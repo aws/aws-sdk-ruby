@@ -12,18 +12,6 @@ module Aws::MediaTailor
 
     # Access configuration parameters.
     #
-    # @note When making an API call, you may pass AccessConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         access_type: "S3_SIGV4", # accepts S3_SIGV4, SECRETS_MANAGER_ACCESS_TOKEN
-    #         secrets_manager_access_token_configuration: {
-    #           header_name: "__string",
-    #           secret_arn: "__string",
-    #           secret_string_key: "__string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] access_type
     #   The type of authentication used to access content from
     #   `HttpConfiguration::BaseUrl` on your source location. Accepted
@@ -67,38 +55,6 @@ module Aws::MediaTailor
     end
 
     # Ad break configuration parameters.
-    #
-    # @note When making an API call, you may pass AdBreak
-    #   data as a hash:
-    #
-    #       {
-    #         message_type: "SPLICE_INSERT", # accepts SPLICE_INSERT, TIME_SIGNAL
-    #         offset_millis: 1,
-    #         slate: {
-    #           source_location_name: "__string",
-    #           vod_source_name: "__string",
-    #         },
-    #         splice_insert_message: {
-    #           avail_num: 1,
-    #           avails_expected: 1,
-    #           splice_event_id: 1,
-    #           unique_program_id: 1,
-    #         },
-    #         time_signal_message: {
-    #           segmentation_descriptors: [
-    #             {
-    #               segment_num: 1,
-    #               segmentation_event_id: 1,
-    #               segmentation_type_id: 1,
-    #               segmentation_upid: "String",
-    #               segmentation_upid_type: 1,
-    #               segments_expected: 1,
-    #               sub_segment_num: 1,
-    #               sub_segments_expected: 1,
-    #             },
-    #           ],
-    #         },
-    #       }
     #
     # @!attribute [rw] message_type
     #   The SCTE-35 ad insertion type. Accepted value: `SPLICE_INSERT`,
@@ -152,13 +108,6 @@ module Aws::MediaTailor
     # No logic is applied to these ad markers. For example, if
     # `EXT-X-CUE-OUT` has a value of `60`, but no ads are filled for that ad
     # break, MediaTailor will not set the value to `0`.
-    #
-    # @note When making an API call, you may pass AdMarkerPassthrough
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false,
-    #       }
     #
     # @!attribute [rw] enabled
     #   Enables ad marker passthrough for your configuration.
@@ -226,14 +175,6 @@ module Aws::MediaTailor
     # using a logical `AND`. You can model logical `OR` combinations by
     # creating multiple prefetch schedules.
     #
-    # @note When making an API call, you may pass AvailMatchingCriteria
-    #   data as a hash:
-    #
-    #       {
-    #         dynamic_variable: "__string", # required
-    #         operator: "EQUALS", # required, accepts EQUALS
-    #       }
-    #
     # @!attribute [rw] dynamic_variable
     #   The dynamic variable(s) that MediaTailor should use as avail
     #   matching criteria. MediaTailor only places the prefetched ads into
@@ -268,14 +209,6 @@ module Aws::MediaTailor
     #
     #
     # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html
-    #
-    # @note When making an API call, you may pass AvailSuppression
-    #   data as a hash:
-    #
-    #       {
-    #         mode: "OFF", # accepts OFF, BEHIND_LIVE_EDGE
-    #         value: "__string",
-    #       }
     #
     # @!attribute [rw] mode
     #   Sets the ad suppression mode. By default, ad suppression is off and
@@ -327,14 +260,6 @@ module Aws::MediaTailor
     #
     # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/bumpers.html
     #
-    # @note When making an API call, you may pass Bumper
-    #   data as a hash:
-    #
-    #       {
-    #         end_url: "__string",
-    #         start_url: "__string",
-    #       }
-    #
     # @!attribute [rw] end_url
     #   The URL for the end bumper asset.
     #   @return [String]
@@ -354,14 +279,6 @@ module Aws::MediaTailor
 
     # The configuration for using a content delivery network (CDN), like
     # Amazon CloudFront, for content and ad segment management.
-    #
-    # @note When making an API call, you may pass CdnConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         ad_segment_url_prefix: "__string",
-    #         content_segment_url_prefix: "__string",
-    #       }
     #
     # @!attribute [rw] ad_segment_url_prefix
     #   A non-default content delivery network (CDN) to serve ad segments.
@@ -477,14 +394,6 @@ module Aws::MediaTailor
     # Configures Amazon CloudWatch log settings for a playback
     # configuration.
     #
-    # @note When making an API call, you may pass ConfigureLogsForPlaybackConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         percent_enabled: 1, # required
-    #         playback_configuration_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] percent_enabled
     #   The percentage of session logs that MediaTailor sends to your
     #   Cloudwatch Logs account. For example, if your playback configuration
@@ -532,37 +441,6 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateChannelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_name: "__string", # required
-    #         filler_slate: {
-    #           source_location_name: "__string",
-    #           vod_source_name: "__string",
-    #         },
-    #         outputs: [ # required
-    #           {
-    #             dash_playlist_settings: {
-    #               manifest_window_seconds: 1,
-    #               min_buffer_time_seconds: 1,
-    #               min_update_period_seconds: 1,
-    #               suggested_presentation_delay_seconds: 1,
-    #             },
-    #             hls_playlist_settings: {
-    #               manifest_window_seconds: 1,
-    #             },
-    #             manifest_name: "__string", # required
-    #             source_group: "__string", # required
-    #           },
-    #         ],
-    #         playback_mode: "LOOP", # required, accepts LOOP, LINEAR
-    #         tags: {
-    #           "__string" => "__string",
-    #         },
-    #         tier: "BASIC", # accepts BASIC, STANDARD
-    #       }
-    #
     # @!attribute [rw] channel_name
     #   The name of the channel.
     #   @return [String]
@@ -682,24 +560,6 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateLiveSourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         http_package_configurations: [ # required
-    #           {
-    #             path: "__string", # required
-    #             source_group: "__string", # required
-    #             type: "DASH", # required, accepts DASH, HLS
-    #           },
-    #         ],
-    #         live_source_name: "__string", # required
-    #         source_location_name: "__string", # required
-    #         tags: {
-    #           "__string" => "__string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] http_package_configurations
     #   A list of HTTP package configuration parameters for this live
     #   source.
@@ -785,32 +645,6 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreatePrefetchScheduleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         consumption: { # required
-    #           avail_matching_criteria: [
-    #             {
-    #               dynamic_variable: "__string", # required
-    #               operator: "EQUALS", # required, accepts EQUALS
-    #             },
-    #           ],
-    #           end_time: Time.now, # required
-    #           start_time: Time.now,
-    #         },
-    #         name: "__string", # required
-    #         playback_configuration_name: "__string", # required
-    #         retrieval: { # required
-    #           dynamic_variables: {
-    #             "__string" => "__string",
-    #           },
-    #           end_time: Time.now, # required
-    #           start_time: Time.now,
-    #         },
-    #         stream_id: "__string",
-    #       }
-    #
     # @!attribute [rw] consumption
     #   The configuration settings for MediaTailor's *consumption* of the
     #   prefetched ads from the ad decision server. Each consumption
@@ -902,56 +736,6 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateProgramRequest
-    #   data as a hash:
-    #
-    #       {
-    #         ad_breaks: [
-    #           {
-    #             message_type: "SPLICE_INSERT", # accepts SPLICE_INSERT, TIME_SIGNAL
-    #             offset_millis: 1,
-    #             slate: {
-    #               source_location_name: "__string",
-    #               vod_source_name: "__string",
-    #             },
-    #             splice_insert_message: {
-    #               avail_num: 1,
-    #               avails_expected: 1,
-    #               splice_event_id: 1,
-    #               unique_program_id: 1,
-    #             },
-    #             time_signal_message: {
-    #               segmentation_descriptors: [
-    #                 {
-    #                   segment_num: 1,
-    #                   segmentation_event_id: 1,
-    #                   segmentation_type_id: 1,
-    #                   segmentation_upid: "String",
-    #                   segmentation_upid_type: 1,
-    #                   segments_expected: 1,
-    #                   sub_segment_num: 1,
-    #                   sub_segments_expected: 1,
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #         ],
-    #         channel_name: "__string", # required
-    #         live_source_name: "__string",
-    #         program_name: "__string", # required
-    #         schedule_configuration: { # required
-    #           transition: { # required
-    #             duration_millis: 1,
-    #             relative_position: "BEFORE_PROGRAM", # required, accepts BEFORE_PROGRAM, AFTER_PROGRAM
-    #             relative_program: "__string",
-    #             scheduled_start_time_millis: 1,
-    #             type: "__string", # required
-    #           },
-    #         },
-    #         source_location_name: "__string", # required
-    #         vod_source_name: "__string",
-    #       }
-    #
     # @!attribute [rw] ad_breaks
     #   The ad break configuration settings.
     #   @return [Array<Types::AdBreak>]
@@ -1046,36 +830,6 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateSourceLocationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         access_configuration: {
-    #           access_type: "S3_SIGV4", # accepts S3_SIGV4, SECRETS_MANAGER_ACCESS_TOKEN
-    #           secrets_manager_access_token_configuration: {
-    #             header_name: "__string",
-    #             secret_arn: "__string",
-    #             secret_string_key: "__string",
-    #           },
-    #         },
-    #         default_segment_delivery_configuration: {
-    #           base_url: "__string",
-    #         },
-    #         http_configuration: { # required
-    #           base_url: "__string", # required
-    #         },
-    #         segment_delivery_configurations: [
-    #           {
-    #             base_url: "__string",
-    #             name: "__string",
-    #           },
-    #         ],
-    #         source_location_name: "__string", # required
-    #         tags: {
-    #           "__string" => "__string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] access_configuration
     #   Access configuration parameters. Configures the type of
     #   authentication used to access content from your source location.
@@ -1188,24 +942,6 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateVodSourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         http_package_configurations: [ # required
-    #           {
-    #             path: "__string", # required
-    #             source_group: "__string", # required
-    #             type: "DASH", # required, accepts DASH, HLS
-    #           },
-    #         ],
-    #         source_location_name: "__string", # required
-    #         tags: {
-    #           "__string" => "__string",
-    #         },
-    #         vod_source_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] http_package_configurations
     #   A list of HTTP package configuration parameters for this VOD source.
     #   @return [Array<Types::HttpPackageConfiguration>]
@@ -1330,14 +1066,6 @@ module Aws::MediaTailor
 
     # The configuration for DASH PUT operations.
     #
-    # @note When making an API call, you may pass DashConfigurationForPut
-    #   data as a hash:
-    #
-    #       {
-    #         mpd_location: "__string",
-    #         origin_manifest_type: "SINGLE_PERIOD", # accepts SINGLE_PERIOD, MULTI_PERIOD
-    #       }
-    #
     # @!attribute [rw] mpd_location
     #   The setting that controls whether MediaTailor includes the Location
     #   tag in DASH manifests. MediaTailor populates the Location tag with
@@ -1369,16 +1097,6 @@ module Aws::MediaTailor
     end
 
     # Dash manifest configuration parameters.
-    #
-    # @note When making an API call, you may pass DashPlaylistSettings
-    #   data as a hash:
-    #
-    #       {
-    #         manifest_window_seconds: 1,
-    #         min_buffer_time_seconds: 1,
-    #         min_update_period_seconds: 1,
-    #         suggested_presentation_delay_seconds: 1,
-    #       }
     #
     # @!attribute [rw] manifest_window_seconds
     #   The total duration (in seconds) of each manifest. Minimum value:
@@ -1422,13 +1140,6 @@ module Aws::MediaTailor
     # such as CloudFront. If you don't specify a segment delivery server,
     # then the source location server is used.
     #
-    # @note When making an API call, you may pass DefaultSegmentDeliveryConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         base_url: "__string",
-    #       }
-    #
     # @!attribute [rw] base_url
     #   The hostname of the server that will be used to serve segments. This
     #   string must include the protocol, such as **https://**.
@@ -1442,13 +1153,6 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteChannelPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] channel_name
     #   The name of the channel associated with this channel policy.
     #   @return [String]
@@ -1465,13 +1169,6 @@ module Aws::MediaTailor
     #
     class DeleteChannelPolicyResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteChannelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] channel_name
     #   The name of the channel.
     #   @return [String]
@@ -1488,14 +1185,6 @@ module Aws::MediaTailor
     #
     class DeleteChannelResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteLiveSourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         live_source_name: "__string", # required
-    #         source_location_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] live_source_name
     #   The name of the live source.
     #   @return [String]
@@ -1517,13 +1206,6 @@ module Aws::MediaTailor
     #
     class DeleteLiveSourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeletePlaybackConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the playback configuration.
     #   @return [String]
@@ -1540,14 +1222,6 @@ module Aws::MediaTailor
     #
     class DeletePlaybackConfigurationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeletePrefetchScheduleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "__string", # required
-    #         playback_configuration_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the prefetch schedule. If the action is successful, the
     #   service sends back an HTTP 204 response with an empty HTTP body.
@@ -1570,14 +1244,6 @@ module Aws::MediaTailor
     #
     class DeletePrefetchScheduleResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteProgramRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_name: "__string", # required
-    #         program_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] channel_name
     #   The name of the channel.
     #   @return [String]
@@ -1599,13 +1265,6 @@ module Aws::MediaTailor
     #
     class DeleteProgramResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteSourceLocationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source_location_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] source_location_name
     #   The name of the source location.
     #   @return [String]
@@ -1622,14 +1281,6 @@ module Aws::MediaTailor
     #
     class DeleteSourceLocationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteVodSourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source_location_name: "__string", # required
-    #         vod_source_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] source_location_name
     #   The name of the source location associated with this VOD Source.
     #   @return [String]
@@ -1651,13 +1302,6 @@ module Aws::MediaTailor
     #
     class DeleteVodSourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeChannelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] channel_name
     #   The name of the channel.
     #   @return [String]
@@ -1735,14 +1379,6 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeLiveSourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         live_source_name: "__string", # required
-    #         source_location_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] live_source_name
     #   The name of the live source.
     #   @return [String]
@@ -1809,14 +1445,6 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeProgramRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_name: "__string", # required
-    #         program_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] channel_name
     #   The name of the channel associated with this Program.
     #   @return [String]
@@ -1889,13 +1517,6 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeSourceLocationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source_location_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] source_location_name
     #   The name of the source location.
     #   @return [String]
@@ -1969,14 +1590,6 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeVodSourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source_location_name: "__string", # required
-    #         vod_source_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] source_location_name
     #   The name of the source location associated with this VOD Source.
     #   @return [String]
@@ -2043,13 +1656,6 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetChannelPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] channel_name
     #   The name of the channel associated with this Channel Policy.
     #   @return [String]
@@ -2075,16 +1681,6 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetChannelScheduleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_name: "__string", # required
-    #         duration_minutes: "__string",
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] channel_name
     #   The name of the channel associated with this Channel Schedule.
     #   @return [String]
@@ -2145,13 +1741,6 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetPlaybackConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The identifier for the playback configuration.
     #   @return [String]
@@ -2323,14 +1912,6 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetPrefetchScheduleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "__string", # required
-    #         playback_configuration_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the prefetch schedule. The name must be unique among all
     #   prefetch schedules that are associated with the specified playback
@@ -2417,13 +1998,6 @@ module Aws::MediaTailor
 
     # HLS playlist configuration parameters.
     #
-    # @note When making an API call, you may pass HlsPlaylistSettings
-    #   data as a hash:
-    #
-    #       {
-    #         manifest_window_seconds: 1,
-    #       }
-    #
     # @!attribute [rw] manifest_window_seconds
     #   The total duration (in seconds) of each manifest. Minimum value:
     #   `30` seconds. Maximum value: `3600` seconds.
@@ -2438,13 +2012,6 @@ module Aws::MediaTailor
     end
 
     # The HTTP configuration for the source location.
-    #
-    # @note When making an API call, you may pass HttpConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         base_url: "__string", # required
-    #       }
     #
     # @!attribute [rw] base_url
     #   The base URL for the source location host server. This string must
@@ -2461,15 +2028,6 @@ module Aws::MediaTailor
 
     # The HTTP package configuration properties for the requested VOD
     # source.
-    #
-    # @note When making an API call, you may pass HttpPackageConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         path: "__string", # required
-    #         source_group: "__string", # required
-    #         type: "DASH", # required, accepts DASH, HLS
-    #       }
     #
     # @!attribute [rw] path
     #   The relative path to the URL for this VOD source. This is combined
@@ -2497,15 +2055,6 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAlertsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #         resource_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of alerts that you want MediaTailor to return in
     #   response to the current request. If there are more than `MaxResults`
@@ -2552,14 +2101,6 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListChannelsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of channels that you want MediaTailor to return
     #   in response to the current request. If there are more than
@@ -2601,15 +2142,6 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListLiveSourcesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #         source_location_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of live sources that you want MediaTailor to
     #   return in response to the current request. If there are more than
@@ -2657,14 +2189,6 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPlaybackConfigurationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of playback configurations that you want
     #   MediaTailor to return in response to the current request. If there
@@ -2708,16 +2232,6 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPrefetchSchedulesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #         playback_configuration_name: "__string", # required
-    #         stream_id: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of prefetch schedules that you want MediaTailor
     #   to return in response to the current request. If there are more than
@@ -2782,14 +2296,6 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSourceLocationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of source locations that you want MediaTailor to
     #   return in response to the current request. If there are more than
@@ -2831,13 +2337,6 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) associated with this resource.
     #   @return [String]
@@ -2869,15 +2368,6 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListVodSourcesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #         source_location_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of VOD sources that you want MediaTailor to
     #   return in response to the current request. If there are more than
@@ -2926,14 +2416,6 @@ module Aws::MediaTailor
     end
 
     # The configuration for pre-roll ad insertion.
-    #
-    # @note When making an API call, you may pass LivePreRollConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         ad_decision_server_url: "__string",
-    #         max_duration_seconds: 1,
-    #       }
     #
     # @!attribute [rw] ad_decision_server_url
     #   The URL for the ad decision server (ADS) for pre-roll ads. This
@@ -3040,15 +2522,6 @@ module Aws::MediaTailor
     # The configuration for manifest processing rules. Manifest processing
     # rules enable customization of the personalized manifests created by
     # MediaTailor.
-    #
-    # @note When making an API call, you may pass ManifestProcessingRules
-    #   data as a hash:
-    #
-    #       {
-    #         ad_marker_passthrough: {
-    #           enabled: false,
-    #         },
-    #       }
     #
     # @!attribute [rw] ad_marker_passthrough
     #   For HLS, when set to `true`, MediaTailor passes through
@@ -3239,20 +2712,6 @@ module Aws::MediaTailor
     # A complex type that contains settings that determine how and when that
     # MediaTailor places prefetched ads into upcoming ad breaks.
     #
-    # @note When making an API call, you may pass PrefetchConsumption
-    #   data as a hash:
-    #
-    #       {
-    #         avail_matching_criteria: [
-    #           {
-    #             dynamic_variable: "__string", # required
-    #             operator: "EQUALS", # required, accepts EQUALS
-    #           },
-    #         ],
-    #         end_time: Time.now, # required
-    #         start_time: Time.now,
-    #       }
-    #
     # @!attribute [rw] avail_matching_criteria
     #   If you only want MediaTailor to insert prefetched ads into avails
     #   (ad breaks) that match specific dynamic variables, such as
@@ -3286,17 +2745,6 @@ module Aws::MediaTailor
     # A complex type that contains settings governing when MediaTailor
     # prefetches ads, and which dynamic variables that MediaTailor includes
     # in the request to the ad decision server.
-    #
-    # @note When making an API call, you may pass PrefetchRetrieval
-    #   data as a hash:
-    #
-    #       {
-    #         dynamic_variables: {
-    #           "__string" => "__string",
-    #         },
-    #         end_time: Time.now, # required
-    #         start_time: Time.now,
-    #       }
     #
     # @!attribute [rw] dynamic_variables
     #   The dynamic variables to use for substitution during prefetch
@@ -3391,14 +2839,6 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutChannelPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_name: "__string", # required
-    #         policy: "__string", # required
-    #       }
-    #
     # @!attribute [rw] channel_name
     #   The channel name associated with this Channel Policy.
     #   @return [String]
@@ -3420,51 +2860,6 @@ module Aws::MediaTailor
     #
     class PutChannelPolicyResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass PutPlaybackConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         ad_decision_server_url: "__string",
-    #         avail_suppression: {
-    #           mode: "OFF", # accepts OFF, BEHIND_LIVE_EDGE
-    #           value: "__string",
-    #         },
-    #         bumper: {
-    #           end_url: "__string",
-    #           start_url: "__string",
-    #         },
-    #         cdn_configuration: {
-    #           ad_segment_url_prefix: "__string",
-    #           content_segment_url_prefix: "__string",
-    #         },
-    #         configuration_aliases: {
-    #           "__string" => {
-    #             "__string" => "__string",
-    #           },
-    #         },
-    #         dash_configuration: {
-    #           mpd_location: "__string",
-    #           origin_manifest_type: "SINGLE_PERIOD", # accepts SINGLE_PERIOD, MULTI_PERIOD
-    #         },
-    #         live_pre_roll_configuration: {
-    #           ad_decision_server_url: "__string",
-    #           max_duration_seconds: 1,
-    #         },
-    #         manifest_processing_rules: {
-    #           ad_marker_passthrough: {
-    #             enabled: false,
-    #           },
-    #         },
-    #         name: "__string", # required
-    #         personalization_threshold_seconds: 1,
-    #         slate_ad_url: "__string",
-    #         tags: {
-    #           "__string" => "__string",
-    #         },
-    #         transcode_profile_name: "__string",
-    #         video_content_source_url: "__string",
-    #       }
-    #
     # @!attribute [rw] ad_decision_server_url
     #   The URL for the ad decision server (ADS). This includes the
     #   specification of static parameters and placeholders for dynamic
@@ -3759,23 +3154,6 @@ module Aws::MediaTailor
 
     # The output configuration for this channel.
     #
-    # @note When making an API call, you may pass RequestOutputItem
-    #   data as a hash:
-    #
-    #       {
-    #         dash_playlist_settings: {
-    #           manifest_window_seconds: 1,
-    #           min_buffer_time_seconds: 1,
-    #           min_update_period_seconds: 1,
-    #           suggested_presentation_delay_seconds: 1,
-    #         },
-    #         hls_playlist_settings: {
-    #           manifest_window_seconds: 1,
-    #         },
-    #         manifest_name: "__string", # required
-    #         source_group: "__string", # required
-    #       }
-    #
     # @!attribute [rw] dash_playlist_settings
     #   DASH manifest configuration parameters.
     #   @return [Types::DashPlaylistSettings]
@@ -3874,19 +3252,6 @@ module Aws::MediaTailor
     # Schedule configuration parameters. A channel must be stopped before
     # changes can be made to the schedule.
     #
-    # @note When making an API call, you may pass ScheduleConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         transition: { # required
-    #           duration_millis: 1,
-    #           relative_position: "BEFORE_PROGRAM", # required, accepts BEFORE_PROGRAM, AFTER_PROGRAM
-    #           relative_program: "__string",
-    #           scheduled_start_time_millis: 1,
-    #           type: "__string", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] transition
     #   Program transition configurations.
     #   @return [Types::Transition]
@@ -3966,15 +3331,6 @@ module Aws::MediaTailor
     #
     # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-access-configuration-access-token.html
     #
-    # @note When making an API call, you may pass SecretsManagerAccessTokenConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         header_name: "__string",
-    #         secret_arn: "__string",
-    #         secret_string_key: "__string",
-    #       }
-    #
     # @!attribute [rw] header_name
     #   The name of the HTTP header used to supply the access token in
     #   requests to the source location.
@@ -4006,14 +3362,6 @@ module Aws::MediaTailor
     end
 
     # The segment delivery configuration settings.
-    #
-    # @note When making an API call, you may pass SegmentDeliveryConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         base_url: "__string",
-    #         name: "__string",
-    #       }
     #
     # @!attribute [rw] base_url
     #   The base URL of the host or path of the segment delivery server that
@@ -4049,20 +3397,6 @@ module Aws::MediaTailor
     #
     # See the `segmentation_descriptor()` table of the 2022 SCTE-35
     # specification for more information.
-    #
-    # @note When making an API call, you may pass SegmentationDescriptor
-    #   data as a hash:
-    #
-    #       {
-    #         segment_num: 1,
-    #         segmentation_event_id: 1,
-    #         segmentation_type_id: 1,
-    #         segmentation_upid: "String",
-    #         segmentation_upid_type: 1,
-    #         segments_expected: 1,
-    #         sub_segment_num: 1,
-    #         sub_segments_expected: 1,
-    #       }
     #
     # @!attribute [rw] segment_num
     #   The segment number to assign to the
@@ -4137,14 +3471,6 @@ module Aws::MediaTailor
     end
 
     # Slate VOD source configuration.
-    #
-    # @note When making an API call, you may pass SlateSource
-    #   data as a hash:
-    #
-    #       {
-    #         source_location_name: "__string",
-    #         vod_source_name: "__string",
-    #       }
     #
     # @!attribute [rw] source_location_name
     #   The name of the source location where the slate VOD source is
@@ -4235,16 +3561,6 @@ module Aws::MediaTailor
 
     # Splice insert message configuration.
     #
-    # @note When making an API call, you may pass SpliceInsertMessage
-    #   data as a hash:
-    #
-    #       {
-    #         avail_num: 1,
-    #         avails_expected: 1,
-    #         splice_event_id: 1,
-    #         unique_program_id: 1,
-    #       }
-    #
     # @!attribute [rw] avail_num
     #   This is written to `splice_insert.avail_num`, as defined in section
     #   9.7.3.1 of the SCTE-35 specification. The default value is `0`.
@@ -4280,13 +3596,6 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartChannelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] channel_name
     #   The name of the channel.
     #   @return [String]
@@ -4303,13 +3612,6 @@ module Aws::MediaTailor
     #
     class StartChannelResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass StopChannelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] channel_name
     #   The name of the channel.
     #   @return [String]
@@ -4326,16 +3628,6 @@ module Aws::MediaTailor
     #
     class StopChannelResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "__string", # required
-    #         tags: { # required
-    #           "__string" => "__string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) associated with the resource.
     #   @return [String]
@@ -4372,24 +3664,6 @@ module Aws::MediaTailor
     # See the `time_signal()` table of the 2022 SCTE-35 specification for
     # more information.
     #
-    # @note When making an API call, you may pass TimeSignalMessage
-    #   data as a hash:
-    #
-    #       {
-    #         segmentation_descriptors: [
-    #           {
-    #             segment_num: 1,
-    #             segmentation_event_id: 1,
-    #             segmentation_type_id: 1,
-    #             segmentation_upid: "String",
-    #             segmentation_upid_type: 1,
-    #             segments_expected: 1,
-    #             sub_segment_num: 1,
-    #             sub_segments_expected: 1,
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] segmentation_descriptors
     #   The configurations for the SCTE-35 `segmentation_descriptor`
     #   message(s) sent with the `time_signal` message.
@@ -4404,17 +3678,6 @@ module Aws::MediaTailor
     end
 
     # Program transition configuration.
-    #
-    # @note When making an API call, you may pass Transition
-    #   data as a hash:
-    #
-    #       {
-    #         duration_millis: 1,
-    #         relative_position: "BEFORE_PROGRAM", # required, accepts BEFORE_PROGRAM, AFTER_PROGRAM
-    #         relative_program: "__string",
-    #         scheduled_start_time_millis: 1,
-    #         type: "__string", # required
-    #       }
     #
     # @!attribute [rw] duration_millis
     #   The duration of the live program in seconds.
@@ -4468,14 +3731,6 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "__string", # required
-    #         tag_keys: ["__string"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource to untag.
     #   @return [String]
@@ -4493,32 +3748,6 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateChannelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_name: "__string", # required
-    #         filler_slate: {
-    #           source_location_name: "__string",
-    #           vod_source_name: "__string",
-    #         },
-    #         outputs: [ # required
-    #           {
-    #             dash_playlist_settings: {
-    #               manifest_window_seconds: 1,
-    #               min_buffer_time_seconds: 1,
-    #               min_update_period_seconds: 1,
-    #               suggested_presentation_delay_seconds: 1,
-    #             },
-    #             hls_playlist_settings: {
-    #               manifest_window_seconds: 1,
-    #             },
-    #             manifest_name: "__string", # required
-    #             source_group: "__string", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] channel_name
     #   The name of the channel.
     #   @return [String]
@@ -4617,21 +3846,6 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateLiveSourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         http_package_configurations: [ # required
-    #           {
-    #             path: "__string", # required
-    #             source_group: "__string", # required
-    #             type: "DASH", # required, accepts DASH, HLS
-    #           },
-    #         ],
-    #         live_source_name: "__string", # required
-    #         source_location_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] http_package_configurations
     #   A list of HTTP package configurations for the live source on this
     #   account.
@@ -4705,33 +3919,6 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateSourceLocationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         access_configuration: {
-    #           access_type: "S3_SIGV4", # accepts S3_SIGV4, SECRETS_MANAGER_ACCESS_TOKEN
-    #           secrets_manager_access_token_configuration: {
-    #             header_name: "__string",
-    #             secret_arn: "__string",
-    #             secret_string_key: "__string",
-    #           },
-    #         },
-    #         default_segment_delivery_configuration: {
-    #           base_url: "__string",
-    #         },
-    #         http_configuration: { # required
-    #           base_url: "__string", # required
-    #         },
-    #         segment_delivery_configurations: [
-    #           {
-    #             base_url: "__string",
-    #             name: "__string",
-    #           },
-    #         ],
-    #         source_location_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] access_configuration
     #   Access configuration parameters. Configures the type of
     #   authentication used to access content from your source location.
@@ -4833,21 +4020,6 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateVodSourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         http_package_configurations: [ # required
-    #           {
-    #             path: "__string", # required
-    #             source_group: "__string", # required
-    #             type: "DASH", # required, accepts DASH, HLS
-    #           },
-    #         ],
-    #         source_location_name: "__string", # required
-    #         vod_source_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] http_package_configurations
     #   A list of HTTP package configurations for the VOD source on this
     #   account.

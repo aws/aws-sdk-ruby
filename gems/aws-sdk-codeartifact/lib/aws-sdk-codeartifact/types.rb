@@ -48,16 +48,6 @@ module Aws::CodeArtifact
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateExternalConnectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "DomainName", # required
-    #         domain_owner: "AccountId",
-    #         repository: "RepositoryName", # required
-    #         external_connection: "ExternalConnectionName", # required
-    #       }
-    #
     # @!attribute [rw] domain
     #   The name of the domain that contains the repository.
     #   @return [String]
@@ -137,25 +127,6 @@ module Aws::CodeArtifact
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CopyPackageVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "DomainName", # required
-    #         domain_owner: "AccountId",
-    #         source_repository: "RepositoryName", # required
-    #         destination_repository: "RepositoryName", # required
-    #         format: "npm", # required, accepts npm, pypi, maven, nuget
-    #         namespace: "PackageNamespace",
-    #         package: "PackageName", # required
-    #         versions: ["PackageVersion"],
-    #         version_revisions: {
-    #           "PackageVersion" => "PackageVersionRevision",
-    #         },
-    #         allow_overwrite: false,
-    #         include_from_upstream: false,
-    #       }
-    #
     # @!attribute [rw] domain
     #   The name of the domain that contains the source and destination
     #   repositories.
@@ -288,20 +259,6 @@ module Aws::CodeArtifact
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "DomainName", # required
-    #         encryption_key: "Arn",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] domain
     #   The name of the domain to create. All domain names in an Amazon Web
     #   Services Region that are in the same Amazon Web Services account
@@ -359,27 +316,6 @@ module Aws::CodeArtifact
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateRepositoryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "DomainName", # required
-    #         domain_owner: "AccountId",
-    #         repository: "RepositoryName", # required
-    #         description: "Description",
-    #         upstreams: [
-    #           {
-    #             repository_name: "RepositoryName", # required
-    #           },
-    #         ],
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] domain
     #   The name of the domain that contains the created repository.
     #   @return [String]
@@ -439,15 +375,6 @@ module Aws::CodeArtifact
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDomainPermissionsPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "DomainName", # required
-    #         domain_owner: "AccountId",
-    #         policy_revision: "PolicyRevision",
-    #       }
-    #
     # @!attribute [rw] domain
     #   The name of the domain associated with the resource policy to be
     #   deleted.
@@ -487,14 +414,6 @@ module Aws::CodeArtifact
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "DomainName", # required
-    #         domain_owner: "AccountId",
-    #       }
-    #
     # @!attribute [rw] domain
     #   The name of the domain to delete.
     #   @return [String]
@@ -526,20 +445,6 @@ module Aws::CodeArtifact
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeletePackageVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "DomainName", # required
-    #         domain_owner: "AccountId",
-    #         repository: "RepositoryName", # required
-    #         format: "npm", # required, accepts npm, pypi, maven, nuget
-    #         namespace: "PackageNamespace",
-    #         package: "PackageName", # required
-    #         versions: ["PackageVersion"], # required
-    #         expected_status: "Published", # accepts Published, Unfinished, Unlisted, Archived, Disposed, Deleted
-    #       }
-    #
     # @!attribute [rw] domain
     #   The name of the domain that contains the package to delete.
     #   @return [String]
@@ -632,16 +537,6 @@ module Aws::CodeArtifact
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteRepositoryPermissionsPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "DomainName", # required
-    #         domain_owner: "AccountId",
-    #         repository: "RepositoryName", # required
-    #         policy_revision: "PolicyRevision",
-    #       }
-    #
     # @!attribute [rw] domain
     #   The name of the domain that contains the repository associated with
     #   the resource policy to be deleted.
@@ -687,15 +582,6 @@ module Aws::CodeArtifact
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteRepositoryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "DomainName", # required
-    #         domain_owner: "AccountId",
-    #         repository: "RepositoryName", # required
-    #       }
-    #
     # @!attribute [rw] domain
     #   The name of the domain that contains the repository to delete.
     #   @return [String]
@@ -732,14 +618,6 @@ module Aws::CodeArtifact
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "DomainName", # required
-    #         domain_owner: "AccountId",
-    #       }
-    #
     # @!attribute [rw] domain
     #   A string that specifies the name of the requested domain.
     #   @return [String]
@@ -772,18 +650,6 @@ module Aws::CodeArtifact
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribePackageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "DomainName", # required
-    #         domain_owner: "AccountId",
-    #         repository: "RepositoryName", # required
-    #         format: "npm", # required, accepts npm, pypi, maven, nuget
-    #         namespace: "PackageNamespace",
-    #         package: "PackageName", # required
-    #       }
-    #
     # @!attribute [rw] domain
     #   The name of the domain that contains the repository that contains
     #   the package.
@@ -849,19 +715,6 @@ module Aws::CodeArtifact
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribePackageVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "DomainName", # required
-    #         domain_owner: "AccountId",
-    #         repository: "RepositoryName", # required
-    #         format: "npm", # required, accepts npm, pypi, maven, nuget
-    #         namespace: "PackageNamespace",
-    #         package: "PackageName", # required
-    #         package_version: "PackageVersion", # required
-    #       }
-    #
     # @!attribute [rw] domain
     #   The name of the domain that contains the repository that contains
     #   the package version.
@@ -933,15 +786,6 @@ module Aws::CodeArtifact
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeRepositoryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "DomainName", # required
-    #         domain_owner: "AccountId",
-    #         repository: "RepositoryName", # required
-    #       }
-    #
     # @!attribute [rw] domain
     #   The name of the domain that contains the repository to describe.
     #   @return [String]
@@ -978,16 +822,6 @@ module Aws::CodeArtifact
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateExternalConnectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "DomainName", # required
-    #         domain_owner: "AccountId",
-    #         repository: "RepositoryName", # required
-    #         external_connection: "ExternalConnectionName", # required
-    #       }
-    #
     # @!attribute [rw] domain
     #   The name of the domain that contains the repository from which to
     #   remove the external repository.
@@ -1031,23 +865,6 @@ module Aws::CodeArtifact
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisposePackageVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "DomainName", # required
-    #         domain_owner: "AccountId",
-    #         repository: "RepositoryName", # required
-    #         format: "npm", # required, accepts npm, pypi, maven, nuget
-    #         namespace: "PackageNamespace",
-    #         package: "PackageName", # required
-    #         versions: ["PackageVersion"], # required
-    #         version_revisions: {
-    #           "PackageVersion" => "PackageVersionRevision",
-    #         },
-    #         expected_status: "Published", # accepts Published, Unfinished, Unlisted, Archived, Disposed, Deleted
-    #       }
-    #
     # @!attribute [rw] domain
     #   The name of the domain that contains the repository you want to
     #   dispose.
@@ -1277,15 +1094,6 @@ module Aws::CodeArtifact
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAuthorizationTokenRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "DomainName", # required
-    #         domain_owner: "AccountId",
-    #         duration_seconds: 1,
-    #       }
-    #
     # @!attribute [rw] domain
     #   The name of the domain that is in scope for the generated
     #   authorization token.
@@ -1332,14 +1140,6 @@ module Aws::CodeArtifact
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDomainPermissionsPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "DomainName", # required
-    #         domain_owner: "AccountId",
-    #       }
-    #
     # @!attribute [rw] domain
     #   The name of the domain to which the resource policy is attached.
     #   @return [String]
@@ -1370,21 +1170,6 @@ module Aws::CodeArtifact
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetPackageVersionAssetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "DomainName", # required
-    #         domain_owner: "AccountId",
-    #         repository: "RepositoryName", # required
-    #         format: "npm", # required, accepts npm, pypi, maven, nuget
-    #         namespace: "PackageNamespace",
-    #         package: "PackageName", # required
-    #         package_version: "PackageVersion", # required
-    #         asset: "AssetName", # required
-    #         package_version_revision: "PackageVersionRevision",
-    #       }
-    #
     # @!attribute [rw] domain
     #   The name of the domain that contains the repository that contains
     #   the package version with the requested asset.
@@ -1480,19 +1265,6 @@ module Aws::CodeArtifact
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetPackageVersionReadmeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "DomainName", # required
-    #         domain_owner: "AccountId",
-    #         repository: "RepositoryName", # required
-    #         format: "npm", # required, accepts npm, pypi, maven, nuget
-    #         namespace: "PackageNamespace",
-    #         package: "PackageName", # required
-    #         package_version: "PackageVersion", # required
-    #       }
-    #
     # @!attribute [rw] domain
     #   The name of the domain that contains the repository that contains
     #   the package version with the requested readme file.
@@ -1597,16 +1369,6 @@ module Aws::CodeArtifact
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRepositoryEndpointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "DomainName", # required
-    #         domain_owner: "AccountId",
-    #         repository: "RepositoryName", # required
-    #         format: "npm", # required, accepts npm, pypi, maven, nuget
-    #       }
-    #
     # @!attribute [rw] domain
     #   The name of the domain that contains the repository.
     #   @return [String]
@@ -1649,15 +1411,6 @@ module Aws::CodeArtifact
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRepositoryPermissionsPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "DomainName", # required
-    #         domain_owner: "AccountId",
-    #         repository: "RepositoryName", # required
-    #       }
-    #
     # @!attribute [rw] domain
     #   The name of the domain containing the repository whose associated
     #   resource policy is to be retrieved.
@@ -1728,14 +1481,6 @@ module Aws::CodeArtifact
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDomainsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to return per page.
     #   @return [Integer]
@@ -1778,21 +1523,6 @@ module Aws::CodeArtifact
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPackageVersionAssetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "DomainName", # required
-    #         domain_owner: "AccountId",
-    #         repository: "RepositoryName", # required
-    #         format: "npm", # required, accepts npm, pypi, maven, nuget
-    #         namespace: "PackageNamespace",
-    #         package: "PackageName", # required
-    #         package_version: "PackageVersion", # required
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] domain
     #   The name of the domain that contains the repository associated with
     #   the package version assets.
@@ -1921,20 +1651,6 @@ module Aws::CodeArtifact
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPackageVersionDependenciesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "DomainName", # required
-    #         domain_owner: "AccountId",
-    #         repository: "RepositoryName", # required
-    #         format: "npm", # required, accepts npm, pypi, maven, nuget
-    #         namespace: "PackageNamespace",
-    #         package: "PackageName", # required
-    #         package_version: "PackageVersion", # required
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] domain
     #   The name of the domain that contains the repository that contains
     #   the requested package version dependencies.
@@ -2057,23 +1773,6 @@ module Aws::CodeArtifact
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPackageVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "DomainName", # required
-    #         domain_owner: "AccountId",
-    #         repository: "RepositoryName", # required
-    #         format: "npm", # required, accepts npm, pypi, maven, nuget
-    #         namespace: "PackageNamespace",
-    #         package: "PackageName", # required
-    #         status: "Published", # accepts Published, Unfinished, Unlisted, Archived, Disposed, Deleted
-    #         sort_by: "PUBLISHED_TIME", # accepts PUBLISHED_TIME
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #         origin_type: "INTERNAL", # accepts INTERNAL, EXTERNAL, UNKNOWN
-    #       }
-    #
     # @!attribute [rw] domain
     #   The name of the domain that contains the repository that contains
     #   the requested package versions.
@@ -2211,22 +1910,6 @@ module Aws::CodeArtifact
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPackagesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "DomainName", # required
-    #         domain_owner: "AccountId",
-    #         repository: "RepositoryName", # required
-    #         format: "npm", # accepts npm, pypi, maven, nuget
-    #         namespace: "PackageNamespace",
-    #         package_prefix: "PackageName",
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #         publish: "ALLOW", # accepts ALLOW, BLOCK
-    #         upstream: "ALLOW", # accepts ALLOW, BLOCK
-    #       }
-    #
     # @!attribute [rw] domain
     #   The name of the domain that contains the repository that contains
     #   the requested packages.
@@ -2335,18 +2018,6 @@ module Aws::CodeArtifact
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRepositoriesInDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "DomainName", # required
-    #         domain_owner: "AccountId",
-    #         administrator_account: "AccountId",
-    #         repository_prefix: "RepositoryName",
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] domain
     #   The name of the domain that contains the returned list of
     #   repositories.
@@ -2408,15 +2079,6 @@ module Aws::CodeArtifact
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRepositoriesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         repository_prefix: "RepositoryName",
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] repository_prefix
     #   A prefix used to filter returned repositories. Only repositories
     #   with names that start with `repositoryPrefix` are returned.
@@ -2464,13 +2126,6 @@ module Aws::CodeArtifact
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource to get tags for.
     #   @return [String]
@@ -2595,14 +2250,6 @@ module Aws::CodeArtifact
     # Details about the origin restrictions set on the package. The package
     # origin restrictions determine how new versions of a package can be
     # added to a specific repository.
-    #
-    # @note When making an API call, you may pass PackageOriginRestrictions
-    #   data as a hash:
-    #
-    #       {
-    #         publish: "ALLOW", # required, accepts ALLOW, BLOCK
-    #         upstream: "ALLOW", # required, accepts ALLOW, BLOCK
-    #       }
     #
     # @!attribute [rw] publish
     #   The package origin configuration that determines if new versions of
@@ -2870,16 +2517,6 @@ module Aws::CodeArtifact
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutDomainPermissionsPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "DomainName", # required
-    #         domain_owner: "AccountId",
-    #         policy_revision: "PolicyRevision",
-    #         policy_document: "PolicyDocument", # required
-    #       }
-    #
     # @!attribute [rw] domain
     #   The name of the domain on which to set the resource policy.
     #   @return [String]
@@ -2923,22 +2560,6 @@ module Aws::CodeArtifact
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutPackageOriginConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "DomainName", # required
-    #         domain_owner: "AccountId",
-    #         repository: "RepositoryName", # required
-    #         format: "npm", # required, accepts npm, pypi, maven, nuget
-    #         namespace: "PackageNamespace",
-    #         package: "PackageName", # required
-    #         restrictions: { # required
-    #           publish: "ALLOW", # required, accepts ALLOW, BLOCK
-    #           upstream: "ALLOW", # required, accepts ALLOW, BLOCK
-    #         },
-    #       }
-    #
     # @!attribute [rw] domain
     #   The name of the domain that contains the repository that contains
     #   the package.
@@ -3023,17 +2644,6 @@ module Aws::CodeArtifact
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutRepositoryPermissionsPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "DomainName", # required
-    #         domain_owner: "AccountId",
-    #         repository: "RepositoryName", # required
-    #         policy_revision: "PolicyRevision",
-    #         policy_document: "PolicyDocument", # required
-    #       }
-    #
     # @!attribute [rw] domain
     #   The name of the domain containing the repository to set the resource
     #   policy on.
@@ -3326,14 +2936,6 @@ module Aws::CodeArtifact
     # A tag is a key-value pair that can be used to manage, search for, or
     # filter resources in CodeArtifact.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The tag key.
     #   @return [String]
@@ -3351,19 +2953,6 @@ module Aws::CodeArtifact
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource that you want to add
     #   or update tags for.
@@ -3405,14 +2994,6 @@ module Aws::CodeArtifact
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource that you want to
     #   remove tags from.
@@ -3435,24 +3016,6 @@ module Aws::CodeArtifact
     #
     class UntagResourceResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdatePackageVersionsStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "DomainName", # required
-    #         domain_owner: "AccountId",
-    #         repository: "RepositoryName", # required
-    #         format: "npm", # required, accepts npm, pypi, maven, nuget
-    #         namespace: "PackageNamespace",
-    #         package: "PackageName", # required
-    #         versions: ["PackageVersion"], # required
-    #         version_revisions: {
-    #           "PackageVersion" => "PackageVersionRevision",
-    #         },
-    #         expected_status: "Published", # accepts Published, Unfinished, Unlisted, Archived, Disposed, Deleted
-    #         target_status: "Published", # required, accepts Published, Unfinished, Unlisted, Archived, Disposed, Deleted
-    #       }
-    #
     # @!attribute [rw] domain
     #   The name of the domain that contains the repository that contains
     #   the package versions with a status to be updated.
@@ -3549,21 +3112,6 @@ module Aws::CodeArtifact
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateRepositoryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "DomainName", # required
-    #         domain_owner: "AccountId",
-    #         repository: "RepositoryName", # required
-    #         description: "Description",
-    #         upstreams: [
-    #           {
-    #             repository_name: "RepositoryName", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] domain
     #   The name of the domain associated with the repository to update.
     #   @return [String]
@@ -3625,13 +3173,6 @@ module Aws::CodeArtifact
     #
     # [1]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_CreateRepository.html
     # [2]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_UpdateRepository.html
-    #
-    # @note When making an API call, you may pass UpstreamRepository
-    #   data as a hash:
-    #
-    #       {
-    #         repository_name: "RepositoryName", # required
-    #       }
     #
     # @!attribute [rw] repository_name
     #   The name of an upstream repository.

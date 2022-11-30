@@ -51,16 +51,6 @@ module Aws::Inspector2
     # An object that contains details about an aggregation response based on
     # Amazon Web Services accounts.
     #
-    # @note When making an API call, you may pass AccountAggregation
-    #   data as a hash:
-    #
-    #       {
-    #         finding_type: "NETWORK_REACHABILITY", # accepts NETWORK_REACHABILITY, PACKAGE_VULNERABILITY
-    #         resource_type: "AWS_EC2_INSTANCE", # accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE, AWS_LAMBDA_FUNCTION
-    #         sort_by: "CRITICAL", # accepts CRITICAL, HIGH, ALL
-    #         sort_order: "ASC", # accepts ASC, DESC
-    #       }
-    #
     # @!attribute [rw] finding_type
     #   The type of finding.
     #   @return [String]
@@ -134,8 +124,6 @@ module Aws::Inspector2
     end
 
     # Contains details about an aggregation request.
-    #
-    # @note AggregationRequest is a union - when making an API calls you must set exactly one of the members.
     #
     # @!attribute [rw] account_aggregation
     #   An object that contains details about an aggregation request based
@@ -226,8 +214,6 @@ module Aws::Inspector2
     # A structure that contains details about the results of an aggregation
     # type.
     #
-    # @note AggregationResponse is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AggregationResponse corresponding to the set member.
-    #
     # @!attribute [rw] account_aggregation
     #   An object that contains details about an aggregation response based
     #   on Amazon Web Services account IDs.
@@ -317,20 +303,6 @@ module Aws::Inspector2
     # The details that define an aggregation based on Amazon machine images
     # (AMIs).
     #
-    # @note When making an API call, you may pass AmiAggregation
-    #   data as a hash:
-    #
-    #       {
-    #         amis: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         sort_by: "CRITICAL", # accepts CRITICAL, HIGH, ALL, AFFECTED_INSTANCES
-    #         sort_order: "ASC", # accepts ASC, DESC
-    #       }
-    #
     # @!attribute [rw] amis
     #   The IDs of AMIs to aggregate findings for.
     #   @return [Array<Types::StringFilter>]
@@ -382,13 +354,6 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateMemberRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID of the member account to be
     #   associated.
@@ -417,15 +382,6 @@ module Aws::Inspector2
 
     # Represents which scan types are automatically enabled for new members
     # of your Amazon Inspector organization.
-    #
-    # @note When making an API call, you may pass AutoEnable
-    #   data as a hash:
-    #
-    #       {
-    #         ec2: false, # required
-    #         ecr: false, # required
-    #         lambda: false,
-    #       }
     #
     # @!attribute [rw] ec2
     #   Represents whether Amazon EC2 scans are automatically enabled for
@@ -512,44 +468,6 @@ module Aws::Inspector2
     end
 
     # An aggregation of information about Amazon ECR containers.
-    #
-    # @note When making an API call, you may pass AwsEcrContainerAggregation
-    #   data as a hash:
-    #
-    #       {
-    #         architectures: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         image_shas: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         image_tags: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         repositories: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         resource_ids: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         sort_by: "CRITICAL", # accepts CRITICAL, HIGH, ALL
-    #         sort_order: "ASC", # accepts ASC, DESC
-    #       }
     #
     # @!attribute [rw] architectures
     #   The architecture of the containers.
@@ -773,13 +691,6 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchGetAccountStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_ids: ["AccountId"],
-    #       }
-    #
     # @!attribute [rw] account_ids
     #   The 12-digit Amazon Web Services account IDs of the accounts to
     #   retrieve Amazon Inspector status for.
@@ -812,13 +723,6 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchGetFreeTrialInfoRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_ids: ["MeteringAccountId"], # required
-    #       }
-    #
     # @!attribute [rw] account_ids
     #   The account IDs to get free trial status for.
     #   @return [Array<String>]
@@ -850,13 +754,6 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CancelFindingsReportRequest
-    #   data as a hash:
-    #
-    #       {
-    #         report_id: "ReportId", # required
-    #       }
-    #
     # @!attribute [rw] report_id
     #   The ID of the report to be canceled.
     #   @return [String]
@@ -926,86 +823,6 @@ module Aws::Inspector2
 
     # A structure that identifies filter criteria for
     # `GetCoverageStatistics`.
-    #
-    # @note When making an API call, you may pass CoverageFilterCriteria
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
-    #             value: "CoverageStringInput", # required
-    #           },
-    #         ],
-    #         ec2_instance_tags: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS
-    #             key: "NonEmptyString", # required
-    #             value: "NonEmptyString",
-    #           },
-    #         ],
-    #         ecr_image_tags: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
-    #             value: "CoverageStringInput", # required
-    #           },
-    #         ],
-    #         ecr_repository_name: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
-    #             value: "CoverageStringInput", # required
-    #           },
-    #         ],
-    #         lambda_function_name: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
-    #             value: "CoverageStringInput", # required
-    #           },
-    #         ],
-    #         lambda_function_runtime: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
-    #             value: "CoverageStringInput", # required
-    #           },
-    #         ],
-    #         lambda_function_tags: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS
-    #             key: "NonEmptyString", # required
-    #             value: "NonEmptyString",
-    #           },
-    #         ],
-    #         resource_id: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
-    #             value: "CoverageStringInput", # required
-    #           },
-    #         ],
-    #         resource_type: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
-    #             value: "CoverageStringInput", # required
-    #           },
-    #         ],
-    #         scan_status_code: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
-    #             value: "CoverageStringInput", # required
-    #           },
-    #         ],
-    #         scan_status_reason: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
-    #             value: "CoverageStringInput", # required
-    #           },
-    #         ],
-    #         scan_type: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
-    #             value: "CoverageStringInput", # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] account_id
     #   An array of Amazon Web Services account IDs to return coverage
@@ -1084,15 +901,6 @@ module Aws::Inspector2
 
     # Contains details of a coverage map filter.
     #
-    # @note When making an API call, you may pass CoverageMapFilter
-    #   data as a hash:
-    #
-    #       {
-    #         comparison: "EQUALS", # required, accepts EQUALS
-    #         key: "NonEmptyString", # required
-    #         value: "NonEmptyString",
-    #       }
-    #
     # @!attribute [rw] comparison
     #   The operator to compare coverage on.
     #   @return [String]
@@ -1116,14 +924,6 @@ module Aws::Inspector2
     end
 
     # Contains details of a coverage string filter.
-    #
-    # @note When making an API call, you may pass CoverageStringFilter
-    #   data as a hash:
-    #
-    #       {
-    #         comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
-    #         value: "CoverageStringInput", # required
-    #       }
     #
     # @!attribute [rw] comparison
     #   The operator to compare strings on.
@@ -1182,276 +982,6 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateFilterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         action: "NONE", # required, accepts NONE, SUPPRESS
-    #         description: "FilterDescription",
-    #         filter_criteria: { # required
-    #           aws_account_id: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           component_id: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           component_type: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           ec2_instance_image_id: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           ec2_instance_subnet_id: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           ec2_instance_vpc_id: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           ecr_image_architecture: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           ecr_image_hash: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           ecr_image_pushed_at: [
-    #             {
-    #               end_inclusive: Time.now,
-    #               start_inclusive: Time.now,
-    #             },
-    #           ],
-    #           ecr_image_registry: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           ecr_image_repository_name: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           ecr_image_tags: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           exploit_available: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           finding_arn: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           finding_status: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           finding_type: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           first_observed_at: [
-    #             {
-    #               end_inclusive: Time.now,
-    #               start_inclusive: Time.now,
-    #             },
-    #           ],
-    #           fix_available: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           inspector_score: [
-    #             {
-    #               lower_inclusive: 1.0,
-    #               upper_inclusive: 1.0,
-    #             },
-    #           ],
-    #           lambda_function_execution_role_arn: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           lambda_function_last_modified_at: [
-    #             {
-    #               end_inclusive: Time.now,
-    #               start_inclusive: Time.now,
-    #             },
-    #           ],
-    #           lambda_function_layers: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           lambda_function_name: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           lambda_function_runtime: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           last_observed_at: [
-    #             {
-    #               end_inclusive: Time.now,
-    #               start_inclusive: Time.now,
-    #             },
-    #           ],
-    #           network_protocol: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           port_range: [
-    #             {
-    #               begin_inclusive: 1,
-    #               end_inclusive: 1,
-    #             },
-    #           ],
-    #           related_vulnerabilities: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           resource_id: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           resource_tags: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS
-    #               key: "MapKey", # required
-    #               value: "MapValue",
-    #             },
-    #           ],
-    #           resource_type: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           severity: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           title: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           updated_at: [
-    #             {
-    #               end_inclusive: Time.now,
-    #               start_inclusive: Time.now,
-    #             },
-    #           ],
-    #           vendor_severity: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           vulnerability_id: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           vulnerability_source: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           vulnerable_packages: [
-    #             {
-    #               architecture: {
-    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #                 value: "StringInput", # required
-    #               },
-    #               epoch: {
-    #                 lower_inclusive: 1.0,
-    #                 upper_inclusive: 1.0,
-    #               },
-    #               name: {
-    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #                 value: "StringInput", # required
-    #               },
-    #               release: {
-    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #                 value: "StringInput", # required
-    #               },
-    #               source_lambda_layer_arn: {
-    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #                 value: "StringInput", # required
-    #               },
-    #               source_layer_hash: {
-    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #                 value: "StringInput", # required
-    #               },
-    #               version: {
-    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #                 value: "StringInput", # required
-    #               },
-    #             },
-    #           ],
-    #         },
-    #         name: "FilterName", # required
-    #         reason: "FilterReason",
-    #         tags: {
-    #           "MapKey" => "MapValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] action
     #   Defines the action that is to be applied to the findings that match
     #   the filter.
@@ -1504,275 +1034,6 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateFindingsReportRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter_criteria: {
-    #           aws_account_id: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           component_id: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           component_type: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           ec2_instance_image_id: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           ec2_instance_subnet_id: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           ec2_instance_vpc_id: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           ecr_image_architecture: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           ecr_image_hash: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           ecr_image_pushed_at: [
-    #             {
-    #               end_inclusive: Time.now,
-    #               start_inclusive: Time.now,
-    #             },
-    #           ],
-    #           ecr_image_registry: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           ecr_image_repository_name: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           ecr_image_tags: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           exploit_available: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           finding_arn: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           finding_status: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           finding_type: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           first_observed_at: [
-    #             {
-    #               end_inclusive: Time.now,
-    #               start_inclusive: Time.now,
-    #             },
-    #           ],
-    #           fix_available: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           inspector_score: [
-    #             {
-    #               lower_inclusive: 1.0,
-    #               upper_inclusive: 1.0,
-    #             },
-    #           ],
-    #           lambda_function_execution_role_arn: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           lambda_function_last_modified_at: [
-    #             {
-    #               end_inclusive: Time.now,
-    #               start_inclusive: Time.now,
-    #             },
-    #           ],
-    #           lambda_function_layers: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           lambda_function_name: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           lambda_function_runtime: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           last_observed_at: [
-    #             {
-    #               end_inclusive: Time.now,
-    #               start_inclusive: Time.now,
-    #             },
-    #           ],
-    #           network_protocol: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           port_range: [
-    #             {
-    #               begin_inclusive: 1,
-    #               end_inclusive: 1,
-    #             },
-    #           ],
-    #           related_vulnerabilities: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           resource_id: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           resource_tags: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS
-    #               key: "MapKey", # required
-    #               value: "MapValue",
-    #             },
-    #           ],
-    #           resource_type: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           severity: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           title: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           updated_at: [
-    #             {
-    #               end_inclusive: Time.now,
-    #               start_inclusive: Time.now,
-    #             },
-    #           ],
-    #           vendor_severity: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           vulnerability_id: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           vulnerability_source: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           vulnerable_packages: [
-    #             {
-    #               architecture: {
-    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #                 value: "StringInput", # required
-    #               },
-    #               epoch: {
-    #                 lower_inclusive: 1.0,
-    #                 upper_inclusive: 1.0,
-    #               },
-    #               name: {
-    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #                 value: "StringInput", # required
-    #               },
-    #               release: {
-    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #                 value: "StringInput", # required
-    #               },
-    #               source_lambda_layer_arn: {
-    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #                 value: "StringInput", # required
-    #               },
-    #               source_layer_hash: {
-    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #                 value: "StringInput", # required
-    #               },
-    #               version: {
-    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #                 value: "StringInput", # required
-    #               },
-    #             },
-    #           ],
-    #         },
-    #         report_format: "CSV", # required, accepts CSV, JSON
-    #         s3_destination: { # required
-    #           bucket_name: "String", # required
-    #           key_prefix: "String",
-    #           kms_key_arn: "String", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] filter_criteria
     #   The filter criteria to apply to the results of the finding report.
     #   @return [Types::FilterCriteria]
@@ -1898,14 +1159,6 @@ module Aws::Inspector2
 
     # Contains details on the time range used to filter findings.
     #
-    # @note When making an API call, you may pass DateFilter
-    #   data as a hash:
-    #
-    #       {
-    #         end_inclusive: Time.now,
-    #         start_inclusive: Time.now,
-    #       }
-    #
     # @!attribute [rw] end_inclusive
     #   A timestamp representing the end of the time period filtered on.
     #   @return [Time]
@@ -1965,13 +1218,6 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteFilterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "FilterArn", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The Amazon Resource Number (ARN) of the filter to be deleted.
     #   @return [String]
@@ -1997,8 +1243,6 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/DescribeOrganizationConfigurationRequest AWS API Documentation
     #
     class DescribeOrganizationConfigurationRequest < Aws::EmptyStructure; end
@@ -2025,15 +1269,6 @@ module Aws::Inspector2
     # Contains details of the Amazon S3 bucket and KMS key used to export
     # findings.
     #
-    # @note When making an API call, you may pass Destination
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_name: "String", # required
-    #         key_prefix: "String",
-    #         kms_key_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] bucket_name
     #   The name of the Amazon S3 bucket to export findings to.
     #   @return [String]
@@ -2056,13 +1291,6 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisableDelegatedAdminAccountRequest
-    #   data as a hash:
-    #
-    #       {
-    #         delegated_admin_account_id: "AccountId", # required
-    #       }
-    #
     # @!attribute [rw] delegated_admin_account_id
     #   The Amazon Web Services account ID of the current Amazon Inspector
     #   delegated administrator.
@@ -2089,14 +1317,6 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisableRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_ids: ["AccountId"],
-    #         resource_types: ["EC2"], # accepts EC2, ECR, LAMBDA
-    #       }
-    #
     # @!attribute [rw] account_ids
     #   An array of account IDs you want to disable Amazon Inspector scans
     #   for.
@@ -2134,13 +1354,6 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateMemberRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID of the member account to
     #   disassociate.
@@ -2168,39 +1381,6 @@ module Aws::Inspector2
     end
 
     # The details that define an aggregation based on Amazon EC2 instances.
-    #
-    # @note When making an API call, you may pass Ec2InstanceAggregation
-    #   data as a hash:
-    #
-    #       {
-    #         amis: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         instance_ids: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         instance_tags: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS
-    #             key: "MapKey", # required
-    #             value: "MapValue",
-    #           },
-    #         ],
-    #         operating_systems: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         sort_by: "NETWORK_FINDINGS", # accepts NETWORK_FINDINGS, CRITICAL, HIGH, ALL
-    #         sort_order: "ASC", # accepts ASC, DESC
-    #       }
     #
     # @!attribute [rw] amis
     #   The AMI IDs associated with the Amazon EC2 instances to aggregate
@@ -2315,13 +1495,6 @@ module Aws::Inspector2
     # Details about the ECR automated re-scan duration setting for your
     # environment.
     #
-    # @note When making an API call, you may pass EcrConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         rescan_duration: "LIFETIME", # required, accepts LIFETIME, DAYS_30, DAYS_180
-    #       }
-    #
     # @!attribute [rw] rescan_duration
     #   The ECR automated re-scan duration defines how long an ECR image
     #   will be actively scanned by Amazon Inspector. When the number of
@@ -2418,14 +1591,6 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass EnableDelegatedAdminAccountRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         delegated_admin_account_id: "AccountId", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   The idempotency token for the request.
     #
@@ -2460,15 +1625,6 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass EnableRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_ids: ["AccountId"],
-    #         client_token: "ClientToken",
-    #         resource_types: ["EC2"], # required, accepts EC2, ECR, LAMBDA
-    #       }
-    #
     # @!attribute [rw] account_ids
     #   A list of account IDs you want to enable Amazon Inspector scans for.
     #   @return [Array<String>]
@@ -2629,267 +1785,6 @@ module Aws::Inspector2
     end
 
     # Details on the criteria used to define the filter.
-    #
-    # @note When making an API call, you may pass FilterCriteria
-    #   data as a hash:
-    #
-    #       {
-    #         aws_account_id: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         component_id: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         component_type: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         ec2_instance_image_id: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         ec2_instance_subnet_id: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         ec2_instance_vpc_id: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         ecr_image_architecture: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         ecr_image_hash: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         ecr_image_pushed_at: [
-    #           {
-    #             end_inclusive: Time.now,
-    #             start_inclusive: Time.now,
-    #           },
-    #         ],
-    #         ecr_image_registry: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         ecr_image_repository_name: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         ecr_image_tags: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         exploit_available: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         finding_arn: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         finding_status: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         finding_type: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         first_observed_at: [
-    #           {
-    #             end_inclusive: Time.now,
-    #             start_inclusive: Time.now,
-    #           },
-    #         ],
-    #         fix_available: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         inspector_score: [
-    #           {
-    #             lower_inclusive: 1.0,
-    #             upper_inclusive: 1.0,
-    #           },
-    #         ],
-    #         lambda_function_execution_role_arn: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         lambda_function_last_modified_at: [
-    #           {
-    #             end_inclusive: Time.now,
-    #             start_inclusive: Time.now,
-    #           },
-    #         ],
-    #         lambda_function_layers: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         lambda_function_name: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         lambda_function_runtime: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         last_observed_at: [
-    #           {
-    #             end_inclusive: Time.now,
-    #             start_inclusive: Time.now,
-    #           },
-    #         ],
-    #         network_protocol: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         port_range: [
-    #           {
-    #             begin_inclusive: 1,
-    #             end_inclusive: 1,
-    #           },
-    #         ],
-    #         related_vulnerabilities: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         resource_id: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         resource_tags: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS
-    #             key: "MapKey", # required
-    #             value: "MapValue",
-    #           },
-    #         ],
-    #         resource_type: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         severity: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         title: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         updated_at: [
-    #           {
-    #             end_inclusive: Time.now,
-    #             start_inclusive: Time.now,
-    #           },
-    #         ],
-    #         vendor_severity: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         vulnerability_id: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         vulnerability_source: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         vulnerable_packages: [
-    #           {
-    #             architecture: {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #             epoch: {
-    #               lower_inclusive: 1.0,
-    #               upper_inclusive: 1.0,
-    #             },
-    #             name: {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #             release: {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #             source_lambda_layer_arn: {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #             source_layer_hash: {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #             version: {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] aws_account_id
     #   Details of the Amazon Web Services account IDs used to filter
@@ -3227,16 +2122,6 @@ module Aws::Inspector2
 
     # The details that define an aggregation based on finding type.
     #
-    # @note When making an API call, you may pass FindingTypeAggregation
-    #   data as a hash:
-    #
-    #       {
-    #         finding_type: "NETWORK_REACHABILITY", # accepts NETWORK_REACHABILITY, PACKAGE_VULNERABILITY
-    #         resource_type: "AWS_EC2_INSTANCE", # accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE, AWS_LAMBDA_FUNCTION
-    #         sort_by: "CRITICAL", # accepts CRITICAL, HIGH, ALL
-    #         sort_order: "ASC", # accepts ASC, DESC
-    #       }
-    #
     # @!attribute [rw] finding_type
     #   The finding type to aggregate.
     #   @return [String]
@@ -3363,8 +2248,6 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetConfigurationRequest AWS API Documentation
     #
     class GetConfigurationRequest < Aws::EmptyStructure; end
@@ -3382,8 +2265,6 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetDelegatedAdminAccountRequest AWS API Documentation
     #
     class GetDelegatedAdminAccountRequest < Aws::EmptyStructure; end
@@ -3401,13 +2282,6 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetFindingsReportStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         report_id: "ReportId",
-    #       }
-    #
     # @!attribute [rw] report_id
     #   The ID of the report to retrieve the status of.
     #   @return [String]
@@ -3457,13 +2331,6 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetMemberRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID of the member account to retrieve
     #   information on.
@@ -3491,32 +2358,6 @@ module Aws::Inspector2
 
     # The details that define an aggregation based on container image
     # layers.
-    #
-    # @note When making an API call, you may pass ImageLayerAggregation
-    #   data as a hash:
-    #
-    #       {
-    #         layer_hashes: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         repositories: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         resource_ids: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         sort_by: "CRITICAL", # accepts CRITICAL, HIGH, ALL
-    #         sort_order: "ASC", # accepts ASC, DESC
-    #       }
     #
     # @!attribute [rw] layer_hashes
     #   The hashes associated with the layers.
@@ -3624,39 +2465,6 @@ module Aws::Inspector2
 
     # The details that define a findings aggregation based on AWS Lambda
     # functions.
-    #
-    # @note When making an API call, you may pass LambdaFunctionAggregation
-    #   data as a hash:
-    #
-    #       {
-    #         function_names: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         function_tags: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS
-    #             key: "MapKey", # required
-    #             value: "MapValue",
-    #           },
-    #         ],
-    #         resource_ids: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         runtimes: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         sort_by: "CRITICAL", # accepts CRITICAL, HIGH, ALL
-    #         sort_order: "ASC", # accepts ASC, DESC
-    #       }
     #
     # @!attribute [rw] function_names
     #   The AWS Lambda function names to include in the aggregation results.
@@ -3776,32 +2584,6 @@ module Aws::Inspector2
     # The details that define a findings aggregation based on an AWS Lambda
     # function's layers.
     #
-    # @note When making an API call, you may pass LambdaLayerAggregation
-    #   data as a hash:
-    #
-    #       {
-    #         function_names: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         layer_arns: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         resource_ids: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         sort_by: "CRITICAL", # accepts CRITICAL, HIGH, ALL
-    #         sort_order: "ASC", # accepts ASC, DESC
-    #       }
-    #
     # @!attribute [rw] function_names
     #   The names of the AWS Lambda functions associated with the layers.
     #   @return [Array<Types::StringFilter>]
@@ -3904,15 +2686,6 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAccountPermissionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         service: "EC2", # accepts EC2, ECR, LAMBDA
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to return in the response.
     #   @return [Integer]
@@ -3961,90 +2734,6 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCoverageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter_criteria: {
-    #           account_id: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
-    #               value: "CoverageStringInput", # required
-    #             },
-    #           ],
-    #           ec2_instance_tags: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS
-    #               key: "NonEmptyString", # required
-    #               value: "NonEmptyString",
-    #             },
-    #           ],
-    #           ecr_image_tags: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
-    #               value: "CoverageStringInput", # required
-    #             },
-    #           ],
-    #           ecr_repository_name: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
-    #               value: "CoverageStringInput", # required
-    #             },
-    #           ],
-    #           lambda_function_name: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
-    #               value: "CoverageStringInput", # required
-    #             },
-    #           ],
-    #           lambda_function_runtime: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
-    #               value: "CoverageStringInput", # required
-    #             },
-    #           ],
-    #           lambda_function_tags: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS
-    #               key: "NonEmptyString", # required
-    #               value: "NonEmptyString",
-    #             },
-    #           ],
-    #           resource_id: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
-    #               value: "CoverageStringInput", # required
-    #             },
-    #           ],
-    #           resource_type: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
-    #               value: "CoverageStringInput", # required
-    #             },
-    #           ],
-    #           scan_status_code: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
-    #               value: "CoverageStringInput", # required
-    #             },
-    #           ],
-    #           scan_status_reason: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
-    #               value: "CoverageStringInput", # required
-    #             },
-    #           ],
-    #           scan_type: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
-    #               value: "CoverageStringInput", # required
-    #             },
-    #           ],
-    #         },
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] filter_criteria
     #   An object that contains details on the filters to apply to the
     #   coverage data for your environment.
@@ -4094,90 +2783,6 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCoverageStatisticsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter_criteria: {
-    #           account_id: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
-    #               value: "CoverageStringInput", # required
-    #             },
-    #           ],
-    #           ec2_instance_tags: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS
-    #               key: "NonEmptyString", # required
-    #               value: "NonEmptyString",
-    #             },
-    #           ],
-    #           ecr_image_tags: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
-    #               value: "CoverageStringInput", # required
-    #             },
-    #           ],
-    #           ecr_repository_name: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
-    #               value: "CoverageStringInput", # required
-    #             },
-    #           ],
-    #           lambda_function_name: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
-    #               value: "CoverageStringInput", # required
-    #             },
-    #           ],
-    #           lambda_function_runtime: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
-    #               value: "CoverageStringInput", # required
-    #             },
-    #           ],
-    #           lambda_function_tags: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS
-    #               key: "NonEmptyString", # required
-    #               value: "NonEmptyString",
-    #             },
-    #           ],
-    #           resource_id: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
-    #               value: "CoverageStringInput", # required
-    #             },
-    #           ],
-    #           resource_type: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
-    #               value: "CoverageStringInput", # required
-    #             },
-    #           ],
-    #           scan_status_code: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
-    #               value: "CoverageStringInput", # required
-    #             },
-    #           ],
-    #           scan_status_reason: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
-    #               value: "CoverageStringInput", # required
-    #             },
-    #           ],
-    #           scan_type: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
-    #               value: "CoverageStringInput", # required
-    #             },
-    #           ],
-    #         },
-    #         group_by: "SCAN_STATUS_CODE", # accepts SCAN_STATUS_CODE, SCAN_STATUS_REASON, ACCOUNT_ID, RESOURCE_TYPE, ECR_REPOSITORY_NAME
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] filter_criteria
     #   An object that contains details on the filters to apply to the
     #   coverage data for your environment.
@@ -4231,14 +2836,6 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDelegatedAdminAccountsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to return in the response.
     #   @return [Integer]
@@ -4282,16 +2879,6 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFiltersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         action: "NONE", # accepts NONE, SUPPRESS
-    #         arns: ["FilterArn"],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] action
     #   The action the filter applies to matched findings.
     #   @return [String]
@@ -4344,218 +2931,6 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFindingAggregationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_ids: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         aggregation_request: {
-    #           account_aggregation: {
-    #             finding_type: "NETWORK_REACHABILITY", # accepts NETWORK_REACHABILITY, PACKAGE_VULNERABILITY
-    #             resource_type: "AWS_EC2_INSTANCE", # accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE, AWS_LAMBDA_FUNCTION
-    #             sort_by: "CRITICAL", # accepts CRITICAL, HIGH, ALL
-    #             sort_order: "ASC", # accepts ASC, DESC
-    #           },
-    #           ami_aggregation: {
-    #             amis: [
-    #               {
-    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #                 value: "StringInput", # required
-    #               },
-    #             ],
-    #             sort_by: "CRITICAL", # accepts CRITICAL, HIGH, ALL, AFFECTED_INSTANCES
-    #             sort_order: "ASC", # accepts ASC, DESC
-    #           },
-    #           aws_ecr_container_aggregation: {
-    #             architectures: [
-    #               {
-    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #                 value: "StringInput", # required
-    #               },
-    #             ],
-    #             image_shas: [
-    #               {
-    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #                 value: "StringInput", # required
-    #               },
-    #             ],
-    #             image_tags: [
-    #               {
-    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #                 value: "StringInput", # required
-    #               },
-    #             ],
-    #             repositories: [
-    #               {
-    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #                 value: "StringInput", # required
-    #               },
-    #             ],
-    #             resource_ids: [
-    #               {
-    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #                 value: "StringInput", # required
-    #               },
-    #             ],
-    #             sort_by: "CRITICAL", # accepts CRITICAL, HIGH, ALL
-    #             sort_order: "ASC", # accepts ASC, DESC
-    #           },
-    #           ec2_instance_aggregation: {
-    #             amis: [
-    #               {
-    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #                 value: "StringInput", # required
-    #               },
-    #             ],
-    #             instance_ids: [
-    #               {
-    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #                 value: "StringInput", # required
-    #               },
-    #             ],
-    #             instance_tags: [
-    #               {
-    #                 comparison: "EQUALS", # required, accepts EQUALS
-    #                 key: "MapKey", # required
-    #                 value: "MapValue",
-    #               },
-    #             ],
-    #             operating_systems: [
-    #               {
-    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #                 value: "StringInput", # required
-    #               },
-    #             ],
-    #             sort_by: "NETWORK_FINDINGS", # accepts NETWORK_FINDINGS, CRITICAL, HIGH, ALL
-    #             sort_order: "ASC", # accepts ASC, DESC
-    #           },
-    #           finding_type_aggregation: {
-    #             finding_type: "NETWORK_REACHABILITY", # accepts NETWORK_REACHABILITY, PACKAGE_VULNERABILITY
-    #             resource_type: "AWS_EC2_INSTANCE", # accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE, AWS_LAMBDA_FUNCTION
-    #             sort_by: "CRITICAL", # accepts CRITICAL, HIGH, ALL
-    #             sort_order: "ASC", # accepts ASC, DESC
-    #           },
-    #           image_layer_aggregation: {
-    #             layer_hashes: [
-    #               {
-    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #                 value: "StringInput", # required
-    #               },
-    #             ],
-    #             repositories: [
-    #               {
-    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #                 value: "StringInput", # required
-    #               },
-    #             ],
-    #             resource_ids: [
-    #               {
-    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #                 value: "StringInput", # required
-    #               },
-    #             ],
-    #             sort_by: "CRITICAL", # accepts CRITICAL, HIGH, ALL
-    #             sort_order: "ASC", # accepts ASC, DESC
-    #           },
-    #           lambda_function_aggregation: {
-    #             function_names: [
-    #               {
-    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #                 value: "StringInput", # required
-    #               },
-    #             ],
-    #             function_tags: [
-    #               {
-    #                 comparison: "EQUALS", # required, accepts EQUALS
-    #                 key: "MapKey", # required
-    #                 value: "MapValue",
-    #               },
-    #             ],
-    #             resource_ids: [
-    #               {
-    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #                 value: "StringInput", # required
-    #               },
-    #             ],
-    #             runtimes: [
-    #               {
-    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #                 value: "StringInput", # required
-    #               },
-    #             ],
-    #             sort_by: "CRITICAL", # accepts CRITICAL, HIGH, ALL
-    #             sort_order: "ASC", # accepts ASC, DESC
-    #           },
-    #           lambda_layer_aggregation: {
-    #             function_names: [
-    #               {
-    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #                 value: "StringInput", # required
-    #               },
-    #             ],
-    #             layer_arns: [
-    #               {
-    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #                 value: "StringInput", # required
-    #               },
-    #             ],
-    #             resource_ids: [
-    #               {
-    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #                 value: "StringInput", # required
-    #               },
-    #             ],
-    #             sort_by: "CRITICAL", # accepts CRITICAL, HIGH, ALL
-    #             sort_order: "ASC", # accepts ASC, DESC
-    #           },
-    #           package_aggregation: {
-    #             package_names: [
-    #               {
-    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #                 value: "StringInput", # required
-    #               },
-    #             ],
-    #             sort_by: "CRITICAL", # accepts CRITICAL, HIGH, ALL
-    #             sort_order: "ASC", # accepts ASC, DESC
-    #           },
-    #           repository_aggregation: {
-    #             repositories: [
-    #               {
-    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #                 value: "StringInput", # required
-    #               },
-    #             ],
-    #             sort_by: "CRITICAL", # accepts CRITICAL, HIGH, ALL, AFFECTED_IMAGES
-    #             sort_order: "ASC", # accepts ASC, DESC
-    #           },
-    #           title_aggregation: {
-    #             resource_type: "AWS_EC2_INSTANCE", # accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE, AWS_LAMBDA_FUNCTION
-    #             sort_by: "CRITICAL", # accepts CRITICAL, HIGH, ALL
-    #             sort_order: "ASC", # accepts ASC, DESC
-    #             titles: [
-    #               {
-    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #                 value: "StringInput", # required
-    #               },
-    #             ],
-    #             vulnerability_ids: [
-    #               {
-    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #                 value: "StringInput", # required
-    #               },
-    #             ],
-    #           },
-    #         },
-    #         aggregation_type: "FINDING_TYPE", # required, accepts FINDING_TYPE, PACKAGE, TITLE, REPOSITORY, AMI, AWS_EC2_INSTANCE, AWS_ECR_CONTAINER, IMAGE_LAYER, ACCOUNT, AWS_LAMBDA_FUNCTION, LAMBDA_LAYER
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] account_ids
     #   The Amazon Web Services account IDs to retrieve finding aggregation
     #   data for.
@@ -4620,275 +2995,6 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFindingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter_criteria: {
-    #           aws_account_id: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           component_id: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           component_type: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           ec2_instance_image_id: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           ec2_instance_subnet_id: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           ec2_instance_vpc_id: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           ecr_image_architecture: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           ecr_image_hash: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           ecr_image_pushed_at: [
-    #             {
-    #               end_inclusive: Time.now,
-    #               start_inclusive: Time.now,
-    #             },
-    #           ],
-    #           ecr_image_registry: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           ecr_image_repository_name: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           ecr_image_tags: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           exploit_available: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           finding_arn: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           finding_status: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           finding_type: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           first_observed_at: [
-    #             {
-    #               end_inclusive: Time.now,
-    #               start_inclusive: Time.now,
-    #             },
-    #           ],
-    #           fix_available: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           inspector_score: [
-    #             {
-    #               lower_inclusive: 1.0,
-    #               upper_inclusive: 1.0,
-    #             },
-    #           ],
-    #           lambda_function_execution_role_arn: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           lambda_function_last_modified_at: [
-    #             {
-    #               end_inclusive: Time.now,
-    #               start_inclusive: Time.now,
-    #             },
-    #           ],
-    #           lambda_function_layers: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           lambda_function_name: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           lambda_function_runtime: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           last_observed_at: [
-    #             {
-    #               end_inclusive: Time.now,
-    #               start_inclusive: Time.now,
-    #             },
-    #           ],
-    #           network_protocol: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           port_range: [
-    #             {
-    #               begin_inclusive: 1,
-    #               end_inclusive: 1,
-    #             },
-    #           ],
-    #           related_vulnerabilities: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           resource_id: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           resource_tags: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS
-    #               key: "MapKey", # required
-    #               value: "MapValue",
-    #             },
-    #           ],
-    #           resource_type: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           severity: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           title: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           updated_at: [
-    #             {
-    #               end_inclusive: Time.now,
-    #               start_inclusive: Time.now,
-    #             },
-    #           ],
-    #           vendor_severity: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           vulnerability_id: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           vulnerability_source: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           vulnerable_packages: [
-    #             {
-    #               architecture: {
-    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #                 value: "StringInput", # required
-    #               },
-    #               epoch: {
-    #                 lower_inclusive: 1.0,
-    #                 upper_inclusive: 1.0,
-    #               },
-    #               name: {
-    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #                 value: "StringInput", # required
-    #               },
-    #               release: {
-    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #                 value: "StringInput", # required
-    #               },
-    #               source_lambda_layer_arn: {
-    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #                 value: "StringInput", # required
-    #               },
-    #               source_layer_hash: {
-    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #                 value: "StringInput", # required
-    #               },
-    #               version: {
-    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #                 value: "StringInput", # required
-    #               },
-    #             },
-    #           ],
-    #         },
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         sort_criteria: {
-    #           field: "AWS_ACCOUNT_ID", # required, accepts AWS_ACCOUNT_ID, FINDING_TYPE, SEVERITY, FIRST_OBSERVED_AT, LAST_OBSERVED_AT, FINDING_STATUS, RESOURCE_TYPE, ECR_IMAGE_PUSHED_AT, ECR_IMAGE_REPOSITORY_NAME, ECR_IMAGE_REGISTRY, NETWORK_PROTOCOL, COMPONENT_TYPE, VULNERABILITY_ID, VULNERABILITY_SOURCE, INSPECTOR_SCORE, VENDOR_SEVERITY
-    #           sort_order: "ASC", # required, accepts ASC, DESC
-    #         },
-    #       }
-    #
     # @!attribute [rw] filter_criteria
     #   Details on the filters to apply to your finding results.
     #   @return [Types::FilterCriteria]
@@ -4941,15 +3047,6 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListMembersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         only_associated: false,
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to return in the response.
     #   @return [Integer]
@@ -4995,13 +3092,6 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon resource number (ARN) of the resource to list tags of.
     #   @return [String]
@@ -5026,15 +3116,6 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListUsageTotalsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_ids: ["UsageAccountId"],
-    #         max_results: 1,
-    #         next_token: "ListUsageTotalsNextToken",
-    #       }
-    #
     # @!attribute [rw] account_ids
     #   The Amazon Web Services account IDs to retrieve usage totals for.
     #   @return [Array<String>]
@@ -5080,15 +3161,6 @@ module Aws::Inspector2
     end
 
     # An object that describes details of a map filter.
-    #
-    # @note When making an API call, you may pass MapFilter
-    #   data as a hash:
-    #
-    #       {
-    #         comparison: "EQUALS", # required, accepts EQUALS
-    #         key: "MapKey", # required
-    #         value: "MapValue",
-    #       }
     #
     # @!attribute [rw] comparison
     #   The operator to use when comparing values in the filter.
@@ -5184,14 +3256,6 @@ module Aws::Inspector2
 
     # An object that describes the details of a number filter.
     #
-    # @note When making an API call, you may pass NumberFilter
-    #   data as a hash:
-    #
-    #       {
-    #         lower_inclusive: 1.0,
-    #         upper_inclusive: 1.0,
-    #       }
-    #
     # @!attribute [rw] lower_inclusive
     #   The lowest number to be included in the filter.
     #   @return [Float]
@@ -5211,20 +3275,6 @@ module Aws::Inspector2
 
     # The details that define an aggregation based on operating system
     # package type.
-    #
-    # @note When making an API call, you may pass PackageAggregation
-    #   data as a hash:
-    #
-    #       {
-    #         package_names: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         sort_by: "CRITICAL", # accepts CRITICAL, HIGH, ALL
-    #         sort_order: "ASC", # accepts ASC, DESC
-    #       }
     #
     # @!attribute [rw] package_names
     #   The names of packages to aggregate findings on.
@@ -5275,40 +3325,6 @@ module Aws::Inspector2
     end
 
     # Contains information on the details of a package filter.
-    #
-    # @note When making an API call, you may pass PackageFilter
-    #   data as a hash:
-    #
-    #       {
-    #         architecture: {
-    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #           value: "StringInput", # required
-    #         },
-    #         epoch: {
-    #           lower_inclusive: 1.0,
-    #           upper_inclusive: 1.0,
-    #         },
-    #         name: {
-    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #           value: "StringInput", # required
-    #         },
-    #         release: {
-    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #           value: "StringInput", # required
-    #         },
-    #         source_lambda_layer_arn: {
-    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #           value: "StringInput", # required
-    #         },
-    #         source_layer_hash: {
-    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #           value: "StringInput", # required
-    #         },
-    #         version: {
-    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #           value: "StringInput", # required
-    #         },
-    #       }
     #
     # @!attribute [rw] architecture
     #   An object that contains details on the package architecture type to
@@ -5459,14 +3475,6 @@ module Aws::Inspector2
 
     # An object that describes the details of a port range filter.
     #
-    # @note When making an API call, you may pass PortRangeFilter
-    #   data as a hash:
-    #
-    #       {
-    #         begin_inclusive: 1,
-    #         end_inclusive: 1,
-    #       }
-    #
     # @!attribute [rw] begin_inclusive
     #   The port number the port range begins at.
     #   @return [Integer]
@@ -5520,20 +3528,6 @@ module Aws::Inspector2
     end
 
     # The details that define an aggregation based on repository.
-    #
-    # @note When making an API call, you may pass RepositoryAggregation
-    #   data as a hash:
-    #
-    #       {
-    #         repositories: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         sort_by: "CRITICAL", # accepts CRITICAL, HIGH, ALL, AFFECTED_IMAGES
-    #         sort_order: "ASC", # accepts ASC, DESC
-    #       }
     #
     # @!attribute [rw] repositories
     #   The names of repositories to aggregate findings on.
@@ -5825,14 +3819,6 @@ module Aws::Inspector2
 
     # Details about the criteria used to sort finding results.
     #
-    # @note When making an API call, you may pass SortCriteria
-    #   data as a hash:
-    #
-    #       {
-    #         field: "AWS_ACCOUNT_ID", # required, accepts AWS_ACCOUNT_ID, FINDING_TYPE, SEVERITY, FIRST_OBSERVED_AT, LAST_OBSERVED_AT, FINDING_STATUS, RESOURCE_TYPE, ECR_IMAGE_PUSHED_AT, ECR_IMAGE_REPOSITORY_NAME, ECR_IMAGE_REGISTRY, NETWORK_PROTOCOL, COMPONENT_TYPE, VULNERABILITY_ID, VULNERABILITY_SOURCE, INSPECTOR_SCORE, VENDOR_SEVERITY
-    #         sort_order: "ASC", # required, accepts ASC, DESC
-    #       }
-    #
     # @!attribute [rw] field
     #   The finding detail field by which results are sorted.
     #   @return [String]
@@ -5898,14 +3884,6 @@ module Aws::Inspector2
 
     # An object that describes the details of a string filter.
     #
-    # @note When making an API call, you may pass StringFilter
-    #   data as a hash:
-    #
-    #       {
-    #         comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #         value: "StringInput", # required
-    #       }
-    #
     # @!attribute [rw] comparison
     #   The operator to use when comparing values in the filter.
     #   @return [String]
@@ -5923,16 +3901,6 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tags: { # required
-    #           "MapKey" => "MapValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource to apply a tag to.
     #   @return [String]
@@ -5973,27 +3941,6 @@ module Aws::Inspector2
     end
 
     # The details that define an aggregation based on finding title.
-    #
-    # @note When making an API call, you may pass TitleAggregation
-    #   data as a hash:
-    #
-    #       {
-    #         resource_type: "AWS_EC2_INSTANCE", # accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE, AWS_LAMBDA_FUNCTION
-    #         sort_by: "CRITICAL", # accepts CRITICAL, HIGH, ALL
-    #         sort_order: "ASC", # accepts ASC, DESC
-    #         titles: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #         vulnerability_ids: [
-    #           {
-    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #             value: "StringInput", # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] resource_type
     #   The resource type to aggregate on.
@@ -6058,14 +4005,6 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) for the resource to remove tags from.
     #   @return [String]
@@ -6087,15 +4026,6 @@ module Aws::Inspector2
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         ecr_configuration: { # required
-    #           rescan_duration: "LIFETIME", # required, accepts LIFETIME, DAYS_30, DAYS_180
-    #         },
-    #       }
-    #
     # @!attribute [rw] ecr_configuration
     #   Specifies how the ECR automated re-scan will be updated for your
     #   environment.
@@ -6113,274 +4043,6 @@ module Aws::Inspector2
     #
     class UpdateConfigurationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateFilterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         action: "NONE", # accepts NONE, SUPPRESS
-    #         description: "FilterDescription",
-    #         filter_arn: "FilterArn", # required
-    #         filter_criteria: {
-    #           aws_account_id: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           component_id: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           component_type: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           ec2_instance_image_id: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           ec2_instance_subnet_id: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           ec2_instance_vpc_id: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           ecr_image_architecture: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           ecr_image_hash: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           ecr_image_pushed_at: [
-    #             {
-    #               end_inclusive: Time.now,
-    #               start_inclusive: Time.now,
-    #             },
-    #           ],
-    #           ecr_image_registry: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           ecr_image_repository_name: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           ecr_image_tags: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           exploit_available: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           finding_arn: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           finding_status: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           finding_type: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           first_observed_at: [
-    #             {
-    #               end_inclusive: Time.now,
-    #               start_inclusive: Time.now,
-    #             },
-    #           ],
-    #           fix_available: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           inspector_score: [
-    #             {
-    #               lower_inclusive: 1.0,
-    #               upper_inclusive: 1.0,
-    #             },
-    #           ],
-    #           lambda_function_execution_role_arn: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           lambda_function_last_modified_at: [
-    #             {
-    #               end_inclusive: Time.now,
-    #               start_inclusive: Time.now,
-    #             },
-    #           ],
-    #           lambda_function_layers: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           lambda_function_name: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           lambda_function_runtime: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           last_observed_at: [
-    #             {
-    #               end_inclusive: Time.now,
-    #               start_inclusive: Time.now,
-    #             },
-    #           ],
-    #           network_protocol: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           port_range: [
-    #             {
-    #               begin_inclusive: 1,
-    #               end_inclusive: 1,
-    #             },
-    #           ],
-    #           related_vulnerabilities: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           resource_id: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           resource_tags: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS
-    #               key: "MapKey", # required
-    #               value: "MapValue",
-    #             },
-    #           ],
-    #           resource_type: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           severity: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           title: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           updated_at: [
-    #             {
-    #               end_inclusive: Time.now,
-    #               start_inclusive: Time.now,
-    #             },
-    #           ],
-    #           vendor_severity: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           vulnerability_id: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           vulnerability_source: [
-    #             {
-    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #               value: "StringInput", # required
-    #             },
-    #           ],
-    #           vulnerable_packages: [
-    #             {
-    #               architecture: {
-    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #                 value: "StringInput", # required
-    #               },
-    #               epoch: {
-    #                 lower_inclusive: 1.0,
-    #                 upper_inclusive: 1.0,
-    #               },
-    #               name: {
-    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #                 value: "StringInput", # required
-    #               },
-    #               release: {
-    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #                 value: "StringInput", # required
-    #               },
-    #               source_lambda_layer_arn: {
-    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #                 value: "StringInput", # required
-    #               },
-    #               source_layer_hash: {
-    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #                 value: "StringInput", # required
-    #               },
-    #               version: {
-    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
-    #                 value: "StringInput", # required
-    #               },
-    #             },
-    #           ],
-    #         },
-    #         name: "FilterName",
-    #         reason: "FilterReason",
-    #       }
-    #
     # @!attribute [rw] action
     #   Specifies the action that is to be applied to the findings that
     #   match the filter.
@@ -6431,17 +4093,6 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateOrganizationConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         auto_enable: { # required
-    #           ec2: false, # required
-    #           ecr: false, # required
-    #           lambda: false,
-    #         },
-    #       }
-    #
     # @!attribute [rw] auto_enable
     #   Defines which scan types are enabled automatically for new members
     #   of your Amazon Inspector organization.

@@ -55,13 +55,6 @@ module Aws::BillingConductor
     # The set of accounts that will be under the billing group. The set of
     # accounts resemble the linked accounts in a consolidated family.
     #
-    # @note When making an API call, you may pass AccountGrouping
-    #   data as a hash:
-    #
-    #       {
-    #         linked_account_ids: ["AccountId"], # required
-    #       }
-    #
     # @!attribute [rw] linked_account_ids
     #   The account IDs that make up the billing group. Account IDs must be
     #   a part of the consolidated billing family, and not associated with
@@ -76,14 +69,6 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateAccountsInput
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "BillingGroupArn", # required
-    #         account_ids: ["AccountId"], # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the billing group that associates
     #   the array of account IDs.
@@ -115,14 +100,6 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociatePricingRulesInput
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "PricingPlanArn", # required
-    #         pricing_rule_arns: ["PricingRuleArn"], # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The `PricingPlanArn` that the `PricingRuleArns` are associated with.
     #   @return [String]
@@ -191,18 +168,6 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchAssociateResourcesToCustomLineItemInput
-    #   data as a hash:
-    #
-    #       {
-    #         target_arn: "CustomLineItemArn", # required
-    #         resource_arns: ["CustomLineItemAssociationElement"], # required
-    #         billing_period_range: {
-    #           inclusive_start_billing_period: "BillingPeriod", # required
-    #           exclusive_end_billing_period: "BillingPeriod",
-    #         },
-    #       }
-    #
     # @!attribute [rw] target_arn
     #   A percentage custom line item ARN to associate the resources to.
     #   @return [String]
@@ -246,18 +211,6 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchDisassociateResourcesFromCustomLineItemInput
-    #   data as a hash:
-    #
-    #       {
-    #         target_arn: "CustomLineItemArn", # required
-    #         resource_arns: ["CustomLineItemAssociationElement"], # required
-    #         billing_period_range: {
-    #           inclusive_start_billing_period: "BillingPeriod", # required
-    #           exclusive_end_billing_period: "BillingPeriod",
-    #         },
-    #       }
-    #
     # @!attribute [rw] target_arn
     #   A percentage custom line item ARN to disassociate the resources
     #   from.
@@ -408,13 +361,6 @@ module Aws::BillingConductor
     # The preferences and settings that will be used to compute the Amazon
     # Web Services charges for a billing group.
     #
-    # @note When making an API call, you may pass ComputationPreference
-    #   data as a hash:
-    #
-    #       {
-    #         pricing_plan_arn: "PricingPlanFullArn", # required
-    #       }
-    #
     # @!attribute [rw] pricing_plan_arn
     #   The Amazon Resource Name (ARN) of the pricing plan that's used to
     #   compute the Amazon Web Services charges for a billing group.
@@ -457,25 +403,6 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateBillingGroupInput
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         name: "BillingGroupName", # required
-    #         account_grouping: { # required
-    #           linked_account_ids: ["AccountId"], # required
-    #         },
-    #         computation_preference: { # required
-    #           pricing_plan_arn: "PricingPlanFullArn", # required
-    #         },
-    #         primary_account_id: "AccountId",
-    #         description: "BillingGroupDescription",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_token
     #   The token that is needed to support idempotency. Idempotency isn't
     #   currently supported, but will be implemented in a future update.
@@ -537,33 +464,6 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateCustomLineItemInput
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         name: "CustomLineItemName", # required
-    #         description: "CustomLineItemDescription", # required
-    #         billing_group_arn: "BillingGroupArn", # required
-    #         billing_period_range: {
-    #           inclusive_start_billing_period: "BillingPeriod", # required
-    #           exclusive_end_billing_period: "BillingPeriod",
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         charge_details: { # required
-    #           flat: {
-    #             charge_value: 1.0, # required
-    #           },
-    #           percentage: {
-    #             percentage_value: 1.0, # required
-    #             associated_values: ["CustomLineItemAssociationElement"],
-    #           },
-    #           type: "CREDIT", # required, accepts CREDIT, FEE
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_token
     #   The token that is needed to support idempotency. Idempotency isn't
     #   currently supported, but will be implemented in a future update.
@@ -626,19 +526,6 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreatePricingPlanInput
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         name: "PricingPlanName", # required
-    #         description: "PricingPlanDescription",
-    #         pricing_rule_arns: ["PricingRuleArn"],
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_token
     #   The token that is needed to support idempotency. Idempotency isn't
     #   currently supported, but will be implemented in a future update.
@@ -690,23 +577,6 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreatePricingRuleInput
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         name: "PricingRuleName", # required
-    #         description: "PricingRuleDescription",
-    #         scope: "GLOBAL", # required, accepts GLOBAL, SERVICE, BILLING_ENTITY
-    #         type: "MARKUP", # required, accepts MARKUP, DISCOUNT
-    #         modifier_percentage: 1.0, # required
-    #         service: "Service",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         billing_entity: "BillingEntity",
-    #       }
-    #
     # @!attribute [rw] client_token
     #   The token that's needed to support idempotency. Idempotency isn't
     #   currently supported, but will be implemented in a future update.
@@ -784,14 +654,6 @@ module Aws::BillingConductor
     # The billing period range in which the custom line item request will be
     # applied.
     #
-    # @note When making an API call, you may pass CustomLineItemBillingPeriodRange
-    #   data as a hash:
-    #
-    #       {
-    #         inclusive_start_billing_period: "BillingPeriod", # required
-    #         exclusive_end_billing_period: "BillingPeriod",
-    #       }
-    #
     # @!attribute [rw] inclusive_start_billing_period
     #   The inclusive start billing period that defines a billing period
     #   range where a custom line is applied.
@@ -813,20 +675,6 @@ module Aws::BillingConductor
 
     # The charge details of a custom line item. It should contain only one
     # of `Flat` or `Percentage`.
-    #
-    # @note When making an API call, you may pass CustomLineItemChargeDetails
-    #   data as a hash:
-    #
-    #       {
-    #         flat: {
-    #           charge_value: 1.0, # required
-    #         },
-    #         percentage: {
-    #           percentage_value: 1.0, # required
-    #           associated_values: ["CustomLineItemAssociationElement"],
-    #         },
-    #         type: "CREDIT", # required, accepts CREDIT, FEE
-    #       }
     #
     # @!attribute [rw] flat
     #   A `CustomLineItemFlatChargeDetails` that describes the charge
@@ -855,13 +703,6 @@ module Aws::BillingConductor
 
     # A representation of the charge details that are associated with a flat
     # custom line item.
-    #
-    # @note When making an API call, you may pass CustomLineItemFlatChargeDetails
-    #   data as a hash:
-    #
-    #       {
-    #         charge_value: 1.0, # required
-    #       }
     #
     # @!attribute [rw] charge_value
     #   The custom line item's fixed charge value in USD.
@@ -940,14 +781,6 @@ module Aws::BillingConductor
 
     # A representation of the charge details that are associated with a
     # percentage custom line item.
-    #
-    # @note When making an API call, you may pass CustomLineItemPercentageChargeDetails
-    #   data as a hash:
-    #
-    #       {
-    #         percentage_value: 1.0, # required
-    #         associated_values: ["CustomLineItemAssociationElement"],
-    #       }
     #
     # @!attribute [rw] percentage_value
     #   The custom line item's percentage value. This will be multiplied
@@ -1035,13 +868,6 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteBillingGroupInput
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "BillingGroupArn", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the billing group that you're
     #   deleting.
@@ -1067,17 +893,6 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteCustomLineItemInput
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "CustomLineItemArn", # required
-    #         billing_period_range: {
-    #           inclusive_start_billing_period: "BillingPeriod", # required
-    #           exclusive_end_billing_period: "BillingPeriod",
-    #         },
-    #       }
-    #
     # @!attribute [rw] arn
     #   The ARN of the custom line item to be deleted.
     #   @return [String]
@@ -1108,13 +923,6 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeletePricingPlanInput
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "PricingPlanArn", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the pricing plan that you're
     #   deleting.
@@ -1140,13 +948,6 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeletePricingRuleInput
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "PricingRuleArn", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the pricing rule that you are
     #   deleting.
@@ -1172,14 +973,6 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateAccountsInput
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "BillingGroupArn", # required
-    #         account_ids: ["AccountId"], # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the billing group that the array
     #   of account IDs will disassociate from.
@@ -1211,14 +1004,6 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociatePricingRulesInput
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "PricingPlanArn", # required
-    #         pricing_rule_arns: ["PricingRuleArn"], # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The pricing plan Amazon Resource Name (ARN) to disassociate pricing
     #   rules from.
@@ -1300,14 +1085,6 @@ module Aws::BillingConductor
     # `Billing Group Arn`\: linked accounts that are associated to the
     # provided Billing Group Arn.
     #
-    # @note When making an API call, you may pass ListAccountAssociationsFilter
-    #   data as a hash:
-    #
-    #       {
-    #         association: "Association",
-    #         account_id: "AccountId",
-    #       }
-    #
     # @!attribute [rw] association
     #   `MONITORED`\: linked accounts that are associated to billing groups.
     #
@@ -1331,18 +1108,6 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAccountAssociationsInput
-    #   data as a hash:
-    #
-    #       {
-    #         billing_period: "BillingPeriod",
-    #         filters: {
-    #           association: "Association",
-    #           account_id: "AccountId",
-    #         },
-    #         next_token: "Token",
-    #       }
-    #
     # @!attribute [rw] billing_period
     #   The preferred billing period to get account associations.
     #   @return [String]
@@ -1395,13 +1160,6 @@ module Aws::BillingConductor
 
     # The filter used to retrieve specific `BillingGroupCostReportElements`.
     #
-    # @note When making an API call, you may pass ListBillingGroupCostReportsFilter
-    #   data as a hash:
-    #
-    #       {
-    #         billing_group_arns: ["BillingGroupArn"],
-    #       }
-    #
     # @!attribute [rw] billing_group_arns
     #   The list of Amazon Resource Names (ARNs) used to filter billing
     #   groups to retrieve reports.
@@ -1415,18 +1173,6 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListBillingGroupCostReportsInput
-    #   data as a hash:
-    #
-    #       {
-    #         billing_period: "BillingPeriod",
-    #         max_results: 1,
-    #         next_token: "Token",
-    #         filters: {
-    #           billing_group_arns: ["BillingGroupArn"],
-    #         },
-    #       }
-    #
     # @!attribute [rw] billing_period
     #   The preferred billing period for your report.
     #   @return [String]
@@ -1477,14 +1223,6 @@ module Aws::BillingConductor
     # The filter that specifies the billing groups and pricing plans to
     # retrieve billing group information.
     #
-    # @note When making an API call, you may pass ListBillingGroupsFilter
-    #   data as a hash:
-    #
-    #       {
-    #         arns: ["BillingGroupArn"],
-    #         pricing_plan: "PricingPlanFullArn",
-    #       }
-    #
     # @!attribute [rw] arns
     #   The list of billing group Amazon Resource Names (ARNs) to retrieve
     #   information.
@@ -1504,19 +1242,6 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListBillingGroupsInput
-    #   data as a hash:
-    #
-    #       {
-    #         billing_period: "BillingPeriod",
-    #         max_results: 1,
-    #         next_token: "Token",
-    #         filters: {
-    #           arns: ["BillingGroupArn"],
-    #           pricing_plan: "PricingPlanFullArn",
-    #         },
-    #       }
-    #
     # @!attribute [rw] billing_period
     #   The preferred billing period to get billing groups.
     #   @return [String]
@@ -1626,14 +1351,6 @@ module Aws::BillingConductor
     # A billing period filter that specifies the custom line item versions
     # to retrieve.
     #
-    # @note When making an API call, you may pass ListCustomLineItemVersionsBillingPeriodRangeFilter
-    #   data as a hash:
-    #
-    #       {
-    #         start_billing_period: "BillingPeriod",
-    #         end_billing_period: "BillingPeriod",
-    #       }
-    #
     # @!attribute [rw] start_billing_period
     #   The inclusive start billing period that defines a billing period
     #   range where a custom line item version is applied.
@@ -1656,16 +1373,6 @@ module Aws::BillingConductor
     # A filter that specifies the billing period range where the custom line
     # item versions reside.
     #
-    # @note When making an API call, you may pass ListCustomLineItemVersionsFilter
-    #   data as a hash:
-    #
-    #       {
-    #         billing_period_range: {
-    #           start_billing_period: "BillingPeriod",
-    #           end_billing_period: "BillingPeriod",
-    #         },
-    #       }
-    #
     # @!attribute [rw] billing_period_range
     #   The billing period range in which the custom line item version is
     #   applied.
@@ -1679,21 +1386,6 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCustomLineItemVersionsInput
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "CustomLineItemArn", # required
-    #         max_results: 1,
-    #         next_token: "Token",
-    #         filters: {
-    #           billing_period_range: {
-    #             start_billing_period: "BillingPeriod",
-    #             end_billing_period: "BillingPeriod",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) for the custom line item.
     #   @return [String]
@@ -1744,15 +1436,6 @@ module Aws::BillingConductor
     # A filter that specifies the custom line items and billing groups to
     # retrieve FFLI information.
     #
-    # @note When making an API call, you may pass ListCustomLineItemsFilter
-    #   data as a hash:
-    #
-    #       {
-    #         names: ["CustomLineItemName"],
-    #         billing_groups: ["BillingGroupArn"],
-    #         arns: ["CustomLineItemArn"],
-    #       }
-    #
     # @!attribute [rw] names
     #   A list of custom line items to retrieve information.
     #   @return [Array<String>]
@@ -1776,20 +1459,6 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCustomLineItemsInput
-    #   data as a hash:
-    #
-    #       {
-    #         billing_period: "BillingPeriod",
-    #         max_results: 1,
-    #         next_token: "Token",
-    #         filters: {
-    #           names: ["CustomLineItemName"],
-    #           billing_groups: ["BillingGroupArn"],
-    #           arns: ["CustomLineItemArn"],
-    #         },
-    #       }
-    #
     # @!attribute [rw] billing_period
     #   The preferred billing period to get custom line items (FFLIs).
     #   @return [String]
@@ -1838,16 +1507,6 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPricingPlansAssociatedWithPricingRuleInput
-    #   data as a hash:
-    #
-    #       {
-    #         billing_period: "BillingPeriod",
-    #         pricing_rule_arn: "PricingRuleArn", # required
-    #         max_results: 1,
-    #         next_token: "Token",
-    #       }
-    #
     # @!attribute [rw] billing_period
     #   The pricing plan billing period for which associations will be
     #   listed.
@@ -1911,13 +1570,6 @@ module Aws::BillingConductor
     # The filter that specifies the Amazon Resource Names (ARNs) of pricing
     # plans, to retrieve pricing plan information.
     #
-    # @note When making an API call, you may pass ListPricingPlansFilter
-    #   data as a hash:
-    #
-    #       {
-    #         arns: ["PricingPlanArn"],
-    #       }
-    #
     # @!attribute [rw] arns
     #   A list of pricing plan Amazon Resource Names (ARNs) to retrieve
     #   information.
@@ -1931,18 +1583,6 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPricingPlansInput
-    #   data as a hash:
-    #
-    #       {
-    #         billing_period: "BillingPeriod",
-    #         filters: {
-    #           arns: ["PricingPlanArn"],
-    #         },
-    #         max_results: 1,
-    #         next_token: "Token",
-    #       }
-    #
     # @!attribute [rw] billing_period
     #   The preferred billing period to get pricing plan.
     #   @return [String]
@@ -1996,16 +1636,6 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPricingRulesAssociatedToPricingPlanInput
-    #   data as a hash:
-    #
-    #       {
-    #         billing_period: "BillingPeriod",
-    #         pricing_plan_arn: "PricingPlanArn", # required
-    #         max_results: 1,
-    #         next_token: "Token",
-    #       }
-    #
     # @!attribute [rw] billing_period
     #   The billing period for which the pricing rule associations are to be
     #   listed.
@@ -2069,13 +1699,6 @@ module Aws::BillingConductor
     # The filter that specifies criteria that the pricing rules returned by
     # the `ListPricingRules` API will adhere to.
     #
-    # @note When making an API call, you may pass ListPricingRulesFilter
-    #   data as a hash:
-    #
-    #       {
-    #         arns: ["PricingRuleArn"],
-    #       }
-    #
     # @!attribute [rw] arns
     #   A list containing the pricing rule Amazon Resource Names (ARNs) to
     #   include in the API response.
@@ -2089,18 +1712,6 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPricingRulesInput
-    #   data as a hash:
-    #
-    #       {
-    #         billing_period: "BillingPeriod",
-    #         filters: {
-    #           arns: ["PricingRuleArn"],
-    #         },
-    #         max_results: 1,
-    #         next_token: "Token",
-    #       }
-    #
     # @!attribute [rw] billing_period
     #   The preferred billing period to get the pricing plan.
     #   @return [String]
@@ -2157,13 +1768,6 @@ module Aws::BillingConductor
     # A filter that specifies the type of resource associations that should
     # be retrieved for a custom line item.
     #
-    # @note When making an API call, you may pass ListResourcesAssociatedToCustomLineItemFilter
-    #   data as a hash:
-    #
-    #       {
-    #         relationship: "PARENT", # accepts PARENT, CHILD
-    #       }
-    #
     # @!attribute [rw] relationship
     #   The type of relationship between the custom line item and the
     #   associated resource.
@@ -2177,19 +1781,6 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListResourcesAssociatedToCustomLineItemInput
-    #   data as a hash:
-    #
-    #       {
-    #         billing_period: "BillingPeriod",
-    #         arn: "CustomLineItemArn", # required
-    #         max_results: 1,
-    #         next_token: "Token",
-    #         filters: {
-    #           relationship: "PARENT", # accepts PARENT, CHILD
-    #         },
-    #       }
-    #
     # @!attribute [rw] billing_period
     #   The billing period for which the resource associations will be
     #   listed.
@@ -2277,13 +1868,6 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) that identifies the resource to list
     #   the tags.
@@ -2476,16 +2060,6 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource to which to add tags.
     #   @return [String]
@@ -2525,14 +2099,6 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource to which to delete
     #   tags.
@@ -2555,19 +2121,6 @@ module Aws::BillingConductor
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateBillingGroupInput
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "BillingGroupArn", # required
-    #         name: "BillingGroupName",
-    #         status: "ACTIVE", # accepts ACTIVE, PRIMARY_ACCOUNT_MISSING
-    #         computation_preference: {
-    #           pricing_plan_arn: "PricingPlanFullArn", # required
-    #         },
-    #         description: "BillingGroupDescription",
-    #       }
-    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the billing group being updated.
     #   @return [String]
@@ -2662,18 +2215,6 @@ module Aws::BillingConductor
     # A representation of the new charge details of a custom line item. This
     # should contain only one of `Flat` or `Percentage`.
     #
-    # @note When making an API call, you may pass UpdateCustomLineItemChargeDetails
-    #   data as a hash:
-    #
-    #       {
-    #         flat: {
-    #           charge_value: 1.0, # required
-    #         },
-    #         percentage: {
-    #           percentage_value: 1.0, # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] flat
     #   An `UpdateCustomLineItemFlatChargeDetails` that describes the new
     #   charge details of a flat custom line item.
@@ -2696,13 +2237,6 @@ module Aws::BillingConductor
     # A representation of the new charge details that are associated with a
     # flat custom line item.
     #
-    # @note When making an API call, you may pass UpdateCustomLineItemFlatChargeDetails
-    #   data as a hash:
-    #
-    #       {
-    #         charge_value: 1.0, # required
-    #       }
-    #
     # @!attribute [rw] charge_value
     #   The custom line item's new fixed charge value in USD.
     #   @return [Float]
@@ -2715,27 +2249,6 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateCustomLineItemInput
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "CustomLineItemArn", # required
-    #         name: "CustomLineItemName",
-    #         description: "CustomLineItemDescription",
-    #         charge_details: {
-    #           flat: {
-    #             charge_value: 1.0, # required
-    #           },
-    #           percentage: {
-    #             percentage_value: 1.0, # required
-    #           },
-    #         },
-    #         billing_period_range: {
-    #           inclusive_start_billing_period: "BillingPeriod", # required
-    #           exclusive_end_billing_period: "BillingPeriod",
-    #         },
-    #       }
-    #
     # @!attribute [rw] arn
     #   The ARN of the custom line item to be updated.
     #   @return [String]
@@ -2817,13 +2330,6 @@ module Aws::BillingConductor
     # A representation of the new charge details that are associated with a
     # percentage custom line item.
     #
-    # @note When making an API call, you may pass UpdateCustomLineItemPercentageChargeDetails
-    #   data as a hash:
-    #
-    #       {
-    #         percentage_value: 1.0, # required
-    #       }
-    #
     # @!attribute [rw] percentage_value
     #   The custom line item's new percentage value. This will be
     #   multiplied against the combined value of its associated resources to
@@ -2838,15 +2344,6 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdatePricingPlanInput
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "PricingPlanArn", # required
-    #         name: "PricingPlanName",
-    #         description: "PricingPlanDescription",
-    #       }
-    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the pricing plan that you're
     #   updating.
@@ -2905,17 +2402,6 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdatePricingRuleInput
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "PricingRuleArn", # required
-    #         name: "PricingRuleName",
-    #         description: "PricingRuleDescription",
-    #         type: "MARKUP", # accepts MARKUP, DISCOUNT
-    #         modifier_percentage: 1.0,
-    #       }
-    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the pricing rule to update.
     #   @return [String]

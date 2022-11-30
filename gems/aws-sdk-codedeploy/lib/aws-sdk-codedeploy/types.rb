@@ -13,19 +13,6 @@ module Aws::CodeDeploy
     # Represents the input of, and adds tags to, an on-premises instance
     # operation.
     #
-    # @note When making an API call, you may pass AddTagsToOnPremisesInstancesInput
-    #   data as a hash:
-    #
-    #       {
-    #         tags: [ # required
-    #           {
-    #             key: "Key",
-    #             value: "Value",
-    #           },
-    #         ],
-    #         instance_names: ["InstanceName"], # required
-    #       }
-    #
     # @!attribute [rw] tags
     #   The tag key-value pairs to add to the on-premises instances.
     #
@@ -48,13 +35,6 @@ module Aws::CodeDeploy
 
     # Information about an alarm.
     #
-    # @note When making an API call, you may pass Alarm
-    #   data as a hash:
-    #
-    #       {
-    #         name: "AlarmName",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the alarm. Maximum length is 255 characters. Each alarm
     #   name can be used only once in a list of alarms.
@@ -70,19 +50,6 @@ module Aws::CodeDeploy
 
     # Information about alarms associated with a deployment or deployment
     # group.
-    #
-    # @note When making an API call, you may pass AlarmConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false,
-    #         ignore_poll_alarm_failure: false,
-    #         alarms: [
-    #           {
-    #             name: "AlarmName",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] enabled
     #   Indicates whether the alarm configuration is enabled.
@@ -125,14 +92,6 @@ module Aws::CodeDeploy
     # YAML-formatted or JSON-formatted string. For Lambda and Amazon ECS
     # deployments, the revision is the same as the AppSpec file. This method
     # replaces the deprecated `RawString` data type.
-    #
-    # @note When making an API call, you may pass AppSpecContent
-    #   data as a hash:
-    #
-    #       {
-    #         content: "RawStringContent",
-    #         sha256: "RawStringSha256",
-    #       }
     #
     # @!attribute [rw] content
     #   The YAML-formatted or JSON-formatted revision string.
@@ -242,14 +201,6 @@ module Aws::CodeDeploy
     # previous version of an application revision when a deployment is not
     # completed successfully.
     #
-    # @note When making an API call, you may pass AutoRollbackConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false,
-    #         events: ["DEPLOYMENT_FAILURE"], # accepts DEPLOYMENT_FAILURE, DEPLOYMENT_STOP_ON_ALARM, DEPLOYMENT_STOP_ON_REQUEST
-    #       }
-    #
     # @!attribute [rw] enabled
     #   Indicates whether a defined automatic rollback configuration is
     #   currently enabled.
@@ -288,37 +239,6 @@ module Aws::CodeDeploy
     end
 
     # Represents the input of a `BatchGetApplicationRevisions` operation.
-    #
-    # @note When making an API call, you may pass BatchGetApplicationRevisionsInput
-    #   data as a hash:
-    #
-    #       {
-    #         application_name: "ApplicationName", # required
-    #         revisions: [ # required
-    #           {
-    #             revision_type: "S3", # accepts S3, GitHub, String, AppSpecContent
-    #             s3_location: {
-    #               bucket: "S3Bucket",
-    #               key: "S3Key",
-    #               bundle_type: "tar", # accepts tar, tgz, zip, YAML, JSON
-    #               version: "VersionId",
-    #               e_tag: "ETag",
-    #             },
-    #             git_hub_location: {
-    #               repository: "Repository",
-    #               commit_id: "CommitId",
-    #             },
-    #             string: {
-    #               content: "RawStringContent",
-    #               sha256: "RawStringSha256",
-    #             },
-    #             app_spec_content: {
-    #               content: "RawStringContent",
-    #               sha256: "RawStringSha256",
-    #             },
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] application_name
     #   The name of an CodeDeploy application about which to get revision
@@ -369,13 +289,6 @@ module Aws::CodeDeploy
 
     # Represents the input of a `BatchGetApplications` operation.
     #
-    # @note When making an API call, you may pass BatchGetApplicationsInput
-    #   data as a hash:
-    #
-    #       {
-    #         application_names: ["ApplicationName"], # required
-    #       }
-    #
     # @!attribute [rw] application_names
     #   A list of application names separated by spaces. The maximum number
     #   of application names you can specify is 100.
@@ -404,14 +317,6 @@ module Aws::CodeDeploy
     end
 
     # Represents the input of a `BatchGetDeploymentGroups` operation.
-    #
-    # @note When making an API call, you may pass BatchGetDeploymentGroupsInput
-    #   data as a hash:
-    #
-    #       {
-    #         application_name: "ApplicationName", # required
-    #         deployment_group_names: ["DeploymentGroupName"], # required
-    #       }
     #
     # @!attribute [rw] application_name
     #   The name of an CodeDeploy application associated with the applicable
@@ -453,14 +358,6 @@ module Aws::CodeDeploy
 
     # Represents the input of a `BatchGetDeploymentInstances` operation.
     #
-    # @note When making an API call, you may pass BatchGetDeploymentInstancesInput
-    #   data as a hash:
-    #
-    #       {
-    #         deployment_id: "DeploymentId", # required
-    #         instance_ids: ["InstanceId"], # required
-    #       }
-    #
     # @!attribute [rw] deployment_id
     #   The unique ID of a deployment.
     #   @return [String]
@@ -499,14 +396,6 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchGetDeploymentTargetsInput
-    #   data as a hash:
-    #
-    #       {
-    #         deployment_id: "DeploymentId",
-    #         target_ids: ["TargetId"],
-    #       }
-    #
     # @!attribute [rw] deployment_id
     #   The unique ID of a deployment.
     #   @return [String]
@@ -571,13 +460,6 @@ module Aws::CodeDeploy
 
     # Represents the input of a `BatchGetDeployments` operation.
     #
-    # @note When making an API call, you may pass BatchGetDeploymentsInput
-    #   data as a hash:
-    #
-    #       {
-    #         deployment_ids: ["DeploymentId"], # required
-    #       }
-    #
     # @!attribute [rw] deployment_ids
     #   A list of deployment IDs, separated by spaces. The maximum number of
     #   deployment IDs you can specify is 25.
@@ -606,13 +488,6 @@ module Aws::CodeDeploy
     end
 
     # Represents the input of a `BatchGetOnPremisesInstances` operation.
-    #
-    # @note When making an API call, you may pass BatchGetOnPremisesInstancesInput
-    #   data as a hash:
-    #
-    #       {
-    #         instance_names: ["InstanceName"], # required
-    #       }
     #
     # @!attribute [rw] instance_names
     #   The names of the on-premises instances about which to get
@@ -652,23 +527,6 @@ module Aws::CodeDeploy
     # Information about blue/green deployment options for a deployment
     # group.
     #
-    # @note When making an API call, you may pass BlueGreenDeploymentConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         terminate_blue_instances_on_deployment_success: {
-    #           action: "TERMINATE", # accepts TERMINATE, KEEP_ALIVE
-    #           termination_wait_time_in_minutes: 1,
-    #         },
-    #         deployment_ready_option: {
-    #           action_on_timeout: "CONTINUE_DEPLOYMENT", # accepts CONTINUE_DEPLOYMENT, STOP_DEPLOYMENT
-    #           wait_time_in_minutes: 1,
-    #         },
-    #         green_fleet_provisioning_option: {
-    #           action: "DISCOVER_EXISTING", # accepts DISCOVER_EXISTING, COPY_AUTO_SCALING_GROUP
-    #         },
-    #       }
-    #
     # @!attribute [rw] terminate_blue_instances_on_deployment_success
     #   Information about whether to terminate instances in the original
     #   fleet during a blue/green deployment.
@@ -697,14 +555,6 @@ module Aws::CodeDeploy
     # Information about whether instances in the original environment are
     # terminated when a blue/green deployment is successful.
     # `BlueInstanceTerminationOption` does not apply to Lambda deployments.
-    #
-    # @note When making an API call, you may pass BlueInstanceTerminationOption
-    #   data as a hash:
-    #
-    #       {
-    #         action: "TERMINATE", # accepts TERMINATE, KEEP_ALIVE
-    #         termination_wait_time_in_minutes: 1,
-    #       }
     #
     # @!attribute [rw] action
     #   The action to take on instances in the original environment after a
@@ -797,14 +647,6 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ContinueDeploymentInput
-    #   data as a hash:
-    #
-    #       {
-    #         deployment_id: "DeploymentId",
-    #         deployment_wait_type: "READY_WAIT", # accepts READY_WAIT, TERMINATION_WAIT
-    #       }
-    #
     # @!attribute [rw] deployment_id
     #   The unique ID of a blue/green deployment for which you want to start
     #   rerouting traffic to the replacement environment.
@@ -827,20 +669,6 @@ module Aws::CodeDeploy
     end
 
     # Represents the input of a `CreateApplication` operation.
-    #
-    # @note When making an API call, you may pass CreateApplicationInput
-    #   data as a hash:
-    #
-    #       {
-    #         application_name: "ApplicationName", # required
-    #         compute_platform: "Server", # accepts Server, Lambda, ECS
-    #         tags: [
-    #           {
-    #             key: "Key",
-    #             value: "Value",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] application_name
     #   The name of the application. This name must be unique with the
@@ -883,29 +711,6 @@ module Aws::CodeDeploy
     end
 
     # Represents the input of a `CreateDeploymentConfig` operation.
-    #
-    # @note When making an API call, you may pass CreateDeploymentConfigInput
-    #   data as a hash:
-    #
-    #       {
-    #         deployment_config_name: "DeploymentConfigName", # required
-    #         minimum_healthy_hosts: {
-    #           type: "HOST_COUNT", # accepts HOST_COUNT, FLEET_PERCENT
-    #           value: 1,
-    #         },
-    #         traffic_routing_config: {
-    #           type: "TimeBasedCanary", # accepts TimeBasedCanary, TimeBasedLinear, AllAtOnce
-    #           time_based_canary: {
-    #             canary_percentage: 1,
-    #             canary_interval: 1,
-    #           },
-    #           time_based_linear: {
-    #             linear_percentage: 1,
-    #             linear_interval: 1,
-    #           },
-    #         },
-    #         compute_platform: "Server", # accepts Server, Lambda, ECS
-    #       }
     #
     # @!attribute [rw] deployment_config_name
     #   The name of the deployment configuration to create.
@@ -969,130 +774,6 @@ module Aws::CodeDeploy
     end
 
     # Represents the input of a `CreateDeploymentGroup` operation.
-    #
-    # @note When making an API call, you may pass CreateDeploymentGroupInput
-    #   data as a hash:
-    #
-    #       {
-    #         application_name: "ApplicationName", # required
-    #         deployment_group_name: "DeploymentGroupName", # required
-    #         deployment_config_name: "DeploymentConfigName",
-    #         ec2_tag_filters: [
-    #           {
-    #             key: "Key",
-    #             value: "Value",
-    #             type: "KEY_ONLY", # accepts KEY_ONLY, VALUE_ONLY, KEY_AND_VALUE
-    #           },
-    #         ],
-    #         on_premises_instance_tag_filters: [
-    #           {
-    #             key: "Key",
-    #             value: "Value",
-    #             type: "KEY_ONLY", # accepts KEY_ONLY, VALUE_ONLY, KEY_AND_VALUE
-    #           },
-    #         ],
-    #         auto_scaling_groups: ["AutoScalingGroupName"],
-    #         service_role_arn: "Role", # required
-    #         trigger_configurations: [
-    #           {
-    #             trigger_name: "TriggerName",
-    #             trigger_target_arn: "TriggerTargetArn",
-    #             trigger_events: ["DeploymentStart"], # accepts DeploymentStart, DeploymentSuccess, DeploymentFailure, DeploymentStop, DeploymentRollback, DeploymentReady, InstanceStart, InstanceSuccess, InstanceFailure, InstanceReady
-    #           },
-    #         ],
-    #         alarm_configuration: {
-    #           enabled: false,
-    #           ignore_poll_alarm_failure: false,
-    #           alarms: [
-    #             {
-    #               name: "AlarmName",
-    #             },
-    #           ],
-    #         },
-    #         auto_rollback_configuration: {
-    #           enabled: false,
-    #           events: ["DEPLOYMENT_FAILURE"], # accepts DEPLOYMENT_FAILURE, DEPLOYMENT_STOP_ON_ALARM, DEPLOYMENT_STOP_ON_REQUEST
-    #         },
-    #         outdated_instances_strategy: "UPDATE", # accepts UPDATE, IGNORE
-    #         deployment_style: {
-    #           deployment_type: "IN_PLACE", # accepts IN_PLACE, BLUE_GREEN
-    #           deployment_option: "WITH_TRAFFIC_CONTROL", # accepts WITH_TRAFFIC_CONTROL, WITHOUT_TRAFFIC_CONTROL
-    #         },
-    #         blue_green_deployment_configuration: {
-    #           terminate_blue_instances_on_deployment_success: {
-    #             action: "TERMINATE", # accepts TERMINATE, KEEP_ALIVE
-    #             termination_wait_time_in_minutes: 1,
-    #           },
-    #           deployment_ready_option: {
-    #             action_on_timeout: "CONTINUE_DEPLOYMENT", # accepts CONTINUE_DEPLOYMENT, STOP_DEPLOYMENT
-    #             wait_time_in_minutes: 1,
-    #           },
-    #           green_fleet_provisioning_option: {
-    #             action: "DISCOVER_EXISTING", # accepts DISCOVER_EXISTING, COPY_AUTO_SCALING_GROUP
-    #           },
-    #         },
-    #         load_balancer_info: {
-    #           elb_info_list: [
-    #             {
-    #               name: "ELBName",
-    #             },
-    #           ],
-    #           target_group_info_list: [
-    #             {
-    #               name: "TargetGroupName",
-    #             },
-    #           ],
-    #           target_group_pair_info_list: [
-    #             {
-    #               target_groups: [
-    #                 {
-    #                   name: "TargetGroupName",
-    #                 },
-    #               ],
-    #               prod_traffic_route: {
-    #                 listener_arns: ["ListenerArn"],
-    #               },
-    #               test_traffic_route: {
-    #                 listener_arns: ["ListenerArn"],
-    #               },
-    #             },
-    #           ],
-    #         },
-    #         ec2_tag_set: {
-    #           ec2_tag_set_list: [
-    #             [
-    #               {
-    #                 key: "Key",
-    #                 value: "Value",
-    #                 type: "KEY_ONLY", # accepts KEY_ONLY, VALUE_ONLY, KEY_AND_VALUE
-    #               },
-    #             ],
-    #           ],
-    #         },
-    #         ecs_services: [
-    #           {
-    #             service_name: "ECSServiceName",
-    #             cluster_name: "ECSClusterName",
-    #           },
-    #         ],
-    #         on_premises_tag_set: {
-    #           on_premises_tag_set_list: [
-    #             [
-    #               {
-    #                 key: "Key",
-    #                 value: "Value",
-    #                 type: "KEY_ONLY", # accepts KEY_ONLY, VALUE_ONLY, KEY_AND_VALUE
-    #               },
-    #             ],
-    #           ],
-    #         },
-    #         tags: [
-    #           {
-    #             key: "Key",
-    #             value: "Value",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] application_name
     #   The name of an CodeDeploy application associated with the IAM user
@@ -1262,75 +943,6 @@ module Aws::CodeDeploy
 
     # Represents the input of a `CreateDeployment` operation.
     #
-    # @note When making an API call, you may pass CreateDeploymentInput
-    #   data as a hash:
-    #
-    #       {
-    #         application_name: "ApplicationName", # required
-    #         deployment_group_name: "DeploymentGroupName",
-    #         revision: {
-    #           revision_type: "S3", # accepts S3, GitHub, String, AppSpecContent
-    #           s3_location: {
-    #             bucket: "S3Bucket",
-    #             key: "S3Key",
-    #             bundle_type: "tar", # accepts tar, tgz, zip, YAML, JSON
-    #             version: "VersionId",
-    #             e_tag: "ETag",
-    #           },
-    #           git_hub_location: {
-    #             repository: "Repository",
-    #             commit_id: "CommitId",
-    #           },
-    #           string: {
-    #             content: "RawStringContent",
-    #             sha256: "RawStringSha256",
-    #           },
-    #           app_spec_content: {
-    #             content: "RawStringContent",
-    #             sha256: "RawStringSha256",
-    #           },
-    #         },
-    #         deployment_config_name: "DeploymentConfigName",
-    #         description: "Description",
-    #         ignore_application_stop_failures: false,
-    #         target_instances: {
-    #           tag_filters: [
-    #             {
-    #               key: "Key",
-    #               value: "Value",
-    #               type: "KEY_ONLY", # accepts KEY_ONLY, VALUE_ONLY, KEY_AND_VALUE
-    #             },
-    #           ],
-    #           auto_scaling_groups: ["AutoScalingGroupName"],
-    #           ec2_tag_set: {
-    #             ec2_tag_set_list: [
-    #               [
-    #                 {
-    #                   key: "Key",
-    #                   value: "Value",
-    #                   type: "KEY_ONLY", # accepts KEY_ONLY, VALUE_ONLY, KEY_AND_VALUE
-    #                 },
-    #               ],
-    #             ],
-    #           },
-    #         },
-    #         auto_rollback_configuration: {
-    #           enabled: false,
-    #           events: ["DEPLOYMENT_FAILURE"], # accepts DEPLOYMENT_FAILURE, DEPLOYMENT_STOP_ON_ALARM, DEPLOYMENT_STOP_ON_REQUEST
-    #         },
-    #         update_outdated_instances_only: false,
-    #         file_exists_behavior: "DISALLOW", # accepts DISALLOW, OVERWRITE, RETAIN
-    #         override_alarm_configuration: {
-    #           enabled: false,
-    #           ignore_poll_alarm_failure: false,
-    #           alarms: [
-    #             {
-    #               name: "AlarmName",
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] application_name
     #   The name of an CodeDeploy application associated with the IAM user
     #   or Amazon Web Services account.
@@ -1475,13 +1087,6 @@ module Aws::CodeDeploy
 
     # Represents the input of a `DeleteApplication` operation.
     #
-    # @note When making an API call, you may pass DeleteApplicationInput
-    #   data as a hash:
-    #
-    #       {
-    #         application_name: "ApplicationName", # required
-    #       }
-    #
     # @!attribute [rw] application_name
     #   The name of an CodeDeploy application associated with the IAM user
     #   or Amazon Web Services account.
@@ -1497,13 +1102,6 @@ module Aws::CodeDeploy
 
     # Represents the input of a `DeleteDeploymentConfig` operation.
     #
-    # @note When making an API call, you may pass DeleteDeploymentConfigInput
-    #   data as a hash:
-    #
-    #       {
-    #         deployment_config_name: "DeploymentConfigName", # required
-    #       }
-    #
     # @!attribute [rw] deployment_config_name
     #   The name of a deployment configuration associated with the IAM user
     #   or Amazon Web Services account.
@@ -1518,14 +1116,6 @@ module Aws::CodeDeploy
     end
 
     # Represents the input of a `DeleteDeploymentGroup` operation.
-    #
-    # @note When making an API call, you may pass DeleteDeploymentGroupInput
-    #   data as a hash:
-    #
-    #       {
-    #         application_name: "ApplicationName", # required
-    #         deployment_group_name: "DeploymentGroupName", # required
-    #       }
     #
     # @!attribute [rw] application_name
     #   The name of an CodeDeploy application associated with the IAM user
@@ -1567,13 +1157,6 @@ module Aws::CodeDeploy
 
     # Represents the input of a `DeleteGitHubAccount` operation.
     #
-    # @note When making an API call, you may pass DeleteGitHubAccountTokenInput
-    #   data as a hash:
-    #
-    #       {
-    #         token_name: "GitHubAccountTokenName",
-    #       }
-    #
     # @!attribute [rw] token_name
     #   The name of the GitHub account connection to delete.
     #   @return [String]
@@ -1600,13 +1183,6 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteResourcesByExternalIdInput
-    #   data as a hash:
-    #
-    #       {
-    #         external_id: "ExternalId",
-    #       }
-    #
     # @!attribute [rw] external_id
     #   The unique ID of an external resource (for example, a CloudFormation
     #   stack ID) that is linked to one or more CodeDeploy resources.
@@ -2198,14 +1774,6 @@ module Aws::CodeDeploy
     # Information about how traffic is rerouted to instances in a
     # replacement environment in a blue/green deployment.
     #
-    # @note When making an API call, you may pass DeploymentReadyOption
-    #   data as a hash:
-    #
-    #       {
-    #         action_on_timeout: "CONTINUE_DEPLOYMENT", # accepts CONTINUE_DEPLOYMENT, STOP_DEPLOYMENT
-    #         wait_time_in_minutes: 1,
-    #       }
-    #
     # @!attribute [rw] action_on_timeout
     #   Information about when to reroute traffic from an original
     #   environment to a replacement environment in a blue/green deployment.
@@ -2240,14 +1808,6 @@ module Aws::CodeDeploy
     # Information about the type of deployment, either in-place or
     # blue/green, you want to run and whether to route deployment traffic
     # behind a load balancer.
-    #
-    # @note When making an API call, you may pass DeploymentStyle
-    #   data as a hash:
-    #
-    #       {
-    #         deployment_type: "IN_PLACE", # accepts IN_PLACE, BLUE_GREEN
-    #         deployment_option: "WITH_TRAFFIC_CONTROL", # accepts WITH_TRAFFIC_CONTROL, WITHOUT_TRAFFIC_CONTROL
-    #       }
     #
     # @!attribute [rw] deployment_type
     #   Indicates whether to run an in-place deployment or a blue/green
@@ -2331,13 +1891,6 @@ module Aws::CodeDeploy
 
     # Represents the input of a `DeregisterOnPremisesInstance` operation.
     #
-    # @note When making an API call, you may pass DeregisterOnPremisesInstanceInput
-    #   data as a hash:
-    #
-    #       {
-    #         instance_name: "InstanceName", # required
-    #       }
-    #
     # @!attribute [rw] instance_name
     #   The name of the on-premises instance to deregister.
     #   @return [String]
@@ -2407,15 +1960,6 @@ module Aws::CodeDeploy
 
     # Information about an EC2 tag filter.
     #
-    # @note When making an API call, you may pass EC2TagFilter
-    #   data as a hash:
-    #
-    #       {
-    #         key: "Key",
-    #         value: "Value",
-    #         type: "KEY_ONLY", # accepts KEY_ONLY, VALUE_ONLY, KEY_AND_VALUE
-    #       }
-    #
     # @!attribute [rw] key
     #   The tag filter key.
     #   @return [String]
@@ -2446,21 +1990,6 @@ module Aws::CodeDeploy
 
     # Information about groups of Amazon EC2 instance tags.
     #
-    # @note When making an API call, you may pass EC2TagSet
-    #   data as a hash:
-    #
-    #       {
-    #         ec2_tag_set_list: [
-    #           [
-    #             {
-    #               key: "Key",
-    #               value: "Value",
-    #               type: "KEY_ONLY", # accepts KEY_ONLY, VALUE_ONLY, KEY_AND_VALUE
-    #             },
-    #           ],
-    #         ],
-    #       }
-    #
     # @!attribute [rw] ec2_tag_set_list
     #   A list that contains other lists of Amazon EC2 instance tag groups.
     #   For an instance to be included in the deployment group, it must be
@@ -2477,14 +2006,6 @@ module Aws::CodeDeploy
 
     # Contains the service and cluster names used to identify an Amazon ECS
     # deployment's target.
-    #
-    # @note When making an API call, you may pass ECSService
-    #   data as a hash:
-    #
-    #       {
-    #         service_name: "ECSServiceName",
-    #         cluster_name: "ECSClusterName",
-    #       }
     #
     # @!attribute [rw] service_name
     #   The name of the target Amazon ECS service.
@@ -2637,13 +2158,6 @@ module Aws::CodeDeploy
     # a deployment. Instances are registered directly with a load balancer,
     # and traffic is routed to the load balancer.
     #
-    # @note When making an API call, you may pass ELBInfo
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ELBName",
-    #       }
-    #
     # @!attribute [rw] name
     #   For blue/green deployments, the name of the load balancer that is
     #   used to route traffic from original instances to replacement
@@ -2765,13 +2279,6 @@ module Aws::CodeDeploy
 
     # Represents the input of a `GetApplication` operation.
     #
-    # @note When making an API call, you may pass GetApplicationInput
-    #   data as a hash:
-    #
-    #       {
-    #         application_name: "ApplicationName", # required
-    #       }
-    #
     # @!attribute [rw] application_name
     #   The name of an CodeDeploy application associated with the IAM user
     #   or Amazon Web Services account.
@@ -2800,35 +2307,6 @@ module Aws::CodeDeploy
     end
 
     # Represents the input of a `GetApplicationRevision` operation.
-    #
-    # @note When making an API call, you may pass GetApplicationRevisionInput
-    #   data as a hash:
-    #
-    #       {
-    #         application_name: "ApplicationName", # required
-    #         revision: { # required
-    #           revision_type: "S3", # accepts S3, GitHub, String, AppSpecContent
-    #           s3_location: {
-    #             bucket: "S3Bucket",
-    #             key: "S3Key",
-    #             bundle_type: "tar", # accepts tar, tgz, zip, YAML, JSON
-    #             version: "VersionId",
-    #             e_tag: "ETag",
-    #           },
-    #           git_hub_location: {
-    #             repository: "Repository",
-    #             commit_id: "CommitId",
-    #           },
-    #           string: {
-    #             content: "RawStringContent",
-    #             sha256: "RawStringSha256",
-    #           },
-    #           app_spec_content: {
-    #             content: "RawStringContent",
-    #             sha256: "RawStringSha256",
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] application_name
     #   The name of the application that corresponds to the revision.
@@ -2875,13 +2353,6 @@ module Aws::CodeDeploy
 
     # Represents the input of a `GetDeploymentConfig` operation.
     #
-    # @note When making an API call, you may pass GetDeploymentConfigInput
-    #   data as a hash:
-    #
-    #       {
-    #         deployment_config_name: "DeploymentConfigName", # required
-    #       }
-    #
     # @!attribute [rw] deployment_config_name
     #   The name of a deployment configuration associated with the IAM user
     #   or Amazon Web Services account.
@@ -2910,14 +2381,6 @@ module Aws::CodeDeploy
     end
 
     # Represents the input of a `GetDeploymentGroup` operation.
-    #
-    # @note When making an API call, you may pass GetDeploymentGroupInput
-    #   data as a hash:
-    #
-    #       {
-    #         application_name: "ApplicationName", # required
-    #         deployment_group_name: "DeploymentGroupName", # required
-    #       }
     #
     # @!attribute [rw] application_name
     #   The name of an CodeDeploy application associated with the IAM user
@@ -2953,13 +2416,6 @@ module Aws::CodeDeploy
 
     # Represents the input of a `GetDeployment` operation.
     #
-    # @note When making an API call, you may pass GetDeploymentInput
-    #   data as a hash:
-    #
-    #       {
-    #         deployment_id: "DeploymentId", # required
-    #       }
-    #
     # @!attribute [rw] deployment_id
     #   The unique ID of a deployment associated with the IAM user or Amazon
     #   Web Services account.
@@ -2974,14 +2430,6 @@ module Aws::CodeDeploy
     end
 
     # Represents the input of a `GetDeploymentInstance` operation.
-    #
-    # @note When making an API call, you may pass GetDeploymentInstanceInput
-    #   data as a hash:
-    #
-    #       {
-    #         deployment_id: "DeploymentId", # required
-    #         instance_id: "InstanceId", # required
-    #       }
     #
     # @!attribute [rw] deployment_id
     #   The unique ID of a deployment.
@@ -3028,14 +2476,6 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDeploymentTargetInput
-    #   data as a hash:
-    #
-    #       {
-    #         deployment_id: "DeploymentId",
-    #         target_id: "TargetId",
-    #       }
-    #
     # @!attribute [rw] deployment_id
     #   The unique ID of a deployment.
     #   @return [String]
@@ -3070,13 +2510,6 @@ module Aws::CodeDeploy
     end
 
     # Represents the input of a `GetOnPremisesInstance` operation.
-    #
-    # @note When making an API call, you may pass GetOnPremisesInstanceInput
-    #   data as a hash:
-    #
-    #       {
-    #         instance_name: "InstanceName", # required
-    #       }
     #
     # @!attribute [rw] instance_name
     #   The name of the on-premises instance about which to get information.
@@ -3120,14 +2553,6 @@ module Aws::CodeDeploy
     # Information about the location of application artifacts stored in
     # GitHub.
     #
-    # @note When making an API call, you may pass GitHubLocation
-    #   data as a hash:
-    #
-    #       {
-    #         repository: "Repository",
-    #         commit_id: "CommitId",
-    #       }
-    #
     # @!attribute [rw] repository
     #   The GitHub account and repository pair that stores a reference to
     #   the commit that represents the bundled artifacts for the application
@@ -3152,13 +2577,6 @@ module Aws::CodeDeploy
 
     # Information about the instances that belong to the replacement
     # environment in a blue/green deployment.
-    #
-    # @note When making an API call, you may pass GreenFleetProvisioningOption
-    #   data as a hash:
-    #
-    #       {
-    #         action: "DISCOVER_EXISTING", # accepts DISCOVER_EXISTING, COPY_AUTO_SCALING_GROUP
-    #       }
     #
     # @!attribute [rw] action
     #   The method used to add instances to a replacement environment.
@@ -3967,19 +3385,6 @@ module Aws::CodeDeploy
 
     # Represents the input of a `ListApplicationRevisions` operation.
     #
-    # @note When making an API call, you may pass ListApplicationRevisionsInput
-    #   data as a hash:
-    #
-    #       {
-    #         application_name: "ApplicationName", # required
-    #         sort_by: "registerTime", # accepts registerTime, firstUsedTime, lastUsedTime
-    #         sort_order: "ascending", # accepts ascending, descending
-    #         s3_bucket: "S3Bucket",
-    #         s3_key_prefix: "S3Key",
-    #         deployed: "include", # accepts include, exclude, ignore
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] application_name
     #   The name of an CodeDeploy application associated with the IAM user
     #   or Amazon Web Services account.
@@ -4080,13 +3485,6 @@ module Aws::CodeDeploy
 
     # Represents the input of a `ListApplications` operation.
     #
-    # @note When making an API call, you may pass ListApplicationsInput
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] next_token
     #   An identifier returned from the previous list applications call. It
     #   can be used to return the next set of applications in the list.
@@ -4122,13 +3520,6 @@ module Aws::CodeDeploy
     end
 
     # Represents the input of a `ListDeploymentConfigs` operation.
-    #
-    # @note When making an API call, you may pass ListDeploymentConfigsInput
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #       }
     #
     # @!attribute [rw] next_token
     #   An identifier returned from the previous `ListDeploymentConfigs`
@@ -4168,14 +3559,6 @@ module Aws::CodeDeploy
     end
 
     # Represents the input of a `ListDeploymentGroups` operation.
-    #
-    # @note When making an API call, you may pass ListDeploymentGroupsInput
-    #   data as a hash:
-    #
-    #       {
-    #         application_name: "ApplicationName", # required
-    #         next_token: "NextToken",
-    #       }
     #
     # @!attribute [rw] application_name
     #   The name of an CodeDeploy application associated with the IAM user
@@ -4224,16 +3607,6 @@ module Aws::CodeDeploy
     end
 
     # Represents the input of a `ListDeploymentInstances` operation.
-    #
-    # @note When making an API call, you may pass ListDeploymentInstancesInput
-    #   data as a hash:
-    #
-    #       {
-    #         deployment_id: "DeploymentId", # required
-    #         next_token: "NextToken",
-    #         instance_status_filter: ["Pending"], # accepts Pending, InProgress, Succeeded, Failed, Skipped, Unknown, Ready
-    #         instance_type_filter: ["Blue"], # accepts Blue, Green
-    #       }
     #
     # @!attribute [rw] deployment_id
     #   The unique ID of a deployment.
@@ -4302,17 +3675,6 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDeploymentTargetsInput
-    #   data as a hash:
-    #
-    #       {
-    #         deployment_id: "DeploymentId",
-    #         next_token: "NextToken",
-    #         target_filters: {
-    #           "TargetStatus" => ["FilterValue"],
-    #         },
-    #       }
-    #
     # @!attribute [rw] deployment_id
     #   The unique ID of a deployment.
     #   @return [String]
@@ -4365,21 +3727,6 @@ module Aws::CodeDeploy
     end
 
     # Represents the input of a `ListDeployments` operation.
-    #
-    # @note When making an API call, you may pass ListDeploymentsInput
-    #   data as a hash:
-    #
-    #       {
-    #         application_name: "ApplicationName",
-    #         deployment_group_name: "DeploymentGroupName",
-    #         external_id: "ExternalId",
-    #         include_only_statuses: ["Created"], # accepts Created, Queued, InProgress, Baking, Succeeded, Failed, Stopped, Ready
-    #         create_time_range: {
-    #           start: Time.now,
-    #           end: Time.now,
-    #         },
-    #         next_token: "NextToken",
-    #       }
     #
     # @!attribute [rw] application_name
     #   The name of an CodeDeploy application associated with the IAM user
@@ -4471,13 +3818,6 @@ module Aws::CodeDeploy
 
     # Represents the input of a `ListGitHubAccountTokenNames` operation.
     #
-    # @note When making an API call, you may pass ListGitHubAccountTokenNamesInput
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] next_token
     #   An identifier returned from the previous
     #   `ListGitHubAccountTokenNames` call. It can be used to return the
@@ -4515,21 +3855,6 @@ module Aws::CodeDeploy
     end
 
     # Represents the input of a `ListOnPremisesInstances` operation.
-    #
-    # @note When making an API call, you may pass ListOnPremisesInstancesInput
-    #   data as a hash:
-    #
-    #       {
-    #         registration_status: "Registered", # accepts Registered, Deregistered
-    #         tag_filters: [
-    #           {
-    #             key: "Key",
-    #             value: "Value",
-    #             type: "KEY_ONLY", # accepts KEY_ONLY, VALUE_ONLY, KEY_AND_VALUE
-    #           },
-    #         ],
-    #         next_token: "NextToken",
-    #       }
     #
     # @!attribute [rw] registration_status
     #   The registration status of the on-premises instances:
@@ -4583,14 +3908,6 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of a CodeDeploy resource. `ListTagsForResource` returns all
     #   the tags associated with the resource that is identified by the
@@ -4635,37 +3952,6 @@ module Aws::CodeDeploy
     # Information about the Elastic Load Balancing load balancer or target
     # group used in a deployment.
     #
-    # @note When making an API call, you may pass LoadBalancerInfo
-    #   data as a hash:
-    #
-    #       {
-    #         elb_info_list: [
-    #           {
-    #             name: "ELBName",
-    #           },
-    #         ],
-    #         target_group_info_list: [
-    #           {
-    #             name: "TargetGroupName",
-    #           },
-    #         ],
-    #         target_group_pair_info_list: [
-    #           {
-    #             target_groups: [
-    #               {
-    #                 name: "TargetGroupName",
-    #               },
-    #             ],
-    #             prod_traffic_route: {
-    #               listener_arns: ["ListenerArn"],
-    #             },
-    #             test_traffic_route: {
-    #               listener_arns: ["ListenerArn"],
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] elb_info_list
     #   An array that contains information about the load balancer to use
     #   for load balancing in a deployment. In Elastic Load Balancing, load
@@ -4702,14 +3988,6 @@ module Aws::CodeDeploy
     end
 
     # Information about minimum healthy instance.
-    #
-    # @note When making an API call, you may pass MinimumHealthyHosts
-    #   data as a hash:
-    #
-    #       {
-    #         type: "HOST_COUNT", # accepts HOST_COUNT, FLEET_PERCENT
-    #         value: 1,
-    #       }
     #
     # @!attribute [rw] type
     #   The minimum healthy instance type:
@@ -4771,21 +4049,6 @@ module Aws::CodeDeploy
 
     # Information about groups of on-premises instance tags.
     #
-    # @note When making an API call, you may pass OnPremisesTagSet
-    #   data as a hash:
-    #
-    #       {
-    #         on_premises_tag_set_list: [
-    #           [
-    #             {
-    #               key: "Key",
-    #               value: "Value",
-    #               type: "KEY_ONLY", # accepts KEY_ONLY, VALUE_ONLY, KEY_AND_VALUE
-    #             },
-    #           ],
-    #         ],
-    #       }
-    #
     # @!attribute [rw] on_premises_tag_set_list
     #   A list that contains other lists of on-premises instance tag groups.
     #   For an instance to be included in the deployment group, it must be
@@ -4806,15 +4069,6 @@ module Aws::CodeDeploy
     #
     class OperationNotSupportedException < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass PutLifecycleEventHookExecutionStatusInput
-    #   data as a hash:
-    #
-    #       {
-    #         deployment_id: "DeploymentId",
-    #         lifecycle_event_hook_execution_id: "LifecycleEventHookExecutionId",
-    #         status: "Pending", # accepts Pending, InProgress, Succeeded, Failed, Skipped, Unknown
-    #       }
-    #
     # @!attribute [rw] deployment_id
     #   The unique ID of a deployment. Pass this ID to a Lambda function
     #   that validates a deployment lifecycle event.
@@ -4860,14 +4114,6 @@ module Aws::CodeDeploy
     # JSON-formatted string. For Lambda deployments, the revision is the
     # same as the AppSpec file.
     #
-    # @note When making an API call, you may pass RawString
-    #   data as a hash:
-    #
-    #       {
-    #         content: "RawStringContent",
-    #         sha256: "RawStringSha256",
-    #       }
-    #
     # @!attribute [rw] content
     #   The YAML-formatted or JSON-formatted revision string. It includes
     #   information about which Lambda function to update and optional
@@ -4888,36 +4134,6 @@ module Aws::CodeDeploy
     end
 
     # Represents the input of a RegisterApplicationRevision operation.
-    #
-    # @note When making an API call, you may pass RegisterApplicationRevisionInput
-    #   data as a hash:
-    #
-    #       {
-    #         application_name: "ApplicationName", # required
-    #         description: "Description",
-    #         revision: { # required
-    #           revision_type: "S3", # accepts S3, GitHub, String, AppSpecContent
-    #           s3_location: {
-    #             bucket: "S3Bucket",
-    #             key: "S3Key",
-    #             bundle_type: "tar", # accepts tar, tgz, zip, YAML, JSON
-    #             version: "VersionId",
-    #             e_tag: "ETag",
-    #           },
-    #           git_hub_location: {
-    #             repository: "Repository",
-    #             commit_id: "CommitId",
-    #           },
-    #           string: {
-    #             content: "RawStringContent",
-    #             sha256: "RawStringSha256",
-    #           },
-    #           app_spec_content: {
-    #             content: "RawStringContent",
-    #             sha256: "RawStringSha256",
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] application_name
     #   The name of an CodeDeploy application associated with the IAM user
@@ -4944,15 +4160,6 @@ module Aws::CodeDeploy
     end
 
     # Represents the input of the register on-premises instance operation.
-    #
-    # @note When making an API call, you may pass RegisterOnPremisesInstanceInput
-    #   data as a hash:
-    #
-    #       {
-    #         instance_name: "InstanceName", # required
-    #         iam_session_arn: "IamSessionArn",
-    #         iam_user_arn: "IamUserArn",
-    #       }
     #
     # @!attribute [rw] instance_name
     #   The name of the on-premises instance to register.
@@ -5000,19 +4207,6 @@ module Aws::CodeDeploy
 
     # Represents the input of a `RemoveTagsFromOnPremisesInstances`
     # operation.
-    #
-    # @note When making an API call, you may pass RemoveTagsFromOnPremisesInstancesInput
-    #   data as a hash:
-    #
-    #       {
-    #         tags: [ # required
-    #           {
-    #             key: "Key",
-    #             value: "Value",
-    #           },
-    #         ],
-    #         instance_names: ["InstanceName"], # required
-    #       }
     #
     # @!attribute [rw] tags
     #   The tag key-value pairs to remove from the on-premises instances.
@@ -5071,32 +4265,6 @@ module Aws::CodeDeploy
     end
 
     # Information about the location of an application revision.
-    #
-    # @note When making an API call, you may pass RevisionLocation
-    #   data as a hash:
-    #
-    #       {
-    #         revision_type: "S3", # accepts S3, GitHub, String, AppSpecContent
-    #         s3_location: {
-    #           bucket: "S3Bucket",
-    #           key: "S3Key",
-    #           bundle_type: "tar", # accepts tar, tgz, zip, YAML, JSON
-    #           version: "VersionId",
-    #           e_tag: "ETag",
-    #         },
-    #         git_hub_location: {
-    #           repository: "Repository",
-    #           commit_id: "CommitId",
-    #         },
-    #         string: {
-    #           content: "RawStringContent",
-    #           sha256: "RawStringSha256",
-    #         },
-    #         app_spec_content: {
-    #           content: "RawStringContent",
-    #           sha256: "RawStringSha256",
-    #         },
-    #       }
     #
     # @!attribute [rw] revision_type
     #   The type of application revision:
@@ -5189,17 +4357,6 @@ module Aws::CodeDeploy
     # Information about the location of application artifacts stored in
     # Amazon S3.
     #
-    # @note When making an API call, you may pass S3Location
-    #   data as a hash:
-    #
-    #       {
-    #         bucket: "S3Bucket",
-    #         key: "S3Key",
-    #         bundle_type: "tar", # accepts tar, tgz, zip, YAML, JSON
-    #         version: "VersionId",
-    #         e_tag: "ETag",
-    #       }
-    #
     # @!attribute [rw] bucket
     #   The name of the Amazon S3 bucket where the application revision is
     #   stored.
@@ -5249,13 +4406,6 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SkipWaitTimeForInstanceTerminationInput
-    #   data as a hash:
-    #
-    #       {
-    #         deployment_id: "DeploymentId",
-    #       }
-    #
     # @!attribute [rw] deployment_id
     #   The unique ID of a blue/green deployment for which you want to skip
     #   the instance termination wait time.
@@ -5270,14 +4420,6 @@ module Aws::CodeDeploy
     end
 
     # Represents the input of a `StopDeployment` operation.
-    #
-    # @note When making an API call, you may pass StopDeploymentInput
-    #   data as a hash:
-    #
-    #       {
-    #         deployment_id: "DeploymentId", # required
-    #         auto_rollback_enabled: false,
-    #       }
     #
     # @!attribute [rw] deployment_id
     #   The unique ID of a deployment.
@@ -5323,14 +4465,6 @@ module Aws::CodeDeploy
 
     # Information about a tag.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "Key",
-    #         value: "Value",
-    #       }
-    #
     # @!attribute [rw] key
     #   The tag's key.
     #   @return [String]
@@ -5349,15 +4483,6 @@ module Aws::CodeDeploy
     end
 
     # Information about an on-premises instance tag filter.
-    #
-    # @note When making an API call, you may pass TagFilter
-    #   data as a hash:
-    #
-    #       {
-    #         key: "Key",
-    #         value: "Value",
-    #         type: "KEY_ONLY", # accepts KEY_ONLY, VALUE_ONLY, KEY_AND_VALUE
-    #       }
     #
     # @!attribute [rw] key
     #   The on-premises instance tag filter key.
@@ -5399,19 +4524,6 @@ module Aws::CodeDeploy
     #
     class TagRequiredException < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass TagResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tags: [ # required
-    #           {
-    #             key: "Key",
-    #             value: "Value",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of a resource, such as a CodeDeploy application or
     #   deployment group.
@@ -5446,13 +4558,6 @@ module Aws::CodeDeploy
     # deployment. Instances are registered as targets in a target group, and
     # traffic is routed to the target group.
     #
-    # @note When making an API call, you may pass TargetGroupInfo
-    #   data as a hash:
-    #
-    #       {
-    #         name: "TargetGroupName",
-    #       }
-    #
     # @!attribute [rw] name
     #   For blue/green deployments, the name of the target group that
     #   instances in the original environment are deregistered from, and
@@ -5474,23 +4579,6 @@ module Aws::CodeDeploy
     # Information about two target groups and how traffic is routed during
     # an Amazon ECS deployment. An optional test traffic route can be
     # specified.
-    #
-    # @note When making an API call, you may pass TargetGroupPairInfo
-    #   data as a hash:
-    #
-    #       {
-    #         target_groups: [
-    #           {
-    #             name: "TargetGroupName",
-    #           },
-    #         ],
-    #         prod_traffic_route: {
-    #           listener_arns: ["ListenerArn"],
-    #         },
-    #         test_traffic_route: {
-    #           listener_arns: ["ListenerArn"],
-    #         },
-    #       }
     #
     # @!attribute [rw] target_groups
     #   One pair of target groups. One is associated with the original task
@@ -5521,31 +4609,6 @@ module Aws::CodeDeploy
 
     # Information about the instances to be used in the replacement
     # environment in a blue/green deployment.
-    #
-    # @note When making an API call, you may pass TargetInstances
-    #   data as a hash:
-    #
-    #       {
-    #         tag_filters: [
-    #           {
-    #             key: "Key",
-    #             value: "Value",
-    #             type: "KEY_ONLY", # accepts KEY_ONLY, VALUE_ONLY, KEY_AND_VALUE
-    #           },
-    #         ],
-    #         auto_scaling_groups: ["AutoScalingGroupName"],
-    #         ec2_tag_set: {
-    #           ec2_tag_set_list: [
-    #             [
-    #               {
-    #                 key: "Key",
-    #                 value: "Value",
-    #                 type: "KEY_ONLY", # accepts KEY_ONLY, VALUE_ONLY, KEY_AND_VALUE
-    #               },
-    #             ],
-    #           ],
-    #         },
-    #       }
     #
     # @!attribute [rw] tag_filters
     #   The tag filter key, type, and value used to identify Amazon EC2
@@ -5586,14 +4649,6 @@ module Aws::CodeDeploy
     # original and target Lambda function versions or ECS task sets are
     # specified in the deployment's AppSpec file.
     #
-    # @note When making an API call, you may pass TimeBasedCanary
-    #   data as a hash:
-    #
-    #       {
-    #         canary_percentage: 1,
-    #         canary_interval: 1,
-    #       }
-    #
     # @!attribute [rw] canary_percentage
     #   The percentage of traffic to shift in the first increment of a
     #   `TimeBasedCanary` deployment.
@@ -5619,14 +4674,6 @@ module Aws::CodeDeploy
     # Lambda function versions or ECS task sets are specified in the
     # deployment's AppSpec file.
     #
-    # @note When making an API call, you may pass TimeBasedLinear
-    #   data as a hash:
-    #
-    #       {
-    #         linear_percentage: 1,
-    #         linear_interval: 1,
-    #       }
-    #
     # @!attribute [rw] linear_percentage
     #   The percentage of traffic that is shifted at the start of each
     #   increment of a `TimeBasedLinear` deployment.
@@ -5647,14 +4694,6 @@ module Aws::CodeDeploy
     end
 
     # Information about a time range.
-    #
-    # @note When making an API call, you may pass TimeRange
-    #   data as a hash:
-    #
-    #       {
-    #         start: Time.now,
-    #         end: Time.now,
-    #       }
     #
     # @!attribute [rw] start
     #   The start time of the time range.
@@ -5685,13 +4724,6 @@ module Aws::CodeDeploy
     # route traffic that is received from the load balancer to a target
     # group.
     #
-    # @note When making an API call, you may pass TrafficRoute
-    #   data as a hash:
-    #
-    #       {
-    #         listener_arns: ["ListenerArn"],
-    #       }
-    #
     # @!attribute [rw] listener_arns
     #   The Amazon Resource Name (ARN) of one listener. The listener
     #   identifies the route between a target group and a load balancer.
@@ -5710,21 +4742,6 @@ module Aws::CodeDeploy
     # version of a Lambda function to another version during an Lambda
     # deployment, or from one Amazon ECS task set to another during an
     # Amazon ECS deployment.
-    #
-    # @note When making an API call, you may pass TrafficRoutingConfig
-    #   data as a hash:
-    #
-    #       {
-    #         type: "TimeBasedCanary", # accepts TimeBasedCanary, TimeBasedLinear, AllAtOnce
-    #         time_based_canary: {
-    #           canary_percentage: 1,
-    #           canary_interval: 1,
-    #         },
-    #         time_based_linear: {
-    #           linear_percentage: 1,
-    #           linear_interval: 1,
-    #         },
-    #       }
     #
     # @!attribute [rw] type
     #   The type of traffic shifting (`TimeBasedCanary` or
@@ -5757,15 +4774,6 @@ module Aws::CodeDeploy
     end
 
     # Information about notification triggers for the deployment group.
-    #
-    # @note When making an API call, you may pass TriggerConfig
-    #   data as a hash:
-    #
-    #       {
-    #         trigger_name: "TriggerName",
-    #         trigger_target_arn: "TriggerTargetArn",
-    #         trigger_events: ["DeploymentStart"], # accepts DeploymentStart, DeploymentSuccess, DeploymentFailure, DeploymentStop, DeploymentRollback, DeploymentReady, InstanceStart, InstanceSuccess, InstanceFailure, InstanceReady
-    #       }
     #
     # @!attribute [rw] trigger_name
     #   The name of the notification trigger.
@@ -5804,14 +4812,6 @@ module Aws::CodeDeploy
     #
     class UnsupportedActionForDeploymentTypeException < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UntagResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tag_keys: ["Key"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) that specifies from which resource to
     #   disassociate the tags with the keys in the `TagKeys` input
@@ -5839,14 +4839,6 @@ module Aws::CodeDeploy
 
     # Represents the input of an `UpdateApplication` operation.
     #
-    # @note When making an API call, you may pass UpdateApplicationInput
-    #   data as a hash:
-    #
-    #       {
-    #         application_name: "ApplicationName",
-    #         new_application_name: "ApplicationName",
-    #       }
-    #
     # @!attribute [rw] application_name
     #   The current name of the application you want to change.
     #   @return [String]
@@ -5865,125 +4857,6 @@ module Aws::CodeDeploy
     end
 
     # Represents the input of an `UpdateDeploymentGroup` operation.
-    #
-    # @note When making an API call, you may pass UpdateDeploymentGroupInput
-    #   data as a hash:
-    #
-    #       {
-    #         application_name: "ApplicationName", # required
-    #         current_deployment_group_name: "DeploymentGroupName", # required
-    #         new_deployment_group_name: "DeploymentGroupName",
-    #         deployment_config_name: "DeploymentConfigName",
-    #         ec2_tag_filters: [
-    #           {
-    #             key: "Key",
-    #             value: "Value",
-    #             type: "KEY_ONLY", # accepts KEY_ONLY, VALUE_ONLY, KEY_AND_VALUE
-    #           },
-    #         ],
-    #         on_premises_instance_tag_filters: [
-    #           {
-    #             key: "Key",
-    #             value: "Value",
-    #             type: "KEY_ONLY", # accepts KEY_ONLY, VALUE_ONLY, KEY_AND_VALUE
-    #           },
-    #         ],
-    #         auto_scaling_groups: ["AutoScalingGroupName"],
-    #         service_role_arn: "Role",
-    #         trigger_configurations: [
-    #           {
-    #             trigger_name: "TriggerName",
-    #             trigger_target_arn: "TriggerTargetArn",
-    #             trigger_events: ["DeploymentStart"], # accepts DeploymentStart, DeploymentSuccess, DeploymentFailure, DeploymentStop, DeploymentRollback, DeploymentReady, InstanceStart, InstanceSuccess, InstanceFailure, InstanceReady
-    #           },
-    #         ],
-    #         alarm_configuration: {
-    #           enabled: false,
-    #           ignore_poll_alarm_failure: false,
-    #           alarms: [
-    #             {
-    #               name: "AlarmName",
-    #             },
-    #           ],
-    #         },
-    #         auto_rollback_configuration: {
-    #           enabled: false,
-    #           events: ["DEPLOYMENT_FAILURE"], # accepts DEPLOYMENT_FAILURE, DEPLOYMENT_STOP_ON_ALARM, DEPLOYMENT_STOP_ON_REQUEST
-    #         },
-    #         outdated_instances_strategy: "UPDATE", # accepts UPDATE, IGNORE
-    #         deployment_style: {
-    #           deployment_type: "IN_PLACE", # accepts IN_PLACE, BLUE_GREEN
-    #           deployment_option: "WITH_TRAFFIC_CONTROL", # accepts WITH_TRAFFIC_CONTROL, WITHOUT_TRAFFIC_CONTROL
-    #         },
-    #         blue_green_deployment_configuration: {
-    #           terminate_blue_instances_on_deployment_success: {
-    #             action: "TERMINATE", # accepts TERMINATE, KEEP_ALIVE
-    #             termination_wait_time_in_minutes: 1,
-    #           },
-    #           deployment_ready_option: {
-    #             action_on_timeout: "CONTINUE_DEPLOYMENT", # accepts CONTINUE_DEPLOYMENT, STOP_DEPLOYMENT
-    #             wait_time_in_minutes: 1,
-    #           },
-    #           green_fleet_provisioning_option: {
-    #             action: "DISCOVER_EXISTING", # accepts DISCOVER_EXISTING, COPY_AUTO_SCALING_GROUP
-    #           },
-    #         },
-    #         load_balancer_info: {
-    #           elb_info_list: [
-    #             {
-    #               name: "ELBName",
-    #             },
-    #           ],
-    #           target_group_info_list: [
-    #             {
-    #               name: "TargetGroupName",
-    #             },
-    #           ],
-    #           target_group_pair_info_list: [
-    #             {
-    #               target_groups: [
-    #                 {
-    #                   name: "TargetGroupName",
-    #                 },
-    #               ],
-    #               prod_traffic_route: {
-    #                 listener_arns: ["ListenerArn"],
-    #               },
-    #               test_traffic_route: {
-    #                 listener_arns: ["ListenerArn"],
-    #               },
-    #             },
-    #           ],
-    #         },
-    #         ec2_tag_set: {
-    #           ec2_tag_set_list: [
-    #             [
-    #               {
-    #                 key: "Key",
-    #                 value: "Value",
-    #                 type: "KEY_ONLY", # accepts KEY_ONLY, VALUE_ONLY, KEY_AND_VALUE
-    #               },
-    #             ],
-    #           ],
-    #         },
-    #         ecs_services: [
-    #           {
-    #             service_name: "ECSServiceName",
-    #             cluster_name: "ECSClusterName",
-    #           },
-    #         ],
-    #         on_premises_tag_set: {
-    #           on_premises_tag_set_list: [
-    #             [
-    #               {
-    #                 key: "Key",
-    #                 value: "Value",
-    #                 type: "KEY_ONLY", # accepts KEY_ONLY, VALUE_ONLY, KEY_AND_VALUE
-    #               },
-    #             ],
-    #           ],
-    #         },
-    #       }
     #
     # @!attribute [rw] application_name
     #   The application name that corresponds to the deployment group to

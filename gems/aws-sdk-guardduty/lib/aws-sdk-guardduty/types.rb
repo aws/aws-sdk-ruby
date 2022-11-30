@@ -10,15 +10,6 @@
 module Aws::GuardDuty
   module Types
 
-    # @note When making an API call, you may pass AcceptAdministratorInvitationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #         administrator_id: "String", # required
-    #         invitation_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The unique ID of the detector of the GuardDuty member account.
     #   @return [String]
@@ -47,15 +38,6 @@ module Aws::GuardDuty
     #
     class AcceptAdministratorInvitationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass AcceptInvitationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #         master_id: "String", # required
-    #         invitation_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The unique ID of the detector of the GuardDuty member account.
     #   @return [String]
@@ -136,14 +118,6 @@ module Aws::GuardDuty
     end
 
     # Contains information about the account.
-    #
-    # @note When making an API call, you may pass AccountDetail
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId", # required
-    #         email: "Email", # required
-    #       }
     #
     # @!attribute [rw] account_id
     #   The member account ID.
@@ -292,14 +266,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ArchiveFindingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #         finding_ids: ["FindingId"], # required
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The ID of the detector that specifies the GuardDuty service whose
     #   findings you want to archive.
@@ -516,24 +482,6 @@ module Aws::GuardDuty
 
     # Contains information about the condition.
     #
-    # @note When making an API call, you may pass Condition
-    #   data as a hash:
-    #
-    #       {
-    #         eq: ["String"],
-    #         neq: ["String"],
-    #         gt: 1,
-    #         gte: 1,
-    #         lt: 1,
-    #         lte: 1,
-    #         equals: ["String"],
-    #         not_equals: ["String"],
-    #         greater_than: 1,
-    #         greater_than_or_equal: 1,
-    #         less_than: 1,
-    #         less_than_or_equal: 1,
-    #       }
-    #
     # @!attribute [rw] eq
     #   Represents the *equal* condition to be applied to a single field
     #   when querying for findings.
@@ -681,33 +629,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDetectorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         enable: false, # required
-    #         client_token: "ClientToken",
-    #         finding_publishing_frequency: "FIFTEEN_MINUTES", # accepts FIFTEEN_MINUTES, ONE_HOUR, SIX_HOURS
-    #         data_sources: {
-    #           s3_logs: {
-    #             enable: false, # required
-    #           },
-    #           kubernetes: {
-    #             audit_logs: { # required
-    #               enable: false, # required
-    #             },
-    #           },
-    #           malware_protection: {
-    #             scan_ec2_instance_with_findings: {
-    #               ebs_volumes: false,
-    #             },
-    #           },
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] enable
     #   A Boolean value that specifies whether the detector is to be
     #   enabled.
@@ -762,39 +683,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateFilterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #         name: "FilterName", # required
-    #         description: "FilterDescription",
-    #         action: "NOOP", # accepts NOOP, ARCHIVE
-    #         rank: 1,
-    #         finding_criteria: { # required
-    #           criterion: {
-    #             "String" => {
-    #               eq: ["String"],
-    #               neq: ["String"],
-    #               gt: 1,
-    #               gte: 1,
-    #               lt: 1,
-    #               lte: 1,
-    #               equals: ["String"],
-    #               not_equals: ["String"],
-    #               greater_than: 1,
-    #               greater_than_or_equal: 1,
-    #               less_than: 1,
-    #               less_than_or_equal: 1,
-    #             },
-    #           },
-    #         },
-    #         client_token: "ClientToken",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The ID of the detector belonging to the GuardDuty account that you
     #   want to create a filter for.
@@ -989,21 +877,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateIPSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #         name: "Name", # required
-    #         format: "TXT", # required, accepts TXT, STIX, OTX_CSV, ALIEN_VAULT, PROOF_POINT, FIRE_EYE
-    #         location: "Location", # required
-    #         activate: false, # required
-    #         client_token: "ClientToken",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The unique ID of the detector of the GuardDuty account that you want
     #   to create an IPSet for.
@@ -1066,19 +939,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateMembersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #         account_details: [ # required
-    #           {
-    #             account_id: "AccountId", # required
-    #             email: "Email", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The unique ID of the detector of the GuardDuty account that you want
     #   to associate member accounts with.
@@ -1111,19 +971,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreatePublishingDestinationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #         destination_type: "S3", # required, accepts S3
-    #         destination_properties: { # required
-    #           destination_arn: "String",
-    #           kms_key_arn: "String",
-    #         },
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The ID of the GuardDuty detector associated with the publishing
     #   destination.
@@ -1169,14 +1016,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateSampleFindingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #         finding_types: ["FindingType"],
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The ID of the detector to create sample findings for.
     #   @return [String]
@@ -1198,21 +1037,6 @@ module Aws::GuardDuty
     #
     class CreateSampleFindingsResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass CreateThreatIntelSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #         name: "Name", # required
-    #         format: "TXT", # required, accepts TXT, STIX, OTX_CSV, ALIEN_VAULT, PROOF_POINT, FIRE_EYE
-    #         location: "Location", # required
-    #         activate: false, # required
-    #         client_token: "ClientToken",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The unique ID of the detector of the GuardDuty account that you want
     #   to create a threatIntelSet for.
@@ -1289,25 +1113,6 @@ module Aws::GuardDuty
     end
 
     # Contains information about which data sources are enabled.
-    #
-    # @note When making an API call, you may pass DataSourceConfigurations
-    #   data as a hash:
-    #
-    #       {
-    #         s3_logs: {
-    #           enable: false, # required
-    #         },
-    #         kubernetes: {
-    #           audit_logs: { # required
-    #             enable: false, # required
-    #           },
-    #         },
-    #         malware_protection: {
-    #           scan_ec2_instance_with_findings: {
-    #             ebs_volumes: false,
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] s3_logs
     #   Describes whether S3 data event logs are enabled as a data source.
@@ -1433,13 +1238,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeclineInvitationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_ids: ["AccountId"], # required
-    #       }
-    #
     # @!attribute [rw] account_ids
     #   A list of account IDs of the Amazon Web Services accounts that sent
     #   invitations to the current member account that you want to decline
@@ -1492,13 +1290,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDetectorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The unique ID of the detector that you want to delete.
     #   @return [String]
@@ -1515,14 +1306,6 @@ module Aws::GuardDuty
     #
     class DeleteDetectorResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteFilterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #         filter_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The unique ID of the detector that the filter is associated with.
     #   @return [String]
@@ -1544,14 +1327,6 @@ module Aws::GuardDuty
     #
     class DeleteFilterResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteIPSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #         ip_set_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The unique ID of the detector associated with the IPSet.
     #   @return [String]
@@ -1573,13 +1348,6 @@ module Aws::GuardDuty
     #
     class DeleteIPSetResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteInvitationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_ids: ["AccountId"], # required
-    #       }
-    #
     # @!attribute [rw] account_ids
     #   A list of account IDs of the Amazon Web Services accounts that sent
     #   invitations to the current member account that you want to delete
@@ -1607,14 +1375,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteMembersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #         account_ids: ["AccountId"], # required
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The unique ID of the detector of the GuardDuty account whose members
     #   you want to delete.
@@ -1646,14 +1406,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeletePublishingDestinationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #         destination_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The unique ID of the detector associated with the publishing
     #   destination to delete.
@@ -1676,14 +1428,6 @@ module Aws::GuardDuty
     #
     class DeletePublishingDestinationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteThreatIntelSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #         threat_intel_set_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The unique ID of the detector that the threatIntelSet is associated
     #   with.
@@ -1706,31 +1450,6 @@ module Aws::GuardDuty
     #
     class DeleteThreatIntelSetResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeMalwareScansRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #         next_token: "String",
-    #         max_results: 1,
-    #         filter_criteria: {
-    #           filter_criterion: [
-    #             {
-    #               criterion_key: "EC2_INSTANCE_ARN", # accepts EC2_INSTANCE_ARN, SCAN_ID, ACCOUNT_ID, GUARDDUTY_FINDING_ID, SCAN_START_TIME, SCAN_STATUS
-    #               filter_condition: {
-    #                 equals_value: "NonEmptyString",
-    #                 greater_than: 1,
-    #                 less_than: 1,
-    #               },
-    #             },
-    #           ],
-    #         },
-    #         sort_criteria: {
-    #           attribute_name: "String",
-    #           order_by: "ASC", # accepts ASC, DESC
-    #         },
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The unique ID of the detector that the request is associated with.
     #   @return [String]
@@ -1788,13 +1507,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeOrganizationConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The ID of the detector to retrieve information about the delegated
     #   administrator from.
@@ -1834,14 +1546,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribePublishingDestinationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #         destination_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The unique ID of the detector associated with the publishing
     #   destination to retrieve.
@@ -1925,14 +1629,6 @@ module Aws::GuardDuty
     # such as an S3 bucket, and the ARN of the KMS key to use to encrypt
     # published findings.
     #
-    # @note When making an API call, you may pass DestinationProperties
-    #   data as a hash:
-    #
-    #       {
-    #         destination_arn: "String",
-    #         kms_key_arn: "String",
-    #       }
-    #
     # @!attribute [rw] destination_arn
     #   The ARN of the resource to publish to.
     #
@@ -1953,13 +1649,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisableOrganizationAdminAccountRequest
-    #   data as a hash:
-    #
-    #       {
-    #         admin_account_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] admin_account_id
     #   The Amazon Web Services Account ID for the organizations account to
     #   be disabled as a GuardDuty delegated administrator.
@@ -1977,13 +1666,6 @@ module Aws::GuardDuty
     #
     class DisableOrganizationAdminAccountResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DisassociateFromAdministratorAccountRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The unique ID of the detector of the GuardDuty member account.
     #   @return [String]
@@ -2000,13 +1682,6 @@ module Aws::GuardDuty
     #
     class DisassociateFromAdministratorAccountResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DisassociateFromMasterAccountRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The unique ID of the detector of the GuardDuty member account.
     #   @return [String]
@@ -2023,14 +1698,6 @@ module Aws::GuardDuty
     #
     class DisassociateFromMasterAccountResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DisassociateMembersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #         account_ids: ["AccountId"], # required
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The unique ID of the detector of the GuardDuty account whose members
     #   you want to disassociate from the administrator account.
@@ -2329,13 +1996,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass EnableOrganizationAdminAccountRequest
-    #   data as a hash:
-    #
-    #       {
-    #         admin_account_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] admin_account_id
     #   The Amazon Web Services Account ID for the organization account to
     #   be enabled as a GuardDuty delegated administrator.
@@ -2369,15 +2029,6 @@ module Aws::GuardDuty
 
     # Contains information about the condition.
     #
-    # @note When making an API call, you may pass FilterCondition
-    #   data as a hash:
-    #
-    #       {
-    #         equals_value: "NonEmptyString",
-    #         greater_than: 1,
-    #         less_than: 1,
-    #       }
-    #
     # @!attribute [rw] equals_value
     #   Represents an *equal* **** condition to be applied to a single field
     #   when querying for scan entries.
@@ -2406,22 +2057,6 @@ module Aws::GuardDuty
     # Represents the criteria to be used in the filter for describing scan
     # entries.
     #
-    # @note When making an API call, you may pass FilterCriteria
-    #   data as a hash:
-    #
-    #       {
-    #         filter_criterion: [
-    #           {
-    #             criterion_key: "EC2_INSTANCE_ARN", # accepts EC2_INSTANCE_ARN, SCAN_ID, ACCOUNT_ID, GUARDDUTY_FINDING_ID, SCAN_START_TIME, SCAN_STATUS
-    #             filter_condition: {
-    #               equals_value: "NonEmptyString",
-    #               greater_than: 1,
-    #               less_than: 1,
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] filter_criterion
     #   Represents a condition that when matched will be added to the
     #   response of the operation.
@@ -2440,18 +2075,6 @@ module Aws::GuardDuty
     # administrator account can view the scan entries for all of its member
     # accounts. However, each member account can view the scan entries only
     # for their own account.
-    #
-    # @note When making an API call, you may pass FilterCriterion
-    #   data as a hash:
-    #
-    #       {
-    #         criterion_key: "EC2_INSTANCE_ARN", # accepts EC2_INSTANCE_ARN, SCAN_ID, ACCOUNT_ID, GUARDDUTY_FINDING_ID, SCAN_START_TIME, SCAN_STATUS
-    #         filter_condition: {
-    #           equals_value: "NonEmptyString",
-    #           greater_than: 1,
-    #           less_than: 1,
-    #         },
-    #       }
     #
     # @!attribute [rw] criterion_key
     #   An enum value representing possible scan properties to match with
@@ -2560,28 +2183,6 @@ module Aws::GuardDuty
 
     # Contains information about the criteria used for querying findings.
     #
-    # @note When making an API call, you may pass FindingCriteria
-    #   data as a hash:
-    #
-    #       {
-    #         criterion: {
-    #           "String" => {
-    #             eq: ["String"],
-    #             neq: ["String"],
-    #             gt: 1,
-    #             gte: 1,
-    #             lt: 1,
-    #             lte: 1,
-    #             equals: ["String"],
-    #             not_equals: ["String"],
-    #             greater_than: 1,
-    #             greater_than_or_equal: 1,
-    #             less_than: 1,
-    #             less_than_or_equal: 1,
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] criterion
     #   Represents a map of finding properties that match specified
     #   conditions and values when querying findings.
@@ -2643,13 +2244,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAdministratorAccountRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The unique ID of the detector of the GuardDuty member account.
     #   @return [String]
@@ -2674,13 +2268,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDetectorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The unique ID of the detector that you want to get.
     #   @return [String]
@@ -2735,14 +2322,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetFilterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #         filter_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The unique ID of the detector that the filter is associated with.
     #   @return [String]
@@ -2801,18 +2380,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetFindingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #         finding_ids: ["FindingId"], # required
-    #         sort_criteria: {
-    #           attribute_name: "String",
-    #           order_by: "ASC", # accepts ASC, DESC
-    #         },
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The ID of the detector that specifies the GuardDuty service whose
     #   findings you want to retrieve.
@@ -2848,32 +2415,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetFindingsStatisticsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #         finding_statistic_types: ["COUNT_BY_SEVERITY"], # required, accepts COUNT_BY_SEVERITY
-    #         finding_criteria: {
-    #           criterion: {
-    #             "String" => {
-    #               eq: ["String"],
-    #               neq: ["String"],
-    #               gt: 1,
-    #               gte: 1,
-    #               lt: 1,
-    #               lte: 1,
-    #               equals: ["String"],
-    #               not_equals: ["String"],
-    #               greater_than: 1,
-    #               greater_than_or_equal: 1,
-    #               less_than: 1,
-    #               less_than_or_equal: 1,
-    #             },
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The ID of the detector that specifies the GuardDuty service whose
     #   findings' statistics you want to retrieve.
@@ -2909,14 +2450,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetIPSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #         ip_set_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The unique ID of the detector that the IPSet is associated with.
     #   @return [String]
@@ -2966,8 +2499,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetInvitationsCountRequest AWS API Documentation
     #
     class GetInvitationsCountRequest < Aws::EmptyStructure; end
@@ -2984,13 +2515,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetMalwareScanSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The unique ID of the detector that the scan setting is associated
     #   with.
@@ -3022,13 +2546,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetMasterAccountRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The unique ID of the detector of the GuardDuty member account.
     #   @return [String]
@@ -3053,14 +2570,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetMemberDetectorsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #         account_ids: ["AccountId"], # required
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The detector ID for the administrator account.
     #   @return [String]
@@ -3097,14 +2606,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetMembersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #         account_ids: ["AccountId"], # required
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The unique ID of the detector of the GuardDuty account whose members
     #   you want to retrieve.
@@ -3142,14 +2643,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRemainingFreeTrialDaysRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #         account_ids: ["AccountId"],
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The unique ID of the detector of the GuardDuty member account.
     #   @return [String]
@@ -3186,14 +2679,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetThreatIntelSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #         threat_intel_set_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The unique ID of the detector that the threatIntelSet is associated
     #   with.
@@ -3246,22 +2731,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetUsageStatisticsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #         usage_statistic_type: "SUM_BY_ACCOUNT", # required, accepts SUM_BY_ACCOUNT, SUM_BY_DATA_SOURCE, SUM_BY_RESOURCE, TOP_RESOURCES
-    #         usage_criteria: { # required
-    #           account_ids: ["AccountId"],
-    #           data_sources: ["FLOW_LOGS"], # required, accepts FLOW_LOGS, CLOUD_TRAIL, DNS_LOGS, S3_LOGS, KUBERNETES_AUDIT_LOGS, EC2_MALWARE_SCAN
-    #           resources: ["String"],
-    #         },
-    #         unit: "String",
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The ID of the detector that specifies the GuardDuty service whose
     #   usage statistics you want to retrieve.
@@ -3510,16 +2979,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass InviteMembersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #         account_ids: ["AccountId"], # required
-    #         disable_email_notification: false,
-    #         message: "String",
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The unique ID of the detector of the GuardDuty account that you want
     #   to invite members with.
@@ -3613,13 +3072,6 @@ module Aws::GuardDuty
 
     # Describes whether Kubernetes audit logs are enabled as a data source.
     #
-    # @note When making an API call, you may pass KubernetesAuditLogsConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         enable: false, # required
-    #       }
-    #
     # @!attribute [rw] enable
     #   The status of Kubernetes audit logs as a data source.
     #   @return [Boolean]
@@ -3648,15 +3100,6 @@ module Aws::GuardDuty
     end
 
     # Describes whether any Kubernetes data sources are enabled.
-    #
-    # @note When making an API call, you may pass KubernetesConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         audit_logs: { # required
-    #           enable: false, # required
-    #         },
-    #       }
     #
     # @!attribute [rw] audit_logs
     #   The status of Kubernetes audit logs as a data source.
@@ -3793,14 +3236,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDetectorsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   You can use this parameter to indicate the maximum number of items
     #   that you want in the response. The default value is 50. The maximum
@@ -3842,15 +3277,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFiltersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The unique ID of the detector that the filter is associated with.
     #   @return [String]
@@ -3897,37 +3323,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFindingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #         finding_criteria: {
-    #           criterion: {
-    #             "String" => {
-    #               eq: ["String"],
-    #               neq: ["String"],
-    #               gt: 1,
-    #               gte: 1,
-    #               lt: 1,
-    #               lte: 1,
-    #               equals: ["String"],
-    #               not_equals: ["String"],
-    #               greater_than: 1,
-    #               greater_than_or_equal: 1,
-    #               less_than: 1,
-    #               less_than_or_equal: 1,
-    #             },
-    #           },
-    #         },
-    #         sort_criteria: {
-    #           attribute_name: "String",
-    #           order_by: "ASC", # accepts ASC, DESC
-    #         },
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The ID of the detector that specifies the GuardDuty service whose
     #   findings you want to list.
@@ -4089,15 +3484,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListIPSetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The unique ID of the detector that the IPSet is associated with.
     #   @return [String]
@@ -4144,14 +3530,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListInvitationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   You can use this parameter to indicate the maximum number of items
     #   that you want in the response. The default value is 50. The maximum
@@ -4193,16 +3571,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListMembersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #         max_results: 1,
-    #         next_token: "String",
-    #         only_associated: "String",
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The unique ID of the detector the member is associated with.
     #   @return [String]
@@ -4262,14 +3630,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListOrganizationAdminAccountsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to return in the response.
     #   @return [Integer]
@@ -4309,15 +3669,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPublishingDestinationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The ID of the detector to retrieve publishing destinations for.
     #   @return [String]
@@ -4366,13 +3717,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "GuardDutyArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) for the given GuardDuty resource.
     #   @return [String]
@@ -4397,15 +3741,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListThreatIntelSetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The unique ID of the detector that the threatIntelSet is associated
     #   with.
@@ -4487,15 +3822,6 @@ module Aws::GuardDuty
     end
 
     # Describes whether Malware Protection will be enabled as a data source.
-    #
-    # @note When making an API call, you may pass MalwareProtectionConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         scan_ec2_instance_with_findings: {
-    #           ebs_volumes: false,
-    #         },
-    #       }
     #
     # @!attribute [rw] scan_ec2_instance_with_findings
     #   Describes the configuration of Malware Protection for EC2 instances
@@ -4789,27 +4115,6 @@ module Aws::GuardDuty
     # configured to be automatically enabled for new members within the
     # organization.
     #
-    # @note When making an API call, you may pass OrganizationDataSourceConfigurations
-    #   data as a hash:
-    #
-    #       {
-    #         s3_logs: {
-    #           auto_enable: false, # required
-    #         },
-    #         kubernetes: {
-    #           audit_logs: { # required
-    #             auto_enable: false, # required
-    #           },
-    #         },
-    #         malware_protection: {
-    #           scan_ec2_instance_with_findings: {
-    #             ebs_volumes: {
-    #               auto_enable: false,
-    #             },
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] s3_logs
     #   Describes whether S3 data event logs are enabled for new members of
     #   the organization.
@@ -4863,13 +4168,6 @@ module Aws::GuardDuty
 
     # Organization-wide EBS volumes scan configuration.
     #
-    # @note When making an API call, you may pass OrganizationEbsVolumes
-    #   data as a hash:
-    #
-    #       {
-    #         auto_enable: false,
-    #       }
-    #
     # @!attribute [rw] auto_enable
     #   Whether scanning EBS volumes should be auto-enabled for new members
     #   joining the organization.
@@ -4900,13 +4198,6 @@ module Aws::GuardDuty
     end
 
     # Organization-wide Kubernetes audit logs configuration.
-    #
-    # @note When making an API call, you may pass OrganizationKubernetesAuditLogsConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         auto_enable: false, # required
-    #       }
     #
     # @!attribute [rw] auto_enable
     #   A value that contains information on whether Kubernetes audit logs
@@ -4940,15 +4231,6 @@ module Aws::GuardDuty
 
     # Organization-wide Kubernetes data sources configurations.
     #
-    # @note When making an API call, you may pass OrganizationKubernetesConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         audit_logs: { # required
-    #           auto_enable: false, # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] audit_logs
     #   Whether Kubernetes audit logs data source should be auto-enabled for
     #   new members joining the organization.
@@ -4979,17 +4261,6 @@ module Aws::GuardDuty
     end
 
     # Organization-wide Malware Protection configurations.
-    #
-    # @note When making an API call, you may pass OrganizationMalwareProtectionConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         scan_ec2_instance_with_findings: {
-    #           ebs_volumes: {
-    #             auto_enable: false,
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] scan_ec2_instance_with_findings
     #   Whether Malware Protection for EC2 instances with findings should be
@@ -5023,13 +4294,6 @@ module Aws::GuardDuty
     # Describes whether S3 data event logs will be automatically enabled for
     # new members of the organization.
     #
-    # @note When making an API call, you may pass OrganizationS3LogsConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         auto_enable: false, # required
-    #       }
-    #
     # @!attribute [rw] auto_enable
     #   A value that contains information on whether S3 data event logs will
     #   be enabled automatically as a data source for the organization.
@@ -5060,15 +4324,6 @@ module Aws::GuardDuty
     end
 
     # Organization-wide EC2 instances with findings scan configuration.
-    #
-    # @note When making an API call, you may pass OrganizationScanEc2InstanceWithFindings
-    #   data as a hash:
-    #
-    #       {
-    #         ebs_volumes: {
-    #           auto_enable: false,
-    #         },
-    #       }
     #
     # @!attribute [rw] ebs_volumes
     #   Whether scanning EBS volumes should be auto-enabled for new members
@@ -5445,13 +4700,6 @@ module Aws::GuardDuty
 
     # Describes whether S3 data event logs will be enabled as a data source.
     #
-    # @note When making an API call, you may pass S3LogsConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         enable: false, # required
-    #       }
-    #
     # @!attribute [rw] enable
     #   The status of S3 data event logs as a data source.
     #   @return [Boolean]
@@ -5563,18 +4811,6 @@ module Aws::GuardDuty
 
     # Contains information about the condition.
     #
-    # @note When making an API call, you may pass ScanCondition
-    #   data as a hash:
-    #
-    #       {
-    #         map_equals: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] map_equals
     #   Represents an *mapEqual* **** condition to be applied to a single
     #   field when triggering for malware scan.
@@ -5590,14 +4826,6 @@ module Aws::GuardDuty
 
     # Represents key, value pair to be matched against given resource
     # property.
-    #
-    # @note When making an API call, you may pass ScanConditionPair
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue",
-    #       }
     #
     # @!attribute [rw] key
     #   Represents *key* **** in the map condition.
@@ -5649,13 +4877,6 @@ module Aws::GuardDuty
 
     # Describes whether Malware Protection for EC2 instances with findings
     # will be enabled as a data source.
-    #
-    # @note When making an API call, you may pass ScanEc2InstanceWithFindings
-    #   data as a hash:
-    #
-    #       {
-    #         ebs_volumes: false,
-    #       }
     #
     # @!attribute [rw] ebs_volumes
     #   Describes the configuration for scanning EBS volumes as data source.
@@ -5717,32 +4938,6 @@ module Aws::GuardDuty
 
     # Contains information about criteria used to filter resources before
     # triggering malware scan.
-    #
-    # @note When making an API call, you may pass ScanResourceCriteria
-    #   data as a hash:
-    #
-    #       {
-    #         include: {
-    #           "EC2_INSTANCE_TAG" => {
-    #             map_equals: [ # required
-    #               {
-    #                 key: "TagKey", # required
-    #                 value: "TagValue",
-    #               },
-    #             ],
-    #           },
-    #         },
-    #         exclude: {
-    #           "EC2_INSTANCE_TAG" => {
-    #             map_equals: [ # required
-    #               {
-    #                 key: "TagKey", # required
-    #                 value: "TagValue",
-    #               },
-    #             ],
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] include
     #   Represents condition that when matched will allow a malware scan for
@@ -5963,14 +5158,6 @@ module Aws::GuardDuty
 
     # Contains information about the criteria used for sorting findings.
     #
-    # @note When making an API call, you may pass SortCriteria
-    #   data as a hash:
-    #
-    #       {
-    #         attribute_name: "String",
-    #         order_by: "ASC", # accepts ASC, DESC
-    #       }
-    #
     # @!attribute [rw] attribute_name
     #   Represents the finding attribute (for example, accountId) to sort
     #   findings by.
@@ -5989,14 +5176,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartMonitoringMembersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #         account_ids: ["AccountId"], # required
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The unique ID of the detector of the GuardDuty administrator account
     #   associated with the member accounts to monitor.
@@ -6029,14 +5208,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopMonitoringMembersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #         account_ids: ["AccountId"], # required
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The unique ID of the detector associated with the GuardDuty
     #   administrator account that is monitoring member accounts.
@@ -6088,16 +5259,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "GuardDutyArn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) for the GuardDuty resource to apply a
     #   tag to.
@@ -6225,14 +5386,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UnarchiveFindingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #         finding_ids: ["FindingId"], # required
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The ID of the detector associated with the findings to unarchive.
     #   @return [String]
@@ -6288,14 +5441,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "GuardDutyArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) for the resource to remove tags from.
     #   @return [String]
@@ -6317,30 +5462,6 @@ module Aws::GuardDuty
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateDetectorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #         enable: false,
-    #         finding_publishing_frequency: "FIFTEEN_MINUTES", # accepts FIFTEEN_MINUTES, ONE_HOUR, SIX_HOURS
-    #         data_sources: {
-    #           s3_logs: {
-    #             enable: false, # required
-    #           },
-    #           kubernetes: {
-    #             audit_logs: { # required
-    #               enable: false, # required
-    #             },
-    #           },
-    #           malware_protection: {
-    #             scan_ec2_instance_with_findings: {
-    #               ebs_volumes: false,
-    #             },
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The unique ID of the detector to update.
     #   @return [String]
@@ -6373,35 +5494,6 @@ module Aws::GuardDuty
     #
     class UpdateDetectorResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateFilterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #         filter_name: "String", # required
-    #         description: "FilterDescription",
-    #         action: "NOOP", # accepts NOOP, ARCHIVE
-    #         rank: 1,
-    #         finding_criteria: {
-    #           criterion: {
-    #             "String" => {
-    #               eq: ["String"],
-    #               neq: ["String"],
-    #               gt: 1,
-    #               gte: 1,
-    #               lt: 1,
-    #               lte: 1,
-    #               equals: ["String"],
-    #               not_equals: ["String"],
-    #               greater_than: 1,
-    #               greater_than_or_equal: 1,
-    #               less_than: 1,
-    #               less_than_or_equal: 1,
-    #             },
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The unique ID of the detector that specifies the GuardDuty service
     #   where you want to update a filter.
@@ -6456,16 +5548,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateFindingsFeedbackRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #         finding_ids: ["FindingId"], # required
-    #         feedback: "USEFUL", # required, accepts USEFUL, NOT_USEFUL
-    #         comments: "String",
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The ID of the detector associated with the findings to update
     #   feedback for.
@@ -6499,17 +5581,6 @@ module Aws::GuardDuty
     #
     class UpdateFindingsFeedbackResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateIPSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #         ip_set_id: "String", # required
-    #         name: "Name",
-    #         location: "Location",
-    #         activate: false,
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The detectorID that specifies the GuardDuty service whose IPSet you
     #   want to update.
@@ -6548,36 +5619,6 @@ module Aws::GuardDuty
     #
     class UpdateIPSetResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateMalwareScanSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #         scan_resource_criteria: {
-    #           include: {
-    #             "EC2_INSTANCE_TAG" => {
-    #               map_equals: [ # required
-    #                 {
-    #                   key: "TagKey", # required
-    #                   value: "TagValue",
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #           exclude: {
-    #             "EC2_INSTANCE_TAG" => {
-    #               map_equals: [ # required
-    #                 {
-    #                   key: "TagKey", # required
-    #                   value: "TagValue",
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #         },
-    #         ebs_snapshot_preservation: "NO_RETENTION", # accepts NO_RETENTION, RETENTION_WITH_FINDING
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The unique ID of the detector that specifies the GuardDuty service
     #   where you want to update scan settings.
@@ -6606,29 +5647,6 @@ module Aws::GuardDuty
     #
     class UpdateMalwareScanSettingsResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateMemberDetectorsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #         account_ids: ["AccountId"], # required
-    #         data_sources: {
-    #           s3_logs: {
-    #             enable: false, # required
-    #           },
-    #           kubernetes: {
-    #             audit_logs: { # required
-    #               enable: false, # required
-    #             },
-    #           },
-    #           malware_protection: {
-    #             scan_ec2_instance_with_findings: {
-    #               ebs_volumes: false,
-    #             },
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The detector ID of the administrator account.
     #   @return [String]
@@ -6664,31 +5682,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateOrganizationConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #         auto_enable: false, # required
-    #         data_sources: {
-    #           s3_logs: {
-    #             auto_enable: false, # required
-    #           },
-    #           kubernetes: {
-    #             audit_logs: { # required
-    #               auto_enable: false, # required
-    #             },
-    #           },
-    #           malware_protection: {
-    #             scan_ec2_instance_with_findings: {
-    #               ebs_volumes: {
-    #                 auto_enable: false,
-    #               },
-    #             },
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The ID of the detector to update the delegated administrator for.
     #   @return [String]
@@ -6716,18 +5709,6 @@ module Aws::GuardDuty
     #
     class UpdateOrganizationConfigurationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdatePublishingDestinationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #         destination_id: "String", # required
-    #         destination_properties: {
-    #           destination_arn: "String",
-    #           kms_key_arn: "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The ID of the detector associated with the publishing destinations
     #   to update.
@@ -6756,17 +5737,6 @@ module Aws::GuardDuty
     #
     class UpdatePublishingDestinationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateThreatIntelSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "DetectorId", # required
-    #         threat_intel_set_id: "String", # required
-    #         name: "Name",
-    #         location: "Location",
-    #         activate: false,
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The detectorID that specifies the GuardDuty service whose
     #   ThreatIntelSet you want to update.
@@ -6828,15 +5798,6 @@ module Aws::GuardDuty
 
     # Contains information about the criteria used to query usage
     # statistics.
-    #
-    # @note When making an API call, you may pass UsageCriteria
-    #   data as a hash:
-    #
-    #       {
-    #         account_ids: ["AccountId"],
-    #         data_sources: ["FLOW_LOGS"], # required, accepts FLOW_LOGS, CLOUD_TRAIL, DNS_LOGS, S3_LOGS, KUBERNETES_AUDIT_LOGS, EC2_MALWARE_SCAN
-    #         resources: ["String"],
-    #       }
     #
     # @!attribute [rw] account_ids
     #   The account IDs to aggregate usage statistics from.

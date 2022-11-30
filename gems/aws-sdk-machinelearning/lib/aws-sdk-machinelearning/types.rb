@@ -10,20 +10,6 @@
 module Aws::MachineLearning
   module Types
 
-    # @note When making an API call, you may pass AddTagsInput
-    #   data as a hash:
-    #
-    #       {
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         resource_id: "EntityId", # required
-    #         resource_type: "BatchPrediction", # required, accepts BatchPrediction, DataSource, Evaluation, MLModel
-    #       }
-    #
     # @!attribute [rw] tags
     #   The key-value pairs to use to create tags. If you specify a key
     #   without specifying a value, Amazon ML creates a tag with the
@@ -180,17 +166,6 @@ module Aws::MachineLearning
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateBatchPredictionInput
-    #   data as a hash:
-    #
-    #       {
-    #         batch_prediction_id: "EntityId", # required
-    #         batch_prediction_name: "EntityName",
-    #         ml_model_id: "EntityId", # required
-    #         batch_prediction_data_source_id: "EntityId", # required
-    #         output_uri: "S3Url", # required
-    #       }
-    #
     # @!attribute [rw] batch_prediction_id
     #   A user-supplied ID that uniquely identifies the `BatchPrediction`.
     #   @return [String]
@@ -254,35 +229,6 @@ module Aws::MachineLearning
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDataSourceFromRDSInput
-    #   data as a hash:
-    #
-    #       {
-    #         data_source_id: "EntityId", # required
-    #         data_source_name: "EntityName",
-    #         rds_data: { # required
-    #           database_information: { # required
-    #             instance_identifier: "RDSInstanceIdentifier", # required
-    #             database_name: "RDSDatabaseName", # required
-    #           },
-    #           select_sql_query: "RDSSelectSqlQuery", # required
-    #           database_credentials: { # required
-    #             username: "RDSDatabaseUsername", # required
-    #             password: "RDSDatabasePassword", # required
-    #           },
-    #           s3_staging_location: "S3Url", # required
-    #           data_rearrangement: "DataRearrangement",
-    #           data_schema: "DataSchema",
-    #           data_schema_uri: "S3Url",
-    #           resource_role: "EDPResourceRole", # required
-    #           service_role: "EDPServiceRole", # required
-    #           subnet_id: "EDPSubnetId", # required
-    #           security_group_ids: ["EDPSecurityGroupId"], # required
-    #         },
-    #         role_arn: "RoleARN", # required
-    #         compute_statistics: false,
-    #       }
-    #
     # @!attribute [rw] data_source_id
     #   A user-supplied ID that uniquely identifies the `DataSource`.
     #   Typically, an Amazon Resource Number (ARN) becomes the ID for a
@@ -392,31 +338,6 @@ module Aws::MachineLearning
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDataSourceFromRedshiftInput
-    #   data as a hash:
-    #
-    #       {
-    #         data_source_id: "EntityId", # required
-    #         data_source_name: "EntityName",
-    #         data_spec: { # required
-    #           database_information: { # required
-    #             database_name: "RedshiftDatabaseName", # required
-    #             cluster_identifier: "RedshiftClusterIdentifier", # required
-    #           },
-    #           select_sql_query: "RedshiftSelectSqlQuery", # required
-    #           database_credentials: { # required
-    #             username: "RedshiftDatabaseUsername", # required
-    #             password: "RedshiftDatabasePassword", # required
-    #           },
-    #           s3_staging_location: "S3Url", # required
-    #           data_rearrangement: "DataRearrangement",
-    #           data_schema: "DataSchema",
-    #           data_schema_uri: "S3Url",
-    #         },
-    #         role_arn: "RoleARN", # required
-    #         compute_statistics: false,
-    #       }
-    #
     # @!attribute [rw] data_source_id
     #   A user-supplied ID that uniquely identifies the `DataSource`.
     #   @return [String]
@@ -507,21 +428,6 @@ module Aws::MachineLearning
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDataSourceFromS3Input
-    #   data as a hash:
-    #
-    #       {
-    #         data_source_id: "EntityId", # required
-    #         data_source_name: "EntityName",
-    #         data_spec: { # required
-    #           data_location_s3: "S3Url", # required
-    #           data_rearrangement: "DataRearrangement",
-    #           data_schema: "DataSchema",
-    #           data_schema_location_s3: "S3Url",
-    #         },
-    #         compute_statistics: false,
-    #       }
-    #
     # @!attribute [rw] data_source_id
     #   A user-supplied identifier that uniquely identifies the
     #   `DataSource`.
@@ -585,16 +491,6 @@ module Aws::MachineLearning
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateEvaluationInput
-    #   data as a hash:
-    #
-    #       {
-    #         evaluation_id: "EntityId", # required
-    #         evaluation_name: "EntityName",
-    #         ml_model_id: "EntityId", # required
-    #         evaluation_data_source_id: "EntityId", # required
-    #       }
-    #
     # @!attribute [rw] evaluation_id
     #   A user-supplied ID that uniquely identifies the `Evaluation`.
     #   @return [String]
@@ -643,21 +539,6 @@ module Aws::MachineLearning
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateMLModelInput
-    #   data as a hash:
-    #
-    #       {
-    #         ml_model_id: "EntityId", # required
-    #         ml_model_name: "EntityName",
-    #         ml_model_type: "REGRESSION", # required, accepts REGRESSION, BINARY, MULTICLASS
-    #         parameters: {
-    #           "StringType" => "StringType",
-    #         },
-    #         training_data_source_id: "EntityId", # required
-    #         recipe: "Recipe",
-    #         recipe_uri: "S3Url",
-    #       }
-    #
     # @!attribute [rw] ml_model_id
     #   A user-supplied ID that uniquely identifies the `MLModel`.
     #   @return [String]
@@ -779,13 +660,6 @@ module Aws::MachineLearning
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateRealtimeEndpointInput
-    #   data as a hash:
-    #
-    #       {
-    #         ml_model_id: "EntityId", # required
-    #       }
-    #
     # @!attribute [rw] ml_model_id
     #   The ID assigned to the `MLModel` during creation.
     #   @return [String]
@@ -949,13 +823,6 @@ module Aws::MachineLearning
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteBatchPredictionInput
-    #   data as a hash:
-    #
-    #       {
-    #         batch_prediction_id: "EntityId", # required
-    #       }
-    #
     # @!attribute [rw] batch_prediction_id
     #   A user-supplied ID that uniquely identifies the `BatchPrediction`.
     #   @return [String]
@@ -984,13 +851,6 @@ module Aws::MachineLearning
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDataSourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         data_source_id: "EntityId", # required
-    #       }
-    #
     # @!attribute [rw] data_source_id
     #   A user-supplied ID that uniquely identifies the `DataSource`.
     #   @return [String]
@@ -1015,13 +875,6 @@ module Aws::MachineLearning
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteEvaluationInput
-    #   data as a hash:
-    #
-    #       {
-    #         evaluation_id: "EntityId", # required
-    #       }
-    #
     # @!attribute [rw] evaluation_id
     #   A user-supplied ID that uniquely identifies the `Evaluation` to
     #   delete.
@@ -1053,13 +906,6 @@ module Aws::MachineLearning
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteMLModelInput
-    #   data as a hash:
-    #
-    #       {
-    #         ml_model_id: "EntityId", # required
-    #       }
-    #
     # @!attribute [rw] ml_model_id
     #   A user-supplied ID that uniquely identifies the `MLModel`.
     #   @return [String]
@@ -1087,13 +933,6 @@ module Aws::MachineLearning
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteRealtimeEndpointInput
-    #   data as a hash:
-    #
-    #       {
-    #         ml_model_id: "EntityId", # required
-    #       }
-    #
     # @!attribute [rw] ml_model_id
     #   The ID assigned to the `MLModel` during creation.
     #   @return [String]
@@ -1126,15 +965,6 @@ module Aws::MachineLearning
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteTagsInput
-    #   data as a hash:
-    #
-    #       {
-    #         tag_keys: ["TagKey"], # required
-    #         resource_id: "EntityId", # required
-    #         resource_type: "BatchPrediction", # required, accepts BatchPrediction, DataSource, Evaluation, MLModel
-    #       }
-    #
     # @!attribute [rw] tag_keys
     #   One or more tags to delete.
     #   @return [Array<String>]
@@ -1172,23 +1002,6 @@ module Aws::MachineLearning
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeBatchPredictionsInput
-    #   data as a hash:
-    #
-    #       {
-    #         filter_variable: "CreatedAt", # accepts CreatedAt, LastUpdatedAt, Status, Name, IAMUser, MLModelId, DataSourceId, DataURI
-    #         eq: "ComparatorValue",
-    #         gt: "ComparatorValue",
-    #         lt: "ComparatorValue",
-    #         ge: "ComparatorValue",
-    #         le: "ComparatorValue",
-    #         ne: "ComparatorValue",
-    #         prefix: "ComparatorValue",
-    #         sort_order: "asc", # accepts asc, dsc
-    #         next_token: "StringType",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] filter_variable
     #   Use one of the following variables to filter a list of
     #   `BatchPrediction`\:
@@ -1323,23 +1136,6 @@ module Aws::MachineLearning
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDataSourcesInput
-    #   data as a hash:
-    #
-    #       {
-    #         filter_variable: "CreatedAt", # accepts CreatedAt, LastUpdatedAt, Status, Name, DataLocationS3, IAMUser
-    #         eq: "ComparatorValue",
-    #         gt: "ComparatorValue",
-    #         lt: "ComparatorValue",
-    #         ge: "ComparatorValue",
-    #         le: "ComparatorValue",
-    #         ne: "ComparatorValue",
-    #         prefix: "ComparatorValue",
-    #         sort_order: "asc", # accepts asc, dsc
-    #         next_token: "StringType",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] filter_variable
     #   Use one of the following variables to filter a list of
     #   `DataSource`\:
@@ -1465,23 +1261,6 @@ module Aws::MachineLearning
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEvaluationsInput
-    #   data as a hash:
-    #
-    #       {
-    #         filter_variable: "CreatedAt", # accepts CreatedAt, LastUpdatedAt, Status, Name, IAMUser, MLModelId, DataSourceId, DataURI
-    #         eq: "ComparatorValue",
-    #         gt: "ComparatorValue",
-    #         lt: "ComparatorValue",
-    #         ge: "ComparatorValue",
-    #         le: "ComparatorValue",
-    #         ne: "ComparatorValue",
-    #         prefix: "ComparatorValue",
-    #         sort_order: "asc", # accepts asc, dsc
-    #         next_token: "StringType",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] filter_variable
     #   Use one of the following variable to filter a list of `Evaluation`
     #   objects:
@@ -1613,23 +1392,6 @@ module Aws::MachineLearning
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeMLModelsInput
-    #   data as a hash:
-    #
-    #       {
-    #         filter_variable: "CreatedAt", # accepts CreatedAt, LastUpdatedAt, Status, Name, IAMUser, TrainingDataSourceId, RealtimeEndpointStatus, MLModelType, Algorithm, TrainingDataURI
-    #         eq: "ComparatorValue",
-    #         gt: "ComparatorValue",
-    #         lt: "ComparatorValue",
-    #         ge: "ComparatorValue",
-    #         le: "ComparatorValue",
-    #         ne: "ComparatorValue",
-    #         prefix: "ComparatorValue",
-    #         sort_order: "asc", # accepts asc, dsc
-    #         next_token: "StringType",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] filter_variable
     #   Use one of the following variables to filter a list of `MLModel`\:
     #
@@ -1768,14 +1530,6 @@ module Aws::MachineLearning
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeTagsInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_id: "EntityId", # required
-    #         resource_type: "BatchPrediction", # required, accepts BatchPrediction, DataSource, Evaluation, MLModel
-    #       }
-    #
     # @!attribute [rw] resource_id
     #   The ID of the ML object. For example, `exampleModelId`.
     #   @return [String]
@@ -1933,13 +1687,6 @@ module Aws::MachineLearning
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetBatchPredictionInput
-    #   data as a hash:
-    #
-    #       {
-    #         batch_prediction_id: "EntityId", # required
-    #       }
-    #
     # @!attribute [rw] batch_prediction_id
     #   An ID assigned to the `BatchPrediction` at creation.
     #   @return [String]
@@ -2079,14 +1826,6 @@ module Aws::MachineLearning
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDataSourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         data_source_id: "EntityId", # required
-    #         verbose: false,
-    #       }
-    #
     # @!attribute [rw] data_source_id
     #   The ID assigned to the `DataSource` at creation.
     #   @return [String]
@@ -2254,13 +1993,6 @@ module Aws::MachineLearning
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetEvaluationInput
-    #   data as a hash:
-    #
-    #       {
-    #         evaluation_id: "EntityId", # required
-    #       }
-    #
     # @!attribute [rw] evaluation_id
     #   The ID of the `Evaluation` to retrieve. The evaluation of each
     #   `MLModel` is recorded and cataloged. The ID provides the means to
@@ -2405,14 +2137,6 @@ module Aws::MachineLearning
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetMLModelInput
-    #   data as a hash:
-    #
-    #       {
-    #         ml_model_id: "EntityId", # required
-    #         verbose: false,
-    #       }
-    #
     # @!attribute [rw] ml_model_id
     #   The ID assigned to the `MLModel` at creation.
     #   @return [String]
@@ -2924,17 +2648,6 @@ module Aws::MachineLearning
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PredictInput
-    #   data as a hash:
-    #
-    #       {
-    #         ml_model_id: "EntityId", # required
-    #         record: { # required
-    #           "VariableName" => "VariableValue",
-    #         },
-    #         predict_endpoint: "VipURL", # required
-    #       }
-    #
     # @!attribute [rw] ml_model_id
     #   A unique identifier of the `MLModel`.
     #   @return [String]
@@ -3030,29 +2743,6 @@ module Aws::MachineLearning
 
     # The data specification of an Amazon Relational Database Service
     # (Amazon RDS) `DataSource`.
-    #
-    # @note When making an API call, you may pass RDSDataSpec
-    #   data as a hash:
-    #
-    #       {
-    #         database_information: { # required
-    #           instance_identifier: "RDSInstanceIdentifier", # required
-    #           database_name: "RDSDatabaseName", # required
-    #         },
-    #         select_sql_query: "RDSSelectSqlQuery", # required
-    #         database_credentials: { # required
-    #           username: "RDSDatabaseUsername", # required
-    #           password: "RDSDatabasePassword", # required
-    #         },
-    #         s3_staging_location: "S3Url", # required
-    #         data_rearrangement: "DataRearrangement",
-    #         data_schema: "DataSchema",
-    #         data_schema_uri: "S3Url",
-    #         resource_role: "EDPResourceRole", # required
-    #         service_role: "EDPServiceRole", # required
-    #         subnet_id: "EDPSubnetId", # required
-    #         security_group_ids: ["EDPSecurityGroupId"], # required
-    #       }
     #
     # @!attribute [rw] database_information
     #   Describes the `DatabaseName` and `InstanceIdentifier` of an Amazon
@@ -3266,14 +2956,6 @@ module Aws::MachineLearning
 
     # The database details of an Amazon RDS database.
     #
-    # @note When making an API call, you may pass RDSDatabase
-    #   data as a hash:
-    #
-    #       {
-    #         instance_identifier: "RDSInstanceIdentifier", # required
-    #         database_name: "RDSDatabaseName", # required
-    #       }
-    #
     # @!attribute [rw] instance_identifier
     #   The ID of an RDS DB instance.
     #   @return [String]
@@ -3291,14 +2973,6 @@ module Aws::MachineLearning
 
     # The database credentials to connect to a database on an RDS DB
     # instance.
-    #
-    # @note When making an API call, you may pass RDSDatabaseCredentials
-    #   data as a hash:
-    #
-    #       {
-    #         username: "RDSDatabaseUsername", # required
-    #         password: "RDSDatabasePassword", # required
-    #       }
     #
     # @!attribute [rw] username
     #   The username to be used by Amazon ML to connect to database on an
@@ -3415,25 +3089,6 @@ module Aws::MachineLearning
     end
 
     # Describes the data specification of an Amazon Redshift `DataSource`.
-    #
-    # @note When making an API call, you may pass RedshiftDataSpec
-    #   data as a hash:
-    #
-    #       {
-    #         database_information: { # required
-    #           database_name: "RedshiftDatabaseName", # required
-    #           cluster_identifier: "RedshiftClusterIdentifier", # required
-    #         },
-    #         select_sql_query: "RedshiftSelectSqlQuery", # required
-    #         database_credentials: { # required
-    #           username: "RedshiftDatabaseUsername", # required
-    #           password: "RedshiftDatabasePassword", # required
-    #         },
-    #         s3_staging_location: "S3Url", # required
-    #         data_rearrangement: "DataRearrangement",
-    #         data_schema: "DataSchema",
-    #         data_schema_uri: "S3Url",
-    #       }
     #
     # @!attribute [rw] database_information
     #   Describes the `DatabaseName` and `ClusterIdentifier` for an Amazon
@@ -3607,14 +3262,6 @@ module Aws::MachineLearning
     # Describes the database details required to connect to an Amazon
     # Redshift database.
     #
-    # @note When making an API call, you may pass RedshiftDatabase
-    #   data as a hash:
-    #
-    #       {
-    #         database_name: "RedshiftDatabaseName", # required
-    #         cluster_identifier: "RedshiftClusterIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] database_name
     #   The name of a database hosted on an Amazon Redshift cluster.
     #   @return [String]
@@ -3632,14 +3279,6 @@ module Aws::MachineLearning
 
     # Describes the database credentials for connecting to a database on an
     # Amazon Redshift cluster.
-    #
-    # @note When making an API call, you may pass RedshiftDatabaseCredentials
-    #   data as a hash:
-    #
-    #       {
-    #         username: "RedshiftDatabaseUsername", # required
-    #         password: "RedshiftDatabasePassword", # required
-    #       }
     #
     # @!attribute [rw] username
     #   A username to be used by Amazon Machine Learning (Amazon ML)to
@@ -3719,16 +3358,6 @@ module Aws::MachineLearning
     end
 
     # Describes the data specification of a `DataSource`.
-    #
-    # @note When making an API call, you may pass S3DataSpec
-    #   data as a hash:
-    #
-    #       {
-    #         data_location_s3: "S3Url", # required
-    #         data_rearrangement: "DataRearrangement",
-    #         data_schema: "DataSchema",
-    #         data_schema_location_s3: "S3Url",
-    #       }
     #
     # @!attribute [rw] data_location_s3
     #   The location of the data file(s) used by a `DataSource`. The URI
@@ -3887,14 +3516,6 @@ module Aws::MachineLearning
     # A custom key-value pair associated with an ML object, such as an ML
     # model.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey",
-    #         value: "TagValue",
-    #       }
-    #
     # @!attribute [rw] key
     #   A unique identifier for the tag. Valid characters include Unicode
     #   letters, digits, white space, \_, ., /, =, +, -, %, and @.
@@ -3922,14 +3543,6 @@ module Aws::MachineLearning
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateBatchPredictionInput
-    #   data as a hash:
-    #
-    #       {
-    #         batch_prediction_id: "EntityId", # required
-    #         batch_prediction_name: "EntityName", # required
-    #       }
-    #
     # @!attribute [rw] batch_prediction_id
     #   The ID assigned to the `BatchPrediction` during creation.
     #   @return [String]
@@ -3962,14 +3575,6 @@ module Aws::MachineLearning
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateDataSourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         data_source_id: "EntityId", # required
-    #         data_source_name: "EntityName", # required
-    #       }
-    #
     # @!attribute [rw] data_source_id
     #   The ID assigned to the `DataSource` during creation.
     #   @return [String]
@@ -4003,14 +3608,6 @@ module Aws::MachineLearning
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateEvaluationInput
-    #   data as a hash:
-    #
-    #       {
-    #         evaluation_id: "EntityId", # required
-    #         evaluation_name: "EntityName", # required
-    #       }
-    #
     # @!attribute [rw] evaluation_id
     #   The ID assigned to the `Evaluation` during creation.
     #   @return [String]
@@ -4043,15 +3640,6 @@ module Aws::MachineLearning
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateMLModelInput
-    #   data as a hash:
-    #
-    #       {
-    #         ml_model_id: "EntityId", # required
-    #         ml_model_name: "EntityName",
-    #         score_threshold: 1.0,
-    #       }
-    #
     # @!attribute [rw] ml_model_id
     #   The ID assigned to the `MLModel` during creation.
     #   @return [String]

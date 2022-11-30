@@ -26,14 +26,6 @@ module Aws::ConnectWisdomService
     # Configuration information for Amazon AppIntegrations to automatically
     # ingest content.
     #
-    # @note When making an API call, you may pass AppIntegrationsConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         app_integration_arn: "GenericArn", # required
-    #         object_fields: ["NonEmptyString"], # required
-    #       }
-    #
     # @!attribute [rw] app_integration_arn
     #   The Amazon Resource Name (ARN) of the AppIntegrations
     #   DataIntegration to use for ingesting content.
@@ -118,8 +110,6 @@ module Aws::ConnectWisdomService
     # The data that is input into Wisdom as a result of the assistant
     # association.
     #
-    # @note AssistantAssociationInputData is a union - when making an API calls you must set exactly one of the members.
-    #
     # @!attribute [rw] knowledge_base_id
     #   The identifier of the knowledge base.
     #   @return [String]
@@ -138,8 +128,6 @@ module Aws::ConnectWisdomService
     end
 
     # The data that is output as a result of the assistant association.
-    #
-    # @note AssistantAssociationOutputData is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AssistantAssociationOutputData corresponding to the set member.
     #
     # @!attribute [rw] knowledge_base_association
     #   The knowledge base where output data is sent.
@@ -499,21 +487,6 @@ module Aws::ConnectWisdomService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAssistantAssociationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assistant_id: "UuidOrArn", # required
-    #         association: { # required
-    #           knowledge_base_id: "Uuid",
-    #         },
-    #         association_type: "KNOWLEDGE_BASE", # required, accepts KNOWLEDGE_BASE
-    #         client_token: "ClientToken",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] assistant_id
     #   The identifier of the Wisdom assistant. Can be either the ID or the
     #   ARN. URLs cannot contain the ARN.
@@ -564,22 +537,6 @@ module Aws::ConnectWisdomService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAssistantRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         description: "Description",
-    #         name: "Name", # required
-    #         server_side_encryption_configuration: {
-    #           kms_key_id: "NonEmptyString",
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         type: "AGENT", # required, accepts AGENT
-    #       }
-    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
@@ -634,24 +591,6 @@ module Aws::ConnectWisdomService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateContentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "NonEmptyString",
-    #         knowledge_base_id: "UuidOrArn", # required
-    #         metadata: {
-    #           "NonEmptyString" => "NonEmptyString",
-    #         },
-    #         name: "Name", # required
-    #         override_link_out_uri: "Uri",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         title: "ContentTitle",
-    #         upload_id: "NonEmptyString", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
@@ -735,31 +674,6 @@ module Aws::ConnectWisdomService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateKnowledgeBaseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "NonEmptyString",
-    #         description: "Description",
-    #         knowledge_base_type: "EXTERNAL", # required, accepts EXTERNAL, CUSTOM
-    #         name: "Name", # required
-    #         rendering_configuration: {
-    #           template_uri: "Uri",
-    #         },
-    #         server_side_encryption_configuration: {
-    #           kms_key_id: "NonEmptyString",
-    #         },
-    #         source_configuration: {
-    #           app_integrations: {
-    #             app_integration_arn: "GenericArn", # required
-    #             object_fields: ["NonEmptyString"], # required
-    #           },
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
@@ -828,19 +742,6 @@ module Aws::ConnectWisdomService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateSessionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assistant_id: "UuidOrArn", # required
-    #         client_token: "ClientToken",
-    #         description: "Description",
-    #         name: "Name", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] assistant_id
     #   The identifier of the Wisdom assistant. Can be either the ID or the
     #   ARN. URLs cannot contain the ARN.
@@ -891,14 +792,6 @@ module Aws::ConnectWisdomService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAssistantAssociationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assistant_association_id: "UuidOrArn", # required
-    #         assistant_id: "UuidOrArn", # required
-    #       }
-    #
     # @!attribute [rw] assistant_association_id
     #   The identifier of the assistant association. Can be either the ID or
     #   the ARN. URLs cannot contain the ARN.
@@ -922,13 +815,6 @@ module Aws::ConnectWisdomService
     #
     class DeleteAssistantAssociationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteAssistantRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assistant_id: "UuidOrArn", # required
-    #       }
-    #
     # @!attribute [rw] assistant_id
     #   The identifier of the Wisdom assistant. Can be either the ID or the
     #   ARN. URLs cannot contain the ARN.
@@ -946,14 +832,6 @@ module Aws::ConnectWisdomService
     #
     class DeleteAssistantResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteContentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         content_id: "UuidOrArn", # required
-    #         knowledge_base_id: "UuidOrArn", # required
-    #       }
-    #
     # @!attribute [rw] content_id
     #   The identifier of the content. Can be either the ID or the ARN. URLs
     #   cannot contain the ARN.
@@ -977,13 +855,6 @@ module Aws::ConnectWisdomService
     #
     class DeleteContentResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteKnowledgeBaseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         knowledge_base_id: "UuidOrArn", # required
-    #       }
-    #
     # @!attribute [rw] knowledge_base_id
     #   The knowledge base to delete content from. Can be either the ID or
     #   the ARN. URLs cannot contain the ARN.
@@ -1046,15 +917,6 @@ module Aws::ConnectWisdomService
 
     # A search filter.
     #
-    # @note When making an API call, you may pass Filter
-    #   data as a hash:
-    #
-    #       {
-    #         field: "NAME", # required, accepts NAME
-    #         operator: "EQUALS", # required, accepts EQUALS
-    #         value: "NonEmptyString", # required
-    #       }
-    #
     # @!attribute [rw] field
     #   The field on which to filter.
     #   @return [String]
@@ -1078,14 +940,6 @@ module Aws::ConnectWisdomService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAssistantAssociationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assistant_association_id: "UuidOrArn", # required
-    #         assistant_id: "UuidOrArn", # required
-    #       }
-    #
     # @!attribute [rw] assistant_association_id
     #   The identifier of the assistant association. Can be either the ID or
     #   the ARN. URLs cannot contain the ARN.
@@ -1117,13 +971,6 @@ module Aws::ConnectWisdomService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAssistantRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assistant_id: "UuidOrArn", # required
-    #       }
-    #
     # @!attribute [rw] assistant_id
     #   The identifier of the Wisdom assistant. Can be either the ID or the
     #   ARN. URLs cannot contain the ARN.
@@ -1149,14 +996,6 @@ module Aws::ConnectWisdomService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetContentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         content_id: "UuidOrArn", # required
-    #         knowledge_base_id: "UuidOrArn", # required
-    #       }
-    #
     # @!attribute [rw] content_id
     #   The identifier of the content. Can be either the ID or the ARN. URLs
     #   cannot contain the ARN.
@@ -1188,14 +1027,6 @@ module Aws::ConnectWisdomService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetContentSummaryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         content_id: "UuidOrArn", # required
-    #         knowledge_base_id: "UuidOrArn", # required
-    #       }
-    #
     # @!attribute [rw] content_id
     #   The identifier of the content. Can be either the ID or the ARN. URLs
     #   cannot contain the ARN.
@@ -1227,13 +1058,6 @@ module Aws::ConnectWisdomService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetKnowledgeBaseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         knowledge_base_id: "UuidOrArn", # required
-    #       }
-    #
     # @!attribute [rw] knowledge_base_id
     #   The identifier of the knowledge base. Can be either the ID or the
     #   ARN. URLs cannot contain the ARN.
@@ -1259,16 +1083,6 @@ module Aws::ConnectWisdomService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRecommendationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assistant_id: "UuidOrArn", # required
-    #         max_results: 1,
-    #         session_id: "UuidOrArn", # required
-    #         wait_time_seconds: 1,
-    #       }
-    #
     # @!attribute [rw] assistant_id
     #   The identifier of the Wisdom assistant. Can be either the ID or the
     #   ARN. URLs cannot contain the ARN.
@@ -1319,14 +1133,6 @@ module Aws::ConnectWisdomService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSessionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assistant_id: "UuidOrArn", # required
-    #         session_id: "UuidOrArn", # required
-    #       }
-    #
     # @!attribute [rw] assistant_id
     #   The identifier of the Wisdom assistant. Can be either the ID or the
     #   ARN. URLs cannot contain the ARN.
@@ -1524,15 +1330,6 @@ module Aws::ConnectWisdomService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAssistantAssociationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assistant_id: "UuidOrArn", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] assistant_id
     #   The identifier of the Wisdom assistant. Can be either the ID or the
     #   ARN. URLs cannot contain the ARN.
@@ -1576,14 +1373,6 @@ module Aws::ConnectWisdomService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAssistantsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to return per page.
     #   @return [Integer]
@@ -1621,15 +1410,6 @@ module Aws::ConnectWisdomService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListContentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         knowledge_base_id: "UuidOrArn", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] knowledge_base_id
     #   The identifier of the knowledge base. Can be either the ID or the
     #   ARN. URLs cannot contain the ARN.
@@ -1673,14 +1453,6 @@ module Aws::ConnectWisdomService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListKnowledgeBasesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NonEmptyString",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to return per page.
     #   @return [Integer]
@@ -1718,13 +1490,6 @@ module Aws::ConnectWisdomService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -1769,15 +1534,6 @@ module Aws::ConnectWisdomService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass NotifyRecommendationsReceivedRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assistant_id: "UuidOrArn", # required
-    #         recommendation_ids: ["String"], # required
-    #         session_id: "UuidOrArn", # required
-    #       }
-    #
     # @!attribute [rw] assistant_id
     #   The identifier of the Wisdom assistant. Can be either the ID or the
     #   ARN. URLs cannot contain the ARN.
@@ -1833,16 +1589,6 @@ module Aws::ConnectWisdomService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass QueryAssistantRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assistant_id: "UuidOrArn", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         query_text: "QueryText", # required
-    #       }
-    #
     # @!attribute [rw] assistant_id
     #   The identifier of the Wisdom assistant. Can be either the ID or the
     #   ARN. URLs cannot contain the ARN.
@@ -1983,8 +1729,6 @@ module Aws::ConnectWisdomService
 
     # A union type containing information related to the trigger.
     #
-    # @note RecommendationTriggerData is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of RecommendationTriggerData corresponding to the set member.
-    #
     # @!attribute [rw] query
     #   Data associated with the QUERY RecommendationTriggerType.
     #   @return [Types::QueryRecommendationTriggerData]
@@ -2002,13 +1746,6 @@ module Aws::ConnectWisdomService
       class Unknown < RecommendationTriggerData; end
     end
 
-    # @note When making an API call, you may pass RemoveKnowledgeBaseTemplateUriRequest
-    #   data as a hash:
-    #
-    #       {
-    #         knowledge_base_id: "UuidOrArn", # required
-    #       }
-    #
     # @!attribute [rw] knowledge_base_id
     #   The identifier of the knowledge base. Can be either the ID or the
     #   ARN. URLs cannot contain the ARN.
@@ -2027,13 +1764,6 @@ module Aws::ConnectWisdomService
     class RemoveKnowledgeBaseTemplateUriResponse < Aws::EmptyStructure; end
 
     # Information about how to render the content.
-    #
-    # @note When making an API call, you may pass RenderingConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         template_uri: "Uri",
-    #       }
     #
     # @!attribute [rw] template_uri
     #   A URI template containing exactly one variable in `$\{variableName\}
@@ -2101,24 +1831,6 @@ module Aws::ConnectWisdomService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SearchContentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         knowledge_base_id: "UuidOrArn", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         search_expression: { # required
-    #           filters: [ # required
-    #             {
-    #               field: "NAME", # required, accepts NAME
-    #               operator: "EQUALS", # required, accepts EQUALS
-    #               value: "NonEmptyString", # required
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] knowledge_base_id
     #   The identifier of the knowledge base. Can be either the ID or the
     #   ARN. URLs cannot contain the ARN.
@@ -2169,19 +1881,6 @@ module Aws::ConnectWisdomService
 
     # The search expression.
     #
-    # @note When making an API call, you may pass SearchExpression
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [ # required
-    #           {
-    #             field: "NAME", # required, accepts NAME
-    #             operator: "EQUALS", # required, accepts EQUALS
-    #             value: "NonEmptyString", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] filters
     #   The search expression filters.
     #   @return [Array<Types::Filter>]
@@ -2194,24 +1893,6 @@ module Aws::ConnectWisdomService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SearchSessionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assistant_id: "UuidOrArn", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         search_expression: { # required
-    #           filters: [ # required
-    #             {
-    #               field: "NAME", # required, accepts NAME
-    #               operator: "EQUALS", # required, accepts EQUALS
-    #               value: "NonEmptyString", # required
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] assistant_id
     #   The identifier of the Wisdom assistant. Can be either the ID or the
     #   ARN. URLs cannot contain the ARN.
@@ -2261,13 +1942,6 @@ module Aws::ConnectWisdomService
     end
 
     # The KMS key used for encryption.
-    #
-    # @note When making an API call, you may pass ServerSideEncryptionConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         kms_key_id: "NonEmptyString",
-    #       }
     #
     # @!attribute [rw] kms_key_id
     #   The KMS key. For information about valid ID values, see [Key
@@ -2367,10 +2041,6 @@ module Aws::ConnectWisdomService
 
     # Configuration information about the external data source.
     #
-    # @note SourceConfiguration is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note SourceConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of SourceConfiguration corresponding to the set member.
-    #
     # @!attribute [rw] app_integrations
     #   Configuration information for Amazon AppIntegrations to
     #   automatically ingest content.
@@ -2389,14 +2059,6 @@ module Aws::ConnectWisdomService
       class Unknown < SourceConfiguration; end
     end
 
-    # @note When making an API call, you may pass StartContentUploadRequest
-    #   data as a hash:
-    #
-    #       {
-    #         content_type: "ContentType", # required
-    #         knowledge_base_id: "UuidOrArn", # required
-    #       }
-    #
     # @!attribute [rw] content_type
     #   The type of content to upload.
     #   @return [String]
@@ -2442,16 +2104,6 @@ module Aws::ConnectWisdomService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -2493,14 +2145,6 @@ module Aws::ConnectWisdomService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -2522,22 +2166,6 @@ module Aws::ConnectWisdomService
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateContentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         content_id: "UuidOrArn", # required
-    #         knowledge_base_id: "UuidOrArn", # required
-    #         metadata: {
-    #           "NonEmptyString" => "NonEmptyString",
-    #         },
-    #         override_link_out_uri: "Uri",
-    #         remove_override_link_out_uri: false,
-    #         revision_id: "NonEmptyString",
-    #         title: "ContentTitle",
-    #         upload_id: "NonEmptyString",
-    #       }
-    #
     # @!attribute [rw] content_id
     #   The identifier of the content. Can be either the ID or the ARN. URLs
     #   cannot contain the ARN.
@@ -2615,14 +2243,6 @@ module Aws::ConnectWisdomService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateKnowledgeBaseTemplateUriRequest
-    #   data as a hash:
-    #
-    #       {
-    #         knowledge_base_id: "UuidOrArn", # required
-    #         template_uri: "Uri", # required
-    #       }
-    #
     # @!attribute [rw] knowledge_base_id
     #   The identifier of the knowledge base. Can be either the ID or the
     #   ARN. URLs cannot contain the ARN.

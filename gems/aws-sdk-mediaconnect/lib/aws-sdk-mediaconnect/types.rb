@@ -12,35 +12,6 @@ module Aws::MediaConnect
 
     # Adds media streams to an existing flow.
     #
-    # @note When making an API call, you may pass AddFlowMediaStreamsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         flow_arn: "__string", # required
-    #         media_streams: [ # required
-    #           {
-    #             attributes: {
-    #               fmtp: {
-    #                 channel_order: "__string",
-    #                 colorimetry: "BT601", # accepts BT601, BT709, BT2020, BT2100, ST2065-1, ST2065-3, XYZ
-    #                 exact_framerate: "__string",
-    #                 par: "__string",
-    #                 range: "NARROW", # accepts NARROW, FULL, FULLPROTECT
-    #                 scan_mode: "progressive", # accepts progressive, interlace, progressive-segmented-frame
-    #                 tcs: "SDR", # accepts SDR, PQ, HLG, LINEAR, BT2100LINPQ, BT2100LINHLG, ST2065-1, ST428-1, DENSITY
-    #               },
-    #               lang: "__string",
-    #             },
-    #             clock_rate: 1,
-    #             description: "__string",
-    #             media_stream_id: 1, # required
-    #             media_stream_name: "__string", # required
-    #             media_stream_type: "video", # required, accepts video, audio, ancillary-data
-    #             video_format: "__string",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] flow_arn
     #   @return [String]
     #
@@ -95,62 +66,6 @@ module Aws::MediaConnect
     # Adds outputs to an existing flow. You can create up to 50 outputs per
     # flow.
     #
-    # @note When making an API call, you may pass AddFlowOutputsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         flow_arn: "__string", # required
-    #         outputs: [ # required
-    #           {
-    #             cidr_allow_list: ["__string"],
-    #             description: "__string",
-    #             destination: "__string",
-    #             encryption: {
-    #               algorithm: "aes128", # accepts aes128, aes192, aes256
-    #               constant_initialization_vector: "__string",
-    #               device_id: "__string",
-    #               key_type: "speke", # accepts speke, static-key, srt-password
-    #               region: "__string",
-    #               resource_id: "__string",
-    #               role_arn: "__string", # required
-    #               secret_arn: "__string",
-    #               url: "__string",
-    #             },
-    #             max_latency: 1,
-    #             media_stream_output_configurations: [
-    #               {
-    #                 destination_configurations: [
-    #                   {
-    #                     destination_ip: "__string", # required
-    #                     destination_port: 1, # required
-    #                     interface: { # required
-    #                       name: "__string", # required
-    #                     },
-    #                   },
-    #                 ],
-    #                 encoding_name: "jxsv", # required, accepts jxsv, raw, smpte291, pcm
-    #                 encoding_parameters: {
-    #                   compression_factor: 1.0, # required
-    #                   encoder_profile: "main", # required, accepts main, high
-    #                 },
-    #                 media_stream_name: "__string", # required
-    #               },
-    #             ],
-    #             min_latency: 1,
-    #             name: "__string",
-    #             port: 1,
-    #             protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos
-    #             remote_id: "__string",
-    #             sender_control_port: 1,
-    #             smoothing_latency: 1,
-    #             stream_id: "__string",
-    #             vpc_interface_attachment: {
-    #               vpc_interface_name: "__string",
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] flow_arn
     #   @return [String]
     #
@@ -188,58 +103,6 @@ module Aws::MediaConnect
     end
 
     # Adds sources to an existing flow.
-    #
-    # @note When making an API call, you may pass AddFlowSourcesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         flow_arn: "__string", # required
-    #         sources: [ # required
-    #           {
-    #             decryption: {
-    #               algorithm: "aes128", # accepts aes128, aes192, aes256
-    #               constant_initialization_vector: "__string",
-    #               device_id: "__string",
-    #               key_type: "speke", # accepts speke, static-key, srt-password
-    #               region: "__string",
-    #               resource_id: "__string",
-    #               role_arn: "__string", # required
-    #               secret_arn: "__string",
-    #               url: "__string",
-    #             },
-    #             description: "__string",
-    #             entitlement_arn: "__string",
-    #             ingest_port: 1,
-    #             max_bitrate: 1,
-    #             max_latency: 1,
-    #             max_sync_buffer: 1,
-    #             media_stream_source_configurations: [
-    #               {
-    #                 encoding_name: "jxsv", # required, accepts jxsv, raw, smpte291, pcm
-    #                 input_configurations: [
-    #                   {
-    #                     input_port: 1, # required
-    #                     interface: { # required
-    #                       name: "__string", # required
-    #                     },
-    #                   },
-    #                 ],
-    #                 media_stream_name: "__string", # required
-    #               },
-    #             ],
-    #             min_latency: 1,
-    #             name: "__string",
-    #             protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos
-    #             sender_control_port: 1,
-    #             sender_ip_address: "__string",
-    #             source_listener_address: "__string",
-    #             source_listener_port: 1,
-    #             stream_id: "__string",
-    #             vpc_interface_name: "__string",
-    #             whitelist_cidr: "__string",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] flow_arn
     #   @return [String]
@@ -279,22 +142,6 @@ module Aws::MediaConnect
 
     # Adds VPC interfaces to an existing flow.
     #
-    # @note When making an API call, you may pass AddFlowVpcInterfacesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         flow_arn: "__string", # required
-    #         vpc_interfaces: [ # required
-    #           {
-    #             name: "__string", # required
-    #             network_interface_type: "ena", # accepts ena, efa
-    #             role_arn: "__string", # required
-    #             security_group_ids: ["__string"], # required
-    #             subnet_id: "__string", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] flow_arn
     #   @return [String]
     #
@@ -333,14 +180,6 @@ module Aws::MediaConnect
 
     # Create maintenance setting for a flow
     #
-    # @note When making an API call, you may pass AddMaintenance
-    #   data as a hash:
-    #
-    #       {
-    #         maintenance_day: "Monday", # required, accepts Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
-    #         maintenance_start_hour: "__string", # required
-    #       }
-    #
     # @!attribute [rw] maintenance_day
     #   A day of a week when the maintenance will happen. Use
     #   Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday.
@@ -361,30 +200,6 @@ module Aws::MediaConnect
     end
 
     # The media stream that you want to add to the flow.
-    #
-    # @note When making an API call, you may pass AddMediaStreamRequest
-    #   data as a hash:
-    #
-    #       {
-    #         attributes: {
-    #           fmtp: {
-    #             channel_order: "__string",
-    #             colorimetry: "BT601", # accepts BT601, BT709, BT2020, BT2100, ST2065-1, ST2065-3, XYZ
-    #             exact_framerate: "__string",
-    #             par: "__string",
-    #             range: "NARROW", # accepts NARROW, FULL, FULLPROTECT
-    #             scan_mode: "progressive", # accepts progressive, interlace, progressive-segmented-frame
-    #             tcs: "SDR", # accepts SDR, PQ, HLG, LINEAR, BT2100LINPQ, BT2100LINHLG, ST2065-1, ST428-1, DENSITY
-    #           },
-    #           lang: "__string",
-    #         },
-    #         clock_rate: 1,
-    #         description: "__string",
-    #         media_stream_id: 1, # required
-    #         media_stream_name: "__string", # required
-    #         media_stream_type: "video", # required, accepts video, audio, ancillary-data
-    #         video_format: "__string",
-    #       }
     #
     # @!attribute [rw] attributes
     #   The attributes that you want to assign to the new media stream.
@@ -432,57 +247,6 @@ module Aws::MediaConnect
     end
 
     # The output that you want to add to this flow.
-    #
-    # @note When making an API call, you may pass AddOutputRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cidr_allow_list: ["__string"],
-    #         description: "__string",
-    #         destination: "__string",
-    #         encryption: {
-    #           algorithm: "aes128", # accepts aes128, aes192, aes256
-    #           constant_initialization_vector: "__string",
-    #           device_id: "__string",
-    #           key_type: "speke", # accepts speke, static-key, srt-password
-    #           region: "__string",
-    #           resource_id: "__string",
-    #           role_arn: "__string", # required
-    #           secret_arn: "__string",
-    #           url: "__string",
-    #         },
-    #         max_latency: 1,
-    #         media_stream_output_configurations: [
-    #           {
-    #             destination_configurations: [
-    #               {
-    #                 destination_ip: "__string", # required
-    #                 destination_port: 1, # required
-    #                 interface: { # required
-    #                   name: "__string", # required
-    #                 },
-    #               },
-    #             ],
-    #             encoding_name: "jxsv", # required, accepts jxsv, raw, smpte291, pcm
-    #             encoding_parameters: {
-    #               compression_factor: 1.0, # required
-    #               encoder_profile: "main", # required, accepts main, high
-    #             },
-    #             media_stream_name: "__string", # required
-    #           },
-    #         ],
-    #         min_latency: 1,
-    #         name: "__string",
-    #         port: 1,
-    #         protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos
-    #         remote_id: "__string",
-    #         sender_control_port: 1,
-    #         smoothing_latency: 1,
-    #         stream_id: "__string",
-    #         vpc_interface_attachment: {
-    #           vpc_interface_name: "__string",
-    #         },
-    #       }
     #
     # @!attribute [rw] cidr_allow_list
     #   The range of IP addresses that should be allowed to initiate output
@@ -617,214 +381,6 @@ module Aws::MediaConnect
     # Creates a new flow. The request must include one source. The request
     # optionally can include outputs (up to 50) and entitlements (up to 50.)
     #
-    # @note When making an API call, you may pass CreateFlowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         availability_zone: "__string",
-    #         entitlements: [
-    #           {
-    #             data_transfer_subscriber_fee_percent: 1,
-    #             description: "__string",
-    #             encryption: {
-    #               algorithm: "aes128", # accepts aes128, aes192, aes256
-    #               constant_initialization_vector: "__string",
-    #               device_id: "__string",
-    #               key_type: "speke", # accepts speke, static-key, srt-password
-    #               region: "__string",
-    #               resource_id: "__string",
-    #               role_arn: "__string", # required
-    #               secret_arn: "__string",
-    #               url: "__string",
-    #             },
-    #             entitlement_status: "ENABLED", # accepts ENABLED, DISABLED
-    #             name: "__string",
-    #             subscribers: ["__string"], # required
-    #           },
-    #         ],
-    #         media_streams: [
-    #           {
-    #             attributes: {
-    #               fmtp: {
-    #                 channel_order: "__string",
-    #                 colorimetry: "BT601", # accepts BT601, BT709, BT2020, BT2100, ST2065-1, ST2065-3, XYZ
-    #                 exact_framerate: "__string",
-    #                 par: "__string",
-    #                 range: "NARROW", # accepts NARROW, FULL, FULLPROTECT
-    #                 scan_mode: "progressive", # accepts progressive, interlace, progressive-segmented-frame
-    #                 tcs: "SDR", # accepts SDR, PQ, HLG, LINEAR, BT2100LINPQ, BT2100LINHLG, ST2065-1, ST428-1, DENSITY
-    #               },
-    #               lang: "__string",
-    #             },
-    #             clock_rate: 1,
-    #             description: "__string",
-    #             media_stream_id: 1, # required
-    #             media_stream_name: "__string", # required
-    #             media_stream_type: "video", # required, accepts video, audio, ancillary-data
-    #             video_format: "__string",
-    #           },
-    #         ],
-    #         name: "__string", # required
-    #         outputs: [
-    #           {
-    #             cidr_allow_list: ["__string"],
-    #             description: "__string",
-    #             destination: "__string",
-    #             encryption: {
-    #               algorithm: "aes128", # accepts aes128, aes192, aes256
-    #               constant_initialization_vector: "__string",
-    #               device_id: "__string",
-    #               key_type: "speke", # accepts speke, static-key, srt-password
-    #               region: "__string",
-    #               resource_id: "__string",
-    #               role_arn: "__string", # required
-    #               secret_arn: "__string",
-    #               url: "__string",
-    #             },
-    #             max_latency: 1,
-    #             media_stream_output_configurations: [
-    #               {
-    #                 destination_configurations: [
-    #                   {
-    #                     destination_ip: "__string", # required
-    #                     destination_port: 1, # required
-    #                     interface: { # required
-    #                       name: "__string", # required
-    #                     },
-    #                   },
-    #                 ],
-    #                 encoding_name: "jxsv", # required, accepts jxsv, raw, smpte291, pcm
-    #                 encoding_parameters: {
-    #                   compression_factor: 1.0, # required
-    #                   encoder_profile: "main", # required, accepts main, high
-    #                 },
-    #                 media_stream_name: "__string", # required
-    #               },
-    #             ],
-    #             min_latency: 1,
-    #             name: "__string",
-    #             port: 1,
-    #             protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos
-    #             remote_id: "__string",
-    #             sender_control_port: 1,
-    #             smoothing_latency: 1,
-    #             stream_id: "__string",
-    #             vpc_interface_attachment: {
-    #               vpc_interface_name: "__string",
-    #             },
-    #           },
-    #         ],
-    #         source: {
-    #           decryption: {
-    #             algorithm: "aes128", # accepts aes128, aes192, aes256
-    #             constant_initialization_vector: "__string",
-    #             device_id: "__string",
-    #             key_type: "speke", # accepts speke, static-key, srt-password
-    #             region: "__string",
-    #             resource_id: "__string",
-    #             role_arn: "__string", # required
-    #             secret_arn: "__string",
-    #             url: "__string",
-    #           },
-    #           description: "__string",
-    #           entitlement_arn: "__string",
-    #           ingest_port: 1,
-    #           max_bitrate: 1,
-    #           max_latency: 1,
-    #           max_sync_buffer: 1,
-    #           media_stream_source_configurations: [
-    #             {
-    #               encoding_name: "jxsv", # required, accepts jxsv, raw, smpte291, pcm
-    #               input_configurations: [
-    #                 {
-    #                   input_port: 1, # required
-    #                   interface: { # required
-    #                     name: "__string", # required
-    #                   },
-    #                 },
-    #               ],
-    #               media_stream_name: "__string", # required
-    #             },
-    #           ],
-    #           min_latency: 1,
-    #           name: "__string",
-    #           protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos
-    #           sender_control_port: 1,
-    #           sender_ip_address: "__string",
-    #           source_listener_address: "__string",
-    #           source_listener_port: 1,
-    #           stream_id: "__string",
-    #           vpc_interface_name: "__string",
-    #           whitelist_cidr: "__string",
-    #         },
-    #         source_failover_config: {
-    #           failover_mode: "MERGE", # accepts MERGE, FAILOVER
-    #           recovery_window: 1,
-    #           source_priority: {
-    #             primary_source: "__string",
-    #           },
-    #           state: "ENABLED", # accepts ENABLED, DISABLED
-    #         },
-    #         sources: [
-    #           {
-    #             decryption: {
-    #               algorithm: "aes128", # accepts aes128, aes192, aes256
-    #               constant_initialization_vector: "__string",
-    #               device_id: "__string",
-    #               key_type: "speke", # accepts speke, static-key, srt-password
-    #               region: "__string",
-    #               resource_id: "__string",
-    #               role_arn: "__string", # required
-    #               secret_arn: "__string",
-    #               url: "__string",
-    #             },
-    #             description: "__string",
-    #             entitlement_arn: "__string",
-    #             ingest_port: 1,
-    #             max_bitrate: 1,
-    #             max_latency: 1,
-    #             max_sync_buffer: 1,
-    #             media_stream_source_configurations: [
-    #               {
-    #                 encoding_name: "jxsv", # required, accepts jxsv, raw, smpte291, pcm
-    #                 input_configurations: [
-    #                   {
-    #                     input_port: 1, # required
-    #                     interface: { # required
-    #                       name: "__string", # required
-    #                     },
-    #                   },
-    #                 ],
-    #                 media_stream_name: "__string", # required
-    #               },
-    #             ],
-    #             min_latency: 1,
-    #             name: "__string",
-    #             protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos
-    #             sender_control_port: 1,
-    #             sender_ip_address: "__string",
-    #             source_listener_address: "__string",
-    #             source_listener_port: 1,
-    #             stream_id: "__string",
-    #             vpc_interface_name: "__string",
-    #             whitelist_cidr: "__string",
-    #           },
-    #         ],
-    #         vpc_interfaces: [
-    #           {
-    #             name: "__string", # required
-    #             network_interface_type: "ena", # accepts ena, efa
-    #             role_arn: "__string", # required
-    #             security_group_ids: ["__string"], # required
-    #             subnet_id: "__string", # required
-    #           },
-    #         ],
-    #         maintenance: {
-    #           maintenance_day: "Monday", # required, accepts Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
-    #           maintenance_start_hour: "__string", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] availability_zone
     #   The Availability Zone that you want to create the flow in. These
     #   options are limited to the Availability Zones within the current AWS
@@ -899,13 +455,6 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteFlowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         flow_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] flow_arn
     #   @return [String]
     #
@@ -936,13 +485,6 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeFlowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         flow_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] flow_arn
     #   @return [String]
     #
@@ -974,13 +516,6 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeOfferingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         offering_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] offering_arn
     #   @return [String]
     #
@@ -1007,13 +542,6 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeReservationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         reservation_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] reservation_arn
     #   @return [String]
     #
@@ -1083,17 +611,6 @@ module Aws::MediaConnect
     # The transport parameters that you want to associate with an outbound
     # media stream.
     #
-    # @note When making an API call, you may pass DestinationConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         destination_ip: "__string", # required
-    #         destination_port: 1, # required
-    #         interface: { # required
-    #           name: "__string", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] destination_ip
     #   The IP address where you want MediaConnect to send contents of the
     #   media stream.
@@ -1152,14 +669,6 @@ module Aws::MediaConnect
     # convert the content. These fields only apply to outputs on flows that
     # have a CDI source.
     #
-    # @note When making an API call, you may pass EncodingParametersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         compression_factor: 1.0, # required
-    #         encoder_profile: "main", # required, accepts main, high
-    #       }
-    #
     # @!attribute [rw] compression_factor
     #   A value that is used to calculate compression for an output. The
     #   bitrate of the output is calculated as follows: Output bitrate = (1
@@ -1186,21 +695,6 @@ module Aws::MediaConnect
     end
 
     # Information about the encryption of the flow.
-    #
-    # @note When making an API call, you may pass Encryption
-    #   data as a hash:
-    #
-    #       {
-    #         algorithm: "aes128", # accepts aes128, aes192, aes256
-    #         constant_initialization_vector: "__string",
-    #         device_id: "__string",
-    #         key_type: "speke", # accepts speke, static-key, srt-password
-    #         region: "__string",
-    #         resource_id: "__string",
-    #         role_arn: "__string", # required
-    #         secret_arn: "__string",
-    #         url: "__string",
-    #       }
     #
     # @!attribute [rw] algorithm
     #   The type of algorithm that is used for the encryption (such as
@@ -1320,18 +814,6 @@ module Aws::MediaConnect
     end
 
     # The settings for source failover.
-    #
-    # @note When making an API call, you may pass FailoverConfig
-    #   data as a hash:
-    #
-    #       {
-    #         failover_mode: "MERGE", # accepts MERGE, FAILOVER
-    #         recovery_window: 1,
-    #         source_priority: {
-    #           primary_source: "__string",
-    #         },
-    #         state: "ENABLED", # accepts ENABLED, DISABLED
-    #       }
     #
     # @!attribute [rw] failover_mode
     #   The type of failover you choose for this flow. MERGE combines the
@@ -1498,19 +980,6 @@ module Aws::MediaConnect
 
     # The settings that you want to use to define the media stream.
     #
-    # @note When making an API call, you may pass FmtpRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_order: "__string",
-    #         colorimetry: "BT601", # accepts BT601, BT709, BT2020, BT2100, ST2065-1, ST2065-3, XYZ
-    #         exact_framerate: "__string",
-    #         par: "__string",
-    #         range: "NARROW", # accepts NARROW, FULL, FULLPROTECT
-    #         scan_mode: "progressive", # accepts progressive, interlace, progressive-segmented-frame
-    #         tcs: "SDR", # accepts SDR, PQ, HLG, LINEAR, BT2100LINPQ, BT2100LINHLG, ST2065-1, ST428-1, DENSITY
-    #       }
-    #
     # @!attribute [rw] channel_order
     #   The format of the audio channel.
     #   @return [String]
@@ -1573,28 +1042,6 @@ module Aws::MediaConnect
     end
 
     # The entitlements that you want to grant on a flow.
-    #
-    # @note When making an API call, you may pass GrantEntitlementRequest
-    #   data as a hash:
-    #
-    #       {
-    #         data_transfer_subscriber_fee_percent: 1,
-    #         description: "__string",
-    #         encryption: {
-    #           algorithm: "aes128", # accepts aes128, aes192, aes256
-    #           constant_initialization_vector: "__string",
-    #           device_id: "__string",
-    #           key_type: "speke", # accepts speke, static-key, srt-password
-    #           region: "__string",
-    #           resource_id: "__string",
-    #           role_arn: "__string", # required
-    #           secret_arn: "__string",
-    #           url: "__string",
-    #         },
-    #         entitlement_status: "ENABLED", # accepts ENABLED, DISABLED
-    #         name: "__string",
-    #         subscribers: ["__string"], # required
-    #       }
     #
     # @!attribute [rw] data_transfer_subscriber_fee_percent
     #   Percentage from 0-100 of the data transfer cost to be billed to the
@@ -1661,33 +1108,6 @@ module Aws::MediaConnect
 
     # Grants an entitlement on a flow.
     #
-    # @note When making an API call, you may pass GrantFlowEntitlementsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         entitlements: [ # required
-    #           {
-    #             data_transfer_subscriber_fee_percent: 1,
-    #             description: "__string",
-    #             encryption: {
-    #               algorithm: "aes128", # accepts aes128, aes192, aes256
-    #               constant_initialization_vector: "__string",
-    #               device_id: "__string",
-    #               key_type: "speke", # accepts speke, static-key, srt-password
-    #               region: "__string",
-    #               resource_id: "__string",
-    #               role_arn: "__string", # required
-    #               secret_arn: "__string",
-    #               url: "__string",
-    #             },
-    #             entitlement_status: "ENABLED", # accepts ENABLED, DISABLED
-    #             name: "__string",
-    #             subscribers: ["__string"], # required
-    #           },
-    #         ],
-    #         flow_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] entitlements
     #   The list of entitlements that you want to grant.
     #   @return [Array<Types::GrantEntitlementRequest>]
@@ -1752,16 +1172,6 @@ module Aws::MediaConnect
     # The transport parameters that you want to associate with an incoming
     # media stream.
     #
-    # @note When making an API call, you may pass InputConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         input_port: 1, # required
-    #         interface: { # required
-    #           name: "__string", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] input_port
     #   The port that you want the flow to listen on for an incoming media
     #   stream.
@@ -1799,13 +1209,6 @@ module Aws::MediaConnect
     # The VPC interface that you want to designate where the media stream is
     # coming from or going to.
     #
-    # @note When making an API call, you may pass InterfaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the VPC interface.
     #   @return [String]
@@ -1833,14 +1236,6 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEntitlementsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [Integer]
     #
@@ -1883,14 +1278,6 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFlowsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [Integer]
     #
@@ -1931,14 +1318,6 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListOfferingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [Integer]
     #
@@ -1984,14 +1363,6 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListReservationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [Integer]
     #
@@ -2037,13 +1408,6 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   @return [String]
     #
@@ -2255,22 +1619,6 @@ module Aws::MediaConnect
 
     # Attributes that are related to the media stream.
     #
-    # @note When making an API call, you may pass MediaStreamAttributesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fmtp: {
-    #           channel_order: "__string",
-    #           colorimetry: "BT601", # accepts BT601, BT709, BT2020, BT2100, ST2065-1, ST2065-3, XYZ
-    #           exact_framerate: "__string",
-    #           par: "__string",
-    #           range: "NARROW", # accepts NARROW, FULL, FULLPROTECT
-    #           scan_mode: "progressive", # accepts progressive, interlace, progressive-segmented-frame
-    #           tcs: "SDR", # accepts SDR, PQ, HLG, LINEAR, BT2100LINPQ, BT2100LINHLG, ST2065-1, ST428-1, DENSITY
-    #         },
-    #         lang: "__string",
-    #       }
-    #
     # @!attribute [rw] fmtp
     #   The settings that you want to use to define the media stream.
     #   @return [Types::FmtpRequest]
@@ -2325,27 +1673,6 @@ module Aws::MediaConnect
 
     # The media stream that you want to associate with the output, and the
     # parameters for that association.
-    #
-    # @note When making an API call, you may pass MediaStreamOutputConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         destination_configurations: [
-    #           {
-    #             destination_ip: "__string", # required
-    #             destination_port: 1, # required
-    #             interface: { # required
-    #               name: "__string", # required
-    #             },
-    #           },
-    #         ],
-    #         encoding_name: "jxsv", # required, accepts jxsv, raw, smpte291, pcm
-    #         encoding_parameters: {
-    #           compression_factor: 1.0, # required
-    #           encoder_profile: "main", # required, accepts main, high
-    #         },
-    #         media_stream_name: "__string", # required
-    #       }
     #
     # @!attribute [rw] destination_configurations
     #   The transport parameters that you want to associate with the media
@@ -2413,22 +1740,6 @@ module Aws::MediaConnect
 
     # The definition of a media stream that you want to associate with the
     # source.
-    #
-    # @note When making an API call, you may pass MediaStreamSourceConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         encoding_name: "jxsv", # required, accepts jxsv, raw, smpte291, pcm
-    #         input_configurations: [
-    #           {
-    #             input_port: 1, # required
-    #             interface: { # required
-    #               name: "__string", # required
-    #             },
-    #           },
-    #         ],
-    #         media_stream_name: "__string", # required
-    #       }
     #
     # @!attribute [rw] encoding_name
     #   The format you want to use to encode the data. For ancillary data
@@ -2633,15 +1944,6 @@ module Aws::MediaConnect
     # in your AWS account. If you already have an active reservation, you
     # can't purchase another offering.
     #
-    # @note When making an API call, you may pass PurchaseOfferingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         offering_arn: "__string", # required
-    #         reservation_name: "__string", # required
-    #         start: "__string", # required
-    #       }
-    #
     # @!attribute [rw] offering_arn
     #   @return [String]
     #
@@ -2689,14 +1991,6 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RemoveFlowMediaStreamRequest
-    #   data as a hash:
-    #
-    #       {
-    #         flow_arn: "__string", # required
-    #         media_stream_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] flow_arn
     #   @return [String]
     #
@@ -2731,14 +2025,6 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RemoveFlowOutputRequest
-    #   data as a hash:
-    #
-    #       {
-    #         flow_arn: "__string", # required
-    #         output_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] flow_arn
     #   @return [String]
     #
@@ -2774,14 +2060,6 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RemoveFlowSourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         flow_arn: "__string", # required
-    #         source_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] flow_arn
     #   @return [String]
     #
@@ -2817,14 +2095,6 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RemoveFlowVpcInterfaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         flow_arn: "__string", # required
-    #         vpc_interface_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] flow_arn
     #   @return [String]
     #
@@ -2999,14 +2269,6 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RevokeFlowEntitlementRequest
-    #   data as a hash:
-    #
-    #       {
-    #         entitlement_arn: "__string", # required
-    #         flow_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] entitlement_arn
     #   @return [String]
     #
@@ -3059,53 +2321,6 @@ module Aws::MediaConnect
     end
 
     # The settings for the source of the flow.
-    #
-    # @note When making an API call, you may pass SetSourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         decryption: {
-    #           algorithm: "aes128", # accepts aes128, aes192, aes256
-    #           constant_initialization_vector: "__string",
-    #           device_id: "__string",
-    #           key_type: "speke", # accepts speke, static-key, srt-password
-    #           region: "__string",
-    #           resource_id: "__string",
-    #           role_arn: "__string", # required
-    #           secret_arn: "__string",
-    #           url: "__string",
-    #         },
-    #         description: "__string",
-    #         entitlement_arn: "__string",
-    #         ingest_port: 1,
-    #         max_bitrate: 1,
-    #         max_latency: 1,
-    #         max_sync_buffer: 1,
-    #         media_stream_source_configurations: [
-    #           {
-    #             encoding_name: "jxsv", # required, accepts jxsv, raw, smpte291, pcm
-    #             input_configurations: [
-    #               {
-    #                 input_port: 1, # required
-    #                 interface: { # required
-    #                   name: "__string", # required
-    #                 },
-    #               },
-    #             ],
-    #             media_stream_name: "__string", # required
-    #           },
-    #         ],
-    #         min_latency: 1,
-    #         name: "__string",
-    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos
-    #         sender_control_port: 1,
-    #         sender_ip_address: "__string",
-    #         source_listener_address: "__string",
-    #         source_listener_port: 1,
-    #         stream_id: "__string",
-    #         vpc_interface_name: "__string",
-    #         whitelist_cidr: "__string",
-    #       }
     #
     # @!attribute [rw] decryption
     #   The type of encryption that is used on the content ingested from
@@ -3318,13 +2533,6 @@ module Aws::MediaConnect
     # The priority you want to assign to a source. You can have a primary
     # stream and a backup stream or two equally prioritized streams.
     #
-    # @note When making an API call, you may pass SourcePriority
-    #   data as a hash:
-    #
-    #       {
-    #         primary_source: "__string",
-    #       }
-    #
     # @!attribute [rw] primary_source
     #   The name of the source you choose as the primary source for this
     #   flow.
@@ -3338,13 +2546,6 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartFlowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         flow_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] flow_arn
     #   @return [String]
     #
@@ -3375,13 +2576,6 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopFlowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         flow_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] flow_arn
     #   @return [String]
     #
@@ -3415,16 +2609,6 @@ module Aws::MediaConnect
     # The tags to add to the resource. Tag keys can have a maximum character
     # length of 128 characters, and tag values can have a maximum length of
     # 256 characters.
-    #
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "__string", # required
-    #         tags: { # required
-    #           "__string" => "__string",
-    #         },
-    #       }
     #
     # @!attribute [rw] resource_arn
     #   @return [String]
@@ -3548,14 +2732,6 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "__string", # required
-    #         tag_keys: ["__string"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   @return [String]
     #
@@ -3572,21 +2748,6 @@ module Aws::MediaConnect
     end
 
     # Information about the encryption of the flow.
-    #
-    # @note When making an API call, you may pass UpdateEncryption
-    #   data as a hash:
-    #
-    #       {
-    #         algorithm: "aes128", # accepts aes128, aes192, aes256
-    #         constant_initialization_vector: "__string",
-    #         device_id: "__string",
-    #         key_type: "speke", # accepts speke, static-key, srt-password
-    #         region: "__string",
-    #         resource_id: "__string",
-    #         role_arn: "__string",
-    #         secret_arn: "__string",
-    #         url: "__string",
-    #       }
     #
     # @!attribute [rw] algorithm
     #   The type of algorithm that is used for the encryption (such as
@@ -3659,18 +2820,6 @@ module Aws::MediaConnect
 
     # The settings for source failover.
     #
-    # @note When making an API call, you may pass UpdateFailoverConfig
-    #   data as a hash:
-    #
-    #       {
-    #         failover_mode: "MERGE", # accepts MERGE, FAILOVER
-    #         recovery_window: 1,
-    #         source_priority: {
-    #           primary_source: "__string",
-    #         },
-    #         state: "ENABLED", # accepts ENABLED, DISABLED
-    #       }
-    #
     # @!attribute [rw] failover_mode
     #   The type of failover you choose for this flow. MERGE combines the
     #   source streams into a single stream, allowing graceful recovery from
@@ -3702,28 +2851,6 @@ module Aws::MediaConnect
     end
 
     # The updates that you want to make to a specific entitlement.
-    #
-    # @note When making an API call, you may pass UpdateFlowEntitlementRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "__string",
-    #         encryption: {
-    #           algorithm: "aes128", # accepts aes128, aes192, aes256
-    #           constant_initialization_vector: "__string",
-    #           device_id: "__string",
-    #           key_type: "speke", # accepts speke, static-key, srt-password
-    #           region: "__string",
-    #           resource_id: "__string",
-    #           role_arn: "__string",
-    #           secret_arn: "__string",
-    #           url: "__string",
-    #         },
-    #         entitlement_arn: "__string", # required
-    #         entitlement_status: "ENABLED", # accepts ENABLED, DISABLED
-    #         flow_arn: "__string", # required
-    #         subscribers: ["__string"],
-    #       }
     #
     # @!attribute [rw] description
     #   A description of the entitlement. This description appears only on
@@ -3792,30 +2919,6 @@ module Aws::MediaConnect
 
     # Update a media stream on a flow.
     #
-    # @note When making an API call, you may pass UpdateFlowMediaStreamRequest
-    #   data as a hash:
-    #
-    #       {
-    #         attributes: {
-    #           fmtp: {
-    #             channel_order: "__string",
-    #             colorimetry: "BT601", # accepts BT601, BT709, BT2020, BT2100, ST2065-1, ST2065-3, XYZ
-    #             exact_framerate: "__string",
-    #             par: "__string",
-    #             range: "NARROW", # accepts NARROW, FULL, FULLPROTECT
-    #             scan_mode: "progressive", # accepts progressive, interlace, progressive-segmented-frame
-    #             tcs: "SDR", # accepts SDR, PQ, HLG, LINEAR, BT2100LINPQ, BT2100LINHLG, ST2065-1, ST428-1, DENSITY
-    #           },
-    #           lang: "__string",
-    #         },
-    #         clock_rate: 1,
-    #         description: "__string",
-    #         flow_arn: "__string", # required
-    #         media_stream_name: "__string", # required
-    #         media_stream_type: "video", # accepts video, audio, ancillary-data
-    #         video_format: "__string",
-    #       }
-    #
     # @!attribute [rw] attributes
     #   The attributes that you want to assign to the media stream.
     #   @return [Types::MediaStreamAttributesRequest]
@@ -3880,59 +2983,6 @@ module Aws::MediaConnect
 
     # The updates that you want to make to an existing output of an existing
     # flow.
-    #
-    # @note When making an API call, you may pass UpdateFlowOutputRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cidr_allow_list: ["__string"],
-    #         description: "__string",
-    #         destination: "__string",
-    #         encryption: {
-    #           algorithm: "aes128", # accepts aes128, aes192, aes256
-    #           constant_initialization_vector: "__string",
-    #           device_id: "__string",
-    #           key_type: "speke", # accepts speke, static-key, srt-password
-    #           region: "__string",
-    #           resource_id: "__string",
-    #           role_arn: "__string",
-    #           secret_arn: "__string",
-    #           url: "__string",
-    #         },
-    #         flow_arn: "__string", # required
-    #         max_latency: 1,
-    #         media_stream_output_configurations: [
-    #           {
-    #             destination_configurations: [
-    #               {
-    #                 destination_ip: "__string", # required
-    #                 destination_port: 1, # required
-    #                 interface: { # required
-    #                   name: "__string", # required
-    #                 },
-    #               },
-    #             ],
-    #             encoding_name: "jxsv", # required, accepts jxsv, raw, smpte291, pcm
-    #             encoding_parameters: {
-    #               compression_factor: 1.0, # required
-    #               encoder_profile: "main", # required, accepts main, high
-    #             },
-    #             media_stream_name: "__string", # required
-    #           },
-    #         ],
-    #         min_latency: 1,
-    #         output_arn: "__string", # required
-    #         port: 1,
-    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos
-    #         remote_id: "__string",
-    #         sender_control_port: 1,
-    #         sender_ip_address: "__string",
-    #         smoothing_latency: 1,
-    #         stream_id: "__string",
-    #         vpc_interface_attachment: {
-    #           vpc_interface_name: "__string",
-    #         },
-    #       }
     #
     # @!attribute [rw] cidr_allow_list
     #   The range of IP addresses that should be allowed to initiate output
@@ -4064,26 +3114,6 @@ module Aws::MediaConnect
 
     # Updates an existing flow.
     #
-    # @note When making an API call, you may pass UpdateFlowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         flow_arn: "__string", # required
-    #         source_failover_config: {
-    #           failover_mode: "MERGE", # accepts MERGE, FAILOVER
-    #           recovery_window: 1,
-    #           source_priority: {
-    #             primary_source: "__string",
-    #           },
-    #           state: "ENABLED", # accepts ENABLED, DISABLED
-    #         },
-    #         maintenance: {
-    #           maintenance_day: "Monday", # accepts Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
-    #           maintenance_scheduled_date: "__string",
-    #           maintenance_start_hour: "__string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] flow_arn
     #   @return [String]
     #
@@ -4122,54 +3152,6 @@ module Aws::MediaConnect
 
     # The updates that you want to make to an existing source of an existing
     # flow.
-    #
-    # @note When making an API call, you may pass UpdateFlowSourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         decryption: {
-    #           algorithm: "aes128", # accepts aes128, aes192, aes256
-    #           constant_initialization_vector: "__string",
-    #           device_id: "__string",
-    #           key_type: "speke", # accepts speke, static-key, srt-password
-    #           region: "__string",
-    #           resource_id: "__string",
-    #           role_arn: "__string",
-    #           secret_arn: "__string",
-    #           url: "__string",
-    #         },
-    #         description: "__string",
-    #         entitlement_arn: "__string",
-    #         flow_arn: "__string", # required
-    #         ingest_port: 1,
-    #         max_bitrate: 1,
-    #         max_latency: 1,
-    #         max_sync_buffer: 1,
-    #         media_stream_source_configurations: [
-    #           {
-    #             encoding_name: "jxsv", # required, accepts jxsv, raw, smpte291, pcm
-    #             input_configurations: [
-    #               {
-    #                 input_port: 1, # required
-    #                 interface: { # required
-    #                   name: "__string", # required
-    #                 },
-    #               },
-    #             ],
-    #             media_stream_name: "__string", # required
-    #           },
-    #         ],
-    #         min_latency: 1,
-    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos
-    #         sender_control_port: 1,
-    #         sender_ip_address: "__string",
-    #         source_arn: "__string", # required
-    #         source_listener_address: "__string",
-    #         source_listener_port: 1,
-    #         stream_id: "__string",
-    #         vpc_interface_name: "__string",
-    #         whitelist_cidr: "__string",
-    #       }
     #
     # @!attribute [rw] decryption
     #   The type of encryption used on the content ingested from this
@@ -4312,15 +3294,6 @@ module Aws::MediaConnect
 
     # Update maintenance setting for a flow
     #
-    # @note When making an API call, you may pass UpdateMaintenance
-    #   data as a hash:
-    #
-    #       {
-    #         maintenance_day: "Monday", # accepts Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
-    #         maintenance_scheduled_date: "__string",
-    #         maintenance_start_hour: "__string",
-    #       }
-    #
     # @!attribute [rw] maintenance_day
     #   A day of a week when the maintenance will happen. use
     #   Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday.
@@ -4390,13 +3363,6 @@ module Aws::MediaConnect
 
     # The settings for attaching a VPC interface to an output.
     #
-    # @note When making an API call, you may pass VpcInterfaceAttachment
-    #   data as a hash:
-    #
-    #       {
-    #         vpc_interface_name: "__string",
-    #       }
-    #
     # @!attribute [rw] vpc_interface_name
     #   The name of the VPC interface to use for this output.
     #   @return [String]
@@ -4410,17 +3376,6 @@ module Aws::MediaConnect
     end
 
     # Desired VPC Interface for a Flow
-    #
-    # @note When making an API call, you may pass VpcInterfaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "__string", # required
-    #         network_interface_type: "ena", # accepts ena, efa
-    #         role_arn: "__string", # required
-    #         security_group_ids: ["__string"], # required
-    #         subnet_id: "__string", # required
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the VPC Interface. This value must be unique within the

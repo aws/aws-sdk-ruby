@@ -25,10 +25,6 @@ module Aws::RDSDataService
 
     # Contains an array.
     #
-    # @note ArrayValue is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note ArrayValue is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ArrayValue corresponding to the set member.
-    #
     # @!attribute [rw] boolean_values
     #   An array of Boolean values.
     #   @return [Array<Boolean>]
@@ -86,45 +82,6 @@ module Aws::RDSDataService
 
     # The request parameters represent the input of a SQL statement over an
     # array of data.
-    #
-    # @note When making an API call, you may pass BatchExecuteStatementRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         secret_arn: "Arn", # required
-    #         sql: "SqlStatement", # required
-    #         database: "DbName",
-    #         schema: "DbName",
-    #         parameter_sets: [
-    #           [
-    #             {
-    #               name: "ParameterName",
-    #               value: {
-    #                 is_null: false,
-    #                 boolean_value: false,
-    #                 long_value: 1,
-    #                 double_value: 1.0,
-    #                 string_value: "String",
-    #                 blob_value: "data",
-    #                 array_value: {
-    #                   boolean_values: [false],
-    #                   long_values: [1],
-    #                   double_values: [1.0],
-    #                   string_values: ["String"],
-    #                   array_values: [
-    #                     {
-    #                       # recursive ArrayValue
-    #                     },
-    #                   ],
-    #                 },
-    #               },
-    #               type_hint: "JSON", # accepts JSON, UUID, TIMESTAMP, DATE, TIME, DECIMAL
-    #             },
-    #           ],
-    #         ],
-    #         transaction_id: "Id",
-    #       }
     #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
@@ -217,16 +174,6 @@ module Aws::RDSDataService
 
     # The request parameters represent the input of a request to start a SQL
     # transaction.
-    #
-    # @note When making an API call, you may pass BeginTransactionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         secret_arn: "Arn", # required
-    #         database: "DbName",
-    #         schema: "DbName",
-    #       }
     #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
@@ -352,15 +299,6 @@ module Aws::RDSDataService
     # The request parameters represent the input of a commit transaction
     # request.
     #
-    # @note When making an API call, you may pass CommitTransactionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         secret_arn: "Arn", # required
-    #         transaction_id: "Id", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
     #   @return [String]
@@ -400,17 +338,6 @@ module Aws::RDSDataService
 
     # The request parameters represent the input of a request to run one or
     # more SQL statements.
-    #
-    # @note When making an API call, you may pass ExecuteSqlRequest
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_or_instance_arn: "Arn", # required
-    #         aws_secret_store_arn: "Arn", # required
-    #         sql_statements: "SqlStatement", # required
-    #         database: "DbName",
-    #         schema: "DbName",
-    #       }
     #
     # @!attribute [rw] db_cluster_or_instance_arn
     #   The ARN of the Aurora Serverless DB cluster.
@@ -474,50 +401,6 @@ module Aws::RDSDataService
 
     # The request parameters represent the input of a request to run a SQL
     # statement against a database.
-    #
-    # @note When making an API call, you may pass ExecuteStatementRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         secret_arn: "Arn", # required
-    #         sql: "SqlStatement", # required
-    #         database: "DbName",
-    #         schema: "DbName",
-    #         parameters: [
-    #           {
-    #             name: "ParameterName",
-    #             value: {
-    #               is_null: false,
-    #               boolean_value: false,
-    #               long_value: 1,
-    #               double_value: 1.0,
-    #               string_value: "String",
-    #               blob_value: "data",
-    #               array_value: {
-    #                 boolean_values: [false],
-    #                 long_values: [1],
-    #                 double_values: [1.0],
-    #                 string_values: ["String"],
-    #                 array_values: [
-    #                   {
-    #                     # recursive ArrayValue
-    #                   },
-    #                 ],
-    #               },
-    #             },
-    #             type_hint: "JSON", # accepts JSON, UUID, TIMESTAMP, DATE, TIME, DECIMAL
-    #           },
-    #         ],
-    #         transaction_id: "Id",
-    #         include_result_metadata: false,
-    #         continue_after_timeout: false,
-    #         result_set_options: {
-    #           decimal_return_type: "STRING", # accepts STRING, DOUBLE_OR_LONG
-    #           long_return_type: "STRING", # accepts STRING, LONG
-    #         },
-    #         format_records_as: "NONE", # accepts NONE, JSON
-    #       }
     #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
@@ -669,10 +552,6 @@ module Aws::RDSDataService
     end
 
     # Contains a value.
-    #
-    # @note Field is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note Field is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Field corresponding to the set member.
     #
     # @!attribute [rw] is_null
     #   A NULL value.
@@ -828,14 +707,6 @@ module Aws::RDSDataService
 
     # Options that control how the result set is returned.
     #
-    # @note When making an API call, you may pass ResultSetOptions
-    #   data as a hash:
-    #
-    #       {
-    #         decimal_return_type: "STRING", # accepts STRING, DOUBLE_OR_LONG
-    #         long_return_type: "STRING", # accepts STRING, LONG
-    #       }
-    #
     # @!attribute [rw] decimal_return_type
     #   A value that indicates how a field of `DECIMAL` type is represented
     #   in the response. The value of `STRING`, the default, specifies that
@@ -868,15 +739,6 @@ module Aws::RDSDataService
 
     # The request parameters represent the input of a request to perform a
     # rollback of a transaction.
-    #
-    # @note When making an API call, you may pass RollbackTransactionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         secret_arn: "Arn", # required
-    #         transaction_id: "Id", # required
-    #       }
     #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
@@ -922,33 +784,6 @@ module Aws::RDSDataService
     class ServiceUnavailableError < Aws::EmptyStructure; end
 
     # A parameter used in a SQL statement.
-    #
-    # @note When making an API call, you may pass SqlParameter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ParameterName",
-    #         value: {
-    #           is_null: false,
-    #           boolean_value: false,
-    #           long_value: 1,
-    #           double_value: 1.0,
-    #           string_value: "String",
-    #           blob_value: "data",
-    #           array_value: {
-    #             boolean_values: [false],
-    #             long_values: [1],
-    #             double_values: [1.0],
-    #             string_values: ["String"],
-    #             array_values: [
-    #               {
-    #                 # recursive ArrayValue
-    #               },
-    #             ],
-    #           },
-    #         },
-    #         type_hint: "JSON", # accepts JSON, UUID, TIMESTAMP, DATE, TIME, DECIMAL
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the parameter.
@@ -1072,8 +907,6 @@ module Aws::RDSDataService
     # Contains the value of a column.
     #
     #      <note> <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation. Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p> </note>
-    #
-    # @note Value is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Value corresponding to the set member.
     #
     # @!attribute [rw] is_null
     #   A NULL value.

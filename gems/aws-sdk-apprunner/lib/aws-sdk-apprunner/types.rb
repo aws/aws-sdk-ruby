@@ -10,15 +10,6 @@
 module Aws::AppRunner
   module Types
 
-    # @note When making an API call, you may pass AssociateCustomDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_arn: "AppRunnerResourceArn", # required
-    #         domain_name: "DomainName", # required
-    #         enable_www_subdomain: false,
-    #       }
-    #
     # @!attribute [rw] service_arn
     #   The Amazon Resource Name (ARN) of the App Runner service that you
     #   want to associate a custom domain name with.
@@ -80,14 +71,6 @@ module Aws::AppRunner
     # Describes resources needed to authenticate access to some source
     # repositories. The specific resource depends on the repository
     # provider.
-    #
-    # @note When making an API call, you may pass AuthenticationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         connection_arn: "AppRunnerResourceArn",
-    #         access_role_arn: "RoleArn",
-    #       }
     #
     # @!attribute [rw] connection_arn
     #   The Amazon Resource Name (ARN) of the App Runner connection that
@@ -278,22 +261,6 @@ module Aws::AppRunner
     # Describes the configuration that App Runner uses to build and run an
     # App Runner service from a source code repository.
     #
-    # @note When making an API call, you may pass CodeConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_source: "REPOSITORY", # required, accepts REPOSITORY, API
-    #         code_configuration_values: {
-    #           runtime: "PYTHON_3", # required, accepts PYTHON_3, NODEJS_12, NODEJS_14, CORRETTO_8, CORRETTO_11, NODEJS_16, GO_1, DOTNET_6, PHP_81, RUBY_31
-    #           build_command: "BuildCommand",
-    #           start_command: "StartCommand",
-    #           port: "String",
-    #           runtime_environment_variables: {
-    #             "RuntimeEnvironmentVariablesKey" => "RuntimeEnvironmentVariablesValue",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] configuration_source
     #   The source of the App Runner configuration. Values are interpreted
     #   as follows:
@@ -327,19 +294,6 @@ module Aws::AppRunner
     # App Runner service. This type doesn't support the full set of
     # possible configuration options. Fur full configuration capabilities,
     # use a `apprunner.yaml` file in the source code repository.
-    #
-    # @note When making an API call, you may pass CodeConfigurationValues
-    #   data as a hash:
-    #
-    #       {
-    #         runtime: "PYTHON_3", # required, accepts PYTHON_3, NODEJS_12, NODEJS_14, CORRETTO_8, CORRETTO_11, NODEJS_16, GO_1, DOTNET_6, PHP_81, RUBY_31
-    #         build_command: "BuildCommand",
-    #         start_command: "StartCommand",
-    #         port: "String",
-    #         runtime_environment_variables: {
-    #           "RuntimeEnvironmentVariablesKey" => "RuntimeEnvironmentVariablesValue",
-    #         },
-    #       }
     #
     # @!attribute [rw] runtime
     #   A runtime environment type for building and running an App Runner
@@ -379,29 +333,6 @@ module Aws::AppRunner
     end
 
     # Describes a source code repository.
-    #
-    # @note When making an API call, you may pass CodeRepository
-    #   data as a hash:
-    #
-    #       {
-    #         repository_url: "String", # required
-    #         source_code_version: { # required
-    #           type: "BRANCH", # required, accepts BRANCH
-    #           value: "String", # required
-    #         },
-    #         code_configuration: {
-    #           configuration_source: "REPOSITORY", # required, accepts REPOSITORY, API
-    #           code_configuration_values: {
-    #             runtime: "PYTHON_3", # required, accepts PYTHON_3, NODEJS_12, NODEJS_14, CORRETTO_8, CORRETTO_11, NODEJS_16, GO_1, DOTNET_6, PHP_81, RUBY_31
-    #             build_command: "BuildCommand",
-    #             start_command: "StartCommand",
-    #             port: "String",
-    #             runtime_environment_variables: {
-    #               "RuntimeEnvironmentVariablesKey" => "RuntimeEnvironmentVariablesValue",
-    #             },
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] repository_url
     #   The location of the repository that contains the source code.
@@ -504,22 +435,6 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAutoScalingConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         auto_scaling_configuration_name: "AutoScalingConfigurationName", # required
-    #         max_concurrency: 1,
-    #         min_size: 1,
-    #         max_size: 1,
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] auto_scaling_configuration_name
     #   A name for the auto scaling configuration. When you use it for the
     #   first time in an Amazon Web Services Region, App Runner creates
@@ -600,20 +515,6 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateConnectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connection_name: "ConnectionName", # required
-    #         provider_type: "GITHUB", # required, accepts GITHUB
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] connection_name
     #   A name for the new connection. It must be unique across all App
     #   Runner connections for the Amazon Web Services account in the Amazon
@@ -652,22 +553,6 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateObservabilityConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         observability_configuration_name: "ObservabilityConfigurationName", # required
-    #         trace_configuration: {
-    #           vendor: "AWSXRAY", # required, accepts AWSXRAY
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] observability_configuration_name
     #   A name for the observability configuration. When you use it for the
     #   first time in an Amazon Web Services Region, App Runner creates
@@ -720,86 +605,6 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateServiceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_name: "ServiceName", # required
-    #         source_configuration: { # required
-    #           code_repository: {
-    #             repository_url: "String", # required
-    #             source_code_version: { # required
-    #               type: "BRANCH", # required, accepts BRANCH
-    #               value: "String", # required
-    #             },
-    #             code_configuration: {
-    #               configuration_source: "REPOSITORY", # required, accepts REPOSITORY, API
-    #               code_configuration_values: {
-    #                 runtime: "PYTHON_3", # required, accepts PYTHON_3, NODEJS_12, NODEJS_14, CORRETTO_8, CORRETTO_11, NODEJS_16, GO_1, DOTNET_6, PHP_81, RUBY_31
-    #                 build_command: "BuildCommand",
-    #                 start_command: "StartCommand",
-    #                 port: "String",
-    #                 runtime_environment_variables: {
-    #                   "RuntimeEnvironmentVariablesKey" => "RuntimeEnvironmentVariablesValue",
-    #                 },
-    #               },
-    #             },
-    #           },
-    #           image_repository: {
-    #             image_identifier: "ImageIdentifier", # required
-    #             image_configuration: {
-    #               runtime_environment_variables: {
-    #                 "RuntimeEnvironmentVariablesKey" => "RuntimeEnvironmentVariablesValue",
-    #               },
-    #               start_command: "StartCommand",
-    #               port: "String",
-    #             },
-    #             image_repository_type: "ECR", # required, accepts ECR, ECR_PUBLIC
-    #           },
-    #           auto_deployments_enabled: false,
-    #           authentication_configuration: {
-    #             connection_arn: "AppRunnerResourceArn",
-    #             access_role_arn: "RoleArn",
-    #           },
-    #         },
-    #         instance_configuration: {
-    #           cpu: "Cpu",
-    #           memory: "Memory",
-    #           instance_role_arn: "RoleArn",
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         encryption_configuration: {
-    #           kms_key: "KmsKeyArn", # required
-    #         },
-    #         health_check_configuration: {
-    #           protocol: "TCP", # accepts TCP, HTTP
-    #           path: "HealthCheckPath",
-    #           interval: 1,
-    #           timeout: 1,
-    #           healthy_threshold: 1,
-    #           unhealthy_threshold: 1,
-    #         },
-    #         auto_scaling_configuration_arn: "AppRunnerResourceArn",
-    #         network_configuration: {
-    #           egress_configuration: {
-    #             egress_type: "DEFAULT", # accepts DEFAULT, VPC
-    #             vpc_connector_arn: "AppRunnerResourceArn",
-    #           },
-    #           ingress_configuration: {
-    #             is_publicly_accessible: false,
-    #           },
-    #         },
-    #         observability_configuration: {
-    #           observability_enabled: false, # required
-    #           observability_configuration_arn: "AppRunnerResourceArn",
-    #         },
-    #       }
-    #
     # @!attribute [rw] service_name
     #   A name for the App Runner service. It must be unique across all the
     #   running App Runner services in your Amazon Web Services account in
@@ -896,21 +701,6 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateVpcConnectorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         vpc_connector_name: "VpcConnectorName", # required
-    #         subnets: ["String"], # required
-    #         security_groups: ["String"],
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] vpc_connector_name
     #   A name for the VPC connector.
     #   @return [String]
@@ -962,24 +752,6 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateVpcIngressConnectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_arn: "AppRunnerResourceArn", # required
-    #         vpc_ingress_connection_name: "VpcIngressConnectionName", # required
-    #         ingress_vpc_configuration: { # required
-    #           vpc_id: "String",
-    #           vpc_endpoint_id: "String",
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] service_arn
     #   The Amazon Resource Name (ARN) for this App Runner service that is
     #   used to create the VPC Ingress Connection resource.
@@ -1061,13 +833,6 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAutoScalingConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         auto_scaling_configuration_arn: "AppRunnerResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] auto_scaling_configuration_arn
     #   The Amazon Resource Name (ARN) of the App Runner auto scaling
     #   configuration that you want to delete.
@@ -1098,13 +863,6 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteConnectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connection_arn: "AppRunnerResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] connection_arn
     #   The Amazon Resource Name (ARN) of the App Runner connection that you
     #   want to delete.
@@ -1131,13 +889,6 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteObservabilityConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         observability_configuration_arn: "AppRunnerResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] observability_configuration_arn
     #   The Amazon Resource Name (ARN) of the App Runner observability
     #   configuration that you want to delete.
@@ -1168,13 +919,6 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteServiceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_arn: "AppRunnerResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] service_arn
     #   The Amazon Resource Name (ARN) of the App Runner service that you
     #   want to delete.
@@ -1208,13 +952,6 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteVpcConnectorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         vpc_connector_arn: "AppRunnerResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] vpc_connector_arn
     #   The Amazon Resource Name (ARN) of the App Runner VPC connector that
     #   you want to delete.
@@ -1243,13 +980,6 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteVpcIngressConnectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         vpc_ingress_connection_arn: "AppRunnerResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] vpc_ingress_connection_arn
     #   The Amazon Resource Name (ARN) of the App Runner VPC Ingress
     #   Connection that you want to delete.
@@ -1276,13 +1006,6 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAutoScalingConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         auto_scaling_configuration_arn: "AppRunnerResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] auto_scaling_configuration_arn
     #   The Amazon Resource Name (ARN) of the App Runner auto scaling
     #   configuration that you want a description for.
@@ -1313,15 +1036,6 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeCustomDomainsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_arn: "AppRunnerResourceArn", # required
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] service_arn
     #   The Amazon Resource Name (ARN) of the App Runner service that you
     #   want associated custom domain names to be described for.
@@ -1392,13 +1106,6 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeObservabilityConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         observability_configuration_arn: "AppRunnerResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] observability_configuration_arn
     #   The Amazon Resource Name (ARN) of the App Runner observability
     #   configuration that you want a description for.
@@ -1429,13 +1136,6 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeServiceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_arn: "AppRunnerResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] service_arn
     #   The Amazon Resource Name (ARN) of the App Runner service that you
     #   want a description for.
@@ -1462,13 +1162,6 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeVpcConnectorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         vpc_connector_arn: "AppRunnerResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] vpc_connector_arn
     #   The Amazon Resource Name (ARN) of the App Runner VPC connector that
     #   you want a description for.
@@ -1497,13 +1190,6 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeVpcIngressConnectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         vpc_ingress_connection_arn: "AppRunnerResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] vpc_ingress_connection_arn
     #   The Amazon Resource Name (ARN) of the App Runner VPC Ingress
     #   Connection that you want a description for.
@@ -1530,14 +1216,6 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateCustomDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_arn: "AppRunnerResourceArn", # required
-    #         domain_name: "DomainName", # required
-    #       }
-    #
     # @!attribute [rw] service_arn
     #   The Amazon Resource Name (ARN) of the App Runner service that you
     #   want to disassociate a custom domain name from.
@@ -1589,14 +1267,6 @@ module Aws::AppRunner
     # Describes configuration settings related to outbound network traffic
     # of an App Runner service.
     #
-    # @note When making an API call, you may pass EgressConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         egress_type: "DEFAULT", # accepts DEFAULT, VPC
-    #         vpc_connector_arn: "AppRunnerResourceArn",
-    #       }
-    #
     # @!attribute [rw] egress_type
     #   The type of egress configuration.
     #
@@ -1624,13 +1294,6 @@ module Aws::AppRunner
     # Describes a custom encryption key that App Runner uses to encrypt
     # copies of the source repository and service logs.
     #
-    # @note When making an API call, you may pass EncryptionConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         kms_key: "KmsKeyArn", # required
-    #       }
-    #
     # @!attribute [rw] kms_key
     #   The ARN of the KMS key that's used for encryption.
     #   @return [String]
@@ -1645,18 +1308,6 @@ module Aws::AppRunner
 
     # Describes the settings for the health check that App Runner performs
     # to monitor the health of a service.
-    #
-    # @note When making an API call, you may pass HealthCheckConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         protocol: "TCP", # accepts TCP, HTTP
-    #         path: "HealthCheckPath",
-    #         interval: 1,
-    #         timeout: 1,
-    #         healthy_threshold: 1,
-    #         unhealthy_threshold: 1,
-    #       }
     #
     # @!attribute [rw] protocol
     #   The IP protocol that App Runner uses to perform health checks for
@@ -1719,17 +1370,6 @@ module Aws::AppRunner
     # Describes the configuration that App Runner uses to run an App Runner
     # service using an image pulled from a source image repository.
     #
-    # @note When making an API call, you may pass ImageConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         runtime_environment_variables: {
-    #           "RuntimeEnvironmentVariablesKey" => "RuntimeEnvironmentVariablesValue",
-    #         },
-    #         start_command: "StartCommand",
-    #         port: "String",
-    #       }
-    #
     # @!attribute [rw] runtime_environment_variables
     #   Environment variables that are available to your running App Runner
     #   service. An array of key-value pairs. Keys with a prefix of
@@ -1759,21 +1399,6 @@ module Aws::AppRunner
     end
 
     # Describes a source image repository.
-    #
-    # @note When making an API call, you may pass ImageRepository
-    #   data as a hash:
-    #
-    #       {
-    #         image_identifier: "ImageIdentifier", # required
-    #         image_configuration: {
-    #           runtime_environment_variables: {
-    #             "RuntimeEnvironmentVariablesKey" => "RuntimeEnvironmentVariablesValue",
-    #           },
-    #           start_command: "StartCommand",
-    #           port: "String",
-    #         },
-    #         image_repository_type: "ECR", # required, accepts ECR, ECR_PUBLIC
-    #       }
     #
     # @!attribute [rw] image_identifier
     #   The identifier of an image.
@@ -1808,13 +1433,6 @@ module Aws::AppRunner
 
     # Network configuration settings for inbound network traffic.
     #
-    # @note When making an API call, you may pass IngressConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         is_publicly_accessible: false,
-    #       }
-    #
     # @!attribute [rw] is_publicly_accessible
     #   Specifies whether your App Runner service is publicly accessible. To
     #   make the service publicly accessible set it to `True`. To make the
@@ -1833,14 +1451,6 @@ module Aws::AppRunner
     # The configuration of your VPC and the associated VPC endpoint. The VPC
     # endpoint is an Amazon Web Services PrivateLink resource that allows
     # access to your App Runner services from within an Amazon VPC.
-    #
-    # @note When making an API call, you may pass IngressVpcConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         vpc_id: "String",
-    #         vpc_endpoint_id: "String",
-    #       }
     #
     # @!attribute [rw] vpc_id
     #   The ID of the VPC that is used for the VPC endpoint.
@@ -1861,15 +1471,6 @@ module Aws::AppRunner
 
     # Describes the runtime configuration of an App Runner service instance
     # (scaling unit).
-    #
-    # @note When making an API call, you may pass InstanceConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         cpu: "Cpu",
-    #         memory: "Memory",
-    #         instance_role_arn: "RoleArn",
-    #       }
     #
     # @!attribute [rw] cpu
     #   The number of CPU units reserved for each instance of your App
@@ -1942,16 +1543,6 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAutoScalingConfigurationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         auto_scaling_configuration_name: "AutoScalingConfigurationName",
-    #         latest_only: false,
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] auto_scaling_configuration_name
     #   The name of the App Runner auto scaling configuration that you want
     #   to list. If specified, App Runner lists revisions that share this
@@ -2018,15 +1609,6 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListConnectionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connection_name: "ConnectionName",
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] connection_name
     #   If specified, only this connection is returned. If not specified,
     #   the result isn't filtered by name.
@@ -2080,16 +1662,6 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListObservabilityConfigurationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         observability_configuration_name: "ObservabilityConfigurationName",
-    #         latest_only: false,
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] observability_configuration_name
     #   The name of the App Runner observability configuration that you want
     #   to list. If specified, App Runner lists revisions that share this
@@ -2156,15 +1728,6 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListOperationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_arn: "AppRunnerResourceArn", # required
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] service_arn
     #   The Amazon Resource Name (ARN) of the App Runner service that you
     #   want a list of operations for.
@@ -2218,14 +1781,6 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListServicesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   A token from a previous result page. Used for a paginated request.
     #   The request retrieves the next result page. All other parameter
@@ -2273,13 +1828,6 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AppRunnerResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource that a tag list is
     #   requested for.
@@ -2308,14 +1856,6 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListVpcConnectorsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to include in each response (result
     #   page). It's used for a paginated request.
@@ -2367,14 +1907,6 @@ module Aws::AppRunner
     # provided. It can return either `ServiceArn` or `VpcEndpointId`, or
     # both.
     #
-    # @note When making an API call, you may pass ListVpcIngressConnectionsFilter
-    #   data as a hash:
-    #
-    #       {
-    #         service_arn: "AppRunnerResourceArn",
-    #         vpc_endpoint_id: "String",
-    #       }
-    #
     # @!attribute [rw] service_arn
     #   The Amazon Resource Name (ARN) of a service to filter by.
     #   @return [String]
@@ -2392,18 +1924,6 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListVpcIngressConnectionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter: {
-    #           service_arn: "AppRunnerResourceArn",
-    #           vpc_endpoint_id: "String",
-    #         },
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] filter
     #   The VPC Ingress Connections to be listed based on either the Service
     #   Arn or Vpc Endpoint Id, or both.
@@ -2460,19 +1980,6 @@ module Aws::AppRunner
     # Describes configuration settings related to network traffic of an App
     # Runner service. Consists of embedded objects for each configurable
     # network feature.
-    #
-    # @note When making an API call, you may pass NetworkConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         egress_configuration: {
-    #           egress_type: "DEFAULT", # accepts DEFAULT, VPC
-    #           vpc_connector_arn: "AppRunnerResourceArn",
-    #         },
-    #         ingress_configuration: {
-    #           is_publicly_accessible: false,
-    #         },
-    #       }
     #
     # @!attribute [rw] egress_configuration
     #   Network configuration settings for outbound message traffic.
@@ -2647,13 +2154,6 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PauseServiceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_arn: "AppRunnerResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] service_arn
     #   The Amazon Resource Name (ARN) of the App Runner service that you
     #   want to pause.
@@ -2701,13 +2201,6 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ResumeServiceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_arn: "AppRunnerResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] service_arn
     #   The Amazon Resource Name (ARN) of the App Runner service that you
     #   want to resume.
@@ -2872,14 +2365,6 @@ module Aws::AppRunner
     # choose to enable. They're configured in a separate resource that you
     # associate with your service.
     #
-    # @note When making an API call, you may pass ServiceObservabilityConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         observability_enabled: false, # required
-    #         observability_configuration_arn: "AppRunnerResourceArn",
-    #       }
-    #
     # @!attribute [rw] observability_enabled
     #   When `true`, an observability configuration resource is associated
     #   with the service, and an `ObservabilityConfigurationArn` is
@@ -3007,14 +2492,6 @@ module Aws::AppRunner
     # Identifies a version of code that App Runner refers to within a source
     # code repository.
     #
-    # @note When making an API call, you may pass SourceCodeVersion
-    #   data as a hash:
-    #
-    #       {
-    #         type: "BRANCH", # required, accepts BRANCH
-    #         value: "String", # required
-    #       }
-    #
     # @!attribute [rw] type
     #   The type of version identifier.
     #
@@ -3039,47 +2516,6 @@ module Aws::AppRunner
 
     # Describes the source deployed to an App Runner service. It can be a
     # code or an image repository.
-    #
-    # @note When making an API call, you may pass SourceConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         code_repository: {
-    #           repository_url: "String", # required
-    #           source_code_version: { # required
-    #             type: "BRANCH", # required, accepts BRANCH
-    #             value: "String", # required
-    #           },
-    #           code_configuration: {
-    #             configuration_source: "REPOSITORY", # required, accepts REPOSITORY, API
-    #             code_configuration_values: {
-    #               runtime: "PYTHON_3", # required, accepts PYTHON_3, NODEJS_12, NODEJS_14, CORRETTO_8, CORRETTO_11, NODEJS_16, GO_1, DOTNET_6, PHP_81, RUBY_31
-    #               build_command: "BuildCommand",
-    #               start_command: "StartCommand",
-    #               port: "String",
-    #               runtime_environment_variables: {
-    #                 "RuntimeEnvironmentVariablesKey" => "RuntimeEnvironmentVariablesValue",
-    #               },
-    #             },
-    #           },
-    #         },
-    #         image_repository: {
-    #           image_identifier: "ImageIdentifier", # required
-    #           image_configuration: {
-    #             runtime_environment_variables: {
-    #               "RuntimeEnvironmentVariablesKey" => "RuntimeEnvironmentVariablesValue",
-    #             },
-    #             start_command: "StartCommand",
-    #             port: "String",
-    #           },
-    #           image_repository_type: "ECR", # required, accepts ECR, ECR_PUBLIC
-    #         },
-    #         auto_deployments_enabled: false,
-    #         authentication_configuration: {
-    #           connection_arn: "AppRunnerResourceArn",
-    #           access_role_arn: "RoleArn",
-    #         },
-    #       }
     #
     # @!attribute [rw] code_repository
     #   The description of a source code repository.
@@ -3125,13 +2561,6 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartDeploymentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_arn: "AppRunnerResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] service_arn
     #   The Amazon Resource Name (ARN) of the App Runner service that you
     #   want to manually deploy to.
@@ -3162,14 +2591,6 @@ module Aws::AppRunner
     # Describes a tag that is applied to an App Runner resource. A tag is a
     # metadata item consisting of a key-value pair.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey",
-    #         value: "TagValue",
-    #       }
-    #
     # @!attribute [rw] key
     #   The key of the tag.
     #   @return [String]
@@ -3187,19 +2608,6 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AppRunnerResourceArn", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource that you want to
     #   update tags for.
@@ -3230,13 +2638,6 @@ module Aws::AppRunner
     # Describes the configuration of the tracing feature within an App
     # Runner observability configuration.
     #
-    # @note When making an API call, you may pass TraceConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         vendor: "AWSXRAY", # required, accepts AWSXRAY
-    #       }
-    #
     # @!attribute [rw] vendor
     #   The implementation provider chosen for tracing App Runner services.
     #   @return [String]
@@ -3249,14 +2650,6 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AppRunnerResourceArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource that you want to
     #   remove tags from.
@@ -3281,77 +2674,6 @@ module Aws::AppRunner
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateServiceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_arn: "AppRunnerResourceArn", # required
-    #         source_configuration: {
-    #           code_repository: {
-    #             repository_url: "String", # required
-    #             source_code_version: { # required
-    #               type: "BRANCH", # required, accepts BRANCH
-    #               value: "String", # required
-    #             },
-    #             code_configuration: {
-    #               configuration_source: "REPOSITORY", # required, accepts REPOSITORY, API
-    #               code_configuration_values: {
-    #                 runtime: "PYTHON_3", # required, accepts PYTHON_3, NODEJS_12, NODEJS_14, CORRETTO_8, CORRETTO_11, NODEJS_16, GO_1, DOTNET_6, PHP_81, RUBY_31
-    #                 build_command: "BuildCommand",
-    #                 start_command: "StartCommand",
-    #                 port: "String",
-    #                 runtime_environment_variables: {
-    #                   "RuntimeEnvironmentVariablesKey" => "RuntimeEnvironmentVariablesValue",
-    #                 },
-    #               },
-    #             },
-    #           },
-    #           image_repository: {
-    #             image_identifier: "ImageIdentifier", # required
-    #             image_configuration: {
-    #               runtime_environment_variables: {
-    #                 "RuntimeEnvironmentVariablesKey" => "RuntimeEnvironmentVariablesValue",
-    #               },
-    #               start_command: "StartCommand",
-    #               port: "String",
-    #             },
-    #             image_repository_type: "ECR", # required, accepts ECR, ECR_PUBLIC
-    #           },
-    #           auto_deployments_enabled: false,
-    #           authentication_configuration: {
-    #             connection_arn: "AppRunnerResourceArn",
-    #             access_role_arn: "RoleArn",
-    #           },
-    #         },
-    #         instance_configuration: {
-    #           cpu: "Cpu",
-    #           memory: "Memory",
-    #           instance_role_arn: "RoleArn",
-    #         },
-    #         auto_scaling_configuration_arn: "AppRunnerResourceArn",
-    #         health_check_configuration: {
-    #           protocol: "TCP", # accepts TCP, HTTP
-    #           path: "HealthCheckPath",
-    #           interval: 1,
-    #           timeout: 1,
-    #           healthy_threshold: 1,
-    #           unhealthy_threshold: 1,
-    #         },
-    #         network_configuration: {
-    #           egress_configuration: {
-    #             egress_type: "DEFAULT", # accepts DEFAULT, VPC
-    #             vpc_connector_arn: "AppRunnerResourceArn",
-    #           },
-    #           ingress_configuration: {
-    #             is_publicly_accessible: false,
-    #           },
-    #         },
-    #         observability_configuration: {
-    #           observability_enabled: false, # required
-    #           observability_configuration_arn: "AppRunnerResourceArn",
-    #         },
-    #       }
-    #
     # @!attribute [rw] service_arn
     #   The Amazon Resource Name (ARN) of the App Runner service that you
     #   want to update.
@@ -3430,17 +2752,6 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateVpcIngressConnectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         vpc_ingress_connection_arn: "AppRunnerResourceArn", # required
-    #         ingress_vpc_configuration: { # required
-    #           vpc_id: "String",
-    #           vpc_endpoint_id: "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] vpc_ingress_connection_arn
     #   The Amazon Resource Name (Arn) for the App Runner VPC Ingress
     #   Connection resource that you want to update.

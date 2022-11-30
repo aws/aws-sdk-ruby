@@ -39,13 +39,6 @@ module Aws::PinpointSMSVoice
     # An object that defines a message that contains text formatted using
     # Amazon Pinpoint Voice Instructions markup.
     #
-    # @note When making an API call, you may pass CallInstructionsMessageType
-    #   data as a hash:
-    #
-    #       {
-    #         text: "NonEmptyString",
-    #       }
-    #
     # @!attribute [rw] text
     #   The language to use when delivering the message. For a complete list
     #   of supported languages, see the Amazon Polly Developer Guide.
@@ -61,14 +54,6 @@ module Aws::PinpointSMSVoice
 
     # An object that contains information about an event destination that
     # sends data to Amazon CloudWatch Logs.
-    #
-    # @note When making an API call, you may pass CloudWatchLogsDestination
-    #   data as a hash:
-    #
-    #       {
-    #         iam_role_arn: "String",
-    #         log_group_arn: "String",
-    #       }
     #
     # @!attribute [rw] iam_role_arn
     #   The Amazon Resource Name (ARN) of an Amazon Identity and Access
@@ -91,29 +76,6 @@ module Aws::PinpointSMSVoice
     end
 
     # Create a new event destination in a configuration set.
-    #
-    # @note When making an API call, you may pass CreateConfigurationSetEventDestinationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_set_name: "__string", # required
-    #         event_destination: {
-    #           cloud_watch_logs_destination: {
-    #             iam_role_arn: "String",
-    #             log_group_arn: "String",
-    #           },
-    #           enabled: false,
-    #           kinesis_firehose_destination: {
-    #             delivery_stream_arn: "String",
-    #             iam_role_arn: "String",
-    #           },
-    #           matching_event_types: ["INITIATED_CALL"], # accepts INITIATED_CALL, RINGING, ANSWERED, COMPLETED_CALL, BUSY, FAILED, NO_ANSWER
-    #           sns_destination: {
-    #             topic_arn: "String",
-    #           },
-    #         },
-    #         event_destination_name: "NonEmptyString",
-    #       }
     #
     # @!attribute [rw] configuration_set_name
     #   @return [String]
@@ -145,13 +107,6 @@ module Aws::PinpointSMSVoice
 
     # A request to create a new configuration set.
     #
-    # @note When making an API call, you may pass CreateConfigurationSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_set_name: "WordCharactersWithDelimiters",
-    #       }
-    #
     # @!attribute [rw] configuration_set_name
     #   The name that you want to give the configuration set.
     #   @return [String]
@@ -171,14 +126,6 @@ module Aws::PinpointSMSVoice
     #
     class CreateConfigurationSetResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteConfigurationSetEventDestinationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_set_name: "__string", # required
-    #         event_destination_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] configuration_set_name
     #   @return [String]
     #
@@ -201,13 +148,6 @@ module Aws::PinpointSMSVoice
     #
     class DeleteConfigurationSetEventDestinationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteConfigurationSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_set_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] configuration_set_name
     #   @return [String]
     #
@@ -274,25 +214,6 @@ module Aws::PinpointSMSVoice
 
     # An object that defines a single event destination.
     #
-    # @note When making an API call, you may pass EventDestinationDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         cloud_watch_logs_destination: {
-    #           iam_role_arn: "String",
-    #           log_group_arn: "String",
-    #         },
-    #         enabled: false,
-    #         kinesis_firehose_destination: {
-    #           delivery_stream_arn: "String",
-    #           iam_role_arn: "String",
-    #         },
-    #         matching_event_types: ["INITIATED_CALL"], # accepts INITIATED_CALL, RINGING, ANSWERED, COMPLETED_CALL, BUSY, FAILED, NO_ANSWER
-    #         sns_destination: {
-    #           topic_arn: "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] cloud_watch_logs_destination
     #   An object that contains information about an event destination that
     #   sends data to Amazon CloudWatch Logs.
@@ -332,13 +253,6 @@ module Aws::PinpointSMSVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetConfigurationSetEventDestinationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_set_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] configuration_set_name
     #   @return [String]
     #
@@ -384,14 +298,6 @@ module Aws::PinpointSMSVoice
     # An object that contains information about an event destination that
     # sends data to Amazon Kinesis Data Firehose.
     #
-    # @note When making an API call, you may pass KinesisFirehoseDestination
-    #   data as a hash:
-    #
-    #       {
-    #         delivery_stream_arn: "String",
-    #         iam_role_arn: "String",
-    #       }
-    #
     # @!attribute [rw] delivery_stream_arn
     #   The Amazon Resource Name (ARN) of an IAM role that can write data to
     #   an Amazon Kinesis Data Firehose stream.
@@ -424,14 +330,6 @@ module Aws::PinpointSMSVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListConfigurationSetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "__string",
-    #         page_size: "__string",
-    #       }
-    #
     # @!attribute [rw] next_token
     #   @return [String]
     #
@@ -484,15 +382,6 @@ module Aws::PinpointSMSVoice
 
     # An object that defines a message that contains unformatted text.
     #
-    # @note When making an API call, you may pass PlainTextMessageType
-    #   data as a hash:
-    #
-    #       {
-    #         language_code: "String",
-    #         text: "NonEmptyString",
-    #         voice_id: "String",
-    #       }
-    #
     # @!attribute [rw] language_code
     #   The language to use when delivering the message. For a complete list
     #   of supported languages, see the Amazon Polly Developer Guide.
@@ -520,15 +409,6 @@ module Aws::PinpointSMSVoice
 
     # An object that defines a message that contains SSML-formatted text.
     #
-    # @note When making an API call, you may pass SSMLMessageType
-    #   data as a hash:
-    #
-    #       {
-    #         language_code: "String",
-    #         text: "NonEmptyString",
-    #         voice_id: "String",
-    #       }
-    #
     # @!attribute [rw] language_code
     #   The language to use when delivering the message. For a complete list
     #   of supported languages, see the Amazon Polly Developer Guide.
@@ -555,31 +435,6 @@ module Aws::PinpointSMSVoice
     end
 
     # A request to create and send a new voice message.
-    #
-    # @note When making an API call, you may pass SendVoiceMessageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         caller_id: "String",
-    #         configuration_set_name: "WordCharactersWithDelimiters",
-    #         content: {
-    #           call_instructions_message: {
-    #             text: "NonEmptyString",
-    #           },
-    #           plain_text_message: {
-    #             language_code: "String",
-    #             text: "NonEmptyString",
-    #             voice_id: "String",
-    #           },
-    #           ssml_message: {
-    #             language_code: "String",
-    #             text: "NonEmptyString",
-    #             voice_id: "String",
-    #           },
-    #         },
-    #         destination_phone_number: "NonEmptyString",
-    #         origination_phone_number: "NonEmptyString",
-    #       }
     #
     # @!attribute [rw] caller_id
     #   The phone number that appears on recipients' devices when they
@@ -637,13 +492,6 @@ module Aws::PinpointSMSVoice
     # An object that contains information about an event destination that
     # sends data to Amazon SNS.
     #
-    # @note When making an API call, you may pass SnsDestination
-    #   data as a hash:
-    #
-    #       {
-    #         topic_arn: "String",
-    #       }
-    #
     # @!attribute [rw] topic_arn
     #   The Amazon Resource Name (ARN) of the Amazon SNS topic that you want
     #   to publish events to.
@@ -674,29 +522,6 @@ module Aws::PinpointSMSVoice
     # An object that defines a request to update an existing event
     # destination.
     #
-    # @note When making an API call, you may pass UpdateConfigurationSetEventDestinationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_set_name: "__string", # required
-    #         event_destination: {
-    #           cloud_watch_logs_destination: {
-    #             iam_role_arn: "String",
-    #             log_group_arn: "String",
-    #           },
-    #           enabled: false,
-    #           kinesis_firehose_destination: {
-    #             delivery_stream_arn: "String",
-    #             iam_role_arn: "String",
-    #           },
-    #           matching_event_types: ["INITIATED_CALL"], # accepts INITIATED_CALL, RINGING, ANSWERED, COMPLETED_CALL, BUSY, FAILED, NO_ANSWER
-    #           sns_destination: {
-    #             topic_arn: "String",
-    #           },
-    #         },
-    #         event_destination_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] configuration_set_name
     #   @return [String]
     #
@@ -726,25 +551,6 @@ module Aws::PinpointSMSVoice
 
     # An object that contains a voice message and information about the
     # recipient that you want to send it to.
-    #
-    # @note When making an API call, you may pass VoiceMessageContent
-    #   data as a hash:
-    #
-    #       {
-    #         call_instructions_message: {
-    #           text: "NonEmptyString",
-    #         },
-    #         plain_text_message: {
-    #           language_code: "String",
-    #           text: "NonEmptyString",
-    #           voice_id: "String",
-    #         },
-    #         ssml_message: {
-    #           language_code: "String",
-    #           text: "NonEmptyString",
-    #           voice_id: "String",
-    #         },
-    #       }
     #
     # @!attribute [rw] call_instructions_message
     #   An object that defines a message that contains text formatted using

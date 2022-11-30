@@ -13,19 +13,6 @@ module Aws::NetworkFirewall
     # A custom action to use in stateless rule actions settings. This is
     # used in CustomAction.
     #
-    # @note When making an API call, you may pass ActionDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         publish_metric_action: {
-    #           dimensions: [ # required
-    #             {
-    #               value: "DimensionValue", # required
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] publish_metric_action
     #   Stateless inspection criteria that publishes the specified metrics
     #   to Amazon CloudWatch for the matching packet. This setting defines a
@@ -48,13 +35,6 @@ module Aws::NetworkFirewall
 
     # A single IP address specification. This is used in the MatchAttributes
     # source and destination specifications.
-    #
-    # @note When making an API call, you may pass Address
-    #   data as a hash:
-    #
-    #       {
-    #         address_definition: "AddressDefinition", # required
-    #       }
     #
     # @!attribute [rw] address_definition
     #   Specify an IP address or a block of IP addresses in Classless
@@ -85,16 +65,6 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateFirewallPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         update_token: "UpdateToken",
-    #         firewall_arn: "ResourceArn",
-    #         firewall_name: "ResourceName",
-    #         firewall_policy_arn: "ResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] update_token
     #   An optional token that you can use for optimistic locking. Network
     #   Firewall returns a token to your requests that access the firewall.
@@ -187,20 +157,6 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateSubnetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         update_token: "UpdateToken",
-    #         firewall_arn: "ResourceArn",
-    #         firewall_name: "ResourceName",
-    #         subnet_mappings: [ # required
-    #           {
-    #             subnet_id: "CollectionMember_String", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] update_token
     #   An optional token that you can use for optimistic locking. Network
     #   Firewall returns a token to your requests that access the firewall.
@@ -373,63 +329,6 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateFirewallPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         firewall_policy_name: "ResourceName", # required
-    #         firewall_policy: { # required
-    #           stateless_rule_group_references: [
-    #             {
-    #               resource_arn: "ResourceArn", # required
-    #               priority: 1, # required
-    #             },
-    #           ],
-    #           stateless_default_actions: ["CollectionMember_String"], # required
-    #           stateless_fragment_default_actions: ["CollectionMember_String"], # required
-    #           stateless_custom_actions: [
-    #             {
-    #               action_name: "ActionName", # required
-    #               action_definition: { # required
-    #                 publish_metric_action: {
-    #                   dimensions: [ # required
-    #                     {
-    #                       value: "DimensionValue", # required
-    #                     },
-    #                   ],
-    #                 },
-    #               },
-    #             },
-    #           ],
-    #           stateful_rule_group_references: [
-    #             {
-    #               resource_arn: "ResourceArn", # required
-    #               priority: 1,
-    #               override: {
-    #                 action: "DROP_TO_ALERT", # accepts DROP_TO_ALERT
-    #               },
-    #             },
-    #           ],
-    #           stateful_default_actions: ["CollectionMember_String"],
-    #           stateful_engine_options: {
-    #             rule_order: "DEFAULT_ACTION_ORDER", # accepts DEFAULT_ACTION_ORDER, STRICT_ORDER
-    #             stream_exception_policy: "DROP", # accepts DROP, CONTINUE
-    #           },
-    #         },
-    #         description: "Description",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         dry_run: false,
-    #         encryption_configuration: {
-    #           key_id: "KeyId",
-    #           type: "CUSTOMER_KMS", # required, accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
-    #         },
-    #       }
-    #
     # @!attribute [rw] firewall_policy_name
     #   The descriptive name of the firewall policy. You can't change the
     #   name of a firewall policy after you create it.
@@ -510,34 +409,6 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateFirewallRequest
-    #   data as a hash:
-    #
-    #       {
-    #         firewall_name: "ResourceName", # required
-    #         firewall_policy_arn: "ResourceArn", # required
-    #         vpc_id: "VpcId", # required
-    #         subnet_mappings: [ # required
-    #           {
-    #             subnet_id: "CollectionMember_String", # required
-    #           },
-    #         ],
-    #         delete_protection: false,
-    #         subnet_change_protection: false,
-    #         firewall_policy_change_protection: false,
-    #         description: "Description",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         encryption_configuration: {
-    #           key_id: "KeyId",
-    #           type: "CUSTOMER_KMS", # required, accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
-    #         },
-    #       }
-    #
     # @!attribute [rw] firewall_name
     #   The descriptive name of the firewall. You can't change the name of
     #   a firewall after you create it.
@@ -636,138 +507,6 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateRuleGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rule_group_name: "ResourceName", # required
-    #         rule_group: {
-    #           rule_variables: {
-    #             ip_sets: {
-    #               "RuleVariableName" => {
-    #                 definition: ["VariableDefinition"], # required
-    #               },
-    #             },
-    #             port_sets: {
-    #               "RuleVariableName" => {
-    #                 definition: ["VariableDefinition"],
-    #               },
-    #             },
-    #           },
-    #           reference_sets: {
-    #             ip_set_references: {
-    #               "IPSetReferenceName" => {
-    #                 reference_arn: "ResourceArn",
-    #               },
-    #             },
-    #           },
-    #           rules_source: { # required
-    #             rules_string: "RulesString",
-    #             rules_source_list: {
-    #               targets: ["CollectionMember_String"], # required
-    #               target_types: ["TLS_SNI"], # required, accepts TLS_SNI, HTTP_HOST
-    #               generated_rules_type: "ALLOWLIST", # required, accepts ALLOWLIST, DENYLIST
-    #             },
-    #             stateful_rules: [
-    #               {
-    #                 action: "PASS", # required, accepts PASS, DROP, ALERT
-    #                 header: { # required
-    #                   protocol: "IP", # required, accepts IP, TCP, UDP, ICMP, HTTP, FTP, TLS, SMB, DNS, DCERPC, SSH, SMTP, IMAP, MSN, KRB5, IKEV2, TFTP, NTP, DHCP
-    #                   source: "Source", # required
-    #                   source_port: "Port", # required
-    #                   direction: "FORWARD", # required, accepts FORWARD, ANY
-    #                   destination: "Destination", # required
-    #                   destination_port: "Port", # required
-    #                 },
-    #                 rule_options: [ # required
-    #                   {
-    #                     keyword: "Keyword", # required
-    #                     settings: ["Setting"],
-    #                   },
-    #                 ],
-    #               },
-    #             ],
-    #             stateless_rules_and_custom_actions: {
-    #               stateless_rules: [ # required
-    #                 {
-    #                   rule_definition: { # required
-    #                     match_attributes: { # required
-    #                       sources: [
-    #                         {
-    #                           address_definition: "AddressDefinition", # required
-    #                         },
-    #                       ],
-    #                       destinations: [
-    #                         {
-    #                           address_definition: "AddressDefinition", # required
-    #                         },
-    #                       ],
-    #                       source_ports: [
-    #                         {
-    #                           from_port: 1, # required
-    #                           to_port: 1, # required
-    #                         },
-    #                       ],
-    #                       destination_ports: [
-    #                         {
-    #                           from_port: 1, # required
-    #                           to_port: 1, # required
-    #                         },
-    #                       ],
-    #                       protocols: [1],
-    #                       tcp_flags: [
-    #                         {
-    #                           flags: ["FIN"], # required, accepts FIN, SYN, RST, PSH, ACK, URG, ECE, CWR
-    #                           masks: ["FIN"], # accepts FIN, SYN, RST, PSH, ACK, URG, ECE, CWR
-    #                         },
-    #                       ],
-    #                     },
-    #                     actions: ["CollectionMember_String"], # required
-    #                   },
-    #                   priority: 1, # required
-    #                 },
-    #               ],
-    #               custom_actions: [
-    #                 {
-    #                   action_name: "ActionName", # required
-    #                   action_definition: { # required
-    #                     publish_metric_action: {
-    #                       dimensions: [ # required
-    #                         {
-    #                           value: "DimensionValue", # required
-    #                         },
-    #                       ],
-    #                     },
-    #                   },
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #           stateful_rule_options: {
-    #             rule_order: "DEFAULT_ACTION_ORDER", # accepts DEFAULT_ACTION_ORDER, STRICT_ORDER
-    #           },
-    #         },
-    #         rules: "RulesString",
-    #         type: "STATELESS", # required, accepts STATELESS, STATEFUL
-    #         description: "Description",
-    #         capacity: 1, # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         dry_run: false,
-    #         encryption_configuration: {
-    #           key_id: "KeyId",
-    #           type: "CUSTOMER_KMS", # required, accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
-    #         },
-    #         source_metadata: {
-    #           source_arn: "ResourceArn",
-    #           source_update_token: "UpdateToken",
-    #         },
-    #       }
-    #
     # @!attribute [rw] rule_group_name
     #   The descriptive name of the rule group. You can't change the name
     #   of a rule group after you create it.
@@ -957,22 +696,6 @@ module Aws::NetworkFirewall
     #   actions settings to specify what to do with packets that don't
     #   match any of the policy's stateless rules.
     #
-    # @note When making an API call, you may pass CustomAction
-    #   data as a hash:
-    #
-    #       {
-    #         action_name: "ActionName", # required
-    #         action_definition: { # required
-    #           publish_metric_action: {
-    #             dimensions: [ # required
-    #               {
-    #                 value: "DimensionValue", # required
-    #               },
-    #             ],
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] action_name
     #   The descriptive name of the custom action. You can't change the
     #   name of a custom action after you create it.
@@ -991,14 +714,6 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteFirewallPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         firewall_policy_name: "ResourceName",
-    #         firewall_policy_arn: "ResourceArn",
-    #       }
-    #
     # @!attribute [rw] firewall_policy_name
     #   The descriptive name of the firewall policy. You can't change the
     #   name of a firewall policy after you create it.
@@ -1034,14 +749,6 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteFirewallRequest
-    #   data as a hash:
-    #
-    #       {
-    #         firewall_name: "ResourceName",
-    #         firewall_arn: "ResourceArn",
-    #       }
-    #
     # @!attribute [rw] firewall_name
     #   The descriptive name of the firewall. You can't change the name of
     #   a firewall after you create it.
@@ -1091,13 +798,6 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteResourcePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the rule group or firewall policy
     #   whose resource policy you want to delete.
@@ -1115,15 +815,6 @@ module Aws::NetworkFirewall
     #
     class DeleteResourcePolicyResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteRuleGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rule_group_name: "ResourceName",
-    #         rule_group_arn: "ResourceArn",
-    #         type: "STATELESS", # accepts STATELESS, STATEFUL
-    #       }
-    #
     # @!attribute [rw] rule_group_name
     #   The descriptive name of the rule group. You can't change the name
     #   of a rule group after you create it.
@@ -1172,14 +863,6 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeFirewallPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         firewall_policy_name: "ResourceName",
-    #         firewall_policy_arn: "ResourceArn",
-    #       }
-    #
     # @!attribute [rw] firewall_policy_name
     #   The descriptive name of the firewall policy. You can't change the
     #   name of a firewall policy after you create it.
@@ -1236,14 +919,6 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeFirewallRequest
-    #   data as a hash:
-    #
-    #       {
-    #         firewall_name: "ResourceName",
-    #         firewall_arn: "ResourceArn",
-    #       }
-    #
     # @!attribute [rw] firewall_name
     #   The descriptive name of the firewall. You can't change the name of
     #   a firewall after you create it.
@@ -1308,14 +983,6 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeLoggingConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         firewall_arn: "ResourceArn",
-    #         firewall_name: "ResourceName",
-    #       }
-    #
     # @!attribute [rw] firewall_arn
     #   The Amazon Resource Name (ARN) of the firewall.
     #
@@ -1355,13 +1022,6 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeResourcePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the rule group or firewall policy
     #   whose resource policy you want to retrieve.
@@ -1387,15 +1047,6 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeRuleGroupMetadataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rule_group_name: "ResourceName",
-    #         rule_group_arn: "ResourceArn",
-    #         type: "STATELESS", # accepts STATELESS, STATEFUL
-    #       }
-    #
     # @!attribute [rw] rule_group_name
     #   The descriptive name of the rule group. You can't change the name
     #   of a rule group after you create it.
@@ -1495,15 +1146,6 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeRuleGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rule_group_name: "ResourceName",
-    #         rule_group_arn: "ResourceArn",
-    #         type: "STATELESS", # accepts STATELESS, STATEFUL
-    #       }
-    #
     # @!attribute [rw] rule_group_name
     #   The descriptive name of the rule group. You can't change the name
     #   of a rule group after you create it.
@@ -1601,13 +1243,6 @@ module Aws::NetworkFirewall
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html#usingDimensions
     # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html
     #
-    # @note When making an API call, you may pass Dimension
-    #   data as a hash:
-    #
-    #       {
-    #         value: "DimensionValue", # required
-    #       }
-    #
     # @!attribute [rw] value
     #   The value to use in the custom metric dimension.
     #   @return [String]
@@ -1620,16 +1255,6 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateSubnetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         update_token: "UpdateToken",
-    #         firewall_arn: "ResourceArn",
-    #         firewall_name: "ResourceName",
-    #         subnet_ids: ["AzSubnet"], # required
-    #       }
-    #
     # @!attribute [rw] update_token
     #   An optional token that you can use for optimistic locking. Network
     #   Firewall returns a token to your requests that access the firewall.
@@ -1736,14 +1361,6 @@ module Aws::NetworkFirewall
     #
     #
     # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-encryption-at-rest.html
-    #
-    # @note When making an API call, you may pass EncryptionConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         key_id: "KeyId",
-    #         type: "CUSTOMER_KMS", # required, accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
-    #       }
     #
     # @!attribute [rw] key_id
     #   The ID of the Amazon Web Services Key Management Service (KMS)
@@ -1895,48 +1512,6 @@ module Aws::NetworkFirewall
     # This, along with FirewallPolicyResponse, define the policy. You can
     # retrieve all objects for a firewall policy by calling
     # DescribeFirewallPolicy.
-    #
-    # @note When making an API call, you may pass FirewallPolicy
-    #   data as a hash:
-    #
-    #       {
-    #         stateless_rule_group_references: [
-    #           {
-    #             resource_arn: "ResourceArn", # required
-    #             priority: 1, # required
-    #           },
-    #         ],
-    #         stateless_default_actions: ["CollectionMember_String"], # required
-    #         stateless_fragment_default_actions: ["CollectionMember_String"], # required
-    #         stateless_custom_actions: [
-    #           {
-    #             action_name: "ActionName", # required
-    #             action_definition: { # required
-    #               publish_metric_action: {
-    #                 dimensions: [ # required
-    #                   {
-    #                     value: "DimensionValue", # required
-    #                   },
-    #                 ],
-    #               },
-    #             },
-    #           },
-    #         ],
-    #         stateful_rule_group_references: [
-    #           {
-    #             resource_arn: "ResourceArn", # required
-    #             priority: 1,
-    #             override: {
-    #               action: "DROP_TO_ALERT", # accepts DROP_TO_ALERT
-    #             },
-    #           },
-    #         ],
-    #         stateful_default_actions: ["CollectionMember_String"],
-    #         stateful_engine_options: {
-    #           rule_order: "DEFAULT_ACTION_ORDER", # accepts DEFAULT_ACTION_ORDER, STRICT_ORDER
-    #           stream_exception_policy: "DROP", # accepts DROP, CONTINUE
-    #         },
-    #       }
     #
     # @!attribute [rw] stateless_rule_group_references
     #   References to the stateless rule groups that are used in the policy.
@@ -2195,18 +1770,6 @@ module Aws::NetworkFirewall
     # headers in stateful traffic flow inspection. Traffic flows that match
     # the criteria are a match for the corresponding StatefulRule.
     #
-    # @note When making an API call, you may pass Header
-    #   data as a hash:
-    #
-    #       {
-    #         protocol: "IP", # required, accepts IP, TCP, UDP, ICMP, HTTP, FTP, TLS, SMB, DNS, DCERPC, SSH, SMTP, IMAP, MSN, KRB5, IKEV2, TFTP, NTP, DHCP
-    #         source: "Source", # required
-    #         source_port: "Port", # required
-    #         direction: "FORWARD", # required, accepts FORWARD, ANY
-    #         destination: "Destination", # required
-    #         destination_port: "Port", # required
-    #       }
-    #
     # @!attribute [rw] protocol
     #   The protocol to inspect for. To specify all, you can use `IP`,
     #   because all traffic on Amazon Web Services and on the internet is
@@ -2297,13 +1860,6 @@ module Aws::NetworkFirewall
     # A list of IP addresses and address ranges, in CIDR notation. This is
     # part of a RuleVariables.
     #
-    # @note When making an API call, you may pass IPSet
-    #   data as a hash:
-    #
-    #       {
-    #         definition: ["VariableDefinition"], # required
-    #       }
-    #
     # @!attribute [rw] definition
     #   The list of IP addresses and address ranges, in CIDR notation.
     #   @return [Array<String>]
@@ -2352,13 +1908,6 @@ module Aws::NetworkFirewall
     #
     # [1]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/rule-groups-ip-set-references
     # [2]: https://docs.aws.amazon.com/vpc/latest/userguide/managed-prefix-lists.html
-    #
-    # @note When making an API call, you may pass IPSetReference
-    #   data as a hash:
-    #
-    #       {
-    #         reference_arn: "ResourceArn",
-    #       }
     #
     # @!attribute [rw] reference_arn
     #   The Amazon Resource Name (ARN) of the resource that you are
@@ -2477,14 +2026,6 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFirewallPoliciesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   When you request a list of objects with a `MaxResults` setting, if
     #   the number of objects that are still available for retrieval exceeds
@@ -2532,15 +2073,6 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFirewallsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "PaginationToken",
-    #         vpc_ids: ["VpcId"],
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   When you request a list of objects with a `MaxResults` setting, if
     #   the number of objects that are still available for retrieval exceeds
@@ -2595,17 +2127,6 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRuleGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #         scope: "MANAGED", # accepts MANAGED, ACCOUNT
-    #         managed_type: "AWS_MANAGED_THREAT_SIGNATURES", # accepts AWS_MANAGED_THREAT_SIGNATURES, AWS_MANAGED_DOMAIN_LISTS
-    #         type: "STATELESS", # accepts STATELESS, STATEFUL
-    #       }
-    #
     # @!attribute [rw] next_token
     #   When you request a list of objects with a `MaxResults` setting, if
     #   the number of objects that are still available for retrieval exceeds
@@ -2673,15 +2194,6 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #         resource_arn: "ResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] next_token
     #   When you request a list of objects with a `MaxResults` setting, if
     #   the number of objects that are still available for retrieval exceeds
@@ -2742,17 +2254,6 @@ module Aws::NetworkFirewall
     # for all network traffic that it receives. It records alert logs for
     # traffic that matches stateful rules that have the rule action set to
     # `DROP` or `ALERT`.
-    #
-    # @note When making an API call, you may pass LogDestinationConfig
-    #   data as a hash:
-    #
-    #       {
-    #         log_type: "ALERT", # required, accepts ALERT, FLOW
-    #         log_destination_type: "S3", # required, accepts S3, CloudWatchLogs, KinesisDataFirehose
-    #         log_destination: { # required
-    #           "HashMapKey" => "HashMapValue",
-    #         },
-    #       }
     #
     # @!attribute [rw] log_type
     #   The type of log to send. Alert logs report traffic that matches a
@@ -2818,21 +2319,6 @@ module Aws::NetworkFirewall
 
     # Defines how Network Firewall performs logging for a Firewall.
     #
-    # @note When making an API call, you may pass LoggingConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         log_destination_configs: [ # required
-    #           {
-    #             log_type: "ALERT", # required, accepts ALERT, FLOW
-    #             log_destination_type: "S3", # required, accepts S3, CloudWatchLogs, KinesisDataFirehose
-    #             log_destination: { # required
-    #               "HashMapKey" => "HashMapValue",
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] log_destination_configs
     #   Defines the logging destinations for the logs for a firewall.
     #   Network Firewall generates logs for stateful rule groups.
@@ -2850,41 +2336,6 @@ module Aws::NetworkFirewall
     # in stateless rule inspection. Each match attributes set can include
     # one or more items such as IP address, CIDR range, port number,
     # protocol, and TCP flags.
-    #
-    # @note When making an API call, you may pass MatchAttributes
-    #   data as a hash:
-    #
-    #       {
-    #         sources: [
-    #           {
-    #             address_definition: "AddressDefinition", # required
-    #           },
-    #         ],
-    #         destinations: [
-    #           {
-    #             address_definition: "AddressDefinition", # required
-    #           },
-    #         ],
-    #         source_ports: [
-    #           {
-    #             from_port: 1, # required
-    #             to_port: 1, # required
-    #           },
-    #         ],
-    #         destination_ports: [
-    #           {
-    #             from_port: 1, # required
-    #             to_port: 1, # required
-    #           },
-    #         ],
-    #         protocols: [1],
-    #         tcp_flags: [
-    #           {
-    #             flags: ["FIN"], # required, accepts FIN, SYN, RST, PSH, ACK, URG, ECE, CWR
-    #             masks: ["FIN"], # accepts FIN, SYN, RST, PSH, ACK, URG, ECE, CWR
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] sources
     #   The source IP addresses and address ranges to inspect for, in CIDR
@@ -2971,14 +2422,6 @@ module Aws::NetworkFirewall
     # destination port ranges in the stateless rule MatchAttributes,
     # `SourcePorts`, and `DestinationPorts` settings.
     #
-    # @note When making an API call, you may pass PortRange
-    #   data as a hash:
-    #
-    #       {
-    #         from_port: 1, # required
-    #         to_port: 1, # required
-    #       }
-    #
     # @!attribute [rw] from_port
     #   The lower limit of the port range. This must be less than or equal
     #   to the `ToPort` specification.
@@ -3000,13 +2443,6 @@ module Aws::NetworkFirewall
 
     # A set of port ranges for use in the rules in a rule group.
     #
-    # @note When making an API call, you may pass PortSet
-    #   data as a hash:
-    #
-    #       {
-    #         definition: ["VariableDefinition"],
-    #       }
-    #
     # @!attribute [rw] definition
     #   The set of port ranges.
     #   @return [Array<String>]
@@ -3023,17 +2459,6 @@ module Aws::NetworkFirewall
     # Amazon CloudWatch for the matching packet. This setting defines a
     # CloudWatch dimension value to be published.
     #
-    # @note When making an API call, you may pass PublishMetricAction
-    #   data as a hash:
-    #
-    #       {
-    #         dimensions: [ # required
-    #           {
-    #             value: "DimensionValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] dimensions
     #   @return [Array<Types::Dimension>]
     #
@@ -3045,14 +2470,6 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutResourcePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         policy: "PolicyString", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the account that you want to share
     #   rule groups and firewall policies with.
@@ -3103,17 +2520,6 @@ module Aws::NetworkFirewall
 
     # Contains a set of IP set references.
     #
-    # @note When making an API call, you may pass ReferenceSets
-    #   data as a hash:
-    #
-    #       {
-    #         ip_set_references: {
-    #           "IPSetReferenceName" => {
-    #             reference_arn: "ResourceArn",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] ip_set_references
     #   The list of IP set references.
     #   @return [Hash<String,Types::IPSetReference>]
@@ -3156,44 +2562,6 @@ module Aws::NetworkFirewall
     # Network Firewall inspects each packet for the specified matching
     # criteria. When a packet matches the criteria, Network Firewall
     # performs the rule's actions on the packet.
-    #
-    # @note When making an API call, you may pass RuleDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         match_attributes: { # required
-    #           sources: [
-    #             {
-    #               address_definition: "AddressDefinition", # required
-    #             },
-    #           ],
-    #           destinations: [
-    #             {
-    #               address_definition: "AddressDefinition", # required
-    #             },
-    #           ],
-    #           source_ports: [
-    #             {
-    #               from_port: 1, # required
-    #               to_port: 1, # required
-    #             },
-    #           ],
-    #           destination_ports: [
-    #             {
-    #               from_port: 1, # required
-    #               to_port: 1, # required
-    #             },
-    #           ],
-    #           protocols: [1],
-    #           tcp_flags: [
-    #             {
-    #               flags: ["FIN"], # required, accepts FIN, SYN, RST, PSH, ACK, URG, ECE, CWR
-    #               masks: ["FIN"], # accepts FIN, SYN, RST, PSH, ACK, URG, ECE, CWR
-    #             },
-    #           ],
-    #         },
-    #         actions: ["CollectionMember_String"], # required
-    #       }
     #
     # @!attribute [rw] match_attributes
     #   Criteria for Network Firewall to use to inspect an individual packet
@@ -3262,116 +2630,6 @@ module Aws::NetworkFirewall
     # Firewall firewall policy, then you use the policy in a firewall. You
     # can reference a rule group from more than one firewall policy, and you
     # can use a firewall policy in more than one firewall.
-    #
-    # @note When making an API call, you may pass RuleGroup
-    #   data as a hash:
-    #
-    #       {
-    #         rule_variables: {
-    #           ip_sets: {
-    #             "RuleVariableName" => {
-    #               definition: ["VariableDefinition"], # required
-    #             },
-    #           },
-    #           port_sets: {
-    #             "RuleVariableName" => {
-    #               definition: ["VariableDefinition"],
-    #             },
-    #           },
-    #         },
-    #         reference_sets: {
-    #           ip_set_references: {
-    #             "IPSetReferenceName" => {
-    #               reference_arn: "ResourceArn",
-    #             },
-    #           },
-    #         },
-    #         rules_source: { # required
-    #           rules_string: "RulesString",
-    #           rules_source_list: {
-    #             targets: ["CollectionMember_String"], # required
-    #             target_types: ["TLS_SNI"], # required, accepts TLS_SNI, HTTP_HOST
-    #             generated_rules_type: "ALLOWLIST", # required, accepts ALLOWLIST, DENYLIST
-    #           },
-    #           stateful_rules: [
-    #             {
-    #               action: "PASS", # required, accepts PASS, DROP, ALERT
-    #               header: { # required
-    #                 protocol: "IP", # required, accepts IP, TCP, UDP, ICMP, HTTP, FTP, TLS, SMB, DNS, DCERPC, SSH, SMTP, IMAP, MSN, KRB5, IKEV2, TFTP, NTP, DHCP
-    #                 source: "Source", # required
-    #                 source_port: "Port", # required
-    #                 direction: "FORWARD", # required, accepts FORWARD, ANY
-    #                 destination: "Destination", # required
-    #                 destination_port: "Port", # required
-    #               },
-    #               rule_options: [ # required
-    #                 {
-    #                   keyword: "Keyword", # required
-    #                   settings: ["Setting"],
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #           stateless_rules_and_custom_actions: {
-    #             stateless_rules: [ # required
-    #               {
-    #                 rule_definition: { # required
-    #                   match_attributes: { # required
-    #                     sources: [
-    #                       {
-    #                         address_definition: "AddressDefinition", # required
-    #                       },
-    #                     ],
-    #                     destinations: [
-    #                       {
-    #                         address_definition: "AddressDefinition", # required
-    #                       },
-    #                     ],
-    #                     source_ports: [
-    #                       {
-    #                         from_port: 1, # required
-    #                         to_port: 1, # required
-    #                       },
-    #                     ],
-    #                     destination_ports: [
-    #                       {
-    #                         from_port: 1, # required
-    #                         to_port: 1, # required
-    #                       },
-    #                     ],
-    #                     protocols: [1],
-    #                     tcp_flags: [
-    #                       {
-    #                         flags: ["FIN"], # required, accepts FIN, SYN, RST, PSH, ACK, URG, ECE, CWR
-    #                         masks: ["FIN"], # accepts FIN, SYN, RST, PSH, ACK, URG, ECE, CWR
-    #                       },
-    #                     ],
-    #                   },
-    #                   actions: ["CollectionMember_String"], # required
-    #                 },
-    #                 priority: 1, # required
-    #               },
-    #             ],
-    #             custom_actions: [
-    #               {
-    #                 action_name: "ActionName", # required
-    #                 action_definition: { # required
-    #                   publish_metric_action: {
-    #                     dimensions: [ # required
-    #                       {
-    #                         value: "DimensionValue", # required
-    #                       },
-    #                     ],
-    #                   },
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #         },
-    #         stateful_rule_options: {
-    #           rule_order: "DEFAULT_ACTION_ORDER", # accepts DEFAULT_ACTION_ORDER, STRICT_ORDER
-    #         },
-    #       }
     #
     # @!attribute [rw] rule_variables
     #   Settings that are available for use in the rules in the rule group.
@@ -3540,14 +2798,6 @@ module Aws::NetworkFirewall
     # Additional settings for a stateful rule. This is part of the
     # StatefulRule configuration.
     #
-    # @note When making an API call, you may pass RuleOption
-    #   data as a hash:
-    #
-    #       {
-    #         keyword: "Keyword", # required
-    #         settings: ["Setting"],
-    #       }
-    #
     # @!attribute [rw] keyword
     #   @return [String]
     #
@@ -3565,22 +2815,6 @@ module Aws::NetworkFirewall
 
     # Settings that are available for use in the rules in the RuleGroup
     # where this is defined.
-    #
-    # @note When making an API call, you may pass RuleVariables
-    #   data as a hash:
-    #
-    #       {
-    #         ip_sets: {
-    #           "RuleVariableName" => {
-    #             definition: ["VariableDefinition"], # required
-    #           },
-    #         },
-    #         port_sets: {
-    #           "RuleVariableName" => {
-    #             definition: ["VariableDefinition"],
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] ip_sets
     #   A list of IP addresses and address ranges, in CIDR notation.
@@ -3602,92 +2836,6 @@ module Aws::NetworkFirewall
     # The stateless or stateful rules definitions for use in a single rule
     # group. Each rule group requires a single `RulesSource`. You can use an
     # instance of this for either stateless rules or stateful rules.
-    #
-    # @note When making an API call, you may pass RulesSource
-    #   data as a hash:
-    #
-    #       {
-    #         rules_string: "RulesString",
-    #         rules_source_list: {
-    #           targets: ["CollectionMember_String"], # required
-    #           target_types: ["TLS_SNI"], # required, accepts TLS_SNI, HTTP_HOST
-    #           generated_rules_type: "ALLOWLIST", # required, accepts ALLOWLIST, DENYLIST
-    #         },
-    #         stateful_rules: [
-    #           {
-    #             action: "PASS", # required, accepts PASS, DROP, ALERT
-    #             header: { # required
-    #               protocol: "IP", # required, accepts IP, TCP, UDP, ICMP, HTTP, FTP, TLS, SMB, DNS, DCERPC, SSH, SMTP, IMAP, MSN, KRB5, IKEV2, TFTP, NTP, DHCP
-    #               source: "Source", # required
-    #               source_port: "Port", # required
-    #               direction: "FORWARD", # required, accepts FORWARD, ANY
-    #               destination: "Destination", # required
-    #               destination_port: "Port", # required
-    #             },
-    #             rule_options: [ # required
-    #               {
-    #                 keyword: "Keyword", # required
-    #                 settings: ["Setting"],
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         stateless_rules_and_custom_actions: {
-    #           stateless_rules: [ # required
-    #             {
-    #               rule_definition: { # required
-    #                 match_attributes: { # required
-    #                   sources: [
-    #                     {
-    #                       address_definition: "AddressDefinition", # required
-    #                     },
-    #                   ],
-    #                   destinations: [
-    #                     {
-    #                       address_definition: "AddressDefinition", # required
-    #                     },
-    #                   ],
-    #                   source_ports: [
-    #                     {
-    #                       from_port: 1, # required
-    #                       to_port: 1, # required
-    #                     },
-    #                   ],
-    #                   destination_ports: [
-    #                     {
-    #                       from_port: 1, # required
-    #                       to_port: 1, # required
-    #                     },
-    #                   ],
-    #                   protocols: [1],
-    #                   tcp_flags: [
-    #                     {
-    #                       flags: ["FIN"], # required, accepts FIN, SYN, RST, PSH, ACK, URG, ECE, CWR
-    #                       masks: ["FIN"], # accepts FIN, SYN, RST, PSH, ACK, URG, ECE, CWR
-    #                     },
-    #                   ],
-    #                 },
-    #                 actions: ["CollectionMember_String"], # required
-    #               },
-    #               priority: 1, # required
-    #             },
-    #           ],
-    #           custom_actions: [
-    #             {
-    #               action_name: "ActionName", # required
-    #               action_definition: { # required
-    #                 publish_metric_action: {
-    #                   dimensions: [ # required
-    #                     {
-    #                       value: "DimensionValue", # required
-    #                     },
-    #                   ],
-    #                 },
-    #               },
-    #             },
-    #           ],
-    #         },
-    #       }
     #
     # @!attribute [rw] rules_string
     #   Stateful inspection criteria, provided in Suricata compatible
@@ -3748,15 +2896,6 @@ module Aws::NetworkFirewall
     #
     # [1]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/stateful-rule-groups-domain-names.html
     #
-    # @note When making an API call, you may pass RulesSourceList
-    #   data as a hash:
-    #
-    #       {
-    #         targets: ["CollectionMember_String"], # required
-    #         target_types: ["TLS_SNI"], # required, accepts TLS_SNI, HTTP_HOST
-    #         generated_rules_type: "ALLOWLIST", # required, accepts ALLOWLIST, DENYLIST
-    #       }
-    #
     # @!attribute [rw] targets
     #   The domains that you want to inspect for in your traffic flows.
     #   Valid domain specifications are the following:
@@ -3799,14 +2938,6 @@ module Aws::NetworkFirewall
     #
     # [1]: https://docs.aws.amazon.com/network-firewall/latest/APIReference/API_DescribeRuleGroup.html
     #
-    # @note When making an API call, you may pass SourceMetadata
-    #   data as a hash:
-    #
-    #       {
-    #         source_arn: "ResourceArn",
-    #         source_update_token: "UpdateToken",
-    #       }
-    #
     # @!attribute [rw] source_arn
     #   The Amazon Resource Name (ARN) of the rule group that your own rule
     #   group is copied from.
@@ -3833,14 +2964,6 @@ module Aws::NetworkFirewall
 
     # Configuration settings for the handling of the stateful rule groups in
     # a firewall policy.
-    #
-    # @note When making an API call, you may pass StatefulEngineOptions
-    #   data as a hash:
-    #
-    #       {
-    #         rule_order: "DEFAULT_ACTION_ORDER", # accepts DEFAULT_ACTION_ORDER, STRICT_ORDER
-    #         stream_exception_policy: "DROP", # accepts DROP, CONTINUE
-    #       }
     #
     # @!attribute [rw] rule_order
     #   Indicates how to manage the order of stateful rule evaluation for
@@ -3894,27 +3017,6 @@ module Aws::NetworkFirewall
     #
     # [1]: https://suricata.readthedocs.io/rules/intro.html#
     #
-    # @note When making an API call, you may pass StatefulRule
-    #   data as a hash:
-    #
-    #       {
-    #         action: "PASS", # required, accepts PASS, DROP, ALERT
-    #         header: { # required
-    #           protocol: "IP", # required, accepts IP, TCP, UDP, ICMP, HTTP, FTP, TLS, SMB, DNS, DCERPC, SSH, SMTP, IMAP, MSN, KRB5, IKEV2, TFTP, NTP, DHCP
-    #           source: "Source", # required
-    #           source_port: "Port", # required
-    #           direction: "FORWARD", # required, accepts FORWARD, ANY
-    #           destination: "Destination", # required
-    #           destination_port: "Port", # required
-    #         },
-    #         rule_options: [ # required
-    #           {
-    #             keyword: "Keyword", # required
-    #             settings: ["Setting"],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] action
     #   Defines what Network Firewall should do with the packets in a
     #   traffic flow when the flow matches the stateful rule criteria. For
@@ -3962,13 +3064,6 @@ module Aws::NetworkFirewall
     # The setting that allows the policy owner to change the behavior of the
     # rule group within a policy.
     #
-    # @note When making an API call, you may pass StatefulRuleGroupOverride
-    #   data as a hash:
-    #
-    #       {
-    #         action: "DROP_TO_ALERT", # accepts DROP_TO_ALERT
-    #       }
-    #
     # @!attribute [rw] action
     #   The action that changes the rule group from `DROP` to `ALERT`. This
     #   only applies to managed rule groups.
@@ -3984,17 +3079,6 @@ module Aws::NetworkFirewall
 
     # Identifier for a single stateful rule group, used in a firewall policy
     # to refer to a rule group.
-    #
-    # @note When making an API call, you may pass StatefulRuleGroupReference
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         priority: 1,
-    #         override: {
-    #           action: "DROP_TO_ALERT", # accepts DROP_TO_ALERT
-    #         },
-    #       }
     #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the stateful rule group.
@@ -4035,13 +3119,6 @@ module Aws::NetworkFirewall
     # Additional options governing how Network Firewall handles the rule
     # group. You can only use these for stateful rule groups.
     #
-    # @note When making an API call, you may pass StatefulRuleOptions
-    #   data as a hash:
-    #
-    #       {
-    #         rule_order: "DEFAULT_ACTION_ORDER", # accepts DEFAULT_ACTION_ORDER, STRICT_ORDER
-    #       }
-    #
     # @!attribute [rw] rule_order
     #   Indicates how to manage the order of the rule evaluation for the
     #   rule group. `DEFAULT_ACTION_ORDER` is the default behavior. Stateful
@@ -4065,47 +3142,6 @@ module Aws::NetworkFirewall
 
     # A single stateless rule. This is used in
     # StatelessRulesAndCustomActions.
-    #
-    # @note When making an API call, you may pass StatelessRule
-    #   data as a hash:
-    #
-    #       {
-    #         rule_definition: { # required
-    #           match_attributes: { # required
-    #             sources: [
-    #               {
-    #                 address_definition: "AddressDefinition", # required
-    #               },
-    #             ],
-    #             destinations: [
-    #               {
-    #                 address_definition: "AddressDefinition", # required
-    #               },
-    #             ],
-    #             source_ports: [
-    #               {
-    #                 from_port: 1, # required
-    #                 to_port: 1, # required
-    #               },
-    #             ],
-    #             destination_ports: [
-    #               {
-    #                 from_port: 1, # required
-    #                 to_port: 1, # required
-    #               },
-    #             ],
-    #             protocols: [1],
-    #             tcp_flags: [
-    #               {
-    #                 flags: ["FIN"], # required, accepts FIN, SYN, RST, PSH, ACK, URG, ECE, CWR
-    #                 masks: ["FIN"], # accepts FIN, SYN, RST, PSH, ACK, URG, ECE, CWR
-    #               },
-    #             ],
-    #           },
-    #           actions: ["CollectionMember_String"], # required
-    #         },
-    #         priority: 1, # required
-    #       }
     #
     # @!attribute [rw] rule_definition
     #   Defines the stateless 5-tuple packet inspection criteria and the
@@ -4143,14 +3179,6 @@ module Aws::NetworkFirewall
     # Identifier for a single stateless rule group, used in a firewall
     # policy to refer to the rule group.
     #
-    # @note When making an API call, you may pass StatelessRuleGroupReference
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         priority: 1, # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the stateless rule group.
     #   @return [String]
@@ -4174,65 +3202,6 @@ module Aws::NetworkFirewall
 
     # Stateless inspection criteria. Each stateless rule group uses exactly
     # one of these data types to define its stateless rules.
-    #
-    # @note When making an API call, you may pass StatelessRulesAndCustomActions
-    #   data as a hash:
-    #
-    #       {
-    #         stateless_rules: [ # required
-    #           {
-    #             rule_definition: { # required
-    #               match_attributes: { # required
-    #                 sources: [
-    #                   {
-    #                     address_definition: "AddressDefinition", # required
-    #                   },
-    #                 ],
-    #                 destinations: [
-    #                   {
-    #                     address_definition: "AddressDefinition", # required
-    #                   },
-    #                 ],
-    #                 source_ports: [
-    #                   {
-    #                     from_port: 1, # required
-    #                     to_port: 1, # required
-    #                   },
-    #                 ],
-    #                 destination_ports: [
-    #                   {
-    #                     from_port: 1, # required
-    #                     to_port: 1, # required
-    #                   },
-    #                 ],
-    #                 protocols: [1],
-    #                 tcp_flags: [
-    #                   {
-    #                     flags: ["FIN"], # required, accepts FIN, SYN, RST, PSH, ACK, URG, ECE, CWR
-    #                     masks: ["FIN"], # accepts FIN, SYN, RST, PSH, ACK, URG, ECE, CWR
-    #                   },
-    #                 ],
-    #               },
-    #               actions: ["CollectionMember_String"], # required
-    #             },
-    #             priority: 1, # required
-    #           },
-    #         ],
-    #         custom_actions: [
-    #           {
-    #             action_name: "ActionName", # required
-    #             action_definition: { # required
-    #               publish_metric_action: {
-    #                 dimensions: [ # required
-    #                   {
-    #                     value: "DimensionValue", # required
-    #                   },
-    #                 ],
-    #               },
-    #             },
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] stateless_rules
     #   Defines the set of stateless rules for use in a stateless rule
@@ -4260,13 +3229,6 @@ module Aws::NetworkFirewall
     # is used with CreateFirewall and AssociateSubnets. Network Firewall
     # creates an instance of the associated firewall in each subnet that you
     # specify, to filter traffic in the subnet's Availability Zone.
-    #
-    # @note When making an API call, you may pass SubnetMapping
-    #   data as a hash:
-    #
-    #       {
-    #         subnet_id: "CollectionMember_String", # required
-    #       }
     #
     # @!attribute [rw] subnet_id
     #   The unique identifier for the subnet.
@@ -4326,14 +3288,6 @@ module Aws::NetworkFirewall
     # TCP flags and masks to inspect packets for, used in stateless rules
     # MatchAttributes settings.
     #
-    # @note When making an API call, you may pass TCPFlagField
-    #   data as a hash:
-    #
-    #       {
-    #         flags: ["FIN"], # required, accepts FIN, SYN, RST, PSH, ACK, URG, ECE, CWR
-    #         masks: ["FIN"], # accepts FIN, SYN, RST, PSH, ACK, URG, ECE, CWR
-    #       }
-    #
     # @!attribute [rw] flags
     #   Used in conjunction with the `Masks` setting to define the flags
     #   that must be set and flags that must not be set in order for the
@@ -4371,14 +3325,6 @@ module Aws::NetworkFirewall
     # "development," or "production"). You can add up to 50 tags to each
     # Amazon Web Services resource.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The part of the key:value pair that defines a tag. You can use a tag
     #   key to describe a category of information, such as "customer." Tag
@@ -4400,19 +3346,6 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -4459,14 +3392,6 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -4487,16 +3412,6 @@ module Aws::NetworkFirewall
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateFirewallDeleteProtectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         update_token: "UpdateToken",
-    #         firewall_arn: "ResourceArn",
-    #         firewall_name: "ResourceName",
-    #         delete_protection: false, # required
-    #       }
-    #
     # @!attribute [rw] update_token
     #   An optional token that you can use for optimistic locking. Network
     #   Firewall returns a token to your requests that access the firewall.
@@ -4597,16 +3512,6 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateFirewallDescriptionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         update_token: "UpdateToken",
-    #         firewall_arn: "ResourceArn",
-    #         firewall_name: "ResourceName",
-    #         description: "Description",
-    #       }
-    #
     # @!attribute [rw] update_token
     #   An optional token that you can use for optimistic locking. Network
     #   Firewall returns a token to your requests that access the firewall.
@@ -4700,19 +3605,6 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateFirewallEncryptionConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         update_token: "UpdateToken",
-    #         firewall_arn: "ResourceArn",
-    #         firewall_name: "ResourceName",
-    #         encryption_configuration: {
-    #           key_id: "KeyId",
-    #           type: "CUSTOMER_KMS", # required, accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
-    #         },
-    #       }
-    #
     # @!attribute [rw] update_token
     #   An optional token that you can use for optimistic locking. Network
     #   Firewall returns a token to your requests that access the firewall.
@@ -4825,16 +3717,6 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateFirewallPolicyChangeProtectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         update_token: "UpdateToken",
-    #         firewall_arn: "ResourceArn",
-    #         firewall_name: "ResourceName",
-    #         firewall_policy_change_protection: false, # required
-    #       }
-    #
     # @!attribute [rw] update_token
     #   An optional token that you can use for optimistic locking. Network
     #   Firewall returns a token to your requests that access the firewall.
@@ -4935,59 +3817,6 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateFirewallPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         update_token: "UpdateToken", # required
-    #         firewall_policy_arn: "ResourceArn",
-    #         firewall_policy_name: "ResourceName",
-    #         firewall_policy: { # required
-    #           stateless_rule_group_references: [
-    #             {
-    #               resource_arn: "ResourceArn", # required
-    #               priority: 1, # required
-    #             },
-    #           ],
-    #           stateless_default_actions: ["CollectionMember_String"], # required
-    #           stateless_fragment_default_actions: ["CollectionMember_String"], # required
-    #           stateless_custom_actions: [
-    #             {
-    #               action_name: "ActionName", # required
-    #               action_definition: { # required
-    #                 publish_metric_action: {
-    #                   dimensions: [ # required
-    #                     {
-    #                       value: "DimensionValue", # required
-    #                     },
-    #                   ],
-    #                 },
-    #               },
-    #             },
-    #           ],
-    #           stateful_rule_group_references: [
-    #             {
-    #               resource_arn: "ResourceArn", # required
-    #               priority: 1,
-    #               override: {
-    #                 action: "DROP_TO_ALERT", # accepts DROP_TO_ALERT
-    #               },
-    #             },
-    #           ],
-    #           stateful_default_actions: ["CollectionMember_String"],
-    #           stateful_engine_options: {
-    #             rule_order: "DEFAULT_ACTION_ORDER", # accepts DEFAULT_ACTION_ORDER, STRICT_ORDER
-    #             stream_exception_policy: "DROP", # accepts DROP, CONTINUE
-    #           },
-    #         },
-    #         description: "Description",
-    #         dry_run: false,
-    #         encryption_configuration: {
-    #           key_id: "KeyId",
-    #           type: "CUSTOMER_KMS", # required, accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
-    #         },
-    #       }
-    #
     # @!attribute [rw] update_token
     #   A token used for optimistic locking. Network Firewall returns a
     #   token to your requests that access the firewall policy. The token
@@ -5087,25 +3916,6 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateLoggingConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         firewall_arn: "ResourceArn",
-    #         firewall_name: "ResourceName",
-    #         logging_configuration: {
-    #           log_destination_configs: [ # required
-    #             {
-    #               log_type: "ALERT", # required, accepts ALERT, FLOW
-    #               log_destination_type: "S3", # required, accepts S3, CloudWatchLogs, KinesisDataFirehose
-    #               log_destination: { # required
-    #                 "HashMapKey" => "HashMapValue",
-    #               },
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] firewall_arn
     #   The Amazon Resource Name (ARN) of the firewall.
     #
@@ -5158,133 +3968,6 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateRuleGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         update_token: "UpdateToken", # required
-    #         rule_group_arn: "ResourceArn",
-    #         rule_group_name: "ResourceName",
-    #         rule_group: {
-    #           rule_variables: {
-    #             ip_sets: {
-    #               "RuleVariableName" => {
-    #                 definition: ["VariableDefinition"], # required
-    #               },
-    #             },
-    #             port_sets: {
-    #               "RuleVariableName" => {
-    #                 definition: ["VariableDefinition"],
-    #               },
-    #             },
-    #           },
-    #           reference_sets: {
-    #             ip_set_references: {
-    #               "IPSetReferenceName" => {
-    #                 reference_arn: "ResourceArn",
-    #               },
-    #             },
-    #           },
-    #           rules_source: { # required
-    #             rules_string: "RulesString",
-    #             rules_source_list: {
-    #               targets: ["CollectionMember_String"], # required
-    #               target_types: ["TLS_SNI"], # required, accepts TLS_SNI, HTTP_HOST
-    #               generated_rules_type: "ALLOWLIST", # required, accepts ALLOWLIST, DENYLIST
-    #             },
-    #             stateful_rules: [
-    #               {
-    #                 action: "PASS", # required, accepts PASS, DROP, ALERT
-    #                 header: { # required
-    #                   protocol: "IP", # required, accepts IP, TCP, UDP, ICMP, HTTP, FTP, TLS, SMB, DNS, DCERPC, SSH, SMTP, IMAP, MSN, KRB5, IKEV2, TFTP, NTP, DHCP
-    #                   source: "Source", # required
-    #                   source_port: "Port", # required
-    #                   direction: "FORWARD", # required, accepts FORWARD, ANY
-    #                   destination: "Destination", # required
-    #                   destination_port: "Port", # required
-    #                 },
-    #                 rule_options: [ # required
-    #                   {
-    #                     keyword: "Keyword", # required
-    #                     settings: ["Setting"],
-    #                   },
-    #                 ],
-    #               },
-    #             ],
-    #             stateless_rules_and_custom_actions: {
-    #               stateless_rules: [ # required
-    #                 {
-    #                   rule_definition: { # required
-    #                     match_attributes: { # required
-    #                       sources: [
-    #                         {
-    #                           address_definition: "AddressDefinition", # required
-    #                         },
-    #                       ],
-    #                       destinations: [
-    #                         {
-    #                           address_definition: "AddressDefinition", # required
-    #                         },
-    #                       ],
-    #                       source_ports: [
-    #                         {
-    #                           from_port: 1, # required
-    #                           to_port: 1, # required
-    #                         },
-    #                       ],
-    #                       destination_ports: [
-    #                         {
-    #                           from_port: 1, # required
-    #                           to_port: 1, # required
-    #                         },
-    #                       ],
-    #                       protocols: [1],
-    #                       tcp_flags: [
-    #                         {
-    #                           flags: ["FIN"], # required, accepts FIN, SYN, RST, PSH, ACK, URG, ECE, CWR
-    #                           masks: ["FIN"], # accepts FIN, SYN, RST, PSH, ACK, URG, ECE, CWR
-    #                         },
-    #                       ],
-    #                     },
-    #                     actions: ["CollectionMember_String"], # required
-    #                   },
-    #                   priority: 1, # required
-    #                 },
-    #               ],
-    #               custom_actions: [
-    #                 {
-    #                   action_name: "ActionName", # required
-    #                   action_definition: { # required
-    #                     publish_metric_action: {
-    #                       dimensions: [ # required
-    #                         {
-    #                           value: "DimensionValue", # required
-    #                         },
-    #                       ],
-    #                     },
-    #                   },
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #           stateful_rule_options: {
-    #             rule_order: "DEFAULT_ACTION_ORDER", # accepts DEFAULT_ACTION_ORDER, STRICT_ORDER
-    #           },
-    #         },
-    #         rules: "RulesString",
-    #         type: "STATELESS", # accepts STATELESS, STATEFUL
-    #         description: "Description",
-    #         dry_run: false,
-    #         encryption_configuration: {
-    #           key_id: "KeyId",
-    #           type: "CUSTOMER_KMS", # required, accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
-    #         },
-    #         source_metadata: {
-    #           source_arn: "ResourceArn",
-    #           source_update_token: "UpdateToken",
-    #         },
-    #       }
-    #
     # @!attribute [rw] update_token
     #   A token used for optimistic locking. Network Firewall returns a
     #   token to your requests that access the rule group. The token marks
@@ -5425,16 +4108,6 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateSubnetChangeProtectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         update_token: "UpdateToken",
-    #         firewall_arn: "ResourceArn",
-    #         firewall_name: "ResourceName",
-    #         subnet_change_protection: false, # required
-    #       }
-    #
     # @!attribute [rw] update_token
     #   An optional token that you can use for optimistic locking. Network
     #   Firewall returns a token to your requests that access the firewall.

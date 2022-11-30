@@ -17,26 +17,6 @@ module Aws::Snowball
     # the `Address` are required, if the address is invalid or unsupported,
     # then an exception is thrown.
     #
-    # @note When making an API call, you may pass Address
-    #   data as a hash:
-    #
-    #       {
-    #         address_id: "AddressId",
-    #         name: "String",
-    #         company: "String",
-    #         street_1: "String",
-    #         street_2: "String",
-    #         street_3: "String",
-    #         city: "String",
-    #         state_or_province: "String",
-    #         prefecture_or_district: "String",
-    #         landmark: "String",
-    #         country: "String",
-    #         postal_code: "String",
-    #         phone_number: "String",
-    #         is_restricted: false,
-    #       }
-    #
     # @!attribute [rw] address_id
     #   The unique ID for an address.
     #   @return [String]
@@ -121,13 +101,6 @@ module Aws::Snowball
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CancelClusterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_id: "ClusterId", # required
-    #       }
-    #
     # @!attribute [rw] cluster_id
     #   The 39-character ID for the cluster that you want to cancel, for
     #   example `CID123e4567-e89b-12d3-a456-426655440000`.
@@ -145,13 +118,6 @@ module Aws::Snowball
     #
     class CancelClusterResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass CancelJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The 39-character job ID for the job that you want to cancel, for
     #   example `JID123e4567-e89b-12d3-a456-426655440000`.
@@ -383,28 +349,6 @@ module Aws::Snowball
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAddressRequest
-    #   data as a hash:
-    #
-    #       {
-    #         address: { # required
-    #           address_id: "AddressId",
-    #           name: "String",
-    #           company: "String",
-    #           street_1: "String",
-    #           street_2: "String",
-    #           street_3: "String",
-    #           city: "String",
-    #           state_or_province: "String",
-    #           prefecture_or_district: "String",
-    #           landmark: "String",
-    #           country: "String",
-    #           postal_code: "String",
-    #           phone_number: "String",
-    #           is_restricted: false,
-    #         },
-    #       }
-    #
     # @!attribute [rw] address
     #   The address that you want the Snow device shipped to.
     #   @return [Types::Address]
@@ -431,74 +375,6 @@ module Aws::Snowball
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateClusterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_type: "IMPORT", # required, accepts IMPORT, EXPORT, LOCAL_USE
-    #         resources: { # required
-    #           s3_resources: [
-    #             {
-    #               bucket_arn: "ResourceARN",
-    #               key_range: {
-    #                 begin_marker: "String",
-    #                 end_marker: "String",
-    #               },
-    #               target_on_device_services: [
-    #                 {
-    #                   service_name: "NFS_ON_DEVICE_SERVICE", # accepts NFS_ON_DEVICE_SERVICE, S3_ON_DEVICE_SERVICE
-    #                   transfer_option: "IMPORT", # accepts IMPORT, EXPORT, LOCAL_USE
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #           lambda_resources: [
-    #             {
-    #               lambda_arn: "ResourceARN",
-    #               event_triggers: [
-    #                 {
-    #                   event_resource_arn: "ResourceARN",
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #           ec2_ami_resources: [
-    #             {
-    #               ami_id: "AmiId", # required
-    #               snowball_ami_id: "String",
-    #             },
-    #           ],
-    #         },
-    #         on_device_service_configuration: {
-    #           nfs_on_device_service: {
-    #             storage_limit: 1,
-    #             storage_unit: "TB", # accepts TB
-    #           },
-    #           tgw_on_device_service: {
-    #             storage_limit: 1,
-    #             storage_unit: "TB", # accepts TB
-    #           },
-    #         },
-    #         description: "String",
-    #         address_id: "AddressId", # required
-    #         kms_key_arn: "KmsKeyARN",
-    #         role_arn: "RoleARN", # required
-    #         snowball_type: "STANDARD", # required, accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S, SNC1_HDD, SNC1_SSD, V3_5C
-    #         shipping_option: "SECOND_DAY", # required, accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
-    #         notification: {
-    #           sns_topic_arn: "SnsTopicARN",
-    #           job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWSSortingFacility, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
-    #           notify_all: false,
-    #         },
-    #         forwarding_address_id: "AddressId",
-    #         tax_documents: {
-    #           ind: {
-    #             gstin: "GSTIN",
-    #           },
-    #         },
-    #         remote_management: "INSTALLED_ONLY", # accepts INSTALLED_ONLY, INSTALLED_AUTOSTART
-    #       }
-    #
     # @!attribute [rw] job_type
     #   The type of job for this cluster. Currently, the only job type
     #   supported for clusters is `LOCAL_USE`.
@@ -656,84 +532,6 @@ module Aws::Snowball
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_type: "IMPORT", # accepts IMPORT, EXPORT, LOCAL_USE
-    #         resources: {
-    #           s3_resources: [
-    #             {
-    #               bucket_arn: "ResourceARN",
-    #               key_range: {
-    #                 begin_marker: "String",
-    #                 end_marker: "String",
-    #               },
-    #               target_on_device_services: [
-    #                 {
-    #                   service_name: "NFS_ON_DEVICE_SERVICE", # accepts NFS_ON_DEVICE_SERVICE, S3_ON_DEVICE_SERVICE
-    #                   transfer_option: "IMPORT", # accepts IMPORT, EXPORT, LOCAL_USE
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #           lambda_resources: [
-    #             {
-    #               lambda_arn: "ResourceARN",
-    #               event_triggers: [
-    #                 {
-    #                   event_resource_arn: "ResourceARN",
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #           ec2_ami_resources: [
-    #             {
-    #               ami_id: "AmiId", # required
-    #               snowball_ami_id: "String",
-    #             },
-    #           ],
-    #         },
-    #         on_device_service_configuration: {
-    #           nfs_on_device_service: {
-    #             storage_limit: 1,
-    #             storage_unit: "TB", # accepts TB
-    #           },
-    #           tgw_on_device_service: {
-    #             storage_limit: 1,
-    #             storage_unit: "TB", # accepts TB
-    #           },
-    #         },
-    #         description: "String",
-    #         address_id: "AddressId",
-    #         kms_key_arn: "KmsKeyARN",
-    #         role_arn: "RoleARN",
-    #         snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, T98, T8, T14, NoPreference, T32
-    #         shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
-    #         notification: {
-    #           sns_topic_arn: "SnsTopicARN",
-    #           job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWSSortingFacility, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
-    #           notify_all: false,
-    #         },
-    #         cluster_id: "ClusterId",
-    #         snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S, SNC1_HDD, SNC1_SSD, V3_5C
-    #         forwarding_address_id: "AddressId",
-    #         tax_documents: {
-    #           ind: {
-    #             gstin: "GSTIN",
-    #           },
-    #         },
-    #         device_configuration: {
-    #           snowcone_device_configuration: {
-    #             wireless_connection: {
-    #               is_wifi_enabled: false,
-    #             },
-    #           },
-    #         },
-    #         remote_management: "INSTALLED_ONLY", # accepts INSTALLED_ONLY, INSTALLED_AUTOSTART
-    #         long_term_pricing_id: "LongTermPricingId",
-    #       }
-    #
     # @!attribute [rw] job_type
     #   Defines the type of job that you're creating.
     #   @return [String]
@@ -926,15 +724,6 @@ module Aws::Snowball
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateLongTermPricingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         long_term_pricing_type: "OneYear", # required, accepts OneYear, ThreeYear
-    #         is_long_term_pricing_auto_renew: false,
-    #         snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S, SNC1_HDD, SNC1_SSD, V3_5C
-    #       }
-    #
     # @!attribute [rw] long_term_pricing_type
     #   The type of long-term pricing option you want for the device, either
     #   1-year or 3-year long-term pricing.
@@ -974,14 +763,6 @@ module Aws::Snowball
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateReturnShippingLabelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #         shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The ID for a job that you want to create the return shipping label
     #   for; for example, `JID123e4567-e89b-12d3-a456-426655440000`.
@@ -1053,13 +834,6 @@ module Aws::Snowball
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAddressRequest
-    #   data as a hash:
-    #
-    #       {
-    #         address_id: "AddressId", # required
-    #       }
-    #
     # @!attribute [rw] address_id
     #   The automatically generated ID for a specific address.
     #   @return [String]
@@ -1085,14 +859,6 @@ module Aws::Snowball
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAddressesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The number of `ADDRESS` objects to return.
     #   @return [Integer]
@@ -1133,13 +899,6 @@ module Aws::Snowball
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeClusterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_id: "ClusterId", # required
-    #       }
-    #
     # @!attribute [rw] cluster_id
     #   The automatically generated ID for a cluster.
     #   @return [String]
@@ -1165,13 +924,6 @@ module Aws::Snowball
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The automatically generated ID for a job, for example
     #   `JID123e4567-e89b-12d3-a456-426655440000`.
@@ -1205,13 +957,6 @@ module Aws::Snowball
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeReturnShippingLabelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The automatically generated ID for a job, for example
     #   `JID123e4567-e89b-12d3-a456-426655440000`.
@@ -1251,17 +996,6 @@ module Aws::Snowball
 
     # The container for `SnowconeDeviceConfiguration`.
     #
-    # @note When making an API call, you may pass DeviceConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         snowcone_device_configuration: {
-    #           wireless_connection: {
-    #             is_wifi_enabled: false,
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] snowcone_device_configuration
     #   Returns information about the device configuration for an Snowcone
     #   job.
@@ -1279,14 +1013,6 @@ module Aws::Snowball
     # Image (AMI), including the Amazon EC2 AMI ID and the Snow device AMI
     # ID. Each AMI has these two IDs to simplify identifying the AMI in both
     # the Amazon Web Services Cloud and on the device.
-    #
-    # @note When making an API call, you may pass Ec2AmiResource
-    #   data as a hash:
-    #
-    #       {
-    #         ami_id: "AmiId", # required
-    #         snowball_ami_id: "String",
-    #       }
     #
     # @!attribute [rw] ami_id
     #   The ID of the AMI in Amazon EC2.
@@ -1321,13 +1047,6 @@ module Aws::Snowball
 
     # The container for the EventTriggerDefinition$EventResourceARN.
     #
-    # @note When making an API call, you may pass EventTriggerDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         event_resource_arn: "ResourceARN",
-    #       }
-    #
     # @!attribute [rw] event_resource_arn
     #   The Amazon Resource Name (ARN) for any local Amazon S3 resource that
     #   is an Lambda function's event trigger associated with this job.
@@ -1341,13 +1060,6 @@ module Aws::Snowball
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetJobManifestRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The ID for a job that you want to get the manifest file for, for
     #   example `JID123e4567-e89b-12d3-a456-426655440000`.
@@ -1374,13 +1086,6 @@ module Aws::Snowball
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetJobUnlockCodeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The ID for the job that you want to get the `UnlockCode` value for,
     #   for example `JID123e4567-e89b-12d3-a456-426655440000`.
@@ -1407,8 +1112,6 @@ module Aws::Snowball
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/GetSnowballUsageRequest AWS API Documentation
     #
     class GetSnowballUsageRequest < Aws::EmptyStructure; end
@@ -1431,13 +1134,6 @@ module Aws::Snowball
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSoftwareUpdatesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The ID for a job that you want to get the software update file for,
     #   for example `JID123e4567-e89b-12d3-a456-426655440000`.
@@ -1468,13 +1164,6 @@ module Aws::Snowball
     end
 
     # The tax documents required in Amazon Web Services Region in India.
-    #
-    # @note When making an API call, you may pass INDTaxDocuments
-    #   data as a hash:
-    #
-    #       {
-    #         gstin: "GSTIN",
-    #       }
     #
     # @!attribute [rw] gstin
     #   The Goods and Services Tax (GST) documents required in Amazon Web
@@ -1838,43 +1527,6 @@ module Aws::Snowball
     # Machine Image (AMI) based on Amazon EC2 that is associated with a
     # particular job.
     #
-    # @note When making an API call, you may pass JobResource
-    #   data as a hash:
-    #
-    #       {
-    #         s3_resources: [
-    #           {
-    #             bucket_arn: "ResourceARN",
-    #             key_range: {
-    #               begin_marker: "String",
-    #               end_marker: "String",
-    #             },
-    #             target_on_device_services: [
-    #               {
-    #                 service_name: "NFS_ON_DEVICE_SERVICE", # accepts NFS_ON_DEVICE_SERVICE, S3_ON_DEVICE_SERVICE
-    #                 transfer_option: "IMPORT", # accepts IMPORT, EXPORT, LOCAL_USE
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         lambda_resources: [
-    #           {
-    #             lambda_arn: "ResourceARN",
-    #             event_triggers: [
-    #               {
-    #                 event_resource_arn: "ResourceARN",
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         ec2_ami_resources: [
-    #           {
-    #             ami_id: "AmiId", # required
-    #             snowball_ami_id: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] s3_resources
     #   An array of `S3Resource` objects.
     #   @return [Array<Types::S3Resource>]
@@ -1916,14 +1568,6 @@ module Aws::Snowball
     # job creation, and has either an inclusive `BeginMarker`, an inclusive
     # `EndMarker`, or both. Ranges are UTF-8 binary sorted.
     #
-    # @note When making an API call, you may pass KeyRange
-    #   data as a hash:
-    #
-    #       {
-    #         begin_marker: "String",
-    #         end_marker: "String",
-    #       }
-    #
     # @!attribute [rw] begin_marker
     #   The key that starts an optional key range for an export job. Ranges
     #   are inclusive and UTF-8 binary sorted.
@@ -1945,18 +1589,6 @@ module Aws::Snowball
 
     # Identifies
     #
-    # @note When making an API call, you may pass LambdaResource
-    #   data as a hash:
-    #
-    #       {
-    #         lambda_arn: "ResourceARN",
-    #         event_triggers: [
-    #           {
-    #             event_resource_arn: "ResourceARN",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] lambda_arn
     #   An Amazon Resource Name (ARN) that represents an Lambda function to
     #   be triggered by PUT object actions on the associated local Amazon S3
@@ -1977,15 +1609,6 @@ module Aws::Snowball
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListClusterJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_id: "ClusterId", # required
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] cluster_id
     #   The 39-character ID for the cluster that you want to list, for
     #   example `CID123e4567-e89b-12d3-a456-426655440000`.
@@ -2032,14 +1655,6 @@ module Aws::Snowball
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListClustersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The number of `ClusterListEntry` objects to return.
     #   @return [Integer]
@@ -2079,14 +1694,6 @@ module Aws::Snowball
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCompatibleImagesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results for the list of compatible images.
     #   Currently, a Snowball Edge device can store 10 AMIs.
@@ -2126,14 +1733,6 @@ module Aws::Snowball
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The number of `JobListEntry` objects to return.
     #   @return [Integer]
@@ -2174,14 +1773,6 @@ module Aws::Snowball
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListLongTermPricingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of `ListLongTermPricing` objects to return.
     #   @return [Integer]
@@ -2288,14 +1879,6 @@ module Aws::Snowball
     # the NFS (Network File System) service on an Amazon Web Services Snow
     # Family device.
     #
-    # @note When making an API call, you may pass NFSOnDeviceServiceConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         storage_limit: 1,
-    #         storage_unit: "TB", # accepts TB
-    #       }
-    #
     # @!attribute [rw] storage_limit
     #   The maximum NFS storage for one Snow Family device.
     #   @return [Integer]
@@ -2325,15 +1908,6 @@ module Aws::Snowball
     # `JobStatesToNotify` array of strings, or you can specify that you want
     # to have Amazon SNS notifications sent out for all job states with
     # `NotifyAll` set to true.
-    #
-    # @note When making an API call, you may pass Notification
-    #   data as a hash:
-    #
-    #       {
-    #         sns_topic_arn: "SnsTopicARN",
-    #         job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWSSortingFacility, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
-    #         notify_all: false,
-    #       }
     #
     # @!attribute [rw] sns_topic_arn
     #   The new SNS `TopicArn` that you want to associate with this job. You
@@ -2372,20 +1946,6 @@ module Aws::Snowball
 
     # An object that represents the metadata and configuration settings for
     # services on an Amazon Web Services Snow Family device.
-    #
-    # @note When making an API call, you may pass OnDeviceServiceConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         nfs_on_device_service: {
-    #           storage_limit: 1,
-    #           storage_unit: "TB", # accepts TB
-    #         },
-    #         tgw_on_device_service: {
-    #           storage_limit: 1,
-    #           storage_unit: "TB", # accepts TB
-    #         },
-    #       }
     #
     # @!attribute [rw] nfs_on_device_service
     #   Represents the NFS (Network File System) service on a Snow Family
@@ -2427,23 +1987,6 @@ module Aws::Snowball
     # the range is defined at job creation, and has either an inclusive
     # `BeginMarker`, an inclusive `EndMarker`, or both. Ranges are UTF-8
     # binary sorted.
-    #
-    # @note When making an API call, you may pass S3Resource
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_arn: "ResourceARN",
-    #         key_range: {
-    #           begin_marker: "String",
-    #           end_marker: "String",
-    #         },
-    #         target_on_device_services: [
-    #           {
-    #             service_name: "NFS_ON_DEVICE_SERVICE", # accepts NFS_ON_DEVICE_SERVICE, S3_ON_DEVICE_SERVICE
-    #             transfer_option: "IMPORT", # accepts IMPORT, EXPORT, LOCAL_USE
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] bucket_arn
     #   The Amazon Resource Name (ARN) of an Amazon S3 bucket.
@@ -2543,15 +2086,6 @@ module Aws::Snowball
 
     # Specifies the device configuration for an Snowcone job.
     #
-    # @note When making an API call, you may pass SnowconeDeviceConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         wireless_connection: {
-    #           is_wifi_enabled: false,
-    #         },
-    #       }
-    #
     # @!attribute [rw] wireless_connection
     #   Configures the wireless connection for the Snowcone device.
     #   @return [Types::WirelessConnection]
@@ -2567,14 +2101,6 @@ module Aws::Snowball
     # An object that represents the metadata and configuration settings for
     # the Storage Gateway service Tape Gateway type on an Amazon Web
     # Services Snow Family device.
-    #
-    # @note When making an API call, you may pass TGWOnDeviceServiceConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         storage_limit: 1,
-    #         storage_unit: "TB", # accepts TB
-    #       }
     #
     # @!attribute [rw] storage_limit
     #   The maximum number of virtual tapes to store on one Snow Family
@@ -2600,14 +2126,6 @@ module Aws::Snowball
     # into. Amazon Web Services Snow Family supports Amazon S3 and NFS
     # (Network File System).
     #
-    # @note When making an API call, you may pass TargetOnDeviceService
-    #   data as a hash:
-    #
-    #       {
-    #         service_name: "NFS_ON_DEVICE_SERVICE", # accepts NFS_ON_DEVICE_SERVICE, S3_ON_DEVICE_SERVICE
-    #         transfer_option: "IMPORT", # accepts IMPORT, EXPORT, LOCAL_USE
-    #       }
-    #
     # @!attribute [rw] service_name
     #   Specifies the name of the service on the Snow Family device that
     #   your transferred data will be exported from or imported into.
@@ -2628,15 +2146,6 @@ module Aws::Snowball
     end
 
     # The tax documents required in your Amazon Web Services Region.
-    #
-    # @note When making an API call, you may pass TaxDocuments
-    #   data as a hash:
-    #
-    #       {
-    #         ind: {
-    #           gstin: "GSTIN",
-    #         },
-    #       }
     #
     # @!attribute [rw] ind
     #   The tax documents required in Amazon Web Services Region in India.
@@ -2665,66 +2174,6 @@ module Aws::Snowball
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateClusterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_id: "ClusterId", # required
-    #         role_arn: "RoleARN",
-    #         description: "String",
-    #         resources: {
-    #           s3_resources: [
-    #             {
-    #               bucket_arn: "ResourceARN",
-    #               key_range: {
-    #                 begin_marker: "String",
-    #                 end_marker: "String",
-    #               },
-    #               target_on_device_services: [
-    #                 {
-    #                   service_name: "NFS_ON_DEVICE_SERVICE", # accepts NFS_ON_DEVICE_SERVICE, S3_ON_DEVICE_SERVICE
-    #                   transfer_option: "IMPORT", # accepts IMPORT, EXPORT, LOCAL_USE
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #           lambda_resources: [
-    #             {
-    #               lambda_arn: "ResourceARN",
-    #               event_triggers: [
-    #                 {
-    #                   event_resource_arn: "ResourceARN",
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #           ec2_ami_resources: [
-    #             {
-    #               ami_id: "AmiId", # required
-    #               snowball_ami_id: "String",
-    #             },
-    #           ],
-    #         },
-    #         on_device_service_configuration: {
-    #           nfs_on_device_service: {
-    #             storage_limit: 1,
-    #             storage_unit: "TB", # accepts TB
-    #           },
-    #           tgw_on_device_service: {
-    #             storage_limit: 1,
-    #             storage_unit: "TB", # accepts TB
-    #           },
-    #         },
-    #         address_id: "AddressId",
-    #         shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
-    #         notification: {
-    #           sns_topic_arn: "SnsTopicARN",
-    #           job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWSSortingFacility, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
-    #           notify_all: false,
-    #         },
-    #         forwarding_address_id: "AddressId",
-    #       }
-    #
     # @!attribute [rw] cluster_id
     #   The cluster ID of the cluster that you want to update, for example
     #   `CID123e4567-e89b-12d3-a456-426655440000`.
@@ -2794,67 +2243,6 @@ module Aws::Snowball
     #
     class UpdateClusterResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #         role_arn: "RoleARN",
-    #         notification: {
-    #           sns_topic_arn: "SnsTopicARN",
-    #           job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWSSortingFacility, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
-    #           notify_all: false,
-    #         },
-    #         resources: {
-    #           s3_resources: [
-    #             {
-    #               bucket_arn: "ResourceARN",
-    #               key_range: {
-    #                 begin_marker: "String",
-    #                 end_marker: "String",
-    #               },
-    #               target_on_device_services: [
-    #                 {
-    #                   service_name: "NFS_ON_DEVICE_SERVICE", # accepts NFS_ON_DEVICE_SERVICE, S3_ON_DEVICE_SERVICE
-    #                   transfer_option: "IMPORT", # accepts IMPORT, EXPORT, LOCAL_USE
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #           lambda_resources: [
-    #             {
-    #               lambda_arn: "ResourceARN",
-    #               event_triggers: [
-    #                 {
-    #                   event_resource_arn: "ResourceARN",
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #           ec2_ami_resources: [
-    #             {
-    #               ami_id: "AmiId", # required
-    #               snowball_ami_id: "String",
-    #             },
-    #           ],
-    #         },
-    #         on_device_service_configuration: {
-    #           nfs_on_device_service: {
-    #             storage_limit: 1,
-    #             storage_unit: "TB", # accepts TB
-    #           },
-    #           tgw_on_device_service: {
-    #             storage_limit: 1,
-    #             storage_unit: "TB", # accepts TB
-    #           },
-    #         },
-    #         address_id: "AddressId",
-    #         shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
-    #         description: "String",
-    #         snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, T98, T8, T14, NoPreference, T32
-    #         forwarding_address_id: "AddressId",
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The job ID of the job that you want to update, for example
     #   `JID123e4567-e89b-12d3-a456-426655440000`.
@@ -2936,14 +2324,6 @@ module Aws::Snowball
     #
     class UpdateJobResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateJobShipmentStateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #         shipment_state: "RECEIVED", # required, accepts RECEIVED, RETURNED
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The job ID of the job whose shipment date you want to update, for
     #   example `JID123e4567-e89b-12d3-a456-426655440000`.
@@ -2971,15 +2351,6 @@ module Aws::Snowball
     #
     class UpdateJobShipmentStateResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateLongTermPricingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         long_term_pricing_id: "LongTermPricingId", # required
-    #         replacement_job: "JobId",
-    #         is_long_term_pricing_auto_renew: false,
-    #       }
-    #
     # @!attribute [rw] long_term_pricing_id
     #   The ID of the long-term pricing type for the device.
     #   @return [String]
@@ -3010,13 +2381,6 @@ module Aws::Snowball
     class UpdateLongTermPricingResult < Aws::EmptyStructure; end
 
     # Configures the wireless connection on an Snowcone device.
-    #
-    # @note When making an API call, you may pass WirelessConnection
-    #   data as a hash:
-    #
-    #       {
-    #         is_wifi_enabled: false,
-    #       }
     #
     # @!attribute [rw] is_wifi_enabled
     #   Enables the Wi-Fi adapter on an Snowcone device.

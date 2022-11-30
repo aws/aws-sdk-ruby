@@ -16,20 +16,6 @@ module Aws::Lex
     # can be set at runtime using the `PutContent`, `PutText`, or
     # `PutSession` operation.
     #
-    # @note When making an API call, you may pass ActiveContext
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ActiveContextName", # required
-    #         time_to_live: { # required
-    #           time_to_live_in_seconds: 1,
-    #           turns_to_live: 1,
-    #         },
-    #         parameters: { # required
-    #           "ParameterName" => "Text",
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the context.
     #   @return [String]
@@ -54,14 +40,6 @@ module Aws::Lex
     end
 
     # The length of time or number of turns that a context remains active.
-    #
-    # @note When making an API call, you may pass ActiveContextTimeToLive
-    #   data as a hash:
-    #
-    #       {
-    #         time_to_live_in_seconds: 1,
-    #         turns_to_live: 1,
-    #       }
     #
     # @!attribute [rw] time_to_live_in_seconds
     #   The number of seconds that the context should be active after it is
@@ -150,15 +128,6 @@ module Aws::Lex
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteSessionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         bot_name: "BotName", # required
-    #         bot_alias: "BotAlias", # required
-    #         user_id: "UserId", # required
-    #       }
-    #
     # @!attribute [rw] bot_name
     #   The name of the bot that contains the session data.
     #   @return [String]
@@ -235,21 +204,6 @@ module Aws::Lex
     # action takes place. Use the `DialogAction` data type to set the
     # interaction to a specific state, or to return the interaction to a
     # previous state.
-    #
-    # @note When making an API call, you may pass DialogAction
-    #   data as a hash:
-    #
-    #       {
-    #         type: "ElicitIntent", # required, accepts ElicitIntent, ConfirmIntent, ElicitSlot, Close, Delegate
-    #         intent_name: "IntentName",
-    #         slots: {
-    #           "String" => "String",
-    #         },
-    #         slot_to_elicit: "String",
-    #         fulfillment_state: "Fulfilled", # accepts Fulfilled, Failed, ReadyForFulfillment
-    #         message: "Text",
-    #         message_format: "PlainText", # accepts PlainText, CustomPayload, SSML, Composite
-    #       }
     #
     # @!attribute [rw] type
     #   The next action that the bot should take in its interaction with the
@@ -369,16 +323,6 @@ module Aws::Lex
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSessionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         bot_name: "BotName", # required
-    #         bot_alias: "BotAlias", # required
-    #         user_id: "UserId", # required
-    #         checkpoint_label_filter: "IntentSummaryCheckpointLabel",
-    #       }
-    #
     # @!attribute [rw] bot_name
     #   The name of the bot that contains the session data.
     #   @return [String]
@@ -477,21 +421,6 @@ module Aws::Lex
     # information to get the current state of an intent so that you can
     # process the intent, or so that you can return the intent to its
     # previous state.
-    #
-    # @note When making an API call, you may pass IntentSummary
-    #   data as a hash:
-    #
-    #       {
-    #         intent_name: "IntentName",
-    #         checkpoint_label: "IntentSummaryCheckpointLabel",
-    #         slots: {
-    #           "String" => "String",
-    #         },
-    #         confirmation_status: "None", # accepts None, Confirmed, Denied
-    #         dialog_action_type: "ElicitIntent", # required, accepts ElicitIntent, ConfirmIntent, ElicitSlot, Close, Delegate
-    #         fulfillment_state: "Fulfilled", # accepts Fulfilled, Failed, ReadyForFulfillment
-    #         slot_to_elicit: "String",
-    #       }
     #
     # @!attribute [rw] intent_name
     #   The name of the intent.
@@ -649,21 +578,6 @@ module Aws::Lex
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PostContentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         bot_name: "BotName", # required
-    #         bot_alias: "BotAlias", # required
-    #         user_id: "UserId", # required
-    #         session_attributes: "AttributesString",
-    #         request_attributes: "AttributesString",
-    #         content_type: "HttpContentType", # required
-    #         accept: "Accept",
-    #         input_stream: "data", # required
-    #         active_contexts: "ActiveContextsString",
-    #       }
-    #
     # @!attribute [rw] bot_name
     #   Name of the Amazon Lex bot.
     #   @return [String]
@@ -1091,34 +1005,6 @@ module Aws::Lex
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PostTextRequest
-    #   data as a hash:
-    #
-    #       {
-    #         bot_name: "BotName", # required
-    #         bot_alias: "BotAlias", # required
-    #         user_id: "UserId", # required
-    #         session_attributes: {
-    #           "String" => "String",
-    #         },
-    #         request_attributes: {
-    #           "String" => "String",
-    #         },
-    #         input_text: "Text", # required
-    #         active_contexts: [
-    #           {
-    #             name: "ActiveContextName", # required
-    #             time_to_live: { # required
-    #               time_to_live_in_seconds: 1,
-    #               turns_to_live: 1,
-    #             },
-    #             parameters: { # required
-    #               "ParameterName" => "Text",
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] bot_name
     #   The name of the Amazon Lex bot.
     #   @return [String]
@@ -1430,55 +1316,6 @@ module Aws::Lex
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutSessionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         bot_name: "BotName", # required
-    #         bot_alias: "BotAlias", # required
-    #         user_id: "UserId", # required
-    #         session_attributes: {
-    #           "String" => "String",
-    #         },
-    #         dialog_action: {
-    #           type: "ElicitIntent", # required, accepts ElicitIntent, ConfirmIntent, ElicitSlot, Close, Delegate
-    #           intent_name: "IntentName",
-    #           slots: {
-    #             "String" => "String",
-    #           },
-    #           slot_to_elicit: "String",
-    #           fulfillment_state: "Fulfilled", # accepts Fulfilled, Failed, ReadyForFulfillment
-    #           message: "Text",
-    #           message_format: "PlainText", # accepts PlainText, CustomPayload, SSML, Composite
-    #         },
-    #         recent_intent_summary_view: [
-    #           {
-    #             intent_name: "IntentName",
-    #             checkpoint_label: "IntentSummaryCheckpointLabel",
-    #             slots: {
-    #               "String" => "String",
-    #             },
-    #             confirmation_status: "None", # accepts None, Confirmed, Denied
-    #             dialog_action_type: "ElicitIntent", # required, accepts ElicitIntent, ConfirmIntent, ElicitSlot, Close, Delegate
-    #             fulfillment_state: "Fulfilled", # accepts Fulfilled, Failed, ReadyForFulfillment
-    #             slot_to_elicit: "String",
-    #           },
-    #         ],
-    #         accept: "Accept",
-    #         active_contexts: [
-    #           {
-    #             name: "ActiveContextName", # required
-    #             time_to_live: { # required
-    #               time_to_live_in_seconds: 1,
-    #               turns_to_live: 1,
-    #             },
-    #             parameters: { # required
-    #               "ParameterName" => "Text",
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] bot_name
     #   The name of the bot that contains the session data.
     #   @return [String]

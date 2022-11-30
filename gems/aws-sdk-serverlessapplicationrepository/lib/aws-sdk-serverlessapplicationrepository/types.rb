@@ -183,16 +183,6 @@ module Aws::ServerlessApplicationRepository
 
     # Policy statement applied to the application.
     #
-    # @note When making an API call, you may pass ApplicationPolicyStatement
-    #   data as a hash:
-    #
-    #       {
-    #         actions: ["__string"], # required
-    #         principal_org_i_ds: ["__string"],
-    #         principals: ["__string"], # required
-    #         statement_id: "__string",
-    #       }
-    #
     # @!attribute [rw] actions
     #   For the list of actions supported for this operation, see
     #   [Application Permissions][1].
@@ -541,27 +531,6 @@ module Aws::ServerlessApplicationRepository
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         author: "__string", # required
-    #         description: "__string", # required
-    #         home_page_url: "__string",
-    #         labels: ["__string"],
-    #         license_body: "__string",
-    #         license_url: "__string",
-    #         name: "__string", # required
-    #         readme_body: "__string",
-    #         readme_url: "__string",
-    #         semantic_version: "__string",
-    #         source_code_archive_url: "__string",
-    #         source_code_url: "__string",
-    #         spdx_license_id: "__string",
-    #         template_body: "__string",
-    #         template_url: "__string",
-    #       }
-    #
     # @!attribute [rw] author
     #   @return [String]
     #
@@ -722,18 +691,6 @@ module Aws::ServerlessApplicationRepository
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateApplicationVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "__string", # required
-    #         semantic_version: "__string", # required
-    #         source_code_archive_url: "__string",
-    #         source_code_url: "__string",
-    #         template_body: "__string",
-    #         template_url: "__string",
-    #       }
-    #
     # @!attribute [rw] application_id
     #   @return [String]
     #
@@ -953,43 +910,6 @@ module Aws::ServerlessApplicationRepository
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateCloudFormationChangeSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "__string", # required
-    #         capabilities: ["__string"],
-    #         change_set_name: "__string",
-    #         client_token: "__string",
-    #         description: "__string",
-    #         notification_arns: ["__string"],
-    #         parameter_overrides: [
-    #           {
-    #             name: "__string", # required
-    #             value: "__string", # required
-    #           },
-    #         ],
-    #         resource_types: ["__string"],
-    #         rollback_configuration: {
-    #           monitoring_time_in_minutes: 1,
-    #           rollback_triggers: [
-    #             {
-    #               arn: "__string", # required
-    #               type: "__string", # required
-    #             },
-    #           ],
-    #         },
-    #         semantic_version: "__string",
-    #         stack_name: "__string", # required
-    #         tags: [
-    #           {
-    #             key: "__string", # required
-    #             value: "__string", # required
-    #           },
-    #         ],
-    #         template_id: "__string",
-    #       }
-    #
     # @!attribute [rw] application_id
     #   @return [String]
     #
@@ -1075,14 +995,6 @@ module Aws::ServerlessApplicationRepository
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateCloudFormationTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "__string", # required
-    #         semantic_version: "__string",
-    #       }
-    #
     # @!attribute [rw] application_id
     #   @return [String]
     #
@@ -1133,13 +1045,6 @@ module Aws::ServerlessApplicationRepository
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] application_id
     #   @return [String]
     #
@@ -1170,13 +1075,6 @@ module Aws::ServerlessApplicationRepository
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetApplicationPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] application_id
     #   @return [String]
     #
@@ -1199,14 +1097,6 @@ module Aws::ServerlessApplicationRepository
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "__string", # required
-    #         semantic_version: "__string",
-    #       }
-    #
     # @!attribute [rw] application_id
     #   @return [String]
     #
@@ -1282,14 +1172,6 @@ module Aws::ServerlessApplicationRepository
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetCloudFormationTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "__string", # required
-    #         template_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] application_id
     #   @return [String]
     #
@@ -1361,16 +1243,6 @@ module Aws::ServerlessApplicationRepository
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListApplicationDependenciesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "__string", # required
-    #         max_items: 1,
-    #         next_token: "__string",
-    #         semantic_version: "__string",
-    #       }
-    #
     # @!attribute [rw] application_id
     #   @return [String]
     #
@@ -1409,15 +1281,6 @@ module Aws::ServerlessApplicationRepository
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListApplicationVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "__string", # required
-    #         max_items: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] application_id
     #   @return [String]
     #
@@ -1452,14 +1315,6 @@ module Aws::ServerlessApplicationRepository
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListApplicationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_items: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] max_items
     #   @return [Integer]
     #
@@ -1640,14 +1495,6 @@ module Aws::ServerlessApplicationRepository
 
     # Parameter value of the application.
     #
-    # @note When making an API call, you may pass ParameterValue
-    #   data as a hash:
-    #
-    #       {
-    #         name: "__string", # required
-    #         value: "__string", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The key associated with the parameter. If you don't specify a key
     #   and value for a particular parameter, AWS CloudFormation uses the
@@ -1667,21 +1514,6 @@ module Aws::ServerlessApplicationRepository
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutApplicationPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "__string", # required
-    #         statements: [ # required
-    #           {
-    #             actions: ["__string"], # required
-    #             principal_org_i_ds: ["__string"],
-    #             principals: ["__string"], # required
-    #             statement_id: "__string",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] application_id
     #   @return [String]
     #
@@ -1712,19 +1544,6 @@ module Aws::ServerlessApplicationRepository
     # href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">RollbackConfiguration</a>
     # </i> Data Type.
     #
-    # @note When making an API call, you may pass RollbackConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         monitoring_time_in_minutes: 1,
-    #         rollback_triggers: [
-    #           {
-    #             arn: "__string", # required
-    #             type: "__string", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] monitoring_time_in_minutes
     #   This property corresponds to the content of the same name for the
     #   <i>AWS CloudFormation <a
@@ -1752,14 +1571,6 @@ module Aws::ServerlessApplicationRepository
     # href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger">RollbackTrigger</a>
     # </i> Data Type.
     #
-    # @note When making an API call, you may pass RollbackTrigger
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "__string", # required
-    #         type: "__string", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   This property corresponds to the content of the same name for the
     #   <i>AWS CloudFormation <a
@@ -1786,14 +1597,6 @@ module Aws::ServerlessApplicationRepository
     # This property corresponds to the <i>AWS CloudFormation <a
     # href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag">Tag</a>
     # </i> Data Type.
-    #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "__string", # required
-    #         value: "__string", # required
-    #       }
     #
     # @!attribute [rw] key
     #   This property corresponds to the content of the same name for the
@@ -1910,14 +1713,6 @@ module Aws::ServerlessApplicationRepository
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UnshareApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "__string", # required
-    #         organization_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] application_id
     #   @return [String]
     #
@@ -1989,19 +1784,6 @@ module Aws::ServerlessApplicationRepository
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "__string", # required
-    #         author: "__string",
-    #         description: "__string",
-    #         home_page_url: "__string",
-    #         labels: ["__string"],
-    #         readme_body: "__string",
-    #         readme_url: "__string",
-    #       }
-    #
     # @!attribute [rw] application_id
     #   @return [String]
     #

@@ -10,13 +10,6 @@
 module Aws::DirectoryService
   module Types
 
-    # @note When making an API call, you may pass AcceptSharedDirectoryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         shared_directory_id: "DirectoryId", # required
-    #       }
-    #
     # @!attribute [rw] shared_directory_id
     #   Identifier of the shared directory in the directory consumer
     #   account. This identifier is different for each directory owner
@@ -62,20 +55,6 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AddIpRoutesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #         ip_routes: [ # required
-    #           {
-    #             cidr_ip: "CidrIp",
-    #             description: "Description",
-    #           },
-    #         ],
-    #         update_security_group_for_directory_controllers: false,
-    #       }
-    #
     # @!attribute [rw] directory_id
     #   Identifier (ID) of the directory to which to add the address block.
     #   @return [String]
@@ -166,18 +145,6 @@ module Aws::DirectoryService
     #
     class AddIpRoutesResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass AddRegionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #         region_name: "RegionName", # required
-    #         vpc_settings: { # required
-    #           vpc_id: "VpcId", # required
-    #           subnet_ids: ["SubnetId"], # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] directory_id
     #   The identifier of the directory to which you want to add Region
     #   replication.
@@ -207,19 +174,6 @@ module Aws::DirectoryService
     #
     class AddRegionResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass AddTagsToResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_id: "ResourceId", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_id
     #   Identifier (ID) for the directory to which to add the tag.
     #   @return [String]
@@ -242,14 +196,6 @@ module Aws::DirectoryService
     class AddTagsToResourceResult < Aws::EmptyStructure; end
 
     # Represents a named directory attribute.
-    #
-    # @note When making an API call, you may pass Attribute
-    #   data as a hash:
-    #
-    #       {
-    #         name: "AttributeName",
-    #         value: "AttributeValue",
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the attribute.
@@ -287,14 +233,6 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CancelSchemaExtensionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #         schema_extension_id: "SchemaExtensionId", # required
-    #       }
-    #
     # @!attribute [rw] directory_id
     #   The identifier of the directory whose schema extension will be
     #   canceled.
@@ -517,13 +455,6 @@ module Aws::DirectoryService
     # settings for the `RegisterCertificate` and `DescribeCertificate`
     # operations.
     #
-    # @note When making an API call, you may pass ClientCertAuthSettings
-    #   data as a hash:
-    #
-    #       {
-    #         ocsp_url: "OCSPUrl",
-    #       }
-    #
     # @!attribute [rw] ocsp_url
     #   Specifies the URL of the default OCSP server used to check for
     #   revocation status. A secondary value to any OCSP address found in
@@ -616,29 +547,6 @@ module Aws::DirectoryService
 
     # Contains the inputs for the ConnectDirectory operation.
     #
-    # @note When making an API call, you may pass ConnectDirectoryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "DirectoryName", # required
-    #         short_name: "DirectoryShortName",
-    #         password: "ConnectPassword", # required
-    #         description: "Description",
-    #         size: "Small", # required, accepts Small, Large
-    #         connect_settings: { # required
-    #           vpc_id: "VpcId", # required
-    #           subnet_ids: ["SubnetId"], # required
-    #           customer_dns_ips: ["IpAddr"], # required
-    #           customer_user_name: "UserName", # required
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The fully qualified name of your self-managed directory, such as
     #   `corp.example.com`.
@@ -699,14 +607,6 @@ module Aws::DirectoryService
 
     # Contains the inputs for the CreateAlias operation.
     #
-    # @note When making an API call, you may pass CreateAliasRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #         alias: "AliasName", # required
-    #       }
-    #
     # @!attribute [rw] directory_id
     #   The identifier of the directory for which to create the alias.
     #   @return [String]
@@ -748,22 +648,6 @@ module Aws::DirectoryService
     end
 
     # Contains the inputs for the CreateComputer operation.
-    #
-    # @note When making an API call, you may pass CreateComputerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #         computer_name: "ComputerName", # required
-    #         password: "ComputerPassword", # required
-    #         organizational_unit_distinguished_name: "OrganizationalUnitDN",
-    #         computer_attributes: [
-    #           {
-    #             name: "AttributeName",
-    #             value: "AttributeValue",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] directory_id
     #   The identifier of the directory in which to create the computer
@@ -820,15 +704,6 @@ module Aws::DirectoryService
     # Service for Microsoft Active Directory. Conditional forwarders are
     # required in order to set up a trust relationship with another domain.
     #
-    # @note When making an API call, you may pass CreateConditionalForwarderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #         remote_domain_name: "RemoteDomainName", # required
-    #         dns_ip_addrs: ["IpAddr"], # required
-    #       }
-    #
     # @!attribute [rw] directory_id
     #   The directory ID of the Amazon Web Services directory for which you
     #   are creating the conditional forwarder.
@@ -861,27 +736,6 @@ module Aws::DirectoryService
     class CreateConditionalForwarderResult < Aws::EmptyStructure; end
 
     # Contains the inputs for the CreateDirectory operation.
-    #
-    # @note When making an API call, you may pass CreateDirectoryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "DirectoryName", # required
-    #         short_name: "DirectoryShortName",
-    #         password: "Password", # required
-    #         description: "Description",
-    #         size: "Small", # required, accepts Small, Large
-    #         vpc_settings: {
-    #           vpc_id: "VpcId", # required
-    #           subnet_ids: ["SubnetId"], # required
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] name
     #   The fully qualified name for the directory, such as
@@ -976,14 +830,6 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateLogSubscriptionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #         log_group_name: "LogGroupName", # required
-    #       }
-    #
     # @!attribute [rw] directory_id
     #   Identifier of the directory to which you want to subscribe and
     #   receive real-time logs to your specified CloudWatch log group.
@@ -1008,27 +854,6 @@ module Aws::DirectoryService
     class CreateLogSubscriptionResult < Aws::EmptyStructure; end
 
     # Creates an Managed Microsoft AD directory.
-    #
-    # @note When making an API call, you may pass CreateMicrosoftADRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "DirectoryName", # required
-    #         short_name: "DirectoryShortName",
-    #         password: "Password", # required
-    #         description: "Description",
-    #         vpc_settings: { # required
-    #           vpc_id: "VpcId", # required
-    #           subnet_ids: ["SubnetId"], # required
-    #         },
-    #         edition: "Enterprise", # accepts Enterprise, Standard
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] name
     #   The fully qualified domain name for the Managed Microsoft AD
@@ -1100,14 +925,6 @@ module Aws::DirectoryService
 
     # Contains the inputs for the CreateSnapshot operation.
     #
-    # @note When making an API call, you may pass CreateSnapshotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #         name: "SnapshotName",
-    #       }
-    #
     # @!attribute [rw] directory_id
     #   The identifier of the directory of which to take a snapshot.
     #   @return [String]
@@ -1149,19 +966,6 @@ module Aws::DirectoryService
     # This action initiates the creation of the Amazon Web Services side of
     # a trust relationship between an Managed Microsoft AD directory and an
     # external domain.
-    #
-    # @note When making an API call, you may pass CreateTrustRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #         remote_domain_name: "RemoteDomainName", # required
-    #         trust_password: "TrustPassword", # required
-    #         trust_direction: "One-Way: Outgoing", # required, accepts One-Way: Outgoing, One-Way: Incoming, Two-Way
-    #         trust_type: "Forest", # accepts Forest, External
-    #         conditional_forwarder_ip_addrs: ["IpAddr"],
-    #         selective_auth: "Enabled", # accepts Enabled, Disabled
-    #       }
     #
     # @!attribute [rw] directory_id
     #   The Directory ID of the Managed Microsoft AD directory for which to
@@ -1225,14 +1029,6 @@ module Aws::DirectoryService
 
     # Deletes a conditional forwarder.
     #
-    # @note When making an API call, you may pass DeleteConditionalForwarderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #         remote_domain_name: "RemoteDomainName", # required
-    #       }
-    #
     # @!attribute [rw] directory_id
     #   The directory ID for which you are deleting the conditional
     #   forwarder.
@@ -1260,13 +1056,6 @@ module Aws::DirectoryService
 
     # Contains the inputs for the DeleteDirectory operation.
     #
-    # @note When making an API call, you may pass DeleteDirectoryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #       }
-    #
     # @!attribute [rw] directory_id
     #   The identifier of the directory to delete.
     #   @return [String]
@@ -1293,13 +1082,6 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteLogSubscriptionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #       }
-    #
     # @!attribute [rw] directory_id
     #   Identifier of the directory whose log subscription you want to
     #   delete.
@@ -1318,13 +1100,6 @@ module Aws::DirectoryService
     class DeleteLogSubscriptionResult < Aws::EmptyStructure; end
 
     # Contains the inputs for the DeleteSnapshot operation.
-    #
-    # @note When making an API call, you may pass DeleteSnapshotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         snapshot_id: "SnapshotId", # required
-    #       }
     #
     # @!attribute [rw] snapshot_id
     #   The identifier of the directory snapshot to be deleted.
@@ -1354,14 +1129,6 @@ module Aws::DirectoryService
 
     # Deletes the local side of an existing trust relationship between the
     # Managed Microsoft AD directory and the external domain.
-    #
-    # @note When making an API call, you may pass DeleteTrustRequest
-    #   data as a hash:
-    #
-    #       {
-    #         trust_id: "TrustId", # required
-    #         delete_associated_conditional_forwarder: false,
-    #       }
     #
     # @!attribute [rw] trust_id
     #   The Trust ID of the trust relationship to be deleted.
@@ -1394,14 +1161,6 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeregisterCertificateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #         certificate_id: "CertificateId", # required
-    #       }
-    #
     # @!attribute [rw] directory_id
     #   The identifier of the directory.
     #   @return [String]
@@ -1425,14 +1184,6 @@ module Aws::DirectoryService
 
     # Removes the specified directory as a publisher to the specified Amazon
     # SNS topic.
-    #
-    # @note When making an API call, you may pass DeregisterEventTopicRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #         topic_name: "TopicName", # required
-    #       }
     #
     # @!attribute [rw] directory_id
     #   The Directory ID to remove as a publisher. This directory will no
@@ -1459,14 +1210,6 @@ module Aws::DirectoryService
     #
     class DeregisterEventTopicResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeCertificateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #         certificate_id: "CertificateId", # required
-    #       }
-    #
     # @!attribute [rw] directory_id
     #   The identifier of the directory.
     #   @return [String]
@@ -1498,16 +1241,6 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeClientAuthenticationSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #         type: "SmartCard", # accepts SmartCard, SmartCardOrPassword
-    #         next_token: "NextToken",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] directory_id
     #   The identifier of the directory for which to retrieve information.
     #   @return [String]
@@ -1566,14 +1299,6 @@ module Aws::DirectoryService
 
     # Describes a conditional forwarder.
     #
-    # @note When making an API call, you may pass DescribeConditionalForwardersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #         remote_domain_names: ["RemoteDomainName"],
-    #       }
-    #
     # @!attribute [rw] directory_id
     #   The directory ID for which to get the list of associated conditional
     #   forwarders.
@@ -1609,15 +1334,6 @@ module Aws::DirectoryService
     end
 
     # Contains the inputs for the DescribeDirectories operation.
-    #
-    # @note When making an API call, you may pass DescribeDirectoriesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_ids: ["DirectoryId"],
-    #         next_token: "NextToken",
-    #         limit: 1,
-    #       }
     #
     # @!attribute [rw] directory_ids
     #   A list of identifiers of the directories for which to obtain the
@@ -1675,16 +1391,6 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDomainControllersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #         domain_controller_ids: ["DomainControllerId"],
-    #         next_token: "NextToken",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] directory_id
     #   Identifier of the directory for which to retrieve the domain
     #   controller information.
@@ -1736,14 +1442,6 @@ module Aws::DirectoryService
 
     # Describes event topics.
     #
-    # @note When making an API call, you may pass DescribeEventTopicsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId",
-    #         topic_names: ["TopicName"],
-    #       }
-    #
     # @!attribute [rw] directory_id
     #   The Directory ID for which to get the list of associated Amazon SNS
     #   topics. If this member is null, associations for all Directory IDs
@@ -1783,16 +1481,6 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeLDAPSSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #         type: "Client", # accepts Client
-    #         next_token: "NextToken",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] directory_id
     #   The identifier of the directory.
     #   @return [String]
@@ -1841,15 +1529,6 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeRegionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #         region_name: "RegionName",
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] directory_id
     #   The identifier of the directory.
     #   @return [String]
@@ -1893,15 +1572,6 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #         status: "Requested", # accepts Requested, Updating, Updated, Failed, Default
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] directory_id
     #   The identifier of the directory for which to retrieve information.
     #   @return [String]
@@ -1955,16 +1625,6 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeSharedDirectoriesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         owner_directory_id: "DirectoryId", # required
-    #         shared_directory_ids: ["DirectoryId"],
-    #         next_token: "NextToken",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] owner_directory_id
     #   Returns the identifier of the directory in the directory owner
     #   account.
@@ -2015,16 +1675,6 @@ module Aws::DirectoryService
     end
 
     # Contains the inputs for the DescribeSnapshots operation.
-    #
-    # @note When making an API call, you may pass DescribeSnapshotsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId",
-    #         snapshot_ids: ["SnapshotId"],
-    #         next_token: "NextToken",
-    #         limit: 1,
-    #       }
     #
     # @!attribute [rw] directory_id
     #   The identifier of the directory for which to retrieve snapshot
@@ -2086,16 +1736,6 @@ module Aws::DirectoryService
     # AD directory. If no input parameters are provided, such as directory
     # ID or trust ID, this request describes all the trust relationships.
     #
-    # @note When making an API call, you may pass DescribeTrustsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId",
-    #         trust_ids: ["TrustId"],
-    #         next_token: "NextToken",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] directory_id
     #   The Directory ID of the Amazon Web Services directory that is a part
     #   of the requested trust relationship.
@@ -2156,16 +1796,6 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeUpdateDirectoryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #         update_type: "OS", # required, accepts OS
-    #         region_name: "RegionName",
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] directory_id
     #   The unique identifier of the directory.
     #   @return [String]
@@ -2257,16 +1887,6 @@ module Aws::DirectoryService
 
     # Contains information for the ConnectDirectory operation when an AD
     # Connector directory is being created.
-    #
-    # @note When making an API call, you may pass DirectoryConnectSettings
-    #   data as a hash:
-    #
-    #       {
-    #         vpc_id: "VpcId", # required
-    #         subnet_ids: ["SubnetId"], # required
-    #         customer_dns_ips: ["IpAddr"], # required
-    #         customer_user_name: "UserName", # required
-    #       }
     #
     # @!attribute [rw] vpc_id
     #   The identifier of the VPC in which the AD Connector is created.
@@ -2666,14 +2286,6 @@ module Aws::DirectoryService
     # Contains VPC information for the CreateDirectory or CreateMicrosoftAD
     # operation.
     #
-    # @note When making an API call, you may pass DirectoryVpcSettings
-    #   data as a hash:
-    #
-    #       {
-    #         vpc_id: "VpcId", # required
-    #         subnet_ids: ["SubnetId"], # required
-    #       }
-    #
     # @!attribute [rw] vpc_id
     #   The identifier of the VPC in which to create the directory.
     #   @return [String]
@@ -2723,14 +2335,6 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisableClientAuthenticationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #         type: "SmartCard", # required, accepts SmartCard, SmartCardOrPassword
-    #       }
-    #
     # @!attribute [rw] directory_id
     #   The identifier of the directory
     #   @return [String]
@@ -2753,14 +2357,6 @@ module Aws::DirectoryService
     #
     class DisableClientAuthenticationResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DisableLDAPSRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #         type: "Client", # required, accepts Client
-    #       }
-    #
     # @!attribute [rw] directory_id
     #   The identifier of the directory.
     #   @return [String]
@@ -2785,13 +2381,6 @@ module Aws::DirectoryService
 
     # Contains the inputs for the DisableRadius operation.
     #
-    # @note When making an API call, you may pass DisableRadiusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #       }
-    #
     # @!attribute [rw] directory_id
     #   The identifier of the directory for which to disable MFA.
     #   @return [String]
@@ -2811,15 +2400,6 @@ module Aws::DirectoryService
     class DisableRadiusResult < Aws::EmptyStructure; end
 
     # Contains the inputs for the DisableSso operation.
-    #
-    # @note When making an API call, you may pass DisableSsoRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #         user_name: "UserName",
-    #         password: "ConnectPassword",
-    #       }
     #
     # @!attribute [rw] directory_id
     #   The identifier of the directory for which to disable single-sign on.
@@ -2941,14 +2521,6 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass EnableClientAuthenticationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #         type: "SmartCard", # required, accepts SmartCard, SmartCardOrPassword
-    #       }
-    #
     # @!attribute [rw] directory_id
     #   The identifier of the specified directory.
     #   @return [String]
@@ -2973,14 +2545,6 @@ module Aws::DirectoryService
     #
     class EnableClientAuthenticationResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass EnableLDAPSRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #         type: "Client", # required, accepts Client
-    #       }
-    #
     # @!attribute [rw] directory_id
     #   The identifier of the directory.
     #   @return [String]
@@ -3004,23 +2568,6 @@ module Aws::DirectoryService
     class EnableLDAPSResult < Aws::EmptyStructure; end
 
     # Contains the inputs for the EnableRadius operation.
-    #
-    # @note When making an API call, you may pass EnableRadiusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #         radius_settings: { # required
-    #           radius_servers: ["Server"],
-    #           radius_port: 1,
-    #           radius_timeout: 1,
-    #           radius_retries: 1,
-    #           shared_secret: "RadiusSharedSecret",
-    #           authentication_protocol: "PAP", # accepts PAP, CHAP, MS-CHAPv1, MS-CHAPv2
-    #           display_label: "RadiusDisplayLabel",
-    #           use_same_username: false,
-    #         },
-    #       }
     #
     # @!attribute [rw] directory_id
     #   The identifier of the directory for which to enable MFA.
@@ -3047,15 +2594,6 @@ module Aws::DirectoryService
     class EnableRadiusResult < Aws::EmptyStructure; end
 
     # Contains the inputs for the EnableSso operation.
-    #
-    # @note When making an API call, you may pass EnableSsoRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #         user_name: "UserName",
-    #         password: "ConnectPassword",
-    #       }
     #
     # @!attribute [rw] directory_id
     #   The identifier of the directory for which to enable single-sign on.
@@ -3173,8 +2711,6 @@ module Aws::DirectoryService
 
     # Contains the inputs for the GetDirectoryLimits operation.
     #
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/GetDirectoryLimitsRequest AWS API Documentation
     #
     class GetDirectoryLimitsRequest < Aws::EmptyStructure; end
@@ -3195,13 +2731,6 @@ module Aws::DirectoryService
     end
 
     # Contains the inputs for the GetSnapshotLimits operation.
-    #
-    # @note When making an API call, you may pass GetSnapshotLimitsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #       }
     #
     # @!attribute [rw] directory_id
     #   Contains the identifier of the directory to obtain the limits for.
@@ -3407,14 +2936,6 @@ module Aws::DirectoryService
     # IP address block. This is often the address block of the DNS server
     # used for your self-managed domain.
     #
-    # @note When making an API call, you may pass IpRoute
-    #   data as a hash:
-    #
-    #       {
-    #         cidr_ip: "CidrIp",
-    #         description: "Description",
-    #       }
-    #
     # @!attribute [rw] cidr_ip
     #   IP address block using CIDR format, for example 10.0.0.0/24. This is
     #   often the address block of the DNS server used for your self-managed
@@ -3518,15 +3039,6 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCertificatesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #         next_token: "NextToken",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] directory_id
     #   The identifier of the directory.
     #   @return [String]
@@ -3572,15 +3084,6 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListIpRoutesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #         next_token: "NextToken",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] directory_id
     #   Identifier (ID) of the directory for which you want to retrieve the
     #   IP addresses.
@@ -3626,15 +3129,6 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListLogSubscriptionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId",
-    #         next_token: "NextToken",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] directory_id
     #   If a *DirectoryID* is provided, lists only the log subscription
     #   associated with that directory. If no *DirectoryId* is provided,
@@ -3679,15 +3173,6 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSchemaExtensionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #         next_token: "NextToken",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] directory_id
     #   The identifier of the directory from which to retrieve the schema
     #   extension information.
@@ -3731,15 +3216,6 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_id: "ResourceId", # required
-    #         next_token: "NextToken",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] resource_id
     #   Identifier (ID) of the directory for which you want to retrieve
     #   tags.
@@ -3828,13 +3304,6 @@ module Aws::DirectoryService
 
     # OS version that the directory needs to be updated to.
     #
-    # @note When making an API call, you may pass OSUpdateSettings
-    #   data as a hash:
-    #
-    #       {
-    #         os_version: "SERVER_2012", # accepts SERVER_2012, SERVER_2019
-    #       }
-    #
     # @!attribute [rw] os_version
     #   OS version that the directory needs to be updated to.
     #   @return [String]
@@ -3911,20 +3380,6 @@ module Aws::DirectoryService
 
     # Contains information about a Remote Authentication Dial In User
     # Service (RADIUS) server.
-    #
-    # @note When making an API call, you may pass RadiusSettings
-    #   data as a hash:
-    #
-    #       {
-    #         radius_servers: ["Server"],
-    #         radius_port: 1,
-    #         radius_timeout: 1,
-    #         radius_retries: 1,
-    #         shared_secret: "RadiusSharedSecret",
-    #         authentication_protocol: "PAP", # accepts PAP, CHAP, MS-CHAPv1, MS-CHAPv2
-    #         display_label: "RadiusDisplayLabel",
-    #         use_same_username: false,
-    #       }
     #
     # @!attribute [rw] radius_servers
     #   An array of strings that contains the fully qualified domain name
@@ -4078,18 +3533,6 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RegisterCertificateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #         certificate_data: "CertificateData", # required
-    #         type: "ClientCertAuth", # accepts ClientCertAuth, ClientLDAPS
-    #         client_cert_auth_settings: {
-    #           ocsp_url: "OCSPUrl",
-    #         },
-    #       }
-    #
     # @!attribute [rw] directory_id
     #   The identifier of the directory.
     #   @return [String]
@@ -4134,14 +3577,6 @@ module Aws::DirectoryService
 
     # Registers a new event topic.
     #
-    # @note When making an API call, you may pass RegisterEventTopicRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #         topic_name: "TopicName", # required
-    #       }
-    #
     # @!attribute [rw] directory_id
     #   The Directory ID that will publish status messages to the Amazon SNS
     #   topic.
@@ -4168,13 +3603,6 @@ module Aws::DirectoryService
     #
     class RegisterEventTopicResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass RejectSharedDirectoryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         shared_directory_id: "DirectoryId", # required
-    #       }
-    #
     # @!attribute [rw] shared_directory_id
     #   Identifier of the shared directory in the directory consumer
     #   account. This identifier is different for each directory owner
@@ -4202,14 +3630,6 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RemoveIpRoutesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #         cidr_ips: ["CidrIp"], # required
-    #       }
-    #
     # @!attribute [rw] directory_id
     #   Identifier (ID) of the directory from which you want to remove the
     #   IP addresses.
@@ -4232,13 +3652,6 @@ module Aws::DirectoryService
     #
     class RemoveIpRoutesResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass RemoveRegionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #       }
-    #
     # @!attribute [rw] directory_id
     #   The identifier of the directory for which you want to remove Region
     #   replication.
@@ -4256,14 +3669,6 @@ module Aws::DirectoryService
     #
     class RemoveRegionResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass RemoveTagsFromResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_id: "ResourceId", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_id
     #   Identifier (ID) of the directory from which to remove the tag.
     #   @return [String]
@@ -4285,15 +3690,6 @@ module Aws::DirectoryService
     #
     class RemoveTagsFromResourceResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass ResetUserPasswordRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #         user_name: "CustomerUserName", # required
-    #         new_password: "UserPassword", # required
-    #       }
-    #
     # @!attribute [rw] directory_id
     #   Identifier of the Managed Microsoft AD or Simple AD directory in
     #   which the user resides.
@@ -4323,13 +3719,6 @@ module Aws::DirectoryService
 
     # An object representing the inputs for the RestoreFromSnapshot
     # operation.
-    #
-    # @note When making an API call, you may pass RestoreFromSnapshotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         snapshot_id: "SnapshotId", # required
-    #       }
     #
     # @!attribute [rw] snapshot_id
     #   The identifier of the snapshot to restore from.
@@ -4415,14 +3804,6 @@ module Aws::DirectoryService
     end
 
     # Contains information about the configurable settings for a directory.
-    #
-    # @note When making an API call, you may pass Setting
-    #   data as a hash:
-    #
-    #       {
-    #         name: "DirectoryConfigurationSettingName", # required
-    #         value: "DirectoryConfigurationSettingValue", # required
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the directory setting. For example:
@@ -4514,19 +3895,6 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ShareDirectoryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #         share_notes: "Notes",
-    #         share_target: { # required
-    #           id: "TargetId", # required
-    #           type: "ACCOUNT", # required, accepts ACCOUNT
-    #         },
-    #         share_method: "ORGANIZATIONS", # required, accepts ORGANIZATIONS, HANDSHAKE
-    #       }
-    #
     # @!attribute [rw] directory_id
     #   Identifier of the Managed Microsoft AD directory that you want to
     #   share with other Amazon Web Services accounts.
@@ -4596,14 +3964,6 @@ module Aws::DirectoryService
     end
 
     # Identifier that contains details about the directory consumer account.
-    #
-    # @note When making an API call, you may pass ShareTarget
-    #   data as a hash:
-    #
-    #       {
-    #         id: "TargetId", # required
-    #         type: "ACCOUNT", # required, accepts ACCOUNT
-    #       }
     #
     # @!attribute [rw] id
     #   Identifier of the directory consumer account.
@@ -4774,16 +4134,6 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartSchemaExtensionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #         create_snapshot_before_schema_extension: false, # required
-    #         ldif_content: "LdifContent", # required
-    #         description: "Description", # required
-    #       }
-    #
     # @!attribute [rw] directory_id
     #   The identifier of the directory for which the schema extension will
     #   be applied to.
@@ -4829,14 +4179,6 @@ module Aws::DirectoryService
     end
 
     # Metadata assigned to a directory consisting of a key-value pair.
-    #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
     #
     # @!attribute [rw] key
     #   Required name of the tag. The string value can be Unicode characters
@@ -4949,17 +4291,6 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UnshareDirectoryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #         unshare_target: { # required
-    #           id: "TargetId", # required
-    #           type: "ACCOUNT", # required, accepts ACCOUNT
-    #         },
-    #       }
-    #
     # @!attribute [rw] directory_id
     #   The identifier of the Managed Microsoft AD directory that you want
     #   to stop sharing.
@@ -4994,14 +4325,6 @@ module Aws::DirectoryService
 
     # Identifier that contains details about the directory consumer account
     # with whom the directory is being unshared.
-    #
-    # @note When making an API call, you may pass UnshareTarget
-    #   data as a hash:
-    #
-    #       {
-    #         id: "TargetId", # required
-    #         type: "ACCOUNT", # required, accepts ACCOUNT
-    #       }
     #
     # @!attribute [rw] id
     #   Identifier of the directory consumer account.
@@ -5060,15 +4383,6 @@ module Aws::DirectoryService
 
     # Updates a conditional forwarder.
     #
-    # @note When making an API call, you may pass UpdateConditionalForwarderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #         remote_domain_name: "RemoteDomainName", # required
-    #         dns_ip_addrs: ["IpAddr"], # required
-    #       }
-    #
     # @!attribute [rw] directory_id
     #   The directory ID of the Amazon Web Services directory for which to
     #   update the conditional forwarder.
@@ -5100,18 +4414,6 @@ module Aws::DirectoryService
     #
     class UpdateConditionalForwarderResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateDirectorySetupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #         update_type: "OS", # required, accepts OS
-    #         os_update_settings: {
-    #           os_version: "SERVER_2012", # accepts SERVER_2012, SERVER_2019
-    #         },
-    #         create_snapshot_before_update: false,
-    #       }
-    #
     # @!attribute [rw] directory_id
     #   The identifier of the directory on which you want to perform the
     #   update.
@@ -5198,14 +4500,6 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateNumberOfDomainControllersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #         desired_number: 1, # required
-    #       }
-    #
     # @!attribute [rw] directory_id
     #   Identifier of the directory to which the domain controllers will be
     #   added or removed.
@@ -5229,23 +4523,6 @@ module Aws::DirectoryService
     class UpdateNumberOfDomainControllersResult < Aws::EmptyStructure; end
 
     # Contains the inputs for the UpdateRadius operation.
-    #
-    # @note When making an API call, you may pass UpdateRadiusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #         radius_settings: { # required
-    #           radius_servers: ["Server"],
-    #           radius_port: 1,
-    #           radius_timeout: 1,
-    #           radius_retries: 1,
-    #           shared_secret: "RadiusSharedSecret",
-    #           authentication_protocol: "PAP", # accepts PAP, CHAP, MS-CHAPv1, MS-CHAPv2
-    #           display_label: "RadiusDisplayLabel",
-    #           use_same_username: false,
-    #         },
-    #       }
     #
     # @!attribute [rw] directory_id
     #   The identifier of the directory for which to update the RADIUS
@@ -5272,19 +4549,6 @@ module Aws::DirectoryService
     #
     class UpdateRadiusResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId", # required
-    #         settings: [ # required
-    #           {
-    #             name: "DirectoryConfigurationSettingName", # required
-    #             value: "DirectoryConfigurationSettingValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] directory_id
     #   The identifier of the directory for which to update settings.
     #   @return [String]
@@ -5314,14 +4578,6 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateTrustRequest
-    #   data as a hash:
-    #
-    #       {
-    #         trust_id: "TrustId", # required
-    #         selective_auth: "Enabled", # accepts Enabled, Disabled
-    #       }
-    #
     # @!attribute [rw] trust_id
     #   Identifier of the trust relationship.
     #   @return [String]
@@ -5391,13 +4647,6 @@ module Aws::DirectoryService
 
     # Initiates the verification of an existing trust relationship between
     # an Managed Microsoft AD directory and an external domain.
-    #
-    # @note When making an API call, you may pass VerifyTrustRequest
-    #   data as a hash:
-    #
-    #       {
-    #         trust_id: "TrustId", # required
-    #       }
     #
     # @!attribute [rw] trust_id
     #   The unique Trust ID of the trust relationship to verify.

@@ -28,13 +28,6 @@ module Aws::CognitoSync
 
     # The input for the BulkPublish operation.
     #
-    # @note When making an API call, you may pass BulkPublishRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity_pool_id: "IdentityPoolId", # required
-    #       }
-    #
     # @!attribute [rw] identity_pool_id
     #   A name-spaced GUID (for example,
     #   us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon
@@ -66,15 +59,6 @@ module Aws::CognitoSync
     end
 
     # Configuration options for configure Cognito streams.
-    #
-    # @note When making an API call, you may pass CognitoStreams
-    #   data as a hash:
-    #
-    #       {
-    #         stream_name: "StreamName",
-    #         role_arn: "AssumeRoleArn",
-    #         streaming_status: "ENABLED", # accepts ENABLED, DISABLED
-    #       }
     #
     # @!attribute [rw] stream_name
     #   The name of the Cognito stream to receive updates. This stream must
@@ -173,15 +157,6 @@ module Aws::CognitoSync
 
     # A request to delete the specific dataset.
     #
-    # @note When making an API call, you may pass DeleteDatasetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity_pool_id: "IdentityPoolId", # required
-    #         identity_id: "IdentityId", # required
-    #         dataset_name: "DatasetName", # required
-    #       }
-    #
     # @!attribute [rw] identity_pool_id
     #   A name-spaced GUID (for example,
     #   us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon
@@ -231,15 +206,6 @@ module Aws::CognitoSync
     # A request for meta data about a dataset (creation date, number of
     # records, size) by owner and dataset name.
     #
-    # @note When making an API call, you may pass DescribeDatasetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity_pool_id: "IdentityPoolId", # required
-    #         identity_id: "IdentityId", # required
-    #         dataset_name: "DatasetName", # required
-    #       }
-    #
     # @!attribute [rw] identity_pool_id
     #   A name-spaced GUID (for example,
     #   us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon
@@ -287,13 +253,6 @@ module Aws::CognitoSync
 
     # A request for usage information about the identity pool.
     #
-    # @note When making an API call, you may pass DescribeIdentityPoolUsageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity_pool_id: "IdentityPoolId", # required
-    #       }
-    #
     # @!attribute [rw] identity_pool_id
     #   A name-spaced GUID (for example,
     #   us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon
@@ -323,14 +282,6 @@ module Aws::CognitoSync
     end
 
     # A request for information about the usage of an identity pool.
-    #
-    # @note When making an API call, you may pass DescribeIdentityUsageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity_pool_id: "IdentityPoolId", # required
-    #         identity_id: "IdentityId", # required
-    #       }
     #
     # @!attribute [rw] identity_pool_id
     #   A name-spaced GUID (for example,
@@ -383,13 +334,6 @@ module Aws::CognitoSync
     end
 
     # The input for the GetBulkPublishDetails operation.
-    #
-    # @note When making an API call, you may pass GetBulkPublishDetailsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity_pool_id: "IdentityPoolId", # required
-    #       }
     #
     # @!attribute [rw] identity_pool_id
     #   A name-spaced GUID (for example,
@@ -454,13 +398,6 @@ module Aws::CognitoSync
 
     # A request for a list of the configured Cognito Events
     #
-    # @note When making an API call, you may pass GetCognitoEventsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity_pool_id: "IdentityPoolId", # required
-    #       }
-    #
     # @!attribute [rw] identity_pool_id
     #   The Cognito Identity Pool ID for the request
     #   @return [String]
@@ -488,13 +425,6 @@ module Aws::CognitoSync
     end
 
     # The input for the GetIdentityPoolConfiguration operation.
-    #
-    # @note When making an API call, you may pass GetIdentityPoolConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity_pool_id: "IdentityPoolId", # required
-    #       }
     #
     # @!attribute [rw] identity_pool_id
     #   A name-spaced GUID (for example,
@@ -693,16 +623,6 @@ module Aws::CognitoSync
 
     # Request for a list of datasets for an identity.
     #
-    # @note When making an API call, you may pass ListDatasetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity_pool_id: "IdentityPoolId", # required
-    #         identity_id: "IdentityId", # required
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] identity_pool_id
     #   A name-spaced GUID (for example,
     #   us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon
@@ -760,14 +680,6 @@ module Aws::CognitoSync
 
     # A request for usage information on an identity pool.
     #
-    # @note When making an API call, you may pass ListIdentityPoolUsageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   A pagination token for obtaining the next page of results.
     #   @return [String]
@@ -815,19 +727,6 @@ module Aws::CognitoSync
     end
 
     # A request for a list of records.
-    #
-    # @note When making an API call, you may pass ListRecordsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity_pool_id: "IdentityPoolId", # required
-    #         identity_id: "IdentityId", # required
-    #         dataset_name: "DatasetName", # required
-    #         last_sync_count: 1,
-    #         next_token: "String",
-    #         max_results: 1,
-    #         sync_session_token: "SyncSessionToken",
-    #       }
     #
     # @!attribute [rw] identity_pool_id
     #   A name-spaced GUID (for example,
@@ -946,14 +845,6 @@ module Aws::CognitoSync
 
     # Configuration options to be applied to the identity pool.
     #
-    # @note When making an API call, you may pass PushSync
-    #   data as a hash:
-    #
-    #       {
-    #         application_arns: ["ApplicationArn"],
-    #         role_arn: "AssumeRoleArn",
-    #       }
-    #
     # @!attribute [rw] application_arns
     #   List of SNS platform application ARNs that could be used by clients.
     #   @return [Array<String>]
@@ -1013,17 +904,6 @@ module Aws::CognitoSync
 
     # An update operation for a record.
     #
-    # @note When making an API call, you may pass RecordPatch
-    #   data as a hash:
-    #
-    #       {
-    #         op: "replace", # required, accepts replace, remove
-    #         key: "RecordKey", # required
-    #         value: "RecordValue",
-    #         sync_count: 1, # required
-    #         device_last_modified_date: Time.now,
-    #       }
-    #
     # @!attribute [rw] op
     #   An operation, either replace or remove.
     #   @return [String]
@@ -1057,16 +937,6 @@ module Aws::CognitoSync
     end
 
     # A request to RegisterDevice.
-    #
-    # @note When making an API call, you may pass RegisterDeviceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity_pool_id: "IdentityPoolId", # required
-    #         identity_id: "IdentityId", # required
-    #         platform: "APNS", # required, accepts APNS, APNS_SANDBOX, GCM, ADM
-    #         token: "PushToken", # required
-    #       }
     #
     # @!attribute [rw] identity_pool_id
     #   A name-spaced GUID (for example,
@@ -1144,16 +1014,6 @@ module Aws::CognitoSync
     #
     # "
     #
-    # @note When making an API call, you may pass SetCognitoEventsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity_pool_id: "IdentityPoolId", # required
-    #         events: { # required
-    #           "CognitoEventType" => "LambdaFunctionArn",
-    #         },
-    #       }
-    #
     # @!attribute [rw] identity_pool_id
     #   The Cognito Identity Pool to use when configuring Cognito Events
     #   @return [String]
@@ -1172,22 +1032,6 @@ module Aws::CognitoSync
     end
 
     # The input for the SetIdentityPoolConfiguration operation.
-    #
-    # @note When making an API call, you may pass SetIdentityPoolConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity_pool_id: "IdentityPoolId", # required
-    #         push_sync: {
-    #           application_arns: ["ApplicationArn"],
-    #           role_arn: "AssumeRoleArn",
-    #         },
-    #         cognito_streams: {
-    #           stream_name: "StreamName",
-    #           role_arn: "AssumeRoleArn",
-    #           streaming_status: "ENABLED", # accepts ENABLED, DISABLED
-    #         },
-    #       }
     #
     # @!attribute [rw] identity_pool_id
     #   A name-spaced GUID (for example,
@@ -1241,16 +1085,6 @@ module Aws::CognitoSync
 
     # A request to SubscribeToDatasetRequest.
     #
-    # @note When making an API call, you may pass SubscribeToDatasetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity_pool_id: "IdentityPoolId", # required
-    #         identity_id: "IdentityId", # required
-    #         dataset_name: "DatasetName", # required
-    #         device_id: "DeviceId", # required
-    #       }
-    #
     # @!attribute [rw] identity_pool_id
     #   A name-spaced GUID (for example,
     #   us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon
@@ -1302,16 +1136,6 @@ module Aws::CognitoSync
 
     # A request to UnsubscribeFromDataset.
     #
-    # @note When making an API call, you may pass UnsubscribeFromDatasetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity_pool_id: "IdentityPoolId", # required
-    #         identity_id: "IdentityId", # required
-    #         dataset_name: "DatasetName", # required
-    #         device_id: "DeviceId", # required
-    #       }
-    #
     # @!attribute [rw] identity_pool_id
     #   A name-spaced GUID (for example,
     #   us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon
@@ -1349,27 +1173,6 @@ module Aws::CognitoSync
 
     # A request to post updates to records or add and delete records for a
     # dataset and user.
-    #
-    # @note When making an API call, you may pass UpdateRecordsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity_pool_id: "IdentityPoolId", # required
-    #         identity_id: "IdentityId", # required
-    #         dataset_name: "DatasetName", # required
-    #         device_id: "DeviceId",
-    #         record_patches: [
-    #           {
-    #             op: "replace", # required, accepts replace, remove
-    #             key: "RecordKey", # required
-    #             value: "RecordValue",
-    #             sync_count: 1, # required
-    #             device_last_modified_date: Time.now,
-    #           },
-    #         ],
-    #         sync_session_token: "SyncSessionToken", # required
-    #         client_context: "ClientContext",
-    #       }
     #
     # @!attribute [rw] identity_pool_id
     #   A name-spaced GUID (for example,

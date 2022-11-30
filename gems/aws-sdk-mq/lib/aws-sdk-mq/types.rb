@@ -333,14 +333,6 @@ module Aws::MQ
     #
     # Does not apply to RabbitMQ brokers.
     #
-    # @note When making an API call, you may pass ConfigurationId
-    #   data as a hash:
-    #
-    #       {
-    #         id: "__string", # required
-    #         revision: 1,
-    #       }
-    #
     # @!attribute [rw] id
     #   Required. The unique ID that Amazon MQ generates for the
     #   configuration.
@@ -604,65 +596,6 @@ module Aws::MQ
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateBrokerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_strategy: "SIMPLE", # accepts SIMPLE, LDAP
-    #         auto_minor_version_upgrade: false, # required
-    #         broker_name: "__string", # required
-    #         configuration: {
-    #           id: "__string", # required
-    #           revision: 1,
-    #         },
-    #         creator_request_id: "__string",
-    #         deployment_mode: "SINGLE_INSTANCE", # required, accepts SINGLE_INSTANCE, ACTIVE_STANDBY_MULTI_AZ, CLUSTER_MULTI_AZ
-    #         encryption_options: {
-    #           kms_key_id: "__string",
-    #           use_aws_owned_key: false, # required
-    #         },
-    #         engine_type: "ACTIVEMQ", # required, accepts ACTIVEMQ, RABBITMQ
-    #         engine_version: "__string", # required
-    #         host_instance_type: "__string", # required
-    #         ldap_server_metadata: {
-    #           hosts: ["__string"], # required
-    #           role_base: "__string", # required
-    #           role_name: "__string",
-    #           role_search_matching: "__string", # required
-    #           role_search_subtree: false,
-    #           service_account_password: "__string", # required
-    #           service_account_username: "__string", # required
-    #           user_base: "__string", # required
-    #           user_role_name: "__string",
-    #           user_search_matching: "__string", # required
-    #           user_search_subtree: false,
-    #         },
-    #         logs: {
-    #           audit: false,
-    #           general: false,
-    #         },
-    #         maintenance_window_start_time: {
-    #           day_of_week: "MONDAY", # required, accepts MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
-    #           time_of_day: "__string", # required
-    #           time_zone: "__string",
-    #         },
-    #         publicly_accessible: false, # required
-    #         security_groups: ["__string"],
-    #         storage_type: "EBS", # accepts EBS, EFS
-    #         subnet_ids: ["__string"],
-    #         tags: {
-    #           "__string" => "__string",
-    #         },
-    #         users: [ # required
-    #           {
-    #             console_access: false,
-    #             groups: ["__string"],
-    #             password: "__string", # required
-    #             username: "__string", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] authentication_strategy
     #   Optional. The authentication strategy used to secure the broker. The
     #   default is SIMPLE.
@@ -872,19 +805,6 @@ module Aws::MQ
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_strategy: "SIMPLE", # accepts SIMPLE, LDAP
-    #         engine_type: "ACTIVEMQ", # required, accepts ACTIVEMQ, RABBITMQ
-    #         engine_version: "__string", # required
-    #         name: "__string", # required
-    #         tags: {
-    #           "__string" => "__string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] authentication_strategy
     #   Optional. The authentication strategy used to secure the broker. The
     #   default is SIMPLE.
@@ -949,16 +869,6 @@ module Aws::MQ
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateTagsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "__string", # required
-    #         tags: {
-    #           "__string" => "__string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   @return [String]
     #
@@ -1003,17 +913,6 @@ module Aws::MQ
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         broker_id: "__string", # required
-    #         console_access: false,
-    #         groups: ["__string"],
-    #         password: "__string", # required
-    #         username: "__string", # required
-    #       }
-    #
     # @!attribute [rw] broker_id
     #   @return [String]
     #
@@ -1059,13 +958,6 @@ module Aws::MQ
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteBrokerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         broker_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] broker_id
     #   @return [String]
     #
@@ -1088,14 +980,6 @@ module Aws::MQ
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteTagsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "__string", # required
-    #         tag_keys: ["__string"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   @return [String]
     #
@@ -1111,14 +995,6 @@ module Aws::MQ
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         broker_id: "__string", # required
-    #         username: "__string", # required
-    #       }
-    #
     # @!attribute [rw] broker_id
     #   @return [String]
     #
@@ -1138,15 +1014,6 @@ module Aws::MQ
     #
     class DeleteUserResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeBrokerEngineTypesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         engine_type: "__string",
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] engine_type
     #   @return [String]
     #
@@ -1185,17 +1052,6 @@ module Aws::MQ
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeBrokerInstanceOptionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         engine_type: "__string",
-    #         host_instance_type: "__string",
-    #         max_results: 1,
-    #         next_token: "__string",
-    #         storage_type: "__string",
-    #       }
-    #
     # @!attribute [rw] engine_type
     #   @return [String]
     #
@@ -1428,13 +1284,6 @@ module Aws::MQ
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeBrokerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         broker_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] broker_id
     #   @return [String]
     #
@@ -1591,13 +1440,6 @@ module Aws::MQ
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] configuration_id
     #   @return [String]
     #
@@ -1691,14 +1533,6 @@ module Aws::MQ
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeConfigurationRevisionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_id: "__string", # required
-    #         configuration_revision: "__string", # required
-    #       }
-    #
     # @!attribute [rw] configuration_id
     #   @return [String]
     #
@@ -1777,14 +1611,6 @@ module Aws::MQ
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         broker_id: "__string", # required
-    #         username: "__string", # required
-    #       }
-    #
     # @!attribute [rw] broker_id
     #   @return [String]
     #
@@ -1832,14 +1658,6 @@ module Aws::MQ
     # Does not apply to RabbitMQ brokers.
     #
     # Encryption options for the broker.
-    #
-    # @note When making an API call, you may pass EncryptionOptions
-    #   data as a hash:
-    #
-    #       {
-    #         kms_key_id: "__string",
-    #         use_aws_owned_key: false, # required
-    #       }
     #
     # @!attribute [rw] kms_key_id
     #   The customer master key (CMK) to use for the AWS Key Management
@@ -1933,23 +1751,6 @@ module Aws::MQ
     # authorize connections to the broker.
     #
     # Does not apply to RabbitMQ brokers.
-    #
-    # @note When making an API call, you may pass LdapServerMetadataInput
-    #   data as a hash:
-    #
-    #       {
-    #         hosts: ["__string"], # required
-    #         role_base: "__string", # required
-    #         role_name: "__string",
-    #         role_search_matching: "__string", # required
-    #         role_search_subtree: false,
-    #         service_account_password: "__string", # required
-    #         service_account_username: "__string", # required
-    #         user_base: "__string", # required
-    #         user_role_name: "__string",
-    #         user_search_matching: "__string", # required
-    #         user_search_subtree: false,
-    #       }
     #
     # @!attribute [rw] hosts
     #   Specifies the location of the LDAP server such as AWS Directory
@@ -2149,14 +1950,6 @@ module Aws::MQ
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListBrokersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [Integer]
     #
@@ -2219,15 +2012,6 @@ module Aws::MQ
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListConfigurationRevisionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_id: "__string", # required
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] configuration_id
     #   @return [String]
     #
@@ -2296,14 +2080,6 @@ module Aws::MQ
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListConfigurationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [Integer]
     #
@@ -2338,13 +2114,6 @@ module Aws::MQ
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   @return [String]
     #
@@ -2400,15 +2169,6 @@ module Aws::MQ
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListUsersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         broker_id: "__string", # required
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] broker_id
     #   @return [String]
     #
@@ -2453,14 +2213,6 @@ module Aws::MQ
 
     # The list of information about logs to be enabled for the specified
     # broker.
-    #
-    # @note When making an API call, you may pass Logs
-    #   data as a hash:
-    #
-    #       {
-    #         audit: false,
-    #         general: false,
-    #       }
     #
     # @!attribute [rw] audit
     #   Enables audit logging. Every user management action made using JMX
@@ -2558,13 +2310,6 @@ module Aws::MQ
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RebootBrokerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         broker_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] broker_id
     #   @return [String]
     #
@@ -2784,44 +2529,6 @@ module Aws::MQ
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateBrokerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_strategy: "SIMPLE", # accepts SIMPLE, LDAP
-    #         auto_minor_version_upgrade: false,
-    #         broker_id: "__string", # required
-    #         configuration: {
-    #           id: "__string", # required
-    #           revision: 1,
-    #         },
-    #         engine_version: "__string",
-    #         host_instance_type: "__string",
-    #         ldap_server_metadata: {
-    #           hosts: ["__string"], # required
-    #           role_base: "__string", # required
-    #           role_name: "__string",
-    #           role_search_matching: "__string", # required
-    #           role_search_subtree: false,
-    #           service_account_password: "__string", # required
-    #           service_account_username: "__string", # required
-    #           user_base: "__string", # required
-    #           user_role_name: "__string",
-    #           user_search_matching: "__string", # required
-    #           user_search_subtree: false,
-    #         },
-    #         logs: {
-    #           audit: false,
-    #           general: false,
-    #         },
-    #         maintenance_window_start_time: {
-    #           day_of_week: "MONDAY", # required, accepts MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
-    #           time_of_day: "__string", # required
-    #           time_zone: "__string",
-    #         },
-    #         security_groups: ["__string"],
-    #       }
-    #
     # @!attribute [rw] authentication_strategy
     #   Optional. The authentication strategy used to secure the broker. The
     #   default is SIMPLE.
@@ -3002,15 +2709,6 @@ module Aws::MQ
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_id: "__string", # required
-    #         data: "__string", # required
-    #         description: "__string",
-    #       }
-    #
     # @!attribute [rw] configuration_id
     #   @return [String]
     #
@@ -3092,17 +2790,6 @@ module Aws::MQ
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         broker_id: "__string", # required
-    #         console_access: false,
-    #         groups: ["__string"],
-    #         password: "__string",
-    #         username: "__string", # required
-    #       }
-    #
     # @!attribute [rw] broker_id
     #   @return [String]
     #
@@ -3139,16 +2826,6 @@ module Aws::MQ
     # provisioned. All subsequent broker users are created by making
     # RabbitMQ API calls directly to brokers or via the RabbitMQ web
     # console.
-    #
-    # @note When making an API call, you may pass User
-    #   data as a hash:
-    #
-    #       {
-    #         console_access: false,
-    #         groups: ["__string"],
-    #         password: "__string", # required
-    #         username: "__string", # required
-    #       }
     #
     # @!attribute [rw] console_access
     #   Enables access to the ActiveMQ Web Console for the ActiveMQ user.
@@ -3248,15 +2925,6 @@ module Aws::MQ
 
     # The scheduled time period relative to UTC during which Amazon MQ
     # begins to apply pending updates or patches to the broker.
-    #
-    # @note When making an API call, you may pass WeeklyStartTime
-    #   data as a hash:
-    #
-    #       {
-    #         day_of_week: "MONDAY", # required, accepts MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
-    #         time_of_day: "__string", # required
-    #         time_zone: "__string",
-    #       }
     #
     # @!attribute [rw] day_of_week
     #   Required. The day of the week.

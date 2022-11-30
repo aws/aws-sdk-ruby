@@ -18,14 +18,6 @@ module Aws::AppStream
     # an image builder, administrators can connect to the image builder only
     # through that endpoint.
     #
-    # @note When making an API call, you may pass AccessEndpoint
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_type: "STREAMING", # required, accepts STREAMING
-    #         vpce_id: "String",
-    #       }
-    #
     # @!attribute [rw] endpoint_type
     #   The type of interface endpoint.
     #   @return [String]
@@ -203,14 +195,6 @@ module Aws::AppStream
 
     # The persistent application settings for users of a stack.
     #
-    # @note When making an API call, you may pass ApplicationSettings
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false, # required
-    #         settings_group: "SettingsGroup",
-    #       }
-    #
     # @!attribute [rw] enabled
     #   Enables or disables persistent application settings for users during
     #   their streaming sessions.
@@ -261,14 +245,6 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateApplicationFleetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_name: "Name", # required
-    #         application_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] fleet_name
     #   The name of the fleet.
     #   @return [String]
@@ -300,15 +276,6 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateApplicationToEntitlementRequest
-    #   data as a hash:
-    #
-    #       {
-    #         stack_name: "Name", # required
-    #         entitlement_name: "Name", # required
-    #         application_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] stack_name
     #   The name of the stack.
     #   @return [String]
@@ -335,14 +302,6 @@ module Aws::AppStream
     #
     class AssociateApplicationToEntitlementResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass AssociateFleetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_name: "String", # required
-    #         stack_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] fleet_name
     #   The name of the fleet.
     #   @return [String]
@@ -364,20 +323,6 @@ module Aws::AppStream
     #
     class AssociateFleetResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass BatchAssociateUserStackRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_stack_associations: [ # required
-    #           {
-    #             stack_name: "String", # required
-    #             user_name: "Username", # required
-    #             authentication_type: "API", # required, accepts API, SAML, USERPOOL, AWS_AD
-    #             send_email_notification: false,
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] user_stack_associations
     #   The list of UserStackAssociation objects.
     #   @return [Array<Types::UserStackAssociation>]
@@ -402,20 +347,6 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchDisassociateUserStackRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_stack_associations: [ # required
-    #           {
-    #             stack_name: "String", # required
-    #             user_name: "Username", # required
-    #             authentication_type: "API", # required, accepts API, SAML, USERPOOL, AWS_AD
-    #             send_email_notification: false,
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] user_stack_associations
     #   The list of UserStackAssociation objects.
     #   @return [Array<Types::UserStackAssociation>]
@@ -451,14 +382,6 @@ module Aws::AppStream
     # domain password. Users will be disconnected to re-authenticate using
     # certificates.
     #
-    # @note When making an API call, you may pass CertificateBasedAuthProperties
-    #   data as a hash:
-    #
-    #       {
-    #         status: "DISABLED", # accepts DISABLED, ENABLED, ENABLED_NO_DIRECTORY_LOGIN_FALLBACK
-    #         certificate_authority_arn: "Arn",
-    #       }
-    #
     # @!attribute [rw] status
     #   The status of the certificate-based authentication properties.
     #   @return [String]
@@ -477,13 +400,6 @@ module Aws::AppStream
     end
 
     # Describes the capacity for a fleet.
-    #
-    # @note When making an API call, you may pass ComputeCapacity
-    #   data as a hash:
-    #
-    #       {
-    #         desired_instances: 1, # required
-    #       }
     #
     # @!attribute [rw] desired_instances
     #   The desired number of streaming instances.
@@ -542,16 +458,6 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CopyImageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source_image_name: "Name", # required
-    #         destination_image_name: "Name", # required
-    #         destination_region: "RegionName", # required
-    #         destination_image_description: "Description",
-    #       }
-    #
     # @!attribute [rw] source_image_name
     #   The name of the image to copy.
     #   @return [String]
@@ -595,31 +501,6 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAppBlockRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         description: "Description",
-    #         display_name: "DisplayName",
-    #         source_s3_location: { # required
-    #           s3_bucket: "S3Bucket", # required
-    #           s3_key: "S3Key", # required
-    #         },
-    #         setup_script_details: { # required
-    #           script_s3_location: { # required
-    #             s3_bucket: "S3Bucket", # required
-    #             s3_key: "S3Key", # required
-    #           },
-    #           executable_path: "String", # required
-    #           executable_parameters: "String",
-    #           timeout_in_seconds: 1, # required
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the app block.
     #   @return [String]
@@ -670,28 +551,6 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         display_name: "DisplayName",
-    #         description: "Description",
-    #         icon_s3_location: { # required
-    #           s3_bucket: "S3Bucket", # required
-    #           s3_key: "S3Key", # required
-    #         },
-    #         launch_path: "String", # required
-    #         working_directory: "String",
-    #         launch_parameters: "String",
-    #         platforms: ["WINDOWS"], # required, accepts WINDOWS, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, AMAZON_LINUX2
-    #         instance_families: ["String"], # required
-    #         app_block_arn: "Arn", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the application. This name is visible to users when
     #   display name is not specified.
@@ -770,22 +629,6 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDirectoryConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_name: "DirectoryName", # required
-    #         organizational_unit_distinguished_names: ["OrganizationalUnitDistinguishedName"], # required
-    #         service_account_credentials: {
-    #           account_name: "AccountName", # required
-    #           account_password: "AccountPassword", # required
-    #         },
-    #         certificate_based_auth_properties: {
-    #           status: "DISABLED", # accepts DISABLED, ENABLED, ENABLED_NO_DIRECTORY_LOGIN_FALLBACK
-    #           certificate_authority_arn: "Arn",
-    #         },
-    #       }
-    #
     # @!attribute [rw] directory_name
     #   The fully qualified name of the directory (for example,
     #   corp.example.com).
@@ -837,22 +680,6 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateEntitlementRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         stack_name: "Name", # required
-    #         description: "Description",
-    #         app_visibility: "ALL", # required, accepts ALL, ASSOCIATED
-    #         attributes: [ # required
-    #           {
-    #             name: "String", # required
-    #             value: "String", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the entitlement.
     #   @return [String]
@@ -897,46 +724,6 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateFleetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         image_name: "String",
-    #         image_arn: "Arn",
-    #         instance_type: "String", # required
-    #         fleet_type: "ALWAYS_ON", # accepts ALWAYS_ON, ON_DEMAND, ELASTIC
-    #         compute_capacity: {
-    #           desired_instances: 1, # required
-    #         },
-    #         vpc_config: {
-    #           subnet_ids: ["String"],
-    #           security_group_ids: ["String"],
-    #         },
-    #         max_user_duration_in_seconds: 1,
-    #         disconnect_timeout_in_seconds: 1,
-    #         description: "Description",
-    #         display_name: "DisplayName",
-    #         enable_default_internet_access: false,
-    #         domain_join_info: {
-    #           directory_name: "DirectoryName",
-    #           organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         idle_disconnect_timeout_in_seconds: 1,
-    #         iam_role_arn: "Arn",
-    #         stream_view: "APP", # accepts APP, DESKTOP
-    #         platform: "WINDOWS", # accepts WINDOWS, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, AMAZON_LINUX2
-    #         max_concurrent_sessions: 1,
-    #         usb_device_filter_strings: ["UsbDeviceFilterString"],
-    #         session_script_s3_location: {
-    #           s3_bucket: "S3Bucket", # required
-    #           s3_key: "S3Key", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   A unique name for the fleet.
     #   @return [String]
@@ -1243,38 +1030,6 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateImageBuilderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         image_name: "String",
-    #         image_arn: "Arn",
-    #         instance_type: "String", # required
-    #         description: "Description",
-    #         display_name: "DisplayName",
-    #         vpc_config: {
-    #           subnet_ids: ["String"],
-    #           security_group_ids: ["String"],
-    #         },
-    #         iam_role_arn: "Arn",
-    #         enable_default_internet_access: false,
-    #         domain_join_info: {
-    #           directory_name: "DirectoryName",
-    #           organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
-    #         },
-    #         appstream_agent_version: "AppstreamAgentVersion",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         access_endpoints: [
-    #           {
-    #             endpoint_type: "STREAMING", # required, accepts STREAMING
-    #             vpce_id: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   A unique name for the image builder.
     #   @return [String]
@@ -1462,14 +1217,6 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateImageBuilderStreamingURLRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #         validity: 1,
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the image builder.
     #   @return [String]
@@ -1506,47 +1253,6 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateStackRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         description: "Description",
-    #         display_name: "DisplayName",
-    #         storage_connectors: [
-    #           {
-    #             connector_type: "HOMEFOLDERS", # required, accepts HOMEFOLDERS, GOOGLE_DRIVE, ONE_DRIVE
-    #             resource_identifier: "ResourceIdentifier",
-    #             domains: ["Domain"],
-    #           },
-    #         ],
-    #         redirect_url: "RedirectURL",
-    #         feedback_url: "FeedbackURL",
-    #         user_settings: [
-    #           {
-    #             action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE, DOMAIN_PASSWORD_SIGNIN, DOMAIN_SMART_CARD_SIGNIN
-    #             permission: "ENABLED", # required, accepts ENABLED, DISABLED
-    #           },
-    #         ],
-    #         application_settings: {
-    #           enabled: false, # required
-    #           settings_group: "SettingsGroup",
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         access_endpoints: [
-    #           {
-    #             endpoint_type: "STREAMING", # required, accepts STREAMING
-    #             vpce_id: "String",
-    #           },
-    #         ],
-    #         embed_host_domains: ["EmbedHostDomain"],
-    #         streaming_experience_settings: {
-    #           preferred_protocol: "TCP", # accepts TCP, UDP
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the stack.
     #   @return [String]
@@ -1655,18 +1361,6 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateStreamingURLRequest
-    #   data as a hash:
-    #
-    #       {
-    #         stack_name: "String", # required
-    #         fleet_name: "String", # required
-    #         user_id: "StreamingUrlUserId", # required
-    #         application_id: "String",
-    #         validity: 1,
-    #         session_context: "String",
-    #       }
-    #
     # @!attribute [rw] stack_name
     #   The name of the stack.
     #   @return [String]
@@ -1732,20 +1426,6 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateUpdatedImageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         existing_image_name: "Name", # required
-    #         new_image_name: "Name", # required
-    #         new_image_description: "Description",
-    #         new_image_display_name: "DisplayName",
-    #         new_image_tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         dry_run: false,
-    #       }
-    #
     # @!attribute [rw] existing_image_name
     #   The name of the image to update.
     #   @return [String]
@@ -1823,8 +1503,6 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateUsageReportSubscriptionRequest AWS API Documentation
     #
     class CreateUsageReportSubscriptionRequest < Aws::EmptyStructure; end
@@ -1854,17 +1532,6 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "Username", # required
-    #         message_action: "SUPPRESS", # accepts SUPPRESS, RESEND
-    #         first_name: "UserAttributeValue",
-    #         last_name: "UserAttributeValue",
-    #         authentication_type: "API", # required, accepts API, SAML, USERPOOL, AWS_AD
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The email address of the user.
     #
@@ -1918,13 +1585,6 @@ module Aws::AppStream
     #
     class CreateUserResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteAppBlockRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the app block.
     #   @return [String]
@@ -1941,13 +1601,6 @@ module Aws::AppStream
     #
     class DeleteAppBlockResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the application.
     #   @return [String]
@@ -1964,13 +1617,6 @@ module Aws::AppStream
     #
     class DeleteApplicationResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteDirectoryConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_name: "DirectoryName", # required
-    #       }
-    #
     # @!attribute [rw] directory_name
     #   The name of the directory configuration.
     #   @return [String]
@@ -1987,14 +1633,6 @@ module Aws::AppStream
     #
     class DeleteDirectoryConfigResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteEntitlementRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         stack_name: "Name", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the entitlement.
     #   @return [String]
@@ -2016,13 +1654,6 @@ module Aws::AppStream
     #
     class DeleteEntitlementResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteFleetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the fleet.
     #   @return [String]
@@ -2039,13 +1670,6 @@ module Aws::AppStream
     #
     class DeleteFleetResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteImageBuilderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the image builder.
     #   @return [String]
@@ -2070,14 +1694,6 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteImagePermissionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         shared_account_id: "AwsAccountId", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the private image.
     #   @return [String]
@@ -2100,13 +1716,6 @@ module Aws::AppStream
     #
     class DeleteImagePermissionsResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteImageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the image.
     #   @return [String]
@@ -2131,13 +1740,6 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteStackRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the stack.
     #   @return [String]
@@ -2154,8 +1756,6 @@ module Aws::AppStream
     #
     class DeleteStackResult < Aws::EmptyStructure; end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteUsageReportSubscriptionRequest AWS API Documentation
     #
     class DeleteUsageReportSubscriptionRequest < Aws::EmptyStructure; end
@@ -2164,14 +1764,6 @@ module Aws::AppStream
     #
     class DeleteUsageReportSubscriptionResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "Username", # required
-    #         authentication_type: "API", # required, accepts API, SAML, USERPOOL, AWS_AD
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The email address of the user.
     #
@@ -2197,15 +1789,6 @@ module Aws::AppStream
     #
     class DeleteUserResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeAppBlocksRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arns: ["Arn"],
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] arns
     #   The ARNs of the app blocks.
     #   @return [Array<String>]
@@ -2247,16 +1830,6 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeApplicationFleetAssociationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_name: "Name",
-    #         application_arn: "Arn",
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] fleet_name
     #   The name of the fleet.
     #   @return [String]
@@ -2303,15 +1876,6 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeApplicationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arns: ["Arn"],
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] arns
     #   The ARNs for the applications.
     #   @return [Array<String>]
@@ -2353,15 +1917,6 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDirectoryConfigsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_names: ["DirectoryName"],
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] directory_names
     #   The directory names.
     #   @return [Array<String>]
@@ -2405,16 +1960,6 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEntitlementsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name",
-    #         stack_name: "Name", # required
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the entitlement.
     #   @return [String]
@@ -2461,14 +2006,6 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeFleetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         names: ["String"],
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] names
     #   The names of the fleets to describe.
     #   @return [Array<String>]
@@ -2505,15 +2042,6 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeImageBuildersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         names: ["String"],
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] names
     #   The names of the image builders to describe.
     #   @return [Array<String>]
@@ -2555,16 +2083,6 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeImagePermissionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         max_results: 1,
-    #         shared_aws_account_ids: ["AwsAccountId"],
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the private image for which to describe permissions. The
     #   image must be one that you own.
@@ -2618,17 +2136,6 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeImagesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         names: ["String"],
-    #         arns: ["Arn"],
-    #         type: "PUBLIC", # accepts PUBLIC, PRIVATE, SHARED
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] names
     #   The names of the public or private images to describe.
     #   @return [Array<String>]
@@ -2680,18 +2187,6 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeSessionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         stack_name: "String", # required
-    #         fleet_name: "String", # required
-    #         user_id: "UserId",
-    #         next_token: "String",
-    #         limit: 1,
-    #         authentication_type: "API", # accepts API, SAML, USERPOOL, AWS_AD
-    #       }
-    #
     # @!attribute [rw] stack_name
     #   The name of the stack. This value is case-sensitive.
     #   @return [String]
@@ -2752,14 +2247,6 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeStacksRequest
-    #   data as a hash:
-    #
-    #       {
-    #         names: ["String"],
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] names
     #   The names of the stacks to describe.
     #   @return [Array<String>]
@@ -2796,14 +2283,6 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeUsageReportSubscriptionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum size of each page of results.
     #   @return [Integer]
@@ -2840,17 +2319,6 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeUserStackAssociationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         stack_name: "String",
-    #         user_name: "Username",
-    #         authentication_type: "API", # accepts API, SAML, USERPOOL, AWS_AD
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] stack_name
     #   The name of the stack that is associated with the user.
     #   @return [String]
@@ -2907,15 +2375,6 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeUsersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_type: "API", # required, accepts API, SAML, USERPOOL, AWS_AD
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] authentication_type
     #   The authentication type for the users in the user pool to describe.
     #   You must specify USERPOOL.
@@ -3005,14 +2464,6 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisableUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "Username", # required
-    #         authentication_type: "API", # required, accepts API, SAML, USERPOOL, AWS_AD
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The email address of the user.
     #
@@ -3038,14 +2489,6 @@ module Aws::AppStream
     #
     class DisableUserResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DisassociateApplicationFleetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_name: "Name", # required
-    #         application_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] fleet_name
     #   The name of the fleet.
     #   @return [String]
@@ -3067,15 +2510,6 @@ module Aws::AppStream
     #
     class DisassociateApplicationFleetResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DisassociateApplicationFromEntitlementRequest
-    #   data as a hash:
-    #
-    #       {
-    #         stack_name: "Name", # required
-    #         entitlement_name: "Name", # required
-    #         application_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] stack_name
     #   The name of the stack with which the entitlement is associated.
     #   @return [String]
@@ -3102,14 +2536,6 @@ module Aws::AppStream
     #
     class DisassociateApplicationFromEntitlementResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DisassociateFleetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_name: "String", # required
-    #         stack_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] fleet_name
     #   The name of the fleet.
     #   @return [String]
@@ -3134,14 +2560,6 @@ module Aws::AppStream
     # Describes the configuration information required to join fleets and
     # image builders to Microsoft Active Directory domains.
     #
-    # @note When making an API call, you may pass DomainJoinInfo
-    #   data as a hash:
-    #
-    #       {
-    #         directory_name: "DirectoryName",
-    #         organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
-    #       }
-    #
     # @!attribute [rw] directory_name
     #   The fully qualified name of the directory (for example,
     #   corp.example.com).
@@ -3161,14 +2579,6 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass EnableUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "Username", # required
-    #         authentication_type: "API", # required, accepts API, SAML, USERPOOL, AWS_AD
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The email address of the user.
     #
@@ -3280,14 +2690,6 @@ module Aws::AppStream
     # work by matching a supported SAML 2.0 attribute name to a value when a
     # user identity federates to an Amazon AppStream 2.0 SAML application.
     #
-    # @note When making an API call, you may pass EntitlementAttribute
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #         value: "String", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   A supported AWS IAM SAML `PrincipalTag` attribute that is matched to
     #   the associated value when a user identity federates into an Amazon
@@ -3339,13 +2741,6 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ExpireSessionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         session_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] session_id
     #   The identifier of the streaming session.
     #   @return [String]
@@ -3958,14 +3353,6 @@ module Aws::AppStream
 
     # Describes the permissions for an image.
     #
-    # @note When making an API call, you may pass ImagePermissions
-    #   data as a hash:
-    #
-    #       {
-    #         allow_fleet: false,
-    #         allow_image_builder: false,
-    #       }
-    #
     # @!attribute [rw] allow_fleet
     #   Indicates whether the image can be used for a fleet.
     #   @return [Boolean]
@@ -4096,14 +3483,6 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAssociatedFleetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         stack_name: "String", # required
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] stack_name
     #   The name of the stack.
     #   @return [String]
@@ -4140,14 +3519,6 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAssociatedStacksRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_name: "String", # required
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] fleet_name
     #   The name of the fleet.
     #   @return [String]
@@ -4184,16 +3555,6 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEntitledApplicationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         stack_name: "Name", # required
-    #         entitlement_name: "Name", # required
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] stack_name
     #   The name of the stack with which the entitlement is associated.
     #   @return [String]
@@ -4240,13 +3601,6 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -4405,14 +3759,6 @@ module Aws::AppStream
 
     # Describes the S3 location.
     #
-    # @note When making an API call, you may pass S3Location
-    #   data as a hash:
-    #
-    #       {
-    #         s3_bucket: "S3Bucket", # required
-    #         s3_key: "S3Key", # required
-    #       }
-    #
     # @!attribute [rw] s3_bucket
     #   The S3 bucket of the S3 object.
     #   @return [String]
@@ -4431,19 +3777,6 @@ module Aws::AppStream
     end
 
     # Describes the details of the script.
-    #
-    # @note When making an API call, you may pass ScriptDetails
-    #   data as a hash:
-    #
-    #       {
-    #         script_s3_location: { # required
-    #           s3_bucket: "S3Bucket", # required
-    #           s3_key: "S3Key", # required
-    #         },
-    #         executable_path: "String", # required
-    #         executable_parameters: "String",
-    #         timeout_in_seconds: 1, # required
-    #       }
     #
     # @!attribute [rw] script_s3_location
     #   The S3 object location for the script.
@@ -4474,14 +3807,6 @@ module Aws::AppStream
 
     # Describes the credentials for the service account used by the fleet or
     # image builder to connect to the directory.
-    #
-    # @note When making an API call, you may pass ServiceAccountCredentials
-    #   data as a hash:
-    #
-    #       {
-    #         account_name: "AccountName", # required
-    #         account_password: "AccountPassword", # required
-    #       }
     #
     # @!attribute [rw] account_name
     #   The user name of the account. This account must have the following
@@ -4700,13 +4025,6 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartFleetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the fleet.
     #   @return [String]
@@ -4723,14 +4041,6 @@ module Aws::AppStream
     #
     class StartFleetResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass StartImageBuilderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #         appstream_agent_version: "AppstreamAgentVersion",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the image builder.
     #   @return [String]
@@ -4762,13 +4072,6 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopFleetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the fleet.
     #   @return [String]
@@ -4785,13 +4088,6 @@ module Aws::AppStream
     #
     class StopFleetResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass StopImageBuilderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the image builder.
     #   @return [String]
@@ -4818,15 +4114,6 @@ module Aws::AppStream
 
     # Describes a connector that enables persistent storage for users.
     #
-    # @note When making an API call, you may pass StorageConnector
-    #   data as a hash:
-    #
-    #       {
-    #         connector_type: "HOMEFOLDERS", # required, accepts HOMEFOLDERS, GOOGLE_DRIVE, ONE_DRIVE
-    #         resource_identifier: "ResourceIdentifier",
-    #         domains: ["Domain"],
-    #       }
-    #
     # @!attribute [rw] connector_type
     #   The type of storage connector.
     #   @return [String]
@@ -4852,13 +4139,6 @@ module Aws::AppStream
     # The streaming protocol you want your stack to prefer. This can be UDP
     # or TCP. Currently, UDP is only supported in the Windows native client.
     #
-    # @note When making an API call, you may pass StreamingExperienceSettings
-    #   data as a hash:
-    #
-    #       {
-    #         preferred_protocol: "TCP", # accepts TCP, UDP
-    #       }
-    #
     # @!attribute [rw] preferred_protocol
     #   The preferred protocol that you want to use while streaming your
     #   application.
@@ -4872,16 +4152,6 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -4912,14 +4182,6 @@ module Aws::AppStream
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -4941,24 +4203,6 @@ module Aws::AppStream
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         display_name: "DisplayName",
-    #         description: "Description",
-    #         icon_s3_location: {
-    #           s3_bucket: "S3Bucket", # required
-    #           s3_key: "S3Key", # required
-    #         },
-    #         launch_path: "String",
-    #         working_directory: "String",
-    #         launch_parameters: "String",
-    #         app_block_arn: "Arn",
-    #         attributes_to_delete: ["LAUNCH_PARAMETERS"], # accepts LAUNCH_PARAMETERS, WORKING_DIRECTORY
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the application. This name is visible to users when
     #   display name is not specified.
@@ -5025,22 +4269,6 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateDirectoryConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_name: "DirectoryName", # required
-    #         organizational_unit_distinguished_names: ["OrganizationalUnitDistinguishedName"],
-    #         service_account_credentials: {
-    #           account_name: "AccountName", # required
-    #           account_password: "AccountPassword", # required
-    #         },
-    #         certificate_based_auth_properties: {
-    #           status: "DISABLED", # accepts DISABLED, ENABLED, ENABLED_NO_DIRECTORY_LOGIN_FALLBACK
-    #           certificate_authority_arn: "Arn",
-    #         },
-    #       }
-    #
     # @!attribute [rw] directory_name
     #   The name of the Directory Config object.
     #   @return [String]
@@ -5091,22 +4319,6 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateEntitlementRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         stack_name: "Name", # required
-    #         description: "Description",
-    #         app_visibility: "ALL", # accepts ALL, ASSOCIATED
-    #         attributes: [
-    #           {
-    #             name: "String", # required
-    #             value: "String", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the entitlement.
     #   @return [String]
@@ -5151,44 +4363,6 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateFleetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         image_name: "String",
-    #         image_arn: "Arn",
-    #         name: "String",
-    #         instance_type: "String",
-    #         compute_capacity: {
-    #           desired_instances: 1, # required
-    #         },
-    #         vpc_config: {
-    #           subnet_ids: ["String"],
-    #           security_group_ids: ["String"],
-    #         },
-    #         max_user_duration_in_seconds: 1,
-    #         disconnect_timeout_in_seconds: 1,
-    #         delete_vpc_config: false,
-    #         description: "Description",
-    #         display_name: "DisplayName",
-    #         enable_default_internet_access: false,
-    #         domain_join_info: {
-    #           directory_name: "DirectoryName",
-    #           organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
-    #         },
-    #         idle_disconnect_timeout_in_seconds: 1,
-    #         attributes_to_delete: ["VPC_CONFIGURATION"], # accepts VPC_CONFIGURATION, VPC_CONFIGURATION_SECURITY_GROUP_IDS, DOMAIN_JOIN_INFO, IAM_ROLE_ARN, USB_DEVICE_FILTER_STRINGS, SESSION_SCRIPT_S3_LOCATION
-    #         iam_role_arn: "Arn",
-    #         stream_view: "APP", # accepts APP, DESKTOP
-    #         platform: "WINDOWS", # accepts WINDOWS, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, AMAZON_LINUX2
-    #         max_concurrent_sessions: 1,
-    #         usb_device_filter_strings: ["UsbDeviceFilterString"],
-    #         session_script_s3_location: {
-    #           s3_bucket: "S3Bucket", # required
-    #           s3_key: "S3Key", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] image_name
     #   The name of the image used to create the fleet.
     #   @return [String]
@@ -5464,18 +4638,6 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateImagePermissionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         shared_account_id: "AwsAccountId", # required
-    #         image_permissions: { # required
-    #           allow_fleet: false,
-    #           allow_image_builder: false,
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the private image.
     #   @return [String]
@@ -5503,46 +4665,6 @@ module Aws::AppStream
     #
     class UpdateImagePermissionsResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateStackRequest
-    #   data as a hash:
-    #
-    #       {
-    #         display_name: "DisplayName",
-    #         description: "Description",
-    #         name: "String", # required
-    #         storage_connectors: [
-    #           {
-    #             connector_type: "HOMEFOLDERS", # required, accepts HOMEFOLDERS, GOOGLE_DRIVE, ONE_DRIVE
-    #             resource_identifier: "ResourceIdentifier",
-    #             domains: ["Domain"],
-    #           },
-    #         ],
-    #         delete_storage_connectors: false,
-    #         redirect_url: "RedirectURL",
-    #         feedback_url: "FeedbackURL",
-    #         attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, STORAGE_CONNECTOR_HOMEFOLDERS, STORAGE_CONNECTOR_GOOGLE_DRIVE, STORAGE_CONNECTOR_ONE_DRIVE, REDIRECT_URL, FEEDBACK_URL, THEME_NAME, USER_SETTINGS, EMBED_HOST_DOMAINS, IAM_ROLE_ARN, ACCESS_ENDPOINTS, STREAMING_EXPERIENCE_SETTINGS
-    #         user_settings: [
-    #           {
-    #             action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE, DOMAIN_PASSWORD_SIGNIN, DOMAIN_SMART_CARD_SIGNIN
-    #             permission: "ENABLED", # required, accepts ENABLED, DISABLED
-    #           },
-    #         ],
-    #         application_settings: {
-    #           enabled: false, # required
-    #           settings_group: "SettingsGroup",
-    #         },
-    #         access_endpoints: [
-    #           {
-    #             endpoint_type: "STREAMING", # required, accepts STREAMING
-    #             vpce_id: "String",
-    #           },
-    #         ],
-    #         embed_host_domains: ["EmbedHostDomain"],
-    #         streaming_experience_settings: {
-    #           preferred_protocol: "TCP", # accepts TCP, UDP
-    #         },
-    #       }
-    #
     # @!attribute [rw] display_name
     #   The stack name to display.
     #   @return [String]
@@ -5746,14 +4868,6 @@ module Aws::AppStream
     # Describes an action and whether the action is enabled or disabled for
     # users during their streaming sessions.
     #
-    # @note When making an API call, you may pass UserSetting
-    #   data as a hash:
-    #
-    #       {
-    #         action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE, DOMAIN_PASSWORD_SIGNIN, DOMAIN_SMART_CARD_SIGNIN
-    #         permission: "ENABLED", # required, accepts ENABLED, DISABLED
-    #       }
-    #
     # @!attribute [rw] action
     #   The action that is enabled or disabled.
     #   @return [String]
@@ -5772,16 +4886,6 @@ module Aws::AppStream
     end
 
     # Describes a user in the user pool and the associated stack.
-    #
-    # @note When making an API call, you may pass UserStackAssociation
-    #   data as a hash:
-    #
-    #       {
-    #         stack_name: "String", # required
-    #         user_name: "Username", # required
-    #         authentication_type: "API", # required, accepts API, SAML, USERPOOL, AWS_AD
-    #         send_email_notification: false,
-    #       }
     #
     # @!attribute [rw] stack_name
     #   The name of the stack that is associated with the user.
@@ -5843,14 +4947,6 @@ module Aws::AppStream
     end
 
     # Describes VPC configuration information for fleets and image builders.
-    #
-    # @note When making an API call, you may pass VpcConfig
-    #   data as a hash:
-    #
-    #       {
-    #         subnet_ids: ["String"],
-    #         security_group_ids: ["String"],
-    #       }
     #
     # @!attribute [rw] subnet_ids
     #   The identifiers of the subnets to which a network interface is

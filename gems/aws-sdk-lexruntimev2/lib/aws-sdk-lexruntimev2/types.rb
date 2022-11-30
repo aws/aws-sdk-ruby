@@ -32,20 +32,6 @@ module Aws::LexRuntimeV2
     # `order-fulfilled`, only intents that have `order-fulfilled` configured
     # as a trigger are considered for follow up.
     #
-    # @note When making an API call, you may pass ActiveContext
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ActiveContextName", # required
-    #         time_to_live: { # required
-    #           time_to_live_in_seconds: 1, # required
-    #           turns_to_live: 1, # required
-    #         },
-    #         context_attributes: { # required
-    #           "ParameterName" => "Text",
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the context.
     #   @return [String]
@@ -79,14 +65,6 @@ module Aws::LexRuntimeV2
     # The time that a context is active. You can specify the time to live in
     # seconds or in conversation turns.
     #
-    # @note When making an API call, you may pass ActiveContextTimeToLive
-    #   data as a hash:
-    #
-    #       {
-    #         time_to_live_in_seconds: 1, # required
-    #         turns_to_live: 1, # required
-    #       }
-    #
     # @!attribute [rw] time_to_live_in_seconds
     #   The number of seconds that the context is active. You can specify
     #   between 5 and 86400 seconds (24 hours).
@@ -111,16 +89,6 @@ module Aws::LexRuntimeV2
     #
     # Amazon Lex V2 accumulates audio chunks until it recognizes a natural
     # pause in speech before processing the input.
-    #
-    # @note When making an API call, you may pass AudioInputEvent
-    #   data as a hash:
-    #
-    #       {
-    #         audio_chunk: "data",
-    #         content_type: "NonEmptyString", # required
-    #         event_id: "EventId",
-    #         client_timestamp_millis: 1,
-    #       }
     #
     # @!attribute [rw] audio_chunk
     #   An encoded stream of audio.
@@ -200,14 +168,6 @@ module Aws::LexRuntimeV2
 
     # A button that appears on a response card show to the user.
     #
-    # @note When making an API call, you may pass Button
-    #   data as a hash:
-    #
-    #       {
-    #         text: "ButtonText", # required
-    #         value: "ButtonValue", # required
-    #       }
-    #
     # @!attribute [rw] text
     #   The text that is displayed on the button.
     #   @return [String]
@@ -245,104 +205,6 @@ module Aws::LexRuntimeV2
     # The initial event sent from the application to Amazon Lex V2 to
     # configure the conversation, including session and request attributes
     # and the response content type.
-    #
-    # @note When making an API call, you may pass ConfigurationEvent
-    #   data as a hash:
-    #
-    #       {
-    #         request_attributes: {
-    #           "NonEmptyString" => "String",
-    #         },
-    #         response_content_type: "NonEmptyString", # required
-    #         session_state: {
-    #           dialog_action: {
-    #             type: "Close", # required, accepts Close, ConfirmIntent, Delegate, ElicitIntent, ElicitSlot, None
-    #             slot_to_elicit: "NonEmptyString",
-    #             slot_elicitation_style: "Default", # accepts Default, SpellByLetter, SpellByWord
-    #             sub_slot_to_elicit: {
-    #               name: "NonEmptyString", # required
-    #               sub_slot_to_elicit: {
-    #                 # recursive ElicitSubSlot
-    #               },
-    #             },
-    #           },
-    #           intent: {
-    #             name: "NonEmptyString", # required
-    #             slots: {
-    #               "NonEmptyString" => {
-    #                 value: {
-    #                   original_value: "NonEmptyString",
-    #                   interpreted_value: "NonEmptyString", # required
-    #                   resolved_values: ["NonEmptyString"],
-    #                 },
-    #                 shape: "Scalar", # accepts Scalar, List, Composite
-    #                 values: [
-    #                   {
-    #                     # recursive Slot
-    #                   },
-    #                 ],
-    #                 sub_slots: {
-    #                   # recursive Slots
-    #                 },
-    #               },
-    #             },
-    #             state: "Failed", # accepts Failed, Fulfilled, InProgress, ReadyForFulfillment, Waiting, FulfillmentInProgress
-    #             confirmation_state: "Confirmed", # accepts Confirmed, Denied, None
-    #           },
-    #           active_contexts: [
-    #             {
-    #               name: "ActiveContextName", # required
-    #               time_to_live: { # required
-    #                 time_to_live_in_seconds: 1, # required
-    #                 turns_to_live: 1, # required
-    #               },
-    #               context_attributes: { # required
-    #                 "ParameterName" => "Text",
-    #               },
-    #             },
-    #           ],
-    #           session_attributes: {
-    #             "NonEmptyString" => "String",
-    #           },
-    #           originating_request_id: "NonEmptyString",
-    #           runtime_hints: {
-    #             slot_hints: {
-    #               "Name" => {
-    #                 "Name" => {
-    #                   runtime_hint_values: [
-    #                     {
-    #                       phrase: "RuntimeHintPhrase", # required
-    #                     },
-    #                   ],
-    #                   sub_slot_hints: {
-    #                     # recursive SlotHintsSlotMap
-    #                   },
-    #                 },
-    #               },
-    #             },
-    #           },
-    #         },
-    #         welcome_messages: [
-    #           {
-    #             content: "Text",
-    #             content_type: "CustomPayload", # required, accepts CustomPayload, ImageResponseCard, PlainText, SSML
-    #             image_response_card: {
-    #               title: "AttachmentTitle", # required
-    #               subtitle: "AttachmentTitle",
-    #               image_url: "AttachmentUrl",
-    #               buttons: [
-    #                 {
-    #                   text: "ButtonText", # required
-    #                   value: "ButtonValue", # required
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #         ],
-    #         disable_playback: false,
-    #         event_id: "EventId",
-    #         client_timestamp_millis: 1,
-    #       }
     #
     # @!attribute [rw] request_attributes
     #   Request-specific information passed between the client application
@@ -451,15 +313,6 @@ module Aws::LexRuntimeV2
     # you can have Amazon Lex V2 process a credit card number input from a
     # phone.
     #
-    # @note When making an API call, you may pass DTMFInputEvent
-    #   data as a hash:
-    #
-    #       {
-    #         input_character: "DTMFRegex", # required
-    #         event_id: "EventId",
-    #         client_timestamp_millis: 1,
-    #       }
-    #
     # @!attribute [rw] input_character
     #   The DTMF character that the user pressed. The allowed characters are
     #   A - D, 0 - 9, # and *.
@@ -486,16 +339,6 @@ module Aws::LexRuntimeV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteSessionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         bot_id: "BotIdentifier", # required
-    #         bot_alias_id: "BotAliasIdentifier", # required
-    #         locale_id: "LocaleId", # required
-    #         session_id: "SessionId", # required
-    #       }
-    #
     # @!attribute [rw] bot_id
     #   The identifier of the bot that contains the session data.
     #   @return [String]
@@ -566,21 +409,6 @@ module Aws::LexRuntimeV2
 
     # The next action that Amazon Lex V2 should take.
     #
-    # @note When making an API call, you may pass DialogAction
-    #   data as a hash:
-    #
-    #       {
-    #         type: "Close", # required, accepts Close, ConfirmIntent, Delegate, ElicitIntent, ElicitSlot, None
-    #         slot_to_elicit: "NonEmptyString",
-    #         slot_elicitation_style: "Default", # accepts Default, SpellByLetter, SpellByWord
-    #         sub_slot_to_elicit: {
-    #           name: "NonEmptyString", # required
-    #           sub_slot_to_elicit: {
-    #             # recursive ElicitSubSlot
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] type
     #   The next action that the bot should take in its interaction with the
     #   user. The possible values are:
@@ -643,14 +471,6 @@ module Aws::LexRuntimeV2
     # Lex V2. Sending a `DisconnectionEvent` event is optional, but can help
     # identify a conversation in logs.
     #
-    # @note When making an API call, you may pass DisconnectionEvent
-    #   data as a hash:
-    #
-    #       {
-    #         event_id: "EventId",
-    #         client_timestamp_millis: 1,
-    #       }
-    #
     # @!attribute [rw] event_id
     #   A unique identifier that your application assigns to the event. You
     #   can use this to identify events in logs.
@@ -674,19 +494,6 @@ module Aws::LexRuntimeV2
     # The specific constituent sub slot of the composite slot to elicit in
     # dialog action.
     #
-    # @note When making an API call, you may pass ElicitSubSlot
-    #   data as a hash:
-    #
-    #       {
-    #         name: "NonEmptyString", # required
-    #         sub_slot_to_elicit: {
-    #           name: "NonEmptyString", # required
-    #           sub_slot_to_elicit: {
-    #             # recursive ElicitSubSlot
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the slot that should be elicited from the user.
     #   @return [String]
@@ -704,16 +511,6 @@ module Aws::LexRuntimeV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSessionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         bot_id: "BotIdentifier", # required
-    #         bot_alias_id: "BotAliasIdentifier", # required
-    #         locale_id: "LocaleId", # required
-    #         session_id: "SessionId", # required
-    #       }
-    #
     # @!attribute [rw] bot_id
     #   The identifier of the bot that contains the session data.
     #   @return [String]
@@ -806,21 +603,6 @@ module Aws::LexRuntimeV2
     # When you use a response card, the response from the user is
     # constrained to the text associated with a button on the card.
     #
-    # @note When making an API call, you may pass ImageResponseCard
-    #   data as a hash:
-    #
-    #       {
-    #         title: "AttachmentTitle", # required
-    #         subtitle: "AttachmentTitle",
-    #         image_url: "AttachmentUrl",
-    #         buttons: [
-    #           {
-    #             text: "ButtonText", # required
-    #             value: "ButtonValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] title
     #   The title to display on the response card. The format of the title
     #   is determined by the platform displaying the response card.
@@ -855,33 +637,6 @@ module Aws::LexRuntimeV2
     end
 
     # The current intent that Amazon Lex V2 is attempting to fulfill.
-    #
-    # @note When making an API call, you may pass Intent
-    #   data as a hash:
-    #
-    #       {
-    #         name: "NonEmptyString", # required
-    #         slots: {
-    #           "NonEmptyString" => {
-    #             value: {
-    #               original_value: "NonEmptyString",
-    #               interpreted_value: "NonEmptyString", # required
-    #               resolved_values: ["NonEmptyString"],
-    #             },
-    #             shape: "Scalar", # accepts Scalar, List, Composite
-    #             values: [
-    #               {
-    #                 # recursive Slot
-    #               },
-    #             ],
-    #             sub_slots: {
-    #               # recursive Slots
-    #             },
-    #           },
-    #         },
-    #         state: "Failed", # accepts Failed, Fulfilled, InProgress, ReadyForFulfillment, Waiting, FulfillmentInProgress
-    #         confirmation_state: "Confirmed", # accepts Confirmed, Denied, None
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the intent.
@@ -1011,25 +766,6 @@ module Aws::LexRuntimeV2
 
     # Container for text that is returned to the customer..
     #
-    # @note When making an API call, you may pass Message
-    #   data as a hash:
-    #
-    #       {
-    #         content: "Text",
-    #         content_type: "CustomPayload", # required, accepts CustomPayload, ImageResponseCard, PlainText, SSML
-    #         image_response_card: {
-    #           title: "AttachmentTitle", # required
-    #           subtitle: "AttachmentTitle",
-    #           image_url: "AttachmentUrl",
-    #           buttons: [
-    #             {
-    #               text: "ButtonText", # required
-    #               value: "ButtonValue", # required
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] content
     #   The text of the message.
     #   @return [String]
@@ -1059,14 +795,6 @@ module Aws::LexRuntimeV2
     # Event sent from the client application to Amazon Lex V2 to indicate
     # that playback of audio is complete and that Amazon Lex V2 should start
     # processing the user's input.
-    #
-    # @note When making an API call, you may pass PlaybackCompletionEvent
-    #   data as a hash:
-    #
-    #       {
-    #         event_id: "EventId",
-    #         client_timestamp_millis: 1,
-    #       }
     #
     # @!attribute [rw] event_id
     #   A unique identifier that your application assigns to the event. You
@@ -1122,105 +850,6 @@ module Aws::LexRuntimeV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutSessionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         bot_id: "BotIdentifier", # required
-    #         bot_alias_id: "BotAliasIdentifier", # required
-    #         locale_id: "LocaleId", # required
-    #         session_id: "SessionId", # required
-    #         messages: [
-    #           {
-    #             content: "Text",
-    #             content_type: "CustomPayload", # required, accepts CustomPayload, ImageResponseCard, PlainText, SSML
-    #             image_response_card: {
-    #               title: "AttachmentTitle", # required
-    #               subtitle: "AttachmentTitle",
-    #               image_url: "AttachmentUrl",
-    #               buttons: [
-    #                 {
-    #                   text: "ButtonText", # required
-    #                   value: "ButtonValue", # required
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #         ],
-    #         session_state: { # required
-    #           dialog_action: {
-    #             type: "Close", # required, accepts Close, ConfirmIntent, Delegate, ElicitIntent, ElicitSlot, None
-    #             slot_to_elicit: "NonEmptyString",
-    #             slot_elicitation_style: "Default", # accepts Default, SpellByLetter, SpellByWord
-    #             sub_slot_to_elicit: {
-    #               name: "NonEmptyString", # required
-    #               sub_slot_to_elicit: {
-    #                 # recursive ElicitSubSlot
-    #               },
-    #             },
-    #           },
-    #           intent: {
-    #             name: "NonEmptyString", # required
-    #             slots: {
-    #               "NonEmptyString" => {
-    #                 value: {
-    #                   original_value: "NonEmptyString",
-    #                   interpreted_value: "NonEmptyString", # required
-    #                   resolved_values: ["NonEmptyString"],
-    #                 },
-    #                 shape: "Scalar", # accepts Scalar, List, Composite
-    #                 values: [
-    #                   {
-    #                     # recursive Slot
-    #                   },
-    #                 ],
-    #                 sub_slots: {
-    #                   # recursive Slots
-    #                 },
-    #               },
-    #             },
-    #             state: "Failed", # accepts Failed, Fulfilled, InProgress, ReadyForFulfillment, Waiting, FulfillmentInProgress
-    #             confirmation_state: "Confirmed", # accepts Confirmed, Denied, None
-    #           },
-    #           active_contexts: [
-    #             {
-    #               name: "ActiveContextName", # required
-    #               time_to_live: { # required
-    #                 time_to_live_in_seconds: 1, # required
-    #                 turns_to_live: 1, # required
-    #               },
-    #               context_attributes: { # required
-    #                 "ParameterName" => "Text",
-    #               },
-    #             },
-    #           ],
-    #           session_attributes: {
-    #             "NonEmptyString" => "String",
-    #           },
-    #           originating_request_id: "NonEmptyString",
-    #           runtime_hints: {
-    #             slot_hints: {
-    #               "Name" => {
-    #                 "Name" => {
-    #                   runtime_hint_values: [
-    #                     {
-    #                       phrase: "RuntimeHintPhrase", # required
-    #                     },
-    #                   ],
-    #                   sub_slot_hints: {
-    #                     # recursive SlotHintsSlotMap
-    #                   },
-    #                 },
-    #               },
-    #             },
-    #           },
-    #         },
-    #         request_attributes: {
-    #           "NonEmptyString" => "String",
-    #         },
-    #         response_content_type: "NonEmptyString",
-    #       }
-    #
     # @!attribute [rw] bot_id
     #   The identifier of the bot that receives the session data.
     #   @return [String]
@@ -1329,88 +958,6 @@ module Aws::LexRuntimeV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RecognizeTextRequest
-    #   data as a hash:
-    #
-    #       {
-    #         bot_id: "BotIdentifier", # required
-    #         bot_alias_id: "BotAliasIdentifier", # required
-    #         locale_id: "LocaleId", # required
-    #         session_id: "SessionId", # required
-    #         text: "Text", # required
-    #         session_state: {
-    #           dialog_action: {
-    #             type: "Close", # required, accepts Close, ConfirmIntent, Delegate, ElicitIntent, ElicitSlot, None
-    #             slot_to_elicit: "NonEmptyString",
-    #             slot_elicitation_style: "Default", # accepts Default, SpellByLetter, SpellByWord
-    #             sub_slot_to_elicit: {
-    #               name: "NonEmptyString", # required
-    #               sub_slot_to_elicit: {
-    #                 # recursive ElicitSubSlot
-    #               },
-    #             },
-    #           },
-    #           intent: {
-    #             name: "NonEmptyString", # required
-    #             slots: {
-    #               "NonEmptyString" => {
-    #                 value: {
-    #                   original_value: "NonEmptyString",
-    #                   interpreted_value: "NonEmptyString", # required
-    #                   resolved_values: ["NonEmptyString"],
-    #                 },
-    #                 shape: "Scalar", # accepts Scalar, List, Composite
-    #                 values: [
-    #                   {
-    #                     # recursive Slot
-    #                   },
-    #                 ],
-    #                 sub_slots: {
-    #                   # recursive Slots
-    #                 },
-    #               },
-    #             },
-    #             state: "Failed", # accepts Failed, Fulfilled, InProgress, ReadyForFulfillment, Waiting, FulfillmentInProgress
-    #             confirmation_state: "Confirmed", # accepts Confirmed, Denied, None
-    #           },
-    #           active_contexts: [
-    #             {
-    #               name: "ActiveContextName", # required
-    #               time_to_live: { # required
-    #                 time_to_live_in_seconds: 1, # required
-    #                 turns_to_live: 1, # required
-    #               },
-    #               context_attributes: { # required
-    #                 "ParameterName" => "Text",
-    #               },
-    #             },
-    #           ],
-    #           session_attributes: {
-    #             "NonEmptyString" => "String",
-    #           },
-    #           originating_request_id: "NonEmptyString",
-    #           runtime_hints: {
-    #             slot_hints: {
-    #               "Name" => {
-    #                 "Name" => {
-    #                   runtime_hint_values: [
-    #                     {
-    #                       phrase: "RuntimeHintPhrase", # required
-    #                     },
-    #                   ],
-    #                   sub_slot_hints: {
-    #                     # recursive SlotHintsSlotMap
-    #                   },
-    #                 },
-    #               },
-    #             },
-    #           },
-    #         },
-    #         request_attributes: {
-    #           "NonEmptyString" => "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] bot_id
     #   The identifier of the bot that processes the request.
     #   @return [String]
@@ -1501,21 +1048,6 @@ module Aws::LexRuntimeV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RecognizeUtteranceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         bot_id: "BotIdentifier", # required
-    #         bot_alias_id: "BotAliasIdentifier", # required
-    #         locale_id: "LocaleId", # required
-    #         session_id: "SessionId", # required
-    #         session_state: "SensitiveNonEmptyString",
-    #         request_attributes: "SensitiveNonEmptyString",
-    #         request_content_type: "NonEmptyString", # required
-    #         response_content_type: "NonEmptyString",
-    #         input_stream: "data",
-    #       }
-    #
     # @!attribute [rw] bot_id
     #   The identifier of the bot that should receive the request.
     #   @return [String]
@@ -1750,29 +1282,6 @@ module Aws::LexRuntimeV2
     # Provides an array of phrases that should be given preference when
     # resolving values for a slot.
     #
-    # @note When making an API call, you may pass RuntimeHintDetails
-    #   data as a hash:
-    #
-    #       {
-    #         runtime_hint_values: [
-    #           {
-    #             phrase: "RuntimeHintPhrase", # required
-    #           },
-    #         ],
-    #         sub_slot_hints: {
-    #           "Name" => {
-    #             runtime_hint_values: [
-    #               {
-    #                 phrase: "RuntimeHintPhrase", # required
-    #               },
-    #             ],
-    #             sub_slot_hints: {
-    #               # recursive SlotHintsSlotMap
-    #             },
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] runtime_hint_values
     #   One or more strings that Amazon Lex V2 should look for in the input
     #   to the bot. Each phrase is given preference when deciding on slot
@@ -1799,13 +1308,6 @@ module Aws::LexRuntimeV2
 
     # Provides the phrase that Amazon Lex V2 should look for in the user's
     # input to the bot.
-    #
-    # @note When making an API call, you may pass RuntimeHintValue
-    #   data as a hash:
-    #
-    #       {
-    #         phrase: "RuntimeHintPhrase", # required
-    #       }
     #
     # @!attribute [rw] phrase
     #   The phrase that Amazon Lex V2 should look for in the user's input
@@ -1835,26 +1337,6 @@ module Aws::LexRuntimeV2
     #
     #
     # [1]: https://docs.aws.amazon.com/lexv2/latest/dg/using-hints.html
-    #
-    # @note When making an API call, you may pass RuntimeHints
-    #   data as a hash:
-    #
-    #       {
-    #         slot_hints: {
-    #           "Name" => {
-    #             "Name" => {
-    #               runtime_hint_values: [
-    #                 {
-    #                   phrase: "RuntimeHintPhrase", # required
-    #                 },
-    #               ],
-    #               sub_slot_hints: {
-    #                 # recursive SlotHintsSlotMap
-    #               },
-    #             },
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] slot_hints
     #   A list of the slots in the intent that should have runtime hints
@@ -1945,78 +1427,6 @@ module Aws::LexRuntimeV2
 
     # The state of the user's session with Amazon Lex V2.
     #
-    # @note When making an API call, you may pass SessionState
-    #   data as a hash:
-    #
-    #       {
-    #         dialog_action: {
-    #           type: "Close", # required, accepts Close, ConfirmIntent, Delegate, ElicitIntent, ElicitSlot, None
-    #           slot_to_elicit: "NonEmptyString",
-    #           slot_elicitation_style: "Default", # accepts Default, SpellByLetter, SpellByWord
-    #           sub_slot_to_elicit: {
-    #             name: "NonEmptyString", # required
-    #             sub_slot_to_elicit: {
-    #               # recursive ElicitSubSlot
-    #             },
-    #           },
-    #         },
-    #         intent: {
-    #           name: "NonEmptyString", # required
-    #           slots: {
-    #             "NonEmptyString" => {
-    #               value: {
-    #                 original_value: "NonEmptyString",
-    #                 interpreted_value: "NonEmptyString", # required
-    #                 resolved_values: ["NonEmptyString"],
-    #               },
-    #               shape: "Scalar", # accepts Scalar, List, Composite
-    #               values: [
-    #                 {
-    #                   # recursive Slot
-    #                 },
-    #               ],
-    #               sub_slots: {
-    #                 # recursive Slots
-    #               },
-    #             },
-    #           },
-    #           state: "Failed", # accepts Failed, Fulfilled, InProgress, ReadyForFulfillment, Waiting, FulfillmentInProgress
-    #           confirmation_state: "Confirmed", # accepts Confirmed, Denied, None
-    #         },
-    #         active_contexts: [
-    #           {
-    #             name: "ActiveContextName", # required
-    #             time_to_live: { # required
-    #               time_to_live_in_seconds: 1, # required
-    #               turns_to_live: 1, # required
-    #             },
-    #             context_attributes: { # required
-    #               "ParameterName" => "Text",
-    #             },
-    #           },
-    #         ],
-    #         session_attributes: {
-    #           "NonEmptyString" => "String",
-    #         },
-    #         originating_request_id: "NonEmptyString",
-    #         runtime_hints: {
-    #           slot_hints: {
-    #             "Name" => {
-    #               "Name" => {
-    #                 runtime_hint_values: [
-    #                   {
-    #                     phrase: "RuntimeHintPhrase", # required
-    #                   },
-    #                 ],
-    #                 sub_slot_hints: {
-    #                   # recursive SlotHintsSlotMap
-    #                 },
-    #               },
-    #             },
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] dialog_action
     #   The next step that Amazon Lex V2 should take in the conversation
     #   with a user.
@@ -2064,54 +1474,6 @@ module Aws::LexRuntimeV2
 
     # A value that Amazon Lex V2 uses to fulfill an intent.
     #
-    # @note When making an API call, you may pass Slot
-    #   data as a hash:
-    #
-    #       {
-    #         value: {
-    #           original_value: "NonEmptyString",
-    #           interpreted_value: "NonEmptyString", # required
-    #           resolved_values: ["NonEmptyString"],
-    #         },
-    #         shape: "Scalar", # accepts Scalar, List, Composite
-    #         values: [
-    #           {
-    #             value: {
-    #               original_value: "NonEmptyString",
-    #               interpreted_value: "NonEmptyString", # required
-    #               resolved_values: ["NonEmptyString"],
-    #             },
-    #             shape: "Scalar", # accepts Scalar, List, Composite
-    #             values: {
-    #               # recursive Values
-    #             },
-    #             sub_slots: {
-    #               "NonEmptyString" => {
-    #                 # recursive Slot
-    #               },
-    #             },
-    #           },
-    #         ],
-    #         sub_slots: {
-    #           "NonEmptyString" => {
-    #             value: {
-    #               original_value: "NonEmptyString",
-    #               interpreted_value: "NonEmptyString", # required
-    #               resolved_values: ["NonEmptyString"],
-    #             },
-    #             shape: "Scalar", # accepts Scalar, List, Composite
-    #             values: [
-    #               {
-    #                 # recursive Slot
-    #               },
-    #             ],
-    #             sub_slots: {
-    #               # recursive Slots
-    #             },
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] value
     #   The current value of the slot.
     #   @return [Types::Value]
@@ -2143,18 +1505,6 @@ module Aws::LexRuntimeV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartConversationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         bot_id: "BotIdentifier", # required
-    #         bot_alias_id: "BotAliasIdentifier", # required
-    #         locale_id: "LocaleId", # required
-    #         session_id: "SessionId", # required
-    #         conversation_mode: "AUDIO", # accepts AUDIO, TEXT
-    #         input_event_stream_hander: EventStreams::StartConversationRequestEventStream.new,
-    #       }
-    #
     # @!attribute [rw] bot_id
     #   The identifier of the bot to process the request.
     #   @return [String]
@@ -2210,15 +1560,6 @@ module Aws::LexRuntimeV2
 
     # The event sent from your client application to Amazon Lex V2 with text
     # input from the user.
-    #
-    # @note When making an API call, you may pass TextInputEvent
-    #   data as a hash:
-    #
-    #       {
-    #         text: "Text", # required
-    #         event_id: "EventId",
-    #         client_timestamp_millis: 1,
-    #       }
     #
     # @!attribute [rw] text
     #   The text from the user. Amazon Lex V2 processes this as a complete
@@ -2322,15 +1663,6 @@ module Aws::LexRuntimeV2
 
     # The value of a slot.
     #
-    # @note When making an API call, you may pass Value
-    #   data as a hash:
-    #
-    #       {
-    #         original_value: "NonEmptyString",
-    #         interpreted_value: "NonEmptyString", # required
-    #         resolved_values: ["NonEmptyString"],
-    #       }
-    #
     # @!attribute [rw] original_value
     #   The text of the utterance from the user that was entered for the
     #   slot.
@@ -2360,130 +1692,6 @@ module Aws::LexRuntimeV2
 
     # Represents a stream of events between your application and Amazon Lex
     # V2.
-    #
-    # @note When making an API call, you may pass StartConversationRequestEventStream
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_event: {
-    #           request_attributes: {
-    #             "NonEmptyString" => "String",
-    #           },
-    #           response_content_type: "NonEmptyString", # required
-    #           session_state: {
-    #             dialog_action: {
-    #               type: "Close", # required, accepts Close, ConfirmIntent, Delegate, ElicitIntent, ElicitSlot, None
-    #               slot_to_elicit: "NonEmptyString",
-    #               slot_elicitation_style: "Default", # accepts Default, SpellByLetter, SpellByWord
-    #               sub_slot_to_elicit: {
-    #                 name: "NonEmptyString", # required
-    #                 sub_slot_to_elicit: {
-    #                   # recursive ElicitSubSlot
-    #                 },
-    #               },
-    #             },
-    #             intent: {
-    #               name: "NonEmptyString", # required
-    #               slots: {
-    #                 "NonEmptyString" => {
-    #                   value: {
-    #                     original_value: "NonEmptyString",
-    #                     interpreted_value: "NonEmptyString", # required
-    #                     resolved_values: ["NonEmptyString"],
-    #                   },
-    #                   shape: "Scalar", # accepts Scalar, List, Composite
-    #                   values: [
-    #                     {
-    #                       # recursive Slot
-    #                     },
-    #                   ],
-    #                   sub_slots: {
-    #                     # recursive Slots
-    #                   },
-    #                 },
-    #               },
-    #               state: "Failed", # accepts Failed, Fulfilled, InProgress, ReadyForFulfillment, Waiting, FulfillmentInProgress
-    #               confirmation_state: "Confirmed", # accepts Confirmed, Denied, None
-    #             },
-    #             active_contexts: [
-    #               {
-    #                 name: "ActiveContextName", # required
-    #                 time_to_live: { # required
-    #                   time_to_live_in_seconds: 1, # required
-    #                   turns_to_live: 1, # required
-    #                 },
-    #                 context_attributes: { # required
-    #                   "ParameterName" => "Text",
-    #                 },
-    #               },
-    #             ],
-    #             session_attributes: {
-    #               "NonEmptyString" => "String",
-    #             },
-    #             originating_request_id: "NonEmptyString",
-    #             runtime_hints: {
-    #               slot_hints: {
-    #                 "Name" => {
-    #                   "Name" => {
-    #                     runtime_hint_values: [
-    #                       {
-    #                         phrase: "RuntimeHintPhrase", # required
-    #                       },
-    #                     ],
-    #                     sub_slot_hints: {
-    #                       # recursive SlotHintsSlotMap
-    #                     },
-    #                   },
-    #                 },
-    #               },
-    #             },
-    #           },
-    #           welcome_messages: [
-    #             {
-    #               content: "Text",
-    #               content_type: "CustomPayload", # required, accepts CustomPayload, ImageResponseCard, PlainText, SSML
-    #               image_response_card: {
-    #                 title: "AttachmentTitle", # required
-    #                 subtitle: "AttachmentTitle",
-    #                 image_url: "AttachmentUrl",
-    #                 buttons: [
-    #                   {
-    #                     text: "ButtonText", # required
-    #                     value: "ButtonValue", # required
-    #                   },
-    #                 ],
-    #               },
-    #             },
-    #           ],
-    #           disable_playback: false,
-    #           event_id: "EventId",
-    #           client_timestamp_millis: 1,
-    #         },
-    #         audio_input_event: {
-    #           audio_chunk: "data",
-    #           content_type: "NonEmptyString", # required
-    #           event_id: "EventId",
-    #           client_timestamp_millis: 1,
-    #         },
-    #         dtmf_input_event: {
-    #           input_character: "DTMFRegex", # required
-    #           event_id: "EventId",
-    #           client_timestamp_millis: 1,
-    #         },
-    #         text_input_event: {
-    #           text: "Text", # required
-    #           event_id: "EventId",
-    #           client_timestamp_millis: 1,
-    #         },
-    #         playback_completion_event: {
-    #           event_id: "EventId",
-    #           client_timestamp_millis: 1,
-    #         },
-    #         disconnection_event: {
-    #           event_id: "EventId",
-    #           client_timestamp_millis: 1,
-    #         },
-    #       }
     #
     # EventStream is an Enumerator of Events.
     #  #event_types #=> Array, returns all modeled event types in the stream

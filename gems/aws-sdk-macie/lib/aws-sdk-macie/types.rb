@@ -29,13 +29,6 @@ module Aws::Macie
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateMemberAccountRequest
-    #   data as a hash:
-    #
-    #       {
-    #         member_account_id: "AWSAccountId", # required
-    #       }
-    #
     # @!attribute [rw] member_account_id
     #   (Discontinued) The ID of the Amazon Web Services account that you
     #   want to associate with Amazon Macie Classic as a member account.
@@ -49,23 +42,6 @@ module Aws::Macie
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateS3ResourcesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         member_account_id: "AWSAccountId",
-    #         s3_resources: [ # required
-    #           {
-    #             bucket_name: "BucketName", # required
-    #             prefix: "Prefix",
-    #             classification_type: { # required
-    #               one_time: "FULL", # required, accepts FULL, NONE
-    #               continuous: "FULL", # required, accepts FULL
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] member_account_id
     #   (Discontinued) The ID of the Amazon Macie Classic member account
     #   whose resources you want to associate with Macie Classic.
@@ -102,14 +78,6 @@ module Aws::Macie
     # (Discontinued) The classification type that Amazon Macie Classic
     # applies to the associated S3 resources.
     #
-    # @note When making an API call, you may pass ClassificationType
-    #   data as a hash:
-    #
-    #       {
-    #         one_time: "FULL", # required, accepts FULL, NONE
-    #         continuous: "FULL", # required, accepts FULL
-    #       }
-    #
     # @!attribute [rw] one_time
     #   (Discontinued) A one-time classification of all of the existing
     #   objects in a specified S3 bucket.
@@ -135,14 +103,6 @@ module Aws::Macie
     # applies to the associated S3 resources. At least one of the
     # classification types (`oneTime` or `continuous`) must be specified.
     #
-    # @note When making an API call, you may pass ClassificationTypeUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         one_time: "FULL", # accepts FULL, NONE
-    #         continuous: "FULL", # accepts FULL
-    #       }
-    #
     # @!attribute [rw] one_time
     #   (Discontinued) A one-time classification of all of the existing
     #   objects in a specified S3 bucket.
@@ -164,13 +124,6 @@ module Aws::Macie
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateMemberAccountRequest
-    #   data as a hash:
-    #
-    #       {
-    #         member_account_id: "AWSAccountId", # required
-    #       }
-    #
     # @!attribute [rw] member_account_id
     #   (Discontinued) The ID of the member account that you want to remove
     #   from Amazon Macie Classic.
@@ -184,19 +137,6 @@ module Aws::Macie
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateS3ResourcesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         member_account_id: "AWSAccountId",
-    #         associated_s3_resources: [ # required
-    #           {
-    #             bucket_name: "BucketName", # required
-    #             prefix: "Prefix",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] member_account_id
     #   (Discontinued) The ID of the Amazon Macie Classic member account
     #   whose resources you want to remove from being monitored by Macie
@@ -323,14 +263,6 @@ module Aws::Macie
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListMemberAccountsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   (Discontinued) Use this parameter when paginating results. Set the
     #   value of this parameter to null on your first call to the
@@ -376,15 +308,6 @@ module Aws::Macie
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListS3ResourcesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         member_account_id: "AWSAccountId",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] member_account_id
     #   (Discontinued) The Amazon Macie Classic member account ID whose
     #   associated S3 resources you want to list.
@@ -456,14 +379,6 @@ module Aws::Macie
     # action and can be used as a response parameter in the
     # `AssociateS3Resources` and `UpdateS3Resources` actions.
     #
-    # @note When making an API call, you may pass S3Resource
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_name: "BucketName", # required
-    #         prefix: "Prefix",
-    #       }
-    #
     # @!attribute [rw] bucket_name
     #   (Discontinued) The name of the S3 bucket.
     #   @return [String]
@@ -485,18 +400,6 @@ module Aws::Macie
     # Macie Classic for monitoring and data classification. This data type
     # is used as a request parameter in the `AssociateS3Resources` action
     # and a response parameter in the `ListS3Resources` action.
-    #
-    # @note When making an API call, you may pass S3ResourceClassification
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_name: "BucketName", # required
-    #         prefix: "Prefix",
-    #         classification_type: { # required
-    #           one_time: "FULL", # required, accepts FULL, NONE
-    #           continuous: "FULL", # required, accepts FULL
-    #         },
-    #       }
     #
     # @!attribute [rw] bucket_name
     #   (Discontinued) The name of the S3 bucket that you want to associate
@@ -527,18 +430,6 @@ module Aws::Macie
     # update. This data type is used as a request parameter in the
     # `UpdateS3Resources` action.
     #
-    # @note When making an API call, you may pass S3ResourceClassificationUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_name: "BucketName", # required
-    #         prefix: "Prefix",
-    #         classification_type_update: { # required
-    #           one_time: "FULL", # accepts FULL, NONE
-    #           continuous: "FULL", # accepts FULL
-    #         },
-    #       }
-    #
     # @!attribute [rw] bucket_name
     #   (Discontinued) The name of the S3 bucket whose classification types
     #   you want to update.
@@ -564,23 +455,6 @@ module Aws::Macie
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateS3ResourcesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         member_account_id: "AWSAccountId",
-    #         s3_resources_update: [ # required
-    #           {
-    #             bucket_name: "BucketName", # required
-    #             prefix: "Prefix",
-    #             classification_type_update: { # required
-    #               one_time: "FULL", # accepts FULL, NONE
-    #               continuous: "FULL", # accepts FULL
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] member_account_id
     #   (Discontinued) The Amazon Web Services account ID of the Amazon
     #   Macie Classic member account whose S3 resources' classification

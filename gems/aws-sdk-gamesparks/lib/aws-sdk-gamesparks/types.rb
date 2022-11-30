@@ -55,18 +55,6 @@ module Aws::GameSparks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateGameRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         description: "GameDescription",
-    #         game_name: "GameName", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_token
     #   A client-defined token. With an active client token in the request,
     #   this action is idempotent.
@@ -107,14 +95,6 @@ module Aws::GameSparks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateSnapshotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "SnapshotDescription",
-    #         game_name: "GameName", # required
-    #       }
-    #
     # @!attribute [rw] description
     #   The description of the snapshot.
     #   @return [String]
@@ -144,20 +124,6 @@ module Aws::GameSparks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateStageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         description: "StageDescription",
-    #         game_name: "GameName", # required
-    #         role: "RoleARN", # required
-    #         stage_name: "StageName", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_token
     #   A client-defined token. With an active client token in the request,
     #   this action is idempotent.
@@ -210,13 +176,6 @@ module Aws::GameSparks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteGameRequest
-    #   data as a hash:
-    #
-    #       {
-    #         game_name: "GameName", # required
-    #       }
-    #
     # @!attribute [rw] game_name
     #   The name of the game to delete.
     #   @return [String]
@@ -233,14 +192,6 @@ module Aws::GameSparks
     #
     class DeleteGameResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteStageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         game_name: "GameName", # required
-    #         stage_name: "StageName", # required
-    #       }
-    #
     # @!attribute [rw] game_name
     #   The name of the game.
     #   @return [String]
@@ -281,15 +232,6 @@ module Aws::GameSparks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisconnectPlayerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         game_name: "GameName", # required
-    #         player_id: "PlayerId", # required
-    #         stage_name: "StageName", # required
-    #       }
-    #
     # @!attribute [rw] game_name
     #   The name of the game.
     #   @return [String]
@@ -329,14 +271,6 @@ module Aws::GameSparks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ExportSnapshotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         game_name: "GameName", # required
-    #         snapshot_id: "SnapshotId", # required
-    #       }
-    #
     # @!attribute [rw] game_name
     #   The name of the game.
     #   @return [String]
@@ -569,15 +503,6 @@ module Aws::GameSparks
 
     # Properties that specify the code generator for a generated code job.
     #
-    # @note When making an API call, you may pass Generator
-    #   data as a hash:
-    #
-    #       {
-    #         game_sdk_version: "GameSdkVersion",
-    #         language: "Language",
-    #         target_platform: "TargetPlatform",
-    #       }
-    #
     # @!attribute [rw] game_sdk_version
     #   The target version of the GameSparks Game SDK.
     #   @return [String]
@@ -605,14 +530,6 @@ module Aws::GameSparks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetExtensionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ExtensionName", # required
-    #         namespace: "ExtensionNamespace", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the extension.
     #   @return [String]
@@ -642,15 +559,6 @@ module Aws::GameSparks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetExtensionVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         extension_version: "ExtensionVersion", # required
-    #         name: "ExtensionName", # required
-    #         namespace: "ExtensionNamespace", # required
-    #       }
-    #
     # @!attribute [rw] extension_version
     #   The version of the extension.
     #   @return [String]
@@ -685,14 +593,6 @@ module Aws::GameSparks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetGameConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         game_name: "GameName", # required
-    #         sections: ["SectionName"],
-    #       }
-    #
     # @!attribute [rw] game_name
     #   The name of the game.
     #   @return [String]
@@ -722,13 +622,6 @@ module Aws::GameSparks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetGameRequest
-    #   data as a hash:
-    #
-    #       {
-    #         game_name: "GameName", # required
-    #       }
-    #
     # @!attribute [rw] game_name
     #   The name of the game.
     #   @return [String]
@@ -753,15 +646,6 @@ module Aws::GameSparks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetGeneratedCodeJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         game_name: "GameName", # required
-    #         job_id: "GeneratedCodeJobId", # required
-    #         snapshot_id: "SnapshotId", # required
-    #       }
-    #
     # @!attribute [rw] game_name
     #   The name of the game.
     #   @return [String]
@@ -796,15 +680,6 @@ module Aws::GameSparks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetPlayerConnectionStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         game_name: "GameName", # required
-    #         player_id: "PlayerId", # required
-    #         stage_name: "StageName", # required
-    #       }
-    #
     # @!attribute [rw] game_name
     #   The name of the game.
     #   @return [String]
@@ -840,15 +715,6 @@ module Aws::GameSparks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSnapshotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         game_name: "GameName", # required
-    #         sections: ["SectionName"],
-    #         snapshot_id: "SnapshotId", # required
-    #       }
-    #
     # @!attribute [rw] game_name
     #   The name of the game.
     #   @return [String]
@@ -883,15 +749,6 @@ module Aws::GameSparks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetStageDeploymentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         deployment_id: "DeploymentId",
-    #         game_name: "GameName", # required
-    #         stage_name: "StageName", # required
-    #       }
-    #
     # @!attribute [rw] deployment_id
     #   The identifier of the stage deployment. `StartStageDeployment`
     #   returns the identifier that you use here.
@@ -927,14 +784,6 @@ module Aws::GameSparks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetStageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         game_name: "GameName", # required
-    #         stage_name: "StageName", # required
-    #       }
-    #
     # @!attribute [rw] game_name
     #   The name of the game.
     #   @return [String]
@@ -964,16 +813,6 @@ module Aws::GameSparks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ImportGameConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         game_name: "GameName", # required
-    #         import_source: { # required
-    #           file: "data", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] game_name
     #   The name of the game.
     #   @return [String]
@@ -1005,13 +844,6 @@ module Aws::GameSparks
 
     # The source used to import configuration sections.
     #
-    # @note When making an API call, you may pass ImportGameConfigurationSource
-    #   data as a hash:
-    #
-    #       {
-    #         file: "data", # required
-    #       }
-    #
     # @!attribute [rw] file
     #   The JSON string containing the configuration sections.
     #   @return [String]
@@ -1037,16 +869,6 @@ module Aws::GameSparks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListExtensionVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         name: "ExtensionName", # required
-    #         namespace: "ExtensionNamespace", # required
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to return.
     #
@@ -1103,14 +925,6 @@ module Aws::GameSparks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListExtensionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to return.
     #
@@ -1157,14 +971,6 @@ module Aws::GameSparks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListGamesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to return.
     #
@@ -1211,16 +1017,6 @@ module Aws::GameSparks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListGeneratedCodeJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         game_name: "GameName", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         snapshot_id: "SnapshotId", # required
-    #       }
-    #
     # @!attribute [rw] game_name
     #   The name of the game.
     #   @return [String]
@@ -1277,15 +1073,6 @@ module Aws::GameSparks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSnapshotsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         game_name: "GameName", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] game_name
     #   The name of the game.
     #   @return [String]
@@ -1338,16 +1125,6 @@ module Aws::GameSparks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListStageDeploymentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         game_name: "GameName", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         stage_name: "StageName", # required
-    #       }
-    #
     # @!attribute [rw] game_name
     #   The name of the game.
     #   @return [String]
@@ -1405,15 +1182,6 @@ module Aws::GameSparks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListStagesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         game_name: "GameName", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] game_name
     #   The name of the game.
     #   @return [String]
@@ -1466,13 +1234,6 @@ module Aws::GameSparks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the GameSparks resource.
     #   @return [String]
@@ -1535,17 +1296,6 @@ module Aws::GameSparks
     end
 
     # A single modification to the configuration section.
-    #
-    # @note When making an API call, you may pass SectionModification
-    #   data as a hash:
-    #
-    #       {
-    #         operation: "ADD", # required, accepts ADD, REMOVE, REPLACE
-    #         path: "Path", # required
-    #         section: "SectionName", # required
-    #         value: {
-    #         },
-    #       }
     #
     # @!attribute [rw] operation
     #   The operation to be performed on a configuration section.
@@ -1838,19 +1588,6 @@ module Aws::GameSparks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartGeneratedCodeJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         game_name: "GameName", # required
-    #         generator: { # required
-    #           game_sdk_version: "GameSdkVersion",
-    #           language: "Language",
-    #           target_platform: "TargetPlatform",
-    #         },
-    #         snapshot_id: "SnapshotId", # required
-    #       }
-    #
     # @!attribute [rw] game_name
     #   The name of the game.
     #   @return [String]
@@ -1886,16 +1623,6 @@ module Aws::GameSparks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartStageDeploymentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         game_name: "GameName", # required
-    #         snapshot_id: "SnapshotId", # required
-    #         stage_name: "StageName", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   A client-defined token. With an active client token in the request,
     #   this action is idempotent.
@@ -1936,16 +1663,6 @@ module Aws::GameSparks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource to add the tags to.
     #   @return [String]
@@ -1980,14 +1697,6 @@ module Aws::GameSparks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource to remove the tags
     #   from.
@@ -2010,22 +1719,6 @@ module Aws::GameSparks
     #
     class UntagResourceResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateGameConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         game_name: "GameName", # required
-    #         modifications: [ # required
-    #           {
-    #             operation: "ADD", # required, accepts ADD, REMOVE, REPLACE
-    #             path: "Path", # required
-    #             section: "SectionName", # required
-    #             value: {
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] game_name
     #   The name of the game.
     #   @return [String]
@@ -2055,14 +1748,6 @@ module Aws::GameSparks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateGameRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "GameDescription",
-    #         game_name: "GameName", # required
-    #       }
-    #
     # @!attribute [rw] description
     #   The description of the game.
     #   @return [String]
@@ -2092,15 +1777,6 @@ module Aws::GameSparks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateSnapshotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "SnapshotDescription",
-    #         game_name: "GameName", # required
-    #         snapshot_id: "SnapshotId", # required
-    #       }
-    #
     # @!attribute [rw] description
     #   The description of the snapshot.
     #   @return [String]
@@ -2135,16 +1811,6 @@ module Aws::GameSparks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateStageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "StageDescription",
-    #         game_name: "GameName", # required
-    #         role: "RoleARN",
-    #         stage_name: "StageName", # required
-    #       }
-    #
     # @!attribute [rw] description
     #   The description of the stage.
     #   @return [String]

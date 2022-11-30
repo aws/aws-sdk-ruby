@@ -13,17 +13,6 @@ module Aws::KafkaConnect
     # The details of the Apache Kafka cluster to which the connector is
     # connected.
     #
-    # @note When making an API call, you may pass ApacheKafkaCluster
-    #   data as a hash:
-    #
-    #       {
-    #         bootstrap_servers: "__string", # required
-    #         vpc: { # required
-    #           security_groups: ["__string"],
-    #           subnets: ["__string"], # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] bootstrap_servers
     #   The bootstrap servers of the cluster.
     #   @return [String]
@@ -64,21 +53,6 @@ module Aws::KafkaConnect
     end
 
     # Specifies how the connector scales.
-    #
-    # @note When making an API call, you may pass AutoScaling
-    #   data as a hash:
-    #
-    #       {
-    #         max_worker_count: 1, # required
-    #         mcu_count: 1, # required
-    #         min_worker_count: 1, # required
-    #         scale_in_policy: {
-    #           cpu_utilization_percentage: 1, # required
-    #         },
-    #         scale_out_policy: {
-    #           cpu_utilization_percentage: 1, # required
-    #         },
-    #       }
     #
     # @!attribute [rw] max_worker_count
     #   The maximum number of workers allocated to the connector.
@@ -150,21 +124,6 @@ module Aws::KafkaConnect
 
     # The updates to the auto scaling parameters for the connector.
     #
-    # @note When making an API call, you may pass AutoScalingUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         max_worker_count: 1, # required
-    #         mcu_count: 1, # required
-    #         min_worker_count: 1, # required
-    #         scale_in_policy: { # required
-    #           cpu_utilization_percentage: 1, # required
-    #         },
-    #         scale_out_policy: { # required
-    #           cpu_utilization_percentage: 1, # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] max_worker_count
     #   The target maximum number of workers allocated to the connector.
     #   @return [Integer]
@@ -215,27 +174,6 @@ module Aws::KafkaConnect
     # Information about the capacity of the connector, whether it is auto
     # scaled or provisioned.
     #
-    # @note When making an API call, you may pass Capacity
-    #   data as a hash:
-    #
-    #       {
-    #         auto_scaling: {
-    #           max_worker_count: 1, # required
-    #           mcu_count: 1, # required
-    #           min_worker_count: 1, # required
-    #           scale_in_policy: {
-    #             cpu_utilization_percentage: 1, # required
-    #           },
-    #           scale_out_policy: {
-    #             cpu_utilization_percentage: 1, # required
-    #           },
-    #         },
-    #         provisioned_capacity: {
-    #           mcu_count: 1, # required
-    #           worker_count: 1, # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] auto_scaling
     #   Information about the auto scaling parameters for the connector.
     #   @return [Types::AutoScaling]
@@ -275,27 +213,6 @@ module Aws::KafkaConnect
     # The target capacity for the connector. The capacity can be auto scaled
     # or provisioned.
     #
-    # @note When making an API call, you may pass CapacityUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         auto_scaling: {
-    #           max_worker_count: 1, # required
-    #           mcu_count: 1, # required
-    #           min_worker_count: 1, # required
-    #           scale_in_policy: { # required
-    #             cpu_utilization_percentage: 1, # required
-    #           },
-    #           scale_out_policy: { # required
-    #             cpu_utilization_percentage: 1, # required
-    #           },
-    #         },
-    #         provisioned_capacity: {
-    #           mcu_count: 1, # required
-    #           worker_count: 1, # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] auto_scaling
     #   The target auto scaling setting.
     #   @return [Types::AutoScalingUpdate]
@@ -314,14 +231,6 @@ module Aws::KafkaConnect
     end
 
     # The settings for delivering connector logs to Amazon CloudWatch Logs.
-    #
-    # @note When making an API call, you may pass CloudWatchLogsLogDelivery
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false, # required
-    #         log_group: "__string",
-    #       }
     #
     # @!attribute [rw] enabled
     #   Whether log delivery to Amazon CloudWatch Logs is enabled.
@@ -465,80 +374,6 @@ module Aws::KafkaConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateConnectorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         capacity: { # required
-    #           auto_scaling: {
-    #             max_worker_count: 1, # required
-    #             mcu_count: 1, # required
-    #             min_worker_count: 1, # required
-    #             scale_in_policy: {
-    #               cpu_utilization_percentage: 1, # required
-    #             },
-    #             scale_out_policy: {
-    #               cpu_utilization_percentage: 1, # required
-    #             },
-    #           },
-    #           provisioned_capacity: {
-    #             mcu_count: 1, # required
-    #             worker_count: 1, # required
-    #           },
-    #         },
-    #         connector_configuration: { # required
-    #           "__string" => "__string",
-    #         },
-    #         connector_description: "__stringMax1024",
-    #         connector_name: "__stringMin1Max128", # required
-    #         kafka_cluster: { # required
-    #           apache_kafka_cluster: { # required
-    #             bootstrap_servers: "__string", # required
-    #             vpc: { # required
-    #               security_groups: ["__string"],
-    #               subnets: ["__string"], # required
-    #             },
-    #           },
-    #         },
-    #         kafka_cluster_client_authentication: { # required
-    #           authentication_type: "NONE", # required, accepts NONE, IAM
-    #         },
-    #         kafka_cluster_encryption_in_transit: { # required
-    #           encryption_type: "PLAINTEXT", # required, accepts PLAINTEXT, TLS
-    #         },
-    #         kafka_connect_version: "__string", # required
-    #         log_delivery: {
-    #           worker_log_delivery: { # required
-    #             cloud_watch_logs: {
-    #               enabled: false, # required
-    #               log_group: "__string",
-    #             },
-    #             firehose: {
-    #               delivery_stream: "__string",
-    #               enabled: false, # required
-    #             },
-    #             s3: {
-    #               bucket: "__string",
-    #               enabled: false, # required
-    #               prefix: "__string",
-    #             },
-    #           },
-    #         },
-    #         plugins: [ # required
-    #           {
-    #             custom_plugin: { # required
-    #               custom_plugin_arn: "__string", # required
-    #               revision: 1, # required
-    #             },
-    #           },
-    #         ],
-    #         service_execution_role_arn: "__string", # required
-    #         worker_configuration: {
-    #           revision: 1, # required
-    #           worker_configuration_arn: "__string", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] capacity
     #   Information about the capacity allocated to the connector. Exactly
     #   one of the two properties must be specified.
@@ -637,22 +472,6 @@ module Aws::KafkaConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateCustomPluginRequest
-    #   data as a hash:
-    #
-    #       {
-    #         content_type: "JAR", # required, accepts JAR, ZIP
-    #         description: "__stringMax1024",
-    #         location: { # required
-    #           s3_location: { # required
-    #             bucket_arn: "__string", # required
-    #             file_key: "__string", # required
-    #             object_version: "__string",
-    #           },
-    #         },
-    #         name: "__stringMin1Max128", # required
-    #       }
-    #
     # @!attribute [rw] content_type
     #   The type of the plugin file.
     #   @return [String]
@@ -708,15 +527,6 @@ module Aws::KafkaConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateWorkerConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "__stringMax1024",
-    #         name: "__stringMin1Max128", # required
-    #         properties_file_content: "SyntheticCreateWorkerConfigurationRequest__string", # required
-    #       }
-    #
     # @!attribute [rw] description
     #   A summary description of the worker configuration.
     #   @return [String]
@@ -769,14 +579,6 @@ module Aws::KafkaConnect
 
     # A plugin is an AWS resource that contains the code that defines a
     # connector's logic.
-    #
-    # @note When making an API call, you may pass CustomPlugin
-    #   data as a hash:
-    #
-    #       {
-    #         custom_plugin_arn: "__string", # required
-    #         revision: 1, # required
-    #       }
     #
     # @!attribute [rw] custom_plugin_arn
     #   The Amazon Resource Name (ARN) of the custom plugin.
@@ -836,17 +638,6 @@ module Aws::KafkaConnect
     end
 
     # Information about the location of a custom plugin.
-    #
-    # @note When making an API call, you may pass CustomPluginLocation
-    #   data as a hash:
-    #
-    #       {
-    #         s3_location: { # required
-    #           bucket_arn: "__string", # required
-    #           file_key: "__string", # required
-    #           object_version: "__string",
-    #         },
-    #       }
     #
     # @!attribute [rw] s3_location
     #   The S3 bucket Amazon Resource Name (ARN), file key, and object
@@ -954,14 +745,6 @@ module Aws::KafkaConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteConnectorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connector_arn: "__string", # required
-    #         current_version: "__string",
-    #       }
-    #
     # @!attribute [rw] connector_arn
     #   The Amazon Resource Name (ARN) of the connector that you want to
     #   delete.
@@ -998,13 +781,6 @@ module Aws::KafkaConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteCustomPluginRequest
-    #   data as a hash:
-    #
-    #       {
-    #         custom_plugin_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] custom_plugin_arn
     #   The Amazon Resource Name (ARN) of the custom plugin that you want to
     #   delete.
@@ -1036,13 +812,6 @@ module Aws::KafkaConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeConnectorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connector_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] connector_arn
     #   The Amazon Resource Name (ARN) of the connector that you want to
     #   describe.
@@ -1154,13 +923,6 @@ module Aws::KafkaConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeCustomPluginRequest
-    #   data as a hash:
-    #
-    #       {
-    #         custom_plugin_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] custom_plugin_arn
     #   Returns information about a custom plugin.
     #   @return [String]
@@ -1217,13 +979,6 @@ module Aws::KafkaConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeWorkerConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         worker_configuration_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] worker_configuration_arn
     #   The Amazon Resource Name (ARN) of the worker configuration that you
     #   want to get information about.
@@ -1270,14 +1025,6 @@ module Aws::KafkaConnect
     end
 
     # The settings for delivering logs to Amazon Kinesis Data Firehose.
-    #
-    # @note When making an API call, you may pass FirehoseLogDelivery
-    #   data as a hash:
-    #
-    #       {
-    #         delivery_stream: "__string",
-    #         enabled: false, # required
-    #       }
     #
     # @!attribute [rw] delivery_stream
     #   The name of the Kinesis Data Firehose delivery stream that is the
@@ -1351,19 +1098,6 @@ module Aws::KafkaConnect
     # The details of the Apache Kafka cluster to which the connector is
     # connected.
     #
-    # @note When making an API call, you may pass KafkaCluster
-    #   data as a hash:
-    #
-    #       {
-    #         apache_kafka_cluster: { # required
-    #           bootstrap_servers: "__string", # required
-    #           vpc: { # required
-    #             security_groups: ["__string"],
-    #             subnets: ["__string"], # required
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] apache_kafka_cluster
     #   The Apache Kafka cluster to which the connector is connected.
     #   @return [Types::ApacheKafkaCluster]
@@ -1378,13 +1112,6 @@ module Aws::KafkaConnect
 
     # The client authentication information used in order to authenticate
     # with the Apache Kafka cluster.
-    #
-    # @note When making an API call, you may pass KafkaClusterClientAuthentication
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_type: "NONE", # required, accepts NONE, IAM
-    #       }
     #
     # @!attribute [rw] authentication_type
     #   The type of client authentication used to connect to the Apache
@@ -1433,13 +1160,6 @@ module Aws::KafkaConnect
 
     # Details of encryption in transit to the Apache Kafka cluster.
     #
-    # @note When making an API call, you may pass KafkaClusterEncryptionInTransit
-    #   data as a hash:
-    #
-    #       {
-    #         encryption_type: "PLAINTEXT", # required, accepts PLAINTEXT, TLS
-    #       }
-    #
     # @!attribute [rw] encryption_type
     #   The type of encryption in transit to the Apache Kafka cluster.
     #   @return [String]
@@ -1467,15 +1187,6 @@ module Aws::KafkaConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListConnectorsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connector_name_prefix: "__string",
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] connector_name_prefix
     #   The name prefix that you want to use to search for and list
     #   connectors.
@@ -1520,14 +1231,6 @@ module Aws::KafkaConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCustomPluginsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of custom plugins to list in one response.
     #   @return [Integer]
@@ -1568,14 +1271,6 @@ module Aws::KafkaConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListWorkerConfigurationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of worker configurations to list in one response.
     #   @return [Integer]
@@ -1617,27 +1312,6 @@ module Aws::KafkaConnect
     end
 
     # Details about log delivery.
-    #
-    # @note When making an API call, you may pass LogDelivery
-    #   data as a hash:
-    #
-    #       {
-    #         worker_log_delivery: { # required
-    #           cloud_watch_logs: {
-    #             enabled: false, # required
-    #             log_group: "__string",
-    #           },
-    #           firehose: {
-    #             delivery_stream: "__string",
-    #             enabled: false, # required
-    #           },
-    #           s3: {
-    #             bucket: "__string",
-    #             enabled: false, # required
-    #             prefix: "__string",
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] worker_log_delivery
     #   The workers can send worker logs to different destination types.
@@ -1684,16 +1358,6 @@ module Aws::KafkaConnect
     # A plugin is an AWS resource that contains the code that defines your
     # connector logic.
     #
-    # @note When making an API call, you may pass Plugin
-    #   data as a hash:
-    #
-    #       {
-    #         custom_plugin: { # required
-    #           custom_plugin_arn: "__string", # required
-    #           revision: 1, # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] custom_plugin
     #   Details about a custom plugin.
     #   @return [Types::CustomPlugin]
@@ -1721,14 +1385,6 @@ module Aws::KafkaConnect
     end
 
     # Details about a connector's provisioned capacity.
-    #
-    # @note When making an API call, you may pass ProvisionedCapacity
-    #   data as a hash:
-    #
-    #       {
-    #         mcu_count: 1, # required
-    #         worker_count: 1, # required
-    #       }
     #
     # @!attribute [rw] mcu_count
     #   The number of microcontroller units (MCUs) allocated to each
@@ -1770,14 +1426,6 @@ module Aws::KafkaConnect
 
     # An update to a connector's fixed capacity.
     #
-    # @note When making an API call, you may pass ProvisionedCapacityUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         mcu_count: 1, # required
-    #         worker_count: 1, # required
-    #       }
-    #
     # @!attribute [rw] mcu_count
     #   The number of microcontroller units (MCUs) allocated to each
     #   connector worker. The valid values are 1,2,4,8.
@@ -1797,15 +1445,6 @@ module Aws::KafkaConnect
     end
 
     # The location of an object in Amazon S3.
-    #
-    # @note When making an API call, you may pass S3Location
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_arn: "__string", # required
-    #         file_key: "__string", # required
-    #         object_version: "__string",
-    #       }
     #
     # @!attribute [rw] bucket_arn
     #   The Amazon Resource Name (ARN) of an S3 bucket.
@@ -1854,15 +1493,6 @@ module Aws::KafkaConnect
     end
 
     # Details about delivering logs to Amazon S3.
-    #
-    # @note When making an API call, you may pass S3LogDelivery
-    #   data as a hash:
-    #
-    #       {
-    #         bucket: "__string",
-    #         enabled: false, # required
-    #         prefix: "__string",
-    #       }
     #
     # @!attribute [rw] bucket
     #   The name of the S3 bucket that is the destination for log delivery.
@@ -1914,13 +1544,6 @@ module Aws::KafkaConnect
 
     # The scale-in policy for the connector.
     #
-    # @note When making an API call, you may pass ScaleInPolicy
-    #   data as a hash:
-    #
-    #       {
-    #         cpu_utilization_percentage: 1, # required
-    #       }
-    #
     # @!attribute [rw] cpu_utilization_percentage
     #   Specifies the CPU utilization percentage threshold at which you want
     #   connector scale in to be triggered.
@@ -1951,13 +1574,6 @@ module Aws::KafkaConnect
 
     # An update to the connector's scale-in policy.
     #
-    # @note When making an API call, you may pass ScaleInPolicyUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         cpu_utilization_percentage: 1, # required
-    #       }
-    #
     # @!attribute [rw] cpu_utilization_percentage
     #   The target CPU utilization percentage threshold at which you want
     #   connector scale in to be triggered.
@@ -1972,13 +1588,6 @@ module Aws::KafkaConnect
     end
 
     # The scale-out policy for the connector.
-    #
-    # @note When making an API call, you may pass ScaleOutPolicy
-    #   data as a hash:
-    #
-    #       {
-    #         cpu_utilization_percentage: 1, # required
-    #       }
     #
     # @!attribute [rw] cpu_utilization_percentage
     #   The CPU utilization percentage threshold at which you want connector
@@ -2009,13 +1618,6 @@ module Aws::KafkaConnect
     end
 
     # An update to the connector's scale-out policy.
-    #
-    # @note When making an API call, you may pass ScaleOutPolicyUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         cpu_utilization_percentage: 1, # required
-    #       }
     #
     # @!attribute [rw] cpu_utilization_percentage
     #   The target CPU utilization percentage threshold at which you want
@@ -2090,31 +1692,6 @@ module Aws::KafkaConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateConnectorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         capacity: { # required
-    #           auto_scaling: {
-    #             max_worker_count: 1, # required
-    #             mcu_count: 1, # required
-    #             min_worker_count: 1, # required
-    #             scale_in_policy: { # required
-    #               cpu_utilization_percentage: 1, # required
-    #             },
-    #             scale_out_policy: { # required
-    #               cpu_utilization_percentage: 1, # required
-    #             },
-    #           },
-    #           provisioned_capacity: {
-    #             mcu_count: 1, # required
-    #             worker_count: 1, # required
-    #           },
-    #         },
-    #         connector_arn: "__string", # required
-    #         current_version: "__string", # required
-    #       }
-    #
     # @!attribute [rw] capacity
     #   The target capacity.
     #   @return [Types::CapacityUpdate]
@@ -2157,14 +1734,6 @@ module Aws::KafkaConnect
 
     # Information about the VPC in which the connector resides.
     #
-    # @note When making an API call, you may pass Vpc
-    #   data as a hash:
-    #
-    #       {
-    #         security_groups: ["__string"],
-    #         subnets: ["__string"], # required
-    #       }
-    #
     # @!attribute [rw] security_groups
     #   The security groups for the connector.
     #   @return [Array<String>]
@@ -2203,14 +1772,6 @@ module Aws::KafkaConnect
 
     # The configuration of the workers, which are the processes that run the
     # connector logic.
-    #
-    # @note When making an API call, you may pass WorkerConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         revision: 1, # required
-    #         worker_configuration_arn: "__string", # required
-    #       }
     #
     # @!attribute [rw] revision
     #   The revision of the worker configuration.
@@ -2337,25 +1898,6 @@ module Aws::KafkaConnect
 
     # Workers can send worker logs to different destination types. This
     # configuration specifies the details of these destinations.
-    #
-    # @note When making an API call, you may pass WorkerLogDelivery
-    #   data as a hash:
-    #
-    #       {
-    #         cloud_watch_logs: {
-    #           enabled: false, # required
-    #           log_group: "__string",
-    #         },
-    #         firehose: {
-    #           delivery_stream: "__string",
-    #           enabled: false, # required
-    #         },
-    #         s3: {
-    #           bucket: "__string",
-    #           enabled: false, # required
-    #           prefix: "__string",
-    #         },
-    #       }
     #
     # @!attribute [rw] cloud_watch_logs
     #   Details about delivering logs to Amazon CloudWatch Logs.

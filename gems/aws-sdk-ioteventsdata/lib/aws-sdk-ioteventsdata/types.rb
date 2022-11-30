@@ -24,16 +24,6 @@ module Aws::IoTEventsData
 
     # Information needed to acknowledge the alarm.
     #
-    # @note When making an API call, you may pass AcknowledgeAlarmActionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         request_id: "RequestId", # required
-    #         alarm_model_name: "AlarmModelName", # required
-    #         key_value: "KeyValue",
-    #         note: "Note",
-    #       }
-    #
     # @!attribute [rw] request_id
     #   The request ID. Each ID must be unique within each batch.
     #   @return [String]
@@ -230,20 +220,6 @@ module Aws::IoTEventsData
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchAcknowledgeAlarmRequest
-    #   data as a hash:
-    #
-    #       {
-    #         acknowledge_action_requests: [ # required
-    #           {
-    #             request_id: "RequestId", # required
-    #             alarm_model_name: "AlarmModelName", # required
-    #             key_value: "KeyValue",
-    #             note: "Note",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] acknowledge_action_requests
     #   The list of acknowledge action requests. You can specify up to 10
     #   requests per operation.
@@ -335,19 +311,6 @@ module Aws::IoTEventsData
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchDeleteDetectorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detectors: [ # required
-    #           {
-    #             message_id: "MessageId", # required
-    #             detector_model_name: "DetectorModelName", # required
-    #             key_value: "KeyValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] detectors
     #   The list of one or more detectors to be deleted.
     #   @return [Array<Types::DeleteDetectorRequest>]
@@ -370,20 +333,6 @@ module Aws::IoTEventsData
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchDisableAlarmRequest
-    #   data as a hash:
-    #
-    #       {
-    #         disable_action_requests: [ # required
-    #           {
-    #             request_id: "RequestId", # required
-    #             alarm_model_name: "AlarmModelName", # required
-    #             key_value: "KeyValue",
-    #             note: "Note",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] disable_action_requests
     #   The list of disable action requests. You can specify up to 10
     #   requests per operation.
@@ -407,20 +356,6 @@ module Aws::IoTEventsData
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchEnableAlarmRequest
-    #   data as a hash:
-    #
-    #       {
-    #         enable_action_requests: [ # required
-    #           {
-    #             request_id: "RequestId", # required
-    #             alarm_model_name: "AlarmModelName", # required
-    #             key_value: "KeyValue",
-    #             note: "Note",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] enable_action_requests
     #   The list of enable action requests. You can specify up to 10
     #   requests per operation.
@@ -467,22 +402,6 @@ module Aws::IoTEventsData
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchPutMessageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         messages: [ # required
-    #           {
-    #             message_id: "MessageId", # required
-    #             input_name: "EphemeralInputName", # required
-    #             payload: "data", # required
-    #             timestamp: {
-    #               time_in_millis: 1,
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] messages
     #   The list of messages to send. Each message has the following format:
     #   `'\{ "messageId": "string", "inputName": "string", "payload":
@@ -505,20 +424,6 @@ module Aws::IoTEventsData
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchResetAlarmRequest
-    #   data as a hash:
-    #
-    #       {
-    #         reset_action_requests: [ # required
-    #           {
-    #             request_id: "RequestId", # required
-    #             alarm_model_name: "AlarmModelName", # required
-    #             key_value: "KeyValue",
-    #             note: "Note",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] reset_action_requests
     #   The list of reset action requests. You can specify up to 10 requests
     #   per operation.
@@ -542,21 +447,6 @@ module Aws::IoTEventsData
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchSnoozeAlarmRequest
-    #   data as a hash:
-    #
-    #       {
-    #         snooze_action_requests: [ # required
-    #           {
-    #             request_id: "RequestId", # required
-    #             alarm_model_name: "AlarmModelName", # required
-    #             key_value: "KeyValue",
-    #             note: "Note",
-    #             snooze_duration: 1, # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] snooze_action_requests
     #   The list of snooze action requests. You can specify up to 10
     #   requests per operation.
@@ -605,34 +495,6 @@ module Aws::IoTEventsData
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchUpdateDetectorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detectors: [ # required
-    #           {
-    #             message_id: "MessageId", # required
-    #             detector_model_name: "DetectorModelName", # required
-    #             key_value: "KeyValue",
-    #             state: { # required
-    #               state_name: "StateName", # required
-    #               variables: [ # required
-    #                 {
-    #                   name: "VariableName", # required
-    #                   value: "VariableValue", # required
-    #                 },
-    #               ],
-    #               timers: [ # required
-    #                 {
-    #                   name: "TimerName", # required
-    #                   seconds: 1, # required
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] detectors
     #   The list of detectors (instances) to update, along with the values
     #   to update.
@@ -717,15 +579,6 @@ module Aws::IoTEventsData
 
     # Information used to delete the detector model.
     #
-    # @note When making an API call, you may pass DeleteDetectorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         message_id: "MessageId", # required
-    #         detector_model_name: "DetectorModelName", # required
-    #         key_value: "KeyValue",
-    #       }
-    #
     # @!attribute [rw] message_id
     #   The ID to assign to the `DeleteDetectorRequest`. Each `"messageId"`
     #   must be unique within each batch sent.
@@ -752,14 +605,6 @@ module Aws::IoTEventsData
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAlarmRequest
-    #   data as a hash:
-    #
-    #       {
-    #         alarm_model_name: "AlarmModelName", # required
-    #         key_value: "KeyValue",
-    #       }
-    #
     # @!attribute [rw] alarm_model_name
     #   The name of the alarm model.
     #   @return [String]
@@ -790,14 +635,6 @@ module Aws::IoTEventsData
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDetectorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_model_name: "DetectorModelName", # required
-    #         key_value: "KeyValue",
-    #       }
-    #
     # @!attribute [rw] detector_model_name
     #   The name of the detector model whose detectors (instances) you want
     #   information about.
@@ -890,25 +727,6 @@ module Aws::IoTEventsData
     # The new state, variable values, and timer settings of the detector
     # (instance).
     #
-    # @note When making an API call, you may pass DetectorStateDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         state_name: "StateName", # required
-    #         variables: [ # required
-    #           {
-    #             name: "VariableName", # required
-    #             value: "VariableValue", # required
-    #           },
-    #         ],
-    #         timers: [ # required
-    #           {
-    #             name: "TimerName", # required
-    #             seconds: 1, # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] state_name
     #   The name of the new state of the detector (instance).
     #   @return [String]
@@ -997,16 +815,6 @@ module Aws::IoTEventsData
 
     # Information used to disable the alarm.
     #
-    # @note When making an API call, you may pass DisableAlarmActionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         request_id: "RequestId", # required
-    #         alarm_model_name: "AlarmModelName", # required
-    #         key_value: "KeyValue",
-    #         note: "Note",
-    #       }
-    #
     # @!attribute [rw] request_id
     #   The request ID. Each ID must be unique within each batch.
     #   @return [String]
@@ -1050,16 +858,6 @@ module Aws::IoTEventsData
     end
 
     # Information needed to enable the alarm.
-    #
-    # @note When making an API call, you may pass EnableAlarmActionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         request_id: "RequestId", # required
-    #         alarm_model_name: "AlarmModelName", # required
-    #         key_value: "KeyValue",
-    #         note: "Note",
-    #       }
     #
     # @!attribute [rw] request_id
     #   The request ID. Each ID must be unique within each batch.
@@ -1115,15 +913,6 @@ module Aws::IoTEventsData
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAlarmsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         alarm_model_name: "AlarmModelName", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] alarm_model_name
     #   The name of the alarm model.
     #   @return [String]
@@ -1160,16 +949,6 @@ module Aws::IoTEventsData
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDetectorsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_model_name: "DetectorModelName", # required
-    #         state_name: "StateName",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] detector_model_name
     #   The name of the detector model whose detectors (instances) are
     #   listed.
@@ -1215,18 +994,6 @@ module Aws::IoTEventsData
 
     # Information about a message.
     #
-    # @note When making an API call, you may pass Message
-    #   data as a hash:
-    #
-    #       {
-    #         message_id: "MessageId", # required
-    #         input_name: "EphemeralInputName", # required
-    #         payload: "data", # required
-    #         timestamp: {
-    #           time_in_millis: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] message_id
     #   The ID to assign to the message. Within each batch sent, each
     #   `"messageId"` must be unique.
@@ -1268,16 +1035,6 @@ module Aws::IoTEventsData
     end
 
     # Information needed to reset the alarm.
-    #
-    # @note When making an API call, you may pass ResetAlarmActionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         request_id: "RequestId", # required
-    #         alarm_model_name: "AlarmModelName", # required
-    #         key_value: "KeyValue",
-    #         note: "Note",
-    #       }
     #
     # @!attribute [rw] request_id
     #   The request ID. Each ID must be unique within each batch.
@@ -1388,17 +1145,6 @@ module Aws::IoTEventsData
 
     # Information needed to snooze the alarm.
     #
-    # @note When making an API call, you may pass SnoozeAlarmActionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         request_id: "RequestId", # required
-    #         alarm_model_name: "AlarmModelName", # required
-    #         key_value: "KeyValue",
-    #         note: "Note",
-    #         snooze_duration: 1, # required
-    #       }
-    #
     # @!attribute [rw] request_id
     #   The request ID. Each ID must be unique within each batch.
     #   @return [String]
@@ -1498,14 +1244,6 @@ module Aws::IoTEventsData
 
     # The new setting of a timer.
     #
-    # @note When making an API call, you may pass TimerDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         name: "TimerName", # required
-    #         seconds: 1, # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the timer.
     #   @return [String]
@@ -1524,13 +1262,6 @@ module Aws::IoTEventsData
 
     # Contains information about a timestamp.
     #
-    # @note When making an API call, you may pass TimestampValue
-    #   data as a hash:
-    #
-    #       {
-    #         time_in_millis: 1,
-    #       }
-    #
     # @!attribute [rw] time_in_millis
     #   The value of the timestamp, in the Unix epoch format.
     #   @return [Integer]
@@ -1542,30 +1273,6 @@ module Aws::IoTEventsData
     end
 
     # Information used to update the detector (instance).
-    #
-    # @note When making an API call, you may pass UpdateDetectorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         message_id: "MessageId", # required
-    #         detector_model_name: "DetectorModelName", # required
-    #         key_value: "KeyValue",
-    #         state: { # required
-    #           state_name: "StateName", # required
-    #           variables: [ # required
-    #             {
-    #               name: "VariableName", # required
-    #               value: "VariableValue", # required
-    #             },
-    #           ],
-    #           timers: [ # required
-    #             {
-    #               name: "TimerName", # required
-    #               seconds: 1, # required
-    #             },
-    #           ],
-    #         },
-    #       }
     #
     # @!attribute [rw] message_id
     #   The ID to assign to the detector update `"message"`. Each
@@ -1614,14 +1321,6 @@ module Aws::IoTEventsData
     end
 
     # The new value of the variable.
-    #
-    # @note When making an API call, you may pass VariableDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         name: "VariableName", # required
-    #         value: "VariableValue", # required
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the variable.

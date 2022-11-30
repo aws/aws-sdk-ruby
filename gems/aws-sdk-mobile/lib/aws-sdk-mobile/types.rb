@@ -80,16 +80,6 @@ module Aws::Mobile
 
     # Request structure used to request a project be created.
     #
-    # @note When making an API call, you may pass CreateProjectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ProjectName",
-    #         region: "ProjectRegion",
-    #         contents: "data",
-    #         snapshot_id: "SnapshotId",
-    #       }
-    #
     # @!attribute [rw] name
     #   Name of the project.
     #   @return [String]
@@ -137,13 +127,6 @@ module Aws::Mobile
 
     # Request structure used to request a project be deleted.
     #
-    # @note When making an API call, you may pass DeleteProjectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_id: "ProjectId", # required
-    #       }
-    #
     # @!attribute [rw] project_id
     #   Unique project identifier.
     #   @return [String]
@@ -178,13 +161,6 @@ module Aws::Mobile
 
     # Request structure to request the details of a specific bundle.
     #
-    # @note When making an API call, you may pass DescribeBundleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         bundle_id: "BundleId", # required
-    #       }
-    #
     # @!attribute [rw] bundle_id
     #   Unique bundle identifier.
     #   @return [String]
@@ -212,14 +188,6 @@ module Aws::Mobile
     end
 
     # Request structure used to request details about a project.
-    #
-    # @note When making an API call, you may pass DescribeProjectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_id: "ProjectId", # required
-    #         sync_from_resources: false,
-    #       }
     #
     # @!attribute [rw] project_id
     #   Unique project identifier.
@@ -257,15 +225,6 @@ module Aws::Mobile
     # Request structure used to request generation of custom SDK and tool
     # packages required to integrate mobile web or app clients with backed
     # AWS resources.
-    #
-    # @note When making an API call, you may pass ExportBundleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         bundle_id: "BundleId", # required
-    #         project_id: "ProjectId",
-    #         platform: "OSX", # accepts OSX, WINDOWS, LINUX, OBJC, SWIFT, ANDROID, JAVASCRIPT
-    #       }
     #
     # @!attribute [rw] bundle_id
     #   Unique bundle identifier.
@@ -309,13 +268,6 @@ module Aws::Mobile
 
     # Request structure used in requests to export project configuration
     # details.
-    #
-    # @note When making an API call, you may pass ExportProjectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_id: "ProjectId", # required
-    #       }
     #
     # @!attribute [rw] project_id
     #   Unique project identifier.
@@ -402,14 +354,6 @@ module Aws::Mobile
 
     # Request structure to request all available bundles.
     #
-    # @note When making an API call, you may pass ListBundlesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   Maximum number of records to list in a single response.
     #   @return [Integer]
@@ -452,14 +396,6 @@ module Aws::Mobile
     end
 
     # Request structure used to request projects list in AWS Mobile Hub.
-    #
-    # @note When making an API call, you may pass ListProjectsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
     #
     # @!attribute [rw] max_results
     #   Maximum number of records to list in a single response.
@@ -678,14 +614,6 @@ module Aws::Mobile
     end
 
     # Request structure used for requests to update project configuration.
-    #
-    # @note When making an API call, you may pass UpdateProjectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         contents: "data",
-    #         project_id: "ProjectId", # required
-    #       }
     #
     # @!attribute [rw] contents
     #   ZIP or YAML file which contains project configuration to be updated.

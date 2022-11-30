@@ -23,13 +23,6 @@ module Aws::CloudControlApi
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CancelResourceRequestInput
-    #   data as a hash:
-    #
-    #       {
-    #         request_token: "RequestToken", # required
-    #       }
-    #
     # @!attribute [rw] request_token
     #   The `RequestToken` of the `ProgressEvent` object returned by the
     #   resource operation request.
@@ -105,17 +98,6 @@ module Aws::CloudControlApi
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         type_name: "TypeName", # required
-    #         type_version_id: "TypeVersionId",
-    #         role_arn: "RoleArn",
-    #         client_token: "ClientToken",
-    #         desired_state: "Properties", # required
-    #       }
-    #
     # @!attribute [rw] type_name
     #   The name of the resource type.
     #   @return [String]
@@ -219,17 +201,6 @@ module Aws::CloudControlApi
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         type_name: "TypeName", # required
-    #         type_version_id: "TypeVersionId",
-    #         role_arn: "RoleArn",
-    #         client_token: "ClientToken",
-    #         identifier: "Identifier", # required
-    #       }
-    #
     # @!attribute [rw] type_name
     #   The name of the resource type.
     #   @return [String]
@@ -356,16 +327,6 @@ module Aws::CloudControlApi
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         type_name: "TypeName", # required
-    #         type_version_id: "TypeVersionId",
-    #         role_arn: "RoleArn",
-    #         identifier: "Identifier", # required
-    #       }
-    #
     # @!attribute [rw] type_name
     #   The name of the resource type.
     #   @return [String]
@@ -446,13 +407,6 @@ module Aws::CloudControlApi
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetResourceRequestStatusInput
-    #   data as a hash:
-    #
-    #       {
-    #         request_token: "RequestToken", # required
-    #       }
-    #
     # @!attribute [rw] request_token
     #   A unique token used to track the progress of the resource operation
     #   request.
@@ -537,18 +491,6 @@ module Aws::CloudControlApi
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListResourceRequestsInput
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         resource_request_status_filter: {
-    #           operations: ["CREATE"], # accepts CREATE, DELETE, UPDATE
-    #           operation_statuses: ["PENDING"], # accepts PENDING, IN_PROGRESS, SUCCESS, FAILED, CANCEL_IN_PROGRESS, CANCEL_COMPLETE
-    #         },
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to be returned with a single call. If
     #   the number of available results exceeds this maximum, the response
@@ -602,18 +544,6 @@ module Aws::CloudControlApi
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListResourcesInput
-    #   data as a hash:
-    #
-    #       {
-    #         type_name: "TypeName", # required
-    #         type_version_id: "TypeVersionId",
-    #         role_arn: "RoleArn",
-    #         next_token: "HandlerNextToken",
-    #         max_results: 1,
-    #         resource_model: "Properties",
-    #       }
-    #
     # @!attribute [rw] type_name
     #   The name of the resource type.
     #   @return [String]
@@ -928,14 +858,6 @@ module Aws::CloudControlApi
 
     # The filter criteria to use in determining the requests returned.
     #
-    # @note When making an API call, you may pass ResourceRequestStatusFilter
-    #   data as a hash:
-    #
-    #       {
-    #         operations: ["CREATE"], # accepts CREATE, DELETE, UPDATE
-    #         operation_statuses: ["PENDING"], # accepts PENDING, IN_PROGRESS, SUCCESS, FAILED, CANCEL_IN_PROGRESS, CANCEL_COMPLETE
-    #       }
-    #
     # @!attribute [rw] operations
     #   The operation types to include in the filter.
     #   @return [Array<String>]
@@ -1034,18 +956,6 @@ module Aws::CloudControlApi
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         type_name: "TypeName", # required
-    #         type_version_id: "TypeVersionId",
-    #         role_arn: "RoleArn",
-    #         client_token: "ClientToken",
-    #         identifier: "Identifier", # required
-    #         patch_document: "PatchDocument", # required
-    #       }
-    #
     # @!attribute [rw] type_name
     #   The name of the resource type.
     #   @return [String]

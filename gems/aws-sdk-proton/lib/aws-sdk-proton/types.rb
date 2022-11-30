@@ -10,13 +10,6 @@
 module Aws::Proton
   module Types
 
-    # @note When making an API call, you may pass AcceptEnvironmentAccountConnectionInput
-    #   data as a hash:
-    #
-    #       {
-    #         id: "EnvironmentAccountConnectionId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the environment account connection.
     #   @return [String]
@@ -88,13 +81,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CancelComponentDeploymentInput
-    #   data as a hash:
-    #
-    #       {
-    #         component_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] component_name
     #   The name of the component with the deployment to cancel.
     #   @return [String]
@@ -120,13 +106,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CancelEnvironmentDeploymentInput
-    #   data as a hash:
-    #
-    #       {
-    #         environment_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] environment_name
     #   The name of the environment with the deployment to cancel.
     #   @return [String]
@@ -151,14 +130,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CancelServiceInstanceDeploymentInput
-    #   data as a hash:
-    #
-    #       {
-    #         service_instance_name: "ResourceName", # required
-    #         service_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] service_instance_name
     #   The name of the service instance with the deployment to cancel.
     #   @return [String]
@@ -189,13 +160,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CancelServicePipelineDeploymentInput
-    #   data as a hash:
-    #
-    #       {
-    #         service_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] service_name
     #   The name of the service with the service pipeline deployment to
     #   cancel.
@@ -241,14 +205,6 @@ module Aws::Proton
     end
 
     # Compatible environment template data.
-    #
-    # @note When making an API call, you may pass CompatibleEnvironmentTemplateInput
-    #   data as a hash:
-    #
-    #       {
-    #         major_version: "TemplateVersionPart", # required
-    #         template_name: "ResourceName", # required
-    #       }
     #
     # @!attribute [rw] major_version
     #   The major version of the compatible environment template.
@@ -440,26 +396,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateComponentInput
-    #   data as a hash:
-    #
-    #       {
-    #         description: "Description",
-    #         environment_name: "ResourceName",
-    #         manifest: "TemplateManifestContents", # required
-    #         name: "ResourceName", # required
-    #         service_instance_name: "ResourceName",
-    #         service_name: "ResourceName",
-    #         service_spec: "SpecContents",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         template_file: "TemplateFileContents", # required
-    #       }
-    #
     # @!attribute [rw] description
     #   An optional customer-provided description of the component.
     #   @return [String]
@@ -550,24 +486,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateEnvironmentAccountConnectionInput
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         codebuild_role_arn: "RoleArn",
-    #         component_role_arn: "RoleArn",
-    #         environment_name: "ResourceName", # required
-    #         management_account_id: "AwsAccountId", # required
-    #         role_arn: "RoleArn", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] client_token
     #   When included, if two identical requests are made with the same
     #   client token, Proton returns the environment account connection that
@@ -662,33 +580,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateEnvironmentInput
-    #   data as a hash:
-    #
-    #       {
-    #         codebuild_role_arn: "RoleArn",
-    #         component_role_arn: "RoleArn",
-    #         description: "Description",
-    #         environment_account_connection_id: "EnvironmentAccountConnectionId",
-    #         name: "ResourceName", # required
-    #         proton_service_role_arn: "Arn",
-    #         provisioning_repository: {
-    #           branch: "GitBranchName", # required
-    #           name: "RepositoryName", # required
-    #           provider: "GITHUB", # required, accepts GITHUB, GITHUB_ENTERPRISE, BITBUCKET
-    #         },
-    #         spec: "SpecContents", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         template_major_version: "TemplateVersionPart", # required
-    #         template_minor_version: "TemplateVersionPart",
-    #         template_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] codebuild_role_arn
     #   The Amazon Resource Name (ARN) of the IAM service role that allows
     #   Proton to provision infrastructure using CodeBuild-based
@@ -831,23 +722,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateEnvironmentTemplateInput
-    #   data as a hash:
-    #
-    #       {
-    #         description: "Description",
-    #         display_name: "DisplayName",
-    #         encryption_key: "Arn",
-    #         name: "ResourceName", # required
-    #         provisioning: "CUSTOMER_MANAGED", # accepts CUSTOMER_MANAGED
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] description
     #   A description of the environment template.
     #   @return [String]
@@ -907,28 +781,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateEnvironmentTemplateVersionInput
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         description: "Description",
-    #         major_version: "TemplateVersionPart",
-    #         source: { # required
-    #           s3: {
-    #             bucket: "S3Bucket", # required
-    #             key: "S3Key", # required
-    #           },
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         template_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   When included, if two identical requests are made with the same
     #   client token, Proton returns the environment template version that
@@ -996,22 +848,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateRepositoryInput
-    #   data as a hash:
-    #
-    #       {
-    #         connection_arn: "Arn", # required
-    #         encryption_key: "Arn",
-    #         name: "RepositoryName", # required
-    #         provider: "GITHUB", # required, accepts GITHUB, GITHUB_ENTERPRISE, BITBUCKET
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] connection_arn
     #   The Amazon Resource Name (ARN) of your AWS CodeStar connection that
     #   connects Proton to your repository provider account. For more
@@ -1072,27 +908,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateServiceInput
-    #   data as a hash:
-    #
-    #       {
-    #         branch_name: "GitBranchName",
-    #         description: "Description",
-    #         name: "ResourceName", # required
-    #         repository_connection_arn: "Arn",
-    #         repository_id: "RepositoryId",
-    #         spec: "SpecContents", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         template_major_version: "TemplateVersionPart", # required
-    #         template_minor_version: "TemplateVersionPart",
-    #         template_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] branch_name
     #   The name of the code repository branch that holds the code that's
     #   deployed in Proton. *Don't* include this parameter if your service
@@ -1190,23 +1005,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateServiceTemplateInput
-    #   data as a hash:
-    #
-    #       {
-    #         description: "Description",
-    #         display_name: "DisplayName",
-    #         encryption_key: "Arn",
-    #         name: "ResourceName", # required
-    #         pipeline_provisioning: "CUSTOMER_MANAGED", # accepts CUSTOMER_MANAGED
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] description
     #   A description of the service template.
     #   @return [String]
@@ -1273,35 +1071,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateServiceTemplateVersionInput
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         compatible_environment_templates: [ # required
-    #           {
-    #             major_version: "TemplateVersionPart", # required
-    #             template_name: "ResourceName", # required
-    #           },
-    #         ],
-    #         description: "Description",
-    #         major_version: "TemplateVersionPart",
-    #         source: { # required
-    #           s3: {
-    #             bucket: "S3Bucket", # required
-    #             key: "S3Key", # required
-    #           },
-    #         },
-    #         supported_component_sources: ["DIRECTLY_DEFINED"], # accepts DIRECTLY_DEFINED
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         template_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   When included, if two identical requests are made with the same
     #   client token, Proton returns the service template version that the
@@ -1392,18 +1161,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateTemplateSyncConfigInput
-    #   data as a hash:
-    #
-    #       {
-    #         branch: "GitBranchName", # required
-    #         repository_name: "RepositoryName", # required
-    #         repository_provider: "GITHUB", # required, accepts GITHUB, GITHUB_ENTERPRISE, BITBUCKET
-    #         subdirectory: "Subdirectory",
-    #         template_name: "ResourceName", # required
-    #         template_type: "ENVIRONMENT", # required, accepts ENVIRONMENT, SERVICE
-    #       }
-    #
     # @!attribute [rw] branch
     #   The repository branch for your template.
     #   @return [String]
@@ -1456,13 +1213,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteComponentInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the component to delete.
     #   @return [String]
@@ -1487,13 +1237,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteEnvironmentAccountConnectionInput
-    #   data as a hash:
-    #
-    #       {
-    #         id: "EnvironmentAccountConnectionId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the environment account connection to delete.
     #   @return [String]
@@ -1519,13 +1262,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteEnvironmentInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the environment to delete.
     #   @return [String]
@@ -1550,13 +1286,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteEnvironmentTemplateInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the environment template to delete.
     #   @return [String]
@@ -1581,15 +1310,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteEnvironmentTemplateVersionInput
-    #   data as a hash:
-    #
-    #       {
-    #         major_version: "TemplateVersionPart", # required
-    #         minor_version: "TemplateVersionPart", # required
-    #         template_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] major_version
     #   The environment template major version to delete.
     #   @return [String]
@@ -1624,14 +1344,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteRepositoryInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "RepositoryName", # required
-    #         provider: "GITHUB", # required, accepts GITHUB, GITHUB_ENTERPRISE, BITBUCKET
-    #       }
-    #
     # @!attribute [rw] name
     #   The repository name.
     #   @return [String]
@@ -1662,13 +1374,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteServiceInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the service to delete.
     #   @return [String]
@@ -1693,13 +1398,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteServiceTemplateInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the service template to delete.
     #   @return [String]
@@ -1724,15 +1422,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteServiceTemplateVersionInput
-    #   data as a hash:
-    #
-    #       {
-    #         major_version: "TemplateVersionPart", # required
-    #         minor_version: "TemplateVersionPart", # required
-    #         template_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] major_version
     #   The service template major version to delete.
     #   @return [String]
@@ -1767,14 +1456,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteTemplateSyncConfigInput
-    #   data as a hash:
-    #
-    #       {
-    #         template_name: "ResourceName", # required
-    #         template_type: "ENVIRONMENT", # required, accepts ENVIRONMENT, SERVICE
-    #       }
-    #
     # @!attribute [rw] template_name
     #   The template name.
     #   @return [String]
@@ -2261,14 +1942,6 @@ module Aws::Proton
 
     # A search filter for environment templates.
     #
-    # @note When making an API call, you may pass EnvironmentTemplateFilter
-    #   data as a hash:
-    #
-    #       {
-    #         major_version: "TemplateVersionPart", # required
-    #         template_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] major_version
     #   Include `majorVersion` to filter search for a major version.
     #   @return [String]
@@ -2466,8 +2139,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/GetAccountSettingsInput AWS API Documentation
     #
     class GetAccountSettingsInput < Aws::EmptyStructure; end
@@ -2485,13 +2156,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetComponentInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the component that you want to get the detailed data
     #   for.
@@ -2517,13 +2181,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetEnvironmentAccountConnectionInput
-    #   data as a hash:
-    #
-    #       {
-    #         id: "EnvironmentAccountConnectionId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the environment account connection that you want to get
     #   the detailed data for.
@@ -2549,13 +2206,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetEnvironmentInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the environment that you want to get the detailed data
     #   for.
@@ -2581,13 +2231,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetEnvironmentTemplateInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the environment template that you want to get the
     #   detailed data for.
@@ -2613,15 +2256,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetEnvironmentTemplateVersionInput
-    #   data as a hash:
-    #
-    #       {
-    #         major_version: "TemplateVersionPart", # required
-    #         minor_version: "TemplateVersionPart", # required
-    #         template_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] major_version
     #   To get environment template major version detail data, include
     #   `major Version`.
@@ -2659,14 +2293,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRepositoryInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "RepositoryName", # required
-    #         provider: "GITHUB", # required, accepts GITHUB, GITHUB_ENTERPRISE, BITBUCKET
-    #       }
-    #
     # @!attribute [rw] name
     #   The repository name, for example `myrepos/myrepo`.
     #   @return [String]
@@ -2696,16 +2322,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRepositorySyncStatusInput
-    #   data as a hash:
-    #
-    #       {
-    #         branch: "GitBranchName", # required
-    #         repository_name: "RepositoryName", # required
-    #         repository_provider: "GITHUB", # required, accepts GITHUB, GITHUB_ENTERPRISE, BITBUCKET
-    #         sync_type: "TEMPLATE_SYNC", # required, accepts TEMPLATE_SYNC
-    #       }
-    #
     # @!attribute [rw] branch
     #   The repository branch.
     #   @return [String]
@@ -2745,13 +2361,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetServiceInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the service that you want to get the detailed data for.
     #   @return [String]
@@ -2764,14 +2373,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetServiceInstanceInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ResourceName", # required
-    #         service_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of a service instance that you want to get the detailed
     #   data for.
@@ -2814,13 +2415,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetServiceTemplateInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the service template that you want to get detailed data
     #   for.
@@ -2846,15 +2440,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetServiceTemplateVersionInput
-    #   data as a hash:
-    #
-    #       {
-    #         major_version: "TemplateVersionPart", # required
-    #         minor_version: "TemplateVersionPart", # required
-    #         template_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] major_version
     #   To get service template major version detail data, include `major
     #   Version`.
@@ -2892,14 +2477,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetTemplateSyncConfigInput
-    #   data as a hash:
-    #
-    #       {
-    #         template_name: "ResourceName", # required
-    #         template_type: "ENVIRONMENT", # required, accepts ENVIRONMENT, SERVICE
-    #       }
-    #
     # @!attribute [rw] template_name
     #   The template name.
     #   @return [String]
@@ -2930,15 +2507,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetTemplateSyncStatusInput
-    #   data as a hash:
-    #
-    #       {
-    #         template_name: "ResourceName", # required
-    #         template_type: "ENVIRONMENT", # required, accepts ENVIRONMENT, SERVICE
-    #         template_version: "TemplateVersionPart", # required
-    #       }
-    #
     # @!attribute [rw] template_name
     #   The template name.
     #   @return [String]
@@ -2996,14 +2564,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListComponentOutputsInput
-    #   data as a hash:
-    #
-    #       {
-    #         component_name: "ResourceName", # required
-    #         next_token: "EmptyNextToken",
-    #       }
-    #
     # @!attribute [rw] component_name
     #   The name of the component whose outputs you want.
     #   @return [String]
@@ -3040,14 +2600,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListComponentProvisionedResourcesInput
-    #   data as a hash:
-    #
-    #       {
-    #         component_name: "ResourceName", # required
-    #         next_token: "EmptyNextToken",
-    #       }
-    #
     # @!attribute [rw] component_name
     #   The name of the component whose provisioned resources you want.
     #   @return [String]
@@ -3086,17 +2638,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListComponentsInput
-    #   data as a hash:
-    #
-    #       {
-    #         environment_name: "ResourceName",
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         service_instance_name: "ResourceName",
-    #         service_name: "ResourceName",
-    #       }
-    #
     # @!attribute [rw] environment_name
     #   The name of an environment for result list filtering. Proton returns
     #   components associated with the environment or attached to service
@@ -3153,17 +2694,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEnvironmentAccountConnectionsInput
-    #   data as a hash:
-    #
-    #       {
-    #         environment_name: "ResourceName",
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         requested_by: "MANAGEMENT_ACCOUNT", # required, accepts MANAGEMENT_ACCOUNT, ENVIRONMENT_ACCOUNT
-    #         statuses: ["PENDING"], # accepts PENDING, CONNECTED, REJECTED
-    #       }
-    #
     # @!attribute [rw] environment_name
     #   The environment name that's associated with each listed environment
     #   account connection.
@@ -3221,14 +2751,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEnvironmentOutputsInput
-    #   data as a hash:
-    #
-    #       {
-    #         environment_name: "ResourceName", # required
-    #         next_token: "EmptyNextToken",
-    #       }
-    #
     # @!attribute [rw] environment_name
     #   The environment name.
     #   @return [String]
@@ -3267,14 +2789,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEnvironmentProvisionedResourcesInput
-    #   data as a hash:
-    #
-    #       {
-    #         environment_name: "ResourceName", # required
-    #         next_token: "EmptyNextToken",
-    #       }
-    #
     # @!attribute [rw] environment_name
     #   The environment name.
     #   @return [String]
@@ -3314,16 +2828,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEnvironmentTemplateVersionsInput
-    #   data as a hash:
-    #
-    #       {
-    #         major_version: "TemplateVersionPart",
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         template_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] major_version
     #   To view a list of minor of versions under a major version of an
     #   environment template, include `major Version`.
@@ -3380,14 +2884,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEnvironmentTemplatesInput
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of environment templates to list.
     #   @return [Integer]
@@ -3426,20 +2922,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEnvironmentsInput
-    #   data as a hash:
-    #
-    #       {
-    #         environment_templates: [
-    #           {
-    #             major_version: "TemplateVersionPart", # required
-    #             template_name: "ResourceName", # required
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] environment_templates
     #   An array of the versions of the environment template.
     #   @return [Array<Types::EnvironmentTemplateFilter>]
@@ -3483,14 +2965,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRepositoriesInput
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of repositories to list.
     #   @return [Integer]
@@ -3529,16 +3003,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRepositorySyncDefinitionsInput
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "EmptyNextToken",
-    #         repository_name: "RepositoryName", # required
-    #         repository_provider: "GITHUB", # required, accepts GITHUB, GITHUB_ENTERPRISE, BITBUCKET
-    #         sync_type: "TEMPLATE_SYNC", # required, accepts TEMPLATE_SYNC
-    #       }
-    #
     # @!attribute [rw] next_token
     #   A token that indicates the location of the next repository sync
     #   definition in the array of repository sync definitions, after the
@@ -3587,15 +3051,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListServiceInstanceOutputsInput
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "EmptyNextToken",
-    #         service_instance_name: "ResourceName", # required
-    #         service_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] next_token
     #   A token that indicates the location of the next output in the array
     #   of outputs, after the list of outputs that was previously requested.
@@ -3637,15 +3092,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListServiceInstanceProvisionedResourcesInput
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "EmptyNextToken",
-    #         service_instance_name: "ResourceName", # required
-    #         service_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] next_token
     #   A token that indicates the location of the next provisioned resource
     #   in the array of provisioned resources, after the list of provisioned
@@ -3693,14 +3139,6 @@ module Aws::Proton
     # A filtering criterion to scope down the result list of the
     # ListServiceInstances action.
     #
-    # @note When making an API call, you may pass ListServiceInstancesFilter
-    #   data as a hash:
-    #
-    #       {
-    #         key: "name", # accepts name, deploymentStatus, templateName, serviceName, deployedTemplateVersionStatus, environmentName, lastDeploymentAttemptedAtBefore, lastDeploymentAttemptedAtAfter, createdAtBefore, createdAtAfter
-    #         value: "ListServiceInstancesFilterValue",
-    #       }
-    #
     # @!attribute [rw] key
     #   The name of a filtering criterion.
     #   @return [String]
@@ -3726,23 +3164,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListServiceInstancesInput
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             key: "name", # accepts name, deploymentStatus, templateName, serviceName, deployedTemplateVersionStatus, environmentName, lastDeploymentAttemptedAtBefore, lastDeploymentAttemptedAtAfter, createdAtBefore, createdAtAfter
-    #             value: "ListServiceInstancesFilterValue",
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         service_name: "ResourceName",
-    #         sort_by: "name", # accepts name, deploymentStatus, templateName, serviceName, environmentName, lastDeploymentAttemptedAt, createdAt
-    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #       }
-    #
     # @!attribute [rw] filters
     #   An array of filtering criteria that scope down the result list. By
     #   default, all service instances in the Amazon Web Services account
@@ -3810,14 +3231,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListServicePipelineOutputsInput
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "EmptyNextToken",
-    #         service_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] next_token
     #   A token that indicates the location of the next output in the array
     #   of outputs, after the list of outputs that was previously requested.
@@ -3854,14 +3267,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListServicePipelineProvisionedResourcesInput
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "EmptyNextToken",
-    #         service_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] next_token
     #   A token that indicates the location of the next provisioned resource
     #   in the array of provisioned resources, after the list of provisioned
@@ -3901,16 +3306,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListServiceTemplateVersionsInput
-    #   data as a hash:
-    #
-    #       {
-    #         major_version: "TemplateVersionPart",
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         template_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] major_version
     #   To view a list of minor of versions under a major version of a
     #   service template, include `major Version`.
@@ -3967,14 +3362,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListServiceTemplatesInput
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of service templates to list.
     #   @return [Integer]
@@ -4013,14 +3400,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListServicesInput
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of services to list.
     #   @return [Integer]
@@ -4058,15 +3437,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "String",
-    #         resource_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of tags to list.
     #   @return [Integer]
@@ -4110,22 +3480,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass NotifyResourceDeploymentStatusChangeInput
-    #   data as a hash:
-    #
-    #       {
-    #         deployment_id: "DeploymentId",
-    #         outputs: [
-    #           {
-    #             key: "OutputKey",
-    #             value_string: "OutputValueString",
-    #           },
-    #         ],
-    #         resource_arn: "Arn", # required
-    #         status: "IN_PROGRESS", # accepts IN_PROGRESS, FAILED, SUCCEEDED
-    #         status_message: "NotifyResourceDeploymentStatusChangeInputStatusMessageString",
-    #       }
-    #
     # @!attribute [rw] deployment_id
     #   The deployment ID for your provisioned resource.
     #   @return [String]
@@ -4164,14 +3518,6 @@ module Aws::Proton
     class NotifyResourceDeploymentStatusChangeOutput < Aws::EmptyStructure; end
 
     # An infrastructure as code defined resource output.
-    #
-    # @note When making an API call, you may pass Output
-    #   data as a hash:
-    #
-    #       {
-    #         key: "OutputKey",
-    #         value_string: "OutputValueString",
-    #       }
     #
     # @!attribute [rw] key
     #   The output key.
@@ -4223,13 +3569,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RejectEnvironmentAccountConnectionInput
-    #   data as a hash:
-    #
-    #       {
-    #         id: "EnvironmentAccountConnectionId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the environment account connection to reject.
     #   @return [String]
@@ -4321,15 +3660,6 @@ module Aws::Proton
     end
 
     # Detail input data for a linked repository branch.
-    #
-    # @note When making an API call, you may pass RepositoryBranchInput
-    #   data as a hash:
-    #
-    #       {
-    #         branch: "GitBranchName", # required
-    #         name: "RepositoryName", # required
-    #         provider: "GITHUB", # required, accepts GITHUB, GITHUB_ENTERPRISE, BITBUCKET
-    #       }
     #
     # @!attribute [rw] branch
     #   The repository branch.
@@ -4580,14 +3910,6 @@ module Aws::Proton
     end
 
     # Template bundle S3 bucket data.
-    #
-    # @note When making an API call, you may pass S3ObjectSource
-    #   data as a hash:
-    #
-    #       {
-    #         bucket: "S3Bucket", # required
-    #         key: "S3Key", # required
-    #       }
     #
     # @!attribute [rw] bucket
     #   The name of the S3 bucket that contains a template bundle.
@@ -5221,14 +4543,6 @@ module Aws::Proton
 
     # A description of a resource tag.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The key of the resource tag.
     #   @return [String]
@@ -5246,19 +4560,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the Proton resource to apply
     #   customer tags to.
@@ -5322,8 +4623,6 @@ module Aws::Proton
 
     # Template version source data.
     #
-    # @note TemplateVersionSourceInput is a union - when making an API calls you must set exactly one of the members.
-    #
     # @!attribute [rw] s3
     #   An S3 source object that includes the template bundle S3 path and
     #   name for a template minor version.
@@ -5355,14 +4654,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource to remove customer
     #   tags from.
@@ -5386,20 +4677,6 @@ module Aws::Proton
     #
     class UntagResourceOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateAccountSettingsInput
-    #   data as a hash:
-    #
-    #       {
-    #         delete_pipeline_provisioning_repository: false,
-    #         pipeline_codebuild_role_arn: "RoleArnOrEmptyString",
-    #         pipeline_provisioning_repository: {
-    #           branch: "GitBranchName", # required
-    #           name: "RepositoryName", # required
-    #           provider: "GITHUB", # required, accepts GITHUB, GITHUB_ENTERPRISE, BITBUCKET
-    #         },
-    #         pipeline_service_role_arn: "RoleArnOrEmptyString",
-    #       }
-    #
     # @!attribute [rw] delete_pipeline_provisioning_repository
     #   Set to `true` to remove a configured pipeline repository from the
     #   account settings. Don't set this field if you are updating the
@@ -5457,19 +4734,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateComponentInput
-    #   data as a hash:
-    #
-    #       {
-    #         deployment_type: "NONE", # required, accepts NONE, CURRENT_VERSION
-    #         description: "Description",
-    #         name: "ResourceName", # required
-    #         service_instance_name: "ResourceNameOrEmpty",
-    #         service_name: "ResourceNameOrEmpty",
-    #         service_spec: "SpecContents",
-    #         template_file: "TemplateFileContents",
-    #       }
-    #
     # @!attribute [rw] deployment_type
     #   The deployment type. It defines the mode for updating a component,
     #   as follows:
@@ -5559,16 +4823,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateEnvironmentAccountConnectionInput
-    #   data as a hash:
-    #
-    #       {
-    #         codebuild_role_arn: "RoleArn",
-    #         component_role_arn: "RoleArn",
-    #         id: "EnvironmentAccountConnectionId", # required
-    #         role_arn: "RoleArn",
-    #       }
-    #
     # @!attribute [rw] codebuild_role_arn
     #   The Amazon Resource Name (ARN) of an IAM service role in the
     #   environment account. Proton uses this role to provision
@@ -5627,27 +4881,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateEnvironmentInput
-    #   data as a hash:
-    #
-    #       {
-    #         codebuild_role_arn: "RoleArn",
-    #         component_role_arn: "RoleArn",
-    #         deployment_type: "NONE", # required, accepts NONE, CURRENT_VERSION, MINOR_VERSION, MAJOR_VERSION
-    #         description: "Description",
-    #         environment_account_connection_id: "EnvironmentAccountConnectionId",
-    #         name: "ResourceName", # required
-    #         proton_service_role_arn: "Arn",
-    #         provisioning_repository: {
-    #           branch: "GitBranchName", # required
-    #           name: "RepositoryName", # required
-    #           provider: "GITHUB", # required, accepts GITHUB, GITHUB_ENTERPRISE, BITBUCKET
-    #         },
-    #         spec: "SpecContents",
-    #         template_major_version: "TemplateVersionPart",
-    #         template_minor_version: "TemplateVersionPart",
-    #       }
-    #
     # @!attribute [rw] codebuild_role_arn
     #   The Amazon Resource Name (ARN) of the IAM service role that allows
     #   Proton to provision infrastructure using CodeBuild-based
@@ -5782,15 +5015,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateEnvironmentTemplateInput
-    #   data as a hash:
-    #
-    #       {
-    #         description: "Description",
-    #         display_name: "DisplayName",
-    #         name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] description
     #   A description of the environment template update.
     #   @return [String]
@@ -5826,17 +5050,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateEnvironmentTemplateVersionInput
-    #   data as a hash:
-    #
-    #       {
-    #         description: "Description",
-    #         major_version: "TemplateVersionPart", # required
-    #         minor_version: "TemplateVersionPart", # required
-    #         status: "REGISTRATION_IN_PROGRESS", # accepts REGISTRATION_IN_PROGRESS, REGISTRATION_FAILED, DRAFT, PUBLISHED
-    #         template_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] description
     #   A description of environment template version to update.
     #   @return [String]
@@ -5884,15 +5097,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateServiceInput
-    #   data as a hash:
-    #
-    #       {
-    #         description: "Description",
-    #         name: "ResourceName", # required
-    #         spec: "SpecContents",
-    #       }
-    #
     # @!attribute [rw] description
     #   The edited service description.
     #   @return [String]
@@ -5923,18 +5127,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateServiceInstanceInput
-    #   data as a hash:
-    #
-    #       {
-    #         deployment_type: "NONE", # required, accepts NONE, CURRENT_VERSION, MINOR_VERSION, MAJOR_VERSION
-    #         name: "ResourceName", # required
-    #         service_name: "ResourceName", # required
-    #         spec: "SpecContents",
-    #         template_major_version: "TemplateVersionPart",
-    #         template_minor_version: "TemplateVersionPart",
-    #       }
-    #
     # @!attribute [rw] deployment_type
     #   The deployment type. It defines the mode for updating a service
     #   instance, as follows:
@@ -6033,17 +5225,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateServicePipelineInput
-    #   data as a hash:
-    #
-    #       {
-    #         deployment_type: "NONE", # required, accepts NONE, CURRENT_VERSION, MINOR_VERSION, MAJOR_VERSION
-    #         service_name: "ResourceName", # required
-    #         spec: "SpecContents", # required
-    #         template_major_version: "TemplateVersionPart",
-    #         template_minor_version: "TemplateVersionPart",
-    #       }
-    #
     # @!attribute [rw] deployment_type
     #   The deployment type.
     #
@@ -6128,15 +5309,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateServiceTemplateInput
-    #   data as a hash:
-    #
-    #       {
-    #         description: "Description",
-    #         display_name: "DisplayName",
-    #         name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] description
     #   A description of the service template update.
     #   @return [String]
@@ -6172,24 +5344,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateServiceTemplateVersionInput
-    #   data as a hash:
-    #
-    #       {
-    #         compatible_environment_templates: [
-    #           {
-    #             major_version: "TemplateVersionPart", # required
-    #             template_name: "ResourceName", # required
-    #           },
-    #         ],
-    #         description: "Description",
-    #         major_version: "TemplateVersionPart", # required
-    #         minor_version: "TemplateVersionPart", # required
-    #         status: "REGISTRATION_IN_PROGRESS", # accepts REGISTRATION_IN_PROGRESS, REGISTRATION_FAILED, DRAFT, PUBLISHED
-    #         supported_component_sources: ["DIRECTLY_DEFINED"], # accepts DIRECTLY_DEFINED
-    #         template_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] compatible_environment_templates
     #   An array of environment template objects that are compatible with
     #   this service template version. A service instance based on this
@@ -6264,18 +5418,6 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateTemplateSyncConfigInput
-    #   data as a hash:
-    #
-    #       {
-    #         branch: "GitBranchName", # required
-    #         repository_name: "RepositoryName", # required
-    #         repository_provider: "GITHUB", # required, accepts GITHUB, GITHUB_ENTERPRISE, BITBUCKET
-    #         subdirectory: "Subdirectory",
-    #         template_name: "ResourceName", # required
-    #         template_type: "ENVIRONMENT", # required, accepts ENVIRONMENT, SERVICE
-    #       }
-    #
     # @!attribute [rw] branch
     #   The repository branch for your template.
     #   @return [String]

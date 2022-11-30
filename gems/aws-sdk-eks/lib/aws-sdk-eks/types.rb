@@ -223,22 +223,6 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateEncryptionConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_name: "String", # required
-    #         encryption_config: [ # required
-    #           {
-    #             resources: ["String"],
-    #             provider: {
-    #               key_arn: "String",
-    #             },
-    #           },
-    #         ],
-    #         client_request_token: "String",
-    #       }
-    #
     # @!attribute [rw] cluster_name
     #   The name of the cluster that you are associating with encryption
     #   configuration.
@@ -278,29 +262,6 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateIdentityProviderConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_name: "String", # required
-    #         oidc: { # required
-    #           identity_provider_config_name: "String", # required
-    #           issuer_url: "String", # required
-    #           client_id: "String", # required
-    #           username_claim: "String",
-    #           username_prefix: "String",
-    #           groups_claim: "String",
-    #           groups_prefix: "String",
-    #           required_claims: {
-    #             "requiredClaimsKey" => "requiredClaimsValue",
-    #           },
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         client_request_token: "String",
-    #       }
-    #
     # @!attribute [rw] cluster_name
     #   The name of the cluster to associate the configuration to.
     #   @return [String]
@@ -636,14 +597,6 @@ module Aws::EKS
 
     # The configuration sent to a cluster for configuration.
     #
-    # @note When making an API call, you may pass ConnectorConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         role_arn: "String", # required
-    #         provider: "EKS_ANYWHERE", # required, accepts EKS_ANYWHERE, ANTHOS, GKE, AKS, OPENSHIFT, TANZU, RANCHER, EC2, OTHER
-    #       }
-    #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the role that is authorized to
     #   request the connector configuration.
@@ -707,13 +660,6 @@ module Aws::EKS
     #
     # [1]: https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html
     #
-    # @note When making an API call, you may pass ControlPlanePlacementRequest
-    #   data as a hash:
-    #
-    #       {
-    #         group_name: "String",
-    #       }
-    #
     # @!attribute [rw] group_name
     #   The name of the placement group for the Kubernetes control plane
     #   instances. This setting can't be changed after cluster creation.
@@ -749,21 +695,6 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAddonRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_name: "ClusterName", # required
-    #         addon_name: "String", # required
-    #         addon_version: "String",
-    #         service_account_role_arn: "RoleArn",
-    #         resolve_conflicts: "OVERWRITE", # accepts OVERWRITE, NONE, PRESERVE
-    #         client_request_token: "String",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] cluster_name
     #   The name of the cluster to create the add-on for.
     #   @return [String]
@@ -878,53 +809,6 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateClusterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ClusterName", # required
-    #         version: "String",
-    #         role_arn: "String", # required
-    #         resources_vpc_config: { # required
-    #           subnet_ids: ["String"],
-    #           security_group_ids: ["String"],
-    #           endpoint_public_access: false,
-    #           endpoint_private_access: false,
-    #           public_access_cidrs: ["String"],
-    #         },
-    #         kubernetes_network_config: {
-    #           service_ipv_4_cidr: "String",
-    #           ip_family: "ipv4", # accepts ipv4, ipv6
-    #         },
-    #         logging: {
-    #           cluster_logging: [
-    #             {
-    #               types: ["api"], # accepts api, audit, authenticator, controllerManager, scheduler
-    #               enabled: false,
-    #             },
-    #           ],
-    #         },
-    #         client_request_token: "String",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         encryption_config: [
-    #           {
-    #             resources: ["String"],
-    #             provider: {
-    #               key_arn: "String",
-    #             },
-    #           },
-    #         ],
-    #         outpost_config: {
-    #           outpost_arns: ["String"], # required
-    #           control_plane_instance_type: "String", # required
-    #           control_plane_placement: {
-    #             group_name: "String",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The unique name to give to your cluster.
     #   @return [String]
@@ -1050,28 +934,6 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateFargateProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fargate_profile_name: "String", # required
-    #         cluster_name: "String", # required
-    #         pod_execution_role_arn: "String", # required
-    #         subnets: ["String"],
-    #         selectors: [
-    #           {
-    #             namespace: "String",
-    #             labels: {
-    #               "String" => "String",
-    #             },
-    #           },
-    #         ],
-    #         client_request_token: "String",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] fargate_profile_name
     #   The name of the Fargate profile.
     #   @return [String]
@@ -1149,54 +1011,6 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateNodegroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_name: "String", # required
-    #         nodegroup_name: "String", # required
-    #         scaling_config: {
-    #           min_size: 1,
-    #           max_size: 1,
-    #           desired_size: 1,
-    #         },
-    #         disk_size: 1,
-    #         subnets: ["String"], # required
-    #         instance_types: ["String"],
-    #         ami_type: "AL2_x86_64", # accepts AL2_x86_64, AL2_x86_64_GPU, AL2_ARM_64, CUSTOM, BOTTLEROCKET_ARM_64, BOTTLEROCKET_x86_64, BOTTLEROCKET_ARM_64_NVIDIA, BOTTLEROCKET_x86_64_NVIDIA
-    #         remote_access: {
-    #           ec2_ssh_key: "String",
-    #           source_security_groups: ["String"],
-    #         },
-    #         node_role: "String", # required
-    #         labels: {
-    #           "labelKey" => "labelValue",
-    #         },
-    #         taints: [
-    #           {
-    #             key: "taintKey",
-    #             value: "taintValue",
-    #             effect: "NO_SCHEDULE", # accepts NO_SCHEDULE, NO_EXECUTE, PREFER_NO_SCHEDULE
-    #           },
-    #         ],
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         client_request_token: "String",
-    #         launch_template: {
-    #           name: "String",
-    #           version: "String",
-    #           id: "String",
-    #         },
-    #         update_config: {
-    #           max_unavailable: 1,
-    #           max_unavailable_percentage: 1,
-    #         },
-    #         capacity_type: "ON_DEMAND", # accepts ON_DEMAND, SPOT
-    #         version: "String",
-    #         release_version: "String",
-    #       }
-    #
     # @!attribute [rw] cluster_name
     #   The name of the cluster to create the node group in.
     #   @return [String]
@@ -1422,15 +1236,6 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAddonRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_name: "ClusterName", # required
-    #         addon_name: "String", # required
-    #         preserve: false,
-    #       }
-    #
     # @!attribute [rw] cluster_name
     #   The name of the cluster to delete the add-on from.
     #   @return [String]
@@ -1477,13 +1282,6 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteClusterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the cluster to delete.
     #   @return [String]
@@ -1508,14 +1306,6 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteFargateProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_name: "String", # required
-    #         fargate_profile_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] cluster_name
     #   The name of the Amazon EKS cluster associated with the Fargate
     #   profile to delete.
@@ -1546,14 +1336,6 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteNodegroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_name: "String", # required
-    #         nodegroup_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] cluster_name
     #   The name of the Amazon EKS cluster that is associated with your node
     #   group.
@@ -1584,13 +1366,6 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeregisterClusterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the connected cluster to deregister.
     #   @return [String]
@@ -1615,14 +1390,6 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAddonRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_name: "ClusterName", # required
-    #         addon_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] cluster_name
     #   The name of the cluster.
     #   @return [String]
@@ -1662,19 +1429,6 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAddonVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         kubernetes_version: "String",
-    #         max_results: 1,
-    #         next_token: "String",
-    #         addon_name: "String",
-    #         types: ["String"],
-    #         publishers: ["String"],
-    #         owners: ["String"],
-    #       }
-    #
     # @!attribute [rw] kubernetes_version
     #   The Kubernetes versions that you can use the add-on with.
     #   @return [String]
@@ -1763,13 +1517,6 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeClusterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the cluster to describe.
     #   @return [String]
@@ -1794,14 +1541,6 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeFargateProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_name: "String", # required
-    #         fargate_profile_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] cluster_name
     #   The name of the Amazon EKS cluster associated with the Fargate
     #   profile.
@@ -1832,17 +1571,6 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeIdentityProviderConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_name: "String", # required
-    #         identity_provider_config: { # required
-    #           type: "String", # required
-    #           name: "String", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] cluster_name
     #   The cluster name that the identity provider configuration is
     #   associated to.
@@ -1874,14 +1602,6 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeNodegroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_name: "String", # required
-    #         nodegroup_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] cluster_name
     #   The name of the Amazon EKS cluster associated with the node group.
     #   @return [String]
@@ -1911,16 +1631,6 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeUpdateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #         update_id: "String", # required
-    #         nodegroup_name: "String",
-    #         addon_name: "String",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the Amazon EKS cluster associated with the update.
     #   @return [String]
@@ -1967,18 +1677,6 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateIdentityProviderConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_name: "String", # required
-    #         identity_provider_config: { # required
-    #           type: "String", # required
-    #           name: "String", # required
-    #         },
-    #         client_request_token: "String",
-    #       }
-    #
     # @!attribute [rw] cluster_name
     #   The name of the cluster to disassociate an identity provider from.
     #   @return [String]
@@ -2018,16 +1716,6 @@ module Aws::EKS
     end
 
     # The encryption configuration for the cluster.
-    #
-    # @note When making an API call, you may pass EncryptionConfig
-    #   data as a hash:
-    #
-    #       {
-    #         resources: ["String"],
-    #         provider: {
-    #           key_arn: "String",
-    #         },
-    #       }
     #
     # @!attribute [rw] resources
     #   Specifies the resources to be encrypted. The only supported value is
@@ -2164,16 +1852,6 @@ module Aws::EKS
 
     # An object representing an Fargate profile selector.
     #
-    # @note When making an API call, you may pass FargateProfileSelector
-    #   data as a hash:
-    #
-    #       {
-    #         namespace: "String",
-    #         labels: {
-    #           "String" => "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] namespace
     #   The Kubernetes namespace that the selector should match.
     #   @return [String]
@@ -2213,14 +1891,6 @@ module Aws::EKS
     end
 
     # An object representing an identity provider configuration.
-    #
-    # @note When making an API call, you may pass IdentityProviderConfig
-    #   data as a hash:
-    #
-    #       {
-    #         type: "String", # required
-    #         name: "String", # required
-    #       }
     #
     # @!attribute [rw] type
     #   The type of the identity provider configuration. The only type
@@ -2412,14 +2082,6 @@ module Aws::EKS
 
     # The Kubernetes network configuration for the cluster.
     #
-    # @note When making an API call, you may pass KubernetesNetworkConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_ipv_4_cidr: "String",
-    #         ip_family: "ipv4", # accepts ipv4, ipv6
-    #       }
-    #
     # @!attribute [rw] service_ipv_4_cidr
     #   Don't specify a value if you select `ipv6` for **ipFamily**. The
     #   CIDR block to assign Kubernetes service IP addresses from. If you
@@ -2537,15 +2199,6 @@ module Aws::EKS
     # [6]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateLaunchTemplate.html
     # [7]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
     #
-    # @note When making an API call, you may pass LaunchTemplateSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String",
-    #         version: "String",
-    #         id: "String",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the launch template.
     #
@@ -2575,15 +2228,6 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAddonsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_name: "ClusterName", # required
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] cluster_name
     #   The name of the cluster.
     #   @return [String]
@@ -2649,15 +2293,6 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListClustersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "String",
-    #         include: ["String"],
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of cluster results returned by `ListClusters` in
     #   paginated output. When you use this parameter, `ListClusters`
@@ -2720,15 +2355,6 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFargateProfilesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_name: "String", # required
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] cluster_name
     #   The name of the Amazon EKS cluster that you would like to list
     #   Fargate profiles in.
@@ -2786,15 +2412,6 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListIdentityProviderConfigsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_name: "String", # required
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] cluster_name
     #   The cluster name that you want to list identity provider
     #   configurations for.
@@ -2851,15 +2468,6 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListNodegroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_name: "String", # required
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] cluster_name
     #   The name of the Amazon EKS cluster that you would like to list node
     #   groups in.
@@ -2916,13 +2524,6 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) that identifies the resource for
     #   which to list the tags. Currently, the supported resources are
@@ -2949,17 +2550,6 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListUpdatesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #         nodegroup_name: "String",
-    #         addon_name: "String",
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the Amazon EKS cluster to list updates for.
     #   @return [String]
@@ -3025,14 +2615,6 @@ module Aws::EKS
     # An object representing the enabled or disabled Kubernetes control
     # plane logs for your cluster.
     #
-    # @note When making an API call, you may pass LogSetup
-    #   data as a hash:
-    #
-    #       {
-    #         types: ["api"], # accepts api, audit, authenticator, controllerManager, scheduler
-    #         enabled: false,
-    #       }
-    #
     # @!attribute [rw] types
     #   The available cluster control plane log types.
     #   @return [Array<String>]
@@ -3055,18 +2637,6 @@ module Aws::EKS
 
     # An object representing the logging configuration for resources in your
     # cluster.
-    #
-    # @note When making an API call, you may pass Logging
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_logging: [
-    #           {
-    #             types: ["api"], # accepts api, audit, authenticator, controllerManager, scheduler
-    #             enabled: false,
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] cluster_logging
     #   The cluster control plane logging configuration for your cluster.
@@ -3308,15 +2878,6 @@ module Aws::EKS
     # node group, you must specify all or none of the properties. When
     # updating a node group, you can specify any or none of the properties.
     #
-    # @note When making an API call, you may pass NodegroupScalingConfig
-    #   data as a hash:
-    #
-    #       {
-    #         min_size: 1,
-    #         max_size: 1,
-    #         desired_size: 1,
-    #       }
-    #
     # @!attribute [rw] min_size
     #   The minimum number of nodes that the managed node group can scale in
     #   to.
@@ -3369,14 +2930,6 @@ module Aws::EKS
     end
 
     # The node group update configuration.
-    #
-    # @note When making an API call, you may pass NodegroupUpdateConfig
-    #   data as a hash:
-    #
-    #       {
-    #         max_unavailable: 1,
-    #         max_unavailable_percentage: 1,
-    #       }
     #
     # @!attribute [rw] max_unavailable
     #   The maximum number of nodes unavailable at once during a version
@@ -3524,22 +3077,6 @@ module Aws::EKS
     #
     # [1]: https://docs.aws.amazon.com/eks/latest/userguide/authenticate-oidc-identity-provider.html
     #
-    # @note When making an API call, you may pass OidcIdentityProviderConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity_provider_config_name: "String", # required
-    #         issuer_url: "String", # required
-    #         client_id: "String", # required
-    #         username_claim: "String",
-    #         username_prefix: "String",
-    #         groups_claim: "String",
-    #         groups_prefix: "String",
-    #         required_claims: {
-    #           "requiredClaimsKey" => "requiredClaimsValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] identity_provider_config_name
     #   The name of the OIDC provider configuration.
     #   @return [String]
@@ -3625,17 +3162,6 @@ module Aws::EKS
     #
     # [1]: https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-local-cluster-create.html
     #
-    # @note When making an API call, you may pass OutpostConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         outpost_arns: ["String"], # required
-    #         control_plane_instance_type: "String", # required
-    #         control_plane_placement: {
-    #           group_name: "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] outpost_arns
     #   The ARN of the Outpost that you want to use for your local Amazon
     #   EKS cluster on Outposts. Only a single Outpost ARN is supported.
@@ -3718,13 +3244,6 @@ module Aws::EKS
     # Identifies the Key Management Service (KMS) key used to encrypt the
     # secrets.
     #
-    # @note When making an API call, you may pass Provider
-    #   data as a hash:
-    #
-    #       {
-    #         key_arn: "String",
-    #       }
-    #
     # @!attribute [rw] key_arn
     #   Amazon Resource Name (ARN) or alias of the KMS key. The KMS key must
     #   be symmetric, created in the same region as the cluster, and if the
@@ -3746,21 +3265,6 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RegisterClusterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ClusterName", # required
-    #         connector_config: { # required
-    #           role_arn: "String", # required
-    #           provider: "EKS_ANYWHERE", # required, accepts EKS_ANYWHERE, ANTHOS, GKE, AKS, OPENSHIFT, TANZU, RANCHER, EC2, OTHER
-    #         },
-    #         client_request_token: "String",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   Define a unique name for this cluster for your Region.
     #   @return [String]
@@ -3810,14 +3314,6 @@ module Aws::EKS
 
     # An object representing the remote access configuration for the managed
     # node group.
-    #
-    # @note When making an API call, you may pass RemoteAccessConfig
-    #   data as a hash:
-    #
-    #       {
-    #         ec2_ssh_key: "String",
-    #         source_security_groups: ["String"],
-    #       }
     #
     # @!attribute [rw] ec2_ssh_key
     #   The Amazon EC2 SSH key that provides access for SSH communication
@@ -3991,16 +3487,6 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource to which to add tags.
     #   Currently, the supported resources are Amazon EKS clusters and
@@ -4031,15 +3517,6 @@ module Aws::EKS
     #
     #
     # [1]: https://docs.aws.amazon.com/eks/latest/userguide/node-taints-managed-node-groups.html
-    #
-    # @note When making an API call, you may pass Taint
-    #   data as a hash:
-    #
-    #       {
-    #         key: "taintKey",
-    #         value: "taintValue",
-    #         effect: "NO_SCHEDULE", # accepts NO_SCHEDULE, NO_EXECUTE, PREFER_NO_SCHEDULE
-    #       }
     #
     # @!attribute [rw] key
     #   The key of the taint.
@@ -4095,14 +3572,6 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource from which to delete
     #   tags. Currently, the supported resources are Amazon EKS clusters and
@@ -4166,18 +3635,6 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateAddonRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_name: "ClusterName", # required
-    #         addon_name: "String", # required
-    #         addon_version: "String",
-    #         service_account_role_arn: "RoleArn",
-    #         resolve_conflicts: "OVERWRITE", # accepts OVERWRITE, NONE, PRESERVE
-    #         client_request_token: "String",
-    #       }
-    #
     # @!attribute [rw] cluster_name
     #   The name of the cluster.
     #   @return [String]
@@ -4271,29 +3728,6 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateClusterConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #         resources_vpc_config: {
-    #           subnet_ids: ["String"],
-    #           security_group_ids: ["String"],
-    #           endpoint_public_access: false,
-    #           endpoint_private_access: false,
-    #           public_access_cidrs: ["String"],
-    #         },
-    #         logging: {
-    #           cluster_logging: [
-    #             {
-    #               types: ["api"], # accepts api, audit, authenticator, controllerManager, scheduler
-    #               enabled: false,
-    #             },
-    #           ],
-    #         },
-    #         client_request_token: "String",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the Amazon EKS cluster to update.
     #   @return [String]
@@ -4353,15 +3787,6 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateClusterVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #         version: "String", # required
-    #         client_request_token: "String",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the Amazon EKS cluster to update.
     #   @return [String]
@@ -4403,16 +3828,6 @@ module Aws::EKS
     # An object representing a Kubernetes label change for a managed node
     # group.
     #
-    # @note When making an API call, you may pass UpdateLabelsPayload
-    #   data as a hash:
-    #
-    #       {
-    #         add_or_update_labels: {
-    #           "labelKey" => "labelValue",
-    #         },
-    #         remove_labels: ["String"],
-    #       }
-    #
     # @!attribute [rw] add_or_update_labels
     #   Kubernetes labels to be added or updated.
     #   @return [Hash<String,String>]
@@ -4430,46 +3845,6 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateNodegroupConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_name: "String", # required
-    #         nodegroup_name: "String", # required
-    #         labels: {
-    #           add_or_update_labels: {
-    #             "labelKey" => "labelValue",
-    #           },
-    #           remove_labels: ["String"],
-    #         },
-    #         taints: {
-    #           add_or_update_taints: [
-    #             {
-    #               key: "taintKey",
-    #               value: "taintValue",
-    #               effect: "NO_SCHEDULE", # accepts NO_SCHEDULE, NO_EXECUTE, PREFER_NO_SCHEDULE
-    #             },
-    #           ],
-    #           remove_taints: [
-    #             {
-    #               key: "taintKey",
-    #               value: "taintValue",
-    #               effect: "NO_SCHEDULE", # accepts NO_SCHEDULE, NO_EXECUTE, PREFER_NO_SCHEDULE
-    #             },
-    #           ],
-    #         },
-    #         scaling_config: {
-    #           min_size: 1,
-    #           max_size: 1,
-    #           desired_size: 1,
-    #         },
-    #         update_config: {
-    #           max_unavailable: 1,
-    #           max_unavailable_percentage: 1,
-    #         },
-    #         client_request_token: "String",
-    #       }
-    #
     # @!attribute [rw] cluster_name
     #   The name of the Amazon EKS cluster that the managed node group
     #   resides in.
@@ -4537,23 +3912,6 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateNodegroupVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_name: "String", # required
-    #         nodegroup_name: "String", # required
-    #         version: "String",
-    #         release_version: "String",
-    #         launch_template: {
-    #           name: "String",
-    #           version: "String",
-    #           id: "String",
-    #         },
-    #         force: false,
-    #         client_request_token: "String",
-    #       }
-    #
     # @!attribute [rw] cluster_name
     #   The name of the Amazon EKS cluster that is associated with the
     #   managed node group to update.
@@ -4671,26 +4029,6 @@ module Aws::EKS
     #
     # [1]: https://docs.aws.amazon.com/eks/latest/userguide/node-taints-managed-node-groups.html
     #
-    # @note When making an API call, you may pass UpdateTaintsPayload
-    #   data as a hash:
-    #
-    #       {
-    #         add_or_update_taints: [
-    #           {
-    #             key: "taintKey",
-    #             value: "taintValue",
-    #             effect: "NO_SCHEDULE", # accepts NO_SCHEDULE, NO_EXECUTE, PREFER_NO_SCHEDULE
-    #           },
-    #         ],
-    #         remove_taints: [
-    #           {
-    #             key: "taintKey",
-    #             value: "taintValue",
-    #             effect: "NO_SCHEDULE", # accepts NO_SCHEDULE, NO_EXECUTE, PREFER_NO_SCHEDULE
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] add_or_update_taints
     #   Kubernetes taints to be added or updated.
     #   @return [Array<Types::Taint>]
@@ -4710,17 +4048,6 @@ module Aws::EKS
 
     # An object representing the VPC configuration to use for an Amazon EKS
     # cluster.
-    #
-    # @note When making an API call, you may pass VpcConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         subnet_ids: ["String"],
-    #         security_group_ids: ["String"],
-    #         endpoint_public_access: false,
-    #         endpoint_private_access: false,
-    #         public_access_cidrs: ["String"],
-    #       }
     #
     # @!attribute [rw] subnet_ids
     #   Specify subnets for your Amazon EKS nodes. Amazon EKS creates

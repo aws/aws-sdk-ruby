@@ -29,18 +29,6 @@ module Aws::OAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateLinkInput
-    #   data as a hash:
-    #
-    #       {
-    #         label_template: "LabelTemplate", # required
-    #         resource_types: ["AWS::CloudWatch::Metric"], # required, accepts AWS::CloudWatch::Metric, AWS::Logs::LogGroup, AWS::XRay::Trace
-    #         sink_identifier: "ResourceIdentifier", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] label_template
     #   Specify a friendly human-readable name to use to identify this
     #   source account when you are viewing data from it in the monitoring
@@ -147,16 +135,6 @@ module Aws::OAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateSinkInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "SinkName", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   A name for the sink.
     #   @return [String]
@@ -214,13 +192,6 @@ module Aws::OAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteLinkInput
-    #   data as a hash:
-    #
-    #       {
-    #         identifier: "ResourceIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] identifier
     #   The ARN of the link to delete.
     #   @return [String]
@@ -237,13 +208,6 @@ module Aws::OAM
     #
     class DeleteLinkOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteSinkInput
-    #   data as a hash:
-    #
-    #       {
-    #         identifier: "ResourceIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] identifier
     #   The ARN of the sink to delete.
     #   @return [String]
@@ -260,13 +224,6 @@ module Aws::OAM
     #
     class DeleteSinkOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass GetLinkInput
-    #   data as a hash:
-    #
-    #       {
-    #         identifier: "ResourceIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] identifier
     #   The ARN of the link to retrieve information for.
     #   @return [String]
@@ -324,13 +281,6 @@ module Aws::OAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSinkInput
-    #   data as a hash:
-    #
-    #       {
-    #         identifier: "ResourceIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] identifier
     #   The ARN of the sink to retrieve information for.
     #   @return [String]
@@ -371,13 +321,6 @@ module Aws::OAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSinkPolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         sink_identifier: "ResourceIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] sink_identifier
     #   The ARN of the sink to retrieve the policy of.
     #   @return [String]
@@ -449,15 +392,6 @@ module Aws::OAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAttachedLinksInput
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         sink_identifier: "ResourceIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] max_results
     #   Limits the number of returned links to the specified number.
     #   @return [Integer]
@@ -525,14 +459,6 @@ module Aws::OAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListLinksInput
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   Limits the number of returned links to the specified number.
     #   @return [Integer]
@@ -606,14 +532,6 @@ module Aws::OAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSinksInput
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   Limits the number of returned links to the specified number.
     #   @return [Integer]
@@ -676,13 +594,6 @@ module Aws::OAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource that you want to view tags for.
     #
@@ -743,14 +654,6 @@ module Aws::OAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutSinkPolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         sink_identifier: "ResourceIdentifier", # required
-    #         policy: "SinkPolicy", # required
-    #       }
-    #
     # @!attribute [rw] sink_identifier
     #   The ARN of the sink to attach this policy to.
     #   @return [String]
@@ -834,16 +737,6 @@ module Aws::OAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource that you're adding tags to.
     #
@@ -891,14 +784,6 @@ module Aws::OAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource that you're removing tags from.
     #
@@ -933,14 +818,6 @@ module Aws::OAM
     #
     class UntagResourceOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateLinkInput
-    #   data as a hash:
-    #
-    #       {
-    #         identifier: "ResourceIdentifier", # required
-    #         resource_types: ["AWS::CloudWatch::Metric"], # required, accepts AWS::CloudWatch::Metric, AWS::Logs::LogGroup, AWS::XRay::Trace
-    #       }
-    #
     # @!attribute [rw] identifier
     #   The ARN of the link that you want to update.
     #   @return [String]

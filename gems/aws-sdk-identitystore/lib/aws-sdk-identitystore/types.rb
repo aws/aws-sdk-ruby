@@ -33,20 +33,6 @@ module Aws::IdentityStore
 
     # The address associated with the specified user.
     #
-    # @note When making an API call, you may pass Address
-    #   data as a hash:
-    #
-    #       {
-    #         street_address: "SensitiveStringType",
-    #         locality: "SensitiveStringType",
-    #         region: "SensitiveStringType",
-    #         postal_code: "SensitiveStringType",
-    #         country: "SensitiveStringType",
-    #         formatted: "SensitiveStringType",
-    #         type: "SensitiveStringType",
-    #         primary: false,
-    #       }
-    #
     # @!attribute [rw] street_address
     #   The street of the address.
     #   @return [String]
@@ -100,8 +86,6 @@ module Aws::IdentityStore
     # provider (IdP) that is associated with the user, the group, or a
     # unique attribute. For example, a unique `GroupDisplayName`.
     #
-    # @note AlternateIdentifier is a union - when making an API calls you must set exactly one of the members.
-    #
     # @!attribute [rw] external_id
     #   The identifier issued to this resource by an external identity
     #   provider.
@@ -128,14 +112,6 @@ module Aws::IdentityStore
 
     # An operation that applies to the requested group. This operation might
     # add, replace, or remove an attribute.
-    #
-    # @note When making an API call, you may pass AttributeOperation
-    #   data as a hash:
-    #
-    #       {
-    #         attribute_path: "AttributePath", # required
-    #         attribute_value: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #       }
     #
     # @!attribute [rw] attribute_path
     #   A string representation of the path to a given attribute or
@@ -196,17 +172,6 @@ module Aws::IdentityStore
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateGroupMembershipRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity_store_id: "IdentityStoreId", # required
-    #         group_id: "ResourceId", # required
-    #         member_id: { # required
-    #           user_id: "ResourceId",
-    #         },
-    #       }
-    #
     # @!attribute [rw] identity_store_id
     #   The globally unique identifier for the identity store.
     #   @return [String]
@@ -249,15 +214,6 @@ module Aws::IdentityStore
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity_store_id: "IdentityStoreId", # required
-    #         display_name: "GroupDisplayName",
-    #         description: "SensitiveStringType",
-    #       }
-    #
     # @!attribute [rw] identity_store_id
     #   The globally unique identifier for the identity store.
     #   @return [String]
@@ -298,56 +254,6 @@ module Aws::IdentityStore
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity_store_id: "IdentityStoreId", # required
-    #         user_name: "UserName",
-    #         name: {
-    #           formatted: "SensitiveStringType",
-    #           family_name: "SensitiveStringType",
-    #           given_name: "SensitiveStringType",
-    #           middle_name: "SensitiveStringType",
-    #           honorific_prefix: "SensitiveStringType",
-    #           honorific_suffix: "SensitiveStringType",
-    #         },
-    #         display_name: "SensitiveStringType",
-    #         nick_name: "SensitiveStringType",
-    #         profile_url: "SensitiveStringType",
-    #         emails: [
-    #           {
-    #             value: "SensitiveStringType",
-    #             type: "SensitiveStringType",
-    #             primary: false,
-    #           },
-    #         ],
-    #         addresses: [
-    #           {
-    #             street_address: "SensitiveStringType",
-    #             locality: "SensitiveStringType",
-    #             region: "SensitiveStringType",
-    #             postal_code: "SensitiveStringType",
-    #             country: "SensitiveStringType",
-    #             formatted: "SensitiveStringType",
-    #             type: "SensitiveStringType",
-    #             primary: false,
-    #           },
-    #         ],
-    #         phone_numbers: [
-    #           {
-    #             value: "SensitiveStringType",
-    #             type: "SensitiveStringType",
-    #             primary: false,
-    #           },
-    #         ],
-    #         user_type: "SensitiveStringType",
-    #         title: "SensitiveStringType",
-    #         preferred_language: "SensitiveStringType",
-    #         locale: "SensitiveStringType",
-    #         timezone: "SensitiveStringType",
-    #       }
-    #
     # @!attribute [rw] identity_store_id
     #   The globally unique identifier for the identity store.
     #   @return [String]
@@ -455,14 +361,6 @@ module Aws::IdentityStore
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteGroupMembershipRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity_store_id: "IdentityStoreId", # required
-    #         membership_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] identity_store_id
     #   The globally unique identifier for the identity store.
     #   @return [String]
@@ -484,14 +382,6 @@ module Aws::IdentityStore
     #
     class DeleteGroupMembershipResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity_store_id: "IdentityStoreId", # required
-    #         group_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] identity_store_id
     #   The globally unique identifier for the identity store.
     #   @return [String]
@@ -513,14 +403,6 @@ module Aws::IdentityStore
     #
     class DeleteGroupResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity_store_id: "IdentityStoreId", # required
-    #         user_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] identity_store_id
     #   The globally unique identifier for the identity store.
     #   @return [String]
@@ -542,14 +424,6 @@ module Aws::IdentityStore
     #
     class DeleteUserResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeGroupMembershipRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity_store_id: "IdentityStoreId", # required
-    #         membership_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] identity_store_id
     #   The globally unique identifier for the identity store.
     #   @return [String]
@@ -594,14 +468,6 @@ module Aws::IdentityStore
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity_store_id: "IdentityStoreId", # required
-    #         group_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] identity_store_id
     #   The globally unique identifier for the identity store, such as
     #   `d-1234567890`. In this example, `d-` is a fixed prefix, and
@@ -661,14 +527,6 @@ module Aws::IdentityStore
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity_store_id: "IdentityStoreId", # required
-    #         user_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] identity_store_id
     #   The globally unique identifier for the identity store, such as
     #   `d-1234567890`. In this example, `d-` is a fixed prefix, and
@@ -784,15 +642,6 @@ module Aws::IdentityStore
 
     # The email address associated with the user.
     #
-    # @note When making an API call, you may pass Email
-    #   data as a hash:
-    #
-    #       {
-    #         value: "SensitiveStringType",
-    #         type: "SensitiveStringType",
-    #         primary: false,
-    #       }
-    #
     # @!attribute [rw] value
     #   A string containing an email address. For example,
     #   "johndoe@amazon.com."
@@ -820,14 +669,6 @@ module Aws::IdentityStore
     # The identifier issued to this resource by an external identity
     # provider.
     #
-    # @note When making an API call, you may pass ExternalId
-    #   data as a hash:
-    #
-    #       {
-    #         issuer: "ExternalIdIssuer", # required
-    #         id: "ExternalIdIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] issuer
     #   The issuer for an external identifier.
     #   @return [String]
@@ -850,14 +691,6 @@ module Aws::IdentityStore
     # object provides the attribute name and attribute value to search users
     # or groups.
     #
-    # @note When making an API call, you may pass Filter
-    #   data as a hash:
-    #
-    #       {
-    #         attribute_path: "AttributePath", # required
-    #         attribute_value: "SensitiveStringType", # required
-    #       }
-    #
     # @!attribute [rw] attribute_path
     #   The attribute path that is used to specify which attribute name to
     #   search. Length limit is 255 characters. For example, `UserName` is a
@@ -879,23 +712,6 @@ module Aws::IdentityStore
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetGroupIdRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity_store_id: "IdentityStoreId", # required
-    #         alternate_identifier: { # required
-    #           external_id: {
-    #             issuer: "ExternalIdIssuer", # required
-    #             id: "ExternalIdIdentifier", # required
-    #           },
-    #           unique_attribute: {
-    #             attribute_path: "AttributePath", # required
-    #             attribute_value: "value", # required, value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] identity_store_id
     #   The globally unique identifier for the identity store.
     #   @return [String]
@@ -933,17 +749,6 @@ module Aws::IdentityStore
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetGroupMembershipIdRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity_store_id: "IdentityStoreId", # required
-    #         group_id: "ResourceId", # required
-    #         member_id: { # required
-    #           user_id: "ResourceId",
-    #         },
-    #       }
-    #
     # @!attribute [rw] identity_store_id
     #   The globally unique identifier for the identity store.
     #   @return [String]
@@ -985,23 +790,6 @@ module Aws::IdentityStore
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetUserIdRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity_store_id: "IdentityStoreId", # required
-    #         alternate_identifier: { # required
-    #           external_id: {
-    #             issuer: "ExternalIdIssuer", # required
-    #             id: "ExternalIdIdentifier", # required
-    #           },
-    #           unique_attribute: {
-    #             attribute_path: "AttributePath", # required
-    #             attribute_value: "value", # required, value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] identity_store_id
     #   The globally unique identifier for the identity store.
     #   @return [String]
@@ -1167,17 +955,6 @@ module Aws::IdentityStore
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass IsMemberInGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity_store_id: "IdentityStoreId", # required
-    #         member_id: { # required
-    #           user_id: "ResourceId",
-    #         },
-    #         group_ids: ["ResourceId"], # required
-    #       }
-    #
     # @!attribute [rw] identity_store_id
     #   The globally unique identifier for the identity store.
     #   @return [String]
@@ -1212,18 +989,6 @@ module Aws::IdentityStore
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListGroupMembershipsForMemberRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity_store_id: "IdentityStoreId", # required
-    #         member_id: { # required
-    #           user_id: "ResourceId",
-    #         },
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] identity_store_id
     #   The globally unique identifier for the identity store.
     #   @return [String]
@@ -1284,16 +1049,6 @@ module Aws::IdentityStore
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListGroupMembershipsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity_store_id: "IdentityStoreId", # required
-    #         group_id: "ResourceId", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] identity_store_id
     #   The globally unique identifier for the identity store.
     #   @return [String]
@@ -1350,21 +1105,6 @@ module Aws::IdentityStore
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity_store_id: "IdentityStoreId", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         filters: [
-    #           {
-    #             attribute_path: "AttributePath", # required
-    #             attribute_value: "SensitiveStringType", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] identity_store_id
     #   The globally unique identifier for the identity store, such as
     #   `d-1234567890`. In this example, `d-` is a fixed prefix, and
@@ -1425,21 +1165,6 @@ module Aws::IdentityStore
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListUsersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity_store_id: "IdentityStoreId", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         filters: [
-    #           {
-    #             attribute_path: "AttributePath", # required
-    #             attribute_value: "SensitiveStringType", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] identity_store_id
     #   The globally unique identifier for the identity store, such as
     #   `d-1234567890`. In this example, `d-` is a fixed prefix, and
@@ -1502,10 +1227,6 @@ module Aws::IdentityStore
 
     # An object containing the identifier of a group member.
     #
-    # @note MemberId is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note MemberId is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of MemberId corresponding to the set member.
-    #
     # @!attribute [rw] user_id
     #   An object containing the identifiers of resources that can be
     #   members.
@@ -1525,18 +1246,6 @@ module Aws::IdentityStore
     end
 
     # The full name of the user.
-    #
-    # @note When making an API call, you may pass Name
-    #   data as a hash:
-    #
-    #       {
-    #         formatted: "SensitiveStringType",
-    #         family_name: "SensitiveStringType",
-    #         given_name: "SensitiveStringType",
-    #         middle_name: "SensitiveStringType",
-    #         honorific_prefix: "SensitiveStringType",
-    #         honorific_suffix: "SensitiveStringType",
-    #       }
     #
     # @!attribute [rw] formatted
     #   A string containing a formatted version of the name for display.
@@ -1576,15 +1285,6 @@ module Aws::IdentityStore
     end
 
     # The phone number associated with the user.
-    #
-    # @note When making an API call, you may pass PhoneNumber
-    #   data as a hash:
-    #
-    #       {
-    #         value: "SensitiveStringType",
-    #         type: "SensitiveStringType",
-    #         primary: false,
-    #       }
     #
     # @!attribute [rw] value
     #   A string containing a phone number. For example, "8675309" or "+1
@@ -1702,14 +1402,6 @@ module Aws::IdentityStore
 
     # An entity attribute that's unique to a specific entity.
     #
-    # @note When making an API call, you may pass UniqueAttribute
-    #   data as a hash:
-    #
-    #       {
-    #         attribute_path: "AttributePath", # required
-    #         attribute_value: "value", # required, value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #       }
-    #
     # @!attribute [rw] attribute_path
     #   A string representation of the path to a given attribute or
     #   sub-attribute. Supports JMESPath.
@@ -1729,20 +1421,6 @@ module Aws::IdentityStore
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity_store_id: "IdentityStoreId", # required
-    #         group_id: "ResourceId", # required
-    #         operations: [ # required
-    #           {
-    #             attribute_path: "AttributePath", # required
-    #             attribute_value: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] identity_store_id
     #   The globally unique identifier for the identity store.
     #   @return [String]
@@ -1770,20 +1448,6 @@ module Aws::IdentityStore
     #
     class UpdateGroupResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity_store_id: "IdentityStoreId", # required
-    #         user_id: "ResourceId", # required
-    #         operations: [ # required
-    #           {
-    #             attribute_path: "AttributePath", # required
-    #             attribute_value: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] identity_store_id
     #   The globally unique identifier for the identity store.
     #   @return [String]

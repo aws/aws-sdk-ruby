@@ -113,13 +113,6 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ArchiveApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "ApplicationID", # required
-    #       }
-    #
     # @!attribute [rw] application_id
     #   Application ID.
     #   @return [String]
@@ -132,13 +125,6 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ArchiveWaveRequest
-    #   data as a hash:
-    #
-    #       {
-    #         wave_id: "WaveID", # required
-    #       }
-    #
     # @!attribute [rw] wave_id
     #   Wave ID.
     #   @return [String]
@@ -151,14 +137,6 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateApplicationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_i_ds: ["ApplicationID"], # required
-    #         wave_id: "WaveID", # required
-    #       }
-    #
     # @!attribute [rw] application_i_ds
     #   Application IDs list.
     #   @return [Array<String>]
@@ -180,14 +158,6 @@ module Aws::Mgn
     #
     class AssociateApplicationsResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass AssociateSourceServersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "ApplicationID", # required
-    #         source_server_i_ds: ["SourceServerID"], # required
-    #       }
-    #
     # @!attribute [rw] application_id
     #   Application ID.
     #   @return [String]
@@ -228,16 +198,6 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ChangeServerLifeCycleStateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         life_cycle: { # required
-    #           state: "READY_FOR_TEST", # required, accepts READY_FOR_TEST, READY_FOR_CUTOVER, CUTOVER
-    #         },
-    #         source_server_id: "SourceServerID", # required
-    #       }
-    #
     # @!attribute [rw] life_cycle
     #   The request to change the source server migration lifecycle state.
     #   @return [Types::ChangeServerLifeCycleStateSourceServerLifecycle]
@@ -257,13 +217,6 @@ module Aws::Mgn
     end
 
     # The request to change the source server migration lifecycle state.
-    #
-    # @note When making an API call, you may pass ChangeServerLifeCycleStateSourceServerLifecycle
-    #   data as a hash:
-    #
-    #       {
-    #         state: "READY_FOR_TEST", # required, accepts READY_FOR_TEST, READY_FOR_CUTOVER, CUTOVER
-    #       }
     #
     # @!attribute [rw] state
     #   The request to change the source server migration lifecycle state.
@@ -310,17 +263,6 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "ApplicationDescription",
-    #         name: "ApplicationName", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] description
     #   Application description.
     #   @return [String]
@@ -343,59 +285,6 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateLaunchConfigurationTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         associate_public_ip_address: false,
-    #         boot_mode: "LEGACY_BIOS", # accepts LEGACY_BIOS, UEFI
-    #         copy_private_ip: false,
-    #         copy_tags: false,
-    #         enable_map_auto_tagging: false,
-    #         large_volume_conf: {
-    #           iops: 1,
-    #           throughput: 1,
-    #           volume_type: "io1", # accepts io1, io2, gp3, gp2, st1, sc1, standard
-    #         },
-    #         launch_disposition: "STOPPED", # accepts STOPPED, STARTED
-    #         licensing: {
-    #           os_byol: false,
-    #         },
-    #         map_auto_tagging_mpe_id: "TagValue",
-    #         post_launch_actions: {
-    #           cloud_watch_log_group_name: "CloudWatchLogGroupName",
-    #           deployment: "TEST_AND_CUTOVER", # accepts TEST_AND_CUTOVER, CUTOVER_ONLY, TEST_ONLY
-    #           s3_log_bucket: "S3LogBucketName",
-    #           s3_output_key_prefix: "BoundedString",
-    #           ssm_documents: [
-    #             {
-    #               action_name: "BoundedString", # required
-    #               must_succeed_for_cutover: false,
-    #               parameters: {
-    #                 "SsmDocumentParameterName" => [
-    #                   {
-    #                     parameter_name: "SsmParameterStoreParameterName", # required
-    #                     parameter_type: "STRING", # required, accepts STRING
-    #                   },
-    #                 ],
-    #               },
-    #               ssm_document_name: "SsmDocumentName", # required
-    #               timeout_seconds: 1,
-    #             },
-    #           ],
-    #         },
-    #         small_volume_conf: {
-    #           iops: 1,
-    #           throughput: 1,
-    #           volume_type: "io1", # accepts io1, io2, gp3, gp2, st1, sc1, standard
-    #         },
-    #         small_volume_max_size: 1,
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         target_instance_type_right_sizing_method: "NONE", # accepts NONE, BASIC
-    #       }
-    #
     # @!attribute [rw] associate_public_ip_address
     #   Associate public Ip address.
     #   @return [Boolean]
@@ -474,29 +363,6 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateReplicationConfigurationTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         associate_default_security_group: false, # required
-    #         bandwidth_throttling: 1, # required
-    #         create_public_ip: false, # required
-    #         data_plane_routing: "PRIVATE_IP", # required, accepts PRIVATE_IP, PUBLIC_IP
-    #         default_large_staging_disk_type: "GP2", # required, accepts GP2, ST1, GP3
-    #         ebs_encryption: "DEFAULT", # required, accepts DEFAULT, CUSTOM
-    #         ebs_encryption_key_arn: "ARN",
-    #         replication_server_instance_type: "EC2InstanceType", # required
-    #         replication_servers_security_groups_i_ds: ["SecurityGroupID"], # required
-    #         staging_area_subnet_id: "SubnetID", # required
-    #         staging_area_tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         use_dedicated_replication_server: false, # required
-    #       }
-    #
     # @!attribute [rw] associate_default_security_group
     #   Request to associate the default Application Migration Service
     #   Security group with the Replication Settings template.
@@ -582,17 +448,6 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateWaveRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "WaveDescription",
-    #         name: "WaveName", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] description
     #   Wave description.
     #   @return [String]
@@ -755,13 +610,6 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "ApplicationID", # required
-    #       }
-    #
     # @!attribute [rw] application_id
     #   Application ID.
     #   @return [String]
@@ -778,13 +626,6 @@ module Aws::Mgn
     #
     class DeleteApplicationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobID", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   Request to delete Job from service by Job ID.
     #   @return [String]
@@ -801,13 +642,6 @@ module Aws::Mgn
     #
     class DeleteJobResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteLaunchConfigurationTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         launch_configuration_template_id: "LaunchConfigurationTemplateID", # required
-    #       }
-    #
     # @!attribute [rw] launch_configuration_template_id
     #   ID of resource to be deleted.
     #   @return [String]
@@ -824,13 +658,6 @@ module Aws::Mgn
     #
     class DeleteLaunchConfigurationTemplateResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteReplicationConfigurationTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         replication_configuration_template_id: "ReplicationConfigurationTemplateID", # required
-    #       }
-    #
     # @!attribute [rw] replication_configuration_template_id
     #   Request to delete Replication Configuration Template from service by
     #   Replication Configuration Template ID.
@@ -848,13 +675,6 @@ module Aws::Mgn
     #
     class DeleteReplicationConfigurationTemplateResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteSourceServerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source_server_id: "SourceServerID", # required
-    #       }
-    #
     # @!attribute [rw] source_server_id
     #   Request to delete Source Server from service by Server ID.
     #   @return [String]
@@ -871,13 +691,6 @@ module Aws::Mgn
     #
     class DeleteSourceServerResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteVcenterClientRequest
-    #   data as a hash:
-    #
-    #       {
-    #         vcenter_client_id: "VcenterClientID", # required
-    #       }
-    #
     # @!attribute [rw] vcenter_client_id
     #   ID of resource to be deleted.
     #   @return [String]
@@ -890,13 +703,6 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteWaveRequest
-    #   data as a hash:
-    #
-    #       {
-    #         wave_id: "WaveID", # required
-    #       }
-    #
     # @!attribute [rw] wave_id
     #   Wave ID.
     #   @return [String]
@@ -913,15 +719,6 @@ module Aws::Mgn
     #
     class DeleteWaveResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeJobLogItemsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobID", # required
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] job_id
     #   Request to describe Job log job ID.
     #   @return [String]
@@ -961,19 +758,6 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: {
-    #           from_date: "ISO8601DatetimeString",
-    #           job_i_ds: ["JobID"],
-    #           to_date: "ISO8601DatetimeString",
-    #         },
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] filters
     #   Request to describe Job log filters.
     #   @return [Types::DescribeJobsRequestFilters]
@@ -997,15 +781,6 @@ module Aws::Mgn
     end
 
     # Request to describe Job log filters.
-    #
-    # @note When making an API call, you may pass DescribeJobsRequestFilters
-    #   data as a hash:
-    #
-    #       {
-    #         from_date: "ISO8601DatetimeString",
-    #         job_i_ds: ["JobID"],
-    #         to_date: "ISO8601DatetimeString",
-    #       }
     #
     # @!attribute [rw] from_date
     #   Request to describe Job log filters by date.
@@ -1046,15 +821,6 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeLaunchConfigurationTemplatesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         launch_configuration_template_i_ds: ["LaunchConfigurationTemplateID"],
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] launch_configuration_template_i_ds
     #   Request to filter Launch Configuration Templates list by Launch
     #   Configuration Template ID.
@@ -1098,15 +864,6 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeReplicationConfigurationTemplatesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #         replication_configuration_template_i_ds: ["ReplicationConfigurationTemplateID"],
-    #       }
-    #
     # @!attribute [rw] max_results
     #   Request to describe Replication Configuration template by max
     #   results.
@@ -1150,21 +907,6 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeSourceServersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: {
-    #           application_i_ds: ["ApplicationID"],
-    #           is_archived: false,
-    #           life_cycle_states: ["STOPPED"], # accepts STOPPED, NOT_READY, READY_FOR_TEST, TESTING, READY_FOR_CUTOVER, CUTTING_OVER, CUTOVER, DISCONNECTED, DISCOVERED
-    #           replication_types: ["AGENT_BASED"], # accepts AGENT_BASED, SNAPSHOT_SHIPPING
-    #           source_server_i_ds: ["SourceServerID"],
-    #         },
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] filters
     #   Request to filter Source Servers list.
     #   @return [Types::DescribeSourceServersRequestFilters]
@@ -1188,17 +930,6 @@ module Aws::Mgn
     end
 
     # Request to filter Source Servers list.
-    #
-    # @note When making an API call, you may pass DescribeSourceServersRequestFilters
-    #   data as a hash:
-    #
-    #       {
-    #         application_i_ds: ["ApplicationID"],
-    #         is_archived: false,
-    #         life_cycle_states: ["STOPPED"], # accepts STOPPED, NOT_READY, READY_FOR_TEST, TESTING, READY_FOR_CUTOVER, CUTTING_OVER, CUTOVER, DISCONNECTED, DISCOVERED
-    #         replication_types: ["AGENT_BASED"], # accepts AGENT_BASED, SNAPSHOT_SHIPPING
-    #         source_server_i_ds: ["SourceServerID"],
-    #       }
     #
     # @!attribute [rw] application_i_ds
     #   Request to filter Source Servers list by application IDs.
@@ -1249,14 +980,6 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeVcenterClientsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   Maximum results to be returned in DescribeVcenterClients.
     #   @return [Integer]
@@ -1291,14 +1014,6 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateApplicationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_i_ds: ["ApplicationID"], # required
-    #         wave_id: "WaveID", # required
-    #       }
-    #
     # @!attribute [rw] application_i_ds
     #   Application IDs list.
     #   @return [Array<String>]
@@ -1320,14 +1035,6 @@ module Aws::Mgn
     #
     class DisassociateApplicationsResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DisassociateSourceServersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "ApplicationID", # required
-    #         source_server_i_ds: ["SourceServerID"], # required
-    #       }
-    #
     # @!attribute [rw] application_id
     #   Application ID.
     #   @return [String]
@@ -1349,13 +1056,6 @@ module Aws::Mgn
     #
     class DisassociateSourceServersResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DisconnectFromServiceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source_server_id: "SourceServerID", # required
-    #       }
-    #
     # @!attribute [rw] source_server_id
     #   Request to disconnect Source Server from service by Server ID.
     #   @return [String]
@@ -1416,13 +1116,6 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass FinalizeCutoverRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source_server_id: "SourceServerID", # required
-    #       }
-    #
     # @!attribute [rw] source_server_id
     #   Request to finalize Cutover by Source Server ID.
     #   @return [String]
@@ -1435,13 +1128,6 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLaunchConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source_server_id: "SourceServerID", # required
-    #       }
-    #
     # @!attribute [rw] source_server_id
     #   Request to get Launch Configuration information by Source Server ID.
     #   @return [String]
@@ -1454,13 +1140,6 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetReplicationConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source_server_id: "SourceServerID", # required
-    #       }
-    #
     # @!attribute [rw] source_server_id
     #   Request to get Replication Configuration by Source Server ID.
     #   @return [String]
@@ -1507,8 +1186,6 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/InitializeServiceRequest AWS API Documentation
     #
     class InitializeServiceRequest < Aws::EmptyStructure; end
@@ -1842,15 +1519,6 @@ module Aws::Mgn
 
     # Launch template disk configuration.
     #
-    # @note When making an API call, you may pass LaunchTemplateDiskConf
-    #   data as a hash:
-    #
-    #       {
-    #         iops: 1,
-    #         throughput: 1,
-    #         volume_type: "io1", # accepts io1, io2, gp3, gp2, st1, sc1, standard
-    #       }
-    #
     # @!attribute [rw] iops
     #   Launch template disk iops configuration.
     #   @return [Integer]
@@ -1898,13 +1566,6 @@ module Aws::Mgn
     end
 
     # Configure Licensing.
-    #
-    # @note When making an API call, you may pass Licensing
-    #   data as a hash:
-    #
-    #       {
-    #         os_byol: false,
-    #       }
     #
     # @!attribute [rw] os_byol
     #   Configure BYOL OS licensing.
@@ -2103,19 +1764,6 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListApplicationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: {
-    #           application_i_ds: ["ApplicationID"],
-    #           is_archived: false,
-    #           wave_i_ds: ["WaveID"],
-    #         },
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] filters
     #   Applications list filters.
     #   @return [Types::ListApplicationsRequestFilters]
@@ -2139,15 +1787,6 @@ module Aws::Mgn
     end
 
     # Applications list filters.
-    #
-    # @note When making an API call, you may pass ListApplicationsRequestFilters
-    #   data as a hash:
-    #
-    #       {
-    #         application_i_ds: ["ApplicationID"],
-    #         is_archived: false,
-    #         wave_i_ds: ["WaveID"],
-    #       }
     #
     # @!attribute [rw] application_i_ds
     #   Filter applications list by application ID.
@@ -2188,18 +1827,6 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSourceServerActionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: {
-    #           action_i_ds: ["ActionID"],
-    #         },
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #         source_server_id: "SourceServerID", # required
-    #       }
-    #
     # @!attribute [rw] filters
     #   Filters to apply when listing source server post migration custom
     #   actions.
@@ -2248,13 +1875,6 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   List tags for resource request by ARN.
     #   @return [String]
@@ -2279,18 +1899,6 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTemplateActionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: {
-    #           action_i_ds: ["ActionID"],
-    #         },
-    #         launch_configuration_template_id: "LaunchConfigurationTemplateID", # required
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] filters
     #   Filters to apply when listing template post migration custom
     #   actions.
@@ -2339,18 +1947,6 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListWavesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: {
-    #           is_archived: false,
-    #           wave_i_ds: ["WaveID"],
-    #         },
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] filters
     #   Waves list filters.
     #   @return [Types::ListWavesRequestFilters]
@@ -2374,14 +1970,6 @@ module Aws::Mgn
     end
 
     # Waves list filters.
-    #
-    # @note When making an API call, you may pass ListWavesRequestFilters
-    #   data as a hash:
-    #
-    #       {
-    #         is_archived: false,
-    #         wave_i_ds: ["WaveID"],
-    #       }
     #
     # @!attribute [rw] is_archived
     #   Filter waves list by archival status.
@@ -2417,13 +2005,6 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass MarkAsArchivedRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source_server_id: "SourceServerID", # required
-    #       }
-    #
     # @!attribute [rw] source_server_id
     #   Mark as archived by Source Server ID.
     #   @return [String]
@@ -2505,32 +2086,6 @@ module Aws::Mgn
 
     # Post Launch Actions to executed on the Test or Cutover instance.
     #
-    # @note When making an API call, you may pass PostLaunchActions
-    #   data as a hash:
-    #
-    #       {
-    #         cloud_watch_log_group_name: "CloudWatchLogGroupName",
-    #         deployment: "TEST_AND_CUTOVER", # accepts TEST_AND_CUTOVER, CUTOVER_ONLY, TEST_ONLY
-    #         s3_log_bucket: "S3LogBucketName",
-    #         s3_output_key_prefix: "BoundedString",
-    #         ssm_documents: [
-    #           {
-    #             action_name: "BoundedString", # required
-    #             must_succeed_for_cutover: false,
-    #             parameters: {
-    #               "SsmDocumentParameterName" => [
-    #                 {
-    #                   parameter_name: "SsmParameterStoreParameterName", # required
-    #                   parameter_type: "STRING", # required, accepts STRING
-    #                 },
-    #               ],
-    #             },
-    #             ssm_document_name: "SsmDocumentName", # required
-    #             timeout_seconds: 1,
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] cloud_watch_log_group_name
     #   AWS Systems Manager Command's CloudWatch log group name.
     #   @return [String]
@@ -2585,29 +2140,6 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutSourceServerActionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         action_id: "ActionID", # required
-    #         action_name: "ActionName", # required
-    #         active: false,
-    #         document_identifier: "BoundedString", # required
-    #         document_version: "DocumentVersion",
-    #         must_succeed_for_cutover: false,
-    #         order: 1, # required
-    #         parameters: {
-    #           "SsmDocumentParameterName" => [
-    #             {
-    #               parameter_name: "SsmParameterStoreParameterName", # required
-    #               parameter_type: "STRING", # required, accepts STRING
-    #             },
-    #           ],
-    #         },
-    #         source_server_id: "SourceServerID", # required
-    #         timeout_seconds: 1,
-    #       }
-    #
     # @!attribute [rw] action_id
     #   Source server post migration custom action ID.
     #   @return [String]
@@ -2665,30 +2197,6 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutTemplateActionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         action_id: "ActionID", # required
-    #         action_name: "BoundedString", # required
-    #         active: false,
-    #         document_identifier: "BoundedString", # required
-    #         document_version: "DocumentVersion",
-    #         launch_configuration_template_id: "LaunchConfigurationTemplateID", # required
-    #         must_succeed_for_cutover: false,
-    #         operating_system: "OperatingSystemString",
-    #         order: 1, # required
-    #         parameters: {
-    #           "SsmDocumentParameterName" => [
-    #             {
-    #               parameter_name: "SsmParameterStoreParameterName", # required
-    #               parameter_type: "STRING", # required, accepts STRING
-    #             },
-    #           ],
-    #         },
-    #         timeout_seconds: 1,
-    #       }
-    #
     # @!attribute [rw] action_id
     #   Template post migration custom action ID.
     #   @return [String]
@@ -2752,14 +2260,6 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RemoveSourceServerActionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         action_id: "ActionID", # required
-    #         source_server_id: "SourceServerID", # required
-    #       }
-    #
     # @!attribute [rw] action_id
     #   Source server post migration custom action ID to remove.
     #   @return [String]
@@ -2781,14 +2281,6 @@ module Aws::Mgn
     #
     class RemoveSourceServerActionResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass RemoveTemplateActionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         action_id: "ActionID", # required
-    #         launch_configuration_template_id: "LaunchConfigurationTemplateID", # required
-    #       }
-    #
     # @!attribute [rw] action_id
     #   Template post migration custom action ID to remove.
     #   @return [String]
@@ -2895,17 +2387,6 @@ module Aws::Mgn
     end
 
     # Replication Configuration replicated disk.
-    #
-    # @note When making an API call, you may pass ReplicationConfigurationReplicatedDisk
-    #   data as a hash:
-    #
-    #       {
-    #         device_name: "BoundedString",
-    #         iops: 1,
-    #         is_boot_disk: false,
-    #         staging_disk_type: "AUTO", # accepts AUTO, GP2, IO1, SC1, ST1, STANDARD, GP3, IO2
-    #         throughput: 1,
-    #       }
     #
     # @!attribute [rw] device_name
     #   Replication Configuration replicated disk device name.
@@ -3050,13 +2531,6 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RetryDataReplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source_server_id: "SourceServerID", # required
-    #       }
-    #
     # @!attribute [rw] source_server_id
     #   Retry data replication for Source Server ID.
     #   @return [String]
@@ -3277,13 +2751,6 @@ module Aws::Mgn
 
     # Source server post migration custom action filters.
     #
-    # @note When making an API call, you may pass SourceServerActionsRequestFilters
-    #   data as a hash:
-    #
-    #       {
-    #         action_i_ds: ["ActionID"],
-    #       }
-    #
     # @!attribute [rw] action_i_ds
     #   Action IDs to filter source server post migration custom actions by.
     #   @return [Array<String>]
@@ -3297,24 +2764,6 @@ module Aws::Mgn
     end
 
     # AWS Systems Manager Document.
-    #
-    # @note When making an API call, you may pass SsmDocument
-    #   data as a hash:
-    #
-    #       {
-    #         action_name: "BoundedString", # required
-    #         must_succeed_for_cutover: false,
-    #         parameters: {
-    #           "SsmDocumentParameterName" => [
-    #             {
-    #               parameter_name: "SsmParameterStoreParameterName", # required
-    #               parameter_type: "STRING", # required, accepts STRING
-    #             },
-    #           ],
-    #         },
-    #         ssm_document_name: "SsmDocumentName", # required
-    #         timeout_seconds: 1,
-    #       }
     #
     # @!attribute [rw] action_name
     #   User-friendly name for the AWS Systems Manager Document.
@@ -3350,14 +2799,6 @@ module Aws::Mgn
 
     # AWS Systems Manager Parameter Store parameter.
     #
-    # @note When making an API call, you may pass SsmParameterStoreParameter
-    #   data as a hash:
-    #
-    #       {
-    #         parameter_name: "SsmParameterStoreParameterName", # required
-    #         parameter_type: "STRING", # required, accepts STRING
-    #       }
-    #
     # @!attribute [rw] parameter_name
     #   AWS Systems Manager Parameter Store parameter name.
     #   @return [String]
@@ -3375,16 +2816,6 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartCutoverRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source_server_i_ds: ["SourceServerID"], # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] source_server_i_ds
     #   Start Cutover by Source Server IDs.
     #   @return [Array<String>]
@@ -3414,13 +2845,6 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartReplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source_server_id: "SourceServerID", # required
-    #       }
-    #
     # @!attribute [rw] source_server_id
     #   ID of source server on which to start replication.
     #   @return [String]
@@ -3433,16 +2857,6 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartTestRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source_server_i_ds: ["SourceServerID"], # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] source_server_i_ds
     #   Start Test for Source Server IDs.
     #   @return [Array<String>]
@@ -3472,16 +2886,6 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ARN", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   Tag resource by ARN.
     #   @return [String]
@@ -3559,13 +2963,6 @@ module Aws::Mgn
 
     # Template post migration custom action filters.
     #
-    # @note When making an API call, you may pass TemplateActionsRequestFilters
-    #   data as a hash:
-    #
-    #       {
-    #         action_i_ds: ["ActionID"],
-    #       }
-    #
     # @!attribute [rw] action_i_ds
     #   Action IDs to filter template post migration custom actions by.
     #   @return [Array<String>]
@@ -3578,16 +2975,6 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TerminateTargetInstancesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source_server_i_ds: ["SourceServerID"], # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] source_server_i_ds
     #   Terminate Target instance by Source Server IDs.
     #   @return [Array<String>]
@@ -3645,13 +3032,6 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UnarchiveApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "ApplicationID", # required
-    #       }
-    #
     # @!attribute [rw] application_id
     #   Application ID.
     #   @return [String]
@@ -3664,13 +3044,6 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UnarchiveWaveRequest
-    #   data as a hash:
-    #
-    #       {
-    #         wave_id: "WaveID", # required
-    #       }
-    #
     # @!attribute [rw] wave_id
     #   Wave ID.
     #   @return [String]
@@ -3700,14 +3073,6 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ARN", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   Untag resource by ARN.
     #   @return [String]
@@ -3725,15 +3090,6 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "ApplicationID", # required
-    #         description: "ApplicationDescription",
-    #         name: "ApplicationName",
-    #       }
-    #
     # @!attribute [rw] application_id
     #   Application ID.
     #   @return [String]
@@ -3756,46 +3112,6 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateLaunchConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         boot_mode: "LEGACY_BIOS", # accepts LEGACY_BIOS, UEFI
-    #         copy_private_ip: false,
-    #         copy_tags: false,
-    #         enable_map_auto_tagging: false,
-    #         launch_disposition: "STOPPED", # accepts STOPPED, STARTED
-    #         licensing: {
-    #           os_byol: false,
-    #         },
-    #         map_auto_tagging_mpe_id: "TagValue",
-    #         name: "SmallBoundedString",
-    #         post_launch_actions: {
-    #           cloud_watch_log_group_name: "CloudWatchLogGroupName",
-    #           deployment: "TEST_AND_CUTOVER", # accepts TEST_AND_CUTOVER, CUTOVER_ONLY, TEST_ONLY
-    #           s3_log_bucket: "S3LogBucketName",
-    #           s3_output_key_prefix: "BoundedString",
-    #           ssm_documents: [
-    #             {
-    #               action_name: "BoundedString", # required
-    #               must_succeed_for_cutover: false,
-    #               parameters: {
-    #                 "SsmDocumentParameterName" => [
-    #                   {
-    #                     parameter_name: "SsmParameterStoreParameterName", # required
-    #                     parameter_type: "STRING", # required, accepts STRING
-    #                   },
-    #                 ],
-    #               },
-    #               ssm_document_name: "SsmDocumentName", # required
-    #               timeout_seconds: 1,
-    #             },
-    #           ],
-    #         },
-    #         source_server_id: "SourceServerID", # required
-    #         target_instance_type_right_sizing_method: "NONE", # accepts NONE, BASIC
-    #       }
-    #
     # @!attribute [rw] boot_mode
     #   Update Launch configuration boot mode request.
     #   @return [String]
@@ -3858,57 +3174,6 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateLaunchConfigurationTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         associate_public_ip_address: false,
-    #         boot_mode: "LEGACY_BIOS", # accepts LEGACY_BIOS, UEFI
-    #         copy_private_ip: false,
-    #         copy_tags: false,
-    #         enable_map_auto_tagging: false,
-    #         large_volume_conf: {
-    #           iops: 1,
-    #           throughput: 1,
-    #           volume_type: "io1", # accepts io1, io2, gp3, gp2, st1, sc1, standard
-    #         },
-    #         launch_configuration_template_id: "LaunchConfigurationTemplateID", # required
-    #         launch_disposition: "STOPPED", # accepts STOPPED, STARTED
-    #         licensing: {
-    #           os_byol: false,
-    #         },
-    #         map_auto_tagging_mpe_id: "TagValue",
-    #         post_launch_actions: {
-    #           cloud_watch_log_group_name: "CloudWatchLogGroupName",
-    #           deployment: "TEST_AND_CUTOVER", # accepts TEST_AND_CUTOVER, CUTOVER_ONLY, TEST_ONLY
-    #           s3_log_bucket: "S3LogBucketName",
-    #           s3_output_key_prefix: "BoundedString",
-    #           ssm_documents: [
-    #             {
-    #               action_name: "BoundedString", # required
-    #               must_succeed_for_cutover: false,
-    #               parameters: {
-    #                 "SsmDocumentParameterName" => [
-    #                   {
-    #                     parameter_name: "SsmParameterStoreParameterName", # required
-    #                     parameter_type: "STRING", # required, accepts STRING
-    #                   },
-    #                 ],
-    #               },
-    #               ssm_document_name: "SsmDocumentName", # required
-    #               timeout_seconds: 1,
-    #             },
-    #           ],
-    #         },
-    #         small_volume_conf: {
-    #           iops: 1,
-    #           throughput: 1,
-    #           volume_type: "io1", # accepts io1, io2, gp3, gp2, st1, sc1, standard
-    #         },
-    #         small_volume_max_size: 1,
-    #         target_instance_type_right_sizing_method: "NONE", # accepts NONE, BASIC
-    #       }
-    #
     # @!attribute [rw] associate_public_ip_address
     #   Associate public Ip address.
     #   @return [Boolean]
@@ -3986,37 +3251,6 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateReplicationConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         associate_default_security_group: false,
-    #         bandwidth_throttling: 1,
-    #         create_public_ip: false,
-    #         data_plane_routing: "PRIVATE_IP", # accepts PRIVATE_IP, PUBLIC_IP
-    #         default_large_staging_disk_type: "GP2", # accepts GP2, ST1, GP3
-    #         ebs_encryption: "DEFAULT", # accepts DEFAULT, CUSTOM
-    #         ebs_encryption_key_arn: "ARN",
-    #         name: "SmallBoundedString",
-    #         replicated_disks: [
-    #           {
-    #             device_name: "BoundedString",
-    #             iops: 1,
-    #             is_boot_disk: false,
-    #             staging_disk_type: "AUTO", # accepts AUTO, GP2, IO1, SC1, ST1, STANDARD, GP3, IO2
-    #             throughput: 1,
-    #           },
-    #         ],
-    #         replication_server_instance_type: "EC2InstanceType",
-    #         replication_servers_security_groups_i_ds: ["SecurityGroupID"],
-    #         source_server_id: "SourceServerID", # required
-    #         staging_area_subnet_id: "SubnetID",
-    #         staging_area_tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         use_dedicated_replication_server: false,
-    #       }
-    #
     # @!attribute [rw] associate_default_security_group
     #   Update replication configuration associate default Application
     #   Migration Service Security group request.
@@ -4104,28 +3338,6 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateReplicationConfigurationTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "ARN",
-    #         associate_default_security_group: false,
-    #         bandwidth_throttling: 1,
-    #         create_public_ip: false,
-    #         data_plane_routing: "PRIVATE_IP", # accepts PRIVATE_IP, PUBLIC_IP
-    #         default_large_staging_disk_type: "GP2", # accepts GP2, ST1, GP3
-    #         ebs_encryption: "DEFAULT", # accepts DEFAULT, CUSTOM
-    #         ebs_encryption_key_arn: "ARN",
-    #         replication_configuration_template_id: "ReplicationConfigurationTemplateID", # required
-    #         replication_server_instance_type: "EC2InstanceType",
-    #         replication_servers_security_groups_i_ds: ["SecurityGroupID"],
-    #         staging_area_subnet_id: "SubnetID",
-    #         staging_area_tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         use_dedicated_replication_server: false,
-    #       }
-    #
     # @!attribute [rw] arn
     #   Update replication configuration template ARN request.
     #   @return [String]
@@ -4212,14 +3424,6 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateSourceServerReplicationTypeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         replication_type: "AGENT_BASED", # required, accepts AGENT_BASED, SNAPSHOT_SHIPPING
-    #         source_server_id: "SourceServerID", # required
-    #       }
-    #
     # @!attribute [rw] replication_type
     #   Replication type to which to update source server.
     #   @return [String]
@@ -4237,15 +3441,6 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateWaveRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "WaveDescription",
-    #         name: "WaveName",
-    #         wave_id: "WaveID", # required
-    #       }
-    #
     # @!attribute [rw] description
     #   Wave description.
     #   @return [String]

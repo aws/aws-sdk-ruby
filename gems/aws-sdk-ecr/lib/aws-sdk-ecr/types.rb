@@ -110,15 +110,6 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchCheckLayerAvailabilityRequest
-    #   data as a hash:
-    #
-    #       {
-    #         registry_id: "RegistryId",
-    #         repository_name: "RepositoryName", # required
-    #         layer_digests: ["BatchedOperationLayerDigest"], # required
-    #       }
-    #
     # @!attribute [rw] registry_id
     #   The Amazon Web Services account ID associated with the registry that
     #   contains the image layers to check. If you do not specify a
@@ -165,20 +156,6 @@ module Aws::ECR
     # Deletes specified images within a specified repository. Images are
     # specified with either the `imageTag` or `imageDigest`.
     #
-    # @note When making an API call, you may pass BatchDeleteImageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         registry_id: "RegistryId",
-    #         repository_name: "RepositoryName", # required
-    #         image_ids: [ # required
-    #           {
-    #             image_digest: "ImageDigest",
-    #             image_tag: "ImageTag",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] registry_id
     #   The Amazon Web Services account ID associated with the registry that
     #   contains the image to delete. If you do not specify a registry, the
@@ -222,21 +199,6 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchGetImageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         registry_id: "RegistryId",
-    #         repository_name: "RepositoryName", # required
-    #         image_ids: [ # required
-    #           {
-    #             image_digest: "ImageDigest",
-    #             image_tag: "ImageTag",
-    #           },
-    #         ],
-    #         accepted_media_types: ["MediaType"],
-    #       }
-    #
     # @!attribute [rw] registry_id
     #   The Amazon Web Services account ID associated with the registry that
     #   contains the images to describe. If you do not specify a registry,
@@ -290,13 +252,6 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchGetRepositoryScanningConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         repository_names: ["RepositoryName"], # required
-    #       }
-    #
     # @!attribute [rw] repository_names
     #   One or more repository names to get the scanning configuration for.
     #   @return [Array<String>]
@@ -326,16 +281,6 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CompleteLayerUploadRequest
-    #   data as a hash:
-    #
-    #       {
-    #         registry_id: "RegistryId",
-    #         repository_name: "RepositoryName", # required
-    #         upload_id: "UploadId", # required
-    #         layer_digests: ["LayerDigest"], # required
-    #       }
-    #
     # @!attribute [rw] registry_id
     #   The Amazon Web Services account ID associated with the registry to
     #   which to upload layers. If you do not specify a registry, the
@@ -393,15 +338,6 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreatePullThroughCacheRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         ecr_repository_prefix: "PullThroughCacheRuleRepositoryPrefix", # required
-    #         upstream_registry_url: "Url", # required
-    #         registry_id: "RegistryId",
-    #       }
-    #
     # @!attribute [rw] ecr_repository_prefix
     #   The repository name prefix to use when caching images from the
     #   source registry.
@@ -458,28 +394,6 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateRepositoryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         registry_id: "RegistryId",
-    #         repository_name: "RepositoryName", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         image_tag_mutability: "MUTABLE", # accepts MUTABLE, IMMUTABLE
-    #         image_scanning_configuration: {
-    #           scan_on_push: false,
-    #         },
-    #         encryption_configuration: {
-    #           encryption_type: "AES256", # required, accepts AES256, KMS
-    #           kms_key: "KmsKey",
-    #         },
-    #       }
-    #
     # @!attribute [rw] registry_id
     #   The Amazon Web Services account ID associated with the registry to
     #   create the repository. If you do not specify a registry, the default
@@ -629,14 +543,6 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteLifecyclePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         registry_id: "RegistryId",
-    #         repository_name: "RepositoryName", # required
-    #       }
-    #
     # @!attribute [rw] registry_id
     #   The Amazon Web Services account ID associated with the registry that
     #   contains the repository. If you do not specify a registry, the
@@ -683,14 +589,6 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeletePullThroughCacheRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         ecr_repository_prefix: "PullThroughCacheRuleRepositoryPrefix", # required
-    #         registry_id: "RegistryId",
-    #       }
-    #
     # @!attribute [rw] ecr_repository_prefix
     #   The Amazon ECR repository prefix associated with the pull through
     #   cache rule to delete.
@@ -739,8 +637,6 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DeleteRegistryPolicyRequest AWS API Documentation
     #
     class DeleteRegistryPolicyRequest < Aws::EmptyStructure; end
@@ -762,14 +658,6 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteRepositoryPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         registry_id: "RegistryId",
-    #         repository_name: "RepositoryName", # required
-    #       }
-    #
     # @!attribute [rw] registry_id
     #   The Amazon Web Services account ID associated with the registry that
     #   contains the repository policy to delete. If you do not specify a
@@ -812,15 +700,6 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteRepositoryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         registry_id: "RegistryId",
-    #         repository_name: "RepositoryName", # required
-    #         force: false,
-    #       }
-    #
     # @!attribute [rw] registry_id
     #   The Amazon Web Services account ID associated with the registry that
     #   contains the repository to delete. If you do not specify a registry,
@@ -857,18 +736,6 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeImageReplicationStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         repository_name: "RepositoryName", # required
-    #         image_id: { # required
-    #           image_digest: "ImageDigest",
-    #           image_tag: "ImageTag",
-    #         },
-    #         registry_id: "RegistryId",
-    #       }
-    #
     # @!attribute [rw] repository_name
     #   The name of the repository that the image is in.
     #   @return [String]
@@ -917,20 +784,6 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeImageScanFindingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         registry_id: "RegistryId",
-    #         repository_name: "RepositoryName", # required
-    #         image_id: { # required
-    #           image_digest: "ImageDigest",
-    #           image_tag: "ImageTag",
-    #         },
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] registry_id
     #   The Amazon Web Services account ID associated with the registry that
     #   contains the repository in which to describe the image scan findings
@@ -1025,13 +878,6 @@ module Aws::ECR
 
     # An object representing a filter on a DescribeImages operation.
     #
-    # @note When making an API call, you may pass DescribeImagesFilter
-    #   data as a hash:
-    #
-    #       {
-    #         tag_status: "TAGGED", # accepts TAGGED, UNTAGGED, ANY
-    #       }
-    #
     # @!attribute [rw] tag_status
     #   The tag status with which to filter your DescribeImages results. You
     #   can filter results based on whether they are `TAGGED` or `UNTAGGED`.
@@ -1045,25 +891,6 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeImagesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         registry_id: "RegistryId",
-    #         repository_name: "RepositoryName", # required
-    #         image_ids: [
-    #           {
-    #             image_digest: "ImageDigest",
-    #             image_tag: "ImageTag",
-    #           },
-    #         ],
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         filter: {
-    #           tag_status: "TAGGED", # accepts TAGGED, UNTAGGED, ANY
-    #         },
-    #       }
-    #
     # @!attribute [rw] registry_id
     #   The Amazon Web Services account ID associated with the registry that
     #   contains the repository in which to describe images. If you do not
@@ -1139,16 +966,6 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribePullThroughCacheRulesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         registry_id: "RegistryId",
-    #         ecr_repository_prefixes: ["PullThroughCacheRuleRepositoryPrefix"],
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] registry_id
     #   The Amazon Web Services account ID associated with the registry to
     #   return the pull through cache rules for. If you do not specify a
@@ -1216,8 +1033,6 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeRegistryRequest AWS API Documentation
     #
     class DescribeRegistryRequest < Aws::EmptyStructure; end
@@ -1239,16 +1054,6 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeRepositoriesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         registry_id: "RegistryId",
-    #         repository_names: ["RepositoryName"],
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] registry_id
     #   The Amazon Web Services account ID associated with the registry that
     #   contains the repositories to be described. If you do not specify a
@@ -1353,14 +1158,6 @@ module Aws::ECR
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/encryption-at-rest.html
-    #
-    # @note When making an API call, you may pass EncryptionConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         encryption_type: "AES256", # required, accepts AES256, KMS
-    #         kms_key: "KmsKey",
-    #       }
     #
     # @!attribute [rw] encryption_type
     #   The encryption type to use.
@@ -1492,13 +1289,6 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAuthorizationTokenRequest
-    #   data as a hash:
-    #
-    #       {
-    #         registry_ids: ["RegistryId"],
-    #       }
-    #
     # @!attribute [rw] registry_ids
     #   A list of Amazon Web Services account IDs that are associated with
     #   the registries for which to get AuthorizationData objects. If you do
@@ -1526,15 +1316,6 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDownloadUrlForLayerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         registry_id: "RegistryId",
-    #         repository_name: "RepositoryName", # required
-    #         layer_digest: "LayerDigest", # required
-    #       }
-    #
     # @!attribute [rw] registry_id
     #   The Amazon Web Services account ID associated with the registry that
     #   contains the image layer to download. If you do not specify a
@@ -1577,25 +1358,6 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLifecyclePolicyPreviewRequest
-    #   data as a hash:
-    #
-    #       {
-    #         registry_id: "RegistryId",
-    #         repository_name: "RepositoryName", # required
-    #         image_ids: [
-    #           {
-    #             image_digest: "ImageDigest",
-    #             image_tag: "ImageTag",
-    #           },
-    #         ],
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         filter: {
-    #           tag_status: "TAGGED", # accepts TAGGED, UNTAGGED, ANY
-    #         },
-    #       }
-    #
     # @!attribute [rw] registry_id
     #   The Amazon Web Services account ID associated with the registry that
     #   contains the repository. If you do not specify a registry, the
@@ -1698,14 +1460,6 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLifecyclePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         registry_id: "RegistryId",
-    #         repository_name: "RepositoryName", # required
-    #       }
-    #
     # @!attribute [rw] registry_id
     #   The Amazon Web Services account ID associated with the registry that
     #   contains the repository. If you do not specify a registry, the
@@ -1752,8 +1506,6 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetRegistryPolicyRequest AWS API Documentation
     #
     class GetRegistryPolicyRequest < Aws::EmptyStructure; end
@@ -1775,8 +1527,6 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetRegistryScanningConfigurationRequest AWS API Documentation
     #
     class GetRegistryScanningConfigurationRequest < Aws::EmptyStructure; end
@@ -1798,14 +1548,6 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRepositoryPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         registry_id: "RegistryId",
-    #         repository_name: "RepositoryName", # required
-    #       }
-    #
     # @!attribute [rw] registry_id
     #   The Amazon Web Services account ID associated with the registry that
     #   contains the repository. If you do not specify a registry, the
@@ -2028,14 +1770,6 @@ module Aws::ECR
     # An object with identifying information for an image in an Amazon ECR
     # repository.
     #
-    # @note When making an API call, you may pass ImageIdentifier
-    #   data as a hash:
-    #
-    #       {
-    #         image_digest: "ImageDigest",
-    #         image_tag: "ImageTag",
-    #       }
-    #
     # @!attribute [rw] image_digest
     #   The `sha256` digest of the image manifest.
     #   @return [String]
@@ -2211,13 +1945,6 @@ module Aws::ECR
 
     # The image scanning configuration for a repository.
     #
-    # @note When making an API call, you may pass ImageScanningConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         scan_on_push: false,
-    #       }
-    #
     # @!attribute [rw] scan_on_push
     #   The setting that determines whether images are scanned after being
     #   pushed to a repository. If set to `true`, images will be scanned
@@ -2252,14 +1979,6 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass InitiateLayerUploadRequest
-    #   data as a hash:
-    #
-    #       {
-    #         registry_id: "RegistryId",
-    #         repository_name: "RepositoryName", # required
-    #       }
-    #
     # @!attribute [rw] registry_id
     #   The Amazon Web Services account ID associated with the registry to
     #   which you intend to upload layers. If you do not specify a registry,
@@ -2526,13 +2245,6 @@ module Aws::ECR
 
     # The filter for the lifecycle policy preview.
     #
-    # @note When making an API call, you may pass LifecyclePolicyPreviewFilter
-    #   data as a hash:
-    #
-    #       {
-    #         tag_status: "TAGGED", # accepts TAGGED, UNTAGGED, ANY
-    #       }
-    #
     # @!attribute [rw] tag_status
     #   The tag status of the image.
     #   @return [String]
@@ -2657,13 +2369,6 @@ module Aws::ECR
 
     # An object representing a filter on a ListImages operation.
     #
-    # @note When making an API call, you may pass ListImagesFilter
-    #   data as a hash:
-    #
-    #       {
-    #         tag_status: "TAGGED", # accepts TAGGED, UNTAGGED, ANY
-    #       }
-    #
     # @!attribute [rw] tag_status
     #   The tag status with which to filter your ListImages results. You can
     #   filter results based on whether they are `TAGGED` or `UNTAGGED`.
@@ -2677,19 +2382,6 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListImagesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         registry_id: "RegistryId",
-    #         repository_name: "RepositoryName", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         filter: {
-    #           tag_status: "TAGGED", # accepts TAGGED, UNTAGGED, ANY
-    #         },
-    #       }
-    #
     # @!attribute [rw] registry_id
     #   The Amazon Web Services account ID associated with the registry that
     #   contains the repository in which to list images. If you do not
@@ -2762,13 +2454,6 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) that identifies the resource for
     #   which to list the tags. Currently, the only supported resource is an
@@ -2917,18 +2602,6 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutImageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         registry_id: "RegistryId",
-    #         repository_name: "RepositoryName", # required
-    #         image_manifest: "ImageManifest", # required
-    #         image_manifest_media_type: "MediaType",
-    #         image_tag: "ImageTag",
-    #         image_digest: "ImageDigest",
-    #       }
-    #
     # @!attribute [rw] registry_id
     #   The Amazon Web Services account ID associated with the registry that
     #   contains the repository in which to put the image. If you do not
@@ -2984,17 +2657,6 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutImageScanningConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         registry_id: "RegistryId",
-    #         repository_name: "RepositoryName", # required
-    #         image_scanning_configuration: { # required
-    #           scan_on_push: false,
-    #         },
-    #       }
-    #
     # @!attribute [rw] registry_id
     #   The Amazon Web Services account ID associated with the registry that
     #   contains the repository in which to update the image scanning
@@ -3045,15 +2707,6 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutImageTagMutabilityRequest
-    #   data as a hash:
-    #
-    #       {
-    #         registry_id: "RegistryId",
-    #         repository_name: "RepositoryName", # required
-    #         image_tag_mutability: "MUTABLE", # required, accepts MUTABLE, IMMUTABLE
-    #       }
-    #
     # @!attribute [rw] registry_id
     #   The Amazon Web Services account ID associated with the registry that
     #   contains the repository in which to update the image tag mutability
@@ -3105,15 +2758,6 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutLifecyclePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         registry_id: "RegistryId",
-    #         repository_name: "RepositoryName", # required
-    #         lifecycle_policy_text: "LifecyclePolicyText", # required
-    #       }
-    #
     # @!attribute [rw] registry_id
     #   The Amazon Web Services account ID associated with the registry that
     #   contains the repository. If you do  not specify a registry, the
@@ -3160,13 +2804,6 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutRegistryPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy_text: "RegistryPolicyText", # required
-    #       }
-    #
     # @!attribute [rw] policy_text
     #   The JSON policy text to apply to your registry. The policy text
     #   follows the same format as IAM policy text. For more information,
@@ -3203,24 +2840,6 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutRegistryScanningConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         scan_type: "BASIC", # accepts BASIC, ENHANCED
-    #         rules: [
-    #           {
-    #             scan_frequency: "SCAN_ON_PUSH", # required, accepts SCAN_ON_PUSH, CONTINUOUS_SCAN, MANUAL
-    #             repository_filters: [ # required
-    #               {
-    #                 filter: "ScanningRepositoryFilterValue", # required
-    #                 filter_type: "WILDCARD", # required, accepts WILDCARD
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] scan_type
     #   The scanning type to set for the registry.
     #
@@ -3264,30 +2883,6 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutReplicationConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         replication_configuration: { # required
-    #           rules: [ # required
-    #             {
-    #               destinations: [ # required
-    #                 {
-    #                   region: "Region", # required
-    #                   registry_id: "RegistryId", # required
-    #                 },
-    #               ],
-    #               repository_filters: [
-    #                 {
-    #                   filter: "RepositoryFilterValue", # required
-    #                   filter_type: "PREFIX_MATCH", # required, accepts PREFIX_MATCH
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] replication_configuration
     #   An object representing the replication configuration for a registry.
     #   @return [Types::ReplicationConfiguration]
@@ -3379,19 +2974,6 @@ module Aws::ECR
 
     # The details of a scanning rule for a private registry.
     #
-    # @note When making an API call, you may pass RegistryScanningRule
-    #   data as a hash:
-    #
-    #       {
-    #         scan_frequency: "SCAN_ON_PUSH", # required, accepts SCAN_ON_PUSH, CONTINUOUS_SCAN, MANUAL
-    #         repository_filters: [ # required
-    #           {
-    #             filter: "ScanningRepositoryFilterValue", # required
-    #             filter_type: "WILDCARD", # required, accepts WILDCARD
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] scan_frequency
     #   The frequency that scans are performed at for a private registry.
     #   When the `ENHANCED` scan type is specified, the supported scan
@@ -3431,28 +3013,6 @@ module Aws::ECR
 
     # The replication configuration for a registry.
     #
-    # @note When making an API call, you may pass ReplicationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         rules: [ # required
-    #           {
-    #             destinations: [ # required
-    #               {
-    #                 region: "Region", # required
-    #                 registry_id: "RegistryId", # required
-    #               },
-    #             ],
-    #             repository_filters: [
-    #               {
-    #                 filter: "RepositoryFilterValue", # required
-    #                 filter_type: "PREFIX_MATCH", # required, accepts PREFIX_MATCH
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] rules
     #   An array of objects representing the replication destinations and
     #   repository filters for a replication configuration.
@@ -3468,14 +3028,6 @@ module Aws::ECR
 
     # An array of objects representing the destination for a replication
     # rule.
-    #
-    # @note When making an API call, you may pass ReplicationDestination
-    #   data as a hash:
-    #
-    #       {
-    #         region: "Region", # required
-    #         registry_id: "RegistryId", # required
-    #       }
     #
     # @!attribute [rw] region
     #   The Region to replicate to.
@@ -3498,24 +3050,6 @@ module Aws::ECR
 
     # An array of objects representing the replication destinations and
     # repository filters for a replication configuration.
-    #
-    # @note When making an API call, you may pass ReplicationRule
-    #   data as a hash:
-    #
-    #       {
-    #         destinations: [ # required
-    #           {
-    #             region: "Region", # required
-    #             registry_id: "RegistryId", # required
-    #           },
-    #         ],
-    #         repository_filters: [
-    #           {
-    #             filter: "RepositoryFilterValue", # required
-    #             filter_type: "PREFIX_MATCH", # required, accepts PREFIX_MATCH
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] destinations
     #   An array of objects representing the destination for a replication
@@ -3614,14 +3148,6 @@ module Aws::ECR
     # controlling which repositories in a private registry are replicated.
     # If no repository filter is specified, all images in the repository are
     # replicated.
-    #
-    # @note When making an API call, you may pass RepositoryFilter
-    #   data as a hash:
-    #
-    #       {
-    #         filter: "RepositoryFilterValue", # required
-    #         filter_type: "PREFIX_MATCH", # required, accepts PREFIX_MATCH
-    #       }
     #
     # @!attribute [rw] filter
     #   The repository filter details. When the `PREFIX_MATCH` filter type
@@ -3817,14 +3343,6 @@ module Aws::ECR
     #
     # [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html#image-scanning-filters
     #
-    # @note When making an API call, you may pass ScanningRepositoryFilter
-    #   data as a hash:
-    #
-    #       {
-    #         filter: "ScanningRepositoryFilterValue", # required
-    #         filter_type: "WILDCARD", # required, accepts WILDCARD
-    #       }
-    #
     # @!attribute [rw] filter
     #   The filter to use when scanning.
     #   @return [String]
@@ -3871,16 +3389,6 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SetRepositoryPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         registry_id: "RegistryId",
-    #         repository_name: "RepositoryName", # required
-    #         policy_text: "RepositoryPolicyText", # required
-    #         force: false,
-    #       }
-    #
     # @!attribute [rw] registry_id
     #   The Amazon Web Services account ID associated with the registry that
     #   contains the repository. If you do not specify a registry, the
@@ -3941,18 +3449,6 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartImageScanRequest
-    #   data as a hash:
-    #
-    #       {
-    #         registry_id: "RegistryId",
-    #         repository_name: "RepositoryName", # required
-    #         image_id: { # required
-    #           image_digest: "ImageDigest",
-    #           image_tag: "ImageTag",
-    #         },
-    #       }
-    #
     # @!attribute [rw] registry_id
     #   The Amazon Web Services account ID associated with the registry that
     #   contains the repository in which to start an image scan request. If
@@ -4006,15 +3502,6 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartLifecyclePolicyPreviewRequest
-    #   data as a hash:
-    #
-    #       {
-    #         registry_id: "RegistryId",
-    #         repository_name: "RepositoryName", # required
-    #         lifecycle_policy_text: "LifecyclePolicyText",
-    #       }
-    #
     # @!attribute [rw] registry_id
     #   The Amazon Web Services account ID associated with the registry that
     #   contains the repository. If you do not specify a registry, the
@@ -4073,14 +3560,6 @@ module Aws::ECR
     # characters, and tag values can have a maximum length of 256
     # characters.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey",
-    #         value: "TagValue",
-    #       }
-    #
     # @!attribute [rw] key
     #   One part of a key-value pair that make up a tag. A `key` is a
     #   general label that acts like a category for more specific tag
@@ -4100,19 +3579,6 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the the resource to which to add
     #   tags. Currently, the only supported resource is an Amazon ECR
@@ -4179,14 +3645,6 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource from which to remove
     #   tags. Currently, the only supported resource is an Amazon ECR
@@ -4210,18 +3668,6 @@ module Aws::ECR
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UploadLayerPartRequest
-    #   data as a hash:
-    #
-    #       {
-    #         registry_id: "RegistryId",
-    #         repository_name: "RepositoryName", # required
-    #         upload_id: "UploadId", # required
-    #         part_first_byte: 1, # required
-    #         part_last_byte: 1, # required
-    #         layer_part_blob: "data", # required
-    #       }
-    #
     # @!attribute [rw] registry_id
     #   The Amazon Web Services account ID associated with the registry to
     #   which you are uploading layer parts. If you do not specify a

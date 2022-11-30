@@ -26,22 +26,6 @@ module Aws::DataExchange
 
     # What occurs after a certain event.
     #
-    # @note When making an API call, you may pass Action
-    #   data as a hash:
-    #
-    #       {
-    #         export_revision_to_s3: {
-    #           encryption: {
-    #             kms_key_arn: "__string",
-    #             type: "aws:kms", # required, accepts aws:kms, AES256
-    #           },
-    #           revision_destination: { # required
-    #             bucket: "__string", # required
-    #             key_pattern: "__string",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] export_revision_to_s3
     #   Details for the export revision to Amazon S3 action.
     #   @return [Types::AutoExportRevisionToS3RequestDetails]
@@ -109,15 +93,6 @@ module Aws::DataExchange
     end
 
     # The destination for the asset.
-    #
-    # @note When making an API call, you may pass AssetDestinationEntry
-    #   data as a hash:
-    #
-    #       {
-    #         asset_id: "Id", # required
-    #         bucket: "__string", # required
-    #         key: "__string",
-    #       }
     #
     # @!attribute [rw] asset_id
     #   The unique identifier for the asset.
@@ -240,14 +215,6 @@ module Aws::DataExchange
 
     # The source of the assets.
     #
-    # @note When making an API call, you may pass AssetSourceEntry
-    #   data as a hash:
-    #
-    #       {
-    #         bucket: "__string", # required
-    #         key: "__string", # required
-    #       }
-    #
     # @!attribute [rw] bucket
     #   The S3 bucket that's part of the source of the asset.
     #   @return [String]
@@ -267,14 +234,6 @@ module Aws::DataExchange
 
     # A revision destination is the Amazon S3 bucket folder destination to
     # where the export will be sent.
-    #
-    # @note When making an API call, you may pass AutoExportRevisionDestinationEntry
-    #   data as a hash:
-    #
-    #       {
-    #         bucket: "__string", # required
-    #         key_pattern: "__string",
-    #       }
     #
     # @!attribute [rw] bucket
     #   The S3 bucket that is the destination for the event action.
@@ -301,20 +260,6 @@ module Aws::DataExchange
 
     # Details of the operation to be performed by the job.
     #
-    # @note When making an API call, you may pass AutoExportRevisionToS3RequestDetails
-    #   data as a hash:
-    #
-    #       {
-    #         encryption: {
-    #           kms_key_arn: "__string",
-    #           type: "aws:kms", # required, accepts aws:kms, AES256
-    #         },
-    #         revision_destination: { # required
-    #           bucket: "__string", # required
-    #           key_pattern: "__string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] encryption
     #   Encryption configuration for the auto export job.
     #   @return [Types::ExportServerSideEncryption]
@@ -333,13 +278,6 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CancelJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The unique identifier for a job.
     #   @return [String]
@@ -378,18 +316,6 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDataSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         asset_type: "S3_SNAPSHOT", # required, accepts S3_SNAPSHOT, REDSHIFT_DATA_SHARE, API_GATEWAY_API
-    #         description: "Description", # required
-    #         name: "Name", # required
-    #         tags: {
-    #           "__string" => "__string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] asset_type
     #   The type of asset that is added to a data set.
     #   @return [String]
@@ -489,29 +415,6 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateEventActionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         action: { # required
-    #           export_revision_to_s3: {
-    #             encryption: {
-    #               kms_key_arn: "__string",
-    #               type: "aws:kms", # required, accepts aws:kms, AES256
-    #             },
-    #             revision_destination: { # required
-    #               bucket: "__string", # required
-    #               key_pattern: "__string",
-    #             },
-    #           },
-    #         },
-    #         event: { # required
-    #           revision_published: {
-    #             data_set_id: "Id", # required
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] action
     #   What occurs after a certain event.
     #   @return [Types::Action]
@@ -568,85 +471,6 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         details: { # required
-    #           export_asset_to_signed_url: {
-    #             asset_id: "Id", # required
-    #             data_set_id: "Id", # required
-    #             revision_id: "Id", # required
-    #           },
-    #           export_assets_to_s3: {
-    #             asset_destinations: [ # required
-    #               {
-    #                 asset_id: "Id", # required
-    #                 bucket: "__string", # required
-    #                 key: "__string",
-    #               },
-    #             ],
-    #             data_set_id: "Id", # required
-    #             encryption: {
-    #               kms_key_arn: "__string",
-    #               type: "aws:kms", # required, accepts aws:kms, AES256
-    #             },
-    #             revision_id: "Id", # required
-    #           },
-    #           export_revisions_to_s3: {
-    #             data_set_id: "Id", # required
-    #             encryption: {
-    #               kms_key_arn: "__string",
-    #               type: "aws:kms", # required, accepts aws:kms, AES256
-    #             },
-    #             revision_destinations: [ # required
-    #               {
-    #                 bucket: "__string", # required
-    #                 key_pattern: "__string",
-    #                 revision_id: "Id", # required
-    #               },
-    #             ],
-    #           },
-    #           import_asset_from_signed_url: {
-    #             asset_name: "AssetName", # required
-    #             data_set_id: "Id", # required
-    #             md_5_hash: "__stringMin24Max24PatternAZaZ094AZaZ092AZaZ093", # required
-    #             revision_id: "Id", # required
-    #           },
-    #           import_assets_from_s3: {
-    #             asset_sources: [ # required
-    #               {
-    #                 bucket: "__string", # required
-    #                 key: "__string", # required
-    #               },
-    #             ],
-    #             data_set_id: "Id", # required
-    #             revision_id: "Id", # required
-    #           },
-    #           import_assets_from_redshift_data_shares: {
-    #             asset_sources: [ # required
-    #               {
-    #                 data_share_arn: "__string", # required
-    #               },
-    #             ],
-    #             data_set_id: "Id", # required
-    #             revision_id: "Id", # required
-    #           },
-    #           import_asset_from_api_gateway_api: {
-    #             api_description: "ApiDescription",
-    #             api_id: "__string", # required
-    #             api_key: "__string",
-    #             api_name: "__string", # required
-    #             api_specification_md_5_hash: "__stringMin24Max24PatternAZaZ094AZaZ092AZaZ093", # required
-    #             data_set_id: "Id", # required
-    #             protocol_type: "REST", # required, accepts REST
-    #             revision_id: "Id", # required
-    #             stage: "__string", # required
-    #           },
-    #         },
-    #         type: "IMPORT_ASSETS_FROM_S3", # required, accepts IMPORT_ASSETS_FROM_S3, IMPORT_ASSET_FROM_SIGNED_URL, EXPORT_ASSETS_TO_S3, EXPORT_ASSET_TO_SIGNED_URL, EXPORT_REVISIONS_TO_S3, IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES, IMPORT_ASSET_FROM_API_GATEWAY_API
-    #       }
-    #
     # @!attribute [rw] details
     #   The details for the CreateJob request.
     #   @return [Types::RequestDetails]
@@ -711,17 +535,6 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateRevisionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         comment: "__stringMin0Max16384",
-    #         data_set_id: "__string", # required
-    #         tags: {
-    #           "__string" => "__string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] comment
     #   An optional comment about the revision.
     #   @return [String]
@@ -892,15 +705,6 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAssetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         asset_id: "__string", # required
-    #         data_set_id: "__string", # required
-    #         revision_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] asset_id
     #   The unique identifier for an asset.
     #   @return [String]
@@ -923,13 +727,6 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDataSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         data_set_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] data_set_id
     #   The unique identifier for a data set.
     #   @return [String]
@@ -942,13 +739,6 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteEventActionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         event_action_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] event_action_id
     #   The unique identifier for the event action.
     #   @return [String]
@@ -961,14 +751,6 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteRevisionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         data_set_id: "__string", # required
-    #         revision_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] data_set_id
     #   The unique identifier for a data set.
     #   @return [String]
@@ -1006,15 +788,6 @@ module Aws::DataExchange
     end
 
     # What occurs to start an action.
-    #
-    # @note When making an API call, you may pass Event
-    #   data as a hash:
-    #
-    #       {
-    #         revision_published: {
-    #           data_set_id: "Id", # required
-    #         },
-    #       }
     #
     # @!attribute [rw] revision_published
     #   What occurs to start the revision publish action.
@@ -1072,15 +845,6 @@ module Aws::DataExchange
     end
 
     # Details of the operation to be performed by the job.
-    #
-    # @note When making an API call, you may pass ExportAssetToSignedUrlRequestDetails
-    #   data as a hash:
-    #
-    #       {
-    #         asset_id: "Id", # required
-    #         data_set_id: "Id", # required
-    #         revision_id: "Id", # required
-    #       }
     #
     # @!attribute [rw] asset_id
     #   The unique identifier for the asset that is exported to a signed
@@ -1145,25 +909,6 @@ module Aws::DataExchange
 
     # Details of the operation to be performed by the job.
     #
-    # @note When making an API call, you may pass ExportAssetsToS3RequestDetails
-    #   data as a hash:
-    #
-    #       {
-    #         asset_destinations: [ # required
-    #           {
-    #             asset_id: "Id", # required
-    #             bucket: "__string", # required
-    #             key: "__string",
-    #           },
-    #         ],
-    #         data_set_id: "Id", # required
-    #         encryption: {
-    #           kms_key_arn: "__string",
-    #           type: "aws:kms", # required, accepts aws:kms, AES256
-    #         },
-    #         revision_id: "Id", # required
-    #       }
-    #
     # @!attribute [rw] asset_destinations
     #   The destination for the asset.
     #   @return [Array<Types::AssetDestinationEntry>]
@@ -1226,24 +971,6 @@ module Aws::DataExchange
 
     # Details of the operation to be performed by the job.
     #
-    # @note When making an API call, you may pass ExportRevisionsToS3RequestDetails
-    #   data as a hash:
-    #
-    #       {
-    #         data_set_id: "Id", # required
-    #         encryption: {
-    #           kms_key_arn: "__string",
-    #           type: "aws:kms", # required, accepts aws:kms, AES256
-    #         },
-    #         revision_destinations: [ # required
-    #           {
-    #             bucket: "__string", # required
-    #             key_pattern: "__string",
-    #             revision_id: "Id", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] data_set_id
     #   The unique identifier for the data set associated with this export
     #   job.
@@ -1301,14 +1028,6 @@ module Aws::DataExchange
     # type in addition to the AWS KMS key. The KMS key is only necessary if
     # you chose the KMS encryption type.
     #
-    # @note When making an API call, you may pass ExportServerSideEncryption
-    #   data as a hash:
-    #
-    #       {
-    #         kms_key_arn: "__string",
-    #         type: "aws:kms", # required, accepts aws:kms, AES256
-    #       }
-    #
     # @!attribute [rw] kms_key_arn
     #   The Amazon Resource Name (ARN) of the AWS KMS key you want to use to
     #   encrypt the Amazon S3 objects. This parameter is required if you
@@ -1329,15 +1048,6 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAssetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         asset_id: "__string", # required
-    #         data_set_id: "__string", # required
-    #         revision_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] asset_id
     #   The unique identifier for an asset.
     #   @return [String]
@@ -1425,13 +1135,6 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDataSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         data_set_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] data_set_id
     #   The unique identifier for a data set.
     #   @return [String]
@@ -1511,13 +1214,6 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetEventActionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         event_action_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] event_action_id
     #   The unique identifier for the event action.
     #   @return [String]
@@ -1569,13 +1265,6 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The unique identifier for a job.
     #   @return [String]
@@ -1635,14 +1324,6 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRevisionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         data_set_id: "__string", # required
-    #         revision_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] data_set_id
     #   The unique identifier for a data set.
     #   @return [String]
@@ -1741,21 +1422,6 @@ module Aws::DataExchange
     end
 
     # The request details.
-    #
-    # @note When making an API call, you may pass ImportAssetFromApiGatewayApiRequestDetails
-    #   data as a hash:
-    #
-    #       {
-    #         api_description: "ApiDescription",
-    #         api_id: "__string", # required
-    #         api_key: "__string",
-    #         api_name: "__string", # required
-    #         api_specification_md_5_hash: "__stringMin24Max24PatternAZaZ094AZaZ092AZaZ093", # required
-    #         data_set_id: "Id", # required
-    #         protocol_type: "REST", # required, accepts REST
-    #         revision_id: "Id", # required
-    #         stage: "__string", # required
-    #       }
     #
     # @!attribute [rw] api_description
     #   The API description. Markdown supported.
@@ -1891,16 +1557,6 @@ module Aws::DataExchange
 
     # Details of the operation to be performed by the job.
     #
-    # @note When making an API call, you may pass ImportAssetFromSignedUrlRequestDetails
-    #   data as a hash:
-    #
-    #       {
-    #         asset_name: "AssetName", # required
-    #         data_set_id: "Id", # required
-    #         md_5_hash: "__stringMin24Max24PatternAZaZ094AZaZ092AZaZ093", # required
-    #         revision_id: "Id", # required
-    #       }
-    #
     # @!attribute [rw] asset_name
     #   The name of the asset. When importing from Amazon S3, the S3 object
     #   key is used as the asset name.
@@ -1978,19 +1634,6 @@ module Aws::DataExchange
 
     # Details from an import from Amazon Redshift datashare request.
     #
-    # @note When making an API call, you may pass ImportAssetsFromRedshiftDataSharesRequestDetails
-    #   data as a hash:
-    #
-    #       {
-    #         asset_sources: [ # required
-    #           {
-    #             data_share_arn: "__string", # required
-    #           },
-    #         ],
-    #         data_set_id: "Id", # required
-    #         revision_id: "Id", # required
-    #       }
-    #
     # @!attribute [rw] asset_sources
     #   A list of Amazon Redshift datashare assets.
     #   @return [Array<Types::RedshiftDataShareAssetSourceEntry>]
@@ -2042,20 +1685,6 @@ module Aws::DataExchange
     end
 
     # Details of the operation to be performed by the job.
-    #
-    # @note When making an API call, you may pass ImportAssetsFromS3RequestDetails
-    #   data as a hash:
-    #
-    #       {
-    #         asset_sources: [ # required
-    #           {
-    #             bucket: "__string", # required
-    #             key: "__string", # required
-    #           },
-    #         ],
-    #         data_set_id: "Id", # required
-    #         revision_id: "Id", # required
-    #       }
     #
     # @!attribute [rw] asset_sources
     #   Is a list of S3 bucket and object key pairs.
@@ -2218,15 +1847,6 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDataSetRevisionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         data_set_id: "__string", # required
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] data_set_id
     #   The unique identifier for a data set.
     #   @return [String]
@@ -2268,15 +1888,6 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDataSetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #         origin: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results returned by a single call.
     #   @return [Integer]
@@ -2319,15 +1930,6 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEventActionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         event_source_id: "__string",
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] event_source_id
     #   The unique identifier for the event source.
     #   @return [String]
@@ -2369,16 +1971,6 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         data_set_id: "__string",
-    #         max_results: 1,
-    #         next_token: "__string",
-    #         revision_id: "__string",
-    #       }
-    #
     # @!attribute [rw] data_set_id
     #   The unique identifier for a data set.
     #   @return [String]
@@ -2425,16 +2017,6 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRevisionAssetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         data_set_id: "__string", # required
-    #         max_results: 1,
-    #         next_token: "__string",
-    #         revision_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] data_set_id
     #   The unique identifier for a data set.
     #   @return [String]
@@ -2481,13 +2063,6 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   An Amazon Resource Name (ARN) that uniquely identifies an AWS
     #   resource.
@@ -2544,13 +2119,6 @@ module Aws::DataExchange
 
     # The source of the Amazon Redshift datashare asset.
     #
-    # @note When making an API call, you may pass RedshiftDataShareAssetSourceEntry
-    #   data as a hash:
-    #
-    #       {
-    #         data_share_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] data_share_arn
     #   The Amazon Resource Name (ARN) of the datashare asset.
     #   @return [String]
@@ -2564,82 +2132,6 @@ module Aws::DataExchange
     end
 
     # The details for the request.
-    #
-    # @note When making an API call, you may pass RequestDetails
-    #   data as a hash:
-    #
-    #       {
-    #         export_asset_to_signed_url: {
-    #           asset_id: "Id", # required
-    #           data_set_id: "Id", # required
-    #           revision_id: "Id", # required
-    #         },
-    #         export_assets_to_s3: {
-    #           asset_destinations: [ # required
-    #             {
-    #               asset_id: "Id", # required
-    #               bucket: "__string", # required
-    #               key: "__string",
-    #             },
-    #           ],
-    #           data_set_id: "Id", # required
-    #           encryption: {
-    #             kms_key_arn: "__string",
-    #             type: "aws:kms", # required, accepts aws:kms, AES256
-    #           },
-    #           revision_id: "Id", # required
-    #         },
-    #         export_revisions_to_s3: {
-    #           data_set_id: "Id", # required
-    #           encryption: {
-    #             kms_key_arn: "__string",
-    #             type: "aws:kms", # required, accepts aws:kms, AES256
-    #           },
-    #           revision_destinations: [ # required
-    #             {
-    #               bucket: "__string", # required
-    #               key_pattern: "__string",
-    #               revision_id: "Id", # required
-    #             },
-    #           ],
-    #         },
-    #         import_asset_from_signed_url: {
-    #           asset_name: "AssetName", # required
-    #           data_set_id: "Id", # required
-    #           md_5_hash: "__stringMin24Max24PatternAZaZ094AZaZ092AZaZ093", # required
-    #           revision_id: "Id", # required
-    #         },
-    #         import_assets_from_s3: {
-    #           asset_sources: [ # required
-    #             {
-    #               bucket: "__string", # required
-    #               key: "__string", # required
-    #             },
-    #           ],
-    #           data_set_id: "Id", # required
-    #           revision_id: "Id", # required
-    #         },
-    #         import_assets_from_redshift_data_shares: {
-    #           asset_sources: [ # required
-    #             {
-    #               data_share_arn: "__string", # required
-    #             },
-    #           ],
-    #           data_set_id: "Id", # required
-    #           revision_id: "Id", # required
-    #         },
-    #         import_asset_from_api_gateway_api: {
-    #           api_description: "ApiDescription",
-    #           api_id: "__string", # required
-    #           api_key: "__string",
-    #           api_name: "__string", # required
-    #           api_specification_md_5_hash: "__stringMin24Max24PatternAZaZ094AZaZ092AZaZ093", # required
-    #           data_set_id: "Id", # required
-    #           protocol_type: "REST", # required, accepts REST
-    #           revision_id: "Id", # required
-    #           stage: "__string", # required
-    #         },
-    #       }
     #
     # @!attribute [rw] export_asset_to_signed_url
     #   Details about the export to signed URL request.
@@ -2753,15 +2245,6 @@ module Aws::DataExchange
 
     # The destination where the assets in the revision will be exported.
     #
-    # @note When making an API call, you may pass RevisionDestinationEntry
-    #   data as a hash:
-    #
-    #       {
-    #         bucket: "__string", # required
-    #         key_pattern: "__string",
-    #         revision_id: "Id", # required
-    #       }
-    #
     # @!attribute [rw] bucket
     #   The S3 bucket that is the destination for the assets in the
     #   revision.
@@ -2870,13 +2353,6 @@ module Aws::DataExchange
 
     # Information about the published revision.
     #
-    # @note When making an API call, you may pass RevisionPublished
-    #   data as a hash:
-    #
-    #       {
-    #         data_set_id: "Id", # required
-    #       }
-    #
     # @!attribute [rw] data_set_id
     #   The data set ID of the published revision.
     #   @return [String]
@@ -2889,15 +2365,6 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RevokeRevisionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         data_set_id: "__string", # required
-    #         revision_id: "__string", # required
-    #         revocation_comment: "__stringMin10Max512", # required
-    #       }
-    #
     # @!attribute [rw] data_set_id
     #   The unique identifier for a data set.
     #   @return [String]
@@ -3010,24 +2477,6 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SendApiAssetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         body: "__string",
-    #         query_string_parameters: {
-    #           "__string" => "__string",
-    #         },
-    #         asset_id: "__string", # required
-    #         data_set_id: "__string", # required
-    #         request_headers: {
-    #           "__string" => "__string",
-    #         },
-    #         method: "__string",
-    #         path: "__string",
-    #         revision_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] body
     #   The request body.
     #   @return [String]
@@ -3124,13 +2573,6 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The unique identifier for a job.
     #   @return [String]
@@ -3147,16 +2589,6 @@ module Aws::DataExchange
     #
     class StartJobResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "__string", # required
-    #         tags: { # required
-    #           "__string" => "__string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   An Amazon Resource Name (ARN) that uniquely identifies an AWS
     #   resource.
@@ -3190,14 +2622,6 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "__string", # required
-    #         tag_keys: ["__string"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   An Amazon Resource Name (ARN) that uniquely identifies an AWS
     #   resource.
@@ -3216,16 +2640,6 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateAssetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         asset_id: "__string", # required
-    #         data_set_id: "__string", # required
-    #         name: "AssetName", # required
-    #         revision_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] asset_id
     #   The unique identifier for an asset.
     #   @return [String]
@@ -3323,15 +2737,6 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateDataSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         data_set_id: "__string", # required
-    #         description: "Description",
-    #         name: "Name",
-    #       }
-    #
     # @!attribute [rw] data_set_id
     #   The unique identifier for a data set.
     #   @return [String]
@@ -3416,25 +2821,6 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateEventActionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         action: {
-    #           export_revision_to_s3: {
-    #             encryption: {
-    #               kms_key_arn: "__string",
-    #               type: "aws:kms", # required, accepts aws:kms, AES256
-    #             },
-    #             revision_destination: { # required
-    #               bucket: "__string", # required
-    #               key_pattern: "__string",
-    #             },
-    #           },
-    #         },
-    #         event_action_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] action
     #   What occurs after a certain event.
     #   @return [Types::Action]
@@ -3491,16 +2877,6 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateRevisionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         comment: "__stringMin0Max16384",
-    #         data_set_id: "__string", # required
-    #         finalized: false,
-    #         revision_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] comment
     #   An optional comment about the revision.
     #   @return [String]

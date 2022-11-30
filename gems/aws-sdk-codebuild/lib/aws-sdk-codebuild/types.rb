@@ -17,13 +17,6 @@ module Aws::CodeBuild
     #
     class AccountLimitExceededException < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass BatchDeleteBuildsInput
-    #   data as a hash:
-    #
-    #       {
-    #         ids: ["NonEmptyString"], # required
-    #       }
-    #
     # @!attribute [rw] ids
     #   The IDs of the builds to delete.
     #   @return [Array<String>]
@@ -53,13 +46,6 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchGetBuildBatchesInput
-    #   data as a hash:
-    #
-    #       {
-    #         ids: ["NonEmptyString"], # required
-    #       }
-    #
     # @!attribute [rw] ids
     #   An array that contains the batch build identifiers to retrieve.
     #   @return [Array<String>]
@@ -91,13 +77,6 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchGetBuildsInput
-    #   data as a hash:
-    #
-    #       {
-    #         ids: ["NonEmptyString"], # required
-    #       }
-    #
     # @!attribute [rw] ids
     #   The IDs of the builds.
     #   @return [Array<String>]
@@ -127,13 +106,6 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchGetProjectsInput
-    #   data as a hash:
-    #
-    #       {
-    #         names: ["NonEmptyString"], # required
-    #       }
-    #
     # @!attribute [rw] names
     #   The names or ARNs of the build projects. To get information about a
     #   project shared with your Amazon Web Services account, its ARN must
@@ -166,13 +138,6 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchGetReportGroupsInput
-    #   data as a hash:
-    #
-    #       {
-    #         report_group_arns: ["NonEmptyString"], # required
-    #       }
-    #
     # @!attribute [rw] report_group_arns
     #   An array of report group ARNs that identify the report groups to
     #   return.
@@ -204,13 +169,6 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchGetReportsInput
-    #   data as a hash:
-    #
-    #       {
-    #         report_arns: ["NonEmptyString"], # required
-    #       }
-    #
     # @!attribute [rw] report_arns
     #   An array of ARNs that identify the `Report` objects to return.
     #   @return [Array<String>]
@@ -242,14 +200,6 @@ module Aws::CodeBuild
     end
 
     # Specifies restrictions for the batch build.
-    #
-    # @note When making an API call, you may pass BatchRestrictions
-    #   data as a hash:
-    #
-    #       {
-    #         maximum_builds_allowed: 1,
-    #         compute_types_allowed: ["NonEmptyString"],
-    #       }
     #
     # @!attribute [rw] maximum_builds_allowed
     #   Specifies the maximum number of builds allowed.
@@ -868,13 +818,6 @@ module Aws::CodeBuild
 
     # Specifies filters when retrieving batch builds.
     #
-    # @note When making an API call, you may pass BuildBatchFilter
-    #   data as a hash:
-    #
-    #       {
-    #         status: "SUCCEEDED", # accepts SUCCEEDED, FAILED, FAULT, TIMED_OUT, IN_PROGRESS, STOPPED
-    #       }
-    #
     # @!attribute [rw] status
     #   The status of the batch builds to retrieve. Only batch builds that
     #   have this status will be retrieved.
@@ -1154,14 +1097,6 @@ module Aws::CodeBuild
     # Contains information that defines how the CodeBuild build project
     # reports the build status to the source provider.
     #
-    # @note When making an API call, you may pass BuildStatusConfig
-    #   data as a hash:
-    #
-    #       {
-    #         context: "String",
-    #         target_url: "String",
-    #       }
-    #
     # @!attribute [rw] context
     #   Specifies the context of the build status CodeBuild sends to the
     #   source provider. The usage of this parameter depends on the source
@@ -1278,15 +1213,6 @@ module Aws::CodeBuild
     end
 
     # Information about CloudWatch Logs for a build project.
-    #
-    # @note When making an API call, you may pass CloudWatchLogsConfig
-    #   data as a hash:
-    #
-    #       {
-    #         status: "ENABLED", # required, accepts ENABLED, DISABLED
-    #         group_name: "String",
-    #         stream_name: "String",
-    #       }
     #
     # @!attribute [rw] status
     #   The current status of the logs in CloudWatch Logs for a build
@@ -1440,162 +1366,6 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateProjectInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ProjectName", # required
-    #         description: "ProjectDescription",
-    #         source: { # required
-    #           type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
-    #           location: "String",
-    #           git_clone_depth: 1,
-    #           git_submodules_config: {
-    #             fetch_submodules: false, # required
-    #           },
-    #           buildspec: "String",
-    #           auth: {
-    #             type: "OAUTH", # required, accepts OAUTH
-    #             resource: "String",
-    #           },
-    #           report_build_status: false,
-    #           build_status_config: {
-    #             context: "String",
-    #             target_url: "String",
-    #           },
-    #           insecure_ssl: false,
-    #           source_identifier: "String",
-    #         },
-    #         secondary_sources: [
-    #           {
-    #             type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
-    #             location: "String",
-    #             git_clone_depth: 1,
-    #             git_submodules_config: {
-    #               fetch_submodules: false, # required
-    #             },
-    #             buildspec: "String",
-    #             auth: {
-    #               type: "OAUTH", # required, accepts OAUTH
-    #               resource: "String",
-    #             },
-    #             report_build_status: false,
-    #             build_status_config: {
-    #               context: "String",
-    #               target_url: "String",
-    #             },
-    #             insecure_ssl: false,
-    #             source_identifier: "String",
-    #           },
-    #         ],
-    #         source_version: "String",
-    #         secondary_source_versions: [
-    #           {
-    #             source_identifier: "String", # required
-    #             source_version: "String", # required
-    #           },
-    #         ],
-    #         artifacts: { # required
-    #           type: "CODEPIPELINE", # required, accepts CODEPIPELINE, S3, NO_ARTIFACTS
-    #           location: "String",
-    #           path: "String",
-    #           namespace_type: "NONE", # accepts NONE, BUILD_ID
-    #           name: "String",
-    #           packaging: "NONE", # accepts NONE, ZIP
-    #           override_artifact_name: false,
-    #           encryption_disabled: false,
-    #           artifact_identifier: "String",
-    #           bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
-    #         },
-    #         secondary_artifacts: [
-    #           {
-    #             type: "CODEPIPELINE", # required, accepts CODEPIPELINE, S3, NO_ARTIFACTS
-    #             location: "String",
-    #             path: "String",
-    #             namespace_type: "NONE", # accepts NONE, BUILD_ID
-    #             name: "String",
-    #             packaging: "NONE", # accepts NONE, ZIP
-    #             override_artifact_name: false,
-    #             encryption_disabled: false,
-    #             artifact_identifier: "String",
-    #             bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
-    #           },
-    #         ],
-    #         cache: {
-    #           type: "NO_CACHE", # required, accepts NO_CACHE, S3, LOCAL
-    #           location: "String",
-    #           modes: ["LOCAL_DOCKER_LAYER_CACHE"], # accepts LOCAL_DOCKER_LAYER_CACHE, LOCAL_SOURCE_CACHE, LOCAL_CUSTOM_CACHE
-    #         },
-    #         environment: { # required
-    #           type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER, LINUX_GPU_CONTAINER, ARM_CONTAINER, WINDOWS_SERVER_2019_CONTAINER
-    #           image: "NonEmptyString", # required
-    #           compute_type: "BUILD_GENERAL1_SMALL", # required, accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE, BUILD_GENERAL1_2XLARGE
-    #           environment_variables: [
-    #             {
-    #               name: "NonEmptyString", # required
-    #               value: "String", # required
-    #               type: "PLAINTEXT", # accepts PLAINTEXT, PARAMETER_STORE, SECRETS_MANAGER
-    #             },
-    #           ],
-    #           privileged_mode: false,
-    #           certificate: "String",
-    #           registry_credential: {
-    #             credential: "NonEmptyString", # required
-    #             credential_provider: "SECRETS_MANAGER", # required, accepts SECRETS_MANAGER
-    #           },
-    #           image_pull_credentials_type: "CODEBUILD", # accepts CODEBUILD, SERVICE_ROLE
-    #         },
-    #         service_role: "NonEmptyString", # required
-    #         timeout_in_minutes: 1,
-    #         queued_timeout_in_minutes: 1,
-    #         encryption_key: "NonEmptyString",
-    #         tags: [
-    #           {
-    #             key: "KeyInput",
-    #             value: "ValueInput",
-    #           },
-    #         ],
-    #         vpc_config: {
-    #           vpc_id: "NonEmptyString",
-    #           subnets: ["NonEmptyString"],
-    #           security_group_ids: ["NonEmptyString"],
-    #         },
-    #         badge_enabled: false,
-    #         logs_config: {
-    #           cloud_watch_logs: {
-    #             status: "ENABLED", # required, accepts ENABLED, DISABLED
-    #             group_name: "String",
-    #             stream_name: "String",
-    #           },
-    #           s3_logs: {
-    #             status: "ENABLED", # required, accepts ENABLED, DISABLED
-    #             location: "String",
-    #             encryption_disabled: false,
-    #             bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
-    #           },
-    #         },
-    #         file_system_locations: [
-    #           {
-    #             type: "EFS", # accepts EFS
-    #             location: "String",
-    #             mount_point: "String",
-    #             identifier: "String",
-    #             mount_options: "String",
-    #           },
-    #         ],
-    #         build_batch_config: {
-    #           service_role: "NonEmptyString",
-    #           combine_artifacts: false,
-    #           restrictions: {
-    #             maximum_builds_allowed: 1,
-    #             compute_types_allowed: ["NonEmptyString"],
-    #           },
-    #           timeout_in_mins: 1,
-    #           batch_report_mode: "REPORT_INDIVIDUAL_BUILDS", # accepts REPORT_INDIVIDUAL_BUILDS, REPORT_AGGREGATED_BATCH
-    #         },
-    #         concurrent_build_limit: 1,
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the build project.
     #   @return [String]
@@ -1785,31 +1555,6 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateReportGroupInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ReportGroupName", # required
-    #         type: "TEST", # required, accepts TEST, CODE_COVERAGE
-    #         export_config: { # required
-    #           export_config_type: "S3", # accepts S3, NO_EXPORT
-    #           s3_destination: {
-    #             bucket: "NonEmptyString",
-    #             bucket_owner: "String",
-    #             path: "String",
-    #             packaging: "ZIP", # accepts ZIP, NONE
-    #             encryption_key: "NonEmptyString",
-    #             encryption_disabled: false,
-    #           },
-    #         },
-    #         tags: [
-    #           {
-    #             key: "KeyInput",
-    #             value: "ValueInput",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the report group.
     #   @return [String]
@@ -1853,24 +1598,6 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateWebhookInput
-    #   data as a hash:
-    #
-    #       {
-    #         project_name: "ProjectName", # required
-    #         branch_filter: "String",
-    #         filter_groups: [
-    #           [
-    #             {
-    #               type: "EVENT", # required, accepts EVENT, BASE_REF, HEAD_REF, ACTOR_ACCOUNT_ID, FILE_PATH, COMMIT_MESSAGE
-    #               pattern: "String", # required
-    #               exclude_matched_pattern: false,
-    #             },
-    #           ],
-    #         ],
-    #         build_type: "BUILD", # accepts BUILD, BUILD_BATCH
-    #       }
-    #
     # @!attribute [rw] project_name
     #   The name of the CodeBuild project.
     #   @return [String]
@@ -1951,13 +1678,6 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteBuildBatchInput
-    #   data as a hash:
-    #
-    #       {
-    #         id: "NonEmptyString", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The identifier of the batch build to delete.
     #   @return [String]
@@ -1994,13 +1714,6 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteProjectInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "NonEmptyString", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the build project.
     #   @return [String]
@@ -2017,14 +1730,6 @@ module Aws::CodeBuild
     #
     class DeleteProjectOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteReportGroupInput
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "NonEmptyString", # required
-    #         delete_reports: false,
-    #       }
-    #
     # @!attribute [rw] arn
     #   The ARN of the report group to delete.
     #   @return [String]
@@ -2058,13 +1763,6 @@ module Aws::CodeBuild
     #
     class DeleteReportGroupOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteReportInput
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "NonEmptyString", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The ARN of the report to delete.
     #   @return [String]
@@ -2081,13 +1779,6 @@ module Aws::CodeBuild
     #
     class DeleteReportOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteResourcePolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "NonEmptyString", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource that is associated with the resource policy.
     #   @return [String]
@@ -2104,13 +1795,6 @@ module Aws::CodeBuild
     #
     class DeleteResourcePolicyOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteSourceCredentialsInput
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "NonEmptyString", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the token.
     #   @return [String]
@@ -2135,13 +1819,6 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteWebhookInput
-    #   data as a hash:
-    #
-    #       {
-    #         project_name: "ProjectName", # required
-    #       }
-    #
     # @!attribute [rw] project_name
     #   The name of the CodeBuild project.
     #   @return [String]
@@ -2158,19 +1835,6 @@ module Aws::CodeBuild
     #
     class DeleteWebhookOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeCodeCoveragesInput
-    #   data as a hash:
-    #
-    #       {
-    #         report_arn: "NonEmptyString", # required
-    #         next_token: "String",
-    #         max_results: 1,
-    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #         sort_by: "LINE_COVERAGE_PERCENTAGE", # accepts LINE_COVERAGE_PERCENTAGE, FILE_PATH
-    #         min_line_coverage_percentage: 1.0,
-    #         max_line_coverage_percentage: 1.0,
-    #       }
-    #
     # @!attribute [rw] report_arn
     #   The ARN of the report for which test cases are returned.
     #   @return [String]
@@ -2244,19 +1908,6 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeTestCasesInput
-    #   data as a hash:
-    #
-    #       {
-    #         report_arn: "String", # required
-    #         next_token: "String",
-    #         max_results: 1,
-    #         filter: {
-    #           status: "String",
-    #           keyword: "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] report_arn
     #   The ARN of the report for which test cases are returned.
     #   @return [String]
@@ -2384,15 +2035,6 @@ module Aws::CodeBuild
     # Information about an environment variable for a build project or a
     # build.
     #
-    # @note When making an API call, you may pass EnvironmentVariable
-    #   data as a hash:
-    #
-    #       {
-    #         name: "NonEmptyString", # required
-    #         value: "String", # required
-    #         type: "PLAINTEXT", # accepts PLAINTEXT, PARAMETER_STORE, SECRETS_MANAGER
-    #       }
-    #
     # @!attribute [rw] name
     #   The name or key of the environment variable.
     #   @return [String]
@@ -2475,15 +2117,6 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetReportGroupTrendInput
-    #   data as a hash:
-    #
-    #       {
-    #         report_group_arn: "NonEmptyString", # required
-    #         num_of_reports: 1,
-    #         trend_field: "PASS_RATE", # required, accepts PASS_RATE, DURATION, TOTAL, LINE_COVERAGE, LINES_COVERED, LINES_MISSED, BRANCH_COVERAGE, BRANCHES_COVERED, BRANCHES_MISSED
-    #       }
-    #
     # @!attribute [rw] report_group_arn
     #   The ARN of the report group that contains the reports to analyze.
     #   @return [String]
@@ -2575,13 +2208,6 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetResourcePolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "NonEmptyString", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource that is associated with the resource policy.
     #   @return [String]
@@ -2610,13 +2236,6 @@ module Aws::CodeBuild
     # Information about the Git submodules configuration for an CodeBuild
     # build project.
     #
-    # @note When making an API call, you may pass GitSubmodulesConfig
-    #   data as a hash:
-    #
-    #       {
-    #         fetch_submodules: false, # required
-    #       }
-    #
     # @!attribute [rw] fetch_submodules
     #   Set to true to fetch Git submodules for your CodeBuild build
     #   project.
@@ -2630,17 +2249,6 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ImportSourceCredentialsInput
-    #   data as a hash:
-    #
-    #       {
-    #         username: "NonEmptyString",
-    #         token: "SensitiveNonEmptyString", # required
-    #         server_type: "GITHUB", # required, accepts GITHUB, BITBUCKET, GITHUB_ENTERPRISE
-    #         auth_type: "OAUTH", # required, accepts OAUTH, BASIC_AUTH, PERSONAL_ACCESS_TOKEN
-    #         should_overwrite: false,
-    #       }
-    #
     # @!attribute [rw] username
     #   The Bitbucket username when the `authType` is BASIC\_AUTH. This
     #   parameter is not valid for other types of source providers or
@@ -2699,13 +2307,6 @@ module Aws::CodeBuild
     #
     class InvalidInputException < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass InvalidateProjectCacheInput
-    #   data as a hash:
-    #
-    #       {
-    #         project_name: "NonEmptyString", # required
-    #       }
-    #
     # @!attribute [rw] project_name
     #   The name of the CodeBuild build project that the cache is reset for.
     #   @return [String]
@@ -2722,19 +2323,6 @@ module Aws::CodeBuild
     #
     class InvalidateProjectCacheOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass ListBuildBatchesForProjectInput
-    #   data as a hash:
-    #
-    #       {
-    #         project_name: "NonEmptyString",
-    #         filter: {
-    #           status: "SUCCEEDED", # accepts SUCCEEDED, FAILED, FAULT, TIMED_OUT, IN_PROGRESS, STOPPED
-    #         },
-    #         max_results: 1,
-    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] project_name
     #   The name of the project.
     #   @return [String]
@@ -2796,18 +2384,6 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListBuildBatchesInput
-    #   data as a hash:
-    #
-    #       {
-    #         filter: {
-    #           status: "SUCCEEDED", # accepts SUCCEEDED, FAILED, FAULT, TIMED_OUT, IN_PROGRESS, STOPPED
-    #         },
-    #         max_results: 1,
-    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] filter
     #   A `BuildBatchFilter` object that specifies the filters for the
     #   search.
@@ -2864,15 +2440,6 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListBuildsForProjectInput
-    #   data as a hash:
-    #
-    #       {
-    #         project_name: "NonEmptyString", # required
-    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] project_name
     #   The name of the CodeBuild project.
     #   @return [String]
@@ -2935,14 +2502,6 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListBuildsInput
-    #   data as a hash:
-    #
-    #       {
-    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] sort_order
     #   The order to list build IDs. Valid values include:
     #
@@ -2990,8 +2549,6 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListCuratedEnvironmentImagesInput AWS API Documentation
     #
     class ListCuratedEnvironmentImagesInput < Aws::EmptyStructure; end
@@ -3009,15 +2566,6 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListProjectsInput
-    #   data as a hash:
-    #
-    #       {
-    #         sort_by: "NAME", # accepts NAME, CREATED_TIME, LAST_MODIFIED_TIME
-    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #         next_token: "NonEmptyString",
-    #       }
-    #
     # @!attribute [rw] sort_by
     #   The criterion to be used to list build project names. Valid values
     #   include:
@@ -3086,16 +2634,6 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListReportGroupsInput
-    #   data as a hash:
-    #
-    #       {
-    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #         sort_by: "NAME", # accepts NAME, CREATED_TIME, LAST_MODIFIED_TIME
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] sort_order
     #   Used to specify the order to sort the list of returned report
     #   groups. Valid values are `ASCENDING` and `DESCENDING`.
@@ -3164,19 +2702,6 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListReportsForReportGroupInput
-    #   data as a hash:
-    #
-    #       {
-    #         report_group_arn: "String", # required
-    #         next_token: "String",
-    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #         max_results: 1,
-    #         filter: {
-    #           status: "GENERATING", # accepts GENERATING, SUCCEEDED, FAILED, INCOMPLETE, DELETING
-    #         },
-    #       }
-    #
     # @!attribute [rw] report_group_arn
     #   The ARN of the report group for which you want to return report
     #   ARNs.
@@ -3242,18 +2767,6 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListReportsInput
-    #   data as a hash:
-    #
-    #       {
-    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #         next_token: "String",
-    #         max_results: 1,
-    #         filter: {
-    #           status: "GENERATING", # accepts GENERATING, SUCCEEDED, FAILED, INCOMPLETE, DELETING
-    #         },
-    #       }
-    #
     # @!attribute [rw] sort_order
     #   Specifies the sort order for the list of returned reports. Valid
     #   values are:
@@ -3320,16 +2833,6 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSharedProjectsInput
-    #   data as a hash:
-    #
-    #       {
-    #         sort_by: "ARN", # accepts ARN, MODIFIED_TIME
-    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #         max_results: 1,
-    #         next_token: "NonEmptyString",
-    #       }
-    #
     # @!attribute [rw] sort_by
     #   The criterion to be used to list build projects shared with the
     #   current Amazon Web Services account or user. Valid values include:
@@ -3400,16 +2903,6 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSharedReportGroupsInput
-    #   data as a hash:
-    #
-    #       {
-    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #         sort_by: "ARN", # accepts ARN, MODIFIED_TIME
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] sort_order
     #   The order in which to list shared report groups. Valid values
     #   include:
@@ -3480,8 +2973,6 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListSourceCredentialsInput AWS API Documentation
     #
     class ListSourceCredentialsInput < Aws::EmptyStructure; end
@@ -3502,23 +2993,6 @@ module Aws::CodeBuild
 
     # Information about logs for a build project. These can be logs in
     # CloudWatch Logs, built in a specified S3 bucket, or both.
-    #
-    # @note When making an API call, you may pass LogsConfig
-    #   data as a hash:
-    #
-    #       {
-    #         cloud_watch_logs: {
-    #           status: "ENABLED", # required, accepts ENABLED, DISABLED
-    #           group_name: "String",
-    #           stream_name: "String",
-    #         },
-    #         s3_logs: {
-    #           status: "ENABLED", # required, accepts ENABLED, DISABLED
-    #           location: "String",
-    #           encryption_disabled: false,
-    #           bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
-    #         },
-    #       }
     #
     # @!attribute [rw] cloud_watch_logs
     #   Information about CloudWatch Logs for a build project. CloudWatch
@@ -3873,22 +3347,6 @@ module Aws::CodeBuild
 
     # Information about the build output artifacts for the build project.
     #
-    # @note When making an API call, you may pass ProjectArtifacts
-    #   data as a hash:
-    #
-    #       {
-    #         type: "CODEPIPELINE", # required, accepts CODEPIPELINE, S3, NO_ARTIFACTS
-    #         location: "String",
-    #         path: "String",
-    #         namespace_type: "NONE", # accepts NONE, BUILD_ID
-    #         name: "String",
-    #         packaging: "NONE", # accepts NONE, ZIP
-    #         override_artifact_name: false,
-    #         encryption_disabled: false,
-    #         artifact_identifier: "String",
-    #         bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
-    #       }
-    #
     # @!attribute [rw] type
     #   The type of build output artifact. Valid values include:
     #
@@ -4117,20 +3575,6 @@ module Aws::CodeBuild
 
     # Contains configuration information about a batch build project.
     #
-    # @note When making an API call, you may pass ProjectBuildBatchConfig
-    #   data as a hash:
-    #
-    #       {
-    #         service_role: "NonEmptyString",
-    #         combine_artifacts: false,
-    #         restrictions: {
-    #           maximum_builds_allowed: 1,
-    #           compute_types_allowed: ["NonEmptyString"],
-    #         },
-    #         timeout_in_mins: 1,
-    #         batch_report_mode: "REPORT_INDIVIDUAL_BUILDS", # accepts REPORT_INDIVIDUAL_BUILDS, REPORT_AGGREGATED_BATCH
-    #       }
-    #
     # @!attribute [rw] service_role
     #   Specifies the service role ARN for the batch build project.
     #   @return [String]
@@ -4180,15 +3624,6 @@ module Aws::CodeBuild
     end
 
     # Information about the cache for the build project.
-    #
-    # @note When making an API call, you may pass ProjectCache
-    #   data as a hash:
-    #
-    #       {
-    #         type: "NO_CACHE", # required, accepts NO_CACHE, S3, LOCAL
-    #         location: "String",
-    #         modes: ["LOCAL_DOCKER_LAYER_CACHE"], # accepts LOCAL_DOCKER_LAYER_CACHE, LOCAL_SOURCE_CACHE, LOCAL_CUSTOM_CACHE
-    #       }
     #
     # @!attribute [rw] type
     #   The type of cache used by the build project. Valid values include:
@@ -4271,29 +3706,6 @@ module Aws::CodeBuild
     end
 
     # Information about the build environment of the build project.
-    #
-    # @note When making an API call, you may pass ProjectEnvironment
-    #   data as a hash:
-    #
-    #       {
-    #         type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER, LINUX_GPU_CONTAINER, ARM_CONTAINER, WINDOWS_SERVER_2019_CONTAINER
-    #         image: "NonEmptyString", # required
-    #         compute_type: "BUILD_GENERAL1_SMALL", # required, accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE, BUILD_GENERAL1_2XLARGE
-    #         environment_variables: [
-    #           {
-    #             name: "NonEmptyString", # required
-    #             value: "String", # required
-    #             type: "PLAINTEXT", # accepts PLAINTEXT, PARAMETER_STORE, SECRETS_MANAGER
-    #           },
-    #         ],
-    #         privileged_mode: false,
-    #         certificate: "String",
-    #         registry_credential: {
-    #           credential: "NonEmptyString", # required
-    #           credential_provider: "SECRETS_MANAGER", # required, accepts SECRETS_MANAGER
-    #         },
-    #         image_pull_credentials_type: "CODEBUILD", # accepts CODEBUILD, SERVICE_ROLE
-    #       }
     #
     # @!attribute [rw] type
     #   The type of build environment to use for related builds.
@@ -4475,17 +3887,6 @@ module Aws::CodeBuild
     #
     # [1]: https://docs.aws.amazon.com/efs/latest/ug/whatisefs.html
     #
-    # @note When making an API call, you may pass ProjectFileSystemLocation
-    #   data as a hash:
-    #
-    #       {
-    #         type: "EFS", # accepts EFS
-    #         location: "String",
-    #         mount_point: "String",
-    #         identifier: "String",
-    #         mount_options: "String",
-    #       }
-    #
     # @!attribute [rw] type
     #   The type of the file system. The one supported type is `EFS`.
     #   @return [String]
@@ -4543,30 +3944,6 @@ module Aws::CodeBuild
     end
 
     # Information about the build input source code for the build project.
-    #
-    # @note When making an API call, you may pass ProjectSource
-    #   data as a hash:
-    #
-    #       {
-    #         type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
-    #         location: "String",
-    #         git_clone_depth: 1,
-    #         git_submodules_config: {
-    #           fetch_submodules: false, # required
-    #         },
-    #         buildspec: "String",
-    #         auth: {
-    #           type: "OAUTH", # required, accepts OAUTH
-    #           resource: "String",
-    #         },
-    #         report_build_status: false,
-    #         build_status_config: {
-    #           context: "String",
-    #           target_url: "String",
-    #         },
-    #         insecure_ssl: false,
-    #         source_identifier: "String",
-    #       }
     #
     # @!attribute [rw] type
     #   The type of repository that contains the source code to be built.
@@ -4744,14 +4121,6 @@ module Aws::CodeBuild
 
     # A source identifier and its corresponding version.
     #
-    # @note When making an API call, you may pass ProjectSourceVersion
-    #   data as a hash:
-    #
-    #       {
-    #         source_identifier: "String", # required
-    #         source_version: "String", # required
-    #       }
-    #
     # @!attribute [rw] source_identifier
     #   An identifier for a source in the build project. The identifier can
     #   only contain alphanumeric characters and underscores, and must be
@@ -4797,14 +4166,6 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutResourcePolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         policy: "NonEmptyString", # required
-    #         resource_arn: "NonEmptyString", # required
-    #       }
-    #
     # @!attribute [rw] policy
     #   A JSON-formatted resource policy. For more information, see [Sharing
     #   a Project][1] and [Sharing a Report Group][2] in the *CodeBuild User
@@ -4856,14 +4217,6 @@ module Aws::CodeBuild
     #
     #
     # [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/sample-private-registry.html
-    #
-    # @note When making an API call, you may pass RegistryCredential
-    #   data as a hash:
-    #
-    #       {
-    #         credential: "NonEmptyString", # required
-    #         credential_provider: "SECRETS_MANAGER", # required, accepts SECRETS_MANAGER
-    #       }
     #
     # @!attribute [rw] credential
     #   The Amazon Resource Name (ARN) or name of credentials created using
@@ -4979,21 +4332,6 @@ module Aws::CodeBuild
 
     # Information about the location where the run of a report is exported.
     #
-    # @note When making an API call, you may pass ReportExportConfig
-    #   data as a hash:
-    #
-    #       {
-    #         export_config_type: "S3", # accepts S3, NO_EXPORT
-    #         s3_destination: {
-    #           bucket: "NonEmptyString",
-    #           bucket_owner: "String",
-    #           path: "String",
-    #           packaging: "ZIP", # accepts ZIP, NONE
-    #           encryption_key: "NonEmptyString",
-    #           encryption_disabled: false,
-    #         },
-    #       }
-    #
     # @!attribute [rw] export_config_type
     #   The export configuration type. Valid values are:
     #
@@ -5018,13 +4356,6 @@ module Aws::CodeBuild
 
     # A filter used to return reports with the status specified by the input
     # `status` parameter.
-    #
-    # @note When making an API call, you may pass ReportFilter
-    #   data as a hash:
-    #
-    #       {
-    #         status: "GENERATING", # accepts GENERATING, SUCCEEDED, FAILED, INCOMPLETE, DELETING
-    #       }
     #
     # @!attribute [rw] status
     #   The status used to filter reports. You can filter using one status
@@ -5199,15 +4530,6 @@ module Aws::CodeBuild
     #
     class ResourceNotFoundException < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass RetryBuildBatchInput
-    #   data as a hash:
-    #
-    #       {
-    #         id: "NonEmptyString",
-    #         idempotency_token: "String",
-    #         retry_type: "RETRY_ALL_BUILDS", # accepts RETRY_ALL_BUILDS, RETRY_FAILED_BUILDS
-    #       }
-    #
     # @!attribute [rw] id
     #   Specifies the identifier of the batch build to restart.
     #   @return [String]
@@ -5246,14 +4568,6 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RetryBuildInput
-    #   data as a hash:
-    #
-    #       {
-    #         id: "NonEmptyString",
-    #         idempotency_token: "String",
-    #       }
-    #
     # @!attribute [rw] id
     #   Specifies the identifier of the build to restart.
     #   @return [String]
@@ -5288,16 +4602,6 @@ module Aws::CodeBuild
     end
 
     # Information about S3 logs for a build project.
-    #
-    # @note When making an API call, you may pass S3LogsConfig
-    #   data as a hash:
-    #
-    #       {
-    #         status: "ENABLED", # required, accepts ENABLED, DISABLED
-    #         location: "String",
-    #         encryption_disabled: false,
-    #         bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
-    #       }
     #
     # @!attribute [rw] status
     #   The current status of the S3 build logs. Valid values are:
@@ -5380,18 +4684,6 @@ module Aws::CodeBuild
     # Information about the S3 bucket where the raw data of a report are
     # exported.
     #
-    # @note When making an API call, you may pass S3ReportExportConfig
-    #   data as a hash:
-    #
-    #       {
-    #         bucket: "NonEmptyString",
-    #         bucket_owner: "String",
-    #         path: "String",
-    #         packaging: "ZIP", # accepts ZIP, NONE
-    #         encryption_key: "NonEmptyString",
-    #         encryption_disabled: false,
-    #       }
-    #
     # @!attribute [rw] bucket
     #   The name of the S3 bucket where the raw data of a report are
     #   exported.
@@ -5446,14 +4738,6 @@ module Aws::CodeBuild
     # This information is for the CodeBuild console's use only. Your code
     # should not get or set this information directly.
     #
-    # @note When making an API call, you may pass SourceAuth
-    #   data as a hash:
-    #
-    #       {
-    #         type: "OAUTH", # required, accepts OAUTH
-    #         resource: "String",
-    #       }
-    #
     # @!attribute [rw] type
     #   <note markdown="1"> This data type is deprecated and is no longer accurate or used.
     #
@@ -5503,132 +4787,6 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartBuildBatchInput
-    #   data as a hash:
-    #
-    #       {
-    #         project_name: "NonEmptyString", # required
-    #         secondary_sources_override: [
-    #           {
-    #             type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
-    #             location: "String",
-    #             git_clone_depth: 1,
-    #             git_submodules_config: {
-    #               fetch_submodules: false, # required
-    #             },
-    #             buildspec: "String",
-    #             auth: {
-    #               type: "OAUTH", # required, accepts OAUTH
-    #               resource: "String",
-    #             },
-    #             report_build_status: false,
-    #             build_status_config: {
-    #               context: "String",
-    #               target_url: "String",
-    #             },
-    #             insecure_ssl: false,
-    #             source_identifier: "String",
-    #           },
-    #         ],
-    #         secondary_sources_version_override: [
-    #           {
-    #             source_identifier: "String", # required
-    #             source_version: "String", # required
-    #           },
-    #         ],
-    #         source_version: "String",
-    #         artifacts_override: {
-    #           type: "CODEPIPELINE", # required, accepts CODEPIPELINE, S3, NO_ARTIFACTS
-    #           location: "String",
-    #           path: "String",
-    #           namespace_type: "NONE", # accepts NONE, BUILD_ID
-    #           name: "String",
-    #           packaging: "NONE", # accepts NONE, ZIP
-    #           override_artifact_name: false,
-    #           encryption_disabled: false,
-    #           artifact_identifier: "String",
-    #           bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
-    #         },
-    #         secondary_artifacts_override: [
-    #           {
-    #             type: "CODEPIPELINE", # required, accepts CODEPIPELINE, S3, NO_ARTIFACTS
-    #             location: "String",
-    #             path: "String",
-    #             namespace_type: "NONE", # accepts NONE, BUILD_ID
-    #             name: "String",
-    #             packaging: "NONE", # accepts NONE, ZIP
-    #             override_artifact_name: false,
-    #             encryption_disabled: false,
-    #             artifact_identifier: "String",
-    #             bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
-    #           },
-    #         ],
-    #         environment_variables_override: [
-    #           {
-    #             name: "NonEmptyString", # required
-    #             value: "String", # required
-    #             type: "PLAINTEXT", # accepts PLAINTEXT, PARAMETER_STORE, SECRETS_MANAGER
-    #           },
-    #         ],
-    #         source_type_override: "CODECOMMIT", # accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
-    #         source_location_override: "String",
-    #         source_auth_override: {
-    #           type: "OAUTH", # required, accepts OAUTH
-    #           resource: "String",
-    #         },
-    #         git_clone_depth_override: 1,
-    #         git_submodules_config_override: {
-    #           fetch_submodules: false, # required
-    #         },
-    #         buildspec_override: "String",
-    #         insecure_ssl_override: false,
-    #         report_build_batch_status_override: false,
-    #         environment_type_override: "WINDOWS_CONTAINER", # accepts WINDOWS_CONTAINER, LINUX_CONTAINER, LINUX_GPU_CONTAINER, ARM_CONTAINER, WINDOWS_SERVER_2019_CONTAINER
-    #         image_override: "NonEmptyString",
-    #         compute_type_override: "BUILD_GENERAL1_SMALL", # accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE, BUILD_GENERAL1_2XLARGE
-    #         certificate_override: "String",
-    #         cache_override: {
-    #           type: "NO_CACHE", # required, accepts NO_CACHE, S3, LOCAL
-    #           location: "String",
-    #           modes: ["LOCAL_DOCKER_LAYER_CACHE"], # accepts LOCAL_DOCKER_LAYER_CACHE, LOCAL_SOURCE_CACHE, LOCAL_CUSTOM_CACHE
-    #         },
-    #         service_role_override: "NonEmptyString",
-    #         privileged_mode_override: false,
-    #         build_timeout_in_minutes_override: 1,
-    #         queued_timeout_in_minutes_override: 1,
-    #         encryption_key_override: "NonEmptyString",
-    #         idempotency_token: "String",
-    #         logs_config_override: {
-    #           cloud_watch_logs: {
-    #             status: "ENABLED", # required, accepts ENABLED, DISABLED
-    #             group_name: "String",
-    #             stream_name: "String",
-    #           },
-    #           s3_logs: {
-    #             status: "ENABLED", # required, accepts ENABLED, DISABLED
-    #             location: "String",
-    #             encryption_disabled: false,
-    #             bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
-    #           },
-    #         },
-    #         registry_credential_override: {
-    #           credential: "NonEmptyString", # required
-    #           credential_provider: "SECRETS_MANAGER", # required, accepts SECRETS_MANAGER
-    #         },
-    #         image_pull_credentials_type_override: "CODEBUILD", # accepts CODEBUILD, SERVICE_ROLE
-    #         build_batch_config_override: {
-    #           service_role: "NonEmptyString",
-    #           combine_artifacts: false,
-    #           restrictions: {
-    #             maximum_builds_allowed: 1,
-    #             compute_types_allowed: ["NonEmptyString"],
-    #           },
-    #           timeout_in_mins: 1,
-    #           batch_report_mode: "REPORT_INDIVIDUAL_BUILDS", # accepts REPORT_INDIVIDUAL_BUILDS, REPORT_AGGREGATED_BATCH
-    #         },
-    #         debug_session_enabled: false,
-    #       }
-    #
     # @!attribute [rw] project_name
     #   The name of the project.
     #   @return [String]
@@ -5928,126 +5086,6 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartBuildInput
-    #   data as a hash:
-    #
-    #       {
-    #         project_name: "NonEmptyString", # required
-    #         secondary_sources_override: [
-    #           {
-    #             type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
-    #             location: "String",
-    #             git_clone_depth: 1,
-    #             git_submodules_config: {
-    #               fetch_submodules: false, # required
-    #             },
-    #             buildspec: "String",
-    #             auth: {
-    #               type: "OAUTH", # required, accepts OAUTH
-    #               resource: "String",
-    #             },
-    #             report_build_status: false,
-    #             build_status_config: {
-    #               context: "String",
-    #               target_url: "String",
-    #             },
-    #             insecure_ssl: false,
-    #             source_identifier: "String",
-    #           },
-    #         ],
-    #         secondary_sources_version_override: [
-    #           {
-    #             source_identifier: "String", # required
-    #             source_version: "String", # required
-    #           },
-    #         ],
-    #         source_version: "String",
-    #         artifacts_override: {
-    #           type: "CODEPIPELINE", # required, accepts CODEPIPELINE, S3, NO_ARTIFACTS
-    #           location: "String",
-    #           path: "String",
-    #           namespace_type: "NONE", # accepts NONE, BUILD_ID
-    #           name: "String",
-    #           packaging: "NONE", # accepts NONE, ZIP
-    #           override_artifact_name: false,
-    #           encryption_disabled: false,
-    #           artifact_identifier: "String",
-    #           bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
-    #         },
-    #         secondary_artifacts_override: [
-    #           {
-    #             type: "CODEPIPELINE", # required, accepts CODEPIPELINE, S3, NO_ARTIFACTS
-    #             location: "String",
-    #             path: "String",
-    #             namespace_type: "NONE", # accepts NONE, BUILD_ID
-    #             name: "String",
-    #             packaging: "NONE", # accepts NONE, ZIP
-    #             override_artifact_name: false,
-    #             encryption_disabled: false,
-    #             artifact_identifier: "String",
-    #             bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
-    #           },
-    #         ],
-    #         environment_variables_override: [
-    #           {
-    #             name: "NonEmptyString", # required
-    #             value: "String", # required
-    #             type: "PLAINTEXT", # accepts PLAINTEXT, PARAMETER_STORE, SECRETS_MANAGER
-    #           },
-    #         ],
-    #         source_type_override: "CODECOMMIT", # accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
-    #         source_location_override: "String",
-    #         source_auth_override: {
-    #           type: "OAUTH", # required, accepts OAUTH
-    #           resource: "String",
-    #         },
-    #         git_clone_depth_override: 1,
-    #         git_submodules_config_override: {
-    #           fetch_submodules: false, # required
-    #         },
-    #         buildspec_override: "String",
-    #         insecure_ssl_override: false,
-    #         report_build_status_override: false,
-    #         build_status_config_override: {
-    #           context: "String",
-    #           target_url: "String",
-    #         },
-    #         environment_type_override: "WINDOWS_CONTAINER", # accepts WINDOWS_CONTAINER, LINUX_CONTAINER, LINUX_GPU_CONTAINER, ARM_CONTAINER, WINDOWS_SERVER_2019_CONTAINER
-    #         image_override: "NonEmptyString",
-    #         compute_type_override: "BUILD_GENERAL1_SMALL", # accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE, BUILD_GENERAL1_2XLARGE
-    #         certificate_override: "String",
-    #         cache_override: {
-    #           type: "NO_CACHE", # required, accepts NO_CACHE, S3, LOCAL
-    #           location: "String",
-    #           modes: ["LOCAL_DOCKER_LAYER_CACHE"], # accepts LOCAL_DOCKER_LAYER_CACHE, LOCAL_SOURCE_CACHE, LOCAL_CUSTOM_CACHE
-    #         },
-    #         service_role_override: "NonEmptyString",
-    #         privileged_mode_override: false,
-    #         timeout_in_minutes_override: 1,
-    #         queued_timeout_in_minutes_override: 1,
-    #         encryption_key_override: "NonEmptyString",
-    #         idempotency_token: "String",
-    #         logs_config_override: {
-    #           cloud_watch_logs: {
-    #             status: "ENABLED", # required, accepts ENABLED, DISABLED
-    #             group_name: "String",
-    #             stream_name: "String",
-    #           },
-    #           s3_logs: {
-    #             status: "ENABLED", # required, accepts ENABLED, DISABLED
-    #             location: "String",
-    #             encryption_disabled: false,
-    #             bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
-    #           },
-    #         },
-    #         registry_credential_override: {
-    #           credential: "NonEmptyString", # required
-    #           credential_provider: "SECRETS_MANAGER", # required, accepts SECRETS_MANAGER
-    #         },
-    #         image_pull_credentials_type_override: "CODEBUILD", # accepts CODEBUILD, SERVICE_ROLE
-    #         debug_session_enabled: false,
-    #       }
-    #
     # @!attribute [rw] project_name
     #   The name of the CodeBuild build project to start running a build.
     #   @return [String]
@@ -6356,13 +5394,6 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopBuildBatchInput
-    #   data as a hash:
-    #
-    #       {
-    #         id: "NonEmptyString", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The identifier of the batch build to stop.
     #   @return [String]
@@ -6387,13 +5418,6 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopBuildInput
-    #   data as a hash:
-    #
-    #       {
-    #         id: "NonEmptyString", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the build.
     #   @return [String]
@@ -6422,14 +5446,6 @@ module Aws::CodeBuild
     #
     # This tag is available for use by Amazon Web Services services that
     # support tags in CodeBuild.
-    #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "KeyInput",
-    #         value: "ValueInput",
-    #       }
     #
     # @!attribute [rw] key
     #   The tag's key.
@@ -6508,14 +5524,6 @@ module Aws::CodeBuild
     # A filter used to return specific types of test cases. In order to pass
     # the filter, the report must meet all of the filter properties.
     #
-    # @note When making an API call, you may pass TestCaseFilter
-    #   data as a hash:
-    #
-    #       {
-    #         status: "String",
-    #         keyword: "String",
-    #       }
-    #
     # @!attribute [rw] status
     #   The status used to filter test cases. A `TestCaseFilter` can have
     #   one status. Valid values are:
@@ -6573,162 +5581,6 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateProjectInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "NonEmptyString", # required
-    #         description: "ProjectDescription",
-    #         source: {
-    #           type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
-    #           location: "String",
-    #           git_clone_depth: 1,
-    #           git_submodules_config: {
-    #             fetch_submodules: false, # required
-    #           },
-    #           buildspec: "String",
-    #           auth: {
-    #             type: "OAUTH", # required, accepts OAUTH
-    #             resource: "String",
-    #           },
-    #           report_build_status: false,
-    #           build_status_config: {
-    #             context: "String",
-    #             target_url: "String",
-    #           },
-    #           insecure_ssl: false,
-    #           source_identifier: "String",
-    #         },
-    #         secondary_sources: [
-    #           {
-    #             type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
-    #             location: "String",
-    #             git_clone_depth: 1,
-    #             git_submodules_config: {
-    #               fetch_submodules: false, # required
-    #             },
-    #             buildspec: "String",
-    #             auth: {
-    #               type: "OAUTH", # required, accepts OAUTH
-    #               resource: "String",
-    #             },
-    #             report_build_status: false,
-    #             build_status_config: {
-    #               context: "String",
-    #               target_url: "String",
-    #             },
-    #             insecure_ssl: false,
-    #             source_identifier: "String",
-    #           },
-    #         ],
-    #         source_version: "String",
-    #         secondary_source_versions: [
-    #           {
-    #             source_identifier: "String", # required
-    #             source_version: "String", # required
-    #           },
-    #         ],
-    #         artifacts: {
-    #           type: "CODEPIPELINE", # required, accepts CODEPIPELINE, S3, NO_ARTIFACTS
-    #           location: "String",
-    #           path: "String",
-    #           namespace_type: "NONE", # accepts NONE, BUILD_ID
-    #           name: "String",
-    #           packaging: "NONE", # accepts NONE, ZIP
-    #           override_artifact_name: false,
-    #           encryption_disabled: false,
-    #           artifact_identifier: "String",
-    #           bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
-    #         },
-    #         secondary_artifacts: [
-    #           {
-    #             type: "CODEPIPELINE", # required, accepts CODEPIPELINE, S3, NO_ARTIFACTS
-    #             location: "String",
-    #             path: "String",
-    #             namespace_type: "NONE", # accepts NONE, BUILD_ID
-    #             name: "String",
-    #             packaging: "NONE", # accepts NONE, ZIP
-    #             override_artifact_name: false,
-    #             encryption_disabled: false,
-    #             artifact_identifier: "String",
-    #             bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
-    #           },
-    #         ],
-    #         cache: {
-    #           type: "NO_CACHE", # required, accepts NO_CACHE, S3, LOCAL
-    #           location: "String",
-    #           modes: ["LOCAL_DOCKER_LAYER_CACHE"], # accepts LOCAL_DOCKER_LAYER_CACHE, LOCAL_SOURCE_CACHE, LOCAL_CUSTOM_CACHE
-    #         },
-    #         environment: {
-    #           type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER, LINUX_GPU_CONTAINER, ARM_CONTAINER, WINDOWS_SERVER_2019_CONTAINER
-    #           image: "NonEmptyString", # required
-    #           compute_type: "BUILD_GENERAL1_SMALL", # required, accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE, BUILD_GENERAL1_2XLARGE
-    #           environment_variables: [
-    #             {
-    #               name: "NonEmptyString", # required
-    #               value: "String", # required
-    #               type: "PLAINTEXT", # accepts PLAINTEXT, PARAMETER_STORE, SECRETS_MANAGER
-    #             },
-    #           ],
-    #           privileged_mode: false,
-    #           certificate: "String",
-    #           registry_credential: {
-    #             credential: "NonEmptyString", # required
-    #             credential_provider: "SECRETS_MANAGER", # required, accepts SECRETS_MANAGER
-    #           },
-    #           image_pull_credentials_type: "CODEBUILD", # accepts CODEBUILD, SERVICE_ROLE
-    #         },
-    #         service_role: "NonEmptyString",
-    #         timeout_in_minutes: 1,
-    #         queued_timeout_in_minutes: 1,
-    #         encryption_key: "NonEmptyString",
-    #         tags: [
-    #           {
-    #             key: "KeyInput",
-    #             value: "ValueInput",
-    #           },
-    #         ],
-    #         vpc_config: {
-    #           vpc_id: "NonEmptyString",
-    #           subnets: ["NonEmptyString"],
-    #           security_group_ids: ["NonEmptyString"],
-    #         },
-    #         badge_enabled: false,
-    #         logs_config: {
-    #           cloud_watch_logs: {
-    #             status: "ENABLED", # required, accepts ENABLED, DISABLED
-    #             group_name: "String",
-    #             stream_name: "String",
-    #           },
-    #           s3_logs: {
-    #             status: "ENABLED", # required, accepts ENABLED, DISABLED
-    #             location: "String",
-    #             encryption_disabled: false,
-    #             bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
-    #           },
-    #         },
-    #         file_system_locations: [
-    #           {
-    #             type: "EFS", # accepts EFS
-    #             location: "String",
-    #             mount_point: "String",
-    #             identifier: "String",
-    #             mount_options: "String",
-    #           },
-    #         ],
-    #         build_batch_config: {
-    #           service_role: "NonEmptyString",
-    #           combine_artifacts: false,
-    #           restrictions: {
-    #             maximum_builds_allowed: 1,
-    #             compute_types_allowed: ["NonEmptyString"],
-    #           },
-    #           timeout_in_mins: 1,
-    #           batch_report_mode: "REPORT_INDIVIDUAL_BUILDS", # accepts REPORT_INDIVIDUAL_BUILDS, REPORT_AGGREGATED_BATCH
-    #         },
-    #         concurrent_build_limit: 1,
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the build project.
     #
@@ -6925,15 +5777,6 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateProjectVisibilityInput
-    #   data as a hash:
-    #
-    #       {
-    #         project_arn: "NonEmptyString", # required
-    #         project_visibility: "PUBLIC_READ", # required, accepts PUBLIC_READ, PRIVATE
-    #         resource_access_role: "NonEmptyString",
-    #       }
-    #
     # @!attribute [rw] project_arn
     #   The Amazon Resource Name (ARN) of the build project.
     #   @return [String]
@@ -6997,30 +5840,6 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateReportGroupInput
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "NonEmptyString", # required
-    #         export_config: {
-    #           export_config_type: "S3", # accepts S3, NO_EXPORT
-    #           s3_destination: {
-    #             bucket: "NonEmptyString",
-    #             bucket_owner: "String",
-    #             path: "String",
-    #             packaging: "ZIP", # accepts ZIP, NONE
-    #             encryption_key: "NonEmptyString",
-    #             encryption_disabled: false,
-    #           },
-    #         },
-    #         tags: [
-    #           {
-    #             key: "KeyInput",
-    #             value: "ValueInput",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] arn
     #   The ARN of the report group to update.
     #   @return [String]
@@ -7063,25 +5882,6 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateWebhookInput
-    #   data as a hash:
-    #
-    #       {
-    #         project_name: "ProjectName", # required
-    #         branch_filter: "String",
-    #         rotate_secret: false,
-    #         filter_groups: [
-    #           [
-    #             {
-    #               type: "EVENT", # required, accepts EVENT, BASE_REF, HEAD_REF, ACTOR_ACCOUNT_ID, FILE_PATH, COMMIT_MESSAGE
-    #               pattern: "String", # required
-    #               exclude_matched_pattern: false,
-    #             },
-    #           ],
-    #         ],
-    #         build_type: "BUILD", # accepts BUILD, BUILD_BATCH
-    #       }
-    #
     # @!attribute [rw] project_name
     #   The name of the CodeBuild project.
     #   @return [String]
@@ -7140,15 +5940,6 @@ module Aws::CodeBuild
     end
 
     # Information about the VPC configuration that CodeBuild accesses.
-    #
-    # @note When making an API call, you may pass VpcConfig
-    #   data as a hash:
-    #
-    #       {
-    #         vpc_id: "NonEmptyString",
-    #         subnets: ["NonEmptyString"],
-    #         security_group_ids: ["NonEmptyString"],
-    #       }
     #
     # @!attribute [rw] vpc_id
     #   The ID of the Amazon VPC.
@@ -7237,15 +6028,6 @@ module Aws::CodeBuild
     end
 
     # A filter used to determine which webhooks trigger a build.
-    #
-    # @note When making an API call, you may pass WebhookFilter
-    #   data as a hash:
-    #
-    #       {
-    #         type: "EVENT", # required, accepts EVENT, BASE_REF, HEAD_REF, ACTOR_ACCOUNT_ID, FILE_PATH, COMMIT_MESSAGE
-    #         pattern: "String", # required
-    #         exclude_matched_pattern: false,
-    #       }
     #
     # @!attribute [rw] type
     #   The type of webhook filter. There are six webhook filter types:

@@ -101,21 +101,6 @@ module Aws::CloudWatchRUM
     # This structure contains much of the configuration data for the app
     # monitor.
     #
-    # @note When making an API call, you may pass AppMonitorConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         allow_cookies: false,
-    #         enable_x_ray: false,
-    #         excluded_pages: ["Url"],
-    #         favorite_pages: ["String"],
-    #         guest_role_arn: "Arn",
-    #         identity_pool_id: "IdentityPoolId",
-    #         included_pages: ["Url"],
-    #         session_sample_rate: 1.0,
-    #         telemetries: ["errors"], # accepts errors, performance, http
-    #       }
-    #
     # @!attribute [rw] allow_cookies
     #   If you set this to `true`, the RUM web client sets two cookies, a
     #   session cookie and a user cookie. The cookies allow the RUM web
@@ -215,15 +200,6 @@ module Aws::CloudWatchRUM
 
     # A structure that contains information about the RUM app monitor.
     #
-    # @note When making an API call, you may pass AppMonitorDetails
-    #   data as a hash:
-    #
-    #       {
-    #         id: "String",
-    #         name: "String",
-    #         version: "String",
-    #       }
-    #
     # @!attribute [rw] id
     #   The unique ID of the app monitor.
     #   @return [String]
@@ -311,26 +287,6 @@ module Aws::CloudWatchRUM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchCreateRumMetricDefinitionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_monitor_name: "AppMonitorName", # required
-    #         destination: "CloudWatch", # required, accepts CloudWatch, Evidently
-    #         destination_arn: "DestinationArn",
-    #         metric_definitions: [ # required
-    #           {
-    #             dimension_keys: {
-    #               "DimensionKey" => "DimensionName",
-    #             },
-    #             event_pattern: "EventPattern",
-    #             name: "MetricName", # required
-    #             unit_label: "UnitLabel",
-    #             value_key: "ValueKey",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] app_monitor_name
     #   The name of the CloudWatch RUM app monitor that is to send the
     #   metrics.
@@ -420,16 +376,6 @@ module Aws::CloudWatchRUM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchDeleteRumMetricDefinitionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_monitor_name: "AppMonitorName", # required
-    #         destination: "CloudWatch", # required, accepts CloudWatch, Evidently
-    #         destination_arn: "DestinationArn",
-    #         metric_definition_ids: ["MetricDefinitionId"], # required
-    #       }
-    #
     # @!attribute [rw] app_monitor_name
     #   The name of the CloudWatch RUM app monitor that is sending these
     #   metrics.
@@ -484,17 +430,6 @@ module Aws::CloudWatchRUM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchGetRumMetricDefinitionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_monitor_name: "AppMonitorName", # required
-    #         destination: "CloudWatch", # required, accepts CloudWatch, Evidently
-    #         destination_arn: "DestinationArn",
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] app_monitor_name
     #   The name of the CloudWatch RUM app monitor that is sending the
     #   metrics.
@@ -581,32 +516,6 @@ module Aws::CloudWatchRUM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAppMonitorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_monitor_configuration: {
-    #           allow_cookies: false,
-    #           enable_x_ray: false,
-    #           excluded_pages: ["Url"],
-    #           favorite_pages: ["String"],
-    #           guest_role_arn: "Arn",
-    #           identity_pool_id: "IdentityPoolId",
-    #           included_pages: ["Url"],
-    #           session_sample_rate: 1.0,
-    #           telemetries: ["errors"], # accepts errors, performance, http
-    #         },
-    #         custom_events: {
-    #           status: "ENABLED", # accepts ENABLED, DISABLED
-    #         },
-    #         cw_log_enabled: false,
-    #         domain: "AppMonitorDomain", # required
-    #         name: "AppMonitorName", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] app_monitor_configuration
     #   A structure that contains much of the configuration data for the app
     #   monitor. If you are using Amazon Cognito for authorization, you must
@@ -705,13 +614,6 @@ module Aws::CloudWatchRUM
     # A structure that contains information about custom events for this app
     # monitor.
     #
-    # @note When making an API call, you may pass CustomEvents
-    #   data as a hash:
-    #
-    #       {
-    #         status: "ENABLED", # accepts ENABLED, DISABLED
-    #       }
-    #
     # @!attribute [rw] status
     #   Specifies whether this app monitor allows the web client to define
     #   and send custom events. The default is for custom events to be
@@ -768,13 +670,6 @@ module Aws::CloudWatchRUM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAppMonitorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "AppMonitorName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the app monitor to delete.
     #   @return [String]
@@ -791,15 +686,6 @@ module Aws::CloudWatchRUM
     #
     class DeleteAppMonitorResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteRumMetricsDestinationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_monitor_name: "AppMonitorName", # required
-    #         destination: "CloudWatch", # required, accepts CloudWatch, Evidently
-    #         destination_arn: "DestinationArn",
-    #       }
-    #
     # @!attribute [rw] app_monitor_name
     #   The name of the app monitor that is sending metrics to the
     #   destination that you want to delete.
@@ -831,25 +717,6 @@ module Aws::CloudWatchRUM
     #
     class DeleteRumMetricsDestinationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass GetAppMonitorDataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             name: "QueryFilterKey",
-    #             values: ["QueryFilterValue"],
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         name: "AppMonitorName", # required
-    #         next_token: "Token",
-    #         time_range: { # required
-    #           after: 1, # required
-    #           before: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] filters
     #   An array of structures that you can use to filter the results to
     #   those that match one or more sets of key-value pairs that you
@@ -905,13 +772,6 @@ module Aws::CloudWatchRUM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAppMonitorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "AppMonitorName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The app monitor to retrieve information for.
     #   @return [String]
@@ -955,14 +815,6 @@ module Aws::CloudWatchRUM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAppMonitorsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to return in one operation. The
     #   default is 50. The maximum that you can specify is 100.
@@ -1001,15 +853,6 @@ module Aws::CloudWatchRUM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRumMetricsDestinationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_monitor_name: "AppMonitorName", # required
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] app_monitor_name
     #   The name of the app monitor associated with the destinations that
     #   you want to retrieve.
@@ -1057,13 +900,6 @@ module Aws::CloudWatchRUM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource that you want to see the tags of.
     #   @return [String]
@@ -1213,19 +1049,6 @@ module Aws::CloudWatchRUM
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-vended-metrics.html
     #
-    # @note When making an API call, you may pass MetricDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dimension_keys: {
-    #           "DimensionKey" => "DimensionName",
-    #         },
-    #         event_pattern: "EventPattern",
-    #         name: "MetricName", # required
-    #         unit_label: "UnitLabel",
-    #         value_key: "ValueKey",
-    #       }
-    #
     # @!attribute [rw] dimension_keys
     #   Use this field only if you are sending the metric to CloudWatch.
     #
@@ -1364,32 +1187,6 @@ module Aws::CloudWatchRUM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutRumEventsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_monitor_details: { # required
-    #           id: "String",
-    #           name: "String",
-    #           version: "String",
-    #         },
-    #         batch_id: "String", # required
-    #         id: "AppMonitorId", # required
-    #         rum_events: [ # required
-    #           {
-    #             details: "JsonValue", # required
-    #             id: "String", # required
-    #             metadata: "JsonValue",
-    #             timestamp: Time.now, # required
-    #             type: "String", # required
-    #           },
-    #         ],
-    #         user_details: { # required
-    #           session_id: "String",
-    #           user_id: "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] app_monitor_details
     #   A structure that contains information about the app monitor that
     #   collected this telemetry information.
@@ -1428,16 +1225,6 @@ module Aws::CloudWatchRUM
     #
     class PutRumEventsResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass PutRumMetricsDestinationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_monitor_name: "AppMonitorName", # required
-    #         destination: "CloudWatch", # required, accepts CloudWatch, Evidently
-    #         destination_arn: "DestinationArn",
-    #         iam_role_arn: "IamRoleArn",
-    #       }
-    #
     # @!attribute [rw] app_monitor_name
     #   The name of the CloudWatch RUM app monitor that will send the
     #   metrics.
@@ -1495,14 +1282,6 @@ module Aws::CloudWatchRUM
     # the value to return all events except events from user sessions with
     # the Chrome browser.
     #
-    # @note When making an API call, you may pass QueryFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "QueryFilterKey",
-    #         values: ["QueryFilterValue"],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of a key to search for. The filter returns only the events
     #   that match the `Name` and `Values` that you specify.
@@ -1550,17 +1329,6 @@ module Aws::CloudWatchRUM
 
     # A structure that contains the information for one performance event
     # that RUM collects from a user session with your application.
-    #
-    # @note When making an API call, you may pass RumEvent
-    #   data as a hash:
-    #
-    #       {
-    #         details: "JsonValue", # required
-    #         id: "String", # required
-    #         metadata: "JsonValue",
-    #         timestamp: Time.now, # required
-    #         type: "String", # required
-    #       }
     #
     # @!attribute [rw] details
     #   A string containing details about the event.
@@ -1611,16 +1379,6 @@ module Aws::CloudWatchRUM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the CloudWatch RUM resource that you're adding tags to.
     #   @return [String]
@@ -1673,14 +1431,6 @@ module Aws::CloudWatchRUM
     # A structure that defines the time range that you want to retrieve
     # results from.
     #
-    # @note When making an API call, you may pass TimeRange
-    #   data as a hash:
-    #
-    #       {
-    #         after: 1, # required
-    #         before: 1,
-    #       }
-    #
     # @!attribute [rw] after
     #   The beginning of the time range to retrieve performance events from.
     #   @return [Integer]
@@ -1700,14 +1450,6 @@ module Aws::CloudWatchRUM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the CloudWatch RUM resource that you're removing tags
     #   from.
@@ -1730,29 +1472,6 @@ module Aws::CloudWatchRUM
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateAppMonitorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_monitor_configuration: {
-    #           allow_cookies: false,
-    #           enable_x_ray: false,
-    #           excluded_pages: ["Url"],
-    #           favorite_pages: ["String"],
-    #           guest_role_arn: "Arn",
-    #           identity_pool_id: "IdentityPoolId",
-    #           included_pages: ["Url"],
-    #           session_sample_rate: 1.0,
-    #           telemetries: ["errors"], # accepts errors, performance, http
-    #         },
-    #         custom_events: {
-    #           status: "ENABLED", # accepts ENABLED, DISABLED
-    #         },
-    #         cw_log_enabled: false,
-    #         domain: "AppMonitorDomain",
-    #         name: "AppMonitorName", # required
-    #       }
-    #
     # @!attribute [rw] app_monitor_configuration
     #   A structure that contains much of the configuration data for the app
     #   monitor. If you are using Amazon Cognito for authorization, you must
@@ -1813,25 +1532,6 @@ module Aws::CloudWatchRUM
     #
     class UpdateAppMonitorResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateRumMetricDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_monitor_name: "AppMonitorName", # required
-    #         destination: "CloudWatch", # required, accepts CloudWatch, Evidently
-    #         destination_arn: "DestinationArn",
-    #         metric_definition: { # required
-    #           dimension_keys: {
-    #             "DimensionKey" => "DimensionName",
-    #           },
-    #           event_pattern: "EventPattern",
-    #           name: "MetricName", # required
-    #           unit_label: "UnitLabel",
-    #           value_key: "ValueKey",
-    #         },
-    #         metric_definition_id: "MetricDefinitionId", # required
-    #       }
-    #
     # @!attribute [rw] app_monitor_name
     #   The name of the CloudWatch RUM app monitor that sends these metrics.
     #   @return [String]
@@ -1885,14 +1585,6 @@ module Aws::CloudWatchRUM
 
     # A structure that contains information about the user session that this
     # batch of events was collected from.
-    #
-    # @note When making an API call, you may pass UserDetails
-    #   data as a hash:
-    #
-    #       {
-    #         session_id: "String",
-    #         user_id: "String",
-    #       }
     #
     # @!attribute [rw] session_id
     #   The session ID that the performance events are from.

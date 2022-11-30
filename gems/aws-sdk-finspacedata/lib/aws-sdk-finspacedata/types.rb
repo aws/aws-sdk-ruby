@@ -23,15 +23,6 @@ module Aws::FinSpaceData
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateUserToPermissionGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         permission_group_id: "PermissionGroupId", # required
-    #         user_id: "UserId", # required
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] permission_group_id
     #   The unique identifier for the permission group.
     #   @return [String]
@@ -243,15 +234,6 @@ module Aws::FinSpaceData
 
     # The definition of a column in a tabular Dataset.
     #
-    # @note When making an API call, you may pass ColumnDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         data_type: "STRING", # accepts STRING, CHAR, INTEGER, TINYINT, SMALLINT, BIGINT, FLOAT, DOUBLE, DATE, DATETIME, BOOLEAN, BINARY
-    #         column_name: "ColumnName",
-    #         column_description: "ColumnDescription",
-    #       }
-    #
     # @!attribute [rw] data_type
     #   Data type of a column.
     #
@@ -316,21 +298,6 @@ module Aws::FinSpaceData
     end
 
     # The request for a CreateChangeset operation.
-    #
-    # @note When making an API call, you may pass CreateChangesetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         dataset_id: "DatasetId", # required
-    #         change_type: "REPLACE", # required, accepts REPLACE, APPEND, MODIFY
-    #         source_params: { # required
-    #           "StringMapKey" => "StringMapValue",
-    #         },
-    #         format_params: { # required
-    #           "StringMapKey" => "StringMapValue",
-    #         },
-    #       }
     #
     # @!attribute [rw] client_token
     #   A token that ensures idempotency. This token expires in 10 minutes.
@@ -448,25 +415,6 @@ module Aws::FinSpaceData
 
     # Request for creating a data view.
     #
-    # @note When making an API call, you may pass CreateDataViewRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         dataset_id: "DatasetId", # required
-    #         auto_update: false,
-    #         sort_columns: ["StringValueLength1to255"],
-    #         partition_columns: ["StringValueLength1to255"],
-    #         as_of_timestamp: 1,
-    #         destination_type_params: { # required
-    #           destination_type: "DataViewDestinationType", # required
-    #           s3_destination_export_file_format: "PARQUET", # accepts PARQUET, DELIMITED_TEXT
-    #           s3_destination_export_file_format_options: {
-    #             "StringMapKey" => "StringMapValue",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_token
     #   A token that ensures idempotency. This token expires in 10 minutes.
     #
@@ -534,42 +482,6 @@ module Aws::FinSpaceData
     end
 
     # The request for a CreateDataset operation
-    #
-    # @note When making an API call, you may pass CreateDatasetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         dataset_title: "DatasetTitle", # required
-    #         kind: "TABULAR", # required, accepts TABULAR, NON_TABULAR
-    #         dataset_description: "DatasetDescription",
-    #         owner_info: {
-    #           name: "OwnerName",
-    #           phone_number: "PhoneNumber",
-    #           email: "Email",
-    #         },
-    #         permission_group_params: { # required
-    #           permission_group_id: "PermissionGroupId",
-    #           dataset_permissions: [
-    #             {
-    #               permission: "StringValueLength1to250",
-    #             },
-    #           ],
-    #         },
-    #         alias: "AliasString",
-    #         schema_definition: {
-    #           tabular_schema_config: {
-    #             columns: [
-    #               {
-    #                 data_type: "STRING", # accepts STRING, CHAR, INTEGER, TINYINT, SMALLINT, BIGINT, FLOAT, DOUBLE, DATE, DATETIME, BOOLEAN, BINARY
-    #                 column_name: "ColumnName",
-    #                 column_description: "ColumnDescription",
-    #               },
-    #             ],
-    #             primary_key_columns: ["ColumnName"],
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] client_token
     #   A token that ensures idempotency. This token expires in 10 minutes.
@@ -639,16 +551,6 @@ module Aws::FinSpaceData
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreatePermissionGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "PermissionGroupName", # required
-    #         description: "PermissionGroupDescription",
-    #         application_permissions: ["CreateDataset"], # required, accepts CreateDataset, ManageClusters, ManageUsersAndGroups, ManageAttributeSets, ViewAuditData, AccessNotebooks, GetTemporaryCredentials
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the permission group.
     #   @return [String]
@@ -717,19 +619,6 @@ module Aws::FinSpaceData
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         email_address: "Email", # required
-    #         type: "SUPER_USER", # required, accepts SUPER_USER, APP_USER
-    #         first_name: "FirstName",
-    #         last_name: "LastName",
-    #         api_access: "ENABLED", # accepts ENABLED, DISABLED
-    #         api_access_principal_arn: "RoleArn",
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] email_address
     #   The email address of the user that you want to register. The email
     #   address serves as a uniquer identifier for each user and cannot be
@@ -831,17 +720,6 @@ module Aws::FinSpaceData
     end
 
     # Structure for the Dataview destination type parameters.
-    #
-    # @note When making an API call, you may pass DataViewDestinationTypeParams
-    #   data as a hash:
-    #
-    #       {
-    #         destination_type: "DataViewDestinationType", # required
-    #         s3_destination_export_file_format: "PARQUET", # accepts PARQUET, DELIMITED_TEXT
-    #         s3_destination_export_file_format_options: {
-    #           "StringMapKey" => "StringMapValue",
-    #         },
-    #       }
     #
     # @!attribute [rw] destination_type
     #   Destination type for a Dataview.
@@ -1081,15 +959,6 @@ module Aws::FinSpaceData
 
     # A structure for Dataset owner info.
     #
-    # @note When making an API call, you may pass DatasetOwnerInfo
-    #   data as a hash:
-    #
-    #       {
-    #         name: "OwnerName",
-    #         phone_number: "PhoneNumber",
-    #         email: "Email",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the Dataset owner.
     #   @return [String]
@@ -1113,14 +982,6 @@ module Aws::FinSpaceData
     end
 
     # The request for a DeleteDataset operation.
-    #
-    # @note When making an API call, you may pass DeleteDatasetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         dataset_id: "DatasetId", # required
-    #       }
     #
     # @!attribute [rw] client_token
     #   A token that ensures idempotency. This token expires in 10 minutes.
@@ -1156,14 +1017,6 @@ module Aws::FinSpaceData
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeletePermissionGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         permission_group_id: "PermissionGroupId", # required
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] permission_group_id
     #   The unique identifier for the permission group that you want to
     #   delete.
@@ -1197,14 +1050,6 @@ module Aws::FinSpaceData
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisableUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_id: "UserId", # required
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] user_id
     #   The unique identifier for the user account that you want to disable.
     #   @return [String]
@@ -1237,15 +1082,6 @@ module Aws::FinSpaceData
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateUserFromPermissionGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         permission_group_id: "PermissionGroupId", # required
-    #         user_id: "UserId", # required
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] permission_group_id
     #   The unique identifier for the permission group.
     #   @return [String]
@@ -1283,14 +1119,6 @@ module Aws::FinSpaceData
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass EnableUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_id: "UserId", # required
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] user_id
     #   The unique identifier for the user account that you want to enable.
     #   @return [String]
@@ -1324,14 +1152,6 @@ module Aws::FinSpaceData
     end
 
     # Request to describe a changeset.
-    #
-    # @note When making an API call, you may pass GetChangesetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_id: "DatasetId", # required
-    #         changeset_id: "ChangesetId", # required
-    #       }
     #
     # @!attribute [rw] dataset_id
     #   The unique identifier for the FinSpace Dataset where the Changeset
@@ -1446,14 +1266,6 @@ module Aws::FinSpaceData
     # Request for retrieving a data view detail. Grouped / accessible within
     # a dataset by its dataset id.
     #
-    # @note When making an API call, you may pass GetDataViewRequest
-    #   data as a hash:
-    #
-    #       {
-    #         data_view_id: "DataViewId", # required
-    #         dataset_id: "DatasetId", # required
-    #       }
-    #
     # @!attribute [rw] data_view_id
     #   The unique identifier for the Dataview.
     #   @return [String]
@@ -1567,13 +1379,6 @@ module Aws::FinSpaceData
 
     # Request for the GetDataset operation.
     #
-    # @note When making an API call, you may pass GetDatasetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_id: "StringValueLength1to255", # required
-    #       }
-    #
     # @!attribute [rw] dataset_id
     #   The unique identifier for a Dataset.
     #   @return [String]
@@ -1662,14 +1467,6 @@ module Aws::FinSpaceData
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetExternalDataViewAccessDetailsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         data_view_id: "DataViewId", # required
-    #         dataset_id: "DatasetId", # required
-    #       }
-    #
     # @!attribute [rw] data_view_id
     #   The unique identifier for the Dataview that you want to access.
     #   @return [String]
@@ -1705,13 +1502,6 @@ module Aws::FinSpaceData
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetPermissionGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         permission_group_id: "PermissionGroupId", # required
-    #       }
-    #
     # @!attribute [rw] permission_group_id
     #   The unique identifier for the permission group.
     #   @return [String]
@@ -1737,14 +1527,6 @@ module Aws::FinSpaceData
     end
 
     # Request for GetProgrammaticAccessCredentials operation
-    #
-    # @note When making an API call, you may pass GetProgrammaticAccessCredentialsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         duration_in_minutes: 1,
-    #         environment_id: "IdType", # required
-    #       }
     #
     # @!attribute [rw] duration_in_minutes
     #   The time duration in which the credentials remain valid.
@@ -1782,13 +1564,6 @@ module Aws::FinSpaceData
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_id: "UserId", # required
-    #       }
-    #
     # @!attribute [rw] user_id
     #   The unique identifier of the user to get data for.
     #   @return [String]
@@ -1905,13 +1680,6 @@ module Aws::FinSpaceData
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetWorkingLocationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         location_type: "INGESTION", # accepts INGESTION, SAGEMAKER
-    #       }
-    #
     # @!attribute [rw] location_type
     #   Specify the type of the working location.
     #
@@ -1983,15 +1751,6 @@ module Aws::FinSpaceData
 
     # Request to ListChangesetsRequest. It exposes minimal query filters.
     #
-    # @note When making an API call, you may pass ListChangesetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_id: "DatasetId", # required
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] dataset_id
     #   The unique identifier for the FinSpace Dataset to which the
     #   Changeset belongs.
@@ -2037,15 +1796,6 @@ module Aws::FinSpaceData
 
     # Request for a list data views.
     #
-    # @note When making an API call, you may pass ListDataViewsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_id: "DatasetId", # required
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] dataset_id
     #   The unique identifier of the Dataset for which to retrieve
     #   Dataviews.
@@ -2088,14 +1838,6 @@ module Aws::FinSpaceData
 
     # Request for the ListDatasets operation.
     #
-    # @note When making an API call, you may pass ListDatasetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   A token that indicates where a results page should begin.
     #   @return [String]
@@ -2132,15 +1874,6 @@ module Aws::FinSpaceData
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPermissionGroupsByUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_id: "UserId", # required
-    #         next_token: "PaginationToken",
-    #         max_results: 1, # required
-    #       }
-    #
     # @!attribute [rw] user_id
     #   The unique identifier for the user.
     #   @return [String]
@@ -2180,14 +1913,6 @@ module Aws::FinSpaceData
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPermissionGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "PaginationToken",
-    #         max_results: 1, # required
-    #       }
-    #
     # @!attribute [rw] next_token
     #   A token that indicates where a results page should begin.
     #   @return [String]
@@ -2222,15 +1947,6 @@ module Aws::FinSpaceData
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListUsersByPermissionGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         permission_group_id: "PermissionGroupId", # required
-    #         next_token: "PaginationToken",
-    #         max_results: 1, # required
-    #       }
-    #
     # @!attribute [rw] permission_group_id
     #   The unique identifier for the permission group.
     #   @return [String]
@@ -2270,14 +1986,6 @@ module Aws::FinSpaceData
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListUsersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "PaginationToken",
-    #         max_results: 1, # required
-    #       }
-    #
     # @!attribute [rw] next_token
     #   A token that indicates where a results page should begin.
     #   @return [String]
@@ -2436,18 +2144,6 @@ module Aws::FinSpaceData
     # \{"permission": "AddDatasetData"\}, \{"permission":
     # "EditDatasetMetadata"\}, \{"permission": "DeleteDataset"\} ] \} `
     #
-    # @note When making an API call, you may pass PermissionGroupParams
-    #   data as a hash:
-    #
-    #       {
-    #         permission_group_id: "PermissionGroupId",
-    #         dataset_permissions: [
-    #           {
-    #             permission: "StringValueLength1to250",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] permission_group_id
     #   The unique identifier for the `PermissionGroup`.
     #   @return [String]
@@ -2465,14 +2161,6 @@ module Aws::FinSpaceData
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ResetUserPasswordRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_id: "UserId", # required
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] user_id
     #   The unique identifier of the user that a temporary password is
     #   requested for.
@@ -2557,13 +2245,6 @@ module Aws::FinSpaceData
     #
     # [1]: https://docs.aws.amazon.com/finspace/latest/userguide/managing-user-permissions.html#supported-dataset-permissions
     #
-    # @note When making an API call, you may pass ResourcePermission
-    #   data as a hash:
-    #
-    #       {
-    #         permission: "StringValueLength1to250",
-    #       }
-    #
     # @!attribute [rw] permission
     #   Permission for a resource.
     #   @return [String]
@@ -2598,20 +2279,6 @@ module Aws::FinSpaceData
 
     # Definition for a schema on a tabular Dataset.
     #
-    # @note When making an API call, you may pass SchemaDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         columns: [
-    #           {
-    #             data_type: "STRING", # accepts STRING, CHAR, INTEGER, TINYINT, SMALLINT, BIGINT, FLOAT, DOUBLE, DATE, DATETIME, BOOLEAN, BINARY
-    #             column_name: "ColumnName",
-    #             column_description: "ColumnDescription",
-    #           },
-    #         ],
-    #         primary_key_columns: ["ColumnName"],
-    #       }
-    #
     # @!attribute [rw] columns
     #   List of column definitions.
     #   @return [Array<Types::ColumnDefinition>]
@@ -2630,22 +2297,6 @@ module Aws::FinSpaceData
     end
 
     # A union of schema types.
-    #
-    # @note When making an API call, you may pass SchemaUnion
-    #   data as a hash:
-    #
-    #       {
-    #         tabular_schema_config: {
-    #           columns: [
-    #             {
-    #               data_type: "STRING", # accepts STRING, CHAR, INTEGER, TINYINT, SMALLINT, BIGINT, FLOAT, DOUBLE, DATE, DATETIME, BOOLEAN, BINARY
-    #               column_name: "ColumnName",
-    #               column_description: "ColumnDescription",
-    #             },
-    #           ],
-    #           primary_key_columns: ["ColumnName"],
-    #         },
-    #       }
     #
     # @!attribute [rw] tabular_schema_config
     #   The configuration for a schema on a tabular Dataset.
@@ -2666,21 +2317,6 @@ module Aws::FinSpaceData
     class ThrottlingException < Aws::EmptyStructure; end
 
     # Request to update an existing changeset.
-    #
-    # @note When making an API call, you may pass UpdateChangesetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         dataset_id: "DatasetId", # required
-    #         changeset_id: "ChangesetId", # required
-    #         source_params: { # required
-    #           "StringMapKey" => "StringMapValue",
-    #         },
-    #         format_params: { # required
-    #           "StringMapKey" => "StringMapValue",
-    #         },
-    #       }
     #
     # @!attribute [rw] client_token
     #   A token that ensures idempotency. This token expires in 10 minutes.
@@ -2789,30 +2425,6 @@ module Aws::FinSpaceData
 
     # The request for an UpdateDataset operation
     #
-    # @note When making an API call, you may pass UpdateDatasetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         dataset_id: "DatasetId", # required
-    #         dataset_title: "DatasetTitle", # required
-    #         kind: "TABULAR", # required, accepts TABULAR, NON_TABULAR
-    #         dataset_description: "DatasetDescription",
-    #         alias: "AliasString",
-    #         schema_definition: {
-    #           tabular_schema_config: {
-    #             columns: [
-    #               {
-    #                 data_type: "STRING", # accepts STRING, CHAR, INTEGER, TINYINT, SMALLINT, BIGINT, FLOAT, DOUBLE, DATE, DATETIME, BOOLEAN, BINARY
-    #                 column_name: "ColumnName",
-    #                 column_description: "ColumnDescription",
-    #               },
-    #             ],
-    #             primary_key_columns: ["ColumnName"],
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_token
     #   A token that ensures idempotency. This token expires in 10 minutes.
     #
@@ -2876,17 +2488,6 @@ module Aws::FinSpaceData
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdatePermissionGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         permission_group_id: "PermissionGroupId", # required
-    #         name: "PermissionGroupName",
-    #         description: "PermissionGroupDescription",
-    #         application_permissions: ["CreateDataset"], # accepts CreateDataset, ManageClusters, ManageUsersAndGroups, ManageAttributeSets, ViewAuditData, AccessNotebooks, GetTemporaryCredentials
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] permission_group_id
     #   The unique identifier for the permission group to update.
     #   @return [String]
@@ -2960,19 +2561,6 @@ module Aws::FinSpaceData
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_id: "UserId", # required
-    #         type: "SUPER_USER", # accepts SUPER_USER, APP_USER
-    #         first_name: "FirstName",
-    #         last_name: "LastName",
-    #         api_access: "ENABLED", # accepts ENABLED, DISABLED
-    #         api_access_principal_arn: "RoleArn",
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] user_id
     #   The unique identifier for the user account to update.
     #   @return [String]

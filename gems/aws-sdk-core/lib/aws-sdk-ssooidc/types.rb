@@ -45,20 +45,6 @@ module Aws::SSOOIDC
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateTokenRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_id: "ClientId", # required
-    #         client_secret: "ClientSecret", # required
-    #         grant_type: "GrantType", # required
-    #         device_code: "DeviceCode",
-    #         code: "AuthCode",
-    #         refresh_token: "RefreshToken",
-    #         scope: ["Scope"],
-    #         redirect_uri: "URI",
-    #       }
-    #
     # @!attribute [rw] client_id
     #   The unique identifier string for each client. This value should come
     #   from the persisted result of the RegisterClient API.
@@ -317,15 +303,6 @@ module Aws::SSOOIDC
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RegisterClientRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_name: "ClientName", # required
-    #         client_type: "ClientType", # required
-    #         scopes: ["Scope"],
-    #       }
-    #
     # @!attribute [rw] client_name
     #   The friendly name of the client.
     #   @return [String]
@@ -410,15 +387,6 @@ module Aws::SSOOIDC
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartDeviceAuthorizationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_id: "ClientId", # required
-    #         client_secret: "ClientSecret", # required
-    #         start_url: "URI", # required
-    #       }
-    #
     # @!attribute [rw] client_id
     #   The unique identifier string for the client that is registered with
     #   IAM Identity Center. This value should come from the persisted

@@ -28,28 +28,6 @@ module Aws::Cloud9
     #
     class ConflictException < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass CreateEnvironmentEC2Request
-    #   data as a hash:
-    #
-    #       {
-    #         name: "EnvironmentName", # required
-    #         description: "EnvironmentDescription",
-    #         client_request_token: "ClientRequestToken",
-    #         instance_type: "InstanceType", # required
-    #         subnet_id: "SubnetId",
-    #         image_id: "ImageId",
-    #         automatic_stop_time_minutes: 1,
-    #         owner_arn: "UserArn",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         connection_type: "CONNECT_SSH", # accepts CONNECT_SSH, CONNECT_SSM
-    #         dry_run: false,
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the environment to create.
     #
@@ -184,15 +162,6 @@ module Aws::Cloud9
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateEnvironmentMembershipRequest
-    #   data as a hash:
-    #
-    #       {
-    #         environment_id: "EnvironmentId", # required
-    #         user_arn: "UserArn", # required
-    #         permissions: "read-write", # required, accepts read-write, read-only
-    #       }
-    #
     # @!attribute [rw] environment_id
     #   The ID of the environment that contains the environment member you
     #   want to add.
@@ -234,14 +203,6 @@ module Aws::Cloud9
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteEnvironmentMembershipRequest
-    #   data as a hash:
-    #
-    #       {
-    #         environment_id: "EnvironmentId", # required
-    #         user_arn: "UserArn", # required
-    #       }
-    #
     # @!attribute [rw] environment_id
     #   The ID of the environment to delete the environment member from.
     #   @return [String]
@@ -264,13 +225,6 @@ module Aws::Cloud9
     #
     class DeleteEnvironmentMembershipResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteEnvironmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         environment_id: "EnvironmentId", # required
-    #       }
-    #
     # @!attribute [rw] environment_id
     #   The ID of the environment to delete.
     #   @return [String]
@@ -287,17 +241,6 @@ module Aws::Cloud9
     #
     class DeleteEnvironmentResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeEnvironmentMembershipsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_arn: "UserArn",
-    #         environment_id: "EnvironmentId",
-    #         permissions: ["owner"], # accepts owner, read-write, read-only
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] user_arn
     #   The Amazon Resource Name (ARN) of an individual environment member
     #   to get information about. If no value is specified, information
@@ -369,13 +312,6 @@ module Aws::Cloud9
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEnvironmentStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         environment_id: "EnvironmentId", # required
-    #       }
-    #
     # @!attribute [rw] environment_id
     #   The ID of the environment to get status information about.
     #   @return [String]
@@ -419,13 +355,6 @@ module Aws::Cloud9
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEnvironmentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         environment_ids: ["EnvironmentId"], # required
-    #       }
-    #
     # @!attribute [rw] environment_ids
     #   The IDs of individual environments to get information about.
     #   @return [Array<String>]
@@ -630,14 +559,6 @@ module Aws::Cloud9
     #
     class LimitExceededException < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass ListEnvironmentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   During a previous call, if there are more than 25 items in the list,
     #   only the first 25 items are returned, along with a unique string
@@ -681,13 +602,6 @@ module Aws::Cloud9
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "EnvironmentArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the Cloud9 development environment
     #   to get the tags for.
@@ -726,14 +640,6 @@ module Aws::Cloud9
     # automatically created by Amazon Web Services services. A system tag is
     # prefixed with `"aws:"` and cannot be modified by the user.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The **name** part of a tag.
     #   @return [String]
@@ -751,19 +657,6 @@ module Aws::Cloud9
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "EnvironmentArn", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the Cloud9 development environment
     #   to add tags to.
@@ -792,14 +685,6 @@ module Aws::Cloud9
     #
     class TooManyRequestsException < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "EnvironmentArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the Cloud9 development environment
     #   to remove tags from.
@@ -823,15 +708,6 @@ module Aws::Cloud9
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateEnvironmentMembershipRequest
-    #   data as a hash:
-    #
-    #       {
-    #         environment_id: "EnvironmentId", # required
-    #         user_arn: "UserArn", # required
-    #         permissions: "read-write", # required, accepts read-write, read-only
-    #       }
-    #
     # @!attribute [rw] environment_id
     #   The ID of the environment for the environment member whose settings
     #   you want to change.
@@ -874,16 +750,6 @@ module Aws::Cloud9
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateEnvironmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         environment_id: "EnvironmentId", # required
-    #         name: "EnvironmentName",
-    #         description: "EnvironmentDescription",
-    #         managed_credentials_action: "ENABLE", # accepts ENABLE, DISABLE
-    #       }
-    #
     # @!attribute [rw] environment_id
     #   The ID of the environment to change settings.
     #   @return [String]

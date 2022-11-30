@@ -26,21 +26,6 @@ module Aws::LookoutMetrics
     # A configuration that specifies the action to perform when anomalies
     # are detected.
     #
-    # @note When making an API call, you may pass Action
-    #   data as a hash:
-    #
-    #       {
-    #         sns_configuration: {
-    #           role_arn: "Arn", # required
-    #           sns_topic_arn: "Arn", # required
-    #           sns_format: "LONG_TEXT", # accepts LONG_TEXT, SHORT_TEXT, JSON
-    #         },
-    #         lambda_configuration: {
-    #           role_arn: "Arn", # required
-    #           lambda_arn: "Arn", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] sns_configuration
     #   A configuration for an Amazon SNS channel.
     #   @return [Types::SNSConfiguration]
@@ -58,13 +43,6 @@ module Aws::LookoutMetrics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ActivateAnomalyDetectorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         anomaly_detector_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] anomaly_detector_arn
     #   The ARN of the anomaly detector.
     #   @return [String]
@@ -148,19 +126,6 @@ module Aws::LookoutMetrics
 
     # The configuration of the alert filters.
     #
-    # @note When making an API call, you may pass AlertFilters
-    #   data as a hash:
-    #
-    #       {
-    #         metric_list: ["MetricName"],
-    #         dimension_filter_list: [
-    #           {
-    #             dimension_name: "ColumnName",
-    #             dimension_value_list: ["DimensionValue"],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] metric_list
     #   The list of measures that you want to get alerts for.
     #   @return [Array<String>]
@@ -238,13 +203,6 @@ module Aws::LookoutMetrics
     end
 
     # Contains information about a detector's configuration.
-    #
-    # @note When making an API call, you may pass AnomalyDetectorConfig
-    #   data as a hash:
-    #
-    #       {
-    #         anomaly_detector_frequency: "P1D", # accepts P1D, PT1H, PT10M, PT5M
-    #       }
     #
     # @!attribute [rw] anomaly_detector_frequency
     #   The frequency at which the detector analyzes its source data.
@@ -440,14 +398,6 @@ module Aws::LookoutMetrics
 
     # An anomalous metric in an anomaly group.
     #
-    # @note When making an API call, you may pass AnomalyGroupTimeSeries
-    #   data as a hash:
-    #
-    #       {
-    #         anomaly_group_id: "UUID", # required
-    #         time_series_id: "TimeSeriesId",
-    #       }
-    #
     # @!attribute [rw] anomaly_group_id
     #   The ID of the anomaly group.
     #   @return [String]
@@ -466,15 +416,6 @@ module Aws::LookoutMetrics
     end
 
     # Feedback for an anomalous metric.
-    #
-    # @note When making an API call, you may pass AnomalyGroupTimeSeriesFeedback
-    #   data as a hash:
-    #
-    #       {
-    #         anomaly_group_id: "UUID", # required
-    #         time_series_id: "TimeSeriesId", # required
-    #         is_anomaly: false, # required
-    #       }
     #
     # @!attribute [rw] anomaly_group_id
     #   The ID of the anomaly group.
@@ -500,14 +441,6 @@ module Aws::LookoutMetrics
 
     # Details about an Amazon AppFlow flow datasource.
     #
-    # @note When making an API call, you may pass AppFlowConfig
-    #   data as a hash:
-    #
-    #       {
-    #         role_arn: "Arn",
-    #         flow_name: "FlowName",
-    #       }
-    #
     # @!attribute [rw] role_arn
     #   An IAM role that gives Amazon Lookout for Metrics permission to
     #   access the flow.
@@ -527,21 +460,6 @@ module Aws::LookoutMetrics
     end
 
     # Details about an Amazon Athena datasource.
-    #
-    # @note When making an API call, you may pass AthenaSourceConfig
-    #   data as a hash:
-    #
-    #       {
-    #         role_arn: "Arn",
-    #         database_name: "AthenaDatabaseName",
-    #         data_catalog: "AthenaDataCatalog",
-    #         table_name: "AthenaTableName",
-    #         work_group_name: "AthenaWorkGroupName",
-    #         s3_results_path: "AthenaS3ResultsPath",
-    #         back_test_configuration: {
-    #           run_back_test_mode: false, # required
-    #         },
-    #       }
     #
     # @!attribute [rw] role_arn
     #   An IAM role that gives Amazon Lookout for Metrics permission to
@@ -627,16 +545,6 @@ module Aws::LookoutMetrics
 
     # An auto detection metric source.
     #
-    # @note When making an API call, you may pass AutoDetectionMetricSource
-    #   data as a hash:
-    #
-    #       {
-    #         s3_source_config: {
-    #           templated_path_list: ["TemplatedPath"],
-    #           historical_data_path_list: ["HistoricalDataPath"],
-    #         },
-    #       }
-    #
     # @!attribute [rw] s3_source_config
     #   The source's source config.
     #   @return [Types::AutoDetectionS3SourceConfig]
@@ -650,14 +558,6 @@ module Aws::LookoutMetrics
     end
 
     # An auto detection source config.
-    #
-    # @note When making an API call, you may pass AutoDetectionS3SourceConfig
-    #   data as a hash:
-    #
-    #       {
-    #         templated_path_list: ["TemplatedPath"],
-    #         historical_data_path_list: ["HistoricalDataPath"],
-    #       }
     #
     # @!attribute [rw] templated_path_list
     #   The config's templated path list.
@@ -676,13 +576,6 @@ module Aws::LookoutMetrics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BackTestAnomalyDetectorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         anomaly_detector_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] anomaly_detector_arn
     #   The Amazon Resource Name (ARN) of the anomaly detector.
     #   @return [String]
@@ -701,13 +594,6 @@ module Aws::LookoutMetrics
 
     # Settings for backtest mode.
     #
-    # @note When making an API call, you may pass BackTestConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         run_back_test_mode: false, # required
-    #       }
-    #
     # @!attribute [rw] run_back_test_mode
     #   Run a backtest instead of monitoring new data.
     #   @return [Boolean]
@@ -721,16 +607,6 @@ module Aws::LookoutMetrics
     end
 
     # Details about an Amazon CloudWatch datasource.
-    #
-    # @note When making an API call, you may pass CloudWatchConfig
-    #   data as a hash:
-    #
-    #       {
-    #         role_arn: "Arn",
-    #         back_test_configuration: {
-    #           run_back_test_mode: false, # required
-    #         },
-    #       }
     #
     # @!attribute [rw] role_arn
     #   An IAM role that gives Amazon Lookout for Metrics permission to
@@ -787,39 +663,6 @@ module Aws::LookoutMetrics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAlertRequest
-    #   data as a hash:
-    #
-    #       {
-    #         alert_name: "AlertName", # required
-    #         alert_sensitivity_threshold: 1,
-    #         alert_description: "AlertDescription",
-    #         anomaly_detector_arn: "Arn", # required
-    #         action: { # required
-    #           sns_configuration: {
-    #             role_arn: "Arn", # required
-    #             sns_topic_arn: "Arn", # required
-    #             sns_format: "LONG_TEXT", # accepts LONG_TEXT, SHORT_TEXT, JSON
-    #           },
-    #           lambda_configuration: {
-    #             role_arn: "Arn", # required
-    #             lambda_arn: "Arn", # required
-    #           },
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         alert_filters: {
-    #           metric_list: ["MetricName"],
-    #           dimension_filter_list: [
-    #             {
-    #               dimension_name: "ColumnName",
-    #               dimension_value_list: ["DimensionValue"],
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] alert_name
     #   The name of the alert.
     #   @return [String]
@@ -879,21 +722,6 @@ module Aws::LookoutMetrics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAnomalyDetectorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         anomaly_detector_name: "AnomalyDetectorName", # required
-    #         anomaly_detector_description: "AnomalyDetectorDescription",
-    #         anomaly_detector_config: { # required
-    #           anomaly_detector_frequency: "P1D", # accepts P1D, PT1H, PT10M, PT5M
-    #         },
-    #         kms_key_arn: "KmsKeyArn",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] anomaly_detector_name
     #   The name of the detector.
     #   @return [String]
@@ -943,112 +771,6 @@ module Aws::LookoutMetrics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateMetricSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         anomaly_detector_arn: "Arn", # required
-    #         metric_set_name: "MetricSetName", # required
-    #         metric_set_description: "MetricSetDescription",
-    #         metric_list: [ # required
-    #           {
-    #             metric_name: "ColumnName", # required
-    #             aggregation_function: "AVG", # required, accepts AVG, SUM
-    #             namespace: "Namespace",
-    #           },
-    #         ],
-    #         offset: 1,
-    #         timestamp_column: {
-    #           column_name: "ColumnName",
-    #           column_format: "DateTimeFormat",
-    #         },
-    #         dimension_list: ["ColumnName"],
-    #         metric_set_frequency: "P1D", # accepts P1D, PT1H, PT10M, PT5M
-    #         metric_source: { # required
-    #           s3_source_config: {
-    #             role_arn: "Arn",
-    #             templated_path_list: ["TemplatedPath"],
-    #             historical_data_path_list: ["HistoricalDataPath"],
-    #             file_format_descriptor: {
-    #               csv_format_descriptor: {
-    #                 file_compression: "NONE", # accepts NONE, GZIP
-    #                 charset: "Charset",
-    #                 contains_header: false,
-    #                 delimiter: "Delimiter",
-    #                 header_list: ["ColumnName"],
-    #                 quote_symbol: "QuoteSymbol",
-    #               },
-    #               json_format_descriptor: {
-    #                 file_compression: "NONE", # accepts NONE, GZIP
-    #                 charset: "Charset",
-    #               },
-    #             },
-    #           },
-    #           app_flow_config: {
-    #             role_arn: "Arn",
-    #             flow_name: "FlowName",
-    #           },
-    #           cloud_watch_config: {
-    #             role_arn: "Arn",
-    #             back_test_configuration: {
-    #               run_back_test_mode: false, # required
-    #             },
-    #           },
-    #           rds_source_config: {
-    #             db_instance_identifier: "RDSDatabaseIdentifier",
-    #             database_host: "DatabaseHost",
-    #             database_port: 1,
-    #             secret_manager_arn: "PoirotSecretManagerArn",
-    #             database_name: "RDSDatabaseName",
-    #             table_name: "TableName",
-    #             role_arn: "Arn",
-    #             vpc_configuration: {
-    #               subnet_id_list: ["SubnetId"], # required
-    #               security_group_id_list: ["SecurityGroupId"], # required
-    #             },
-    #           },
-    #           redshift_source_config: {
-    #             cluster_identifier: "RedshiftClusterIdentifier",
-    #             database_host: "DatabaseHost",
-    #             database_port: 1,
-    #             secret_manager_arn: "PoirotSecretManagerArn",
-    #             database_name: "RedshiftDatabaseName",
-    #             table_name: "TableName",
-    #             role_arn: "Arn",
-    #             vpc_configuration: {
-    #               subnet_id_list: ["SubnetId"], # required
-    #               security_group_id_list: ["SecurityGroupId"], # required
-    #             },
-    #           },
-    #           athena_source_config: {
-    #             role_arn: "Arn",
-    #             database_name: "AthenaDatabaseName",
-    #             data_catalog: "AthenaDataCatalog",
-    #             table_name: "AthenaTableName",
-    #             work_group_name: "AthenaWorkGroupName",
-    #             s3_results_path: "AthenaS3ResultsPath",
-    #             back_test_configuration: {
-    #               run_back_test_mode: false, # required
-    #             },
-    #           },
-    #         },
-    #         timezone: "Timezone",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         dimension_filter_list: [
-    #           {
-    #             name: "ColumnName",
-    #             filter_list: [
-    #               {
-    #                 dimension_value: "DimensionValue",
-    #                 filter_operation: "EQUALS", # accepts EQUALS
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] anomaly_detector_arn
     #   The ARN of the anomaly detector that will use the dataset.
     #   @return [String]
@@ -1141,18 +863,6 @@ module Aws::LookoutMetrics
     # Contains information about how a source CSV data file should be
     # analyzed.
     #
-    # @note When making an API call, you may pass CsvFormatDescriptor
-    #   data as a hash:
-    #
-    #       {
-    #         file_compression: "NONE", # accepts NONE, GZIP
-    #         charset: "Charset",
-    #         contains_header: false,
-    #         delimiter: "Delimiter",
-    #         header_list: ["ColumnName"],
-    #         quote_symbol: "QuoteSymbol",
-    #       }
-    #
     # @!attribute [rw] file_compression
     #   The level of compression of the source CSV file.
     #   @return [String]
@@ -1221,13 +931,6 @@ module Aws::LookoutMetrics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeactivateAnomalyDetectorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         anomaly_detector_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] anomaly_detector_arn
     #   The Amazon Resource Name (ARN) of the anomaly detector.
     #   @return [String]
@@ -1244,13 +947,6 @@ module Aws::LookoutMetrics
     #
     class DeactivateAnomalyDetectorResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteAlertRequest
-    #   data as a hash:
-    #
-    #       {
-    #         alert_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] alert_arn
     #   The ARN of the alert to delete.
     #   @return [String]
@@ -1267,13 +963,6 @@ module Aws::LookoutMetrics
     #
     class DeleteAlertResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteAnomalyDetectorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         anomaly_detector_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] anomaly_detector_arn
     #   The ARN of the detector to delete.
     #   @return [String]
@@ -1290,13 +979,6 @@ module Aws::LookoutMetrics
     #
     class DeleteAnomalyDetectorResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeAlertRequest
-    #   data as a hash:
-    #
-    #       {
-    #         alert_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] alert_arn
     #   The ARN of the alert to describe.
     #   @return [String]
@@ -1321,16 +1003,6 @@ module Aws::LookoutMetrics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAnomalyDetectionExecutionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         anomaly_detector_arn: "Arn", # required
-    #         timestamp: "TimestampString",
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] anomaly_detector_arn
     #   The Amazon Resource Name (ARN) of the anomaly detector.
     #   @return [String]
@@ -1376,13 +1048,6 @@ module Aws::LookoutMetrics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAnomalyDetectorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         anomaly_detector_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] anomaly_detector_arn
     #   The ARN of the detector to describe.
     #   @return [String]
@@ -1452,13 +1117,6 @@ module Aws::LookoutMetrics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeMetricSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         metric_set_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] metric_set_arn
     #   The ARN of the dataset.
     #   @return [String]
@@ -1552,19 +1210,6 @@ module Aws::LookoutMetrics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DetectMetricSetConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         anomaly_detector_arn: "Arn", # required
-    #         auto_detection_metric_source: { # required
-    #           s3_source_config: {
-    #             templated_path_list: ["TemplatedPath"],
-    #             historical_data_path_list: ["HistoricalDataPath"],
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] anomaly_detector_arn
     #   An anomaly detector ARN.
     #   @return [String]
@@ -1768,14 +1413,6 @@ module Aws::LookoutMetrics
 
     # The dimension filter, containing DimensionName and DimensionValueList.
     #
-    # @note When making an API call, you may pass DimensionFilter
-    #   data as a hash:
-    #
-    #       {
-    #         dimension_name: "ColumnName",
-    #         dimension_value_list: ["DimensionValue"],
-    #       }
-    #
     # @!attribute [rw] dimension_name
     #   The name of the dimension to filter on.
     #   @return [String]
@@ -1858,24 +1495,6 @@ module Aws::LookoutMetrics
 
     # Contains information about a source file's formatting.
     #
-    # @note When making an API call, you may pass FileFormatDescriptor
-    #   data as a hash:
-    #
-    #       {
-    #         csv_format_descriptor: {
-    #           file_compression: "NONE", # accepts NONE, GZIP
-    #           charset: "Charset",
-    #           contains_header: false,
-    #           delimiter: "Delimiter",
-    #           header_list: ["ColumnName"],
-    #           quote_symbol: "QuoteSymbol",
-    #         },
-    #         json_format_descriptor: {
-    #           file_compression: "NONE", # accepts NONE, GZIP
-    #           charset: "Charset",
-    #         },
-    #       }
-    #
     # @!attribute [rw] csv_format_descriptor
     #   Contains information about how a source CSV data file should be
     #   analyzed.
@@ -1900,14 +1519,6 @@ module Aws::LookoutMetrics
     # condition statement. The condition statement is specified in the
     # `FilterOperation` object.
     #
-    # @note When making an API call, you may pass Filter
-    #   data as a hash:
-    #
-    #       {
-    #         dimension_value: "DimensionValue",
-    #         filter_operation: "EQUALS", # accepts EQUALS
-    #       }
-    #
     # @!attribute [rw] dimension_value
     #   The value that you want to include in the filter.
     #   @return [String]
@@ -1925,14 +1536,6 @@ module Aws::LookoutMetrics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAnomalyGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         anomaly_group_id: "UUID", # required
-    #         anomaly_detector_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] anomaly_group_id
     #   The ID of the anomaly group.
     #   @return [String]
@@ -1962,14 +1565,6 @@ module Aws::LookoutMetrics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDataQualityMetricsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         anomaly_detector_arn: "Arn", # required
-    #         metric_set_arn: "Arn",
-    #       }
-    #
     # @!attribute [rw] anomaly_detector_arn
     #   The Amazon Resource Name (ARN) of the anomaly detector that you want
     #   to investigate.
@@ -2002,19 +1597,6 @@ module Aws::LookoutMetrics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetFeedbackRequest
-    #   data as a hash:
-    #
-    #       {
-    #         anomaly_detector_arn: "Arn", # required
-    #         anomaly_group_time_series_feedback: { # required
-    #           anomaly_group_id: "UUID", # required
-    #           time_series_id: "TimeSeriesId",
-    #         },
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] anomaly_detector_arn
     #   The Amazon Resource Name (ARN) of the anomaly detector.
     #   @return [String]
@@ -2060,31 +1642,6 @@ module Aws::LookoutMetrics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSampleDataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         s3_source_config: {
-    #           role_arn: "Arn", # required
-    #           templated_path_list: ["TemplatedPath"],
-    #           historical_data_path_list: ["HistoricalDataPath"],
-    #           file_format_descriptor: { # required
-    #             csv_format_descriptor: {
-    #               file_compression: "NONE", # accepts NONE, GZIP
-    #               charset: "Charset",
-    #               contains_header: false,
-    #               delimiter: "Delimiter",
-    #               header_list: ["ColumnName"],
-    #               quote_symbol: "QuoteSymbol",
-    #             },
-    #             json_format_descriptor: {
-    #               file_compression: "NONE", # accepts NONE, GZIP
-    #               charset: "Charset",
-    #             },
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] s3_source_config
     #   A datasource bucket in Amazon S3.
     #   @return [Types::SampleDataS3SourceConfig]
@@ -2183,14 +1740,6 @@ module Aws::LookoutMetrics
     # Contains information about how a source JSON data file should be
     # analyzed.
     #
-    # @note When making an API call, you may pass JsonFormatDescriptor
-    #   data as a hash:
-    #
-    #       {
-    #         file_compression: "NONE", # accepts NONE, GZIP
-    #         charset: "Charset",
-    #       }
-    #
     # @!attribute [rw] file_compression
     #   The level of compression of the source CSV file.
     #   @return [String]
@@ -2210,14 +1759,6 @@ module Aws::LookoutMetrics
 
     # Contains information about a Lambda configuration.
     #
-    # @note When making an API call, you may pass LambdaConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         role_arn: "Arn", # required
-    #         lambda_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] role_arn
     #   The ARN of an IAM role that has permission to invoke the Lambda
     #   function.
@@ -2236,15 +1777,6 @@ module Aws::LookoutMetrics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAlertsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         anomaly_detector_arn: "Arn",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] anomaly_detector_arn
     #   The ARN of the alert's detector.
     #   @return [String]
@@ -2288,14 +1820,6 @@ module Aws::LookoutMetrics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAnomalyDetectorsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to return.
     #   @return [Integer]
@@ -2333,17 +1857,6 @@ module Aws::LookoutMetrics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAnomalyGroupRelatedMetricsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         anomaly_detector_arn: "Arn", # required
-    #         anomaly_group_id: "UUID", # required
-    #         relationship_type_filter: "CAUSE_OF_INPUT_ANOMALY_GROUP", # accepts CAUSE_OF_INPUT_ANOMALY_GROUP, EFFECT_OF_INPUT_ANOMALY_GROUP
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] anomaly_detector_arn
     #   The Amazon Resource Name (ARN) of the anomaly detector.
     #   @return [String]
@@ -2397,16 +1910,6 @@ module Aws::LookoutMetrics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAnomalyGroupSummariesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         anomaly_detector_arn: "Arn", # required
-    #         sensitivity_threshold: 1, # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] anomaly_detector_arn
     #   The Amazon Resource Name (ARN) of the anomaly detector.
     #   @return [String]
@@ -2457,17 +1960,6 @@ module Aws::LookoutMetrics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAnomalyGroupTimeSeriesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         anomaly_detector_arn: "Arn", # required
-    #         anomaly_group_id: "UUID", # required
-    #         metric_name: "MetricName", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] anomaly_detector_arn
     #   The Amazon Resource Name (ARN) of the anomaly detector.
     #   @return [String]
@@ -2533,15 +2025,6 @@ module Aws::LookoutMetrics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListMetricSetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         anomaly_detector_arn: "Arn",
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] anomaly_detector_arn
     #   The ARN of the anomaly detector containing the metrics sets to list.
     #   @return [String]
@@ -2586,13 +2069,6 @@ module Aws::LookoutMetrics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The resource's Amazon Resource Name (ARN).
     #   @return [String]
@@ -2619,15 +2095,6 @@ module Aws::LookoutMetrics
 
     # A calculation made by contrasting a measure and a dimension from your
     # source data.
-    #
-    # @note When making an API call, you may pass Metric
-    #   data as a hash:
-    #
-    #       {
-    #         metric_name: "ColumnName", # required
-    #         aggregation_function: "AVG", # required, accepts AVG, SUM
-    #         namespace: "Namespace",
-    #       }
     #
     # @!attribute [rw] metric_name
     #   The name of the metric.
@@ -2702,19 +2169,6 @@ module Aws::LookoutMetrics
     # dimensions are joined with an AND operation and the values are joined
     # with an OR operation.
     #
-    # @note When making an API call, you may pass MetricSetDimensionFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ColumnName",
-    #         filter_list: [
-    #           {
-    #             dimension_value: "DimensionValue",
-    #             filter_operation: "EQUALS", # accepts EQUALS
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The dimension that you want to filter on.
     #   @return [String]
@@ -2782,78 +2236,6 @@ module Aws::LookoutMetrics
 
     # Contains information about source data used to generate metrics.
     #
-    # @note When making an API call, you may pass MetricSource
-    #   data as a hash:
-    #
-    #       {
-    #         s3_source_config: {
-    #           role_arn: "Arn",
-    #           templated_path_list: ["TemplatedPath"],
-    #           historical_data_path_list: ["HistoricalDataPath"],
-    #           file_format_descriptor: {
-    #             csv_format_descriptor: {
-    #               file_compression: "NONE", # accepts NONE, GZIP
-    #               charset: "Charset",
-    #               contains_header: false,
-    #               delimiter: "Delimiter",
-    #               header_list: ["ColumnName"],
-    #               quote_symbol: "QuoteSymbol",
-    #             },
-    #             json_format_descriptor: {
-    #               file_compression: "NONE", # accepts NONE, GZIP
-    #               charset: "Charset",
-    #             },
-    #           },
-    #         },
-    #         app_flow_config: {
-    #           role_arn: "Arn",
-    #           flow_name: "FlowName",
-    #         },
-    #         cloud_watch_config: {
-    #           role_arn: "Arn",
-    #           back_test_configuration: {
-    #             run_back_test_mode: false, # required
-    #           },
-    #         },
-    #         rds_source_config: {
-    #           db_instance_identifier: "RDSDatabaseIdentifier",
-    #           database_host: "DatabaseHost",
-    #           database_port: 1,
-    #           secret_manager_arn: "PoirotSecretManagerArn",
-    #           database_name: "RDSDatabaseName",
-    #           table_name: "TableName",
-    #           role_arn: "Arn",
-    #           vpc_configuration: {
-    #             subnet_id_list: ["SubnetId"], # required
-    #             security_group_id_list: ["SecurityGroupId"], # required
-    #           },
-    #         },
-    #         redshift_source_config: {
-    #           cluster_identifier: "RedshiftClusterIdentifier",
-    #           database_host: "DatabaseHost",
-    #           database_port: 1,
-    #           secret_manager_arn: "PoirotSecretManagerArn",
-    #           database_name: "RedshiftDatabaseName",
-    #           table_name: "TableName",
-    #           role_arn: "Arn",
-    #           vpc_configuration: {
-    #             subnet_id_list: ["SubnetId"], # required
-    #             security_group_id_list: ["SecurityGroupId"], # required
-    #           },
-    #         },
-    #         athena_source_config: {
-    #           role_arn: "Arn",
-    #           database_name: "AthenaDatabaseName",
-    #           data_catalog: "AthenaDataCatalog",
-    #           table_name: "AthenaTableName",
-    #           work_group_name: "AthenaWorkGroupName",
-    #           s3_results_path: "AthenaS3ResultsPath",
-    #           back_test_configuration: {
-    #             run_back_test_mode: false, # required
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] s3_source_config
     #   Contains information about the configuration of the S3 bucket that
     #   contains source files.
@@ -2893,18 +2275,6 @@ module Aws::LookoutMetrics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutFeedbackRequest
-    #   data as a hash:
-    #
-    #       {
-    #         anomaly_detector_arn: "Arn", # required
-    #         anomaly_group_time_series_feedback: { # required
-    #           anomaly_group_id: "UUID", # required
-    #           time_series_id: "TimeSeriesId", # required
-    #           is_anomaly: false, # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] anomaly_detector_arn
     #   The Amazon Resource Name (ARN) of the anomaly detector.
     #   @return [String]
@@ -2928,23 +2298,6 @@ module Aws::LookoutMetrics
 
     # Contains information about the Amazon Relational Database Service
     # (RDS) configuration.
-    #
-    # @note When making an API call, you may pass RDSSourceConfig
-    #   data as a hash:
-    #
-    #       {
-    #         db_instance_identifier: "RDSDatabaseIdentifier",
-    #         database_host: "DatabaseHost",
-    #         database_port: 1,
-    #         secret_manager_arn: "PoirotSecretManagerArn",
-    #         database_name: "RDSDatabaseName",
-    #         table_name: "TableName",
-    #         role_arn: "Arn",
-    #         vpc_configuration: {
-    #           subnet_id_list: ["SubnetId"], # required
-    #           security_group_id_list: ["SecurityGroupId"], # required
-    #         },
-    #       }
     #
     # @!attribute [rw] db_instance_identifier
     #   A string identifying the database instance.
@@ -2995,23 +2348,6 @@ module Aws::LookoutMetrics
     end
 
     # Provides information about the Amazon Redshift database configuration.
-    #
-    # @note When making an API call, you may pass RedshiftSourceConfig
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_identifier: "RedshiftClusterIdentifier",
-    #         database_host: "DatabaseHost",
-    #         database_port: 1,
-    #         secret_manager_arn: "PoirotSecretManagerArn",
-    #         database_name: "RedshiftDatabaseName",
-    #         table_name: "TableName",
-    #         role_arn: "Arn",
-    #         vpc_configuration: {
-    #           subnet_id_list: ["SubnetId"], # required
-    #           security_group_id_list: ["SecurityGroupId"], # required
-    #         },
-    #       }
     #
     # @!attribute [rw] cluster_identifier
     #   A string identifying the Redshift cluster.
@@ -3089,29 +2425,6 @@ module Aws::LookoutMetrics
     # Contains information about the configuration of the S3 bucket that
     # contains source files.
     #
-    # @note When making an API call, you may pass S3SourceConfig
-    #   data as a hash:
-    #
-    #       {
-    #         role_arn: "Arn",
-    #         templated_path_list: ["TemplatedPath"],
-    #         historical_data_path_list: ["HistoricalDataPath"],
-    #         file_format_descriptor: {
-    #           csv_format_descriptor: {
-    #             file_compression: "NONE", # accepts NONE, GZIP
-    #             charset: "Charset",
-    #             contains_header: false,
-    #             delimiter: "Delimiter",
-    #             header_list: ["ColumnName"],
-    #             quote_symbol: "QuoteSymbol",
-    #           },
-    #           json_format_descriptor: {
-    #             file_compression: "NONE", # accepts NONE, GZIP
-    #             charset: "Charset",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] role_arn
     #   The ARN of an IAM role that has read and write access permissions to
     #   the source S3 bucket.
@@ -3142,15 +2455,6 @@ module Aws::LookoutMetrics
 
     # Contains information about the SNS topic to which you want to send
     # your alerts and the IAM role that has access to that topic.
-    #
-    # @note When making an API call, you may pass SNSConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         role_arn: "Arn", # required
-    #         sns_topic_arn: "Arn", # required
-    #         sns_format: "LONG_TEXT", # accepts LONG_TEXT, SHORT_TEXT, JSON
-    #       }
     #
     # @!attribute [rw] role_arn
     #   The ARN of the IAM role that has access to the target SNS topic.
@@ -3185,29 +2489,6 @@ module Aws::LookoutMetrics
     end
 
     # Contains information about the source configuration in Amazon S3.
-    #
-    # @note When making an API call, you may pass SampleDataS3SourceConfig
-    #   data as a hash:
-    #
-    #       {
-    #         role_arn: "Arn", # required
-    #         templated_path_list: ["TemplatedPath"],
-    #         historical_data_path_list: ["HistoricalDataPath"],
-    #         file_format_descriptor: { # required
-    #           csv_format_descriptor: {
-    #             file_compression: "NONE", # accepts NONE, GZIP
-    #             charset: "Charset",
-    #             contains_header: false,
-    #             delimiter: "Delimiter",
-    #             header_list: ["ColumnName"],
-    #             quote_symbol: "QuoteSymbol",
-    #           },
-    #           json_format_descriptor: {
-    #             file_compression: "NONE", # accepts NONE, GZIP
-    #             charset: "Charset",
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the role.
@@ -3270,16 +2551,6 @@ module Aws::LookoutMetrics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The resource's Amazon Resource Name (ARN).
     #   @return [String]
@@ -3350,14 +2621,6 @@ module Aws::LookoutMetrics
     # Contains information about the column used to track time in a source
     # data file.
     #
-    # @note When making an API call, you may pass TimestampColumn
-    #   data as a hash:
-    #
-    #       {
-    #         column_name: "ColumnName",
-    #         column_format: "DateTimeFormat",
-    #       }
-    #
     # @!attribute [rw] column_name
     #   The name of the timestamp column.
     #   @return [String]
@@ -3389,14 +2652,6 @@ module Aws::LookoutMetrics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The resource's Amazon Resource Name (ARN).
     #   @return [String]
@@ -3418,35 +2673,6 @@ module Aws::LookoutMetrics
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateAlertRequest
-    #   data as a hash:
-    #
-    #       {
-    #         alert_arn: "Arn", # required
-    #         alert_description: "AlertDescription",
-    #         alert_sensitivity_threshold: 1,
-    #         action: {
-    #           sns_configuration: {
-    #             role_arn: "Arn", # required
-    #             sns_topic_arn: "Arn", # required
-    #             sns_format: "LONG_TEXT", # accepts LONG_TEXT, SHORT_TEXT, JSON
-    #           },
-    #           lambda_configuration: {
-    #             role_arn: "Arn", # required
-    #             lambda_arn: "Arn", # required
-    #           },
-    #         },
-    #         alert_filters: {
-    #           metric_list: ["MetricName"],
-    #           dimension_filter_list: [
-    #             {
-    #               dimension_name: "ColumnName",
-    #               dimension_value_list: ["DimensionValue"],
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] alert_arn
     #   The ARN of the alert to update.
     #   @return [String]
@@ -3492,18 +2718,6 @@ module Aws::LookoutMetrics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateAnomalyDetectorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         anomaly_detector_arn: "Arn", # required
-    #         kms_key_arn: "KmsKeyArn",
-    #         anomaly_detector_description: "AnomalyDetectorDescription",
-    #         anomaly_detector_config: {
-    #           anomaly_detector_frequency: "P1D", # accepts P1D, PT1H, PT10M, PT5M
-    #         },
-    #       }
-    #
     # @!attribute [rw] anomaly_detector_arn
     #   The ARN of the detector to update.
     #   @return [String]
@@ -3544,107 +2758,6 @@ module Aws::LookoutMetrics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateMetricSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         metric_set_arn: "Arn", # required
-    #         metric_set_description: "MetricSetDescription",
-    #         metric_list: [
-    #           {
-    #             metric_name: "ColumnName", # required
-    #             aggregation_function: "AVG", # required, accepts AVG, SUM
-    #             namespace: "Namespace",
-    #           },
-    #         ],
-    #         offset: 1,
-    #         timestamp_column: {
-    #           column_name: "ColumnName",
-    #           column_format: "DateTimeFormat",
-    #         },
-    #         dimension_list: ["ColumnName"],
-    #         metric_set_frequency: "P1D", # accepts P1D, PT1H, PT10M, PT5M
-    #         metric_source: {
-    #           s3_source_config: {
-    #             role_arn: "Arn",
-    #             templated_path_list: ["TemplatedPath"],
-    #             historical_data_path_list: ["HistoricalDataPath"],
-    #             file_format_descriptor: {
-    #               csv_format_descriptor: {
-    #                 file_compression: "NONE", # accepts NONE, GZIP
-    #                 charset: "Charset",
-    #                 contains_header: false,
-    #                 delimiter: "Delimiter",
-    #                 header_list: ["ColumnName"],
-    #                 quote_symbol: "QuoteSymbol",
-    #               },
-    #               json_format_descriptor: {
-    #                 file_compression: "NONE", # accepts NONE, GZIP
-    #                 charset: "Charset",
-    #               },
-    #             },
-    #           },
-    #           app_flow_config: {
-    #             role_arn: "Arn",
-    #             flow_name: "FlowName",
-    #           },
-    #           cloud_watch_config: {
-    #             role_arn: "Arn",
-    #             back_test_configuration: {
-    #               run_back_test_mode: false, # required
-    #             },
-    #           },
-    #           rds_source_config: {
-    #             db_instance_identifier: "RDSDatabaseIdentifier",
-    #             database_host: "DatabaseHost",
-    #             database_port: 1,
-    #             secret_manager_arn: "PoirotSecretManagerArn",
-    #             database_name: "RDSDatabaseName",
-    #             table_name: "TableName",
-    #             role_arn: "Arn",
-    #             vpc_configuration: {
-    #               subnet_id_list: ["SubnetId"], # required
-    #               security_group_id_list: ["SecurityGroupId"], # required
-    #             },
-    #           },
-    #           redshift_source_config: {
-    #             cluster_identifier: "RedshiftClusterIdentifier",
-    #             database_host: "DatabaseHost",
-    #             database_port: 1,
-    #             secret_manager_arn: "PoirotSecretManagerArn",
-    #             database_name: "RedshiftDatabaseName",
-    #             table_name: "TableName",
-    #             role_arn: "Arn",
-    #             vpc_configuration: {
-    #               subnet_id_list: ["SubnetId"], # required
-    #               security_group_id_list: ["SecurityGroupId"], # required
-    #             },
-    #           },
-    #           athena_source_config: {
-    #             role_arn: "Arn",
-    #             database_name: "AthenaDatabaseName",
-    #             data_catalog: "AthenaDataCatalog",
-    #             table_name: "AthenaTableName",
-    #             work_group_name: "AthenaWorkGroupName",
-    #             s3_results_path: "AthenaS3ResultsPath",
-    #             back_test_configuration: {
-    #               run_back_test_mode: false, # required
-    #             },
-    #           },
-    #         },
-    #         dimension_filter_list: [
-    #           {
-    #             name: "ColumnName",
-    #             filter_list: [
-    #               {
-    #                 dimension_value: "DimensionValue",
-    #                 filter_operation: "EQUALS", # accepts EQUALS
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] metric_set_arn
     #   The ARN of the dataset to update.
     #   @return [String]
@@ -3760,14 +2873,6 @@ module Aws::LookoutMetrics
 
     # Contains configuration information about the Amazon Virtual Private
     # Cloud (VPC).
-    #
-    # @note When making an API call, you may pass VpcConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         subnet_id_list: ["SubnetId"], # required
-    #         security_group_id_list: ["SecurityGroupId"], # required
-    #       }
     #
     # @!attribute [rw] subnet_id_list
     #   An array of strings containing the Amazon VPC subnet IDs (e.g.,

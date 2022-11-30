@@ -51,20 +51,6 @@ module Aws::DatabaseMigrationService
 
     # Associates a set of tags with an DMS resource.
     #
-    # @note When making an API call, you may pass AddTagsToResourceMessage
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #         tags: [ # required
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #             resource_arn: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   Identifies the DMS resource to which tags should be added. The value
     #   for this parameter is an Amazon Resource Name (ARN).
@@ -90,15 +76,6 @@ module Aws::DatabaseMigrationService
     #
     class AddTagsToResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass ApplyPendingMaintenanceActionMessage
-    #   data as a hash:
-    #
-    #       {
-    #         replication_instance_arn: "String", # required
-    #         apply_action: "String", # required
-    #         opt_in_type: "String", # required
-    #       }
-    #
     # @!attribute [rw] replication_instance_arn
     #   The Amazon Resource Name (ARN) of the DMS resource that the pending
     #   maintenance action applies to.
@@ -172,13 +149,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CancelReplicationTaskAssessmentRunMessage
-    #   data as a hash:
-    #
-    #       {
-    #         replication_task_assessment_run_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] replication_task_assessment_run_arn
     #   Amazon Resource Name (ARN) of the premigration assessment run to be
     #   canceled.
@@ -466,335 +436,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateEndpointMessage
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_identifier: "String", # required
-    #         endpoint_type: "source", # required, accepts source, target
-    #         engine_name: "String", # required
-    #         username: "String",
-    #         password: "SecretString",
-    #         server_name: "String",
-    #         port: 1,
-    #         database_name: "String",
-    #         extra_connection_attributes: "String",
-    #         kms_key_id: "String",
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #             resource_arn: "String",
-    #           },
-    #         ],
-    #         certificate_arn: "String",
-    #         ssl_mode: "none", # accepts none, require, verify-ca, verify-full
-    #         service_access_role_arn: "String",
-    #         external_table_definition: "String",
-    #         dynamo_db_settings: {
-    #           service_access_role_arn: "String", # required
-    #         },
-    #         s3_settings: {
-    #           service_access_role_arn: "String",
-    #           external_table_definition: "String",
-    #           csv_row_delimiter: "String",
-    #           csv_delimiter: "String",
-    #           bucket_folder: "String",
-    #           bucket_name: "String",
-    #           compression_type: "none", # accepts none, gzip
-    #           encryption_mode: "sse-s3", # accepts sse-s3, sse-kms
-    #           server_side_encryption_kms_key_id: "String",
-    #           data_format: "csv", # accepts csv, parquet
-    #           encoding_type: "plain", # accepts plain, plain-dictionary, rle-dictionary
-    #           dict_page_size_limit: 1,
-    #           row_group_length: 1,
-    #           data_page_size: 1,
-    #           parquet_version: "parquet-1-0", # accepts parquet-1-0, parquet-2-0
-    #           enable_statistics: false,
-    #           include_op_for_full_load: false,
-    #           cdc_inserts_only: false,
-    #           timestamp_column_name: "String",
-    #           parquet_timestamp_in_millisecond: false,
-    #           cdc_inserts_and_updates: false,
-    #           date_partition_enabled: false,
-    #           date_partition_sequence: "YYYYMMDD", # accepts YYYYMMDD, YYYYMMDDHH, YYYYMM, MMYYYYDD, DDMMYYYY
-    #           date_partition_delimiter: "SLASH", # accepts SLASH, UNDERSCORE, DASH, NONE
-    #           use_csv_no_sup_value: false,
-    #           csv_no_sup_value: "String",
-    #           preserve_transactions: false,
-    #           cdc_path: "String",
-    #           use_task_start_time_for_full_load_timestamp: false,
-    #           canned_acl_for_objects: "none", # accepts none, private, public-read, public-read-write, authenticated-read, aws-exec-read, bucket-owner-read, bucket-owner-full-control
-    #           add_column_name: false,
-    #           cdc_max_batch_interval: 1,
-    #           cdc_min_file_size: 1,
-    #           csv_null_value: "String",
-    #           ignore_header_rows: 1,
-    #           max_file_size: 1,
-    #           rfc_4180: false,
-    #           date_partition_timezone: "String",
-    #           add_trailing_padding_character: false,
-    #           expected_bucket_owner: "String",
-    #         },
-    #         dms_transfer_settings: {
-    #           service_access_role_arn: "String",
-    #           bucket_name: "String",
-    #         },
-    #         mongo_db_settings: {
-    #           username: "String",
-    #           password: "SecretString",
-    #           server_name: "String",
-    #           port: 1,
-    #           database_name: "String",
-    #           auth_type: "no", # accepts no, password
-    #           auth_mechanism: "default", # accepts default, mongodb_cr, scram_sha_1
-    #           nesting_level: "none", # accepts none, one
-    #           extract_doc_id: "String",
-    #           docs_to_investigate: "String",
-    #           auth_source: "String",
-    #           kms_key_id: "String",
-    #           secrets_manager_access_role_arn: "String",
-    #           secrets_manager_secret_id: "String",
-    #         },
-    #         kinesis_settings: {
-    #           stream_arn: "String",
-    #           message_format: "json", # accepts json, json-unformatted
-    #           service_access_role_arn: "String",
-    #           include_transaction_details: false,
-    #           include_partition_value: false,
-    #           partition_include_schema_table: false,
-    #           include_table_alter_operations: false,
-    #           include_control_details: false,
-    #           include_null_and_empty: false,
-    #           no_hex_prefix: false,
-    #         },
-    #         kafka_settings: {
-    #           broker: "String",
-    #           topic: "String",
-    #           message_format: "json", # accepts json, json-unformatted
-    #           include_transaction_details: false,
-    #           include_partition_value: false,
-    #           partition_include_schema_table: false,
-    #           include_table_alter_operations: false,
-    #           include_control_details: false,
-    #           message_max_bytes: 1,
-    #           include_null_and_empty: false,
-    #           security_protocol: "plaintext", # accepts plaintext, ssl-authentication, ssl-encryption, sasl-ssl
-    #           ssl_client_certificate_arn: "String",
-    #           ssl_client_key_arn: "String",
-    #           ssl_client_key_password: "SecretString",
-    #           ssl_ca_certificate_arn: "String",
-    #           sasl_username: "String",
-    #           sasl_password: "SecretString",
-    #           no_hex_prefix: false,
-    #         },
-    #         elasticsearch_settings: {
-    #           service_access_role_arn: "String", # required
-    #           endpoint_uri: "String", # required
-    #           full_load_error_percentage: 1,
-    #           error_retry_duration: 1,
-    #           use_new_mapping_type: false,
-    #         },
-    #         neptune_settings: {
-    #           service_access_role_arn: "String",
-    #           s3_bucket_name: "String", # required
-    #           s3_bucket_folder: "String", # required
-    #           error_retry_duration: 1,
-    #           max_file_size: 1,
-    #           max_retry_count: 1,
-    #           iam_auth_enabled: false,
-    #         },
-    #         redshift_settings: {
-    #           accept_any_date: false,
-    #           after_connect_script: "String",
-    #           bucket_folder: "String",
-    #           bucket_name: "String",
-    #           case_sensitive_names: false,
-    #           comp_update: false,
-    #           connection_timeout: 1,
-    #           database_name: "String",
-    #           date_format: "String",
-    #           empty_as_null: false,
-    #           encryption_mode: "sse-s3", # accepts sse-s3, sse-kms
-    #           explicit_ids: false,
-    #           file_transfer_upload_streams: 1,
-    #           load_timeout: 1,
-    #           max_file_size: 1,
-    #           password: "SecretString",
-    #           port: 1,
-    #           remove_quotes: false,
-    #           replace_invalid_chars: "String",
-    #           replace_chars: "String",
-    #           server_name: "String",
-    #           service_access_role_arn: "String",
-    #           server_side_encryption_kms_key_id: "String",
-    #           time_format: "String",
-    #           trim_blanks: false,
-    #           truncate_columns: false,
-    #           username: "String",
-    #           write_buffer_size: 1,
-    #           secrets_manager_access_role_arn: "String",
-    #           secrets_manager_secret_id: "String",
-    #         },
-    #         postgre_sql_settings: {
-    #           after_connect_script: "String",
-    #           capture_ddls: false,
-    #           max_file_size: 1,
-    #           database_name: "String",
-    #           ddl_artifacts_schema: "String",
-    #           execute_timeout: 1,
-    #           fail_tasks_on_lob_truncation: false,
-    #           heartbeat_enable: false,
-    #           heartbeat_schema: "String",
-    #           heartbeat_frequency: 1,
-    #           password: "SecretString",
-    #           port: 1,
-    #           server_name: "String",
-    #           username: "String",
-    #           slot_name: "String",
-    #           plugin_name: "no-preference", # accepts no-preference, test-decoding, pglogical
-    #           secrets_manager_access_role_arn: "String",
-    #           secrets_manager_secret_id: "String",
-    #           trim_space_in_char: false,
-    #         },
-    #         my_sql_settings: {
-    #           after_connect_script: "String",
-    #           clean_source_metadata_on_mismatch: false,
-    #           database_name: "String",
-    #           events_poll_interval: 1,
-    #           target_db_type: "specific-database", # accepts specific-database, multiple-databases
-    #           max_file_size: 1,
-    #           parallel_load_threads: 1,
-    #           password: "SecretString",
-    #           port: 1,
-    #           server_name: "String",
-    #           server_timezone: "String",
-    #           username: "String",
-    #           secrets_manager_access_role_arn: "String",
-    #           secrets_manager_secret_id: "String",
-    #         },
-    #         oracle_settings: {
-    #           add_supplemental_logging: false,
-    #           archived_log_dest_id: 1,
-    #           additional_archived_log_dest_id: 1,
-    #           extra_archived_log_dest_ids: [1],
-    #           allow_select_nested_tables: false,
-    #           parallel_asm_read_threads: 1,
-    #           read_ahead_blocks: 1,
-    #           access_alternate_directly: false,
-    #           use_alternate_folder_for_online: false,
-    #           oracle_path_prefix: "String",
-    #           use_path_prefix: "String",
-    #           replace_path_prefix: false,
-    #           enable_homogenous_tablespace: false,
-    #           direct_path_no_log: false,
-    #           archived_logs_only: false,
-    #           asm_password: "SecretString",
-    #           asm_server: "String",
-    #           asm_user: "String",
-    #           char_length_semantics: "default", # accepts default, char, byte
-    #           database_name: "String",
-    #           direct_path_parallel_load: false,
-    #           fail_tasks_on_lob_truncation: false,
-    #           number_datatype_scale: 1,
-    #           password: "SecretString",
-    #           port: 1,
-    #           read_table_space_name: false,
-    #           retry_interval: 1,
-    #           security_db_encryption: "SecretString",
-    #           security_db_encryption_name: "String",
-    #           server_name: "String",
-    #           spatial_data_option_to_geo_json_function_name: "String",
-    #           standby_delay_time: 1,
-    #           username: "String",
-    #           use_b_file: false,
-    #           use_direct_path_full_load: false,
-    #           use_logminer_reader: false,
-    #           secrets_manager_access_role_arn: "String",
-    #           secrets_manager_secret_id: "String",
-    #           secrets_manager_oracle_asm_access_role_arn: "String",
-    #           secrets_manager_oracle_asm_secret_id: "String",
-    #           trim_space_in_char: false,
-    #         },
-    #         sybase_settings: {
-    #           database_name: "String",
-    #           password: "SecretString",
-    #           port: 1,
-    #           server_name: "String",
-    #           username: "String",
-    #           secrets_manager_access_role_arn: "String",
-    #           secrets_manager_secret_id: "String",
-    #         },
-    #         microsoft_sql_server_settings: {
-    #           port: 1,
-    #           bcp_packet_size: 1,
-    #           database_name: "String",
-    #           control_tables_file_group: "String",
-    #           password: "SecretString",
-    #           query_single_always_on_node: false,
-    #           read_backup_only: false,
-    #           safeguard_policy: "rely-on-sql-server-replication-agent", # accepts rely-on-sql-server-replication-agent, exclusive-automatic-truncation, shared-automatic-truncation
-    #           server_name: "String",
-    #           username: "String",
-    #           use_bcp_full_load: false,
-    #           use_third_party_backup_device: false,
-    #           secrets_manager_access_role_arn: "String",
-    #           secrets_manager_secret_id: "String",
-    #           trim_space_in_char: false,
-    #         },
-    #         ibm_db_2_settings: {
-    #           database_name: "String",
-    #           password: "SecretString",
-    #           port: 1,
-    #           server_name: "String",
-    #           set_data_capture_changes: false,
-    #           current_lsn: "String",
-    #           max_k_bytes_per_read: 1,
-    #           username: "String",
-    #           secrets_manager_access_role_arn: "String",
-    #           secrets_manager_secret_id: "String",
-    #         },
-    #         resource_identifier: "String",
-    #         doc_db_settings: {
-    #           username: "String",
-    #           password: "SecretString",
-    #           server_name: "String",
-    #           port: 1,
-    #           database_name: "String",
-    #           nesting_level: "none", # accepts none, one
-    #           extract_doc_id: false,
-    #           docs_to_investigate: 1,
-    #           kms_key_id: "String",
-    #           secrets_manager_access_role_arn: "String",
-    #           secrets_manager_secret_id: "String",
-    #         },
-    #         redis_settings: {
-    #           server_name: "String", # required
-    #           port: 1, # required
-    #           ssl_security_protocol: "plaintext", # accepts plaintext, ssl-encryption
-    #           auth_type: "none", # accepts none, auth-role, auth-token
-    #           auth_user_name: "String",
-    #           auth_password: "SecretString",
-    #           ssl_ca_certificate_arn: "String",
-    #         },
-    #         gcp_my_sql_settings: {
-    #           after_connect_script: "String",
-    #           clean_source_metadata_on_mismatch: false,
-    #           database_name: "String",
-    #           events_poll_interval: 1,
-    #           target_db_type: "specific-database", # accepts specific-database, multiple-databases
-    #           max_file_size: 1,
-    #           parallel_load_threads: 1,
-    #           password: "SecretString",
-    #           port: 1,
-    #           server_name: "String",
-    #           server_timezone: "String",
-    #           username: "String",
-    #           secrets_manager_access_role_arn: "String",
-    #           secrets_manager_secret_id: "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] endpoint_identifier
     #   The database endpoint identifier. Identifiers must begin with a
     #   letter and must contain only ASCII letters, digits, and hyphens.
@@ -1142,25 +783,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateEventSubscriptionMessage
-    #   data as a hash:
-    #
-    #       {
-    #         subscription_name: "String", # required
-    #         sns_topic_arn: "String", # required
-    #         source_type: "String",
-    #         event_categories: ["String"],
-    #         source_ids: ["String"],
-    #         enabled: false,
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #             resource_arn: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] subscription_name
     #   The name of the DMS event notification subscription. This name must
     #   be less than 255 characters.
@@ -1237,16 +859,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateFleetAdvisorCollectorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         collector_name: "String", # required
-    #         description: "String",
-    #         service_access_role_arn: "String", # required
-    #         s3_bucket_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] collector_name
     #   The name of your Fleet Advisor collector (for example,
     #   `sample-collector`).
@@ -1312,34 +924,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateReplicationInstanceMessage
-    #   data as a hash:
-    #
-    #       {
-    #         replication_instance_identifier: "String", # required
-    #         allocated_storage: 1,
-    #         replication_instance_class: "String", # required
-    #         vpc_security_group_ids: ["String"],
-    #         availability_zone: "String",
-    #         replication_subnet_group_identifier: "String",
-    #         preferred_maintenance_window: "String",
-    #         multi_az: false,
-    #         engine_version: "String",
-    #         auto_minor_version_upgrade: false,
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #             resource_arn: "String",
-    #           },
-    #         ],
-    #         kms_key_id: "String",
-    #         publicly_accessible: false,
-    #         dns_name_servers: "String",
-    #         resource_identifier: "String",
-    #         network_type: "String",
-    #       }
-    #
     # @!attribute [rw] replication_instance_identifier
     #   The replication instance identifier. This parameter is stored as a
     #   lowercase string.
@@ -1516,22 +1100,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateReplicationSubnetGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         replication_subnet_group_identifier: "String", # required
-    #         replication_subnet_group_description: "String", # required
-    #         subnet_ids: ["String"], # required
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #             resource_arn: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] replication_subnet_group_identifier
     #   The name for the replication subnet group. This value is stored as a
     #   lowercase string.
@@ -1577,31 +1145,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateReplicationTaskMessage
-    #   data as a hash:
-    #
-    #       {
-    #         replication_task_identifier: "String", # required
-    #         source_endpoint_arn: "String", # required
-    #         target_endpoint_arn: "String", # required
-    #         replication_instance_arn: "String", # required
-    #         migration_type: "full-load", # required, accepts full-load, cdc, full-load-and-cdc
-    #         table_mappings: "String", # required
-    #         replication_task_settings: "String",
-    #         cdc_start_time: Time.now,
-    #         cdc_start_position: "String",
-    #         cdc_stop_position: "String",
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #             resource_arn: "String",
-    #           },
-    #         ],
-    #         task_data: "String",
-    #         resource_identifier: "String",
-    #       }
-    #
     # @!attribute [rw] replication_task_identifier
     #   An identifier for the replication task.
     #
@@ -1889,13 +1432,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteCertificateMessage
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] certificate_arn
     #   The Amazon Resource Name (ARN) of the certificate.
     #   @return [String]
@@ -1920,13 +1456,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteCollectorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         collector_referenced_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] collector_referenced_id
     #   The reference ID of the Fleet Advisor collector to delete.
     #   @return [String]
@@ -1939,14 +1468,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteConnectionMessage
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_arn: "String", # required
-    #         replication_instance_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] endpoint_arn
     #   The Amazon Resource Name (ARN) string that uniquely identifies the
     #   endpoint.
@@ -1977,13 +1498,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteEndpointMessage
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] endpoint_arn
     #   The Amazon Resource Name (ARN) string that uniquely identifies the
     #   endpoint.
@@ -2009,13 +1523,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteEventSubscriptionMessage
-    #   data as a hash:
-    #
-    #       {
-    #         subscription_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] subscription_name
     #   The name of the DMS event notification subscription to be deleted.
     #   @return [String]
@@ -2040,13 +1547,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteFleetAdvisorDatabasesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         database_ids: ["String"], # required
-    #       }
-    #
     # @!attribute [rw] database_ids
     #   The IDs of the Fleet Advisor collector databases to delete.
     #   @return [Array<String>]
@@ -2071,13 +1571,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteReplicationInstanceMessage
-    #   data as a hash:
-    #
-    #       {
-    #         replication_instance_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] replication_instance_arn
     #   The Amazon Resource Name (ARN) of the replication instance to be
     #   deleted.
@@ -2103,13 +1596,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteReplicationSubnetGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         replication_subnet_group_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] replication_subnet_group_identifier
     #   The subnet group name of the replication instance.
     #   @return [String]
@@ -2126,13 +1612,6 @@ module Aws::DatabaseMigrationService
     #
     class DeleteReplicationSubnetGroupResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteReplicationTaskAssessmentRunMessage
-    #   data as a hash:
-    #
-    #       {
-    #         replication_task_assessment_run_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] replication_task_assessment_run_arn
     #   Amazon Resource Name (ARN) of the premigration assessment run to be
     #   deleted.
@@ -2159,13 +1638,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteReplicationTaskMessage
-    #   data as a hash:
-    #
-    #       {
-    #         replication_task_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] replication_task_arn
     #   The Amazon Resource Name (ARN) of the replication task to be
     #   deleted.
@@ -2191,8 +1663,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeAccountAttributesMessage AWS API Documentation
     #
     class DescribeAccountAttributesMessage < Aws::EmptyStructure; end
@@ -2226,19 +1696,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeApplicableIndividualAssessmentsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         replication_task_arn: "String",
-    #         replication_instance_arn: "String",
-    #         source_engine_name: "String",
-    #         target_engine_name: "String",
-    #         migration_type: "full-load", # accepts full-load, cdc, full-load-and-cdc
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] replication_task_arn
     #   Amazon Resource Name (ARN) of a migration task on which you want to
     #   base the default list of individual assessments.
@@ -2320,20 +1777,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeCertificatesMessage
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] filters
     #   Filters applied to the certificates described in the form of
     #   key-value pairs. Valid values are `certificate-arn` and
@@ -2383,20 +1826,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeConnectionsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] filters
     #   The filters applied to the connection.
     #
@@ -2449,15 +1878,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEndpointSettingsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         engine_name: "String", # required
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] engine_name
     #   The databse engine used for your source or target endpoint.
     #   @return [String]
@@ -2505,20 +1925,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEndpointTypesMessage
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] filters
     #   Filters applied to the endpoint types.
     #
@@ -2571,20 +1977,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEndpointsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] filters
     #   Filters applied to the endpoints.
     #
@@ -2638,19 +2030,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEventCategoriesMessage
-    #   data as a hash:
-    #
-    #       {
-    #         source_type: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] source_type
     #   The type of DMS resource that generates events.
     #
@@ -2682,21 +2061,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEventSubscriptionsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         subscription_name: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] subscription_name
     #   The name of the DMS event subscription to be described.
     #   @return [String]
@@ -2754,26 +2118,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEventsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         source_identifier: "String",
-    #         source_type: "replication-instance", # accepts replication-instance
-    #         start_time: Time.now,
-    #         end_time: Time.now,
-    #         duration: 1,
-    #         event_categories: ["String"],
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] source_identifier
     #   The identifier of an event source.
     #   @return [String]
@@ -2857,20 +2201,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeFleetAdvisorCollectorsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] filters
     #   If you specify any of the following filters, the output includes
     #   information for only those collectors that meet the filter criteria:
@@ -2926,20 +2256,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeFleetAdvisorDatabasesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] filters
     #   If you specify any of the following filters, the output includes
     #   information for only those databases that meet the filter criteria:
@@ -3003,14 +2319,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeFleetAdvisorLsaAnalysisRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_records: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] max_records
     #   Sets the maximum number of records returned in the response.
     #   @return [Integer]
@@ -3051,20 +2359,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeFleetAdvisorSchemaObjectSummaryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] filters
     #   If you specify any of the following filters, the output includes
     #   information for only those schema objects that meet the filter
@@ -3120,20 +2414,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeFleetAdvisorSchemasRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] filters
     #   If you specify any of the following filters, the output includes
     #   information for only those schemas that meet the filter criteria:
@@ -3203,14 +2483,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeOrderableReplicationInstancesMessage
-    #   data as a hash:
-    #
-    #       {
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
@@ -3256,21 +2528,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribePendingMaintenanceActionsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         replication_instance_arn: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         marker: "String",
-    #         max_records: 1,
-    #       }
-    #
     # @!attribute [rw] replication_instance_arn
     #   The Amazon Resource Name (ARN) of the replication instance.
     #   @return [String]
@@ -3325,13 +2582,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeRefreshSchemasStatusMessage
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] endpoint_arn
     #   The Amazon Resource Name (ARN) string that uniquely identifies the
     #   endpoint.
@@ -3357,15 +2607,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeReplicationInstanceTaskLogsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         replication_instance_arn: "String", # required
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] replication_instance_arn
     #   The Amazon Resource Name (ARN) of the replication instance.
     #   @return [String]
@@ -3423,20 +2664,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeReplicationInstancesMessage
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] filters
     #   Filters applied to replication instances.
     #
@@ -3491,20 +2718,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeReplicationSubnetGroupsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] filters
     #   Filters applied to replication subnet groups.
     #
@@ -3557,15 +2770,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeReplicationTaskAssessmentResultsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         replication_task_arn: "String",
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] replication_task_arn
     #   The Amazon Resource Name (ARN) string that uniquely identifies the
     #   task. When this input parameter is specified, the API returns only
@@ -3624,20 +2828,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeReplicationTaskAssessmentRunsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] filters
     #   Filters applied to the premigration assessment runs described in the
     #   form of key-value pairs.
@@ -3689,20 +2879,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeReplicationTaskIndividualAssessmentsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] filters
     #   Filters applied to the individual assessments described in the form
     #   of key-value pairs.
@@ -3754,21 +2930,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeReplicationTasksMessage
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #         without_settings: false,
-    #       }
-    #
     # @!attribute [rw] filters
     #   Filters applied to replication tasks.
     #
@@ -3830,15 +2991,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeSchemasMessage
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_arn: "String", # required
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] endpoint_arn
     #   The Amazon Resource Name (ARN) string that uniquely identifies the
     #   endpoint.
@@ -3890,21 +3042,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeTableStatisticsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         replication_task_arn: "String", # required
-    #         max_records: 1,
-    #         marker: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] replication_task_arn
     #   The Amazon Resource Name (ARN) of the replication task.
     #   @return [String]
@@ -3972,14 +3109,6 @@ module Aws::DatabaseMigrationService
 
     # The settings in JSON format for the DMS Transfer type source endpoint.
     #
-    # @note When making an API call, you may pass DmsTransferSettings
-    #   data as a hash:
-    #
-    #       {
-    #         service_access_role_arn: "String",
-    #         bucket_name: "String",
-    #       }
-    #
     # @!attribute [rw] service_access_role_arn
     #   The Amazon Resource Name (ARN) used by the service access IAM role.
     #   The role must allow the `iam:PassRole` action.
@@ -3999,23 +3128,6 @@ module Aws::DatabaseMigrationService
     end
 
     # Provides information that defines a DocumentDB endpoint.
-    #
-    # @note When making an API call, you may pass DocDbSettings
-    #   data as a hash:
-    #
-    #       {
-    #         username: "String",
-    #         password: "SecretString",
-    #         server_name: "String",
-    #         port: 1,
-    #         database_name: "String",
-    #         nesting_level: "none", # accepts none, one
-    #         extract_doc_id: false,
-    #         docs_to_investigate: 1,
-    #         kms_key_id: "String",
-    #         secrets_manager_access_role_arn: "String",
-    #         secrets_manager_secret_id: "String",
-    #       }
     #
     # @!attribute [rw] username
     #   The user name you use to access the DocumentDB source endpoint.
@@ -4122,13 +3234,6 @@ module Aws::DatabaseMigrationService
     # Management (IAM) role used to define an Amazon DynamoDB target
     # endpoint.
     #
-    # @note When making an API call, you may pass DynamoDbSettings
-    #   data as a hash:
-    #
-    #       {
-    #         service_access_role_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] service_access_role_arn
     #   The Amazon Resource Name (ARN) used by the service to access the IAM
     #   role. The role must allow the `iam:PassRole` action.
@@ -4143,17 +3248,6 @@ module Aws::DatabaseMigrationService
     end
 
     # Provides information that defines an OpenSearch endpoint.
-    #
-    # @note When making an API call, you may pass ElasticsearchSettings
-    #   data as a hash:
-    #
-    #       {
-    #         service_access_role_arn: "String", # required
-    #         endpoint_uri: "String", # required
-    #         full_load_error_percentage: 1,
-    #         error_retry_duration: 1,
-    #         use_new_mapping_type: false,
-    #       }
     #
     # @!attribute [rw] service_access_role_arn
     #   The Amazon Resource Name (ARN) used by the service to access the IAM
@@ -4627,14 +3721,6 @@ module Aws::DatabaseMigrationService
     # particular `Describe*` call or similar operation. Filters are used as
     # an optional parameter for certain API operations.
     #
-    # @note When making an API call, you may pass Filter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #         values: ["String"], # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the filter as specified for a `Describe*` or similar
     #   operation.
@@ -4721,26 +3807,6 @@ module Aws::DatabaseMigrationService
     end
 
     # Settings in JSON format for the source GCP MySQL endpoint.
-    #
-    # @note When making an API call, you may pass GcpMySQLSettings
-    #   data as a hash:
-    #
-    #       {
-    #         after_connect_script: "String",
-    #         clean_source_metadata_on_mismatch: false,
-    #         database_name: "String",
-    #         events_poll_interval: 1,
-    #         target_db_type: "specific-database", # accepts specific-database, multiple-databases
-    #         max_file_size: 1,
-    #         parallel_load_threads: 1,
-    #         password: "SecretString",
-    #         port: 1,
-    #         server_name: "String",
-    #         server_timezone: "String",
-    #         username: "String",
-    #         secrets_manager_access_role_arn: "String",
-    #         secrets_manager_secret_id: "String",
-    #       }
     #
     # @!attribute [rw] after_connect_script
     #   Specifies a script to run immediately after DMS connects to the
@@ -4881,22 +3947,6 @@ module Aws::DatabaseMigrationService
 
     # Provides information that defines an IBM Db2 LUW endpoint.
     #
-    # @note When making an API call, you may pass IBMDb2Settings
-    #   data as a hash:
-    #
-    #       {
-    #         database_name: "String",
-    #         password: "SecretString",
-    #         port: 1,
-    #         server_name: "String",
-    #         set_data_capture_changes: false,
-    #         current_lsn: "String",
-    #         max_k_bytes_per_read: 1,
-    #         username: "String",
-    #         secrets_manager_access_role_arn: "String",
-    #         secrets_manager_secret_id: "String",
-    #       }
-    #
     # @!attribute [rw] database_name
     #   Database name for the endpoint.
     #   @return [String]
@@ -4980,22 +4030,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ImportCertificateMessage
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_identifier: "String", # required
-    #         certificate_pem: "SecretString",
-    #         certificate_wallet: "data",
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #             resource_arn: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] certificate_identifier
     #   A customer-assigned name for the certificate. Identifiers must begin
     #   with a letter and must contain only ASCII letters, digits, and
@@ -5224,30 +4258,6 @@ module Aws::DatabaseMigrationService
     # endpoint and details of transaction and control table data
     # information.
     #
-    # @note When making an API call, you may pass KafkaSettings
-    #   data as a hash:
-    #
-    #       {
-    #         broker: "String",
-    #         topic: "String",
-    #         message_format: "json", # accepts json, json-unformatted
-    #         include_transaction_details: false,
-    #         include_partition_value: false,
-    #         partition_include_schema_table: false,
-    #         include_table_alter_operations: false,
-    #         include_control_details: false,
-    #         message_max_bytes: 1,
-    #         include_null_and_empty: false,
-    #         security_protocol: "plaintext", # accepts plaintext, ssl-authentication, ssl-encryption, sasl-ssl
-    #         ssl_client_certificate_arn: "String",
-    #         ssl_client_key_arn: "String",
-    #         ssl_client_key_password: "SecretString",
-    #         ssl_ca_certificate_arn: "String",
-    #         sasl_username: "String",
-    #         sasl_password: "SecretString",
-    #         no_hex_prefix: false,
-    #       }
-    #
     # @!attribute [rw] broker
     #   A comma-separated list of one or more broker locations in your Kafka
     #   cluster that host your Kafka instance. Specify each broker location
@@ -5398,22 +4408,6 @@ module Aws::DatabaseMigrationService
     # applied to the endpoint and details of transaction and control table
     # data information.
     #
-    # @note When making an API call, you may pass KinesisSettings
-    #   data as a hash:
-    #
-    #       {
-    #         stream_arn: "String",
-    #         message_format: "json", # accepts json, json-unformatted
-    #         service_access_role_arn: "String",
-    #         include_transaction_details: false,
-    #         include_partition_value: false,
-    #         partition_include_schema_table: false,
-    #         include_table_alter_operations: false,
-    #         include_control_details: false,
-    #         include_null_and_empty: false,
-    #         no_hex_prefix: false,
-    #       }
-    #
     # @!attribute [rw] stream_arn
     #   The Amazon Resource Name (ARN) for the Amazon Kinesis Data Streams
     #   endpoint.
@@ -5498,14 +4492,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceMessage
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String",
-    #         resource_arn_list: ["String"],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) string that uniquely identifies the
     #   DMS resource to list tags for. This returns a list of keys (names of
@@ -5542,27 +4528,6 @@ module Aws::DatabaseMigrationService
     end
 
     # Provides information that defines a Microsoft SQL Server endpoint.
-    #
-    # @note When making an API call, you may pass MicrosoftSQLServerSettings
-    #   data as a hash:
-    #
-    #       {
-    #         port: 1,
-    #         bcp_packet_size: 1,
-    #         database_name: "String",
-    #         control_tables_file_group: "String",
-    #         password: "SecretString",
-    #         query_single_always_on_node: false,
-    #         read_backup_only: false,
-    #         safeguard_policy: "rely-on-sql-server-replication-agent", # accepts rely-on-sql-server-replication-agent, exclusive-automatic-truncation, shared-automatic-truncation
-    #         server_name: "String",
-    #         username: "String",
-    #         use_bcp_full_load: false,
-    #         use_third_party_backup_device: false,
-    #         secrets_manager_access_role_arn: "String",
-    #         secrets_manager_secret_id: "String",
-    #         trim_space_in_char: false,
-    #       }
     #
     # @!attribute [rw] port
     #   Endpoint TCP port.
@@ -5705,328 +4670,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyEndpointMessage
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_arn: "String", # required
-    #         endpoint_identifier: "String",
-    #         endpoint_type: "source", # accepts source, target
-    #         engine_name: "String",
-    #         username: "String",
-    #         password: "SecretString",
-    #         server_name: "String",
-    #         port: 1,
-    #         database_name: "String",
-    #         extra_connection_attributes: "String",
-    #         certificate_arn: "String",
-    #         ssl_mode: "none", # accepts none, require, verify-ca, verify-full
-    #         service_access_role_arn: "String",
-    #         external_table_definition: "String",
-    #         dynamo_db_settings: {
-    #           service_access_role_arn: "String", # required
-    #         },
-    #         s3_settings: {
-    #           service_access_role_arn: "String",
-    #           external_table_definition: "String",
-    #           csv_row_delimiter: "String",
-    #           csv_delimiter: "String",
-    #           bucket_folder: "String",
-    #           bucket_name: "String",
-    #           compression_type: "none", # accepts none, gzip
-    #           encryption_mode: "sse-s3", # accepts sse-s3, sse-kms
-    #           server_side_encryption_kms_key_id: "String",
-    #           data_format: "csv", # accepts csv, parquet
-    #           encoding_type: "plain", # accepts plain, plain-dictionary, rle-dictionary
-    #           dict_page_size_limit: 1,
-    #           row_group_length: 1,
-    #           data_page_size: 1,
-    #           parquet_version: "parquet-1-0", # accepts parquet-1-0, parquet-2-0
-    #           enable_statistics: false,
-    #           include_op_for_full_load: false,
-    #           cdc_inserts_only: false,
-    #           timestamp_column_name: "String",
-    #           parquet_timestamp_in_millisecond: false,
-    #           cdc_inserts_and_updates: false,
-    #           date_partition_enabled: false,
-    #           date_partition_sequence: "YYYYMMDD", # accepts YYYYMMDD, YYYYMMDDHH, YYYYMM, MMYYYYDD, DDMMYYYY
-    #           date_partition_delimiter: "SLASH", # accepts SLASH, UNDERSCORE, DASH, NONE
-    #           use_csv_no_sup_value: false,
-    #           csv_no_sup_value: "String",
-    #           preserve_transactions: false,
-    #           cdc_path: "String",
-    #           use_task_start_time_for_full_load_timestamp: false,
-    #           canned_acl_for_objects: "none", # accepts none, private, public-read, public-read-write, authenticated-read, aws-exec-read, bucket-owner-read, bucket-owner-full-control
-    #           add_column_name: false,
-    #           cdc_max_batch_interval: 1,
-    #           cdc_min_file_size: 1,
-    #           csv_null_value: "String",
-    #           ignore_header_rows: 1,
-    #           max_file_size: 1,
-    #           rfc_4180: false,
-    #           date_partition_timezone: "String",
-    #           add_trailing_padding_character: false,
-    #           expected_bucket_owner: "String",
-    #         },
-    #         dms_transfer_settings: {
-    #           service_access_role_arn: "String",
-    #           bucket_name: "String",
-    #         },
-    #         mongo_db_settings: {
-    #           username: "String",
-    #           password: "SecretString",
-    #           server_name: "String",
-    #           port: 1,
-    #           database_name: "String",
-    #           auth_type: "no", # accepts no, password
-    #           auth_mechanism: "default", # accepts default, mongodb_cr, scram_sha_1
-    #           nesting_level: "none", # accepts none, one
-    #           extract_doc_id: "String",
-    #           docs_to_investigate: "String",
-    #           auth_source: "String",
-    #           kms_key_id: "String",
-    #           secrets_manager_access_role_arn: "String",
-    #           secrets_manager_secret_id: "String",
-    #         },
-    #         kinesis_settings: {
-    #           stream_arn: "String",
-    #           message_format: "json", # accepts json, json-unformatted
-    #           service_access_role_arn: "String",
-    #           include_transaction_details: false,
-    #           include_partition_value: false,
-    #           partition_include_schema_table: false,
-    #           include_table_alter_operations: false,
-    #           include_control_details: false,
-    #           include_null_and_empty: false,
-    #           no_hex_prefix: false,
-    #         },
-    #         kafka_settings: {
-    #           broker: "String",
-    #           topic: "String",
-    #           message_format: "json", # accepts json, json-unformatted
-    #           include_transaction_details: false,
-    #           include_partition_value: false,
-    #           partition_include_schema_table: false,
-    #           include_table_alter_operations: false,
-    #           include_control_details: false,
-    #           message_max_bytes: 1,
-    #           include_null_and_empty: false,
-    #           security_protocol: "plaintext", # accepts plaintext, ssl-authentication, ssl-encryption, sasl-ssl
-    #           ssl_client_certificate_arn: "String",
-    #           ssl_client_key_arn: "String",
-    #           ssl_client_key_password: "SecretString",
-    #           ssl_ca_certificate_arn: "String",
-    #           sasl_username: "String",
-    #           sasl_password: "SecretString",
-    #           no_hex_prefix: false,
-    #         },
-    #         elasticsearch_settings: {
-    #           service_access_role_arn: "String", # required
-    #           endpoint_uri: "String", # required
-    #           full_load_error_percentage: 1,
-    #           error_retry_duration: 1,
-    #           use_new_mapping_type: false,
-    #         },
-    #         neptune_settings: {
-    #           service_access_role_arn: "String",
-    #           s3_bucket_name: "String", # required
-    #           s3_bucket_folder: "String", # required
-    #           error_retry_duration: 1,
-    #           max_file_size: 1,
-    #           max_retry_count: 1,
-    #           iam_auth_enabled: false,
-    #         },
-    #         redshift_settings: {
-    #           accept_any_date: false,
-    #           after_connect_script: "String",
-    #           bucket_folder: "String",
-    #           bucket_name: "String",
-    #           case_sensitive_names: false,
-    #           comp_update: false,
-    #           connection_timeout: 1,
-    #           database_name: "String",
-    #           date_format: "String",
-    #           empty_as_null: false,
-    #           encryption_mode: "sse-s3", # accepts sse-s3, sse-kms
-    #           explicit_ids: false,
-    #           file_transfer_upload_streams: 1,
-    #           load_timeout: 1,
-    #           max_file_size: 1,
-    #           password: "SecretString",
-    #           port: 1,
-    #           remove_quotes: false,
-    #           replace_invalid_chars: "String",
-    #           replace_chars: "String",
-    #           server_name: "String",
-    #           service_access_role_arn: "String",
-    #           server_side_encryption_kms_key_id: "String",
-    #           time_format: "String",
-    #           trim_blanks: false,
-    #           truncate_columns: false,
-    #           username: "String",
-    #           write_buffer_size: 1,
-    #           secrets_manager_access_role_arn: "String",
-    #           secrets_manager_secret_id: "String",
-    #         },
-    #         postgre_sql_settings: {
-    #           after_connect_script: "String",
-    #           capture_ddls: false,
-    #           max_file_size: 1,
-    #           database_name: "String",
-    #           ddl_artifacts_schema: "String",
-    #           execute_timeout: 1,
-    #           fail_tasks_on_lob_truncation: false,
-    #           heartbeat_enable: false,
-    #           heartbeat_schema: "String",
-    #           heartbeat_frequency: 1,
-    #           password: "SecretString",
-    #           port: 1,
-    #           server_name: "String",
-    #           username: "String",
-    #           slot_name: "String",
-    #           plugin_name: "no-preference", # accepts no-preference, test-decoding, pglogical
-    #           secrets_manager_access_role_arn: "String",
-    #           secrets_manager_secret_id: "String",
-    #           trim_space_in_char: false,
-    #         },
-    #         my_sql_settings: {
-    #           after_connect_script: "String",
-    #           clean_source_metadata_on_mismatch: false,
-    #           database_name: "String",
-    #           events_poll_interval: 1,
-    #           target_db_type: "specific-database", # accepts specific-database, multiple-databases
-    #           max_file_size: 1,
-    #           parallel_load_threads: 1,
-    #           password: "SecretString",
-    #           port: 1,
-    #           server_name: "String",
-    #           server_timezone: "String",
-    #           username: "String",
-    #           secrets_manager_access_role_arn: "String",
-    #           secrets_manager_secret_id: "String",
-    #         },
-    #         oracle_settings: {
-    #           add_supplemental_logging: false,
-    #           archived_log_dest_id: 1,
-    #           additional_archived_log_dest_id: 1,
-    #           extra_archived_log_dest_ids: [1],
-    #           allow_select_nested_tables: false,
-    #           parallel_asm_read_threads: 1,
-    #           read_ahead_blocks: 1,
-    #           access_alternate_directly: false,
-    #           use_alternate_folder_for_online: false,
-    #           oracle_path_prefix: "String",
-    #           use_path_prefix: "String",
-    #           replace_path_prefix: false,
-    #           enable_homogenous_tablespace: false,
-    #           direct_path_no_log: false,
-    #           archived_logs_only: false,
-    #           asm_password: "SecretString",
-    #           asm_server: "String",
-    #           asm_user: "String",
-    #           char_length_semantics: "default", # accepts default, char, byte
-    #           database_name: "String",
-    #           direct_path_parallel_load: false,
-    #           fail_tasks_on_lob_truncation: false,
-    #           number_datatype_scale: 1,
-    #           password: "SecretString",
-    #           port: 1,
-    #           read_table_space_name: false,
-    #           retry_interval: 1,
-    #           security_db_encryption: "SecretString",
-    #           security_db_encryption_name: "String",
-    #           server_name: "String",
-    #           spatial_data_option_to_geo_json_function_name: "String",
-    #           standby_delay_time: 1,
-    #           username: "String",
-    #           use_b_file: false,
-    #           use_direct_path_full_load: false,
-    #           use_logminer_reader: false,
-    #           secrets_manager_access_role_arn: "String",
-    #           secrets_manager_secret_id: "String",
-    #           secrets_manager_oracle_asm_access_role_arn: "String",
-    #           secrets_manager_oracle_asm_secret_id: "String",
-    #           trim_space_in_char: false,
-    #         },
-    #         sybase_settings: {
-    #           database_name: "String",
-    #           password: "SecretString",
-    #           port: 1,
-    #           server_name: "String",
-    #           username: "String",
-    #           secrets_manager_access_role_arn: "String",
-    #           secrets_manager_secret_id: "String",
-    #         },
-    #         microsoft_sql_server_settings: {
-    #           port: 1,
-    #           bcp_packet_size: 1,
-    #           database_name: "String",
-    #           control_tables_file_group: "String",
-    #           password: "SecretString",
-    #           query_single_always_on_node: false,
-    #           read_backup_only: false,
-    #           safeguard_policy: "rely-on-sql-server-replication-agent", # accepts rely-on-sql-server-replication-agent, exclusive-automatic-truncation, shared-automatic-truncation
-    #           server_name: "String",
-    #           username: "String",
-    #           use_bcp_full_load: false,
-    #           use_third_party_backup_device: false,
-    #           secrets_manager_access_role_arn: "String",
-    #           secrets_manager_secret_id: "String",
-    #           trim_space_in_char: false,
-    #         },
-    #         ibm_db_2_settings: {
-    #           database_name: "String",
-    #           password: "SecretString",
-    #           port: 1,
-    #           server_name: "String",
-    #           set_data_capture_changes: false,
-    #           current_lsn: "String",
-    #           max_k_bytes_per_read: 1,
-    #           username: "String",
-    #           secrets_manager_access_role_arn: "String",
-    #           secrets_manager_secret_id: "String",
-    #         },
-    #         doc_db_settings: {
-    #           username: "String",
-    #           password: "SecretString",
-    #           server_name: "String",
-    #           port: 1,
-    #           database_name: "String",
-    #           nesting_level: "none", # accepts none, one
-    #           extract_doc_id: false,
-    #           docs_to_investigate: 1,
-    #           kms_key_id: "String",
-    #           secrets_manager_access_role_arn: "String",
-    #           secrets_manager_secret_id: "String",
-    #         },
-    #         redis_settings: {
-    #           server_name: "String", # required
-    #           port: 1, # required
-    #           ssl_security_protocol: "plaintext", # accepts plaintext, ssl-encryption
-    #           auth_type: "none", # accepts none, auth-role, auth-token
-    #           auth_user_name: "String",
-    #           auth_password: "SecretString",
-    #           ssl_ca_certificate_arn: "String",
-    #         },
-    #         exact_settings: false,
-    #         gcp_my_sql_settings: {
-    #           after_connect_script: "String",
-    #           clean_source_metadata_on_mismatch: false,
-    #           database_name: "String",
-    #           events_poll_interval: 1,
-    #           target_db_type: "specific-database", # accepts specific-database, multiple-databases
-    #           max_file_size: 1,
-    #           parallel_load_threads: 1,
-    #           password: "SecretString",
-    #           port: 1,
-    #           server_name: "String",
-    #           server_timezone: "String",
-    #           username: "String",
-    #           secrets_manager_access_role_arn: "String",
-    #           secrets_manager_secret_id: "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] endpoint_arn
     #   The Amazon Resource Name (ARN) string that uniquely identifies the
     #   endpoint.
@@ -6371,17 +5014,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyEventSubscriptionMessage
-    #   data as a hash:
-    #
-    #       {
-    #         subscription_name: "String", # required
-    #         sns_topic_arn: "String",
-    #         source_type: "String",
-    #         event_categories: ["String"],
-    #         enabled: false,
-    #       }
-    #
     # @!attribute [rw] subscription_name
     #   The name of the DMS event notification subscription to be modified.
     #   @return [String]
@@ -6433,24 +5065,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyReplicationInstanceMessage
-    #   data as a hash:
-    #
-    #       {
-    #         replication_instance_arn: "String", # required
-    #         allocated_storage: 1,
-    #         apply_immediately: false,
-    #         replication_instance_class: "String",
-    #         vpc_security_group_ids: ["String"],
-    #         preferred_maintenance_window: "String",
-    #         multi_az: false,
-    #         engine_version: "String",
-    #         allow_major_version_upgrade: false,
-    #         auto_minor_version_upgrade: false,
-    #         replication_instance_identifier: "String",
-    #         network_type: "String",
-    #       }
-    #
     # @!attribute [rw] replication_instance_arn
     #   The Amazon Resource Name (ARN) of the replication instance.
     #   @return [String]
@@ -6585,15 +5199,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyReplicationSubnetGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         replication_subnet_group_identifier: "String", # required
-    #         replication_subnet_group_description: "String",
-    #         subnet_ids: ["String"], # required
-    #       }
-    #
     # @!attribute [rw] replication_subnet_group_identifier
     #   The name of the replication instance subnet group.
     #   @return [String]
@@ -6628,21 +5233,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyReplicationTaskMessage
-    #   data as a hash:
-    #
-    #       {
-    #         replication_task_arn: "String", # required
-    #         replication_task_identifier: "String",
-    #         migration_type: "full-load", # accepts full-load, cdc, full-load-and-cdc
-    #         table_mappings: "String",
-    #         replication_task_settings: "String",
-    #         cdc_start_time: Time.now,
-    #         cdc_start_position: "String",
-    #         cdc_stop_position: "String",
-    #         task_data: "String",
-    #       }
-    #
     # @!attribute [rw] replication_task_arn
     #   The Amazon Resource Name (ARN) of the replication task.
     #   @return [String]
@@ -6765,26 +5355,6 @@ module Aws::DatabaseMigrationService
     end
 
     # Provides information that defines a MongoDB endpoint.
-    #
-    # @note When making an API call, you may pass MongoDbSettings
-    #   data as a hash:
-    #
-    #       {
-    #         username: "String",
-    #         password: "SecretString",
-    #         server_name: "String",
-    #         port: 1,
-    #         database_name: "String",
-    #         auth_type: "no", # accepts no, password
-    #         auth_mechanism: "default", # accepts default, mongodb_cr, scram_sha_1
-    #         nesting_level: "none", # accepts none, one
-    #         extract_doc_id: "String",
-    #         docs_to_investigate: "String",
-    #         auth_source: "String",
-    #         kms_key_id: "String",
-    #         secrets_manager_access_role_arn: "String",
-    #         secrets_manager_secret_id: "String",
-    #       }
     #
     # @!attribute [rw] username
     #   The user name you use to access the MongoDB source endpoint.
@@ -6915,14 +5485,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass MoveReplicationTaskMessage
-    #   data as a hash:
-    #
-    #       {
-    #         replication_task_arn: "String", # required
-    #         target_replication_instance_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] replication_task_arn
     #   The Amazon Resource Name (ARN) of the task that you want to move.
     #   @return [String]
@@ -6954,26 +5516,6 @@ module Aws::DatabaseMigrationService
     end
 
     # Provides information that defines a MySQL endpoint.
-    #
-    # @note When making an API call, you may pass MySQLSettings
-    #   data as a hash:
-    #
-    #       {
-    #         after_connect_script: "String",
-    #         clean_source_metadata_on_mismatch: false,
-    #         database_name: "String",
-    #         events_poll_interval: 1,
-    #         target_db_type: "specific-database", # accepts specific-database, multiple-databases
-    #         max_file_size: 1,
-    #         parallel_load_threads: 1,
-    #         password: "SecretString",
-    #         port: 1,
-    #         server_name: "String",
-    #         server_timezone: "String",
-    #         username: "String",
-    #         secrets_manager_access_role_arn: "String",
-    #         secrets_manager_secret_id: "String",
-    #       }
     #
     # @!attribute [rw] after_connect_script
     #   Specifies a script to run immediately after DMS connects to the
@@ -7117,19 +5659,6 @@ module Aws::DatabaseMigrationService
 
     # Provides information that defines an Amazon Neptune endpoint.
     #
-    # @note When making an API call, you may pass NeptuneSettings
-    #   data as a hash:
-    #
-    #       {
-    #         service_access_role_arn: "String",
-    #         s3_bucket_name: "String", # required
-    #         s3_bucket_folder: "String", # required
-    #         error_retry_duration: 1,
-    #         max_file_size: 1,
-    #         max_retry_count: 1,
-    #         iam_auth_enabled: false,
-    #       }
-    #
     # @!attribute [rw] service_access_role_arn
     #   The Amazon Resource Name (ARN) of the service role that you created
     #   for the Neptune target endpoint. The role must allow the
@@ -7196,53 +5725,6 @@ module Aws::DatabaseMigrationService
     end
 
     # Provides information that defines an Oracle endpoint.
-    #
-    # @note When making an API call, you may pass OracleSettings
-    #   data as a hash:
-    #
-    #       {
-    #         add_supplemental_logging: false,
-    #         archived_log_dest_id: 1,
-    #         additional_archived_log_dest_id: 1,
-    #         extra_archived_log_dest_ids: [1],
-    #         allow_select_nested_tables: false,
-    #         parallel_asm_read_threads: 1,
-    #         read_ahead_blocks: 1,
-    #         access_alternate_directly: false,
-    #         use_alternate_folder_for_online: false,
-    #         oracle_path_prefix: "String",
-    #         use_path_prefix: "String",
-    #         replace_path_prefix: false,
-    #         enable_homogenous_tablespace: false,
-    #         direct_path_no_log: false,
-    #         archived_logs_only: false,
-    #         asm_password: "SecretString",
-    #         asm_server: "String",
-    #         asm_user: "String",
-    #         char_length_semantics: "default", # accepts default, char, byte
-    #         database_name: "String",
-    #         direct_path_parallel_load: false,
-    #         fail_tasks_on_lob_truncation: false,
-    #         number_datatype_scale: 1,
-    #         password: "SecretString",
-    #         port: 1,
-    #         read_table_space_name: false,
-    #         retry_interval: 1,
-    #         security_db_encryption: "SecretString",
-    #         security_db_encryption_name: "String",
-    #         server_name: "String",
-    #         spatial_data_option_to_geo_json_function_name: "String",
-    #         standby_delay_time: 1,
-    #         username: "String",
-    #         use_b_file: false,
-    #         use_direct_path_full_load: false,
-    #         use_logminer_reader: false,
-    #         secrets_manager_access_role_arn: "String",
-    #         secrets_manager_secret_id: "String",
-    #         secrets_manager_oracle_asm_access_role_arn: "String",
-    #         secrets_manager_oracle_asm_secret_id: "String",
-    #         trim_space_in_char: false,
-    #       }
     #
     # @!attribute [rw] add_supplemental_logging
     #   Set this attribute to set up table-level supplemental logging for
@@ -7828,31 +6310,6 @@ module Aws::DatabaseMigrationService
 
     # Provides information that defines a PostgreSQL endpoint.
     #
-    # @note When making an API call, you may pass PostgreSQLSettings
-    #   data as a hash:
-    #
-    #       {
-    #         after_connect_script: "String",
-    #         capture_ddls: false,
-    #         max_file_size: 1,
-    #         database_name: "String",
-    #         ddl_artifacts_schema: "String",
-    #         execute_timeout: 1,
-    #         fail_tasks_on_lob_truncation: false,
-    #         heartbeat_enable: false,
-    #         heartbeat_schema: "String",
-    #         heartbeat_frequency: 1,
-    #         password: "SecretString",
-    #         port: 1,
-    #         server_name: "String",
-    #         username: "String",
-    #         slot_name: "String",
-    #         plugin_name: "no-preference", # accepts no-preference, test-decoding, pglogical
-    #         secrets_manager_access_role_arn: "String",
-    #         secrets_manager_secret_id: "String",
-    #         trim_space_in_char: false,
-    #       }
-    #
     # @!attribute [rw] after_connect_script
     #   For use with change data capture (CDC) only, this attribute has DMS
     #   bypass foreign keys and user triggers to reduce the time it takes to
@@ -8028,15 +6485,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RebootReplicationInstanceMessage
-    #   data as a hash:
-    #
-    #       {
-    #         replication_instance_arn: "String", # required
-    #         force_failover: false,
-    #         force_planned_failover: false,
-    #       }
-    #
     # @!attribute [rw] replication_instance_arn
     #   The Amazon Resource Name (ARN) of the replication instance.
     #   @return [String]
@@ -8080,19 +6528,6 @@ module Aws::DatabaseMigrationService
     end
 
     # Provides information that defines a Redis target endpoint.
-    #
-    # @note When making an API call, you may pass RedisSettings
-    #   data as a hash:
-    #
-    #       {
-    #         server_name: "String", # required
-    #         port: 1, # required
-    #         ssl_security_protocol: "plaintext", # accepts plaintext, ssl-encryption
-    #         auth_type: "none", # accepts none, auth-role, auth-token
-    #         auth_user_name: "String",
-    #         auth_password: "SecretString",
-    #         ssl_ca_certificate_arn: "String",
-    #       }
     #
     # @!attribute [rw] server_name
     #   Fully qualified domain name of the endpoint.
@@ -8153,42 +6588,6 @@ module Aws::DatabaseMigrationService
     end
 
     # Provides information that defines an Amazon Redshift endpoint.
-    #
-    # @note When making an API call, you may pass RedshiftSettings
-    #   data as a hash:
-    #
-    #       {
-    #         accept_any_date: false,
-    #         after_connect_script: "String",
-    #         bucket_folder: "String",
-    #         bucket_name: "String",
-    #         case_sensitive_names: false,
-    #         comp_update: false,
-    #         connection_timeout: 1,
-    #         database_name: "String",
-    #         date_format: "String",
-    #         empty_as_null: false,
-    #         encryption_mode: "sse-s3", # accepts sse-s3, sse-kms
-    #         explicit_ids: false,
-    #         file_transfer_upload_streams: 1,
-    #         load_timeout: 1,
-    #         max_file_size: 1,
-    #         password: "SecretString",
-    #         port: 1,
-    #         remove_quotes: false,
-    #         replace_invalid_chars: "String",
-    #         replace_chars: "String",
-    #         server_name: "String",
-    #         service_access_role_arn: "String",
-    #         server_side_encryption_kms_key_id: "String",
-    #         time_format: "String",
-    #         trim_blanks: false,
-    #         truncate_columns: false,
-    #         username: "String",
-    #         write_buffer_size: 1,
-    #         secrets_manager_access_role_arn: "String",
-    #         secrets_manager_secret_id: "String",
-    #       }
     #
     # @!attribute [rw] accept_any_date
     #   A value that indicates to allow any date format, including invalid
@@ -8471,14 +6870,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RefreshSchemasMessage
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_arn: "String", # required
-    #         replication_instance_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] endpoint_arn
     #   The Amazon Resource Name (ARN) string that uniquely identifies the
     #   endpoint.
@@ -8545,20 +6936,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ReloadTablesMessage
-    #   data as a hash:
-    #
-    #       {
-    #         replication_task_arn: "String", # required
-    #         tables_to_reload: [ # required
-    #           {
-    #             schema_name: "String", # required
-    #             table_name: "String", # required
-    #           },
-    #         ],
-    #         reload_option: "data-reload", # accepts data-reload, validate-only
-    #       }
-    #
     # @!attribute [rw] replication_task_arn
     #   The Amazon Resource Name (ARN) of the replication task.
     #   @return [String]
@@ -8601,14 +6978,6 @@ module Aws::DatabaseMigrationService
     end
 
     # Removes one or more tags from an DMS resource.
-    #
-    # @note When making an API call, you may pass RemoveTagsFromResourceMessage
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #         tag_keys: ["String"], # required
-    #       }
     #
     # @!attribute [rw] resource_arn
     #   An DMS resource from which you want to remove tag(s). The value for
@@ -9655,52 +8024,6 @@ module Aws::DatabaseMigrationService
 
     # Settings for exporting data to Amazon S3.
     #
-    # @note When making an API call, you may pass S3Settings
-    #   data as a hash:
-    #
-    #       {
-    #         service_access_role_arn: "String",
-    #         external_table_definition: "String",
-    #         csv_row_delimiter: "String",
-    #         csv_delimiter: "String",
-    #         bucket_folder: "String",
-    #         bucket_name: "String",
-    #         compression_type: "none", # accepts none, gzip
-    #         encryption_mode: "sse-s3", # accepts sse-s3, sse-kms
-    #         server_side_encryption_kms_key_id: "String",
-    #         data_format: "csv", # accepts csv, parquet
-    #         encoding_type: "plain", # accepts plain, plain-dictionary, rle-dictionary
-    #         dict_page_size_limit: 1,
-    #         row_group_length: 1,
-    #         data_page_size: 1,
-    #         parquet_version: "parquet-1-0", # accepts parquet-1-0, parquet-2-0
-    #         enable_statistics: false,
-    #         include_op_for_full_load: false,
-    #         cdc_inserts_only: false,
-    #         timestamp_column_name: "String",
-    #         parquet_timestamp_in_millisecond: false,
-    #         cdc_inserts_and_updates: false,
-    #         date_partition_enabled: false,
-    #         date_partition_sequence: "YYYYMMDD", # accepts YYYYMMDD, YYYYMMDDHH, YYYYMM, MMYYYYDD, DDMMYYYY
-    #         date_partition_delimiter: "SLASH", # accepts SLASH, UNDERSCORE, DASH, NONE
-    #         use_csv_no_sup_value: false,
-    #         csv_no_sup_value: "String",
-    #         preserve_transactions: false,
-    #         cdc_path: "String",
-    #         use_task_start_time_for_full_load_timestamp: false,
-    #         canned_acl_for_objects: "none", # accepts none, private, public-read, public-read-write, authenticated-read, aws-exec-read, bucket-owner-read, bucket-owner-full-control
-    #         add_column_name: false,
-    #         cdc_max_batch_interval: 1,
-    #         cdc_min_file_size: 1,
-    #         csv_null_value: "String",
-    #         ignore_header_rows: 1,
-    #         max_file_size: 1,
-    #         rfc_4180: false,
-    #         date_partition_timezone: "String",
-    #         add_trailing_padding_character: false,
-    #         expected_bucket_owner: "String",
-    #       }
-    #
     # @!attribute [rw] service_access_role_arn
     #   The Amazon Resource Name (ARN) used by the service to access the IAM
     #   role. The role must allow the `iam:PassRole` action. It is a
@@ -10460,13 +8783,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartReplicationTaskAssessmentMessage
-    #   data as a hash:
-    #
-    #       {
-    #         replication_task_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] replication_task_arn
     #   The Amazon Resource Name (ARN) of the replication task.
     #   @return [String]
@@ -10491,21 +8807,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartReplicationTaskAssessmentRunMessage
-    #   data as a hash:
-    #
-    #       {
-    #         replication_task_arn: "String", # required
-    #         service_access_role_arn: "String", # required
-    #         result_location_bucket: "String", # required
-    #         result_location_folder: "String",
-    #         result_encryption_mode: "String",
-    #         result_kms_key_arn: "String",
-    #         assessment_run_name: "String", # required
-    #         include_only: ["String"],
-    #         exclude: ["String"],
-    #       }
-    #
     # @!attribute [rw] replication_task_arn
     #   Amazon Resource Name (ARN) of the migration task associated with the
     #   premigration assessment run that you want to start.
@@ -10611,17 +8912,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartReplicationTaskMessage
-    #   data as a hash:
-    #
-    #       {
-    #         replication_task_arn: "String", # required
-    #         start_replication_task_type: "start-replication", # required, accepts start-replication, resume-processing, reload-target
-    #         cdc_start_time: Time.now,
-    #         cdc_start_position: "String",
-    #         cdc_stop_position: "String",
-    #       }
-    #
     # @!attribute [rw] replication_task_arn
     #   The Amazon Resource Name (ARN) of the replication task to be
     #   started.
@@ -10714,13 +9004,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopReplicationTaskMessage
-    #   data as a hash:
-    #
-    #       {
-    #         replication_task_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] replication_task_arn
     #   The Amazon Resource Name(ARN) of the replication task to be stopped.
     #   @return [String]
@@ -10844,19 +9127,6 @@ module Aws::DatabaseMigrationService
     end
 
     # Provides information that defines a SAP ASE endpoint.
-    #
-    # @note When making an API call, you may pass SybaseSettings
-    #   data as a hash:
-    #
-    #       {
-    #         database_name: "String",
-    #         password: "SecretString",
-    #         port: 1,
-    #         server_name: "String",
-    #         username: "String",
-    #         secrets_manager_access_role_arn: "String",
-    #         secrets_manager_secret_id: "String",
-    #       }
     #
     # @!attribute [rw] database_name
     #   Database name for the endpoint.
@@ -11094,14 +9364,6 @@ module Aws::DatabaseMigrationService
 
     # Provides the name of the schema and table to be reloaded.
     #
-    # @note When making an API call, you may pass TableToReload
-    #   data as a hash:
-    #
-    #       {
-    #         schema_name: "String", # required
-    #         table_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] schema_name
     #   The schema name of the table to be reloaded.
     #   @return [String]
@@ -11127,15 +9389,6 @@ module Aws::DatabaseMigrationService
     # * `ListTagsForResource`
     #
     # * `RemoveTagsFromResource`
-    #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "String",
-    #         value: "String",
-    #         resource_arn: "String",
-    #       }
     #
     # @!attribute [rw] key
     #   A key is the required name of the tag. The string value can be 1-128
@@ -11170,14 +9423,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TestConnectionMessage
-    #   data as a hash:
-    #
-    #       {
-    #         replication_instance_arn: "String", # required
-    #         endpoint_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] replication_instance_arn
     #   The Amazon Resource Name (ARN) of the replication instance.
     #   @return [String]
@@ -11208,13 +9453,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateSubscriptionsToEventBridgeMessage
-    #   data as a hash:
-    #
-    #       {
-    #         force_move: false,
-    #       }
-    #
     # @!attribute [rw] force_move
     #   When set to true, this operation migrates DMS subscriptions for
     #   Amazon SNS notifications no matter what your replication instance

@@ -31,15 +31,6 @@ module Aws::FMS
 
     # An individual Firewall Manager application.
     #
-    # @note When making an API call, you may pass App
-    #   data as a hash:
-    #
-    #       {
-    #         app_name: "ResourceName", # required
-    #         protocol: "Protocol", # required
-    #         port: 1, # required
-    #       }
-    #
     # @!attribute [rw] app_name
     #   The application's name.
     #   @return [String]
@@ -69,33 +60,6 @@ module Aws::FMS
     end
 
     # An Firewall Manager applications list.
-    #
-    # @note When making an API call, you may pass AppsListData
-    #   data as a hash:
-    #
-    #       {
-    #         list_id: "ListId",
-    #         list_name: "ResourceName", # required
-    #         list_update_token: "UpdateToken",
-    #         create_time: Time.now,
-    #         last_update_time: Time.now,
-    #         apps_list: [ # required
-    #           {
-    #             app_name: "ResourceName", # required
-    #             protocol: "Protocol", # required
-    #             port: 1, # required
-    #           },
-    #         ],
-    #         previous_apps_list: {
-    #           "PreviousListVersion" => [
-    #             {
-    #               app_name: "ResourceName", # required
-    #               protocol: "Protocol", # required
-    #               port: 1, # required
-    #             },
-    #           ],
-    #         },
-    #       }
     #
     # @!attribute [rw] list_id
     #   The ID of the Firewall Manager applications list.
@@ -173,13 +137,6 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateAdminAccountRequest
-    #   data as a hash:
-    #
-    #       {
-    #         admin_account: "AWSAccountId", # required
-    #       }
-    #
     # @!attribute [rw] admin_account
     #   The Amazon Web Services account ID to associate with Firewall
     #   Manager as the Firewall Manager administrator account. This must be
@@ -200,13 +157,6 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateThirdPartyFirewallRequest
-    #   data as a hash:
-    #
-    #       {
-    #         third_party_firewall: "PALO_ALTO_NETWORKS_CLOUD_NGFW", # required, accepts PALO_ALTO_NETWORKS_CLOUD_NGFW
-    #       }
-    #
     # @!attribute [rw] third_party_firewall
     #   The name of the third-party firewall vendor.
     #   @return [String]
@@ -320,14 +270,6 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchAssociateResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_set_identifier: "Identifier", # required
-    #         items: ["Identifier"], # required
-    #       }
-    #
     # @!attribute [rw] resource_set_identifier
     #   A unique identifier for the resource set, used in a TODO to refer to
     #   the resource set.
@@ -366,14 +308,6 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchDisassociateResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_set_identifier: "Identifier", # required
-    #         items: ["Identifier"], # required
-    #       }
-    #
     # @!attribute [rw] resource_set_identifier
     #   A unique identifier for the resource set, used in a TODO to refer to
     #   the resource set.
@@ -450,13 +384,6 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAppsListRequest
-    #   data as a hash:
-    #
-    #       {
-    #         list_id: "ListId", # required
-    #       }
-    #
     # @!attribute [rw] list_id
     #   The ID of the applications list that you want to delete. You can
     #   retrieve this ID from `PutAppsList`, `ListAppsLists`, and
@@ -471,20 +398,10 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/DeleteNotificationChannelRequest AWS API Documentation
     #
     class DeleteNotificationChannelRequest < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeletePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy_id: "PolicyId", # required
-    #         delete_all_policy_resources: false,
-    #       }
-    #
     # @!attribute [rw] policy_id
     #   The ID of the policy that you want to delete. You can retrieve this
     #   ID from `PutPolicy` and `ListPolicies`.
@@ -531,13 +448,6 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteProtocolsListRequest
-    #   data as a hash:
-    #
-    #       {
-    #         list_id: "ListId", # required
-    #       }
-    #
     # @!attribute [rw] list_id
     #   The ID of the protocols list that you want to delete. You can
     #   retrieve this ID from `PutProtocolsList`, `ListProtocolsLists`, and
@@ -552,13 +462,6 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteResourceSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identifier: "Base62Id", # required
-    #       }
-    #
     # @!attribute [rw] identifier
     #   A unique identifier for the resource set, used in a TODO to refer to
     #   the resource set.
@@ -572,19 +475,10 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/DisassociateAdminAccountRequest AWS API Documentation
     #
     class DisassociateAdminAccountRequest < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DisassociateThirdPartyFirewallRequest
-    #   data as a hash:
-    #
-    #       {
-    #         third_party_firewall: "PALO_ALTO_NETWORKS_CLOUD_NGFW", # required, accepts PALO_ALTO_NETWORKS_CLOUD_NGFW
-    #       }
-    #
     # @!attribute [rw] third_party_firewall
     #   The name of the third-party firewall vendor.
     #   @return [String]
@@ -1156,8 +1050,6 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/GetAdminAccountRequest AWS API Documentation
     #
     class GetAdminAccountRequest < Aws::EmptyStructure; end
@@ -1181,14 +1073,6 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAppsListRequest
-    #   data as a hash:
-    #
-    #       {
-    #         list_id: "ListId", # required
-    #         default_list: false,
-    #       }
-    #
     # @!attribute [rw] list_id
     #   The ID of the Firewall Manager applications list that you want the
     #   details for.
@@ -1225,14 +1109,6 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetComplianceDetailRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy_id: "PolicyId", # required
-    #         member_account: "AWSAccountId", # required
-    #       }
-    #
     # @!attribute [rw] policy_id
     #   The ID of the policy that you want to get the details for.
     #   `PolicyId` is returned by `PutPolicy` and by `ListPolicies`.
@@ -1265,8 +1141,6 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/GetNotificationChannelRequest AWS API Documentation
     #
     class GetNotificationChannelRequest < Aws::EmptyStructure; end
@@ -1289,13 +1163,6 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy_id: "PolicyId", # required
-    #       }
-    #
     # @!attribute [rw] policy_id
     #   The ID of the Firewall Manager policy that you want the details for.
     #   @return [String]
@@ -1325,18 +1192,6 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetProtectionStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy_id: "PolicyId", # required
-    #         member_account_id: "AWSAccountId",
-    #         start_time: Time.now,
-    #         end_time: Time.now,
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] policy_id
     #   The ID of the policy for which you want to get the attack
     #   information.
@@ -1442,14 +1297,6 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetProtocolsListRequest
-    #   data as a hash:
-    #
-    #       {
-    #         list_id: "ListId", # required
-    #         default_list: false,
-    #       }
-    #
     # @!attribute [rw] list_id
     #   The ID of the Firewall Manager protocols list that you want the
     #   details for.
@@ -1486,13 +1333,6 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetResourceSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identifier: "Base62Id", # required
-    #       }
-    #
     # @!attribute [rw] identifier
     #   A unique identifier for the resource set, used in a TODO to refer to
     #   the resource set.
@@ -1523,13 +1363,6 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetThirdPartyFirewallAssociationStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         third_party_firewall: "PALO_ALTO_NETWORKS_CLOUD_NGFW", # required, accepts PALO_ALTO_NETWORKS_CLOUD_NGFW
-    #       }
-    #
     # @!attribute [rw] third_party_firewall
     #   The name of the third-party firewall vendor.
     #   @return [String]
@@ -1590,16 +1423,6 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetViolationDetailsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy_id: "PolicyId", # required
-    #         member_account: "AWSAccountId", # required
-    #         resource_id: "ResourceId", # required
-    #         resource_type: "ResourceType", # required
-    #       }
-    #
     # @!attribute [rw] policy_id
     #   The ID of the Firewall Manager policy that you want the details for.
     #   This currently only supports security group content audit policies.
@@ -1727,15 +1550,6 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAppsListsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         default_lists: false,
-    #         next_token: "PaginationToken",
-    #         max_results: 1, # required
-    #       }
-    #
     # @!attribute [rw] default_lists
     #   Specifies whether the lists to retrieve are default lists owned by
     #   Firewall Manager.
@@ -1789,15 +1603,6 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListComplianceStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy_id: "PolicyId", # required
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] policy_id
     #   The ID of the Firewall Manager policy that you want the details for.
     #   @return [String]
@@ -1853,16 +1658,6 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDiscoveredResourcesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         member_account_ids: ["AWSAccountId"], # required
-    #         resource_type: "ResourceType", # required
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] member_account_ids
     #   The Amazon Web Services account IDs to discover resources in. Only
     #   one account is supported per request. The account must be a member
@@ -1920,14 +1715,6 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListMemberAccountsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If you specify a value for `MaxResults` and you have more account
     #   IDs than the number that you specify for `MaxResults`, Firewall
@@ -1976,14 +1763,6 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPoliciesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If you specify a value for `MaxResults` and you have more
     #   `PolicySummary` objects than the number that you specify for
@@ -2032,15 +1811,6 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListProtocolsListsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         default_lists: false,
-    #         next_token: "PaginationToken",
-    #         max_results: 1, # required
-    #       }
-    #
     # @!attribute [rw] default_lists
     #   Specifies whether the lists to retrieve are default lists owned by
     #   Firewall Manager.
@@ -2094,15 +1864,6 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListResourceSetResourcesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identifier: "ResourceId", # required
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] identifier
     #   A unique identifier for the resource set, used in a TODO to refer to
     #   the resource set.
@@ -2155,14 +1916,6 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListResourceSetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   When you request a list of objects with a `MaxResults` setting, if
     #   the number of objects that are still available for retrieval exceeds
@@ -2208,13 +1961,6 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource to return tags for.
     #   The Firewall Manager resources that support tagging are policies,
@@ -2241,15 +1987,6 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListThirdPartyFirewallFirewallPoliciesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         third_party_firewall: "PALO_ALTO_NETWORKS_CLOUD_NGFW", # required, accepts PALO_ALTO_NETWORKS_CLOUD_NGFW
-    #         next_token: "PaginationToken",
-    #         max_results: 1, # required
-    #       }
-    #
     # @!attribute [rw] third_party_firewall
     #   The name of the third-party firewall vendor.
     #   @return [String]
@@ -2648,13 +2385,6 @@ module Aws::FMS
     #
     # [1]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/architectures.html
     #
-    # @note When making an API call, you may pass NetworkFirewallPolicy
-    #   data as a hash:
-    #
-    #       {
-    #         firewall_deployment_model: "CENTRALIZED", # accepts CENTRALIZED, DISTRIBUTED
-    #       }
-    #
     # @!attribute [rw] firewall_deployment_model
     #   Defines the deployment model to use for the firewall policy. To use
     #   a distributed model, set [PolicyOption][1] to `NULL`.
@@ -2866,46 +2596,6 @@ module Aws::FMS
     end
 
     # An Firewall Manager policy.
-    #
-    # @note When making an API call, you may pass Policy
-    #   data as a hash:
-    #
-    #       {
-    #         policy_id: "PolicyId",
-    #         policy_name: "ResourceName", # required
-    #         policy_update_token: "PolicyUpdateToken",
-    #         security_service_policy_data: { # required
-    #           type: "WAF", # required, accepts WAF, WAFV2, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT, NETWORK_FIREWALL, DNS_FIREWALL, THIRD_PARTY_FIREWALL, IMPORT_NETWORK_FIREWALL
-    #           managed_service_data: "ManagedServiceData",
-    #           policy_option: {
-    #             network_firewall_policy: {
-    #               firewall_deployment_model: "CENTRALIZED", # accepts CENTRALIZED, DISTRIBUTED
-    #             },
-    #             third_party_firewall_policy: {
-    #               firewall_deployment_model: "CENTRALIZED", # accepts CENTRALIZED, DISTRIBUTED
-    #             },
-    #           },
-    #         },
-    #         resource_type: "ResourceType", # required
-    #         resource_type_list: ["ResourceType"],
-    #         resource_tags: [
-    #           {
-    #             key: "ResourceTagKey", # required
-    #             value: "ResourceTagValue",
-    #           },
-    #         ],
-    #         exclude_resource_tags: false, # required
-    #         remediation_enabled: false, # required
-    #         delete_unused_fm_managed_resources: false,
-    #         include_map: {
-    #           "ACCOUNT" => ["CustomerPolicyScopeId"],
-    #         },
-    #         exclude_map: {
-    #           "ACCOUNT" => ["CustomerPolicyScopeId"],
-    #         },
-    #         resource_set_ids: ["Base62Id"],
-    #         policy_description: "ResourceDescription",
-    #       }
     #
     # @!attribute [rw] policy_id
     #   The ID of the Firewall Manager policy.
@@ -3185,18 +2875,6 @@ module Aws::FMS
     # Contains the Network Firewall firewall policy options to configure the
     # policy's deployment model and third-party firewall policy settings.
     #
-    # @note When making an API call, you may pass PolicyOption
-    #   data as a hash:
-    #
-    #       {
-    #         network_firewall_policy: {
-    #           firewall_deployment_model: "CENTRALIZED", # accepts CENTRALIZED, DISTRIBUTED
-    #         },
-    #         third_party_firewall_policy: {
-    #           firewall_deployment_model: "CENTRALIZED", # accepts CENTRALIZED, DISTRIBUTED
-    #         },
-    #       }
-    #
     # @!attribute [rw] network_firewall_policy
     #   Defines the deployment model to use for the firewall policy.
     #   @return [Types::NetworkFirewallPolicy]
@@ -3333,21 +3011,6 @@ module Aws::FMS
 
     # An Firewall Manager protocols list.
     #
-    # @note When making an API call, you may pass ProtocolsListData
-    #   data as a hash:
-    #
-    #       {
-    #         list_id: "ListId",
-    #         list_name: "ResourceName", # required
-    #         list_update_token: "UpdateToken",
-    #         create_time: Time.now,
-    #         last_update_time: Time.now,
-    #         protocols_list: ["Protocol"], # required
-    #         previous_protocols_list: {
-    #           "PreviousListVersion" => ["Protocol"],
-    #         },
-    #       }
-    #
     # @!attribute [rw] list_id
     #   The ID of the Firewall Manager protocols list.
     #   @return [String]
@@ -3423,41 +3086,6 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutAppsListRequest
-    #   data as a hash:
-    #
-    #       {
-    #         apps_list: { # required
-    #           list_id: "ListId",
-    #           list_name: "ResourceName", # required
-    #           list_update_token: "UpdateToken",
-    #           create_time: Time.now,
-    #           last_update_time: Time.now,
-    #           apps_list: [ # required
-    #             {
-    #               app_name: "ResourceName", # required
-    #               protocol: "Protocol", # required
-    #               port: 1, # required
-    #             },
-    #           ],
-    #           previous_apps_list: {
-    #             "PreviousListVersion" => [
-    #               {
-    #                 app_name: "ResourceName", # required
-    #                 protocol: "Protocol", # required
-    #                 port: 1, # required
-    #               },
-    #             ],
-    #           },
-    #         },
-    #         tag_list: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] apps_list
     #   The details of the Firewall Manager applications list to be created.
     #   @return [Types::AppsListData]
@@ -3492,14 +3120,6 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutNotificationChannelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         sns_topic_arn: "ResourceArn", # required
-    #         sns_role_name: "ResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] sns_topic_arn
     #   The Amazon Resource Name (ARN) of the SNS topic that collects
     #   notifications from Firewall Manager.
@@ -3519,54 +3139,6 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy: { # required
-    #           policy_id: "PolicyId",
-    #           policy_name: "ResourceName", # required
-    #           policy_update_token: "PolicyUpdateToken",
-    #           security_service_policy_data: { # required
-    #             type: "WAF", # required, accepts WAF, WAFV2, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT, NETWORK_FIREWALL, DNS_FIREWALL, THIRD_PARTY_FIREWALL, IMPORT_NETWORK_FIREWALL
-    #             managed_service_data: "ManagedServiceData",
-    #             policy_option: {
-    #               network_firewall_policy: {
-    #                 firewall_deployment_model: "CENTRALIZED", # accepts CENTRALIZED, DISTRIBUTED
-    #               },
-    #               third_party_firewall_policy: {
-    #                 firewall_deployment_model: "CENTRALIZED", # accepts CENTRALIZED, DISTRIBUTED
-    #               },
-    #             },
-    #           },
-    #           resource_type: "ResourceType", # required
-    #           resource_type_list: ["ResourceType"],
-    #           resource_tags: [
-    #             {
-    #               key: "ResourceTagKey", # required
-    #               value: "ResourceTagValue",
-    #             },
-    #           ],
-    #           exclude_resource_tags: false, # required
-    #           remediation_enabled: false, # required
-    #           delete_unused_fm_managed_resources: false,
-    #           include_map: {
-    #             "ACCOUNT" => ["CustomerPolicyScopeId"],
-    #           },
-    #           exclude_map: {
-    #             "ACCOUNT" => ["CustomerPolicyScopeId"],
-    #           },
-    #           resource_set_ids: ["Base62Id"],
-    #           policy_description: "ResourceDescription",
-    #         },
-    #         tag_list: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] policy
     #   The details of the Firewall Manager policy to be created.
     #   @return [Types::Policy]
@@ -3601,29 +3173,6 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutProtocolsListRequest
-    #   data as a hash:
-    #
-    #       {
-    #         protocols_list: { # required
-    #           list_id: "ListId",
-    #           list_name: "ResourceName", # required
-    #           list_update_token: "UpdateToken",
-    #           create_time: Time.now,
-    #           last_update_time: Time.now,
-    #           protocols_list: ["Protocol"], # required
-    #           previous_protocols_list: {
-    #             "PreviousListVersion" => ["Protocol"],
-    #           },
-    #         },
-    #         tag_list: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] protocols_list
     #   The details of the Firewall Manager protocols list to be created.
     #   @return [Types::ProtocolsListData]
@@ -3658,26 +3207,6 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutResourceSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_set: { # required
-    #           id: "Base62Id",
-    #           name: "Name", # required
-    #           description: "Description",
-    #           update_token: "UpdateToken",
-    #           resource_type_list: ["ResourceType"], # required
-    #           last_update_time: Time.now,
-    #         },
-    #         tag_list: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_set
     #   Details about the resource set to be created or updated.&gt;
     #   @return [Types::ResourceSet]
@@ -3829,18 +3358,6 @@ module Aws::FMS
 
     # A set of resources to include in a policy.
     #
-    # @note When making an API call, you may pass ResourceSet
-    #   data as a hash:
-    #
-    #       {
-    #         id: "Base62Id",
-    #         name: "Name", # required
-    #         description: "Description",
-    #         update_token: "UpdateToken",
-    #         resource_type_list: ["ResourceType"], # required
-    #         last_update_time: Time.now,
-    #       }
-    #
     # @!attribute [rw] id
     #   A unique identifier for the resource set. This ID is returned in the
     #   responses to create and list commands. You provide it to operations
@@ -3946,14 +3463,6 @@ module Aws::FMS
     #
     #
     # [1]: https://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/tag-editor.html
-    #
-    # @note When making an API call, you may pass ResourceTag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "ResourceTagKey", # required
-    #         value: "ResourceTagValue",
-    #       }
     #
     # @!attribute [rw] key
     #   The resource tag key.
@@ -4299,22 +3808,6 @@ module Aws::FMS
     # Details about the security service that is being used to protect the
     # resources.
     #
-    # @note When making an API call, you may pass SecurityServicePolicyData
-    #   data as a hash:
-    #
-    #       {
-    #         type: "WAF", # required, accepts WAF, WAFV2, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT, NETWORK_FIREWALL, DNS_FIREWALL, THIRD_PARTY_FIREWALL, IMPORT_NETWORK_FIREWALL
-    #         managed_service_data: "ManagedServiceData",
-    #         policy_option: {
-    #           network_firewall_policy: {
-    #             firewall_deployment_model: "CENTRALIZED", # accepts CENTRALIZED, DISTRIBUTED
-    #           },
-    #           third_party_firewall_policy: {
-    #             firewall_deployment_model: "CENTRALIZED", # accepts CENTRALIZED, DISTRIBUTED
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] type
     #   The service that the policy is using to protect the resources. This
     #   specifies the type of policy that is created, either an WAF policy,
@@ -4630,14 +4123,6 @@ module Aws::FMS
     # "test," "development," or "production"). You can add up to 50
     # tags to each Amazon Web Services resource.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   Part of the key:value pair that defines a tag. You can use a tag key
     #   to describe a category of information, such as "customer." Tag
@@ -4659,19 +4144,6 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         tag_list: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource to return tags for.
     #   The Firewall Manager resources that support tagging are policies,
@@ -4821,13 +4293,6 @@ module Aws::FMS
 
     # Configures the deployment model for the third-party firewall.
     #
-    # @note When making an API call, you may pass ThirdPartyFirewallPolicy
-    #   data as a hash:
-    #
-    #       {
-    #         firewall_deployment_model: "CENTRALIZED", # accepts CENTRALIZED, DISTRIBUTED
-    #       }
-    #
     # @!attribute [rw] firewall_deployment_model
     #   Defines the deployment model to use for the third-party firewall
     #   policy.
@@ -4841,14 +4306,6 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource to return tags for.
     #   The Firewall Manager resources that support tagging are policies,

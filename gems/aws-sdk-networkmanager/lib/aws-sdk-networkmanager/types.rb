@@ -12,14 +12,6 @@ module Aws::NetworkManager
 
     # Specifies a location in Amazon Web Services.
     #
-    # @note When making an API call, you may pass AWSLocation
-    #   data as a hash:
-    #
-    #       {
-    #         zone: "ConstrainedString",
-    #         subnet_arn: "SubnetArn",
-    #       }
-    #
     # @!attribute [rw] zone
     #   The Zone that the device is located in. Specify the ID of an
     #   Availability Zone, Local Zone, Wavelength Zone, or an Outpost.
@@ -39,13 +31,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AcceptAttachmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         attachment_id: "AttachmentId", # required
-    #       }
-    #
     # @!attribute [rw] attachment_id
     #   The ID of the attachment.
     #   @return [String]
@@ -103,16 +88,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateConnectPeerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         global_network_id: "GlobalNetworkId", # required
-    #         connect_peer_id: "ConnectPeerId", # required
-    #         device_id: "DeviceId", # required
-    #         link_id: "LinkId",
-    #       }
-    #
     # @!attribute [rw] global_network_id
     #   The ID of your global network.
     #   @return [String]
@@ -152,16 +127,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateCustomerGatewayRequest
-    #   data as a hash:
-    #
-    #       {
-    #         customer_gateway_arn: "CustomerGatewayArn", # required
-    #         global_network_id: "GlobalNetworkId", # required
-    #         device_id: "DeviceId", # required
-    #         link_id: "LinkId",
-    #       }
-    #
     # @!attribute [rw] customer_gateway_arn
     #   The Amazon Resource Name (ARN) of the customer gateway.
     #   @return [String]
@@ -201,15 +166,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateLinkRequest
-    #   data as a hash:
-    #
-    #       {
-    #         global_network_id: "GlobalNetworkId", # required
-    #         device_id: "DeviceId", # required
-    #         link_id: "LinkId", # required
-    #       }
-    #
     # @!attribute [rw] global_network_id
     #   The ID of the global network.
     #   @return [String]
@@ -244,16 +200,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateTransitGatewayConnectPeerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         global_network_id: "GlobalNetworkId", # required
-    #         transit_gateway_connect_peer_arn: "TransitGatewayConnectPeerArn", # required
-    #         device_id: "DeviceId", # required
-    #         link_id: "LinkId",
-    #       }
-    #
     # @!attribute [rw] global_network_id
     #   The ID of the global network.
     #   @return [String]
@@ -374,14 +320,6 @@ module Aws::NetworkManager
 
     # Describes bandwidth information.
     #
-    # @note When making an API call, you may pass Bandwidth
-    #   data as a hash:
-    #
-    #       {
-    #         upload_speed: 1,
-    #         download_speed: 1,
-    #       }
-    #
     # @!attribute [rw] upload_speed
     #   Upload speed in Mbps.
     #   @return [Integer]
@@ -400,13 +338,6 @@ module Aws::NetworkManager
     end
 
     # Describes the BGP options.
-    #
-    # @note When making an API call, you may pass BgpOptions
-    #   data as a hash:
-    #
-    #       {
-    #         peer_asn: 1,
-    #       }
     #
     # @!attribute [rw] peer_asn
     #   The Peer ASN of the BGP.
@@ -469,13 +400,6 @@ module Aws::NetworkManager
     end
 
     # Describes a core network Connect attachment options.
-    #
-    # @note When making an API call, you may pass ConnectAttachmentOptions
-    #   data as a hash:
-    #
-    #       {
-    #         protocol: "GRE", # accepts GRE
-    #       }
     #
     # @!attribute [rw] protocol
     #   The protocol used for the attachment connection.
@@ -1162,15 +1086,6 @@ module Aws::NetworkManager
 
     # Returns details about a core network edge.
     #
-    # @note When making an API call, you may pass CoreNetworkSegmentEdgeIdentifier
-    #   data as a hash:
-    #
-    #       {
-    #         core_network_id: "CoreNetworkId",
-    #         segment_name: "ConstrainedString",
-    #         edge_location: "ExternalRegionCode",
-    #       }
-    #
     # @!attribute [rw] core_network_id
     #   The ID of a core network.
     #   @return [String]
@@ -1237,25 +1152,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateConnectAttachmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         core_network_id: "CoreNetworkId", # required
-    #         edge_location: "ExternalRegionCode", # required
-    #         transport_attachment_id: "AttachmentId", # required
-    #         options: { # required
-    #           protocol: "GRE", # accepts GRE
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] core_network_id
     #   The ID of a core network where you want to create the attachment.
     #   @return [String]
@@ -1308,26 +1204,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateConnectPeerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connect_attachment_id: "AttachmentId", # required
-    #         core_network_address: "IPAddress",
-    #         peer_address: "IPAddress", # required
-    #         bgp_options: {
-    #           peer_asn: 1,
-    #         },
-    #         inside_cidr_blocks: ["ConstrainedString"], # required
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] connect_attachment_id
     #   The ID of the connection attachment.
     #   @return [String]
@@ -1385,24 +1261,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateConnectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         global_network_id: "GlobalNetworkId", # required
-    #         device_id: "DeviceId", # required
-    #         connected_device_id: "DeviceId", # required
-    #         link_id: "LinkId",
-    #         connected_link_id: "LinkId",
-    #         description: "ConstrainedString",
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] global_network_id
     #   The ID of the global network.
     #   @return [String]
@@ -1459,22 +1317,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateCoreNetworkRequest
-    #   data as a hash:
-    #
-    #       {
-    #         global_network_id: "GlobalNetworkId", # required
-    #         description: "ConstrainedString",
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         policy_document: "CoreNetworkPolicyDocument",
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] global_network_id
     #   The ID of the global network that a core network will be a part of.
     #   @return [String]
@@ -1522,34 +1364,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDeviceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         global_network_id: "GlobalNetworkId", # required
-    #         aws_location: {
-    #           zone: "ConstrainedString",
-    #           subnet_arn: "SubnetArn",
-    #         },
-    #         description: "ConstrainedString",
-    #         type: "ConstrainedString",
-    #         vendor: "ConstrainedString",
-    #         model: "ConstrainedString",
-    #         serial_number: "ConstrainedString",
-    #         location: {
-    #           address: "ConstrainedString",
-    #           latitude: "ConstrainedString",
-    #           longitude: "ConstrainedString",
-    #         },
-    #         site_id: "SiteId",
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] global_network_id
     #   The ID of the global network.
     #   @return [String]
@@ -1628,19 +1442,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateGlobalNetworkRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "ConstrainedString",
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] description
     #   A description of the global network.
     #
@@ -1672,27 +1473,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateLinkRequest
-    #   data as a hash:
-    #
-    #       {
-    #         global_network_id: "GlobalNetworkId", # required
-    #         description: "ConstrainedString",
-    #         type: "ConstrainedString",
-    #         bandwidth: { # required
-    #           upload_speed: 1,
-    #           download_speed: 1,
-    #         },
-    #         provider: "ConstrainedString",
-    #         site_id: "SiteId", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] global_network_id
     #   The ID of the global network.
     #   @return [String]
@@ -1755,25 +1535,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateSiteRequest
-    #   data as a hash:
-    #
-    #       {
-    #         global_network_id: "GlobalNetworkId", # required
-    #         description: "ConstrainedString",
-    #         location: {
-    #           address: "ConstrainedString",
-    #           latitude: "ConstrainedString",
-    #           longitude: "ConstrainedString",
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] global_network_id
     #   The ID of the global network.
     #   @return [String]
@@ -1823,21 +1584,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateSiteToSiteVpnAttachmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         core_network_id: "CoreNetworkId", # required
-    #         vpn_connection_arn: "VpnConnectionArn", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] core_network_id
     #   The ID of a core network where you're creating a site-to-site VPN
     #   attachment.
@@ -1881,21 +1627,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateTransitGatewayPeeringRequest
-    #   data as a hash:
-    #
-    #       {
-    #         core_network_id: "CoreNetworkId", # required
-    #         transit_gateway_arn: "TransitGatewayArn", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] core_network_id
     #   The ID of a core network.
     #   @return [String]
@@ -1939,21 +1670,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateTransitGatewayRouteTableAttachmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         peering_id: "PeeringId", # required
-    #         transit_gateway_route_table_arn: "TransitGatewayRouteTableArn", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] peering_id
     #   The ID of the peer for the
     #   @return [String]
@@ -1998,25 +1714,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateVpcAttachmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         core_network_id: "CoreNetworkId", # required
-    #         vpc_arn: "VpcArn", # required
-    #         subnet_arns: ["SubnetArn"], # required
-    #         options: {
-    #           ipv_6_support: false,
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] core_network_id
     #   The ID of a core network for the VPC attachment.
     #   @return [String]
@@ -2104,13 +1801,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAttachmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         attachment_id: "AttachmentId", # required
-    #       }
-    #
     # @!attribute [rw] attachment_id
     #   The ID of the attachment to delete.
     #   @return [String]
@@ -2135,13 +1825,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteConnectPeerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connect_peer_id: "ConnectPeerId", # required
-    #       }
-    #
     # @!attribute [rw] connect_peer_id
     #   The ID of the deleted Connect peer.
     #   @return [String]
@@ -2166,14 +1849,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteConnectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         global_network_id: "GlobalNetworkId", # required
-    #         connection_id: "ConnectionId", # required
-    #       }
-    #
     # @!attribute [rw] global_network_id
     #   The ID of the global network.
     #   @return [String]
@@ -2203,14 +1878,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteCoreNetworkPolicyVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         core_network_id: "CoreNetworkId", # required
-    #         policy_version_id: 1, # required
-    #       }
-    #
     # @!attribute [rw] core_network_id
     #   The ID of a core network for the deleted policy.
     #   @return [String]
@@ -2240,13 +1907,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteCoreNetworkRequest
-    #   data as a hash:
-    #
-    #       {
-    #         core_network_id: "CoreNetworkId", # required
-    #       }
-    #
     # @!attribute [rw] core_network_id
     #   The network ID of the deleted core network.
     #   @return [String]
@@ -2271,14 +1931,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDeviceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         global_network_id: "GlobalNetworkId", # required
-    #         device_id: "DeviceId", # required
-    #       }
-    #
     # @!attribute [rw] global_network_id
     #   The ID of the global network.
     #   @return [String]
@@ -2308,13 +1960,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteGlobalNetworkRequest
-    #   data as a hash:
-    #
-    #       {
-    #         global_network_id: "GlobalNetworkId", # required
-    #       }
-    #
     # @!attribute [rw] global_network_id
     #   The ID of the global network.
     #   @return [String]
@@ -2339,14 +1984,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteLinkRequest
-    #   data as a hash:
-    #
-    #       {
-    #         global_network_id: "GlobalNetworkId", # required
-    #         link_id: "LinkId", # required
-    #       }
-    #
     # @!attribute [rw] global_network_id
     #   The ID of the global network.
     #   @return [String]
@@ -2376,13 +2013,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeletePeeringRequest
-    #   data as a hash:
-    #
-    #       {
-    #         peering_id: "PeeringId", # required
-    #       }
-    #
     # @!attribute [rw] peering_id
     #   The ID of the peering connection to delete.
     #   @return [String]
@@ -2407,13 +2037,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteResourcePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the policy to delete.
     #   @return [String]
@@ -2430,14 +2053,6 @@ module Aws::NetworkManager
     #
     class DeleteResourcePolicyResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteSiteRequest
-    #   data as a hash:
-    #
-    #       {
-    #         global_network_id: "GlobalNetworkId", # required
-    #         site_id: "SiteId", # required
-    #       }
-    #
     # @!attribute [rw] global_network_id
     #   The ID of the global network.
     #   @return [String]
@@ -2467,14 +2082,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeregisterTransitGatewayRequest
-    #   data as a hash:
-    #
-    #       {
-    #         global_network_id: "GlobalNetworkId", # required
-    #         transit_gateway_arn: "TransitGatewayArn", # required
-    #       }
-    #
     # @!attribute [rw] global_network_id
     #   The ID of the global network.
     #   @return [String]
@@ -2504,15 +2111,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeGlobalNetworksRequest
-    #   data as a hash:
-    #
-    #       {
-    #         global_network_ids: ["GlobalNetworkId"],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] global_network_ids
     #   The IDs of one or more global networks. The maximum is 10.
     #   @return [Array<String>]
@@ -2631,14 +2229,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateConnectPeerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         global_network_id: "GlobalNetworkId", # required
-    #         connect_peer_id: "ConnectPeerId", # required
-    #       }
-    #
     # @!attribute [rw] global_network_id
     #   The ID of the global network.
     #   @return [String]
@@ -2668,14 +2258,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateCustomerGatewayRequest
-    #   data as a hash:
-    #
-    #       {
-    #         global_network_id: "GlobalNetworkId", # required
-    #         customer_gateway_arn: "CustomerGatewayArn", # required
-    #       }
-    #
     # @!attribute [rw] global_network_id
     #   The ID of the global network.
     #   @return [String]
@@ -2705,15 +2287,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateLinkRequest
-    #   data as a hash:
-    #
-    #       {
-    #         global_network_id: "GlobalNetworkId", # required
-    #         device_id: "DeviceId", # required
-    #         link_id: "LinkId", # required
-    #       }
-    #
     # @!attribute [rw] global_network_id
     #   The ID of the global network.
     #   @return [String]
@@ -2748,14 +2321,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateTransitGatewayConnectPeerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         global_network_id: "GlobalNetworkId", # required
-    #         transit_gateway_connect_peer_arn: "TransitGatewayConnectPeerArn", # required
-    #       }
-    #
     # @!attribute [rw] global_network_id
     #   The ID of the global network.
     #   @return [String]
@@ -2785,14 +2350,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ExecuteCoreNetworkChangeSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         core_network_id: "CoreNetworkId", # required
-    #         policy_version_id: 1, # required
-    #       }
-    #
     # @!attribute [rw] core_network_id
     #   The ID of a core network.
     #   @return [String]
@@ -2814,13 +2371,6 @@ module Aws::NetworkManager
     #
     class ExecuteCoreNetworkChangeSetResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass GetConnectAttachmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         attachment_id: "AttachmentId", # required
-    #       }
-    #
     # @!attribute [rw] attachment_id
     #   The ID of the attachment.
     #   @return [String]
@@ -2845,16 +2395,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetConnectPeerAssociationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         global_network_id: "GlobalNetworkId", # required
-    #         connect_peer_ids: ["ConnectPeerId"],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] global_network_id
     #   The ID of the global network.
     #   @return [String]
@@ -2899,13 +2439,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetConnectPeerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connect_peer_id: "ConnectPeerId", # required
-    #       }
-    #
     # @!attribute [rw] connect_peer_id
     #   The ID of the Connect peer.
     #   @return [String]
@@ -2930,17 +2463,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetConnectionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         global_network_id: "GlobalNetworkId", # required
-    #         connection_ids: ["ConnectionId"],
-    #         device_id: "DeviceId",
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] global_network_id
     #   The ID of the global network.
     #   @return [String]
@@ -2990,16 +2512,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetCoreNetworkChangeEventsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         core_network_id: "CoreNetworkId", # required
-    #         policy_version_id: 1, # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] core_network_id
     #   The ID of a core network.
     #   @return [String]
@@ -3044,16 +2556,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetCoreNetworkChangeSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         core_network_id: "CoreNetworkId", # required
-    #         policy_version_id: 1, # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] core_network_id
     #   The ID of a core network.
     #   @return [String]
@@ -3098,15 +2600,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetCoreNetworkPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         core_network_id: "CoreNetworkId", # required
-    #         policy_version_id: 1,
-    #         alias: "LIVE", # accepts LIVE, LATEST
-    #       }
-    #
     # @!attribute [rw] core_network_id
     #   The ID of a core network.
     #   @return [String]
@@ -3141,13 +2634,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetCoreNetworkRequest
-    #   data as a hash:
-    #
-    #       {
-    #         core_network_id: "CoreNetworkId", # required
-    #       }
-    #
     # @!attribute [rw] core_network_id
     #   The ID of a core network.
     #   @return [String]
@@ -3172,16 +2658,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetCustomerGatewayAssociationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         global_network_id: "GlobalNetworkId", # required
-    #         customer_gateway_arns: ["CustomerGatewayArn"],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] global_network_id
     #   The ID of the global network.
     #   @return [String]
@@ -3227,17 +2703,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDevicesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         global_network_id: "GlobalNetworkId", # required
-    #         device_ids: ["DeviceId"],
-    #         site_id: "SiteId",
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] global_network_id
     #   The ID of the global network.
     #   @return [String]
@@ -3287,17 +2752,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLinkAssociationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         global_network_id: "GlobalNetworkId", # required
-    #         device_id: "DeviceId",
-    #         link_id: "LinkId",
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] global_network_id
     #   The ID of the global network.
     #   @return [String]
@@ -3347,19 +2801,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLinksRequest
-    #   data as a hash:
-    #
-    #       {
-    #         global_network_id: "GlobalNetworkId", # required
-    #         link_ids: ["LinkId"],
-    #         site_id: "SiteId",
-    #         type: "ConstrainedString",
-    #         provider: "ConstrainedString",
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] global_network_id
     #   The ID of the global network.
     #   @return [String]
@@ -3419,16 +2860,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetNetworkResourceCountsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         global_network_id: "GlobalNetworkId", # required
-    #         resource_type: "ConstrainedString",
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] global_network_id
     #   The ID of the global network.
     #   @return [String]
@@ -3505,21 +2936,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetNetworkResourceRelationshipsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         global_network_id: "GlobalNetworkId", # required
-    #         core_network_id: "CoreNetworkId",
-    #         registered_gateway_arn: "ResourceArn",
-    #         aws_region: "ExternalRegionCode",
-    #         account_id: "AWSAccountId",
-    #         resource_type: "ConstrainedString",
-    #         resource_arn: "ResourceArn",
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] global_network_id
     #   The ID of the global network.
     #   @return [String]
@@ -3621,21 +3037,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetNetworkResourcesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         global_network_id: "GlobalNetworkId", # required
-    #         core_network_id: "CoreNetworkId",
-    #         registered_gateway_arn: "ResourceArn",
-    #         aws_region: "ExternalRegionCode",
-    #         account_id: "AWSAccountId",
-    #         resource_type: "ConstrainedString",
-    #         resource_arn: "ResourceArn",
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] global_network_id
     #   The ID of the global network.
     #   @return [String]
@@ -3756,31 +3157,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetNetworkRoutesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         global_network_id: "GlobalNetworkId", # required
-    #         route_table_identifier: { # required
-    #           transit_gateway_route_table_arn: "TransitGatewayRouteTableArn",
-    #           core_network_segment_edge: {
-    #             core_network_id: "CoreNetworkId",
-    #             segment_name: "ConstrainedString",
-    #             edge_location: "ExternalRegionCode",
-    #           },
-    #         },
-    #         exact_cidr_matches: ["ConstrainedString"],
-    #         longest_prefix_matches: ["ConstrainedString"],
-    #         subnet_of_matches: ["ConstrainedString"],
-    #         supernet_of_matches: ["ConstrainedString"],
-    #         prefix_list_ids: ["ConstrainedString"],
-    #         states: ["ACTIVE"], # accepts ACTIVE, BLACKHOLE
-    #         types: ["PROPAGATED"], # accepts PROPAGATED, STATIC
-    #         destination_filters: {
-    #           "FilterName" => ["FilterValue"],
-    #         },
-    #       }
-    #
     # @!attribute [rw] global_network_id
     #   The ID of the global network.
     #   @return [String]
@@ -3873,21 +3249,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetNetworkTelemetryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         global_network_id: "GlobalNetworkId", # required
-    #         core_network_id: "CoreNetworkId",
-    #         registered_gateway_arn: "ResourceArn",
-    #         aws_region: "ExternalRegionCode",
-    #         account_id: "AWSAccountId",
-    #         resource_type: "ConstrainedString",
-    #         resource_arn: "ResourceArn",
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] global_network_id
     #   The ID of the global network.
     #   @return [String]
@@ -3989,13 +3350,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetResourcePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource.
     #   @return [String]
@@ -4020,14 +3374,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRouteAnalysisRequest
-    #   data as a hash:
-    #
-    #       {
-    #         global_network_id: "GlobalNetworkId", # required
-    #         route_analysis_id: "ConstrainedString", # required
-    #       }
-    #
     # @!attribute [rw] global_network_id
     #   The ID of the global network.
     #   @return [String]
@@ -4057,13 +3403,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSiteToSiteVpnAttachmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         attachment_id: "AttachmentId", # required
-    #       }
-    #
     # @!attribute [rw] attachment_id
     #   The ID of the attachment.
     #   @return [String]
@@ -4088,16 +3427,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSitesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         global_network_id: "GlobalNetworkId", # required
-    #         site_ids: ["SiteId"],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] global_network_id
     #   The ID of the global network.
     #   @return [String]
@@ -4142,16 +3471,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetTransitGatewayConnectPeerAssociationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         global_network_id: "GlobalNetworkId", # required
-    #         transit_gateway_connect_peer_arns: ["TransitGatewayConnectPeerArn"],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] global_network_id
     #   The ID of the global network.
     #   @return [String]
@@ -4197,13 +3516,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetTransitGatewayPeeringRequest
-    #   data as a hash:
-    #
-    #       {
-    #         peering_id: "PeeringId", # required
-    #       }
-    #
     # @!attribute [rw] peering_id
     #   The ID of the peering request.
     #   @return [String]
@@ -4228,16 +3540,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetTransitGatewayRegistrationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         global_network_id: "GlobalNetworkId", # required
-    #         transit_gateway_arns: ["TransitGatewayArn"],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] global_network_id
     #   The ID of the global network.
     #   @return [String]
@@ -4283,13 +3585,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetTransitGatewayRouteTableAttachmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         attachment_id: "AttachmentId", # required
-    #       }
-    #
     # @!attribute [rw] attachment_id
     #   The ID of the transit gateway route table attachment.
     #   @return [String]
@@ -4315,13 +3610,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetVpcAttachmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         attachment_id: "AttachmentId", # required
-    #       }
-    #
     # @!attribute [rw] attachment_id
     #   The ID of the attachment.
     #   @return [String]
@@ -4498,18 +3786,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAttachmentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         core_network_id: "CoreNetworkId",
-    #         attachment_type: "CONNECT", # accepts CONNECT, SITE_TO_SITE_VPN, VPC, TRANSIT_GATEWAY_ROUTE_TABLE
-    #         edge_location: "ExternalRegionCode",
-    #         state: "REJECTED", # accepts REJECTED, PENDING_ATTACHMENT_ACCEPTANCE, CREATING, FAILED, AVAILABLE, UPDATING, PENDING_NETWORK_UPDATE, PENDING_TAG_ACCEPTANCE, DELETING
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] core_network_id
     #   The ID of a core network.
     #   @return [String]
@@ -4564,16 +3840,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListConnectPeersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         core_network_id: "CoreNetworkId",
-    #         connect_attachment_id: "AttachmentId",
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] core_network_id
     #   The ID of a core network.
     #   @return [String]
@@ -4618,15 +3884,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCoreNetworkPolicyVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         core_network_id: "CoreNetworkId", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] core_network_id
     #   The ID of a core network.
     #   @return [String]
@@ -4666,14 +3923,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCoreNetworksRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to return.
     #   @return [Integer]
@@ -4708,14 +3957,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListOrganizationServiceAccessStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to return.
     #   @return [Integer]
@@ -4750,18 +3991,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPeeringsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         core_network_id: "CoreNetworkId",
-    #         peering_type: "TRANSIT_GATEWAY", # accepts TRANSIT_GATEWAY
-    #         edge_location: "ExternalRegionCode",
-    #         state: "CREATING", # accepts CREATING, FAILED, AVAILABLE, DELETING
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] core_network_id
     #   The ID of a core network.
     #   @return [String]
@@ -4816,13 +4045,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -4848,15 +4070,6 @@ module Aws::NetworkManager
     end
 
     # Describes a location.
-    #
-    # @note When making an API call, you may pass Location
-    #   data as a hash:
-    #
-    #       {
-    #         address: "ConstrainedString",
-    #         latitude: "ConstrainedString",
-    #         longitude: "ConstrainedString",
-    #       }
     #
     # @!attribute [rw] address
     #   The physical address.
@@ -5307,17 +4520,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutCoreNetworkPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         core_network_id: "CoreNetworkId", # required
-    #         policy_document: "CoreNetworkPolicyDocument", # required
-    #         description: "ConstrainedString",
-    #         latest_version_id: 1,
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] core_network_id
     #   The ID of a core network.
     #   @return [String]
@@ -5365,14 +4567,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutResourcePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy_document: "ResourcePolicyDocument", # required
-    #         resource_arn: "ResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] policy_document
     #   The JSON resource policy document.
     #   @return [String]
@@ -5394,14 +4588,6 @@ module Aws::NetworkManager
     #
     class PutResourcePolicyResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass RegisterTransitGatewayRequest
-    #   data as a hash:
-    #
-    #       {
-    #         global_network_id: "GlobalNetworkId", # required
-    #         transit_gateway_arn: "TransitGatewayArn", # required
-    #       }
-    #
     # @!attribute [rw] global_network_id
     #   The ID of the global network.
     #   @return [String]
@@ -5431,13 +4617,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RejectAttachmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         attachment_id: "AttachmentId", # required
-    #       }
-    #
     # @!attribute [rw] attachment_id
     #   The ID of the attachment.
     #   @return [String]
@@ -5509,14 +4688,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RestoreCoreNetworkPolicyVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         core_network_id: "CoreNetworkId", # required
-    #         policy_version_id: 1, # required
-    #       }
-    #
     # @!attribute [rw] core_network_id
     #   The ID of a core network.
     #   @return [String]
@@ -5690,14 +4861,6 @@ module Aws::NetworkManager
 
     # Describes a source or a destination.
     #
-    # @note When making an API call, you may pass RouteAnalysisEndpointOptionsSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         transit_gateway_attachment_arn: "TransitGatewayAttachmentArn",
-    #         ip_address: "IPAddress",
-    #       }
-    #
     # @!attribute [rw] transit_gateway_attachment_arn
     #   The ARN of the transit gateway attachment.
     #   @return [String]
@@ -5735,18 +4898,6 @@ module Aws::NetworkManager
     end
 
     # Describes a route table.
-    #
-    # @note When making an API call, you may pass RouteTableIdentifier
-    #   data as a hash:
-    #
-    #       {
-    #         transit_gateway_route_table_arn: "TransitGatewayRouteTableArn",
-    #         core_network_segment_edge: {
-    #           core_network_id: "CoreNetworkId",
-    #           segment_name: "ConstrainedString",
-    #           edge_location: "ExternalRegionCode",
-    #         },
-    #       }
     #
     # @!attribute [rw] transit_gateway_route_table_arn
     #   The ARN of the transit gateway route table.
@@ -5867,13 +5018,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartOrganizationServiceAccessUpdateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         action: "Action", # required
-    #       }
-    #
     # @!attribute [rw] action
     #   The action to take for the update request. This can be either
     #   `ENABLE` or `DISABLE`.
@@ -5900,23 +5044,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartRouteAnalysisRequest
-    #   data as a hash:
-    #
-    #       {
-    #         global_network_id: "GlobalNetworkId", # required
-    #         source: { # required
-    #           transit_gateway_attachment_arn: "TransitGatewayAttachmentArn",
-    #           ip_address: "IPAddress",
-    #         },
-    #         destination: { # required
-    #           transit_gateway_attachment_arn: "TransitGatewayAttachmentArn",
-    #           ip_address: "IPAddress",
-    #         },
-    #         include_return_path: false,
-    #         use_middleboxes: false,
-    #       }
-    #
     # @!attribute [rw] global_network_id
     #   The ID of the global network.
     #   @return [String]
@@ -5965,14 +5092,6 @@ module Aws::NetworkManager
 
     # Describes a tag.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey",
-    #         value: "TagValue",
-    #       }
-    #
     # @!attribute [rw] key
     #   The tag key.
     #
@@ -5994,19 +5113,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -6171,14 +5277,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -6200,17 +5298,6 @@ module Aws::NetworkManager
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateConnectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         global_network_id: "GlobalNetworkId", # required
-    #         connection_id: "ConnectionId", # required
-    #         link_id: "LinkId",
-    #         connected_link_id: "LinkId",
-    #         description: "ConstrainedString",
-    #       }
-    #
     # @!attribute [rw] global_network_id
     #   The ID of the global network.
     #   @return [String]
@@ -6257,14 +5344,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateCoreNetworkRequest
-    #   data as a hash:
-    #
-    #       {
-    #         core_network_id: "CoreNetworkId", # required
-    #         description: "ConstrainedString",
-    #       }
-    #
     # @!attribute [rw] core_network_id
     #   The ID of a core network.
     #   @return [String]
@@ -6294,29 +5373,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateDeviceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         global_network_id: "GlobalNetworkId", # required
-    #         device_id: "DeviceId", # required
-    #         aws_location: {
-    #           zone: "ConstrainedString",
-    #           subnet_arn: "SubnetArn",
-    #         },
-    #         description: "ConstrainedString",
-    #         type: "ConstrainedString",
-    #         vendor: "ConstrainedString",
-    #         model: "ConstrainedString",
-    #         serial_number: "ConstrainedString",
-    #         location: {
-    #           address: "ConstrainedString",
-    #           latitude: "ConstrainedString",
-    #           longitude: "ConstrainedString",
-    #         },
-    #         site_id: "SiteId",
-    #       }
-    #
     # @!attribute [rw] global_network_id
     #   The ID of the global network.
     #   @return [String]
@@ -6395,14 +5451,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateGlobalNetworkRequest
-    #   data as a hash:
-    #
-    #       {
-    #         global_network_id: "GlobalNetworkId", # required
-    #         description: "ConstrainedString",
-    #       }
-    #
     # @!attribute [rw] global_network_id
     #   The ID of your global network.
     #   @return [String]
@@ -6434,21 +5482,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateLinkRequest
-    #   data as a hash:
-    #
-    #       {
-    #         global_network_id: "GlobalNetworkId", # required
-    #         link_id: "LinkId", # required
-    #         description: "ConstrainedString",
-    #         type: "ConstrainedString",
-    #         bandwidth: {
-    #           upload_speed: 1,
-    #           download_speed: 1,
-    #         },
-    #         provider: "ConstrainedString",
-    #       }
-    #
     # @!attribute [rw] global_network_id
     #   The ID of the global network.
     #   @return [String]
@@ -6504,17 +5537,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateNetworkResourceMetadataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         global_network_id: "GlobalNetworkId", # required
-    #         resource_arn: "ResourceArn", # required
-    #         metadata: { # required
-    #           "ConstrainedString" => "ConstrainedString",
-    #         },
-    #       }
-    #
     # @!attribute [rw] global_network_id
     #   The ID of the global network.
     #   @return [String]
@@ -6554,20 +5576,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateSiteRequest
-    #   data as a hash:
-    #
-    #       {
-    #         global_network_id: "GlobalNetworkId", # required
-    #         site_id: "SiteId", # required
-    #         description: "ConstrainedString",
-    #         location: {
-    #           address: "ConstrainedString",
-    #           latitude: "ConstrainedString",
-    #           longitude: "ConstrainedString",
-    #         },
-    #       }
-    #
     # @!attribute [rw] global_network_id
     #   The ID of the global network.
     #   @return [String]
@@ -6615,18 +5623,6 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateVpcAttachmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         attachment_id: "AttachmentId", # required
-    #         add_subnet_arns: ["SubnetArn"],
-    #         remove_subnet_arns: ["SubnetArn"],
-    #         options: {
-    #           ipv_6_support: false,
-    #         },
-    #       }
-    #
     # @!attribute [rw] attachment_id
     #   The ID of the attachment.
     #   @return [String]
@@ -6733,13 +5729,6 @@ module Aws::NetworkManager
     end
 
     # Describes the VPC options.
-    #
-    # @note When making an API call, you may pass VpcOptions
-    #   data as a hash:
-    #
-    #       {
-    #         ipv_6_support: false,
-    #       }
     #
     # @!attribute [rw] ipv_6_support
     #   Indicates whether IPv6 is supported.

@@ -59,15 +59,6 @@ module Aws::ConnectParticipant
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CompleteAttachmentUploadRequest
-    #   data as a hash:
-    #
-    #       {
-    #         attachment_ids: ["ArtifactId"], # required
-    #         client_token: "NonEmptyClientToken", # required
-    #         connection_token: "ParticipantToken", # required
-    #       }
-    #
     # @!attribute [rw] attachment_ids
     #   A list of unique identifiers for the attachments.
     #   @return [Array<String>]
@@ -134,15 +125,6 @@ module Aws::ConnectParticipant
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateParticipantConnectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         type: ["WEBSOCKET"], # required, accepts WEBSOCKET, CONNECTION_CREDENTIALS
-    #         participant_token: "ParticipantToken", # required
-    #         connect_participant: false,
-    #       }
-    #
     # @!attribute [rw] type
     #   Type of connection information required.
     #   @return [Array<String>]
@@ -191,14 +173,6 @@ module Aws::ConnectParticipant
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisconnectParticipantRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         connection_token: "ParticipantToken", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
@@ -225,14 +199,6 @@ module Aws::ConnectParticipant
     #
     class DisconnectParticipantResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass GetAttachmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         attachment_id: "ArtifactId", # required
-    #         connection_token: "ParticipantToken", # required
-    #       }
-    #
     # @!attribute [rw] attachment_id
     #   A unique identifier for the attachment.
     #   @return [String]
@@ -275,23 +241,6 @@ module Aws::ConnectParticipant
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetTranscriptRequest
-    #   data as a hash:
-    #
-    #       {
-    #         contact_id: "ContactId",
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         scan_direction: "FORWARD", # accepts FORWARD, BACKWARD
-    #         sort_order: "DESCENDING", # accepts DESCENDING, ASCENDING
-    #         start_position: {
-    #           id: "ChatItemId",
-    #           absolute_time: "Instant",
-    #           most_recent: 1,
-    #         },
-    #         connection_token: "ParticipantToken", # required
-    #       }
-    #
     # @!attribute [rw] contact_id
     #   The contactId from the current contact chain for which transcript is
     #   needed.
@@ -434,16 +383,6 @@ module Aws::ConnectParticipant
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SendEventRequest
-    #   data as a hash:
-    #
-    #       {
-    #         content_type: "ChatContentType", # required
-    #         content: "ChatContent",
-    #         client_token: "ClientToken",
-    #         connection_token: "ParticipantToken", # required
-    #       }
-    #
     # @!attribute [rw] content_type
     #   The content type of the request. Supported types are:
     #
@@ -501,16 +440,6 @@ module Aws::ConnectParticipant
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SendMessageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         content_type: "ChatContentType", # required
-    #         content: "ChatContent", # required
-    #         client_token: "ClientToken",
-    #         connection_token: "ParticipantToken", # required
-    #       }
-    #
     # @!attribute [rw] content_type
     #   The type of the content. Supported types are text/plain.
     #   @return [String]
@@ -575,17 +504,6 @@ module Aws::ConnectParticipant
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartAttachmentUploadRequest
-    #   data as a hash:
-    #
-    #       {
-    #         content_type: "ContentType", # required
-    #         attachment_size_in_bytes: 1, # required
-    #         attachment_name: "AttachmentName", # required
-    #         client_token: "NonEmptyClientToken", # required
-    #         connection_token: "ParticipantToken", # required
-    #       }
-    #
     # @!attribute [rw] content_type
     #   Describes the MIME file type of the attachment. For a list of
     #   supported file types, see [Feature specifications][1] in the *Amazon
@@ -648,15 +566,6 @@ module Aws::ConnectParticipant
 
     # A filtering option for where to start. For example, if you sent 100
     # messages, start with message 50.
-    #
-    # @note When making an API call, you may pass StartPosition
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ChatItemId",
-    #         absolute_time: "Instant",
-    #         most_recent: 1,
-    #       }
     #
     # @!attribute [rw] id
     #   The ID of the message or event where to start.

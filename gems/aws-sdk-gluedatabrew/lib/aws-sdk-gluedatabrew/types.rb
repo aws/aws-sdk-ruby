@@ -27,13 +27,6 @@ module Aws::GlueDataBrew
     # contain detected entities. When undefined, no statistics will be
     # computed on columns that contain detected entities.
     #
-    # @note When making an API call, you may pass AllowedStatistics
-    #   data as a hash:
-    #
-    #       {
-    #         statistics: ["Statistic"], # required
-    #       }
-    #
     # @!attribute [rw] statistics
     #   One or more column statistics to allow for columns that contain
     #   detected entities.
@@ -47,14 +40,6 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchDeleteRecipeVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "RecipeName", # required
-    #         recipe_versions: ["RecipeVersion"], # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the recipe whose versions are to be deleted.
     #   @return [String]
@@ -95,14 +80,6 @@ module Aws::GlueDataBrew
     # Selector of a column from a dataset for profile job configuration. One
     # selector includes either a column name or a regular expression.
     #
-    # @note When making an API call, you may pass ColumnSelector
-    #   data as a hash:
-    #
-    #       {
-    #         regex: "ColumnName",
-    #         name: "ColumnName",
-    #       }
-    #
     # @!attribute [rw] regex
     #   A regular expression for selecting a column from a dataset.
     #   @return [String]
@@ -123,29 +100,6 @@ module Aws::GlueDataBrew
     # Configuration for column evaluations for a profile job.
     # ColumnStatisticsConfiguration can be used to select evaluations and
     # override parameters of evaluations for particular columns.
-    #
-    # @note When making an API call, you may pass ColumnStatisticsConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         selectors: [
-    #           {
-    #             regex: "ColumnName",
-    #             name: "ColumnName",
-    #           },
-    #         ],
-    #         statistics: { # required
-    #           included_statistics: ["Statistic"],
-    #           overrides: [
-    #             {
-    #               statistic: "Statistic", # required
-    #               parameters: { # required
-    #                 "ParameterName" => "ParameterValue",
-    #               },
-    #             },
-    #           ],
-    #         },
-    #       }
     #
     # @!attribute [rw] selectors
     #   List of column selectors. Selectors can be used to select columns
@@ -176,15 +130,6 @@ module Aws::GlueDataBrew
     # specify multiple `ConditionExpression` elements. Each condition is
     # applied to the rows in a dataset first, before the recipe action is
     # performed.
-    #
-    # @note When making an API call, you may pass ConditionExpression
-    #   data as a hash:
-    #
-    #       {
-    #         condition: "Condition", # required
-    #         value: "ConditionValue",
-    #         target_column: "TargetColumn", # required
-    #       }
     #
     # @!attribute [rw] condition
     #   A specific condition to apply to a recipe action. For more
@@ -228,92 +173,6 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDatasetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "DatasetName", # required
-    #         format: "CSV", # accepts CSV, JSON, PARQUET, EXCEL, ORC
-    #         format_options: {
-    #           json: {
-    #             multi_line: false,
-    #           },
-    #           excel: {
-    #             sheet_names: ["SheetName"],
-    #             sheet_indexes: [1],
-    #             header_row: false,
-    #           },
-    #           csv: {
-    #             delimiter: "Delimiter",
-    #             header_row: false,
-    #           },
-    #         },
-    #         input: { # required
-    #           s3_input_definition: {
-    #             bucket: "Bucket", # required
-    #             key: "Key",
-    #             bucket_owner: "BucketOwner",
-    #           },
-    #           data_catalog_input_definition: {
-    #             catalog_id: "CatalogId",
-    #             database_name: "DatabaseName", # required
-    #             table_name: "TableName", # required
-    #             temp_directory: {
-    #               bucket: "Bucket", # required
-    #               key: "Key",
-    #               bucket_owner: "BucketOwner",
-    #             },
-    #           },
-    #           database_input_definition: {
-    #             glue_connection_name: "GlueConnectionName", # required
-    #             database_table_name: "DatabaseTableName",
-    #             temp_directory: {
-    #               bucket: "Bucket", # required
-    #               key: "Key",
-    #               bucket_owner: "BucketOwner",
-    #             },
-    #             query_string: "QueryString",
-    #           },
-    #           metadata: {
-    #             source_arn: "Arn",
-    #           },
-    #         },
-    #         path_options: {
-    #           last_modified_date_condition: {
-    #             expression: "Expression", # required
-    #             values_map: { # required
-    #               "ValueReference" => "ConditionValue",
-    #             },
-    #           },
-    #           files_limit: {
-    #             max_files: 1, # required
-    #             ordered_by: "LAST_MODIFIED_DATE", # accepts LAST_MODIFIED_DATE
-    #             order: "DESCENDING", # accepts DESCENDING, ASCENDING
-    #           },
-    #           parameters: {
-    #             "PathParameterName" => {
-    #               name: "PathParameterName", # required
-    #               type: "Datetime", # required, accepts Datetime, Number, String
-    #               datetime_options: {
-    #                 format: "DatetimeFormat", # required
-    #                 timezone_offset: "TimezoneOffset",
-    #                 locale_code: "LocaleCode",
-    #               },
-    #               create_column: false,
-    #               filter: {
-    #                 expression: "Expression", # required
-    #                 values_map: { # required
-    #                   "ValueReference" => "ConditionValue",
-    #                 },
-    #               },
-    #             },
-    #           },
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the dataset to be created. Valid characters are
     #   alphanumeric (A-Z, a-z, 0-9), hyphen (-), period (.), and space.
@@ -368,87 +227,6 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateProfileJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_name: "DatasetName", # required
-    #         encryption_key_arn: "EncryptionKeyArn",
-    #         encryption_mode: "SSE-KMS", # accepts SSE-KMS, SSE-S3
-    #         name: "JobName", # required
-    #         log_subscription: "ENABLE", # accepts ENABLE, DISABLE
-    #         max_capacity: 1,
-    #         max_retries: 1,
-    #         output_location: { # required
-    #           bucket: "Bucket", # required
-    #           key: "Key",
-    #           bucket_owner: "BucketOwner",
-    #         },
-    #         configuration: {
-    #           dataset_statistics_configuration: {
-    #             included_statistics: ["Statistic"],
-    #             overrides: [
-    #               {
-    #                 statistic: "Statistic", # required
-    #                 parameters: { # required
-    #                   "ParameterName" => "ParameterValue",
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #           profile_columns: [
-    #             {
-    #               regex: "ColumnName",
-    #               name: "ColumnName",
-    #             },
-    #           ],
-    #           column_statistics_configurations: [
-    #             {
-    #               selectors: [
-    #                 {
-    #                   regex: "ColumnName",
-    #                   name: "ColumnName",
-    #                 },
-    #               ],
-    #               statistics: { # required
-    #                 included_statistics: ["Statistic"],
-    #                 overrides: [
-    #                   {
-    #                     statistic: "Statistic", # required
-    #                     parameters: { # required
-    #                       "ParameterName" => "ParameterValue",
-    #                     },
-    #                   },
-    #                 ],
-    #               },
-    #             },
-    #           ],
-    #           entity_detector_configuration: {
-    #             entity_types: ["EntityType"], # required
-    #             allowed_statistics: [
-    #               {
-    #                 statistics: ["Statistic"], # required
-    #               },
-    #             ],
-    #           },
-    #         },
-    #         validation_configurations: [
-    #           {
-    #             ruleset_arn: "Arn", # required
-    #             validation_mode: "CHECK_ALL", # accepts CHECK_ALL
-    #           },
-    #         ],
-    #         role_arn: "Arn", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         timeout: 1,
-    #         job_sample: {
-    #           mode: "FULL_DATASET", # accepts FULL_DATASET, CUSTOM_ROWS
-    #           size: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] dataset_name
     #   The name of the dataset that this job is to act upon.
     #   @return [String]
@@ -560,23 +338,6 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateProjectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_name: "DatasetName", # required
-    #         name: "ProjectName", # required
-    #         recipe_name: "RecipeName", # required
-    #         sample: {
-    #           size: 1,
-    #           type: "FIRST_N", # required, accepts FIRST_N, LAST_N, RANDOM
-    #         },
-    #         role_arn: "Arn", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] dataset_name
     #   The name of an existing dataset to associate this project with.
     #   @return [String]
@@ -629,85 +390,6 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateRecipeJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_name: "DatasetName",
-    #         encryption_key_arn: "EncryptionKeyArn",
-    #         encryption_mode: "SSE-KMS", # accepts SSE-KMS, SSE-S3
-    #         name: "JobName", # required
-    #         log_subscription: "ENABLE", # accepts ENABLE, DISABLE
-    #         max_capacity: 1,
-    #         max_retries: 1,
-    #         outputs: [
-    #           {
-    #             compression_format: "GZIP", # accepts GZIP, LZ4, SNAPPY, BZIP2, DEFLATE, LZO, BROTLI, ZSTD, ZLIB
-    #             format: "CSV", # accepts CSV, JSON, PARQUET, GLUEPARQUET, AVRO, ORC, XML, TABLEAUHYPER
-    #             partition_columns: ["ColumnName"],
-    #             location: { # required
-    #               bucket: "Bucket", # required
-    #               key: "Key",
-    #               bucket_owner: "BucketOwner",
-    #             },
-    #             overwrite: false,
-    #             format_options: {
-    #               csv: {
-    #                 delimiter: "Delimiter",
-    #               },
-    #             },
-    #             max_output_files: 1,
-    #           },
-    #         ],
-    #         data_catalog_outputs: [
-    #           {
-    #             catalog_id: "CatalogId",
-    #             database_name: "DatabaseName", # required
-    #             table_name: "TableName", # required
-    #             s3_options: {
-    #               location: { # required
-    #                 bucket: "Bucket", # required
-    #                 key: "Key",
-    #                 bucket_owner: "BucketOwner",
-    #               },
-    #             },
-    #             database_options: {
-    #               temp_directory: {
-    #                 bucket: "Bucket", # required
-    #                 key: "Key",
-    #                 bucket_owner: "BucketOwner",
-    #               },
-    #               table_name: "DatabaseTableName", # required
-    #             },
-    #             overwrite: false,
-    #           },
-    #         ],
-    #         database_outputs: [
-    #           {
-    #             glue_connection_name: "GlueConnectionName", # required
-    #             database_options: { # required
-    #               temp_directory: {
-    #                 bucket: "Bucket", # required
-    #                 key: "Key",
-    #                 bucket_owner: "BucketOwner",
-    #               },
-    #               table_name: "DatabaseTableName", # required
-    #             },
-    #             database_output_mode: "NEW_TABLE", # accepts NEW_TABLE
-    #           },
-    #         ],
-    #         project_name: "ProjectName",
-    #         recipe_reference: {
-    #           name: "RecipeName", # required
-    #           recipe_version: "RecipeVersion",
-    #         },
-    #         role_arn: "Arn", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         timeout: 1,
-    #       }
-    #
     # @!attribute [rw] dataset_name
     #   The name of the dataset that this job processes.
     #   @return [String]
@@ -817,34 +499,6 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateRecipeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "RecipeDescription",
-    #         name: "RecipeName", # required
-    #         steps: [ # required
-    #           {
-    #             action: { # required
-    #               operation: "Operation", # required
-    #               parameters: {
-    #                 "ParameterName" => "ParameterValue",
-    #               },
-    #             },
-    #             condition_expressions: [
-    #               {
-    #                 condition: "Condition", # required
-    #                 value: "ConditionValue",
-    #                 target_column: "TargetColumn", # required
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] description
     #   A description for the recipe.
     #   @return [String]
@@ -887,39 +541,6 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateRulesetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "RulesetName", # required
-    #         description: "RulesetDescription",
-    #         target_arn: "Arn", # required
-    #         rules: [ # required
-    #           {
-    #             name: "RuleName", # required
-    #             disabled: false,
-    #             check_expression: "Expression", # required
-    #             substitution_map: {
-    #               "ValueReference" => "ConditionValue",
-    #             },
-    #             threshold: {
-    #               value: 1.0, # required
-    #               type: "GREATER_THAN_OR_EQUAL", # accepts GREATER_THAN_OR_EQUAL, LESS_THAN_OR_EQUAL, GREATER_THAN, LESS_THAN
-    #               unit: "COUNT", # accepts COUNT, PERCENTAGE
-    #             },
-    #             column_selectors: [
-    #               {
-    #                 regex: "ColumnName",
-    #                 name: "ColumnName",
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the ruleset to be created. Valid characters are
     #   alphanumeric (A-Z, a-z, 0-9), hyphen (-), period (.), and space.
@@ -967,18 +588,6 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateScheduleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_names: ["JobName"],
-    #         cron_expression: "CronExpression", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         name: "ScheduleName", # required
-    #       }
-    #
     # @!attribute [rw] job_names
     #   The name or names of one or more jobs to be run.
     #   @return [Array<String>]
@@ -1029,14 +638,6 @@ module Aws::GlueDataBrew
     # comma-separated value (CSV) file when creating a dataset from that
     # file.
     #
-    # @note When making an API call, you may pass CsvOptions
-    #   data as a hash:
-    #
-    #       {
-    #         delimiter: "Delimiter",
-    #         header_row: false,
-    #       }
-    #
     # @!attribute [rw] delimiter
     #   A single character that specifies the delimiter being used in the
     #   CSV file.
@@ -1060,13 +661,6 @@ module Aws::GlueDataBrew
     # Represents a set of options that define how DataBrew will write a
     # comma-separated value (CSV) file.
     #
-    # @note When making an API call, you may pass CsvOutputOptions
-    #   data as a hash:
-    #
-    #       {
-    #         delimiter: "Delimiter",
-    #       }
-    #
     # @!attribute [rw] delimiter
     #   A single character that specifies the delimiter used to create CSV
     #   job output.
@@ -1082,20 +676,6 @@ module Aws::GlueDataBrew
 
     # Represents how metadata stored in the Glue Data Catalog is defined in
     # a DataBrew dataset.
-    #
-    # @note When making an API call, you may pass DataCatalogInputDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         catalog_id: "CatalogId",
-    #         database_name: "DatabaseName", # required
-    #         table_name: "TableName", # required
-    #         temp_directory: {
-    #           bucket: "Bucket", # required
-    #           key: "Key",
-    #           bucket_owner: "BucketOwner",
-    #         },
-    #       }
     #
     # @!attribute [rw] catalog_id
     #   The unique identifier of the Amazon Web Services account that holds
@@ -1129,31 +709,6 @@ module Aws::GlueDataBrew
 
     # Represents options that specify how and where in the Glue Data Catalog
     # DataBrew writes the output generated by recipe jobs.
-    #
-    # @note When making an API call, you may pass DataCatalogOutput
-    #   data as a hash:
-    #
-    #       {
-    #         catalog_id: "CatalogId",
-    #         database_name: "DatabaseName", # required
-    #         table_name: "TableName", # required
-    #         s3_options: {
-    #           location: { # required
-    #             bucket: "Bucket", # required
-    #             key: "Key",
-    #             bucket_owner: "BucketOwner",
-    #           },
-    #         },
-    #         database_options: {
-    #           temp_directory: {
-    #             bucket: "Bucket", # required
-    #             key: "Key",
-    #             bucket_owner: "BucketOwner",
-    #           },
-    #           table_name: "DatabaseTableName", # required
-    #         },
-    #         overwrite: false,
-    #       }
     #
     # @!attribute [rw] catalog_id
     #   The unique identifier of the Amazon Web Services account that holds
@@ -1199,20 +754,6 @@ module Aws::GlueDataBrew
 
     # Connection information for dataset input files stored in a database.
     #
-    # @note When making an API call, you may pass DatabaseInputDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         glue_connection_name: "GlueConnectionName", # required
-    #         database_table_name: "DatabaseTableName",
-    #         temp_directory: {
-    #           bucket: "Bucket", # required
-    #           key: "Key",
-    #           bucket_owner: "BucketOwner",
-    #         },
-    #         query_string: "QueryString",
-    #       }
-    #
     # @!attribute [rw] glue_connection_name
     #   The Glue Connection that stores the connection information for the
     #   target database.
@@ -1247,22 +788,6 @@ module Aws::GlueDataBrew
     # Represents a JDBC database output object which defines the output
     # destination for a DataBrew recipe job to write into.
     #
-    # @note When making an API call, you may pass DatabaseOutput
-    #   data as a hash:
-    #
-    #       {
-    #         glue_connection_name: "GlueConnectionName", # required
-    #         database_options: { # required
-    #           temp_directory: {
-    #             bucket: "Bucket", # required
-    #             key: "Key",
-    #             bucket_owner: "BucketOwner",
-    #           },
-    #           table_name: "DatabaseTableName", # required
-    #         },
-    #         database_output_mode: "NEW_TABLE", # accepts NEW_TABLE
-    #       }
-    #
     # @!attribute [rw] glue_connection_name
     #   The Glue connection that stores the connection information for the
     #   target database.
@@ -1290,18 +815,6 @@ module Aws::GlueDataBrew
 
     # Represents options that specify how and where DataBrew writes the
     # database output generated by recipe jobs.
-    #
-    # @note When making an API call, you may pass DatabaseTableOutputOptions
-    #   data as a hash:
-    #
-    #       {
-    #         temp_directory: {
-    #           bucket: "Bucket", # required
-    #           key: "Key",
-    #           bucket_owner: "BucketOwner",
-    #         },
-    #         table_name: "DatabaseTableName", # required
-    #       }
     #
     # @!attribute [rw] temp_directory
     #   Represents an Amazon S3 location (bucket name and object key) where
@@ -1405,26 +918,6 @@ module Aws::GlueDataBrew
     # Represents a dataset parameter that defines type and conditions for a
     # parameter in the Amazon S3 path of the dataset.
     #
-    # @note When making an API call, you may pass DatasetParameter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "PathParameterName", # required
-    #         type: "Datetime", # required, accepts Datetime, Number, String
-    #         datetime_options: {
-    #           format: "DatetimeFormat", # required
-    #           timezone_offset: "TimezoneOffset",
-    #           locale_code: "LocaleCode",
-    #         },
-    #         create_column: false,
-    #         filter: {
-    #           expression: "Expression", # required
-    #           values_map: { # required
-    #             "ValueReference" => "ConditionValue",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the parameter that is used in the dataset's Amazon S3
     #   path.
@@ -1465,15 +958,6 @@ module Aws::GlueDataBrew
     # Represents additional options for correct interpretation of datetime
     # parameters used in the Amazon S3 path of a dataset.
     #
-    # @note When making an API call, you may pass DatetimeOptions
-    #   data as a hash:
-    #
-    #       {
-    #         format: "DatetimeFormat", # required
-    #         timezone_offset: "TimezoneOffset",
-    #         locale_code: "LocaleCode",
-    #       }
-    #
     # @!attribute [rw] format
     #   Required option, that defines the datetime format used for a date
     #   parameter in the Amazon S3 path. Should use only supported datetime
@@ -1504,13 +988,6 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDatasetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "DatasetName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the dataset to be deleted.
     #   @return [String]
@@ -1535,13 +1012,6 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "JobName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the job to be deleted.
     #   @return [String]
@@ -1566,13 +1036,6 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteProjectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ProjectName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the project to be deleted.
     #   @return [String]
@@ -1597,14 +1060,6 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteRecipeVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "RecipeName", # required
-    #         recipe_version: "RecipeVersion", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the recipe.
     #   @return [String]
@@ -1641,13 +1096,6 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteRulesetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "RulesetName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the ruleset to be deleted.
     #   @return [String]
@@ -1672,13 +1120,6 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteScheduleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ScheduleName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the schedule to be deleted.
     #   @return [String]
@@ -1703,13 +1144,6 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDatasetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "DatasetName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the dataset to be described.
     #   @return [String]
@@ -1795,13 +1229,6 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "JobName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the job to be described.
     #   @return [String]
@@ -1964,14 +1391,6 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeJobRunRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "JobName", # required
-    #         run_id: "JobRunId", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the job being processed during this run.
     #   @return [String]
@@ -2104,13 +1523,6 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeProjectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ProjectName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the project to be described.
     #   @return [String]
@@ -2210,14 +1622,6 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeRecipeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "RecipeName", # required
-    #         recipe_version: "RecipeVersion",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the recipe to be described.
     #   @return [String]
@@ -2311,13 +1715,6 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeRulesetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "RulesetName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the ruleset to be described.
     #   @return [String]
@@ -2390,13 +1787,6 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeScheduleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ScheduleName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the schedule to be described.
     #   @return [String]
@@ -2472,18 +1862,6 @@ module Aws::GlueDataBrew
     # Configuration of entity detection for a profile job. When undefined,
     # entity detection is disabled.
     #
-    # @note When making an API call, you may pass EntityDetectorConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         entity_types: ["EntityType"], # required
-    #         allowed_statistics: [
-    #           {
-    #             statistics: ["Statistic"], # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] entity_types
     #   Entity types to detect. Can be any of the following:
     #
@@ -2547,15 +1925,6 @@ module Aws::GlueDataBrew
     # Represents a set of options that define how DataBrew will interpret a
     # Microsoft Excel file when creating a dataset from that file.
     #
-    # @note When making an API call, you may pass ExcelOptions
-    #   data as a hash:
-    #
-    #       {
-    #         sheet_names: ["SheetName"],
-    #         sheet_indexes: [1],
-    #         header_row: false,
-    #       }
-    #
     # @!attribute [rw] sheet_names
     #   One or more named sheets in the Excel file that will be included in
     #   the dataset.
@@ -2584,15 +1953,6 @@ module Aws::GlueDataBrew
 
     # Represents a limit imposed on number of Amazon S3 files that should be
     # selected for a dataset from a connected Amazon S3 path.
-    #
-    # @note When making an API call, you may pass FilesLimit
-    #   data as a hash:
-    #
-    #       {
-    #         max_files: 1, # required
-    #         ordered_by: "LAST_MODIFIED_DATE", # accepts LAST_MODIFIED_DATE
-    #         order: "DESCENDING", # accepts DESCENDING, ASCENDING
-    #       }
     #
     # @!attribute [rw] max_files
     #   The number of Amazon S3 files to select.
@@ -2628,16 +1988,6 @@ module Aws::GlueDataBrew
     #
     # [1]: https://docs.aws.amazon.com/databrew/latest/dg/datasets.multiple-files.html#conditions.for.dynamic.datasets
     #
-    # @note When making an API call, you may pass FilterExpression
-    #   data as a hash:
-    #
-    #       {
-    #         expression: "Expression", # required
-    #         values_map: { # required
-    #           "ValueReference" => "ConditionValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] expression
     #   The expression which includes condition names followed by
     #   substitution variables, possibly grouped and combined with other
@@ -2662,24 +2012,6 @@ module Aws::GlueDataBrew
 
     # Represents a set of options that define the structure of either
     # comma-separated value (CSV), Excel, or JSON input.
-    #
-    # @note When making an API call, you may pass FormatOptions
-    #   data as a hash:
-    #
-    #       {
-    #         json: {
-    #           multi_line: false,
-    #         },
-    #         excel: {
-    #           sheet_names: ["SheetName"],
-    #           sheet_indexes: [1],
-    #           header_row: false,
-    #         },
-    #         csv: {
-    #           delimiter: "Delimiter",
-    #           header_row: false,
-    #         },
-    #       }
     #
     # @!attribute [rw] json
     #   Options that define how JSON input is to be interpreted by DataBrew.
@@ -2706,40 +2038,6 @@ module Aws::GlueDataBrew
 
     # Represents information on how DataBrew can find data, in either the
     # Glue Data Catalog or Amazon S3.
-    #
-    # @note When making an API call, you may pass Input
-    #   data as a hash:
-    #
-    #       {
-    #         s3_input_definition: {
-    #           bucket: "Bucket", # required
-    #           key: "Key",
-    #           bucket_owner: "BucketOwner",
-    #         },
-    #         data_catalog_input_definition: {
-    #           catalog_id: "CatalogId",
-    #           database_name: "DatabaseName", # required
-    #           table_name: "TableName", # required
-    #           temp_directory: {
-    #             bucket: "Bucket", # required
-    #             key: "Key",
-    #             bucket_owner: "BucketOwner",
-    #           },
-    #         },
-    #         database_input_definition: {
-    #           glue_connection_name: "GlueConnectionName", # required
-    #           database_table_name: "DatabaseTableName",
-    #           temp_directory: {
-    #             bucket: "Bucket", # required
-    #             key: "Key",
-    #             bucket_owner: "BucketOwner",
-    #           },
-    #           query_string: "QueryString",
-    #         },
-    #         metadata: {
-    #           source_arn: "Arn",
-    #         },
-    #       }
     #
     # @!attribute [rw] s3_input_definition
     #   The Amazon S3 location where the data is stored.
@@ -3053,14 +2351,6 @@ module Aws::GlueDataBrew
     # isn't provided, the default is used. The default value is
     # CUSTOM\_ROWS for the mode parameter and 20,000 for the size parameter.
     #
-    # @note When making an API call, you may pass JobSample
-    #   data as a hash:
-    #
-    #       {
-    #         mode: "FULL_DATASET", # accepts FULL_DATASET, CUSTOM_ROWS
-    #         size: 1,
-    #       }
-    #
     # @!attribute [rw] mode
     #   A value that determines whether the profile job is run on the entire
     #   dataset or a specified number of rows. This value must be one of the
@@ -3092,13 +2382,6 @@ module Aws::GlueDataBrew
     # Represents the JSON-specific options that define how input is to be
     # interpreted by Glue DataBrew.
     #
-    # @note When making an API call, you may pass JsonOptions
-    #   data as a hash:
-    #
-    #       {
-    #         multi_line: false,
-    #       }
-    #
     # @!attribute [rw] multi_line
     #   A value that specifies whether JSON input contains embedded new line
     #   characters.
@@ -3112,14 +2395,6 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDatasetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to return in this request.
     #   @return [Integer]
@@ -3156,15 +2431,6 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListJobRunsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "JobName", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the job.
     #   @return [String]
@@ -3206,16 +2472,6 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_name: "DatasetName",
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         project_name: "ProjectName",
-    #       }
-    #
     # @!attribute [rw] dataset_name
     #   The name of a dataset. Using this parameter indicates to return only
     #   those jobs that act on the specified dataset.
@@ -3266,14 +2522,6 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListProjectsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The token returned by a previous call to retrieve the next set of
     #   results.
@@ -3310,15 +2558,6 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRecipeVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         name: "RecipeName", # required
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to return in this request.
     #   @return [Integer]
@@ -3360,15 +2599,6 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRecipesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         recipe_version: "RecipeVersion",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to return in this request.
     #   @return [Integer]
@@ -3415,15 +2645,6 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRulesetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         target_arn: "Arn",
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] target_arn
     #   The Amazon Resource Name (ARN) of a resource (dataset). Using this
     #   parameter indicates to return only those rulesets that are
@@ -3469,15 +2690,6 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSchedulesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_name: "JobName",
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] job_name
     #   The name of the job that these schedules apply to.
     #   @return [String]
@@ -3519,13 +2731,6 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) string that uniquely identifies the
     #   DataBrew resource.
@@ -3553,13 +2758,6 @@ module Aws::GlueDataBrew
 
     # Contains additional resource information needed for specific datasets.
     #
-    # @note When making an API call, you may pass Metadata
-    #   data as a hash:
-    #
-    #       {
-    #         source_arn: "Arn",
-    #       }
-    #
     # @!attribute [rw] source_arn
     #   The Amazon Resource Name (ARN) associated with the dataset.
     #   Currently, DataBrew only supports ARNs from Amazon AppFlow.
@@ -3575,27 +2773,6 @@ module Aws::GlueDataBrew
 
     # Represents options that specify how and where in Amazon S3 DataBrew
     # writes the output generated by recipe jobs or profile jobs.
-    #
-    # @note When making an API call, you may pass Output
-    #   data as a hash:
-    #
-    #       {
-    #         compression_format: "GZIP", # accepts GZIP, LZ4, SNAPPY, BZIP2, DEFLATE, LZO, BROTLI, ZSTD, ZLIB
-    #         format: "CSV", # accepts CSV, JSON, PARQUET, GLUEPARQUET, AVRO, ORC, XML, TABLEAUHYPER
-    #         partition_columns: ["ColumnName"],
-    #         location: { # required
-    #           bucket: "Bucket", # required
-    #           key: "Key",
-    #           bucket_owner: "BucketOwner",
-    #         },
-    #         overwrite: false,
-    #         format_options: {
-    #           csv: {
-    #             delimiter: "Delimiter",
-    #           },
-    #         },
-    #         max_output_files: 1,
-    #       }
     #
     # @!attribute [rw] compression_format
     #   The compression algorithm used to compress the output text of the
@@ -3648,15 +2825,6 @@ module Aws::GlueDataBrew
     # Represents a set of options that define the structure of
     # comma-separated (CSV) job output.
     #
-    # @note When making an API call, you may pass OutputFormatOptions
-    #   data as a hash:
-    #
-    #       {
-    #         csv: {
-    #           delimiter: "Delimiter",
-    #         },
-    #       }
-    #
     # @!attribute [rw] csv
     #   Represents a set of options that define the structure of
     #   comma-separated value (CSV) job output.
@@ -3672,41 +2840,6 @@ module Aws::GlueDataBrew
 
     # Represents a set of options that define how DataBrew selects files for
     # a given Amazon S3 path in a dataset.
-    #
-    # @note When making an API call, you may pass PathOptions
-    #   data as a hash:
-    #
-    #       {
-    #         last_modified_date_condition: {
-    #           expression: "Expression", # required
-    #           values_map: { # required
-    #             "ValueReference" => "ConditionValue",
-    #           },
-    #         },
-    #         files_limit: {
-    #           max_files: 1, # required
-    #           ordered_by: "LAST_MODIFIED_DATE", # accepts LAST_MODIFIED_DATE
-    #           order: "DESCENDING", # accepts DESCENDING, ASCENDING
-    #         },
-    #         parameters: {
-    #           "PathParameterName" => {
-    #             name: "PathParameterName", # required
-    #             type: "Datetime", # required, accepts Datetime, Number, String
-    #             datetime_options: {
-    #               format: "DatetimeFormat", # required
-    #               timezone_offset: "TimezoneOffset",
-    #               locale_code: "LocaleCode",
-    #             },
-    #             create_column: false,
-    #             filter: {
-    #               expression: "Expression", # required
-    #               values_map: { # required
-    #                 "ValueReference" => "ConditionValue",
-    #               },
-    #             },
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] last_modified_date_condition
     #   If provided, this structure defines a date range for matching Amazon
@@ -3737,58 +2870,6 @@ module Aws::GlueDataBrew
     # columns, do evaluations, and override default parameters of
     # evaluations. When configuration is undefined, the profile job will
     # apply default settings to all supported columns.
-    #
-    # @note When making an API call, you may pass ProfileConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_statistics_configuration: {
-    #           included_statistics: ["Statistic"],
-    #           overrides: [
-    #             {
-    #               statistic: "Statistic", # required
-    #               parameters: { # required
-    #                 "ParameterName" => "ParameterValue",
-    #               },
-    #             },
-    #           ],
-    #         },
-    #         profile_columns: [
-    #           {
-    #             regex: "ColumnName",
-    #             name: "ColumnName",
-    #           },
-    #         ],
-    #         column_statistics_configurations: [
-    #           {
-    #             selectors: [
-    #               {
-    #                 regex: "ColumnName",
-    #                 name: "ColumnName",
-    #               },
-    #             ],
-    #             statistics: { # required
-    #               included_statistics: ["Statistic"],
-    #               overrides: [
-    #                 {
-    #                   statistic: "Statistic", # required
-    #                   parameters: { # required
-    #                     "ParameterName" => "ParameterValue",
-    #                   },
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #         ],
-    #         entity_detector_configuration: {
-    #           entity_types: ["EntityType"], # required
-    #           allowed_statistics: [
-    #             {
-    #               statistics: ["Statistic"], # required
-    #             },
-    #           ],
-    #         },
-    #       }
     #
     # @!attribute [rw] dataset_statistics_configuration
     #   Configuration for inter-column evaluations. Configuration can be
@@ -3912,14 +2993,6 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PublishRecipeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "RecipeDescription",
-    #         name: "RecipeName", # required
-    #       }
-    #
     # @!attribute [rw] description
     #   A description of the recipe to be published, for this version of the
     #   recipe.
@@ -4044,16 +3117,6 @@ module Aws::GlueDataBrew
     #
     # [1]: https://docs.aws.amazon.com/databrew/latest/dg/recipe-actions-reference.html
     #
-    # @note When making an API call, you may pass RecipeAction
-    #   data as a hash:
-    #
-    #       {
-    #         operation: "Operation", # required
-    #         parameters: {
-    #           "ParameterName" => "ParameterValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] operation
     #   The name of a valid DataBrew transformation to be performed on the
     #   data.
@@ -4074,14 +3137,6 @@ module Aws::GlueDataBrew
 
     # Represents the name and version of a DataBrew recipe.
     #
-    # @note When making an API call, you may pass RecipeReference
-    #   data as a hash:
-    #
-    #       {
-    #         name: "RecipeName", # required
-    #         recipe_version: "RecipeVersion",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the recipe.
     #   @return [String]
@@ -4100,25 +3155,6 @@ module Aws::GlueDataBrew
     end
 
     # Represents a single step from a DataBrew recipe to be performed.
-    #
-    # @note When making an API call, you may pass RecipeStep
-    #   data as a hash:
-    #
-    #       {
-    #         action: { # required
-    #           operation: "Operation", # required
-    #           parameters: {
-    #             "ParameterName" => "ParameterValue",
-    #           },
-    #         },
-    #         condition_expressions: [
-    #           {
-    #             condition: "Condition", # required
-    #             value: "ConditionValue",
-    #             target_column: "TargetColumn", # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] action
     #   The particular action to be performed in the recipe step.
@@ -4183,29 +3219,6 @@ module Aws::GlueDataBrew
 
     # Represents a single data quality requirement that should be validated
     # in the scope of this dataset.
-    #
-    # @note When making an API call, you may pass Rule
-    #   data as a hash:
-    #
-    #       {
-    #         name: "RuleName", # required
-    #         disabled: false,
-    #         check_expression: "Expression", # required
-    #         substitution_map: {
-    #           "ValueReference" => "ConditionValue",
-    #         },
-    #         threshold: {
-    #           value: 1.0, # required
-    #           type: "GREATER_THAN_OR_EQUAL", # accepts GREATER_THAN_OR_EQUAL, LESS_THAN_OR_EQUAL, GREATER_THAN, LESS_THAN
-    #           unit: "COUNT", # accepts COUNT, PERCENTAGE
-    #         },
-    #         column_selectors: [
-    #           {
-    #             regex: "ColumnName",
-    #             name: "ColumnName",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the rule.
@@ -4343,15 +3356,6 @@ module Aws::GlueDataBrew
     # object key) where DataBrew can read input data, or write output from a
     # job.
     #
-    # @note When making an API call, you may pass S3Location
-    #   data as a hash:
-    #
-    #       {
-    #         bucket: "Bucket", # required
-    #         key: "Key",
-    #         bucket_owner: "BucketOwner",
-    #       }
-    #
     # @!attribute [rw] bucket
     #   The Amazon S3 bucket name.
     #   @return [String]
@@ -4377,17 +3381,6 @@ module Aws::GlueDataBrew
     # Represents options that specify how and where DataBrew writes the
     # Amazon S3 output generated by recipe jobs.
     #
-    # @note When making an API call, you may pass S3TableOutputOptions
-    #   data as a hash:
-    #
-    #       {
-    #         location: { # required
-    #           bucket: "Bucket", # required
-    #           key: "Key",
-    #           bucket_owner: "BucketOwner",
-    #         },
-    #       }
-    #
     # @!attribute [rw] location
     #   Represents an Amazon S3 location (bucket name and object key) where
     #   DataBrew can write output from a job.
@@ -4403,14 +3396,6 @@ module Aws::GlueDataBrew
 
     # Represents the sample size and sampling type for DataBrew to use for
     # interactive data analysis.
-    #
-    # @note When making an API call, you may pass Sample
-    #   data as a hash:
-    #
-    #       {
-    #         size: 1,
-    #         type: "FIRST_N", # required, accepts FIRST_N, LAST_N, RANDOM
-    #       }
     #
     # @!attribute [rw] size
     #   The number of rows in the sample.
@@ -4494,39 +3479,6 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SendProjectSessionActionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         preview: false,
-    #         name: "ProjectName", # required
-    #         recipe_step: {
-    #           action: { # required
-    #             operation: "Operation", # required
-    #             parameters: {
-    #               "ParameterName" => "ParameterValue",
-    #             },
-    #           },
-    #           condition_expressions: [
-    #             {
-    #               condition: "Condition", # required
-    #               value: "ConditionValue",
-    #               target_column: "TargetColumn", # required
-    #             },
-    #           ],
-    #         },
-    #         step_index: 1,
-    #         client_session_id: "ClientSessionId",
-    #         view_frame: {
-    #           start_column_index: 1, # required
-    #           column_range: 1,
-    #           hidden_columns: ["ColumnName"],
-    #           start_row_index: 1,
-    #           row_range: 1,
-    #           analytics: "ENABLE", # accepts ENABLE, DISABLE
-    #         },
-    #       }
-    #
     # @!attribute [rw] preview
     #   If true, the result of the recipe step will be returned, but not
     #   applied.
@@ -4604,13 +3556,6 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartJobRunRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "JobName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the job to be run.
     #   @return [String]
@@ -4635,14 +3580,6 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartProjectSessionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ProjectName", # required
-    #         assume_control: false,
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the project to act upon.
     #   @return [String]
@@ -4680,16 +3617,6 @@ module Aws::GlueDataBrew
 
     # Override of a particular evaluation for a profile job.
     #
-    # @note When making an API call, you may pass StatisticOverride
-    #   data as a hash:
-    #
-    #       {
-    #         statistic: "Statistic", # required
-    #         parameters: { # required
-    #           "ParameterName" => "ParameterValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] statistic
     #   The name of an evaluation
     #   @return [String]
@@ -4711,21 +3638,6 @@ module Aws::GlueDataBrew
     # be used to select evaluations and override the parameters of selected
     # evaluations.
     #
-    # @note When making an API call, you may pass StatisticsConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         included_statistics: ["Statistic"],
-    #         overrides: [
-    #           {
-    #             statistic: "Statistic", # required
-    #             parameters: { # required
-    #               "ParameterName" => "ParameterValue",
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] included_statistics
     #   List of included evaluations. When the list is undefined, all
     #   supported evaluations will be included.
@@ -4744,14 +3656,6 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopJobRunRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "JobName", # required
-    #         run_id: "JobRunId", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the job to be stopped.
     #   @return [String]
@@ -4781,16 +3685,6 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The DataBrew resource to which tags should be added. The value for
     #   this parameter is an Amazon Resource Name (ARN). For DataBrew, you
@@ -4819,15 +3713,6 @@ module Aws::GlueDataBrew
     # specific column. Then the threshold will be used to determine whether
     # the validation succeeds.
     #
-    # @note When making an API call, you may pass Threshold
-    #   data as a hash:
-    #
-    #       {
-    #         value: 1.0, # required
-    #         type: "GREATER_THAN_OR_EQUAL", # accepts GREATER_THAN_OR_EQUAL, LESS_THAN_OR_EQUAL, GREATER_THAN, LESS_THAN
-    #         unit: "COUNT", # accepts COUNT, PERCENTAGE
-    #       }
-    #
     # @!attribute [rw] value
     #   The value of a threshold.
     #   @return [Float]
@@ -4852,14 +3737,6 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   A DataBrew resource from which you want to remove a tag or tags. The
     #   value for this parameter is an Amazon Resource Name (ARN).
@@ -4882,89 +3759,6 @@ module Aws::GlueDataBrew
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateDatasetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "DatasetName", # required
-    #         format: "CSV", # accepts CSV, JSON, PARQUET, EXCEL, ORC
-    #         format_options: {
-    #           json: {
-    #             multi_line: false,
-    #           },
-    #           excel: {
-    #             sheet_names: ["SheetName"],
-    #             sheet_indexes: [1],
-    #             header_row: false,
-    #           },
-    #           csv: {
-    #             delimiter: "Delimiter",
-    #             header_row: false,
-    #           },
-    #         },
-    #         input: { # required
-    #           s3_input_definition: {
-    #             bucket: "Bucket", # required
-    #             key: "Key",
-    #             bucket_owner: "BucketOwner",
-    #           },
-    #           data_catalog_input_definition: {
-    #             catalog_id: "CatalogId",
-    #             database_name: "DatabaseName", # required
-    #             table_name: "TableName", # required
-    #             temp_directory: {
-    #               bucket: "Bucket", # required
-    #               key: "Key",
-    #               bucket_owner: "BucketOwner",
-    #             },
-    #           },
-    #           database_input_definition: {
-    #             glue_connection_name: "GlueConnectionName", # required
-    #             database_table_name: "DatabaseTableName",
-    #             temp_directory: {
-    #               bucket: "Bucket", # required
-    #               key: "Key",
-    #               bucket_owner: "BucketOwner",
-    #             },
-    #             query_string: "QueryString",
-    #           },
-    #           metadata: {
-    #             source_arn: "Arn",
-    #           },
-    #         },
-    #         path_options: {
-    #           last_modified_date_condition: {
-    #             expression: "Expression", # required
-    #             values_map: { # required
-    #               "ValueReference" => "ConditionValue",
-    #             },
-    #           },
-    #           files_limit: {
-    #             max_files: 1, # required
-    #             ordered_by: "LAST_MODIFIED_DATE", # accepts LAST_MODIFIED_DATE
-    #             order: "DESCENDING", # accepts DESCENDING, ASCENDING
-    #           },
-    #           parameters: {
-    #             "PathParameterName" => {
-    #               name: "PathParameterName", # required
-    #               type: "Datetime", # required, accepts Datetime, Number, String
-    #               datetime_options: {
-    #                 format: "DatetimeFormat", # required
-    #                 timezone_offset: "TimezoneOffset",
-    #                 locale_code: "LocaleCode",
-    #               },
-    #               create_column: false,
-    #               filter: {
-    #                 expression: "Expression", # required
-    #                 values_map: { # required
-    #                   "ValueReference" => "ConditionValue",
-    #                 },
-    #               },
-    #             },
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the dataset to be updated.
     #   @return [String]
@@ -5013,83 +3807,6 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateProfileJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration: {
-    #           dataset_statistics_configuration: {
-    #             included_statistics: ["Statistic"],
-    #             overrides: [
-    #               {
-    #                 statistic: "Statistic", # required
-    #                 parameters: { # required
-    #                   "ParameterName" => "ParameterValue",
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #           profile_columns: [
-    #             {
-    #               regex: "ColumnName",
-    #               name: "ColumnName",
-    #             },
-    #           ],
-    #           column_statistics_configurations: [
-    #             {
-    #               selectors: [
-    #                 {
-    #                   regex: "ColumnName",
-    #                   name: "ColumnName",
-    #                 },
-    #               ],
-    #               statistics: { # required
-    #                 included_statistics: ["Statistic"],
-    #                 overrides: [
-    #                   {
-    #                     statistic: "Statistic", # required
-    #                     parameters: { # required
-    #                       "ParameterName" => "ParameterValue",
-    #                     },
-    #                   },
-    #                 ],
-    #               },
-    #             },
-    #           ],
-    #           entity_detector_configuration: {
-    #             entity_types: ["EntityType"], # required
-    #             allowed_statistics: [
-    #               {
-    #                 statistics: ["Statistic"], # required
-    #               },
-    #             ],
-    #           },
-    #         },
-    #         encryption_key_arn: "EncryptionKeyArn",
-    #         encryption_mode: "SSE-KMS", # accepts SSE-KMS, SSE-S3
-    #         name: "JobName", # required
-    #         log_subscription: "ENABLE", # accepts ENABLE, DISABLE
-    #         max_capacity: 1,
-    #         max_retries: 1,
-    #         output_location: { # required
-    #           bucket: "Bucket", # required
-    #           key: "Key",
-    #           bucket_owner: "BucketOwner",
-    #         },
-    #         validation_configurations: [
-    #           {
-    #             ruleset_arn: "Arn", # required
-    #             validation_mode: "CHECK_ALL", # accepts CHECK_ALL
-    #           },
-    #         ],
-    #         role_arn: "Arn", # required
-    #         timeout: 1,
-    #         job_sample: {
-    #           mode: "FULL_DATASET", # accepts FULL_DATASET, CUSTOM_ROWS
-    #           size: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] configuration
     #   Configuration for profile jobs. Used to select columns, do
     #   evaluations, and override default parameters of evaluations. When
@@ -5189,18 +3906,6 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateProjectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         sample: {
-    #           size: 1,
-    #           type: "FIRST_N", # required, accepts FIRST_N, LAST_N, RANDOM
-    #         },
-    #         role_arn: "Arn", # required
-    #         name: "ProjectName", # required
-    #       }
-    #
     # @!attribute [rw] sample
     #   Represents the sample size and sampling type for DataBrew to use for
     #   interactive data analysis.
@@ -5242,76 +3947,6 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateRecipeJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         encryption_key_arn: "EncryptionKeyArn",
-    #         encryption_mode: "SSE-KMS", # accepts SSE-KMS, SSE-S3
-    #         name: "JobName", # required
-    #         log_subscription: "ENABLE", # accepts ENABLE, DISABLE
-    #         max_capacity: 1,
-    #         max_retries: 1,
-    #         outputs: [
-    #           {
-    #             compression_format: "GZIP", # accepts GZIP, LZ4, SNAPPY, BZIP2, DEFLATE, LZO, BROTLI, ZSTD, ZLIB
-    #             format: "CSV", # accepts CSV, JSON, PARQUET, GLUEPARQUET, AVRO, ORC, XML, TABLEAUHYPER
-    #             partition_columns: ["ColumnName"],
-    #             location: { # required
-    #               bucket: "Bucket", # required
-    #               key: "Key",
-    #               bucket_owner: "BucketOwner",
-    #             },
-    #             overwrite: false,
-    #             format_options: {
-    #               csv: {
-    #                 delimiter: "Delimiter",
-    #               },
-    #             },
-    #             max_output_files: 1,
-    #           },
-    #         ],
-    #         data_catalog_outputs: [
-    #           {
-    #             catalog_id: "CatalogId",
-    #             database_name: "DatabaseName", # required
-    #             table_name: "TableName", # required
-    #             s3_options: {
-    #               location: { # required
-    #                 bucket: "Bucket", # required
-    #                 key: "Key",
-    #                 bucket_owner: "BucketOwner",
-    #               },
-    #             },
-    #             database_options: {
-    #               temp_directory: {
-    #                 bucket: "Bucket", # required
-    #                 key: "Key",
-    #                 bucket_owner: "BucketOwner",
-    #               },
-    #               table_name: "DatabaseTableName", # required
-    #             },
-    #             overwrite: false,
-    #           },
-    #         ],
-    #         database_outputs: [
-    #           {
-    #             glue_connection_name: "GlueConnectionName", # required
-    #             database_options: { # required
-    #               temp_directory: {
-    #                 bucket: "Bucket", # required
-    #                 key: "Key",
-    #                 bucket_owner: "BucketOwner",
-    #               },
-    #               table_name: "DatabaseTableName", # required
-    #             },
-    #             database_output_mode: "NEW_TABLE", # accepts NEW_TABLE
-    #           },
-    #         ],
-    #         role_arn: "Arn", # required
-    #         timeout: 1,
-    #       }
-    #
     # @!attribute [rw] encryption_key_arn
     #   The Amazon Resource Name (ARN) of an encryption key that is used to
     #   protect the job.
@@ -5399,31 +4034,6 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateRecipeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "RecipeDescription",
-    #         name: "RecipeName", # required
-    #         steps: [
-    #           {
-    #             action: { # required
-    #               operation: "Operation", # required
-    #               parameters: {
-    #                 "ParameterName" => "ParameterValue",
-    #               },
-    #             },
-    #             condition_expressions: [
-    #               {
-    #                 condition: "Condition", # required
-    #                 value: "ConditionValue",
-    #                 target_column: "TargetColumn", # required
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] description
     #   A description of the recipe.
     #   @return [String]
@@ -5460,35 +4070,6 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateRulesetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "RulesetName", # required
-    #         description: "RulesetDescription",
-    #         rules: [ # required
-    #           {
-    #             name: "RuleName", # required
-    #             disabled: false,
-    #             check_expression: "Expression", # required
-    #             substitution_map: {
-    #               "ValueReference" => "ConditionValue",
-    #             },
-    #             threshold: {
-    #               value: 1.0, # required
-    #               type: "GREATER_THAN_OR_EQUAL", # accepts GREATER_THAN_OR_EQUAL, LESS_THAN_OR_EQUAL, GREATER_THAN, LESS_THAN
-    #               unit: "COUNT", # accepts COUNT, PERCENTAGE
-    #             },
-    #             column_selectors: [
-    #               {
-    #                 regex: "ColumnName",
-    #                 name: "ColumnName",
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the ruleset to be updated.
     #   @return [String]
@@ -5524,15 +4105,6 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateScheduleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_names: ["JobName"],
-    #         cron_expression: "CronExpression", # required
-    #         name: "ScheduleName", # required
-    #       }
-    #
     # @!attribute [rw] job_names
     #   The name or names of one or more jobs to be run for this schedule.
     #   @return [Array<String>]
@@ -5578,14 +4150,6 @@ module Aws::GlueDataBrew
     # ValidationConfiguration is null, the profile job will run without data
     # quality validation.
     #
-    # @note When making an API call, you may pass ValidationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         ruleset_arn: "Arn", # required
-    #         validation_mode: "CHECK_ALL", # accepts CHECK_ALL
-    #       }
-    #
     # @!attribute [rw] ruleset_arn
     #   The Amazon Resource Name (ARN) for the ruleset to be validated in
     #   the profile job. The TargetArn of the selected ruleset should be the
@@ -5621,18 +4185,6 @@ module Aws::GlueDataBrew
     end
 
     # Represents the data being transformed during an action.
-    #
-    # @note When making an API call, you may pass ViewFrame
-    #   data as a hash:
-    #
-    #       {
-    #         start_column_index: 1, # required
-    #         column_range: 1,
-    #         hidden_columns: ["ColumnName"],
-    #         start_row_index: 1,
-    #         row_range: 1,
-    #         analytics: "ENABLE", # accepts ENABLE, DISABLE
-    #       }
     #
     # @!attribute [rw] start_column_index
     #   The starting index for the range of columns to return in the view

@@ -43,14 +43,6 @@ module Aws::ImportExport
 
     # Input structure for the CancelJob operation.
     #
-    # @note When making an API call, you may pass CancelJobInput
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #         api_version: "APIVersion",
-    #       }
-    #
     # @!attribute [rw] job_id
     #   A unique identifier which refers to a particular job.
     #   @return [String]
@@ -92,17 +84,6 @@ module Aws::ImportExport
     end
 
     # Input structure for the CreateJob operation.
-    #
-    # @note When making an API call, you may pass CreateJobInput
-    #   data as a hash:
-    #
-    #       {
-    #         job_type: "Import", # required, accepts Import, Export
-    #         manifest: "Manifest", # required
-    #         manifest_addendum: "ManifestAddendum",
-    #         validate_only: false, # required
-    #         api_version: "APIVersion",
-    #       }
     #
     # @!attribute [rw] job_type
     #   Specifies whether the job to initiate is an import or export job.
@@ -202,24 +183,6 @@ module Aws::ImportExport
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetShippingLabelInput
-    #   data as a hash:
-    #
-    #       {
-    #         job_ids: ["GenericString"], # required
-    #         name: "name",
-    #         company: "company",
-    #         phone_number: "phoneNumber",
-    #         country: "country",
-    #         state_or_province: "stateOrProvince",
-    #         city: "city",
-    #         postal_code: "postalCode",
-    #         street1: "street1",
-    #         street2: "street2",
-    #         street3: "street3",
-    #         api_version: "APIVersion",
-    #       }
-    #
     # @!attribute [rw] job_ids
     #   @return [Array<String>]
     #
@@ -304,14 +267,6 @@ module Aws::ImportExport
     end
 
     # Input structure for the GetStatus operation.
-    #
-    # @note When making an API call, you may pass GetStatusInput
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #         api_version: "APIVersion",
-    #       }
     #
     # @!attribute [rw] job_id
     #   A unique identifier which refers to a particular job.
@@ -558,15 +513,6 @@ module Aws::ImportExport
 
     # Input structure for the ListJobs operation.
     #
-    # @note When making an API call, you may pass ListJobsInput
-    #   data as a hash:
-    #
-    #       {
-    #         max_jobs: 1,
-    #         marker: "Marker",
-    #         api_version: "APIVersion",
-    #       }
-    #
     # @!attribute [rw] max_jobs
     #   Sets the maximum number of jobs returned in the response. If there
     #   are additional jobs that were not returned because MaxJobs was
@@ -713,17 +659,6 @@ module Aws::ImportExport
     end
 
     # Input structure for the UpateJob operation.
-    #
-    # @note When making an API call, you may pass UpdateJobInput
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #         manifest: "Manifest", # required
-    #         job_type: "Import", # required, accepts Import, Export
-    #         validate_only: false, # required
-    #         api_version: "APIVersion",
-    #       }
     #
     # @!attribute [rw] job_id
     #   A unique identifier which refers to a particular job.

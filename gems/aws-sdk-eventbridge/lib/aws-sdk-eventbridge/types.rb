@@ -10,13 +10,6 @@
 module Aws::EventBridge
   module Types
 
-    # @note When making an API call, you may pass ActivateEventSourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "EventSourceName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the partner event source to activate.
     #   @return [String]
@@ -141,15 +134,6 @@ module Aws::EventBridge
     # task, and whether a public IP address is to be used. This structure is
     # relevant only for ECS tasks that use the `awsvpc` network mode.
     #
-    # @note When making an API call, you may pass AwsVpcConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         subnets: ["String"], # required
-    #         security_groups: ["String"],
-    #         assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
-    #       }
-    #
     # @!attribute [rw] subnets
     #   Specifies the subnets associated with the task. These subnets must
     #   all be in the same VPC. You can specify as many as 16 subnets.
@@ -183,13 +167,6 @@ module Aws::EventBridge
     # array properties for a job, it becomes an array job. This parameter is
     # used only if the target is an Batch job.
     #
-    # @note When making an API call, you may pass BatchArrayProperties
-    #   data as a hash:
-    #
-    #       {
-    #         size: 1,
-    #       }
-    #
     # @!attribute [rw] size
     #   The size of the array, if this is an array batch job. Valid values
     #   are integers between 2 and 10,000.
@@ -204,20 +181,6 @@ module Aws::EventBridge
     end
 
     # The custom parameters to be used when the target is an Batch job.
-    #
-    # @note When making an API call, you may pass BatchParameters
-    #   data as a hash:
-    #
-    #       {
-    #         job_definition: "String", # required
-    #         job_name: "String", # required
-    #         array_properties: {
-    #           size: 1,
-    #         },
-    #         retry_strategy: {
-    #           attempts: 1,
-    #         },
-    #       }
     #
     # @!attribute [rw] job_definition
     #   The ARN or name of the job definition to use if the event target is
@@ -259,13 +222,6 @@ module Aws::EventBridge
     # job. If you specify a retry strategy here, it overrides the retry
     # strategy defined in the job definition.
     #
-    # @note When making an API call, you may pass BatchRetryStrategy
-    #   data as a hash:
-    #
-    #       {
-    #         attempts: 1,
-    #       }
-    #
     # @!attribute [rw] attempts
     #   The number of times to attempt to retry, if the job fails. Valid
     #   values are 1–10.
@@ -279,13 +235,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CancelReplayRequest
-    #   data as a hash:
-    #
-    #       {
-    #         replay_name: "ReplayName", # required
-    #       }
-    #
     # @!attribute [rw] replay_name
     #   The name of the replay to cancel.
     #   @return [String]
@@ -326,15 +275,6 @@ module Aws::EventBridge
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CapacityProviderStrategyItem.html
-    #
-    # @note When making an API call, you may pass CapacityProviderStrategyItem
-    #   data as a hash:
-    #
-    #       {
-    #         capacity_provider: "CapacityProvider", # required
-    #         weight: 1,
-    #         base: 1,
-    #       }
     #
     # @!attribute [rw] capacity_provider
     #   The short name of the capacity provider.
@@ -380,15 +320,6 @@ module Aws::EventBridge
     #
     # `'\{"Type" : "StringEquals", "Key": "aws:PrincipalOrgID", "Value":
     # "o-1234567890"\}'`
-    #
-    # @note When making an API call, you may pass Condition
-    #   data as a hash:
-    #
-    #       {
-    #         type: "String", # required
-    #         key: "String", # required
-    #         value: "String", # required
-    #       }
     #
     # @!attribute [rw] type
     #   Specifies the type of condition. Currently the only supported value
@@ -529,15 +460,6 @@ module Aws::EventBridge
     # additional body parameters per request. An event payload cannot exceed
     # 64 KB.
     #
-    # @note When making an API call, you may pass ConnectionBodyParameter
-    #   data as a hash:
-    #
-    #       {
-    #         key: "String",
-    #         value: "String",
-    #         is_value_secret: false,
-    #       }
-    #
     # @!attribute [rw] key
     #   The key for the parameter.
     #   @return [String]
@@ -564,15 +486,6 @@ module Aws::EventBridge
     # additional header parameters per request. An event payload cannot
     # exceed 64 KB.
     #
-    # @note When making an API call, you may pass ConnectionHeaderParameter
-    #   data as a hash:
-    #
-    #       {
-    #         key: "HeaderKey",
-    #         value: "HeaderValue",
-    #         is_value_secret: false,
-    #       }
-    #
     # @!attribute [rw] key
     #   The key for the parameter.
     #   @return [String]
@@ -596,33 +509,6 @@ module Aws::EventBridge
     end
 
     # Contains additional parameters for the connection.
-    #
-    # @note When making an API call, you may pass ConnectionHttpParameters
-    #   data as a hash:
-    #
-    #       {
-    #         header_parameters: [
-    #           {
-    #             key: "HeaderKey",
-    #             value: "HeaderValue",
-    #             is_value_secret: false,
-    #           },
-    #         ],
-    #         query_string_parameters: [
-    #           {
-    #             key: "QueryStringKey",
-    #             value: "QueryStringValue",
-    #             is_value_secret: false,
-    #           },
-    #         ],
-    #         body_parameters: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #             is_value_secret: false,
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] header_parameters
     #   Contains additional header parameters for the connection.
@@ -700,15 +586,6 @@ module Aws::EventBridge
     # additional parameter counts towards the event payload size, which
     # cannot exceed 64 KB.
     #
-    # @note When making an API call, you may pass ConnectionQueryStringParameter
-    #   data as a hash:
-    #
-    #       {
-    #         key: "QueryStringKey",
-    #         value: "QueryStringValue",
-    #         is_value_secret: false,
-    #       }
-    #
     # @!attribute [rw] key
     #   The key for a query string parameter.
     #   @return [String]
@@ -731,18 +608,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateApiDestinationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ApiDestinationName", # required
-    #         description: "ApiDestinationDescription",
-    #         connection_arn: "ConnectionArn", # required
-    #         invocation_endpoint: "HttpsEndpoint", # required
-    #         http_method: "POST", # required, accepts POST, GET, HEAD, OPTIONS, PUT, PATCH, DELETE
-    #         invocation_rate_limit_per_second: 1,
-    #       }
-    #
     # @!attribute [rw] name
     #   The name for the API destination to create.
     #   @return [String]
@@ -812,17 +677,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateArchiveRequest
-    #   data as a hash:
-    #
-    #       {
-    #         archive_name: "ArchiveName", # required
-    #         event_source_arn: "Arn", # required
-    #         description: "ArchiveDescription",
-    #         event_pattern: "EventPattern",
-    #         retention_days: 1,
-    #       }
-    #
     # @!attribute [rw] archive_name
     #   The name for the archive to create.
     #   @return [String]
@@ -885,14 +739,6 @@ module Aws::EventBridge
 
     # Contains the API key authorization parameters for the connection.
     #
-    # @note When making an API call, you may pass CreateConnectionApiKeyAuthRequestParameters
-    #   data as a hash:
-    #
-    #       {
-    #         api_key_name: "AuthHeaderParameters", # required
-    #         api_key_value: "AuthHeaderParameters", # required
-    #       }
-    #
     # @!attribute [rw] api_key_name
     #   The name of the API key to use for authorization.
     #   @return [String]
@@ -911,74 +757,6 @@ module Aws::EventBridge
     end
 
     # Contains the authorization parameters for the connection.
-    #
-    # @note When making an API call, you may pass CreateConnectionAuthRequestParameters
-    #   data as a hash:
-    #
-    #       {
-    #         basic_auth_parameters: {
-    #           username: "AuthHeaderParameters", # required
-    #           password: "AuthHeaderParameters", # required
-    #         },
-    #         o_auth_parameters: {
-    #           client_parameters: { # required
-    #             client_id: "AuthHeaderParameters", # required
-    #             client_secret: "AuthHeaderParameters", # required
-    #           },
-    #           authorization_endpoint: "HttpsEndpoint", # required
-    #           http_method: "GET", # required, accepts GET, POST, PUT
-    #           o_auth_http_parameters: {
-    #             header_parameters: [
-    #               {
-    #                 key: "HeaderKey",
-    #                 value: "HeaderValue",
-    #                 is_value_secret: false,
-    #               },
-    #             ],
-    #             query_string_parameters: [
-    #               {
-    #                 key: "QueryStringKey",
-    #                 value: "QueryStringValue",
-    #                 is_value_secret: false,
-    #               },
-    #             ],
-    #             body_parameters: [
-    #               {
-    #                 key: "String",
-    #                 value: "String",
-    #                 is_value_secret: false,
-    #               },
-    #             ],
-    #           },
-    #         },
-    #         api_key_auth_parameters: {
-    #           api_key_name: "AuthHeaderParameters", # required
-    #           api_key_value: "AuthHeaderParameters", # required
-    #         },
-    #         invocation_http_parameters: {
-    #           header_parameters: [
-    #             {
-    #               key: "HeaderKey",
-    #               value: "HeaderValue",
-    #               is_value_secret: false,
-    #             },
-    #           ],
-    #           query_string_parameters: [
-    #             {
-    #               key: "QueryStringKey",
-    #               value: "QueryStringValue",
-    #               is_value_secret: false,
-    #             },
-    #           ],
-    #           body_parameters: [
-    #             {
-    #               key: "String",
-    #               value: "String",
-    #               is_value_secret: false,
-    #             },
-    #           ],
-    #         },
-    #       }
     #
     # @!attribute [rw] basic_auth_parameters
     #   A `CreateConnectionBasicAuthRequestParameters` object that contains
@@ -1016,14 +794,6 @@ module Aws::EventBridge
 
     # Contains the Basic authorization parameters to use for the connection.
     #
-    # @note When making an API call, you may pass CreateConnectionBasicAuthRequestParameters
-    #   data as a hash:
-    #
-    #       {
-    #         username: "AuthHeaderParameters", # required
-    #         password: "AuthHeaderParameters", # required
-    #       }
-    #
     # @!attribute [rw] username
     #   The user name to use for Basic authorization.
     #   @return [String]
@@ -1044,14 +814,6 @@ module Aws::EventBridge
 
     # Contains the Basic authorization parameters to use for the connection.
     #
-    # @note When making an API call, you may pass CreateConnectionOAuthClientRequestParameters
-    #   data as a hash:
-    #
-    #       {
-    #         client_id: "AuthHeaderParameters", # required
-    #         client_secret: "AuthHeaderParameters", # required
-    #       }
-    #
     # @!attribute [rw] client_id
     #   The client ID to use for OAuth authorization for the connection.
     #   @return [String]
@@ -1071,41 +833,6 @@ module Aws::EventBridge
     end
 
     # Contains the OAuth authorization parameters to use for the connection.
-    #
-    # @note When making an API call, you may pass CreateConnectionOAuthRequestParameters
-    #   data as a hash:
-    #
-    #       {
-    #         client_parameters: { # required
-    #           client_id: "AuthHeaderParameters", # required
-    #           client_secret: "AuthHeaderParameters", # required
-    #         },
-    #         authorization_endpoint: "HttpsEndpoint", # required
-    #         http_method: "GET", # required, accepts GET, POST, PUT
-    #         o_auth_http_parameters: {
-    #           header_parameters: [
-    #             {
-    #               key: "HeaderKey",
-    #               value: "HeaderValue",
-    #               is_value_secret: false,
-    #             },
-    #           ],
-    #           query_string_parameters: [
-    #             {
-    #               key: "QueryStringKey",
-    #               value: "QueryStringValue",
-    #               is_value_secret: false,
-    #             },
-    #           ],
-    #           body_parameters: [
-    #             {
-    #               key: "String",
-    #               value: "String",
-    #               is_value_secret: false,
-    #             },
-    #           ],
-    #         },
-    #       }
     #
     # @!attribute [rw] client_parameters
     #   A `CreateConnectionOAuthClientRequestParameters` object that
@@ -1137,79 +864,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateConnectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ConnectionName", # required
-    #         description: "ConnectionDescription",
-    #         authorization_type: "BASIC", # required, accepts BASIC, OAUTH_CLIENT_CREDENTIALS, API_KEY
-    #         auth_parameters: { # required
-    #           basic_auth_parameters: {
-    #             username: "AuthHeaderParameters", # required
-    #             password: "AuthHeaderParameters", # required
-    #           },
-    #           o_auth_parameters: {
-    #             client_parameters: { # required
-    #               client_id: "AuthHeaderParameters", # required
-    #               client_secret: "AuthHeaderParameters", # required
-    #             },
-    #             authorization_endpoint: "HttpsEndpoint", # required
-    #             http_method: "GET", # required, accepts GET, POST, PUT
-    #             o_auth_http_parameters: {
-    #               header_parameters: [
-    #                 {
-    #                   key: "HeaderKey",
-    #                   value: "HeaderValue",
-    #                   is_value_secret: false,
-    #                 },
-    #               ],
-    #               query_string_parameters: [
-    #                 {
-    #                   key: "QueryStringKey",
-    #                   value: "QueryStringValue",
-    #                   is_value_secret: false,
-    #                 },
-    #               ],
-    #               body_parameters: [
-    #                 {
-    #                   key: "String",
-    #                   value: "String",
-    #                   is_value_secret: false,
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #           api_key_auth_parameters: {
-    #             api_key_name: "AuthHeaderParameters", # required
-    #             api_key_value: "AuthHeaderParameters", # required
-    #           },
-    #           invocation_http_parameters: {
-    #             header_parameters: [
-    #               {
-    #                 key: "HeaderKey",
-    #                 value: "HeaderValue",
-    #                 is_value_secret: false,
-    #               },
-    #             ],
-    #             query_string_parameters: [
-    #               {
-    #                 key: "QueryStringKey",
-    #                 value: "QueryStringValue",
-    #                 is_value_secret: false,
-    #               },
-    #             ],
-    #             body_parameters: [
-    #               {
-    #                 key: "String",
-    #                 value: "String",
-    #                 is_value_secret: false,
-    #               },
-    #             ],
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name for the connection to create.
     #   @return [String]
@@ -1265,33 +919,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateEndpointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "EndpointName", # required
-    #         description: "EndpointDescription",
-    #         routing_config: { # required
-    #           failover_config: { # required
-    #             primary: { # required
-    #               health_check: "HealthCheck", # required
-    #             },
-    #             secondary: { # required
-    #               route: "Route", # required
-    #             },
-    #           },
-    #         },
-    #         replication_config: {
-    #           state: "ENABLED", # accepts ENABLED, DISABLED
-    #         },
-    #         event_buses: [ # required
-    #           {
-    #             event_bus_arn: "NonPartnerEventBusArn", # required
-    #           },
-    #         ],
-    #         role_arn: "IamRoleArn",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the global endpoint. For example,
     #   `"Name":"us-east-2-custom_bus_A-endpoint"`.
@@ -1375,20 +1002,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateEventBusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "EventBusName", # required
-    #         event_source_name: "EventSourceName",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the new event bus.
     #
@@ -1431,14 +1044,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreatePartnerEventSourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "EventSourceName", # required
-    #         account: "AccountId", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the partner event source. This name must be unique and
     #   must be in the format ` partner_name/event_namespace/event_name `.
@@ -1473,13 +1078,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeactivateEventSourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "EventSourceName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the partner event source to deactivate.
     #   @return [String]
@@ -1495,13 +1093,6 @@ module Aws::EventBridge
     # A `DeadLetterConfig` object that contains information about a
     # dead-letter queue configuration.
     #
-    # @note When making an API call, you may pass DeadLetterConfig
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "ResourceArn",
-    #       }
-    #
     # @!attribute [rw] arn
     #   The ARN of the SQS queue specified as the target for the dead-letter
     #   queue.
@@ -1515,13 +1106,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeauthorizeConnectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ConnectionName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the connection to remove authorization from.
     #   @return [String]
@@ -1566,13 +1150,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteApiDestinationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ApiDestinationName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the destination to delete.
     #   @return [String]
@@ -1589,13 +1166,6 @@ module Aws::EventBridge
     #
     class DeleteApiDestinationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteArchiveRequest
-    #   data as a hash:
-    #
-    #       {
-    #         archive_name: "ArchiveName", # required
-    #       }
-    #
     # @!attribute [rw] archive_name
     #   The name of the archive to delete.
     #   @return [String]
@@ -1612,13 +1182,6 @@ module Aws::EventBridge
     #
     class DeleteArchiveResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteConnectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ConnectionName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the connection to delete.
     #   @return [String]
@@ -1665,13 +1228,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteEndpointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "EndpointName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the endpoint you want to delete. For example,
     #   `"Name":"us-east-2-custom_bus_A-endpoint"`..
@@ -1689,13 +1245,6 @@ module Aws::EventBridge
     #
     class DeleteEndpointResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteEventBusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "EventBusName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the event bus to delete.
     #   @return [String]
@@ -1708,14 +1257,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeletePartnerEventSourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "EventSourceName", # required
-    #         account: "AccountId", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the event source to delete.
     #   @return [String]
@@ -1734,15 +1275,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "RuleName", # required
-    #         event_bus_name: "EventBusNameOrArn",
-    #         force: false,
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the rule.
     #   @return [String]
@@ -1771,13 +1303,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeApiDestinationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ApiDestinationName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the API destination to retrieve.
     #   @return [String]
@@ -1856,13 +1381,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeArchiveRequest
-    #   data as a hash:
-    #
-    #       {
-    #         archive_name: "ArchiveName", # required
-    #       }
-    #
     # @!attribute [rw] archive_name
     #   The name of the archive to retrieve.
     #   @return [String]
@@ -1937,13 +1455,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeConnectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ConnectionName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the connection to retrieve.
     #   @return [String]
@@ -2019,14 +1530,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEndpointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "EndpointName", # required
-    #         home_region: "HomeRegion",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the endpoint you want to get information about. For
     #   example, `"Name":"us-east-2-custom_bus_A-endpoint"`.
@@ -2124,13 +1627,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEventBusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "EventBusNameOrArn",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name or ARN of the event bus to show details for. If you omit
     #   this, the default event bus is displayed.
@@ -2168,13 +1664,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEventSourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "EventSourceName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the partner event source to display the details of.
     #   @return [String]
@@ -2230,13 +1719,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribePartnerEventSourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "EventSourceName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the event source to display.
     #   @return [String]
@@ -2266,13 +1748,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeReplayRequest
-    #   data as a hash:
-    #
-    #       {
-    #         replay_name: "ReplayName", # required
-    #       }
-    #
     # @!attribute [rw] replay_name
     #   The name of the replay to retrieve.
     #   @return [String]
@@ -2354,14 +1829,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "RuleName", # required
-    #         event_bus_name: "EventBusNameOrArn",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the rule.
     #   @return [String]
@@ -2451,14 +1918,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisableRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "RuleName", # required
-    #         event_bus_name: "EventBusNameOrArn",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the rule.
     #   @return [String]
@@ -2479,53 +1938,6 @@ module Aws::EventBridge
 
     # The custom parameters to be used when the target is an Amazon ECS
     # task.
-    #
-    # @note When making an API call, you may pass EcsParameters
-    #   data as a hash:
-    #
-    #       {
-    #         task_definition_arn: "Arn", # required
-    #         task_count: 1,
-    #         launch_type: "EC2", # accepts EC2, FARGATE, EXTERNAL
-    #         network_configuration: {
-    #           awsvpc_configuration: {
-    #             subnets: ["String"], # required
-    #             security_groups: ["String"],
-    #             assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
-    #           },
-    #         },
-    #         platform_version: "String",
-    #         group: "String",
-    #         capacity_provider_strategy: [
-    #           {
-    #             capacity_provider: "CapacityProvider", # required
-    #             weight: 1,
-    #             base: 1,
-    #           },
-    #         ],
-    #         enable_ecs_managed_tags: false,
-    #         enable_execute_command: false,
-    #         placement_constraints: [
-    #           {
-    #             type: "distinctInstance", # accepts distinctInstance, memberOf
-    #             expression: "PlacementConstraintExpression",
-    #           },
-    #         ],
-    #         placement_strategy: [
-    #           {
-    #             type: "random", # accepts random, spread, binpack
-    #             field: "PlacementStrategyField",
-    #           },
-    #         ],
-    #         propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION
-    #         reference_id: "ReferenceId",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] task_definition_arn
     #   The ARN of the task definition to use if the event target is an
@@ -2659,14 +2071,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass EnableRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "RuleName", # required
-    #         event_bus_name: "EventBusNameOrArn",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the rule.
     #   @return [String]
@@ -2771,13 +2175,6 @@ module Aws::EventBridge
 
     # The event buses the endpoint is associated with.
     #
-    # @note When making an API call, you may pass EndpointEventBus
-    #   data as a hash:
-    #
-    #       {
-    #         event_bus_arn: "NonPartnerEventBusArn", # required
-    #       }
-    #
     # @!attribute [rw] event_bus_arn
     #   The ARN of the event bus the endpoint is associated with.
     #   @return [String]
@@ -2872,18 +2269,6 @@ module Aws::EventBridge
     # The failover configuration for an endpoint. This includes what
     # triggers failover and what happens when it's triggered.
     #
-    # @note When making an API call, you may pass FailoverConfig
-    #   data as a hash:
-    #
-    #       {
-    #         primary: { # required
-    #           health_check: "HealthCheck", # required
-    #         },
-    #         secondary: { # required
-    #           route: "Route", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] primary
     #   The main Region of the endpoint.
     #   @return [Types::Primary]
@@ -2906,19 +2291,6 @@ module Aws::EventBridge
     # Gateway REST APIs or EventBridge ApiDestinations. In the latter case,
     # these are merged with any InvocationParameters specified on the
     # Connection, with any values from the Connection taking precedence.
-    #
-    # @note When making an API call, you may pass HttpParameters
-    #   data as a hash:
-    #
-    #       {
-    #         path_parameter_values: ["PathParameter"],
-    #         header_parameters: {
-    #           "HeaderKey" => "HeaderValue",
-    #         },
-    #         query_string_parameters: {
-    #           "QueryStringKey" => "QueryStringValue",
-    #         },
-    #       }
     #
     # @!attribute [rw] path_parameter_values
     #   The path parameter values to be used to populate API Gateway REST
@@ -2954,16 +2326,6 @@ module Aws::EventBridge
 
     # Contains the parameters needed for you to provide custom input to a
     # target based on one or more pieces of data extracted from the event.
-    #
-    # @note When making an API call, you may pass InputTransformer
-    #   data as a hash:
-    #
-    #       {
-    #         input_paths_map: {
-    #           "InputTransformerPathKey" => "TargetInputPath",
-    #         },
-    #         input_template: "TransformerInput", # required
-    #       }
     #
     # @!attribute [rw] input_paths_map
     #   Map of JSON paths to be extracted from the event. You can then
@@ -3068,13 +2430,6 @@ module Aws::EventBridge
     # not include this parameter, the default is to use the `eventId` as the
     # partition key.
     #
-    # @note When making an API call, you may pass KinesisParameters
-    #   data as a hash:
-    #
-    #       {
-    #         partition_key_path: "TargetPartitionKeyPath", # required
-    #       }
-    #
     # @!attribute [rw] partition_key_path
     #   The JSON path to be extracted from the event and used as the
     #   partition key. For more information, see [Amazon Kinesis Streams Key
@@ -3100,16 +2455,6 @@ module Aws::EventBridge
     #
     class LimitExceededException < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass ListApiDestinationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name_prefix: "ApiDestinationName",
-    #         connection_arn: "ConnectionArn",
-    #         next_token: "NextToken",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] name_prefix
     #   A name prefix to filter results returned. Only API destinations with
     #   a name that starts with the prefix are returned.
@@ -3158,17 +2503,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListArchivesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name_prefix: "ArchiveName",
-    #         event_source_arn: "Arn",
-    #         state: "ENABLED", # accepts ENABLED, DISABLED, CREATING, UPDATING, CREATE_FAILED, UPDATE_FAILED
-    #         next_token: "NextToken",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] name_prefix
     #   A name prefix to filter the archives returned. Only archives with
     #   name that match the prefix are returned.
@@ -3221,16 +2555,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListConnectionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name_prefix: "ConnectionName",
-    #         connection_state: "CREATING", # accepts CREATING, UPDATING, DELETING, AUTHORIZED, DEAUTHORIZED, AUTHORIZING, DEAUTHORIZING
-    #         next_token: "NextToken",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] name_prefix
     #   A name prefix to filter results returned. Only connections with a
     #   name that starts with the prefix are returned.
@@ -3279,16 +2603,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEndpointsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name_prefix: "EndpointName",
-    #         home_region: "HomeRegion",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] name_prefix
     #   A value that will return a subset of the endpoints associated with
     #   this account. For example, `"NamePrefix": "ABC"` will return all
@@ -3346,15 +2660,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEventBusesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name_prefix: "EventBusName",
-    #         next_token: "NextToken",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] name_prefix
     #   Specifying this limits the results to only those event buses with
     #   names that start with the specified prefix.
@@ -3399,15 +2704,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEventSourcesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name_prefix: "EventSourceNamePrefix",
-    #         next_token: "NextToken",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] name_prefix
     #   Specifying this limits the results to only those partner event
     #   sources with names that start with the specified prefix.
@@ -3452,15 +2748,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPartnerEventSourceAccountsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         event_source_name: "EventSourceName", # required
-    #         next_token: "NextToken",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] event_source_name
     #   The name of the partner event source to display account information
     #   about.
@@ -3505,15 +2792,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPartnerEventSourcesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name_prefix: "PartnerEventSourceNamePrefix", # required
-    #         next_token: "NextToken",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] name_prefix
     #   If you specify this, the results are limited to only those partner
     #   event sources that start with the string you specify.
@@ -3558,17 +2836,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListReplaysRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name_prefix: "ReplayName",
-    #         state: "STARTING", # accepts STARTING, RUNNING, CANCELLING, COMPLETED, CANCELLED, FAILED
-    #         event_source_arn: "Arn",
-    #         next_token: "NextToken",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] name_prefix
     #   A name prefix to filter the replays returned. Only replays with name
     #   that match the prefix are returned.
@@ -3622,16 +2889,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRuleNamesByTargetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         target_arn: "TargetArn", # required
-    #         event_bus_name: "EventBusNameOrArn",
-    #         next_token: "NextToken",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] target_arn
     #   The Amazon Resource Name (ARN) of the target resource.
     #   @return [String]
@@ -3679,16 +2936,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRulesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name_prefix: "RuleName",
-    #         event_bus_name: "EventBusNameOrArn",
-    #         next_token: "NextToken",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] name_prefix
     #   The prefix matching the rule name.
     #   @return [String]
@@ -3736,13 +2983,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the EventBridge resource for which you want to view tags.
     #   @return [String]
@@ -3768,16 +3008,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTargetsByRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rule: "RuleName", # required
-    #         event_bus_name: "EventBusNameOrArn",
-    #         next_token: "NextToken",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] rule
     #   The name of the rule.
     #   @return [String]
@@ -3838,17 +3068,6 @@ module Aws::EventBridge
     class ManagedRuleException < Aws::EmptyStructure; end
 
     # This structure specifies the network configuration for an ECS task.
-    #
-    # @note When making an API call, you may pass NetworkConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         awsvpc_configuration: {
-    #           subnets: ["String"], # required
-    #           security_groups: ["String"],
-    #           assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
-    #         },
-    #       }
     #
     # @!attribute [rw] awsvpc_configuration
     #   Use this structure to specify the VPC subnets and security groups
@@ -3938,14 +3157,6 @@ module Aws::EventBridge
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html
     #
-    # @note When making an API call, you may pass PlacementConstraint
-    #   data as a hash:
-    #
-    #       {
-    #         type: "distinctInstance", # accepts distinctInstance, memberOf
-    #         expression: "PlacementConstraintExpression",
-    #       }
-    #
     # @!attribute [rw] type
     #   The type of constraint. Use distinctInstance to ensure that each
     #   task in a particular group is running on a different container
@@ -3980,14 +3191,6 @@ module Aws::EventBridge
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-strategies.html
-    #
-    # @note When making an API call, you may pass PlacementStrategy
-    #   data as a hash:
-    #
-    #       {
-    #         type: "random", # accepts random, spread, binpack
-    #         field: "PlacementStrategyField",
-    #       }
     #
     # @!attribute [rw] type
     #   The type of placement strategy. The random placement strategy
@@ -4028,13 +3231,6 @@ module Aws::EventBridge
 
     # The primary Region of the endpoint.
     #
-    # @note When making an API call, you may pass Primary
-    #   data as a hash:
-    #
-    #       {
-    #         health_check: "HealthCheck", # required
-    #       }
-    #
     # @!attribute [rw] health_check
     #   The ARN of the health check used by the endpoint to determine
     #   whether failover is triggered.
@@ -4048,24 +3244,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutEventsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         entries: [ # required
-    #           {
-    #             time: Time.now,
-    #             source: "String",
-    #             resources: ["EventResource"],
-    #             detail_type: "String",
-    #             detail: "String",
-    #             event_bus_name: "NonPartnerEventBusNameOrArn",
-    #             trace_header: "TraceHeader",
-    #           },
-    #         ],
-    #         endpoint_id: "EndpointId",
-    #       }
-    #
     # @!attribute [rw] entries
     #   The entry that defines an event in your system. You can specify
     #   several parameters for the entry such as the source and type of the
@@ -4090,19 +3268,6 @@ module Aws::EventBridge
     end
 
     # Represents an event to be submitted.
-    #
-    # @note When making an API call, you may pass PutEventsRequestEntry
-    #   data as a hash:
-    #
-    #       {
-    #         time: Time.now,
-    #         source: "String",
-    #         resources: ["EventResource"],
-    #         detail_type: "String",
-    #         detail: "String",
-    #         event_bus_name: "NonPartnerEventBusNameOrArn",
-    #         trace_header: "TraceHeader",
-    #       }
     #
     # @!attribute [rw] time
     #   The time stamp of the event, per [RFC3339][1]. If no time stamp is
@@ -4223,21 +3388,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutPartnerEventsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         entries: [ # required
-    #           {
-    #             time: Time.now,
-    #             source: "EventSourceName",
-    #             resources: ["EventResource"],
-    #             detail_type: "String",
-    #             detail: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] entries
     #   The list of events to write to the event bus.
     #   @return [Array<Types::PutPartnerEventsRequestEntry>]
@@ -4251,17 +3401,6 @@ module Aws::EventBridge
     end
 
     # The details about an event generated by an SaaS partner.
-    #
-    # @note When making an API call, you may pass PutPartnerEventsRequestEntry
-    #   data as a hash:
-    #
-    #       {
-    #         time: Time.now,
-    #         source: "EventSourceName",
-    #         resources: ["EventResource"],
-    #         detail_type: "String",
-    #         detail: "String",
-    #       }
     #
     # @!attribute [rw] time
     #   The date and time of the event.
@@ -4342,22 +3481,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutPermissionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         event_bus_name: "NonPartnerEventBusName",
-    #         action: "Action",
-    #         principal: "Principal",
-    #         statement_id: "StatementId",
-    #         condition: {
-    #           type: "String", # required
-    #           key: "String", # required
-    #           value: "String", # required
-    #         },
-    #         policy: "String",
-    #       }
-    #
     # @!attribute [rw] event_bus_name
     #   The name of the event bus associated with the rule. If you omit
     #   this, the default event bus is used.
@@ -4434,25 +3557,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "RuleName", # required
-    #         schedule_expression: "ScheduleExpression",
-    #         event_pattern: "EventPattern",
-    #         state: "ENABLED", # accepts ENABLED, DISABLED
-    #         description: "RuleDescription",
-    #         role_arn: "RoleArn",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         event_bus_name: "EventBusNameOrArn",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the rule that you are creating or updating.
     #   @return [String]
@@ -4526,128 +3630,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutTargetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rule: "RuleName", # required
-    #         event_bus_name: "EventBusNameOrArn",
-    #         targets: [ # required
-    #           {
-    #             id: "TargetId", # required
-    #             arn: "TargetArn", # required
-    #             role_arn: "RoleArn",
-    #             input: "TargetInput",
-    #             input_path: "TargetInputPath",
-    #             input_transformer: {
-    #               input_paths_map: {
-    #                 "InputTransformerPathKey" => "TargetInputPath",
-    #               },
-    #               input_template: "TransformerInput", # required
-    #             },
-    #             kinesis_parameters: {
-    #               partition_key_path: "TargetPartitionKeyPath", # required
-    #             },
-    #             run_command_parameters: {
-    #               run_command_targets: [ # required
-    #                 {
-    #                   key: "RunCommandTargetKey", # required
-    #                   values: ["RunCommandTargetValue"], # required
-    #                 },
-    #               ],
-    #             },
-    #             ecs_parameters: {
-    #               task_definition_arn: "Arn", # required
-    #               task_count: 1,
-    #               launch_type: "EC2", # accepts EC2, FARGATE, EXTERNAL
-    #               network_configuration: {
-    #                 awsvpc_configuration: {
-    #                   subnets: ["String"], # required
-    #                   security_groups: ["String"],
-    #                   assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
-    #                 },
-    #               },
-    #               platform_version: "String",
-    #               group: "String",
-    #               capacity_provider_strategy: [
-    #                 {
-    #                   capacity_provider: "CapacityProvider", # required
-    #                   weight: 1,
-    #                   base: 1,
-    #                 },
-    #               ],
-    #               enable_ecs_managed_tags: false,
-    #               enable_execute_command: false,
-    #               placement_constraints: [
-    #                 {
-    #                   type: "distinctInstance", # accepts distinctInstance, memberOf
-    #                   expression: "PlacementConstraintExpression",
-    #                 },
-    #               ],
-    #               placement_strategy: [
-    #                 {
-    #                   type: "random", # accepts random, spread, binpack
-    #                   field: "PlacementStrategyField",
-    #                 },
-    #               ],
-    #               propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION
-    #               reference_id: "ReferenceId",
-    #               tags: [
-    #                 {
-    #                   key: "TagKey", # required
-    #                   value: "TagValue", # required
-    #                 },
-    #               ],
-    #             },
-    #             batch_parameters: {
-    #               job_definition: "String", # required
-    #               job_name: "String", # required
-    #               array_properties: {
-    #                 size: 1,
-    #               },
-    #               retry_strategy: {
-    #                 attempts: 1,
-    #               },
-    #             },
-    #             sqs_parameters: {
-    #               message_group_id: "MessageGroupId",
-    #             },
-    #             http_parameters: {
-    #               path_parameter_values: ["PathParameter"],
-    #               header_parameters: {
-    #                 "HeaderKey" => "HeaderValue",
-    #               },
-    #               query_string_parameters: {
-    #                 "QueryStringKey" => "QueryStringValue",
-    #               },
-    #             },
-    #             redshift_data_parameters: {
-    #               secret_manager_arn: "RedshiftSecretManagerArn",
-    #               database: "Database", # required
-    #               db_user: "DbUser",
-    #               sql: "Sql", # required
-    #               statement_name: "StatementName",
-    #               with_event: false,
-    #             },
-    #             sage_maker_pipeline_parameters: {
-    #               pipeline_parameter_list: [
-    #                 {
-    #                   name: "SageMakerPipelineParameterName", # required
-    #                   value: "SageMakerPipelineParameterValue", # required
-    #                 },
-    #               ],
-    #             },
-    #             dead_letter_config: {
-    #               arn: "ResourceArn",
-    #             },
-    #             retry_policy: {
-    #               maximum_retry_attempts: 1,
-    #               maximum_event_age_in_seconds: 1,
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] rule
     #   The name of the rule.
     #   @return [String]
@@ -4718,18 +3700,6 @@ module Aws::EventBridge
     # Redshift cluster to invoke the Amazon Redshift Data API
     # ExecuteStatement based on EventBridge events.
     #
-    # @note When making an API call, you may pass RedshiftDataParameters
-    #   data as a hash:
-    #
-    #       {
-    #         secret_manager_arn: "RedshiftSecretManagerArn",
-    #         database: "Database", # required
-    #         db_user: "DbUser",
-    #         sql: "Sql", # required
-    #         statement_name: "StatementName",
-    #         with_event: false,
-    #       }
-    #
     # @!attribute [rw] secret_manager_arn
     #   The name or ARN of the secret that enables access to the database.
     #   Required when authenticating using Amazon Web Services Secrets
@@ -4773,15 +3743,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RemovePermissionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         statement_id: "StatementId",
-    #         remove_all_permissions: false,
-    #         event_bus_name: "NonPartnerEventBusName",
-    #       }
-    #
     # @!attribute [rw] statement_id
     #   The statement ID corresponding to the account that is no longer
     #   allowed to put events to the default event bus.
@@ -4806,16 +3767,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RemoveTargetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rule: "RuleName", # required
-    #         event_bus_name: "EventBusNameOrArn",
-    #         ids: ["TargetId"], # required
-    #         force: false,
-    #       }
-    #
     # @!attribute [rw] rule
     #   The name of the rule.
     #   @return [String]
@@ -4954,14 +3905,6 @@ module Aws::EventBridge
 
     # A `ReplayDestination` object that contains details about a replay.
     #
-    # @note When making an API call, you may pass ReplayDestination
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "Arn", # required
-    #         filter_arns: ["Arn"],
-    #       }
-    #
     # @!attribute [rw] arn
     #   The ARN of the event bus to replay event to. You can replay events
     #   only to the event bus specified to create the archive.
@@ -4981,13 +3924,6 @@ module Aws::EventBridge
     end
 
     # Endpoints can replicate all events to the secondary Region.
-    #
-    # @note When making an API call, you may pass ReplicationConfig
-    #   data as a hash:
-    #
-    #       {
-    #         state: "ENABLED", # accepts ENABLED, DISABLED
-    #       }
     #
     # @!attribute [rw] state
     #   The state of event replication.
@@ -5016,14 +3952,6 @@ module Aws::EventBridge
     # A `RetryPolicy` object that includes information about the retry
     # policy settings.
     #
-    # @note When making an API call, you may pass RetryPolicy
-    #   data as a hash:
-    #
-    #       {
-    #         maximum_retry_attempts: 1,
-    #         maximum_event_age_in_seconds: 1,
-    #       }
-    #
     # @!attribute [rw] maximum_retry_attempts
     #   The maximum number of retry attempts to make before the request
     #   fails. Retry attempts continue until either the maximum number of
@@ -5046,20 +3974,6 @@ module Aws::EventBridge
     end
 
     # The routing configuration of the endpoint.
-    #
-    # @note When making an API call, you may pass RoutingConfig
-    #   data as a hash:
-    #
-    #       {
-    #         failover_config: { # required
-    #           primary: { # required
-    #             health_check: "HealthCheck", # required
-    #           },
-    #           secondary: { # required
-    #             route: "Route", # required
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] failover_config
     #   The failover configuration for an endpoint. This includes what
@@ -5152,18 +4066,6 @@ module Aws::EventBridge
     # This parameter contains the criteria (either InstanceIds or a tag)
     # used to specify which EC2 instances are to be sent the command.
     #
-    # @note When making an API call, you may pass RunCommandParameters
-    #   data as a hash:
-    #
-    #       {
-    #         run_command_targets: [ # required
-    #           {
-    #             key: "RunCommandTargetKey", # required
-    #             values: ["RunCommandTargetValue"], # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] run_command_targets
     #   Currently, we support including only one RunCommandTarget block,
     #   which specifies either an array of InstanceIds or a tag.
@@ -5180,14 +4082,6 @@ module Aws::EventBridge
     # Information about the EC2 instances that are to be sent the command,
     # specified as key-value pairs. Each `RunCommandTarget` block can
     # include only one key, but this key may specify multiple values.
-    #
-    # @note When making an API call, you may pass RunCommandTarget
-    #   data as a hash:
-    #
-    #       {
-    #         key: "RunCommandTargetKey", # required
-    #         values: ["RunCommandTargetValue"], # required
-    #       }
     #
     # @!attribute [rw] key
     #   Can be either `tag:` *tag-key* or `InstanceIds`.
@@ -5211,14 +4105,6 @@ module Aws::EventBridge
     # Name/Value pair of a parameter to start execution of a SageMaker Model
     # Building Pipeline.
     #
-    # @note When making an API call, you may pass SageMakerPipelineParameter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "SageMakerPipelineParameterName", # required
-    #         value: "SageMakerPipelineParameterValue", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   Name of parameter to start execution of a SageMaker Model Building
     #   Pipeline.
@@ -5241,18 +4127,6 @@ module Aws::EventBridge
     # These are custom parameters to use when the target is a SageMaker
     # Model Building Pipeline that starts based on EventBridge events.
     #
-    # @note When making an API call, you may pass SageMakerPipelineParameters
-    #   data as a hash:
-    #
-    #       {
-    #         pipeline_parameter_list: [
-    #           {
-    #             name: "SageMakerPipelineParameterName", # required
-    #             value: "SageMakerPipelineParameterValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] pipeline_parameter_list
     #   List of Parameter names and values for SageMaker Model Building
     #   Pipeline execution.
@@ -5269,13 +4143,6 @@ module Aws::EventBridge
     # The secondary Region that processes events when failover is triggered
     # or replication is enabled.
     #
-    # @note When making an API call, you may pass Secondary
-    #   data as a hash:
-    #
-    #       {
-    #         route: "Route", # required
-    #       }
-    #
     # @!attribute [rw] route
     #   Defines the secondary Region.
     #   @return [String]
@@ -5291,13 +4158,6 @@ module Aws::EventBridge
     # This structure includes the custom parameter to be used when the
     # target is an SQS FIFO queue.
     #
-    # @note When making an API call, you may pass SqsParameters
-    #   data as a hash:
-    #
-    #       {
-    #         message_group_id: "MessageGroupId",
-    #       }
-    #
     # @!attribute [rw] message_group_id
     #   The FIFO message group ID to use as the target.
     #   @return [String]
@@ -5310,21 +4170,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartReplayRequest
-    #   data as a hash:
-    #
-    #       {
-    #         replay_name: "ReplayName", # required
-    #         description: "ReplayDescription",
-    #         event_source_arn: "Arn", # required
-    #         event_start_time: Time.now, # required
-    #         event_end_time: Time.now, # required
-    #         destination: { # required
-    #           arn: "Arn", # required
-    #           filter_arns: ["Arn"],
-    #         },
-    #       }
-    #
     # @!attribute [rw] replay_name
     #   The name of the replay to start.
     #   @return [String]
@@ -5397,14 +4242,6 @@ module Aws::EventBridge
     # A key-value pair associated with an Amazon Web Services resource. In
     # EventBridge, rules and event buses support tagging.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   A string you can use to assign a value. The combination of tag keys
     #   and values can help you organize and categorize your resources.
@@ -5423,19 +4260,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the EventBridge resource that you're adding tags to.
     #   @return [String]
@@ -5472,122 +4296,6 @@ module Aws::EventBridge
     #
     # [1]: https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutTargets.html
     # [2]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html
-    #
-    # @note When making an API call, you may pass Target
-    #   data as a hash:
-    #
-    #       {
-    #         id: "TargetId", # required
-    #         arn: "TargetArn", # required
-    #         role_arn: "RoleArn",
-    #         input: "TargetInput",
-    #         input_path: "TargetInputPath",
-    #         input_transformer: {
-    #           input_paths_map: {
-    #             "InputTransformerPathKey" => "TargetInputPath",
-    #           },
-    #           input_template: "TransformerInput", # required
-    #         },
-    #         kinesis_parameters: {
-    #           partition_key_path: "TargetPartitionKeyPath", # required
-    #         },
-    #         run_command_parameters: {
-    #           run_command_targets: [ # required
-    #             {
-    #               key: "RunCommandTargetKey", # required
-    #               values: ["RunCommandTargetValue"], # required
-    #             },
-    #           ],
-    #         },
-    #         ecs_parameters: {
-    #           task_definition_arn: "Arn", # required
-    #           task_count: 1,
-    #           launch_type: "EC2", # accepts EC2, FARGATE, EXTERNAL
-    #           network_configuration: {
-    #             awsvpc_configuration: {
-    #               subnets: ["String"], # required
-    #               security_groups: ["String"],
-    #               assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
-    #             },
-    #           },
-    #           platform_version: "String",
-    #           group: "String",
-    #           capacity_provider_strategy: [
-    #             {
-    #               capacity_provider: "CapacityProvider", # required
-    #               weight: 1,
-    #               base: 1,
-    #             },
-    #           ],
-    #           enable_ecs_managed_tags: false,
-    #           enable_execute_command: false,
-    #           placement_constraints: [
-    #             {
-    #               type: "distinctInstance", # accepts distinctInstance, memberOf
-    #               expression: "PlacementConstraintExpression",
-    #             },
-    #           ],
-    #           placement_strategy: [
-    #             {
-    #               type: "random", # accepts random, spread, binpack
-    #               field: "PlacementStrategyField",
-    #             },
-    #           ],
-    #           propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION
-    #           reference_id: "ReferenceId",
-    #           tags: [
-    #             {
-    #               key: "TagKey", # required
-    #               value: "TagValue", # required
-    #             },
-    #           ],
-    #         },
-    #         batch_parameters: {
-    #           job_definition: "String", # required
-    #           job_name: "String", # required
-    #           array_properties: {
-    #             size: 1,
-    #           },
-    #           retry_strategy: {
-    #             attempts: 1,
-    #           },
-    #         },
-    #         sqs_parameters: {
-    #           message_group_id: "MessageGroupId",
-    #         },
-    #         http_parameters: {
-    #           path_parameter_values: ["PathParameter"],
-    #           header_parameters: {
-    #             "HeaderKey" => "HeaderValue",
-    #           },
-    #           query_string_parameters: {
-    #             "QueryStringKey" => "QueryStringValue",
-    #           },
-    #         },
-    #         redshift_data_parameters: {
-    #           secret_manager_arn: "RedshiftSecretManagerArn",
-    #           database: "Database", # required
-    #           db_user: "DbUser",
-    #           sql: "Sql", # required
-    #           statement_name: "StatementName",
-    #           with_event: false,
-    #         },
-    #         sage_maker_pipeline_parameters: {
-    #           pipeline_parameter_list: [
-    #             {
-    #               name: "SageMakerPipelineParameterName", # required
-    #               value: "SageMakerPipelineParameterValue", # required
-    #             },
-    #           ],
-    #         },
-    #         dead_letter_config: {
-    #           arn: "ResourceArn",
-    #         },
-    #         retry_policy: {
-    #           maximum_retry_attempts: 1,
-    #           maximum_event_age_in_seconds: 1,
-    #         },
-    #       }
     #
     # @!attribute [rw] id
     #   The ID of the target within the specified rule. Use this ID to
@@ -5737,14 +4445,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TestEventPatternRequest
-    #   data as a hash:
-    #
-    #       {
-    #         event_pattern: "EventPattern", # required
-    #         event: "String", # required
-    #       }
-    #
     # @!attribute [rw] event_pattern
     #   The event pattern. For more information, see [Events and Event
     #   Patterns][1] in the *Amazon EventBridge User Guide*.
@@ -5799,14 +4499,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the EventBridge resource from which you are removing
     #   tags.
@@ -5829,18 +4521,6 @@ module Aws::EventBridge
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateApiDestinationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ApiDestinationName", # required
-    #         description: "ApiDestinationDescription",
-    #         connection_arn: "ConnectionArn",
-    #         invocation_endpoint: "HttpsEndpoint",
-    #         http_method: "POST", # accepts POST, GET, HEAD, OPTIONS, PUT, PATCH, DELETE
-    #         invocation_rate_limit_per_second: 1,
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the API destination to update.
     #   @return [String]
@@ -5907,16 +4587,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateArchiveRequest
-    #   data as a hash:
-    #
-    #       {
-    #         archive_name: "ArchiveName", # required
-    #         description: "ArchiveDescription",
-    #         event_pattern: "EventPattern",
-    #         retention_days: 1,
-    #       }
-    #
     # @!attribute [rw] archive_name
     #   The name of the archive to update.
     #   @return [String]
@@ -5974,14 +4644,6 @@ module Aws::EventBridge
     # Contains the API key authorization parameters to use to update the
     # connection.
     #
-    # @note When making an API call, you may pass UpdateConnectionApiKeyAuthRequestParameters
-    #   data as a hash:
-    #
-    #       {
-    #         api_key_name: "AuthHeaderParameters",
-    #         api_key_value: "AuthHeaderParameters",
-    #       }
-    #
     # @!attribute [rw] api_key_name
     #   The name of the API key to use for authorization.
     #   @return [String]
@@ -6000,74 +4662,6 @@ module Aws::EventBridge
     end
 
     # Contains the additional parameters to use for the connection.
-    #
-    # @note When making an API call, you may pass UpdateConnectionAuthRequestParameters
-    #   data as a hash:
-    #
-    #       {
-    #         basic_auth_parameters: {
-    #           username: "AuthHeaderParameters",
-    #           password: "AuthHeaderParameters",
-    #         },
-    #         o_auth_parameters: {
-    #           client_parameters: {
-    #             client_id: "AuthHeaderParameters",
-    #             client_secret: "AuthHeaderParameters",
-    #           },
-    #           authorization_endpoint: "HttpsEndpoint",
-    #           http_method: "GET", # accepts GET, POST, PUT
-    #           o_auth_http_parameters: {
-    #             header_parameters: [
-    #               {
-    #                 key: "HeaderKey",
-    #                 value: "HeaderValue",
-    #                 is_value_secret: false,
-    #               },
-    #             ],
-    #             query_string_parameters: [
-    #               {
-    #                 key: "QueryStringKey",
-    #                 value: "QueryStringValue",
-    #                 is_value_secret: false,
-    #               },
-    #             ],
-    #             body_parameters: [
-    #               {
-    #                 key: "String",
-    #                 value: "String",
-    #                 is_value_secret: false,
-    #               },
-    #             ],
-    #           },
-    #         },
-    #         api_key_auth_parameters: {
-    #           api_key_name: "AuthHeaderParameters",
-    #           api_key_value: "AuthHeaderParameters",
-    #         },
-    #         invocation_http_parameters: {
-    #           header_parameters: [
-    #             {
-    #               key: "HeaderKey",
-    #               value: "HeaderValue",
-    #               is_value_secret: false,
-    #             },
-    #           ],
-    #           query_string_parameters: [
-    #             {
-    #               key: "QueryStringKey",
-    #               value: "QueryStringValue",
-    #               is_value_secret: false,
-    #             },
-    #           ],
-    #           body_parameters: [
-    #             {
-    #               key: "String",
-    #               value: "String",
-    #               is_value_secret: false,
-    #             },
-    #           ],
-    #         },
-    #       }
     #
     # @!attribute [rw] basic_auth_parameters
     #   A `UpdateConnectionBasicAuthRequestParameters` object that contains
@@ -6102,14 +4696,6 @@ module Aws::EventBridge
 
     # Contains the Basic authorization parameters for the connection.
     #
-    # @note When making an API call, you may pass UpdateConnectionBasicAuthRequestParameters
-    #   data as a hash:
-    #
-    #       {
-    #         username: "AuthHeaderParameters",
-    #         password: "AuthHeaderParameters",
-    #       }
-    #
     # @!attribute [rw] username
     #   The user name to use for Basic authorization.
     #   @return [String]
@@ -6130,14 +4716,6 @@ module Aws::EventBridge
 
     # Contains the OAuth authorization parameters to use for the connection.
     #
-    # @note When making an API call, you may pass UpdateConnectionOAuthClientRequestParameters
-    #   data as a hash:
-    #
-    #       {
-    #         client_id: "AuthHeaderParameters",
-    #         client_secret: "AuthHeaderParameters",
-    #       }
-    #
     # @!attribute [rw] client_id
     #   The client ID to use for OAuth authorization.
     #   @return [String]
@@ -6157,41 +4735,6 @@ module Aws::EventBridge
     end
 
     # Contains the OAuth request parameters to use for the connection.
-    #
-    # @note When making an API call, you may pass UpdateConnectionOAuthRequestParameters
-    #   data as a hash:
-    #
-    #       {
-    #         client_parameters: {
-    #           client_id: "AuthHeaderParameters",
-    #           client_secret: "AuthHeaderParameters",
-    #         },
-    #         authorization_endpoint: "HttpsEndpoint",
-    #         http_method: "GET", # accepts GET, POST, PUT
-    #         o_auth_http_parameters: {
-    #           header_parameters: [
-    #             {
-    #               key: "HeaderKey",
-    #               value: "HeaderValue",
-    #               is_value_secret: false,
-    #             },
-    #           ],
-    #           query_string_parameters: [
-    #             {
-    #               key: "QueryStringKey",
-    #               value: "QueryStringValue",
-    #               is_value_secret: false,
-    #             },
-    #           ],
-    #           body_parameters: [
-    #             {
-    #               key: "String",
-    #               value: "String",
-    #               is_value_secret: false,
-    #             },
-    #           ],
-    #         },
-    #       }
     #
     # @!attribute [rw] client_parameters
     #   A `UpdateConnectionOAuthClientRequestParameters` object that
@@ -6224,79 +4767,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateConnectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ConnectionName", # required
-    #         description: "ConnectionDescription",
-    #         authorization_type: "BASIC", # accepts BASIC, OAUTH_CLIENT_CREDENTIALS, API_KEY
-    #         auth_parameters: {
-    #           basic_auth_parameters: {
-    #             username: "AuthHeaderParameters",
-    #             password: "AuthHeaderParameters",
-    #           },
-    #           o_auth_parameters: {
-    #             client_parameters: {
-    #               client_id: "AuthHeaderParameters",
-    #               client_secret: "AuthHeaderParameters",
-    #             },
-    #             authorization_endpoint: "HttpsEndpoint",
-    #             http_method: "GET", # accepts GET, POST, PUT
-    #             o_auth_http_parameters: {
-    #               header_parameters: [
-    #                 {
-    #                   key: "HeaderKey",
-    #                   value: "HeaderValue",
-    #                   is_value_secret: false,
-    #                 },
-    #               ],
-    #               query_string_parameters: [
-    #                 {
-    #                   key: "QueryStringKey",
-    #                   value: "QueryStringValue",
-    #                   is_value_secret: false,
-    #                 },
-    #               ],
-    #               body_parameters: [
-    #                 {
-    #                   key: "String",
-    #                   value: "String",
-    #                   is_value_secret: false,
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #           api_key_auth_parameters: {
-    #             api_key_name: "AuthHeaderParameters",
-    #             api_key_value: "AuthHeaderParameters",
-    #           },
-    #           invocation_http_parameters: {
-    #             header_parameters: [
-    #               {
-    #                 key: "HeaderKey",
-    #                 value: "HeaderValue",
-    #                 is_value_secret: false,
-    #               },
-    #             ],
-    #             query_string_parameters: [
-    #               {
-    #                 key: "QueryStringKey",
-    #                 value: "QueryStringValue",
-    #                 is_value_secret: false,
-    #               },
-    #             ],
-    #             body_parameters: [
-    #               {
-    #                 key: "String",
-    #                 value: "String",
-    #                 is_value_secret: false,
-    #               },
-    #             ],
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the connection to update.
     #   @return [String]
@@ -6356,33 +4826,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateEndpointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "EndpointName", # required
-    #         description: "EndpointDescription",
-    #         routing_config: {
-    #           failover_config: { # required
-    #             primary: { # required
-    #               health_check: "HealthCheck", # required
-    #             },
-    #             secondary: { # required
-    #               route: "Route", # required
-    #             },
-    #           },
-    #         },
-    #         replication_config: {
-    #           state: "ENABLED", # accepts ENABLED, DISABLED
-    #         },
-    #         event_buses: [
-    #           {
-    #             event_bus_arn: "NonPartnerEventBusArn", # required
-    #           },
-    #         ],
-    #         role_arn: "IamRoleArn",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the endpoint you want to update.
     #   @return [String]

@@ -26,14 +26,6 @@ module Aws::Appflow
     # The aggregation settings that you can use to customize the output
     # format of your flow data.
     #
-    # @note When making an API call, you may pass AggregationConfig
-    #   data as a hash:
-    #
-    #       {
-    #         aggregation_type: "None", # accepts None, SingleFile
-    #         target_file_size: 1,
-    #       }
-    #
     # @!attribute [rw] aggregation_type
     #   Specifies whether Amazon AppFlow aggregates the flow records into a
     #   single file, or leave them unaggregated.
@@ -58,14 +50,6 @@ module Aws::Appflow
 
     # The connector-specific credentials required when using Amplitude.
     #
-    # @note When making an API call, you may pass AmplitudeConnectorProfileCredentials
-    #   data as a hash:
-    #
-    #       {
-    #         api_key: "ApiKey", # required
-    #         secret_key: "SecretKey", # required
-    #       }
-    #
     # @!attribute [rw] api_key
     #   A unique alphanumeric identifier used to authenticate a user,
     #   developer, or calling program to your API.
@@ -87,8 +71,6 @@ module Aws::Appflow
     # The connector-specific profile properties required when using
     # Amplitude.
     #
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/AmplitudeConnectorProfileProperties AWS API Documentation
     #
     class AmplitudeConnectorProfileProperties < Aws::EmptyStructure; end
@@ -101,13 +83,6 @@ module Aws::Appflow
 
     # The properties that are applied when Amplitude is being used as a
     # source.
-    #
-    # @note When making an API call, you may pass AmplitudeSourceProperties
-    #   data as a hash:
-    #
-    #       {
-    #         object: "Object", # required
-    #       }
     #
     # @!attribute [rw] object
     #   The object specified in the Amplitude flow source.
@@ -122,14 +97,6 @@ module Aws::Appflow
     end
 
     # The API key credentials required for API key authentication.
-    #
-    # @note When making an API call, you may pass ApiKeyCredentials
-    #   data as a hash:
-    #
-    #       {
-    #         api_key: "ApiKey", # required
-    #         api_secret_key: "ApiSecretKey",
-    #       }
     #
     # @!attribute [rw] api_key
     #   The API key required for API key authentication.
@@ -234,14 +201,6 @@ module Aws::Appflow
     end
 
     # The basic auth credentials required for basic authentication.
-    #
-    # @note When making an API call, you may pass BasicAuthCredentials
-    #   data as a hash:
-    #
-    #       {
-    #         username: "Username", # required
-    #         password: "Password", # required
-    #       }
     #
     # @!attribute [rw] username
     #   The username to use to connect to a resource.
@@ -713,14 +672,6 @@ module Aws::Appflow
     # Used by select connectors for which the OAuth workflow is supported,
     # such as Salesforce, Google Analytics, Marketo, Zendesk, and Slack.
     #
-    # @note When making an API call, you may pass ConnectorOAuthRequest
-    #   data as a hash:
-    #
-    #       {
-    #         auth_code: "AuthCode",
-    #         redirect_uri: "RedirectUri",
-    #       }
-    #
     # @!attribute [rw] auth_code
     #   The code provided by the connector when it has been authenticated
     #   via the connected app.
@@ -741,28 +692,6 @@ module Aws::Appflow
     end
 
     # The operation to be performed on the provided source fields.
-    #
-    # @note When making an API call, you may pass ConnectorOperator
-    #   data as a hash:
-    #
-    #       {
-    #         amplitude: "BETWEEN", # accepts BETWEEN
-    #         datadog: "PROJECTION", # accepts PROJECTION, BETWEEN, EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #         dynatrace: "PROJECTION", # accepts PROJECTION, BETWEEN, EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #         google_analytics: "PROJECTION", # accepts PROJECTION, BETWEEN
-    #         infor_nexus: "PROJECTION", # accepts PROJECTION, BETWEEN, EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #         marketo: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, BETWEEN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #         s3: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #         salesforce: "PROJECTION", # accepts PROJECTION, LESS_THAN, CONTAINS, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #         service_now: "PROJECTION", # accepts PROJECTION, CONTAINS, LESS_THAN, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #         singular: "PROJECTION", # accepts PROJECTION, EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #         slack: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #         trendmicro: "PROJECTION", # accepts PROJECTION, EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #         veeva: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, CONTAINS, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #         zendesk: "PROJECTION", # accepts PROJECTION, GREATER_THAN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #         sapo_data: "PROJECTION", # accepts PROJECTION, LESS_THAN, CONTAINS, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #         custom_connector: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, CONTAINS, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #       }
     #
     # @!attribute [rw] amplitude
     #   The operation to be performed on the provided Amplitude source
@@ -929,235 +858,6 @@ module Aws::Appflow
     # Defines the connector-specific configuration and credentials for the
     # connector profile.
     #
-    # @note When making an API call, you may pass ConnectorProfileConfig
-    #   data as a hash:
-    #
-    #       {
-    #         connector_profile_properties: { # required
-    #           amplitude: {
-    #           },
-    #           datadog: {
-    #             instance_url: "InstanceUrl", # required
-    #           },
-    #           dynatrace: {
-    #             instance_url: "InstanceUrl", # required
-    #           },
-    #           google_analytics: {
-    #           },
-    #           honeycode: {
-    #           },
-    #           infor_nexus: {
-    #             instance_url: "InstanceUrl", # required
-    #           },
-    #           marketo: {
-    #             instance_url: "InstanceUrl", # required
-    #           },
-    #           redshift: {
-    #             database_url: "DatabaseUrl",
-    #             bucket_name: "BucketName", # required
-    #             bucket_prefix: "BucketPrefix",
-    #             role_arn: "RoleArn", # required
-    #             data_api_role_arn: "DataApiRoleArn",
-    #             is_redshift_serverless: false,
-    #             cluster_identifier: "ClusterIdentifier",
-    #             workgroup_name: "WorkgroupName",
-    #             database_name: "DatabaseName",
-    #           },
-    #           salesforce: {
-    #             instance_url: "InstanceUrl",
-    #             is_sandbox_environment: false,
-    #           },
-    #           service_now: {
-    #             instance_url: "InstanceUrl", # required
-    #           },
-    #           singular: {
-    #           },
-    #           slack: {
-    #             instance_url: "InstanceUrl", # required
-    #           },
-    #           snowflake: {
-    #             warehouse: "Warehouse", # required
-    #             stage: "Stage", # required
-    #             bucket_name: "BucketName", # required
-    #             bucket_prefix: "BucketPrefix",
-    #             private_link_service_name: "PrivateLinkServiceName",
-    #             account_name: "AccountName",
-    #             region: "Region",
-    #           },
-    #           trendmicro: {
-    #           },
-    #           veeva: {
-    #             instance_url: "InstanceUrl", # required
-    #           },
-    #           zendesk: {
-    #             instance_url: "InstanceUrl", # required
-    #           },
-    #           sapo_data: {
-    #             application_host_url: "ApplicationHostUrl", # required
-    #             application_service_path: "ApplicationServicePath", # required
-    #             port_number: 1, # required
-    #             client_number: "ClientNumber", # required
-    #             logon_language: "LogonLanguage",
-    #             private_link_service_name: "PrivateLinkServiceName",
-    #             o_auth_properties: {
-    #               token_url: "TokenUrl", # required
-    #               auth_code_url: "AuthCodeUrl", # required
-    #               o_auth_scopes: ["OAuthScope"], # required
-    #             },
-    #           },
-    #           custom_connector: {
-    #             profile_properties: {
-    #               "ProfilePropertyKey" => "ProfilePropertyValue",
-    #             },
-    #             o_auth_2_properties: {
-    #               token_url: "TokenUrl", # required
-    #               o_auth_2_grant_type: "CLIENT_CREDENTIALS", # required, accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
-    #               token_url_custom_properties: {
-    #                 "CustomPropertyKey" => "CustomPropertyValue",
-    #               },
-    #             },
-    #           },
-    #         },
-    #         connector_profile_credentials: {
-    #           amplitude: {
-    #             api_key: "ApiKey", # required
-    #             secret_key: "SecretKey", # required
-    #           },
-    #           datadog: {
-    #             api_key: "ApiKey", # required
-    #             application_key: "ApplicationKey", # required
-    #           },
-    #           dynatrace: {
-    #             api_token: "ApiToken", # required
-    #           },
-    #           google_analytics: {
-    #             client_id: "ClientId", # required
-    #             client_secret: "ClientSecret", # required
-    #             access_token: "AccessToken",
-    #             refresh_token: "RefreshToken",
-    #             o_auth_request: {
-    #               auth_code: "AuthCode",
-    #               redirect_uri: "RedirectUri",
-    #             },
-    #           },
-    #           honeycode: {
-    #             access_token: "AccessToken",
-    #             refresh_token: "RefreshToken",
-    #             o_auth_request: {
-    #               auth_code: "AuthCode",
-    #               redirect_uri: "RedirectUri",
-    #             },
-    #           },
-    #           infor_nexus: {
-    #             access_key_id: "AccessKeyId", # required
-    #             user_id: "Username", # required
-    #             secret_access_key: "Key", # required
-    #             datakey: "Key", # required
-    #           },
-    #           marketo: {
-    #             client_id: "ClientId", # required
-    #             client_secret: "ClientSecret", # required
-    #             access_token: "AccessToken",
-    #             o_auth_request: {
-    #               auth_code: "AuthCode",
-    #               redirect_uri: "RedirectUri",
-    #             },
-    #           },
-    #           redshift: {
-    #             username: "String",
-    #             password: "Password",
-    #           },
-    #           salesforce: {
-    #             access_token: "AccessToken",
-    #             refresh_token: "RefreshToken",
-    #             o_auth_request: {
-    #               auth_code: "AuthCode",
-    #               redirect_uri: "RedirectUri",
-    #             },
-    #             client_credentials_arn: "ClientCredentialsArn",
-    #           },
-    #           service_now: {
-    #             username: "Username", # required
-    #             password: "Password", # required
-    #           },
-    #           singular: {
-    #             api_key: "ApiKey", # required
-    #           },
-    #           slack: {
-    #             client_id: "ClientId", # required
-    #             client_secret: "ClientSecret", # required
-    #             access_token: "AccessToken",
-    #             o_auth_request: {
-    #               auth_code: "AuthCode",
-    #               redirect_uri: "RedirectUri",
-    #             },
-    #           },
-    #           snowflake: {
-    #             username: "Username", # required
-    #             password: "Password", # required
-    #           },
-    #           trendmicro: {
-    #             api_secret_key: "ApiSecretKey", # required
-    #           },
-    #           veeva: {
-    #             username: "Username", # required
-    #             password: "Password", # required
-    #           },
-    #           zendesk: {
-    #             client_id: "ClientId", # required
-    #             client_secret: "ClientSecret", # required
-    #             access_token: "AccessToken",
-    #             o_auth_request: {
-    #               auth_code: "AuthCode",
-    #               redirect_uri: "RedirectUri",
-    #             },
-    #           },
-    #           sapo_data: {
-    #             basic_auth_credentials: {
-    #               username: "Username", # required
-    #               password: "Password", # required
-    #             },
-    #             o_auth_credentials: {
-    #               client_id: "ClientId", # required
-    #               client_secret: "ClientSecret", # required
-    #               access_token: "AccessToken",
-    #               refresh_token: "RefreshToken",
-    #               o_auth_request: {
-    #                 auth_code: "AuthCode",
-    #                 redirect_uri: "RedirectUri",
-    #               },
-    #             },
-    #           },
-    #           custom_connector: {
-    #             authentication_type: "OAUTH2", # required, accepts OAUTH2, APIKEY, BASIC, CUSTOM
-    #             basic: {
-    #               username: "Username", # required
-    #               password: "Password", # required
-    #             },
-    #             oauth2: {
-    #               client_id: "ClientId",
-    #               client_secret: "ClientSecret",
-    #               access_token: "AccessToken",
-    #               refresh_token: "RefreshToken",
-    #               o_auth_request: {
-    #                 auth_code: "AuthCode",
-    #                 redirect_uri: "RedirectUri",
-    #               },
-    #             },
-    #             api_key: {
-    #               api_key: "ApiKey", # required
-    #               api_secret_key: "ApiSecretKey",
-    #             },
-    #             custom: {
-    #               custom_authentication_type: "CustomAuthenticationType", # required
-    #               credentials_map: {
-    #                 "CredentialsMapKey" => "CredentialsMapValue",
-    #               },
-    #             },
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] connector_profile_properties
     #   The connector-specific properties of the profile configuration.
     #   @return [Types::ConnectorProfileProperties]
@@ -1176,148 +876,6 @@ module Aws::Appflow
     end
 
     # The connector-specific credentials required by a connector.
-    #
-    # @note When making an API call, you may pass ConnectorProfileCredentials
-    #   data as a hash:
-    #
-    #       {
-    #         amplitude: {
-    #           api_key: "ApiKey", # required
-    #           secret_key: "SecretKey", # required
-    #         },
-    #         datadog: {
-    #           api_key: "ApiKey", # required
-    #           application_key: "ApplicationKey", # required
-    #         },
-    #         dynatrace: {
-    #           api_token: "ApiToken", # required
-    #         },
-    #         google_analytics: {
-    #           client_id: "ClientId", # required
-    #           client_secret: "ClientSecret", # required
-    #           access_token: "AccessToken",
-    #           refresh_token: "RefreshToken",
-    #           o_auth_request: {
-    #             auth_code: "AuthCode",
-    #             redirect_uri: "RedirectUri",
-    #           },
-    #         },
-    #         honeycode: {
-    #           access_token: "AccessToken",
-    #           refresh_token: "RefreshToken",
-    #           o_auth_request: {
-    #             auth_code: "AuthCode",
-    #             redirect_uri: "RedirectUri",
-    #           },
-    #         },
-    #         infor_nexus: {
-    #           access_key_id: "AccessKeyId", # required
-    #           user_id: "Username", # required
-    #           secret_access_key: "Key", # required
-    #           datakey: "Key", # required
-    #         },
-    #         marketo: {
-    #           client_id: "ClientId", # required
-    #           client_secret: "ClientSecret", # required
-    #           access_token: "AccessToken",
-    #           o_auth_request: {
-    #             auth_code: "AuthCode",
-    #             redirect_uri: "RedirectUri",
-    #           },
-    #         },
-    #         redshift: {
-    #           username: "String",
-    #           password: "Password",
-    #         },
-    #         salesforce: {
-    #           access_token: "AccessToken",
-    #           refresh_token: "RefreshToken",
-    #           o_auth_request: {
-    #             auth_code: "AuthCode",
-    #             redirect_uri: "RedirectUri",
-    #           },
-    #           client_credentials_arn: "ClientCredentialsArn",
-    #         },
-    #         service_now: {
-    #           username: "Username", # required
-    #           password: "Password", # required
-    #         },
-    #         singular: {
-    #           api_key: "ApiKey", # required
-    #         },
-    #         slack: {
-    #           client_id: "ClientId", # required
-    #           client_secret: "ClientSecret", # required
-    #           access_token: "AccessToken",
-    #           o_auth_request: {
-    #             auth_code: "AuthCode",
-    #             redirect_uri: "RedirectUri",
-    #           },
-    #         },
-    #         snowflake: {
-    #           username: "Username", # required
-    #           password: "Password", # required
-    #         },
-    #         trendmicro: {
-    #           api_secret_key: "ApiSecretKey", # required
-    #         },
-    #         veeva: {
-    #           username: "Username", # required
-    #           password: "Password", # required
-    #         },
-    #         zendesk: {
-    #           client_id: "ClientId", # required
-    #           client_secret: "ClientSecret", # required
-    #           access_token: "AccessToken",
-    #           o_auth_request: {
-    #             auth_code: "AuthCode",
-    #             redirect_uri: "RedirectUri",
-    #           },
-    #         },
-    #         sapo_data: {
-    #           basic_auth_credentials: {
-    #             username: "Username", # required
-    #             password: "Password", # required
-    #           },
-    #           o_auth_credentials: {
-    #             client_id: "ClientId", # required
-    #             client_secret: "ClientSecret", # required
-    #             access_token: "AccessToken",
-    #             refresh_token: "RefreshToken",
-    #             o_auth_request: {
-    #               auth_code: "AuthCode",
-    #               redirect_uri: "RedirectUri",
-    #             },
-    #           },
-    #         },
-    #         custom_connector: {
-    #           authentication_type: "OAUTH2", # required, accepts OAUTH2, APIKEY, BASIC, CUSTOM
-    #           basic: {
-    #             username: "Username", # required
-    #             password: "Password", # required
-    #           },
-    #           oauth2: {
-    #             client_id: "ClientId",
-    #             client_secret: "ClientSecret",
-    #             access_token: "AccessToken",
-    #             refresh_token: "RefreshToken",
-    #             o_auth_request: {
-    #               auth_code: "AuthCode",
-    #               redirect_uri: "RedirectUri",
-    #             },
-    #           },
-    #           api_key: {
-    #             api_key: "ApiKey", # required
-    #             api_secret_key: "ApiSecretKey",
-    #           },
-    #           custom: {
-    #             custom_authentication_type: "CustomAuthenticationType", # required
-    #             credentials_map: {
-    #               "CredentialsMapKey" => "CredentialsMapValue",
-    #             },
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] amplitude
     #   The connector-specific credentials required when using Amplitude.
@@ -1423,95 +981,6 @@ module Aws::Appflow
 
     # The connector-specific profile properties required by each connector.
     #
-    # @note When making an API call, you may pass ConnectorProfileProperties
-    #   data as a hash:
-    #
-    #       {
-    #         amplitude: {
-    #         },
-    #         datadog: {
-    #           instance_url: "InstanceUrl", # required
-    #         },
-    #         dynatrace: {
-    #           instance_url: "InstanceUrl", # required
-    #         },
-    #         google_analytics: {
-    #         },
-    #         honeycode: {
-    #         },
-    #         infor_nexus: {
-    #           instance_url: "InstanceUrl", # required
-    #         },
-    #         marketo: {
-    #           instance_url: "InstanceUrl", # required
-    #         },
-    #         redshift: {
-    #           database_url: "DatabaseUrl",
-    #           bucket_name: "BucketName", # required
-    #           bucket_prefix: "BucketPrefix",
-    #           role_arn: "RoleArn", # required
-    #           data_api_role_arn: "DataApiRoleArn",
-    #           is_redshift_serverless: false,
-    #           cluster_identifier: "ClusterIdentifier",
-    #           workgroup_name: "WorkgroupName",
-    #           database_name: "DatabaseName",
-    #         },
-    #         salesforce: {
-    #           instance_url: "InstanceUrl",
-    #           is_sandbox_environment: false,
-    #         },
-    #         service_now: {
-    #           instance_url: "InstanceUrl", # required
-    #         },
-    #         singular: {
-    #         },
-    #         slack: {
-    #           instance_url: "InstanceUrl", # required
-    #         },
-    #         snowflake: {
-    #           warehouse: "Warehouse", # required
-    #           stage: "Stage", # required
-    #           bucket_name: "BucketName", # required
-    #           bucket_prefix: "BucketPrefix",
-    #           private_link_service_name: "PrivateLinkServiceName",
-    #           account_name: "AccountName",
-    #           region: "Region",
-    #         },
-    #         trendmicro: {
-    #         },
-    #         veeva: {
-    #           instance_url: "InstanceUrl", # required
-    #         },
-    #         zendesk: {
-    #           instance_url: "InstanceUrl", # required
-    #         },
-    #         sapo_data: {
-    #           application_host_url: "ApplicationHostUrl", # required
-    #           application_service_path: "ApplicationServicePath", # required
-    #           port_number: 1, # required
-    #           client_number: "ClientNumber", # required
-    #           logon_language: "LogonLanguage",
-    #           private_link_service_name: "PrivateLinkServiceName",
-    #           o_auth_properties: {
-    #             token_url: "TokenUrl", # required
-    #             auth_code_url: "AuthCodeUrl", # required
-    #             o_auth_scopes: ["OAuthScope"], # required
-    #           },
-    #         },
-    #         custom_connector: {
-    #           profile_properties: {
-    #             "ProfilePropertyKey" => "ProfilePropertyValue",
-    #           },
-    #           o_auth_2_properties: {
-    #             token_url: "TokenUrl", # required
-    #             o_auth_2_grant_type: "CLIENT_CREDENTIALS", # required, accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
-    #             token_url_custom_properties: {
-    #               "CustomPropertyKey" => "CustomPropertyValue",
-    #             },
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] amplitude
     #   The connector-specific properties required by Amplitude.
     #   @return [Types::AmplitudeConnectorProfileProperties]
@@ -1613,15 +1082,6 @@ module Aws::Appflow
     # Contains information about the configuration of the connector being
     # registered.
     #
-    # @note When making an API call, you may pass ConnectorProvisioningConfig
-    #   data as a hash:
-    #
-    #       {
-    #         lambda: {
-    #           lambda_arn: "ARN", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] lambda
     #   Contains information about the configuration of the lambda which is
     #   being registered as the connector.
@@ -1694,242 +1154,6 @@ module Aws::Appflow
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateConnectorProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connector_profile_name: "ConnectorProfileName", # required
-    #         kms_arn: "KMSArn",
-    #         connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector
-    #         connector_label: "ConnectorLabel",
-    #         connection_mode: "Public", # required, accepts Public, Private
-    #         connector_profile_config: { # required
-    #           connector_profile_properties: { # required
-    #             amplitude: {
-    #             },
-    #             datadog: {
-    #               instance_url: "InstanceUrl", # required
-    #             },
-    #             dynatrace: {
-    #               instance_url: "InstanceUrl", # required
-    #             },
-    #             google_analytics: {
-    #             },
-    #             honeycode: {
-    #             },
-    #             infor_nexus: {
-    #               instance_url: "InstanceUrl", # required
-    #             },
-    #             marketo: {
-    #               instance_url: "InstanceUrl", # required
-    #             },
-    #             redshift: {
-    #               database_url: "DatabaseUrl",
-    #               bucket_name: "BucketName", # required
-    #               bucket_prefix: "BucketPrefix",
-    #               role_arn: "RoleArn", # required
-    #               data_api_role_arn: "DataApiRoleArn",
-    #               is_redshift_serverless: false,
-    #               cluster_identifier: "ClusterIdentifier",
-    #               workgroup_name: "WorkgroupName",
-    #               database_name: "DatabaseName",
-    #             },
-    #             salesforce: {
-    #               instance_url: "InstanceUrl",
-    #               is_sandbox_environment: false,
-    #             },
-    #             service_now: {
-    #               instance_url: "InstanceUrl", # required
-    #             },
-    #             singular: {
-    #             },
-    #             slack: {
-    #               instance_url: "InstanceUrl", # required
-    #             },
-    #             snowflake: {
-    #               warehouse: "Warehouse", # required
-    #               stage: "Stage", # required
-    #               bucket_name: "BucketName", # required
-    #               bucket_prefix: "BucketPrefix",
-    #               private_link_service_name: "PrivateLinkServiceName",
-    #               account_name: "AccountName",
-    #               region: "Region",
-    #             },
-    #             trendmicro: {
-    #             },
-    #             veeva: {
-    #               instance_url: "InstanceUrl", # required
-    #             },
-    #             zendesk: {
-    #               instance_url: "InstanceUrl", # required
-    #             },
-    #             sapo_data: {
-    #               application_host_url: "ApplicationHostUrl", # required
-    #               application_service_path: "ApplicationServicePath", # required
-    #               port_number: 1, # required
-    #               client_number: "ClientNumber", # required
-    #               logon_language: "LogonLanguage",
-    #               private_link_service_name: "PrivateLinkServiceName",
-    #               o_auth_properties: {
-    #                 token_url: "TokenUrl", # required
-    #                 auth_code_url: "AuthCodeUrl", # required
-    #                 o_auth_scopes: ["OAuthScope"], # required
-    #               },
-    #             },
-    #             custom_connector: {
-    #               profile_properties: {
-    #                 "ProfilePropertyKey" => "ProfilePropertyValue",
-    #               },
-    #               o_auth_2_properties: {
-    #                 token_url: "TokenUrl", # required
-    #                 o_auth_2_grant_type: "CLIENT_CREDENTIALS", # required, accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
-    #                 token_url_custom_properties: {
-    #                   "CustomPropertyKey" => "CustomPropertyValue",
-    #                 },
-    #               },
-    #             },
-    #           },
-    #           connector_profile_credentials: {
-    #             amplitude: {
-    #               api_key: "ApiKey", # required
-    #               secret_key: "SecretKey", # required
-    #             },
-    #             datadog: {
-    #               api_key: "ApiKey", # required
-    #               application_key: "ApplicationKey", # required
-    #             },
-    #             dynatrace: {
-    #               api_token: "ApiToken", # required
-    #             },
-    #             google_analytics: {
-    #               client_id: "ClientId", # required
-    #               client_secret: "ClientSecret", # required
-    #               access_token: "AccessToken",
-    #               refresh_token: "RefreshToken",
-    #               o_auth_request: {
-    #                 auth_code: "AuthCode",
-    #                 redirect_uri: "RedirectUri",
-    #               },
-    #             },
-    #             honeycode: {
-    #               access_token: "AccessToken",
-    #               refresh_token: "RefreshToken",
-    #               o_auth_request: {
-    #                 auth_code: "AuthCode",
-    #                 redirect_uri: "RedirectUri",
-    #               },
-    #             },
-    #             infor_nexus: {
-    #               access_key_id: "AccessKeyId", # required
-    #               user_id: "Username", # required
-    #               secret_access_key: "Key", # required
-    #               datakey: "Key", # required
-    #             },
-    #             marketo: {
-    #               client_id: "ClientId", # required
-    #               client_secret: "ClientSecret", # required
-    #               access_token: "AccessToken",
-    #               o_auth_request: {
-    #                 auth_code: "AuthCode",
-    #                 redirect_uri: "RedirectUri",
-    #               },
-    #             },
-    #             redshift: {
-    #               username: "String",
-    #               password: "Password",
-    #             },
-    #             salesforce: {
-    #               access_token: "AccessToken",
-    #               refresh_token: "RefreshToken",
-    #               o_auth_request: {
-    #                 auth_code: "AuthCode",
-    #                 redirect_uri: "RedirectUri",
-    #               },
-    #               client_credentials_arn: "ClientCredentialsArn",
-    #             },
-    #             service_now: {
-    #               username: "Username", # required
-    #               password: "Password", # required
-    #             },
-    #             singular: {
-    #               api_key: "ApiKey", # required
-    #             },
-    #             slack: {
-    #               client_id: "ClientId", # required
-    #               client_secret: "ClientSecret", # required
-    #               access_token: "AccessToken",
-    #               o_auth_request: {
-    #                 auth_code: "AuthCode",
-    #                 redirect_uri: "RedirectUri",
-    #               },
-    #             },
-    #             snowflake: {
-    #               username: "Username", # required
-    #               password: "Password", # required
-    #             },
-    #             trendmicro: {
-    #               api_secret_key: "ApiSecretKey", # required
-    #             },
-    #             veeva: {
-    #               username: "Username", # required
-    #               password: "Password", # required
-    #             },
-    #             zendesk: {
-    #               client_id: "ClientId", # required
-    #               client_secret: "ClientSecret", # required
-    #               access_token: "AccessToken",
-    #               o_auth_request: {
-    #                 auth_code: "AuthCode",
-    #                 redirect_uri: "RedirectUri",
-    #               },
-    #             },
-    #             sapo_data: {
-    #               basic_auth_credentials: {
-    #                 username: "Username", # required
-    #                 password: "Password", # required
-    #               },
-    #               o_auth_credentials: {
-    #                 client_id: "ClientId", # required
-    #                 client_secret: "ClientSecret", # required
-    #                 access_token: "AccessToken",
-    #                 refresh_token: "RefreshToken",
-    #                 o_auth_request: {
-    #                   auth_code: "AuthCode",
-    #                   redirect_uri: "RedirectUri",
-    #                 },
-    #               },
-    #             },
-    #             custom_connector: {
-    #               authentication_type: "OAUTH2", # required, accepts OAUTH2, APIKEY, BASIC, CUSTOM
-    #               basic: {
-    #                 username: "Username", # required
-    #                 password: "Password", # required
-    #               },
-    #               oauth2: {
-    #                 client_id: "ClientId",
-    #                 client_secret: "ClientSecret",
-    #                 access_token: "AccessToken",
-    #                 refresh_token: "RefreshToken",
-    #                 o_auth_request: {
-    #                   auth_code: "AuthCode",
-    #                   redirect_uri: "RedirectUri",
-    #                 },
-    #               },
-    #               api_key: {
-    #                 api_key: "ApiKey", # required
-    #                 api_secret_key: "ApiSecretKey",
-    #               },
-    #               custom: {
-    #                 custom_authentication_type: "CustomAuthenticationType", # required
-    #                 credentials_map: {
-    #                   "CredentialsMapKey" => "CredentialsMapValue",
-    #                 },
-    #               },
-    #             },
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] connector_profile_name
     #   The name of the connector profile. The name is unique for each
     #   `ConnectorProfile` in your Amazon Web Services account.
@@ -1989,280 +1213,6 @@ module Aws::Appflow
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateFlowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         flow_name: "FlowName", # required
-    #         description: "FlowDescription",
-    #         kms_arn: "KMSArn",
-    #         trigger_config: { # required
-    #           trigger_type: "Scheduled", # required, accepts Scheduled, Event, OnDemand
-    #           trigger_properties: {
-    #             scheduled: {
-    #               schedule_expression: "ScheduleExpression", # required
-    #               data_pull_mode: "Incremental", # accepts Incremental, Complete
-    #               schedule_start_time: Time.now,
-    #               schedule_end_time: Time.now,
-    #               timezone: "Timezone",
-    #               schedule_offset: 1,
-    #               first_execution_from: Time.now,
-    #               flow_error_deactivation_threshold: 1,
-    #             },
-    #           },
-    #         },
-    #         source_flow_config: { # required
-    #           connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector
-    #           api_version: "ApiVersion",
-    #           connector_profile_name: "ConnectorProfileName",
-    #           source_connector_properties: { # required
-    #             amplitude: {
-    #               object: "Object", # required
-    #             },
-    #             datadog: {
-    #               object: "Object", # required
-    #             },
-    #             dynatrace: {
-    #               object: "Object", # required
-    #             },
-    #             google_analytics: {
-    #               object: "Object", # required
-    #             },
-    #             infor_nexus: {
-    #               object: "Object", # required
-    #             },
-    #             marketo: {
-    #               object: "Object", # required
-    #             },
-    #             s3: {
-    #               bucket_name: "BucketName", # required
-    #               bucket_prefix: "BucketPrefix",
-    #               s3_input_format_config: {
-    #                 s3_input_file_type: "CSV", # accepts CSV, JSON
-    #               },
-    #             },
-    #             salesforce: {
-    #               object: "Object", # required
-    #               enable_dynamic_field_update: false,
-    #               include_deleted_records: false,
-    #               data_transfer_api: "AUTOMATIC", # accepts AUTOMATIC, BULKV2, REST_SYNC
-    #             },
-    #             service_now: {
-    #               object: "Object", # required
-    #             },
-    #             singular: {
-    #               object: "Object", # required
-    #             },
-    #             slack: {
-    #               object: "Object", # required
-    #             },
-    #             trendmicro: {
-    #               object: "Object", # required
-    #             },
-    #             veeva: {
-    #               object: "Object", # required
-    #               document_type: "DocumentType",
-    #               include_source_files: false,
-    #               include_renditions: false,
-    #               include_all_versions: false,
-    #             },
-    #             zendesk: {
-    #               object: "Object", # required
-    #             },
-    #             sapo_data: {
-    #               object_path: "Object",
-    #             },
-    #             custom_connector: {
-    #               entity_name: "EntityName", # required
-    #               custom_properties: {
-    #                 "CustomPropertyKey" => "CustomPropertyValue",
-    #               },
-    #             },
-    #           },
-    #           incremental_pull_config: {
-    #             datetime_type_field_name: "DatetimeTypeFieldName",
-    #           },
-    #         },
-    #         destination_flow_config_list: [ # required
-    #           {
-    #             connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector
-    #             api_version: "ApiVersion",
-    #             connector_profile_name: "ConnectorProfileName",
-    #             destination_connector_properties: { # required
-    #               redshift: {
-    #                 object: "Object", # required
-    #                 intermediate_bucket_name: "BucketName", # required
-    #                 bucket_prefix: "BucketPrefix",
-    #                 error_handling_config: {
-    #                   fail_on_first_destination_error: false,
-    #                   bucket_prefix: "BucketPrefix",
-    #                   bucket_name: "BucketName",
-    #                 },
-    #               },
-    #               s3: {
-    #                 bucket_name: "BucketName", # required
-    #                 bucket_prefix: "BucketPrefix",
-    #                 s3_output_format_config: {
-    #                   file_type: "CSV", # accepts CSV, JSON, PARQUET
-    #                   prefix_config: {
-    #                     prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
-    #                     prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
-    #                     path_prefix_hierarchy: ["EXECUTION_ID"], # accepts EXECUTION_ID, SCHEMA_VERSION
-    #                   },
-    #                   aggregation_config: {
-    #                     aggregation_type: "None", # accepts None, SingleFile
-    #                     target_file_size: 1,
-    #                   },
-    #                   preserve_source_data_typing: false,
-    #                 },
-    #               },
-    #               salesforce: {
-    #                 object: "Object", # required
-    #                 id_field_names: ["Name"],
-    #                 error_handling_config: {
-    #                   fail_on_first_destination_error: false,
-    #                   bucket_prefix: "BucketPrefix",
-    #                   bucket_name: "BucketName",
-    #                 },
-    #                 write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
-    #                 data_transfer_api: "AUTOMATIC", # accepts AUTOMATIC, BULKV2, REST_SYNC
-    #               },
-    #               snowflake: {
-    #                 object: "Object", # required
-    #                 intermediate_bucket_name: "BucketName", # required
-    #                 bucket_prefix: "BucketPrefix",
-    #                 error_handling_config: {
-    #                   fail_on_first_destination_error: false,
-    #                   bucket_prefix: "BucketPrefix",
-    #                   bucket_name: "BucketName",
-    #                 },
-    #               },
-    #               event_bridge: {
-    #                 object: "Object", # required
-    #                 error_handling_config: {
-    #                   fail_on_first_destination_error: false,
-    #                   bucket_prefix: "BucketPrefix",
-    #                   bucket_name: "BucketName",
-    #                 },
-    #               },
-    #               lookout_metrics: {
-    #               },
-    #               upsolver: {
-    #                 bucket_name: "UpsolverBucketName", # required
-    #                 bucket_prefix: "BucketPrefix",
-    #                 s3_output_format_config: { # required
-    #                   file_type: "CSV", # accepts CSV, JSON, PARQUET
-    #                   prefix_config: { # required
-    #                     prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
-    #                     prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
-    #                     path_prefix_hierarchy: ["EXECUTION_ID"], # accepts EXECUTION_ID, SCHEMA_VERSION
-    #                   },
-    #                   aggregation_config: {
-    #                     aggregation_type: "None", # accepts None, SingleFile
-    #                     target_file_size: 1,
-    #                   },
-    #                 },
-    #               },
-    #               honeycode: {
-    #                 object: "Object", # required
-    #                 error_handling_config: {
-    #                   fail_on_first_destination_error: false,
-    #                   bucket_prefix: "BucketPrefix",
-    #                   bucket_name: "BucketName",
-    #                 },
-    #               },
-    #               customer_profiles: {
-    #                 domain_name: "DomainName", # required
-    #                 object_type_name: "ObjectTypeName",
-    #               },
-    #               zendesk: {
-    #                 object: "Object", # required
-    #                 id_field_names: ["Name"],
-    #                 error_handling_config: {
-    #                   fail_on_first_destination_error: false,
-    #                   bucket_prefix: "BucketPrefix",
-    #                   bucket_name: "BucketName",
-    #                 },
-    #                 write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
-    #               },
-    #               marketo: {
-    #                 object: "Object", # required
-    #                 error_handling_config: {
-    #                   fail_on_first_destination_error: false,
-    #                   bucket_prefix: "BucketPrefix",
-    #                   bucket_name: "BucketName",
-    #                 },
-    #               },
-    #               custom_connector: {
-    #                 entity_name: "EntityName", # required
-    #                 error_handling_config: {
-    #                   fail_on_first_destination_error: false,
-    #                   bucket_prefix: "BucketPrefix",
-    #                   bucket_name: "BucketName",
-    #                 },
-    #                 write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
-    #                 id_field_names: ["Name"],
-    #                 custom_properties: {
-    #                   "CustomPropertyKey" => "CustomPropertyValue",
-    #                 },
-    #               },
-    #               sapo_data: {
-    #                 object_path: "Object", # required
-    #                 success_response_handling_config: {
-    #                   bucket_prefix: "BucketPrefix",
-    #                   bucket_name: "BucketName",
-    #                 },
-    #                 id_field_names: ["Name"],
-    #                 error_handling_config: {
-    #                   fail_on_first_destination_error: false,
-    #                   bucket_prefix: "BucketPrefix",
-    #                   bucket_name: "BucketName",
-    #                 },
-    #                 write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
-    #               },
-    #             },
-    #           },
-    #         ],
-    #         tasks: [ # required
-    #           {
-    #             source_fields: ["String"], # required
-    #             connector_operator: {
-    #               amplitude: "BETWEEN", # accepts BETWEEN
-    #               datadog: "PROJECTION", # accepts PROJECTION, BETWEEN, EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #               dynatrace: "PROJECTION", # accepts PROJECTION, BETWEEN, EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #               google_analytics: "PROJECTION", # accepts PROJECTION, BETWEEN
-    #               infor_nexus: "PROJECTION", # accepts PROJECTION, BETWEEN, EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #               marketo: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, BETWEEN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #               s3: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #               salesforce: "PROJECTION", # accepts PROJECTION, LESS_THAN, CONTAINS, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #               service_now: "PROJECTION", # accepts PROJECTION, CONTAINS, LESS_THAN, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #               singular: "PROJECTION", # accepts PROJECTION, EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #               slack: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #               trendmicro: "PROJECTION", # accepts PROJECTION, EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #               veeva: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, CONTAINS, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #               zendesk: "PROJECTION", # accepts PROJECTION, GREATER_THAN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #               sapo_data: "PROJECTION", # accepts PROJECTION, LESS_THAN, CONTAINS, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #               custom_connector: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, CONTAINS, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #             },
-    #             destination_field: "DestinationField",
-    #             task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Map_all, Mask, Merge, Passthrough, Truncate, Validate, Partition
-    #             task_properties: {
-    #               "VALUE" => "Property",
-    #             },
-    #           },
-    #         ],
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         metadata_catalog_config: {
-    #           glue_data_catalog: {
-    #             role_arn: "GlueDataCatalogIAMRole", # required
-    #             database_name: "GlueDataCatalogDatabaseName", # required
-    #             table_prefix: "GlueDataCatalogTablePrefix", # required
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] flow_name
     #   The specified name of the flow. Spaces are not allowed. Use
     #   underscores (\_) or hyphens (-) only.
@@ -2365,16 +1315,6 @@ module Aws::Appflow
 
     # The custom credentials required for custom authentication.
     #
-    # @note When making an API call, you may pass CustomAuthCredentials
-    #   data as a hash:
-    #
-    #       {
-    #         custom_authentication_type: "CustomAuthenticationType", # required
-    #         credentials_map: {
-    #           "CredentialsMapKey" => "CredentialsMapValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] custom_authentication_type
     #   The custom authentication type that the connector uses.
     #   @return [String]
@@ -2394,23 +1334,6 @@ module Aws::Appflow
 
     # The properties that are applied when the custom connector is being
     # used as a destination.
-    #
-    # @note When making an API call, you may pass CustomConnectorDestinationProperties
-    #   data as a hash:
-    #
-    #       {
-    #         entity_name: "EntityName", # required
-    #         error_handling_config: {
-    #           fail_on_first_destination_error: false,
-    #           bucket_prefix: "BucketPrefix",
-    #           bucket_name: "BucketName",
-    #         },
-    #         write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
-    #         id_field_names: ["Name"],
-    #         custom_properties: {
-    #           "CustomPropertyKey" => "CustomPropertyValue",
-    #         },
-    #       }
     #
     # @!attribute [rw] entity_name
     #   The entity specified in the custom connector as a destination in the
@@ -2452,37 +1375,6 @@ module Aws::Appflow
     # The connector-specific profile credentials that are required when
     # using the custom connector.
     #
-    # @note When making an API call, you may pass CustomConnectorProfileCredentials
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_type: "OAUTH2", # required, accepts OAUTH2, APIKEY, BASIC, CUSTOM
-    #         basic: {
-    #           username: "Username", # required
-    #           password: "Password", # required
-    #         },
-    #         oauth2: {
-    #           client_id: "ClientId",
-    #           client_secret: "ClientSecret",
-    #           access_token: "AccessToken",
-    #           refresh_token: "RefreshToken",
-    #           o_auth_request: {
-    #             auth_code: "AuthCode",
-    #             redirect_uri: "RedirectUri",
-    #           },
-    #         },
-    #         api_key: {
-    #           api_key: "ApiKey", # required
-    #           api_secret_key: "ApiSecretKey",
-    #         },
-    #         custom: {
-    #           custom_authentication_type: "CustomAuthenticationType", # required
-    #           credentials_map: {
-    #             "CredentialsMapKey" => "CredentialsMapValue",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] authentication_type
     #   The authentication type that the custom connector uses for
     #   authenticating while creating a connector profile.
@@ -2521,22 +1413,6 @@ module Aws::Appflow
 
     # The profile properties required by the custom connector.
     #
-    # @note When making an API call, you may pass CustomConnectorProfileProperties
-    #   data as a hash:
-    #
-    #       {
-    #         profile_properties: {
-    #           "ProfilePropertyKey" => "ProfilePropertyValue",
-    #         },
-    #         o_auth_2_properties: {
-    #           token_url: "TokenUrl", # required
-    #           o_auth_2_grant_type: "CLIENT_CREDENTIALS", # required, accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
-    #           token_url_custom_properties: {
-    #             "CustomPropertyKey" => "CustomPropertyValue",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] profile_properties
     #   A map of properties that are required to create a profile for the
     #   custom connector.
@@ -2557,16 +1433,6 @@ module Aws::Appflow
 
     # The properties that are applied when the custom connector is being
     # used as a source.
-    #
-    # @note When making an API call, you may pass CustomConnectorSourceProperties
-    #   data as a hash:
-    #
-    #       {
-    #         entity_name: "EntityName", # required
-    #         custom_properties: {
-    #           "CustomPropertyKey" => "CustomPropertyValue",
-    #         },
-    #       }
     #
     # @!attribute [rw] entity_name
     #   The entity specified in the custom connector as a source in the
@@ -2589,14 +1455,6 @@ module Aws::Appflow
 
     # The properties that are applied when Amazon Connect Customer Profiles
     # is used as a destination.
-    #
-    # @note When making an API call, you may pass CustomerProfilesDestinationProperties
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         object_type_name: "ObjectTypeName",
-    #       }
     #
     # @!attribute [rw] domain_name
     #   The unique name of the Amazon Connect Customer Profiles domain.
@@ -2624,14 +1482,6 @@ module Aws::Appflow
 
     # The connector-specific credentials required by Datadog.
     #
-    # @note When making an API call, you may pass DatadogConnectorProfileCredentials
-    #   data as a hash:
-    #
-    #       {
-    #         api_key: "ApiKey", # required
-    #         application_key: "ApplicationKey", # required
-    #       }
-    #
     # @!attribute [rw] api_key
     #   A unique alphanumeric identifier used to authenticate a user,
     #   developer, or calling program to your API.
@@ -2655,13 +1505,6 @@ module Aws::Appflow
 
     # The connector-specific profile properties required by Datadog.
     #
-    # @note When making an API call, you may pass DatadogConnectorProfileProperties
-    #   data as a hash:
-    #
-    #       {
-    #         instance_url: "InstanceUrl", # required
-    #       }
-    #
     # @!attribute [rw] instance_url
     #   The location of the Datadog resource.
     #   @return [String]
@@ -2683,13 +1526,6 @@ module Aws::Appflow
     # The properties that are applied when Datadog is being used as a
     # source.
     #
-    # @note When making an API call, you may pass DatadogSourceProperties
-    #   data as a hash:
-    #
-    #       {
-    #         object: "Object", # required
-    #       }
-    #
     # @!attribute [rw] object
     #   The object specified in the Datadog flow source.
     #   @return [String]
@@ -2702,14 +1538,6 @@ module Aws::Appflow
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteConnectorProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connector_profile_name: "ConnectorProfileName", # required
-    #         force_delete: false,
-    #       }
-    #
     # @!attribute [rw] connector_profile_name
     #   The name of the connector profile. The name is unique for each
     #   `ConnectorProfile` in your account.
@@ -2733,14 +1561,6 @@ module Aws::Appflow
     #
     class DeleteConnectorProfileResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteFlowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         flow_name: "FlowName", # required
-    #         force_delete: false,
-    #       }
-    #
     # @!attribute [rw] flow_name
     #   The specified name of the flow. Spaces are not allowed. Use
     #   underscores (\_) or hyphens (-) only.
@@ -2764,16 +1584,6 @@ module Aws::Appflow
     #
     class DeleteFlowResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeConnectorEntityRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connector_entity_name: "EntityName", # required
-    #         connector_type: "Salesforce", # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector
-    #         connector_profile_name: "ConnectorProfileName",
-    #         api_version: "ApiVersion",
-    #       }
-    #
     # @!attribute [rw] connector_entity_name
     #   The entity name for that connector.
     #   @return [String]
@@ -2817,17 +1627,6 @@ module Aws::Appflow
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeConnectorProfilesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connector_profile_names: ["ConnectorProfileName"],
-    #         connector_type: "Salesforce", # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector
-    #         connector_label: "ConnectorLabel",
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] connector_profile_names
     #   The name of the connector profile. The name is unique for each
     #   `ConnectorProfile` in the Amazon Web Services account.
@@ -2884,14 +1683,6 @@ module Aws::Appflow
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeConnectorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector
-    #         connector_label: "ConnectorLabel",
-    #       }
-    #
     # @!attribute [rw] connector_type
     #   The connector type, such as CUSTOMCONNECTOR, Saleforce, Marketo.
     #   Please choose CUSTOMCONNECTOR for Lambda based custom connectors.
@@ -2924,15 +1715,6 @@ module Aws::Appflow
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeConnectorsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connector_types: ["Salesforce"], # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] connector_types
     #   The type of connector, such as Salesforce, Amplitude, and so on.
     #   @return [Array<String>]
@@ -2979,15 +1761,6 @@ module Aws::Appflow
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeFlowExecutionRecordsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         flow_name: "FlowName", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] flow_name
     #   The specified name of the flow. Spaces are not allowed. Use
     #   underscores (\_) or hyphens (-) only.
@@ -3030,13 +1803,6 @@ module Aws::Appflow
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeFlowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         flow_name: "FlowName", # required
-    #       }
-    #
     # @!attribute [rw] flow_name
     #   The specified name of the flow. Spaces are not allowed. Use
     #   underscores (\_) or hyphens (-) only.
@@ -3178,143 +1944,6 @@ module Aws::Appflow
     # This stores the information that is required to query a particular
     # connector.
     #
-    # @note When making an API call, you may pass DestinationConnectorProperties
-    #   data as a hash:
-    #
-    #       {
-    #         redshift: {
-    #           object: "Object", # required
-    #           intermediate_bucket_name: "BucketName", # required
-    #           bucket_prefix: "BucketPrefix",
-    #           error_handling_config: {
-    #             fail_on_first_destination_error: false,
-    #             bucket_prefix: "BucketPrefix",
-    #             bucket_name: "BucketName",
-    #           },
-    #         },
-    #         s3: {
-    #           bucket_name: "BucketName", # required
-    #           bucket_prefix: "BucketPrefix",
-    #           s3_output_format_config: {
-    #             file_type: "CSV", # accepts CSV, JSON, PARQUET
-    #             prefix_config: {
-    #               prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
-    #               prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
-    #               path_prefix_hierarchy: ["EXECUTION_ID"], # accepts EXECUTION_ID, SCHEMA_VERSION
-    #             },
-    #             aggregation_config: {
-    #               aggregation_type: "None", # accepts None, SingleFile
-    #               target_file_size: 1,
-    #             },
-    #             preserve_source_data_typing: false,
-    #           },
-    #         },
-    #         salesforce: {
-    #           object: "Object", # required
-    #           id_field_names: ["Name"],
-    #           error_handling_config: {
-    #             fail_on_first_destination_error: false,
-    #             bucket_prefix: "BucketPrefix",
-    #             bucket_name: "BucketName",
-    #           },
-    #           write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
-    #           data_transfer_api: "AUTOMATIC", # accepts AUTOMATIC, BULKV2, REST_SYNC
-    #         },
-    #         snowflake: {
-    #           object: "Object", # required
-    #           intermediate_bucket_name: "BucketName", # required
-    #           bucket_prefix: "BucketPrefix",
-    #           error_handling_config: {
-    #             fail_on_first_destination_error: false,
-    #             bucket_prefix: "BucketPrefix",
-    #             bucket_name: "BucketName",
-    #           },
-    #         },
-    #         event_bridge: {
-    #           object: "Object", # required
-    #           error_handling_config: {
-    #             fail_on_first_destination_error: false,
-    #             bucket_prefix: "BucketPrefix",
-    #             bucket_name: "BucketName",
-    #           },
-    #         },
-    #         lookout_metrics: {
-    #         },
-    #         upsolver: {
-    #           bucket_name: "UpsolverBucketName", # required
-    #           bucket_prefix: "BucketPrefix",
-    #           s3_output_format_config: { # required
-    #             file_type: "CSV", # accepts CSV, JSON, PARQUET
-    #             prefix_config: { # required
-    #               prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
-    #               prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
-    #               path_prefix_hierarchy: ["EXECUTION_ID"], # accepts EXECUTION_ID, SCHEMA_VERSION
-    #             },
-    #             aggregation_config: {
-    #               aggregation_type: "None", # accepts None, SingleFile
-    #               target_file_size: 1,
-    #             },
-    #           },
-    #         },
-    #         honeycode: {
-    #           object: "Object", # required
-    #           error_handling_config: {
-    #             fail_on_first_destination_error: false,
-    #             bucket_prefix: "BucketPrefix",
-    #             bucket_name: "BucketName",
-    #           },
-    #         },
-    #         customer_profiles: {
-    #           domain_name: "DomainName", # required
-    #           object_type_name: "ObjectTypeName",
-    #         },
-    #         zendesk: {
-    #           object: "Object", # required
-    #           id_field_names: ["Name"],
-    #           error_handling_config: {
-    #             fail_on_first_destination_error: false,
-    #             bucket_prefix: "BucketPrefix",
-    #             bucket_name: "BucketName",
-    #           },
-    #           write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
-    #         },
-    #         marketo: {
-    #           object: "Object", # required
-    #           error_handling_config: {
-    #             fail_on_first_destination_error: false,
-    #             bucket_prefix: "BucketPrefix",
-    #             bucket_name: "BucketName",
-    #           },
-    #         },
-    #         custom_connector: {
-    #           entity_name: "EntityName", # required
-    #           error_handling_config: {
-    #             fail_on_first_destination_error: false,
-    #             bucket_prefix: "BucketPrefix",
-    #             bucket_name: "BucketName",
-    #           },
-    #           write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
-    #           id_field_names: ["Name"],
-    #           custom_properties: {
-    #             "CustomPropertyKey" => "CustomPropertyValue",
-    #           },
-    #         },
-    #         sapo_data: {
-    #           object_path: "Object", # required
-    #           success_response_handling_config: {
-    #             bucket_prefix: "BucketPrefix",
-    #             bucket_name: "BucketName",
-    #           },
-    #           id_field_names: ["Name"],
-    #           error_handling_config: {
-    #             fail_on_first_destination_error: false,
-    #             bucket_prefix: "BucketPrefix",
-    #             bucket_name: "BucketName",
-    #           },
-    #           write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
-    #         },
-    #       }
-    #
     # @!attribute [rw] redshift
     #   The properties required to query Amazon Redshift.
     #   @return [Types::RedshiftDestinationProperties]
@@ -3437,148 +2066,6 @@ module Aws::Appflow
     # Contains information about the configuration of destination connectors
     # present in the flow.
     #
-    # @note When making an API call, you may pass DestinationFlowConfig
-    #   data as a hash:
-    #
-    #       {
-    #         connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector
-    #         api_version: "ApiVersion",
-    #         connector_profile_name: "ConnectorProfileName",
-    #         destination_connector_properties: { # required
-    #           redshift: {
-    #             object: "Object", # required
-    #             intermediate_bucket_name: "BucketName", # required
-    #             bucket_prefix: "BucketPrefix",
-    #             error_handling_config: {
-    #               fail_on_first_destination_error: false,
-    #               bucket_prefix: "BucketPrefix",
-    #               bucket_name: "BucketName",
-    #             },
-    #           },
-    #           s3: {
-    #             bucket_name: "BucketName", # required
-    #             bucket_prefix: "BucketPrefix",
-    #             s3_output_format_config: {
-    #               file_type: "CSV", # accepts CSV, JSON, PARQUET
-    #               prefix_config: {
-    #                 prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
-    #                 prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
-    #                 path_prefix_hierarchy: ["EXECUTION_ID"], # accepts EXECUTION_ID, SCHEMA_VERSION
-    #               },
-    #               aggregation_config: {
-    #                 aggregation_type: "None", # accepts None, SingleFile
-    #                 target_file_size: 1,
-    #               },
-    #               preserve_source_data_typing: false,
-    #             },
-    #           },
-    #           salesforce: {
-    #             object: "Object", # required
-    #             id_field_names: ["Name"],
-    #             error_handling_config: {
-    #               fail_on_first_destination_error: false,
-    #               bucket_prefix: "BucketPrefix",
-    #               bucket_name: "BucketName",
-    #             },
-    #             write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
-    #             data_transfer_api: "AUTOMATIC", # accepts AUTOMATIC, BULKV2, REST_SYNC
-    #           },
-    #           snowflake: {
-    #             object: "Object", # required
-    #             intermediate_bucket_name: "BucketName", # required
-    #             bucket_prefix: "BucketPrefix",
-    #             error_handling_config: {
-    #               fail_on_first_destination_error: false,
-    #               bucket_prefix: "BucketPrefix",
-    #               bucket_name: "BucketName",
-    #             },
-    #           },
-    #           event_bridge: {
-    #             object: "Object", # required
-    #             error_handling_config: {
-    #               fail_on_first_destination_error: false,
-    #               bucket_prefix: "BucketPrefix",
-    #               bucket_name: "BucketName",
-    #             },
-    #           },
-    #           lookout_metrics: {
-    #           },
-    #           upsolver: {
-    #             bucket_name: "UpsolverBucketName", # required
-    #             bucket_prefix: "BucketPrefix",
-    #             s3_output_format_config: { # required
-    #               file_type: "CSV", # accepts CSV, JSON, PARQUET
-    #               prefix_config: { # required
-    #                 prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
-    #                 prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
-    #                 path_prefix_hierarchy: ["EXECUTION_ID"], # accepts EXECUTION_ID, SCHEMA_VERSION
-    #               },
-    #               aggregation_config: {
-    #                 aggregation_type: "None", # accepts None, SingleFile
-    #                 target_file_size: 1,
-    #               },
-    #             },
-    #           },
-    #           honeycode: {
-    #             object: "Object", # required
-    #             error_handling_config: {
-    #               fail_on_first_destination_error: false,
-    #               bucket_prefix: "BucketPrefix",
-    #               bucket_name: "BucketName",
-    #             },
-    #           },
-    #           customer_profiles: {
-    #             domain_name: "DomainName", # required
-    #             object_type_name: "ObjectTypeName",
-    #           },
-    #           zendesk: {
-    #             object: "Object", # required
-    #             id_field_names: ["Name"],
-    #             error_handling_config: {
-    #               fail_on_first_destination_error: false,
-    #               bucket_prefix: "BucketPrefix",
-    #               bucket_name: "BucketName",
-    #             },
-    #             write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
-    #           },
-    #           marketo: {
-    #             object: "Object", # required
-    #             error_handling_config: {
-    #               fail_on_first_destination_error: false,
-    #               bucket_prefix: "BucketPrefix",
-    #               bucket_name: "BucketName",
-    #             },
-    #           },
-    #           custom_connector: {
-    #             entity_name: "EntityName", # required
-    #             error_handling_config: {
-    #               fail_on_first_destination_error: false,
-    #               bucket_prefix: "BucketPrefix",
-    #               bucket_name: "BucketName",
-    #             },
-    #             write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
-    #             id_field_names: ["Name"],
-    #             custom_properties: {
-    #               "CustomPropertyKey" => "CustomPropertyValue",
-    #             },
-    #           },
-    #           sapo_data: {
-    #             object_path: "Object", # required
-    #             success_response_handling_config: {
-    #               bucket_prefix: "BucketPrefix",
-    #               bucket_name: "BucketName",
-    #             },
-    #             id_field_names: ["Name"],
-    #             error_handling_config: {
-    #               fail_on_first_destination_error: false,
-    #               bucket_prefix: "BucketPrefix",
-    #               bucket_name: "BucketName",
-    #             },
-    #             write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] connector_type
     #   The type of connector, such as Salesforce, Amplitude, and so on.
     #   @return [String]
@@ -3610,13 +2097,6 @@ module Aws::Appflow
 
     # The connector-specific profile credentials required by Dynatrace.
     #
-    # @note When making an API call, you may pass DynatraceConnectorProfileCredentials
-    #   data as a hash:
-    #
-    #       {
-    #         api_token: "ApiToken", # required
-    #       }
-    #
     # @!attribute [rw] api_token
     #   The API tokens used by Dynatrace API to authenticate various API
     #   calls.
@@ -3631,13 +2111,6 @@ module Aws::Appflow
     end
 
     # The connector-specific profile properties required by Dynatrace.
-    #
-    # @note When making an API call, you may pass DynatraceConnectorProfileProperties
-    #   data as a hash:
-    #
-    #       {
-    #         instance_url: "InstanceUrl", # required
-    #       }
     #
     # @!attribute [rw] instance_url
     #   The location of the Dynatrace resource.
@@ -3660,13 +2133,6 @@ module Aws::Appflow
     # The properties that are applied when Dynatrace is being used as a
     # source.
     #
-    # @note When making an API call, you may pass DynatraceSourceProperties
-    #   data as a hash:
-    #
-    #       {
-    #         object: "Object", # required
-    #       }
-    #
     # @!attribute [rw] object
     #   The object specified in the Dynatrace flow source.
     #   @return [String]
@@ -3685,15 +2151,6 @@ module Aws::Appflow
     # continue and attempt to insert every record regardless of the initial
     # failure. `ErrorHandlingConfig` is a part of the destination connector
     # details.
-    #
-    # @note When making an API call, you may pass ErrorHandlingConfig
-    #   data as a hash:
-    #
-    #       {
-    #         fail_on_first_destination_error: false,
-    #         bucket_prefix: "BucketPrefix",
-    #         bucket_name: "BucketName",
-    #       }
     #
     # @!attribute [rw] fail_on_first_destination_error
     #   Specifies if the flow should fail after the first instance of a
@@ -3740,18 +2197,6 @@ module Aws::Appflow
 
     # The properties that are applied when Amazon EventBridge is being used
     # as a destination.
-    #
-    # @note When making an API call, you may pass EventBridgeDestinationProperties
-    #   data as a hash:
-    #
-    #       {
-    #         object: "Object", # required
-    #         error_handling_config: {
-    #           fail_on_first_destination_error: false,
-    #           bucket_prefix: "BucketPrefix",
-    #           bucket_name: "BucketName",
-    #         },
-    #       }
     #
     # @!attribute [rw] object
     #   The object specified in the Amazon EventBridge flow destination.
@@ -4035,15 +2480,6 @@ module Aws::Appflow
     #
     #  </note>
     #
-    # @note When making an API call, you may pass GlueDataCatalogConfig
-    #   data as a hash:
-    #
-    #       {
-    #         role_arn: "GlueDataCatalogIAMRole", # required
-    #         database_name: "GlueDataCatalogDatabaseName", # required
-    #         table_prefix: "GlueDataCatalogTablePrefix", # required
-    #       }
-    #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of an IAM role that grants Amazon
     #   AppFlow the permissions it needs to create Data Catalog tables,
@@ -4088,20 +2524,6 @@ module Aws::Appflow
     # The connector-specific profile credentials required by Google
     # Analytics.
     #
-    # @note When making an API call, you may pass GoogleAnalyticsConnectorProfileCredentials
-    #   data as a hash:
-    #
-    #       {
-    #         client_id: "ClientId", # required
-    #         client_secret: "ClientSecret", # required
-    #         access_token: "AccessToken",
-    #         refresh_token: "RefreshToken",
-    #         o_auth_request: {
-    #           auth_code: "AuthCode",
-    #           redirect_uri: "RedirectUri",
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_id
     #   The identifier for the desired client.
     #   @return [String]
@@ -4141,8 +2563,6 @@ module Aws::Appflow
     # The connector-specific profile properties required by Google
     # Analytics.
     #
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/GoogleAnalyticsConnectorProfileProperties AWS API Documentation
     #
     class GoogleAnalyticsConnectorProfileProperties < Aws::EmptyStructure; end
@@ -4164,13 +2584,6 @@ module Aws::Appflow
     # The properties that are applied when Google Analytics is being used as
     # a source.
     #
-    # @note When making an API call, you may pass GoogleAnalyticsSourceProperties
-    #   data as a hash:
-    #
-    #       {
-    #         object: "Object", # required
-    #       }
-    #
     # @!attribute [rw] object
     #   The object specified in the Google Analytics flow source.
     #   @return [String]
@@ -4185,18 +2598,6 @@ module Aws::Appflow
 
     # The connector-specific credentials required when using Amazon
     # Honeycode.
-    #
-    # @note When making an API call, you may pass HoneycodeConnectorProfileCredentials
-    #   data as a hash:
-    #
-    #       {
-    #         access_token: "AccessToken",
-    #         refresh_token: "RefreshToken",
-    #         o_auth_request: {
-    #           auth_code: "AuthCode",
-    #           redirect_uri: "RedirectUri",
-    #         },
-    #       }
     #
     # @!attribute [rw] access_token
     #   The credentials used to access protected Amazon Honeycode resources.
@@ -4224,26 +2625,12 @@ module Aws::Appflow
     # The connector-specific properties required when using Amazon
     # Honeycode.
     #
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/HoneycodeConnectorProfileProperties AWS API Documentation
     #
     class HoneycodeConnectorProfileProperties < Aws::EmptyStructure; end
 
     # The properties that are applied when Amazon Honeycode is used as a
     # destination.
-    #
-    # @note When making an API call, you may pass HoneycodeDestinationProperties
-    #   data as a hash:
-    #
-    #       {
-    #         object: "Object", # required
-    #         error_handling_config: {
-    #           fail_on_first_destination_error: false,
-    #           bucket_prefix: "BucketPrefix",
-    #           bucket_name: "BucketName",
-    #         },
-    #       }
     #
     # @!attribute [rw] object
     #   The object specified in the Amazon Honeycode flow destination.
@@ -4284,13 +2671,6 @@ module Aws::Appflow
     # Specifies the configuration used when importing incremental records
     # from the source.
     #
-    # @note When making an API call, you may pass IncrementalPullConfig
-    #   data as a hash:
-    #
-    #       {
-    #         datetime_type_field_name: "DatetimeTypeFieldName",
-    #       }
-    #
     # @!attribute [rw] datetime_type_field_name
     #   A field that specifies the date time or timestamp field as the
     #   criteria to use when importing incremental records from the source.
@@ -4305,16 +2685,6 @@ module Aws::Appflow
     end
 
     # The connector-specific profile credentials required by Infor Nexus.
-    #
-    # @note When making an API call, you may pass InforNexusConnectorProfileCredentials
-    #   data as a hash:
-    #
-    #       {
-    #         access_key_id: "AccessKeyId", # required
-    #         user_id: "Username", # required
-    #         secret_access_key: "Key", # required
-    #         datakey: "Key", # required
-    #       }
     #
     # @!attribute [rw] access_key_id
     #   The Access Key portion of the credentials.
@@ -4345,13 +2715,6 @@ module Aws::Appflow
 
     # The connector-specific profile properties required by Infor Nexus.
     #
-    # @note When making an API call, you may pass InforNexusConnectorProfileProperties
-    #   data as a hash:
-    #
-    #       {
-    #         instance_url: "InstanceUrl", # required
-    #       }
-    #
     # @!attribute [rw] instance_url
     #   The location of the Infor Nexus resource.
     #   @return [String]
@@ -4372,13 +2735,6 @@ module Aws::Appflow
 
     # The properties that are applied when Infor Nexus is being used as a
     # source.
-    #
-    # @note When making an API call, you may pass InforNexusSourceProperties
-    #   data as a hash:
-    #
-    #       {
-    #         object: "Object", # required
-    #       }
     #
     # @!attribute [rw] object
     #   The object specified in the Infor Nexus flow source.
@@ -4409,13 +2765,6 @@ module Aws::Appflow
     # Contains information about the configuration of the lambda which is
     # being registered as the connector.
     #
-    # @note When making an API call, you may pass LambdaConnectorProvisioningConfig
-    #   data as a hash:
-    #
-    #       {
-    #         lambda_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] lambda_arn
     #   Lambda ARN of the connector being registered.
     #   @return [String]
@@ -4428,16 +2777,6 @@ module Aws::Appflow
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListConnectorEntitiesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connector_profile_name: "ConnectorProfileName",
-    #         connector_type: "Salesforce", # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector
-    #         entities_path: "EntitiesPath",
-    #         api_version: "ApiVersion",
-    #       }
-    #
     # @!attribute [rw] connector_profile_name
     #   The name of the connector profile. The name is unique for each
     #   `ConnectorProfile` in the Amazon Web Services account, and is used
@@ -4487,14 +2826,6 @@ module Aws::Appflow
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListConnectorsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   Specifies the maximum number of items that should be returned in the
     #   result set. The default for `maxResults` is 20 (for all paginated
@@ -4533,14 +2864,6 @@ module Aws::Appflow
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFlowsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   Specifies the maximum number of items that should be returned in the
     #   result set.
@@ -4576,13 +2899,6 @@ module Aws::Appflow
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the specified flow.
     #   @return [String]
@@ -4610,26 +2926,11 @@ module Aws::Appflow
     # The properties that are applied when Amazon Lookout for Metrics is
     # used as a destination.
     #
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/LookoutMetricsDestinationProperties AWS API Documentation
     #
     class LookoutMetricsDestinationProperties < Aws::EmptyStructure; end
 
     # The connector-specific profile credentials required by Marketo.
-    #
-    # @note When making an API call, you may pass MarketoConnectorProfileCredentials
-    #   data as a hash:
-    #
-    #       {
-    #         client_id: "ClientId", # required
-    #         client_secret: "ClientSecret", # required
-    #         access_token: "AccessToken",
-    #         o_auth_request: {
-    #           auth_code: "AuthCode",
-    #           redirect_uri: "RedirectUri",
-    #         },
-    #       }
     #
     # @!attribute [rw] client_id
     #   The identifier for the desired client.
@@ -4662,13 +2963,6 @@ module Aws::Appflow
 
     # The connector-specific profile properties required when using Marketo.
     #
-    # @note When making an API call, you may pass MarketoConnectorProfileProperties
-    #   data as a hash:
-    #
-    #       {
-    #         instance_url: "InstanceUrl", # required
-    #       }
-    #
     # @!attribute [rw] instance_url
     #   The location of the Marketo resource.
     #   @return [String]
@@ -4683,18 +2977,6 @@ module Aws::Appflow
 
     # The properties that Amazon AppFlow applies when you use Marketo as a
     # flow destination.
-    #
-    # @note When making an API call, you may pass MarketoDestinationProperties
-    #   data as a hash:
-    #
-    #       {
-    #         object: "Object", # required
-    #         error_handling_config: {
-    #           fail_on_first_destination_error: false,
-    #           bucket_prefix: "BucketPrefix",
-    #           bucket_name: "BucketName",
-    #         },
-    #       }
     #
     # @!attribute [rw] object
     #   The object specified in the Marketo flow destination.
@@ -4727,13 +3009,6 @@ module Aws::Appflow
     # The properties that are applied when Marketo is being used as a
     # source.
     #
-    # @note When making an API call, you may pass MarketoSourceProperties
-    #   data as a hash:
-    #
-    #       {
-    #         object: "Object", # required
-    #       }
-    #
     # @!attribute [rw] object
     #   The object specified in the Marketo flow source.
     #   @return [String]
@@ -4749,17 +3024,6 @@ module Aws::Appflow
     # Specifies the configuration that Amazon AppFlow uses when it catalogs
     # your data. When Amazon AppFlow catalogs your data, it stores metadata
     # in a data catalog.
-    #
-    # @note When making an API call, you may pass MetadataCatalogConfig
-    #   data as a hash:
-    #
-    #       {
-    #         glue_data_catalog: {
-    #           role_arn: "GlueDataCatalogIAMRole", # required
-    #           database_name: "GlueDataCatalogDatabaseName", # required
-    #           table_prefix: "GlueDataCatalogTablePrefix", # required
-    #         },
-    #       }
     #
     # @!attribute [rw] glue_data_catalog
     #   Specifies the configuration that Amazon AppFlow uses when it
@@ -4820,20 +3084,6 @@ module Aws::Appflow
     end
 
     # The OAuth 2.0 credentials required for OAuth 2.0 authentication.
-    #
-    # @note When making an API call, you may pass OAuth2Credentials
-    #   data as a hash:
-    #
-    #       {
-    #         client_id: "ClientId",
-    #         client_secret: "ClientSecret",
-    #         access_token: "AccessToken",
-    #         refresh_token: "RefreshToken",
-    #         o_auth_request: {
-    #           auth_code: "AuthCode",
-    #           redirect_uri: "RedirectUri",
-    #         },
-    #       }
     #
     # @!attribute [rw] client_id
     #   The identifier for the desired client.
@@ -4954,17 +3204,6 @@ module Aws::Appflow
 
     # The OAuth 2.0 properties required for OAuth 2.0 authentication.
     #
-    # @note When making an API call, you may pass OAuth2Properties
-    #   data as a hash:
-    #
-    #       {
-    #         token_url: "TokenUrl", # required
-    #         o_auth_2_grant_type: "CLIENT_CREDENTIALS", # required, accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
-    #         token_url_custom_properties: {
-    #           "CustomPropertyKey" => "CustomPropertyValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] token_url
     #   The token URL required for OAuth 2.0 authentication.
     #   @return [String]
@@ -4991,20 +3230,6 @@ module Aws::Appflow
     end
 
     # The OAuth credentials required for OAuth type authentication.
-    #
-    # @note When making an API call, you may pass OAuthCredentials
-    #   data as a hash:
-    #
-    #       {
-    #         client_id: "ClientId", # required
-    #         client_secret: "ClientSecret", # required
-    #         access_token: "AccessToken",
-    #         refresh_token: "RefreshToken",
-    #         o_auth_request: {
-    #           auth_code: "AuthCode",
-    #           redirect_uri: "RedirectUri",
-    #         },
-    #       }
     #
     # @!attribute [rw] client_id
     #   The identifier for the desired client.
@@ -5042,15 +3267,6 @@ module Aws::Appflow
 
     # The OAuth properties required for OAuth type authentication.
     #
-    # @note When making an API call, you may pass OAuthProperties
-    #   data as a hash:
-    #
-    #       {
-    #         token_url: "TokenUrl", # required
-    #         auth_code_url: "AuthCodeUrl", # required
-    #         o_auth_scopes: ["OAuthScope"], # required
-    #       }
-    #
     # @!attribute [rw] token_url
     #   The token url required to fetch access/refresh tokens using
     #   authorization code and also to refresh expired access token using
@@ -5078,15 +3294,6 @@ module Aws::Appflow
 
     # Specifies elements that Amazon AppFlow includes in the file and folder
     # names in the flow destination.
-    #
-    # @note When making an API call, you may pass PrefixConfig
-    #   data as a hash:
-    #
-    #       {
-    #         prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
-    #         prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
-    #         path_prefix_hierarchy: ["EXECUTION_ID"], # accepts EXECUTION_ID, SCHEMA_VERSION
-    #       }
     #
     # @!attribute [rw] prefix_type
     #   Determines the format of the prefix, and whether it applies to the
@@ -5175,14 +3382,6 @@ module Aws::Appflow
     # The connector-specific profile credentials required when using Amazon
     # Redshift.
     #
-    # @note When making an API call, you may pass RedshiftConnectorProfileCredentials
-    #   data as a hash:
-    #
-    #       {
-    #         username: "String",
-    #         password: "Password",
-    #       }
-    #
     # @!attribute [rw] username
     #   The name of the user.
     #   @return [String]
@@ -5201,21 +3400,6 @@ module Aws::Appflow
     end
 
     # The connector-specific profile properties when using Amazon Redshift.
-    #
-    # @note When making an API call, you may pass RedshiftConnectorProfileProperties
-    #   data as a hash:
-    #
-    #       {
-    #         database_url: "DatabaseUrl",
-    #         bucket_name: "BucketName", # required
-    #         bucket_prefix: "BucketPrefix",
-    #         role_arn: "RoleArn", # required
-    #         data_api_role_arn: "DataApiRoleArn",
-    #         is_redshift_serverless: false,
-    #         cluster_identifier: "ClusterIdentifier",
-    #         workgroup_name: "WorkgroupName",
-    #         database_name: "DatabaseName",
-    #       }
     #
     # @!attribute [rw] database_url
     #   The JDBC URL of the Amazon Redshift cluster.
@@ -5289,20 +3473,6 @@ module Aws::Appflow
     # The properties that are applied when Amazon Redshift is being used as
     # a destination.
     #
-    # @note When making an API call, you may pass RedshiftDestinationProperties
-    #   data as a hash:
-    #
-    #       {
-    #         object: "Object", # required
-    #         intermediate_bucket_name: "BucketName", # required
-    #         bucket_prefix: "BucketPrefix",
-    #         error_handling_config: {
-    #           fail_on_first_destination_error: false,
-    #           bucket_prefix: "BucketPrefix",
-    #           bucket_name: "BucketName",
-    #         },
-    #       }
-    #
     # @!attribute [rw] object
     #   The object specified in the Amazon Redshift flow destination.
     #   @return [String]
@@ -5343,20 +3513,6 @@ module Aws::Appflow
     #
     class RedshiftMetadata < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass RegisterConnectorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connector_label: "ConnectorLabel",
-    #         description: "Description",
-    #         connector_provisioning_type: "LAMBDA", # accepts LAMBDA
-    #         connector_provisioning_config: {
-    #           lambda: {
-    #             lambda_arn: "ARN", # required
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] connector_label
     #   The name of the connector. The name is unique for each
     #   `ConnectorRegistration` in your Amazon Web Services account.
@@ -5451,27 +3607,6 @@ module Aws::Appflow
     # The properties that are applied when Amazon S3 is used as a
     # destination.
     #
-    # @note When making an API call, you may pass S3DestinationProperties
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_name: "BucketName", # required
-    #         bucket_prefix: "BucketPrefix",
-    #         s3_output_format_config: {
-    #           file_type: "CSV", # accepts CSV, JSON, PARQUET
-    #           prefix_config: {
-    #             prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
-    #             prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
-    #             path_prefix_hierarchy: ["EXECUTION_ID"], # accepts EXECUTION_ID, SCHEMA_VERSION
-    #           },
-    #           aggregation_config: {
-    #             aggregation_type: "None", # accepts None, SingleFile
-    #             target_file_size: 1,
-    #           },
-    #           preserve_source_data_typing: false,
-    #         },
-    #       }
-    #
     # @!attribute [rw] bucket_name
     #   The Amazon S3 bucket name in which Amazon AppFlow places the
     #   transferred data.
@@ -5500,13 +3635,6 @@ module Aws::Appflow
     # When you use Amazon S3 as the source, the configuration format that
     # you provide the flow input data.
     #
-    # @note When making an API call, you may pass S3InputFormatConfig
-    #   data as a hash:
-    #
-    #       {
-    #         s3_input_file_type: "CSV", # accepts CSV, JSON
-    #       }
-    #
     # @!attribute [rw] s3_input_file_type
     #   The file type that Amazon AppFlow gets from your Amazon S3 bucket.
     #   @return [String]
@@ -5527,23 +3655,6 @@ module Aws::Appflow
 
     # The configuration that determines how Amazon AppFlow should format the
     # flow output data when Amazon S3 is used as the destination.
-    #
-    # @note When making an API call, you may pass S3OutputFormatConfig
-    #   data as a hash:
-    #
-    #       {
-    #         file_type: "CSV", # accepts CSV, JSON, PARQUET
-    #         prefix_config: {
-    #           prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
-    #           prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
-    #           path_prefix_hierarchy: ["EXECUTION_ID"], # accepts EXECUTION_ID, SCHEMA_VERSION
-    #         },
-    #         aggregation_config: {
-    #           aggregation_type: "None", # accepts None, SingleFile
-    #           target_file_size: 1,
-    #         },
-    #         preserve_source_data_typing: false,
-    #       }
     #
     # @!attribute [rw] file_type
     #   Indicates the file type that Amazon AppFlow places in the Amazon S3
@@ -5589,17 +3700,6 @@ module Aws::Appflow
     # The properties that are applied when Amazon S3 is being used as the
     # flow source.
     #
-    # @note When making an API call, you may pass S3SourceProperties
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_name: "BucketName", # required
-    #         bucket_prefix: "BucketPrefix",
-    #         s3_input_format_config: {
-    #           s3_input_file_type: "CSV", # accepts CSV, JSON
-    #         },
-    #       }
-    #
     # @!attribute [rw] bucket_name
     #   The Amazon S3 bucket name where the source files are stored.
     #   @return [String]
@@ -5627,26 +3727,6 @@ module Aws::Appflow
     # The connector-specific profile credentials required when using
     # SAPOData.
     #
-    # @note When making an API call, you may pass SAPODataConnectorProfileCredentials
-    #   data as a hash:
-    #
-    #       {
-    #         basic_auth_credentials: {
-    #           username: "Username", # required
-    #           password: "Password", # required
-    #         },
-    #         o_auth_credentials: {
-    #           client_id: "ClientId", # required
-    #           client_secret: "ClientSecret", # required
-    #           access_token: "AccessToken",
-    #           refresh_token: "RefreshToken",
-    #           o_auth_request: {
-    #             auth_code: "AuthCode",
-    #             redirect_uri: "RedirectUri",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] basic_auth_credentials
     #   The SAPOData basic authentication credentials.
     #   @return [Types::BasicAuthCredentials]
@@ -5666,23 +3746,6 @@ module Aws::Appflow
 
     # The connector-specific profile properties required when using
     # SAPOData.
-    #
-    # @note When making an API call, you may pass SAPODataConnectorProfileProperties
-    #   data as a hash:
-    #
-    #       {
-    #         application_host_url: "ApplicationHostUrl", # required
-    #         application_service_path: "ApplicationServicePath", # required
-    #         port_number: 1, # required
-    #         client_number: "ClientNumber", # required
-    #         logon_language: "LogonLanguage",
-    #         private_link_service_name: "PrivateLinkServiceName",
-    #         o_auth_properties: {
-    #           token_url: "TokenUrl", # required
-    #           auth_code_url: "AuthCodeUrl", # required
-    #           o_auth_scopes: ["OAuthScope"], # required
-    #         },
-    #       }
     #
     # @!attribute [rw] application_host_url
     #   The location of the SAPOData resource.
@@ -5730,24 +3793,6 @@ module Aws::Appflow
 
     # The properties that are applied when using SAPOData as a flow
     # destination
-    #
-    # @note When making an API call, you may pass SAPODataDestinationProperties
-    #   data as a hash:
-    #
-    #       {
-    #         object_path: "Object", # required
-    #         success_response_handling_config: {
-    #           bucket_prefix: "BucketPrefix",
-    #           bucket_name: "BucketName",
-    #         },
-    #         id_field_names: ["Name"],
-    #         error_handling_config: {
-    #           fail_on_first_destination_error: false,
-    #           bucket_prefix: "BucketPrefix",
-    #           bucket_name: "BucketName",
-    #         },
-    #         write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
-    #       }
     #
     # @!attribute [rw] object_path
     #   The object path specified in the SAPOData flow destination.
@@ -5801,13 +3846,6 @@ module Aws::Appflow
 
     # The properties that are applied when using SAPOData as a flow source.
     #
-    # @note When making an API call, you may pass SAPODataSourceProperties
-    #   data as a hash:
-    #
-    #       {
-    #         object_path: "Object",
-    #       }
-    #
     # @!attribute [rw] object_path
     #   The object path specified in the SAPOData flow source.
     #   @return [String]
@@ -5822,19 +3860,6 @@ module Aws::Appflow
 
     # The connector-specific profile credentials required when using
     # Salesforce.
-    #
-    # @note When making an API call, you may pass SalesforceConnectorProfileCredentials
-    #   data as a hash:
-    #
-    #       {
-    #         access_token: "AccessToken",
-    #         refresh_token: "RefreshToken",
-    #         o_auth_request: {
-    #           auth_code: "AuthCode",
-    #           redirect_uri: "RedirectUri",
-    #         },
-    #         client_credentials_arn: "ClientCredentialsArn",
-    #       }
     #
     # @!attribute [rw] access_token
     #   The credentials used to access protected Salesforce resources.
@@ -5868,14 +3893,6 @@ module Aws::Appflow
     # The connector-specific profile properties required when using
     # Salesforce.
     #
-    # @note When making an API call, you may pass SalesforceConnectorProfileProperties
-    #   data as a hash:
-    #
-    #       {
-    #         instance_url: "InstanceUrl",
-    #         is_sandbox_environment: false,
-    #       }
-    #
     # @!attribute [rw] instance_url
     #   The location of the Salesforce resource.
     #   @return [String]
@@ -5896,21 +3913,6 @@ module Aws::Appflow
 
     # The properties that are applied when Salesforce is being used as a
     # destination.
-    #
-    # @note When making an API call, you may pass SalesforceDestinationProperties
-    #   data as a hash:
-    #
-    #       {
-    #         object: "Object", # required
-    #         id_field_names: ["Name"],
-    #         error_handling_config: {
-    #           fail_on_first_destination_error: false,
-    #           bucket_prefix: "BucketPrefix",
-    #           bucket_name: "BucketName",
-    #         },
-    #         write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
-    #         data_transfer_api: "AUTOMATIC", # accepts AUTOMATIC, BULKV2, REST_SYNC
-    #       }
     #
     # @!attribute [rw] object
     #   The object specified in the Salesforce flow destination.
@@ -6019,16 +4021,6 @@ module Aws::Appflow
     # The properties that are applied when Salesforce is being used as a
     # source.
     #
-    # @note When making an API call, you may pass SalesforceSourceProperties
-    #   data as a hash:
-    #
-    #       {
-    #         object: "Object", # required
-    #         enable_dynamic_field_update: false,
-    #         include_deleted_records: false,
-    #         data_transfer_api: "AUTOMATIC", # accepts AUTOMATIC, BULKV2, REST_SYNC
-    #       }
-    #
     # @!attribute [rw] object
     #   The object specified in the Salesforce flow source.
     #   @return [String]
@@ -6106,20 +4098,6 @@ module Aws::Appflow
     # defined by the user. Currently, these settings only apply to the
     # `Scheduled` trigger type.
     #
-    # @note When making an API call, you may pass ScheduledTriggerProperties
-    #   data as a hash:
-    #
-    #       {
-    #         schedule_expression: "ScheduleExpression", # required
-    #         data_pull_mode: "Incremental", # accepts Incremental, Complete
-    #         schedule_start_time: Time.now,
-    #         schedule_end_time: Time.now,
-    #         timezone: "Timezone",
-    #         schedule_offset: 1,
-    #         first_execution_from: Time.now,
-    #         flow_error_deactivation_threshold: 1,
-    #       }
-    #
     # @!attribute [rw] schedule_expression
     #   The scheduling expression that determines the rate at which the
     #   schedule will run, for example `rate(5minutes)`.
@@ -6187,14 +4165,6 @@ module Aws::Appflow
     # The connector-specific profile credentials required when using
     # ServiceNow.
     #
-    # @note When making an API call, you may pass ServiceNowConnectorProfileCredentials
-    #   data as a hash:
-    #
-    #       {
-    #         username: "Username", # required
-    #         password: "Password", # required
-    #       }
-    #
     # @!attribute [rw] username
     #   The name of the user.
     #   @return [String]
@@ -6214,13 +4184,6 @@ module Aws::Appflow
 
     # The connector-specific profile properties required when using
     # ServiceNow.
-    #
-    # @note When making an API call, you may pass ServiceNowConnectorProfileProperties
-    #   data as a hash:
-    #
-    #       {
-    #         instance_url: "InstanceUrl", # required
-    #       }
     #
     # @!attribute [rw] instance_url
     #   The location of the ServiceNow resource.
@@ -6242,13 +4205,6 @@ module Aws::Appflow
 
     # The properties that are applied when ServiceNow is being used as a
     # source.
-    #
-    # @note When making an API call, you may pass ServiceNowSourceProperties
-    #   data as a hash:
-    #
-    #       {
-    #         object: "Object", # required
-    #       }
     #
     # @!attribute [rw] object
     #   The object specified in the ServiceNow flow source.
@@ -6279,13 +4235,6 @@ module Aws::Appflow
     # The connector-specific profile credentials required when using
     # Singular.
     #
-    # @note When making an API call, you may pass SingularConnectorProfileCredentials
-    #   data as a hash:
-    #
-    #       {
-    #         api_key: "ApiKey", # required
-    #       }
-    #
     # @!attribute [rw] api_key
     #   A unique alphanumeric identifier used to authenticate a user,
     #   developer, or calling program to your API.
@@ -6302,8 +4251,6 @@ module Aws::Appflow
     # The connector-specific profile properties required when using
     # Singular.
     #
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/SingularConnectorProfileProperties AWS API Documentation
     #
     class SingularConnectorProfileProperties < Aws::EmptyStructure; end
@@ -6316,13 +4263,6 @@ module Aws::Appflow
 
     # The properties that are applied when Singular is being used as a
     # source.
-    #
-    # @note When making an API call, you may pass SingularSourceProperties
-    #   data as a hash:
-    #
-    #       {
-    #         object: "Object", # required
-    #       }
     #
     # @!attribute [rw] object
     #   The object specified in the Singular flow source.
@@ -6337,19 +4277,6 @@ module Aws::Appflow
     end
 
     # The connector-specific profile credentials required when using Slack.
-    #
-    # @note When making an API call, you may pass SlackConnectorProfileCredentials
-    #   data as a hash:
-    #
-    #       {
-    #         client_id: "ClientId", # required
-    #         client_secret: "ClientSecret", # required
-    #         access_token: "AccessToken",
-    #         o_auth_request: {
-    #           auth_code: "AuthCode",
-    #           redirect_uri: "RedirectUri",
-    #         },
-    #       }
     #
     # @!attribute [rw] client_id
     #   The identifier for the client.
@@ -6382,13 +4309,6 @@ module Aws::Appflow
 
     # The connector-specific profile properties required when using Slack.
     #
-    # @note When making an API call, you may pass SlackConnectorProfileProperties
-    #   data as a hash:
-    #
-    #       {
-    #         instance_url: "InstanceUrl", # required
-    #       }
-    #
     # @!attribute [rw] instance_url
     #   The location of the Slack resource.
     #   @return [String]
@@ -6417,13 +4337,6 @@ module Aws::Appflow
 
     # The properties that are applied when Slack is being used as a source.
     #
-    # @note When making an API call, you may pass SlackSourceProperties
-    #   data as a hash:
-    #
-    #       {
-    #         object: "Object", # required
-    #       }
-    #
     # @!attribute [rw] object
     #   The object specified in the Slack flow source.
     #   @return [String]
@@ -6438,14 +4351,6 @@ module Aws::Appflow
 
     # The connector-specific profile credentials required when using
     # Snowflake.
-    #
-    # @note When making an API call, you may pass SnowflakeConnectorProfileCredentials
-    #   data as a hash:
-    #
-    #       {
-    #         username: "Username", # required
-    #         password: "Password", # required
-    #       }
     #
     # @!attribute [rw] username
     #   The name of the user.
@@ -6466,19 +4371,6 @@ module Aws::Appflow
 
     # The connector-specific profile properties required when using
     # Snowflake.
-    #
-    # @note When making an API call, you may pass SnowflakeConnectorProfileProperties
-    #   data as a hash:
-    #
-    #       {
-    #         warehouse: "Warehouse", # required
-    #         stage: "Stage", # required
-    #         bucket_name: "BucketName", # required
-    #         bucket_prefix: "BucketPrefix",
-    #         private_link_service_name: "PrivateLinkServiceName",
-    #         account_name: "AccountName",
-    #         region: "Region",
-    #       }
     #
     # @!attribute [rw] warehouse
     #   The name of the Snowflake warehouse.
@@ -6529,20 +4421,6 @@ module Aws::Appflow
 
     # The properties that are applied when Snowflake is being used as a
     # destination.
-    #
-    # @note When making an API call, you may pass SnowflakeDestinationProperties
-    #   data as a hash:
-    #
-    #       {
-    #         object: "Object", # required
-    #         intermediate_bucket_name: "BucketName", # required
-    #         bucket_prefix: "BucketPrefix",
-    #         error_handling_config: {
-    #           fail_on_first_destination_error: false,
-    #           bucket_prefix: "BucketPrefix",
-    #           bucket_name: "BucketName",
-    #         },
-    #       }
     #
     # @!attribute [rw] object
     #   The object specified in the Snowflake flow destination.
@@ -6595,74 +4473,6 @@ module Aws::Appflow
 
     # Specifies the information that is required to query a particular
     # connector.
-    #
-    # @note When making an API call, you may pass SourceConnectorProperties
-    #   data as a hash:
-    #
-    #       {
-    #         amplitude: {
-    #           object: "Object", # required
-    #         },
-    #         datadog: {
-    #           object: "Object", # required
-    #         },
-    #         dynatrace: {
-    #           object: "Object", # required
-    #         },
-    #         google_analytics: {
-    #           object: "Object", # required
-    #         },
-    #         infor_nexus: {
-    #           object: "Object", # required
-    #         },
-    #         marketo: {
-    #           object: "Object", # required
-    #         },
-    #         s3: {
-    #           bucket_name: "BucketName", # required
-    #           bucket_prefix: "BucketPrefix",
-    #           s3_input_format_config: {
-    #             s3_input_file_type: "CSV", # accepts CSV, JSON
-    #           },
-    #         },
-    #         salesforce: {
-    #           object: "Object", # required
-    #           enable_dynamic_field_update: false,
-    #           include_deleted_records: false,
-    #           data_transfer_api: "AUTOMATIC", # accepts AUTOMATIC, BULKV2, REST_SYNC
-    #         },
-    #         service_now: {
-    #           object: "Object", # required
-    #         },
-    #         singular: {
-    #           object: "Object", # required
-    #         },
-    #         slack: {
-    #           object: "Object", # required
-    #         },
-    #         trendmicro: {
-    #           object: "Object", # required
-    #         },
-    #         veeva: {
-    #           object: "Object", # required
-    #           document_type: "DocumentType",
-    #           include_source_files: false,
-    #           include_renditions: false,
-    #           include_all_versions: false,
-    #         },
-    #         zendesk: {
-    #           object: "Object", # required
-    #         },
-    #         sapo_data: {
-    #           object_path: "Object",
-    #         },
-    #         custom_connector: {
-    #           entity_name: "EntityName", # required
-    #           custom_properties: {
-    #             "CustomPropertyKey" => "CustomPropertyValue",
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] amplitude
     #   Specifies the information that is required for querying Amplitude.
@@ -6783,82 +4593,6 @@ module Aws::Appflow
     # Contains information about the configuration of the source connector
     # used in the flow.
     #
-    # @note When making an API call, you may pass SourceFlowConfig
-    #   data as a hash:
-    #
-    #       {
-    #         connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector
-    #         api_version: "ApiVersion",
-    #         connector_profile_name: "ConnectorProfileName",
-    #         source_connector_properties: { # required
-    #           amplitude: {
-    #             object: "Object", # required
-    #           },
-    #           datadog: {
-    #             object: "Object", # required
-    #           },
-    #           dynatrace: {
-    #             object: "Object", # required
-    #           },
-    #           google_analytics: {
-    #             object: "Object", # required
-    #           },
-    #           infor_nexus: {
-    #             object: "Object", # required
-    #           },
-    #           marketo: {
-    #             object: "Object", # required
-    #           },
-    #           s3: {
-    #             bucket_name: "BucketName", # required
-    #             bucket_prefix: "BucketPrefix",
-    #             s3_input_format_config: {
-    #               s3_input_file_type: "CSV", # accepts CSV, JSON
-    #             },
-    #           },
-    #           salesforce: {
-    #             object: "Object", # required
-    #             enable_dynamic_field_update: false,
-    #             include_deleted_records: false,
-    #             data_transfer_api: "AUTOMATIC", # accepts AUTOMATIC, BULKV2, REST_SYNC
-    #           },
-    #           service_now: {
-    #             object: "Object", # required
-    #           },
-    #           singular: {
-    #             object: "Object", # required
-    #           },
-    #           slack: {
-    #             object: "Object", # required
-    #           },
-    #           trendmicro: {
-    #             object: "Object", # required
-    #           },
-    #           veeva: {
-    #             object: "Object", # required
-    #             document_type: "DocumentType",
-    #             include_source_files: false,
-    #             include_renditions: false,
-    #             include_all_versions: false,
-    #           },
-    #           zendesk: {
-    #             object: "Object", # required
-    #           },
-    #           sapo_data: {
-    #             object_path: "Object",
-    #           },
-    #           custom_connector: {
-    #             entity_name: "EntityName", # required
-    #             custom_properties: {
-    #               "CustomPropertyKey" => "CustomPropertyValue",
-    #             },
-    #           },
-    #         },
-    #         incremental_pull_config: {
-    #           datetime_type_field_name: "DatetimeTypeFieldName",
-    #         },
-    #       }
-    #
     # @!attribute [rw] connector_type
     #   The type of connector, such as Salesforce, Amplitude, and so on.
     #   @return [String]
@@ -6896,13 +4630,6 @@ module Aws::Appflow
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartFlowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         flow_name: "FlowName", # required
-    #       }
-    #
     # @!attribute [rw] flow_name
     #   The specified name of the flow. Spaces are not allowed. Use
     #   underscores (\_) or hyphens (-) only.
@@ -6940,13 +4667,6 @@ module Aws::Appflow
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopFlowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         flow_name: "FlowName", # required
-    #       }
-    #
     # @!attribute [rw] flow_name
     #   The specified name of the flow. Spaces are not allowed. Use
     #   underscores (\_) or hyphens (-) only.
@@ -6983,14 +4703,6 @@ module Aws::Appflow
     # For example, this setting would determine where to write the response
     # from the destination connector upon a successful insert operation.
     #
-    # @note When making an API call, you may pass SuccessResponseHandlingConfig
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_prefix: "BucketPrefix",
-    #         bucket_name: "BucketName",
-    #       }
-    #
     # @!attribute [rw] bucket_prefix
     #   The Amazon S3 bucket prefix.
     #   @return [String]
@@ -7024,16 +4736,6 @@ module Aws::Appflow
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ARN", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the flow that you want to tag.
     #   @return [String]
@@ -7057,36 +4759,6 @@ module Aws::Appflow
 
     # A class for modeling different type of tasks. Task implementation
     # varies based on the `TaskType`.
-    #
-    # @note When making an API call, you may pass Task
-    #   data as a hash:
-    #
-    #       {
-    #         source_fields: ["String"], # required
-    #         connector_operator: {
-    #           amplitude: "BETWEEN", # accepts BETWEEN
-    #           datadog: "PROJECTION", # accepts PROJECTION, BETWEEN, EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #           dynatrace: "PROJECTION", # accepts PROJECTION, BETWEEN, EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #           google_analytics: "PROJECTION", # accepts PROJECTION, BETWEEN
-    #           infor_nexus: "PROJECTION", # accepts PROJECTION, BETWEEN, EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #           marketo: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, BETWEEN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #           s3: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #           salesforce: "PROJECTION", # accepts PROJECTION, LESS_THAN, CONTAINS, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #           service_now: "PROJECTION", # accepts PROJECTION, CONTAINS, LESS_THAN, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #           singular: "PROJECTION", # accepts PROJECTION, EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #           slack: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #           trendmicro: "PROJECTION", # accepts PROJECTION, EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #           veeva: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, CONTAINS, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #           zendesk: "PROJECTION", # accepts PROJECTION, GREATER_THAN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #           sapo_data: "PROJECTION", # accepts PROJECTION, LESS_THAN, CONTAINS, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #           custom_connector: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, CONTAINS, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #         },
-    #         destination_field: "DestinationField",
-    #         task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Map_all, Mask, Merge, Passthrough, Truncate, Validate, Partition
-    #         task_properties: {
-    #           "VALUE" => "Property",
-    #         },
-    #       }
     #
     # @!attribute [rw] source_fields
     #   The source fields to which a particular task is applied.
@@ -7140,13 +4812,6 @@ module Aws::Appflow
     # The connector-specific profile credentials required when using Trend
     # Micro.
     #
-    # @note When making an API call, you may pass TrendmicroConnectorProfileCredentials
-    #   data as a hash:
-    #
-    #       {
-    #         api_secret_key: "ApiSecretKey", # required
-    #       }
-    #
     # @!attribute [rw] api_secret_key
     #   The Secret Access Key portion of the credentials.
     #   @return [String]
@@ -7162,8 +4827,6 @@ module Aws::Appflow
     # The connector-specific profile properties required when using Trend
     # Micro.
     #
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/TrendmicroConnectorProfileProperties AWS API Documentation
     #
     class TrendmicroConnectorProfileProperties < Aws::EmptyStructure; end
@@ -7176,13 +4839,6 @@ module Aws::Appflow
 
     # The properties that are applied when using Trend Micro as a flow
     # source.
-    #
-    # @note When making an API call, you may pass TrendmicroSourceProperties
-    #   data as a hash:
-    #
-    #       {
-    #         object: "Object", # required
-    #       }
     #
     # @!attribute [rw] object
     #   The object specified in the Trend Micro flow source.
@@ -7198,25 +4854,6 @@ module Aws::Appflow
 
     # The trigger settings that determine how and when Amazon AppFlow runs
     # the specified flow.
-    #
-    # @note When making an API call, you may pass TriggerConfig
-    #   data as a hash:
-    #
-    #       {
-    #         trigger_type: "Scheduled", # required, accepts Scheduled, Event, OnDemand
-    #         trigger_properties: {
-    #           scheduled: {
-    #             schedule_expression: "ScheduleExpression", # required
-    #             data_pull_mode: "Incremental", # accepts Incremental, Complete
-    #             schedule_start_time: Time.now,
-    #             schedule_end_time: Time.now,
-    #             timezone: "Timezone",
-    #             schedule_offset: 1,
-    #             first_execution_from: Time.now,
-    #             flow_error_deactivation_threshold: 1,
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] trigger_type
     #   Specifies the type of flow trigger. This can be `OnDemand`,
@@ -7242,22 +4879,6 @@ module Aws::Appflow
     # flow. Currently, these settings only apply to the `Scheduled` trigger
     # type.
     #
-    # @note When making an API call, you may pass TriggerProperties
-    #   data as a hash:
-    #
-    #       {
-    #         scheduled: {
-    #           schedule_expression: "ScheduleExpression", # required
-    #           data_pull_mode: "Incremental", # accepts Incremental, Complete
-    #           schedule_start_time: Time.now,
-    #           schedule_end_time: Time.now,
-    #           timezone: "Timezone",
-    #           schedule_offset: 1,
-    #           first_execution_from: Time.now,
-    #           flow_error_deactivation_threshold: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] scheduled
     #   Specifies the configuration details of a schedule-triggered flow as
     #   defined by the user.
@@ -7271,14 +4892,6 @@ module Aws::Appflow
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UnregisterConnectorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connector_label: "ConnectorLabel", # required
-    #         force_delete: false,
-    #       }
-    #
     # @!attribute [rw] connector_label
     #   The label of the connector. The label is unique for each
     #   `ConnectorRegistration` in your Amazon Web Services account.
@@ -7316,14 +4929,6 @@ module Aws::Appflow
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ARN", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the flow that you want to untag.
     #   @return [String]
@@ -7346,239 +4951,6 @@ module Aws::Appflow
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateConnectorProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connector_profile_name: "ConnectorProfileName", # required
-    #         connection_mode: "Public", # required, accepts Public, Private
-    #         connector_profile_config: { # required
-    #           connector_profile_properties: { # required
-    #             amplitude: {
-    #             },
-    #             datadog: {
-    #               instance_url: "InstanceUrl", # required
-    #             },
-    #             dynatrace: {
-    #               instance_url: "InstanceUrl", # required
-    #             },
-    #             google_analytics: {
-    #             },
-    #             honeycode: {
-    #             },
-    #             infor_nexus: {
-    #               instance_url: "InstanceUrl", # required
-    #             },
-    #             marketo: {
-    #               instance_url: "InstanceUrl", # required
-    #             },
-    #             redshift: {
-    #               database_url: "DatabaseUrl",
-    #               bucket_name: "BucketName", # required
-    #               bucket_prefix: "BucketPrefix",
-    #               role_arn: "RoleArn", # required
-    #               data_api_role_arn: "DataApiRoleArn",
-    #               is_redshift_serverless: false,
-    #               cluster_identifier: "ClusterIdentifier",
-    #               workgroup_name: "WorkgroupName",
-    #               database_name: "DatabaseName",
-    #             },
-    #             salesforce: {
-    #               instance_url: "InstanceUrl",
-    #               is_sandbox_environment: false,
-    #             },
-    #             service_now: {
-    #               instance_url: "InstanceUrl", # required
-    #             },
-    #             singular: {
-    #             },
-    #             slack: {
-    #               instance_url: "InstanceUrl", # required
-    #             },
-    #             snowflake: {
-    #               warehouse: "Warehouse", # required
-    #               stage: "Stage", # required
-    #               bucket_name: "BucketName", # required
-    #               bucket_prefix: "BucketPrefix",
-    #               private_link_service_name: "PrivateLinkServiceName",
-    #               account_name: "AccountName",
-    #               region: "Region",
-    #             },
-    #             trendmicro: {
-    #             },
-    #             veeva: {
-    #               instance_url: "InstanceUrl", # required
-    #             },
-    #             zendesk: {
-    #               instance_url: "InstanceUrl", # required
-    #             },
-    #             sapo_data: {
-    #               application_host_url: "ApplicationHostUrl", # required
-    #               application_service_path: "ApplicationServicePath", # required
-    #               port_number: 1, # required
-    #               client_number: "ClientNumber", # required
-    #               logon_language: "LogonLanguage",
-    #               private_link_service_name: "PrivateLinkServiceName",
-    #               o_auth_properties: {
-    #                 token_url: "TokenUrl", # required
-    #                 auth_code_url: "AuthCodeUrl", # required
-    #                 o_auth_scopes: ["OAuthScope"], # required
-    #               },
-    #             },
-    #             custom_connector: {
-    #               profile_properties: {
-    #                 "ProfilePropertyKey" => "ProfilePropertyValue",
-    #               },
-    #               o_auth_2_properties: {
-    #                 token_url: "TokenUrl", # required
-    #                 o_auth_2_grant_type: "CLIENT_CREDENTIALS", # required, accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
-    #                 token_url_custom_properties: {
-    #                   "CustomPropertyKey" => "CustomPropertyValue",
-    #                 },
-    #               },
-    #             },
-    #           },
-    #           connector_profile_credentials: {
-    #             amplitude: {
-    #               api_key: "ApiKey", # required
-    #               secret_key: "SecretKey", # required
-    #             },
-    #             datadog: {
-    #               api_key: "ApiKey", # required
-    #               application_key: "ApplicationKey", # required
-    #             },
-    #             dynatrace: {
-    #               api_token: "ApiToken", # required
-    #             },
-    #             google_analytics: {
-    #               client_id: "ClientId", # required
-    #               client_secret: "ClientSecret", # required
-    #               access_token: "AccessToken",
-    #               refresh_token: "RefreshToken",
-    #               o_auth_request: {
-    #                 auth_code: "AuthCode",
-    #                 redirect_uri: "RedirectUri",
-    #               },
-    #             },
-    #             honeycode: {
-    #               access_token: "AccessToken",
-    #               refresh_token: "RefreshToken",
-    #               o_auth_request: {
-    #                 auth_code: "AuthCode",
-    #                 redirect_uri: "RedirectUri",
-    #               },
-    #             },
-    #             infor_nexus: {
-    #               access_key_id: "AccessKeyId", # required
-    #               user_id: "Username", # required
-    #               secret_access_key: "Key", # required
-    #               datakey: "Key", # required
-    #             },
-    #             marketo: {
-    #               client_id: "ClientId", # required
-    #               client_secret: "ClientSecret", # required
-    #               access_token: "AccessToken",
-    #               o_auth_request: {
-    #                 auth_code: "AuthCode",
-    #                 redirect_uri: "RedirectUri",
-    #               },
-    #             },
-    #             redshift: {
-    #               username: "String",
-    #               password: "Password",
-    #             },
-    #             salesforce: {
-    #               access_token: "AccessToken",
-    #               refresh_token: "RefreshToken",
-    #               o_auth_request: {
-    #                 auth_code: "AuthCode",
-    #                 redirect_uri: "RedirectUri",
-    #               },
-    #               client_credentials_arn: "ClientCredentialsArn",
-    #             },
-    #             service_now: {
-    #               username: "Username", # required
-    #               password: "Password", # required
-    #             },
-    #             singular: {
-    #               api_key: "ApiKey", # required
-    #             },
-    #             slack: {
-    #               client_id: "ClientId", # required
-    #               client_secret: "ClientSecret", # required
-    #               access_token: "AccessToken",
-    #               o_auth_request: {
-    #                 auth_code: "AuthCode",
-    #                 redirect_uri: "RedirectUri",
-    #               },
-    #             },
-    #             snowflake: {
-    #               username: "Username", # required
-    #               password: "Password", # required
-    #             },
-    #             trendmicro: {
-    #               api_secret_key: "ApiSecretKey", # required
-    #             },
-    #             veeva: {
-    #               username: "Username", # required
-    #               password: "Password", # required
-    #             },
-    #             zendesk: {
-    #               client_id: "ClientId", # required
-    #               client_secret: "ClientSecret", # required
-    #               access_token: "AccessToken",
-    #               o_auth_request: {
-    #                 auth_code: "AuthCode",
-    #                 redirect_uri: "RedirectUri",
-    #               },
-    #             },
-    #             sapo_data: {
-    #               basic_auth_credentials: {
-    #                 username: "Username", # required
-    #                 password: "Password", # required
-    #               },
-    #               o_auth_credentials: {
-    #                 client_id: "ClientId", # required
-    #                 client_secret: "ClientSecret", # required
-    #                 access_token: "AccessToken",
-    #                 refresh_token: "RefreshToken",
-    #                 o_auth_request: {
-    #                   auth_code: "AuthCode",
-    #                   redirect_uri: "RedirectUri",
-    #                 },
-    #               },
-    #             },
-    #             custom_connector: {
-    #               authentication_type: "OAUTH2", # required, accepts OAUTH2, APIKEY, BASIC, CUSTOM
-    #               basic: {
-    #                 username: "Username", # required
-    #                 password: "Password", # required
-    #               },
-    #               oauth2: {
-    #                 client_id: "ClientId",
-    #                 client_secret: "ClientSecret",
-    #                 access_token: "AccessToken",
-    #                 refresh_token: "RefreshToken",
-    #                 o_auth_request: {
-    #                   auth_code: "AuthCode",
-    #                   redirect_uri: "RedirectUri",
-    #                 },
-    #               },
-    #               api_key: {
-    #                 api_key: "ApiKey", # required
-    #                 api_secret_key: "ApiSecretKey",
-    #               },
-    #               custom: {
-    #                 custom_authentication_type: "CustomAuthenticationType", # required
-    #                 credentials_map: {
-    #                   "CredentialsMapKey" => "CredentialsMapValue",
-    #                 },
-    #               },
-    #             },
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] connector_profile_name
     #   The name of the connector profile and is unique for each
     #   `ConnectorProfile` in the Amazon Web Services account.
@@ -7615,19 +4987,6 @@ module Aws::Appflow
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateConnectorRegistrationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connector_label: "ConnectorLabel", # required
-    #         description: "Description",
-    #         connector_provisioning_config: {
-    #           lambda: {
-    #             lambda_arn: "ARN", # required
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] connector_label
     #   The name of the connector. The name is unique for each connector
     #   registration in your AWS account.
@@ -7665,276 +5024,6 @@ module Aws::Appflow
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateFlowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         flow_name: "FlowName", # required
-    #         description: "FlowDescription",
-    #         trigger_config: { # required
-    #           trigger_type: "Scheduled", # required, accepts Scheduled, Event, OnDemand
-    #           trigger_properties: {
-    #             scheduled: {
-    #               schedule_expression: "ScheduleExpression", # required
-    #               data_pull_mode: "Incremental", # accepts Incremental, Complete
-    #               schedule_start_time: Time.now,
-    #               schedule_end_time: Time.now,
-    #               timezone: "Timezone",
-    #               schedule_offset: 1,
-    #               first_execution_from: Time.now,
-    #               flow_error_deactivation_threshold: 1,
-    #             },
-    #           },
-    #         },
-    #         source_flow_config: { # required
-    #           connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector
-    #           api_version: "ApiVersion",
-    #           connector_profile_name: "ConnectorProfileName",
-    #           source_connector_properties: { # required
-    #             amplitude: {
-    #               object: "Object", # required
-    #             },
-    #             datadog: {
-    #               object: "Object", # required
-    #             },
-    #             dynatrace: {
-    #               object: "Object", # required
-    #             },
-    #             google_analytics: {
-    #               object: "Object", # required
-    #             },
-    #             infor_nexus: {
-    #               object: "Object", # required
-    #             },
-    #             marketo: {
-    #               object: "Object", # required
-    #             },
-    #             s3: {
-    #               bucket_name: "BucketName", # required
-    #               bucket_prefix: "BucketPrefix",
-    #               s3_input_format_config: {
-    #                 s3_input_file_type: "CSV", # accepts CSV, JSON
-    #               },
-    #             },
-    #             salesforce: {
-    #               object: "Object", # required
-    #               enable_dynamic_field_update: false,
-    #               include_deleted_records: false,
-    #               data_transfer_api: "AUTOMATIC", # accepts AUTOMATIC, BULKV2, REST_SYNC
-    #             },
-    #             service_now: {
-    #               object: "Object", # required
-    #             },
-    #             singular: {
-    #               object: "Object", # required
-    #             },
-    #             slack: {
-    #               object: "Object", # required
-    #             },
-    #             trendmicro: {
-    #               object: "Object", # required
-    #             },
-    #             veeva: {
-    #               object: "Object", # required
-    #               document_type: "DocumentType",
-    #               include_source_files: false,
-    #               include_renditions: false,
-    #               include_all_versions: false,
-    #             },
-    #             zendesk: {
-    #               object: "Object", # required
-    #             },
-    #             sapo_data: {
-    #               object_path: "Object",
-    #             },
-    #             custom_connector: {
-    #               entity_name: "EntityName", # required
-    #               custom_properties: {
-    #                 "CustomPropertyKey" => "CustomPropertyValue",
-    #               },
-    #             },
-    #           },
-    #           incremental_pull_config: {
-    #             datetime_type_field_name: "DatetimeTypeFieldName",
-    #           },
-    #         },
-    #         destination_flow_config_list: [ # required
-    #           {
-    #             connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector
-    #             api_version: "ApiVersion",
-    #             connector_profile_name: "ConnectorProfileName",
-    #             destination_connector_properties: { # required
-    #               redshift: {
-    #                 object: "Object", # required
-    #                 intermediate_bucket_name: "BucketName", # required
-    #                 bucket_prefix: "BucketPrefix",
-    #                 error_handling_config: {
-    #                   fail_on_first_destination_error: false,
-    #                   bucket_prefix: "BucketPrefix",
-    #                   bucket_name: "BucketName",
-    #                 },
-    #               },
-    #               s3: {
-    #                 bucket_name: "BucketName", # required
-    #                 bucket_prefix: "BucketPrefix",
-    #                 s3_output_format_config: {
-    #                   file_type: "CSV", # accepts CSV, JSON, PARQUET
-    #                   prefix_config: {
-    #                     prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
-    #                     prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
-    #                     path_prefix_hierarchy: ["EXECUTION_ID"], # accepts EXECUTION_ID, SCHEMA_VERSION
-    #                   },
-    #                   aggregation_config: {
-    #                     aggregation_type: "None", # accepts None, SingleFile
-    #                     target_file_size: 1,
-    #                   },
-    #                   preserve_source_data_typing: false,
-    #                 },
-    #               },
-    #               salesforce: {
-    #                 object: "Object", # required
-    #                 id_field_names: ["Name"],
-    #                 error_handling_config: {
-    #                   fail_on_first_destination_error: false,
-    #                   bucket_prefix: "BucketPrefix",
-    #                   bucket_name: "BucketName",
-    #                 },
-    #                 write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
-    #                 data_transfer_api: "AUTOMATIC", # accepts AUTOMATIC, BULKV2, REST_SYNC
-    #               },
-    #               snowflake: {
-    #                 object: "Object", # required
-    #                 intermediate_bucket_name: "BucketName", # required
-    #                 bucket_prefix: "BucketPrefix",
-    #                 error_handling_config: {
-    #                   fail_on_first_destination_error: false,
-    #                   bucket_prefix: "BucketPrefix",
-    #                   bucket_name: "BucketName",
-    #                 },
-    #               },
-    #               event_bridge: {
-    #                 object: "Object", # required
-    #                 error_handling_config: {
-    #                   fail_on_first_destination_error: false,
-    #                   bucket_prefix: "BucketPrefix",
-    #                   bucket_name: "BucketName",
-    #                 },
-    #               },
-    #               lookout_metrics: {
-    #               },
-    #               upsolver: {
-    #                 bucket_name: "UpsolverBucketName", # required
-    #                 bucket_prefix: "BucketPrefix",
-    #                 s3_output_format_config: { # required
-    #                   file_type: "CSV", # accepts CSV, JSON, PARQUET
-    #                   prefix_config: { # required
-    #                     prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
-    #                     prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
-    #                     path_prefix_hierarchy: ["EXECUTION_ID"], # accepts EXECUTION_ID, SCHEMA_VERSION
-    #                   },
-    #                   aggregation_config: {
-    #                     aggregation_type: "None", # accepts None, SingleFile
-    #                     target_file_size: 1,
-    #                   },
-    #                 },
-    #               },
-    #               honeycode: {
-    #                 object: "Object", # required
-    #                 error_handling_config: {
-    #                   fail_on_first_destination_error: false,
-    #                   bucket_prefix: "BucketPrefix",
-    #                   bucket_name: "BucketName",
-    #                 },
-    #               },
-    #               customer_profiles: {
-    #                 domain_name: "DomainName", # required
-    #                 object_type_name: "ObjectTypeName",
-    #               },
-    #               zendesk: {
-    #                 object: "Object", # required
-    #                 id_field_names: ["Name"],
-    #                 error_handling_config: {
-    #                   fail_on_first_destination_error: false,
-    #                   bucket_prefix: "BucketPrefix",
-    #                   bucket_name: "BucketName",
-    #                 },
-    #                 write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
-    #               },
-    #               marketo: {
-    #                 object: "Object", # required
-    #                 error_handling_config: {
-    #                   fail_on_first_destination_error: false,
-    #                   bucket_prefix: "BucketPrefix",
-    #                   bucket_name: "BucketName",
-    #                 },
-    #               },
-    #               custom_connector: {
-    #                 entity_name: "EntityName", # required
-    #                 error_handling_config: {
-    #                   fail_on_first_destination_error: false,
-    #                   bucket_prefix: "BucketPrefix",
-    #                   bucket_name: "BucketName",
-    #                 },
-    #                 write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
-    #                 id_field_names: ["Name"],
-    #                 custom_properties: {
-    #                   "CustomPropertyKey" => "CustomPropertyValue",
-    #                 },
-    #               },
-    #               sapo_data: {
-    #                 object_path: "Object", # required
-    #                 success_response_handling_config: {
-    #                   bucket_prefix: "BucketPrefix",
-    #                   bucket_name: "BucketName",
-    #                 },
-    #                 id_field_names: ["Name"],
-    #                 error_handling_config: {
-    #                   fail_on_first_destination_error: false,
-    #                   bucket_prefix: "BucketPrefix",
-    #                   bucket_name: "BucketName",
-    #                 },
-    #                 write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
-    #               },
-    #             },
-    #           },
-    #         ],
-    #         tasks: [ # required
-    #           {
-    #             source_fields: ["String"], # required
-    #             connector_operator: {
-    #               amplitude: "BETWEEN", # accepts BETWEEN
-    #               datadog: "PROJECTION", # accepts PROJECTION, BETWEEN, EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #               dynatrace: "PROJECTION", # accepts PROJECTION, BETWEEN, EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #               google_analytics: "PROJECTION", # accepts PROJECTION, BETWEEN
-    #               infor_nexus: "PROJECTION", # accepts PROJECTION, BETWEEN, EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #               marketo: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, BETWEEN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #               s3: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #               salesforce: "PROJECTION", # accepts PROJECTION, LESS_THAN, CONTAINS, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #               service_now: "PROJECTION", # accepts PROJECTION, CONTAINS, LESS_THAN, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #               singular: "PROJECTION", # accepts PROJECTION, EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #               slack: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #               trendmicro: "PROJECTION", # accepts PROJECTION, EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #               veeva: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, CONTAINS, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #               zendesk: "PROJECTION", # accepts PROJECTION, GREATER_THAN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #               sapo_data: "PROJECTION", # accepts PROJECTION, LESS_THAN, CONTAINS, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #               custom_connector: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, CONTAINS, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #             },
-    #             destination_field: "DestinationField",
-    #             task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Map_all, Mask, Merge, Passthrough, Truncate, Validate, Partition
-    #             task_properties: {
-    #               "VALUE" => "Property",
-    #             },
-    #           },
-    #         ],
-    #         metadata_catalog_config: {
-    #           glue_data_catalog: {
-    #             role_arn: "GlueDataCatalogIAMRole", # required
-    #             database_name: "GlueDataCatalogDatabaseName", # required
-    #             table_prefix: "GlueDataCatalogTablePrefix", # required
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] flow_name
     #   The specified name of the flow. Spaces are not allowed. Use
     #   underscores (\_) or hyphens (-) only.
@@ -7999,26 +5088,6 @@ module Aws::Appflow
     # The properties that are applied when Upsolver is used as a
     # destination.
     #
-    # @note When making an API call, you may pass UpsolverDestinationProperties
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_name: "UpsolverBucketName", # required
-    #         bucket_prefix: "BucketPrefix",
-    #         s3_output_format_config: { # required
-    #           file_type: "CSV", # accepts CSV, JSON, PARQUET
-    #           prefix_config: { # required
-    #             prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
-    #             prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
-    #             path_prefix_hierarchy: ["EXECUTION_ID"], # accepts EXECUTION_ID, SCHEMA_VERSION
-    #           },
-    #           aggregation_config: {
-    #             aggregation_type: "None", # accepts None, SingleFile
-    #             target_file_size: 1,
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] bucket_name
     #   The Upsolver Amazon S3 bucket name in which Amazon AppFlow places
     #   the transferred data.
@@ -8052,22 +5121,6 @@ module Aws::Appflow
 
     # The configuration that determines how Amazon AppFlow formats the flow
     # output data when Upsolver is used as the destination.
-    #
-    # @note When making an API call, you may pass UpsolverS3OutputFormatConfig
-    #   data as a hash:
-    #
-    #       {
-    #         file_type: "CSV", # accepts CSV, JSON, PARQUET
-    #         prefix_config: { # required
-    #           prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
-    #           prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
-    #           path_prefix_hierarchy: ["EXECUTION_ID"], # accepts EXECUTION_ID, SCHEMA_VERSION
-    #         },
-    #         aggregation_config: {
-    #           aggregation_type: "None", # accepts None, SingleFile
-    #           target_file_size: 1,
-    #         },
-    #       }
     #
     # @!attribute [rw] file_type
     #   Indicates the file type that Amazon AppFlow places in the Upsolver
@@ -8109,14 +5162,6 @@ module Aws::Appflow
 
     # The connector-specific profile credentials required when using Veeva.
     #
-    # @note When making an API call, you may pass VeevaConnectorProfileCredentials
-    #   data as a hash:
-    #
-    #       {
-    #         username: "Username", # required
-    #         password: "Password", # required
-    #       }
-    #
     # @!attribute [rw] username
     #   The name of the user.
     #   @return [String]
@@ -8135,13 +5180,6 @@ module Aws::Appflow
     end
 
     # The connector-specific profile properties required when using Veeva.
-    #
-    # @note When making an API call, you may pass VeevaConnectorProfileProperties
-    #   data as a hash:
-    #
-    #       {
-    #         instance_url: "InstanceUrl", # required
-    #       }
     #
     # @!attribute [rw] instance_url
     #   The location of the Veeva resource.
@@ -8162,17 +5200,6 @@ module Aws::Appflow
     class VeevaMetadata < Aws::EmptyStructure; end
 
     # The properties that are applied when using Veeva as a flow source.
-    #
-    # @note When making an API call, you may pass VeevaSourceProperties
-    #   data as a hash:
-    #
-    #       {
-    #         object: "Object", # required
-    #         document_type: "DocumentType",
-    #         include_source_files: false,
-    #         include_renditions: false,
-    #         include_all_versions: false,
-    #       }
     #
     # @!attribute [rw] object
     #   The object specified in the Veeva flow source.
@@ -8212,19 +5239,6 @@ module Aws::Appflow
     # The connector-specific profile credentials required when using
     # Zendesk.
     #
-    # @note When making an API call, you may pass ZendeskConnectorProfileCredentials
-    #   data as a hash:
-    #
-    #       {
-    #         client_id: "ClientId", # required
-    #         client_secret: "ClientSecret", # required
-    #         access_token: "AccessToken",
-    #         o_auth_request: {
-    #           auth_code: "AuthCode",
-    #           redirect_uri: "RedirectUri",
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_id
     #   The identifier for the desired client.
     #   @return [String]
@@ -8256,13 +5270,6 @@ module Aws::Appflow
 
     # The connector-specific profile properties required when using Zendesk.
     #
-    # @note When making an API call, you may pass ZendeskConnectorProfileProperties
-    #   data as a hash:
-    #
-    #       {
-    #         instance_url: "InstanceUrl", # required
-    #       }
-    #
     # @!attribute [rw] instance_url
     #   The location of the Zendesk resource.
     #   @return [String]
@@ -8276,20 +5283,6 @@ module Aws::Appflow
     end
 
     # The properties that are applied when Zendesk is used as a destination.
-    #
-    # @note When making an API call, you may pass ZendeskDestinationProperties
-    #   data as a hash:
-    #
-    #       {
-    #         object: "Object", # required
-    #         id_field_names: ["Name"],
-    #         error_handling_config: {
-    #           fail_on_first_destination_error: false,
-    #           bucket_prefix: "BucketPrefix",
-    #           bucket_name: "BucketName",
-    #         },
-    #         write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
-    #       }
     #
     # @!attribute [rw] object
     #   The object specified in the Zendesk flow destination.
@@ -8340,13 +5333,6 @@ module Aws::Appflow
     end
 
     # The properties that are applied when using Zendesk as a flow source.
-    #
-    # @note When making an API call, you may pass ZendeskSourceProperties
-    #   data as a hash:
-    #
-    #       {
-    #         object: "Object", # required
-    #       }
     #
     # @!attribute [rw] object
     #   The object specified in the Zendesk flow source.

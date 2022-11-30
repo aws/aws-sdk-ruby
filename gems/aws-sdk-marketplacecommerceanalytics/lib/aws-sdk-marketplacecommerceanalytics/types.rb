@@ -12,21 +12,6 @@ module Aws::MarketplaceCommerceAnalytics
 
     # Container for the parameters to the GenerateDataSet operation.
     #
-    # @note When making an API call, you may pass GenerateDataSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         data_set_type: "customer_subscriber_hourly_monthly_subscriptions", # required, accepts customer_subscriber_hourly_monthly_subscriptions, customer_subscriber_annual_subscriptions, daily_business_usage_by_instance_type, daily_business_fees, daily_business_free_trial_conversions, daily_business_new_instances, daily_business_new_product_subscribers, daily_business_canceled_product_subscribers, monthly_revenue_billing_and_revenue_data, monthly_revenue_annual_subscriptions, monthly_revenue_field_demonstration_usage, monthly_revenue_flexible_payment_schedule, disbursed_amount_by_product, disbursed_amount_by_product_with_uncollected_funds, disbursed_amount_by_instance_hours, disbursed_amount_by_customer_geo, disbursed_amount_by_age_of_uncollected_funds, disbursed_amount_by_age_of_disbursed_funds, disbursed_amount_by_age_of_past_due_funds, disbursed_amount_by_uncollected_funds_breakdown, customer_profile_by_industry, customer_profile_by_revenue, customer_profile_by_geography, sales_compensation_billed_revenue, us_sales_and_use_tax_records
-    #         data_set_publication_date: Time.now, # required
-    #         role_name_arn: "RoleNameArn", # required
-    #         destination_s3_bucket_name: "DestinationS3BucketName", # required
-    #         destination_s3_prefix: "DestinationS3Prefix",
-    #         sns_topic_arn: "SnsTopicArn", # required
-    #         customer_defined_values: {
-    #           "OptionalKey" => "OptionalValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] data_set_type
     #   The desired data set type.
     #
@@ -207,21 +192,6 @@ module Aws::MarketplaceCommerceAnalytics
     end
 
     # Container for the parameters to the StartSupportDataExport operation.
-    #
-    # @note When making an API call, you may pass StartSupportDataExportRequest
-    #   data as a hash:
-    #
-    #       {
-    #         data_set_type: "customer_support_contacts_data", # required, accepts customer_support_contacts_data, test_customer_support_contacts_data
-    #         from_date: Time.now, # required
-    #         role_name_arn: "RoleNameArn", # required
-    #         destination_s3_bucket_name: "DestinationS3BucketName", # required
-    #         destination_s3_prefix: "DestinationS3Prefix",
-    #         sns_topic_arn: "SnsTopicArn", # required
-    #         customer_defined_values: {
-    #           "OptionalKey" => "OptionalValue",
-    #         },
-    #       }
     #
     # @!attribute [rw] data_set_type
     #   Specifies the data set type to be written to the output csv file.

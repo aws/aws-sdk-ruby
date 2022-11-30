@@ -23,39 +23,6 @@ module Aws::CodeGuruReviewer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateRepositoryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         repository: { # required
-    #           code_commit: {
-    #             name: "Name", # required
-    #           },
-    #           bitbucket: {
-    #             name: "Name", # required
-    #             connection_arn: "ConnectionArn", # required
-    #             owner: "Owner", # required
-    #           },
-    #           git_hub_enterprise_server: {
-    #             name: "Name", # required
-    #             connection_arn: "ConnectionArn", # required
-    #             owner: "Owner", # required
-    #           },
-    #           s3_bucket: {
-    #             name: "Name", # required
-    #             bucket_name: "S3BucketName", # required
-    #           },
-    #         },
-    #         client_request_token: "ClientRequestToken",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         kms_key_details: {
-    #           kms_key_id: "KMSKeyId",
-    #           encryption_option: "AWS_OWNED_CMK", # accepts AWS_OWNED_CMK, CUSTOMER_MANAGED_CMK
-    #         },
-    #       }
-    #
     # @!attribute [rw] repository
     #   The repository to associate.
     #   @return [Types::Repository]
@@ -137,14 +104,6 @@ module Aws::CodeGuruReviewer
     #
     # [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType
     #
-    # @note When making an API call, you may pass BranchDiffSourceCodeType
-    #   data as a hash:
-    #
-    #       {
-    #         source_branch_name: "BranchName", # required
-    #         destination_branch_name: "BranchName", # required
-    #       }
-    #
     # @!attribute [rw] source_branch_name
     #   The source branch for a diff in an associated repository.
     #   @return [String]
@@ -170,14 +129,6 @@ module Aws::CodeGuruReviewer
     #
     # * Build artifacts are .jar or .class files that are compressed in a
     #   .zip file.
-    #
-    # @note When making an API call, you may pass CodeArtifacts
-    #   data as a hash:
-    #
-    #       {
-    #         source_code_artifacts_object_key: "SourceCodeArtifactsObjectKey", # required
-    #         build_artifacts_object_key: "BuildArtifactsObjectKey",
-    #       }
     #
     # @!attribute [rw] source_code_artifacts_object_key
     #   The S3 object key for a source code .zip file. This is required for
@@ -208,13 +159,6 @@ module Aws::CodeGuruReviewer
     # CodeCommit repository must be in the same Amazon Web Services Region
     # and Amazon Web Services account where its CodeGuru Reviewer code
     # reviews are configured.
-    #
-    # @note When making an API call, you may pass CodeCommitRepository
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the Amazon Web Services CodeCommit repository. For more
@@ -461,51 +405,6 @@ module Aws::CodeGuruReviewer
     #
     # [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CreateCodeReview
     #
-    # @note When making an API call, you may pass CodeReviewType
-    #   data as a hash:
-    #
-    #       {
-    #         repository_analysis: { # required
-    #           repository_head: {
-    #             branch_name: "BranchName", # required
-    #           },
-    #           source_code_type: {
-    #             commit_diff: {
-    #               source_commit: "CommitId",
-    #               destination_commit: "CommitId",
-    #               merge_base_commit: "CommitId",
-    #             },
-    #             repository_head: {
-    #               branch_name: "BranchName", # required
-    #             },
-    #             branch_diff: {
-    #               source_branch_name: "BranchName", # required
-    #               destination_branch_name: "BranchName", # required
-    #             },
-    #             s3_bucket_repository: {
-    #               name: "Name", # required
-    #               details: {
-    #                 bucket_name: "S3BucketName",
-    #                 code_artifacts: {
-    #                   source_code_artifacts_object_key: "SourceCodeArtifactsObjectKey", # required
-    #                   build_artifacts_object_key: "BuildArtifactsObjectKey",
-    #                 },
-    #               },
-    #             },
-    #             request_metadata: {
-    #               request_id: "RequestId",
-    #               requester: "Requester",
-    #               event_info: {
-    #                 name: "EventName",
-    #                 state: "EventState",
-    #               },
-    #               vendor_name: "GitHub", # accepts GitHub, GitLab, NativeS3
-    #             },
-    #           },
-    #         },
-    #         analysis_types: ["Security"], # accepts Security, CodeQuality
-    #       }
-    #
     # @!attribute [rw] repository_analysis
     #   A code review that analyzes all code under a specified branch in an
     #   associated repository. The associated repository is specified using
@@ -539,15 +438,6 @@ module Aws::CodeGuruReviewer
     #
     #
     # [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType
-    #
-    # @note When making an API call, you may pass CommitDiffSourceCodeType
-    #   data as a hash:
-    #
-    #       {
-    #         source_commit: "CommitId",
-    #         destination_commit: "CommitId",
-    #         merge_base_commit: "CommitId",
-    #       }
     #
     # @!attribute [rw] source_commit
     #   The SHA of the source commit used to generate a commit diff. This
@@ -588,56 +478,6 @@ module Aws::CodeGuruReviewer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateCodeReviewRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "CodeReviewName", # required
-    #         repository_association_arn: "AssociationArn", # required
-    #         type: { # required
-    #           repository_analysis: { # required
-    #             repository_head: {
-    #               branch_name: "BranchName", # required
-    #             },
-    #             source_code_type: {
-    #               commit_diff: {
-    #                 source_commit: "CommitId",
-    #                 destination_commit: "CommitId",
-    #                 merge_base_commit: "CommitId",
-    #               },
-    #               repository_head: {
-    #                 branch_name: "BranchName", # required
-    #               },
-    #               branch_diff: {
-    #                 source_branch_name: "BranchName", # required
-    #                 destination_branch_name: "BranchName", # required
-    #               },
-    #               s3_bucket_repository: {
-    #                 name: "Name", # required
-    #                 details: {
-    #                   bucket_name: "S3BucketName",
-    #                   code_artifacts: {
-    #                     source_code_artifacts_object_key: "SourceCodeArtifactsObjectKey", # required
-    #                     build_artifacts_object_key: "BuildArtifactsObjectKey",
-    #                   },
-    #                 },
-    #               },
-    #               request_metadata: {
-    #                 request_id: "RequestId",
-    #                 requester: "Requester",
-    #                 event_info: {
-    #                   name: "EventName",
-    #                   state: "EventState",
-    #                 },
-    #                 vendor_name: "GitHub", # accepts GitHub, GitLab, NativeS3
-    #               },
-    #             },
-    #           },
-    #           analysis_types: ["Security"], # accepts Security, CodeQuality
-    #         },
-    #         client_request_token: "ClientRequestToken",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the code review. The name of each code review in your
     #   Amazon Web Services account must be unique.
@@ -700,13 +540,6 @@ module Aws::CodeGuruReviewer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeCodeReviewRequest
-    #   data as a hash:
-    #
-    #       {
-    #         code_review_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] code_review_arn
     #   The Amazon Resource Name (ARN) of the [CodeReview][1] object.
     #
@@ -735,15 +568,6 @@ module Aws::CodeGuruReviewer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeRecommendationFeedbackRequest
-    #   data as a hash:
-    #
-    #       {
-    #         code_review_arn: "Arn", # required
-    #         recommendation_id: "RecommendationId", # required
-    #         user_id: "UserId",
-    #       }
-    #
     # @!attribute [rw] code_review_arn
     #   The Amazon Resource Name (ARN) of the [CodeReview][1] object.
     #
@@ -793,13 +617,6 @@ module Aws::CodeGuruReviewer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeRepositoryAssociationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         association_arn: "AssociationArn", # required
-    #       }
-    #
     # @!attribute [rw] association_arn
     #   The Amazon Resource Name (ARN) of the [RepositoryAssociation][1]
     #   object. You can retrieve this ARN by calling
@@ -845,13 +662,6 @@ module Aws::CodeGuruReviewer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateRepositoryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         association_arn: "AssociationArn", # required
-    #       }
-    #
     # @!attribute [rw] association_arn
     #   The Amazon Resource Name (ARN) of the [RepositoryAssociation][1]
     #   object. You can retrieve this ARN by calling
@@ -900,14 +710,6 @@ module Aws::CodeGuruReviewer
     # Information about an event. The event might be a push, pull request,
     # scheduled request, or another type of event.
     #
-    # @note When making an API call, you may pass EventInfo
-    #   data as a hash:
-    #
-    #       {
-    #         name: "EventName",
-    #         state: "EventState",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the event. The possible names are `pull_request`,
     #   `workflow_dispatch`, `schedule`, and `push`
@@ -950,14 +752,6 @@ module Aws::CodeGuruReviewer
     # * The ID of the Amazon Web Services KMS key that is associated with a
     #   repository association.
     #
-    # @note When making an API call, you may pass KMSKeyDetails
-    #   data as a hash:
-    #
-    #       {
-    #         kms_key_id: "KMSKeyId",
-    #         encryption_option: "AWS_OWNED_CMK", # accepts AWS_OWNED_CMK, CUSTOMER_MANAGED_CMK
-    #       }
-    #
     # @!attribute [rw] kms_key_id
     #   The ID of the Amazon Web Services KMS key that is associated with a
     #   repository association.
@@ -978,18 +772,6 @@ module Aws::CodeGuruReviewer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCodeReviewsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         provider_types: ["CodeCommit"], # accepts CodeCommit, GitHub, Bitbucket, GitHubEnterpriseServer, S3Bucket
-    #         states: ["Completed"], # accepts Completed, Pending, Failed, Deleting
-    #         repository_names: ["Name"],
-    #         type: "PullRequest", # required, accepts PullRequest, RepositoryAnalysis
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] provider_types
     #   List of provider types for filtering that needs to be applied before
     #   displaying the result. For example, `providerTypes=[GitHub]` lists
@@ -1064,17 +846,6 @@ module Aws::CodeGuruReviewer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRecommendationFeedbackRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         code_review_arn: "Arn", # required
-    #         user_ids: ["UserId"],
-    #         recommendation_ids: ["RecommendationId"],
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If `nextToken` is returned, there are more results available. The
     #   value of `nextToken` is a unique pagination token for each page.
@@ -1148,15 +919,6 @@ module Aws::CodeGuruReviewer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRecommendationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         code_review_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] next_token
     #   Pagination token.
     #   @return [String]
@@ -1201,18 +963,6 @@ module Aws::CodeGuruReviewer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRepositoryAssociationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         provider_types: ["CodeCommit"], # accepts CodeCommit, GitHub, Bitbucket, GitHubEnterpriseServer, S3Bucket
-    #         states: ["Associated"], # accepts Associated, Associating, Failed, Disassociating, Disassociated
-    #         names: ["Name"],
-    #         owners: ["Owner"],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] provider_types
     #   List of provider types to use as a filter.
     #   @return [Array<String>]
@@ -1331,13 +1081,6 @@ module Aws::CodeGuruReviewer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AssociationArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the [RepositoryAssociation][1]
     #   object. You can retrieve this ARN by calling
@@ -1472,15 +1215,6 @@ module Aws::CodeGuruReviewer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutRecommendationFeedbackRequest
-    #   data as a hash:
-    #
-    #       {
-    #         code_review_arn: "Arn", # required
-    #         recommendation_id: "RecommendationId", # required
-    #         reactions: ["ThumbsUp"], # required, accepts ThumbsUp, ThumbsDown
-    #       }
-    #
     # @!attribute [rw] code_review_arn
     #   The Amazon Resource Name (ARN) of the [CodeReview][1] object.
     #
@@ -1666,29 +1400,6 @@ module Aws::CodeGuruReviewer
     # `Repository` object is not used if your source code is in an
     # associated GitHub repository.
     #
-    # @note When making an API call, you may pass Repository
-    #   data as a hash:
-    #
-    #       {
-    #         code_commit: {
-    #           name: "Name", # required
-    #         },
-    #         bitbucket: {
-    #           name: "Name", # required
-    #           connection_arn: "ConnectionArn", # required
-    #           owner: "Owner", # required
-    #         },
-    #         git_hub_enterprise_server: {
-    #           name: "Name", # required
-    #           connection_arn: "ConnectionArn", # required
-    #           owner: "Owner", # required
-    #         },
-    #         s3_bucket: {
-    #           name: "Name", # required
-    #           bucket_name: "S3BucketName", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] code_commit
     #   Information about an Amazon Web Services CodeCommit repository.
     #   @return [Types::CodeCommitRepository]
@@ -1723,48 +1434,6 @@ module Aws::CodeGuruReviewer
     #
     #
     # [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CreateCodeReview
-    #
-    # @note When making an API call, you may pass RepositoryAnalysis
-    #   data as a hash:
-    #
-    #       {
-    #         repository_head: {
-    #           branch_name: "BranchName", # required
-    #         },
-    #         source_code_type: {
-    #           commit_diff: {
-    #             source_commit: "CommitId",
-    #             destination_commit: "CommitId",
-    #             merge_base_commit: "CommitId",
-    #           },
-    #           repository_head: {
-    #             branch_name: "BranchName", # required
-    #           },
-    #           branch_diff: {
-    #             source_branch_name: "BranchName", # required
-    #             destination_branch_name: "BranchName", # required
-    #           },
-    #           s3_bucket_repository: {
-    #             name: "Name", # required
-    #             details: {
-    #               bucket_name: "S3BucketName",
-    #               code_artifacts: {
-    #                 source_code_artifacts_object_key: "SourceCodeArtifactsObjectKey", # required
-    #                 build_artifacts_object_key: "BuildArtifactsObjectKey",
-    #               },
-    #             },
-    #           },
-    #           request_metadata: {
-    #             request_id: "RequestId",
-    #             requester: "Requester",
-    #             event_info: {
-    #               name: "EventName",
-    #               state: "EventState",
-    #             },
-    #             vendor_name: "GitHub", # accepts GitHub, GitLab, NativeS3
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] repository_head
     #   A [SourceCodeType][1] that specifies the tip of a branch in an
@@ -2046,13 +1715,6 @@ module Aws::CodeGuruReviewer
     #
     # [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType
     #
-    # @note When making an API call, you may pass RepositoryHeadSourceCodeType
-    #   data as a hash:
-    #
-    #       {
-    #         branch_name: "BranchName", # required
-    #       }
-    #
     # @!attribute [rw] branch_name
     #   The name of the branch in an associated repository. The
     #   `RepositoryHeadSourceCodeType` specifies the tip of this branch.
@@ -2068,19 +1730,6 @@ module Aws::CodeGuruReviewer
 
     # Metadata that is associated with a code review. This applies to both
     # pull request and repository analysis code reviews.
-    #
-    # @note When making an API call, you may pass RequestMetadata
-    #   data as a hash:
-    #
-    #       {
-    #         request_id: "RequestId",
-    #         requester: "Requester",
-    #         event_info: {
-    #           name: "EventName",
-    #           state: "EventState",
-    #         },
-    #         vendor_name: "GitHub", # accepts GitHub, GitLab, NativeS3
-    #       }
     #
     # @!attribute [rw] request_id
     #   The ID of the request. This is required for a pull request code
@@ -2176,20 +1825,6 @@ module Aws::CodeGuruReviewer
     # associated repository contains a source code .zip file and a build
     # artifacts .zip file that contains .jar or .class files.
     #
-    # @note When making an API call, you may pass S3BucketRepository
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         details: {
-    #           bucket_name: "S3BucketName",
-    #           code_artifacts: {
-    #             source_code_artifacts_object_key: "SourceCodeArtifactsObjectKey", # required
-    #             build_artifacts_object_key: "BuildArtifactsObjectKey",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the repository when the `ProviderType` is `S3Bucket`.
     #   @return [String]
@@ -2211,14 +1846,6 @@ module Aws::CodeGuruReviewer
     end
 
     # Information about a repository in an S3 bucket.
-    #
-    # @note When making an API call, you may pass S3Repository
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         bucket_name: "S3BucketName", # required
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the repository in the S3 bucket.
@@ -2242,17 +1869,6 @@ module Aws::CodeGuruReviewer
     # contains the S3 object keys for a source code .zip file and for a
     # build artifacts .zip file that contains .jar or .class files.
     #
-    # @note When making an API call, you may pass S3RepositoryDetails
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_name: "S3BucketName",
-    #         code_artifacts: {
-    #           source_code_artifacts_object_key: "SourceCodeArtifactsObjectKey", # required
-    #           build_artifacts_object_key: "BuildArtifactsObjectKey",
-    #         },
-    #       }
-    #
     # @!attribute [rw] bucket_name
     #   The name of the S3 bucket used for associating a new S3 repository.
     #   It must begin with `codeguru-reviewer-`.
@@ -2274,43 +1890,6 @@ module Aws::CodeGuruReviewer
     end
 
     # Specifies the source code that is analyzed in a code review.
-    #
-    # @note When making an API call, you may pass SourceCodeType
-    #   data as a hash:
-    #
-    #       {
-    #         commit_diff: {
-    #           source_commit: "CommitId",
-    #           destination_commit: "CommitId",
-    #           merge_base_commit: "CommitId",
-    #         },
-    #         repository_head: {
-    #           branch_name: "BranchName", # required
-    #         },
-    #         branch_diff: {
-    #           source_branch_name: "BranchName", # required
-    #           destination_branch_name: "BranchName", # required
-    #         },
-    #         s3_bucket_repository: {
-    #           name: "Name", # required
-    #           details: {
-    #             bucket_name: "S3BucketName",
-    #             code_artifacts: {
-    #               source_code_artifacts_object_key: "SourceCodeArtifactsObjectKey", # required
-    #               build_artifacts_object_key: "BuildArtifactsObjectKey",
-    #             },
-    #           },
-    #         },
-    #         request_metadata: {
-    #           request_id: "RequestId",
-    #           requester: "Requester",
-    #           event_info: {
-    #             name: "EventName",
-    #             state: "EventState",
-    #           },
-    #           vendor_name: "GitHub", # accepts GitHub, GitLab, NativeS3
-    #         },
-    #       }
     #
     # @!attribute [rw] commit_diff
     #   A [SourceCodeType][1] that specifies a commit diff created by a pull
@@ -2372,16 +1951,6 @@ module Aws::CodeGuruReviewer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AssociationArn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the [RepositoryAssociation][1]
     #   object. You can retrieve this ARN by calling
@@ -2421,15 +1990,6 @@ module Aws::CodeGuruReviewer
 
     # Information about a third-party source repository connected to
     # CodeGuru Reviewer.
-    #
-    # @note When making an API call, you may pass ThirdPartySourceRepository
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         connection_arn: "ConnectionArn", # required
-    #         owner: "Owner", # required
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the third party source repository.
@@ -2477,14 +2037,6 @@ module Aws::CodeGuruReviewer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AssociationArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the [RepositoryAssociation][1]
     #   object. You can retrieve this ARN by calling

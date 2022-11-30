@@ -38,30 +38,6 @@ module Aws::HealthLake
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateFHIRDatastoreRequest
-    #   data as a hash:
-    #
-    #       {
-    #         datastore_name: "DatastoreName",
-    #         datastore_type_version: "R4", # required, accepts R4
-    #         sse_configuration: {
-    #           kms_encryption_config: { # required
-    #             cmk_type: "CUSTOMER_MANAGED_KMS_KEY", # required, accepts CUSTOMER_MANAGED_KMS_KEY, AWS_OWNED_KMS_KEY
-    #             kms_key_id: "EncryptionKeyID",
-    #           },
-    #         },
-    #         preload_data_config: {
-    #           preload_data_type: "SYNTHEA", # required, accepts SYNTHEA
-    #         },
-    #         client_token: "ClientTokenString",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] datastore_name
     #   The user generated name for the Data Store.
     #   @return [String]
@@ -139,16 +115,6 @@ module Aws::HealthLake
     end
 
     # The filters applied to Data Store query.
-    #
-    # @note When making an API call, you may pass DatastoreFilter
-    #   data as a hash:
-    #
-    #       {
-    #         datastore_name: "DatastoreName",
-    #         datastore_status: "CREATING", # accepts CREATING, ACTIVE, DELETING, DELETED
-    #         created_before: Time.now,
-    #         created_after: Time.now,
-    #       }
     #
     # @!attribute [rw] datastore_name
     #   Allows the user to filter Data Store results by name.
@@ -240,13 +206,6 @@ module Aws::HealthLake
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteFHIRDatastoreRequest
-    #   data as a hash:
-    #
-    #       {
-    #         datastore_id: "DatastoreId",
-    #       }
-    #
     # @!attribute [rw] datastore_id
     #   The AWS-generated ID for the Data Store to be deleted.
     #   @return [String]
@@ -289,13 +248,6 @@ module Aws::HealthLake
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeFHIRDatastoreRequest
-    #   data as a hash:
-    #
-    #       {
-    #         datastore_id: "DatastoreId",
-    #       }
-    #
     # @!attribute [rw] datastore_id
     #   The AWS-generated Data Store id. This is part of the
     #   ‘CreateFHIRDatastore’ output.
@@ -323,14 +275,6 @@ module Aws::HealthLake
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeFHIRExportJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         datastore_id: "DatastoreId", # required
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] datastore_id
     #   The AWS generated ID for the Data Store from which files are being
     #   exported from for an export job.
@@ -362,14 +306,6 @@ module Aws::HealthLake
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeFHIRImportJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         datastore_id: "DatastoreId", # required
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] datastore_id
     #   The AWS-generated ID of the Data Store.
     #   @return [String]
@@ -526,10 +462,6 @@ module Aws::HealthLake
 
     # The input properties for an import job.
     #
-    # @note InputDataConfig is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note InputDataConfig is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of InputDataConfig corresponding to the set member.
-    #
     # @!attribute [rw] s3_uri
     #   The S3Uri is the user specified S3 location of the FHIR data to be
     #   imported into Amazon HealthLake.
@@ -565,14 +497,6 @@ module Aws::HealthLake
     # customer owned key is not specified, an AWS owned key will be used for
     # encryption.
     #
-    # @note When making an API call, you may pass KmsEncryptionConfig
-    #   data as a hash:
-    #
-    #       {
-    #         cmk_type: "CUSTOMER_MANAGED_KMS_KEY", # required, accepts CUSTOMER_MANAGED_KMS_KEY, AWS_OWNED_KMS_KEY
-    #         kms_key_id: "EncryptionKeyID",
-    #       }
-    #
     # @!attribute [rw] cmk_type
     #   The type of customer-managed-key(CMK) used for encyrption. The two
     #   types of supported CMKs are customer owned CMKs and AWS owned CMKs.
@@ -592,20 +516,6 @@ module Aws::HealthLake
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFHIRDatastoresRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter: {
-    #           datastore_name: "DatastoreName",
-    #           datastore_status: "CREATING", # accepts CREATING, ACTIVE, DELETING, DELETED
-    #           created_before: Time.now,
-    #           created_after: Time.now,
-    #         },
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] filter
     #   Lists all filters associated with a FHIR Data Store request.
     #   @return [Types::DatastoreFilter]
@@ -647,19 +557,6 @@ module Aws::HealthLake
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFHIRExportJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         datastore_id: "DatastoreId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         job_name: "JobName",
-    #         job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED_WITH_ERRORS, COMPLETED, FAILED
-    #         submitted_before: Time.now,
-    #         submitted_after: Time.now,
-    #       }
-    #
     # @!attribute [rw] datastore_id
     #   This parameter limits the response to the export job with the
     #   specified Data Store ID.
@@ -728,19 +625,6 @@ module Aws::HealthLake
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFHIRImportJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         datastore_id: "DatastoreId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         job_name: "JobName",
-    #         job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED_WITH_ERRORS, COMPLETED, FAILED
-    #         submitted_before: Time.now,
-    #         submitted_after: Time.now,
-    #       }
-    #
     # @!attribute [rw] datastore_id
     #   This parameter limits the response to the import job with the
     #   specified Data Store ID.
@@ -809,13 +693,6 @@ module Aws::HealthLake
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name(ARN) of the Data Store for which tags are
     #   being added.
@@ -844,10 +721,6 @@ module Aws::HealthLake
     # The output data configuration that was supplied when the export job
     # was created.
     #
-    # @note OutputDataConfig is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note OutputDataConfig is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of OutputDataConfig corresponding to the set member.
-    #
     # @!attribute [rw] s3_configuration
     #   The output data configuration that was supplied when the export job
     #   was created.
@@ -868,13 +741,6 @@ module Aws::HealthLake
 
     # The input properties for the preloaded Data Store. Only data preloaded
     # from Synthea is supported.
-    #
-    # @note When making an API call, you may pass PreloadDataConfig
-    #   data as a hash:
-    #
-    #       {
-    #         preload_data_type: "SYNTHEA", # required, accepts SYNTHEA
-    #       }
     #
     # @!attribute [rw] preload_data_type
     #   The type of preloaded data. Only Synthea preloaded data is
@@ -905,14 +771,6 @@ module Aws::HealthLake
     # The configuration of the S3 bucket for either an import or export job.
     # This includes assigning permissions for access.
     #
-    # @note When making an API call, you may pass S3Configuration
-    #   data as a hash:
-    #
-    #       {
-    #         s3_uri: "S3Uri", # required
-    #         kms_key_id: "EncryptionKeyID", # required
-    #       }
-    #
     # @!attribute [rw] s3_uri
     #   The S3Uri is the user specified S3 location of the FHIR data to be
     #   imported into Amazon HealthLake.
@@ -934,16 +792,6 @@ module Aws::HealthLake
     # The server-side encryption key configuration for a customer provided
     # encryption key.
     #
-    # @note When making an API call, you may pass SseConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         kms_encryption_config: { # required
-    #           cmk_type: "CUSTOMER_MANAGED_KMS_KEY", # required, accepts CUSTOMER_MANAGED_KMS_KEY, AWS_OWNED_KMS_KEY
-    #           kms_key_id: "EncryptionKeyID",
-    #         },
-    #       }
-    #
     # @!attribute [rw] kms_encryption_config
     #   The KMS encryption configuration used to provide details for data
     #   encryption.
@@ -957,22 +805,6 @@ module Aws::HealthLake
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartFHIRExportJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_name: "JobName",
-    #         output_data_config: { # required
-    #           s3_configuration: {
-    #             s3_uri: "S3Uri", # required
-    #             kms_key_id: "EncryptionKeyID", # required
-    #           },
-    #         },
-    #         datastore_id: "DatastoreId", # required
-    #         data_access_role_arn: "IamRoleArn", # required
-    #         client_token: "ClientTokenString", # required
-    #       }
-    #
     # @!attribute [rw] job_name
     #   The user generated name for an export job.
     #   @return [String]
@@ -1034,25 +866,6 @@ module Aws::HealthLake
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartFHIRImportJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_name: "JobName",
-    #         input_data_config: { # required
-    #           s3_uri: "S3Uri",
-    #         },
-    #         job_output_data_config: { # required
-    #           s3_configuration: {
-    #             s3_uri: "S3Uri", # required
-    #             kms_key_id: "EncryptionKeyID", # required
-    #           },
-    #         },
-    #         datastore_id: "DatastoreId", # required
-    #         data_access_role_arn: "IamRoleArn", # required
-    #         client_token: "ClientTokenString", # required
-    #       }
-    #
     # @!attribute [rw] job_name
     #   The name of the FHIR Import job in the StartFHIRImport job request.
     #   @return [String]
@@ -1121,14 +934,6 @@ module Aws::HealthLake
     # A tag is a label consisting of a user-defined key and value. The form
     # for tags is \\\{"Key", "Value"\\}
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The key portion of a tag. Tag keys are case sensitive.
     #   @return [String]
@@ -1146,19 +951,6 @@ module Aws::HealthLake
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name(ARN)that gives Amazon HealthLake access to
     #   the Data Store which tags are being added to.
@@ -1196,14 +988,6 @@ module Aws::HealthLake
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   "The Amazon Resource Name(ARN) of the Data Store for which tags are
     #   being removed

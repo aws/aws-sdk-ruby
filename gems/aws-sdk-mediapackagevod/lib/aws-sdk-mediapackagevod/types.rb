@@ -174,14 +174,6 @@ module Aws::MediaPackageVod
 
     # CDN Authorization credentials
     #
-    # @note When making an API call, you may pass Authorization
-    #   data as a hash:
-    #
-    #       {
-    #         cdn_identifier_secret: "__string", # required
-    #         secrets_role_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] cdn_identifier_secret
     #   The Amazon Resource Name (ARN) for the secret in AWS Secrets Manager
     #   that is used for CDN authorization.
@@ -202,22 +194,6 @@ module Aws::MediaPackageVod
     end
 
     # A CMAF encryption configuration.
-    #
-    # @note When making an API call, you may pass CmafEncryption
-    #   data as a hash:
-    #
-    #       {
-    #         constant_initialization_vector: "__string",
-    #         speke_key_provider: { # required
-    #           encryption_contract_configuration: {
-    #             preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1, PRESET-AUDIO-2, PRESET-AUDIO-3, SHARED, UNENCRYPTED
-    #             preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1, PRESET-VIDEO-2, PRESET-VIDEO-3, PRESET-VIDEO-4, PRESET-VIDEO-5, PRESET-VIDEO-6, PRESET-VIDEO-7, PRESET-VIDEO-8, SHARED, UNENCRYPTED
-    #           },
-    #           role_arn: "__string", # required
-    #           system_ids: ["__string"], # required
-    #           url: "__string", # required
-    #         },
-    #       }
     #
     # @!attribute [rw] constant_initialization_vector
     #   An optional 128-bit, 16-byte hex value represented by a 32-character
@@ -242,40 +218,6 @@ module Aws::MediaPackageVod
     end
 
     # A CMAF packaging configuration.
-    #
-    # @note When making an API call, you may pass CmafPackage
-    #   data as a hash:
-    #
-    #       {
-    #         encryption: {
-    #           constant_initialization_vector: "__string",
-    #           speke_key_provider: { # required
-    #             encryption_contract_configuration: {
-    #               preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1, PRESET-AUDIO-2, PRESET-AUDIO-3, SHARED, UNENCRYPTED
-    #               preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1, PRESET-VIDEO-2, PRESET-VIDEO-3, PRESET-VIDEO-4, PRESET-VIDEO-5, PRESET-VIDEO-6, PRESET-VIDEO-7, PRESET-VIDEO-8, SHARED, UNENCRYPTED
-    #             },
-    #             role_arn: "__string", # required
-    #             system_ids: ["__string"], # required
-    #             url: "__string", # required
-    #           },
-    #         },
-    #         hls_manifests: [ # required
-    #           {
-    #             ad_markers: "NONE", # accepts NONE, SCTE35_ENHANCED, PASSTHROUGH
-    #             include_iframe_only_stream: false,
-    #             manifest_name: "__string",
-    #             program_date_time_interval_seconds: 1,
-    #             repeat_ext_x_key: false,
-    #             stream_selection: {
-    #               max_video_bits_per_second: 1,
-    #               min_video_bits_per_second: 1,
-    #               stream_order: "ORIGINAL", # accepts ORIGINAL, VIDEO_BITRATE_ASCENDING, VIDEO_BITRATE_DESCENDING
-    #             },
-    #           },
-    #         ],
-    #         include_encoder_configuration_in_segments: false,
-    #         segment_duration_seconds: 1,
-    #       }
     #
     # @!attribute [rw] encryption
     #   A CMAF encryption configuration.
@@ -324,16 +266,6 @@ module Aws::MediaPackageVod
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ConfigureLogsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         egress_access_logs: {
-    #           log_group_name: "__string",
-    #         },
-    #         id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] egress_access_logs
     #   Configure egress access logging.
     #   @return [Types::EgressAccessLogs]
@@ -384,20 +316,6 @@ module Aws::MediaPackageVod
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAssetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "__string", # required
-    #         packaging_group_id: "__string", # required
-    #         resource_id: "__string",
-    #         source_arn: "__string", # required
-    #         source_role_arn: "__string", # required
-    #         tags: {
-    #           "__string" => "__string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] id
     #   @return [String]
     #
@@ -474,135 +392,6 @@ module Aws::MediaPackageVod
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreatePackagingConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cmaf_package: {
-    #           encryption: {
-    #             constant_initialization_vector: "__string",
-    #             speke_key_provider: { # required
-    #               encryption_contract_configuration: {
-    #                 preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1, PRESET-AUDIO-2, PRESET-AUDIO-3, SHARED, UNENCRYPTED
-    #                 preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1, PRESET-VIDEO-2, PRESET-VIDEO-3, PRESET-VIDEO-4, PRESET-VIDEO-5, PRESET-VIDEO-6, PRESET-VIDEO-7, PRESET-VIDEO-8, SHARED, UNENCRYPTED
-    #               },
-    #               role_arn: "__string", # required
-    #               system_ids: ["__string"], # required
-    #               url: "__string", # required
-    #             },
-    #           },
-    #           hls_manifests: [ # required
-    #             {
-    #               ad_markers: "NONE", # accepts NONE, SCTE35_ENHANCED, PASSTHROUGH
-    #               include_iframe_only_stream: false,
-    #               manifest_name: "__string",
-    #               program_date_time_interval_seconds: 1,
-    #               repeat_ext_x_key: false,
-    #               stream_selection: {
-    #                 max_video_bits_per_second: 1,
-    #                 min_video_bits_per_second: 1,
-    #                 stream_order: "ORIGINAL", # accepts ORIGINAL, VIDEO_BITRATE_ASCENDING, VIDEO_BITRATE_DESCENDING
-    #               },
-    #             },
-    #           ],
-    #           include_encoder_configuration_in_segments: false,
-    #           segment_duration_seconds: 1,
-    #         },
-    #         dash_package: {
-    #           dash_manifests: [ # required
-    #             {
-    #               manifest_layout: "FULL", # accepts FULL, COMPACT
-    #               manifest_name: "__string",
-    #               min_buffer_time_seconds: 1,
-    #               profile: "NONE", # accepts NONE, HBBTV_1_5
-    #               scte_markers_source: "SEGMENTS", # accepts SEGMENTS, MANIFEST
-    #               stream_selection: {
-    #                 max_video_bits_per_second: 1,
-    #                 min_video_bits_per_second: 1,
-    #                 stream_order: "ORIGINAL", # accepts ORIGINAL, VIDEO_BITRATE_ASCENDING, VIDEO_BITRATE_DESCENDING
-    #               },
-    #             },
-    #           ],
-    #           encryption: {
-    #             speke_key_provider: { # required
-    #               encryption_contract_configuration: {
-    #                 preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1, PRESET-AUDIO-2, PRESET-AUDIO-3, SHARED, UNENCRYPTED
-    #                 preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1, PRESET-VIDEO-2, PRESET-VIDEO-3, PRESET-VIDEO-4, PRESET-VIDEO-5, PRESET-VIDEO-6, PRESET-VIDEO-7, PRESET-VIDEO-8, SHARED, UNENCRYPTED
-    #               },
-    #               role_arn: "__string", # required
-    #               system_ids: ["__string"], # required
-    #               url: "__string", # required
-    #             },
-    #           },
-    #           include_encoder_configuration_in_segments: false,
-    #           include_iframe_only_stream: false,
-    #           period_triggers: ["ADS"], # accepts ADS
-    #           segment_duration_seconds: 1,
-    #           segment_template_format: "NUMBER_WITH_TIMELINE", # accepts NUMBER_WITH_TIMELINE, TIME_WITH_TIMELINE, NUMBER_WITH_DURATION
-    #         },
-    #         hls_package: {
-    #           encryption: {
-    #             constant_initialization_vector: "__string",
-    #             encryption_method: "AES_128", # accepts AES_128, SAMPLE_AES
-    #             speke_key_provider: { # required
-    #               encryption_contract_configuration: {
-    #                 preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1, PRESET-AUDIO-2, PRESET-AUDIO-3, SHARED, UNENCRYPTED
-    #                 preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1, PRESET-VIDEO-2, PRESET-VIDEO-3, PRESET-VIDEO-4, PRESET-VIDEO-5, PRESET-VIDEO-6, PRESET-VIDEO-7, PRESET-VIDEO-8, SHARED, UNENCRYPTED
-    #               },
-    #               role_arn: "__string", # required
-    #               system_ids: ["__string"], # required
-    #               url: "__string", # required
-    #             },
-    #           },
-    #           hls_manifests: [ # required
-    #             {
-    #               ad_markers: "NONE", # accepts NONE, SCTE35_ENHANCED, PASSTHROUGH
-    #               include_iframe_only_stream: false,
-    #               manifest_name: "__string",
-    #               program_date_time_interval_seconds: 1,
-    #               repeat_ext_x_key: false,
-    #               stream_selection: {
-    #                 max_video_bits_per_second: 1,
-    #                 min_video_bits_per_second: 1,
-    #                 stream_order: "ORIGINAL", # accepts ORIGINAL, VIDEO_BITRATE_ASCENDING, VIDEO_BITRATE_DESCENDING
-    #               },
-    #             },
-    #           ],
-    #           include_dvb_subtitles: false,
-    #           segment_duration_seconds: 1,
-    #           use_audio_rendition_group: false,
-    #         },
-    #         id: "__string", # required
-    #         mss_package: {
-    #           encryption: {
-    #             speke_key_provider: { # required
-    #               encryption_contract_configuration: {
-    #                 preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1, PRESET-AUDIO-2, PRESET-AUDIO-3, SHARED, UNENCRYPTED
-    #                 preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1, PRESET-VIDEO-2, PRESET-VIDEO-3, PRESET-VIDEO-4, PRESET-VIDEO-5, PRESET-VIDEO-6, PRESET-VIDEO-7, PRESET-VIDEO-8, SHARED, UNENCRYPTED
-    #               },
-    #               role_arn: "__string", # required
-    #               system_ids: ["__string"], # required
-    #               url: "__string", # required
-    #             },
-    #           },
-    #           mss_manifests: [ # required
-    #             {
-    #               manifest_name: "__string",
-    #               stream_selection: {
-    #                 max_video_bits_per_second: 1,
-    #                 min_video_bits_per_second: 1,
-    #                 stream_order: "ORIGINAL", # accepts ORIGINAL, VIDEO_BITRATE_ASCENDING, VIDEO_BITRATE_DESCENDING
-    #               },
-    #             },
-    #           ],
-    #           segment_duration_seconds: 1,
-    #         },
-    #         packaging_group_id: "__string", # required
-    #         tags: {
-    #           "__string" => "__string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] cmaf_package
     #   A CMAF packaging configuration.
     #   @return [Types::CmafPackage]
@@ -689,23 +478,6 @@ module Aws::MediaPackageVod
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreatePackagingGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         authorization: {
-    #           cdn_identifier_secret: "__string", # required
-    #           secrets_role_arn: "__string", # required
-    #         },
-    #         egress_access_logs: {
-    #           log_group_name: "__string",
-    #         },
-    #         id: "__string", # required
-    #         tags: {
-    #           "__string" => "__string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] authorization
     #   CDN Authorization credentials
     #   @return [Types::Authorization]
@@ -769,21 +541,6 @@ module Aws::MediaPackageVod
     # A Dynamic Adaptive Streaming over HTTP (DASH) encryption
     # configuration.
     #
-    # @note When making an API call, you may pass DashEncryption
-    #   data as a hash:
-    #
-    #       {
-    #         speke_key_provider: { # required
-    #           encryption_contract_configuration: {
-    #             preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1, PRESET-AUDIO-2, PRESET-AUDIO-3, SHARED, UNENCRYPTED
-    #             preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1, PRESET-VIDEO-2, PRESET-VIDEO-3, PRESET-VIDEO-4, PRESET-VIDEO-5, PRESET-VIDEO-6, PRESET-VIDEO-7, PRESET-VIDEO-8, SHARED, UNENCRYPTED
-    #           },
-    #           role_arn: "__string", # required
-    #           system_ids: ["__string"], # required
-    #           url: "__string", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] speke_key_provider
     #   A configuration for accessing an external Secure Packager and
     #   Encoder Key Exchange (SPEKE) service that will provide encryption
@@ -799,22 +556,6 @@ module Aws::MediaPackageVod
     end
 
     # A DASH manifest configuration.
-    #
-    # @note When making an API call, you may pass DashManifest
-    #   data as a hash:
-    #
-    #       {
-    #         manifest_layout: "FULL", # accepts FULL, COMPACT
-    #         manifest_name: "__string",
-    #         min_buffer_time_seconds: 1,
-    #         profile: "NONE", # accepts NONE, HBBTV_1_5
-    #         scte_markers_source: "SEGMENTS", # accepts SEGMENTS, MANIFEST
-    #         stream_selection: {
-    #           max_video_bits_per_second: 1,
-    #           min_video_bits_per_second: 1,
-    #           stream_order: "ORIGINAL", # accepts ORIGINAL, VIDEO_BITRATE_ASCENDING, VIDEO_BITRATE_DESCENDING
-    #         },
-    #       }
     #
     # @!attribute [rw] manifest_layout
     #   Determines the position of some tags in the Media Presentation
@@ -863,42 +604,6 @@ module Aws::MediaPackageVod
     end
 
     # A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
-    #
-    # @note When making an API call, you may pass DashPackage
-    #   data as a hash:
-    #
-    #       {
-    #         dash_manifests: [ # required
-    #           {
-    #             manifest_layout: "FULL", # accepts FULL, COMPACT
-    #             manifest_name: "__string",
-    #             min_buffer_time_seconds: 1,
-    #             profile: "NONE", # accepts NONE, HBBTV_1_5
-    #             scte_markers_source: "SEGMENTS", # accepts SEGMENTS, MANIFEST
-    #             stream_selection: {
-    #               max_video_bits_per_second: 1,
-    #               min_video_bits_per_second: 1,
-    #               stream_order: "ORIGINAL", # accepts ORIGINAL, VIDEO_BITRATE_ASCENDING, VIDEO_BITRATE_DESCENDING
-    #             },
-    #           },
-    #         ],
-    #         encryption: {
-    #           speke_key_provider: { # required
-    #             encryption_contract_configuration: {
-    #               preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1, PRESET-AUDIO-2, PRESET-AUDIO-3, SHARED, UNENCRYPTED
-    #               preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1, PRESET-VIDEO-2, PRESET-VIDEO-3, PRESET-VIDEO-4, PRESET-VIDEO-5, PRESET-VIDEO-6, PRESET-VIDEO-7, PRESET-VIDEO-8, SHARED, UNENCRYPTED
-    #             },
-    #             role_arn: "__string", # required
-    #             system_ids: ["__string"], # required
-    #             url: "__string", # required
-    #           },
-    #         },
-    #         include_encoder_configuration_in_segments: false,
-    #         include_iframe_only_stream: false,
-    #         period_triggers: ["ADS"], # accepts ADS
-    #         segment_duration_seconds: 1,
-    #         segment_template_format: "NUMBER_WITH_TIMELINE", # accepts NUMBER_WITH_TIMELINE, TIME_WITH_TIMELINE, NUMBER_WITH_DURATION
-    #       }
     #
     # @!attribute [rw] dash_manifests
     #   A list of DASH manifest configurations.
@@ -960,13 +665,6 @@ module Aws::MediaPackageVod
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAssetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   @return [String]
     #
@@ -982,13 +680,6 @@ module Aws::MediaPackageVod
     #
     class DeleteAssetResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeletePackagingConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   @return [String]
     #
@@ -1004,13 +695,6 @@ module Aws::MediaPackageVod
     #
     class DeletePackagingConfigurationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeletePackagingGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   @return [String]
     #
@@ -1026,13 +710,6 @@ module Aws::MediaPackageVod
     #
     class DeletePackagingGroupResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeAssetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   @return [String]
     #
@@ -1088,13 +765,6 @@ module Aws::MediaPackageVod
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribePackagingConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   @return [String]
     #
@@ -1151,13 +821,6 @@ module Aws::MediaPackageVod
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribePackagingGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   @return [String]
     #
@@ -1204,13 +867,6 @@ module Aws::MediaPackageVod
     end
 
     # Configure egress access logging.
-    #
-    # @note When making an API call, you may pass EgressAccessLogs
-    #   data as a hash:
-    #
-    #       {
-    #         log_group_name: "__string",
-    #       }
     #
     # @!attribute [rw] log_group_name
     #   Customize the log group name.
@@ -1263,14 +919,6 @@ module Aws::MediaPackageVod
     # must disable key rotation for this endpoint by setting
     # keyRotationIntervalSeconds to 0.
     #
-    # @note When making an API call, you may pass EncryptionContractConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1, PRESET-AUDIO-2, PRESET-AUDIO-3, SHARED, UNENCRYPTED
-    #         preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1, PRESET-VIDEO-2, PRESET-VIDEO-3, PRESET-VIDEO-4, PRESET-VIDEO-5, PRESET-VIDEO-6, PRESET-VIDEO-7, PRESET-VIDEO-8, SHARED, UNENCRYPTED
-    #       }
-    #
     # @!attribute [rw] preset_speke_20_audio
     #   A collection of audio encryption presets.
     #   @return [String]
@@ -1301,23 +949,6 @@ module Aws::MediaPackageVod
 
     # An HTTP Live Streaming (HLS) encryption configuration.
     #
-    # @note When making an API call, you may pass HlsEncryption
-    #   data as a hash:
-    #
-    #       {
-    #         constant_initialization_vector: "__string",
-    #         encryption_method: "AES_128", # accepts AES_128, SAMPLE_AES
-    #         speke_key_provider: { # required
-    #           encryption_contract_configuration: {
-    #             preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1, PRESET-AUDIO-2, PRESET-AUDIO-3, SHARED, UNENCRYPTED
-    #             preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1, PRESET-VIDEO-2, PRESET-VIDEO-3, PRESET-VIDEO-4, PRESET-VIDEO-5, PRESET-VIDEO-6, PRESET-VIDEO-7, PRESET-VIDEO-8, SHARED, UNENCRYPTED
-    #           },
-    #           role_arn: "__string", # required
-    #           system_ids: ["__string"], # required
-    #           url: "__string", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] constant_initialization_vector
     #   A constant initialization vector for encryption (optional). When not
     #   specified the initialization vector will be periodically rotated.
@@ -1344,22 +975,6 @@ module Aws::MediaPackageVod
     end
 
     # An HTTP Live Streaming (HLS) manifest configuration.
-    #
-    # @note When making an API call, you may pass HlsManifest
-    #   data as a hash:
-    #
-    #       {
-    #         ad_markers: "NONE", # accepts NONE, SCTE35_ENHANCED, PASSTHROUGH
-    #         include_iframe_only_stream: false,
-    #         manifest_name: "__string",
-    #         program_date_time_interval_seconds: 1,
-    #         repeat_ext_x_key: false,
-    #         stream_selection: {
-    #           max_video_bits_per_second: 1,
-    #           min_video_bits_per_second: 1,
-    #           stream_order: "ORIGINAL", # accepts ORIGINAL, VIDEO_BITRATE_ASCENDING, VIDEO_BITRATE_DESCENDING
-    #         },
-    #       }
     #
     # @!attribute [rw] ad_markers
     #   This setting controls how ad markers are included in the packaged
@@ -1415,42 +1030,6 @@ module Aws::MediaPackageVod
 
     # An HTTP Live Streaming (HLS) packaging configuration.
     #
-    # @note When making an API call, you may pass HlsPackage
-    #   data as a hash:
-    #
-    #       {
-    #         encryption: {
-    #           constant_initialization_vector: "__string",
-    #           encryption_method: "AES_128", # accepts AES_128, SAMPLE_AES
-    #           speke_key_provider: { # required
-    #             encryption_contract_configuration: {
-    #               preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1, PRESET-AUDIO-2, PRESET-AUDIO-3, SHARED, UNENCRYPTED
-    #               preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1, PRESET-VIDEO-2, PRESET-VIDEO-3, PRESET-VIDEO-4, PRESET-VIDEO-5, PRESET-VIDEO-6, PRESET-VIDEO-7, PRESET-VIDEO-8, SHARED, UNENCRYPTED
-    #             },
-    #             role_arn: "__string", # required
-    #             system_ids: ["__string"], # required
-    #             url: "__string", # required
-    #           },
-    #         },
-    #         hls_manifests: [ # required
-    #           {
-    #             ad_markers: "NONE", # accepts NONE, SCTE35_ENHANCED, PASSTHROUGH
-    #             include_iframe_only_stream: false,
-    #             manifest_name: "__string",
-    #             program_date_time_interval_seconds: 1,
-    #             repeat_ext_x_key: false,
-    #             stream_selection: {
-    #               max_video_bits_per_second: 1,
-    #               min_video_bits_per_second: 1,
-    #               stream_order: "ORIGINAL", # accepts ORIGINAL, VIDEO_BITRATE_ASCENDING, VIDEO_BITRATE_DESCENDING
-    #             },
-    #           },
-    #         ],
-    #         include_dvb_subtitles: false,
-    #         segment_duration_seconds: 1,
-    #         use_audio_rendition_group: false,
-    #       }
-    #
     # @!attribute [rw] encryption
     #   An HTTP Live Streaming (HLS) encryption configuration.
     #   @return [Types::HlsEncryption]
@@ -1497,15 +1076,6 @@ module Aws::MediaPackageVod
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAssetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #         packaging_group_id: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [Integer]
     #
@@ -1540,15 +1110,6 @@ module Aws::MediaPackageVod
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPackagingConfigurationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #         packaging_group_id: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [Integer]
     #
@@ -1583,14 +1144,6 @@ module Aws::MediaPackageVod
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPackagingGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [Integer]
     #
@@ -1621,13 +1174,6 @@ module Aws::MediaPackageVod
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   @return [String]
     #
@@ -1652,21 +1198,6 @@ module Aws::MediaPackageVod
 
     # A Microsoft Smooth Streaming (MSS) encryption configuration.
     #
-    # @note When making an API call, you may pass MssEncryption
-    #   data as a hash:
-    #
-    #       {
-    #         speke_key_provider: { # required
-    #           encryption_contract_configuration: {
-    #             preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1, PRESET-AUDIO-2, PRESET-AUDIO-3, SHARED, UNENCRYPTED
-    #             preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1, PRESET-VIDEO-2, PRESET-VIDEO-3, PRESET-VIDEO-4, PRESET-VIDEO-5, PRESET-VIDEO-6, PRESET-VIDEO-7, PRESET-VIDEO-8, SHARED, UNENCRYPTED
-    #           },
-    #           role_arn: "__string", # required
-    #           system_ids: ["__string"], # required
-    #           url: "__string", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] speke_key_provider
     #   A configuration for accessing an external Secure Packager and
     #   Encoder Key Exchange (SPEKE) service that will provide encryption
@@ -1682,18 +1213,6 @@ module Aws::MediaPackageVod
     end
 
     # A Microsoft Smooth Streaming (MSS) manifest configuration.
-    #
-    # @note When making an API call, you may pass MssManifest
-    #   data as a hash:
-    #
-    #       {
-    #         manifest_name: "__string",
-    #         stream_selection: {
-    #           max_video_bits_per_second: 1,
-    #           min_video_bits_per_second: 1,
-    #           stream_order: "ORIGINAL", # accepts ORIGINAL, VIDEO_BITRATE_ASCENDING, VIDEO_BITRATE_DESCENDING
-    #         },
-    #       }
     #
     # @!attribute [rw] manifest_name
     #   An optional string to include in the name of the manifest.
@@ -1713,34 +1232,6 @@ module Aws::MediaPackageVod
     end
 
     # A Microsoft Smooth Streaming (MSS) PackagingConfiguration.
-    #
-    # @note When making an API call, you may pass MssPackage
-    #   data as a hash:
-    #
-    #       {
-    #         encryption: {
-    #           speke_key_provider: { # required
-    #             encryption_contract_configuration: {
-    #               preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1, PRESET-AUDIO-2, PRESET-AUDIO-3, SHARED, UNENCRYPTED
-    #               preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1, PRESET-VIDEO-2, PRESET-VIDEO-3, PRESET-VIDEO-4, PRESET-VIDEO-5, PRESET-VIDEO-6, PRESET-VIDEO-7, PRESET-VIDEO-8, SHARED, UNENCRYPTED
-    #             },
-    #             role_arn: "__string", # required
-    #             system_ids: ["__string"], # required
-    #             url: "__string", # required
-    #           },
-    #         },
-    #         mss_manifests: [ # required
-    #           {
-    #             manifest_name: "__string",
-    #             stream_selection: {
-    #               max_video_bits_per_second: 1,
-    #               min_video_bits_per_second: 1,
-    #               stream_order: "ORIGINAL", # accepts ORIGINAL, VIDEO_BITRATE_ASCENDING, VIDEO_BITRATE_DESCENDING
-    #             },
-    #           },
-    #         ],
-    #         segment_duration_seconds: 1,
-    #       }
     #
     # @!attribute [rw] encryption
     #   A Microsoft Smooth Streaming (MSS) encryption configuration.
@@ -2008,19 +1499,6 @@ module Aws::MediaPackageVod
     # A configuration for accessing an external Secure Packager and Encoder
     # Key Exchange (SPEKE) service that will provide encryption keys.
     #
-    # @note When making an API call, you may pass SpekeKeyProvider
-    #   data as a hash:
-    #
-    #       {
-    #         encryption_contract_configuration: {
-    #           preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1, PRESET-AUDIO-2, PRESET-AUDIO-3, SHARED, UNENCRYPTED
-    #           preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1, PRESET-VIDEO-2, PRESET-VIDEO-3, PRESET-VIDEO-4, PRESET-VIDEO-5, PRESET-VIDEO-6, PRESET-VIDEO-7, PRESET-VIDEO-8, SHARED, UNENCRYPTED
-    #         },
-    #         role_arn: "__string", # required
-    #         system_ids: ["__string"], # required
-    #         url: "__string", # required
-    #       }
-    #
     # @!attribute [rw] encryption_contract_configuration
     #   Use encryptionContractConfiguration to configure one or more content
     #   encryption keys for your endpoints that use SPEKE 2.0. The
@@ -2060,15 +1538,6 @@ module Aws::MediaPackageVod
 
     # A StreamSelection configuration.
     #
-    # @note When making an API call, you may pass StreamSelection
-    #   data as a hash:
-    #
-    #       {
-    #         max_video_bits_per_second: 1,
-    #         min_video_bits_per_second: 1,
-    #         stream_order: "ORIGINAL", # accepts ORIGINAL, VIDEO_BITRATE_ASCENDING, VIDEO_BITRATE_DESCENDING
-    #       }
-    #
     # @!attribute [rw] max_video_bits_per_second
     #   The maximum video bitrate (bps) to include in output.
     #   @return [Integer]
@@ -2091,16 +1560,6 @@ module Aws::MediaPackageVod
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "__string", # required
-    #         tags: { # required
-    #           "__string" => "__string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   @return [String]
     #
@@ -2150,14 +1609,6 @@ module Aws::MediaPackageVod
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "__string", # required
-    #         tag_keys: ["__string"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   @return [String]
     #
@@ -2173,17 +1624,6 @@ module Aws::MediaPackageVod
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdatePackagingGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         authorization: {
-    #           cdn_identifier_secret: "__string", # required
-    #           secrets_role_arn: "__string", # required
-    #         },
-    #         id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] authorization
     #   CDN Authorization credentials
     #   @return [Types::Authorization]

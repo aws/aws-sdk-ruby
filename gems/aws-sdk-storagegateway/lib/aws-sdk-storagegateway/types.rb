@@ -26,25 +26,6 @@ module Aws::StorageGateway
     #
     # * ActivateGatewayInput$TapeDriveType
     #
-    # @note When making an API call, you may pass ActivateGatewayInput
-    #   data as a hash:
-    #
-    #       {
-    #         activation_key: "ActivationKey", # required
-    #         gateway_name: "GatewayName", # required
-    #         gateway_timezone: "GatewayTimezone", # required
-    #         gateway_region: "RegionId", # required
-    #         gateway_type: "GatewayType",
-    #         tape_drive_type: "TapeDriveType",
-    #         medium_changer_type: "MediumChangerType",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] activation_key
     #   Your gateway activation key. You can obtain the activation key by
     #   sending an HTTP GET request with redirects enabled to the gateway IP
@@ -170,14 +151,6 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AddCacheInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN", # required
-    #         disk_ids: ["DiskId"], # required
-    #       }
-    #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and Amazon
@@ -214,19 +187,6 @@ module Aws::StorageGateway
     end
 
     # AddTagsToResourceInput
-    #
-    # @note When making an API call, you may pass AddTagsToResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceARN", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource you want to add tags
@@ -269,14 +229,6 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AddUploadBufferInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN", # required
-    #         disk_ids: ["DiskId"], # required
-    #       }
-    #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and Amazon
@@ -318,14 +270,6 @@ module Aws::StorageGateway
     #
     # ^
     #
-    # @note When making an API call, you may pass AddWorkingStorageInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN", # required
-    #         disk_ids: ["DiskId"], # required
-    #       }
-    #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and Amazon
@@ -364,15 +308,6 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssignTapePoolInput
-    #   data as a hash:
-    #
-    #       {
-    #         tape_arn: "TapeARN", # required
-    #         pool_id: "PoolId", # required
-    #         bypass_governance_retention: false,
-    #       }
-    #
     # @!attribute [rw] tape_arn
     #   The unique Amazon Resource Name (ARN) of the virtual tape that you
     #   want to add to the tape pool.
@@ -421,30 +356,6 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateFileSystemInput
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "DomainUserName", # required
-    #         password: "DomainUserPassword", # required
-    #         client_token: "ClientToken", # required
-    #         gateway_arn: "GatewayARN", # required
-    #         location_arn: "FileSystemLocationARN", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         audit_destination_arn: "AuditDestinationARN",
-    #         cache_attributes: {
-    #           cache_stale_timeout_in_seconds: 1,
-    #         },
-    #         endpoint_network_configuration: {
-    #           ip_addresses: ["IPV4Address"],
-    #         },
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The user name of the user credential that has permission to access
     #   the root share D$ of the Amazon FSx file system. The user account
@@ -525,17 +436,6 @@ module Aws::StorageGateway
     end
 
     # AttachVolumeInput
-    #
-    # @note When making an API call, you may pass AttachVolumeInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN", # required
-    #         target_name: "TargetName",
-    #         volume_arn: "VolumeARN", # required
-    #         network_interface_id: "NetworkInterfaceId", # required
-    #         disk_id: "DiskId",
-    #       }
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway that you want to
@@ -641,17 +541,6 @@ module Aws::StorageGateway
     #
     # [1]: https://docs.aws.amazon.com/storagegateway/latest/userguide/GettingStartedCreateTapes.html#CreateTapesAutomatically
     #
-    # @note When making an API call, you may pass AutomaticTapeCreationRule
-    #   data as a hash:
-    #
-    #       {
-    #         tape_barcode_prefix: "TapeBarcodePrefix", # required
-    #         pool_id: "PoolId", # required
-    #         tape_size_in_bytes: 1, # required
-    #         minimum_num_tapes: 1, # required
-    #         worm: false,
-    #       }
-    #
     # @!attribute [rw] tape_barcode_prefix
     #   A prefix that you append to the barcode of the virtual tape that you
     #   are creating. This prefix makes the barcode unique.
@@ -712,19 +601,6 @@ module Aws::StorageGateway
     # one or more days of the week, during which bandwidth rate limits are
     # specified for uploading, downloading, or both.
     #
-    # @note When making an API call, you may pass BandwidthRateLimitInterval
-    #   data as a hash:
-    #
-    #       {
-    #         start_hour_of_day: 1, # required
-    #         start_minute_of_hour: 1, # required
-    #         end_hour_of_day: 1, # required
-    #         end_minute_of_hour: 1, # required
-    #         days_of_week: [1], # required
-    #         average_upload_rate_limit_in_bits_per_sec: 1,
-    #         average_download_rate_limit_in_bits_per_sec: 1,
-    #       }
-    #
     # @!attribute [rw] start_hour_of_day
     #   The hour of the day to start the bandwidth rate limit interval.
     #   @return [Integer]
@@ -779,13 +655,6 @@ module Aws::StorageGateway
     end
 
     # The refresh cache information for the file share or FSx file systems.
-    #
-    # @note When making an API call, you may pass CacheAttributes
-    #   data as a hash:
-    #
-    #       {
-    #         cache_stale_timeout_in_seconds: 1,
-    #       }
     #
     # @!attribute [rw] cache_stale_timeout_in_seconds
     #   Refreshes a file share's cache by using Time To Live (TTL). TTL is
@@ -924,14 +793,6 @@ module Aws::StorageGateway
 
     # CancelArchivalInput
     #
-    # @note When making an API call, you may pass CancelArchivalInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN", # required
-    #         tape_arn: "TapeARN", # required
-    #       }
-    #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and Amazon
@@ -968,14 +829,6 @@ module Aws::StorageGateway
     end
 
     # CancelRetrievalInput
-    #
-    # @note When making an API call, you may pass CancelRetrievalInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN", # required
-    #         tape_arn: "TapeARN", # required
-    #       }
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -1048,27 +901,6 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateCachediSCSIVolumeInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN", # required
-    #         volume_size_in_bytes: 1, # required
-    #         snapshot_id: "SnapshotId",
-    #         target_name: "TargetName", # required
-    #         source_volume_arn: "VolumeARN",
-    #         network_interface_id: "NetworkInterfaceId", # required
-    #         client_token: "ClientToken", # required
-    #         kms_encrypted: false,
-    #         kms_key: "KMSKey",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and Amazon
@@ -1189,45 +1021,6 @@ module Aws::StorageGateway
     end
 
     # CreateNFSFileShareInput
-    #
-    # @note When making an API call, you may pass CreateNFSFileShareInput
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken", # required
-    #         nfs_file_share_defaults: {
-    #           file_mode: "PermissionMode",
-    #           directory_mode: "PermissionMode",
-    #           group_id: 1,
-    #           owner_id: 1,
-    #         },
-    #         gateway_arn: "GatewayARN", # required
-    #         kms_encrypted: false,
-    #         kms_key: "KMSKey",
-    #         role: "Role", # required
-    #         location_arn: "LocationARN", # required
-    #         default_storage_class: "StorageClass",
-    #         object_acl: "private", # accepts private, public-read, public-read-write, authenticated-read, bucket-owner-read, bucket-owner-full-control, aws-exec-read
-    #         client_list: ["IPV4AddressCIDR"],
-    #         squash: "Squash",
-    #         read_only: false,
-    #         guess_mime_type_enabled: false,
-    #         requester_pays: false,
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         file_share_name: "FileShareName",
-    #         cache_attributes: {
-    #           cache_stale_timeout_in_seconds: 1,
-    #         },
-    #         notification_policy: "NotificationPolicy",
-    #         vpc_endpoint_dns_name: "DNSHostName",
-    #         bucket_region: "RegionId",
-    #         audit_destination_arn: "AuditDestinationARN",
-    #       }
     #
     # @!attribute [rw] client_token
     #   A unique string value that you supply that is used by S3 File
@@ -1478,45 +1271,6 @@ module Aws::StorageGateway
     end
 
     # CreateSMBFileShareInput
-    #
-    # @note When making an API call, you may pass CreateSMBFileShareInput
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken", # required
-    #         gateway_arn: "GatewayARN", # required
-    #         kms_encrypted: false,
-    #         kms_key: "KMSKey",
-    #         role: "Role", # required
-    #         location_arn: "LocationARN", # required
-    #         default_storage_class: "StorageClass",
-    #         object_acl: "private", # accepts private, public-read, public-read-write, authenticated-read, bucket-owner-read, bucket-owner-full-control, aws-exec-read
-    #         read_only: false,
-    #         guess_mime_type_enabled: false,
-    #         requester_pays: false,
-    #         smbacl_enabled: false,
-    #         access_based_enumeration: false,
-    #         admin_user_list: ["UserListUser"],
-    #         valid_user_list: ["UserListUser"],
-    #         invalid_user_list: ["UserListUser"],
-    #         audit_destination_arn: "AuditDestinationARN",
-    #         authentication: "Authentication",
-    #         case_sensitivity: "ClientSpecified", # accepts ClientSpecified, CaseSensitive
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         file_share_name: "FileShareName",
-    #         cache_attributes: {
-    #           cache_stale_timeout_in_seconds: 1,
-    #         },
-    #         notification_policy: "NotificationPolicy",
-    #         vpc_endpoint_dns_name: "DNSHostName",
-    #         bucket_region: "RegionId",
-    #         oplocks_enabled: false,
-    #       }
     #
     # @!attribute [rw] client_token
     #   A unique string value that you supply that is used by S3 File
@@ -1823,20 +1577,6 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateSnapshotFromVolumeRecoveryPointInput
-    #   data as a hash:
-    #
-    #       {
-    #         volume_arn: "VolumeARN", # required
-    #         snapshot_description: "SnapshotDescription", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] volume_arn
     #   The Amazon Resource Name (ARN) of the iSCSI volume target. Use the
     #   DescribeStorediSCSIVolumes operation to return to retrieve the
@@ -1901,20 +1641,6 @@ module Aws::StorageGateway
     # * CreateSnapshotInput$SnapshotDescription
     #
     # * CreateSnapshotInput$VolumeARN
-    #
-    # @note When making an API call, you may pass CreateSnapshotInput
-    #   data as a hash:
-    #
-    #       {
-    #         volume_arn: "VolumeARN", # required
-    #         snapshot_description: "SnapshotDescription", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] volume_arn
     #   The Amazon Resource Name (ARN) of the volume. Use the ListVolumes
@@ -1984,26 +1710,6 @@ module Aws::StorageGateway
     # * CreateStorediSCSIVolumeInput$SnapshotId
     #
     # * CreateStorediSCSIVolumeInput$TargetName
-    #
-    # @note When making an API call, you may pass CreateStorediSCSIVolumeInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN", # required
-    #         disk_id: "DiskId", # required
-    #         snapshot_id: "SnapshotId",
-    #         preserve_existing_data: false, # required
-    #         target_name: "TargetName", # required
-    #         network_interface_id: "NetworkInterfaceId", # required
-    #         kms_encrypted: false,
-    #         kms_key: "KMSKey",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -2128,22 +1834,6 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateTapePoolInput
-    #   data as a hash:
-    #
-    #       {
-    #         pool_name: "PoolName", # required
-    #         storage_class: "DEEP_ARCHIVE", # required, accepts DEEP_ARCHIVE, GLACIER
-    #         retention_lock_type: "COMPLIANCE", # accepts COMPLIANCE, GOVERNANCE, NONE
-    #         retention_lock_time_in_days: 1,
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] pool_name
     #   The name of the new custom tape pool.
     #   @return [String]
@@ -2208,25 +1898,6 @@ module Aws::StorageGateway
     end
 
     # CreateTapeWithBarcodeInput
-    #
-    # @note When making an API call, you may pass CreateTapeWithBarcodeInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN", # required
-    #         tape_size_in_bytes: 1, # required
-    #         tape_barcode: "TapeBarcode", # required
-    #         kms_encrypted: false,
-    #         kms_key: "KMSKey",
-    #         pool_id: "PoolId",
-    #         worm: false,
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] gateway_arn
     #   The unique Amazon Resource Name (ARN) that represents the gateway to
@@ -2322,27 +1993,6 @@ module Aws::StorageGateway
     end
 
     # CreateTapesInput
-    #
-    # @note When making an API call, you may pass CreateTapesInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN", # required
-    #         tape_size_in_bytes: 1, # required
-    #         client_token: "ClientToken", # required
-    #         num_tapes_to_create: 1, # required
-    #         tape_barcode_prefix: "TapeBarcodePrefix", # required
-    #         kms_encrypted: false,
-    #         kms_key: "KMSKey",
-    #         pool_id: "PoolId",
-    #         worm: false,
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] gateway_arn
     #   The unique Amazon Resource Name (ARN) that represents the gateway to
@@ -2456,13 +2106,6 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAutomaticTapeCreationPolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN", # required
-    #       }
-    #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and Amazon
@@ -2496,14 +2139,6 @@ module Aws::StorageGateway
     # * DeleteBandwidthRateLimitInput$BandwidthType
     #
     # ^
-    #
-    # @note When making an API call, you may pass DeleteBandwidthRateLimitInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN", # required
-    #         bandwidth_type: "BandwidthType", # required
-    #       }
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -2550,14 +2185,6 @@ module Aws::StorageGateway
     #
     # * DeleteChapCredentialsInput$TargetARN
     #
-    # @note When making an API call, you may pass DeleteChapCredentialsInput
-    #   data as a hash:
-    #
-    #       {
-    #         target_arn: "TargetARN", # required
-    #         initiator_name: "IqnName", # required
-    #       }
-    #
     # @!attribute [rw] target_arn
     #   The Amazon Resource Name (ARN) of the iSCSI volume target. Use the
     #   DescribeStorediSCSIVolumes operation to return to retrieve the
@@ -2598,14 +2225,6 @@ module Aws::StorageGateway
 
     # DeleteFileShareInput
     #
-    # @note When making an API call, you may pass DeleteFileShareInput
-    #   data as a hash:
-    #
-    #       {
-    #         file_share_arn: "FileShareARN", # required
-    #         force_delete: false,
-    #       }
-    #
     # @!attribute [rw] file_share_arn
     #   The Amazon Resource Name (ARN) of the file share to be deleted.
     #   @return [String]
@@ -2645,13 +2264,6 @@ module Aws::StorageGateway
 
     # A JSON object containing the ID of the gateway to delete.
     #
-    # @note When making an API call, you may pass DeleteGatewayInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN", # required
-    #       }
-    #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and Amazon
@@ -2682,13 +2294,6 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteSnapshotScheduleInput
-    #   data as a hash:
-    #
-    #       {
-    #         volume_arn: "VolumeARN", # required
-    #       }
-    #
     # @!attribute [rw] volume_arn
     #   The volume which snapshot schedule to delete.
     #   @return [String]
@@ -2714,14 +2319,6 @@ module Aws::StorageGateway
     end
 
     # DeleteTapeArchiveInput
-    #
-    # @note When making an API call, you may pass DeleteTapeArchiveInput
-    #   data as a hash:
-    #
-    #       {
-    #         tape_arn: "TapeARN", # required
-    #         bypass_governance_retention: false,
-    #       }
     #
     # @!attribute [rw] tape_arn
     #   The Amazon Resource Name (ARN) of the virtual tape to delete from
@@ -2760,15 +2357,6 @@ module Aws::StorageGateway
     end
 
     # DeleteTapeInput
-    #
-    # @note When making an API call, you may pass DeleteTapeInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN", # required
-    #         tape_arn: "TapeARN", # required
-    #         bypass_governance_retention: false,
-    #       }
     #
     # @!attribute [rw] gateway_arn
     #   The unique Amazon Resource Name (ARN) of the gateway that the
@@ -2812,13 +2400,6 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteTapePoolInput
-    #   data as a hash:
-    #
-    #       {
-    #         pool_arn: "PoolARN", # required
-    #       }
-    #
     # @!attribute [rw] pool_arn
     #   The Amazon Resource Name (ARN) of the custom tape pool to delete.
     #   @return [String]
@@ -2845,13 +2426,6 @@ module Aws::StorageGateway
     end
 
     # A JSON object containing the DeleteVolumeInput$VolumeARN to delete.
-    #
-    # @note When making an API call, you may pass DeleteVolumeInput
-    #   data as a hash:
-    #
-    #       {
-    #         volume_arn: "VolumeARN", # required
-    #       }
     #
     # @!attribute [rw] volume_arn
     #   The Amazon Resource Name (ARN) of the volume. Use the ListVolumes
@@ -2882,13 +2456,6 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAvailabilityMonitorTestInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN", # required
-    #       }
-    #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and Amazon
@@ -2931,13 +2498,6 @@ module Aws::StorageGateway
 
     # A JSON object containing the Amazon Resource Name (ARN) of the
     # gateway.
-    #
-    # @note When making an API call, you may pass DescribeBandwidthRateLimitInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN", # required
-    #       }
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -2983,13 +2543,6 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeBandwidthRateLimitScheduleInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN", # required
-    #       }
-    #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and Amazon
@@ -3024,13 +2577,6 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeCacheInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN", # required
-    #       }
-    #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and Amazon
@@ -3099,13 +2645,6 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeCachediSCSIVolumesInput
-    #   data as a hash:
-    #
-    #       {
-    #         volume_arns: ["VolumeARN"], # required
-    #       }
-    #
     # @!attribute [rw] volume_arns
     #   An array of strings where each string represents the Amazon Resource
     #   Name (ARN) of a cached volume. All of the specified cached volumes
@@ -3138,13 +2677,6 @@ module Aws::StorageGateway
 
     # A JSON object containing the Amazon Resource Name (ARN) of the iSCSI
     # volume target.
-    #
-    # @note When making an API call, you may pass DescribeChapCredentialsInput
-    #   data as a hash:
-    #
-    #       {
-    #         target_arn: "TargetARN", # required
-    #       }
     #
     # @!attribute [rw] target_arn
     #   The Amazon Resource Name (ARN) of the iSCSI volume target. Use the
@@ -3192,13 +2724,6 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeFileSystemAssociationsInput
-    #   data as a hash:
-    #
-    #       {
-    #         file_system_association_arn_list: ["FileSystemAssociationARN"], # required
-    #       }
-    #
     # @!attribute [rw] file_system_association_arn_list
     #   An array containing the Amazon Resource Name (ARN) of each file
     #   system association to be described.
@@ -3226,13 +2751,6 @@ module Aws::StorageGateway
     end
 
     # A JSON object containing the ID of the gateway.
-    #
-    # @note When making an API call, you may pass DescribeGatewayInformationInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN", # required
-    #       }
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -3393,13 +2911,6 @@ module Aws::StorageGateway
     # A JSON object containing the Amazon Resource Name (ARN) of the
     # gateway.
     #
-    # @note When making an API call, you may pass DescribeMaintenanceStartTimeInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN", # required
-    #       }
-    #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and Amazon
@@ -3478,13 +2989,6 @@ module Aws::StorageGateway
 
     # DescribeNFSFileSharesInput
     #
-    # @note When making an API call, you may pass DescribeNFSFileSharesInput
-    #   data as a hash:
-    #
-    #       {
-    #         file_share_arn_list: ["FileShareARN"], # required
-    #       }
-    #
     # @!attribute [rw] file_share_arn_list
     #   An array containing the Amazon Resource Name (ARN) of each file
     #   share to be described.
@@ -3514,13 +3018,6 @@ module Aws::StorageGateway
 
     # DescribeSMBFileSharesInput
     #
-    # @note When making an API call, you may pass DescribeSMBFileSharesInput
-    #   data as a hash:
-    #
-    #       {
-    #         file_share_arn_list: ["FileShareARN"], # required
-    #       }
-    #
     # @!attribute [rw] file_share_arn_list
     #   An array containing the Amazon Resource Name (ARN) of each file
     #   share to be described.
@@ -3548,13 +3045,6 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeSMBSettingsInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN", # required
-    #       }
-    #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and Amazon
@@ -3659,13 +3149,6 @@ module Aws::StorageGateway
     # A JSON object containing the DescribeSnapshotScheduleInput$VolumeARN
     # of the volume.
     #
-    # @note When making an API call, you may pass DescribeSnapshotScheduleInput
-    #   data as a hash:
-    #
-    #       {
-    #         volume_arn: "VolumeARN", # required
-    #       }
-    #
     # @!attribute [rw] volume_arn
     #   The Amazon Resource Name (ARN) of the volume. Use the ListVolumes
     #   operation to return a list of gateway volumes.
@@ -3724,13 +3207,6 @@ module Aws::StorageGateway
 
     # A JSON object containing a list of
     # DescribeStorediSCSIVolumesInput$VolumeARNs.
-    #
-    # @note When making an API call, you may pass DescribeStorediSCSIVolumesInput
-    #   data as a hash:
-    #
-    #       {
-    #         volume_arns: ["VolumeARN"], # required
-    #       }
     #
     # @!attribute [rw] volume_arns
     #   An array of strings where each string represents the Amazon Resource
@@ -3810,15 +3286,6 @@ module Aws::StorageGateway
 
     # DescribeTapeArchivesInput
     #
-    # @note When making an API call, you may pass DescribeTapeArchivesInput
-    #   data as a hash:
-    #
-    #       {
-    #         tape_arns: ["TapeARN"],
-    #         marker: "Marker",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] tape_arns
     #   Specifies one or more unique Amazon Resource Names (ARNs) that
     #   represent the virtual tapes you want to describe.
@@ -3872,15 +3339,6 @@ module Aws::StorageGateway
     end
 
     # DescribeTapeRecoveryPointsInput
-    #
-    # @note When making an API call, you may pass DescribeTapeRecoveryPointsInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN", # required
-    #         marker: "Marker",
-    #         limit: 1,
-    #       }
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -3941,16 +3399,6 @@ module Aws::StorageGateway
     end
 
     # DescribeTapesInput
-    #
-    # @note When making an API call, you may pass DescribeTapesInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN", # required
-    #         tape_arns: ["TapeARN"],
-    #         marker: "Marker",
-    #         limit: 1,
-    #       }
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -4016,13 +3464,6 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeUploadBufferInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN", # required
-    #       }
-    #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and Amazon
@@ -4072,16 +3513,6 @@ module Aws::StorageGateway
     end
 
     # DescribeVTLDevicesInput
-    #
-    # @note When making an API call, you may pass DescribeVTLDevicesInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN", # required
-    #         vtl_device_arns: ["VTLDeviceARN"],
-    #         marker: "Marker",
-    #         limit: 1,
-    #       }
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -4155,13 +3586,6 @@ module Aws::StorageGateway
     # A JSON object containing the Amazon Resource Name (ARN) of the
     # gateway.
     #
-    # @note When making an API call, you may pass DescribeWorkingStorageInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN", # required
-    #       }
-    #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and Amazon
@@ -4213,14 +3637,6 @@ module Aws::StorageGateway
     end
 
     # AttachVolumeInput
-    #
-    # @note When making an API call, you may pass DetachVolumeInput
-    #   data as a hash:
-    #
-    #       {
-    #         volume_arn: "VolumeARN", # required
-    #         force_detach: false,
-    #       }
     #
     # @!attribute [rw] volume_arn
     #   The Amazon Resource Name (ARN) of the volume to detach from the
@@ -4291,13 +3707,6 @@ module Aws::StorageGateway
 
     # DisableGatewayInput
     #
-    # @note When making an API call, you may pass DisableGatewayInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN", # required
-    #       }
-    #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and Amazon
@@ -4326,14 +3735,6 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateFileSystemInput
-    #   data as a hash:
-    #
-    #       {
-    #         file_system_association_arn: "FileSystemAssociationARN", # required
-    #         force_delete: false,
-    #       }
-    #
     # @!attribute [rw] file_system_association_arn
     #   The Amazon Resource Name (ARN) of the file system association to be
     #   deleted.
@@ -4428,13 +3829,6 @@ module Aws::StorageGateway
 
     # Specifies network configuration information for the gateway associated
     # with the Amazon FSx file system.
-    #
-    # @note When making an API call, you may pass EndpointNetworkConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         ip_addresses: ["IPV4Address"],
-    #       }
     #
     # @!attribute [rw] ip_addresses
     #   A list of gateway IP addresses on which the associated Amazon FSx
@@ -4725,19 +4119,6 @@ module Aws::StorageGateway
 
     # JoinDomainInput
     #
-    # @note When making an API call, you may pass JoinDomainInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN", # required
-    #         domain_name: "DomainName", # required
-    #         organizational_unit: "OrganizationalUnit",
-    #         domain_controllers: ["Host"],
-    #         timeout_in_seconds: 1,
-    #         user_name: "DomainUserName", # required
-    #         password: "DomainUserPassword", # required
-    #       }
-    #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the
     #   `ListGateways` operation to return a list of gateways for your
@@ -4834,13 +4215,6 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAutomaticTapeCreationPoliciesInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN",
-    #       }
-    #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and Amazon
@@ -4870,15 +4244,6 @@ module Aws::StorageGateway
     end
 
     # ListFileShareInput
-    #
-    # @note When making an API call, you may pass ListFileSharesInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN",
-    #         limit: 1,
-    #         marker: "Marker",
-    #       }
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway whose file shares you
@@ -4934,15 +4299,6 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFileSystemAssociationsInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN",
-    #         limit: 1,
-    #         marker: "Marker",
-    #       }
-    #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and Amazon
@@ -5004,14 +4360,6 @@ module Aws::StorageGateway
     #
     # * ListGatewaysInput$Marker
     #
-    # @note When making an API call, you may pass ListGatewaysInput
-    #   data as a hash:
-    #
-    #       {
-    #         marker: "Marker",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] marker
     #   An opaque string that indicates the position at which to begin the
     #   returned list of gateways.
@@ -5053,13 +4401,6 @@ module Aws::StorageGateway
     # A JSON object containing the Amazon Resource Name (ARN) of the
     # gateway.
     #
-    # @note When making an API call, you may pass ListLocalDisksInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN", # required
-    #       }
-    #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and Amazon
@@ -5098,15 +4439,6 @@ module Aws::StorageGateway
     end
 
     # ListTagsForResourceInput
-    #
-    # @note When making an API call, you may pass ListTagsForResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceARN", # required
-    #         marker: "Marker",
-    #         limit: 1,
-    #       }
     #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource for which you want to
@@ -5159,15 +4491,6 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTapePoolsInput
-    #   data as a hash:
-    #
-    #       {
-    #         pool_arns: ["PoolARN"],
-    #         marker: "Marker",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] pool_arns
     #   The Amazon Resource Name (ARN) of each of the custom tape pools you
     #   want to list. If you don't specify a custom tape pool ARN, the
@@ -5223,15 +4546,6 @@ module Aws::StorageGateway
     # * ListTapesInput$Marker
     #
     # * ListTapesInput$TapeARNs
-    #
-    # @note When making an API call, you may pass ListTapesInput
-    #   data as a hash:
-    #
-    #       {
-    #         tape_arns: ["TapeARN"],
-    #         marker: "Marker",
-    #         limit: 1,
-    #       }
     #
     # @!attribute [rw] tape_arns
     #   The Amazon Resource Name (ARN) of each of the tapes you want to
@@ -5289,13 +4603,6 @@ module Aws::StorageGateway
 
     # ListVolumeInitiatorsInput
     #
-    # @note When making an API call, you may pass ListVolumeInitiatorsInput
-    #   data as a hash:
-    #
-    #       {
-    #         volume_arn: "VolumeARN", # required
-    #       }
-    #
     # @!attribute [rw] volume_arn
     #   The Amazon Resource Name (ARN) of the volume. Use the ListVolumes
     #   operation to return a list of gateway volumes for the gateway.
@@ -5324,13 +4631,6 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListVolumeRecoveryPointsInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN", # required
-    #       }
-    #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and Amazon
@@ -5369,15 +4669,6 @@ module Aws::StorageGateway
     # * ListVolumesInput$Limit
     #
     # * ListVolumesInput$Marker
-    #
-    # @note When making an API call, you may pass ListVolumesInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN",
-    #         marker: "Marker",
-    #         limit: 1,
-    #       }
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -5446,16 +4737,6 @@ module Aws::StorageGateway
     # in an S3 bucket by Storage Gateway, the S3 objects that represent
     # files and folders are assigned these default Unix permissions. This
     # operation is only supported for S3 File Gateways.
-    #
-    # @note When making an API call, you may pass NFSFileShareDefaults
-    #   data as a hash:
-    #
-    #       {
-    #         file_mode: "PermissionMode",
-    #         directory_mode: "PermissionMode",
-    #         group_id: 1,
-    #         owner_id: 1,
-    #       }
     #
     # @!attribute [rw] file_mode
     #   The Unix file mode in the form "nnnn". For example, `0666`
@@ -5773,13 +5054,6 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass NotifyWhenUploadedInput
-    #   data as a hash:
-    #
-    #       {
-    #         file_share_arn: "FileShareARN", # required
-    #       }
-    #
     # @!attribute [rw] file_share_arn
     #   The Amazon Resource Name (ARN) of the file share.
     #   @return [String]
@@ -5863,15 +5137,6 @@ module Aws::StorageGateway
 
     # RefreshCacheInput
     #
-    # @note When making an API call, you may pass RefreshCacheInput
-    #   data as a hash:
-    #
-    #       {
-    #         file_share_arn: "FileShareARN", # required
-    #         folder_list: ["Folder"],
-    #         recursive: false,
-    #       }
-    #
     # @!attribute [rw] file_share_arn
     #   The Amazon Resource Name (ARN) of the file share you want to
     #   refresh.
@@ -5930,14 +5195,6 @@ module Aws::StorageGateway
 
     # RemoveTagsFromResourceInput
     #
-    # @note When making an API call, you may pass RemoveTagsFromResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceARN", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource you want to remove
     #   the tags from.
@@ -5972,13 +5229,6 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ResetCacheInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN", # required
-    #       }
-    #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and Amazon
@@ -6008,14 +5258,6 @@ module Aws::StorageGateway
     end
 
     # RetrieveTapeArchiveInput
-    #
-    # @note When making an API call, you may pass RetrieveTapeArchiveInput
-    #   data as a hash:
-    #
-    #       {
-    #         tape_arn: "TapeARN", # required
-    #         gateway_arn: "GatewayARN", # required
-    #       }
     #
     # @!attribute [rw] tape_arn
     #   The Amazon Resource Name (ARN) of the virtual tape you want to
@@ -6055,14 +5297,6 @@ module Aws::StorageGateway
     end
 
     # RetrieveTapeRecoveryPointInput
-    #
-    # @note When making an API call, you may pass RetrieveTapeRecoveryPointInput
-    #   data as a hash:
-    #
-    #       {
-    #         tape_arn: "TapeARN", # required
-    #         gateway_arn: "GatewayARN", # required
-    #       }
     #
     # @!attribute [rw] tape_arn
     #   The Amazon Resource Name (ARN) of the virtual tape for which you
@@ -6405,13 +5639,6 @@ module Aws::StorageGateway
     # A list of Active Directory users and groups that have special
     # permissions for SMB file shares on the gateway.
     #
-    # @note When making an API call, you may pass SMBLocalGroups
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_admins: ["UserListUser"],
-    #       }
-    #
     # @!attribute [rw] gateway_admins
     #   A list of Active Directory users and groups that have local Gateway
     #   Admin permissions. Acceptable formats include: `DOMAIN\User1`,
@@ -6452,14 +5679,6 @@ module Aws::StorageGateway
 
     # SetLocalConsolePasswordInput
     #
-    # @note When making an API call, you may pass SetLocalConsolePasswordInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN", # required
-    #         local_console_password: "LocalConsolePassword", # required
-    #       }
-    #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and Amazon
@@ -6494,14 +5713,6 @@ module Aws::StorageGateway
     end
 
     # SetSMBGuestPasswordInput
-    #
-    # @note When making an API call, you may pass SetSMBGuestPasswordInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN", # required
-    #         password: "SMBGuestPassword", # required
-    #       }
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the S3 File Gateway the SMB file
@@ -6538,13 +5749,6 @@ module Aws::StorageGateway
     # A JSON object containing the Amazon Resource Name (ARN) of the gateway
     # to shut down.
     #
-    # @note When making an API call, you may pass ShutdownGatewayInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN", # required
-    #       }
-    #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and Amazon
@@ -6576,13 +5780,6 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartAvailabilityMonitorTestInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN", # required
-    #       }
-    #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and Amazon
@@ -6613,13 +5810,6 @@ module Aws::StorageGateway
 
     # A JSON object containing the Amazon Resource Name (ARN) of the gateway
     # to start.
-    #
-    # @note When making an API call, you may pass StartGatewayInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN", # required
-    #       }
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -6802,14 +5992,6 @@ module Aws::StorageGateway
     # A key-value pair that helps you manage, filter, and search for your
     # resource. Allowed characters: letters, white space, and numbers,
     # representable in UTF-8, and the following characters: + - = . \_ : /.
-    #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
     #
     # @!attribute [rw] key
     #   Tag key. The key can't start with aws:.
@@ -7105,22 +6287,6 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateAutomaticTapeCreationPolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         automatic_tape_creation_rules: [ # required
-    #           {
-    #             tape_barcode_prefix: "TapeBarcodePrefix", # required
-    #             pool_id: "PoolId", # required
-    #             tape_size_in_bytes: 1, # required
-    #             minimum_num_tapes: 1, # required
-    #             worm: false,
-    #           },
-    #         ],
-    #         gateway_arn: "GatewayARN", # required
-    #       }
-    #
     # @!attribute [rw] automatic_tape_creation_rules
     #   An automatic tape creation policy consists of a list of automatic
     #   tape creation rules. The rules determine when and how to
@@ -7161,15 +6327,6 @@ module Aws::StorageGateway
     # * UpdateBandwidthRateLimitInput$AverageDownloadRateLimitInBitsPerSec
     #
     # * UpdateBandwidthRateLimitInput$AverageUploadRateLimitInBitsPerSec
-    #
-    # @note When making an API call, you may pass UpdateBandwidthRateLimitInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN", # required
-    #         average_upload_rate_limit_in_bits_per_sec: 1,
-    #         average_download_rate_limit_in_bits_per_sec: 1,
-    #       }
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -7212,24 +6369,6 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateBandwidthRateLimitScheduleInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN", # required
-    #         bandwidth_rate_limit_intervals: [ # required
-    #           {
-    #             start_hour_of_day: 1, # required
-    #             start_minute_of_hour: 1, # required
-    #             end_hour_of_day: 1, # required
-    #             end_minute_of_hour: 1, # required
-    #             days_of_week: [1], # required
-    #             average_upload_rate_limit_in_bits_per_sec: 1,
-    #             average_download_rate_limit_in_bits_per_sec: 1,
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and Amazon
@@ -7274,16 +6413,6 @@ module Aws::StorageGateway
     # * UpdateChapCredentialsInput$SecretToAuthenticateTarget
     #
     # * UpdateChapCredentialsInput$TargetARN
-    #
-    # @note When making an API call, you may pass UpdateChapCredentialsInput
-    #   data as a hash:
-    #
-    #       {
-    #         target_arn: "TargetARN", # required
-    #         secret_to_authenticate_initiator: "ChapSecret", # required
-    #         initiator_name: "IqnName", # required
-    #         secret_to_authenticate_target: "ChapSecret",
-    #       }
     #
     # @!attribute [rw] target_arn
     #   The Amazon Resource Name (ARN) of the iSCSI volume target. Use the
@@ -7349,19 +6478,6 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateFileSystemAssociationInput
-    #   data as a hash:
-    #
-    #       {
-    #         file_system_association_arn: "FileSystemAssociationARN", # required
-    #         user_name: "DomainUserName",
-    #         password: "DomainUserPassword",
-    #         audit_destination_arn: "AuditDestinationARN",
-    #         cache_attributes: {
-    #           cache_stale_timeout_in_seconds: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] file_system_association_arn
     #   The Amazon Resource Name (ARN) of the file system association that
     #   you want to update.
@@ -7411,17 +6527,6 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateGatewayInformationInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN", # required
-    #         gateway_name: "GatewayName",
-    #         gateway_timezone: "GatewayTimezone",
-    #         cloud_watch_log_group_arn: "CloudWatchLogGroupARN",
-    #         gateway_capacity: "Small", # accepts Small, Medium, Large
-    #       }
-    #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and Amazon
@@ -7488,13 +6593,6 @@ module Aws::StorageGateway
     # A JSON object containing the Amazon Resource Name (ARN) of the gateway
     # to update.
     #
-    # @note When making an API call, you may pass UpdateGatewaySoftwareNowInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN", # required
-    #       }
-    #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and Amazon
@@ -7535,17 +6633,6 @@ module Aws::StorageGateway
     # * UpdateMaintenanceStartTimeInput$HourOfDay
     #
     # * UpdateMaintenanceStartTimeInput$MinuteOfHour
-    #
-    # @note When making an API call, you may pass UpdateMaintenanceStartTimeInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN", # required
-    #         hour_of_day: 1, # required
-    #         minute_of_hour: 1, # required
-    #         day_of_week: 1,
-    #         day_of_month: 1,
-    #       }
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -7608,34 +6695,6 @@ module Aws::StorageGateway
     end
 
     # UpdateNFSFileShareInput
-    #
-    # @note When making an API call, you may pass UpdateNFSFileShareInput
-    #   data as a hash:
-    #
-    #       {
-    #         file_share_arn: "FileShareARN", # required
-    #         kms_encrypted: false,
-    #         kms_key: "KMSKey",
-    #         nfs_file_share_defaults: {
-    #           file_mode: "PermissionMode",
-    #           directory_mode: "PermissionMode",
-    #           group_id: 1,
-    #           owner_id: 1,
-    #         },
-    #         default_storage_class: "StorageClass",
-    #         object_acl: "private", # accepts private, public-read, public-read-write, authenticated-read, bucket-owner-read, bucket-owner-full-control, aws-exec-read
-    #         client_list: ["IPV4AddressCIDR"],
-    #         squash: "Squash",
-    #         read_only: false,
-    #         guess_mime_type_enabled: false,
-    #         requester_pays: false,
-    #         file_share_name: "FileShareName",
-    #         cache_attributes: {
-    #           cache_stale_timeout_in_seconds: 1,
-    #         },
-    #         notification_policy: "NotificationPolicy",
-    #         audit_destination_arn: "AuditDestinationARN",
-    #       }
     #
     # @!attribute [rw] file_share_arn
     #   The Amazon Resource Name (ARN) of the file share to be updated.
@@ -7803,33 +6862,6 @@ module Aws::StorageGateway
     end
 
     # UpdateSMBFileShareInput
-    #
-    # @note When making an API call, you may pass UpdateSMBFileShareInput
-    #   data as a hash:
-    #
-    #       {
-    #         file_share_arn: "FileShareARN", # required
-    #         kms_encrypted: false,
-    #         kms_key: "KMSKey",
-    #         default_storage_class: "StorageClass",
-    #         object_acl: "private", # accepts private, public-read, public-read-write, authenticated-read, bucket-owner-read, bucket-owner-full-control, aws-exec-read
-    #         read_only: false,
-    #         guess_mime_type_enabled: false,
-    #         requester_pays: false,
-    #         smbacl_enabled: false,
-    #         access_based_enumeration: false,
-    #         admin_user_list: ["UserListUser"],
-    #         valid_user_list: ["UserListUser"],
-    #         invalid_user_list: ["UserListUser"],
-    #         audit_destination_arn: "AuditDestinationARN",
-    #         case_sensitivity: "ClientSpecified", # accepts ClientSpecified, CaseSensitive
-    #         file_share_name: "FileShareName",
-    #         cache_attributes: {
-    #           cache_stale_timeout_in_seconds: 1,
-    #         },
-    #         notification_policy: "NotificationPolicy",
-    #         oplocks_enabled: false,
-    #       }
     #
     # @!attribute [rw] file_share_arn
     #   The Amazon Resource Name (ARN) of the SMB file share that you want
@@ -8043,14 +7075,6 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateSMBFileShareVisibilityInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN", # required
-    #         file_shares_visible: false, # required
-    #       }
-    #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and Amazon
@@ -8084,16 +7108,6 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateSMBLocalGroupsInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN", # required
-    #         smb_local_groups: { # required
-    #           gateway_admins: ["UserListUser"],
-    #         },
-    #       }
-    #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and Amazon
@@ -8128,14 +7142,6 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateSMBSecurityStrategyInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayARN", # required
-    #         smb_security_strategy: "ClientSpecified", # required, accepts ClientSpecified, MandatorySigning, MandatoryEncryption
-    #       }
-    #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and Amazon
@@ -8194,22 +7200,6 @@ module Aws::StorageGateway
     # * UpdateSnapshotScheduleInput$StartAt
     #
     # * UpdateSnapshotScheduleInput$VolumeARN
-    #
-    # @note When making an API call, you may pass UpdateSnapshotScheduleInput
-    #   data as a hash:
-    #
-    #       {
-    #         volume_arn: "VolumeARN", # required
-    #         start_at: 1, # required
-    #         recurrence_in_hours: 1, # required
-    #         description: "Description",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] volume_arn
     #   The Amazon Resource Name (ARN) of the volume. Use the ListVolumes
@@ -8272,14 +7262,6 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateVTLDeviceTypeInput
-    #   data as a hash:
-    #
-    #       {
-    #         vtl_device_arn: "VTLDeviceARN", # required
-    #         device_type: "DeviceType", # required
-    #       }
-    #
     # @!attribute [rw] vtl_device_arn
     #   The Amazon Resource Name (ARN) of the medium changer you want to
     #   select.

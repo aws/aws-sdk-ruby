@@ -62,24 +62,6 @@ module Aws::Account
     # Contains the details of the primary contact information associated
     # with an Amazon Web Services account.
     #
-    # @note When making an API call, you may pass ContactInformation
-    #   data as a hash:
-    #
-    #       {
-    #         address_line_1: "AddressLine", # required
-    #         address_line_2: "AddressLine",
-    #         address_line_3: "AddressLine",
-    #         city: "City", # required
-    #         company_name: "CompanyName",
-    #         country_code: "CountryCode", # required
-    #         district_or_county: "DistrictOrCounty",
-    #         full_name: "FullName", # required
-    #         phone_number: "ContactInformationPhoneNumber", # required
-    #         postal_code: "PostalCode", # required
-    #         state_or_region: "StateOrRegion",
-    #         website_url: "WebsiteUrl",
-    #       }
-    #
     # @!attribute [rw] address_line_1
     #   The first line of the primary contact address.
     #   @return [String]
@@ -152,14 +134,6 @@ module Aws::Account
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAlternateContactRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         alternate_contact_type: "BILLING", # required, accepts BILLING, OPERATIONS, SECURITY
-    #       }
-    #
     # @!attribute [rw] account_id
     #   Specifies the 12 digit account ID number of the Amazon Web Services
     #   account that you want to access or modify with this operation.
@@ -207,14 +181,6 @@ module Aws::Account
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAlternateContactRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         alternate_contact_type: "BILLING", # required, accepts BILLING, OPERATIONS, SECURITY
-    #       }
-    #
     # @!attribute [rw] account_id
     #   Specifies the 12 digit account ID number of the Amazon Web Services
     #   account that you want to access or modify with this operation.
@@ -275,13 +241,6 @@ module Aws::Account
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetContactInformationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #       }
-    #
     # @!attribute [rw] account_id
     #   Specifies the 12-digit account ID number of the Amazon Web Services
     #   account that you want to access or modify with this operation. If
@@ -349,18 +308,6 @@ module Aws::Account
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutAlternateContactRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         alternate_contact_type: "BILLING", # required, accepts BILLING, OPERATIONS, SECURITY
-    #         email_address: "EmailAddress", # required
-    #         name: "Name", # required
-    #         phone_number: "PhoneNumber", # required
-    #         title: "Title", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   Specifies the 12 digit account ID number of the Amazon Web Services
     #   account that you want to access or modify with this operation.
@@ -428,27 +375,6 @@ module Aws::Account
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutContactInformationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         contact_information: { # required
-    #           address_line_1: "AddressLine", # required
-    #           address_line_2: "AddressLine",
-    #           address_line_3: "AddressLine",
-    #           city: "City", # required
-    #           company_name: "CompanyName",
-    #           country_code: "CountryCode", # required
-    #           district_or_county: "DistrictOrCounty",
-    #           full_name: "FullName", # required
-    #           phone_number: "ContactInformationPhoneNumber", # required
-    #           postal_code: "PostalCode", # required
-    #           state_or_region: "StateOrRegion",
-    #           website_url: "WebsiteUrl",
-    #         },
-    #       }
-    #
     # @!attribute [rw] account_id
     #   Specifies the 12-digit account ID number of the Amazon Web Services
     #   account that you want to access or modify with this operation. If

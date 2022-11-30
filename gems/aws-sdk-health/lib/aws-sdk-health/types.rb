@@ -108,14 +108,6 @@ module Aws::Health
     # [1]: https://docs.aws.amazon.com/health/latest/APIReference/API_EventFilter.html
     # [2]: https://docs.aws.amazon.com/health/latest/APIReference/API_EntityFilter.html
     #
-    # @note When making an API call, you may pass DateTimeRange
-    #   data as a hash:
-    #
-    #       {
-    #         from: Time.now,
-    #         to: Time.now,
-    #       }
-    #
     # @!attribute [rw] from
     #   The starting date and time of a time range.
     #   @return [Time]
@@ -133,15 +125,6 @@ module Aws::Health
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAffectedAccountsForOrganizationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         event_arn: "eventArn", # required
-    #         next_token: "nextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] event_arn
     #   The unique identifier for the event. The event ARN has the
     #   `arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID
@@ -215,21 +198,6 @@ module Aws::Health
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAffectedEntitiesForOrganizationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_entity_filters: [ # required
-    #           {
-    #             event_arn: "eventArn", # required
-    #             aws_account_id: "accountId",
-    #           },
-    #         ],
-    #         locale: "locale",
-    #         next_token: "nextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] organization_entity_filters
     #   A JSON set of elements including the `awsAccountId` and the
     #   `eventArn`.
@@ -293,32 +261,6 @@ module Aws::Health
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAffectedEntitiesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter: { # required
-    #           event_arns: ["eventArn"], # required
-    #           entity_arns: ["entityArn"],
-    #           entity_values: ["entityValue"],
-    #           last_updated_times: [
-    #             {
-    #               from: Time.now,
-    #               to: Time.now,
-    #             },
-    #           ],
-    #           tags: [
-    #             {
-    #               "tagKey" => "tagValue",
-    #             },
-    #           ],
-    #           status_codes: ["IMPAIRED"], # accepts IMPAIRED, UNIMPAIRED, UNKNOWN
-    #         },
-    #         locale: "locale",
-    #         next_token: "nextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] filter
     #   Values to narrow the results returned. At least one event ARN is
     #   required.
@@ -374,13 +316,6 @@ module Aws::Health
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEntityAggregatesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         event_arns: ["eventArn"],
-    #       }
-    #
     # @!attribute [rw] event_arns
     #   A list of event ARNs (unique identifiers). For example:
     #   `"arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456",
@@ -408,49 +343,6 @@ module Aws::Health
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEventAggregatesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter: {
-    #           event_arns: ["eventArn"],
-    #           event_type_codes: ["eventType"],
-    #           services: ["service"],
-    #           regions: ["region"],
-    #           availability_zones: ["availabilityZone"],
-    #           start_times: [
-    #             {
-    #               from: Time.now,
-    #               to: Time.now,
-    #             },
-    #           ],
-    #           end_times: [
-    #             {
-    #               from: Time.now,
-    #               to: Time.now,
-    #             },
-    #           ],
-    #           last_updated_times: [
-    #             {
-    #               from: Time.now,
-    #               to: Time.now,
-    #             },
-    #           ],
-    #           entity_arns: ["entityArn"],
-    #           entity_values: ["entityValue"],
-    #           event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange, investigation
-    #           tags: [
-    #             {
-    #               "tagKey" => "tagValue",
-    #             },
-    #           ],
-    #           event_status_codes: ["open"], # accepts open, closed, upcoming
-    #         },
-    #         aggregate_field: "eventTypeCategory", # required, accepts eventTypeCategory
-    #         max_results: 1,
-    #         next_token: "nextToken",
-    #       }
-    #
     # @!attribute [rw] filter
     #   Values to narrow the results returned.
     #   @return [Types::EventFilter]
@@ -505,19 +397,6 @@ module Aws::Health
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEventDetailsForOrganizationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_event_detail_filters: [ # required
-    #           {
-    #             event_arn: "eventArn", # required
-    #             aws_account_id: "accountId",
-    #           },
-    #         ],
-    #         locale: "locale",
-    #       }
-    #
     # @!attribute [rw] organization_event_detail_filters
     #   A set of JSON elements that includes the `awsAccountId` and the
     #   `eventArn`.
@@ -554,14 +433,6 @@ module Aws::Health
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEventDetailsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         event_arns: ["eventArn"], # required
-    #         locale: "locale",
-    #       }
-    #
     # @!attribute [rw] event_arns
     #   A list of event ARNs (unique identifiers). For example:
     #   `"arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456",
@@ -599,20 +470,6 @@ module Aws::Health
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEventTypesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter: {
-    #           event_type_codes: ["eventTypeCode"],
-    #           services: ["service"],
-    #           event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange, investigation
-    #         },
-    #         locale: "locale",
-    #         next_token: "nextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] filter
     #   Values to narrow the results returned.
     #   @return [Types::EventTypeFilter]
@@ -672,37 +529,6 @@ module Aws::Health
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEventsForOrganizationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter: {
-    #           event_type_codes: ["eventType"],
-    #           aws_account_ids: ["accountId"],
-    #           services: ["service"],
-    #           regions: ["region"],
-    #           start_time: {
-    #             from: Time.now,
-    #             to: Time.now,
-    #           },
-    #           end_time: {
-    #             from: Time.now,
-    #             to: Time.now,
-    #           },
-    #           last_updated_time: {
-    #             from: Time.now,
-    #             to: Time.now,
-    #           },
-    #           entity_arns: ["entityArn"],
-    #           entity_values: ["entityValue"],
-    #           event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange, investigation
-    #           event_status_codes: ["open"], # accepts open, closed, upcoming
-    #         },
-    #         next_token: "nextToken",
-    #         max_results: 1,
-    #         locale: "locale",
-    #       }
-    #
     # @!attribute [rw] filter
     #   Values to narrow the results returned.
     #   @return [Types::OrganizationEventFilter]
@@ -757,49 +583,6 @@ module Aws::Health
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEventsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter: {
-    #           event_arns: ["eventArn"],
-    #           event_type_codes: ["eventType"],
-    #           services: ["service"],
-    #           regions: ["region"],
-    #           availability_zones: ["availabilityZone"],
-    #           start_times: [
-    #             {
-    #               from: Time.now,
-    #               to: Time.now,
-    #             },
-    #           ],
-    #           end_times: [
-    #             {
-    #               from: Time.now,
-    #               to: Time.now,
-    #             },
-    #           ],
-    #           last_updated_times: [
-    #             {
-    #               from: Time.now,
-    #               to: Time.now,
-    #             },
-    #           ],
-    #           entity_arns: ["entityArn"],
-    #           entity_values: ["entityValue"],
-    #           event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange, investigation
-    #           tags: [
-    #             {
-    #               "tagKey" => "tagValue",
-    #             },
-    #           ],
-    #           event_status_codes: ["open"], # accepts open, closed, upcoming
-    #         },
-    #         next_token: "nextToken",
-    #         max_results: 1,
-    #         locale: "locale",
-    #       }
-    #
     # @!attribute [rw] filter
     #   Values to narrow the results returned.
     #   @return [Types::EventFilter]
@@ -906,27 +689,6 @@ module Aws::Health
     #
     #
     # [1]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntities.html
-    #
-    # @note When making an API call, you may pass EntityFilter
-    #   data as a hash:
-    #
-    #       {
-    #         event_arns: ["eventArn"], # required
-    #         entity_arns: ["entityArn"],
-    #         entity_values: ["entityValue"],
-    #         last_updated_times: [
-    #           {
-    #             from: Time.now,
-    #             to: Time.now,
-    #           },
-    #         ],
-    #         tags: [
-    #           {
-    #             "tagKey" => "tagValue",
-    #           },
-    #         ],
-    #         status_codes: ["IMPAIRED"], # accepts IMPAIRED, UNIMPAIRED, UNKNOWN
-    #       }
     #
     # @!attribute [rw] event_arns
     #   A list of event ARNs (unique identifiers). For example:
@@ -1094,14 +856,6 @@ module Aws::Health
     # [1]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetailsForOrganization.html
     # [2]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntitiesForOrganization.html
     #
-    # @note When making an API call, you may pass EventAccountFilter
-    #   data as a hash:
-    #
-    #       {
-    #         event_arn: "eventArn", # required
-    #         aws_account_id: "accountId",
-    #       }
-    #
     # @!attribute [rw] event_arn
     #   The unique identifier for the event. The event ARN has the
     #   `arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID
@@ -1244,44 +998,6 @@ module Aws::Health
     # [1]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEvents.html
     # [2]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventAggregates.html
     #
-    # @note When making an API call, you may pass EventFilter
-    #   data as a hash:
-    #
-    #       {
-    #         event_arns: ["eventArn"],
-    #         event_type_codes: ["eventType"],
-    #         services: ["service"],
-    #         regions: ["region"],
-    #         availability_zones: ["availabilityZone"],
-    #         start_times: [
-    #           {
-    #             from: Time.now,
-    #             to: Time.now,
-    #           },
-    #         ],
-    #         end_times: [
-    #           {
-    #             from: Time.now,
-    #             to: Time.now,
-    #           },
-    #         ],
-    #         last_updated_times: [
-    #           {
-    #             from: Time.now,
-    #             to: Time.now,
-    #           },
-    #         ],
-    #         entity_arns: ["entityArn"],
-    #         entity_values: ["entityValue"],
-    #         event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange, investigation
-    #         tags: [
-    #           {
-    #             "tagKey" => "tagValue",
-    #           },
-    #         ],
-    #         event_status_codes: ["open"], # accepts open, closed, upcoming
-    #       }
-    #
     # @!attribute [rw] event_arns
     #   A list of event ARNs (unique identifiers). For example:
     #   `"arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456",
@@ -1418,15 +1134,6 @@ module Aws::Health
     #
     #
     # [1]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventTypes.html
-    #
-    # @note When making an API call, you may pass EventTypeFilter
-    #   data as a hash:
-    #
-    #       {
-    #         event_type_codes: ["eventTypeCode"],
-    #         services: ["service"],
-    #         event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange, investigation
-    #       }
     #
     # @!attribute [rw] event_type_codes
     #   A list of event type codes.
@@ -1737,32 +1444,6 @@ module Aws::Health
     #
     #
     # [1]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventsForOrganization.html
-    #
-    # @note When making an API call, you may pass OrganizationEventFilter
-    #   data as a hash:
-    #
-    #       {
-    #         event_type_codes: ["eventType"],
-    #         aws_account_ids: ["accountId"],
-    #         services: ["service"],
-    #         regions: ["region"],
-    #         start_time: {
-    #           from: Time.now,
-    #           to: Time.now,
-    #         },
-    #         end_time: {
-    #           from: Time.now,
-    #           to: Time.now,
-    #         },
-    #         last_updated_time: {
-    #           from: Time.now,
-    #           to: Time.now,
-    #         },
-    #         entity_arns: ["entityArn"],
-    #         entity_values: ["entityValue"],
-    #         event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange, investigation
-    #         event_status_codes: ["open"], # accepts open, closed, upcoming
-    #       }
     #
     # @!attribute [rw] event_type_codes
     #   A list of unique identifiers for event types. For example,

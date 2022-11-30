@@ -78,13 +78,6 @@ module Aws::IVS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchGetChannelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arns: ["ChannelArn"], # required
-    #       }
-    #
     # @!attribute [rw] arns
     #   Array of ARNs, one per channel.
     #   @return [Array<String>]
@@ -113,13 +106,6 @@ module Aws::IVS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchGetStreamKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arns: ["StreamKeyArn"], # required
-    #       }
-    #
     # @!attribute [rw] arns
     #   Array of ARNs, one per channel.
     #   @return [Array<String>]
@@ -310,20 +296,6 @@ module Aws::IVS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateChannelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         authorized: false,
-    #         latency_mode: "NORMAL", # accepts NORMAL, LOW
-    #         name: "ChannelName",
-    #         recording_configuration_arn: "ChannelRecordingConfigurationArn",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         type: "BASIC", # accepts BASIC, STANDARD
-    #       }
-    #
     # @!attribute [rw] authorized
     #   Whether the channel is private (enabled for playback authorization).
     #   Default: `false`.
@@ -406,26 +378,6 @@ module Aws::IVS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateRecordingConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         destination_configuration: { # required
-    #           s3: {
-    #             bucket_name: "S3DestinationBucketName", # required
-    #           },
-    #         },
-    #         name: "RecordingConfigurationName",
-    #         recording_reconnect_window_seconds: 1,
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         thumbnail_configuration: {
-    #           recording_mode: "DISABLED", # accepts DISABLED, INTERVAL
-    #           target_interval_seconds: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] destination_configuration
     #   A complex type that contains a destination configuration for where
     #   recorded video will be stored.
@@ -485,16 +437,6 @@ module Aws::IVS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateStreamKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_arn: "ChannelArn", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] channel_arn
     #   ARN of the channel for which to create the stream key.
     #   @return [String]
@@ -532,13 +474,6 @@ module Aws::IVS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteChannelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "ChannelArn", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   ARN of the channel to be deleted.
     #   @return [String]
@@ -551,13 +486,6 @@ module Aws::IVS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeletePlaybackKeyPairRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "PlaybackKeyPairArn", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   ARN of the key pair to be deleted.
     #   @return [String]
@@ -574,13 +502,6 @@ module Aws::IVS
     #
     class DeletePlaybackKeyPairResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteRecordingConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "RecordingConfigurationArn", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   ARN of the recording configuration to be deleted.
     #   @return [String]
@@ -593,13 +514,6 @@ module Aws::IVS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteStreamKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "StreamKeyArn", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   ARN of the stream key to be deleted.
     #   @return [String]
@@ -617,15 +531,6 @@ module Aws::IVS
     # For recording, you define one and only one type of destination
     # configuration.
     #
-    # @note When making an API call, you may pass DestinationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         s3: {
-    #           bucket_name: "S3DestinationBucketName", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] s3
     #   An S3 destination configuration where recorded videos will be
     #   stored.
@@ -639,13 +544,6 @@ module Aws::IVS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetChannelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "ChannelArn", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   ARN of the channel for which the configuration is to be retrieved.
     #   @return [String]
@@ -669,13 +567,6 @@ module Aws::IVS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetPlaybackKeyPairRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "PlaybackKeyPairArn", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   ARN of the key pair to be returned.
     #   @return [String]
@@ -702,13 +593,6 @@ module Aws::IVS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRecordingConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "RecordingConfigurationArn", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   ARN of the recording configuration to be retrieved.
     #   @return [String]
@@ -735,13 +619,6 @@ module Aws::IVS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetStreamKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "StreamKeyArn", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   ARN for the stream key to be retrieved.
     #   @return [String]
@@ -768,13 +645,6 @@ module Aws::IVS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetStreamRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_arn: "ChannelArn", # required
-    #       }
-    #
     # @!attribute [rw] channel_arn
     #   Channel ARN for stream to be accessed.
     #   @return [String]
@@ -798,14 +668,6 @@ module Aws::IVS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetStreamSessionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_arn: "ChannelArn", # required
-    #         stream_id: "StreamId",
-    #       }
-    #
     # @!attribute [rw] channel_arn
     #   ARN of the channel resource
     #   @return [String]
@@ -837,17 +699,6 @@ module Aws::IVS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ImportPlaybackKeyPairRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "PlaybackKeyPairName",
-    #         public_key_material: "PlaybackPublicKeyMaterial", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   Playback-key-pair name. The value does not need to be unique.
     #   @return [String]
@@ -921,16 +772,6 @@ module Aws::IVS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListChannelsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter_by_name: "ChannelName",
-    #         filter_by_recording_configuration_arn: "ChannelRecordingConfigurationArn",
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] filter_by_name
     #   Filters the channel list to match the specified name.
     #   @return [String]
@@ -978,14 +819,6 @@ module Aws::IVS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPlaybackKeyPairsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   Maximum number of key pairs to return. Default: your service quota
     #   or 100, whichever is smaller.
@@ -1023,14 +856,6 @@ module Aws::IVS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRecordingConfigurationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   Maximum number of recording configurations to return. Default: your
     #   service quota or 100, whichever is smaller.
@@ -1068,15 +893,6 @@ module Aws::IVS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListStreamKeysRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_arn: "ChannelArn", # required
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] channel_arn
     #   Channel ARN used to filter the list.
     #   @return [String]
@@ -1118,15 +934,6 @@ module Aws::IVS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListStreamSessionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_arn: "ChannelArn", # required
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] channel_arn
     #   Channel ARN used to filter the list.
     #   @return [String]
@@ -1168,17 +975,6 @@ module Aws::IVS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListStreamsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter_by: {
-    #           health: "HEALTHY", # accepts HEALTHY, STARVING, UNKNOWN
-    #         },
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] filter_by
     #   Filters the stream list to match the specified criterion.
     #   @return [Types::StreamFilters]
@@ -1220,13 +1016,6 @@ module Aws::IVS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource to be retrieved. The ARN must be
     #   URL-encoded.
@@ -1332,14 +1121,6 @@ module Aws::IVS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutMetadataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_arn: "ChannelArn", # required
-    #         metadata: "StreamMetadata", # required
-    #       }
-    #
     # @!attribute [rw] channel_arn
     #   ARN of the channel into which metadata is inserted. This channel
     #   must have an active stream.
@@ -1477,13 +1258,6 @@ module Aws::IVS
     # A complex type that describes an S3 location where recorded videos
     # will be stored.
     #
-    # @note When making an API call, you may pass S3DestinationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_name: "S3DestinationBucketName", # required
-    #       }
-    #
     # @!attribute [rw] bucket_name
     #   Location (S3 bucket name) where recorded videos will be stored.
     #   @return [String]
@@ -1508,13 +1282,6 @@ module Aws::IVS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopStreamRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_arn: "ChannelArn", # required
-    #       }
-    #
     # @!attribute [rw] channel_arn
     #   ARN of the channel for which the stream is to be stopped.
     #   @return [String]
@@ -1613,13 +1380,6 @@ module Aws::IVS
     end
 
     # Object specifying the stream attribute on which to filter.
-    #
-    # @note When making an API call, you may pass StreamFilters
-    #   data as a hash:
-    #
-    #       {
-    #         health: "HEALTHY", # accepts HEALTHY, STARVING, UNKNOWN
-    #       }
     #
     # @!attribute [rw] health
     #   The stream’s health.
@@ -1849,16 +1609,6 @@ module Aws::IVS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   ARN of the resource for which tags are to be added or updated. The
     #   ARN must be URL-encoded.
@@ -1904,14 +1654,6 @@ module Aws::IVS
     # An object representing a configuration of thumbnails for recorded
     # video.
     #
-    # @note When making an API call, you may pass ThumbnailConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         recording_mode: "DISABLED", # accepts DISABLED, INTERVAL
-    #         target_interval_seconds: 1,
-    #       }
-    #
     # @!attribute [rw] recording_mode
     #   Thumbnail recording mode. Default: `INTERVAL`.
     #   @return [String]
@@ -1943,14 +1685,6 @@ module Aws::IVS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   ARN of the resource for which tags are to be removed. The ARN must
     #   be URL-encoded.
@@ -1980,18 +1714,6 @@ module Aws::IVS
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateChannelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "ChannelArn", # required
-    #         authorized: false,
-    #         latency_mode: "NORMAL", # accepts NORMAL, LOW
-    #         name: "ChannelName",
-    #         recording_configuration_arn: "ChannelRecordingConfigurationArn",
-    #         type: "BASIC", # accepts BASIC, STANDARD
-    #       }
-    #
     # @!attribute [rw] arn
     #   ARN of the channel to be updated.
     #   @return [String]

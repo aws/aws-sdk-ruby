@@ -14,13 +14,6 @@ module Aws::IoT1ClickDevicesService
     #
     class Attributes < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass ClaimDevicesByClaimCodeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         claim_code: "__string", # required
-    #       }
-    #
     # @!attribute [rw] claim_code
     #   @return [String]
     #
@@ -50,13 +43,6 @@ module Aws::IoT1ClickDevicesService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDeviceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] device_id
     #   @return [String]
     #
@@ -194,14 +180,6 @@ module Aws::IoT1ClickDevicesService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeviceMethod
-    #   data as a hash:
-    #
-    #       {
-    #         device_type: "__string",
-    #         method_name: "__string",
-    #       }
-    #
     # @!attribute [rw] device_type
     #   The type of the device, such as "button".
     #   @return [String]
@@ -225,16 +203,6 @@ module Aws::IoT1ClickDevicesService
     #
     class Empty < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass FinalizeDeviceClaimRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_id: "__string", # required
-    #         tags: {
-    #           "__string" => "__string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] device_id
     #   @return [String]
     #
@@ -278,13 +246,6 @@ module Aws::IoT1ClickDevicesService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDeviceMethodsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] device_id
     #   @return [String]
     #
@@ -308,13 +269,6 @@ module Aws::IoT1ClickDevicesService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass InitiateDeviceClaimRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] device_id
     #   @return [String]
     #
@@ -371,18 +325,6 @@ module Aws::IoT1ClickDevicesService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass InvokeDeviceMethodRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_id: "__string", # required
-    #         device_method: {
-    #           device_type: "__string",
-    #           method_name: "__string",
-    #         },
-    #         device_method_parameters: "__string",
-    #       }
-    #
     # @!attribute [rw] device_id
     #   @return [String]
     #
@@ -417,17 +359,6 @@ module Aws::IoT1ClickDevicesService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDeviceEventsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_id: "__string", # required
-    #         from_time_stamp: Time.now, # required
-    #         max_results: 1,
-    #         next_token: "__string",
-    #         to_time_stamp: Time.now, # required
-    #       }
-    #
     # @!attribute [rw] device_id
     #   @return [String]
     #
@@ -470,15 +401,6 @@ module Aws::IoT1ClickDevicesService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDevicesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_type: "__string",
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] device_type
     #   @return [String]
     #
@@ -515,13 +437,6 @@ module Aws::IoT1ClickDevicesService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   @return [String]
     #
@@ -613,16 +528,6 @@ module Aws::IoT1ClickDevicesService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "__string", # required
-    #         tags: { # required
-    #           "__string" => "__string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   @return [String]
     #
@@ -638,13 +543,6 @@ module Aws::IoT1ClickDevicesService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UnclaimDeviceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] device_id
     #   @return [String]
     #
@@ -667,14 +565,6 @@ module Aws::IoT1ClickDevicesService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "__string", # required
-    #         tag_keys: ["__string"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   @return [String]
     #
@@ -690,14 +580,6 @@ module Aws::IoT1ClickDevicesService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateDeviceStateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_id: "__string", # required
-    #         enabled: false,
-    #       }
-    #
     # @!attribute [rw] device_id
     #   @return [String]
     #

@@ -51,14 +51,6 @@ module Aws::ECS
 
     # An object representing a change in state for a task attachment.
     #
-    # @note When making an API call, you may pass AttachmentStateChange
-    #   data as a hash:
-    #
-    #       {
-    #         attachment_arn: "String", # required
-    #         status: "String", # required
-    #       }
-    #
     # @!attribute [rw] attachment_arn
     #   The Amazon Resource Name (ARN) of the attachment.
     #   @return [String]
@@ -85,16 +77,6 @@ module Aws::ECS
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html#attributes
-    #
-    # @note When making an API call, you may pass Attribute
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #         value: "String",
-    #         target_type: "container-instance", # accepts container-instance
-    #         target_id: "String",
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the attribute. The `name` must contain between 1 and 128
@@ -142,21 +124,6 @@ module Aws::ECS
     class AttributeLimitExceededException < Aws::EmptyStructure; end
 
     # The details of the Auto Scaling group for the capacity provider.
-    #
-    # @note When making an API call, you may pass AutoScalingGroupProvider
-    #   data as a hash:
-    #
-    #       {
-    #         auto_scaling_group_arn: "String", # required
-    #         managed_scaling: {
-    #           status: "ENABLED", # accepts ENABLED, DISABLED
-    #           target_capacity: 1,
-    #           minimum_scaling_step_size: 1,
-    #           maximum_scaling_step_size: 1,
-    #           instance_warmup_period: 1,
-    #         },
-    #         managed_termination_protection: "ENABLED", # accepts ENABLED, DISABLED
-    #       }
     #
     # @!attribute [rw] auto_scaling_group_arn
     #   The Amazon Resource Name (ARN) that identifies the Auto Scaling
@@ -206,20 +173,6 @@ module Aws::ECS
 
     # The details of the Auto Scaling group capacity provider to update.
     #
-    # @note When making an API call, you may pass AutoScalingGroupProviderUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         managed_scaling: {
-    #           status: "ENABLED", # accepts ENABLED, DISABLED
-    #           target_capacity: 1,
-    #           minimum_scaling_step_size: 1,
-    #           maximum_scaling_step_size: 1,
-    #           instance_warmup_period: 1,
-    #         },
-    #         managed_termination_protection: "ENABLED", # accepts ENABLED, DISABLED
-    #       }
-    #
     # @!attribute [rw] managed_scaling
     #   The managed scaling settings for the Auto Scaling group capacity
     #   provider.
@@ -259,15 +212,6 @@ module Aws::ECS
     end
 
     # An object representing the networking details for a task or service.
-    #
-    # @note When making an API call, you may pass AwsVpcConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         subnets: ["String"], # required
-    #         security_groups: ["String"],
-    #         assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
-    #       }
     #
     # @!attribute [rw] subnets
     #   The IDs of the subnets associated with the task or service. There's
@@ -428,15 +372,6 @@ module Aws::ECS
     #
     # A capacity provider strategy may contain a maximum of 6 capacity
     # providers.
-    #
-    # @note When making an API call, you may pass CapacityProviderStrategyItem
-    #   data as a hash:
-    #
-    #       {
-    #         capacity_provider: "String", # required
-    #         weight: 1,
-    #         base: 1,
-    #       }
     #
     # @!attribute [rw] capacity_provider
     #   The short name of the capacity provider.
@@ -714,23 +649,6 @@ module Aws::ECS
 
     # The execute command configuration for the cluster.
     #
-    # @note When making an API call, you may pass ClusterConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         execute_command_configuration: {
-    #           kms_key_id: "String",
-    #           logging: "NONE", # accepts NONE, DEFAULT, OVERRIDE
-    #           log_configuration: {
-    #             cloud_watch_log_group_name: "String",
-    #             cloud_watch_encryption_enabled: false,
-    #             s3_bucket_name: "String",
-    #             s3_encryption_enabled: false,
-    #             s3_key_prefix: "String",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] execute_command_configuration
     #   The details of the execute command configuration.
     #   @return [Types::ExecuteCommandConfiguration]
@@ -828,13 +746,6 @@ module Aws::ECS
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html
     #
-    # @note When making an API call, you may pass ClusterServiceConnectDefaultsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         namespace: "String", # required
-    #       }
-    #
     # @!attribute [rw] namespace
     #   The namespace name or full Amazon Resource Name (ARN) of the Cloud
     #   Map namespace that's used when you create a service and don't
@@ -876,14 +787,6 @@ module Aws::ECS
 
     # The settings to use when creating a cluster. This parameter is used to
     # turn on CloudWatch Container Insights for a cluster.
-    #
-    # @note When making an API call, you may pass ClusterSetting
-    #   data as a hash:
-    #
-    #       {
-    #         name: "containerInsights", # accepts containerInsights
-    #         value: "String",
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the cluster setting. The only supported value is
@@ -1016,160 +919,6 @@ module Aws::ECS
 
     # Container definitions are used in task definitions to describe the
     # different containers that are launched as part of a task.
-    #
-    # @note When making an API call, you may pass ContainerDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String",
-    #         image: "String",
-    #         repository_credentials: {
-    #           credentials_parameter: "String", # required
-    #         },
-    #         cpu: 1,
-    #         memory: 1,
-    #         memory_reservation: 1,
-    #         links: ["String"],
-    #         port_mappings: [
-    #           {
-    #             container_port: 1,
-    #             host_port: 1,
-    #             protocol: "tcp", # accepts tcp, udp
-    #             name: "String",
-    #             app_protocol: "http", # accepts http, http2, grpc
-    #           },
-    #         ],
-    #         essential: false,
-    #         entry_point: ["String"],
-    #         command: ["String"],
-    #         environment: [
-    #           {
-    #             name: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #         environment_files: [
-    #           {
-    #             value: "String", # required
-    #             type: "s3", # required, accepts s3
-    #           },
-    #         ],
-    #         mount_points: [
-    #           {
-    #             source_volume: "String",
-    #             container_path: "String",
-    #             read_only: false,
-    #           },
-    #         ],
-    #         volumes_from: [
-    #           {
-    #             source_container: "String",
-    #             read_only: false,
-    #           },
-    #         ],
-    #         linux_parameters: {
-    #           capabilities: {
-    #             add: ["String"],
-    #             drop: ["String"],
-    #           },
-    #           devices: [
-    #             {
-    #               host_path: "String", # required
-    #               container_path: "String",
-    #               permissions: ["read"], # accepts read, write, mknod
-    #             },
-    #           ],
-    #           init_process_enabled: false,
-    #           shared_memory_size: 1,
-    #           tmpfs: [
-    #             {
-    #               container_path: "String", # required
-    #               size: 1, # required
-    #               mount_options: ["String"],
-    #             },
-    #           ],
-    #           max_swap: 1,
-    #           swappiness: 1,
-    #         },
-    #         secrets: [
-    #           {
-    #             name: "String", # required
-    #             value_from: "String", # required
-    #           },
-    #         ],
-    #         depends_on: [
-    #           {
-    #             container_name: "String", # required
-    #             condition: "START", # required, accepts START, COMPLETE, SUCCESS, HEALTHY
-    #           },
-    #         ],
-    #         start_timeout: 1,
-    #         stop_timeout: 1,
-    #         hostname: "String",
-    #         user: "String",
-    #         working_directory: "String",
-    #         disable_networking: false,
-    #         privileged: false,
-    #         readonly_root_filesystem: false,
-    #         dns_servers: ["String"],
-    #         dns_search_domains: ["String"],
-    #         extra_hosts: [
-    #           {
-    #             hostname: "String", # required
-    #             ip_address: "String", # required
-    #           },
-    #         ],
-    #         docker_security_options: ["String"],
-    #         interactive: false,
-    #         pseudo_terminal: false,
-    #         docker_labels: {
-    #           "String" => "String",
-    #         },
-    #         ulimits: [
-    #           {
-    #             name: "core", # required, accepts core, cpu, data, fsize, locks, memlock, msgqueue, nice, nofile, nproc, rss, rtprio, rttime, sigpending, stack
-    #             soft_limit: 1, # required
-    #             hard_limit: 1, # required
-    #           },
-    #         ],
-    #         log_configuration: {
-    #           log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk, awsfirelens
-    #           options: {
-    #             "String" => "String",
-    #           },
-    #           secret_options: [
-    #             {
-    #               name: "String", # required
-    #               value_from: "String", # required
-    #             },
-    #           ],
-    #         },
-    #         health_check: {
-    #           command: ["String"], # required
-    #           interval: 1,
-    #           timeout: 1,
-    #           retries: 1,
-    #           start_period: 1,
-    #         },
-    #         system_controls: [
-    #           {
-    #             namespace: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #         resource_requirements: [
-    #           {
-    #             value: "String", # required
-    #             type: "GPU", # required, accepts GPU, InferenceAccelerator
-    #           },
-    #         ],
-    #         firelens_configuration: {
-    #           type: "fluentd", # required, accepts fluentd, fluentbit
-    #           options: {
-    #             "String" => "String",
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] name
     #   The name of a container. If you're linking multiple containers
@@ -2160,14 +1909,6 @@ module Aws::ECS
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html
     # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html
     #
-    # @note When making an API call, you may pass ContainerDependency
-    #   data as a hash:
-    #
-    #       {
-    #         container_name: "String", # required
-    #         condition: "START", # required, accepts START, COMPLETE, SUCCESS, HEALTHY
-    #       }
-    #
     # @!attribute [rw] container_name
     #   The name of a container.
     #   @return [String]
@@ -2426,35 +2167,6 @@ module Aws::ECS
     # is `\{"containerOverrides": [ ] \}`. If a non-empty container override
     # is specified, the `name` parameter must be included.
     #
-    # @note When making an API call, you may pass ContainerOverride
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String",
-    #         command: ["String"],
-    #         environment: [
-    #           {
-    #             name: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #         environment_files: [
-    #           {
-    #             value: "String", # required
-    #             type: "s3", # required, accepts s3
-    #           },
-    #         ],
-    #         cpu: 1,
-    #         memory: 1,
-    #         memory_reservation: 1,
-    #         resource_requirements: [
-    #           {
-    #             value: "String", # required
-    #             type: "GPU", # required, accepts GPU, InferenceAccelerator
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the container that receives the override. This parameter
     #   is required if any override is specified.
@@ -2521,26 +2233,6 @@ module Aws::ECS
 
     # An object that represents a change in state for a container.
     #
-    # @note When making an API call, you may pass ContainerStateChange
-    #   data as a hash:
-    #
-    #       {
-    #         container_name: "String",
-    #         image_digest: "String",
-    #         runtime_id: "String",
-    #         exit_code: 1,
-    #         network_bindings: [
-    #           {
-    #             bind_ip: "String",
-    #             container_port: 1,
-    #             host_port: 1,
-    #             protocol: "tcp", # accepts tcp, udp
-    #           },
-    #         ],
-    #         reason: "String",
-    #         status: "String",
-    #       }
-    #
     # @!attribute [rw] container_name
     #   The name of the container.
     #   @return [String]
@@ -2584,30 +2276,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateCapacityProviderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #         auto_scaling_group_provider: { # required
-    #           auto_scaling_group_arn: "String", # required
-    #           managed_scaling: {
-    #             status: "ENABLED", # accepts ENABLED, DISABLED
-    #             target_capacity: 1,
-    #             minimum_scaling_step_size: 1,
-    #             maximum_scaling_step_size: 1,
-    #             instance_warmup_period: 1,
-    #           },
-    #           managed_termination_protection: "ENABLED", # accepts ENABLED, DISABLED
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the capacity provider. Up to 255 characters are allowed.
     #   They include letters (both upper and lowercase letters), numbers,
@@ -2672,49 +2340,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateClusterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_name: "String",
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         settings: [
-    #           {
-    #             name: "containerInsights", # accepts containerInsights
-    #             value: "String",
-    #           },
-    #         ],
-    #         configuration: {
-    #           execute_command_configuration: {
-    #             kms_key_id: "String",
-    #             logging: "NONE", # accepts NONE, DEFAULT, OVERRIDE
-    #             log_configuration: {
-    #               cloud_watch_log_group_name: "String",
-    #               cloud_watch_encryption_enabled: false,
-    #               s3_bucket_name: "String",
-    #               s3_encryption_enabled: false,
-    #               s3_key_prefix: "String",
-    #             },
-    #           },
-    #         },
-    #         capacity_providers: ["String"],
-    #         default_capacity_provider_strategy: [
-    #           {
-    #             capacity_provider: "String", # required
-    #             weight: 1,
-    #             base: 1,
-    #           },
-    #         ],
-    #         service_connect_defaults: {
-    #           namespace: "String", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] cluster_name
     #   The name of your cluster. If you don't specify a name for your
     #   cluster, you create a cluster that's named `default`. Up to 255
@@ -2848,113 +2473,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateServiceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster: "String",
-    #         service_name: "String", # required
-    #         task_definition: "String",
-    #         load_balancers: [
-    #           {
-    #             target_group_arn: "String",
-    #             load_balancer_name: "String",
-    #             container_name: "String",
-    #             container_port: 1,
-    #           },
-    #         ],
-    #         service_registries: [
-    #           {
-    #             registry_arn: "String",
-    #             port: 1,
-    #             container_name: "String",
-    #             container_port: 1,
-    #           },
-    #         ],
-    #         desired_count: 1,
-    #         client_token: "String",
-    #         launch_type: "EC2", # accepts EC2, FARGATE, EXTERNAL
-    #         capacity_provider_strategy: [
-    #           {
-    #             capacity_provider: "String", # required
-    #             weight: 1,
-    #             base: 1,
-    #           },
-    #         ],
-    #         platform_version: "String",
-    #         role: "String",
-    #         deployment_configuration: {
-    #           deployment_circuit_breaker: {
-    #             enable: false, # required
-    #             rollback: false, # required
-    #           },
-    #           maximum_percent: 1,
-    #           minimum_healthy_percent: 1,
-    #         },
-    #         placement_constraints: [
-    #           {
-    #             type: "distinctInstance", # accepts distinctInstance, memberOf
-    #             expression: "String",
-    #           },
-    #         ],
-    #         placement_strategy: [
-    #           {
-    #             type: "random", # accepts random, spread, binpack
-    #             field: "String",
-    #           },
-    #         ],
-    #         network_configuration: {
-    #           awsvpc_configuration: {
-    #             subnets: ["String"], # required
-    #             security_groups: ["String"],
-    #             assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
-    #           },
-    #         },
-    #         health_check_grace_period_seconds: 1,
-    #         scheduling_strategy: "REPLICA", # accepts REPLICA, DAEMON
-    #         deployment_controller: {
-    #           type: "ECS", # required, accepts ECS, CODE_DEPLOY, EXTERNAL
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         enable_ecs_managed_tags: false,
-    #         propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION, SERVICE, NONE
-    #         enable_execute_command: false,
-    #         service_connect_configuration: {
-    #           enabled: false, # required
-    #           namespace: "String",
-    #           services: [
-    #             {
-    #               port_name: "String", # required
-    #               discovery_name: "String",
-    #               client_aliases: [
-    #                 {
-    #                   port: 1, # required
-    #                   dns_name: "String",
-    #                 },
-    #               ],
-    #               ingress_port_override: 1,
-    #             },
-    #           ],
-    #           log_configuration: {
-    #             log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk, awsfirelens
-    #             options: {
-    #               "String" => "String",
-    #             },
-    #             secret_options: [
-    #               {
-    #                 name: "String", # required
-    #                 value_from: "String", # required
-    #               },
-    #             ],
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster
     #   that you run your service on. If you do not specify a cluster, the
@@ -3378,59 +2896,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateTaskSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service: "String", # required
-    #         cluster: "String", # required
-    #         external_id: "String",
-    #         task_definition: "String", # required
-    #         network_configuration: {
-    #           awsvpc_configuration: {
-    #             subnets: ["String"], # required
-    #             security_groups: ["String"],
-    #             assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
-    #           },
-    #         },
-    #         load_balancers: [
-    #           {
-    #             target_group_arn: "String",
-    #             load_balancer_name: "String",
-    #             container_name: "String",
-    #             container_port: 1,
-    #           },
-    #         ],
-    #         service_registries: [
-    #           {
-    #             registry_arn: "String",
-    #             port: 1,
-    #             container_name: "String",
-    #             container_port: 1,
-    #           },
-    #         ],
-    #         launch_type: "EC2", # accepts EC2, FARGATE, EXTERNAL
-    #         capacity_provider_strategy: [
-    #           {
-    #             capacity_provider: "String", # required
-    #             weight: 1,
-    #             base: 1,
-    #           },
-    #         ],
-    #         platform_version: "String",
-    #         scale: {
-    #           value: 1.0,
-    #           unit: "PERCENT", # accepts PERCENT
-    #         },
-    #         client_token: "String",
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] service
     #   The short name or full Amazon Resource Name (ARN) of the service to
     #   create the task set in.
@@ -3598,14 +3063,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAccountSettingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights
-    #         principal_arn: "String",
-    #       }
-    #
     # @!attribute [rw] name
     #   The resource name to disable the account setting for. If
     #   `serviceLongArnFormat` is specified, the ARN for your Amazon ECS
@@ -3647,21 +3104,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAttributesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster: "String",
-    #         attributes: [ # required
-    #           {
-    #             name: "String", # required
-    #             value: "String",
-    #             target_type: "container-instance", # accepts container-instance
-    #             target_id: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster
     #   that contains the resource to delete attributes. If you do not
@@ -3698,13 +3140,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteCapacityProviderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         capacity_provider: "String", # required
-    #       }
-    #
     # @!attribute [rw] capacity_provider
     #   The short name or full Amazon Resource Name (ARN) of the capacity
     #   provider to delete.
@@ -3730,13 +3165,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteClusterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster: "String", # required
-    #       }
-    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster to
     #   delete.
@@ -3762,15 +3190,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteServiceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster: "String",
-    #         service: "String", # required
-    #         force: false,
-    #       }
-    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster
     #   that hosts the service to delete. If you do not specify a cluster,
@@ -3809,16 +3228,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteTaskSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster: "String", # required
-    #         service: "String", # required
-    #         task_set: "String", # required
-    #         force: false,
-    #       }
-    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster
     #   that hosts the service that the task set found in to delete.
@@ -4062,14 +3471,6 @@ module Aws::ECS
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html
     #
-    # @note When making an API call, you may pass DeploymentCircuitBreaker
-    #   data as a hash:
-    #
-    #       {
-    #         enable: false, # required
-    #         rollback: false, # required
-    #       }
-    #
     # @!attribute [rw] enable
     #   Determines whether to use the deployment circuit breaker logic for
     #   the service.
@@ -4093,18 +3494,6 @@ module Aws::ECS
 
     # Optional deployment parameters that control how many tasks run during
     # a deployment and the ordering of stopping and starting tasks.
-    #
-    # @note When making an API call, you may pass DeploymentConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         deployment_circuit_breaker: {
-    #           enable: false, # required
-    #           rollback: false, # required
-    #         },
-    #         maximum_percent: 1,
-    #         minimum_healthy_percent: 1,
-    #       }
     #
     # @!attribute [rw] deployment_circuit_breaker
     #   <note markdown="1"> The deployment circuit breaker can only be used for services using
@@ -4219,13 +3608,6 @@ module Aws::ECS
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html
     #
-    # @note When making an API call, you may pass DeploymentController
-    #   data as a hash:
-    #
-    #       {
-    #         type: "ECS", # required, accepts ECS, CODE_DEPLOY, EXTERNAL
-    #       }
-    #
     # @!attribute [rw] type
     #   The deployment controller type to use.
     #
@@ -4262,15 +3644,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeregisterContainerInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster: "String",
-    #         container_instance: "String", # required
-    #         force: false,
-    #       }
-    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster
     #   that hosts the container instance to deregister. If you do not
@@ -4325,13 +3698,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeregisterTaskDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         task_definition: "String", # required
-    #       }
-    #
     # @!attribute [rw] task_definition
     #   The `family` and `revision` (`family:revision`) or full Amazon
     #   Resource Name (ARN) of the task definition to deregister. You must
@@ -4358,16 +3724,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeCapacityProvidersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         capacity_providers: ["String"],
-    #         include: ["TAGS"], # accepts TAGS
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] capacity_providers
     #   The short name or full Amazon Resource Name (ARN) of one or more
     #   capacity providers. Up to `100` capacity providers can be described
@@ -4444,14 +3800,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeClustersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         clusters: ["String"],
-    #         include: ["ATTACHMENTS"], # accepts ATTACHMENTS, CONFIGURATIONS, SETTINGS, STATISTICS, TAGS
-    #       }
-    #
     # @!attribute [rw] clusters
     #   A list of up to 100 cluster names or full cluster Amazon Resource
     #   Name (ARN) entries. If you do not specify a cluster, the default
@@ -4506,15 +3854,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeContainerInstancesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster: "String",
-    #         container_instances: ["String"], # required
-    #         include: ["TAGS"], # accepts TAGS, CONTAINER_INSTANCE_HEALTH
-    #       }
-    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster
     #   that hosts the container instances to describe. If you do not
@@ -4565,15 +3904,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeServicesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster: "String",
-    #         services: ["String"], # required
-    #         include: ["TAGS"], # accepts TAGS
-    #       }
-    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN)the cluster that
     #   hosts the service to describe. If you do not specify a cluster, the
@@ -4621,14 +3951,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeTaskDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         task_definition: "String", # required
-    #         include: ["TAGS"], # accepts TAGS
-    #       }
-    #
     # @!attribute [rw] task_definition
     #   The `family` for the latest `ACTIVE` revision, `family` and
     #   `revision` (`family:revision`) for a specific revision in the
@@ -4695,16 +4017,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeTaskSetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster: "String", # required
-    #         service: "String", # required
-    #         task_sets: ["String"],
-    #         include: ["TAGS"], # accepts TAGS
-    #       }
-    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster
     #   that hosts the service that the task sets exist in.
@@ -4753,15 +4065,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeTasksRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster: "String",
-    #         tasks: ["String"], # required
-    #         include: ["TAGS"], # accepts TAGS
-    #       }
-    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster
     #   that hosts the task or tasks to describe. If you do not specify a
@@ -4809,15 +4112,6 @@ module Aws::ECS
 
     # An object representing a container instance host device.
     #
-    # @note When making an API call, you may pass Device
-    #   data as a hash:
-    #
-    #       {
-    #         host_path: "String", # required
-    #         container_path: "String",
-    #         permissions: ["read"], # accepts read, write, mknod
-    #       }
-    #
     # @!attribute [rw] host_path
     #   The path for the device on the host container instance.
     #   @return [String]
@@ -4842,14 +4136,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DiscoverPollEndpointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         container_instance: "String",
-    #         cluster: "String",
-    #       }
-    #
     # @!attribute [rw] container_instance
     #   The container instance ID or full ARN of the container instance. For
     #   more information about the ARN format, see [Amazon Resource Name
@@ -4906,21 +4192,6 @@ module Aws::ECS
     # volumes are only supported when you're using the EC2 launch type.
     # Windows containers only support the use of the `local` driver. To use
     # bind mounts, specify a `host` instead.
-    #
-    # @note When making an API call, you may pass DockerVolumeConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         scope: "task", # accepts task, shared
-    #         autoprovision: false,
-    #         driver: "String",
-    #         driver_opts: {
-    #           "String" => "String",
-    #         },
-    #         labels: {
-    #           "String" => "String",
-    #         },
-    #       }
     #
     # @!attribute [rw] scope
     #   The scope for the Docker volume that determines its lifecycle.
@@ -4999,14 +4270,6 @@ module Aws::ECS
     # The authorization configuration details for the Amazon EFS file
     # system.
     #
-    # @note When making an API call, you may pass EFSAuthorizationConfig
-    #   data as a hash:
-    #
-    #       {
-    #         access_point_id: "String",
-    #         iam: "ENABLED", # accepts ENABLED, DISABLED
-    #       }
-    #
     # @!attribute [rw] access_point_id
     #   The Amazon EFS access point ID to use. If an access point is
     #   specified, the root directory value specified in the
@@ -5053,20 +4316,6 @@ module Aws::ECS
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/efs-volumes.html
-    #
-    # @note When making an API call, you may pass EFSVolumeConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         file_system_id: "String", # required
-    #         root_directory: "String",
-    #         transit_encryption: "ENABLED", # accepts ENABLED, DISABLED
-    #         transit_encryption_port: 1,
-    #         authorization_config: {
-    #           access_point_id: "String",
-    #           iam: "ENABLED", # accepts ENABLED, DISABLED
-    #         },
-    #       }
     #
     # @!attribute [rw] file_system_id
     #   The Amazon EFS file system ID to use.
@@ -5154,14 +4403,6 @@ module Aws::ECS
     # [1]: https://docs.docker.com/compose/env-file/
     # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/taskdef-envfiles.html
     #
-    # @note When making an API call, you may pass EnvironmentFile
-    #   data as a hash:
-    #
-    #       {
-    #         value: "String", # required
-    #         type: "s3", # required, accepts s3
-    #       }
-    #
     # @!attribute [rw] value
     #   The Amazon Resource Name (ARN) of the Amazon S3 object containing
     #   the environment variable file.
@@ -5196,13 +4437,6 @@ module Aws::ECS
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/userguide/using_data_volumes.html
     #
-    # @note When making an API call, you may pass EphemeralStorage
-    #   data as a hash:
-    #
-    #       {
-    #         size_in_gi_b: 1, # required
-    #       }
-    #
     # @!attribute [rw] size_in_gi_b
     #   The total amount, in GiB, of ephemeral storage to set for the task.
     #   The minimum supported value is `21` GiB and the maximum supported
@@ -5218,21 +4452,6 @@ module Aws::ECS
     end
 
     # The details of the execute command configuration.
-    #
-    # @note When making an API call, you may pass ExecuteCommandConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         kms_key_id: "String",
-    #         logging: "NONE", # accepts NONE, DEFAULT, OVERRIDE
-    #         log_configuration: {
-    #           cloud_watch_log_group_name: "String",
-    #           cloud_watch_encryption_enabled: false,
-    #           s3_bucket_name: "String",
-    #           s3_encryption_enabled: false,
-    #           s3_key_prefix: "String",
-    #         },
-    #       }
     #
     # @!attribute [rw] kms_key_id
     #   Specify an Key Management Service key ID to encrypt the data between
@@ -5274,17 +4493,6 @@ module Aws::ECS
 
     # The log configuration for the results of the execute command actions.
     # The logs can be sent to CloudWatch Logs or an Amazon S3 bucket.
-    #
-    # @note When making an API call, you may pass ExecuteCommandLogConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         cloud_watch_log_group_name: "String",
-    #         cloud_watch_encryption_enabled: false,
-    #         s3_bucket_name: "String",
-    #         s3_encryption_enabled: false,
-    #         s3_key_prefix: "String",
-    #       }
     #
     # @!attribute [rw] cloud_watch_log_group_name
     #   The name of the CloudWatch log group to send logs to.
@@ -5328,17 +4536,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ExecuteCommandRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster: "String",
-    #         container: "String",
-    #         command: "String", # required
-    #         interactive: false, # required
-    #         task: "String", # required
-    #       }
-    #
     # @!attribute [rw] cluster
     #   The Amazon Resource Name (ARN) or short name of the cluster the task
     #   is running in. If you do not specify a cluster, the default cluster
@@ -5430,14 +4627,6 @@ module Aws::ECS
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_FSxWindowsFileServerVolumeConfiguration.html
     # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/wfsx-volumes.html
     #
-    # @note When making an API call, you may pass FSxWindowsFileServerAuthorizationConfig
-    #   data as a hash:
-    #
-    #       {
-    #         credentials_parameter: "String", # required
-    #         domain: "String", # required
-    #       }
-    #
     # @!attribute [rw] credentials_parameter
     #   The authorization credential option to use. The authorization
     #   credential options can be provided using either the Amazon Resource
@@ -5475,18 +4664,6 @@ module Aws::ECS
     #
     # [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/what-is.html
     # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/wfsx-volumes.html
-    #
-    # @note When making an API call, you may pass FSxWindowsFileServerVolumeConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         file_system_id: "String", # required
-    #         root_directory: "String", # required
-    #         authorization_config: { # required
-    #           credentials_parameter: "String", # required
-    #           domain: "String", # required
-    #         },
-    #       }
     #
     # @!attribute [rw] file_system_id
     #   The Amazon FSx for Windows File Server file system ID to use.
@@ -5550,16 +4727,6 @@ module Aws::ECS
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html
     #
-    # @note When making an API call, you may pass FirelensConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         type: "fluentd", # required, accepts fluentd, fluentbit
-    #         options: {
-    #           "String" => "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] type
     #   The log router to use. The valid values are `fluentd` or
     #   `fluentbit`.
@@ -5595,14 +4762,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetTaskProtectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster: "String", # required
-    #         tasks: ["String"],
-    #       }
-    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster
     #   that hosts the service that the task sets exist in.
@@ -5720,17 +4879,6 @@ module Aws::ECS
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html
     # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
     #
-    # @note When making an API call, you may pass HealthCheck
-    #   data as a hash:
-    #
-    #       {
-    #         command: ["String"], # required
-    #         interval: 1,
-    #         timeout: 1,
-    #         retries: 1,
-    #         start_period: 1,
-    #       }
-    #
     # @!attribute [rw] command
     #   A string array representing the command that the container runs to
     #   determine if it is healthy. The string array must start with `CMD`
@@ -5805,14 +4953,6 @@ module Aws::ECS
     # file of a container via the `extraHosts` parameter of its
     # ContainerDefinition.
     #
-    # @note When making an API call, you may pass HostEntry
-    #   data as a hash:
-    #
-    #       {
-    #         hostname: "String", # required
-    #         ip_address: "String", # required
-    #       }
-    #
     # @!attribute [rw] hostname
     #   The hostname to use in the `/etc/hosts` entry.
     #   @return [String]
@@ -5831,13 +4971,6 @@ module Aws::ECS
     end
 
     # Details on a container instance bind mount host volume.
-    #
-    # @note When making an API call, you may pass HostVolumeProperties
-    #   data as a hash:
-    #
-    #       {
-    #         source_path: "String",
-    #       }
     #
     # @!attribute [rw] source_path
     #   When the `host` parameter is used, specify a `sourcePath` to declare
@@ -5870,14 +5003,6 @@ module Aws::ECS
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-inference.html
     #
-    # @note When making an API call, you may pass InferenceAccelerator
-    #   data as a hash:
-    #
-    #       {
-    #         device_name: "String", # required
-    #         device_type: "String", # required
-    #       }
-    #
     # @!attribute [rw] device_name
     #   The Elastic Inference accelerator device name. The `deviceName` must
     #   also be referenced in a container definition as a
@@ -5906,14 +5031,6 @@ module Aws::ECS
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-inference.html
-    #
-    # @note When making an API call, you may pass InferenceAcceleratorOverride
-    #   data as a hash:
-    #
-    #       {
-    #         device_name: "String",
-    #         device_type: "String",
-    #       }
     #
     # @!attribute [rw] device_name
     #   The Elastic Inference accelerator device name to override for the
@@ -5986,14 +5103,6 @@ module Aws::ECS
     # [1]: https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities
     # [2]: http://man7.org/linux/man-pages/man7/capabilities.7.html
     #
-    # @note When making an API call, you may pass KernelCapabilities
-    #   data as a hash:
-    #
-    #       {
-    #         add: ["String"],
-    #         drop: ["String"],
-    #       }
-    #
     # @!attribute [rw] add
     #   The Linux capabilities for the container that have been added to the
     #   default configuration provided by Docker. This parameter maps to
@@ -6056,14 +5165,6 @@ module Aws::ECS
 
     # A key-value pair object.
     #
-    # @note When making an API call, you may pass KeyValuePair
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String",
-    #         value: "String",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the key-value pair. For environment variables, this is
     #   the name of the environment variable.
@@ -6091,34 +5192,6 @@ module Aws::ECS
 
     # Linux-specific options that are applied to the container, such as
     # Linux KernelCapabilities.
-    #
-    # @note When making an API call, you may pass LinuxParameters
-    #   data as a hash:
-    #
-    #       {
-    #         capabilities: {
-    #           add: ["String"],
-    #           drop: ["String"],
-    #         },
-    #         devices: [
-    #           {
-    #             host_path: "String", # required
-    #             container_path: "String",
-    #             permissions: ["read"], # accepts read, write, mknod
-    #           },
-    #         ],
-    #         init_process_enabled: false,
-    #         shared_memory_size: 1,
-    #         tmpfs: [
-    #           {
-    #             container_path: "String", # required
-    #             size: 1, # required
-    #             mount_options: ["String"],
-    #           },
-    #         ],
-    #         max_swap: 1,
-    #         swappiness: 1,
-    #       }
     #
     # @!attribute [rw] capabilities
     #   The Linux capabilities for the container that are added to or
@@ -6249,18 +5322,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAccountSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "serviceLongArnFormat", # accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights
-    #         value: "String",
-    #         principal_arn: "String",
-    #         effective_settings: false,
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the account setting you want to list the settings for.
     #   @return [String]
@@ -6348,18 +5409,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAttributesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster: "String",
-    #         target_type: "container-instance", # required, accepts container-instance
-    #         attribute_name: "String",
-    #         attribute_value: "String",
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster to
     #   list attributes. If you do not specify a cluster, the default
@@ -6437,14 +5486,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListClustersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The `nextToken` value returned from a `ListClusters` request
     #   indicating that more results are available to fulfill the request
@@ -6499,17 +5540,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListContainerInstancesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster: "String",
-    #         filter: "String",
-    #         next_token: "String",
-    #         max_results: 1,
-    #         status: "ACTIVE", # accepts ACTIVE, DRAINING, REGISTERING, DEREGISTERING, REGISTRATION_FAILED
-    #       }
-    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster
     #   that hosts the container instances to list. If you do not specify a
@@ -6595,15 +5625,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListServicesByNamespaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         namespace: "String", # required
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] namespace
     #   The namespace name or full Amazon Resource Name (ARN) of the Cloud
     #   Map namespace to list the services in.
@@ -6674,17 +5695,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListServicesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster: "String",
-    #         next_token: "String",
-    #         max_results: 1,
-    #         launch_type: "EC2", # accepts EC2, FARGATE, EXTERNAL
-    #         scheduling_strategy: "REPLICA", # accepts REPLICA, DAEMON
-    #       }
-    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster to
     #   use when filtering the `ListServices` results. If you do not specify
@@ -6757,13 +5767,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) that identifies the resource to list
     #   the tags for. Currently, the supported resources are Amazon ECS
@@ -6791,16 +5794,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTaskDefinitionFamiliesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         family_prefix: "String",
-    #         status: "ACTIVE", # accepts ACTIVE, INACTIVE, ALL
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] family_prefix
     #   The `familyPrefix` is a string that's used to filter the results of
     #   `ListTaskDefinitionFamilies`. If you specify a `familyPrefix`, only
@@ -6879,17 +5872,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTaskDefinitionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         family_prefix: "String",
-    #         status: "ACTIVE", # accepts ACTIVE, INACTIVE
-    #         sort: "ASC", # accepts ASC, DESC
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] family_prefix
     #   The full family name to filter the `ListTaskDefinitions` results
     #   with. Specifying a `familyPrefix` limits the listed task definitions
@@ -6974,21 +5956,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTasksRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster: "String",
-    #         container_instance: "String",
-    #         family: "String",
-    #         next_token: "String",
-    #         max_results: 1,
-    #         started_by: "String",
-    #         service_name: "String",
-    #         desired_status: "RUNNING", # accepts RUNNING, PENDING, STOPPED
-    #         launch_type: "EC2", # accepts EC2, FARGATE, EXTERNAL
-    #       }
-    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster to
     #   use when filtering the `ListTasks` results. If you do not specify a
@@ -7126,16 +6093,6 @@ module Aws::ECS
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html
     #
-    # @note When making an API call, you may pass LoadBalancer
-    #   data as a hash:
-    #
-    #       {
-    #         target_group_arn: "String",
-    #         load_balancer_name: "String",
-    #         container_name: "String",
-    #         container_port: 1,
-    #       }
-    #
     # @!attribute [rw] target_group_arn
     #   The full Amazon Resource Name (ARN) of the Elastic Load Balancing
     #   target group or groups associated with a service or task set.
@@ -7244,22 +6201,6 @@ module Aws::ECS
     # [4]: https://docs.docker.com/engine/admin/logging/overview/
     # [5]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
     #
-    # @note When making an API call, you may pass LogConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk, awsfirelens
-    #         options: {
-    #           "String" => "String",
-    #         },
-    #         secret_options: [
-    #           {
-    #             name: "String", # required
-    #             value_from: "String", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] log_driver
     #   The log driver to use for the container.
     #
@@ -7356,16 +6297,6 @@ module Aws::ECS
 
     # An object representing a change in state for a managed agent.
     #
-    # @note When making an API call, you may pass ManagedAgentStateChange
-    #   data as a hash:
-    #
-    #       {
-    #         container_name: "String", # required
-    #         managed_agent_name: "ExecuteCommandAgent", # required, accepts ExecuteCommandAgent
-    #         status: "String", # required
-    #         reason: "String",
-    #       }
-    #
     # @!attribute [rw] container_name
     #   The name of the container that's associated with the managed agent.
     #   @return [String]
@@ -7409,17 +6340,6 @@ module Aws::ECS
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/asg-capacity-providers.html#asg-capacity-providers-managed-scaling
-    #
-    # @note When making an API call, you may pass ManagedScaling
-    #   data as a hash:
-    #
-    #       {
-    #         status: "ENABLED", # accepts ENABLED, DISABLED
-    #         target_capacity: 1,
-    #         minimum_scaling_step_size: 1,
-    #         maximum_scaling_step_size: 1,
-    #         instance_warmup_period: 1,
-    #       }
     #
     # @!attribute [rw] status
     #   Determines whether to use managed scaling for the capacity provider.
@@ -7488,15 +6408,6 @@ module Aws::ECS
     # Details for a volume mount point that's used in a container
     # definition.
     #
-    # @note When making an API call, you may pass MountPoint
-    #   data as a hash:
-    #
-    #       {
-    #         source_volume: "String",
-    #         container_path: "String",
-    #         read_only: false,
-    #       }
-    #
     # @!attribute [rw] source_volume
     #   The name of the volume to mount. Must be a volume name referenced in
     #   the `name` parameter of task definition `volume`.
@@ -7533,16 +6444,6 @@ module Aws::ECS
     # and automatic host and container port assignments are visible in the
     # `networkBindings` section of DescribeTasks API responses.
     #
-    # @note When making an API call, you may pass NetworkBinding
-    #   data as a hash:
-    #
-    #       {
-    #         bind_ip: "String",
-    #         container_port: 1,
-    #         host_port: 1,
-    #         protocol: "tcp", # accepts tcp, udp
-    #       }
-    #
     # @!attribute [rw] bind_ip
     #   The IP address that the container is bound to on the container
     #   instance.
@@ -7574,17 +6475,6 @@ module Aws::ECS
 
     # An object representing the network configuration for a task or
     # service.
-    #
-    # @note When making an API call, you may pass NetworkConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         awsvpc_configuration: {
-    #           subnets: ["String"], # required
-    #           security_groups: ["String"],
-    #           assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
-    #         },
-    #       }
     #
     # @!attribute [rw] awsvpc_configuration
     #   The VPC subnets and security groups that are associated with a task.
@@ -7649,14 +6539,6 @@ module Aws::ECS
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html
     #
-    # @note When making an API call, you may pass PlacementConstraint
-    #   data as a hash:
-    #
-    #       {
-    #         type: "distinctInstance", # accepts distinctInstance, memberOf
-    #         expression: "String",
-    #       }
-    #
     # @!attribute [rw] type
     #   The type of constraint. Use `distinctInstance` to ensure that each
     #   task in a particular group is running on a different container
@@ -7693,14 +6575,6 @@ module Aws::ECS
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-strategies.html
     #
-    # @note When making an API call, you may pass PlacementStrategy
-    #   data as a hash:
-    #
-    #       {
-    #         type: "random", # accepts random, spread, binpack
-    #         field: "String",
-    #       }
-    #
     # @!attribute [rw] type
     #   The type of placement strategy. The `random` placement strategy
     #   randomly places tasks on available candidates. The `spread`
@@ -7734,14 +6608,6 @@ module Aws::ECS
 
     # The devices that are available on the container instance. The only
     # supported device type is a GPU.
-    #
-    # @note When making an API call, you may pass PlatformDevice
-    #   data as a hash:
-    #
-    #       {
-    #         id: "String", # required
-    #         type: "GPU", # required, accepts GPU
-    #       }
     #
     # @!attribute [rw] id
     #   The ID for the GPUs on the container instance. The available GPU IDs
@@ -7792,17 +6658,6 @@ module Aws::ECS
     # After a task reaches the `RUNNING` status, manual and automatic host
     # and container port assignments are visible in the `networkBindings`
     # section of DescribeTasks API responses.
-    #
-    # @note When making an API call, you may pass PortMapping
-    #   data as a hash:
-    #
-    #       {
-    #         container_port: 1,
-    #         host_port: 1,
-    #         protocol: "tcp", # accepts tcp, udp
-    #         name: "String",
-    #         app_protocol: "http", # accepts http, http2, grpc
-    #       }
     #
     # @!attribute [rw] container_port
     #   The port number on the container that's bound to the user-specified
@@ -7955,20 +6810,6 @@ module Aws::ECS
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html
     #
-    # @note When making an API call, you may pass ProxyConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         type: "APPMESH", # accepts APPMESH
-    #         container_name: "String", # required
-    #         properties: [
-    #           {
-    #             name: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] type
     #   The proxy type. The only supported value is `APPMESH`.
     #   @return [String]
@@ -8020,14 +6861,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutAccountSettingDefaultRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights
-    #         value: "String", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The resource name for which to modify the account setting. If
     #   `serviceLongArnFormat` is specified, the ARN for your Amazon ECS
@@ -8077,15 +6910,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutAccountSettingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights
-    #         value: "String", # required
-    #         principal_arn: "String",
-    #       }
-    #
     # @!attribute [rw] name
     #   The Amazon ECS resource name for which to modify the account
     #   setting. If `serviceLongArnFormat` is specified, the ARN for your
@@ -8140,21 +6964,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutAttributesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster: "String",
-    #         attributes: [ # required
-    #           {
-    #             name: "String", # required
-    #             value: "String",
-    #             target_type: "container-instance", # accepts container-instance
-    #             target_id: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster
     #   that contains the resource to apply attributes. If you do not
@@ -8188,21 +6997,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutClusterCapacityProvidersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster: "String", # required
-    #         capacity_providers: ["String"], # required
-    #         default_capacity_provider_strategy: [ # required
-    #           {
-    #             capacity_provider: "String", # required
-    #             weight: 1,
-    #             base: 1,
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster to
     #   modify the capacity provider settings for. If you don't specify a
@@ -8271,51 +7065,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RegisterContainerInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster: "String",
-    #         instance_identity_document: "String",
-    #         instance_identity_document_signature: "String",
-    #         total_resources: [
-    #           {
-    #             name: "String",
-    #             type: "String",
-    #             double_value: 1.0,
-    #             long_value: 1,
-    #             integer_value: 1,
-    #             string_set_value: ["String"],
-    #           },
-    #         ],
-    #         version_info: {
-    #           agent_version: "String",
-    #           agent_hash: "String",
-    #           docker_version: "String",
-    #         },
-    #         container_instance_arn: "String",
-    #         attributes: [
-    #           {
-    #             name: "String", # required
-    #             value: "String",
-    #             target_type: "container-instance", # accepts container-instance
-    #             target_id: "String",
-    #           },
-    #         ],
-    #         platform_devices: [
-    #           {
-    #             id: "String", # required
-    #             type: "GPU", # required, accepts GPU
-    #           },
-    #         ],
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster to
     #   register your container instance with. If you do not specify a
@@ -8418,245 +7167,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RegisterTaskDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         family: "String", # required
-    #         task_role_arn: "String",
-    #         execution_role_arn: "String",
-    #         network_mode: "bridge", # accepts bridge, host, awsvpc, none
-    #         container_definitions: [ # required
-    #           {
-    #             name: "String",
-    #             image: "String",
-    #             repository_credentials: {
-    #               credentials_parameter: "String", # required
-    #             },
-    #             cpu: 1,
-    #             memory: 1,
-    #             memory_reservation: 1,
-    #             links: ["String"],
-    #             port_mappings: [
-    #               {
-    #                 container_port: 1,
-    #                 host_port: 1,
-    #                 protocol: "tcp", # accepts tcp, udp
-    #                 name: "String",
-    #                 app_protocol: "http", # accepts http, http2, grpc
-    #               },
-    #             ],
-    #             essential: false,
-    #             entry_point: ["String"],
-    #             command: ["String"],
-    #             environment: [
-    #               {
-    #                 name: "String",
-    #                 value: "String",
-    #               },
-    #             ],
-    #             environment_files: [
-    #               {
-    #                 value: "String", # required
-    #                 type: "s3", # required, accepts s3
-    #               },
-    #             ],
-    #             mount_points: [
-    #               {
-    #                 source_volume: "String",
-    #                 container_path: "String",
-    #                 read_only: false,
-    #               },
-    #             ],
-    #             volumes_from: [
-    #               {
-    #                 source_container: "String",
-    #                 read_only: false,
-    #               },
-    #             ],
-    #             linux_parameters: {
-    #               capabilities: {
-    #                 add: ["String"],
-    #                 drop: ["String"],
-    #               },
-    #               devices: [
-    #                 {
-    #                   host_path: "String", # required
-    #                   container_path: "String",
-    #                   permissions: ["read"], # accepts read, write, mknod
-    #                 },
-    #               ],
-    #               init_process_enabled: false,
-    #               shared_memory_size: 1,
-    #               tmpfs: [
-    #                 {
-    #                   container_path: "String", # required
-    #                   size: 1, # required
-    #                   mount_options: ["String"],
-    #                 },
-    #               ],
-    #               max_swap: 1,
-    #               swappiness: 1,
-    #             },
-    #             secrets: [
-    #               {
-    #                 name: "String", # required
-    #                 value_from: "String", # required
-    #               },
-    #             ],
-    #             depends_on: [
-    #               {
-    #                 container_name: "String", # required
-    #                 condition: "START", # required, accepts START, COMPLETE, SUCCESS, HEALTHY
-    #               },
-    #             ],
-    #             start_timeout: 1,
-    #             stop_timeout: 1,
-    #             hostname: "String",
-    #             user: "String",
-    #             working_directory: "String",
-    #             disable_networking: false,
-    #             privileged: false,
-    #             readonly_root_filesystem: false,
-    #             dns_servers: ["String"],
-    #             dns_search_domains: ["String"],
-    #             extra_hosts: [
-    #               {
-    #                 hostname: "String", # required
-    #                 ip_address: "String", # required
-    #               },
-    #             ],
-    #             docker_security_options: ["String"],
-    #             interactive: false,
-    #             pseudo_terminal: false,
-    #             docker_labels: {
-    #               "String" => "String",
-    #             },
-    #             ulimits: [
-    #               {
-    #                 name: "core", # required, accepts core, cpu, data, fsize, locks, memlock, msgqueue, nice, nofile, nproc, rss, rtprio, rttime, sigpending, stack
-    #                 soft_limit: 1, # required
-    #                 hard_limit: 1, # required
-    #               },
-    #             ],
-    #             log_configuration: {
-    #               log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk, awsfirelens
-    #               options: {
-    #                 "String" => "String",
-    #               },
-    #               secret_options: [
-    #                 {
-    #                   name: "String", # required
-    #                   value_from: "String", # required
-    #                 },
-    #               ],
-    #             },
-    #             health_check: {
-    #               command: ["String"], # required
-    #               interval: 1,
-    #               timeout: 1,
-    #               retries: 1,
-    #               start_period: 1,
-    #             },
-    #             system_controls: [
-    #               {
-    #                 namespace: "String",
-    #                 value: "String",
-    #               },
-    #             ],
-    #             resource_requirements: [
-    #               {
-    #                 value: "String", # required
-    #                 type: "GPU", # required, accepts GPU, InferenceAccelerator
-    #               },
-    #             ],
-    #             firelens_configuration: {
-    #               type: "fluentd", # required, accepts fluentd, fluentbit
-    #               options: {
-    #                 "String" => "String",
-    #               },
-    #             },
-    #           },
-    #         ],
-    #         volumes: [
-    #           {
-    #             name: "String",
-    #             host: {
-    #               source_path: "String",
-    #             },
-    #             docker_volume_configuration: {
-    #               scope: "task", # accepts task, shared
-    #               autoprovision: false,
-    #               driver: "String",
-    #               driver_opts: {
-    #                 "String" => "String",
-    #               },
-    #               labels: {
-    #                 "String" => "String",
-    #               },
-    #             },
-    #             efs_volume_configuration: {
-    #               file_system_id: "String", # required
-    #               root_directory: "String",
-    #               transit_encryption: "ENABLED", # accepts ENABLED, DISABLED
-    #               transit_encryption_port: 1,
-    #               authorization_config: {
-    #                 access_point_id: "String",
-    #                 iam: "ENABLED", # accepts ENABLED, DISABLED
-    #               },
-    #             },
-    #             fsx_windows_file_server_volume_configuration: {
-    #               file_system_id: "String", # required
-    #               root_directory: "String", # required
-    #               authorization_config: { # required
-    #                 credentials_parameter: "String", # required
-    #                 domain: "String", # required
-    #               },
-    #             },
-    #           },
-    #         ],
-    #         placement_constraints: [
-    #           {
-    #             type: "memberOf", # accepts memberOf
-    #             expression: "String",
-    #           },
-    #         ],
-    #         requires_compatibilities: ["EC2"], # accepts EC2, FARGATE, EXTERNAL
-    #         cpu: "String",
-    #         memory: "String",
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         pid_mode: "host", # accepts host, task
-    #         ipc_mode: "host", # accepts host, task, none
-    #         proxy_configuration: {
-    #           type: "APPMESH", # accepts APPMESH
-    #           container_name: "String", # required
-    #           properties: [
-    #             {
-    #               name: "String",
-    #               value: "String",
-    #             },
-    #           ],
-    #         },
-    #         inference_accelerators: [
-    #           {
-    #             device_name: "String", # required
-    #             device_type: "String", # required
-    #           },
-    #         ],
-    #         ephemeral_storage: {
-    #           size_in_gi_b: 1, # required
-    #         },
-    #         runtime_platform: {
-    #           cpu_architecture: "X86_64", # accepts X86_64, ARM64
-    #           operating_system_family: "WINDOWS_SERVER_2019_FULL", # accepts WINDOWS_SERVER_2019_FULL, WINDOWS_SERVER_2019_CORE, WINDOWS_SERVER_2016_FULL, WINDOWS_SERVER_2004_CORE, WINDOWS_SERVER_2022_CORE, WINDOWS_SERVER_2022_FULL, WINDOWS_SERVER_20H2_CORE, LINUX
-    #         },
-    #       }
-    #
     # @!attribute [rw] family
     #   You must specify a `family` for a task definition. You can use it
     #   track multiple versions of the same task definition. The `family` is
@@ -9051,13 +7561,6 @@ module Aws::ECS
 
     # The repository credentials for private registry authentication.
     #
-    # @note When making an API call, you may pass RepositoryCredentials
-    #   data as a hash:
-    #
-    #       {
-    #         credentials_parameter: "String", # required
-    #       }
-    #
     # @!attribute [rw] credentials_parameter
     #   The Amazon Resource Name (ARN) of the secret containing the private
     #   repository credentials.
@@ -9080,18 +7583,6 @@ module Aws::ECS
     end
 
     # Describes the resources available for a container instance.
-    #
-    # @note When making an API call, you may pass Resource
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String",
-    #         type: "String",
-    #         double_value: 1.0,
-    #         long_value: 1,
-    #         integer_value: 1,
-    #         string_set_value: ["String"],
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the resource, such as `CPU`, `MEMORY`, `PORTS`,
@@ -9159,14 +7650,6 @@ module Aws::ECS
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-gpu.html
     # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-inference.html
     #
-    # @note When making an API call, you may pass ResourceRequirement
-    #   data as a hash:
-    #
-    #       {
-    #         value: "String", # required
-    #         type: "GPU", # required, accepts GPU, InferenceAccelerator
-    #       }
-    #
     # @!attribute [rw] value
     #   The value for the specified resource type.
     #
@@ -9195,97 +7678,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RunTaskRequest
-    #   data as a hash:
-    #
-    #       {
-    #         capacity_provider_strategy: [
-    #           {
-    #             capacity_provider: "String", # required
-    #             weight: 1,
-    #             base: 1,
-    #           },
-    #         ],
-    #         cluster: "String",
-    #         count: 1,
-    #         enable_ecs_managed_tags: false,
-    #         enable_execute_command: false,
-    #         group: "String",
-    #         launch_type: "EC2", # accepts EC2, FARGATE, EXTERNAL
-    #         network_configuration: {
-    #           awsvpc_configuration: {
-    #             subnets: ["String"], # required
-    #             security_groups: ["String"],
-    #             assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
-    #           },
-    #         },
-    #         overrides: {
-    #           container_overrides: [
-    #             {
-    #               name: "String",
-    #               command: ["String"],
-    #               environment: [
-    #                 {
-    #                   name: "String",
-    #                   value: "String",
-    #                 },
-    #               ],
-    #               environment_files: [
-    #                 {
-    #                   value: "String", # required
-    #                   type: "s3", # required, accepts s3
-    #                 },
-    #               ],
-    #               cpu: 1,
-    #               memory: 1,
-    #               memory_reservation: 1,
-    #               resource_requirements: [
-    #                 {
-    #                   value: "String", # required
-    #                   type: "GPU", # required, accepts GPU, InferenceAccelerator
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #           cpu: "String",
-    #           inference_accelerator_overrides: [
-    #             {
-    #               device_name: "String",
-    #               device_type: "String",
-    #             },
-    #           ],
-    #           execution_role_arn: "String",
-    #           memory: "String",
-    #           task_role_arn: "String",
-    #           ephemeral_storage: {
-    #             size_in_gi_b: 1, # required
-    #           },
-    #         },
-    #         placement_constraints: [
-    #           {
-    #             type: "distinctInstance", # accepts distinctInstance, memberOf
-    #             expression: "String",
-    #           },
-    #         ],
-    #         placement_strategy: [
-    #           {
-    #             type: "random", # accepts random, spread, binpack
-    #             field: "String",
-    #           },
-    #         ],
-    #         platform_version: "String",
-    #         propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION, SERVICE, NONE
-    #         reference_id: "String",
-    #         started_by: "String",
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         task_definition: "String", # required
-    #       }
-    #
     # @!attribute [rw] capacity_provider_strategy
     #   The capacity provider strategy to use for the task.
     #
@@ -9564,14 +7956,6 @@ module Aws::ECS
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#runtime-platform
     #
-    # @note When making an API call, you may pass RuntimePlatform
-    #   data as a hash:
-    #
-    #       {
-    #         cpu_architecture: "X86_64", # accepts X86_64, ARM64
-    #         operating_system_family: "WINDOWS_SERVER_2019_FULL", # accepts WINDOWS_SERVER_2019_FULL, WINDOWS_SERVER_2019_CORE, WINDOWS_SERVER_2016_FULL, WINDOWS_SERVER_2004_CORE, WINDOWS_SERVER_2022_CORE, WINDOWS_SERVER_2022_FULL, WINDOWS_SERVER_20H2_CORE, LINUX
-    #       }
-    #
     # @!attribute [rw] cpu_architecture
     #   The CPU architecture.
     #
@@ -9595,14 +7979,6 @@ module Aws::ECS
 
     # A floating-point percentage of the desired number of tasks to place
     # and keep running in the task set.
-    #
-    # @note When making an API call, you may pass Scale
-    #   data as a hash:
-    #
-    #       {
-    #         value: 1.0,
-    #         unit: "PERCENT", # accepts PERCENT
-    #       }
     #
     # @!attribute [rw] value
     #   The value, specified as a percent total of a service's
@@ -9638,14 +8014,6 @@ module Aws::ECS
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html
-    #
-    # @note When making an API call, you may pass Secret
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #         value_from: "String", # required
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the secret.
@@ -9995,14 +8363,6 @@ module Aws::ECS
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html
     #
-    # @note When making an API call, you may pass ServiceConnectClientAlias
-    #   data as a hash:
-    #
-    #       {
-    #         port: 1, # required
-    #         dns_name: "String",
-    #       }
-    #
     # @!attribute [rw] port
     #   The listening port number for the Service Connect proxy. This port
     #   is available inside of all of the tasks within the same namespace.
@@ -10067,39 +8427,6 @@ module Aws::ECS
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html
-    #
-    # @note When making an API call, you may pass ServiceConnectConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false, # required
-    #         namespace: "String",
-    #         services: [
-    #           {
-    #             port_name: "String", # required
-    #             discovery_name: "String",
-    #             client_aliases: [
-    #               {
-    #                 port: 1, # required
-    #                 dns_name: "String",
-    #               },
-    #             ],
-    #             ingress_port_override: 1,
-    #           },
-    #         ],
-    #         log_configuration: {
-    #           log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk, awsfirelens
-    #           options: {
-    #             "String" => "String",
-    #           },
-    #           secret_options: [
-    #             {
-    #               name: "String", # required
-    #               value_from: "String", # required
-    #             },
-    #           ],
-    #         },
-    #       }
     #
     # @!attribute [rw] enabled
     #   Specifies whether to use Service Connect with this service.
@@ -10199,21 +8526,6 @@ module Aws::ECS
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html
-    #
-    # @note When making an API call, you may pass ServiceConnectService
-    #   data as a hash:
-    #
-    #       {
-    #         port_name: "String", # required
-    #         discovery_name: "String",
-    #         client_aliases: [
-    #           {
-    #             port: 1, # required
-    #             dns_name: "String",
-    #           },
-    #         ],
-    #         ingress_port_override: 1,
-    #       }
     #
     # @!attribute [rw] port_name
     #   The `portName` must match the name of one of the `portMappings` from
@@ -10360,16 +8672,6 @@ module Aws::ECS
     # Amazon ECS starts a new deployment. New tasks are registered and
     # deregistered to the updated service registry configuration.
     #
-    # @note When making an API call, you may pass ServiceRegistry
-    #   data as a hash:
-    #
-    #       {
-    #         registry_arn: "String",
-    #         port: 1,
-    #         container_name: "String",
-    #         container_port: 1,
-    #       }
-    #
     # @!attribute [rw] registry_arn
     #   The Amazon Resource Name (ARN) of the service registry. The
     #   currently supported service registry is Cloud Map. For more
@@ -10475,76 +8777,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartTaskRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster: "String",
-    #         container_instances: ["String"], # required
-    #         enable_ecs_managed_tags: false,
-    #         enable_execute_command: false,
-    #         group: "String",
-    #         network_configuration: {
-    #           awsvpc_configuration: {
-    #             subnets: ["String"], # required
-    #             security_groups: ["String"],
-    #             assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
-    #           },
-    #         },
-    #         overrides: {
-    #           container_overrides: [
-    #             {
-    #               name: "String",
-    #               command: ["String"],
-    #               environment: [
-    #                 {
-    #                   name: "String",
-    #                   value: "String",
-    #                 },
-    #               ],
-    #               environment_files: [
-    #                 {
-    #                   value: "String", # required
-    #                   type: "s3", # required, accepts s3
-    #                 },
-    #               ],
-    #               cpu: 1,
-    #               memory: 1,
-    #               memory_reservation: 1,
-    #               resource_requirements: [
-    #                 {
-    #                   value: "String", # required
-    #                   type: "GPU", # required, accepts GPU, InferenceAccelerator
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #           cpu: "String",
-    #           inference_accelerator_overrides: [
-    #             {
-    #               device_name: "String",
-    #               device_type: "String",
-    #             },
-    #           ],
-    #           execution_role_arn: "String",
-    #           memory: "String",
-    #           task_role_arn: "String",
-    #           ephemeral_storage: {
-    #             size_in_gi_b: 1, # required
-    #           },
-    #         },
-    #         propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION, SERVICE, NONE
-    #         reference_id: "String",
-    #         started_by: "String",
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         task_definition: "String", # required
-    #       }
-    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster
     #   where to start your task. If you do not specify a cluster, the
@@ -10698,15 +8930,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopTaskRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster: "String",
-    #         task: "String", # required
-    #         reason: "String",
-    #       }
-    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster
     #   that hosts the task to stop. If you do not specify a cluster, the
@@ -10747,19 +8970,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SubmitAttachmentStateChangesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster: "String",
-    #         attachments: [ # required
-    #           {
-    #             attachment_arn: "String", # required
-    #             status: "String", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] cluster
     #   The short name or full ARN of the cluster that hosts the container
     #   instance the attachment belongs to.
@@ -10790,27 +9000,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SubmitContainerStateChangeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster: "String",
-    #         task: "String",
-    #         container_name: "String",
-    #         runtime_id: "String",
-    #         status: "String",
-    #         exit_code: 1,
-    #         reason: "String",
-    #         network_bindings: [
-    #           {
-    #             bind_ip: "String",
-    #             container_port: 1,
-    #             host_port: 1,
-    #             protocol: "tcp", # accepts tcp, udp
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] cluster
     #   The short name or full ARN of the cluster that hosts the container.
     #   @return [String]
@@ -10871,51 +9060,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SubmitTaskStateChangeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster: "String",
-    #         task: "String",
-    #         status: "String",
-    #         reason: "String",
-    #         containers: [
-    #           {
-    #             container_name: "String",
-    #             image_digest: "String",
-    #             runtime_id: "String",
-    #             exit_code: 1,
-    #             network_bindings: [
-    #               {
-    #                 bind_ip: "String",
-    #                 container_port: 1,
-    #                 host_port: 1,
-    #                 protocol: "tcp", # accepts tcp, udp
-    #               },
-    #             ],
-    #             reason: "String",
-    #             status: "String",
-    #           },
-    #         ],
-    #         attachments: [
-    #           {
-    #             attachment_arn: "String", # required
-    #             status: "String", # required
-    #           },
-    #         ],
-    #         managed_agents: [
-    #           {
-    #             container_name: "String", # required
-    #             managed_agent_name: "ExecuteCommandAgent", # required, accepts ExecuteCommandAgent
-    #             status: "String", # required
-    #             reason: "String",
-    #           },
-    #         ],
-    #         pull_started_at: Time.now,
-    #         pull_stopped_at: Time.now,
-    #         execution_stopped_at: Time.now,
-    #       }
-    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster
     #   that hosts the task.
@@ -11015,14 +9159,6 @@ module Aws::ECS
     # [2]: https://docs.docker.com/engine/api/v1.35/
     # [3]: https://docs.docker.com/engine/reference/run/#security-configuration
     #
-    # @note When making an API call, you may pass SystemControl
-    #   data as a hash:
-    #
-    #       {
-    #         namespace: "String",
-    #         value: "String",
-    #       }
-    #
     # @!attribute [rw] namespace
     #   The namespaced kernel parameter to set a `value` for.
     #   @return [String]
@@ -11070,14 +9206,6 @@ module Aws::ECS
     #   values with this prefix. Tags with this prefix do not count against
     #   your tags per resource limit.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey",
-    #         value: "TagValue",
-    #       }
-    #
     # @!attribute [rw] key
     #   One part of a key-value pair that make up a tag. A `key` is a
     #   general label that acts like a category for more specific tag
@@ -11098,19 +9226,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource to add tags to.
     #   Currently, the supported resources are Amazon ECS capacity
@@ -11985,14 +10100,6 @@ module Aws::ECS
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html
     #
-    # @note When making an API call, you may pass TaskDefinitionPlacementConstraint
-    #   data as a hash:
-    #
-    #       {
-    #         type: "memberOf", # accepts memberOf
-    #         expression: "String",
-    #       }
-    #
     # @!attribute [rw] type
     #   The type of constraint. The `MemberOf` constraint restricts
     #   selection to be from a group of valid candidates.
@@ -12018,52 +10125,6 @@ module Aws::ECS
     end
 
     # The overrides that are associated with a task.
-    #
-    # @note When making an API call, you may pass TaskOverride
-    #   data as a hash:
-    #
-    #       {
-    #         container_overrides: [
-    #           {
-    #             name: "String",
-    #             command: ["String"],
-    #             environment: [
-    #               {
-    #                 name: "String",
-    #                 value: "String",
-    #               },
-    #             ],
-    #             environment_files: [
-    #               {
-    #                 value: "String", # required
-    #                 type: "s3", # required, accepts s3
-    #               },
-    #             ],
-    #             cpu: 1,
-    #             memory: 1,
-    #             memory_reservation: 1,
-    #             resource_requirements: [
-    #               {
-    #                 value: "String", # required
-    #                 type: "GPU", # required, accepts GPU, InferenceAccelerator
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         cpu: "String",
-    #         inference_accelerator_overrides: [
-    #           {
-    #             device_name: "String",
-    #             device_type: "String",
-    #           },
-    #         ],
-    #         execution_role_arn: "String",
-    #         memory: "String",
-    #         task_role_arn: "String",
-    #         ephemeral_storage: {
-    #           size_in_gi_b: 1, # required
-    #         },
-    #       }
     #
     # @!attribute [rw] container_overrides
     #   One or more container overrides that are sent to a task.
@@ -12376,15 +10437,6 @@ module Aws::ECS
 
     # The container path, mount options, and size of the tmpfs mount.
     #
-    # @note When making an API call, you may pass Tmpfs
-    #   data as a hash:
-    #
-    #       {
-    #         container_path: "String", # required
-    #         size: 1, # required
-    #         mount_options: ["String"],
-    #       }
-    #
     # @!attribute [rw] container_path
     #   The absolute file path where the tmpfs volume is to be mounted.
     #   @return [String]
@@ -12424,15 +10476,6 @@ module Aws::ECS
     # container can use. The default `nofile` soft limit is `1024` and hard
     # limit is `4096`.
     #
-    # @note When making an API call, you may pass Ulimit
-    #   data as a hash:
-    #
-    #       {
-    #         name: "core", # required, accepts core, cpu, data, fsize, locks, memlock, msgqueue, nice, nofile, nproc, rss, rtprio, rttime, sigpending, stack
-    #         soft_limit: 1, # required
-    #         hard_limit: 1, # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The `type` of the `ulimit`.
     #   @return [String]
@@ -12461,14 +10504,6 @@ module Aws::ECS
     #
     class UnsupportedFeatureException < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource to delete tags from.
     #   Currently, the supported resources are Amazon ECS capacity
@@ -12493,23 +10528,6 @@ module Aws::ECS
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateCapacityProviderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #         auto_scaling_group_provider: { # required
-    #           managed_scaling: {
-    #             status: "ENABLED", # accepts ENABLED, DISABLED
-    #             target_capacity: 1,
-    #             minimum_scaling_step_size: 1,
-    #             maximum_scaling_step_size: 1,
-    #             instance_warmup_period: 1,
-    #           },
-    #           managed_termination_protection: "ENABLED", # accepts ENABLED, DISABLED
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the capacity provider to update.
     #   @return [String]
@@ -12540,35 +10558,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateClusterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster: "String", # required
-    #         settings: [
-    #           {
-    #             name: "containerInsights", # accepts containerInsights
-    #             value: "String",
-    #           },
-    #         ],
-    #         configuration: {
-    #           execute_command_configuration: {
-    #             kms_key_id: "String",
-    #             logging: "NONE", # accepts NONE, DEFAULT, OVERRIDE
-    #             log_configuration: {
-    #               cloud_watch_log_group_name: "String",
-    #               cloud_watch_encryption_enabled: false,
-    #               s3_bucket_name: "String",
-    #               s3_encryption_enabled: false,
-    #               s3_key_prefix: "String",
-    #             },
-    #           },
-    #         },
-    #         service_connect_defaults: {
-    #           namespace: "String", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] cluster
     #   The name of the cluster to modify the settings for.
     #   @return [String]
@@ -12628,19 +10617,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateClusterSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster: "String", # required
-    #         settings: [ # required
-    #           {
-    #             name: "containerInsights", # accepts containerInsights
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] cluster
     #   The name of the cluster to modify the settings for.
     #   @return [String]
@@ -12680,14 +10656,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateContainerAgentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster: "String",
-    #         container_instance: "String", # required
-    #       }
-    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster
     #   that your container instance is running on. If you do not specify a
@@ -12721,15 +10689,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateContainerInstancesStateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster: "String",
-    #         container_instances: ["String"], # required
-    #         status: "ACTIVE", # required, accepts ACTIVE, DRAINING, REGISTERING, DEREGISTERING, REGISTRATION_FAILED
-    #       }
-    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster
     #   that hosts the container instance to update. If you do not specify a
@@ -12788,15 +10747,6 @@ module Aws::ECS
     #
     class UpdateInProgressException < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateServicePrimaryTaskSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster: "String", # required
-    #         service: "String", # required
-    #         primary_task_set: "String", # required
-    #       }
-    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster
     #   that hosts the service that the task set exists in.
@@ -12834,101 +10784,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateServiceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster: "String",
-    #         service: "String", # required
-    #         desired_count: 1,
-    #         task_definition: "String",
-    #         capacity_provider_strategy: [
-    #           {
-    #             capacity_provider: "String", # required
-    #             weight: 1,
-    #             base: 1,
-    #           },
-    #         ],
-    #         deployment_configuration: {
-    #           deployment_circuit_breaker: {
-    #             enable: false, # required
-    #             rollback: false, # required
-    #           },
-    #           maximum_percent: 1,
-    #           minimum_healthy_percent: 1,
-    #         },
-    #         network_configuration: {
-    #           awsvpc_configuration: {
-    #             subnets: ["String"], # required
-    #             security_groups: ["String"],
-    #             assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
-    #           },
-    #         },
-    #         placement_constraints: [
-    #           {
-    #             type: "distinctInstance", # accepts distinctInstance, memberOf
-    #             expression: "String",
-    #           },
-    #         ],
-    #         placement_strategy: [
-    #           {
-    #             type: "random", # accepts random, spread, binpack
-    #             field: "String",
-    #           },
-    #         ],
-    #         platform_version: "String",
-    #         force_new_deployment: false,
-    #         health_check_grace_period_seconds: 1,
-    #         enable_execute_command: false,
-    #         enable_ecs_managed_tags: false,
-    #         load_balancers: [
-    #           {
-    #             target_group_arn: "String",
-    #             load_balancer_name: "String",
-    #             container_name: "String",
-    #             container_port: 1,
-    #           },
-    #         ],
-    #         propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION, SERVICE, NONE
-    #         service_registries: [
-    #           {
-    #             registry_arn: "String",
-    #             port: 1,
-    #             container_name: "String",
-    #             container_port: 1,
-    #           },
-    #         ],
-    #         service_connect_configuration: {
-    #           enabled: false, # required
-    #           namespace: "String",
-    #           services: [
-    #             {
-    #               port_name: "String", # required
-    #               discovery_name: "String",
-    #               client_aliases: [
-    #                 {
-    #                   port: 1, # required
-    #                   dns_name: "String",
-    #                 },
-    #               ],
-    #               ingress_port_override: 1,
-    #             },
-    #           ],
-    #           log_configuration: {
-    #             log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk, awsfirelens
-    #             options: {
-    #               "String" => "String",
-    #             },
-    #             secret_options: [
-    #               {
-    #                 name: "String", # required
-    #                 value_from: "String", # required
-    #               },
-    #             ],
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster
     #   that your service runs on. If you do not specify a cluster, the
@@ -13200,16 +11055,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateTaskProtectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster: "String", # required
-    #         tasks: ["String"], # required
-    #         protection_enabled: false, # required
-    #         expires_in_minutes: 1,
-    #       }
-    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster
     #   that hosts the service that the task sets exist in.
@@ -13273,19 +11118,6 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateTaskSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster: "String", # required
-    #         service: "String", # required
-    #         task_set: "String", # required
-    #         scale: { # required
-    #           value: 1.0,
-    #           unit: "PERCENT", # accepts PERCENT
-    #         },
-    #       }
-    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster
     #   that hosts the service that the task set is found in.
@@ -13332,15 +11164,6 @@ module Aws::ECS
     # The Docker and Amazon ECS container agent version information about a
     # container instance.
     #
-    # @note When making an API call, you may pass VersionInfo
-    #   data as a hash:
-    #
-    #       {
-    #         agent_version: "String",
-    #         agent_hash: "String",
-    #         docker_version: "String",
-    #       }
-    #
     # @!attribute [rw] agent_version
     #   The version number of the Amazon ECS container agent.
     #   @return [String]
@@ -13380,45 +11203,6 @@ module Aws::ECS
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html
-    #
-    # @note When making an API call, you may pass Volume
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String",
-    #         host: {
-    #           source_path: "String",
-    #         },
-    #         docker_volume_configuration: {
-    #           scope: "task", # accepts task, shared
-    #           autoprovision: false,
-    #           driver: "String",
-    #           driver_opts: {
-    #             "String" => "String",
-    #           },
-    #           labels: {
-    #             "String" => "String",
-    #           },
-    #         },
-    #         efs_volume_configuration: {
-    #           file_system_id: "String", # required
-    #           root_directory: "String",
-    #           transit_encryption: "ENABLED", # accepts ENABLED, DISABLED
-    #           transit_encryption_port: 1,
-    #           authorization_config: {
-    #             access_point_id: "String",
-    #             iam: "ENABLED", # accepts ENABLED, DISABLED
-    #           },
-    #         },
-    #         fsx_windows_file_server_volume_configuration: {
-    #           file_system_id: "String", # required
-    #           root_directory: "String", # required
-    #           authorization_config: { # required
-    #             credentials_parameter: "String", # required
-    #             domain: "String", # required
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the volume. Up to 255 letters (uppercase and lowercase),
@@ -13478,14 +11262,6 @@ module Aws::ECS
 
     # Details on a data volume from another container in the same task
     # definition.
-    #
-    # @note When making an API call, you may pass VolumeFrom
-    #   data as a hash:
-    #
-    #       {
-    #         source_container: "String",
-    #         read_only: false,
-    #       }
     #
     # @!attribute [rw] source_container
     #   The name of another container within the same task definition to

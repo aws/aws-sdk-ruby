@@ -61,13 +61,6 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CancelKeyDeletionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         key_id: "KeyIdType", # required
-    #       }
-    #
     # @!attribute [rw] key_id
     #   Identifies the KMS key whose deletion is being canceled.
     #
@@ -249,13 +242,6 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ConnectCustomKeyStoreRequest
-    #   data as a hash:
-    #
-    #       {
-    #         custom_key_store_id: "CustomKeyStoreIdType", # required
-    #       }
-    #
     # @!attribute [rw] custom_key_store_id
     #   Enter the key store ID of the custom key store that you want to
     #   connect. To find the ID of a custom key store, use the
@@ -274,14 +260,6 @@ module Aws::KMS
     #
     class ConnectCustomKeyStoreResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass CreateAliasRequest
-    #   data as a hash:
-    #
-    #       {
-    #         alias_name: "AliasNameType", # required
-    #         target_key_id: "KeyIdType", # required
-    #       }
-    #
     # @!attribute [rw] alias_name
     #   Specifies the alias name. This value must begin with `alias/`
     #   followed by a name, such as `alias/ExampleAlias`.
@@ -335,25 +313,6 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateCustomKeyStoreRequest
-    #   data as a hash:
-    #
-    #       {
-    #         custom_key_store_name: "CustomKeyStoreNameType", # required
-    #         cloud_hsm_cluster_id: "CloudHsmClusterIdType",
-    #         trust_anchor_certificate: "TrustAnchorCertificateType",
-    #         key_store_password: "KeyStorePasswordType",
-    #         custom_key_store_type: "AWS_CLOUDHSM", # accepts AWS_CLOUDHSM, EXTERNAL_KEY_STORE
-    #         xks_proxy_uri_endpoint: "XksProxyUriEndpointType",
-    #         xks_proxy_uri_path: "XksProxyUriPathType",
-    #         xks_proxy_vpc_endpoint_service_name: "XksProxyVpcEndpointServiceNameType",
-    #         xks_proxy_authentication_credential: {
-    #           access_key_id: "XksProxyAuthenticationAccessKeyIdType", # required
-    #           raw_secret_access_key: "XksProxyAuthenticationRawSecretAccessKeyType", # required
-    #         },
-    #         xks_proxy_connectivity: "PUBLIC_ENDPOINT", # accepts PUBLIC_ENDPOINT, VPC_ENDPOINT_SERVICE
-    #       }
-    #
     # @!attribute [rw] custom_key_store_name
     #   Specifies a friendly name for the custom key store. The name must be
     #   unique in your Amazon Web Services account and Region. This
@@ -587,26 +546,6 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateGrantRequest
-    #   data as a hash:
-    #
-    #       {
-    #         key_id: "KeyIdType", # required
-    #         grantee_principal: "PrincipalIdType", # required
-    #         retiring_principal: "PrincipalIdType",
-    #         operations: ["Decrypt"], # required, accepts Decrypt, Encrypt, GenerateDataKey, GenerateDataKeyWithoutPlaintext, ReEncryptFrom, ReEncryptTo, Sign, Verify, GetPublicKey, CreateGrant, RetireGrant, DescribeKey, GenerateDataKeyPair, GenerateDataKeyPairWithoutPlaintext, GenerateMac, VerifyMac
-    #         constraints: {
-    #           encryption_context_subset: {
-    #             "EncryptionContextKey" => "EncryptionContextValue",
-    #           },
-    #           encryption_context_equals: {
-    #             "EncryptionContextKey" => "EncryptionContextValue",
-    #           },
-    #         },
-    #         grant_tokens: ["GrantTokenType"],
-    #         name: "GrantNameType",
-    #       }
-    #
     # @!attribute [rw] key_id
     #   Identifies the KMS key for the grant. The grant gives principals
     #   permission to use this KMS key.
@@ -799,28 +738,6 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy: "PolicyType",
-    #         description: "DescriptionType",
-    #         key_usage: "SIGN_VERIFY", # accepts SIGN_VERIFY, ENCRYPT_DECRYPT, GENERATE_VERIFY_MAC
-    #         customer_master_key_spec: "RSA_2048", # accepts RSA_2048, RSA_3072, RSA_4096, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1, SYMMETRIC_DEFAULT, HMAC_224, HMAC_256, HMAC_384, HMAC_512, SM2
-    #         key_spec: "RSA_2048", # accepts RSA_2048, RSA_3072, RSA_4096, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1, SYMMETRIC_DEFAULT, HMAC_224, HMAC_256, HMAC_384, HMAC_512, SM2
-    #         origin: "AWS_KMS", # accepts AWS_KMS, EXTERNAL, AWS_CLOUDHSM, EXTERNAL_KEY_STORE
-    #         custom_key_store_id: "CustomKeyStoreIdType",
-    #         bypass_policy_lockout_safety_check: false,
-    #         tags: [
-    #           {
-    #             tag_key: "TagKeyType", # required
-    #             tag_value: "TagValueType", # required
-    #           },
-    #         ],
-    #         multi_region: false,
-    #         xks_key_id: "XksKeyIdType",
-    #       }
-    #
     # @!attribute [rw] policy
     #   The key policy to attach to the KMS key.
     #
@@ -1544,19 +1461,6 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DecryptRequest
-    #   data as a hash:
-    #
-    #       {
-    #         ciphertext_blob: "data", # required
-    #         encryption_context: {
-    #           "EncryptionContextKey" => "EncryptionContextValue",
-    #         },
-    #         grant_tokens: ["GrantTokenType"],
-    #         key_id: "KeyIdType",
-    #         encryption_algorithm: "SYMMETRIC_DEFAULT", # accepts SYMMETRIC_DEFAULT, RSAES_OAEP_SHA_1, RSAES_OAEP_SHA_256, SM2PKE
-    #       }
-    #
     # @!attribute [rw] ciphertext_blob
     #   Ciphertext to be decrypted. The blob includes metadata.
     #   @return [String]
@@ -1687,13 +1591,6 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAliasRequest
-    #   data as a hash:
-    #
-    #       {
-    #         alias_name: "AliasNameType", # required
-    #       }
-    #
     # @!attribute [rw] alias_name
     #   The alias to be deleted. The alias name must begin with `alias/`
     #   followed by the alias name, such as `alias/ExampleAlias`.
@@ -1707,13 +1604,6 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteCustomKeyStoreRequest
-    #   data as a hash:
-    #
-    #       {
-    #         custom_key_store_id: "CustomKeyStoreIdType", # required
-    #       }
-    #
     # @!attribute [rw] custom_key_store_id
     #   Enter the ID of the custom key store you want to delete. To find the
     #   ID of a custom key store, use the DescribeCustomKeyStores operation.
@@ -1731,13 +1621,6 @@ module Aws::KMS
     #
     class DeleteCustomKeyStoreResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteImportedKeyMaterialRequest
-    #   data as a hash:
-    #
-    #       {
-    #         key_id: "KeyIdType", # required
-    #       }
-    #
     # @!attribute [rw] key_id
     #   Identifies the KMS key from which you are deleting imported key
     #   material. The `Origin` of the KMS key must be `EXTERNAL`.
@@ -1777,16 +1660,6 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeCustomKeyStoresRequest
-    #   data as a hash:
-    #
-    #       {
-    #         custom_key_store_id: "CustomKeyStoreIdType",
-    #         custom_key_store_name: "CustomKeyStoreNameType",
-    #         limit: 1,
-    #         marker: "MarkerType",
-    #       }
-    #
     # @!attribute [rw] custom_key_store_id
     #   Gets only information about the specified custom key store. Enter
     #   the key store ID.
@@ -1856,14 +1729,6 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         key_id: "KeyIdType", # required
-    #         grant_tokens: ["GrantTokenType"],
-    #       }
-    #
     # @!attribute [rw] key_id
     #   Describes the specified KMS key.
     #
@@ -1931,13 +1796,6 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisableKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         key_id: "KeyIdType", # required
-    #       }
-    #
     # @!attribute [rw] key_id
     #   Identifies the KMS key to disable.
     #
@@ -1962,13 +1820,6 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisableKeyRotationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         key_id: "KeyIdType", # required
-    #       }
-    #
     # @!attribute [rw] key_id
     #   Identifies a symmetric encryption KMS key. You cannot enable or
     #   disable automatic rotation of [asymmetric KMS keys][1], [HMAC KMS
@@ -2016,13 +1867,6 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisconnectCustomKeyStoreRequest
-    #   data as a hash:
-    #
-    #       {
-    #         custom_key_store_id: "CustomKeyStoreIdType", # required
-    #       }
-    #
     # @!attribute [rw] custom_key_store_id
     #   Enter the ID of the custom key store you want to disconnect. To find
     #   the ID of a custom key store, use the DescribeCustomKeyStores
@@ -2041,13 +1885,6 @@ module Aws::KMS
     #
     class DisconnectCustomKeyStoreResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass EnableKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         key_id: "KeyIdType", # required
-    #       }
-    #
     # @!attribute [rw] key_id
     #   Identifies the KMS key to enable.
     #
@@ -2072,13 +1909,6 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass EnableKeyRotationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         key_id: "KeyIdType", # required
-    #       }
-    #
     # @!attribute [rw] key_id
     #   Identifies a symmetric encryption KMS key. You cannot enable
     #   automatic rotation of [asymmetric KMS keys][1], [HMAC KMS keys][2],
@@ -2115,19 +1945,6 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass EncryptRequest
-    #   data as a hash:
-    #
-    #       {
-    #         key_id: "KeyIdType", # required
-    #         plaintext: "data", # required
-    #         encryption_context: {
-    #           "EncryptionContextKey" => "EncryptionContextValue",
-    #         },
-    #         grant_tokens: ["GrantTokenType"],
-    #         encryption_algorithm: "SYMMETRIC_DEFAULT", # accepts SYMMETRIC_DEFAULT, RSAES_OAEP_SHA_1, RSAES_OAEP_SHA_256, SM2PKE
-    #       }
-    #
     # @!attribute [rw] key_id
     #   Identifies the KMS key to use in the encryption operation. The KMS
     #   key must have a `KeyUsage` of `ENCRYPT_DECRYPT`. To find the
@@ -2266,18 +2083,6 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GenerateDataKeyPairRequest
-    #   data as a hash:
-    #
-    #       {
-    #         encryption_context: {
-    #           "EncryptionContextKey" => "EncryptionContextValue",
-    #         },
-    #         key_id: "KeyIdType", # required
-    #         key_pair_spec: "RSA_2048", # required, accepts RSA_2048, RSA_3072, RSA_4096, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1, SM2
-    #         grant_tokens: ["GrantTokenType"],
-    #       }
-    #
     # @!attribute [rw] encryption_context
     #   Specifies the encryption context that will be used when encrypting
     #   the private key in the data key pair.
@@ -2403,18 +2208,6 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GenerateDataKeyPairWithoutPlaintextRequest
-    #   data as a hash:
-    #
-    #       {
-    #         encryption_context: {
-    #           "EncryptionContextKey" => "EncryptionContextValue",
-    #         },
-    #         key_id: "KeyIdType", # required
-    #         key_pair_spec: "RSA_2048", # required, accepts RSA_2048, RSA_3072, RSA_4096, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1, SM2
-    #         grant_tokens: ["GrantTokenType"],
-    #       }
-    #
     # @!attribute [rw] encryption_context
     #   Specifies the encryption context that will be used when encrypting
     #   the private key in the data key pair.
@@ -2533,19 +2326,6 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GenerateDataKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         key_id: "KeyIdType", # required
-    #         encryption_context: {
-    #           "EncryptionContextKey" => "EncryptionContextValue",
-    #         },
-    #         number_of_bytes: 1,
-    #         key_spec: "AES_256", # accepts AES_256, AES_128
-    #         grant_tokens: ["GrantTokenType"],
-    #       }
-    #
     # @!attribute [rw] key_id
     #   Specifies the symmetric encryption KMS key that encrypts the data
     #   key. You cannot specify an asymmetric KMS key or a KMS key in a
@@ -2670,19 +2450,6 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GenerateDataKeyWithoutPlaintextRequest
-    #   data as a hash:
-    #
-    #       {
-    #         key_id: "KeyIdType", # required
-    #         encryption_context: {
-    #           "EncryptionContextKey" => "EncryptionContextValue",
-    #         },
-    #         key_spec: "AES_256", # accepts AES_256, AES_128
-    #         number_of_bytes: 1,
-    #         grant_tokens: ["GrantTokenType"],
-    #       }
-    #
     # @!attribute [rw] key_id
     #   Specifies the symmetric encryption KMS key that encrypts the data
     #   key. You cannot specify an asymmetric KMS key or a KMS key in a
@@ -2792,16 +2559,6 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GenerateMacRequest
-    #   data as a hash:
-    #
-    #       {
-    #         message: "data", # required
-    #         key_id: "KeyIdType", # required
-    #         mac_algorithm: "HMAC_SHA_224", # required, accepts HMAC_SHA_224, HMAC_SHA_256, HMAC_SHA_384, HMAC_SHA_512
-    #         grant_tokens: ["GrantTokenType"],
-    #       }
-    #
     # @!attribute [rw] message
     #   The message to be hashed. Specify a message of up to 4,096 bytes.
     #
@@ -2885,14 +2642,6 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GenerateRandomRequest
-    #   data as a hash:
-    #
-    #       {
-    #         number_of_bytes: 1,
-    #         custom_key_store_id: "CustomKeyStoreIdType",
-    #       }
-    #
     # @!attribute [rw] number_of_bytes
     #   The length of the random byte string. This parameter is required.
     #   @return [Integer]
@@ -2930,14 +2679,6 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetKeyPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         key_id: "KeyIdType", # required
-    #         policy_name: "PolicyNameType", # required
-    #       }
-    #
     # @!attribute [rw] key_id
     #   Gets the key policy for the specified KMS key.
     #
@@ -2980,13 +2721,6 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetKeyRotationStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         key_id: "KeyIdType", # required
-    #       }
-    #
     # @!attribute [rw] key_id
     #   Gets the rotation status for the specified KMS key.
     #
@@ -3025,15 +2759,6 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetParametersForImportRequest
-    #   data as a hash:
-    #
-    #       {
-    #         key_id: "KeyIdType", # required
-    #         wrapping_algorithm: "RSAES_PKCS1_V1_5", # required, accepts RSAES_PKCS1_V1_5, RSAES_OAEP_SHA_1, RSAES_OAEP_SHA_256
-    #         wrapping_key_spec: "RSA_2048", # required, accepts RSA_2048
-    #       }
-    #
     # @!attribute [rw] key_id
     #   The identifier of the symmetric encryption KMS key into which you
     #   will import key material. The `Origin` of the KMS key must be
@@ -3115,14 +2840,6 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetPublicKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         key_id: "KeyIdType", # required
-    #         grant_tokens: ["GrantTokenType"],
-    #       }
-    #
     # @!attribute [rw] key_id
     #   Identifies the asymmetric KMS key that includes the public key.
     #
@@ -3279,18 +2996,6 @@ module Aws::KMS
     # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/symm-asymm-concepts.html#symmetric-cmks
     # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/policy-conditions.html#conditions-kms-encryption-context
     #
-    # @note When making an API call, you may pass GrantConstraints
-    #   data as a hash:
-    #
-    #       {
-    #         encryption_context_subset: {
-    #           "EncryptionContextKey" => "EncryptionContextValue",
-    #         },
-    #         encryption_context_equals: {
-    #           "EncryptionContextKey" => "EncryptionContextValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] encryption_context_subset
     #   A list of key-value pairs that must be included in the encryption
     #   context of the [cryptographic operation][1] request. The grant
@@ -3391,17 +3096,6 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ImportKeyMaterialRequest
-    #   data as a hash:
-    #
-    #       {
-    #         key_id: "KeyIdType", # required
-    #         import_token: "data", # required
-    #         encrypted_key_material: "data", # required
-    #         valid_to: Time.now,
-    #         expiration_model: "KEY_MATERIAL_EXPIRES", # accepts KEY_MATERIAL_EXPIRES, KEY_MATERIAL_DOES_NOT_EXPIRE
-    #       }
-    #
     # @!attribute [rw] key_id
     #   The identifier of the symmetric encryption KMS key that receives the
     #   imported key material. This must be the same KMS key specified in
@@ -4057,15 +3751,6 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAliasesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         key_id: "KeyIdType",
-    #         limit: 1,
-    #         marker: "MarkerType",
-    #       }
-    #
     # @!attribute [rw] key_id
     #   Lists only aliases that are associated with the specified KMS key.
     #   Enter a KMS key in your Amazon Web Services account.
@@ -4138,17 +3823,6 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListGrantsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         limit: 1,
-    #         marker: "MarkerType",
-    #         key_id: "KeyIdType", # required
-    #         grant_id: "GrantIdType",
-    #         grantee_principal: "PrincipalIdType",
-    #       }
-    #
     # @!attribute [rw] limit
     #   Use this parameter to specify the maximum number of items to return.
     #   When this value is present, KMS does not return more than the
@@ -4232,15 +3906,6 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListKeyPoliciesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         key_id: "KeyIdType", # required
-    #         limit: 1,
-    #         marker: "MarkerType",
-    #       }
-    #
     # @!attribute [rw] key_id
     #   Gets the names of key policies for the specified KMS key.
     #
@@ -4311,14 +3976,6 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListKeysRequest
-    #   data as a hash:
-    #
-    #       {
-    #         limit: 1,
-    #         marker: "MarkerType",
-    #       }
-    #
     # @!attribute [rw] limit
     #   Use this parameter to specify the maximum number of items to return.
     #   When this value is present, KMS does not return more than the
@@ -4370,15 +4027,6 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListResourceTagsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         key_id: "KeyIdType", # required
-    #         limit: 1,
-    #         marker: "MarkerType",
-    #       }
-    #
     # @!attribute [rw] key_id
     #   Gets tags on the specified KMS key.
     #
@@ -4461,15 +4109,6 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRetirableGrantsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         limit: 1,
-    #         marker: "MarkerType",
-    #         retiring_principal: "PrincipalIdType", # required
-    #       }
-    #
     # @!attribute [rw] limit
     #   Use this parameter to specify the maximum number of items to return.
     #   When this value is present, KMS does not return more than the
@@ -4594,16 +4233,6 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutKeyPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         key_id: "KeyIdType", # required
-    #         policy_name: "PolicyNameType", # required
-    #         policy: "PolicyType", # required
-    #         bypass_policy_lockout_safety_check: false,
-    #       }
-    #
     # @!attribute [rw] key_id
     #   Sets the key policy on the specified KMS key.
     #
@@ -4705,24 +4334,6 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ReEncryptRequest
-    #   data as a hash:
-    #
-    #       {
-    #         ciphertext_blob: "data", # required
-    #         source_encryption_context: {
-    #           "EncryptionContextKey" => "EncryptionContextValue",
-    #         },
-    #         source_key_id: "KeyIdType",
-    #         destination_key_id: "KeyIdType", # required
-    #         destination_encryption_context: {
-    #           "EncryptionContextKey" => "EncryptionContextValue",
-    #         },
-    #         source_encryption_algorithm: "SYMMETRIC_DEFAULT", # accepts SYMMETRIC_DEFAULT, RSAES_OAEP_SHA_1, RSAES_OAEP_SHA_256, SM2PKE
-    #         destination_encryption_algorithm: "SYMMETRIC_DEFAULT", # accepts SYMMETRIC_DEFAULT, RSAES_OAEP_SHA_1, RSAES_OAEP_SHA_256, SM2PKE
-    #         grant_tokens: ["GrantTokenType"],
-    #       }
-    #
     # @!attribute [rw] ciphertext_blob
     #   Ciphertext of the data to reencrypt.
     #   @return [String]
@@ -4928,23 +4539,6 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ReplicateKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         key_id: "KeyIdType", # required
-    #         replica_region: "RegionType", # required
-    #         policy: "PolicyType",
-    #         bypass_policy_lockout_safety_check: false,
-    #         description: "DescriptionType",
-    #         tags: [
-    #           {
-    #             tag_key: "TagKeyType", # required
-    #             tag_value: "TagValueType", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] key_id
     #   Identifies the multi-Region primary key that is being replicated. To
     #   determine whether a KMS key is a multi-Region primary key, use the
@@ -5170,15 +4764,6 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RetireGrantRequest
-    #   data as a hash:
-    #
-    #       {
-    #         grant_token: "GrantTokenType",
-    #         key_id: "KeyIdType",
-    #         grant_id: "GrantIdType",
-    #       }
-    #
     # @!attribute [rw] grant_token
     #   Identifies the grant to be retired. You can use a grant token to
     #   identify a new grant even before it has achieved eventual
@@ -5222,14 +4807,6 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RevokeGrantRequest
-    #   data as a hash:
-    #
-    #       {
-    #         key_id: "KeyIdType", # required
-    #         grant_id: "GrantIdType", # required
-    #       }
-    #
     # @!attribute [rw] key_id
     #   A unique identifier for the KMS key associated with the grant. To
     #   get the key ID and key ARN for a KMS key, use ListKeys or
@@ -5264,14 +4841,6 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ScheduleKeyDeletionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         key_id: "KeyIdType", # required
-    #         pending_window_in_days: 1,
-    #       }
-    #
     # @!attribute [rw] key_id
     #   The unique identifier of the KMS key to delete.
     #
@@ -5357,17 +4926,6 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SignRequest
-    #   data as a hash:
-    #
-    #       {
-    #         key_id: "KeyIdType", # required
-    #         message: "data", # required
-    #         message_type: "RAW", # accepts RAW, DIGEST
-    #         grant_tokens: ["GrantTokenType"],
-    #         signing_algorithm: "RSASSA_PSS_SHA_256", # required, accepts RSASSA_PSS_SHA_256, RSASSA_PSS_SHA_384, RSASSA_PSS_SHA_512, RSASSA_PKCS1_V1_5_SHA_256, RSASSA_PKCS1_V1_5_SHA_384, RSASSA_PKCS1_V1_5_SHA_512, ECDSA_SHA_256, ECDSA_SHA_384, ECDSA_SHA_512, SM2DSA
-    #       }
-    #
     # @!attribute [rw] key_id
     #   Identifies an asymmetric KMS key. KMS uses the private key in the
     #   asymmetric KMS key to sign the message. The `KeyUsage` type of the
@@ -5497,14 +5055,6 @@ module Aws::KMS
     #
     # [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         tag_key: "TagKeyType", # required
-    #         tag_value: "TagValueType", # required
-    #       }
-    #
     # @!attribute [rw] tag_key
     #   The key of the tag.
     #   @return [String]
@@ -5535,19 +5085,6 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         key_id: "KeyIdType", # required
-    #         tags: [ # required
-    #           {
-    #             tag_key: "TagKeyType", # required
-    #             tag_value: "TagValueType", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] key_id
     #   Identifies a customer managed key in the account and Region.
     #
@@ -5598,14 +5135,6 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         key_id: "KeyIdType", # required
-    #         tag_keys: ["TagKeyType"], # required
-    #       }
-    #
     # @!attribute [rw] key_id
     #   Identifies the KMS key from which you are removing tags.
     #
@@ -5635,14 +5164,6 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateAliasRequest
-    #   data as a hash:
-    #
-    #       {
-    #         alias_name: "AliasNameType", # required
-    #         target_key_id: "KeyIdType", # required
-    #       }
-    #
     # @!attribute [rw] alias_name
     #   Identifies the alias that is changing its KMS key. This value must
     #   begin with `alias/` followed by the alias name, such as
@@ -5690,24 +5211,6 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateCustomKeyStoreRequest
-    #   data as a hash:
-    #
-    #       {
-    #         custom_key_store_id: "CustomKeyStoreIdType", # required
-    #         new_custom_key_store_name: "CustomKeyStoreNameType",
-    #         key_store_password: "KeyStorePasswordType",
-    #         cloud_hsm_cluster_id: "CloudHsmClusterIdType",
-    #         xks_proxy_uri_endpoint: "XksProxyUriEndpointType",
-    #         xks_proxy_uri_path: "XksProxyUriPathType",
-    #         xks_proxy_vpc_endpoint_service_name: "XksProxyVpcEndpointServiceNameType",
-    #         xks_proxy_authentication_credential: {
-    #           access_key_id: "XksProxyAuthenticationAccessKeyIdType", # required
-    #           raw_secret_access_key: "XksProxyAuthenticationRawSecretAccessKeyType", # required
-    #         },
-    #         xks_proxy_connectivity: "PUBLIC_ENDPOINT", # accepts PUBLIC_ENDPOINT, VPC_ENDPOINT_SERVICE
-    #       }
-    #
     # @!attribute [rw] custom_key_store_id
     #   Identifies the custom key store that you want to update. Enter the
     #   ID of the custom key store. To find the ID of a custom key store,
@@ -5863,14 +5366,6 @@ module Aws::KMS
     #
     class UpdateCustomKeyStoreResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateKeyDescriptionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         key_id: "KeyIdType", # required
-    #         description: "DescriptionType", # required
-    #       }
-    #
     # @!attribute [rw] key_id
     #   Updates the description of the specified KMS key.
     #
@@ -5900,14 +5395,6 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdatePrimaryRegionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         key_id: "KeyIdType", # required
-    #         primary_region: "RegionType", # required
-    #       }
-    #
     # @!attribute [rw] key_id
     #   Identifies the current primary key. When the operation completes,
     #   this KMS key will be a replica key.
@@ -5943,17 +5430,6 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass VerifyMacRequest
-    #   data as a hash:
-    #
-    #       {
-    #         message: "data", # required
-    #         key_id: "KeyIdType", # required
-    #         mac_algorithm: "HMAC_SHA_224", # required, accepts HMAC_SHA_224, HMAC_SHA_256, HMAC_SHA_384, HMAC_SHA_512
-    #         mac: "data", # required
-    #         grant_tokens: ["GrantTokenType"],
-    #       }
-    #
     # @!attribute [rw] message
     #   The message that will be used in the verification. Enter the same
     #   message that was used to generate the HMAC.
@@ -6037,18 +5513,6 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass VerifyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         key_id: "KeyIdType", # required
-    #         message: "data", # required
-    #         message_type: "RAW", # accepts RAW, DIGEST
-    #         signature: "data", # required
-    #         signing_algorithm: "RSASSA_PSS_SHA_256", # required, accepts RSASSA_PSS_SHA_256, RSASSA_PSS_SHA_384, RSASSA_PSS_SHA_512, RSASSA_PKCS1_V1_5_SHA_256, RSASSA_PKCS1_V1_5_SHA_384, RSASSA_PKCS1_V1_5_SHA_512, ECDSA_SHA_256, ECDSA_SHA_384, ECDSA_SHA_512, SM2DSA
-    #         grant_tokens: ["GrantTokenType"],
-    #       }
-    #
     # @!attribute [rw] key_id
     #   Identifies the asymmetric KMS key that will be used to verify the
     #   signature. This must be the same KMS key that was used to generate
@@ -6255,14 +5719,6 @@ module Aws::KMS
     # report them to KMS.
     #
     # The `XksProxyAuthenticationCredential` includes two required elements.
-    #
-    # @note When making an API call, you may pass XksProxyAuthenticationCredentialType
-    #   data as a hash:
-    #
-    #       {
-    #         access_key_id: "XksProxyAuthenticationAccessKeyIdType", # required
-    #         raw_secret_access_key: "XksProxyAuthenticationRawSecretAccessKeyType", # required
-    #       }
     #
     # @!attribute [rw] access_key_id
     #   A unique identifier for the raw secret access key.

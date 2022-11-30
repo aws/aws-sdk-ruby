@@ -24,13 +24,6 @@ module Aws::ResourceExplorer2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateDefaultViewInput
-    #   data as a hash:
-    #
-    #       {
-    #         view_arn: "AssociateDefaultViewInputViewArnString", # required
-    #       }
-    #
     # @!attribute [rw] view_arn
     #   The [Amazon resource name (ARN)][1] of the view to set as the
     #   default for the Amazon Web Services Region and Amazon Web Services
@@ -94,13 +87,6 @@ module Aws::ResourceExplorer2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchGetViewInput
-    #   data as a hash:
-    #
-    #       {
-    #         view_arns: ["String"],
-    #       }
-    #
     # @!attribute [rw] view_arns
     #   A list of [Amazon resource names (ARNs)][1] that identify the views
     #   you want details for.
@@ -152,16 +138,6 @@ module Aws::ResourceExplorer2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateIndexInput
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "String",
-    #         tags: {
-    #           "String" => "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_token
     #   This value helps ensure idempotency. Resource Explorer uses this
     #   value to prevent the accidental creation of duplicate versions. We
@@ -223,25 +199,6 @@ module Aws::ResourceExplorer2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateViewInput
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "CreateViewInputClientTokenString",
-    #         filters: {
-    #           filter_string: "SearchFilterFilterStringString", # required
-    #         },
-    #         included_properties: [
-    #           {
-    #             name: "IncludedPropertyNameString", # required
-    #           },
-    #         ],
-    #         tags: {
-    #           "String" => "String",
-    #         },
-    #         view_name: "ViewName", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   This value helps ensure idempotency. Resource Explorer uses this
     #   value to prevent the accidental creation of duplicate versions. We
@@ -326,13 +283,6 @@ module Aws::ResourceExplorer2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteIndexInput
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The [Amazon resource name (ARN)][1] of the index that you want to
     #   delete.
@@ -382,13 +332,6 @@ module Aws::ResourceExplorer2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteViewInput
-    #   data as a hash:
-    #
-    #       {
-    #         view_arn: "DeleteViewInputViewArnString", # required
-    #       }
-    #
     # @!attribute [rw] view_arn
     #   The [Amazon resource name (ARN)][1] of the view that you want to
     #   delete.
@@ -507,13 +450,6 @@ module Aws::ResourceExplorer2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetViewInput
-    #   data as a hash:
-    #
-    #       {
-    #         view_arn: "GetViewInputViewArnString", # required
-    #       }
-    #
     # @!attribute [rw] view_arn
     #   The [Amazon resource name (ARN)][1] of the view that you want
     #   information about.
@@ -552,13 +488,6 @@ module Aws::ResourceExplorer2
     # that you can optionally include in the view. This lets you view that
     # property in search results, and filter your search results based on
     # the value of the property.
-    #
-    # @note When making an API call, you may pass IncludedProperty
-    #   data as a hash:
-    #
-    #       {
-    #         name: "IncludedPropertyNameString", # required
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the property that is included in this view.
@@ -642,16 +571,6 @@ module Aws::ResourceExplorer2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListIndexesInput
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "ListIndexesInputNextTokenString",
-    #         regions: ["String"],
-    #         type: "LOCAL", # accepts LOCAL, AGGREGATOR
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results that you want included on each page of
     #   the response. If you do not include this parameter, it defaults to a
@@ -720,14 +639,6 @@ module Aws::ResourceExplorer2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSupportedResourceTypesInput
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results that you want included on each page of
     #   the response. If you do not include this parameter, it defaults to a
@@ -782,13 +693,6 @@ module Aws::ResourceExplorer2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The [Amazon resource name (ARN)][1] of the view or index that you
     #   want to attach tags to.
@@ -819,14 +723,6 @@ module Aws::ResourceExplorer2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListViewsInput
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results that you want included on each page of
     #   the response. If you do not include this parameter, it defaults to a
@@ -1017,13 +913,6 @@ module Aws::ResourceExplorer2
     # A search filter defines which resources can be part of a search query
     # result set.
     #
-    # @note When making an API call, you may pass SearchFilter
-    #   data as a hash:
-    #
-    #       {
-    #         filter_string: "SearchFilterFilterStringString", # required
-    #       }
-    #
     # @!attribute [rw] filter_string
     #   The string that contains the search keywords, prefixes, and
     #   operators to control the results that can be returned by a Search
@@ -1042,16 +931,6 @@ module Aws::ResourceExplorer2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SearchInput
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "SearchInputNextTokenString",
-    #         query_string: "QueryString", # required
-    #         view_arn: "SearchInputViewArnString",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results that you want included on each page of
     #   the response. If you do not include this parameter, it defaults to a
@@ -1204,16 +1083,6 @@ module Aws::ResourceExplorer2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         tags: {
-    #           "String" => "String",
-    #         },
-    #         resource_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] tags
     #   A list of tag key and value pairs that you want to attach to the
     #   specified view or index.
@@ -1270,14 +1139,6 @@ module Aws::ResourceExplorer2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #         tag_keys: ["String"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the view or index that you want to
     #   remove tags from.
@@ -1301,14 +1162,6 @@ module Aws::ResourceExplorer2
     #
     class UntagResourceOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateIndexTypeInput
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "String", # required
-    #         type: "LOCAL", # required, accepts LOCAL, AGGREGATOR
-    #       }
-    #
     # @!attribute [rw] arn
     #   The [Amazon resource name (ARN)][1] of the index that you want to
     #   update.
@@ -1371,21 +1224,6 @@ module Aws::ResourceExplorer2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateViewInput
-    #   data as a hash:
-    #
-    #       {
-    #         filters: {
-    #           filter_string: "SearchFilterFilterStringString", # required
-    #         },
-    #         included_properties: [
-    #           {
-    #             name: "IncludedPropertyNameString", # required
-    #           },
-    #         ],
-    #         view_arn: "UpdateViewInputViewArnString", # required
-    #       }
-    #
     # @!attribute [rw] filters
     #   An array of strings that specify which resources are included in the
     #   results of queries made using this view. When you use this view in a

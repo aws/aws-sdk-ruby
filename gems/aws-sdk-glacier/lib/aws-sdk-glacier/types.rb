@@ -22,15 +22,6 @@ module Aws::Glacier
     # [1]: https://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-abort-upload.html
     # [2]: https://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html
     #
-    # @note When making an API call, you may pass AbortMultipartUploadInput
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "string", # required
-    #         vault_name: "string", # required
-    #         upload_id: "string", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
@@ -58,14 +49,6 @@ module Aws::Glacier
 
     # The input values for `AbortVaultLock`.
     #
-    # @note When making an API call, you may pass AbortVaultLockInput
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "string", # required
-    #         vault_name: "string", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID. This value must match
     #   the AWS account ID associated with the credentials used to sign the
@@ -88,17 +71,6 @@ module Aws::Glacier
     end
 
     # The input values for `AddTagsToVault`.
-    #
-    # @note When making an API call, you may pass AddTagsToVaultInput
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "string", # required
-    #         vault_name: "string", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
     #
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
@@ -161,18 +133,6 @@ module Aws::Glacier
     # Contains information about the comma-separated value (CSV) file to
     # select from.
     #
-    # @note When making an API call, you may pass CSVInput
-    #   data as a hash:
-    #
-    #       {
-    #         file_header_info: "USE", # accepts USE, IGNORE, NONE
-    #         comments: "string",
-    #         quote_escape_character: "string",
-    #         record_delimiter: "string",
-    #         field_delimiter: "string",
-    #         quote_character: "string",
-    #       }
-    #
     # @!attribute [rw] file_header_info
     #   Describes the first line of input. Valid values are `None`,
     #   `Ignore`, and `Use`.
@@ -216,17 +176,6 @@ module Aws::Glacier
     # Contains information about the comma-separated value (CSV) file that
     # the job results are stored in.
     #
-    # @note When making an API call, you may pass CSVOutput
-    #   data as a hash:
-    #
-    #       {
-    #         quote_fields: "ALWAYS", # accepts ALWAYS, ASNEEDED
-    #         quote_escape_character: "string",
-    #         record_delimiter: "string",
-    #         field_delimiter: "string",
-    #         quote_character: "string",
-    #       }
-    #
     # @!attribute [rw] quote_fields
     #   A value that indicates whether all output fields should be contained
     #   within quotation marks.
@@ -266,17 +215,6 @@ module Aws::Glacier
     # and Amazon S3 Glacier (Glacier) can now assemble the archive from the
     # uploaded parts. After assembling and saving the archive to the vault,
     # Glacier returns the URI path of the newly created archive resource.
-    #
-    # @note When making an API call, you may pass CompleteMultipartUploadInput
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "string", # required
-    #         vault_name: "string", # required
-    #         upload_id: "string", # required
-    #         archive_size: 1,
-    #         checksum: "string",
-    #       }
     #
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
@@ -321,15 +259,6 @@ module Aws::Glacier
 
     # The input values for `CompleteVaultLock`.
     #
-    # @note When making an API call, you may pass CompleteVaultLockInput
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "string", # required
-    #         vault_name: "string", # required
-    #         lock_id: "string", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID. This value must match
     #   the AWS account ID associated with the credentials used to sign the
@@ -358,14 +287,6 @@ module Aws::Glacier
     end
 
     # Provides options to create a vault.
-    #
-    # @note When making an API call, you may pass CreateVaultInput
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "string", # required
-    #         vault_name: "string", # required
-    #       }
     #
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID. This value must match
@@ -402,18 +323,6 @@ module Aws::Glacier
 
     # Data retrieval policy.
     #
-    # @note When making an API call, you may pass DataRetrievalPolicy
-    #   data as a hash:
-    #
-    #       {
-    #         rules: [
-    #           {
-    #             strategy: "string",
-    #             bytes_per_hour: 1,
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] rules
     #   The policy rule. Although this is a list type, currently there must
     #   be only one rule, which contains a Strategy field and optionally a
@@ -427,14 +336,6 @@ module Aws::Glacier
     end
 
     # Data retrieval policy rule.
-    #
-    # @note When making an API call, you may pass DataRetrievalRule
-    #   data as a hash:
-    #
-    #       {
-    #         strategy: "string",
-    #         bytes_per_hour: 1,
-    #       }
     #
     # @!attribute [rw] strategy
     #   The type of data retrieval policy to set.
@@ -459,15 +360,6 @@ module Aws::Glacier
 
     # Provides options for deleting an archive from an Amazon S3 Glacier
     # vault.
-    #
-    # @note When making an API call, you may pass DeleteArchiveInput
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "string", # required
-    #         vault_name: "string", # required
-    #         archive_id: "string", # required
-    #       }
     #
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
@@ -496,14 +388,6 @@ module Aws::Glacier
 
     # DeleteVaultAccessPolicy input.
     #
-    # @note When making an API call, you may pass DeleteVaultAccessPolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "string", # required
-    #         vault_name: "string", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
@@ -525,14 +409,6 @@ module Aws::Glacier
     end
 
     # Provides options for deleting a vault from Amazon S3 Glacier.
-    #
-    # @note When making an API call, you may pass DeleteVaultInput
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "string", # required
-    #         vault_name: "string", # required
-    #       }
     #
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
@@ -557,14 +433,6 @@ module Aws::Glacier
     # Provides options for deleting a vault notification configuration from
     # an Amazon Glacier vault.
     #
-    # @note When making an API call, you may pass DeleteVaultNotificationsInput
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "string", # required
-    #         vault_name: "string", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
@@ -586,15 +454,6 @@ module Aws::Glacier
     end
 
     # Provides options for retrieving a job description.
-    #
-    # @note When making an API call, you may pass DescribeJobInput
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "string", # required
-    #         vault_name: "string", # required
-    #         job_id: "string", # required
-    #       }
     #
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
@@ -623,14 +482,6 @@ module Aws::Glacier
 
     # Provides options for retrieving metadata for a specific vault in
     # Amazon Glacier.
-    #
-    # @note When making an API call, you may pass DescribeVaultInput
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "string", # required
-    #         vault_name: "string", # required
-    #       }
     #
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
@@ -700,15 +551,6 @@ module Aws::Glacier
     # Contains information about the encryption used to store the job
     # results in Amazon S3.
     #
-    # @note When making an API call, you may pass Encryption
-    #   data as a hash:
-    #
-    #       {
-    #         encryption_type: "aws:kms", # accepts aws:kms, AES256
-    #         kms_key_id: "string",
-    #         kms_context: "string",
-    #       }
-    #
     # @!attribute [rw] encryption_type
     #   The server-side encryption algorithm used when storing job results
     #   in Amazon S3, for example `AES256` or `aws:kms`.
@@ -734,13 +576,6 @@ module Aws::Glacier
     end
 
     # Input for GetDataRetrievalPolicy.
-    #
-    # @note When making an API call, you may pass GetDataRetrievalPolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "string", # required
-    #       }
     #
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID. This value must match
@@ -772,16 +607,6 @@ module Aws::Glacier
     end
 
     # Provides options for downloading output of an Amazon S3 Glacier job.
-    #
-    # @note When making an API call, you may pass GetJobOutputInput
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "string", # required
-    #         vault_name: "string", # required
-    #         job_id: "string", # required
-    #         range: "string",
-    #       }
     #
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
@@ -918,14 +743,6 @@ module Aws::Glacier
 
     # Input for GetVaultAccessPolicy.
     #
-    # @note When making an API call, you may pass GetVaultAccessPolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "string", # required
-    #         vault_name: "string", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
@@ -959,14 +776,6 @@ module Aws::Glacier
     end
 
     # The input values for `GetVaultLock`.
-    #
-    # @note When making an API call, you may pass GetVaultLockInput
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "string", # required
-    #         vault_name: "string", # required
-    #       }
     #
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
@@ -1020,14 +829,6 @@ module Aws::Glacier
 
     # Provides options for retrieving the notification configuration set on
     # an Amazon Glacier vault.
-    #
-    # @note When making an API call, you may pass GetVaultNotificationsInput
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "string", # required
-    #         vault_name: "string", # required
-    #       }
     #
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
@@ -1220,20 +1021,6 @@ module Aws::Glacier
 
     # Contains information about a grant.
     #
-    # @note When making an API call, you may pass Grant
-    #   data as a hash:
-    #
-    #       {
-    #         grantee: {
-    #           type: "AmazonCustomerByEmail", # required, accepts AmazonCustomerByEmail, CanonicalUser, Group
-    #           display_name: "string",
-    #           uri: "string",
-    #           id: "string",
-    #           email_address: "string",
-    #         },
-    #         permission: "FULL_CONTROL", # accepts FULL_CONTROL, WRITE, WRITE_ACP, READ, READ_ACP
-    #       }
-    #
     # @!attribute [rw] grantee
     #   The grantee.
     #   @return [Types::Grantee]
@@ -1250,17 +1037,6 @@ module Aws::Glacier
     end
 
     # Contains information about the grantee.
-    #
-    # @note When making an API call, you may pass Grantee
-    #   data as a hash:
-    #
-    #       {
-    #         type: "AmazonCustomerByEmail", # required, accepts AmazonCustomerByEmail, CanonicalUser, Group
-    #         display_name: "string",
-    #         uri: "string",
-    #         id: "string",
-    #         email_address: "string",
-    #       }
     #
     # @!attribute [rw] type
     #   Type of grantee
@@ -1293,83 +1069,6 @@ module Aws::Glacier
     end
 
     # Provides options for initiating an Amazon S3 Glacier job.
-    #
-    # @note When making an API call, you may pass InitiateJobInput
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "string", # required
-    #         vault_name: "string", # required
-    #         job_parameters: {
-    #           format: "string",
-    #           type: "string",
-    #           archive_id: "string",
-    #           description: "string",
-    #           sns_topic: "string",
-    #           retrieval_byte_range: "string",
-    #           tier: "string",
-    #           inventory_retrieval_parameters: {
-    #             start_date: Time.now,
-    #             end_date: Time.now,
-    #             limit: "string",
-    #             marker: "string",
-    #           },
-    #           select_parameters: {
-    #             input_serialization: {
-    #               csv: {
-    #                 file_header_info: "USE", # accepts USE, IGNORE, NONE
-    #                 comments: "string",
-    #                 quote_escape_character: "string",
-    #                 record_delimiter: "string",
-    #                 field_delimiter: "string",
-    #                 quote_character: "string",
-    #               },
-    #             },
-    #             expression_type: "SQL", # accepts SQL
-    #             expression: "string",
-    #             output_serialization: {
-    #               csv: {
-    #                 quote_fields: "ALWAYS", # accepts ALWAYS, ASNEEDED
-    #                 quote_escape_character: "string",
-    #                 record_delimiter: "string",
-    #                 field_delimiter: "string",
-    #                 quote_character: "string",
-    #               },
-    #             },
-    #           },
-    #           output_location: {
-    #             s3: {
-    #               bucket_name: "string",
-    #               prefix: "string",
-    #               encryption: {
-    #                 encryption_type: "aws:kms", # accepts aws:kms, AES256
-    #                 kms_key_id: "string",
-    #                 kms_context: "string",
-    #               },
-    #               canned_acl: "private", # accepts private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, bucket-owner-full-control
-    #               access_control_list: [
-    #                 {
-    #                   grantee: {
-    #                     type: "AmazonCustomerByEmail", # required, accepts AmazonCustomerByEmail, CanonicalUser, Group
-    #                     display_name: "string",
-    #                     uri: "string",
-    #                     id: "string",
-    #                     email_address: "string",
-    #                   },
-    #                   permission: "FULL_CONTROL", # accepts FULL_CONTROL, WRITE, WRITE_ACP, READ, READ_ACP
-    #                 },
-    #               ],
-    #               tagging: {
-    #                 "string" => "string",
-    #               },
-    #               user_metadata: {
-    #                 "string" => "string",
-    #               },
-    #               storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA
-    #             },
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
@@ -1420,16 +1119,6 @@ module Aws::Glacier
 
     # Provides options for initiating a multipart upload to an Amazon S3
     # Glacier vault.
-    #
-    # @note When making an API call, you may pass InitiateMultipartUploadInput
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "string", # required
-    #         vault_name: "string", # required
-    #         archive_description: "string",
-    #         part_size: 1,
-    #       }
     #
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
@@ -1488,17 +1177,6 @@ module Aws::Glacier
 
     # The input values for `InitiateVaultLock`.
     #
-    # @note When making an API call, you may pass InitiateVaultLockInput
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "string", # required
-    #         vault_name: "string", # required
-    #         policy: {
-    #           policy: "string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID. This value must match
     #   the AWS account ID associated with the credentials used to sign the
@@ -1539,20 +1217,6 @@ module Aws::Glacier
     end
 
     # Describes how the archive is serialized.
-    #
-    # @note When making an API call, you may pass InputSerialization
-    #   data as a hash:
-    #
-    #       {
-    #         csv: {
-    #           file_header_info: "USE", # accepts USE, IGNORE, NONE
-    #           comments: "string",
-    #           quote_escape_character: "string",
-    #           record_delimiter: "string",
-    #           field_delimiter: "string",
-    #           quote_character: "string",
-    #         },
-    #       }
     #
     # @!attribute [rw] csv
     #   Describes the serialization of a CSV-encoded object.
@@ -1659,16 +1323,6 @@ module Aws::Glacier
 
     # Provides options for specifying a range inventory retrieval job.
     #
-    # @note When making an API call, you may pass InventoryRetrievalJobInput
-    #   data as a hash:
-    #
-    #       {
-    #         start_date: Time.now,
-    #         end_date: Time.now,
-    #         limit: "string",
-    #         marker: "string",
-    #       }
-    #
     # @!attribute [rw] start_date
     #   The start of the date range in UTC for vault inventory retrieval
     #   that includes archives created on or after this date. This value
@@ -1706,79 +1360,6 @@ module Aws::Glacier
     end
 
     # Provides options for defining a job.
-    #
-    # @note When making an API call, you may pass JobParameters
-    #   data as a hash:
-    #
-    #       {
-    #         format: "string",
-    #         type: "string",
-    #         archive_id: "string",
-    #         description: "string",
-    #         sns_topic: "string",
-    #         retrieval_byte_range: "string",
-    #         tier: "string",
-    #         inventory_retrieval_parameters: {
-    #           start_date: Time.now,
-    #           end_date: Time.now,
-    #           limit: "string",
-    #           marker: "string",
-    #         },
-    #         select_parameters: {
-    #           input_serialization: {
-    #             csv: {
-    #               file_header_info: "USE", # accepts USE, IGNORE, NONE
-    #               comments: "string",
-    #               quote_escape_character: "string",
-    #               record_delimiter: "string",
-    #               field_delimiter: "string",
-    #               quote_character: "string",
-    #             },
-    #           },
-    #           expression_type: "SQL", # accepts SQL
-    #           expression: "string",
-    #           output_serialization: {
-    #             csv: {
-    #               quote_fields: "ALWAYS", # accepts ALWAYS, ASNEEDED
-    #               quote_escape_character: "string",
-    #               record_delimiter: "string",
-    #               field_delimiter: "string",
-    #               quote_character: "string",
-    #             },
-    #           },
-    #         },
-    #         output_location: {
-    #           s3: {
-    #             bucket_name: "string",
-    #             prefix: "string",
-    #             encryption: {
-    #               encryption_type: "aws:kms", # accepts aws:kms, AES256
-    #               kms_key_id: "string",
-    #               kms_context: "string",
-    #             },
-    #             canned_acl: "private", # accepts private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, bucket-owner-full-control
-    #             access_control_list: [
-    #               {
-    #                 grantee: {
-    #                   type: "AmazonCustomerByEmail", # required, accepts AmazonCustomerByEmail, CanonicalUser, Group
-    #                   display_name: "string",
-    #                   uri: "string",
-    #                   id: "string",
-    #                   email_address: "string",
-    #                 },
-    #                 permission: "FULL_CONTROL", # accepts FULL_CONTROL, WRITE, WRITE_ACP, READ, READ_ACP
-    #               },
-    #             ],
-    #             tagging: {
-    #               "string" => "string",
-    #             },
-    #             user_metadata: {
-    #               "string" => "string",
-    #             },
-    #             storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] format
     #   When initiating a job to retrieve a vault inventory, you can
@@ -1891,18 +1472,6 @@ module Aws::Glacier
     # Provides options for retrieving a job list for an Amazon S3 Glacier
     # vault.
     #
-    # @note When making an API call, you may pass ListJobsInput
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "string", # required
-    #         vault_name: "string", # required
-    #         limit: 1,
-    #         marker: "string",
-    #         statuscode: "string",
-    #         completed: "string",
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
@@ -1975,16 +1544,6 @@ module Aws::Glacier
     # Provides options for retrieving list of in-progress multipart uploads
     # for an Amazon Glacier vault.
     #
-    # @note When making an API call, you may pass ListMultipartUploadsInput
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "string", # required
-    #         vault_name: "string", # required
-    #         marker: "string",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
@@ -2043,17 +1602,6 @@ module Aws::Glacier
 
     # Provides options for retrieving a list of parts of an archive that
     # have been uploaded in a specific multipart upload.
-    #
-    # @note When making an API call, you may pass ListPartsInput
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "string", # required
-    #         vault_name: "string", # required
-    #         upload_id: "string", # required
-    #         marker: "string",
-    #         limit: 1,
-    #       }
     #
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
@@ -2146,13 +1694,6 @@ module Aws::Glacier
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListProvisionedCapacityInput
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "string", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The AWS account ID of the account that owns the vault. You can
     #   either specify an AWS account ID or optionally a single '-'
@@ -2178,14 +1719,6 @@ module Aws::Glacier
     end
 
     # The input value for `ListTagsForVaultInput`.
-    #
-    # @note When making an API call, you may pass ListTagsForVaultInput
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "string", # required
-    #         vault_name: "string", # required
-    #       }
     #
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
@@ -2223,15 +1756,6 @@ module Aws::Glacier
     # Provides options to retrieve the vault list owned by the calling
     # user's account. The list provides metadata information for each
     # vault.
-    #
-    # @note When making an API call, you may pass ListVaultsInput
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "string", # required
-    #         marker: "string",
-    #         limit: 1,
-    #       }
     #
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID. This value must match
@@ -2307,41 +1831,6 @@ module Aws::Glacier
     # Contains information about the location where the select job results
     # are stored.
     #
-    # @note When making an API call, you may pass OutputLocation
-    #   data as a hash:
-    #
-    #       {
-    #         s3: {
-    #           bucket_name: "string",
-    #           prefix: "string",
-    #           encryption: {
-    #             encryption_type: "aws:kms", # accepts aws:kms, AES256
-    #             kms_key_id: "string",
-    #             kms_context: "string",
-    #           },
-    #           canned_acl: "private", # accepts private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, bucket-owner-full-control
-    #           access_control_list: [
-    #             {
-    #               grantee: {
-    #                 type: "AmazonCustomerByEmail", # required, accepts AmazonCustomerByEmail, CanonicalUser, Group
-    #                 display_name: "string",
-    #                 uri: "string",
-    #                 id: "string",
-    #                 email_address: "string",
-    #               },
-    #               permission: "FULL_CONTROL", # accepts FULL_CONTROL, WRITE, WRITE_ACP, READ, READ_ACP
-    #             },
-    #           ],
-    #           tagging: {
-    #             "string" => "string",
-    #           },
-    #           user_metadata: {
-    #             "string" => "string",
-    #           },
-    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA
-    #         },
-    #       }
-    #
     # @!attribute [rw] s3
     #   Describes an S3 location that will receive the results of the job
     #   request.
@@ -2354,19 +1843,6 @@ module Aws::Glacier
     end
 
     # Describes how the select output is serialized.
-    #
-    # @note When making an API call, you may pass OutputSerialization
-    #   data as a hash:
-    #
-    #       {
-    #         csv: {
-    #           quote_fields: "ALWAYS", # accepts ALWAYS, ASNEEDED
-    #           quote_escape_character: "string",
-    #           record_delimiter: "string",
-    #           field_delimiter: "string",
-    #           quote_character: "string",
-    #         },
-    #       }
     #
     # @!attribute [rw] csv
     #   Describes the serialization of CSV-encoded query results.
@@ -2444,13 +1920,6 @@ module Aws::Glacier
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PurchaseProvisionedCapacityInput
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "string", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The AWS account ID of the account that owns the vault. You can
     #   either specify an AWS account ID or optionally a single '-'
@@ -2476,15 +1945,6 @@ module Aws::Glacier
     end
 
     # The input value for `RemoveTagsFromVaultInput`.
-    #
-    # @note When making an API call, you may pass RemoveTagsFromVaultInput
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "string", # required
-    #         vault_name: "string", # required
-    #         tag_keys: ["string"],
-    #       }
     #
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
@@ -2563,39 +2023,6 @@ module Aws::Glacier
     # Contains information about the location in Amazon S3 where the select
     # job results are stored.
     #
-    # @note When making an API call, you may pass S3Location
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_name: "string",
-    #         prefix: "string",
-    #         encryption: {
-    #           encryption_type: "aws:kms", # accepts aws:kms, AES256
-    #           kms_key_id: "string",
-    #           kms_context: "string",
-    #         },
-    #         canned_acl: "private", # accepts private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, bucket-owner-full-control
-    #         access_control_list: [
-    #           {
-    #             grantee: {
-    #               type: "AmazonCustomerByEmail", # required, accepts AmazonCustomerByEmail, CanonicalUser, Group
-    #               display_name: "string",
-    #               uri: "string",
-    #               id: "string",
-    #               email_address: "string",
-    #             },
-    #             permission: "FULL_CONTROL", # accepts FULL_CONTROL, WRITE, WRITE_ACP, READ, READ_ACP
-    #           },
-    #         ],
-    #         tagging: {
-    #           "string" => "string",
-    #         },
-    #         user_metadata: {
-    #           "string" => "string",
-    #         },
-    #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA
-    #       }
-    #
     # @!attribute [rw] bucket_name
     #   The name of the Amazon S3 bucket where the job results are stored.
     #   @return [String]
@@ -2643,33 +2070,6 @@ module Aws::Glacier
     end
 
     # Contains information about the parameters used for a select.
-    #
-    # @note When making an API call, you may pass SelectParameters
-    #   data as a hash:
-    #
-    #       {
-    #         input_serialization: {
-    #           csv: {
-    #             file_header_info: "USE", # accepts USE, IGNORE, NONE
-    #             comments: "string",
-    #             quote_escape_character: "string",
-    #             record_delimiter: "string",
-    #             field_delimiter: "string",
-    #             quote_character: "string",
-    #           },
-    #         },
-    #         expression_type: "SQL", # accepts SQL
-    #         expression: "string",
-    #         output_serialization: {
-    #           csv: {
-    #             quote_fields: "ALWAYS", # accepts ALWAYS, ASNEEDED
-    #             quote_escape_character: "string",
-    #             record_delimiter: "string",
-    #             field_delimiter: "string",
-    #             quote_character: "string",
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] input_serialization
     #   Describes the serialization format of the object.
@@ -2720,21 +2120,6 @@ module Aws::Glacier
 
     # SetDataRetrievalPolicy input.
     #
-    # @note When making an API call, you may pass SetDataRetrievalPolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "string", # required
-    #         policy: {
-    #           rules: [
-    #             {
-    #               strategy: "string",
-    #               bytes_per_hour: 1,
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID. This value must match
     #   the AWS account ID associated with the credentials used to sign the
@@ -2757,17 +2142,6 @@ module Aws::Glacier
     end
 
     # SetVaultAccessPolicy input.
-    #
-    # @note When making an API call, you may pass SetVaultAccessPolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "string", # required
-    #         vault_name: "string", # required
-    #         policy: {
-    #           policy: "string",
-    #         },
-    #       }
     #
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
@@ -2797,18 +2171,6 @@ module Aws::Glacier
     # Provides options to configure notifications that will be sent when
     # specific events happen to a vault.
     #
-    # @note When making an API call, you may pass SetVaultNotificationsInput
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "string", # required
-    #         vault_name: "string", # required
-    #         vault_notification_config: {
-    #           sns_topic: "string",
-    #           events: ["string"],
-    #         },
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
@@ -2835,17 +2197,6 @@ module Aws::Glacier
     end
 
     # Provides options to add an archive to a vault.
-    #
-    # @note When making an API call, you may pass UploadArchiveInput
-    #   data as a hash:
-    #
-    #       {
-    #         vault_name: "string", # required
-    #         account_id: "string", # required
-    #         archive_description: "string",
-    #         checksum: "string",
-    #         body: "data",
-    #       }
     #
     # @!attribute [rw] vault_name
     #   The name of the vault.
@@ -2921,18 +2272,6 @@ module Aws::Glacier
     # Provides options to upload a part of an archive in a multipart upload
     # operation.
     #
-    # @note When making an API call, you may pass UploadMultipartPartInput
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "string", # required
-    #         vault_name: "string", # required
-    #         upload_id: "string", # required
-    #         checksum: "string",
-    #         range: "string",
-    #         body: "data",
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
@@ -2992,13 +2331,6 @@ module Aws::Glacier
 
     # Contains the vault access policy.
     #
-    # @note When making an API call, you may pass VaultAccessPolicy
-    #   data as a hash:
-    #
-    #       {
-    #         policy: "string",
-    #       }
-    #
     # @!attribute [rw] policy
     #   The vault access policy.
     #   @return [String]
@@ -3011,13 +2343,6 @@ module Aws::Glacier
 
     # Contains the vault lock policy.
     #
-    # @note When making an API call, you may pass VaultLockPolicy
-    #   data as a hash:
-    #
-    #       {
-    #         policy: "string",
-    #       }
-    #
     # @!attribute [rw] policy
     #   The vault lock policy.
     #   @return [String]
@@ -3029,14 +2354,6 @@ module Aws::Glacier
     end
 
     # Represents a vault's notification configuration.
-    #
-    # @note When making an API call, you may pass VaultNotificationConfig
-    #   data as a hash:
-    #
-    #       {
-    #         sns_topic: "string",
-    #         events: ["string"],
-    #       }
     #
     # @!attribute [rw] sns_topic
     #   The Amazon Simple Notification Service (Amazon SNS) topic Amazon

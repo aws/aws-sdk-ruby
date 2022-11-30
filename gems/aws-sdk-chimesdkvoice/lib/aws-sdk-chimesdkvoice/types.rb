@@ -61,15 +61,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociatePhoneNumbersWithVoiceConnectorGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         voice_connector_group_id: "NonEmptyString", # required
-    #         e164_phone_numbers: ["E164PhoneNumber"], # required
-    #         force_associate: false,
-    #       }
-    #
     # @!attribute [rw] voice_connector_group_id
     #   @return [String]
     #
@@ -100,15 +91,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociatePhoneNumbersWithVoiceConnectorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         voice_connector_id: "NonEmptyString", # required
-    #         e164_phone_numbers: ["E164PhoneNumber"], # required
-    #         force_associate: false,
-    #       }
-    #
     # @!attribute [rw] voice_connector_id
     #   @return [String]
     #
@@ -143,13 +125,6 @@ module Aws::ChimeSDKVoice
     #
     class BadRequestException < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass BatchDeletePhoneNumberRequest
-    #   data as a hash:
-    #
-    #       {
-    #         phone_number_ids: ["String"], # required
-    #       }
-    #
     # @!attribute [rw] phone_number_ids
     #   @return [Array<String>]
     #
@@ -172,19 +147,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchUpdatePhoneNumberRequest
-    #   data as a hash:
-    #
-    #       {
-    #         update_phone_number_request_items: [ # required
-    #           {
-    #             phone_number_id: "SensitiveNonEmptyString", # required
-    #             product_type: "VoiceConnector", # accepts VoiceConnector, SipMediaApplicationDialIn
-    #             calling_name: "CallingName",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] update_phone_number_request_items
     #   @return [Array<Types::UpdatePhoneNumberRequestItem>]
     #
@@ -246,14 +208,6 @@ module Aws::ChimeSDKVoice
     #
     class ConflictException < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass CreatePhoneNumberOrderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         product_type: "VoiceConnector", # required, accepts VoiceConnector, SipMediaApplicationDialIn
-    #         e164_phone_numbers: ["E164PhoneNumber"], # required
-    #       }
-    #
     # @!attribute [rw] product_type
     #   @return [String]
     #
@@ -280,23 +234,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateProxySessionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         voice_connector_id: "NonEmptyString128", # required
-    #         participant_phone_numbers: ["E164PhoneNumber"], # required
-    #         name: "ProxySessionNameString",
-    #         expiry_minutes: 1,
-    #         capabilities: ["Voice"], # required, accepts Voice, SMS
-    #         number_selection_behavior: "PreferSticky", # accepts PreferSticky, AvoidSticky
-    #         geo_match_level: "Country", # accepts Country, AreaCode
-    #         geo_match_params: {
-    #           country: "Country", # required
-    #           area_code: "AreaCode", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] voice_connector_id
     #   @return [String]
     #
@@ -347,21 +284,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateSipMediaApplicationCallRequest
-    #   data as a hash:
-    #
-    #       {
-    #         from_phone_number: "E164PhoneNumber", # required
-    #         to_phone_number: "E164PhoneNumber", # required
-    #         sip_media_application_id: "NonEmptyString", # required
-    #         sip_headers: {
-    #           "SensitiveString" => "SensitiveString",
-    #         },
-    #         arguments_map: {
-    #           "SensitiveString" => "SensitiveString",
-    #         },
-    #       }
-    #
     # @!attribute [rw] from_phone_number
     #   @return [String]
     #
@@ -400,19 +322,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateSipMediaApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         aws_region: "String", # required
-    #         name: "SipMediaApplicationName", # required
-    #         endpoints: [ # required
-    #           {
-    #             lambda_arn: "FunctionArn",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] aws_region
     #   @return [String]
     #
@@ -443,23 +352,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateSipRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "SipRuleName", # required
-    #         trigger_type: "ToPhoneNumber", # required, accepts ToPhoneNumber, RequestUriHostname
-    #         trigger_value: "NonEmptyString", # required
-    #         disabled: false,
-    #         target_applications: [
-    #           {
-    #             sip_media_application_id: "NonEmptyString",
-    #             priority: 1,
-    #             aws_region: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   @return [String]
     #
@@ -498,19 +390,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateVoiceConnectorGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "VoiceConnectorGroupName", # required
-    #         voice_connector_items: [
-    #           {
-    #             voice_connector_id: "NonEmptyString", # required
-    #             priority: 1, # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   @return [String]
     #
@@ -537,15 +416,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateVoiceConnectorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "VoiceConnectorName", # required
-    #         aws_region: "us-east-1", # accepts us-east-1, us-west-2, ca-central-1, eu-central-1, eu-west-1, eu-west-2, ap-northeast-2, ap-northeast-1, ap-southeast-1, ap-southeast-2
-    #         require_encryption: false, # required
-    #       }
-    #
     # @!attribute [rw] name
     #   @return [String]
     #
@@ -576,14 +446,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass Credential
-    #   data as a hash:
-    #
-    #       {
-    #         username: "SensitiveString",
-    #         password: "SensitiveString",
-    #       }
-    #
     # @!attribute [rw] username
     #   @return [String]
     #
@@ -599,15 +461,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DNISEmergencyCallingConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         emergency_phone_number: "E164PhoneNumber", # required
-    #         test_phone_number: "E164PhoneNumber",
-    #         calling_country: "Alpha2CountryCode", # required
-    #       }
-    #
     # @!attribute [rw] emergency_phone_number
     #   @return [String]
     #
@@ -627,13 +480,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeletePhoneNumberRequest
-    #   data as a hash:
-    #
-    #       {
-    #         phone_number_id: "SensitiveNonEmptyString", # required
-    #       }
-    #
     # @!attribute [rw] phone_number_id
     #   @return [String]
     #
@@ -645,14 +491,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteProxySessionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         voice_connector_id: "NonEmptyString128", # required
-    #         proxy_session_id: "NonEmptyString128", # required
-    #       }
-    #
     # @!attribute [rw] voice_connector_id
     #   @return [String]
     #
@@ -668,13 +506,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteSipMediaApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         sip_media_application_id: "NonEmptyString", # required
-    #       }
-    #
     # @!attribute [rw] sip_media_application_id
     #   @return [String]
     #
@@ -686,13 +517,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteSipRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         sip_rule_id: "NonEmptyString", # required
-    #       }
-    #
     # @!attribute [rw] sip_rule_id
     #   @return [String]
     #
@@ -704,13 +528,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteVoiceConnectorEmergencyCallingConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         voice_connector_id: "NonEmptyString", # required
-    #       }
-    #
     # @!attribute [rw] voice_connector_id
     #   @return [String]
     #
@@ -722,13 +539,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteVoiceConnectorGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         voice_connector_group_id: "NonEmptyString", # required
-    #       }
-    #
     # @!attribute [rw] voice_connector_group_id
     #   @return [String]
     #
@@ -740,13 +550,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteVoiceConnectorOriginationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         voice_connector_id: "NonEmptyString", # required
-    #       }
-    #
     # @!attribute [rw] voice_connector_id
     #   @return [String]
     #
@@ -758,13 +561,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteVoiceConnectorProxyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         voice_connector_id: "NonEmptyString128", # required
-    #       }
-    #
     # @!attribute [rw] voice_connector_id
     #   @return [String]
     #
@@ -776,13 +572,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteVoiceConnectorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         voice_connector_id: "NonEmptyString", # required
-    #       }
-    #
     # @!attribute [rw] voice_connector_id
     #   @return [String]
     #
@@ -794,13 +583,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteVoiceConnectorStreamingConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         voice_connector_id: "NonEmptyString", # required
-    #       }
-    #
     # @!attribute [rw] voice_connector_id
     #   @return [String]
     #
@@ -812,14 +594,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteVoiceConnectorTerminationCredentialsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         voice_connector_id: "NonEmptyString", # required
-    #         usernames: ["SensitiveString"], # required
-    #       }
-    #
     # @!attribute [rw] voice_connector_id
     #   @return [String]
     #
@@ -835,13 +609,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteVoiceConnectorTerminationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         voice_connector_id: "NonEmptyString", # required
-    #       }
-    #
     # @!attribute [rw] voice_connector_id
     #   @return [String]
     #
@@ -853,14 +620,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociatePhoneNumbersFromVoiceConnectorGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         voice_connector_group_id: "NonEmptyString", # required
-    #         e164_phone_numbers: ["E164PhoneNumber"], # required
-    #       }
-    #
     # @!attribute [rw] voice_connector_group_id
     #   @return [String]
     #
@@ -887,14 +646,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociatePhoneNumbersFromVoiceConnectorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         voice_connector_id: "NonEmptyString", # required
-    #         e164_phone_numbers: ["E164PhoneNumber"], # required
-    #       }
-    #
     # @!attribute [rw] voice_connector_id
     #   @return [String]
     #
@@ -921,19 +672,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass EmergencyCallingConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         dnis: [
-    #           {
-    #             emergency_phone_number: "E164PhoneNumber", # required
-    #             test_phone_number: "E164PhoneNumber",
-    #             calling_country: "Alpha2CountryCode", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] dnis
     #   @return [Array<Types::DNISEmergencyCallingConfiguration>]
     #
@@ -949,14 +687,6 @@ module Aws::ChimeSDKVoice
     #
     class ForbiddenException < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass GeoMatchParams
-    #   data as a hash:
-    #
-    #       {
-    #         country: "Country", # required
-    #         area_code: "AreaCode", # required
-    #       }
-    #
     # @!attribute [rw] country
     #   @return [String]
     #
@@ -983,13 +713,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetPhoneNumberOrderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         phone_number_order_id: "GuidString", # required
-    #       }
-    #
     # @!attribute [rw] phone_number_order_id
     #   @return [String]
     #
@@ -1012,13 +735,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetPhoneNumberRequest
-    #   data as a hash:
-    #
-    #       {
-    #         phone_number_id: "SensitiveNonEmptyString", # required
-    #       }
-    #
     # @!attribute [rw] phone_number_id
     #   @return [String]
     #
@@ -1056,14 +772,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetProxySessionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         voice_connector_id: "NonEmptyString128", # required
-    #         proxy_session_id: "NonEmptyString128", # required
-    #       }
-    #
     # @!attribute [rw] voice_connector_id
     #   @return [String]
     #
@@ -1090,13 +798,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSipMediaApplicationAlexaSkillConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         sip_media_application_id: "NonEmptyString", # required
-    #       }
-    #
     # @!attribute [rw] sip_media_application_id
     #   @return [String]
     #
@@ -1119,13 +820,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSipMediaApplicationLoggingConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         sip_media_application_id: "NonEmptyString", # required
-    #       }
-    #
     # @!attribute [rw] sip_media_application_id
     #   @return [String]
     #
@@ -1148,13 +842,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSipMediaApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         sip_media_application_id: "NonEmptyString", # required
-    #       }
-    #
     # @!attribute [rw] sip_media_application_id
     #   @return [String]
     #
@@ -1177,13 +864,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSipRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         sip_rule_id: "NonEmptyString", # required
-    #       }
-    #
     # @!attribute [rw] sip_rule_id
     #   @return [String]
     #
@@ -1206,13 +886,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetVoiceConnectorEmergencyCallingConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         voice_connector_id: "NonEmptyString", # required
-    #       }
-    #
     # @!attribute [rw] voice_connector_id
     #   @return [String]
     #
@@ -1235,13 +908,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetVoiceConnectorGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         voice_connector_group_id: "NonEmptyString", # required
-    #       }
-    #
     # @!attribute [rw] voice_connector_group_id
     #   @return [String]
     #
@@ -1264,13 +930,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetVoiceConnectorLoggingConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         voice_connector_id: "NonEmptyString", # required
-    #       }
-    #
     # @!attribute [rw] voice_connector_id
     #   @return [String]
     #
@@ -1293,13 +952,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetVoiceConnectorOriginationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         voice_connector_id: "NonEmptyString", # required
-    #       }
-    #
     # @!attribute [rw] voice_connector_id
     #   @return [String]
     #
@@ -1322,13 +974,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetVoiceConnectorProxyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         voice_connector_id: "NonEmptyString128", # required
-    #       }
-    #
     # @!attribute [rw] voice_connector_id
     #   @return [String]
     #
@@ -1351,13 +996,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetVoiceConnectorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         voice_connector_id: "NonEmptyString", # required
-    #       }
-    #
     # @!attribute [rw] voice_connector_id
     #   @return [String]
     #
@@ -1380,13 +1018,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetVoiceConnectorStreamingConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         voice_connector_id: "NonEmptyString", # required
-    #       }
-    #
     # @!attribute [rw] voice_connector_id
     #   @return [String]
     #
@@ -1409,13 +1040,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetVoiceConnectorTerminationHealthRequest
-    #   data as a hash:
-    #
-    #       {
-    #         voice_connector_id: "NonEmptyString", # required
-    #       }
-    #
     # @!attribute [rw] voice_connector_id
     #   @return [String]
     #
@@ -1438,13 +1062,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetVoiceConnectorTerminationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         voice_connector_id: "NonEmptyString", # required
-    #       }
-    #
     # @!attribute [rw] voice_connector_id
     #   @return [String]
     #
@@ -1478,14 +1095,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPhoneNumberOrdersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   @return [String]
     #
@@ -1516,18 +1125,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPhoneNumbersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         status: "String",
-    #         product_type: "VoiceConnector", # accepts VoiceConnector, SipMediaApplicationDialIn
-    #         filter_name: "VoiceConnectorId", # accepts VoiceConnectorId, VoiceConnectorGroupId, SipRuleId
-    #         filter_value: "String",
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] status
     #   @return [String]
     #
@@ -1574,16 +1171,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListProxySessionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         voice_connector_id: "NonEmptyString128", # required
-    #         status: "Open", # accepts Open, InProgress, Closed
-    #         next_token: "NextTokenString",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] voice_connector_id
     #   @return [String]
     #
@@ -1622,14 +1209,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSipMediaApplicationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextTokenString",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [Integer]
     #
@@ -1660,15 +1239,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSipRulesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         sip_media_application_id: "NonEmptyString",
-    #         max_results: 1,
-    #         next_token: "NextTokenString",
-    #       }
-    #
     # @!attribute [rw] sip_media_application_id
     #   @return [String]
     #
@@ -1703,13 +1273,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSupportedPhoneNumberCountriesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         product_type: "VoiceConnector", # required, accepts VoiceConnector, SipMediaApplicationDialIn
-    #       }
-    #
     # @!attribute [rw] product_type
     #   @return [String]
     #
@@ -1732,14 +1295,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListVoiceConnectorGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   @return [String]
     #
@@ -1770,13 +1325,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListVoiceConnectorTerminationCredentialsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         voice_connector_id: "NonEmptyString", # required
-    #       }
-    #
     # @!attribute [rw] voice_connector_id
     #   @return [String]
     #
@@ -1799,14 +1347,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListVoiceConnectorsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   @return [String]
     #
@@ -1837,13 +1377,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass LoggingConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         enable_sip_logs: false,
-    #       }
-    #
     # @!attribute [rw] enable_sip_logs
     #   @return [Boolean]
     #
@@ -1874,22 +1407,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass Origination
-    #   data as a hash:
-    #
-    #       {
-    #         routes: [
-    #           {
-    #             host: "String",
-    #             port: 1,
-    #             protocol: "TCP", # accepts TCP, UDP
-    #             priority: 1,
-    #             weight: 1,
-    #           },
-    #         ],
-    #         disabled: false,
-    #       }
-    #
     # @!attribute [rw] routes
     #   @return [Array<Types::OriginationRoute>]
     #
@@ -1905,17 +1422,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass OriginationRoute
-    #   data as a hash:
-    #
-    #       {
-    #         host: "String",
-    #         port: 1,
-    #         protocol: "TCP", # accepts TCP, UDP
-    #         priority: 1,
-    #         weight: 1,
-    #       }
-    #
     # @!attribute [rw] host
     #   @return [String]
     #
@@ -2222,17 +1728,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutSipMediaApplicationAlexaSkillConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         sip_media_application_id: "NonEmptyString", # required
-    #         sip_media_application_alexa_skill_configuration: {
-    #           alexa_skill_status: "ACTIVE", # required, accepts ACTIVE, INACTIVE
-    #           alexa_skill_ids: ["AlexaSkillId"], # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] sip_media_application_id
     #   @return [String]
     #
@@ -2259,16 +1754,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutSipMediaApplicationLoggingConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         sip_media_application_id: "NonEmptyString", # required
-    #         sip_media_application_logging_configuration: {
-    #           enable_sip_media_application_message_logs: false,
-    #         },
-    #       }
-    #
     # @!attribute [rw] sip_media_application_id
     #   @return [String]
     #
@@ -2295,22 +1780,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutVoiceConnectorEmergencyCallingConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         voice_connector_id: "NonEmptyString", # required
-    #         emergency_calling_configuration: { # required
-    #           dnis: [
-    #             {
-    #               emergency_phone_number: "E164PhoneNumber", # required
-    #               test_phone_number: "E164PhoneNumber",
-    #               calling_country: "Alpha2CountryCode", # required
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] voice_connector_id
     #   @return [String]
     #
@@ -2337,16 +1806,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutVoiceConnectorLoggingConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         voice_connector_id: "NonEmptyString", # required
-    #         logging_configuration: { # required
-    #           enable_sip_logs: false,
-    #         },
-    #       }
-    #
     # @!attribute [rw] voice_connector_id
     #   @return [String]
     #
@@ -2373,25 +1832,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutVoiceConnectorOriginationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         voice_connector_id: "NonEmptyString", # required
-    #         origination: { # required
-    #           routes: [
-    #             {
-    #               host: "String",
-    #               port: 1,
-    #               protocol: "TCP", # accepts TCP, UDP
-    #               priority: 1,
-    #               weight: 1,
-    #             },
-    #           ],
-    #           disabled: false,
-    #         },
-    #       }
-    #
     # @!attribute [rw] voice_connector_id
     #   @return [String]
     #
@@ -2418,17 +1858,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutVoiceConnectorProxyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         voice_connector_id: "NonEmptyString128", # required
-    #         default_session_expiry_minutes: 1, # required
-    #         phone_number_pool_countries: ["Country"], # required
-    #         fall_back_phone_number: "E164PhoneNumber",
-    #         disabled: false,
-    #       }
-    #
     # @!attribute [rw] voice_connector_id
     #   @return [String]
     #
@@ -2467,22 +1896,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutVoiceConnectorStreamingConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         voice_connector_id: "NonEmptyString", # required
-    #         streaming_configuration: { # required
-    #           data_retention_in_hours: 1, # required
-    #           disabled: false, # required
-    #           streaming_notification_targets: [
-    #             {
-    #               notification_target: "EventBridge", # accepts EventBridge, SNS, SQS
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] voice_connector_id
     #   @return [String]
     #
@@ -2509,19 +1922,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutVoiceConnectorTerminationCredentialsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         voice_connector_id: "NonEmptyString", # required
-    #         credentials: [
-    #           {
-    #             username: "SensitiveString",
-    #             password: "SensitiveString",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] voice_connector_id
     #   @return [String]
     #
@@ -2537,20 +1937,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutVoiceConnectorTerminationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         voice_connector_id: "NonEmptyString", # required
-    #         termination: { # required
-    #           cps_limit: 1,
-    #           default_phone_number: "E164PhoneNumber",
-    #           calling_regions: ["CallingRegion"],
-    #           cidr_allowed_list: ["String"],
-    #           disabled: false,
-    #         },
-    #       }
-    #
     # @!attribute [rw] voice_connector_id
     #   @return [String]
     #
@@ -2581,13 +1967,6 @@ module Aws::ChimeSDKVoice
     #
     class ResourceLimitExceededException < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass RestorePhoneNumberRequest
-    #   data as a hash:
-    #
-    #       {
-    #         phone_number_id: "SensitiveNonEmptyString", # required
-    #       }
-    #
     # @!attribute [rw] phone_number_id
     #   @return [String]
     #
@@ -2610,20 +1989,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SearchAvailablePhoneNumbersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         area_code: "String",
-    #         city: "String",
-    #         country: "Alpha2CountryCode",
-    #         state: "String",
-    #         toll_free_prefix: "TollFreePrefix",
-    #         phone_number_type: "Local", # accepts Local, TollFree
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] area_code
     #   @return [String]
     #
@@ -2717,14 +2082,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SipMediaApplicationAlexaSkillConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         alexa_skill_status: "ACTIVE", # required, accepts ACTIVE, INACTIVE
-    #         alexa_skill_ids: ["AlexaSkillId"], # required
-    #       }
-    #
     # @!attribute [rw] alexa_skill_status
     #   @return [String]
     #
@@ -2751,13 +2108,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SipMediaApplicationEndpoint
-    #   data as a hash:
-    #
-    #       {
-    #         lambda_arn: "FunctionArn",
-    #       }
-    #
     # @!attribute [rw] lambda_arn
     #   @return [String]
     #
@@ -2769,13 +2119,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SipMediaApplicationLoggingConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         enable_sip_media_application_message_logs: false,
-    #       }
-    #
     # @!attribute [rw] enable_sip_media_application_message_logs
     #   @return [Boolean]
     #
@@ -2826,15 +2169,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SipRuleTargetApplication
-    #   data as a hash:
-    #
-    #       {
-    #         sip_media_application_id: "NonEmptyString",
-    #         priority: 1,
-    #         aws_region: "String",
-    #       }
-    #
     # @!attribute [rw] sip_media_application_id
     #   @return [String]
     #
@@ -2854,19 +2188,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StreamingConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         data_retention_in_hours: 1, # required
-    #         disabled: false, # required
-    #         streaming_notification_targets: [
-    #           {
-    #             notification_target: "EventBridge", # accepts EventBridge, SNS, SQS
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] data_retention_in_hours
     #   @return [Integer]
     #
@@ -2886,13 +2207,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StreamingNotificationTarget
-    #   data as a hash:
-    #
-    #       {
-    #         notification_target: "EventBridge", # accepts EventBridge, SNS, SQS
-    #       }
-    #
     # @!attribute [rw] notification_target
     #   @return [String]
     #
@@ -2904,17 +2218,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass Termination
-    #   data as a hash:
-    #
-    #       {
-    #         cps_limit: 1,
-    #         default_phone_number: "E164PhoneNumber",
-    #         calling_regions: ["CallingRegion"],
-    #         cidr_allowed_list: ["String"],
-    #         disabled: false,
-    #       }
-    #
     # @!attribute [rw] cps_limit
     #   @return [Integer]
     #
@@ -2965,15 +2268,6 @@ module Aws::ChimeSDKVoice
     #
     class UnauthorizedClientException < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateGlobalSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         voice_connector: {
-    #           cdr_bucket: "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] voice_connector
     #   @return [Types::VoiceConnectorSettings]
     #
@@ -2985,15 +2279,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdatePhoneNumberRequest
-    #   data as a hash:
-    #
-    #       {
-    #         phone_number_id: "SensitiveNonEmptyString", # required
-    #         product_type: "VoiceConnector", # accepts VoiceConnector, SipMediaApplicationDialIn
-    #         calling_name: "CallingName",
-    #       }
-    #
     # @!attribute [rw] phone_number_id
     #   @return [String]
     #
@@ -3013,15 +2298,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdatePhoneNumberRequestItem
-    #   data as a hash:
-    #
-    #       {
-    #         phone_number_id: "SensitiveNonEmptyString", # required
-    #         product_type: "VoiceConnector", # accepts VoiceConnector, SipMediaApplicationDialIn
-    #         calling_name: "CallingName",
-    #       }
-    #
     # @!attribute [rw] phone_number_id
     #   @return [String]
     #
@@ -3052,13 +2328,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdatePhoneNumberSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         calling_name: "CallingName", # required
-    #       }
-    #
     # @!attribute [rw] calling_name
     #   @return [String]
     #
@@ -3070,16 +2339,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateProxySessionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         voice_connector_id: "NonEmptyString128", # required
-    #         proxy_session_id: "NonEmptyString128", # required
-    #         capabilities: ["Voice"], # required, accepts Voice, SMS
-    #         expiry_minutes: 1,
-    #       }
-    #
     # @!attribute [rw] voice_connector_id
     #   @return [String]
     #
@@ -3114,17 +2373,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateSipMediaApplicationCallRequest
-    #   data as a hash:
-    #
-    #       {
-    #         sip_media_application_id: "NonEmptyString", # required
-    #         transaction_id: "NonEmptyString", # required
-    #         arguments: { # required
-    #           "SensitiveString" => "SensitiveString",
-    #         },
-    #       }
-    #
     # @!attribute [rw] sip_media_application_id
     #   @return [String]
     #
@@ -3155,19 +2403,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateSipMediaApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         sip_media_application_id: "NonEmptyString", # required
-    #         name: "SipMediaApplicationName",
-    #         endpoints: [
-    #           {
-    #             lambda_arn: "FunctionArn",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] sip_media_application_id
     #   @return [String]
     #
@@ -3198,22 +2433,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateSipRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         sip_rule_id: "NonEmptyString", # required
-    #         name: "SipRuleName", # required
-    #         disabled: false,
-    #         target_applications: [
-    #           {
-    #             sip_media_application_id: "NonEmptyString",
-    #             priority: 1,
-    #             aws_region: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] sip_rule_id
     #   @return [String]
     #
@@ -3248,20 +2467,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateVoiceConnectorGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         voice_connector_group_id: "NonEmptyString", # required
-    #         name: "VoiceConnectorGroupName", # required
-    #         voice_connector_items: [ # required
-    #           {
-    #             voice_connector_id: "NonEmptyString", # required
-    #             priority: 1, # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] voice_connector_group_id
     #   @return [String]
     #
@@ -3292,15 +2497,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateVoiceConnectorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         voice_connector_id: "NonEmptyString", # required
-    #         name: "VoiceConnectorName", # required
-    #         require_encryption: false, # required
-    #       }
-    #
     # @!attribute [rw] voice_connector_id
     #   @return [String]
     #
@@ -3331,19 +2527,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ValidateE911AddressRequest
-    #   data as a hash:
-    #
-    #       {
-    #         aws_account_id: "NonEmptyString", # required
-    #         street_number: "SensitiveNonEmptyString", # required
-    #         street_info: "SensitiveNonEmptyString", # required
-    #         city: "SensitiveNonEmptyString", # required
-    #         state: "SensitiveNonEmptyString", # required
-    #         country: "SensitiveNonEmptyString", # required
-    #         postal_code: "SensitiveNonEmptyString", # required
-    #       }
-    #
     # @!attribute [rw] aws_account_id
     #   @return [String]
     #
@@ -3472,14 +2655,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass VoiceConnectorItem
-    #   data as a hash:
-    #
-    #       {
-    #         voice_connector_id: "NonEmptyString", # required
-    #         priority: 1, # required
-    #       }
-    #
     # @!attribute [rw] voice_connector_id
     #   @return [String]
     #
@@ -3495,13 +2670,6 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass VoiceConnectorSettings
-    #   data as a hash:
-    #
-    #       {
-    #         cdr_bucket: "String",
-    #       }
-    #
     # @!attribute [rw] cdr_bucket
     #   @return [String]
     #

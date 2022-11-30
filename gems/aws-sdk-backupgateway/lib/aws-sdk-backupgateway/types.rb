@@ -29,14 +29,6 @@ module Aws::BackupGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateGatewayToServerInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayArn", # required
-    #         server_arn: "ServerArn", # required
-    #       }
-    #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the
     #   `ListGateways` operation to return a list of gateways for your
@@ -87,21 +79,6 @@ module Aws::BackupGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateGatewayInput
-    #   data as a hash:
-    #
-    #       {
-    #         activation_key: "ActivationKey", # required
-    #         gateway_display_name: "Name", # required
-    #         gateway_type: "BACKUP_VM", # required, accepts BACKUP_VM
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] activation_key
     #   The activation key of the created gateway.
     #   @return [String]
@@ -142,13 +119,6 @@ module Aws::BackupGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteGatewayInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayArn", # required
-    #       }
-    #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway to delete.
     #   @return [String]
@@ -173,13 +143,6 @@ module Aws::BackupGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteHypervisorInput
-    #   data as a hash:
-    #
-    #       {
-    #         hypervisor_arn: "ServerArn", # required
-    #       }
-    #
     # @!attribute [rw] hypervisor_arn
     #   The Amazon Resource Name (ARN) of the hypervisor to delete.
     #   @return [String]
@@ -204,13 +167,6 @@ module Aws::BackupGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateGatewayFromServerInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayArn", # required
-    #       }
-    #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway to disassociate.
     #   @return [String]
@@ -329,13 +285,6 @@ module Aws::BackupGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetGatewayInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayArn", # required
-    #       }
-    #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway.
     #   @return [String]
@@ -361,13 +310,6 @@ module Aws::BackupGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetVirtualMachineInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the virtual machine.
     #   @return [String]
@@ -433,23 +375,6 @@ module Aws::BackupGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ImportHypervisorConfigurationInput
-    #   data as a hash:
-    #
-    #       {
-    #         host: "Host", # required
-    #         kms_key_arn: "KmsKeyArn",
-    #         name: "Name", # required
-    #         password: "Password",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         username: "Username",
-    #       }
-    #
     # @!attribute [rw] host
     #   The server host of the hypervisor. This can be either an IP address
     #   or a fully-qualified domain name (FQDN).
@@ -519,14 +444,6 @@ module Aws::BackupGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListGatewaysInput
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of gateways to list.
     #   @return [Integer]
@@ -567,14 +484,6 @@ module Aws::BackupGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListHypervisorsInput
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of hypervisors to list.
     #   @return [Integer]
@@ -616,13 +525,6 @@ module Aws::BackupGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource's tags to list.
     #   @return [String]
@@ -653,15 +555,6 @@ module Aws::BackupGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListVirtualMachinesInput
-    #   data as a hash:
-    #
-    #       {
-    #         hypervisor_arn: "ServerArn",
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] hypervisor_arn
     #   The Amazon Resource Name (ARN) of the hypervisor connected to your
     #   virtual machine.
@@ -749,17 +642,6 @@ module Aws::BackupGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutMaintenanceStartTimeInput
-    #   data as a hash:
-    #
-    #       {
-    #         day_of_month: 1,
-    #         day_of_week: 1,
-    #         gateway_arn: "GatewayArn", # required
-    #         hour_of_day: 1, # required
-    #         minute_of_hour: 1, # required
-    #       }
-    #
     # @!attribute [rw] day_of_month
     #   The day of the month start maintenance on a gateway.
     #
@@ -830,14 +712,6 @@ module Aws::BackupGateway
     # resources. Allowed characters include UTF-8 letters, numbers, spaces,
     # and the following characters: + - = . \_ : /.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The key part of a tag's key-value pair. The key can't start with
     #   `aws:`.
@@ -856,19 +730,6 @@ module Aws::BackupGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource to tag.
     #   @return [String]
@@ -898,16 +759,6 @@ module Aws::BackupGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TestHypervisorConfigurationInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayArn", # required
-    #         host: "Host", # required
-    #         password: "Password",
-    #         username: "Username",
-    #       }
-    #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway to the hypervisor to
     #   test.
@@ -961,14 +812,6 @@ module Aws::BackupGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource from which to remove
     #   tags.
@@ -1000,14 +843,6 @@ module Aws::BackupGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateGatewayInformationInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayArn", # required
-    #         gateway_display_name: "Name",
-    #       }
-    #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway to update.
     #   @return [String]
@@ -1037,13 +872,6 @@ module Aws::BackupGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateGatewaySoftwareNowInput
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "GatewayArn", # required
-    #       }
-    #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway to be updated.
     #   @return [String]
@@ -1068,17 +896,6 @@ module Aws::BackupGateway
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateHypervisorInput
-    #   data as a hash:
-    #
-    #       {
-    #         host: "Host",
-    #         hypervisor_arn: "ServerArn", # required
-    #         name: "Name",
-    #         password: "Password",
-    #         username: "Username",
-    #       }
-    #
     # @!attribute [rw] host
     #   The updated host of the hypervisor. This can be either an IP address
     #   or a fully-qualified domain name (FQDN).

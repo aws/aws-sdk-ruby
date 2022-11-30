@@ -112,17 +112,6 @@ module Aws::MediaStore
     # policy. If more than one rule applies, the service uses the first
     # applicable rule listed.
     #
-    # @note When making an API call, you may pass CorsRule
-    #   data as a hash:
-    #
-    #       {
-    #         allowed_origins: ["Origin"], # required
-    #         allowed_methods: ["PUT"], # accepts PUT, GET, DELETE, HEAD
-    #         allowed_headers: ["Header"], # required
-    #         max_age_seconds: 1,
-    #         expose_headers: ["Header"],
-    #       }
-    #
     # @!attribute [rw] allowed_origins
     #   One or more response headers that you want users to be able to
     #   access from their applications (for example, from a JavaScript
@@ -179,19 +168,6 @@ module Aws::MediaStore
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateContainerInput
-    #   data as a hash:
-    #
-    #       {
-    #         container_name: "ContainerName", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] container_name
     #   The name for the container. The name must be from 1 to 255
     #   characters. Container names must be unique to your AWS account
@@ -252,13 +228,6 @@ module Aws::MediaStore
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteContainerInput
-    #   data as a hash:
-    #
-    #       {
-    #         container_name: "ContainerName", # required
-    #       }
-    #
     # @!attribute [rw] container_name
     #   The name of the container to delete.
     #   @return [String]
@@ -275,13 +244,6 @@ module Aws::MediaStore
     #
     class DeleteContainerOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteContainerPolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         container_name: "ContainerName", # required
-    #       }
-    #
     # @!attribute [rw] container_name
     #   The name of the container that holds the policy.
     #   @return [String]
@@ -298,13 +260,6 @@ module Aws::MediaStore
     #
     class DeleteContainerPolicyOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteCorsPolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         container_name: "ContainerName", # required
-    #       }
-    #
     # @!attribute [rw] container_name
     #   The name of the container to remove the policy from.
     #   @return [String]
@@ -321,13 +276,6 @@ module Aws::MediaStore
     #
     class DeleteCorsPolicyOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteLifecyclePolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         container_name: "ContainerName", # required
-    #       }
-    #
     # @!attribute [rw] container_name
     #   The name of the container that holds the object lifecycle policy.
     #   @return [String]
@@ -344,13 +292,6 @@ module Aws::MediaStore
     #
     class DeleteLifecyclePolicyOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteMetricPolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         container_name: "ContainerName", # required
-    #       }
-    #
     # @!attribute [rw] container_name
     #   The name of the container that is associated with the metric policy
     #   that you want to delete.
@@ -368,13 +309,6 @@ module Aws::MediaStore
     #
     class DeleteMetricPolicyOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeContainerInput
-    #   data as a hash:
-    #
-    #       {
-    #         container_name: "ContainerName",
-    #       }
-    #
     # @!attribute [rw] container_name
     #   The name of the container to query.
     #   @return [String]
@@ -399,13 +333,6 @@ module Aws::MediaStore
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetContainerPolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         container_name: "ContainerName", # required
-    #       }
-    #
     # @!attribute [rw] container_name
     #   The name of the container.
     #   @return [String]
@@ -430,13 +357,6 @@ module Aws::MediaStore
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetCorsPolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         container_name: "ContainerName", # required
-    #       }
-    #
     # @!attribute [rw] container_name
     #   The name of the container that the policy is assigned to.
     #   @return [String]
@@ -461,13 +381,6 @@ module Aws::MediaStore
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLifecyclePolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         container_name: "ContainerName", # required
-    #       }
-    #
     # @!attribute [rw] container_name
     #   The name of the container that the object lifecycle policy is
     #   assigned to.
@@ -493,13 +406,6 @@ module Aws::MediaStore
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetMetricPolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         container_name: "ContainerName", # required
-    #       }
-    #
     # @!attribute [rw] container_name
     #   The name of the container that is associated with the metric policy.
     #   @return [String]
@@ -550,14 +456,6 @@ module Aws::MediaStore
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListContainersInput
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   Only if you used `MaxResults` in the first command, enter the token
     #   (which was included in the previous response) to obtain the next set
@@ -599,13 +497,6 @@ module Aws::MediaStore
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource: "ContainerARN", # required
-    #       }
-    #
     # @!attribute [rw] resource
     #   The Amazon Resource Name (ARN) for the container.
     #   @return [String]
@@ -644,19 +535,6 @@ module Aws::MediaStore
     #
     # [1]: https://docs.aws.amazon.com/mediastore/latest/ug/policies-metric-examples.html
     #
-    # @note When making an API call, you may pass MetricPolicy
-    #   data as a hash:
-    #
-    #       {
-    #         container_level_metrics: "ENABLED", # required, accepts ENABLED, DISABLED
-    #         metric_policy_rules: [
-    #           {
-    #             object_group: "ObjectGroup", # required
-    #             object_group_name: "ObjectGroupName", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] container_level_metrics
     #   A setting to enable or disable metrics at the container level.
     #   @return [String]
@@ -692,14 +570,6 @@ module Aws::MediaStore
     #
     # [1]: https://console.aws.amazon.com/servicequotas/home?region=us-east-1#!/services/mediastore/quotas
     #
-    # @note When making an API call, you may pass MetricPolicyRule
-    #   data as a hash:
-    #
-    #       {
-    #         object_group: "ObjectGroup", # required
-    #         object_group_name: "ObjectGroupName", # required
-    #       }
-    #
     # @!attribute [rw] object_group
     #   A path or file name that defines which objects to include in the
     #   group. Wildcards (*) are acceptable.
@@ -731,14 +601,6 @@ module Aws::MediaStore
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutContainerPolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         container_name: "ContainerName", # required
-    #         policy: "ContainerPolicy", # required
-    #       }
-    #
     # @!attribute [rw] container_name
     #   The name of the container.
     #   @return [String]
@@ -765,22 +627,6 @@ module Aws::MediaStore
     #
     class PutContainerPolicyOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass PutCorsPolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         container_name: "ContainerName", # required
-    #         cors_policy: [ # required
-    #           {
-    #             allowed_origins: ["Origin"], # required
-    #             allowed_methods: ["PUT"], # accepts PUT, GET, DELETE, HEAD
-    #             allowed_headers: ["Header"], # required
-    #             max_age_seconds: 1,
-    #             expose_headers: ["Header"],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] container_name
     #   The name of the container that you want to assign the CORS policy
     #   to.
@@ -803,14 +649,6 @@ module Aws::MediaStore
     #
     class PutCorsPolicyOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass PutLifecyclePolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         container_name: "ContainerName", # required
-    #         lifecycle_policy: "LifecyclePolicy", # required
-    #       }
-    #
     # @!attribute [rw] container_name
     #   The name of the container that you want to assign the object
     #   lifecycle policy to.
@@ -833,22 +671,6 @@ module Aws::MediaStore
     #
     class PutLifecyclePolicyOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass PutMetricPolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         container_name: "ContainerName", # required
-    #         metric_policy: { # required
-    #           container_level_metrics: "ENABLED", # required, accepts ENABLED, DISABLED
-    #           metric_policy_rules: [
-    #             {
-    #               object_group: "ObjectGroup", # required
-    #               object_group_name: "ObjectGroupName", # required
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] container_name
     #   The name of the container that you want to add the metric policy to.
     #   @return [String]
@@ -886,13 +708,6 @@ module Aws::MediaStore
     #
     class PutMetricPolicyOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass StartAccessLoggingInput
-    #   data as a hash:
-    #
-    #       {
-    #         container_name: "ContainerName", # required
-    #       }
-    #
     # @!attribute [rw] container_name
     #   The name of the container that you want to start access logging on.
     #   @return [String]
@@ -909,13 +724,6 @@ module Aws::MediaStore
     #
     class StartAccessLoggingOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass StopAccessLoggingInput
-    #   data as a hash:
-    #
-    #       {
-    #         container_name: "ContainerName", # required
-    #       }
-    #
     # @!attribute [rw] container_name
     #   The name of the container that you want to stop access logging on.
     #   @return [String]
@@ -944,14 +752,6 @@ module Aws::MediaStore
     #
     # [1]: https://docs.aws.amazon.com/mediastore/latest/ug/tagging.html
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue",
-    #       }
-    #
     # @!attribute [rw] key
     #   Part of the key:value pair that defines a tag. You can use a tag key
     #   to describe a category of information, such as "customer." Tag
@@ -973,19 +773,6 @@ module Aws::MediaStore
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource: "ContainerARN", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource
     #   The Amazon Resource Name (ARN) for the container.
     #   @return [String]
@@ -1014,14 +801,6 @@ module Aws::MediaStore
     #
     class TagResourceOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UntagResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource: "ContainerARN", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource
     #   The Amazon Resource Name (ARN) for the container.
     #   @return [String]

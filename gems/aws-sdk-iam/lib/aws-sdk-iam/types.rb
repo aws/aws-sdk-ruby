@@ -249,14 +249,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AddClientIDToOpenIDConnectProviderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         open_id_connect_provider_arn: "arnType", # required
-    #         client_id: "clientIDType", # required
-    #       }
-    #
     # @!attribute [rw] open_id_connect_provider_arn
     #   The Amazon Resource Name (ARN) of the IAM OpenID Connect (OIDC)
     #   provider resource to add the client ID to. You can get a list of
@@ -278,14 +270,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AddRoleToInstanceProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_profile_name: "instanceProfileNameType", # required
-    #         role_name: "roleNameType", # required
-    #       }
-    #
     # @!attribute [rw] instance_profile_name
     #   The name of the instance profile to update.
     #
@@ -321,14 +305,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AddUserToGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         group_name: "groupNameType", # required
-    #         user_name: "existingUserNameType", # required
-    #       }
-    #
     # @!attribute [rw] group_name
     #   The name of the group to update.
     #
@@ -364,14 +340,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AttachGroupPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         group_name: "groupNameType", # required
-    #         policy_arn: "arnType", # required
-    #       }
-    #
     # @!attribute [rw] group_name
     #   The name (friendly name, not ARN) of the group to attach the policy
     #   to.
@@ -406,14 +374,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AttachRolePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         role_name: "roleNameType", # required
-    #         policy_arn: "arnType", # required
-    #       }
-    #
     # @!attribute [rw] role_name
     #   The name (friendly name, not ARN) of the role to attach the policy
     #   to.
@@ -448,14 +408,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AttachUserPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "userNameType", # required
-    #         policy_arn: "arnType", # required
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The name (friendly name, not ARN) of the IAM user to attach the
     #   policy to.
@@ -562,14 +514,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ChangePasswordRequest
-    #   data as a hash:
-    #
-    #       {
-    #         old_password: "passwordType", # required
-    #         new_password: "passwordType", # required
-    #       }
-    #
     # @!attribute [rw] old_password
     #   The IAM user's current password.
     #   @return [String]
@@ -626,15 +570,6 @@ module Aws::IAM
     # This data type is used as an input parameter to SimulateCustomPolicy
     # and SimulatePrincipalPolicy.
     #
-    # @note When making an API call, you may pass ContextEntry
-    #   data as a hash:
-    #
-    #       {
-    #         context_key_name: "ContextKeyNameType",
-    #         context_key_values: ["ContextKeyValueType"],
-    #         context_key_type: "string", # accepts string, stringList, numeric, numericList, boolean, booleanList, ip, ipList, binary, binaryList, date, dateList
-    #       }
-    #
     # @!attribute [rw] context_key_name
     #   The full name of a condition context key, including the service
     #   prefix. For example, `aws:SourceIp` or `s3:VersionId`.
@@ -661,13 +596,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAccessKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "existingUserNameType",
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The name of the IAM user that the new key will belong to.
     #
@@ -703,13 +631,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAccountAliasRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_alias: "accountAliasType", # required
-    #       }
-    #
     # @!attribute [rw] account_alias
     #   The account alias to create.
     #
@@ -731,14 +652,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         path: "pathType",
-    #         group_name: "groupNameType", # required
-    #       }
-    #
     # @!attribute [rw] path
     #   The path to the group. For more information about paths, see [IAM
     #   identifiers][1] in the *IAM User Guide*.
@@ -792,20 +705,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateInstanceProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_profile_name: "instanceProfileNameType", # required
-    #         path: "pathType",
-    #         tags: [
-    #           {
-    #             key: "tagKeyType", # required
-    #             value: "tagValueType", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] instance_profile_name
     #   The name of the instance profile to create.
     #
@@ -880,15 +779,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateLoginProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "userNameType", # required
-    #         password: "passwordType", # required
-    #         password_reset_required: false,
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The name of the IAM user to create a password for. The user must
     #   already exist.
@@ -950,21 +840,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateOpenIDConnectProviderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         url: "OpenIDConnectProviderUrlType", # required
-    #         client_id_list: ["clientIDType"],
-    #         thumbprint_list: ["thumbprintType"], # required
-    #         tags: [
-    #           {
-    #             key: "tagKeyType", # required
-    #             value: "tagValueType", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] url
     #   The URL of the identity provider. The URL must begin with `https://`
     #   and should correspond to the `iss` claim in the provider's OpenID
@@ -1080,22 +955,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreatePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy_name: "policyNameType", # required
-    #         path: "policyPathType",
-    #         policy_document: "policyDocumentType", # required
-    #         description: "policyDescriptionType",
-    #         tags: [
-    #           {
-    #             key: "tagKeyType", # required
-    #             value: "tagValueType", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] policy_name
     #   The friendly name of the policy.
     #
@@ -1221,15 +1080,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreatePolicyVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy_arn: "arnType", # required
-    #         policy_document: "policyDocumentType", # required
-    #         set_as_default: false,
-    #       }
-    #
     # @!attribute [rw] policy_arn
     #   The Amazon Resource Name (ARN) of the IAM policy to which you want
     #   to add a new version.
@@ -1314,24 +1164,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateRoleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         path: "pathType",
-    #         role_name: "roleNameType", # required
-    #         assume_role_policy_document: "policyDocumentType", # required
-    #         description: "roleDescriptionType",
-    #         max_session_duration: 1,
-    #         permissions_boundary: "arnType",
-    #         tags: [
-    #           {
-    #             key: "tagKeyType", # required
-    #             value: "tagValueType", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] path
     #   The path to the role. For more information about paths, see [IAM
     #   Identifiers][1] in the *IAM User Guide*.
@@ -1467,20 +1299,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateSAMLProviderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         saml_metadata_document: "SAMLMetadataDocumentType", # required
-    #         name: "SAMLProviderNameType", # required
-    #         tags: [
-    #           {
-    #             key: "tagKeyType", # required
-    #             value: "tagValueType", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] saml_metadata_document
     #   An XML document generated by an identity provider (IdP) that
     #   supports SAML 2.0. The document includes the issuer's name,
@@ -1564,15 +1382,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateServiceLinkedRoleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         aws_service_name: "groupNameType", # required
-    #         description: "roleDescriptionType",
-    #         custom_suffix: "customSuffixType",
-    #       }
-    #
     # @!attribute [rw] aws_service_name
     #   The service principal for the Amazon Web Services service to which
     #   this role is attached. You use a string similar to a URL but without
@@ -1629,14 +1438,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateServiceSpecificCredentialRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "userNameType", # required
-    #         service_name: "serviceName", # required
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The name of the IAM user that is to be associated with the
     #   credentials. The new service-specific credentials have the same
@@ -1685,21 +1486,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         path: "pathType",
-    #         user_name: "userNameType", # required
-    #         permissions_boundary: "arnType",
-    #         tags: [
-    #           {
-    #             key: "tagKeyType", # required
-    #             value: "tagValueType", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] path
     #   The path for the user name. For more information about paths, see
     #   [IAM identifiers][1] in the *IAM User Guide*.
@@ -1776,20 +1562,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateVirtualMFADeviceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         path: "pathType",
-    #         virtual_mfa_device_name: "virtualMFADeviceName", # required
-    #         tags: [
-    #           {
-    #             key: "tagKeyType", # required
-    #             value: "tagValueType", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] path
     #   The path for the virtual MFA device. For more information about
     #   paths, see [IAM identifiers][1] in the *IAM User Guide*.
@@ -1914,14 +1686,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeactivateMFADeviceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "existingUserNameType", # required
-    #         serial_number: "serialNumberType", # required
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The name of the user whose MFA device you want to deactivate.
     #
@@ -1958,14 +1722,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAccessKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "existingUserNameType",
-    #         access_key_id: "accessKeyIdType", # required
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The name of the user whose access key pair you want to delete.
     #
@@ -2001,13 +1757,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAccountAliasRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_alias: "accountAliasType", # required
-    #       }
-    #
     # @!attribute [rw] account_alias
     #   The name of the account alias to delete.
     #
@@ -2044,14 +1793,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteGroupPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         group_name: "groupNameType", # required
-    #         policy_name: "policyNameType", # required
-    #       }
-    #
     # @!attribute [rw] group_name
     #   The name (friendly name, not ARN) identifying the group that the
     #   policy is embedded in.
@@ -2088,13 +1829,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         group_name: "groupNameType", # required
-    #       }
-    #
     # @!attribute [rw] group_name
     #   The name of the IAM group to delete.
     #
@@ -2116,13 +1850,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteInstanceProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_profile_name: "instanceProfileNameType", # required
-    #       }
-    #
     # @!attribute [rw] instance_profile_name
     #   The name of the instance profile to delete.
     #
@@ -2144,13 +1871,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteLoginProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "userNameType", # required
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The name of the user whose password you want to delete.
     #
@@ -2172,13 +1892,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteOpenIDConnectProviderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         open_id_connect_provider_arn: "arnType", # required
-    #       }
-    #
     # @!attribute [rw] open_id_connect_provider_arn
     #   The Amazon Resource Name (ARN) of the IAM OpenID Connect provider
     #   resource object to delete. You can get a list of OpenID Connect
@@ -2194,13 +1907,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeletePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy_arn: "arnType", # required
-    #       }
-    #
     # @!attribute [rw] policy_arn
     #   The Amazon Resource Name (ARN) of the IAM policy you want to delete.
     #
@@ -2220,14 +1926,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeletePolicyVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy_arn: "arnType", # required
-    #         version_id: "policyVersionIdType", # required
-    #       }
-    #
     # @!attribute [rw] policy_arn
     #   The Amazon Resource Name (ARN) of the IAM policy from which you want
     #   to delete a version.
@@ -2266,13 +1964,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteRolePermissionsBoundaryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         role_name: "roleNameType", # required
-    #       }
-    #
     # @!attribute [rw] role_name
     #   The name (friendly name, not ARN) of the IAM role from which you
     #   want to remove the permissions boundary.
@@ -2286,14 +1977,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteRolePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         role_name: "roleNameType", # required
-    #         policy_name: "policyNameType", # required
-    #       }
-    #
     # @!attribute [rw] role_name
     #   The name (friendly name, not ARN) identifying the role that the
     #   policy is embedded in.
@@ -2330,13 +2013,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteRoleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         role_name: "roleNameType", # required
-    #       }
-    #
     # @!attribute [rw] role_name
     #   The name of the role to delete.
     #
@@ -2358,13 +2034,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteSAMLProviderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         saml_provider_arn: "arnType", # required
-    #       }
-    #
     # @!attribute [rw] saml_provider_arn
     #   The Amazon Resource Name (ARN) of the SAML provider to delete.
     #   @return [String]
@@ -2377,14 +2046,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteSSHPublicKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "userNameType", # required
-    #         ssh_public_key_id: "publicKeyIdType", # required
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The name of the IAM user associated with the SSH public key.
     #
@@ -2419,13 +2080,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteServerCertificateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         server_certificate_name: "serverCertificateNameType", # required
-    #       }
-    #
     # @!attribute [rw] server_certificate_name
     #   The name of the server certificate you want to delete.
     #
@@ -2447,13 +2101,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteServiceLinkedRoleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         role_name: "roleNameType", # required
-    #       }
-    #
     # @!attribute [rw] role_name
     #   The name of the service-linked role to be deleted.
     #   @return [String]
@@ -2480,14 +2127,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteServiceSpecificCredentialRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "userNameType",
-    #         service_specific_credential_id: "serviceSpecificCredentialId", # required
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The name of the IAM user associated with the service-specific
     #   credential. If this value is not specified, then the operation
@@ -2525,14 +2164,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteSigningCertificateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "existingUserNameType",
-    #         certificate_id: "certificateIdType", # required
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The name of the user the signing certificate belongs to.
     #
@@ -2567,13 +2198,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteUserPermissionsBoundaryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "userNameType", # required
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The name (friendly name, not ARN) of the IAM user from which you
     #   want to remove the permissions boundary.
@@ -2587,14 +2211,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteUserPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "existingUserNameType", # required
-    #         policy_name: "policyNameType", # required
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The name (friendly name, not ARN) identifying the user that the
     #   policy is embedded in.
@@ -2631,13 +2247,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "existingUserNameType", # required
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The name of the user to delete.
     #
@@ -2659,13 +2268,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteVirtualMFADeviceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         serial_number: "serialNumberType", # required
-    #       }
-    #
     # @!attribute [rw] serial_number
     #   The serial number that uniquely identifies the MFA device. For
     #   virtual MFA devices, the serial number is the same as the ARN.
@@ -2717,14 +2319,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DetachGroupPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         group_name: "groupNameType", # required
-    #         policy_arn: "arnType", # required
-    #       }
-    #
     # @!attribute [rw] group_name
     #   The name (friendly name, not ARN) of the IAM group to detach the
     #   policy from.
@@ -2759,14 +2353,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DetachRolePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         role_name: "roleNameType", # required
-    #         policy_arn: "arnType", # required
-    #       }
-    #
     # @!attribute [rw] role_name
     #   The name (friendly name, not ARN) of the IAM role to detach the
     #   policy from.
@@ -2801,14 +2387,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DetachUserPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "userNameType", # required
-    #         policy_arn: "arnType", # required
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The name (friendly name, not ARN) of the IAM user to detach the
     #   policy from.
@@ -2871,16 +2449,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass EnableMFADeviceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "existingUserNameType", # required
-    #         serial_number: "serialNumberType", # required
-    #         authentication_code_1: "authenticationCodeType", # required
-    #         authentication_code_2: "authenticationCodeType", # required
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The name of the IAM user for whom you want to enable the MFA device.
     #
@@ -3209,14 +2777,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GenerateOrganizationsAccessReportRequest
-    #   data as a hash:
-    #
-    #       {
-    #         entity_path: "organizationsEntityPathType", # required
-    #         organizations_policy_id: "organizationsPolicyIdType",
-    #       }
-    #
     # @!attribute [rw] entity_path
     #   The path of the Organizations entity (root, OU, or account). You can
     #   build an entity path using the known structure of your organization.
@@ -3258,14 +2818,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GenerateServiceLastAccessedDetailsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "arnType", # required
-    #         granularity: "SERVICE_LEVEL", # accepts SERVICE_LEVEL, ACTION_LEVEL
-    #       }
-    #
     # @!attribute [rw] arn
     #   The ARN of the IAM resource (user, group, role, or managed policy)
     #   used to generate information about when the resource was last used
@@ -3307,13 +2859,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAccessKeyLastUsedRequest
-    #   data as a hash:
-    #
-    #       {
-    #         access_key_id: "accessKeyIdType", # required
-    #       }
-    #
     # @!attribute [rw] access_key_id
     #   The identifier of an access key.
     #
@@ -3355,15 +2900,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAccountAuthorizationDetailsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter: ["User"], # accepts User, Role, Group, LocalManagedPolicy, AWSManagedPolicy
-    #         max_items: 1,
-    #         marker: "markerType",
-    #       }
-    #
     # @!attribute [rw] filter
     #   A list of entity types used to filter the results. Only the entities
     #   that match the types you specify are included in the output. Use the
@@ -3483,13 +3019,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetContextKeysForCustomPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy_input_list: ["policyDocumentType"], # required
-    #       }
-    #
     # @!attribute [rw] policy_input_list
     #   A list of policies for which you want the list of context keys
     #   referenced in those policies. Each document is specified as a string
@@ -3535,14 +3064,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetContextKeysForPrincipalPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy_source_arn: "arnType", # required
-    #         policy_input_list: ["policyDocumentType"],
-    #       }
-    #
     # @!attribute [rw] policy_source_arn
     #   The ARN of a user, group, or role whose policies contain the context
     #   keys that you want listed. If you specify a user, the list includes
@@ -3621,14 +3142,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetGroupPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         group_name: "groupNameType", # required
-    #         policy_name: "policyNameType", # required
-    #       }
-    #
     # @!attribute [rw] group_name
     #   The name of the group the policy is associated with.
     #
@@ -3693,15 +3206,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         group_name: "groupNameType", # required
-    #         marker: "markerType",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] group_name
     #   The name of the group.
     #
@@ -3782,13 +3286,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetInstanceProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_profile_name: "instanceProfileNameType", # required
-    #       }
-    #
     # @!attribute [rw] instance_profile_name
     #   The name of the instance profile to get information about.
     #
@@ -3824,13 +3321,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLoginProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "userNameType", # required
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The name of the user whose login profile you want to retrieve.
     #
@@ -3867,13 +3357,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetOpenIDConnectProviderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         open_id_connect_provider_arn: "arnType", # required
-    #       }
-    #
     # @!attribute [rw] open_id_connect_provider_arn
     #   The Amazon Resource Name (ARN) of the OIDC provider resource object
     #   in IAM to get information for. You can get a list of OIDC provider
@@ -3943,16 +3426,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetOrganizationsAccessReportRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "jobIDType", # required
-    #         max_items: 1,
-    #         marker: "markerType",
-    #         sort_key: "SERVICE_NAMESPACE_ASCENDING", # accepts SERVICE_NAMESPACE_ASCENDING, SERVICE_NAMESPACE_DESCENDING, LAST_AUTHENTICATED_TIME_ASCENDING, LAST_AUTHENTICATED_TIME_DESCENDING
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The identifier of the request generated by the
     #   GenerateOrganizationsAccessReport operation.
@@ -4076,13 +3549,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy_arn: "arnType", # required
-    #       }
-    #
     # @!attribute [rw] policy_arn
     #   The Amazon Resource Name (ARN) of the managed policy that you want
     #   information about.
@@ -4117,14 +3583,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetPolicyVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy_arn: "arnType", # required
-    #         version_id: "policyVersionIdType", # required
-    #       }
-    #
     # @!attribute [rw] policy_arn
     #   The Amazon Resource Name (ARN) of the managed policy that you want
     #   information about.
@@ -4173,14 +3631,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRolePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         role_name: "roleNameType", # required
-    #         policy_name: "policyNameType", # required
-    #       }
-    #
     # @!attribute [rw] role_name
     #   The name of the role associated with the policy.
     #
@@ -4245,13 +3695,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRoleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         role_name: "roleNameType", # required
-    #       }
-    #
     # @!attribute [rw] role_name
     #   The name of the IAM role to get information about.
     #
@@ -4287,13 +3730,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSAMLProviderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         saml_provider_arn: "arnType", # required
-    #       }
-    #
     # @!attribute [rw] saml_provider_arn
     #   The Amazon Resource Name (ARN) of the SAML provider resource object
     #   in IAM to get information about.
@@ -4351,15 +3787,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSSHPublicKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "userNameType", # required
-    #         ssh_public_key_id: "publicKeyIdType", # required
-    #         encoding: "SSH", # required, accepts SSH, PEM
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The name of the IAM user associated with the SSH public key.
     #
@@ -4415,13 +3842,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetServerCertificateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         server_certificate_name: "serverCertificateNameType", # required
-    #       }
-    #
     # @!attribute [rw] server_certificate_name
     #   The name of the server certificate you want to retrieve information
     #   about.
@@ -4458,15 +3878,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetServiceLastAccessedDetailsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "jobIDType", # required
-    #         max_items: 1,
-    #         marker: "markerType",
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The ID of the request generated by the
     #   GenerateServiceLastAccessedDetails operation. The `JobId` returned
@@ -4577,16 +3988,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetServiceLastAccessedDetailsWithEntitiesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "jobIDType", # required
-    #         service_namespace: "serviceNamespaceType", # required
-    #         max_items: 1,
-    #         marker: "markerType",
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The ID of the request generated by the
     #   `GenerateServiceLastAccessedDetails` operation.
@@ -4708,13 +4109,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetServiceLinkedRoleDeletionStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         deletion_task_id: "DeletionTaskIdType", # required
-    #       }
-    #
     # @!attribute [rw] deletion_task_id
     #   The deletion task identifier. This identifier is returned by the
     #   DeleteServiceLinkedRole operation in the format
@@ -4747,14 +4141,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetUserPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "existingUserNameType", # required
-    #         policy_name: "policyNameType", # required
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The name of the user who the policy is associated with.
     #
@@ -4819,13 +4205,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "existingUserNameType",
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The name of the user to get information about.
     #
@@ -5199,15 +4578,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAccessKeysRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "existingUserNameType",
-    #         marker: "markerType",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The name of the user.
     #
@@ -5283,14 +4653,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAccountAliasesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         marker: "markerType",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] marker
     #   Use this parameter only when paginating results and only after you
     #   receive a response indicating that the results are truncated. Set it
@@ -5353,16 +4715,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAttachedGroupPoliciesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         group_name: "groupNameType", # required
-    #         path_prefix: "policyPathType",
-    #         marker: "markerType",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] group_name
     #   The name (friendly name, not ARN) of the group to list attached
     #   policies for.
@@ -5458,16 +4810,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAttachedRolePoliciesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         role_name: "roleNameType", # required
-    #         path_prefix: "policyPathType",
-    #         marker: "markerType",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] role_name
     #   The name (friendly name, not ARN) of the role to list attached
     #   policies for.
@@ -5563,16 +4905,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAttachedUserPoliciesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "userNameType", # required
-    #         path_prefix: "policyPathType",
-    #         marker: "markerType",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The name (friendly name, not ARN) of the user to list attached
     #   policies for.
@@ -5668,18 +5000,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEntitiesForPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy_arn: "arnType", # required
-    #         entity_filter: "User", # accepts User, Role, Group, LocalManagedPolicy, AWSManagedPolicy
-    #         path_prefix: "pathType",
-    #         policy_usage_filter: "PermissionsPolicy", # accepts PermissionsPolicy, PermissionsBoundary
-    #         marker: "markerType",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] policy_arn
     #   The Amazon Resource Name (ARN) of the IAM policy for which you want
     #   the versions.
@@ -5806,15 +5126,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListGroupPoliciesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         group_name: "groupNameType", # required
-    #         marker: "markerType",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] group_name
     #   The name of the group to list policies for.
     #
@@ -5899,15 +5210,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListGroupsForUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "existingUserNameType", # required
-    #         marker: "markerType",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The name of the user to list groups for.
     #
@@ -5983,15 +5285,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         path_prefix: "pathPrefixType",
-    #         marker: "markerType",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] path_prefix
     #   The path prefix for filtering the results. For example, the prefix
     #   `/division_abc/subdivision_xyz/` gets all groups whose path starts
@@ -6073,15 +5366,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListInstanceProfileTagsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_profile_name: "instanceProfileNameType", # required
-    #         marker: "markerType",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] instance_profile_name
     #   The name of the IAM instance profile whose tags you want to see.
     #
@@ -6158,15 +5442,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListInstanceProfilesForRoleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         role_name: "roleNameType", # required
-    #         marker: "markerType",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] role_name
     #   The name of the role to list instance profiles for.
     #
@@ -6243,15 +5518,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListInstanceProfilesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         path_prefix: "pathPrefixType",
-    #         marker: "markerType",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] path_prefix
     #   The path prefix for filtering the results. For example, the prefix
     #   `/application_abc/component_xyz/` gets all instance profiles whose
@@ -6333,15 +5599,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListMFADeviceTagsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         serial_number: "serialNumberType", # required
-    #         marker: "markerType",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] serial_number
     #   The unique identifier for the IAM virtual MFA device whose tags you
     #   want to see. For virtual MFA devices, the serial number is the same
@@ -6420,15 +5677,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListMFADevicesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "existingUserNameType",
-    #         marker: "markerType",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The name of the user whose MFA devices you want to list.
     #
@@ -6504,15 +5752,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListOpenIDConnectProviderTagsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         open_id_connect_provider_arn: "arnType", # required
-    #         marker: "markerType",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] open_id_connect_provider_arn
     #   The ARN of the OpenID Connect (OIDC) identity provider whose tags
     #   you want to see.
@@ -6590,8 +5829,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListOpenIDConnectProvidersRequest AWS API Documentation
     #
     class ListOpenIDConnectProvidersRequest < Aws::EmptyStructure; end
@@ -6650,15 +5887,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPoliciesGrantingServiceAccessRequest
-    #   data as a hash:
-    #
-    #       {
-    #         marker: "markerType",
-    #         arn: "arnType", # required
-    #         service_namespaces: ["serviceNamespaceType"], # required
-    #       }
-    #
     # @!attribute [rw] marker
     #   Use this parameter only when paginating results and only after you
     #   receive a response indicating that the results are truncated. Set it
@@ -6729,18 +5957,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPoliciesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         scope: "All", # accepts All, AWS, Local
-    #         only_attached: false,
-    #         path_prefix: "policyPathType",
-    #         policy_usage_filter: "PermissionsPolicy", # accepts PermissionsPolicy, PermissionsBoundary
-    #         marker: "markerType",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] scope
     #   The scope to use for filtering the results.
     #
@@ -6853,15 +6069,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPolicyTagsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy_arn: "arnType", # required
-    #         marker: "markerType",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] policy_arn
     #   The ARN of the IAM customer managed policy whose tags you want to
     #   see.
@@ -6939,15 +6146,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPolicyVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy_arn: "arnType", # required
-    #         marker: "markerType",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] policy_arn
     #   The Amazon Resource Name (ARN) of the IAM policy for which you want
     #   the versions.
@@ -7029,15 +6227,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRolePoliciesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         role_name: "roleNameType", # required
-    #         marker: "markerType",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] role_name
     #   The name of the role to list policies for.
     #
@@ -7113,15 +6302,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRoleTagsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         role_name: "roleNameType", # required
-    #         marker: "markerType",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] role_name
     #   The name of the IAM role for which you want to see the list of tags.
     #
@@ -7198,15 +6378,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRolesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         path_prefix: "pathPrefixType",
-    #         marker: "markerType",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] path_prefix
     #   The path prefix for filtering the results. For example, the prefix
     #   `/application_abc/component_xyz/` gets all roles whose path starts
@@ -7288,15 +6459,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSAMLProviderTagsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         saml_provider_arn: "arnType", # required
-    #         marker: "markerType",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] saml_provider_arn
     #   The ARN of the Security Assertion Markup Language (SAML) identity
     #   provider whose tags you want to see.
@@ -7375,8 +6537,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListSAMLProvidersRequest AWS API Documentation
     #
     class ListSAMLProvidersRequest < Aws::EmptyStructure; end
@@ -7396,15 +6556,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSSHPublicKeysRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "userNameType",
-    #         marker: "markerType",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The name of the IAM user to list SSH public keys for. If none is
     #   specified, the `UserName` field is determined implicitly based on
@@ -7482,15 +6633,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListServerCertificateTagsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         server_certificate_name: "serverCertificateNameType", # required
-    #         marker: "markerType",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] server_certificate_name
     #   The name of the IAM server certificate whose tags you want to see.
     #
@@ -7567,15 +6709,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListServerCertificatesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         path_prefix: "pathPrefixType",
-    #         marker: "markerType",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] path_prefix
     #   The path prefix for filtering the results. For example:
     #   `/company/servercerts` would get all server certificates for which
@@ -7657,14 +6790,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListServiceSpecificCredentialsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "userNameType",
-    #         service_name: "serviceName",
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The name of the user whose service-specific credentials you want
     #   information about. If this value is not specified, then the
@@ -7709,15 +6834,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSigningCertificatesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "existingUserNameType",
-    #         marker: "markerType",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The name of the IAM user whose signing certificates you want to
     #   examine.
@@ -7794,15 +6910,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListUserPoliciesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "existingUserNameType", # required
-    #         marker: "markerType",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The name of the user to list policies for.
     #
@@ -7878,15 +6985,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListUserTagsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "existingUserNameType", # required
-    #         marker: "markerType",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The name of the IAM user whose tags you want to see.
     #
@@ -7963,15 +7061,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListUsersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         path_prefix: "pathPrefixType",
-    #         marker: "markerType",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] path_prefix
     #   The path prefix for filtering the results. For example:
     #   `/division_abc/subdivision_xyz/`, which would get all user names
@@ -8053,15 +7142,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListVirtualMFADevicesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assignment_status: "Assigned", # accepts Assigned, Unassigned, Any
-    #         marker: "markerType",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] assignment_status
     #   The status (`Unassigned` or `Assigned`) of the devices to list. If
     #   you do not specify an `AssignmentStatus`, the operation defaults to
@@ -8979,15 +8059,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutGroupPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         group_name: "groupNameType", # required
-    #         policy_name: "policyNameType", # required
-    #         policy_document: "policyDocumentType", # required
-    #       }
-    #
     # @!attribute [rw] group_name
     #   The name of the group to associate the policy with.
     #
@@ -9049,14 +8120,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutRolePermissionsBoundaryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         role_name: "roleNameType", # required
-    #         permissions_boundary: "arnType", # required
-    #       }
-    #
     # @!attribute [rw] role_name
     #   The name (friendly name, not ARN) of the IAM role for which you want
     #   to set the permissions boundary.
@@ -9076,15 +8139,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutRolePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         role_name: "roleNameType", # required
-    #         policy_name: "policyNameType", # required
-    #         policy_document: "policyDocumentType", # required
-    #       }
-    #
     # @!attribute [rw] role_name
     #   The name of the role to associate the policy with.
     #
@@ -9146,14 +8200,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutUserPermissionsBoundaryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "userNameType", # required
-    #         permissions_boundary: "arnType", # required
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The name (friendly name, not ARN) of the IAM user for which you want
     #   to set the permissions boundary.
@@ -9173,15 +8219,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutUserPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "existingUserNameType", # required
-    #         policy_name: "policyNameType", # required
-    #         policy_document: "policyDocumentType", # required
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The name of the user to associate the policy with.
     #
@@ -9243,14 +8280,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RemoveClientIDFromOpenIDConnectProviderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         open_id_connect_provider_arn: "arnType", # required
-    #         client_id: "clientIDType", # required
-    #       }
-    #
     # @!attribute [rw] open_id_connect_provider_arn
     #   The Amazon Resource Name (ARN) of the IAM OIDC provider resource to
     #   remove the client ID from. You can get a list of OIDC provider ARNs
@@ -9279,14 +8308,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RemoveRoleFromInstanceProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_profile_name: "instanceProfileNameType", # required
-    #         role_name: "roleNameType", # required
-    #       }
-    #
     # @!attribute [rw] instance_profile_name
     #   The name of the instance profile to update.
     #
@@ -9322,14 +8343,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RemoveUserFromGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         group_name: "groupNameType", # required
-    #         user_name: "existingUserNameType", # required
-    #       }
-    #
     # @!attribute [rw] group_name
     #   The name of the group to update.
     #
@@ -9379,14 +8392,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ResetServiceSpecificCredentialRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "userNameType",
-    #         service_specific_credential_id: "serviceSpecificCredentialId", # required
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The name of the IAM user associated with the service-specific
     #   credential. If this value is not specified, then the operation
@@ -9501,16 +8506,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ResyncMFADeviceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "existingUserNameType", # required
-    #         serial_number: "serialNumberType", # required
-    #         authentication_code_1: "authenticationCodeType", # required
-    #         authentication_code_2: "authenticationCodeType", # required
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The name of the user whose MFA device you want to resynchronize.
     #
@@ -10313,14 +9308,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SetDefaultPolicyVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy_arn: "arnType", # required
-    #         version_id: "policyVersionIdType", # required
-    #       }
-    #
     # @!attribute [rw] policy_arn
     #   The Amazon Resource Name (ARN) of the IAM policy whose default
     #   version you want to set.
@@ -10353,13 +9340,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SetSecurityTokenServicePreferencesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         global_endpoint_token_version: "v1Token", # required, accepts v1Token, v2Token
-    #       }
-    #
     # @!attribute [rw] global_endpoint_token_version
     #   The version of the global endpoint token. Version 1 tokens are valid
     #   only in Amazon Web Services Regions that are available by default.
@@ -10422,29 +9402,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SimulateCustomPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy_input_list: ["policyDocumentType"], # required
-    #         permissions_boundary_policy_input_list: ["policyDocumentType"],
-    #         action_names: ["ActionNameType"], # required
-    #         resource_arns: ["ResourceNameType"],
-    #         resource_policy: "policyDocumentType",
-    #         resource_owner: "ResourceNameType",
-    #         caller_arn: "ResourceNameType",
-    #         context_entries: [
-    #           {
-    #             context_key_name: "ContextKeyNameType",
-    #             context_key_values: ["ContextKeyValueType"],
-    #             context_key_type: "string", # accepts string, stringList, numeric, numericList, boolean, booleanList, ip, ipList, binary, binaryList, date, dateList
-    #           },
-    #         ],
-    #         resource_handling_option: "ResourceHandlingOptionType",
-    #         max_items: 1,
-    #         marker: "markerType",
-    #       }
-    #
     # @!attribute [rw] policy_input_list
     #   A list of policy documents to include in the simulation. Each
     #   document is specified as a string containing the complete, valid
@@ -10723,30 +9680,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SimulatePrincipalPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy_source_arn: "arnType", # required
-    #         policy_input_list: ["policyDocumentType"],
-    #         permissions_boundary_policy_input_list: ["policyDocumentType"],
-    #         action_names: ["ActionNameType"], # required
-    #         resource_arns: ["ResourceNameType"],
-    #         resource_policy: "policyDocumentType",
-    #         resource_owner: "ResourceNameType",
-    #         caller_arn: "ResourceNameType",
-    #         context_entries: [
-    #           {
-    #             context_key_name: "ContextKeyNameType",
-    #             context_key_values: ["ContextKeyValueType"],
-    #             context_key_type: "string", # accepts string, stringList, numeric, numericList, boolean, booleanList, ip, ipList, binary, binaryList, date, dateList
-    #           },
-    #         ],
-    #         resource_handling_option: "ResourceHandlingOptionType",
-    #         max_items: 1,
-    #         marker: "markerType",
-    #       }
-    #
     # @!attribute [rw] policy_source_arn
     #   The Amazon Resource Name (ARN) of a user, group, or role whose
     #   policies you want to include in the simulation. If you specify a
@@ -11054,14 +9987,6 @@ module Aws::IAM
     #
     # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "tagKeyType", # required
-    #         value: "tagValueType", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The key name that can be used to look up or retrieve the associated
     #   value. For example, `Department` or `Cost Center` are common
@@ -11093,19 +10018,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagInstanceProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_profile_name: "instanceProfileNameType", # required
-    #         tags: [ # required
-    #           {
-    #             key: "tagKeyType", # required
-    #             value: "tagValueType", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] instance_profile_name
     #   The name of the IAM instance profile to which you want to add tags.
     #
@@ -11133,19 +10045,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagMFADeviceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         serial_number: "serialNumberType", # required
-    #         tags: [ # required
-    #           {
-    #             key: "tagKeyType", # required
-    #             value: "tagValueType", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] serial_number
     #   The unique identifier for the IAM virtual MFA device to which you
     #   want to add tags. For virtual MFA devices, the serial number is the
@@ -11175,19 +10074,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagOpenIDConnectProviderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         open_id_connect_provider_arn: "arnType", # required
-    #         tags: [ # required
-    #           {
-    #             key: "tagKeyType", # required
-    #             value: "tagValueType", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] open_id_connect_provider_arn
     #   The ARN of the OIDC identity provider in IAM to which you want to
     #   add tags.
@@ -11217,19 +10103,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy_arn: "arnType", # required
-    #         tags: [ # required
-    #           {
-    #             key: "tagKeyType", # required
-    #             value: "tagValueType", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] policy_arn
     #   The ARN of the IAM customer managed policy to which you want to add
     #   tags.
@@ -11258,19 +10131,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagRoleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         role_name: "roleNameType", # required
-    #         tags: [ # required
-    #           {
-    #             key: "tagKeyType", # required
-    #             value: "tagValueType", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] role_name
     #   The name of the IAM role to which you want to add tags.
     #
@@ -11298,19 +10158,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagSAMLProviderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         saml_provider_arn: "arnType", # required
-    #         tags: [ # required
-    #           {
-    #             key: "tagKeyType", # required
-    #             value: "tagValueType", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] saml_provider_arn
     #   The ARN of the SAML identity provider in IAM to which you want to
     #   add tags.
@@ -11340,19 +10187,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagServerCertificateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         server_certificate_name: "serverCertificateNameType", # required
-    #         tags: [ # required
-    #           {
-    #             key: "tagKeyType", # required
-    #             value: "tagValueType", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] server_certificate_name
     #   The name of the IAM server certificate to which you want to add
     #   tags.
@@ -11382,19 +10216,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "existingUserNameType", # required
-    #         tags: [ # required
-    #           {
-    #             key: "tagKeyType", # required
-    #             value: "tagValueType", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The name of the IAM user to which you want to add tags.
     #
@@ -11514,14 +10335,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagInstanceProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_profile_name: "instanceProfileNameType", # required
-    #         tag_keys: ["tagKeyType"], # required
-    #       }
-    #
     # @!attribute [rw] instance_profile_name
     #   The name of the IAM instance profile from which you want to remove
     #   tags.
@@ -11550,14 +10363,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagMFADeviceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         serial_number: "serialNumberType", # required
-    #         tag_keys: ["tagKeyType"], # required
-    #       }
-    #
     # @!attribute [rw] serial_number
     #   The unique identifier for the IAM virtual MFA device from which you
     #   want to remove tags. For virtual MFA devices, the serial number is
@@ -11587,14 +10392,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagOpenIDConnectProviderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         open_id_connect_provider_arn: "arnType", # required
-    #         tag_keys: ["tagKeyType"], # required
-    #       }
-    #
     # @!attribute [rw] open_id_connect_provider_arn
     #   The ARN of the OIDC provider in IAM from which you want to remove
     #   tags.
@@ -11623,14 +10420,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy_arn: "arnType", # required
-    #         tag_keys: ["tagKeyType"], # required
-    #       }
-    #
     # @!attribute [rw] policy_arn
     #   The ARN of the IAM customer managed policy from which you want to
     #   remove tags.
@@ -11659,14 +10448,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagRoleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         role_name: "roleNameType", # required
-    #         tag_keys: ["tagKeyType"], # required
-    #       }
-    #
     # @!attribute [rw] role_name
     #   The name of the IAM role from which you want to remove tags.
     #
@@ -11694,14 +10475,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagSAMLProviderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         saml_provider_arn: "arnType", # required
-    #         tag_keys: ["tagKeyType"], # required
-    #       }
-    #
     # @!attribute [rw] saml_provider_arn
     #   The ARN of the SAML identity provider in IAM from which you want to
     #   remove tags.
@@ -11730,14 +10503,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagServerCertificateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         server_certificate_name: "serverCertificateNameType", # required
-    #         tag_keys: ["tagKeyType"], # required
-    #       }
-    #
     # @!attribute [rw] server_certificate_name
     #   The name of the IAM server certificate from which you want to remove
     #   tags.
@@ -11766,14 +10531,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "existingUserNameType", # required
-    #         tag_keys: ["tagKeyType"], # required
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The name of the IAM user from which you want to remove tags.
     #
@@ -11801,15 +10558,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateAccessKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "existingUserNameType",
-    #         access_key_id: "accessKeyIdType", # required
-    #         status: "Active", # required, accepts Active, Inactive
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The name of the user whose key you want to update.
     #
@@ -11851,21 +10599,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateAccountPasswordPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         minimum_password_length: 1,
-    #         require_symbols: false,
-    #         require_numbers: false,
-    #         require_uppercase_characters: false,
-    #         require_lowercase_characters: false,
-    #         allow_users_to_change_password: false,
-    #         max_password_age: 1,
-    #         password_reuse_prevention: 1,
-    #         hard_expiry: false,
-    #       }
-    #
     # @!attribute [rw] minimum_password_length
     #   The minimum number of characters allowed in an IAM user password.
     #
@@ -11983,14 +10716,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateAssumeRolePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         role_name: "roleNameType", # required
-    #         policy_document: "policyDocumentType", # required
-    #       }
-    #
     # @!attribute [rw] role_name
     #   The name of the role to update with the new policy.
     #
@@ -12038,15 +10763,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         group_name: "groupNameType", # required
-    #         new_path: "pathType",
-    #         new_group_name: "groupNameType",
-    #       }
-    #
     # @!attribute [rw] group_name
     #   Name of the IAM group to update. If you're changing the name of the
     #   group, this is the original name.
@@ -12097,15 +10813,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateLoginProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "userNameType", # required
-    #         password: "passwordType",
-    #         password_reset_required: false,
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The name of the user whose password you want to update.
     #
@@ -12159,14 +10866,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateOpenIDConnectProviderThumbprintRequest
-    #   data as a hash:
-    #
-    #       {
-    #         open_id_connect_provider_arn: "arnType", # required
-    #         thumbprint_list: ["thumbprintType"], # required
-    #       }
-    #
     # @!attribute [rw] open_id_connect_provider_arn
     #   The Amazon Resource Name (ARN) of the IAM OIDC provider resource
     #   object for which you want to update the thumbprint. You can get a
@@ -12196,14 +10895,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateRoleDescriptionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         role_name: "roleNameType", # required
-    #         description: "roleDescriptionType", # required
-    #       }
-    #
     # @!attribute [rw] role_name
     #   The name of the role that you want to modify.
     #   @return [String]
@@ -12233,15 +10924,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateRoleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         role_name: "roleNameType", # required
-    #         description: "roleDescriptionType",
-    #         max_session_duration: 1,
-    #       }
-    #
     # @!attribute [rw] role_name
     #   The name of the role that you want to modify.
     #   @return [String]
@@ -12287,14 +10969,6 @@ module Aws::IAM
     #
     class UpdateRoleResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateSAMLProviderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         saml_metadata_document: "SAMLMetadataDocumentType", # required
-    #         saml_provider_arn: "arnType", # required
-    #       }
-    #
     # @!attribute [rw] saml_metadata_document
     #   An XML document generated by an identity provider (IdP) that
     #   supports SAML 2.0. The document includes the issuer's name,
@@ -12339,15 +11013,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateSSHPublicKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "userNameType", # required
-    #         ssh_public_key_id: "publicKeyIdType", # required
-    #         status: "Active", # required, accepts Active, Inactive
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The name of the IAM user associated with the SSH public key.
     #
@@ -12389,15 +11054,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateServerCertificateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         server_certificate_name: "serverCertificateNameType", # required
-    #         new_path: "pathType",
-    #         new_server_certificate_name: "serverCertificateNameType",
-    #       }
-    #
     # @!attribute [rw] server_certificate_name
     #   The name of the server certificate that you want to update.
     #
@@ -12452,15 +11108,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateServiceSpecificCredentialRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "userNameType",
-    #         service_specific_credential_id: "serviceSpecificCredentialId", # required
-    #         status: "Active", # required, accepts Active, Inactive
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The name of the IAM user associated with the service-specific
     #   credential. If you do not specify this value, then the operation
@@ -12502,15 +11149,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateSigningCertificateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "existingUserNameType",
-    #         certificate_id: "certificateIdType", # required
-    #         status: "Active", # required, accepts Active, Inactive
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The name of the IAM user the signing certificate belongs to.
     #
@@ -12552,15 +11190,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "existingUserNameType", # required
-    #         new_path: "pathType",
-    #         new_user_name: "userNameType",
-    #       }
-    #
     # @!attribute [rw] user_name
     #   Name of the user to update. If you're changing the name of the
     #   user, this is the original user name.
@@ -12611,14 +11240,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UploadSSHPublicKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "userNameType", # required
-    #         ssh_public_key_body: "publicKeyMaterialType", # required
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The name of the IAM user to associate the SSH public key with.
     #
@@ -12678,23 +11299,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UploadServerCertificateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         path: "pathType",
-    #         server_certificate_name: "serverCertificateNameType", # required
-    #         certificate_body: "certificateBodyType", # required
-    #         private_key: "privateKeyType", # required
-    #         certificate_chain: "certificateChainType",
-    #         tags: [
-    #           {
-    #             key: "tagKeyType", # required
-    #             value: "tagValueType", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] path
     #   The path for the server certificate. For more information about
     #   paths, see [IAM identifiers][1] in the *IAM User Guide*.
@@ -12853,14 +11457,6 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UploadSigningCertificateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "existingUserNameType",
-    #         certificate_body: "certificateBodyType", # required
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The name of the user the signing certificate is for.
     #

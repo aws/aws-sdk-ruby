@@ -70,19 +70,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AddLayerVersionPermissionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         layer_name: "LayerName", # required
-    #         version_number: 1, # required
-    #         statement_id: "StatementId", # required
-    #         action: "LayerPermissionAllowedAction", # required
-    #         principal: "LayerPermissionAllowedPrincipal", # required
-    #         organization_id: "OrganizationId",
-    #         revision_id: "String",
-    #       }
-    #
     # @!attribute [rw] layer_name
     #   The name or Amazon Resource Name (ARN) of the layer.
     #   @return [String]
@@ -151,23 +138,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AddPermissionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_name: "FunctionName", # required
-    #         statement_id: "StatementId", # required
-    #         action: "Action", # required
-    #         principal: "Principal", # required
-    #         source_arn: "Arn",
-    #         source_account: "SourceOwner",
-    #         event_source_token: "EventSourceToken",
-    #         qualifier: "Qualifier",
-    #         revision_id: "String",
-    #         principal_org_id: "PrincipalOrgID",
-    #         function_url_auth_type: "NONE", # accepts NONE, AWS_IAM
-    #       }
-    #
     # @!attribute [rw] function_name
     #   The name of the Lambda function, version, or alias.
     #
@@ -337,15 +307,6 @@ module Aws::Lambda
     #
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html
     #
-    # @note When making an API call, you may pass AliasRoutingConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         additional_version_weights: {
-    #           "AdditionalVersion" => 1.0,
-    #         },
-    #       }
-    #
     # @!attribute [rw] additional_version_weights
     #   The second version, and the percentage of traffic that's routed to
     #   it.
@@ -360,13 +321,6 @@ module Aws::Lambda
     end
 
     # List of signing profiles that can sign a code package.
-    #
-    # @note When making an API call, you may pass AllowedPublishers
-    #   data as a hash:
-    #
-    #       {
-    #         signing_profile_version_arns: ["Arn"], # required
-    #       }
     #
     # @!attribute [rw] signing_profile_version_arns
     #   The Amazon Resource Name (ARN) for each of the signing profiles. A
@@ -383,13 +337,6 @@ module Aws::Lambda
 
     # Specific configuration settings for an Amazon Managed Streaming for
     # Apache Kafka (Amazon MSK) event source.
-    #
-    # @note When making an API call, you may pass AmazonManagedKafkaEventSourceConfig
-    #   data as a hash:
-    #
-    #       {
-    #         consumer_group_id: "URI",
-    #       }
     #
     # @!attribute [rw] consumer_group_id
     #   The identifier for the Kafka consumer group to join. The consumer
@@ -480,13 +427,6 @@ module Aws::Lambda
     #
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-policies
     #
-    # @note When making an API call, you may pass CodeSigningPolicies
-    #   data as a hash:
-    #
-    #       {
-    #         untrusted_artifact_on_deployment: "Warn", # accepts Warn, Enforce
-    #       }
-    #
     # @!attribute [rw] untrusted_artifact_on_deployment
     #   Code signing configuration policy for deployment validation failure.
     #   If you set the policy to `Enforce`, Lambda blocks the deployment
@@ -574,18 +514,6 @@ module Aws::Lambda
     #
     # [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
     #
-    # @note When making an API call, you may pass Cors
-    #   data as a hash:
-    #
-    #       {
-    #         allow_credentials: false,
-    #         allow_headers: ["Header"],
-    #         allow_methods: ["Method"],
-    #         allow_origins: ["Origin"],
-    #         expose_headers: ["Header"],
-    #         max_age: 1,
-    #       }
-    #
     # @!attribute [rw] allow_credentials
     #   Whether to allow cookies or other credentials in requests to your
     #   function URL. The default is `false`.
@@ -636,21 +564,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAliasRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_name: "FunctionName", # required
-    #         name: "Alias", # required
-    #         function_version: "Version", # required
-    #         description: "Description",
-    #         routing_config: {
-    #           additional_version_weights: {
-    #             "AdditionalVersion" => 1.0,
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] function_name
     #   The name of the Lambda function.
     #
@@ -699,19 +612,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateCodeSigningConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "Description",
-    #         allowed_publishers: { # required
-    #           signing_profile_version_arns: ["Arn"], # required
-    #         },
-    #         code_signing_policies: {
-    #           untrusted_artifact_on_deployment: "Warn", # accepts Warn, Enforce
-    #         },
-    #       }
-    #
     # @!attribute [rw] description
     #   Descriptive name for this code signing configuration.
     #   @return [String]
@@ -747,59 +647,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateEventSourceMappingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         event_source_arn: "Arn",
-    #         function_name: "FunctionName", # required
-    #         enabled: false,
-    #         batch_size: 1,
-    #         filter_criteria: {
-    #           filters: [
-    #             {
-    #               pattern: "Pattern",
-    #             },
-    #           ],
-    #         },
-    #         maximum_batching_window_in_seconds: 1,
-    #         parallelization_factor: 1,
-    #         starting_position: "TRIM_HORIZON", # accepts TRIM_HORIZON, LATEST, AT_TIMESTAMP
-    #         starting_position_timestamp: Time.now,
-    #         destination_config: {
-    #           on_success: {
-    #             destination: "DestinationArn",
-    #           },
-    #           on_failure: {
-    #             destination: "DestinationArn",
-    #           },
-    #         },
-    #         maximum_record_age_in_seconds: 1,
-    #         bisect_batch_on_function_error: false,
-    #         maximum_retry_attempts: 1,
-    #         tumbling_window_in_seconds: 1,
-    #         topics: ["Topic"],
-    #         queues: ["Queue"],
-    #         source_access_configurations: [
-    #           {
-    #             type: "BASIC_AUTH", # accepts BASIC_AUTH, VPC_SUBNET, VPC_SECURITY_GROUP, SASL_SCRAM_512_AUTH, SASL_SCRAM_256_AUTH, VIRTUAL_HOST, CLIENT_CERTIFICATE_TLS_AUTH, SERVER_ROOT_CA_CERTIFICATE
-    #             uri: "URI",
-    #           },
-    #         ],
-    #         self_managed_event_source: {
-    #           endpoints: {
-    #             "KAFKA_BOOTSTRAP_SERVERS" => ["Endpoint"],
-    #           },
-    #         },
-    #         function_response_types: ["ReportBatchItemFailures"], # accepts ReportBatchItemFailures
-    #         amazon_managed_kafka_event_source_config: {
-    #           consumer_group_id: "URI",
-    #         },
-    #         self_managed_kafka_event_source_config: {
-    #           consumer_group_id: "URI",
-    #         },
-    #       }
-    #
     # @!attribute [rw] event_source_arn
     #   The Amazon Resource Name (ARN) of the event source.
     #
@@ -994,67 +841,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateFunctionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_name: "FunctionName", # required
-    #         runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2, nodejs18.x
-    #         role: "RoleArn", # required
-    #         handler: "Handler",
-    #         code: { # required
-    #           zip_file: "data",
-    #           s3_bucket: "S3Bucket",
-    #           s3_key: "S3Key",
-    #           s3_object_version: "S3ObjectVersion",
-    #           image_uri: "String",
-    #         },
-    #         description: "Description",
-    #         timeout: 1,
-    #         memory_size: 1,
-    #         publish: false,
-    #         vpc_config: {
-    #           subnet_ids: ["SubnetId"],
-    #           security_group_ids: ["SecurityGroupId"],
-    #         },
-    #         package_type: "Zip", # accepts Zip, Image
-    #         dead_letter_config: {
-    #           target_arn: "ResourceArn",
-    #         },
-    #         environment: {
-    #           variables: {
-    #             "EnvironmentVariableName" => "EnvironmentVariableValue",
-    #           },
-    #         },
-    #         kms_key_arn: "KMSKeyArn",
-    #         tracing_config: {
-    #           mode: "Active", # accepts Active, PassThrough
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         layers: ["LayerVersionArn"],
-    #         file_system_configs: [
-    #           {
-    #             arn: "FileSystemArn", # required
-    #             local_mount_path: "LocalMountPath", # required
-    #           },
-    #         ],
-    #         image_config: {
-    #           entry_point: ["String"],
-    #           command: ["String"],
-    #           working_directory: "WorkingDirectory",
-    #         },
-    #         code_signing_config_arn: "CodeSigningConfigArn",
-    #         architectures: ["x86_64"], # accepts x86_64, arm64
-    #         ephemeral_storage: {
-    #           size: 1, # required
-    #         },
-    #         snap_start: {
-    #           apply_on: "PublishedVersions", # accepts PublishedVersions, None
-    #         },
-    #       }
-    #
     # @!attribute [rw] function_name
     #   The name of the Lambda function.
     #
@@ -1263,23 +1049,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateFunctionUrlConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_name: "FunctionName", # required
-    #         qualifier: "FunctionUrlQualifier",
-    #         auth_type: "NONE", # required, accepts NONE, AWS_IAM
-    #         cors: {
-    #           allow_credentials: false,
-    #           allow_headers: ["Header"],
-    #           allow_methods: ["Method"],
-    #           allow_origins: ["Origin"],
-    #           expose_headers: ["Header"],
-    #           max_age: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] function_name
     #   The name of the Lambda function.
     #
@@ -1388,13 +1157,6 @@ module Aws::Lambda
     #
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq
     #
-    # @note When making an API call, you may pass DeadLetterConfig
-    #   data as a hash:
-    #
-    #       {
-    #         target_arn: "ResourceArn",
-    #       }
-    #
     # @!attribute [rw] target_arn
     #   The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS
     #   topic.
@@ -1408,14 +1170,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAliasRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_name: "FunctionName", # required
-    #         name: "Alias", # required
-    #       }
-    #
     # @!attribute [rw] function_name
     #   The name of the Lambda function.
     #
@@ -1445,13 +1199,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteCodeSigningConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         code_signing_config_arn: "CodeSigningConfigArn", # required
-    #       }
-    #
     # @!attribute [rw] code_signing_config_arn
     #   The The Amazon Resource Name (ARN) of the code signing
     #   configuration.
@@ -1469,13 +1216,6 @@ module Aws::Lambda
     #
     class DeleteCodeSigningConfigResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteEventSourceMappingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         uuid: "String", # required
-    #       }
-    #
     # @!attribute [rw] uuid
     #   The identifier of the event source mapping.
     #   @return [String]
@@ -1488,13 +1228,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteFunctionCodeSigningConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_name: "FunctionName", # required
-    #       }
-    #
     # @!attribute [rw] function_name
     #   The name of the Lambda function.
     #
@@ -1519,13 +1252,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteFunctionConcurrencyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_name: "FunctionName", # required
-    #       }
-    #
     # @!attribute [rw] function_name
     #   The name of the Lambda function.
     #
@@ -1550,14 +1276,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteFunctionEventInvokeConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_name: "FunctionName", # required
-    #         qualifier: "Qualifier",
-    #       }
-    #
     # @!attribute [rw] function_name
     #   The name of the Lambda function, version, or alias.
     #
@@ -1589,14 +1307,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteFunctionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_name: "FunctionName", # required
-    #         qualifier: "Qualifier",
-    #       }
-    #
     # @!attribute [rw] function_name
     #   The name of the Lambda function or version.
     #
@@ -1629,14 +1339,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteFunctionUrlConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_name: "FunctionName", # required
-    #         qualifier: "FunctionUrlQualifier",
-    #       }
-    #
     # @!attribute [rw] function_name
     #   The name of the Lambda function.
     #
@@ -1666,14 +1368,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteLayerVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         layer_name: "LayerName", # required
-    #         version_number: 1, # required
-    #       }
-    #
     # @!attribute [rw] layer_name
     #   The name or Amazon Resource Name (ARN) of the layer.
     #   @return [String]
@@ -1691,14 +1385,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteProvisionedConcurrencyConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_name: "FunctionName", # required
-    #         qualifier: "Qualifier", # required
-    #       }
-    #
     # @!attribute [rw] function_name
     #   The name of the Lambda function.
     #
@@ -1730,18 +1416,6 @@ module Aws::Lambda
 
     # A configuration object that specifies the destination of an event
     # after Lambda processes it.
-    #
-    # @note When making an API call, you may pass DestinationConfig
-    #   data as a hash:
-    #
-    #       {
-    #         on_success: {
-    #           destination: "DestinationArn",
-    #         },
-    #         on_failure: {
-    #           destination: "DestinationArn",
-    #         },
-    #       }
     #
     # @!attribute [rw] on_success
     #   The destination configuration for successful invocations.
@@ -1918,15 +1592,6 @@ module Aws::Lambda
     # An environment variable is a pair of strings that are stored in a
     # function's version-specific configuration.
     #
-    # @note When making an API call, you may pass Environment
-    #   data as a hash:
-    #
-    #       {
-    #         variables: {
-    #           "EnvironmentVariableName" => "EnvironmentVariableValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] variables
     #   Environment variable key-value pairs. For more information, see
     #   [Using Lambda environment variables][1].
@@ -1986,13 +1651,6 @@ module Aws::Lambda
 
     # The size of the function's `/tmp` directory in MB. The default value
     # is 512, but it can be any whole number between 512 and 10,240 MB.
-    #
-    # @note When making an API call, you may pass EphemeralStorage
-    #   data as a hash:
-    #
-    #       {
-    #         size: 1, # required
-    #       }
     #
     # @!attribute [rw] size
     #   The size of the function's `/tmp` directory.
@@ -2199,14 +1857,6 @@ module Aws::Lambda
     #
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html
     #
-    # @note When making an API call, you may pass FileSystemConfig
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "FileSystemArn", # required
-    #         local_mount_path: "LocalMountPath", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the Amazon EFS access point that
     #   provides access to the file system.
@@ -2229,13 +1879,6 @@ module Aws::Lambda
     # A structure within a `FilterCriteria` object that defines an event
     # filtering pattern.
     #
-    # @note When making an API call, you may pass Filter
-    #   data as a hash:
-    #
-    #       {
-    #         pattern: "Pattern",
-    #       }
-    #
     # @!attribute [rw] pattern
     #   A filter pattern. For more information on the syntax of a filter
     #   pattern, see [ Filter rule syntax][1].
@@ -2255,17 +1898,6 @@ module Aws::Lambda
 
     # An object that contains the filters for an event source.
     #
-    # @note When making an API call, you may pass FilterCriteria
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             pattern: "Pattern",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] filters
     #   A list of filters.
     #   @return [Array<Types::Filter>]
@@ -2281,17 +1913,6 @@ module Aws::Lambda
     # The code for the Lambda function. You can either specify an object in
     # Amazon S3, upload a .zip file archive deployment package directly, or
     # specify the URI of a container image.
-    #
-    # @note When making an API call, you may pass FunctionCode
-    #   data as a hash:
-    #
-    #       {
-    #         zip_file: "data",
-    #         s3_bucket: "S3Bucket",
-    #         s3_key: "S3Key",
-    #         s3_object_version: "S3ObjectVersion",
-    #         image_uri: "String",
-    #       }
     #
     # @!attribute [rw] zip_file
     #   The base64-encoded contents of the deployment package. Amazon Web
@@ -2685,8 +2306,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetAccountSettingsRequest AWS API Documentation
     #
     class GetAccountSettingsRequest < Aws::EmptyStructure; end
@@ -2708,14 +2327,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAliasRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_name: "FunctionName", # required
-    #         name: "Alias", # required
-    #       }
-    #
     # @!attribute [rw] function_name
     #   The name of the Lambda function.
     #
@@ -2745,13 +2356,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetCodeSigningConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         code_signing_config_arn: "CodeSigningConfigArn", # required
-    #       }
-    #
     # @!attribute [rw] code_signing_config_arn
     #   The The Amazon Resource Name (ARN) of the code signing
     #   configuration.
@@ -2777,13 +2381,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetEventSourceMappingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         uuid: "String", # required
-    #       }
-    #
     # @!attribute [rw] uuid
     #   The identifier of the event source mapping.
     #   @return [String]
@@ -2796,13 +2393,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetFunctionCodeSigningConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_name: "FunctionName", # required
-    #       }
-    #
     # @!attribute [rw] function_name
     #   The name of the Lambda function.
     #
@@ -2857,13 +2447,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetFunctionConcurrencyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_name: "FunctionName", # required
-    #       }
-    #
     # @!attribute [rw] function_name
     #   The name of the Lambda function.
     #
@@ -2901,14 +2484,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetFunctionConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_name: "NamespacedFunctionName", # required
-    #         qualifier: "Qualifier",
-    #       }
-    #
     # @!attribute [rw] function_name
     #   The name of the Lambda function, version, or alias.
     #
@@ -2941,14 +2516,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetFunctionEventInvokeConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_name: "FunctionName", # required
-    #         qualifier: "Qualifier",
-    #       }
-    #
     # @!attribute [rw] function_name
     #   The name of the Lambda function, version, or alias.
     #
@@ -2980,14 +2547,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetFunctionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_name: "NamespacedFunctionName", # required
-    #         qualifier: "Qualifier",
-    #       }
-    #
     # @!attribute [rw] function_name
     #   The name of the Lambda function, version, or alias.
     #
@@ -3055,14 +2614,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetFunctionUrlConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_name: "FunctionName", # required
-    #         qualifier: "FunctionUrlQualifier",
-    #       }
-    #
     # @!attribute [rw] function_name
     #   The name of the Lambda function.
     #
@@ -3152,13 +2703,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLayerVersionByArnRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "LayerVersionArn", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The ARN of the layer version.
     #   @return [String]
@@ -3171,14 +2715,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLayerVersionPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         layer_name: "LayerName", # required
-    #         version_number: 1, # required
-    #       }
-    #
     # @!attribute [rw] layer_name
     #   The name or Amazon Resource Name (ARN) of the layer.
     #   @return [String]
@@ -3213,14 +2749,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLayerVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         layer_name: "LayerName", # required
-    #         version_number: 1, # required
-    #       }
-    #
     # @!attribute [rw] layer_name
     #   The name or Amazon Resource Name (ARN) of the layer.
     #   @return [String]
@@ -3299,14 +2827,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_name: "NamespacedFunctionName", # required
-    #         qualifier: "Qualifier",
-    #       }
-    #
     # @!attribute [rw] function_name
     #   The name of the Lambda function, version, or alias.
     #
@@ -3355,14 +2875,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetProvisionedConcurrencyConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_name: "FunctionName", # required
-    #         qualifier: "Qualifier", # required
-    #       }
-    #
     # @!attribute [rw] function_name
     #   The name of the Lambda function.
     #
@@ -3444,15 +2956,6 @@ module Aws::Lambda
     #
     #
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-parms
-    #
-    # @note When making an API call, you may pass ImageConfig
-    #   data as a hash:
-    #
-    #       {
-    #         entry_point: ["String"],
-    #         command: ["String"],
-    #         working_directory: "WorkingDirectory",
-    #       }
     #
     # @!attribute [rw] entry_point
     #   Specifies the entry point to their application, which is typically
@@ -3642,18 +3145,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass InvocationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_name: "NamespacedFunctionName", # required
-    #         invocation_type: "Event", # accepts Event, RequestResponse, DryRun
-    #         log_type: "None", # accepts None, Tail
-    #         client_context: "String",
-    #         payload: "data",
-    #         qualifier: "Qualifier",
-    #       }
-    #
     # @!attribute [rw] function_name
     #   The name of the Lambda function, version, or alias.
     #
@@ -3763,14 +3254,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass InvokeAsyncRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_name: "NamespacedFunctionName", # required
-    #         invoke_args: "data", # required
-    #       }
-    #
     # @!attribute [rw] function_name
     #   The name of the Lambda function.
     #
@@ -3929,16 +3412,6 @@ module Aws::Lambda
     #
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
     #
-    # @note When making an API call, you may pass LayerVersionContentInput
-    #   data as a hash:
-    #
-    #       {
-    #         s3_bucket: "S3Bucket",
-    #         s3_key: "S3Key",
-    #         s3_object_version: "S3ObjectVersion",
-    #         zip_file: "data",
-    #       }
-    #
     # @!attribute [rw] s3_bucket
     #   The Amazon S3 bucket of the layer archive.
     #   @return [String]
@@ -4089,16 +3562,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAliasesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_name: "FunctionName", # required
-    #         function_version: "Version",
-    #         marker: "String",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] function_name
     #   The name of the Lambda function.
     #
@@ -4157,14 +3620,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCodeSigningConfigsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         marker: "String",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] marker
     #   Specify the pagination token that's returned by a previous request
     #   to retrieve the next page of results.
@@ -4200,16 +3655,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEventSourceMappingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         event_source_arn: "Arn",
-    #         function_name: "FunctionName",
-    #         marker: "String",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] event_source_arn
     #   The Amazon Resource Name (ARN) of the event source.
     #
@@ -4284,15 +3729,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFunctionEventInvokeConfigsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_name: "FunctionName", # required
-    #         marker: "String",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] function_name
     #   The name of the Lambda function.
     #
@@ -4345,15 +3781,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFunctionUrlConfigsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_name: "FunctionName", # required
-    #         marker: "String",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] function_name
     #   The name of the Lambda function.
     #
@@ -4408,15 +3835,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFunctionsByCodeSigningConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         code_signing_config_arn: "CodeSigningConfigArn", # required
-    #         marker: "String",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] code_signing_config_arn
     #   The The Amazon Resource Name (ARN) of the code signing
     #   configuration.
@@ -4458,16 +3876,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFunctionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         master_region: "MasterRegion",
-    #         function_version: "ALL", # accepts ALL
-    #         marker: "String",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] master_region
     #   For Lambda@Edge functions, the Amazon Web Services Region of the
     #   master function. For example, `us-east-1` filters the list of
@@ -4522,17 +3930,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListLayerVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2, nodejs18.x
-    #         layer_name: "LayerName", # required
-    #         marker: "String",
-    #         max_items: 1,
-    #         compatible_architecture: "x86_64", # accepts x86_64, arm64
-    #       }
-    #
     # @!attribute [rw] compatible_runtime
     #   A runtime identifier. For example, `go1.x`.
     #   @return [String]
@@ -4587,16 +3984,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListLayersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2, nodejs18.x
-    #         marker: "String",
-    #         max_items: 1,
-    #         compatible_architecture: "x86_64", # accepts x86_64, arm64
-    #       }
-    #
     # @!attribute [rw] compatible_runtime
     #   A runtime identifier. For example, `go1.x`.
     #   @return [String]
@@ -4646,15 +4033,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListProvisionedConcurrencyConfigsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_name: "FunctionName", # required
-    #         marker: "String",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] function_name
     #   The name of the Lambda function.
     #
@@ -4707,13 +4085,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource: "FunctionArn", # required
-    #       }
-    #
     # @!attribute [rw] resource
     #   The function's Amazon Resource Name (ARN). Note: Lambda does not
     #   support adding tags to aliases or versions.
@@ -4739,15 +4110,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListVersionsByFunctionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_name: "NamespacedFunctionName", # required
-    #         marker: "String",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] function_name
     #   The name of the Lambda function.
     #
@@ -4804,13 +4166,6 @@ module Aws::Lambda
 
     # A destination for events that failed processing.
     #
-    # @note When making an API call, you may pass OnFailure
-    #   data as a hash:
-    #
-    #       {
-    #         destination: "DestinationArn",
-    #       }
-    #
     # @!attribute [rw] destination
     #   The Amazon Resource Name (ARN) of the destination resource.
     #   @return [String]
@@ -4824,13 +4179,6 @@ module Aws::Lambda
     end
 
     # A destination for events that were processed successfully.
-    #
-    # @note When making an API call, you may pass OnSuccess
-    #   data as a hash:
-    #
-    #       {
-    #         destination: "DestinationArn",
-    #       }
     #
     # @!attribute [rw] destination
     #   The Amazon Resource Name (ARN) of the destination resource.
@@ -4958,23 +4306,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PublishLayerVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         layer_name: "LayerName", # required
-    #         description: "Description",
-    #         content: { # required
-    #           s3_bucket: "S3Bucket",
-    #           s3_key: "S3Key",
-    #           s3_object_version: "S3ObjectVersion",
-    #           zip_file: "data",
-    #         },
-    #         compatible_runtimes: ["nodejs"], # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2, nodejs18.x
-    #         license_info: "LicenseInfo",
-    #         compatible_architectures: ["x86_64"], # accepts x86_64, arm64
-    #       }
-    #
     # @!attribute [rw] layer_name
     #   The name or Amazon Resource Name (ARN) of the layer.
     #   @return [String]
@@ -5093,16 +4424,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PublishVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_name: "FunctionName", # required
-    #         code_sha_256: "String",
-    #         description: "Description",
-    #         revision_id: "String",
-    #       }
-    #
     # @!attribute [rw] function_name
     #   The name of the Lambda function.
     #
@@ -5149,14 +4470,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutFunctionCodeSigningConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         code_signing_config_arn: "CodeSigningConfigArn", # required
-    #         function_name: "FunctionName", # required
-    #       }
-    #
     # @!attribute [rw] code_signing_config_arn
     #   The The Amazon Resource Name (ARN) of the code signing
     #   configuration.
@@ -5217,14 +4530,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutFunctionConcurrencyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_name: "FunctionName", # required
-    #         reserved_concurrent_executions: 1, # required
-    #       }
-    #
     # @!attribute [rw] function_name
     #   The name of the Lambda function.
     #
@@ -5254,24 +4559,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutFunctionEventInvokeConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_name: "FunctionName", # required
-    #         qualifier: "Qualifier",
-    #         maximum_retry_attempts: 1,
-    #         maximum_event_age_in_seconds: 1,
-    #         destination_config: {
-    #           on_success: {
-    #             destination: "DestinationArn",
-    #           },
-    #           on_failure: {
-    #             destination: "DestinationArn",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] function_name
     #   The name of the Lambda function, version, or alias.
     #
@@ -5332,15 +4619,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutProvisionedConcurrencyConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_name: "FunctionName", # required
-    #         qualifier: "Qualifier", # required
-    #         provisioned_concurrent_executions: 1, # required
-    #       }
-    #
     # @!attribute [rw] function_name
     #   The name of the Lambda function.
     #
@@ -5422,16 +4700,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RemoveLayerVersionPermissionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         layer_name: "LayerName", # required
-    #         version_number: 1, # required
-    #         statement_id: "StatementId", # required
-    #         revision_id: "String",
-    #       }
-    #
     # @!attribute [rw] layer_name
     #   The name or Amazon Resource Name (ARN) of the layer.
     #   @return [String]
@@ -5461,16 +4729,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RemovePermissionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_name: "FunctionName", # required
-    #         statement_id: "NamespacedStatementId", # required
-    #         qualifier: "Qualifier",
-    #         revision_id: "String",
-    #       }
-    #
     # @!attribute [rw] function_name
     #   The name of the Lambda function, version, or alias.
     #
@@ -5615,15 +4873,6 @@ module Aws::Lambda
 
     # The self-managed Apache Kafka cluster for your event source.
     #
-    # @note When making an API call, you may pass SelfManagedEventSource
-    #   data as a hash:
-    #
-    #       {
-    #         endpoints: {
-    #           "KAFKA_BOOTSTRAP_SERVERS" => ["Endpoint"],
-    #         },
-    #       }
-    #
     # @!attribute [rw] endpoints
     #   The list of bootstrap servers for your Kafka brokers in the
     #   following format: `"KAFKA_BOOTSTRAP_SERVERS":
@@ -5640,13 +4889,6 @@ module Aws::Lambda
 
     # Specific configuration settings for a self-managed Apache Kafka event
     # source.
-    #
-    # @note When making an API call, you may pass SelfManagedKafkaEventSourceConfig
-    #   data as a hash:
-    #
-    #       {
-    #         consumer_group_id: "URI",
-    #       }
     #
     # @!attribute [rw] consumer_group_id
     #   The identifier for the Kafka consumer group to join. The consumer
@@ -5693,13 +4935,6 @@ module Aws::Lambda
     #
     #
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html
-    #
-    # @note When making an API call, you may pass SnapStart
-    #   data as a hash:
-    #
-    #       {
-    #         apply_on: "PublishedVersions", # accepts PublishedVersions, None
-    #       }
     #
     # @!attribute [rw] apply_on
     #   Set to `PublishedVersions` to create a snapshot of the initialized
@@ -5805,14 +5040,6 @@ module Aws::Lambda
     # To secure and define access to your event source, you can specify the
     # authentication protocol, VPC components, or virtual host.
     #
-    # @note When making an API call, you may pass SourceAccessConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         type: "BASIC_AUTH", # accepts BASIC_AUTH, VPC_SUBNET, VPC_SECURITY_GROUP, SASL_SCRAM_512_AUTH, SASL_SCRAM_256_AUTH, VIRTUAL_HOST, CLIENT_CERTIFICATE_TLS_AUTH, SERVER_ROOT_CA_CERTIFICATE
-    #         uri: "URI",
-    #       }
-    #
     # @!attribute [rw] type
     #   The type of authentication protocol, VPC components, or virtual host
     #   for your event source. For example: `"Type":"SASL_SCRAM_512_AUTH"`.
@@ -5890,16 +5117,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource: "FunctionArn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource
     #   The function's Amazon Resource Name (ARN).
     #   @return [String]
@@ -5955,13 +5172,6 @@ module Aws::Lambda
     #
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html
     #
-    # @note When making an API call, you may pass TracingConfig
-    #   data as a hash:
-    #
-    #       {
-    #         mode: "Active", # accepts Active, PassThrough
-    #       }
-    #
     # @!attribute [rw] mode
     #   The tracing mode.
     #   @return [String]
@@ -6005,14 +5215,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource: "FunctionArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource
     #   The function's Amazon Resource Name (ARN).
     #   @return [String]
@@ -6030,22 +5232,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateAliasRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_name: "FunctionName", # required
-    #         name: "Alias", # required
-    #         function_version: "Version",
-    #         description: "Description",
-    #         routing_config: {
-    #           additional_version_weights: {
-    #             "AdditionalVersion" => 1.0,
-    #           },
-    #         },
-    #         revision_id: "String",
-    #       }
-    #
     # @!attribute [rw] function_name
     #   The name of the Lambda function.
     #
@@ -6101,20 +5287,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateCodeSigningConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         code_signing_config_arn: "CodeSigningConfigArn", # required
-    #         description: "Description",
-    #         allowed_publishers: {
-    #           signing_profile_version_arns: ["Arn"], # required
-    #         },
-    #         code_signing_policies: {
-    #           untrusted_artifact_on_deployment: "Warn", # accepts Warn, Enforce
-    #         },
-    #       }
-    #
     # @!attribute [rw] code_signing_config_arn
     #   The The Amazon Resource Name (ARN) of the code signing
     #   configuration.
@@ -6155,44 +5327,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateEventSourceMappingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         uuid: "String", # required
-    #         function_name: "FunctionName",
-    #         enabled: false,
-    #         batch_size: 1,
-    #         filter_criteria: {
-    #           filters: [
-    #             {
-    #               pattern: "Pattern",
-    #             },
-    #           ],
-    #         },
-    #         maximum_batching_window_in_seconds: 1,
-    #         destination_config: {
-    #           on_success: {
-    #             destination: "DestinationArn",
-    #           },
-    #           on_failure: {
-    #             destination: "DestinationArn",
-    #           },
-    #         },
-    #         maximum_record_age_in_seconds: 1,
-    #         bisect_batch_on_function_error: false,
-    #         maximum_retry_attempts: 1,
-    #         parallelization_factor: 1,
-    #         source_access_configurations: [
-    #           {
-    #             type: "BASIC_AUTH", # accepts BASIC_AUTH, VPC_SUBNET, VPC_SECURITY_GROUP, SASL_SCRAM_512_AUTH, SASL_SCRAM_256_AUTH, VIRTUAL_HOST, CLIENT_CERTIFICATE_TLS_AUTH, SERVER_ROOT_CA_CERTIFICATE
-    #             uri: "URI",
-    #           },
-    #         ],
-    #         tumbling_window_in_seconds: 1,
-    #         function_response_types: ["ReportBatchItemFailures"], # accepts ReportBatchItemFailures
-    #       }
-    #
     # @!attribute [rw] uuid
     #   The identifier of the event source mapping.
     #   @return [String]
@@ -6335,22 +5469,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateFunctionCodeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_name: "FunctionName", # required
-    #         zip_file: "data",
-    #         s3_bucket: "S3Bucket",
-    #         s3_key: "S3Key",
-    #         s3_object_version: "S3ObjectVersion",
-    #         image_uri: "String",
-    #         publish: false,
-    #         dry_run: false,
-    #         revision_id: "String",
-    #         architectures: ["x86_64"], # accepts x86_64, arm64
-    #       }
-    #
     # @!attribute [rw] function_name
     #   The name of the Lambda function.
     #
@@ -6435,54 +5553,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateFunctionConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_name: "FunctionName", # required
-    #         role: "RoleArn",
-    #         handler: "Handler",
-    #         description: "Description",
-    #         timeout: 1,
-    #         memory_size: 1,
-    #         vpc_config: {
-    #           subnet_ids: ["SubnetId"],
-    #           security_group_ids: ["SecurityGroupId"],
-    #         },
-    #         environment: {
-    #           variables: {
-    #             "EnvironmentVariableName" => "EnvironmentVariableValue",
-    #           },
-    #         },
-    #         runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2, nodejs18.x
-    #         dead_letter_config: {
-    #           target_arn: "ResourceArn",
-    #         },
-    #         kms_key_arn: "KMSKeyArn",
-    #         tracing_config: {
-    #           mode: "Active", # accepts Active, PassThrough
-    #         },
-    #         revision_id: "String",
-    #         layers: ["LayerVersionArn"],
-    #         file_system_configs: [
-    #           {
-    #             arn: "FileSystemArn", # required
-    #             local_mount_path: "LocalMountPath", # required
-    #           },
-    #         ],
-    #         image_config: {
-    #           entry_point: ["String"],
-    #           command: ["String"],
-    #           working_directory: "WorkingDirectory",
-    #         },
-    #         ephemeral_storage: {
-    #           size: 1, # required
-    #         },
-    #         snap_start: {
-    #           apply_on: "PublishedVersions", # accepts PublishedVersions, None
-    #         },
-    #       }
-    #
     # @!attribute [rw] function_name
     #   The name of the Lambda function.
     #
@@ -6657,24 +5727,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateFunctionEventInvokeConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_name: "FunctionName", # required
-    #         qualifier: "Qualifier",
-    #         maximum_retry_attempts: 1,
-    #         maximum_event_age_in_seconds: 1,
-    #         destination_config: {
-    #           on_success: {
-    #             destination: "DestinationArn",
-    #           },
-    #           on_failure: {
-    #             destination: "DestinationArn",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] function_name
     #   The name of the Lambda function, version, or alias.
     #
@@ -6735,23 +5787,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateFunctionUrlConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_name: "FunctionName", # required
-    #         qualifier: "FunctionUrlQualifier",
-    #         auth_type: "NONE", # accepts NONE, AWS_IAM
-    #         cors: {
-    #           allow_credentials: false,
-    #           allow_headers: ["Header"],
-    #           allow_methods: ["Method"],
-    #           allow_origins: ["Origin"],
-    #           expose_headers: ["Header"],
-    #           max_age: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] function_name
     #   The name of the Lambda function.
     #
@@ -6871,14 +5906,6 @@ module Aws::Lambda
     #
     #
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html
-    #
-    # @note When making an API call, you may pass VpcConfig
-    #   data as a hash:
-    #
-    #       {
-    #         subnet_ids: ["SubnetId"],
-    #         security_group_ids: ["SecurityGroupId"],
-    #       }
     #
     # @!attribute [rw] subnet_ids
     #   A list of VPC subnet IDs.

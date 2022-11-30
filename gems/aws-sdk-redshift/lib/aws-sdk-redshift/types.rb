@@ -10,14 +10,6 @@
 module Aws::Redshift
   module Types
 
-    # @note When making an API call, you may pass AcceptReservedNodeExchangeInputMessage
-    #   data as a hash:
-    #
-    #       {
-    #         reserved_node_id: "String", # required
-    #         target_reserved_node_offering_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] reserved_node_id
     #   A string representing the node identifier of the DC1 Reserved Node
     #   to be exchanged.
@@ -139,16 +131,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateDataShareConsumerMessage
-    #   data as a hash:
-    #
-    #       {
-    #         data_share_arn: "String", # required
-    #         associate_entire_account: false,
-    #         consumer_arn: "String",
-    #         consumer_region: "String",
-    #       }
-    #
     # @!attribute [rw] data_share_arn
     #   The Amazon Resource Name (ARN) of the datashare that the consumer is
     #   to use with the account or the namespace.
@@ -257,16 +239,6 @@ module Aws::Redshift
     #
     class AuthorizationQuotaExceededFault < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass AuthorizeClusterSecurityGroupIngressMessage
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_security_group_name: "String", # required
-    #         cidrip: "String",
-    #         ec2_security_group_name: "String",
-    #         ec2_security_group_owner_id: "String",
-    #       }
-    #
     # @!attribute [rw] cluster_security_group_name
     #   The name of the security group to which the ingress rule is added.
     #   @return [String]
@@ -311,14 +283,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AuthorizeDataShareMessage
-    #   data as a hash:
-    #
-    #       {
-    #         data_share_arn: "String", # required
-    #         consumer_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] data_share_arn
     #   The Amazon Resource Name (ARN) of the datashare that producers are
     #   to authorize sharing for.
@@ -339,15 +303,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AuthorizeEndpointAccessMessage
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_identifier: "String",
-    #         account: "String", # required
-    #         vpc_ids: ["String"],
-    #       }
-    #
     # @!attribute [rw] cluster_identifier
     #   The cluster identifier of the cluster to grant access to.
     #   @return [String]
@@ -370,16 +325,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AuthorizeSnapshotAccessMessage
-    #   data as a hash:
-    #
-    #       {
-    #         snapshot_identifier: "String",
-    #         snapshot_arn: "String",
-    #         snapshot_cluster_identifier: "String",
-    #         account_with_restore_access: "String", # required
-    #       }
-    #
     # @!attribute [rw] snapshot_identifier
     #   The identifier of the snapshot the account is authorized to restore.
     #   @return [String]
@@ -445,18 +390,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchDeleteClusterSnapshotsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identifiers: [ # required
-    #           {
-    #             snapshot_identifier: "String", # required
-    #             snapshot_cluster_identifier: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] identifiers
     #   A list of identifiers for the snapshots that you want to delete.
     #   @return [Array<Types::DeleteClusterSnapshotMessage>]
@@ -500,15 +433,6 @@ module Aws::Redshift
     #
     class BatchModifyClusterSnapshotsLimitExceededFault < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass BatchModifyClusterSnapshotsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         snapshot_identifier_list: ["String"], # required
-    #         manual_snapshot_retention_period: 1,
-    #         force: false,
-    #       }
-    #
     # @!attribute [rw] snapshot_identifier_list
     #   A list of snapshot identifiers you want to modify.
     #   @return [Array<String>]
@@ -563,13 +487,6 @@ module Aws::Redshift
     #
     class BucketNotFoundFault < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass CancelResizeMessage
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] cluster_identifier
     #   The unique identifier for the cluster that you want to cancel a
     #   resize operation for.
@@ -1732,16 +1649,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CopyClusterSnapshotMessage
-    #   data as a hash:
-    #
-    #       {
-    #         source_snapshot_identifier: "String", # required
-    #         source_snapshot_cluster_identifier: "String",
-    #         target_snapshot_identifier: "String", # required
-    #         manual_snapshot_retention_period: 1,
-    #       }
-    #
     # @!attribute [rw] source_snapshot_identifier
     #   The identifier for the source snapshot.
     #
@@ -1822,14 +1729,6 @@ module Aws::Redshift
     #
     class CopyToRegionDisabledFault < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass CreateAuthenticationProfileMessage
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_profile_name: "AuthenticationProfileNameString", # required
-    #         authentication_profile_content: "String", # required
-    #       }
-    #
     # @!attribute [rw] authentication_profile_name
     #   The name of the authentication profile to be created.
     #   @return [String]
@@ -1866,51 +1765,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_name: "String",
-    #         cluster_identifier: "String", # required
-    #         cluster_type: "String",
-    #         node_type: "String", # required
-    #         master_username: "String", # required
-    #         master_user_password: "String", # required
-    #         cluster_security_groups: ["String"],
-    #         vpc_security_group_ids: ["String"],
-    #         cluster_subnet_group_name: "String",
-    #         availability_zone: "String",
-    #         preferred_maintenance_window: "String",
-    #         cluster_parameter_group_name: "String",
-    #         automated_snapshot_retention_period: 1,
-    #         manual_snapshot_retention_period: 1,
-    #         port: 1,
-    #         cluster_version: "String",
-    #         allow_version_upgrade: false,
-    #         number_of_nodes: 1,
-    #         publicly_accessible: false,
-    #         encrypted: false,
-    #         hsm_client_certificate_identifier: "String",
-    #         hsm_configuration_identifier: "String",
-    #         elastic_ip: "String",
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #         kms_key_id: "String",
-    #         enhanced_vpc_routing: false,
-    #         additional_info: "String",
-    #         iam_roles: ["String"],
-    #         maintenance_track_name: "String",
-    #         snapshot_schedule_identifier: "String",
-    #         availability_zone_relocation: false,
-    #         aqua_configuration_status: "enabled", # accepts enabled, disabled, auto
-    #         default_iam_role_arn: "String",
-    #         load_sample_data: "String",
-    #       }
-    #
     # @!attribute [rw] db_name
     #   The name of the first database to be created when the cluster is
     #   created.
@@ -2335,21 +2189,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateClusterParameterGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         parameter_group_name: "String", # required
-    #         parameter_group_family: "String", # required
-    #         description: "String", # required
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] parameter_group_name
     #   The name of the cluster parameter group.
     #
@@ -2425,20 +2264,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateClusterSecurityGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_security_group_name: "String", # required
-    #         description: "String", # required
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] cluster_security_group_name
     #   The name for the security group. Amazon Redshift stores the value as
     #   a lowercase string.
@@ -2485,21 +2310,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateClusterSnapshotMessage
-    #   data as a hash:
-    #
-    #       {
-    #         snapshot_identifier: "String", # required
-    #         cluster_identifier: "String", # required
-    #         manual_snapshot_retention_period: 1,
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] snapshot_identifier
     #   A unique identifier for the snapshot that you are requesting. This
     #   identifier must be unique for all snapshots within the Amazon Web
@@ -2558,21 +2368,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateClusterSubnetGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_subnet_group_name: "String", # required
-    #         description: "String", # required
-    #         subnet_ids: ["String"], # required
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] cluster_subnet_group_name
     #   The name for the subnet group. Amazon Redshift stores the value as a
     #   lowercase string.
@@ -2625,17 +2420,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateEndpointAccessMessage
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_identifier: "String",
-    #         resource_owner: "String",
-    #         endpoint_name: "String", # required
-    #         subnet_group_name: "String", # required
-    #         vpc_security_group_ids: ["String"],
-    #       }
-    #
     # @!attribute [rw] cluster_identifier
     #   The cluster identifier of the cluster to access.
     #   @return [String]
@@ -2677,25 +2461,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateEventSubscriptionMessage
-    #   data as a hash:
-    #
-    #       {
-    #         subscription_name: "String", # required
-    #         sns_topic_arn: "String", # required
-    #         source_type: "String",
-    #         source_ids: ["String"],
-    #         event_categories: ["String"],
-    #         severity: "String",
-    #         enabled: false,
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] subscription_name
     #   The name of the event subscription to be created.
     #
@@ -2791,19 +2556,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateHsmClientCertificateMessage
-    #   data as a hash:
-    #
-    #       {
-    #         hsm_client_certificate_identifier: "String", # required
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] hsm_client_certificate_identifier
     #   The identifier to be assigned to the new HSM client certificate that
     #   the cluster will use to connect to the HSM to use the database
@@ -2837,24 +2589,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateHsmConfigurationMessage
-    #   data as a hash:
-    #
-    #       {
-    #         hsm_configuration_identifier: "String", # required
-    #         description: "String", # required
-    #         hsm_ip_address: "String", # required
-    #         hsm_partition_name: "String", # required
-    #         hsm_partition_password: "String", # required
-    #         hsm_server_public_certificate: "String", # required
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] hsm_configuration_identifier
     #   The identifier to be assigned to the new Amazon Redshift HSM
     #   configuration.
@@ -2916,36 +2650,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateScheduledActionMessage
-    #   data as a hash:
-    #
-    #       {
-    #         scheduled_action_name: "String", # required
-    #         target_action: { # required
-    #           resize_cluster: {
-    #             cluster_identifier: "String", # required
-    #             cluster_type: "String",
-    #             node_type: "String",
-    #             number_of_nodes: 1,
-    #             classic: false,
-    #             reserved_node_id: "String",
-    #             target_reserved_node_offering_id: "String",
-    #           },
-    #           pause_cluster: {
-    #             cluster_identifier: "String", # required
-    #           },
-    #           resume_cluster: {
-    #             cluster_identifier: "String", # required
-    #           },
-    #         },
-    #         schedule: "String", # required
-    #         iam_role: "String", # required
-    #         scheduled_action_description: "String",
-    #         start_time: Time.now,
-    #         end_time: Time.now,
-    #         enable: false,
-    #       }
-    #
     # @!attribute [rw] scheduled_action_name
     #   The name of the scheduled action. The name must be unique within an
     #   account. For more information about this parameter, see
@@ -3007,20 +2711,6 @@ module Aws::Redshift
 
     # The result of the `CreateSnapshotCopyGrant` action.
     #
-    # @note When making an API call, you may pass CreateSnapshotCopyGrantMessage
-    #   data as a hash:
-    #
-    #       {
-    #         snapshot_copy_grant_name: "String", # required
-    #         kms_key_id: "String",
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] snapshot_copy_grant_name
     #   The name of the snapshot copy grant. This name must be unique in the
     #   region for the Amazon Web Services account.
@@ -3081,23 +2771,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateSnapshotScheduleMessage
-    #   data as a hash:
-    #
-    #       {
-    #         schedule_definitions: ["String"],
-    #         schedule_identifier: "String",
-    #         schedule_description: "String",
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #         dry_run: false,
-    #         next_invocations: 1,
-    #       }
-    #
     # @!attribute [rw] schedule_definitions
     #   The definition of the snapshot schedule. The definition is made up
     #   of schedule expressions, for example "cron(30 12 *)" or "rate(12
@@ -3138,19 +2811,6 @@ module Aws::Redshift
 
     # Contains the output from the `CreateTags` action.
     #
-    # @note When making an API call, you may pass CreateTagsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         resource_name: "String", # required
-    #         tags: [ # required
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_name
     #   The Amazon Resource Name (ARN) to which you want to add the tag or
     #   tags. For example,
@@ -3176,24 +2836,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateUsageLimitMessage
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_identifier: "String", # required
-    #         feature_type: "spectrum", # required, accepts spectrum, concurrency-scaling, cross-region-datasharing
-    #         limit_type: "time", # required, accepts time, data-scanned
-    #         amount: 1, # required
-    #         period: "daily", # accepts daily, weekly, monthly
-    #         breach_action: "log", # accepts log, emit-metric, disable
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] cluster_identifier
     #   The identifier of the cluster that you want to limit usage.
     #   @return [String]
@@ -3382,14 +3024,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeauthorizeDataShareMessage
-    #   data as a hash:
-    #
-    #       {
-    #         data_share_arn: "String", # required
-    #         consumer_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] data_share_arn
     #   The Amazon Resource Name (ARN) of the datashare to remove
     #   authorization from.
@@ -3466,13 +3100,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAuthenticationProfileMessage
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_profile_name: "AuthenticationProfileNameString", # required
-    #       }
-    #
     # @!attribute [rw] authentication_profile_name
     #   The name of the authentication profile to delete.
     #   @return [String]
@@ -3497,16 +3124,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_identifier: "String", # required
-    #         skip_final_cluster_snapshot: false,
-    #         final_cluster_snapshot_identifier: "String",
-    #         final_cluster_snapshot_retention_period: 1,
-    #       }
-    #
     # @!attribute [rw] cluster_identifier
     #   The identifier of the cluster to be deleted.
     #
@@ -3569,13 +3186,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteClusterParameterGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         parameter_group_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] parameter_group_name
     #   The name of the parameter group to be deleted.
     #
@@ -3606,13 +3216,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteClusterSecurityGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_security_group_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] cluster_security_group_name
     #   The name of the cluster security group to be deleted.
     #   @return [String]
@@ -3625,14 +3228,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteClusterSnapshotMessage
-    #   data as a hash:
-    #
-    #       {
-    #         snapshot_identifier: "String", # required
-    #         snapshot_cluster_identifier: "String",
-    #       }
-    #
     # @!attribute [rw] snapshot_identifier
     #   The unique identifier of the manual snapshot to be deleted.
     #
@@ -3670,13 +3265,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteClusterSubnetGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_subnet_group_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] cluster_subnet_group_name
     #   The name of the cluster subnet group name to be deleted.
     #   @return [String]
@@ -3689,13 +3277,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteEndpointAccessMessage
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] endpoint_name
     #   The Redshift-managed VPC endpoint to delete.
     #   @return [String]
@@ -3708,13 +3289,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteEventSubscriptionMessage
-    #   data as a hash:
-    #
-    #       {
-    #         subscription_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] subscription_name
     #   The name of the Amazon Redshift event notification subscription to
     #   be deleted.
@@ -3728,13 +3302,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteHsmClientCertificateMessage
-    #   data as a hash:
-    #
-    #       {
-    #         hsm_client_certificate_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] hsm_client_certificate_identifier
     #   The identifier of the HSM client certificate to be deleted.
     #   @return [String]
@@ -3747,13 +3314,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteHsmConfigurationMessage
-    #   data as a hash:
-    #
-    #       {
-    #         hsm_configuration_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] hsm_configuration_identifier
     #   The identifier of the Amazon Redshift HSM configuration to be
     #   deleted.
@@ -3767,13 +3327,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteScheduledActionMessage
-    #   data as a hash:
-    #
-    #       {
-    #         scheduled_action_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] scheduled_action_name
     #   The name of the scheduled action to delete.
     #   @return [String]
@@ -3788,13 +3341,6 @@ module Aws::Redshift
 
     # The result of the `DeleteSnapshotCopyGrant` action.
     #
-    # @note When making an API call, you may pass DeleteSnapshotCopyGrantMessage
-    #   data as a hash:
-    #
-    #       {
-    #         snapshot_copy_grant_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] snapshot_copy_grant_name
     #   The name of the snapshot copy grant to delete.
     #   @return [String]
@@ -3807,13 +3353,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteSnapshotScheduleMessage
-    #   data as a hash:
-    #
-    #       {
-    #         schedule_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] schedule_identifier
     #   A unique identifier of the snapshot schedule to delete.
     #   @return [String]
@@ -3827,14 +3366,6 @@ module Aws::Redshift
     end
 
     # Contains the output from the `DeleteTags` action.
-    #
-    # @note When making an API call, you may pass DeleteTagsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         resource_name: "String", # required
-    #         tag_keys: ["String"], # required
-    #       }
     #
     # @!attribute [rw] resource_name
     #   The Amazon Resource Name (ARN) from which you want to remove the tag
@@ -3855,13 +3386,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteUsageLimitMessage
-    #   data as a hash:
-    #
-    #       {
-    #         usage_limit_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] usage_limit_id
     #   The identifier of the usage limit to delete.
     #   @return [String]
@@ -3889,13 +3413,6 @@ module Aws::Redshift
     #
     class DependentServiceUnavailableFault < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeAccountAttributesMessage
-    #   data as a hash:
-    #
-    #       {
-    #         attribute_names: ["String"],
-    #       }
-    #
     # @!attribute [rw] attribute_names
     #   A list of attribute names.
     #   @return [Array<String>]
@@ -3908,13 +3425,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAuthenticationProfilesMessage
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_profile_name: "AuthenticationProfileNameString",
-    #       }
-    #
     # @!attribute [rw] authentication_profile_name
     #   The name of the authentication profile to describe. If not specified
     #   then all authentication profiles owned by the account are listed.
@@ -3940,15 +3450,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeClusterDbRevisionsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_identifier: "String",
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] cluster_identifier
     #   A unique identifier for a cluster whose `ClusterDbRevisions` you are
     #   requesting. This parameter is case sensitive. All clusters defined
@@ -3991,17 +3492,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeClusterParameterGroupsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         parameter_group_name: "String",
-    #         max_records: 1,
-    #         marker: "String",
-    #         tag_keys: ["String"],
-    #         tag_values: ["String"],
-    #       }
-    #
     # @!attribute [rw] parameter_group_name
     #   The name of a specific parameter group for which to return details.
     #   By default, details about all parameter groups and the default
@@ -4062,16 +3552,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeClusterParametersMessage
-    #   data as a hash:
-    #
-    #       {
-    #         parameter_group_name: "String", # required
-    #         source: "String",
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] parameter_group_name
     #   The name of a cluster parameter group for which to return details.
     #   @return [String]
@@ -4120,17 +3600,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeClusterSecurityGroupsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_security_group_name: "String",
-    #         max_records: 1,
-    #         marker: "String",
-    #         tag_keys: ["String"],
-    #         tag_values: ["String"],
-    #       }
-    #
     # @!attribute [rw] cluster_security_group_name
     #   The name of a cluster security group for which you are requesting
     #   details. You can specify either the **Marker** parameter or a
@@ -4196,30 +3665,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeClusterSnapshotsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_identifier: "String",
-    #         snapshot_identifier: "String",
-    #         snapshot_arn: "String",
-    #         snapshot_type: "String",
-    #         start_time: Time.now,
-    #         end_time: Time.now,
-    #         max_records: 1,
-    #         marker: "String",
-    #         owner_account: "String",
-    #         tag_keys: ["String"],
-    #         tag_values: ["String"],
-    #         cluster_exists: false,
-    #         sorting_entities: [
-    #           {
-    #             attribute: "SOURCE_TYPE", # required, accepts SOURCE_TYPE, TOTAL_SIZE, CREATE_TIME
-    #             sort_order: "ASC", # accepts ASC, DESC
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] cluster_identifier
     #   The identifier of the cluster which generated the requested
     #   snapshots.
@@ -4361,17 +3806,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeClusterSubnetGroupsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_subnet_group_name: "String",
-    #         max_records: 1,
-    #         marker: "String",
-    #         tag_keys: ["String"],
-    #         tag_values: ["String"],
-    #       }
-    #
     # @!attribute [rw] cluster_subnet_group_name
     #   The name of the cluster subnet group for which information is
     #   requested.
@@ -4431,15 +3865,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeClusterTracksMessage
-    #   data as a hash:
-    #
-    #       {
-    #         maintenance_track_name: "String",
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] maintenance_track_name
     #   The name of the maintenance track.
     #   @return [String]
@@ -4469,16 +3894,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeClusterVersionsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_version: "String",
-    #         cluster_parameter_group_family: "String",
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] cluster_version
     #   The specific cluster version to return.
     #
@@ -4531,17 +3946,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeClustersMessage
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_identifier: "String",
-    #         max_records: 1,
-    #         marker: "String",
-    #         tag_keys: ["String"],
-    #         tag_values: ["String"],
-    #       }
-    #
     # @!attribute [rw] cluster_identifier
     #   The unique identifier of a cluster whose properties you are
     #   requesting. This parameter is case sensitive.
@@ -4606,16 +4010,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDataSharesForConsumerMessage
-    #   data as a hash:
-    #
-    #       {
-    #         consumer_arn: "String",
-    #         status: "ACTIVE", # accepts ACTIVE, AVAILABLE
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] consumer_arn
     #   The Amazon Resource Name (ARN) of the consumer that returns in the
     #   list of datashares.
@@ -4679,16 +4073,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDataSharesForProducerMessage
-    #   data as a hash:
-    #
-    #       {
-    #         producer_arn: "String",
-    #         status: "ACTIVE", # accepts ACTIVE, AUTHORIZED, PENDING_AUTHORIZATION, DEAUTHORIZED, REJECTED
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] producer_arn
     #   The Amazon Resource Name (ARN) of the producer that returns in the
     #   list of datashares.
@@ -4752,15 +4136,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDataSharesMessage
-    #   data as a hash:
-    #
-    #       {
-    #         data_share_arn: "String",
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] data_share_arn
     #   The identifier of the datashare to describe details of.
     #   @return [String]
@@ -4816,15 +4191,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDefaultClusterParametersMessage
-    #   data as a hash:
-    #
-    #       {
-    #         parameter_group_family: "String", # required
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] parameter_group_family
     #   The name of the cluster parameter group family.
     #   @return [String]
@@ -4874,18 +4240,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEndpointAccessMessage
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_identifier: "String",
-    #         resource_owner: "String",
-    #         endpoint_name: "String",
-    #         vpc_id: "String",
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] cluster_identifier
     #   The cluster identifier associated with the described endpoint.
     #   @return [String]
@@ -4930,17 +4284,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEndpointAuthorizationMessage
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_identifier: "String",
-    #         account: "String",
-    #         grantee: false,
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] cluster_identifier
     #   The cluster identifier of the cluster to access.
     #   @return [String]
@@ -4984,13 +4327,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEventCategoriesMessage
-    #   data as a hash:
-    #
-    #       {
-    #         source_type: "String",
-    #       }
-    #
     # @!attribute [rw] source_type
     #   The source type, such as cluster or parameter group, to which the
     #   described event categories apply.
@@ -5007,17 +4343,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEventSubscriptionsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         subscription_name: "String",
-    #         max_records: 1,
-    #         marker: "String",
-    #         tag_keys: ["String"],
-    #         tag_values: ["String"],
-    #       }
-    #
     # @!attribute [rw] subscription_name
     #   The name of the Amazon Redshift event notification subscription to
     #   be described.
@@ -5077,19 +4402,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEventsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         source_identifier: "String",
-    #         source_type: "cluster", # accepts cluster, cluster-parameter-group, cluster-security-group, cluster-snapshot, scheduled-action
-    #         start_time: Time.now,
-    #         end_time: Time.now,
-    #         duration: 1,
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] source_identifier
     #   The identifier of the event source for which events will be
     #   returned. If this parameter is not specified, then all sources are
@@ -5202,17 +4514,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeHsmClientCertificatesMessage
-    #   data as a hash:
-    #
-    #       {
-    #         hsm_client_certificate_identifier: "String",
-    #         max_records: 1,
-    #         marker: "String",
-    #         tag_keys: ["String"],
-    #         tag_values: ["String"],
-    #       }
-    #
     # @!attribute [rw] hsm_client_certificate_identifier
     #   The identifier of a specific HSM client certificate for which you
     #   want information. If no identifier is specified, information is
@@ -5274,17 +4575,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeHsmConfigurationsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         hsm_configuration_identifier: "String",
-    #         max_records: 1,
-    #         marker: "String",
-    #         tag_keys: ["String"],
-    #         tag_values: ["String"],
-    #       }
-    #
     # @!attribute [rw] hsm_configuration_identifier
     #   The identifier of a specific Amazon Redshift HSM configuration to be
     #   described. If no identifier is specified, information is returned
@@ -5346,13 +4636,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeLoggingStatusMessage
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] cluster_identifier
     #   The identifier of the cluster from which to get the logging status.
     #
@@ -5367,26 +4650,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeNodeConfigurationOptionsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         action_type: "restore-cluster", # required, accepts restore-cluster, recommend-node-config, resize-cluster
-    #         cluster_identifier: "String",
-    #         snapshot_identifier: "String",
-    #         snapshot_arn: "String",
-    #         owner_account: "String",
-    #         filters: [
-    #           {
-    #             name: "NodeType", # accepts NodeType, NumberOfNodes, EstimatedDiskUtilizationPercent, Mode
-    #             operator: "eq", # accepts eq, lt, gt, le, ge, in, between
-    #             values: ["String"],
-    #           },
-    #         ],
-    #         marker: "String",
-    #         max_records: 1,
-    #       }
-    #
     # @!attribute [rw] action_type
     #   The action type to evaluate for possible node configurations.
     #   Specify "restore-cluster" to get configuration combinations based
@@ -5458,16 +4721,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeOrderableClusterOptionsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_version: "String",
-    #         node_type: "String",
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] cluster_version
     #   The version filter value. Specify this parameter to show only the
     #   available offerings matching the specified version.
@@ -5516,16 +4769,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribePartnersInputMessage
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "PartnerIntegrationAccountId", # required
-    #         cluster_identifier: "PartnerIntegrationClusterIdentifier", # required
-    #         database_name: "PartnerIntegrationDatabaseName",
-    #         partner_name: "PartnerIntegrationPartnerName",
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID that owns the cluster.
     #   @return [String]
@@ -5569,16 +4812,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeReservedNodeExchangeStatusInputMessage
-    #   data as a hash:
-    #
-    #       {
-    #         reserved_node_id: "String",
-    #         reserved_node_exchange_request_id: "String",
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] reserved_node_id
     #   The identifier of the source reserved node in a reserved-node
     #   exchange request.
@@ -5636,15 +4869,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeReservedNodeOfferingsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         reserved_node_offering_id: "String",
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] reserved_node_offering_id
     #   The unique identifier for the offering.
     #   @return [String]
@@ -5681,15 +4905,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeReservedNodesMessage
-    #   data as a hash:
-    #
-    #       {
-    #         reserved_node_id: "String",
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] reserved_node_id
     #   Identifier for the node reservation.
     #   @return [String]
@@ -5726,13 +4941,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeResizeMessage
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] cluster_identifier
     #   The unique identifier of a cluster whose resize progress you are
     #   requesting. This parameter is case-sensitive.
@@ -5749,25 +4957,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeScheduledActionsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         scheduled_action_name: "String",
-    #         target_action_type: "ResizeCluster", # accepts ResizeCluster, PauseCluster, ResumeCluster
-    #         start_time: Time.now,
-    #         end_time: Time.now,
-    #         active: false,
-    #         filters: [
-    #           {
-    #             name: "cluster-identifier", # required, accepts cluster-identifier, iam-role
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         marker: "String",
-    #         max_records: 1,
-    #       }
-    #
     # @!attribute [rw] scheduled_action_name
     #   The name of the scheduled action to retrieve.
     #   @return [String]
@@ -5836,17 +5025,6 @@ module Aws::Redshift
 
     # The result of the `DescribeSnapshotCopyGrants` action.
     #
-    # @note When making an API call, you may pass DescribeSnapshotCopyGrantsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         snapshot_copy_grant_name: "String",
-    #         max_records: 1,
-    #         marker: "String",
-    #         tag_keys: ["String"],
-    #         tag_values: ["String"],
-    #       }
-    #
     # @!attribute [rw] snapshot_copy_grant_name
     #   The name of the snapshot copy grant.
     #   @return [String]
@@ -5907,18 +5085,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeSnapshotSchedulesMessage
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_identifier: "String",
-    #         schedule_identifier: "String",
-    #         tag_keys: ["String"],
-    #         tag_values: ["String"],
-    #         marker: "String",
-    #         max_records: 1,
-    #       }
-    #
     # @!attribute [rw] cluster_identifier
     #   The unique identifier for the cluster whose snapshot schedules you
     #   want to view.
@@ -5988,16 +5154,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeTableRestoreStatusMessage
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_identifier: "String",
-    #         table_restore_request_id: "String",
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] cluster_identifier
     #   The Amazon Redshift cluster that the table is being restored to.
     #   @return [String]
@@ -6034,18 +5190,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeTagsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         resource_name: "String",
-    #         resource_type: "String",
-    #         max_records: 1,
-    #         marker: "String",
-    #         tag_keys: ["String"],
-    #         tag_values: ["String"],
-    #       }
-    #
     # @!attribute [rw] resource_name
     #   The Amazon Resource Name (ARN) for which you want to describe the
     #   tag or tags. For example,
@@ -6135,19 +5279,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeUsageLimitsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         usage_limit_id: "String",
-    #         cluster_identifier: "String",
-    #         feature_type: "spectrum", # accepts spectrum, concurrency-scaling, cross-region-datasharing
-    #         max_records: 1,
-    #         marker: "String",
-    #         tag_keys: ["String"],
-    #         tag_values: ["String"],
-    #       }
-    #
     # @!attribute [rw] usage_limit_id
     #   The identifier of the usage limit to describe.
     #   @return [String]
@@ -6217,13 +5348,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisableLoggingMessage
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] cluster_identifier
     #   The identifier of the cluster on which logging is to be stopped.
     #
@@ -6238,13 +5362,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisableSnapshotCopyMessage
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] cluster_identifier
     #   The unique identifier of the source cluster that you want to disable
     #   copying of snapshots to a destination region.
@@ -6273,16 +5390,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateDataShareConsumerMessage
-    #   data as a hash:
-    #
-    #       {
-    #         data_share_arn: "String", # required
-    #         disassociate_entire_account: false,
-    #         consumer_arn: "String",
-    #         consumer_region: "String",
-    #       }
-    #
     # @!attribute [rw] data_share_arn
     #   The Amazon Resource Name (ARN) of the datashare to remove
     #   association for.
@@ -6364,17 +5471,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass EnableLoggingMessage
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_identifier: "String", # required
-    #         bucket_name: "String",
-    #         s3_key_prefix: "String",
-    #         log_destination_type: "s3", # accepts s3, cloudwatch
-    #         log_exports: ["String"],
-    #       }
-    #
     # @!attribute [rw] cluster_identifier
     #   The identifier of the cluster on which logging is to be started.
     #
@@ -6436,17 +5532,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass EnableSnapshotCopyMessage
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_identifier: "String", # required
-    #         destination_region: "String", # required
-    #         retention_period: 1,
-    #         snapshot_copy_grant_name: "String",
-    #         manual_snapshot_retention_period: 1,
-    #       }
-    #
     # @!attribute [rw] cluster_identifier
     #   The unique identifier of the source cluster to copy snapshots from.
     #
@@ -7001,18 +6086,6 @@ module Aws::Redshift
 
     # The request parameters to get cluster credentials.
     #
-    # @note When making an API call, you may pass GetClusterCredentialsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_user: "String", # required
-    #         db_name: "String",
-    #         cluster_identifier: "String", # required
-    #         duration_seconds: 1,
-    #         auto_create: false,
-    #         db_groups: ["String"],
-    #       }
-    #
     # @!attribute [rw] db_user
     #   The name of a database user. If a user name matching `DbUser` exists
     #   in the database, the temporary user credentials have the same
@@ -7131,15 +6204,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetClusterCredentialsWithIAMMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_name: "String",
-    #         cluster_identifier: "String", # required
-    #         duration_seconds: 1,
-    #       }
-    #
     # @!attribute [rw] db_name
     #   The name of the database for which you are requesting credentials.
     #   If the database name is specified, the IAM policy must allow access
@@ -7168,17 +6232,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetReservedNodeExchangeConfigurationOptionsInputMessage
-    #   data as a hash:
-    #
-    #       {
-    #         action_type: "restore-cluster", # required, accepts restore-cluster, resize-cluster
-    #         cluster_identifier: "String",
-    #         snapshot_identifier: "String",
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] action_type
     #   The action type of the reserved-node configuration. The action type
     #   can be an exchange initiated from either a snapshot or a resize.
@@ -7245,15 +6298,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetReservedNodeExchangeOfferingsInputMessage
-    #   data as a hash:
-    #
-    #       {
-    #         reserved_node_id: "String", # required
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] reserved_node_id
     #   A string representing the node identifier for the DC1 Reserved Node
     #   to be exchanged.
@@ -7841,14 +6885,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyAquaInputMessage
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_identifier: "String", # required
-    #         aqua_configuration_status: "enabled", # accepts enabled, disabled, auto
-    #       }
-    #
     # @!attribute [rw] cluster_identifier
     #   The identifier of the cluster to be modified.
     #   @return [String]
@@ -7880,14 +6916,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyAuthenticationProfileMessage
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_profile_name: "AuthenticationProfileNameString", # required
-    #         authentication_profile_content: "String", # required
-    #       }
-    #
     # @!attribute [rw] authentication_profile_name
     #   The name of the authentication profile to replace.
     #   @return [String]
@@ -7924,14 +6952,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyClusterDbRevisionMessage
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_identifier: "String", # required
-    #         revision_target: "String", # required
-    #       }
-    #
     # @!attribute [rw] cluster_identifier
     #   The unique identifier of a cluster whose database revision you want
     #   to modify.
@@ -7965,16 +6985,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyClusterIamRolesMessage
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_identifier: "String", # required
-    #         add_iam_roles: ["String"],
-    #         remove_iam_roles: ["String"],
-    #         default_iam_role_arn: "String",
-    #       }
-    #
     # @!attribute [rw] cluster_identifier
     #   The unique identifier of the cluster for which you want to associate
     #   or disassociate IAM roles.
@@ -8018,18 +7028,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyClusterMaintenanceMessage
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_identifier: "String", # required
-    #         defer_maintenance: false,
-    #         defer_maintenance_identifier: "String",
-    #         defer_maintenance_start_time: Time.now,
-    #         defer_maintenance_end_time: Time.now,
-    #         defer_maintenance_duration: 1,
-    #       }
-    #
     # @!attribute [rw] cluster_identifier
     #   A unique identifier for the cluster.
     #   @return [String]
@@ -8084,37 +7082,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_identifier: "String", # required
-    #         cluster_type: "String",
-    #         node_type: "String",
-    #         number_of_nodes: 1,
-    #         cluster_security_groups: ["String"],
-    #         vpc_security_group_ids: ["String"],
-    #         master_user_password: "String",
-    #         cluster_parameter_group_name: "String",
-    #         automated_snapshot_retention_period: 1,
-    #         manual_snapshot_retention_period: 1,
-    #         preferred_maintenance_window: "String",
-    #         cluster_version: "String",
-    #         allow_version_upgrade: false,
-    #         hsm_client_certificate_identifier: "String",
-    #         hsm_configuration_identifier: "String",
-    #         new_cluster_identifier: "String",
-    #         publicly_accessible: false,
-    #         elastic_ip: "String",
-    #         enhanced_vpc_routing: false,
-    #         maintenance_track_name: "String",
-    #         encrypted: false,
-    #         kms_key_id: "String",
-    #         availability_zone_relocation: false,
-    #         availability_zone: "String",
-    #         port: 1,
-    #       }
-    #
     # @!attribute [rw] cluster_identifier
     #   The unique identifier of the cluster to be modified.
     #
@@ -8440,26 +7407,6 @@ module Aws::Redshift
 
     # Describes a modify cluster parameter group operation.
     #
-    # @note When making an API call, you may pass ModifyClusterParameterGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         parameter_group_name: "String", # required
-    #         parameters: [ # required
-    #           {
-    #             parameter_name: "String",
-    #             parameter_value: "String",
-    #             description: "String",
-    #             source: "String",
-    #             data_type: "String",
-    #             allowed_values: "String",
-    #             apply_type: "static", # accepts static, dynamic
-    #             is_modifiable: false,
-    #             minimum_engine_version: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] parameter_group_name
     #   The name of the parameter group to be modified.
     #   @return [String]
@@ -8497,15 +7444,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyClusterSnapshotMessage
-    #   data as a hash:
-    #
-    #       {
-    #         snapshot_identifier: "String", # required
-    #         manual_snapshot_retention_period: 1,
-    #         force: false,
-    #       }
-    #
     # @!attribute [rw] snapshot_identifier
     #   The identifier of the snapshot whose setting you want to modify.
     #   @return [String]
@@ -8547,15 +7485,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyClusterSnapshotScheduleMessage
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_identifier: "String", # required
-    #         schedule_identifier: "String",
-    #         disassociate_schedule: false,
-    #       }
-    #
     # @!attribute [rw] cluster_identifier
     #   A unique identifier for the cluster whose snapshot schedule you want
     #   to modify.
@@ -8581,15 +7510,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyClusterSubnetGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_subnet_group_name: "String", # required
-    #         description: "String",
-    #         subnet_ids: ["String"], # required
-    #       }
-    #
     # @!attribute [rw] cluster_subnet_group_name
     #   The name of the subnet group to be modified.
     #   @return [String]
@@ -8625,14 +7545,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyEndpointAccessMessage
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_name: "String", # required
-    #         vpc_security_group_ids: ["String"],
-    #       }
-    #
     # @!attribute [rw] endpoint_name
     #   The endpoint to be modified.
     #   @return [String]
@@ -8651,19 +7563,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyEventSubscriptionMessage
-    #   data as a hash:
-    #
-    #       {
-    #         subscription_name: "String", # required
-    #         sns_topic_arn: "String",
-    #         source_type: "String",
-    #         source_ids: ["String"],
-    #         event_categories: ["String"],
-    #         severity: "String",
-    #         enabled: false,
-    #       }
-    #
     # @!attribute [rw] subscription_name
     #   The name of the modified Amazon Redshift event notification
     #   subscription.
@@ -8744,36 +7643,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyScheduledActionMessage
-    #   data as a hash:
-    #
-    #       {
-    #         scheduled_action_name: "String", # required
-    #         target_action: {
-    #           resize_cluster: {
-    #             cluster_identifier: "String", # required
-    #             cluster_type: "String",
-    #             node_type: "String",
-    #             number_of_nodes: 1,
-    #             classic: false,
-    #             reserved_node_id: "String",
-    #             target_reserved_node_offering_id: "String",
-    #           },
-    #           pause_cluster: {
-    #             cluster_identifier: "String", # required
-    #           },
-    #           resume_cluster: {
-    #             cluster_identifier: "String", # required
-    #           },
-    #         },
-    #         schedule: "String",
-    #         iam_role: "String",
-    #         scheduled_action_description: "String",
-    #         start_time: Time.now,
-    #         end_time: Time.now,
-    #         enable: false,
-    #       }
-    #
     # @!attribute [rw] scheduled_action_name
     #   The name of the scheduled action to modify.
     #   @return [String]
@@ -8828,15 +7697,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifySnapshotCopyRetentionPeriodMessage
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_identifier: "String", # required
-    #         retention_period: 1, # required
-    #         manual: false,
-    #       }
-    #
     # @!attribute [rw] cluster_identifier
     #   The unique identifier of the cluster for which you want to change
     #   the retention period for either automated or manual snapshots that
@@ -8900,14 +7760,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifySnapshotScheduleMessage
-    #   data as a hash:
-    #
-    #       {
-    #         schedule_identifier: "String", # required
-    #         schedule_definitions: ["String"], # required
-    #       }
-    #
     # @!attribute [rw] schedule_identifier
     #   A unique alphanumeric identifier of the schedule to modify.
     #   @return [String]
@@ -8927,15 +7779,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyUsageLimitMessage
-    #   data as a hash:
-    #
-    #       {
-    #         usage_limit_id: "String", # required
-    #         amount: 1,
-    #         breach_action: "log", # accepts log, emit-metric, disable
-    #       }
-    #
     # @!attribute [rw] usage_limit_id
     #   The identifier of the usage limit to modify.
     #   @return [String]
@@ -9019,15 +7862,6 @@ module Aws::Redshift
     end
 
     # A set of elements to filter the returned node configurations.
-    #
-    # @note When making an API call, you may pass NodeConfigurationOptionsFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "NodeType", # accepts NodeType, NumberOfNodes, EstimatedDiskUtilizationPercent, Mode
-    #         operator: "eq", # accepts eq, lt, gt, le, ge, in, between
-    #         values: ["String"],
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the element to filter.
@@ -9154,21 +7988,6 @@ module Aws::Redshift
 
     # Describes a parameter in a cluster parameter group.
     #
-    # @note When making an API call, you may pass Parameter
-    #   data as a hash:
-    #
-    #       {
-    #         parameter_name: "String",
-    #         parameter_value: "String",
-    #         description: "String",
-    #         source: "String",
-    #         data_type: "String",
-    #         allowed_values: "String",
-    #         apply_type: "static", # accepts static, dynamic
-    #         is_modifiable: false,
-    #         minimum_engine_version: "String",
-    #       }
-    #
     # @!attribute [rw] parameter_name
     #   The name of the parameter.
     #   @return [String]
@@ -9275,16 +8094,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PartnerIntegrationInputMessage
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "PartnerIntegrationAccountId", # required
-    #         cluster_identifier: "PartnerIntegrationClusterIdentifier", # required
-    #         database_name: "PartnerIntegrationDatabaseName", # required
-    #         partner_name: "PartnerIntegrationPartnerName", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID that owns the cluster.
     #   @return [String]
@@ -9338,13 +8147,6 @@ module Aws::Redshift
 
     # Describes a pause cluster operation. For example, a scheduled action
     # to run the `PauseCluster` API operation.
-    #
-    # @note When making an API call, you may pass PauseClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_identifier: "String", # required
-    #       }
     #
     # @!attribute [rw] cluster_identifier
     #   The identifier of the cluster to be paused.
@@ -9455,14 +8257,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PurchaseReservedNodeOfferingMessage
-    #   data as a hash:
-    #
-    #       {
-    #         reserved_node_offering_id: "String", # required
-    #         node_count: 1,
-    #       }
-    #
     # @!attribute [rw] reserved_node_offering_id
     #   The unique identifier of the reserved node offering you want to
     #   purchase.
@@ -9497,13 +8291,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RebootClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] cluster_identifier
     #   The cluster identifier.
     #   @return [String]
@@ -9548,13 +8335,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RejectDataShareMessage
-    #   data as a hash:
-    #
-    #       {
-    #         data_share_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] data_share_arn
     #   The Amazon Resource Name (ARN) of the datashare to reject.
     #   @return [String]
@@ -9891,27 +8671,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ResetClusterParameterGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         parameter_group_name: "String", # required
-    #         reset_all_parameters: false,
-    #         parameters: [
-    #           {
-    #             parameter_name: "String",
-    #             parameter_value: "String",
-    #             description: "String",
-    #             source: "String",
-    #             data_type: "String",
-    #             allowed_values: "String",
-    #             apply_type: "static", # accepts static, dynamic
-    #             is_modifiable: false,
-    #             minimum_engine_version: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] parameter_group_name
     #   The name of the cluster parameter group to be reset.
     #   @return [String]
@@ -9944,19 +8703,6 @@ module Aws::Redshift
 
     # Describes a resize cluster operation. For example, a scheduled action
     # to run the `ResizeCluster` API operation.
-    #
-    # @note When making an API call, you may pass ResizeClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_identifier: "String", # required
-    #         cluster_type: "String",
-    #         node_type: "String",
-    #         number_of_nodes: 1,
-    #         classic: false,
-    #         reserved_node_id: "String",
-    #         target_reserved_node_offering_id: "String",
-    #       }
     #
     # @!attribute [rw] cluster_identifier
     #   The unique identifier for the cluster to resize.
@@ -10168,45 +8914,6 @@ module Aws::Redshift
     #
     class ResourceNotFoundFault < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass RestoreFromClusterSnapshotMessage
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_identifier: "String", # required
-    #         snapshot_identifier: "String",
-    #         snapshot_arn: "String",
-    #         snapshot_cluster_identifier: "String",
-    #         port: 1,
-    #         availability_zone: "String",
-    #         allow_version_upgrade: false,
-    #         cluster_subnet_group_name: "String",
-    #         publicly_accessible: false,
-    #         owner_account: "String",
-    #         hsm_client_certificate_identifier: "String",
-    #         hsm_configuration_identifier: "String",
-    #         elastic_ip: "String",
-    #         cluster_parameter_group_name: "String",
-    #         cluster_security_groups: ["String"],
-    #         vpc_security_group_ids: ["String"],
-    #         preferred_maintenance_window: "String",
-    #         automated_snapshot_retention_period: 1,
-    #         manual_snapshot_retention_period: 1,
-    #         kms_key_id: "String",
-    #         node_type: "String",
-    #         enhanced_vpc_routing: false,
-    #         additional_info: "String",
-    #         iam_roles: ["String"],
-    #         maintenance_track_name: "String",
-    #         snapshot_schedule_identifier: "String",
-    #         number_of_nodes: 1,
-    #         availability_zone_relocation: false,
-    #         aqua_configuration_status: "enabled", # accepts enabled, disabled, auto
-    #         default_iam_role_arn: "String",
-    #         reserved_node_id: "String",
-    #         target_reserved_node_offering_id: "String",
-    #         encrypted: false,
-    #       }
-    #
     # @!attribute [rw] cluster_identifier
     #   The identifier of the cluster that will be created from restoring
     #   the snapshot.
@@ -10606,21 +9313,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RestoreTableFromClusterSnapshotMessage
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_identifier: "String", # required
-    #         snapshot_identifier: "String", # required
-    #         source_database_name: "String", # required
-    #         source_schema_name: "String",
-    #         source_table_name: "String", # required
-    #         target_database_name: "String",
-    #         target_schema_name: "String",
-    #         new_table_name: "String", # required
-    #         enable_case_sensitive_identifier: false,
-    #       }
-    #
     # @!attribute [rw] cluster_identifier
     #   The identifier of the Amazon Redshift cluster to restore the table
     #   to.
@@ -10696,13 +9388,6 @@ module Aws::Redshift
     # Describes a resume cluster operation. For example, a scheduled action
     # to run the `ResumeCluster` API operation.
     #
-    # @note When making an API call, you may pass ResumeClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] cluster_identifier
     #   The identifier of the cluster to be resumed.
     #   @return [String]
@@ -10754,16 +9439,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RevokeClusterSecurityGroupIngressMessage
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_security_group_name: "String", # required
-    #         cidrip: "String",
-    #         ec2_security_group_name: "String",
-    #         ec2_security_group_owner_id: "String",
-    #       }
-    #
     # @!attribute [rw] cluster_security_group_name
     #   The name of the security Group from which to revoke the ingress
     #   rule.
@@ -10815,16 +9490,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RevokeEndpointAccessMessage
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_identifier: "String",
-    #         account: "String",
-    #         vpc_ids: ["String"],
-    #         force: false,
-    #       }
-    #
     # @!attribute [rw] cluster_identifier
     #   The cluster to revoke access from.
     #   @return [String]
@@ -10855,16 +9520,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RevokeSnapshotAccessMessage
-    #   data as a hash:
-    #
-    #       {
-    #         snapshot_identifier: "String",
-    #         snapshot_arn: "String",
-    #         snapshot_cluster_identifier: "String",
-    #         account_with_restore_access: "String", # required
-    #       }
-    #
     # @!attribute [rw] snapshot_identifier
     #   The identifier of the snapshot that the account can no longer
     #   access.
@@ -10910,13 +9565,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RotateEncryptionKeyMessage
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] cluster_identifier
     #   The unique identifier of the cluster that you want to rotate the
     #   encryption keys for.
@@ -11067,14 +9715,6 @@ module Aws::Redshift
 
     # A set of elements to filter the returned scheduled actions.
     #
-    # @note When making an API call, you may pass ScheduledActionFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "cluster-identifier", # required, accepts cluster-identifier, iam-role
-    #         values: ["String"], # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The type of element to filter.
     #   @return [String]
@@ -11107,27 +9747,6 @@ module Aws::Redshift
 
     # The action type that specifies an Amazon Redshift API operation that
     # is supported by the Amazon Redshift scheduler.
-    #
-    # @note When making an API call, you may pass ScheduledActionType
-    #   data as a hash:
-    #
-    #       {
-    #         resize_cluster: {
-    #           cluster_identifier: "String", # required
-    #           cluster_type: "String",
-    #           node_type: "String",
-    #           number_of_nodes: 1,
-    #           classic: false,
-    #           reserved_node_id: "String",
-    #           target_reserved_node_offering_id: "String",
-    #         },
-    #         pause_cluster: {
-    #           cluster_identifier: "String", # required
-    #         },
-    #         resume_cluster: {
-    #           cluster_identifier: "String", # required
-    #         },
-    #       }
     #
     # @!attribute [rw] resize_cluster
     #   An action that runs a `ResizeCluster` API operation.
@@ -11633,14 +10252,6 @@ module Aws::Redshift
 
     # Describes a sorting entity
     #
-    # @note When making an API call, you may pass SnapshotSortingEntity
-    #   data as a hash:
-    #
-    #       {
-    #         attribute: "SOURCE_TYPE", # required, accepts SOURCE_TYPE, TOTAL_SIZE, CREATE_TIME
-    #         sort_order: "ASC", # accepts ASC, DESC
-    #       }
-    #
     # @!attribute [rw] attribute
     #   The category for sorting the snapshots.
     #   @return [String]
@@ -11883,14 +10494,6 @@ module Aws::Redshift
 
     # A tag consisting of a name/value pair for a resource.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "String",
-    #         value: "String",
-    #       }
-    #
     # @!attribute [rw] key
     #   The key, or name, for the resource tag.
     #   @return [String]
@@ -12040,18 +10643,6 @@ module Aws::Redshift
     #
     class UnsupportedOptionFault < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdatePartnerStatusInputMessage
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "PartnerIntegrationAccountId", # required
-    #         cluster_identifier: "PartnerIntegrationClusterIdentifier", # required
-    #         database_name: "PartnerIntegrationDatabaseName", # required
-    #         partner_name: "PartnerIntegrationPartnerName", # required
-    #         status: "Active", # required, accepts Active, Inactive, RuntimeFailure, ConnectionFailure
-    #         status_message: "PartnerIntegrationStatusMessage",
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID that owns the cluster.
     #   @return [String]

@@ -12,14 +12,6 @@ module Aws::DocDB
 
     # Represents the input to AddSourceIdentifierToSubscription.
     #
-    # @note When making an API call, you may pass AddSourceIdentifierToSubscriptionMessage
-    #   data as a hash:
-    #
-    #       {
-    #         subscription_name: "String", # required
-    #         source_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] subscription_name
     #   The name of the Amazon DocumentDB event notification subscription
     #   that you want to add a source identifier to.
@@ -64,19 +56,6 @@ module Aws::DocDB
 
     # Represents the input to AddTagsToResource.
     #
-    # @note When making an API call, you may pass AddTagsToResourceMessage
-    #   data as a hash:
-    #
-    #       {
-    #         resource_name: "String", # required
-    #         tags: [ # required
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_name
     #   The Amazon DocumentDB resource that the tags are added to. This
     #   value is an Amazon Resource Name .
@@ -96,15 +75,6 @@ module Aws::DocDB
     end
 
     # Represents the input to ApplyPendingMaintenanceAction.
-    #
-    # @note When making an API call, you may pass ApplyPendingMaintenanceActionMessage
-    #   data as a hash:
-    #
-    #       {
-    #         resource_identifier: "String", # required
-    #         apply_action: "String", # required
-    #         opt_in_type: "String", # required
-    #       }
     #
     # @!attribute [rw] resource_identifier
     #   The Amazon Resource Name (ARN) of the resource that the pending
@@ -263,14 +233,6 @@ module Aws::DocDB
     # are exported (or not exported) to CloudWatch Logs. The values within
     # these arrays depend on the engine that is being used.
     #
-    # @note When making an API call, you may pass CloudwatchLogsExportConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         enable_log_types: ["String"],
-    #         disable_log_types: ["String"],
-    #       }
-    #
     # @!attribute [rw] enable_log_types
     #   The list of log types to enable.
     #   @return [Array<String>]
@@ -289,21 +251,6 @@ module Aws::DocDB
     end
 
     # Represents the input to CopyDBClusterParameterGroup.
-    #
-    # @note When making an API call, you may pass CopyDBClusterParameterGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         source_db_cluster_parameter_group_identifier: "String", # required
-    #         target_db_cluster_parameter_group_identifier: "String", # required
-    #         target_db_cluster_parameter_group_description: "String", # required
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] source_db_cluster_parameter_group_identifier
     #   The identifier or Amazon Resource Name (ARN) for the source cluster
@@ -372,24 +319,6 @@ module Aws::DocDB
     end
 
     # Represents the input to CopyDBClusterSnapshot.
-    #
-    # @note When making an API call, you may pass CopyDBClusterSnapshotMessage
-    #   data as a hash:
-    #
-    #       {
-    #         source_db_cluster_snapshot_identifier: "String", # required
-    #         target_db_cluster_snapshot_identifier: "String", # required
-    #         kms_key_id: "String",
-    #         pre_signed_url: "String",
-    #         copy_tags: false,
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #         source_region: "String",
-    #       }
     #
     # @!attribute [rw] source_db_cluster_snapshot_identifier
     #   The identifier of the cluster snapshot to copy. This parameter is
@@ -529,38 +458,6 @@ module Aws::DocDB
     end
 
     # Represents the input to CreateDBCluster.
-    #
-    # @note When making an API call, you may pass CreateDBClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         availability_zones: ["String"],
-    #         backup_retention_period: 1,
-    #         db_cluster_identifier: "String", # required
-    #         db_cluster_parameter_group_name: "String",
-    #         vpc_security_group_ids: ["String"],
-    #         db_subnet_group_name: "String",
-    #         engine: "String", # required
-    #         engine_version: "String",
-    #         port: 1,
-    #         master_username: "String",
-    #         master_user_password: "String",
-    #         preferred_backup_window: "String",
-    #         preferred_maintenance_window: "String",
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #         storage_encrypted: false,
-    #         kms_key_id: "String",
-    #         pre_signed_url: "String",
-    #         enable_cloudwatch_logs_exports: ["String"],
-    #         deletion_protection: false,
-    #         global_cluster_identifier: "GlobalClusterIdentifier",
-    #         source_region: "String",
-    #       }
     #
     # @!attribute [rw] availability_zones
     #   A list of Amazon EC2 Availability Zones that instances in the
@@ -777,21 +674,6 @@ module Aws::DocDB
 
     # Represents the input of CreateDBClusterParameterGroup.
     #
-    # @note When making an API call, you may pass CreateDBClusterParameterGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_parameter_group_name: "String", # required
-    #         db_parameter_group_family: "String", # required
-    #         description: "String", # required
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] db_cluster_parameter_group_name
     #   The name of the cluster parameter group.
     #
@@ -855,20 +737,6 @@ module Aws::DocDB
 
     # Represents the input of CreateDBClusterSnapshot.
     #
-    # @note When making an API call, you may pass CreateDBClusterSnapshotMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_snapshot_identifier: "String", # required
-    #         db_cluster_identifier: "String", # required
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] db_cluster_snapshot_identifier
     #   The identifier of the cluster snapshot. This parameter is stored as
     #   a lowercase string.
@@ -924,29 +792,6 @@ module Aws::DocDB
     end
 
     # Represents the input to CreateDBInstance.
-    #
-    # @note When making an API call, you may pass CreateDBInstanceMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_instance_identifier: "String", # required
-    #         db_instance_class: "String", # required
-    #         engine: "String", # required
-    #         availability_zone: "String",
-    #         preferred_maintenance_window: "String",
-    #         auto_minor_version_upgrade: false,
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #         db_cluster_identifier: "String", # required
-    #         copy_tags_to_snapshot: false,
-    #         promotion_tier: 1,
-    #         enable_performance_insights: false,
-    #         performance_insights_kms_key_id: "String",
-    #       }
     #
     # @!attribute [rw] db_instance_identifier
     #   The instance identifier. This parameter is stored as a lowercase
@@ -1086,21 +931,6 @@ module Aws::DocDB
 
     # Represents the input to CreateDBSubnetGroup.
     #
-    # @note When making an API call, you may pass CreateDBSubnetGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_subnet_group_name: "String", # required
-    #         db_subnet_group_description: "String", # required
-    #         subnet_ids: ["String"], # required
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] db_subnet_group_name
     #   The name for the subnet group. This value is stored as a lowercase
     #   string.
@@ -1147,24 +977,6 @@ module Aws::DocDB
     end
 
     # Represents the input to CreateEventSubscription.
-    #
-    # @note When making an API call, you may pass CreateEventSubscriptionMessage
-    #   data as a hash:
-    #
-    #       {
-    #         subscription_name: "String", # required
-    #         sns_topic_arn: "String", # required
-    #         source_type: "String",
-    #         event_categories: ["String"],
-    #         source_ids: ["String"],
-    #         enabled: false,
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] subscription_name
     #   The name of the subscription.
@@ -1253,19 +1065,6 @@ module Aws::DocDB
     end
 
     # Represents the input to CreateGlobalCluster.
-    #
-    # @note When making an API call, you may pass CreateGlobalClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         global_cluster_identifier: "GlobalClusterIdentifier", # required
-    #         source_db_cluster_identifier: "String",
-    #         engine: "String",
-    #         engine_version: "String",
-    #         deletion_protection: false,
-    #         database_name: "String",
-    #         storage_encrypted: false,
-    #       }
     #
     # @!attribute [rw] global_cluster_identifier
     #   The cluster identifier of the new global cluster.
@@ -2385,15 +2184,6 @@ module Aws::DocDB
 
     # Represents the input to DeleteDBCluster.
     #
-    # @note When making an API call, you may pass DeleteDBClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_identifier: "String", # required
-    #         skip_final_snapshot: false,
-    #         final_db_snapshot_identifier: "String",
-    #       }
-    #
     # @!attribute [rw] db_cluster_identifier
     #   The cluster identifier for the cluster to be deleted. This parameter
     #   isn't case sensitive.
@@ -2449,13 +2239,6 @@ module Aws::DocDB
 
     # Represents the input to DeleteDBClusterParameterGroup.
     #
-    # @note When making an API call, you may pass DeleteDBClusterParameterGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_parameter_group_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] db_cluster_parameter_group_name
     #   The name of the cluster parameter group.
     #
@@ -2490,13 +2273,6 @@ module Aws::DocDB
 
     # Represents the input to DeleteDBClusterSnapshot.
     #
-    # @note When making an API call, you may pass DeleteDBClusterSnapshotMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_snapshot_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] db_cluster_snapshot_identifier
     #   The identifier of the cluster snapshot to delete.
     #
@@ -2525,13 +2301,6 @@ module Aws::DocDB
     end
 
     # Represents the input to DeleteDBInstance.
-    #
-    # @note When making an API call, you may pass DeleteDBInstanceMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_instance_identifier: "String", # required
-    #       }
     #
     # @!attribute [rw] db_instance_identifier
     #   The instance identifier for the instance to be deleted. This
@@ -2566,13 +2335,6 @@ module Aws::DocDB
 
     # Represents the input to DeleteDBSubnetGroup.
     #
-    # @note When making an API call, you may pass DeleteDBSubnetGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_subnet_group_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] db_subnet_group_name
     #   The name of the database subnet group to delete.
     #
@@ -2597,13 +2359,6 @@ module Aws::DocDB
     end
 
     # Represents the input to DeleteEventSubscription.
-    #
-    # @note When making an API call, you may pass DeleteEventSubscriptionMessage
-    #   data as a hash:
-    #
-    #       {
-    #         subscription_name: "String", # required
-    #       }
     #
     # @!attribute [rw] subscription_name
     #   The name of the Amazon DocumentDB event notification subscription
@@ -2632,13 +2387,6 @@ module Aws::DocDB
 
     # Represents the input to DeleteGlobalCluster.
     #
-    # @note When making an API call, you may pass DeleteGlobalClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         global_cluster_identifier: "GlobalClusterIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] global_cluster_identifier
     #   The cluster identifier of the global cluster being deleted.
     #   @return [String]
@@ -2663,21 +2411,6 @@ module Aws::DocDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeCertificatesMessage
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_identifier: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] certificate_identifier
     #   The user-supplied certificate identifier. If this parameter is
     #   specified, information for only the specified certificate is
@@ -2730,21 +2463,6 @@ module Aws::DocDB
 
     # Represents the input to DescribeDBClusterParameterGroups.
     #
-    # @note When making an API call, you may pass DescribeDBClusterParameterGroupsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_parameter_group_name: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] db_cluster_parameter_group_name
     #   The name of a specific cluster parameter group to return details
     #   for.
@@ -2790,22 +2508,6 @@ module Aws::DocDB
     end
 
     # Represents the input to DescribeDBClusterParameters.
-    #
-    # @note When making an API call, you may pass DescribeDBClusterParametersMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_parameter_group_name: "String", # required
-    #         source: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
     #
     # @!attribute [rw] db_cluster_parameter_group_name
     #   The name of a specific cluster parameter group to return parameter
@@ -2859,13 +2561,6 @@ module Aws::DocDB
 
     # Represents the input to DescribeDBClusterSnapshotAttributes.
     #
-    # @note When making an API call, you may pass DescribeDBClusterSnapshotAttributesMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_snapshot_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] db_cluster_snapshot_identifier
     #   The identifier for the cluster snapshot to describe the attributes
     #   for.
@@ -2893,25 +2588,6 @@ module Aws::DocDB
     end
 
     # Represents the input to DescribeDBClusterSnapshots.
-    #
-    # @note When making an API call, you may pass DescribeDBClusterSnapshotsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_identifier: "String",
-    #         db_cluster_snapshot_identifier: "String",
-    #         snapshot_type: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #         include_shared: false,
-    #         include_public: false,
-    #       }
     #
     # @!attribute [rw] db_cluster_identifier
     #   The ID of the cluster to retrieve the list of cluster snapshots for.
@@ -3019,21 +2695,6 @@ module Aws::DocDB
 
     # Represents the input to DescribeDBClusters.
     #
-    # @note When making an API call, you may pass DescribeDBClustersMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_identifier: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] db_cluster_identifier
     #   The user-provided cluster identifier. If this parameter is
     #   specified, information from only the specific cluster is returned.
@@ -3087,26 +2748,6 @@ module Aws::DocDB
     end
 
     # Represents the input to DescribeDBEngineVersions.
-    #
-    # @note When making an API call, you may pass DescribeDBEngineVersionsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         engine: "String",
-    #         engine_version: "String",
-    #         db_parameter_group_family: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #         default_only: false,
-    #         list_supported_character_sets: false,
-    #         list_supported_timezones: false,
-    #       }
     #
     # @!attribute [rw] engine
     #   The database engine to return.
@@ -3184,21 +2825,6 @@ module Aws::DocDB
 
     # Represents the input to DescribeDBInstances.
     #
-    # @note When making an API call, you may pass DescribeDBInstancesMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_instance_identifier: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] db_instance_identifier
     #   The user-provided instance identifier. If this parameter is
     #   specified, information from only the specific instance is returned.
@@ -3257,21 +2883,6 @@ module Aws::DocDB
 
     # Represents the input to DescribeDBSubnetGroups.
     #
-    # @note When making an API call, you may pass DescribeDBSubnetGroupsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_subnet_group_name: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] db_subnet_group_name
     #   The name of the subnet group to return details for.
     #   @return [String]
@@ -3309,21 +2920,6 @@ module Aws::DocDB
     end
 
     # Represents the input to DescribeEngineDefaultClusterParameters.
-    #
-    # @note When making an API call, you may pass DescribeEngineDefaultClusterParametersMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_parameter_group_family: "String", # required
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
     #
     # @!attribute [rw] db_parameter_group_family
     #   The name of the cluster parameter group family to return the engine
@@ -3377,19 +2973,6 @@ module Aws::DocDB
 
     # Represents the input to DescribeEventCategories.
     #
-    # @note When making an API call, you may pass DescribeEventCategoriesMessage
-    #   data as a hash:
-    #
-    #       {
-    #         source_type: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] source_type
     #   The type of source that is generating the events.
     #
@@ -3411,21 +2994,6 @@ module Aws::DocDB
     end
 
     # Represents the input to DescribeEventSubscriptions.
-    #
-    # @note When making an API call, you may pass DescribeEventSubscriptionsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         subscription_name: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
     #
     # @!attribute [rw] subscription_name
     #   The name of the Amazon DocumentDB event notification subscription
@@ -3465,26 +3033,6 @@ module Aws::DocDB
     end
 
     # Represents the input to DescribeEvents.
-    #
-    # @note When making an API call, you may pass DescribeEventsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         source_identifier: "String",
-    #         source_type: "db-instance", # accepts db-instance, db-parameter-group, db-security-group, db-snapshot, db-cluster, db-cluster-snapshot
-    #         start_time: Time.now,
-    #         end_time: Time.now,
-    #         duration: 1,
-    #         event_categories: ["String"],
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
     #
     # @!attribute [rw] source_identifier
     #   The identifier of the event source for which events are returned. If
@@ -3577,21 +3125,6 @@ module Aws::DocDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeGlobalClustersMessage
-    #   data as a hash:
-    #
-    #       {
-    #         global_cluster_identifier: "GlobalClusterIdentifier",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] global_cluster_identifier
     #   The user-supplied cluster identifier. If this parameter is
     #   specified, information from only the specific cluster is returned.
@@ -3632,25 +3165,6 @@ module Aws::DocDB
     end
 
     # Represents the input to DescribeOrderableDBInstanceOptions.
-    #
-    # @note When making an API call, you may pass DescribeOrderableDBInstanceOptionsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         engine: "String", # required
-    #         engine_version: "String",
-    #         db_instance_class: "String",
-    #         license_model: "String",
-    #         vpc: false,
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
     #
     # @!attribute [rw] engine
     #   The name of the engine to retrieve instance options for.
@@ -3713,21 +3227,6 @@ module Aws::DocDB
     end
 
     # Represents the input to DescribePendingMaintenanceActions.
-    #
-    # @note When making an API call, you may pass DescribePendingMaintenanceActionsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         resource_identifier: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         marker: "String",
-    #         max_records: 1,
-    #       }
     #
     # @!attribute [rw] resource_identifier
     #   The ARN of a resource to return pending maintenance actions for.
@@ -4029,14 +3528,6 @@ module Aws::DocDB
 
     # Represents the input to FailoverDBCluster.
     #
-    # @note When making an API call, you may pass FailoverDBClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_identifier: "String",
-    #         target_db_instance_identifier: "String",
-    #       }
-    #
     # @!attribute [rw] db_cluster_identifier
     #   A cluster identifier to force a failover for. This parameter is not
     #   case sensitive.
@@ -4081,14 +3572,6 @@ module Aws::DocDB
     # criteria, such as IDs.
     #
     # Wildcards are not supported in filters.
-    #
-    # @note When making an API call, you may pass Filter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #         values: ["String"], # required
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the filter. Filter names are case sensitive.
@@ -4355,19 +3838,6 @@ module Aws::DocDB
 
     # Represents the input to ListTagsForResource.
     #
-    # @note When making an API call, you may pass ListTagsForResourceMessage
-    #   data as a hash:
-    #
-    #       {
-    #         resource_name: "String", # required
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_name
     #   The Amazon DocumentDB resource with tags to be listed. This value is
     #   an Amazon Resource Name (ARN).
@@ -4387,28 +3857,6 @@ module Aws::DocDB
     end
 
     # Represents the input to ModifyDBCluster.
-    #
-    # @note When making an API call, you may pass ModifyDBClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_identifier: "String", # required
-    #         new_db_cluster_identifier: "String",
-    #         apply_immediately: false,
-    #         backup_retention_period: 1,
-    #         db_cluster_parameter_group_name: "String",
-    #         vpc_security_group_ids: ["String"],
-    #         port: 1,
-    #         master_user_password: "String",
-    #         preferred_backup_window: "String",
-    #         preferred_maintenance_window: "String",
-    #         cloudwatch_logs_export_configuration: {
-    #           enable_log_types: ["String"],
-    #           disable_log_types: ["String"],
-    #         },
-    #         engine_version: "String",
-    #         deletion_protection: false,
-    #       }
     #
     # @!attribute [rw] db_cluster_identifier
     #   The cluster identifier for the cluster that is being modified. This
@@ -4569,27 +4017,6 @@ module Aws::DocDB
 
     # Represents the input to ModifyDBClusterParameterGroup.
     #
-    # @note When making an API call, you may pass ModifyDBClusterParameterGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_parameter_group_name: "String", # required
-    #         parameters: [ # required
-    #           {
-    #             parameter_name: "String",
-    #             parameter_value: "String",
-    #             description: "String",
-    #             source: "String",
-    #             apply_type: "String",
-    #             data_type: "String",
-    #             allowed_values: "String",
-    #             is_modifiable: false,
-    #             minimum_engine_version: "String",
-    #             apply_method: "immediate", # accepts immediate, pending-reboot
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] db_cluster_parameter_group_name
     #   The name of the cluster parameter group to modify.
     #   @return [String]
@@ -4620,16 +4047,6 @@ module Aws::DocDB
     end
 
     # Represents the input to ModifyDBClusterSnapshotAttribute.
-    #
-    # @note When making an API call, you may pass ModifyDBClusterSnapshotAttributeMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_snapshot_identifier: "String", # required
-    #         attribute_name: "String", # required
-    #         values_to_add: ["String"],
-    #         values_to_remove: ["String"],
-    #       }
     #
     # @!attribute [rw] db_cluster_snapshot_identifier
     #   The identifier for the cluster snapshot to modify the attributes
@@ -4696,23 +4113,6 @@ module Aws::DocDB
     end
 
     # Represents the input to ModifyDBInstance.
-    #
-    # @note When making an API call, you may pass ModifyDBInstanceMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_instance_identifier: "String", # required
-    #         db_instance_class: "String",
-    #         apply_immediately: false,
-    #         preferred_maintenance_window: "String",
-    #         auto_minor_version_upgrade: false,
-    #         new_db_instance_identifier: "String",
-    #         ca_certificate_identifier: "String",
-    #         copy_tags_to_snapshot: false,
-    #         promotion_tier: 1,
-    #         enable_performance_insights: false,
-    #         performance_insights_kms_key_id: "String",
-    #       }
     #
     # @!attribute [rw] db_instance_identifier
     #   The instance identifier. This value is stored as a lowercase string.
@@ -4869,15 +4269,6 @@ module Aws::DocDB
 
     # Represents the input to ModifyDBSubnetGroup.
     #
-    # @note When making an API call, you may pass ModifyDBSubnetGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_subnet_group_name: "String", # required
-    #         db_subnet_group_description: "String",
-    #         subnet_ids: ["String"], # required
-    #       }
-    #
     # @!attribute [rw] db_subnet_group_name
     #   The name for the subnet group. This value is stored as a lowercase
     #   string. You can't modify the default subnet group.
@@ -4919,17 +4310,6 @@ module Aws::DocDB
     end
 
     # Represents the input to ModifyEventSubscription.
-    #
-    # @note When making an API call, you may pass ModifyEventSubscriptionMessage
-    #   data as a hash:
-    #
-    #       {
-    #         subscription_name: "String", # required
-    #         sns_topic_arn: "String",
-    #         source_type: "String",
-    #         event_categories: ["String"],
-    #         enabled: false,
-    #       }
     #
     # @!attribute [rw] subscription_name
     #   The name of the Amazon DocumentDB event notification subscription.
@@ -4985,15 +4365,6 @@ module Aws::DocDB
     end
 
     # Represents the input to ModifyGlobalCluster.
-    #
-    # @note When making an API call, you may pass ModifyGlobalClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         global_cluster_identifier: "GlobalClusterIdentifier", # required
-    #         new_global_cluster_identifier: "GlobalClusterIdentifier",
-    #         deletion_protection: false,
-    #       }
     #
     # @!attribute [rw] global_cluster_identifier
     #   The identifier for the global cluster being modified. This parameter
@@ -5108,22 +4479,6 @@ module Aws::DocDB
     end
 
     # Detailed information about an individual parameter.
-    #
-    # @note When making an API call, you may pass Parameter
-    #   data as a hash:
-    #
-    #       {
-    #         parameter_name: "String",
-    #         parameter_value: "String",
-    #         description: "String",
-    #         source: "String",
-    #         apply_type: "String",
-    #         data_type: "String",
-    #         allowed_values: "String",
-    #         is_modifiable: false,
-    #         minimum_engine_version: "String",
-    #         apply_method: "immediate", # accepts immediate, pending-reboot
-    #       }
     #
     # @!attribute [rw] parameter_name
     #   Specifies the name of the parameter.
@@ -5371,14 +4726,6 @@ module Aws::DocDB
 
     # Represents the input to RebootDBInstance.
     #
-    # @note When making an API call, you may pass RebootDBInstanceMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_instance_identifier: "String", # required
-    #         force_failover: false,
-    #       }
-    #
     # @!attribute [rw] db_instance_identifier
     #   The instance identifier. This parameter is stored as a lowercase
     #   string.
@@ -5420,14 +4767,6 @@ module Aws::DocDB
 
     # Represents the input to RemoveFromGlobalCluster.
     #
-    # @note When making an API call, you may pass RemoveFromGlobalClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         global_cluster_identifier: "GlobalClusterIdentifier", # required
-    #         db_cluster_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] global_cluster_identifier
     #   The cluster identifier to detach from the Amazon DocumentDB global
     #   cluster.
@@ -5460,14 +4799,6 @@ module Aws::DocDB
     end
 
     # Represents the input to RemoveSourceIdentifierFromSubscription.
-    #
-    # @note When making an API call, you may pass RemoveSourceIdentifierFromSubscriptionMessage
-    #   data as a hash:
-    #
-    #       {
-    #         subscription_name: "String", # required
-    #         source_identifier: "String", # required
-    #       }
     #
     # @!attribute [rw] subscription_name
     #   The name of the Amazon DocumentDB event notification subscription
@@ -5503,14 +4834,6 @@ module Aws::DocDB
 
     # Represents the input to RemoveTagsFromResource.
     #
-    # @note When making an API call, you may pass RemoveTagsFromResourceMessage
-    #   data as a hash:
-    #
-    #       {
-    #         resource_name: "String", # required
-    #         tag_keys: ["String"], # required
-    #       }
-    #
     # @!attribute [rw] resource_name
     #   The Amazon DocumentDB resource that the tags are removed from. This
     #   value is an Amazon Resource Name (ARN).
@@ -5530,28 +4853,6 @@ module Aws::DocDB
     end
 
     # Represents the input to ResetDBClusterParameterGroup.
-    #
-    # @note When making an API call, you may pass ResetDBClusterParameterGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_parameter_group_name: "String", # required
-    #         reset_all_parameters: false,
-    #         parameters: [
-    #           {
-    #             parameter_name: "String",
-    #             parameter_value: "String",
-    #             description: "String",
-    #             source: "String",
-    #             apply_type: "String",
-    #             data_type: "String",
-    #             allowed_values: "String",
-    #             is_modifiable: false,
-    #             minimum_engine_version: "String",
-    #             apply_method: "immediate", # accepts immediate, pending-reboot
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] db_cluster_parameter_group_name
     #   The name of the cluster parameter group to reset.
@@ -5608,29 +4909,6 @@ module Aws::DocDB
     end
 
     # Represents the input to RestoreDBClusterFromSnapshot.
-    #
-    # @note When making an API call, you may pass RestoreDBClusterFromSnapshotMessage
-    #   data as a hash:
-    #
-    #       {
-    #         availability_zones: ["String"],
-    #         db_cluster_identifier: "String", # required
-    #         snapshot_identifier: "String", # required
-    #         engine: "String", # required
-    #         engine_version: "String",
-    #         port: 1,
-    #         db_subnet_group_name: "String",
-    #         vpc_security_group_ids: ["String"],
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #         kms_key_id: "String",
-    #         enable_cloudwatch_logs_exports: ["String"],
-    #         deletion_protection: false,
-    #       }
     #
     # @!attribute [rw] availability_zones
     #   Provides the list of Amazon EC2 Availability Zones that instances in
@@ -5770,29 +5048,6 @@ module Aws::DocDB
     end
 
     # Represents the input to RestoreDBClusterToPointInTime.
-    #
-    # @note When making an API call, you may pass RestoreDBClusterToPointInTimeMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_identifier: "String", # required
-    #         restore_type: "String",
-    #         source_db_cluster_identifier: "String", # required
-    #         restore_to_time: Time.now,
-    #         use_latest_restorable_time: false,
-    #         port: 1,
-    #         db_subnet_group_name: "String",
-    #         vpc_security_group_ids: ["String"],
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #         kms_key_id: "String",
-    #         enable_cloudwatch_logs_exports: ["String"],
-    #         deletion_protection: false,
-    #       }
     #
     # @!attribute [rw] db_cluster_identifier
     #   The name of the new cluster to be created.
@@ -5998,13 +5253,6 @@ module Aws::DocDB
     #
     class SourceNotFoundFault < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass StartDBClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] db_cluster_identifier
     #   The identifier of the cluster to restart. Example:
     #   `docdb-2019-05-28-15-24-52`
@@ -6030,13 +5278,6 @@ module Aws::DocDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopDBClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] db_cluster_identifier
     #   The identifier of the cluster to stop. Example:
     #   `docdb-2019-05-28-15-24-52`
@@ -6126,14 +5367,6 @@ module Aws::DocDB
 
     # Metadata assigned to an Amazon DocumentDB resource consisting of a
     # key-value pair.
-    #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "String",
-    #         value: "String",
-    #       }
     #
     # @!attribute [rw] key
     #   The required name of the tag. The string value can be from 1 to 128

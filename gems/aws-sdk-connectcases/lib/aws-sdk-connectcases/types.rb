@@ -26,40 +26,6 @@ module Aws::ConnectCases
     # Content specific to `BasicLayout` type. It configures fields in the
     # top panel and More Info tab of agent application.
     #
-    # @note When making an API call, you may pass BasicLayout
-    #   data as a hash:
-    #
-    #       {
-    #         more_info: {
-    #           sections: [
-    #             {
-    #               field_group: {
-    #                 fields: [ # required
-    #                   {
-    #                     id: "FieldId", # required
-    #                   },
-    #                 ],
-    #                 name: "FieldGroupNameString",
-    #               },
-    #             },
-    #           ],
-    #         },
-    #         top_panel: {
-    #           sections: [
-    #             {
-    #               field_group: {
-    #                 fields: [ # required
-    #                   {
-    #                     id: "FieldId", # required
-    #                   },
-    #                 ],
-    #                 name: "FieldGroupNameString",
-    #               },
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] more_info
     #   This represents sections in a tab of the page layout.
     #   @return [Types::LayoutSections]
@@ -77,18 +43,6 @@ module Aws::ConnectCases
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchGetFieldRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_id: "DomainId", # required
-    #         fields: [ # required
-    #           {
-    #             id: "FieldId", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] domain_id
     #   The unique identifier of the Cases domain.
     #   @return [String]
@@ -123,21 +77,6 @@ module Aws::ConnectCases
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchPutFieldOptionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_id: "DomainId", # required
-    #         field_id: "FieldId", # required
-    #         options: [ # required
-    #           {
-    #             active: false, # required
-    #             name: "FieldOptionName", # required
-    #             value: "FieldOptionValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] domain_id
     #   The unique identifier of the Cases domain.
     #   @return [String]
@@ -174,17 +113,6 @@ module Aws::ConnectCases
 
     # Details of what case data is published through the case event stream.
     #
-    # @note When making an API call, you may pass CaseEventIncludedData
-    #   data as a hash:
-    #
-    #       {
-    #         fields: [ # required
-    #           {
-    #             id: "FieldId", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] fields
     #   List of field identifiers.
     #   @return [Array<Types::FieldIdentifier>]
@@ -198,8 +126,6 @@ module Aws::ConnectCases
     end
 
     # A filter for cases. Only one value can be provided.
-    #
-    # @note CaseFilter is a union - when making an API calls you must set exactly one of the members.
     #
     # @!attribute [rw] and_all
     #   Provides "and all" filtering.
@@ -251,14 +177,6 @@ module Aws::ConnectCases
 
     # Represents the content of a `Comment` to be returned to agents.
     #
-    # @note When making an API call, you may pass CommentContent
-    #   data as a hash:
-    #
-    #       {
-    #         body: "CommentBody", # required
-    #         content_type: "Text/Plain", # required, accepts Text/Plain
-    #       }
-    #
     # @!attribute [rw] body
     #   Text in the body of a `Comment` on a case.
     #   @return [String]
@@ -277,8 +195,6 @@ module Aws::ConnectCases
     end
 
     # A filter for related items of type `Comment`.
-    #
-    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/CommentFilter AWS API Documentation
     #
@@ -301,13 +217,6 @@ module Aws::ConnectCases
     end
 
     # An object that represents an Amazon Connect contact object.
-    #
-    # @note When making an API call, you may pass Contact
-    #   data as a hash:
-    #
-    #       {
-    #         contact_arn: "ContactArn", # required
-    #       }
     #
     # @!attribute [rw] contact_arn
     #   A unique identifier of a contact in Amazon Connect.
@@ -349,14 +258,6 @@ module Aws::ConnectCases
 
     # A filter for related items of type `Contact`.
     #
-    # @note When making an API call, you may pass ContactFilter
-    #   data as a hash:
-    #
-    #       {
-    #         channel: ["Channel"],
-    #         contact_arn: "ContactArn",
-    #       }
-    #
     # @!attribute [rw] channel
     #   A list of channels to filter on for related items of type `Contact`.
     #   @return [Array<String>]
@@ -374,25 +275,6 @@ module Aws::ConnectCases
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateCaseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "CreateCaseRequestClientTokenString",
-    #         domain_id: "DomainId", # required
-    #         fields: [ # required
-    #           {
-    #             id: "FieldId", # required
-    #             value: { # required
-    #               boolean_value: false,
-    #               double_value: 1.0,
-    #               string_value: "FieldValueUnionStringValueString",
-    #             },
-    #           },
-    #         ],
-    #         template_id: "TemplateId", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If not provided, the Amazon Web Services
@@ -448,13 +330,6 @@ module Aws::ConnectCases
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "DomainName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name for your Cases domain. It must be unique for your Amazon
     #   Web Services account.
@@ -490,16 +365,6 @@ module Aws::ConnectCases
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateFieldRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "FieldDescription",
-    #         domain_id: "DomainId", # required
-    #         name: "FieldName", # required
-    #         type: "Text", # required, accepts Text, Number, Boolean, DateTime, SingleSelect
-    #       }
-    #
     # @!attribute [rw] description
     #   The description of the field.
     #   @return [String]
@@ -545,46 +410,6 @@ module Aws::ConnectCases
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateLayoutRequest
-    #   data as a hash:
-    #
-    #       {
-    #         content: { # required
-    #           basic: {
-    #             more_info: {
-    #               sections: [
-    #                 {
-    #                   field_group: {
-    #                     fields: [ # required
-    #                       {
-    #                         id: "FieldId", # required
-    #                       },
-    #                     ],
-    #                     name: "FieldGroupNameString",
-    #                   },
-    #                 },
-    #               ],
-    #             },
-    #             top_panel: {
-    #               sections: [
-    #                 {
-    #                   field_group: {
-    #                     fields: [ # required
-    #                       {
-    #                         id: "FieldId", # required
-    #                       },
-    #                     ],
-    #                     name: "FieldGroupNameString",
-    #                   },
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #         },
-    #         domain_id: "DomainId", # required
-    #         name: "LayoutName", # required
-    #       }
-    #
     # @!attribute [rw] content
     #   Information about which fields will be present in the layout, and
     #   information about the order of the fields.
@@ -625,24 +450,6 @@ module Aws::ConnectCases
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateRelatedItemRequest
-    #   data as a hash:
-    #
-    #       {
-    #         case_id: "CaseId", # required
-    #         content: { # required
-    #           comment: {
-    #             body: "CommentBody", # required
-    #             content_type: "Text/Plain", # required, accepts Text/Plain
-    #           },
-    #           contact: {
-    #             contact_arn: "ContactArn", # required
-    #           },
-    #         },
-    #         domain_id: "DomainId", # required
-    #         type: "Contact", # required, accepts Contact, Comment
-    #       }
-    #
     # @!attribute [rw] case_id
     #   A unique identifier of the case.
     #   @return [String]
@@ -687,24 +494,6 @@ module Aws::ConnectCases
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "TemplateDescription",
-    #         domain_id: "DomainId", # required
-    #         layout_configuration: {
-    #           default_layout: "LayoutId",
-    #         },
-    #         name: "TemplateName", # required
-    #         required_fields: [
-    #           {
-    #             field_id: "FieldId", # required
-    #           },
-    #         ],
-    #         status: "Active", # accepts Active, Inactive
-    #       }
-    #
     # @!attribute [rw] description
     #   A brief description of the template.
     #   @return [String]
@@ -787,25 +576,6 @@ module Aws::ConnectCases
     # Configuration to enable EventBridge case event delivery and determine
     # what data is delivered.
     #
-    # @note When making an API call, you may pass EventBridgeConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false, # required
-    #         included_data: {
-    #           case_data: {
-    #             fields: [ # required
-    #               {
-    #                 id: "FieldId", # required
-    #               },
-    #             ],
-    #           },
-    #           related_item_data: {
-    #             include_content: false, # required
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] enabled
     #   Indicates whether the to broadcast case event data to the customer.
     #   @return [Boolean]
@@ -826,22 +596,6 @@ module Aws::ConnectCases
 
     # Details of what case and related item data is published through the
     # case event stream.
-    #
-    # @note When making an API call, you may pass EventIncludedData
-    #   data as a hash:
-    #
-    #       {
-    #         case_data: {
-    #           fields: [ # required
-    #             {
-    #               id: "FieldId", # required
-    #             },
-    #           ],
-    #         },
-    #         related_item_data: {
-    #           include_content: false, # required
-    #         },
-    #       }
     #
     # @!attribute [rw] case_data
     #   Details of what case data is published through the case event
@@ -887,8 +641,6 @@ module Aws::ConnectCases
     end
 
     # A filter for fields. Only one value can be provided.
-    #
-    # @note FieldFilter is a union - when making an API calls you must set exactly one of the members.
     #
     # @!attribute [rw] contains
     #   Object containing field identifier and value information.
@@ -939,18 +691,6 @@ module Aws::ConnectCases
 
     # Object for a group of fields and associated properties.
     #
-    # @note When making an API call, you may pass FieldGroup
-    #   data as a hash:
-    #
-    #       {
-    #         fields: [ # required
-    #           {
-    #             id: "FieldId", # required
-    #           },
-    #         ],
-    #         name: "FieldGroupNameString",
-    #       }
-    #
     # @!attribute [rw] fields
     #   Represents an ordered list containing field related information.
     #   @return [Array<Types::FieldItem>]
@@ -970,13 +710,6 @@ module Aws::ConnectCases
 
     # Object for unique identifier of a field.
     #
-    # @note When making an API call, you may pass FieldIdentifier
-    #   data as a hash:
-    #
-    #       {
-    #         id: "FieldId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   Unique identifier of a field.
     #   @return [String]
@@ -991,13 +724,6 @@ module Aws::ConnectCases
 
     # Object for field related information.
     #
-    # @note When making an API call, you may pass FieldItem
-    #   data as a hash:
-    #
-    #       {
-    #         id: "FieldId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   Unique identifier of a field.
     #   @return [String]
@@ -1011,15 +737,6 @@ module Aws::ConnectCases
     end
 
     # Object for field Options information.
-    #
-    # @note When making an API call, you may pass FieldOption
-    #   data as a hash:
-    #
-    #       {
-    #         active: false, # required
-    #         name: "FieldOptionName", # required
-    #         value: "FieldOptionValue", # required
-    #       }
     #
     # @!attribute [rw] active
     #   Describes whether the `FieldOption` is active (displayed) or
@@ -1105,18 +822,6 @@ module Aws::ConnectCases
 
     # Object for case field values.
     #
-    # @note When making an API call, you may pass FieldValue
-    #   data as a hash:
-    #
-    #       {
-    #         id: "FieldId", # required
-    #         value: { # required
-    #           boolean_value: false,
-    #           double_value: 1.0,
-    #           string_value: "FieldValueUnionStringValueString",
-    #         },
-    #       }
-    #
     # @!attribute [rw] id
     #   Unique identifier of a field.
     #   @return [String]
@@ -1135,10 +840,6 @@ module Aws::ConnectCases
     end
 
     # Object to store union of Field values.
-    #
-    # @note FieldValueUnion is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note FieldValueUnion is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of FieldValueUnion corresponding to the set member.
     #
     # @!attribute [rw] boolean_value
     #   Can be either null, or have a Boolean value type. Only one value can
@@ -1171,13 +872,6 @@ module Aws::ConnectCases
       class Unknown < FieldValueUnion; end
     end
 
-    # @note When making an API call, you may pass GetCaseEventConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_id: "DomainId", # required
-    #       }
-    #
     # @!attribute [rw] domain_id
     #   The unique identifier of the Cases domain.
     #   @return [String]
@@ -1203,20 +897,6 @@ module Aws::ConnectCases
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetCaseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         case_id: "CaseId", # required
-    #         domain_id: "DomainId", # required
-    #         fields: [ # required
-    #           {
-    #             id: "FieldId", # required
-    #           },
-    #         ],
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] case_id
     #   A unique identifier of the case.
     #   @return [String]
@@ -1275,13 +955,6 @@ module Aws::ConnectCases
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_id: "DomainId", # required
-    #       }
-    #
     # @!attribute [rw] domain_id
     #   The unique identifier of the Cases domain.
     #   @return [String]
@@ -1377,14 +1050,6 @@ module Aws::ConnectCases
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLayoutRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_id: "DomainId", # required
-    #         layout_id: "LayoutId", # required
-    #       }
-    #
     # @!attribute [rw] domain_id
     #   The unique identifier of the Cases domain.
     #   @return [String]
@@ -1436,14 +1101,6 @@ module Aws::ConnectCases
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_id: "DomainId", # required
-    #         template_id: "TemplateId", # required
-    #       }
-    #
     # @!attribute [rw] domain_id
     #   The unique identifier of the Cases domain.
     #   @return [String]
@@ -1531,13 +1188,6 @@ module Aws::ConnectCases
 
     # Object to store configuration of layouts associated to the template.
     #
-    # @note When making an API call, you may pass LayoutConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         default_layout: "LayoutId",
-    #       }
-    #
     # @!attribute [rw] default_layout
     #   Unique identifier of a layout.
     #   @return [String]
@@ -1551,10 +1201,6 @@ module Aws::ConnectCases
     end
 
     # Object to store union of different versions of layout content.
-    #
-    # @note LayoutContent is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note LayoutContent is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of LayoutContent corresponding to the set member.
     #
     # @!attribute [rw] basic
     #   Content specific to `BasicLayout` type. It configures fields in the
@@ -1576,24 +1222,6 @@ module Aws::ConnectCases
 
     # Ordered list containing different kinds of sections that can be added.
     # A LayoutSections object can only contain one section.
-    #
-    # @note When making an API call, you may pass LayoutSections
-    #   data as a hash:
-    #
-    #       {
-    #         sections: [
-    #           {
-    #             field_group: {
-    #               fields: [ # required
-    #                 {
-    #                   id: "FieldId", # required
-    #                 },
-    #               ],
-    #               name: "FieldGroupNameString",
-    #             },
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] sections
     #   Ordered list containing different kinds of sections that can be
@@ -1632,16 +1260,6 @@ module Aws::ConnectCases
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCasesForContactRequest
-    #   data as a hash:
-    #
-    #       {
-    #         contact_arn: "ContactArn", # required
-    #         domain_id: "DomainId", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] contact_arn
     #   A unique identifier of a contact in Amazon Connect.
     #   @return [String]
@@ -1689,14 +1307,6 @@ module Aws::ConnectCases
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDomainsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to return per page.
     #   @return [Integer]
@@ -1734,17 +1344,6 @@ module Aws::ConnectCases
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFieldOptionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_id: "DomainId", # required
-    #         field_id: "FieldId", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         values: ["Value"],
-    #       }
-    #
     # @!attribute [rw] domain_id
     #   The unique identifier of the Cases domain.
     #   @return [String]
@@ -1797,15 +1396,6 @@ module Aws::ConnectCases
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFieldsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_id: "DomainId", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] domain_id
     #   The unique identifier of the Cases domain.
     #   @return [String]
@@ -1848,15 +1438,6 @@ module Aws::ConnectCases
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListLayoutsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_id: "DomainId", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] domain_id
     #   The unique identifier of the Cases domain.
     #   @return [String]
@@ -1899,13 +1480,6 @@ module Aws::ConnectCases
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN)
     #   @return [String]
@@ -1931,16 +1505,6 @@ module Aws::ConnectCases
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTemplatesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_id: "DomainId", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         status: ["Active"], # accepts Active, Inactive
-    #       }
-    #
     # @!attribute [rw] domain_id
     #   The unique identifier of the Cases domain.
     #   @return [String]
@@ -1988,28 +1552,6 @@ module Aws::ConnectCases
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutCaseEventConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_id: "DomainId", # required
-    #         event_bridge: { # required
-    #           enabled: false, # required
-    #           included_data: {
-    #             case_data: {
-    #               fields: [ # required
-    #                 {
-    #                   id: "FieldId", # required
-    #                 },
-    #               ],
-    #             },
-    #             related_item_data: {
-    #               include_content: false, # required
-    #             },
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] domain_id
     #   The unique identifier of the Cases domain.
     #   @return [String]
@@ -2033,8 +1575,6 @@ module Aws::ConnectCases
     class PutCaseEventConfigurationResponse < Aws::EmptyStructure; end
 
     # Represents the content of a particular type of related item.
-    #
-    # @note RelatedItemContent is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of RelatedItemContent corresponding to the set member.
     #
     # @!attribute [rw] comment
     #   Represents the content of a comment to be returned to agents.
@@ -2062,13 +1602,6 @@ module Aws::ConnectCases
     # Details of what related item data is published through the case event
     # stream.
     #
-    # @note When making an API call, you may pass RelatedItemEventIncludedData
-    #   data as a hash:
-    #
-    #       {
-    #         include_content: false, # required
-    #       }
-    #
     # @!attribute [rw] include_content
     #   Details of what related item data is published through the case
     #   event stream.
@@ -2083,8 +1616,6 @@ module Aws::ConnectCases
     end
 
     # Represents the content of a related item to be created.
-    #
-    # @note RelatedItemInputContent is a union - when making an API calls you must set exactly one of the members.
     #
     # @!attribute [rw] comment
     #   Represents the content of a comment to be returned to agents.
@@ -2113,8 +1644,6 @@ module Aws::ConnectCases
     # The list of types of related items and their parameters to use for
     # filtering.
     #
-    # @note RelatedItemTypeFilter is a union - when making an API calls you must set exactly one of the members.
-    #
     # @!attribute [rw] comment
     #   A filter for related items of type `Comment`.
     #   @return [Types::CommentFilter]
@@ -2139,13 +1668,6 @@ module Aws::ConnectCases
     end
 
     # List of fields that must have a value provided to create a case.
-    #
-    # @note When making an API call, you may pass RequiredField
-    #   data as a hash:
-    #
-    #       {
-    #         field_id: "FieldId", # required
-    #       }
     #
     # @!attribute [rw] field_id
     #   Unique identifier of a field.
@@ -2184,87 +1706,6 @@ module Aws::ConnectCases
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SearchCasesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_id: "DomainId", # required
-    #         fields: [
-    #           {
-    #             id: "FieldId", # required
-    #           },
-    #         ],
-    #         filter: {
-    #           and_all: [
-    #             {
-    #               # recursive CaseFilter
-    #             },
-    #           ],
-    #           field: {
-    #             contains: {
-    #               id: "FieldId", # required
-    #               value: { # required
-    #                 boolean_value: false,
-    #                 double_value: 1.0,
-    #                 string_value: "FieldValueUnionStringValueString",
-    #               },
-    #             },
-    #             equal_to: {
-    #               id: "FieldId", # required
-    #               value: { # required
-    #                 boolean_value: false,
-    #                 double_value: 1.0,
-    #                 string_value: "FieldValueUnionStringValueString",
-    #               },
-    #             },
-    #             greater_than: {
-    #               id: "FieldId", # required
-    #               value: { # required
-    #                 boolean_value: false,
-    #                 double_value: 1.0,
-    #                 string_value: "FieldValueUnionStringValueString",
-    #               },
-    #             },
-    #             greater_than_or_equal_to: {
-    #               id: "FieldId", # required
-    #               value: { # required
-    #                 boolean_value: false,
-    #                 double_value: 1.0,
-    #                 string_value: "FieldValueUnionStringValueString",
-    #               },
-    #             },
-    #             less_than: {
-    #               id: "FieldId", # required
-    #               value: { # required
-    #                 boolean_value: false,
-    #                 double_value: 1.0,
-    #                 string_value: "FieldValueUnionStringValueString",
-    #               },
-    #             },
-    #             less_than_or_equal_to: {
-    #               id: "FieldId", # required
-    #               value: { # required
-    #                 boolean_value: false,
-    #                 double_value: 1.0,
-    #                 string_value: "FieldValueUnionStringValueString",
-    #               },
-    #             },
-    #           },
-    #           not: {
-    #             # recursive CaseFilter
-    #           },
-    #         },
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         search_term: "SearchCasesRequestSearchTermString",
-    #         sorts: [
-    #           {
-    #             field_id: "FieldId", # required
-    #             sort_order: "Asc", # required, accepts Asc, Desc
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] domain_id
     #   The unique identifier of the Cases domain.
     #   @return [String]
@@ -2362,26 +1803,6 @@ module Aws::ConnectCases
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SearchRelatedItemsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         case_id: "CaseId", # required
-    #         domain_id: "DomainId", # required
-    #         filters: [
-    #           {
-    #             comment: {
-    #             },
-    #             contact: {
-    #               channel: ["Channel"],
-    #               contact_arn: "ContactArn",
-    #             },
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] case_id
     #   A unique identifier of the case.
     #   @return [String]
@@ -2472,10 +1893,6 @@ module Aws::ConnectCases
 
     # This represents a sections within a panel or tab of the page layout.
     #
-    # @note Section is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note Section is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Section corresponding to the set member.
-    #
     # @!attribute [rw] field_group
     #   Consists of a group of fields and associated properties.
     #   @return [Types::FieldGroup]
@@ -2514,14 +1931,6 @@ module Aws::ConnectCases
 
     # A structured set of sort terms.
     #
-    # @note When making an API call, you may pass Sort
-    #   data as a hash:
-    #
-    #       {
-    #         field_id: "FieldId", # required
-    #         sort_order: "Asc", # required, accepts Asc, Desc
-    #       }
-    #
     # @!attribute [rw] field_id
     #   Unique identifier of a field.
     #   @return [String]
@@ -2539,16 +1948,6 @@ module Aws::ConnectCases
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "Arn", # required
-    #         tags: { # required
-    #           "String" => "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN)
     #   @return [String]
@@ -2610,14 +2009,6 @@ module Aws::ConnectCases
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "Arn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN)
     #   @return [String]
@@ -2635,24 +2026,6 @@ module Aws::ConnectCases
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateCaseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         case_id: "CaseId", # required
-    #         domain_id: "DomainId", # required
-    #         fields: [ # required
-    #           {
-    #             id: "FieldId", # required
-    #             value: { # required
-    #               boolean_value: false,
-    #               double_value: 1.0,
-    #               string_value: "FieldValueUnionStringValueString",
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] case_id
     #   A unique identifier of the case.
     #   @return [String]
@@ -2681,16 +2054,6 @@ module Aws::ConnectCases
     #
     class UpdateCaseResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateFieldRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "FieldDescription",
-    #         domain_id: "DomainId", # required
-    #         field_id: "FieldId", # required
-    #         name: "FieldName",
-    #       }
-    #
     # @!attribute [rw] description
     #   The description of a field.
     #   @return [String]
@@ -2722,47 +2085,6 @@ module Aws::ConnectCases
     #
     class UpdateFieldResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateLayoutRequest
-    #   data as a hash:
-    #
-    #       {
-    #         content: {
-    #           basic: {
-    #             more_info: {
-    #               sections: [
-    #                 {
-    #                   field_group: {
-    #                     fields: [ # required
-    #                       {
-    #                         id: "FieldId", # required
-    #                       },
-    #                     ],
-    #                     name: "FieldGroupNameString",
-    #                   },
-    #                 },
-    #               ],
-    #             },
-    #             top_panel: {
-    #               sections: [
-    #                 {
-    #                   field_group: {
-    #                     fields: [ # required
-    #                       {
-    #                         id: "FieldId", # required
-    #                       },
-    #                     ],
-    #                     name: "FieldGroupNameString",
-    #                   },
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #         },
-    #         domain_id: "DomainId", # required
-    #         layout_id: "LayoutId", # required
-    #         name: "LayoutName",
-    #       }
-    #
     # @!attribute [rw] content
     #   Information about which fields will be present in the layout, the
     #   order of the fields, and a read-only attribute of the field.
@@ -2795,25 +2117,6 @@ module Aws::ConnectCases
     #
     class UpdateLayoutResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "TemplateDescription",
-    #         domain_id: "DomainId", # required
-    #         layout_configuration: {
-    #           default_layout: "LayoutId",
-    #         },
-    #         name: "TemplateName",
-    #         required_fields: [
-    #           {
-    #             field_id: "FieldId", # required
-    #           },
-    #         ],
-    #         status: "Active", # accepts Active, Inactive
-    #         template_id: "TemplateId", # required
-    #       }
-    #
     # @!attribute [rw] description
     #   A brief description of the template.
     #   @return [String]

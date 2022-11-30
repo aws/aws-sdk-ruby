@@ -25,16 +25,6 @@ module Aws::Pricing
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeServicesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_code: "String",
-    #         format_version: "String",
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] service_code
     #   The code for the service whose information you want to retrieve,
     #   such as `AmazonEC2`. You can use the `ServiceCode` to filter the
@@ -106,15 +96,6 @@ module Aws::Pricing
 
     # The constraints that you want all returned products to match.
     #
-    # @note When making an API call, you may pass Filter
-    #   data as a hash:
-    #
-    #       {
-    #         type: "TERM_MATCH", # required, accepts TERM_MATCH
-    #         field: "String", # required
-    #         value: "String", # required
-    #       }
-    #
     # @!attribute [rw] type
     #   The type of filter that you want to use.
     #
@@ -154,16 +135,6 @@ module Aws::Pricing
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAttributeValuesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_code: "String", # required
-    #         attribute_name: "String", # required
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] service_code
     #   The service code for the service whose attributes you want to
     #   retrieve. For example, if you want the retrieve an EC2 attribute,
@@ -215,23 +186,6 @@ module Aws::Pricing
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetProductsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_code: "String", # required
-    #         filters: [
-    #           {
-    #             type: "TERM_MATCH", # required, accepts TERM_MATCH
-    #             field: "String", # required
-    #             value: "String", # required
-    #           },
-    #         ],
-    #         format_version: "String",
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] service_code
     #   The code for the service whose products you want to retrieve.
     #   @return [String]

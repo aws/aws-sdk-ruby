@@ -102,15 +102,6 @@ module Aws::ChimeSDKMeetings
     #   streams, but only after media renegotiation between the client and
     #   the Amazon Chime back-end server.
     #
-    # @note When making an API call, you may pass AttendeeCapabilities
-    #   data as a hash:
-    #
-    #       {
-    #         audio: "SendReceive", # required, accepts SendReceive, Send, Receive, None
-    #         video: "SendReceive", # required, accepts SendReceive, Send, Receive, None
-    #         content: "SendReceive", # required, accepts SendReceive, Send, Receive, None
-    #       }
-    #
     # @!attribute [rw] audio
     #   The audio capability assigned to an attendee.
     #   @return [String]
@@ -135,13 +126,6 @@ module Aws::ChimeSDKMeetings
 
     # A structure that contains one or more attendee IDs.
     #
-    # @note When making an API call, you may pass AttendeeIdItem
-    #   data as a hash:
-    #
-    #       {
-    #         attendee_id: "GuidString", # required
-    #       }
-    #
     # @!attribute [rw] attendee_id
     #   A list of one or more attendee IDs.
     #   @return [String]
@@ -156,13 +140,6 @@ module Aws::ChimeSDKMeetings
 
     # An optional category of meeting features that contains audio-specific
     # configurations, such as operating parameters for Amazon Voice Focus.
-    #
-    # @note When making an API call, you may pass AudioFeatures
-    #   data as a hash:
-    #
-    #       {
-    #         echo_reduction: "AVAILABLE", # accepts AVAILABLE, UNAVAILABLE
-    #       }
     #
     # @!attribute [rw] echo_reduction
     #   Makes echo reduction available to clients who connect to the
@@ -200,23 +177,6 @@ module Aws::ChimeSDKMeetings
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchCreateAttendeeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         meeting_id: "GuidString", # required
-    #         attendees: [ # required
-    #           {
-    #             external_user_id: "ExternalUserId", # required
-    #             capabilities: {
-    #               audio: "SendReceive", # required, accepts SendReceive, Send, Receive, None
-    #               video: "SendReceive", # required, accepts SendReceive, Send, Receive, None
-    #               content: "SendReceive", # required, accepts SendReceive, Send, Receive, None
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] meeting_id
     #   The Amazon Chime SDK ID of the meeting to which you're adding
     #   attendees.
@@ -254,23 +214,6 @@ module Aws::ChimeSDKMeetings
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchUpdateAttendeeCapabilitiesExceptRequest
-    #   data as a hash:
-    #
-    #       {
-    #         meeting_id: "GuidString", # required
-    #         excluded_attendee_ids: [ # required
-    #           {
-    #             attendee_id: "GuidString", # required
-    #           },
-    #         ],
-    #         capabilities: { # required
-    #           audio: "SendReceive", # required, accepts SendReceive, Send, Receive, None
-    #           video: "SendReceive", # required, accepts SendReceive, Send, Receive, None
-    #           content: "SendReceive", # required, accepts SendReceive, Send, Receive, None
-    #         },
-    #       }
-    #
     # @!attribute [rw] meeting_id
     #   The ID of the meeting associated with the update request.
     #   @return [String]
@@ -344,19 +287,6 @@ module Aws::ChimeSDKMeetings
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAttendeeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         meeting_id: "GuidString", # required
-    #         external_user_id: "ExternalUserId", # required
-    #         capabilities: {
-    #           audio: "SendReceive", # required, accepts SendReceive, Send, Receive, None
-    #           video: "SendReceive", # required, accepts SendReceive, Send, Receive, None
-    #           content: "SendReceive", # required, accepts SendReceive, Send, Receive, None
-    #         },
-    #       }
-    #
     # @!attribute [rw] meeting_id
     #   The unique ID of the meeting.
     #   @return [String]
@@ -411,18 +341,6 @@ module Aws::ChimeSDKMeetings
     # The Amazon Chime SDK attendee fields to create, used with the
     # BatchCreateAttendee action.
     #
-    # @note When making an API call, you may pass CreateAttendeeRequestItem
-    #   data as a hash:
-    #
-    #       {
-    #         external_user_id: "ExternalUserId", # required
-    #         capabilities: {
-    #           audio: "SendReceive", # required, accepts SendReceive, Send, Receive, None
-    #           video: "SendReceive", # required, accepts SendReceive, Send, Receive, None
-    #           content: "SendReceive", # required, accepts SendReceive, Send, Receive, None
-    #         },
-    #       }
-    #
     # @!attribute [rw] external_user_id
     #   The Amazon Chime SDK external user ID. An idempotency token. Links
     #   the attendee to an identity managed by a builder application.
@@ -453,34 +371,6 @@ module Aws::ChimeSDKMeetings
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateMeetingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_request_token: "ClientRequestToken", # required
-    #         media_region: "MediaRegion", # required
-    #         meeting_host_id: "ExternalUserId",
-    #         external_meeting_id: "ExternalMeetingId", # required
-    #         notifications_configuration: {
-    #           lambda_function_arn: "Arn",
-    #           sns_topic_arn: "Arn",
-    #           sqs_queue_arn: "Arn",
-    #         },
-    #         meeting_features: {
-    #           audio: {
-    #             echo_reduction: "AVAILABLE", # accepts AVAILABLE, UNAVAILABLE
-    #           },
-    #         },
-    #         primary_meeting_id: "PrimaryMeetingId",
-    #         tenant_ids: ["TenantId"],
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] client_request_token
     #   The unique identifier for the client request. Use a different token
     #   for different meetings.
@@ -612,44 +502,6 @@ module Aws::ChimeSDKMeetings
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateMeetingWithAttendeesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_request_token: "ClientRequestToken", # required
-    #         media_region: "MediaRegion", # required
-    #         meeting_host_id: "ExternalUserId",
-    #         external_meeting_id: "ExternalMeetingId", # required
-    #         meeting_features: {
-    #           audio: {
-    #             echo_reduction: "AVAILABLE", # accepts AVAILABLE, UNAVAILABLE
-    #           },
-    #         },
-    #         notifications_configuration: {
-    #           lambda_function_arn: "Arn",
-    #           sns_topic_arn: "Arn",
-    #           sqs_queue_arn: "Arn",
-    #         },
-    #         attendees: [ # required
-    #           {
-    #             external_user_id: "ExternalUserId", # required
-    #             capabilities: {
-    #               audio: "SendReceive", # required, accepts SendReceive, Send, Receive, None
-    #               video: "SendReceive", # required, accepts SendReceive, Send, Receive, None
-    #               content: "SendReceive", # required, accepts SendReceive, Send, Receive, None
-    #             },
-    #           },
-    #         ],
-    #         primary_meeting_id: "PrimaryMeetingId",
-    #         tenant_ids: ["TenantId"],
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] client_request_token
     #   The unique identifier for the client request. Use a different token
     #   for different meetings.
@@ -749,14 +601,6 @@ module Aws::ChimeSDKMeetings
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAttendeeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         meeting_id: "GuidString", # required
-    #         attendee_id: "GuidString", # required
-    #       }
-    #
     # @!attribute [rw] meeting_id
     #   The Amazon Chime SDK meeting ID.
     #   @return [String]
@@ -774,13 +618,6 @@ module Aws::ChimeSDKMeetings
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteMeetingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         meeting_id: "GuidString", # required
-    #       }
-    #
     # @!attribute [rw] meeting_id
     #   The Amazon Chime SDK meeting ID.
     #   @return [String]
@@ -794,18 +631,6 @@ module Aws::ChimeSDKMeetings
     end
 
     # Settings specific to the Amazon Transcribe Medical engine.
-    #
-    # @note When making an API call, you may pass EngineTranscribeMedicalSettings
-    #   data as a hash:
-    #
-    #       {
-    #         language_code: "en-US", # required, accepts en-US
-    #         specialty: "PRIMARYCARE", # required, accepts PRIMARYCARE, CARDIOLOGY, NEUROLOGY, ONCOLOGY, RADIOLOGY, UROLOGY
-    #         type: "CONVERSATION", # required, accepts CONVERSATION, DICTATION
-    #         vocabulary_name: "String",
-    #         region: "us-east-1", # accepts us-east-1, us-east-2, us-west-2, ap-southeast-2, ca-central-1, eu-west-1, auto
-    #         content_identification_type: "PHI", # accepts PHI
-    #       }
     #
     # @!attribute [rw] language_code
     #   The language code specified for the Amazon Transcribe Medical
@@ -848,26 +673,6 @@ module Aws::ChimeSDKMeetings
     end
 
     # Settings specific to the Amazon Transcribe engine.
-    #
-    # @note When making an API call, you may pass EngineTranscribeSettings
-    #   data as a hash:
-    #
-    #       {
-    #         language_code: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
-    #         vocabulary_filter_method: "remove", # accepts remove, mask, tag
-    #         vocabulary_filter_name: "String",
-    #         vocabulary_name: "String",
-    #         region: "us-east-2", # accepts us-east-2, us-east-1, us-west-2, ap-northeast-2, ap-southeast-2, ap-northeast-1, ca-central-1, eu-central-1, eu-west-1, eu-west-2, sa-east-1, auto, us-gov-west-1
-    #         enable_partial_results_stabilization: false,
-    #         partial_results_stability: "low", # accepts low, medium, high
-    #         content_identification_type: "PII", # accepts PII
-    #         content_redaction_type: "PII", # accepts PII
-    #         pii_entity_types: "TranscribePiiEntityTypes",
-    #         language_model_name: "TranscribeLanguageModelName",
-    #         identify_language: false,
-    #         language_options: "TranscribeLanguageOptions",
-    #         preferred_language: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
-    #       }
     #
     # @!attribute [rw] language_code
     #   The language code specified for the Amazon Transcribe engine.
@@ -992,14 +797,6 @@ module Aws::ChimeSDKMeetings
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAttendeeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         meeting_id: "GuidString", # required
-    #         attendee_id: "GuidString", # required
-    #       }
-    #
     # @!attribute [rw] meeting_id
     #   The Amazon Chime SDK meeting ID.
     #   @return [String]
@@ -1029,13 +826,6 @@ module Aws::ChimeSDKMeetings
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetMeetingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         meeting_id: "GuidString", # required
-    #       }
-    #
     # @!attribute [rw] meeting_id
     #   The Amazon Chime SDK meeting ID.
     #   @return [String]
@@ -1083,15 +873,6 @@ module Aws::ChimeSDKMeetings
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAttendeesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         meeting_id: "GuidString", # required
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] meeting_id
     #   The Amazon Chime SDK meeting ID.
     #   @return [String]
@@ -1131,13 +912,6 @@ module Aws::ChimeSDKMeetings
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource.
     #   @return [String]
@@ -1276,15 +1050,6 @@ module Aws::ChimeSDKMeetings
 
     # The configuration settings of the features available to a meeting.&gt;
     #
-    # @note When making an API call, you may pass MeetingFeaturesConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         audio: {
-    #           echo_reduction: "AVAILABLE", # accepts AVAILABLE, UNAVAILABLE
-    #         },
-    #       }
-    #
     # @!attribute [rw] audio
     #   The configuration settings for the audio features available to a
     #   meeting.
@@ -1324,15 +1089,6 @@ module Aws::ChimeSDKMeetings
 
     # The configuration for resource targets to receive notifications when
     # meeting and attendee events occur.
-    #
-    # @note When making an API call, you may pass NotificationsConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         lambda_function_arn: "Arn",
-    #         sns_topic_arn: "Arn",
-    #         sqs_queue_arn: "Arn",
-    #       }
     #
     # @!attribute [rw] lambda_function_arn
     #   The ARN of the AWS Lambda function in the notifications
@@ -1434,39 +1190,6 @@ module Aws::ChimeSDKMeetings
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartMeetingTranscriptionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         meeting_id: "GuidString", # required
-    #         transcription_configuration: { # required
-    #           engine_transcribe_settings: {
-    #             language_code: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
-    #             vocabulary_filter_method: "remove", # accepts remove, mask, tag
-    #             vocabulary_filter_name: "String",
-    #             vocabulary_name: "String",
-    #             region: "us-east-2", # accepts us-east-2, us-east-1, us-west-2, ap-northeast-2, ap-southeast-2, ap-northeast-1, ca-central-1, eu-central-1, eu-west-1, eu-west-2, sa-east-1, auto, us-gov-west-1
-    #             enable_partial_results_stabilization: false,
-    #             partial_results_stability: "low", # accepts low, medium, high
-    #             content_identification_type: "PII", # accepts PII
-    #             content_redaction_type: "PII", # accepts PII
-    #             pii_entity_types: "TranscribePiiEntityTypes",
-    #             language_model_name: "TranscribeLanguageModelName",
-    #             identify_language: false,
-    #             language_options: "TranscribeLanguageOptions",
-    #             preferred_language: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
-    #           },
-    #           engine_transcribe_medical_settings: {
-    #             language_code: "en-US", # required, accepts en-US
-    #             specialty: "PRIMARYCARE", # required, accepts PRIMARYCARE, CARDIOLOGY, NEUROLOGY, ONCOLOGY, RADIOLOGY, UROLOGY
-    #             type: "CONVERSATION", # required, accepts CONVERSATION, DICTATION
-    #             vocabulary_name: "String",
-    #             region: "us-east-1", # accepts us-east-1, us-east-2, us-west-2, ap-southeast-2, ca-central-1, eu-west-1, auto
-    #             content_identification_type: "PHI", # accepts PHI
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] meeting_id
     #   The unique ID of the meeting being transcribed.
     #   @return [String]
@@ -1486,13 +1209,6 @@ module Aws::ChimeSDKMeetings
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopMeetingTranscriptionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         meeting_id: "GuidString", # required
-    #       }
-    #
     # @!attribute [rw] meeting_id
     #   The unique ID of the meeting for which you stop transcription.
     #   @return [String]
@@ -1506,14 +1222,6 @@ module Aws::ChimeSDKMeetings
     end
 
     # A key-value pair that you define.
-    #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
     #
     # @!attribute [rw] key
     #   The tag's key.
@@ -1532,19 +1240,6 @@ module Aws::ChimeSDKMeetings
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource.
     #   @return [String]
@@ -1619,36 +1314,6 @@ module Aws::ChimeSDKMeetings
     # contain `EngineTranscribeSettings` or
     # `EngineTranscribeMedicalSettings`.
     #
-    # @note When making an API call, you may pass TranscriptionConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         engine_transcribe_settings: {
-    #           language_code: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
-    #           vocabulary_filter_method: "remove", # accepts remove, mask, tag
-    #           vocabulary_filter_name: "String",
-    #           vocabulary_name: "String",
-    #           region: "us-east-2", # accepts us-east-2, us-east-1, us-west-2, ap-northeast-2, ap-southeast-2, ap-northeast-1, ca-central-1, eu-central-1, eu-west-1, eu-west-2, sa-east-1, auto, us-gov-west-1
-    #           enable_partial_results_stabilization: false,
-    #           partial_results_stability: "low", # accepts low, medium, high
-    #           content_identification_type: "PII", # accepts PII
-    #           content_redaction_type: "PII", # accepts PII
-    #           pii_entity_types: "TranscribePiiEntityTypes",
-    #           language_model_name: "TranscribeLanguageModelName",
-    #           identify_language: false,
-    #           language_options: "TranscribeLanguageOptions",
-    #           preferred_language: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
-    #         },
-    #         engine_transcribe_medical_settings: {
-    #           language_code: "en-US", # required, accepts en-US
-    #           specialty: "PRIMARYCARE", # required, accepts PRIMARYCARE, CARDIOLOGY, NEUROLOGY, ONCOLOGY, RADIOLOGY, UROLOGY
-    #           type: "CONVERSATION", # required, accepts CONVERSATION, DICTATION
-    #           vocabulary_name: "String",
-    #           region: "us-east-1", # accepts us-east-1, us-east-2, us-west-2, ap-southeast-2, ca-central-1, eu-west-1, auto
-    #           content_identification_type: "PHI", # accepts PHI
-    #         },
-    #       }
-    #
     # @!attribute [rw] engine_transcribe_settings
     #   The transcription configuration settings passed to Amazon
     #   Transcribe.
@@ -1715,14 +1380,6 @@ module Aws::ChimeSDKMeetings
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource that you're removing tags from.
     #   @return [String]
@@ -1744,19 +1401,6 @@ module Aws::ChimeSDKMeetings
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateAttendeeCapabilitiesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         meeting_id: "GuidString", # required
-    #         attendee_id: "GuidString", # required
-    #         capabilities: { # required
-    #           audio: "SendReceive", # required, accepts SendReceive, Send, Receive, None
-    #           video: "SendReceive", # required, accepts SendReceive, Send, Receive, None
-    #           content: "SendReceive", # required, accepts SendReceive, Send, Receive, None
-    #         },
-    #       }
-    #
     # @!attribute [rw] meeting_id
     #   The ID of the meeting associated with the update request.
     #   @return [String]

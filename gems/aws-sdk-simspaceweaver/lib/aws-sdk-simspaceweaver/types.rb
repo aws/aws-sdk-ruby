@@ -62,15 +62,6 @@ module Aws::SimSpaceWeaver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAppInput
-    #   data as a hash:
-    #
-    #       {
-    #         app: "SimSpaceWeaverResourceName", # required
-    #         domain: "SimSpaceWeaverResourceName", # required
-    #         simulation: "SimSpaceWeaverResourceName", # required
-    #       }
-    #
     # @!attribute [rw] app
     #   The name of the app.
     #   @return [String]
@@ -97,13 +88,6 @@ module Aws::SimSpaceWeaver
     #
     class DeleteAppOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteSimulationInput
-    #   data as a hash:
-    #
-    #       {
-    #         simulation: "SimSpaceWeaverResourceName", # required
-    #       }
-    #
     # @!attribute [rw] simulation
     #   The name of the simulation.
     #   @return [String]
@@ -120,15 +104,6 @@ module Aws::SimSpaceWeaver
     #
     class DeleteSimulationOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeAppInput
-    #   data as a hash:
-    #
-    #       {
-    #         app: "SimSpaceWeaverResourceName", # required
-    #         domain: "SimSpaceWeaverResourceName", # required
-    #         simulation: "SimSpaceWeaverResourceName", # required
-    #       }
-    #
     # @!attribute [rw] app
     #   The name of the app.
     #   @return [String]
@@ -200,13 +175,6 @@ module Aws::SimSpaceWeaver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeSimulationInput
-    #   data as a hash:
-    #
-    #       {
-    #         simulation: "SimSpaceWeaverResourceName", # required
-    #       }
-    #
     # @!attribute [rw] simulation
     #   The name of the simulation.
     #   @return [String]
@@ -379,13 +347,6 @@ module Aws::SimSpaceWeaver
     # Options that apply when the app starts. These optiAons override
     # default behavior.
     #
-    # @note When making an API call, you may pass LaunchOverrides
-    #   data as a hash:
-    #
-    #       {
-    #         launch_commands: ["NonEmptyString"],
-    #       }
-    #
     # @!attribute [rw] launch_commands
     #   App launch commands and command line parameters that override the
     #   launch command configured in the simulation schema.
@@ -399,16 +360,6 @@ module Aws::SimSpaceWeaver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAppsInput
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "SimSpaceWeaverResourceName",
-    #         max_results: 1,
-    #         next_token: "OptionalString",
-    #         simulation: "SimSpaceWeaverResourceName", # required
-    #       }
-    #
     # @!attribute [rw] domain
     #   The name of the domain that you want to list apps for.
     #   @return [String]
@@ -465,14 +416,6 @@ module Aws::SimSpaceWeaver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSimulationsInput
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "OptionalString",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of simulations to list.
     #   @return [Integer]
@@ -519,13 +462,6 @@ module Aws::SimSpaceWeaver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "SimSpaceWeaverArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource. For more information
     #   about ARNs, see [Amazon Resource Names (ARNs)][1] in the *Amazon Web
@@ -640,14 +576,6 @@ module Aws::SimSpaceWeaver
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html
-    #
-    # @note When making an API call, you may pass S3Location
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_name: "BucketName",
-    #         object_key: "ObjectKey",
-    #       }
     #
     # @!attribute [rw] bucket_name
     #   The name of an Amazon S3 bucket. For more information about buckets,
@@ -839,20 +767,6 @@ module Aws::SimSpaceWeaver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartAppInput
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         description: "Description",
-    #         domain: "SimSpaceWeaverResourceName", # required
-    #         launch_overrides: {
-    #           launch_commands: ["NonEmptyString"],
-    #         },
-    #         name: "SimSpaceWeaverResourceName", # required
-    #         simulation: "SimSpaceWeaverResourceName", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   A value that you provide to ensure that repeated calls to this API
     #   operation using the same parameters complete only once. A
@@ -919,13 +833,6 @@ module Aws::SimSpaceWeaver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartClockInput
-    #   data as a hash:
-    #
-    #       {
-    #         simulation: "SimSpaceWeaverResourceName", # required
-    #       }
-    #
     # @!attribute [rw] simulation
     #   The name of the simulation.
     #   @return [String]
@@ -942,24 +849,6 @@ module Aws::SimSpaceWeaver
     #
     class StartClockOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass StartSimulationInput
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         description: "Description",
-    #         maximum_duration: "TimeToLiveString",
-    #         name: "SimSpaceWeaverResourceName", # required
-    #         role_arn: "RoleArn", # required
-    #         schema_s3_location: { # required
-    #           bucket_name: "BucketName",
-    #           object_key: "ObjectKey",
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_token
     #   A value that you provide to ensure that repeated calls to this API
     #   operation using the same parameters complete only once. A
@@ -1062,15 +951,6 @@ module Aws::SimSpaceWeaver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopAppInput
-    #   data as a hash:
-    #
-    #       {
-    #         app: "SimSpaceWeaverResourceName", # required
-    #         domain: "SimSpaceWeaverResourceName", # required
-    #         simulation: "SimSpaceWeaverResourceName", # required
-    #       }
-    #
     # @!attribute [rw] app
     #   The name of the app.
     #   @return [String]
@@ -1097,13 +977,6 @@ module Aws::SimSpaceWeaver
     #
     class StopAppOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass StopClockInput
-    #   data as a hash:
-    #
-    #       {
-    #         simulation: "SimSpaceWeaverResourceName", # required
-    #       }
-    #
     # @!attribute [rw] simulation
     #   The name of the simulation.
     #   @return [String]
@@ -1120,13 +993,6 @@ module Aws::SimSpaceWeaver
     #
     class StopClockOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass StopSimulationInput
-    #   data as a hash:
-    #
-    #       {
-    #         simulation: "SimSpaceWeaverResourceName", # required
-    #       }
-    #
     # @!attribute [rw] simulation
     #   The name of the simulation.
     #   @return [String]
@@ -1143,16 +1009,6 @@ module Aws::SimSpaceWeaver
     #
     class StopSimulationOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass TagResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "SimSpaceWeaverArn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource that you want to add
     #   tags to. For more information about ARNs, see [Amazon Resource Names
@@ -1191,14 +1047,6 @@ module Aws::SimSpaceWeaver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "SimSpaceWeaverArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource that you want to
     #   remove tags from. For more information about ARNs, see [Amazon

@@ -101,14 +101,6 @@ module Aws::KinesisVideo
     # the API returns only the channels that satisfy a condition specified
     # in `ChannelNameCondition`.
     #
-    # @note When making an API call, you may pass ChannelNameCondition
-    #   data as a hash:
-    #
-    #       {
-    #         comparison_operator: "BEGINS_WITH", # accepts BEGINS_WITH
-    #         comparison_value: "ChannelName",
-    #       }
-    #
     # @!attribute [rw] comparison_operator
     #   A comparison operator. Currently, you can only specify the
     #   `BEGINS_WITH` operator, which finds signaling channels whose names
@@ -142,23 +134,6 @@ module Aws::KinesisVideo
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateSignalingChannelInput
-    #   data as a hash:
-    #
-    #       {
-    #         channel_name: "ChannelName", # required
-    #         channel_type: "SINGLE_MASTER", # accepts SINGLE_MASTER, FULL_MESH
-    #         single_master_configuration: {
-    #           message_ttl_seconds: 1,
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] channel_name
     #   A name for the signaling channel that you are creating. It must be
     #   unique for each Amazon Web Services account and Amazon Web Services
@@ -203,20 +178,6 @@ module Aws::KinesisVideo
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateStreamInput
-    #   data as a hash:
-    #
-    #       {
-    #         device_name: "DeviceName",
-    #         stream_name: "StreamName", # required
-    #         media_type: "MediaType",
-    #         kms_key_id: "KmsKeyId",
-    #         data_retention_in_hours: 1,
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] device_name
     #   The name of the device that is writing to the stream.
     #
@@ -310,14 +271,6 @@ module Aws::KinesisVideo
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteSignalingChannelInput
-    #   data as a hash:
-    #
-    #       {
-    #         channel_arn: "ResourceARN", # required
-    #         current_version: "Version",
-    #       }
-    #
     # @!attribute [rw] channel_arn
     #   The Amazon Resource Name (ARN) of the signaling channel that you
     #   want to delete.
@@ -343,14 +296,6 @@ module Aws::KinesisVideo
     #
     class DeleteSignalingChannelOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteStreamInput
-    #   data as a hash:
-    #
-    #       {
-    #         stream_arn: "ResourceARN", # required
-    #         current_version: "Version",
-    #       }
-    #
     # @!attribute [rw] stream_arn
     #   The Amazon Resource Name (ARN) of the stream that you want to
     #   delete.
@@ -380,14 +325,6 @@ module Aws::KinesisVideo
     #
     class DeleteStreamOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeImageGenerationConfigurationInput
-    #   data as a hash:
-    #
-    #       {
-    #         stream_name: "StreamName",
-    #         stream_arn: "ResourceARN",
-    #       }
-    #
     # @!attribute [rw] stream_name
     #   The name of the stream from which to retrieve the image generation
     #   configuration. You must specify either the `StreamName` or the
@@ -423,14 +360,6 @@ module Aws::KinesisVideo
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeNotificationConfigurationInput
-    #   data as a hash:
-    #
-    #       {
-    #         stream_name: "StreamName",
-    #         stream_arn: "ResourceARN",
-    #       }
-    #
     # @!attribute [rw] stream_name
     #   The name of the stream from which to retrieve the notification
     #   configuration. You must specify either the `StreamName` or the
@@ -466,14 +395,6 @@ module Aws::KinesisVideo
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeSignalingChannelInput
-    #   data as a hash:
-    #
-    #       {
-    #         channel_name: "ChannelName",
-    #         channel_arn: "ResourceARN",
-    #       }
-    #
     # @!attribute [rw] channel_name
     #   The name of the signaling channel that you want to describe.
     #   @return [String]
@@ -504,14 +425,6 @@ module Aws::KinesisVideo
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeStreamInput
-    #   data as a hash:
-    #
-    #       {
-    #         stream_name: "StreamName",
-    #         stream_arn: "ResourceARN",
-    #       }
-    #
     # @!attribute [rw] stream_name
     #   The name of the stream.
     #   @return [String]
@@ -554,15 +467,6 @@ module Aws::KinesisVideo
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDataEndpointInput
-    #   data as a hash:
-    #
-    #       {
-    #         stream_name: "StreamName",
-    #         stream_arn: "ResourceARN",
-    #         api_name: "PUT_MEDIA", # required, accepts PUT_MEDIA, GET_MEDIA, LIST_FRAGMENTS, GET_MEDIA_FOR_FRAGMENT_LIST, GET_HLS_STREAMING_SESSION_URL, GET_DASH_STREAMING_SESSION_URL, GET_CLIP, GET_IMAGES
-    #       }
-    #
     # @!attribute [rw] stream_name
     #   The name of the stream that you want to get the endpoint for. You
     #   must specify either this parameter or a `StreamARN` in the request.
@@ -601,17 +505,6 @@ module Aws::KinesisVideo
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSignalingChannelEndpointInput
-    #   data as a hash:
-    #
-    #       {
-    #         channel_arn: "ResourceARN", # required
-    #         single_master_channel_endpoint_configuration: {
-    #           protocols: ["WSS"], # accepts WSS, HTTPS
-    #           role: "MASTER", # accepts MASTER, VIEWER
-    #         },
-    #       }
-    #
     # @!attribute [rw] channel_arn
     #   The Amazon Resource Name (ARN) of the signalling channel for which
     #   you want to get an endpoint.
@@ -646,25 +539,6 @@ module Aws::KinesisVideo
     # The structure that contains the information required for the KVS
     # images delivery. If null, the configuration will be deleted from the
     # stream.
-    #
-    # @note When making an API call, you may pass ImageGenerationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         status: "ENABLED", # required, accepts ENABLED, DISABLED
-    #         image_selector_type: "SERVER_TIMESTAMP", # required, accepts SERVER_TIMESTAMP, PRODUCER_TIMESTAMP
-    #         destination_config: { # required
-    #           uri: "DestinationUri", # required
-    #           destination_region: "DestinationRegion", # required
-    #         },
-    #         sampling_interval: 1, # required
-    #         format: "JPEG", # required, accepts JPEG, PNG
-    #         format_config: {
-    #           "JPEGQuality" => "FormatConfigValue",
-    #         },
-    #         width_pixels: 1,
-    #         height_pixels: 1,
-    #       }
     #
     # @!attribute [rw] status
     #   Indicates whether the `ContinuousImageGenerationConfigurations` API
@@ -744,14 +618,6 @@ module Aws::KinesisVideo
     # The structure that contains the information required to deliver images
     # to a customer.
     #
-    # @note When making an API call, you may pass ImageGenerationDestinationConfig
-    #   data as a hash:
-    #
-    #       {
-    #         uri: "DestinationUri", # required
-    #         destination_region: "DestinationRegion", # required
-    #       }
-    #
     # @!attribute [rw] uri
     #   The Uniform Resource Idenifier (URI) that identifies where the
     #   images will be delivered.
@@ -811,18 +677,6 @@ module Aws::KinesisVideo
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSignalingChannelsInput
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         channel_name_condition: {
-    #           comparison_operator: "BEGINS_WITH", # accepts BEGINS_WITH
-    #           comparison_value: "ChannelName",
-    #         },
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of channels to return in the response. The
     #   default is 500.
@@ -869,18 +723,6 @@ module Aws::KinesisVideo
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListStreamsInput
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         stream_name_condition: {
-    #           comparison_operator: "BEGINS_WITH", # accepts BEGINS_WITH
-    #           comparison_value: "StreamName",
-    #         },
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of streams to return in the response. The default
     #   is 10,000.
@@ -928,14 +770,6 @@ module Aws::KinesisVideo
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         resource_arn: "ResourceARN", # required
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If you specify this parameter and the result of a
     #   `ListTagsForResource` call is truncated, the response includes a
@@ -978,15 +812,6 @@ module Aws::KinesisVideo
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForStreamInput
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         stream_arn: "ResourceARN",
-    #         stream_name: "StreamName",
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If you specify this parameter and the result of a
     #   `ListTagsForStream` call is truncated, the response includes a token
@@ -1062,16 +887,6 @@ module Aws::KinesisVideo
     # images delivery. If this parameter is null, the configuration will be
     # deleted from the stream.
     #
-    # @note When making an API call, you may pass NotificationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         status: "ENABLED", # required, accepts ENABLED, DISABLED
-    #         destination_config: { # required
-    #           uri: "DestinationUri", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] status
     #   Indicates if a notification configuration is enabled or disabled.
     #   @return [String]
@@ -1092,13 +907,6 @@ module Aws::KinesisVideo
 
     # The structure that contains the information required to deliver a
     # notification to a customer.
-    #
-    # @note When making an API call, you may pass NotificationDestinationConfig
-    #   data as a hash:
-    #
-    #       {
-    #         uri: "DestinationUri", # required
-    #       }
     #
     # @!attribute [rw] uri
     #   The Uniform Resource Idenifier (URI) that identifies where the
@@ -1173,14 +981,6 @@ module Aws::KinesisVideo
     # An object that contains the endpoint configuration for the
     # `SINGLE_MASTER` channel type.
     #
-    # @note When making an API call, you may pass SingleMasterChannelEndpointConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         protocols: ["WSS"], # accepts WSS, HTTPS
-    #         role: "MASTER", # accepts MASTER, VIEWER
-    #       }
-    #
     # @!attribute [rw] protocols
     #   This property is used to determine the nature of communication over
     #   this `SINGLE_MASTER` signaling channel. If `WSS` is specified, this
@@ -1209,13 +1009,6 @@ module Aws::KinesisVideo
 
     # A structure that contains the configuration for the `SINGLE_MASTER`
     # channel type.
-    #
-    # @note When making an API call, you may pass SingleMasterConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         message_ttl_seconds: 1,
-    #       }
     #
     # @!attribute [rw] message_ttl_seconds
     #   The period of time a signaling channel retains undelivered messages
@@ -1291,14 +1084,6 @@ module Aws::KinesisVideo
     # `BEGINS_WITH` operator, which finds streams whose names start with a
     # given prefix.
     #
-    # @note When making an API call, you may pass StreamNameCondition
-    #   data as a hash:
-    #
-    #       {
-    #         comparison_operator: "BEGINS_WITH", # accepts BEGINS_WITH
-    #         comparison_value: "StreamName",
-    #       }
-    #
     # @!attribute [rw] comparison_operator
     #   A comparison operator. Currently, you can specify only the
     #   `BEGINS_WITH` operator, which finds streams whose names start with a
@@ -1321,14 +1106,6 @@ module Aws::KinesisVideo
     # A key and value pair that is associated with the specified signaling
     # channel.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The key of the tag that is associated with the specified signaling
     #   channel.
@@ -1348,19 +1125,6 @@ module Aws::KinesisVideo
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceARN", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the signaling channel to which you
     #   want to add tags.
@@ -1384,17 +1148,6 @@ module Aws::KinesisVideo
     #
     class TagResourceOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass TagStreamInput
-    #   data as a hash:
-    #
-    #       {
-    #         stream_arn: "ResourceARN",
-    #         stream_name: "StreamName",
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] stream_arn
     #   The Amazon Resource Name (ARN) of the resource that you want to add
     #   the tag or tags to.
@@ -1437,14 +1190,6 @@ module Aws::KinesisVideo
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceARN", # required
-    #         tag_key_list: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the signaling channel from which
     #   you want to remove tags.
@@ -1467,15 +1212,6 @@ module Aws::KinesisVideo
     #
     class UntagResourceOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UntagStreamInput
-    #   data as a hash:
-    #
-    #       {
-    #         stream_arn: "ResourceARN",
-    #         stream_name: "StreamName",
-    #         tag_key_list: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] stream_arn
     #   The Amazon Resource Name (ARN) of the stream that you want to remove
     #   tags from.
@@ -1503,17 +1239,6 @@ module Aws::KinesisVideo
     #
     class UntagStreamOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateDataRetentionInput
-    #   data as a hash:
-    #
-    #       {
-    #         stream_name: "StreamName",
-    #         stream_arn: "ResourceARN",
-    #         current_version: "Version", # required
-    #         operation: "INCREASE_DATA_RETENTION", # required, accepts INCREASE_DATA_RETENTION, DECREASE_DATA_RETENTION
-    #         data_retention_change_in_hours: 1, # required
-    #       }
-    #
     # @!attribute [rw] stream_name
     #   The name of the stream whose retention period you want to change.
     #   @return [String]
@@ -1556,29 +1281,6 @@ module Aws::KinesisVideo
     #
     class UpdateDataRetentionOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateImageGenerationConfigurationInput
-    #   data as a hash:
-    #
-    #       {
-    #         stream_name: "StreamName",
-    #         stream_arn: "ResourceARN",
-    #         image_generation_configuration: {
-    #           status: "ENABLED", # required, accepts ENABLED, DISABLED
-    #           image_selector_type: "SERVER_TIMESTAMP", # required, accepts SERVER_TIMESTAMP, PRODUCER_TIMESTAMP
-    #           destination_config: { # required
-    #             uri: "DestinationUri", # required
-    #             destination_region: "DestinationRegion", # required
-    #           },
-    #           sampling_interval: 1, # required
-    #           format: "JPEG", # required, accepts JPEG, PNG
-    #           format_config: {
-    #             "JPEGQuality" => "FormatConfigValue",
-    #           },
-    #           width_pixels: 1,
-    #           height_pixels: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] stream_name
     #   The name of the stream from which to update the image generation
     #   configuration. You must specify either the `StreamName` or the
@@ -1611,20 +1313,6 @@ module Aws::KinesisVideo
     #
     class UpdateImageGenerationConfigurationOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateNotificationConfigurationInput
-    #   data as a hash:
-    #
-    #       {
-    #         stream_name: "StreamName",
-    #         stream_arn: "ResourceARN",
-    #         notification_configuration: {
-    #           status: "ENABLED", # required, accepts ENABLED, DISABLED
-    #           destination_config: { # required
-    #             uri: "DestinationUri", # required
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] stream_name
     #   The name of the stream from which to update the notification
     #   configuration. You must specify either the `StreamName` or the
@@ -1657,17 +1345,6 @@ module Aws::KinesisVideo
     #
     class UpdateNotificationConfigurationOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateSignalingChannelInput
-    #   data as a hash:
-    #
-    #       {
-    #         channel_arn: "ResourceARN", # required
-    #         current_version: "Version", # required
-    #         single_master_configuration: {
-    #           message_ttl_seconds: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] channel_arn
     #   The Amazon Resource Name (ARN) of the signaling channel that you
     #   want to update.
@@ -1697,17 +1374,6 @@ module Aws::KinesisVideo
     #
     class UpdateSignalingChannelOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateStreamInput
-    #   data as a hash:
-    #
-    #       {
-    #         stream_name: "StreamName",
-    #         stream_arn: "ResourceARN",
-    #         current_version: "Version", # required
-    #         device_name: "DeviceName",
-    #         media_type: "MediaType",
-    #       }
-    #
     # @!attribute [rw] stream_name
     #   The name of the stream whose metadata you want to update.
     #

@@ -40,17 +40,6 @@ module Aws::KinesisVideoArchivedMedia
     # range and very different points in time, only the oldest ingested
     # collection of fragments are returned.
     #
-    # @note When making an API call, you may pass ClipFragmentSelector
-    #   data as a hash:
-    #
-    #       {
-    #         fragment_selector_type: "PRODUCER_TIMESTAMP", # required, accepts PRODUCER_TIMESTAMP, SERVER_TIMESTAMP
-    #         timestamp_range: { # required
-    #           start_timestamp: Time.now, # required
-    #           end_timestamp: Time.now, # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] fragment_selector_type
     #   The origin of the timestamps to use (Server or Producer).
     #   @return [String]
@@ -69,14 +58,6 @@ module Aws::KinesisVideoArchivedMedia
     end
 
     # The range of timestamps for which to return fragments.
-    #
-    # @note When making an API call, you may pass ClipTimestampRange
-    #   data as a hash:
-    #
-    #       {
-    #         start_timestamp: Time.now, # required
-    #         end_timestamp: Time.now, # required
-    #       }
     #
     # @!attribute [rw] start_timestamp
     #   The starting timestamp in the range of timestamps for which to
@@ -114,17 +95,6 @@ module Aws::KinesisVideoArchivedMedia
 
     # Contains the range of timestamps for the requested media, and the
     # source of the timestamps.
-    #
-    # @note When making an API call, you may pass DASHFragmentSelector
-    #   data as a hash:
-    #
-    #       {
-    #         fragment_selector_type: "PRODUCER_TIMESTAMP", # accepts PRODUCER_TIMESTAMP, SERVER_TIMESTAMP
-    #         timestamp_range: {
-    #           start_timestamp: Time.now,
-    #           end_timestamp: Time.now,
-    #         },
-    #       }
     #
     # @!attribute [rw] fragment_selector_type
     #   The source of the timestamps for the requested media.
@@ -181,14 +151,6 @@ module Aws::KinesisVideoArchivedMedia
     # exactly at or after the start time are included in the session.
     # Fragments that start before the start time and continue past it are
     # not included in the session.
-    #
-    # @note When making an API call, you may pass DASHTimestampRange
-    #   data as a hash:
-    #
-    #       {
-    #         start_timestamp: Time.now,
-    #         end_timestamp: Time.now,
-    #       }
     #
     # @!attribute [rw] start_timestamp
     #   The start of the timestamp range for the requested media.
@@ -290,17 +252,6 @@ module Aws::KinesisVideoArchivedMedia
     # of 00:00:04 would return the fragments with start times of 00:00:02
     # and 00:00:04.
     #
-    # @note When making an API call, you may pass FragmentSelector
-    #   data as a hash:
-    #
-    #       {
-    #         fragment_selector_type: "PRODUCER_TIMESTAMP", # required, accepts PRODUCER_TIMESTAMP, SERVER_TIMESTAMP
-    #         timestamp_range: { # required
-    #           start_timestamp: Time.now, # required
-    #           end_timestamp: Time.now, # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] fragment_selector_type
     #   The origin of the timestamps to use (Server or Producer).
     #   @return [String]
@@ -318,21 +269,6 @@ module Aws::KinesisVideoArchivedMedia
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetClipInput
-    #   data as a hash:
-    #
-    #       {
-    #         stream_name: "StreamName",
-    #         stream_arn: "ResourceARN",
-    #         clip_fragment_selector: { # required
-    #           fragment_selector_type: "PRODUCER_TIMESTAMP", # required, accepts PRODUCER_TIMESTAMP, SERVER_TIMESTAMP
-    #           timestamp_range: { # required
-    #             start_timestamp: Time.now, # required
-    #             end_timestamp: Time.now, # required
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] stream_name
     #   The name of the stream for which to retrieve the media clip.
     #
@@ -385,26 +321,6 @@ module Aws::KinesisVideoArchivedMedia
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDASHStreamingSessionURLInput
-    #   data as a hash:
-    #
-    #       {
-    #         stream_name: "StreamName",
-    #         stream_arn: "ResourceARN",
-    #         playback_mode: "LIVE", # accepts LIVE, LIVE_REPLAY, ON_DEMAND
-    #         display_fragment_timestamp: "ALWAYS", # accepts ALWAYS, NEVER
-    #         display_fragment_number: "ALWAYS", # accepts ALWAYS, NEVER
-    #         dash_fragment_selector: {
-    #           fragment_selector_type: "PRODUCER_TIMESTAMP", # accepts PRODUCER_TIMESTAMP, SERVER_TIMESTAMP
-    #           timestamp_range: {
-    #             start_timestamp: Time.now,
-    #             end_timestamp: Time.now,
-    #           },
-    #         },
-    #         expires: 1,
-    #         max_manifest_fragment_results: 1,
-    #       }
-    #
     # @!attribute [rw] stream_name
     #   The name of the stream for which to retrieve the MPEG-DASH manifest
     #   URL.
@@ -587,27 +503,6 @@ module Aws::KinesisVideoArchivedMedia
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetHLSStreamingSessionURLInput
-    #   data as a hash:
-    #
-    #       {
-    #         stream_name: "StreamName",
-    #         stream_arn: "ResourceARN",
-    #         playback_mode: "LIVE", # accepts LIVE, LIVE_REPLAY, ON_DEMAND
-    #         hls_fragment_selector: {
-    #           fragment_selector_type: "PRODUCER_TIMESTAMP", # accepts PRODUCER_TIMESTAMP, SERVER_TIMESTAMP
-    #           timestamp_range: {
-    #             start_timestamp: Time.now,
-    #             end_timestamp: Time.now,
-    #           },
-    #         },
-    #         container_format: "FRAGMENTED_MP4", # accepts FRAGMENTED_MP4, MPEG_TS
-    #         discontinuity_mode: "ALWAYS", # accepts ALWAYS, NEVER, ON_DISCONTINUITY
-    #         display_fragment_timestamp: "ALWAYS", # accepts ALWAYS, NEVER
-    #         expires: 1,
-    #         max_media_playlist_fragment_results: 1,
-    #       }
-    #
     # @!attribute [rw] stream_name
     #   The name of the stream for which to retrieve the HLS master playlist
     #   URL.
@@ -826,26 +721,6 @@ module Aws::KinesisVideoArchivedMedia
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetImagesInput
-    #   data as a hash:
-    #
-    #       {
-    #         stream_name: "StreamName",
-    #         stream_arn: "ResourceARN",
-    #         image_selector_type: "PRODUCER_TIMESTAMP", # required, accepts PRODUCER_TIMESTAMP, SERVER_TIMESTAMP
-    #         start_timestamp: Time.now, # required
-    #         end_timestamp: Time.now, # required
-    #         sampling_interval: 1, # required
-    #         format: "JPEG", # required, accepts JPEG, PNG
-    #         format_config: {
-    #           "JPEGQuality" => "FormatConfigValue",
-    #         },
-    #         width_pixels: 1,
-    #         height_pixels: 1,
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] stream_name
     #   The name of the stream from which to retrieve the images. You must
     #   specify either the `StreamName` or the `StreamARN`.
@@ -976,15 +851,6 @@ module Aws::KinesisVideoArchivedMedia
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetMediaForFragmentListInput
-    #   data as a hash:
-    #
-    #       {
-    #         stream_name: "StreamName",
-    #         stream_arn: "ResourceARN",
-    #         fragments: ["FragmentNumberString"], # required
-    #       }
-    #
     # @!attribute [rw] stream_name
     #   The name of the stream from which to retrieve fragment media.
     #   Specify either this parameter or the `StreamARN` parameter.
@@ -1059,17 +925,6 @@ module Aws::KinesisVideoArchivedMedia
     # Contains the range of timestamps for the requested media, and the
     # source of the timestamps.
     #
-    # @note When making an API call, you may pass HLSFragmentSelector
-    #   data as a hash:
-    #
-    #       {
-    #         fragment_selector_type: "PRODUCER_TIMESTAMP", # accepts PRODUCER_TIMESTAMP, SERVER_TIMESTAMP
-    #         timestamp_range: {
-    #           start_timestamp: Time.now,
-    #           end_timestamp: Time.now,
-    #         },
-    #       }
-    #
     # @!attribute [rw] fragment_selector_type
     #   The source of the timestamps for the requested media.
     #
@@ -1120,14 +975,6 @@ module Aws::KinesisVideoArchivedMedia
     # The start and end of the timestamp range for the requested media.
     #
     # This value should not be present if `PlaybackType` is `LIVE`.
-    #
-    # @note When making an API call, you may pass HLSTimestampRange
-    #   data as a hash:
-    #
-    #       {
-    #         start_timestamp: Time.now,
-    #         end_timestamp: Time.now,
-    #       }
     #
     # @!attribute [rw] start_timestamp
     #   The start of the timestamp range for the requested media.
@@ -1254,23 +1101,6 @@ module Aws::KinesisVideoArchivedMedia
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFragmentsInput
-    #   data as a hash:
-    #
-    #       {
-    #         stream_name: "StreamName",
-    #         stream_arn: "ResourceARN",
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         fragment_selector: {
-    #           fragment_selector_type: "PRODUCER_TIMESTAMP", # required, accepts PRODUCER_TIMESTAMP, SERVER_TIMESTAMP
-    #           timestamp_range: { # required
-    #             start_timestamp: Time.now, # required
-    #             end_timestamp: Time.now, # required
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] stream_name
     #   The name of the stream from which to retrieve a fragment list.
     #   Specify either this parameter or the `StreamARN` parameter.
@@ -1396,14 +1226,6 @@ module Aws::KinesisVideoArchivedMedia
     end
 
     # The range of timestamps for which to return fragments.
-    #
-    # @note When making an API call, you may pass TimestampRange
-    #   data as a hash:
-    #
-    #       {
-    #         start_timestamp: Time.now, # required
-    #         end_timestamp: Time.now, # required
-    #       }
     #
     # @!attribute [rw] start_timestamp
     #   The starting timestamp in the range of timestamps for which to

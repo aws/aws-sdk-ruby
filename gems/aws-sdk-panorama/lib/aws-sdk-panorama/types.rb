@@ -159,26 +159,6 @@ module Aws::Panorama
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateApplicationInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_instance_id_to_replace: "ApplicationInstanceId",
-    #         default_runtime_context_device: "DefaultRuntimeContextDevice", # required
-    #         description: "Description",
-    #         manifest_overrides_payload: {
-    #           payload_data: "ManifestOverridesPayloadData",
-    #         },
-    #         manifest_payload: { # required
-    #           payload_data: "ManifestPayloadData",
-    #         },
-    #         name: "ApplicationInstanceName",
-    #         runtime_role_arn: "RuntimeRoleArn",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] application_instance_id_to_replace
     #   The ID of an application instance to replace with the new instance.
     #   @return [String]
@@ -238,19 +218,6 @@ module Aws::Panorama
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateJobForDevicesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_ids: ["DeviceId"], # required
-    #         device_job_config: {
-    #           ota_job_config: {
-    #             image_version: "ImageVersion", # required
-    #           },
-    #         },
-    #         job_type: "OTA", # required, accepts OTA, REBOOT
-    #       }
-    #
     # @!attribute [rw] device_ids
     #   IDs of target devices.
     #   @return [Array<String>]
@@ -285,28 +252,6 @@ module Aws::Panorama
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateNodeFromTemplateJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_tags: [
-    #           {
-    #             resource_type: "PACKAGE", # required, accepts PACKAGE
-    #             tags: { # required
-    #               "TagKey" => "TagValue",
-    #             },
-    #           },
-    #         ],
-    #         node_description: "Description",
-    #         node_name: "NodeName", # required
-    #         output_package_name: "NodePackageName", # required
-    #         output_package_version: "NodePackageVersion", # required
-    #         template_parameters: { # required
-    #           "TemplateKey" => "TemplateValue",
-    #         },
-    #         template_type: "RTSP_CAMERA_STREAM", # required, accepts RTSP_CAMERA_STREAM
-    #       }
-    #
     # @!attribute [rw] job_tags
     #   Tags for the job.
     #   @return [Array<Types::JobResourceTags>]
@@ -361,38 +306,6 @@ module Aws::Panorama
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreatePackageImportJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken", # required
-    #         input_config: { # required
-    #           package_version_input_config: {
-    #             s3_location: { # required
-    #               bucket_name: "BucketName", # required
-    #               object_key: "ObjectKey", # required
-    #               region: "Region",
-    #             },
-    #           },
-    #         },
-    #         job_tags: [
-    #           {
-    #             resource_type: "PACKAGE", # required, accepts PACKAGE
-    #             tags: { # required
-    #               "TagKey" => "TagValue",
-    #             },
-    #           },
-    #         ],
-    #         job_type: "NODE_PACKAGE_VERSION", # required, accepts NODE_PACKAGE_VERSION, MARKETPLACE_NODE_PACKAGE_VERSION
-    #         output_config: { # required
-    #           package_version_output_config: {
-    #             mark_latest: false,
-    #             package_name: "NodePackageName", # required
-    #             package_version: "NodePackageVersion", # required
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_token
     #   A client token for the package import job.
     #   @return [String]
@@ -437,16 +350,6 @@ module Aws::Panorama
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreatePackageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         package_name: "NodePackageName", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] package_name
     #   A name for the package.
     #   @return [String]
@@ -486,13 +389,6 @@ module Aws::Panorama
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDeviceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_id: "DeviceId", # required
-    #       }
-    #
     # @!attribute [rw] device_id
     #   The device's ID.
     #   @return [String]
@@ -517,14 +413,6 @@ module Aws::Panorama
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeletePackageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         force_delete: false,
-    #         package_id: "NodePackageId", # required
-    #       }
-    #
     # @!attribute [rw] force_delete
     #   Delete the package even if it has artifacts stored in its access
     #   point. Deletes the package's artifacts from Amazon S3.
@@ -547,17 +435,6 @@ module Aws::Panorama
     #
     class DeletePackageResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeregisterPackageVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         owner_account: "PackageOwnerAccount",
-    #         package_id: "NodePackageId", # required
-    #         package_version: "NodePackageVersion", # required
-    #         patch_version: "NodePackagePatchVersion", # required
-    #         updated_latest_patch_version: "NodePackagePatchVersion",
-    #       }
-    #
     # @!attribute [rw] owner_account
     #   An owner account.
     #   @return [String]
@@ -595,13 +472,6 @@ module Aws::Panorama
     #
     class DeregisterPackageVersionResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeApplicationInstanceDetailsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_instance_id: "ApplicationInstanceId", # required
-    #       }
-    #
     # @!attribute [rw] application_instance_id
     #   The application instance's ID.
     #   @return [String]
@@ -661,13 +531,6 @@ module Aws::Panorama
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeApplicationInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_instance_id: "ApplicationInstanceId", # required
-    #       }
-    #
     # @!attribute [rw] application_instance_id
     #   The application instance's ID.
     #   @return [String]
@@ -762,13 +625,6 @@ module Aws::Panorama
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDeviceJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The job's ID.
     #   @return [String]
@@ -833,13 +689,6 @@ module Aws::Panorama
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDeviceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_id: "DeviceId", # required
-    #       }
-    #
     # @!attribute [rw] device_id
     #   The device's ID.
     #   @return [String]
@@ -961,13 +810,6 @@ module Aws::Panorama
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeNodeFromTemplateJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The job's ID.
     #   @return [String]
@@ -1047,14 +889,6 @@ module Aws::Panorama
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeNodeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         node_id: "NodeId", # required
-    #         owner_account: "PackageOwnerAccount",
-    #       }
-    #
     # @!attribute [rw] node_id
     #   The node's ID.
     #   @return [String]
@@ -1149,13 +983,6 @@ module Aws::Panorama
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribePackageImportJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The job's ID.
     #   @return [String]
@@ -1230,13 +1057,6 @@ module Aws::Panorama
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribePackageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         package_id: "NodePackageId", # required
-    #       }
-    #
     # @!attribute [rw] package_id
     #   The package's ID.
     #   @return [String]
@@ -1296,16 +1116,6 @@ module Aws::Panorama
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribePackageVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         owner_account: "PackageOwnerAccount",
-    #         package_id: "NodePackageId", # required
-    #         package_version: "NodePackageVersion", # required
-    #         patch_version: "NodePackagePatchVersion",
-    #       }
-    #
     # @!attribute [rw] owner_account
     #   The version's owner account.
     #   @return [String]
@@ -1502,15 +1312,6 @@ module Aws::Panorama
 
     # A job's configuration.
     #
-    # @note When making an API call, you may pass DeviceJobConfig
-    #   data as a hash:
-    #
-    #       {
-    #         ota_job_config: {
-    #           image_version: "ImageVersion", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] ota_job_config
     #   A configuration for an over-the-air (OTA) upgrade. Required for OTA
     #   jobs.
@@ -1525,19 +1326,6 @@ module Aws::Panorama
     end
 
     # A device's network configuration.
-    #
-    # @note When making an API call, you may pass EthernetPayload
-    #   data as a hash:
-    #
-    #       {
-    #         connection_type: "STATIC_IP", # required, accepts STATIC_IP, DHCP
-    #         static_ip_connection_info: {
-    #           default_gateway: "DefaultGateway", # required
-    #           dns: ["Dns"], # required
-    #           ip_address: "IpAddress", # required
-    #           mask: "Mask", # required
-    #         },
-    #       }
     #
     # @!attribute [rw] connection_type
     #   How the device gets an IP address.
@@ -1619,16 +1407,6 @@ module Aws::Panorama
 
     # Tags for a job.
     #
-    # @note When making an API call, you may pass JobResourceTags
-    #   data as a hash:
-    #
-    #       {
-    #         resource_type: "PACKAGE", # required, accepts PACKAGE
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_type
     #   The job's type.
     #   @return [String]
@@ -1670,15 +1448,6 @@ module Aws::Panorama
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListApplicationInstanceDependenciesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_instance_id: "ApplicationInstanceId", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] application_instance_id
     #   The application instance's ID.
     #   @return [String]
@@ -1720,15 +1489,6 @@ module Aws::Panorama
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListApplicationInstanceNodeInstancesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_instance_id: "ApplicationInstanceId", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] application_instance_id
     #   The node instances' application instance ID.
     #   @return [String]
@@ -1770,16 +1530,6 @@ module Aws::Panorama
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListApplicationInstancesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_id: "DeviceId",
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         status_filter: "DEPLOYMENT_SUCCEEDED", # accepts DEPLOYMENT_SUCCEEDED, DEPLOYMENT_ERROR, REMOVAL_SUCCEEDED, REMOVAL_FAILED, PROCESSING_DEPLOYMENT, PROCESSING_REMOVAL, DEPLOYMENT_FAILED
-    #       }
-    #
     # @!attribute [rw] device_id
     #   The application instances' device ID.
     #   @return [String]
@@ -1826,15 +1576,6 @@ module Aws::Panorama
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDevicesJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_id: "DeviceId",
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] device_id
     #   Filter results by the job's target device ID.
     #   @return [String]
@@ -1875,18 +1616,6 @@ module Aws::Panorama
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDevicesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_aggregated_status_filter: "ERROR", # accepts ERROR, AWAITING_PROVISIONING, PENDING, FAILED, DELETING, ONLINE, OFFLINE, LEASE_EXPIRED, UPDATE_NEEDED, REBOOTING
-    #         max_results: 1,
-    #         name_filter: "NameFilter",
-    #         next_token: "NextToken",
-    #         sort_by: "DEVICE_ID", # accepts DEVICE_ID, CREATED_TIME, NAME, DEVICE_AGGREGATED_STATUS
-    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #       }
-    #
     # @!attribute [rw] device_aggregated_status_filter
     #   Filter based on a device's status.
     #   @return [String]
@@ -1944,14 +1673,6 @@ module Aws::Panorama
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListNodeFromTemplateJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of node from template jobs to return in one page
     #   of results.
@@ -1988,19 +1709,6 @@ module Aws::Panorama
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListNodesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         category: "BUSINESS_LOGIC", # accepts BUSINESS_LOGIC, ML_MODEL, MEDIA_SOURCE, MEDIA_SINK
-    #         max_results: 1,
-    #         next_token: "Token",
-    #         owner_account: "PackageOwnerAccount",
-    #         package_name: "NodePackageName",
-    #         package_version: "NodePackageVersion",
-    #         patch_version: "NodePackagePatchVersion",
-    #       }
-    #
     # @!attribute [rw] category
     #   Search for nodes by category.
     #   @return [String]
@@ -2061,14 +1769,6 @@ module Aws::Panorama
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPackageImportJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of package import jobs to return in one page of
     #   results.
@@ -2105,14 +1805,6 @@ module Aws::Panorama
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPackagesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "Token",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of packages to return in one page of results.
     #   @return [Integer]
@@ -2148,13 +1840,6 @@ module Aws::Panorama
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The resource's ARN.
     #   @return [String]
@@ -2183,10 +1868,6 @@ module Aws::Panorama
     # document that has a single key (`PayloadData`) where the value is an
     # escaped string representation of the overrides document.
     #
-    # @note ManifestOverridesPayload is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note ManifestOverridesPayload is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ManifestOverridesPayload corresponding to the set member.
-    #
     # @!attribute [rw] payload_data
     #   The overrides document.
     #   @return [String]
@@ -2209,10 +1890,6 @@ module Aws::Panorama
     # representation of the application manifest (`graph.json`). This file
     # is located in the `graphs` folder in your application source.
     #
-    # @note ManifestPayload is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note ManifestPayload is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ManifestPayload corresponding to the set member.
-    #
     # @!attribute [rw] payload_data
     #   The application manifest.
     #   @return [String]
@@ -2231,33 +1908,6 @@ module Aws::Panorama
     end
 
     # The network configuration for a device.
-    #
-    # @note When making an API call, you may pass NetworkPayload
-    #   data as a hash:
-    #
-    #       {
-    #         ethernet_0: {
-    #           connection_type: "STATIC_IP", # required, accepts STATIC_IP, DHCP
-    #           static_ip_connection_info: {
-    #             default_gateway: "DefaultGateway", # required
-    #             dns: ["Dns"], # required
-    #             ip_address: "IpAddress", # required
-    #             mask: "Mask", # required
-    #           },
-    #         },
-    #         ethernet_1: {
-    #           connection_type: "STATIC_IP", # required, accepts STATIC_IP, DHCP
-    #           static_ip_connection_info: {
-    #             default_gateway: "DefaultGateway", # required
-    #             dns: ["Dns"], # required
-    #             ip_address: "IpAddress", # required
-    #             mask: "Mask", # required
-    #           },
-    #         },
-    #         ntp: {
-    #           ntp_servers: ["IpAddressOrServerName"], # required
-    #         },
-    #       }
     #
     # @!attribute [rw] ethernet_0
     #   Settings for Ethernet port 0.
@@ -2537,14 +2187,6 @@ module Aws::Panorama
 
     # A signal to a camera node to start or stop processing video.
     #
-    # @note When making an API call, you may pass NodeSignal
-    #   data as a hash:
-    #
-    #       {
-    #         node_instance_id: "NodeInstanceId", # required
-    #         signal: "PAUSE", # required, accepts PAUSE, RESUME
-    #       }
-    #
     # @!attribute [rw] node_instance_id
     #   The camera node's name, from the application manifest.
     #   @return [String]
@@ -2564,13 +2206,6 @@ module Aws::Panorama
 
     # Network time protocol (NTP) server settings. Use this option to
     # connect to local NTP servers instead of `pool.ntp.org`.
-    #
-    # @note When making an API call, you may pass NtpPayload
-    #   data as a hash:
-    #
-    #       {
-    #         ntp_servers: ["IpAddressOrServerName"], # required
-    #       }
     #
     # @!attribute [rw] ntp_servers
     #   NTP servers to use, in order of preference.
@@ -2609,13 +2244,6 @@ module Aws::Panorama
     end
 
     # An over-the-air update (OTA) job configuration.
-    #
-    # @note When making an API call, you may pass OTAJobConfig
-    #   data as a hash:
-    #
-    #       {
-    #         image_version: "ImageVersion", # required
-    #       }
     #
     # @!attribute [rw] image_version
     #   The target version of the device software.
@@ -2689,19 +2317,6 @@ module Aws::Panorama
 
     # A configuration for a package import job.
     #
-    # @note When making an API call, you may pass PackageImportJobInputConfig
-    #   data as a hash:
-    #
-    #       {
-    #         package_version_input_config: {
-    #           s3_location: { # required
-    #             bucket_name: "BucketName", # required
-    #             object_key: "ObjectKey", # required
-    #             region: "Region",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] package_version_input_config
     #   The package version's input configuration.
     #   @return [Types::PackageVersionInputConfig]
@@ -2744,17 +2359,6 @@ module Aws::Panorama
     end
 
     # An output configuration for a package import job.
-    #
-    # @note When making an API call, you may pass PackageImportJobOutputConfig
-    #   data as a hash:
-    #
-    #       {
-    #         package_version_output_config: {
-    #           mark_latest: false,
-    #           package_name: "NodePackageName", # required
-    #           package_version: "NodePackageVersion", # required
-    #         },
-    #       }
     #
     # @!attribute [rw] package_version_output_config
     #   The package version's output configuration.
@@ -2828,17 +2432,6 @@ module Aws::Panorama
 
     # A package version input configuration.
     #
-    # @note When making an API call, you may pass PackageVersionInputConfig
-    #   data as a hash:
-    #
-    #       {
-    #         s3_location: { # required
-    #           bucket_name: "BucketName", # required
-    #           object_key: "ObjectKey", # required
-    #           region: "Region",
-    #         },
-    #       }
-    #
     # @!attribute [rw] s3_location
     #   A location in Amazon S3.
     #   @return [Types::S3Location]
@@ -2852,15 +2445,6 @@ module Aws::Panorama
     end
 
     # A package version output configuration.
-    #
-    # @note When making an API call, you may pass PackageVersionOutputConfig
-    #   data as a hash:
-    #
-    #       {
-    #         mark_latest: false,
-    #         package_name: "NodePackageName", # required
-    #         package_version: "NodePackageVersion", # required
-    #       }
     #
     # @!attribute [rw] mark_latest
     #   Indicates that the version is recommended for all users.
@@ -2884,40 +2468,6 @@ module Aws::Panorama
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ProvisionDeviceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "Description",
-    #         name: "DeviceName", # required
-    #         networking_configuration: {
-    #           ethernet_0: {
-    #             connection_type: "STATIC_IP", # required, accepts STATIC_IP, DHCP
-    #             static_ip_connection_info: {
-    #               default_gateway: "DefaultGateway", # required
-    #               dns: ["Dns"], # required
-    #               ip_address: "IpAddress", # required
-    #               mask: "Mask", # required
-    #             },
-    #           },
-    #           ethernet_1: {
-    #             connection_type: "STATIC_IP", # required, accepts STATIC_IP, DHCP
-    #             static_ip_connection_info: {
-    #               default_gateway: "DefaultGateway", # required
-    #               dns: ["Dns"], # required
-    #               ip_address: "IpAddress", # required
-    #               mask: "Mask", # required
-    #             },
-    #           },
-    #           ntp: {
-    #             ntp_servers: ["IpAddressOrServerName"], # required
-    #           },
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] description
     #   A description for the device.
     #   @return [String]
@@ -2977,17 +2527,6 @@ module Aws::Panorama
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RegisterPackageVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         mark_latest: false,
-    #         owner_account: "PackageOwnerAccount",
-    #         package_id: "NodePackageId", # required
-    #         package_version: "NodePackageVersion", # required
-    #         patch_version: "NodePackagePatchVersion", # required
-    #       }
-    #
     # @!attribute [rw] mark_latest
     #   Whether to mark the new version as the latest version.
     #   @return [Boolean]
@@ -3024,13 +2563,6 @@ module Aws::Panorama
     #
     class RegisterPackageVersionResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass RemoveApplicationInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_instance_id: "ApplicationInstanceId", # required
-    #       }
-    #
     # @!attribute [rw] application_instance_id
     #   An application instance ID.
     #   @return [String]
@@ -3101,15 +2633,6 @@ module Aws::Panorama
 
     # A location in Amazon S3.
     #
-    # @note When making an API call, you may pass S3Location
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_name: "BucketName", # required
-    #         object_key: "ObjectKey", # required
-    #         region: "Region",
-    #       }
-    #
     # @!attribute [rw] bucket_name
     #   A bucket name.
     #   @return [String]
@@ -3165,19 +2688,6 @@ module Aws::Panorama
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SignalApplicationInstanceNodeInstancesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_instance_id: "ApplicationInstanceId", # required
-    #         node_signals: [ # required
-    #           {
-    #             node_instance_id: "NodeInstanceId", # required
-    #             signal: "PAUSE", # required, accepts PAUSE, RESUME
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] application_instance_id
     #   An application instance ID.
     #   @return [String]
@@ -3208,16 +2718,6 @@ module Aws::Panorama
     end
 
     # A static IP configuration.
-    #
-    # @note When making an API call, you may pass StaticIpConnectionInfo
-    #   data as a hash:
-    #
-    #       {
-    #         default_gateway: "DefaultGateway", # required
-    #         dns: ["Dns"], # required
-    #         ip_address: "IpAddress", # required
-    #         mask: "Mask", # required
-    #       }
     #
     # @!attribute [rw] default_gateway
     #   The connection's default gateway.
@@ -3280,16 +2780,6 @@ module Aws::Panorama
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The resource's ARN.
     #   @return [String]
@@ -3311,14 +2801,6 @@ module Aws::Panorama
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The resource's ARN.
     #   @return [String]
@@ -3340,14 +2822,6 @@ module Aws::Panorama
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateDeviceMetadataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "Description",
-    #         device_id: "DeviceId", # required
-    #       }
-    #
     # @!attribute [rw] description
     #   A description for the device.
     #   @return [String]

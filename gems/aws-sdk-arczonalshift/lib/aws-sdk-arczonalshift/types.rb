@@ -23,13 +23,6 @@ module Aws::ARCZonalShift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CancelZonalShiftRequest
-    #   data as a hash:
-    #
-    #       {
-    #         zonal_shift_id: "ZonalShiftId", # required
-    #       }
-    #
     # @!attribute [rw] zonal_shift_id
     #   The internally-generated identifier of a zonal shift.
     #   @return [String]
@@ -66,13 +59,6 @@ module Aws::ARCZonalShift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetManagedResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_identifier: "ResourceIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] resource_identifier
     #   The identifier for the resource to include in a zonal shift. The
     #   identifier is the Amazon Resource Name (ARN) for the resource.
@@ -133,14 +119,6 @@ module Aws::ARCZonalShift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListManagedResourcesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The number of objects that you want to return with this call.
     #   @return [Integer]
@@ -183,15 +161,6 @@ module Aws::ARCZonalShift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListZonalShiftsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "String",
-    #         status: "ACTIVE", # accepts ACTIVE, EXPIRED, CANCELED
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The number of objects that you want to return with this call.
     #   @return [Integer]
@@ -297,16 +266,6 @@ module Aws::ARCZonalShift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartZonalShiftRequest
-    #   data as a hash:
-    #
-    #       {
-    #         away_from: "AvailabilityZone", # required
-    #         comment: "ZonalShiftComment", # required
-    #         expires_in: "ExpiresIn", # required
-    #         resource_identifier: "ResourceIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] away_from
     #   The Availability Zone that traffic is moved away from for a resource
     #   when you start a zonal shift. Until the zonal shift expires or you
@@ -370,15 +329,6 @@ module Aws::ARCZonalShift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateZonalShiftRequest
-    #   data as a hash:
-    #
-    #       {
-    #         comment: "ZonalShiftComment",
-    #         expires_in: "ExpiresIn",
-    #         zonal_shift_id: "ZonalShiftId", # required
-    #       }
-    #
     # @!attribute [rw] comment
     #   A comment that you enter about the zonal shift. Only the latest
     #   comment is retained; no comment history is maintained. A new comment

@@ -53,13 +53,6 @@ module Aws::AppConfigData
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLatestConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_token: "Token", # required
-    #       }
-    #
     # @!attribute [rw] configuration_token
     #   Token describing the current state of the configuration session. To
     #   obtain a token, first call the StartConfigurationSession API. Note
@@ -162,16 +155,6 @@ module Aws::AppConfigData
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartConfigurationSessionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_identifier: "Identifier", # required
-    #         environment_identifier: "Identifier", # required
-    #         configuration_profile_identifier: "Identifier", # required
-    #         required_minimum_poll_interval_in_seconds: 1,
-    #       }
-    #
     # @!attribute [rw] application_identifier
     #   The application ID or the application name.
     #   @return [String]

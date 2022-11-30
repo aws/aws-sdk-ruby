@@ -23,20 +23,6 @@ module Aws::CloudWatchEvidently
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchEvaluateFeatureRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project: "ProjectRef", # required
-    #         requests: [ # required
-    #           {
-    #             entity_id: "EntityId", # required
-    #             evaluation_context: "JsonValue",
-    #             feature: "FeatureName", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] project
     #   The name or ARN of the project that contains the feature being
     #   evaluated.
@@ -88,13 +74,6 @@ module Aws::CloudWatchEvidently
     # A structure containing the CloudWatch Logs log group where the project
     # stores evaluation events.
     #
-    # @note When making an API call, you may pass CloudWatchLogsDestinationConfig
-    #   data as a hash:
-    #
-    #       {
-    #         log_group: "CwLogGroupSafeName",
-    #       }
-    #
     # @!attribute [rw] log_group
     #   The name of the log group where the project stores evaluation
     #   events.
@@ -132,47 +111,6 @@ module Aws::CloudWatchEvidently
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateExperimentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "Description",
-    #         metric_goals: [ # required
-    #           {
-    #             desired_change: "INCREASE", # accepts INCREASE, DECREASE
-    #             metric_definition: { # required
-    #               entity_id_key: "JsonPath", # required
-    #               event_pattern: "MetricDefinitionConfigEventPatternString",
-    #               name: "CwDimensionSafeName", # required
-    #               unit_label: "MetricUnitLabel",
-    #               value_key: "JsonPath", # required
-    #             },
-    #           },
-    #         ],
-    #         name: "ExperimentName", # required
-    #         online_ab_config: {
-    #           control_treatment_name: "TreatmentName",
-    #           treatment_weights: {
-    #             "TreatmentName" => 1,
-    #           },
-    #         },
-    #         project: "ProjectRef", # required
-    #         randomization_salt: "RandomizationSalt",
-    #         sampling_rate: 1,
-    #         segment: "SegmentRef",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         treatments: [ # required
-    #           {
-    #             description: "Description",
-    #             feature: "FeatureName", # required
-    #             name: "TreatmentName", # required
-    #             variation: "VariationName", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] description
     #   An optional description of the experiment.
     #   @return [String]
@@ -272,34 +210,6 @@ module Aws::CloudWatchEvidently
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateFeatureRequest
-    #   data as a hash:
-    #
-    #       {
-    #         default_variation: "VariationName",
-    #         description: "Description",
-    #         entity_overrides: {
-    #           "EntityId" => "VariationName",
-    #         },
-    #         evaluation_strategy: "ALL_RULES", # accepts ALL_RULES, DEFAULT_VARIATION
-    #         name: "FeatureName", # required
-    #         project: "ProjectRef", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         variations: [ # required
-    #           {
-    #             name: "VariationName", # required
-    #             value: { # required
-    #               bool_value: false,
-    #               double_value: 1.0,
-    #               long_value: 1,
-    #               string_value: "VariableValueStringValueString",
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] default_variation
     #   The name of the variation to use as the default variation. The
     #   default variation is served to users who are not allocated to any
@@ -383,57 +293,6 @@ module Aws::CloudWatchEvidently
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateLaunchRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "Description",
-    #         groups: [ # required
-    #           {
-    #             description: "Description",
-    #             feature: "FeatureName", # required
-    #             name: "GroupName", # required
-    #             variation: "VariationName", # required
-    #           },
-    #         ],
-    #         metric_monitors: [
-    #           {
-    #             metric_definition: { # required
-    #               entity_id_key: "JsonPath", # required
-    #               event_pattern: "MetricDefinitionConfigEventPatternString",
-    #               name: "CwDimensionSafeName", # required
-    #               unit_label: "MetricUnitLabel",
-    #               value_key: "JsonPath", # required
-    #             },
-    #           },
-    #         ],
-    #         name: "LaunchName", # required
-    #         project: "ProjectRef", # required
-    #         randomization_salt: "RandomizationSalt",
-    #         scheduled_splits_config: {
-    #           steps: [ # required
-    #             {
-    #               group_weights: { # required
-    #                 "GroupName" => 1,
-    #               },
-    #               segment_overrides: [
-    #                 {
-    #                   evaluation_order: 1, # required
-    #                   segment: "SegmentRef", # required
-    #                   weights: { # required
-    #                     "GroupName" => 1,
-    #                   },
-    #                 },
-    #               ],
-    #               start_time: Time.now, # required
-    #             },
-    #           ],
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] description
     #   An optional description for the launch.
     #   @return [String]
@@ -513,30 +372,6 @@ module Aws::CloudWatchEvidently
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateProjectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_config_resource: {
-    #           application_id: "AppConfigResourceId",
-    #           environment_id: "AppConfigResourceId",
-    #         },
-    #         data_delivery: {
-    #           cloud_watch_logs: {
-    #             log_group: "CwLogGroupSafeName",
-    #           },
-    #           s3_destination: {
-    #             bucket: "S3BucketSafeName",
-    #             prefix: "S3PrefixSafeName",
-    #           },
-    #         },
-    #         description: "Description",
-    #         name: "ProjectName", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] app_config_resource
     #   Use this parameter if the project will use *client-side evaluation
     #   powered by AppConfig*. Client-side evaluation allows your
@@ -613,18 +448,6 @@ module Aws::CloudWatchEvidently
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateSegmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "Description",
-    #         name: "SegmentName", # required
-    #         pattern: "SegmentPattern", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] description
     #   An optional description for this segment.
     #   @return [String]
@@ -680,14 +503,6 @@ module Aws::CloudWatchEvidently
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteExperimentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         experiment: "ExperimentName", # required
-    #         project: "ProjectRef", # required
-    #       }
-    #
     # @!attribute [rw] experiment
     #   The name of the experiment to delete.
     #   @return [String]
@@ -710,14 +525,6 @@ module Aws::CloudWatchEvidently
     #
     class DeleteExperimentResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteFeatureRequest
-    #   data as a hash:
-    #
-    #       {
-    #         feature: "FeatureName", # required
-    #         project: "ProjectRef", # required
-    #       }
-    #
     # @!attribute [rw] feature
     #   The name of the feature to delete.
     #   @return [String]
@@ -739,14 +546,6 @@ module Aws::CloudWatchEvidently
     #
     class DeleteFeatureResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteLaunchRequest
-    #   data as a hash:
-    #
-    #       {
-    #         launch: "LaunchName", # required
-    #         project: "ProjectRef", # required
-    #       }
-    #
     # @!attribute [rw] launch
     #   The name of the launch to delete.
     #   @return [String]
@@ -768,13 +567,6 @@ module Aws::CloudWatchEvidently
     #
     class DeleteLaunchResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteProjectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project: "ProjectRef", # required
-    #       }
-    #
     # @!attribute [rw] project
     #   The name or ARN of the project to delete.
     #   @return [String]
@@ -791,13 +583,6 @@ module Aws::CloudWatchEvidently
     #
     class DeleteProjectResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteSegmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         segment: "SegmentRef", # required
-    #       }
-    #
     # @!attribute [rw] segment
     #   Specifies the segment to delete.
     #   @return [String]
@@ -814,16 +599,6 @@ module Aws::CloudWatchEvidently
     #
     class DeleteSegmentResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass EvaluateFeatureRequest
-    #   data as a hash:
-    #
-    #       {
-    #         entity_id: "EntityId", # required
-    #         evaluation_context: "JsonValue",
-    #         feature: "FeatureName", # required
-    #         project: "ProjectRef", # required
-    #       }
-    #
     # @!attribute [rw] entity_id
     #   An internal ID that represents a unique user of the application.
     #   This `entityID` is checked against any override rules assigned for
@@ -899,15 +674,6 @@ module Aws::CloudWatchEvidently
     end
 
     # This structure assigns a feature variation to one user session.
-    #
-    # @note When making an API call, you may pass EvaluationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         entity_id: "EntityId", # required
-    #         evaluation_context: "JsonValue",
-    #         feature: "FeatureName", # required
-    #       }
     #
     # @!attribute [rw] entity_id
     #   An internal ID that represents a unique user session of the
@@ -1014,15 +780,6 @@ module Aws::CloudWatchEvidently
     # or custom event sent to Evidently. This is a JSON payload. If this
     # event specifies a pre-defined event type, the payload must follow the
     # defined event schema.
-    #
-    # @note When making an API call, you may pass Event
-    #   data as a hash:
-    #
-    #       {
-    #         data: "JsonValue", # required
-    #         timestamp: Time.now, # required
-    #         type: "aws.evidently.evaluation", # required, accepts aws.evidently.evaluation, aws.evidently.custom
-    #       }
     #
     # @!attribute [rw] data
     #   The event data.
@@ -1438,14 +1195,6 @@ module Aws::CloudWatchEvidently
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetExperimentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         experiment: "ExperimentName", # required
-    #         project: "ProjectRef", # required
-    #       }
-    #
     # @!attribute [rw] experiment
     #   The name of the experiment that you want to see the details of.
     #   @return [String]
@@ -1475,22 +1224,6 @@ module Aws::CloudWatchEvidently
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetExperimentResultsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         base_stat: "Mean", # accepts Mean
-    #         end_time: Time.now,
-    #         experiment: "ExperimentName", # required
-    #         metric_names: ["CwDimensionSafeName"], # required
-    #         period: 1,
-    #         project: "ProjectRef", # required
-    #         report_names: ["BayesianInference"], # accepts BayesianInference
-    #         result_stats: ["BaseStat"], # accepts BaseStat, TreatmentEffect, ConfidenceInterval, PValue
-    #         start_time: Time.now,
-    #         treatment_names: ["TreatmentName"], # required
-    #       }
-    #
     # @!attribute [rw] base_stat
     #   The statistic used to calculate experiment results. Currently the
     #   only valid value is `mean`, which uses the mean of the collected
@@ -1609,14 +1342,6 @@ module Aws::CloudWatchEvidently
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetFeatureRequest
-    #   data as a hash:
-    #
-    #       {
-    #         feature: "FeatureName", # required
-    #         project: "ProjectRef", # required
-    #       }
-    #
     # @!attribute [rw] feature
     #   The name of the feature that you want to retrieve information for.
     #   @return [String]
@@ -1646,14 +1371,6 @@ module Aws::CloudWatchEvidently
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLaunchRequest
-    #   data as a hash:
-    #
-    #       {
-    #         launch: "LaunchName", # required
-    #         project: "ProjectRef", # required
-    #       }
-    #
     # @!attribute [rw] launch
     #   The name of the launch that you want to see the details of.
     #   @return [String]
@@ -1683,13 +1400,6 @@ module Aws::CloudWatchEvidently
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetProjectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project: "ProjectRef", # required
-    #       }
-    #
     # @!attribute [rw] project
     #   The name or ARN of the project that you want to see the details of.
     #   @return [String]
@@ -1714,13 +1424,6 @@ module Aws::CloudWatchEvidently
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSegmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         segment: "SegmentRef", # required
-    #       }
-    #
     # @!attribute [rw] segment
     #   The ARN of the segment to return information for.
     #   @return [String]
@@ -1902,16 +1605,6 @@ module Aws::CloudWatchEvidently
     # A structure that defines one launch group in a launch. A launch group
     # is a variation of the feature that you are including in the launch.
     #
-    # @note When making an API call, you may pass LaunchGroupConfig
-    #   data as a hash:
-    #
-    #       {
-    #         description: "Description",
-    #         feature: "FeatureName", # required
-    #         name: "GroupName", # required
-    #         variation: "VariationName", # required
-    #       }
-    #
     # @!attribute [rw] description
     #   A description of the launch group.
     #   @return [String]
@@ -1939,16 +1632,6 @@ module Aws::CloudWatchEvidently
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListExperimentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         project: "ProjectRef", # required
-    #         status: "CREATED", # accepts CREATED, UPDATING, RUNNING, COMPLETED, CANCELLED
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to include in the response.
     #   @return [Integer]
@@ -1997,15 +1680,6 @@ module Aws::CloudWatchEvidently
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFeaturesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         project: "ProjectRef", # required
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to include in the response.
     #   @return [Integer]
@@ -2048,16 +1722,6 @@ module Aws::CloudWatchEvidently
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListLaunchesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         project: "ProjectRef", # required
-    #         status: "CREATED", # accepts CREATED, UPDATING, RUNNING, COMPLETED, CANCELLED
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to include in the response.
     #   @return [Integer]
@@ -2106,14 +1770,6 @@ module Aws::CloudWatchEvidently
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListProjectsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to include in the response.
     #   @return [Integer]
@@ -2151,16 +1807,6 @@ module Aws::CloudWatchEvidently
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSegmentReferencesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         segment: "SegmentRef", # required
-    #         type: "EXPERIMENT", # required, accepts EXPERIMENT, LAUNCH
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to include in the response. If you
     #   omit this, the default of 50 is used.
@@ -2211,14 +1857,6 @@ module Aws::CloudWatchEvidently
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSegmentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to include in the response. If you
     #   omit this, the default of 50 is used.
@@ -2257,13 +1895,6 @@ module Aws::CloudWatchEvidently
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource that you want to see the tags of.
     #   @return [String]
@@ -2336,17 +1967,6 @@ module Aws::CloudWatchEvidently
     # This structure defines a metric that you want to use to evaluate the
     # variations during a launch or experiment.
     #
-    # @note When making an API call, you may pass MetricDefinitionConfig
-    #   data as a hash:
-    #
-    #       {
-    #         entity_id_key: "JsonPath", # required
-    #         event_pattern: "MetricDefinitionConfigEventPatternString",
-    #         name: "CwDimensionSafeName", # required
-    #         unit_label: "MetricUnitLabel",
-    #         value_key: "JsonPath", # required
-    #       }
-    #
     # @!attribute [rw] entity_id_key
     #   The entity, such as a user or session, that does an action that
     #   causes a metric value to be recorded. An example is
@@ -2416,20 +2036,6 @@ module Aws::CloudWatchEvidently
     # Use this structure to tell Evidently whether higher or lower values
     # are desired for a metric that is used in an experiment.
     #
-    # @note When making an API call, you may pass MetricGoalConfig
-    #   data as a hash:
-    #
-    #       {
-    #         desired_change: "INCREASE", # accepts INCREASE, DECREASE
-    #         metric_definition: { # required
-    #           entity_id_key: "JsonPath", # required
-    #           event_pattern: "MetricDefinitionConfigEventPatternString",
-    #           name: "CwDimensionSafeName", # required
-    #           unit_label: "MetricUnitLabel",
-    #           value_key: "JsonPath", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] desired_change
     #   `INCREASE` means that a variation with a higher number for this
     #   metric is performing better.
@@ -2469,19 +2075,6 @@ module Aws::CloudWatchEvidently
     # A structure that defines a metric to be used to monitor performance of
     # the variations during a launch.
     #
-    # @note When making an API call, you may pass MetricMonitorConfig
-    #   data as a hash:
-    #
-    #       {
-    #         metric_definition: { # required
-    #           entity_id_key: "JsonPath", # required
-    #           event_pattern: "MetricDefinitionConfigEventPatternString",
-    #           name: "CwDimensionSafeName", # required
-    #           unit_label: "MetricUnitLabel",
-    #           value_key: "JsonPath", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] metric_definition
     #   A structure that defines the metric.
     #   @return [Types::MetricDefinitionConfig]
@@ -2498,16 +2091,6 @@ module Aws::CloudWatchEvidently
     # as the "control" version. The "control" version is used for
     # comparison with other variations. This structure also specifies how
     # much experiment traffic is allocated to each variation.
-    #
-    # @note When making an API call, you may pass OnlineAbConfig
-    #   data as a hash:
-    #
-    #       {
-    #         control_treatment_name: "TreatmentName",
-    #         treatment_weights: {
-    #           "TreatmentName" => 1,
-    #         },
-    #       }
     #
     # @!attribute [rw] control_treatment_name
     #   The name of the variation that is to be the default variation that
@@ -2688,14 +2271,6 @@ module Aws::CloudWatchEvidently
     #
     # [1]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html
     #
-    # @note When making an API call, you may pass ProjectAppConfigResourceConfig
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "AppConfigResourceId",
-    #         environment_id: "AppConfigResourceId",
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The ID of the AppConfig application to use for client-side
     #   evaluation.
@@ -2740,19 +2315,6 @@ module Aws::CloudWatchEvidently
 
     # A structure that contains information about where Evidently is to
     # store evaluation events for longer term storage.
-    #
-    # @note When making an API call, you may pass ProjectDataDeliveryConfig
-    #   data as a hash:
-    #
-    #       {
-    #         cloud_watch_logs: {
-    #           log_group: "CwLogGroupSafeName",
-    #         },
-    #         s3_destination: {
-    #           bucket: "S3BucketSafeName",
-    #           prefix: "S3PrefixSafeName",
-    #         },
-    #       }
     #
     # @!attribute [rw] cloud_watch_logs
     #   If the project stores evaluation events in CloudWatch Logs, this
@@ -2844,20 +2406,6 @@ module Aws::CloudWatchEvidently
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutProjectEventsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         events: [ # required
-    #           {
-    #             data: "JsonValue", # required
-    #             timestamp: Time.now, # required
-    #             type: "aws.evidently.evaluation", # required, accepts aws.evidently.evaluation, aws.evidently.custom
-    #           },
-    #         ],
-    #         project: "ProjectRef", # required
-    #       }
-    #
     # @!attribute [rw] events
     #   An array of event structures that contain the performance data that
     #   is being sent to Evidently.
@@ -3015,14 +2563,6 @@ module Aws::CloudWatchEvidently
     # If the project stores evaluation events in an Amazon S3 bucket, this
     # structure stores the bucket name and bucket prefix.
     #
-    # @note When making an API call, you may pass S3DestinationConfig
-    #   data as a hash:
-    #
-    #       {
-    #         bucket: "S3BucketSafeName",
-    #         prefix: "S3PrefixSafeName",
-    #       }
-    #
     # @!attribute [rw] bucket
     #   The name of the bucket in which Evidently stores evaluation events.
     #   @return [String]
@@ -3091,25 +2631,6 @@ module Aws::CloudWatchEvidently
     # feature variations during one step of a launch, and the start time of
     # that step.
     #
-    # @note When making an API call, you may pass ScheduledSplitConfig
-    #   data as a hash:
-    #
-    #       {
-    #         group_weights: { # required
-    #           "GroupName" => 1,
-    #         },
-    #         segment_overrides: [
-    #           {
-    #             evaluation_order: 1, # required
-    #             segment: "SegmentRef", # required
-    #             weights: { # required
-    #               "GroupName" => 1,
-    #             },
-    #           },
-    #         ],
-    #         start_time: Time.now, # required
-    #       }
-    #
     # @!attribute [rw] group_weights
     #   The traffic allocation percentages among the feature variations
     #   during one step of a launch. This is a set of key-value pairs. The
@@ -3149,29 +2670,6 @@ module Aws::CloudWatchEvidently
     # An array of structures that define the traffic allocation percentages
     # among the feature variations during each step of a launch. This also
     # defines the start time of each step.
-    #
-    # @note When making an API call, you may pass ScheduledSplitsLaunchConfig
-    #   data as a hash:
-    #
-    #       {
-    #         steps: [ # required
-    #           {
-    #             group_weights: { # required
-    #               "GroupName" => 1,
-    #             },
-    #             segment_overrides: [
-    #               {
-    #                 evaluation_order: 1, # required
-    #                 segment: "SegmentRef", # required
-    #                 weights: { # required
-    #                   "GroupName" => 1,
-    #                 },
-    #               },
-    #             ],
-    #             start_time: Time.now, # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] steps
     #   An array of structures that define the traffic allocation
@@ -3275,17 +2773,6 @@ module Aws::CloudWatchEvidently
     # This structure specifies a segment that you have already created, and
     # defines the traffic split for that segment to be used in a launch.
     #
-    # @note When making an API call, you may pass SegmentOverride
-    #   data as a hash:
-    #
-    #       {
-    #         evaluation_order: 1, # required
-    #         segment: "SegmentRef", # required
-    #         weights: { # required
-    #           "GroupName" => 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] evaluation_order
     #   A number indicating the order to use to evaluate segment overrides,
     #   if there are more than one. Segment overrides with lower numbers are
@@ -3361,15 +2848,6 @@ module Aws::CloudWatchEvidently
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartExperimentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         analysis_complete_time: Time.now, # required
-    #         experiment: "ExperimentName", # required
-    #         project: "ProjectRef", # required
-    #       }
-    #
     # @!attribute [rw] analysis_complete_time
     #   The date and time to end the experiment. This must be no more than
     #   30 days after the experiment starts.
@@ -3406,14 +2884,6 @@ module Aws::CloudWatchEvidently
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartLaunchRequest
-    #   data as a hash:
-    #
-    #       {
-    #         launch: "LaunchName", # required
-    #         project: "ProjectRef", # required
-    #       }
-    #
     # @!attribute [rw] launch
     #   The name of the launch to start.
     #   @return [String]
@@ -3444,16 +2914,6 @@ module Aws::CloudWatchEvidently
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopExperimentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         desired_state: "COMPLETED", # accepts COMPLETED, CANCELLED
-    #         experiment: "ExperimentName", # required
-    #         project: "ProjectRef", # required
-    #         reason: "Description",
-    #       }
-    #
     # @!attribute [rw] desired_state
     #   Specify whether the experiment is to be considered `COMPLETED` or
     #   `CANCELLED` after it stops.
@@ -3494,16 +2954,6 @@ module Aws::CloudWatchEvidently
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopLaunchRequest
-    #   data as a hash:
-    #
-    #       {
-    #         desired_state: "COMPLETED", # accepts COMPLETED, CANCELLED
-    #         launch: "LaunchName", # required
-    #         project: "ProjectRef", # required
-    #         reason: "Description",
-    #       }
-    #
     # @!attribute [rw] desired_state
     #   Specify whether to consider the launch as `COMPLETED` or `CANCELLED`
     #   after it stops.
@@ -3545,16 +2995,6 @@ module Aws::CloudWatchEvidently
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the CloudWatch Evidently resource that you're adding
     #   tags to.
@@ -3577,14 +3017,6 @@ module Aws::CloudWatchEvidently
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass TestSegmentPatternRequest
-    #   data as a hash:
-    #
-    #       {
-    #         pattern: "SegmentPattern", # required
-    #         payload: "JsonValue", # required
-    #       }
-    #
     # @!attribute [rw] pattern
     #   The pattern to test.
     #   @return [String]
@@ -3671,16 +3103,6 @@ module Aws::CloudWatchEvidently
     # is a variation of the feature that you are including in the
     # experiment.
     #
-    # @note When making an API call, you may pass TreatmentConfig
-    #   data as a hash:
-    #
-    #       {
-    #         description: "Description",
-    #         feature: "FeatureName", # required
-    #         name: "TreatmentName", # required
-    #         variation: "VariationName", # required
-    #       }
-    #
     # @!attribute [rw] description
     #   A description for this treatment.
     #   @return [String]
@@ -3709,14 +3131,6 @@ module Aws::CloudWatchEvidently
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the CloudWatch Evidently resource that you're removing
     #   tags from.
@@ -3739,45 +3153,6 @@ module Aws::CloudWatchEvidently
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateExperimentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "Description",
-    #         experiment: "ExperimentName", # required
-    #         metric_goals: [
-    #           {
-    #             desired_change: "INCREASE", # accepts INCREASE, DECREASE
-    #             metric_definition: { # required
-    #               entity_id_key: "JsonPath", # required
-    #               event_pattern: "MetricDefinitionConfigEventPatternString",
-    #               name: "CwDimensionSafeName", # required
-    #               unit_label: "MetricUnitLabel",
-    #               value_key: "JsonPath", # required
-    #             },
-    #           },
-    #         ],
-    #         online_ab_config: {
-    #           control_treatment_name: "TreatmentName",
-    #           treatment_weights: {
-    #             "TreatmentName" => 1,
-    #           },
-    #         },
-    #         project: "ProjectRef", # required
-    #         randomization_salt: "RandomizationSalt",
-    #         remove_segment: false,
-    #         sampling_rate: 1,
-    #         segment: "SegmentRef",
-    #         treatments: [
-    #           {
-    #             description: "Description",
-    #             feature: "FeatureName", # required
-    #             name: "TreatmentName", # required
-    #             variation: "VariationName", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] description
     #   An optional description of the experiment.
     #   @return [String]
@@ -3869,32 +3244,6 @@ module Aws::CloudWatchEvidently
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateFeatureRequest
-    #   data as a hash:
-    #
-    #       {
-    #         add_or_update_variations: [
-    #           {
-    #             name: "VariationName", # required
-    #             value: { # required
-    #               bool_value: false,
-    #               double_value: 1.0,
-    #               long_value: 1,
-    #               string_value: "VariableValueStringValueString",
-    #             },
-    #           },
-    #         ],
-    #         default_variation: "VariationName",
-    #         description: "Description",
-    #         entity_overrides: {
-    #           "EntityId" => "VariationName",
-    #         },
-    #         evaluation_strategy: "ALL_RULES", # accepts ALL_RULES, DEFAULT_VARIATION
-    #         feature: "FeatureName", # required
-    #         project: "ProjectRef", # required
-    #         remove_variations: ["VariationName"],
-    #       }
-    #
     # @!attribute [rw] add_or_update_variations
     #   To update variation configurations for this feature, or add new
     #   ones, specify this structure. In this array, include any variations
@@ -3972,54 +3321,6 @@ module Aws::CloudWatchEvidently
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateLaunchRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "Description",
-    #         groups: [
-    #           {
-    #             description: "Description",
-    #             feature: "FeatureName", # required
-    #             name: "GroupName", # required
-    #             variation: "VariationName", # required
-    #           },
-    #         ],
-    #         launch: "LaunchName", # required
-    #         metric_monitors: [
-    #           {
-    #             metric_definition: { # required
-    #               entity_id_key: "JsonPath", # required
-    #               event_pattern: "MetricDefinitionConfigEventPatternString",
-    #               name: "CwDimensionSafeName", # required
-    #               unit_label: "MetricUnitLabel",
-    #               value_key: "JsonPath", # required
-    #             },
-    #           },
-    #         ],
-    #         project: "ProjectRef", # required
-    #         randomization_salt: "RandomizationSalt",
-    #         scheduled_splits_config: {
-    #           steps: [ # required
-    #             {
-    #               group_weights: { # required
-    #                 "GroupName" => 1,
-    #               },
-    #               segment_overrides: [
-    #                 {
-    #                   evaluation_order: 1, # required
-    #                   segment: "SegmentRef", # required
-    #                   weights: { # required
-    #                     "GroupName" => 1,
-    #                   },
-    #                 },
-    #               ],
-    #               start_time: Time.now, # required
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] description
     #   An optional description for the launch.
     #   @return [String]
@@ -4084,20 +3385,6 @@ module Aws::CloudWatchEvidently
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateProjectDataDeliveryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cloud_watch_logs: {
-    #           log_group: "CwLogGroupSafeName",
-    #         },
-    #         project: "ProjectRef", # required
-    #         s3_destination: {
-    #           bucket: "S3BucketSafeName",
-    #           prefix: "S3PrefixSafeName",
-    #         },
-    #       }
-    #
     # @!attribute [rw] cloud_watch_logs
     #   A structure containing the CloudWatch Logs log group where you want
     #   to store evaluation events.
@@ -4135,18 +3422,6 @@ module Aws::CloudWatchEvidently
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateProjectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_config_resource: {
-    #           application_id: "AppConfigResourceId",
-    #           environment_id: "AppConfigResourceId",
-    #         },
-    #         description: "Description",
-    #         project: "ProjectRef", # required
-    #       }
-    #
     # @!attribute [rw] app_config_resource
     #   Use this parameter if the project will use client-side evaluation
     #   powered by AppConfig. Client-side evaluation allows your application
@@ -4238,10 +3513,6 @@ module Aws::CloudWatchEvidently
     # exactly one field. It can be `boolValue`, `doubleValue`, `longValue`,
     # or `stringValue`.
     #
-    # @note VariableValue is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note VariableValue is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of VariableValue corresponding to the set member.
-    #
     # @!attribute [rw] bool_value
     #   If this feature uses the Boolean variation type, this field contains
     #   the Boolean value of this variation.
@@ -4303,19 +3574,6 @@ module Aws::CloudWatchEvidently
 
     # This structure contains the name and variation value of one variation
     # of a feature.
-    #
-    # @note When making an API call, you may pass VariationConfig
-    #   data as a hash:
-    #
-    #       {
-    #         name: "VariationName", # required
-    #         value: { # required
-    #           bool_value: false,
-    #           double_value: 1.0,
-    #           long_value: 1,
-    #           string_value: "VariableValueStringValueString",
-    #         },
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the variation.

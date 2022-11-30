@@ -23,19 +23,6 @@ module Aws::ACM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AddTagsToCertificateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_arn: "Arn", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] certificate_arn
     #   String that contains the ARN of the ACM certificate to which the tag
     #   is to be applied. This must be of the form:
@@ -292,13 +279,6 @@ module Aws::ACM
     #
     # [1]: https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency
     #
-    # @note When making an API call, you may pass CertificateOptions
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_transparency_logging_preference: "ENABLED", # accepts ENABLED, DISABLED
-    #       }
-    #
     # @!attribute [rw] certificate_transparency_logging_preference
     #   You can opt out of certificate transparency logging by specifying
     #   the `DISABLED` option. Opt in by specifying `ENABLED`.
@@ -501,13 +481,6 @@ module Aws::ACM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteCertificateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] certificate_arn
     #   String that contains the ARN of the ACM certificate to be deleted.
     #   This must be of the form:
@@ -530,13 +503,6 @@ module Aws::ACM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeCertificateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] certificate_arn
     #   The Amazon Resource Name (ARN) of the ACM certificate. The ARN must
     #   have the following form:
@@ -635,14 +601,6 @@ module Aws::ACM
     # Contains information about the domain names that you want ACM to use
     # to send you emails that enable you to validate domain ownership.
     #
-    # @note When making an API call, you may pass DomainValidationOption
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainNameString", # required
-    #         validation_domain: "DomainNameString", # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   A fully qualified domain name (FQDN) in the certificate request.
     #   @return [String]
@@ -679,13 +637,6 @@ module Aws::ACM
     # Object containing expiration events options associated with an Amazon
     # Web Services account.
     #
-    # @note When making an API call, you may pass ExpiryEventsConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         days_before_expiry: 1,
-    #       }
-    #
     # @!attribute [rw] days_before_expiry
     #   Specifies the number of days prior to certificate expiration when
     #   ACM starts generating `EventBridge` events. ACM sends one event per
@@ -702,14 +653,6 @@ module Aws::ACM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ExportCertificateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_arn: "Arn", # required
-    #         passphrase: "data", # required
-    #       }
-    #
     # @!attribute [rw] certificate_arn
     #   An Amazon Resource Name (ARN) of the issued certificate. This must
     #   be of the form:
@@ -811,15 +754,6 @@ module Aws::ACM
     # This structure can be used in the ListCertificates action to filter
     # the output of the certificate list.
     #
-    # @note When making an API call, you may pass Filters
-    #   data as a hash:
-    #
-    #       {
-    #         extended_key_usage: ["TLS_WEB_SERVER_AUTHENTICATION"], # accepts TLS_WEB_SERVER_AUTHENTICATION, TLS_WEB_CLIENT_AUTHENTICATION, CODE_SIGNING, EMAIL_PROTECTION, TIME_STAMPING, OCSP_SIGNING, IPSEC_END_SYSTEM, IPSEC_TUNNEL, IPSEC_USER, ANY, NONE, CUSTOM
-    #         key_usage: ["DIGITAL_SIGNATURE"], # accepts DIGITAL_SIGNATURE, NON_REPUDIATION, KEY_ENCIPHERMENT, DATA_ENCIPHERMENT, KEY_AGREEMENT, CERTIFICATE_SIGNING, CRL_SIGNING, ENCIPHER_ONLY, DECIPHER_ONLY, ANY, CUSTOM
-    #         key_types: ["RSA_1024"], # accepts RSA_1024, RSA_2048, RSA_3072, RSA_4096, EC_prime256v1, EC_secp384r1, EC_secp521r1
-    #       }
-    #
     # @!attribute [rw] extended_key_usage
     #   Specify one or more ExtendedKeyUsage extension values.
     #   @return [Array<String>]
@@ -863,13 +797,6 @@ module Aws::ACM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetCertificateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] certificate_arn
     #   String that contains a certificate ARN in the following format:
     #
@@ -911,22 +838,6 @@ module Aws::ACM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ImportCertificateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_arn: "Arn",
-    #         certificate: "data", # required
-    #         private_key: "data", # required
-    #         certificate_chain: "data",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] certificate_arn
     #   The [Amazon Resource Name (ARN)][1] of an imported certificate to
     #   replace. To import a new certificate, omit this field.
@@ -1093,22 +1004,6 @@ module Aws::ACM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCertificatesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_statuses: ["PENDING_VALIDATION"], # accepts PENDING_VALIDATION, ISSUED, INACTIVE, EXPIRED, VALIDATION_TIMED_OUT, REVOKED, FAILED
-    #         includes: {
-    #           extended_key_usage: ["TLS_WEB_SERVER_AUTHENTICATION"], # accepts TLS_WEB_SERVER_AUTHENTICATION, TLS_WEB_CLIENT_AUTHENTICATION, CODE_SIGNING, EMAIL_PROTECTION, TIME_STAMPING, OCSP_SIGNING, IPSEC_END_SYSTEM, IPSEC_TUNNEL, IPSEC_USER, ANY, NONE, CUSTOM
-    #           key_usage: ["DIGITAL_SIGNATURE"], # accepts DIGITAL_SIGNATURE, NON_REPUDIATION, KEY_ENCIPHERMENT, DATA_ENCIPHERMENT, KEY_AGREEMENT, CERTIFICATE_SIGNING, CRL_SIGNING, ENCIPHER_ONLY, DECIPHER_ONLY, ANY, CUSTOM
-    #           key_types: ["RSA_1024"], # accepts RSA_1024, RSA_2048, RSA_3072, RSA_4096, EC_prime256v1, EC_secp384r1, EC_secp521r1
-    #         },
-    #         next_token: "NextToken",
-    #         max_items: 1,
-    #         sort_by: "CREATED_AT", # accepts CREATED_AT
-    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #       }
-    #
     # @!attribute [rw] certificate_statuses
     #   Filter the certificate list by status value.
     #   @return [Array<String>]
@@ -1175,13 +1070,6 @@ module Aws::ACM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForCertificateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] certificate_arn
     #   String that contains the ARN of the ACM certificate for which you
     #   want to list the tags. This must have the following form:
@@ -1216,16 +1104,6 @@ module Aws::ACM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutAccountConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         expiry_events: {
-    #           days_before_expiry: 1,
-    #         },
-    #         idempotency_token: "IdempotencyToken", # required
-    #       }
-    #
     # @!attribute [rw] expiry_events
     #   Specifies expiration events associated with an account.
     #   @return [Types::ExpiryEventsConfiguration]
@@ -1248,19 +1126,6 @@ module Aws::ACM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RemoveTagsFromCertificateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_arn: "Arn", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] certificate_arn
     #   String that contains the ARN of the ACM Certificate with one or more
     #   tags that you want to remove. This must be of the form:
@@ -1288,13 +1153,6 @@ module Aws::ACM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RenewCertificateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] certificate_arn
     #   String that contains the ARN of the ACM certificate to be renewed.
     #   This must be of the form:
@@ -1364,33 +1222,6 @@ module Aws::ACM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RequestCertificateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainNameString", # required
-    #         validation_method: "EMAIL", # accepts EMAIL, DNS
-    #         subject_alternative_names: ["DomainNameString"],
-    #         idempotency_token: "IdempotencyToken",
-    #         domain_validation_options: [
-    #           {
-    #             domain_name: "DomainNameString", # required
-    #             validation_domain: "DomainNameString", # required
-    #           },
-    #         ],
-    #         options: {
-    #           certificate_transparency_logging_preference: "ENABLED", # accepts ENABLED, DISABLED
-    #         },
-    #         certificate_authority_arn: "PcaArn",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         key_algorithm: "RSA_1024", # accepts RSA_1024, RSA_2048, RSA_3072, RSA_4096, EC_prime256v1, EC_secp384r1, EC_secp521r1
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   Fully qualified domain name (FQDN), such as www.example.com, that
     #   you want to secure with an ACM certificate. Use an asterisk (*) to
@@ -1560,15 +1391,6 @@ module Aws::ACM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ResendValidationEmailRequest
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_arn: "Arn", # required
-    #         domain: "DomainNameString", # required
-    #         validation_domain: "DomainNameString", # required
-    #       }
-    #
     # @!attribute [rw] certificate_arn
     #   String that contains the ARN of the requested certificate. The
     #   certificate ARN is generated and returned by the RequestCertificate
@@ -1673,14 +1495,6 @@ module Aws::ACM
     # A key-value pair that identifies or specifies metadata about an ACM
     # resource.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue",
-    #       }
-    #
     # @!attribute [rw] key
     #   The key of the tag.
     #   @return [String]
@@ -1739,16 +1553,6 @@ module Aws::ACM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateCertificateOptionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_arn: "Arn", # required
-    #         options: { # required
-    #           certificate_transparency_logging_preference: "ENABLED", # accepts ENABLED, DISABLED
-    #         },
-    #       }
-    #
     # @!attribute [rw] certificate_arn
     #   ARN of the requested certificate to update. This must be of the
     #   form:

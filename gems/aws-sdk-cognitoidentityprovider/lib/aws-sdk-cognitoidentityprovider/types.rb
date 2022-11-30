@@ -12,18 +12,6 @@ module Aws::CognitoIdentityProvider
 
     # The data type for `AccountRecoverySetting`.
     #
-    # @note When making an API call, you may pass AccountRecoverySettingType
-    #   data as a hash:
-    #
-    #       {
-    #         recovery_mechanisms: [
-    #           {
-    #             priority: 1, # required
-    #             name: "verified_email", # required, accepts verified_email, verified_phone_number, admin_only
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] recovery_mechanisms
     #   The list of `RecoveryOptionTypes`.
     #   @return [Array<Types::RecoveryOptionType>]
@@ -37,14 +25,6 @@ module Aws::CognitoIdentityProvider
     end
 
     # Account takeover action type.
-    #
-    # @note When making an API call, you may pass AccountTakeoverActionType
-    #   data as a hash:
-    #
-    #       {
-    #         notify: false, # required
-    #         event_action: "BLOCK", # required, accepts BLOCK, MFA_IF_CONFIGURED, MFA_REQUIRED, NO_ACTION
-    #       }
     #
     # @!attribute [rw] notify
     #   Flag specifying whether to send a notification.
@@ -76,24 +56,6 @@ module Aws::CognitoIdentityProvider
 
     # Account takeover actions type.
     #
-    # @note When making an API call, you may pass AccountTakeoverActionsType
-    #   data as a hash:
-    #
-    #       {
-    #         low_action: {
-    #           notify: false, # required
-    #           event_action: "BLOCK", # required, accepts BLOCK, MFA_IF_CONFIGURED, MFA_REQUIRED, NO_ACTION
-    #         },
-    #         medium_action: {
-    #           notify: false, # required
-    #           event_action: "BLOCK", # required, accepts BLOCK, MFA_IF_CONFIGURED, MFA_REQUIRED, NO_ACTION
-    #         },
-    #         high_action: {
-    #           notify: false, # required
-    #           event_action: "BLOCK", # required, accepts BLOCK, MFA_IF_CONFIGURED, MFA_REQUIRED, NO_ACTION
-    #         },
-    #       }
-    #
     # @!attribute [rw] low_action
     #   Action to take for a low risk.
     #   @return [Types::AccountTakeoverActionType]
@@ -119,46 +81,6 @@ module Aws::CognitoIdentityProvider
     # Configuration for mitigation actions and notification for different
     # levels of risk detected for a potential account takeover.
     #
-    # @note When making an API call, you may pass AccountTakeoverRiskConfigurationType
-    #   data as a hash:
-    #
-    #       {
-    #         notify_configuration: {
-    #           from: "StringType",
-    #           reply_to: "StringType",
-    #           source_arn: "ArnType", # required
-    #           block_email: {
-    #             subject: "EmailNotificationSubjectType", # required
-    #             html_body: "EmailNotificationBodyType",
-    #             text_body: "EmailNotificationBodyType",
-    #           },
-    #           no_action_email: {
-    #             subject: "EmailNotificationSubjectType", # required
-    #             html_body: "EmailNotificationBodyType",
-    #             text_body: "EmailNotificationBodyType",
-    #           },
-    #           mfa_email: {
-    #             subject: "EmailNotificationSubjectType", # required
-    #             html_body: "EmailNotificationBodyType",
-    #             text_body: "EmailNotificationBodyType",
-    #           },
-    #         },
-    #         actions: { # required
-    #           low_action: {
-    #             notify: false, # required
-    #             event_action: "BLOCK", # required, accepts BLOCK, MFA_IF_CONFIGURED, MFA_REQUIRED, NO_ACTION
-    #           },
-    #           medium_action: {
-    #             notify: false, # required
-    #             event_action: "BLOCK", # required, accepts BLOCK, MFA_IF_CONFIGURED, MFA_REQUIRED, NO_ACTION
-    #           },
-    #           high_action: {
-    #             notify: false, # required
-    #             event_action: "BLOCK", # required, accepts BLOCK, MFA_IF_CONFIGURED, MFA_REQUIRED, NO_ACTION
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] notify_configuration
     #   The notify configuration used to construct email notifications.
     #   @return [Types::NotifyConfigurationType]
@@ -177,30 +99,6 @@ module Aws::CognitoIdentityProvider
     end
 
     # Represents the request to add custom attributes.
-    #
-    # @note When making an API call, you may pass AddCustomAttributesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         custom_attributes: [ # required
-    #           {
-    #             name: "CustomAttributeNameType",
-    #             attribute_data_type: "String", # accepts String, Number, DateTime, Boolean
-    #             developer_only_attribute: false,
-    #             mutable: false,
-    #             required: false,
-    #             number_attribute_constraints: {
-    #               min_value: "StringType",
-    #               max_value: "StringType",
-    #             },
-    #             string_attribute_constraints: {
-    #               min_length: "StringType",
-    #               max_length: "StringType",
-    #             },
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] user_pool_id
     #   The user pool ID for the user pool where you want to add custom
@@ -227,15 +125,6 @@ module Aws::CognitoIdentityProvider
     #
     class AddCustomAttributesResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass AdminAddUserToGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         username: "UsernameType", # required
-    #         group_name: "GroupNameType", # required
-    #       }
-    #
     # @!attribute [rw] user_pool_id
     #   The user pool ID for the user pool.
     #   @return [String]
@@ -259,17 +148,6 @@ module Aws::CognitoIdentityProvider
     end
 
     # Represents the request to confirm user registration.
-    #
-    # @note When making an API call, you may pass AdminConfirmSignUpRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         username: "UsernameType", # required
-    #         client_metadata: {
-    #           "StringType" => "StringType",
-    #         },
-    #       }
     #
     # @!attribute [rw] user_pool_id
     #   The user pool ID for which you want to confirm user registration.
@@ -335,19 +213,6 @@ module Aws::CognitoIdentityProvider
 
     # The configuration for creating a new user profile.
     #
-    # @note When making an API call, you may pass AdminCreateUserConfigType
-    #   data as a hash:
-    #
-    #       {
-    #         allow_admin_create_user_only: false,
-    #         unused_account_validity_days: 1,
-    #         invite_message_template: {
-    #           sms_message: "SmsVerificationMessageType",
-    #           email_message: "EmailVerificationMessageType",
-    #           email_subject: "EmailVerificationSubjectType",
-    #         },
-    #       }
-    #
     # @!attribute [rw] allow_admin_create_user_only
     #   Set to `True` if only the administrator is allowed to create user
     #   profiles. Set to `False` if users can sign themselves up via an app.
@@ -390,33 +255,6 @@ module Aws::CognitoIdentityProvider
     end
 
     # Represents the request to create a user in the specified user pool.
-    #
-    # @note When making an API call, you may pass AdminCreateUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         username: "UsernameType", # required
-    #         user_attributes: [
-    #           {
-    #             name: "AttributeNameType", # required
-    #             value: "AttributeValueType",
-    #           },
-    #         ],
-    #         validation_data: [
-    #           {
-    #             name: "AttributeNameType", # required
-    #             value: "AttributeValueType",
-    #           },
-    #         ],
-    #         temporary_password: "PasswordType",
-    #         force_alias_creation: false,
-    #         message_action: "RESEND", # accepts RESEND, SUPPRESS
-    #         desired_delivery_mediums: ["SMS"], # accepts SMS, EMAIL
-    #         client_metadata: {
-    #           "StringType" => "StringType",
-    #         },
-    #       }
     #
     # @!attribute [rw] user_pool_id
     #   The user pool ID for the user pool where the user will be created.
@@ -600,15 +438,6 @@ module Aws::CognitoIdentityProvider
 
     # Represents the request to delete user attributes as an administrator.
     #
-    # @note When making an API call, you may pass AdminDeleteUserAttributesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         username: "UsernameType", # required
-    #         user_attribute_names: ["AttributeNameType"], # required
-    #       }
-    #
     # @!attribute [rw] user_pool_id
     #   The user pool ID for the user pool where you want to delete user
     #   attributes.
@@ -646,14 +475,6 @@ module Aws::CognitoIdentityProvider
 
     # Represents the request to delete a user as an administrator.
     #
-    # @note When making an API call, you may pass AdminDeleteUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         username: "UsernameType", # required
-    #       }
-    #
     # @!attribute [rw] user_pool_id
     #   The user pool ID for the user pool where you want to delete the
     #   user.
@@ -672,18 +493,6 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AdminDisableProviderForUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "StringType", # required
-    #         user: { # required
-    #           provider_name: "ProviderNameType",
-    #           provider_attribute_name: "StringType",
-    #           provider_attribute_value: "StringType",
-    #         },
-    #       }
-    #
     # @!attribute [rw] user_pool_id
     #   The user pool ID for the user pool.
     #   @return [String]
@@ -706,14 +515,6 @@ module Aws::CognitoIdentityProvider
     class AdminDisableProviderForUserResponse < Aws::EmptyStructure; end
 
     # Represents the request to disable the user as an administrator.
-    #
-    # @note When making an API call, you may pass AdminDisableUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         username: "UsernameType", # required
-    #       }
     #
     # @!attribute [rw] user_pool_id
     #   The user pool ID for the user pool where you want to disable the
@@ -742,14 +543,6 @@ module Aws::CognitoIdentityProvider
 
     # Represents the request that enables the user as an administrator.
     #
-    # @note When making an API call, you may pass AdminEnableUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         username: "UsernameType", # required
-    #       }
-    #
     # @!attribute [rw] user_pool_id
     #   The user pool ID for the user pool where you want to enable the
     #   user.
@@ -777,15 +570,6 @@ module Aws::CognitoIdentityProvider
 
     # Sends the forgot device request, as an administrator.
     #
-    # @note When making an API call, you may pass AdminForgetDeviceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         username: "UsernameType", # required
-    #         device_key: "DeviceKeyType", # required
-    #       }
-    #
     # @!attribute [rw] user_pool_id
     #   The user pool ID.
     #   @return [String]
@@ -809,15 +593,6 @@ module Aws::CognitoIdentityProvider
     end
 
     # Represents the request to get the device, as an administrator.
-    #
-    # @note When making an API call, you may pass AdminGetDeviceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_key: "DeviceKeyType", # required
-    #         user_pool_id: "UserPoolIdType", # required
-    #         username: "UsernameType", # required
-    #       }
     #
     # @!attribute [rw] device_key
     #   The device key.
@@ -856,14 +631,6 @@ module Aws::CognitoIdentityProvider
     end
 
     # Represents the request to get the specified user as an administrator.
-    #
-    # @note When making an API call, you may pass AdminGetUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         username: "UsernameType", # required
-    #       }
     #
     # @!attribute [rw] user_pool_id
     #   The user pool ID for the user pool where you want to get information
@@ -960,36 +727,6 @@ module Aws::CognitoIdentityProvider
     end
 
     # Initiates the authorization request, as an administrator.
-    #
-    # @note When making an API call, you may pass AdminInitiateAuthRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         client_id: "ClientIdType", # required
-    #         auth_flow: "USER_SRP_AUTH", # required, accepts USER_SRP_AUTH, REFRESH_TOKEN_AUTH, REFRESH_TOKEN, CUSTOM_AUTH, ADMIN_NO_SRP_AUTH, USER_PASSWORD_AUTH, ADMIN_USER_PASSWORD_AUTH
-    #         auth_parameters: {
-    #           "StringType" => "StringType",
-    #         },
-    #         client_metadata: {
-    #           "StringType" => "StringType",
-    #         },
-    #         analytics_metadata: {
-    #           analytics_endpoint_id: "StringType",
-    #         },
-    #         context_data: {
-    #           ip_address: "StringType", # required
-    #           server_name: "StringType", # required
-    #           server_path: "StringType", # required
-    #           http_headers: [ # required
-    #             {
-    #               header_name: "StringType",
-    #               header_value: "StringType",
-    #             },
-    #           ],
-    #           encoded_data: "StringType",
-    #         },
-    #       }
     #
     # @!attribute [rw] user_pool_id
     #   The ID of the Amazon Cognito user pool.
@@ -1262,23 +999,6 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AdminLinkProviderForUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "StringType", # required
-    #         destination_user: { # required
-    #           provider_name: "ProviderNameType",
-    #           provider_attribute_name: "StringType",
-    #           provider_attribute_value: "StringType",
-    #         },
-    #         source_user: { # required
-    #           provider_name: "ProviderNameType",
-    #           provider_attribute_name: "StringType",
-    #           provider_attribute_value: "StringType",
-    #         },
-    #       }
-    #
     # @!attribute [rw] user_pool_id
     #   The user pool ID for the user pool.
     #   @return [String]
@@ -1347,16 +1067,6 @@ module Aws::CognitoIdentityProvider
 
     # Represents the request to list devices, as an administrator.
     #
-    # @note When making an API call, you may pass AdminListDevicesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         username: "UsernameType", # required
-    #         limit: 1,
-    #         pagination_token: "SearchPaginationTokenType",
-    #       }
-    #
     # @!attribute [rw] user_pool_id
     #   The user pool ID.
     #   @return [String]
@@ -1403,16 +1113,6 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AdminListGroupsForUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         username: "UsernameType", # required
-    #         user_pool_id: "UserPoolIdType", # required
-    #         limit: 1,
-    #         next_token: "PaginationKey",
-    #       }
-    #
     # @!attribute [rw] username
     #   The username for the user.
     #   @return [String]
@@ -1461,16 +1161,6 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AdminListUserAuthEventsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         username: "UsernameType", # required
-    #         max_results: 1,
-    #         next_token: "PaginationKey",
-    #       }
-    #
     # @!attribute [rw] user_pool_id
     #   The user pool ID.
     #   @return [String]
@@ -1518,15 +1208,6 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AdminRemoveUserFromGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         username: "UsernameType", # required
-    #         group_name: "GroupNameType", # required
-    #       }
-    #
     # @!attribute [rw] user_pool_id
     #   The user pool ID for the user pool.
     #   @return [String]
@@ -1551,17 +1232,6 @@ module Aws::CognitoIdentityProvider
 
     # Represents the request to reset a user's password as an
     # administrator.
-    #
-    # @note When making an API call, you may pass AdminResetUserPasswordRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         username: "UsernameType", # required
-    #         client_metadata: {
-    #           "StringType" => "StringType",
-    #         },
-    #       }
     #
     # @!attribute [rw] user_pool_id
     #   The user pool ID for the user pool where you want to reset the
@@ -1629,37 +1299,6 @@ module Aws::CognitoIdentityProvider
 
     # The request to respond to the authentication challenge, as an
     # administrator.
-    #
-    # @note When making an API call, you may pass AdminRespondToAuthChallengeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         client_id: "ClientIdType", # required
-    #         challenge_name: "SMS_MFA", # required, accepts SMS_MFA, SOFTWARE_TOKEN_MFA, SELECT_MFA_TYPE, MFA_SETUP, PASSWORD_VERIFIER, CUSTOM_CHALLENGE, DEVICE_SRP_AUTH, DEVICE_PASSWORD_VERIFIER, ADMIN_NO_SRP_AUTH, NEW_PASSWORD_REQUIRED
-    #         challenge_responses: {
-    #           "StringType" => "StringType",
-    #         },
-    #         session: "SessionType",
-    #         analytics_metadata: {
-    #           analytics_endpoint_id: "StringType",
-    #         },
-    #         context_data: {
-    #           ip_address: "StringType", # required
-    #           server_name: "StringType", # required
-    #           server_path: "StringType", # required
-    #           http_headers: [ # required
-    #             {
-    #               header_name: "StringType",
-    #               header_value: "StringType",
-    #             },
-    #           ],
-    #           encoded_data: "StringType",
-    #         },
-    #         client_metadata: {
-    #           "StringType" => "StringType",
-    #         },
-    #       }
     #
     # @!attribute [rw] user_pool_id
     #   The ID of the Amazon Cognito user pool.
@@ -1863,22 +1502,6 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AdminSetUserMFAPreferenceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         sms_mfa_settings: {
-    #           enabled: false,
-    #           preferred_mfa: false,
-    #         },
-    #         software_token_mfa_settings: {
-    #           enabled: false,
-    #           preferred_mfa: false,
-    #         },
-    #         username: "UsernameType", # required
-    #         user_pool_id: "UserPoolIdType", # required
-    #       }
-    #
     # @!attribute [rw] sms_mfa_settings
     #   The SMS text message MFA settings.
     #   @return [Types::SMSMfaSettingsType]
@@ -1910,16 +1533,6 @@ module Aws::CognitoIdentityProvider
     #
     class AdminSetUserMFAPreferenceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass AdminSetUserPasswordRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         username: "UsernameType", # required
-    #         password: "PasswordType", # required
-    #         permanent: false,
-    #       }
-    #
     # @!attribute [rw] user_pool_id
     #   The user pool ID for the user pool where you want to set the user's
     #   password.
@@ -1955,20 +1568,6 @@ module Aws::CognitoIdentityProvider
     # You can use this parameter to set an MFA configuration that uses the
     # SMS delivery medium.
     #
-    # @note When making an API call, you may pass AdminSetUserSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         username: "UsernameType", # required
-    #         mfa_options: [ # required
-    #           {
-    #             delivery_medium: "SMS", # accepts SMS, EMAIL
-    #             attribute_name: "AttributeNameType",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] user_pool_id
     #   The ID of the user pool that contains the user whose options you're
     #   setting.
@@ -2000,16 +1599,6 @@ module Aws::CognitoIdentityProvider
     #
     class AdminSetUserSettingsResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass AdminUpdateAuthEventFeedbackRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         username: "UsernameType", # required
-    #         event_id: "EventIdType", # required
-    #         feedback_value: "Valid", # required, accepts Valid, Invalid
-    #       }
-    #
     # @!attribute [rw] user_pool_id
     #   The user pool ID.
     #   @return [String]
@@ -2042,16 +1631,6 @@ module Aws::CognitoIdentityProvider
     class AdminUpdateAuthEventFeedbackResponse < Aws::EmptyStructure; end
 
     # The request to update the device status, as an administrator.
-    #
-    # @note When making an API call, you may pass AdminUpdateDeviceStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         username: "UsernameType", # required
-    #         device_key: "DeviceKeyType", # required
-    #         device_remembered_status: "remembered", # accepts remembered, not_remembered
-    #       }
     #
     # @!attribute [rw] user_pool_id
     #   The user pool ID.
@@ -2089,23 +1668,6 @@ module Aws::CognitoIdentityProvider
 
     # Represents the request to update the user's attributes as an
     # administrator.
-    #
-    # @note When making an API call, you may pass AdminUpdateUserAttributesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         username: "UsernameType", # required
-    #         user_attributes: [ # required
-    #           {
-    #             name: "AttributeNameType", # required
-    #             value: "AttributeValueType",
-    #           },
-    #         ],
-    #         client_metadata: {
-    #           "StringType" => "StringType",
-    #         },
-    #       }
     #
     # @!attribute [rw] user_pool_id
     #   The user pool ID for the user pool where you want to update user
@@ -2198,14 +1760,6 @@ module Aws::CognitoIdentityProvider
 
     # The request to sign out of all devices, as an administrator.
     #
-    # @note When making an API call, you may pass AdminUserGlobalSignOutRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         username: "UsernameType", # required
-    #       }
-    #
     # @!attribute [rw] user_pool_id
     #   The user pool ID.
     #   @return [String]
@@ -2259,17 +1813,6 @@ module Aws::CognitoIdentityProvider
     #
     #  </note>
     #
-    # @note When making an API call, you may pass AnalyticsConfigurationType
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "HexStringType",
-    #         application_arn: "ArnType",
-    #         role_arn: "ArnType",
-    #         external_id: "StringType",
-    #         user_data_shared: false,
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The application ID for an Amazon Pinpoint application.
     #   @return [String]
@@ -2320,13 +1863,6 @@ module Aws::CognitoIdentityProvider
     #
     # [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-pinpoint-integration.html
     #
-    # @note When making an API call, you may pass AnalyticsMetadataType
-    #   data as a hash:
-    #
-    #       {
-    #         analytics_endpoint_id: "StringType",
-    #       }
-    #
     # @!attribute [rw] analytics_endpoint_id
     #   The endpoint ID.
     #   @return [String]
@@ -2339,14 +1875,6 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateSoftwareTokenRequest
-    #   data as a hash:
-    #
-    #       {
-    #         access_token: "TokenModelType",
-    #         session: "SessionType",
-    #       }
-    #
     # @!attribute [rw] access_token
     #   A valid access token that Amazon Cognito issued to the user whose
     #   software token you want to generate.
@@ -2388,14 +1916,6 @@ module Aws::CognitoIdentityProvider
     end
 
     # Specifies whether the attribute is standard or custom.
-    #
-    # @note When making an API call, you may pass AttributeType
-    #   data as a hash:
-    #
-    #       {
-    #         name: "AttributeNameType", # required
-    #         value: "AttributeValueType",
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the attribute.
@@ -2527,15 +2047,6 @@ module Aws::CognitoIdentityProvider
 
     # Represents the request to change a user password.
     #
-    # @note When making an API call, you may pass ChangePasswordRequest
-    #   data as a hash:
-    #
-    #       {
-    #         previous_password: "PasswordType", # required
-    #         proposed_password: "PasswordType", # required
-    #         access_token: "TokenModelType", # required
-    #       }
-    #
     # @!attribute [rw] previous_password
     #   The old password.
     #   @return [String]
@@ -2625,13 +2136,6 @@ module Aws::CognitoIdentityProvider
 
     # The compromised credentials actions type.
     #
-    # @note When making an API call, you may pass CompromisedCredentialsActionsType
-    #   data as a hash:
-    #
-    #       {
-    #         event_action: "BLOCK", # required, accepts BLOCK, NO_ACTION
-    #       }
-    #
     # @!attribute [rw] event_action
     #   The event action.
     #   @return [String]
@@ -2645,16 +2149,6 @@ module Aws::CognitoIdentityProvider
     end
 
     # The compromised credentials risk configuration type.
-    #
-    # @note When making an API call, you may pass CompromisedCredentialsRiskConfigurationType
-    #   data as a hash:
-    #
-    #       {
-    #         event_filter: ["SIGN_IN"], # accepts SIGN_IN, PASSWORD_CHANGE, SIGN_UP
-    #         actions: { # required
-    #           event_action: "BLOCK", # required, accepts BLOCK, NO_ACTION
-    #         },
-    #       }
     #
     # @!attribute [rw] event_filter
     #   Perform the action for these events. The default is to perform all
@@ -2690,19 +2184,6 @@ module Aws::CognitoIdentityProvider
     end
 
     # Confirms the device request.
-    #
-    # @note When making an API call, you may pass ConfirmDeviceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         access_token: "TokenModelType", # required
-    #         device_key: "DeviceKeyType", # required
-    #         device_secret_verifier_config: {
-    #           password_verifier: "StringType",
-    #           salt: "StringType",
-    #         },
-    #         device_name: "DeviceNameType",
-    #       }
     #
     # @!attribute [rw] access_token
     #   A valid access token that Amazon Cognito issued to the user whose
@@ -2748,27 +2229,6 @@ module Aws::CognitoIdentityProvider
     end
 
     # The request representing the confirmation for a password reset.
-    #
-    # @note When making an API call, you may pass ConfirmForgotPasswordRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_id: "ClientIdType", # required
-    #         secret_hash: "SecretHashType",
-    #         username: "UsernameType", # required
-    #         confirmation_code: "ConfirmationCodeType", # required
-    #         password: "PasswordType", # required
-    #         analytics_metadata: {
-    #           analytics_endpoint_id: "StringType",
-    #         },
-    #         user_context_data: {
-    #           ip_address: "StringType",
-    #           encoded_data: "StringType",
-    #         },
-    #         client_metadata: {
-    #           "StringType" => "StringType",
-    #         },
-    #       }
     #
     # @!attribute [rw] client_id
     #   The app client ID of the app associated with the user pool.
@@ -2872,27 +2332,6 @@ module Aws::CognitoIdentityProvider
     class ConfirmForgotPasswordResponse < Aws::EmptyStructure; end
 
     # Represents the request to confirm registration of a user.
-    #
-    # @note When making an API call, you may pass ConfirmSignUpRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_id: "ClientIdType", # required
-    #         secret_hash: "SecretHashType",
-    #         username: "UsernameType", # required
-    #         confirmation_code: "ConfirmationCodeType", # required
-    #         force_alias_creation: false,
-    #         analytics_metadata: {
-    #           analytics_endpoint_id: "StringType",
-    #         },
-    #         user_context_data: {
-    #           ip_address: "StringType",
-    #           encoded_data: "StringType",
-    #         },
-    #         client_metadata: {
-    #           "StringType" => "StringType",
-    #         },
-    #       }
     #
     # @!attribute [rw] client_id
     #   The ID of the app client associated with the user pool.
@@ -2999,22 +2438,6 @@ module Aws::CognitoIdentityProvider
     # Contextual user data type used for evaluating the risk of an
     # unexpected event by Amazon Cognito advanced security.
     #
-    # @note When making an API call, you may pass ContextDataType
-    #   data as a hash:
-    #
-    #       {
-    #         ip_address: "StringType", # required
-    #         server_name: "StringType", # required
-    #         server_path: "StringType", # required
-    #         http_headers: [ # required
-    #           {
-    #             header_name: "StringType",
-    #             header_value: "StringType",
-    #           },
-    #         ],
-    #         encoded_data: "StringType",
-    #       }
-    #
     # @!attribute [rw] ip_address
     #   The source IP address of your user's device.
     #   @return [String]
@@ -3054,17 +2477,6 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         group_name: "GroupNameType", # required
-    #         user_pool_id: "UserPoolIdType", # required
-    #         description: "DescriptionType",
-    #         role_arn: "ArnType",
-    #         precedence: 1,
-    #       }
-    #
     # @!attribute [rw] group_name
     #   The name of the group. Must be unique.
     #   @return [String]
@@ -3126,22 +2538,6 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateIdentityProviderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         provider_name: "ProviderNameTypeV1", # required
-    #         provider_type: "SAML", # required, accepts SAML, Facebook, Google, LoginWithAmazon, SignInWithApple, OIDC
-    #         provider_details: { # required
-    #           "StringType" => "StringType",
-    #         },
-    #         attribute_mapping: {
-    #           "AttributeMappingKeyType" => "StringType",
-    #         },
-    #         idp_identifiers: ["IdpIdentifierType"],
-    #       }
-    #
     # @!attribute [rw] user_pool_id
     #   The user pool ID.
     #   @return [String]
@@ -3259,21 +2655,6 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateResourceServerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         identifier: "ResourceServerIdentifierType", # required
-    #         name: "ResourceServerNameType", # required
-    #         scopes: [
-    #           {
-    #             scope_name: "ResourceServerScopeNameType", # required
-    #             scope_description: "ResourceServerScopeDescriptionType", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] user_pool_id
     #   The user pool ID for the user pool.
     #   @return [String]
@@ -3318,15 +2699,6 @@ module Aws::CognitoIdentityProvider
 
     # Represents the request to create the user import job.
     #
-    # @note When making an API call, you may pass CreateUserImportJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_name: "UserImportJobNameType", # required
-    #         user_pool_id: "UserPoolIdType", # required
-    #         cloud_watch_logs_role_arn: "ArnType", # required
-    #       }
-    #
     # @!attribute [rw] job_name
     #   The job name for the user import job.
     #   @return [String]
@@ -3367,44 +2739,6 @@ module Aws::CognitoIdentityProvider
     end
 
     # Represents the request to create a user pool client.
-    #
-    # @note When making an API call, you may pass CreateUserPoolClientRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         client_name: "ClientNameType", # required
-    #         generate_secret: false,
-    #         refresh_token_validity: 1,
-    #         access_token_validity: 1,
-    #         id_token_validity: 1,
-    #         token_validity_units: {
-    #           access_token: "seconds", # accepts seconds, minutes, hours, days
-    #           id_token: "seconds", # accepts seconds, minutes, hours, days
-    #           refresh_token: "seconds", # accepts seconds, minutes, hours, days
-    #         },
-    #         read_attributes: ["ClientPermissionType"],
-    #         write_attributes: ["ClientPermissionType"],
-    #         explicit_auth_flows: ["ADMIN_NO_SRP_AUTH"], # accepts ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY, USER_PASSWORD_AUTH, ALLOW_ADMIN_USER_PASSWORD_AUTH, ALLOW_CUSTOM_AUTH, ALLOW_USER_PASSWORD_AUTH, ALLOW_USER_SRP_AUTH, ALLOW_REFRESH_TOKEN_AUTH
-    #         supported_identity_providers: ["ProviderNameType"],
-    #         callback_urls: ["RedirectUrlType"],
-    #         logout_urls: ["RedirectUrlType"],
-    #         default_redirect_uri: "RedirectUrlType",
-    #         allowed_o_auth_flows: ["code"], # accepts code, implicit, client_credentials
-    #         allowed_o_auth_scopes: ["ScopeType"],
-    #         allowed_o_auth_flows_user_pool_client: false,
-    #         analytics_configuration: {
-    #           application_id: "HexStringType",
-    #           application_arn: "ArnType",
-    #           role_arn: "ArnType",
-    #           external_id: "StringType",
-    #           user_data_shared: false,
-    #         },
-    #         prevent_user_existence_errors: "LEGACY", # accepts LEGACY, ENABLED
-    #         enable_token_revocation: false,
-    #         enable_propagate_additional_user_context_data: false,
-    #         auth_session_validity: 1,
-    #       }
     #
     # @!attribute [rw] user_pool_id
     #   The user pool ID for the user pool where you want to create a user
@@ -3739,17 +3073,6 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateUserPoolDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "DomainType", # required
-    #         user_pool_id: "UserPoolIdType", # required
-    #         custom_domain_config: {
-    #           certificate_arn: "ArnType", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] domain
     #   The domain string. For custom domains, this is the fully-qualified
     #   domain name, such as `auth.example.com`. For Amazon Cognito prefix
@@ -3800,123 +3123,6 @@ module Aws::CognitoIdentityProvider
     end
 
     # Represents the request to create a user pool.
-    #
-    # @note When making an API call, you may pass CreateUserPoolRequest
-    #   data as a hash:
-    #
-    #       {
-    #         pool_name: "UserPoolNameType", # required
-    #         policies: {
-    #           password_policy: {
-    #             minimum_length: 1,
-    #             require_uppercase: false,
-    #             require_lowercase: false,
-    #             require_numbers: false,
-    #             require_symbols: false,
-    #             temporary_password_validity_days: 1,
-    #           },
-    #         },
-    #         deletion_protection: "ACTIVE", # accepts ACTIVE, INACTIVE
-    #         lambda_config: {
-    #           pre_sign_up: "ArnType",
-    #           custom_message: "ArnType",
-    #           post_confirmation: "ArnType",
-    #           pre_authentication: "ArnType",
-    #           post_authentication: "ArnType",
-    #           define_auth_challenge: "ArnType",
-    #           create_auth_challenge: "ArnType",
-    #           verify_auth_challenge_response: "ArnType",
-    #           pre_token_generation: "ArnType",
-    #           user_migration: "ArnType",
-    #           custom_sms_sender: {
-    #             lambda_version: "V1_0", # required, accepts V1_0
-    #             lambda_arn: "ArnType", # required
-    #           },
-    #           custom_email_sender: {
-    #             lambda_version: "V1_0", # required, accepts V1_0
-    #             lambda_arn: "ArnType", # required
-    #           },
-    #           kms_key_id: "ArnType",
-    #         },
-    #         auto_verified_attributes: ["phone_number"], # accepts phone_number, email
-    #         alias_attributes: ["phone_number"], # accepts phone_number, email, preferred_username
-    #         username_attributes: ["phone_number"], # accepts phone_number, email
-    #         sms_verification_message: "SmsVerificationMessageType",
-    #         email_verification_message: "EmailVerificationMessageType",
-    #         email_verification_subject: "EmailVerificationSubjectType",
-    #         verification_message_template: {
-    #           sms_message: "SmsVerificationMessageType",
-    #           email_message: "EmailVerificationMessageType",
-    #           email_subject: "EmailVerificationSubjectType",
-    #           email_message_by_link: "EmailVerificationMessageByLinkType",
-    #           email_subject_by_link: "EmailVerificationSubjectByLinkType",
-    #           default_email_option: "CONFIRM_WITH_LINK", # accepts CONFIRM_WITH_LINK, CONFIRM_WITH_CODE
-    #         },
-    #         sms_authentication_message: "SmsVerificationMessageType",
-    #         mfa_configuration: "OFF", # accepts OFF, ON, OPTIONAL
-    #         user_attribute_update_settings: {
-    #           attributes_require_verification_before_update: ["phone_number"], # accepts phone_number, email
-    #         },
-    #         device_configuration: {
-    #           challenge_required_on_new_device: false,
-    #           device_only_remembered_on_user_prompt: false,
-    #         },
-    #         email_configuration: {
-    #           source_arn: "ArnType",
-    #           reply_to_email_address: "EmailAddressType",
-    #           email_sending_account: "COGNITO_DEFAULT", # accepts COGNITO_DEFAULT, DEVELOPER
-    #           from: "StringType",
-    #           configuration_set: "SESConfigurationSet",
-    #         },
-    #         sms_configuration: {
-    #           sns_caller_arn: "ArnType", # required
-    #           external_id: "StringType",
-    #           sns_region: "RegionCodeType",
-    #         },
-    #         user_pool_tags: {
-    #           "TagKeysType" => "TagValueType",
-    #         },
-    #         admin_create_user_config: {
-    #           allow_admin_create_user_only: false,
-    #           unused_account_validity_days: 1,
-    #           invite_message_template: {
-    #             sms_message: "SmsVerificationMessageType",
-    #             email_message: "EmailVerificationMessageType",
-    #             email_subject: "EmailVerificationSubjectType",
-    #           },
-    #         },
-    #         schema: [
-    #           {
-    #             name: "CustomAttributeNameType",
-    #             attribute_data_type: "String", # accepts String, Number, DateTime, Boolean
-    #             developer_only_attribute: false,
-    #             mutable: false,
-    #             required: false,
-    #             number_attribute_constraints: {
-    #               min_value: "StringType",
-    #               max_value: "StringType",
-    #             },
-    #             string_attribute_constraints: {
-    #               min_length: "StringType",
-    #               max_length: "StringType",
-    #             },
-    #           },
-    #         ],
-    #         user_pool_add_ons: {
-    #           advanced_security_mode: "OFF", # required, accepts OFF, AUDIT, ENFORCED
-    #         },
-    #         username_configuration: {
-    #           case_sensitive: false, # required
-    #         },
-    #         account_recovery_setting: {
-    #           recovery_mechanisms: [
-    #             {
-    #               priority: 1, # required
-    #               name: "verified_email", # required, accepts verified_email, verified_phone_number, admin_only
-    #             },
-    #           ],
-    #         },
-    #       }
     #
     # @!attribute [rw] pool_name
     #   A string used to name the user pool.
@@ -4146,13 +3352,6 @@ module Aws::CognitoIdentityProvider
     # The configuration for a custom domain that hosts the sign-up and
     # sign-in webpages for your application.
     #
-    # @note When making an API call, you may pass CustomDomainConfigType
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_arn: "ArnType", # required
-    #       }
-    #
     # @!attribute [rw] certificate_arn
     #   The Amazon Resource Name (ARN) of an Certificate Manager SSL
     #   certificate. You use this certificate for the subdomain of your
@@ -4168,14 +3367,6 @@ module Aws::CognitoIdentityProvider
     end
 
     # A custom email sender Lambda configuration type.
-    #
-    # @note When making an API call, you may pass CustomEmailLambdaVersionConfigType
-    #   data as a hash:
-    #
-    #       {
-    #         lambda_version: "V1_0", # required, accepts V1_0
-    #         lambda_arn: "ArnType", # required
-    #       }
     #
     # @!attribute [rw] lambda_version
     #   Signature of the "request" attribute in the "event" information
@@ -4199,14 +3390,6 @@ module Aws::CognitoIdentityProvider
 
     # A custom SMS sender Lambda configuration type.
     #
-    # @note When making an API call, you may pass CustomSMSLambdaVersionConfigType
-    #   data as a hash:
-    #
-    #       {
-    #         lambda_version: "V1_0", # required, accepts V1_0
-    #         lambda_arn: "ArnType", # required
-    #       }
-    #
     # @!attribute [rw] lambda_version
     #   Signature of the "request" attribute in the "event" information
     #   that Amazon Cognito passes to your custom SMS Lambda function. The
@@ -4227,14 +3410,6 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         group_name: "GroupNameType", # required
-    #         user_pool_id: "UserPoolIdType", # required
-    #       }
-    #
     # @!attribute [rw] group_name
     #   The name of the group.
     #   @return [String]
@@ -4252,14 +3427,6 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteIdentityProviderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         provider_name: "ProviderNameType", # required
-    #       }
-    #
     # @!attribute [rw] user_pool_id
     #   The user pool ID.
     #   @return [String]
@@ -4277,14 +3444,6 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteResourceServerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         identifier: "ResourceServerIdentifierType", # required
-    #       }
-    #
     # @!attribute [rw] user_pool_id
     #   The user pool ID for the user pool that hosts the resource server.
     #   @return [String]
@@ -4303,14 +3462,6 @@ module Aws::CognitoIdentityProvider
     end
 
     # Represents the request to delete user attributes.
-    #
-    # @note When making an API call, you may pass DeleteUserAttributesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_attribute_names: ["AttributeNameType"], # required
-    #         access_token: "TokenModelType", # required
-    #       }
     #
     # @!attribute [rw] user_attribute_names
     #   An array of strings representing the user attribute names you want
@@ -4342,14 +3493,6 @@ module Aws::CognitoIdentityProvider
 
     # Represents the request to delete a user pool client.
     #
-    # @note When making an API call, you may pass DeleteUserPoolClientRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         client_id: "ClientIdType", # required
-    #       }
-    #
     # @!attribute [rw] user_pool_id
     #   The user pool ID for the user pool where you want to delete the
     #   client.
@@ -4368,14 +3511,6 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteUserPoolDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "DomainType", # required
-    #         user_pool_id: "UserPoolIdType", # required
-    #       }
-    #
     # @!attribute [rw] domain
     #   The domain string. For custom domains, this is the fully-qualified
     #   domain name, such as `auth.example.com`. For Amazon Cognito prefix
@@ -4401,13 +3536,6 @@ module Aws::CognitoIdentityProvider
 
     # Represents the request to delete a user pool.
     #
-    # @note When making an API call, you may pass DeleteUserPoolRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #       }
-    #
     # @!attribute [rw] user_pool_id
     #   The user pool ID for the user pool you want to delete.
     #   @return [String]
@@ -4422,13 +3550,6 @@ module Aws::CognitoIdentityProvider
 
     # Represents the request to delete a user.
     #
-    # @note When making an API call, you may pass DeleteUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         access_token: "TokenModelType", # required
-    #       }
-    #
     # @!attribute [rw] access_token
     #   A valid access token that Amazon Cognito issued to the user whose
     #   user profile you want to delete.
@@ -4442,14 +3563,6 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeIdentityProviderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         provider_name: "ProviderNameType", # required
-    #       }
-    #
     # @!attribute [rw] user_pool_id
     #   The user pool ID.
     #   @return [String]
@@ -4479,14 +3592,6 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeResourceServerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         identifier: "ResourceServerIdentifierType", # required
-    #       }
-    #
     # @!attribute [rw] user_pool_id
     #   The user pool ID for the user pool that hosts the resource server.
     #   @return [String]
@@ -4516,14 +3621,6 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeRiskConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         client_id: "ClientIdType",
-    #       }
-    #
     # @!attribute [rw] user_pool_id
     #   The user pool ID.
     #   @return [String]
@@ -4554,14 +3651,6 @@ module Aws::CognitoIdentityProvider
     end
 
     # Represents the request to describe the user import job.
-    #
-    # @note When making an API call, you may pass DescribeUserImportJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         job_id: "UserImportJobIdType", # required
-    #       }
     #
     # @!attribute [rw] user_pool_id
     #   The user pool ID for the user pool that the users are being imported
@@ -4598,14 +3687,6 @@ module Aws::CognitoIdentityProvider
 
     # Represents the request to describe a user pool client.
     #
-    # @note When making an API call, you may pass DescribeUserPoolClientRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         client_id: "ClientIdType", # required
-    #       }
-    #
     # @!attribute [rw] user_pool_id
     #   The user pool ID for the user pool you want to describe.
     #   @return [String]
@@ -4639,13 +3720,6 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeUserPoolDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "DomainType", # required
-    #       }
-    #
     # @!attribute [rw] domain
     #   The domain string. For custom domains, this is the fully-qualified
     #   domain name, such as `auth.example.com`. For Amazon Cognito prefix
@@ -4673,13 +3747,6 @@ module Aws::CognitoIdentityProvider
     end
 
     # Represents the request to describe the user pool.
-    #
-    # @note When making an API call, you may pass DescribeUserPoolRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #       }
     #
     # @!attribute [rw] user_pool_id
     #   The user pool ID for the user pool you want to describe.
@@ -4737,14 +3804,6 @@ module Aws::CognitoIdentityProvider
     # [4]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_InitiateAuth.html
     # [5]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_InitiateAuth.html#API_InitiateAuth_ResponseSyntax
     #
-    # @note When making an API call, you may pass DeviceConfigurationType
-    #   data as a hash:
-    #
-    #       {
-    #         challenge_required_on_new_device: false,
-    #         device_only_remembered_on_user_prompt: false,
-    #       }
-    #
     # @!attribute [rw] challenge_required_on_new_device
     #   When true, a remembered device can sign in with device
     #   authentication instead of SMS and time-based one-time password
@@ -4784,14 +3843,6 @@ module Aws::CognitoIdentityProvider
     end
 
     # The device verifier against which it is authenticated.
-    #
-    # @note When making an API call, you may pass DeviceSecretVerifierConfigType
-    #   data as a hash:
-    #
-    #       {
-    #         password_verifier: "StringType",
-    #         salt: "StringType",
-    #       }
     #
     # @!attribute [rw] password_verifier
     #   The password verifier.
@@ -4931,17 +3982,6 @@ module Aws::CognitoIdentityProvider
     #
     #
     # [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-email.html
-    #
-    # @note When making an API call, you may pass EmailConfigurationType
-    #   data as a hash:
-    #
-    #       {
-    #         source_arn: "ArnType",
-    #         reply_to_email_address: "EmailAddressType",
-    #         email_sending_account: "COGNITO_DEFAULT", # accepts COGNITO_DEFAULT, DEVELOPER
-    #         from: "StringType",
-    #         configuration_set: "SESConfigurationSet",
-    #       }
     #
     # @!attribute [rw] source_arn
     #   The ARN of a verified email address in Amazon SES. Amazon Cognito
@@ -5196,14 +4236,6 @@ module Aws::CognitoIdentityProvider
 
     # Represents the request to forget the device.
     #
-    # @note When making an API call, you may pass ForgetDeviceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         access_token: "TokenModelType",
-    #         device_key: "DeviceKeyType", # required
-    #       }
-    #
     # @!attribute [rw] access_token
     #   A valid access token that Amazon Cognito issued to the user whose
     #   registered device you want to forget.
@@ -5223,25 +4255,6 @@ module Aws::CognitoIdentityProvider
     end
 
     # Represents the request to reset a user's password.
-    #
-    # @note When making an API call, you may pass ForgotPasswordRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_id: "ClientIdType", # required
-    #         secret_hash: "SecretHashType",
-    #         user_context_data: {
-    #           ip_address: "StringType",
-    #           encoded_data: "StringType",
-    #         },
-    #         username: "UsernameType", # required
-    #         analytics_metadata: {
-    #           analytics_endpoint_id: "StringType",
-    #         },
-    #         client_metadata: {
-    #           "StringType" => "StringType",
-    #         },
-    #       }
     #
     # @!attribute [rw] client_id
     #   The ID of the client associated with the user pool.
@@ -5341,13 +4354,6 @@ module Aws::CognitoIdentityProvider
     # Represents the request to get the header information of the CSV file
     # for the user import job.
     #
-    # @note When making an API call, you may pass GetCSVHeaderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #       }
-    #
     # @!attribute [rw] user_pool_id
     #   The user pool ID for the user pool that the users are to be imported
     #   into.
@@ -5384,14 +4390,6 @@ module Aws::CognitoIdentityProvider
 
     # Represents the request to get the device.
     #
-    # @note When making an API call, you may pass GetDeviceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_key: "DeviceKeyType", # required
-    #         access_token: "TokenModelType",
-    #       }
-    #
     # @!attribute [rw] device_key
     #   The device key.
     #   @return [String]
@@ -5424,14 +4422,6 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         group_name: "GroupNameType", # required
-    #         user_pool_id: "UserPoolIdType", # required
-    #       }
-    #
     # @!attribute [rw] group_name
     #   The name of the group.
     #   @return [String]
@@ -5461,14 +4451,6 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetIdentityProviderByIdentifierRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         idp_identifier: "IdpIdentifierType", # required
-    #       }
-    #
     # @!attribute [rw] user_pool_id
     #   The user pool ID.
     #   @return [String]
@@ -5500,13 +4482,6 @@ module Aws::CognitoIdentityProvider
 
     # Request to get a signing certificate from Amazon Cognito.
     #
-    # @note When making an API call, you may pass GetSigningCertificateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #       }
-    #
     # @!attribute [rw] user_pool_id
     #   The user pool ID.
     #   @return [String]
@@ -5533,14 +4508,6 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetUICustomizationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         client_id: "ClientIdType",
-    #       }
-    #
     # @!attribute [rw] user_pool_id
     #   The user pool ID for the user pool.
     #   @return [String]
@@ -5571,17 +4538,6 @@ module Aws::CognitoIdentityProvider
     end
 
     # Represents the request to get user attribute verification.
-    #
-    # @note When making an API call, you may pass GetUserAttributeVerificationCodeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         access_token: "TokenModelType", # required
-    #         attribute_name: "AttributeNameType", # required
-    #         client_metadata: {
-    #           "StringType" => "StringType",
-    #         },
-    #       }
     #
     # @!attribute [rw] access_token
     #   A non-expired access token for the user whose attribute verification
@@ -5657,13 +4613,6 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetUserPoolMfaConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #       }
-    #
     # @!attribute [rw] user_pool_id
     #   The user pool ID.
     #   @return [String]
@@ -5708,13 +4657,6 @@ module Aws::CognitoIdentityProvider
     end
 
     # Represents the request to get information about the user.
-    #
-    # @note When making an API call, you may pass GetUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         access_token: "TokenModelType", # required
-    #       }
     #
     # @!attribute [rw] access_token
     #   A non-expired access token for the user whose information you want
@@ -5774,13 +4716,6 @@ module Aws::CognitoIdentityProvider
     end
 
     # Represents the request to sign out all devices.
-    #
-    # @note When making an API call, you may pass GlobalSignOutRequest
-    #   data as a hash:
-    #
-    #       {
-    #         access_token: "TokenModelType", # required
-    #       }
     #
     # @!attribute [rw] access_token
     #   A valid access token that Amazon Cognito issued to the user who you
@@ -5876,14 +4811,6 @@ module Aws::CognitoIdentityProvider
     end
 
     # The HTTP header.
-    #
-    # @note When making an API call, you may pass HttpHeader
-    #   data as a hash:
-    #
-    #       {
-    #         header_name: "StringType",
-    #         header_value: "StringType",
-    #       }
     #
     # @!attribute [rw] header_name
     #   The header name.
@@ -6023,27 +4950,6 @@ module Aws::CognitoIdentityProvider
     end
 
     # Initiates the authentication request.
-    #
-    # @note When making an API call, you may pass InitiateAuthRequest
-    #   data as a hash:
-    #
-    #       {
-    #         auth_flow: "USER_SRP_AUTH", # required, accepts USER_SRP_AUTH, REFRESH_TOKEN_AUTH, REFRESH_TOKEN, CUSTOM_AUTH, ADMIN_NO_SRP_AUTH, USER_PASSWORD_AUTH, ADMIN_USER_PASSWORD_AUTH
-    #         auth_parameters: {
-    #           "StringType" => "StringType",
-    #         },
-    #         client_metadata: {
-    #           "StringType" => "StringType",
-    #         },
-    #         client_id: "ClientIdType", # required
-    #         analytics_metadata: {
-    #           analytics_endpoint_id: "StringType",
-    #         },
-    #         user_context_data: {
-    #           ip_address: "StringType",
-    #           encoded_data: "StringType",
-    #         },
-    #       }
     #
     # @!attribute [rw] auth_flow
     #   The authentication flow for this call to run. The API action will
@@ -6439,31 +5345,6 @@ module Aws::CognitoIdentityProvider
 
     # Specifies the configuration for Lambda triggers.
     #
-    # @note When making an API call, you may pass LambdaConfigType
-    #   data as a hash:
-    #
-    #       {
-    #         pre_sign_up: "ArnType",
-    #         custom_message: "ArnType",
-    #         post_confirmation: "ArnType",
-    #         pre_authentication: "ArnType",
-    #         post_authentication: "ArnType",
-    #         define_auth_challenge: "ArnType",
-    #         create_auth_challenge: "ArnType",
-    #         verify_auth_challenge_response: "ArnType",
-    #         pre_token_generation: "ArnType",
-    #         user_migration: "ArnType",
-    #         custom_sms_sender: {
-    #           lambda_version: "V1_0", # required, accepts V1_0
-    #           lambda_arn: "ArnType", # required
-    #         },
-    #         custom_email_sender: {
-    #           lambda_version: "V1_0", # required, accepts V1_0
-    #           lambda_arn: "ArnType", # required
-    #         },
-    #         kms_key_id: "ArnType",
-    #       }
-    #
     # @!attribute [rw] pre_sign_up
     #   A pre-registration Lambda trigger.
     #   @return [String]
@@ -6557,15 +5438,6 @@ module Aws::CognitoIdentityProvider
 
     # Represents the request to list the devices.
     #
-    # @note When making an API call, you may pass ListDevicesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         access_token: "TokenModelType", # required
-    #         limit: 1,
-    #         pagination_token: "SearchPaginationTokenType",
-    #       }
-    #
     # @!attribute [rw] access_token
     #   A valid access token that Amazon Cognito issued to the user whose
     #   list of devices you want to view.
@@ -6608,15 +5480,6 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         limit: 1,
-    #         next_token: "PaginationKey",
-    #       }
-    #
     # @!attribute [rw] user_pool_id
     #   The user pool ID for the user pool.
     #   @return [String]
@@ -6660,15 +5523,6 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListIdentityProvidersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         max_results: 1,
-    #         next_token: "PaginationKeyType",
-    #       }
-    #
     # @!attribute [rw] user_pool_id
     #   The user pool ID.
     #   @return [String]
@@ -6708,15 +5562,6 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListResourceServersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         max_results: 1,
-    #         next_token: "PaginationKeyType",
-    #       }
-    #
     # @!attribute [rw] user_pool_id
     #   The user pool ID for the user pool.
     #   @return [String]
@@ -6756,13 +5601,6 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ArnType", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the user pool that the tags are
     #   assigned to.
@@ -6789,15 +5627,6 @@ module Aws::CognitoIdentityProvider
     end
 
     # Represents the request to list the user import jobs.
-    #
-    # @note When making an API call, you may pass ListUserImportJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         max_results: 1, # required
-    #         pagination_token: "PaginationKeyType",
-    #       }
     #
     # @!attribute [rw] user_pool_id
     #   The user pool ID for the user pool that the users are being imported
@@ -6846,15 +5675,6 @@ module Aws::CognitoIdentityProvider
     end
 
     # Represents the request to list the user pool clients.
-    #
-    # @note When making an API call, you may pass ListUserPoolClientsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         max_results: 1,
-    #         next_token: "PaginationKey",
-    #       }
     #
     # @!attribute [rw] user_pool_id
     #   The user pool ID for the user pool where you want to list user pool
@@ -6905,14 +5725,6 @@ module Aws::CognitoIdentityProvider
 
     # Represents the request to list user pools.
     #
-    # @note When making an API call, you may pass ListUserPoolsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "PaginationKeyType",
-    #         max_results: 1, # required
-    #       }
-    #
     # @!attribute [rw] next_token
     #   An identifier that was returned from the previous call to this
     #   operation, which can be used to return the next set of items in the
@@ -6954,16 +5766,6 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListUsersInGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         group_name: "GroupNameType", # required
-    #         limit: 1,
-    #         next_token: "PaginationKey",
-    #       }
-    #
     # @!attribute [rw] user_pool_id
     #   The user pool ID for the user pool.
     #   @return [String]
@@ -7012,17 +5814,6 @@ module Aws::CognitoIdentityProvider
     end
 
     # Represents the request to list users.
-    #
-    # @note When making an API call, you may pass ListUsersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         attributes_to_get: ["AttributeNameType"],
-    #         limit: 1,
-    #         pagination_token: "SearchPaginationTokenType",
-    #         filter: "UserFilterType",
-    #       }
     #
     # @!attribute [rw] user_pool_id
     #   The user pool ID for the user pool on which the search should be
@@ -7168,14 +5959,6 @@ module Aws::CognitoIdentityProvider
     # multi-factor authentication (MFA) configurations. Does not apply to
     # time-based one-time password (TOTP) software token MFA configurations.
     #
-    # @note When making an API call, you may pass MFAOptionType
-    #   data as a hash:
-    #
-    #       {
-    #         delivery_medium: "SMS", # accepts SMS, EMAIL
-    #         attribute_name: "AttributeNameType",
-    #       }
-    #
     # @!attribute [rw] delivery_medium
     #   The delivery medium to send the MFA code. You can use this parameter
     #   to set only the `SMS` delivery medium value.
@@ -7196,15 +5979,6 @@ module Aws::CognitoIdentityProvider
     end
 
     # The message template structure.
-    #
-    # @note When making an API call, you may pass MessageTemplateType
-    #   data as a hash:
-    #
-    #       {
-    #         sms_message: "SmsVerificationMessageType",
-    #         email_message: "EmailVerificationMessageType",
-    #         email_subject: "EmailVerificationSubjectType",
-    #       }
     #
     # @!attribute [rw] sms_message
     #   The message template for SMS messages.
@@ -7274,30 +6048,6 @@ module Aws::CognitoIdentityProvider
 
     # The notify configuration type.
     #
-    # @note When making an API call, you may pass NotifyConfigurationType
-    #   data as a hash:
-    #
-    #       {
-    #         from: "StringType",
-    #         reply_to: "StringType",
-    #         source_arn: "ArnType", # required
-    #         block_email: {
-    #           subject: "EmailNotificationSubjectType", # required
-    #           html_body: "EmailNotificationBodyType",
-    #           text_body: "EmailNotificationBodyType",
-    #         },
-    #         no_action_email: {
-    #           subject: "EmailNotificationSubjectType", # required
-    #           html_body: "EmailNotificationBodyType",
-    #           text_body: "EmailNotificationBodyType",
-    #         },
-    #         mfa_email: {
-    #           subject: "EmailNotificationSubjectType", # required
-    #           html_body: "EmailNotificationBodyType",
-    #           text_body: "EmailNotificationBodyType",
-    #         },
-    #       }
-    #
     # @!attribute [rw] from
     #   The email address that is sending the email. The address must be
     #   either individually verified with Amazon Simple Email Service, or
@@ -7343,15 +6093,6 @@ module Aws::CognitoIdentityProvider
 
     # The notify email type.
     #
-    # @note When making an API call, you may pass NotifyEmailType
-    #   data as a hash:
-    #
-    #       {
-    #         subject: "EmailNotificationSubjectType", # required
-    #         html_body: "EmailNotificationBodyType",
-    #         text_body: "EmailNotificationBodyType",
-    #       }
-    #
     # @!attribute [rw] subject
     #   The email subject.
     #   @return [String]
@@ -7377,14 +6118,6 @@ module Aws::CognitoIdentityProvider
     # The minimum and maximum values of an attribute that is of the number
     # data type.
     #
-    # @note When making an API call, you may pass NumberAttributeConstraintsType
-    #   data as a hash:
-    #
-    #       {
-    #         min_value: "StringType",
-    #         max_value: "StringType",
-    #       }
-    #
     # @!attribute [rw] min_value
     #   The minimum value of an attribute that is of the number data type.
     #   @return [String]
@@ -7403,18 +6136,6 @@ module Aws::CognitoIdentityProvider
     end
 
     # The password policy type.
-    #
-    # @note When making an API call, you may pass PasswordPolicyType
-    #   data as a hash:
-    #
-    #       {
-    #         minimum_length: 1,
-    #         require_uppercase: false,
-    #         require_lowercase: false,
-    #         require_numbers: false,
-    #         require_symbols: false,
-    #         temporary_password_validity_days: 1,
-    #       }
     #
     # @!attribute [rw] minimum_length
     #   The minimum length of the password in the policy that you have set.
@@ -7527,15 +6248,6 @@ module Aws::CognitoIdentityProvider
 
     # A container for information about an IdP for a user pool.
     #
-    # @note When making an API call, you may pass ProviderUserIdentifierType
-    #   data as a hash:
-    #
-    #       {
-    #         provider_name: "ProviderNameType",
-    #         provider_attribute_name: "StringType",
-    #         provider_attribute_value: "StringType",
-    #       }
-    #
     # @!attribute [rw] provider_name
     #   The name of the provider, such as Facebook, Google, or Login with
     #   Amazon.
@@ -7563,14 +6275,6 @@ module Aws::CognitoIdentityProvider
     # A map containing a priority as a key, and recovery method name as a
     # value.
     #
-    # @note When making an API call, you may pass RecoveryOptionType
-    #   data as a hash:
-    #
-    #       {
-    #         priority: 1, # required
-    #         name: "verified_email", # required, accepts verified_email, verified_phone_number, admin_only
-    #       }
-    #
     # @!attribute [rw] priority
     #   A positive integer specifying priority of a method with 1 being the
     #   highest priority.
@@ -7590,25 +6294,6 @@ module Aws::CognitoIdentityProvider
     end
 
     # Represents the request to resend the confirmation code.
-    #
-    # @note When making an API call, you may pass ResendConfirmationCodeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_id: "ClientIdType", # required
-    #         secret_hash: "SecretHashType",
-    #         user_context_data: {
-    #           ip_address: "StringType",
-    #           encoded_data: "StringType",
-    #         },
-    #         username: "UsernameType", # required
-    #         analytics_metadata: {
-    #           analytics_endpoint_id: "StringType",
-    #         },
-    #         client_metadata: {
-    #           "StringType" => "StringType",
-    #         },
-    #       }
     #
     # @!attribute [rw] client_id
     #   The ID of the client associated with the user pool.
@@ -7723,14 +6408,6 @@ module Aws::CognitoIdentityProvider
 
     # A resource server scope.
     #
-    # @note When making an API call, you may pass ResourceServerScopeType
-    #   data as a hash:
-    #
-    #       {
-    #         scope_name: "ResourceServerScopeNameType", # required
-    #         scope_description: "ResourceServerScopeDescriptionType", # required
-    #       }
-    #
     # @!attribute [rw] scope_name
     #   The name of the scope.
     #   @return [String]
@@ -7778,28 +6455,6 @@ module Aws::CognitoIdentityProvider
     end
 
     # The request to respond to an authentication challenge.
-    #
-    # @note When making an API call, you may pass RespondToAuthChallengeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_id: "ClientIdType", # required
-    #         challenge_name: "SMS_MFA", # required, accepts SMS_MFA, SOFTWARE_TOKEN_MFA, SELECT_MFA_TYPE, MFA_SETUP, PASSWORD_VERIFIER, CUSTOM_CHALLENGE, DEVICE_SRP_AUTH, DEVICE_PASSWORD_VERIFIER, ADMIN_NO_SRP_AUTH, NEW_PASSWORD_REQUIRED
-    #         session: "SessionType",
-    #         challenge_responses: {
-    #           "StringType" => "StringType",
-    #         },
-    #         analytics_metadata: {
-    #           analytics_endpoint_id: "StringType",
-    #         },
-    #         user_context_data: {
-    #           ip_address: "StringType",
-    #           encoded_data: "StringType",
-    #         },
-    #         client_metadata: {
-    #           "StringType" => "StringType",
-    #         },
-    #       }
     #
     # @!attribute [rw] client_id
     #   The app client ID.
@@ -7985,15 +6640,6 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RevokeTokenRequest
-    #   data as a hash:
-    #
-    #       {
-    #         token: "TokenModelType", # required
-    #         client_id: "ClientIdType", # required
-    #         client_secret: "ClientSecretType",
-    #       }
-    #
     # @!attribute [rw] token
     #   The refresh token that you want to revoke.
     #   @return [String]
@@ -8065,14 +6711,6 @@ module Aws::CognitoIdentityProvider
 
     # The type of the configuration to override the risk decision.
     #
-    # @note When making an API call, you may pass RiskExceptionConfigurationType
-    #   data as a hash:
-    #
-    #       {
-    #         blocked_ip_range_list: ["StringType"],
-    #         skipped_ip_range_list: ["StringType"],
-    #       }
-    #
     # @!attribute [rw] blocked_ip_range_list
     #   Overrides the risk decision to always block the pre-authentication
     #   requests. The IP range is in CIDR notation, a compact representation
@@ -8102,14 +6740,6 @@ module Aws::CognitoIdentityProvider
     # attempts, deactivate MFA for users and turn on Adaptive Authentication
     # for the user pool.
     #
-    # @note When making an API call, you may pass SMSMfaSettingsType
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false,
-    #         preferred_mfa: false,
-    #       }
-    #
     # @!attribute [rw] enabled
     #   Specifies whether SMS text message MFA is activated. If an MFA type
     #   is activated for a user, the user will be prompted for MFA during
@@ -8131,25 +6761,6 @@ module Aws::CognitoIdentityProvider
     end
 
     # Contains information about the schema attribute.
-    #
-    # @note When making an API call, you may pass SchemaAttributeType
-    #   data as a hash:
-    #
-    #       {
-    #         name: "CustomAttributeNameType",
-    #         attribute_data_type: "String", # accepts String, Number, DateTime, Boolean
-    #         developer_only_attribute: false,
-    #         mutable: false,
-    #         required: false,
-    #         number_attribute_constraints: {
-    #           min_value: "StringType",
-    #           max_value: "StringType",
-    #         },
-    #         string_attribute_constraints: {
-    #           min_length: "StringType",
-    #           max_length: "StringType",
-    #         },
-    #       }
     #
     # @!attribute [rw] name
     #   A schema attribute of the name type.
@@ -8235,60 +6846,6 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SetRiskConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         client_id: "ClientIdType",
-    #         compromised_credentials_risk_configuration: {
-    #           event_filter: ["SIGN_IN"], # accepts SIGN_IN, PASSWORD_CHANGE, SIGN_UP
-    #           actions: { # required
-    #             event_action: "BLOCK", # required, accepts BLOCK, NO_ACTION
-    #           },
-    #         },
-    #         account_takeover_risk_configuration: {
-    #           notify_configuration: {
-    #             from: "StringType",
-    #             reply_to: "StringType",
-    #             source_arn: "ArnType", # required
-    #             block_email: {
-    #               subject: "EmailNotificationSubjectType", # required
-    #               html_body: "EmailNotificationBodyType",
-    #               text_body: "EmailNotificationBodyType",
-    #             },
-    #             no_action_email: {
-    #               subject: "EmailNotificationSubjectType", # required
-    #               html_body: "EmailNotificationBodyType",
-    #               text_body: "EmailNotificationBodyType",
-    #             },
-    #             mfa_email: {
-    #               subject: "EmailNotificationSubjectType", # required
-    #               html_body: "EmailNotificationBodyType",
-    #               text_body: "EmailNotificationBodyType",
-    #             },
-    #           },
-    #           actions: { # required
-    #             low_action: {
-    #               notify: false, # required
-    #               event_action: "BLOCK", # required, accepts BLOCK, MFA_IF_CONFIGURED, MFA_REQUIRED, NO_ACTION
-    #             },
-    #             medium_action: {
-    #               notify: false, # required
-    #               event_action: "BLOCK", # required, accepts BLOCK, MFA_IF_CONFIGURED, MFA_REQUIRED, NO_ACTION
-    #             },
-    #             high_action: {
-    #               notify: false, # required
-    #               event_action: "BLOCK", # required, accepts BLOCK, MFA_IF_CONFIGURED, MFA_REQUIRED, NO_ACTION
-    #             },
-    #           },
-    #         },
-    #         risk_exception_configuration: {
-    #           blocked_ip_range_list: ["StringType"],
-    #           skipped_ip_range_list: ["StringType"],
-    #         },
-    #       }
-    #
     # @!attribute [rw] user_pool_id
     #   The user pool ID.
     #   @return [String]
@@ -8340,16 +6897,6 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SetUICustomizationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         client_id: "ClientIdType",
-    #         css: "CSSType",
-    #         image_file: "data",
-    #       }
-    #
     # @!attribute [rw] user_pool_id
     #   The user pool ID for the user pool.
     #   @return [String]
@@ -8389,21 +6936,6 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SetUserMFAPreferenceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         sms_mfa_settings: {
-    #           enabled: false,
-    #           preferred_mfa: false,
-    #         },
-    #         software_token_mfa_settings: {
-    #           enabled: false,
-    #           preferred_mfa: false,
-    #         },
-    #         access_token: "TokenModelType", # required
-    #       }
-    #
     # @!attribute [rw] sms_mfa_settings
     #   The SMS text message multi-factor authentication (MFA) settings.
     #   @return [Types::SMSMfaSettingsType]
@@ -8431,25 +6963,6 @@ module Aws::CognitoIdentityProvider
     #
     class SetUserMFAPreferenceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass SetUserPoolMfaConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         sms_mfa_configuration: {
-    #           sms_authentication_message: "SmsVerificationMessageType",
-    #           sms_configuration: {
-    #             sns_caller_arn: "ArnType", # required
-    #             external_id: "StringType",
-    #             sns_region: "RegionCodeType",
-    #           },
-    #         },
-    #         software_token_mfa_configuration: {
-    #           enabled: false,
-    #         },
-    #         mfa_configuration: "OFF", # accepts OFF, ON, OPTIONAL
-    #       }
-    #
     # @!attribute [rw] user_pool_id
     #   The user pool ID.
     #   @return [String]
@@ -8522,19 +7035,6 @@ module Aws::CognitoIdentityProvider
 
     # Represents the request to set user settings.
     #
-    # @note When making an API call, you may pass SetUserSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         access_token: "TokenModelType", # required
-    #         mfa_options: [ # required
-    #           {
-    #             delivery_medium: "SMS", # accepts SMS, EMAIL
-    #             attribute_name: "AttributeNameType",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] access_token
     #   A valid access token that Amazon Cognito issued to the user whose
     #   user settings you want to configure.
@@ -8561,38 +7061,6 @@ module Aws::CognitoIdentityProvider
     class SetUserSettingsResponse < Aws::EmptyStructure; end
 
     # Represents the request to register a user.
-    #
-    # @note When making an API call, you may pass SignUpRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_id: "ClientIdType", # required
-    #         secret_hash: "SecretHashType",
-    #         username: "UsernameType", # required
-    #         password: "PasswordType", # required
-    #         user_attributes: [
-    #           {
-    #             name: "AttributeNameType", # required
-    #             value: "AttributeValueType",
-    #           },
-    #         ],
-    #         validation_data: [
-    #           {
-    #             name: "AttributeNameType", # required
-    #             value: "AttributeValueType",
-    #           },
-    #         ],
-    #         analytics_metadata: {
-    #           analytics_endpoint_id: "StringType",
-    #         },
-    #         user_context_data: {
-    #           ip_address: "StringType",
-    #           encoded_data: "StringType",
-    #         },
-    #         client_metadata: {
-    #           "StringType" => "StringType",
-    #         },
-    #       }
     #
     # @!attribute [rw] client_id
     #   The ID of the client associated with the user pool.
@@ -8724,15 +7192,6 @@ module Aws::CognitoIdentityProvider
     # you want, the Amazon Cognito user pool uses an Identity and Access
     # Management (IAM) role in your Amazon Web Services account.
     #
-    # @note When making an API call, you may pass SmsConfigurationType
-    #   data as a hash:
-    #
-    #       {
-    #         sns_caller_arn: "ArnType", # required
-    #         external_id: "StringType",
-    #         sns_region: "RegionCodeType",
-    #       }
-    #
     # @!attribute [rw] sns_caller_arn
     #   The Amazon Resource Name (ARN) of the Amazon SNS caller. This is the
     #   ARN of the IAM role in your Amazon Web Services account that Amazon
@@ -8793,18 +7252,6 @@ module Aws::CognitoIdentityProvider
     # The SMS text message multi-factor authentication (MFA) configuration
     # type.
     #
-    # @note When making an API call, you may pass SmsMfaConfigType
-    #   data as a hash:
-    #
-    #       {
-    #         sms_authentication_message: "SmsVerificationMessageType",
-    #         sms_configuration: {
-    #           sns_caller_arn: "ArnType", # required
-    #           external_id: "StringType",
-    #           sns_region: "RegionCodeType",
-    #         },
-    #       }
-    #
     # @!attribute [rw] sms_authentication_message
     #   The SMS authentication message that will be sent to users with the
     #   code they must sign in. The message must contain the ‘\\\{####\\}’
@@ -8847,13 +7294,6 @@ module Aws::CognitoIdentityProvider
 
     # The type used for enabling software token MFA at the user pool level.
     #
-    # @note When making an API call, you may pass SoftwareTokenMfaConfigType
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false,
-    #       }
-    #
     # @!attribute [rw] enabled
     #   Specifies whether software token MFA is activated.
     #   @return [Boolean]
@@ -8872,14 +7312,6 @@ module Aws::CognitoIdentityProvider
     # the device has been trusted. If you want MFA to be applied selectively
     # based on the assessed risk level of sign-in attempts, deactivate MFA
     # for users and turn on Adaptive Authentication for the user pool.
-    #
-    # @note When making an API call, you may pass SoftwareTokenMfaSettingsType
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false,
-    #         preferred_mfa: false,
-    #       }
     #
     # @!attribute [rw] enabled
     #   Specifies whether software token MFA is activated. If an MFA type is
@@ -8902,14 +7334,6 @@ module Aws::CognitoIdentityProvider
     end
 
     # Represents the request to start the user import job.
-    #
-    # @note When making an API call, you may pass StartUserImportJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         job_id: "UserImportJobIdType", # required
-    #       }
     #
     # @!attribute [rw] user_pool_id
     #   The user pool ID for the user pool that the users are being imported
@@ -8946,14 +7370,6 @@ module Aws::CognitoIdentityProvider
 
     # Represents the request to stop the user import job.
     #
-    # @note When making an API call, you may pass StopUserImportJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         job_id: "UserImportJobIdType", # required
-    #       }
-    #
     # @!attribute [rw] user_pool_id
     #   The user pool ID for the user pool that the users are being imported
     #   into.
@@ -8989,14 +7405,6 @@ module Aws::CognitoIdentityProvider
 
     # The constraints associated with a string attribute.
     #
-    # @note When making an API call, you may pass StringAttributeConstraintsType
-    #   data as a hash:
-    #
-    #       {
-    #         min_length: "StringType",
-    #         max_length: "StringType",
-    #       }
-    #
     # @!attribute [rw] min_length
     #   The minimum length.
     #   @return [String]
@@ -9014,16 +7422,6 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ArnType", # required
-    #         tags: { # required
-    #           "TagKeysType" => "TagValueType",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the user pool to assign the tags
     #   to.
@@ -9048,15 +7446,6 @@ module Aws::CognitoIdentityProvider
 
     # The data type TokenValidityUnits specifies the time units you use when
     # you set the duration of ID, access, and refresh tokens.
-    #
-    # @note When making an API call, you may pass TokenValidityUnitsType
-    #   data as a hash:
-    #
-    #       {
-    #         access_token: "seconds", # accepts seconds, minutes, hours, days
-    #         id_token: "seconds", # accepts seconds, minutes, hours, days
-    #         refresh_token: "seconds", # accepts seconds, minutes, hours, days
-    #       }
     #
     # @!attribute [rw] access_token
     #   A time unit of `seconds`, `minutes`, `hours`, or `days` for the
@@ -9249,14 +7638,6 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ArnType", # required
-    #         tag_keys: ["TagKeysType"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the user pool that the tags are
     #   assigned to.
@@ -9279,17 +7660,6 @@ module Aws::CognitoIdentityProvider
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateAuthEventFeedbackRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         username: "UsernameType", # required
-    #         event_id: "EventIdType", # required
-    #         feedback_token: "TokenModelType", # required
-    #         feedback_value: "Valid", # required, accepts Valid, Invalid
-    #       }
-    #
     # @!attribute [rw] user_pool_id
     #   The user pool ID.
     #   @return [String]
@@ -9328,15 +7698,6 @@ module Aws::CognitoIdentityProvider
 
     # Represents the request to update the device status.
     #
-    # @note When making an API call, you may pass UpdateDeviceStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         access_token: "TokenModelType", # required
-    #         device_key: "DeviceKeyType", # required
-    #         device_remembered_status: "remembered", # accepts remembered, not_remembered
-    #       }
-    #
     # @!attribute [rw] access_token
     #   A valid access token that Amazon Cognito issued to the user whose
     #   device status you want to update.
@@ -9366,17 +7727,6 @@ module Aws::CognitoIdentityProvider
     #
     class UpdateDeviceStatusResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         group_name: "GroupNameType", # required
-    #         user_pool_id: "UserPoolIdType", # required
-    #         description: "DescriptionType",
-    #         role_arn: "ArnType",
-    #         precedence: 1,
-    #       }
-    #
     # @!attribute [rw] group_name
     #   The name of the group.
     #   @return [String]
@@ -9428,21 +7778,6 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateIdentityProviderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         provider_name: "ProviderNameType", # required
-    #         provider_details: {
-    #           "StringType" => "StringType",
-    #         },
-    #         attribute_mapping: {
-    #           "AttributeMappingKeyType" => "StringType",
-    #         },
-    #         idp_identifiers: ["IdpIdentifierType"],
-    #       }
-    #
     # @!attribute [rw] user_pool_id
     #   The user pool ID.
     #   @return [String]
@@ -9488,21 +7823,6 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateResourceServerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         identifier: "ResourceServerIdentifierType", # required
-    #         name: "ResourceServerNameType", # required
-    #         scopes: [
-    #           {
-    #             scope_name: "ResourceServerScopeNameType", # required
-    #             scope_description: "ResourceServerScopeDescriptionType", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] user_pool_id
     #   The user pool ID for the user pool.
     #   @return [String]
@@ -9543,22 +7863,6 @@ module Aws::CognitoIdentityProvider
     end
 
     # Represents the request to update user attributes.
-    #
-    # @note When making an API call, you may pass UpdateUserAttributesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_attributes: [ # required
-    #           {
-    #             name: "AttributeNameType", # required
-    #             value: "AttributeValueType",
-    #           },
-    #         ],
-    #         access_token: "TokenModelType", # required
-    #         client_metadata: {
-    #           "StringType" => "StringType",
-    #         },
-    #       }
     #
     # @!attribute [rw] user_attributes
     #   An array of name-value pairs representing user attributes.
@@ -9645,44 +7949,6 @@ module Aws::CognitoIdentityProvider
     end
 
     # Represents the request to update the user pool client.
-    #
-    # @note When making an API call, you may pass UpdateUserPoolClientRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         client_id: "ClientIdType", # required
-    #         client_name: "ClientNameType",
-    #         refresh_token_validity: 1,
-    #         access_token_validity: 1,
-    #         id_token_validity: 1,
-    #         token_validity_units: {
-    #           access_token: "seconds", # accepts seconds, minutes, hours, days
-    #           id_token: "seconds", # accepts seconds, minutes, hours, days
-    #           refresh_token: "seconds", # accepts seconds, minutes, hours, days
-    #         },
-    #         read_attributes: ["ClientPermissionType"],
-    #         write_attributes: ["ClientPermissionType"],
-    #         explicit_auth_flows: ["ADMIN_NO_SRP_AUTH"], # accepts ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY, USER_PASSWORD_AUTH, ALLOW_ADMIN_USER_PASSWORD_AUTH, ALLOW_CUSTOM_AUTH, ALLOW_USER_PASSWORD_AUTH, ALLOW_USER_SRP_AUTH, ALLOW_REFRESH_TOKEN_AUTH
-    #         supported_identity_providers: ["ProviderNameType"],
-    #         callback_urls: ["RedirectUrlType"],
-    #         logout_urls: ["RedirectUrlType"],
-    #         default_redirect_uri: "RedirectUrlType",
-    #         allowed_o_auth_flows: ["code"], # accepts code, implicit, client_credentials
-    #         allowed_o_auth_scopes: ["ScopeType"],
-    #         allowed_o_auth_flows_user_pool_client: false,
-    #         analytics_configuration: {
-    #           application_id: "HexStringType",
-    #           application_arn: "ArnType",
-    #           role_arn: "ArnType",
-    #           external_id: "StringType",
-    #           user_data_shared: false,
-    #         },
-    #         prevent_user_existence_errors: "LEGACY", # accepts LEGACY, ENABLED
-    #         enable_token_revocation: false,
-    #         enable_propagate_additional_user_context_data: false,
-    #         auth_session_validity: 1,
-    #       }
     #
     # @!attribute [rw] user_pool_id
     #   The user pool ID for the user pool where you want to update the user
@@ -10004,17 +8270,6 @@ module Aws::CognitoIdentityProvider
 
     # The UpdateUserPoolDomain request input.
     #
-    # @note When making an API call, you may pass UpdateUserPoolDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "DomainType", # required
-    #         user_pool_id: "UserPoolIdType", # required
-    #         custom_domain_config: { # required
-    #           certificate_arn: "ArnType", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] domain
     #   The domain name for the custom domain that hosts the sign-up and
     #   sign-in pages for your application. One example might be
@@ -10062,101 +8317,6 @@ module Aws::CognitoIdentityProvider
     end
 
     # Represents the request to update the user pool.
-    #
-    # @note When making an API call, you may pass UpdateUserPoolRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "UserPoolIdType", # required
-    #         policies: {
-    #           password_policy: {
-    #             minimum_length: 1,
-    #             require_uppercase: false,
-    #             require_lowercase: false,
-    #             require_numbers: false,
-    #             require_symbols: false,
-    #             temporary_password_validity_days: 1,
-    #           },
-    #         },
-    #         deletion_protection: "ACTIVE", # accepts ACTIVE, INACTIVE
-    #         lambda_config: {
-    #           pre_sign_up: "ArnType",
-    #           custom_message: "ArnType",
-    #           post_confirmation: "ArnType",
-    #           pre_authentication: "ArnType",
-    #           post_authentication: "ArnType",
-    #           define_auth_challenge: "ArnType",
-    #           create_auth_challenge: "ArnType",
-    #           verify_auth_challenge_response: "ArnType",
-    #           pre_token_generation: "ArnType",
-    #           user_migration: "ArnType",
-    #           custom_sms_sender: {
-    #             lambda_version: "V1_0", # required, accepts V1_0
-    #             lambda_arn: "ArnType", # required
-    #           },
-    #           custom_email_sender: {
-    #             lambda_version: "V1_0", # required, accepts V1_0
-    #             lambda_arn: "ArnType", # required
-    #           },
-    #           kms_key_id: "ArnType",
-    #         },
-    #         auto_verified_attributes: ["phone_number"], # accepts phone_number, email
-    #         sms_verification_message: "SmsVerificationMessageType",
-    #         email_verification_message: "EmailVerificationMessageType",
-    #         email_verification_subject: "EmailVerificationSubjectType",
-    #         verification_message_template: {
-    #           sms_message: "SmsVerificationMessageType",
-    #           email_message: "EmailVerificationMessageType",
-    #           email_subject: "EmailVerificationSubjectType",
-    #           email_message_by_link: "EmailVerificationMessageByLinkType",
-    #           email_subject_by_link: "EmailVerificationSubjectByLinkType",
-    #           default_email_option: "CONFIRM_WITH_LINK", # accepts CONFIRM_WITH_LINK, CONFIRM_WITH_CODE
-    #         },
-    #         sms_authentication_message: "SmsVerificationMessageType",
-    #         user_attribute_update_settings: {
-    #           attributes_require_verification_before_update: ["phone_number"], # accepts phone_number, email
-    #         },
-    #         mfa_configuration: "OFF", # accepts OFF, ON, OPTIONAL
-    #         device_configuration: {
-    #           challenge_required_on_new_device: false,
-    #           device_only_remembered_on_user_prompt: false,
-    #         },
-    #         email_configuration: {
-    #           source_arn: "ArnType",
-    #           reply_to_email_address: "EmailAddressType",
-    #           email_sending_account: "COGNITO_DEFAULT", # accepts COGNITO_DEFAULT, DEVELOPER
-    #           from: "StringType",
-    #           configuration_set: "SESConfigurationSet",
-    #         },
-    #         sms_configuration: {
-    #           sns_caller_arn: "ArnType", # required
-    #           external_id: "StringType",
-    #           sns_region: "RegionCodeType",
-    #         },
-    #         user_pool_tags: {
-    #           "TagKeysType" => "TagValueType",
-    #         },
-    #         admin_create_user_config: {
-    #           allow_admin_create_user_only: false,
-    #           unused_account_validity_days: 1,
-    #           invite_message_template: {
-    #             sms_message: "SmsVerificationMessageType",
-    #             email_message: "EmailVerificationMessageType",
-    #             email_subject: "EmailVerificationSubjectType",
-    #           },
-    #         },
-    #         user_pool_add_ons: {
-    #           advanced_security_mode: "OFF", # required, accepts OFF, AUDIT, ENFORCED
-    #         },
-    #         account_recovery_setting: {
-    #           recovery_mechanisms: [
-    #             {
-    #               priority: 1, # required
-    #               name: "verified_email", # required, accepts verified_email, verified_phone_number, admin_only
-    #             },
-    #           ],
-    #         },
-    #       }
     #
     # @!attribute [rw] user_pool_id
     #   The user pool ID for the user pool you want to update.
@@ -10352,13 +8512,6 @@ module Aws::CognitoIdentityProvider
     #
     # [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-email-phone-verification.html#user-pool-settings-verifications-verify-attribute-updates
     #
-    # @note When making an API call, you may pass UserAttributeUpdateSettingsType
-    #   data as a hash:
-    #
-    #       {
-    #         attributes_require_verification_before_update: ["phone_number"], # accepts phone_number, email
-    #       }
-    #
     # @!attribute [rw] attributes_require_verification_before_update
     #   Requires that your user verifies their email address, phone number,
     #   or both before Amazon Cognito updates the value of that attribute.
@@ -10398,14 +8551,6 @@ module Aws::CognitoIdentityProvider
     # Contextual data, such as the user's device fingerprint, IP address,
     # or location, used for evaluating the risk of an unexpected event by
     # Amazon Cognito advanced security.
-    #
-    # @note When making an API call, you may pass UserContextDataType
-    #   data as a hash:
-    #
-    #       {
-    #         ip_address: "StringType",
-    #         encoded_data: "StringType",
-    #       }
     #
     # @!attribute [rw] ip_address
     #   The source IP address of your user's device.
@@ -10603,13 +8748,6 @@ module Aws::CognitoIdentityProvider
     end
 
     # The user pool add-ons type.
-    #
-    # @note When making an API call, you may pass UserPoolAddOnsType
-    #   data as a hash:
-    #
-    #       {
-    #         advanced_security_mode: "OFF", # required, accepts OFF, AUDIT, ENFORCED
-    #       }
     #
     # @!attribute [rw] advanced_security_mode
     #   The advanced security mode.
@@ -11020,20 +9158,6 @@ module Aws::CognitoIdentityProvider
 
     # The policy associated with a user pool.
     #
-    # @note When making an API call, you may pass UserPoolPolicyType
-    #   data as a hash:
-    #
-    #       {
-    #         password_policy: {
-    #           minimum_length: 1,
-    #           require_uppercase: false,
-    #           require_lowercase: false,
-    #           require_numbers: false,
-    #           require_symbols: false,
-    #           temporary_password_validity_days: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] password_policy
     #   The password policy.
     #   @return [Types::PasswordPolicyType]
@@ -11408,13 +9532,6 @@ module Aws::CognitoIdentityProvider
 
     # The username configuration type.
     #
-    # @note When making an API call, you may pass UsernameConfigurationType
-    #   data as a hash:
-    #
-    #       {
-    #         case_sensitive: false, # required
-    #       }
-    #
     # @!attribute [rw] case_sensitive
     #   Specifies whether user name case sensitivity will be applied for all
     #   users in the user pool through Amazon Cognito APIs.
@@ -11462,18 +9579,6 @@ module Aws::CognitoIdentityProvider
     end
 
     # The template for verification messages.
-    #
-    # @note When making an API call, you may pass VerificationMessageTemplateType
-    #   data as a hash:
-    #
-    #       {
-    #         sms_message: "SmsVerificationMessageType",
-    #         email_message: "EmailVerificationMessageType",
-    #         email_subject: "EmailVerificationSubjectType",
-    #         email_message_by_link: "EmailVerificationMessageByLinkType",
-    #         email_subject_by_link: "EmailVerificationSubjectByLinkType",
-    #         default_email_option: "CONFIRM_WITH_LINK", # accepts CONFIRM_WITH_LINK, CONFIRM_WITH_CODE
-    #       }
     #
     # @!attribute [rw] sms_message
     #   The template for SMS messages that Amazon Cognito sends to your
@@ -11546,16 +9651,6 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass VerifySoftwareTokenRequest
-    #   data as a hash:
-    #
-    #       {
-    #         access_token: "TokenModelType",
-    #         session: "SessionType",
-    #         user_code: "SoftwareTokenMFAUserCodeType", # required
-    #         friendly_device_name: "StringType",
-    #       }
-    #
     # @!attribute [rw] access_token
     #   A valid access token that Amazon Cognito issued to the user whose
     #   software token you want to verify.
@@ -11609,15 +9704,6 @@ module Aws::CognitoIdentityProvider
     end
 
     # Represents the request to verify user attributes.
-    #
-    # @note When making an API call, you may pass VerifyUserAttributeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         access_token: "TokenModelType", # required
-    #         attribute_name: "AttributeNameType", # required
-    #         code: "ConfirmationCodeType", # required
-    #       }
     #
     # @!attribute [rw] access_token
     #   A valid access token that Amazon Cognito issued to the user whose

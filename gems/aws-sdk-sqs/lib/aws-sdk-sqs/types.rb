@@ -10,16 +10,6 @@
 module Aws::SQS
   module Types
 
-    # @note When making an API call, you may pass AddPermissionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         queue_url: "String", # required
-    #         label: "String", # required
-    #         aws_account_ids: ["String"], # required
-    #         actions: ["String"], # required
-    #       }
-    #
     # @!attribute [rw] queue_url
     #   The URL of the Amazon SQS queue to which permissions are added.
     #
@@ -118,20 +108,6 @@ module Aws::SQS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ChangeMessageVisibilityBatchRequest
-    #   data as a hash:
-    #
-    #       {
-    #         queue_url: "String", # required
-    #         entries: [ # required
-    #           {
-    #             id: "String", # required
-    #             receipt_handle: "String", # required
-    #             visibility_timeout: 1,
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] queue_url
     #   The URL of the Amazon SQS queue whose messages' visibility is
     #   changed.
@@ -166,15 +142,6 @@ module Aws::SQS
     # `&ChangeMessageVisibilityBatchRequestEntry.1.ReceiptHandle=your_receipt_handle`
     #
     # `&ChangeMessageVisibilityBatchRequestEntry.1.VisibilityTimeout=45`
-    #
-    # @note When making an API call, you may pass ChangeMessageVisibilityBatchRequestEntry
-    #   data as a hash:
-    #
-    #       {
-    #         id: "String", # required
-    #         receipt_handle: "String", # required
-    #         visibility_timeout: 1,
-    #       }
     #
     # @!attribute [rw] id
     #   An identifier for this particular receipt handle used to communicate
@@ -243,15 +210,6 @@ module Aws::SQS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ChangeMessageVisibilityRequest
-    #   data as a hash:
-    #
-    #       {
-    #         queue_url: "String", # required
-    #         receipt_handle: "String", # required
-    #         visibility_timeout: 1, # required
-    #       }
-    #
     # @!attribute [rw] queue_url
     #   The URL of the Amazon SQS queue whose message's visibility is
     #   changed.
@@ -280,19 +238,6 @@ module Aws::SQS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateQueueRequest
-    #   data as a hash:
-    #
-    #       {
-    #         queue_name: "String", # required
-    #         attributes: {
-    #           "All" => "String",
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] queue_name
     #   The name of the new queue. The following limits apply to this name:
     #
@@ -538,19 +483,6 @@ module Aws::SQS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteMessageBatchRequest
-    #   data as a hash:
-    #
-    #       {
-    #         queue_url: "String", # required
-    #         entries: [ # required
-    #           {
-    #             id: "String", # required
-    #             receipt_handle: "String", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] queue_url
     #   The URL of the Amazon SQS queue from which messages are deleted.
     #
@@ -571,14 +503,6 @@ module Aws::SQS
     end
 
     # Encloses a receipt handle and an identifier for it.
-    #
-    # @note When making an API call, you may pass DeleteMessageBatchRequestEntry
-    #   data as a hash:
-    #
-    #       {
-    #         id: "String", # required
-    #         receipt_handle: "String", # required
-    #       }
     #
     # @!attribute [rw] id
     #   An identifier for this particular receipt handle. This is used to
@@ -641,14 +565,6 @@ module Aws::SQS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteMessageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         queue_url: "String", # required
-    #         receipt_handle: "String", # required
-    #       }
-    #
     # @!attribute [rw] queue_url
     #   The URL of the Amazon SQS queue from which messages are deleted.
     #
@@ -668,13 +584,6 @@ module Aws::SQS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteQueueRequest
-    #   data as a hash:
-    #
-    #       {
-    #         queue_url: "String", # required
-    #       }
-    #
     # @!attribute [rw] queue_url
     #   The URL of the Amazon SQS queue to delete.
     #
@@ -695,14 +604,6 @@ module Aws::SQS
     #
     class EmptyBatchRequest < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass GetQueueAttributesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         queue_url: "String", # required
-    #         attribute_names: ["All"], # accepts All, Policy, VisibilityTimeout, MaximumMessageSize, MessageRetentionPeriod, ApproximateNumberOfMessages, ApproximateNumberOfMessagesNotVisible, CreatedTimestamp, LastModifiedTimestamp, QueueArn, ApproximateNumberOfMessagesDelayed, DelaySeconds, ReceiveMessageWaitTimeSeconds, RedrivePolicy, FifoQueue, ContentBasedDeduplication, KmsMasterKeyId, KmsDataKeyReusePeriodSeconds, DeduplicationScope, FifoThroughputLimit, RedriveAllowPolicy, SqsManagedSseEnabled
-    #       }
-    #
     # @!attribute [rw] queue_url
     #   The URL of the Amazon SQS queue whose attribute information is
     #   retrieved.
@@ -890,14 +791,6 @@ module Aws::SQS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetQueueUrlRequest
-    #   data as a hash:
-    #
-    #       {
-    #         queue_name: "String", # required
-    #         queue_owner_aws_account_id: "String",
-    #       }
-    #
     # @!attribute [rw] queue_name
     #   The name of the queue whose URL must be fetched. Maximum 80
     #   characters. Valid values: alphanumeric characters, hyphens (`-`),
@@ -964,15 +857,6 @@ module Aws::SQS
     #
     class InvalidMessageContents < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass ListDeadLetterSourceQueuesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         queue_url: "String", # required
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] queue_url
     #   The URL of a dead-letter queue.
     #
@@ -1021,13 +905,6 @@ module Aws::SQS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListQueueTagsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         queue_url: "String", # required
-    #       }
-    #
     # @!attribute [rw] queue_url
     #   The URL of the queue.
     #   @return [String]
@@ -1052,15 +929,6 @@ module Aws::SQS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListQueuesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         queue_name_prefix: "String",
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] queue_name_prefix
     #   A string to use for filtering the list results. Only those queues
     #   whose name begins with the specified string are returned.
@@ -1205,17 +1073,6 @@ module Aws::SQS
     # and `Value`, are part of the message size restriction (256 KB or
     # 262,144 bytes).
     #
-    # @note When making an API call, you may pass MessageAttributeValue
-    #   data as a hash:
-    #
-    #       {
-    #         string_value: "String",
-    #         binary_value: "data",
-    #         string_list_values: ["String"],
-    #         binary_list_values: ["data"],
-    #         data_type: "String", # required
-    #       }
-    #
     # @!attribute [rw] string_value
     #   Strings are Unicode with UTF-8 binary encoding. For a list of code
     #   values, see [ASCII Printable Characters][1].
@@ -1275,17 +1132,6 @@ module Aws::SQS
     #
     # `Name`, `type`, `value` and the message body must not be empty or
     # null.
-    #
-    # @note When making an API call, you may pass MessageSystemAttributeValue
-    #   data as a hash:
-    #
-    #       {
-    #         string_value: "String",
-    #         binary_value: "data",
-    #         string_list_values: ["String"],
-    #         binary_list_values: ["data"],
-    #         data_type: "String", # required
-    #       }
     #
     # @!attribute [rw] string_value
     #   Strings are Unicode with UTF-8 binary encoding. For a list of code
@@ -1351,13 +1197,6 @@ module Aws::SQS
     #
     class PurgeQueueInProgress < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass PurgeQueueRequest
-    #   data as a hash:
-    #
-    #       {
-    #         queue_url: "String", # required
-    #       }
-    #
     # @!attribute [rw] queue_url
     #   The URL of the queue from which the `PurgeQueue` action deletes
     #   messages.
@@ -1400,19 +1239,6 @@ module Aws::SQS
     #
     class ReceiptHandleIsInvalid < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass ReceiveMessageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         queue_url: "String", # required
-    #         attribute_names: ["All"], # accepts All, Policy, VisibilityTimeout, MaximumMessageSize, MessageRetentionPeriod, ApproximateNumberOfMessages, ApproximateNumberOfMessagesNotVisible, CreatedTimestamp, LastModifiedTimestamp, QueueArn, ApproximateNumberOfMessagesDelayed, DelaySeconds, ReceiveMessageWaitTimeSeconds, RedrivePolicy, FifoQueue, ContentBasedDeduplication, KmsMasterKeyId, KmsDataKeyReusePeriodSeconds, DeduplicationScope, FifoThroughputLimit, RedriveAllowPolicy, SqsManagedSseEnabled
-    #         message_attribute_names: ["MessageAttributeName"],
-    #         max_number_of_messages: 1,
-    #         visibility_timeout: 1,
-    #         wait_time_seconds: 1,
-    #         receive_request_attempt_id: "String",
-    #       }
-    #
     # @!attribute [rw] queue_url
     #   The URL of the Amazon SQS queue from which messages are received.
     #
@@ -1616,14 +1442,6 @@ module Aws::SQS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RemovePermissionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         queue_url: "String", # required
-    #         label: "String", # required
-    #       }
-    #
     # @!attribute [rw] queue_url
     #   The URL of the Amazon SQS queue from which permissions are removed.
     #
@@ -1644,40 +1462,6 @@ module Aws::SQS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SendMessageBatchRequest
-    #   data as a hash:
-    #
-    #       {
-    #         queue_url: "String", # required
-    #         entries: [ # required
-    #           {
-    #             id: "String", # required
-    #             message_body: "String", # required
-    #             delay_seconds: 1,
-    #             message_attributes: {
-    #               "String" => {
-    #                 string_value: "String",
-    #                 binary_value: "data",
-    #                 string_list_values: ["String"],
-    #                 binary_list_values: ["data"],
-    #                 data_type: "String", # required
-    #               },
-    #             },
-    #             message_system_attributes: {
-    #               "AWSTraceHeader" => {
-    #                 string_value: "String",
-    #                 binary_value: "data",
-    #                 string_list_values: ["String"],
-    #                 binary_list_values: ["data"],
-    #                 data_type: "String", # required
-    #               },
-    #             },
-    #             message_deduplication_id: "String",
-    #             message_group_id: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] queue_url
     #   The URL of the Amazon SQS queue to which batched messages are sent.
     #
@@ -1699,35 +1483,6 @@ module Aws::SQS
 
     # Contains the details of a single Amazon SQS message along with an
     # `Id`.
-    #
-    # @note When making an API call, you may pass SendMessageBatchRequestEntry
-    #   data as a hash:
-    #
-    #       {
-    #         id: "String", # required
-    #         message_body: "String", # required
-    #         delay_seconds: 1,
-    #         message_attributes: {
-    #           "String" => {
-    #             string_value: "String",
-    #             binary_value: "data",
-    #             string_list_values: ["String"],
-    #             binary_list_values: ["data"],
-    #             data_type: "String", # required
-    #           },
-    #         },
-    #         message_system_attributes: {
-    #           "AWSTraceHeader" => {
-    #             string_value: "String",
-    #             binary_value: "data",
-    #             string_list_values: ["String"],
-    #             binary_list_values: ["data"],
-    #             data_type: "String", # required
-    #           },
-    #         },
-    #         message_deduplication_id: "String",
-    #         message_group_id: "String",
-    #       }
     #
     # @!attribute [rw] id
     #   An identifier for a message in this batch used to communicate the
@@ -1987,35 +1742,6 @@ module Aws::SQS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SendMessageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         queue_url: "String", # required
-    #         message_body: "String", # required
-    #         delay_seconds: 1,
-    #         message_attributes: {
-    #           "String" => {
-    #             string_value: "String",
-    #             binary_value: "data",
-    #             string_list_values: ["String"],
-    #             binary_list_values: ["data"],
-    #             data_type: "String", # required
-    #           },
-    #         },
-    #         message_system_attributes: {
-    #           "AWSTraceHeader" => {
-    #             string_value: "String",
-    #             binary_value: "data",
-    #             string_list_values: ["String"],
-    #             binary_list_values: ["data"],
-    #             data_type: "String", # required
-    #           },
-    #         },
-    #         message_deduplication_id: "String",
-    #         message_group_id: "String",
-    #       }
-    #
     # @!attribute [rw] queue_url
     #   The URL of the Amazon SQS queue to which a message is sent.
     #
@@ -2254,16 +1980,6 @@ module Aws::SQS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SetQueueAttributesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         queue_url: "String", # required
-    #         attributes: { # required
-    #           "All" => "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] queue_url
     #   The URL of the Amazon SQS queue whose attributes are set.
     #
@@ -2440,16 +2156,6 @@ module Aws::SQS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagQueueRequest
-    #   data as a hash:
-    #
-    #       {
-    #         queue_url: "String", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] queue_url
     #   The URL of the queue.
     #   @return [String]
@@ -2479,14 +2185,6 @@ module Aws::SQS
     #
     class UnsupportedOperation < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UntagQueueRequest
-    #   data as a hash:
-    #
-    #       {
-    #         queue_url: "String", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] queue_url
     #   The URL of the queue.
     #   @return [String]

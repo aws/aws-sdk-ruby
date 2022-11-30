@@ -38,17 +38,6 @@ module Aws::CloudSearch
     # Synonyms, stopwords, and stemming options for an analysis scheme.
     # Includes tokenization dictionary for Japanese.
     #
-    # @note When making an API call, you may pass AnalysisOptions
-    #   data as a hash:
-    #
-    #       {
-    #         synonyms: "String",
-    #         stopwords: "String",
-    #         stemming_dictionary: "String",
-    #         japanese_tokenization_dictionary: "String",
-    #         algorithmic_stemming: "none", # accepts none, minimal, light, full
-    #       }
-    #
     # @!attribute [rw] synonyms
     #   A JSON object that defines synonym groups and aliases. A synonym
     #   group is an array of arrays, where each sub-array is a group of
@@ -117,21 +106,6 @@ module Aws::CloudSearch
     # processed. The following options can be configured for an analysis
     # scheme: `Synonyms`, `Stopwords`, `StemmingDictionary`,
     # `JapaneseTokenizationDictionary` and `AlgorithmicStemming`.
-    #
-    # @note When making an API call, you may pass AnalysisScheme
-    #   data as a hash:
-    #
-    #       {
-    #         analysis_scheme_name: "StandardName", # required
-    #         analysis_scheme_language: "ar", # required, accepts ar, bg, ca, cs, da, de, el, en, es, eu, fa, fi, fr, ga, gl, he, hi, hu, hy, id, it, ja, ko, lv, mul, nl, no, pt, ro, ru, sv, th, tr, zh-Hans, zh-Hant
-    #         analysis_options: {
-    #           synonyms: "String",
-    #           stopwords: "String",
-    #           stemming_dictionary: "String",
-    #           japanese_tokenization_dictionary: "String",
-    #           algorithmic_stemming: "none", # accepts none, minimal, light, full
-    #         },
-    #       }
     #
     # @!attribute [rw] analysis_scheme_name
     #   Names must begin with a letter and can contain the following
@@ -217,13 +191,6 @@ module Aws::CloudSearch
     # Container for the parameters to the `BuildSuggester` operation.
     # Specifies the name of the domain you want to update.
     #
-    # @note When making an API call, you may pass BuildSuggestersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   A string that represents the name of a domain. Domain names are
     #   unique across the domains owned by an account within an AWS region.
@@ -252,13 +219,6 @@ module Aws::CloudSearch
 
     # Container for the parameters to the `CreateDomain` operation.
     # Specifies a name for the new search domain.
-    #
-    # @note When making an API call, you may pass CreateDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #       }
     #
     # @!attribute [rw] domain_name
     #   A name for the domain you are creating. Allowed characters are a-z
@@ -289,17 +249,6 @@ module Aws::CloudSearch
     # Options for a field that contains an array of dates. Present if
     # `IndexFieldType` specifies the field is of type `date-array`. All
     # options are enabled by default.
-    #
-    # @note When making an API call, you may pass DateArrayOptions
-    #   data as a hash:
-    #
-    #       {
-    #         default_value: "FieldValue",
-    #         source_fields: "FieldNameCommaList",
-    #         facet_enabled: false,
-    #         search_enabled: false,
-    #         return_enabled: false,
-    #       }
     #
     # @!attribute [rw] default_value
     #   A value to use for the field if the field isn't specified for a
@@ -337,18 +286,6 @@ module Aws::CloudSearch
     # (Coordinated Universal Time) according to IETF RFC3339:
     # yyyy-mm-ddT00:00:00Z. Present if `IndexFieldType` specifies the field
     # is of type `date`. All options are enabled by default.
-    #
-    # @note When making an API call, you may pass DateOptions
-    #   data as a hash:
-    #
-    #       {
-    #         default_value: "FieldValue",
-    #         source_field: "FieldName",
-    #         facet_enabled: false,
-    #         search_enabled: false,
-    #         return_enabled: false,
-    #         sort_enabled: false,
-    #       }
     #
     # @!attribute [rw] default_value
     #   A value to use for the field if the field isn't specified for a
@@ -406,24 +343,6 @@ module Aws::CloudSearch
     # Specifies the name of the domain you want to update and the analysis
     # scheme configuration.
     #
-    # @note When making an API call, you may pass DefineAnalysisSchemeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         analysis_scheme: { # required
-    #           analysis_scheme_name: "StandardName", # required
-    #           analysis_scheme_language: "ar", # required, accepts ar, bg, ca, cs, da, de, el, en, es, eu, fa, fi, fr, ga, gl, he, hi, hu, hy, id, it, ja, ko, lv, mul, nl, no, pt, ro, ru, sv, th, tr, zh-Hans, zh-Hant
-    #           analysis_options: {
-    #             synonyms: "String",
-    #             stopwords: "String",
-    #             stemming_dictionary: "String",
-    #             japanese_tokenization_dictionary: "String",
-    #             algorithmic_stemming: "none", # accepts none, minimal, light, full
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   A string that represents the name of a domain. Domain names are
     #   unique across the domains owned by an account within an AWS region.
@@ -463,17 +382,6 @@ module Aws::CloudSearch
     # Specifies the name of the domain you want to update and the expression
     # you want to configure.
     #
-    # @note When making an API call, you may pass DefineExpressionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         expression: { # required
-    #           expression_name: "StandardName", # required
-    #           expression_value: "ExpressionValue", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   A string that represents the name of a domain. Domain names are
     #   unique across the domains owned by an account within an AWS region.
@@ -511,100 +419,6 @@ module Aws::CloudSearch
     # Specifies the name of the domain you want to update and the index
     # field configuration.
     #
-    # @note When making an API call, you may pass DefineIndexFieldRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         index_field: { # required
-    #           index_field_name: "DynamicFieldName", # required
-    #           index_field_type: "int", # required, accepts int, double, literal, text, date, latlon, int-array, double-array, literal-array, text-array, date-array
-    #           int_options: {
-    #             default_value: 1,
-    #             source_field: "FieldName",
-    #             facet_enabled: false,
-    #             search_enabled: false,
-    #             return_enabled: false,
-    #             sort_enabled: false,
-    #           },
-    #           double_options: {
-    #             default_value: 1.0,
-    #             source_field: "FieldName",
-    #             facet_enabled: false,
-    #             search_enabled: false,
-    #             return_enabled: false,
-    #             sort_enabled: false,
-    #           },
-    #           literal_options: {
-    #             default_value: "FieldValue",
-    #             source_field: "FieldName",
-    #             facet_enabled: false,
-    #             search_enabled: false,
-    #             return_enabled: false,
-    #             sort_enabled: false,
-    #           },
-    #           text_options: {
-    #             default_value: "FieldValue",
-    #             source_field: "FieldName",
-    #             return_enabled: false,
-    #             sort_enabled: false,
-    #             highlight_enabled: false,
-    #             analysis_scheme: "Word",
-    #           },
-    #           date_options: {
-    #             default_value: "FieldValue",
-    #             source_field: "FieldName",
-    #             facet_enabled: false,
-    #             search_enabled: false,
-    #             return_enabled: false,
-    #             sort_enabled: false,
-    #           },
-    #           lat_lon_options: {
-    #             default_value: "FieldValue",
-    #             source_field: "FieldName",
-    #             facet_enabled: false,
-    #             search_enabled: false,
-    #             return_enabled: false,
-    #             sort_enabled: false,
-    #           },
-    #           int_array_options: {
-    #             default_value: 1,
-    #             source_fields: "FieldNameCommaList",
-    #             facet_enabled: false,
-    #             search_enabled: false,
-    #             return_enabled: false,
-    #           },
-    #           double_array_options: {
-    #             default_value: 1.0,
-    #             source_fields: "FieldNameCommaList",
-    #             facet_enabled: false,
-    #             search_enabled: false,
-    #             return_enabled: false,
-    #           },
-    #           literal_array_options: {
-    #             default_value: "FieldValue",
-    #             source_fields: "FieldNameCommaList",
-    #             facet_enabled: false,
-    #             search_enabled: false,
-    #             return_enabled: false,
-    #           },
-    #           text_array_options: {
-    #             default_value: "FieldValue",
-    #             source_fields: "FieldNameCommaList",
-    #             return_enabled: false,
-    #             highlight_enabled: false,
-    #             analysis_scheme: "Word",
-    #           },
-    #           date_array_options: {
-    #             default_value: "FieldValue",
-    #             source_fields: "FieldNameCommaList",
-    #             facet_enabled: false,
-    #             search_enabled: false,
-    #             return_enabled: false,
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   A string that represents the name of a domain. Domain names are
     #   unique across the domains owned by an account within an AWS region.
@@ -639,21 +453,6 @@ module Aws::CloudSearch
     # Container for the parameters to the `DefineSuggester` operation.
     # Specifies the name of the domain you want to update and the suggester
     # configuration.
-    #
-    # @note When making an API call, you may pass DefineSuggesterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         suggester: { # required
-    #           suggester_name: "StandardName", # required
-    #           document_suggester_options: { # required
-    #             source_field: "FieldName", # required
-    #             fuzzy_matching: "none", # accepts none, low, high
-    #             sort_expression: "String",
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] domain_name
     #   A string that represents the name of a domain. Domain names are
@@ -693,14 +492,6 @@ module Aws::CloudSearch
     # Specifies the name of the domain you want to update and the analysis
     # scheme you want to delete.
     #
-    # @note When making an API call, you may pass DeleteAnalysisSchemeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         analysis_scheme_name: "StandardName", # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   A string that represents the name of a domain. Domain names are
     #   unique across the domains owned by an account within an AWS region.
@@ -735,13 +526,6 @@ module Aws::CloudSearch
     # Container for the parameters to the `DeleteDomain` operation.
     # Specifies the name of the domain you want to delete.
     #
-    # @note When making an API call, you may pass DeleteDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The name of the domain you want to permanently delete.
     #   @return [String]
@@ -769,14 +553,6 @@ module Aws::CloudSearch
     # Container for the parameters to the `DeleteExpression` operation.
     # Specifies the name of the domain you want to update and the name of
     # the expression you want to delete.
-    #
-    # @note When making an API call, you may pass DeleteExpressionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         expression_name: "StandardName", # required
-    #       }
     #
     # @!attribute [rw] domain_name
     #   A string that represents the name of a domain. Domain names are
@@ -813,14 +589,6 @@ module Aws::CloudSearch
     # Specifies the name of the domain you want to update and the name of
     # the index field you want to delete.
     #
-    # @note When making an API call, you may pass DeleteIndexFieldRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         index_field_name: "DynamicFieldName", # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   A string that represents the name of a domain. Domain names are
     #   unique across the domains owned by an account within an AWS region.
@@ -855,14 +623,6 @@ module Aws::CloudSearch
     # Container for the parameters to the `DeleteSuggester` operation.
     # Specifies the name of the domain you want to update and name of the
     # suggester you want to delete.
-    #
-    # @note When making an API call, you may pass DeleteSuggesterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         suggester_name: "StandardName", # required
-    #       }
     #
     # @!attribute [rw] domain_name
     #   A string that represents the name of a domain. Domain names are
@@ -901,15 +661,6 @@ module Aws::CloudSearch
     # of the analysis schemes you want to describe. To show the active
     # configuration and exclude any pending changes, set the `Deployed`
     # option to `true`.
-    #
-    # @note When making an API call, you may pass DescribeAnalysisSchemesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         analysis_scheme_names: ["StandardName"],
-    #         deployed: false,
-    #       }
     #
     # @!attribute [rw] domain_name
     #   The name of the domain you want to describe.
@@ -950,14 +701,6 @@ module Aws::CloudSearch
     # show the active configuration and exclude any pending changes, set the
     # Deployed option to `true`.
     #
-    # @note When making an API call, you may pass DescribeAvailabilityOptionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         deployed: false,
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The name of the domain you want to describe.
     #   @return [String]
@@ -994,14 +737,6 @@ module Aws::CloudSearch
     # show the active configuration and exclude any pending changes, set the
     # Deployed option to `true`.
     #
-    # @note When making an API call, you may pass DescribeDomainEndpointOptionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         deployed: false,
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   A string that represents the name of a domain.
     #   @return [String]
@@ -1037,13 +772,6 @@ module Aws::CloudSearch
     # particular domains, specify the names of the domains you want to
     # describe.
     #
-    # @note When making an API call, you may pass DescribeDomainsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_names: ["DomainName"],
-    #       }
-    #
     # @!attribute [rw] domain_names
     #   The names of the domains you want to include in the response.
     #   @return [Array<String>]
@@ -1072,15 +800,6 @@ module Aws::CloudSearch
     # response to particular expressions, specify the names of the
     # expressions you want to describe. To show the active configuration and
     # exclude any pending changes, set the `Deployed` option to `true`.
-    #
-    # @note When making an API call, you may pass DescribeExpressionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         expression_names: ["StandardName"],
-    #         deployed: false,
-    #       }
     #
     # @!attribute [rw] domain_name
     #   The name of the domain you want to describe.
@@ -1123,15 +842,6 @@ module Aws::CloudSearch
     # fields you want to describe. To show the active configuration and
     # exclude any pending changes, set the `Deployed` option to `true`.
     #
-    # @note When making an API call, you may pass DescribeIndexFieldsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         field_names: ["DynamicFieldName"],
-    #         deployed: false,
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The name of the domain you want to describe.
     #   @return [String]
@@ -1170,13 +880,6 @@ module Aws::CloudSearch
     # Container for the parameters to the `DescribeScalingParameters`
     # operation. Specifies the name of the domain you want to describe.
     #
-    # @note When making an API call, you may pass DescribeScalingParametersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   A string that represents the name of a domain. Domain names are
     #   unique across the domains owned by an account within an AWS region.
@@ -1208,14 +911,6 @@ module Aws::CloudSearch
     # operation. Specifies the name of the domain you want to describe. To
     # show the active configuration and exclude any pending changes, set the
     # `Deployed` option to `true`.
-    #
-    # @note When making an API call, you may pass DescribeServiceAccessPoliciesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         deployed: false,
-    #       }
     #
     # @!attribute [rw] domain_name
     #   The name of the domain you want to describe.
@@ -1250,15 +945,6 @@ module Aws::CloudSearch
     # response to particular suggesters, specify the names of the suggesters
     # you want to describe. To show the active configuration and exclude any
     # pending changes, set the `Deployed` option to `true`.
-    #
-    # @note When making an API call, you may pass DescribeSuggestersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         suggester_names: ["StandardName"],
-    #         deployed: false,
-    #       }
     #
     # @!attribute [rw] domain_name
     #   The name of the domain you want to describe.
@@ -1300,15 +986,6 @@ module Aws::CloudSearch
 
     # Options for a search suggester.
     #
-    # @note When making an API call, you may pass DocumentSuggesterOptions
-    #   data as a hash:
-    #
-    #       {
-    #         source_field: "FieldName", # required
-    #         fuzzy_matching: "none", # accepts none, low, high
-    #         sort_expression: "String",
-    #       }
-    #
     # @!attribute [rw] source_field
     #   The name of the index field you want to use for suggestions.
     #   @return [String]
@@ -1341,14 +1018,6 @@ module Aws::CloudSearch
     end
 
     # The domain's endpoint options.
-    #
-    # @note When making an API call, you may pass DomainEndpointOptions
-    #   data as a hash:
-    #
-    #       {
-    #         enforce_https: false,
-    #         tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07
-    #       }
     #
     # @!attribute [rw] enforce_https
     #   Whether the domain is HTTPS only enabled.
@@ -1477,17 +1146,6 @@ module Aws::CloudSearch
     # floating point values. Present if `IndexFieldType` specifies the field
     # is of type `double-array`. All options are enabled by default.
     #
-    # @note When making an API call, you may pass DoubleArrayOptions
-    #   data as a hash:
-    #
-    #       {
-    #         default_value: 1.0,
-    #         source_fields: "FieldNameCommaList",
-    #         facet_enabled: false,
-    #         search_enabled: false,
-    #         return_enabled: false,
-    #       }
-    #
     # @!attribute [rw] default_value
     #   A value to use for the field if the field isn't specified for a
     #   document.
@@ -1523,18 +1181,6 @@ module Aws::CloudSearch
     # Options for a double-precision 64-bit floating point field. Present if
     # `IndexFieldType` specifies the field is of type `double`. All options
     # are enabled by default.
-    #
-    # @note When making an API call, you may pass DoubleOptions
-    #   data as a hash:
-    #
-    #       {
-    #         default_value: 1.0,
-    #         source_field: "FieldName",
-    #         facet_enabled: false,
-    #         search_enabled: false,
-    #         return_enabled: false,
-    #         sort_enabled: false,
-    #       }
     #
     # @!attribute [rw] default_value
     #   A value to use for the field if the field isn't specified for a
@@ -1577,14 +1223,6 @@ module Aws::CloudSearch
     # A named expression that can be evaluated at search time. Can be used
     # to sort the search results, define other expressions, or return
     # computed information in the search results.
-    #
-    # @note When making an API call, you may pass Expression
-    #   data as a hash:
-    #
-    #       {
-    #         expression_name: "StandardName", # required
-    #         expression_value: "ExpressionValue", # required
-    #       }
     #
     # @!attribute [rw] expression_name
     #   Names must begin with a letter and can contain the following
@@ -1630,13 +1268,6 @@ module Aws::CloudSearch
     # Container for the parameters to the `IndexDocuments` operation.
     # Specifies the name of the domain you want to re-index.
     #
-    # @note When making an API call, you may pass IndexDocumentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   A string that represents the name of a domain. Domain names are
     #   unique across the domains owned by an account within an AWS region.
@@ -1666,97 +1297,6 @@ module Aws::CloudSearch
     # Configuration information for a field in the index, including its
     # name, type, and options. The supported options depend on the
     # `IndexFieldType`.
-    #
-    # @note When making an API call, you may pass IndexField
-    #   data as a hash:
-    #
-    #       {
-    #         index_field_name: "DynamicFieldName", # required
-    #         index_field_type: "int", # required, accepts int, double, literal, text, date, latlon, int-array, double-array, literal-array, text-array, date-array
-    #         int_options: {
-    #           default_value: 1,
-    #           source_field: "FieldName",
-    #           facet_enabled: false,
-    #           search_enabled: false,
-    #           return_enabled: false,
-    #           sort_enabled: false,
-    #         },
-    #         double_options: {
-    #           default_value: 1.0,
-    #           source_field: "FieldName",
-    #           facet_enabled: false,
-    #           search_enabled: false,
-    #           return_enabled: false,
-    #           sort_enabled: false,
-    #         },
-    #         literal_options: {
-    #           default_value: "FieldValue",
-    #           source_field: "FieldName",
-    #           facet_enabled: false,
-    #           search_enabled: false,
-    #           return_enabled: false,
-    #           sort_enabled: false,
-    #         },
-    #         text_options: {
-    #           default_value: "FieldValue",
-    #           source_field: "FieldName",
-    #           return_enabled: false,
-    #           sort_enabled: false,
-    #           highlight_enabled: false,
-    #           analysis_scheme: "Word",
-    #         },
-    #         date_options: {
-    #           default_value: "FieldValue",
-    #           source_field: "FieldName",
-    #           facet_enabled: false,
-    #           search_enabled: false,
-    #           return_enabled: false,
-    #           sort_enabled: false,
-    #         },
-    #         lat_lon_options: {
-    #           default_value: "FieldValue",
-    #           source_field: "FieldName",
-    #           facet_enabled: false,
-    #           search_enabled: false,
-    #           return_enabled: false,
-    #           sort_enabled: false,
-    #         },
-    #         int_array_options: {
-    #           default_value: 1,
-    #           source_fields: "FieldNameCommaList",
-    #           facet_enabled: false,
-    #           search_enabled: false,
-    #           return_enabled: false,
-    #         },
-    #         double_array_options: {
-    #           default_value: 1.0,
-    #           source_fields: "FieldNameCommaList",
-    #           facet_enabled: false,
-    #           search_enabled: false,
-    #           return_enabled: false,
-    #         },
-    #         literal_array_options: {
-    #           default_value: "FieldValue",
-    #           source_fields: "FieldNameCommaList",
-    #           facet_enabled: false,
-    #           search_enabled: false,
-    #           return_enabled: false,
-    #         },
-    #         text_array_options: {
-    #           default_value: "FieldValue",
-    #           source_fields: "FieldNameCommaList",
-    #           return_enabled: false,
-    #           highlight_enabled: false,
-    #           analysis_scheme: "Word",
-    #         },
-    #         date_array_options: {
-    #           default_value: "FieldValue",
-    #           source_fields: "FieldNameCommaList",
-    #           facet_enabled: false,
-    #           search_enabled: false,
-    #           return_enabled: false,
-    #         },
-    #       }
     #
     # @!attribute [rw] index_field_name
     #   A string that represents the name of an index field. CloudSearch
@@ -1898,17 +1438,6 @@ module Aws::CloudSearch
     # Present if `IndexFieldType` specifies the field is of type
     # `int-array`. All options are enabled by default.
     #
-    # @note When making an API call, you may pass IntArrayOptions
-    #   data as a hash:
-    #
-    #       {
-    #         default_value: 1,
-    #         source_fields: "FieldNameCommaList",
-    #         facet_enabled: false,
-    #         search_enabled: false,
-    #         return_enabled: false,
-    #       }
-    #
     # @!attribute [rw] default_value
     #   A value to use for the field if the field isn't specified for a
     #   document.
@@ -1944,18 +1473,6 @@ module Aws::CloudSearch
     # Options for a 64-bit signed integer field. Present if `IndexFieldType`
     # specifies the field is of type `int`. All options are enabled by
     # default.
-    #
-    # @note When making an API call, you may pass IntOptions
-    #   data as a hash:
-    #
-    #       {
-    #         default_value: 1,
-    #         source_field: "FieldName",
-    #         facet_enabled: false,
-    #         search_enabled: false,
-    #         return_enabled: false,
-    #         sort_enabled: false,
-    #       }
     #
     # @!attribute [rw] default_value
     #   A value to use for the field if the field isn't specified for a
@@ -2014,18 +1531,6 @@ module Aws::CloudSearch
     # as a latitude and longitude value pair. Present if `IndexFieldType`
     # specifies the field is of type `latlon`. All options are enabled by
     # default.
-    #
-    # @note When making an API call, you may pass LatLonOptions
-    #   data as a hash:
-    #
-    #       {
-    #         default_value: "FieldValue",
-    #         source_field: "FieldName",
-    #         facet_enabled: false,
-    #         search_enabled: false,
-    #         return_enabled: false,
-    #         sort_enabled: false,
-    #       }
     #
     # @!attribute [rw] default_value
     #   A value to use for the field if the field isn't specified for a
@@ -2114,17 +1619,6 @@ module Aws::CloudSearch
     # if `IndexFieldType` specifies the field is of type `literal-array`.
     # All options are enabled by default.
     #
-    # @note When making an API call, you may pass LiteralArrayOptions
-    #   data as a hash:
-    #
-    #       {
-    #         default_value: "FieldValue",
-    #         source_fields: "FieldNameCommaList",
-    #         facet_enabled: false,
-    #         search_enabled: false,
-    #         return_enabled: false,
-    #       }
-    #
     # @!attribute [rw] default_value
     #   A value to use for the field if the field isn't specified for a
     #   document.
@@ -2159,18 +1653,6 @@ module Aws::CloudSearch
 
     # Options for literal field. Present if `IndexFieldType` specifies the
     # field is of type `literal`. All options are enabled by default.
-    #
-    # @note When making an API call, you may pass LiteralOptions
-    #   data as a hash:
-    #
-    #       {
-    #         default_value: "FieldValue",
-    #         source_field: "FieldName",
-    #         facet_enabled: false,
-    #         search_enabled: false,
-    #         return_enabled: false,
-    #         sort_enabled: false,
-    #       }
     #
     # @!attribute [rw] default_value
     #   A value to use for the field if the field isn't specified for a
@@ -2281,15 +1763,6 @@ module Aws::CloudSearch
     # The desired instance type and desired number of replicas of each index
     # partition.
     #
-    # @note When making an API call, you may pass ScalingParameters
-    #   data as a hash:
-    #
-    #       {
-    #         desired_instance_type: "search.m1.small", # accepts search.m1.small, search.m1.large, search.m2.xlarge, search.m2.2xlarge, search.m3.medium, search.m3.large, search.m3.xlarge, search.m3.2xlarge, search.small, search.medium, search.large, search.xlarge, search.2xlarge, search.previousgeneration.small, search.previousgeneration.large, search.previousgeneration.xlarge, search.previousgeneration.2xlarge
-    #         desired_replication_count: 1,
-    #         desired_partition_count: 1,
-    #       }
-    #
     # @!attribute [rw] desired_instance_type
     #   The instance type that you want to preconfigure for your domain. For
     #   example, `search.m1.small`.
@@ -2353,18 +1826,6 @@ module Aws::CloudSearch
     # suggestions. The following options can be configured for a suggester:
     # `FuzzyMatching`, `SortExpression`.
     #
-    # @note When making an API call, you may pass Suggester
-    #   data as a hash:
-    #
-    #       {
-    #         suggester_name: "StandardName", # required
-    #         document_suggester_options: { # required
-    #           source_field: "FieldName", # required
-    #           fuzzy_matching: "none", # accepts none, low, high
-    #           sort_expression: "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] suggester_name
     #   Names must begin with a letter and can contain the following
     #   characters: a-z (lowercase), 0-9, and \_ (underscore).
@@ -2406,17 +1867,6 @@ module Aws::CloudSearch
     # `text-array` field is always searchable. All options are enabled by
     # default.
     #
-    # @note When making an API call, you may pass TextArrayOptions
-    #   data as a hash:
-    #
-    #       {
-    #         default_value: "FieldValue",
-    #         source_fields: "FieldNameCommaList",
-    #         return_enabled: false,
-    #         highlight_enabled: false,
-    #         analysis_scheme: "Word",
-    #       }
-    #
     # @!attribute [rw] default_value
     #   A value to use for the field if the field isn't specified for a
     #   document.
@@ -2452,18 +1902,6 @@ module Aws::CloudSearch
     # Options for text field. Present if `IndexFieldType` specifies the
     # field is of type `text`. A `text` field is always searchable. All
     # options are enabled by default.
-    #
-    # @note When making an API call, you may pass TextOptions
-    #   data as a hash:
-    #
-    #       {
-    #         default_value: "FieldValue",
-    #         source_field: "FieldName",
-    #         return_enabled: false,
-    #         sort_enabled: false,
-    #         highlight_enabled: false,
-    #         analysis_scheme: "Word",
-    #       }
     #
     # @!attribute [rw] default_value
     #   A value to use for the field if the field isn't specified for a
@@ -2521,14 +1959,6 @@ module Aws::CloudSearch
     # operation. Specifies the name of the domain you want to update and the
     # Multi-AZ availability option.
     #
-    # @note When making an API call, you may pass UpdateAvailabilityOptionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         multi_az: false, # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   A string that represents the name of a domain. Domain names are
     #   unique across the domains owned by an account within an AWS region.
@@ -2568,17 +1998,6 @@ module Aws::CloudSearch
     # operation. Specifies the name of the domain you want to update and the
     # domain endpoint options.
     #
-    # @note When making an API call, you may pass UpdateDomainEndpointOptionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         domain_endpoint_options: { # required
-    #           enforce_https: false,
-    #           tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07
-    #         },
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   A string that represents the name of a domain.
     #   @return [String]
@@ -2613,18 +2032,6 @@ module Aws::CloudSearch
     # Container for the parameters to the `UpdateScalingParameters`
     # operation. Specifies the name of the domain you want to update and the
     # scaling parameters you want to configure.
-    #
-    # @note When making an API call, you may pass UpdateScalingParametersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         scaling_parameters: { # required
-    #           desired_instance_type: "search.m1.small", # accepts search.m1.small, search.m1.large, search.m2.xlarge, search.m2.2xlarge, search.m3.medium, search.m3.large, search.m3.xlarge, search.m3.2xlarge, search.small, search.medium, search.large, search.xlarge, search.2xlarge, search.previousgeneration.small, search.previousgeneration.large, search.previousgeneration.xlarge, search.previousgeneration.2xlarge
-    #           desired_replication_count: 1,
-    #           desired_partition_count: 1,
-    #         },
-    #       }
     #
     # @!attribute [rw] domain_name
     #   A string that represents the name of a domain. Domain names are
@@ -2662,14 +2069,6 @@ module Aws::CloudSearch
     # Container for the parameters to the `UpdateServiceAccessPolicies`
     # operation. Specifies the name of the domain you want to update and the
     # access rules you want to configure.
-    #
-    # @note When making an API call, you may pass UpdateServiceAccessPoliciesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         access_policies: "PolicyDocument", # required
-    #       }
     #
     # @!attribute [rw] domain_name
     #   A string that represents the name of a domain. Domain names are

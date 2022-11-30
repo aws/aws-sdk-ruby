@@ -20,13 +20,6 @@ module Aws::Athena
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html#object-ownership-overview
     #
-    # @note When making an API call, you may pass AclConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         s3_acl_option: "BUCKET_OWNER_FULL_CONTROL", # required, accepts BUCKET_OWNER_FULL_CONTROL
-    #       }
-    #
     # @!attribute [rw] s3_acl_option
     #   The Amazon S3 canned ACL that Athena should specify when storing
     #   query results. Currently the only supported canned ACL is
@@ -98,13 +91,6 @@ module Aws::Athena
 
     # Contains an array of named query IDs.
     #
-    # @note When making an API call, you may pass BatchGetNamedQueryInput
-    #   data as a hash:
-    #
-    #       {
-    #         named_query_ids: ["NamedQueryId"], # required
-    #       }
-    #
     # @!attribute [rw] named_query_ids
     #   An array of query IDs.
     #   @return [Array<String>]
@@ -134,14 +120,6 @@ module Aws::Athena
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchGetPreparedStatementInput
-    #   data as a hash:
-    #
-    #       {
-    #         prepared_statement_names: ["StatementName"], # required
-    #         work_group: "WorkGroupName", # required
-    #       }
-    #
     # @!attribute [rw] prepared_statement_names
     #   A list of prepared statement names to return.
     #   @return [Array<String>]
@@ -178,13 +156,6 @@ module Aws::Athena
     end
 
     # Contains an array of query execution IDs.
-    #
-    # @note When making an API call, you may pass BatchGetQueryExecutionInput
-    #   data as a hash:
-    #
-    #       {
-    #         query_execution_ids: ["QueryExecutionId"], # required
-    #       }
     #
     # @!attribute [rw] query_execution_ids
     #   An array of query execution IDs.
@@ -300,24 +271,6 @@ module Aws::Athena
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDataCatalogInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "CatalogNameString", # required
-    #         type: "LAMBDA", # required, accepts LAMBDA, GLUE, HIVE
-    #         description: "DescriptionString",
-    #         parameters: {
-    #           "KeyString" => "ParametersMapValue",
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the data catalog to create. The catalog name must be
     #   unique for the Amazon Web Services account and can use a maximum of
@@ -402,18 +355,6 @@ module Aws::Athena
     #
     class CreateDataCatalogOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass CreateNamedQueryInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "NameString", # required
-    #         description: "DescriptionString",
-    #         database: "DatabaseString", # required
-    #         query_string: "QueryString", # required
-    #         client_request_token: "IdempotencyToken",
-    #         work_group: "WorkGroupName",
-    #       }
-    #
     # @!attribute [rw] name
     #   The query name.
     #   @return [String]
@@ -476,16 +417,6 @@ module Aws::Athena
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreatePreparedStatementInput
-    #   data as a hash:
-    #
-    #       {
-    #         statement_name: "StatementName", # required
-    #         work_group: "WorkGroupName", # required
-    #         query_statement: "QueryString", # required
-    #         description: "DescriptionString",
-    #       }
-    #
     # @!attribute [rw] statement_name
     #   The name of the prepared statement.
     #   @return [String]
@@ -517,41 +448,6 @@ module Aws::Athena
     #
     class CreatePreparedStatementOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass CreateWorkGroupInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "WorkGroupName", # required
-    #         configuration: {
-    #           result_configuration: {
-    #             output_location: "ResultOutputLocation",
-    #             encryption_configuration: {
-    #               encryption_option: "SSE_S3", # required, accepts SSE_S3, SSE_KMS, CSE_KMS
-    #               kms_key: "String",
-    #             },
-    #             expected_bucket_owner: "AwsAccountId",
-    #             acl_configuration: {
-    #               s3_acl_option: "BUCKET_OWNER_FULL_CONTROL", # required, accepts BUCKET_OWNER_FULL_CONTROL
-    #             },
-    #           },
-    #           enforce_work_group_configuration: false,
-    #           publish_cloud_watch_metrics_enabled: false,
-    #           bytes_scanned_cutoff_per_query: 1,
-    #           requester_pays_enabled: false,
-    #           engine_version: {
-    #             selected_engine_version: "NameString",
-    #             effective_engine_version: "NameString",
-    #           },
-    #         },
-    #         description: "WorkGroupDescriptionString",
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The workgroup name.
     #   @return [String]
@@ -726,13 +622,6 @@ module Aws::Athena
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDataCatalogInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "CatalogNameString", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the data catalog to delete.
     #   @return [String]
@@ -749,13 +638,6 @@ module Aws::Athena
     #
     class DeleteDataCatalogOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteNamedQueryInput
-    #   data as a hash:
-    #
-    #       {
-    #         named_query_id: "NamedQueryId", # required
-    #       }
-    #
     # @!attribute [rw] named_query_id
     #   The unique ID of the query to delete.
     #
@@ -775,14 +657,6 @@ module Aws::Athena
     #
     class DeleteNamedQueryOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeletePreparedStatementInput
-    #   data as a hash:
-    #
-    #       {
-    #         statement_name: "StatementName", # required
-    #         work_group: "WorkGroupName", # required
-    #       }
-    #
     # @!attribute [rw] statement_name
     #   The name of the prepared statement to delete.
     #   @return [String]
@@ -804,14 +678,6 @@ module Aws::Athena
     #
     class DeletePreparedStatementOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteWorkGroupInput
-    #   data as a hash:
-    #
-    #       {
-    #         work_group: "WorkGroupName", # required
-    #         recursive_delete_option: false,
-    #       }
-    #
     # @!attribute [rw] work_group
     #   The unique name of the workgroup to delete.
     #   @return [String]
@@ -836,14 +702,6 @@ module Aws::Athena
 
     # If query results are encrypted in Amazon S3, indicates the encryption
     # option used (for example, `SSE_KMS` or `CSE_KMS`) and key information.
-    #
-    # @note When making an API call, you may pass EncryptionConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         encryption_option: "SSE_S3", # required, accepts SSE_S3, SSE_KMS, CSE_KMS
-    #         kms_key: "String",
-    #       }
     #
     # @!attribute [rw] encryption_option
     #   Indicates whether Amazon S3 server-side encryption with Amazon
@@ -872,14 +730,6 @@ module Aws::Athena
 
     # The Athena engine version for running queries.
     #
-    # @note When making an API call, you may pass EngineVersion
-    #   data as a hash:
-    #
-    #       {
-    #         selected_engine_version: "NameString",
-    #         effective_engine_version: "NameString",
-    #       }
-    #
     # @!attribute [rw] selected_engine_version
     #   The engine version requested by the user. Possible values are
     #   determined by the output of `ListEngineVersions`, including Auto.
@@ -905,13 +755,6 @@ module Aws::Athena
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDataCatalogInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "CatalogNameString", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the data catalog to return.
     #   @return [String]
@@ -936,14 +779,6 @@ module Aws::Athena
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDatabaseInput
-    #   data as a hash:
-    #
-    #       {
-    #         catalog_name: "CatalogNameString", # required
-    #         database_name: "NameString", # required
-    #       }
-    #
     # @!attribute [rw] catalog_name
     #   The name of the data catalog that contains the database to return.
     #   @return [String]
@@ -973,13 +808,6 @@ module Aws::Athena
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetNamedQueryInput
-    #   data as a hash:
-    #
-    #       {
-    #         named_query_id: "NamedQueryId", # required
-    #       }
-    #
     # @!attribute [rw] named_query_id
     #   The unique ID of the query. Use ListNamedQueries to get query IDs.
     #   @return [String]
@@ -1004,14 +832,6 @@ module Aws::Athena
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetPreparedStatementInput
-    #   data as a hash:
-    #
-    #       {
-    #         statement_name: "StatementName", # required
-    #         work_group: "WorkGroupName", # required
-    #       }
-    #
     # @!attribute [rw] statement_name
     #   The name of the prepared statement to retrieve.
     #   @return [String]
@@ -1041,13 +861,6 @@ module Aws::Athena
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetQueryExecutionInput
-    #   data as a hash:
-    #
-    #       {
-    #         query_execution_id: "QueryExecutionId", # required
-    #       }
-    #
     # @!attribute [rw] query_execution_id
     #   The unique ID of the query execution.
     #   @return [String]
@@ -1072,15 +885,6 @@ module Aws::Athena
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetQueryResultsInput
-    #   data as a hash:
-    #
-    #       {
-    #         query_execution_id: "QueryExecutionId", # required
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] query_execution_id
     #   The unique ID of the query execution.
     #   @return [String]
@@ -1132,13 +936,6 @@ module Aws::Athena
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetQueryRuntimeStatisticsInput
-    #   data as a hash:
-    #
-    #       {
-    #         query_execution_id: "QueryExecutionId", # required
-    #       }
-    #
     # @!attribute [rw] query_execution_id
     #   The unique ID of the query execution.
     #   @return [String]
@@ -1163,15 +960,6 @@ module Aws::Athena
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetTableMetadataInput
-    #   data as a hash:
-    #
-    #       {
-    #         catalog_name: "CatalogNameString", # required
-    #         database_name: "NameString", # required
-    #         table_name: "NameString", # required
-    #       }
-    #
     # @!attribute [rw] catalog_name
     #   The name of the data catalog that contains the database and table
     #   metadata to return.
@@ -1207,13 +995,6 @@ module Aws::Athena
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetWorkGroupInput
-    #   data as a hash:
-    #
-    #       {
-    #         work_group: "WorkGroupName", # required
-    #       }
-    #
     # @!attribute [rw] work_group
     #   The name of the workgroup.
     #   @return [String]
@@ -1272,14 +1053,6 @@ module Aws::Athena
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDataCatalogsInput
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   A token generated by the Athena service that specifies where to
     #   continue pagination if a previous request was truncated. To obtain
@@ -1320,15 +1093,6 @@ module Aws::Athena
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDatabasesInput
-    #   data as a hash:
-    #
-    #       {
-    #         catalog_name: "CatalogNameString", # required
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] catalog_name
     #   The name of the data catalog that contains the databases to return.
     #   @return [String]
@@ -1374,14 +1138,6 @@ module Aws::Athena
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEngineVersionsInput
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   A token generated by the Athena service that specifies where to
     #   continue pagination if a previous request was truncated. To obtain
@@ -1422,15 +1178,6 @@ module Aws::Athena
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListNamedQueriesInput
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "Token",
-    #         max_results: 1,
-    #         work_group: "WorkGroupName",
-    #       }
-    #
     # @!attribute [rw] next_token
     #   A token generated by the Athena service that specifies where to
     #   continue pagination if a previous request was truncated. To obtain
@@ -1478,15 +1225,6 @@ module Aws::Athena
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPreparedStatementsInput
-    #   data as a hash:
-    #
-    #       {
-    #         work_group: "WorkGroupName", # required
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] work_group
     #   The workgroup to list the prepared statements for.
     #   @return [String]
@@ -1532,15 +1270,6 @@ module Aws::Athena
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListQueryExecutionsInput
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "Token",
-    #         max_results: 1,
-    #         work_group: "WorkGroupName",
-    #       }
-    #
     # @!attribute [rw] next_token
     #   A token generated by the Athena service that specifies where to
     #   continue pagination if a previous request was truncated. To obtain
@@ -1585,17 +1314,6 @@ module Aws::Athena
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTableMetadataInput
-    #   data as a hash:
-    #
-    #       {
-    #         catalog_name: "CatalogNameString", # required
-    #         database_name: "NameString", # required
-    #         expression: "ExpressionString",
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] catalog_name
     #   The name of the data catalog for which table metadata should be
     #   returned.
@@ -1654,15 +1372,6 @@ module Aws::Athena
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   Lists the tags for the resource with the specified ARN.
     #   @return [String]
@@ -1705,14 +1414,6 @@ module Aws::Athena
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListWorkGroupsInput
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   A token generated by the Athena service that specifies where to
     #   continue pagination if a previous request was truncated. To obtain
@@ -1946,14 +1647,6 @@ module Aws::Athena
 
     # The database and data catalog context in which the query execution
     # occurs.
-    #
-    # @note When making an API call, you may pass QueryExecutionContext
-    #   data as a hash:
-    #
-    #       {
-    #         database: "DatabaseString",
-    #         catalog: "CatalogNameString",
-    #       }
     #
     # @!attribute [rw] database
     #   The name of the database used in the query execution. The database
@@ -2307,21 +2000,6 @@ module Aws::Athena
     # "client-side settings". If workgroup settings override client-side
     # settings, then the query uses the workgroup settings.
     #
-    # @note When making an API call, you may pass ResultConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         output_location: "ResultOutputLocation",
-    #         encryption_configuration: {
-    #           encryption_option: "SSE_S3", # required, accepts SSE_S3, SSE_KMS, CSE_KMS
-    #           kms_key: "String",
-    #         },
-    #         expected_bucket_owner: "AwsAccountId",
-    #         acl_configuration: {
-    #           s3_acl_option: "BUCKET_OWNER_FULL_CONTROL", # required, accepts BUCKET_OWNER_FULL_CONTROL
-    #         },
-    #       }
-    #
     # @!attribute [rw] output_location
     #   The location in Amazon S3 where your query results are stored, such
     #   as `s3://path/to/query/bucket/`. To run the query, you must specify
@@ -2404,25 +2082,6 @@ module Aws::Athena
 
     # The information about the updates in the query results, such as output
     # location and encryption configuration for the query results.
-    #
-    # @note When making an API call, you may pass ResultConfigurationUpdates
-    #   data as a hash:
-    #
-    #       {
-    #         output_location: "ResultOutputLocation",
-    #         remove_output_location: false,
-    #         encryption_configuration: {
-    #           encryption_option: "SSE_S3", # required, accepts SSE_S3, SSE_KMS, CSE_KMS
-    #           kms_key: "String",
-    #         },
-    #         remove_encryption_configuration: false,
-    #         expected_bucket_owner: "AwsAccountId",
-    #         remove_expected_bucket_owner: false,
-    #         acl_configuration: {
-    #           s3_acl_option: "BUCKET_OWNER_FULL_CONTROL", # required, accepts BUCKET_OWNER_FULL_CONTROL
-    #         },
-    #         remove_acl_configuration: false,
-    #       }
     #
     # @!attribute [rw] output_location
     #   The location in Amazon S3 where your query results are stored, such
@@ -2547,14 +2206,6 @@ module Aws::Athena
     # Specifies whether previous query results are reused, and if so, their
     # maximum age.
     #
-    # @note When making an API call, you may pass ResultReuseByAgeConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false, # required
-    #         max_age_in_minutes: 1,
-    #       }
-    #
     # @!attribute [rw] enabled
     #   True if previous query results can be reused when the query is run;
     #   otherwise, false. The default is false.
@@ -2575,16 +2226,6 @@ module Aws::Athena
     end
 
     # Specifies the query result reuse behavior for the query.
-    #
-    # @note When making an API call, you may pass ResultReuseConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         result_reuse_by_age_configuration: {
-    #           enabled: false, # required
-    #           max_age_in_minutes: 1,
-    #         },
-    #       }
     #
     # @!attribute [rw] result_reuse_by_age_configuration
     #   Specifies whether previous query results are reused, and if so,
@@ -2667,37 +2308,6 @@ module Aws::Athena
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartQueryExecutionInput
-    #   data as a hash:
-    #
-    #       {
-    #         query_string: "QueryString", # required
-    #         client_request_token: "IdempotencyToken",
-    #         query_execution_context: {
-    #           database: "DatabaseString",
-    #           catalog: "CatalogNameString",
-    #         },
-    #         result_configuration: {
-    #           output_location: "ResultOutputLocation",
-    #           encryption_configuration: {
-    #             encryption_option: "SSE_S3", # required, accepts SSE_S3, SSE_KMS, CSE_KMS
-    #             kms_key: "String",
-    #           },
-    #           expected_bucket_owner: "AwsAccountId",
-    #           acl_configuration: {
-    #             s3_acl_option: "BUCKET_OWNER_FULL_CONTROL", # required, accepts BUCKET_OWNER_FULL_CONTROL
-    #           },
-    #         },
-    #         work_group: "WorkGroupName",
-    #         execution_parameters: ["ExecutionParameter"],
-    #         result_reuse_configuration: {
-    #           result_reuse_by_age_configuration: {
-    #             enabled: false, # required
-    #             max_age_in_minutes: 1,
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] query_string
     #   The SQL query statements to be executed.
     #   @return [String]
@@ -2773,13 +2383,6 @@ module Aws::Athena
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopQueryExecutionInput
-    #   data as a hash:
-    #
-    #       {
-    #         query_execution_id: "QueryExecutionId", # required
-    #       }
-    #
     # @!attribute [rw] query_execution_id
     #   The unique ID of the query execution to stop.
     #
@@ -2860,14 +2463,6 @@ module Aws::Athena
     #
     # [1]: https://aws.amazon.com/answers/account-management/aws-tagging-strategies/
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey",
-    #         value: "TagValue",
-    #       }
-    #
     # @!attribute [rw] key
     #   A tag key. The tag key length is from 1 to 128 Unicode characters in
     #   UTF-8. You can use letters and numbers representable in UTF-8, and
@@ -2891,19 +2486,6 @@ module Aws::Athena
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   Specifies the ARN of the Athena resource (workgroup or data catalog)
     #   to which tags are to be added.
@@ -3034,14 +2616,6 @@ module Aws::Athena
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   Specifies the ARN of the resource from which tags are to be removed.
     #   @return [String]
@@ -3064,18 +2638,6 @@ module Aws::Athena
     #
     class UntagResourceOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateDataCatalogInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "CatalogNameString", # required
-    #         type: "LAMBDA", # required, accepts LAMBDA, GLUE, HIVE
-    #         description: "DescriptionString",
-    #         parameters: {
-    #           "KeyString" => "ParametersMapValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the data catalog to update. The catalog name must be
     #   unique for the Amazon Web Services account and can use a maximum of
@@ -3137,16 +2699,6 @@ module Aws::Athena
     #
     class UpdateDataCatalogOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateNamedQueryInput
-    #   data as a hash:
-    #
-    #       {
-    #         named_query_id: "NamedQueryId", # required
-    #         name: "NameString", # required
-    #         description: "NamedQueryDescriptionString",
-    #         query_string: "QueryString", # required
-    #       }
-    #
     # @!attribute [rw] named_query_id
     #   The unique identifier (UUID) of the query.
     #   @return [String]
@@ -3178,16 +2730,6 @@ module Aws::Athena
     #
     class UpdateNamedQueryOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdatePreparedStatementInput
-    #   data as a hash:
-    #
-    #       {
-    #         statement_name: "StatementName", # required
-    #         work_group: "WorkGroupName", # required
-    #         query_statement: "QueryString", # required
-    #         description: "DescriptionString",
-    #       }
-    #
     # @!attribute [rw] statement_name
     #   The name of the prepared statement.
     #   @return [String]
@@ -3219,41 +2761,6 @@ module Aws::Athena
     #
     class UpdatePreparedStatementOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateWorkGroupInput
-    #   data as a hash:
-    #
-    #       {
-    #         work_group: "WorkGroupName", # required
-    #         description: "WorkGroupDescriptionString",
-    #         configuration_updates: {
-    #           enforce_work_group_configuration: false,
-    #           result_configuration_updates: {
-    #             output_location: "ResultOutputLocation",
-    #             remove_output_location: false,
-    #             encryption_configuration: {
-    #               encryption_option: "SSE_S3", # required, accepts SSE_S3, SSE_KMS, CSE_KMS
-    #               kms_key: "String",
-    #             },
-    #             remove_encryption_configuration: false,
-    #             expected_bucket_owner: "AwsAccountId",
-    #             remove_expected_bucket_owner: false,
-    #             acl_configuration: {
-    #               s3_acl_option: "BUCKET_OWNER_FULL_CONTROL", # required, accepts BUCKET_OWNER_FULL_CONTROL
-    #             },
-    #             remove_acl_configuration: false,
-    #           },
-    #           publish_cloud_watch_metrics_enabled: false,
-    #           bytes_scanned_cutoff_per_query: 1,
-    #           remove_bytes_scanned_cutoff_per_query: false,
-    #           requester_pays_enabled: false,
-    #           engine_version: {
-    #             selected_engine_version: "NameString",
-    #             effective_engine_version: "NameString",
-    #           },
-    #         },
-    #         state: "ENABLED", # accepts ENABLED, DISABLED
-    #       }
-    #
     # @!attribute [rw] work_group
     #   The specified workgroup that will be updated.
     #   @return [String]
@@ -3349,31 +2856,6 @@ module Aws::Athena
     # `WorkGroupConfiguration`. See
     # WorkGroupConfiguration$EnforceWorkGroupConfiguration.
     #
-    # @note When making an API call, you may pass WorkGroupConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         result_configuration: {
-    #           output_location: "ResultOutputLocation",
-    #           encryption_configuration: {
-    #             encryption_option: "SSE_S3", # required, accepts SSE_S3, SSE_KMS, CSE_KMS
-    #             kms_key: "String",
-    #           },
-    #           expected_bucket_owner: "AwsAccountId",
-    #           acl_configuration: {
-    #             s3_acl_option: "BUCKET_OWNER_FULL_CONTROL", # required, accepts BUCKET_OWNER_FULL_CONTROL
-    #           },
-    #         },
-    #         enforce_work_group_configuration: false,
-    #         publish_cloud_watch_metrics_enabled: false,
-    #         bytes_scanned_cutoff_per_query: 1,
-    #         requester_pays_enabled: false,
-    #         engine_version: {
-    #           selected_engine_version: "NameString",
-    #           effective_engine_version: "NameString",
-    #         },
-    #       }
-    #
     # @!attribute [rw] result_configuration
     #   The configuration for the workgroup, which includes the location in
     #   Amazon S3 where query results are stored and the encryption option,
@@ -3450,36 +2932,6 @@ module Aws::Athena
     # the workgroup settings override the client-side settings, and the data
     # usage limit for the amount of bytes scanned per query, if it is
     # specified.
-    #
-    # @note When making an API call, you may pass WorkGroupConfigurationUpdates
-    #   data as a hash:
-    #
-    #       {
-    #         enforce_work_group_configuration: false,
-    #         result_configuration_updates: {
-    #           output_location: "ResultOutputLocation",
-    #           remove_output_location: false,
-    #           encryption_configuration: {
-    #             encryption_option: "SSE_S3", # required, accepts SSE_S3, SSE_KMS, CSE_KMS
-    #             kms_key: "String",
-    #           },
-    #           remove_encryption_configuration: false,
-    #           expected_bucket_owner: "AwsAccountId",
-    #           remove_expected_bucket_owner: false,
-    #           acl_configuration: {
-    #             s3_acl_option: "BUCKET_OWNER_FULL_CONTROL", # required, accepts BUCKET_OWNER_FULL_CONTROL
-    #           },
-    #           remove_acl_configuration: false,
-    #         },
-    #         publish_cloud_watch_metrics_enabled: false,
-    #         bytes_scanned_cutoff_per_query: 1,
-    #         remove_bytes_scanned_cutoff_per_query: false,
-    #         requester_pays_enabled: false,
-    #         engine_version: {
-    #           selected_engine_version: "NameString",
-    #           effective_engine_version: "NameString",
-    #         },
-    #       }
     #
     # @!attribute [rw] enforce_work_group_configuration
     #   If set to "true", the settings for the workgroup override

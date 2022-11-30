@@ -12,15 +12,6 @@ module Aws::OpenSearchService
 
     # Information about an Amazon OpenSearch Service domain.
     #
-    # @note When making an API call, you may pass AWSDomainInformation
-    #   data as a hash:
-    #
-    #       {
-    #         owner_id: "OwnerId",
-    #         domain_name: "DomainName", # required
-    #         region: "Region",
-    #       }
-    #
     # @!attribute [rw] owner_id
     #   The Amazon Web Services account ID of the domain owner.
     #   @return [String]
@@ -45,13 +36,6 @@ module Aws::OpenSearchService
 
     # Container for the parameters to the `AcceptInboundConnection`
     # operation.
-    #
-    # @note When making an API call, you may pass AcceptInboundConnectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connection_id: "ConnectionId", # required
-    #       }
     #
     # @!attribute [rw] connection_id
     #   The ID of the inbound connection to accept.
@@ -114,19 +98,6 @@ module Aws::OpenSearchService
 
     # Container for the parameters to the `AddTags` operation. Specifies the
     # tags to attach to the domain.
-    #
-    # @note When making an API call, you may pass AddTagsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "ARN", # required
-    #         tag_list: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] arn
     #   Amazon Resource Name (ARN) for the OpenSearch Service domain to
@@ -276,32 +247,6 @@ module Aws::OpenSearchService
     #
     # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/fgac.html
     #
-    # @note When making an API call, you may pass AdvancedSecurityOptionsInput
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false,
-    #         internal_user_database_enabled: false,
-    #         master_user_options: {
-    #           master_user_arn: "ARN",
-    #           master_user_name: "Username",
-    #           master_user_password: "Password",
-    #         },
-    #         saml_options: {
-    #           enabled: false,
-    #           idp: {
-    #             metadata_content: "SAMLMetadata", # required
-    #             entity_id: "SAMLEntityId", # required
-    #           },
-    #           master_user_name: "Username",
-    #           master_backend_role: "BackendRole",
-    #           subject_key: "String",
-    #           roles_key: "String",
-    #           session_timeout_minutes: 1,
-    #         },
-    #         anonymous_auth_enabled: false,
-    #       }
-    #
     # @!attribute [rw] enabled
     #   True to enable fine-grained access control.
     #   @return [Boolean]
@@ -363,14 +308,6 @@ module Aws::OpenSearchService
     # Container for the request parameters to the `AssociatePackage`
     # operation.
     #
-    # @note When making an API call, you may pass AssociatePackageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         package_id: "PackageID", # required
-    #         domain_name: "DomainName", # required
-    #       }
-    #
     # @!attribute [rw] package_id
     #   Internal ID of the package to associate with a domain. Use
     #   `DescribePackages` to find this value.
@@ -404,14 +341,6 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AuthorizeVpcEndpointAccessRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         account: "AWSAccount", # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The name of the OpenSearch Service domain to provide access to.
     #   @return [String]
@@ -517,18 +446,6 @@ module Aws::OpenSearchService
     #
     # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html
     #
-    # @note When making an API call, you may pass AutoTuneMaintenanceSchedule
-    #   data as a hash:
-    #
-    #       {
-    #         start_at: Time.now,
-    #         duration: {
-    #           value: 1,
-    #           unit: "HOURS", # accepts HOURS
-    #         },
-    #         cron_expression_for_recurrence: "String",
-    #       }
-    #
     # @!attribute [rw] start_at
     #   The Epoch timestamp at which the Auto-Tune maintenance schedule
     #   starts.
@@ -560,24 +477,6 @@ module Aws::OpenSearchService
     #
     #
     # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html
-    #
-    # @note When making an API call, you may pass AutoTuneOptions
-    #   data as a hash:
-    #
-    #       {
-    #         desired_state: "ENABLED", # accepts ENABLED, DISABLED
-    #         rollback_on_disable: "NO_ROLLBACK", # accepts NO_ROLLBACK, DEFAULT_ROLLBACK
-    #         maintenance_schedules: [
-    #           {
-    #             start_at: Time.now,
-    #             duration: {
-    #               value: 1,
-    #               unit: "HOURS", # accepts HOURS
-    #             },
-    #             cron_expression_for_recurrence: "String",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] desired_state
     #   Whether Auto-Tune is enabled or disabled.
@@ -612,23 +511,6 @@ module Aws::OpenSearchService
     #
     #
     # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html
-    #
-    # @note When making an API call, you may pass AutoTuneOptionsInput
-    #   data as a hash:
-    #
-    #       {
-    #         desired_state: "ENABLED", # accepts ENABLED, DISABLED
-    #         maintenance_schedules: [
-    #           {
-    #             start_at: Time.now,
-    #             duration: {
-    #               value: 1,
-    #               unit: "HOURS", # accepts HOURS
-    #             },
-    #             cron_expression_for_recurrence: "String",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] desired_state
     #   Whether Auto-Tune is enabled or disabled.
@@ -752,13 +634,6 @@ module Aws::OpenSearchService
 
     # Container for the request parameters to cancel a service software
     # update.
-    #
-    # @note When making an API call, you may pass CancelServiceSoftwareUpdateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #       }
     #
     # @!attribute [rw] domain_name
     #   Name of the OpenSearch Service domain that you want to cancel the
@@ -894,27 +769,6 @@ module Aws::OpenSearchService
     #
     # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html
     #
-    # @note When making an API call, you may pass ClusterConfig
-    #   data as a hash:
-    #
-    #       {
-    #         instance_type: "m3.medium.search", # accepts m3.medium.search, m3.large.search, m3.xlarge.search, m3.2xlarge.search, m4.large.search, m4.xlarge.search, m4.2xlarge.search, m4.4xlarge.search, m4.10xlarge.search, m5.large.search, m5.xlarge.search, m5.2xlarge.search, m5.4xlarge.search, m5.12xlarge.search, m5.24xlarge.search, r5.large.search, r5.xlarge.search, r5.2xlarge.search, r5.4xlarge.search, r5.12xlarge.search, r5.24xlarge.search, c5.large.search, c5.xlarge.search, c5.2xlarge.search, c5.4xlarge.search, c5.9xlarge.search, c5.18xlarge.search, t3.nano.search, t3.micro.search, t3.small.search, t3.medium.search, t3.large.search, t3.xlarge.search, t3.2xlarge.search, ultrawarm1.medium.search, ultrawarm1.large.search, ultrawarm1.xlarge.search, t2.micro.search, t2.small.search, t2.medium.search, r3.large.search, r3.xlarge.search, r3.2xlarge.search, r3.4xlarge.search, r3.8xlarge.search, i2.xlarge.search, i2.2xlarge.search, d2.xlarge.search, d2.2xlarge.search, d2.4xlarge.search, d2.8xlarge.search, c4.large.search, c4.xlarge.search, c4.2xlarge.search, c4.4xlarge.search, c4.8xlarge.search, r4.large.search, r4.xlarge.search, r4.2xlarge.search, r4.4xlarge.search, r4.8xlarge.search, r4.16xlarge.search, i3.large.search, i3.xlarge.search, i3.2xlarge.search, i3.4xlarge.search, i3.8xlarge.search, i3.16xlarge.search, r6g.large.search, r6g.xlarge.search, r6g.2xlarge.search, r6g.4xlarge.search, r6g.8xlarge.search, r6g.12xlarge.search, m6g.large.search, m6g.xlarge.search, m6g.2xlarge.search, m6g.4xlarge.search, m6g.8xlarge.search, m6g.12xlarge.search, c6g.large.search, c6g.xlarge.search, c6g.2xlarge.search, c6g.4xlarge.search, c6g.8xlarge.search, c6g.12xlarge.search, r6gd.large.search, r6gd.xlarge.search, r6gd.2xlarge.search, r6gd.4xlarge.search, r6gd.8xlarge.search, r6gd.12xlarge.search, r6gd.16xlarge.search, t4g.small.search, t4g.medium.search
-    #         instance_count: 1,
-    #         dedicated_master_enabled: false,
-    #         zone_awareness_enabled: false,
-    #         zone_awareness_config: {
-    #           availability_zone_count: 1,
-    #         },
-    #         dedicated_master_type: "m3.medium.search", # accepts m3.medium.search, m3.large.search, m3.xlarge.search, m3.2xlarge.search, m4.large.search, m4.xlarge.search, m4.2xlarge.search, m4.4xlarge.search, m4.10xlarge.search, m5.large.search, m5.xlarge.search, m5.2xlarge.search, m5.4xlarge.search, m5.12xlarge.search, m5.24xlarge.search, r5.large.search, r5.xlarge.search, r5.2xlarge.search, r5.4xlarge.search, r5.12xlarge.search, r5.24xlarge.search, c5.large.search, c5.xlarge.search, c5.2xlarge.search, c5.4xlarge.search, c5.9xlarge.search, c5.18xlarge.search, t3.nano.search, t3.micro.search, t3.small.search, t3.medium.search, t3.large.search, t3.xlarge.search, t3.2xlarge.search, ultrawarm1.medium.search, ultrawarm1.large.search, ultrawarm1.xlarge.search, t2.micro.search, t2.small.search, t2.medium.search, r3.large.search, r3.xlarge.search, r3.2xlarge.search, r3.4xlarge.search, r3.8xlarge.search, i2.xlarge.search, i2.2xlarge.search, d2.xlarge.search, d2.2xlarge.search, d2.4xlarge.search, d2.8xlarge.search, c4.large.search, c4.xlarge.search, c4.2xlarge.search, c4.4xlarge.search, c4.8xlarge.search, r4.large.search, r4.xlarge.search, r4.2xlarge.search, r4.4xlarge.search, r4.8xlarge.search, r4.16xlarge.search, i3.large.search, i3.xlarge.search, i3.2xlarge.search, i3.4xlarge.search, i3.8xlarge.search, i3.16xlarge.search, r6g.large.search, r6g.xlarge.search, r6g.2xlarge.search, r6g.4xlarge.search, r6g.8xlarge.search, r6g.12xlarge.search, m6g.large.search, m6g.xlarge.search, m6g.2xlarge.search, m6g.4xlarge.search, m6g.8xlarge.search, m6g.12xlarge.search, c6g.large.search, c6g.xlarge.search, c6g.2xlarge.search, c6g.4xlarge.search, c6g.8xlarge.search, c6g.12xlarge.search, r6gd.large.search, r6gd.xlarge.search, r6gd.2xlarge.search, r6gd.4xlarge.search, r6gd.8xlarge.search, r6gd.12xlarge.search, r6gd.16xlarge.search, t4g.small.search, t4g.medium.search
-    #         dedicated_master_count: 1,
-    #         warm_enabled: false,
-    #         warm_type: "ultrawarm1.medium.search", # accepts ultrawarm1.medium.search, ultrawarm1.large.search, ultrawarm1.xlarge.search
-    #         warm_count: 1,
-    #         cold_storage_options: {
-    #           enabled: false, # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] instance_type
     #   Instance type of data nodes in the cluster.
     #   @return [String]
@@ -1018,16 +872,6 @@ module Aws::OpenSearchService
     #
     # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cognito-auth.html
     #
-    # @note When making an API call, you may pass CognitoOptions
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false,
-    #         user_pool_id: "UserPoolId",
-    #         identity_pool_id: "IdentityPoolId",
-    #         role_arn: "RoleArn",
-    #       }
-    #
     # @!attribute [rw] enabled
     #   Whether to enable or disable Amazon Cognito authentication for
     #   OpenSearch Dashboards.
@@ -1086,13 +930,6 @@ module Aws::OpenSearchService
     #
     # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cold-storage.html
     #
-    # @note When making an API call, you may pass ColdStorageOptions
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false, # required
-    #       }
-    #
     # @!attribute [rw] enabled
     #   Whether to enable or disable cold storage on the domain.
     #   @return [Boolean]
@@ -1132,116 +969,6 @@ module Aws::OpenSearchService
     #
     class ConflictException < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass CreateDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         engine_version: "VersionString",
-    #         cluster_config: {
-    #           instance_type: "m3.medium.search", # accepts m3.medium.search, m3.large.search, m3.xlarge.search, m3.2xlarge.search, m4.large.search, m4.xlarge.search, m4.2xlarge.search, m4.4xlarge.search, m4.10xlarge.search, m5.large.search, m5.xlarge.search, m5.2xlarge.search, m5.4xlarge.search, m5.12xlarge.search, m5.24xlarge.search, r5.large.search, r5.xlarge.search, r5.2xlarge.search, r5.4xlarge.search, r5.12xlarge.search, r5.24xlarge.search, c5.large.search, c5.xlarge.search, c5.2xlarge.search, c5.4xlarge.search, c5.9xlarge.search, c5.18xlarge.search, t3.nano.search, t3.micro.search, t3.small.search, t3.medium.search, t3.large.search, t3.xlarge.search, t3.2xlarge.search, ultrawarm1.medium.search, ultrawarm1.large.search, ultrawarm1.xlarge.search, t2.micro.search, t2.small.search, t2.medium.search, r3.large.search, r3.xlarge.search, r3.2xlarge.search, r3.4xlarge.search, r3.8xlarge.search, i2.xlarge.search, i2.2xlarge.search, d2.xlarge.search, d2.2xlarge.search, d2.4xlarge.search, d2.8xlarge.search, c4.large.search, c4.xlarge.search, c4.2xlarge.search, c4.4xlarge.search, c4.8xlarge.search, r4.large.search, r4.xlarge.search, r4.2xlarge.search, r4.4xlarge.search, r4.8xlarge.search, r4.16xlarge.search, i3.large.search, i3.xlarge.search, i3.2xlarge.search, i3.4xlarge.search, i3.8xlarge.search, i3.16xlarge.search, r6g.large.search, r6g.xlarge.search, r6g.2xlarge.search, r6g.4xlarge.search, r6g.8xlarge.search, r6g.12xlarge.search, m6g.large.search, m6g.xlarge.search, m6g.2xlarge.search, m6g.4xlarge.search, m6g.8xlarge.search, m6g.12xlarge.search, c6g.large.search, c6g.xlarge.search, c6g.2xlarge.search, c6g.4xlarge.search, c6g.8xlarge.search, c6g.12xlarge.search, r6gd.large.search, r6gd.xlarge.search, r6gd.2xlarge.search, r6gd.4xlarge.search, r6gd.8xlarge.search, r6gd.12xlarge.search, r6gd.16xlarge.search, t4g.small.search, t4g.medium.search
-    #           instance_count: 1,
-    #           dedicated_master_enabled: false,
-    #           zone_awareness_enabled: false,
-    #           zone_awareness_config: {
-    #             availability_zone_count: 1,
-    #           },
-    #           dedicated_master_type: "m3.medium.search", # accepts m3.medium.search, m3.large.search, m3.xlarge.search, m3.2xlarge.search, m4.large.search, m4.xlarge.search, m4.2xlarge.search, m4.4xlarge.search, m4.10xlarge.search, m5.large.search, m5.xlarge.search, m5.2xlarge.search, m5.4xlarge.search, m5.12xlarge.search, m5.24xlarge.search, r5.large.search, r5.xlarge.search, r5.2xlarge.search, r5.4xlarge.search, r5.12xlarge.search, r5.24xlarge.search, c5.large.search, c5.xlarge.search, c5.2xlarge.search, c5.4xlarge.search, c5.9xlarge.search, c5.18xlarge.search, t3.nano.search, t3.micro.search, t3.small.search, t3.medium.search, t3.large.search, t3.xlarge.search, t3.2xlarge.search, ultrawarm1.medium.search, ultrawarm1.large.search, ultrawarm1.xlarge.search, t2.micro.search, t2.small.search, t2.medium.search, r3.large.search, r3.xlarge.search, r3.2xlarge.search, r3.4xlarge.search, r3.8xlarge.search, i2.xlarge.search, i2.2xlarge.search, d2.xlarge.search, d2.2xlarge.search, d2.4xlarge.search, d2.8xlarge.search, c4.large.search, c4.xlarge.search, c4.2xlarge.search, c4.4xlarge.search, c4.8xlarge.search, r4.large.search, r4.xlarge.search, r4.2xlarge.search, r4.4xlarge.search, r4.8xlarge.search, r4.16xlarge.search, i3.large.search, i3.xlarge.search, i3.2xlarge.search, i3.4xlarge.search, i3.8xlarge.search, i3.16xlarge.search, r6g.large.search, r6g.xlarge.search, r6g.2xlarge.search, r6g.4xlarge.search, r6g.8xlarge.search, r6g.12xlarge.search, m6g.large.search, m6g.xlarge.search, m6g.2xlarge.search, m6g.4xlarge.search, m6g.8xlarge.search, m6g.12xlarge.search, c6g.large.search, c6g.xlarge.search, c6g.2xlarge.search, c6g.4xlarge.search, c6g.8xlarge.search, c6g.12xlarge.search, r6gd.large.search, r6gd.xlarge.search, r6gd.2xlarge.search, r6gd.4xlarge.search, r6gd.8xlarge.search, r6gd.12xlarge.search, r6gd.16xlarge.search, t4g.small.search, t4g.medium.search
-    #           dedicated_master_count: 1,
-    #           warm_enabled: false,
-    #           warm_type: "ultrawarm1.medium.search", # accepts ultrawarm1.medium.search, ultrawarm1.large.search, ultrawarm1.xlarge.search
-    #           warm_count: 1,
-    #           cold_storage_options: {
-    #             enabled: false, # required
-    #           },
-    #         },
-    #         ebs_options: {
-    #           ebs_enabled: false,
-    #           volume_type: "standard", # accepts standard, gp2, io1, gp3
-    #           volume_size: 1,
-    #           iops: 1,
-    #           throughput: 1,
-    #         },
-    #         access_policies: "PolicyDocument",
-    #         snapshot_options: {
-    #           automated_snapshot_start_hour: 1,
-    #         },
-    #         vpc_options: {
-    #           subnet_ids: ["String"],
-    #           security_group_ids: ["String"],
-    #         },
-    #         cognito_options: {
-    #           enabled: false,
-    #           user_pool_id: "UserPoolId",
-    #           identity_pool_id: "IdentityPoolId",
-    #           role_arn: "RoleArn",
-    #         },
-    #         encryption_at_rest_options: {
-    #           enabled: false,
-    #           kms_key_id: "KmsKeyId",
-    #         },
-    #         node_to_node_encryption_options: {
-    #           enabled: false,
-    #         },
-    #         advanced_options: {
-    #           "String" => "String",
-    #         },
-    #         log_publishing_options: {
-    #           "INDEX_SLOW_LOGS" => {
-    #             cloud_watch_logs_log_group_arn: "CloudWatchLogsLogGroupArn",
-    #             enabled: false,
-    #           },
-    #         },
-    #         domain_endpoint_options: {
-    #           enforce_https: false,
-    #           tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07
-    #           custom_endpoint_enabled: false,
-    #           custom_endpoint: "DomainNameFqdn",
-    #           custom_endpoint_certificate_arn: "ARN",
-    #         },
-    #         advanced_security_options: {
-    #           enabled: false,
-    #           internal_user_database_enabled: false,
-    #           master_user_options: {
-    #             master_user_arn: "ARN",
-    #             master_user_name: "Username",
-    #             master_user_password: "Password",
-    #           },
-    #           saml_options: {
-    #             enabled: false,
-    #             idp: {
-    #               metadata_content: "SAMLMetadata", # required
-    #               entity_id: "SAMLEntityId", # required
-    #             },
-    #             master_user_name: "Username",
-    #             master_backend_role: "BackendRole",
-    #             subject_key: "String",
-    #             roles_key: "String",
-    #             session_timeout_minutes: 1,
-    #           },
-    #           anonymous_auth_enabled: false,
-    #         },
-    #         tag_list: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         auto_tune_options: {
-    #           desired_state: "ENABLED", # accepts ENABLED, DISABLED
-    #           maintenance_schedules: [
-    #             {
-    #               start_at: Time.now,
-    #               duration: {
-    #                 value: 1,
-    #                 unit: "HOURS", # accepts HOURS
-    #               },
-    #               cron_expression_for_recurrence: "String",
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   Name of the OpenSearch Service domain to create. Domain names are
     #   unique across the domains owned by an account within an Amazon Web
@@ -1403,27 +1130,6 @@ module Aws::OpenSearchService
     # Container for the parameters to the `CreateOutboundConnection`
     # operation.
     #
-    # @note When making an API call, you may pass CreateOutboundConnectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         local_domain_info: { # required
-    #           aws_domain_information: {
-    #             owner_id: "OwnerId",
-    #             domain_name: "DomainName", # required
-    #             region: "Region",
-    #           },
-    #         },
-    #         remote_domain_info: { # required
-    #           aws_domain_information: {
-    #             owner_id: "OwnerId",
-    #             domain_name: "DomainName", # required
-    #             region: "Region",
-    #           },
-    #         },
-    #         connection_alias: "ConnectionAlias", # required
-    #       }
-    #
     # @!attribute [rw] local_domain_info
     #   Name and Region of the source (local) domain.
     #   @return [Types::DomainInformationContainer]
@@ -1484,19 +1190,6 @@ module Aws::OpenSearchService
 
     # Container for request parameters to the `CreatePackage` operation.
     #
-    # @note When making an API call, you may pass CreatePackageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         package_name: "PackageName", # required
-    #         package_type: "TXT-DICTIONARY", # required, accepts TXT-DICTIONARY
-    #         package_description: "PackageDescription",
-    #         package_source: { # required
-    #           s3_bucket_name: "S3BucketName",
-    #           s3_key: "S3Key",
-    #         },
-    #       }
-    #
     # @!attribute [rw] package_name
     #   Unique name for the package.
     #   @return [String]
@@ -1538,18 +1231,6 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateVpcEndpointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_arn: "DomainArn", # required
-    #         vpc_options: { # required
-    #           subnet_ids: ["String"],
-    #           security_group_ids: ["String"],
-    #         },
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] domain_arn
     #   The Amazon Resource Name (ARN) of the domain to grant access to.
     #   @return [String]
@@ -1587,13 +1268,6 @@ module Aws::OpenSearchService
 
     # Container for the parameters to the `DeleteDomain` operation.
     #
-    # @note When making an API call, you may pass DeleteDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The name of the domain you want to permanently delete.
     #   @return [String]
@@ -1625,13 +1299,6 @@ module Aws::OpenSearchService
     # Container for the parameters to the `DeleteInboundConnection`
     # operation.
     #
-    # @note When making an API call, you may pass DeleteInboundConnectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connection_id: "ConnectionId", # required
-    #       }
-    #
     # @!attribute [rw] connection_id
     #   The ID of the inbound connection to permanently delete.
     #   @return [String]
@@ -1662,13 +1329,6 @@ module Aws::OpenSearchService
     # Container for the parameters to the `DeleteOutboundConnection`
     # operation.
     #
-    # @note When making an API call, you may pass DeleteOutboundConnectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connection_id: "ConnectionId", # required
-    #       }
-    #
     # @!attribute [rw] connection_id
     #   The ID of the outbound connection you want to permanently delete.
     #   @return [String]
@@ -1698,13 +1358,6 @@ module Aws::OpenSearchService
     # Deletes a package from OpenSearch Service. The package can't be
     # associated with any OpenSearch Service domain.
     #
-    # @note When making an API call, you may pass DeletePackageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         package_id: "PackageID", # required
-    #       }
-    #
     # @!attribute [rw] package_id
     #   The internal ID of the package you want to delete. Use
     #   `DescribePackages` to find this value.
@@ -1733,13 +1386,6 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteVpcEndpointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         vpc_endpoint_id: "VpcEndpointId", # required
-    #       }
-    #
     # @!attribute [rw] vpc_endpoint_id
     #   The unique identifier of the endpoint.
     #   @return [String]
@@ -1767,15 +1413,6 @@ module Aws::OpenSearchService
 
     # Container for the parameters to the `DescribeDomainAutoTunes`
     # operation.
-    #
-    # @note When making an API call, you may pass DescribeDomainAutoTunesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
     #
     # @!attribute [rw] domain_name
     #   Name of the domain that you want Auto-Tune details about.
@@ -1829,14 +1466,6 @@ module Aws::OpenSearchService
     # Container for the parameters to the `DescribeDomainChangeProgress`
     # operation.
     #
-    # @note When making an API call, you may pass DescribeDomainChangeProgressRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         change_id: "GUID",
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The name of the domain to get progress information for.
     #   @return [String]
@@ -1874,13 +1503,6 @@ module Aws::OpenSearchService
 
     # Container for the parameters to the `DescribeDomainConfig` operation.
     #
-    # @note When making an API call, you may pass DescribeDomainConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   Name of the OpenSearch Service domain configuration that you want to
     #   describe.
@@ -1910,13 +1532,6 @@ module Aws::OpenSearchService
 
     # Container for the parameters to the `DescribeDomain` operation.
     #
-    # @note When making an API call, you may pass DescribeDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The name of the domain that you want information about.
     #   @return [String]
@@ -1945,13 +1560,6 @@ module Aws::OpenSearchService
     end
 
     # Container for the parameters to the `DescribeDomains` operation.
-    #
-    # @note When making an API call, you may pass DescribeDomainsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_names: ["DomainName"], # required
-    #       }
     #
     # @!attribute [rw] domain_names
     #   Array of OpenSearch Service domain names that you want information
@@ -1984,20 +1592,6 @@ module Aws::OpenSearchService
 
     # Container for the parameters to the `DescribeInboundConnections`
     # operation.
-    #
-    # @note When making an API call, you may pass DescribeInboundConnectionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             name: "NonEmptyString",
-    #             values: ["NonEmptyString"],
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
     #
     # @!attribute [rw] filters
     #   A list of filters used to match properties for inbound cross-cluster
@@ -2051,15 +1645,6 @@ module Aws::OpenSearchService
     # Container for the parameters to the `DescribeInstanceTypeLimits`
     # operation.
     #
-    # @note When making an API call, you may pass DescribeInstanceTypeLimitsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName",
-    #         instance_type: "m3.medium.search", # required, accepts m3.medium.search, m3.large.search, m3.xlarge.search, m3.2xlarge.search, m4.large.search, m4.xlarge.search, m4.2xlarge.search, m4.4xlarge.search, m4.10xlarge.search, m5.large.search, m5.xlarge.search, m5.2xlarge.search, m5.4xlarge.search, m5.12xlarge.search, m5.24xlarge.search, r5.large.search, r5.xlarge.search, r5.2xlarge.search, r5.4xlarge.search, r5.12xlarge.search, r5.24xlarge.search, c5.large.search, c5.xlarge.search, c5.2xlarge.search, c5.4xlarge.search, c5.9xlarge.search, c5.18xlarge.search, t3.nano.search, t3.micro.search, t3.small.search, t3.medium.search, t3.large.search, t3.xlarge.search, t3.2xlarge.search, ultrawarm1.medium.search, ultrawarm1.large.search, ultrawarm1.xlarge.search, t2.micro.search, t2.small.search, t2.medium.search, r3.large.search, r3.xlarge.search, r3.2xlarge.search, r3.4xlarge.search, r3.8xlarge.search, i2.xlarge.search, i2.2xlarge.search, d2.xlarge.search, d2.2xlarge.search, d2.4xlarge.search, d2.8xlarge.search, c4.large.search, c4.xlarge.search, c4.2xlarge.search, c4.4xlarge.search, c4.8xlarge.search, r4.large.search, r4.xlarge.search, r4.2xlarge.search, r4.4xlarge.search, r4.8xlarge.search, r4.16xlarge.search, i3.large.search, i3.xlarge.search, i3.2xlarge.search, i3.4xlarge.search, i3.8xlarge.search, i3.16xlarge.search, r6g.large.search, r6g.xlarge.search, r6g.2xlarge.search, r6g.4xlarge.search, r6g.8xlarge.search, r6g.12xlarge.search, m6g.large.search, m6g.xlarge.search, m6g.2xlarge.search, m6g.4xlarge.search, m6g.8xlarge.search, m6g.12xlarge.search, c6g.large.search, c6g.xlarge.search, c6g.2xlarge.search, c6g.4xlarge.search, c6g.8xlarge.search, c6g.12xlarge.search, r6gd.large.search, r6gd.xlarge.search, r6gd.2xlarge.search, r6gd.4xlarge.search, r6gd.8xlarge.search, r6gd.12xlarge.search, r6gd.16xlarge.search, t4g.small.search, t4g.medium.search
-    #         engine_version: "VersionString", # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The name of the domain. Only specify if you need the limits for an
     #   existing domain.
@@ -2104,20 +1689,6 @@ module Aws::OpenSearchService
 
     # Container for the parameters to the `DescribeOutboundConnections`
     # operation.
-    #
-    # @note When making an API call, you may pass DescribeOutboundConnectionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             name: "NonEmptyString",
-    #             values: ["NonEmptyString"],
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
     #
     # @!attribute [rw] filters
     #   List of filter names and values that you can use for requests.
@@ -2169,14 +1740,6 @@ module Aws::OpenSearchService
 
     # A filter to apply to the `DescribePackage` response.
     #
-    # @note When making an API call, you may pass DescribePackagesFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "PackageID", # accepts PackageID, PackageName, PackageStatus
-    #         value: ["DescribePackagesFilterValue"],
-    #       }
-    #
     # @!attribute [rw] name
     #   Any field from `PackageDetails`.
     #   @return [String]
@@ -2196,20 +1759,6 @@ module Aws::OpenSearchService
 
     # Container for the request parameters to the `DescribePackage`
     # operation.
-    #
-    # @note When making an API call, you may pass DescribePackagesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             name: "PackageID", # accepts PackageID, PackageName, PackageStatus
-    #             value: ["DescribePackagesFilterValue"],
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
     #
     # @!attribute [rw] filters
     #   Only returns packages that match the `DescribePackagesFilterList`
@@ -2263,15 +1812,6 @@ module Aws::OpenSearchService
 
     # Container for the request parameters to a
     # `DescribeReservedInstanceOfferings` operation.
-    #
-    # @note When making an API call, you may pass DescribeReservedInstanceOfferingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         reserved_instance_offering_id: "GUID",
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
     #
     # @!attribute [rw] reserved_instance_offering_id
     #   The Reserved Instance identifier filter value. Use this parameter to
@@ -2327,15 +1867,6 @@ module Aws::OpenSearchService
     # Container for the request parameters to the
     # `DescribeReservedInstances` operation.
     #
-    # @note When making an API call, you may pass DescribeReservedInstancesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         reserved_instance_id: "GUID",
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] reserved_instance_id
     #   The reserved instance identifier filter value. Use this parameter to
     #   show only the reservation that matches the specified reserved
@@ -2386,13 +1917,6 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeVpcEndpointsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         vpc_endpoint_ids: ["VpcEndpointId"], # required
-    #       }
-    #
     # @!attribute [rw] vpc_endpoint_ids
     #   The unique identifiers of the endpoints to get information about.
     #   @return [Array<String>]
@@ -2431,14 +1955,6 @@ module Aws::OpenSearchService
 
     # Container for the request parameters to the `DissociatePackage`
     # operation.
-    #
-    # @note When making an API call, you may pass DissociatePackageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         package_id: "PackageID", # required
-    #         domain_name: "DomainName", # required
-    #       }
     #
     # @!attribute [rw] package_id
     #   Internal ID of the package to dissociate from the domain. Use
@@ -2571,17 +2087,6 @@ module Aws::OpenSearchService
     # Options to configure a custom endpoint for an OpenSearch Service
     # domain.
     #
-    # @note When making an API call, you may pass DomainEndpointOptions
-    #   data as a hash:
-    #
-    #       {
-    #         enforce_https: false,
-    #         tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07
-    #         custom_endpoint_enabled: false,
-    #         custom_endpoint: "DomainNameFqdn",
-    #         custom_endpoint_certificate_arn: "ARN",
-    #       }
-    #
     # @!attribute [rw] enforce_https
     #   True to require that all traffic to the domain arrive over HTTPS.
     #   @return [Boolean]
@@ -2665,17 +2170,6 @@ module Aws::OpenSearchService
     end
 
     # Container for information about an OpenSearch Service domain.
-    #
-    # @note When making an API call, you may pass DomainInformationContainer
-    #   data as a hash:
-    #
-    #       {
-    #         aws_domain_information: {
-    #           owner_id: "OwnerId",
-    #           domain_name: "DomainName", # required
-    #           region: "Region",
-    #         },
-    #       }
     #
     # @!attribute [rw] aws_domain_information
     #   Information about an Amazon OpenSearch Service domain.
@@ -2946,14 +2440,6 @@ module Aws::OpenSearchService
     #
     # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html
     #
-    # @note When making an API call, you may pass Duration
-    #   data as a hash:
-    #
-    #       {
-    #         value: 1,
-    #         unit: "HOURS", # accepts HOURS
-    #       }
-    #
     # @!attribute [rw] value
     #   Integer to specify the value of a maintenance schedule duration.
     #   @return [Integer]
@@ -2973,17 +2459,6 @@ module Aws::OpenSearchService
 
     # Container for the parameters required to enable EBS-based storage for
     # an OpenSearch Service domain.
-    #
-    # @note When making an API call, you may pass EBSOptions
-    #   data as a hash:
-    #
-    #       {
-    #         ebs_enabled: false,
-    #         volume_type: "standard", # accepts standard, gp2, io1, gp3
-    #         volume_size: 1,
-    #         iops: 1,
-    #         throughput: 1,
-    #       }
     #
     # @!attribute [rw] ebs_enabled
     #   Indicates whether EBS volumes are attached to data nodes in an
@@ -3044,14 +2519,6 @@ module Aws::OpenSearchService
     # Specifies whether the domain should encrypt data at rest, and if so,
     # the Key Management Service (KMS) key to use. Can be used only to
     # create a new domain, not update an existing one.
-    #
-    # @note When making an API call, you may pass EncryptionAtRestOptions
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false,
-    #         kms_key_id: "KmsKeyId",
-    #       }
     #
     # @!attribute [rw] enabled
     #   True to enable encryption at rest.
@@ -3117,14 +2584,6 @@ module Aws::OpenSearchService
     # A cross-cluster connection must match at least one of the specified
     # values for it to be returned from an operation.
     #
-    # @note When making an API call, you may pass Filter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "NonEmptyString",
-    #         values: ["NonEmptyString"],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the filter.
     #   @return [String]
@@ -3144,13 +2603,6 @@ module Aws::OpenSearchService
 
     # Container for the request parameters to `GetCompatibleVersions`
     # operation.
-    #
-    # @note When making an API call, you may pass GetCompatibleVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName",
-    #       }
     #
     # @!attribute [rw] domain_name
     #   The name of an existing domain. Provide this parameter to limit the
@@ -3183,15 +2635,6 @@ module Aws::OpenSearchService
 
     # Container for the request parameters to the `GetPackageVersionHistory`
     # operation.
-    #
-    # @note When making an API call, you may pass GetPackageVersionHistoryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         package_id: "PackageID", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
     #
     # @!attribute [rw] package_id
     #   The unique identifier of the package.
@@ -3251,15 +2694,6 @@ module Aws::OpenSearchService
     # Container for the request parameters to the `GetUpgradeHistory`
     # operation.
     #
-    # @note When making an API call, you may pass GetUpgradeHistoryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The name of an existing domain.
     #   @return [String]
@@ -3312,13 +2746,6 @@ module Aws::OpenSearchService
 
     # Container for the request parameters to the `GetUpgradeStatus`
     # operation.
-    #
-    # @note When making an API call, you may pass GetUpgradeStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #       }
     #
     # @!attribute [rw] domain_name
     #   The domain of the domain to get upgrade status information for.
@@ -3573,13 +3000,6 @@ module Aws::OpenSearchService
 
     # Container for the parameters to the `ListDomainNames` operation.
     #
-    # @note When making an API call, you may pass ListDomainNamesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         engine_type: "OpenSearch", # accepts OpenSearch, Elasticsearch
-    #       }
-    #
     # @!attribute [rw] engine_type
     #   Filters the output by domain engine type.
     #   @return [String]
@@ -3610,15 +3030,6 @@ module Aws::OpenSearchService
 
     # Container for the request parameters to the `ListDomainsForPackage`
     # operation.
-    #
-    # @note When making an API call, you may pass ListDomainsForPackageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         package_id: "PackageID", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
     #
     # @!attribute [rw] package_id
     #   The unique identifier of the package for which to list associated
@@ -3670,16 +3081,6 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListInstanceTypeDetailsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         engine_version: "VersionString", # required
-    #         domain_name: "DomainName",
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] engine_version
     #   Version of OpenSearch or Elasticsearch, in the format
     #   Elasticsearch\_X.Y or OpenSearch\_X.Y. Defaults to the latest
@@ -3737,15 +3138,6 @@ module Aws::OpenSearchService
     # Container for the request parameters to the `ListPackagesForDomain`
     # operation.
     #
-    # @note When making an API call, you may pass ListPackagesForDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The name of the domain for which you want to list associated
     #   packages.
@@ -3798,13 +3190,6 @@ module Aws::OpenSearchService
 
     # Container for the parameters to the `ListTags` operation.
     #
-    # @note When making an API call, you may pass ListTagsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   Amazon Resource Name (ARN) for the domain to view tags for.
     #   @return [String]
@@ -3832,14 +3217,6 @@ module Aws::OpenSearchService
     end
 
     # Container for the request parameters to the `ListVersions` operation.
-    #
-    # @note When making an API call, you may pass ListVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
     #
     # @!attribute [rw] max_results
     #   An optional parameter that specifies the maximum number of results
@@ -3885,14 +3262,6 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListVpcEndpointAccessRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The name of the OpenSearch Service domain to retrieve access
     #   information for.
@@ -3938,14 +3307,6 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListVpcEndpointsForDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The name of the domain to list associated VPC endpoints for.
     #   @return [String]
@@ -3986,13 +3347,6 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListVpcEndpointsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If your initial `ListVpcEndpoints` operation returns a `nextToken`,
     #   you can include the returned `nextToken` in subsequent
@@ -4042,14 +3396,6 @@ module Aws::OpenSearchService
     #
     # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createdomain-configure-slow-logs.html
     #
-    # @note When making an API call, you may pass LogPublishingOption
-    #   data as a hash:
-    #
-    #       {
-    #         cloud_watch_logs_log_group_arn: "CloudWatchLogsLogGroupArn",
-    #         enabled: false,
-    #       }
-    #
     # @!attribute [rw] cloud_watch_logs_log_group_arn
     #   The Amazon Resource Name (ARN) of the CloudWatch Logs group to
     #   publish logs to.
@@ -4090,15 +3436,6 @@ module Aws::OpenSearchService
 
     # Credentials for the master user for a domain.
     #
-    # @note When making an API call, you may pass MasterUserOptions
-    #   data as a hash:
-    #
-    #       {
-    #         master_user_arn: "ARN",
-    #         master_user_name: "Username",
-    #         master_user_password: "Password",
-    #       }
-    #
     # @!attribute [rw] master_user_arn
     #   Amazon Resource Name (ARN) for the master user. Only specify if
     #   `InternalUserDatabaseEnabled` is `false`.
@@ -4130,13 +3467,6 @@ module Aws::OpenSearchService
     #
     #
     # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ntn.html
-    #
-    # @note When making an API call, you may pass NodeToNodeEncryptionOptions
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false,
-    #       }
     #
     # @!attribute [rw] enabled
     #   True to enable node-to-node encryption.
@@ -4343,14 +3673,6 @@ module Aws::OpenSearchService
 
     # The Amazon S3 location to import the package from.
     #
-    # @note When making an API call, you may pass PackageSource
-    #   data as a hash:
-    #
-    #       {
-    #         s3_bucket_name: "S3BucketName",
-    #         s3_key: "S3Key",
-    #       }
-    #
     # @!attribute [rw] s3_bucket_name
     #   The name of the Amazon S3 bucket containing the package.
     #   @return [String]
@@ -4394,15 +3716,6 @@ module Aws::OpenSearchService
 
     # Container for request parameters to the
     # `PurchaseReservedInstanceOffering` operation.
-    #
-    # @note When making an API call, you may pass PurchaseReservedInstanceOfferingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         reserved_instance_offering_id: "GUID", # required
-    #         reservation_name: "ReservationToken", # required
-    #         instance_count: 1,
-    #       }
     #
     # @!attribute [rw] reserved_instance_offering_id
     #   The ID of the Reserved Instance offering to purchase.
@@ -4469,13 +3782,6 @@ module Aws::OpenSearchService
     # Container for the request parameters to the `RejectInboundConnection`
     # operation.
     #
-    # @note When making an API call, you may pass RejectInboundConnectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connection_id: "ConnectionId", # required
-    #       }
-    #
     # @!attribute [rw] connection_id
     #   The unique identifier of the inbound connection to reject.
     #   @return [String]
@@ -4503,14 +3809,6 @@ module Aws::OpenSearchService
     end
 
     # Container for the request parameters to the `RemoveTags` operation.
-    #
-    # @note When making an API call, you may pass RemoveTagsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "ARN", # required
-    #         tag_keys: ["String"], # required
-    #       }
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the domain from which you want to
@@ -4682,14 +3980,6 @@ module Aws::OpenSearchService
     #
     class ResourceNotFoundException < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass RevokeVpcEndpointAccessRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         account: "AWSAccount", # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The name of the OpenSearch Service domain.
     #   @return [String]
@@ -4713,14 +4003,6 @@ module Aws::OpenSearchService
 
     # The SAML identity povider information.
     #
-    # @note When making an API call, you may pass SAMLIdp
-    #   data as a hash:
-    #
-    #       {
-    #         metadata_content: "SAMLMetadata", # required
-    #         entity_id: "SAMLEntityId", # required
-    #       }
-    #
     # @!attribute [rw] metadata_content
     #   The metadata of the SAML application, in XML format.
     #   @return [String]
@@ -4741,22 +4023,6 @@ module Aws::OpenSearchService
 
     # The SAML authentication configuration for an Amazon OpenSearch Service
     # domain.
-    #
-    # @note When making an API call, you may pass SAMLOptionsInput
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false,
-    #         idp: {
-    #           metadata_content: "SAMLMetadata", # required
-    #           entity_id: "SAMLEntityId", # required
-    #         },
-    #         master_user_name: "Username",
-    #         master_backend_role: "BackendRole",
-    #         subject_key: "String",
-    #         roles_key: "String",
-    #         session_timeout_minutes: 1,
-    #       }
     #
     # @!attribute [rw] enabled
     #   True to enable SAML authentication for a domain.
@@ -4940,13 +4206,6 @@ module Aws::OpenSearchService
     # The time, in UTC format, when OpenSearch Service takes a daily
     # automated snapshot of the specified domain. Default is `0` hours.
     #
-    # @note When making an API call, you may pass SnapshotOptions
-    #   data as a hash:
-    #
-    #       {
-    #         automated_snapshot_start_hour: 1,
-    #       }
-    #
     # @!attribute [rw] automated_snapshot_start_hour
     #   The time, in UTC format, when OpenSearch Service takes a daily
     #   automated snapshot of the specified domain. Default is `0` hours.
@@ -4982,13 +4241,6 @@ module Aws::OpenSearchService
 
     # Container for the request parameters to the
     # `StartServiceSoftwareUpdate` operation.
-    #
-    # @note When making an API call, you may pass StartServiceSoftwareUpdateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #       }
     #
     # @!attribute [rw] domain_name
     #   The name of the domain that you want to update to the latest service
@@ -5087,14 +4339,6 @@ module Aws::OpenSearchService
 
     # A tag (key-value pair) for an Amazon OpenSearch Service resource.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The tag key. Tag keys must be unique for the domain to which they
     #   are attached.
@@ -5117,111 +4361,6 @@ module Aws::OpenSearchService
     end
 
     # Container for the request parameters to the `UpdateDomain` operation.
-    #
-    # @note When making an API call, you may pass UpdateDomainConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         cluster_config: {
-    #           instance_type: "m3.medium.search", # accepts m3.medium.search, m3.large.search, m3.xlarge.search, m3.2xlarge.search, m4.large.search, m4.xlarge.search, m4.2xlarge.search, m4.4xlarge.search, m4.10xlarge.search, m5.large.search, m5.xlarge.search, m5.2xlarge.search, m5.4xlarge.search, m5.12xlarge.search, m5.24xlarge.search, r5.large.search, r5.xlarge.search, r5.2xlarge.search, r5.4xlarge.search, r5.12xlarge.search, r5.24xlarge.search, c5.large.search, c5.xlarge.search, c5.2xlarge.search, c5.4xlarge.search, c5.9xlarge.search, c5.18xlarge.search, t3.nano.search, t3.micro.search, t3.small.search, t3.medium.search, t3.large.search, t3.xlarge.search, t3.2xlarge.search, ultrawarm1.medium.search, ultrawarm1.large.search, ultrawarm1.xlarge.search, t2.micro.search, t2.small.search, t2.medium.search, r3.large.search, r3.xlarge.search, r3.2xlarge.search, r3.4xlarge.search, r3.8xlarge.search, i2.xlarge.search, i2.2xlarge.search, d2.xlarge.search, d2.2xlarge.search, d2.4xlarge.search, d2.8xlarge.search, c4.large.search, c4.xlarge.search, c4.2xlarge.search, c4.4xlarge.search, c4.8xlarge.search, r4.large.search, r4.xlarge.search, r4.2xlarge.search, r4.4xlarge.search, r4.8xlarge.search, r4.16xlarge.search, i3.large.search, i3.xlarge.search, i3.2xlarge.search, i3.4xlarge.search, i3.8xlarge.search, i3.16xlarge.search, r6g.large.search, r6g.xlarge.search, r6g.2xlarge.search, r6g.4xlarge.search, r6g.8xlarge.search, r6g.12xlarge.search, m6g.large.search, m6g.xlarge.search, m6g.2xlarge.search, m6g.4xlarge.search, m6g.8xlarge.search, m6g.12xlarge.search, c6g.large.search, c6g.xlarge.search, c6g.2xlarge.search, c6g.4xlarge.search, c6g.8xlarge.search, c6g.12xlarge.search, r6gd.large.search, r6gd.xlarge.search, r6gd.2xlarge.search, r6gd.4xlarge.search, r6gd.8xlarge.search, r6gd.12xlarge.search, r6gd.16xlarge.search, t4g.small.search, t4g.medium.search
-    #           instance_count: 1,
-    #           dedicated_master_enabled: false,
-    #           zone_awareness_enabled: false,
-    #           zone_awareness_config: {
-    #             availability_zone_count: 1,
-    #           },
-    #           dedicated_master_type: "m3.medium.search", # accepts m3.medium.search, m3.large.search, m3.xlarge.search, m3.2xlarge.search, m4.large.search, m4.xlarge.search, m4.2xlarge.search, m4.4xlarge.search, m4.10xlarge.search, m5.large.search, m5.xlarge.search, m5.2xlarge.search, m5.4xlarge.search, m5.12xlarge.search, m5.24xlarge.search, r5.large.search, r5.xlarge.search, r5.2xlarge.search, r5.4xlarge.search, r5.12xlarge.search, r5.24xlarge.search, c5.large.search, c5.xlarge.search, c5.2xlarge.search, c5.4xlarge.search, c5.9xlarge.search, c5.18xlarge.search, t3.nano.search, t3.micro.search, t3.small.search, t3.medium.search, t3.large.search, t3.xlarge.search, t3.2xlarge.search, ultrawarm1.medium.search, ultrawarm1.large.search, ultrawarm1.xlarge.search, t2.micro.search, t2.small.search, t2.medium.search, r3.large.search, r3.xlarge.search, r3.2xlarge.search, r3.4xlarge.search, r3.8xlarge.search, i2.xlarge.search, i2.2xlarge.search, d2.xlarge.search, d2.2xlarge.search, d2.4xlarge.search, d2.8xlarge.search, c4.large.search, c4.xlarge.search, c4.2xlarge.search, c4.4xlarge.search, c4.8xlarge.search, r4.large.search, r4.xlarge.search, r4.2xlarge.search, r4.4xlarge.search, r4.8xlarge.search, r4.16xlarge.search, i3.large.search, i3.xlarge.search, i3.2xlarge.search, i3.4xlarge.search, i3.8xlarge.search, i3.16xlarge.search, r6g.large.search, r6g.xlarge.search, r6g.2xlarge.search, r6g.4xlarge.search, r6g.8xlarge.search, r6g.12xlarge.search, m6g.large.search, m6g.xlarge.search, m6g.2xlarge.search, m6g.4xlarge.search, m6g.8xlarge.search, m6g.12xlarge.search, c6g.large.search, c6g.xlarge.search, c6g.2xlarge.search, c6g.4xlarge.search, c6g.8xlarge.search, c6g.12xlarge.search, r6gd.large.search, r6gd.xlarge.search, r6gd.2xlarge.search, r6gd.4xlarge.search, r6gd.8xlarge.search, r6gd.12xlarge.search, r6gd.16xlarge.search, t4g.small.search, t4g.medium.search
-    #           dedicated_master_count: 1,
-    #           warm_enabled: false,
-    #           warm_type: "ultrawarm1.medium.search", # accepts ultrawarm1.medium.search, ultrawarm1.large.search, ultrawarm1.xlarge.search
-    #           warm_count: 1,
-    #           cold_storage_options: {
-    #             enabled: false, # required
-    #           },
-    #         },
-    #         ebs_options: {
-    #           ebs_enabled: false,
-    #           volume_type: "standard", # accepts standard, gp2, io1, gp3
-    #           volume_size: 1,
-    #           iops: 1,
-    #           throughput: 1,
-    #         },
-    #         snapshot_options: {
-    #           automated_snapshot_start_hour: 1,
-    #         },
-    #         vpc_options: {
-    #           subnet_ids: ["String"],
-    #           security_group_ids: ["String"],
-    #         },
-    #         cognito_options: {
-    #           enabled: false,
-    #           user_pool_id: "UserPoolId",
-    #           identity_pool_id: "IdentityPoolId",
-    #           role_arn: "RoleArn",
-    #         },
-    #         advanced_options: {
-    #           "String" => "String",
-    #         },
-    #         access_policies: "PolicyDocument",
-    #         log_publishing_options: {
-    #           "INDEX_SLOW_LOGS" => {
-    #             cloud_watch_logs_log_group_arn: "CloudWatchLogsLogGroupArn",
-    #             enabled: false,
-    #           },
-    #         },
-    #         encryption_at_rest_options: {
-    #           enabled: false,
-    #           kms_key_id: "KmsKeyId",
-    #         },
-    #         domain_endpoint_options: {
-    #           enforce_https: false,
-    #           tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07
-    #           custom_endpoint_enabled: false,
-    #           custom_endpoint: "DomainNameFqdn",
-    #           custom_endpoint_certificate_arn: "ARN",
-    #         },
-    #         node_to_node_encryption_options: {
-    #           enabled: false,
-    #         },
-    #         advanced_security_options: {
-    #           enabled: false,
-    #           internal_user_database_enabled: false,
-    #           master_user_options: {
-    #             master_user_arn: "ARN",
-    #             master_user_name: "Username",
-    #             master_user_password: "Password",
-    #           },
-    #           saml_options: {
-    #             enabled: false,
-    #             idp: {
-    #               metadata_content: "SAMLMetadata", # required
-    #               entity_id: "SAMLEntityId", # required
-    #             },
-    #             master_user_name: "Username",
-    #             master_backend_role: "BackendRole",
-    #             subject_key: "String",
-    #             roles_key: "String",
-    #             session_timeout_minutes: 1,
-    #           },
-    #           anonymous_auth_enabled: false,
-    #         },
-    #         auto_tune_options: {
-    #           desired_state: "ENABLED", # accepts ENABLED, DISABLED
-    #           rollback_on_disable: "NO_ROLLBACK", # accepts NO_ROLLBACK, DEFAULT_ROLLBACK
-    #           maintenance_schedules: [
-    #             {
-    #               start_at: Time.now,
-    #               duration: {
-    #                 value: 1,
-    #                 unit: "HOURS", # accepts HOURS
-    #               },
-    #               cron_expression_for_recurrence: "String",
-    #             },
-    #           ],
-    #         },
-    #         dry_run: false,
-    #       }
     #
     # @!attribute [rw] domain_name
     #   The name of the domain that you're updating.
@@ -5371,19 +4510,6 @@ module Aws::OpenSearchService
 
     # Container for request parameters to the `UpdatePackage` operation.
     #
-    # @note When making an API call, you may pass UpdatePackageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         package_id: "PackageID", # required
-    #         package_source: { # required
-    #           s3_bucket_name: "S3BucketName",
-    #           s3_key: "S3Key",
-    #         },
-    #         package_description: "PackageDescription",
-    #         commit_message: "CommitMessage",
-    #       }
-    #
     # @!attribute [rw] package_id
     #   The unique identifier for the package.
     #   @return [String]
@@ -5426,17 +4552,6 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateVpcEndpointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         vpc_endpoint_id: "VpcEndpointId", # required
-    #         vpc_options: { # required
-    #           subnet_ids: ["String"],
-    #           security_group_ids: ["String"],
-    #         },
-    #       }
-    #
     # @!attribute [rw] vpc_endpoint_id
     #   The unique identifier of the endpoint.
     #   @return [String]
@@ -5467,18 +4582,6 @@ module Aws::OpenSearchService
     end
 
     # Container for the request parameters to the `UpgradeDomain` operation.
-    #
-    # @note When making an API call, you may pass UpgradeDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         target_version: "VersionString", # required
-    #         perform_check_only: false,
-    #         advanced_options: {
-    #           "String" => "String",
-    #         },
-    #       }
     #
     # @!attribute [rw] domain_name
     #   Name of the OpenSearch Service domain that you want to upgrade.
@@ -5710,14 +4813,6 @@ module Aws::OpenSearchService
     #
     # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/vpc.html
     #
-    # @note When making an API call, you may pass VPCOptions
-    #   data as a hash:
-    #
-    #       {
-    #         subnet_ids: ["String"],
-    #         security_group_ids: ["String"],
-    #       }
-    #
     # @!attribute [rw] subnet_ids
     #   A list of subnet IDs associated with the VPC endpoints for the
     #   domain. If your domain uses multiple Availability Zones, you need to
@@ -5866,13 +4961,6 @@ module Aws::OpenSearchService
 
     # The zone awareness configuration for an Amazon OpenSearch Service
     # domain.
-    #
-    # @note When making an API call, you may pass ZoneAwarenessConfig
-    #   data as a hash:
-    #
-    #       {
-    #         availability_zone_count: 1,
-    #       }
     #
     # @!attribute [rw] availability_zone_count
     #   If you enabled multiple Availability Zones, this value is the number

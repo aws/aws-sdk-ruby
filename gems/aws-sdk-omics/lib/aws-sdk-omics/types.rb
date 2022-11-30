@@ -25,15 +25,6 @@ module Aws::Omics
 
     # A read set activation job filter.
     #
-    # @note When making an API call, you may pass ActivateReadSetFilter
-    #   data as a hash:
-    #
-    #       {
-    #         created_after: Time.now,
-    #         created_before: Time.now,
-    #         status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, CANCELLING, CANCELLED, FAILED, COMPLETED, COMPLETED_WITH_FAILURES
-    #       }
-    #
     # @!attribute [rw] created_after
     #   The filter's start date.
     #   @return [Time]
@@ -134,13 +125,6 @@ module Aws::Omics
     end
 
     # A source for an annotation import job.
-    #
-    # @note When making an API call, you may pass AnnotationImportItemSource
-    #   data as a hash:
-    #
-    #       {
-    #         source: "S3Uri", # required
-    #       }
     #
     # @!attribute [rw] source
     #   The source file's location in Amazon S3.
@@ -272,14 +256,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchDeleteReadSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         ids: ["ReadSetId"], # required
-    #         sequence_store_id: "SequenceStoreId", # required
-    #       }
-    #
     # @!attribute [rw] ids
     #   The read sets' IDs.
     #   @return [Array<String>]
@@ -309,13 +285,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CancelAnnotationImportRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The job's ID.
     #   @return [String]
@@ -332,13 +301,6 @@ module Aws::Omics
     #
     class CancelAnnotationImportResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass CancelRunRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "RunId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The run's ID.
     #   @return [String]
@@ -351,13 +313,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CancelVariantImportRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The job's ID.
     #   @return [String]
@@ -388,38 +343,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAnnotationStoreRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "StoreDescription",
-    #         name: "CreateAnnotationStoreRequestNameString",
-    #         reference: {
-    #           reference_arn: "ReferenceArn",
-    #         },
-    #         sse_config: {
-    #           key_arn: "SseConfigKeyArnString",
-    #           type: "KMS", # required, accepts KMS
-    #         },
-    #         store_format: "GFF", # required, accepts GFF, TSV, VCF
-    #         store_options: {
-    #           tsv_store_options: {
-    #             annotation_type: "GENERIC", # accepts GENERIC, CHR_POS, CHR_POS_REF_ALT, CHR_START_END_ONE_BASE, CHR_START_END_REF_ALT_ONE_BASE, CHR_START_END_ZERO_BASE, CHR_START_END_REF_ALT_ZERO_BASE
-    #             format_to_header: {
-    #               "CHR" => "FormatToHeaderValueString",
-    #             },
-    #             schema: [
-    #               {
-    #                 "String" => "LONG", # accepts LONG, INT, STRING, FLOAT, DOUBLE, BOOLEAN
-    #               },
-    #             ],
-    #           },
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] description
     #   A description for the store.
     #   @return [String]
@@ -504,22 +427,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateReferenceStoreRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         description: "ReferenceStoreDescription",
-    #         name: "ReferenceStoreName", # required
-    #         sse_config: {
-    #           key_arn: "SseConfigKeyArnString",
-    #           type: "KMS", # required, accepts KMS
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_token
     #   To ensure that requests don't run multiple times, specify a unique
     #   token for each request.
@@ -590,20 +497,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateRunGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_cpus: 1,
-    #         max_duration: 1,
-    #         max_runs: 1,
-    #         name: "RunGroupName",
-    #         request_id: "RunGroupRequestId", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] max_cpus
     #   The maximum number of CPUs to use in the group.
     #   @return [Integer]
@@ -666,22 +559,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateSequenceStoreRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         description: "SequenceStoreDescription",
-    #         name: "SequenceStoreName", # required
-    #         sse_config: {
-    #           key_arn: "SseConfigKeyArnString",
-    #           type: "KMS", # required, accepts KMS
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_token
     #   To ensure that requests don't run multiple times, specify a unique
     #   token for each request.
@@ -752,24 +629,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateVariantStoreRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "StoreDescription",
-    #         name: "CreateVariantStoreRequestNameString",
-    #         reference: { # required
-    #           reference_arn: "ReferenceArn",
-    #         },
-    #         sse_config: {
-    #           key_arn: "SseConfigKeyArnString",
-    #           type: "KMS", # required, accepts KMS
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] description
     #   A description for the store.
     #   @return [String]
@@ -834,29 +693,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateWorkflowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         definition_uri: "WorkflowDefinition",
-    #         definition_zip: "data",
-    #         description: "WorkflowDescription",
-    #         engine: "WDL", # accepts WDL, NEXTFLOW
-    #         main: "WorkflowMain",
-    #         name: "WorkflowName",
-    #         parameter_template: {
-    #           "WorkflowParameterName" => {
-    #             description: "WorkflowParameterDescription",
-    #             optional: false,
-    #           },
-    #         },
-    #         request_id: "WorkflowRequestId", # required
-    #         storage_capacity: 1,
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] definition_uri
     #   The URI of a definition for the workflow.
     #   @return [String]
@@ -944,14 +780,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAnnotationStoreRequest
-    #   data as a hash:
-    #
-    #       {
-    #         force: false,
-    #         name: "String", # required
-    #       }
-    #
     # @!attribute [rw] force
     #   Whether to force deletion.
     #   @return [Boolean]
@@ -981,14 +809,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteReferenceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ReferenceId", # required
-    #         reference_store_id: "ReferenceStoreId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The reference's ID.
     #   @return [String]
@@ -1010,13 +830,6 @@ module Aws::Omics
     #
     class DeleteReferenceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteReferenceStoreRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ReferenceStoreId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The store's ID.
     #   @return [String]
@@ -1033,13 +846,6 @@ module Aws::Omics
     #
     class DeleteReferenceStoreResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteRunGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "RunGroupId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The run group's ID.
     #   @return [String]
@@ -1052,13 +858,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteRunRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "RunId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The run's ID.
     #   @return [String]
@@ -1071,13 +870,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteSequenceStoreRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "SequenceStoreId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The sequence store's ID.
     #   @return [String]
@@ -1094,14 +886,6 @@ module Aws::Omics
     #
     class DeleteSequenceStoreResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteVariantStoreRequest
-    #   data as a hash:
-    #
-    #       {
-    #         force: false,
-    #         name: "String", # required
-    #       }
-    #
     # @!attribute [rw] force
     #   Whether to force deletion.
     #   @return [Boolean]
@@ -1131,13 +915,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteWorkflowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "WorkflowId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The workflow's ID.
     #   @return [String]
@@ -1151,13 +928,6 @@ module Aws::Omics
     end
 
     # A read set.
-    #
-    # @note When making an API call, you may pass ExportReadSet
-    #   data as a hash:
-    #
-    #       {
-    #         read_set_id: "ReadSetId", # required
-    #       }
     #
     # @!attribute [rw] read_set_id
     #   The set's ID.
@@ -1196,15 +966,6 @@ module Aws::Omics
     end
 
     # An read set export job filter.
-    #
-    # @note When making an API call, you may pass ExportReadSetFilter
-    #   data as a hash:
-    #
-    #       {
-    #         created_after: Time.now,
-    #         created_before: Time.now,
-    #         status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, CANCELLING, CANCELLED, FAILED, COMPLETED, COMPLETED_WITH_FAILURES
-    #       }
     #
     # @!attribute [rw] created_after
     #   The filter's start date.
@@ -1293,10 +1054,6 @@ module Aws::Omics
 
     # Formatting options for a file.
     #
-    # @note FormatOptions is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note FormatOptions is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of FormatOptions corresponding to the set member.
-    #
     # @!attribute [rw] tsv_options
     #   Options for a TSV file.
     #   @return [Types::TsvOptions]
@@ -1320,13 +1077,6 @@ module Aws::Omics
       class Unknown < FormatOptions; end
     end
 
-    # @note When making an API call, you may pass GetAnnotationImportRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The job's ID.
     #   @return [String]
@@ -1401,13 +1151,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAnnotationStoreRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The store's name.
     #   @return [String]
@@ -1497,14 +1240,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetReadSetActivationJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ActivationJobId", # required
-    #         sequence_store_id: "SequenceStoreId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The job's ID.
     #   @return [String]
@@ -1564,14 +1299,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetReadSetExportJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ExportJobId", # required
-    #         sequence_store_id: "SequenceStoreId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The job's ID.
     #   @return [String]
@@ -1636,14 +1363,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetReadSetImportJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ImportJobId", # required
-    #         sequence_store_id: "SequenceStoreId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The job's ID.
     #   @return [String]
@@ -1708,14 +1427,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetReadSetMetadataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ReadSetId", # required
-    #         sequence_store_id: "SequenceStoreId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The read set's ID.
     #   @return [String]
@@ -1805,16 +1516,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetReadSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         file: "SOURCE1", # accepts SOURCE1, SOURCE2, INDEX
-    #         id: "ReadSetId", # required
-    #         part_number: 1, # required
-    #         sequence_store_id: "SequenceStoreId", # required
-    #       }
-    #
     # @!attribute [rw] file
     #   The file to retrieve.
     #   @return [String]
@@ -1854,14 +1555,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetReferenceImportJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ImportJobId", # required
-    #         reference_store_id: "ReferenceStoreId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The job's ID.
     #   @return [String]
@@ -1926,14 +1619,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetReferenceMetadataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ReferenceId", # required
-    #         reference_store_id: "ReferenceStoreId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The reference's ID.
     #   @return [String]
@@ -2008,17 +1693,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetReferenceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         file: "SOURCE", # accepts SOURCE, INDEX
-    #         id: "ReferenceId", # required
-    #         part_number: 1, # required
-    #         range: "Range",
-    #         reference_store_id: "ReferenceStoreId", # required
-    #       }
-    #
     # @!attribute [rw] file
     #   The file to retrieve.
     #   @return [String]
@@ -2063,13 +1737,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetReferenceStoreRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ReferenceStoreId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The store's ID.
     #   @return [String]
@@ -2119,13 +1786,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRunGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "RunGroupId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The group's ID.
     #   @return [String]
@@ -2185,14 +1845,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRunRequest
-    #   data as a hash:
-    #
-    #       {
-    #         export: ["DEFINITION"], # accepts DEFINITION
-    #         id: "RunId", # required
-    #       }
-    #
     # @!attribute [rw] export
     #   The run's export format.
     #   @return [Array<String>]
@@ -2332,14 +1984,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRunTaskRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "RunId", # required
-    #         task_id: "TaskId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The task's ID.
     #   @return [String]
@@ -2414,13 +2058,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSequenceStoreRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "SequenceStoreId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The store's ID.
     #   @return [String]
@@ -2470,13 +2107,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetVariantImportRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The job's ID.
     #   @return [String]
@@ -2546,13 +2176,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetVariantStoreRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The store's name.
     #   @return [String]
@@ -2632,15 +2255,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetWorkflowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         export: ["DEFINITION"], # accepts DEFINITION
-    #         id: "WorkflowId", # required
-    #         type: "PRIVATE", # accepts PRIVATE
-    #       }
-    #
     # @!attribute [rw] export
     #   The export format for the workflow.
     #   @return [Array<String>]
@@ -2746,15 +2360,6 @@ module Aws::Omics
     end
 
     # A filter for import read set jobs.
-    #
-    # @note When making an API call, you may pass ImportReadSetFilter
-    #   data as a hash:
-    #
-    #       {
-    #         created_after: Time.now,
-    #         created_before: Time.now,
-    #         status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, CANCELLING, CANCELLED, FAILED, COMPLETED, COMPLETED_WITH_FAILURES
-    #       }
     #
     # @!attribute [rw] created_after
     #   The filter's start date.
@@ -2883,15 +2488,6 @@ module Aws::Omics
 
     # A filter for import references.
     #
-    # @note When making an API call, you may pass ImportReferenceFilter
-    #   data as a hash:
-    #
-    #       {
-    #         created_after: Time.now,
-    #         created_before: Time.now,
-    #         status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, CANCELLING, CANCELLED, FAILED, COMPLETED, COMPLETED_WITH_FAILURES
-    #       }
-    #
     # @!attribute [rw] created_after
     #   The filter's start date.
     #   @return [Time]
@@ -3007,14 +2603,6 @@ module Aws::Omics
 
     # A filter for annotation import jobs.
     #
-    # @note When making an API call, you may pass ListAnnotationImportJobsFilter
-    #   data as a hash:
-    #
-    #       {
-    #         status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, CANCELLED, COMPLETED, FAILED
-    #         store_name: "String",
-    #       }
-    #
     # @!attribute [rw] status
     #   A status to filter on.
     #   @return [String]
@@ -3032,19 +2620,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAnnotationImportJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter: {
-    #           status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, CANCELLED, COMPLETED, FAILED
-    #           store_name: "String",
-    #         },
-    #         ids: ["ResourceIdentifier"],
-    #         max_results: 1,
-    #         next_token: "ListAnnotationImportJobsRequestNextTokenString",
-    #       }
-    #
     # @!attribute [rw] filter
     #   A filter to apply to the list.
     #   @return [Types::ListAnnotationImportJobsFilter]
@@ -3092,13 +2667,6 @@ module Aws::Omics
 
     # A filter for annotation stores.
     #
-    # @note When making an API call, you may pass ListAnnotationStoresFilter
-    #   data as a hash:
-    #
-    #       {
-    #         status: "CREATING", # accepts CREATING, UPDATING, DELETING, ACTIVE, FAILED
-    #       }
-    #
     # @!attribute [rw] status
     #   A status to filter on.
     #   @return [String]
@@ -3111,18 +2679,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAnnotationStoresRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter: {
-    #           status: "CREATING", # accepts CREATING, UPDATING, DELETING, ACTIVE, FAILED
-    #         },
-    #         ids: ["ResourceIdentifier"],
-    #         max_results: 1,
-    #         next_token: "ListAnnotationStoresRequestNextTokenString",
-    #       }
-    #
     # @!attribute [rw] filter
     #   A filter to apply to the list.
     #   @return [Types::ListAnnotationStoresFilter]
@@ -3168,20 +2724,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListReadSetActivationJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter: {
-    #           created_after: Time.now,
-    #           created_before: Time.now,
-    #           status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, CANCELLING, CANCELLED, FAILED, COMPLETED, COMPLETED_WITH_FAILURES
-    #         },
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         sequence_store_id: "SequenceStoreId", # required
-    #       }
-    #
     # @!attribute [rw] filter
     #   A filter to apply to the list.
     #   @return [Types::ActivateReadSetFilter]
@@ -3228,20 +2770,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListReadSetExportJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter: {
-    #           created_after: Time.now,
-    #           created_before: Time.now,
-    #           status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, CANCELLING, CANCELLED, FAILED, COMPLETED, COMPLETED_WITH_FAILURES
-    #         },
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         sequence_store_id: "SequenceStoreId", # required
-    #       }
-    #
     # @!attribute [rw] filter
     #   A filter to apply to the list.
     #   @return [Types::ExportReadSetFilter]
@@ -3287,20 +2815,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListReadSetImportJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter: {
-    #           created_after: Time.now,
-    #           created_before: Time.now,
-    #           status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, CANCELLING, CANCELLED, FAILED, COMPLETED, COMPLETED_WITH_FAILURES
-    #         },
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         sequence_store_id: "SequenceStoreId", # required
-    #       }
-    #
     # @!attribute [rw] filter
     #   A filter to apply to the list.
     #   @return [Types::ImportReadSetFilter]
@@ -3346,22 +2860,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListReadSetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter: {
-    #           created_after: Time.now,
-    #           created_before: Time.now,
-    #           name: "ReadSetName",
-    #           reference_arn: "ReferenceArn",
-    #           status: "ARCHIVED", # accepts ARCHIVED, ACTIVATING, ACTIVE, DELETING, DELETED
-    #         },
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         sequence_store_id: "SequenceStoreId", # required
-    #       }
-    #
     # @!attribute [rw] filter
     #   A filter to apply to the list.
     #   @return [Types::ReadSetFilter]
@@ -3407,20 +2905,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListReferenceImportJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter: {
-    #           created_after: Time.now,
-    #           created_before: Time.now,
-    #           status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, CANCELLING, CANCELLED, FAILED, COMPLETED, COMPLETED_WITH_FAILURES
-    #         },
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         reference_store_id: "ReferenceStoreId", # required
-    #       }
-    #
     # @!attribute [rw] filter
     #   A filter to apply to the list.
     #   @return [Types::ImportReferenceFilter]
@@ -3466,19 +2950,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListReferenceStoresRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter: {
-    #           created_after: Time.now,
-    #           created_before: Time.now,
-    #           name: "ReferenceStoreName",
-    #         },
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] filter
     #   A filter to apply to the list.
     #   @return [Types::ReferenceStoreFilter]
@@ -3519,21 +2990,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListReferencesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter: {
-    #           created_after: Time.now,
-    #           created_before: Time.now,
-    #           md5: "Md5",
-    #           name: "ReferenceName",
-    #         },
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         reference_store_id: "ReferenceStoreId", # required
-    #       }
-    #
     # @!attribute [rw] filter
     #   A filter to apply to the list.
     #   @return [Types::ReferenceFilter]
@@ -3579,15 +3035,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRunGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         name: "RunGroupName",
-    #         starting_token: "RunGroupListToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of run groups to return in one page of results.
     #   @return [Integer]
@@ -3628,16 +3075,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRunTasksRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "RunId", # required
-    #         max_results: 1,
-    #         starting_token: "TaskListToken",
-    #         status: "PENDING", # accepts PENDING, STARTING, RUNNING, STOPPING, COMPLETED, CANCELLED, FAILED
-    #       }
-    #
     # @!attribute [rw] id
     #   The run's ID.
     #   @return [String]
@@ -3683,16 +3120,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRunsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         name: "RunName",
-    #         run_group_id: "RunGroupId",
-    #         starting_token: "RunListToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of runs to return in one page of results.
     #   @return [Integer]
@@ -3738,19 +3165,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSequenceStoresRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter: {
-    #           created_after: Time.now,
-    #           created_before: Time.now,
-    #           name: "SequenceStoreName",
-    #         },
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] filter
     #   A filter to apply to the list.
     #   @return [Types::SequenceStoreFilter]
@@ -3791,13 +3205,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "TagArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The resource's ARN.
     #   @return [String]
@@ -3824,14 +3231,6 @@ module Aws::Omics
 
     # A filter for variant import jobs.
     #
-    # @note When making an API call, you may pass ListVariantImportJobsFilter
-    #   data as a hash:
-    #
-    #       {
-    #         status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, CANCELLED, COMPLETED, FAILED
-    #         store_name: "String",
-    #       }
-    #
     # @!attribute [rw] status
     #   A status to filter on.
     #   @return [String]
@@ -3849,19 +3248,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListVariantImportJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter: {
-    #           status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, CANCELLED, COMPLETED, FAILED
-    #           store_name: "String",
-    #         },
-    #         ids: ["ResourceIdentifier"],
-    #         max_results: 1,
-    #         next_token: "ListVariantImportJobsRequestNextTokenString",
-    #       }
-    #
     # @!attribute [rw] filter
     #   A filter to apply to the list.
     #   @return [Types::ListVariantImportJobsFilter]
@@ -3909,13 +3295,6 @@ module Aws::Omics
 
     # A filter for variant stores.
     #
-    # @note When making an API call, you may pass ListVariantStoresFilter
-    #   data as a hash:
-    #
-    #       {
-    #         status: "CREATING", # accepts CREATING, UPDATING, DELETING, ACTIVE, FAILED
-    #       }
-    #
     # @!attribute [rw] status
     #   A status to filter on.
     #   @return [String]
@@ -3928,18 +3307,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListVariantStoresRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter: {
-    #           status: "CREATING", # accepts CREATING, UPDATING, DELETING, ACTIVE, FAILED
-    #         },
-    #         ids: ["ResourceIdentifier"],
-    #         max_results: 1,
-    #         next_token: "ListVariantStoresRequestNextTokenString",
-    #       }
-    #
     # @!attribute [rw] filter
     #   A filter to apply to the list.
     #   @return [Types::ListVariantStoresFilter]
@@ -3985,16 +3352,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListWorkflowsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         name: "WorkflowName",
-    #         starting_token: "WorkflowListToken",
-    #         type: "PRIVATE", # accepts PRIVATE
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of workflows to return in one page of results.
     #   @return [Integer]
@@ -4054,21 +3411,6 @@ module Aws::Omics
     end
 
     # Read options for an annotation import job.
-    #
-    # @note When making an API call, you may pass ReadOptions
-    #   data as a hash:
-    #
-    #       {
-    #         comment: "CommentChar",
-    #         encoding: "Encoding",
-    #         escape: "EscapeChar",
-    #         escape_quotes: false,
-    #         header: false,
-    #         line_sep: "LineSep",
-    #         quote: "Quote",
-    #         quote_all: false,
-    #         sep: "Separator",
-    #       }
     #
     # @!attribute [rw] comment
     #   The file's comment character.
@@ -4172,17 +3514,6 @@ module Aws::Omics
     end
 
     # A filter for read sets.
-    #
-    # @note When making an API call, you may pass ReadSetFilter
-    #   data as a hash:
-    #
-    #       {
-    #         created_after: Time.now,
-    #         created_before: Time.now,
-    #         name: "ReadSetName",
-    #         reference_arn: "ReferenceArn",
-    #         status: "ARCHIVED", # accepts ARCHIVED, ACTIVATING, ACTIVE, DELETING, DELETED
-    #       }
     #
     # @!attribute [rw] created_after
     #   The filter's start date.
@@ -4306,16 +3637,6 @@ module Aws::Omics
 
     # A filter for references.
     #
-    # @note When making an API call, you may pass ReferenceFilter
-    #   data as a hash:
-    #
-    #       {
-    #         created_after: Time.now,
-    #         created_before: Time.now,
-    #         md5: "Md5",
-    #         name: "ReferenceName",
-    #       }
-    #
     # @!attribute [rw] created_after
     #   The filter's start date.
     #   @return [Time]
@@ -4344,10 +3665,6 @@ module Aws::Omics
     end
 
     # A genome reference.
-    #
-    # @note ReferenceItem is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note ReferenceItem is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ReferenceItem corresponding to the set member.
     #
     # @!attribute [rw] reference_arn
     #   The reference's ARN.
@@ -4460,15 +3777,6 @@ module Aws::Omics
     end
 
     # A filter for reference stores.
-    #
-    # @note When making an API call, you may pass ReferenceStoreFilter
-    #   data as a hash:
-    #
-    #       {
-    #         created_after: Time.now,
-    #         created_before: Time.now,
-    #         name: "ReferenceStoreName",
-    #       }
     #
     # @!attribute [rw] created_after
     #   The filter's start date.
@@ -4691,15 +3999,6 @@ module Aws::Omics
 
     # A filter for a sequence store.
     #
-    # @note When making an API call, you may pass SequenceStoreFilter
-    #   data as a hash:
-    #
-    #       {
-    #         created_after: Time.now,
-    #         created_before: Time.now,
-    #         name: "SequenceStoreName",
-    #       }
-    #
     # @!attribute [rw] created_after
     #   The filter's start date.
     #   @return [Time]
@@ -4737,14 +4036,6 @@ module Aws::Omics
 
     # Source files for a sequence.
     #
-    # @note When making an API call, you may pass SourceFiles
-    #   data as a hash:
-    #
-    #       {
-    #         source1: "S3Uri", # required
-    #         source2: "S3Uri",
-    #       }
-    #
     # @!attribute [rw] source1
     #   The location of the first file in Amazon S3.
     #   @return [String]
@@ -4764,14 +4055,6 @@ module Aws::Omics
 
     # Server-side encryption (SSE) settings for a store.
     #
-    # @note When making an API call, you may pass SseConfig
-    #   data as a hash:
-    #
-    #       {
-    #         key_arn: "SseConfigKeyArnString",
-    #         type: "KMS", # required, accepts KMS
-    #       }
-    #
     # @!attribute [rw] key_arn
     #   An encryption key ARN.
     #   @return [String]
@@ -4789,39 +4072,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartAnnotationImportRequest
-    #   data as a hash:
-    #
-    #       {
-    #         destination_name: "StoreName", # required
-    #         format_options: {
-    #           tsv_options: {
-    #             read_options: {
-    #               comment: "CommentChar",
-    #               encoding: "Encoding",
-    #               escape: "EscapeChar",
-    #               escape_quotes: false,
-    #               header: false,
-    #               line_sep: "LineSep",
-    #               quote: "Quote",
-    #               quote_all: false,
-    #               sep: "Separator",
-    #             },
-    #           },
-    #           vcf_options: {
-    #             ignore_filter_field: false,
-    #             ignore_qual_field: false,
-    #           },
-    #         },
-    #         items: [ # required
-    #           {
-    #             source: "S3Uri", # required
-    #           },
-    #         ],
-    #         role_arn: "Arn", # required
-    #         run_left_normalization: false,
-    #       }
-    #
     # @!attribute [rw] destination_name
     #   A destination annotation store for the job.
     #   @return [String]
@@ -4866,19 +4116,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartReadSetActivationJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         sequence_store_id: "SequenceStoreId", # required
-    #         sources: [ # required
-    #           {
-    #             read_set_id: "ReadSetId", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] client_token
     #   To ensure that jobs don't run multiple times, specify a unique
     #   token for each job.
@@ -4931,13 +4168,6 @@ module Aws::Omics
 
     # A source for a read set activation job.
     #
-    # @note When making an API call, you may pass StartReadSetActivationJobSourceItem
-    #   data as a hash:
-    #
-    #       {
-    #         read_set_id: "ReadSetId", # required
-    #       }
-    #
     # @!attribute [rw] read_set_id
     #   The source's read set ID.
     #   @return [String]
@@ -4950,21 +4180,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartReadSetExportJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         destination: "S3Destination", # required
-    #         role_arn: "RoleArn", # required
-    #         sequence_store_id: "SequenceStoreId", # required
-    #         sources: [ # required
-    #           {
-    #             read_set_id: "ReadSetId", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] client_token
     #   To ensure that jobs don't run multiple times, specify a unique
     #   token for each job.
@@ -5030,33 +4245,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartReadSetImportJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         role_arn: "RoleArn", # required
-    #         sequence_store_id: "SequenceStoreId", # required
-    #         sources: [ # required
-    #           {
-    #             description: "ReadSetDescription",
-    #             generated_from: "GeneratedFrom",
-    #             name: "ReadSetName",
-    #             reference_arn: "ReferenceArn", # required
-    #             sample_id: "SampleId", # required
-    #             source_file_type: "FASTQ", # required, accepts FASTQ, BAM, CRAM
-    #             source_files: { # required
-    #               source1: "S3Uri", # required
-    #               source2: "S3Uri",
-    #             },
-    #             subject_id: "SubjectId", # required
-    #             tags: {
-    #               "TagKey" => "TagValue",
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] client_token
     #   To ensure that jobs don't run multiple times, specify a unique
     #   token for each job.
@@ -5119,26 +4307,6 @@ module Aws::Omics
 
     # A source for a read set import job.
     #
-    # @note When making an API call, you may pass StartReadSetImportJobSourceItem
-    #   data as a hash:
-    #
-    #       {
-    #         description: "ReadSetDescription",
-    #         generated_from: "GeneratedFrom",
-    #         name: "ReadSetName",
-    #         reference_arn: "ReferenceArn", # required
-    #         sample_id: "SampleId", # required
-    #         source_file_type: "FASTQ", # required, accepts FASTQ, BAM, CRAM
-    #         source_files: { # required
-    #           source1: "S3Uri", # required
-    #           source2: "S3Uri",
-    #         },
-    #         subject_id: "SubjectId", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] description
     #   The source's description.
     #   @return [String]
@@ -5191,25 +4359,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartReferenceImportJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         reference_store_id: "ReferenceStoreId", # required
-    #         role_arn: "RoleArn", # required
-    #         sources: [ # required
-    #           {
-    #             description: "ReferenceDescription",
-    #             name: "ReferenceName", # required
-    #             source_file: "S3Uri", # required
-    #             tags: {
-    #               "TagKey" => "TagValue",
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] client_token
     #   To ensure that jobs don't run multiple times, specify a unique
     #   token for each job.
@@ -5272,18 +4421,6 @@ module Aws::Omics
 
     # A source for a reference import job.
     #
-    # @note When making an API call, you may pass StartReferenceImportJobSourceItem
-    #   data as a hash:
-    #
-    #       {
-    #         description: "ReferenceDescription",
-    #         name: "ReferenceName", # required
-    #         source_file: "S3Uri", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] description
     #   The source's description.
     #   @return [String]
@@ -5311,28 +4448,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartRunRequest
-    #   data as a hash:
-    #
-    #       {
-    #         log_level: "OFF", # accepts OFF, FATAL, ERROR, ALL
-    #         name: "RunName",
-    #         output_uri: "RunOutputUri",
-    #         parameters: {
-    #         },
-    #         priority: 1,
-    #         request_id: "RunRequestId", # required
-    #         role_arn: "RunRoleArn", # required
-    #         run_group_id: "RunGroupId",
-    #         run_id: "RunId",
-    #         storage_capacity: 1,
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         workflow_id: "WorkflowId",
-    #         workflow_type: "PRIVATE", # accepts PRIVATE
-    #       }
-    #
     # @!attribute [rw] log_level
     #   A log level for the run.
     #   @return [String]
@@ -5435,20 +4550,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartVariantImportRequest
-    #   data as a hash:
-    #
-    #       {
-    #         destination_name: "StoreName", # required
-    #         items: [ # required
-    #           {
-    #             source: "S3Uri", # required
-    #           },
-    #         ],
-    #         role_arn: "Arn", # required
-    #         run_left_normalization: false,
-    #       }
-    #
     # @!attribute [rw] destination_name
     #   The destination variant store for the job.
     #   @return [String]
@@ -5490,10 +4591,6 @@ module Aws::Omics
 
     # Settings for a store.
     #
-    # @note StoreOptions is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note StoreOptions is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of StoreOptions corresponding to the set member.
-    #
     # @!attribute [rw] tsv_store_options
     #   File settings for a TSV store.
     #   @return [Types::TsvStoreOptions]
@@ -5511,16 +4608,6 @@ module Aws::Omics
       class Unknown < StoreOptions; end
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "TagArn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The resource's ARN.
     #   @return [String]
@@ -5606,23 +4693,6 @@ module Aws::Omics
 
     # Formatting options for a TSV file.
     #
-    # @note When making an API call, you may pass TsvOptions
-    #   data as a hash:
-    #
-    #       {
-    #         read_options: {
-    #           comment: "CommentChar",
-    #           encoding: "Encoding",
-    #           escape: "EscapeChar",
-    #           escape_quotes: false,
-    #           header: false,
-    #           line_sep: "LineSep",
-    #           quote: "Quote",
-    #           quote_all: false,
-    #           sep: "Separator",
-    #         },
-    #       }
-    #
     # @!attribute [rw] read_options
     #   The file's read options.
     #   @return [Types::ReadOptions]
@@ -5636,21 +4706,6 @@ module Aws::Omics
     end
 
     # File settings for a TSV store.
-    #
-    # @note When making an API call, you may pass TsvStoreOptions
-    #   data as a hash:
-    #
-    #       {
-    #         annotation_type: "GENERIC", # accepts GENERIC, CHR_POS, CHR_POS_REF_ALT, CHR_START_END_ONE_BASE, CHR_START_END_REF_ALT_ONE_BASE, CHR_START_END_ZERO_BASE, CHR_START_END_REF_ALT_ZERO_BASE
-    #         format_to_header: {
-    #           "CHR" => "FormatToHeaderValueString",
-    #         },
-    #         schema: [
-    #           {
-    #             "String" => "LONG", # accepts LONG, INT, STRING, FLOAT, DOUBLE, BOOLEAN
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] annotation_type
     #   The store's annotation type.
@@ -5674,14 +4729,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "TagArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The resource's ARN.
     #   @return [String]
@@ -5703,14 +4750,6 @@ module Aws::Omics
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateAnnotationStoreRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "StoreDescription",
-    #         name: "String", # required
-    #       }
-    #
     # @!attribute [rw] description
     #   A description for the store.
     #   @return [String]
@@ -5780,17 +4819,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateRunGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "RunGroupId", # required
-    #         max_cpus: 1,
-    #         max_duration: 1,
-    #         max_runs: 1,
-    #         name: "RunGroupName",
-    #       }
-    #
     # @!attribute [rw] id
     #   The group's ID.
     #   @return [String]
@@ -5823,14 +4851,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateVariantStoreRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "StoreDescription",
-    #         name: "String", # required
-    #       }
-    #
     # @!attribute [rw] description
     #   A description for the store.
     #   @return [String]
@@ -5890,15 +4910,6 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateWorkflowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "WorkflowDescription",
-    #         id: "WorkflowId", # required
-    #         name: "WorkflowName",
-    #       }
-    #
     # @!attribute [rw] description
     #   A description for the workflow.
     #   @return [String]
@@ -5955,13 +4966,6 @@ module Aws::Omics
     end
 
     # A imported variant item's source.
-    #
-    # @note When making an API call, you may pass VariantImportItemSource
-    #   data as a hash:
-    #
-    #       {
-    #         source: "S3Uri", # required
-    #       }
     #
     # @!attribute [rw] source
     #   The source file's location in Amazon S3.
@@ -6090,14 +5094,6 @@ module Aws::Omics
 
     # Formatting options for a VCF file.
     #
-    # @note When making an API call, you may pass VcfOptions
-    #   data as a hash:
-    #
-    #       {
-    #         ignore_filter_field: false,
-    #         ignore_qual_field: false,
-    #       }
-    #
     # @!attribute [rw] ignore_filter_field
     #   The file's ignore filter field setting.
     #   @return [Boolean]
@@ -6160,14 +5156,6 @@ module Aws::Omics
     end
 
     # A workflow parameter.
-    #
-    # @note When making an API call, you may pass WorkflowParameter
-    #   data as a hash:
-    #
-    #       {
-    #         description: "WorkflowParameterDescription",
-    #         optional: false,
-    #       }
     #
     # @!attribute [rw] description
     #   The parameter's description.

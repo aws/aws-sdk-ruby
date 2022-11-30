@@ -10,16 +10,6 @@
 module Aws::IoT1ClickProjects
   module Types
 
-    # @note When making an API call, you may pass AssociateDeviceWithPlacementRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_name: "ProjectName", # required
-    #         placement_name: "PlacementName", # required
-    #         device_id: "DeviceId", # required
-    #         device_template_name: "DeviceTemplateName", # required
-    #       }
-    #
     # @!attribute [rw] project_name
     #   The name of the project containing the placement in which to
     #   associate the device.
@@ -50,17 +40,6 @@ module Aws::IoT1ClickProjects
 
     class AssociateDeviceWithPlacementResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass CreatePlacementRequest
-    #   data as a hash:
-    #
-    #       {
-    #         placement_name: "PlacementName", # required
-    #         project_name: "ProjectName", # required
-    #         attributes: {
-    #           "AttributeName" => "AttributeValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] placement_name
     #   The name of the placement to be created.
     #   @return [String]
@@ -84,30 +63,6 @@ module Aws::IoT1ClickProjects
 
     class CreatePlacementResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass CreateProjectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_name: "ProjectName", # required
-    #         description: "Description",
-    #         placement_template: {
-    #           default_attributes: {
-    #             "AttributeName" => "AttributeDefaultValue",
-    #           },
-    #           device_templates: {
-    #             "DeviceTemplateName" => {
-    #               device_type: "DeviceType",
-    #               callback_overrides: {
-    #                 "DeviceCallbackKey" => "DeviceCallbackValue",
-    #               },
-    #             },
-    #           },
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] project_name
     #   The name of the project to create.
     #   @return [String]
@@ -145,14 +100,6 @@ module Aws::IoT1ClickProjects
 
     class CreateProjectResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeletePlacementRequest
-    #   data as a hash:
-    #
-    #       {
-    #         placement_name: "PlacementName", # required
-    #         project_name: "ProjectName", # required
-    #       }
-    #
     # @!attribute [rw] placement_name
     #   The name of the empty placement to delete.
     #   @return [String]
@@ -170,13 +117,6 @@ module Aws::IoT1ClickProjects
 
     class DeletePlacementResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteProjectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_name: "ProjectName", # required
-    #       }
-    #
     # @!attribute [rw] project_name
     #   The name of the empty project to delete.
     #   @return [String]
@@ -189,14 +129,6 @@ module Aws::IoT1ClickProjects
 
     class DeleteProjectResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribePlacementRequest
-    #   data as a hash:
-    #
-    #       {
-    #         placement_name: "PlacementName", # required
-    #         project_name: "ProjectName", # required
-    #       }
-    #
     # @!attribute [rw] placement_name
     #   The name of the placement within a project.
     #   @return [String]
@@ -222,13 +154,6 @@ module Aws::IoT1ClickProjects
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeProjectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_name: "ProjectName", # required
-    #       }
-    #
     # @!attribute [rw] project_name
     #   The name of the project to be described.
     #   @return [String]
@@ -252,16 +177,6 @@ module Aws::IoT1ClickProjects
     # An object representing a device for a placement template (see
     # PlacementTemplate).
     #
-    # @note When making an API call, you may pass DeviceTemplate
-    #   data as a hash:
-    #
-    #       {
-    #         device_type: "DeviceType",
-    #         callback_overrides: {
-    #           "DeviceCallbackKey" => "DeviceCallbackValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] device_type
     #   The device type, which currently must be `"button"`.
     #   @return [String]
@@ -278,15 +193,6 @@ module Aws::IoT1ClickProjects
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateDeviceFromPlacementRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_name: "ProjectName", # required
-    #         placement_name: "PlacementName", # required
-    #         device_template_name: "DeviceTemplateName", # required
-    #       }
-    #
     # @!attribute [rw] project_name
     #   The name of the project that contains the placement.
     #   @return [String]
@@ -309,14 +215,6 @@ module Aws::IoT1ClickProjects
 
     class DisassociateDeviceFromPlacementResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass GetDevicesInPlacementRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_name: "ProjectName", # required
-    #         placement_name: "PlacementName", # required
-    #       }
-    #
     # @!attribute [rw] project_name
     #   The name of the project containing the placement.
     #   @return [String]
@@ -369,15 +267,6 @@ module Aws::IoT1ClickProjects
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPlacementsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_name: "ProjectName", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] project_name
     #   The project containing the placements to be listed.
     #   @return [String]
@@ -415,14 +304,6 @@ module Aws::IoT1ClickProjects
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListProjectsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The token to retrieve the next set of results.
     #   @return [String]
@@ -455,13 +336,6 @@ module Aws::IoT1ClickProjects
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ProjectArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource whose tags you want to list.
     #   @return [String]
@@ -549,23 +423,6 @@ module Aws::IoT1ClickProjects
     end
 
     # An object defining the template for a placement.
-    #
-    # @note When making an API call, you may pass PlacementTemplate
-    #   data as a hash:
-    #
-    #       {
-    #         default_attributes: {
-    #           "AttributeName" => "AttributeDefaultValue",
-    #         },
-    #         device_templates: {
-    #           "DeviceTemplateName" => {
-    #             device_type: "DeviceType",
-    #             callback_overrides: {
-    #               "DeviceCallbackKey" => "DeviceCallbackValue",
-    #             },
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] default_attributes
     #   The default attributes (key/value pairs) to be applied to all
@@ -692,16 +549,6 @@ module Aws::IoT1ClickProjects
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ProjectArn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resouce for which tag(s) should be added or modified.
     #   @return [String]
@@ -738,14 +585,6 @@ module Aws::IoT1ClickProjects
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ProjectArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource whose tag you want to remove.
     #   @return [String]
@@ -763,17 +602,6 @@ module Aws::IoT1ClickProjects
 
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdatePlacementRequest
-    #   data as a hash:
-    #
-    #       {
-    #         placement_name: "PlacementName", # required
-    #         project_name: "ProjectName", # required
-    #         attributes: {
-    #           "AttributeName" => "AttributeValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] placement_name
     #   The name of the placement to update.
     #   @return [String]
@@ -797,27 +625,6 @@ module Aws::IoT1ClickProjects
 
     class UpdatePlacementResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateProjectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_name: "ProjectName", # required
-    #         description: "Description",
-    #         placement_template: {
-    #           default_attributes: {
-    #             "AttributeName" => "AttributeDefaultValue",
-    #           },
-    #           device_templates: {
-    #             "DeviceTemplateName" => {
-    #               device_type: "DeviceType",
-    #               callback_overrides: {
-    #                 "DeviceCallbackKey" => "DeviceCallbackValue",
-    #               },
-    #             },
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] project_name
     #   The name of the project to be updated.
     #   @return [String]

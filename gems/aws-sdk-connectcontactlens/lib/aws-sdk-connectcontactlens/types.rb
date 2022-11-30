@@ -119,16 +119,6 @@ module Aws::ConnectContactLens
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRealtimeContactAnalysisSegmentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         contact_id: "ContactId", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance.
     #   @return [String]

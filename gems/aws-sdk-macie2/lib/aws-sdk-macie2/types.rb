@@ -18,15 +18,6 @@ module Aws::Macie2
     # The masterAccount property has been deprecated and is retained only
     # for backward compatibility.
     #
-    # @note When making an API call, you may pass AcceptInvitationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         administrator_account_id: "__string",
-    #         invitation_id: "__string", # required
-    #         master_account: "__string",
-    #       }
-    #
     # @!attribute [rw] administrator_account_id
     #   @return [String]
     #
@@ -84,14 +75,6 @@ module Aws::Macie2
 
     # Specifies the details of an account to associate with an Amazon Macie
     # administrator account.
-    #
-    # @note When making an API call, you may pass AccountDetail
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "__string", # required
-    #         email: "__string", # required
-    #       }
     #
     # @!attribute [rw] account_id
     #   @return [String]
@@ -155,17 +138,6 @@ module Aws::Macie2
     # Specifies the criteria for an allow list. The criteria must specify a
     # regular expression (regex) or an S3 object (s3WordsList). It can't
     # specify both.
-    #
-    # @note When making an API call, you may pass AllowListCriteria
-    #   data as a hash:
-    #
-    #       {
-    #         regex: "__stringMin1Max512PatternSS",
-    #         s3_words_list: {
-    #           bucket_name: "__stringMin3Max255PatternAZaZ093255", # required
-    #           object_key: "__stringMin1Max1024PatternSS", # required
-    #         },
-    #       }
     #
     # @!attribute [rw] regex
     #   @return [String]
@@ -368,13 +340,6 @@ module Aws::Macie2
     # Specifies one or more custom data identifiers to retrieve information
     # about.
     #
-    # @note When making an API call, you may pass BatchGetCustomDataIdentifiersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         ids: ["__string"],
-    #       }
-    #
     # @!attribute [rw] ids
     #   @return [Array<String>]
     #
@@ -547,19 +512,6 @@ module Aws::Macie2
 
     # Specifies the operator to use in a property-based condition that
     # filters the results of a query for information about S3 buckets.
-    #
-    # @note When making an API call, you may pass BucketCriteriaAdditionalProperties
-    #   data as a hash:
-    #
-    #       {
-    #         eq: ["__string"],
-    #         gt: 1,
-    #         gte: 1,
-    #         lt: 1,
-    #         lte: 1,
-    #         neq: ["__string"],
-    #         prefix: "__string",
-    #       }
     #
     # @!attribute [rw] eq
     #   @return [Array<String>]
@@ -877,14 +829,6 @@ module Aws::Macie2
     # Specifies criteria for sorting the results of a query for information
     # about S3 buckets.
     #
-    # @note When making an API call, you may pass BucketSortCriteria
-    #   data as a hash:
-    #
-    #       {
-    #         attribute_name: "__string",
-    #         order_by: "ASC", # accepts ASC, DESC
-    #       }
-    #
     # @!attribute [rw] attribute_name
     #   @return [String]
     #
@@ -1021,17 +965,6 @@ module Aws::Macie2
     # encryption settings to use when storing results in that location. The
     # location must be an S3 bucket.
     #
-    # @note When making an API call, you may pass ClassificationExportConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         s3_destination: {
-    #           bucket_name: "__string", # required
-    #           key_prefix: "__string",
-    #           kms_key_arn: "__string", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] s3_destination
     #   Specifies an S3 bucket to store data classification results in, and
     #   the encryption settings to use when storing results in that bucket.
@@ -1143,25 +1076,6 @@ module Aws::Macie2
     # a regular expression that Macie can't compile or an S3 object that
     # Macie can't retrieve or parse, an error occurs.
     #
-    # @note When making an API call, you may pass CreateAllowListRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "__string", # required
-    #         criteria: { # required
-    #           regex: "__stringMin1Max512PatternSS",
-    #           s3_words_list: {
-    #             bucket_name: "__stringMin3Max255PatternAZaZ093255", # required
-    #             object_key: "__stringMin1Max1024PatternSS", # required
-    #           },
-    #         },
-    #         description: "__stringMin1Max512PatternSS",
-    #         name: "__stringMin1Max128Pattern", # required
-    #         tags: {
-    #           "__string" => "__string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_token
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -1219,131 +1133,6 @@ module Aws::Macie2
     # create it. This helps ensure that you have an immutable history of
     # sensitive data findings and discovery results for data privacy and
     # protection audits or investigations.
-    #
-    # @note When making an API call, you may pass CreateClassificationJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         allow_list_ids: ["__string"],
-    #         client_token: "__string", # required
-    #         custom_data_identifier_ids: ["__string"],
-    #         description: "__string",
-    #         initial_run: false,
-    #         job_type: "ONE_TIME", # required, accepts ONE_TIME, SCHEDULED
-    #         managed_data_identifier_ids: ["__string"],
-    #         managed_data_identifier_selector: "ALL", # accepts ALL, EXCLUDE, INCLUDE, NONE
-    #         name: "__string", # required
-    #         s3_job_definition: { # required
-    #           bucket_criteria: {
-    #             excludes: {
-    #               and: [
-    #                 {
-    #                   simple_criterion: {
-    #                     comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #                     key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
-    #                     values: ["__string"],
-    #                   },
-    #                   tag_criterion: {
-    #                     comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #                     tag_values: [
-    #                       {
-    #                         key: "__string",
-    #                         value: "__string",
-    #                       },
-    #                     ],
-    #                   },
-    #                 },
-    #               ],
-    #             },
-    #             includes: {
-    #               and: [
-    #                 {
-    #                   simple_criterion: {
-    #                     comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #                     key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
-    #                     values: ["__string"],
-    #                   },
-    #                   tag_criterion: {
-    #                     comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #                     tag_values: [
-    #                       {
-    #                         key: "__string",
-    #                         value: "__string",
-    #                       },
-    #                     ],
-    #                   },
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #           bucket_definitions: [
-    #             {
-    #               account_id: "__string", # required
-    #               buckets: ["__string"], # required
-    #             },
-    #           ],
-    #           scoping: {
-    #             excludes: {
-    #               and: [
-    #                 {
-    #                   simple_scope_term: {
-    #                     comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #                     key: "OBJECT_EXTENSION", # accepts OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, OBJECT_KEY
-    #                     values: ["__string"],
-    #                   },
-    #                   tag_scope_term: {
-    #                     comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #                     key: "__string",
-    #                     tag_values: [
-    #                       {
-    #                         key: "__string",
-    #                         value: "__string",
-    #                       },
-    #                     ],
-    #                     target: "S3_OBJECT", # accepts S3_OBJECT
-    #                   },
-    #                 },
-    #               ],
-    #             },
-    #             includes: {
-    #               and: [
-    #                 {
-    #                   simple_scope_term: {
-    #                     comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #                     key: "OBJECT_EXTENSION", # accepts OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, OBJECT_KEY
-    #                     values: ["__string"],
-    #                   },
-    #                   tag_scope_term: {
-    #                     comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #                     key: "__string",
-    #                     tag_values: [
-    #                       {
-    #                         key: "__string",
-    #                         value: "__string",
-    #                       },
-    #                     ],
-    #                     target: "S3_OBJECT", # accepts S3_OBJECT
-    #                   },
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #         },
-    #         sampling_percentage: 1,
-    #         schedule_frequency: {
-    #           daily_schedule: {
-    #           },
-    #           monthly_schedule: {
-    #             day_of_month: 1,
-    #           },
-    #           weekly_schedule: {
-    #             day_of_week: "SUNDAY", # accepts SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
-    #           },
-    #         },
-    #         tags: {
-    #           "__string" => "__string",
-    #         },
-    #       }
     #
     # @!attribute [rw] allow_list_ids
     #   @return [Array<String>]
@@ -1443,28 +1232,6 @@ module Aws::Macie2
     # sensitive data findings and discovery results for data privacy and
     # protection audits or investigations.
     #
-    # @note When making an API call, you may pass CreateCustomDataIdentifierRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "__string",
-    #         description: "__string",
-    #         ignore_words: ["__string"],
-    #         keywords: ["__string"],
-    #         maximum_match_distance: 1,
-    #         name: "__string", # required
-    #         regex: "__string", # required
-    #         severity_levels: [
-    #           {
-    #             occurrences_threshold: 1, # required
-    #             severity: "LOW", # required, accepts LOW, MEDIUM, HIGH
-    #           },
-    #         ],
-    #         tags: {
-    #           "__string" => "__string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_token
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -1542,33 +1309,6 @@ module Aws::Macie2
 
     # Specifies the criteria and other settings for a new findings filter.
     #
-    # @note When making an API call, you may pass CreateFindingsFilterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         action: "ARCHIVE", # required, accepts ARCHIVE, NOOP
-    #         client_token: "__string",
-    #         description: "__string",
-    #         finding_criteria: { # required
-    #           criterion: {
-    #             "__string" => {
-    #               eq: ["__string"],
-    #               eq_exact_match: ["__string"],
-    #               gt: 1,
-    #               gte: 1,
-    #               lt: 1,
-    #               lte: 1,
-    #               neq: ["__string"],
-    #             },
-    #           },
-    #         },
-    #         name: "__string", # required
-    #         position: 1,
-    #         tags: {
-    #           "__string" => "__string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] action
     #   The action to perform on findings that match the filter criteria. To
     #   suppress (automatically archive) findings that match the criteria,
@@ -1638,15 +1378,6 @@ module Aws::Macie2
     # notification on the recipient's console. You can optionally notify
     # the recipient by also sending the invitation as an email message.
     #
-    # @note When making an API call, you may pass CreateInvitationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_ids: ["__string"], # required
-    #         disable_email_notification: false,
-    #         message: "__string",
-    #       }
-    #
     # @!attribute [rw] account_ids
     #   @return [Array<String>]
     #
@@ -1683,19 +1414,6 @@ module Aws::Macie2
     # Specifies an Amazon Web Services account to associate with an Amazon
     # Macie administrator account.
     #
-    # @note When making an API call, you may pass CreateMemberRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account: { # required
-    #           account_id: "__string", # required
-    #           email: "__string", # required
-    #         },
-    #         tags: {
-    #           "__string" => "__string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] account
     #   Specifies the details of an account to associate with an Amazon
     #   Macie administrator account.
@@ -1731,13 +1449,6 @@ module Aws::Macie2
 
     # Specifies the types of sample findings to create.
     #
-    # @note When making an API call, you may pass CreateSampleFindingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         finding_types: ["SensitiveData:S3Object/Multiple"], # accepts SensitiveData:S3Object/Multiple, SensitiveData:S3Object/Financial, SensitiveData:S3Object/Personal, SensitiveData:S3Object/Credentials, SensitiveData:S3Object/CustomIdentifier, Policy:IAMUser/S3BucketPublic, Policy:IAMUser/S3BucketSharedExternally, Policy:IAMUser/S3BucketReplicatedExternally, Policy:IAMUser/S3BucketEncryptionDisabled, Policy:IAMUser/S3BlockPublicAccessDisabled
-    #       }
-    #
     # @!attribute [rw] finding_types
     #   @return [Array<String>]
     #
@@ -1757,30 +1468,6 @@ module Aws::Macie2
     # criteria for including or excluding S3 buckets from a classification
     # job.
     #
-    # @note When making an API call, you may pass CriteriaBlockForJob
-    #   data as a hash:
-    #
-    #       {
-    #         and: [
-    #           {
-    #             simple_criterion: {
-    #               comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #               key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
-    #               values: ["__string"],
-    #             },
-    #             tag_criterion: {
-    #               comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #               tag_values: [
-    #                 {
-    #                   key: "__string",
-    #                   value: "__string",
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] and
     #   @return [Array<Types::CriteriaForJob>]
     #
@@ -1794,26 +1481,6 @@ module Aws::Macie2
 
     # Specifies a property- or tag-based condition that defines criteria for
     # including or excluding S3 buckets from a classification job.
-    #
-    # @note When making an API call, you may pass CriteriaForJob
-    #   data as a hash:
-    #
-    #       {
-    #         simple_criterion: {
-    #           comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #           key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
-    #           values: ["__string"],
-    #         },
-    #         tag_criterion: {
-    #           comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #           tag_values: [
-    #             {
-    #               key: "__string",
-    #               value: "__string",
-    #             },
-    #           ],
-    #         },
-    #       }
     #
     # @!attribute [rw] simple_criterion
     #   Specifies a property-based condition that determines whether an S3
@@ -1842,19 +1509,6 @@ module Aws::Macie2
     #
     #
     # [1]: https://docs.aws.amazon.com/macie/latest/user/findings-filter-basics.html
-    #
-    # @note When making an API call, you may pass CriterionAdditionalProperties
-    #   data as a hash:
-    #
-    #       {
-    #         eq: ["__string"],
-    #         eq_exact_match: ["__string"],
-    #         gt: 1,
-    #         gte: 1,
-    #         lt: 1,
-    #         lte: 1,
-    #         neq: ["__string"],
-    #       }
     #
     # @!attribute [rw] eq
     #   @return [Array<String>]
@@ -1975,21 +1629,12 @@ module Aws::Macie2
     # Specifies that a classification job runs once a day, every day. This
     # is an empty object.
     #
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DailySchedule AWS API Documentation
     #
     class DailySchedule < Aws::EmptyStructure; end
 
     # Specifies one or more accounts that sent Amazon Macie membership
     # invitations to decline.
-    #
-    # @note When making an API call, you may pass DeclineInvitationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_ids: ["__string"], # required
-    #       }
     #
     # @!attribute [rw] account_ids
     #   @return [Array<String>]
@@ -2042,14 +1687,6 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAllowListRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "__string", # required
-    #         ignore_job_checks: "__string",
-    #       }
-    #
     # @!attribute [rw] id
     #   @return [String]
     #
@@ -2069,13 +1706,6 @@ module Aws::Macie2
     #
     class DeleteAllowListResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteCustomDataIdentifierRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   @return [String]
     #
@@ -2091,13 +1721,6 @@ module Aws::Macie2
     #
     class DeleteCustomDataIdentifierResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteFindingsFilterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   @return [String]
     #
@@ -2115,13 +1738,6 @@ module Aws::Macie2
 
     # Specifies one or more accounts that sent Amazon Macie membership
     # invitations to delete.
-    #
-    # @note When making an API call, you may pass DeleteInvitationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_ids: ["__string"], # required
-    #       }
     #
     # @!attribute [rw] account_ids
     #   @return [Array<String>]
@@ -2148,13 +1764,6 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteMemberRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   @return [String]
     #
@@ -2173,29 +1782,6 @@ module Aws::Macie2
     # Specifies criteria for filtering, sorting, and paginating the results
     # of a query for statistical data and other information about S3
     # buckets.
-    #
-    # @note When making an API call, you may pass DescribeBucketsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         criteria: {
-    #           "__string" => {
-    #             eq: ["__string"],
-    #             gt: 1,
-    #             gte: 1,
-    #             lt: 1,
-    #             lte: 1,
-    #             neq: ["__string"],
-    #             prefix: "__string",
-    #           },
-    #         },
-    #         max_results: 1,
-    #         next_token: "__string",
-    #         sort_criteria: {
-    #           attribute_name: "__string",
-    #           order_by: "ASC", # accepts ASC, DESC
-    #         },
-    #       }
     #
     # @!attribute [rw] criteria
     #   Specifies, as a map, one or more property-based conditions that
@@ -2243,13 +1829,6 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeClassificationJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   @return [String]
     #
@@ -2388,8 +1967,6 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DescribeOrganizationConfigurationRequest AWS API Documentation
     #
     class DescribeOrganizationConfigurationRequest < Aws::EmptyStructure; end
@@ -2466,8 +2043,6 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DisableMacieRequest AWS API Documentation
     #
     class DisableMacieRequest < Aws::EmptyStructure; end
@@ -2476,13 +2051,6 @@ module Aws::Macie2
     #
     class DisableMacieResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DisableOrganizationAdminAccountRequest
-    #   data as a hash:
-    #
-    #       {
-    #         admin_account_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] admin_account_id
     #   @return [String]
     #
@@ -2498,8 +2066,6 @@ module Aws::Macie2
     #
     class DisableOrganizationAdminAccountResponse < Aws::EmptyStructure; end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DisassociateFromAdministratorAccountRequest AWS API Documentation
     #
     class DisassociateFromAdministratorAccountRequest < Aws::EmptyStructure; end
@@ -2508,8 +2074,6 @@ module Aws::Macie2
     #
     class DisassociateFromAdministratorAccountResponse < Aws::EmptyStructure; end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DisassociateFromMasterAccountRequest AWS API Documentation
     #
     class DisassociateFromMasterAccountRequest < Aws::EmptyStructure; end
@@ -2518,13 +2082,6 @@ module Aws::Macie2
     #
     class DisassociateFromMasterAccountResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DisassociateMemberRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   @return [String]
     #
@@ -2563,15 +2120,6 @@ module Aws::Macie2
 
     # Enables Amazon Macie and specifies the configuration settings for a
     # Macie account.
-    #
-    # @note When making an API call, you may pass EnableMacieRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "__string",
-    #         finding_publishing_frequency: "FIFTEEN_MINUTES", # accepts FIFTEEN_MINUTES, ONE_HOUR, SIX_HOURS
-    #         status: "PAUSED", # accepts PAUSED, ENABLED
-    #       }
     #
     # @!attribute [rw] client_token
     #   **A suitable default value is auto-generated.** You should normally
@@ -2612,14 +2160,6 @@ module Aws::Macie2
     # administrator account for an organization in Organizations. To submit
     # this request, you must be a user of the Organizations management
     # account.
-    #
-    # @note When making an API call, you may pass EnableOrganizationAdminAccountRequest
-    #   data as a hash:
-    #
-    #       {
-    #         admin_account_id: "__string", # required
-    #         client_token: "__string",
-    #       }
     #
     # @!attribute [rw] admin_account_id
     #   @return [String]
@@ -2824,23 +2364,6 @@ module Aws::Macie2
     # Specifies, as a map, one or more property-based conditions that filter
     # the results of a query for findings.
     #
-    # @note When making an API call, you may pass FindingCriteria
-    #   data as a hash:
-    #
-    #       {
-    #         criterion: {
-    #           "__string" => {
-    #             eq: ["__string"],
-    #             eq_exact_match: ["__string"],
-    #             gt: 1,
-    #             gte: 1,
-    #             lt: 1,
-    #             lte: 1,
-    #             neq: ["__string"],
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] criterion
     #   Specifies a condition that defines a property, operator, and one or
     #   more values to filter the results of a query for findings. The
@@ -2864,14 +2387,6 @@ module Aws::Macie2
 
     # Specifies criteria for sorting the results of a query that retrieves
     # aggregated statistical data about findings.
-    #
-    # @note When making an API call, you may pass FindingStatisticsSortCriteria
-    #   data as a hash:
-    #
-    #       {
-    #         attribute_name: "groupKey", # accepts groupKey, count
-    #         order_by: "ASC", # accepts ASC, DESC
-    #       }
     #
     # @!attribute [rw] attribute_name
     #   The grouping to sort the results by. Valid values are:
@@ -2923,8 +2438,6 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetAdministratorAccountRequest AWS API Documentation
     #
     class GetAdministratorAccountRequest < Aws::EmptyStructure; end
@@ -2946,13 +2459,6 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAllowListRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   @return [String]
     #
@@ -3017,8 +2523,6 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetAutomatedDiscoveryConfigurationRequest AWS API Documentation
     #
     class GetAutomatedDiscoveryConfigurationRequest < Aws::EmptyStructure; end
@@ -3067,13 +2571,6 @@ module Aws::Macie2
 
     # Specifies the account that owns the S3 buckets to retrieve aggregated
     # statistical data for.
-    #
-    # @note When making an API call, you may pass GetBucketStatisticsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "__string",
-    #       }
     #
     # @!attribute [rw] account_id
     #   @return [String]
@@ -3190,8 +2687,6 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetClassificationExportConfigurationRequest AWS API Documentation
     #
     class GetClassificationExportConfigurationRequest < Aws::EmptyStructure; end
@@ -3213,13 +2708,6 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetClassificationScopeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   @return [String]
     #
@@ -3258,13 +2746,6 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetCustomDataIdentifierRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   @return [String]
     #
@@ -3354,31 +2835,6 @@ module Aws::Macie2
     # the results of a query that retrieves aggregated statistical data
     # about findings.
     #
-    # @note When making an API call, you may pass GetFindingStatisticsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         finding_criteria: {
-    #           criterion: {
-    #             "__string" => {
-    #               eq: ["__string"],
-    #               eq_exact_match: ["__string"],
-    #               gt: 1,
-    #               gte: 1,
-    #               lt: 1,
-    #               lte: 1,
-    #               neq: ["__string"],
-    #             },
-    #           },
-    #         },
-    #         group_by: "resourcesAffected.s3Bucket.name", # required, accepts resourcesAffected.s3Bucket.name, type, classificationDetails.jobId, severity.description
-    #         size: 1,
-    #         sort_criteria: {
-    #           attribute_name: "groupKey", # accepts groupKey, count
-    #           order_by: "ASC", # accepts ASC, DESC
-    #         },
-    #       }
-    #
     # @!attribute [rw] finding_criteria
     #   Specifies, as a map, one or more property-based conditions that
     #   filter the results of a query for findings.
@@ -3420,13 +2876,6 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetFindingsFilterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   @return [String]
     #
@@ -3487,8 +2936,6 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetFindingsPublicationConfigurationRequest AWS API Documentation
     #
     class GetFindingsPublicationConfigurationRequest < Aws::EmptyStructure; end
@@ -3516,17 +2963,6 @@ module Aws::Macie2
     end
 
     # Specifies one or more findings to retrieve.
-    #
-    # @note When making an API call, you may pass GetFindingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         finding_ids: ["__string"], # required
-    #         sort_criteria: {
-    #           attribute_name: "__string",
-    #           order_by: "ASC", # accepts ASC, DESC
-    #         },
-    #       }
     #
     # @!attribute [rw] finding_ids
     #   @return [Array<String>]
@@ -3558,8 +2994,6 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetInvitationsCountRequest AWS API Documentation
     #
     class GetInvitationsCountRequest < Aws::EmptyStructure; end
@@ -3579,8 +3013,6 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetMacieSessionRequest AWS API Documentation
     #
     class GetMacieSessionRequest < Aws::EmptyStructure; end
@@ -3625,8 +3057,6 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetMasterAccountRequest AWS API Documentation
     #
     class GetMasterAccountRequest < Aws::EmptyStructure; end
@@ -3648,13 +3078,6 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetMemberRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   @return [String]
     #
@@ -3716,13 +3139,6 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetResourceProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   @return [String]
     #
@@ -3769,8 +3185,6 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetRevealConfigurationRequest AWS API Documentation
     #
     class GetRevealConfigurationRequest < Aws::EmptyStructure; end
@@ -3796,13 +3210,6 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSensitiveDataOccurrencesAvailabilityRequest
-    #   data as a hash:
-    #
-    #       {
-    #         finding_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] finding_id
     #   @return [String]
     #
@@ -3835,13 +3242,6 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSensitiveDataOccurrencesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         finding_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] finding_id
     #   @return [String]
     #
@@ -3879,13 +3279,6 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSensitivityInspectionTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   @return [String]
     #
@@ -3954,26 +3347,6 @@ module Aws::Macie2
     # of a query for quotas and aggregated usage data for one or more Amazon
     # Macie accounts.
     #
-    # @note When making an API call, you may pass GetUsageStatisticsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter_by: [
-    #           {
-    #             comparator: "GT", # accepts GT, GTE, LT, LTE, EQ, NE, CONTAINS
-    #             key: "accountId", # accepts accountId, serviceLimit, freeTrialStartDate, total
-    #             values: ["__string"],
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "__string",
-    #         sort_by: {
-    #           key: "accountId", # accepts accountId, total, serviceLimitValue, freeTrialStartDate
-    #           order_by: "ASC", # accepts ASC, DESC
-    #         },
-    #         time_range: "MONTH_TO_DATE", # accepts MONTH_TO_DATE, PAST_30_DAYS
-    #       }
-    #
     # @!attribute [rw] filter_by
     #   @return [Array<Types::UsageStatisticsFilter>]
     #
@@ -4029,13 +3402,6 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetUsageTotalsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         time_range: "__string",
-    #       }
-    #
     # @!attribute [rw] time_range
     #   @return [String]
     #
@@ -4293,20 +3659,6 @@ module Aws::Macie2
 
     # Specifies the recurrence pattern for running a classification job.
     #
-    # @note When making an API call, you may pass JobScheduleFrequency
-    #   data as a hash:
-    #
-    #       {
-    #         daily_schedule: {
-    #         },
-    #         monthly_schedule: {
-    #           day_of_month: 1,
-    #         },
-    #         weekly_schedule: {
-    #           day_of_week: "SUNDAY", # accepts SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
-    #         },
-    #       }
-    #
     # @!attribute [rw] daily_schedule
     #   Specifies that a classification job runs once a day, every day. This
     #   is an empty object.
@@ -4337,28 +3689,6 @@ module Aws::Macie2
     # JobScopeTerm object can contain only one simpleScopeTerm object or one
     # tagScopeTerm object.
     #
-    # @note When making an API call, you may pass JobScopeTerm
-    #   data as a hash:
-    #
-    #       {
-    #         simple_scope_term: {
-    #           comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #           key: "OBJECT_EXTENSION", # accepts OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, OBJECT_KEY
-    #           values: ["__string"],
-    #         },
-    #         tag_scope_term: {
-    #           comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #           key: "__string",
-    #           tag_values: [
-    #             {
-    #               key: "__string",
-    #               value: "__string",
-    #             },
-    #           ],
-    #           target: "S3_OBJECT", # accepts S3_OBJECT
-    #         },
-    #       }
-    #
     # @!attribute [rw] simple_scope_term
     #   Specifies a property-based condition that determines whether an S3
     #   object is included or excluded from a classification job.
@@ -4381,32 +3711,6 @@ module Aws::Macie2
     # Specifies one or more property- and tag-based conditions that define
     # criteria for including or excluding S3 objects from a classification
     # job.
-    #
-    # @note When making an API call, you may pass JobScopingBlock
-    #   data as a hash:
-    #
-    #       {
-    #         and: [
-    #           {
-    #             simple_scope_term: {
-    #               comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #               key: "OBJECT_EXTENSION", # accepts OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, OBJECT_KEY
-    #               values: ["__string"],
-    #             },
-    #             tag_scope_term: {
-    #               comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #               key: "__string",
-    #               tag_values: [
-    #                 {
-    #                   key: "__string",
-    #                   value: "__string",
-    #                 },
-    #               ],
-    #               target: "S3_OBJECT", # accepts S3_OBJECT
-    #             },
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] and
     #   @return [Array<Types::JobScopeTerm>]
@@ -4528,14 +3832,6 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAllowListsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [Integer]
     #
@@ -4570,34 +3866,6 @@ module Aws::Macie2
 
     # Specifies criteria for filtering, sorting, and paginating the results
     # of a request for information about classification jobs.
-    #
-    # @note When making an API call, you may pass ListClassificationJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter_criteria: {
-    #           excludes: [
-    #             {
-    #               comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #               key: "jobType", # accepts jobType, jobStatus, createdAt, name
-    #               values: ["__string"],
-    #             },
-    #           ],
-    #           includes: [
-    #             {
-    #               comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #               key: "jobType", # accepts jobType, jobStatus, createdAt, name
-    #               values: ["__string"],
-    #             },
-    #           ],
-    #         },
-    #         max_results: 1,
-    #         next_token: "__string",
-    #         sort_criteria: {
-    #           attribute_name: "createdAt", # accepts createdAt, jobStatus, name, jobType
-    #           order_by: "ASC", # accepts ASC, DESC
-    #         },
-    #       }
     #
     # @!attribute [rw] filter_criteria
     #   Specifies criteria for filtering the results of a request for
@@ -4644,14 +3912,6 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListClassificationScopesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "__string",
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] name
     #   @return [String]
     #
@@ -4691,14 +3951,6 @@ module Aws::Macie2
     # Specifies criteria for paginating the results of a request for
     # information about custom data identifiers.
     #
-    # @note When making an API call, you may pass ListCustomDataIdentifiersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [Integer]
     #
@@ -4732,14 +3984,6 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFindingsFiltersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [Integer]
     #
@@ -4774,31 +4018,6 @@ module Aws::Macie2
 
     # Specifies criteria for filtering, sorting, and paginating the results
     # of a request for information about findings.
-    #
-    # @note When making an API call, you may pass ListFindingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         finding_criteria: {
-    #           criterion: {
-    #             "__string" => {
-    #               eq: ["__string"],
-    #               eq_exact_match: ["__string"],
-    #               gt: 1,
-    #               gte: 1,
-    #               lt: 1,
-    #               lte: 1,
-    #               neq: ["__string"],
-    #             },
-    #           },
-    #         },
-    #         max_results: 1,
-    #         next_token: "__string",
-    #         sort_criteria: {
-    #           attribute_name: "__string",
-    #           order_by: "ASC", # accepts ASC, DESC
-    #         },
-    #       }
     #
     # @!attribute [rw] finding_criteria
     #   Specifies, as a map, one or more property-based conditions that
@@ -4845,14 +4064,6 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListInvitationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [Integer]
     #
@@ -4889,26 +4100,6 @@ module Aws::Macie2
     # Specifies criteria for filtering the results of a request for
     # information about classification jobs.
     #
-    # @note When making an API call, you may pass ListJobsFilterCriteria
-    #   data as a hash:
-    #
-    #       {
-    #         excludes: [
-    #           {
-    #             comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #             key: "jobType", # accepts jobType, jobStatus, createdAt, name
-    #             values: ["__string"],
-    #           },
-    #         ],
-    #         includes: [
-    #           {
-    #             comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #             key: "jobType", # accepts jobType, jobStatus, createdAt, name
-    #             values: ["__string"],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] excludes
     #   @return [Array<Types::ListJobsFilterTerm>]
     #
@@ -4927,15 +4118,6 @@ module Aws::Macie2
     # Specifies a condition that filters the results of a request for
     # information about classification jobs. Each condition consists of a
     # property, an operator, and one or more values.
-    #
-    # @note When making an API call, you may pass ListJobsFilterTerm
-    #   data as a hash:
-    #
-    #       {
-    #         comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #         key: "jobType", # accepts jobType, jobStatus, createdAt, name
-    #         values: ["__string"],
-    #       }
     #
     # @!attribute [rw] comparator
     #   The operator to use in a condition. Depending on the type of
@@ -4962,14 +4144,6 @@ module Aws::Macie2
     # Specifies criteria for sorting the results of a request for
     # information about classification jobs.
     #
-    # @note When making an API call, you may pass ListJobsSortCriteria
-    #   data as a hash:
-    #
-    #       {
-    #         attribute_name: "createdAt", # accepts createdAt, jobStatus, name, jobType
-    #         order_by: "ASC", # accepts ASC, DESC
-    #       }
-    #
     # @!attribute [rw] attribute_name
     #   The property to sort the results by. Valid values are:
     #   @return [String]
@@ -4988,13 +4162,6 @@ module Aws::Macie2
 
     # Specifies criteria for paginating the results of a request for
     # information about managed data identifiers.
-    #
-    # @note When making an API call, you may pass ListManagedDataIdentifiersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "__string",
-    #       }
     #
     # @!attribute [rw] next_token
     #   @return [String]
@@ -5025,15 +4192,6 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListMembersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #         only_associated: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [Integer]
     #
@@ -5071,14 +4229,6 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListOrganizationAdminAccountsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [Integer]
     #
@@ -5112,14 +4262,6 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListResourceProfileArtifactsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "__string",
-    #         resource_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] next_token
     #   @return [String]
     #
@@ -5156,15 +4298,6 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListResourceProfileDetectionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #         resource_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [Integer]
     #
@@ -5205,14 +4338,6 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSensitivityInspectionTemplatesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [Integer]
     #
@@ -5248,13 +4373,6 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   @return [String]
     #
@@ -5484,13 +4602,6 @@ module Aws::Macie2
     # Specifies a monthly recurrence pattern for running a classification
     # job.
     #
-    # @note When making an API call, you may pass MonthlySchedule
-    #   data as a hash:
-    #
-    #       {
-    #         day_of_month: 1,
-    #       }
-    #
     # @!attribute [rw] day_of_month
     #   @return [Integer]
     #
@@ -5651,19 +4762,6 @@ module Aws::Macie2
     # Specifies where to store data classification results, and the
     # encryption settings to use when storing results in that location.
     #
-    # @note When making an API call, you may pass PutClassificationExportConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration: { # required
-    #           s3_destination: {
-    #             bucket_name: "__string", # required
-    #             key_prefix: "__string",
-    #             kms_key_arn: "__string", # required
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] configuration
     #   Specifies where to store data classification results, and the
     #   encryption settings to use when storing results in that location.
@@ -5697,17 +4795,6 @@ module Aws::Macie2
 
     # Specifies configuration settings for publishing findings to Security
     # Hub automatically.
-    #
-    # @note When making an API call, you may pass PutFindingsPublicationConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "__string",
-    #         security_hub_configuration: {
-    #           publish_classification_findings: false, # required
-    #           publish_policy_findings: false, # required
-    #         },
-    #       }
     #
     # @!attribute [rw] client_token
     #   **A suitable default value is auto-generated.** You should normally
@@ -5917,14 +5004,6 @@ module Aws::Macie2
     # Management Service (KMS) key. Otherwise, an error occurs. Macie uses
     # the specified key to encrypt the sensitive data that you retrieve.
     #
-    # @note When making an API call, you may pass RevealConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         kms_key_id: "__stringMin1Max2048",
-    #         status: "ENABLED", # required, accepts ENABLED, DISABLED
-    #       }
-    #
     # @!attribute [rw] kms_key_id
     #   @return [String]
     #
@@ -5996,52 +5075,6 @@ module Aws::Macie2
     # including or excluding S3 buckets from a classification job. Exclude
     # conditions take precedence over include conditions.
     #
-    # @note When making an API call, you may pass S3BucketCriteriaForJob
-    #   data as a hash:
-    #
-    #       {
-    #         excludes: {
-    #           and: [
-    #             {
-    #               simple_criterion: {
-    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #                 key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
-    #                 values: ["__string"],
-    #               },
-    #               tag_criterion: {
-    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #                 tag_values: [
-    #                   {
-    #                     key: "__string",
-    #                     value: "__string",
-    #                   },
-    #                 ],
-    #               },
-    #             },
-    #           ],
-    #         },
-    #         includes: {
-    #           and: [
-    #             {
-    #               simple_criterion: {
-    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #                 key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
-    #                 values: ["__string"],
-    #               },
-    #               tag_criterion: {
-    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #                 tag_values: [
-    #                   {
-    #                     key: "__string",
-    #                     value: "__string",
-    #                   },
-    #                 ],
-    #               },
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] excludes
     #   Specifies one or more property- and tag-based conditions that define
     #   criteria for including or excluding S3 buckets from a classification
@@ -6066,14 +5099,6 @@ module Aws::Macie2
     # Specifies an Amazon Web Services account that owns S3 buckets for a
     # classification job to analyze, and one or more specific buckets to
     # analyze for that account.
-    #
-    # @note When making an API call, you may pass S3BucketDefinitionForJob
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "__string", # required
-    #         buckets: ["__string"], # required
-    #       }
     #
     # @!attribute [rw] account_id
     #   @return [String]
@@ -6141,14 +5166,6 @@ module Aws::Macie2
     # Specifies S3 buckets to add or remove from the exclusion list defined
     # by the classification scope for an Amazon Macie account.
     #
-    # @note When making an API call, you may pass S3ClassificationScopeExclusionUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_names: ["S3BucketName"], # required
-    #         operation: "ADD", # required, accepts ADD, REPLACE, REMOVE
-    #       }
-    #
     # @!attribute [rw] bucket_names
     #   @return [Array<String>]
     #
@@ -6170,16 +5187,6 @@ module Aws::Macie2
     # Specifies changes to the list of S3 buckets that are excluded from
     # automated sensitive data discovery for an Amazon Macie account.
     #
-    # @note When making an API call, you may pass S3ClassificationScopeUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         excludes: { # required
-    #           bucket_names: ["S3BucketName"], # required
-    #           operation: "ADD", # required, accepts ADD, REPLACE, REMOVE
-    #         },
-    #       }
-    #
     # @!attribute [rw] excludes
     #   Specifies S3 buckets to add or remove from the exclusion list
     #   defined by the classification scope for an Amazon Macie account.
@@ -6195,15 +5202,6 @@ module Aws::Macie2
 
     # Specifies an S3 bucket to store data classification results in, and
     # the encryption settings to use when storing results in that bucket.
-    #
-    # @note When making an API call, you may pass S3Destination
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_name: "__string", # required
-    #         key_prefix: "__string",
-    #         kms_key_arn: "__string", # required
-    #       }
     #
     # @!attribute [rw] bucket_name
     #   @return [String]
@@ -6231,106 +5229,6 @@ module Aws::Macie2
     # buckets each time the job runs. If it's dynamic, the job analyzes
     # objects in any buckets that match the specified criteria each time the
     # job starts to run.
-    #
-    # @note When making an API call, you may pass S3JobDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_criteria: {
-    #           excludes: {
-    #             and: [
-    #               {
-    #                 simple_criterion: {
-    #                   comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #                   key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
-    #                   values: ["__string"],
-    #                 },
-    #                 tag_criterion: {
-    #                   comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #                   tag_values: [
-    #                     {
-    #                       key: "__string",
-    #                       value: "__string",
-    #                     },
-    #                   ],
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #           includes: {
-    #             and: [
-    #               {
-    #                 simple_criterion: {
-    #                   comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #                   key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
-    #                   values: ["__string"],
-    #                 },
-    #                 tag_criterion: {
-    #                   comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #                   tag_values: [
-    #                     {
-    #                       key: "__string",
-    #                       value: "__string",
-    #                     },
-    #                   ],
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #         },
-    #         bucket_definitions: [
-    #           {
-    #             account_id: "__string", # required
-    #             buckets: ["__string"], # required
-    #           },
-    #         ],
-    #         scoping: {
-    #           excludes: {
-    #             and: [
-    #               {
-    #                 simple_scope_term: {
-    #                   comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #                   key: "OBJECT_EXTENSION", # accepts OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, OBJECT_KEY
-    #                   values: ["__string"],
-    #                 },
-    #                 tag_scope_term: {
-    #                   comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #                   key: "__string",
-    #                   tag_values: [
-    #                     {
-    #                       key: "__string",
-    #                       value: "__string",
-    #                     },
-    #                   ],
-    #                   target: "S3_OBJECT", # accepts S3_OBJECT
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #           includes: {
-    #             and: [
-    #               {
-    #                 simple_scope_term: {
-    #                   comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #                   key: "OBJECT_EXTENSION", # accepts OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, OBJECT_KEY
-    #                   values: ["__string"],
-    #                 },
-    #                 tag_scope_term: {
-    #                   comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #                   key: "__string",
-    #                   tag_values: [
-    #                     {
-    #                       key: "__string",
-    #                       value: "__string",
-    #                     },
-    #                   ],
-    #                   target: "S3_OBJECT", # accepts S3_OBJECT
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] bucket_criteria
     #   Specifies property- and tag-based conditions that define criteria
@@ -6423,14 +5321,6 @@ module Aws::Macie2
     # Provides information about an S3 object that lists specific text to
     # ignore.
     #
-    # @note When making an API call, you may pass S3WordsList
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_name: "__stringMin3Max255PatternAZaZ093255", # required
-    #         object_key: "__stringMin1Max1024PatternSS", # required
-    #       }
-    #
     # @!attribute [rw] bucket_name
     #   @return [String]
     #
@@ -6449,56 +5339,6 @@ module Aws::Macie2
     # Specifies one or more property- and tag-based conditions that define
     # criteria for including or excluding S3 objects from a classification
     # job. Exclude conditions take precedence over include conditions.
-    #
-    # @note When making an API call, you may pass Scoping
-    #   data as a hash:
-    #
-    #       {
-    #         excludes: {
-    #           and: [
-    #             {
-    #               simple_scope_term: {
-    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #                 key: "OBJECT_EXTENSION", # accepts OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, OBJECT_KEY
-    #                 values: ["__string"],
-    #               },
-    #               tag_scope_term: {
-    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #                 key: "__string",
-    #                 tag_values: [
-    #                   {
-    #                     key: "__string",
-    #                     value: "__string",
-    #                   },
-    #                 ],
-    #                 target: "S3_OBJECT", # accepts S3_OBJECT
-    #               },
-    #             },
-    #           ],
-    #         },
-    #         includes: {
-    #           and: [
-    #             {
-    #               simple_scope_term: {
-    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #                 key: "OBJECT_EXTENSION", # accepts OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, OBJECT_KEY
-    #                 values: ["__string"],
-    #               },
-    #               tag_scope_term: {
-    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #                 key: "__string",
-    #                 tag_values: [
-    #                   {
-    #                     key: "__string",
-    #                     value: "__string",
-    #                   },
-    #                 ],
-    #                 target: "S3_OBJECT", # accepts S3_OBJECT
-    #               },
-    #             },
-    #           ],
-    #         },
-    #       }
     #
     # @!attribute [rw] excludes
     #   Specifies one or more property- and tag-based conditions that define
@@ -6525,52 +5365,6 @@ module Aws::Macie2
     # criteria for including or excluding S3 buckets from the query results.
     # Exclude conditions take precedence over include conditions.
     #
-    # @note When making an API call, you may pass SearchResourcesBucketCriteria
-    #   data as a hash:
-    #
-    #       {
-    #         excludes: {
-    #           and: [
-    #             {
-    #               simple_criterion: {
-    #                 comparator: "EQ", # accepts EQ, NE
-    #                 key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
-    #                 values: ["__string"],
-    #               },
-    #               tag_criterion: {
-    #                 comparator: "EQ", # accepts EQ, NE
-    #                 tag_values: [
-    #                   {
-    #                     key: "__string",
-    #                     value: "__string",
-    #                   },
-    #                 ],
-    #               },
-    #             },
-    #           ],
-    #         },
-    #         includes: {
-    #           and: [
-    #             {
-    #               simple_criterion: {
-    #                 comparator: "EQ", # accepts EQ, NE
-    #                 key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
-    #                 values: ["__string"],
-    #               },
-    #               tag_criterion: {
-    #                 comparator: "EQ", # accepts EQ, NE
-    #                 tag_values: [
-    #                   {
-    #                     key: "__string",
-    #                     value: "__string",
-    #                   },
-    #                 ],
-    #               },
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] excludes
     #   Specifies property- and tag-based conditions that define filter
     #   criteria for including or excluding Amazon Web Services resources
@@ -6594,26 +5388,6 @@ module Aws::Macie2
 
     # Specifies a property- or tag-based filter condition for including or
     # excluding Amazon Web Services resources from the query results.
-    #
-    # @note When making an API call, you may pass SearchResourcesCriteria
-    #   data as a hash:
-    #
-    #       {
-    #         simple_criterion: {
-    #           comparator: "EQ", # accepts EQ, NE
-    #           key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
-    #           values: ["__string"],
-    #         },
-    #         tag_criterion: {
-    #           comparator: "EQ", # accepts EQ, NE
-    #           tag_values: [
-    #             {
-    #               key: "__string",
-    #               value: "__string",
-    #             },
-    #           ],
-    #         },
-    #       }
     #
     # @!attribute [rw] simple_criterion
     #   Specifies a property-based filter condition that determines which
@@ -6640,30 +5414,6 @@ module Aws::Macie2
     # criteria for including or excluding Amazon Web Services resources from
     # the query results.
     #
-    # @note When making an API call, you may pass SearchResourcesCriteriaBlock
-    #   data as a hash:
-    #
-    #       {
-    #         and: [
-    #           {
-    #             simple_criterion: {
-    #               comparator: "EQ", # accepts EQ, NE
-    #               key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
-    #               values: ["__string"],
-    #             },
-    #             tag_criterion: {
-    #               comparator: "EQ", # accepts EQ, NE
-    #               tag_values: [
-    #                 {
-    #                   key: "__string",
-    #                   value: "__string",
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] and
     #   @return [Array<Types::SearchResourcesCriteria>]
     #
@@ -6678,60 +5428,6 @@ module Aws::Macie2
     # Specifies criteria for filtering, sorting, and paginating the results
     # of a query for statistical data and other information about Amazon Web
     # Services resources that Amazon Macie monitors and analyzes.
-    #
-    # @note When making an API call, you may pass SearchResourcesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_criteria: {
-    #           excludes: {
-    #             and: [
-    #               {
-    #                 simple_criterion: {
-    #                   comparator: "EQ", # accepts EQ, NE
-    #                   key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
-    #                   values: ["__string"],
-    #                 },
-    #                 tag_criterion: {
-    #                   comparator: "EQ", # accepts EQ, NE
-    #                   tag_values: [
-    #                     {
-    #                       key: "__string",
-    #                       value: "__string",
-    #                     },
-    #                   ],
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #           includes: {
-    #             and: [
-    #               {
-    #                 simple_criterion: {
-    #                   comparator: "EQ", # accepts EQ, NE
-    #                   key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
-    #                   values: ["__string"],
-    #                 },
-    #                 tag_criterion: {
-    #                   comparator: "EQ", # accepts EQ, NE
-    #                   tag_values: [
-    #                     {
-    #                       key: "__string",
-    #                       value: "__string",
-    #                     },
-    #                   ],
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #         },
-    #         max_results: 1,
-    #         next_token: "__string",
-    #         sort_criteria: {
-    #           attribute_name: "ACCOUNT_ID", # accepts ACCOUNT_ID, RESOURCE_NAME, S3_CLASSIFIABLE_OBJECT_COUNT, S3_CLASSIFIABLE_SIZE_IN_BYTES
-    #           order_by: "ASC", # accepts ASC, DESC
-    #         },
-    #       }
     #
     # @!attribute [rw] bucket_criteria
     #   Specifies property- and tag-based conditions that define filter
@@ -6785,15 +5481,6 @@ module Aws::Macie2
     # Amazon Web Services resources are included or excluded from the query
     # results.
     #
-    # @note When making an API call, you may pass SearchResourcesSimpleCriterion
-    #   data as a hash:
-    #
-    #       {
-    #         comparator: "EQ", # accepts EQ, NE
-    #         key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
-    #         values: ["__string"],
-    #       }
-    #
     # @!attribute [rw] comparator
     #   The operator to use in a condition that filters the results of a
     #   query. Valid values are:
@@ -6821,14 +5508,6 @@ module Aws::Macie2
     # about Amazon Web Services resources that Amazon Macie monitors and
     # analyzes.
     #
-    # @note When making an API call, you may pass SearchResourcesSortCriteria
-    #   data as a hash:
-    #
-    #       {
-    #         attribute_name: "ACCOUNT_ID", # accepts ACCOUNT_ID, RESOURCE_NAME, S3_CLASSIFIABLE_OBJECT_COUNT, S3_CLASSIFIABLE_SIZE_IN_BYTES
-    #         order_by: "ASC", # accepts ASC, DESC
-    #       }
-    #
     # @!attribute [rw] attribute_name
     #   The property to sort the query results by. Valid values are:
     #   @return [String]
@@ -6848,19 +5527,6 @@ module Aws::Macie2
     # Specifies a tag-based filter condition that determines which Amazon
     # Web Services resources are included or excluded from the query
     # results.
-    #
-    # @note When making an API call, you may pass SearchResourcesTagCriterion
-    #   data as a hash:
-    #
-    #       {
-    #         comparator: "EQ", # accepts EQ, NE
-    #         tag_values: [
-    #           {
-    #             key: "__string",
-    #             value: "__string",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] comparator
     #   The operator to use in a condition that filters the results of a
@@ -6883,14 +5549,6 @@ module Aws::Macie2
     # to use in a tag-based filter condition for a query. Tag keys and
     # values are case sensitive. Also, Amazon Macie doesn't support use of
     # partial values or wildcard characters in tag-based filter conditions.
-    #
-    # @note When making an API call, you may pass SearchResourcesTagCriterionPair
-    #   data as a hash:
-    #
-    #       {
-    #         key: "__string",
-    #         value: "__string",
-    #       }
     #
     # @!attribute [rw] key
     #   @return [String]
@@ -6915,14 +5573,6 @@ module Aws::Macie2
     #
     #
     # [1]: https://docs.aws.amazon.com/macie/latest/user/securityhub-integration.html
-    #
-    # @note When making an API call, you may pass SecurityHubConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         publish_classification_findings: false, # required
-    #         publish_policy_findings: false, # required
-    #       }
     #
     # @!attribute [rw] publish_classification_findings
     #   @return [Boolean]
@@ -7009,13 +5659,6 @@ module Aws::Macie2
     #
     # [1]: https://docs.aws.amazon.com/macie/latest/user/managed-data-identifiers.html
     #
-    # @note When making an API call, you may pass SensitivityInspectionTemplateExcludes
-    #   data as a hash:
-    #
-    #       {
-    #         managed_data_identifier_ids: ["__string"],
-    #       }
-    #
     # @!attribute [rw] managed_data_identifier_ids
     #   @return [Array<String>]
     #
@@ -7038,15 +5681,6 @@ module Aws::Macie2
     #
     #
     # [1]: https://docs.aws.amazon.com/macie/latest/user/managed-data-identifiers.html
-    #
-    # @note When making an API call, you may pass SensitivityInspectionTemplateIncludes
-    #   data as a hash:
-    #
-    #       {
-    #         allow_list_ids: ["__string"],
-    #         custom_data_identifier_ids: ["__string"],
-    #         managed_data_identifier_ids: ["__string"],
-    #       }
     #
     # @!attribute [rw] allow_list_ids
     #   @return [Array<String>]
@@ -7236,14 +5870,6 @@ module Aws::Macie2
     # the findings, based on the number of occurrences of text that matches
     # the custom data identifier's detection criteria.
     #
-    # @note When making an API call, you may pass SeverityLevel
-    #   data as a hash:
-    #
-    #       {
-    #         occurrences_threshold: 1, # required
-    #         severity: "LOW", # required, accepts LOW, MEDIUM, HIGH
-    #       }
-    #
     # @!attribute [rw] occurrences_threshold
     #   @return [Integer]
     #
@@ -7263,15 +5889,6 @@ module Aws::Macie2
 
     # Specifies a property-based condition that determines whether an S3
     # bucket is included or excluded from a classification job.
-    #
-    # @note When making an API call, you may pass SimpleCriterionForJob
-    #   data as a hash:
-    #
-    #       {
-    #         comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #         key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
-    #         values: ["__string"],
-    #       }
     #
     # @!attribute [rw] comparator
     #   The operator to use in a condition. Depending on the type of
@@ -7300,15 +5917,6 @@ module Aws::Macie2
     # Specifies a property-based condition that determines whether an S3
     # object is included or excluded from a classification job.
     #
-    # @note When making an API call, you may pass SimpleScopeTerm
-    #   data as a hash:
-    #
-    #       {
-    #         comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #         key: "OBJECT_EXTENSION", # accepts OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, OBJECT_KEY
-    #         values: ["__string"],
-    #       }
-    #
     # @!attribute [rw] comparator
     #   The operator to use in a condition. Depending on the type of
     #   condition, possible values are:
@@ -7334,14 +5942,6 @@ module Aws::Macie2
     end
 
     # Specifies criteria for sorting the results of a request for findings.
-    #
-    # @note When making an API call, you may pass SortCriteria
-    #   data as a hash:
-    #
-    #       {
-    #         attribute_name: "__string",
-    #         order_by: "ASC", # accepts ASC, DESC
-    #       }
     #
     # @!attribute [rw] attribute_name
     #   @return [String]
@@ -7379,14 +5979,6 @@ module Aws::Macie2
     # detected a type of sensitive data to start excluding or including in
     # an S3 bucket's sensitivity score.
     #
-    # @note When making an API call, you may pass SuppressDataIdentifier
-    #   data as a hash:
-    #
-    #       {
-    #         id: "__string",
-    #         type: "CUSTOM", # accepts CUSTOM, MANAGED
-    #       }
-    #
     # @!attribute [rw] id
     #   @return [String]
     #
@@ -7406,19 +5998,6 @@ module Aws::Macie2
 
     # Specifies a tag-based condition that determines whether an S3 bucket
     # is included or excluded from a classification job.
-    #
-    # @note When making an API call, you may pass TagCriterionForJob
-    #   data as a hash:
-    #
-    #       {
-    #         comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #         tag_values: [
-    #           {
-    #             key: "__string",
-    #             value: "__string",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] comparator
     #   The operator to use in a condition. Depending on the type of
@@ -7443,14 +6022,6 @@ module Aws::Macie2
     # are case sensitive. Also, Amazon Macie doesn't support use of partial
     # values or wildcard characters in tag-based conditions.
     #
-    # @note When making an API call, you may pass TagCriterionPairForJob
-    #   data as a hash:
-    #
-    #       {
-    #         key: "__string",
-    #         value: "__string",
-    #       }
-    #
     # @!attribute [rw] key
     #   @return [String]
     #
@@ -7468,16 +6039,6 @@ module Aws::Macie2
 
     # Specifies the tags (keys and values) to associate with an Amazon Macie
     # resource.
-    #
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "__string", # required
-    #         tags: { # required
-    #           "__string" => "__string",
-    #         },
-    #       }
     #
     # @!attribute [rw] resource_arn
     #   @return [String]
@@ -7505,21 +6066,6 @@ module Aws::Macie2
 
     # Specifies a tag-based condition that determines whether an S3 object
     # is included or excluded from a classification job.
-    #
-    # @note When making an API call, you may pass TagScopeTerm
-    #   data as a hash:
-    #
-    #       {
-    #         comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #         key: "__string",
-    #         tag_values: [
-    #           {
-    #             key: "__string",
-    #             value: "__string",
-    #           },
-    #         ],
-    #         target: "S3_OBJECT", # accepts S3_OBJECT
-    #       }
     #
     # @!attribute [rw] comparator
     #   The operator to use in a condition. Depending on the type of
@@ -7554,14 +6100,6 @@ module Aws::Macie2
     # Also, Amazon Macie doesn't support use of partial values or wildcard
     # characters in tag-based conditions.
     #
-    # @note When making an API call, you may pass TagValuePair
-    #   data as a hash:
-    #
-    #       {
-    #         key: "__string",
-    #         value: "__string",
-    #       }
-    #
     # @!attribute [rw] key
     #   @return [String]
     #
@@ -7578,17 +6116,6 @@ module Aws::Macie2
     end
 
     # Specifies the detection criteria of a custom data identifier to test.
-    #
-    # @note When making an API call, you may pass TestCustomDataIdentifierRequest
-    #   data as a hash:
-    #
-    #       {
-    #         ignore_words: ["__string"],
-    #         keywords: ["__string"],
-    #         maximum_match_distance: 1,
-    #         regex: "__string", # required
-    #         sample_text: "__string", # required
-    #       }
     #
     # @!attribute [rw] ignore_words
     #   @return [Array<String>]
@@ -7681,14 +6208,6 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "__string", # required
-    #         tag_keys: ["__string"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   @return [String]
     #
@@ -7716,22 +6235,6 @@ module Aws::Macie2
     # request. If the criteria specify a regular expression that Macie
     # can't compile or an S3 object that Macie can't retrieve or parse, an
     # error occurs.
-    #
-    # @note When making an API call, you may pass UpdateAllowListRequest
-    #   data as a hash:
-    #
-    #       {
-    #         criteria: { # required
-    #           regex: "__stringMin1Max512PatternSS",
-    #           s3_words_list: {
-    #             bucket_name: "__stringMin3Max255PatternAZaZ093255", # required
-    #             object_key: "__stringMin1Max1024PatternSS", # required
-    #           },
-    #         },
-    #         description: "__stringMin1Max512PatternSS",
-    #         id: "__string", # required
-    #         name: "__stringMin1Max128Pattern", # required
-    #       }
     #
     # @!attribute [rw] criteria
     #   Specifies the criteria for an allow list. The criteria must specify
@@ -7780,13 +6283,6 @@ module Aws::Macie2
     # Enables or disables automated sensitive data discovery for an Amazon
     # Macie account.
     #
-    # @note When making an API call, you may pass UpdateAutomatedDiscoveryConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         status: "ENABLED", # required, accepts ENABLED, DISABLED
-    #       }
-    #
     # @!attribute [rw] status
     #   The status of the automated sensitive data discovery configuration
     #   for an Amazon Macie account. Valid values are:
@@ -7811,14 +6307,6 @@ module Aws::Macie2
     #
     #
     # [1]: https://docs.aws.amazon.com/macie/latest/user/discovery-jobs-manage.html
-    #
-    # @note When making an API call, you may pass UpdateClassificationJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "__string", # required
-    #         job_status: "RUNNING", # required, accepts RUNNING, PAUSED, CANCELLED, COMPLETE, IDLE, USER_PAUSED
-    #       }
     #
     # @!attribute [rw] job_id
     #   @return [String]
@@ -7846,19 +6334,6 @@ module Aws::Macie2
     # automated sensitive data discovery must currently be enabled for the
     # account.
     #
-    # @note When making an API call, you may pass UpdateClassificationScopeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "__string", # required
-    #         s3: {
-    #           excludes: { # required
-    #             bucket_names: ["S3BucketName"], # required
-    #             operation: "ADD", # required, accepts ADD, REPLACE, REMOVE
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] id
     #   @return [String]
     #
@@ -7881,31 +6356,6 @@ module Aws::Macie2
     class UpdateClassificationScopeResponse < Aws::EmptyStructure; end
 
     # Specifies the criteria and other settings for a findings filter.
-    #
-    # @note When making an API call, you may pass UpdateFindingsFilterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         action: "ARCHIVE", # accepts ARCHIVE, NOOP
-    #         client_token: "__string",
-    #         description: "__string",
-    #         finding_criteria: {
-    #           criterion: {
-    #             "__string" => {
-    #               eq: ["__string"],
-    #               eq_exact_match: ["__string"],
-    #               gt: 1,
-    #               gte: 1,
-    #               lt: 1,
-    #               lte: 1,
-    #               neq: ["__string"],
-    #             },
-    #           },
-    #         },
-    #         id: "__string", # required
-    #         name: "__string",
-    #         position: 1,
-    #       }
     #
     # @!attribute [rw] action
     #   The action to perform on findings that match the filter criteria. To
@@ -7970,14 +6420,6 @@ module Aws::Macie2
     # Changes the status or configuration settings for an Amazon Macie
     # account.
     #
-    # @note When making an API call, you may pass UpdateMacieSessionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         finding_publishing_frequency: "FIFTEEN_MINUTES", # accepts FIFTEEN_MINUTES, ONE_HOUR, SIX_HOURS
-    #         status: "PAUSED", # accepts PAUSED, ENABLED
-    #       }
-    #
     # @!attribute [rw] finding_publishing_frequency
     #   The frequency with which Amazon Macie publishes updates to policy
     #   findings for an account. This includes publishing updates to
@@ -8009,14 +6451,6 @@ module Aws::Macie2
 
     # Suspends (pauses) or re-enables Amazon Macie for a member account.
     #
-    # @note When making an API call, you may pass UpdateMemberSessionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "__string", # required
-    #         status: "PAUSED", # required, accepts PAUSED, ENABLED
-    #       }
-    #
     # @!attribute [rw] id
     #   @return [String]
     #
@@ -8040,13 +6474,6 @@ module Aws::Macie2
     # Specifies whether to enable Amazon Macie automatically for accounts
     # that are added to an organization in Organizations.
     #
-    # @note When making an API call, you may pass UpdateOrganizationConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         auto_enable: false, # required
-    #       }
-    #
     # @!attribute [rw] auto_enable
     #   @return [Boolean]
     #
@@ -8068,19 +6495,6 @@ module Aws::Macie2
     # sensitive data in calculations of the bucket's sensitivity score. You
     # can update the settings only if automated sensitive data discovery is
     # currently enabled for your account.
-    #
-    # @note When making an API call, you may pass UpdateResourceProfileDetectionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "__string", # required
-    #         suppress_data_identifiers: [
-    #           {
-    #             id: "__string",
-    #             type: "CUSTOM", # accepts CUSTOM, MANAGED
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] resource_arn
     #   @return [String]
@@ -8105,14 +6519,6 @@ module Aws::Macie2
     # monitors and analyzes for your account. To update the score, automated
     # sensitive data discovery must currently be enabled for your account.
     #
-    # @note When making an API call, you may pass UpdateResourceProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "__string", # required
-    #         sensitivity_score_override: 1,
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   @return [String]
     #
@@ -8135,16 +6541,6 @@ module Aws::Macie2
     # Specifies the configuration settings for retrieving occurrences of
     # sensitive data reported by findings, and the status of the
     # configuration for an Amazon Macie account.
-    #
-    # @note When making an API call, you may pass UpdateRevealConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration: { # required
-    #           kms_key_id: "__stringMin1Max2048",
-    #           status: "ENABLED", # required, accepts ENABLED, DISABLED
-    #         },
-    #       }
     #
     # @!attribute [rw] configuration
     #   Specifies the configuration settings for retrieving occurrences of
@@ -8189,22 +6585,6 @@ module Aws::Macie2
     # performs automated sensitive data discovery for the account. To update
     # the settings, automated sensitive data discovery must currently be
     # enabled for the account.
-    #
-    # @note When making an API call, you may pass UpdateSensitivityInspectionTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "__string",
-    #         excludes: {
-    #           managed_data_identifier_ids: ["__string"],
-    #         },
-    #         id: "__string", # required
-    #         includes: {
-    #           allow_list_ids: ["__string"],
-    #           custom_data_identifier_ids: ["__string"],
-    #           managed_data_identifier_ids: ["__string"],
-    #         },
-    #       }
     #
     # @!attribute [rw] description
     #   @return [String]
@@ -8312,15 +6692,6 @@ module Aws::Macie2
     # Specifies a condition for filtering the results of a query for quota
     # and usage data for one or more Amazon Macie accounts.
     #
-    # @note When making an API call, you may pass UsageStatisticsFilter
-    #   data as a hash:
-    #
-    #       {
-    #         comparator: "GT", # accepts GT, GTE, LT, LTE, EQ, NE, CONTAINS
-    #         key: "accountId", # accepts accountId, serviceLimit, freeTrialStartDate, total
-    #         values: ["__string"],
-    #       }
-    #
     # @!attribute [rw] comparator
     #   The operator to use in a condition that filters the results of a
     #   query for Amazon Macie account quotas and usage data. Valid values
@@ -8347,14 +6718,6 @@ module Aws::Macie2
 
     # Specifies criteria for sorting the results of a query for Amazon Macie
     # account quotas and usage data.
-    #
-    # @note When making an API call, you may pass UsageStatisticsSortBy
-    #   data as a hash:
-    #
-    #       {
-    #         key: "accountId", # accepts accountId, total, serviceLimitValue, freeTrialStartDate
-    #         order_by: "ASC", # accepts ASC, DESC
-    #       }
     #
     # @!attribute [rw] key
     #   The field to use to sort the results of a query for Amazon Macie
@@ -8528,13 +6891,6 @@ module Aws::Macie2
 
     # Specifies a weekly recurrence pattern for running a classification
     # job.
-    #
-    # @note When making an API call, you may pass WeeklySchedule
-    #   data as a hash:
-    #
-    #       {
-    #         day_of_week: "SUNDAY", # accepts SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
-    #       }
     #
     # @!attribute [rw] day_of_week
     #   @return [String]

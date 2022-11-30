@@ -51,26 +51,6 @@ module Aws::Honeycode
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchCreateTableRowsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workbook_id: "ResourceId", # required
-    #         table_id: "ResourceId", # required
-    #         rows_to_create: [ # required
-    #           {
-    #             batch_item_id: "BatchItemId", # required
-    #             cells_to_create: { # required
-    #               "ResourceId" => {
-    #                 fact: "Fact",
-    #                 facts: ["Fact"],
-    #               },
-    #             },
-    #           },
-    #         ],
-    #         client_request_token: "ClientRequestToken",
-    #       }
-    #
     # @!attribute [rw] workbook_id
     #   The ID of the workbook where the new rows are being added.
     #
@@ -146,16 +126,6 @@ module Aws::Honeycode
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchDeleteTableRowsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workbook_id: "ResourceId", # required
-    #         table_id: "ResourceId", # required
-    #         row_ids: ["RowId"], # required
-    #         client_request_token: "ClientRequestToken",
-    #       }
-    #
     # @!attribute [rw] workbook_id
     #   The ID of the workbook where the rows are being deleted.
     #
@@ -222,26 +192,6 @@ module Aws::Honeycode
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchUpdateTableRowsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workbook_id: "ResourceId", # required
-    #         table_id: "ResourceId", # required
-    #         rows_to_update: [ # required
-    #           {
-    #             row_id: "RowId", # required
-    #             cells_to_update: { # required
-    #               "ResourceId" => {
-    #                 fact: "Fact",
-    #                 facts: ["Fact"],
-    #               },
-    #             },
-    #           },
-    #         ],
-    #         client_request_token: "ClientRequestToken",
-    #       }
-    #
     # @!attribute [rw] workbook_id
     #   The ID of the workbook where the rows are being updated.
     #
@@ -312,30 +262,6 @@ module Aws::Honeycode
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchUpsertTableRowsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workbook_id: "ResourceId", # required
-    #         table_id: "ResourceId", # required
-    #         rows_to_upsert: [ # required
-    #           {
-    #             batch_item_id: "BatchItemId", # required
-    #             filter: { # required
-    #               formula: "Formula", # required
-    #               context_row_id: "RowId",
-    #             },
-    #             cells_to_update: { # required
-    #               "ResourceId" => {
-    #                 fact: "Fact",
-    #                 facts: ["Fact"],
-    #               },
-    #             },
-    #           },
-    #         ],
-    #         client_request_token: "ClientRequestToken",
-    #       }
-    #
     # @!attribute [rw] workbook_id
     #   The ID of the workbook where the rows are being upserted.
     #
@@ -536,14 +462,6 @@ module Aws::Honeycode
     #
     #  </note>
     #
-    # @note When making an API call, you may pass CellInput
-    #   data as a hash:
-    #
-    #       {
-    #         fact: "Fact",
-    #         facts: ["Fact"],
-    #       }
-    #
     # @!attribute [rw] fact
     #   Fact represents the data that is entered into a cell. This data can
     #   be free text or a formula. Formulas need to start with the equals
@@ -586,19 +504,6 @@ module Aws::Honeycode
 
     # Data needed to create a single row in a table as part of the
     # BatchCreateTableRows request.
-    #
-    # @note When making an API call, you may pass CreateRowData
-    #   data as a hash:
-    #
-    #       {
-    #         batch_item_id: "BatchItemId", # required
-    #         cells_to_create: { # required
-    #           "ResourceId" => {
-    #             fact: "Fact",
-    #             facts: ["Fact"],
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] batch_item_id
     #   An external identifier that represents the single row that is being
@@ -652,16 +557,6 @@ module Aws::Honeycode
     # An object that contains the options relating to parsing delimited text
     # as part of an import request.
     #
-    # @note When making an API call, you may pass DelimitedTextImportOptions
-    #   data as a hash:
-    #
-    #       {
-    #         delimiter: "DelimitedTextDelimiter", # required
-    #         has_header_row: false,
-    #         ignore_empty_rows: false,
-    #         data_character_encoding: "UTF-8", # accepts UTF-8, US-ASCII, ISO-8859-1, UTF-16BE, UTF-16LE, UTF-16
-    #       }
-    #
     # @!attribute [rw] delimiter
     #   The delimiter to use for separating columns in a single row of the
     #   input.
@@ -692,15 +587,6 @@ module Aws::Honeycode
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeTableDataImportJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workbook_id: "ResourceId", # required
-    #         table_id: "ResourceId", # required
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] workbook_id
     #   The ID of the workbook into which data was imported.
     #
@@ -765,17 +651,6 @@ module Aws::Honeycode
     # An object that contains the options relating to the destination of the
     # import request.
     #
-    # @note When making an API call, you may pass DestinationOptions
-    #   data as a hash:
-    #
-    #       {
-    #         column_map: {
-    #           "ResourceId" => {
-    #             column_index: 1,
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] column_map
     #   A map of the column id to the import properties for each column.
     #   @return [Hash<String,Types::SourceDataColumnProperties>]
@@ -814,14 +689,6 @@ module Aws::Honeycode
     # An object that represents a filter formula along with the id of the
     # context row under which the filter function needs to evaluate.
     #
-    # @note When making an API call, you may pass Filter
-    #   data as a hash:
-    #
-    #       {
-    #         formula: "Formula", # required
-    #         context_row_id: "RowId",
-    #       }
-    #
     # @!attribute [rw] formula
     #   A formula representing a filter function that returns zero or more
     #   matching rows from a table. Valid formulas in this field return a
@@ -848,22 +715,6 @@ module Aws::Honeycode
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetScreenDataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workbook_id: "ResourceId", # required
-    #         app_id: "ResourceId", # required
-    #         screen_id: "ResourceId", # required
-    #         variables: {
-    #           "VariableName" => {
-    #             raw_value: "RawValue", # required
-    #           },
-    #         },
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] workbook_id
     #   The ID of the workbook that contains the screen.
     #   @return [String]
@@ -944,15 +795,6 @@ module Aws::Honeycode
     # An object that has details about the source of the data that was
     # submitted for import.
     #
-    # @note When making an API call, you may pass ImportDataSource
-    #   data as a hash:
-    #
-    #       {
-    #         data_source_config: { # required
-    #           data_source_url: "SecureURL",
-    #         },
-    #       }
-    #
     # @!attribute [rw] data_source_config
     #   The configuration parameters for the data source of the import
     #   @return [Types::ImportDataSourceConfig]
@@ -967,13 +809,6 @@ module Aws::Honeycode
 
     # An object that contains the configuration parameters for the data
     # source of an import request.
-    #
-    # @note When making an API call, you may pass ImportDataSourceConfig
-    #   data as a hash:
-    #
-    #       {
-    #         data_source_url: "SecureURL",
-    #       }
     #
     # @!attribute [rw] data_source_url
     #   The URL from which source data will be downloaded for the import
@@ -1011,25 +846,6 @@ module Aws::Honeycode
     # An object that contains the options specified by the sumitter of the
     # import request.
     #
-    # @note When making an API call, you may pass ImportOptions
-    #   data as a hash:
-    #
-    #       {
-    #         destination_options: {
-    #           column_map: {
-    #             "ResourceId" => {
-    #               column_index: 1,
-    #             },
-    #           },
-    #         },
-    #         delimited_text_options: {
-    #           delimiter: "DelimitedTextDelimiter", # required
-    #           has_header_row: false,
-    #           ignore_empty_rows: false,
-    #           data_character_encoding: "UTF-8", # accepts UTF-8, US-ASCII, ISO-8859-1, UTF-16BE, UTF-16LE, UTF-16
-    #         },
-    #       }
-    #
     # @!attribute [rw] destination_options
     #   Options relating to the destination of the import request.
     #   @return [Types::DestinationOptions]
@@ -1061,23 +877,6 @@ module Aws::Honeycode
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass InvokeScreenAutomationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workbook_id: "ResourceId", # required
-    #         app_id: "ResourceId", # required
-    #         screen_id: "ResourceId", # required
-    #         screen_automation_id: "ResourceId", # required
-    #         variables: {
-    #           "VariableName" => {
-    #             raw_value: "RawValue", # required
-    #           },
-    #         },
-    #         row_id: "RowId",
-    #         client_request_token: "ClientRequestToken",
-    #       }
-    #
     # @!attribute [rw] workbook_id
     #   The ID of the workbook that contains the screen automation.
     #   @return [String]
@@ -1146,15 +945,6 @@ module Aws::Honeycode
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTableColumnsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workbook_id: "ResourceId", # required
-    #         table_id: "ResourceId", # required
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] workbook_id
     #   The ID of the workbook that contains the table whose columns are
     #   being retrieved.
@@ -1216,17 +1006,6 @@ module Aws::Honeycode
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTableRowsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workbook_id: "ResourceId", # required
-    #         table_id: "ResourceId", # required
-    #         row_ids: ["RowId"],
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] workbook_id
     #   The ID of the workbook that contains the table whose rows are being
     #   retrieved.
@@ -1314,15 +1093,6 @@ module Aws::Honeycode
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTablesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workbook_id: "ResourceId", # required
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] workbook_id
     #   The ID of the workbook whose tables are being retrieved.
     #
@@ -1380,13 +1150,6 @@ module Aws::Honeycode
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The resource's Amazon Resource Name (ARN).
     #   @return [String]
@@ -1411,20 +1174,6 @@ module Aws::Honeycode
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass QueryTableRowsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workbook_id: "ResourceId", # required
-    #         table_id: "ResourceId", # required
-    #         filter_formula: { # required
-    #           formula: "Formula", # required
-    #           context_row_id: "RowId",
-    #         },
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] workbook_id
     #   The ID of the workbook whose table rows are being queried.
     #
@@ -1613,13 +1362,6 @@ module Aws::Honeycode
     # An object that contains the properties for importing data to a
     # specific column in a table.
     #
-    # @note When making an API call, you may pass SourceDataColumnProperties
-    #   data as a hash:
-    #
-    #       {
-    #         column_index: 1,
-    #       }
-    #
     # @!attribute [rw] column_index
     #   The index of the column in the input file.
     #   @return [Integer]
@@ -1632,36 +1374,6 @@ module Aws::Honeycode
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartTableDataImportJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workbook_id: "ResourceId", # required
-    #         data_source: { # required
-    #           data_source_config: { # required
-    #             data_source_url: "SecureURL",
-    #           },
-    #         },
-    #         data_format: "DELIMITED_TEXT", # required, accepts DELIMITED_TEXT
-    #         destination_table_id: "ResourceId", # required
-    #         import_options: { # required
-    #           destination_options: {
-    #             column_map: {
-    #               "ResourceId" => {
-    #                 column_index: 1,
-    #               },
-    #             },
-    #           },
-    #           delimited_text_options: {
-    #             delimiter: "DelimitedTextDelimiter", # required
-    #             has_header_row: false,
-    #             ignore_empty_rows: false,
-    #             data_character_encoding: "UTF-8", # accepts UTF-8, US-ASCII, ISO-8859-1, UTF-16BE, UTF-16LE, UTF-16
-    #           },
-    #         },
-    #         client_request_token: "ClientRequestToken", # required
-    #       }
-    #
     # @!attribute [rw] workbook_id
     #   The ID of the workbook where the rows are being imported.
     #
@@ -1832,16 +1544,6 @@ module Aws::Honeycode
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The resource's Amazon Resource Name (ARN).
     #   @return [String]
@@ -1876,14 +1578,6 @@ module Aws::Honeycode
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The resource's Amazon Resource Name (ARN).
     #   @return [String]
@@ -1908,19 +1602,6 @@ module Aws::Honeycode
     # Data needed to create a single row in a table as part of the
     # BatchCreateTableRows request.
     #
-    # @note When making an API call, you may pass UpdateRowData
-    #   data as a hash:
-    #
-    #       {
-    #         row_id: "RowId", # required
-    #         cells_to_update: { # required
-    #           "ResourceId" => {
-    #             fact: "Fact",
-    #             facts: ["Fact"],
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] row_id
     #   The id of the row that needs to be updated.
     #   @return [String]
@@ -1942,23 +1623,6 @@ module Aws::Honeycode
 
     # Data needed to upsert rows in a table as part of a single item in the
     # BatchUpsertTableRows request.
-    #
-    # @note When making an API call, you may pass UpsertRowData
-    #   data as a hash:
-    #
-    #       {
-    #         batch_item_id: "BatchItemId", # required
-    #         filter: { # required
-    #           formula: "Formula", # required
-    #           context_row_id: "RowId",
-    #         },
-    #         cells_to_update: { # required
-    #           "ResourceId" => {
-    #             fact: "Fact",
-    #             facts: ["Fact"],
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] batch_item_id
     #   An external identifier that represents a single item in the request
@@ -2039,13 +1703,6 @@ module Aws::Honeycode
 
     # The input variables to the app to be used by the
     # InvokeScreenAutomation action request.
-    #
-    # @note When making an API call, you may pass VariableValue
-    #   data as a hash:
-    #
-    #       {
-    #         raw_value: "RawValue", # required
-    #       }
     #
     # @!attribute [rw] raw_value
     #   Raw value of the variable.

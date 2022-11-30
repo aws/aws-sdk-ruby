@@ -80,14 +80,6 @@ module Aws::SecurityLake
     # Automatically enable new organization accounts as member accounts from
     # a Security Lake administrator account.
     #
-    # @note When making an API call, you may pass AutoEnableNewRegionConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         region: "us-east-1", # required, accepts us-east-1, us-west-2, eu-central-1, us-east-2, eu-west-1, ap-northeast-1, ap-southeast-2
-    #         sources: ["ROUTE53"], # required, accepts ROUTE53, VPC_FLOW, CLOUD_TRAIL, SH_FINDINGS
-    #       }
-    #
     # @!attribute [rw] region
     #   The Regions where Security Lake is auto enabled
     #   @return [String]
@@ -187,22 +179,6 @@ module Aws::SecurityLake
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAwsLogSourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         enable_all_dimensions: {
-    #           "String" => {
-    #             "String" => ["String"],
-    #           },
-    #         },
-    #         enable_single_dimension: ["SafeString"],
-    #         enable_two_dimensions: {
-    #           "String" => ["String"],
-    #         },
-    #         input_order: ["REGION"], # required, accepts REGION, SOURCE_TYPE, MEMBER
-    #       }
-    #
     # @!attribute [rw] enable_all_dimensions
     #   Enables specific sources in all Regions and source types.
     #   @return [Hash<String,Hash<String,Array<String>>>]
@@ -251,16 +227,6 @@ module Aws::SecurityLake
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateCustomLogSourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         custom_source_name: "CustomSourceType", # required
-    #         event_class: "ACCESS_ACTIVITY", # required, accepts ACCESS_ACTIVITY, FILE_ACTIVITY, KERNEL_ACTIVITY, KERNEL_EXTENSION, MEMORY_ACTIVITY, MODULE_ACTIVITY, PROCESS_ACTIVITY, REGISTRY_KEY_ACTIVITY, REGISTRY_VALUE_ACTIVITY, RESOURCE_ACTIVITY, SCHEDULED_JOB_ACTIVITY, SECURITY_FINDING, ACCOUNT_CHANGE, AUTHENTICATION, AUTHORIZATION, ENTITY_MANAGEMENT_AUDIT, DHCP_ACTIVITY, NETWORK_ACTIVITY, DNS_ACTIVITY, FTP_ACTIVITY, HTTP_ACTIVITY, RDP_ACTIVITY, SMB_ACTIVITY, SSH_ACTIVITY, CLOUD_API, CONTAINER_LIFECYCLE, DATABASE_LIFECYCLE, CONFIG_STATE, CLOUD_STORAGE, INVENTORY_INFO, RFB_ACTIVITY, SMTP_ACTIVITY, VIRTUAL_MACHINE_ACTIVITY
-    #         glue_invocation_role_arn: "RoleArn", # required
-    #         log_provider_account_id: "AwsAccountId", # required
-    #       }
-    #
     # @!attribute [rw] custom_source_name
     #   The custom source name for a third-party custom source.
     #   @return [String]
@@ -332,18 +298,6 @@ module Aws::SecurityLake
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDatalakeAutoEnableRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_for_new_accounts: [ # required
-    #           {
-    #             region: "us-east-1", # required, accepts us-east-1, us-west-2, eu-central-1, us-east-2, eu-west-1, ap-northeast-1, ap-southeast-2
-    #             sources: ["ROUTE53"], # required, accepts ROUTE53, VPC_FLOW, CLOUD_TRAIL, SH_FINDINGS
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] configuration_for_new_accounts
     #   Enable Amazon Security Lake with the specified configurations
     #   settings to begin ingesting security data for new accounts in
@@ -362,13 +316,6 @@ module Aws::SecurityLake
     #
     class CreateDatalakeAutoEnableResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass CreateDatalakeDelegatedAdminRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account: "SafeString", # required
-    #       }
-    #
     # @!attribute [rw] account
     #   Account ID of the Security Lake delegated administrator.
     #   @return [String]
@@ -385,14 +332,6 @@ module Aws::SecurityLake
     #
     class CreateDatalakeDelegatedAdminResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass CreateDatalakeExceptionsSubscriptionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         notification_endpoint: "SafeString", # required
-    #         subscription_protocol: "HTTP", # required, accepts HTTP, HTTPS, EMAIL, EMAIL_JSON, SMS, SQS, LAMBDA, APP, FIREHOSE
-    #       }
-    #
     # @!attribute [rw] notification_endpoint
     #   The account in which the exception notifications subscription is
     #   created.
@@ -415,31 +354,6 @@ module Aws::SecurityLake
     #
     class CreateDatalakeExceptionsSubscriptionResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass CreateDatalakeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configurations: {
-    #           "us-east-1" => {
-    #             encryption_key: "String",
-    #             replication_destination_regions: ["us-east-1"], # accepts us-east-1, us-west-2, eu-central-1, us-east-2, eu-west-1, ap-northeast-1, ap-southeast-2
-    #             replication_role_arn: "RoleArn",
-    #             retention_settings: [
-    #               {
-    #                 retention_period: 1,
-    #                 storage_class: "STANDARD_IA", # accepts STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER_IR, GLACIER, DEEP_ARCHIVE, EXPIRE
-    #               },
-    #             ],
-    #             tags_map: {
-    #               "String" => "String",
-    #             },
-    #           },
-    #         },
-    #         enable_all: false,
-    #         meta_store_manager_role_arn: "RoleArn",
-    #         regions: ["us-east-1"], # accepts us-east-1, us-west-2, eu-central-1, us-east-2, eu-west-1, ap-northeast-1, ap-southeast-2
-    #       }
-    #
     # @!attribute [rw] configurations
     #   Enable Security Lake with the specified configurations settings to
     #   begin ingesting security data.
@@ -483,23 +397,6 @@ module Aws::SecurityLake
     #
     class CreateDatalakeResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass CreateSubscriberRequest
-    #   data as a hash:
-    #
-    #       {
-    #         access_types: ["LAKEFORMATION"], # accepts LAKEFORMATION, S3
-    #         account_id: "AwsAccountId", # required
-    #         external_id: "SafeString", # required
-    #         source_types: [ # required
-    #           {
-    #             aws_source_type: "ROUTE53", # accepts ROUTE53, VPC_FLOW, CLOUD_TRAIL, SH_FINDINGS
-    #             custom_source_type: "CustomSourceType",
-    #           },
-    #         ],
-    #         subscriber_description: "SafeString",
-    #         subscriber_name: "CreateSubscriberRequestSubscriberNameString", # required
-    #       }
-    #
     # @!attribute [rw] access_types
     #   The Amazon S3 or Lake Formation access type.
     #   @return [Array<String>]
@@ -575,19 +472,6 @@ module Aws::SecurityLake
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateSubscriptionNotificationConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         create_sqs: false,
-    #         https_api_key_name: "String",
-    #         https_api_key_value: "String",
-    #         https_method: "POST", # accepts POST, PUT
-    #         role_arn: "RoleArn",
-    #         subscription_endpoint: "CreateSubscriptionNotificationConfigurationRequestSubscriptionEndpointString",
-    #         subscription_id: "UUID", # required
-    #       }
-    #
     # @!attribute [rw] create_sqs
     #   Create a new subscription notification for the specified
     #   subscription ID in Security Lake.
@@ -645,22 +529,6 @@ module Aws::SecurityLake
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAwsLogSourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         disable_all_dimensions: {
-    #           "String" => {
-    #             "String" => ["String"],
-    #           },
-    #         },
-    #         disable_single_dimension: ["SafeString"],
-    #         disable_two_dimensions: {
-    #           "String" => ["String"],
-    #         },
-    #         input_order: ["REGION"], # required, accepts REGION, SOURCE_TYPE, MEMBER
-    #       }
-    #
     # @!attribute [rw] disable_all_dimensions
     #   Removes the specific Amazon Web Services sources from all Regions
     #   and source types.
@@ -710,13 +578,6 @@ module Aws::SecurityLake
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteCustomLogSourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         custom_source_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] custom_source_name
     #   The custom source name for the custome log source.
     #   @return [String]
@@ -741,18 +602,6 @@ module Aws::SecurityLake
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDatalakeAutoEnableRequest
-    #   data as a hash:
-    #
-    #       {
-    #         remove_from_configuration_for_new_accounts: [ # required
-    #           {
-    #             region: "us-east-1", # required, accepts us-east-1, us-west-2, eu-central-1, us-east-2, eu-west-1, ap-northeast-1, ap-southeast-2
-    #             sources: ["ROUTE53"], # required, accepts ROUTE53, VPC_FLOW, CLOUD_TRAIL, SH_FINDINGS
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] remove_from_configuration_for_new_accounts
     #   Delete Amazon Security Lake with the specified configurations
     #   settings to stop ingesting security data for new accounts in
@@ -771,13 +620,6 @@ module Aws::SecurityLake
     #
     class DeleteDatalakeAutoEnableResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteDatalakeDelegatedAdminRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account: "SafeString", # required
-    #       }
-    #
     # @!attribute [rw] account
     #   Account ID the Security Lake delegated administrator.
     #   @return [String]
@@ -794,8 +636,6 @@ module Aws::SecurityLake
     #
     class DeleteDatalakeDelegatedAdminResponse < Aws::EmptyStructure; end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/DeleteDatalakeExceptionsSubscriptionRequest AWS API Documentation
     #
     class DeleteDatalakeExceptionsSubscriptionRequest < Aws::EmptyStructure; end
@@ -813,8 +653,6 @@ module Aws::SecurityLake
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/DeleteDatalakeRequest AWS API Documentation
     #
     class DeleteDatalakeRequest < Aws::EmptyStructure; end
@@ -823,13 +661,6 @@ module Aws::SecurityLake
     #
     class DeleteDatalakeResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteSubscriberRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "String", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   A value created by Security Lake that uniquely identifies your
     #   `DeleteSubscriber` API request.
@@ -847,13 +678,6 @@ module Aws::SecurityLake
     #
     class DeleteSubscriberResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteSubscriptionNotificationConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         subscription_id: "UUID", # required
-    #       }
-    #
     # @!attribute [rw] subscription_id
     #   The subscription ID of the Amazon Security Lake subscriber account.
     #   @return [String]
@@ -929,8 +753,6 @@ module Aws::SecurityLake
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/GetDatalakeAutoEnableRequest AWS API Documentation
     #
     class GetDatalakeAutoEnableRequest < Aws::EmptyStructure; end
@@ -947,8 +769,6 @@ module Aws::SecurityLake
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/GetDatalakeExceptionsExpiryRequest AWS API Documentation
     #
     class GetDatalakeExceptionsExpiryRequest < Aws::EmptyStructure; end
@@ -965,8 +785,6 @@ module Aws::SecurityLake
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/GetDatalakeExceptionsSubscriptionRequest AWS API Documentation
     #
     class GetDatalakeExceptionsSubscriptionRequest < Aws::EmptyStructure; end
@@ -983,8 +801,6 @@ module Aws::SecurityLake
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/GetDatalakeRequest AWS API Documentation
     #
     class GetDatalakeRequest < Aws::EmptyStructure; end
@@ -1001,15 +817,6 @@ module Aws::SecurityLake
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDatalakeStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_set: ["SafeString"],
-    #         max_account_results: 1,
-    #         next_token: "SafeString",
-    #       }
-    #
     # @!attribute [rw] account_set
     #   The account IDs for which a static snapshot of the current Region,
     #   including enabled accounts and log sources is retrieved.
@@ -1062,13 +869,6 @@ module Aws::SecurityLake
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSubscriberRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "String", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   A value created by Security Lake that uniquely identifies your
     #   `GetSubscriber` API request.
@@ -1128,24 +928,6 @@ module Aws::SecurityLake
     end
 
     # Provides details of lake configuration object in Amazon Security Lake.
-    #
-    # @note When making an API call, you may pass LakeConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         encryption_key: "String",
-    #         replication_destination_regions: ["us-east-1"], # accepts us-east-1, us-west-2, eu-central-1, us-east-2, eu-west-1, ap-northeast-1, ap-southeast-2
-    #         replication_role_arn: "RoleArn",
-    #         retention_settings: [
-    #           {
-    #             retention_period: 1,
-    #             storage_class: "STANDARD_IA", # accepts STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER_IR, GLACIER, DEEP_ARCHIVE, EXPIRE
-    #           },
-    #         ],
-    #         tags_map: {
-    #           "String" => "String",
-    #         },
-    #       }
     #
     # @!attribute [rw] encryption_key
     #   The type of encryption key used by Security Lake to encrypt the lake
@@ -1256,15 +1038,6 @@ module Aws::SecurityLake
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDatalakeExceptionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_failures: 1,
-    #         next_token: "SafeString",
-    #         region_set: ["us-east-1"], # accepts us-east-1, us-west-2, eu-central-1, us-east-2, eu-west-1, ap-northeast-1, ap-southeast-2
-    #       }
-    #
     # @!attribute [rw] max_failures
     #   List the maximum number of failures in Security Lake.
     #   @return [Integer]
@@ -1308,24 +1081,6 @@ module Aws::SecurityLake
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListLogSourcesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         input_order: ["REGION"], # accepts REGION, SOURCE_TYPE, MEMBER
-    #         list_all_dimensions: {
-    #           "String" => {
-    #             "String" => ["String"],
-    #           },
-    #         },
-    #         list_single_dimension: ["SafeString"],
-    #         list_two_dimensions: {
-    #           "String" => ["String"],
-    #         },
-    #         max_results: 1,
-    #         next_token: "SafeString",
-    #       }
-    #
     # @!attribute [rw] input_order
     #   Lists the log sources in input order, namely Region, source type,
     #   and member account.
@@ -1391,14 +1146,6 @@ module Aws::SecurityLake
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSubscribersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "SafeString",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of accounts for which the configuration is
     #   displayed.
@@ -1505,14 +1252,6 @@ module Aws::SecurityLake
     # Retention settings for the destination Amazon S3 buckets in Security
     # Lake.
     #
-    # @note When making an API call, you may pass RetentionSetting
-    #   data as a hash:
-    #
-    #       {
-    #         retention_period: 1,
-    #         storage_class: "STANDARD_IA", # accepts STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER_IR, GLACIER, DEEP_ARCHIVE, EXPIRE
-    #       }
-    #
     # @!attribute [rw] retention_period
     #   The retention period specifies a fixed period of time during which
     #   the Security Lake object remains locked. You can specify the
@@ -1589,10 +1328,6 @@ module Aws::SecurityLake
 
     # The supported source types from which logs and events are collected in
     # Amazon Security Lake.
-    #
-    # @note SourceType is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note SourceType is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of SourceType corresponding to the set member.
     #
     # @!attribute [rw] aws_source_type
     #   Amazon Security Lake supports logs and events collection for
@@ -1751,13 +1486,6 @@ module Aws::SecurityLake
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateDatalakeExceptionsExpiryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         exception_message_expiry: 1, # required
-    #       }
-    #
     # @!attribute [rw] exception_message_expiry
     #   The time-to-live (TTL) for the exception message to remain.
     #   @return [Integer]
@@ -1774,14 +1502,6 @@ module Aws::SecurityLake
     #
     class UpdateDatalakeExceptionsExpiryResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateDatalakeExceptionsSubscriptionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         notification_endpoint: "SafeString", # required
-    #         subscription_protocol: "HTTP", # required, accepts HTTP, HTTPS, EMAIL, EMAIL_JSON, SMS, SQS, LAMBDA, APP, FIREHOSE
-    #       }
-    #
     # @!attribute [rw] notification_endpoint
     #   The account which is subscribed to receive exception notifications.
     #   @return [String]
@@ -1803,28 +1523,6 @@ module Aws::SecurityLake
     #
     class UpdateDatalakeExceptionsSubscriptionResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateDatalakeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configurations: { # required
-    #           "us-east-1" => {
-    #             encryption_key: "String",
-    #             replication_destination_regions: ["us-east-1"], # accepts us-east-1, us-west-2, eu-central-1, us-east-2, eu-west-1, ap-northeast-1, ap-southeast-2
-    #             replication_role_arn: "RoleArn",
-    #             retention_settings: [
-    #               {
-    #                 retention_period: 1,
-    #                 storage_class: "STANDARD_IA", # accepts STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER_IR, GLACIER, DEEP_ARCHIVE, EXPIRE
-    #               },
-    #             ],
-    #             tags_map: {
-    #               "String" => "String",
-    #             },
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] configurations
     #   The configuration object
     #   @return [Hash<String,Types::LakeConfigurationRequest>]
@@ -1841,22 +1539,6 @@ module Aws::SecurityLake
     #
     class UpdateDatalakeResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateSubscriberRequest
-    #   data as a hash:
-    #
-    #       {
-    #         external_id: "SafeString",
-    #         id: "String", # required
-    #         source_types: [
-    #           {
-    #             aws_source_type: "ROUTE53", # accepts ROUTE53, VPC_FLOW, CLOUD_TRAIL, SH_FINDINGS
-    #             custom_source_type: "CustomSourceType",
-    #           },
-    #         ],
-    #         subscriber_description: "SafeString",
-    #         subscriber_name: "UpdateSubscriberRequestSubscriberNameString",
-    #       }
-    #
     # @!attribute [rw] external_id
     #   External ID of the Security Lake account.
     #   @return [String]
@@ -1906,19 +1588,6 @@ module Aws::SecurityLake
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateSubscriptionNotificationConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         create_sqs: false,
-    #         https_api_key_name: "String",
-    #         https_api_key_value: "String",
-    #         https_method: "POST", # accepts POST, PUT
-    #         role_arn: "RoleArn",
-    #         subscription_endpoint: "UpdateSubscriptionNotificationConfigurationRequestSubscriptionEndpointString",
-    #         subscription_id: "UUID", # required
-    #       }
-    #
     # @!attribute [rw] create_sqs
     #   Create a new subscription notification for the specified
     #   subscription ID in Security Lake.

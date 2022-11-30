@@ -323,18 +323,6 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteRecommendationPreferencesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_type: "Ec2Instance", # required, accepts Ec2Instance, AutoScalingGroup, EbsVolume, LambdaFunction, NotApplicable
-    #         scope: {
-    #           name: "Organization", # accepts Organization, AccountId, ResourceArn
-    #           value: "ScopeValue",
-    #         },
-    #         recommendation_preference_names: ["EnhancedInfrastructureMetrics"], # required, accepts EnhancedInfrastructureMetrics, InferredWorkloadTypes, ExternalMetricsPreference
-    #       }
-    #
     # @!attribute [rw] resource_type
     #   The target resource type of the recommendation preference to delete.
     #
@@ -382,21 +370,6 @@ module Aws::ComputeOptimizer
     #
     class DeleteRecommendationPreferencesResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeRecommendationExportJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_ids: ["JobId"],
-    #         filters: [
-    #           {
-    #             name: "ResourceType", # accepts ResourceType, JobStatus
-    #             values: ["FilterValue"],
-    #           },
-    #         ],
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] job_ids
     #   The identification numbers of the export jobs to return.
     #
@@ -464,14 +437,6 @@ module Aws::ComputeOptimizer
     # DescribeRecommendationExportJobs action, and `Filter` with the
     # GetAutoScalingGroupRecommendations and GetEC2InstanceRecommendations
     # actions.
-    #
-    # @note When making an API call, you may pass EBSFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Finding", # accepts Finding
-    #         values: ["FilterValue"],
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the filter.
@@ -636,14 +601,6 @@ module Aws::ComputeOptimizer
     # enrollment statuses. Use this filter with the
     # GetEnrollmentStatusesForOrganization action.
     #
-    # @note When making an API call, you may pass EnrollmentFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Status", # accepts Status
-    #         values: ["FilterValue"],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the filter.
     #
@@ -694,29 +651,6 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ExportAutoScalingGroupRecommendationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_ids: ["AccountId"],
-    #         filters: [
-    #           {
-    #             name: "Finding", # accepts Finding, FindingReasonCodes, RecommendationSourceType
-    #             values: ["FilterValue"],
-    #           },
-    #         ],
-    #         fields_to_export: ["AccountId"], # accepts AccountId, AutoScalingGroupArn, AutoScalingGroupName, Finding, UtilizationMetricsCpuMaximum, UtilizationMetricsMemoryMaximum, UtilizationMetricsEbsReadOpsPerSecondMaximum, UtilizationMetricsEbsWriteOpsPerSecondMaximum, UtilizationMetricsEbsReadBytesPerSecondMaximum, UtilizationMetricsEbsWriteBytesPerSecondMaximum, UtilizationMetricsDiskReadOpsPerSecondMaximum, UtilizationMetricsDiskWriteOpsPerSecondMaximum, UtilizationMetricsDiskReadBytesPerSecondMaximum, UtilizationMetricsDiskWriteBytesPerSecondMaximum, UtilizationMetricsNetworkInBytesPerSecondMaximum, UtilizationMetricsNetworkOutBytesPerSecondMaximum, UtilizationMetricsNetworkPacketsInPerSecondMaximum, UtilizationMetricsNetworkPacketsOutPerSecondMaximum, LookbackPeriodInDays, CurrentConfigurationInstanceType, CurrentConfigurationDesiredCapacity, CurrentConfigurationMinSize, CurrentConfigurationMaxSize, CurrentOnDemandPrice, CurrentStandardOneYearNoUpfrontReservedPrice, CurrentStandardThreeYearNoUpfrontReservedPrice, CurrentVCpus, CurrentMemory, CurrentStorage, CurrentNetwork, RecommendationOptionsConfigurationInstanceType, RecommendationOptionsConfigurationDesiredCapacity, RecommendationOptionsConfigurationMinSize, RecommendationOptionsConfigurationMaxSize, RecommendationOptionsProjectedUtilizationMetricsCpuMaximum, RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum, RecommendationOptionsPerformanceRisk, RecommendationOptionsOnDemandPrice, RecommendationOptionsStandardOneYearNoUpfrontReservedPrice, RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice, RecommendationOptionsVcpus, RecommendationOptionsMemory, RecommendationOptionsStorage, RecommendationOptionsNetwork, LastRefreshTimestamp, CurrentPerformanceRisk, RecommendationOptionsSavingsOpportunityPercentage, RecommendationOptionsEstimatedMonthlySavingsCurrency, RecommendationOptionsEstimatedMonthlySavingsValue, EffectiveRecommendationPreferencesCpuVendorArchitectures, EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics, EffectiveRecommendationPreferencesInferredWorkloadTypes, InferredWorkloadTypes, RecommendationOptionsMigrationEffort
-    #         s3_destination_config: { # required
-    #           bucket: "DestinationBucket",
-    #           key_prefix: "DestinationKeyPrefix",
-    #         },
-    #         file_format: "Csv", # accepts Csv
-    #         include_member_accounts: false,
-    #         recommendation_preferences: {
-    #           cpu_vendor_architectures: ["AWS_ARM64"], # accepts AWS_ARM64, CURRENT
-    #         },
-    #       }
-    #
     # @!attribute [rw] account_ids
     #   The IDs of the Amazon Web Services accounts for which to export Auto
     #   Scaling group recommendations.
@@ -857,26 +791,6 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ExportEBSVolumeRecommendationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_ids: ["AccountId"],
-    #         filters: [
-    #           {
-    #             name: "Finding", # accepts Finding
-    #             values: ["FilterValue"],
-    #           },
-    #         ],
-    #         fields_to_export: ["AccountId"], # accepts AccountId, VolumeArn, Finding, UtilizationMetricsVolumeReadOpsPerSecondMaximum, UtilizationMetricsVolumeWriteOpsPerSecondMaximum, UtilizationMetricsVolumeReadBytesPerSecondMaximum, UtilizationMetricsVolumeWriteBytesPerSecondMaximum, LookbackPeriodInDays, CurrentConfigurationVolumeType, CurrentConfigurationVolumeBaselineIOPS, CurrentConfigurationVolumeBaselineThroughput, CurrentConfigurationVolumeBurstIOPS, CurrentConfigurationVolumeBurstThroughput, CurrentConfigurationVolumeSize, CurrentMonthlyPrice, RecommendationOptionsConfigurationVolumeType, RecommendationOptionsConfigurationVolumeBaselineIOPS, RecommendationOptionsConfigurationVolumeBaselineThroughput, RecommendationOptionsConfigurationVolumeBurstIOPS, RecommendationOptionsConfigurationVolumeBurstThroughput, RecommendationOptionsConfigurationVolumeSize, RecommendationOptionsMonthlyPrice, RecommendationOptionsPerformanceRisk, LastRefreshTimestamp, CurrentPerformanceRisk, RecommendationOptionsSavingsOpportunityPercentage, RecommendationOptionsEstimatedMonthlySavingsCurrency, RecommendationOptionsEstimatedMonthlySavingsValue
-    #         s3_destination_config: { # required
-    #           bucket: "DestinationBucket",
-    #           key_prefix: "DestinationKeyPrefix",
-    #         },
-    #         file_format: "Csv", # accepts Csv
-    #         include_member_accounts: false,
-    #       }
-    #
     # @!attribute [rw] account_ids
     #   The IDs of the Amazon Web Services accounts for which to export
     #   Amazon EBS volume recommendations.
@@ -995,29 +909,6 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ExportEC2InstanceRecommendationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_ids: ["AccountId"],
-    #         filters: [
-    #           {
-    #             name: "Finding", # accepts Finding, FindingReasonCodes, RecommendationSourceType
-    #             values: ["FilterValue"],
-    #           },
-    #         ],
-    #         fields_to_export: ["AccountId"], # accepts AccountId, InstanceArn, InstanceName, Finding, FindingReasonCodes, LookbackPeriodInDays, CurrentInstanceType, UtilizationMetricsCpuMaximum, UtilizationMetricsMemoryMaximum, UtilizationMetricsEbsReadOpsPerSecondMaximum, UtilizationMetricsEbsWriteOpsPerSecondMaximum, UtilizationMetricsEbsReadBytesPerSecondMaximum, UtilizationMetricsEbsWriteBytesPerSecondMaximum, UtilizationMetricsDiskReadOpsPerSecondMaximum, UtilizationMetricsDiskWriteOpsPerSecondMaximum, UtilizationMetricsDiskReadBytesPerSecondMaximum, UtilizationMetricsDiskWriteBytesPerSecondMaximum, UtilizationMetricsNetworkInBytesPerSecondMaximum, UtilizationMetricsNetworkOutBytesPerSecondMaximum, UtilizationMetricsNetworkPacketsInPerSecondMaximum, UtilizationMetricsNetworkPacketsOutPerSecondMaximum, CurrentOnDemandPrice, CurrentStandardOneYearNoUpfrontReservedPrice, CurrentStandardThreeYearNoUpfrontReservedPrice, CurrentVCpus, CurrentMemory, CurrentStorage, CurrentNetwork, RecommendationOptionsInstanceType, RecommendationOptionsProjectedUtilizationMetricsCpuMaximum, RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum, RecommendationOptionsPlatformDifferences, RecommendationOptionsPerformanceRisk, RecommendationOptionsVcpus, RecommendationOptionsMemory, RecommendationOptionsStorage, RecommendationOptionsNetwork, RecommendationOptionsOnDemandPrice, RecommendationOptionsStandardOneYearNoUpfrontReservedPrice, RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice, RecommendationsSourcesRecommendationSourceArn, RecommendationsSourcesRecommendationSourceType, LastRefreshTimestamp, CurrentPerformanceRisk, RecommendationOptionsSavingsOpportunityPercentage, RecommendationOptionsEstimatedMonthlySavingsCurrency, RecommendationOptionsEstimatedMonthlySavingsValue, EffectiveRecommendationPreferencesCpuVendorArchitectures, EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics, EffectiveRecommendationPreferencesInferredWorkloadTypes, InferredWorkloadTypes, RecommendationOptionsMigrationEffort, EffectiveRecommendationPreferencesExternalMetricsSource
-    #         s3_destination_config: { # required
-    #           bucket: "DestinationBucket",
-    #           key_prefix: "DestinationKeyPrefix",
-    #         },
-    #         file_format: "Csv", # accepts Csv
-    #         include_member_accounts: false,
-    #         recommendation_preferences: {
-    #           cpu_vendor_architectures: ["AWS_ARM64"], # accepts AWS_ARM64, CURRENT
-    #         },
-    #       }
-    #
     # @!attribute [rw] account_ids
     #   The IDs of the Amazon Web Services accounts for which to export
     #   instance recommendations.
@@ -1138,26 +1029,6 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ExportLambdaFunctionRecommendationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_ids: ["AccountId"],
-    #         filters: [
-    #           {
-    #             name: "Finding", # accepts Finding, FindingReasonCode
-    #             values: ["FilterValue"],
-    #           },
-    #         ],
-    #         fields_to_export: ["AccountId"], # accepts AccountId, FunctionArn, FunctionVersion, Finding, FindingReasonCodes, NumberOfInvocations, UtilizationMetricsDurationMaximum, UtilizationMetricsDurationAverage, UtilizationMetricsMemoryMaximum, UtilizationMetricsMemoryAverage, LookbackPeriodInDays, CurrentConfigurationMemorySize, CurrentConfigurationTimeout, CurrentCostTotal, CurrentCostAverage, RecommendationOptionsConfigurationMemorySize, RecommendationOptionsCostLow, RecommendationOptionsCostHigh, RecommendationOptionsProjectedUtilizationMetricsDurationLowerBound, RecommendationOptionsProjectedUtilizationMetricsDurationUpperBound, RecommendationOptionsProjectedUtilizationMetricsDurationExpected, LastRefreshTimestamp, CurrentPerformanceRisk, RecommendationOptionsSavingsOpportunityPercentage, RecommendationOptionsEstimatedMonthlySavingsCurrency, RecommendationOptionsEstimatedMonthlySavingsValue
-    #         s3_destination_config: { # required
-    #           bucket: "DestinationBucket",
-    #           key_prefix: "DestinationKeyPrefix",
-    #         },
-    #         file_format: "Csv", # accepts Csv
-    #         include_member_accounts: false,
-    #       }
-    #
     # @!attribute [rw] account_ids
     #   The IDs of the Amazon Web Services accounts for which to export
     #   Lambda function recommendations.
@@ -1279,13 +1150,6 @@ module Aws::ComputeOptimizer
     # Describes the external metrics preferences for EC2 rightsizing
     # recommendations.
     #
-    # @note When making an API call, you may pass ExternalMetricsPreference
-    #   data as a hash:
-    #
-    #       {
-    #         source: "Datadog", # accepts Datadog, Dynatrace, NewRelic, Instana
-    #       }
-    #
     # @!attribute [rw] source
     #   Contains the source options for external metrics preferences.
     #   @return [String]
@@ -1307,14 +1171,6 @@ module Aws::ComputeOptimizer
     # `LambdaFunctionRecommendationFilter` with the
     # GetLambdaFunctionRecommendations action, and `JobFilter` with the
     # DescribeRecommendationExportJobs action.
-    #
-    # @note When making an API call, you may pass Filter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Finding", # accepts Finding, FindingReasonCodes, RecommendationSourceType
-    #         values: ["FilterValue"],
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the filter.
@@ -1439,25 +1295,6 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAutoScalingGroupRecommendationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_ids: ["AccountId"],
-    #         auto_scaling_group_arns: ["AutoScalingGroupArn"],
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         filters: [
-    #           {
-    #             name: "Finding", # accepts Finding, FindingReasonCodes, RecommendationSourceType
-    #             values: ["FilterValue"],
-    #           },
-    #         ],
-    #         recommendation_preferences: {
-    #           cpu_vendor_architectures: ["AWS_ARM64"], # accepts AWS_ARM64, CURRENT
-    #         },
-    #       }
-    #
     # @!attribute [rw] account_ids
     #   The ID of the Amazon Web Services account for which to return Auto
     #   Scaling group recommendations.
@@ -1540,22 +1377,6 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetEBSVolumeRecommendationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         volume_arns: ["VolumeArn"],
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         filters: [
-    #           {
-    #             name: "Finding", # accepts Finding
-    #             values: ["FilterValue"],
-    #           },
-    #         ],
-    #         account_ids: ["AccountId"],
-    #       }
-    #
     # @!attribute [rw] volume_arns
     #   The Amazon Resource Name (ARN) of the volumes for which to return
     #   recommendations.
@@ -1630,25 +1451,6 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetEC2InstanceRecommendationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_arns: ["InstanceArn"],
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         filters: [
-    #           {
-    #             name: "Finding", # accepts Finding, FindingReasonCodes, RecommendationSourceType
-    #             values: ["FilterValue"],
-    #           },
-    #         ],
-    #         account_ids: ["AccountId"],
-    #         recommendation_preferences: {
-    #           cpu_vendor_architectures: ["AWS_ARM64"], # accepts AWS_ARM64, CURRENT
-    #         },
-    #       }
-    #
     # @!attribute [rw] instance_arns
     #   The Amazon Resource Name (ARN) of the instances for which to return
     #   recommendations.
@@ -1729,20 +1531,6 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetEC2RecommendationProjectedMetricsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_arn: "InstanceArn", # required
-    #         stat: "Maximum", # required, accepts Maximum, Average
-    #         period: 1, # required
-    #         start_time: Time.now, # required
-    #         end_time: Time.now, # required
-    #         recommendation_preferences: {
-    #           cpu_vendor_architectures: ["AWS_ARM64"], # accepts AWS_ARM64, CURRENT
-    #         },
-    #       }
-    #
     # @!attribute [rw] instance_arn
     #   The Amazon Resource Name (ARN) of the instances for which to return
     #   recommendation projected metrics.
@@ -1794,13 +1582,6 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetEffectiveRecommendationPreferencesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource for which to confirm
     #   effective recommendation preferences. Only EC2 instance and Auto
@@ -1870,8 +1651,6 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/GetEnrollmentStatusRequest AWS API Documentation
     #
     class GetEnrollmentStatusRequest < Aws::EmptyStructure; end
@@ -1916,20 +1695,6 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetEnrollmentStatusesForOrganizationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             name: "Status", # accepts Status
-    #             values: ["FilterValue"],
-    #           },
-    #         ],
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] filters
     #   An array of objects to specify a filter that returns a more specific
     #   list of account enrollment statuses.
@@ -1981,22 +1746,6 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLambdaFunctionRecommendationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_arns: ["FunctionArn"],
-    #         account_ids: ["AccountId"],
-    #         filters: [
-    #           {
-    #             name: "Finding", # accepts Finding, FindingReasonCode
-    #             values: ["FilterValue"],
-    #           },
-    #         ],
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] function_arns
     #   The Amazon Resource Name (ARN) of the functions for which to return
     #   recommendations.
@@ -2103,19 +1852,6 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRecommendationPreferencesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_type: "Ec2Instance", # required, accepts Ec2Instance, AutoScalingGroup, EbsVolume, LambdaFunction, NotApplicable
-    #         scope: {
-    #           name: "Organization", # accepts Organization, AccountId, ResourceArn
-    #           value: "ScopeValue",
-    #         },
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] resource_type
     #   The target resource type of the recommendation preference for which
     #   to return preferences.
@@ -2190,15 +1926,6 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRecommendationSummariesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_ids: ["AccountId"],
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] account_ids
     #   The ID of the Amazon Web Services account for which to return
     #   recommendation summaries.
@@ -2743,14 +2470,6 @@ module Aws::ComputeOptimizer
     # GetAutoScalingGroupRecommendations and GetEC2InstanceRecommendations
     # actions.
     #
-    # @note When making an API call, you may pass JobFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ResourceType", # accepts ResourceType, JobStatus
-    #         values: ["FilterValue"],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the filter.
     #
@@ -2996,14 +2715,6 @@ module Aws::ComputeOptimizer
     # `Filter` with the GetAutoScalingGroupRecommendations and
     # GetEC2InstanceRecommendations actions.
     #
-    # @note When making an API call, you may pass LambdaFunctionRecommendationFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Finding", # accepts Finding, FindingReasonCode
-    #         values: ["FilterValue"],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the filter.
     #
@@ -3201,22 +2912,6 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutRecommendationPreferencesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_type: "Ec2Instance", # required, accepts Ec2Instance, AutoScalingGroup, EbsVolume, LambdaFunction, NotApplicable
-    #         scope: {
-    #           name: "Organization", # accepts Organization, AccountId, ResourceArn
-    #           value: "ScopeValue",
-    #         },
-    #         enhanced_infrastructure_metrics: "Active", # accepts Active, Inactive
-    #         inferred_workload_types: "Active", # accepts Active, Inactive
-    #         external_metrics_preference: {
-    #           source: "Datadog", # accepts Datadog, Dynatrace, NewRelic, Instana
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_type
     #   The target resource type of the recommendation preference to create.
     #
@@ -3400,13 +3095,6 @@ module Aws::ComputeOptimizer
     # Describes the recommendation preferences to return in the response of
     # a GetAutoScalingGroupRecommendations, GetEC2InstanceRecommendations,
     # and GetEC2RecommendationProjectedMetrics request.
-    #
-    # @note When making an API call, you may pass RecommendationPreferences
-    #   data as a hash:
-    #
-    #       {
-    #         cpu_vendor_architectures: ["AWS_ARM64"], # accepts AWS_ARM64, CURRENT
-    #       }
     #
     # @!attribute [rw] cpu_vendor_architectures
     #   Specifies the CPU vendor and architecture for Amazon EC2 instance
@@ -3673,14 +3361,6 @@ module Aws::ComputeOptimizer
     #
     # [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/create-s3-bucket-policy-for-compute-optimizer.html
     #
-    # @note When making an API call, you may pass S3DestinationConfig
-    #   data as a hash:
-    #
-    #       {
-    #         bucket: "DestinationBucket",
-    #         key_prefix: "DestinationKeyPrefix",
-    #       }
-    #
     # @!attribute [rw] bucket
     #   The name of the Amazon S3 bucket to use as the destination for an
     #   export job.
@@ -3767,14 +3447,6 @@ module Aws::ComputeOptimizer
     #
     #
     # [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html
-    #
-    # @note When making an API call, you may pass Scope
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Organization", # accepts Organization, AccountId, ResourceArn
-    #         value: "ScopeValue",
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the scope.
@@ -3869,14 +3541,6 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateEnrollmentStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         status: "Active", # required, accepts Active, Inactive, Pending, Failed
-    #         include_member_accounts: false,
-    #       }
-    #
     # @!attribute [rw] status
     #   The new enrollment status of the account.
     #

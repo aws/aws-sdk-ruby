@@ -229,18 +229,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AddCustomRoutingEndpointsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_configurations: [ # required
-    #           {
-    #             endpoint_id: "GenericString",
-    #           },
-    #         ],
-    #         endpoint_group_arn: "GenericString", # required
-    #       }
-    #
     # @!attribute [rw] endpoint_configurations
     #   The list of endpoint objects to add to a custom routing accelerator.
     #   @return [Array<Types::CustomRoutingEndpointConfiguration>]
@@ -277,20 +265,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AddEndpointsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_configurations: [ # required
-    #           {
-    #             endpoint_id: "GenericString",
-    #             weight: 1,
-    #             client_ip_preservation_enabled: false,
-    #           },
-    #         ],
-    #         endpoint_group_arn: "GenericString", # required
-    #       }
-    #
     # @!attribute [rw] endpoint_configurations
     #   The list of endpoint objects.
     #   @return [Array<Types::EndpointConfiguration>]
@@ -325,13 +299,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AdvertiseByoipCidrRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cidr: "GenericString", # required
-    #       }
-    #
     # @!attribute [rw] cidr
     #   The address range, in CIDR notation. This must be the exact range
     #   that you provisioned. You can't advertise only a portion of the
@@ -358,17 +325,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AllowCustomRoutingTrafficRequest
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_group_arn: "GenericString", # required
-    #         endpoint_id: "GenericString", # required
-    #         destination_addresses: ["IpAddress"],
-    #         destination_ports: [1],
-    #         allow_all_traffic_to_endpoint: false,
-    #       }
-    #
     # @!attribute [rw] endpoint_group_arn
     #   The Amazon Resource Name (ARN) of the endpoint group.
     #   @return [String]
@@ -581,14 +537,6 @@ module Aws::GlobalAccelerator
     #
     # [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html
     #
-    # @note When making an API call, you may pass CidrAuthorizationContext
-    #   data as a hash:
-    #
-    #       {
-    #         message: "GenericString", # required
-    #         signature: "GenericString", # required
-    #       }
-    #
     # @!attribute [rw] message
     #   The plain-text authorization message for the prefix and account.
     #   @return [String]
@@ -619,23 +567,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAcceleratorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "GenericString", # required
-    #         ip_address_type: "IPV4", # accepts IPV4, DUAL_STACK
-    #         ip_addresses: ["IpAddress"],
-    #         enabled: false,
-    #         idempotency_token: "IdempotencyToken", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the accelerator. The name can have a maximum of 64
     #   characters, must contain only alphanumeric characters, periods (.),
@@ -731,23 +662,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateCustomRoutingAcceleratorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "GenericString", # required
-    #         ip_address_type: "IPV4", # accepts IPV4, DUAL_STACK
-    #         ip_addresses: ["IpAddress"],
-    #         enabled: false,
-    #         idempotency_token: "IdempotencyToken", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of a custom routing accelerator. The name can have a
     #   maximum of 64 characters, must contain only alphanumeric characters
@@ -842,22 +756,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateCustomRoutingEndpointGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         listener_arn: "GenericString", # required
-    #         endpoint_group_region: "GenericString", # required
-    #         destination_configurations: [ # required
-    #           {
-    #             from_port: 1, # required
-    #             to_port: 1, # required
-    #             protocols: ["TCP"], # required, accepts TCP, UDP
-    #           },
-    #         ],
-    #         idempotency_token: "IdempotencyToken", # required
-    #       }
-    #
     # @!attribute [rw] listener_arn
     #   The Amazon Resource Name (ARN) of the listener for a custom routing
     #   endpoint.
@@ -906,20 +804,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateCustomRoutingListenerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         accelerator_arn: "GenericString", # required
-    #         port_ranges: [ # required
-    #           {
-    #             from_port: 1,
-    #             to_port: 1,
-    #           },
-    #         ],
-    #         idempotency_token: "IdempotencyToken", # required
-    #       }
-    #
     # @!attribute [rw] accelerator_arn
     #   The Amazon Resource Name (ARN) of the accelerator for a custom
     #   routing listener.
@@ -967,34 +851,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateEndpointGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         listener_arn: "GenericString", # required
-    #         endpoint_group_region: "GenericString", # required
-    #         endpoint_configurations: [
-    #           {
-    #             endpoint_id: "GenericString",
-    #             weight: 1,
-    #             client_ip_preservation_enabled: false,
-    #           },
-    #         ],
-    #         traffic_dial_percentage: 1.0,
-    #         health_check_port: 1,
-    #         health_check_protocol: "TCP", # accepts TCP, HTTP, HTTPS
-    #         health_check_path: "HealthCheckPath",
-    #         health_check_interval_seconds: 1,
-    #         threshold_count: 1,
-    #         idempotency_token: "IdempotencyToken", # required
-    #         port_overrides: [
-    #           {
-    #             listener_port: 1,
-    #             endpoint_port: 1,
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] listener_arn
     #   The Amazon Resource Name (ARN) of the listener.
     #   @return [String]
@@ -1105,22 +961,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateListenerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         accelerator_arn: "GenericString", # required
-    #         port_ranges: [ # required
-    #           {
-    #             from_port: 1,
-    #             to_port: 1,
-    #           },
-    #         ],
-    #         protocol: "TCP", # required, accepts TCP, UDP
-    #         client_affinity: "NONE", # accepts NONE, SOURCE_IP
-    #         idempotency_token: "IdempotencyToken", # required
-    #       }
-    #
     # @!attribute [rw] accelerator_arn
     #   The Amazon Resource Name (ARN) of your accelerator.
     #   @return [String]
@@ -1320,15 +1160,6 @@ module Aws::GlobalAccelerator
     # all endpoints (virtual private cloud subnets) in an endpoint group to
     # accept client traffic on.
     #
-    # @note When making an API call, you may pass CustomRoutingDestinationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         from_port: 1, # required
-    #         to_port: 1, # required
-    #         protocols: ["TCP"], # required, accepts TCP, UDP
-    #       }
-    #
     # @!attribute [rw] from_port
     #   The first port, inclusive, in the range of ports for the endpoint
     #   group that is associated with a custom routing accelerator.
@@ -1385,13 +1216,6 @@ module Aws::GlobalAccelerator
 
     # The list of endpoint objects. For custom routing, this is a list of
     # virtual private cloud (VPC) subnet IDs.
-    #
-    # @note When making an API call, you may pass CustomRoutingEndpointConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_id: "GenericString",
-    #       }
     #
     # @!attribute [rw] endpoint_id
     #   An ID for the endpoint. For custom routing accelerators, this is the
@@ -1485,13 +1309,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAcceleratorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         accelerator_arn: "GenericString", # required
-    #       }
-    #
     # @!attribute [rw] accelerator_arn
     #   The Amazon Resource Name (ARN) of an accelerator.
     #   @return [String]
@@ -1504,13 +1321,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteCustomRoutingAcceleratorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         accelerator_arn: "GenericString", # required
-    #       }
-    #
     # @!attribute [rw] accelerator_arn
     #   The Amazon Resource Name (ARN) of the custom routing accelerator to
     #   delete.
@@ -1524,13 +1334,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteCustomRoutingEndpointGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_group_arn: "GenericString", # required
-    #       }
-    #
     # @!attribute [rw] endpoint_group_arn
     #   The Amazon Resource Name (ARN) of the endpoint group to delete.
     #   @return [String]
@@ -1543,13 +1346,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteCustomRoutingListenerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         listener_arn: "GenericString", # required
-    #       }
-    #
     # @!attribute [rw] listener_arn
     #   The Amazon Resource Name (ARN) of the listener to delete.
     #   @return [String]
@@ -1562,13 +1358,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteEndpointGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_group_arn: "GenericString", # required
-    #       }
-    #
     # @!attribute [rw] endpoint_group_arn
     #   The Amazon Resource Name (ARN) of the endpoint group to delete.
     #   @return [String]
@@ -1581,13 +1370,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteListenerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         listener_arn: "GenericString", # required
-    #       }
-    #
     # @!attribute [rw] listener_arn
     #   The Amazon Resource Name (ARN) of the listener.
     #   @return [String]
@@ -1600,17 +1382,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DenyCustomRoutingTrafficRequest
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_group_arn: "GenericString", # required
-    #         endpoint_id: "GenericString", # required
-    #         destination_addresses: ["IpAddress"],
-    #         destination_ports: [1],
-    #         deny_all_traffic_to_endpoint: false,
-    #       }
-    #
     # @!attribute [rw] endpoint_group_arn
     #   The Amazon Resource Name (ARN) of the endpoint group.
     #   @return [String]
@@ -1662,13 +1433,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeprovisionByoipCidrRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cidr: "GenericString", # required
-    #       }
-    #
     # @!attribute [rw] cidr
     #   The address range, in CIDR notation. The prefix must be the same
     #   prefix that you specified when you provisioned the address range.
@@ -1694,13 +1458,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAcceleratorAttributesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         accelerator_arn: "GenericString", # required
-    #       }
-    #
     # @!attribute [rw] accelerator_arn
     #   The Amazon Resource Name (ARN) of the accelerator with the
     #   attributes that you want to describe.
@@ -1726,13 +1483,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAcceleratorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         accelerator_arn: "GenericString", # required
-    #       }
-    #
     # @!attribute [rw] accelerator_arn
     #   The Amazon Resource Name (ARN) of the accelerator to describe.
     #   @return [String]
@@ -1757,13 +1507,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeCustomRoutingAcceleratorAttributesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         accelerator_arn: "GenericString", # required
-    #       }
-    #
     # @!attribute [rw] accelerator_arn
     #   The Amazon Resource Name (ARN) of the custom routing accelerator to
     #   describe the attributes for.
@@ -1789,13 +1532,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeCustomRoutingAcceleratorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         accelerator_arn: "GenericString", # required
-    #       }
-    #
     # @!attribute [rw] accelerator_arn
     #   The Amazon Resource Name (ARN) of the accelerator to describe.
     #   @return [String]
@@ -1820,13 +1556,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeCustomRoutingEndpointGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_group_arn: "GenericString", # required
-    #       }
-    #
     # @!attribute [rw] endpoint_group_arn
     #   The Amazon Resource Name (ARN) of the endpoint group to describe.
     #   @return [String]
@@ -1852,13 +1581,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeCustomRoutingListenerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         listener_arn: "GenericString", # required
-    #       }
-    #
     # @!attribute [rw] listener_arn
     #   The Amazon Resource Name (ARN) of the listener to describe.
     #   @return [String]
@@ -1883,13 +1605,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEndpointGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_group_arn: "GenericString", # required
-    #       }
-    #
     # @!attribute [rw] endpoint_group_arn
     #   The Amazon Resource Name (ARN) of the endpoint group to describe.
     #   @return [String]
@@ -1914,13 +1629,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeListenerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         listener_arn: "GenericString", # required
-    #       }
-    #
     # @!attribute [rw] listener_arn
     #   The Amazon Resource Name (ARN) of the listener to describe.
     #   @return [String]
@@ -2015,15 +1723,6 @@ module Aws::GlobalAccelerator
 
     # A complex type for endpoints. A resource must be valid and active when
     # you add it as an endpoint.
-    #
-    # @note When making an API call, you may pass EndpointConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_id: "GenericString",
-    #         weight: 1,
-    #         client_ip_preservation_enabled: false,
-    #       }
     #
     # @!attribute [rw] endpoint_id
     #   An ID for the endpoint. If the endpoint is a Network Load Balancer
@@ -2267,14 +1966,6 @@ module Aws::GlobalAccelerator
     # A complex type for an endpoint. Specifies information about the
     # endpoint to remove from the endpoint group.
     #
-    # @note When making an API call, you may pass EndpointIdentifier
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_id: "GenericString", # required
-    #         client_ip_preservation_enabled: false,
-    #       }
-    #
     # @!attribute [rw] endpoint_id
     #   An ID for the endpoint. If the endpoint is a Network Load Balancer
     #   or Application Load Balancer, this is the Amazon Resource Name (ARN)
@@ -2423,14 +2114,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAcceleratorsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "GenericString",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The number of Global Accelerator objects that you want to return
     #   with this call. The default value is 10.
@@ -2468,14 +2151,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListByoipCidrsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "GenericString",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to return with a single call. To
     #   retrieve the remaining results, make another call with the returned
@@ -2512,14 +2187,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCustomRoutingAcceleratorsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "GenericString",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The number of custom routing Global Accelerator objects that you
     #   want to return with this call. The default value is 10.
@@ -2557,15 +2224,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCustomRoutingEndpointGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         listener_arn: "GenericString", # required
-    #         max_results: 1,
-    #         next_token: "GenericString",
-    #       }
-    #
     # @!attribute [rw] listener_arn
     #   The Amazon Resource Name (ARN) of the listener to list endpoint
     #   groups for.
@@ -2610,15 +2268,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCustomRoutingListenersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         accelerator_arn: "GenericString", # required
-    #         max_results: 1,
-    #         next_token: "GenericString",
-    #       }
-    #
     # @!attribute [rw] accelerator_arn
     #   The Amazon Resource Name (ARN) of the accelerator to list listeners
     #   for.
@@ -2662,16 +2311,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCustomRoutingPortMappingsByDestinationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_id: "GenericString", # required
-    #         destination_address: "GenericString", # required
-    #         max_results: 1,
-    #         next_token: "GenericString",
-    #       }
-    #
     # @!attribute [rw] endpoint_id
     #   The ID for the virtual private cloud (VPC) subnet.
     #   @return [String]
@@ -2721,16 +2360,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCustomRoutingPortMappingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         accelerator_arn: "GenericString", # required
-    #         endpoint_group_arn: "GenericString",
-    #         max_results: 1,
-    #         next_token: "GenericString",
-    #       }
-    #
     # @!attribute [rw] accelerator_arn
     #   The Amazon Resource Name (ARN) of the accelerator to list the custom
     #   routing port mappings for.
@@ -2780,15 +2409,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEndpointGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         listener_arn: "GenericString", # required
-    #         max_results: 1,
-    #         next_token: "GenericString",
-    #       }
-    #
     # @!attribute [rw] listener_arn
     #   The Amazon Resource Name (ARN) of the listener.
     #   @return [String]
@@ -2831,15 +2451,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListListenersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         accelerator_arn: "GenericString", # required
-    #         max_results: 1,
-    #         next_token: "GenericString",
-    #       }
-    #
     # @!attribute [rw] accelerator_arn
     #   The Amazon Resource Name (ARN) of the accelerator for which you want
     #   to list listener objects.
@@ -2883,13 +2494,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the accelerator to list tags for.
     #   An ARN uniquely identifies an accelerator.
@@ -3040,14 +2644,6 @@ module Aws::GlobalAccelerator
     #
     # [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoint-groups-port-override.html
     #
-    # @note When making an API call, you may pass PortOverride
-    #   data as a hash:
-    #
-    #       {
-    #         listener_port: 1,
-    #         endpoint_port: 1,
-    #       }
-    #
     # @!attribute [rw] listener_port
     #   The listener port that you want to map to a specific endpoint port.
     #   This is the port that user traffic arrives to the Global Accelerator
@@ -3071,14 +2667,6 @@ module Aws::GlobalAccelerator
 
     # A complex type for a range of ports for a listener.
     #
-    # @note When making an API call, you may pass PortRange
-    #   data as a hash:
-    #
-    #       {
-    #         from_port: 1,
-    #         to_port: 1,
-    #       }
-    #
     # @!attribute [rw] from_port
     #   The first port in the range of ports, inclusive.
     #   @return [Integer]
@@ -3096,17 +2684,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ProvisionByoipCidrRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cidr: "GenericString", # required
-    #         cidr_authorization_context: { # required
-    #           message: "GenericString", # required
-    #           signature: "GenericString", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] cidr
     #   The public IPv4 address range, in CIDR notation. The most specific
     #   IP prefix that you can specify is /24. The address range cannot
@@ -3140,14 +2717,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RemoveCustomRoutingEndpointsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_ids: ["GenericString"], # required
-    #         endpoint_group_arn: "GenericString", # required
-    #       }
-    #
     # @!attribute [rw] endpoint_ids
     #   The IDs for the endpoints. For custom routing accelerators, endpoint
     #   IDs are the virtual private cloud (VPC) subnet IDs.
@@ -3167,19 +2736,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RemoveEndpointsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_identifiers: [ # required
-    #           {
-    #             endpoint_id: "GenericString", # required
-    #             client_ip_preservation_enabled: false,
-    #           },
-    #         ],
-    #         endpoint_group_arn: "GenericString", # required
-    #       }
-    #
     # @!attribute [rw] endpoint_identifiers
     #   The identifiers of the endpoints that you want to remove.
     #   @return [Array<Types::EndpointIdentifier>]
@@ -3218,14 +2774,6 @@ module Aws::GlobalAccelerator
 
     # A complex type that contains a `Tag` key and `Tag` value.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   A string that contains a `Tag` key.
     #   @return [String]
@@ -3243,19 +2791,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the Global Accelerator resource to
     #   add tags to. An ARN uniquely identifies a resource.
@@ -3293,14 +2828,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the Global Accelerator resource to
     #   remove tags from. An ARN uniquely identifies a resource.
@@ -3324,16 +2851,6 @@ module Aws::GlobalAccelerator
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateAcceleratorAttributesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         accelerator_arn: "GenericString", # required
-    #         flow_logs_enabled: false,
-    #         flow_logs_s3_bucket: "GenericString",
-    #         flow_logs_s3_prefix: "GenericString",
-    #       }
-    #
     # @!attribute [rw] accelerator_arn
     #   The Amazon Resource Name (ARN) of the accelerator that you want to
     #   update.
@@ -3393,16 +2910,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateAcceleratorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         accelerator_arn: "GenericString", # required
-    #         name: "GenericString",
-    #         ip_address_type: "IPV4", # accepts IPV4, DUAL_STACK
-    #         enabled: false,
-    #       }
-    #
     # @!attribute [rw] accelerator_arn
     #   The Amazon Resource Name (ARN) of the accelerator to update.
     #   @return [String]
@@ -3449,16 +2956,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateCustomRoutingAcceleratorAttributesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         accelerator_arn: "GenericString", # required
-    #         flow_logs_enabled: false,
-    #         flow_logs_s3_bucket: "GenericString",
-    #         flow_logs_s3_prefix: "GenericString",
-    #       }
-    #
     # @!attribute [rw] accelerator_arn
     #   The Amazon Resource Name (ARN) of the custom routing accelerator to
     #   update attributes for.
@@ -3519,16 +3016,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateCustomRoutingAcceleratorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         accelerator_arn: "GenericString", # required
-    #         name: "GenericString",
-    #         ip_address_type: "IPV4", # accepts IPV4, DUAL_STACK
-    #         enabled: false,
-    #       }
-    #
     # @!attribute [rw] accelerator_arn
     #   The Amazon Resource Name (ARN) of the accelerator to update.
     #   @return [String]
@@ -3575,19 +3062,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateCustomRoutingListenerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         listener_arn: "GenericString", # required
-    #         port_ranges: [ # required
-    #           {
-    #             from_port: 1,
-    #             to_port: 1,
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] listener_arn
     #   The Amazon Resource Name (ARN) of the listener to update.
     #   @return [String]
@@ -3627,32 +3101,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateEndpointGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_group_arn: "GenericString", # required
-    #         endpoint_configurations: [
-    #           {
-    #             endpoint_id: "GenericString",
-    #             weight: 1,
-    #             client_ip_preservation_enabled: false,
-    #           },
-    #         ],
-    #         traffic_dial_percentage: 1.0,
-    #         health_check_port: 1,
-    #         health_check_protocol: "TCP", # accepts TCP, HTTP, HTTPS
-    #         health_check_path: "HealthCheckPath",
-    #         health_check_interval_seconds: 1,
-    #         threshold_count: 1,
-    #         port_overrides: [
-    #           {
-    #             listener_port: 1,
-    #             endpoint_port: 1,
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] endpoint_group_arn
     #   The Amazon Resource Name (ARN) of the endpoint group.
     #   @return [String]
@@ -3749,21 +3197,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateListenerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         listener_arn: "GenericString", # required
-    #         port_ranges: [
-    #           {
-    #             from_port: 1,
-    #             to_port: 1,
-    #           },
-    #         ],
-    #         protocol: "TCP", # accepts TCP, UDP
-    #         client_affinity: "NONE", # accepts NONE, SOURCE_IP
-    #       }
-    #
     # @!attribute [rw] listener_arn
     #   The Amazon Resource Name (ARN) of the listener to update.
     #   @return [String]
@@ -3827,13 +3260,6 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass WithdrawByoipCidrRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cidr: "GenericString", # required
-    #       }
-    #
     # @!attribute [rw] cidr
     #   The address range, in CIDR notation.
     #   @return [String]

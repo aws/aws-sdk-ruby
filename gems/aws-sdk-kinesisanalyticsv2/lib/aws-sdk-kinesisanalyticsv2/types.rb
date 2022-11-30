@@ -10,18 +10,6 @@
 module Aws::KinesisAnalyticsV2
   module Types
 
-    # @note When making an API call, you may pass AddApplicationCloudWatchLoggingOptionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_name: "ApplicationName", # required
-    #         current_application_version_id: 1,
-    #         cloud_watch_logging_option: { # required
-    #           log_stream_arn: "LogStreamARN", # required
-    #         },
-    #         conditional_token: "ConditionalToken",
-    #       }
-    #
     # @!attribute [rw] application_name
     #   The Kinesis Data Analytics application name.
     #   @return [String]
@@ -85,20 +73,6 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AddApplicationInputProcessingConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_name: "ApplicationName", # required
-    #         current_application_version_id: 1, # required
-    #         input_id: "Id", # required
-    #         input_processing_configuration: { # required
-    #           input_lambda_processor: { # required
-    #             resource_arn: "ResourceARN", # required
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] application_name
     #   The name of the application to which you want to add the input
     #   processing configuration.
@@ -163,53 +137,6 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AddApplicationInputRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_name: "ApplicationName", # required
-    #         current_application_version_id: 1, # required
-    #         input: { # required
-    #           name_prefix: "InAppStreamName", # required
-    #           input_processing_configuration: {
-    #             input_lambda_processor: { # required
-    #               resource_arn: "ResourceARN", # required
-    #             },
-    #           },
-    #           kinesis_streams_input: {
-    #             resource_arn: "ResourceARN", # required
-    #           },
-    #           kinesis_firehose_input: {
-    #             resource_arn: "ResourceARN", # required
-    #           },
-    #           input_parallelism: {
-    #             count: 1,
-    #           },
-    #           input_schema: { # required
-    #             record_format: { # required
-    #               record_format_type: "JSON", # required, accepts JSON, CSV
-    #               mapping_parameters: {
-    #                 json_mapping_parameters: {
-    #                   record_row_path: "RecordRowPath", # required
-    #                 },
-    #                 csv_mapping_parameters: {
-    #                   record_row_delimiter: "RecordRowDelimiter", # required
-    #                   record_column_delimiter: "RecordColumnDelimiter", # required
-    #                 },
-    #               },
-    #             },
-    #             record_encoding: "RecordEncoding",
-    #             record_columns: [ # required
-    #               {
-    #                 name: "RecordColumnName", # required
-    #                 mapping: "RecordColumnMapping",
-    #                 sql_type: "RecordColumnSqlType", # required
-    #               },
-    #             ],
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] application_name
     #   The name of your existing application to which you want to add the
     #   streaming source.
@@ -258,29 +185,6 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AddApplicationOutputRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_name: "ApplicationName", # required
-    #         current_application_version_id: 1, # required
-    #         output: { # required
-    #           name: "InAppStreamName", # required
-    #           kinesis_streams_output: {
-    #             resource_arn: "ResourceARN", # required
-    #           },
-    #           kinesis_firehose_output: {
-    #             resource_arn: "ResourceARN", # required
-    #           },
-    #           lambda_output: {
-    #             resource_arn: "ResourceARN", # required
-    #           },
-    #           destination_schema: { # required
-    #             record_format_type: "JSON", # required, accepts JSON, CSV
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] application_name
     #   The name of the application to which you want to add the output
     #   configuration.
@@ -339,43 +243,6 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AddApplicationReferenceDataSourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_name: "ApplicationName", # required
-    #         current_application_version_id: 1, # required
-    #         reference_data_source: { # required
-    #           table_name: "InAppTableName", # required
-    #           s3_reference_data_source: {
-    #             bucket_arn: "BucketARN",
-    #             file_key: "FileKey",
-    #           },
-    #           reference_schema: { # required
-    #             record_format: { # required
-    #               record_format_type: "JSON", # required, accepts JSON, CSV
-    #               mapping_parameters: {
-    #                 json_mapping_parameters: {
-    #                   record_row_path: "RecordRowPath", # required
-    #                 },
-    #                 csv_mapping_parameters: {
-    #                   record_row_delimiter: "RecordRowDelimiter", # required
-    #                   record_column_delimiter: "RecordColumnDelimiter", # required
-    #                 },
-    #               },
-    #             },
-    #             record_encoding: "RecordEncoding",
-    #             record_columns: [ # required
-    #               {
-    #                 name: "RecordColumnName", # required
-    #                 mapping: "RecordColumnMapping",
-    #                 sql_type: "RecordColumnSqlType", # required
-    #               },
-    #             ],
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] application_name
     #   The name of an existing application.
     #   @return [String]
@@ -429,19 +296,6 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AddApplicationVpcConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_name: "ApplicationName", # required
-    #         current_application_version_id: 1,
-    #         vpc_configuration: { # required
-    #           subnet_ids: ["SubnetId"], # required
-    #           security_group_ids: ["SecurityGroupId"], # required
-    #         },
-    #         conditional_token: "ConditionalToken",
-    #       }
-    #
     # @!attribute [rw] application_name
     #   The name of an existing application.
     #   @return [String]
@@ -507,22 +361,6 @@ module Aws::KinesisAnalyticsV2
 
     # Describes code configuration for an application.
     #
-    # @note When making an API call, you may pass ApplicationCodeConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         code_content: {
-    #           text_content: "TextContent",
-    #           zip_file_content: "data",
-    #           s3_content_location: {
-    #             bucket_arn: "BucketARN", # required
-    #             file_key: "FileKey", # required
-    #             object_version: "ObjectVersion",
-    #           },
-    #         },
-    #         code_content_type: "PLAINTEXT", # required, accepts PLAINTEXT, ZIPFILE
-    #       }
-    #
     # @!attribute [rw] code_content
     #   The location and type of the application code.
     #   @return [Types::CodeContent]
@@ -564,22 +402,6 @@ module Aws::KinesisAnalyticsV2
     # supported for a Flink-based Kinesis Data Analytics application or a
     # SQL-based Kinesis Data Analytics application.
     #
-    # @note When making an API call, you may pass ApplicationCodeConfigurationUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         code_content_type_update: "PLAINTEXT", # accepts PLAINTEXT, ZIPFILE
-    #         code_content_update: {
-    #           text_content_update: "TextContent",
-    #           zip_file_content_update: "data",
-    #           s3_content_location_update: {
-    #             bucket_arn_update: "BucketARN",
-    #             file_key_update: "FileKey",
-    #             object_version_update: "ObjectVersion",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] code_content_type_update
     #   Describes updates to the code content type.
     #   @return [String]
@@ -599,184 +421,6 @@ module Aws::KinesisAnalyticsV2
 
     # Specifies the creation parameters for a Kinesis Data Analytics
     # application.
-    #
-    # @note When making an API call, you may pass ApplicationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         sql_application_configuration: {
-    #           inputs: [
-    #             {
-    #               name_prefix: "InAppStreamName", # required
-    #               input_processing_configuration: {
-    #                 input_lambda_processor: { # required
-    #                   resource_arn: "ResourceARN", # required
-    #                 },
-    #               },
-    #               kinesis_streams_input: {
-    #                 resource_arn: "ResourceARN", # required
-    #               },
-    #               kinesis_firehose_input: {
-    #                 resource_arn: "ResourceARN", # required
-    #               },
-    #               input_parallelism: {
-    #                 count: 1,
-    #               },
-    #               input_schema: { # required
-    #                 record_format: { # required
-    #                   record_format_type: "JSON", # required, accepts JSON, CSV
-    #                   mapping_parameters: {
-    #                     json_mapping_parameters: {
-    #                       record_row_path: "RecordRowPath", # required
-    #                     },
-    #                     csv_mapping_parameters: {
-    #                       record_row_delimiter: "RecordRowDelimiter", # required
-    #                       record_column_delimiter: "RecordColumnDelimiter", # required
-    #                     },
-    #                   },
-    #                 },
-    #                 record_encoding: "RecordEncoding",
-    #                 record_columns: [ # required
-    #                   {
-    #                     name: "RecordColumnName", # required
-    #                     mapping: "RecordColumnMapping",
-    #                     sql_type: "RecordColumnSqlType", # required
-    #                   },
-    #                 ],
-    #               },
-    #             },
-    #           ],
-    #           outputs: [
-    #             {
-    #               name: "InAppStreamName", # required
-    #               kinesis_streams_output: {
-    #                 resource_arn: "ResourceARN", # required
-    #               },
-    #               kinesis_firehose_output: {
-    #                 resource_arn: "ResourceARN", # required
-    #               },
-    #               lambda_output: {
-    #                 resource_arn: "ResourceARN", # required
-    #               },
-    #               destination_schema: { # required
-    #                 record_format_type: "JSON", # required, accepts JSON, CSV
-    #               },
-    #             },
-    #           ],
-    #           reference_data_sources: [
-    #             {
-    #               table_name: "InAppTableName", # required
-    #               s3_reference_data_source: {
-    #                 bucket_arn: "BucketARN",
-    #                 file_key: "FileKey",
-    #               },
-    #               reference_schema: { # required
-    #                 record_format: { # required
-    #                   record_format_type: "JSON", # required, accepts JSON, CSV
-    #                   mapping_parameters: {
-    #                     json_mapping_parameters: {
-    #                       record_row_path: "RecordRowPath", # required
-    #                     },
-    #                     csv_mapping_parameters: {
-    #                       record_row_delimiter: "RecordRowDelimiter", # required
-    #                       record_column_delimiter: "RecordColumnDelimiter", # required
-    #                     },
-    #                   },
-    #                 },
-    #                 record_encoding: "RecordEncoding",
-    #                 record_columns: [ # required
-    #                   {
-    #                     name: "RecordColumnName", # required
-    #                     mapping: "RecordColumnMapping",
-    #                     sql_type: "RecordColumnSqlType", # required
-    #                   },
-    #                 ],
-    #               },
-    #             },
-    #           ],
-    #         },
-    #         flink_application_configuration: {
-    #           checkpoint_configuration: {
-    #             configuration_type: "DEFAULT", # required, accepts DEFAULT, CUSTOM
-    #             checkpointing_enabled: false,
-    #             checkpoint_interval: 1,
-    #             min_pause_between_checkpoints: 1,
-    #           },
-    #           monitoring_configuration: {
-    #             configuration_type: "DEFAULT", # required, accepts DEFAULT, CUSTOM
-    #             metrics_level: "APPLICATION", # accepts APPLICATION, TASK, OPERATOR, PARALLELISM
-    #             log_level: "INFO", # accepts INFO, WARN, ERROR, DEBUG
-    #           },
-    #           parallelism_configuration: {
-    #             configuration_type: "DEFAULT", # required, accepts DEFAULT, CUSTOM
-    #             parallelism: 1,
-    #             parallelism_per_kpu: 1,
-    #             auto_scaling_enabled: false,
-    #           },
-    #         },
-    #         environment_properties: {
-    #           property_groups: [ # required
-    #             {
-    #               property_group_id: "Id", # required
-    #               property_map: { # required
-    #                 "PropertyKey" => "PropertyValue",
-    #               },
-    #             },
-    #           ],
-    #         },
-    #         application_code_configuration: {
-    #           code_content: {
-    #             text_content: "TextContent",
-    #             zip_file_content: "data",
-    #             s3_content_location: {
-    #               bucket_arn: "BucketARN", # required
-    #               file_key: "FileKey", # required
-    #               object_version: "ObjectVersion",
-    #             },
-    #           },
-    #           code_content_type: "PLAINTEXT", # required, accepts PLAINTEXT, ZIPFILE
-    #         },
-    #         application_snapshot_configuration: {
-    #           snapshots_enabled: false, # required
-    #         },
-    #         vpc_configurations: [
-    #           {
-    #             subnet_ids: ["SubnetId"], # required
-    #             security_group_ids: ["SecurityGroupId"], # required
-    #           },
-    #         ],
-    #         zeppelin_application_configuration: {
-    #           monitoring_configuration: {
-    #             log_level: "INFO", # required, accepts INFO, WARN, ERROR, DEBUG
-    #           },
-    #           catalog_configuration: {
-    #             glue_data_catalog_configuration: { # required
-    #               database_arn: "DatabaseARN", # required
-    #             },
-    #           },
-    #           deploy_as_application_configuration: {
-    #             s3_content_location: { # required
-    #               bucket_arn: "BucketARN", # required
-    #               base_path: "BasePath",
-    #             },
-    #           },
-    #           custom_artifacts_configuration: [
-    #             {
-    #               artifact_type: "UDF", # required, accepts UDF, DEPENDENCY_JAR
-    #               s3_content_location: {
-    #                 bucket_arn: "BucketARN", # required
-    #                 file_key: "FileKey", # required
-    #                 object_version: "ObjectVersion",
-    #               },
-    #               maven_reference: {
-    #                 group_id: "MavenGroupId", # required
-    #                 artifact_id: "MavenArtifactId", # required
-    #                 version: "MavenVersion", # required
-    #               },
-    #             },
-    #           ],
-    #         },
-    #       }
     #
     # @!attribute [rw] sql_application_configuration
     #   The creation and update parameters for a SQL-based Kinesis Data
@@ -885,188 +529,6 @@ module Aws::KinesisAnalyticsV2
     end
 
     # Describes updates to an application's configuration.
-    #
-    # @note When making an API call, you may pass ApplicationConfigurationUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         sql_application_configuration_update: {
-    #           input_updates: [
-    #             {
-    #               input_id: "Id", # required
-    #               name_prefix_update: "InAppStreamName",
-    #               input_processing_configuration_update: {
-    #                 input_lambda_processor_update: { # required
-    #                   resource_arn_update: "ResourceARN", # required
-    #                 },
-    #               },
-    #               kinesis_streams_input_update: {
-    #                 resource_arn_update: "ResourceARN", # required
-    #               },
-    #               kinesis_firehose_input_update: {
-    #                 resource_arn_update: "ResourceARN", # required
-    #               },
-    #               input_schema_update: {
-    #                 record_format_update: {
-    #                   record_format_type: "JSON", # required, accepts JSON, CSV
-    #                   mapping_parameters: {
-    #                     json_mapping_parameters: {
-    #                       record_row_path: "RecordRowPath", # required
-    #                     },
-    #                     csv_mapping_parameters: {
-    #                       record_row_delimiter: "RecordRowDelimiter", # required
-    #                       record_column_delimiter: "RecordColumnDelimiter", # required
-    #                     },
-    #                   },
-    #                 },
-    #                 record_encoding_update: "RecordEncoding",
-    #                 record_column_updates: [
-    #                   {
-    #                     name: "RecordColumnName", # required
-    #                     mapping: "RecordColumnMapping",
-    #                     sql_type: "RecordColumnSqlType", # required
-    #                   },
-    #                 ],
-    #               },
-    #               input_parallelism_update: {
-    #                 count_update: 1, # required
-    #               },
-    #             },
-    #           ],
-    #           output_updates: [
-    #             {
-    #               output_id: "Id", # required
-    #               name_update: "InAppStreamName",
-    #               kinesis_streams_output_update: {
-    #                 resource_arn_update: "ResourceARN", # required
-    #               },
-    #               kinesis_firehose_output_update: {
-    #                 resource_arn_update: "ResourceARN", # required
-    #               },
-    #               lambda_output_update: {
-    #                 resource_arn_update: "ResourceARN", # required
-    #               },
-    #               destination_schema_update: {
-    #                 record_format_type: "JSON", # required, accepts JSON, CSV
-    #               },
-    #             },
-    #           ],
-    #           reference_data_source_updates: [
-    #             {
-    #               reference_id: "Id", # required
-    #               table_name_update: "InAppTableName",
-    #               s3_reference_data_source_update: {
-    #                 bucket_arn_update: "BucketARN",
-    #                 file_key_update: "FileKey",
-    #               },
-    #               reference_schema_update: {
-    #                 record_format: { # required
-    #                   record_format_type: "JSON", # required, accepts JSON, CSV
-    #                   mapping_parameters: {
-    #                     json_mapping_parameters: {
-    #                       record_row_path: "RecordRowPath", # required
-    #                     },
-    #                     csv_mapping_parameters: {
-    #                       record_row_delimiter: "RecordRowDelimiter", # required
-    #                       record_column_delimiter: "RecordColumnDelimiter", # required
-    #                     },
-    #                   },
-    #                 },
-    #                 record_encoding: "RecordEncoding",
-    #                 record_columns: [ # required
-    #                   {
-    #                     name: "RecordColumnName", # required
-    #                     mapping: "RecordColumnMapping",
-    #                     sql_type: "RecordColumnSqlType", # required
-    #                   },
-    #                 ],
-    #               },
-    #             },
-    #           ],
-    #         },
-    #         application_code_configuration_update: {
-    #           code_content_type_update: "PLAINTEXT", # accepts PLAINTEXT, ZIPFILE
-    #           code_content_update: {
-    #             text_content_update: "TextContent",
-    #             zip_file_content_update: "data",
-    #             s3_content_location_update: {
-    #               bucket_arn_update: "BucketARN",
-    #               file_key_update: "FileKey",
-    #               object_version_update: "ObjectVersion",
-    #             },
-    #           },
-    #         },
-    #         flink_application_configuration_update: {
-    #           checkpoint_configuration_update: {
-    #             configuration_type_update: "DEFAULT", # accepts DEFAULT, CUSTOM
-    #             checkpointing_enabled_update: false,
-    #             checkpoint_interval_update: 1,
-    #             min_pause_between_checkpoints_update: 1,
-    #           },
-    #           monitoring_configuration_update: {
-    #             configuration_type_update: "DEFAULT", # accepts DEFAULT, CUSTOM
-    #             metrics_level_update: "APPLICATION", # accepts APPLICATION, TASK, OPERATOR, PARALLELISM
-    #             log_level_update: "INFO", # accepts INFO, WARN, ERROR, DEBUG
-    #           },
-    #           parallelism_configuration_update: {
-    #             configuration_type_update: "DEFAULT", # accepts DEFAULT, CUSTOM
-    #             parallelism_update: 1,
-    #             parallelism_per_kpu_update: 1,
-    #             auto_scaling_enabled_update: false,
-    #           },
-    #         },
-    #         environment_property_updates: {
-    #           property_groups: [ # required
-    #             {
-    #               property_group_id: "Id", # required
-    #               property_map: { # required
-    #                 "PropertyKey" => "PropertyValue",
-    #               },
-    #             },
-    #           ],
-    #         },
-    #         application_snapshot_configuration_update: {
-    #           snapshots_enabled_update: false, # required
-    #         },
-    #         vpc_configuration_updates: [
-    #           {
-    #             vpc_configuration_id: "Id", # required
-    #             subnet_id_updates: ["SubnetId"],
-    #             security_group_id_updates: ["SecurityGroupId"],
-    #           },
-    #         ],
-    #         zeppelin_application_configuration_update: {
-    #           monitoring_configuration_update: {
-    #             log_level_update: "INFO", # required, accepts INFO, WARN, ERROR, DEBUG
-    #           },
-    #           catalog_configuration_update: {
-    #             glue_data_catalog_configuration_update: { # required
-    #               database_arn_update: "DatabaseARN", # required
-    #             },
-    #           },
-    #           deploy_as_application_configuration_update: {
-    #             s3_content_location_update: {
-    #               bucket_arn_update: "BucketARN",
-    #               base_path_update: "BasePath",
-    #             },
-    #           },
-    #           custom_artifacts_configuration_update: [
-    #             {
-    #               artifact_type: "UDF", # required, accepts UDF, DEPENDENCY_JAR
-    #               s3_content_location: {
-    #                 bucket_arn: "BucketARN", # required
-    #                 file_key: "FileKey", # required
-    #                 object_version: "ObjectVersion",
-    #               },
-    #               maven_reference: {
-    #                 group_id: "MavenGroupId", # required
-    #                 artifact_id: "MavenArtifactId", # required
-    #                 version: "MavenVersion", # required
-    #               },
-    #             },
-    #           ],
-    #         },
-    #       }
     #
     # @!attribute [rw] sql_application_configuration_update
     #   Describes updates to a SQL-based Kinesis Data Analytics
@@ -1242,13 +704,6 @@ module Aws::KinesisAnalyticsV2
 
     # Describes the updated maintenance configuration for the application.
     #
-    # @note When making an API call, you may pass ApplicationMaintenanceConfigurationUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         application_maintenance_window_start_time_update: "ApplicationMaintenanceWindowStartTime", # required
-    #       }
-    #
     # @!attribute [rw] application_maintenance_window_start_time_update
     #   The updated start time for the maintenance window.
     #   @return [String]
@@ -1263,14 +718,6 @@ module Aws::KinesisAnalyticsV2
 
     # Specifies the method and snapshot to use when restarting an
     # application using previously saved application state.
-    #
-    # @note When making an API call, you may pass ApplicationRestoreConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         application_restore_type: "SKIP_RESTORE_FROM_SNAPSHOT", # required, accepts SKIP_RESTORE_FROM_SNAPSHOT, RESTORE_FROM_LATEST_SNAPSHOT, RESTORE_FROM_CUSTOM_SNAPSHOT
-    #         snapshot_name: "SnapshotName",
-    #       }
     #
     # @!attribute [rw] application_restore_type
     #   Specifies how the application should be restored.
@@ -1294,13 +741,6 @@ module Aws::KinesisAnalyticsV2
 
     # Describes whether snapshots are enabled for a Flink-based Kinesis Data
     # Analytics application.
-    #
-    # @note When making an API call, you may pass ApplicationSnapshotConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         snapshots_enabled: false, # required
-    #       }
     #
     # @!attribute [rw] snapshots_enabled
     #   Describes whether snapshots are enabled for a Flink-based Kinesis
@@ -1333,13 +773,6 @@ module Aws::KinesisAnalyticsV2
 
     # Describes updates to whether snapshots are enabled for a Flink-based
     # Kinesis Data Analytics application.
-    #
-    # @note When making an API call, you may pass ApplicationSnapshotConfigurationUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         snapshots_enabled_update: false, # required
-    #       }
     #
     # @!attribute [rw] snapshots_enabled_update
     #   Describes updates to whether snapshots are enabled for an
@@ -1426,14 +859,6 @@ module Aws::KinesisAnalyticsV2
     #
     # `"name2", "address2"`
     #
-    # @note When making an API call, you may pass CSVMappingParameters
-    #   data as a hash:
-    #
-    #       {
-    #         record_row_delimiter: "RecordRowDelimiter", # required
-    #         record_column_delimiter: "RecordColumnDelimiter", # required
-    #       }
-    #
     # @!attribute [rw] record_row_delimiter
     #   The row delimiter. For example, in a CSV format, *'\\n'* is the
     #   typical row delimiter.
@@ -1456,15 +881,6 @@ module Aws::KinesisAnalyticsV2
     # The configuration parameters for the default Amazon Glue database. You
     # use this database for SQL queries that you write in a Kinesis Data
     # Analytics Studio notebook.
-    #
-    # @note When making an API call, you may pass CatalogConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         glue_data_catalog_configuration: { # required
-    #           database_arn: "DatabaseARN", # required
-    #         },
-    #       }
     #
     # @!attribute [rw] glue_data_catalog_configuration
     #   The configuration parameters for the default Amazon Glue database.
@@ -1503,15 +919,6 @@ module Aws::KinesisAnalyticsV2
     # database. You use this database for SQL queries that you write in a
     # Kinesis Data Analytics Studio notebook.
     #
-    # @note When making an API call, you may pass CatalogConfigurationUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         glue_data_catalog_configuration_update: { # required
-    #           database_arn_update: "DatabaseARN", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] glue_data_catalog_configuration_update
     #   Updates to the configuration parameters for the default Amazon Glue
     #   database. You use this database for SQL queries that you write in a
@@ -1535,16 +942,6 @@ module Aws::KinesisAnalyticsV2
     #
     # [1]: https://ci.apache.org/projects/flink/flink-docs-release-1.8/concepts/programming-model.html#checkpoints-for-fault-tolerance
     # [2]: https://ci.apache.org/projects/flink/flink-docs-release-1.8/
-    #
-    # @note When making an API call, you may pass CheckpointConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_type: "DEFAULT", # required, accepts DEFAULT, CUSTOM
-    #         checkpointing_enabled: false,
-    #         checkpoint_interval: 1,
-    #         min_pause_between_checkpoints: 1,
-    #       }
     #
     # @!attribute [rw] configuration_type
     #   Describes whether the application uses Kinesis Data Analytics'
@@ -1689,16 +1086,6 @@ module Aws::KinesisAnalyticsV2
     # Describes updates to the checkpointing parameters for a Flink-based
     # Kinesis Data Analytics application.
     #
-    # @note When making an API call, you may pass CheckpointConfigurationUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_type_update: "DEFAULT", # accepts DEFAULT, CUSTOM
-    #         checkpointing_enabled_update: false,
-    #         checkpoint_interval_update: 1,
-    #         min_pause_between_checkpoints_update: 1,
-    #       }
-    #
     # @!attribute [rw] configuration_type_update
     #   Describes updates to whether the application uses the default
     #   checkpointing behavior of Kinesis Data Analytics. You must set this
@@ -1768,13 +1155,6 @@ module Aws::KinesisAnalyticsV2
     # Provides a description of Amazon CloudWatch logging options, including
     # the log stream Amazon Resource Name (ARN).
     #
-    # @note When making an API call, you may pass CloudWatchLoggingOption
-    #   data as a hash:
-    #
-    #       {
-    #         log_stream_arn: "LogStreamARN", # required
-    #       }
-    #
     # @!attribute [rw] log_stream_arn
     #   The ARN of the CloudWatch log to receive application messages.
     #   @return [String]
@@ -1820,14 +1200,6 @@ module Aws::KinesisAnalyticsV2
 
     # Describes the Amazon CloudWatch logging option updates.
     #
-    # @note When making an API call, you may pass CloudWatchLoggingOptionUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         cloud_watch_logging_option_id: "Id", # required
-    #         log_stream_arn_update: "LogStreamARN",
-    #       }
-    #
     # @!attribute [rw] cloud_watch_logging_option_id
     #   The ID of the CloudWatch logging option to update
     #   @return [String]
@@ -1849,19 +1221,6 @@ module Aws::KinesisAnalyticsV2
     # Specifies either the application code, or the location of the
     # application code, for a Flink-based Kinesis Data Analytics
     # application.
-    #
-    # @note When making an API call, you may pass CodeContent
-    #   data as a hash:
-    #
-    #       {
-    #         text_content: "TextContent",
-    #         zip_file_content: "data",
-    #         s3_content_location: {
-    #           bucket_arn: "BucketARN", # required
-    #           file_key: "FileKey", # required
-    #           object_version: "ObjectVersion",
-    #         },
-    #       }
     #
     # @!attribute [rw] text_content
     #   The text-format code for a Flink-based Kinesis Data Analytics
@@ -1923,19 +1282,6 @@ module Aws::KinesisAnalyticsV2
     # Describes an update to the code of an application. Not supported for
     # Apache Zeppelin.
     #
-    # @note When making an API call, you may pass CodeContentUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         text_content_update: "TextContent",
-    #         zip_file_content_update: "data",
-    #         s3_content_location_update: {
-    #           bucket_arn_update: "BucketARN",
-    #           file_key_update: "FileKey",
-    #           object_version_update: "ObjectVersion",
-    #         },
-    #       }
-    #
     # @!attribute [rw] text_content_update
     #   Describes an update to the text code for an application.
     #   @return [String]
@@ -1987,15 +1333,6 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateApplicationPresignedUrlRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_name: "ApplicationName", # required
-    #         url_type: "FLINK_DASHBOARD_URL", # required, accepts FLINK_DASHBOARD_URL, ZEPPELIN_UI_URL
-    #         session_expiration_duration_in_seconds: 1,
-    #       }
-    #
     # @!attribute [rw] application_name
     #   The name of the application.
     #   @return [String]
@@ -2032,202 +1369,6 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_name: "ApplicationName", # required
-    #         application_description: "ApplicationDescription",
-    #         runtime_environment: "SQL-1_0", # required, accepts SQL-1_0, FLINK-1_6, FLINK-1_8, ZEPPELIN-FLINK-1_0, FLINK-1_11, FLINK-1_13, ZEPPELIN-FLINK-2_0, FLINK-1_15
-    #         service_execution_role: "RoleARN", # required
-    #         application_configuration: {
-    #           sql_application_configuration: {
-    #             inputs: [
-    #               {
-    #                 name_prefix: "InAppStreamName", # required
-    #                 input_processing_configuration: {
-    #                   input_lambda_processor: { # required
-    #                     resource_arn: "ResourceARN", # required
-    #                   },
-    #                 },
-    #                 kinesis_streams_input: {
-    #                   resource_arn: "ResourceARN", # required
-    #                 },
-    #                 kinesis_firehose_input: {
-    #                   resource_arn: "ResourceARN", # required
-    #                 },
-    #                 input_parallelism: {
-    #                   count: 1,
-    #                 },
-    #                 input_schema: { # required
-    #                   record_format: { # required
-    #                     record_format_type: "JSON", # required, accepts JSON, CSV
-    #                     mapping_parameters: {
-    #                       json_mapping_parameters: {
-    #                         record_row_path: "RecordRowPath", # required
-    #                       },
-    #                       csv_mapping_parameters: {
-    #                         record_row_delimiter: "RecordRowDelimiter", # required
-    #                         record_column_delimiter: "RecordColumnDelimiter", # required
-    #                       },
-    #                     },
-    #                   },
-    #                   record_encoding: "RecordEncoding",
-    #                   record_columns: [ # required
-    #                     {
-    #                       name: "RecordColumnName", # required
-    #                       mapping: "RecordColumnMapping",
-    #                       sql_type: "RecordColumnSqlType", # required
-    #                     },
-    #                   ],
-    #                 },
-    #               },
-    #             ],
-    #             outputs: [
-    #               {
-    #                 name: "InAppStreamName", # required
-    #                 kinesis_streams_output: {
-    #                   resource_arn: "ResourceARN", # required
-    #                 },
-    #                 kinesis_firehose_output: {
-    #                   resource_arn: "ResourceARN", # required
-    #                 },
-    #                 lambda_output: {
-    #                   resource_arn: "ResourceARN", # required
-    #                 },
-    #                 destination_schema: { # required
-    #                   record_format_type: "JSON", # required, accepts JSON, CSV
-    #                 },
-    #               },
-    #             ],
-    #             reference_data_sources: [
-    #               {
-    #                 table_name: "InAppTableName", # required
-    #                 s3_reference_data_source: {
-    #                   bucket_arn: "BucketARN",
-    #                   file_key: "FileKey",
-    #                 },
-    #                 reference_schema: { # required
-    #                   record_format: { # required
-    #                     record_format_type: "JSON", # required, accepts JSON, CSV
-    #                     mapping_parameters: {
-    #                       json_mapping_parameters: {
-    #                         record_row_path: "RecordRowPath", # required
-    #                       },
-    #                       csv_mapping_parameters: {
-    #                         record_row_delimiter: "RecordRowDelimiter", # required
-    #                         record_column_delimiter: "RecordColumnDelimiter", # required
-    #                       },
-    #                     },
-    #                   },
-    #                   record_encoding: "RecordEncoding",
-    #                   record_columns: [ # required
-    #                     {
-    #                       name: "RecordColumnName", # required
-    #                       mapping: "RecordColumnMapping",
-    #                       sql_type: "RecordColumnSqlType", # required
-    #                     },
-    #                   ],
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #           flink_application_configuration: {
-    #             checkpoint_configuration: {
-    #               configuration_type: "DEFAULT", # required, accepts DEFAULT, CUSTOM
-    #               checkpointing_enabled: false,
-    #               checkpoint_interval: 1,
-    #               min_pause_between_checkpoints: 1,
-    #             },
-    #             monitoring_configuration: {
-    #               configuration_type: "DEFAULT", # required, accepts DEFAULT, CUSTOM
-    #               metrics_level: "APPLICATION", # accepts APPLICATION, TASK, OPERATOR, PARALLELISM
-    #               log_level: "INFO", # accepts INFO, WARN, ERROR, DEBUG
-    #             },
-    #             parallelism_configuration: {
-    #               configuration_type: "DEFAULT", # required, accepts DEFAULT, CUSTOM
-    #               parallelism: 1,
-    #               parallelism_per_kpu: 1,
-    #               auto_scaling_enabled: false,
-    #             },
-    #           },
-    #           environment_properties: {
-    #             property_groups: [ # required
-    #               {
-    #                 property_group_id: "Id", # required
-    #                 property_map: { # required
-    #                   "PropertyKey" => "PropertyValue",
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #           application_code_configuration: {
-    #             code_content: {
-    #               text_content: "TextContent",
-    #               zip_file_content: "data",
-    #               s3_content_location: {
-    #                 bucket_arn: "BucketARN", # required
-    #                 file_key: "FileKey", # required
-    #                 object_version: "ObjectVersion",
-    #               },
-    #             },
-    #             code_content_type: "PLAINTEXT", # required, accepts PLAINTEXT, ZIPFILE
-    #           },
-    #           application_snapshot_configuration: {
-    #             snapshots_enabled: false, # required
-    #           },
-    #           vpc_configurations: [
-    #             {
-    #               subnet_ids: ["SubnetId"], # required
-    #               security_group_ids: ["SecurityGroupId"], # required
-    #             },
-    #           ],
-    #           zeppelin_application_configuration: {
-    #             monitoring_configuration: {
-    #               log_level: "INFO", # required, accepts INFO, WARN, ERROR, DEBUG
-    #             },
-    #             catalog_configuration: {
-    #               glue_data_catalog_configuration: { # required
-    #                 database_arn: "DatabaseARN", # required
-    #               },
-    #             },
-    #             deploy_as_application_configuration: {
-    #               s3_content_location: { # required
-    #                 bucket_arn: "BucketARN", # required
-    #                 base_path: "BasePath",
-    #               },
-    #             },
-    #             custom_artifacts_configuration: [
-    #               {
-    #                 artifact_type: "UDF", # required, accepts UDF, DEPENDENCY_JAR
-    #                 s3_content_location: {
-    #                   bucket_arn: "BucketARN", # required
-    #                   file_key: "FileKey", # required
-    #                   object_version: "ObjectVersion",
-    #                 },
-    #                 maven_reference: {
-    #                   group_id: "MavenGroupId", # required
-    #                   artifact_id: "MavenArtifactId", # required
-    #                   version: "MavenVersion", # required
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #         },
-    #         cloud_watch_logging_options: [
-    #           {
-    #             log_stream_arn: "LogStreamARN", # required
-    #           },
-    #         ],
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         application_mode: "STREAMING", # accepts STREAMING, INTERACTIVE
-    #       }
-    #
     # @!attribute [rw] application_name
     #   The name of your application (for example, `sample-app`).
     #   @return [String]
@@ -2302,14 +1443,6 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateApplicationSnapshotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_name: "ApplicationName", # required
-    #         snapshot_name: "SnapshotName", # required
-    #       }
-    #
     # @!attribute [rw] application_name
     #   The name of an existing application
     #   @return [String]
@@ -2333,23 +1466,6 @@ module Aws::KinesisAnalyticsV2
 
     # Specifies dependency JARs, as well as JAR files that contain
     # user-defined functions (UDF).
-    #
-    # @note When making an API call, you may pass CustomArtifactConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         artifact_type: "UDF", # required, accepts UDF, DEPENDENCY_JAR
-    #         s3_content_location: {
-    #           bucket_arn: "BucketARN", # required
-    #           file_key: "FileKey", # required
-    #           object_version: "ObjectVersion",
-    #         },
-    #         maven_reference: {
-    #           group_id: "MavenGroupId", # required
-    #           artifact_id: "MavenArtifactId", # required
-    #           version: "MavenVersion", # required
-    #         },
-    #       }
     #
     # @!attribute [rw] artifact_type
     #   `UDF` stands for user-defined functions. This type of artifact must
@@ -2409,16 +1525,6 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteApplicationCloudWatchLoggingOptionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_name: "ApplicationName", # required
-    #         current_application_version_id: 1,
-    #         cloud_watch_logging_option_id: "Id", # required
-    #         conditional_token: "ConditionalToken",
-    #       }
-    #
     # @!attribute [rw] application_name
     #   The application name.
     #   @return [String]
@@ -2482,15 +1588,6 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteApplicationInputProcessingConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_name: "ApplicationName", # required
-    #         current_application_version_id: 1, # required
-    #         input_id: "Id", # required
-    #       }
-    #
     # @!attribute [rw] application_name
     #   The name of the application.
     #   @return [String]
@@ -2535,15 +1632,6 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteApplicationOutputRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_name: "ApplicationName", # required
-    #         current_application_version_id: 1, # required
-    #         output_id: "Id", # required
-    #       }
-    #
     # @!attribute [rw] application_name
     #   The application name.
     #   @return [String]
@@ -2592,15 +1680,6 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteApplicationReferenceDataSourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_name: "ApplicationName", # required
-    #         current_application_version_id: 1, # required
-    #         reference_id: "Id", # required
-    #       }
-    #
     # @!attribute [rw] application_name
     #   The name of an existing application.
     #   @return [String]
@@ -2647,14 +1726,6 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_name: "ApplicationName", # required
-    #         create_timestamp: Time.now, # required
-    #       }
-    #
     # @!attribute [rw] application_name
     #   The name of the application to delete.
     #   @return [String]
@@ -2676,15 +1747,6 @@ module Aws::KinesisAnalyticsV2
     #
     class DeleteApplicationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteApplicationSnapshotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_name: "ApplicationName", # required
-    #         snapshot_name: "SnapshotName", # required
-    #         snapshot_creation_timestamp: Time.now, # required
-    #       }
-    #
     # @!attribute [rw] application_name
     #   The name of an existing application.
     #   @return [String]
@@ -2712,16 +1774,6 @@ module Aws::KinesisAnalyticsV2
     #
     class DeleteApplicationSnapshotResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteApplicationVpcConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_name: "ApplicationName", # required
-    #         current_application_version_id: 1,
-    #         vpc_configuration_id: "Id", # required
-    #         conditional_token: "ConditionalToken",
-    #       }
-    #
     # @!attribute [rw] application_name
     #   The name of an existing application.
     #   @return [String]
@@ -2778,16 +1830,6 @@ module Aws::KinesisAnalyticsV2
     # The information required to deploy a Kinesis Data Analytics Studio
     # notebook as an application with durable state.
     #
-    # @note When making an API call, you may pass DeployAsApplicationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         s3_content_location: { # required
-    #           bucket_arn: "BucketARN", # required
-    #           base_path: "BasePath",
-    #         },
-    #       }
-    #
     # @!attribute [rw] s3_content_location
     #   The description of an Amazon S3 object that contains the Amazon Data
     #   Analytics application, including the Amazon Resource Name (ARN) of
@@ -2823,16 +1865,6 @@ module Aws::KinesisAnalyticsV2
     # Updates to the configuration information required to deploy an Amazon
     # Data Analytics Studio notebook as an application with durable state.
     #
-    # @note When making an API call, you may pass DeployAsApplicationConfigurationUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         s3_content_location_update: {
-    #           bucket_arn_update: "BucketARN",
-    #           base_path_update: "BasePath",
-    #         },
-    #       }
-    #
     # @!attribute [rw] s3_content_location_update
     #   Updates to the location that holds the data required to specify an
     #   Amazon Data Analytics application.
@@ -2846,14 +1878,6 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_name: "ApplicationName", # required
-    #         include_additional_details: false,
-    #       }
-    #
     # @!attribute [rw] application_name
     #   The name of the application.
     #   @return [String]
@@ -2886,14 +1910,6 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeApplicationSnapshotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_name: "ApplicationName", # required
-    #         snapshot_name: "SnapshotName", # required
-    #       }
-    #
     # @!attribute [rw] application_name
     #   The name of an existing application.
     #   @return [String]
@@ -2924,14 +1940,6 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeApplicationVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_name: "ApplicationName", # required
-    #         application_version_id: 1, # required
-    #       }
-    #
     # @!attribute [rw] application_name
     #   The name of the application for which you want to get the version
     #   description.
@@ -2968,13 +1976,6 @@ module Aws::KinesisAnalyticsV2
     # Describes the data format when records are written to the destination
     # in a SQL-based Kinesis Data Analytics application.
     #
-    # @note When making an API call, you may pass DestinationSchema
-    #   data as a hash:
-    #
-    #       {
-    #         record_format_type: "JSON", # required, accepts JSON, CSV
-    #       }
-    #
     # @!attribute [rw] record_format_type
     #   Specifies the format of the records on the output stream.
     #   @return [String]
@@ -2987,26 +1988,6 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DiscoverInputSchemaRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceARN",
-    #         service_execution_role: "RoleARN", # required
-    #         input_starting_position_configuration: {
-    #           input_starting_position: "NOW", # accepts NOW, TRIM_HORIZON, LAST_STOPPED_POINT
-    #         },
-    #         s3_configuration: {
-    #           bucket_arn: "BucketARN", # required
-    #           file_key: "FileKey", # required
-    #         },
-    #         input_processing_configuration: {
-    #           input_lambda_processor: { # required
-    #             resource_arn: "ResourceARN", # required
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the streaming source.
     #   @return [String]
@@ -3077,20 +2058,6 @@ module Aws::KinesisAnalyticsV2
     # Describes execution properties for a Flink-based Kinesis Data
     # Analytics application.
     #
-    # @note When making an API call, you may pass EnvironmentProperties
-    #   data as a hash:
-    #
-    #       {
-    #         property_groups: [ # required
-    #           {
-    #             property_group_id: "Id", # required
-    #             property_map: { # required
-    #               "PropertyKey" => "PropertyValue",
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] property_groups
     #   Describes the execution property groups.
     #   @return [Array<Types::PropertyGroup>]
@@ -3120,20 +2087,6 @@ module Aws::KinesisAnalyticsV2
     # Describes updates to the execution property groups for a Flink-based
     # Kinesis Data Analytics application or a Studio notebook.
     #
-    # @note When making an API call, you may pass EnvironmentPropertyUpdates
-    #   data as a hash:
-    #
-    #       {
-    #         property_groups: [ # required
-    #           {
-    #             property_group_id: "Id", # required
-    #             property_map: { # required
-    #               "PropertyKey" => "PropertyValue",
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] property_groups
     #   Describes updates to the execution property groups.
     #   @return [Array<Types::PropertyGroup>]
@@ -3148,29 +2101,6 @@ module Aws::KinesisAnalyticsV2
 
     # Describes configuration parameters for a Flink-based Kinesis Data
     # Analytics application or a Studio notebook.
-    #
-    # @note When making an API call, you may pass FlinkApplicationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         checkpoint_configuration: {
-    #           configuration_type: "DEFAULT", # required, accepts DEFAULT, CUSTOM
-    #           checkpointing_enabled: false,
-    #           checkpoint_interval: 1,
-    #           min_pause_between_checkpoints: 1,
-    #         },
-    #         monitoring_configuration: {
-    #           configuration_type: "DEFAULT", # required, accepts DEFAULT, CUSTOM
-    #           metrics_level: "APPLICATION", # accepts APPLICATION, TASK, OPERATOR, PARALLELISM
-    #           log_level: "INFO", # accepts INFO, WARN, ERROR, DEBUG
-    #         },
-    #         parallelism_configuration: {
-    #           configuration_type: "DEFAULT", # required, accepts DEFAULT, CUSTOM
-    #           parallelism: 1,
-    #           parallelism_per_kpu: 1,
-    #           auto_scaling_enabled: false,
-    #         },
-    #       }
     #
     # @!attribute [rw] checkpoint_configuration
     #   Describes an application's checkpointing configuration.
@@ -3250,29 +2180,6 @@ module Aws::KinesisAnalyticsV2
     # Describes updates to the configuration parameters for a Flink-based
     # Kinesis Data Analytics application.
     #
-    # @note When making an API call, you may pass FlinkApplicationConfigurationUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         checkpoint_configuration_update: {
-    #           configuration_type_update: "DEFAULT", # accepts DEFAULT, CUSTOM
-    #           checkpointing_enabled_update: false,
-    #           checkpoint_interval_update: 1,
-    #           min_pause_between_checkpoints_update: 1,
-    #         },
-    #         monitoring_configuration_update: {
-    #           configuration_type_update: "DEFAULT", # accepts DEFAULT, CUSTOM
-    #           metrics_level_update: "APPLICATION", # accepts APPLICATION, TASK, OPERATOR, PARALLELISM
-    #           log_level_update: "INFO", # accepts INFO, WARN, ERROR, DEBUG
-    #         },
-    #         parallelism_configuration_update: {
-    #           configuration_type_update: "DEFAULT", # accepts DEFAULT, CUSTOM
-    #           parallelism_update: 1,
-    #           parallelism_per_kpu_update: 1,
-    #           auto_scaling_enabled_update: false,
-    #         },
-    #       }
-    #
     # @!attribute [rw] checkpoint_configuration_update
     #   Describes updates to an application's checkpointing configuration.
     #   Checkpointing is the process of persisting application state for
@@ -3301,13 +2208,6 @@ module Aws::KinesisAnalyticsV2
 
     # Describes the starting parameters for a Flink-based Kinesis Data
     # Analytics application.
-    #
-    # @note When making an API call, you may pass FlinkRunConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         allow_non_restored_state: false,
-    #       }
     #
     # @!attribute [rw] allow_non_restored_state
     #   When restoring from a snapshot, specifies whether the runtime is
@@ -3342,13 +2242,6 @@ module Aws::KinesisAnalyticsV2
     # Flink SQL queries and table API transforms that you write in an
     # application.
     #
-    # @note When making an API call, you may pass GlueDataCatalogConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         database_arn: "DatabaseARN", # required
-    #       }
-    #
     # @!attribute [rw] database_arn
     #   The Amazon Resource Name (ARN) of the database.
     #   @return [String]
@@ -3381,13 +2274,6 @@ module Aws::KinesisAnalyticsV2
     # SQL queries that you write in a Kinesis Data Analytics Studio
     # notebook.
     #
-    # @note When making an API call, you may pass GlueDataCatalogConfigurationUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         database_arn_update: "DatabaseARN", # required
-    #       }
-    #
     # @!attribute [rw] database_arn_update
     #   The updated Amazon Resource Name (ARN) of the database.
     #   @return [String]
@@ -3404,49 +2290,6 @@ module Aws::KinesisAnalyticsV2
     # Analytics application, you specify the streaming source, the
     # in-application stream name that is created, and the mapping between
     # the two.
-    #
-    # @note When making an API call, you may pass Input
-    #   data as a hash:
-    #
-    #       {
-    #         name_prefix: "InAppStreamName", # required
-    #         input_processing_configuration: {
-    #           input_lambda_processor: { # required
-    #             resource_arn: "ResourceARN", # required
-    #           },
-    #         },
-    #         kinesis_streams_input: {
-    #           resource_arn: "ResourceARN", # required
-    #         },
-    #         kinesis_firehose_input: {
-    #           resource_arn: "ResourceARN", # required
-    #         },
-    #         input_parallelism: {
-    #           count: 1,
-    #         },
-    #         input_schema: { # required
-    #           record_format: { # required
-    #             record_format_type: "JSON", # required, accepts JSON, CSV
-    #             mapping_parameters: {
-    #               json_mapping_parameters: {
-    #                 record_row_path: "RecordRowPath", # required
-    #               },
-    #               csv_mapping_parameters: {
-    #                 record_row_delimiter: "RecordRowDelimiter", # required
-    #                 record_column_delimiter: "RecordColumnDelimiter", # required
-    #               },
-    #             },
-    #           },
-    #           record_encoding: "RecordEncoding",
-    #           record_columns: [ # required
-    #             {
-    #               name: "RecordColumnName", # required
-    #               mapping: "RecordColumnMapping",
-    #               sql_type: "RecordColumnSqlType", # required
-    #             },
-    #           ],
-    #         },
-    #       }
     #
     # @!attribute [rw] name_prefix
     #   The name prefix to use when creating an in-application stream.
@@ -3568,13 +2411,6 @@ module Aws::KinesisAnalyticsV2
     # Lambda function that is used to preprocess records in the stream in a
     # SQL-based Kinesis Data Analytics application.
     #
-    # @note When making an API call, you may pass InputLambdaProcessor
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceARN", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the Amazon Lambda function that operates on records in
     #   the stream.
@@ -3643,13 +2479,6 @@ module Aws::KinesisAnalyticsV2
     # update to the InputLambdaProcessor that is used to preprocess the
     # records in the stream.
     #
-    # @note When making an API call, you may pass InputLambdaProcessorUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn_update: "ResourceARN", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn_update
     #   The Amazon Resource Name (ARN) of the new Amazon Lambda function
     #   that is used to preprocess the records in the stream.
@@ -3678,13 +2507,6 @@ module Aws::KinesisAnalyticsV2
     # number of in-application streams to create for a given streaming
     # source.
     #
-    # @note When making an API call, you may pass InputParallelism
-    #   data as a hash:
-    #
-    #       {
-    #         count: 1,
-    #       }
-    #
     # @!attribute [rw] count
     #   The number of in-application streams to create.
     #   @return [Integer]
@@ -3699,13 +2521,6 @@ module Aws::KinesisAnalyticsV2
 
     # For a SQL-based Kinesis Data Analytics application, provides updates
     # to the parallelism count.
-    #
-    # @note When making an API call, you may pass InputParallelismUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         count_update: 1, # required
-    #       }
     #
     # @!attribute [rw] count_update
     #   The number of in-application streams to create for the specified
@@ -3728,15 +2543,6 @@ module Aws::KinesisAnalyticsV2
     #
     #
     # [1]: https://docs.aws.amazon.com/lambda/
-    #
-    # @note When making an API call, you may pass InputProcessingConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         input_lambda_processor: { # required
-    #           resource_arn: "ResourceARN", # required
-    #         },
-    #       }
     #
     # @!attribute [rw] input_lambda_processor
     #   The InputLambdaProcessor that is used to preprocess the records in
@@ -3775,15 +2581,6 @@ module Aws::KinesisAnalyticsV2
     # For a SQL-based Kinesis Data Analytics application, describes updates
     # to an InputProcessingConfiguration.
     #
-    # @note When making an API call, you may pass InputProcessingConfigurationUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         input_lambda_processor_update: { # required
-    #           resource_arn_update: "ResourceARN", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] input_lambda_processor_update
     #   Provides update information for an InputLambdaProcessor.
     #   @return [Types::InputLambdaProcessorUpdate]
@@ -3798,32 +2595,6 @@ module Aws::KinesisAnalyticsV2
 
     # Describes updates for an SQL-based Kinesis Data Analytics
     # application's input schema.
-    #
-    # @note When making an API call, you may pass InputSchemaUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         record_format_update: {
-    #           record_format_type: "JSON", # required, accepts JSON, CSV
-    #           mapping_parameters: {
-    #             json_mapping_parameters: {
-    #               record_row_path: "RecordRowPath", # required
-    #             },
-    #             csv_mapping_parameters: {
-    #               record_row_delimiter: "RecordRowDelimiter", # required
-    #               record_column_delimiter: "RecordColumnDelimiter", # required
-    #             },
-    #           },
-    #         },
-    #         record_encoding_update: "RecordEncoding",
-    #         record_column_updates: [
-    #           {
-    #             name: "RecordColumnName", # required
-    #             mapping: "RecordColumnMapping",
-    #             sql_type: "RecordColumnSqlType", # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] record_format_update
     #   Specifies the format of the records on the streaming source.
@@ -3853,13 +2624,6 @@ module Aws::KinesisAnalyticsV2
     # Describes the point at which the application reads from the streaming
     # source.
     #
-    # @note When making an API call, you may pass InputStartingPositionConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         input_starting_position: "NOW", # accepts NOW, TRIM_HORIZON, LAST_STOPPED_POINT
-    #       }
-    #
     # @!attribute [rw] input_starting_position
     #   The starting position on the stream.
     #
@@ -3887,50 +2651,6 @@ module Aws::KinesisAnalyticsV2
     # For a SQL-based Kinesis Data Analytics application, describes updates
     # to a specific input configuration (identified by the `InputId` of an
     # application).
-    #
-    # @note When making an API call, you may pass InputUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         input_id: "Id", # required
-    #         name_prefix_update: "InAppStreamName",
-    #         input_processing_configuration_update: {
-    #           input_lambda_processor_update: { # required
-    #             resource_arn_update: "ResourceARN", # required
-    #           },
-    #         },
-    #         kinesis_streams_input_update: {
-    #           resource_arn_update: "ResourceARN", # required
-    #         },
-    #         kinesis_firehose_input_update: {
-    #           resource_arn_update: "ResourceARN", # required
-    #         },
-    #         input_schema_update: {
-    #           record_format_update: {
-    #             record_format_type: "JSON", # required, accepts JSON, CSV
-    #             mapping_parameters: {
-    #               json_mapping_parameters: {
-    #                 record_row_path: "RecordRowPath", # required
-    #               },
-    #               csv_mapping_parameters: {
-    #                 record_row_delimiter: "RecordRowDelimiter", # required
-    #                 record_column_delimiter: "RecordColumnDelimiter", # required
-    #               },
-    #             },
-    #           },
-    #           record_encoding_update: "RecordEncoding",
-    #           record_column_updates: [
-    #             {
-    #               name: "RecordColumnName", # required
-    #               mapping: "RecordColumnMapping",
-    #               sql_type: "RecordColumnSqlType", # required
-    #             },
-    #           ],
-    #         },
-    #         input_parallelism_update: {
-    #           count_update: 1, # required
-    #         },
-    #       }
     #
     # @!attribute [rw] input_id
     #   The input ID of the application input to be updated.
@@ -4024,13 +2744,6 @@ module Aws::KinesisAnalyticsV2
     # additional mapping information when JSON is the record format on the
     # streaming source.
     #
-    # @note When making an API call, you may pass JSONMappingParameters
-    #   data as a hash:
-    #
-    #       {
-    #         record_row_path: "RecordRowPath", # required
-    #       }
-    #
     # @!attribute [rw] record_row_path
     #   The path to the top-level parent that contains the records.
     #   @return [String]
@@ -4046,13 +2759,6 @@ module Aws::KinesisAnalyticsV2
     # For a SQL-based Kinesis Data Analytics application, identifies a
     # Kinesis Data Firehose delivery stream as the streaming source. You
     # provide the delivery stream's Amazon Resource Name (ARN).
-    #
-    # @note When making an API call, you may pass KinesisFirehoseInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceARN", # required
-    #       }
     #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the delivery stream.
@@ -4098,13 +2804,6 @@ module Aws::KinesisAnalyticsV2
     # application input configuration, provides information about a Kinesis
     # Data Firehose delivery stream as the streaming source.
     #
-    # @note When making an API call, you may pass KinesisFirehoseInputUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn_update: "ResourceARN", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn_update
     #   The Amazon Resource Name (ARN) of the input delivery stream to read.
     #   @return [String]
@@ -4121,13 +2820,6 @@ module Aws::KinesisAnalyticsV2
     # application output, identifies a Kinesis Data Firehose delivery stream
     # as the destination. You provide the stream Amazon Resource Name (ARN)
     # of the delivery stream.
-    #
-    # @note When making an API call, you may pass KinesisFirehoseOutput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceARN", # required
-    #       }
     #
     # @!attribute [rw] resource_arn
     #   The ARN of the destination delivery stream to write to.
@@ -4174,13 +2866,6 @@ module Aws::KinesisAnalyticsV2
     # information about a Kinesis Data Firehose delivery stream that is
     # configured as the destination.
     #
-    # @note When making an API call, you may pass KinesisFirehoseOutputUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn_update: "ResourceARN", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn_update
     #   The Amazon Resource Name (ARN) of the delivery stream to write to.
     #   @return [String]
@@ -4195,13 +2880,6 @@ module Aws::KinesisAnalyticsV2
 
     # Identifies a Kinesis data stream as the streaming source. You provide
     # the stream's Amazon Resource Name (ARN).
-    #
-    # @note When making an API call, you may pass KinesisStreamsInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceARN", # required
-    #       }
     #
     # @!attribute [rw] resource_arn
     #   The ARN of the input Kinesis data stream to read.
@@ -4247,13 +2925,6 @@ module Aws::KinesisAnalyticsV2
     # Analytics application, provides information about a Kinesis stream as
     # the streaming source.
     #
-    # @note When making an API call, you may pass KinesisStreamsInputUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn_update: "ResourceARN", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn_update
     #   The Amazon Resource Name (ARN) of the input Kinesis data stream to
     #   read.
@@ -4270,13 +2941,6 @@ module Aws::KinesisAnalyticsV2
     # When you configure a SQL-based Kinesis Data Analytics application's
     # output, identifies a Kinesis data stream as the destination. You
     # provide the stream Amazon Resource Name (ARN).
-    #
-    # @note When making an API call, you may pass KinesisStreamsOutput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceARN", # required
-    #       }
     #
     # @!attribute [rw] resource_arn
     #   The ARN of the destination Kinesis data stream to write to.
@@ -4323,13 +2987,6 @@ module Aws::KinesisAnalyticsV2
     # information about a Kinesis data stream that is configured as the
     # destination.
     #
-    # @note When making an API call, you may pass KinesisStreamsOutputUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn_update: "ResourceARN", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn_update
     #   The Amazon Resource Name (ARN) of the Kinesis data stream where you
     #   want to write the output.
@@ -4347,13 +3004,6 @@ module Aws::KinesisAnalyticsV2
     # output, identifies an Amazon Lambda function as the destination. You
     # provide the function Amazon Resource Name (ARN) of the Lambda
     # function.
-    #
-    # @note When making an API call, you may pass LambdaOutput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceARN", # required
-    #       }
     #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the destination Lambda function to
@@ -4412,13 +3062,6 @@ module Aws::KinesisAnalyticsV2
     # information about an Amazon Lambda function that is configured as the
     # destination.
     #
-    # @note When making an API call, you may pass LambdaOutputUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn_update: "ResourceARN", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn_update
     #   The Amazon Resource Name (ARN) of the destination Amazon Lambda
     #   function.
@@ -4456,15 +3099,6 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListApplicationSnapshotsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_name: "ApplicationName", # required
-    #         limit: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] application_name
     #   The name of an existing application.
     #   @return [String]
@@ -4509,15 +3143,6 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListApplicationVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_name: "ApplicationName", # required
-    #         limit: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] application_name
     #   The name of the application for which you want to list all versions.
     #   @return [String]
@@ -4578,14 +3203,6 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListApplicationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         limit: 1,
-    #         next_token: "ApplicationName",
-    #       }
-    #
     # @!attribute [rw] limit
     #   The maximum number of applications to list.
     #   @return [Integer]
@@ -4635,13 +3252,6 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "KinesisAnalyticsARN", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the application for which to retrieve tags.
     #   @return [String]
@@ -4672,19 +3282,6 @@ module Aws::KinesisAnalyticsV2
     # JSON, CSV, or record fields delimited by some delimiter) on the
     # streaming source.
     #
-    # @note When making an API call, you may pass MappingParameters
-    #   data as a hash:
-    #
-    #       {
-    #         json_mapping_parameters: {
-    #           record_row_path: "RecordRowPath", # required
-    #         },
-    #         csv_mapping_parameters: {
-    #           record_row_delimiter: "RecordRowDelimiter", # required
-    #           record_column_delimiter: "RecordColumnDelimiter", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] json_mapping_parameters
     #   Provides additional mapping information when JSON is the record
     #   format on the streaming source.
@@ -4706,15 +3303,6 @@ module Aws::KinesisAnalyticsV2
 
     # The information required to specify a Maven reference. You can use
     # Maven references to specify dependency JAR files.
-    #
-    # @note When making an API call, you may pass MavenReference
-    #   data as a hash:
-    #
-    #       {
-    #         group_id: "MavenGroupId", # required
-    #         artifact_id: "MavenArtifactId", # required
-    #         version: "MavenVersion", # required
-    #       }
     #
     # @!attribute [rw] group_id
     #   The group ID of the Maven reference.
@@ -4745,15 +3333,6 @@ module Aws::KinesisAnalyticsV2
     #
     #
     # [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/java/monitoring-overview.html
-    #
-    # @note When making an API call, you may pass MonitoringConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_type: "DEFAULT", # required, accepts DEFAULT, CUSTOM
-    #         metrics_level: "APPLICATION", # accepts APPLICATION, TASK, OPERATOR, PARALLELISM
-    #         log_level: "INFO", # accepts INFO, WARN, ERROR, DEBUG
-    #       }
     #
     # @!attribute [rw] configuration_type
     #   Describes whether to use the default CloudWatch logging
@@ -4811,15 +3390,6 @@ module Aws::KinesisAnalyticsV2
     # Describes updates to configuration parameters for Amazon CloudWatch
     # logging for an application.
     #
-    # @note When making an API call, you may pass MonitoringConfigurationUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_type_update: "DEFAULT", # accepts DEFAULT, CUSTOM
-    #         metrics_level_update: "APPLICATION", # accepts APPLICATION, TASK, OPERATOR, PARALLELISM
-    #         log_level_update: "INFO", # accepts INFO, WARN, ERROR, DEBUG
-    #       }
-    #
     # @!attribute [rw] configuration_type_update
     #   Describes updates to whether to use the default CloudWatch logging
     #   configuration for an application. You must set this property to
@@ -4853,25 +3423,6 @@ module Aws::KinesisAnalyticsV2
     # destination where you want the in-application stream data to be
     # written. The destination can be a Kinesis data stream or a Kinesis
     # Data Firehose delivery stream.
-    #
-    # @note When making an API call, you may pass Output
-    #   data as a hash:
-    #
-    #       {
-    #         name: "InAppStreamName", # required
-    #         kinesis_streams_output: {
-    #           resource_arn: "ResourceARN", # required
-    #         },
-    #         kinesis_firehose_output: {
-    #           resource_arn: "ResourceARN", # required
-    #         },
-    #         lambda_output: {
-    #           resource_arn: "ResourceARN", # required
-    #         },
-    #         destination_schema: { # required
-    #           record_format_type: "JSON", # required, accepts JSON, CSV
-    #         },
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the in-application stream.
@@ -4956,26 +3507,6 @@ module Aws::KinesisAnalyticsV2
     # For a SQL-based Kinesis Data Analytics application, describes updates
     # to the output configuration identified by the `OutputId`.
     #
-    # @note When making an API call, you may pass OutputUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         output_id: "Id", # required
-    #         name_update: "InAppStreamName",
-    #         kinesis_streams_output_update: {
-    #           resource_arn_update: "ResourceARN", # required
-    #         },
-    #         kinesis_firehose_output_update: {
-    #           resource_arn_update: "ResourceARN", # required
-    #         },
-    #         lambda_output_update: {
-    #           resource_arn_update: "ResourceARN", # required
-    #         },
-    #         destination_schema_update: {
-    #           record_format_type: "JSON", # required, accepts JSON, CSV
-    #         },
-    #       }
-    #
     # @!attribute [rw] output_id
     #   Identifies the specific output configuration that you want to
     #   update.
@@ -5028,16 +3559,6 @@ module Aws::KinesisAnalyticsV2
     #
     # [1]: https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/parallel.html
     # [2]: https://ci.apache.org/projects/flink/flink-docs-release-1.8/
-    #
-    # @note When making an API call, you may pass ParallelismConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_type: "DEFAULT", # required, accepts DEFAULT, CUSTOM
-    #         parallelism: 1,
-    #         parallelism_per_kpu: 1,
-    #         auto_scaling_enabled: false,
-    #       }
     #
     # @!attribute [rw] configuration_type
     #   Describes whether the application uses the default parallelism for
@@ -5150,16 +3671,6 @@ module Aws::KinesisAnalyticsV2
     # Describes updates to parameters for how an application executes
     # multiple tasks simultaneously.
     #
-    # @note When making an API call, you may pass ParallelismConfigurationUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_type_update: "DEFAULT", # accepts DEFAULT, CUSTOM
-    #         parallelism_update: 1,
-    #         parallelism_per_kpu_update: 1,
-    #         auto_scaling_enabled_update: false,
-    #       }
-    #
     # @!attribute [rw] configuration_type_update
     #   Describes updates to whether the application uses the default
     #   parallelism for the Kinesis Data Analytics service, or if a custom
@@ -5205,16 +3716,6 @@ module Aws::KinesisAnalyticsV2
 
     # Property key-value pairs passed into an application.
     #
-    # @note When making an API call, you may pass PropertyGroup
-    #   data as a hash:
-    #
-    #       {
-    #         property_group_id: "Id", # required
-    #         property_map: { # required
-    #           "PropertyKey" => "PropertyValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] property_group_id
     #   Describes the key of an application execution property key-value
     #   pair.
@@ -5239,15 +3740,6 @@ module Aws::KinesisAnalyticsV2
     # corresponding column in the in-application stream.
     #
     # Also used to describe the format of the reference data source.
-    #
-    # @note When making an API call, you may pass RecordColumn
-    #   data as a hash:
-    #
-    #       {
-    #         name: "RecordColumnName", # required
-    #         mapping: "RecordColumnMapping",
-    #         sql_type: "RecordColumnSqlType", # required
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the column that is created in the in-application input
@@ -5278,22 +3770,6 @@ module Aws::KinesisAnalyticsV2
     # record format and relevant mapping information that should be applied
     # to schematize the records on the stream.
     #
-    # @note When making an API call, you may pass RecordFormat
-    #   data as a hash:
-    #
-    #       {
-    #         record_format_type: "JSON", # required, accepts JSON, CSV
-    #         mapping_parameters: {
-    #           json_mapping_parameters: {
-    #             record_row_path: "RecordRowPath", # required
-    #           },
-    #           csv_mapping_parameters: {
-    #             record_row_delimiter: "RecordRowDelimiter", # required
-    #             record_column_delimiter: "RecordColumnDelimiter", # required
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] record_format_type
     #   The type of record format.
     #   @return [String]
@@ -5319,39 +3795,6 @@ module Aws::KinesisAnalyticsV2
     # bucket name and object key name), the resulting in-application table
     # name that is created, and the necessary schema to map the data
     # elements in the Amazon S3 object to the in-application table.
-    #
-    # @note When making an API call, you may pass ReferenceDataSource
-    #   data as a hash:
-    #
-    #       {
-    #         table_name: "InAppTableName", # required
-    #         s3_reference_data_source: {
-    #           bucket_arn: "BucketARN",
-    #           file_key: "FileKey",
-    #         },
-    #         reference_schema: { # required
-    #           record_format: { # required
-    #             record_format_type: "JSON", # required, accepts JSON, CSV
-    #             mapping_parameters: {
-    #               json_mapping_parameters: {
-    #                 record_row_path: "RecordRowPath", # required
-    #               },
-    #               csv_mapping_parameters: {
-    #                 record_row_delimiter: "RecordRowDelimiter", # required
-    #                 record_column_delimiter: "RecordColumnDelimiter", # required
-    #               },
-    #             },
-    #           },
-    #           record_encoding: "RecordEncoding",
-    #           record_columns: [ # required
-    #             {
-    #               name: "RecordColumnName", # required
-    #               mapping: "RecordColumnMapping",
-    #               sql_type: "RecordColumnSqlType", # required
-    #             },
-    #           ],
-    #         },
-    #       }
     #
     # @!attribute [rw] table_name
     #   The name of the in-application table to create.
@@ -5423,40 +3866,6 @@ module Aws::KinesisAnalyticsV2
     # the in-application table name that is created, and updated mapping
     # information that maps the data in the Amazon S3 object to the
     # in-application reference table that is created.
-    #
-    # @note When making an API call, you may pass ReferenceDataSourceUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         reference_id: "Id", # required
-    #         table_name_update: "InAppTableName",
-    #         s3_reference_data_source_update: {
-    #           bucket_arn_update: "BucketARN",
-    #           file_key_update: "FileKey",
-    #         },
-    #         reference_schema_update: {
-    #           record_format: { # required
-    #             record_format_type: "JSON", # required, accepts JSON, CSV
-    #             mapping_parameters: {
-    #               json_mapping_parameters: {
-    #                 record_row_path: "RecordRowPath", # required
-    #               },
-    #               csv_mapping_parameters: {
-    #                 record_row_delimiter: "RecordRowDelimiter", # required
-    #                 record_column_delimiter: "RecordColumnDelimiter", # required
-    #               },
-    #             },
-    #           },
-    #           record_encoding: "RecordEncoding",
-    #           record_columns: [ # required
-    #             {
-    #               name: "RecordColumnName", # required
-    #               mapping: "RecordColumnMapping",
-    #               sql_type: "RecordColumnSqlType", # required
-    #             },
-    #           ],
-    #         },
-    #       }
     #
     # @!attribute [rw] reference_id
     #   The ID of the reference data source that is being updated. You can
@@ -5536,14 +3945,6 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RollbackApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_name: "ApplicationName", # required
-    #         current_application_version_id: 1, # required
-    #       }
-    #
     # @!attribute [rw] application_name
     #   The name of the application.
     #   @return [String]
@@ -5578,27 +3979,6 @@ module Aws::KinesisAnalyticsV2
 
     # Describes the starting parameters for an Kinesis Data Analytics
     # application.
-    #
-    # @note When making an API call, you may pass RunConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         flink_run_configuration: {
-    #           allow_non_restored_state: false,
-    #         },
-    #         sql_run_configurations: [
-    #           {
-    #             input_id: "Id", # required
-    #             input_starting_position_configuration: { # required
-    #               input_starting_position: "NOW", # accepts NOW, TRIM_HORIZON, LAST_STOPPED_POINT
-    #             },
-    #           },
-    #         ],
-    #         application_restore_configuration: {
-    #           application_restore_type: "SKIP_RESTORE_FROM_SNAPSHOT", # required, accepts SKIP_RESTORE_FROM_SNAPSHOT, RESTORE_FROM_LATEST_SNAPSHOT, RESTORE_FROM_CUSTOM_SNAPSHOT
-    #           snapshot_name: "SnapshotName",
-    #         },
-    #       }
     #
     # @!attribute [rw] flink_run_configuration
     #   Describes the starting parameters for a Flink-based Kinesis Data
@@ -5647,19 +4027,6 @@ module Aws::KinesisAnalyticsV2
 
     # Describes the updates to the starting parameters for a Kinesis Data
     # Analytics application.
-    #
-    # @note When making an API call, you may pass RunConfigurationUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         flink_run_configuration: {
-    #           allow_non_restored_state: false,
-    #         },
-    #         application_restore_configuration: {
-    #           application_restore_type: "SKIP_RESTORE_FROM_SNAPSHOT", # required, accepts SKIP_RESTORE_FROM_SNAPSHOT, RESTORE_FROM_LATEST_SNAPSHOT, RESTORE_FROM_CUSTOM_SNAPSHOT
-    #           snapshot_name: "SnapshotName",
-    #         },
-    #       }
     #
     # @!attribute [rw] flink_run_configuration
     #   Describes the starting parameters for a Flink-based Kinesis Data
@@ -5711,14 +4078,6 @@ module Aws::KinesisAnalyticsV2
     # Name (ARN) of the S3 bucket and the name of the Amazon S3 object that
     # contains the data.
     #
-    # @note When making an API call, you may pass S3Configuration
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_arn: "BucketARN", # required
-    #         file_key: "FileKey", # required
-    #       }
-    #
     # @!attribute [rw] bucket_arn
     #   The ARN of the S3 bucket that contains the data.
     #   @return [String]
@@ -5737,14 +4096,6 @@ module Aws::KinesisAnalyticsV2
     end
 
     # The S3 bucket that holds the application information.
-    #
-    # @note When making an API call, you may pass S3ContentBaseLocation
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_arn: "BucketARN", # required
-    #         base_path: "BasePath",
-    #       }
     #
     # @!attribute [rw] bucket_arn
     #   The Amazon Resource Name (ARN) of the S3 bucket.
@@ -5785,14 +4136,6 @@ module Aws::KinesisAnalyticsV2
     # The information required to update the S3 base location that holds the
     # application.
     #
-    # @note When making an API call, you may pass S3ContentBaseLocationUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_arn_update: "BucketARN",
-    #         base_path_update: "BasePath",
-    #       }
-    #
     # @!attribute [rw] bucket_arn_update
     #   The updated Amazon Resource Name (ARN) of the S3 bucket.
     #   @return [String]
@@ -5814,15 +4157,6 @@ module Aws::KinesisAnalyticsV2
     # Amazon S3 object, including the Amazon Resource Name (ARN) of the S3
     # bucket, the name of the Amazon S3 object that contains the data, and
     # the version number of the Amazon S3 object that contains the data.
-    #
-    # @note When making an API call, you may pass S3ContentLocation
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_arn: "BucketARN", # required
-    #         file_key: "FileKey", # required
-    #         object_version: "ObjectVersion",
-    #       }
     #
     # @!attribute [rw] bucket_arn
     #   The Amazon Resource Name (ARN) for the S3 bucket containing the
@@ -5849,15 +4183,6 @@ module Aws::KinesisAnalyticsV2
 
     # Describes an update for the Amazon S3 code content location for an
     # application.
-    #
-    # @note When making an API call, you may pass S3ContentLocationUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_arn_update: "BucketARN",
-    #         file_key_update: "FileKey",
-    #         object_version_update: "ObjectVersion",
-    #       }
     #
     # @!attribute [rw] bucket_arn_update
     #   The new Amazon Resource Name (ARN) for the S3 bucket containing the
@@ -5888,14 +4213,6 @@ module Aws::KinesisAnalyticsV2
     # A Kinesis Data Analytics application loads reference data only once.
     # If the data changes, you call the UpdateApplication operation to
     # trigger reloading of data into your application.
-    #
-    # @note When making an API call, you may pass S3ReferenceDataSource
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_arn: "BucketARN",
-    #         file_key: "FileKey",
-    #       }
     #
     # @!attribute [rw] bucket_arn
     #   The Amazon Resource Name (ARN) of the S3 bucket.
@@ -5950,14 +4267,6 @@ module Aws::KinesisAnalyticsV2
     # For a SQL-based Kinesis Data Analytics application, describes the
     # Amazon S3 bucket name and object key name for an in-application
     # reference table.
-    #
-    # @note When making an API call, you may pass S3ReferenceDataSourceUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_arn_update: "BucketARN",
-    #         file_key_update: "FileKey",
-    #       }
     #
     # @!attribute [rw] bucket_arn_update
     #   The Amazon Resource Name (ARN) of the S3 bucket.
@@ -6022,32 +4331,6 @@ module Aws::KinesisAnalyticsV2
     # format of the data in the streaming source, and how each data element
     # maps to corresponding columns created in the in-application stream.
     #
-    # @note When making an API call, you may pass SourceSchema
-    #   data as a hash:
-    #
-    #       {
-    #         record_format: { # required
-    #           record_format_type: "JSON", # required, accepts JSON, CSV
-    #           mapping_parameters: {
-    #             json_mapping_parameters: {
-    #               record_row_path: "RecordRowPath", # required
-    #             },
-    #             csv_mapping_parameters: {
-    #               record_row_delimiter: "RecordRowDelimiter", # required
-    #               record_column_delimiter: "RecordColumnDelimiter", # required
-    #             },
-    #           },
-    #         },
-    #         record_encoding: "RecordEncoding",
-    #         record_columns: [ # required
-    #           {
-    #             name: "RecordColumnName", # required
-    #             mapping: "RecordColumnMapping",
-    #             sql_type: "RecordColumnSqlType", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] record_format
     #   Specifies the format of the records on the streaming source.
     #   @return [Types::RecordFormat]
@@ -6073,101 +4356,6 @@ module Aws::KinesisAnalyticsV2
 
     # Describes the inputs, outputs, and reference data sources for a
     # SQL-based Kinesis Data Analytics application.
-    #
-    # @note When making an API call, you may pass SqlApplicationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         inputs: [
-    #           {
-    #             name_prefix: "InAppStreamName", # required
-    #             input_processing_configuration: {
-    #               input_lambda_processor: { # required
-    #                 resource_arn: "ResourceARN", # required
-    #               },
-    #             },
-    #             kinesis_streams_input: {
-    #               resource_arn: "ResourceARN", # required
-    #             },
-    #             kinesis_firehose_input: {
-    #               resource_arn: "ResourceARN", # required
-    #             },
-    #             input_parallelism: {
-    #               count: 1,
-    #             },
-    #             input_schema: { # required
-    #               record_format: { # required
-    #                 record_format_type: "JSON", # required, accepts JSON, CSV
-    #                 mapping_parameters: {
-    #                   json_mapping_parameters: {
-    #                     record_row_path: "RecordRowPath", # required
-    #                   },
-    #                   csv_mapping_parameters: {
-    #                     record_row_delimiter: "RecordRowDelimiter", # required
-    #                     record_column_delimiter: "RecordColumnDelimiter", # required
-    #                   },
-    #                 },
-    #               },
-    #               record_encoding: "RecordEncoding",
-    #               record_columns: [ # required
-    #                 {
-    #                   name: "RecordColumnName", # required
-    #                   mapping: "RecordColumnMapping",
-    #                   sql_type: "RecordColumnSqlType", # required
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #         ],
-    #         outputs: [
-    #           {
-    #             name: "InAppStreamName", # required
-    #             kinesis_streams_output: {
-    #               resource_arn: "ResourceARN", # required
-    #             },
-    #             kinesis_firehose_output: {
-    #               resource_arn: "ResourceARN", # required
-    #             },
-    #             lambda_output: {
-    #               resource_arn: "ResourceARN", # required
-    #             },
-    #             destination_schema: { # required
-    #               record_format_type: "JSON", # required, accepts JSON, CSV
-    #             },
-    #           },
-    #         ],
-    #         reference_data_sources: [
-    #           {
-    #             table_name: "InAppTableName", # required
-    #             s3_reference_data_source: {
-    #               bucket_arn: "BucketARN",
-    #               file_key: "FileKey",
-    #             },
-    #             reference_schema: { # required
-    #               record_format: { # required
-    #                 record_format_type: "JSON", # required, accepts JSON, CSV
-    #                 mapping_parameters: {
-    #                   json_mapping_parameters: {
-    #                     record_row_path: "RecordRowPath", # required
-    #                   },
-    #                   csv_mapping_parameters: {
-    #                     record_row_delimiter: "RecordRowDelimiter", # required
-    #                     record_column_delimiter: "RecordColumnDelimiter", # required
-    #                   },
-    #                 },
-    #               },
-    #               record_encoding: "RecordEncoding",
-    #               record_columns: [ # required
-    #                 {
-    #                   name: "RecordColumnName", # required
-    #                   mapping: "RecordColumnMapping",
-    #                   sql_type: "RecordColumnSqlType", # required
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] inputs
     #   The array of Input objects describing the input streams used by the
@@ -6226,104 +4414,6 @@ module Aws::KinesisAnalyticsV2
     # reference data sources for a SQL-based Kinesis Data Analytics
     # application.
     #
-    # @note When making an API call, you may pass SqlApplicationConfigurationUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         input_updates: [
-    #           {
-    #             input_id: "Id", # required
-    #             name_prefix_update: "InAppStreamName",
-    #             input_processing_configuration_update: {
-    #               input_lambda_processor_update: { # required
-    #                 resource_arn_update: "ResourceARN", # required
-    #               },
-    #             },
-    #             kinesis_streams_input_update: {
-    #               resource_arn_update: "ResourceARN", # required
-    #             },
-    #             kinesis_firehose_input_update: {
-    #               resource_arn_update: "ResourceARN", # required
-    #             },
-    #             input_schema_update: {
-    #               record_format_update: {
-    #                 record_format_type: "JSON", # required, accepts JSON, CSV
-    #                 mapping_parameters: {
-    #                   json_mapping_parameters: {
-    #                     record_row_path: "RecordRowPath", # required
-    #                   },
-    #                   csv_mapping_parameters: {
-    #                     record_row_delimiter: "RecordRowDelimiter", # required
-    #                     record_column_delimiter: "RecordColumnDelimiter", # required
-    #                   },
-    #                 },
-    #               },
-    #               record_encoding_update: "RecordEncoding",
-    #               record_column_updates: [
-    #                 {
-    #                   name: "RecordColumnName", # required
-    #                   mapping: "RecordColumnMapping",
-    #                   sql_type: "RecordColumnSqlType", # required
-    #                 },
-    #               ],
-    #             },
-    #             input_parallelism_update: {
-    #               count_update: 1, # required
-    #             },
-    #           },
-    #         ],
-    #         output_updates: [
-    #           {
-    #             output_id: "Id", # required
-    #             name_update: "InAppStreamName",
-    #             kinesis_streams_output_update: {
-    #               resource_arn_update: "ResourceARN", # required
-    #             },
-    #             kinesis_firehose_output_update: {
-    #               resource_arn_update: "ResourceARN", # required
-    #             },
-    #             lambda_output_update: {
-    #               resource_arn_update: "ResourceARN", # required
-    #             },
-    #             destination_schema_update: {
-    #               record_format_type: "JSON", # required, accepts JSON, CSV
-    #             },
-    #           },
-    #         ],
-    #         reference_data_source_updates: [
-    #           {
-    #             reference_id: "Id", # required
-    #             table_name_update: "InAppTableName",
-    #             s3_reference_data_source_update: {
-    #               bucket_arn_update: "BucketARN",
-    #               file_key_update: "FileKey",
-    #             },
-    #             reference_schema_update: {
-    #               record_format: { # required
-    #                 record_format_type: "JSON", # required, accepts JSON, CSV
-    #                 mapping_parameters: {
-    #                   json_mapping_parameters: {
-    #                     record_row_path: "RecordRowPath", # required
-    #                   },
-    #                   csv_mapping_parameters: {
-    #                     record_row_delimiter: "RecordRowDelimiter", # required
-    #                     record_column_delimiter: "RecordColumnDelimiter", # required
-    #                   },
-    #                 },
-    #               },
-    #               record_encoding: "RecordEncoding",
-    #               record_columns: [ # required
-    #                 {
-    #                   name: "RecordColumnName", # required
-    #                   mapping: "RecordColumnMapping",
-    #                   sql_type: "RecordColumnSqlType", # required
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] input_updates
     #   The array of InputUpdate objects describing the new input streams
     #   used by the application.
@@ -6352,16 +4442,6 @@ module Aws::KinesisAnalyticsV2
     # Describes the starting parameters for a SQL-based Kinesis Data
     # Analytics application.
     #
-    # @note When making an API call, you may pass SqlRunConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         input_id: "Id", # required
-    #         input_starting_position_configuration: { # required
-    #           input_starting_position: "NOW", # accepts NOW, TRIM_HORIZON, LAST_STOPPED_POINT
-    #         },
-    #       }
-    #
     # @!attribute [rw] input_id
     #   The input source ID. You can get this ID by calling the
     #   DescribeApplication operation.
@@ -6381,30 +4461,6 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_name: "ApplicationName", # required
-    #         run_configuration: {
-    #           flink_run_configuration: {
-    #             allow_non_restored_state: false,
-    #           },
-    #           sql_run_configurations: [
-    #             {
-    #               input_id: "Id", # required
-    #               input_starting_position_configuration: { # required
-    #                 input_starting_position: "NOW", # accepts NOW, TRIM_HORIZON, LAST_STOPPED_POINT
-    #               },
-    #             },
-    #           ],
-    #           application_restore_configuration: {
-    #             application_restore_type: "SKIP_RESTORE_FROM_SNAPSHOT", # required, accepts SKIP_RESTORE_FROM_SNAPSHOT, RESTORE_FROM_LATEST_SNAPSHOT, RESTORE_FROM_CUSTOM_SNAPSHOT
-    #             snapshot_name: "SnapshotName",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] application_name
     #   The name of the application.
     #   @return [String]
@@ -6427,14 +4483,6 @@ module Aws::KinesisAnalyticsV2
     #
     class StartApplicationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass StopApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_name: "ApplicationName", # required
-    #         force: false,
-    #       }
-    #
     # @!attribute [rw] application_name
     #   The name of the running application to stop.
     #   @return [String]
@@ -6483,14 +4531,6 @@ module Aws::KinesisAnalyticsV2
     #
     # [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue",
-    #       }
-    #
     # @!attribute [rw] key
     #   The key of the key-value tag.
     #   @return [String]
@@ -6508,19 +4548,6 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "KinesisAnalyticsARN", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the application to assign the tags.
     #   @return [String]
@@ -6597,14 +4624,6 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "KinesisAnalyticsARN", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the Kinesis Data Analytics application from which to
     #   remove the tags.
@@ -6627,16 +4646,6 @@ module Aws::KinesisAnalyticsV2
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateApplicationMaintenanceConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_name: "ApplicationName", # required
-    #         application_maintenance_configuration_update: { # required
-    #           application_maintenance_window_start_time_update: "ApplicationMaintenanceWindowStartTime", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] application_name
     #   The name of the application for which you want to update the
     #   maintenance configuration.
@@ -6673,209 +4682,6 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_name: "ApplicationName", # required
-    #         current_application_version_id: 1,
-    #         application_configuration_update: {
-    #           sql_application_configuration_update: {
-    #             input_updates: [
-    #               {
-    #                 input_id: "Id", # required
-    #                 name_prefix_update: "InAppStreamName",
-    #                 input_processing_configuration_update: {
-    #                   input_lambda_processor_update: { # required
-    #                     resource_arn_update: "ResourceARN", # required
-    #                   },
-    #                 },
-    #                 kinesis_streams_input_update: {
-    #                   resource_arn_update: "ResourceARN", # required
-    #                 },
-    #                 kinesis_firehose_input_update: {
-    #                   resource_arn_update: "ResourceARN", # required
-    #                 },
-    #                 input_schema_update: {
-    #                   record_format_update: {
-    #                     record_format_type: "JSON", # required, accepts JSON, CSV
-    #                     mapping_parameters: {
-    #                       json_mapping_parameters: {
-    #                         record_row_path: "RecordRowPath", # required
-    #                       },
-    #                       csv_mapping_parameters: {
-    #                         record_row_delimiter: "RecordRowDelimiter", # required
-    #                         record_column_delimiter: "RecordColumnDelimiter", # required
-    #                       },
-    #                     },
-    #                   },
-    #                   record_encoding_update: "RecordEncoding",
-    #                   record_column_updates: [
-    #                     {
-    #                       name: "RecordColumnName", # required
-    #                       mapping: "RecordColumnMapping",
-    #                       sql_type: "RecordColumnSqlType", # required
-    #                     },
-    #                   ],
-    #                 },
-    #                 input_parallelism_update: {
-    #                   count_update: 1, # required
-    #                 },
-    #               },
-    #             ],
-    #             output_updates: [
-    #               {
-    #                 output_id: "Id", # required
-    #                 name_update: "InAppStreamName",
-    #                 kinesis_streams_output_update: {
-    #                   resource_arn_update: "ResourceARN", # required
-    #                 },
-    #                 kinesis_firehose_output_update: {
-    #                   resource_arn_update: "ResourceARN", # required
-    #                 },
-    #                 lambda_output_update: {
-    #                   resource_arn_update: "ResourceARN", # required
-    #                 },
-    #                 destination_schema_update: {
-    #                   record_format_type: "JSON", # required, accepts JSON, CSV
-    #                 },
-    #               },
-    #             ],
-    #             reference_data_source_updates: [
-    #               {
-    #                 reference_id: "Id", # required
-    #                 table_name_update: "InAppTableName",
-    #                 s3_reference_data_source_update: {
-    #                   bucket_arn_update: "BucketARN",
-    #                   file_key_update: "FileKey",
-    #                 },
-    #                 reference_schema_update: {
-    #                   record_format: { # required
-    #                     record_format_type: "JSON", # required, accepts JSON, CSV
-    #                     mapping_parameters: {
-    #                       json_mapping_parameters: {
-    #                         record_row_path: "RecordRowPath", # required
-    #                       },
-    #                       csv_mapping_parameters: {
-    #                         record_row_delimiter: "RecordRowDelimiter", # required
-    #                         record_column_delimiter: "RecordColumnDelimiter", # required
-    #                       },
-    #                     },
-    #                   },
-    #                   record_encoding: "RecordEncoding",
-    #                   record_columns: [ # required
-    #                     {
-    #                       name: "RecordColumnName", # required
-    #                       mapping: "RecordColumnMapping",
-    #                       sql_type: "RecordColumnSqlType", # required
-    #                     },
-    #                   ],
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #           application_code_configuration_update: {
-    #             code_content_type_update: "PLAINTEXT", # accepts PLAINTEXT, ZIPFILE
-    #             code_content_update: {
-    #               text_content_update: "TextContent",
-    #               zip_file_content_update: "data",
-    #               s3_content_location_update: {
-    #                 bucket_arn_update: "BucketARN",
-    #                 file_key_update: "FileKey",
-    #                 object_version_update: "ObjectVersion",
-    #               },
-    #             },
-    #           },
-    #           flink_application_configuration_update: {
-    #             checkpoint_configuration_update: {
-    #               configuration_type_update: "DEFAULT", # accepts DEFAULT, CUSTOM
-    #               checkpointing_enabled_update: false,
-    #               checkpoint_interval_update: 1,
-    #               min_pause_between_checkpoints_update: 1,
-    #             },
-    #             monitoring_configuration_update: {
-    #               configuration_type_update: "DEFAULT", # accepts DEFAULT, CUSTOM
-    #               metrics_level_update: "APPLICATION", # accepts APPLICATION, TASK, OPERATOR, PARALLELISM
-    #               log_level_update: "INFO", # accepts INFO, WARN, ERROR, DEBUG
-    #             },
-    #             parallelism_configuration_update: {
-    #               configuration_type_update: "DEFAULT", # accepts DEFAULT, CUSTOM
-    #               parallelism_update: 1,
-    #               parallelism_per_kpu_update: 1,
-    #               auto_scaling_enabled_update: false,
-    #             },
-    #           },
-    #           environment_property_updates: {
-    #             property_groups: [ # required
-    #               {
-    #                 property_group_id: "Id", # required
-    #                 property_map: { # required
-    #                   "PropertyKey" => "PropertyValue",
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #           application_snapshot_configuration_update: {
-    #             snapshots_enabled_update: false, # required
-    #           },
-    #           vpc_configuration_updates: [
-    #             {
-    #               vpc_configuration_id: "Id", # required
-    #               subnet_id_updates: ["SubnetId"],
-    #               security_group_id_updates: ["SecurityGroupId"],
-    #             },
-    #           ],
-    #           zeppelin_application_configuration_update: {
-    #             monitoring_configuration_update: {
-    #               log_level_update: "INFO", # required, accepts INFO, WARN, ERROR, DEBUG
-    #             },
-    #             catalog_configuration_update: {
-    #               glue_data_catalog_configuration_update: { # required
-    #                 database_arn_update: "DatabaseARN", # required
-    #               },
-    #             },
-    #             deploy_as_application_configuration_update: {
-    #               s3_content_location_update: {
-    #                 bucket_arn_update: "BucketARN",
-    #                 base_path_update: "BasePath",
-    #               },
-    #             },
-    #             custom_artifacts_configuration_update: [
-    #               {
-    #                 artifact_type: "UDF", # required, accepts UDF, DEPENDENCY_JAR
-    #                 s3_content_location: {
-    #                   bucket_arn: "BucketARN", # required
-    #                   file_key: "FileKey", # required
-    #                   object_version: "ObjectVersion",
-    #                 },
-    #                 maven_reference: {
-    #                   group_id: "MavenGroupId", # required
-    #                   artifact_id: "MavenArtifactId", # required
-    #                   version: "MavenVersion", # required
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #         },
-    #         service_execution_role_update: "RoleARN",
-    #         run_configuration_update: {
-    #           flink_run_configuration: {
-    #             allow_non_restored_state: false,
-    #           },
-    #           application_restore_configuration: {
-    #             application_restore_type: "SKIP_RESTORE_FROM_SNAPSHOT", # required, accepts SKIP_RESTORE_FROM_SNAPSHOT, RESTORE_FROM_LATEST_SNAPSHOT, RESTORE_FROM_CUSTOM_SNAPSHOT
-    #             snapshot_name: "SnapshotName",
-    #           },
-    #         },
-    #         cloud_watch_logging_option_updates: [
-    #           {
-    #             cloud_watch_logging_option_id: "Id", # required
-    #             log_stream_arn_update: "LogStreamARN",
-    #           },
-    #         ],
-    #         conditional_token: "ConditionalToken",
-    #       }
-    #
     # @!attribute [rw] application_name
     #   The name of the application to update.
     #   @return [String]
@@ -6944,14 +4750,6 @@ module Aws::KinesisAnalyticsV2
 
     # Describes the parameters of a VPC used by the application.
     #
-    # @note When making an API call, you may pass VpcConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         subnet_ids: ["SubnetId"], # required
-    #         security_group_ids: ["SecurityGroupId"], # required
-    #       }
-    #
     # @!attribute [rw] subnet_ids
     #   The array of [Subnet][1] IDs used by the VPC configuration.
     #
@@ -7016,15 +4814,6 @@ module Aws::KinesisAnalyticsV2
 
     # Describes updates to the VPC configuration used by the application.
     #
-    # @note When making an API call, you may pass VpcConfigurationUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         vpc_configuration_id: "Id", # required
-    #         subnet_id_updates: ["SubnetId"],
-    #         security_group_id_updates: ["SecurityGroupId"],
-    #       }
-    #
     # @!attribute [rw] vpc_configuration_id
     #   Describes an update to the ID of the VPC configuration.
     #   @return [String]
@@ -7058,41 +4847,6 @@ module Aws::KinesisAnalyticsV2
     end
 
     # The configuration of a Kinesis Data Analytics Studio notebook.
-    #
-    # @note When making an API call, you may pass ZeppelinApplicationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         monitoring_configuration: {
-    #           log_level: "INFO", # required, accepts INFO, WARN, ERROR, DEBUG
-    #         },
-    #         catalog_configuration: {
-    #           glue_data_catalog_configuration: { # required
-    #             database_arn: "DatabaseARN", # required
-    #           },
-    #         },
-    #         deploy_as_application_configuration: {
-    #           s3_content_location: { # required
-    #             bucket_arn: "BucketARN", # required
-    #             base_path: "BasePath",
-    #           },
-    #         },
-    #         custom_artifacts_configuration: [
-    #           {
-    #             artifact_type: "UDF", # required, accepts UDF, DEPENDENCY_JAR
-    #             s3_content_location: {
-    #               bucket_arn: "BucketARN", # required
-    #               file_key: "FileKey", # required
-    #               object_version: "ObjectVersion",
-    #             },
-    #             maven_reference: {
-    #               group_id: "MavenGroupId", # required
-    #               artifact_id: "MavenArtifactId", # required
-    #               version: "MavenVersion", # required
-    #             },
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] monitoring_configuration
     #   The monitoring configuration of a Kinesis Data Analytics Studio
@@ -7161,41 +4915,6 @@ module Aws::KinesisAnalyticsV2
     # Updates to the configuration of Kinesis Data Analytics Studio
     # notebook.
     #
-    # @note When making an API call, you may pass ZeppelinApplicationConfigurationUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         monitoring_configuration_update: {
-    #           log_level_update: "INFO", # required, accepts INFO, WARN, ERROR, DEBUG
-    #         },
-    #         catalog_configuration_update: {
-    #           glue_data_catalog_configuration_update: { # required
-    #             database_arn_update: "DatabaseARN", # required
-    #           },
-    #         },
-    #         deploy_as_application_configuration_update: {
-    #           s3_content_location_update: {
-    #             bucket_arn_update: "BucketARN",
-    #             base_path_update: "BasePath",
-    #           },
-    #         },
-    #         custom_artifacts_configuration_update: [
-    #           {
-    #             artifact_type: "UDF", # required, accepts UDF, DEPENDENCY_JAR
-    #             s3_content_location: {
-    #               bucket_arn: "BucketARN", # required
-    #               file_key: "FileKey", # required
-    #               object_version: "ObjectVersion",
-    #             },
-    #             maven_reference: {
-    #               group_id: "MavenGroupId", # required
-    #               artifact_id: "MavenArtifactId", # required
-    #               version: "MavenVersion", # required
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] monitoring_configuration_update
     #   Updates to the monitoring configuration of a Kinesis Data Analytics
     #   Studio notebook.
@@ -7236,13 +4955,6 @@ module Aws::KinesisAnalyticsV2
     #
     # [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/java/monitoring-overview.html
     #
-    # @note When making an API call, you may pass ZeppelinMonitoringConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         log_level: "INFO", # required, accepts INFO, WARN, ERROR, DEBUG
-    #       }
-    #
     # @!attribute [rw] log_level
     #   The verbosity of the CloudWatch Logs for an application.
     #   @return [String]
@@ -7272,13 +4984,6 @@ module Aws::KinesisAnalyticsV2
 
     # Updates to the monitoring configuration for Apache Zeppelin within a
     # Kinesis Data Analytics Studio notebook.
-    #
-    # @note When making an API call, you may pass ZeppelinMonitoringConfigurationUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         log_level_update: "INFO", # required, accepts INFO, WARN, ERROR, DEBUG
-    #       }
     #
     # @!attribute [rw] log_level_update
     #   Updates to the logging level for Apache Zeppelin within a Kinesis

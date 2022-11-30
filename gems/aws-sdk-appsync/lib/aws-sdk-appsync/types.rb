@@ -25,29 +25,6 @@ module Aws::AppSync
 
     # Describes an additional authentication provider.
     #
-    # @note When making an API call, you may pass AdditionalAuthenticationProvider
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_type: "API_KEY", # accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
-    #         open_id_connect_config: {
-    #           issuer: "String", # required
-    #           client_id: "String",
-    #           iat_ttl: 1,
-    #           auth_ttl: 1,
-    #         },
-    #         user_pool_config: {
-    #           user_pool_id: "String", # required
-    #           aws_region: "String", # required
-    #           app_id_client_regex: "String",
-    #         },
-    #         lambda_authorizer_config: {
-    #           authorizer_result_ttl_in_seconds: 1,
-    #           authorizer_uri: "String", # required
-    #           identity_validation_expression: "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] authentication_type
     #   The authentication type: API key, Identity and Access Management
     #   (IAM), OpenID Connect (OIDC), Amazon Cognito user pools, or Lambda.
@@ -330,14 +307,6 @@ module Aws::AppSync
     # AppSync function. Specifies the name and version of the runtime to
     # use. Note that if a runtime is specified, code must also be specified.
     #
-    # @note When making an API call, you may pass AppSyncRuntime
-    #   data as a hash:
-    #
-    #       {
-    #         name: "APPSYNC_JS", # required, accepts APPSYNC_JS
-    #         runtime_version: "String", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The `name` of the runtime to use. Currently, the only allowed value
     #   is `APPSYNC_JS`.
@@ -357,14 +326,6 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateApiRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         api_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The domain name.
     #   @return [String]
@@ -397,17 +358,6 @@ module Aws::AppSync
     # The authorization configuration in case the HTTP endpoint requires
     # authorization.
     #
-    # @note When making an API call, you may pass AuthorizationConfig
-    #   data as a hash:
-    #
-    #       {
-    #         authorization_type: "AWS_IAM", # required, accepts AWS_IAM
-    #         aws_iam_config: {
-    #           signing_region: "String",
-    #           signing_service_name: "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] authorization_type
     #   The authorization type that the HTTP endpoint requires.
     #
@@ -431,14 +381,6 @@ module Aws::AppSync
     end
 
     # The Identity and Access Management (IAM) configuration.
-    #
-    # @note When making an API call, you may pass AwsIamConfig
-    #   data as a hash:
-    #
-    #       {
-    #         signing_region: "String",
-    #         signing_service_name: "String",
-    #       }
     #
     # @!attribute [rw] signing_region
     #   The signing Amazon Web Services Region for IAM authorization.
@@ -501,14 +443,6 @@ module Aws::AppSync
     end
 
     # The caching configuration for a resolver that has caching activated.
-    #
-    # @note When making an API call, you may pass CachingConfig
-    #   data as a hash:
-    #
-    #       {
-    #         ttl: 1, # required
-    #         caching_keys: ["String"],
-    #       }
     #
     # @!attribute [rw] ttl
     #   The TTL in seconds for a resolver that has caching activated.
@@ -588,15 +522,6 @@ module Aws::AppSync
 
     # Describes an Amazon Cognito user pool configuration.
     #
-    # @note When making an API call, you may pass CognitoUserPoolConfig
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "String", # required
-    #         aws_region: "String", # required
-    #         app_id_client_regex: "String",
-    #       }
-    #
     # @!attribute [rw] user_pool_id
     #   The user pool ID.
     #   @return [String]
@@ -636,18 +561,6 @@ module Aws::AppSync
     end
 
     # Represents the input of a `CreateApiCache` operation.
-    #
-    # @note When making an API call, you may pass CreateApiCacheRequest
-    #   data as a hash:
-    #
-    #       {
-    #         api_id: "String", # required
-    #         ttl: 1, # required
-    #         transit_encryption_enabled: false,
-    #         at_rest_encryption_enabled: false,
-    #         api_caching_behavior: "FULL_REQUEST_CACHING", # required, accepts FULL_REQUEST_CACHING, PER_RESOLVER_CACHING
-    #         type: "T2_SMALL", # required, accepts T2_SMALL, T2_MEDIUM, R4_LARGE, R4_XLARGE, R4_2XLARGE, R4_4XLARGE, R4_8XLARGE, SMALL, MEDIUM, LARGE, XLARGE, LARGE_2X, LARGE_4X, LARGE_8X, LARGE_12X
-    #       }
     #
     # @!attribute [rw] api_id
     #   The GraphQL API ID.
@@ -746,15 +659,6 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateApiKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         api_id: "String", # required
-    #         description: "String",
-    #         expires: 1,
-    #       }
-    #
     # @!attribute [rw] api_id
     #   The ID for your GraphQL API.
     #   @return [String]
@@ -792,59 +696,6 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDataSourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         api_id: "String", # required
-    #         name: "ResourceName", # required
-    #         description: "String",
-    #         type: "AWS_LAMBDA", # required, accepts AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, NONE, HTTP, RELATIONAL_DATABASE, AMAZON_OPENSEARCH_SERVICE
-    #         service_role_arn: "String",
-    #         dynamodb_config: {
-    #           table_name: "String", # required
-    #           aws_region: "String", # required
-    #           use_caller_credentials: false,
-    #           delta_sync_config: {
-    #             base_table_ttl: 1,
-    #             delta_sync_table_name: "String",
-    #             delta_sync_table_ttl: 1,
-    #           },
-    #           versioned: false,
-    #         },
-    #         lambda_config: {
-    #           lambda_function_arn: "String", # required
-    #         },
-    #         elasticsearch_config: {
-    #           endpoint: "String", # required
-    #           aws_region: "String", # required
-    #         },
-    #         open_search_service_config: {
-    #           endpoint: "String", # required
-    #           aws_region: "String", # required
-    #         },
-    #         http_config: {
-    #           endpoint: "String",
-    #           authorization_config: {
-    #             authorization_type: "AWS_IAM", # required, accepts AWS_IAM
-    #             aws_iam_config: {
-    #               signing_region: "String",
-    #               signing_service_name: "String",
-    #             },
-    #           },
-    #         },
-    #         relational_database_config: {
-    #           relational_database_source_type: "RDS_HTTP_ENDPOINT", # accepts RDS_HTTP_ENDPOINT
-    #           rds_http_endpoint_config: {
-    #             aws_region: "String",
-    #             db_cluster_identifier: "String",
-    #             database_name: "String",
-    #             schema: "String",
-    #             aws_secret_store_arn: "String",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] api_id
     #   The API ID for the GraphQL API for the `DataSource`.
     #   @return [String]
@@ -926,15 +777,6 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDomainNameRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         certificate_arn: "CertificateArn", # required
-    #         description: "Description",
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The domain name.
     #   @return [String]
@@ -971,32 +813,6 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateFunctionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         api_id: "String", # required
-    #         name: "ResourceName", # required
-    #         description: "String",
-    #         data_source_name: "ResourceName", # required
-    #         request_mapping_template: "MappingTemplate",
-    #         response_mapping_template: "MappingTemplate",
-    #         function_version: "String",
-    #         sync_config: {
-    #           conflict_handler: "OPTIMISTIC_CONCURRENCY", # accepts OPTIMISTIC_CONCURRENCY, LAMBDA, AUTOMERGE, NONE
-    #           conflict_detection: "VERSION", # accepts VERSION, NONE
-    #           lambda_conflict_handler_config: {
-    #             lambda_conflict_handler_arn: "String",
-    #           },
-    #         },
-    #         max_batch_size: 1,
-    #         runtime: {
-    #           name: "APPSYNC_JS", # required, accepts APPSYNC_JS
-    #           runtime_version: "String", # required
-    #         },
-    #         code: "Code",
-    #       }
-    #
     # @!attribute [rw] api_id
     #   The GraphQL API ID.
     #   @return [String]
@@ -1082,61 +898,6 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateGraphqlApiRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #         log_config: {
-    #           field_log_level: "NONE", # required, accepts NONE, ERROR, ALL
-    #           cloud_watch_logs_role_arn: "String", # required
-    #           exclude_verbose_content: false,
-    #         },
-    #         authentication_type: "API_KEY", # required, accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
-    #         user_pool_config: {
-    #           user_pool_id: "String", # required
-    #           aws_region: "String", # required
-    #           default_action: "ALLOW", # required, accepts ALLOW, DENY
-    #           app_id_client_regex: "String",
-    #         },
-    #         open_id_connect_config: {
-    #           issuer: "String", # required
-    #           client_id: "String",
-    #           iat_ttl: 1,
-    #           auth_ttl: 1,
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         additional_authentication_providers: [
-    #           {
-    #             authentication_type: "API_KEY", # accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
-    #             open_id_connect_config: {
-    #               issuer: "String", # required
-    #               client_id: "String",
-    #               iat_ttl: 1,
-    #               auth_ttl: 1,
-    #             },
-    #             user_pool_config: {
-    #               user_pool_id: "String", # required
-    #               aws_region: "String", # required
-    #               app_id_client_regex: "String",
-    #             },
-    #             lambda_authorizer_config: {
-    #               authorizer_result_ttl_in_seconds: 1,
-    #               authorizer_uri: "String", # required
-    #               identity_validation_expression: "String",
-    #             },
-    #           },
-    #         ],
-    #         xray_enabled: false,
-    #         lambda_authorizer_config: {
-    #           authorizer_result_ttl_in_seconds: 1,
-    #           authorizer_uri: "String", # required
-    #           identity_validation_expression: "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   A user-supplied name for the `GraphqlApi`.
     #   @return [String]
@@ -1203,39 +964,6 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateResolverRequest
-    #   data as a hash:
-    #
-    #       {
-    #         api_id: "String", # required
-    #         type_name: "ResourceName", # required
-    #         field_name: "ResourceName", # required
-    #         data_source_name: "ResourceName",
-    #         request_mapping_template: "MappingTemplate",
-    #         response_mapping_template: "MappingTemplate",
-    #         kind: "UNIT", # accepts UNIT, PIPELINE
-    #         pipeline_config: {
-    #           functions: ["String"],
-    #         },
-    #         sync_config: {
-    #           conflict_handler: "OPTIMISTIC_CONCURRENCY", # accepts OPTIMISTIC_CONCURRENCY, LAMBDA, AUTOMERGE, NONE
-    #           conflict_detection: "VERSION", # accepts VERSION, NONE
-    #           lambda_conflict_handler_config: {
-    #             lambda_conflict_handler_arn: "String",
-    #           },
-    #         },
-    #         caching_config: {
-    #           ttl: 1, # required
-    #           caching_keys: ["String"],
-    #         },
-    #         max_batch_size: 1,
-    #         runtime: {
-    #           name: "APPSYNC_JS", # required, accepts APPSYNC_JS
-    #           runtime_version: "String", # required
-    #         },
-    #         code: "Code",
-    #       }
-    #
     # @!attribute [rw] api_id
     #   The ID for the GraphQL API for which the resolver is being created.
     #   @return [String]
@@ -1342,15 +1070,6 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateTypeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         api_id: "String", # required
-    #         definition: "String", # required
-    #         format: "SDL", # required, accepts SDL, JSON
-    #       }
-    #
     # @!attribute [rw] api_id
     #   The API ID.
     #   @return [String]
@@ -1481,13 +1200,6 @@ module Aws::AppSync
 
     # Represents the input of a `DeleteApiCache` operation.
     #
-    # @note When making an API call, you may pass DeleteApiCacheRequest
-    #   data as a hash:
-    #
-    #       {
-    #         api_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] api_id
     #   The API ID.
     #   @return [String]
@@ -1506,14 +1218,6 @@ module Aws::AppSync
     #
     class DeleteApiCacheResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteApiKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         api_id: "String", # required
-    #         id: "String", # required
-    #       }
-    #
     # @!attribute [rw] api_id
     #   The API ID.
     #   @return [String]
@@ -1535,14 +1239,6 @@ module Aws::AppSync
     #
     class DeleteApiKeyResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteDataSourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         api_id: "String", # required
-    #         name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] api_id
     #   The API ID.
     #   @return [String]
@@ -1564,13 +1260,6 @@ module Aws::AppSync
     #
     class DeleteDataSourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteDomainNameRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The domain name.
     #   @return [String]
@@ -1587,14 +1276,6 @@ module Aws::AppSync
     #
     class DeleteDomainNameResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteFunctionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         api_id: "String", # required
-    #         function_id: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] api_id
     #   The GraphQL API ID.
     #   @return [String]
@@ -1616,13 +1297,6 @@ module Aws::AppSync
     #
     class DeleteFunctionResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteGraphqlApiRequest
-    #   data as a hash:
-    #
-    #       {
-    #         api_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] api_id
     #   The API ID.
     #   @return [String]
@@ -1639,15 +1313,6 @@ module Aws::AppSync
     #
     class DeleteGraphqlApiResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteResolverRequest
-    #   data as a hash:
-    #
-    #       {
-    #         api_id: "String", # required
-    #         type_name: "ResourceName", # required
-    #         field_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] api_id
     #   The API ID.
     #   @return [String]
@@ -1674,14 +1339,6 @@ module Aws::AppSync
     #
     class DeleteResolverResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteTypeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         api_id: "String", # required
-    #         type_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] api_id
     #   The API ID.
     #   @return [String]
@@ -1704,15 +1361,6 @@ module Aws::AppSync
     class DeleteTypeResponse < Aws::EmptyStructure; end
 
     # Describes a Delta Sync configuration.
-    #
-    # @note When making an API call, you may pass DeltaSyncConfig
-    #   data as a hash:
-    #
-    #       {
-    #         base_table_ttl: 1,
-    #         delta_sync_table_name: "String",
-    #         delta_sync_table_ttl: 1,
-    #       }
     #
     # @!attribute [rw] base_table_ttl
     #   The number of minutes that an Item is stored in the data source.
@@ -1737,13 +1385,6 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateApiRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The domain name.
     #   @return [String]
@@ -1798,21 +1439,6 @@ module Aws::AppSync
 
     # Describes an Amazon DynamoDB data source configuration.
     #
-    # @note When making an API call, you may pass DynamodbDataSourceConfig
-    #   data as a hash:
-    #
-    #       {
-    #         table_name: "String", # required
-    #         aws_region: "String", # required
-    #         use_caller_credentials: false,
-    #         delta_sync_config: {
-    #           base_table_ttl: 1,
-    #           delta_sync_table_name: "String",
-    #           delta_sync_table_ttl: 1,
-    #         },
-    #         versioned: false,
-    #       }
-    #
     # @!attribute [rw] table_name
     #   The table name.
     #   @return [String]
@@ -1852,14 +1478,6 @@ module Aws::AppSync
     # OpenSearch Service. This configuration is deprecated. For new data
     # sources, use OpenSearchServiceDataSourceConfig to specify an
     # OpenSearch data source.
-    #
-    # @note When making an API call, you may pass ElasticsearchDataSourceConfig
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint: "String", # required
-    #         aws_region: "String", # required
-    #       }
     #
     # @!attribute [rw] endpoint
     #   The endpoint.
@@ -1912,19 +1530,6 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass EvaluateCodeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         runtime: { # required
-    #           name: "APPSYNC_JS", # required, accepts APPSYNC_JS
-    #           runtime_version: "String", # required
-    #         },
-    #         code: "Code", # required
-    #         context: "Context", # required
-    #         function: "String",
-    #       }
-    #
     # @!attribute [rw] runtime
     #   The runtime to be used when evaluating the code. Currently, only the
     #   `APPSYNC_JS` runtime is supported.
@@ -1980,14 +1585,6 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass EvaluateMappingTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         template: "Template", # required
-    #         context: "Context", # required
-    #       }
-    #
     # @!attribute [rw] template
     #   The mapping template; this can be a request or response template. A
     #   `template` is required for this action.
@@ -2031,13 +1628,6 @@ module Aws::AppSync
     end
 
     # Represents the input of a `FlushApiCache` operation.
-    #
-    # @note When making an API call, you may pass FlushApiCacheRequest
-    #   data as a hash:
-    #
-    #       {
-    #         api_id: "String", # required
-    #       }
     #
     # @!attribute [rw] api_id
     #   The API ID.
@@ -2137,13 +1727,6 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetApiAssociationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The domain name.
     #   @return [String]
@@ -2169,13 +1752,6 @@ module Aws::AppSync
     end
 
     # Represents the input of a `GetApiCache` operation.
-    #
-    # @note When making an API call, you may pass GetApiCacheRequest
-    #   data as a hash:
-    #
-    #       {
-    #         api_id: "String", # required
-    #       }
     #
     # @!attribute [rw] api_id
     #   The API ID.
@@ -2203,14 +1779,6 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDataSourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         api_id: "String", # required
-    #         name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] api_id
     #   The API ID.
     #   @return [String]
@@ -2240,13 +1808,6 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDomainNameRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The domain name.
     #   @return [String]
@@ -2271,14 +1832,6 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetFunctionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         api_id: "String", # required
-    #         function_id: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] api_id
     #   The GraphQL API ID.
     #   @return [String]
@@ -2308,13 +1861,6 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetGraphqlApiRequest
-    #   data as a hash:
-    #
-    #       {
-    #         api_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] api_id
     #   The API ID for the GraphQL API.
     #   @return [String]
@@ -2339,15 +1885,6 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetIntrospectionSchemaRequest
-    #   data as a hash:
-    #
-    #       {
-    #         api_id: "String", # required
-    #         format: "SDL", # required, accepts SDL, JSON
-    #         include_directives: false,
-    #       }
-    #
     # @!attribute [rw] api_id
     #   The API ID.
     #   @return [String]
@@ -2389,15 +1926,6 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetResolverRequest
-    #   data as a hash:
-    #
-    #       {
-    #         api_id: "String", # required
-    #         type_name: "ResourceName", # required
-    #         field_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] api_id
     #   The API ID.
     #   @return [String]
@@ -2432,13 +1960,6 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSchemaCreationStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         api_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] api_id
     #   The API ID.
     #   @return [String]
@@ -2471,15 +1992,6 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetTypeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         api_id: "String", # required
-    #         type_name: "ResourceName", # required
-    #         format: "SDL", # required, accepts SDL, JSON
-    #       }
-    #
     # @!attribute [rw] api_id
     #   The API ID.
     #   @return [String]
@@ -2606,20 +2118,6 @@ module Aws::AppSync
 
     # Describes an HTTP data source configuration.
     #
-    # @note When making an API call, you may pass HttpDataSourceConfig
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint: "String",
-    #         authorization_config: {
-    #           authorization_type: "AWS_IAM", # required, accepts AWS_IAM
-    #           aws_iam_config: {
-    #             signing_region: "String",
-    #             signing_service_name: "String",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] endpoint
     #   The HTTP URL endpoint. You can specify either the domain name or IP,
     #   and port combination, and the URL scheme must be HTTP or HTTPS. If
@@ -2657,15 +2155,6 @@ module Aws::AppSync
     # A `LambdaAuthorizerConfig` specifies how to authorize AppSync API
     # access when using the `AWS_LAMBDA` authorizer mode. Be aware that an
     # AppSync API can have only one Lambda authorizer configured at a time.
-    #
-    # @note When making an API call, you may pass LambdaAuthorizerConfig
-    #   data as a hash:
-    #
-    #       {
-    #         authorizer_result_ttl_in_seconds: 1,
-    #         authorizer_uri: "String", # required
-    #         identity_validation_expression: "String",
-    #       }
     #
     # @!attribute [rw] authorizer_result_ttl_in_seconds
     #   The number of seconds a response should be cached for. The default
@@ -2708,13 +2197,6 @@ module Aws::AppSync
     # The `LambdaConflictHandlerConfig` object when configuring `LAMBDA` as
     # the Conflict Handler.
     #
-    # @note When making an API call, you may pass LambdaConflictHandlerConfig
-    #   data as a hash:
-    #
-    #       {
-    #         lambda_conflict_handler_arn: "String",
-    #       }
-    #
     # @!attribute [rw] lambda_conflict_handler_arn
     #   The Amazon Resource Name (ARN) for the Lambda function to use as the
     #   Conflict Handler.
@@ -2729,13 +2211,6 @@ module Aws::AppSync
     end
 
     # Describes an Lambda data source configuration.
-    #
-    # @note When making an API call, you may pass LambdaDataSourceConfig
-    #   data as a hash:
-    #
-    #       {
-    #         lambda_function_arn: "String", # required
-    #       }
     #
     # @!attribute [rw] lambda_function_arn
     #   The Amazon Resource Name (ARN) for the Lambda function.
@@ -2762,15 +2237,6 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListApiKeysRequest
-    #   data as a hash:
-    #
-    #       {
-    #         api_id: "String", # required
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] api_id
     #   The API ID.
     #   @return [String]
@@ -2813,15 +2279,6 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDataSourcesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         api_id: "String", # required
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] api_id
     #   The API ID.
     #   @return [String]
@@ -2864,14 +2321,6 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDomainNamesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The API token.
     #   @return [String]
@@ -2906,15 +2355,6 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFunctionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         api_id: "String", # required
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] api_id
     #   The GraphQL API ID.
     #   @return [String]
@@ -2958,14 +2398,6 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListGraphqlApisRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   An identifier that was returned from the previous call to this
     #   operation, which you can use to return the next set of items in the
@@ -3003,16 +2435,6 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListResolversByFunctionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         api_id: "String", # required
-    #         function_id: "String", # required
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] api_id
     #   The API ID.
     #   @return [String]
@@ -3060,16 +2482,6 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListResolversRequest
-    #   data as a hash:
-    #
-    #       {
-    #         api_id: "String", # required
-    #         type_name: "String", # required
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] api_id
     #   The API ID.
     #   @return [String]
@@ -3117,13 +2529,6 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The `GraphqlApi` Amazon Resource Name (ARN).
     #   @return [String]
@@ -3148,16 +2553,6 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTypesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         api_id: "String", # required
-    #         format: "SDL", # required, accepts SDL, JSON
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] api_id
     #   The API ID.
     #   @return [String]
@@ -3206,15 +2601,6 @@ module Aws::AppSync
     end
 
     # The Amazon CloudWatch Logs configuration.
-    #
-    # @note When making an API call, you may pass LogConfig
-    #   data as a hash:
-    #
-    #       {
-    #         field_log_level: "NONE", # required, accepts NONE, ERROR, ALL
-    #         cloud_watch_logs_role_arn: "String", # required
-    #         exclude_verbose_content: false,
-    #       }
     #
     # @!attribute [rw] field_log_level
     #   The field logging level. Values can be NONE, ERROR, or ALL.
@@ -3277,16 +2663,6 @@ module Aws::AppSync
 
     # Describes an OpenID Connect (OIDC) configuration.
     #
-    # @note When making an API call, you may pass OpenIDConnectConfig
-    #   data as a hash:
-    #
-    #       {
-    #         issuer: "String", # required
-    #         client_id: "String",
-    #         iat_ttl: 1,
-    #         auth_ttl: 1,
-    #       }
-    #
     # @!attribute [rw] issuer
     #   The issuer for the OIDC configuration. The issuer returned by
     #   discovery must exactly match the value of `iss` in the ID token.
@@ -3323,14 +2699,6 @@ module Aws::AppSync
 
     # Describes an OpenSearch data source configuration.
     #
-    # @note When making an API call, you may pass OpenSearchServiceDataSourceConfig
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint: "String", # required
-    #         aws_region: "String", # required
-    #       }
-    #
     # @!attribute [rw] endpoint
     #   The endpoint.
     #   @return [String]
@@ -3350,13 +2718,6 @@ module Aws::AppSync
 
     # The pipeline configuration for a resolver of kind `PIPELINE`.
     #
-    # @note When making an API call, you may pass PipelineConfig
-    #   data as a hash:
-    #
-    #       {
-    #         functions: ["String"],
-    #       }
-    #
     # @!attribute [rw] functions
     #   A list of `Function` objects.
     #   @return [Array<String>]
@@ -3371,17 +2732,6 @@ module Aws::AppSync
 
     # The Amazon Relational Database Service (Amazon RDS) HTTP endpoint
     # configuration.
-    #
-    # @note When making an API call, you may pass RdsHttpEndpointConfig
-    #   data as a hash:
-    #
-    #       {
-    #         aws_region: "String",
-    #         db_cluster_identifier: "String",
-    #         database_name: "String",
-    #         schema: "String",
-    #         aws_secret_store_arn: "String",
-    #       }
     #
     # @!attribute [rw] aws_region
     #   Amazon Web Services Region for Amazon RDS HTTP endpoint.
@@ -3417,20 +2767,6 @@ module Aws::AppSync
     end
 
     # Describes a relational database data source configuration.
-    #
-    # @note When making an API call, you may pass RelationalDatabaseDataSourceConfig
-    #   data as a hash:
-    #
-    #       {
-    #         relational_database_source_type: "RDS_HTTP_ENDPOINT", # accepts RDS_HTTP_ENDPOINT
-    #         rds_http_endpoint_config: {
-    #           aws_region: "String",
-    #           db_cluster_identifier: "String",
-    #           database_name: "String",
-    #           schema: "String",
-    #           aws_secret_store_arn: "String",
-    #         },
-    #       }
     #
     # @!attribute [rw] relational_database_source_type
     #   Source type for the relational database.
@@ -3542,14 +2878,6 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartSchemaCreationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         api_id: "String", # required
-    #         definition: "data", # required
-    #       }
-    #
     # @!attribute [rw] api_id
     #   The API ID.
     #   @return [String]
@@ -3585,17 +2913,6 @@ module Aws::AppSync
     #
     # Specifies which Conflict Detection strategy and Resolution strategy to
     # use when the resolver is invoked.
-    #
-    # @note When making an API call, you may pass SyncConfig
-    #   data as a hash:
-    #
-    #       {
-    #         conflict_handler: "OPTIMISTIC_CONCURRENCY", # accepts OPTIMISTIC_CONCURRENCY, LAMBDA, AUTOMERGE, NONE
-    #         conflict_detection: "VERSION", # accepts VERSION, NONE
-    #         lambda_conflict_handler_config: {
-    #           lambda_conflict_handler_arn: "String",
-    #         },
-    #       }
     #
     # @!attribute [rw] conflict_handler
     #   The Conflict Resolution strategy to perform in the event of a
@@ -3636,16 +2953,6 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The `GraphqlApi` Amazon Resource Name (ARN).
     #   @return [String]
@@ -3714,14 +3021,6 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The `GraphqlApi` Amazon Resource Name (ARN).
     #   @return [String]
@@ -3744,16 +3043,6 @@ module Aws::AppSync
     class UntagResourceResponse < Aws::EmptyStructure; end
 
     # Represents the input of a `UpdateApiCache` operation.
-    #
-    # @note When making an API call, you may pass UpdateApiCacheRequest
-    #   data as a hash:
-    #
-    #       {
-    #         api_id: "String", # required
-    #         ttl: 1, # required
-    #         api_caching_behavior: "FULL_REQUEST_CACHING", # required, accepts FULL_REQUEST_CACHING, PER_RESOLVER_CACHING
-    #         type: "T2_SMALL", # required, accepts T2_SMALL, T2_MEDIUM, R4_LARGE, R4_XLARGE, R4_2XLARGE, R4_4XLARGE, R4_8XLARGE, SMALL, MEDIUM, LARGE, XLARGE, LARGE_2X, LARGE_4X, LARGE_8X, LARGE_12X
-    #       }
     #
     # @!attribute [rw] api_id
     #   The GraphQL API ID.
@@ -3840,16 +3129,6 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateApiKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         api_id: "String", # required
-    #         id: "String", # required
-    #         description: "String",
-    #         expires: 1,
-    #       }
-    #
     # @!attribute [rw] api_id
     #   The ID for the GraphQL API.
     #   @return [String]
@@ -3891,59 +3170,6 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateDataSourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         api_id: "String", # required
-    #         name: "ResourceName", # required
-    #         description: "String",
-    #         type: "AWS_LAMBDA", # required, accepts AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, NONE, HTTP, RELATIONAL_DATABASE, AMAZON_OPENSEARCH_SERVICE
-    #         service_role_arn: "String",
-    #         dynamodb_config: {
-    #           table_name: "String", # required
-    #           aws_region: "String", # required
-    #           use_caller_credentials: false,
-    #           delta_sync_config: {
-    #             base_table_ttl: 1,
-    #             delta_sync_table_name: "String",
-    #             delta_sync_table_ttl: 1,
-    #           },
-    #           versioned: false,
-    #         },
-    #         lambda_config: {
-    #           lambda_function_arn: "String", # required
-    #         },
-    #         elasticsearch_config: {
-    #           endpoint: "String", # required
-    #           aws_region: "String", # required
-    #         },
-    #         open_search_service_config: {
-    #           endpoint: "String", # required
-    #           aws_region: "String", # required
-    #         },
-    #         http_config: {
-    #           endpoint: "String",
-    #           authorization_config: {
-    #             authorization_type: "AWS_IAM", # required, accepts AWS_IAM
-    #             aws_iam_config: {
-    #               signing_region: "String",
-    #               signing_service_name: "String",
-    #             },
-    #           },
-    #         },
-    #         relational_database_config: {
-    #           relational_database_source_type: "RDS_HTTP_ENDPOINT", # accepts RDS_HTTP_ENDPOINT
-    #           rds_http_endpoint_config: {
-    #             aws_region: "String",
-    #             db_cluster_identifier: "String",
-    #             database_name: "String",
-    #             schema: "String",
-    #             aws_secret_store_arn: "String",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] api_id
     #   The API ID.
     #   @return [String]
@@ -4023,14 +3249,6 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateDomainNameRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         description: "Description",
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The domain name.
     #   @return [String]
@@ -4060,33 +3278,6 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateFunctionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         api_id: "String", # required
-    #         name: "ResourceName", # required
-    #         description: "String",
-    #         function_id: "ResourceName", # required
-    #         data_source_name: "ResourceName", # required
-    #         request_mapping_template: "MappingTemplate",
-    #         response_mapping_template: "MappingTemplate",
-    #         function_version: "String",
-    #         sync_config: {
-    #           conflict_handler: "OPTIMISTIC_CONCURRENCY", # accepts OPTIMISTIC_CONCURRENCY, LAMBDA, AUTOMERGE, NONE
-    #           conflict_detection: "VERSION", # accepts VERSION, NONE
-    #           lambda_conflict_handler_config: {
-    #             lambda_conflict_handler_arn: "String",
-    #           },
-    #         },
-    #         max_batch_size: 1,
-    #         runtime: {
-    #           name: "APPSYNC_JS", # required, accepts APPSYNC_JS
-    #           runtime_version: "String", # required
-    #         },
-    #         code: "Code",
-    #       }
-    #
     # @!attribute [rw] api_id
     #   The GraphQL API ID.
     #   @return [String]
@@ -4177,59 +3368,6 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateGraphqlApiRequest
-    #   data as a hash:
-    #
-    #       {
-    #         api_id: "String", # required
-    #         name: "String", # required
-    #         log_config: {
-    #           field_log_level: "NONE", # required, accepts NONE, ERROR, ALL
-    #           cloud_watch_logs_role_arn: "String", # required
-    #           exclude_verbose_content: false,
-    #         },
-    #         authentication_type: "API_KEY", # accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
-    #         user_pool_config: {
-    #           user_pool_id: "String", # required
-    #           aws_region: "String", # required
-    #           default_action: "ALLOW", # required, accepts ALLOW, DENY
-    #           app_id_client_regex: "String",
-    #         },
-    #         open_id_connect_config: {
-    #           issuer: "String", # required
-    #           client_id: "String",
-    #           iat_ttl: 1,
-    #           auth_ttl: 1,
-    #         },
-    #         additional_authentication_providers: [
-    #           {
-    #             authentication_type: "API_KEY", # accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
-    #             open_id_connect_config: {
-    #               issuer: "String", # required
-    #               client_id: "String",
-    #               iat_ttl: 1,
-    #               auth_ttl: 1,
-    #             },
-    #             user_pool_config: {
-    #               user_pool_id: "String", # required
-    #               aws_region: "String", # required
-    #               app_id_client_regex: "String",
-    #             },
-    #             lambda_authorizer_config: {
-    #               authorizer_result_ttl_in_seconds: 1,
-    #               authorizer_uri: "String", # required
-    #               identity_validation_expression: "String",
-    #             },
-    #           },
-    #         ],
-    #         xray_enabled: false,
-    #         lambda_authorizer_config: {
-    #           authorizer_result_ttl_in_seconds: 1,
-    #           authorizer_uri: "String", # required
-    #           identity_validation_expression: "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] api_id
     #   The API ID.
     #   @return [String]
@@ -4297,39 +3435,6 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateResolverRequest
-    #   data as a hash:
-    #
-    #       {
-    #         api_id: "String", # required
-    #         type_name: "ResourceName", # required
-    #         field_name: "ResourceName", # required
-    #         data_source_name: "ResourceName",
-    #         request_mapping_template: "MappingTemplate",
-    #         response_mapping_template: "MappingTemplate",
-    #         kind: "UNIT", # accepts UNIT, PIPELINE
-    #         pipeline_config: {
-    #           functions: ["String"],
-    #         },
-    #         sync_config: {
-    #           conflict_handler: "OPTIMISTIC_CONCURRENCY", # accepts OPTIMISTIC_CONCURRENCY, LAMBDA, AUTOMERGE, NONE
-    #           conflict_detection: "VERSION", # accepts VERSION, NONE
-    #           lambda_conflict_handler_config: {
-    #             lambda_conflict_handler_arn: "String",
-    #           },
-    #         },
-    #         caching_config: {
-    #           ttl: 1, # required
-    #           caching_keys: ["String"],
-    #         },
-    #         max_batch_size: 1,
-    #         runtime: {
-    #           name: "APPSYNC_JS", # required, accepts APPSYNC_JS
-    #           runtime_version: "String", # required
-    #         },
-    #         code: "Code",
-    #       }
-    #
     # @!attribute [rw] api_id
     #   The API ID.
     #   @return [String]
@@ -4436,16 +3541,6 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateTypeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         api_id: "String", # required
-    #         type_name: "ResourceName", # required
-    #         definition: "String",
-    #         format: "SDL", # required, accepts SDL, JSON
-    #       }
-    #
     # @!attribute [rw] api_id
     #   The API ID.
     #   @return [String]
@@ -4486,16 +3581,6 @@ module Aws::AppSync
     end
 
     # Describes an Amazon Cognito user pool configuration.
-    #
-    # @note When making an API call, you may pass UserPoolConfig
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_id: "String", # required
-    #         aws_region: "String", # required
-    #         default_action: "ALLOW", # required, accepts ALLOW, DENY
-    #         app_id_client_regex: "String",
-    #       }
     #
     # @!attribute [rw] user_pool_id
     #   The user pool ID.

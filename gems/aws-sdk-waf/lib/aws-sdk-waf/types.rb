@@ -32,26 +32,6 @@ module Aws::WAF
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
     # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
-    # @note When making an API call, you may pass ActivatedRule
-    #   data as a hash:
-    #
-    #       {
-    #         priority: 1, # required
-    #         rule_id: "ResourceId", # required
-    #         action: {
-    #           type: "BLOCK", # required, accepts BLOCK, ALLOW, COUNT
-    #         },
-    #         override_action: {
-    #           type: "NONE", # required, accepts NONE, COUNT
-    #         },
-    #         type: "REGULAR", # accepts REGULAR, RATE_BASED, GROUP
-    #         excluded_rules: [
-    #           {
-    #             rule_id: "ResourceId", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] priority
     #   Specifies the order in which the `Rules` in a `WebACL` are
     #   evaluated. Rules with a lower value for `Priority` are evaluated
@@ -296,22 +276,6 @@ module Aws::WAF
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
     # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
-    # @note When making an API call, you may pass ByteMatchSetUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         action: "INSERT", # required, accepts INSERT, DELETE
-    #         byte_match_tuple: { # required
-    #           field_to_match: { # required
-    #             type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
-    #             data: "MatchFieldData",
-    #           },
-    #           target_string: "data", # required
-    #           text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
-    #           positional_constraint: "EXACTLY", # required, accepts EXACTLY, STARTS_WITH, ENDS_WITH, CONTAINS, CONTAINS_WORD
-    #         },
-    #       }
-    #
     # @!attribute [rw] action
     #   Specifies whether to insert or delete a ByteMatchTuple.
     #   @return [String]
@@ -350,19 +314,6 @@ module Aws::WAF
     #
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
     # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
-    #
-    # @note When making an API call, you may pass ByteMatchTuple
-    #   data as a hash:
-    #
-    #       {
-    #         field_to_match: { # required
-    #           type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
-    #           data: "MatchFieldData",
-    #         },
-    #         target_string: "data", # required
-    #         text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
-    #         positional_constraint: "EXACTLY", # required, accepts EXACTLY, STARTS_WITH, ENDS_WITH, CONTAINS, CONTAINS_WORD
-    #       }
     #
     # @!attribute [rw] field_to_match
     #   The part of a web request that you want AWS WAF to search, such as a
@@ -571,14 +522,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateByteMatchSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ResourceName", # required
-    #         change_token: "ChangeToken", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   A friendly name or description of the ByteMatchSet. You can't
     #   change `Name` after you create a `ByteMatchSet`.
@@ -616,14 +559,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateGeoMatchSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ResourceName", # required
-    #         change_token: "ChangeToken", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   A friendly name or description of the GeoMatchSet. You can't change
     #   `Name` after you create the `GeoMatchSet`.
@@ -662,14 +597,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateIPSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ResourceName", # required
-    #         change_token: "ChangeToken", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   A friendly name or description of the IPSet. You can't change
     #   `Name` after you create the `IPSet`.
@@ -707,23 +634,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateRateBasedRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ResourceName", # required
-    #         metric_name: "MetricName", # required
-    #         rate_key: "IP", # required, accepts IP
-    #         rate_limit: 1, # required
-    #         change_token: "ChangeToken", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   A friendly name or description of the RateBasedRule. You can't
     #   change the name of a `RateBasedRule` after you create it.
@@ -796,14 +706,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateRegexMatchSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ResourceName", # required
-    #         change_token: "ChangeToken", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   A friendly name or description of the RegexMatchSet. You can't
     #   change `Name` after you create a `RegexMatchSet`.
@@ -841,14 +743,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateRegexPatternSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ResourceName", # required
-    #         change_token: "ChangeToken", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   A friendly name or description of the RegexPatternSet. You can't
     #   change `Name` after you create a `RegexPatternSet`.
@@ -887,21 +781,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateRuleGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ResourceName", # required
-    #         metric_name: "MetricName", # required
-    #         change_token: "ChangeToken", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   A friendly name or description of the RuleGroup. You can't change
     #   `Name` after you create a `RuleGroup`.
@@ -953,21 +832,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ResourceName", # required
-    #         metric_name: "MetricName", # required
-    #         change_token: "ChangeToken", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   A friendly name or description of the Rule. You can't change the
     #   name of a `Rule` after you create it.
@@ -1019,14 +883,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateSizeConstraintSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ResourceName", # required
-    #         change_token: "ChangeToken", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   A friendly name or description of the SizeConstraintSet. You can't
     #   change `Name` after you create a `SizeConstraintSet`.
@@ -1066,14 +922,6 @@ module Aws::WAF
     end
 
     # A request to create a SqlInjectionMatchSet.
-    #
-    # @note When making an API call, you may pass CreateSqlInjectionMatchSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ResourceName", # required
-    #         change_token: "ChangeToken", # required
-    #       }
     #
     # @!attribute [rw] name
     #   A friendly name or description for the SqlInjectionMatchSet that
@@ -1116,15 +964,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateWebACLMigrationStackRequest
-    #   data as a hash:
-    #
-    #       {
-    #         web_acl_id: "ResourceId", # required
-    #         s3_bucket_name: "S3BucketName", # required
-    #         ignore_unsupported_type: false, # required
-    #       }
-    #
     # @!attribute [rw] web_acl_id
     #   The UUID of the WAF Classic web ACL that you want to migrate to WAF
     #   v2.
@@ -1178,24 +1017,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateWebACLRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ResourceName", # required
-    #         metric_name: "MetricName", # required
-    #         default_action: { # required
-    #           type: "BLOCK", # required, accepts BLOCK, ALLOW, COUNT
-    #         },
-    #         change_token: "ChangeToken", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   A friendly name or description of the WebACL. You can't change
     #   `Name` after you create the `WebACL`.
@@ -1256,14 +1077,6 @@ module Aws::WAF
 
     # A request to create an XssMatchSet.
     #
-    # @note When making an API call, you may pass CreateXssMatchSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ResourceName", # required
-    #         change_token: "ChangeToken", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   A friendly name or description for the XssMatchSet that you're
     #   creating. You can't change `Name` after you create the
@@ -1304,14 +1117,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteByteMatchSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         byte_match_set_id: "ResourceId", # required
-    #         change_token: "ChangeToken", # required
-    #       }
-    #
     # @!attribute [rw] byte_match_set_id
     #   The `ByteMatchSetId` of the ByteMatchSet that you want to delete.
     #   `ByteMatchSetId` is returned by CreateByteMatchSet and by
@@ -1345,14 +1150,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteGeoMatchSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         geo_match_set_id: "ResourceId", # required
-    #         change_token: "ChangeToken", # required
-    #       }
-    #
     # @!attribute [rw] geo_match_set_id
     #   The `GeoMatchSetID` of the GeoMatchSet that you want to delete.
     #   `GeoMatchSetId` is returned by CreateGeoMatchSet and by
@@ -1386,14 +1183,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteIPSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         ip_set_id: "ResourceId", # required
-    #         change_token: "ChangeToken", # required
-    #       }
-    #
     # @!attribute [rw] ip_set_id
     #   The `IPSetId` of the IPSet that you want to delete. `IPSetId` is
     #   returned by CreateIPSet and by ListIPSets.
@@ -1426,13 +1215,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteLoggingConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the web ACL from which you want to
     #   delete the LoggingConfiguration.
@@ -1450,13 +1232,6 @@ module Aws::WAF
     #
     class DeleteLoggingConfigurationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeletePermissionPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the RuleGroup from which you want
     #   to delete the policy.
@@ -1476,14 +1251,6 @@ module Aws::WAF
     #
     class DeletePermissionPolicyResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteRateBasedRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rule_id: "ResourceId", # required
-    #         change_token: "ChangeToken", # required
-    #       }
-    #
     # @!attribute [rw] rule_id
     #   The `RuleId` of the RateBasedRule that you want to delete. `RuleId`
     #   is returned by CreateRateBasedRule and by ListRateBasedRules.
@@ -1516,14 +1283,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteRegexMatchSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         regex_match_set_id: "ResourceId", # required
-    #         change_token: "ChangeToken", # required
-    #       }
-    #
     # @!attribute [rw] regex_match_set_id
     #   The `RegexMatchSetId` of the RegexMatchSet that you want to delete.
     #   `RegexMatchSetId` is returned by CreateRegexMatchSet and by
@@ -1557,14 +1316,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteRegexPatternSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         regex_pattern_set_id: "ResourceId", # required
-    #         change_token: "ChangeToken", # required
-    #       }
-    #
     # @!attribute [rw] regex_pattern_set_id
     #   The `RegexPatternSetId` of the RegexPatternSet that you want to
     #   delete. `RegexPatternSetId` is returned by CreateRegexPatternSet and
@@ -1599,14 +1350,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteRuleGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rule_group_id: "ResourceId", # required
-    #         change_token: "ChangeToken", # required
-    #       }
-    #
     # @!attribute [rw] rule_group_id
     #   The `RuleGroupId` of the RuleGroup that you want to delete.
     #   `RuleGroupId` is returned by CreateRuleGroup and by ListRuleGroups.
@@ -1639,14 +1382,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rule_id: "ResourceId", # required
-    #         change_token: "ChangeToken", # required
-    #       }
-    #
     # @!attribute [rw] rule_id
     #   The `RuleId` of the Rule that you want to delete. `RuleId` is
     #   returned by CreateRule and by ListRules.
@@ -1679,14 +1414,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteSizeConstraintSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         size_constraint_set_id: "ResourceId", # required
-    #         change_token: "ChangeToken", # required
-    #       }
-    #
     # @!attribute [rw] size_constraint_set_id
     #   The `SizeConstraintSetId` of the SizeConstraintSet that you want to
     #   delete. `SizeConstraintSetId` is returned by CreateSizeConstraintSet
@@ -1722,14 +1449,6 @@ module Aws::WAF
     end
 
     # A request to delete a SqlInjectionMatchSet from AWS WAF.
-    #
-    # @note When making an API call, you may pass DeleteSqlInjectionMatchSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         sql_injection_match_set_id: "ResourceId", # required
-    #         change_token: "ChangeToken", # required
-    #       }
     #
     # @!attribute [rw] sql_injection_match_set_id
     #   The `SqlInjectionMatchSetId` of the SqlInjectionMatchSet that you
@@ -1768,14 +1487,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteWebACLRequest
-    #   data as a hash:
-    #
-    #       {
-    #         web_acl_id: "ResourceId", # required
-    #         change_token: "ChangeToken", # required
-    #       }
-    #
     # @!attribute [rw] web_acl_id
     #   The `WebACLId` of the WebACL that you want to delete. `WebACLId` is
     #   returned by CreateWebACL and by ListWebACLs.
@@ -1809,14 +1520,6 @@ module Aws::WAF
     end
 
     # A request to delete an XssMatchSet from AWS WAF.
-    #
-    # @note When making an API call, you may pass DeleteXssMatchSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         xss_match_set_id: "ResourceId", # required
-    #         change_token: "ChangeToken", # required
-    #       }
     #
     # @!attribute [rw] xss_match_set_id
     #   The `XssMatchSetId` of the XssMatchSet that you want to delete.
@@ -1871,13 +1574,6 @@ module Aws::WAF
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
     # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
-    # @note When making an API call, you may pass ExcludedRule
-    #   data as a hash:
-    #
-    #       {
-    #         rule_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] rule_id
     #   The unique identifier for the rule to exclude from the rule group.
     #   @return [String]
@@ -1905,14 +1601,6 @@ module Aws::WAF
     #
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
     # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
-    #
-    # @note When making an API call, you may pass FieldToMatch
-    #   data as a hash:
-    #
-    #       {
-    #         type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
-    #         data: "MatchFieldData",
-    #       }
     #
     # @!attribute [rw] type
     #   The part of the web request that you want AWS WAF to search for a
@@ -1991,14 +1679,6 @@ module Aws::WAF
     #
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
     # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
-    #
-    # @note When making an API call, you may pass GeoMatchConstraint
-    #   data as a hash:
-    #
-    #       {
-    #         type: "Country", # required, accepts Country
-    #         value: "AF", # required, accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW
-    #       }
     #
     # @!attribute [rw] type
     #   The type of geographical area you want AWS WAF to search for.
@@ -2118,17 +1798,6 @@ module Aws::WAF
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
     # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
-    # @note When making an API call, you may pass GeoMatchSetUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         action: "INSERT", # required, accepts INSERT, DELETE
-    #         geo_match_constraint: { # required
-    #           type: "Country", # required, accepts Country
-    #           value: "AF", # required, accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW
-    #         },
-    #       }
-    #
     # @!attribute [rw] action
     #   Specifies whether to insert or delete a country with
     #   UpdateGeoMatchSet.
@@ -2148,13 +1817,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetByteMatchSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         byte_match_set_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] byte_match_set_id
     #   The `ByteMatchSetId` of the ByteMatchSet that you want to get.
     #   `ByteMatchSetId` is returned by CreateByteMatchSet and by
@@ -2192,8 +1854,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetChangeTokenRequest AWS API Documentation
     #
     class GetChangeTokenRequest < Aws::EmptyStructure; end
@@ -2212,13 +1872,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetChangeTokenStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         change_token: "ChangeToken", # required
-    #       }
-    #
     # @!attribute [rw] change_token
     #   The change token for which you want to get the status. This change
     #   token was previously returned in the `GetChangeToken` response.
@@ -2244,13 +1897,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetGeoMatchSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         geo_match_set_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] geo_match_set_id
     #   The `GeoMatchSetId` of the GeoMatchSet that you want to get.
     #   `GeoMatchSetId` is returned by CreateGeoMatchSet and by
@@ -2280,13 +1926,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetIPSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         ip_set_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] ip_set_id
     #   The `IPSetId` of the IPSet that you want to get. `IPSetId` is
     #   returned by CreateIPSet and by ListIPSets.
@@ -2318,13 +1957,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLoggingConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the web ACL for which you want to
     #   get the LoggingConfiguration.
@@ -2350,13 +1982,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetPermissionPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the RuleGroup for which you want
     #   to get the policy.
@@ -2382,14 +2007,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRateBasedRuleManagedKeysRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rule_id: "ResourceId", # required
-    #         next_marker: "NextMarker",
-    #       }
-    #
     # @!attribute [rw] rule_id
     #   The `RuleId` of the RateBasedRule for which you want to get a list
     #   of `ManagedKeys`. `RuleId` is returned by CreateRateBasedRule and by
@@ -2428,13 +2045,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRateBasedRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rule_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] rule_id
     #   The `RuleId` of the RateBasedRule that you want to get. `RuleId` is
     #   returned by CreateRateBasedRule and by ListRateBasedRules.
@@ -2461,13 +2071,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRegexMatchSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         regex_match_set_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] regex_match_set_id
     #   The `RegexMatchSetId` of the RegexMatchSet that you want to get.
     #   `RegexMatchSetId` is returned by CreateRegexMatchSet and by
@@ -2496,13 +2099,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRegexPatternSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         regex_pattern_set_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] regex_pattern_set_id
     #   The `RegexPatternSetId` of the RegexPatternSet that you want to get.
     #   `RegexPatternSetId` is returned by CreateRegexPatternSet and by
@@ -2532,13 +2128,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRuleGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rule_group_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] rule_group_id
     #   The `RuleGroupId` of the RuleGroup that you want to get.
     #   `RuleGroupId` is returned by CreateRuleGroup and by ListRuleGroups.
@@ -2565,13 +2154,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rule_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] rule_id
     #   The `RuleId` of the Rule that you want to get. `RuleId` is returned
     #   by CreateRule and by ListRules.
@@ -2604,19 +2186,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSampledRequestsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         web_acl_id: "ResourceId", # required
-    #         rule_id: "ResourceId", # required
-    #         time_window: { # required
-    #           start_time: Time.now, # required
-    #           end_time: Time.now, # required
-    #         },
-    #         max_items: 1, # required
-    #       }
-    #
     # @!attribute [rw] web_acl_id
     #   The `WebACLId` of the `WebACL` for which you want
     #   `GetSampledRequests` to return a sample of requests.
@@ -2693,13 +2262,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSizeConstraintSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         size_constraint_set_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] size_constraint_set_id
     #   The `SizeConstraintSetId` of the SizeConstraintSet that you want to
     #   get. `SizeConstraintSetId` is returned by CreateSizeConstraintSet
@@ -2739,13 +2301,6 @@ module Aws::WAF
 
     # A request to get a SqlInjectionMatchSet.
     #
-    # @note When making an API call, you may pass GetSqlInjectionMatchSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         sql_injection_match_set_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] sql_injection_match_set_id
     #   The `SqlInjectionMatchSetId` of the SqlInjectionMatchSet that you
     #   want to get. `SqlInjectionMatchSetId` is returned by
@@ -2784,13 +2339,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetWebACLRequest
-    #   data as a hash:
-    #
-    #       {
-    #         web_acl_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] web_acl_id
     #   The `WebACLId` of the WebACL that you want to get. `WebACLId` is
     #   returned by CreateWebACL and by ListWebACLs.
@@ -2828,13 +2376,6 @@ module Aws::WAF
     end
 
     # A request to get an XssMatchSet.
-    #
-    # @note When making an API call, you may pass GetXssMatchSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         xss_match_set_id: "ResourceId", # required
-    #       }
     #
     # @!attribute [rw] xss_match_set_id
     #   The `XssMatchSetId` of the XssMatchSet that you want to get.
@@ -3064,14 +2605,6 @@ module Aws::WAF
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
     # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
-    # @note When making an API call, you may pass IPSetDescriptor
-    #   data as a hash:
-    #
-    #       {
-    #         type: "IPV4", # required, accepts IPV4, IPV6
-    #         value: "IPSetDescriptorValue", # required
-    #       }
-    #
     # @!attribute [rw] type
     #   Specify `IPV4` or `IPV6`.
     #   @return [String]
@@ -3168,17 +2701,6 @@ module Aws::WAF
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
     # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
-    # @note When making an API call, you may pass IPSetUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         action: "INSERT", # required, accepts INSERT, DELETE
-    #         ip_set_descriptor: { # required
-    #           type: "IPV4", # required, accepts IPV4, IPV6
-    #           value: "IPSetDescriptorValue", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] action
     #   Specifies whether to insert or delete an IP address with
     #   UpdateIPSet.
@@ -3198,15 +2720,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListActivatedRulesInRuleGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rule_group_id: "ResourceId",
-    #         next_marker: "NextMarker",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] rule_group_id
     #   The `RuleGroupId` of the RuleGroup for which you want to get a list
     #   of ActivatedRule objects.
@@ -3262,14 +2775,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListByteMatchSetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_marker: "NextMarker",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] next_marker
     #   If you specify a value for `Limit` and you have more `ByteMatchSets`
     #   than the value of `Limit`, AWS WAF returns a `NextMarker` value in
@@ -3318,14 +2823,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListGeoMatchSetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_marker: "NextMarker",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] next_marker
     #   If you specify a value for `Limit` and you have more `GeoMatchSet`s
     #   than the value of `Limit`, AWS WAF returns a `NextMarker` value in
@@ -3374,14 +2871,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListIPSetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_marker: "NextMarker",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] next_marker
     #   AWS WAF returns a `NextMarker` value in the response that allows you
     #   to list another group of `IPSets`. For the second and subsequent
@@ -3425,14 +2914,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListLoggingConfigurationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_marker: "NextMarker",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] next_marker
     #   If you specify a value for `Limit` and you have more
     #   `LoggingConfigurations` than the value of `Limit`, AWS WAF returns a
@@ -3482,14 +2963,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRateBasedRulesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_marker: "NextMarker",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] next_marker
     #   If you specify a value for `Limit` and you have more `Rules` than
     #   the value of `Limit`, AWS WAF returns a `NextMarker` value in the
@@ -3536,14 +3009,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRegexMatchSetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_marker: "NextMarker",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] next_marker
     #   If you specify a value for `Limit` and you have more `RegexMatchSet`
     #   objects than the value of `Limit`, AWS WAF returns a `NextMarker`
@@ -3593,14 +3058,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRegexPatternSetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_marker: "NextMarker",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] next_marker
     #   If you specify a value for `Limit` and you have more
     #   `RegexPatternSet` objects than the value of `Limit`, AWS WAF returns
@@ -3650,14 +3107,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRuleGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_marker: "NextMarker",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] next_marker
     #   If you specify a value for `Limit` and you have more `RuleGroups`
     #   than the value of `Limit`, AWS WAF returns a `NextMarker` value in
@@ -3704,14 +3153,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRulesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_marker: "NextMarker",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] next_marker
     #   If you specify a value for `Limit` and you have more `Rules` than
     #   the value of `Limit`, AWS WAF returns a `NextMarker` value in the
@@ -3758,14 +3199,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSizeConstraintSetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_marker: "NextMarker",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] next_marker
     #   If you specify a value for `Limit` and you have more
     #   `SizeConstraintSets` than the value of `Limit`, AWS WAF returns a
@@ -3818,14 +3251,6 @@ module Aws::WAF
     # A request to list the SqlInjectionMatchSet objects created by the
     # current AWS account.
     #
-    # @note When making an API call, you may pass ListSqlInjectionMatchSetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_marker: "NextMarker",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] next_marker
     #   If you specify a value for `Limit` and you have more
     #   SqlInjectionMatchSet objects than the value of `Limit`, AWS WAF
@@ -3877,14 +3302,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSubscribedRuleGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_marker: "NextMarker",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] next_marker
     #   If you specify a value for `Limit` and you have more
     #   `ByteMatchSets`subscribed rule groups than the value of `Limit`, AWS
@@ -3932,15 +3349,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_marker: "NextMarker",
-    #         limit: 1,
-    #         resource_arn: "ResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] next_marker
     #   @return [String]
     #
@@ -3975,14 +3383,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListWebACLsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_marker: "NextMarker",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] next_marker
     #   If you specify a value for `Limit` and you have more `WebACL`
     #   objects than the number that you specify for `Limit`, AWS WAF
@@ -4033,14 +3433,6 @@ module Aws::WAF
 
     # A request to list the XssMatchSet objects created by the current AWS
     # account.
-    #
-    # @note When making an API call, you may pass ListXssMatchSetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_marker: "NextMarker",
-    #         limit: 1,
-    #       }
     #
     # @!attribute [rw] next_marker
     #   If you specify a value for `Limit` and you have more XssMatchSet
@@ -4108,20 +3500,6 @@ module Aws::WAF
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
     # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
-    # @note When making an API call, you may pass LoggingConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         log_destination_configs: ["ResourceArn"], # required
-    #         redacted_fields: [
-    #           {
-    #             type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
-    #             data: "MatchFieldData",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the web ACL that you want to
     #   associate with `LogDestinationConfigs`.
@@ -4167,15 +3545,6 @@ module Aws::WAF
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
     # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
-    # @note When making an API call, you may pass Predicate
-    #   data as a hash:
-    #
-    #       {
-    #         negated: false, # required
-    #         type: "IPMatch", # required, accepts IPMatch, ByteMatch, SqlInjectionMatch, GeoMatch, SizeConstraint, XssMatch, RegexMatch
-    #         data_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] negated
     #   Set `Negated` to `False` if you want AWS WAF to allow, block, or
     #   count requests based on the settings in the specified ByteMatchSet,
@@ -4212,22 +3581,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutLoggingConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         logging_configuration: { # required
-    #           resource_arn: "ResourceArn", # required
-    #           log_destination_configs: ["ResourceArn"], # required
-    #           redacted_fields: [
-    #             {
-    #               type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
-    #               data: "MatchFieldData",
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] logging_configuration
     #   The Amazon Kinesis Data Firehose that contains the inspected traffic
     #   information, the redacted fields details, and the Amazon Resource
@@ -4259,14 +3612,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutPermissionPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         policy: "PolicyString", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the RuleGroup to which you want to
     #   attach the policy.
@@ -4503,21 +3848,6 @@ module Aws::WAF
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
     # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
-    # @note When making an API call, you may pass RegexMatchSetUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         action: "INSERT", # required, accepts INSERT, DELETE
-    #         regex_match_tuple: { # required
-    #           field_to_match: { # required
-    #             type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
-    #             data: "MatchFieldData",
-    #           },
-    #           text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
-    #           regex_pattern_set_id: "ResourceId", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] action
     #   Specifies whether to insert or delete a RegexMatchTuple.
     #   @return [String]
@@ -4567,18 +3897,6 @@ module Aws::WAF
     #
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
     # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
-    #
-    # @note When making an API call, you may pass RegexMatchTuple
-    #   data as a hash:
-    #
-    #       {
-    #         field_to_match: { # required
-    #           type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
-    #           data: "MatchFieldData",
-    #         },
-    #         text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
-    #         regex_pattern_set_id: "ResourceId", # required
-    #       }
     #
     # @!attribute [rw] field_to_match
     #   Specifies where in a web request to look for the `RegexPatternSet`.
@@ -4792,14 +4110,6 @@ module Aws::WAF
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
     # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
-    # @note When making an API call, you may pass RegexPatternSetUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         action: "INSERT", # required, accepts INSERT, DELETE
-    #         regex_pattern_string: "RegexPatternString", # required
-    #       }
-    #
     # @!attribute [rw] action
     #   Specifies whether to insert or delete a `RegexPatternString`.
     #   @return [String]
@@ -5005,29 +4315,6 @@ module Aws::WAF
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
     # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
-    # @note When making an API call, you may pass RuleGroupUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         action: "INSERT", # required, accepts INSERT, DELETE
-    #         activated_rule: { # required
-    #           priority: 1, # required
-    #           rule_id: "ResourceId", # required
-    #           action: {
-    #             type: "BLOCK", # required, accepts BLOCK, ALLOW, COUNT
-    #           },
-    #           override_action: {
-    #             type: "NONE", # required, accepts NONE, COUNT
-    #           },
-    #           type: "REGULAR", # accepts REGULAR, RATE_BASED, GROUP
-    #           excluded_rules: [
-    #             {
-    #               rule_id: "ResourceId", # required
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] action
     #   Specify `INSERT` to add an `ActivatedRule` to a `RuleGroup`. Use
     #   `DELETE` to remove an `ActivatedRule` from a `RuleGroup`.
@@ -5106,18 +4393,6 @@ module Aws::WAF
     #
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
     # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
-    #
-    # @note When making an API call, you may pass RuleUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         action: "INSERT", # required, accepts INSERT, DELETE
-    #         predicate: { # required
-    #           negated: false, # required
-    #           type: "IPMatch", # required, accepts IPMatch, ByteMatch, SqlInjectionMatch, GeoMatch, SizeConstraint, XssMatch, RegexMatch
-    #           data_id: "ResourceId", # required
-    #         },
-    #       }
     #
     # @!attribute [rw] action
     #   Specify `INSERT` to add a `Predicate` to a `Rule`. Use `DELETE` to
@@ -5217,19 +4492,6 @@ module Aws::WAF
     #
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
     # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
-    #
-    # @note When making an API call, you may pass SizeConstraint
-    #   data as a hash:
-    #
-    #       {
-    #         field_to_match: { # required
-    #           type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
-    #           data: "MatchFieldData",
-    #         },
-    #         text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
-    #         comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
-    #         size: 1, # required
-    #       }
     #
     # @!attribute [rw] field_to_match
     #   Specifies where in a web request to look for the size constraint.
@@ -5479,22 +4741,6 @@ module Aws::WAF
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
     # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
-    # @note When making an API call, you may pass SizeConstraintSetUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         action: "INSERT", # required, accepts INSERT, DELETE
-    #         size_constraint: { # required
-    #           field_to_match: { # required
-    #             type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
-    #             data: "MatchFieldData",
-    #           },
-    #           text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
-    #           comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
-    #           size: 1, # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] action
     #   Specify `INSERT` to add a SizeConstraintSetUpdate to a
     #   SizeConstraintSet. Use `DELETE` to remove a
@@ -5633,20 +4879,6 @@ module Aws::WAF
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
     # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
-    # @note When making an API call, you may pass SqlInjectionMatchSetUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         action: "INSERT", # required, accepts INSERT, DELETE
-    #         sql_injection_match_tuple: { # required
-    #           field_to_match: { # required
-    #             type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
-    #             data: "MatchFieldData",
-    #           },
-    #           text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
-    #         },
-    #       }
-    #
     # @!attribute [rw] action
     #   Specify `INSERT` to add a SqlInjectionMatchSetUpdate to a
     #   SqlInjectionMatchSet. Use `DELETE` to remove a
@@ -5685,17 +4917,6 @@ module Aws::WAF
     #
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
     # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
-    #
-    # @note When making an API call, you may pass SqlInjectionMatchTuple
-    #   data as a hash:
-    #
-    #       {
-    #         field_to_match: { # required
-    #           type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
-    #           data: "MatchFieldData",
-    #         },
-    #         text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
-    #       }
     #
     # @!attribute [rw] field_to_match
     #   Specifies where in a web request to look for snippets of malicious
@@ -5858,14 +5079,6 @@ module Aws::WAF
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
     # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   @return [String]
     #
@@ -5922,19 +5135,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   @return [String]
     #
@@ -5985,14 +5185,6 @@ module Aws::WAF
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
     # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
-    # @note When making an API call, you may pass TimeWindow
-    #   data as a hash:
-    #
-    #       {
-    #         start_time: Time.now, # required
-    #         end_time: Time.now, # required
-    #       }
-    #
     # @!attribute [rw] start_time
     #   The beginning of the time range from which you want
     #   `GetSampledRequests` to return a sample of the requests that your
@@ -6020,14 +5212,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   @return [String]
     #
@@ -6047,28 +5231,6 @@ module Aws::WAF
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateByteMatchSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         byte_match_set_id: "ResourceId", # required
-    #         change_token: "ChangeToken", # required
-    #         updates: [ # required
-    #           {
-    #             action: "INSERT", # required, accepts INSERT, DELETE
-    #             byte_match_tuple: { # required
-    #               field_to_match: { # required
-    #                 type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
-    #                 data: "MatchFieldData",
-    #               },
-    #               target_string: "data", # required
-    #               text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
-    #               positional_constraint: "EXACTLY", # required, accepts EXACTLY, STARTS_WITH, ENDS_WITH, CONTAINS, CONTAINS_WORD
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] byte_match_set_id
     #   The `ByteMatchSetId` of the ByteMatchSet that you want to update.
     #   `ByteMatchSetId` is returned by CreateByteMatchSet and by
@@ -6116,23 +5278,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateGeoMatchSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         geo_match_set_id: "ResourceId", # required
-    #         change_token: "ChangeToken", # required
-    #         updates: [ # required
-    #           {
-    #             action: "INSERT", # required, accepts INSERT, DELETE
-    #             geo_match_constraint: { # required
-    #               type: "Country", # required, accepts Country
-    #               value: "AF", # required, accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] geo_match_set_id
     #   The `GeoMatchSetId` of the GeoMatchSet that you want to update.
     #   `GeoMatchSetId` is returned by CreateGeoMatchSet and by
@@ -6181,23 +5326,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateIPSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         ip_set_id: "ResourceId", # required
-    #         change_token: "ChangeToken", # required
-    #         updates: [ # required
-    #           {
-    #             action: "INSERT", # required, accepts INSERT, DELETE
-    #             ip_set_descriptor: { # required
-    #               type: "IPV4", # required, accepts IPV4, IPV6
-    #               value: "IPSetDescriptorValue", # required
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] ip_set_id
     #   The `IPSetId` of the IPSet that you want to update. `IPSetId` is
     #   returned by CreateIPSet and by ListIPSets.
@@ -6243,25 +5371,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateRateBasedRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rule_id: "ResourceId", # required
-    #         change_token: "ChangeToken", # required
-    #         updates: [ # required
-    #           {
-    #             action: "INSERT", # required, accepts INSERT, DELETE
-    #             predicate: { # required
-    #               negated: false, # required
-    #               type: "IPMatch", # required, accepts IPMatch, ByteMatch, SqlInjectionMatch, GeoMatch, SizeConstraint, XssMatch, RegexMatch
-    #               data_id: "ResourceId", # required
-    #             },
-    #           },
-    #         ],
-    #         rate_limit: 1, # required
-    #       }
-    #
     # @!attribute [rw] rule_id
     #   The `RuleId` of the `RateBasedRule` that you want to update.
     #   `RuleId` is returned by `CreateRateBasedRule` and by
@@ -6310,27 +5419,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateRegexMatchSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         regex_match_set_id: "ResourceId", # required
-    #         updates: [ # required
-    #           {
-    #             action: "INSERT", # required, accepts INSERT, DELETE
-    #             regex_match_tuple: { # required
-    #               field_to_match: { # required
-    #                 type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
-    #                 data: "MatchFieldData",
-    #               },
-    #               text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
-    #               regex_pattern_set_id: "ResourceId", # required
-    #             },
-    #           },
-    #         ],
-    #         change_token: "ChangeToken", # required
-    #       }
-    #
     # @!attribute [rw] regex_match_set_id
     #   The `RegexMatchSetId` of the RegexMatchSet that you want to update.
     #   `RegexMatchSetId` is returned by CreateRegexMatchSet and by
@@ -6371,20 +5459,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateRegexPatternSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         regex_pattern_set_id: "ResourceId", # required
-    #         updates: [ # required
-    #           {
-    #             action: "INSERT", # required, accepts INSERT, DELETE
-    #             regex_pattern_string: "RegexPatternString", # required
-    #           },
-    #         ],
-    #         change_token: "ChangeToken", # required
-    #       }
-    #
     # @!attribute [rw] regex_pattern_set_id
     #   The `RegexPatternSetId` of the RegexPatternSet that you want to
     #   update. `RegexPatternSetId` is returned by CreateRegexPatternSet and
@@ -6425,35 +5499,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateRuleGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rule_group_id: "ResourceId", # required
-    #         updates: [ # required
-    #           {
-    #             action: "INSERT", # required, accepts INSERT, DELETE
-    #             activated_rule: { # required
-    #               priority: 1, # required
-    #               rule_id: "ResourceId", # required
-    #               action: {
-    #                 type: "BLOCK", # required, accepts BLOCK, ALLOW, COUNT
-    #               },
-    #               override_action: {
-    #                 type: "NONE", # required, accepts NONE, COUNT
-    #               },
-    #               type: "REGULAR", # accepts REGULAR, RATE_BASED, GROUP
-    #               excluded_rules: [
-    #                 {
-    #                   rule_id: "ResourceId", # required
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #         ],
-    #         change_token: "ChangeToken", # required
-    #       }
-    #
     # @!attribute [rw] rule_group_id
     #   The `RuleGroupId` of the RuleGroup that you want to update.
     #   `RuleGroupId` is returned by CreateRuleGroup and by ListRuleGroups.
@@ -6500,24 +5545,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rule_id: "ResourceId", # required
-    #         change_token: "ChangeToken", # required
-    #         updates: [ # required
-    #           {
-    #             action: "INSERT", # required, accepts INSERT, DELETE
-    #             predicate: { # required
-    #               negated: false, # required
-    #               type: "IPMatch", # required, accepts IPMatch, ByteMatch, SqlInjectionMatch, GeoMatch, SizeConstraint, XssMatch, RegexMatch
-    #               data_id: "ResourceId", # required
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] rule_id
     #   The `RuleId` of the `Rule` that you want to update. `RuleId` is
     #   returned by `CreateRule` and by ListRules.
@@ -6563,28 +5590,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateSizeConstraintSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         size_constraint_set_id: "ResourceId", # required
-    #         change_token: "ChangeToken", # required
-    #         updates: [ # required
-    #           {
-    #             action: "INSERT", # required, accepts INSERT, DELETE
-    #             size_constraint: { # required
-    #               field_to_match: { # required
-    #                 type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
-    #                 data: "MatchFieldData",
-    #               },
-    #               text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
-    #               comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
-    #               size: 1, # required
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] size_constraint_set_id
     #   The `SizeConstraintSetId` of the SizeConstraintSet that you want to
     #   update. `SizeConstraintSetId` is returned by CreateSizeConstraintSet
@@ -6634,26 +5639,6 @@ module Aws::WAF
     end
 
     # A request to update a SqlInjectionMatchSet.
-    #
-    # @note When making an API call, you may pass UpdateSqlInjectionMatchSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         sql_injection_match_set_id: "ResourceId", # required
-    #         change_token: "ChangeToken", # required
-    #         updates: [ # required
-    #           {
-    #             action: "INSERT", # required, accepts INSERT, DELETE
-    #             sql_injection_match_tuple: { # required
-    #               field_to_match: { # required
-    #                 type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
-    #                 data: "MatchFieldData",
-    #               },
-    #               text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
-    #             },
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] sql_injection_match_set_id
     #   The `SqlInjectionMatchSetId` of the `SqlInjectionMatchSet` that you
@@ -6706,38 +5691,6 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateWebACLRequest
-    #   data as a hash:
-    #
-    #       {
-    #         web_acl_id: "ResourceId", # required
-    #         change_token: "ChangeToken", # required
-    #         updates: [
-    #           {
-    #             action: "INSERT", # required, accepts INSERT, DELETE
-    #             activated_rule: { # required
-    #               priority: 1, # required
-    #               rule_id: "ResourceId", # required
-    #               action: {
-    #                 type: "BLOCK", # required, accepts BLOCK, ALLOW, COUNT
-    #               },
-    #               override_action: {
-    #                 type: "NONE", # required, accepts NONE, COUNT
-    #               },
-    #               type: "REGULAR", # accepts REGULAR, RATE_BASED, GROUP
-    #               excluded_rules: [
-    #                 {
-    #                   rule_id: "ResourceId", # required
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #         ],
-    #         default_action: {
-    #           type: "BLOCK", # required, accepts BLOCK, ALLOW, COUNT
-    #         },
-    #       }
-    #
     # @!attribute [rw] web_acl_id
     #   The `WebACLId` of the WebACL that you want to update. `WebACLId` is
     #   returned by CreateWebACL and by ListWebACLs.
@@ -6798,26 +5751,6 @@ module Aws::WAF
     end
 
     # A request to update an XssMatchSet.
-    #
-    # @note When making an API call, you may pass UpdateXssMatchSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         xss_match_set_id: "ResourceId", # required
-    #         change_token: "ChangeToken", # required
-    #         updates: [ # required
-    #           {
-    #             action: "INSERT", # required, accepts INSERT, DELETE
-    #             xss_match_tuple: { # required
-    #               field_to_match: { # required
-    #                 type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
-    #                 data: "MatchFieldData",
-    #               },
-    #               text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
-    #             },
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] xss_match_set_id
     #   The `XssMatchSetId` of the `XssMatchSet` that you want to update.
@@ -7273,13 +6206,6 @@ module Aws::WAF
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
     # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
-    # @note When making an API call, you may pass WafAction
-    #   data as a hash:
-    #
-    #       {
-    #         type: "BLOCK", # required, accepts BLOCK, ALLOW, COUNT
-    #       }
-    #
     # @!attribute [rw] type
     #   Specifies how you want AWS WAF to respond to requests that match the
     #   settings in a `Rule`. Valid settings include the following:
@@ -7319,13 +6245,6 @@ module Aws::WAF
     #
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
     # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
-    #
-    # @note When making an API call, you may pass WafOverrideAction
-    #   data as a hash:
-    #
-    #       {
-    #         type: "NONE", # required, accepts NONE, COUNT
-    #       }
     #
     # @!attribute [rw] type
     #   `COUNT` overrides the action specified by the individual rule within
@@ -7472,29 +6391,6 @@ module Aws::WAF
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
     # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
-    # @note When making an API call, you may pass WebACLUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         action: "INSERT", # required, accepts INSERT, DELETE
-    #         activated_rule: { # required
-    #           priority: 1, # required
-    #           rule_id: "ResourceId", # required
-    #           action: {
-    #             type: "BLOCK", # required, accepts BLOCK, ALLOW, COUNT
-    #           },
-    #           override_action: {
-    #             type: "NONE", # required, accepts NONE, COUNT
-    #           },
-    #           type: "REGULAR", # accepts REGULAR, RATE_BASED, GROUP
-    #           excluded_rules: [
-    #             {
-    #               rule_id: "ResourceId", # required
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] action
     #   Specifies whether to insert a `Rule` into or delete a `Rule` from a
     #   `WebACL`.
@@ -7626,20 +6522,6 @@ module Aws::WAF
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
     # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
-    # @note When making an API call, you may pass XssMatchSetUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         action: "INSERT", # required, accepts INSERT, DELETE
-    #         xss_match_tuple: { # required
-    #           field_to_match: { # required
-    #             type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
-    #             data: "MatchFieldData",
-    #           },
-    #           text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
-    #         },
-    #       }
-    #
     # @!attribute [rw] action
     #   Specify `INSERT` to add an XssMatchSetUpdate to an XssMatchSet. Use
     #   `DELETE` to remove an `XssMatchSetUpdate` from an `XssMatchSet`.
@@ -7677,17 +6559,6 @@ module Aws::WAF
     #
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
     # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
-    #
-    # @note When making an API call, you may pass XssMatchTuple
-    #   data as a hash:
-    #
-    #       {
-    #         field_to_match: { # required
-    #           type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
-    #           data: "MatchFieldData",
-    #         },
-    #         text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
-    #       }
     #
     # @!attribute [rw] field_to_match
     #   Specifies where in a web request to look for cross-site scripting

@@ -23,15 +23,6 @@ module Aws::IoTRoboRunner
 
     # Cartesian coordinates in 3D space relative to the RoboRunner origin.
     #
-    # @note When making an API call, you may pass CartesianCoordinates
-    #   data as a hash:
-    #
-    #       {
-    #         x: 1.0, # required
-    #         y: 1.0, # required
-    #         z: 1.0,
-    #       }
-    #
     # @!attribute [rw] x
     #   X coordinate.
     #   @return [Float]
@@ -63,17 +54,6 @@ module Aws::IoTRoboRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDestinationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "IdempotencyToken",
-    #         name: "Name", # required
-    #         site: "SiteGenericIdentifier", # required
-    #         state: "ENABLED", # accepts ENABLED, DISABLED, DECOMMISSIONED
-    #         additional_fixed_properties: "DestinationAdditionalFixedProperties",
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Token used for detecting replayed requests. Replayed requests will
     #   not be performed multiple times.
@@ -139,16 +119,6 @@ module Aws::IoTRoboRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateSiteRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "IdempotencyToken",
-    #         name: "Name", # required
-    #         country_code: "SiteCountryCode", # required
-    #         description: "SiteDescription",
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Token used for detecting replayed requests. Replayed requests will
     #   not be performed multiple times.
@@ -204,16 +174,6 @@ module Aws::IoTRoboRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateWorkerFleetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "IdempotencyToken",
-    #         name: "Name", # required
-    #         site: "SiteGenericIdentifier", # required
-    #         additional_fixed_properties: "WorkerFleetAdditionalFixedProperties",
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Token used for detecting replayed requests. Replayed requests will
     #   not be performed multiple times.
@@ -269,33 +229,6 @@ module Aws::IoTRoboRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateWorkerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "IdempotencyToken",
-    #         name: "Name", # required
-    #         fleet: "WorkerFleetGenericIdentifier", # required
-    #         additional_transient_properties: "WorkerAdditionalTransientPropertiesJson",
-    #         additional_fixed_properties: "WorkerAdditionalFixedPropertiesJson",
-    #         vendor_properties: {
-    #           vendor_worker_id: "VendorWorkerId", # required
-    #           vendor_worker_ip_address: "VendorWorkerIpAddress",
-    #           vendor_additional_transient_properties: "VendorAdditionalTransientPropertiesJson",
-    #           vendor_additional_fixed_properties: "VendorAdditionalFixedPropertiesJson",
-    #         },
-    #         position: {
-    #           cartesian_coordinates: {
-    #             x: 1.0, # required
-    #             y: 1.0, # required
-    #             z: 1.0,
-    #           },
-    #         },
-    #         orientation: {
-    #           degrees: 1.0,
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Token used for detecting replayed requests. Replayed requests will
     #   not be performed multiple times.
@@ -377,13 +310,6 @@ module Aws::IoTRoboRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDestinationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "DestinationGenericIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   Destination ARN.
     #   @return [String]
@@ -396,13 +322,6 @@ module Aws::IoTRoboRunner
 
     class DeleteDestinationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteSiteRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "SiteGenericIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   Site ARN.
     #   @return [String]
@@ -415,13 +334,6 @@ module Aws::IoTRoboRunner
 
     class DeleteSiteResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteWorkerFleetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "WorkerFleetGenericIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   Full ARN of the worker fleet.
     #   @return [String]
@@ -434,13 +346,6 @@ module Aws::IoTRoboRunner
 
     class DeleteWorkerFleetResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteWorkerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "WorkerGenericIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   Full ARN of the worker.
     #   @return [String]
@@ -501,13 +406,6 @@ module Aws::IoTRoboRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDestinationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "DestinationGenericIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   Destination ARN.
     #   @return [String]
@@ -564,13 +462,6 @@ module Aws::IoTRoboRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSiteRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "SiteGenericIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   Site ARN.
     #   @return [String]
@@ -622,13 +513,6 @@ module Aws::IoTRoboRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetWorkerFleetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "WorkerFleetGenericIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   Full ARN of the worker fleet.
     #   @return [String]
@@ -680,13 +564,6 @@ module Aws::IoTRoboRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetWorkerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "WorkerGenericIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   Full ARN of the worker.
     #   @return [String]
@@ -775,16 +652,6 @@ module Aws::IoTRoboRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDestinationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         site: "SiteGenericIdentifier", # required
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #         state: "ENABLED", # accepts ENABLED, DISABLED, DECOMMISSIONED
-    #       }
-    #
     # @!attribute [rw] site
     #   Site ARN.
     #   @return [String]
@@ -827,14 +694,6 @@ module Aws::IoTRoboRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSitesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   Maximum number of results to retrieve in a single ListSites call.
     #   @return [Integer]
@@ -867,15 +726,6 @@ module Aws::IoTRoboRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListWorkerFleetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         site: "SiteGenericIdentifier", # required
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] site
     #   Site ARN.
     #   @return [String]
@@ -914,16 +764,6 @@ module Aws::IoTRoboRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListWorkersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         site: "SiteGenericIdentifier", # required
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #         fleet: "WorkerFleetGenericIdentifier",
-    #       }
-    #
     # @!attribute [rw] site
     #   Site ARN.
     #   @return [String]
@@ -968,10 +808,6 @@ module Aws::IoTRoboRunner
 
     # Worker orientation measured in units clockwise from north.
     #
-    # @note Orientation is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note Orientation is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Orientation corresponding to the set member.
-    #
     # @!attribute [rw] degrees
     #   Degrees, limited on \[0, 360)
     #   @return [Float]
@@ -988,10 +824,6 @@ module Aws::IoTRoboRunner
     end
 
     # Supported coordinates for worker position.
-    #
-    # @note PositionCoordinates is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note PositionCoordinates is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of PositionCoordinates corresponding to the set member.
     #
     # @!attribute [rw] cartesian_coordinates
     #   Cartesian coordinates.
@@ -1072,16 +904,6 @@ module Aws::IoTRoboRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateDestinationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "DestinationGenericIdentifier", # required
-    #         name: "Name",
-    #         state: "ENABLED", # accepts ENABLED, DISABLED, DECOMMISSIONED
-    #         additional_fixed_properties: "DestinationAdditionalFixedProperties",
-    #       }
-    #
     # @!attribute [rw] id
     #   Destination ARN.
     #   @return [String]
@@ -1144,16 +966,6 @@ module Aws::IoTRoboRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateSiteRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "SiteGenericIdentifier", # required
-    #         name: "Name",
-    #         country_code: "SiteCountryCode",
-    #         description: "SiteDescription",
-    #       }
-    #
     # @!attribute [rw] id
     #   Site ARN.
     #   @return [String]
@@ -1216,15 +1028,6 @@ module Aws::IoTRoboRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateWorkerFleetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "WorkerFleetGenericIdentifier", # required
-    #         name: "Name",
-    #         additional_fixed_properties: "WorkerFleetAdditionalFixedProperties",
-    #       }
-    #
     # @!attribute [rw] id
     #   Full ARN of the worker fleet.
     #   @return [String]
@@ -1277,32 +1080,6 @@ module Aws::IoTRoboRunner
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateWorkerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "WorkerGenericIdentifier", # required
-    #         name: "Name",
-    #         additional_transient_properties: "WorkerAdditionalTransientPropertiesJson",
-    #         additional_fixed_properties: "WorkerAdditionalFixedPropertiesJson",
-    #         vendor_properties: {
-    #           vendor_worker_id: "VendorWorkerId", # required
-    #           vendor_worker_ip_address: "VendorWorkerIpAddress",
-    #           vendor_additional_transient_properties: "VendorAdditionalTransientPropertiesJson",
-    #           vendor_additional_fixed_properties: "VendorAdditionalFixedPropertiesJson",
-    #         },
-    #         position: {
-    #           cartesian_coordinates: {
-    #             x: 1.0, # required
-    #             y: 1.0, # required
-    #             z: 1.0,
-    #           },
-    #         },
-    #         orientation: {
-    #           degrees: 1.0,
-    #         },
-    #       }
-    #
     # @!attribute [rw] id
     #   Full ARN of the worker.
     #   @return [String]
@@ -1414,16 +1191,6 @@ module Aws::IoTRoboRunner
     end
 
     # Properties of the worker that are provided by the vendor FMS.
-    #
-    # @note When making an API call, you may pass VendorProperties
-    #   data as a hash:
-    #
-    #       {
-    #         vendor_worker_id: "VendorWorkerId", # required
-    #         vendor_worker_ip_address: "VendorWorkerIpAddress",
-    #         vendor_additional_transient_properties: "VendorAdditionalTransientPropertiesJson",
-    #         vendor_additional_fixed_properties: "VendorAdditionalFixedPropertiesJson",
-    #       }
     #
     # @!attribute [rw] vendor_worker_id
     #   The worker ID defined by the vendor FMS.

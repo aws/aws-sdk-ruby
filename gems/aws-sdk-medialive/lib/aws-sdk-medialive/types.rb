@@ -12,21 +12,6 @@ module Aws::MediaLive
 
     # Aac Settings
     #
-    # @note When making an API call, you may pass AacSettings
-    #   data as a hash:
-    #
-    #       {
-    #         bitrate: 1.0,
-    #         coding_mode: "AD_RECEIVER_MIX", # accepts AD_RECEIVER_MIX, CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_5_1
-    #         input_type: "BROADCASTER_MIXED_AD", # accepts BROADCASTER_MIXED_AD, NORMAL
-    #         profile: "HEV1", # accepts HEV1, HEV2, LC
-    #         rate_control_mode: "CBR", # accepts CBR, VBR
-    #         raw_format: "LATM_LOAS", # accepts LATM_LOAS, NONE
-    #         sample_rate: 1.0,
-    #         spec: "MPEG2", # accepts MPEG2, MPEG4
-    #         vbr_quality: "HIGH", # accepts HIGH, LOW, MEDIUM_HIGH, MEDIUM_LOW
-    #       }
-    #
     # @!attribute [rw] bitrate
     #   Average bitrate in bits/second. Valid values depend on rate control
     #   mode and profile.
@@ -96,19 +81,6 @@ module Aws::MediaLive
 
     # Ac3 Settings
     #
-    # @note When making an API call, you may pass Ac3Settings
-    #   data as a hash:
-    #
-    #       {
-    #         bitrate: 1.0,
-    #         bitstream_mode: "COMMENTARY", # accepts COMMENTARY, COMPLETE_MAIN, DIALOGUE, EMERGENCY, HEARING_IMPAIRED, MUSIC_AND_EFFECTS, VISUALLY_IMPAIRED, VOICE_OVER
-    #         coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_3_2_LFE
-    #         dialnorm: 1,
-    #         drc_profile: "FILM_STANDARD", # accepts FILM_STANDARD, NONE
-    #         lfe_filter: "DISABLED", # accepts DISABLED, ENABLED
-    #         metadata_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
-    #       }
-    #
     # @!attribute [rw] bitrate
     #   Average bitrate in bits/second. Valid bitrates depend on the coding
     #   mode.
@@ -159,13 +131,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AcceptInputDeviceTransferRequest
-    #   data as a hash:
-    #
-    #       {
-    #         input_device_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] input_device_id
     #   @return [String]
     #
@@ -194,13 +159,6 @@ module Aws::MediaLive
 
     # Ancillary Source Settings
     #
-    # @note When making an API call, you may pass AncillarySourceSettings
-    #   data as a hash:
-    #
-    #       {
-    #         source_ancillary_channel_number: 1,
-    #       }
-    #
     # @!attribute [rw] source_ancillary_channel_number
     #   Specifies the number (1 to 4) of the captions channel you want to
     #   extract from the ancillary captions. If you plan to convert the
@@ -220,15 +178,6 @@ module Aws::MediaLive
 
     # Archive Cdn Settings
     #
-    # @note When making an API call, you may pass ArchiveCdnSettings
-    #   data as a hash:
-    #
-    #       {
-    #         archive_s3_settings: {
-    #           canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
-    #         },
-    #       }
-    #
     # @!attribute [rw] archive_s3_settings
     #   Archive S3 Settings
     #   @return [Types::ArchiveS3Settings]
@@ -242,74 +191,6 @@ module Aws::MediaLive
     end
 
     # Archive Container Settings
-    #
-    # @note When making an API call, you may pass ArchiveContainerSettings
-    #   data as a hash:
-    #
-    #       {
-    #         m2ts_settings: {
-    #           absent_input_audio_behavior: "DROP", # accepts DROP, ENCODE_SILENCE
-    #           arib: "DISABLED", # accepts DISABLED, ENABLED
-    #           arib_captions_pid: "__string",
-    #           arib_captions_pid_control: "AUTO", # accepts AUTO, USE_CONFIGURED
-    #           audio_buffer_model: "ATSC", # accepts ATSC, DVB
-    #           audio_frames_per_pes: 1,
-    #           audio_pids: "__string",
-    #           audio_stream_type: "ATSC", # accepts ATSC, DVB
-    #           bitrate: 1,
-    #           buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
-    #           cc_descriptor: "DISABLED", # accepts DISABLED, ENABLED
-    #           dvb_nit_settings: {
-    #             network_id: 1, # required
-    #             network_name: "__stringMin1Max256", # required
-    #             rep_interval: 1,
-    #           },
-    #           dvb_sdt_settings: {
-    #             output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
-    #             rep_interval: 1,
-    #             service_name: "__stringMin1Max256",
-    #             service_provider_name: "__stringMin1Max256",
-    #           },
-    #           dvb_sub_pids: "__string",
-    #           dvb_tdt_settings: {
-    #             rep_interval: 1,
-    #           },
-    #           dvb_teletext_pid: "__string",
-    #           ebif: "NONE", # accepts NONE, PASSTHROUGH
-    #           ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS", # accepts VIDEO_AND_FIXED_INTERVALS, VIDEO_INTERVAL
-    #           ebp_lookahead_ms: 1,
-    #           ebp_placement: "VIDEO_AND_AUDIO_PIDS", # accepts VIDEO_AND_AUDIO_PIDS, VIDEO_PID
-    #           ecm_pid: "__string",
-    #           es_rate_in_pes: "EXCLUDE", # accepts EXCLUDE, INCLUDE
-    #           etv_platform_pid: "__string",
-    #           etv_signal_pid: "__string",
-    #           fragment_time: 1.0,
-    #           klv: "NONE", # accepts NONE, PASSTHROUGH
-    #           klv_data_pids: "__string",
-    #           nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #           null_packet_bitrate: 1.0,
-    #           pat_interval: 1,
-    #           pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
-    #           pcr_period: 1,
-    #           pcr_pid: "__string",
-    #           pmt_interval: 1,
-    #           pmt_pid: "__string",
-    #           program_num: 1,
-    #           rate_mode: "CBR", # accepts CBR, VBR
-    #           scte_27_pids: "__string",
-    #           scte_35_control: "NONE", # accepts NONE, PASSTHROUGH
-    #           scte_35_pid: "__string",
-    #           segmentation_markers: "EBP", # accepts EBP, EBP_LEGACY, NONE, PSI_SEGSTART, RAI_ADAPT, RAI_SEGSTART
-    #           segmentation_style: "MAINTAIN_CADENCE", # accepts MAINTAIN_CADENCE, RESET_CADENCE
-    #           segmentation_time: 1.0,
-    #           timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #           timed_metadata_pid: "__string",
-    #           transport_stream_id: 1,
-    #           video_pid: "__string",
-    #         },
-    #         raw_settings: {
-    #         },
-    #       }
     #
     # @!attribute [rw] m2ts_settings
     #   M2ts Settings
@@ -329,21 +210,6 @@ module Aws::MediaLive
     end
 
     # Archive Group Settings
-    #
-    # @note When making an API call, you may pass ArchiveGroupSettings
-    #   data as a hash:
-    #
-    #       {
-    #         archive_cdn_settings: {
-    #           archive_s3_settings: {
-    #             canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
-    #           },
-    #         },
-    #         destination: { # required
-    #           destination_ref_id: "__string",
-    #         },
-    #         rollover_interval: 1,
-    #       }
     #
     # @!attribute [rw] archive_cdn_settings
     #   Parameters that control interactions with the CDN.
@@ -369,78 +235,6 @@ module Aws::MediaLive
     end
 
     # Archive Output Settings
-    #
-    # @note When making an API call, you may pass ArchiveOutputSettings
-    #   data as a hash:
-    #
-    #       {
-    #         container_settings: { # required
-    #           m2ts_settings: {
-    #             absent_input_audio_behavior: "DROP", # accepts DROP, ENCODE_SILENCE
-    #             arib: "DISABLED", # accepts DISABLED, ENABLED
-    #             arib_captions_pid: "__string",
-    #             arib_captions_pid_control: "AUTO", # accepts AUTO, USE_CONFIGURED
-    #             audio_buffer_model: "ATSC", # accepts ATSC, DVB
-    #             audio_frames_per_pes: 1,
-    #             audio_pids: "__string",
-    #             audio_stream_type: "ATSC", # accepts ATSC, DVB
-    #             bitrate: 1,
-    #             buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
-    #             cc_descriptor: "DISABLED", # accepts DISABLED, ENABLED
-    #             dvb_nit_settings: {
-    #               network_id: 1, # required
-    #               network_name: "__stringMin1Max256", # required
-    #               rep_interval: 1,
-    #             },
-    #             dvb_sdt_settings: {
-    #               output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
-    #               rep_interval: 1,
-    #               service_name: "__stringMin1Max256",
-    #               service_provider_name: "__stringMin1Max256",
-    #             },
-    #             dvb_sub_pids: "__string",
-    #             dvb_tdt_settings: {
-    #               rep_interval: 1,
-    #             },
-    #             dvb_teletext_pid: "__string",
-    #             ebif: "NONE", # accepts NONE, PASSTHROUGH
-    #             ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS", # accepts VIDEO_AND_FIXED_INTERVALS, VIDEO_INTERVAL
-    #             ebp_lookahead_ms: 1,
-    #             ebp_placement: "VIDEO_AND_AUDIO_PIDS", # accepts VIDEO_AND_AUDIO_PIDS, VIDEO_PID
-    #             ecm_pid: "__string",
-    #             es_rate_in_pes: "EXCLUDE", # accepts EXCLUDE, INCLUDE
-    #             etv_platform_pid: "__string",
-    #             etv_signal_pid: "__string",
-    #             fragment_time: 1.0,
-    #             klv: "NONE", # accepts NONE, PASSTHROUGH
-    #             klv_data_pids: "__string",
-    #             nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #             null_packet_bitrate: 1.0,
-    #             pat_interval: 1,
-    #             pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
-    #             pcr_period: 1,
-    #             pcr_pid: "__string",
-    #             pmt_interval: 1,
-    #             pmt_pid: "__string",
-    #             program_num: 1,
-    #             rate_mode: "CBR", # accepts CBR, VBR
-    #             scte_27_pids: "__string",
-    #             scte_35_control: "NONE", # accepts NONE, PASSTHROUGH
-    #             scte_35_pid: "__string",
-    #             segmentation_markers: "EBP", # accepts EBP, EBP_LEGACY, NONE, PSI_SEGSTART, RAI_ADAPT, RAI_SEGSTART
-    #             segmentation_style: "MAINTAIN_CADENCE", # accepts MAINTAIN_CADENCE, RESET_CADENCE
-    #             segmentation_time: 1.0,
-    #             timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #             timed_metadata_pid: "__string",
-    #             transport_stream_id: 1,
-    #             video_pid: "__string",
-    #           },
-    #           raw_settings: {
-    #           },
-    #         },
-    #         extension: "__string",
-    #         name_modifier: "__string",
-    #       }
     #
     # @!attribute [rw] container_settings
     #   Settings specific to the container type of the file.
@@ -468,13 +262,6 @@ module Aws::MediaLive
 
     # Archive S3 Settings
     #
-    # @note When making an API call, you may pass ArchiveS3Settings
-    #   data as a hash:
-    #
-    #       {
-    #         canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
-    #       }
-    #
     # @!attribute [rw] canned_acl
     #   Specify the canned ACL to apply to each S3 request. Defaults to
     #   none.
@@ -490,34 +277,17 @@ module Aws::MediaLive
 
     # Arib Destination Settings
     #
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AribDestinationSettings AWS API Documentation
     #
     class AribDestinationSettings < Aws::EmptyStructure; end
 
     # Arib Source Settings
     #
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AribSourceSettings AWS API Documentation
     #
     class AribSourceSettings < Aws::EmptyStructure; end
 
     # Audio Channel Mapping
-    #
-    # @note When making an API call, you may pass AudioChannelMapping
-    #   data as a hash:
-    #
-    #       {
-    #         input_channel_levels: [ # required
-    #           {
-    #             gain: 1, # required
-    #             input_channel: 1, # required
-    #           },
-    #         ],
-    #         output_channel: 1, # required
-    #       }
     #
     # @!attribute [rw] input_channel_levels
     #   Indices and gain values for each input channel that should be
@@ -538,75 +308,6 @@ module Aws::MediaLive
     end
 
     # Audio Codec Settings
-    #
-    # @note When making an API call, you may pass AudioCodecSettings
-    #   data as a hash:
-    #
-    #       {
-    #         aac_settings: {
-    #           bitrate: 1.0,
-    #           coding_mode: "AD_RECEIVER_MIX", # accepts AD_RECEIVER_MIX, CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_5_1
-    #           input_type: "BROADCASTER_MIXED_AD", # accepts BROADCASTER_MIXED_AD, NORMAL
-    #           profile: "HEV1", # accepts HEV1, HEV2, LC
-    #           rate_control_mode: "CBR", # accepts CBR, VBR
-    #           raw_format: "LATM_LOAS", # accepts LATM_LOAS, NONE
-    #           sample_rate: 1.0,
-    #           spec: "MPEG2", # accepts MPEG2, MPEG4
-    #           vbr_quality: "HIGH", # accepts HIGH, LOW, MEDIUM_HIGH, MEDIUM_LOW
-    #         },
-    #         ac_3_settings: {
-    #           bitrate: 1.0,
-    #           bitstream_mode: "COMMENTARY", # accepts COMMENTARY, COMPLETE_MAIN, DIALOGUE, EMERGENCY, HEARING_IMPAIRED, MUSIC_AND_EFFECTS, VISUALLY_IMPAIRED, VOICE_OVER
-    #           coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_3_2_LFE
-    #           dialnorm: 1,
-    #           drc_profile: "FILM_STANDARD", # accepts FILM_STANDARD, NONE
-    #           lfe_filter: "DISABLED", # accepts DISABLED, ENABLED
-    #           metadata_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
-    #         },
-    #         eac_3_atmos_settings: {
-    #           bitrate: 1.0,
-    #           coding_mode: "CODING_MODE_5_1_4", # accepts CODING_MODE_5_1_4, CODING_MODE_7_1_4, CODING_MODE_9_1_6
-    #           dialnorm: 1,
-    #           drc_line: "FILM_LIGHT", # accepts FILM_LIGHT, FILM_STANDARD, MUSIC_LIGHT, MUSIC_STANDARD, NONE, SPEECH
-    #           drc_rf: "FILM_LIGHT", # accepts FILM_LIGHT, FILM_STANDARD, MUSIC_LIGHT, MUSIC_STANDARD, NONE, SPEECH
-    #           height_trim: 1.0,
-    #           surround_trim: 1.0,
-    #         },
-    #         eac_3_settings: {
-    #           attenuation_control: "ATTENUATE_3_DB", # accepts ATTENUATE_3_DB, NONE
-    #           bitrate: 1.0,
-    #           bitstream_mode: "COMMENTARY", # accepts COMMENTARY, COMPLETE_MAIN, EMERGENCY, HEARING_IMPAIRED, VISUALLY_IMPAIRED
-    #           coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_2_0, CODING_MODE_3_2
-    #           dc_filter: "DISABLED", # accepts DISABLED, ENABLED
-    #           dialnorm: 1,
-    #           drc_line: "FILM_LIGHT", # accepts FILM_LIGHT, FILM_STANDARD, MUSIC_LIGHT, MUSIC_STANDARD, NONE, SPEECH
-    #           drc_rf: "FILM_LIGHT", # accepts FILM_LIGHT, FILM_STANDARD, MUSIC_LIGHT, MUSIC_STANDARD, NONE, SPEECH
-    #           lfe_control: "LFE", # accepts LFE, NO_LFE
-    #           lfe_filter: "DISABLED", # accepts DISABLED, ENABLED
-    #           lo_ro_center_mix_level: 1.0,
-    #           lo_ro_surround_mix_level: 1.0,
-    #           lt_rt_center_mix_level: 1.0,
-    #           lt_rt_surround_mix_level: 1.0,
-    #           metadata_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
-    #           passthrough_control: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, WHEN_POSSIBLE
-    #           phase_control: "NO_SHIFT", # accepts NO_SHIFT, SHIFT_90_DEGREES
-    #           stereo_downmix: "DPL2", # accepts DPL2, LO_RO, LT_RT, NOT_INDICATED
-    #           surround_ex_mode: "DISABLED", # accepts DISABLED, ENABLED, NOT_INDICATED
-    #           surround_mode: "DISABLED", # accepts DISABLED, ENABLED, NOT_INDICATED
-    #         },
-    #         mp_2_settings: {
-    #           bitrate: 1.0,
-    #           coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_2_0
-    #           sample_rate: 1.0,
-    #         },
-    #         pass_through_settings: {
-    #         },
-    #         wav_settings: {
-    #           bit_depth: 1.0,
-    #           coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_2_0, CODING_MODE_4_0, CODING_MODE_8_0
-    #           sample_rate: 1.0,
-    #         },
-    #       }
     #
     # @!attribute [rw] aac_settings
     #   Aac Settings
@@ -651,118 +352,6 @@ module Aws::MediaLive
     end
 
     # Audio Description
-    #
-    # @note When making an API call, you may pass AudioDescription
-    #   data as a hash:
-    #
-    #       {
-    #         audio_normalization_settings: {
-    #           algorithm: "ITU_1770_1", # accepts ITU_1770_1, ITU_1770_2
-    #           algorithm_control: "CORRECT_AUDIO", # accepts CORRECT_AUDIO
-    #           target_lkfs: 1.0,
-    #         },
-    #         audio_selector_name: "__string", # required
-    #         audio_type: "CLEAN_EFFECTS", # accepts CLEAN_EFFECTS, HEARING_IMPAIRED, UNDEFINED, VISUAL_IMPAIRED_COMMENTARY
-    #         audio_type_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
-    #         audio_watermarking_settings: {
-    #           nielsen_watermarks_settings: {
-    #             nielsen_cbet_settings: {
-    #               cbet_check_digit_string: "__stringMin2Max2", # required
-    #               cbet_stepaside: "DISABLED", # required, accepts DISABLED, ENABLED
-    #               csid: "__stringMin1Max7", # required
-    #             },
-    #             nielsen_distribution_type: "FINAL_DISTRIBUTOR", # accepts FINAL_DISTRIBUTOR, PROGRAM_CONTENT
-    #             nielsen_naes_ii_nw_settings: {
-    #               check_digit_string: "__stringMin2Max2", # required
-    #               sid: 1.0, # required
-    #             },
-    #           },
-    #         },
-    #         codec_settings: {
-    #           aac_settings: {
-    #             bitrate: 1.0,
-    #             coding_mode: "AD_RECEIVER_MIX", # accepts AD_RECEIVER_MIX, CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_5_1
-    #             input_type: "BROADCASTER_MIXED_AD", # accepts BROADCASTER_MIXED_AD, NORMAL
-    #             profile: "HEV1", # accepts HEV1, HEV2, LC
-    #             rate_control_mode: "CBR", # accepts CBR, VBR
-    #             raw_format: "LATM_LOAS", # accepts LATM_LOAS, NONE
-    #             sample_rate: 1.0,
-    #             spec: "MPEG2", # accepts MPEG2, MPEG4
-    #             vbr_quality: "HIGH", # accepts HIGH, LOW, MEDIUM_HIGH, MEDIUM_LOW
-    #           },
-    #           ac_3_settings: {
-    #             bitrate: 1.0,
-    #             bitstream_mode: "COMMENTARY", # accepts COMMENTARY, COMPLETE_MAIN, DIALOGUE, EMERGENCY, HEARING_IMPAIRED, MUSIC_AND_EFFECTS, VISUALLY_IMPAIRED, VOICE_OVER
-    #             coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_3_2_LFE
-    #             dialnorm: 1,
-    #             drc_profile: "FILM_STANDARD", # accepts FILM_STANDARD, NONE
-    #             lfe_filter: "DISABLED", # accepts DISABLED, ENABLED
-    #             metadata_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
-    #           },
-    #           eac_3_atmos_settings: {
-    #             bitrate: 1.0,
-    #             coding_mode: "CODING_MODE_5_1_4", # accepts CODING_MODE_5_1_4, CODING_MODE_7_1_4, CODING_MODE_9_1_6
-    #             dialnorm: 1,
-    #             drc_line: "FILM_LIGHT", # accepts FILM_LIGHT, FILM_STANDARD, MUSIC_LIGHT, MUSIC_STANDARD, NONE, SPEECH
-    #             drc_rf: "FILM_LIGHT", # accepts FILM_LIGHT, FILM_STANDARD, MUSIC_LIGHT, MUSIC_STANDARD, NONE, SPEECH
-    #             height_trim: 1.0,
-    #             surround_trim: 1.0,
-    #           },
-    #           eac_3_settings: {
-    #             attenuation_control: "ATTENUATE_3_DB", # accepts ATTENUATE_3_DB, NONE
-    #             bitrate: 1.0,
-    #             bitstream_mode: "COMMENTARY", # accepts COMMENTARY, COMPLETE_MAIN, EMERGENCY, HEARING_IMPAIRED, VISUALLY_IMPAIRED
-    #             coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_2_0, CODING_MODE_3_2
-    #             dc_filter: "DISABLED", # accepts DISABLED, ENABLED
-    #             dialnorm: 1,
-    #             drc_line: "FILM_LIGHT", # accepts FILM_LIGHT, FILM_STANDARD, MUSIC_LIGHT, MUSIC_STANDARD, NONE, SPEECH
-    #             drc_rf: "FILM_LIGHT", # accepts FILM_LIGHT, FILM_STANDARD, MUSIC_LIGHT, MUSIC_STANDARD, NONE, SPEECH
-    #             lfe_control: "LFE", # accepts LFE, NO_LFE
-    #             lfe_filter: "DISABLED", # accepts DISABLED, ENABLED
-    #             lo_ro_center_mix_level: 1.0,
-    #             lo_ro_surround_mix_level: 1.0,
-    #             lt_rt_center_mix_level: 1.0,
-    #             lt_rt_surround_mix_level: 1.0,
-    #             metadata_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
-    #             passthrough_control: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, WHEN_POSSIBLE
-    #             phase_control: "NO_SHIFT", # accepts NO_SHIFT, SHIFT_90_DEGREES
-    #             stereo_downmix: "DPL2", # accepts DPL2, LO_RO, LT_RT, NOT_INDICATED
-    #             surround_ex_mode: "DISABLED", # accepts DISABLED, ENABLED, NOT_INDICATED
-    #             surround_mode: "DISABLED", # accepts DISABLED, ENABLED, NOT_INDICATED
-    #           },
-    #           mp_2_settings: {
-    #             bitrate: 1.0,
-    #             coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_2_0
-    #             sample_rate: 1.0,
-    #           },
-    #           pass_through_settings: {
-    #           },
-    #           wav_settings: {
-    #             bit_depth: 1.0,
-    #             coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_2_0, CODING_MODE_4_0, CODING_MODE_8_0
-    #             sample_rate: 1.0,
-    #           },
-    #         },
-    #         language_code: "__stringMin1Max35",
-    #         language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
-    #         name: "__stringMax255", # required
-    #         remix_settings: {
-    #           channel_mappings: [ # required
-    #             {
-    #               input_channel_levels: [ # required
-    #                 {
-    #                   gain: 1, # required
-    #                   input_channel: 1, # required
-    #                 },
-    #               ],
-    #               output_channel: 1, # required
-    #             },
-    #           ],
-    #           channels_in: 1,
-    #           channels_out: 1,
-    #         },
-    #         stream_name: "__string",
-    #       }
     #
     # @!attribute [rw] audio_normalization_settings
     #   Advanced audio normalization settings.
@@ -846,14 +435,6 @@ module Aws::MediaLive
 
     # Audio Hls Rendition Selection
     #
-    # @note When making an API call, you may pass AudioHlsRenditionSelection
-    #   data as a hash:
-    #
-    #       {
-    #         group_id: "__stringMin1", # required
-    #         name: "__stringMin1", # required
-    #       }
-    #
     # @!attribute [rw] group_id
     #   Specifies the GROUP-ID in the #EXT-X-MEDIA tag of the target HLS
     #   audio rendition.
@@ -874,14 +455,6 @@ module Aws::MediaLive
     end
 
     # Audio Language Selection
-    #
-    # @note When making an API call, you may pass AudioLanguageSelection
-    #   data as a hash:
-    #
-    #       {
-    #         language_code: "__string", # required
-    #         language_selection_policy: "LOOSE", # accepts LOOSE, STRICT
-    #       }
     #
     # @!attribute [rw] language_code
     #   Selects a specific three-letter language code from within an audio
@@ -908,15 +481,6 @@ module Aws::MediaLive
     end
 
     # Audio Normalization Settings
-    #
-    # @note When making an API call, you may pass AudioNormalizationSettings
-    #   data as a hash:
-    #
-    #       {
-    #         algorithm: "ITU_1770_1", # accepts ITU_1770_1, ITU_1770_2
-    #         algorithm_control: "CORRECT_AUDIO", # accepts CORRECT_AUDIO
-    #         target_lkfs: 1.0,
-    #       }
     #
     # @!attribute [rw] algorithm
     #   Audio normalization algorithm to use. itu17701 conforms to the CALM
@@ -947,20 +511,6 @@ module Aws::MediaLive
     end
 
     # Audio Only Hls Settings
-    #
-    # @note When making an API call, you may pass AudioOnlyHlsSettings
-    #   data as a hash:
-    #
-    #       {
-    #         audio_group_id: "__string",
-    #         audio_only_image: {
-    #           password_param: "__string",
-    #           uri: "__stringMax2048", # required
-    #           username: "__string",
-    #         },
-    #         audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT", # accepts ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
-    #         segment_type: "AAC", # accepts AAC, FMP4
-    #       }
     #
     # @!attribute [rw] audio_group_id
     #   Specifies the group to which the audio Rendition belongs.
@@ -1006,13 +556,6 @@ module Aws::MediaLive
 
     # Audio Pid Selection
     #
-    # @note When making an API call, you may pass AudioPidSelection
-    #   data as a hash:
-    #
-    #       {
-    #         pid: 1, # required
-    #       }
-    #
     # @!attribute [rw] pid
     #   Selects a specific PID from within a source.
     #   @return [Integer]
@@ -1026,33 +569,6 @@ module Aws::MediaLive
     end
 
     # Audio Selector
-    #
-    # @note When making an API call, you may pass AudioSelector
-    #   data as a hash:
-    #
-    #       {
-    #         name: "__stringMin1", # required
-    #         selector_settings: {
-    #           audio_hls_rendition_selection: {
-    #             group_id: "__stringMin1", # required
-    #             name: "__stringMin1", # required
-    #           },
-    #           audio_language_selection: {
-    #             language_code: "__string", # required
-    #             language_selection_policy: "LOOSE", # accepts LOOSE, STRICT
-    #           },
-    #           audio_pid_selection: {
-    #             pid: 1, # required
-    #           },
-    #           audio_track_selection: {
-    #             tracks: [ # required
-    #               {
-    #                 track: 1, # required
-    #               },
-    #             ],
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] name
     #   The name of this AudioSelector. AudioDescriptions will use this name
@@ -1074,30 +590,6 @@ module Aws::MediaLive
     end
 
     # Audio Selector Settings
-    #
-    # @note When making an API call, you may pass AudioSelectorSettings
-    #   data as a hash:
-    #
-    #       {
-    #         audio_hls_rendition_selection: {
-    #           group_id: "__stringMin1", # required
-    #           name: "__stringMin1", # required
-    #         },
-    #         audio_language_selection: {
-    #           language_code: "__string", # required
-    #           language_selection_policy: "LOOSE", # accepts LOOSE, STRICT
-    #         },
-    #         audio_pid_selection: {
-    #           pid: 1, # required
-    #         },
-    #         audio_track_selection: {
-    #           tracks: [ # required
-    #             {
-    #               track: 1, # required
-    #             },
-    #           ],
-    #         },
-    #       }
     #
     # @!attribute [rw] audio_hls_rendition_selection
     #   Audio Hls Rendition Selection
@@ -1126,14 +618,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AudioSilenceFailoverSettings
-    #   data as a hash:
-    #
-    #       {
-    #         audio_selector_name: "__string", # required
-    #         audio_silence_threshold_msec: 1,
-    #       }
-    #
     # @!attribute [rw] audio_selector_name
     #   The name of the audio selector in the input that MediaLive should
     #   monitor to detect silence. Select your most important rendition. If
@@ -1157,13 +641,6 @@ module Aws::MediaLive
 
     # Audio Track
     #
-    # @note When making an API call, you may pass AudioTrack
-    #   data as a hash:
-    #
-    #       {
-    #         track: 1, # required
-    #       }
-    #
     # @!attribute [rw] track
     #   1-based integer value that maps to a specific audio track
     #   @return [Integer]
@@ -1177,17 +654,6 @@ module Aws::MediaLive
     end
 
     # Audio Track Selection
-    #
-    # @note When making an API call, you may pass AudioTrackSelection
-    #   data as a hash:
-    #
-    #       {
-    #         tracks: [ # required
-    #           {
-    #             track: 1, # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] tracks
     #   Selects one or more unique audio tracks from within a source.
@@ -1203,24 +669,6 @@ module Aws::MediaLive
 
     # Audio Watermark Settings
     #
-    # @note When making an API call, you may pass AudioWatermarkSettings
-    #   data as a hash:
-    #
-    #       {
-    #         nielsen_watermarks_settings: {
-    #           nielsen_cbet_settings: {
-    #             cbet_check_digit_string: "__stringMin2Max2", # required
-    #             cbet_stepaside: "DISABLED", # required, accepts DISABLED, ENABLED
-    #             csid: "__stringMin1Max7", # required
-    #           },
-    #           nielsen_distribution_type: "FINAL_DISTRIBUTOR", # accepts FINAL_DISTRIBUTOR, PROGRAM_CONTENT
-    #           nielsen_naes_ii_nw_settings: {
-    #             check_digit_string: "__stringMin2Max2", # required
-    #             sid: 1.0, # required
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] nielsen_watermarks_settings
     #   Settings to configure Nielsen Watermarks in the audio encode
     #   @return [Types::NielsenWatermarksSettings]
@@ -1234,32 +682,6 @@ module Aws::MediaLive
     end
 
     # The settings for Automatic Input Failover.
-    #
-    # @note When making an API call, you may pass AutomaticInputFailoverSettings
-    #   data as a hash:
-    #
-    #       {
-    #         error_clear_time_msec: 1,
-    #         failover_conditions: [
-    #           {
-    #             failover_condition_settings: {
-    #               audio_silence_settings: {
-    #                 audio_selector_name: "__string", # required
-    #                 audio_silence_threshold_msec: 1,
-    #               },
-    #               input_loss_settings: {
-    #                 input_loss_threshold_msec: 1,
-    #               },
-    #               video_black_settings: {
-    #                 black_detect_threshold: 1.0,
-    #                 video_black_threshold_msec: 1,
-    #               },
-    #             },
-    #           },
-    #         ],
-    #         input_preference: "EQUAL_INPUT_PREFERENCE", # accepts EQUAL_INPUT_PREFERENCE, PRIMARY_INPUT_PREFERRED
-    #         secondary_input_id: "__string", # required
-    #       }
     #
     # @!attribute [rw] error_clear_time_msec
     #   This clear time defines the requirement a recovered input must meet
@@ -1298,18 +720,6 @@ module Aws::MediaLive
 
     # Avail Blanking
     #
-    # @note When making an API call, you may pass AvailBlanking
-    #   data as a hash:
-    #
-    #       {
-    #         avail_blanking_image: {
-    #           password_param: "__string",
-    #           uri: "__stringMax2048", # required
-    #           username: "__string",
-    #         },
-    #         state: "DISABLED", # accepts DISABLED, ENABLED
-    #       }
-    #
     # @!attribute [rw] avail_blanking_image
     #   Blanking image to be used. Leave empty for solid black. Only bmp and
     #   png images are supported.
@@ -1331,32 +741,6 @@ module Aws::MediaLive
 
     # Avail Configuration
     #
-    # @note When making an API call, you may pass AvailConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         avail_settings: {
-    #           esam: {
-    #             acquisition_point_id: "__stringMax256", # required
-    #             ad_avail_offset: 1,
-    #             password: "__string",
-    #             pois_endpoint: "__string", # required
-    #             username: "__string",
-    #             zone_identity: "__stringMax256",
-    #           },
-    #           scte_35_splice_insert: {
-    #             ad_avail_offset: 1,
-    #             no_regional_blackout_flag: "FOLLOW", # accepts FOLLOW, IGNORE
-    #             web_delivery_allowed_flag: "FOLLOW", # accepts FOLLOW, IGNORE
-    #           },
-    #           scte_35_time_signal_apos: {
-    #             ad_avail_offset: 1,
-    #             no_regional_blackout_flag: "FOLLOW", # accepts FOLLOW, IGNORE
-    #             web_delivery_allowed_flag: "FOLLOW", # accepts FOLLOW, IGNORE
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] avail_settings
     #   Ad avail settings.
     #   @return [Types::AvailSettings]
@@ -1370,30 +754,6 @@ module Aws::MediaLive
     end
 
     # Avail Settings
-    #
-    # @note When making an API call, you may pass AvailSettings
-    #   data as a hash:
-    #
-    #       {
-    #         esam: {
-    #           acquisition_point_id: "__stringMax256", # required
-    #           ad_avail_offset: 1,
-    #           password: "__string",
-    #           pois_endpoint: "__string", # required
-    #           username: "__string",
-    #           zone_identity: "__stringMax256",
-    #         },
-    #         scte_35_splice_insert: {
-    #           ad_avail_offset: 1,
-    #           no_regional_blackout_flag: "FOLLOW", # accepts FOLLOW, IGNORE
-    #           web_delivery_allowed_flag: "FOLLOW", # accepts FOLLOW, IGNORE
-    #         },
-    #         scte_35_time_signal_apos: {
-    #           ad_avail_offset: 1,
-    #           no_regional_blackout_flag: "FOLLOW", # accepts FOLLOW, IGNORE
-    #           web_delivery_allowed_flag: "FOLLOW", # accepts FOLLOW, IGNORE
-    #         },
-    #       }
     #
     # @!attribute [rw] esam
     #   Esam
@@ -1468,16 +828,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchDeleteRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_ids: ["__string"],
-    #         input_ids: ["__string"],
-    #         input_security_group_ids: ["__string"],
-    #         multiplex_ids: ["__string"],
-    #       }
-    #
     # @!attribute [rw] channel_ids
     #   @return [Array<String>]
     #
@@ -1567,136 +917,6 @@ module Aws::MediaLive
     # A list of schedule actions to create (in a request) or that have been
     # created (in a response).
     #
-    # @note When making an API call, you may pass BatchScheduleActionCreateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         schedule_actions: [ # required
-    #           {
-    #             action_name: "__string", # required
-    #             schedule_action_settings: { # required
-    #               hls_id_3_segment_tagging_settings: {
-    #                 tag: "__string", # required
-    #               },
-    #               hls_timed_metadata_settings: {
-    #                 id_3: "__string", # required
-    #               },
-    #               input_prepare_settings: {
-    #                 input_attachment_name_reference: "__string",
-    #                 input_clipping_settings: {
-    #                   input_timecode_source: "ZEROBASED", # required, accepts ZEROBASED, EMBEDDED
-    #                   start_timecode: {
-    #                     timecode: "__string",
-    #                   },
-    #                   stop_timecode: {
-    #                     last_frame_clipping_behavior: "EXCLUDE_LAST_FRAME", # accepts EXCLUDE_LAST_FRAME, INCLUDE_LAST_FRAME
-    #                     timecode: "__string",
-    #                   },
-    #                 },
-    #                 url_path: ["__string"],
-    #               },
-    #               input_switch_settings: {
-    #                 input_attachment_name_reference: "__string", # required
-    #                 input_clipping_settings: {
-    #                   input_timecode_source: "ZEROBASED", # required, accepts ZEROBASED, EMBEDDED
-    #                   start_timecode: {
-    #                     timecode: "__string",
-    #                   },
-    #                   stop_timecode: {
-    #                     last_frame_clipping_behavior: "EXCLUDE_LAST_FRAME", # accepts EXCLUDE_LAST_FRAME, INCLUDE_LAST_FRAME
-    #                     timecode: "__string",
-    #                   },
-    #                 },
-    #                 url_path: ["__string"],
-    #               },
-    #               motion_graphics_image_activate_settings: {
-    #                 duration: 1,
-    #                 password_param: "__string",
-    #                 url: "__string",
-    #                 username: "__string",
-    #               },
-    #               motion_graphics_image_deactivate_settings: {
-    #               },
-    #               pause_state_settings: {
-    #                 pipelines: [
-    #                   {
-    #                     pipeline_id: "PIPELINE_0", # required, accepts PIPELINE_0, PIPELINE_1
-    #                   },
-    #                 ],
-    #               },
-    #               scte_35_input_settings: {
-    #                 input_attachment_name_reference: "__string",
-    #                 mode: "FIXED", # required, accepts FIXED, FOLLOW_ACTIVE
-    #               },
-    #               scte_35_return_to_network_settings: {
-    #                 splice_event_id: 1, # required
-    #               },
-    #               scte_35_splice_insert_settings: {
-    #                 duration: 1,
-    #                 splice_event_id: 1, # required
-    #               },
-    #               scte_35_time_signal_settings: {
-    #                 scte_35_descriptors: [ # required
-    #                   {
-    #                     scte_35_descriptor_settings: { # required
-    #                       segmentation_descriptor_scte_35_descriptor_settings: { # required
-    #                         delivery_restrictions: {
-    #                           archive_allowed_flag: "ARCHIVE_NOT_ALLOWED", # required, accepts ARCHIVE_NOT_ALLOWED, ARCHIVE_ALLOWED
-    #                           device_restrictions: "NONE", # required, accepts NONE, RESTRICT_GROUP0, RESTRICT_GROUP1, RESTRICT_GROUP2
-    #                           no_regional_blackout_flag: "REGIONAL_BLACKOUT", # required, accepts REGIONAL_BLACKOUT, NO_REGIONAL_BLACKOUT
-    #                           web_delivery_allowed_flag: "WEB_DELIVERY_NOT_ALLOWED", # required, accepts WEB_DELIVERY_NOT_ALLOWED, WEB_DELIVERY_ALLOWED
-    #                         },
-    #                         segment_num: 1,
-    #                         segmentation_cancel_indicator: "SEGMENTATION_EVENT_NOT_CANCELED", # required, accepts SEGMENTATION_EVENT_NOT_CANCELED, SEGMENTATION_EVENT_CANCELED
-    #                         segmentation_duration: 1,
-    #                         segmentation_event_id: 1, # required
-    #                         segmentation_type_id: 1,
-    #                         segmentation_upid: "__string",
-    #                         segmentation_upid_type: 1,
-    #                         segments_expected: 1,
-    #                         sub_segment_num: 1,
-    #                         sub_segments_expected: 1,
-    #                       },
-    #                     },
-    #                   },
-    #                 ],
-    #               },
-    #               static_image_activate_settings: {
-    #                 duration: 1,
-    #                 fade_in: 1,
-    #                 fade_out: 1,
-    #                 height: 1,
-    #                 image: { # required
-    #                   password_param: "__string",
-    #                   uri: "__stringMax2048", # required
-    #                   username: "__string",
-    #                 },
-    #                 image_x: 1,
-    #                 image_y: 1,
-    #                 layer: 1,
-    #                 opacity: 1,
-    #                 width: 1,
-    #               },
-    #               static_image_deactivate_settings: {
-    #                 fade_out: 1,
-    #                 layer: 1,
-    #               },
-    #             },
-    #             schedule_action_start_settings: { # required
-    #               fixed_mode_schedule_action_start_settings: {
-    #                 time: "__string", # required
-    #               },
-    #               follow_mode_schedule_action_start_settings: {
-    #                 follow_point: "END", # required, accepts END, START
-    #                 reference_action_name: "__string", # required
-    #               },
-    #               immediate_mode_schedule_action_start_settings: {
-    #               },
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] schedule_actions
     #   A list of schedule actions to create.
     #   @return [Array<Types::ScheduleAction>]
@@ -1724,13 +944,6 @@ module Aws::MediaLive
     end
 
     # A list of schedule actions to delete.
-    #
-    # @note When making an API call, you may pass BatchScheduleActionDeleteRequest
-    #   data as a hash:
-    #
-    #       {
-    #         action_names: ["__string"], # required
-    #       }
     #
     # @!attribute [rw] action_names
     #   A list of schedule actions to delete.
@@ -1777,14 +990,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchStartRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_ids: ["__string"],
-    #         multiplex_ids: ["__string"],
-    #       }
-    #
     # @!attribute [rw] channel_ids
     #   @return [Array<String>]
     #
@@ -1853,14 +1058,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchStopRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_ids: ["__string"],
-    #         multiplex_ids: ["__string"],
-    #       }
-    #
     # @!attribute [rw] channel_ids
     #   @return [Array<String>]
     #
@@ -1938,142 +1135,6 @@ module Aws::MediaLive
     # actions (remove actions from the schedule), or both create and delete
     # actions.
     #
-    # @note When making an API call, you may pass BatchUpdateScheduleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_id: "__string", # required
-    #         creates: {
-    #           schedule_actions: [ # required
-    #             {
-    #               action_name: "__string", # required
-    #               schedule_action_settings: { # required
-    #                 hls_id_3_segment_tagging_settings: {
-    #                   tag: "__string", # required
-    #                 },
-    #                 hls_timed_metadata_settings: {
-    #                   id_3: "__string", # required
-    #                 },
-    #                 input_prepare_settings: {
-    #                   input_attachment_name_reference: "__string",
-    #                   input_clipping_settings: {
-    #                     input_timecode_source: "ZEROBASED", # required, accepts ZEROBASED, EMBEDDED
-    #                     start_timecode: {
-    #                       timecode: "__string",
-    #                     },
-    #                     stop_timecode: {
-    #                       last_frame_clipping_behavior: "EXCLUDE_LAST_FRAME", # accepts EXCLUDE_LAST_FRAME, INCLUDE_LAST_FRAME
-    #                       timecode: "__string",
-    #                     },
-    #                   },
-    #                   url_path: ["__string"],
-    #                 },
-    #                 input_switch_settings: {
-    #                   input_attachment_name_reference: "__string", # required
-    #                   input_clipping_settings: {
-    #                     input_timecode_source: "ZEROBASED", # required, accepts ZEROBASED, EMBEDDED
-    #                     start_timecode: {
-    #                       timecode: "__string",
-    #                     },
-    #                     stop_timecode: {
-    #                       last_frame_clipping_behavior: "EXCLUDE_LAST_FRAME", # accepts EXCLUDE_LAST_FRAME, INCLUDE_LAST_FRAME
-    #                       timecode: "__string",
-    #                     },
-    #                   },
-    #                   url_path: ["__string"],
-    #                 },
-    #                 motion_graphics_image_activate_settings: {
-    #                   duration: 1,
-    #                   password_param: "__string",
-    #                   url: "__string",
-    #                   username: "__string",
-    #                 },
-    #                 motion_graphics_image_deactivate_settings: {
-    #                 },
-    #                 pause_state_settings: {
-    #                   pipelines: [
-    #                     {
-    #                       pipeline_id: "PIPELINE_0", # required, accepts PIPELINE_0, PIPELINE_1
-    #                     },
-    #                   ],
-    #                 },
-    #                 scte_35_input_settings: {
-    #                   input_attachment_name_reference: "__string",
-    #                   mode: "FIXED", # required, accepts FIXED, FOLLOW_ACTIVE
-    #                 },
-    #                 scte_35_return_to_network_settings: {
-    #                   splice_event_id: 1, # required
-    #                 },
-    #                 scte_35_splice_insert_settings: {
-    #                   duration: 1,
-    #                   splice_event_id: 1, # required
-    #                 },
-    #                 scte_35_time_signal_settings: {
-    #                   scte_35_descriptors: [ # required
-    #                     {
-    #                       scte_35_descriptor_settings: { # required
-    #                         segmentation_descriptor_scte_35_descriptor_settings: { # required
-    #                           delivery_restrictions: {
-    #                             archive_allowed_flag: "ARCHIVE_NOT_ALLOWED", # required, accepts ARCHIVE_NOT_ALLOWED, ARCHIVE_ALLOWED
-    #                             device_restrictions: "NONE", # required, accepts NONE, RESTRICT_GROUP0, RESTRICT_GROUP1, RESTRICT_GROUP2
-    #                             no_regional_blackout_flag: "REGIONAL_BLACKOUT", # required, accepts REGIONAL_BLACKOUT, NO_REGIONAL_BLACKOUT
-    #                             web_delivery_allowed_flag: "WEB_DELIVERY_NOT_ALLOWED", # required, accepts WEB_DELIVERY_NOT_ALLOWED, WEB_DELIVERY_ALLOWED
-    #                           },
-    #                           segment_num: 1,
-    #                           segmentation_cancel_indicator: "SEGMENTATION_EVENT_NOT_CANCELED", # required, accepts SEGMENTATION_EVENT_NOT_CANCELED, SEGMENTATION_EVENT_CANCELED
-    #                           segmentation_duration: 1,
-    #                           segmentation_event_id: 1, # required
-    #                           segmentation_type_id: 1,
-    #                           segmentation_upid: "__string",
-    #                           segmentation_upid_type: 1,
-    #                           segments_expected: 1,
-    #                           sub_segment_num: 1,
-    #                           sub_segments_expected: 1,
-    #                         },
-    #                       },
-    #                     },
-    #                   ],
-    #                 },
-    #                 static_image_activate_settings: {
-    #                   duration: 1,
-    #                   fade_in: 1,
-    #                   fade_out: 1,
-    #                   height: 1,
-    #                   image: { # required
-    #                     password_param: "__string",
-    #                     uri: "__stringMax2048", # required
-    #                     username: "__string",
-    #                   },
-    #                   image_x: 1,
-    #                   image_y: 1,
-    #                   layer: 1,
-    #                   opacity: 1,
-    #                   width: 1,
-    #                 },
-    #                 static_image_deactivate_settings: {
-    #                   fade_out: 1,
-    #                   layer: 1,
-    #                 },
-    #               },
-    #               schedule_action_start_settings: { # required
-    #                 fixed_mode_schedule_action_start_settings: {
-    #                   time: "__string", # required
-    #                 },
-    #                 follow_mode_schedule_action_start_settings: {
-    #                   follow_point: "END", # required, accepts END, START
-    #                   reference_action_name: "__string", # required
-    #                 },
-    #                 immediate_mode_schedule_action_start_settings: {
-    #                 },
-    #               },
-    #             },
-    #           ],
-    #         },
-    #         deletes: {
-    #           action_names: ["__string"], # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] channel_id
     #   @return [String]
     #
@@ -2133,25 +1194,6 @@ module Aws::MediaLive
 
     # Blackout Slate
     #
-    # @note When making an API call, you may pass BlackoutSlate
-    #   data as a hash:
-    #
-    #       {
-    #         blackout_slate_image: {
-    #           password_param: "__string",
-    #           uri: "__stringMax2048", # required
-    #           username: "__string",
-    #         },
-    #         network_end_blackout: "DISABLED", # accepts DISABLED, ENABLED
-    #         network_end_blackout_image: {
-    #           password_param: "__string",
-    #           uri: "__stringMax2048", # required
-    #           username: "__string",
-    #         },
-    #         network_id: "__stringMin34Max34",
-    #         state: "DISABLED", # accepts DISABLED, ENABLED
-    #       }
-    #
     # @!attribute [rw] blackout_slate_image
     #   Blackout slate image to be used. Leave empty for solid black. Only
     #   bmp and png images are supported.
@@ -2195,33 +1237,6 @@ module Aws::MediaLive
     end
 
     # Burn In Destination Settings
-    #
-    # @note When making an API call, you may pass BurnInDestinationSettings
-    #   data as a hash:
-    #
-    #       {
-    #         alignment: "CENTERED", # accepts CENTERED, LEFT, SMART
-    #         background_color: "BLACK", # accepts BLACK, NONE, WHITE
-    #         background_opacity: 1,
-    #         font: {
-    #           password_param: "__string",
-    #           uri: "__stringMax2048", # required
-    #           username: "__string",
-    #         },
-    #         font_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
-    #         font_opacity: 1,
-    #         font_resolution: 1,
-    #         font_size: "__string",
-    #         outline_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
-    #         outline_size: 1,
-    #         shadow_color: "BLACK", # accepts BLACK, NONE, WHITE
-    #         shadow_opacity: 1,
-    #         shadow_x_offset: 1,
-    #         shadow_y_offset: 1,
-    #         teletext_grid_control: "FIXED", # accepts FIXED, SCALED
-    #         x_position: 1,
-    #         y_position: 1,
-    #       }
     #
     # @!attribute [rw] alignment
     #   If no explicit xPosition or yPosition is provided, setting alignment
@@ -2366,13 +1381,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CancelInputDeviceTransferRequest
-    #   data as a hash:
-    #
-    #       {
-    #         input_device_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] input_device_id
     #   @return [String]
     #
@@ -2389,93 +1397,6 @@ module Aws::MediaLive
     class CancelInputDeviceTransferResponse < Aws::EmptyStructure; end
 
     # Caption Description
-    #
-    # @note When making an API call, you may pass CaptionDescription
-    #   data as a hash:
-    #
-    #       {
-    #         accessibility: "DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES", # accepts DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES, IMPLEMENTS_ACCESSIBILITY_FEATURES
-    #         caption_selector_name: "__string", # required
-    #         destination_settings: {
-    #           arib_destination_settings: {
-    #           },
-    #           burn_in_destination_settings: {
-    #             alignment: "CENTERED", # accepts CENTERED, LEFT, SMART
-    #             background_color: "BLACK", # accepts BLACK, NONE, WHITE
-    #             background_opacity: 1,
-    #             font: {
-    #               password_param: "__string",
-    #               uri: "__stringMax2048", # required
-    #               username: "__string",
-    #             },
-    #             font_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
-    #             font_opacity: 1,
-    #             font_resolution: 1,
-    #             font_size: "__string",
-    #             outline_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
-    #             outline_size: 1,
-    #             shadow_color: "BLACK", # accepts BLACK, NONE, WHITE
-    #             shadow_opacity: 1,
-    #             shadow_x_offset: 1,
-    #             shadow_y_offset: 1,
-    #             teletext_grid_control: "FIXED", # accepts FIXED, SCALED
-    #             x_position: 1,
-    #             y_position: 1,
-    #           },
-    #           dvb_sub_destination_settings: {
-    #             alignment: "CENTERED", # accepts CENTERED, LEFT, SMART
-    #             background_color: "BLACK", # accepts BLACK, NONE, WHITE
-    #             background_opacity: 1,
-    #             font: {
-    #               password_param: "__string",
-    #               uri: "__stringMax2048", # required
-    #               username: "__string",
-    #             },
-    #             font_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
-    #             font_opacity: 1,
-    #             font_resolution: 1,
-    #             font_size: "__string",
-    #             outline_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
-    #             outline_size: 1,
-    #             shadow_color: "BLACK", # accepts BLACK, NONE, WHITE
-    #             shadow_opacity: 1,
-    #             shadow_x_offset: 1,
-    #             shadow_y_offset: 1,
-    #             teletext_grid_control: "FIXED", # accepts FIXED, SCALED
-    #             x_position: 1,
-    #             y_position: 1,
-    #           },
-    #           ebu_tt_d_destination_settings: {
-    #             copyright_holder: "__stringMax1000",
-    #             fill_line_gap: "DISABLED", # accepts DISABLED, ENABLED
-    #             font_family: "__string",
-    #             style_control: "EXCLUDE", # accepts EXCLUDE, INCLUDE
-    #           },
-    #           embedded_destination_settings: {
-    #           },
-    #           embedded_plus_scte_20_destination_settings: {
-    #           },
-    #           rtmp_caption_info_destination_settings: {
-    #           },
-    #           scte_20_plus_embedded_destination_settings: {
-    #           },
-    #           scte_27_destination_settings: {
-    #           },
-    #           smpte_tt_destination_settings: {
-    #           },
-    #           teletext_destination_settings: {
-    #           },
-    #           ttml_destination_settings: {
-    #             style_control: "PASSTHROUGH", # accepts PASSTHROUGH, USE_CONFIGURED
-    #           },
-    #           webvtt_destination_settings: {
-    #             style_control: "NO_STYLE_DATA", # accepts NO_STYLE_DATA, PASSTHROUGH
-    #           },
-    #         },
-    #         language_code: "__string",
-    #         language_description: "__string",
-    #         name: "__string", # required
-    #       }
     #
     # @!attribute [rw] accessibility
     #   Indicates whether the caption track implements accessibility
@@ -2522,86 +1443,6 @@ module Aws::MediaLive
     end
 
     # Caption Destination Settings
-    #
-    # @note When making an API call, you may pass CaptionDestinationSettings
-    #   data as a hash:
-    #
-    #       {
-    #         arib_destination_settings: {
-    #         },
-    #         burn_in_destination_settings: {
-    #           alignment: "CENTERED", # accepts CENTERED, LEFT, SMART
-    #           background_color: "BLACK", # accepts BLACK, NONE, WHITE
-    #           background_opacity: 1,
-    #           font: {
-    #             password_param: "__string",
-    #             uri: "__stringMax2048", # required
-    #             username: "__string",
-    #           },
-    #           font_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
-    #           font_opacity: 1,
-    #           font_resolution: 1,
-    #           font_size: "__string",
-    #           outline_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
-    #           outline_size: 1,
-    #           shadow_color: "BLACK", # accepts BLACK, NONE, WHITE
-    #           shadow_opacity: 1,
-    #           shadow_x_offset: 1,
-    #           shadow_y_offset: 1,
-    #           teletext_grid_control: "FIXED", # accepts FIXED, SCALED
-    #           x_position: 1,
-    #           y_position: 1,
-    #         },
-    #         dvb_sub_destination_settings: {
-    #           alignment: "CENTERED", # accepts CENTERED, LEFT, SMART
-    #           background_color: "BLACK", # accepts BLACK, NONE, WHITE
-    #           background_opacity: 1,
-    #           font: {
-    #             password_param: "__string",
-    #             uri: "__stringMax2048", # required
-    #             username: "__string",
-    #           },
-    #           font_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
-    #           font_opacity: 1,
-    #           font_resolution: 1,
-    #           font_size: "__string",
-    #           outline_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
-    #           outline_size: 1,
-    #           shadow_color: "BLACK", # accepts BLACK, NONE, WHITE
-    #           shadow_opacity: 1,
-    #           shadow_x_offset: 1,
-    #           shadow_y_offset: 1,
-    #           teletext_grid_control: "FIXED", # accepts FIXED, SCALED
-    #           x_position: 1,
-    #           y_position: 1,
-    #         },
-    #         ebu_tt_d_destination_settings: {
-    #           copyright_holder: "__stringMax1000",
-    #           fill_line_gap: "DISABLED", # accepts DISABLED, ENABLED
-    #           font_family: "__string",
-    #           style_control: "EXCLUDE", # accepts EXCLUDE, INCLUDE
-    #         },
-    #         embedded_destination_settings: {
-    #         },
-    #         embedded_plus_scte_20_destination_settings: {
-    #         },
-    #         rtmp_caption_info_destination_settings: {
-    #         },
-    #         scte_20_plus_embedded_destination_settings: {
-    #         },
-    #         scte_27_destination_settings: {
-    #         },
-    #         smpte_tt_destination_settings: {
-    #         },
-    #         teletext_destination_settings: {
-    #         },
-    #         ttml_destination_settings: {
-    #           style_control: "PASSTHROUGH", # accepts PASSTHROUGH, USE_CONFIGURED
-    #         },
-    #         webvtt_destination_settings: {
-    #           style_control: "NO_STYLE_DATA", # accepts NO_STYLE_DATA, PASSTHROUGH
-    #         },
-    #       }
     #
     # @!attribute [rw] arib_destination_settings
     #   Arib Destination Settings
@@ -2678,15 +1519,6 @@ module Aws::MediaLive
     # Maps a caption channel to an ISO 693-2 language code
     # (http://www.loc.gov/standards/iso639-2), with an optional description.
     #
-    # @note When making an API call, you may pass CaptionLanguageMapping
-    #   data as a hash:
-    #
-    #       {
-    #         caption_channel: 1, # required
-    #         language_code: "__stringMin3Max3", # required
-    #         language_description: "__stringMin1", # required
-    #       }
-    #
     # @!attribute [rw] caption_channel
     #   The closed caption channel being described by this
     #   CaptionLanguageMapping. Each channel mapping must have a unique
@@ -2713,16 +1545,6 @@ module Aws::MediaLive
     end
 
     # Caption Rectangle
-    #
-    # @note When making an API call, you may pass CaptionRectangle
-    #   data as a hash:
-    #
-    #       {
-    #         height: 1.0, # required
-    #         left_offset: 1.0, # required
-    #         top_offset: 1.0, # required
-    #         width: 1.0, # required
-    #       }
     #
     # @!attribute [rw] height
     #   See the description in leftOffset. For height, specify the entire
@@ -2784,48 +1606,6 @@ module Aws::MediaLive
     # Output groups for this Live Event. Output groups contain information
     # about where streams should be distributed.
     #
-    # @note When making an API call, you may pass CaptionSelector
-    #   data as a hash:
-    #
-    #       {
-    #         language_code: "__string",
-    #         name: "__stringMin1", # required
-    #         selector_settings: {
-    #           ancillary_source_settings: {
-    #             source_ancillary_channel_number: 1,
-    #           },
-    #           arib_source_settings: {
-    #           },
-    #           dvb_sub_source_settings: {
-    #             ocr_language: "DEU", # accepts DEU, ENG, FRA, NLD, POR, SPA
-    #             pid: 1,
-    #           },
-    #           embedded_source_settings: {
-    #             convert_608_to_708: "DISABLED", # accepts DISABLED, UPCONVERT
-    #             scte_20_detection: "AUTO", # accepts AUTO, OFF
-    #             source_608_channel_number: 1,
-    #             source_608_track_number: 1,
-    #           },
-    #           scte_20_source_settings: {
-    #             convert_608_to_708: "DISABLED", # accepts DISABLED, UPCONVERT
-    #             source_608_channel_number: 1,
-    #           },
-    #           scte_27_source_settings: {
-    #             ocr_language: "DEU", # accepts DEU, ENG, FRA, NLD, POR, SPA
-    #             pid: 1,
-    #           },
-    #           teletext_source_settings: {
-    #             output_rectangle: {
-    #               height: 1.0, # required
-    #               left_offset: 1.0, # required
-    #               top_offset: 1.0, # required
-    #               width: 1.0, # required
-    #             },
-    #             page_number: "__string",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] language_code
     #   When specified this field indicates the three letter language code
     #   of the caption track to extract from the source.
@@ -2852,44 +1632,6 @@ module Aws::MediaLive
     end
 
     # Caption Selector Settings
-    #
-    # @note When making an API call, you may pass CaptionSelectorSettings
-    #   data as a hash:
-    #
-    #       {
-    #         ancillary_source_settings: {
-    #           source_ancillary_channel_number: 1,
-    #         },
-    #         arib_source_settings: {
-    #         },
-    #         dvb_sub_source_settings: {
-    #           ocr_language: "DEU", # accepts DEU, ENG, FRA, NLD, POR, SPA
-    #           pid: 1,
-    #         },
-    #         embedded_source_settings: {
-    #           convert_608_to_708: "DISABLED", # accepts DISABLED, UPCONVERT
-    #           scte_20_detection: "AUTO", # accepts AUTO, OFF
-    #           source_608_channel_number: 1,
-    #           source_608_track_number: 1,
-    #         },
-    #         scte_20_source_settings: {
-    #           convert_608_to_708: "DISABLED", # accepts DISABLED, UPCONVERT
-    #           source_608_channel_number: 1,
-    #         },
-    #         scte_27_source_settings: {
-    #           ocr_language: "DEU", # accepts DEU, ENG, FRA, NLD, POR, SPA
-    #           pid: 1,
-    #         },
-    #         teletext_source_settings: {
-    #           output_rectangle: {
-    #             height: 1.0, # required
-    #             left_offset: 1.0, # required
-    #             top_offset: 1.0, # required
-    #             width: 1.0, # required
-    #           },
-    #           page_number: "__string",
-    #         },
-    #       }
     #
     # @!attribute [rw] ancillary_source_settings
     #   Ancillary Source Settings
@@ -2933,13 +1675,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CdiInputSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         resolution: "SD", # accepts SD, HD, FHD, UHD
-    #       }
-    #
     # @!attribute [rw] resolution
     #   Maximum CDI input resolution
     #   @return [String]
@@ -3173,13 +1908,6 @@ module Aws::MediaLive
     # Request to claim an AWS Elemental device that you have purchased from
     # a third-party vendor.
     #
-    # @note When making an API call, you may pass ClaimDeviceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "__string",
-    #       }
-    #
     # @!attribute [rw] id
     #   The id of the device you want to claim.
     #   @return [String]
@@ -3197,8 +1925,6 @@ module Aws::MediaLive
     class ClaimDeviceResponse < Aws::EmptyStructure; end
 
     # Passthrough applies no color space conversion to the output
-    #
-    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ColorSpacePassthroughSettings AWS API Documentation
     #
@@ -3294,997 +2020,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateChannelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cdi_input_specification: {
-    #           resolution: "SD", # accepts SD, HD, FHD, UHD
-    #         },
-    #         channel_class: "STANDARD", # accepts STANDARD, SINGLE_PIPELINE
-    #         destinations: [
-    #           {
-    #             id: "__string",
-    #             media_package_settings: [
-    #               {
-    #                 channel_id: "__stringMin1",
-    #               },
-    #             ],
-    #             multiplex_settings: {
-    #               multiplex_id: "__stringMin1",
-    #               program_name: "__stringMin1",
-    #             },
-    #             settings: [
-    #               {
-    #                 password_param: "__string",
-    #                 stream_name: "__string",
-    #                 url: "__string",
-    #                 username: "__string",
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         encoder_settings: {
-    #           audio_descriptions: [ # required
-    #             {
-    #               audio_normalization_settings: {
-    #                 algorithm: "ITU_1770_1", # accepts ITU_1770_1, ITU_1770_2
-    #                 algorithm_control: "CORRECT_AUDIO", # accepts CORRECT_AUDIO
-    #                 target_lkfs: 1.0,
-    #               },
-    #               audio_selector_name: "__string", # required
-    #               audio_type: "CLEAN_EFFECTS", # accepts CLEAN_EFFECTS, HEARING_IMPAIRED, UNDEFINED, VISUAL_IMPAIRED_COMMENTARY
-    #               audio_type_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
-    #               audio_watermarking_settings: {
-    #                 nielsen_watermarks_settings: {
-    #                   nielsen_cbet_settings: {
-    #                     cbet_check_digit_string: "__stringMin2Max2", # required
-    #                     cbet_stepaside: "DISABLED", # required, accepts DISABLED, ENABLED
-    #                     csid: "__stringMin1Max7", # required
-    #                   },
-    #                   nielsen_distribution_type: "FINAL_DISTRIBUTOR", # accepts FINAL_DISTRIBUTOR, PROGRAM_CONTENT
-    #                   nielsen_naes_ii_nw_settings: {
-    #                     check_digit_string: "__stringMin2Max2", # required
-    #                     sid: 1.0, # required
-    #                   },
-    #                 },
-    #               },
-    #               codec_settings: {
-    #                 aac_settings: {
-    #                   bitrate: 1.0,
-    #                   coding_mode: "AD_RECEIVER_MIX", # accepts AD_RECEIVER_MIX, CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_5_1
-    #                   input_type: "BROADCASTER_MIXED_AD", # accepts BROADCASTER_MIXED_AD, NORMAL
-    #                   profile: "HEV1", # accepts HEV1, HEV2, LC
-    #                   rate_control_mode: "CBR", # accepts CBR, VBR
-    #                   raw_format: "LATM_LOAS", # accepts LATM_LOAS, NONE
-    #                   sample_rate: 1.0,
-    #                   spec: "MPEG2", # accepts MPEG2, MPEG4
-    #                   vbr_quality: "HIGH", # accepts HIGH, LOW, MEDIUM_HIGH, MEDIUM_LOW
-    #                 },
-    #                 ac_3_settings: {
-    #                   bitrate: 1.0,
-    #                   bitstream_mode: "COMMENTARY", # accepts COMMENTARY, COMPLETE_MAIN, DIALOGUE, EMERGENCY, HEARING_IMPAIRED, MUSIC_AND_EFFECTS, VISUALLY_IMPAIRED, VOICE_OVER
-    #                   coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_3_2_LFE
-    #                   dialnorm: 1,
-    #                   drc_profile: "FILM_STANDARD", # accepts FILM_STANDARD, NONE
-    #                   lfe_filter: "DISABLED", # accepts DISABLED, ENABLED
-    #                   metadata_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
-    #                 },
-    #                 eac_3_atmos_settings: {
-    #                   bitrate: 1.0,
-    #                   coding_mode: "CODING_MODE_5_1_4", # accepts CODING_MODE_5_1_4, CODING_MODE_7_1_4, CODING_MODE_9_1_6
-    #                   dialnorm: 1,
-    #                   drc_line: "FILM_LIGHT", # accepts FILM_LIGHT, FILM_STANDARD, MUSIC_LIGHT, MUSIC_STANDARD, NONE, SPEECH
-    #                   drc_rf: "FILM_LIGHT", # accepts FILM_LIGHT, FILM_STANDARD, MUSIC_LIGHT, MUSIC_STANDARD, NONE, SPEECH
-    #                   height_trim: 1.0,
-    #                   surround_trim: 1.0,
-    #                 },
-    #                 eac_3_settings: {
-    #                   attenuation_control: "ATTENUATE_3_DB", # accepts ATTENUATE_3_DB, NONE
-    #                   bitrate: 1.0,
-    #                   bitstream_mode: "COMMENTARY", # accepts COMMENTARY, COMPLETE_MAIN, EMERGENCY, HEARING_IMPAIRED, VISUALLY_IMPAIRED
-    #                   coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_2_0, CODING_MODE_3_2
-    #                   dc_filter: "DISABLED", # accepts DISABLED, ENABLED
-    #                   dialnorm: 1,
-    #                   drc_line: "FILM_LIGHT", # accepts FILM_LIGHT, FILM_STANDARD, MUSIC_LIGHT, MUSIC_STANDARD, NONE, SPEECH
-    #                   drc_rf: "FILM_LIGHT", # accepts FILM_LIGHT, FILM_STANDARD, MUSIC_LIGHT, MUSIC_STANDARD, NONE, SPEECH
-    #                   lfe_control: "LFE", # accepts LFE, NO_LFE
-    #                   lfe_filter: "DISABLED", # accepts DISABLED, ENABLED
-    #                   lo_ro_center_mix_level: 1.0,
-    #                   lo_ro_surround_mix_level: 1.0,
-    #                   lt_rt_center_mix_level: 1.0,
-    #                   lt_rt_surround_mix_level: 1.0,
-    #                   metadata_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
-    #                   passthrough_control: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, WHEN_POSSIBLE
-    #                   phase_control: "NO_SHIFT", # accepts NO_SHIFT, SHIFT_90_DEGREES
-    #                   stereo_downmix: "DPL2", # accepts DPL2, LO_RO, LT_RT, NOT_INDICATED
-    #                   surround_ex_mode: "DISABLED", # accepts DISABLED, ENABLED, NOT_INDICATED
-    #                   surround_mode: "DISABLED", # accepts DISABLED, ENABLED, NOT_INDICATED
-    #                 },
-    #                 mp_2_settings: {
-    #                   bitrate: 1.0,
-    #                   coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_2_0
-    #                   sample_rate: 1.0,
-    #                 },
-    #                 pass_through_settings: {
-    #                 },
-    #                 wav_settings: {
-    #                   bit_depth: 1.0,
-    #                   coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_2_0, CODING_MODE_4_0, CODING_MODE_8_0
-    #                   sample_rate: 1.0,
-    #                 },
-    #               },
-    #               language_code: "__stringMin1Max35",
-    #               language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
-    #               name: "__stringMax255", # required
-    #               remix_settings: {
-    #                 channel_mappings: [ # required
-    #                   {
-    #                     input_channel_levels: [ # required
-    #                       {
-    #                         gain: 1, # required
-    #                         input_channel: 1, # required
-    #                       },
-    #                     ],
-    #                     output_channel: 1, # required
-    #                   },
-    #                 ],
-    #                 channels_in: 1,
-    #                 channels_out: 1,
-    #               },
-    #               stream_name: "__string",
-    #             },
-    #           ],
-    #           avail_blanking: {
-    #             avail_blanking_image: {
-    #               password_param: "__string",
-    #               uri: "__stringMax2048", # required
-    #               username: "__string",
-    #             },
-    #             state: "DISABLED", # accepts DISABLED, ENABLED
-    #           },
-    #           avail_configuration: {
-    #             avail_settings: {
-    #               esam: {
-    #                 acquisition_point_id: "__stringMax256", # required
-    #                 ad_avail_offset: 1,
-    #                 password: "__string",
-    #                 pois_endpoint: "__string", # required
-    #                 username: "__string",
-    #                 zone_identity: "__stringMax256",
-    #               },
-    #               scte_35_splice_insert: {
-    #                 ad_avail_offset: 1,
-    #                 no_regional_blackout_flag: "FOLLOW", # accepts FOLLOW, IGNORE
-    #                 web_delivery_allowed_flag: "FOLLOW", # accepts FOLLOW, IGNORE
-    #               },
-    #               scte_35_time_signal_apos: {
-    #                 ad_avail_offset: 1,
-    #                 no_regional_blackout_flag: "FOLLOW", # accepts FOLLOW, IGNORE
-    #                 web_delivery_allowed_flag: "FOLLOW", # accepts FOLLOW, IGNORE
-    #               },
-    #             },
-    #           },
-    #           blackout_slate: {
-    #             blackout_slate_image: {
-    #               password_param: "__string",
-    #               uri: "__stringMax2048", # required
-    #               username: "__string",
-    #             },
-    #             network_end_blackout: "DISABLED", # accepts DISABLED, ENABLED
-    #             network_end_blackout_image: {
-    #               password_param: "__string",
-    #               uri: "__stringMax2048", # required
-    #               username: "__string",
-    #             },
-    #             network_id: "__stringMin34Max34",
-    #             state: "DISABLED", # accepts DISABLED, ENABLED
-    #           },
-    #           caption_descriptions: [
-    #             {
-    #               accessibility: "DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES", # accepts DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES, IMPLEMENTS_ACCESSIBILITY_FEATURES
-    #               caption_selector_name: "__string", # required
-    #               destination_settings: {
-    #                 arib_destination_settings: {
-    #                 },
-    #                 burn_in_destination_settings: {
-    #                   alignment: "CENTERED", # accepts CENTERED, LEFT, SMART
-    #                   background_color: "BLACK", # accepts BLACK, NONE, WHITE
-    #                   background_opacity: 1,
-    #                   font: {
-    #                     password_param: "__string",
-    #                     uri: "__stringMax2048", # required
-    #                     username: "__string",
-    #                   },
-    #                   font_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
-    #                   font_opacity: 1,
-    #                   font_resolution: 1,
-    #                   font_size: "__string",
-    #                   outline_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
-    #                   outline_size: 1,
-    #                   shadow_color: "BLACK", # accepts BLACK, NONE, WHITE
-    #                   shadow_opacity: 1,
-    #                   shadow_x_offset: 1,
-    #                   shadow_y_offset: 1,
-    #                   teletext_grid_control: "FIXED", # accepts FIXED, SCALED
-    #                   x_position: 1,
-    #                   y_position: 1,
-    #                 },
-    #                 dvb_sub_destination_settings: {
-    #                   alignment: "CENTERED", # accepts CENTERED, LEFT, SMART
-    #                   background_color: "BLACK", # accepts BLACK, NONE, WHITE
-    #                   background_opacity: 1,
-    #                   font: {
-    #                     password_param: "__string",
-    #                     uri: "__stringMax2048", # required
-    #                     username: "__string",
-    #                   },
-    #                   font_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
-    #                   font_opacity: 1,
-    #                   font_resolution: 1,
-    #                   font_size: "__string",
-    #                   outline_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
-    #                   outline_size: 1,
-    #                   shadow_color: "BLACK", # accepts BLACK, NONE, WHITE
-    #                   shadow_opacity: 1,
-    #                   shadow_x_offset: 1,
-    #                   shadow_y_offset: 1,
-    #                   teletext_grid_control: "FIXED", # accepts FIXED, SCALED
-    #                   x_position: 1,
-    #                   y_position: 1,
-    #                 },
-    #                 ebu_tt_d_destination_settings: {
-    #                   copyright_holder: "__stringMax1000",
-    #                   fill_line_gap: "DISABLED", # accepts DISABLED, ENABLED
-    #                   font_family: "__string",
-    #                   style_control: "EXCLUDE", # accepts EXCLUDE, INCLUDE
-    #                 },
-    #                 embedded_destination_settings: {
-    #                 },
-    #                 embedded_plus_scte_20_destination_settings: {
-    #                 },
-    #                 rtmp_caption_info_destination_settings: {
-    #                 },
-    #                 scte_20_plus_embedded_destination_settings: {
-    #                 },
-    #                 scte_27_destination_settings: {
-    #                 },
-    #                 smpte_tt_destination_settings: {
-    #                 },
-    #                 teletext_destination_settings: {
-    #                 },
-    #                 ttml_destination_settings: {
-    #                   style_control: "PASSTHROUGH", # accepts PASSTHROUGH, USE_CONFIGURED
-    #                 },
-    #                 webvtt_destination_settings: {
-    #                   style_control: "NO_STYLE_DATA", # accepts NO_STYLE_DATA, PASSTHROUGH
-    #                 },
-    #               },
-    #               language_code: "__string",
-    #               language_description: "__string",
-    #               name: "__string", # required
-    #             },
-    #           ],
-    #           feature_activations: {
-    #             input_prepare_schedule_actions: "DISABLED", # accepts DISABLED, ENABLED
-    #           },
-    #           global_configuration: {
-    #             initial_audio_gain: 1,
-    #             input_end_action: "NONE", # accepts NONE, SWITCH_AND_LOOP_INPUTS
-    #             input_loss_behavior: {
-    #               black_frame_msec: 1,
-    #               input_loss_image_color: "__stringMin6Max6",
-    #               input_loss_image_slate: {
-    #                 password_param: "__string",
-    #                 uri: "__stringMax2048", # required
-    #                 username: "__string",
-    #               },
-    #               input_loss_image_type: "COLOR", # accepts COLOR, SLATE
-    #               repeat_frame_msec: 1,
-    #             },
-    #             output_locking_mode: "EPOCH_LOCKING", # accepts EPOCH_LOCKING, PIPELINE_LOCKING
-    #             output_timing_source: "INPUT_CLOCK", # accepts INPUT_CLOCK, SYSTEM_CLOCK
-    #             support_low_framerate_inputs: "DISABLED", # accepts DISABLED, ENABLED
-    #           },
-    #           motion_graphics_configuration: {
-    #             motion_graphics_insertion: "DISABLED", # accepts DISABLED, ENABLED
-    #             motion_graphics_settings: { # required
-    #               html_motion_graphics_settings: {
-    #               },
-    #             },
-    #           },
-    #           nielsen_configuration: {
-    #             distributor_id: "__string",
-    #             nielsen_pcm_to_id_3_tagging: "DISABLED", # accepts DISABLED, ENABLED
-    #           },
-    #           output_groups: [ # required
-    #             {
-    #               name: "__stringMax32",
-    #               output_group_settings: { # required
-    #                 archive_group_settings: {
-    #                   archive_cdn_settings: {
-    #                     archive_s3_settings: {
-    #                       canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
-    #                     },
-    #                   },
-    #                   destination: { # required
-    #                     destination_ref_id: "__string",
-    #                   },
-    #                   rollover_interval: 1,
-    #                 },
-    #                 frame_capture_group_settings: {
-    #                   destination: { # required
-    #                     destination_ref_id: "__string",
-    #                   },
-    #                   frame_capture_cdn_settings: {
-    #                     frame_capture_s3_settings: {
-    #                       canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
-    #                     },
-    #                   },
-    #                 },
-    #                 hls_group_settings: {
-    #                   ad_markers: ["ADOBE"], # accepts ADOBE, ELEMENTAL, ELEMENTAL_SCTE35
-    #                   base_url_content: "__string",
-    #                   base_url_content_1: "__string",
-    #                   base_url_manifest: "__string",
-    #                   base_url_manifest_1: "__string",
-    #                   caption_language_mappings: [
-    #                     {
-    #                       caption_channel: 1, # required
-    #                       language_code: "__stringMin3Max3", # required
-    #                       language_description: "__stringMin1", # required
-    #                     },
-    #                   ],
-    #                   caption_language_setting: "INSERT", # accepts INSERT, NONE, OMIT
-    #                   client_cache: "DISABLED", # accepts DISABLED, ENABLED
-    #                   codec_specification: "RFC_4281", # accepts RFC_4281, RFC_6381
-    #                   constant_iv: "__stringMin32Max32",
-    #                   destination: { # required
-    #                     destination_ref_id: "__string",
-    #                   },
-    #                   directory_structure: "SINGLE_DIRECTORY", # accepts SINGLE_DIRECTORY, SUBDIRECTORY_PER_STREAM
-    #                   discontinuity_tags: "INSERT", # accepts INSERT, NEVER_INSERT
-    #                   encryption_type: "AES128", # accepts AES128, SAMPLE_AES
-    #                   hls_cdn_settings: {
-    #                     hls_akamai_settings: {
-    #                       connection_retry_interval: 1,
-    #                       filecache_duration: 1,
-    #                       http_transfer_mode: "CHUNKED", # accepts CHUNKED, NON_CHUNKED
-    #                       num_retries: 1,
-    #                       restart_delay: 1,
-    #                       salt: "__string",
-    #                       token: "__string",
-    #                     },
-    #                     hls_basic_put_settings: {
-    #                       connection_retry_interval: 1,
-    #                       filecache_duration: 1,
-    #                       num_retries: 1,
-    #                       restart_delay: 1,
-    #                     },
-    #                     hls_media_store_settings: {
-    #                       connection_retry_interval: 1,
-    #                       filecache_duration: 1,
-    #                       media_store_storage_class: "TEMPORAL", # accepts TEMPORAL
-    #                       num_retries: 1,
-    #                       restart_delay: 1,
-    #                     },
-    #                     hls_s3_settings: {
-    #                       canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
-    #                     },
-    #                     hls_webdav_settings: {
-    #                       connection_retry_interval: 1,
-    #                       filecache_duration: 1,
-    #                       http_transfer_mode: "CHUNKED", # accepts CHUNKED, NON_CHUNKED
-    #                       num_retries: 1,
-    #                       restart_delay: 1,
-    #                     },
-    #                   },
-    #                   hls_id_3_segment_tagging: "DISABLED", # accepts DISABLED, ENABLED
-    #                   i_frame_only_playlists: "DISABLED", # accepts DISABLED, STANDARD
-    #                   incomplete_segment_behavior: "AUTO", # accepts AUTO, SUPPRESS
-    #                   index_n_segments: 1,
-    #                   input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
-    #                   iv_in_manifest: "EXCLUDE", # accepts EXCLUDE, INCLUDE
-    #                   iv_source: "EXPLICIT", # accepts EXPLICIT, FOLLOWS_SEGMENT_NUMBER
-    #                   keep_segments: 1,
-    #                   key_format: "__string",
-    #                   key_format_versions: "__string",
-    #                   key_provider_settings: {
-    #                     static_key_settings: {
-    #                       key_provider_server: {
-    #                         password_param: "__string",
-    #                         uri: "__stringMax2048", # required
-    #                         username: "__string",
-    #                       },
-    #                       static_key_value: "__stringMin32Max32", # required
-    #                     },
-    #                   },
-    #                   manifest_compression: "GZIP", # accepts GZIP, NONE
-    #                   manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
-    #                   min_segment_length: 1,
-    #                   mode: "LIVE", # accepts LIVE, VOD
-    #                   output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY, VARIANT_MANIFESTS_AND_SEGMENTS
-    #                   program_date_time: "EXCLUDE", # accepts EXCLUDE, INCLUDE
-    #                   program_date_time_clock: "INITIALIZE_FROM_OUTPUT_TIMECODE", # accepts INITIALIZE_FROM_OUTPUT_TIMECODE, SYSTEM_CLOCK
-    #                   program_date_time_period: 1,
-    #                   redundant_manifest: "DISABLED", # accepts DISABLED, ENABLED
-    #                   segment_length: 1,
-    #                   segmentation_mode: "USE_INPUT_SEGMENTATION", # accepts USE_INPUT_SEGMENTATION, USE_SEGMENT_DURATION
-    #                   segments_per_subdirectory: 1,
-    #                   stream_inf_resolution: "EXCLUDE", # accepts EXCLUDE, INCLUDE
-    #                   timed_metadata_id_3_frame: "NONE", # accepts NONE, PRIV, TDRL
-    #                   timed_metadata_id_3_period: 1,
-    #                   timestamp_delta_milliseconds: 1,
-    #                   ts_file_mode: "SEGMENTED_FILES", # accepts SEGMENTED_FILES, SINGLE_FILE
-    #                 },
-    #                 media_package_group_settings: {
-    #                   destination: { # required
-    #                     destination_ref_id: "__string",
-    #                   },
-    #                 },
-    #                 ms_smooth_group_settings: {
-    #                   acquisition_point_id: "__string",
-    #                   audio_only_timecode_control: "PASSTHROUGH", # accepts PASSTHROUGH, USE_CONFIGURED_CLOCK
-    #                   certificate_mode: "SELF_SIGNED", # accepts SELF_SIGNED, VERIFY_AUTHENTICITY
-    #                   connection_retry_interval: 1,
-    #                   destination: { # required
-    #                     destination_ref_id: "__string",
-    #                   },
-    #                   event_id: "__string",
-    #                   event_id_mode: "NO_EVENT_ID", # accepts NO_EVENT_ID, USE_CONFIGURED, USE_TIMESTAMP
-    #                   event_stop_behavior: "NONE", # accepts NONE, SEND_EOS
-    #                   filecache_duration: 1,
-    #                   fragment_length: 1,
-    #                   input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
-    #                   num_retries: 1,
-    #                   restart_delay: 1,
-    #                   segmentation_mode: "USE_INPUT_SEGMENTATION", # accepts USE_INPUT_SEGMENTATION, USE_SEGMENT_DURATION
-    #                   send_delay_ms: 1,
-    #                   sparse_track_type: "NONE", # accepts NONE, SCTE_35, SCTE_35_WITHOUT_SEGMENTATION
-    #                   stream_manifest_behavior: "DO_NOT_SEND", # accepts DO_NOT_SEND, SEND
-    #                   timestamp_offset: "__string",
-    #                   timestamp_offset_mode: "USE_CONFIGURED_OFFSET", # accepts USE_CONFIGURED_OFFSET, USE_EVENT_START_DATE
-    #                 },
-    #                 multiplex_group_settings: {
-    #                 },
-    #                 rtmp_group_settings: {
-    #                   ad_markers: ["ON_CUE_POINT_SCTE35"], # accepts ON_CUE_POINT_SCTE35
-    #                   authentication_scheme: "AKAMAI", # accepts AKAMAI, COMMON
-    #                   cache_full_behavior: "DISCONNECT_IMMEDIATELY", # accepts DISCONNECT_IMMEDIATELY, WAIT_FOR_SERVER
-    #                   cache_length: 1,
-    #                   caption_data: "ALL", # accepts ALL, FIELD1_608, FIELD1_AND_FIELD2_608
-    #                   input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
-    #                   restart_delay: 1,
-    #                 },
-    #                 udp_group_settings: {
-    #                   input_loss_action: "DROP_PROGRAM", # accepts DROP_PROGRAM, DROP_TS, EMIT_PROGRAM
-    #                   timed_metadata_id_3_frame: "NONE", # accepts NONE, PRIV, TDRL
-    #                   timed_metadata_id_3_period: 1,
-    #                 },
-    #               },
-    #               outputs: [ # required
-    #                 {
-    #                   audio_description_names: ["__string"],
-    #                   caption_description_names: ["__string"],
-    #                   output_name: "__stringMin1Max255",
-    #                   output_settings: { # required
-    #                     archive_output_settings: {
-    #                       container_settings: { # required
-    #                         m2ts_settings: {
-    #                           absent_input_audio_behavior: "DROP", # accepts DROP, ENCODE_SILENCE
-    #                           arib: "DISABLED", # accepts DISABLED, ENABLED
-    #                           arib_captions_pid: "__string",
-    #                           arib_captions_pid_control: "AUTO", # accepts AUTO, USE_CONFIGURED
-    #                           audio_buffer_model: "ATSC", # accepts ATSC, DVB
-    #                           audio_frames_per_pes: 1,
-    #                           audio_pids: "__string",
-    #                           audio_stream_type: "ATSC", # accepts ATSC, DVB
-    #                           bitrate: 1,
-    #                           buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
-    #                           cc_descriptor: "DISABLED", # accepts DISABLED, ENABLED
-    #                           dvb_nit_settings: {
-    #                             network_id: 1, # required
-    #                             network_name: "__stringMin1Max256", # required
-    #                             rep_interval: 1,
-    #                           },
-    #                           dvb_sdt_settings: {
-    #                             output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
-    #                             rep_interval: 1,
-    #                             service_name: "__stringMin1Max256",
-    #                             service_provider_name: "__stringMin1Max256",
-    #                           },
-    #                           dvb_sub_pids: "__string",
-    #                           dvb_tdt_settings: {
-    #                             rep_interval: 1,
-    #                           },
-    #                           dvb_teletext_pid: "__string",
-    #                           ebif: "NONE", # accepts NONE, PASSTHROUGH
-    #                           ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS", # accepts VIDEO_AND_FIXED_INTERVALS, VIDEO_INTERVAL
-    #                           ebp_lookahead_ms: 1,
-    #                           ebp_placement: "VIDEO_AND_AUDIO_PIDS", # accepts VIDEO_AND_AUDIO_PIDS, VIDEO_PID
-    #                           ecm_pid: "__string",
-    #                           es_rate_in_pes: "EXCLUDE", # accepts EXCLUDE, INCLUDE
-    #                           etv_platform_pid: "__string",
-    #                           etv_signal_pid: "__string",
-    #                           fragment_time: 1.0,
-    #                           klv: "NONE", # accepts NONE, PASSTHROUGH
-    #                           klv_data_pids: "__string",
-    #                           nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                           null_packet_bitrate: 1.0,
-    #                           pat_interval: 1,
-    #                           pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
-    #                           pcr_period: 1,
-    #                           pcr_pid: "__string",
-    #                           pmt_interval: 1,
-    #                           pmt_pid: "__string",
-    #                           program_num: 1,
-    #                           rate_mode: "CBR", # accepts CBR, VBR
-    #                           scte_27_pids: "__string",
-    #                           scte_35_control: "NONE", # accepts NONE, PASSTHROUGH
-    #                           scte_35_pid: "__string",
-    #                           segmentation_markers: "EBP", # accepts EBP, EBP_LEGACY, NONE, PSI_SEGSTART, RAI_ADAPT, RAI_SEGSTART
-    #                           segmentation_style: "MAINTAIN_CADENCE", # accepts MAINTAIN_CADENCE, RESET_CADENCE
-    #                           segmentation_time: 1.0,
-    #                           timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                           timed_metadata_pid: "__string",
-    #                           transport_stream_id: 1,
-    #                           video_pid: "__string",
-    #                         },
-    #                         raw_settings: {
-    #                         },
-    #                       },
-    #                       extension: "__string",
-    #                       name_modifier: "__string",
-    #                     },
-    #                     frame_capture_output_settings: {
-    #                       name_modifier: "__string",
-    #                     },
-    #                     hls_output_settings: {
-    #                       h265_packaging_type: "HEV1", # accepts HEV1, HVC1
-    #                       hls_settings: { # required
-    #                         audio_only_hls_settings: {
-    #                           audio_group_id: "__string",
-    #                           audio_only_image: {
-    #                             password_param: "__string",
-    #                             uri: "__stringMax2048", # required
-    #                             username: "__string",
-    #                           },
-    #                           audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT", # accepts ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
-    #                           segment_type: "AAC", # accepts AAC, FMP4
-    #                         },
-    #                         fmp_4_hls_settings: {
-    #                           audio_rendition_sets: "__string",
-    #                           nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                           timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                         },
-    #                         frame_capture_hls_settings: {
-    #                         },
-    #                         standard_hls_settings: {
-    #                           audio_rendition_sets: "__string",
-    #                           m3u_8_settings: { # required
-    #                             audio_frames_per_pes: 1,
-    #                             audio_pids: "__string",
-    #                             ecm_pid: "__string",
-    #                             nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                             pat_interval: 1,
-    #                             pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
-    #                             pcr_period: 1,
-    #                             pcr_pid: "__string",
-    #                             pmt_interval: 1,
-    #                             pmt_pid: "__string",
-    #                             program_num: 1,
-    #                             scte_35_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                             scte_35_pid: "__string",
-    #                             timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                             timed_metadata_pid: "__string",
-    #                             transport_stream_id: 1,
-    #                             video_pid: "__string",
-    #                           },
-    #                         },
-    #                       },
-    #                       name_modifier: "__stringMin1",
-    #                       segment_modifier: "__string",
-    #                     },
-    #                     media_package_output_settings: {
-    #                     },
-    #                     ms_smooth_output_settings: {
-    #                       h265_packaging_type: "HEV1", # accepts HEV1, HVC1
-    #                       name_modifier: "__string",
-    #                     },
-    #                     multiplex_output_settings: {
-    #                       destination: { # required
-    #                         destination_ref_id: "__string",
-    #                       },
-    #                     },
-    #                     rtmp_output_settings: {
-    #                       certificate_mode: "SELF_SIGNED", # accepts SELF_SIGNED, VERIFY_AUTHENTICITY
-    #                       connection_retry_interval: 1,
-    #                       destination: { # required
-    #                         destination_ref_id: "__string",
-    #                       },
-    #                       num_retries: 1,
-    #                     },
-    #                     udp_output_settings: {
-    #                       buffer_msec: 1,
-    #                       container_settings: { # required
-    #                         m2ts_settings: {
-    #                           absent_input_audio_behavior: "DROP", # accepts DROP, ENCODE_SILENCE
-    #                           arib: "DISABLED", # accepts DISABLED, ENABLED
-    #                           arib_captions_pid: "__string",
-    #                           arib_captions_pid_control: "AUTO", # accepts AUTO, USE_CONFIGURED
-    #                           audio_buffer_model: "ATSC", # accepts ATSC, DVB
-    #                           audio_frames_per_pes: 1,
-    #                           audio_pids: "__string",
-    #                           audio_stream_type: "ATSC", # accepts ATSC, DVB
-    #                           bitrate: 1,
-    #                           buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
-    #                           cc_descriptor: "DISABLED", # accepts DISABLED, ENABLED
-    #                           dvb_nit_settings: {
-    #                             network_id: 1, # required
-    #                             network_name: "__stringMin1Max256", # required
-    #                             rep_interval: 1,
-    #                           },
-    #                           dvb_sdt_settings: {
-    #                             output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
-    #                             rep_interval: 1,
-    #                             service_name: "__stringMin1Max256",
-    #                             service_provider_name: "__stringMin1Max256",
-    #                           },
-    #                           dvb_sub_pids: "__string",
-    #                           dvb_tdt_settings: {
-    #                             rep_interval: 1,
-    #                           },
-    #                           dvb_teletext_pid: "__string",
-    #                           ebif: "NONE", # accepts NONE, PASSTHROUGH
-    #                           ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS", # accepts VIDEO_AND_FIXED_INTERVALS, VIDEO_INTERVAL
-    #                           ebp_lookahead_ms: 1,
-    #                           ebp_placement: "VIDEO_AND_AUDIO_PIDS", # accepts VIDEO_AND_AUDIO_PIDS, VIDEO_PID
-    #                           ecm_pid: "__string",
-    #                           es_rate_in_pes: "EXCLUDE", # accepts EXCLUDE, INCLUDE
-    #                           etv_platform_pid: "__string",
-    #                           etv_signal_pid: "__string",
-    #                           fragment_time: 1.0,
-    #                           klv: "NONE", # accepts NONE, PASSTHROUGH
-    #                           klv_data_pids: "__string",
-    #                           nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                           null_packet_bitrate: 1.0,
-    #                           pat_interval: 1,
-    #                           pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
-    #                           pcr_period: 1,
-    #                           pcr_pid: "__string",
-    #                           pmt_interval: 1,
-    #                           pmt_pid: "__string",
-    #                           program_num: 1,
-    #                           rate_mode: "CBR", # accepts CBR, VBR
-    #                           scte_27_pids: "__string",
-    #                           scte_35_control: "NONE", # accepts NONE, PASSTHROUGH
-    #                           scte_35_pid: "__string",
-    #                           segmentation_markers: "EBP", # accepts EBP, EBP_LEGACY, NONE, PSI_SEGSTART, RAI_ADAPT, RAI_SEGSTART
-    #                           segmentation_style: "MAINTAIN_CADENCE", # accepts MAINTAIN_CADENCE, RESET_CADENCE
-    #                           segmentation_time: 1.0,
-    #                           timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                           timed_metadata_pid: "__string",
-    #                           transport_stream_id: 1,
-    #                           video_pid: "__string",
-    #                         },
-    #                       },
-    #                       destination: { # required
-    #                         destination_ref_id: "__string",
-    #                       },
-    #                       fec_output_settings: {
-    #                         column_depth: 1,
-    #                         include_fec: "COLUMN", # accepts COLUMN, COLUMN_AND_ROW
-    #                         row_length: 1,
-    #                       },
-    #                     },
-    #                   },
-    #                   video_description_name: "__string",
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #           timecode_config: { # required
-    #             source: "EMBEDDED", # required, accepts EMBEDDED, SYSTEMCLOCK, ZEROBASED
-    #             sync_threshold: 1,
-    #           },
-    #           video_descriptions: [ # required
-    #             {
-    #               codec_settings: {
-    #                 frame_capture_settings: {
-    #                   capture_interval: 1,
-    #                   capture_interval_units: "MILLISECONDS", # accepts MILLISECONDS, SECONDS
-    #                 },
-    #                 h264_settings: {
-    #                   adaptive_quantization: "AUTO", # accepts AUTO, HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
-    #                   afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
-    #                   bitrate: 1,
-    #                   buf_fill_pct: 1,
-    #                   buf_size: 1,
-    #                   color_metadata: "IGNORE", # accepts IGNORE, INSERT
-    #                   color_space_settings: {
-    #                     color_space_passthrough_settings: {
-    #                     },
-    #                     rec_601_settings: {
-    #                     },
-    #                     rec_709_settings: {
-    #                     },
-    #                   },
-    #                   entropy_encoding: "CABAC", # accepts CABAC, CAVLC
-    #                   filter_settings: {
-    #                     temporal_filter_settings: {
-    #                       post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
-    #                       strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16
-    #                     },
-    #                   },
-    #                   fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
-    #                   flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
-    #                   force_field_pictures: "DISABLED", # accepts DISABLED, ENABLED
-    #                   framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                   framerate_denominator: 1,
-    #                   framerate_numerator: 1,
-    #                   gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
-    #                   gop_closed_cadence: 1,
-    #                   gop_num_b_frames: 1,
-    #                   gop_size: 1.0,
-    #                   gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
-    #                   level: "H264_LEVEL_1", # accepts H264_LEVEL_1, H264_LEVEL_1_1, H264_LEVEL_1_2, H264_LEVEL_1_3, H264_LEVEL_2, H264_LEVEL_2_1, H264_LEVEL_2_2, H264_LEVEL_3, H264_LEVEL_3_1, H264_LEVEL_3_2, H264_LEVEL_4, H264_LEVEL_4_1, H264_LEVEL_4_2, H264_LEVEL_5, H264_LEVEL_5_1, H264_LEVEL_5_2, H264_LEVEL_AUTO
-    #                   look_ahead_rate_control: "HIGH", # accepts HIGH, LOW, MEDIUM
-    #                   max_bitrate: 1,
-    #                   min_i_interval: 1,
-    #                   num_ref_frames: 1,
-    #                   par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                   par_denominator: 1,
-    #                   par_numerator: 1,
-    #                   profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
-    #                   quality_level: "ENHANCED_QUALITY", # accepts ENHANCED_QUALITY, STANDARD_QUALITY
-    #                   qvbr_quality_level: 1,
-    #                   rate_control_mode: "CBR", # accepts CBR, MULTIPLEX, QVBR, VBR
-    #                   scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
-    #                   scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
-    #                   slices: 1,
-    #                   softness: 1,
-    #                   spatial_aq: "DISABLED", # accepts DISABLED, ENABLED
-    #                   subgop_length: "DYNAMIC", # accepts DYNAMIC, FIXED
-    #                   syntax: "DEFAULT", # accepts DEFAULT, RP2027
-    #                   temporal_aq: "DISABLED", # accepts DISABLED, ENABLED
-    #                   timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
-    #                 },
-    #                 h265_settings: {
-    #                   adaptive_quantization: "AUTO", # accepts AUTO, HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
-    #                   afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
-    #                   alternative_transfer_function: "INSERT", # accepts INSERT, OMIT
-    #                   bitrate: 1,
-    #                   buf_size: 1,
-    #                   color_metadata: "IGNORE", # accepts IGNORE, INSERT
-    #                   color_space_settings: {
-    #                     color_space_passthrough_settings: {
-    #                     },
-    #                     dolby_vision_81_settings: {
-    #                     },
-    #                     hdr_10_settings: {
-    #                       max_cll: 1,
-    #                       max_fall: 1,
-    #                     },
-    #                     rec_601_settings: {
-    #                     },
-    #                     rec_709_settings: {
-    #                     },
-    #                   },
-    #                   filter_settings: {
-    #                     temporal_filter_settings: {
-    #                       post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
-    #                       strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16
-    #                     },
-    #                   },
-    #                   fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
-    #                   flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
-    #                   framerate_denominator: 1, # required
-    #                   framerate_numerator: 1, # required
-    #                   gop_closed_cadence: 1,
-    #                   gop_size: 1.0,
-    #                   gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
-    #                   level: "H265_LEVEL_1", # accepts H265_LEVEL_1, H265_LEVEL_2, H265_LEVEL_2_1, H265_LEVEL_3, H265_LEVEL_3_1, H265_LEVEL_4, H265_LEVEL_4_1, H265_LEVEL_5, H265_LEVEL_5_1, H265_LEVEL_5_2, H265_LEVEL_6, H265_LEVEL_6_1, H265_LEVEL_6_2, H265_LEVEL_AUTO
-    #                   look_ahead_rate_control: "HIGH", # accepts HIGH, LOW, MEDIUM
-    #                   max_bitrate: 1,
-    #                   min_i_interval: 1,
-    #                   par_denominator: 1,
-    #                   par_numerator: 1,
-    #                   profile: "MAIN", # accepts MAIN, MAIN_10BIT
-    #                   qvbr_quality_level: 1,
-    #                   rate_control_mode: "CBR", # accepts CBR, MULTIPLEX, QVBR
-    #                   scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
-    #                   scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
-    #                   slices: 1,
-    #                   tier: "HIGH", # accepts HIGH, MAIN
-    #                   timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
-    #                 },
-    #                 mpeg_2_settings: {
-    #                   adaptive_quantization: "AUTO", # accepts AUTO, HIGH, LOW, MEDIUM, OFF
-    #                   afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
-    #                   color_metadata: "IGNORE", # accepts IGNORE, INSERT
-    #                   color_space: "AUTO", # accepts AUTO, PASSTHROUGH
-    #                   display_aspect_ratio: "DISPLAYRATIO16X9", # accepts DISPLAYRATIO16X9, DISPLAYRATIO4X3
-    #                   filter_settings: {
-    #                     temporal_filter_settings: {
-    #                       post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
-    #                       strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16
-    #                     },
-    #                   },
-    #                   fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
-    #                   framerate_denominator: 1, # required
-    #                   framerate_numerator: 1, # required
-    #                   gop_closed_cadence: 1,
-    #                   gop_num_b_frames: 1,
-    #                   gop_size: 1.0,
-    #                   gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
-    #                   scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
-    #                   subgop_length: "DYNAMIC", # accepts DYNAMIC, FIXED
-    #                   timecode_insertion: "DISABLED", # accepts DISABLED, GOP_TIMECODE
-    #                 },
-    #               },
-    #               height: 1,
-    #               name: "__string", # required
-    #               respond_to_afd: "NONE", # accepts NONE, PASSTHROUGH, RESPOND
-    #               scaling_behavior: "DEFAULT", # accepts DEFAULT, STRETCH_TO_OUTPUT
-    #               sharpness: 1,
-    #               width: 1,
-    #             },
-    #           ],
-    #         },
-    #         input_attachments: [
-    #           {
-    #             automatic_input_failover_settings: {
-    #               error_clear_time_msec: 1,
-    #               failover_conditions: [
-    #                 {
-    #                   failover_condition_settings: {
-    #                     audio_silence_settings: {
-    #                       audio_selector_name: "__string", # required
-    #                       audio_silence_threshold_msec: 1,
-    #                     },
-    #                     input_loss_settings: {
-    #                       input_loss_threshold_msec: 1,
-    #                     },
-    #                     video_black_settings: {
-    #                       black_detect_threshold: 1.0,
-    #                       video_black_threshold_msec: 1,
-    #                     },
-    #                   },
-    #                 },
-    #               ],
-    #               input_preference: "EQUAL_INPUT_PREFERENCE", # accepts EQUAL_INPUT_PREFERENCE, PRIMARY_INPUT_PREFERRED
-    #               secondary_input_id: "__string", # required
-    #             },
-    #             input_attachment_name: "__string",
-    #             input_id: "__string",
-    #             input_settings: {
-    #               audio_selectors: [
-    #                 {
-    #                   name: "__stringMin1", # required
-    #                   selector_settings: {
-    #                     audio_hls_rendition_selection: {
-    #                       group_id: "__stringMin1", # required
-    #                       name: "__stringMin1", # required
-    #                     },
-    #                     audio_language_selection: {
-    #                       language_code: "__string", # required
-    #                       language_selection_policy: "LOOSE", # accepts LOOSE, STRICT
-    #                     },
-    #                     audio_pid_selection: {
-    #                       pid: 1, # required
-    #                     },
-    #                     audio_track_selection: {
-    #                       tracks: [ # required
-    #                         {
-    #                           track: 1, # required
-    #                         },
-    #                       ],
-    #                     },
-    #                   },
-    #                 },
-    #               ],
-    #               caption_selectors: [
-    #                 {
-    #                   language_code: "__string",
-    #                   name: "__stringMin1", # required
-    #                   selector_settings: {
-    #                     ancillary_source_settings: {
-    #                       source_ancillary_channel_number: 1,
-    #                     },
-    #                     arib_source_settings: {
-    #                     },
-    #                     dvb_sub_source_settings: {
-    #                       ocr_language: "DEU", # accepts DEU, ENG, FRA, NLD, POR, SPA
-    #                       pid: 1,
-    #                     },
-    #                     embedded_source_settings: {
-    #                       convert_608_to_708: "DISABLED", # accepts DISABLED, UPCONVERT
-    #                       scte_20_detection: "AUTO", # accepts AUTO, OFF
-    #                       source_608_channel_number: 1,
-    #                       source_608_track_number: 1,
-    #                     },
-    #                     scte_20_source_settings: {
-    #                       convert_608_to_708: "DISABLED", # accepts DISABLED, UPCONVERT
-    #                       source_608_channel_number: 1,
-    #                     },
-    #                     scte_27_source_settings: {
-    #                       ocr_language: "DEU", # accepts DEU, ENG, FRA, NLD, POR, SPA
-    #                       pid: 1,
-    #                     },
-    #                     teletext_source_settings: {
-    #                       output_rectangle: {
-    #                         height: 1.0, # required
-    #                         left_offset: 1.0, # required
-    #                         top_offset: 1.0, # required
-    #                         width: 1.0, # required
-    #                       },
-    #                       page_number: "__string",
-    #                     },
-    #                   },
-    #                 },
-    #               ],
-    #               deblock_filter: "DISABLED", # accepts DISABLED, ENABLED
-    #               denoise_filter: "DISABLED", # accepts DISABLED, ENABLED
-    #               filter_strength: 1,
-    #               input_filter: "AUTO", # accepts AUTO, DISABLED, FORCED
-    #               network_input_settings: {
-    #                 hls_input_settings: {
-    #                   bandwidth: 1,
-    #                   buffer_segments: 1,
-    #                   retries: 1,
-    #                   retry_interval: 1,
-    #                   scte_35_source: "MANIFEST", # accepts MANIFEST, SEGMENTS
-    #                 },
-    #                 server_validation: "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", # accepts CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME, CHECK_CRYPTOGRAPHY_ONLY
-    #               },
-    #               scte_35_pid: 1,
-    #               smpte_2038_data_preference: "IGNORE", # accepts IGNORE, PREFER
-    #               source_end_behavior: "CONTINUE", # accepts CONTINUE, LOOP
-    #               video_selector: {
-    #                 color_space: "FOLLOW", # accepts FOLLOW, HDR10, HLG_2020, REC_601, REC_709
-    #                 color_space_settings: {
-    #                   hdr_10_settings: {
-    #                     max_cll: 1,
-    #                     max_fall: 1,
-    #                   },
-    #                 },
-    #                 color_space_usage: "FALLBACK", # accepts FALLBACK, FORCE
-    #                 selector_settings: {
-    #                   video_selector_pid: {
-    #                     pid: 1,
-    #                   },
-    #                   video_selector_program_id: {
-    #                     program_id: 1,
-    #                   },
-    #                 },
-    #               },
-    #             },
-    #           },
-    #         ],
-    #         input_specification: {
-    #           codec: "MPEG2", # accepts MPEG2, AVC, HEVC
-    #           maximum_bitrate: "MAX_10_MBPS", # accepts MAX_10_MBPS, MAX_20_MBPS, MAX_50_MBPS
-    #           resolution: "SD", # accepts SD, HD, UHD
-    #         },
-    #         log_level: "ERROR", # accepts ERROR, WARNING, INFO, DEBUG, DISABLED
-    #         maintenance: {
-    #           maintenance_day: "MONDAY", # accepts MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
-    #           maintenance_start_time: "__stringPattern010920300",
-    #         },
-    #         name: "__string",
-    #         request_id: "__string",
-    #         reserved: "__string",
-    #         role_arn: "__string",
-    #         tags: {
-    #           "__string" => "__string",
-    #         },
-    #         vpc: {
-    #           public_address_allocation_ids: ["__string"],
-    #           security_group_ids: ["__string"],
-    #           subnet_ids: ["__string"], # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] cdi_input_specification
     #   @return [Types::CdiInputSpecification]
     #
@@ -4453,46 +2188,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateInputRequest
-    #   data as a hash:
-    #
-    #       {
-    #         destinations: [
-    #           {
-    #             stream_name: "__string",
-    #           },
-    #         ],
-    #         input_devices: [
-    #           {
-    #             id: "__string",
-    #           },
-    #         ],
-    #         input_security_groups: ["__string"],
-    #         media_connect_flows: [
-    #           {
-    #             flow_arn: "__string",
-    #           },
-    #         ],
-    #         name: "__string",
-    #         request_id: "__string",
-    #         role_arn: "__string",
-    #         sources: [
-    #           {
-    #             password_param: "__string",
-    #             url: "__string",
-    #             username: "__string",
-    #           },
-    #         ],
-    #         tags: {
-    #           "__string" => "__string",
-    #         },
-    #         type: "UDP_PUSH", # accepts UDP_PUSH, RTP_PUSH, RTMP_PUSH, RTMP_PULL, URL_PULL, MP4_FILE, MEDIACONNECT, INPUT_DEVICE, AWS_CDI, TS_FILE
-    #         vpc: {
-    #           security_group_ids: ["__string"],
-    #           subnet_ids: ["__string"], # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] destinations
     #   @return [Array<Types::InputDestinationRequest>]
     #
@@ -4574,20 +2269,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateInputSecurityGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         tags: {
-    #           "__string" => "__string",
-    #         },
-    #         whitelist_rules: [
-    #           {
-    #             cidr: "__string",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] tags
     #   @return [Hash<String,String>]
     #
@@ -4684,31 +2365,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateMultiplexProgramRequest
-    #   data as a hash:
-    #
-    #       {
-    #         multiplex_id: "__string", # required
-    #         multiplex_program_settings: { # required
-    #           preferred_channel_pipeline: "CURRENTLY_ACTIVE", # accepts CURRENTLY_ACTIVE, PIPELINE_0, PIPELINE_1
-    #           program_number: 1, # required
-    #           service_descriptor: {
-    #             provider_name: "__stringMax256", # required
-    #             service_name: "__stringMax256", # required
-    #           },
-    #           video_settings: {
-    #             constant_bitrate: 1,
-    #             statmux_settings: {
-    #               maximum_bitrate: 1,
-    #               minimum_bitrate: 1,
-    #               priority: 1,
-    #             },
-    #           },
-    #         },
-    #         program_name: "__string", # required
-    #         request_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] multiplex_id
     #   @return [String]
     #
@@ -4759,24 +2415,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateMultiplexRequest
-    #   data as a hash:
-    #
-    #       {
-    #         availability_zones: ["__string"], # required
-    #         multiplex_settings: { # required
-    #           maximum_video_buffer_delay_milliseconds: 1,
-    #           transport_stream_bitrate: 1, # required
-    #           transport_stream_id: 1, # required
-    #           transport_stream_reserved_bitrate: 1,
-    #         },
-    #         name: "__string", # required
-    #         request_id: "__string", # required
-    #         tags: {
-    #           "__string" => "__string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] availability_zones
     #   @return [Array<String>]
     #
@@ -4849,17 +2487,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreatePartnerInputRequest
-    #   data as a hash:
-    #
-    #       {
-    #         input_id: "__string", # required
-    #         request_id: "__string",
-    #         tags: {
-    #           "__string" => "__string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] input_id
     #   @return [String]
     #
@@ -4903,16 +2530,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateTagsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "__string", # required
-    #         tags: {
-    #           "__string" => "__string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   @return [String]
     #
@@ -4928,13 +2545,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteChannelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] channel_id
     #   @return [String]
     #
@@ -5030,13 +2640,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteInputRequest
-    #   data as a hash:
-    #
-    #       {
-    #         input_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] input_id
     #   @return [String]
     #
@@ -5052,13 +2655,6 @@ module Aws::MediaLive
     #
     class DeleteInputResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteInputSecurityGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         input_security_group_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] input_security_group_id
     #   @return [String]
     #
@@ -5074,14 +2670,6 @@ module Aws::MediaLive
     #
     class DeleteInputSecurityGroupResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteMultiplexProgramRequest
-    #   data as a hash:
-    #
-    #       {
-    #         multiplex_id: "__string", # required
-    #         program_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] multiplex_id
     #   @return [String]
     #
@@ -5126,13 +2714,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteMultiplexRequest
-    #   data as a hash:
-    #
-    #       {
-    #         multiplex_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] multiplex_id
     #   @return [String]
     #
@@ -5193,13 +2774,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteReservationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         reservation_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] reservation_id
     #   @return [String]
     #
@@ -5299,13 +2873,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteScheduleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] channel_id
     #   @return [String]
     #
@@ -5321,14 +2888,6 @@ module Aws::MediaLive
     #
     class DeleteScheduleResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteTagsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "__string", # required
-    #         tag_keys: ["__string"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   @return [String]
     #
@@ -5344,13 +2903,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeChannelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] channel_id
     #   @return [String]
     #
@@ -5446,13 +2998,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeInputDeviceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         input_device_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] input_device_id
     #   @return [String]
     #
@@ -5534,14 +3079,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeInputDeviceThumbnailRequest
-    #   data as a hash:
-    #
-    #       {
-    #         input_device_id: "__string", # required
-    #         accept: "image/jpeg", # required, accepts image/jpeg
-    #       }
-    #
     # @!attribute [rw] input_device_id
     #   @return [String]
     #
@@ -5584,13 +3121,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeInputRequest
-    #   data as a hash:
-    #
-    #       {
-    #         input_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] input_id
     #   @return [String]
     #
@@ -5681,13 +3211,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeInputSecurityGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         input_security_group_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] input_security_group_id
     #   @return [String]
     #
@@ -5730,14 +3253,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeMultiplexProgramRequest
-    #   data as a hash:
-    #
-    #       {
-    #         multiplex_id: "__string", # required
-    #         program_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] multiplex_id
     #   @return [String]
     #
@@ -5782,13 +3297,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeMultiplexRequest
-    #   data as a hash:
-    #
-    #       {
-    #         multiplex_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] multiplex_id
     #   @return [String]
     #
@@ -5849,13 +3357,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeOfferingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         offering_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] offering_id
     #   @return [String]
     #
@@ -5921,13 +3422,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeReservationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         reservation_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] reservation_id
     #   @return [String]
     #
@@ -6027,15 +3521,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeScheduleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_id: "__string", # required
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] channel_id
     #   @return [String]
     #
@@ -6072,22 +3557,11 @@ module Aws::MediaLive
 
     # Dolby Vision Profile 8.1 Settings
     #
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DolbyVision81Settings AWS API Documentation
     #
     class DolbyVision81Settings < Aws::EmptyStructure; end
 
     # DVB Network Information Table (NIT)
-    #
-    # @note When making an API call, you may pass DvbNitSettings
-    #   data as a hash:
-    #
-    #       {
-    #         network_id: 1, # required
-    #         network_name: "__stringMin1Max256", # required
-    #         rep_interval: 1,
-    #       }
     #
     # @!attribute [rw] network_id
     #   The numeric value placed in the Network Information Table (NIT).
@@ -6114,16 +3588,6 @@ module Aws::MediaLive
     end
 
     # DVB Service Description Table (SDT)
-    #
-    # @note When making an API call, you may pass DvbSdtSettings
-    #   data as a hash:
-    #
-    #       {
-    #         output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
-    #         rep_interval: 1,
-    #         service_name: "__stringMin1Max256",
-    #         service_provider_name: "__stringMin1Max256",
-    #       }
     #
     # @!attribute [rw] output_sdt
     #   Selects method of inserting SDT information into output stream. The
@@ -6163,33 +3627,6 @@ module Aws::MediaLive
     end
 
     # Dvb Sub Destination Settings
-    #
-    # @note When making an API call, you may pass DvbSubDestinationSettings
-    #   data as a hash:
-    #
-    #       {
-    #         alignment: "CENTERED", # accepts CENTERED, LEFT, SMART
-    #         background_color: "BLACK", # accepts BLACK, NONE, WHITE
-    #         background_opacity: 1,
-    #         font: {
-    #           password_param: "__string",
-    #           uri: "__stringMax2048", # required
-    #           username: "__string",
-    #         },
-    #         font_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
-    #         font_opacity: 1,
-    #         font_resolution: 1,
-    #         font_size: "__string",
-    #         outline_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
-    #         outline_size: 1,
-    #         shadow_color: "BLACK", # accepts BLACK, NONE, WHITE
-    #         shadow_opacity: 1,
-    #         shadow_x_offset: 1,
-    #         shadow_y_offset: 1,
-    #         teletext_grid_control: "FIXED", # accepts FIXED, SCALED
-    #         x_position: 1,
-    #         y_position: 1,
-    #       }
     #
     # @!attribute [rw] alignment
     #   If no explicit xPosition or yPosition is provided, setting alignment
@@ -6342,14 +3779,6 @@ module Aws::MediaLive
 
     # Dvb Sub Source Settings
     #
-    # @note When making an API call, you may pass DvbSubSourceSettings
-    #   data as a hash:
-    #
-    #       {
-    #         ocr_language: "DEU", # accepts DEU, ENG, FRA, NLD, POR, SPA
-    #         pid: 1,
-    #       }
-    #
     # @!attribute [rw] ocr_language
     #   If you will configure a WebVTT caption description that references
     #   this caption selector, use this field to provide the language to
@@ -6373,13 +3802,6 @@ module Aws::MediaLive
 
     # DVB Time and Date Table (SDT)
     #
-    # @note When making an API call, you may pass DvbTdtSettings
-    #   data as a hash:
-    #
-    #       {
-    #         rep_interval: 1,
-    #       }
-    #
     # @!attribute [rw] rep_interval
     #   The number of milliseconds between instances of this table in the
     #   output transport stream.
@@ -6394,19 +3816,6 @@ module Aws::MediaLive
     end
 
     # Eac3 Atmos Settings
-    #
-    # @note When making an API call, you may pass Eac3AtmosSettings
-    #   data as a hash:
-    #
-    #       {
-    #         bitrate: 1.0,
-    #         coding_mode: "CODING_MODE_5_1_4", # accepts CODING_MODE_5_1_4, CODING_MODE_7_1_4, CODING_MODE_9_1_6
-    #         dialnorm: 1,
-    #         drc_line: "FILM_LIGHT", # accepts FILM_LIGHT, FILM_STANDARD, MUSIC_LIGHT, MUSIC_STANDARD, NONE, SPEECH
-    #         drc_rf: "FILM_LIGHT", # accepts FILM_LIGHT, FILM_STANDARD, MUSIC_LIGHT, MUSIC_STANDARD, NONE, SPEECH
-    #         height_trim: 1.0,
-    #         surround_trim: 1.0,
-    #       }
     #
     # @!attribute [rw] bitrate
     #   Average bitrate in bits/second. Valid bitrates depend on the coding
@@ -6460,32 +3869,6 @@ module Aws::MediaLive
     end
 
     # Eac3 Settings
-    #
-    # @note When making an API call, you may pass Eac3Settings
-    #   data as a hash:
-    #
-    #       {
-    #         attenuation_control: "ATTENUATE_3_DB", # accepts ATTENUATE_3_DB, NONE
-    #         bitrate: 1.0,
-    #         bitstream_mode: "COMMENTARY", # accepts COMMENTARY, COMPLETE_MAIN, EMERGENCY, HEARING_IMPAIRED, VISUALLY_IMPAIRED
-    #         coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_2_0, CODING_MODE_3_2
-    #         dc_filter: "DISABLED", # accepts DISABLED, ENABLED
-    #         dialnorm: 1,
-    #         drc_line: "FILM_LIGHT", # accepts FILM_LIGHT, FILM_STANDARD, MUSIC_LIGHT, MUSIC_STANDARD, NONE, SPEECH
-    #         drc_rf: "FILM_LIGHT", # accepts FILM_LIGHT, FILM_STANDARD, MUSIC_LIGHT, MUSIC_STANDARD, NONE, SPEECH
-    #         lfe_control: "LFE", # accepts LFE, NO_LFE
-    #         lfe_filter: "DISABLED", # accepts DISABLED, ENABLED
-    #         lo_ro_center_mix_level: 1.0,
-    #         lo_ro_surround_mix_level: 1.0,
-    #         lt_rt_center_mix_level: 1.0,
-    #         lt_rt_surround_mix_level: 1.0,
-    #         metadata_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
-    #         passthrough_control: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, WHEN_POSSIBLE
-    #         phase_control: "NO_SHIFT", # accepts NO_SHIFT, SHIFT_90_DEGREES
-    #         stereo_downmix: "DPL2", # accepts DPL2, LO_RO, LT_RT, NOT_INDICATED
-    #         surround_ex_mode: "DISABLED", # accepts DISABLED, ENABLED, NOT_INDICATED
-    #         surround_mode: "DISABLED", # accepts DISABLED, ENABLED, NOT_INDICATED
-    #       }
     #
     # @!attribute [rw] attenuation_control
     #   When set to attenuate3Db, applies a 3 dB attenuation to the surround
@@ -6617,16 +4000,6 @@ module Aws::MediaLive
 
     # Ebu Tt DDestination Settings
     #
-    # @note When making an API call, you may pass EbuTtDDestinationSettings
-    #   data as a hash:
-    #
-    #       {
-    #         copyright_holder: "__stringMax1000",
-    #         fill_line_gap: "DISABLED", # accepts DISABLED, ENABLED
-    #         font_family: "__string",
-    #         style_control: "EXCLUDE", # accepts EXCLUDE, INCLUDE
-    #       }
-    #
     # @!attribute [rw] copyright_holder
     #   Complete this field if you want to include the name of the copyright
     #   holder in the copyright tag in the captions metadata.
@@ -6680,31 +4053,17 @@ module Aws::MediaLive
 
     # Embedded Destination Settings
     #
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/EmbeddedDestinationSettings AWS API Documentation
     #
     class EmbeddedDestinationSettings < Aws::EmptyStructure; end
 
     # Embedded Plus Scte20 Destination Settings
     #
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/EmbeddedPlusScte20DestinationSettings AWS API Documentation
     #
     class EmbeddedPlusScte20DestinationSettings < Aws::EmptyStructure; end
 
     # Embedded Source Settings
-    #
-    # @note When making an API call, you may pass EmbeddedSourceSettings
-    #   data as a hash:
-    #
-    #       {
-    #         convert_608_to_708: "DISABLED", # accepts DISABLED, UPCONVERT
-    #         scte_20_detection: "AUTO", # accepts AUTO, OFF
-    #         source_608_channel_number: 1,
-    #         source_608_track_number: 1,
-    #       }
     #
     # @!attribute [rw] convert_608_to_708
     #   If upconvert, 608 data is both passed through via the "608
@@ -6743,817 +4102,6 @@ module Aws::MediaLive
     class Empty < Aws::EmptyStructure; end
 
     # Encoder Settings
-    #
-    # @note When making an API call, you may pass EncoderSettings
-    #   data as a hash:
-    #
-    #       {
-    #         audio_descriptions: [ # required
-    #           {
-    #             audio_normalization_settings: {
-    #               algorithm: "ITU_1770_1", # accepts ITU_1770_1, ITU_1770_2
-    #               algorithm_control: "CORRECT_AUDIO", # accepts CORRECT_AUDIO
-    #               target_lkfs: 1.0,
-    #             },
-    #             audio_selector_name: "__string", # required
-    #             audio_type: "CLEAN_EFFECTS", # accepts CLEAN_EFFECTS, HEARING_IMPAIRED, UNDEFINED, VISUAL_IMPAIRED_COMMENTARY
-    #             audio_type_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
-    #             audio_watermarking_settings: {
-    #               nielsen_watermarks_settings: {
-    #                 nielsen_cbet_settings: {
-    #                   cbet_check_digit_string: "__stringMin2Max2", # required
-    #                   cbet_stepaside: "DISABLED", # required, accepts DISABLED, ENABLED
-    #                   csid: "__stringMin1Max7", # required
-    #                 },
-    #                 nielsen_distribution_type: "FINAL_DISTRIBUTOR", # accepts FINAL_DISTRIBUTOR, PROGRAM_CONTENT
-    #                 nielsen_naes_ii_nw_settings: {
-    #                   check_digit_string: "__stringMin2Max2", # required
-    #                   sid: 1.0, # required
-    #                 },
-    #               },
-    #             },
-    #             codec_settings: {
-    #               aac_settings: {
-    #                 bitrate: 1.0,
-    #                 coding_mode: "AD_RECEIVER_MIX", # accepts AD_RECEIVER_MIX, CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_5_1
-    #                 input_type: "BROADCASTER_MIXED_AD", # accepts BROADCASTER_MIXED_AD, NORMAL
-    #                 profile: "HEV1", # accepts HEV1, HEV2, LC
-    #                 rate_control_mode: "CBR", # accepts CBR, VBR
-    #                 raw_format: "LATM_LOAS", # accepts LATM_LOAS, NONE
-    #                 sample_rate: 1.0,
-    #                 spec: "MPEG2", # accepts MPEG2, MPEG4
-    #                 vbr_quality: "HIGH", # accepts HIGH, LOW, MEDIUM_HIGH, MEDIUM_LOW
-    #               },
-    #               ac_3_settings: {
-    #                 bitrate: 1.0,
-    #                 bitstream_mode: "COMMENTARY", # accepts COMMENTARY, COMPLETE_MAIN, DIALOGUE, EMERGENCY, HEARING_IMPAIRED, MUSIC_AND_EFFECTS, VISUALLY_IMPAIRED, VOICE_OVER
-    #                 coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_3_2_LFE
-    #                 dialnorm: 1,
-    #                 drc_profile: "FILM_STANDARD", # accepts FILM_STANDARD, NONE
-    #                 lfe_filter: "DISABLED", # accepts DISABLED, ENABLED
-    #                 metadata_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
-    #               },
-    #               eac_3_atmos_settings: {
-    #                 bitrate: 1.0,
-    #                 coding_mode: "CODING_MODE_5_1_4", # accepts CODING_MODE_5_1_4, CODING_MODE_7_1_4, CODING_MODE_9_1_6
-    #                 dialnorm: 1,
-    #                 drc_line: "FILM_LIGHT", # accepts FILM_LIGHT, FILM_STANDARD, MUSIC_LIGHT, MUSIC_STANDARD, NONE, SPEECH
-    #                 drc_rf: "FILM_LIGHT", # accepts FILM_LIGHT, FILM_STANDARD, MUSIC_LIGHT, MUSIC_STANDARD, NONE, SPEECH
-    #                 height_trim: 1.0,
-    #                 surround_trim: 1.0,
-    #               },
-    #               eac_3_settings: {
-    #                 attenuation_control: "ATTENUATE_3_DB", # accepts ATTENUATE_3_DB, NONE
-    #                 bitrate: 1.0,
-    #                 bitstream_mode: "COMMENTARY", # accepts COMMENTARY, COMPLETE_MAIN, EMERGENCY, HEARING_IMPAIRED, VISUALLY_IMPAIRED
-    #                 coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_2_0, CODING_MODE_3_2
-    #                 dc_filter: "DISABLED", # accepts DISABLED, ENABLED
-    #                 dialnorm: 1,
-    #                 drc_line: "FILM_LIGHT", # accepts FILM_LIGHT, FILM_STANDARD, MUSIC_LIGHT, MUSIC_STANDARD, NONE, SPEECH
-    #                 drc_rf: "FILM_LIGHT", # accepts FILM_LIGHT, FILM_STANDARD, MUSIC_LIGHT, MUSIC_STANDARD, NONE, SPEECH
-    #                 lfe_control: "LFE", # accepts LFE, NO_LFE
-    #                 lfe_filter: "DISABLED", # accepts DISABLED, ENABLED
-    #                 lo_ro_center_mix_level: 1.0,
-    #                 lo_ro_surround_mix_level: 1.0,
-    #                 lt_rt_center_mix_level: 1.0,
-    #                 lt_rt_surround_mix_level: 1.0,
-    #                 metadata_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
-    #                 passthrough_control: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, WHEN_POSSIBLE
-    #                 phase_control: "NO_SHIFT", # accepts NO_SHIFT, SHIFT_90_DEGREES
-    #                 stereo_downmix: "DPL2", # accepts DPL2, LO_RO, LT_RT, NOT_INDICATED
-    #                 surround_ex_mode: "DISABLED", # accepts DISABLED, ENABLED, NOT_INDICATED
-    #                 surround_mode: "DISABLED", # accepts DISABLED, ENABLED, NOT_INDICATED
-    #               },
-    #               mp_2_settings: {
-    #                 bitrate: 1.0,
-    #                 coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_2_0
-    #                 sample_rate: 1.0,
-    #               },
-    #               pass_through_settings: {
-    #               },
-    #               wav_settings: {
-    #                 bit_depth: 1.0,
-    #                 coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_2_0, CODING_MODE_4_0, CODING_MODE_8_0
-    #                 sample_rate: 1.0,
-    #               },
-    #             },
-    #             language_code: "__stringMin1Max35",
-    #             language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
-    #             name: "__stringMax255", # required
-    #             remix_settings: {
-    #               channel_mappings: [ # required
-    #                 {
-    #                   input_channel_levels: [ # required
-    #                     {
-    #                       gain: 1, # required
-    #                       input_channel: 1, # required
-    #                     },
-    #                   ],
-    #                   output_channel: 1, # required
-    #                 },
-    #               ],
-    #               channels_in: 1,
-    #               channels_out: 1,
-    #             },
-    #             stream_name: "__string",
-    #           },
-    #         ],
-    #         avail_blanking: {
-    #           avail_blanking_image: {
-    #             password_param: "__string",
-    #             uri: "__stringMax2048", # required
-    #             username: "__string",
-    #           },
-    #           state: "DISABLED", # accepts DISABLED, ENABLED
-    #         },
-    #         avail_configuration: {
-    #           avail_settings: {
-    #             esam: {
-    #               acquisition_point_id: "__stringMax256", # required
-    #               ad_avail_offset: 1,
-    #               password: "__string",
-    #               pois_endpoint: "__string", # required
-    #               username: "__string",
-    #               zone_identity: "__stringMax256",
-    #             },
-    #             scte_35_splice_insert: {
-    #               ad_avail_offset: 1,
-    #               no_regional_blackout_flag: "FOLLOW", # accepts FOLLOW, IGNORE
-    #               web_delivery_allowed_flag: "FOLLOW", # accepts FOLLOW, IGNORE
-    #             },
-    #             scte_35_time_signal_apos: {
-    #               ad_avail_offset: 1,
-    #               no_regional_blackout_flag: "FOLLOW", # accepts FOLLOW, IGNORE
-    #               web_delivery_allowed_flag: "FOLLOW", # accepts FOLLOW, IGNORE
-    #             },
-    #           },
-    #         },
-    #         blackout_slate: {
-    #           blackout_slate_image: {
-    #             password_param: "__string",
-    #             uri: "__stringMax2048", # required
-    #             username: "__string",
-    #           },
-    #           network_end_blackout: "DISABLED", # accepts DISABLED, ENABLED
-    #           network_end_blackout_image: {
-    #             password_param: "__string",
-    #             uri: "__stringMax2048", # required
-    #             username: "__string",
-    #           },
-    #           network_id: "__stringMin34Max34",
-    #           state: "DISABLED", # accepts DISABLED, ENABLED
-    #         },
-    #         caption_descriptions: [
-    #           {
-    #             accessibility: "DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES", # accepts DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES, IMPLEMENTS_ACCESSIBILITY_FEATURES
-    #             caption_selector_name: "__string", # required
-    #             destination_settings: {
-    #               arib_destination_settings: {
-    #               },
-    #               burn_in_destination_settings: {
-    #                 alignment: "CENTERED", # accepts CENTERED, LEFT, SMART
-    #                 background_color: "BLACK", # accepts BLACK, NONE, WHITE
-    #                 background_opacity: 1,
-    #                 font: {
-    #                   password_param: "__string",
-    #                   uri: "__stringMax2048", # required
-    #                   username: "__string",
-    #                 },
-    #                 font_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
-    #                 font_opacity: 1,
-    #                 font_resolution: 1,
-    #                 font_size: "__string",
-    #                 outline_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
-    #                 outline_size: 1,
-    #                 shadow_color: "BLACK", # accepts BLACK, NONE, WHITE
-    #                 shadow_opacity: 1,
-    #                 shadow_x_offset: 1,
-    #                 shadow_y_offset: 1,
-    #                 teletext_grid_control: "FIXED", # accepts FIXED, SCALED
-    #                 x_position: 1,
-    #                 y_position: 1,
-    #               },
-    #               dvb_sub_destination_settings: {
-    #                 alignment: "CENTERED", # accepts CENTERED, LEFT, SMART
-    #                 background_color: "BLACK", # accepts BLACK, NONE, WHITE
-    #                 background_opacity: 1,
-    #                 font: {
-    #                   password_param: "__string",
-    #                   uri: "__stringMax2048", # required
-    #                   username: "__string",
-    #                 },
-    #                 font_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
-    #                 font_opacity: 1,
-    #                 font_resolution: 1,
-    #                 font_size: "__string",
-    #                 outline_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
-    #                 outline_size: 1,
-    #                 shadow_color: "BLACK", # accepts BLACK, NONE, WHITE
-    #                 shadow_opacity: 1,
-    #                 shadow_x_offset: 1,
-    #                 shadow_y_offset: 1,
-    #                 teletext_grid_control: "FIXED", # accepts FIXED, SCALED
-    #                 x_position: 1,
-    #                 y_position: 1,
-    #               },
-    #               ebu_tt_d_destination_settings: {
-    #                 copyright_holder: "__stringMax1000",
-    #                 fill_line_gap: "DISABLED", # accepts DISABLED, ENABLED
-    #                 font_family: "__string",
-    #                 style_control: "EXCLUDE", # accepts EXCLUDE, INCLUDE
-    #               },
-    #               embedded_destination_settings: {
-    #               },
-    #               embedded_plus_scte_20_destination_settings: {
-    #               },
-    #               rtmp_caption_info_destination_settings: {
-    #               },
-    #               scte_20_plus_embedded_destination_settings: {
-    #               },
-    #               scte_27_destination_settings: {
-    #               },
-    #               smpte_tt_destination_settings: {
-    #               },
-    #               teletext_destination_settings: {
-    #               },
-    #               ttml_destination_settings: {
-    #                 style_control: "PASSTHROUGH", # accepts PASSTHROUGH, USE_CONFIGURED
-    #               },
-    #               webvtt_destination_settings: {
-    #                 style_control: "NO_STYLE_DATA", # accepts NO_STYLE_DATA, PASSTHROUGH
-    #               },
-    #             },
-    #             language_code: "__string",
-    #             language_description: "__string",
-    #             name: "__string", # required
-    #           },
-    #         ],
-    #         feature_activations: {
-    #           input_prepare_schedule_actions: "DISABLED", # accepts DISABLED, ENABLED
-    #         },
-    #         global_configuration: {
-    #           initial_audio_gain: 1,
-    #           input_end_action: "NONE", # accepts NONE, SWITCH_AND_LOOP_INPUTS
-    #           input_loss_behavior: {
-    #             black_frame_msec: 1,
-    #             input_loss_image_color: "__stringMin6Max6",
-    #             input_loss_image_slate: {
-    #               password_param: "__string",
-    #               uri: "__stringMax2048", # required
-    #               username: "__string",
-    #             },
-    #             input_loss_image_type: "COLOR", # accepts COLOR, SLATE
-    #             repeat_frame_msec: 1,
-    #           },
-    #           output_locking_mode: "EPOCH_LOCKING", # accepts EPOCH_LOCKING, PIPELINE_LOCKING
-    #           output_timing_source: "INPUT_CLOCK", # accepts INPUT_CLOCK, SYSTEM_CLOCK
-    #           support_low_framerate_inputs: "DISABLED", # accepts DISABLED, ENABLED
-    #         },
-    #         motion_graphics_configuration: {
-    #           motion_graphics_insertion: "DISABLED", # accepts DISABLED, ENABLED
-    #           motion_graphics_settings: { # required
-    #             html_motion_graphics_settings: {
-    #             },
-    #           },
-    #         },
-    #         nielsen_configuration: {
-    #           distributor_id: "__string",
-    #           nielsen_pcm_to_id_3_tagging: "DISABLED", # accepts DISABLED, ENABLED
-    #         },
-    #         output_groups: [ # required
-    #           {
-    #             name: "__stringMax32",
-    #             output_group_settings: { # required
-    #               archive_group_settings: {
-    #                 archive_cdn_settings: {
-    #                   archive_s3_settings: {
-    #                     canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
-    #                   },
-    #                 },
-    #                 destination: { # required
-    #                   destination_ref_id: "__string",
-    #                 },
-    #                 rollover_interval: 1,
-    #               },
-    #               frame_capture_group_settings: {
-    #                 destination: { # required
-    #                   destination_ref_id: "__string",
-    #                 },
-    #                 frame_capture_cdn_settings: {
-    #                   frame_capture_s3_settings: {
-    #                     canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
-    #                   },
-    #                 },
-    #               },
-    #               hls_group_settings: {
-    #                 ad_markers: ["ADOBE"], # accepts ADOBE, ELEMENTAL, ELEMENTAL_SCTE35
-    #                 base_url_content: "__string",
-    #                 base_url_content_1: "__string",
-    #                 base_url_manifest: "__string",
-    #                 base_url_manifest_1: "__string",
-    #                 caption_language_mappings: [
-    #                   {
-    #                     caption_channel: 1, # required
-    #                     language_code: "__stringMin3Max3", # required
-    #                     language_description: "__stringMin1", # required
-    #                   },
-    #                 ],
-    #                 caption_language_setting: "INSERT", # accepts INSERT, NONE, OMIT
-    #                 client_cache: "DISABLED", # accepts DISABLED, ENABLED
-    #                 codec_specification: "RFC_4281", # accepts RFC_4281, RFC_6381
-    #                 constant_iv: "__stringMin32Max32",
-    #                 destination: { # required
-    #                   destination_ref_id: "__string",
-    #                 },
-    #                 directory_structure: "SINGLE_DIRECTORY", # accepts SINGLE_DIRECTORY, SUBDIRECTORY_PER_STREAM
-    #                 discontinuity_tags: "INSERT", # accepts INSERT, NEVER_INSERT
-    #                 encryption_type: "AES128", # accepts AES128, SAMPLE_AES
-    #                 hls_cdn_settings: {
-    #                   hls_akamai_settings: {
-    #                     connection_retry_interval: 1,
-    #                     filecache_duration: 1,
-    #                     http_transfer_mode: "CHUNKED", # accepts CHUNKED, NON_CHUNKED
-    #                     num_retries: 1,
-    #                     restart_delay: 1,
-    #                     salt: "__string",
-    #                     token: "__string",
-    #                   },
-    #                   hls_basic_put_settings: {
-    #                     connection_retry_interval: 1,
-    #                     filecache_duration: 1,
-    #                     num_retries: 1,
-    #                     restart_delay: 1,
-    #                   },
-    #                   hls_media_store_settings: {
-    #                     connection_retry_interval: 1,
-    #                     filecache_duration: 1,
-    #                     media_store_storage_class: "TEMPORAL", # accepts TEMPORAL
-    #                     num_retries: 1,
-    #                     restart_delay: 1,
-    #                   },
-    #                   hls_s3_settings: {
-    #                     canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
-    #                   },
-    #                   hls_webdav_settings: {
-    #                     connection_retry_interval: 1,
-    #                     filecache_duration: 1,
-    #                     http_transfer_mode: "CHUNKED", # accepts CHUNKED, NON_CHUNKED
-    #                     num_retries: 1,
-    #                     restart_delay: 1,
-    #                   },
-    #                 },
-    #                 hls_id_3_segment_tagging: "DISABLED", # accepts DISABLED, ENABLED
-    #                 i_frame_only_playlists: "DISABLED", # accepts DISABLED, STANDARD
-    #                 incomplete_segment_behavior: "AUTO", # accepts AUTO, SUPPRESS
-    #                 index_n_segments: 1,
-    #                 input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
-    #                 iv_in_manifest: "EXCLUDE", # accepts EXCLUDE, INCLUDE
-    #                 iv_source: "EXPLICIT", # accepts EXPLICIT, FOLLOWS_SEGMENT_NUMBER
-    #                 keep_segments: 1,
-    #                 key_format: "__string",
-    #                 key_format_versions: "__string",
-    #                 key_provider_settings: {
-    #                   static_key_settings: {
-    #                     key_provider_server: {
-    #                       password_param: "__string",
-    #                       uri: "__stringMax2048", # required
-    #                       username: "__string",
-    #                     },
-    #                     static_key_value: "__stringMin32Max32", # required
-    #                   },
-    #                 },
-    #                 manifest_compression: "GZIP", # accepts GZIP, NONE
-    #                 manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
-    #                 min_segment_length: 1,
-    #                 mode: "LIVE", # accepts LIVE, VOD
-    #                 output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY, VARIANT_MANIFESTS_AND_SEGMENTS
-    #                 program_date_time: "EXCLUDE", # accepts EXCLUDE, INCLUDE
-    #                 program_date_time_clock: "INITIALIZE_FROM_OUTPUT_TIMECODE", # accepts INITIALIZE_FROM_OUTPUT_TIMECODE, SYSTEM_CLOCK
-    #                 program_date_time_period: 1,
-    #                 redundant_manifest: "DISABLED", # accepts DISABLED, ENABLED
-    #                 segment_length: 1,
-    #                 segmentation_mode: "USE_INPUT_SEGMENTATION", # accepts USE_INPUT_SEGMENTATION, USE_SEGMENT_DURATION
-    #                 segments_per_subdirectory: 1,
-    #                 stream_inf_resolution: "EXCLUDE", # accepts EXCLUDE, INCLUDE
-    #                 timed_metadata_id_3_frame: "NONE", # accepts NONE, PRIV, TDRL
-    #                 timed_metadata_id_3_period: 1,
-    #                 timestamp_delta_milliseconds: 1,
-    #                 ts_file_mode: "SEGMENTED_FILES", # accepts SEGMENTED_FILES, SINGLE_FILE
-    #               },
-    #               media_package_group_settings: {
-    #                 destination: { # required
-    #                   destination_ref_id: "__string",
-    #                 },
-    #               },
-    #               ms_smooth_group_settings: {
-    #                 acquisition_point_id: "__string",
-    #                 audio_only_timecode_control: "PASSTHROUGH", # accepts PASSTHROUGH, USE_CONFIGURED_CLOCK
-    #                 certificate_mode: "SELF_SIGNED", # accepts SELF_SIGNED, VERIFY_AUTHENTICITY
-    #                 connection_retry_interval: 1,
-    #                 destination: { # required
-    #                   destination_ref_id: "__string",
-    #                 },
-    #                 event_id: "__string",
-    #                 event_id_mode: "NO_EVENT_ID", # accepts NO_EVENT_ID, USE_CONFIGURED, USE_TIMESTAMP
-    #                 event_stop_behavior: "NONE", # accepts NONE, SEND_EOS
-    #                 filecache_duration: 1,
-    #                 fragment_length: 1,
-    #                 input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
-    #                 num_retries: 1,
-    #                 restart_delay: 1,
-    #                 segmentation_mode: "USE_INPUT_SEGMENTATION", # accepts USE_INPUT_SEGMENTATION, USE_SEGMENT_DURATION
-    #                 send_delay_ms: 1,
-    #                 sparse_track_type: "NONE", # accepts NONE, SCTE_35, SCTE_35_WITHOUT_SEGMENTATION
-    #                 stream_manifest_behavior: "DO_NOT_SEND", # accepts DO_NOT_SEND, SEND
-    #                 timestamp_offset: "__string",
-    #                 timestamp_offset_mode: "USE_CONFIGURED_OFFSET", # accepts USE_CONFIGURED_OFFSET, USE_EVENT_START_DATE
-    #               },
-    #               multiplex_group_settings: {
-    #               },
-    #               rtmp_group_settings: {
-    #                 ad_markers: ["ON_CUE_POINT_SCTE35"], # accepts ON_CUE_POINT_SCTE35
-    #                 authentication_scheme: "AKAMAI", # accepts AKAMAI, COMMON
-    #                 cache_full_behavior: "DISCONNECT_IMMEDIATELY", # accepts DISCONNECT_IMMEDIATELY, WAIT_FOR_SERVER
-    #                 cache_length: 1,
-    #                 caption_data: "ALL", # accepts ALL, FIELD1_608, FIELD1_AND_FIELD2_608
-    #                 input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
-    #                 restart_delay: 1,
-    #               },
-    #               udp_group_settings: {
-    #                 input_loss_action: "DROP_PROGRAM", # accepts DROP_PROGRAM, DROP_TS, EMIT_PROGRAM
-    #                 timed_metadata_id_3_frame: "NONE", # accepts NONE, PRIV, TDRL
-    #                 timed_metadata_id_3_period: 1,
-    #               },
-    #             },
-    #             outputs: [ # required
-    #               {
-    #                 audio_description_names: ["__string"],
-    #                 caption_description_names: ["__string"],
-    #                 output_name: "__stringMin1Max255",
-    #                 output_settings: { # required
-    #                   archive_output_settings: {
-    #                     container_settings: { # required
-    #                       m2ts_settings: {
-    #                         absent_input_audio_behavior: "DROP", # accepts DROP, ENCODE_SILENCE
-    #                         arib: "DISABLED", # accepts DISABLED, ENABLED
-    #                         arib_captions_pid: "__string",
-    #                         arib_captions_pid_control: "AUTO", # accepts AUTO, USE_CONFIGURED
-    #                         audio_buffer_model: "ATSC", # accepts ATSC, DVB
-    #                         audio_frames_per_pes: 1,
-    #                         audio_pids: "__string",
-    #                         audio_stream_type: "ATSC", # accepts ATSC, DVB
-    #                         bitrate: 1,
-    #                         buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
-    #                         cc_descriptor: "DISABLED", # accepts DISABLED, ENABLED
-    #                         dvb_nit_settings: {
-    #                           network_id: 1, # required
-    #                           network_name: "__stringMin1Max256", # required
-    #                           rep_interval: 1,
-    #                         },
-    #                         dvb_sdt_settings: {
-    #                           output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
-    #                           rep_interval: 1,
-    #                           service_name: "__stringMin1Max256",
-    #                           service_provider_name: "__stringMin1Max256",
-    #                         },
-    #                         dvb_sub_pids: "__string",
-    #                         dvb_tdt_settings: {
-    #                           rep_interval: 1,
-    #                         },
-    #                         dvb_teletext_pid: "__string",
-    #                         ebif: "NONE", # accepts NONE, PASSTHROUGH
-    #                         ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS", # accepts VIDEO_AND_FIXED_INTERVALS, VIDEO_INTERVAL
-    #                         ebp_lookahead_ms: 1,
-    #                         ebp_placement: "VIDEO_AND_AUDIO_PIDS", # accepts VIDEO_AND_AUDIO_PIDS, VIDEO_PID
-    #                         ecm_pid: "__string",
-    #                         es_rate_in_pes: "EXCLUDE", # accepts EXCLUDE, INCLUDE
-    #                         etv_platform_pid: "__string",
-    #                         etv_signal_pid: "__string",
-    #                         fragment_time: 1.0,
-    #                         klv: "NONE", # accepts NONE, PASSTHROUGH
-    #                         klv_data_pids: "__string",
-    #                         nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                         null_packet_bitrate: 1.0,
-    #                         pat_interval: 1,
-    #                         pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
-    #                         pcr_period: 1,
-    #                         pcr_pid: "__string",
-    #                         pmt_interval: 1,
-    #                         pmt_pid: "__string",
-    #                         program_num: 1,
-    #                         rate_mode: "CBR", # accepts CBR, VBR
-    #                         scte_27_pids: "__string",
-    #                         scte_35_control: "NONE", # accepts NONE, PASSTHROUGH
-    #                         scte_35_pid: "__string",
-    #                         segmentation_markers: "EBP", # accepts EBP, EBP_LEGACY, NONE, PSI_SEGSTART, RAI_ADAPT, RAI_SEGSTART
-    #                         segmentation_style: "MAINTAIN_CADENCE", # accepts MAINTAIN_CADENCE, RESET_CADENCE
-    #                         segmentation_time: 1.0,
-    #                         timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                         timed_metadata_pid: "__string",
-    #                         transport_stream_id: 1,
-    #                         video_pid: "__string",
-    #                       },
-    #                       raw_settings: {
-    #                       },
-    #                     },
-    #                     extension: "__string",
-    #                     name_modifier: "__string",
-    #                   },
-    #                   frame_capture_output_settings: {
-    #                     name_modifier: "__string",
-    #                   },
-    #                   hls_output_settings: {
-    #                     h265_packaging_type: "HEV1", # accepts HEV1, HVC1
-    #                     hls_settings: { # required
-    #                       audio_only_hls_settings: {
-    #                         audio_group_id: "__string",
-    #                         audio_only_image: {
-    #                           password_param: "__string",
-    #                           uri: "__stringMax2048", # required
-    #                           username: "__string",
-    #                         },
-    #                         audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT", # accepts ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
-    #                         segment_type: "AAC", # accepts AAC, FMP4
-    #                       },
-    #                       fmp_4_hls_settings: {
-    #                         audio_rendition_sets: "__string",
-    #                         nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                         timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                       },
-    #                       frame_capture_hls_settings: {
-    #                       },
-    #                       standard_hls_settings: {
-    #                         audio_rendition_sets: "__string",
-    #                         m3u_8_settings: { # required
-    #                           audio_frames_per_pes: 1,
-    #                           audio_pids: "__string",
-    #                           ecm_pid: "__string",
-    #                           nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                           pat_interval: 1,
-    #                           pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
-    #                           pcr_period: 1,
-    #                           pcr_pid: "__string",
-    #                           pmt_interval: 1,
-    #                           pmt_pid: "__string",
-    #                           program_num: 1,
-    #                           scte_35_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                           scte_35_pid: "__string",
-    #                           timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                           timed_metadata_pid: "__string",
-    #                           transport_stream_id: 1,
-    #                           video_pid: "__string",
-    #                         },
-    #                       },
-    #                     },
-    #                     name_modifier: "__stringMin1",
-    #                     segment_modifier: "__string",
-    #                   },
-    #                   media_package_output_settings: {
-    #                   },
-    #                   ms_smooth_output_settings: {
-    #                     h265_packaging_type: "HEV1", # accepts HEV1, HVC1
-    #                     name_modifier: "__string",
-    #                   },
-    #                   multiplex_output_settings: {
-    #                     destination: { # required
-    #                       destination_ref_id: "__string",
-    #                     },
-    #                   },
-    #                   rtmp_output_settings: {
-    #                     certificate_mode: "SELF_SIGNED", # accepts SELF_SIGNED, VERIFY_AUTHENTICITY
-    #                     connection_retry_interval: 1,
-    #                     destination: { # required
-    #                       destination_ref_id: "__string",
-    #                     },
-    #                     num_retries: 1,
-    #                   },
-    #                   udp_output_settings: {
-    #                     buffer_msec: 1,
-    #                     container_settings: { # required
-    #                       m2ts_settings: {
-    #                         absent_input_audio_behavior: "DROP", # accepts DROP, ENCODE_SILENCE
-    #                         arib: "DISABLED", # accepts DISABLED, ENABLED
-    #                         arib_captions_pid: "__string",
-    #                         arib_captions_pid_control: "AUTO", # accepts AUTO, USE_CONFIGURED
-    #                         audio_buffer_model: "ATSC", # accepts ATSC, DVB
-    #                         audio_frames_per_pes: 1,
-    #                         audio_pids: "__string",
-    #                         audio_stream_type: "ATSC", # accepts ATSC, DVB
-    #                         bitrate: 1,
-    #                         buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
-    #                         cc_descriptor: "DISABLED", # accepts DISABLED, ENABLED
-    #                         dvb_nit_settings: {
-    #                           network_id: 1, # required
-    #                           network_name: "__stringMin1Max256", # required
-    #                           rep_interval: 1,
-    #                         },
-    #                         dvb_sdt_settings: {
-    #                           output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
-    #                           rep_interval: 1,
-    #                           service_name: "__stringMin1Max256",
-    #                           service_provider_name: "__stringMin1Max256",
-    #                         },
-    #                         dvb_sub_pids: "__string",
-    #                         dvb_tdt_settings: {
-    #                           rep_interval: 1,
-    #                         },
-    #                         dvb_teletext_pid: "__string",
-    #                         ebif: "NONE", # accepts NONE, PASSTHROUGH
-    #                         ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS", # accepts VIDEO_AND_FIXED_INTERVALS, VIDEO_INTERVAL
-    #                         ebp_lookahead_ms: 1,
-    #                         ebp_placement: "VIDEO_AND_AUDIO_PIDS", # accepts VIDEO_AND_AUDIO_PIDS, VIDEO_PID
-    #                         ecm_pid: "__string",
-    #                         es_rate_in_pes: "EXCLUDE", # accepts EXCLUDE, INCLUDE
-    #                         etv_platform_pid: "__string",
-    #                         etv_signal_pid: "__string",
-    #                         fragment_time: 1.0,
-    #                         klv: "NONE", # accepts NONE, PASSTHROUGH
-    #                         klv_data_pids: "__string",
-    #                         nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                         null_packet_bitrate: 1.0,
-    #                         pat_interval: 1,
-    #                         pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
-    #                         pcr_period: 1,
-    #                         pcr_pid: "__string",
-    #                         pmt_interval: 1,
-    #                         pmt_pid: "__string",
-    #                         program_num: 1,
-    #                         rate_mode: "CBR", # accepts CBR, VBR
-    #                         scte_27_pids: "__string",
-    #                         scte_35_control: "NONE", # accepts NONE, PASSTHROUGH
-    #                         scte_35_pid: "__string",
-    #                         segmentation_markers: "EBP", # accepts EBP, EBP_LEGACY, NONE, PSI_SEGSTART, RAI_ADAPT, RAI_SEGSTART
-    #                         segmentation_style: "MAINTAIN_CADENCE", # accepts MAINTAIN_CADENCE, RESET_CADENCE
-    #                         segmentation_time: 1.0,
-    #                         timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                         timed_metadata_pid: "__string",
-    #                         transport_stream_id: 1,
-    #                         video_pid: "__string",
-    #                       },
-    #                     },
-    #                     destination: { # required
-    #                       destination_ref_id: "__string",
-    #                     },
-    #                     fec_output_settings: {
-    #                       column_depth: 1,
-    #                       include_fec: "COLUMN", # accepts COLUMN, COLUMN_AND_ROW
-    #                       row_length: 1,
-    #                     },
-    #                   },
-    #                 },
-    #                 video_description_name: "__string",
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         timecode_config: { # required
-    #           source: "EMBEDDED", # required, accepts EMBEDDED, SYSTEMCLOCK, ZEROBASED
-    #           sync_threshold: 1,
-    #         },
-    #         video_descriptions: [ # required
-    #           {
-    #             codec_settings: {
-    #               frame_capture_settings: {
-    #                 capture_interval: 1,
-    #                 capture_interval_units: "MILLISECONDS", # accepts MILLISECONDS, SECONDS
-    #               },
-    #               h264_settings: {
-    #                 adaptive_quantization: "AUTO", # accepts AUTO, HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
-    #                 afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
-    #                 bitrate: 1,
-    #                 buf_fill_pct: 1,
-    #                 buf_size: 1,
-    #                 color_metadata: "IGNORE", # accepts IGNORE, INSERT
-    #                 color_space_settings: {
-    #                   color_space_passthrough_settings: {
-    #                   },
-    #                   rec_601_settings: {
-    #                   },
-    #                   rec_709_settings: {
-    #                   },
-    #                 },
-    #                 entropy_encoding: "CABAC", # accepts CABAC, CAVLC
-    #                 filter_settings: {
-    #                   temporal_filter_settings: {
-    #                     post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
-    #                     strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16
-    #                   },
-    #                 },
-    #                 fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
-    #                 flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
-    #                 force_field_pictures: "DISABLED", # accepts DISABLED, ENABLED
-    #                 framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                 framerate_denominator: 1,
-    #                 framerate_numerator: 1,
-    #                 gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
-    #                 gop_closed_cadence: 1,
-    #                 gop_num_b_frames: 1,
-    #                 gop_size: 1.0,
-    #                 gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
-    #                 level: "H264_LEVEL_1", # accepts H264_LEVEL_1, H264_LEVEL_1_1, H264_LEVEL_1_2, H264_LEVEL_1_3, H264_LEVEL_2, H264_LEVEL_2_1, H264_LEVEL_2_2, H264_LEVEL_3, H264_LEVEL_3_1, H264_LEVEL_3_2, H264_LEVEL_4, H264_LEVEL_4_1, H264_LEVEL_4_2, H264_LEVEL_5, H264_LEVEL_5_1, H264_LEVEL_5_2, H264_LEVEL_AUTO
-    #                 look_ahead_rate_control: "HIGH", # accepts HIGH, LOW, MEDIUM
-    #                 max_bitrate: 1,
-    #                 min_i_interval: 1,
-    #                 num_ref_frames: 1,
-    #                 par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                 par_denominator: 1,
-    #                 par_numerator: 1,
-    #                 profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
-    #                 quality_level: "ENHANCED_QUALITY", # accepts ENHANCED_QUALITY, STANDARD_QUALITY
-    #                 qvbr_quality_level: 1,
-    #                 rate_control_mode: "CBR", # accepts CBR, MULTIPLEX, QVBR, VBR
-    #                 scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
-    #                 scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
-    #                 slices: 1,
-    #                 softness: 1,
-    #                 spatial_aq: "DISABLED", # accepts DISABLED, ENABLED
-    #                 subgop_length: "DYNAMIC", # accepts DYNAMIC, FIXED
-    #                 syntax: "DEFAULT", # accepts DEFAULT, RP2027
-    #                 temporal_aq: "DISABLED", # accepts DISABLED, ENABLED
-    #                 timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
-    #               },
-    #               h265_settings: {
-    #                 adaptive_quantization: "AUTO", # accepts AUTO, HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
-    #                 afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
-    #                 alternative_transfer_function: "INSERT", # accepts INSERT, OMIT
-    #                 bitrate: 1,
-    #                 buf_size: 1,
-    #                 color_metadata: "IGNORE", # accepts IGNORE, INSERT
-    #                 color_space_settings: {
-    #                   color_space_passthrough_settings: {
-    #                   },
-    #                   dolby_vision_81_settings: {
-    #                   },
-    #                   hdr_10_settings: {
-    #                     max_cll: 1,
-    #                     max_fall: 1,
-    #                   },
-    #                   rec_601_settings: {
-    #                   },
-    #                   rec_709_settings: {
-    #                   },
-    #                 },
-    #                 filter_settings: {
-    #                   temporal_filter_settings: {
-    #                     post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
-    #                     strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16
-    #                   },
-    #                 },
-    #                 fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
-    #                 flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
-    #                 framerate_denominator: 1, # required
-    #                 framerate_numerator: 1, # required
-    #                 gop_closed_cadence: 1,
-    #                 gop_size: 1.0,
-    #                 gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
-    #                 level: "H265_LEVEL_1", # accepts H265_LEVEL_1, H265_LEVEL_2, H265_LEVEL_2_1, H265_LEVEL_3, H265_LEVEL_3_1, H265_LEVEL_4, H265_LEVEL_4_1, H265_LEVEL_5, H265_LEVEL_5_1, H265_LEVEL_5_2, H265_LEVEL_6, H265_LEVEL_6_1, H265_LEVEL_6_2, H265_LEVEL_AUTO
-    #                 look_ahead_rate_control: "HIGH", # accepts HIGH, LOW, MEDIUM
-    #                 max_bitrate: 1,
-    #                 min_i_interval: 1,
-    #                 par_denominator: 1,
-    #                 par_numerator: 1,
-    #                 profile: "MAIN", # accepts MAIN, MAIN_10BIT
-    #                 qvbr_quality_level: 1,
-    #                 rate_control_mode: "CBR", # accepts CBR, MULTIPLEX, QVBR
-    #                 scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
-    #                 scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
-    #                 slices: 1,
-    #                 tier: "HIGH", # accepts HIGH, MAIN
-    #                 timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
-    #               },
-    #               mpeg_2_settings: {
-    #                 adaptive_quantization: "AUTO", # accepts AUTO, HIGH, LOW, MEDIUM, OFF
-    #                 afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
-    #                 color_metadata: "IGNORE", # accepts IGNORE, INSERT
-    #                 color_space: "AUTO", # accepts AUTO, PASSTHROUGH
-    #                 display_aspect_ratio: "DISPLAYRATIO16X9", # accepts DISPLAYRATIO16X9, DISPLAYRATIO4X3
-    #                 filter_settings: {
-    #                   temporal_filter_settings: {
-    #                     post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
-    #                     strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16
-    #                   },
-    #                 },
-    #                 fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
-    #                 framerate_denominator: 1, # required
-    #                 framerate_numerator: 1, # required
-    #                 gop_closed_cadence: 1,
-    #                 gop_num_b_frames: 1,
-    #                 gop_size: 1.0,
-    #                 gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
-    #                 scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
-    #                 subgop_length: "DYNAMIC", # accepts DYNAMIC, FIXED
-    #                 timecode_insertion: "DISABLED", # accepts DISABLED, GOP_TIMECODE
-    #               },
-    #             },
-    #             height: 1,
-    #             name: "__string", # required
-    #             respond_to_afd: "NONE", # accepts NONE, PASSTHROUGH, RESPOND
-    #             scaling_behavior: "DEFAULT", # accepts DEFAULT, STRETCH_TO_OUTPUT
-    #             sharpness: 1,
-    #             width: 1,
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] audio_descriptions
     #   @return [Array<Types::AudioDescription>]
@@ -7622,18 +4170,6 @@ module Aws::MediaLive
 
     # Esam
     #
-    # @note When making an API call, you may pass Esam
-    #   data as a hash:
-    #
-    #       {
-    #         acquisition_point_id: "__stringMax256", # required
-    #         ad_avail_offset: 1,
-    #         password: "__string",
-    #         pois_endpoint: "__string", # required
-    #         username: "__string",
-    #         zone_identity: "__stringMax256",
-    #       }
-    #
     # @!attribute [rw] acquisition_point_id
     #   Sent as acquisitionPointIdentity to identify the MediaLive channel
     #   to the POIS.
@@ -7683,25 +4219,6 @@ module Aws::MediaLive
     # Failover Condition settings. There can be multiple failover conditions
     # inside AutomaticInputFailoverSettings.
     #
-    # @note When making an API call, you may pass FailoverCondition
-    #   data as a hash:
-    #
-    #       {
-    #         failover_condition_settings: {
-    #           audio_silence_settings: {
-    #             audio_selector_name: "__string", # required
-    #             audio_silence_threshold_msec: 1,
-    #           },
-    #           input_loss_settings: {
-    #             input_loss_threshold_msec: 1,
-    #           },
-    #           video_black_settings: {
-    #             black_detect_threshold: 1.0,
-    #             video_black_threshold_msec: 1,
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] failover_condition_settings
     #   Failover condition type-specific settings.
     #   @return [Types::FailoverConditionSettings]
@@ -7715,23 +4232,6 @@ module Aws::MediaLive
     end
 
     # Settings for one failover condition.
-    #
-    # @note When making an API call, you may pass FailoverConditionSettings
-    #   data as a hash:
-    #
-    #       {
-    #         audio_silence_settings: {
-    #           audio_selector_name: "__string", # required
-    #           audio_silence_threshold_msec: 1,
-    #         },
-    #         input_loss_settings: {
-    #           input_loss_threshold_msec: 1,
-    #         },
-    #         video_black_settings: {
-    #           black_detect_threshold: 1.0,
-    #           video_black_threshold_msec: 1,
-    #         },
-    #       }
     #
     # @!attribute [rw] audio_silence_settings
     #   MediaLive will perform a failover if the specified audio selector is
@@ -7760,13 +4260,6 @@ module Aws::MediaLive
 
     # Feature Activations
     #
-    # @note When making an API call, you may pass FeatureActivations
-    #   data as a hash:
-    #
-    #       {
-    #         input_prepare_schedule_actions: "DISABLED", # accepts DISABLED, ENABLED
-    #       }
-    #
     # @!attribute [rw] input_prepare_schedule_actions
     #   Enables the Input Prepare feature. You can create Input Prepare
     #   actions in the schedule only if this feature is enabled. If you
@@ -7783,15 +4276,6 @@ module Aws::MediaLive
     end
 
     # Fec Output Settings
-    #
-    # @note When making an API call, you may pass FecOutputSettings
-    #   data as a hash:
-    #
-    #       {
-    #         column_depth: 1,
-    #         include_fec: "COLUMN", # accepts COLUMN, COLUMN_AND_ROW
-    #         row_length: 1,
-    #       }
     #
     # @!attribute [rw] column_depth
     #   Parameter D from SMPTE 2022-1. The height of the FEC protection
@@ -7825,13 +4309,6 @@ module Aws::MediaLive
 
     # Start time for the action.
     #
-    # @note When making an API call, you may pass FixedModeScheduleActionStartSettings
-    #   data as a hash:
-    #
-    #       {
-    #         time: "__string", # required
-    #       }
-    #
     # @!attribute [rw] time
     #   Start time for the action to start in the channel. (Not the time for
     #   the action to be added to the schedule: actions are always added to
@@ -7849,15 +4326,6 @@ module Aws::MediaLive
     end
 
     # Fmp4 Hls Settings
-    #
-    # @note When making an API call, you may pass Fmp4HlsSettings
-    #   data as a hash:
-    #
-    #       {
-    #         audio_rendition_sets: "__string",
-    #         nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #         timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #       }
     #
     # @!attribute [rw] audio_rendition_sets
     #   List all the audio groups that are used with the video output
@@ -7887,14 +4355,6 @@ module Aws::MediaLive
     end
 
     # Settings to specify if an action follows another.
-    #
-    # @note When making an API call, you may pass FollowModeScheduleActionStartSettings
-    #   data as a hash:
-    #
-    #       {
-    #         follow_point: "END", # required, accepts END, START
-    #         reference_action_name: "__string", # required
-    #       }
     #
     # @!attribute [rw] follow_point
     #   Identifies whether this action starts relative to the start or
@@ -7927,15 +4387,6 @@ module Aws::MediaLive
 
     # Frame Capture Cdn Settings
     #
-    # @note When making an API call, you may pass FrameCaptureCdnSettings
-    #   data as a hash:
-    #
-    #       {
-    #         frame_capture_s3_settings: {
-    #           canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
-    #         },
-    #       }
-    #
     # @!attribute [rw] frame_capture_s3_settings
     #   Frame Capture S3 Settings
     #   @return [Types::FrameCaptureS3Settings]
@@ -7949,20 +4400,6 @@ module Aws::MediaLive
     end
 
     # Frame Capture Group Settings
-    #
-    # @note When making an API call, you may pass FrameCaptureGroupSettings
-    #   data as a hash:
-    #
-    #       {
-    #         destination: { # required
-    #           destination_ref_id: "__string",
-    #         },
-    #         frame_capture_cdn_settings: {
-    #           frame_capture_s3_settings: {
-    #             canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] destination
     #   The destination for the frame capture files. Either the URI for an
@@ -7991,20 +4428,11 @@ module Aws::MediaLive
 
     # Frame Capture Hls Settings
     #
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/FrameCaptureHlsSettings AWS API Documentation
     #
     class FrameCaptureHlsSettings < Aws::EmptyStructure; end
 
     # Frame Capture Output Settings
-    #
-    # @note When making an API call, you may pass FrameCaptureOutputSettings
-    #   data as a hash:
-    #
-    #       {
-    #         name_modifier: "__string",
-    #       }
     #
     # @!attribute [rw] name_modifier
     #   Required if the output group contains more than one output. This
@@ -8021,13 +4449,6 @@ module Aws::MediaLive
 
     # Frame Capture S3 Settings
     #
-    # @note When making an API call, you may pass FrameCaptureS3Settings
-    #   data as a hash:
-    #
-    #       {
-    #         canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
-    #       }
-    #
     # @!attribute [rw] canned_acl
     #   Specify the canned ACL to apply to each S3 request. Defaults to
     #   none.
@@ -8042,14 +4463,6 @@ module Aws::MediaLive
     end
 
     # Frame Capture Settings
-    #
-    # @note When making an API call, you may pass FrameCaptureSettings
-    #   data as a hash:
-    #
-    #       {
-    #         capture_interval: 1,
-    #         capture_interval_units: "MILLISECONDS", # accepts MILLISECONDS, SECONDS
-    #       }
     #
     # @!attribute [rw] capture_interval
     #   The frequency at which to capture frames for inclusion in the
@@ -8082,28 +4495,6 @@ module Aws::MediaLive
     end
 
     # Global Configuration
-    #
-    # @note When making an API call, you may pass GlobalConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         initial_audio_gain: 1,
-    #         input_end_action: "NONE", # accepts NONE, SWITCH_AND_LOOP_INPUTS
-    #         input_loss_behavior: {
-    #           black_frame_msec: 1,
-    #           input_loss_image_color: "__stringMin6Max6",
-    #           input_loss_image_slate: {
-    #             password_param: "__string",
-    #             uri: "__stringMax2048", # required
-    #             username: "__string",
-    #           },
-    #           input_loss_image_type: "COLOR", # accepts COLOR, SLATE
-    #           repeat_frame_msec: 1,
-    #         },
-    #         output_locking_mode: "EPOCH_LOCKING", # accepts EPOCH_LOCKING, PIPELINE_LOCKING
-    #         output_timing_source: "INPUT_CLOCK", # accepts INPUT_CLOCK, SYSTEM_CLOCK
-    #         support_low_framerate_inputs: "DISABLED", # accepts DISABLED, ENABLED
-    #       }
     #
     # @!attribute [rw] initial_audio_gain
     #   Value to set the initial audio gain for the Live Event.
@@ -8159,18 +4550,6 @@ module Aws::MediaLive
 
     # H264 Color Space Settings
     #
-    # @note When making an API call, you may pass H264ColorSpaceSettings
-    #   data as a hash:
-    #
-    #       {
-    #         color_space_passthrough_settings: {
-    #         },
-    #         rec_601_settings: {
-    #         },
-    #         rec_709_settings: {
-    #         },
-    #       }
-    #
     # @!attribute [rw] color_space_passthrough_settings
     #   Passthrough applies no color space conversion to the output
     #   @return [Types::ColorSpacePassthroughSettings]
@@ -8195,16 +4574,6 @@ module Aws::MediaLive
 
     # H264 Filter Settings
     #
-    # @note When making an API call, you may pass H264FilterSettings
-    #   data as a hash:
-    #
-    #       {
-    #         temporal_filter_settings: {
-    #           post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
-    #           strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16
-    #         },
-    #       }
-    #
     # @!attribute [rw] temporal_filter_settings
     #   Temporal Filter Settings
     #   @return [Types::TemporalFilterSettings]
@@ -8218,65 +4587,6 @@ module Aws::MediaLive
     end
 
     # H264 Settings
-    #
-    # @note When making an API call, you may pass H264Settings
-    #   data as a hash:
-    #
-    #       {
-    #         adaptive_quantization: "AUTO", # accepts AUTO, HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
-    #         afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
-    #         bitrate: 1,
-    #         buf_fill_pct: 1,
-    #         buf_size: 1,
-    #         color_metadata: "IGNORE", # accepts IGNORE, INSERT
-    #         color_space_settings: {
-    #           color_space_passthrough_settings: {
-    #           },
-    #           rec_601_settings: {
-    #           },
-    #           rec_709_settings: {
-    #           },
-    #         },
-    #         entropy_encoding: "CABAC", # accepts CABAC, CAVLC
-    #         filter_settings: {
-    #           temporal_filter_settings: {
-    #             post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
-    #             strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16
-    #           },
-    #         },
-    #         fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
-    #         flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
-    #         force_field_pictures: "DISABLED", # accepts DISABLED, ENABLED
-    #         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #         framerate_denominator: 1,
-    #         framerate_numerator: 1,
-    #         gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
-    #         gop_closed_cadence: 1,
-    #         gop_num_b_frames: 1,
-    #         gop_size: 1.0,
-    #         gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
-    #         level: "H264_LEVEL_1", # accepts H264_LEVEL_1, H264_LEVEL_1_1, H264_LEVEL_1_2, H264_LEVEL_1_3, H264_LEVEL_2, H264_LEVEL_2_1, H264_LEVEL_2_2, H264_LEVEL_3, H264_LEVEL_3_1, H264_LEVEL_3_2, H264_LEVEL_4, H264_LEVEL_4_1, H264_LEVEL_4_2, H264_LEVEL_5, H264_LEVEL_5_1, H264_LEVEL_5_2, H264_LEVEL_AUTO
-    #         look_ahead_rate_control: "HIGH", # accepts HIGH, LOW, MEDIUM
-    #         max_bitrate: 1,
-    #         min_i_interval: 1,
-    #         num_ref_frames: 1,
-    #         par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #         par_denominator: 1,
-    #         par_numerator: 1,
-    #         profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
-    #         quality_level: "ENHANCED_QUALITY", # accepts ENHANCED_QUALITY, STANDARD_QUALITY
-    #         qvbr_quality_level: 1,
-    #         rate_control_mode: "CBR", # accepts CBR, MULTIPLEX, QVBR, VBR
-    #         scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
-    #         scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
-    #         slices: 1,
-    #         softness: 1,
-    #         spatial_aq: "DISABLED", # accepts DISABLED, ENABLED
-    #         subgop_length: "DYNAMIC", # accepts DYNAMIC, FIXED
-    #         syntax: "DEFAULT", # accepts DEFAULT, RP2027
-    #         temporal_aq: "DISABLED", # accepts DISABLED, ENABLED
-    #         timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
-    #       }
     #
     # @!attribute [rw] adaptive_quantization
     #   Enables or disables adaptive quantization, which is a technique
@@ -8623,24 +4933,6 @@ module Aws::MediaLive
 
     # H265 Color Space Settings
     #
-    # @note When making an API call, you may pass H265ColorSpaceSettings
-    #   data as a hash:
-    #
-    #       {
-    #         color_space_passthrough_settings: {
-    #         },
-    #         dolby_vision_81_settings: {
-    #         },
-    #         hdr_10_settings: {
-    #           max_cll: 1,
-    #           max_fall: 1,
-    #         },
-    #         rec_601_settings: {
-    #         },
-    #         rec_709_settings: {
-    #         },
-    #       }
-    #
     # @!attribute [rw] color_space_passthrough_settings
     #   Passthrough applies no color space conversion to the output
     #   @return [Types::ColorSpacePassthroughSettings]
@@ -8675,16 +4967,6 @@ module Aws::MediaLive
 
     # H265 Filter Settings
     #
-    # @note When making an API call, you may pass H265FilterSettings
-    #   data as a hash:
-    #
-    #       {
-    #         temporal_filter_settings: {
-    #           post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
-    #           strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16
-    #         },
-    #       }
-    #
     # @!attribute [rw] temporal_filter_settings
     #   Temporal Filter Settings
     #   @return [Types::TemporalFilterSettings]
@@ -8698,59 +4980,6 @@ module Aws::MediaLive
     end
 
     # H265 Settings
-    #
-    # @note When making an API call, you may pass H265Settings
-    #   data as a hash:
-    #
-    #       {
-    #         adaptive_quantization: "AUTO", # accepts AUTO, HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
-    #         afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
-    #         alternative_transfer_function: "INSERT", # accepts INSERT, OMIT
-    #         bitrate: 1,
-    #         buf_size: 1,
-    #         color_metadata: "IGNORE", # accepts IGNORE, INSERT
-    #         color_space_settings: {
-    #           color_space_passthrough_settings: {
-    #           },
-    #           dolby_vision_81_settings: {
-    #           },
-    #           hdr_10_settings: {
-    #             max_cll: 1,
-    #             max_fall: 1,
-    #           },
-    #           rec_601_settings: {
-    #           },
-    #           rec_709_settings: {
-    #           },
-    #         },
-    #         filter_settings: {
-    #           temporal_filter_settings: {
-    #             post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
-    #             strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16
-    #           },
-    #         },
-    #         fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
-    #         flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
-    #         framerate_denominator: 1, # required
-    #         framerate_numerator: 1, # required
-    #         gop_closed_cadence: 1,
-    #         gop_size: 1.0,
-    #         gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
-    #         level: "H265_LEVEL_1", # accepts H265_LEVEL_1, H265_LEVEL_2, H265_LEVEL_2_1, H265_LEVEL_3, H265_LEVEL_3_1, H265_LEVEL_4, H265_LEVEL_4_1, H265_LEVEL_5, H265_LEVEL_5_1, H265_LEVEL_5_2, H265_LEVEL_6, H265_LEVEL_6_1, H265_LEVEL_6_2, H265_LEVEL_AUTO
-    #         look_ahead_rate_control: "HIGH", # accepts HIGH, LOW, MEDIUM
-    #         max_bitrate: 1,
-    #         min_i_interval: 1,
-    #         par_denominator: 1,
-    #         par_numerator: 1,
-    #         profile: "MAIN", # accepts MAIN, MAIN_10BIT
-    #         qvbr_quality_level: 1,
-    #         rate_control_mode: "CBR", # accepts CBR, MULTIPLEX, QVBR
-    #         scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
-    #         scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
-    #         slices: 1,
-    #         tier: "HIGH", # accepts HIGH, MAIN
-    #         timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
-    #       }
     #
     # @!attribute [rw] adaptive_quantization
     #   Adaptive quantization. Allows intra-frame quantizers to vary to
@@ -8957,14 +5186,6 @@ module Aws::MediaLive
 
     # Hdr10 Settings
     #
-    # @note When making an API call, you may pass Hdr10Settings
-    #   data as a hash:
-    #
-    #       {
-    #         max_cll: 1,
-    #         max_fall: 1,
-    #       }
-    #
     # @!attribute [rw] max_cll
     #   Maximum Content Light Level An integer metadata value defining the
     #   maximum light level, in nits, of any single pixel within an encoded
@@ -8987,19 +5208,6 @@ module Aws::MediaLive
     end
 
     # Hls Akamai Settings
-    #
-    # @note When making an API call, you may pass HlsAkamaiSettings
-    #   data as a hash:
-    #
-    #       {
-    #         connection_retry_interval: 1,
-    #         filecache_duration: 1,
-    #         http_transfer_mode: "CHUNKED", # accepts CHUNKED, NON_CHUNKED
-    #         num_retries: 1,
-    #         restart_delay: 1,
-    #         salt: "__string",
-    #         token: "__string",
-    #       }
     #
     # @!attribute [rw] connection_retry_interval
     #   Number of seconds to wait before retrying connection to the CDN if
@@ -9050,16 +5258,6 @@ module Aws::MediaLive
 
     # Hls Basic Put Settings
     #
-    # @note When making an API call, you may pass HlsBasicPutSettings
-    #   data as a hash:
-    #
-    #       {
-    #         connection_retry_interval: 1,
-    #         filecache_duration: 1,
-    #         num_retries: 1,
-    #         restart_delay: 1,
-    #       }
-    #
     # @!attribute [rw] connection_retry_interval
     #   Number of seconds to wait before retrying connection to the CDN if
     #   the connection is lost.
@@ -9091,44 +5289,6 @@ module Aws::MediaLive
     end
 
     # Hls Cdn Settings
-    #
-    # @note When making an API call, you may pass HlsCdnSettings
-    #   data as a hash:
-    #
-    #       {
-    #         hls_akamai_settings: {
-    #           connection_retry_interval: 1,
-    #           filecache_duration: 1,
-    #           http_transfer_mode: "CHUNKED", # accepts CHUNKED, NON_CHUNKED
-    #           num_retries: 1,
-    #           restart_delay: 1,
-    #           salt: "__string",
-    #           token: "__string",
-    #         },
-    #         hls_basic_put_settings: {
-    #           connection_retry_interval: 1,
-    #           filecache_duration: 1,
-    #           num_retries: 1,
-    #           restart_delay: 1,
-    #         },
-    #         hls_media_store_settings: {
-    #           connection_retry_interval: 1,
-    #           filecache_duration: 1,
-    #           media_store_storage_class: "TEMPORAL", # accepts TEMPORAL
-    #           num_retries: 1,
-    #           restart_delay: 1,
-    #         },
-    #         hls_s3_settings: {
-    #           canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
-    #         },
-    #         hls_webdav_settings: {
-    #           connection_retry_interval: 1,
-    #           filecache_duration: 1,
-    #           http_transfer_mode: "CHUNKED", # accepts CHUNKED, NON_CHUNKED
-    #           num_retries: 1,
-    #           restart_delay: 1,
-    #         },
-    #       }
     #
     # @!attribute [rw] hls_akamai_settings
     #   Hls Akamai Settings
@@ -9163,105 +5323,6 @@ module Aws::MediaLive
     end
 
     # Hls Group Settings
-    #
-    # @note When making an API call, you may pass HlsGroupSettings
-    #   data as a hash:
-    #
-    #       {
-    #         ad_markers: ["ADOBE"], # accepts ADOBE, ELEMENTAL, ELEMENTAL_SCTE35
-    #         base_url_content: "__string",
-    #         base_url_content_1: "__string",
-    #         base_url_manifest: "__string",
-    #         base_url_manifest_1: "__string",
-    #         caption_language_mappings: [
-    #           {
-    #             caption_channel: 1, # required
-    #             language_code: "__stringMin3Max3", # required
-    #             language_description: "__stringMin1", # required
-    #           },
-    #         ],
-    #         caption_language_setting: "INSERT", # accepts INSERT, NONE, OMIT
-    #         client_cache: "DISABLED", # accepts DISABLED, ENABLED
-    #         codec_specification: "RFC_4281", # accepts RFC_4281, RFC_6381
-    #         constant_iv: "__stringMin32Max32",
-    #         destination: { # required
-    #           destination_ref_id: "__string",
-    #         },
-    #         directory_structure: "SINGLE_DIRECTORY", # accepts SINGLE_DIRECTORY, SUBDIRECTORY_PER_STREAM
-    #         discontinuity_tags: "INSERT", # accepts INSERT, NEVER_INSERT
-    #         encryption_type: "AES128", # accepts AES128, SAMPLE_AES
-    #         hls_cdn_settings: {
-    #           hls_akamai_settings: {
-    #             connection_retry_interval: 1,
-    #             filecache_duration: 1,
-    #             http_transfer_mode: "CHUNKED", # accepts CHUNKED, NON_CHUNKED
-    #             num_retries: 1,
-    #             restart_delay: 1,
-    #             salt: "__string",
-    #             token: "__string",
-    #           },
-    #           hls_basic_put_settings: {
-    #             connection_retry_interval: 1,
-    #             filecache_duration: 1,
-    #             num_retries: 1,
-    #             restart_delay: 1,
-    #           },
-    #           hls_media_store_settings: {
-    #             connection_retry_interval: 1,
-    #             filecache_duration: 1,
-    #             media_store_storage_class: "TEMPORAL", # accepts TEMPORAL
-    #             num_retries: 1,
-    #             restart_delay: 1,
-    #           },
-    #           hls_s3_settings: {
-    #             canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
-    #           },
-    #           hls_webdav_settings: {
-    #             connection_retry_interval: 1,
-    #             filecache_duration: 1,
-    #             http_transfer_mode: "CHUNKED", # accepts CHUNKED, NON_CHUNKED
-    #             num_retries: 1,
-    #             restart_delay: 1,
-    #           },
-    #         },
-    #         hls_id_3_segment_tagging: "DISABLED", # accepts DISABLED, ENABLED
-    #         i_frame_only_playlists: "DISABLED", # accepts DISABLED, STANDARD
-    #         incomplete_segment_behavior: "AUTO", # accepts AUTO, SUPPRESS
-    #         index_n_segments: 1,
-    #         input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
-    #         iv_in_manifest: "EXCLUDE", # accepts EXCLUDE, INCLUDE
-    #         iv_source: "EXPLICIT", # accepts EXPLICIT, FOLLOWS_SEGMENT_NUMBER
-    #         keep_segments: 1,
-    #         key_format: "__string",
-    #         key_format_versions: "__string",
-    #         key_provider_settings: {
-    #           static_key_settings: {
-    #             key_provider_server: {
-    #               password_param: "__string",
-    #               uri: "__stringMax2048", # required
-    #               username: "__string",
-    #             },
-    #             static_key_value: "__stringMin32Max32", # required
-    #           },
-    #         },
-    #         manifest_compression: "GZIP", # accepts GZIP, NONE
-    #         manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
-    #         min_segment_length: 1,
-    #         mode: "LIVE", # accepts LIVE, VOD
-    #         output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY, VARIANT_MANIFESTS_AND_SEGMENTS
-    #         program_date_time: "EXCLUDE", # accepts EXCLUDE, INCLUDE
-    #         program_date_time_clock: "INITIALIZE_FROM_OUTPUT_TIMECODE", # accepts INITIALIZE_FROM_OUTPUT_TIMECODE, SYSTEM_CLOCK
-    #         program_date_time_period: 1,
-    #         redundant_manifest: "DISABLED", # accepts DISABLED, ENABLED
-    #         segment_length: 1,
-    #         segmentation_mode: "USE_INPUT_SEGMENTATION", # accepts USE_INPUT_SEGMENTATION, USE_SEGMENT_DURATION
-    #         segments_per_subdirectory: 1,
-    #         stream_inf_resolution: "EXCLUDE", # accepts EXCLUDE, INCLUDE
-    #         timed_metadata_id_3_frame: "NONE", # accepts NONE, PRIV, TDRL
-    #         timed_metadata_id_3_period: 1,
-    #         timestamp_delta_milliseconds: 1,
-    #         ts_file_mode: "SEGMENTED_FILES", # accepts SEGMENTED_FILES, SINGLE_FILE
-    #       }
     #
     # @!attribute [rw] ad_markers
     #   Choose one or more ad marker types to pass SCTE35 signals through to
@@ -9606,13 +5667,6 @@ module Aws::MediaLive
     # Settings for the action to insert a user-defined ID3 tag in each HLS
     # segment
     #
-    # @note When making an API call, you may pass HlsId3SegmentTaggingScheduleActionSettings
-    #   data as a hash:
-    #
-    #       {
-    #         tag: "__string", # required
-    #       }
-    #
     # @!attribute [rw] tag
     #   ID3 tag to insert into each segment. Supports special keyword
     #   identifiers to substitute in segment-related values.\\nSupported
@@ -9629,17 +5683,6 @@ module Aws::MediaLive
     end
 
     # Hls Input Settings
-    #
-    # @note When making an API call, you may pass HlsInputSettings
-    #   data as a hash:
-    #
-    #       {
-    #         bandwidth: 1,
-    #         buffer_segments: 1,
-    #         retries: 1,
-    #         retry_interval: 1,
-    #         scte_35_source: "MANIFEST", # accepts MANIFEST, SEGMENTS
-    #       }
     #
     # @!attribute [rw] bandwidth
     #   When specified the HLS stream with the m3u8 BANDWIDTH that most
@@ -9686,17 +5729,6 @@ module Aws::MediaLive
 
     # Hls Media Store Settings
     #
-    # @note When making an API call, you may pass HlsMediaStoreSettings
-    #   data as a hash:
-    #
-    #       {
-    #         connection_retry_interval: 1,
-    #         filecache_duration: 1,
-    #         media_store_storage_class: "TEMPORAL", # accepts TEMPORAL
-    #         num_retries: 1,
-    #         restart_delay: 1,
-    #       }
-    #
     # @!attribute [rw] connection_retry_interval
     #   Number of seconds to wait before retrying connection to the CDN if
     #   the connection is lost.
@@ -9735,56 +5767,6 @@ module Aws::MediaLive
 
     # Hls Output Settings
     #
-    # @note When making an API call, you may pass HlsOutputSettings
-    #   data as a hash:
-    #
-    #       {
-    #         h265_packaging_type: "HEV1", # accepts HEV1, HVC1
-    #         hls_settings: { # required
-    #           audio_only_hls_settings: {
-    #             audio_group_id: "__string",
-    #             audio_only_image: {
-    #               password_param: "__string",
-    #               uri: "__stringMax2048", # required
-    #               username: "__string",
-    #             },
-    #             audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT", # accepts ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
-    #             segment_type: "AAC", # accepts AAC, FMP4
-    #           },
-    #           fmp_4_hls_settings: {
-    #             audio_rendition_sets: "__string",
-    #             nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #             timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #           },
-    #           frame_capture_hls_settings: {
-    #           },
-    #           standard_hls_settings: {
-    #             audio_rendition_sets: "__string",
-    #             m3u_8_settings: { # required
-    #               audio_frames_per_pes: 1,
-    #               audio_pids: "__string",
-    #               ecm_pid: "__string",
-    #               nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #               pat_interval: 1,
-    #               pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
-    #               pcr_period: 1,
-    #               pcr_pid: "__string",
-    #               pmt_interval: 1,
-    #               pmt_pid: "__string",
-    #               program_num: 1,
-    #               scte_35_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #               scte_35_pid: "__string",
-    #               timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #               timed_metadata_pid: "__string",
-    #               transport_stream_id: 1,
-    #               video_pid: "__string",
-    #             },
-    #           },
-    #         },
-    #         name_modifier: "__stringMin1",
-    #         segment_modifier: "__string",
-    #       }
-    #
     # @!attribute [rw] h265_packaging_type
     #   Only applicable when this output is referencing an H.265 video
     #   description. Specifies whether MP4 segments should be packaged as
@@ -9818,13 +5800,6 @@ module Aws::MediaLive
 
     # Hls S3 Settings
     #
-    # @note When making an API call, you may pass HlsS3Settings
-    #   data as a hash:
-    #
-    #       {
-    #         canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
-    #       }
-    #
     # @!attribute [rw] canned_acl
     #   Specify the canned ACL to apply to each S3 request. Defaults to
     #   none.
@@ -9839,51 +5814,6 @@ module Aws::MediaLive
     end
 
     # Hls Settings
-    #
-    # @note When making an API call, you may pass HlsSettings
-    #   data as a hash:
-    #
-    #       {
-    #         audio_only_hls_settings: {
-    #           audio_group_id: "__string",
-    #           audio_only_image: {
-    #             password_param: "__string",
-    #             uri: "__stringMax2048", # required
-    #             username: "__string",
-    #           },
-    #           audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT", # accepts ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
-    #           segment_type: "AAC", # accepts AAC, FMP4
-    #         },
-    #         fmp_4_hls_settings: {
-    #           audio_rendition_sets: "__string",
-    #           nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #           timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #         },
-    #         frame_capture_hls_settings: {
-    #         },
-    #         standard_hls_settings: {
-    #           audio_rendition_sets: "__string",
-    #           m3u_8_settings: { # required
-    #             audio_frames_per_pes: 1,
-    #             audio_pids: "__string",
-    #             ecm_pid: "__string",
-    #             nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #             pat_interval: 1,
-    #             pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
-    #             pcr_period: 1,
-    #             pcr_pid: "__string",
-    #             pmt_interval: 1,
-    #             pmt_pid: "__string",
-    #             program_num: 1,
-    #             scte_35_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #             scte_35_pid: "__string",
-    #             timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #             timed_metadata_pid: "__string",
-    #             transport_stream_id: 1,
-    #             video_pid: "__string",
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] audio_only_hls_settings
     #   Audio Only Hls Settings
@@ -9914,13 +5844,6 @@ module Aws::MediaLive
 
     # Settings for the action to emit HLS metadata
     #
-    # @note When making an API call, you may pass HlsTimedMetadataScheduleActionSettings
-    #   data as a hash:
-    #
-    #       {
-    #         id_3: "__string", # required
-    #       }
-    #
     # @!attribute [rw] id_3
     #   Base64 string formatted according to the ID3 specification:
     #   http://id3.org/id3v2.4.0-structure
@@ -9935,17 +5858,6 @@ module Aws::MediaLive
     end
 
     # Hls Webdav Settings
-    #
-    # @note When making an API call, you may pass HlsWebdavSettings
-    #   data as a hash:
-    #
-    #       {
-    #         connection_retry_interval: 1,
-    #         filecache_duration: 1,
-    #         http_transfer_mode: "CHUNKED", # accepts CHUNKED, NON_CHUNKED
-    #         num_retries: 1,
-    #         restart_delay: 1,
-    #       }
     #
     # @!attribute [rw] connection_retry_interval
     #   Number of seconds to wait before retrying connection to the CDN if
@@ -9984,15 +5896,11 @@ module Aws::MediaLive
 
     # Html Motion Graphics Settings
     #
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/HtmlMotionGraphicsSettings AWS API Documentation
     #
     class HtmlMotionGraphicsSettings < Aws::EmptyStructure; end
 
     # Settings to configure an action so that it occurs as soon as possible.
-    #
-    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ImmediateModeScheduleActionStartSettings AWS API Documentation
     #
@@ -10097,138 +6005,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass InputAttachment
-    #   data as a hash:
-    #
-    #       {
-    #         automatic_input_failover_settings: {
-    #           error_clear_time_msec: 1,
-    #           failover_conditions: [
-    #             {
-    #               failover_condition_settings: {
-    #                 audio_silence_settings: {
-    #                   audio_selector_name: "__string", # required
-    #                   audio_silence_threshold_msec: 1,
-    #                 },
-    #                 input_loss_settings: {
-    #                   input_loss_threshold_msec: 1,
-    #                 },
-    #                 video_black_settings: {
-    #                   black_detect_threshold: 1.0,
-    #                   video_black_threshold_msec: 1,
-    #                 },
-    #               },
-    #             },
-    #           ],
-    #           input_preference: "EQUAL_INPUT_PREFERENCE", # accepts EQUAL_INPUT_PREFERENCE, PRIMARY_INPUT_PREFERRED
-    #           secondary_input_id: "__string", # required
-    #         },
-    #         input_attachment_name: "__string",
-    #         input_id: "__string",
-    #         input_settings: {
-    #           audio_selectors: [
-    #             {
-    #               name: "__stringMin1", # required
-    #               selector_settings: {
-    #                 audio_hls_rendition_selection: {
-    #                   group_id: "__stringMin1", # required
-    #                   name: "__stringMin1", # required
-    #                 },
-    #                 audio_language_selection: {
-    #                   language_code: "__string", # required
-    #                   language_selection_policy: "LOOSE", # accepts LOOSE, STRICT
-    #                 },
-    #                 audio_pid_selection: {
-    #                   pid: 1, # required
-    #                 },
-    #                 audio_track_selection: {
-    #                   tracks: [ # required
-    #                     {
-    #                       track: 1, # required
-    #                     },
-    #                   ],
-    #                 },
-    #               },
-    #             },
-    #           ],
-    #           caption_selectors: [
-    #             {
-    #               language_code: "__string",
-    #               name: "__stringMin1", # required
-    #               selector_settings: {
-    #                 ancillary_source_settings: {
-    #                   source_ancillary_channel_number: 1,
-    #                 },
-    #                 arib_source_settings: {
-    #                 },
-    #                 dvb_sub_source_settings: {
-    #                   ocr_language: "DEU", # accepts DEU, ENG, FRA, NLD, POR, SPA
-    #                   pid: 1,
-    #                 },
-    #                 embedded_source_settings: {
-    #                   convert_608_to_708: "DISABLED", # accepts DISABLED, UPCONVERT
-    #                   scte_20_detection: "AUTO", # accepts AUTO, OFF
-    #                   source_608_channel_number: 1,
-    #                   source_608_track_number: 1,
-    #                 },
-    #                 scte_20_source_settings: {
-    #                   convert_608_to_708: "DISABLED", # accepts DISABLED, UPCONVERT
-    #                   source_608_channel_number: 1,
-    #                 },
-    #                 scte_27_source_settings: {
-    #                   ocr_language: "DEU", # accepts DEU, ENG, FRA, NLD, POR, SPA
-    #                   pid: 1,
-    #                 },
-    #                 teletext_source_settings: {
-    #                   output_rectangle: {
-    #                     height: 1.0, # required
-    #                     left_offset: 1.0, # required
-    #                     top_offset: 1.0, # required
-    #                     width: 1.0, # required
-    #                   },
-    #                   page_number: "__string",
-    #                 },
-    #               },
-    #             },
-    #           ],
-    #           deblock_filter: "DISABLED", # accepts DISABLED, ENABLED
-    #           denoise_filter: "DISABLED", # accepts DISABLED, ENABLED
-    #           filter_strength: 1,
-    #           input_filter: "AUTO", # accepts AUTO, DISABLED, FORCED
-    #           network_input_settings: {
-    #             hls_input_settings: {
-    #               bandwidth: 1,
-    #               buffer_segments: 1,
-    #               retries: 1,
-    #               retry_interval: 1,
-    #               scte_35_source: "MANIFEST", # accepts MANIFEST, SEGMENTS
-    #             },
-    #             server_validation: "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", # accepts CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME, CHECK_CRYPTOGRAPHY_ONLY
-    #           },
-    #           scte_35_pid: 1,
-    #           smpte_2038_data_preference: "IGNORE", # accepts IGNORE, PREFER
-    #           source_end_behavior: "CONTINUE", # accepts CONTINUE, LOOP
-    #           video_selector: {
-    #             color_space: "FOLLOW", # accepts FOLLOW, HDR10, HLG_2020, REC_601, REC_709
-    #             color_space_settings: {
-    #               hdr_10_settings: {
-    #                 max_cll: 1,
-    #                 max_fall: 1,
-    #               },
-    #             },
-    #             color_space_usage: "FALLBACK", # accepts FALLBACK, FORCE
-    #             selector_settings: {
-    #               video_selector_pid: {
-    #                 pid: 1,
-    #               },
-    #               video_selector_program_id: {
-    #                 program_id: 1,
-    #               },
-    #             },
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] automatic_input_failover_settings
     #   User-specified settings for defining what the conditions are for
     #   declaring the input unhealthy and failing over to a different input.
@@ -10260,14 +6036,6 @@ module Aws::MediaLive
 
     # Input Channel Level
     #
-    # @note When making an API call, you may pass InputChannelLevel
-    #   data as a hash:
-    #
-    #       {
-    #         gain: 1, # required
-    #         input_channel: 1, # required
-    #       }
-    #
     # @!attribute [rw] gain
     #   Remixing value. Units are in dB and acceptable values are within the
     #   range from -60 (mute) and 6 dB.
@@ -10288,20 +6056,6 @@ module Aws::MediaLive
 
     # Settings to let you create a clip of the file input, in order to set
     # up the input to ingest only a portion of the file.
-    #
-    # @note When making an API call, you may pass InputClippingSettings
-    #   data as a hash:
-    #
-    #       {
-    #         input_timecode_source: "ZEROBASED", # required, accepts ZEROBASED, EMBEDDED
-    #         start_timecode: {
-    #           timecode: "__string",
-    #         },
-    #         stop_timecode: {
-    #           last_frame_clipping_behavior: "EXCLUDE_LAST_FRAME", # accepts EXCLUDE_LAST_FRAME, INCLUDE_LAST_FRAME
-    #           timecode: "__string",
-    #         },
-    #       }
     #
     # @!attribute [rw] input_timecode_source
     #   The source of the timecodes in the source being clipped.
@@ -10357,13 +6111,6 @@ module Aws::MediaLive
     end
 
     # Endpoint settings for a PUSH type input.
-    #
-    # @note When making an API call, you may pass InputDestinationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         stream_name: "__string",
-    #       }
     #
     # @!attribute [rw] stream_name
     #   A unique name for the location the RTMP stream is being pushed to.
@@ -10471,14 +6218,6 @@ module Aws::MediaLive
     end
 
     # Configurable settings for the input device.
-    #
-    # @note When making an API call, you may pass InputDeviceConfigurableSettings
-    #   data as a hash:
-    #
-    #       {
-    #         configured_input: "AUTO", # accepts AUTO, HDMI, SDI
-    #         max_bitrate: 1,
-    #       }
     #
     # @!attribute [rw] configured_input
     #   The input source that you want to use. If the device has a source
@@ -10610,13 +6349,6 @@ module Aws::MediaLive
 
     # Settings for an input device.
     #
-    # @note When making an API call, you may pass InputDeviceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "__string",
-    #       }
-    #
     # @!attribute [rw] id
     #   The unique ID for the device.
     #   @return [String]
@@ -10630,13 +6362,6 @@ module Aws::MediaLive
     end
 
     # Settings for an input device.
-    #
-    # @note When making an API call, you may pass InputDeviceSettings
-    #   data as a hash:
-    #
-    #       {
-    #         id: "__string",
-    #       }
     #
     # @!attribute [rw] id
     #   The unique ID for the device.
@@ -10779,15 +6504,6 @@ module Aws::MediaLive
 
     # Input Location
     #
-    # @note When making an API call, you may pass InputLocation
-    #   data as a hash:
-    #
-    #       {
-    #         password_param: "__string",
-    #         uri: "__stringMax2048", # required
-    #         username: "__string",
-    #       }
-    #
     # @!attribute [rw] password_param
     #   key used to extract the password from EC2 Parameter store
     #   @return [String]
@@ -10818,21 +6534,6 @@ module Aws::MediaLive
     end
 
     # Input Loss Behavior
-    #
-    # @note When making an API call, you may pass InputLossBehavior
-    #   data as a hash:
-    #
-    #       {
-    #         black_frame_msec: 1,
-    #         input_loss_image_color: "__stringMin6Max6",
-    #         input_loss_image_slate: {
-    #           password_param: "__string",
-    #           uri: "__stringMax2048", # required
-    #           username: "__string",
-    #         },
-    #         input_loss_image_type: "COLOR", # accepts COLOR, SLATE
-    #         repeat_frame_msec: 1,
-    #       }
     #
     # @!attribute [rw] black_frame_msec
     #   On input loss, the number of milliseconds to substitute black into
@@ -10879,13 +6580,6 @@ module Aws::MediaLive
     # MediaLive will perform a failover if content is not detected in this
     # input for the specified period.
     #
-    # @note When making an API call, you may pass InputLossFailoverSettings
-    #   data as a hash:
-    #
-    #       {
-    #         input_loss_threshold_msec: 1,
-    #       }
-    #
     # @!attribute [rw] input_loss_threshold_msec
     #   The amount of time (in milliseconds) that no input is detected.
     #   After that time, an input failover will occur.
@@ -10900,24 +6594,6 @@ module Aws::MediaLive
     end
 
     # Action to prepare an input for a future immediate input switch.
-    #
-    # @note When making an API call, you may pass InputPrepareScheduleActionSettings
-    #   data as a hash:
-    #
-    #       {
-    #         input_attachment_name_reference: "__string",
-    #         input_clipping_settings: {
-    #           input_timecode_source: "ZEROBASED", # required, accepts ZEROBASED, EMBEDDED
-    #           start_timecode: {
-    #             timecode: "__string",
-    #           },
-    #           stop_timecode: {
-    #             last_frame_clipping_behavior: "EXCLUDE_LAST_FRAME", # accepts EXCLUDE_LAST_FRAME, INCLUDE_LAST_FRAME
-    #             timecode: "__string",
-    #           },
-    #         },
-    #         url_path: ["__string"],
-    #       }
     #
     # @!attribute [rw] input_attachment_name_reference
     #   The name of the input attachment that should be prepared by this
@@ -11007,112 +6683,6 @@ module Aws::MediaLive
 
     # Live Event input parameters. There can be multiple inputs in a single
     # Live Event.
-    #
-    # @note When making an API call, you may pass InputSettings
-    #   data as a hash:
-    #
-    #       {
-    #         audio_selectors: [
-    #           {
-    #             name: "__stringMin1", # required
-    #             selector_settings: {
-    #               audio_hls_rendition_selection: {
-    #                 group_id: "__stringMin1", # required
-    #                 name: "__stringMin1", # required
-    #               },
-    #               audio_language_selection: {
-    #                 language_code: "__string", # required
-    #                 language_selection_policy: "LOOSE", # accepts LOOSE, STRICT
-    #               },
-    #               audio_pid_selection: {
-    #                 pid: 1, # required
-    #               },
-    #               audio_track_selection: {
-    #                 tracks: [ # required
-    #                   {
-    #                     track: 1, # required
-    #                   },
-    #                 ],
-    #               },
-    #             },
-    #           },
-    #         ],
-    #         caption_selectors: [
-    #           {
-    #             language_code: "__string",
-    #             name: "__stringMin1", # required
-    #             selector_settings: {
-    #               ancillary_source_settings: {
-    #                 source_ancillary_channel_number: 1,
-    #               },
-    #               arib_source_settings: {
-    #               },
-    #               dvb_sub_source_settings: {
-    #                 ocr_language: "DEU", # accepts DEU, ENG, FRA, NLD, POR, SPA
-    #                 pid: 1,
-    #               },
-    #               embedded_source_settings: {
-    #                 convert_608_to_708: "DISABLED", # accepts DISABLED, UPCONVERT
-    #                 scte_20_detection: "AUTO", # accepts AUTO, OFF
-    #                 source_608_channel_number: 1,
-    #                 source_608_track_number: 1,
-    #               },
-    #               scte_20_source_settings: {
-    #                 convert_608_to_708: "DISABLED", # accepts DISABLED, UPCONVERT
-    #                 source_608_channel_number: 1,
-    #               },
-    #               scte_27_source_settings: {
-    #                 ocr_language: "DEU", # accepts DEU, ENG, FRA, NLD, POR, SPA
-    #                 pid: 1,
-    #               },
-    #               teletext_source_settings: {
-    #                 output_rectangle: {
-    #                   height: 1.0, # required
-    #                   left_offset: 1.0, # required
-    #                   top_offset: 1.0, # required
-    #                   width: 1.0, # required
-    #                 },
-    #                 page_number: "__string",
-    #               },
-    #             },
-    #           },
-    #         ],
-    #         deblock_filter: "DISABLED", # accepts DISABLED, ENABLED
-    #         denoise_filter: "DISABLED", # accepts DISABLED, ENABLED
-    #         filter_strength: 1,
-    #         input_filter: "AUTO", # accepts AUTO, DISABLED, FORCED
-    #         network_input_settings: {
-    #           hls_input_settings: {
-    #             bandwidth: 1,
-    #             buffer_segments: 1,
-    #             retries: 1,
-    #             retry_interval: 1,
-    #             scte_35_source: "MANIFEST", # accepts MANIFEST, SEGMENTS
-    #           },
-    #           server_validation: "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", # accepts CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME, CHECK_CRYPTOGRAPHY_ONLY
-    #         },
-    #         scte_35_pid: 1,
-    #         smpte_2038_data_preference: "IGNORE", # accepts IGNORE, PREFER
-    #         source_end_behavior: "CONTINUE", # accepts CONTINUE, LOOP
-    #         video_selector: {
-    #           color_space: "FOLLOW", # accepts FOLLOW, HDR10, HLG_2020, REC_601, REC_709
-    #           color_space_settings: {
-    #             hdr_10_settings: {
-    #               max_cll: 1,
-    #               max_fall: 1,
-    #             },
-    #           },
-    #           color_space_usage: "FALLBACK", # accepts FALLBACK, FORCE
-    #           selector_settings: {
-    #             video_selector_pid: {
-    #               pid: 1,
-    #             },
-    #             video_selector_program_id: {
-    #               program_id: 1,
-    #             },
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] audio_selectors
     #   Used to select the audio stream to decode for inputs that have
@@ -11218,15 +6788,6 @@ module Aws::MediaLive
 
     # Settings for for a PULL type input.
     #
-    # @note When making an API call, you may pass InputSourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         password_param: "__string",
-    #         url: "__string",
-    #         username: "__string",
-    #       }
-    #
     # @!attribute [rw] password_param
     #   The key used to extract the password from EC2 Parameter store.
     #   @return [String]
@@ -11250,15 +6811,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass InputSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         codec: "MPEG2", # accepts MPEG2, AVC, HEVC
-    #         maximum_bitrate: "MAX_10_MBPS", # accepts MAX_10_MBPS, MAX_20_MBPS, MAX_50_MBPS
-    #         resolution: "SD", # accepts SD, HD, UHD
-    #       }
-    #
     # @!attribute [rw] codec
     #   Input codec
     #   @return [String]
@@ -11283,24 +6835,6 @@ module Aws::MediaLive
 
     # Settings for the "switch input" action: to switch from ingesting one
     # input to ingesting another input.
-    #
-    # @note When making an API call, you may pass InputSwitchScheduleActionSettings
-    #   data as a hash:
-    #
-    #       {
-    #         input_attachment_name_reference: "__string", # required
-    #         input_clipping_settings: {
-    #           input_timecode_source: "ZEROBASED", # required, accepts ZEROBASED, EMBEDDED
-    #           start_timecode: {
-    #             timecode: "__string",
-    #           },
-    #           stop_timecode: {
-    #             last_frame_clipping_behavior: "EXCLUDE_LAST_FRAME", # accepts EXCLUDE_LAST_FRAME, INCLUDE_LAST_FRAME
-    #             timecode: "__string",
-    #           },
-    #         },
-    #         url_path: ["__string"],
-    #       }
     #
     # @!attribute [rw] input_attachment_name_reference
     #   The name of the input attachment (not the name of the input!) to
@@ -11334,14 +6868,6 @@ module Aws::MediaLive
     # public Internet addresses. This property requires setting the roleArn
     # property on Input creation. Not compatible with the
     # inputSecurityGroups property.
-    #
-    # @note When making an API call, you may pass InputVpcRequest
-    #   data as a hash:
-    #
-    #       {
-    #         security_group_ids: ["__string"],
-    #         subnet_ids: ["__string"], # required
-    #       }
     #
     # @!attribute [rw] security_group_ids
     #   A list of up to 5 EC2 VPC security group IDs to attach to the Input
@@ -11378,13 +6904,6 @@ module Aws::MediaLive
     end
 
     # An IPv4 CIDR to whitelist.
-    #
-    # @note When making an API call, you may pass InputWhitelistRuleCidr
-    #   data as a hash:
-    #
-    #       {
-    #         cidr: "__string",
-    #       }
     #
     # @!attribute [rw] cidr
     #   The IPv4 CIDR to whitelist.
@@ -11433,20 +6952,6 @@ module Aws::MediaLive
 
     # Key Provider Settings
     #
-    # @note When making an API call, you may pass KeyProviderSettings
-    #   data as a hash:
-    #
-    #       {
-    #         static_key_settings: {
-    #           key_provider_server: {
-    #             password_param: "__string",
-    #             uri: "__stringMax2048", # required
-    #             username: "__string",
-    #           },
-    #           static_key_value: "__stringMin32Max32", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] static_key_settings
     #   Static Key Settings
     #   @return [Types::StaticKeySettings]
@@ -11470,14 +6975,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListChannelsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [Integer]
     #
@@ -11523,15 +7020,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListInputDeviceTransfersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #         transfer_type: "__string", # required
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [Integer]
     #
@@ -11587,14 +7075,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListInputDevicesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [Integer]
     #
@@ -11644,14 +7124,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListInputSecurityGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [Integer]
     #
@@ -11700,14 +7172,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListInputsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [Integer]
     #
@@ -11753,15 +7217,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListMultiplexProgramsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         multiplex_id: "__string", # required
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [Integer]
     #
@@ -11813,14 +7268,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListMultiplexesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [Integer]
     #
@@ -11868,24 +7315,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListOfferingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_class: "__string",
-    #         channel_configuration: "__string",
-    #         codec: "__string",
-    #         duration: "__string",
-    #         max_results: 1,
-    #         maximum_bitrate: "__string",
-    #         maximum_framerate: "__string",
-    #         next_token: "__string",
-    #         resolution: "__string",
-    #         resource_type: "__string",
-    #         special_feature: "__string",
-    #         video_quality: "__string",
-    #       }
-    #
     # @!attribute [rw] channel_class
     #   @return [String]
     #
@@ -11975,22 +7404,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListReservationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_class: "__string",
-    #         codec: "__string",
-    #         max_results: 1,
-    #         maximum_bitrate: "__string",
-    #         maximum_framerate: "__string",
-    #         next_token: "__string",
-    #         resolution: "__string",
-    #         resource_type: "__string",
-    #         special_feature: "__string",
-    #         video_quality: "__string",
-    #       }
-    #
     # @!attribute [rw] channel_class
     #   @return [String]
     #
@@ -12072,13 +7485,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   @return [String]
     #
@@ -12102,70 +7508,6 @@ module Aws::MediaLive
     end
 
     # M2ts Settings
-    #
-    # @note When making an API call, you may pass M2tsSettings
-    #   data as a hash:
-    #
-    #       {
-    #         absent_input_audio_behavior: "DROP", # accepts DROP, ENCODE_SILENCE
-    #         arib: "DISABLED", # accepts DISABLED, ENABLED
-    #         arib_captions_pid: "__string",
-    #         arib_captions_pid_control: "AUTO", # accepts AUTO, USE_CONFIGURED
-    #         audio_buffer_model: "ATSC", # accepts ATSC, DVB
-    #         audio_frames_per_pes: 1,
-    #         audio_pids: "__string",
-    #         audio_stream_type: "ATSC", # accepts ATSC, DVB
-    #         bitrate: 1,
-    #         buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
-    #         cc_descriptor: "DISABLED", # accepts DISABLED, ENABLED
-    #         dvb_nit_settings: {
-    #           network_id: 1, # required
-    #           network_name: "__stringMin1Max256", # required
-    #           rep_interval: 1,
-    #         },
-    #         dvb_sdt_settings: {
-    #           output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
-    #           rep_interval: 1,
-    #           service_name: "__stringMin1Max256",
-    #           service_provider_name: "__stringMin1Max256",
-    #         },
-    #         dvb_sub_pids: "__string",
-    #         dvb_tdt_settings: {
-    #           rep_interval: 1,
-    #         },
-    #         dvb_teletext_pid: "__string",
-    #         ebif: "NONE", # accepts NONE, PASSTHROUGH
-    #         ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS", # accepts VIDEO_AND_FIXED_INTERVALS, VIDEO_INTERVAL
-    #         ebp_lookahead_ms: 1,
-    #         ebp_placement: "VIDEO_AND_AUDIO_PIDS", # accepts VIDEO_AND_AUDIO_PIDS, VIDEO_PID
-    #         ecm_pid: "__string",
-    #         es_rate_in_pes: "EXCLUDE", # accepts EXCLUDE, INCLUDE
-    #         etv_platform_pid: "__string",
-    #         etv_signal_pid: "__string",
-    #         fragment_time: 1.0,
-    #         klv: "NONE", # accepts NONE, PASSTHROUGH
-    #         klv_data_pids: "__string",
-    #         nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #         null_packet_bitrate: 1.0,
-    #         pat_interval: 1,
-    #         pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
-    #         pcr_period: 1,
-    #         pcr_pid: "__string",
-    #         pmt_interval: 1,
-    #         pmt_pid: "__string",
-    #         program_num: 1,
-    #         rate_mode: "CBR", # accepts CBR, VBR
-    #         scte_27_pids: "__string",
-    #         scte_35_control: "NONE", # accepts NONE, PASSTHROUGH
-    #         scte_35_pid: "__string",
-    #         segmentation_markers: "EBP", # accepts EBP, EBP_LEGACY, NONE, PSI_SEGSTART, RAI_ADAPT, RAI_SEGSTART
-    #         segmentation_style: "MAINTAIN_CADENCE", # accepts MAINTAIN_CADENCE, RESET_CADENCE
-    #         segmentation_time: 1.0,
-    #         timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #         timed_metadata_pid: "__string",
-    #         transport_stream_id: 1,
-    #         video_pid: "__string",
-    #       }
     #
     # @!attribute [rw] absent_input_audio_behavior
     #   When set to drop, output audio streams will be removed from the
@@ -12517,29 +7859,6 @@ module Aws::MediaLive
 
     # Settings information for the .m3u8 container
     #
-    # @note When making an API call, you may pass M3u8Settings
-    #   data as a hash:
-    #
-    #       {
-    #         audio_frames_per_pes: 1,
-    #         audio_pids: "__string",
-    #         ecm_pid: "__string",
-    #         nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #         pat_interval: 1,
-    #         pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
-    #         pcr_period: 1,
-    #         pcr_pid: "__string",
-    #         pmt_interval: 1,
-    #         pmt_pid: "__string",
-    #         program_num: 1,
-    #         scte_35_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #         scte_35_pid: "__string",
-    #         timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #         timed_metadata_pid: "__string",
-    #         transport_stream_id: 1,
-    #         video_pid: "__string",
-    #       }
-    #
     # @!attribute [rw] audio_frames_per_pes
     #   The number of audio frames to insert for each PES packet.
     #   @return [Integer]
@@ -12655,14 +7974,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass MaintenanceCreateSettings
-    #   data as a hash:
-    #
-    #       {
-    #         maintenance_day: "MONDAY", # accepts MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
-    #         maintenance_start_time: "__stringPattern010920300",
-    #       }
-    #
     # @!attribute [rw] maintenance_day
     #   Choose one day of the week for maintenance. The chosen day is used
     #   for all future maintenance windows.
@@ -12711,15 +8022,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass MaintenanceUpdateSettings
-    #   data as a hash:
-    #
-    #       {
-    #         maintenance_day: "MONDAY", # accepts MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
-    #         maintenance_scheduled_date: "__string",
-    #         maintenance_start_time: "__stringPattern010920300",
-    #       }
-    #
     # @!attribute [rw] maintenance_day
     #   Choose one day of the week for maintenance. The chosen day is used
     #   for all future maintenance windows.
@@ -12761,13 +8063,6 @@ module Aws::MediaLive
 
     # The settings for a MediaConnect Flow.
     #
-    # @note When making an API call, you may pass MediaConnectFlowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         flow_arn: "__string",
-    #       }
-    #
     # @!attribute [rw] flow_arn
     #   The ARN of the MediaConnect Flow that you want to use as a source.
     #   @return [String]
@@ -12782,15 +8077,6 @@ module Aws::MediaLive
 
     # Media Package Group Settings
     #
-    # @note When making an API call, you may pass MediaPackageGroupSettings
-    #   data as a hash:
-    #
-    #       {
-    #         destination: { # required
-    #           destination_ref_id: "__string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] destination
     #   MediaPackage channel destination.
     #   @return [Types::OutputLocationRef]
@@ -12804,13 +8090,6 @@ module Aws::MediaLive
     end
 
     # MediaPackage Output Destination Settings
-    #
-    # @note When making an API call, you may pass MediaPackageOutputDestinationSettings
-    #   data as a hash:
-    #
-    #       {
-    #         channel_id: "__stringMin1",
-    #       }
     #
     # @!attribute [rw] channel_id
     #   ID of the channel in MediaPackage that is the destination for this
@@ -12830,24 +8109,12 @@ module Aws::MediaLive
 
     # Media Package Output Settings
     #
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MediaPackageOutputSettings AWS API Documentation
     #
     class MediaPackageOutputSettings < Aws::EmptyStructure; end
 
     # Settings to specify the rendering of motion graphics into the video
     # stream.
-    #
-    # @note When making an API call, you may pass MotionGraphicsActivateScheduleActionSettings
-    #   data as a hash:
-    #
-    #       {
-    #         duration: 1,
-    #         password_param: "__string",
-    #         url: "__string",
-    #         username: "__string",
-    #       }
     #
     # @!attribute [rw] duration
     #   Duration (in milliseconds) that motion graphics should render on to
@@ -12884,17 +8151,6 @@ module Aws::MediaLive
 
     # Motion Graphics Configuration
     #
-    # @note When making an API call, you may pass MotionGraphicsConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         motion_graphics_insertion: "DISABLED", # accepts DISABLED, ENABLED
-    #         motion_graphics_settings: { # required
-    #           html_motion_graphics_settings: {
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] motion_graphics_insertion
     #   Motion Graphics Insertion
     #   @return [String]
@@ -12915,21 +8171,11 @@ module Aws::MediaLive
     # Settings to specify the ending of rendering motion graphics into the
     # video stream.
     #
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MotionGraphicsDeactivateScheduleActionSettings AWS API Documentation
     #
     class MotionGraphicsDeactivateScheduleActionSettings < Aws::EmptyStructure; end
 
     # Motion Graphics Settings
-    #
-    # @note When making an API call, you may pass MotionGraphicsSettings
-    #   data as a hash:
-    #
-    #       {
-    #         html_motion_graphics_settings: {
-    #         },
-    #       }
     #
     # @!attribute [rw] html_motion_graphics_settings
     #   Html Motion Graphics Settings
@@ -12944,15 +8190,6 @@ module Aws::MediaLive
     end
 
     # Mp2 Settings
-    #
-    # @note When making an API call, you may pass Mp2Settings
-    #   data as a hash:
-    #
-    #       {
-    #         bitrate: 1.0,
-    #         coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_2_0
-    #         sample_rate: 1.0,
-    #       }
     #
     # @!attribute [rw] bitrate
     #   Average bitrate in bits/second.
@@ -12979,16 +8216,6 @@ module Aws::MediaLive
 
     # Mpeg2 Filter Settings
     #
-    # @note When making an API call, you may pass Mpeg2FilterSettings
-    #   data as a hash:
-    #
-    #       {
-    #         temporal_filter_settings: {
-    #           post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
-    #           strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16
-    #         },
-    #       }
-    #
     # @!attribute [rw] temporal_filter_settings
     #   Temporal Filter Settings
     #   @return [Types::TemporalFilterSettings]
@@ -13002,33 +8229,6 @@ module Aws::MediaLive
     end
 
     # Mpeg2 Settings
-    #
-    # @note When making an API call, you may pass Mpeg2Settings
-    #   data as a hash:
-    #
-    #       {
-    #         adaptive_quantization: "AUTO", # accepts AUTO, HIGH, LOW, MEDIUM, OFF
-    #         afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
-    #         color_metadata: "IGNORE", # accepts IGNORE, INSERT
-    #         color_space: "AUTO", # accepts AUTO, PASSTHROUGH
-    #         display_aspect_ratio: "DISPLAYRATIO16X9", # accepts DISPLAYRATIO16X9, DISPLAYRATIO4X3
-    #         filter_settings: {
-    #           temporal_filter_settings: {
-    #             post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
-    #             strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16
-    #           },
-    #         },
-    #         fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
-    #         framerate_denominator: 1, # required
-    #         framerate_numerator: 1, # required
-    #         gop_closed_cadence: 1,
-    #         gop_num_b_frames: 1,
-    #         gop_size: 1.0,
-    #         gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
-    #         scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
-    #         subgop_length: "DYNAMIC", # accepts DYNAMIC, FIXED
-    #         timecode_insertion: "DISABLED", # accepts DISABLED, GOP_TIMECODE
-    #       }
     #
     # @!attribute [rw] adaptive_quantization
     #   Choose Off to disable adaptive quantization. Or choose another value
@@ -13170,33 +8370,6 @@ module Aws::MediaLive
 
     # Ms Smooth Group Settings
     #
-    # @note When making an API call, you may pass MsSmoothGroupSettings
-    #   data as a hash:
-    #
-    #       {
-    #         acquisition_point_id: "__string",
-    #         audio_only_timecode_control: "PASSTHROUGH", # accepts PASSTHROUGH, USE_CONFIGURED_CLOCK
-    #         certificate_mode: "SELF_SIGNED", # accepts SELF_SIGNED, VERIFY_AUTHENTICITY
-    #         connection_retry_interval: 1,
-    #         destination: { # required
-    #           destination_ref_id: "__string",
-    #         },
-    #         event_id: "__string",
-    #         event_id_mode: "NO_EVENT_ID", # accepts NO_EVENT_ID, USE_CONFIGURED, USE_TIMESTAMP
-    #         event_stop_behavior: "NONE", # accepts NONE, SEND_EOS
-    #         filecache_duration: 1,
-    #         fragment_length: 1,
-    #         input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
-    #         num_retries: 1,
-    #         restart_delay: 1,
-    #         segmentation_mode: "USE_INPUT_SEGMENTATION", # accepts USE_INPUT_SEGMENTATION, USE_SEGMENT_DURATION
-    #         send_delay_ms: 1,
-    #         sparse_track_type: "NONE", # accepts NONE, SCTE_35, SCTE_35_WITHOUT_SEGMENTATION
-    #         stream_manifest_behavior: "DO_NOT_SEND", # accepts DO_NOT_SEND, SEND
-    #         timestamp_offset: "__string",
-    #         timestamp_offset_mode: "USE_CONFIGURED_OFFSET", # accepts USE_CONFIGURED_OFFSET, USE_EVENT_START_DATE
-    #       }
-    #
     # @!attribute [rw] acquisition_point_id
     #   The ID to include in each message in the sparse track. Ignored if
     #   sparseTrackType is NONE.
@@ -13332,14 +8505,6 @@ module Aws::MediaLive
 
     # Ms Smooth Output Settings
     #
-    # @note When making an API call, you may pass MsSmoothOutputSettings
-    #   data as a hash:
-    #
-    #       {
-    #         h265_packaging_type: "HEV1", # accepts HEV1, HVC1
-    #         name_modifier: "__string",
-    #       }
-    #
     # @!attribute [rw] h265_packaging_type
     #   Only applicable when this output is referencing an H.265 video
     #   description. Specifies whether MP4 segments should be packaged as
@@ -13438,8 +8603,6 @@ module Aws::MediaLive
 
     # Multiplex Group Settings
     #
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MultiplexGroupSettings AWS API Documentation
     #
     class MultiplexGroupSettings < Aws::EmptyStructure; end
@@ -13473,15 +8636,6 @@ module Aws::MediaLive
     end
 
     # Multiplex Output Settings
-    #
-    # @note When making an API call, you may pass MultiplexOutputSettings
-    #   data as a hash:
-    #
-    #       {
-    #         destination: { # required
-    #           destination_ref_id: "__string",
-    #         },
-    #       }
     #
     # @!attribute [rw] destination
     #   Destination is a Multiplex.
@@ -13535,14 +8689,6 @@ module Aws::MediaLive
 
     # Multiplex Program Input Destination Settings for outputting a Channel
     # to a Multiplex
-    #
-    # @note When making an API call, you may pass MultiplexProgramChannelDestinationSettings
-    #   data as a hash:
-    #
-    #       {
-    #         multiplex_id: "__stringMin1",
-    #         program_name: "__stringMin1",
-    #       }
     #
     # @!attribute [rw] multiplex_id
     #   The ID of the Multiplex that the encoder is providing output to. You
@@ -13650,14 +8796,6 @@ module Aws::MediaLive
     # Transport stream service descriptor configuration for the Multiplex
     # program.
     #
-    # @note When making an API call, you may pass MultiplexProgramServiceDescriptor
-    #   data as a hash:
-    #
-    #       {
-    #         provider_name: "__stringMax256", # required
-    #         service_name: "__stringMax256", # required
-    #       }
-    #
     # @!attribute [rw] provider_name
     #   Name of the provider.
     #   @return [String]
@@ -13676,26 +8814,6 @@ module Aws::MediaLive
     end
 
     # Multiplex Program settings configuration.
-    #
-    # @note When making an API call, you may pass MultiplexProgramSettings
-    #   data as a hash:
-    #
-    #       {
-    #         preferred_channel_pipeline: "CURRENTLY_ACTIVE", # accepts CURRENTLY_ACTIVE, PIPELINE_0, PIPELINE_1
-    #         program_number: 1, # required
-    #         service_descriptor: {
-    #           provider_name: "__stringMax256", # required
-    #           service_name: "__stringMax256", # required
-    #         },
-    #         video_settings: {
-    #           constant_bitrate: 1,
-    #           statmux_settings: {
-    #             maximum_bitrate: 1,
-    #             minimum_bitrate: 1,
-    #             priority: 1,
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] preferred_channel_pipeline
     #   Indicates which pipeline is preferred by the multiplex for program
@@ -13745,16 +8863,6 @@ module Aws::MediaLive
 
     # Contains configuration for a Multiplex event
     #
-    # @note When making an API call, you may pass MultiplexSettings
-    #   data as a hash:
-    #
-    #       {
-    #         maximum_video_buffer_delay_milliseconds: 1,
-    #         transport_stream_bitrate: 1, # required
-    #         transport_stream_id: 1, # required
-    #         transport_stream_reserved_bitrate: 1,
-    #       }
-    #
     # @!attribute [rw] maximum_video_buffer_delay_milliseconds
     #   Maximum video buffer delay in milliseconds.
     #   @return [Integer]
@@ -13797,15 +8905,6 @@ module Aws::MediaLive
     end
 
     # Statmux rate control settings
-    #
-    # @note When making an API call, you may pass MultiplexStatmuxVideoSettings
-    #   data as a hash:
-    #
-    #       {
-    #         maximum_bitrate: 1,
-    #         minimum_bitrate: 1,
-    #         priority: 1,
-    #       }
     #
     # @!attribute [rw] maximum_bitrate
     #   Maximum statmux bitrate.
@@ -13888,18 +8987,6 @@ module Aws::MediaLive
 
     # The video configuration for each program in a multiplex.
     #
-    # @note When making an API call, you may pass MultiplexVideoSettings
-    #   data as a hash:
-    #
-    #       {
-    #         constant_bitrate: 1,
-    #         statmux_settings: {
-    #           maximum_bitrate: 1,
-    #           minimum_bitrate: 1,
-    #           priority: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] constant_bitrate
     #   The constant bitrate configuration for the video encode. When this
     #   field is defined, StatmuxSettings must be undefined.
@@ -13921,20 +9008,6 @@ module Aws::MediaLive
 
     # Network source to transcode. Must be accessible to the Elemental Live
     # node that is running the live event through a network connection.
-    #
-    # @note When making an API call, you may pass NetworkInputSettings
-    #   data as a hash:
-    #
-    #       {
-    #         hls_input_settings: {
-    #           bandwidth: 1,
-    #           buffer_segments: 1,
-    #           retries: 1,
-    #           retry_interval: 1,
-    #           scte_35_source: "MANIFEST", # accepts MANIFEST, SEGMENTS
-    #         },
-    #         server_validation: "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", # accepts CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME, CHECK_CRYPTOGRAPHY_ONLY
-    #       }
     #
     # @!attribute [rw] hls_input_settings
     #   Specifies HLS input settings when the uri is for a HLS manifest.
@@ -13961,15 +9034,6 @@ module Aws::MediaLive
 
     # Nielsen CBET
     #
-    # @note When making an API call, you may pass NielsenCBET
-    #   data as a hash:
-    #
-    #       {
-    #         cbet_check_digit_string: "__stringMin2Max2", # required
-    #         cbet_stepaside: "DISABLED", # required, accepts DISABLED, ENABLED
-    #         csid: "__stringMin1Max7", # required
-    #       }
-    #
     # @!attribute [rw] cbet_check_digit_string
     #   Enter the CBET check digits to use in the watermark.
     #   @return [String]
@@ -13995,14 +9059,6 @@ module Aws::MediaLive
 
     # Nielsen Configuration
     #
-    # @note When making an API call, you may pass NielsenConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         distributor_id: "__string",
-    #         nielsen_pcm_to_id_3_tagging: "DISABLED", # accepts DISABLED, ENABLED
-    #       }
-    #
     # @!attribute [rw] distributor_id
     #   Enter the Distributor ID assigned to your organization by Nielsen.
     #   @return [String]
@@ -14022,14 +9078,6 @@ module Aws::MediaLive
 
     # Nielsen Naes Ii Nw
     #
-    # @note When making an API call, you may pass NielsenNaesIiNw
-    #   data as a hash:
-    #
-    #       {
-    #         check_digit_string: "__stringMin2Max2", # required
-    #         sid: 1.0, # required
-    #       }
-    #
     # @!attribute [rw] check_digit_string
     #   Enter the check digit string for the watermark
     #   @return [String]
@@ -14048,22 +9096,6 @@ module Aws::MediaLive
     end
 
     # Nielsen Watermarks Settings
-    #
-    # @note When making an API call, you may pass NielsenWatermarksSettings
-    #   data as a hash:
-    #
-    #       {
-    #         nielsen_cbet_settings: {
-    #           cbet_check_digit_string: "__stringMin2Max2", # required
-    #           cbet_stepaside: "DISABLED", # required, accepts DISABLED, ENABLED
-    #           csid: "__stringMin1Max7", # required
-    #         },
-    #         nielsen_distribution_type: "FINAL_DISTRIBUTOR", # accepts FINAL_DISTRIBUTOR, PROGRAM_CONTENT
-    #         nielsen_naes_ii_nw_settings: {
-    #           check_digit_string: "__stringMin2Max2", # required
-    #           sid: 1.0, # required
-    #         },
-    #       }
     #
     # @!attribute [rw] nielsen_cbet_settings
     #   Complete these fields only if you want to insert watermarks of type
@@ -14171,227 +9203,6 @@ module Aws::MediaLive
 
     # Output settings. There can be multiple outputs within a group.
     #
-    # @note When making an API call, you may pass Output
-    #   data as a hash:
-    #
-    #       {
-    #         audio_description_names: ["__string"],
-    #         caption_description_names: ["__string"],
-    #         output_name: "__stringMin1Max255",
-    #         output_settings: { # required
-    #           archive_output_settings: {
-    #             container_settings: { # required
-    #               m2ts_settings: {
-    #                 absent_input_audio_behavior: "DROP", # accepts DROP, ENCODE_SILENCE
-    #                 arib: "DISABLED", # accepts DISABLED, ENABLED
-    #                 arib_captions_pid: "__string",
-    #                 arib_captions_pid_control: "AUTO", # accepts AUTO, USE_CONFIGURED
-    #                 audio_buffer_model: "ATSC", # accepts ATSC, DVB
-    #                 audio_frames_per_pes: 1,
-    #                 audio_pids: "__string",
-    #                 audio_stream_type: "ATSC", # accepts ATSC, DVB
-    #                 bitrate: 1,
-    #                 buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
-    #                 cc_descriptor: "DISABLED", # accepts DISABLED, ENABLED
-    #                 dvb_nit_settings: {
-    #                   network_id: 1, # required
-    #                   network_name: "__stringMin1Max256", # required
-    #                   rep_interval: 1,
-    #                 },
-    #                 dvb_sdt_settings: {
-    #                   output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
-    #                   rep_interval: 1,
-    #                   service_name: "__stringMin1Max256",
-    #                   service_provider_name: "__stringMin1Max256",
-    #                 },
-    #                 dvb_sub_pids: "__string",
-    #                 dvb_tdt_settings: {
-    #                   rep_interval: 1,
-    #                 },
-    #                 dvb_teletext_pid: "__string",
-    #                 ebif: "NONE", # accepts NONE, PASSTHROUGH
-    #                 ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS", # accepts VIDEO_AND_FIXED_INTERVALS, VIDEO_INTERVAL
-    #                 ebp_lookahead_ms: 1,
-    #                 ebp_placement: "VIDEO_AND_AUDIO_PIDS", # accepts VIDEO_AND_AUDIO_PIDS, VIDEO_PID
-    #                 ecm_pid: "__string",
-    #                 es_rate_in_pes: "EXCLUDE", # accepts EXCLUDE, INCLUDE
-    #                 etv_platform_pid: "__string",
-    #                 etv_signal_pid: "__string",
-    #                 fragment_time: 1.0,
-    #                 klv: "NONE", # accepts NONE, PASSTHROUGH
-    #                 klv_data_pids: "__string",
-    #                 nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                 null_packet_bitrate: 1.0,
-    #                 pat_interval: 1,
-    #                 pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
-    #                 pcr_period: 1,
-    #                 pcr_pid: "__string",
-    #                 pmt_interval: 1,
-    #                 pmt_pid: "__string",
-    #                 program_num: 1,
-    #                 rate_mode: "CBR", # accepts CBR, VBR
-    #                 scte_27_pids: "__string",
-    #                 scte_35_control: "NONE", # accepts NONE, PASSTHROUGH
-    #                 scte_35_pid: "__string",
-    #                 segmentation_markers: "EBP", # accepts EBP, EBP_LEGACY, NONE, PSI_SEGSTART, RAI_ADAPT, RAI_SEGSTART
-    #                 segmentation_style: "MAINTAIN_CADENCE", # accepts MAINTAIN_CADENCE, RESET_CADENCE
-    #                 segmentation_time: 1.0,
-    #                 timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                 timed_metadata_pid: "__string",
-    #                 transport_stream_id: 1,
-    #                 video_pid: "__string",
-    #               },
-    #               raw_settings: {
-    #               },
-    #             },
-    #             extension: "__string",
-    #             name_modifier: "__string",
-    #           },
-    #           frame_capture_output_settings: {
-    #             name_modifier: "__string",
-    #           },
-    #           hls_output_settings: {
-    #             h265_packaging_type: "HEV1", # accepts HEV1, HVC1
-    #             hls_settings: { # required
-    #               audio_only_hls_settings: {
-    #                 audio_group_id: "__string",
-    #                 audio_only_image: {
-    #                   password_param: "__string",
-    #                   uri: "__stringMax2048", # required
-    #                   username: "__string",
-    #                 },
-    #                 audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT", # accepts ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
-    #                 segment_type: "AAC", # accepts AAC, FMP4
-    #               },
-    #               fmp_4_hls_settings: {
-    #                 audio_rendition_sets: "__string",
-    #                 nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                 timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #               },
-    #               frame_capture_hls_settings: {
-    #               },
-    #               standard_hls_settings: {
-    #                 audio_rendition_sets: "__string",
-    #                 m3u_8_settings: { # required
-    #                   audio_frames_per_pes: 1,
-    #                   audio_pids: "__string",
-    #                   ecm_pid: "__string",
-    #                   nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                   pat_interval: 1,
-    #                   pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
-    #                   pcr_period: 1,
-    #                   pcr_pid: "__string",
-    #                   pmt_interval: 1,
-    #                   pmt_pid: "__string",
-    #                   program_num: 1,
-    #                   scte_35_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                   scte_35_pid: "__string",
-    #                   timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                   timed_metadata_pid: "__string",
-    #                   transport_stream_id: 1,
-    #                   video_pid: "__string",
-    #                 },
-    #               },
-    #             },
-    #             name_modifier: "__stringMin1",
-    #             segment_modifier: "__string",
-    #           },
-    #           media_package_output_settings: {
-    #           },
-    #           ms_smooth_output_settings: {
-    #             h265_packaging_type: "HEV1", # accepts HEV1, HVC1
-    #             name_modifier: "__string",
-    #           },
-    #           multiplex_output_settings: {
-    #             destination: { # required
-    #               destination_ref_id: "__string",
-    #             },
-    #           },
-    #           rtmp_output_settings: {
-    #             certificate_mode: "SELF_SIGNED", # accepts SELF_SIGNED, VERIFY_AUTHENTICITY
-    #             connection_retry_interval: 1,
-    #             destination: { # required
-    #               destination_ref_id: "__string",
-    #             },
-    #             num_retries: 1,
-    #           },
-    #           udp_output_settings: {
-    #             buffer_msec: 1,
-    #             container_settings: { # required
-    #               m2ts_settings: {
-    #                 absent_input_audio_behavior: "DROP", # accepts DROP, ENCODE_SILENCE
-    #                 arib: "DISABLED", # accepts DISABLED, ENABLED
-    #                 arib_captions_pid: "__string",
-    #                 arib_captions_pid_control: "AUTO", # accepts AUTO, USE_CONFIGURED
-    #                 audio_buffer_model: "ATSC", # accepts ATSC, DVB
-    #                 audio_frames_per_pes: 1,
-    #                 audio_pids: "__string",
-    #                 audio_stream_type: "ATSC", # accepts ATSC, DVB
-    #                 bitrate: 1,
-    #                 buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
-    #                 cc_descriptor: "DISABLED", # accepts DISABLED, ENABLED
-    #                 dvb_nit_settings: {
-    #                   network_id: 1, # required
-    #                   network_name: "__stringMin1Max256", # required
-    #                   rep_interval: 1,
-    #                 },
-    #                 dvb_sdt_settings: {
-    #                   output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
-    #                   rep_interval: 1,
-    #                   service_name: "__stringMin1Max256",
-    #                   service_provider_name: "__stringMin1Max256",
-    #                 },
-    #                 dvb_sub_pids: "__string",
-    #                 dvb_tdt_settings: {
-    #                   rep_interval: 1,
-    #                 },
-    #                 dvb_teletext_pid: "__string",
-    #                 ebif: "NONE", # accepts NONE, PASSTHROUGH
-    #                 ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS", # accepts VIDEO_AND_FIXED_INTERVALS, VIDEO_INTERVAL
-    #                 ebp_lookahead_ms: 1,
-    #                 ebp_placement: "VIDEO_AND_AUDIO_PIDS", # accepts VIDEO_AND_AUDIO_PIDS, VIDEO_PID
-    #                 ecm_pid: "__string",
-    #                 es_rate_in_pes: "EXCLUDE", # accepts EXCLUDE, INCLUDE
-    #                 etv_platform_pid: "__string",
-    #                 etv_signal_pid: "__string",
-    #                 fragment_time: 1.0,
-    #                 klv: "NONE", # accepts NONE, PASSTHROUGH
-    #                 klv_data_pids: "__string",
-    #                 nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                 null_packet_bitrate: 1.0,
-    #                 pat_interval: 1,
-    #                 pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
-    #                 pcr_period: 1,
-    #                 pcr_pid: "__string",
-    #                 pmt_interval: 1,
-    #                 pmt_pid: "__string",
-    #                 program_num: 1,
-    #                 rate_mode: "CBR", # accepts CBR, VBR
-    #                 scte_27_pids: "__string",
-    #                 scte_35_control: "NONE", # accepts NONE, PASSTHROUGH
-    #                 scte_35_pid: "__string",
-    #                 segmentation_markers: "EBP", # accepts EBP, EBP_LEGACY, NONE, PSI_SEGSTART, RAI_ADAPT, RAI_SEGSTART
-    #                 segmentation_style: "MAINTAIN_CADENCE", # accepts MAINTAIN_CADENCE, RESET_CADENCE
-    #                 segmentation_time: 1.0,
-    #                 timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                 timed_metadata_pid: "__string",
-    #                 transport_stream_id: 1,
-    #                 video_pid: "__string",
-    #               },
-    #             },
-    #             destination: { # required
-    #               destination_ref_id: "__string",
-    #             },
-    #             fec_output_settings: {
-    #               column_depth: 1,
-    #               include_fec: "COLUMN", # accepts COLUMN, COLUMN_AND_ROW
-    #               row_length: 1,
-    #             },
-    #           },
-    #         },
-    #         video_description_name: "__string",
-    #       }
-    #
     # @!attribute [rw] audio_description_names
     #   The names of the AudioDescriptions used as audio sources for this
     #   output.
@@ -14426,30 +9237,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass OutputDestination
-    #   data as a hash:
-    #
-    #       {
-    #         id: "__string",
-    #         media_package_settings: [
-    #           {
-    #             channel_id: "__stringMin1",
-    #           },
-    #         ],
-    #         multiplex_settings: {
-    #           multiplex_id: "__stringMin1",
-    #           program_name: "__stringMin1",
-    #         },
-    #         settings: [
-    #           {
-    #             password_param: "__string",
-    #             stream_name: "__string",
-    #             url: "__string",
-    #             username: "__string",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] id
     #   User-specified id. This is used in an output group or an output.
     #   @return [String]
@@ -14480,16 +9267,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass OutputDestinationSettings
-    #   data as a hash:
-    #
-    #       {
-    #         password_param: "__string",
-    #         stream_name: "__string",
-    #         url: "__string",
-    #         username: "__string",
-    #       }
-    #
     # @!attribute [rw] password_param
     #   key used to extract the password from EC2 Parameter store
     #   @return [String]
@@ -14520,394 +9297,6 @@ module Aws::MediaLive
     # Output groups for this Live Event. Output groups contain information
     # about where streams should be distributed.
     #
-    # @note When making an API call, you may pass OutputGroup
-    #   data as a hash:
-    #
-    #       {
-    #         name: "__stringMax32",
-    #         output_group_settings: { # required
-    #           archive_group_settings: {
-    #             archive_cdn_settings: {
-    #               archive_s3_settings: {
-    #                 canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
-    #               },
-    #             },
-    #             destination: { # required
-    #               destination_ref_id: "__string",
-    #             },
-    #             rollover_interval: 1,
-    #           },
-    #           frame_capture_group_settings: {
-    #             destination: { # required
-    #               destination_ref_id: "__string",
-    #             },
-    #             frame_capture_cdn_settings: {
-    #               frame_capture_s3_settings: {
-    #                 canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
-    #               },
-    #             },
-    #           },
-    #           hls_group_settings: {
-    #             ad_markers: ["ADOBE"], # accepts ADOBE, ELEMENTAL, ELEMENTAL_SCTE35
-    #             base_url_content: "__string",
-    #             base_url_content_1: "__string",
-    #             base_url_manifest: "__string",
-    #             base_url_manifest_1: "__string",
-    #             caption_language_mappings: [
-    #               {
-    #                 caption_channel: 1, # required
-    #                 language_code: "__stringMin3Max3", # required
-    #                 language_description: "__stringMin1", # required
-    #               },
-    #             ],
-    #             caption_language_setting: "INSERT", # accepts INSERT, NONE, OMIT
-    #             client_cache: "DISABLED", # accepts DISABLED, ENABLED
-    #             codec_specification: "RFC_4281", # accepts RFC_4281, RFC_6381
-    #             constant_iv: "__stringMin32Max32",
-    #             destination: { # required
-    #               destination_ref_id: "__string",
-    #             },
-    #             directory_structure: "SINGLE_DIRECTORY", # accepts SINGLE_DIRECTORY, SUBDIRECTORY_PER_STREAM
-    #             discontinuity_tags: "INSERT", # accepts INSERT, NEVER_INSERT
-    #             encryption_type: "AES128", # accepts AES128, SAMPLE_AES
-    #             hls_cdn_settings: {
-    #               hls_akamai_settings: {
-    #                 connection_retry_interval: 1,
-    #                 filecache_duration: 1,
-    #                 http_transfer_mode: "CHUNKED", # accepts CHUNKED, NON_CHUNKED
-    #                 num_retries: 1,
-    #                 restart_delay: 1,
-    #                 salt: "__string",
-    #                 token: "__string",
-    #               },
-    #               hls_basic_put_settings: {
-    #                 connection_retry_interval: 1,
-    #                 filecache_duration: 1,
-    #                 num_retries: 1,
-    #                 restart_delay: 1,
-    #               },
-    #               hls_media_store_settings: {
-    #                 connection_retry_interval: 1,
-    #                 filecache_duration: 1,
-    #                 media_store_storage_class: "TEMPORAL", # accepts TEMPORAL
-    #                 num_retries: 1,
-    #                 restart_delay: 1,
-    #               },
-    #               hls_s3_settings: {
-    #                 canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
-    #               },
-    #               hls_webdav_settings: {
-    #                 connection_retry_interval: 1,
-    #                 filecache_duration: 1,
-    #                 http_transfer_mode: "CHUNKED", # accepts CHUNKED, NON_CHUNKED
-    #                 num_retries: 1,
-    #                 restart_delay: 1,
-    #               },
-    #             },
-    #             hls_id_3_segment_tagging: "DISABLED", # accepts DISABLED, ENABLED
-    #             i_frame_only_playlists: "DISABLED", # accepts DISABLED, STANDARD
-    #             incomplete_segment_behavior: "AUTO", # accepts AUTO, SUPPRESS
-    #             index_n_segments: 1,
-    #             input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
-    #             iv_in_manifest: "EXCLUDE", # accepts EXCLUDE, INCLUDE
-    #             iv_source: "EXPLICIT", # accepts EXPLICIT, FOLLOWS_SEGMENT_NUMBER
-    #             keep_segments: 1,
-    #             key_format: "__string",
-    #             key_format_versions: "__string",
-    #             key_provider_settings: {
-    #               static_key_settings: {
-    #                 key_provider_server: {
-    #                   password_param: "__string",
-    #                   uri: "__stringMax2048", # required
-    #                   username: "__string",
-    #                 },
-    #                 static_key_value: "__stringMin32Max32", # required
-    #               },
-    #             },
-    #             manifest_compression: "GZIP", # accepts GZIP, NONE
-    #             manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
-    #             min_segment_length: 1,
-    #             mode: "LIVE", # accepts LIVE, VOD
-    #             output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY, VARIANT_MANIFESTS_AND_SEGMENTS
-    #             program_date_time: "EXCLUDE", # accepts EXCLUDE, INCLUDE
-    #             program_date_time_clock: "INITIALIZE_FROM_OUTPUT_TIMECODE", # accepts INITIALIZE_FROM_OUTPUT_TIMECODE, SYSTEM_CLOCK
-    #             program_date_time_period: 1,
-    #             redundant_manifest: "DISABLED", # accepts DISABLED, ENABLED
-    #             segment_length: 1,
-    #             segmentation_mode: "USE_INPUT_SEGMENTATION", # accepts USE_INPUT_SEGMENTATION, USE_SEGMENT_DURATION
-    #             segments_per_subdirectory: 1,
-    #             stream_inf_resolution: "EXCLUDE", # accepts EXCLUDE, INCLUDE
-    #             timed_metadata_id_3_frame: "NONE", # accepts NONE, PRIV, TDRL
-    #             timed_metadata_id_3_period: 1,
-    #             timestamp_delta_milliseconds: 1,
-    #             ts_file_mode: "SEGMENTED_FILES", # accepts SEGMENTED_FILES, SINGLE_FILE
-    #           },
-    #           media_package_group_settings: {
-    #             destination: { # required
-    #               destination_ref_id: "__string",
-    #             },
-    #           },
-    #           ms_smooth_group_settings: {
-    #             acquisition_point_id: "__string",
-    #             audio_only_timecode_control: "PASSTHROUGH", # accepts PASSTHROUGH, USE_CONFIGURED_CLOCK
-    #             certificate_mode: "SELF_SIGNED", # accepts SELF_SIGNED, VERIFY_AUTHENTICITY
-    #             connection_retry_interval: 1,
-    #             destination: { # required
-    #               destination_ref_id: "__string",
-    #             },
-    #             event_id: "__string",
-    #             event_id_mode: "NO_EVENT_ID", # accepts NO_EVENT_ID, USE_CONFIGURED, USE_TIMESTAMP
-    #             event_stop_behavior: "NONE", # accepts NONE, SEND_EOS
-    #             filecache_duration: 1,
-    #             fragment_length: 1,
-    #             input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
-    #             num_retries: 1,
-    #             restart_delay: 1,
-    #             segmentation_mode: "USE_INPUT_SEGMENTATION", # accepts USE_INPUT_SEGMENTATION, USE_SEGMENT_DURATION
-    #             send_delay_ms: 1,
-    #             sparse_track_type: "NONE", # accepts NONE, SCTE_35, SCTE_35_WITHOUT_SEGMENTATION
-    #             stream_manifest_behavior: "DO_NOT_SEND", # accepts DO_NOT_SEND, SEND
-    #             timestamp_offset: "__string",
-    #             timestamp_offset_mode: "USE_CONFIGURED_OFFSET", # accepts USE_CONFIGURED_OFFSET, USE_EVENT_START_DATE
-    #           },
-    #           multiplex_group_settings: {
-    #           },
-    #           rtmp_group_settings: {
-    #             ad_markers: ["ON_CUE_POINT_SCTE35"], # accepts ON_CUE_POINT_SCTE35
-    #             authentication_scheme: "AKAMAI", # accepts AKAMAI, COMMON
-    #             cache_full_behavior: "DISCONNECT_IMMEDIATELY", # accepts DISCONNECT_IMMEDIATELY, WAIT_FOR_SERVER
-    #             cache_length: 1,
-    #             caption_data: "ALL", # accepts ALL, FIELD1_608, FIELD1_AND_FIELD2_608
-    #             input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
-    #             restart_delay: 1,
-    #           },
-    #           udp_group_settings: {
-    #             input_loss_action: "DROP_PROGRAM", # accepts DROP_PROGRAM, DROP_TS, EMIT_PROGRAM
-    #             timed_metadata_id_3_frame: "NONE", # accepts NONE, PRIV, TDRL
-    #             timed_metadata_id_3_period: 1,
-    #           },
-    #         },
-    #         outputs: [ # required
-    #           {
-    #             audio_description_names: ["__string"],
-    #             caption_description_names: ["__string"],
-    #             output_name: "__stringMin1Max255",
-    #             output_settings: { # required
-    #               archive_output_settings: {
-    #                 container_settings: { # required
-    #                   m2ts_settings: {
-    #                     absent_input_audio_behavior: "DROP", # accepts DROP, ENCODE_SILENCE
-    #                     arib: "DISABLED", # accepts DISABLED, ENABLED
-    #                     arib_captions_pid: "__string",
-    #                     arib_captions_pid_control: "AUTO", # accepts AUTO, USE_CONFIGURED
-    #                     audio_buffer_model: "ATSC", # accepts ATSC, DVB
-    #                     audio_frames_per_pes: 1,
-    #                     audio_pids: "__string",
-    #                     audio_stream_type: "ATSC", # accepts ATSC, DVB
-    #                     bitrate: 1,
-    #                     buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
-    #                     cc_descriptor: "DISABLED", # accepts DISABLED, ENABLED
-    #                     dvb_nit_settings: {
-    #                       network_id: 1, # required
-    #                       network_name: "__stringMin1Max256", # required
-    #                       rep_interval: 1,
-    #                     },
-    #                     dvb_sdt_settings: {
-    #                       output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
-    #                       rep_interval: 1,
-    #                       service_name: "__stringMin1Max256",
-    #                       service_provider_name: "__stringMin1Max256",
-    #                     },
-    #                     dvb_sub_pids: "__string",
-    #                     dvb_tdt_settings: {
-    #                       rep_interval: 1,
-    #                     },
-    #                     dvb_teletext_pid: "__string",
-    #                     ebif: "NONE", # accepts NONE, PASSTHROUGH
-    #                     ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS", # accepts VIDEO_AND_FIXED_INTERVALS, VIDEO_INTERVAL
-    #                     ebp_lookahead_ms: 1,
-    #                     ebp_placement: "VIDEO_AND_AUDIO_PIDS", # accepts VIDEO_AND_AUDIO_PIDS, VIDEO_PID
-    #                     ecm_pid: "__string",
-    #                     es_rate_in_pes: "EXCLUDE", # accepts EXCLUDE, INCLUDE
-    #                     etv_platform_pid: "__string",
-    #                     etv_signal_pid: "__string",
-    #                     fragment_time: 1.0,
-    #                     klv: "NONE", # accepts NONE, PASSTHROUGH
-    #                     klv_data_pids: "__string",
-    #                     nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                     null_packet_bitrate: 1.0,
-    #                     pat_interval: 1,
-    #                     pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
-    #                     pcr_period: 1,
-    #                     pcr_pid: "__string",
-    #                     pmt_interval: 1,
-    #                     pmt_pid: "__string",
-    #                     program_num: 1,
-    #                     rate_mode: "CBR", # accepts CBR, VBR
-    #                     scte_27_pids: "__string",
-    #                     scte_35_control: "NONE", # accepts NONE, PASSTHROUGH
-    #                     scte_35_pid: "__string",
-    #                     segmentation_markers: "EBP", # accepts EBP, EBP_LEGACY, NONE, PSI_SEGSTART, RAI_ADAPT, RAI_SEGSTART
-    #                     segmentation_style: "MAINTAIN_CADENCE", # accepts MAINTAIN_CADENCE, RESET_CADENCE
-    #                     segmentation_time: 1.0,
-    #                     timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                     timed_metadata_pid: "__string",
-    #                     transport_stream_id: 1,
-    #                     video_pid: "__string",
-    #                   },
-    #                   raw_settings: {
-    #                   },
-    #                 },
-    #                 extension: "__string",
-    #                 name_modifier: "__string",
-    #               },
-    #               frame_capture_output_settings: {
-    #                 name_modifier: "__string",
-    #               },
-    #               hls_output_settings: {
-    #                 h265_packaging_type: "HEV1", # accepts HEV1, HVC1
-    #                 hls_settings: { # required
-    #                   audio_only_hls_settings: {
-    #                     audio_group_id: "__string",
-    #                     audio_only_image: {
-    #                       password_param: "__string",
-    #                       uri: "__stringMax2048", # required
-    #                       username: "__string",
-    #                     },
-    #                     audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT", # accepts ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
-    #                     segment_type: "AAC", # accepts AAC, FMP4
-    #                   },
-    #                   fmp_4_hls_settings: {
-    #                     audio_rendition_sets: "__string",
-    #                     nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                     timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                   },
-    #                   frame_capture_hls_settings: {
-    #                   },
-    #                   standard_hls_settings: {
-    #                     audio_rendition_sets: "__string",
-    #                     m3u_8_settings: { # required
-    #                       audio_frames_per_pes: 1,
-    #                       audio_pids: "__string",
-    #                       ecm_pid: "__string",
-    #                       nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                       pat_interval: 1,
-    #                       pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
-    #                       pcr_period: 1,
-    #                       pcr_pid: "__string",
-    #                       pmt_interval: 1,
-    #                       pmt_pid: "__string",
-    #                       program_num: 1,
-    #                       scte_35_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                       scte_35_pid: "__string",
-    #                       timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                       timed_metadata_pid: "__string",
-    #                       transport_stream_id: 1,
-    #                       video_pid: "__string",
-    #                     },
-    #                   },
-    #                 },
-    #                 name_modifier: "__stringMin1",
-    #                 segment_modifier: "__string",
-    #               },
-    #               media_package_output_settings: {
-    #               },
-    #               ms_smooth_output_settings: {
-    #                 h265_packaging_type: "HEV1", # accepts HEV1, HVC1
-    #                 name_modifier: "__string",
-    #               },
-    #               multiplex_output_settings: {
-    #                 destination: { # required
-    #                   destination_ref_id: "__string",
-    #                 },
-    #               },
-    #               rtmp_output_settings: {
-    #                 certificate_mode: "SELF_SIGNED", # accepts SELF_SIGNED, VERIFY_AUTHENTICITY
-    #                 connection_retry_interval: 1,
-    #                 destination: { # required
-    #                   destination_ref_id: "__string",
-    #                 },
-    #                 num_retries: 1,
-    #               },
-    #               udp_output_settings: {
-    #                 buffer_msec: 1,
-    #                 container_settings: { # required
-    #                   m2ts_settings: {
-    #                     absent_input_audio_behavior: "DROP", # accepts DROP, ENCODE_SILENCE
-    #                     arib: "DISABLED", # accepts DISABLED, ENABLED
-    #                     arib_captions_pid: "__string",
-    #                     arib_captions_pid_control: "AUTO", # accepts AUTO, USE_CONFIGURED
-    #                     audio_buffer_model: "ATSC", # accepts ATSC, DVB
-    #                     audio_frames_per_pes: 1,
-    #                     audio_pids: "__string",
-    #                     audio_stream_type: "ATSC", # accepts ATSC, DVB
-    #                     bitrate: 1,
-    #                     buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
-    #                     cc_descriptor: "DISABLED", # accepts DISABLED, ENABLED
-    #                     dvb_nit_settings: {
-    #                       network_id: 1, # required
-    #                       network_name: "__stringMin1Max256", # required
-    #                       rep_interval: 1,
-    #                     },
-    #                     dvb_sdt_settings: {
-    #                       output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
-    #                       rep_interval: 1,
-    #                       service_name: "__stringMin1Max256",
-    #                       service_provider_name: "__stringMin1Max256",
-    #                     },
-    #                     dvb_sub_pids: "__string",
-    #                     dvb_tdt_settings: {
-    #                       rep_interval: 1,
-    #                     },
-    #                     dvb_teletext_pid: "__string",
-    #                     ebif: "NONE", # accepts NONE, PASSTHROUGH
-    #                     ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS", # accepts VIDEO_AND_FIXED_INTERVALS, VIDEO_INTERVAL
-    #                     ebp_lookahead_ms: 1,
-    #                     ebp_placement: "VIDEO_AND_AUDIO_PIDS", # accepts VIDEO_AND_AUDIO_PIDS, VIDEO_PID
-    #                     ecm_pid: "__string",
-    #                     es_rate_in_pes: "EXCLUDE", # accepts EXCLUDE, INCLUDE
-    #                     etv_platform_pid: "__string",
-    #                     etv_signal_pid: "__string",
-    #                     fragment_time: 1.0,
-    #                     klv: "NONE", # accepts NONE, PASSTHROUGH
-    #                     klv_data_pids: "__string",
-    #                     nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                     null_packet_bitrate: 1.0,
-    #                     pat_interval: 1,
-    #                     pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
-    #                     pcr_period: 1,
-    #                     pcr_pid: "__string",
-    #                     pmt_interval: 1,
-    #                     pmt_pid: "__string",
-    #                     program_num: 1,
-    #                     rate_mode: "CBR", # accepts CBR, VBR
-    #                     scte_27_pids: "__string",
-    #                     scte_35_control: "NONE", # accepts NONE, PASSTHROUGH
-    #                     scte_35_pid: "__string",
-    #                     segmentation_markers: "EBP", # accepts EBP, EBP_LEGACY, NONE, PSI_SEGSTART, RAI_ADAPT, RAI_SEGSTART
-    #                     segmentation_style: "MAINTAIN_CADENCE", # accepts MAINTAIN_CADENCE, RESET_CADENCE
-    #                     segmentation_time: 1.0,
-    #                     timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                     timed_metadata_pid: "__string",
-    #                     transport_stream_id: 1,
-    #                     video_pid: "__string",
-    #                   },
-    #                 },
-    #                 destination: { # required
-    #                   destination_ref_id: "__string",
-    #                 },
-    #                 fec_output_settings: {
-    #                   column_depth: 1,
-    #                   include_fec: "COLUMN", # accepts COLUMN, COLUMN_AND_ROW
-    #                   row_length: 1,
-    #                 },
-    #               },
-    #             },
-    #             video_description_name: "__string",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   Custom output group name optionally defined by the user.
     #   @return [String]
@@ -14930,172 +9319,6 @@ module Aws::MediaLive
     end
 
     # Output Group Settings
-    #
-    # @note When making an API call, you may pass OutputGroupSettings
-    #   data as a hash:
-    #
-    #       {
-    #         archive_group_settings: {
-    #           archive_cdn_settings: {
-    #             archive_s3_settings: {
-    #               canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
-    #             },
-    #           },
-    #           destination: { # required
-    #             destination_ref_id: "__string",
-    #           },
-    #           rollover_interval: 1,
-    #         },
-    #         frame_capture_group_settings: {
-    #           destination: { # required
-    #             destination_ref_id: "__string",
-    #           },
-    #           frame_capture_cdn_settings: {
-    #             frame_capture_s3_settings: {
-    #               canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
-    #             },
-    #           },
-    #         },
-    #         hls_group_settings: {
-    #           ad_markers: ["ADOBE"], # accepts ADOBE, ELEMENTAL, ELEMENTAL_SCTE35
-    #           base_url_content: "__string",
-    #           base_url_content_1: "__string",
-    #           base_url_manifest: "__string",
-    #           base_url_manifest_1: "__string",
-    #           caption_language_mappings: [
-    #             {
-    #               caption_channel: 1, # required
-    #               language_code: "__stringMin3Max3", # required
-    #               language_description: "__stringMin1", # required
-    #             },
-    #           ],
-    #           caption_language_setting: "INSERT", # accepts INSERT, NONE, OMIT
-    #           client_cache: "DISABLED", # accepts DISABLED, ENABLED
-    #           codec_specification: "RFC_4281", # accepts RFC_4281, RFC_6381
-    #           constant_iv: "__stringMin32Max32",
-    #           destination: { # required
-    #             destination_ref_id: "__string",
-    #           },
-    #           directory_structure: "SINGLE_DIRECTORY", # accepts SINGLE_DIRECTORY, SUBDIRECTORY_PER_STREAM
-    #           discontinuity_tags: "INSERT", # accepts INSERT, NEVER_INSERT
-    #           encryption_type: "AES128", # accepts AES128, SAMPLE_AES
-    #           hls_cdn_settings: {
-    #             hls_akamai_settings: {
-    #               connection_retry_interval: 1,
-    #               filecache_duration: 1,
-    #               http_transfer_mode: "CHUNKED", # accepts CHUNKED, NON_CHUNKED
-    #               num_retries: 1,
-    #               restart_delay: 1,
-    #               salt: "__string",
-    #               token: "__string",
-    #             },
-    #             hls_basic_put_settings: {
-    #               connection_retry_interval: 1,
-    #               filecache_duration: 1,
-    #               num_retries: 1,
-    #               restart_delay: 1,
-    #             },
-    #             hls_media_store_settings: {
-    #               connection_retry_interval: 1,
-    #               filecache_duration: 1,
-    #               media_store_storage_class: "TEMPORAL", # accepts TEMPORAL
-    #               num_retries: 1,
-    #               restart_delay: 1,
-    #             },
-    #             hls_s3_settings: {
-    #               canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
-    #             },
-    #             hls_webdav_settings: {
-    #               connection_retry_interval: 1,
-    #               filecache_duration: 1,
-    #               http_transfer_mode: "CHUNKED", # accepts CHUNKED, NON_CHUNKED
-    #               num_retries: 1,
-    #               restart_delay: 1,
-    #             },
-    #           },
-    #           hls_id_3_segment_tagging: "DISABLED", # accepts DISABLED, ENABLED
-    #           i_frame_only_playlists: "DISABLED", # accepts DISABLED, STANDARD
-    #           incomplete_segment_behavior: "AUTO", # accepts AUTO, SUPPRESS
-    #           index_n_segments: 1,
-    #           input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
-    #           iv_in_manifest: "EXCLUDE", # accepts EXCLUDE, INCLUDE
-    #           iv_source: "EXPLICIT", # accepts EXPLICIT, FOLLOWS_SEGMENT_NUMBER
-    #           keep_segments: 1,
-    #           key_format: "__string",
-    #           key_format_versions: "__string",
-    #           key_provider_settings: {
-    #             static_key_settings: {
-    #               key_provider_server: {
-    #                 password_param: "__string",
-    #                 uri: "__stringMax2048", # required
-    #                 username: "__string",
-    #               },
-    #               static_key_value: "__stringMin32Max32", # required
-    #             },
-    #           },
-    #           manifest_compression: "GZIP", # accepts GZIP, NONE
-    #           manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
-    #           min_segment_length: 1,
-    #           mode: "LIVE", # accepts LIVE, VOD
-    #           output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY, VARIANT_MANIFESTS_AND_SEGMENTS
-    #           program_date_time: "EXCLUDE", # accepts EXCLUDE, INCLUDE
-    #           program_date_time_clock: "INITIALIZE_FROM_OUTPUT_TIMECODE", # accepts INITIALIZE_FROM_OUTPUT_TIMECODE, SYSTEM_CLOCK
-    #           program_date_time_period: 1,
-    #           redundant_manifest: "DISABLED", # accepts DISABLED, ENABLED
-    #           segment_length: 1,
-    #           segmentation_mode: "USE_INPUT_SEGMENTATION", # accepts USE_INPUT_SEGMENTATION, USE_SEGMENT_DURATION
-    #           segments_per_subdirectory: 1,
-    #           stream_inf_resolution: "EXCLUDE", # accepts EXCLUDE, INCLUDE
-    #           timed_metadata_id_3_frame: "NONE", # accepts NONE, PRIV, TDRL
-    #           timed_metadata_id_3_period: 1,
-    #           timestamp_delta_milliseconds: 1,
-    #           ts_file_mode: "SEGMENTED_FILES", # accepts SEGMENTED_FILES, SINGLE_FILE
-    #         },
-    #         media_package_group_settings: {
-    #           destination: { # required
-    #             destination_ref_id: "__string",
-    #           },
-    #         },
-    #         ms_smooth_group_settings: {
-    #           acquisition_point_id: "__string",
-    #           audio_only_timecode_control: "PASSTHROUGH", # accepts PASSTHROUGH, USE_CONFIGURED_CLOCK
-    #           certificate_mode: "SELF_SIGNED", # accepts SELF_SIGNED, VERIFY_AUTHENTICITY
-    #           connection_retry_interval: 1,
-    #           destination: { # required
-    #             destination_ref_id: "__string",
-    #           },
-    #           event_id: "__string",
-    #           event_id_mode: "NO_EVENT_ID", # accepts NO_EVENT_ID, USE_CONFIGURED, USE_TIMESTAMP
-    #           event_stop_behavior: "NONE", # accepts NONE, SEND_EOS
-    #           filecache_duration: 1,
-    #           fragment_length: 1,
-    #           input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
-    #           num_retries: 1,
-    #           restart_delay: 1,
-    #           segmentation_mode: "USE_INPUT_SEGMENTATION", # accepts USE_INPUT_SEGMENTATION, USE_SEGMENT_DURATION
-    #           send_delay_ms: 1,
-    #           sparse_track_type: "NONE", # accepts NONE, SCTE_35, SCTE_35_WITHOUT_SEGMENTATION
-    #           stream_manifest_behavior: "DO_NOT_SEND", # accepts DO_NOT_SEND, SEND
-    #           timestamp_offset: "__string",
-    #           timestamp_offset_mode: "USE_CONFIGURED_OFFSET", # accepts USE_CONFIGURED_OFFSET, USE_EVENT_START_DATE
-    #         },
-    #         multiplex_group_settings: {
-    #         },
-    #         rtmp_group_settings: {
-    #           ad_markers: ["ON_CUE_POINT_SCTE35"], # accepts ON_CUE_POINT_SCTE35
-    #           authentication_scheme: "AKAMAI", # accepts AKAMAI, COMMON
-    #           cache_full_behavior: "DISCONNECT_IMMEDIATELY", # accepts DISCONNECT_IMMEDIATELY, WAIT_FOR_SERVER
-    #           cache_length: 1,
-    #           caption_data: "ALL", # accepts ALL, FIELD1_608, FIELD1_AND_FIELD2_608
-    #           input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
-    #           restart_delay: 1,
-    #         },
-    #         udp_group_settings: {
-    #           input_loss_action: "DROP_PROGRAM", # accepts DROP_PROGRAM, DROP_TS, EMIT_PROGRAM
-    #           timed_metadata_id_3_frame: "NONE", # accepts NONE, PRIV, TDRL
-    #           timed_metadata_id_3_period: 1,
-    #         },
-    #       }
     #
     # @!attribute [rw] archive_group_settings
     #   Archive Group Settings
@@ -15146,13 +9369,6 @@ module Aws::MediaLive
 
     # Reference to an OutputDestination ID defined in the channel
     #
-    # @note When making an API call, you may pass OutputLocationRef
-    #   data as a hash:
-    #
-    #       {
-    #         destination_ref_id: "__string",
-    #       }
-    #
     # @!attribute [rw] destination_ref_id
     #   @return [String]
     #
@@ -15165,221 +9381,6 @@ module Aws::MediaLive
     end
 
     # Output Settings
-    #
-    # @note When making an API call, you may pass OutputSettings
-    #   data as a hash:
-    #
-    #       {
-    #         archive_output_settings: {
-    #           container_settings: { # required
-    #             m2ts_settings: {
-    #               absent_input_audio_behavior: "DROP", # accepts DROP, ENCODE_SILENCE
-    #               arib: "DISABLED", # accepts DISABLED, ENABLED
-    #               arib_captions_pid: "__string",
-    #               arib_captions_pid_control: "AUTO", # accepts AUTO, USE_CONFIGURED
-    #               audio_buffer_model: "ATSC", # accepts ATSC, DVB
-    #               audio_frames_per_pes: 1,
-    #               audio_pids: "__string",
-    #               audio_stream_type: "ATSC", # accepts ATSC, DVB
-    #               bitrate: 1,
-    #               buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
-    #               cc_descriptor: "DISABLED", # accepts DISABLED, ENABLED
-    #               dvb_nit_settings: {
-    #                 network_id: 1, # required
-    #                 network_name: "__stringMin1Max256", # required
-    #                 rep_interval: 1,
-    #               },
-    #               dvb_sdt_settings: {
-    #                 output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
-    #                 rep_interval: 1,
-    #                 service_name: "__stringMin1Max256",
-    #                 service_provider_name: "__stringMin1Max256",
-    #               },
-    #               dvb_sub_pids: "__string",
-    #               dvb_tdt_settings: {
-    #                 rep_interval: 1,
-    #               },
-    #               dvb_teletext_pid: "__string",
-    #               ebif: "NONE", # accepts NONE, PASSTHROUGH
-    #               ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS", # accepts VIDEO_AND_FIXED_INTERVALS, VIDEO_INTERVAL
-    #               ebp_lookahead_ms: 1,
-    #               ebp_placement: "VIDEO_AND_AUDIO_PIDS", # accepts VIDEO_AND_AUDIO_PIDS, VIDEO_PID
-    #               ecm_pid: "__string",
-    #               es_rate_in_pes: "EXCLUDE", # accepts EXCLUDE, INCLUDE
-    #               etv_platform_pid: "__string",
-    #               etv_signal_pid: "__string",
-    #               fragment_time: 1.0,
-    #               klv: "NONE", # accepts NONE, PASSTHROUGH
-    #               klv_data_pids: "__string",
-    #               nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #               null_packet_bitrate: 1.0,
-    #               pat_interval: 1,
-    #               pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
-    #               pcr_period: 1,
-    #               pcr_pid: "__string",
-    #               pmt_interval: 1,
-    #               pmt_pid: "__string",
-    #               program_num: 1,
-    #               rate_mode: "CBR", # accepts CBR, VBR
-    #               scte_27_pids: "__string",
-    #               scte_35_control: "NONE", # accepts NONE, PASSTHROUGH
-    #               scte_35_pid: "__string",
-    #               segmentation_markers: "EBP", # accepts EBP, EBP_LEGACY, NONE, PSI_SEGSTART, RAI_ADAPT, RAI_SEGSTART
-    #               segmentation_style: "MAINTAIN_CADENCE", # accepts MAINTAIN_CADENCE, RESET_CADENCE
-    #               segmentation_time: 1.0,
-    #               timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #               timed_metadata_pid: "__string",
-    #               transport_stream_id: 1,
-    #               video_pid: "__string",
-    #             },
-    #             raw_settings: {
-    #             },
-    #           },
-    #           extension: "__string",
-    #           name_modifier: "__string",
-    #         },
-    #         frame_capture_output_settings: {
-    #           name_modifier: "__string",
-    #         },
-    #         hls_output_settings: {
-    #           h265_packaging_type: "HEV1", # accepts HEV1, HVC1
-    #           hls_settings: { # required
-    #             audio_only_hls_settings: {
-    #               audio_group_id: "__string",
-    #               audio_only_image: {
-    #                 password_param: "__string",
-    #                 uri: "__stringMax2048", # required
-    #                 username: "__string",
-    #               },
-    #               audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT", # accepts ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
-    #               segment_type: "AAC", # accepts AAC, FMP4
-    #             },
-    #             fmp_4_hls_settings: {
-    #               audio_rendition_sets: "__string",
-    #               nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #               timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #             },
-    #             frame_capture_hls_settings: {
-    #             },
-    #             standard_hls_settings: {
-    #               audio_rendition_sets: "__string",
-    #               m3u_8_settings: { # required
-    #                 audio_frames_per_pes: 1,
-    #                 audio_pids: "__string",
-    #                 ecm_pid: "__string",
-    #                 nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                 pat_interval: 1,
-    #                 pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
-    #                 pcr_period: 1,
-    #                 pcr_pid: "__string",
-    #                 pmt_interval: 1,
-    #                 pmt_pid: "__string",
-    #                 program_num: 1,
-    #                 scte_35_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                 scte_35_pid: "__string",
-    #                 timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                 timed_metadata_pid: "__string",
-    #                 transport_stream_id: 1,
-    #                 video_pid: "__string",
-    #               },
-    #             },
-    #           },
-    #           name_modifier: "__stringMin1",
-    #           segment_modifier: "__string",
-    #         },
-    #         media_package_output_settings: {
-    #         },
-    #         ms_smooth_output_settings: {
-    #           h265_packaging_type: "HEV1", # accepts HEV1, HVC1
-    #           name_modifier: "__string",
-    #         },
-    #         multiplex_output_settings: {
-    #           destination: { # required
-    #             destination_ref_id: "__string",
-    #           },
-    #         },
-    #         rtmp_output_settings: {
-    #           certificate_mode: "SELF_SIGNED", # accepts SELF_SIGNED, VERIFY_AUTHENTICITY
-    #           connection_retry_interval: 1,
-    #           destination: { # required
-    #             destination_ref_id: "__string",
-    #           },
-    #           num_retries: 1,
-    #         },
-    #         udp_output_settings: {
-    #           buffer_msec: 1,
-    #           container_settings: { # required
-    #             m2ts_settings: {
-    #               absent_input_audio_behavior: "DROP", # accepts DROP, ENCODE_SILENCE
-    #               arib: "DISABLED", # accepts DISABLED, ENABLED
-    #               arib_captions_pid: "__string",
-    #               arib_captions_pid_control: "AUTO", # accepts AUTO, USE_CONFIGURED
-    #               audio_buffer_model: "ATSC", # accepts ATSC, DVB
-    #               audio_frames_per_pes: 1,
-    #               audio_pids: "__string",
-    #               audio_stream_type: "ATSC", # accepts ATSC, DVB
-    #               bitrate: 1,
-    #               buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
-    #               cc_descriptor: "DISABLED", # accepts DISABLED, ENABLED
-    #               dvb_nit_settings: {
-    #                 network_id: 1, # required
-    #                 network_name: "__stringMin1Max256", # required
-    #                 rep_interval: 1,
-    #               },
-    #               dvb_sdt_settings: {
-    #                 output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
-    #                 rep_interval: 1,
-    #                 service_name: "__stringMin1Max256",
-    #                 service_provider_name: "__stringMin1Max256",
-    #               },
-    #               dvb_sub_pids: "__string",
-    #               dvb_tdt_settings: {
-    #                 rep_interval: 1,
-    #               },
-    #               dvb_teletext_pid: "__string",
-    #               ebif: "NONE", # accepts NONE, PASSTHROUGH
-    #               ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS", # accepts VIDEO_AND_FIXED_INTERVALS, VIDEO_INTERVAL
-    #               ebp_lookahead_ms: 1,
-    #               ebp_placement: "VIDEO_AND_AUDIO_PIDS", # accepts VIDEO_AND_AUDIO_PIDS, VIDEO_PID
-    #               ecm_pid: "__string",
-    #               es_rate_in_pes: "EXCLUDE", # accepts EXCLUDE, INCLUDE
-    #               etv_platform_pid: "__string",
-    #               etv_signal_pid: "__string",
-    #               fragment_time: 1.0,
-    #               klv: "NONE", # accepts NONE, PASSTHROUGH
-    #               klv_data_pids: "__string",
-    #               nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #               null_packet_bitrate: 1.0,
-    #               pat_interval: 1,
-    #               pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
-    #               pcr_period: 1,
-    #               pcr_pid: "__string",
-    #               pmt_interval: 1,
-    #               pmt_pid: "__string",
-    #               program_num: 1,
-    #               rate_mode: "CBR", # accepts CBR, VBR
-    #               scte_27_pids: "__string",
-    #               scte_35_control: "NONE", # accepts NONE, PASSTHROUGH
-    #               scte_35_pid: "__string",
-    #               segmentation_markers: "EBP", # accepts EBP, EBP_LEGACY, NONE, PSI_SEGSTART, RAI_ADAPT, RAI_SEGSTART
-    #               segmentation_style: "MAINTAIN_CADENCE", # accepts MAINTAIN_CADENCE, RESET_CADENCE
-    #               segmentation_time: 1.0,
-    #               timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #               timed_metadata_pid: "__string",
-    #               transport_stream_id: 1,
-    #               video_pid: "__string",
-    #             },
-    #           },
-    #           destination: { # required
-    #             destination_ref_id: "__string",
-    #           },
-    #           fec_output_settings: {
-    #             column_depth: 1,
-    #             include_fec: "COLUMN", # accepts COLUMN, COLUMN_AND_ROW
-    #             row_length: 1,
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] archive_output_settings
     #   Archive Output Settings
@@ -15430,24 +9431,11 @@ module Aws::MediaLive
 
     # Pass Through Settings
     #
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/PassThroughSettings AWS API Documentation
     #
     class PassThroughSettings < Aws::EmptyStructure; end
 
     # Settings for the action to set pause state of a channel.
-    #
-    # @note When making an API call, you may pass PauseStateScheduleActionSettings
-    #   data as a hash:
-    #
-    #       {
-    #         pipelines: [
-    #           {
-    #             pipeline_id: "PIPELINE_0", # required, accepts PIPELINE_0, PIPELINE_1
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] pipelines
     #   @return [Array<Types::PipelinePauseStateSettings>]
@@ -15501,13 +9489,6 @@ module Aws::MediaLive
     end
 
     # Settings for pausing a pipeline.
-    #
-    # @note When making an API call, you may pass PipelinePauseStateSettings
-    #   data as a hash:
-    #
-    #       {
-    #         pipeline_id: "PIPELINE_0", # required, accepts PIPELINE_0, PIPELINE_1
-    #       }
     #
     # @!attribute [rw] pipeline_id
     #   Pipeline ID to pause ("PIPELINE\_0" or "PIPELINE\_1").
@@ -15563,24 +9544,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PurchaseOfferingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         count: 1, # required
-    #         name: "__string",
-    #         offering_id: "__string", # required
-    #         renewal_settings: {
-    #           automatic_renewal: "DISABLED", # accepts DISABLED, ENABLED, UNAVAILABLE
-    #           renewal_count: 1,
-    #         },
-    #         request_id: "__string",
-    #         start: "__string",
-    #         tags: {
-    #           "__string" => "__string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] count
     #   @return [Integer]
     #
@@ -15647,8 +9610,6 @@ module Aws::MediaLive
 
     # Raw Settings
     #
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RawSettings AWS API Documentation
     #
     class RawSettings < Aws::EmptyStructure; end
@@ -15668,14 +9629,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RebootInputDeviceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         force: "NO", # accepts NO, YES
-    #         input_device_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] force
     #   Whether or not to force reboot the input device.
     #   @return [String]
@@ -15698,27 +9651,16 @@ module Aws::MediaLive
 
     # Rec601 Settings
     #
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Rec601Settings AWS API Documentation
     #
     class Rec601Settings < Aws::EmptyStructure; end
 
     # Rec709 Settings
     #
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Rec709Settings AWS API Documentation
     #
     class Rec709Settings < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass RejectInputDeviceTransferRequest
-    #   data as a hash:
-    #
-    #       {
-    #         input_device_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] input_device_id
     #   @return [String]
     #
@@ -15735,25 +9677,6 @@ module Aws::MediaLive
     class RejectInputDeviceTransferResponse < Aws::EmptyStructure; end
 
     # Remix Settings
-    #
-    # @note When making an API call, you may pass RemixSettings
-    #   data as a hash:
-    #
-    #       {
-    #         channel_mappings: [ # required
-    #           {
-    #             input_channel_levels: [ # required
-    #               {
-    #                 gain: 1, # required
-    #                 input_channel: 1, # required
-    #               },
-    #             ],
-    #             output_channel: 1, # required
-    #           },
-    #         ],
-    #         channels_in: 1,
-    #         channels_out: 1,
-    #       }
     #
     # @!attribute [rw] channel_mappings
     #   Mapping of input channels to output channels, with appropriate gain
@@ -15780,14 +9703,6 @@ module Aws::MediaLive
     end
 
     # The Renewal settings for Reservations
-    #
-    # @note When making an API call, you may pass RenewalSettings
-    #   data as a hash:
-    #
-    #       {
-    #         automatic_renewal: "DISABLED", # accepts DISABLED, ENABLED, UNAVAILABLE
-    #         renewal_count: 1,
-    #       }
     #
     # @!attribute [rw] automatic_renewal
     #   Automatic renewal status for the reservation
@@ -15989,26 +9904,11 @@ module Aws::MediaLive
 
     # Rtmp Caption Info Destination Settings
     #
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RtmpCaptionInfoDestinationSettings AWS API Documentation
     #
     class RtmpCaptionInfoDestinationSettings < Aws::EmptyStructure; end
 
     # Rtmp Group Settings
-    #
-    # @note When making an API call, you may pass RtmpGroupSettings
-    #   data as a hash:
-    #
-    #       {
-    #         ad_markers: ["ON_CUE_POINT_SCTE35"], # accepts ON_CUE_POINT_SCTE35
-    #         authentication_scheme: "AKAMAI", # accepts AKAMAI, COMMON
-    #         cache_full_behavior: "DISCONNECT_IMMEDIATELY", # accepts DISCONNECT_IMMEDIATELY, WAIT_FOR_SERVER
-    #         cache_length: 1,
-    #         caption_data: "ALL", # accepts ALL, FIELD1_608, FIELD1_AND_FIELD2_608
-    #         input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
-    #         restart_delay: 1,
-    #       }
     #
     # @!attribute [rw] ad_markers
     #   Choose the ad marker type for this output group. MediaLive will
@@ -16073,18 +9973,6 @@ module Aws::MediaLive
 
     # Rtmp Output Settings
     #
-    # @note When making an API call, you may pass RtmpOutputSettings
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_mode: "SELF_SIGNED", # accepts SELF_SIGNED, VERIFY_AUTHENTICITY
-    #         connection_retry_interval: 1,
-    #         destination: { # required
-    #           destination_ref_id: "__string",
-    #         },
-    #         num_retries: 1,
-    #       }
-    #
     # @!attribute [rw] certificate_mode
     #   If set to verifyAuthenticity, verify the tls certificate chain to a
     #   trusted Certificate Authority (CA). This will cause rtmps outputs
@@ -16119,132 +10007,6 @@ module Aws::MediaLive
 
     # Contains information on a single schedule action.
     #
-    # @note When making an API call, you may pass ScheduleAction
-    #   data as a hash:
-    #
-    #       {
-    #         action_name: "__string", # required
-    #         schedule_action_settings: { # required
-    #           hls_id_3_segment_tagging_settings: {
-    #             tag: "__string", # required
-    #           },
-    #           hls_timed_metadata_settings: {
-    #             id_3: "__string", # required
-    #           },
-    #           input_prepare_settings: {
-    #             input_attachment_name_reference: "__string",
-    #             input_clipping_settings: {
-    #               input_timecode_source: "ZEROBASED", # required, accepts ZEROBASED, EMBEDDED
-    #               start_timecode: {
-    #                 timecode: "__string",
-    #               },
-    #               stop_timecode: {
-    #                 last_frame_clipping_behavior: "EXCLUDE_LAST_FRAME", # accepts EXCLUDE_LAST_FRAME, INCLUDE_LAST_FRAME
-    #                 timecode: "__string",
-    #               },
-    #             },
-    #             url_path: ["__string"],
-    #           },
-    #           input_switch_settings: {
-    #             input_attachment_name_reference: "__string", # required
-    #             input_clipping_settings: {
-    #               input_timecode_source: "ZEROBASED", # required, accepts ZEROBASED, EMBEDDED
-    #               start_timecode: {
-    #                 timecode: "__string",
-    #               },
-    #               stop_timecode: {
-    #                 last_frame_clipping_behavior: "EXCLUDE_LAST_FRAME", # accepts EXCLUDE_LAST_FRAME, INCLUDE_LAST_FRAME
-    #                 timecode: "__string",
-    #               },
-    #             },
-    #             url_path: ["__string"],
-    #           },
-    #           motion_graphics_image_activate_settings: {
-    #             duration: 1,
-    #             password_param: "__string",
-    #             url: "__string",
-    #             username: "__string",
-    #           },
-    #           motion_graphics_image_deactivate_settings: {
-    #           },
-    #           pause_state_settings: {
-    #             pipelines: [
-    #               {
-    #                 pipeline_id: "PIPELINE_0", # required, accepts PIPELINE_0, PIPELINE_1
-    #               },
-    #             ],
-    #           },
-    #           scte_35_input_settings: {
-    #             input_attachment_name_reference: "__string",
-    #             mode: "FIXED", # required, accepts FIXED, FOLLOW_ACTIVE
-    #           },
-    #           scte_35_return_to_network_settings: {
-    #             splice_event_id: 1, # required
-    #           },
-    #           scte_35_splice_insert_settings: {
-    #             duration: 1,
-    #             splice_event_id: 1, # required
-    #           },
-    #           scte_35_time_signal_settings: {
-    #             scte_35_descriptors: [ # required
-    #               {
-    #                 scte_35_descriptor_settings: { # required
-    #                   segmentation_descriptor_scte_35_descriptor_settings: { # required
-    #                     delivery_restrictions: {
-    #                       archive_allowed_flag: "ARCHIVE_NOT_ALLOWED", # required, accepts ARCHIVE_NOT_ALLOWED, ARCHIVE_ALLOWED
-    #                       device_restrictions: "NONE", # required, accepts NONE, RESTRICT_GROUP0, RESTRICT_GROUP1, RESTRICT_GROUP2
-    #                       no_regional_blackout_flag: "REGIONAL_BLACKOUT", # required, accepts REGIONAL_BLACKOUT, NO_REGIONAL_BLACKOUT
-    #                       web_delivery_allowed_flag: "WEB_DELIVERY_NOT_ALLOWED", # required, accepts WEB_DELIVERY_NOT_ALLOWED, WEB_DELIVERY_ALLOWED
-    #                     },
-    #                     segment_num: 1,
-    #                     segmentation_cancel_indicator: "SEGMENTATION_EVENT_NOT_CANCELED", # required, accepts SEGMENTATION_EVENT_NOT_CANCELED, SEGMENTATION_EVENT_CANCELED
-    #                     segmentation_duration: 1,
-    #                     segmentation_event_id: 1, # required
-    #                     segmentation_type_id: 1,
-    #                     segmentation_upid: "__string",
-    #                     segmentation_upid_type: 1,
-    #                     segments_expected: 1,
-    #                     sub_segment_num: 1,
-    #                     sub_segments_expected: 1,
-    #                   },
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #           static_image_activate_settings: {
-    #             duration: 1,
-    #             fade_in: 1,
-    #             fade_out: 1,
-    #             height: 1,
-    #             image: { # required
-    #               password_param: "__string",
-    #               uri: "__stringMax2048", # required
-    #               username: "__string",
-    #             },
-    #             image_x: 1,
-    #             image_y: 1,
-    #             layer: 1,
-    #             opacity: 1,
-    #             width: 1,
-    #           },
-    #           static_image_deactivate_settings: {
-    #             fade_out: 1,
-    #             layer: 1,
-    #           },
-    #         },
-    #         schedule_action_start_settings: { # required
-    #           fixed_mode_schedule_action_start_settings: {
-    #             time: "__string", # required
-    #           },
-    #           follow_mode_schedule_action_start_settings: {
-    #             follow_point: "END", # required, accepts END, START
-    #             reference_action_name: "__string", # required
-    #           },
-    #           immediate_mode_schedule_action_start_settings: {
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] action_name
     #   The name of the action, must be unique within the schedule. This
     #   name provides the main reference to an action once it is added to
@@ -16273,118 +10035,6 @@ module Aws::MediaLive
     end
 
     # Holds the settings for a single schedule action.
-    #
-    # @note When making an API call, you may pass ScheduleActionSettings
-    #   data as a hash:
-    #
-    #       {
-    #         hls_id_3_segment_tagging_settings: {
-    #           tag: "__string", # required
-    #         },
-    #         hls_timed_metadata_settings: {
-    #           id_3: "__string", # required
-    #         },
-    #         input_prepare_settings: {
-    #           input_attachment_name_reference: "__string",
-    #           input_clipping_settings: {
-    #             input_timecode_source: "ZEROBASED", # required, accepts ZEROBASED, EMBEDDED
-    #             start_timecode: {
-    #               timecode: "__string",
-    #             },
-    #             stop_timecode: {
-    #               last_frame_clipping_behavior: "EXCLUDE_LAST_FRAME", # accepts EXCLUDE_LAST_FRAME, INCLUDE_LAST_FRAME
-    #               timecode: "__string",
-    #             },
-    #           },
-    #           url_path: ["__string"],
-    #         },
-    #         input_switch_settings: {
-    #           input_attachment_name_reference: "__string", # required
-    #           input_clipping_settings: {
-    #             input_timecode_source: "ZEROBASED", # required, accepts ZEROBASED, EMBEDDED
-    #             start_timecode: {
-    #               timecode: "__string",
-    #             },
-    #             stop_timecode: {
-    #               last_frame_clipping_behavior: "EXCLUDE_LAST_FRAME", # accepts EXCLUDE_LAST_FRAME, INCLUDE_LAST_FRAME
-    #               timecode: "__string",
-    #             },
-    #           },
-    #           url_path: ["__string"],
-    #         },
-    #         motion_graphics_image_activate_settings: {
-    #           duration: 1,
-    #           password_param: "__string",
-    #           url: "__string",
-    #           username: "__string",
-    #         },
-    #         motion_graphics_image_deactivate_settings: {
-    #         },
-    #         pause_state_settings: {
-    #           pipelines: [
-    #             {
-    #               pipeline_id: "PIPELINE_0", # required, accepts PIPELINE_0, PIPELINE_1
-    #             },
-    #           ],
-    #         },
-    #         scte_35_input_settings: {
-    #           input_attachment_name_reference: "__string",
-    #           mode: "FIXED", # required, accepts FIXED, FOLLOW_ACTIVE
-    #         },
-    #         scte_35_return_to_network_settings: {
-    #           splice_event_id: 1, # required
-    #         },
-    #         scte_35_splice_insert_settings: {
-    #           duration: 1,
-    #           splice_event_id: 1, # required
-    #         },
-    #         scte_35_time_signal_settings: {
-    #           scte_35_descriptors: [ # required
-    #             {
-    #               scte_35_descriptor_settings: { # required
-    #                 segmentation_descriptor_scte_35_descriptor_settings: { # required
-    #                   delivery_restrictions: {
-    #                     archive_allowed_flag: "ARCHIVE_NOT_ALLOWED", # required, accepts ARCHIVE_NOT_ALLOWED, ARCHIVE_ALLOWED
-    #                     device_restrictions: "NONE", # required, accepts NONE, RESTRICT_GROUP0, RESTRICT_GROUP1, RESTRICT_GROUP2
-    #                     no_regional_blackout_flag: "REGIONAL_BLACKOUT", # required, accepts REGIONAL_BLACKOUT, NO_REGIONAL_BLACKOUT
-    #                     web_delivery_allowed_flag: "WEB_DELIVERY_NOT_ALLOWED", # required, accepts WEB_DELIVERY_NOT_ALLOWED, WEB_DELIVERY_ALLOWED
-    #                   },
-    #                   segment_num: 1,
-    #                   segmentation_cancel_indicator: "SEGMENTATION_EVENT_NOT_CANCELED", # required, accepts SEGMENTATION_EVENT_NOT_CANCELED, SEGMENTATION_EVENT_CANCELED
-    #                   segmentation_duration: 1,
-    #                   segmentation_event_id: 1, # required
-    #                   segmentation_type_id: 1,
-    #                   segmentation_upid: "__string",
-    #                   segmentation_upid_type: 1,
-    #                   segments_expected: 1,
-    #                   sub_segment_num: 1,
-    #                   sub_segments_expected: 1,
-    #                 },
-    #               },
-    #             },
-    #           ],
-    #         },
-    #         static_image_activate_settings: {
-    #           duration: 1,
-    #           fade_in: 1,
-    #           fade_out: 1,
-    #           height: 1,
-    #           image: { # required
-    #             password_param: "__string",
-    #             uri: "__stringMax2048", # required
-    #             username: "__string",
-    #           },
-    #           image_x: 1,
-    #           image_y: 1,
-    #           layer: 1,
-    #           opacity: 1,
-    #           width: 1,
-    #         },
-    #         static_image_deactivate_settings: {
-    #           fade_out: 1,
-    #           layer: 1,
-    #         },
-    #       }
     #
     # @!attribute [rw] hls_id_3_segment_tagging_settings
     #   Action to insert HLS ID3 segment tagging
@@ -16461,21 +10111,6 @@ module Aws::MediaLive
     # Settings to specify when an action should occur. Only one of the
     # options must be selected.
     #
-    # @note When making an API call, you may pass ScheduleActionStartSettings
-    #   data as a hash:
-    #
-    #       {
-    #         fixed_mode_schedule_action_start_settings: {
-    #           time: "__string", # required
-    #         },
-    #         follow_mode_schedule_action_start_settings: {
-    #           follow_point: "END", # required, accepts END, START
-    #           reference_action_name: "__string", # required
-    #         },
-    #         immediate_mode_schedule_action_start_settings: {
-    #         },
-    #       }
-    #
     # @!attribute [rw] fixed_mode_schedule_action_start_settings
     #   Option for specifying the start time for an action.
     #   @return [Types::FixedModeScheduleActionStartSettings]
@@ -16525,21 +10160,11 @@ module Aws::MediaLive
 
     # Scte20 Plus Embedded Destination Settings
     #
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Scte20PlusEmbeddedDestinationSettings AWS API Documentation
     #
     class Scte20PlusEmbeddedDestinationSettings < Aws::EmptyStructure; end
 
     # Scte20 Source Settings
-    #
-    # @note When making an API call, you may pass Scte20SourceSettings
-    #   data as a hash:
-    #
-    #       {
-    #         convert_608_to_708: "DISABLED", # accepts DISABLED, UPCONVERT
-    #         source_608_channel_number: 1,
-    #       }
     #
     # @!attribute [rw] convert_608_to_708
     #   If upconvert, 608 data is both passed through via the "608
@@ -16564,21 +10189,11 @@ module Aws::MediaLive
 
     # Scte27 Destination Settings
     #
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Scte27DestinationSettings AWS API Documentation
     #
     class Scte27DestinationSettings < Aws::EmptyStructure; end
 
     # Scte27 Source Settings
-    #
-    # @note When making an API call, you may pass Scte27SourceSettings
-    #   data as a hash:
-    #
-    #       {
-    #         ocr_language: "DEU", # accepts DEU, ENG, FRA, NLD, POR, SPA
-    #         pid: 1,
-    #       }
     #
     # @!attribute [rw] ocr_language
     #   If you will configure a WebVTT caption description that references
@@ -16611,16 +10226,6 @@ module Aws::MediaLive
     # "restriction" flags. To declare that there are no restrictions, omit
     # this element.
     #
-    # @note When making an API call, you may pass Scte35DeliveryRestrictions
-    #   data as a hash:
-    #
-    #       {
-    #         archive_allowed_flag: "ARCHIVE_NOT_ALLOWED", # required, accepts ARCHIVE_NOT_ALLOWED, ARCHIVE_ALLOWED
-    #         device_restrictions: "NONE", # required, accepts NONE, RESTRICT_GROUP0, RESTRICT_GROUP1, RESTRICT_GROUP2
-    #         no_regional_blackout_flag: "REGIONAL_BLACKOUT", # required, accepts REGIONAL_BLACKOUT, NO_REGIONAL_BLACKOUT
-    #         web_delivery_allowed_flag: "WEB_DELIVERY_NOT_ALLOWED", # required, accepts WEB_DELIVERY_NOT_ALLOWED, WEB_DELIVERY_ALLOWED
-    #       }
-    #
     # @!attribute [rw] archive_allowed_flag
     #   Corresponds to SCTE-35 archive\_allowed\_flag.
     #   @return [String]
@@ -16650,32 +10255,6 @@ module Aws::MediaLive
 
     # Holds one set of SCTE-35 Descriptor Settings.
     #
-    # @note When making an API call, you may pass Scte35Descriptor
-    #   data as a hash:
-    #
-    #       {
-    #         scte_35_descriptor_settings: { # required
-    #           segmentation_descriptor_scte_35_descriptor_settings: { # required
-    #             delivery_restrictions: {
-    #               archive_allowed_flag: "ARCHIVE_NOT_ALLOWED", # required, accepts ARCHIVE_NOT_ALLOWED, ARCHIVE_ALLOWED
-    #               device_restrictions: "NONE", # required, accepts NONE, RESTRICT_GROUP0, RESTRICT_GROUP1, RESTRICT_GROUP2
-    #               no_regional_blackout_flag: "REGIONAL_BLACKOUT", # required, accepts REGIONAL_BLACKOUT, NO_REGIONAL_BLACKOUT
-    #               web_delivery_allowed_flag: "WEB_DELIVERY_NOT_ALLOWED", # required, accepts WEB_DELIVERY_NOT_ALLOWED, WEB_DELIVERY_ALLOWED
-    #             },
-    #             segment_num: 1,
-    #             segmentation_cancel_indicator: "SEGMENTATION_EVENT_NOT_CANCELED", # required, accepts SEGMENTATION_EVENT_NOT_CANCELED, SEGMENTATION_EVENT_CANCELED
-    #             segmentation_duration: 1,
-    #             segmentation_event_id: 1, # required
-    #             segmentation_type_id: 1,
-    #             segmentation_upid: "__string",
-    #             segmentation_upid_type: 1,
-    #             segments_expected: 1,
-    #             sub_segment_num: 1,
-    #             sub_segments_expected: 1,
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] scte_35_descriptor_settings
     #   SCTE-35 Descriptor Settings.
     #   @return [Types::Scte35DescriptorSettings]
@@ -16690,30 +10269,6 @@ module Aws::MediaLive
 
     # SCTE-35 Descriptor settings.
     #
-    # @note When making an API call, you may pass Scte35DescriptorSettings
-    #   data as a hash:
-    #
-    #       {
-    #         segmentation_descriptor_scte_35_descriptor_settings: { # required
-    #           delivery_restrictions: {
-    #             archive_allowed_flag: "ARCHIVE_NOT_ALLOWED", # required, accepts ARCHIVE_NOT_ALLOWED, ARCHIVE_ALLOWED
-    #             device_restrictions: "NONE", # required, accepts NONE, RESTRICT_GROUP0, RESTRICT_GROUP1, RESTRICT_GROUP2
-    #             no_regional_blackout_flag: "REGIONAL_BLACKOUT", # required, accepts REGIONAL_BLACKOUT, NO_REGIONAL_BLACKOUT
-    #             web_delivery_allowed_flag: "WEB_DELIVERY_NOT_ALLOWED", # required, accepts WEB_DELIVERY_NOT_ALLOWED, WEB_DELIVERY_ALLOWED
-    #           },
-    #           segment_num: 1,
-    #           segmentation_cancel_indicator: "SEGMENTATION_EVENT_NOT_CANCELED", # required, accepts SEGMENTATION_EVENT_NOT_CANCELED, SEGMENTATION_EVENT_CANCELED
-    #           segmentation_duration: 1,
-    #           segmentation_event_id: 1, # required
-    #           segmentation_type_id: 1,
-    #           segmentation_upid: "__string",
-    #           segmentation_upid_type: 1,
-    #           segments_expected: 1,
-    #           sub_segment_num: 1,
-    #           sub_segments_expected: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] segmentation_descriptor_scte_35_descriptor_settings
     #   SCTE-35 Segmentation Descriptor.
     #   @return [Types::Scte35SegmentationDescriptor]
@@ -16727,14 +10282,6 @@ module Aws::MediaLive
     end
 
     # Settings for the "scte35 input" action
-    #
-    # @note When making an API call, you may pass Scte35InputScheduleActionSettings
-    #   data as a hash:
-    #
-    #       {
-    #         input_attachment_name_reference: "__string",
-    #         mode: "FIXED", # required, accepts FIXED, FOLLOW_ACTIVE
-    #       }
     #
     # @!attribute [rw] input_attachment_name_reference
     #   In fixed mode, enter the name of the input attachment that you want
@@ -16757,13 +10304,6 @@ module Aws::MediaLive
 
     # Settings for a SCTE-35 return\_to\_network message.
     #
-    # @note When making an API call, you may pass Scte35ReturnToNetworkScheduleActionSettings
-    #   data as a hash:
-    #
-    #       {
-    #         splice_event_id: 1, # required
-    #       }
-    #
     # @!attribute [rw] splice_event_id
     #   The splice\_event\_id for the SCTE-35 splice\_insert, as defined in
     #   SCTE-35.
@@ -16778,28 +10318,6 @@ module Aws::MediaLive
     end
 
     # Corresponds to SCTE-35 segmentation\_descriptor.
-    #
-    # @note When making an API call, you may pass Scte35SegmentationDescriptor
-    #   data as a hash:
-    #
-    #       {
-    #         delivery_restrictions: {
-    #           archive_allowed_flag: "ARCHIVE_NOT_ALLOWED", # required, accepts ARCHIVE_NOT_ALLOWED, ARCHIVE_ALLOWED
-    #           device_restrictions: "NONE", # required, accepts NONE, RESTRICT_GROUP0, RESTRICT_GROUP1, RESTRICT_GROUP2
-    #           no_regional_blackout_flag: "REGIONAL_BLACKOUT", # required, accepts REGIONAL_BLACKOUT, NO_REGIONAL_BLACKOUT
-    #           web_delivery_allowed_flag: "WEB_DELIVERY_NOT_ALLOWED", # required, accepts WEB_DELIVERY_NOT_ALLOWED, WEB_DELIVERY_ALLOWED
-    #         },
-    #         segment_num: 1,
-    #         segmentation_cancel_indicator: "SEGMENTATION_EVENT_NOT_CANCELED", # required, accepts SEGMENTATION_EVENT_NOT_CANCELED, SEGMENTATION_EVENT_CANCELED
-    #         segmentation_duration: 1,
-    #         segmentation_event_id: 1, # required
-    #         segmentation_type_id: 1,
-    #         segmentation_upid: "__string",
-    #         segmentation_upid_type: 1,
-    #         segments_expected: 1,
-    #         sub_segment_num: 1,
-    #         sub_segments_expected: 1,
-    #       }
     #
     # @!attribute [rw] delivery_restrictions
     #   Holds the four SCTE-35 delivery restriction parameters.
@@ -16888,15 +10406,6 @@ module Aws::MediaLive
 
     # Scte35 Splice Insert
     #
-    # @note When making an API call, you may pass Scte35SpliceInsert
-    #   data as a hash:
-    #
-    #       {
-    #         ad_avail_offset: 1,
-    #         no_regional_blackout_flag: "FOLLOW", # accepts FOLLOW, IGNORE
-    #         web_delivery_allowed_flag: "FOLLOW", # accepts FOLLOW, IGNORE
-    #       }
-    #
     # @!attribute [rw] ad_avail_offset
     #   When specified, this offset (in milliseconds) is added to the input
     #   Ad Avail PTS time. This only applies to embedded SCTE 104/35
@@ -16925,14 +10434,6 @@ module Aws::MediaLive
 
     # Settings for a SCTE-35 splice\_insert message.
     #
-    # @note When making an API call, you may pass Scte35SpliceInsertScheduleActionSettings
-    #   data as a hash:
-    #
-    #       {
-    #         duration: 1,
-    #         splice_event_id: 1, # required
-    #       }
-    #
     # @!attribute [rw] duration
     #   Optional, the duration for the splice\_insert, in 90 KHz ticks. To
     #   convert seconds to ticks, multiple the seconds by 90,000. If you
@@ -16958,15 +10459,6 @@ module Aws::MediaLive
     end
 
     # Scte35 Time Signal Apos
-    #
-    # @note When making an API call, you may pass Scte35TimeSignalApos
-    #   data as a hash:
-    #
-    #       {
-    #         ad_avail_offset: 1,
-    #         no_regional_blackout_flag: "FOLLOW", # accepts FOLLOW, IGNORE
-    #         web_delivery_allowed_flag: "FOLLOW", # accepts FOLLOW, IGNORE
-    #       }
     #
     # @!attribute [rw] ad_avail_offset
     #   When specified, this offset (in milliseconds) is added to the input
@@ -16996,36 +10488,6 @@ module Aws::MediaLive
 
     # Settings for a SCTE-35 time\_signal.
     #
-    # @note When making an API call, you may pass Scte35TimeSignalScheduleActionSettings
-    #   data as a hash:
-    #
-    #       {
-    #         scte_35_descriptors: [ # required
-    #           {
-    #             scte_35_descriptor_settings: { # required
-    #               segmentation_descriptor_scte_35_descriptor_settings: { # required
-    #                 delivery_restrictions: {
-    #                   archive_allowed_flag: "ARCHIVE_NOT_ALLOWED", # required, accepts ARCHIVE_NOT_ALLOWED, ARCHIVE_ALLOWED
-    #                   device_restrictions: "NONE", # required, accepts NONE, RESTRICT_GROUP0, RESTRICT_GROUP1, RESTRICT_GROUP2
-    #                   no_regional_blackout_flag: "REGIONAL_BLACKOUT", # required, accepts REGIONAL_BLACKOUT, NO_REGIONAL_BLACKOUT
-    #                   web_delivery_allowed_flag: "WEB_DELIVERY_NOT_ALLOWED", # required, accepts WEB_DELIVERY_NOT_ALLOWED, WEB_DELIVERY_ALLOWED
-    #                 },
-    #                 segment_num: 1,
-    #                 segmentation_cancel_indicator: "SEGMENTATION_EVENT_NOT_CANCELED", # required, accepts SEGMENTATION_EVENT_NOT_CANCELED, SEGMENTATION_EVENT_CANCELED
-    #                 segmentation_duration: 1,
-    #                 segmentation_event_id: 1, # required
-    #                 segmentation_type_id: 1,
-    #                 segmentation_upid: "__string",
-    #                 segmentation_upid_type: 1,
-    #                 segments_expected: 1,
-    #                 sub_segment_num: 1,
-    #                 sub_segments_expected: 1,
-    #               },
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] scte_35_descriptors
     #   The list of SCTE-35 descriptors accompanying the SCTE-35
     #   time\_signal.
@@ -17041,39 +10503,11 @@ module Aws::MediaLive
 
     # Smpte Tt Destination Settings
     #
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/SmpteTtDestinationSettings AWS API Documentation
     #
     class SmpteTtDestinationSettings < Aws::EmptyStructure; end
 
     # Standard Hls Settings
-    #
-    # @note When making an API call, you may pass StandardHlsSettings
-    #   data as a hash:
-    #
-    #       {
-    #         audio_rendition_sets: "__string",
-    #         m3u_8_settings: { # required
-    #           audio_frames_per_pes: 1,
-    #           audio_pids: "__string",
-    #           ecm_pid: "__string",
-    #           nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #           pat_interval: 1,
-    #           pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
-    #           pcr_period: 1,
-    #           pcr_pid: "__string",
-    #           pmt_interval: 1,
-    #           pmt_pid: "__string",
-    #           program_num: 1,
-    #           scte_35_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #           scte_35_pid: "__string",
-    #           timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #           timed_metadata_pid: "__string",
-    #           transport_stream_id: 1,
-    #           video_pid: "__string",
-    #         },
-    #       }
     #
     # @!attribute [rw] audio_rendition_sets
     #   List all the audio groups that are used with the video output
@@ -17094,13 +10528,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartChannelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] channel_id
     #   @return [String]
     #
@@ -17196,13 +10623,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartInputDeviceMaintenanceWindowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         input_device_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] input_device_id
     #   @return [String]
     #
@@ -17218,13 +10638,6 @@ module Aws::MediaLive
     #
     class StartInputDeviceMaintenanceWindowResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass StartMultiplexRequest
-    #   data as a hash:
-    #
-    #       {
-    #         multiplex_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] multiplex_id
     #   @return [String]
     #
@@ -17287,13 +10700,6 @@ module Aws::MediaLive
 
     # Settings to identify the start of the clip.
     #
-    # @note When making an API call, you may pass StartTimecode
-    #   data as a hash:
-    #
-    #       {
-    #         timecode: "__string",
-    #       }
-    #
     # @!attribute [rw] timecode
     #   The timecode for the frame where you want to start the clip.
     #   Optional; if not specified, the clip starts at first frame in the
@@ -17309,26 +10715,6 @@ module Aws::MediaLive
     end
 
     # Settings for the action to activate a static image.
-    #
-    # @note When making an API call, you may pass StaticImageActivateScheduleActionSettings
-    #   data as a hash:
-    #
-    #       {
-    #         duration: 1,
-    #         fade_in: 1,
-    #         fade_out: 1,
-    #         height: 1,
-    #         image: { # required
-    #           password_param: "__string",
-    #           uri: "__stringMax2048", # required
-    #           username: "__string",
-    #         },
-    #         image_x: 1,
-    #         image_y: 1,
-    #         layer: 1,
-    #         opacity: 1,
-    #         width: 1,
-    #       }
     #
     # @!attribute [rw] duration
     #   The duration in milliseconds for the image to remain on the video.
@@ -17414,14 +10800,6 @@ module Aws::MediaLive
 
     # Settings for the action to deactivate the image in a specific layer.
     #
-    # @note When making an API call, you may pass StaticImageDeactivateScheduleActionSettings
-    #   data as a hash:
-    #
-    #       {
-    #         fade_out: 1,
-    #         layer: 1,
-    #       }
-    #
     # @!attribute [rw] fade_out
     #   The time in milliseconds for the image to fade out. Default is 0 (no
     #   fade-out).
@@ -17442,18 +10820,6 @@ module Aws::MediaLive
 
     # Static Key Settings
     #
-    # @note When making an API call, you may pass StaticKeySettings
-    #   data as a hash:
-    #
-    #       {
-    #         key_provider_server: {
-    #           password_param: "__string",
-    #           uri: "__stringMax2048", # required
-    #           username: "__string",
-    #         },
-    #         static_key_value: "__stringMin32Max32", # required
-    #       }
-    #
     # @!attribute [rw] key_provider_server
     #   The URL of the license server used for protecting content.
     #   @return [Types::InputLocation]
@@ -17471,13 +10837,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopChannelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] channel_id
     #   @return [String]
     #
@@ -17573,13 +10932,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopMultiplexRequest
-    #   data as a hash:
-    #
-    #       {
-    #         multiplex_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] multiplex_id
     #   @return [String]
     #
@@ -17642,14 +10994,6 @@ module Aws::MediaLive
 
     # Settings to identify the end of the clip.
     #
-    # @note When making an API call, you may pass StopTimecode
-    #   data as a hash:
-    #
-    #       {
-    #         last_frame_clipping_behavior: "EXCLUDE_LAST_FRAME", # accepts EXCLUDE_LAST_FRAME, INCLUDE_LAST_FRAME
-    #         timecode: "__string",
-    #       }
-    #
     # @!attribute [rw] last_frame_clipping_behavior
     #   If you specify a StopTimecode in an input (in order to clip the
     #   file), you can specify if you want the clip to exclude (the default)
@@ -17684,26 +11028,11 @@ module Aws::MediaLive
 
     # Teletext Destination Settings
     #
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/TeletextDestinationSettings AWS API Documentation
     #
     class TeletextDestinationSettings < Aws::EmptyStructure; end
 
     # Teletext Source Settings
-    #
-    # @note When making an API call, you may pass TeletextSourceSettings
-    #   data as a hash:
-    #
-    #       {
-    #         output_rectangle: {
-    #           height: 1.0, # required
-    #           left_offset: 1.0, # required
-    #           top_offset: 1.0, # required
-    #           width: 1.0, # required
-    #         },
-    #         page_number: "__string",
-    #       }
     #
     # @!attribute [rw] output_rectangle
     #   Optionally defines a region where TTML style captions will be
@@ -17727,14 +11056,6 @@ module Aws::MediaLive
     end
 
     # Temporal Filter Settings
-    #
-    # @note When making an API call, you may pass TemporalFilterSettings
-    #   data as a hash:
-    #
-    #       {
-    #         post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
-    #         strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16
-    #       }
     #
     # @!attribute [rw] post_filter_sharpening
     #   If you enable this filter, the results are the following: - If the
@@ -17776,14 +11097,6 @@ module Aws::MediaLive
     end
 
     # Timecode Config
-    #
-    # @note When making an API call, you may pass TimecodeConfig
-    #   data as a hash:
-    #
-    #       {
-    #         source: "EMBEDDED", # required, accepts EMBEDDED, SYSTEMCLOCK, ZEROBASED
-    #         sync_threshold: 1,
-    #       }
     #
     # @!attribute [rw] source
     #   Identifies the source for the timecode that will be associated with
@@ -17847,16 +11160,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TransferInputDeviceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         input_device_id: "__string", # required
-    #         target_customer_id: "__string",
-    #         target_region: "__string",
-    #         transfer_message: "__string",
-    #       }
-    #
     # @!attribute [rw] input_device_id
     #   @return [String]
     #
@@ -17915,13 +11218,6 @@ module Aws::MediaLive
 
     # Ttml Destination Settings
     #
-    # @note When making an API call, you may pass TtmlDestinationSettings
-    #   data as a hash:
-    #
-    #       {
-    #         style_control: "PASSTHROUGH", # accepts PASSTHROUGH, USE_CONFIGURED
-    #       }
-    #
     # @!attribute [rw] style_control
     #   This field is not currently supported and will not affect the output
     #   styling. Leave the default value.
@@ -17937,72 +11233,6 @@ module Aws::MediaLive
 
     # Udp Container Settings
     #
-    # @note When making an API call, you may pass UdpContainerSettings
-    #   data as a hash:
-    #
-    #       {
-    #         m2ts_settings: {
-    #           absent_input_audio_behavior: "DROP", # accepts DROP, ENCODE_SILENCE
-    #           arib: "DISABLED", # accepts DISABLED, ENABLED
-    #           arib_captions_pid: "__string",
-    #           arib_captions_pid_control: "AUTO", # accepts AUTO, USE_CONFIGURED
-    #           audio_buffer_model: "ATSC", # accepts ATSC, DVB
-    #           audio_frames_per_pes: 1,
-    #           audio_pids: "__string",
-    #           audio_stream_type: "ATSC", # accepts ATSC, DVB
-    #           bitrate: 1,
-    #           buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
-    #           cc_descriptor: "DISABLED", # accepts DISABLED, ENABLED
-    #           dvb_nit_settings: {
-    #             network_id: 1, # required
-    #             network_name: "__stringMin1Max256", # required
-    #             rep_interval: 1,
-    #           },
-    #           dvb_sdt_settings: {
-    #             output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
-    #             rep_interval: 1,
-    #             service_name: "__stringMin1Max256",
-    #             service_provider_name: "__stringMin1Max256",
-    #           },
-    #           dvb_sub_pids: "__string",
-    #           dvb_tdt_settings: {
-    #             rep_interval: 1,
-    #           },
-    #           dvb_teletext_pid: "__string",
-    #           ebif: "NONE", # accepts NONE, PASSTHROUGH
-    #           ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS", # accepts VIDEO_AND_FIXED_INTERVALS, VIDEO_INTERVAL
-    #           ebp_lookahead_ms: 1,
-    #           ebp_placement: "VIDEO_AND_AUDIO_PIDS", # accepts VIDEO_AND_AUDIO_PIDS, VIDEO_PID
-    #           ecm_pid: "__string",
-    #           es_rate_in_pes: "EXCLUDE", # accepts EXCLUDE, INCLUDE
-    #           etv_platform_pid: "__string",
-    #           etv_signal_pid: "__string",
-    #           fragment_time: 1.0,
-    #           klv: "NONE", # accepts NONE, PASSTHROUGH
-    #           klv_data_pids: "__string",
-    #           nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #           null_packet_bitrate: 1.0,
-    #           pat_interval: 1,
-    #           pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
-    #           pcr_period: 1,
-    #           pcr_pid: "__string",
-    #           pmt_interval: 1,
-    #           pmt_pid: "__string",
-    #           program_num: 1,
-    #           rate_mode: "CBR", # accepts CBR, VBR
-    #           scte_27_pids: "__string",
-    #           scte_35_control: "NONE", # accepts NONE, PASSTHROUGH
-    #           scte_35_pid: "__string",
-    #           segmentation_markers: "EBP", # accepts EBP, EBP_LEGACY, NONE, PSI_SEGSTART, RAI_ADAPT, RAI_SEGSTART
-    #           segmentation_style: "MAINTAIN_CADENCE", # accepts MAINTAIN_CADENCE, RESET_CADENCE
-    #           segmentation_time: 1.0,
-    #           timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #           timed_metadata_pid: "__string",
-    #           transport_stream_id: 1,
-    #           video_pid: "__string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] m2ts_settings
     #   M2ts Settings
     #   @return [Types::M2tsSettings]
@@ -18016,15 +11246,6 @@ module Aws::MediaLive
     end
 
     # Udp Group Settings
-    #
-    # @note When making an API call, you may pass UdpGroupSettings
-    #   data as a hash:
-    #
-    #       {
-    #         input_loss_action: "DROP_PROGRAM", # accepts DROP_PROGRAM, DROP_TS, EMIT_PROGRAM
-    #         timed_metadata_id_3_frame: "NONE", # accepts NONE, PRIV, TDRL
-    #         timed_metadata_id_3_period: 1,
-    #       }
     #
     # @!attribute [rw] input_loss_action
     #   Specifies behavior of last resort when input video is lost, and no
@@ -18056,83 +11277,6 @@ module Aws::MediaLive
     end
 
     # Udp Output Settings
-    #
-    # @note When making an API call, you may pass UdpOutputSettings
-    #   data as a hash:
-    #
-    #       {
-    #         buffer_msec: 1,
-    #         container_settings: { # required
-    #           m2ts_settings: {
-    #             absent_input_audio_behavior: "DROP", # accepts DROP, ENCODE_SILENCE
-    #             arib: "DISABLED", # accepts DISABLED, ENABLED
-    #             arib_captions_pid: "__string",
-    #             arib_captions_pid_control: "AUTO", # accepts AUTO, USE_CONFIGURED
-    #             audio_buffer_model: "ATSC", # accepts ATSC, DVB
-    #             audio_frames_per_pes: 1,
-    #             audio_pids: "__string",
-    #             audio_stream_type: "ATSC", # accepts ATSC, DVB
-    #             bitrate: 1,
-    #             buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
-    #             cc_descriptor: "DISABLED", # accepts DISABLED, ENABLED
-    #             dvb_nit_settings: {
-    #               network_id: 1, # required
-    #               network_name: "__stringMin1Max256", # required
-    #               rep_interval: 1,
-    #             },
-    #             dvb_sdt_settings: {
-    #               output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
-    #               rep_interval: 1,
-    #               service_name: "__stringMin1Max256",
-    #               service_provider_name: "__stringMin1Max256",
-    #             },
-    #             dvb_sub_pids: "__string",
-    #             dvb_tdt_settings: {
-    #               rep_interval: 1,
-    #             },
-    #             dvb_teletext_pid: "__string",
-    #             ebif: "NONE", # accepts NONE, PASSTHROUGH
-    #             ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS", # accepts VIDEO_AND_FIXED_INTERVALS, VIDEO_INTERVAL
-    #             ebp_lookahead_ms: 1,
-    #             ebp_placement: "VIDEO_AND_AUDIO_PIDS", # accepts VIDEO_AND_AUDIO_PIDS, VIDEO_PID
-    #             ecm_pid: "__string",
-    #             es_rate_in_pes: "EXCLUDE", # accepts EXCLUDE, INCLUDE
-    #             etv_platform_pid: "__string",
-    #             etv_signal_pid: "__string",
-    #             fragment_time: 1.0,
-    #             klv: "NONE", # accepts NONE, PASSTHROUGH
-    #             klv_data_pids: "__string",
-    #             nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #             null_packet_bitrate: 1.0,
-    #             pat_interval: 1,
-    #             pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
-    #             pcr_period: 1,
-    #             pcr_pid: "__string",
-    #             pmt_interval: 1,
-    #             pmt_pid: "__string",
-    #             program_num: 1,
-    #             rate_mode: "CBR", # accepts CBR, VBR
-    #             scte_27_pids: "__string",
-    #             scte_35_control: "NONE", # accepts NONE, PASSTHROUGH
-    #             scte_35_pid: "__string",
-    #             segmentation_markers: "EBP", # accepts EBP, EBP_LEGACY, NONE, PSI_SEGSTART, RAI_ADAPT, RAI_SEGSTART
-    #             segmentation_style: "MAINTAIN_CADENCE", # accepts MAINTAIN_CADENCE, RESET_CADENCE
-    #             segmentation_time: 1.0,
-    #             timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #             timed_metadata_pid: "__string",
-    #             transport_stream_id: 1,
-    #             video_pid: "__string",
-    #           },
-    #         },
-    #         destination: { # required
-    #           destination_ref_id: "__string",
-    #         },
-    #         fec_output_settings: {
-    #           column_depth: 1,
-    #           include_fec: "COLUMN", # accepts COLUMN, COLUMN_AND_ROW
-    #           row_length: 1,
-    #         },
-    #       }
     #
     # @!attribute [rw] buffer_msec
     #   UDP output buffering in milliseconds. Larger values increase latency
@@ -18253,36 +11397,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateChannelClassRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_class: "STANDARD", # required, accepts STANDARD, SINGLE_PIPELINE
-    #         channel_id: "__string", # required
-    #         destinations: [
-    #           {
-    #             id: "__string",
-    #             media_package_settings: [
-    #               {
-    #                 channel_id: "__stringMin1",
-    #               },
-    #             ],
-    #             multiplex_settings: {
-    #               multiplex_id: "__stringMin1",
-    #               program_name: "__stringMin1",
-    #             },
-    #             settings: [
-    #               {
-    #                 password_param: "__string",
-    #                 stream_name: "__string",
-    #                 url: "__string",
-    #                 username: "__string",
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] channel_class
     #   A standard channel has two encoding pipelines and a single pipeline
     #   channel only has one.
@@ -18315,988 +11429,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateChannelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cdi_input_specification: {
-    #           resolution: "SD", # accepts SD, HD, FHD, UHD
-    #         },
-    #         channel_id: "__string", # required
-    #         destinations: [
-    #           {
-    #             id: "__string",
-    #             media_package_settings: [
-    #               {
-    #                 channel_id: "__stringMin1",
-    #               },
-    #             ],
-    #             multiplex_settings: {
-    #               multiplex_id: "__stringMin1",
-    #               program_name: "__stringMin1",
-    #             },
-    #             settings: [
-    #               {
-    #                 password_param: "__string",
-    #                 stream_name: "__string",
-    #                 url: "__string",
-    #                 username: "__string",
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         encoder_settings: {
-    #           audio_descriptions: [ # required
-    #             {
-    #               audio_normalization_settings: {
-    #                 algorithm: "ITU_1770_1", # accepts ITU_1770_1, ITU_1770_2
-    #                 algorithm_control: "CORRECT_AUDIO", # accepts CORRECT_AUDIO
-    #                 target_lkfs: 1.0,
-    #               },
-    #               audio_selector_name: "__string", # required
-    #               audio_type: "CLEAN_EFFECTS", # accepts CLEAN_EFFECTS, HEARING_IMPAIRED, UNDEFINED, VISUAL_IMPAIRED_COMMENTARY
-    #               audio_type_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
-    #               audio_watermarking_settings: {
-    #                 nielsen_watermarks_settings: {
-    #                   nielsen_cbet_settings: {
-    #                     cbet_check_digit_string: "__stringMin2Max2", # required
-    #                     cbet_stepaside: "DISABLED", # required, accepts DISABLED, ENABLED
-    #                     csid: "__stringMin1Max7", # required
-    #                   },
-    #                   nielsen_distribution_type: "FINAL_DISTRIBUTOR", # accepts FINAL_DISTRIBUTOR, PROGRAM_CONTENT
-    #                   nielsen_naes_ii_nw_settings: {
-    #                     check_digit_string: "__stringMin2Max2", # required
-    #                     sid: 1.0, # required
-    #                   },
-    #                 },
-    #               },
-    #               codec_settings: {
-    #                 aac_settings: {
-    #                   bitrate: 1.0,
-    #                   coding_mode: "AD_RECEIVER_MIX", # accepts AD_RECEIVER_MIX, CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_5_1
-    #                   input_type: "BROADCASTER_MIXED_AD", # accepts BROADCASTER_MIXED_AD, NORMAL
-    #                   profile: "HEV1", # accepts HEV1, HEV2, LC
-    #                   rate_control_mode: "CBR", # accepts CBR, VBR
-    #                   raw_format: "LATM_LOAS", # accepts LATM_LOAS, NONE
-    #                   sample_rate: 1.0,
-    #                   spec: "MPEG2", # accepts MPEG2, MPEG4
-    #                   vbr_quality: "HIGH", # accepts HIGH, LOW, MEDIUM_HIGH, MEDIUM_LOW
-    #                 },
-    #                 ac_3_settings: {
-    #                   bitrate: 1.0,
-    #                   bitstream_mode: "COMMENTARY", # accepts COMMENTARY, COMPLETE_MAIN, DIALOGUE, EMERGENCY, HEARING_IMPAIRED, MUSIC_AND_EFFECTS, VISUALLY_IMPAIRED, VOICE_OVER
-    #                   coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_3_2_LFE
-    #                   dialnorm: 1,
-    #                   drc_profile: "FILM_STANDARD", # accepts FILM_STANDARD, NONE
-    #                   lfe_filter: "DISABLED", # accepts DISABLED, ENABLED
-    #                   metadata_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
-    #                 },
-    #                 eac_3_atmos_settings: {
-    #                   bitrate: 1.0,
-    #                   coding_mode: "CODING_MODE_5_1_4", # accepts CODING_MODE_5_1_4, CODING_MODE_7_1_4, CODING_MODE_9_1_6
-    #                   dialnorm: 1,
-    #                   drc_line: "FILM_LIGHT", # accepts FILM_LIGHT, FILM_STANDARD, MUSIC_LIGHT, MUSIC_STANDARD, NONE, SPEECH
-    #                   drc_rf: "FILM_LIGHT", # accepts FILM_LIGHT, FILM_STANDARD, MUSIC_LIGHT, MUSIC_STANDARD, NONE, SPEECH
-    #                   height_trim: 1.0,
-    #                   surround_trim: 1.0,
-    #                 },
-    #                 eac_3_settings: {
-    #                   attenuation_control: "ATTENUATE_3_DB", # accepts ATTENUATE_3_DB, NONE
-    #                   bitrate: 1.0,
-    #                   bitstream_mode: "COMMENTARY", # accepts COMMENTARY, COMPLETE_MAIN, EMERGENCY, HEARING_IMPAIRED, VISUALLY_IMPAIRED
-    #                   coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_2_0, CODING_MODE_3_2
-    #                   dc_filter: "DISABLED", # accepts DISABLED, ENABLED
-    #                   dialnorm: 1,
-    #                   drc_line: "FILM_LIGHT", # accepts FILM_LIGHT, FILM_STANDARD, MUSIC_LIGHT, MUSIC_STANDARD, NONE, SPEECH
-    #                   drc_rf: "FILM_LIGHT", # accepts FILM_LIGHT, FILM_STANDARD, MUSIC_LIGHT, MUSIC_STANDARD, NONE, SPEECH
-    #                   lfe_control: "LFE", # accepts LFE, NO_LFE
-    #                   lfe_filter: "DISABLED", # accepts DISABLED, ENABLED
-    #                   lo_ro_center_mix_level: 1.0,
-    #                   lo_ro_surround_mix_level: 1.0,
-    #                   lt_rt_center_mix_level: 1.0,
-    #                   lt_rt_surround_mix_level: 1.0,
-    #                   metadata_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
-    #                   passthrough_control: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, WHEN_POSSIBLE
-    #                   phase_control: "NO_SHIFT", # accepts NO_SHIFT, SHIFT_90_DEGREES
-    #                   stereo_downmix: "DPL2", # accepts DPL2, LO_RO, LT_RT, NOT_INDICATED
-    #                   surround_ex_mode: "DISABLED", # accepts DISABLED, ENABLED, NOT_INDICATED
-    #                   surround_mode: "DISABLED", # accepts DISABLED, ENABLED, NOT_INDICATED
-    #                 },
-    #                 mp_2_settings: {
-    #                   bitrate: 1.0,
-    #                   coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_2_0
-    #                   sample_rate: 1.0,
-    #                 },
-    #                 pass_through_settings: {
-    #                 },
-    #                 wav_settings: {
-    #                   bit_depth: 1.0,
-    #                   coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_2_0, CODING_MODE_4_0, CODING_MODE_8_0
-    #                   sample_rate: 1.0,
-    #                 },
-    #               },
-    #               language_code: "__stringMin1Max35",
-    #               language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
-    #               name: "__stringMax255", # required
-    #               remix_settings: {
-    #                 channel_mappings: [ # required
-    #                   {
-    #                     input_channel_levels: [ # required
-    #                       {
-    #                         gain: 1, # required
-    #                         input_channel: 1, # required
-    #                       },
-    #                     ],
-    #                     output_channel: 1, # required
-    #                   },
-    #                 ],
-    #                 channels_in: 1,
-    #                 channels_out: 1,
-    #               },
-    #               stream_name: "__string",
-    #             },
-    #           ],
-    #           avail_blanking: {
-    #             avail_blanking_image: {
-    #               password_param: "__string",
-    #               uri: "__stringMax2048", # required
-    #               username: "__string",
-    #             },
-    #             state: "DISABLED", # accepts DISABLED, ENABLED
-    #           },
-    #           avail_configuration: {
-    #             avail_settings: {
-    #               esam: {
-    #                 acquisition_point_id: "__stringMax256", # required
-    #                 ad_avail_offset: 1,
-    #                 password: "__string",
-    #                 pois_endpoint: "__string", # required
-    #                 username: "__string",
-    #                 zone_identity: "__stringMax256",
-    #               },
-    #               scte_35_splice_insert: {
-    #                 ad_avail_offset: 1,
-    #                 no_regional_blackout_flag: "FOLLOW", # accepts FOLLOW, IGNORE
-    #                 web_delivery_allowed_flag: "FOLLOW", # accepts FOLLOW, IGNORE
-    #               },
-    #               scte_35_time_signal_apos: {
-    #                 ad_avail_offset: 1,
-    #                 no_regional_blackout_flag: "FOLLOW", # accepts FOLLOW, IGNORE
-    #                 web_delivery_allowed_flag: "FOLLOW", # accepts FOLLOW, IGNORE
-    #               },
-    #             },
-    #           },
-    #           blackout_slate: {
-    #             blackout_slate_image: {
-    #               password_param: "__string",
-    #               uri: "__stringMax2048", # required
-    #               username: "__string",
-    #             },
-    #             network_end_blackout: "DISABLED", # accepts DISABLED, ENABLED
-    #             network_end_blackout_image: {
-    #               password_param: "__string",
-    #               uri: "__stringMax2048", # required
-    #               username: "__string",
-    #             },
-    #             network_id: "__stringMin34Max34",
-    #             state: "DISABLED", # accepts DISABLED, ENABLED
-    #           },
-    #           caption_descriptions: [
-    #             {
-    #               accessibility: "DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES", # accepts DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES, IMPLEMENTS_ACCESSIBILITY_FEATURES
-    #               caption_selector_name: "__string", # required
-    #               destination_settings: {
-    #                 arib_destination_settings: {
-    #                 },
-    #                 burn_in_destination_settings: {
-    #                   alignment: "CENTERED", # accepts CENTERED, LEFT, SMART
-    #                   background_color: "BLACK", # accepts BLACK, NONE, WHITE
-    #                   background_opacity: 1,
-    #                   font: {
-    #                     password_param: "__string",
-    #                     uri: "__stringMax2048", # required
-    #                     username: "__string",
-    #                   },
-    #                   font_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
-    #                   font_opacity: 1,
-    #                   font_resolution: 1,
-    #                   font_size: "__string",
-    #                   outline_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
-    #                   outline_size: 1,
-    #                   shadow_color: "BLACK", # accepts BLACK, NONE, WHITE
-    #                   shadow_opacity: 1,
-    #                   shadow_x_offset: 1,
-    #                   shadow_y_offset: 1,
-    #                   teletext_grid_control: "FIXED", # accepts FIXED, SCALED
-    #                   x_position: 1,
-    #                   y_position: 1,
-    #                 },
-    #                 dvb_sub_destination_settings: {
-    #                   alignment: "CENTERED", # accepts CENTERED, LEFT, SMART
-    #                   background_color: "BLACK", # accepts BLACK, NONE, WHITE
-    #                   background_opacity: 1,
-    #                   font: {
-    #                     password_param: "__string",
-    #                     uri: "__stringMax2048", # required
-    #                     username: "__string",
-    #                   },
-    #                   font_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
-    #                   font_opacity: 1,
-    #                   font_resolution: 1,
-    #                   font_size: "__string",
-    #                   outline_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
-    #                   outline_size: 1,
-    #                   shadow_color: "BLACK", # accepts BLACK, NONE, WHITE
-    #                   shadow_opacity: 1,
-    #                   shadow_x_offset: 1,
-    #                   shadow_y_offset: 1,
-    #                   teletext_grid_control: "FIXED", # accepts FIXED, SCALED
-    #                   x_position: 1,
-    #                   y_position: 1,
-    #                 },
-    #                 ebu_tt_d_destination_settings: {
-    #                   copyright_holder: "__stringMax1000",
-    #                   fill_line_gap: "DISABLED", # accepts DISABLED, ENABLED
-    #                   font_family: "__string",
-    #                   style_control: "EXCLUDE", # accepts EXCLUDE, INCLUDE
-    #                 },
-    #                 embedded_destination_settings: {
-    #                 },
-    #                 embedded_plus_scte_20_destination_settings: {
-    #                 },
-    #                 rtmp_caption_info_destination_settings: {
-    #                 },
-    #                 scte_20_plus_embedded_destination_settings: {
-    #                 },
-    #                 scte_27_destination_settings: {
-    #                 },
-    #                 smpte_tt_destination_settings: {
-    #                 },
-    #                 teletext_destination_settings: {
-    #                 },
-    #                 ttml_destination_settings: {
-    #                   style_control: "PASSTHROUGH", # accepts PASSTHROUGH, USE_CONFIGURED
-    #                 },
-    #                 webvtt_destination_settings: {
-    #                   style_control: "NO_STYLE_DATA", # accepts NO_STYLE_DATA, PASSTHROUGH
-    #                 },
-    #               },
-    #               language_code: "__string",
-    #               language_description: "__string",
-    #               name: "__string", # required
-    #             },
-    #           ],
-    #           feature_activations: {
-    #             input_prepare_schedule_actions: "DISABLED", # accepts DISABLED, ENABLED
-    #           },
-    #           global_configuration: {
-    #             initial_audio_gain: 1,
-    #             input_end_action: "NONE", # accepts NONE, SWITCH_AND_LOOP_INPUTS
-    #             input_loss_behavior: {
-    #               black_frame_msec: 1,
-    #               input_loss_image_color: "__stringMin6Max6",
-    #               input_loss_image_slate: {
-    #                 password_param: "__string",
-    #                 uri: "__stringMax2048", # required
-    #                 username: "__string",
-    #               },
-    #               input_loss_image_type: "COLOR", # accepts COLOR, SLATE
-    #               repeat_frame_msec: 1,
-    #             },
-    #             output_locking_mode: "EPOCH_LOCKING", # accepts EPOCH_LOCKING, PIPELINE_LOCKING
-    #             output_timing_source: "INPUT_CLOCK", # accepts INPUT_CLOCK, SYSTEM_CLOCK
-    #             support_low_framerate_inputs: "DISABLED", # accepts DISABLED, ENABLED
-    #           },
-    #           motion_graphics_configuration: {
-    #             motion_graphics_insertion: "DISABLED", # accepts DISABLED, ENABLED
-    #             motion_graphics_settings: { # required
-    #               html_motion_graphics_settings: {
-    #               },
-    #             },
-    #           },
-    #           nielsen_configuration: {
-    #             distributor_id: "__string",
-    #             nielsen_pcm_to_id_3_tagging: "DISABLED", # accepts DISABLED, ENABLED
-    #           },
-    #           output_groups: [ # required
-    #             {
-    #               name: "__stringMax32",
-    #               output_group_settings: { # required
-    #                 archive_group_settings: {
-    #                   archive_cdn_settings: {
-    #                     archive_s3_settings: {
-    #                       canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
-    #                     },
-    #                   },
-    #                   destination: { # required
-    #                     destination_ref_id: "__string",
-    #                   },
-    #                   rollover_interval: 1,
-    #                 },
-    #                 frame_capture_group_settings: {
-    #                   destination: { # required
-    #                     destination_ref_id: "__string",
-    #                   },
-    #                   frame_capture_cdn_settings: {
-    #                     frame_capture_s3_settings: {
-    #                       canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
-    #                     },
-    #                   },
-    #                 },
-    #                 hls_group_settings: {
-    #                   ad_markers: ["ADOBE"], # accepts ADOBE, ELEMENTAL, ELEMENTAL_SCTE35
-    #                   base_url_content: "__string",
-    #                   base_url_content_1: "__string",
-    #                   base_url_manifest: "__string",
-    #                   base_url_manifest_1: "__string",
-    #                   caption_language_mappings: [
-    #                     {
-    #                       caption_channel: 1, # required
-    #                       language_code: "__stringMin3Max3", # required
-    #                       language_description: "__stringMin1", # required
-    #                     },
-    #                   ],
-    #                   caption_language_setting: "INSERT", # accepts INSERT, NONE, OMIT
-    #                   client_cache: "DISABLED", # accepts DISABLED, ENABLED
-    #                   codec_specification: "RFC_4281", # accepts RFC_4281, RFC_6381
-    #                   constant_iv: "__stringMin32Max32",
-    #                   destination: { # required
-    #                     destination_ref_id: "__string",
-    #                   },
-    #                   directory_structure: "SINGLE_DIRECTORY", # accepts SINGLE_DIRECTORY, SUBDIRECTORY_PER_STREAM
-    #                   discontinuity_tags: "INSERT", # accepts INSERT, NEVER_INSERT
-    #                   encryption_type: "AES128", # accepts AES128, SAMPLE_AES
-    #                   hls_cdn_settings: {
-    #                     hls_akamai_settings: {
-    #                       connection_retry_interval: 1,
-    #                       filecache_duration: 1,
-    #                       http_transfer_mode: "CHUNKED", # accepts CHUNKED, NON_CHUNKED
-    #                       num_retries: 1,
-    #                       restart_delay: 1,
-    #                       salt: "__string",
-    #                       token: "__string",
-    #                     },
-    #                     hls_basic_put_settings: {
-    #                       connection_retry_interval: 1,
-    #                       filecache_duration: 1,
-    #                       num_retries: 1,
-    #                       restart_delay: 1,
-    #                     },
-    #                     hls_media_store_settings: {
-    #                       connection_retry_interval: 1,
-    #                       filecache_duration: 1,
-    #                       media_store_storage_class: "TEMPORAL", # accepts TEMPORAL
-    #                       num_retries: 1,
-    #                       restart_delay: 1,
-    #                     },
-    #                     hls_s3_settings: {
-    #                       canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
-    #                     },
-    #                     hls_webdav_settings: {
-    #                       connection_retry_interval: 1,
-    #                       filecache_duration: 1,
-    #                       http_transfer_mode: "CHUNKED", # accepts CHUNKED, NON_CHUNKED
-    #                       num_retries: 1,
-    #                       restart_delay: 1,
-    #                     },
-    #                   },
-    #                   hls_id_3_segment_tagging: "DISABLED", # accepts DISABLED, ENABLED
-    #                   i_frame_only_playlists: "DISABLED", # accepts DISABLED, STANDARD
-    #                   incomplete_segment_behavior: "AUTO", # accepts AUTO, SUPPRESS
-    #                   index_n_segments: 1,
-    #                   input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
-    #                   iv_in_manifest: "EXCLUDE", # accepts EXCLUDE, INCLUDE
-    #                   iv_source: "EXPLICIT", # accepts EXPLICIT, FOLLOWS_SEGMENT_NUMBER
-    #                   keep_segments: 1,
-    #                   key_format: "__string",
-    #                   key_format_versions: "__string",
-    #                   key_provider_settings: {
-    #                     static_key_settings: {
-    #                       key_provider_server: {
-    #                         password_param: "__string",
-    #                         uri: "__stringMax2048", # required
-    #                         username: "__string",
-    #                       },
-    #                       static_key_value: "__stringMin32Max32", # required
-    #                     },
-    #                   },
-    #                   manifest_compression: "GZIP", # accepts GZIP, NONE
-    #                   manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
-    #                   min_segment_length: 1,
-    #                   mode: "LIVE", # accepts LIVE, VOD
-    #                   output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY, VARIANT_MANIFESTS_AND_SEGMENTS
-    #                   program_date_time: "EXCLUDE", # accepts EXCLUDE, INCLUDE
-    #                   program_date_time_clock: "INITIALIZE_FROM_OUTPUT_TIMECODE", # accepts INITIALIZE_FROM_OUTPUT_TIMECODE, SYSTEM_CLOCK
-    #                   program_date_time_period: 1,
-    #                   redundant_manifest: "DISABLED", # accepts DISABLED, ENABLED
-    #                   segment_length: 1,
-    #                   segmentation_mode: "USE_INPUT_SEGMENTATION", # accepts USE_INPUT_SEGMENTATION, USE_SEGMENT_DURATION
-    #                   segments_per_subdirectory: 1,
-    #                   stream_inf_resolution: "EXCLUDE", # accepts EXCLUDE, INCLUDE
-    #                   timed_metadata_id_3_frame: "NONE", # accepts NONE, PRIV, TDRL
-    #                   timed_metadata_id_3_period: 1,
-    #                   timestamp_delta_milliseconds: 1,
-    #                   ts_file_mode: "SEGMENTED_FILES", # accepts SEGMENTED_FILES, SINGLE_FILE
-    #                 },
-    #                 media_package_group_settings: {
-    #                   destination: { # required
-    #                     destination_ref_id: "__string",
-    #                   },
-    #                 },
-    #                 ms_smooth_group_settings: {
-    #                   acquisition_point_id: "__string",
-    #                   audio_only_timecode_control: "PASSTHROUGH", # accepts PASSTHROUGH, USE_CONFIGURED_CLOCK
-    #                   certificate_mode: "SELF_SIGNED", # accepts SELF_SIGNED, VERIFY_AUTHENTICITY
-    #                   connection_retry_interval: 1,
-    #                   destination: { # required
-    #                     destination_ref_id: "__string",
-    #                   },
-    #                   event_id: "__string",
-    #                   event_id_mode: "NO_EVENT_ID", # accepts NO_EVENT_ID, USE_CONFIGURED, USE_TIMESTAMP
-    #                   event_stop_behavior: "NONE", # accepts NONE, SEND_EOS
-    #                   filecache_duration: 1,
-    #                   fragment_length: 1,
-    #                   input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
-    #                   num_retries: 1,
-    #                   restart_delay: 1,
-    #                   segmentation_mode: "USE_INPUT_SEGMENTATION", # accepts USE_INPUT_SEGMENTATION, USE_SEGMENT_DURATION
-    #                   send_delay_ms: 1,
-    #                   sparse_track_type: "NONE", # accepts NONE, SCTE_35, SCTE_35_WITHOUT_SEGMENTATION
-    #                   stream_manifest_behavior: "DO_NOT_SEND", # accepts DO_NOT_SEND, SEND
-    #                   timestamp_offset: "__string",
-    #                   timestamp_offset_mode: "USE_CONFIGURED_OFFSET", # accepts USE_CONFIGURED_OFFSET, USE_EVENT_START_DATE
-    #                 },
-    #                 multiplex_group_settings: {
-    #                 },
-    #                 rtmp_group_settings: {
-    #                   ad_markers: ["ON_CUE_POINT_SCTE35"], # accepts ON_CUE_POINT_SCTE35
-    #                   authentication_scheme: "AKAMAI", # accepts AKAMAI, COMMON
-    #                   cache_full_behavior: "DISCONNECT_IMMEDIATELY", # accepts DISCONNECT_IMMEDIATELY, WAIT_FOR_SERVER
-    #                   cache_length: 1,
-    #                   caption_data: "ALL", # accepts ALL, FIELD1_608, FIELD1_AND_FIELD2_608
-    #                   input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
-    #                   restart_delay: 1,
-    #                 },
-    #                 udp_group_settings: {
-    #                   input_loss_action: "DROP_PROGRAM", # accepts DROP_PROGRAM, DROP_TS, EMIT_PROGRAM
-    #                   timed_metadata_id_3_frame: "NONE", # accepts NONE, PRIV, TDRL
-    #                   timed_metadata_id_3_period: 1,
-    #                 },
-    #               },
-    #               outputs: [ # required
-    #                 {
-    #                   audio_description_names: ["__string"],
-    #                   caption_description_names: ["__string"],
-    #                   output_name: "__stringMin1Max255",
-    #                   output_settings: { # required
-    #                     archive_output_settings: {
-    #                       container_settings: { # required
-    #                         m2ts_settings: {
-    #                           absent_input_audio_behavior: "DROP", # accepts DROP, ENCODE_SILENCE
-    #                           arib: "DISABLED", # accepts DISABLED, ENABLED
-    #                           arib_captions_pid: "__string",
-    #                           arib_captions_pid_control: "AUTO", # accepts AUTO, USE_CONFIGURED
-    #                           audio_buffer_model: "ATSC", # accepts ATSC, DVB
-    #                           audio_frames_per_pes: 1,
-    #                           audio_pids: "__string",
-    #                           audio_stream_type: "ATSC", # accepts ATSC, DVB
-    #                           bitrate: 1,
-    #                           buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
-    #                           cc_descriptor: "DISABLED", # accepts DISABLED, ENABLED
-    #                           dvb_nit_settings: {
-    #                             network_id: 1, # required
-    #                             network_name: "__stringMin1Max256", # required
-    #                             rep_interval: 1,
-    #                           },
-    #                           dvb_sdt_settings: {
-    #                             output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
-    #                             rep_interval: 1,
-    #                             service_name: "__stringMin1Max256",
-    #                             service_provider_name: "__stringMin1Max256",
-    #                           },
-    #                           dvb_sub_pids: "__string",
-    #                           dvb_tdt_settings: {
-    #                             rep_interval: 1,
-    #                           },
-    #                           dvb_teletext_pid: "__string",
-    #                           ebif: "NONE", # accepts NONE, PASSTHROUGH
-    #                           ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS", # accepts VIDEO_AND_FIXED_INTERVALS, VIDEO_INTERVAL
-    #                           ebp_lookahead_ms: 1,
-    #                           ebp_placement: "VIDEO_AND_AUDIO_PIDS", # accepts VIDEO_AND_AUDIO_PIDS, VIDEO_PID
-    #                           ecm_pid: "__string",
-    #                           es_rate_in_pes: "EXCLUDE", # accepts EXCLUDE, INCLUDE
-    #                           etv_platform_pid: "__string",
-    #                           etv_signal_pid: "__string",
-    #                           fragment_time: 1.0,
-    #                           klv: "NONE", # accepts NONE, PASSTHROUGH
-    #                           klv_data_pids: "__string",
-    #                           nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                           null_packet_bitrate: 1.0,
-    #                           pat_interval: 1,
-    #                           pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
-    #                           pcr_period: 1,
-    #                           pcr_pid: "__string",
-    #                           pmt_interval: 1,
-    #                           pmt_pid: "__string",
-    #                           program_num: 1,
-    #                           rate_mode: "CBR", # accepts CBR, VBR
-    #                           scte_27_pids: "__string",
-    #                           scte_35_control: "NONE", # accepts NONE, PASSTHROUGH
-    #                           scte_35_pid: "__string",
-    #                           segmentation_markers: "EBP", # accepts EBP, EBP_LEGACY, NONE, PSI_SEGSTART, RAI_ADAPT, RAI_SEGSTART
-    #                           segmentation_style: "MAINTAIN_CADENCE", # accepts MAINTAIN_CADENCE, RESET_CADENCE
-    #                           segmentation_time: 1.0,
-    #                           timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                           timed_metadata_pid: "__string",
-    #                           transport_stream_id: 1,
-    #                           video_pid: "__string",
-    #                         },
-    #                         raw_settings: {
-    #                         },
-    #                       },
-    #                       extension: "__string",
-    #                       name_modifier: "__string",
-    #                     },
-    #                     frame_capture_output_settings: {
-    #                       name_modifier: "__string",
-    #                     },
-    #                     hls_output_settings: {
-    #                       h265_packaging_type: "HEV1", # accepts HEV1, HVC1
-    #                       hls_settings: { # required
-    #                         audio_only_hls_settings: {
-    #                           audio_group_id: "__string",
-    #                           audio_only_image: {
-    #                             password_param: "__string",
-    #                             uri: "__stringMax2048", # required
-    #                             username: "__string",
-    #                           },
-    #                           audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT", # accepts ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
-    #                           segment_type: "AAC", # accepts AAC, FMP4
-    #                         },
-    #                         fmp_4_hls_settings: {
-    #                           audio_rendition_sets: "__string",
-    #                           nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                           timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                         },
-    #                         frame_capture_hls_settings: {
-    #                         },
-    #                         standard_hls_settings: {
-    #                           audio_rendition_sets: "__string",
-    #                           m3u_8_settings: { # required
-    #                             audio_frames_per_pes: 1,
-    #                             audio_pids: "__string",
-    #                             ecm_pid: "__string",
-    #                             nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                             pat_interval: 1,
-    #                             pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
-    #                             pcr_period: 1,
-    #                             pcr_pid: "__string",
-    #                             pmt_interval: 1,
-    #                             pmt_pid: "__string",
-    #                             program_num: 1,
-    #                             scte_35_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                             scte_35_pid: "__string",
-    #                             timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                             timed_metadata_pid: "__string",
-    #                             transport_stream_id: 1,
-    #                             video_pid: "__string",
-    #                           },
-    #                         },
-    #                       },
-    #                       name_modifier: "__stringMin1",
-    #                       segment_modifier: "__string",
-    #                     },
-    #                     media_package_output_settings: {
-    #                     },
-    #                     ms_smooth_output_settings: {
-    #                       h265_packaging_type: "HEV1", # accepts HEV1, HVC1
-    #                       name_modifier: "__string",
-    #                     },
-    #                     multiplex_output_settings: {
-    #                       destination: { # required
-    #                         destination_ref_id: "__string",
-    #                       },
-    #                     },
-    #                     rtmp_output_settings: {
-    #                       certificate_mode: "SELF_SIGNED", # accepts SELF_SIGNED, VERIFY_AUTHENTICITY
-    #                       connection_retry_interval: 1,
-    #                       destination: { # required
-    #                         destination_ref_id: "__string",
-    #                       },
-    #                       num_retries: 1,
-    #                     },
-    #                     udp_output_settings: {
-    #                       buffer_msec: 1,
-    #                       container_settings: { # required
-    #                         m2ts_settings: {
-    #                           absent_input_audio_behavior: "DROP", # accepts DROP, ENCODE_SILENCE
-    #                           arib: "DISABLED", # accepts DISABLED, ENABLED
-    #                           arib_captions_pid: "__string",
-    #                           arib_captions_pid_control: "AUTO", # accepts AUTO, USE_CONFIGURED
-    #                           audio_buffer_model: "ATSC", # accepts ATSC, DVB
-    #                           audio_frames_per_pes: 1,
-    #                           audio_pids: "__string",
-    #                           audio_stream_type: "ATSC", # accepts ATSC, DVB
-    #                           bitrate: 1,
-    #                           buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
-    #                           cc_descriptor: "DISABLED", # accepts DISABLED, ENABLED
-    #                           dvb_nit_settings: {
-    #                             network_id: 1, # required
-    #                             network_name: "__stringMin1Max256", # required
-    #                             rep_interval: 1,
-    #                           },
-    #                           dvb_sdt_settings: {
-    #                             output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
-    #                             rep_interval: 1,
-    #                             service_name: "__stringMin1Max256",
-    #                             service_provider_name: "__stringMin1Max256",
-    #                           },
-    #                           dvb_sub_pids: "__string",
-    #                           dvb_tdt_settings: {
-    #                             rep_interval: 1,
-    #                           },
-    #                           dvb_teletext_pid: "__string",
-    #                           ebif: "NONE", # accepts NONE, PASSTHROUGH
-    #                           ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS", # accepts VIDEO_AND_FIXED_INTERVALS, VIDEO_INTERVAL
-    #                           ebp_lookahead_ms: 1,
-    #                           ebp_placement: "VIDEO_AND_AUDIO_PIDS", # accepts VIDEO_AND_AUDIO_PIDS, VIDEO_PID
-    #                           ecm_pid: "__string",
-    #                           es_rate_in_pes: "EXCLUDE", # accepts EXCLUDE, INCLUDE
-    #                           etv_platform_pid: "__string",
-    #                           etv_signal_pid: "__string",
-    #                           fragment_time: 1.0,
-    #                           klv: "NONE", # accepts NONE, PASSTHROUGH
-    #                           klv_data_pids: "__string",
-    #                           nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                           null_packet_bitrate: 1.0,
-    #                           pat_interval: 1,
-    #                           pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
-    #                           pcr_period: 1,
-    #                           pcr_pid: "__string",
-    #                           pmt_interval: 1,
-    #                           pmt_pid: "__string",
-    #                           program_num: 1,
-    #                           rate_mode: "CBR", # accepts CBR, VBR
-    #                           scte_27_pids: "__string",
-    #                           scte_35_control: "NONE", # accepts NONE, PASSTHROUGH
-    #                           scte_35_pid: "__string",
-    #                           segmentation_markers: "EBP", # accepts EBP, EBP_LEGACY, NONE, PSI_SEGSTART, RAI_ADAPT, RAI_SEGSTART
-    #                           segmentation_style: "MAINTAIN_CADENCE", # accepts MAINTAIN_CADENCE, RESET_CADENCE
-    #                           segmentation_time: 1.0,
-    #                           timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
-    #                           timed_metadata_pid: "__string",
-    #                           transport_stream_id: 1,
-    #                           video_pid: "__string",
-    #                         },
-    #                       },
-    #                       destination: { # required
-    #                         destination_ref_id: "__string",
-    #                       },
-    #                       fec_output_settings: {
-    #                         column_depth: 1,
-    #                         include_fec: "COLUMN", # accepts COLUMN, COLUMN_AND_ROW
-    #                         row_length: 1,
-    #                       },
-    #                     },
-    #                   },
-    #                   video_description_name: "__string",
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #           timecode_config: { # required
-    #             source: "EMBEDDED", # required, accepts EMBEDDED, SYSTEMCLOCK, ZEROBASED
-    #             sync_threshold: 1,
-    #           },
-    #           video_descriptions: [ # required
-    #             {
-    #               codec_settings: {
-    #                 frame_capture_settings: {
-    #                   capture_interval: 1,
-    #                   capture_interval_units: "MILLISECONDS", # accepts MILLISECONDS, SECONDS
-    #                 },
-    #                 h264_settings: {
-    #                   adaptive_quantization: "AUTO", # accepts AUTO, HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
-    #                   afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
-    #                   bitrate: 1,
-    #                   buf_fill_pct: 1,
-    #                   buf_size: 1,
-    #                   color_metadata: "IGNORE", # accepts IGNORE, INSERT
-    #                   color_space_settings: {
-    #                     color_space_passthrough_settings: {
-    #                     },
-    #                     rec_601_settings: {
-    #                     },
-    #                     rec_709_settings: {
-    #                     },
-    #                   },
-    #                   entropy_encoding: "CABAC", # accepts CABAC, CAVLC
-    #                   filter_settings: {
-    #                     temporal_filter_settings: {
-    #                       post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
-    #                       strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16
-    #                     },
-    #                   },
-    #                   fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
-    #                   flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
-    #                   force_field_pictures: "DISABLED", # accepts DISABLED, ENABLED
-    #                   framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                   framerate_denominator: 1,
-    #                   framerate_numerator: 1,
-    #                   gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
-    #                   gop_closed_cadence: 1,
-    #                   gop_num_b_frames: 1,
-    #                   gop_size: 1.0,
-    #                   gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
-    #                   level: "H264_LEVEL_1", # accepts H264_LEVEL_1, H264_LEVEL_1_1, H264_LEVEL_1_2, H264_LEVEL_1_3, H264_LEVEL_2, H264_LEVEL_2_1, H264_LEVEL_2_2, H264_LEVEL_3, H264_LEVEL_3_1, H264_LEVEL_3_2, H264_LEVEL_4, H264_LEVEL_4_1, H264_LEVEL_4_2, H264_LEVEL_5, H264_LEVEL_5_1, H264_LEVEL_5_2, H264_LEVEL_AUTO
-    #                   look_ahead_rate_control: "HIGH", # accepts HIGH, LOW, MEDIUM
-    #                   max_bitrate: 1,
-    #                   min_i_interval: 1,
-    #                   num_ref_frames: 1,
-    #                   par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                   par_denominator: 1,
-    #                   par_numerator: 1,
-    #                   profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
-    #                   quality_level: "ENHANCED_QUALITY", # accepts ENHANCED_QUALITY, STANDARD_QUALITY
-    #                   qvbr_quality_level: 1,
-    #                   rate_control_mode: "CBR", # accepts CBR, MULTIPLEX, QVBR, VBR
-    #                   scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
-    #                   scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
-    #                   slices: 1,
-    #                   softness: 1,
-    #                   spatial_aq: "DISABLED", # accepts DISABLED, ENABLED
-    #                   subgop_length: "DYNAMIC", # accepts DYNAMIC, FIXED
-    #                   syntax: "DEFAULT", # accepts DEFAULT, RP2027
-    #                   temporal_aq: "DISABLED", # accepts DISABLED, ENABLED
-    #                   timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
-    #                 },
-    #                 h265_settings: {
-    #                   adaptive_quantization: "AUTO", # accepts AUTO, HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
-    #                   afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
-    #                   alternative_transfer_function: "INSERT", # accepts INSERT, OMIT
-    #                   bitrate: 1,
-    #                   buf_size: 1,
-    #                   color_metadata: "IGNORE", # accepts IGNORE, INSERT
-    #                   color_space_settings: {
-    #                     color_space_passthrough_settings: {
-    #                     },
-    #                     dolby_vision_81_settings: {
-    #                     },
-    #                     hdr_10_settings: {
-    #                       max_cll: 1,
-    #                       max_fall: 1,
-    #                     },
-    #                     rec_601_settings: {
-    #                     },
-    #                     rec_709_settings: {
-    #                     },
-    #                   },
-    #                   filter_settings: {
-    #                     temporal_filter_settings: {
-    #                       post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
-    #                       strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16
-    #                     },
-    #                   },
-    #                   fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
-    #                   flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
-    #                   framerate_denominator: 1, # required
-    #                   framerate_numerator: 1, # required
-    #                   gop_closed_cadence: 1,
-    #                   gop_size: 1.0,
-    #                   gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
-    #                   level: "H265_LEVEL_1", # accepts H265_LEVEL_1, H265_LEVEL_2, H265_LEVEL_2_1, H265_LEVEL_3, H265_LEVEL_3_1, H265_LEVEL_4, H265_LEVEL_4_1, H265_LEVEL_5, H265_LEVEL_5_1, H265_LEVEL_5_2, H265_LEVEL_6, H265_LEVEL_6_1, H265_LEVEL_6_2, H265_LEVEL_AUTO
-    #                   look_ahead_rate_control: "HIGH", # accepts HIGH, LOW, MEDIUM
-    #                   max_bitrate: 1,
-    #                   min_i_interval: 1,
-    #                   par_denominator: 1,
-    #                   par_numerator: 1,
-    #                   profile: "MAIN", # accepts MAIN, MAIN_10BIT
-    #                   qvbr_quality_level: 1,
-    #                   rate_control_mode: "CBR", # accepts CBR, MULTIPLEX, QVBR
-    #                   scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
-    #                   scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
-    #                   slices: 1,
-    #                   tier: "HIGH", # accepts HIGH, MAIN
-    #                   timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
-    #                 },
-    #                 mpeg_2_settings: {
-    #                   adaptive_quantization: "AUTO", # accepts AUTO, HIGH, LOW, MEDIUM, OFF
-    #                   afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
-    #                   color_metadata: "IGNORE", # accepts IGNORE, INSERT
-    #                   color_space: "AUTO", # accepts AUTO, PASSTHROUGH
-    #                   display_aspect_ratio: "DISPLAYRATIO16X9", # accepts DISPLAYRATIO16X9, DISPLAYRATIO4X3
-    #                   filter_settings: {
-    #                     temporal_filter_settings: {
-    #                       post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
-    #                       strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16
-    #                     },
-    #                   },
-    #                   fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
-    #                   framerate_denominator: 1, # required
-    #                   framerate_numerator: 1, # required
-    #                   gop_closed_cadence: 1,
-    #                   gop_num_b_frames: 1,
-    #                   gop_size: 1.0,
-    #                   gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
-    #                   scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
-    #                   subgop_length: "DYNAMIC", # accepts DYNAMIC, FIXED
-    #                   timecode_insertion: "DISABLED", # accepts DISABLED, GOP_TIMECODE
-    #                 },
-    #               },
-    #               height: 1,
-    #               name: "__string", # required
-    #               respond_to_afd: "NONE", # accepts NONE, PASSTHROUGH, RESPOND
-    #               scaling_behavior: "DEFAULT", # accepts DEFAULT, STRETCH_TO_OUTPUT
-    #               sharpness: 1,
-    #               width: 1,
-    #             },
-    #           ],
-    #         },
-    #         input_attachments: [
-    #           {
-    #             automatic_input_failover_settings: {
-    #               error_clear_time_msec: 1,
-    #               failover_conditions: [
-    #                 {
-    #                   failover_condition_settings: {
-    #                     audio_silence_settings: {
-    #                       audio_selector_name: "__string", # required
-    #                       audio_silence_threshold_msec: 1,
-    #                     },
-    #                     input_loss_settings: {
-    #                       input_loss_threshold_msec: 1,
-    #                     },
-    #                     video_black_settings: {
-    #                       black_detect_threshold: 1.0,
-    #                       video_black_threshold_msec: 1,
-    #                     },
-    #                   },
-    #                 },
-    #               ],
-    #               input_preference: "EQUAL_INPUT_PREFERENCE", # accepts EQUAL_INPUT_PREFERENCE, PRIMARY_INPUT_PREFERRED
-    #               secondary_input_id: "__string", # required
-    #             },
-    #             input_attachment_name: "__string",
-    #             input_id: "__string",
-    #             input_settings: {
-    #               audio_selectors: [
-    #                 {
-    #                   name: "__stringMin1", # required
-    #                   selector_settings: {
-    #                     audio_hls_rendition_selection: {
-    #                       group_id: "__stringMin1", # required
-    #                       name: "__stringMin1", # required
-    #                     },
-    #                     audio_language_selection: {
-    #                       language_code: "__string", # required
-    #                       language_selection_policy: "LOOSE", # accepts LOOSE, STRICT
-    #                     },
-    #                     audio_pid_selection: {
-    #                       pid: 1, # required
-    #                     },
-    #                     audio_track_selection: {
-    #                       tracks: [ # required
-    #                         {
-    #                           track: 1, # required
-    #                         },
-    #                       ],
-    #                     },
-    #                   },
-    #                 },
-    #               ],
-    #               caption_selectors: [
-    #                 {
-    #                   language_code: "__string",
-    #                   name: "__stringMin1", # required
-    #                   selector_settings: {
-    #                     ancillary_source_settings: {
-    #                       source_ancillary_channel_number: 1,
-    #                     },
-    #                     arib_source_settings: {
-    #                     },
-    #                     dvb_sub_source_settings: {
-    #                       ocr_language: "DEU", # accepts DEU, ENG, FRA, NLD, POR, SPA
-    #                       pid: 1,
-    #                     },
-    #                     embedded_source_settings: {
-    #                       convert_608_to_708: "DISABLED", # accepts DISABLED, UPCONVERT
-    #                       scte_20_detection: "AUTO", # accepts AUTO, OFF
-    #                       source_608_channel_number: 1,
-    #                       source_608_track_number: 1,
-    #                     },
-    #                     scte_20_source_settings: {
-    #                       convert_608_to_708: "DISABLED", # accepts DISABLED, UPCONVERT
-    #                       source_608_channel_number: 1,
-    #                     },
-    #                     scte_27_source_settings: {
-    #                       ocr_language: "DEU", # accepts DEU, ENG, FRA, NLD, POR, SPA
-    #                       pid: 1,
-    #                     },
-    #                     teletext_source_settings: {
-    #                       output_rectangle: {
-    #                         height: 1.0, # required
-    #                         left_offset: 1.0, # required
-    #                         top_offset: 1.0, # required
-    #                         width: 1.0, # required
-    #                       },
-    #                       page_number: "__string",
-    #                     },
-    #                   },
-    #                 },
-    #               ],
-    #               deblock_filter: "DISABLED", # accepts DISABLED, ENABLED
-    #               denoise_filter: "DISABLED", # accepts DISABLED, ENABLED
-    #               filter_strength: 1,
-    #               input_filter: "AUTO", # accepts AUTO, DISABLED, FORCED
-    #               network_input_settings: {
-    #                 hls_input_settings: {
-    #                   bandwidth: 1,
-    #                   buffer_segments: 1,
-    #                   retries: 1,
-    #                   retry_interval: 1,
-    #                   scte_35_source: "MANIFEST", # accepts MANIFEST, SEGMENTS
-    #                 },
-    #                 server_validation: "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", # accepts CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME, CHECK_CRYPTOGRAPHY_ONLY
-    #               },
-    #               scte_35_pid: 1,
-    #               smpte_2038_data_preference: "IGNORE", # accepts IGNORE, PREFER
-    #               source_end_behavior: "CONTINUE", # accepts CONTINUE, LOOP
-    #               video_selector: {
-    #                 color_space: "FOLLOW", # accepts FOLLOW, HDR10, HLG_2020, REC_601, REC_709
-    #                 color_space_settings: {
-    #                   hdr_10_settings: {
-    #                     max_cll: 1,
-    #                     max_fall: 1,
-    #                   },
-    #                 },
-    #                 color_space_usage: "FALLBACK", # accepts FALLBACK, FORCE
-    #                 selector_settings: {
-    #                   video_selector_pid: {
-    #                     pid: 1,
-    #                   },
-    #                   video_selector_program_id: {
-    #                     program_id: 1,
-    #                   },
-    #                 },
-    #               },
-    #             },
-    #           },
-    #         ],
-    #         input_specification: {
-    #           codec: "MPEG2", # accepts MPEG2, AVC, HEVC
-    #           maximum_bitrate: "MAX_10_MBPS", # accepts MAX_10_MBPS, MAX_20_MBPS, MAX_50_MBPS
-    #           resolution: "SD", # accepts SD, HD, UHD
-    #         },
-    #         log_level: "ERROR", # accepts ERROR, WARNING, INFO, DEBUG, DISABLED
-    #         maintenance: {
-    #           maintenance_day: "MONDAY", # accepts MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
-    #           maintenance_scheduled_date: "__string",
-    #           maintenance_start_time: "__stringPattern010920300",
-    #         },
-    #         name: "__string",
-    #         role_arn: "__string",
-    #       }
-    #
     # @!attribute [rw] cdi_input_specification
     #   @return [Types::CdiInputSpecification]
     #
@@ -19443,22 +11575,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateInputDeviceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         hd_device_settings: {
-    #           configured_input: "AUTO", # accepts AUTO, HDMI, SDI
-    #           max_bitrate: 1,
-    #         },
-    #         input_device_id: "__string", # required
-    #         name: "__string",
-    #         uhd_device_settings: {
-    #           configured_input: "AUTO", # accepts AUTO, HDMI, SDI
-    #           max_bitrate: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] hd_device_settings
     #   Configurable settings for the input device.
     #   @return [Types::InputDeviceConfigurableSettings]
@@ -19554,38 +11670,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateInputRequest
-    #   data as a hash:
-    #
-    #       {
-    #         destinations: [
-    #           {
-    #             stream_name: "__string",
-    #           },
-    #         ],
-    #         input_devices: [
-    #           {
-    #             id: "__string",
-    #           },
-    #         ],
-    #         input_id: "__string", # required
-    #         input_security_groups: ["__string"],
-    #         media_connect_flows: [
-    #           {
-    #             flow_arn: "__string",
-    #           },
-    #         ],
-    #         name: "__string",
-    #         role_arn: "__string",
-    #         sources: [
-    #           {
-    #             password_param: "__string",
-    #             url: "__string",
-    #             username: "__string",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] destinations
     #   @return [Array<Types::InputDestinationRequest>]
     #
@@ -19647,21 +11731,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateInputSecurityGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         input_security_group_id: "__string", # required
-    #         tags: {
-    #           "__string" => "__string",
-    #         },
-    #         whitelist_rules: [
-    #           {
-    #             cidr: "__string",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] input_security_group_id
     #   @return [String]
     #
@@ -19734,30 +11803,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateMultiplexProgramRequest
-    #   data as a hash:
-    #
-    #       {
-    #         multiplex_id: "__string", # required
-    #         multiplex_program_settings: {
-    #           preferred_channel_pipeline: "CURRENTLY_ACTIVE", # accepts CURRENTLY_ACTIVE, PIPELINE_0, PIPELINE_1
-    #           program_number: 1, # required
-    #           service_descriptor: {
-    #             provider_name: "__stringMax256", # required
-    #             service_name: "__stringMax256", # required
-    #           },
-    #           video_settings: {
-    #             constant_bitrate: 1,
-    #             statmux_settings: {
-    #               maximum_bitrate: 1,
-    #               minimum_bitrate: 1,
-    #               priority: 1,
-    #             },
-    #           },
-    #         },
-    #         program_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] multiplex_id
     #   @return [String]
     #
@@ -19802,20 +11847,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateMultiplexRequest
-    #   data as a hash:
-    #
-    #       {
-    #         multiplex_id: "__string", # required
-    #         multiplex_settings: {
-    #           maximum_video_buffer_delay_milliseconds: 1,
-    #           transport_stream_bitrate: 1, # required
-    #           transport_stream_id: 1, # required
-    #           transport_stream_reserved_bitrate: 1,
-    #         },
-    #         name: "__string",
-    #       }
-    #
     # @!attribute [rw] multiplex_id
     #   @return [String]
     #
@@ -19879,18 +11910,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateReservationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "__string",
-    #         renewal_settings: {
-    #           automatic_renewal: "DISABLED", # accepts DISABLED, ENABLED, UNAVAILABLE
-    #           renewal_count: 1,
-    #         },
-    #         reservation_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   @return [String]
     #
@@ -19954,14 +11973,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass VideoBlackFailoverSettings
-    #   data as a hash:
-    #
-    #       {
-    #         black_detect_threshold: 1.0,
-    #         video_black_threshold_msec: 1,
-    #       }
-    #
     # @!attribute [rw] black_detect_threshold
     #   A value used in calculating the threshold below which MediaLive
     #   considers a pixel to be 'black'. For the input to be considered
@@ -19992,143 +12003,6 @@ module Aws::MediaLive
 
     # Video Codec Settings
     #
-    # @note When making an API call, you may pass VideoCodecSettings
-    #   data as a hash:
-    #
-    #       {
-    #         frame_capture_settings: {
-    #           capture_interval: 1,
-    #           capture_interval_units: "MILLISECONDS", # accepts MILLISECONDS, SECONDS
-    #         },
-    #         h264_settings: {
-    #           adaptive_quantization: "AUTO", # accepts AUTO, HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
-    #           afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
-    #           bitrate: 1,
-    #           buf_fill_pct: 1,
-    #           buf_size: 1,
-    #           color_metadata: "IGNORE", # accepts IGNORE, INSERT
-    #           color_space_settings: {
-    #             color_space_passthrough_settings: {
-    #             },
-    #             rec_601_settings: {
-    #             },
-    #             rec_709_settings: {
-    #             },
-    #           },
-    #           entropy_encoding: "CABAC", # accepts CABAC, CAVLC
-    #           filter_settings: {
-    #             temporal_filter_settings: {
-    #               post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
-    #               strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16
-    #             },
-    #           },
-    #           fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
-    #           flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
-    #           force_field_pictures: "DISABLED", # accepts DISABLED, ENABLED
-    #           framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #           framerate_denominator: 1,
-    #           framerate_numerator: 1,
-    #           gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
-    #           gop_closed_cadence: 1,
-    #           gop_num_b_frames: 1,
-    #           gop_size: 1.0,
-    #           gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
-    #           level: "H264_LEVEL_1", # accepts H264_LEVEL_1, H264_LEVEL_1_1, H264_LEVEL_1_2, H264_LEVEL_1_3, H264_LEVEL_2, H264_LEVEL_2_1, H264_LEVEL_2_2, H264_LEVEL_3, H264_LEVEL_3_1, H264_LEVEL_3_2, H264_LEVEL_4, H264_LEVEL_4_1, H264_LEVEL_4_2, H264_LEVEL_5, H264_LEVEL_5_1, H264_LEVEL_5_2, H264_LEVEL_AUTO
-    #           look_ahead_rate_control: "HIGH", # accepts HIGH, LOW, MEDIUM
-    #           max_bitrate: 1,
-    #           min_i_interval: 1,
-    #           num_ref_frames: 1,
-    #           par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #           par_denominator: 1,
-    #           par_numerator: 1,
-    #           profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
-    #           quality_level: "ENHANCED_QUALITY", # accepts ENHANCED_QUALITY, STANDARD_QUALITY
-    #           qvbr_quality_level: 1,
-    #           rate_control_mode: "CBR", # accepts CBR, MULTIPLEX, QVBR, VBR
-    #           scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
-    #           scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
-    #           slices: 1,
-    #           softness: 1,
-    #           spatial_aq: "DISABLED", # accepts DISABLED, ENABLED
-    #           subgop_length: "DYNAMIC", # accepts DYNAMIC, FIXED
-    #           syntax: "DEFAULT", # accepts DEFAULT, RP2027
-    #           temporal_aq: "DISABLED", # accepts DISABLED, ENABLED
-    #           timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
-    #         },
-    #         h265_settings: {
-    #           adaptive_quantization: "AUTO", # accepts AUTO, HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
-    #           afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
-    #           alternative_transfer_function: "INSERT", # accepts INSERT, OMIT
-    #           bitrate: 1,
-    #           buf_size: 1,
-    #           color_metadata: "IGNORE", # accepts IGNORE, INSERT
-    #           color_space_settings: {
-    #             color_space_passthrough_settings: {
-    #             },
-    #             dolby_vision_81_settings: {
-    #             },
-    #             hdr_10_settings: {
-    #               max_cll: 1,
-    #               max_fall: 1,
-    #             },
-    #             rec_601_settings: {
-    #             },
-    #             rec_709_settings: {
-    #             },
-    #           },
-    #           filter_settings: {
-    #             temporal_filter_settings: {
-    #               post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
-    #               strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16
-    #             },
-    #           },
-    #           fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
-    #           flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
-    #           framerate_denominator: 1, # required
-    #           framerate_numerator: 1, # required
-    #           gop_closed_cadence: 1,
-    #           gop_size: 1.0,
-    #           gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
-    #           level: "H265_LEVEL_1", # accepts H265_LEVEL_1, H265_LEVEL_2, H265_LEVEL_2_1, H265_LEVEL_3, H265_LEVEL_3_1, H265_LEVEL_4, H265_LEVEL_4_1, H265_LEVEL_5, H265_LEVEL_5_1, H265_LEVEL_5_2, H265_LEVEL_6, H265_LEVEL_6_1, H265_LEVEL_6_2, H265_LEVEL_AUTO
-    #           look_ahead_rate_control: "HIGH", # accepts HIGH, LOW, MEDIUM
-    #           max_bitrate: 1,
-    #           min_i_interval: 1,
-    #           par_denominator: 1,
-    #           par_numerator: 1,
-    #           profile: "MAIN", # accepts MAIN, MAIN_10BIT
-    #           qvbr_quality_level: 1,
-    #           rate_control_mode: "CBR", # accepts CBR, MULTIPLEX, QVBR
-    #           scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
-    #           scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
-    #           slices: 1,
-    #           tier: "HIGH", # accepts HIGH, MAIN
-    #           timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
-    #         },
-    #         mpeg_2_settings: {
-    #           adaptive_quantization: "AUTO", # accepts AUTO, HIGH, LOW, MEDIUM, OFF
-    #           afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
-    #           color_metadata: "IGNORE", # accepts IGNORE, INSERT
-    #           color_space: "AUTO", # accepts AUTO, PASSTHROUGH
-    #           display_aspect_ratio: "DISPLAYRATIO16X9", # accepts DISPLAYRATIO16X9, DISPLAYRATIO4X3
-    #           filter_settings: {
-    #             temporal_filter_settings: {
-    #               post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
-    #               strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16
-    #             },
-    #           },
-    #           fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
-    #           framerate_denominator: 1, # required
-    #           framerate_numerator: 1, # required
-    #           gop_closed_cadence: 1,
-    #           gop_num_b_frames: 1,
-    #           gop_size: 1.0,
-    #           gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
-    #           scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
-    #           subgop_length: "DYNAMIC", # accepts DYNAMIC, FIXED
-    #           timecode_insertion: "DISABLED", # accepts DISABLED, GOP_TIMECODE
-    #         },
-    #       }
-    #
     # @!attribute [rw] frame_capture_settings
     #   Frame Capture Settings
     #   @return [Types::FrameCaptureSettings]
@@ -20157,151 +12031,6 @@ module Aws::MediaLive
     end
 
     # Video settings for this stream.
-    #
-    # @note When making an API call, you may pass VideoDescription
-    #   data as a hash:
-    #
-    #       {
-    #         codec_settings: {
-    #           frame_capture_settings: {
-    #             capture_interval: 1,
-    #             capture_interval_units: "MILLISECONDS", # accepts MILLISECONDS, SECONDS
-    #           },
-    #           h264_settings: {
-    #             adaptive_quantization: "AUTO", # accepts AUTO, HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
-    #             afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
-    #             bitrate: 1,
-    #             buf_fill_pct: 1,
-    #             buf_size: 1,
-    #             color_metadata: "IGNORE", # accepts IGNORE, INSERT
-    #             color_space_settings: {
-    #               color_space_passthrough_settings: {
-    #               },
-    #               rec_601_settings: {
-    #               },
-    #               rec_709_settings: {
-    #               },
-    #             },
-    #             entropy_encoding: "CABAC", # accepts CABAC, CAVLC
-    #             filter_settings: {
-    #               temporal_filter_settings: {
-    #                 post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
-    #                 strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16
-    #               },
-    #             },
-    #             fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
-    #             flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
-    #             force_field_pictures: "DISABLED", # accepts DISABLED, ENABLED
-    #             framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #             framerate_denominator: 1,
-    #             framerate_numerator: 1,
-    #             gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
-    #             gop_closed_cadence: 1,
-    #             gop_num_b_frames: 1,
-    #             gop_size: 1.0,
-    #             gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
-    #             level: "H264_LEVEL_1", # accepts H264_LEVEL_1, H264_LEVEL_1_1, H264_LEVEL_1_2, H264_LEVEL_1_3, H264_LEVEL_2, H264_LEVEL_2_1, H264_LEVEL_2_2, H264_LEVEL_3, H264_LEVEL_3_1, H264_LEVEL_3_2, H264_LEVEL_4, H264_LEVEL_4_1, H264_LEVEL_4_2, H264_LEVEL_5, H264_LEVEL_5_1, H264_LEVEL_5_2, H264_LEVEL_AUTO
-    #             look_ahead_rate_control: "HIGH", # accepts HIGH, LOW, MEDIUM
-    #             max_bitrate: 1,
-    #             min_i_interval: 1,
-    #             num_ref_frames: 1,
-    #             par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #             par_denominator: 1,
-    #             par_numerator: 1,
-    #             profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
-    #             quality_level: "ENHANCED_QUALITY", # accepts ENHANCED_QUALITY, STANDARD_QUALITY
-    #             qvbr_quality_level: 1,
-    #             rate_control_mode: "CBR", # accepts CBR, MULTIPLEX, QVBR, VBR
-    #             scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
-    #             scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
-    #             slices: 1,
-    #             softness: 1,
-    #             spatial_aq: "DISABLED", # accepts DISABLED, ENABLED
-    #             subgop_length: "DYNAMIC", # accepts DYNAMIC, FIXED
-    #             syntax: "DEFAULT", # accepts DEFAULT, RP2027
-    #             temporal_aq: "DISABLED", # accepts DISABLED, ENABLED
-    #             timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
-    #           },
-    #           h265_settings: {
-    #             adaptive_quantization: "AUTO", # accepts AUTO, HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
-    #             afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
-    #             alternative_transfer_function: "INSERT", # accepts INSERT, OMIT
-    #             bitrate: 1,
-    #             buf_size: 1,
-    #             color_metadata: "IGNORE", # accepts IGNORE, INSERT
-    #             color_space_settings: {
-    #               color_space_passthrough_settings: {
-    #               },
-    #               dolby_vision_81_settings: {
-    #               },
-    #               hdr_10_settings: {
-    #                 max_cll: 1,
-    #                 max_fall: 1,
-    #               },
-    #               rec_601_settings: {
-    #               },
-    #               rec_709_settings: {
-    #               },
-    #             },
-    #             filter_settings: {
-    #               temporal_filter_settings: {
-    #                 post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
-    #                 strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16
-    #               },
-    #             },
-    #             fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
-    #             flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
-    #             framerate_denominator: 1, # required
-    #             framerate_numerator: 1, # required
-    #             gop_closed_cadence: 1,
-    #             gop_size: 1.0,
-    #             gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
-    #             level: "H265_LEVEL_1", # accepts H265_LEVEL_1, H265_LEVEL_2, H265_LEVEL_2_1, H265_LEVEL_3, H265_LEVEL_3_1, H265_LEVEL_4, H265_LEVEL_4_1, H265_LEVEL_5, H265_LEVEL_5_1, H265_LEVEL_5_2, H265_LEVEL_6, H265_LEVEL_6_1, H265_LEVEL_6_2, H265_LEVEL_AUTO
-    #             look_ahead_rate_control: "HIGH", # accepts HIGH, LOW, MEDIUM
-    #             max_bitrate: 1,
-    #             min_i_interval: 1,
-    #             par_denominator: 1,
-    #             par_numerator: 1,
-    #             profile: "MAIN", # accepts MAIN, MAIN_10BIT
-    #             qvbr_quality_level: 1,
-    #             rate_control_mode: "CBR", # accepts CBR, MULTIPLEX, QVBR
-    #             scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
-    #             scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
-    #             slices: 1,
-    #             tier: "HIGH", # accepts HIGH, MAIN
-    #             timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
-    #           },
-    #           mpeg_2_settings: {
-    #             adaptive_quantization: "AUTO", # accepts AUTO, HIGH, LOW, MEDIUM, OFF
-    #             afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
-    #             color_metadata: "IGNORE", # accepts IGNORE, INSERT
-    #             color_space: "AUTO", # accepts AUTO, PASSTHROUGH
-    #             display_aspect_ratio: "DISPLAYRATIO16X9", # accepts DISPLAYRATIO16X9, DISPLAYRATIO4X3
-    #             filter_settings: {
-    #               temporal_filter_settings: {
-    #                 post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
-    #                 strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16
-    #               },
-    #             },
-    #             fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
-    #             framerate_denominator: 1, # required
-    #             framerate_numerator: 1, # required
-    #             gop_closed_cadence: 1,
-    #             gop_num_b_frames: 1,
-    #             gop_size: 1.0,
-    #             gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
-    #             scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
-    #             subgop_length: "DYNAMIC", # accepts DYNAMIC, FIXED
-    #             timecode_insertion: "DISABLED", # accepts DISABLED, GOP_TIMECODE
-    #           },
-    #         },
-    #         height: 1,
-    #         name: "__string", # required
-    #         respond_to_afd: "NONE", # accepts NONE, PASSTHROUGH, RESPOND
-    #         scaling_behavior: "DEFAULT", # accepts DEFAULT, STRETCH_TO_OUTPUT
-    #         sharpness: 1,
-    #         width: 1,
-    #       }
     #
     # @!attribute [rw] codec_settings
     #   Video codec settings.
@@ -20374,28 +12103,6 @@ module Aws::MediaLive
     # Specifies a particular video stream within an input source. An input
     # may have only a single video selector.
     #
-    # @note When making an API call, you may pass VideoSelector
-    #   data as a hash:
-    #
-    #       {
-    #         color_space: "FOLLOW", # accepts FOLLOW, HDR10, HLG_2020, REC_601, REC_709
-    #         color_space_settings: {
-    #           hdr_10_settings: {
-    #             max_cll: 1,
-    #             max_fall: 1,
-    #           },
-    #         },
-    #         color_space_usage: "FALLBACK", # accepts FALLBACK, FORCE
-    #         selector_settings: {
-    #           video_selector_pid: {
-    #             pid: 1,
-    #           },
-    #           video_selector_program_id: {
-    #             program_id: 1,
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] color_space
     #   Specifies the color space of an input. This setting works in tandem
     #   with colorSpaceUsage and a video description's
@@ -20436,16 +12143,6 @@ module Aws::MediaLive
 
     # Video Selector Color Space Settings
     #
-    # @note When making an API call, you may pass VideoSelectorColorSpaceSettings
-    #   data as a hash:
-    #
-    #       {
-    #         hdr_10_settings: {
-    #           max_cll: 1,
-    #           max_fall: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] hdr_10_settings
     #   Hdr10 Settings
     #   @return [Types::Hdr10Settings]
@@ -20460,13 +12157,6 @@ module Aws::MediaLive
 
     # Video Selector Pid
     #
-    # @note When making an API call, you may pass VideoSelectorPid
-    #   data as a hash:
-    #
-    #       {
-    #         pid: 1,
-    #       }
-    #
     # @!attribute [rw] pid
     #   Selects a specific PID from within a video source.
     #   @return [Integer]
@@ -20480,13 +12170,6 @@ module Aws::MediaLive
     end
 
     # Video Selector Program Id
-    #
-    # @note When making an API call, you may pass VideoSelectorProgramId
-    #   data as a hash:
-    #
-    #       {
-    #         program_id: 1,
-    #       }
     #
     # @!attribute [rw] program_id
     #   Selects a specific program from within a multi-program transport
@@ -20503,18 +12186,6 @@ module Aws::MediaLive
     end
 
     # Video Selector Settings
-    #
-    # @note When making an API call, you may pass VideoSelectorSettings
-    #   data as a hash:
-    #
-    #       {
-    #         video_selector_pid: {
-    #           pid: 1,
-    #         },
-    #         video_selector_program_id: {
-    #           program_id: 1,
-    #         },
-    #       }
     #
     # @!attribute [rw] video_selector_pid
     #   Video Selector Pid
@@ -20536,15 +12207,6 @@ module Aws::MediaLive
     # The properties for a private VPC Output When this property is
     # specified, the output egress addresses will be created in a user
     # specified VPC
-    #
-    # @note When making an API call, you may pass VpcOutputSettings
-    #   data as a hash:
-    #
-    #       {
-    #         public_address_allocation_ids: ["__string"],
-    #         security_group_ids: ["__string"],
-    #         subnet_ids: ["__string"], # required
-    #       }
     #
     # @!attribute [rw] public_address_allocation_ids
     #   List of public address allocation ids to associate with ENIs that
@@ -20609,15 +12271,6 @@ module Aws::MediaLive
 
     # Wav Settings
     #
-    # @note When making an API call, you may pass WavSettings
-    #   data as a hash:
-    #
-    #       {
-    #         bit_depth: 1.0,
-    #         coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_2_0, CODING_MODE_4_0, CODING_MODE_8_0
-    #         sample_rate: 1.0,
-    #       }
-    #
     # @!attribute [rw] bit_depth
     #   Bits per sample.
     #   @return [Float]
@@ -20642,13 +12295,6 @@ module Aws::MediaLive
     end
 
     # Webvtt Destination Settings
-    #
-    # @note When making an API call, you may pass WebvttDestinationSettings
-    #   data as a hash:
-    #
-    #       {
-    #         style_control: "NO_STYLE_DATA", # accepts NO_STYLE_DATA, PASSTHROUGH
-    #       }
     #
     # @!attribute [rw] style_control
     #   Controls whether the color and position of the source captions is

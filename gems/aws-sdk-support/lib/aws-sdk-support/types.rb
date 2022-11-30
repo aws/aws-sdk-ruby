@@ -10,19 +10,6 @@
 module Aws::Support
   module Types
 
-    # @note When making an API call, you may pass AddAttachmentsToSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         attachment_set_id: "AttachmentSetId",
-    #         attachments: [ # required
-    #           {
-    #             file_name: "FileName",
-    #             data: "data",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] attachment_set_id
     #   The ID of the attachment set. If an `attachmentSetId` is not
     #   specified, a new attachment set is created, and the ID of the set is
@@ -73,16 +60,6 @@ module Aws::Support
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AddCommunicationToCaseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         case_id: "CaseId",
-    #         communication_body: "CommunicationBody", # required
-    #         cc_email_addresses: ["CcEmailAddress"],
-    #         attachment_set_id: "AttachmentSetId",
-    #       }
-    #
     # @!attribute [rw] case_id
     #   The support case ID requested or returned in the call. The case ID
     #   is an alphanumeric string formatted as shown in this example:
@@ -131,14 +108,6 @@ module Aws::Support
 
     # An attachment to a case communication. The attachment consists of the
     # file name and the content of the file.
-    #
-    # @note When making an API call, you may pass Attachment
-    #   data as a hash:
-    #
-    #       {
-    #         file_name: "FileName",
-    #         data: "data",
-    #       }
     #
     # @!attribute [rw] file_name
     #   The name of the attachment file.
@@ -502,21 +471,6 @@ module Aws::Support
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateCaseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         subject: "Subject", # required
-    #         service_code: "ServiceCode",
-    #         severity_code: "SeverityCode",
-    #         category_code: "CategoryCode",
-    #         communication_body: "CommunicationBody", # required
-    #         cc_email_addresses: ["CcEmailAddress"],
-    #         language: "Language",
-    #         issue_type: "IssueType",
-    #         attachment_set_id: "AttachmentSetId",
-    #       }
-    #
     # @!attribute [rw] subject
     #   The title of the support case. The title appears in the **Subject**
     #   field on the Amazon Web Services Support Center [Create Case][1]
@@ -648,13 +602,6 @@ module Aws::Support
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAttachmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         attachment_id: "AttachmentId", # required
-    #       }
-    #
     # @!attribute [rw] attachment_id
     #   The ID of the attachment to return. Attachment IDs are returned by
     #   the DescribeCommunications operation.
@@ -688,21 +635,6 @@ module Aws::Support
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeCasesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         case_id_list: ["CaseId"],
-    #         display_id: "DisplayId",
-    #         after_time: "AfterTime",
-    #         before_time: "BeforeTime",
-    #         include_resolved_cases: false,
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         language: "Language",
-    #         include_communications: false,
-    #       }
-    #
     # @!attribute [rw] case_id_list
     #   A list of ID numbers of the support cases you want returned. The
     #   maximum number of cases is 100.
@@ -791,17 +723,6 @@ module Aws::Support
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeCommunicationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         case_id: "CaseId", # required
-    #         before_time: "BeforeTime",
-    #         after_time: "AfterTime",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] case_id
     #   The support case ID requested or returned in the call. The case ID
     #   is an alphanumeric string formatted as shown in this example:
@@ -859,14 +780,6 @@ module Aws::Support
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeServicesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_code_list: ["ServiceCode"],
-    #         language: "Language",
-    #       }
-    #
     # @!attribute [rw] service_code_list
     #   A JSON-formatted list of service codes available for Amazon Web
     #   Services services.
@@ -903,13 +816,6 @@ module Aws::Support
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeSeverityLevelsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         language: "Language",
-    #       }
-    #
     # @!attribute [rw] language
     #   The ISO 639-1 code for the language in which Amazon Web Services
     #   provides support. Amazon Web Services Support currently supports
@@ -942,13 +848,6 @@ module Aws::Support
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeTrustedAdvisorCheckRefreshStatusesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         check_ids: ["String"], # required
-    #       }
-    #
     # @!attribute [rw] check_ids
     #   The IDs of the Trusted Advisor checks to get the status.
     #
@@ -981,14 +880,6 @@ module Aws::Support
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeTrustedAdvisorCheckResultRequest
-    #   data as a hash:
-    #
-    #       {
-    #         check_id: "String", # required
-    #         language: "String",
-    #       }
-    #
     # @!attribute [rw] check_id
     #   The unique identifier for the Trusted Advisor check.
     #   @return [String]
@@ -1024,13 +915,6 @@ module Aws::Support
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeTrustedAdvisorCheckSummariesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         check_ids: ["String"], # required
-    #       }
-    #
     # @!attribute [rw] check_ids
     #   The IDs of the Trusted Advisor checks.
     #   @return [Array<String>]
@@ -1058,13 +942,6 @@ module Aws::Support
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeTrustedAdvisorChecksRequest
-    #   data as a hash:
-    #
-    #       {
-    #         language: "String", # required
-    #       }
-    #
     # @!attribute [rw] language
     #   The ISO 639-1 code for the language in which Amazon Web Services
     #   provides support. Amazon Web Services Support currently supports
@@ -1128,13 +1005,6 @@ module Aws::Support
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RefreshTrustedAdvisorCheckRequest
-    #   data as a hash:
-    #
-    #       {
-    #         check_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] check_id
     #   The unique identifier for the Trusted Advisor check to refresh.
     #
@@ -1167,13 +1037,6 @@ module Aws::Support
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ResolveCaseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         case_id: "CaseId",
-    #       }
-    #
     # @!attribute [rw] case_id
     #   The support case ID requested or returned in the call. The case ID
     #   is an alphanumeric string formatted as shown in this example:

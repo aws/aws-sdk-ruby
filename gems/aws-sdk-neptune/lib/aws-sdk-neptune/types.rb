@@ -10,15 +10,6 @@
 module Aws::Neptune
   module Types
 
-    # @note When making an API call, you may pass AddRoleToDBClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_identifier: "String", # required
-    #         role_arn: "String", # required
-    #         feature_name: "String",
-    #       }
-    #
     # @!attribute [rw] db_cluster_identifier
     #   The name of the DB cluster to associate the IAM role with.
     #   @return [String]
@@ -46,14 +37,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AddSourceIdentifierToSubscriptionMessage
-    #   data as a hash:
-    #
-    #       {
-    #         subscription_name: "String", # required
-    #         source_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] subscription_name
     #   The name of the event notification subscription you want to add a
     #   source identifier to.
@@ -99,19 +82,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AddTagsToResourceMessage
-    #   data as a hash:
-    #
-    #       {
-    #         resource_name: "String", # required
-    #         tags: [ # required
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_name
     #   The Amazon Neptune resource that the tags are added to. This value
     #   is an Amazon Resource Name (ARN). For information about creating an
@@ -135,15 +105,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ApplyPendingMaintenanceActionMessage
-    #   data as a hash:
-    #
-    #       {
-    #         resource_identifier: "String", # required
-    #         apply_action: "String", # required
-    #         opt_in_type: "String", # required
-    #       }
-    #
     # @!attribute [rw] resource_identifier
     #   The Amazon Resource Name (ARN) of the resource that the pending
     #   maintenance action applies to. For information about creating an
@@ -253,14 +214,6 @@ module Aws::Neptune
     # The `EnableLogTypes` and `DisableLogTypes` arrays determine which logs
     # will be exported (or not exported) to CloudWatch Logs.
     #
-    # @note When making an API call, you may pass CloudwatchLogsExportConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         enable_log_types: ["String"],
-    #         disable_log_types: ["String"],
-    #       }
-    #
     # @!attribute [rw] enable_log_types
     #   The list of log types to enable.
     #   @return [Array<String>]
@@ -278,21 +231,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CopyDBClusterParameterGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         source_db_cluster_parameter_group_identifier: "String", # required
-    #         target_db_cluster_parameter_group_identifier: "String", # required
-    #         target_db_cluster_parameter_group_description: "String", # required
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] source_db_cluster_parameter_group_identifier
     #   The identifier or Amazon Resource Name (ARN) for the source DB
     #   cluster parameter group. For information about creating an ARN, see
@@ -367,24 +305,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CopyDBClusterSnapshotMessage
-    #   data as a hash:
-    #
-    #       {
-    #         source_db_cluster_snapshot_identifier: "String", # required
-    #         target_db_cluster_snapshot_identifier: "String", # required
-    #         kms_key_id: "String",
-    #         pre_signed_url: "String",
-    #         copy_tags: false,
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #         source_region: "String",
-    #       }
-    #
     # @!attribute [rw] source_db_cluster_snapshot_identifier
     #   The identifier of the DB cluster snapshot to copy. This parameter is
     #   not case-sensitive.
@@ -485,21 +405,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CopyDBParameterGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         source_db_parameter_group_identifier: "String", # required
-    #         target_db_parameter_group_identifier: "String", # required
-    #         target_db_parameter_group_description: "String", # required
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] source_db_parameter_group_identifier
     #   The identifier or ARN for the source DB parameter group. For
     #   information about creating an ARN, see [ Constructing an Amazon
@@ -567,23 +472,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDBClusterEndpointMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_identifier: "String", # required
-    #         db_cluster_endpoint_identifier: "String", # required
-    #         endpoint_type: "String", # required
-    #         static_members: ["String"],
-    #         excluded_members: ["String"],
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] db_cluster_identifier
     #   The DB cluster identifier of the DB cluster associated with the
     #   endpoint. This parameter is stored as a lowercase string.
@@ -711,48 +599,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDBClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         availability_zones: ["String"],
-    #         backup_retention_period: 1,
-    #         character_set_name: "String",
-    #         copy_tags_to_snapshot: false,
-    #         database_name: "String",
-    #         db_cluster_identifier: "String", # required
-    #         db_cluster_parameter_group_name: "String",
-    #         vpc_security_group_ids: ["String"],
-    #         db_subnet_group_name: "String",
-    #         engine: "String", # required
-    #         engine_version: "String",
-    #         port: 1,
-    #         master_username: "String",
-    #         master_user_password: "String",
-    #         option_group_name: "String",
-    #         preferred_backup_window: "String",
-    #         preferred_maintenance_window: "String",
-    #         replication_source_identifier: "String",
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #         storage_encrypted: false,
-    #         kms_key_id: "String",
-    #         pre_signed_url: "String",
-    #         enable_iam_database_authentication: false,
-    #         enable_cloudwatch_logs_exports: ["String"],
-    #         deletion_protection: false,
-    #         serverless_v2_scaling_configuration: {
-    #           min_capacity: 1.0,
-    #           max_capacity: 1.0,
-    #         },
-    #         global_cluster_identifier: "GlobalClusterIdentifier",
-    #         source_region: "String",
-    #       }
-    #
     # @!attribute [rw] availability_zones
     #   A list of EC2 Availability Zones that instances in the DB cluster
     #   can be created in.
@@ -1026,21 +872,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDBClusterParameterGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_parameter_group_name: "String", # required
-    #         db_parameter_group_family: "String", # required
-    #         description: "String", # required
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] db_cluster_parameter_group_name
     #   The name of the DB cluster parameter group.
     #
@@ -1113,20 +944,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDBClusterSnapshotMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_snapshot_identifier: "String", # required
-    #         db_cluster_identifier: "String", # required
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] db_cluster_snapshot_identifier
     #   The identifier of the DB cluster snapshot. This parameter is stored
     #   as a lowercase string.
@@ -1184,60 +1001,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDBInstanceMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_name: "String",
-    #         db_instance_identifier: "String", # required
-    #         allocated_storage: 1,
-    #         db_instance_class: "String", # required
-    #         engine: "String", # required
-    #         master_username: "String",
-    #         master_user_password: "String",
-    #         db_security_groups: ["String"],
-    #         vpc_security_group_ids: ["String"],
-    #         availability_zone: "String",
-    #         db_subnet_group_name: "String",
-    #         preferred_maintenance_window: "String",
-    #         db_parameter_group_name: "String",
-    #         backup_retention_period: 1,
-    #         preferred_backup_window: "String",
-    #         port: 1,
-    #         multi_az: false,
-    #         engine_version: "String",
-    #         auto_minor_version_upgrade: false,
-    #         license_model: "String",
-    #         iops: 1,
-    #         option_group_name: "String",
-    #         character_set_name: "String",
-    #         publicly_accessible: false,
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #         db_cluster_identifier: "String",
-    #         storage_type: "String",
-    #         tde_credential_arn: "String",
-    #         tde_credential_password: "String",
-    #         storage_encrypted: false,
-    #         kms_key_id: "String",
-    #         domain: "String",
-    #         copy_tags_to_snapshot: false,
-    #         monitoring_interval: 1,
-    #         monitoring_role_arn: "String",
-    #         domain_iam_role_name: "String",
-    #         promotion_tier: 1,
-    #         timezone: "String",
-    #         enable_iam_database_authentication: false,
-    #         enable_performance_insights: false,
-    #         performance_insights_kms_key_id: "String",
-    #         enable_cloudwatch_logs_exports: ["String"],
-    #         deletion_protection: false,
-    #       }
-    #
     # @!attribute [rw] db_name
     #   Not supported.
     #   @return [String]
@@ -1624,21 +1387,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDBParameterGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_parameter_group_name: "String", # required
-    #         db_parameter_group_family: "String", # required
-    #         description: "String", # required
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] db_parameter_group_name
     #   The name of the DB parameter group.
     #
@@ -1696,21 +1444,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDBSubnetGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_subnet_group_name: "String", # required
-    #         db_subnet_group_description: "String", # required
-    #         subnet_ids: ["String"], # required
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] db_subnet_group_name
     #   The name for the DB subnet group. This value is stored as a
     #   lowercase string.
@@ -1759,24 +1492,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateEventSubscriptionMessage
-    #   data as a hash:
-    #
-    #       {
-    #         subscription_name: "String", # required
-    #         sns_topic_arn: "String", # required
-    #         source_type: "String",
-    #         event_categories: ["String"],
-    #         source_ids: ["String"],
-    #         enabled: false,
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] subscription_name
     #   The name of the subscription.
     #
@@ -1865,18 +1580,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateGlobalClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         global_cluster_identifier: "GlobalClusterIdentifier", # required
-    #         source_db_cluster_identifier: "String",
-    #         engine: "String",
-    #         engine_version: "String",
-    #         deletion_protection: false,
-    #         storage_encrypted: false,
-    #       }
-    #
     # @!attribute [rw] global_cluster_identifier
     #   The cluster identifier of the new global database cluster.
     #   @return [String]
@@ -3576,13 +3279,6 @@ module Aws::Neptune
     #
     class DBUpgradeDependencyFailureFault < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteDBClusterEndpointMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_endpoint_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] db_cluster_endpoint_identifier
     #   The identifier associated with the custom endpoint. This parameter
     #   is stored as a lowercase string.
@@ -3680,15 +3376,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDBClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_identifier: "String", # required
-    #         skip_final_snapshot: false,
-    #         final_db_snapshot_identifier: "String",
-    #       }
-    #
     # @!attribute [rw] db_cluster_identifier
     #   The DB cluster identifier for the DB cluster to be deleted. This
     #   parameter isn't case-sensitive.
@@ -3742,13 +3429,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDBClusterParameterGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_parameter_group_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] db_cluster_parameter_group_name
     #   The name of the DB cluster parameter group.
     #
@@ -3784,13 +3464,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDBClusterSnapshotMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_snapshot_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] db_cluster_snapshot_identifier
     #   The identifier of the DB cluster snapshot to delete.
     #
@@ -3821,15 +3494,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDBInstanceMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_instance_identifier: "String", # required
-    #         skip_final_snapshot: false,
-    #         final_db_snapshot_identifier: "String",
-    #       }
-    #
     # @!attribute [rw] db_instance_identifier
     #   The DB instance identifier for the DB instance to be deleted. This
     #   parameter isn't case-sensitive.
@@ -3907,13 +3571,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDBParameterGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_parameter_group_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] db_parameter_group_name
     #   The name of the DB parameter group.
     #
@@ -3934,13 +3591,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDBSubnetGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_subnet_group_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] db_subnet_group_name
     #   The name of the database subnet group to delete.
     #
@@ -3964,13 +3614,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteEventSubscriptionMessage
-    #   data as a hash:
-    #
-    #       {
-    #         subscription_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] subscription_name
     #   The name of the event notification subscription you want to delete.
     #   @return [String]
@@ -3996,13 +3639,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteGlobalClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         global_cluster_identifier: "GlobalClusterIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] global_cluster_identifier
     #   The cluster identifier of the global database cluster being deleted.
     #   @return [String]
@@ -4032,22 +3668,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDBClusterEndpointsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_identifier: "String",
-    #         db_cluster_endpoint_identifier: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] db_cluster_identifier
     #   The DB cluster identifier of the DB cluster associated with the
     #   endpoint. This parameter is stored as a lowercase string.
@@ -4104,21 +3724,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDBClusterParameterGroupsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_parameter_group_name: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] db_cluster_parameter_group_name
     #   The name of a specific DB cluster parameter group to return details
     #   for.
@@ -4164,22 +3769,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDBClusterParametersMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_parameter_group_name: "String", # required
-    #         source: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] db_cluster_parameter_group_name
     #   The name of a specific DB cluster parameter group to return
     #   parameter details for.
@@ -4231,13 +3820,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDBClusterSnapshotAttributesMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_snapshot_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] db_cluster_snapshot_identifier
     #   The identifier for the DB cluster snapshot to describe the
     #   attributes for.
@@ -4269,25 +3851,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDBClusterSnapshotsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_identifier: "String",
-    #         db_cluster_snapshot_identifier: "String",
-    #         snapshot_type: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #         include_shared: false,
-    #         include_public: false,
-    #       }
-    #
     # @!attribute [rw] db_cluster_identifier
     #   The ID of the DB cluster to retrieve the list of DB cluster
     #   snapshots for. This parameter can't be used in conjunction with the
@@ -4402,21 +3965,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDBClustersMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_identifier: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] db_cluster_identifier
     #   The user-supplied DB cluster identifier. If this parameter is
     #   specified, information from only the specific DB cluster is
@@ -4475,26 +4023,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDBEngineVersionsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         engine: "String",
-    #         engine_version: "String",
-    #         db_parameter_group_family: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #         default_only: false,
-    #         list_supported_character_sets: false,
-    #         list_supported_timezones: false,
-    #       }
-    #
     # @!attribute [rw] engine
     #   The database engine to return.
     #   @return [String]
@@ -4570,21 +4098,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDBInstancesMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_instance_identifier: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] db_instance_identifier
     #   The user-supplied instance identifier. If this parameter is
     #   specified, information from only the specific DB instance is
@@ -4644,21 +4157,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDBParameterGroupsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_parameter_group_name: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] db_parameter_group_name
     #   The name of a specific DB parameter group to return details for.
     #
@@ -4703,22 +4201,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDBParametersMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_parameter_group_name: "String", # required
-    #         source: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] db_parameter_group_name
     #   The name of a specific DB parameter group to return details for.
     #
@@ -4771,21 +4253,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDBSubnetGroupsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_subnet_group_name: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] db_subnet_group_name
     #   The name of the DB subnet group to return details for.
     #   @return [String]
@@ -4823,21 +4290,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEngineDefaultClusterParametersMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_parameter_group_family: "String", # required
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] db_parameter_group_family
     #   The name of the DB cluster parameter group family to return engine
     #   parameter information for.
@@ -4889,21 +4341,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEngineDefaultParametersMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_parameter_group_family: "String", # required
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] db_parameter_group_family
     #   The name of the DB parameter group family.
     #   @return [String]
@@ -4954,19 +4391,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEventCategoriesMessage
-    #   data as a hash:
-    #
-    #       {
-    #         source_type: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] source_type
     #   The type of source that is generating the events.
     #
@@ -4987,21 +4411,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEventSubscriptionsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         subscription_name: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] subscription_name
     #   The name of the event notification subscription you want to
     #   describe.
@@ -5040,26 +4449,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEventsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         source_identifier: "String",
-    #         source_type: "db-instance", # accepts db-instance, db-parameter-group, db-security-group, db-snapshot, db-cluster, db-cluster-snapshot
-    #         start_time: Time.now,
-    #         end_time: Time.now,
-    #         duration: 1,
-    #         event_categories: ["String"],
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] source_identifier
     #   The identifier of the event source for which events are returned. If
     #   not specified, then all sources are included in the response.
@@ -5161,15 +4550,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeGlobalClustersMessage
-    #   data as a hash:
-    #
-    #       {
-    #         global_cluster_identifier: "GlobalClusterIdentifier",
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] global_cluster_identifier
     #   The user-supplied DB cluster identifier. If this parameter is
     #   specified, only information about the specified DB cluster is
@@ -5207,25 +4587,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeOrderableDBInstanceOptionsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         engine: "String", # required
-    #         engine_version: "String",
-    #         db_instance_class: "String",
-    #         license_model: "String",
-    #         vpc: false,
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] engine
     #   The name of the engine to retrieve DB instance options for.
     #   @return [String]
@@ -5288,21 +4649,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribePendingMaintenanceActionsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         resource_identifier: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         marker: "String",
-    #         max_records: 1,
-    #       }
-    #
     # @!attribute [rw] resource_identifier
     #   The ARN of a resource to return pending maintenance actions for.
     #   @return [String]
@@ -5352,13 +4698,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeValidDBInstanceModificationsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_instance_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] db_instance_identifier
     #   The customer identifier or the ARN of your DB instance.
     #   @return [String]
@@ -5689,14 +5028,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass FailoverDBClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_identifier: "String",
-    #         target_db_instance_identifier: "String",
-    #       }
-    #
     # @!attribute [rw] db_cluster_identifier
     #   A DB cluster identifier to force a failover for. This parameter is
     #   not case-sensitive.
@@ -5739,14 +5070,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass FailoverGlobalClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         global_cluster_identifier: "GlobalClusterIdentifier", # required
-    #         target_db_cluster_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] global_cluster_identifier
     #   Identifier of the Neptune global database that should be failed
     #   over. The identifier is the unique key assigned by the user when the
@@ -5789,14 +5112,6 @@ module Aws::Neptune
     end
 
     # This type is not currently supported.
-    #
-    # @note When making an API call, you may pass Filter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #         values: ["String"], # required
-    #       }
     #
     # @!attribute [rw] name
     #   This parameter is not currently supported.
@@ -6073,19 +5388,6 @@ module Aws::Neptune
     #
     class KMSKeyNotAccessibleFault < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass ListTagsForResourceMessage
-    #   data as a hash:
-    #
-    #       {
-    #         resource_name: "String", # required
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_name
     #   The Amazon Neptune resource with tags to be listed. This value is an
     #   Amazon Resource Name (ARN). For information about creating an ARN,
@@ -6109,16 +5411,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyDBClusterEndpointMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_endpoint_identifier: "String", # required
-    #         endpoint_type: "String",
-    #         static_members: ["String"],
-    #         excluded_members: ["String"],
-    #       }
-    #
     # @!attribute [rw] db_cluster_endpoint_identifier
     #   The identifier of the endpoint to modify. This parameter is stored
     #   as a lowercase string.
@@ -6235,37 +5527,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyDBClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_identifier: "String", # required
-    #         new_db_cluster_identifier: "String",
-    #         apply_immediately: false,
-    #         backup_retention_period: 1,
-    #         db_cluster_parameter_group_name: "String",
-    #         vpc_security_group_ids: ["String"],
-    #         port: 1,
-    #         master_user_password: "String",
-    #         option_group_name: "String",
-    #         preferred_backup_window: "String",
-    #         preferred_maintenance_window: "String",
-    #         enable_iam_database_authentication: false,
-    #         cloudwatch_logs_export_configuration: {
-    #           enable_log_types: ["String"],
-    #           disable_log_types: ["String"],
-    #         },
-    #         engine_version: "String",
-    #         allow_major_version_upgrade: false,
-    #         db_instance_parameter_group_name: "String",
-    #         deletion_protection: false,
-    #         copy_tags_to_snapshot: false,
-    #         serverless_v2_scaling_configuration: {
-    #           min_capacity: 1.0,
-    #           max_capacity: 1.0,
-    #         },
-    #       }
-    #
     # @!attribute [rw] db_cluster_identifier
     #   The DB cluster identifier for the cluster being modified. This
     #   parameter is not case-sensitive.
@@ -6488,27 +5749,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyDBClusterParameterGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_parameter_group_name: "String", # required
-    #         parameters: [ # required
-    #           {
-    #             parameter_name: "String",
-    #             parameter_value: "String",
-    #             description: "String",
-    #             source: "String",
-    #             apply_type: "String",
-    #             data_type: "String",
-    #             allowed_values: "String",
-    #             is_modifiable: false,
-    #             minimum_engine_version: "String",
-    #             apply_method: "immediate", # accepts immediate, pending-reboot
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] db_cluster_parameter_group_name
     #   The name of the DB cluster parameter group to modify.
     #   @return [String]
@@ -6541,16 +5781,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyDBClusterSnapshotAttributeMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_snapshot_identifier: "String", # required
-    #         attribute_name: "String", # required
-    #         values_to_add: ["String"],
-    #         values_to_remove: ["String"],
-    #       }
-    #
     # @!attribute [rw] db_cluster_snapshot_identifier
     #   The identifier for the DB cluster snapshot to modify the attributes
     #   for.
@@ -6617,52 +5847,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyDBInstanceMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_instance_identifier: "String", # required
-    #         allocated_storage: 1,
-    #         db_instance_class: "String",
-    #         db_subnet_group_name: "String",
-    #         db_security_groups: ["String"],
-    #         vpc_security_group_ids: ["String"],
-    #         apply_immediately: false,
-    #         master_user_password: "String",
-    #         db_parameter_group_name: "String",
-    #         backup_retention_period: 1,
-    #         preferred_backup_window: "String",
-    #         preferred_maintenance_window: "String",
-    #         multi_az: false,
-    #         engine_version: "String",
-    #         allow_major_version_upgrade: false,
-    #         auto_minor_version_upgrade: false,
-    #         license_model: "String",
-    #         iops: 1,
-    #         option_group_name: "String",
-    #         new_db_instance_identifier: "String",
-    #         storage_type: "String",
-    #         tde_credential_arn: "String",
-    #         tde_credential_password: "String",
-    #         ca_certificate_identifier: "String",
-    #         domain: "String",
-    #         copy_tags_to_snapshot: false,
-    #         monitoring_interval: 1,
-    #         db_port_number: 1,
-    #         publicly_accessible: false,
-    #         monitoring_role_arn: "String",
-    #         domain_iam_role_name: "String",
-    #         promotion_tier: 1,
-    #         enable_iam_database_authentication: false,
-    #         enable_performance_insights: false,
-    #         performance_insights_kms_key_id: "String",
-    #         cloudwatch_logs_export_configuration: {
-    #           enable_log_types: ["String"],
-    #           disable_log_types: ["String"],
-    #         },
-    #         deletion_protection: false,
-    #       }
-    #
     # @!attribute [rw] db_instance_identifier
     #   The DB instance identifier. This value is stored as a lowercase
     #   string.
@@ -7054,27 +6238,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyDBParameterGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_parameter_group_name: "String", # required
-    #         parameters: [ # required
-    #           {
-    #             parameter_name: "String",
-    #             parameter_value: "String",
-    #             description: "String",
-    #             source: "String",
-    #             apply_type: "String",
-    #             data_type: "String",
-    #             allowed_values: "String",
-    #             is_modifiable: false,
-    #             minimum_engine_version: "String",
-    #             apply_method: "immediate", # accepts immediate, pending-reboot
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] db_parameter_group_name
     #   The name of the DB parameter group.
     #
@@ -7111,15 +6274,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyDBSubnetGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_subnet_group_name: "String", # required
-    #         db_subnet_group_description: "String",
-    #         subnet_ids: ["String"], # required
-    #       }
-    #
     # @!attribute [rw] db_subnet_group_name
     #   The name for the DB subnet group. This value is stored as a
     #   lowercase string. You can't modify the default subnet group.
@@ -7163,17 +6317,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyEventSubscriptionMessage
-    #   data as a hash:
-    #
-    #       {
-    #         subscription_name: "String", # required
-    #         sns_topic_arn: "String",
-    #         source_type: "String",
-    #         event_categories: ["String"],
-    #         enabled: false,
-    #       }
-    #
     # @!attribute [rw] subscription_name
     #   The name of the event notification subscription.
     #   @return [String]
@@ -7229,17 +6372,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyGlobalClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         global_cluster_identifier: "GlobalClusterIdentifier", # required
-    #         new_global_cluster_identifier: "GlobalClusterIdentifier",
-    #         deletion_protection: false,
-    #         engine_version: "String",
-    #         allow_major_version_upgrade: false,
-    #       }
-    #
     # @!attribute [rw] global_cluster_identifier
     #   The DB cluster identifier for the global cluster being modified.
     #   This parameter is not case-sensitive.
@@ -7489,22 +6621,6 @@ module Aws::Neptune
 
     # Specifies a parameter.
     #
-    # @note When making an API call, you may pass Parameter
-    #   data as a hash:
-    #
-    #       {
-    #         parameter_name: "String",
-    #         parameter_value: "String",
-    #         description: "String",
-    #         source: "String",
-    #         apply_type: "String",
-    #         data_type: "String",
-    #         allowed_values: "String",
-    #         is_modifiable: false,
-    #         minimum_engine_version: "String",
-    #         apply_method: "immediate", # accepts immediate, pending-reboot
-    #       }
-    #
     # @!attribute [rw] parameter_name
     #   Specifies the name of the parameter.
     #   @return [String]
@@ -7748,13 +6864,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PromoteReadReplicaDBClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] db_cluster_identifier
     #   Not supported.
     #   @return [String]
@@ -7816,14 +6925,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RebootDBInstanceMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_instance_identifier: "String", # required
-    #         force_failover: false,
-    #       }
-    #
     # @!attribute [rw] db_instance_identifier
     #   The DB instance identifier. This parameter is stored as a lowercase
     #   string.
@@ -7866,14 +6967,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RemoveFromGlobalClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         global_cluster_identifier: "GlobalClusterIdentifier", # required
-    #         db_cluster_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] global_cluster_identifier
     #   The identifier of the Neptune global database from which to detach
     #   the specified Neptune DB cluster.
@@ -7910,15 +7003,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RemoveRoleFromDBClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_identifier: "String", # required
-    #         role_arn: "String", # required
-    #         feature_name: "String",
-    #       }
-    #
     # @!attribute [rw] db_cluster_identifier
     #   The name of the DB cluster to disassociate the IAM role from.
     #   @return [String]
@@ -7949,14 +7033,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RemoveSourceIdentifierFromSubscriptionMessage
-    #   data as a hash:
-    #
-    #       {
-    #         subscription_name: "String", # required
-    #         source_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] subscription_name
     #   The name of the event notification subscription you want to remove a
     #   source identifier from.
@@ -7990,14 +7066,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RemoveTagsFromResourceMessage
-    #   data as a hash:
-    #
-    #       {
-    #         resource_name: "String", # required
-    #         tag_keys: ["String"], # required
-    #       }
-    #
     # @!attribute [rw] resource_name
     #   The Amazon Neptune resource that the tags are removed from. This
     #   value is an Amazon Resource Name (ARN). For information about
@@ -8022,28 +7090,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ResetDBClusterParameterGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_parameter_group_name: "String", # required
-    #         reset_all_parameters: false,
-    #         parameters: [
-    #           {
-    #             parameter_name: "String",
-    #             parameter_value: "String",
-    #             description: "String",
-    #             source: "String",
-    #             apply_type: "String",
-    #             data_type: "String",
-    #             allowed_values: "String",
-    #             is_modifiable: false,
-    #             minimum_engine_version: "String",
-    #             apply_method: "immediate", # accepts immediate, pending-reboot
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] db_cluster_parameter_group_name
     #   The name of the DB cluster parameter group to reset.
     #   @return [String]
@@ -8071,28 +7117,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ResetDBParameterGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_parameter_group_name: "String", # required
-    #         reset_all_parameters: false,
-    #         parameters: [
-    #           {
-    #             parameter_name: "String",
-    #             parameter_value: "String",
-    #             description: "String",
-    #             source: "String",
-    #             apply_type: "String",
-    #             data_type: "String",
-    #             allowed_values: "String",
-    #             is_modifiable: false,
-    #             minimum_engine_version: "String",
-    #             apply_method: "immediate", # accepts immediate, pending-reboot
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] db_parameter_group_name
     #   The name of the DB parameter group.
     #
@@ -8156,38 +7180,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RestoreDBClusterFromSnapshotMessage
-    #   data as a hash:
-    #
-    #       {
-    #         availability_zones: ["String"],
-    #         db_cluster_identifier: "String", # required
-    #         snapshot_identifier: "String", # required
-    #         engine: "String", # required
-    #         engine_version: "String",
-    #         port: 1,
-    #         db_subnet_group_name: "String",
-    #         database_name: "String",
-    #         option_group_name: "String",
-    #         vpc_security_group_ids: ["String"],
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #         kms_key_id: "String",
-    #         enable_iam_database_authentication: false,
-    #         enable_cloudwatch_logs_exports: ["String"],
-    #         db_cluster_parameter_group_name: "String",
-    #         deletion_protection: false,
-    #         copy_tags_to_snapshot: false,
-    #         serverless_v2_scaling_configuration: {
-    #           min_capacity: 1.0,
-    #           max_capacity: 1.0,
-    #         },
-    #       }
-    #
     # @!attribute [rw] availability_zones
     #   Provides the list of EC2 Availability Zones that instances in the
     #   restored DB cluster can be created in.
@@ -8378,36 +7370,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RestoreDBClusterToPointInTimeMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_identifier: "String", # required
-    #         restore_type: "String",
-    #         source_db_cluster_identifier: "String", # required
-    #         restore_to_time: Time.now,
-    #         use_latest_restorable_time: false,
-    #         port: 1,
-    #         db_subnet_group_name: "String",
-    #         option_group_name: "String",
-    #         vpc_security_group_ids: ["String"],
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #         kms_key_id: "String",
-    #         enable_iam_database_authentication: false,
-    #         enable_cloudwatch_logs_exports: ["String"],
-    #         db_cluster_parameter_group_name: "String",
-    #         deletion_protection: false,
-    #         serverless_v2_scaling_configuration: {
-    #           min_capacity: 1.0,
-    #           max_capacity: 1.0,
-    #         },
-    #       }
-    #
     # @!attribute [rw] db_cluster_identifier
     #   The name of the new DB cluster to be created.
     #
@@ -8639,14 +7601,6 @@ module Aws::Neptune
     #
     # [1]: https://docs.aws.amazon.com/neptune/latest/userguide/neptune-serverless-using.html
     #
-    # @note When making an API call, you may pass ServerlessV2ScalingConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         min_capacity: 1.0,
-    #         max_capacity: 1.0,
-    #       }
-    #
     # @!attribute [rw] min_capacity
     #   The minimum number of Neptune capacity units (NCUs) for a DB
     #   instance in a Neptune Serverless cluster. You can specify NCU values
@@ -8718,13 +7672,6 @@ module Aws::Neptune
     #
     class SourceNotFoundFault < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass StartDBClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] db_cluster_identifier
     #   The DB cluster identifier of the Neptune DB cluster to be started.
     #   This parameter is stored as a lowercase string.
@@ -8753,13 +7700,6 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopDBClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] db_cluster_identifier
     #   The DB cluster identifier of the Neptune DB cluster to be stopped.
     #   This parameter is stored as a lowercase string.
@@ -8854,14 +7794,6 @@ module Aws::Neptune
 
     # Metadata assigned to an Amazon Neptune resource consisting of a
     # key-value pair.
-    #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "String",
-    #         value: "String",
-    #       }
     #
     # @!attribute [rw] key
     #   A key is the required name of the tag. The string value can be from

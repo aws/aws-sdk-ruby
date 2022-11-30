@@ -130,14 +130,6 @@ module Aws::MemoryDB
     # Denotes the user's authentication properties, such as whether it
     # requires a password to authenticate. Used in output responses.
     #
-    # @note When making an API call, you may pass AuthenticationMode
-    #   data as a hash:
-    #
-    #       {
-    #         type: "password", # accepts password
-    #         passwords: ["String"],
-    #       }
-    #
     # @!attribute [rw] type
     #   Indicates whether the user requires a password to authenticate. All
     #   newly-created users require a password.
@@ -171,16 +163,6 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchUpdateClusterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_names: ["String"], # required
-    #         service_update: {
-    #           service_update_name_to_apply: "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] cluster_names
     #   The cluster names to apply the updates.
     #   @return [Array<String>]
@@ -490,22 +472,6 @@ module Aws::MemoryDB
     #
     class ClusterQuotaForCustomerExceededFault < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass CopySnapshotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source_snapshot_name: "String", # required
-    #         target_snapshot_name: "String", # required
-    #         target_bucket: "TargetBucket",
-    #         kms_key_id: "KmsKeyId",
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] source_snapshot_name
     #   The name of an existing snapshot from which to make a copy.
     #   @return [String]
@@ -564,20 +530,6 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateACLRequest
-    #   data as a hash:
-    #
-    #       {
-    #         acl_name: "String", # required
-    #         user_names: ["UserName"],
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] acl_name
     #   The name of the Access Control List.
     #   @return [String]
@@ -614,39 +566,6 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateClusterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_name: "String", # required
-    #         node_type: "String", # required
-    #         parameter_group_name: "String",
-    #         description: "String",
-    #         num_shards: 1,
-    #         num_replicas_per_shard: 1,
-    #         subnet_group_name: "String",
-    #         security_group_ids: ["String"],
-    #         maintenance_window: "String",
-    #         port: 1,
-    #         sns_topic_arn: "String",
-    #         tls_enabled: false,
-    #         kms_key_id: "String",
-    #         snapshot_arns: ["String"],
-    #         snapshot_name: "String",
-    #         snapshot_retention_limit: 1,
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #         snapshot_window: "String",
-    #         acl_name: "ACLName", # required
-    #         engine_version: "String",
-    #         auto_minor_version_upgrade: false,
-    #         data_tiering: false,
-    #       }
-    #
     # @!attribute [rw] cluster_name
     #   The name of the cluster. This value must be unique as it also serves
     #   as the cluster identifier.
@@ -825,21 +744,6 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateParameterGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         parameter_group_name: "String", # required
-    #         family: "String", # required
-    #         description: "String",
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] parameter_group_name
     #   The name of the parameter group.
     #   @return [String]
@@ -882,21 +786,6 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateSnapshotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_name: "String", # required
-    #         snapshot_name: "String", # required
-    #         kms_key_id: "String",
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] cluster_name
     #   The snapshot is created from this cluster.
     #   @return [String]
@@ -938,21 +827,6 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateSubnetGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         subnet_group_name: "String", # required
-    #         description: "String",
-    #         subnet_ids: ["String"], # required
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] subnet_group_name
     #   The name of the subnet group.
     #   @return [String]
@@ -994,24 +868,6 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "UserName", # required
-    #         authentication_mode: { # required
-    #           type: "password", # accepts password
-    #           passwords: ["String"],
-    #         },
-    #         access_string: "AccessString", # required
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The name of the user. This value must be unique as it also serves as
     #   the user identifier.
@@ -1059,13 +915,6 @@ module Aws::MemoryDB
     #
     class DefaultUserRequired < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteACLRequest
-    #   data as a hash:
-    #
-    #       {
-    #         acl_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] acl_name
     #   The name of the Access Control List to delete
     #   @return [String]
@@ -1090,14 +939,6 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteClusterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_name: "String", # required
-    #         final_snapshot_name: "String",
-    #       }
-    #
     # @!attribute [rw] cluster_name
     #   The name of the cluster to be deleted
     #   @return [String]
@@ -1129,13 +970,6 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteParameterGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         parameter_group_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] parameter_group_name
     #   The name of the parameter group to delete.
     #   @return [String]
@@ -1160,13 +994,6 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteSnapshotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         snapshot_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] snapshot_name
     #   The name of the snapshot to delete
     #   @return [String]
@@ -1191,13 +1018,6 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteSubnetGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         subnet_group_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] subnet_group_name
     #   The name of the subnet group to delete
     #   @return [String]
@@ -1222,13 +1042,6 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "UserName", # required
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The name of the user to delete
     #   @return [String]
@@ -1253,15 +1066,6 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeACLsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         acl_name: "String",
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] acl_name
     #   The name of the ACL
     #   @return [String]
@@ -1312,16 +1116,6 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeClustersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_name: "String",
-    #         max_results: 1,
-    #         next_token: "String",
-    #         show_shard_details: false,
-    #       }
-    #
     # @!attribute [rw] cluster_name
     #   The name of the cluster
     #   @return [String]
@@ -1380,17 +1174,6 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEngineVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         engine_version: "String",
-    #         parameter_group_family: "String",
-    #         max_results: 1,
-    #         next_token: "String",
-    #         default_only: false,
-    #       }
-    #
     # @!attribute [rw] engine_version
     #   The Redis engine version
     #   @return [String]
@@ -1455,19 +1238,6 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEventsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source_name: "String",
-    #         source_type: "node", # accepts node, parameter-group, subnet-group, cluster, user, acl
-    #         start_time: Time.now,
-    #         end_time: Time.now,
-    #         duration: 1,
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] source_name
     #   The identifier of the event source for which events are returned. If
     #   not specified, all sources are included in the response.
@@ -1545,15 +1315,6 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeParameterGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         parameter_group_name: "String",
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] parameter_group_name
     #   The name of a specific parameter group to return details for.
     #   @return [String]
@@ -1607,15 +1368,6 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeParametersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         parameter_group_name: "String", # required
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] parameter_group_name
     #   he name of a specific parameter group to return details for.
     #   @return [String]
@@ -1670,17 +1422,6 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeServiceUpdatesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_update_name: "String",
-    #         cluster_names: ["String"],
-    #         status: ["available"], # accepts available, in-progress, complete, scheduled
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] service_update_name
     #   The unique ID of the service update to describe.
     #   @return [String]
@@ -1743,18 +1484,6 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeSnapshotsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_name: "String",
-    #         snapshot_name: "String",
-    #         source: "String",
-    #         next_token: "String",
-    #         max_results: 1,
-    #         show_detail: false,
-    #       }
-    #
     # @!attribute [rw] cluster_name
     #   A user-supplied cluster identifier. If this parameter is specified,
     #   only snapshots associated with that specific cluster are described.
@@ -1829,15 +1558,6 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeSubnetGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         subnet_group_name: "String",
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] subnet_group_name
     #   The name of the subnet group to return details for.
     #   @return [String]
@@ -1891,21 +1611,6 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeUsersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "UserName",
-    #         filters: [
-    #           {
-    #             name: "FilterName", # required
-    #             values: ["FilterValue"], # required
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The name of the user
     #   @return [String]
@@ -2046,14 +1751,6 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass FailoverShardRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_name: "String", # required
-    #         shard_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] cluster_name
     #   The cluster being failed over
     #   @return [String]
@@ -2085,14 +1782,6 @@ module Aws::MemoryDB
 
     # Used to streamline results of a search based on the property being
     # filtered.
-    #
-    # @note When making an API call, you may pass Filter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "FilterName", # required
-    #         values: ["FilterValue"], # required
-    #       }
     #
     # @!attribute [rw] name
     #   The property being filtered. For example, UserName.
@@ -2181,13 +1870,6 @@ module Aws::MemoryDB
     #
     class InvalidVPCNetworkStateFault < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass ListAllowedNodeTypeUpdatesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] cluster_name
     #   The name of the cluster you want to scale. MemoryDB uses the cluster
     #   name to identify the current node type being used by this cluster,
@@ -2219,13 +1901,6 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource for which you want
     #   the list of tags
@@ -2388,14 +2063,6 @@ module Aws::MemoryDB
     # Describes a name-value pair that is used to update the value of a
     # parameter.
     #
-    # @note When making an API call, you may pass ParameterNameValue
-    #   data as a hash:
-    #
-    #       {
-    #         parameter_name: "String",
-    #         parameter_value: "String",
-    #       }
-    #
     # @!attribute [rw] parameter_name
     #   The name of the parameter
     #   @return [String]
@@ -2435,13 +2102,6 @@ module Aws::MemoryDB
 
     # A request to configure the number of replicas in a shard
     #
-    # @note When making an API call, you may pass ReplicaConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         replica_count: 1,
-    #       }
-    #
     # @!attribute [rw] replica_count
     #   The number of replicas to scale up or down to
     #   @return [Integer]
@@ -2454,15 +2114,6 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ResetParameterGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         parameter_group_name: "String", # required
-    #         all_parameters: false,
-    #         parameter_names: ["String"],
-    #       }
-    #
     # @!attribute [rw] parameter_group_name
     #   The name of the parameter group to reset.
     #   @return [String]
@@ -2596,13 +2247,6 @@ module Aws::MemoryDB
 
     # A request to apply a service update
     #
-    # @note When making an API call, you may pass ServiceUpdateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_update_name_to_apply: "String",
-    #       }
-    #
     # @!attribute [rw] service_update_name_to_apply
     #   The unique ID of the service update
     #   @return [String]
@@ -2676,13 +2320,6 @@ module Aws::MemoryDB
     end
 
     # A request to configure the sharding properties of a cluster
-    #
-    # @note When making an API call, you may pass ShardConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         shard_count: 1,
-    #       }
     #
     # @!attribute [rw] shard_count
     #   The number of shards in the cluster
@@ -2915,14 +2552,6 @@ module Aws::MemoryDB
     #
     # [1]: https://docs.aws.amazon.com/MemoryDB/latest/devguide/tagging-resources.html
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "String",
-    #         value: "String",
-    #       }
-    #
     # @!attribute [rw] key
     #   The key for the tag. May not be null.
     #   @return [String]
@@ -2948,19 +2577,6 @@ module Aws::MemoryDB
     #
     class TagQuotaPerResourceExceeded < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #         tags: [ # required
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource to which the tags are
     #   to be added
@@ -3021,14 +2637,6 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #         tag_keys: ["String"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource to which the tags are
     #   to be removed
@@ -3059,15 +2667,6 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateACLRequest
-    #   data as a hash:
-    #
-    #       {
-    #         acl_name: "String", # required
-    #         user_names_to_add: ["UserName"],
-    #         user_names_to_remove: ["UserName"],
-    #       }
-    #
     # @!attribute [rw] acl_name
     #   The name of the Access Control List
     #   @return [String]
@@ -3102,30 +2701,6 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateClusterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_name: "String", # required
-    #         description: "String",
-    #         security_group_ids: ["String"],
-    #         maintenance_window: "String",
-    #         sns_topic_arn: "String",
-    #         sns_topic_status: "String",
-    #         parameter_group_name: "String",
-    #         snapshot_window: "String",
-    #         snapshot_retention_limit: 1,
-    #         node_type: "String",
-    #         engine_version: "String",
-    #         replica_configuration: {
-    #           replica_count: 1,
-    #         },
-    #         shard_configuration: {
-    #           shard_count: 1,
-    #         },
-    #         acl_name: "ACLName",
-    #       }
-    #
     # @!attribute [rw] cluster_name
     #   The name of the cluster to update
     #   @return [String]
@@ -3245,19 +2820,6 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateParameterGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         parameter_group_name: "String", # required
-    #         parameter_name_values: [ # required
-    #           {
-    #             parameter_name: "String",
-    #             parameter_value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] parameter_group_name
     #   The name of the parameter group to update.
     #   @return [String]
@@ -3290,15 +2852,6 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateSubnetGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         subnet_group_name: "String", # required
-    #         description: "String",
-    #         subnet_ids: ["String"],
-    #       }
-    #
     # @!attribute [rw] subnet_group_name
     #   The name of the subnet group
     #   @return [String]
@@ -3333,18 +2886,6 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "UserName", # required
-    #         authentication_mode: {
-    #           type: "password", # accepts password
-    #           passwords: ["String"],
-    #         },
-    #         access_string: "AccessString",
-    #       }
-    #
     # @!attribute [rw] user_name
     #   The name of the user
     #   @return [String]

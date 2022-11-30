@@ -101,14 +101,6 @@ module Aws::Personalize
     #
     # [1]: https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html
     #
-    # @note When making an API call, you may pass AutoMLConfig
-    #   data as a hash:
-    #
-    #       {
-    #         metric_name: "MetricName",
-    #         recipe_list: ["Arn"],
-    #       }
-    #
     # @!attribute [rw] metric_name
     #   The metric to optimize.
     #   @return [String]
@@ -238,15 +230,6 @@ module Aws::Personalize
 
     # The configuration details of a batch inference job.
     #
-    # @note When making an API call, you may pass BatchInferenceJobConfig
-    #   data as a hash:
-    #
-    #       {
-    #         item_exploration_config: {
-    #           "ParameterName" => "ParameterValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] item_exploration_config
     #   A string to string map specifying the exploration configuration
     #   hyperparameters, including `explorationWeight` and
@@ -269,16 +252,6 @@ module Aws::Personalize
 
     # The input configuration of a batch inference job.
     #
-    # @note When making an API call, you may pass BatchInferenceJobInput
-    #   data as a hash:
-    #
-    #       {
-    #         s3_data_source: { # required
-    #           path: "S3Location", # required
-    #           kms_key_arn: "KmsKeyArn",
-    #         },
-    #       }
-    #
     # @!attribute [rw] s3_data_source
     #   The URI of the Amazon S3 location that contains your input data. The
     #   Amazon S3 bucket must be in the same region as the API endpoint you
@@ -294,16 +267,6 @@ module Aws::Personalize
     end
 
     # The output configuration parameters of a batch inference job.
-    #
-    # @note When making an API call, you may pass BatchInferenceJobOutput
-    #   data as a hash:
-    #
-    #       {
-    #         s3_data_destination: { # required
-    #           path: "S3Location", # required
-    #           kms_key_arn: "KmsKeyArn",
-    #         },
-    #       }
     #
     # @!attribute [rw] s3_data_destination
     #   Information on the Amazon S3 bucket in which the batch inference
@@ -463,16 +426,6 @@ module Aws::Personalize
 
     # The input configuration of a batch segment job.
     #
-    # @note When making an API call, you may pass BatchSegmentJobInput
-    #   data as a hash:
-    #
-    #       {
-    #         s3_data_source: { # required
-    #           path: "S3Location", # required
-    #           kms_key_arn: "KmsKeyArn",
-    #         },
-    #       }
-    #
     # @!attribute [rw] s3_data_source
     #   The configuration details of an Amazon S3 input or output bucket.
     #   @return [Types::S3DataConfig]
@@ -486,16 +439,6 @@ module Aws::Personalize
     end
 
     # The output configuration parameters of a batch segment job.
-    #
-    # @note When making an API call, you may pass BatchSegmentJobOutput
-    #   data as a hash:
-    #
-    #       {
-    #         s3_data_destination: { # required
-    #           path: "S3Location", # required
-    #           kms_key_arn: "KmsKeyArn",
-    #         },
-    #       }
     #
     # @!attribute [rw] s3_data_destination
     #   The configuration details of an Amazon S3 input or output bucket.
@@ -651,15 +594,6 @@ module Aws::Personalize
 
     # The configuration details of a campaign.
     #
-    # @note When making an API call, you may pass CampaignConfig
-    #   data as a hash:
-    #
-    #       {
-    #         item_exploration_config: {
-    #           "ParameterName" => "ParameterValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] item_exploration_config
     #   Specifies the exploration configuration hyperparameters, including
     #   `explorationWeight` and `explorationItemAgeCutOff`, you want to use
@@ -792,14 +726,6 @@ module Aws::Personalize
 
     # Provides the name and range of a categorical hyperparameter.
     #
-    # @note When making an API call, you may pass CategoricalHyperParameterRange
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ParameterName",
-    #         values: ["CategoricalValue"],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the hyperparameter.
     #   @return [String]
@@ -818,15 +744,6 @@ module Aws::Personalize
     end
 
     # Provides the name and range of a continuous hyperparameter.
-    #
-    # @note When making an API call, you may pass ContinuousHyperParameterRange
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ParameterName",
-    #         min_value: 1.0,
-    #         max_value: 1.0,
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the hyperparameter.
@@ -850,40 +767,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateBatchInferenceJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_name: "Name", # required
-    #         solution_version_arn: "Arn", # required
-    #         filter_arn: "Arn",
-    #         num_results: 1,
-    #         job_input: { # required
-    #           s3_data_source: { # required
-    #             path: "S3Location", # required
-    #             kms_key_arn: "KmsKeyArn",
-    #           },
-    #         },
-    #         job_output: { # required
-    #           s3_data_destination: { # required
-    #             path: "S3Location", # required
-    #             kms_key_arn: "KmsKeyArn",
-    #           },
-    #         },
-    #         role_arn: "RoleArn", # required
-    #         batch_inference_job_config: {
-    #           item_exploration_config: {
-    #             "ParameterName" => "ParameterValue",
-    #           },
-    #         },
-    #         tags: [
-    #           {
-    #             tag_key: "TagKey", # required
-    #             tag_value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] job_name
     #   The name of the batch inference job to create.
     #   @return [String]
@@ -963,35 +846,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateBatchSegmentJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_name: "Name", # required
-    #         solution_version_arn: "Arn", # required
-    #         filter_arn: "Arn",
-    #         num_results: 1,
-    #         job_input: { # required
-    #           s3_data_source: { # required
-    #             path: "S3Location", # required
-    #             kms_key_arn: "KmsKeyArn",
-    #           },
-    #         },
-    #         job_output: { # required
-    #           s3_data_destination: { # required
-    #             path: "S3Location", # required
-    #             kms_key_arn: "KmsKeyArn",
-    #           },
-    #         },
-    #         role_arn: "RoleArn", # required
-    #         tags: [
-    #           {
-    #             tag_key: "TagKey", # required
-    #             tag_value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] job_name
     #   The name of the batch segment job to create.
     #   @return [String]
@@ -1067,26 +921,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateCampaignRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         solution_version_arn: "Arn", # required
-    #         min_provisioned_tps: 1,
-    #         campaign_config: {
-    #           item_exploration_config: {
-    #             "ParameterName" => "ParameterValue",
-    #           },
-    #         },
-    #         tags: [
-    #           {
-    #             tag_key: "TagKey", # required
-    #             tag_value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   A name for the new campaign. The campaign name must be unique within
     #   your account.
@@ -1137,28 +971,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDatasetExportJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_name: "Name", # required
-    #         dataset_arn: "Arn", # required
-    #         ingestion_mode: "BULK", # accepts BULK, PUT, ALL
-    #         role_arn: "RoleArn", # required
-    #         job_output: { # required
-    #           s3_data_destination: { # required
-    #             path: "S3Location", # required
-    #             kms_key_arn: "KmsKeyArn",
-    #           },
-    #         },
-    #         tags: [
-    #           {
-    #             tag_key: "TagKey", # required
-    #             tag_value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] job_name
     #   The name for the dataset export job.
     #   @return [String]
@@ -1218,22 +1030,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDatasetGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         role_arn: "RoleArn",
-    #         kms_key_arn: "KmsKeyArn",
-    #         domain: "ECOMMERCE", # accepts ECOMMERCE, VIDEO_ON_DEMAND
-    #         tags: [
-    #           {
-    #             tag_key: "TagKey", # required
-    #             tag_value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name for the new dataset group.
     #   @return [String]
@@ -1294,26 +1090,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDatasetImportJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_name: "Name", # required
-    #         dataset_arn: "Arn", # required
-    #         data_source: { # required
-    #           data_location: "S3Location",
-    #         },
-    #         role_arn: "RoleArn", # required
-    #         tags: [
-    #           {
-    #             tag_key: "TagKey", # required
-    #             tag_value: "TagValue", # required
-    #           },
-    #         ],
-    #         import_mode: "FULL", # accepts FULL, INCREMENTAL
-    #         publish_attribution_metrics_to_s3: false,
-    #       }
-    #
     # @!attribute [rw] job_name
     #   The name for the dataset import job.
     #   @return [String]
@@ -1383,22 +1159,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDatasetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         schema_arn: "Arn", # required
-    #         dataset_group_arn: "Arn", # required
-    #         dataset_type: "DatasetType", # required
-    #         tags: [
-    #           {
-    #             tag_key: "TagKey", # required
-    #             tag_value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name for the dataset.
     #   @return [String]
@@ -1457,20 +1217,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateEventTrackerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         dataset_group_arn: "Arn", # required
-    #         tags: [
-    #           {
-    #             tag_key: "TagKey", # required
-    #             tag_value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name for the event tracker.
     #   @return [String]
@@ -1520,21 +1266,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateFilterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         dataset_group_arn: "Arn", # required
-    #         filter_expression: "FilterExpression", # required
-    #         tags: [
-    #           {
-    #             tag_key: "TagKey", # required
-    #             tag_value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the filter to create.
     #   @return [String]
@@ -1585,28 +1316,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateMetricAttributionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         dataset_group_arn: "Arn", # required
-    #         metrics: [ # required
-    #           {
-    #             event_type: "EventType", # required
-    #             metric_name: "MetricName", # required
-    #             expression: "MetricExpression", # required
-    #           },
-    #         ],
-    #         metrics_output_config: { # required
-    #           s3_data_destination: {
-    #             path: "S3Location", # required
-    #             kms_key_arn: "KmsKeyArn",
-    #           },
-    #           role_arn: "RoleArn", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   A name for the metric attribution.
     #   @return [String]
@@ -1651,27 +1360,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateRecommenderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         dataset_group_arn: "Arn", # required
-    #         recipe_arn: "Arn", # required
-    #         recommender_config: {
-    #           item_exploration_config: {
-    #             "ParameterName" => "ParameterValue",
-    #           },
-    #           min_recommendation_requests_per_second: 1,
-    #         },
-    #         tags: [
-    #           {
-    #             tag_key: "TagKey", # required
-    #             tag_value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the recommender.
     #   @return [String]
@@ -1729,15 +1417,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateSchemaRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         schema: "AvroSchema", # required
-    #         domain: "ECOMMERCE", # accepts ECOMMERCE, VIDEO_ON_DEMAND
-    #       }
-    #
     # @!attribute [rw] name
     #   The name for the schema.
     #   @return [String]
@@ -1774,74 +1453,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateSolutionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         perform_hpo: false,
-    #         perform_auto_ml: false,
-    #         recipe_arn: "Arn",
-    #         dataset_group_arn: "Arn", # required
-    #         event_type: "EventType",
-    #         solution_config: {
-    #           event_value_threshold: "EventValueThreshold",
-    #           hpo_config: {
-    #             hpo_objective: {
-    #               type: "HPOObjectiveType",
-    #               metric_name: "MetricName",
-    #               metric_regex: "MetricRegex",
-    #             },
-    #             hpo_resource_config: {
-    #               max_number_of_training_jobs: "HPOResource",
-    #               max_parallel_training_jobs: "HPOResource",
-    #             },
-    #             algorithm_hyper_parameter_ranges: {
-    #               integer_hyper_parameter_ranges: [
-    #                 {
-    #                   name: "ParameterName",
-    #                   min_value: 1,
-    #                   max_value: 1,
-    #                 },
-    #               ],
-    #               continuous_hyper_parameter_ranges: [
-    #                 {
-    #                   name: "ParameterName",
-    #                   min_value: 1.0,
-    #                   max_value: 1.0,
-    #                 },
-    #               ],
-    #               categorical_hyper_parameter_ranges: [
-    #                 {
-    #                   name: "ParameterName",
-    #                   values: ["CategoricalValue"],
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #           algorithm_hyper_parameters: {
-    #             "ParameterName" => "ParameterValue",
-    #           },
-    #           feature_transformation_parameters: {
-    #             "ParameterName" => "ParameterValue",
-    #           },
-    #           auto_ml_config: {
-    #             metric_name: "MetricName",
-    #             recipe_list: ["Arn"],
-    #           },
-    #           optimization_objective: {
-    #             item_attribute: "ItemAttribute",
-    #             objective_sensitivity: "LOW", # accepts LOW, MEDIUM, HIGH, OFF
-    #           },
-    #         },
-    #         tags: [
-    #           {
-    #             tag_key: "TagKey", # required
-    #             tag_value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name for the solution.
     #   @return [String]
@@ -1931,21 +1542,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateSolutionVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name",
-    #         solution_arn: "Arn", # required
-    #         training_mode: "FULL", # accepts FULL, UPDATE
-    #         tags: [
-    #           {
-    #             tag_key: "TagKey", # required
-    #             tag_value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the solution version.
     #   @return [String]
@@ -2008,13 +1604,6 @@ module Aws::Personalize
 
     # Describes the data source that contains the data to upload to a
     # dataset.
-    #
-    # @note When making an API call, you may pass DataSource
-    #   data as a hash:
-    #
-    #       {
-    #         data_location: "S3Location",
-    #       }
     #
     # @!attribute [rw] data_location
     #   The path to the Amazon S3 bucket where the data that you want to
@@ -2182,16 +1771,6 @@ module Aws::Personalize
     end
 
     # The output configuration parameters of a dataset export job.
-    #
-    # @note When making an API call, you may pass DatasetExportJobOutput
-    #   data as a hash:
-    #
-    #       {
-    #         s3_data_destination: { # required
-    #           path: "S3Location", # required
-    #           kms_key_arn: "KmsKeyArn",
-    #         },
-    #       }
     #
     # @!attribute [rw] s3_data_destination
     #   The configuration details of an Amazon S3 input or output bucket.
@@ -2803,13 +2382,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteCampaignRequest
-    #   data as a hash:
-    #
-    #       {
-    #         campaign_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] campaign_arn
     #   The Amazon Resource Name (ARN) of the campaign to delete.
     #   @return [String]
@@ -2822,13 +2394,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDatasetGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_group_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] dataset_group_arn
     #   The ARN of the dataset group to delete.
     #   @return [String]
@@ -2841,13 +2406,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDatasetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] dataset_arn
     #   The Amazon Resource Name (ARN) of the dataset to delete.
     #   @return [String]
@@ -2860,13 +2418,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteEventTrackerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         event_tracker_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] event_tracker_arn
     #   The Amazon Resource Name (ARN) of the event tracker to delete.
     #   @return [String]
@@ -2879,13 +2430,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteFilterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] filter_arn
     #   The ARN of the filter to delete.
     #   @return [String]
@@ -2898,13 +2442,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteMetricAttributionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         metric_attribution_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] metric_attribution_arn
     #   The metric attribution's Amazon Resource Name (ARN).
     #   @return [String]
@@ -2917,13 +2454,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteRecommenderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         recommender_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] recommender_arn
     #   The Amazon Resource Name (ARN) of the recommender to delete.
     #   @return [String]
@@ -2936,13 +2466,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteSchemaRequest
-    #   data as a hash:
-    #
-    #       {
-    #         schema_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] schema_arn
     #   The Amazon Resource Name (ARN) of the schema to delete.
     #   @return [String]
@@ -2955,13 +2478,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteSolutionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         solution_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] solution_arn
     #   The ARN of the solution to delete.
     #   @return [String]
@@ -2974,13 +2490,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAlgorithmRequest
-    #   data as a hash:
-    #
-    #       {
-    #         algorithm_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] algorithm_arn
     #   The Amazon Resource Name (ARN) of the algorithm to describe.
     #   @return [String]
@@ -3005,13 +2514,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeBatchInferenceJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         batch_inference_job_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] batch_inference_job_arn
     #   The ARN of the batch inference job to describe.
     #   @return [String]
@@ -3036,13 +2538,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeBatchSegmentJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         batch_segment_job_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] batch_segment_job_arn
     #   The ARN of the batch segment job to describe.
     #   @return [String]
@@ -3067,13 +2562,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeCampaignRequest
-    #   data as a hash:
-    #
-    #       {
-    #         campaign_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] campaign_arn
     #   The Amazon Resource Name (ARN) of the campaign.
     #   @return [String]
@@ -3098,13 +2586,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDatasetExportJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_export_job_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] dataset_export_job_arn
     #   The Amazon Resource Name (ARN) of the dataset export job to
     #   describe.
@@ -3140,13 +2621,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDatasetGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_group_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] dataset_group_arn
     #   The Amazon Resource Name (ARN) of the dataset group to describe.
     #   @return [String]
@@ -3171,13 +2645,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDatasetImportJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_import_job_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] dataset_import_job_arn
     #   The Amazon Resource Name (ARN) of the dataset import job to
     #   describe.
@@ -3213,13 +2680,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDatasetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] dataset_arn
     #   The Amazon Resource Name (ARN) of the dataset to describe.
     #   @return [String]
@@ -3244,13 +2704,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEventTrackerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         event_tracker_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] event_tracker_arn
     #   The Amazon Resource Name (ARN) of the event tracker to describe.
     #   @return [String]
@@ -3275,13 +2728,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeFeatureTransformationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         feature_transformation_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] feature_transformation_arn
     #   The Amazon Resource Name (ARN) of the feature transformation to
     #   describe.
@@ -3307,13 +2753,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeFilterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] filter_arn
     #   The ARN of the filter to describe.
     #   @return [String]
@@ -3338,13 +2777,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeMetricAttributionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         metric_attribution_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] metric_attribution_arn
     #   The metric attribution's Amazon Resource Name (ARN).
     #   @return [String]
@@ -3369,13 +2801,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeRecipeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         recipe_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] recipe_arn
     #   The Amazon Resource Name (ARN) of the recipe to describe.
     #   @return [String]
@@ -3400,13 +2825,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeRecommenderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         recommender_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] recommender_arn
     #   The Amazon Resource Name (ARN) of the recommender to describe.
     #   @return [String]
@@ -3431,13 +2849,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeSchemaRequest
-    #   data as a hash:
-    #
-    #       {
-    #         schema_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] schema_arn
     #   The Amazon Resource Name (ARN) of the schema to retrieve.
     #   @return [String]
@@ -3462,13 +2873,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeSolutionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         solution_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] solution_arn
     #   The Amazon Resource Name (ARN) of the solution to describe.
     #   @return [String]
@@ -3493,13 +2897,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeSolutionVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         solution_version_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] solution_version_arn
     #   The Amazon Resource Name (ARN) of the solution version.
     #   @return [String]
@@ -3786,13 +3183,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSolutionMetricsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         solution_version_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] solution_version_arn
     #   The Amazon Resource Name (ARN) of the solution version for which to
     #   get metrics.
@@ -3830,43 +3220,6 @@ module Aws::Personalize
 
     # Describes the properties for hyperparameter optimization (HPO).
     #
-    # @note When making an API call, you may pass HPOConfig
-    #   data as a hash:
-    #
-    #       {
-    #         hpo_objective: {
-    #           type: "HPOObjectiveType",
-    #           metric_name: "MetricName",
-    #           metric_regex: "MetricRegex",
-    #         },
-    #         hpo_resource_config: {
-    #           max_number_of_training_jobs: "HPOResource",
-    #           max_parallel_training_jobs: "HPOResource",
-    #         },
-    #         algorithm_hyper_parameter_ranges: {
-    #           integer_hyper_parameter_ranges: [
-    #             {
-    #               name: "ParameterName",
-    #               min_value: 1,
-    #               max_value: 1,
-    #             },
-    #           ],
-    #           continuous_hyper_parameter_ranges: [
-    #             {
-    #               name: "ParameterName",
-    #               min_value: 1.0,
-    #               max_value: 1.0,
-    #             },
-    #           ],
-    #           categorical_hyper_parameter_ranges: [
-    #             {
-    #               name: "ParameterName",
-    #               values: ["CategoricalValue"],
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] hpo_objective
     #   The metric to optimize during HPO.
     #
@@ -3901,15 +3254,6 @@ module Aws::Personalize
     #
     #  </note>
     #
-    # @note When making an API call, you may pass HPOObjective
-    #   data as a hash:
-    #
-    #       {
-    #         type: "HPOObjectiveType",
-    #         metric_name: "MetricName",
-    #         metric_regex: "MetricRegex",
-    #       }
-    #
     # @!attribute [rw] type
     #   The type of the metric. Valid values are `Maximize` and `Minimize`.
     #   @return [String]
@@ -3936,14 +3280,6 @@ module Aws::Personalize
     # Describes the resource configuration for hyperparameter optimization
     # (HPO).
     #
-    # @note When making an API call, you may pass HPOResourceConfig
-    #   data as a hash:
-    #
-    #       {
-    #         max_number_of_training_jobs: "HPOResource",
-    #         max_parallel_training_jobs: "HPOResource",
-    #       }
-    #
     # @!attribute [rw] max_number_of_training_jobs
     #   The maximum number of training jobs when you create a solution
     #   version. The maximum value for `maxNumberOfTrainingJobs` is `40`.
@@ -3966,32 +3302,6 @@ module Aws::Personalize
 
     # Specifies the hyperparameters and their ranges. Hyperparameters can be
     # categorical, continuous, or integer-valued.
-    #
-    # @note When making an API call, you may pass HyperParameterRanges
-    #   data as a hash:
-    #
-    #       {
-    #         integer_hyper_parameter_ranges: [
-    #           {
-    #             name: "ParameterName",
-    #             min_value: 1,
-    #             max_value: 1,
-    #           },
-    #         ],
-    #         continuous_hyper_parameter_ranges: [
-    #           {
-    #             name: "ParameterName",
-    #             min_value: 1.0,
-    #             max_value: 1.0,
-    #           },
-    #         ],
-    #         categorical_hyper_parameter_ranges: [
-    #           {
-    #             name: "ParameterName",
-    #             values: ["CategoricalValue"],
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] integer_hyper_parameter_ranges
     #   The integer-valued hyperparameters and their ranges.
@@ -4016,15 +3326,6 @@ module Aws::Personalize
     end
 
     # Provides the name and range of an integer-valued hyperparameter.
-    #
-    # @note When making an API call, you may pass IntegerHyperParameterRange
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ParameterName",
-    #         min_value: 1,
-    #         max_value: 1,
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the hyperparameter.
@@ -4087,15 +3388,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListBatchInferenceJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         solution_version_arn: "Arn",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] solution_version_arn
     #   The Amazon Resource Name (ARN) of the solution version from which
     #   the batch inference jobs were created.
@@ -4138,15 +3430,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListBatchSegmentJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         solution_version_arn: "Arn",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] solution_version_arn
     #   The Amazon Resource Name (ARN) of the solution version that the
     #   batch segment jobs used to generate batch segments.
@@ -4189,15 +3472,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCampaignsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         solution_arn: "Arn",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] solution_arn
     #   The Amazon Resource Name (ARN) of the solution to list the campaigns
     #   for. When a solution is not specified, all the campaigns associated
@@ -4244,15 +3518,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDatasetExportJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_arn: "Arn",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] dataset_arn
     #   The Amazon Resource Name (ARN) of the dataset to list the dataset
     #   export jobs for.
@@ -4295,14 +3560,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDatasetGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   A token returned from the previous call to `ListDatasetGroups` for
     #   getting the next set of dataset groups (if they exist).
@@ -4338,15 +3595,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDatasetImportJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_arn: "Arn",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] dataset_arn
     #   The Amazon Resource Name (ARN) of the dataset to list the dataset
     #   import jobs for.
@@ -4389,15 +3637,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDatasetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_group_arn: "Arn",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] dataset_group_arn
     #   The Amazon Resource Name (ARN) of the dataset group that contains
     #   the datasets to list.
@@ -4440,15 +3679,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEventTrackersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_group_arn: "Arn",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] dataset_group_arn
     #   The ARN of a dataset group used to filter the response.
     #   @return [String]
@@ -4489,15 +3719,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFiltersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_group_arn: "Arn",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] dataset_group_arn
     #   The ARN of the dataset group that contains the filters.
     #   @return [String]
@@ -4538,15 +3759,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListMetricAttributionMetricsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         metric_attribution_arn: "Arn",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] metric_attribution_arn
     #   The Amazon Resource Name (ARN) of the metric attribution to retrieve
     #   attributes for.
@@ -4590,15 +3802,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListMetricAttributionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_group_arn: "Arn",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] dataset_group_arn
     #   The metric attributions' dataset group Amazon Resource Name (ARN).
     #   @return [String]
@@ -4641,16 +3844,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRecipesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         recipe_provider: "SERVICE", # accepts SERVICE
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         domain: "ECOMMERCE", # accepts ECOMMERCE, VIDEO_ON_DEMAND
-    #       }
-    #
     # @!attribute [rw] recipe_provider
     #   The default is `SERVICE`.
     #   @return [String]
@@ -4699,15 +3892,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRecommendersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_group_arn: "Arn",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] dataset_group_arn
     #   The Amazon Resource Name (ARN) of the Domain dataset group to list
     #   the recommenders for. When a Domain dataset group is not specified,
@@ -4750,14 +3934,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSchemasRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   A token returned from the previous call to `ListSchemas` for getting
     #   the next set of schemas (if they exist).
@@ -4793,15 +3969,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSolutionVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         solution_arn: "Arn",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] solution_arn
     #   The Amazon Resource Name (ARN) of the solution.
     #   @return [String]
@@ -4843,15 +4010,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSolutionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_group_arn: "Arn",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] dataset_group_arn
     #   The Amazon Resource Name (ARN) of the dataset group.
     #   @return [String]
@@ -4892,13 +4050,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The resource's Amazon Resource Name.
     #   @return [String]
@@ -4929,15 +4080,6 @@ module Aws::Personalize
     #
     #
     # [1]: https://docs.aws.amazon.com/personalize/latest/dg/measuring-recommendation-impact.html
-    #
-    # @note When making an API call, you may pass MetricAttribute
-    #   data as a hash:
-    #
-    #       {
-    #         event_type: "EventType", # required
-    #         metric_name: "MetricName", # required
-    #         expression: "MetricExpression", # required
-    #       }
     #
     # @!attribute [rw] event_type
     #   The metric's event type.
@@ -5024,17 +4166,6 @@ module Aws::Personalize
 
     # The output configuration details for a metric attribution.
     #
-    # @note When making an API call, you may pass MetricAttributionOutput
-    #   data as a hash:
-    #
-    #       {
-    #         s3_data_destination: {
-    #           path: "S3Location", # required
-    #           kms_key_arn: "KmsKeyArn",
-    #         },
-    #         role_arn: "RoleArn", # required
-    #       }
-    #
     # @!attribute [rw] s3_data_destination
     #   The configuration details of an Amazon S3 input or output bucket.
     #   @return [Types::S3DataConfig]
@@ -5110,14 +4241,6 @@ module Aws::Personalize
     #
     #
     # [1]: https://docs.aws.amazon.com/personalize/latest/dg/optimizing-solution-for-objective.html
-    #
-    # @note When making an API call, you may pass OptimizationObjective
-    #   data as a hash:
-    #
-    #       {
-    #         item_attribute: "ItemAttribute",
-    #         objective_sensitivity: "LOW", # accepts LOW, MEDIUM, HIGH, OFF
-    #       }
     #
     # @!attribute [rw] item_attribute
     #   The numerical metadata column in an Items dataset related to the
@@ -5343,16 +4466,6 @@ module Aws::Personalize
 
     # The configuration details of the recommender.
     #
-    # @note When making an API call, you may pass RecommenderConfig
-    #   data as a hash:
-    #
-    #       {
-    #         item_exploration_config: {
-    #           "ParameterName" => "ParameterValue",
-    #         },
-    #         min_recommendation_requests_per_second: 1,
-    #       }
-    #
     # @!attribute [rw] item_exploration_config
     #   Specifies the exploration configuration hyperparameters, including
     #   `explorationWeight` and `explorationItemAgeCutOff`, you want to use
@@ -5529,14 +4642,6 @@ module Aws::Personalize
 
     # The configuration details of an Amazon S3 input or output bucket.
     #
-    # @note When making an API call, you may pass S3DataConfig
-    #   data as a hash:
-    #
-    #       {
-    #         path: "S3Location", # required
-    #         kms_key_arn: "KmsKeyArn",
-    #       }
-    #
     # @!attribute [rw] path
     #   The file path of the Amazon S3 bucket.
     #   @return [String]
@@ -5648,60 +4753,6 @@ module Aws::Personalize
     end
 
     # Describes the configuration properties for the solution.
-    #
-    # @note When making an API call, you may pass SolutionConfig
-    #   data as a hash:
-    #
-    #       {
-    #         event_value_threshold: "EventValueThreshold",
-    #         hpo_config: {
-    #           hpo_objective: {
-    #             type: "HPOObjectiveType",
-    #             metric_name: "MetricName",
-    #             metric_regex: "MetricRegex",
-    #           },
-    #           hpo_resource_config: {
-    #             max_number_of_training_jobs: "HPOResource",
-    #             max_parallel_training_jobs: "HPOResource",
-    #           },
-    #           algorithm_hyper_parameter_ranges: {
-    #             integer_hyper_parameter_ranges: [
-    #               {
-    #                 name: "ParameterName",
-    #                 min_value: 1,
-    #                 max_value: 1,
-    #               },
-    #             ],
-    #             continuous_hyper_parameter_ranges: [
-    #               {
-    #                 name: "ParameterName",
-    #                 min_value: 1.0,
-    #                 max_value: 1.0,
-    #               },
-    #             ],
-    #             categorical_hyper_parameter_ranges: [
-    #               {
-    #                 name: "ParameterName",
-    #                 values: ["CategoricalValue"],
-    #               },
-    #             ],
-    #           },
-    #         },
-    #         algorithm_hyper_parameters: {
-    #           "ParameterName" => "ParameterValue",
-    #         },
-    #         feature_transformation_parameters: {
-    #           "ParameterName" => "ParameterValue",
-    #         },
-    #         auto_ml_config: {
-    #           metric_name: "MetricName",
-    #           recipe_list: ["Arn"],
-    #         },
-    #         optimization_objective: {
-    #           item_attribute: "ItemAttribute",
-    #           objective_sensitivity: "LOW", # accepts LOW, MEDIUM, HIGH, OFF
-    #         },
-    #       }
     #
     # @!attribute [rw] event_value_threshold
     #   Only events with a value greater than or equal to this threshold are
@@ -5984,13 +5035,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartRecommenderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         recommender_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] recommender_arn
     #   The Amazon Resource Name (ARN) of the recommender to start.
     #   @return [String]
@@ -6015,13 +5059,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopRecommenderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         recommender_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] recommender_arn
     #   The Amazon Resource Name (ARN) of the recommender to stop.
     #   @return [String]
@@ -6046,13 +5083,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopSolutionVersionCreationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         solution_version_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] solution_version_arn
     #   The Amazon Resource Name (ARN) of the solution version you want to
     #   stop creating.
@@ -6075,14 +5105,6 @@ module Aws::Personalize
     #
     # [1]: https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         tag_key: "TagKey", # required
-    #         tag_value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] tag_key
     #   One part of a key-value pair that makes up a tag. A key is a general
     #   label that acts like a category for more specific tag values.
@@ -6102,19 +5124,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tags: [ # required
-    #           {
-    #             tag_key: "TagKey", # required
-    #             tag_value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The resource's Amazon Resource Name (ARN).
     #   @return [String]
@@ -6184,14 +5193,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The resource's Amazon Resource Name (ARN).
     #   @return [String]
@@ -6213,20 +5214,6 @@ module Aws::Personalize
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateCampaignRequest
-    #   data as a hash:
-    #
-    #       {
-    #         campaign_arn: "Arn", # required
-    #         solution_version_arn: "Arn",
-    #         min_provisioned_tps: 1,
-    #         campaign_config: {
-    #           item_exploration_config: {
-    #             "ParameterName" => "ParameterValue",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] campaign_arn
     #   The Amazon Resource Name (ARN) of the campaign.
     #   @return [String]
@@ -6267,28 +5254,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateMetricAttributionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         add_metrics: [
-    #           {
-    #             event_type: "EventType", # required
-    #             metric_name: "MetricName", # required
-    #             expression: "MetricExpression", # required
-    #           },
-    #         ],
-    #         remove_metrics: ["MetricName"],
-    #         metrics_output_config: {
-    #           s3_data_destination: {
-    #             path: "S3Location", # required
-    #             kms_key_arn: "KmsKeyArn",
-    #           },
-    #           role_arn: "RoleArn", # required
-    #         },
-    #         metric_attribution_arn: "Arn",
-    #       }
-    #
     # @!attribute [rw] add_metrics
     #   Add new metric attributes to the metric attribution.
     #   @return [Array<Types::MetricAttribute>]
@@ -6329,19 +5294,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateRecommenderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         recommender_arn: "Arn", # required
-    #         recommender_config: { # required
-    #           item_exploration_config: {
-    #             "ParameterName" => "ParameterValue",
-    #           },
-    #           min_recommendation_requests_per_second: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] recommender_arn
     #   The Amazon Resource Name (ARN) of the recommender to modify.
     #   @return [String]

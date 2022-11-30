@@ -10,32 +10,6 @@
 module Aws::STS
   module Types
 
-    # @note When making an API call, you may pass AssumeRoleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         role_arn: "arnType", # required
-    #         role_session_name: "roleSessionNameType", # required
-    #         policy_arns: [
-    #           {
-    #             arn: "arnType",
-    #           },
-    #         ],
-    #         policy: "sessionPolicyDocumentType",
-    #         duration_seconds: 1,
-    #         tags: [
-    #           {
-    #             key: "tagKeyType", # required
-    #             value: "tagValueType", # required
-    #           },
-    #         ],
-    #         transitive_tag_keys: ["tagKeyType"],
-    #         external_id: "externalIdType",
-    #         serial_number: "serialNumberType",
-    #         token_code: "tokenCodeType",
-    #         source_identity: "sourceIdentityType",
-    #       }
-    #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the role to assume.
     #   @return [String]
@@ -397,22 +371,6 @@ module Aws::STS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssumeRoleWithSAMLRequest
-    #   data as a hash:
-    #
-    #       {
-    #         role_arn: "arnType", # required
-    #         principal_arn: "arnType", # required
-    #         saml_assertion: "SAMLAssertionType", # required
-    #         policy_arns: [
-    #           {
-    #             arn: "arnType",
-    #           },
-    #         ],
-    #         policy: "sessionPolicyDocumentType",
-    #         duration_seconds: 1,
-    #       }
-    #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the role that the caller is
     #   assuming.
@@ -670,23 +628,6 @@ module Aws::STS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssumeRoleWithWebIdentityRequest
-    #   data as a hash:
-    #
-    #       {
-    #         role_arn: "arnType", # required
-    #         role_session_name: "roleSessionNameType", # required
-    #         web_identity_token: "clientTokenType", # required
-    #         provider_id: "urlType",
-    #         policy_arns: [
-    #           {
-    #             arn: "arnType",
-    #           },
-    #         ],
-    #         policy: "sessionPolicyDocumentType",
-    #         duration_seconds: 1,
-    #       }
-    #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the role that the caller is
     #   assuming.
@@ -1004,13 +945,6 @@ module Aws::STS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DecodeAuthorizationMessageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         encoded_message: "encodedMessageType", # required
-    #       }
-    #
     # @!attribute [rw] encoded_message
     #   The encoded message that was returned with the response.
     #   @return [String]
@@ -1081,13 +1015,6 @@ module Aws::STS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAccessKeyInfoRequest
-    #   data as a hash:
-    #
-    #       {
-    #         access_key_id: "accessKeyIdType", # required
-    #       }
-    #
     # @!attribute [rw] access_key_id
     #   The identifier of an access key.
     #
@@ -1116,8 +1043,6 @@ module Aws::STS
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetCallerIdentityRequest AWS API Documentation
     #
     class GetCallerIdentityRequest < Aws::EmptyStructure; end
@@ -1156,26 +1081,6 @@ module Aws::STS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetFederationTokenRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "userNameType", # required
-    #         policy: "sessionPolicyDocumentType",
-    #         policy_arns: [
-    #           {
-    #             arn: "arnType",
-    #           },
-    #         ],
-    #         duration_seconds: 1,
-    #         tags: [
-    #           {
-    #             key: "tagKeyType", # required
-    #             value: "tagValueType", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the federated user. The name is used as an identifier
     #   for the temporary security credentials (such as `Bob`). For example,
@@ -1389,15 +1294,6 @@ module Aws::STS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSessionTokenRequest
-    #   data as a hash:
-    #
-    #       {
-    #         duration_seconds: 1,
-    #         serial_number: "serialNumberType",
-    #         token_code: "tokenCodeType",
-    #       }
-    #
     # @!attribute [rw] duration_seconds
     #   The duration, in seconds, that the credentials should remain valid.
     #   Acceptable durations for IAM user sessions range from 900 seconds
@@ -1581,13 +1477,6 @@ module Aws::STS
     # A reference to the IAM managed policy that is passed as a session
     # policy for a role session or a federated user session.
     #
-    # @note When making an API call, you may pass PolicyDescriptorType
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "arnType",
-    #       }
-    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the IAM managed policy to use as a
     #   session policy for the role. For more information about ARNs, see
@@ -1637,14 +1526,6 @@ module Aws::STS
     #
     #
     # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_session-tags.html
-    #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "tagKeyType", # required
-    #         value: "tagValueType", # required
-    #       }
     #
     # @!attribute [rw] key
     #   The key for a session tag.

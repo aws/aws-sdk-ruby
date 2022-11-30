@@ -48,14 +48,6 @@ module Aws::DynamoDB
     # Represents an attribute for describing the key schema for the table
     # and indexes.
     #
-    # @note When making an API call, you may pass AttributeDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         attribute_name: "KeySchemaAttributeName", # required
-    #         attribute_type: "S", # required, accepts S, N, B
-    #       }
-    #
     # @!attribute [rw] attribute_name
     #   A name for the attribute.
     #   @return [String]
@@ -90,24 +82,6 @@ module Aws::DynamoDB
     #
     #
     # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes
-    #
-    # @note When making an API call, you may pass AttributeValue
-    #   data as a hash:
-    #
-    #       {
-    #         s: "StringAttributeValue",
-    #         n: "NumberAttributeValue",
-    #         b: "data",
-    #         ss: ["StringAttributeValue"],
-    #         ns: ["NumberAttributeValue"],
-    #         bs: ["data"],
-    #         m: {
-    #           "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #         },
-    #         l: ["value"], # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #         null: false,
-    #         bool: false,
-    #       }
     #
     # @!attribute [rw] s
     #   An attribute of type String. For example:
@@ -209,14 +183,6 @@ module Aws::DynamoDB
     # must have lengths greater than zero; and set type attributes must not
     # be empty. Requests with empty values will be rejected with a
     # `ValidationException` exception.
-    #
-    # @note When making an API call, you may pass AttributeValueUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         value: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #         action: "ADD", # accepts ADD, PUT, DELETE
-    #       }
     #
     # @!attribute [rw] value
     #   Represents the data for an attribute.
@@ -339,19 +305,6 @@ module Aws::DynamoDB
 
     # Represents the auto scaling policy to be modified.
     #
-    # @note When making an API call, you may pass AutoScalingPolicyUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         policy_name: "AutoScalingPolicyName",
-    #         target_tracking_scaling_policy_configuration: { # required
-    #           disable_scale_in: false,
-    #           scale_in_cooldown: 1,
-    #           scale_out_cooldown: 1,
-    #           target_value: 1.0, # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] policy_name
     #   The name of the scaling policy.
     #   @return [String]
@@ -409,25 +362,6 @@ module Aws::DynamoDB
 
     # Represents the auto scaling settings to be modified for a global table
     # or global secondary index.
-    #
-    # @note When making an API call, you may pass AutoScalingSettingsUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         minimum_units: 1,
-    #         maximum_units: 1,
-    #         auto_scaling_disabled: false,
-    #         auto_scaling_role_arn: "AutoScalingRoleArn",
-    #         scaling_policy_update: {
-    #           policy_name: "AutoScalingPolicyName",
-    #           target_tracking_scaling_policy_configuration: { # required
-    #             disable_scale_in: false,
-    #             scale_in_cooldown: 1,
-    #             scale_out_cooldown: 1,
-    #             target_value: 1.0, # required
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] minimum_units
     #   The minimum capacity units that a global table or global secondary
@@ -513,16 +447,6 @@ module Aws::DynamoDB
 
     # Represents the settings of a target tracking scaling policy that will
     # be modified.
-    #
-    # @note When making an API call, you may pass AutoScalingTargetTrackingScalingPolicyConfigurationUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         disable_scale_in: false,
-    #         scale_in_cooldown: 1,
-    #         scale_out_cooldown: 1,
-    #         target_value: 1.0, # required
-    #       }
     #
     # @!attribute [rw] disable_scale_in
     #   Indicates whether scale in by the target tracking policy is
@@ -757,20 +681,6 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchExecuteStatementInput
-    #   data as a hash:
-    #
-    #       {
-    #         statements: [ # required
-    #           {
-    #             statement: "PartiQLStatement", # required
-    #             parameters: ["value"], # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #             consistent_read: false,
-    #           },
-    #         ],
-    #         return_consumed_capacity: "INDEXES", # accepts INDEXES, TOTAL, NONE
-    #       }
-    #
     # @!attribute [rw] statements
     #   The list of PartiQL statements representing the batch to run.
     #   @return [Array<Types::BatchStatementRequest>]
@@ -823,28 +733,6 @@ module Aws::DynamoDB
     end
 
     # Represents the input of a `BatchGetItem` operation.
-    #
-    # @note When making an API call, you may pass BatchGetItemInput
-    #   data as a hash:
-    #
-    #       {
-    #         request_items: { # required
-    #           "TableName" => {
-    #             keys: [ # required
-    #               {
-    #                 "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #               },
-    #             ],
-    #             attributes_to_get: ["AttributeName"],
-    #             consistent_read: false,
-    #             projection_expression: "ProjectionExpression",
-    #             expression_attribute_names: {
-    #               "ExpressionAttributeNameVariable" => "AttributeName",
-    #             },
-    #           },
-    #         },
-    #         return_consumed_capacity: "INDEXES", # accepts INDEXES, TOTAL, NONE
-    #       }
     #
     # @!attribute [rw] request_items
     #   A map of one or more table names and, for each table, a map that
@@ -1040,15 +928,6 @@ module Aws::DynamoDB
 
     # A PartiQL batch statement request.
     #
-    # @note When making an API call, you may pass BatchStatementRequest
-    #   data as a hash:
-    #
-    #       {
-    #         statement: "PartiQLStatement", # required
-    #         parameters: ["value"], # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #         consistent_read: false,
-    #       }
-    #
     # @!attribute [rw] statement
     #   A valid PartiQL statement.
     #   @return [String]
@@ -1097,30 +976,6 @@ module Aws::DynamoDB
     end
 
     # Represents the input of a `BatchWriteItem` operation.
-    #
-    # @note When making an API call, you may pass BatchWriteItemInput
-    #   data as a hash:
-    #
-    #       {
-    #         request_items: { # required
-    #           "TableName" => [
-    #             {
-    #               put_request: {
-    #                 item: { # required
-    #                   "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #                 },
-    #               },
-    #               delete_request: {
-    #                 key: { # required
-    #                   "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #                 },
-    #               },
-    #             },
-    #           ],
-    #         },
-    #         return_consumed_capacity: "INDEXES", # accepts INDEXES, TOTAL, NONE
-    #         return_item_collection_metrics: "SIZE", # accepts SIZE, NONE
-    #       }
     #
     # @!attribute [rw] request_items
     #   A map of one or more table names and, for each table, a list of
@@ -1389,14 +1244,6 @@ module Aws::DynamoDB
     # * For a `Scan` operation, `Condition` is used in a `ScanFilter`, which
     #   evaluates the scan results and returns only the desired values.
     #
-    # @note When making an API call, you may pass Condition
-    #   data as a hash:
-    #
-    #       {
-    #         attribute_value_list: ["value"], # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #         comparison_operator: "EQ", # required, accepts EQ, NE, IN, LE, LT, GE, GT, BETWEEN, NOT_NULL, NULL, CONTAINS, NOT_CONTAINS, BEGINS_WITH
-    #       }
-    #
     # @!attribute [rw] attribute_value_list
     #   One or more values to evaluate against the supplied attribute. The
     #   number of values in the list depends on the `ComparisonOperator`
@@ -1604,24 +1451,6 @@ module Aws::DynamoDB
     # Represents a request to perform a check that an item exists or to
     # check the condition of specific attributes of the item.
     #
-    # @note When making an API call, you may pass ConditionCheck
-    #   data as a hash:
-    #
-    #       {
-    #         key: { # required
-    #           "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #         },
-    #         table_name: "TableName", # required
-    #         condition_expression: "ConditionExpression", # required
-    #         expression_attribute_names: {
-    #           "ExpressionAttributeNameVariable" => "AttributeName",
-    #         },
-    #         expression_attribute_values: {
-    #           "ExpressionAttributeValueVariable" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #         },
-    #         return_values_on_condition_check_failure: "ALL_OLD", # accepts ALL_OLD, NONE
-    #       }
-    #
     # @!attribute [rw] key
     #   The primary key of the item to be checked. Each element consists of
     #   an attribute name and a value for that attribute.
@@ -1795,14 +1624,6 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateBackupInput
-    #   data as a hash:
-    #
-    #       {
-    #         table_name: "TableName", # required
-    #         backup_name: "BackupName", # required
-    #       }
-    #
     # @!attribute [rw] table_name
     #   The name of the table.
     #   @return [String]
@@ -1834,27 +1655,6 @@ module Aws::DynamoDB
 
     # Represents a new global secondary index to be added to an existing
     # table.
-    #
-    # @note When making an API call, you may pass CreateGlobalSecondaryIndexAction
-    #   data as a hash:
-    #
-    #       {
-    #         index_name: "IndexName", # required
-    #         key_schema: [ # required
-    #           {
-    #             attribute_name: "KeySchemaAttributeName", # required
-    #             key_type: "HASH", # required, accepts HASH, RANGE
-    #           },
-    #         ],
-    #         projection: { # required
-    #           projection_type: "ALL", # accepts ALL, KEYS_ONLY, INCLUDE
-    #           non_key_attributes: ["NonKeyAttributeName"],
-    #         },
-    #         provisioned_throughput: {
-    #           read_capacity_units: 1, # required
-    #           write_capacity_units: 1, # required
-    #         },
-    #       }
     #
     # @!attribute [rw] index_name
     #   The name of the global secondary index to be created.
@@ -1894,18 +1694,6 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateGlobalTableInput
-    #   data as a hash:
-    #
-    #       {
-    #         global_table_name: "TableName", # required
-    #         replication_group: [ # required
-    #           {
-    #             region_name: "RegionName",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] global_table_name
     #   The global table name.
     #   @return [String]
@@ -1937,13 +1725,6 @@ module Aws::DynamoDB
 
     # Represents a replica to be added.
     #
-    # @note When making an API call, you may pass CreateReplicaAction
-    #   data as a hash:
-    #
-    #       {
-    #         region_name: "RegionName", # required
-    #       }
-    #
     # @!attribute [rw] region_name
     #   The Region of the replica to be added.
     #   @return [String]
@@ -1957,26 +1738,6 @@ module Aws::DynamoDB
     end
 
     # Represents a replica to be created.
-    #
-    # @note When making an API call, you may pass CreateReplicationGroupMemberAction
-    #   data as a hash:
-    #
-    #       {
-    #         region_name: "RegionName", # required
-    #         kms_master_key_id: "KMSMasterKeyId",
-    #         provisioned_throughput_override: {
-    #           read_capacity_units: 1,
-    #         },
-    #         global_secondary_indexes: [
-    #           {
-    #             index_name: "IndexName", # required
-    #             provisioned_throughput_override: {
-    #               read_capacity_units: 1,
-    #             },
-    #           },
-    #         ],
-    #         table_class_override: "STANDARD", # accepts STANDARD, STANDARD_INFREQUENT_ACCESS
-    #       }
     #
     # @!attribute [rw] region_name
     #   The Region where the new replica will be created.
@@ -2017,80 +1778,6 @@ module Aws::DynamoDB
     end
 
     # Represents the input of a `CreateTable` operation.
-    #
-    # @note When making an API call, you may pass CreateTableInput
-    #   data as a hash:
-    #
-    #       {
-    #         attribute_definitions: [ # required
-    #           {
-    #             attribute_name: "KeySchemaAttributeName", # required
-    #             attribute_type: "S", # required, accepts S, N, B
-    #           },
-    #         ],
-    #         table_name: "TableName", # required
-    #         key_schema: [ # required
-    #           {
-    #             attribute_name: "KeySchemaAttributeName", # required
-    #             key_type: "HASH", # required, accepts HASH, RANGE
-    #           },
-    #         ],
-    #         local_secondary_indexes: [
-    #           {
-    #             index_name: "IndexName", # required
-    #             key_schema: [ # required
-    #               {
-    #                 attribute_name: "KeySchemaAttributeName", # required
-    #                 key_type: "HASH", # required, accepts HASH, RANGE
-    #               },
-    #             ],
-    #             projection: { # required
-    #               projection_type: "ALL", # accepts ALL, KEYS_ONLY, INCLUDE
-    #               non_key_attributes: ["NonKeyAttributeName"],
-    #             },
-    #           },
-    #         ],
-    #         global_secondary_indexes: [
-    #           {
-    #             index_name: "IndexName", # required
-    #             key_schema: [ # required
-    #               {
-    #                 attribute_name: "KeySchemaAttributeName", # required
-    #                 key_type: "HASH", # required, accepts HASH, RANGE
-    #               },
-    #             ],
-    #             projection: { # required
-    #               projection_type: "ALL", # accepts ALL, KEYS_ONLY, INCLUDE
-    #               non_key_attributes: ["NonKeyAttributeName"],
-    #             },
-    #             provisioned_throughput: {
-    #               read_capacity_units: 1, # required
-    #               write_capacity_units: 1, # required
-    #             },
-    #           },
-    #         ],
-    #         billing_mode: "PROVISIONED", # accepts PROVISIONED, PAY_PER_REQUEST
-    #         provisioned_throughput: {
-    #           read_capacity_units: 1, # required
-    #           write_capacity_units: 1, # required
-    #         },
-    #         stream_specification: {
-    #           stream_enabled: false, # required
-    #           stream_view_type: "NEW_IMAGE", # accepts NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES, KEYS_ONLY
-    #         },
-    #         sse_specification: {
-    #           enabled: false,
-    #           sse_type: "AES256", # accepts AES256, KMS
-    #           kms_master_key_id: "KMSMasterKeyId",
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKeyString", # required
-    #             value: "TagValueString", # required
-    #           },
-    #         ],
-    #         table_class: "STANDARD", # accepts STANDARD, STANDARD_INFREQUENT_ACCESS
-    #       }
     #
     # @!attribute [rw] attribute_definitions
     #   An array of attributes that describe the key schema for the table
@@ -2344,14 +2031,6 @@ module Aws::DynamoDB
 
     # Processing options for the CSV file being imported.
     #
-    # @note When making an API call, you may pass CsvOptions
-    #   data as a hash:
-    #
-    #       {
-    #         delimiter: "CsvDelimiter",
-    #         header_list: ["CsvHeader"],
-    #       }
-    #
     # @!attribute [rw] delimiter
     #   The delimiter used for separating items in the CSV file being
     #   imported.
@@ -2375,24 +2054,6 @@ module Aws::DynamoDB
     end
 
     # Represents a request to perform a `DeleteItem` operation.
-    #
-    # @note When making an API call, you may pass Delete
-    #   data as a hash:
-    #
-    #       {
-    #         key: { # required
-    #           "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #         },
-    #         table_name: "TableName", # required
-    #         condition_expression: "ConditionExpression",
-    #         expression_attribute_names: {
-    #           "ExpressionAttributeNameVariable" => "AttributeName",
-    #         },
-    #         expression_attribute_values: {
-    #           "ExpressionAttributeValueVariable" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #         },
-    #         return_values_on_condition_check_failure: "ALL_OLD", # accepts ALL_OLD, NONE
-    #       }
     #
     # @!attribute [rw] key
     #   The primary key of the item to be deleted. Each element consists of
@@ -2437,13 +2098,6 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteBackupInput
-    #   data as a hash:
-    #
-    #       {
-    #         backup_arn: "BackupArn", # required
-    #       }
-    #
     # @!attribute [rw] backup_arn
     #   The ARN associated with the backup.
     #   @return [String]
@@ -2471,13 +2125,6 @@ module Aws::DynamoDB
     # Represents a global secondary index to be deleted from an existing
     # table.
     #
-    # @note When making an API call, you may pass DeleteGlobalSecondaryIndexAction
-    #   data as a hash:
-    #
-    #       {
-    #         index_name: "IndexName", # required
-    #       }
-    #
     # @!attribute [rw] index_name
     #   The name of the global secondary index to be deleted.
     #   @return [String]
@@ -2491,35 +2138,6 @@ module Aws::DynamoDB
     end
 
     # Represents the input of a `DeleteItem` operation.
-    #
-    # @note When making an API call, you may pass DeleteItemInput
-    #   data as a hash:
-    #
-    #       {
-    #         table_name: "TableName", # required
-    #         key: { # required
-    #           "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #         },
-    #         expected: {
-    #           "AttributeName" => {
-    #             value: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #             exists: false,
-    #             comparison_operator: "EQ", # accepts EQ, NE, IN, LE, LT, GE, GT, BETWEEN, NOT_NULL, NULL, CONTAINS, NOT_CONTAINS, BEGINS_WITH
-    #             attribute_value_list: ["value"], # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #           },
-    #         },
-    #         conditional_operator: "AND", # accepts AND, OR
-    #         return_values: "NONE", # accepts NONE, ALL_OLD, UPDATED_OLD, ALL_NEW, UPDATED_NEW
-    #         return_consumed_capacity: "INDEXES", # accepts INDEXES, TOTAL, NONE
-    #         return_item_collection_metrics: "SIZE", # accepts SIZE, NONE
-    #         condition_expression: "ConditionExpression",
-    #         expression_attribute_names: {
-    #           "ExpressionAttributeNameVariable" => "AttributeName",
-    #         },
-    #         expression_attribute_values: {
-    #           "ExpressionAttributeValueVariable" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #         },
-    #       }
     #
     # @!attribute [rw] table_name
     #   The name of the table from which to delete the item.
@@ -2786,13 +2404,6 @@ module Aws::DynamoDB
 
     # Represents a replica to be removed.
     #
-    # @note When making an API call, you may pass DeleteReplicaAction
-    #   data as a hash:
-    #
-    #       {
-    #         region_name: "RegionName", # required
-    #       }
-    #
     # @!attribute [rw] region_name
     #   The Region of the replica to be removed.
     #   @return [String]
@@ -2807,13 +2418,6 @@ module Aws::DynamoDB
 
     # Represents a replica to be deleted.
     #
-    # @note When making an API call, you may pass DeleteReplicationGroupMemberAction
-    #   data as a hash:
-    #
-    #       {
-    #         region_name: "RegionName", # required
-    #       }
-    #
     # @!attribute [rw] region_name
     #   The Region where the replica exists.
     #   @return [String]
@@ -2827,15 +2431,6 @@ module Aws::DynamoDB
     end
 
     # Represents a request to perform a `DeleteItem` operation on an item.
-    #
-    # @note When making an API call, you may pass DeleteRequest
-    #   data as a hash:
-    #
-    #       {
-    #         key: { # required
-    #           "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #         },
-    #       }
     #
     # @!attribute [rw] key
     #   A map of attribute name to attribute values, representing the
@@ -2853,13 +2448,6 @@ module Aws::DynamoDB
     end
 
     # Represents the input of a `DeleteTable` operation.
-    #
-    # @note When making an API call, you may pass DeleteTableInput
-    #   data as a hash:
-    #
-    #       {
-    #         table_name: "TableName", # required
-    #       }
     #
     # @!attribute [rw] table_name
     #   The name of the table to delete.
@@ -2887,13 +2475,6 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeBackupInput
-    #   data as a hash:
-    #
-    #       {
-    #         backup_arn: "BackupArn", # required
-    #       }
-    #
     # @!attribute [rw] backup_arn
     #   The Amazon Resource Name (ARN) associated with the backup.
     #   @return [String]
@@ -2918,13 +2499,6 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeContinuousBackupsInput
-    #   data as a hash:
-    #
-    #       {
-    #         table_name: "TableName", # required
-    #       }
-    #
     # @!attribute [rw] table_name
     #   Name of the table for which the customer wants to check the
     #   continuous backups and point in time recovery settings.
@@ -2951,14 +2525,6 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeContributorInsightsInput
-    #   data as a hash:
-    #
-    #       {
-    #         table_name: "TableName", # required
-    #         index_name: "IndexName",
-    #       }
-    #
     # @!attribute [rw] table_name
     #   The name of the table to describe.
     #   @return [String]
@@ -3029,8 +2595,6 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeEndpointsRequest AWS API Documentation
     #
     class DescribeEndpointsRequest < Aws::EmptyStructure; end
@@ -3047,13 +2611,6 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeExportInput
-    #   data as a hash:
-    #
-    #       {
-    #         export_arn: "ExportArn", # required
-    #       }
-    #
     # @!attribute [rw] export_arn
     #   The Amazon Resource Name (ARN) associated with the export.
     #   @return [String]
@@ -3078,13 +2635,6 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeGlobalTableInput
-    #   data as a hash:
-    #
-    #       {
-    #         global_table_name: "TableName", # required
-    #       }
-    #
     # @!attribute [rw] global_table_name
     #   The name of the global table.
     #   @return [String]
@@ -3109,13 +2659,6 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeGlobalTableSettingsInput
-    #   data as a hash:
-    #
-    #       {
-    #         global_table_name: "TableName", # required
-    #       }
-    #
     # @!attribute [rw] global_table_name
     #   The name of the global table to describe.
     #   @return [String]
@@ -3145,13 +2688,6 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeImportInput
-    #   data as a hash:
-    #
-    #       {
-    #         import_arn: "ImportArn", # required
-    #       }
-    #
     # @!attribute [rw] import_arn
     #   The Amazon Resource Name (ARN) associated with the table you're
     #   importing to.
@@ -3180,13 +2716,6 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeKinesisStreamingDestinationInput
-    #   data as a hash:
-    #
-    #       {
-    #         table_name: "TableName", # required
-    #       }
-    #
     # @!attribute [rw] table_name
     #   The name of the table being described.
     #   @return [String]
@@ -3217,8 +2746,6 @@ module Aws::DynamoDB
     end
 
     # Represents the input of a `DescribeLimits` operation. Has no content.
-    #
-    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeLimitsInput AWS API Documentation
     #
@@ -3263,13 +2790,6 @@ module Aws::DynamoDB
 
     # Represents the input of a `DescribeTable` operation.
     #
-    # @note When making an API call, you may pass DescribeTableInput
-    #   data as a hash:
-    #
-    #       {
-    #         table_name: "TableName", # required
-    #       }
-    #
     # @!attribute [rw] table_name
     #   The name of the table to describe.
     #   @return [String]
@@ -3296,13 +2816,6 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeTableReplicaAutoScalingInput
-    #   data as a hash:
-    #
-    #       {
-    #         table_name: "TableName", # required
-    #       }
-    #
     # @!attribute [rw] table_name
     #   The name of the table.
     #   @return [String]
@@ -3327,13 +2840,6 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeTimeToLiveInput
-    #   data as a hash:
-    #
-    #       {
-    #         table_name: "TableName", # required
-    #       }
-    #
     # @!attribute [rw] table_name
     #   The name of the table to be described.
     #   @return [String]
@@ -3390,18 +2896,6 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ExecuteStatementInput
-    #   data as a hash:
-    #
-    #       {
-    #         statement: "PartiQLStatement", # required
-    #         parameters: ["value"], # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #         consistent_read: false,
-    #         next_token: "PartiQLNextToken",
-    #         return_consumed_capacity: "INDEXES", # accepts INDEXES, TOTAL, NONE
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] statement
     #   The PartiQL statement representing the operation to run.
     #   @return [String]
@@ -3515,20 +3009,6 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ExecuteTransactionInput
-    #   data as a hash:
-    #
-    #       {
-    #         transact_statements: [ # required
-    #           {
-    #             statement: "PartiQLStatement", # required
-    #             parameters: ["value"], # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #           },
-    #         ],
-    #         client_request_token: "ClientRequestToken",
-    #         return_consumed_capacity: "INDEXES", # accepts INDEXES, TOTAL, NONE
-    #       }
-    #
     # @!attribute [rw] transact_statements
     #   The list of PartiQL statements representing the transaction to run.
     #   @return [Array<Types::ParameterizedStatement>]
@@ -3602,16 +3082,6 @@ module Aws::DynamoDB
     # `Value` and `Exists` are incompatible with `AttributeValueList` and
     # `ComparisonOperator`. Note that if you use both sets of parameters at
     # once, DynamoDB will return a `ValidationException` exception.
-    #
-    # @note When making an API call, you may pass ExpectedAttributeValue
-    #   data as a hash:
-    #
-    #       {
-    #         value: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #         exists: false,
-    #         comparison_operator: "EQ", # accepts EQ, NE, IN, LE, LT, GE, GT, BETWEEN, NOT_NULL, NULL, CONTAINS, NOT_CONTAINS, BEGINS_WITH
-    #         attribute_value_list: ["value"], # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #       }
     #
     # @!attribute [rw] value
     #   Represents the data for the expected attribute.
@@ -4021,21 +3491,6 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ExportTableToPointInTimeInput
-    #   data as a hash:
-    #
-    #       {
-    #         table_arn: "TableArn", # required
-    #         export_time: Time.now,
-    #         client_token: "ClientToken",
-    #         s3_bucket: "S3Bucket", # required
-    #         s3_bucket_owner: "S3BucketOwner",
-    #         s3_prefix: "S3Prefix",
-    #         s3_sse_algorithm: "AES256", # accepts AES256, KMS
-    #         s3_sse_kms_key_id: "S3SseKmsKeyId",
-    #         export_format: "DYNAMODB_JSON", # accepts DYNAMODB_JSON, ION
-    #       }
-    #
     # @!attribute [rw] table_arn
     #   The Amazon Resource Name (ARN) associated with the table to export.
     #   @return [String]
@@ -4148,20 +3603,6 @@ module Aws::DynamoDB
     # Specifies an item and related attribute values to retrieve in a
     # `TransactGetItem` object.
     #
-    # @note When making an API call, you may pass Get
-    #   data as a hash:
-    #
-    #       {
-    #         key: { # required
-    #           "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #         },
-    #         table_name: "TableName", # required
-    #         projection_expression: "ProjectionExpression",
-    #         expression_attribute_names: {
-    #           "ExpressionAttributeNameVariable" => "AttributeName",
-    #         },
-    #       }
-    #
     # @!attribute [rw] key
     #   A map of attribute names to `AttributeValue` objects that specifies
     #   the primary key of the item to retrieve.
@@ -4197,23 +3638,6 @@ module Aws::DynamoDB
     end
 
     # Represents the input of a `GetItem` operation.
-    #
-    # @note When making an API call, you may pass GetItemInput
-    #   data as a hash:
-    #
-    #       {
-    #         table_name: "TableName", # required
-    #         key: { # required
-    #           "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #         },
-    #         attributes_to_get: ["AttributeName"],
-    #         consistent_read: false,
-    #         return_consumed_capacity: "INDEXES", # accepts INDEXES, TOTAL, NONE
-    #         projection_expression: "ProjectionExpression",
-    #         expression_attribute_names: {
-    #           "ExpressionAttributeNameVariable" => "AttributeName",
-    #         },
-    #       }
     #
     # @!attribute [rw] table_name
     #   The name of the table containing the requested item.
@@ -4382,27 +3806,6 @@ module Aws::DynamoDB
 
     # Represents the properties of a global secondary index.
     #
-    # @note When making an API call, you may pass GlobalSecondaryIndex
-    #   data as a hash:
-    #
-    #       {
-    #         index_name: "IndexName", # required
-    #         key_schema: [ # required
-    #           {
-    #             attribute_name: "KeySchemaAttributeName", # required
-    #             key_type: "HASH", # required, accepts HASH, RANGE
-    #           },
-    #         ],
-    #         projection: { # required
-    #           projection_type: "ALL", # accepts ALL, KEYS_ONLY, INCLUDE
-    #           non_key_attributes: ["NonKeyAttributeName"],
-    #         },
-    #         provisioned_throughput: {
-    #           read_capacity_units: 1, # required
-    #           write_capacity_units: 1, # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] index_name
     #   The name of the global secondary index. The name must be unique
     #   among all other indexes on this table.
@@ -4462,28 +3865,6 @@ module Aws::DynamoDB
 
     # Represents the auto scaling settings of a global secondary index for a
     # global table that will be modified.
-    #
-    # @note When making an API call, you may pass GlobalSecondaryIndexAutoScalingUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         index_name: "IndexName",
-    #         provisioned_write_capacity_auto_scaling_update: {
-    #           minimum_units: 1,
-    #           maximum_units: 1,
-    #           auto_scaling_disabled: false,
-    #           auto_scaling_role_arn: "AutoScalingRoleArn",
-    #           scaling_policy_update: {
-    #             policy_name: "AutoScalingPolicyName",
-    #             target_tracking_scaling_policy_configuration: { # required
-    #               disable_scale_in: false,
-    #               scale_in_cooldown: 1,
-    #               scale_out_cooldown: 1,
-    #               target_value: 1.0, # required
-    #             },
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] index_name
     #   The name of the global secondary index.
@@ -4677,39 +4058,6 @@ module Aws::DynamoDB
     # * An existing global secondary index to be removed from an existing
     #   table.
     #
-    # @note When making an API call, you may pass GlobalSecondaryIndexUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         update: {
-    #           index_name: "IndexName", # required
-    #           provisioned_throughput: { # required
-    #             read_capacity_units: 1, # required
-    #             write_capacity_units: 1, # required
-    #           },
-    #         },
-    #         create: {
-    #           index_name: "IndexName", # required
-    #           key_schema: [ # required
-    #             {
-    #               attribute_name: "KeySchemaAttributeName", # required
-    #               key_type: "HASH", # required, accepts HASH, RANGE
-    #             },
-    #           ],
-    #           projection: { # required
-    #             projection_type: "ALL", # accepts ALL, KEYS_ONLY, INCLUDE
-    #             non_key_attributes: ["NonKeyAttributeName"],
-    #           },
-    #           provisioned_throughput: {
-    #             read_capacity_units: 1, # required
-    #             write_capacity_units: 1, # required
-    #           },
-    #         },
-    #         delete: {
-    #           index_name: "IndexName", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] update
     #   The name of an existing global secondary index, along with new
     #   provisioned throughput settings to be applied to that index.
@@ -4820,29 +4168,6 @@ module Aws::DynamoDB
 
     # Represents the settings of a global secondary index for a global table
     # that will be modified.
-    #
-    # @note When making an API call, you may pass GlobalTableGlobalSecondaryIndexSettingsUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         index_name: "IndexName", # required
-    #         provisioned_write_capacity_units: 1,
-    #         provisioned_write_capacity_auto_scaling_settings_update: {
-    #           minimum_units: 1,
-    #           maximum_units: 1,
-    #           auto_scaling_disabled: false,
-    #           auto_scaling_role_arn: "AutoScalingRoleArn",
-    #           scaling_policy_update: {
-    #             policy_name: "AutoScalingPolicyName",
-    #             target_tracking_scaling_policy_configuration: { # required
-    #               disable_scale_in: false,
-    #               scale_in_cooldown: 1,
-    #               scale_out_cooldown: 1,
-    #               target_value: 1.0, # required
-    #             },
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] index_name
     #   The name of the global secondary index. The name must be unique
@@ -5095,70 +4420,6 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ImportTableInput
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         s3_bucket_source: { # required
-    #           s3_bucket_owner: "S3BucketOwner",
-    #           s3_bucket: "S3Bucket", # required
-    #           s3_key_prefix: "S3Prefix",
-    #         },
-    #         input_format: "DYNAMODB_JSON", # required, accepts DYNAMODB_JSON, ION, CSV
-    #         input_format_options: {
-    #           csv: {
-    #             delimiter: "CsvDelimiter",
-    #             header_list: ["CsvHeader"],
-    #           },
-    #         },
-    #         input_compression_type: "GZIP", # accepts GZIP, ZSTD, NONE
-    #         table_creation_parameters: { # required
-    #           table_name: "TableName", # required
-    #           attribute_definitions: [ # required
-    #             {
-    #               attribute_name: "KeySchemaAttributeName", # required
-    #               attribute_type: "S", # required, accepts S, N, B
-    #             },
-    #           ],
-    #           key_schema: [ # required
-    #             {
-    #               attribute_name: "KeySchemaAttributeName", # required
-    #               key_type: "HASH", # required, accepts HASH, RANGE
-    #             },
-    #           ],
-    #           billing_mode: "PROVISIONED", # accepts PROVISIONED, PAY_PER_REQUEST
-    #           provisioned_throughput: {
-    #             read_capacity_units: 1, # required
-    #             write_capacity_units: 1, # required
-    #           },
-    #           sse_specification: {
-    #             enabled: false,
-    #             sse_type: "AES256", # accepts AES256, KMS
-    #             kms_master_key_id: "KMSMasterKeyId",
-    #           },
-    #           global_secondary_indexes: [
-    #             {
-    #               index_name: "IndexName", # required
-    #               key_schema: [ # required
-    #                 {
-    #                   attribute_name: "KeySchemaAttributeName", # required
-    #                   key_type: "HASH", # required, accepts HASH, RANGE
-    #                 },
-    #               ],
-    #               projection: { # required
-    #                 projection_type: "ALL", # accepts ALL, KEYS_ONLY, INCLUDE
-    #                 non_key_attributes: ["NonKeyAttributeName"],
-    #               },
-    #               provisioned_throughput: {
-    #                 read_capacity_units: 1, # required
-    #                 write_capacity_units: 1, # required
-    #               },
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Providing a `ClientToken` makes the call to `ImportTableInput`
     #   idempotent, meaning that multiple identical calls have the same
@@ -5243,16 +4504,6 @@ module Aws::DynamoDB
 
     # The format options for the data that was imported into the target
     # table. There is one value, CsvOption.
-    #
-    # @note When making an API call, you may pass InputFormatOptions
-    #   data as a hash:
-    #
-    #       {
-    #         csv: {
-    #           delimiter: "CsvDelimiter",
-    #           header_list: ["CsvHeader"],
-    #         },
-    #       }
     #
     # @!attribute [rw] csv
     #   The options for imported source files in CSV format. The values are
@@ -5386,14 +4637,6 @@ module Aws::DynamoDB
     # nested attribute). The data type must be one of String, Number, or
     # Binary. The attribute cannot be nested within a List or a Map.
     #
-    # @note When making an API call, you may pass KeySchemaElement
-    #   data as a hash:
-    #
-    #       {
-    #         attribute_name: "KeySchemaAttributeName", # required
-    #         key_type: "HASH", # required, accepts HASH, RANGE
-    #       }
-    #
     # @!attribute [rw] attribute_name
     #   The name of a key attribute.
     #   @return [String]
@@ -5434,23 +4677,6 @@ module Aws::DynamoDB
     # For example, with a simple primary key, you only need to provide the
     # partition key. For a composite primary key, you must provide *both*
     # the partition key and the sort key.
-    #
-    # @note When making an API call, you may pass KeysAndAttributes
-    #   data as a hash:
-    #
-    #       {
-    #         keys: [ # required
-    #           {
-    #             "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #           },
-    #         ],
-    #         attributes_to_get: ["AttributeName"],
-    #         consistent_read: false,
-    #         projection_expression: "ProjectionExpression",
-    #         expression_attribute_names: {
-    #           "ExpressionAttributeNameVariable" => "AttributeName",
-    #         },
-    #       }
     #
     # @!attribute [rw] keys
     #   The primary key attribute values that define the items and the
@@ -5580,14 +4806,6 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass KinesisStreamingDestinationInput
-    #   data as a hash:
-    #
-    #       {
-    #         table_name: "TableName", # required
-    #         stream_arn: "StreamArn", # required
-    #       }
-    #
     # @!attribute [rw] table_name
     #   The name of the DynamoDB table.
     #   @return [String]
@@ -5657,18 +4875,6 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListBackupsInput
-    #   data as a hash:
-    #
-    #       {
-    #         table_name: "TableName",
-    #         limit: 1,
-    #         time_range_lower_bound: Time.now,
-    #         time_range_upper_bound: Time.now,
-    #         exclusive_start_backup_arn: "BackupArn",
-    #         backup_type: "USER", # accepts USER, SYSTEM, AWS_BACKUP, ALL
-    #       }
-    #
     # @!attribute [rw] table_name
     #   The backups from the table specified by `TableName` are listed.
     #   @return [String]
@@ -5749,15 +4955,6 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListContributorInsightsInput
-    #   data as a hash:
-    #
-    #       {
-    #         table_name: "TableName",
-    #         next_token: "NextTokenString",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] table_name
     #   The name of the table.
     #   @return [String]
@@ -5797,15 +4994,6 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListExportsInput
-    #   data as a hash:
-    #
-    #       {
-    #         table_arn: "TableArn",
-    #         max_results: 1,
-    #         next_token: "ExportNextToken",
-    #       }
-    #
     # @!attribute [rw] table_arn
     #   The Amazon Resource Name (ARN) associated with the exported table.
     #   @return [String]
@@ -5849,15 +5037,6 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListGlobalTablesInput
-    #   data as a hash:
-    #
-    #       {
-    #         exclusive_start_global_table_name: "TableName",
-    #         limit: 1,
-    #         region_name: "RegionName",
-    #       }
-    #
     # @!attribute [rw] exclusive_start_global_table_name
     #   The first global table name that this operation will evaluate.
     #   @return [String]
@@ -5904,15 +5083,6 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListImportsInput
-    #   data as a hash:
-    #
-    #       {
-    #         table_arn: "TableArn",
-    #         page_size: 1,
-    #         next_token: "ImportNextToken",
-    #       }
-    #
     # @!attribute [rw] table_arn
     #   The Amazon Resource Name (ARN) associated with the table that was
     #   imported to.
@@ -5958,14 +5128,6 @@ module Aws::DynamoDB
     end
 
     # Represents the input of a `ListTables` operation.
-    #
-    # @note When making an API call, you may pass ListTablesInput
-    #   data as a hash:
-    #
-    #       {
-    #         exclusive_start_table_name: "TableName",
-    #         limit: 1,
-    #       }
     #
     # @!attribute [rw] exclusive_start_table_name
     #   The first table name that this operation will evaluate. Use the
@@ -6017,14 +5179,6 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsOfResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArnString", # required
-    #         next_token: "NextTokenString",
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon DynamoDB resource with tags to be listed. This value is
     #   an Amazon Resource Name (ARN).
@@ -6065,23 +5219,6 @@ module Aws::DynamoDB
     end
 
     # Represents the properties of a local secondary index.
-    #
-    # @note When making an API call, you may pass LocalSecondaryIndex
-    #   data as a hash:
-    #
-    #       {
-    #         index_name: "IndexName", # required
-    #         key_schema: [ # required
-    #           {
-    #             attribute_name: "KeySchemaAttributeName", # required
-    #             key_type: "HASH", # required, accepts HASH, RANGE
-    #           },
-    #         ],
-    #         projection: { # required
-    #           projection_type: "ALL", # accepts ALL, KEYS_ONLY, INCLUDE
-    #           non_key_attributes: ["NonKeyAttributeName"],
-    #         },
-    #       }
     #
     # @!attribute [rw] index_name
     #   The name of the local secondary index. The name must be unique among
@@ -6236,14 +5373,6 @@ module Aws::DynamoDB
 
     # Represents a PartiQL statment that uses parameters.
     #
-    # @note When making an API call, you may pass ParameterizedStatement
-    #   data as a hash:
-    #
-    #       {
-    #         statement: "PartiQLStatement", # required
-    #         parameters: ["value"], # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #       }
-    #
     # @!attribute [rw] statement
     #   A PartiQL statment that uses parameters.
     #   @return [String]
@@ -6294,13 +5423,6 @@ module Aws::DynamoDB
 
     # Represents the settings used to enable point in time recovery.
     #
-    # @note When making an API call, you may pass PointInTimeRecoverySpecification
-    #   data as a hash:
-    #
-    #       {
-    #         point_in_time_recovery_enabled: false, # required
-    #       }
-    #
     # @!attribute [rw] point_in_time_recovery_enabled
     #   Indicates whether point in time recovery is enabled (true) or
     #   disabled (false) on the table.
@@ -6330,14 +5452,6 @@ module Aws::DynamoDB
     # Represents attributes that are copied (projected) from the table into
     # an index. These are in addition to the primary key attributes and
     # index key attributes, which are automatically projected.
-    #
-    # @note When making an API call, you may pass Projection
-    #   data as a hash:
-    #
-    #       {
-    #         projection_type: "ALL", # accepts ALL, KEYS_ONLY, INCLUDE
-    #         non_key_attributes: ["NonKeyAttributeName"],
-    #       }
     #
     # @!attribute [rw] projection_type
     #   The set of attributes that are projected into the index:
@@ -6382,14 +5496,6 @@ module Aws::DynamoDB
     #
     #
     # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html
-    #
-    # @note When making an API call, you may pass ProvisionedThroughput
-    #   data as a hash:
-    #
-    #       {
-    #         read_capacity_units: 1, # required
-    #         write_capacity_units: 1, # required
-    #       }
     #
     # @!attribute [rw] read_capacity_units
     #   The maximum number of strongly consistent reads consumed per second
@@ -6504,13 +5610,6 @@ module Aws::DynamoDB
     # Replica-specific provisioned throughput settings. If not specified,
     # uses the source table's provisioned throughput settings.
     #
-    # @note When making an API call, you may pass ProvisionedThroughputOverride
-    #   data as a hash:
-    #
-    #       {
-    #         read_capacity_units: 1,
-    #       }
-    #
     # @!attribute [rw] read_capacity_units
     #   Replica-specific read capacity units. If not specified, uses the
     #   source table's read capacity settings.
@@ -6525,24 +5624,6 @@ module Aws::DynamoDB
     end
 
     # Represents a request to perform a `PutItem` operation.
-    #
-    # @note When making an API call, you may pass Put
-    #   data as a hash:
-    #
-    #       {
-    #         item: { # required
-    #           "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #         },
-    #         table_name: "TableName", # required
-    #         condition_expression: "ConditionExpression",
-    #         expression_attribute_names: {
-    #           "ExpressionAttributeNameVariable" => "AttributeName",
-    #         },
-    #         expression_attribute_values: {
-    #           "ExpressionAttributeValueVariable" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #         },
-    #         return_values_on_condition_check_failure: "ALL_OLD", # accepts ALL_OLD, NONE
-    #       }
     #
     # @!attribute [rw] item
     #   A map of attribute name to attribute values, representing the
@@ -6592,35 +5673,6 @@ module Aws::DynamoDB
     end
 
     # Represents the input of a `PutItem` operation.
-    #
-    # @note When making an API call, you may pass PutItemInput
-    #   data as a hash:
-    #
-    #       {
-    #         table_name: "TableName", # required
-    #         item: { # required
-    #           "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #         },
-    #         expected: {
-    #           "AttributeName" => {
-    #             value: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #             exists: false,
-    #             comparison_operator: "EQ", # accepts EQ, NE, IN, LE, LT, GE, GT, BETWEEN, NOT_NULL, NULL, CONTAINS, NOT_CONTAINS, BEGINS_WITH
-    #             attribute_value_list: ["value"], # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #           },
-    #         },
-    #         return_values: "NONE", # accepts NONE, ALL_OLD, UPDATED_OLD, ALL_NEW, UPDATED_NEW
-    #         return_consumed_capacity: "INDEXES", # accepts INDEXES, TOTAL, NONE
-    #         return_item_collection_metrics: "SIZE", # accepts SIZE, NONE
-    #         conditional_operator: "AND", # accepts AND, OR
-    #         condition_expression: "ConditionExpression",
-    #         expression_attribute_names: {
-    #           "ExpressionAttributeNameVariable" => "AttributeName",
-    #         },
-    #         expression_attribute_values: {
-    #           "ExpressionAttributeValueVariable" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #         },
-    #       }
     #
     # @!attribute [rw] table_name
     #   The name of the table to contain the item.
@@ -6909,15 +5961,6 @@ module Aws::DynamoDB
 
     # Represents a request to perform a `PutItem` operation on an item.
     #
-    # @note When making an API call, you may pass PutRequest
-    #   data as a hash:
-    #
-    #       {
-    #         item: { # required
-    #           "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #         },
-    #       }
-    #
     # @!attribute [rw] item
     #   A map of attribute name to attribute values, representing the
     #   primary key of an item to be processed by `PutItem`. All of the
@@ -6936,45 +5979,6 @@ module Aws::DynamoDB
     end
 
     # Represents the input of a `Query` operation.
-    #
-    # @note When making an API call, you may pass QueryInput
-    #   data as a hash:
-    #
-    #       {
-    #         table_name: "TableName", # required
-    #         index_name: "IndexName",
-    #         select: "ALL_ATTRIBUTES", # accepts ALL_ATTRIBUTES, ALL_PROJECTED_ATTRIBUTES, SPECIFIC_ATTRIBUTES, COUNT
-    #         attributes_to_get: ["AttributeName"],
-    #         limit: 1,
-    #         consistent_read: false,
-    #         key_conditions: {
-    #           "AttributeName" => {
-    #             attribute_value_list: ["value"], # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #             comparison_operator: "EQ", # required, accepts EQ, NE, IN, LE, LT, GE, GT, BETWEEN, NOT_NULL, NULL, CONTAINS, NOT_CONTAINS, BEGINS_WITH
-    #           },
-    #         },
-    #         query_filter: {
-    #           "AttributeName" => {
-    #             attribute_value_list: ["value"], # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #             comparison_operator: "EQ", # required, accepts EQ, NE, IN, LE, LT, GE, GT, BETWEEN, NOT_NULL, NULL, CONTAINS, NOT_CONTAINS, BEGINS_WITH
-    #           },
-    #         },
-    #         conditional_operator: "AND", # accepts AND, OR
-    #         scan_index_forward: false,
-    #         exclusive_start_key: {
-    #           "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #         },
-    #         return_consumed_capacity: "INDEXES", # accepts INDEXES, TOTAL, NONE
-    #         projection_expression: "ProjectionExpression",
-    #         filter_expression: "ConditionExpression",
-    #         key_condition_expression: "KeyExpression",
-    #         expression_attribute_names: {
-    #           "ExpressionAttributeNameVariable" => "AttributeName",
-    #         },
-    #         expression_attribute_values: {
-    #           "ExpressionAttributeValueVariable" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #         },
-    #       }
     #
     # @!attribute [rw] table_name
     #   The name of the table containing the requested items.
@@ -7463,13 +6467,6 @@ module Aws::DynamoDB
 
     # Represents the properties of a replica.
     #
-    # @note When making an API call, you may pass Replica
-    #   data as a hash:
-    #
-    #       {
-    #         region_name: "RegionName",
-    #       }
-    #
     # @!attribute [rw] region_name
     #   The Region where the replica needs to be created.
     #   @return [String]
@@ -7541,48 +6538,6 @@ module Aws::DynamoDB
 
     # Represents the auto scaling settings of a replica that will be
     # modified.
-    #
-    # @note When making an API call, you may pass ReplicaAutoScalingUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         region_name: "RegionName", # required
-    #         replica_global_secondary_index_updates: [
-    #           {
-    #             index_name: "IndexName",
-    #             provisioned_read_capacity_auto_scaling_update: {
-    #               minimum_units: 1,
-    #               maximum_units: 1,
-    #               auto_scaling_disabled: false,
-    #               auto_scaling_role_arn: "AutoScalingRoleArn",
-    #               scaling_policy_update: {
-    #                 policy_name: "AutoScalingPolicyName",
-    #                 target_tracking_scaling_policy_configuration: { # required
-    #                   disable_scale_in: false,
-    #                   scale_in_cooldown: 1,
-    #                   scale_out_cooldown: 1,
-    #                   target_value: 1.0, # required
-    #                 },
-    #               },
-    #             },
-    #           },
-    #         ],
-    #         replica_provisioned_read_capacity_auto_scaling_update: {
-    #           minimum_units: 1,
-    #           maximum_units: 1,
-    #           auto_scaling_disabled: false,
-    #           auto_scaling_role_arn: "AutoScalingRoleArn",
-    #           scaling_policy_update: {
-    #             policy_name: "AutoScalingPolicyName",
-    #             target_tracking_scaling_policy_configuration: { # required
-    #               disable_scale_in: false,
-    #               scale_in_cooldown: 1,
-    #               scale_out_cooldown: 1,
-    #               target_value: 1.0, # required
-    #             },
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] region_name
     #   The Region where the replica exists.
@@ -7696,16 +6651,6 @@ module Aws::DynamoDB
 
     # Represents the properties of a replica global secondary index.
     #
-    # @note When making an API call, you may pass ReplicaGlobalSecondaryIndex
-    #   data as a hash:
-    #
-    #       {
-    #         index_name: "IndexName", # required
-    #         provisioned_throughput_override: {
-    #           read_capacity_units: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] index_name
     #   The name of the global secondary index.
     #   @return [String]
@@ -7767,28 +6712,6 @@ module Aws::DynamoDB
 
     # Represents the auto scaling settings of a global secondary index for a
     # replica that will be modified.
-    #
-    # @note When making an API call, you may pass ReplicaGlobalSecondaryIndexAutoScalingUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         index_name: "IndexName",
-    #         provisioned_read_capacity_auto_scaling_update: {
-    #           minimum_units: 1,
-    #           maximum_units: 1,
-    #           auto_scaling_disabled: false,
-    #           auto_scaling_role_arn: "AutoScalingRoleArn",
-    #           scaling_policy_update: {
-    #             policy_name: "AutoScalingPolicyName",
-    #             target_tracking_scaling_policy_configuration: { # required
-    #               disable_scale_in: false,
-    #               scale_in_cooldown: 1,
-    #               scale_out_cooldown: 1,
-    #               target_value: 1.0, # required
-    #             },
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] index_name
     #   The name of the global secondary index.
@@ -7882,29 +6805,6 @@ module Aws::DynamoDB
 
     # Represents the settings of a global secondary index for a global table
     # that will be modified.
-    #
-    # @note When making an API call, you may pass ReplicaGlobalSecondaryIndexSettingsUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         index_name: "IndexName", # required
-    #         provisioned_read_capacity_units: 1,
-    #         provisioned_read_capacity_auto_scaling_settings_update: {
-    #           minimum_units: 1,
-    #           maximum_units: 1,
-    #           auto_scaling_disabled: false,
-    #           auto_scaling_role_arn: "AutoScalingRoleArn",
-    #           scaling_policy_update: {
-    #             policy_name: "AutoScalingPolicyName",
-    #             target_tracking_scaling_policy_configuration: { # required
-    #               disable_scale_in: false,
-    #               scale_in_cooldown: 1,
-    #               scale_out_cooldown: 1,
-    #               target_value: 1.0, # required
-    #             },
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] index_name
     #   The name of the global secondary index. The name must be unique
@@ -8025,51 +6925,6 @@ module Aws::DynamoDB
     # Represents the settings for a global table in a Region that will be
     # modified.
     #
-    # @note When making an API call, you may pass ReplicaSettingsUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         region_name: "RegionName", # required
-    #         replica_provisioned_read_capacity_units: 1,
-    #         replica_provisioned_read_capacity_auto_scaling_settings_update: {
-    #           minimum_units: 1,
-    #           maximum_units: 1,
-    #           auto_scaling_disabled: false,
-    #           auto_scaling_role_arn: "AutoScalingRoleArn",
-    #           scaling_policy_update: {
-    #             policy_name: "AutoScalingPolicyName",
-    #             target_tracking_scaling_policy_configuration: { # required
-    #               disable_scale_in: false,
-    #               scale_in_cooldown: 1,
-    #               scale_out_cooldown: 1,
-    #               target_value: 1.0, # required
-    #             },
-    #           },
-    #         },
-    #         replica_global_secondary_index_settings_update: [
-    #           {
-    #             index_name: "IndexName", # required
-    #             provisioned_read_capacity_units: 1,
-    #             provisioned_read_capacity_auto_scaling_settings_update: {
-    #               minimum_units: 1,
-    #               maximum_units: 1,
-    #               auto_scaling_disabled: false,
-    #               auto_scaling_role_arn: "AutoScalingRoleArn",
-    #               scaling_policy_update: {
-    #                 policy_name: "AutoScalingPolicyName",
-    #                 target_tracking_scaling_policy_configuration: { # required
-    #                   disable_scale_in: false,
-    #                   scale_in_cooldown: 1,
-    #                   scale_out_cooldown: 1,
-    #                   target_value: 1.0, # required
-    #                 },
-    #               },
-    #             },
-    #           },
-    #         ],
-    #         replica_table_class: "STANDARD", # accepts STANDARD, STANDARD_INFREQUENT_ACCESS
-    #       }
-    #
     # @!attribute [rw] region_name
     #   The Region of the replica to be added.
     #   @return [String]
@@ -8120,18 +6975,6 @@ module Aws::DynamoDB
     #
     # * An existing replica to be removed from an existing global table.
     #
-    # @note When making an API call, you may pass ReplicaUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         create: {
-    #           region_name: "RegionName", # required
-    #         },
-    #         delete: {
-    #           region_name: "RegionName", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] create
     #   The parameters required for creating a replica on an existing global
     #   table.
@@ -8168,47 +7011,6 @@ module Aws::DynamoDB
     # policies, or CloudWatch alarms.
     #
     #  </note>
-    #
-    # @note When making an API call, you may pass ReplicationGroupUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         create: {
-    #           region_name: "RegionName", # required
-    #           kms_master_key_id: "KMSMasterKeyId",
-    #           provisioned_throughput_override: {
-    #             read_capacity_units: 1,
-    #           },
-    #           global_secondary_indexes: [
-    #             {
-    #               index_name: "IndexName", # required
-    #               provisioned_throughput_override: {
-    #                 read_capacity_units: 1,
-    #               },
-    #             },
-    #           ],
-    #           table_class_override: "STANDARD", # accepts STANDARD, STANDARD_INFREQUENT_ACCESS
-    #         },
-    #         update: {
-    #           region_name: "RegionName", # required
-    #           kms_master_key_id: "KMSMasterKeyId",
-    #           provisioned_throughput_override: {
-    #             read_capacity_units: 1,
-    #           },
-    #           global_secondary_indexes: [
-    #             {
-    #               index_name: "IndexName", # required
-    #               provisioned_throughput_override: {
-    #                 read_capacity_units: 1,
-    #               },
-    #             },
-    #           ],
-    #           table_class_override: "STANDARD", # accepts STANDARD, STANDARD_INFREQUENT_ACCESS
-    #         },
-    #         delete: {
-    #           region_name: "RegionName", # required
-    #         },
-    #       }
     #
     # @!attribute [rw] create
     #   The parameters required for creating a replica for the table.
@@ -8313,58 +7115,6 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RestoreTableFromBackupInput
-    #   data as a hash:
-    #
-    #       {
-    #         target_table_name: "TableName", # required
-    #         backup_arn: "BackupArn", # required
-    #         billing_mode_override: "PROVISIONED", # accepts PROVISIONED, PAY_PER_REQUEST
-    #         global_secondary_index_override: [
-    #           {
-    #             index_name: "IndexName", # required
-    #             key_schema: [ # required
-    #               {
-    #                 attribute_name: "KeySchemaAttributeName", # required
-    #                 key_type: "HASH", # required, accepts HASH, RANGE
-    #               },
-    #             ],
-    #             projection: { # required
-    #               projection_type: "ALL", # accepts ALL, KEYS_ONLY, INCLUDE
-    #               non_key_attributes: ["NonKeyAttributeName"],
-    #             },
-    #             provisioned_throughput: {
-    #               read_capacity_units: 1, # required
-    #               write_capacity_units: 1, # required
-    #             },
-    #           },
-    #         ],
-    #         local_secondary_index_override: [
-    #           {
-    #             index_name: "IndexName", # required
-    #             key_schema: [ # required
-    #               {
-    #                 attribute_name: "KeySchemaAttributeName", # required
-    #                 key_type: "HASH", # required, accepts HASH, RANGE
-    #               },
-    #             ],
-    #             projection: { # required
-    #               projection_type: "ALL", # accepts ALL, KEYS_ONLY, INCLUDE
-    #               non_key_attributes: ["NonKeyAttributeName"],
-    #             },
-    #           },
-    #         ],
-    #         provisioned_throughput_override: {
-    #           read_capacity_units: 1, # required
-    #           write_capacity_units: 1, # required
-    #         },
-    #         sse_specification_override: {
-    #           enabled: false,
-    #           sse_type: "AES256", # accepts AES256, KMS
-    #           kms_master_key_id: "KMSMasterKeyId",
-    #         },
-    #       }
-    #
     # @!attribute [rw] target_table_name
     #   The name of the new table to which the backup must be restored.
     #   @return [String]
@@ -8423,61 +7173,6 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RestoreTableToPointInTimeInput
-    #   data as a hash:
-    #
-    #       {
-    #         source_table_arn: "TableArn",
-    #         source_table_name: "TableName",
-    #         target_table_name: "TableName", # required
-    #         use_latest_restorable_time: false,
-    #         restore_date_time: Time.now,
-    #         billing_mode_override: "PROVISIONED", # accepts PROVISIONED, PAY_PER_REQUEST
-    #         global_secondary_index_override: [
-    #           {
-    #             index_name: "IndexName", # required
-    #             key_schema: [ # required
-    #               {
-    #                 attribute_name: "KeySchemaAttributeName", # required
-    #                 key_type: "HASH", # required, accepts HASH, RANGE
-    #               },
-    #             ],
-    #             projection: { # required
-    #               projection_type: "ALL", # accepts ALL, KEYS_ONLY, INCLUDE
-    #               non_key_attributes: ["NonKeyAttributeName"],
-    #             },
-    #             provisioned_throughput: {
-    #               read_capacity_units: 1, # required
-    #               write_capacity_units: 1, # required
-    #             },
-    #           },
-    #         ],
-    #         local_secondary_index_override: [
-    #           {
-    #             index_name: "IndexName", # required
-    #             key_schema: [ # required
-    #               {
-    #                 attribute_name: "KeySchemaAttributeName", # required
-    #                 key_type: "HASH", # required, accepts HASH, RANGE
-    #               },
-    #             ],
-    #             projection: { # required
-    #               projection_type: "ALL", # accepts ALL, KEYS_ONLY, INCLUDE
-    #               non_key_attributes: ["NonKeyAttributeName"],
-    #             },
-    #           },
-    #         ],
-    #         provisioned_throughput_override: {
-    #           read_capacity_units: 1, # required
-    #           write_capacity_units: 1, # required
-    #         },
-    #         sse_specification_override: {
-    #           enabled: false,
-    #           sse_type: "AES256", # accepts AES256, KMS
-    #           kms_master_key_id: "KMSMasterKeyId",
-    #         },
-    #       }
-    #
     # @!attribute [rw] source_table_arn
     #   The DynamoDB table that will be restored. This value is an Amazon
     #   Resource Name (ARN).
@@ -8556,15 +7251,6 @@ module Aws::DynamoDB
 
     # The S3 bucket that is being imported from.
     #
-    # @note When making an API call, you may pass S3BucketSource
-    #   data as a hash:
-    #
-    #       {
-    #         s3_bucket_owner: "S3BucketOwner",
-    #         s3_bucket: "S3Bucket", # required
-    #         s3_key_prefix: "S3Prefix",
-    #       }
-    #
     # @!attribute [rw] s3_bucket_owner
     #   The account number of the S3 bucket that is being imported from. If
     #   the bucket is owned by the requester this is optional.
@@ -8636,15 +7322,6 @@ module Aws::DynamoDB
 
     # Represents the settings used to enable server-side encryption.
     #
-    # @note When making an API call, you may pass SSESpecification
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false,
-    #         sse_type: "AES256", # accepts AES256, KMS
-    #         kms_master_key_id: "KMSMasterKeyId",
-    #       }
-    #
     # @!attribute [rw] enabled
     #   Indicates whether server-side encryption is done using an Amazon Web
     #   Services managed key or an Amazon Web Services owned key. If enabled
@@ -8682,39 +7359,6 @@ module Aws::DynamoDB
     end
 
     # Represents the input of a `Scan` operation.
-    #
-    # @note When making an API call, you may pass ScanInput
-    #   data as a hash:
-    #
-    #       {
-    #         table_name: "TableName", # required
-    #         index_name: "IndexName",
-    #         attributes_to_get: ["AttributeName"],
-    #         limit: 1,
-    #         select: "ALL_ATTRIBUTES", # accepts ALL_ATTRIBUTES, ALL_PROJECTED_ATTRIBUTES, SPECIFIC_ATTRIBUTES, COUNT
-    #         scan_filter: {
-    #           "AttributeName" => {
-    #             attribute_value_list: ["value"], # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #             comparison_operator: "EQ", # required, accepts EQ, NE, IN, LE, LT, GE, GT, BETWEEN, NOT_NULL, NULL, CONTAINS, NOT_CONTAINS, BEGINS_WITH
-    #           },
-    #         },
-    #         conditional_operator: "AND", # accepts AND, OR
-    #         exclusive_start_key: {
-    #           "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #         },
-    #         return_consumed_capacity: "INDEXES", # accepts INDEXES, TOTAL, NONE
-    #         total_segments: 1,
-    #         segment: 1,
-    #         projection_expression: "ProjectionExpression",
-    #         filter_expression: "ConditionExpression",
-    #         expression_attribute_names: {
-    #           "ExpressionAttributeNameVariable" => "AttributeName",
-    #         },
-    #         expression_attribute_values: {
-    #           "ExpressionAttributeValueVariable" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #         },
-    #         consistent_read: false,
-    #       }
     #
     # @!attribute [rw] table_name
     #   The name of the table containing the requested items; or, if you
@@ -9237,14 +7881,6 @@ module Aws::DynamoDB
 
     # Represents the DynamoDB Streams configuration for a table in DynamoDB.
     #
-    # @note When making an API call, you may pass StreamSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         stream_enabled: false, # required
-    #         stream_view_type: "NEW_IMAGE", # accepts NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES, KEYS_ONLY
-    #       }
-    #
     # @!attribute [rw] stream_enabled
     #   Indicates whether DynamoDB Streams is enabled (true) or disabled
     #   (false) on the table.
@@ -9343,54 +7979,6 @@ module Aws::DynamoDB
     end
 
     # The parameters for the table created as part of the import operation.
-    #
-    # @note When making an API call, you may pass TableCreationParameters
-    #   data as a hash:
-    #
-    #       {
-    #         table_name: "TableName", # required
-    #         attribute_definitions: [ # required
-    #           {
-    #             attribute_name: "KeySchemaAttributeName", # required
-    #             attribute_type: "S", # required, accepts S, N, B
-    #           },
-    #         ],
-    #         key_schema: [ # required
-    #           {
-    #             attribute_name: "KeySchemaAttributeName", # required
-    #             key_type: "HASH", # required, accepts HASH, RANGE
-    #           },
-    #         ],
-    #         billing_mode: "PROVISIONED", # accepts PROVISIONED, PAY_PER_REQUEST
-    #         provisioned_throughput: {
-    #           read_capacity_units: 1, # required
-    #           write_capacity_units: 1, # required
-    #         },
-    #         sse_specification: {
-    #           enabled: false,
-    #           sse_type: "AES256", # accepts AES256, KMS
-    #           kms_master_key_id: "KMSMasterKeyId",
-    #         },
-    #         global_secondary_indexes: [
-    #           {
-    #             index_name: "IndexName", # required
-    #             key_schema: [ # required
-    #               {
-    #                 attribute_name: "KeySchemaAttributeName", # required
-    #                 key_type: "HASH", # required, accepts HASH, RANGE
-    #               },
-    #             ],
-    #             projection: { # required
-    #               projection_type: "ALL", # accepts ALL, KEYS_ONLY, INCLUDE
-    #               non_key_attributes: ["NonKeyAttributeName"],
-    #             },
-    #             provisioned_throughput: {
-    #               read_capacity_units: 1, # required
-    #               write_capacity_units: 1, # required
-    #             },
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] table_name
     #   The name of the table created as part of the import operation.
@@ -9815,14 +8403,6 @@ module Aws::DynamoDB
     #
     # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKeyString", # required
-    #         value: "TagValueString", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The key of the tag. Tag keys are case sensitive. Each DynamoDB table
     #   can only have up to one tag with the same key. If you try to add an
@@ -9843,19 +8423,6 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArnString", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKeyString", # required
-    #             value: "TagValueString", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   Identifies the Amazon DynamoDB resource to which tags should be
     #   added. This value is an Amazon Resource Name (ARN).
@@ -9897,14 +8464,6 @@ module Aws::DynamoDB
     # Represents the settings used to enable or disable Time to Live (TTL)
     # for the specified table.
     #
-    # @note When making an API call, you may pass TimeToLiveSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false, # required
-    #         attribute_name: "TimeToLiveAttributeName", # required
-    #       }
-    #
     # @!attribute [rw] enabled
     #   Indicates whether TTL is to be enabled (true) or disabled (false) on
     #   the table.
@@ -9926,22 +8485,6 @@ module Aws::DynamoDB
 
     # Specifies an item to be retrieved as part of the transaction.
     #
-    # @note When making an API call, you may pass TransactGetItem
-    #   data as a hash:
-    #
-    #       {
-    #         get: { # required
-    #           key: { # required
-    #             "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #           },
-    #           table_name: "TableName", # required
-    #           projection_expression: "ProjectionExpression",
-    #           expression_attribute_names: {
-    #             "ExpressionAttributeNameVariable" => "AttributeName",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] get
     #   Contains the primary key that identifies the item to get, together
     #   with the name of the table that contains the item, and optionally
@@ -9956,27 +8499,6 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TransactGetItemsInput
-    #   data as a hash:
-    #
-    #       {
-    #         transact_items: [ # required
-    #           {
-    #             get: { # required
-    #               key: { # required
-    #                 "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #               },
-    #               table_name: "TableName", # required
-    #               projection_expression: "ProjectionExpression",
-    #               expression_attribute_names: {
-    #                 "ExpressionAttributeNameVariable" => "AttributeName",
-    #               },
-    #             },
-    #           },
-    #         ],
-    #         return_consumed_capacity: "INDEXES", # accepts INDEXES, TOTAL, NONE
-    #       }
-    #
     # @!attribute [rw] transact_items
     #   An ordered array of up to 100 `TransactGetItem` objects, each of
     #   which contains a `Get` structure.
@@ -10030,69 +8552,6 @@ module Aws::DynamoDB
     # A list of requests that can perform update, put, delete, or check
     # operations on multiple items in one or more tables atomically.
     #
-    # @note When making an API call, you may pass TransactWriteItem
-    #   data as a hash:
-    #
-    #       {
-    #         condition_check: {
-    #           key: { # required
-    #             "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #           },
-    #           table_name: "TableName", # required
-    #           condition_expression: "ConditionExpression", # required
-    #           expression_attribute_names: {
-    #             "ExpressionAttributeNameVariable" => "AttributeName",
-    #           },
-    #           expression_attribute_values: {
-    #             "ExpressionAttributeValueVariable" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #           },
-    #           return_values_on_condition_check_failure: "ALL_OLD", # accepts ALL_OLD, NONE
-    #         },
-    #         put: {
-    #           item: { # required
-    #             "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #           },
-    #           table_name: "TableName", # required
-    #           condition_expression: "ConditionExpression",
-    #           expression_attribute_names: {
-    #             "ExpressionAttributeNameVariable" => "AttributeName",
-    #           },
-    #           expression_attribute_values: {
-    #             "ExpressionAttributeValueVariable" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #           },
-    #           return_values_on_condition_check_failure: "ALL_OLD", # accepts ALL_OLD, NONE
-    #         },
-    #         delete: {
-    #           key: { # required
-    #             "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #           },
-    #           table_name: "TableName", # required
-    #           condition_expression: "ConditionExpression",
-    #           expression_attribute_names: {
-    #             "ExpressionAttributeNameVariable" => "AttributeName",
-    #           },
-    #           expression_attribute_values: {
-    #             "ExpressionAttributeValueVariable" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #           },
-    #           return_values_on_condition_check_failure: "ALL_OLD", # accepts ALL_OLD, NONE
-    #         },
-    #         update: {
-    #           key: { # required
-    #             "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #           },
-    #           update_expression: "UpdateExpression", # required
-    #           table_name: "TableName", # required
-    #           condition_expression: "ConditionExpression",
-    #           expression_attribute_names: {
-    #             "ExpressionAttributeNameVariable" => "AttributeName",
-    #           },
-    #           expression_attribute_values: {
-    #             "ExpressionAttributeValueVariable" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #           },
-    #           return_values_on_condition_check_failure: "ALL_OLD", # accepts ALL_OLD, NONE
-    #         },
-    #       }
-    #
     # @!attribute [rw] condition_check
     #   A request to perform a check item operation.
     #   @return [Types::ConditionCheck]
@@ -10120,76 +8579,6 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TransactWriteItemsInput
-    #   data as a hash:
-    #
-    #       {
-    #         transact_items: [ # required
-    #           {
-    #             condition_check: {
-    #               key: { # required
-    #                 "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #               },
-    #               table_name: "TableName", # required
-    #               condition_expression: "ConditionExpression", # required
-    #               expression_attribute_names: {
-    #                 "ExpressionAttributeNameVariable" => "AttributeName",
-    #               },
-    #               expression_attribute_values: {
-    #                 "ExpressionAttributeValueVariable" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #               },
-    #               return_values_on_condition_check_failure: "ALL_OLD", # accepts ALL_OLD, NONE
-    #             },
-    #             put: {
-    #               item: { # required
-    #                 "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #               },
-    #               table_name: "TableName", # required
-    #               condition_expression: "ConditionExpression",
-    #               expression_attribute_names: {
-    #                 "ExpressionAttributeNameVariable" => "AttributeName",
-    #               },
-    #               expression_attribute_values: {
-    #                 "ExpressionAttributeValueVariable" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #               },
-    #               return_values_on_condition_check_failure: "ALL_OLD", # accepts ALL_OLD, NONE
-    #             },
-    #             delete: {
-    #               key: { # required
-    #                 "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #               },
-    #               table_name: "TableName", # required
-    #               condition_expression: "ConditionExpression",
-    #               expression_attribute_names: {
-    #                 "ExpressionAttributeNameVariable" => "AttributeName",
-    #               },
-    #               expression_attribute_values: {
-    #                 "ExpressionAttributeValueVariable" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #               },
-    #               return_values_on_condition_check_failure: "ALL_OLD", # accepts ALL_OLD, NONE
-    #             },
-    #             update: {
-    #               key: { # required
-    #                 "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #               },
-    #               update_expression: "UpdateExpression", # required
-    #               table_name: "TableName", # required
-    #               condition_expression: "ConditionExpression",
-    #               expression_attribute_names: {
-    #                 "ExpressionAttributeNameVariable" => "AttributeName",
-    #               },
-    #               expression_attribute_values: {
-    #                 "ExpressionAttributeValueVariable" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #               },
-    #               return_values_on_condition_check_failure: "ALL_OLD", # accepts ALL_OLD, NONE
-    #             },
-    #           },
-    #         ],
-    #         return_consumed_capacity: "INDEXES", # accepts INDEXES, TOTAL, NONE
-    #         return_item_collection_metrics: "SIZE", # accepts SIZE, NONE
-    #         client_request_token: "ClientRequestToken",
-    #       }
-    #
     # @!attribute [rw] transact_items
     #   An ordered array of up to 100 `TransactWriteItem` objects, each of
     #   which contains a `ConditionCheck`, `Put`, `Update`, or `Delete`
@@ -10484,14 +8873,6 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArnString", # required
-    #         tag_keys: ["TagKeyString"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The DynamoDB resource that the tags will be removed from. This value
     #   is an Amazon Resource Name (ARN).
@@ -10512,25 +8893,6 @@ module Aws::DynamoDB
     end
 
     # Represents a request to perform an `UpdateItem` operation.
-    #
-    # @note When making an API call, you may pass Update
-    #   data as a hash:
-    #
-    #       {
-    #         key: { # required
-    #           "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #         },
-    #         update_expression: "UpdateExpression", # required
-    #         table_name: "TableName", # required
-    #         condition_expression: "ConditionExpression",
-    #         expression_attribute_names: {
-    #           "ExpressionAttributeNameVariable" => "AttributeName",
-    #         },
-    #         expression_attribute_values: {
-    #           "ExpressionAttributeValueVariable" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #         },
-    #         return_values_on_condition_check_failure: "ALL_OLD", # accepts ALL_OLD, NONE
-    #       }
     #
     # @!attribute [rw] key
     #   The primary key of the item to be updated. Each element consists of
@@ -10581,16 +8943,6 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateContinuousBackupsInput
-    #   data as a hash:
-    #
-    #       {
-    #         table_name: "TableName", # required
-    #         point_in_time_recovery_specification: { # required
-    #           point_in_time_recovery_enabled: false, # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] table_name
     #   The name of the table.
     #   @return [String]
@@ -10621,15 +8973,6 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateContributorInsightsInput
-    #   data as a hash:
-    #
-    #       {
-    #         table_name: "TableName", # required
-    #         index_name: "IndexName",
-    #         contributor_insights_action: "ENABLE", # required, accepts ENABLE, DISABLE
-    #       }
-    #
     # @!attribute [rw] table_name
     #   The name of the table.
     #   @return [String]
@@ -10677,17 +9020,6 @@ module Aws::DynamoDB
     # Represents the new provisioned throughput settings to be applied to a
     # global secondary index.
     #
-    # @note When making an API call, you may pass UpdateGlobalSecondaryIndexAction
-    #   data as a hash:
-    #
-    #       {
-    #         index_name: "IndexName", # required
-    #         provisioned_throughput: { # required
-    #           read_capacity_units: 1, # required
-    #           write_capacity_units: 1, # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] index_name
     #   The name of the global secondary index to be updated.
     #   @return [String]
@@ -10714,23 +9046,6 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateGlobalTableInput
-    #   data as a hash:
-    #
-    #       {
-    #         global_table_name: "TableName", # required
-    #         replica_updates: [ # required
-    #           {
-    #             create: {
-    #               region_name: "RegionName", # required
-    #             },
-    #             delete: {
-    #               region_name: "RegionName", # required
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] global_table_name
     #   The global table name.
     #   @return [String]
@@ -10761,94 +9076,6 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateGlobalTableSettingsInput
-    #   data as a hash:
-    #
-    #       {
-    #         global_table_name: "TableName", # required
-    #         global_table_billing_mode: "PROVISIONED", # accepts PROVISIONED, PAY_PER_REQUEST
-    #         global_table_provisioned_write_capacity_units: 1,
-    #         global_table_provisioned_write_capacity_auto_scaling_settings_update: {
-    #           minimum_units: 1,
-    #           maximum_units: 1,
-    #           auto_scaling_disabled: false,
-    #           auto_scaling_role_arn: "AutoScalingRoleArn",
-    #           scaling_policy_update: {
-    #             policy_name: "AutoScalingPolicyName",
-    #             target_tracking_scaling_policy_configuration: { # required
-    #               disable_scale_in: false,
-    #               scale_in_cooldown: 1,
-    #               scale_out_cooldown: 1,
-    #               target_value: 1.0, # required
-    #             },
-    #           },
-    #         },
-    #         global_table_global_secondary_index_settings_update: [
-    #           {
-    #             index_name: "IndexName", # required
-    #             provisioned_write_capacity_units: 1,
-    #             provisioned_write_capacity_auto_scaling_settings_update: {
-    #               minimum_units: 1,
-    #               maximum_units: 1,
-    #               auto_scaling_disabled: false,
-    #               auto_scaling_role_arn: "AutoScalingRoleArn",
-    #               scaling_policy_update: {
-    #                 policy_name: "AutoScalingPolicyName",
-    #                 target_tracking_scaling_policy_configuration: { # required
-    #                   disable_scale_in: false,
-    #                   scale_in_cooldown: 1,
-    #                   scale_out_cooldown: 1,
-    #                   target_value: 1.0, # required
-    #                 },
-    #               },
-    #             },
-    #           },
-    #         ],
-    #         replica_settings_update: [
-    #           {
-    #             region_name: "RegionName", # required
-    #             replica_provisioned_read_capacity_units: 1,
-    #             replica_provisioned_read_capacity_auto_scaling_settings_update: {
-    #               minimum_units: 1,
-    #               maximum_units: 1,
-    #               auto_scaling_disabled: false,
-    #               auto_scaling_role_arn: "AutoScalingRoleArn",
-    #               scaling_policy_update: {
-    #                 policy_name: "AutoScalingPolicyName",
-    #                 target_tracking_scaling_policy_configuration: { # required
-    #                   disable_scale_in: false,
-    #                   scale_in_cooldown: 1,
-    #                   scale_out_cooldown: 1,
-    #                   target_value: 1.0, # required
-    #                 },
-    #               },
-    #             },
-    #             replica_global_secondary_index_settings_update: [
-    #               {
-    #                 index_name: "IndexName", # required
-    #                 provisioned_read_capacity_units: 1,
-    #                 provisioned_read_capacity_auto_scaling_settings_update: {
-    #                   minimum_units: 1,
-    #                   maximum_units: 1,
-    #                   auto_scaling_disabled: false,
-    #                   auto_scaling_role_arn: "AutoScalingRoleArn",
-    #                   scaling_policy_update: {
-    #                     policy_name: "AutoScalingPolicyName",
-    #                     target_tracking_scaling_policy_configuration: { # required
-    #                       disable_scale_in: false,
-    #                       scale_in_cooldown: 1,
-    #                       scale_out_cooldown: 1,
-    #                       target_value: 1.0, # required
-    #                     },
-    #                   },
-    #                 },
-    #               },
-    #             ],
-    #             replica_table_class: "STANDARD", # accepts STANDARD, STANDARD_INFREQUENT_ACCESS
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] global_table_name
     #   The name of the global table
     #   @return [String]
@@ -10923,42 +9150,6 @@ module Aws::DynamoDB
     end
 
     # Represents the input of an `UpdateItem` operation.
-    #
-    # @note When making an API call, you may pass UpdateItemInput
-    #   data as a hash:
-    #
-    #       {
-    #         table_name: "TableName", # required
-    #         key: { # required
-    #           "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #         },
-    #         attribute_updates: {
-    #           "AttributeName" => {
-    #             value: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #             action: "ADD", # accepts ADD, PUT, DELETE
-    #           },
-    #         },
-    #         expected: {
-    #           "AttributeName" => {
-    #             value: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #             exists: false,
-    #             comparison_operator: "EQ", # accepts EQ, NE, IN, LE, LT, GE, GT, BETWEEN, NOT_NULL, NULL, CONTAINS, NOT_CONTAINS, BEGINS_WITH
-    #             attribute_value_list: ["value"], # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #           },
-    #         },
-    #         conditional_operator: "AND", # accepts AND, OR
-    #         return_values: "NONE", # accepts NONE, ALL_OLD, UPDATED_OLD, ALL_NEW, UPDATED_NEW
-    #         return_consumed_capacity: "INDEXES", # accepts INDEXES, TOTAL, NONE
-    #         return_item_collection_metrics: "SIZE", # accepts SIZE, NONE
-    #         update_expression: "UpdateExpression",
-    #         condition_expression: "ConditionExpression",
-    #         expression_attribute_names: {
-    #           "ExpressionAttributeNameVariable" => "AttributeName",
-    #         },
-    #         expression_attribute_values: {
-    #           "ExpressionAttributeValueVariable" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #         },
-    #       }
     #
     # @!attribute [rw] table_name
     #   The name of the table containing the item to update.
@@ -11341,26 +9532,6 @@ module Aws::DynamoDB
 
     # Represents a replica to be modified.
     #
-    # @note When making an API call, you may pass UpdateReplicationGroupMemberAction
-    #   data as a hash:
-    #
-    #       {
-    #         region_name: "RegionName", # required
-    #         kms_master_key_id: "KMSMasterKeyId",
-    #         provisioned_throughput_override: {
-    #           read_capacity_units: 1,
-    #         },
-    #         global_secondary_indexes: [
-    #           {
-    #             index_name: "IndexName", # required
-    #             provisioned_throughput_override: {
-    #               read_capacity_units: 1,
-    #             },
-    #           },
-    #         ],
-    #         table_class_override: "STANDARD", # accepts STANDARD, STANDARD_INFREQUENT_ACCESS
-    #       }
-    #
     # @!attribute [rw] region_name
     #   The Region where the replica exists.
     #   @return [String]
@@ -11400,104 +9571,6 @@ module Aws::DynamoDB
     end
 
     # Represents the input of an `UpdateTable` operation.
-    #
-    # @note When making an API call, you may pass UpdateTableInput
-    #   data as a hash:
-    #
-    #       {
-    #         attribute_definitions: [
-    #           {
-    #             attribute_name: "KeySchemaAttributeName", # required
-    #             attribute_type: "S", # required, accepts S, N, B
-    #           },
-    #         ],
-    #         table_name: "TableName", # required
-    #         billing_mode: "PROVISIONED", # accepts PROVISIONED, PAY_PER_REQUEST
-    #         provisioned_throughput: {
-    #           read_capacity_units: 1, # required
-    #           write_capacity_units: 1, # required
-    #         },
-    #         global_secondary_index_updates: [
-    #           {
-    #             update: {
-    #               index_name: "IndexName", # required
-    #               provisioned_throughput: { # required
-    #                 read_capacity_units: 1, # required
-    #                 write_capacity_units: 1, # required
-    #               },
-    #             },
-    #             create: {
-    #               index_name: "IndexName", # required
-    #               key_schema: [ # required
-    #                 {
-    #                   attribute_name: "KeySchemaAttributeName", # required
-    #                   key_type: "HASH", # required, accepts HASH, RANGE
-    #                 },
-    #               ],
-    #               projection: { # required
-    #                 projection_type: "ALL", # accepts ALL, KEYS_ONLY, INCLUDE
-    #                 non_key_attributes: ["NonKeyAttributeName"],
-    #               },
-    #               provisioned_throughput: {
-    #                 read_capacity_units: 1, # required
-    #                 write_capacity_units: 1, # required
-    #               },
-    #             },
-    #             delete: {
-    #               index_name: "IndexName", # required
-    #             },
-    #           },
-    #         ],
-    #         stream_specification: {
-    #           stream_enabled: false, # required
-    #           stream_view_type: "NEW_IMAGE", # accepts NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES, KEYS_ONLY
-    #         },
-    #         sse_specification: {
-    #           enabled: false,
-    #           sse_type: "AES256", # accepts AES256, KMS
-    #           kms_master_key_id: "KMSMasterKeyId",
-    #         },
-    #         replica_updates: [
-    #           {
-    #             create: {
-    #               region_name: "RegionName", # required
-    #               kms_master_key_id: "KMSMasterKeyId",
-    #               provisioned_throughput_override: {
-    #                 read_capacity_units: 1,
-    #               },
-    #               global_secondary_indexes: [
-    #                 {
-    #                   index_name: "IndexName", # required
-    #                   provisioned_throughput_override: {
-    #                     read_capacity_units: 1,
-    #                   },
-    #                 },
-    #               ],
-    #               table_class_override: "STANDARD", # accepts STANDARD, STANDARD_INFREQUENT_ACCESS
-    #             },
-    #             update: {
-    #               region_name: "RegionName", # required
-    #               kms_master_key_id: "KMSMasterKeyId",
-    #               provisioned_throughput_override: {
-    #                 read_capacity_units: 1,
-    #               },
-    #               global_secondary_indexes: [
-    #                 {
-    #                   index_name: "IndexName", # required
-    #                   provisioned_throughput_override: {
-    #                     read_capacity_units: 1,
-    #                   },
-    #                 },
-    #               ],
-    #               table_class_override: "STANDARD", # accepts STANDARD, STANDARD_INFREQUENT_ACCESS
-    #             },
-    #             delete: {
-    #               region_name: "RegionName", # required
-    #             },
-    #           },
-    #         ],
-    #         table_class: "STANDARD", # accepts STANDARD, STANDARD_INFREQUENT_ACCESS
-    #       }
     #
     # @!attribute [rw] attribute_definitions
     #   An array of attributes that describe the key schema for the table
@@ -11622,88 +9695,6 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateTableReplicaAutoScalingInput
-    #   data as a hash:
-    #
-    #       {
-    #         global_secondary_index_updates: [
-    #           {
-    #             index_name: "IndexName",
-    #             provisioned_write_capacity_auto_scaling_update: {
-    #               minimum_units: 1,
-    #               maximum_units: 1,
-    #               auto_scaling_disabled: false,
-    #               auto_scaling_role_arn: "AutoScalingRoleArn",
-    #               scaling_policy_update: {
-    #                 policy_name: "AutoScalingPolicyName",
-    #                 target_tracking_scaling_policy_configuration: { # required
-    #                   disable_scale_in: false,
-    #                   scale_in_cooldown: 1,
-    #                   scale_out_cooldown: 1,
-    #                   target_value: 1.0, # required
-    #                 },
-    #               },
-    #             },
-    #           },
-    #         ],
-    #         table_name: "TableName", # required
-    #         provisioned_write_capacity_auto_scaling_update: {
-    #           minimum_units: 1,
-    #           maximum_units: 1,
-    #           auto_scaling_disabled: false,
-    #           auto_scaling_role_arn: "AutoScalingRoleArn",
-    #           scaling_policy_update: {
-    #             policy_name: "AutoScalingPolicyName",
-    #             target_tracking_scaling_policy_configuration: { # required
-    #               disable_scale_in: false,
-    #               scale_in_cooldown: 1,
-    #               scale_out_cooldown: 1,
-    #               target_value: 1.0, # required
-    #             },
-    #           },
-    #         },
-    #         replica_updates: [
-    #           {
-    #             region_name: "RegionName", # required
-    #             replica_global_secondary_index_updates: [
-    #               {
-    #                 index_name: "IndexName",
-    #                 provisioned_read_capacity_auto_scaling_update: {
-    #                   minimum_units: 1,
-    #                   maximum_units: 1,
-    #                   auto_scaling_disabled: false,
-    #                   auto_scaling_role_arn: "AutoScalingRoleArn",
-    #                   scaling_policy_update: {
-    #                     policy_name: "AutoScalingPolicyName",
-    #                     target_tracking_scaling_policy_configuration: { # required
-    #                       disable_scale_in: false,
-    #                       scale_in_cooldown: 1,
-    #                       scale_out_cooldown: 1,
-    #                       target_value: 1.0, # required
-    #                     },
-    #                   },
-    #                 },
-    #               },
-    #             ],
-    #             replica_provisioned_read_capacity_auto_scaling_update: {
-    #               minimum_units: 1,
-    #               maximum_units: 1,
-    #               auto_scaling_disabled: false,
-    #               auto_scaling_role_arn: "AutoScalingRoleArn",
-    #               scaling_policy_update: {
-    #                 policy_name: "AutoScalingPolicyName",
-    #                 target_tracking_scaling_policy_configuration: { # required
-    #                   disable_scale_in: false,
-    #                   scale_in_cooldown: 1,
-    #                   scale_out_cooldown: 1,
-    #                   target_value: 1.0, # required
-    #                 },
-    #               },
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] global_secondary_index_updates
     #   Represents the auto scaling settings of the global secondary indexes
     #   of the replica to be updated.
@@ -11749,17 +9740,6 @@ module Aws::DynamoDB
 
     # Represents the input of an `UpdateTimeToLive` operation.
     #
-    # @note When making an API call, you may pass UpdateTimeToLiveInput
-    #   data as a hash:
-    #
-    #       {
-    #         table_name: "TableName", # required
-    #         time_to_live_specification: { # required
-    #           enabled: false, # required
-    #           attribute_name: "TimeToLiveAttributeName", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] table_name
     #   The name of the table to be configured.
     #   @return [String]
@@ -11794,22 +9774,6 @@ module Aws::DynamoDB
     # You can only request one of these operations, not both, in a single
     # `WriteRequest`. If you do need to perform both of these operations,
     # you need to provide two separate `WriteRequest` objects.
-    #
-    # @note When making an API call, you may pass WriteRequest
-    #   data as a hash:
-    #
-    #       {
-    #         put_request: {
-    #           item: { # required
-    #             "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #           },
-    #         },
-    #         delete_request: {
-    #           key: { # required
-    #             "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] put_request
     #   A request to perform a `PutItem` operation.

@@ -49,15 +49,6 @@ module Aws::SsmSap
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ApplicationCredential
-    #   data as a hash:
-    #
-    #       {
-    #         database_name: "DatabaseName", # required
-    #         credential_type: "ADMIN", # required, accepts ADMIN
-    #         secret_id: "SecretId", # required
-    #       }
-    #
     # @!attribute [rw] database_name
     #   @return [String]
     #
@@ -255,15 +246,6 @@ module Aws::SsmSap
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteResourcePermissionInput
-    #   data as a hash:
-    #
-    #       {
-    #         action_type: "RESTORE", # accepts RESTORE
-    #         source_resource_arn: "Arn",
-    #         resource_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] action_type
     #   @return [String]
     #
@@ -294,13 +276,6 @@ module Aws::SsmSap
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeregisterApplicationInput
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "ApplicationId", # required
-    #       }
-    #
     # @!attribute [rw] application_id
     #   @return [String]
     #
@@ -316,14 +291,6 @@ module Aws::SsmSap
     #
     class DeregisterApplicationOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass GetApplicationInput
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "ApplicationId",
-    #         application_arn: "SsmSapArn",
-    #       }
-    #
     # @!attribute [rw] application_id
     #   @return [String]
     #
@@ -354,14 +321,6 @@ module Aws::SsmSap
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetComponentInput
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "ApplicationId", # required
-    #         component_id: "ComponentId", # required
-    #       }
-    #
     # @!attribute [rw] application_id
     #   @return [String]
     #
@@ -388,16 +347,6 @@ module Aws::SsmSap
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDatabaseInput
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "ApplicationId",
-    #         component_id: "ComponentId",
-    #         database_id: "DatabaseId",
-    #         database_arn: "SsmSapArn",
-    #       }
-    #
     # @!attribute [rw] application_id
     #   @return [String]
     #
@@ -436,13 +385,6 @@ module Aws::SsmSap
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetOperationInput
-    #   data as a hash:
-    #
-    #       {
-    #         operation_id: "OperationId", # required
-    #       }
-    #
     # @!attribute [rw] operation_id
     #   @return [String]
     #
@@ -465,14 +407,6 @@ module Aws::SsmSap
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetResourcePermissionInput
-    #   data as a hash:
-    #
-    #       {
-    #         action_type: "RESTORE", # accepts RESTORE
-    #         resource_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] action_type
     #   @return [String]
     #
@@ -533,14 +467,6 @@ module Aws::SsmSap
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListApplicationsInput
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   @return [String]
     #
@@ -571,15 +497,6 @@ module Aws::SsmSap
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListComponentsInput
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "ApplicationId",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] application_id
     #   @return [String]
     #
@@ -614,16 +531,6 @@ module Aws::SsmSap
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDatabasesInput
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "ApplicationId",
-    #         component_id: "ComponentId",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] application_id
     #   @return [String]
     #
@@ -662,13 +569,6 @@ module Aws::SsmSap
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "SsmSapArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   @return [String]
     #
@@ -742,15 +642,6 @@ module Aws::SsmSap
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutResourcePermissionInput
-    #   data as a hash:
-    #
-    #       {
-    #         action_type: "RESTORE", # required, accepts RESTORE
-    #         source_resource_arn: "Arn", # required
-    #         resource_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] action_type
     #   @return [String]
     #
@@ -781,27 +672,6 @@ module Aws::SsmSap
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RegisterApplicationInput
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "ApplicationId", # required
-    #         application_type: "HANA", # required, accepts HANA
-    #         instances: ["InstanceId"], # required
-    #         sap_instance_number: "SAPInstanceNumber",
-    #         sid: "SID",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         credentials: [ # required
-    #           {
-    #             database_name: "DatabaseName", # required
-    #             credential_type: "ADMIN", # required, accepts ADMIN
-    #             secret_id: "SecretId", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] application_id
     #   @return [String]
     #
@@ -863,16 +733,6 @@ module Aws::SsmSap
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "SsmSapArn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   @return [String]
     #
@@ -892,14 +752,6 @@ module Aws::SsmSap
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "SsmSapArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   @return [String]
     #
@@ -921,27 +773,6 @@ module Aws::SsmSap
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateApplicationSettingsInput
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "ApplicationId", # required
-    #         credentials_to_add_or_update: [
-    #           {
-    #             database_name: "DatabaseName", # required
-    #             credential_type: "ADMIN", # required, accepts ADMIN
-    #             secret_id: "SecretId", # required
-    #           },
-    #         ],
-    #         credentials_to_remove: [
-    #           {
-    #             database_name: "DatabaseName", # required
-    #             credential_type: "ADMIN", # required, accepts ADMIN
-    #             secret_id: "SecretId", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] application_id
     #   @return [String]
     #

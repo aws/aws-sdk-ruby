@@ -77,13 +77,6 @@ module Aws::Shield
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateDRTLogBucketRequest
-    #   data as a hash:
-    #
-    #       {
-    #         log_bucket: "LogBucket", # required
-    #       }
-    #
     # @!attribute [rw] log_bucket
     #   The Amazon S3 bucket that contains the logs that you want to share.
     #   @return [String]
@@ -100,13 +93,6 @@ module Aws::Shield
     #
     class AssociateDRTLogBucketResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass AssociateDRTRoleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         role_arn: "RoleArn", # required
-    #       }
-    #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the role the SRT will use to
     #   access your Amazon Web Services account.
@@ -133,14 +119,6 @@ module Aws::Shield
     #
     class AssociateDRTRoleResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass AssociateHealthCheckRequest
-    #   data as a hash:
-    #
-    #       {
-    #         protection_id: "ProtectionId", # required
-    #         health_check_arn: "HealthCheckArn", # required
-    #       }
-    #
     # @!attribute [rw] protection_id
     #   The unique identifier (ID) for the Protection object to add the
     #   health check association to.
@@ -164,19 +142,6 @@ module Aws::Shield
     #
     class AssociateHealthCheckResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass AssociateProactiveEngagementDetailsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         emergency_contact_list: [ # required
-    #           {
-    #             email_address: "EmailAddress", # required
-    #             phone_number: "PhoneNumber",
-    #             contact_notes: "ContactNotes",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] emergency_contact_list
     #   A list of email addresses and phone numbers that the Shield Response
     #   Team (SRT) can use to contact you for escalations to the SRT and to
@@ -475,8 +440,6 @@ module Aws::Shield
     #
     # JSON specification: `"Block": \{\}`
     #
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/BlockAction AWS API Documentation
     #
     class BlockAction < Aws::EmptyStructure; end
@@ -512,29 +475,10 @@ module Aws::Shield
     #
     # JSON specification: `"Count": \{\}`
     #
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/CountAction AWS API Documentation
     #
     class CountAction < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass CreateProtectionGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         protection_group_id: "ProtectionGroupId", # required
-    #         aggregation: "SUM", # required, accepts SUM, MEAN, MAX
-    #         pattern: "ALL", # required, accepts ALL, ARBITRARY, BY_RESOURCE_TYPE
-    #         resource_type: "CLOUDFRONT_DISTRIBUTION", # accepts CLOUDFRONT_DISTRIBUTION, ROUTE_53_HOSTED_ZONE, ELASTIC_IP_ALLOCATION, CLASSIC_LOAD_BALANCER, APPLICATION_LOAD_BALANCER, GLOBAL_ACCELERATOR
-    #         members: ["ResourceArn"],
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] protection_group_id
     #   The name of the protection group. You use this to identify the
     #   protection group in lists and to manage the protection group, for
@@ -602,20 +546,6 @@ module Aws::Shield
     #
     class CreateProtectionGroupResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass CreateProtectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ProtectionName", # required
-    #         resource_arn: "ResourceArn", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   Friendly name for the `Protection` you are creating.
     #   @return [String]
@@ -675,8 +605,6 @@ module Aws::Shield
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/CreateSubscriptionRequest AWS API Documentation
     #
     class CreateSubscriptionRequest < Aws::EmptyStructure; end
@@ -685,13 +613,6 @@ module Aws::Shield
     #
     class CreateSubscriptionResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteProtectionGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         protection_group_id: "ProtectionGroupId", # required
-    #       }
-    #
     # @!attribute [rw] protection_group_id
     #   The name of the protection group. You use this to identify the
     #   protection group in lists and to manage the protection group, for
@@ -710,13 +631,6 @@ module Aws::Shield
     #
     class DeleteProtectionGroupResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteProtectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         protection_id: "ProtectionId", # required
-    #       }
-    #
     # @!attribute [rw] protection_id
     #   The unique identifier (ID) for the Protection object to be deleted.
     #   @return [String]
@@ -733,8 +647,6 @@ module Aws::Shield
     #
     class DeleteProtectionResponse < Aws::EmptyStructure; end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DeleteSubscriptionRequest AWS API Documentation
     #
     class DeleteSubscriptionRequest < Aws::EmptyStructure; end
@@ -743,13 +655,6 @@ module Aws::Shield
     #
     class DeleteSubscriptionResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeAttackRequest
-    #   data as a hash:
-    #
-    #       {
-    #         attack_id: "AttackId", # required
-    #       }
-    #
     # @!attribute [rw] attack_id
     #   The unique identifier (ID) for the attack.
     #   @return [String]
@@ -774,8 +679,6 @@ module Aws::Shield
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeAttackStatisticsRequest AWS API Documentation
     #
     class DescribeAttackStatisticsRequest < Aws::EmptyStructure; end
@@ -797,8 +700,6 @@ module Aws::Shield
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeDRTAccessRequest AWS API Documentation
     #
     class DescribeDRTAccessRequest < Aws::EmptyStructure; end
@@ -821,8 +722,6 @@ module Aws::Shield
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeEmergencyContactSettingsRequest AWS API Documentation
     #
     class DescribeEmergencyContactSettingsRequest < Aws::EmptyStructure; end
@@ -842,13 +741,6 @@ module Aws::Shield
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeProtectionGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         protection_group_id: "ProtectionGroupId", # required
-    #       }
-    #
     # @!attribute [rw] protection_group_id
     #   The name of the protection group. You use this to identify the
     #   protection group in lists and to manage the protection group, for
@@ -877,14 +769,6 @@ module Aws::Shield
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeProtectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         protection_id: "ProtectionId",
-    #         resource_arn: "ResourceArn",
-    #       }
-    #
     # @!attribute [rw] protection_id
     #   The unique identifier (ID) for the Protection object to describe.
     #   You must provide either the `ResourceArn` of the protected resource
@@ -918,8 +802,6 @@ module Aws::Shield
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeSubscriptionRequest AWS API Documentation
     #
     class DescribeSubscriptionRequest < Aws::EmptyStructure; end
@@ -936,13 +818,6 @@ module Aws::Shield
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisableApplicationLayerAutomaticResponseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN (Amazon Resource Name) of the protected resource.
     #   @return [String]
@@ -959,8 +834,6 @@ module Aws::Shield
     #
     class DisableApplicationLayerAutomaticResponseResponse < Aws::EmptyStructure; end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DisableProactiveEngagementRequest AWS API Documentation
     #
     class DisableProactiveEngagementRequest < Aws::EmptyStructure; end
@@ -969,13 +842,6 @@ module Aws::Shield
     #
     class DisableProactiveEngagementResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DisassociateDRTLogBucketRequest
-    #   data as a hash:
-    #
-    #       {
-    #         log_bucket: "LogBucket", # required
-    #       }
-    #
     # @!attribute [rw] log_bucket
     #   The Amazon S3 bucket that contains the logs that you want to share.
     #   @return [String]
@@ -992,8 +858,6 @@ module Aws::Shield
     #
     class DisassociateDRTLogBucketResponse < Aws::EmptyStructure; end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DisassociateDRTRoleRequest AWS API Documentation
     #
     class DisassociateDRTRoleRequest < Aws::EmptyStructure; end
@@ -1002,14 +866,6 @@ module Aws::Shield
     #
     class DisassociateDRTRoleResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DisassociateHealthCheckRequest
-    #   data as a hash:
-    #
-    #       {
-    #         protection_id: "ProtectionId", # required
-    #         health_check_arn: "HealthCheckArn", # required
-    #       }
-    #
     # @!attribute [rw] protection_id
     #   The unique identifier (ID) for the Protection object to remove the
     #   health check association from.
@@ -1037,15 +893,6 @@ module Aws::Shield
     # proactive engagement enabled, for escalations to the SRT and to
     # initiate proactive customer support.
     #
-    # @note When making an API call, you may pass EmergencyContact
-    #   data as a hash:
-    #
-    #       {
-    #         email_address: "EmailAddress", # required
-    #         phone_number: "PhoneNumber",
-    #         contact_notes: "ContactNotes",
-    #       }
-    #
     # @!attribute [rw] email_address
     #   The email address for the contact.
     #   @return [String]
@@ -1068,19 +915,6 @@ module Aws::Shield
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass EnableApplicationLayerAutomaticResponseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         action: { # required
-    #           block: {
-    #           },
-    #           count: {
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN (Amazon Resource Name) of the protected resource.
     #   @return [String]
@@ -1109,8 +943,6 @@ module Aws::Shield
     #
     class EnableApplicationLayerAutomaticResponseResponse < Aws::EmptyStructure; end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/EnableProactiveEngagementRequest AWS API Documentation
     #
     class EnableProactiveEngagementRequest < Aws::EmptyStructure; end
@@ -1119,8 +951,6 @@ module Aws::Shield
     #
     class EnableProactiveEngagementResponse < Aws::EmptyStructure; end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/GetSubscriptionStateRequest AWS API Documentation
     #
     class GetSubscriptionStateRequest < Aws::EmptyStructure; end
@@ -1143,15 +973,6 @@ module Aws::Shield
     # protections for a specific resource type. You can provide up to one
     # criteria per filter type. Shield Advanced returns protections that
     # exactly match all of the filter criteria that you provide.
-    #
-    # @note When making an API call, you may pass InclusionProtectionFilters
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arns: ["ResourceArn"],
-    #         protection_names: ["ProtectionName"],
-    #         resource_types: ["CLOUDFRONT_DISTRIBUTION"], # accepts CLOUDFRONT_DISTRIBUTION, ROUTE_53_HOSTED_ZONE, ELASTIC_IP_ALLOCATION, CLASSIC_LOAD_BALANCER, APPLICATION_LOAD_BALANCER, GLOBAL_ACCELERATOR
-    #       }
     #
     # @!attribute [rw] resource_arns
     #   The ARN (Amazon Resource Name) of the resource whose protection you
@@ -1183,16 +1004,6 @@ module Aws::Shield
     # aggregation, or resource type. You can provide up to one criteria per
     # filter type. Shield Advanced returns the protection groups that
     # exactly match all of the search criteria that you provide.
-    #
-    # @note When making an API call, you may pass InclusionProtectionGroupFilters
-    #   data as a hash:
-    #
-    #       {
-    #         protection_group_ids: ["ProtectionGroupId"],
-    #         patterns: ["ALL"], # accepts ALL, ARBITRARY, BY_RESOURCE_TYPE
-    #         resource_types: ["CLOUDFRONT_DISTRIBUTION"], # accepts CLOUDFRONT_DISTRIBUTION, ROUTE_53_HOSTED_ZONE, ELASTIC_IP_ALLOCATION, CLASSIC_LOAD_BALANCER, APPLICATION_LOAD_BALANCER, GLOBAL_ACCELERATOR
-    #         aggregations: ["SUM"], # accepts SUM, MEAN, MAX
-    #       }
     #
     # @!attribute [rw] protection_group_ids
     #   The ID of the protection group that you want to retrieve.
@@ -1351,23 +1162,6 @@ module Aws::Shield
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAttacksRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arns: ["ResourceArn"],
-    #         start_time: {
-    #           from_inclusive: Time.now,
-    #           to_exclusive: Time.now,
-    #         },
-    #         end_time: {
-    #           from_inclusive: Time.now,
-    #           to_exclusive: Time.now,
-    #         },
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] resource_arns
     #   The ARNs (Amazon Resource Names) of the resources that were
     #   attacked. If you leave this blank, all applicable resources for this
@@ -1467,20 +1261,6 @@ module Aws::Shield
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListProtectionGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "Token",
-    #         max_results: 1,
-    #         inclusion_filters: {
-    #           protection_group_ids: ["ProtectionGroupId"],
-    #           patterns: ["ALL"], # accepts ALL, ARBITRARY, BY_RESOURCE_TYPE
-    #           resource_types: ["CLOUDFRONT_DISTRIBUTION"], # accepts CLOUDFRONT_DISTRIBUTION, ROUTE_53_HOSTED_ZONE, ELASTIC_IP_ALLOCATION, CLASSIC_LOAD_BALANCER, APPLICATION_LOAD_BALANCER, GLOBAL_ACCELERATOR
-    #           aggregations: ["SUM"], # accepts SUM, MEAN, MAX
-    #         },
-    #       }
-    #
     # @!attribute [rw] next_token
     #   When you request a list of objects from Shield Advanced, if the
     #   response does not include all of the remaining available objects,
@@ -1558,19 +1338,6 @@ module Aws::Shield
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListProtectionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "Token",
-    #         max_results: 1,
-    #         inclusion_filters: {
-    #           resource_arns: ["ResourceArn"],
-    #           protection_names: ["ProtectionName"],
-    #           resource_types: ["CLOUDFRONT_DISTRIBUTION"], # accepts CLOUDFRONT_DISTRIBUTION, ROUTE_53_HOSTED_ZONE, ELASTIC_IP_ALLOCATION, CLASSIC_LOAD_BALANCER, APPLICATION_LOAD_BALANCER, GLOBAL_ACCELERATOR
-    #         },
-    #       }
-    #
     # @!attribute [rw] next_token
     #   When you request a list of objects from Shield Advanced, if the
     #   response does not include all of the remaining available objects,
@@ -1650,15 +1417,6 @@ module Aws::Shield
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListResourcesInProtectionGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         protection_group_id: "ProtectionGroupId", # required
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] protection_group_id
     #   The name of the protection group. You use this to identify the
     #   protection group in lists and to manage the protection group, for
@@ -1735,13 +1493,6 @@ module Aws::Shield
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource to get tags for.
     #   @return [String]
@@ -2048,16 +1799,6 @@ module Aws::Shield
     # Advanced creates the WAF rules in a Shield Advanced-managed rule
     # group, inside the web ACL that you have associated with the resource.
     #
-    # @note When making an API call, you may pass ResponseAction
-    #   data as a hash:
-    #
-    #       {
-    #         block: {
-    #         },
-    #         count: {
-    #         },
-    #       }
-    #
     # @!attribute [rw] block
     #   Specifies that Shield Advanced should configure its WAF rules with
     #   the WAF `Block` action.
@@ -2263,14 +2004,6 @@ module Aws::Shield
     # specify one or more tags to add to each Amazon Web Services resource,
     # up to 50 tags for a resource.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey",
-    #         value: "TagValue",
-    #       }
-    #
     # @!attribute [rw] key
     #   Part of the key:value pair that defines a tag. You can use a tag key
     #   to describe a category of information, such as "customer." Tag
@@ -2292,19 +2025,6 @@ module Aws::Shield
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource that you want to add
     #   or update tags for.
@@ -2329,14 +2049,6 @@ module Aws::Shield
 
     # The time range.
     #
-    # @note When making an API call, you may pass TimeRange
-    #   data as a hash:
-    #
-    #       {
-    #         from_inclusive: Time.now,
-    #         to_exclusive: Time.now,
-    #       }
-    #
     # @!attribute [rw] from_inclusive
     #   The start time, in Unix time in seconds.
     #   @return [Time]
@@ -2354,14 +2066,6 @@ module Aws::Shield
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource that you want to
     #   remove tags from.
@@ -2384,19 +2088,6 @@ module Aws::Shield
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateApplicationLayerAutomaticResponseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         action: { # required
-    #           block: {
-    #           },
-    #           count: {
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN (Amazon Resource Name) of the resource.
     #   @return [String]
@@ -2425,19 +2116,6 @@ module Aws::Shield
     #
     class UpdateApplicationLayerAutomaticResponseResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateEmergencyContactSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         emergency_contact_list: [
-    #           {
-    #             email_address: "EmailAddress", # required
-    #             phone_number: "PhoneNumber",
-    #             contact_notes: "ContactNotes",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] emergency_contact_list
     #   A list of email addresses and phone numbers that the Shield Response
     #   Team (SRT) can use to contact you if you have proactive engagement
@@ -2460,17 +2138,6 @@ module Aws::Shield
     #
     class UpdateEmergencyContactSettingsResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateProtectionGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         protection_group_id: "ProtectionGroupId", # required
-    #         aggregation: "SUM", # required, accepts SUM, MEAN, MAX
-    #         pattern: "ALL", # required, accepts ALL, ARBITRARY, BY_RESOURCE_TYPE
-    #         resource_type: "CLOUDFRONT_DISTRIBUTION", # accepts CLOUDFRONT_DISTRIBUTION, ROUTE_53_HOSTED_ZONE, ELASTIC_IP_ALLOCATION, CLASSIC_LOAD_BALANCER, APPLICATION_LOAD_BALANCER, GLOBAL_ACCELERATOR
-    #         members: ["ResourceArn"],
-    #       }
-    #
     # @!attribute [rw] protection_group_id
     #   The name of the protection group. You use this to identify the
     #   protection group in lists and to manage the protection group, for
@@ -2532,13 +2199,6 @@ module Aws::Shield
     #
     class UpdateProtectionGroupResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateSubscriptionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         auto_renew: "ENABLED", # accepts ENABLED, DISABLED
-    #       }
-    #
     # @!attribute [rw] auto_renew
     #   When you initally create a subscription, `AutoRenew` is set to
     #   `ENABLED`. If `ENABLED`, the subscription will be automatically

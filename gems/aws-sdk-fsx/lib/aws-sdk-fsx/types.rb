@@ -273,15 +273,6 @@ module Aws::FSx
     # The request object specifying one or more DNS alias names to associate
     # with an Amazon FSx for Windows File Server file system.
     #
-    # @note When making an API call, you may pass AssociateFileSystemAliasesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_request_token: "ClientRequestToken",
-    #         file_system_id: "FileSystemId", # required
-    #         aliases: ["AlternateDNSName"], # required
-    #       }
-    #
     # @!attribute [rw] client_request_token
     #   (Optional) An idempotency token for resource creation, in a string
     #   of up to 64 ASCII characters. This token is automatically filled on
@@ -357,13 +348,6 @@ module Aws::FSx
     # This `AutoExportPolicy` is supported only for Amazon FSx for Lustre
     # file systems with the `Persistent_2` deployment type.
     #
-    # @note When making an API call, you may pass AutoExportPolicy
-    #   data as a hash:
-    #
-    #       {
-    #         events: ["NEW"], # accepts NEW, CHANGED, DELETED
-    #       }
-    #
     # @!attribute [rw] events
     #   The `AutoExportPolicy` can have the following event values:
     #
@@ -396,13 +380,6 @@ module Aws::FSx
     #
     # The `AutoImportPolicy` is supported only for Amazon FSx for Lustre
     # file systems with the `Persistent_2` deployment type.
-    #
-    # @note When making an API call, you may pass AutoImportPolicy
-    #   data as a hash:
-    #
-    #       {
-    #         events: ["NEW"], # accepts NEW, CHANGED, DELETED
-    #       }
     #
     # @!attribute [rw] events
     #   The `AutoImportPolicy` can have the following event values:
@@ -646,13 +623,6 @@ module Aws::FSx
 
     # Cancels a data repository task.
     #
-    # @note When making an API call, you may pass CancelDataRepositoryTaskRequest
-    #   data as a hash:
-    #
-    #       {
-    #         task_id: "TaskId", # required
-    #       }
-    #
     # @!attribute [rw] task_id
     #   Specifies the data repository task to cancel.
     #   @return [String]
@@ -704,16 +674,6 @@ module Aws::FSx
     # report `Path` parameter. You can specify whether or not a report gets
     # generated for a task using the `Enabled` parameter.
     #
-    # @note When making an API call, you may pass CompletionReport
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false, # required
-    #         path: "ArchivePath",
-    #         format: "REPORT_CSV_20191124", # accepts REPORT_CSV_20191124
-    #         scope: "FAILED_FILES_ONLY", # accepts FAILED_FILES_ONLY
-    #       }
-    #
     # @!attribute [rw] enabled
     #   Set `Enabled` to `True` to generate a `CompletionReport` when the
     #   task completes. If set to `true`, then you need to provide a report
@@ -760,23 +720,6 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CopyBackupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_request_token: "ClientRequestToken",
-    #         source_backup_id: "SourceBackupId", # required
-    #         source_region: "Region",
-    #         kms_key_id: "KmsKeyId",
-    #         copy_tags: false,
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] client_request_token
     #   (Optional) An idempotency token for resource creation, in a string
     #   of up to 64 ASCII characters. This token is automatically filled on
@@ -871,21 +814,6 @@ module Aws::FSx
 
     # The request object for the `CreateBackup` operation.
     #
-    # @note When making an API call, you may pass CreateBackupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         file_system_id: "FileSystemId",
-    #         client_request_token: "ClientRequestToken",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         volume_id: "VolumeId",
-    #       }
-    #
     # @!attribute [rw] file_system_id
     #   The ID of the file system to back up.
     #   @return [String]
@@ -937,32 +865,6 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDataRepositoryAssociationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         file_system_id: "FileSystemId", # required
-    #         file_system_path: "Namespace",
-    #         data_repository_path: "ArchivePath", # required
-    #         batch_import_meta_data_on_create: false,
-    #         imported_file_chunk_size: 1,
-    #         s3: {
-    #           auto_import_policy: {
-    #             events: ["NEW"], # accepts NEW, CHANGED, DELETED
-    #           },
-    #           auto_export_policy: {
-    #             events: ["NEW"], # accepts NEW, CHANGED, DELETED
-    #           },
-    #         },
-    #         client_request_token: "ClientRequestToken",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] file_system_id
     #   The globally unique ID of the file system, assigned by Amazon FSx.
     #   @return [String]
@@ -1066,29 +968,6 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDataRepositoryTaskRequest
-    #   data as a hash:
-    #
-    #       {
-    #         type: "EXPORT_TO_REPOSITORY", # required, accepts EXPORT_TO_REPOSITORY, IMPORT_METADATA_FROM_REPOSITORY, RELEASE_DATA_FROM_FILESYSTEM, AUTO_RELEASE_DATA
-    #         paths: ["DataRepositoryTaskPath"],
-    #         file_system_id: "FileSystemId", # required
-    #         report: { # required
-    #           enabled: false, # required
-    #           path: "ArchivePath",
-    #           format: "REPORT_CSV_20191124", # accepts REPORT_CSV_20191124
-    #           scope: "FAILED_FILES_ONLY", # accepts FAILED_FILES_ONLY
-    #         },
-    #         client_request_token: "ClientRequestToken",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         capacity_to_release: 1,
-    #       }
-    #
     # @!attribute [rw] type
     #   Specifies the type of data repository task to create.
     #   @return [String]
@@ -1176,18 +1055,6 @@ module Aws::FSx
     # The Amazon File Cache configuration for the cache that you are
     # creating.
     #
-    # @note When making an API call, you may pass CreateFileCacheLustreConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         per_unit_storage_throughput: 1, # required
-    #         deployment_type: "CACHE_1", # required, accepts CACHE_1
-    #         weekly_maintenance_start_time: "WeeklyTime",
-    #         metadata_configuration: { # required
-    #           storage_capacity: 1, # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] per_unit_storage_throughput
     #   Provisions the amount of read and write throughput for each 1
     #   tebibyte (TiB) of cache storage capacity, in MB/s/TiB. The only
@@ -1230,45 +1097,6 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateFileCacheRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_request_token: "ClientRequestToken",
-    #         file_cache_type: "LUSTRE", # required, accepts LUSTRE
-    #         file_cache_type_version: "FileSystemTypeVersion", # required
-    #         storage_capacity: 1, # required
-    #         subnet_ids: ["SubnetId"], # required
-    #         security_group_ids: ["SecurityGroupId"],
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         copy_tags_to_data_repository_associations: false,
-    #         kms_key_id: "KmsKeyId",
-    #         lustre_configuration: {
-    #           per_unit_storage_throughput: 1, # required
-    #           deployment_type: "CACHE_1", # required, accepts CACHE_1
-    #           weekly_maintenance_start_time: "WeeklyTime",
-    #           metadata_configuration: { # required
-    #             storage_capacity: 1, # required
-    #           },
-    #         },
-    #         data_repository_associations: [
-    #           {
-    #             file_cache_path: "Namespace", # required
-    #             data_repository_path: "ArchivePath", # required
-    #             data_repository_subdirectories: ["Namespace"],
-    #             nfs: {
-    #               version: "NFS3", # required, accepts NFS3
-    #               dns_ips: ["IpAddress"],
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] client_request_token
     #   An idempotency token for resource creation, in a string of up to 64
     #   ASCII characters. This token is automatically filled on your behalf
@@ -1388,108 +1216,6 @@ module Aws::FSx
     end
 
     # The request object for the `CreateFileSystemFromBackup` operation.
-    #
-    # @note When making an API call, you may pass CreateFileSystemFromBackupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         backup_id: "BackupId", # required
-    #         client_request_token: "ClientRequestToken",
-    #         subnet_ids: ["SubnetId"], # required
-    #         security_group_ids: ["SecurityGroupId"],
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         windows_configuration: {
-    #           active_directory_id: "DirectoryId",
-    #           self_managed_active_directory_configuration: {
-    #             domain_name: "ActiveDirectoryFullyQualifiedName", # required
-    #             organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
-    #             file_system_administrators_group: "FileSystemAdministratorsGroupName",
-    #             user_name: "DirectoryUserName", # required
-    #             password: "DirectoryPassword", # required
-    #             dns_ips: ["IpAddress"], # required
-    #           },
-    #           deployment_type: "MULTI_AZ_1", # accepts MULTI_AZ_1, SINGLE_AZ_1, SINGLE_AZ_2
-    #           preferred_subnet_id: "SubnetId",
-    #           throughput_capacity: 1, # required
-    #           weekly_maintenance_start_time: "WeeklyTime",
-    #           daily_automatic_backup_start_time: "DailyTime",
-    #           automatic_backup_retention_days: 1,
-    #           copy_tags_to_backups: false,
-    #           aliases: ["AlternateDNSName"],
-    #           audit_log_configuration: {
-    #             file_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
-    #             file_share_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
-    #             audit_log_destination: "GeneralARN",
-    #           },
-    #         },
-    #         lustre_configuration: {
-    #           weekly_maintenance_start_time: "WeeklyTime",
-    #           import_path: "ArchivePath",
-    #           export_path: "ArchivePath",
-    #           imported_file_chunk_size: 1,
-    #           deployment_type: "SCRATCH_1", # accepts SCRATCH_1, SCRATCH_2, PERSISTENT_1, PERSISTENT_2
-    #           auto_import_policy: "NONE", # accepts NONE, NEW, NEW_CHANGED, NEW_CHANGED_DELETED
-    #           per_unit_storage_throughput: 1,
-    #           daily_automatic_backup_start_time: "DailyTime",
-    #           automatic_backup_retention_days: 1,
-    #           copy_tags_to_backups: false,
-    #           drive_cache_type: "NONE", # accepts NONE, READ
-    #           data_compression_type: "NONE", # accepts NONE, LZ4
-    #           log_configuration: {
-    #             level: "DISABLED", # required, accepts DISABLED, WARN_ONLY, ERROR_ONLY, WARN_ERROR
-    #             destination: "GeneralARN",
-    #           },
-    #           root_squash_configuration: {
-    #             root_squash: "LustreRootSquash",
-    #             no_squash_nids: ["LustreNoSquashNid"],
-    #           },
-    #         },
-    #         storage_type: "SSD", # accepts SSD, HDD
-    #         kms_key_id: "KmsKeyId",
-    #         file_system_type_version: "FileSystemTypeVersion",
-    #         open_zfs_configuration: {
-    #           automatic_backup_retention_days: 1,
-    #           copy_tags_to_backups: false,
-    #           copy_tags_to_volumes: false,
-    #           daily_automatic_backup_start_time: "DailyTime",
-    #           deployment_type: "SINGLE_AZ_1", # required, accepts SINGLE_AZ_1, SINGLE_AZ_2
-    #           throughput_capacity: 1, # required
-    #           weekly_maintenance_start_time: "WeeklyTime",
-    #           disk_iops_configuration: {
-    #             mode: "AUTOMATIC", # accepts AUTOMATIC, USER_PROVISIONED
-    #             iops: 1,
-    #           },
-    #           root_volume_configuration: {
-    #             record_size_ki_b: 1,
-    #             data_compression_type: "NONE", # accepts NONE, ZSTD, LZ4
-    #             nfs_exports: [
-    #               {
-    #                 client_configurations: [ # required
-    #                   {
-    #                     clients: "OpenZFSClients", # required
-    #                     options: ["OpenZFSNfsExportOption"], # required
-    #                   },
-    #                 ],
-    #               },
-    #             ],
-    #             user_and_group_quotas: [
-    #               {
-    #                 type: "USER", # required, accepts USER, GROUP
-    #                 id: 1, # required
-    #                 storage_capacity_quota_gi_b: 1, # required
-    #               },
-    #             ],
-    #             copy_tags_to_snapshots: false,
-    #             read_only: false,
-    #           },
-    #         },
-    #         storage_capacity: 1,
-    #       }
     #
     # @!attribute [rw] backup_id
     #   The ID of the source backup. Specifies the backup that you are
@@ -1681,32 +1407,6 @@ module Aws::FSx
     # * `ImportPath`
     #
     #  </note>
-    #
-    # @note When making an API call, you may pass CreateFileSystemLustreConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         weekly_maintenance_start_time: "WeeklyTime",
-    #         import_path: "ArchivePath",
-    #         export_path: "ArchivePath",
-    #         imported_file_chunk_size: 1,
-    #         deployment_type: "SCRATCH_1", # accepts SCRATCH_1, SCRATCH_2, PERSISTENT_1, PERSISTENT_2
-    #         auto_import_policy: "NONE", # accepts NONE, NEW, NEW_CHANGED, NEW_CHANGED_DELETED
-    #         per_unit_storage_throughput: 1,
-    #         daily_automatic_backup_start_time: "DailyTime",
-    #         automatic_backup_retention_days: 1,
-    #         copy_tags_to_backups: false,
-    #         drive_cache_type: "NONE", # accepts NONE, READ
-    #         data_compression_type: "NONE", # accepts NONE, LZ4
-    #         log_configuration: {
-    #           level: "DISABLED", # required, accepts DISABLED, WARN_ONLY, ERROR_ONLY, WARN_ERROR
-    #           destination: "GeneralARN",
-    #         },
-    #         root_squash_configuration: {
-    #           root_squash: "LustreRootSquash",
-    #           no_squash_nids: ["LustreNoSquashNid"],
-    #         },
-    #       }
     #
     # @!attribute [rw] weekly_maintenance_start_time
     #   (Optional) The preferred start time to perform weekly maintenance,
@@ -1983,25 +1683,6 @@ module Aws::FSx
     # The ONTAP configuration properties of the FSx for ONTAP file system
     # that you are creating.
     #
-    # @note When making an API call, you may pass CreateFileSystemOntapConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         automatic_backup_retention_days: 1,
-    #         daily_automatic_backup_start_time: "DailyTime",
-    #         deployment_type: "MULTI_AZ_1", # required, accepts MULTI_AZ_1, SINGLE_AZ_1
-    #         endpoint_ip_address_range: "IpAddressRange",
-    #         fsx_admin_password: "AdminPassword",
-    #         disk_iops_configuration: {
-    #           mode: "AUTOMATIC", # accepts AUTOMATIC, USER_PROVISIONED
-    #           iops: 1,
-    #         },
-    #         preferred_subnet_id: "SubnetId",
-    #         route_table_ids: ["RouteTableId"],
-    #         throughput_capacity: 1, # required
-    #         weekly_maintenance_start_time: "WeeklyTime",
-    #       }
-    #
     # @!attribute [rw] automatic_backup_retention_days
     #   The number of days to retain automatic backups. Setting this
     #   property to `0` disables automatic backups. You can retain automatic
@@ -2108,46 +1789,6 @@ module Aws::FSx
 
     # The Amazon FSx for OpenZFS configuration properties for the file
     # system that you are creating.
-    #
-    # @note When making an API call, you may pass CreateFileSystemOpenZFSConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         automatic_backup_retention_days: 1,
-    #         copy_tags_to_backups: false,
-    #         copy_tags_to_volumes: false,
-    #         daily_automatic_backup_start_time: "DailyTime",
-    #         deployment_type: "SINGLE_AZ_1", # required, accepts SINGLE_AZ_1, SINGLE_AZ_2
-    #         throughput_capacity: 1, # required
-    #         weekly_maintenance_start_time: "WeeklyTime",
-    #         disk_iops_configuration: {
-    #           mode: "AUTOMATIC", # accepts AUTOMATIC, USER_PROVISIONED
-    #           iops: 1,
-    #         },
-    #         root_volume_configuration: {
-    #           record_size_ki_b: 1,
-    #           data_compression_type: "NONE", # accepts NONE, ZSTD, LZ4
-    #           nfs_exports: [
-    #             {
-    #               client_configurations: [ # required
-    #                 {
-    #                   clients: "OpenZFSClients", # required
-    #                   options: ["OpenZFSNfsExportOption"], # required
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #           user_and_group_quotas: [
-    #             {
-    #               type: "USER", # required, accepts USER, GROUP
-    #               id: 1, # required
-    #               storage_capacity_quota_gi_b: 1, # required
-    #             },
-    #           ],
-    #           copy_tags_to_snapshots: false,
-    #           read_only: false,
-    #         },
-    #       }
     #
     # @!attribute [rw] automatic_backup_retention_days
     #   The number of days to retain automatic backups. Setting this
@@ -2271,123 +1912,6 @@ module Aws::FSx
     end
 
     # The request object used to create a new Amazon FSx file system.
-    #
-    # @note When making an API call, you may pass CreateFileSystemRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_request_token: "ClientRequestToken",
-    #         file_system_type: "WINDOWS", # required, accepts WINDOWS, LUSTRE, ONTAP, OPENZFS
-    #         storage_capacity: 1, # required
-    #         storage_type: "SSD", # accepts SSD, HDD
-    #         subnet_ids: ["SubnetId"], # required
-    #         security_group_ids: ["SecurityGroupId"],
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         kms_key_id: "KmsKeyId",
-    #         windows_configuration: {
-    #           active_directory_id: "DirectoryId",
-    #           self_managed_active_directory_configuration: {
-    #             domain_name: "ActiveDirectoryFullyQualifiedName", # required
-    #             organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
-    #             file_system_administrators_group: "FileSystemAdministratorsGroupName",
-    #             user_name: "DirectoryUserName", # required
-    #             password: "DirectoryPassword", # required
-    #             dns_ips: ["IpAddress"], # required
-    #           },
-    #           deployment_type: "MULTI_AZ_1", # accepts MULTI_AZ_1, SINGLE_AZ_1, SINGLE_AZ_2
-    #           preferred_subnet_id: "SubnetId",
-    #           throughput_capacity: 1, # required
-    #           weekly_maintenance_start_time: "WeeklyTime",
-    #           daily_automatic_backup_start_time: "DailyTime",
-    #           automatic_backup_retention_days: 1,
-    #           copy_tags_to_backups: false,
-    #           aliases: ["AlternateDNSName"],
-    #           audit_log_configuration: {
-    #             file_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
-    #             file_share_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
-    #             audit_log_destination: "GeneralARN",
-    #           },
-    #         },
-    #         lustre_configuration: {
-    #           weekly_maintenance_start_time: "WeeklyTime",
-    #           import_path: "ArchivePath",
-    #           export_path: "ArchivePath",
-    #           imported_file_chunk_size: 1,
-    #           deployment_type: "SCRATCH_1", # accepts SCRATCH_1, SCRATCH_2, PERSISTENT_1, PERSISTENT_2
-    #           auto_import_policy: "NONE", # accepts NONE, NEW, NEW_CHANGED, NEW_CHANGED_DELETED
-    #           per_unit_storage_throughput: 1,
-    #           daily_automatic_backup_start_time: "DailyTime",
-    #           automatic_backup_retention_days: 1,
-    #           copy_tags_to_backups: false,
-    #           drive_cache_type: "NONE", # accepts NONE, READ
-    #           data_compression_type: "NONE", # accepts NONE, LZ4
-    #           log_configuration: {
-    #             level: "DISABLED", # required, accepts DISABLED, WARN_ONLY, ERROR_ONLY, WARN_ERROR
-    #             destination: "GeneralARN",
-    #           },
-    #           root_squash_configuration: {
-    #             root_squash: "LustreRootSquash",
-    #             no_squash_nids: ["LustreNoSquashNid"],
-    #           },
-    #         },
-    #         ontap_configuration: {
-    #           automatic_backup_retention_days: 1,
-    #           daily_automatic_backup_start_time: "DailyTime",
-    #           deployment_type: "MULTI_AZ_1", # required, accepts MULTI_AZ_1, SINGLE_AZ_1
-    #           endpoint_ip_address_range: "IpAddressRange",
-    #           fsx_admin_password: "AdminPassword",
-    #           disk_iops_configuration: {
-    #             mode: "AUTOMATIC", # accepts AUTOMATIC, USER_PROVISIONED
-    #             iops: 1,
-    #           },
-    #           preferred_subnet_id: "SubnetId",
-    #           route_table_ids: ["RouteTableId"],
-    #           throughput_capacity: 1, # required
-    #           weekly_maintenance_start_time: "WeeklyTime",
-    #         },
-    #         file_system_type_version: "FileSystemTypeVersion",
-    #         open_zfs_configuration: {
-    #           automatic_backup_retention_days: 1,
-    #           copy_tags_to_backups: false,
-    #           copy_tags_to_volumes: false,
-    #           daily_automatic_backup_start_time: "DailyTime",
-    #           deployment_type: "SINGLE_AZ_1", # required, accepts SINGLE_AZ_1, SINGLE_AZ_2
-    #           throughput_capacity: 1, # required
-    #           weekly_maintenance_start_time: "WeeklyTime",
-    #           disk_iops_configuration: {
-    #             mode: "AUTOMATIC", # accepts AUTOMATIC, USER_PROVISIONED
-    #             iops: 1,
-    #           },
-    #           root_volume_configuration: {
-    #             record_size_ki_b: 1,
-    #             data_compression_type: "NONE", # accepts NONE, ZSTD, LZ4
-    #             nfs_exports: [
-    #               {
-    #                 client_configurations: [ # required
-    #                   {
-    #                     clients: "OpenZFSClients", # required
-    #                     options: ["OpenZFSNfsExportOption"], # required
-    #                   },
-    #                 ],
-    #               },
-    #             ],
-    #             user_and_group_quotas: [
-    #               {
-    #                 type: "USER", # required, accepts USER, GROUP
-    #                 id: 1, # required
-    #                 storage_capacity_quota_gi_b: 1, # required
-    #               },
-    #             ],
-    #             copy_tags_to_snapshots: false,
-    #             read_only: false,
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] client_request_token
     #   A string of up to 64 ASCII characters that Amazon FSx uses to ensure
@@ -2610,34 +2134,6 @@ module Aws::FSx
     # The configuration object for the Microsoft Windows file system used in
     # `CreateFileSystem` and `CreateFileSystemFromBackup` operations.
     #
-    # @note When making an API call, you may pass CreateFileSystemWindowsConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         active_directory_id: "DirectoryId",
-    #         self_managed_active_directory_configuration: {
-    #           domain_name: "ActiveDirectoryFullyQualifiedName", # required
-    #           organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
-    #           file_system_administrators_group: "FileSystemAdministratorsGroupName",
-    #           user_name: "DirectoryUserName", # required
-    #           password: "DirectoryPassword", # required
-    #           dns_ips: ["IpAddress"], # required
-    #         },
-    #         deployment_type: "MULTI_AZ_1", # accepts MULTI_AZ_1, SINGLE_AZ_1, SINGLE_AZ_2
-    #         preferred_subnet_id: "SubnetId",
-    #         throughput_capacity: 1, # required
-    #         weekly_maintenance_start_time: "WeeklyTime",
-    #         daily_automatic_backup_start_time: "DailyTime",
-    #         automatic_backup_retention_days: 1,
-    #         copy_tags_to_backups: false,
-    #         aliases: ["AlternateDNSName"],
-    #         audit_log_configuration: {
-    #           file_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
-    #           file_share_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
-    #           audit_log_destination: "GeneralARN",
-    #         },
-    #       }
-    #
     # @!attribute [rw] active_directory_id
     #   The ID for an existing Amazon Web Services Managed Microsoft Active
     #   Directory (AD) instance that the file system should join when it's
@@ -2793,24 +2289,6 @@ module Aws::FSx
 
     # Specifies the configuration of the ONTAP volume that you are creating.
     #
-    # @note When making an API call, you may pass CreateOntapVolumeConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         junction_path: "JunctionPath",
-    #         security_style: "UNIX", # accepts UNIX, NTFS, MIXED
-    #         size_in_megabytes: 1, # required
-    #         storage_efficiency_enabled: false,
-    #         storage_virtual_machine_id: "StorageVirtualMachineId", # required
-    #         tiering_policy: {
-    #           cooling_period: 1,
-    #           name: "SNAPSHOT_ONLY", # accepts SNAPSHOT_ONLY, AUTO, ALL, NONE
-    #         },
-    #         ontap_volume_type: "RW", # accepts RW, DP
-    #         snapshot_policy: "SnapshotPolicy",
-    #         copy_tags_to_backups: false,
-    #       }
-    #
     # @!attribute [rw] junction_path
     #   Specifies the location in the SVM's namespace where the volume is
     #   mounted. The `JunctionPath` must have a leading forward slash, such
@@ -2964,14 +2442,6 @@ module Aws::FSx
     # The snapshot configuration to use when creating an OpenZFS volume from
     # a snapshot.
     #
-    # @note When making an API call, you may pass CreateOpenZFSOriginSnapshotConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         snapshot_arn: "ResourceARN", # required
-    #         copy_strategy: "CLONE", # required, accepts CLONE, FULL_COPY
-    #       }
-    #
     # @!attribute [rw] snapshot_arn
     #   The Amazon Resource Name (ARN) for a given resource. ARNs uniquely
     #   identify Amazon Web Services resources. We require an ARN when you
@@ -3008,40 +2478,6 @@ module Aws::FSx
 
     # Specifies the configuration of the Amazon FSx for OpenZFS volume that
     # you are creating.
-    #
-    # @note When making an API call, you may pass CreateOpenZFSVolumeConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         parent_volume_id: "VolumeId", # required
-    #         storage_capacity_reservation_gi_b: 1,
-    #         storage_capacity_quota_gi_b: 1,
-    #         record_size_ki_b: 1,
-    #         data_compression_type: "NONE", # accepts NONE, ZSTD, LZ4
-    #         copy_tags_to_snapshots: false,
-    #         origin_snapshot: {
-    #           snapshot_arn: "ResourceARN", # required
-    #           copy_strategy: "CLONE", # required, accepts CLONE, FULL_COPY
-    #         },
-    #         read_only: false,
-    #         nfs_exports: [
-    #           {
-    #             client_configurations: [ # required
-    #               {
-    #                 clients: "OpenZFSClients", # required
-    #                 options: ["OpenZFSNfsExportOption"], # required
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         user_and_group_quotas: [
-    #           {
-    #             type: "USER", # required, accepts USER, GROUP
-    #             id: 1, # required
-    #             storage_capacity_quota_gi_b: 1, # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] parent_volume_id
     #   The ID of the volume to use as the parent volume of the volume that
@@ -3169,21 +2605,6 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateSnapshotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_request_token: "ClientRequestToken",
-    #         name: "SnapshotName", # required
-    #         volume_id: "VolumeId", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] client_request_token
     #   (Optional) An idempotency token for resource creation, in a string
     #   of up to 64 ASCII characters. This token is automatically filled on
@@ -3229,34 +2650,6 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateStorageVirtualMachineRequest
-    #   data as a hash:
-    #
-    #       {
-    #         active_directory_configuration: {
-    #           net_bios_name: "NetBiosAlias", # required
-    #           self_managed_active_directory_configuration: {
-    #             domain_name: "ActiveDirectoryFullyQualifiedName", # required
-    #             organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
-    #             file_system_administrators_group: "FileSystemAdministratorsGroupName",
-    #             user_name: "DirectoryUserName", # required
-    #             password: "DirectoryPassword", # required
-    #             dns_ips: ["IpAddress"], # required
-    #           },
-    #         },
-    #         client_request_token: "ClientRequestToken",
-    #         file_system_id: "FileSystemId", # required
-    #         name: "StorageVirtualMachineName", # required
-    #         svm_admin_password: "AdminPassword",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         root_volume_security_style: "UNIX", # accepts UNIX, NTFS, MIXED
-    #       }
-    #
     # @!attribute [rw] active_directory_configuration
     #   Describes the self-managed Microsoft Active Directory to which you
     #   want to join the SVM. Joining an Active Directory provides user
@@ -3339,21 +2732,6 @@ module Aws::FSx
     # virtual machine (SVM) to your self-managed (including on-premises)
     # Microsoft Active Directory (AD) directory.
     #
-    # @note When making an API call, you may pass CreateSvmActiveDirectoryConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         net_bios_name: "NetBiosAlias", # required
-    #         self_managed_active_directory_configuration: {
-    #           domain_name: "ActiveDirectoryFullyQualifiedName", # required
-    #           organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
-    #           file_system_administrators_group: "FileSystemAdministratorsGroupName",
-    #           user_name: "DirectoryUserName", # required
-    #           password: "DirectoryPassword", # required
-    #           dns_ips: ["IpAddress"], # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] net_bios_name
     #   The NetBIOS name of the Active Directory computer object that will
     #   be created for your SVM.
@@ -3382,35 +2760,6 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateVolumeFromBackupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         backup_id: "BackupId", # required
-    #         client_request_token: "ClientRequestToken",
-    #         name: "VolumeName", # required
-    #         ontap_configuration: {
-    #           junction_path: "JunctionPath",
-    #           security_style: "UNIX", # accepts UNIX, NTFS, MIXED
-    #           size_in_megabytes: 1, # required
-    #           storage_efficiency_enabled: false,
-    #           storage_virtual_machine_id: "StorageVirtualMachineId", # required
-    #           tiering_policy: {
-    #             cooling_period: 1,
-    #             name: "SNAPSHOT_ONLY", # accepts SNAPSHOT_ONLY, AUTO, ALL, NONE
-    #           },
-    #           ontap_volume_type: "RW", # accepts RW, DP
-    #           snapshot_policy: "SnapshotPolicy",
-    #           copy_tags_to_backups: false,
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] backup_id
     #   The ID of the source backup. Specifies the backup that you are
     #   copying.
@@ -3464,65 +2813,6 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateVolumeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_request_token: "ClientRequestToken",
-    #         volume_type: "ONTAP", # required, accepts ONTAP, OPENZFS
-    #         name: "VolumeName", # required
-    #         ontap_configuration: {
-    #           junction_path: "JunctionPath",
-    #           security_style: "UNIX", # accepts UNIX, NTFS, MIXED
-    #           size_in_megabytes: 1, # required
-    #           storage_efficiency_enabled: false,
-    #           storage_virtual_machine_id: "StorageVirtualMachineId", # required
-    #           tiering_policy: {
-    #             cooling_period: 1,
-    #             name: "SNAPSHOT_ONLY", # accepts SNAPSHOT_ONLY, AUTO, ALL, NONE
-    #           },
-    #           ontap_volume_type: "RW", # accepts RW, DP
-    #           snapshot_policy: "SnapshotPolicy",
-    #           copy_tags_to_backups: false,
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         open_zfs_configuration: {
-    #           parent_volume_id: "VolumeId", # required
-    #           storage_capacity_reservation_gi_b: 1,
-    #           storage_capacity_quota_gi_b: 1,
-    #           record_size_ki_b: 1,
-    #           data_compression_type: "NONE", # accepts NONE, ZSTD, LZ4
-    #           copy_tags_to_snapshots: false,
-    #           origin_snapshot: {
-    #             snapshot_arn: "ResourceARN", # required
-    #             copy_strategy: "CLONE", # required, accepts CLONE, FULL_COPY
-    #           },
-    #           read_only: false,
-    #           nfs_exports: [
-    #             {
-    #               client_configurations: [ # required
-    #                 {
-    #                   clients: "OpenZFSClients", # required
-    #                   options: ["OpenZFSNfsExportOption"], # required
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #           user_and_group_quotas: [
-    #             {
-    #               type: "USER", # required, accepts USER, GROUP
-    #               id: 1, # required
-    #               storage_capacity_quota_gi_b: 1, # required
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_request_token
     #   (Optional) An idempotency token for resource creation, in a string
     #   of up to 64 ASCII characters. This token is automatically filled on
@@ -4132,14 +3422,6 @@ module Aws::FSx
     # system IDs, task lifecycles, and by task type. A filter object
     # consists of a filter `Name`, and one or more `Values` for the filter.
     #
-    # @note When making an API call, you may pass DataRepositoryTaskFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "file-system-id", # accepts file-system-id, task-lifecycle, data-repository-association-id, file-cache-id
-    #         values: ["DataRepositoryTaskFilterValue"],
-    #       }
-    #
     # @!attribute [rw] name
     #   Name of the task property to use in filtering the tasks returned in
     #   the response.
@@ -4225,14 +3507,6 @@ module Aws::FSx
 
     # The request object for the `DeleteBackup` operation.
     #
-    # @note When making an API call, you may pass DeleteBackupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         backup_id: "BackupId", # required
-    #         client_request_token: "ClientRequestToken",
-    #       }
-    #
     # @!attribute [rw] backup_id
     #   The ID of the backup that you want to delete.
     #   @return [String]
@@ -4275,15 +3549,6 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDataRepositoryAssociationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         association_id: "DataRepositoryAssociationId", # required
-    #         client_request_token: "ClientRequestToken",
-    #         delete_data_in_file_system: false,
-    #       }
-    #
     # @!attribute [rw] association_id
     #   The ID of the data repository association that you want to delete.
     #   @return [String]
@@ -4337,14 +3602,6 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteFileCacheRequest
-    #   data as a hash:
-    #
-    #       {
-    #         file_cache_id: "FileCacheId", # required
-    #         client_request_token: "ClientRequestToken",
-    #       }
-    #
     # @!attribute [rw] file_cache_id
     #   The ID of the cache that's being deleted.
     #   @return [String]
@@ -4389,19 +3646,6 @@ module Aws::FSx
 
     # The configuration object for the Amazon FSx for Lustre file system
     # being deleted in the `DeleteFileSystem` operation.
-    #
-    # @note When making an API call, you may pass DeleteFileSystemLustreConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         skip_final_backup: false,
-    #         final_backup_tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] skip_final_backup
     #   Set `SkipFinalBackup` to false if you want to take a final backup of
@@ -4456,20 +3700,6 @@ module Aws::FSx
     # The configuration object for the Amazon FSx for OpenZFS file system
     # used in the `DeleteFileSystem` operation.
     #
-    # @note When making an API call, you may pass DeleteFileSystemOpenZFSConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         skip_final_backup: false,
-    #         final_backup_tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         options: ["DELETE_CHILD_VOLUMES_AND_SNAPSHOTS"], # accepts DELETE_CHILD_VOLUMES_AND_SNAPSHOTS
-    #       }
-    #
     # @!attribute [rw] skip_final_backup
     #   By default, Amazon FSx for OpenZFS takes a final backup on your
     #   behalf when the `DeleteFileSystem` operation is invoked. Doing this
@@ -4521,42 +3751,6 @@ module Aws::FSx
     end
 
     # The request object for `DeleteFileSystem` operation.
-    #
-    # @note When making an API call, you may pass DeleteFileSystemRequest
-    #   data as a hash:
-    #
-    #       {
-    #         file_system_id: "FileSystemId", # required
-    #         client_request_token: "ClientRequestToken",
-    #         windows_configuration: {
-    #           skip_final_backup: false,
-    #           final_backup_tags: [
-    #             {
-    #               key: "TagKey", # required
-    #               value: "TagValue", # required
-    #             },
-    #           ],
-    #         },
-    #         lustre_configuration: {
-    #           skip_final_backup: false,
-    #           final_backup_tags: [
-    #             {
-    #               key: "TagKey", # required
-    #               value: "TagValue", # required
-    #             },
-    #           ],
-    #         },
-    #         open_zfs_configuration: {
-    #           skip_final_backup: false,
-    #           final_backup_tags: [
-    #             {
-    #               key: "TagKey", # required
-    #               value: "TagValue", # required
-    #             },
-    #           ],
-    #           options: ["DELETE_CHILD_VOLUMES_AND_SNAPSHOTS"], # accepts DELETE_CHILD_VOLUMES_AND_SNAPSHOTS
-    #         },
-    #       }
     #
     # @!attribute [rw] file_system_id
     #   The ID of the file system that you want to delete.
@@ -4641,19 +3835,6 @@ module Aws::FSx
     # The configuration object for the Microsoft Windows file system used in
     # the `DeleteFileSystem` operation.
     #
-    # @note When making an API call, you may pass DeleteFileSystemWindowsConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         skip_final_backup: false,
-    #         final_backup_tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] skip_final_backup
     #   By default, Amazon FSx for Windows takes a final backup on your
     #   behalf when the `DeleteFileSystem` operation is invoked. Doing this
@@ -4695,14 +3876,6 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteSnapshotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_request_token: "ClientRequestToken",
-    #         snapshot_id: "SnapshotId", # required
-    #       }
-    #
     # @!attribute [rw] client_request_token
     #   (Optional) An idempotency token for resource creation, in a string
     #   of up to 64 ASCII characters. This token is automatically filled on
@@ -4744,14 +3917,6 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteStorageVirtualMachineRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_request_token: "ClientRequestToken",
-    #         storage_virtual_machine_id: "StorageVirtualMachineId", # required
-    #       }
-    #
     # @!attribute [rw] client_request_token
     #   (Optional) An idempotency token for resource creation, in a string
     #   of up to 64 ASCII characters. This token is automatically filled on
@@ -4795,19 +3960,6 @@ module Aws::FSx
     # Use to specify skipping a final backup, or to add tags to a final
     # backup.
     #
-    # @note When making an API call, you may pass DeleteVolumeOntapConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         skip_final_backup: false,
-    #         final_backup_tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] skip_final_backup
     #   Set to true if you want to skip taking a final backup of the volume
     #   you are deleting.
@@ -4850,13 +4002,6 @@ module Aws::FSx
     # A value that specifies whether to delete all child volumes and
     # snapshots.
     #
-    # @note When making an API call, you may pass DeleteVolumeOpenZFSConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         options: ["DELETE_CHILD_VOLUMES_AND_SNAPSHOTS"], # accepts DELETE_CHILD_VOLUMES_AND_SNAPSHOTS
-    #       }
-    #
     # @!attribute [rw] options
     #   To delete the volume's child volumes, snapshots, and clones, use
     #   the string `DELETE_CHILD_VOLUMES_AND_SNAPSHOTS`.
@@ -4870,26 +4015,6 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteVolumeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_request_token: "ClientRequestToken",
-    #         volume_id: "VolumeId", # required
-    #         ontap_configuration: {
-    #           skip_final_backup: false,
-    #           final_backup_tags: [
-    #             {
-    #               key: "TagKey", # required
-    #               value: "TagValue", # required
-    #             },
-    #           ],
-    #         },
-    #         open_zfs_configuration: {
-    #           options: ["DELETE_CHILD_VOLUMES_AND_SNAPSHOTS"], # accepts DELETE_CHILD_VOLUMES_AND_SNAPSHOTS
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_request_token
     #   (Optional) An idempotency token for resource creation, in a string
     #   of up to 64 ASCII characters. This token is automatically filled on
@@ -4952,21 +4077,6 @@ module Aws::FSx
 
     # The request object for the `DescribeBackups` operation.
     #
-    # @note When making an API call, you may pass DescribeBackupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         backup_ids: ["BackupId"],
-    #         filters: [
-    #           {
-    #             name: "file-system-id", # accepts file-system-id, backup-type, file-system-type, volume-id, data-repository-type, file-cache-id, file-cache-type
-    #             values: ["FilterValue"],
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] backup_ids
     #   The IDs of the backups that you want to retrieve. This parameter
     #   value overrides any filters. If any IDs aren't found, a
@@ -5024,21 +4134,6 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDataRepositoryAssociationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         association_ids: ["DataRepositoryAssociationId"],
-    #         filters: [
-    #           {
-    #             name: "file-system-id", # accepts file-system-id, backup-type, file-system-type, volume-id, data-repository-type, file-cache-id, file-cache-type
-    #             values: ["FilterValue"],
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] association_ids
     #   IDs of the data repository associations whose descriptions you want
     #   to retrieve (String).
@@ -5091,21 +4186,6 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDataRepositoryTasksRequest
-    #   data as a hash:
-    #
-    #       {
-    #         task_ids: ["TaskId"],
-    #         filters: [
-    #           {
-    #             name: "file-system-id", # accepts file-system-id, task-lifecycle, data-repository-association-id, file-cache-id
-    #             values: ["DataRepositoryTaskFilterValue"],
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] task_ids
     #   (Optional) IDs of the tasks whose descriptions you want to retrieve
     #   (String).
@@ -5160,15 +4240,6 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeFileCachesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         file_cache_ids: ["FileCacheId"],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] file_cache_ids
     #   IDs of the caches whose descriptions you want to retrieve (String).
     #   @return [Array<String>]
@@ -5216,16 +4287,6 @@ module Aws::FSx
     end
 
     # The request object for `DescribeFileSystemAliases` operation.
-    #
-    # @note When making an API call, you may pass DescribeFileSystemAliasesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_request_token: "ClientRequestToken",
-    #         file_system_id: "FileSystemId", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
     #
     # @!attribute [rw] client_request_token
     #   (Optional) An idempotency token for resource creation, in a string
@@ -5292,15 +4353,6 @@ module Aws::FSx
 
     # The request object for `DescribeFileSystems` operation.
     #
-    # @note When making an API call, you may pass DescribeFileSystemsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         file_system_ids: ["FileSystemId"],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] file_system_ids
     #   IDs of the file systems whose descriptions you want to retrieve
     #   (String).
@@ -5351,21 +4403,6 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeSnapshotsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         snapshot_ids: ["SnapshotId"],
-    #         filters: [
-    #           {
-    #             name: "file-system-id", # accepts file-system-id, volume-id
-    #             values: ["SnapshotFilterValue"],
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] snapshot_ids
     #   The IDs of the snapshots that you want to retrieve. This parameter
     #   value overrides any filters. If any IDs aren't found, a
@@ -5420,21 +4457,6 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeStorageVirtualMachinesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         storage_virtual_machine_ids: ["StorageVirtualMachineId"],
-    #         filters: [
-    #           {
-    #             name: "file-system-id", # accepts file-system-id
-    #             values: ["StorageVirtualMachineFilterValue"],
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] storage_virtual_machine_ids
     #   Enter the ID of one or more SVMs that you want to view.
     #   @return [Array<String>]
@@ -5487,21 +4509,6 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeVolumesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         volume_ids: ["VolumeId"],
-    #         filters: [
-    #           {
-    #             name: "file-system-id", # accepts file-system-id, storage-virtual-machine-id
-    #             values: ["VolumeFilterValue"],
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] volume_ids
     #   The IDs of the volumes whose descriptions you want to retrieve.
     #   @return [Array<String>]
@@ -5558,15 +4565,6 @@ module Aws::FSx
     # The request object of DNS aliases to disassociate from an Amazon FSx
     # for Windows File Server file system.
     #
-    # @note When making an API call, you may pass DisassociateFileSystemAliasesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_request_token: "ClientRequestToken",
-    #         file_system_id: "FileSystemId", # required
-    #         aliases: ["AlternateDNSName"], # required
-    #       }
-    #
     # @!attribute [rw] client_request_token
     #   (Optional) An idempotency token for resource creation, in a string
     #   of up to 64 ASCII characters. This token is automatically filled on
@@ -5621,14 +4619,6 @@ module Aws::FSx
     # additional IOPS per GB of storage. The configuration consists of the
     # total number of provisioned SSD IOPS and how the amount was
     # provisioned (by the customer or by the system).
-    #
-    # @note When making an API call, you may pass DiskIopsConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         mode: "AUTOMATIC", # accepts AUTOMATIC, USER_PROVISIONED
-    #         iops: 1,
-    #       }
     #
     # @!attribute [rw] mode
     #   Specifies whether the number of IOPS for the file system is using
@@ -5927,19 +4917,6 @@ module Aws::FSx
     #
     # The DRA does not support automatic import or automatic export.
     #
-    # @note When making an API call, you may pass FileCacheDataRepositoryAssociation
-    #   data as a hash:
-    #
-    #       {
-    #         file_cache_path: "Namespace", # required
-    #         data_repository_path: "ArchivePath", # required
-    #         data_repository_subdirectories: ["Namespace"],
-    #         nfs: {
-    #           version: "NFS3", # required, accepts NFS3
-    #           dns_ips: ["IpAddress"],
-    #         },
-    #       }
-    #
     # @!attribute [rw] file_cache_path
     #   A path on the cache that points to a high-level directory (such as
     #   `/ns1/`) or subdirectory (such as `/ns1/subdir/`) that will be
@@ -6090,13 +5067,6 @@ module Aws::FSx
     # The metadata on Amazon File Cache is managed by a Lustre Metadata
     # Server (MDS) while the actual metadata is persisted on an MDT.
     #
-    # @note When making an API call, you may pass FileCacheLustreMetadataConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         storage_capacity: 1, # required
-    #       }
-    #
     # @!attribute [rw] storage_capacity
     #   The storage capacity of the Lustre MDT (Metadata Target) storage
     #   volume in gibibytes (GiB). The only supported value is `2400` GiB.
@@ -6112,14 +5082,6 @@ module Aws::FSx
 
     # The configuration for an NFS data repository association (DRA) created
     # during the creation of the Amazon File Cache resource.
-    #
-    # @note When making an API call, you may pass FileCacheNFSConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         version: "NFS3", # required, accepts NFS3
-    #         dns_ips: ["IpAddress"],
-    #       }
     #
     # @!attribute [rw] version
     #   The version of the NFS (Network File System) protocol of the NFS
@@ -6427,14 +5389,6 @@ module Aws::FSx
     # multiple filters to return results that meet all applied filter
     # requirements.
     #
-    # @note When making an API call, you may pass Filter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "file-system-id", # accepts file-system-id, backup-type, file-system-type, volume-id, data-repository-type, file-cache-id, file-cache-type
-    #         values: ["FilterValue"],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name for this filter.
     #   @return [String]
@@ -6653,15 +5607,6 @@ module Aws::FSx
     end
 
     # The request object for `ListTagsForResource` operation.
-    #
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceARN", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
     #
     # @!attribute [rw] resource_arn
     #   The ARN of the Amazon FSx resource that will have its tags listed.
@@ -6901,14 +5846,6 @@ module Aws::FSx
     # Lustre logging writes the enabled logging events for your file system
     # or cache to Amazon CloudWatch Logs.
     #
-    # @note When making an API call, you may pass LustreLogCreateConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         level: "DISABLED", # required, accepts DISABLED, WARN_ONLY, ERROR_ONLY, WARN_ERROR
-    #         destination: "GeneralARN",
-    #       }
-    #
     # @!attribute [rw] level
     #   Sets which data repository events are logged by Amazon FSx.
     #
@@ -6968,14 +5905,6 @@ module Aws::FSx
     #
     #
     # [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/root-squash.html
-    #
-    # @note When making an API call, you may pass LustreRootSquashConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         root_squash: "LustreRootSquash",
-    #         no_squash_nids: ["LustreNoSquashNid"],
-    #       }
     #
     # @!attribute [rw] root_squash
     #   You enable root squash by setting a user ID (UID) and group ID (GID)
@@ -7360,14 +6289,6 @@ module Aws::FSx
     # Specifies who can mount an OpenZFS file system and the options
     # available while mounting the file system.
     #
-    # @note When making an API call, you may pass OpenZFSClientConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         clients: "OpenZFSClients", # required
-    #         options: ["OpenZFSNfsExportOption"], # required
-    #       }
-    #
     # @!attribute [rw] clients
     #   A value that specifies who can mount the file system. You can
     #   provide a wildcard character (`*`), an IP address (`0.0.0.0`), or a
@@ -7405,33 +6326,6 @@ module Aws::FSx
     end
 
     # The configuration of an Amazon FSx for OpenZFS root volume.
-    #
-    # @note When making an API call, you may pass OpenZFSCreateRootVolumeConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         record_size_ki_b: 1,
-    #         data_compression_type: "NONE", # accepts NONE, ZSTD, LZ4
-    #         nfs_exports: [
-    #           {
-    #             client_configurations: [ # required
-    #               {
-    #                 clients: "OpenZFSClients", # required
-    #                 options: ["OpenZFSNfsExportOption"], # required
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         user_and_group_quotas: [
-    #           {
-    #             type: "USER", # required, accepts USER, GROUP
-    #             id: 1, # required
-    #             storage_capacity_quota_gi_b: 1, # required
-    #           },
-    #         ],
-    #         copy_tags_to_snapshots: false,
-    #         read_only: false,
-    #       }
     #
     # @!attribute [rw] record_size_ki_b
     #   Specifies the record size of an OpenZFS root volume, in kibibytes
@@ -7598,18 +6492,6 @@ module Aws::FSx
     # The Network File System (NFS) configurations for mounting an Amazon
     # FSx for OpenZFS file system.
     #
-    # @note When making an API call, you may pass OpenZFSNfsExport
-    #   data as a hash:
-    #
-    #       {
-    #         client_configurations: [ # required
-    #           {
-    #             clients: "OpenZFSClients", # required
-    #             options: ["OpenZFSNfsExportOption"], # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] client_configurations
     #   A list of configuration objects that contain the client and options
     #   for mounting the OpenZFS file system.
@@ -7662,15 +6544,6 @@ module Aws::FSx
 
     # The configuration for how much storage a user or group can use on the
     # volume.
-    #
-    # @note When making an API call, you may pass OpenZFSUserOrGroupQuota
-    #   data as a hash:
-    #
-    #       {
-    #         type: "USER", # required, accepts USER, GROUP
-    #         id: 1, # required
-    #         storage_capacity_quota_gi_b: 1, # required
-    #       }
     #
     # @!attribute [rw] type
     #   A value that specifies whether the quota applies to a user or group.
@@ -7809,14 +6682,6 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ReleaseFileSystemNfsV3LocksRequest
-    #   data as a hash:
-    #
-    #       {
-    #         file_system_id: "FileSystemId", # required
-    #         client_request_token: "ClientRequestToken",
-    #       }
-    #
     # @!attribute [rw] file_system_id
     #   The globally unique ID of the file system, assigned by Amazon FSx.
     #   @return [String]
@@ -7892,16 +6757,6 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RestoreVolumeFromSnapshotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_request_token: "ClientRequestToken",
-    #         volume_id: "VolumeId", # required
-    #         snapshot_id: "SnapshotId", # required
-    #         options: ["DELETE_INTERMEDIATE_SNAPSHOTS"], # accepts DELETE_INTERMEDIATE_SNAPSHOTS, DELETE_CLONED_VOLUMES
-    #       }
-    #
     # @!attribute [rw] client_request_token
     #   (Optional) An idempotency token for resource creation, in a string
     #   of up to 64 ASCII characters. This token is automatically filled on
@@ -7985,18 +6840,6 @@ module Aws::FSx
     #
     #  </note>
     #
-    # @note When making an API call, you may pass S3DataRepositoryConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         auto_import_policy: {
-    #           events: ["NEW"], # accepts NEW, CHANGED, DELETED
-    #         },
-    #         auto_export_policy: {
-    #           events: ["NEW"], # accepts NEW, CHANGED, DELETED
-    #         },
-    #       }
-    #
     # @!attribute [rw] auto_import_policy
     #   Specifies the type of updated objects (new, changed, deleted) that
     #   will be automatically imported from the linked S3 bucket to your
@@ -8070,18 +6913,6 @@ module Aws::FSx
     # [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-managed-AD.html
     # [2]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-svms.html
     #
-    # @note When making an API call, you may pass SelfManagedActiveDirectoryConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "ActiveDirectoryFullyQualifiedName", # required
-    #         organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
-    #         file_system_administrators_group: "FileSystemAdministratorsGroupName",
-    #         user_name: "DirectoryUserName", # required
-    #         password: "DirectoryPassword", # required
-    #         dns_ips: ["IpAddress"], # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The fully qualified domain name of the self-managed AD directory,
     #   such as `corp.example.com`.
@@ -8147,15 +6978,6 @@ module Aws::FSx
 
     # The configuration that Amazon FSx uses to join the Windows File Server
     # instance to a self-managed Microsoft Active Directory (AD) directory.
-    #
-    # @note When making an API call, you may pass SelfManagedActiveDirectoryConfigurationUpdates
-    #   data as a hash:
-    #
-    #       {
-    #         user_name: "DirectoryUserName",
-    #         password: "DirectoryPassword",
-    #         dns_ips: ["IpAddress"],
-    #       }
     #
     # @!attribute [rw] user_name
     #   The user name for the service account on your self-managed AD domain
@@ -8282,14 +7104,6 @@ module Aws::FSx
     # A filter used to restrict the results of `DescribeSnapshots` calls.
     # You can use multiple filters to return results that meet all applied
     # filter requirements.
-    #
-    # @note When making an API call, you may pass SnapshotFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "file-system-id", # accepts file-system-id, volume-id
-    #         values: ["SnapshotFilterValue"],
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the filter to use. You can filter by the
@@ -8442,14 +7256,6 @@ module Aws::FSx
     # for NetApp ONTAP storage virtual machines (SVMs). You can use multiple
     # filters to return results that meet all applied filter requirements.
     #
-    # @note When making an API call, you may pass StorageVirtualMachineFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "file-system-id", # accepts file-system-id
-    #         values: ["StorageVirtualMachineFilterValue"],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name for this filter.
     #   @return [String]
@@ -8567,14 +7373,6 @@ module Aws::FSx
 
     # Specifies a key-value pair for a resource tag.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   A value that specifies the `TagKey`, the name of the tag. Tag keys
     #   must be unique for the resource to which they are attached.
@@ -8597,19 +7395,6 @@ module Aws::FSx
     end
 
     # The request object for the `TagResource` operation.
-    #
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceARN", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the Amazon FSx resource that you
@@ -8667,14 +7452,6 @@ module Aws::FSx
     #
     # ^
     #
-    # @note When making an API call, you may pass TieringPolicy
-    #   data as a hash:
-    #
-    #       {
-    #         cooling_period: 1,
-    #         name: "SNAPSHOT_ONLY", # accepts SNAPSHOT_ONLY, AUTO, ALL, NONE
-    #       }
-    #
     # @!attribute [rw] cooling_period
     #   Specifies the number of days that user data in a volume must remain
     #   inactive before it is considered "cold" and moved to the capacity
@@ -8725,14 +7502,6 @@ module Aws::FSx
 
     # The request object for `UntagResource` action.
     #
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceARN", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the Amazon FSx resource to untag.
     #   @return [String]
@@ -8757,23 +7526,6 @@ module Aws::FSx
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateDataRepositoryAssociationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         association_id: "DataRepositoryAssociationId", # required
-    #         client_request_token: "ClientRequestToken",
-    #         imported_file_chunk_size: 1,
-    #         s3: {
-    #           auto_import_policy: {
-    #             events: ["NEW"], # accepts NEW, CHANGED, DELETED
-    #           },
-    #           auto_export_policy: {
-    #             events: ["NEW"], # accepts NEW, CHANGED, DELETED
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] association_id
     #   The ID of the data repository association that you are updating.
     #   @return [String]
@@ -8835,13 +7587,6 @@ module Aws::FSx
 
     # The configuration update for an Amazon File Cache resource.
     #
-    # @note When making an API call, you may pass UpdateFileCacheLustreConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         weekly_maintenance_start_time: "WeeklyTime",
-    #       }
-    #
     # @!attribute [rw] weekly_maintenance_start_time
     #   A recurring weekly time, in the format `D:HH:MM`.
     #
@@ -8867,17 +7612,6 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateFileCacheRequest
-    #   data as a hash:
-    #
-    #       {
-    #         file_cache_id: "FileCacheId", # required
-    #         client_request_token: "ClientRequestToken",
-    #         lustre_configuration: {
-    #           weekly_maintenance_start_time: "WeeklyTime",
-    #         },
-    #       }
-    #
     # @!attribute [rw] file_cache_id
     #   The ID of the cache that you are updating.
     #   @return [String]
@@ -8920,25 +7654,6 @@ module Aws::FSx
 
     # The configuration object for Amazon FSx for Lustre file systems used
     # in the `UpdateFileSystem` operation.
-    #
-    # @note When making an API call, you may pass UpdateFileSystemLustreConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         weekly_maintenance_start_time: "WeeklyTime",
-    #         daily_automatic_backup_start_time: "DailyTime",
-    #         automatic_backup_retention_days: 1,
-    #         auto_import_policy: "NONE", # accepts NONE, NEW, NEW_CHANGED, NEW_CHANGED_DELETED
-    #         data_compression_type: "NONE", # accepts NONE, LZ4
-    #         log_configuration: {
-    #           level: "DISABLED", # required, accepts DISABLED, WARN_ONLY, ERROR_ONLY, WARN_ERROR
-    #           destination: "GeneralARN",
-    #         },
-    #         root_squash_configuration: {
-    #           root_squash: "LustreRootSquash",
-    #           no_squash_nids: ["LustreNoSquashNid"],
-    #         },
-    #       }
     #
     # @!attribute [rw] weekly_maintenance_start_time
     #   (Optional) The preferred start time to perform weekly maintenance,
@@ -9039,23 +7754,6 @@ module Aws::FSx
     # The configuration updates for an Amazon FSx for NetApp ONTAP file
     # system.
     #
-    # @note When making an API call, you may pass UpdateFileSystemOntapConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         automatic_backup_retention_days: 1,
-    #         daily_automatic_backup_start_time: "DailyTime",
-    #         fsx_admin_password: "AdminPassword",
-    #         weekly_maintenance_start_time: "WeeklyTime",
-    #         disk_iops_configuration: {
-    #           mode: "AUTOMATIC", # accepts AUTOMATIC, USER_PROVISIONED
-    #           iops: 1,
-    #         },
-    #         throughput_capacity: 1,
-    #         add_route_table_ids: ["RouteTableId"],
-    #         remove_route_table_ids: ["RouteTableId"],
-    #       }
-    #
     # @!attribute [rw] automatic_backup_retention_days
     #   The number of days to retain automatic backups. Setting this
     #   property to `0` disables automatic backups. You can retain automatic
@@ -9133,22 +7831,6 @@ module Aws::FSx
     end
 
     # The configuration updates for an Amazon FSx for OpenZFS file system.
-    #
-    # @note When making an API call, you may pass UpdateFileSystemOpenZFSConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         automatic_backup_retention_days: 1,
-    #         copy_tags_to_backups: false,
-    #         copy_tags_to_volumes: false,
-    #         daily_automatic_backup_start_time: "DailyTime",
-    #         throughput_capacity: 1,
-    #         weekly_maintenance_start_time: "WeeklyTime",
-    #         disk_iops_configuration: {
-    #           mode: "AUTOMATIC", # accepts AUTOMATIC, USER_PROVISIONED
-    #           iops: 1,
-    #         },
-    #       }
     #
     # @!attribute [rw] automatic_backup_retention_days
     #   The number of days to retain automatic backups. Setting this
@@ -9236,71 +7918,6 @@ module Aws::FSx
     end
 
     # The request object for the `UpdateFileSystem` operation.
-    #
-    # @note When making an API call, you may pass UpdateFileSystemRequest
-    #   data as a hash:
-    #
-    #       {
-    #         file_system_id: "FileSystemId", # required
-    #         client_request_token: "ClientRequestToken",
-    #         storage_capacity: 1,
-    #         windows_configuration: {
-    #           weekly_maintenance_start_time: "WeeklyTime",
-    #           daily_automatic_backup_start_time: "DailyTime",
-    #           automatic_backup_retention_days: 1,
-    #           throughput_capacity: 1,
-    #           self_managed_active_directory_configuration: {
-    #             user_name: "DirectoryUserName",
-    #             password: "DirectoryPassword",
-    #             dns_ips: ["IpAddress"],
-    #           },
-    #           audit_log_configuration: {
-    #             file_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
-    #             file_share_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
-    #             audit_log_destination: "GeneralARN",
-    #           },
-    #         },
-    #         lustre_configuration: {
-    #           weekly_maintenance_start_time: "WeeklyTime",
-    #           daily_automatic_backup_start_time: "DailyTime",
-    #           automatic_backup_retention_days: 1,
-    #           auto_import_policy: "NONE", # accepts NONE, NEW, NEW_CHANGED, NEW_CHANGED_DELETED
-    #           data_compression_type: "NONE", # accepts NONE, LZ4
-    #           log_configuration: {
-    #             level: "DISABLED", # required, accepts DISABLED, WARN_ONLY, ERROR_ONLY, WARN_ERROR
-    #             destination: "GeneralARN",
-    #           },
-    #           root_squash_configuration: {
-    #             root_squash: "LustreRootSquash",
-    #             no_squash_nids: ["LustreNoSquashNid"],
-    #           },
-    #         },
-    #         ontap_configuration: {
-    #           automatic_backup_retention_days: 1,
-    #           daily_automatic_backup_start_time: "DailyTime",
-    #           fsx_admin_password: "AdminPassword",
-    #           weekly_maintenance_start_time: "WeeklyTime",
-    #           disk_iops_configuration: {
-    #             mode: "AUTOMATIC", # accepts AUTOMATIC, USER_PROVISIONED
-    #             iops: 1,
-    #           },
-    #           throughput_capacity: 1,
-    #           add_route_table_ids: ["RouteTableId"],
-    #           remove_route_table_ids: ["RouteTableId"],
-    #         },
-    #         open_zfs_configuration: {
-    #           automatic_backup_retention_days: 1,
-    #           copy_tags_to_backups: false,
-    #           copy_tags_to_volumes: false,
-    #           daily_automatic_backup_start_time: "DailyTime",
-    #           throughput_capacity: 1,
-    #           weekly_maintenance_start_time: "WeeklyTime",
-    #           disk_iops_configuration: {
-    #             mode: "AUTOMATIC", # accepts AUTOMATIC, USER_PROVISIONED
-    #             iops: 1,
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] file_system_id
     #   The ID of the file system that you are updating.
@@ -9416,26 +8033,6 @@ module Aws::FSx
     # Server file system. Amazon FSx only overwrites existing properties
     # with non-null values provided in the request.
     #
-    # @note When making an API call, you may pass UpdateFileSystemWindowsConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         weekly_maintenance_start_time: "WeeklyTime",
-    #         daily_automatic_backup_start_time: "DailyTime",
-    #         automatic_backup_retention_days: 1,
-    #         throughput_capacity: 1,
-    #         self_managed_active_directory_configuration: {
-    #           user_name: "DirectoryUserName",
-    #           password: "DirectoryPassword",
-    #           dns_ips: ["IpAddress"],
-    #         },
-    #         audit_log_configuration: {
-    #           file_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
-    #           file_share_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
-    #           audit_log_destination: "GeneralARN",
-    #         },
-    #       }
-    #
     # @!attribute [rw] weekly_maintenance_start_time
     #   The preferred start time to perform weekly maintenance, formatted
     #   d:HH:MM in the UTC time zone. Where d is the weekday number, from 1
@@ -9499,22 +8096,6 @@ module Aws::FSx
 
     # Used to specify changes to the ONTAP configuration for the volume you
     # are updating.
-    #
-    # @note When making an API call, you may pass UpdateOntapVolumeConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         junction_path: "JunctionPath",
-    #         security_style: "UNIX", # accepts UNIX, NTFS, MIXED
-    #         size_in_megabytes: 1,
-    #         storage_efficiency_enabled: false,
-    #         tiering_policy: {
-    #           cooling_period: 1,
-    #           name: "SNAPSHOT_ONLY", # accepts SNAPSHOT_ONLY, AUTO, ALL, NONE
-    #         },
-    #         snapshot_policy: "SnapshotPolicy",
-    #         copy_tags_to_backups: false,
-    #       }
     #
     # @!attribute [rw] junction_path
     #   Specifies the location in the SVM's namespace where the volume is
@@ -9598,34 +8179,6 @@ module Aws::FSx
     # Used to specify changes to the OpenZFS configuration for the volume
     # that you are updating.
     #
-    # @note When making an API call, you may pass UpdateOpenZFSVolumeConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         storage_capacity_reservation_gi_b: 1,
-    #         storage_capacity_quota_gi_b: 1,
-    #         record_size_ki_b: 1,
-    #         data_compression_type: "NONE", # accepts NONE, ZSTD, LZ4
-    #         nfs_exports: [
-    #           {
-    #             client_configurations: [ # required
-    #               {
-    #                 clients: "OpenZFSClients", # required
-    #                 options: ["OpenZFSNfsExportOption"], # required
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         user_and_group_quotas: [
-    #           {
-    #             type: "USER", # required, accepts USER, GROUP
-    #             id: 1, # required
-    #             storage_capacity_quota_gi_b: 1, # required
-    #           },
-    #         ],
-    #         read_only: false,
-    #       }
-    #
     # @!attribute [rw] storage_capacity_reservation_gi_b
     #   The amount of storage in gibibytes (GiB) to reserve from the parent
     #   volume. You can't reserve more storage than the parent volume has
@@ -9700,15 +8253,6 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateSnapshotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_request_token: "ClientRequestToken",
-    #         name: "SnapshotName", # required
-    #         snapshot_id: "SnapshotId", # required
-    #       }
-    #
     # @!attribute [rw] client_request_token
     #   (Optional) An idempotency token for resource creation, in a string
     #   of up to 64 ASCII characters. This token is automatically filled on
@@ -9751,22 +8295,6 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateStorageVirtualMachineRequest
-    #   data as a hash:
-    #
-    #       {
-    #         active_directory_configuration: {
-    #           self_managed_active_directory_configuration: {
-    #             user_name: "DirectoryUserName",
-    #             password: "DirectoryPassword",
-    #             dns_ips: ["IpAddress"],
-    #           },
-    #         },
-    #         client_request_token: "ClientRequestToken",
-    #         storage_virtual_machine_id: "StorageVirtualMachineId", # required
-    #         svm_admin_password: "AdminPassword",
-    #       }
-    #
     # @!attribute [rw] active_directory_configuration
     #   Updates the Microsoft Active Directory (AD) configuration for an SVM
     #   that is joined to an AD.
@@ -9819,17 +8347,6 @@ module Aws::FSx
     # joined to an AD. Please note, account credentials are not returned in
     # the response payload.
     #
-    # @note When making an API call, you may pass UpdateSvmActiveDirectoryConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         self_managed_active_directory_configuration: {
-    #           user_name: "DirectoryUserName",
-    #           password: "DirectoryPassword",
-    #           dns_ips: ["IpAddress"],
-    #         },
-    #       }
-    #
     # @!attribute [rw] self_managed_active_directory_configuration
     #   The configuration that Amazon FSx uses to join the Windows File
     #   Server instance to a self-managed Microsoft Active Directory (AD)
@@ -9844,51 +8361,6 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateVolumeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_request_token: "ClientRequestToken",
-    #         volume_id: "VolumeId", # required
-    #         ontap_configuration: {
-    #           junction_path: "JunctionPath",
-    #           security_style: "UNIX", # accepts UNIX, NTFS, MIXED
-    #           size_in_megabytes: 1,
-    #           storage_efficiency_enabled: false,
-    #           tiering_policy: {
-    #             cooling_period: 1,
-    #             name: "SNAPSHOT_ONLY", # accepts SNAPSHOT_ONLY, AUTO, ALL, NONE
-    #           },
-    #           snapshot_policy: "SnapshotPolicy",
-    #           copy_tags_to_backups: false,
-    #         },
-    #         name: "VolumeName",
-    #         open_zfs_configuration: {
-    #           storage_capacity_reservation_gi_b: 1,
-    #           storage_capacity_quota_gi_b: 1,
-    #           record_size_ki_b: 1,
-    #           data_compression_type: "NONE", # accepts NONE, ZSTD, LZ4
-    #           nfs_exports: [
-    #             {
-    #               client_configurations: [ # required
-    #                 {
-    #                   clients: "OpenZFSClients", # required
-    #                   options: ["OpenZFSNfsExportOption"], # required
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #           user_and_group_quotas: [
-    #             {
-    #               type: "USER", # required, accepts USER, GROUP
-    #               id: 1, # required
-    #               storage_capacity_quota_gi_b: 1, # required
-    #             },
-    #           ],
-    #           read_only: false,
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_request_token
     #   (Optional) An idempotency token for resource creation, in a string
     #   of up to 64 ASCII characters. This token is automatically filled on
@@ -10045,14 +8517,6 @@ module Aws::FSx
     # multiple filters to return results that meet all applied filter
     # requirements.
     #
-    # @note When making an API call, you may pass VolumeFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "file-system-id", # accepts file-system-id, storage-virtual-machine-id
-    #         values: ["VolumeFilterValue"],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name for this filter.
     #   @return [String]
@@ -10153,15 +8617,6 @@ module Aws::FSx
 
     # The Windows file access auditing configuration used when creating or
     # updating an Amazon FSx for Windows File Server file system.
-    #
-    # @note When making an API call, you may pass WindowsAuditLogCreateConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         file_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
-    #         file_share_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
-    #         audit_log_destination: "GeneralARN",
-    #       }
     #
     # @!attribute [rw] file_access_audit_log_level
     #   Sets which attempt type is logged by Amazon FSx for file and folder

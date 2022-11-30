@@ -34,15 +34,6 @@ module Aws::SSO
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRoleCredentialsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         role_name: "RoleNameType", # required
-    #         account_id: "AccountIdType", # required
-    #         access_token: "AccessTokenType", # required
-    #       }
-    #
     # @!attribute [rw] role_name
     #   The friendly name of the role that is assigned to the user.
     #   @return [String]
@@ -97,16 +88,6 @@ module Aws::SSO
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAccountRolesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextTokenType",
-    #         max_results: 1,
-    #         access_token: "AccessTokenType", # required
-    #         account_id: "AccountIdType", # required
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The page token from the previous response output when you request
     #   subsequent pages.
@@ -159,15 +140,6 @@ module Aws::SSO
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAccountsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextTokenType",
-    #         max_results: 1,
-    #         access_token: "AccessTokenType", # required
-    #       }
-    #
     # @!attribute [rw] next_token
     #   (Optional) When requesting subsequent pages, this is the page token
     #   from the previous response output.
@@ -215,13 +187,6 @@ module Aws::SSO
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass LogoutRequest
-    #   data as a hash:
-    #
-    #       {
-    #         access_token: "AccessTokenType", # required
-    #       }
-    #
     # @!attribute [rw] access_token
     #   The token issued by the `CreateToken` API call. For more
     #   information, see [CreateToken][1] in the *IAM Identity Center OIDC

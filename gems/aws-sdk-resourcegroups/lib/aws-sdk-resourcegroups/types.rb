@@ -24,32 +24,6 @@ module Aws::ResourceGroups
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateGroupInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "GroupName", # required
-    #         description: "Description",
-    #         resource_query: {
-    #           type: "TAG_FILTERS_1_0", # required, accepts TAG_FILTERS_1_0, CLOUDFORMATION_STACK_1_0
-    #           query: "Query", # required
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         configuration: [
-    #           {
-    #             type: "GroupConfigurationType", # required
-    #             parameters: [
-    #               {
-    #                 name: "GroupConfigurationParameterName", # required
-    #                 values: ["GroupConfigurationParameterValue"],
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the group, which is the identifier of the group in other
     #   operations. You can't change the name of a resource group after you
@@ -151,14 +125,6 @@ module Aws::ResourceGroups
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteGroupInput
-    #   data as a hash:
-    #
-    #       {
-    #         group_name: "GroupName",
-    #         group: "GroupString",
-    #       }
-    #
     # @!attribute [rw] group_name
     #   Deprecated - don't use this parameter. Use `Group` instead.
     #   @return [String]
@@ -225,13 +191,6 @@ module Aws::ResourceGroups
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetGroupConfigurationInput
-    #   data as a hash:
-    #
-    #       {
-    #         group: "GroupString",
-    #       }
-    #
     # @!attribute [rw] group
     #   The name or the ARN of the resource group.
     #   @return [String]
@@ -262,14 +221,6 @@ module Aws::ResourceGroups
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetGroupInput
-    #   data as a hash:
-    #
-    #       {
-    #         group_name: "GroupName",
-    #         group: "GroupString",
-    #       }
-    #
     # @!attribute [rw] group_name
     #   Deprecated - don't use this parameter. Use `Group` instead.
     #   @return [String]
@@ -299,14 +250,6 @@ module Aws::ResourceGroups
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetGroupQueryInput
-    #   data as a hash:
-    #
-    #       {
-    #         group_name: "GroupName",
-    #         group: "GroupString",
-    #       }
-    #
     # @!attribute [rw] group_name
     #   Don't use this parameter. Use `Group` instead.
     #   @return [String]
@@ -342,13 +285,6 @@ module Aws::ResourceGroups
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetTagsInput
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "GroupArn", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The ARN of the resource group whose tags you want to retrieve.
     #   @return [String]
@@ -463,19 +399,6 @@ module Aws::ResourceGroups
     #
     # [1]: https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html
     #
-    # @note When making an API call, you may pass GroupConfigurationItem
-    #   data as a hash:
-    #
-    #       {
-    #         type: "GroupConfigurationType", # required
-    #         parameters: [
-    #           {
-    #             name: "GroupConfigurationParameterName", # required
-    #             values: ["GroupConfigurationParameterValue"],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] type
     #   Specifies the type of group configuration item. Each item must have
     #   a unique value for `type`. For the list of types that you can
@@ -514,14 +437,6 @@ module Aws::ResourceGroups
     #
     # [1]: https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html
     #
-    # @note When making an API call, you may pass GroupConfigurationParameter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "GroupConfigurationParameterName", # required
-    #         values: ["GroupConfigurationParameterValue"],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the group configuration parameter. For the list of
     #   parameters that you can use with each configuration item type, see
@@ -553,14 +468,6 @@ module Aws::ResourceGroups
 
     # A filter collection that you can use to restrict the results from a
     # `List` operation to only those you want to include.
-    #
-    # @note When making an API call, you may pass GroupFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "resource-type", # required, accepts resource-type, configuration-type
-    #         values: ["GroupFilterValue"], # required
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the filter. Filter names are case-sensitive.
@@ -621,14 +528,6 @@ module Aws::ResourceGroups
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GroupResourcesInput
-    #   data as a hash:
-    #
-    #       {
-    #         group: "GroupString", # required
-    #         resource_arns: ["ResourceArn"], # required
-    #       }
-    #
     # @!attribute [rw] group
     #   The name or the ARN of the resource group to add resources to.
     #   @return [String]
@@ -689,22 +588,6 @@ module Aws::ResourceGroups
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListGroupResourcesInput
-    #   data as a hash:
-    #
-    #       {
-    #         group_name: "GroupName",
-    #         group: "GroupString",
-    #         filters: [
-    #           {
-    #             name: "resource-type", # required, accepts resource-type
-    #             values: ["ResourceFilterValue"], # required
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] group_name
     #   <i> <b>Deprecated - don't use this parameter. Use the
     #   <code>Group</code> request field instead.</b> </i>
@@ -843,20 +726,6 @@ module Aws::ResourceGroups
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListGroupsInput
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             name: "resource-type", # required, accepts resource-type, configuration-type
-    #             values: ["GroupFilterValue"], # required
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] filters
     #   Filters, formatted as GroupFilter objects, that you want to apply to
     #   a `ListGroups` operation.
@@ -979,24 +848,6 @@ module Aws::ResourceGroups
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutGroupConfigurationInput
-    #   data as a hash:
-    #
-    #       {
-    #         group: "GroupString",
-    #         configuration: [
-    #           {
-    #             type: "GroupConfigurationType", # required
-    #             parameters: [
-    #               {
-    #                 name: "GroupConfigurationParameterName", # required
-    #                 values: ["GroupConfigurationParameterValue"],
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] group
     #   The name or ARN of the resource group with the configuration that
     #   you want to update.
@@ -1067,14 +918,6 @@ module Aws::ResourceGroups
 
     # A filter name and value pair that is used to obtain more specific
     # results from a list of resources.
-    #
-    # @note When making an API call, you may pass ResourceFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "resource-type", # required, accepts resource-type
-    #         values: ["ResourceFilterValue"], # required
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the filter. Filter names are case-sensitive.
@@ -1181,14 +1024,6 @@ module Aws::ResourceGroups
     #
     # [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-quoting-strings.html
     #
-    # @note When making an API call, you may pass ResourceQuery
-    #   data as a hash:
-    #
-    #       {
-    #         type: "TAG_FILTERS_1_0", # required, accepts TAG_FILTERS_1_0, CLOUDFORMATION_STACK_1_0
-    #         query: "Query", # required
-    #       }
-    #
     # @!attribute [rw] type
     #   The type of the query. You can use the following values:
     #
@@ -1266,18 +1101,6 @@ module Aws::ResourceGroups
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SearchResourcesInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_query: { # required
-    #           type: "TAG_FILTERS_1_0", # required, accepts TAG_FILTERS_1_0, CLOUDFORMATION_STACK_1_0
-    #           query: "Query", # required
-    #         },
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] resource_query
     #   The search query, using the same formats that are supported for
     #   resource group definition. For more information, see CreateGroup.
@@ -1344,16 +1167,6 @@ module Aws::ResourceGroups
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagInput
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "GroupArn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] arn
     #   The ARN of the resource group to which to add tags.
     #   @return [String]
@@ -1417,14 +1230,6 @@ module Aws::ResourceGroups
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UngroupResourcesInput
-    #   data as a hash:
-    #
-    #       {
-    #         group: "GroupString", # required
-    #         resource_arns: ["ResourceArn"], # required
-    #       }
-    #
     # @!attribute [rw] group
     #   The name or the ARN of the resource group from which to remove the
     #   resources.
@@ -1472,14 +1277,6 @@ module Aws::ResourceGroups
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagInput
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "GroupArn", # required
-    #         keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The ARN of the resource group from which to remove tags. The command
     #   removed both the specified keys and any values associated with those
@@ -1516,15 +1313,6 @@ module Aws::ResourceGroups
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateGroupInput
-    #   data as a hash:
-    #
-    #       {
-    #         group_name: "GroupName",
-    #         group: "GroupString",
-    #         description: "Description",
-    #       }
-    #
     # @!attribute [rw] group_name
     #   Don't use this parameter. Use `Group` instead.
     #   @return [String]
@@ -1561,18 +1349,6 @@ module Aws::ResourceGroups
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateGroupQueryInput
-    #   data as a hash:
-    #
-    #       {
-    #         group_name: "GroupName",
-    #         group: "GroupString",
-    #         resource_query: { # required
-    #           type: "TAG_FILTERS_1_0", # required, accepts TAG_FILTERS_1_0, CLOUDFORMATION_STACK_1_0
-    #           query: "Query", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] group_name
     #   Don't use this parameter. Use `Group` instead.
     #   @return [String]

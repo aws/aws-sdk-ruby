@@ -24,14 +24,6 @@ module Aws::IoTDataPlane
 
     # The input for the DeleteThingShadow operation.
     #
-    # @note When making an API call, you may pass DeleteThingShadowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         thing_name: "ThingName", # required
-    #         shadow_name: "ShadowName",
-    #       }
-    #
     # @!attribute [rw] thing_name
     #   The name of the thing.
     #   @return [String]
@@ -60,13 +52,6 @@ module Aws::IoTDataPlane
     end
 
     # The input for the GetRetainedMessage operation.
-    #
-    # @note When making an API call, you may pass GetRetainedMessageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         topic: "Topic", # required
-    #       }
     #
     # @!attribute [rw] topic
     #   The topic name of the retained message to retrieve.
@@ -108,14 +93,6 @@ module Aws::IoTDataPlane
     end
 
     # The input for the GetThingShadow operation.
-    #
-    # @note When making an API call, you may pass GetThingShadowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         thing_name: "ThingName", # required
-    #         shadow_name: "ShadowName",
-    #       }
     #
     # @!attribute [rw] thing_name
     #   The name of the thing.
@@ -168,15 +145,6 @@ module Aws::IoTDataPlane
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListNamedShadowsForThingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         thing_name: "ThingName", # required
-    #         next_token: "NextToken",
-    #         page_size: 1,
-    #       }
-    #
     # @!attribute [rw] thing_name
     #   The name of the thing.
     #   @return [String]
@@ -218,14 +186,6 @@ module Aws::IoTDataPlane
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRetainedMessagesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   To retrieve the next set of results, the `nextToken` value from a
     #   previous response; otherwise **null** to receive the first set of
@@ -274,22 +234,6 @@ module Aws::IoTDataPlane
     end
 
     # The input for the Publish operation.
-    #
-    # @note When making an API call, you may pass PublishRequest
-    #   data as a hash:
-    #
-    #       {
-    #         topic: "Topic", # required
-    #         qos: 1,
-    #         retain: false,
-    #         payload: "data",
-    #         user_properties: "UserProperties",
-    #         payload_format_indicator: "UNSPECIFIED_BYTES", # accepts UNSPECIFIED_BYTES, UTF8_DATA
-    #         content_type: "ContentType",
-    #         response_topic: "ResponseTopic",
-    #         correlation_data: "CorrelationData",
-    #         message_expiry: 1,
-    #       }
     #
     # @!attribute [rw] topic
     #   The name of the MQTT topic.
@@ -487,15 +431,6 @@ module Aws::IoTDataPlane
     end
 
     # The input for the UpdateThingShadow operation.
-    #
-    # @note When making an API call, you may pass UpdateThingShadowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         thing_name: "ThingName", # required
-    #         shadow_name: "ShadowName",
-    #         payload: "data", # required
-    #       }
     #
     # @!attribute [rw] thing_name
     #   The name of the thing.

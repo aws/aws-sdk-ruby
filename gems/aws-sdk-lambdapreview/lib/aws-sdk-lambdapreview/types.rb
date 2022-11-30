@@ -10,19 +10,6 @@
 module Aws::LambdaPreview
   module Types
 
-    # @note When making an API call, you may pass AddEventSourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         event_source: "String", # required
-    #         function_name: "FunctionName", # required
-    #         role: "RoleArn", # required
-    #         batch_size: 1,
-    #         parameters: {
-    #           "String" => "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] event_source
     #   The Amazon Resource Name (ARN) of the Amazon Kinesis stream that is
     #   the event source. Any record added to this stream causes AWS Lambda
@@ -70,13 +57,6 @@ module Aws::LambdaPreview
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteFunctionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_name: "FunctionName", # required
-    #       }
-    #
     # @!attribute [rw] function_name
     #   The Lambda function to delete.
     #   @return [String]
@@ -250,13 +230,6 @@ module Aws::LambdaPreview
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetEventSourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         uuid: "String", # required
-    #       }
-    #
     # @!attribute [rw] uuid
     #   The AWS Lambda assigned ID of the event source mapping.
     #   @return [String]
@@ -269,13 +242,6 @@ module Aws::LambdaPreview
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetFunctionConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_name: "FunctionName", # required
-    #       }
-    #
     # @!attribute [rw] function_name
     #   The name of the Lambda function for which you want to retrieve the
     #   configuration information.
@@ -289,13 +255,6 @@ module Aws::LambdaPreview
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetFunctionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_name: "FunctionName", # required
-    #       }
-    #
     # @!attribute [rw] function_name
     #   The Lambda function name.
     #   @return [String]
@@ -365,14 +324,6 @@ module Aws::LambdaPreview
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass InvokeAsyncRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_name: "FunctionName", # required
-    #         invoke_args: "data", # required
-    #       }
-    #
     # @!attribute [rw] function_name
     #   The Lambda function name.
     #   @return [String]
@@ -405,16 +356,6 @@ module Aws::LambdaPreview
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEventSourcesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         event_source_arn: "String",
-    #         function_name: "FunctionName",
-    #         marker: "String",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] event_source_arn
     #   The Amazon Resource Name (ARN) of the Amazon Kinesis stream.
     #   @return [String]
@@ -464,14 +405,6 @@ module Aws::LambdaPreview
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFunctionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         marker: "String",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] marker
     #   Optional string. An opaque pagination token returned from a previous
     #   `ListFunctions` operation. If present, indicates where to continue
@@ -513,13 +446,6 @@ module Aws::LambdaPreview
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RemoveEventSourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         uuid: "String", # required
-    #       }
-    #
     # @!attribute [rw] uuid
     #   The event source mapping ID.
     #   @return [String]
@@ -567,18 +493,6 @@ module Aws::LambdaPreview
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateFunctionConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_name: "FunctionName", # required
-    #         role: "RoleArn",
-    #         handler: "Handler",
-    #         description: "Description",
-    #         timeout: 1,
-    #         memory_size: 1,
-    #       }
-    #
     # @!attribute [rw] function_name
     #   The name of the Lambda function.
     #   @return [String]
@@ -627,21 +541,6 @@ module Aws::LambdaPreview
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UploadFunctionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_name: "FunctionName", # required
-    #         function_zip: "data", # required
-    #         runtime: "nodejs", # required, accepts nodejs
-    #         role: "RoleArn", # required
-    #         handler: "Handler", # required
-    #         mode: "event", # required, accepts event
-    #         description: "Description",
-    #         timeout: 1,
-    #         memory_size: 1,
-    #       }
-    #
     # @!attribute [rw] function_name
     #   The name you want to assign to the function you are uploading. The
     #   function names appear in the console and are returned in the

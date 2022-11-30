@@ -17,16 +17,6 @@ module Aws::Imagebuilder
     # also specify commands to run on launch for all of your build
     # instances.
     #
-    # @note When making an API call, you may pass AdditionalInstanceConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         systems_manager_agent: {
-    #           uninstall_after_build: false,
-    #         },
-    #         user_data_override: "UserDataOverride",
-    #       }
-    #
     # @!attribute [rw] systems_manager_agent
     #   Contains settings for the Systems Manager agent on your build
     #   instance.
@@ -106,25 +96,6 @@ module Aws::Imagebuilder
 
     # Define and configure the output AMIs of the pipeline.
     #
-    # @note When making an API call, you may pass AmiDistributionConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         name: "AmiNameString",
-    #         description: "NonEmptyString",
-    #         target_account_ids: ["AccountId"],
-    #         ami_tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         kms_key_id: "NonEmptyString",
-    #         launch_permission: {
-    #           user_ids: ["AccountId"],
-    #           user_groups: ["NonEmptyString"],
-    #           organization_arns: ["OrganizationArn"],
-    #           organizational_unit_arns: ["OrganizationalUnitArn"],
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the output AMI.
     #   @return [String]
@@ -178,14 +149,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CancelImageCreationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         image_build_version_arn: "ImageBuildVersionArn", # required
-    #         client_token: "ClientToken", # required
-    #       }
-    #
     # @!attribute [rw] image_build_version_arn
     #   The Amazon Resource Name (ARN) of the image whose creation you want
     #   to cancel.
@@ -348,19 +311,6 @@ module Aws::Imagebuilder
 
     # Configuration details of the component.
     #
-    # @note When making an API call, you may pass ComponentConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         component_arn: "ComponentVersionArnOrBuildVersionArn", # required
-    #         parameters: [
-    #           {
-    #             name: "ComponentParameterName", # required
-    #             value: ["ComponentParameterValue"], # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] component_arn
     #   The Amazon Resource Name (ARN) of the component.
     #   @return [String]
@@ -380,14 +330,6 @@ module Aws::Imagebuilder
     end
 
     # Contains a key/value pair that sets the named component parameter.
-    #
-    # @note When making an API call, you may pass ComponentParameter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ComponentParameterName", # required
-    #         value: ["ComponentParameterValue"], # required
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the component parameter to set.
@@ -647,18 +589,6 @@ module Aws::Imagebuilder
     # Container distribution settings for encryption, licensing, and sharing
     # in a specific Region.
     #
-    # @note When making an API call, you may pass ContainerDistributionConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         description: "NonEmptyString",
-    #         container_tags: ["NonEmptyString"],
-    #         target_repository: { # required
-    #           service: "ECR", # required, accepts ECR
-    #           repository_name: "NonEmptyString", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] description
     #   The description of the container distribution configuration.
     #   @return [String]
@@ -869,25 +799,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateComponentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ResourceName", # required
-    #         semantic_version: "VersionNumber", # required
-    #         description: "NonEmptyString",
-    #         change_description: "NonEmptyString",
-    #         platform: "Windows", # required, accepts Windows, Linux
-    #         supported_os_versions: ["OsVersion"],
-    #         data: "InlineComponentData",
-    #         uri: "Uri",
-    #         kms_key_id: "NonEmptyString",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         client_token: "ClientToken", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the component.
     #   @return [String]
@@ -1007,62 +918,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateContainerRecipeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         container_type: "DOCKER", # required, accepts DOCKER
-    #         name: "ResourceName", # required
-    #         description: "NonEmptyString",
-    #         semantic_version: "VersionNumber", # required
-    #         components: [ # required
-    #           {
-    #             component_arn: "ComponentVersionArnOrBuildVersionArn", # required
-    #             parameters: [
-    #               {
-    #                 name: "ComponentParameterName", # required
-    #                 value: ["ComponentParameterValue"], # required
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         instance_configuration: {
-    #           image: "NonEmptyString",
-    #           block_device_mappings: [
-    #             {
-    #               device_name: "NonEmptyString",
-    #               ebs: {
-    #                 encrypted: false,
-    #                 delete_on_termination: false,
-    #                 iops: 1,
-    #                 kms_key_id: "NonEmptyString",
-    #                 snapshot_id: "NonEmptyString",
-    #                 volume_size: 1,
-    #                 volume_type: "standard", # accepts standard, io1, io2, gp2, gp3, sc1, st1
-    #                 throughput: 1,
-    #               },
-    #               virtual_name: "NonEmptyString",
-    #               no_device: "EmptyString",
-    #             },
-    #           ],
-    #         },
-    #         dockerfile_template_data: "InlineDockerFileTemplate",
-    #         dockerfile_template_uri: "Uri",
-    #         platform_override: "Windows", # accepts Windows, Linux
-    #         image_os_version_override: "NonEmptyString",
-    #         parent_image: "NonEmptyString", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         working_directory: "NonEmptyString",
-    #         target_repository: { # required
-    #           service: "ECR", # required, accepts ECR
-    #           repository_name: "NonEmptyString", # required
-    #         },
-    #         kms_key_id: "NonEmptyString",
-    #         client_token: "ClientToken", # required
-    #       }
-    #
     # @!attribute [rw] container_type
     #   The type of container to create.
     #   @return [String]
@@ -1198,75 +1053,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDistributionConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ResourceName", # required
-    #         description: "NonEmptyString",
-    #         distributions: [ # required
-    #           {
-    #             region: "NonEmptyString", # required
-    #             ami_distribution_configuration: {
-    #               name: "AmiNameString",
-    #               description: "NonEmptyString",
-    #               target_account_ids: ["AccountId"],
-    #               ami_tags: {
-    #                 "TagKey" => "TagValue",
-    #               },
-    #               kms_key_id: "NonEmptyString",
-    #               launch_permission: {
-    #                 user_ids: ["AccountId"],
-    #                 user_groups: ["NonEmptyString"],
-    #                 organization_arns: ["OrganizationArn"],
-    #                 organizational_unit_arns: ["OrganizationalUnitArn"],
-    #               },
-    #             },
-    #             container_distribution_configuration: {
-    #               description: "NonEmptyString",
-    #               container_tags: ["NonEmptyString"],
-    #               target_repository: { # required
-    #                 service: "ECR", # required, accepts ECR
-    #                 repository_name: "NonEmptyString", # required
-    #               },
-    #             },
-    #             license_configuration_arns: ["LicenseConfigurationArn"],
-    #             launch_template_configurations: [
-    #               {
-    #                 launch_template_id: "LaunchTemplateId", # required
-    #                 account_id: "AccountId",
-    #                 set_default_version: false,
-    #               },
-    #             ],
-    #             s3_export_configuration: {
-    #               role_name: "NonEmptyString", # required
-    #               disk_image_format: "VMDK", # required, accepts VMDK, RAW, VHD
-    #               s3_bucket: "NonEmptyString", # required
-    #               s3_prefix: "NonEmptyString",
-    #             },
-    #             fast_launch_configurations: [
-    #               {
-    #                 enabled: false, # required
-    #                 snapshot_configuration: {
-    #                   target_resource_count: 1,
-    #                 },
-    #                 max_parallel_launches: 1,
-    #                 launch_template: {
-    #                   launch_template_id: "LaunchTemplateId",
-    #                   launch_template_name: "NonEmptyString",
-    #                   launch_template_version: "NonEmptyString",
-    #                 },
-    #                 account_id: "AccountId",
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         client_token: "ClientToken", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the distribution configuration.
     #   @return [String]
@@ -1325,33 +1111,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateImagePipelineRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ResourceName", # required
-    #         description: "NonEmptyString",
-    #         image_recipe_arn: "ImageRecipeArn",
-    #         container_recipe_arn: "ContainerRecipeArn",
-    #         infrastructure_configuration_arn: "InfrastructureConfigurationArn", # required
-    #         distribution_configuration_arn: "DistributionConfigurationArn",
-    #         image_tests_configuration: {
-    #           image_tests_enabled: false,
-    #           timeout_minutes: 1,
-    #         },
-    #         enhanced_image_metadata_enabled: false,
-    #         schedule: {
-    #           schedule_expression: "NonEmptyString",
-    #           timezone: "Timezone",
-    #           pipeline_execution_start_condition: "EXPRESSION_MATCH_ONLY", # accepts EXPRESSION_MATCH_ONLY, EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE
-    #         },
-    #         status: "DISABLED", # accepts DISABLED, ENABLED
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         client_token: "ClientToken", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the image pipeline.
     #   @return [String]
@@ -1453,55 +1212,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateImageRecipeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ResourceName", # required
-    #         description: "NonEmptyString",
-    #         semantic_version: "VersionNumber", # required
-    #         components: [ # required
-    #           {
-    #             component_arn: "ComponentVersionArnOrBuildVersionArn", # required
-    #             parameters: [
-    #               {
-    #                 name: "ComponentParameterName", # required
-    #                 value: ["ComponentParameterValue"], # required
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         parent_image: "NonEmptyString", # required
-    #         block_device_mappings: [
-    #           {
-    #             device_name: "NonEmptyString",
-    #             ebs: {
-    #               encrypted: false,
-    #               delete_on_termination: false,
-    #               iops: 1,
-    #               kms_key_id: "NonEmptyString",
-    #               snapshot_id: "NonEmptyString",
-    #               volume_size: 1,
-    #               volume_type: "standard", # accepts standard, io1, io2, gp2, gp3, sc1, st1
-    #               throughput: 1,
-    #             },
-    #             virtual_name: "NonEmptyString",
-    #             no_device: "EmptyString",
-    #           },
-    #         ],
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         working_directory: "NonEmptyString",
-    #         additional_instance_configuration: {
-    #           systems_manager_agent: {
-    #             uninstall_after_build: false,
-    #           },
-    #           user_data_override: "UserDataOverride",
-    #         },
-    #         client_token: "ClientToken", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the image recipe.
     #   @return [String]
@@ -1610,25 +1320,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateImageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         image_recipe_arn: "ImageRecipeArn",
-    #         container_recipe_arn: "ContainerRecipeArn",
-    #         distribution_configuration_arn: "DistributionConfigurationArn",
-    #         infrastructure_configuration_arn: "InfrastructureConfigurationArn", # required
-    #         image_tests_configuration: {
-    #           image_tests_enabled: false,
-    #           timeout_minutes: 1,
-    #         },
-    #         enhanced_image_metadata_enabled: false,
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         client_token: "ClientToken", # required
-    #       }
-    #
     # @!attribute [rw] image_recipe_arn
     #   The Amazon Resource Name (ARN) of the image recipe that defines how
     #   images are configured, tested, and assessed.
@@ -1710,38 +1401,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateInfrastructureConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ResourceName", # required
-    #         description: "NonEmptyString",
-    #         instance_types: ["InstanceType"],
-    #         instance_profile_name: "InstanceProfileNameType", # required
-    #         security_group_ids: ["NonEmptyString"],
-    #         subnet_id: "NonEmptyString",
-    #         logging: {
-    #           s3_logs: {
-    #             s3_bucket_name: "NonEmptyString",
-    #             s3_key_prefix: "NonEmptyString",
-    #           },
-    #         },
-    #         key_pair: "NonEmptyString",
-    #         terminate_instance_on_failure: false,
-    #         sns_topic_arn: "SnsTopicArn",
-    #         resource_tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         instance_metadata_options: {
-    #           http_tokens: "HttpTokens",
-    #           http_put_response_hop_limit: 1,
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         client_token: "ClientToken", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the infrastructure configuration.
     #   @return [String]
@@ -1863,13 +1522,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteComponentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         component_build_version_arn: "ComponentBuildVersionArn", # required
-    #       }
-    #
     # @!attribute [rw] component_build_version_arn
     #   The Amazon Resource Name (ARN) of the component build version to
     #   delete.
@@ -1901,13 +1553,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteContainerRecipeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         container_recipe_arn: "ContainerRecipeArn", # required
-    #       }
-    #
     # @!attribute [rw] container_recipe_arn
     #   The Amazon Resource Name (ARN) of the container recipe to delete.
     #   @return [String]
@@ -1938,13 +1583,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDistributionConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         distribution_configuration_arn: "DistributionConfigurationArn", # required
-    #       }
-    #
     # @!attribute [rw] distribution_configuration_arn
     #   The Amazon Resource Name (ARN) of the distribution configuration to
     #   delete.
@@ -1976,13 +1614,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteImagePipelineRequest
-    #   data as a hash:
-    #
-    #       {
-    #         image_pipeline_arn: "ImagePipelineArn", # required
-    #       }
-    #
     # @!attribute [rw] image_pipeline_arn
     #   The Amazon Resource Name (ARN) of the image pipeline to delete.
     #   @return [String]
@@ -2013,13 +1644,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteImageRecipeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         image_recipe_arn: "ImageRecipeArn", # required
-    #       }
-    #
     # @!attribute [rw] image_recipe_arn
     #   The Amazon Resource Name (ARN) of the image recipe to delete.
     #   @return [String]
@@ -2049,13 +1673,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteImageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         image_build_version_arn: "ImageBuildVersionArn", # required
-    #       }
-    #
     # @!attribute [rw] image_build_version_arn
     #   The Amazon Resource Name (ARN) of the Image Builder image resource
     #   to delete.
@@ -2087,13 +1704,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteInfrastructureConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         infrastructure_configuration_arn: "InfrastructureConfigurationArn", # required
-    #       }
-    #
     # @!attribute [rw] infrastructure_configuration_arn
     #   The Amazon Resource Name (ARN) of the infrastructure configuration
     #   to delete.
@@ -2126,65 +1736,6 @@ module Aws::Imagebuilder
     end
 
     # Defines the settings for a specific Region.
-    #
-    # @note When making an API call, you may pass Distribution
-    #   data as a hash:
-    #
-    #       {
-    #         region: "NonEmptyString", # required
-    #         ami_distribution_configuration: {
-    #           name: "AmiNameString",
-    #           description: "NonEmptyString",
-    #           target_account_ids: ["AccountId"],
-    #           ami_tags: {
-    #             "TagKey" => "TagValue",
-    #           },
-    #           kms_key_id: "NonEmptyString",
-    #           launch_permission: {
-    #             user_ids: ["AccountId"],
-    #             user_groups: ["NonEmptyString"],
-    #             organization_arns: ["OrganizationArn"],
-    #             organizational_unit_arns: ["OrganizationalUnitArn"],
-    #           },
-    #         },
-    #         container_distribution_configuration: {
-    #           description: "NonEmptyString",
-    #           container_tags: ["NonEmptyString"],
-    #           target_repository: { # required
-    #             service: "ECR", # required, accepts ECR
-    #             repository_name: "NonEmptyString", # required
-    #           },
-    #         },
-    #         license_configuration_arns: ["LicenseConfigurationArn"],
-    #         launch_template_configurations: [
-    #           {
-    #             launch_template_id: "LaunchTemplateId", # required
-    #             account_id: "AccountId",
-    #             set_default_version: false,
-    #           },
-    #         ],
-    #         s3_export_configuration: {
-    #           role_name: "NonEmptyString", # required
-    #           disk_image_format: "VMDK", # required, accepts VMDK, RAW, VHD
-    #           s3_bucket: "NonEmptyString", # required
-    #           s3_prefix: "NonEmptyString",
-    #         },
-    #         fast_launch_configurations: [
-    #           {
-    #             enabled: false, # required
-    #             snapshot_configuration: {
-    #               target_resource_count: 1,
-    #             },
-    #             max_parallel_launches: 1,
-    #             launch_template: {
-    #               launch_template_id: "LaunchTemplateId",
-    #               launch_template_name: "NonEmptyString",
-    #               launch_template_version: "NonEmptyString",
-    #             },
-    #             account_id: "AccountId",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] region
     #   The target Region.
@@ -2331,20 +1882,6 @@ module Aws::Imagebuilder
 
     # Amazon EBS-specific block device mapping specifications.
     #
-    # @note When making an API call, you may pass EbsInstanceBlockDeviceSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         encrypted: false,
-    #         delete_on_termination: false,
-    #         iops: 1,
-    #         kms_key_id: "NonEmptyString",
-    #         snapshot_id: "NonEmptyString",
-    #         volume_size: 1,
-    #         volume_type: "standard", # accepts standard, io1, io2, gp2, gp3, sc1, st1
-    #         throughput: 1,
-    #       }
-    #
     # @!attribute [rw] encrypted
     #   Use to configure device encryption.
     #   @return [Boolean]
@@ -2395,23 +1932,6 @@ module Aws::Imagebuilder
 
     # Define and configure faster launching for output Windows AMIs.
     #
-    # @note When making an API call, you may pass FastLaunchConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false, # required
-    #         snapshot_configuration: {
-    #           target_resource_count: 1,
-    #         },
-    #         max_parallel_launches: 1,
-    #         launch_template: {
-    #           launch_template_id: "LaunchTemplateId",
-    #           launch_template_name: "NonEmptyString",
-    #           launch_template_version: "NonEmptyString",
-    #         },
-    #         account_id: "AccountId",
-    #       }
-    #
     # @!attribute [rw] enabled
     #   A Boolean that represents the current state of faster launching for
     #   the Windows AMI. Set to `true` to start using Windows faster
@@ -2459,15 +1979,6 @@ module Aws::Imagebuilder
     #
     #  </note>
     #
-    # @note When making an API call, you may pass FastLaunchLaunchTemplateSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         launch_template_id: "LaunchTemplateId",
-    #         launch_template_name: "NonEmptyString",
-    #         launch_template_version: "NonEmptyString",
-    #       }
-    #
     # @!attribute [rw] launch_template_id
     #   The ID of the launch template to use for faster launching for a
     #   Windows AMI.
@@ -2496,13 +2007,6 @@ module Aws::Imagebuilder
     # Configuration settings for creating and managing pre-provisioned
     # snapshots for a fast-launch enabled Windows AMI.
     #
-    # @note When making an API call, you may pass FastLaunchSnapshotConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         target_resource_count: 1,
-    #       }
-    #
     # @!attribute [rw] target_resource_count
     #   The number of pre-provisioned snapshots to keep on hand for a
     #   fast-launch enabled Windows AMI.
@@ -2520,14 +2024,6 @@ module Aws::Imagebuilder
     # list of results from a list operation. Filters can be used to match a
     # set of resources by specific criteria, such as tags, attributes, or
     # IDs.
-    #
-    # @note When making an API call, you may pass Filter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "FilterName",
-    #         values: ["FilterValue"],
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the filter. Filter names are case-sensitive.
@@ -2559,13 +2055,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetComponentPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         component_arn: "ComponentBuildVersionArn", # required
-    #       }
-    #
     # @!attribute [rw] component_arn
     #   The Amazon Resource Name (ARN) of the component whose policy you
     #   want to retrieve.
@@ -2596,13 +2085,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetComponentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         component_build_version_arn: "ComponentVersionArnOrBuildVersionArn", # required
-    #       }
-    #
     # @!attribute [rw] component_build_version_arn
     #   The Amazon Resource Name (ARN) of the component that you want to
     #   retrieve. Regex requires "/\\d+$" suffix.
@@ -2633,13 +2115,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetContainerRecipePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         container_recipe_arn: "ContainerRecipeArn", # required
-    #       }
-    #
     # @!attribute [rw] container_recipe_arn
     #   The Amazon Resource Name (ARN) of the container recipe for the
     #   policy being requested.
@@ -2670,13 +2145,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetContainerRecipeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         container_recipe_arn: "ContainerRecipeArn", # required
-    #       }
-    #
     # @!attribute [rw] container_recipe_arn
     #   The Amazon Resource Name (ARN) of the container recipe to retrieve.
     #   @return [String]
@@ -2706,13 +2174,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDistributionConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         distribution_configuration_arn: "DistributionConfigurationArn", # required
-    #       }
-    #
     # @!attribute [rw] distribution_configuration_arn
     #   The Amazon Resource Name (ARN) of the distribution configuration
     #   that you want to retrieve.
@@ -2743,13 +2204,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetImagePipelineRequest
-    #   data as a hash:
-    #
-    #       {
-    #         image_pipeline_arn: "ImagePipelineArn", # required
-    #       }
-    #
     # @!attribute [rw] image_pipeline_arn
     #   The Amazon Resource Name (ARN) of the image pipeline that you want
     #   to retrieve.
@@ -2780,13 +2234,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetImagePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         image_arn: "ImageBuildVersionArn", # required
-    #       }
-    #
     # @!attribute [rw] image_arn
     #   The Amazon Resource Name (ARN) of the image whose policy you want to
     #   retrieve.
@@ -2817,13 +2264,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetImageRecipePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         image_recipe_arn: "ImageRecipeArn", # required
-    #       }
-    #
     # @!attribute [rw] image_recipe_arn
     #   The Amazon Resource Name (ARN) of the image recipe whose policy you
     #   want to retrieve.
@@ -2854,13 +2294,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetImageRecipeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         image_recipe_arn: "ImageRecipeArn", # required
-    #       }
-    #
     # @!attribute [rw] image_recipe_arn
     #   The Amazon Resource Name (ARN) of the image recipe that you want to
     #   retrieve.
@@ -2891,13 +2324,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetImageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         image_build_version_arn: "ImageVersionArnOrBuildVersionArn", # required
-    #       }
-    #
     # @!attribute [rw] image_build_version_arn
     #   The Amazon Resource Name (ARN) of the image that you want to
     #   retrieve.
@@ -2929,13 +2355,6 @@ module Aws::Imagebuilder
     end
 
     # GetInfrastructureConfiguration request object.
-    #
-    # @note When making an API call, you may pass GetInfrastructureConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         infrastructure_configuration_arn: "InfrastructureConfigurationArn", # required
-    #       }
     #
     # @!attribute [rw] infrastructure_configuration_arn
     #   The Amazon Resource Name (ARN) of the infrastructure configuration
@@ -3495,14 +2914,6 @@ module Aws::Imagebuilder
     # building the image, to verify that the AMI or container image is valid
     # before distributing it.
     #
-    # @note When making an API call, you may pass ImageTestsConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         image_tests_enabled: false,
-    #         timeout_minutes: 1,
-    #       }
-    #
     # @!attribute [rw] image_tests_enabled
     #   Determines if tests should run after building the image. Image
     #   Builder defaults to enable tests to run following the image build,
@@ -3629,26 +3040,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ImportComponentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ResourceName", # required
-    #         semantic_version: "VersionNumber", # required
-    #         description: "NonEmptyString",
-    #         change_description: "NonEmptyString",
-    #         type: "BUILD", # required, accepts BUILD, TEST
-    #         format: "SHELL", # required, accepts SHELL
-    #         platform: "Windows", # required, accepts Windows, Linux
-    #         data: "NonEmptyString",
-    #         uri: "Uri",
-    #         kms_key_id: "NonEmptyString",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         client_token: "ClientToken", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the component.
     #   @return [String]
@@ -3764,22 +3155,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ImportVmImageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "NonEmptyString", # required
-    #         semantic_version: "VersionNumber", # required
-    #         description: "NonEmptyString",
-    #         platform: "Windows", # required, accepts Windows, Linux
-    #         os_version: "OsVersion",
-    #         vm_import_task_id: "NonEmptyString", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         client_token: "ClientToken", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the base image that is created by the import process.
     #   @return [String]
@@ -4038,25 +3413,6 @@ module Aws::Imagebuilder
     # Defines block device mappings for the instance used to configure your
     # image.
     #
-    # @note When making an API call, you may pass InstanceBlockDeviceMapping
-    #   data as a hash:
-    #
-    #       {
-    #         device_name: "NonEmptyString",
-    #         ebs: {
-    #           encrypted: false,
-    #           delete_on_termination: false,
-    #           iops: 1,
-    #           kms_key_id: "NonEmptyString",
-    #           snapshot_id: "NonEmptyString",
-    #           volume_size: 1,
-    #           volume_type: "standard", # accepts standard, io1, io2, gp2, gp3, sc1, st1
-    #           throughput: 1,
-    #         },
-    #         virtual_name: "NonEmptyString",
-    #         no_device: "EmptyString",
-    #       }
-    #
     # @!attribute [rw] device_name
     #   The device to which these mappings apply.
     #   @return [String]
@@ -4086,30 +3442,6 @@ module Aws::Imagebuilder
 
     # Defines a custom base AMI and block device mapping configurations of
     # an instance used for building and testing container images.
-    #
-    # @note When making an API call, you may pass InstanceConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         image: "NonEmptyString",
-    #         block_device_mappings: [
-    #           {
-    #             device_name: "NonEmptyString",
-    #             ebs: {
-    #               encrypted: false,
-    #               delete_on_termination: false,
-    #               iops: 1,
-    #               kms_key_id: "NonEmptyString",
-    #               snapshot_id: "NonEmptyString",
-    #               volume_size: 1,
-    #               volume_type: "standard", # accepts standard, io1, io2, gp2, gp3, sc1, st1
-    #               throughput: 1,
-    #             },
-    #             virtual_name: "NonEmptyString",
-    #             no_device: "EmptyString",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] image
     #   The AMI ID to use as the base image for a container build and test
@@ -4143,14 +3475,6 @@ module Aws::Imagebuilder
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/configuring-instance-metadata-options.html
-    #
-    # @note When making an API call, you may pass InstanceMetadataOptions
-    #   data as a hash:
-    #
-    #       {
-    #         http_tokens: "HttpTokens",
-    #         http_put_response_hop_limit: 1,
-    #       }
     #
     # @!attribute [rw] http_tokens
     #   Indicates whether a signed token header is required for instance
@@ -4275,16 +3599,6 @@ module Aws::Imagebuilder
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyImageAttribute.html
     #
-    # @note When making an API call, you may pass LaunchPermissionConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         user_ids: ["AccountId"],
-    #         user_groups: ["NonEmptyString"],
-    #         organization_arns: ["OrganizationArn"],
-    #         organizational_unit_arns: ["OrganizationalUnitArn"],
-    #       }
-    #
     # @!attribute [rw] user_ids
     #   The Amazon Web Services account ID.
     #   @return [Array<String>]
@@ -4327,15 +3641,6 @@ module Aws::Imagebuilder
     # Identifies an Amazon EC2 launch template to use for a specific
     # account.
     #
-    # @note When making an API call, you may pass LaunchTemplateConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         launch_template_id: "LaunchTemplateId", # required
-    #         account_id: "AccountId",
-    #         set_default_version: false,
-    #       }
-    #
     # @!attribute [rw] launch_template_id
     #   Identifies the Amazon EC2 launch template to use.
     #   @return [String]
@@ -4359,15 +3664,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListComponentBuildVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         component_version_arn: "ComponentVersionArn", # required
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] component_version_arn
     #   The component version Amazon Resource Name (ARN) whose versions you
     #   want to list.
@@ -4417,22 +3713,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListComponentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         owner: "Self", # accepts Self, Shared, Amazon
-    #         filters: [
-    #           {
-    #             name: "FilterName",
-    #             values: ["FilterValue"],
-    #           },
-    #         ],
-    #         by_name: false,
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] owner
     #   The owner defines which components you want to list. By default,
     #   this request will only show components owned by your account. You
@@ -4513,21 +3793,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListContainerRecipesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         owner: "Self", # accepts Self, Shared, Amazon
-    #         filters: [
-    #           {
-    #             name: "FilterName",
-    #             values: ["FilterValue"],
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "NonEmptyString",
-    #       }
-    #
     # @!attribute [rw] owner
     #   Returns container recipes belonging to the specified owner, that
     #   have been shared with you. You can omit this field to return
@@ -4592,20 +3857,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDistributionConfigurationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             name: "FilterName",
-    #             values: ["FilterValue"],
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] filters
     #   You can filter on `name` to streamline results.
     #   @return [Array<Types::Filter>]
@@ -4654,21 +3905,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListImageBuildVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         image_version_arn: "ImageVersionArn", # required
-    #         filters: [
-    #           {
-    #             name: "FilterName",
-    #             values: ["FilterValue"],
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] image_version_arn
     #   The Amazon Resource Name (ARN) of the image whose build versions you
     #   want to retrieve.
@@ -4733,15 +3969,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListImagePackagesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         image_build_version_arn: "ImageBuildVersionArn", # required
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] image_build_version_arn
     #   Filter results for the ListImagePackages request by the Image Build
     #   Version ARN
@@ -4790,21 +4017,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListImagePipelineImagesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         image_pipeline_arn: "ImagePipelineArn", # required
-    #         filters: [
-    #           {
-    #             name: "FilterName",
-    #             values: ["FilterValue"],
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] image_pipeline_arn
     #   The Amazon Resource Name (ARN) of the image pipeline whose images
     #   you want to view.
@@ -4863,20 +4075,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListImagePipelinesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             name: "FilterName",
-    #             values: ["FilterValue"],
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] filters
     #   Use the following filters to streamline results:
     #
@@ -4937,21 +4135,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListImageRecipesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         owner: "Self", # accepts Self, Shared, Amazon
-    #         filters: [
-    #           {
-    #             name: "FilterName",
-    #             values: ["FilterValue"],
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] owner
     #   The owner defines which image recipes you want to list. By default,
     #   this request will only show image recipes owned by your account. You
@@ -5015,23 +4198,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListImagesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         owner: "Self", # accepts Self, Shared, Amazon
-    #         filters: [
-    #           {
-    #             name: "FilterName",
-    #             values: ["FilterValue"],
-    #           },
-    #         ],
-    #         by_name: false,
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #         include_deprecated: false,
-    #       }
-    #
     # @!attribute [rw] owner
     #   The owner defines which images you want to list. By default, this
     #   request will only show images owned by your account. You can use
@@ -5121,20 +4287,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListInfrastructureConfigurationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             name: "FilterName",
-    #             values: ["FilterValue"],
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] filters
     #   You can filter on `name` to streamline results.
     #   @return [Array<Types::Filter>]
@@ -5183,13 +4335,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ImageBuilderArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource whose tags you want
     #   to retrieve.
@@ -5216,16 +4361,6 @@ module Aws::Imagebuilder
     end
 
     # Logging configuration defines where Image Builder uploads your logs.
-    #
-    # @note When making an API call, you may pass Logging
-    #   data as a hash:
-    #
-    #       {
-    #         s3_logs: {
-    #           s3_bucket_name: "NonEmptyString",
-    #           s3_key_prefix: "NonEmptyString",
-    #         },
-    #       }
     #
     # @!attribute [rw] s3_logs
     #   The Amazon S3 logging configuration.
@@ -5259,14 +4394,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutComponentPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         component_arn: "ComponentBuildVersionArn", # required
-    #         policy: "ResourcePolicyDocument", # required
-    #       }
-    #
     # @!attribute [rw] component_arn
     #   The Amazon Resource Name (ARN) of the component that this policy
     #   should be applied to.
@@ -5303,14 +4430,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutContainerRecipePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         container_recipe_arn: "ContainerRecipeArn", # required
-    #         policy: "ResourcePolicyDocument", # required
-    #       }
-    #
     # @!attribute [rw] container_recipe_arn
     #   The Amazon Resource Name (ARN) of the container recipe that this
     #   policy should be applied to.
@@ -5347,14 +4466,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutImagePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         image_arn: "ImageBuildVersionArn", # required
-    #         policy: "ResourcePolicyDocument", # required
-    #       }
-    #
     # @!attribute [rw] image_arn
     #   The Amazon Resource Name (ARN) of the image that this policy should
     #   be applied to.
@@ -5391,14 +4502,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutImageRecipePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         image_recipe_arn: "ImageRecipeArn", # required
-    #         policy: "ResourcePolicyDocument", # required
-    #       }
-    #
     # @!attribute [rw] image_recipe_arn
     #   The Amazon Resource Name (ARN) of the image recipe that this policy
     #   should be applied to.
@@ -5493,16 +4596,6 @@ module Aws::Imagebuilder
     # Properties that configure export from your build instance to a
     # compatible file format for your VM.
     #
-    # @note When making an API call, you may pass S3ExportConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         role_name: "NonEmptyString", # required
-    #         disk_image_format: "VMDK", # required, accepts VMDK, RAW, VHD
-    #         s3_bucket: "NonEmptyString", # required
-    #         s3_prefix: "NonEmptyString",
-    #       }
-    #
     # @!attribute [rw] role_name
     #   The name of the role that grants VM Import/Export permission to
     #   export images to your S3 bucket.
@@ -5543,14 +4636,6 @@ module Aws::Imagebuilder
 
     # Amazon S3 logging configuration.
     #
-    # @note When making an API call, you may pass S3Logs
-    #   data as a hash:
-    #
-    #       {
-    #         s3_bucket_name: "NonEmptyString",
-    #         s3_key_prefix: "NonEmptyString",
-    #       }
-    #
     # @!attribute [rw] s3_bucket_name
     #   The S3 bucket in which to store the logs.
     #   @return [String]
@@ -5570,15 +4655,6 @@ module Aws::Imagebuilder
 
     # A schedule configures how often and when a pipeline will automatically
     # create a new image.
-    #
-    # @note When making an API call, you may pass Schedule
-    #   data as a hash:
-    #
-    #       {
-    #         schedule_expression: "NonEmptyString",
-    #         timezone: "Timezone",
-    #         pipeline_execution_start_condition: "EXPRESSION_MATCH_ONLY", # accepts EXPRESSION_MATCH_ONLY, EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE
-    #       }
     #
     # @!attribute [rw] schedule_expression
     #   The cron expression determines how often EC2 Image Builder evaluates
@@ -5676,14 +4752,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartImagePipelineExecutionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         image_pipeline_arn: "ImagePipelineArn", # required
-    #         client_token: "ClientToken", # required
-    #       }
-    #
     # @!attribute [rw] image_pipeline_arn
     #   The Amazon Resource Name (ARN) of the image pipeline that you want
     #   to manually invoke.
@@ -5731,13 +4799,6 @@ module Aws::Imagebuilder
     # Contains settings for the Systems Manager agent on your build
     # instance.
     #
-    # @note When making an API call, you may pass SystemsManagerAgent
-    #   data as a hash:
-    #
-    #       {
-    #         uninstall_after_build: false,
-    #       }
-    #
     # @!attribute [rw] uninstall_after_build
     #   Controls whether the Systems Manager agent is removed from your
     #   final build image, prior to creating the new AMI. If this is set to
@@ -5754,16 +4815,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ImageBuilderArn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource that you want to tag.
     #   @return [String]
@@ -5787,14 +4838,6 @@ module Aws::Imagebuilder
 
     # The container repository where the output container image is stored.
     #
-    # @note When making an API call, you may pass TargetContainerRepository
-    #   data as a hash:
-    #
-    #       {
-    #         service: "ECR", # required, accepts ECR
-    #         repository_name: "NonEmptyString", # required
-    #       }
-    #
     # @!attribute [rw] service
     #   Specifies the service in which this image was registered.
     #   @return [String]
@@ -5813,14 +4856,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ImageBuilderArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource that you want to
     #   untag.
@@ -5843,72 +4878,6 @@ module Aws::Imagebuilder
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateDistributionConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         distribution_configuration_arn: "DistributionConfigurationArn", # required
-    #         description: "NonEmptyString",
-    #         distributions: [ # required
-    #           {
-    #             region: "NonEmptyString", # required
-    #             ami_distribution_configuration: {
-    #               name: "AmiNameString",
-    #               description: "NonEmptyString",
-    #               target_account_ids: ["AccountId"],
-    #               ami_tags: {
-    #                 "TagKey" => "TagValue",
-    #               },
-    #               kms_key_id: "NonEmptyString",
-    #               launch_permission: {
-    #                 user_ids: ["AccountId"],
-    #                 user_groups: ["NonEmptyString"],
-    #                 organization_arns: ["OrganizationArn"],
-    #                 organizational_unit_arns: ["OrganizationalUnitArn"],
-    #               },
-    #             },
-    #             container_distribution_configuration: {
-    #               description: "NonEmptyString",
-    #               container_tags: ["NonEmptyString"],
-    #               target_repository: { # required
-    #                 service: "ECR", # required, accepts ECR
-    #                 repository_name: "NonEmptyString", # required
-    #               },
-    #             },
-    #             license_configuration_arns: ["LicenseConfigurationArn"],
-    #             launch_template_configurations: [
-    #               {
-    #                 launch_template_id: "LaunchTemplateId", # required
-    #                 account_id: "AccountId",
-    #                 set_default_version: false,
-    #               },
-    #             ],
-    #             s3_export_configuration: {
-    #               role_name: "NonEmptyString", # required
-    #               disk_image_format: "VMDK", # required, accepts VMDK, RAW, VHD
-    #               s3_bucket: "NonEmptyString", # required
-    #               s3_prefix: "NonEmptyString",
-    #             },
-    #             fast_launch_configurations: [
-    #               {
-    #                 enabled: false, # required
-    #                 snapshot_configuration: {
-    #                   target_resource_count: 1,
-    #                 },
-    #                 max_parallel_launches: 1,
-    #                 launch_template: {
-    #                   launch_template_id: "LaunchTemplateId",
-    #                   launch_template_name: "NonEmptyString",
-    #                   launch_template_version: "NonEmptyString",
-    #                 },
-    #                 account_id: "AccountId",
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         client_token: "ClientToken", # required
-    #       }
-    #
     # @!attribute [rw] distribution_configuration_arn
     #   The Amazon Resource Name (ARN) of the distribution configuration
     #   that you want to update.
@@ -5963,30 +4932,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateImagePipelineRequest
-    #   data as a hash:
-    #
-    #       {
-    #         image_pipeline_arn: "ImagePipelineArn", # required
-    #         description: "NonEmptyString",
-    #         image_recipe_arn: "ImageRecipeArn",
-    #         container_recipe_arn: "ContainerRecipeArn",
-    #         infrastructure_configuration_arn: "InfrastructureConfigurationArn", # required
-    #         distribution_configuration_arn: "DistributionConfigurationArn",
-    #         image_tests_configuration: {
-    #           image_tests_enabled: false,
-    #           timeout_minutes: 1,
-    #         },
-    #         enhanced_image_metadata_enabled: false,
-    #         schedule: {
-    #           schedule_expression: "NonEmptyString",
-    #           timezone: "Timezone",
-    #           pipeline_execution_start_condition: "EXPRESSION_MATCH_ONLY", # accepts EXPRESSION_MATCH_ONLY, EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE
-    #         },
-    #         status: "DISABLED", # accepts DISABLED, ENABLED
-    #         client_token: "ClientToken", # required
-    #       }
-    #
     # @!attribute [rw] image_pipeline_arn
     #   The Amazon Resource Name (ARN) of the image pipeline that you want
     #   to update.
@@ -6083,35 +5028,6 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateInfrastructureConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         infrastructure_configuration_arn: "InfrastructureConfigurationArn", # required
-    #         description: "NonEmptyString",
-    #         instance_types: ["InstanceType"],
-    #         instance_profile_name: "InstanceProfileNameType", # required
-    #         security_group_ids: ["NonEmptyString"],
-    #         subnet_id: "NonEmptyString",
-    #         logging: {
-    #           s3_logs: {
-    #             s3_bucket_name: "NonEmptyString",
-    #             s3_key_prefix: "NonEmptyString",
-    #           },
-    #         },
-    #         key_pair: "NonEmptyString",
-    #         terminate_instance_on_failure: false,
-    #         sns_topic_arn: "SnsTopicArn",
-    #         client_token: "ClientToken", # required
-    #         resource_tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         instance_metadata_options: {
-    #           http_tokens: "HttpTokens",
-    #           http_put_response_hop_limit: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] infrastructure_configuration_arn
     #   The Amazon Resource Name (ARN) of the infrastructure configuration
     #   that you want to update.

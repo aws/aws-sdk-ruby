@@ -85,8 +85,6 @@ module Aws::ResourceGroupsTaggingAPI
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/DescribeReportCreationInput AWS API Documentation
     #
     class DescribeReportCreationInput < Aws::EmptyStructure; end
@@ -184,19 +182,6 @@ module Aws::ResourceGroupsTaggingAPI
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetComplianceSummaryInput
-    #   data as a hash:
-    #
-    #       {
-    #         target_id_filters: ["TargetId"],
-    #         region_filters: ["Region"],
-    #         resource_type_filters: ["AmazonResourceType"],
-    #         tag_key_filters: ["TagKey"],
-    #         group_by: ["TARGET_ID"], # accepts TARGET_ID, REGION, RESOURCE_TYPE
-    #         max_results: 1,
-    #         pagination_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] target_id_filters
     #   Specifies target identifiers (usually, specific account IDs) to
     #   limit the output by. If you use this parameter, the count of
@@ -304,25 +289,6 @@ module Aws::ResourceGroupsTaggingAPI
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetResourcesInput
-    #   data as a hash:
-    #
-    #       {
-    #         pagination_token: "PaginationToken",
-    #         tag_filters: [
-    #           {
-    #             key: "TagKey",
-    #             values: ["TagValue"],
-    #           },
-    #         ],
-    #         resources_per_page: 1,
-    #         tags_per_page: 1,
-    #         resource_type_filters: ["AmazonResourceType"],
-    #         include_compliance_details: false,
-    #         exclude_compliant_resources: false,
-    #         resource_arn_list: ["ResourceARN"],
-    #       }
-    #
     # @!attribute [rw] pagination_token
     #   Specifies a `PaginationToken` response value from a previous request
     #   to indicate that you want the next page of results. Leave this
@@ -500,13 +466,6 @@ module Aws::ResourceGroupsTaggingAPI
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetTagKeysInput
-    #   data as a hash:
-    #
-    #       {
-    #         pagination_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] pagination_token
     #   Specifies a `PaginationToken` response value from a previous request
     #   to indicate that you want the next page of results. Leave this
@@ -541,14 +500,6 @@ module Aws::ResourceGroupsTaggingAPI
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetTagValuesInput
-    #   data as a hash:
-    #
-    #       {
-    #         pagination_token: "PaginationToken",
-    #         key: "TagKey", # required
-    #       }
-    #
     # @!attribute [rw] pagination_token
     #   Specifies a `PaginationToken` response value from a previous request
     #   to indicate that you want the next page of results. Leave this
@@ -676,13 +627,6 @@ module Aws::ResourceGroupsTaggingAPI
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartReportCreationInput
-    #   data as a hash:
-    #
-    #       {
-    #         s3_bucket: "S3Bucket", # required
-    #       }
-    #
     # @!attribute [rw] s3_bucket
     #   The name of the Amazon S3 bucket where the report will be stored;
     #   for example:
@@ -784,14 +728,6 @@ module Aws::ResourceGroupsTaggingAPI
     # A list of tags (keys and values) that are used to specify the
     # associated resources.
     #
-    # @note When making an API call, you may pass TagFilter
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey",
-    #         values: ["TagValue"],
-    #       }
-    #
     # @!attribute [rw] key
     #   One part of a key-value pair that makes up a tag. A key is a general
     #   label that acts like a category for more specific tag values.
@@ -812,16 +748,6 @@ module Aws::ResourceGroupsTaggingAPI
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourcesInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn_list: ["ResourceARN"], # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn_list
     #   Specifies the list of ARNs of the resources that you want to apply
     #   tags to.
@@ -879,14 +805,6 @@ module Aws::ResourceGroupsTaggingAPI
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourcesInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn_list: ["ResourceARN"], # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn_list
     #   Specifies a list of ARNs of the resources that you want to remove
     #   tags from.

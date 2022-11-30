@@ -10,14 +10,6 @@
 module Aws::RAM
   module Types
 
-    # @note When making an API call, you may pass AcceptResourceShareInvitationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_share_invitation_arn: "String", # required
-    #         client_token: "String",
-    #       }
-    #
     # @!attribute [rw] resource_share_invitation_arn
     #   The [Amazon Resoure Name (ARN)][1] of the invitation that you want
     #   to accept.
@@ -73,17 +65,6 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateResourceSharePermissionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_share_arn: "String", # required
-    #         permission_arn: "String", # required
-    #         replace: false,
-    #         client_token: "String",
-    #         permission_version: 1,
-    #       }
-    #
     # @!attribute [rw] resource_share_arn
     #   Specifies the [Amazon Resoure Name (ARN)][1] of the resource share
     #   to which you want to add or replace permissions.
@@ -179,16 +160,6 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateResourceShareRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_share_arn: "String", # required
-    #         resource_arns: ["String"],
-    #         principals: ["String"],
-    #         client_token: "String",
-    #       }
-    #
     # @!attribute [rw] resource_share_arn
     #   Specifies the [Amazon Resoure Name (ARN)][1] of the resource share
     #   that you want to add principals or resources to.
@@ -294,24 +265,6 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateResourceShareRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #         resource_arns: ["String"],
-    #         principals: ["String"],
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         allow_external_principals: false,
-    #         client_token: "String",
-    #         permission_arns: ["String"],
-    #       }
-    #
     # @!attribute [rw] name
     #   Specifies the name of the resource share.
     #   @return [String]
@@ -434,14 +387,6 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteResourceShareRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_share_arn: "String", # required
-    #         client_token: "String",
-    #       }
-    #
     # @!attribute [rw] resource_share_arn
     #   Specifies the [Amazon Resoure Name (ARN)][1] of the resource share
     #   to delete.
@@ -498,15 +443,6 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateResourceSharePermissionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_share_arn: "String", # required
-    #         permission_arn: "String", # required
-    #         client_token: "String",
-    #       }
-    #
     # @!attribute [rw] resource_share_arn
     #   The [Amazon Resoure Name (ARN)][1] of the resource share from which
     #   you want to disassociate a permission.
@@ -574,16 +510,6 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateResourceShareRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_share_arn: "String", # required
-    #         resource_arns: ["String"],
-    #         principals: ["String"],
-    #         client_token: "String",
-    #       }
-    #
     # @!attribute [rw] resource_share_arn
     #   Specifies [Amazon Resoure Name (ARN)][1] of the resource share that
     #   you want to remove resources from.
@@ -688,8 +614,6 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/EnableSharingWithAwsOrganizationRequest AWS API Documentation
     #
     class EnableSharingWithAwsOrganizationRequest < Aws::EmptyStructure; end
@@ -707,14 +631,6 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetPermissionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         permission_arn: "String", # required
-    #         permission_version: 1,
-    #       }
-    #
     # @!attribute [rw] permission_arn
     #   Specifies the [Amazon Resoure Name (ARN)][1] of the permission whose
     #   contents you want to retrieve. To find the ARN for a permission, use
@@ -755,16 +671,6 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetResourcePoliciesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arns: ["String"], # required
-    #         principal: "String",
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] resource_arns
     #   Specifies the [Amazon Resource Names (ARNs)][1] of the resources
     #   whose policies you want to retrieve.
@@ -832,19 +738,6 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetResourceShareAssociationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         association_type: "PRINCIPAL", # required, accepts PRINCIPAL, RESOURCE
-    #         resource_share_arns: ["String"],
-    #         resource_arn: "String",
-    #         principal: "String",
-    #         association_status: "ASSOCIATING", # accepts ASSOCIATING, ASSOCIATED, FAILED, DISASSOCIATING, DISASSOCIATED
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] association_type
     #   Specifies whether you want to retrieve the associations that involve
     #   a specified resource or principal.
@@ -953,16 +846,6 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetResourceShareInvitationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_share_invitation_arns: ["String"],
-    #         resource_share_arns: ["String"],
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] resource_share_invitation_arns
     #   Specifies the [Amazon Resource Names (ARNs)][1] of the resource
     #   share invitations you want information about.
@@ -1036,25 +919,6 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetResourceSharesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_share_arns: ["String"],
-    #         resource_share_status: "PENDING", # accepts PENDING, ACTIVE, FAILED, DELETING, DELETED
-    #         resource_owner: "SELF", # required, accepts SELF, OTHER-ACCOUNTS
-    #         name: "String",
-    #         tag_filters: [
-    #           {
-    #             tag_key: "TagKey",
-    #             tag_values: ["TagValue"],
-    #           },
-    #         ],
-    #         next_token: "String",
-    #         max_results: 1,
-    #         permission_arn: "String",
-    #       }
-    #
     # @!attribute [rw] resource_share_arns
     #   Specifies the [Amazon Resource Names (ARNs)][1] of individual
     #   resource shares that you want information about.
@@ -1252,16 +1116,6 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPendingInvitationResourcesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_share_invitation_arn: "String", # required
-    #         next_token: "String",
-    #         max_results: 1,
-    #         resource_region_scope: "ALL", # accepts ALL, REGIONAL, GLOBAL
-    #       }
-    #
     # @!attribute [rw] resource_share_invitation_arn
     #   Specifies the [Amazon Resoure Name (ARN)][1] of the invitation. You
     #   can use GetResourceShareInvitations to find the ARN of the
@@ -1343,15 +1197,6 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPermissionVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         permission_arn: "String", # required
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] permission_arn
     #   Specifies the [Amazon Resoure Name (ARN)][1] of the RAM permission
     #   whose versions you want to list. You can use the `permissionVersion`
@@ -1417,15 +1262,6 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPermissionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_type: "String",
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] resource_type
     #   Specifies that you want to list permissions for only the specified
     #   resource type. For example, to list only permissions that apply to
@@ -1486,19 +1322,6 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPrincipalsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_owner: "SELF", # required, accepts SELF, OTHER-ACCOUNTS
-    #         resource_arn: "String",
-    #         principals: ["String"],
-    #         resource_type: "String",
-    #         resource_share_arns: ["String"],
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] resource_owner
     #   Specifies that you want to list information for only resource shares
     #   that match the following:
@@ -1628,15 +1451,6 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListResourceSharePermissionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_share_arn: "String", # required
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] resource_share_arn
     #   Specifies the [Amazon Resoure Name (ARN)][1] of the resource share
     #   for which you want to retrieve the associated permissions.
@@ -1700,15 +1514,6 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListResourceTypesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "String",
-    #         max_results: 1,
-    #         resource_region_scope: "ALL", # accepts ALL, REGIONAL, GLOBAL
-    #       }
-    #
     # @!attribute [rw] next_token
     #   Specifies that you want to receive the next page of results. Valid
     #   only if you received a `NextToken` response in the previous request.
@@ -1779,20 +1584,6 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListResourcesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_owner: "SELF", # required, accepts SELF, OTHER-ACCOUNTS
-    #         principal: "String",
-    #         resource_type: "String",
-    #         resource_arns: ["String"],
-    #         resource_share_arns: ["String"],
-    #         next_token: "String",
-    #         max_results: 1,
-    #         resource_region_scope: "ALL", # accepts ALL, REGIONAL, GLOBAL
-    #       }
-    #
     # @!attribute [rw] resource_owner
     #   Specifies that you want to list only the resource shares that match
     #   the following:
@@ -1991,13 +1782,6 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PromoteResourceShareCreatedFromPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_share_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] resource_share_arn
     #   Specifies the [Amazon Resoure Name (ARN)][1] of the resource share
     #   to promote.
@@ -2028,14 +1812,6 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RejectResourceShareInvitationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_share_invitation_arn: "String", # required
-    #         client_token: "String",
-    #       }
-    #
     # @!attribute [rw] resource_share_invitation_arn
     #   Specifies the [Amazon Resoure Name (ARN)][1] of the invitation that
     #   you want to reject.
@@ -2682,14 +2458,6 @@ module Aws::RAM
     # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html
     # [2]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey",
-    #         value: "TagValue",
-    #       }
-    #
     # @!attribute [rw] key
     #   The key, or name, attached to the tag. Every tag must have a key.
     #   Key names are case sensitive.
@@ -2711,14 +2479,6 @@ module Aws::RAM
 
     # A tag key and optional list of possible values that you can use to
     # filter results for tagged resources.
-    #
-    # @note When making an API call, you may pass TagFilter
-    #   data as a hash:
-    #
-    #       {
-    #         tag_key: "TagKey",
-    #         tag_values: ["TagValue"],
-    #       }
     #
     # @!attribute [rw] tag_key
     #   The tag key. This must have a valid string value and can't be
@@ -2766,19 +2526,6 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_share_arn: "String", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_share_arn
     #   Specifies the [Amazon Resoure Name (ARN)][1] of the resource share
     #   that you want to add tags to.
@@ -2834,14 +2581,6 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_share_arn: "String", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_share_arn
     #   Specifies the [Amazon Resoure Name (ARN)][1] of the resource share
     #   that you want to remove tags from. The tags are removed from the
@@ -2869,16 +2608,6 @@ module Aws::RAM
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateResourceShareRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_share_arn: "String", # required
-    #         name: "String",
-    #         allow_external_principals: false,
-    #         client_token: "String",
-    #       }
-    #
     # @!attribute [rw] resource_share_arn
     #   Specifies the [Amazon Resoure Name (ARN)][1] of the resource share
     #   that you want to modify.

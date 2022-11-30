@@ -97,20 +97,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AddTagsToResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem, OpsMetadata, Automation, Association
-    #         resource_id: "ResourceId", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_type
     #   Specifies the type of resource you are tagging.
     #
@@ -176,13 +162,6 @@ module Aws::SSM
 
     # A CloudWatch alarm you apply to an automation or command.
     #
-    # @note When making an API call, you may pass Alarm
-    #   data as a hash:
-    #
-    #       {
-    #         name: "AlarmName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of your CloudWatch alarm.
     #   @return [String]
@@ -197,18 +176,6 @@ module Aws::SSM
 
     # The details for the CloudWatch alarm you want to apply to an
     # automation or command.
-    #
-    # @note When making an API call, you may pass AlarmConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         ignore_poll_alarm_failure: false,
-    #         alarms: [ # required
-    #           {
-    #             name: "AlarmName", # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] ignore_poll_alarm_failure
     #   If you specify `true` for this value, your automation or command
@@ -263,16 +230,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateOpsItemRelatedItemRequest
-    #   data as a hash:
-    #
-    #       {
-    #         ops_item_id: "OpsItemId", # required
-    #         association_type: "OpsItemRelatedItemAssociationType", # required
-    #         resource_type: "OpsItemRelatedItemAssociationResourceType", # required
-    #         resource_uri: "OpsItemRelatedItemAssociationResourceUri", # required
-    #       }
-    #
     # @!attribute [rw] ops_item_id
     #   The ID of the OpsItem to which you want to associate a resource as a
     #   related item.
@@ -717,15 +674,6 @@ module Aws::SSM
 
     # Filters used in the request.
     #
-    # @note When making an API call, you may pass AssociationExecutionFilter
-    #   data as a hash:
-    #
-    #       {
-    #         key: "ExecutionId", # required, accepts ExecutionId, Status, CreatedTime
-    #         value: "AssociationExecutionFilterValue", # required
-    #         type: "EQUAL", # required, accepts EQUAL, LESS_THAN, GREATER_THAN
-    #       }
-    #
     # @!attribute [rw] key
     #   The key value used in the request.
     #   @return [String]
@@ -805,14 +753,6 @@ module Aws::SSM
 
     # Filters for the association execution.
     #
-    # @note When making an API call, you may pass AssociationExecutionTargetsFilter
-    #   data as a hash:
-    #
-    #       {
-    #         key: "Status", # required, accepts Status, ResourceId, ResourceType
-    #         value: "AssociationExecutionTargetsFilterValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The key value used in the request.
     #   @return [String]
@@ -831,14 +771,6 @@ module Aws::SSM
     end
 
     # Describes a filter.
-    #
-    # @note When making an API call, you may pass AssociationFilter
-    #   data as a hash:
-    #
-    #       {
-    #         key: "InstanceId", # required, accepts InstanceId, Name, AssociationId, AssociationStatusName, LastExecutedBefore, LastExecutedAfter, AssociationName, ResourceGroupName
-    #         value: "AssociationFilterValue", # required
-    #       }
     #
     # @!attribute [rw] key
     #   The name of the filter.
@@ -896,16 +828,6 @@ module Aws::SSM
     end
 
     # Describes an association status.
-    #
-    # @note When making an API call, you may pass AssociationStatus
-    #   data as a hash:
-    #
-    #       {
-    #         date: Time.now, # required
-    #         name: "Pending", # required, accepts Pending, Success, Failed
-    #         message: "StatusMessage", # required
-    #         additional_info: "StatusAdditionalInfo",
-    #       }
     #
     # @!attribute [rw] date
     #   The date when the status changed.
@@ -1161,15 +1083,6 @@ module Aws::SSM
     # Identifying information about a document attachment, including the
     # file name and a key-value pair that identifies the location of an
     # attachment to a document.
-    #
-    # @note When making an API call, you may pass AttachmentsSource
-    #   data as a hash:
-    #
-    #       {
-    #         key: "SourceUrl", # accepts SourceUrl, S3FileUrl, AttachmentReference
-    #         values: ["AttachmentsSourceValue"],
-    #         name: "AttachmentIdentifier",
-    #       }
     #
     # @!attribute [rw] key
     #   The key of a key-value pair that identifies the location of an
@@ -1463,14 +1376,6 @@ module Aws::SSM
     # A filter used to match specific automation executions. This is used to
     # limit the scope of Automation execution information returned.
     #
-    # @note When making an API call, you may pass AutomationExecutionFilter
-    #   data as a hash:
-    #
-    #       {
-    #         key: "DocumentNamePrefix", # required, accepts DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter, AutomationType, TagKey, TargetResourceGroup, AutomationSubtype, OpsItemId
-    #         values: ["AutomationExecutionFilterValue"], # required
-    #       }
-    #
     # @!attribute [rw] key
     #   One or more keys to limit the results.
     #   @return [String]
@@ -1715,51 +1620,6 @@ module Aws::SSM
 
     # Defines the basic information about a patch baseline override.
     #
-    # @note When making an API call, you may pass BaselineOverride
-    #   data as a hash:
-    #
-    #       {
-    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, AMAZON_LINUX_2022, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS, RASPBIAN, ROCKY_LINUX
-    #         global_filters: {
-    #           patch_filters: [ # required
-    #             {
-    #               key: "ARCH", # required, accepts ARCH, ADVISORY_ID, BUGZILLA_ID, PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, CVE_ID, EPOCH, MSRC_SEVERITY, NAME, PATCH_ID, SECTION, PRIORITY, REPOSITORY, RELEASE, SEVERITY, SECURITY, VERSION
-    #               values: ["PatchFilterValue"], # required
-    #             },
-    #           ],
-    #         },
-    #         approval_rules: {
-    #           patch_rules: [ # required
-    #             {
-    #               patch_filter_group: { # required
-    #                 patch_filters: [ # required
-    #                   {
-    #                     key: "ARCH", # required, accepts ARCH, ADVISORY_ID, BUGZILLA_ID, PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, CVE_ID, EPOCH, MSRC_SEVERITY, NAME, PATCH_ID, SECTION, PRIORITY, REPOSITORY, RELEASE, SEVERITY, SECURITY, VERSION
-    #                     values: ["PatchFilterValue"], # required
-    #                   },
-    #                 ],
-    #               },
-    #               compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
-    #               approve_after_days: 1,
-    #               approve_until_date: "PatchStringDateTime",
-    #               enable_non_security: false,
-    #             },
-    #           ],
-    #         },
-    #         approved_patches: ["PatchId"],
-    #         approved_patches_compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
-    #         rejected_patches: ["PatchId"],
-    #         rejected_patches_action: "ALLOW_AS_DEPENDENCY", # accepts ALLOW_AS_DEPENDENCY, BLOCK
-    #         approved_patches_enable_non_security: false,
-    #         sources: [
-    #           {
-    #             name: "PatchSourceName", # required
-    #             products: ["PatchSourceProduct"], # required
-    #             configuration: "PatchSourceConfiguration", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] operating_system
     #   The operating system rule used by the patch baseline override.
     #   @return [String]
@@ -1839,14 +1699,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CancelCommandRequest
-    #   data as a hash:
-    #
-    #       {
-    #         command_id: "CommandId", # required
-    #         instance_ids: ["InstanceId"],
-    #       }
-    #
     # @!attribute [rw] command_id
     #   The ID of the command you want to cancel.
     #   @return [String]
@@ -1873,13 +1725,6 @@ module Aws::SSM
     #
     class CancelCommandResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass CancelMaintenanceWindowExecutionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         window_execution_id: "MaintenanceWindowExecutionId", # required
-    #       }
-    #
     # @!attribute [rw] window_execution_id
     #   The ID of the maintenance window execution to stop.
     #   @return [String]
@@ -1906,14 +1751,6 @@ module Aws::SSM
 
     # Configuration options for sending command output to Amazon CloudWatch
     # Logs.
-    #
-    # @note When making an API call, you may pass CloudWatchOutputConfig
-    #   data as a hash:
-    #
-    #       {
-    #         cloud_watch_log_group_name: "CloudWatchLogGroupName",
-    #         cloud_watch_output_enabled: false,
-    #       }
     #
     # @!attribute [rw] cloud_watch_log_group_name
     #   The name of the CloudWatch Logs log group where you want to send
@@ -2172,14 +2009,6 @@ module Aws::SSM
     # `Pending` because the command hasn't run on the node yet.
     #
     #  </note>
-    #
-    # @note When making an API call, you may pass CommandFilter
-    #   data as a hash:
-    #
-    #       {
-    #         key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status, ExecutionStage, DocumentName
-    #         value: "CommandFilterValue", # required
-    #       }
     #
     # @!attribute [rw] key
     #   The name of the filter.
@@ -2605,15 +2434,6 @@ module Aws::SSM
     # execution using a datetime object that is saved in the following
     # format: yyyy-MM-dd'T'HH:mm:ss'Z'.
     #
-    # @note When making an API call, you may pass ComplianceExecutionSummary
-    #   data as a hash:
-    #
-    #       {
-    #         execution_time: Time.now, # required
-    #         execution_id: "ComplianceExecutionId",
-    #         execution_type: "ComplianceExecutionType",
-    #       }
-    #
     # @!attribute [rw] execution_time
     #   The time the execution ran as a datetime object that is saved in the
     #   following format: yyyy-MM-dd'T'HH:mm:ss'Z'.
@@ -2711,19 +2531,6 @@ module Aws::SSM
 
     # Information about a compliance item.
     #
-    # @note When making an API call, you may pass ComplianceItemEntry
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ComplianceItemId",
-    #         title: "ComplianceItemTitle",
-    #         severity: "CRITICAL", # required, accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
-    #         status: "COMPLIANT", # required, accepts COMPLIANT, NON_COMPLIANT
-    #         details: {
-    #           "AttributeName" => "AttributeValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] id
     #   The compliance item ID. For example, if the compliance item is a
     #   Windows patch, the ID could be the number of the KB article.
@@ -2764,15 +2571,6 @@ module Aws::SSM
 
     # One or more filters. Use a filter to return a more specific list of
     # results.
-    #
-    # @note When making an API call, you may pass ComplianceStringFilter
-    #   data as a hash:
-    #
-    #       {
-    #         key: "ComplianceStringFilterKey",
-    #         values: ["ComplianceFilterValue"],
-    #         type: "EQUAL", # accepts EQUAL, NOT_EQUAL, BEGIN_WITH, LESS_THAN, GREATER_THAN
-    #       }
     #
     # @!attribute [rw] key
     #   The name of the filter.
@@ -2856,29 +2654,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateActivationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "ActivationDescription",
-    #         default_instance_name: "DefaultInstanceName",
-    #         iam_role: "IamRole", # required
-    #         registration_limit: 1,
-    #         expiration_date: Time.now,
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         registration_metadata: [
-    #           {
-    #             key: "RegistrationMetadataKey", # required
-    #             value: "RegistrationMetadataValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] description
     #   A user-defined description of the resource that you want to register
     #   with Systems Manager.
@@ -2990,75 +2765,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAssociationBatchRequest
-    #   data as a hash:
-    #
-    #       {
-    #         entries: [ # required
-    #           {
-    #             name: "DocumentARN", # required
-    #             instance_id: "InstanceId",
-    #             parameters: {
-    #               "ParameterName" => ["ParameterValue"],
-    #             },
-    #             automation_target_parameter_name: "AutomationTargetParameterName",
-    #             document_version: "DocumentVersion",
-    #             targets: [
-    #               {
-    #                 key: "TargetKey",
-    #                 values: ["TargetValue"],
-    #               },
-    #             ],
-    #             schedule_expression: "ScheduleExpression",
-    #             output_location: {
-    #               s3_location: {
-    #                 output_s3_region: "S3Region",
-    #                 output_s3_bucket_name: "S3BucketName",
-    #                 output_s3_key_prefix: "S3KeyPrefix",
-    #               },
-    #             },
-    #             association_name: "AssociationName",
-    #             max_errors: "MaxErrors",
-    #             max_concurrency: "MaxConcurrency",
-    #             compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
-    #             sync_compliance: "AUTO", # accepts AUTO, MANUAL
-    #             apply_only_at_cron_interval: false,
-    #             calendar_names: ["CalendarNameOrARN"],
-    #             target_locations: [
-    #               {
-    #                 accounts: ["Account"],
-    #                 regions: ["Region"],
-    #                 target_location_max_concurrency: "MaxConcurrency",
-    #                 target_location_max_errors: "MaxErrors",
-    #                 execution_role_name: "ExecutionRoleName",
-    #                 target_location_alarm_configuration: {
-    #                   ignore_poll_alarm_failure: false,
-    #                   alarms: [ # required
-    #                     {
-    #                       name: "AlarmName", # required
-    #                     },
-    #                   ],
-    #                 },
-    #               },
-    #             ],
-    #             schedule_offset: 1,
-    #             target_maps: [
-    #               {
-    #                 "TargetMapKey" => ["TargetMapValue"],
-    #               },
-    #             ],
-    #             alarm_configuration: {
-    #               ignore_poll_alarm_failure: false,
-    #               alarms: [ # required
-    #                 {
-    #                   name: "AlarmName", # required
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] entries
     #   One or more associations.
     #   @return [Array<Types::CreateAssociationBatchRequestEntry>]
@@ -3073,71 +2779,6 @@ module Aws::SSM
 
     # Describes the association of a Amazon Web Services Systems Manager
     # document (SSM document) and a managed node.
-    #
-    # @note When making an API call, you may pass CreateAssociationBatchRequestEntry
-    #   data as a hash:
-    #
-    #       {
-    #         name: "DocumentARN", # required
-    #         instance_id: "InstanceId",
-    #         parameters: {
-    #           "ParameterName" => ["ParameterValue"],
-    #         },
-    #         automation_target_parameter_name: "AutomationTargetParameterName",
-    #         document_version: "DocumentVersion",
-    #         targets: [
-    #           {
-    #             key: "TargetKey",
-    #             values: ["TargetValue"],
-    #           },
-    #         ],
-    #         schedule_expression: "ScheduleExpression",
-    #         output_location: {
-    #           s3_location: {
-    #             output_s3_region: "S3Region",
-    #             output_s3_bucket_name: "S3BucketName",
-    #             output_s3_key_prefix: "S3KeyPrefix",
-    #           },
-    #         },
-    #         association_name: "AssociationName",
-    #         max_errors: "MaxErrors",
-    #         max_concurrency: "MaxConcurrency",
-    #         compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
-    #         sync_compliance: "AUTO", # accepts AUTO, MANUAL
-    #         apply_only_at_cron_interval: false,
-    #         calendar_names: ["CalendarNameOrARN"],
-    #         target_locations: [
-    #           {
-    #             accounts: ["Account"],
-    #             regions: ["Region"],
-    #             target_location_max_concurrency: "MaxConcurrency",
-    #             target_location_max_errors: "MaxErrors",
-    #             execution_role_name: "ExecutionRoleName",
-    #             target_location_alarm_configuration: {
-    #               ignore_poll_alarm_failure: false,
-    #               alarms: [ # required
-    #                 {
-    #                   name: "AlarmName", # required
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #         ],
-    #         schedule_offset: 1,
-    #         target_maps: [
-    #           {
-    #             "TargetMapKey" => ["TargetMapValue"],
-    #           },
-    #         ],
-    #         alarm_configuration: {
-    #           ignore_poll_alarm_failure: false,
-    #           alarms: [ # required
-    #             {
-    #               name: "AlarmName", # required
-    #             },
-    #           ],
-    #         },
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the SSM document that contains the configuration
@@ -3344,77 +2985,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAssociationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "DocumentARN", # required
-    #         document_version: "DocumentVersion",
-    #         instance_id: "InstanceId",
-    #         parameters: {
-    #           "ParameterName" => ["ParameterValue"],
-    #         },
-    #         targets: [
-    #           {
-    #             key: "TargetKey",
-    #             values: ["TargetValue"],
-    #           },
-    #         ],
-    #         schedule_expression: "ScheduleExpression",
-    #         output_location: {
-    #           s3_location: {
-    #             output_s3_region: "S3Region",
-    #             output_s3_bucket_name: "S3BucketName",
-    #             output_s3_key_prefix: "S3KeyPrefix",
-    #           },
-    #         },
-    #         association_name: "AssociationName",
-    #         automation_target_parameter_name: "AutomationTargetParameterName",
-    #         max_errors: "MaxErrors",
-    #         max_concurrency: "MaxConcurrency",
-    #         compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
-    #         sync_compliance: "AUTO", # accepts AUTO, MANUAL
-    #         apply_only_at_cron_interval: false,
-    #         calendar_names: ["CalendarNameOrARN"],
-    #         target_locations: [
-    #           {
-    #             accounts: ["Account"],
-    #             regions: ["Region"],
-    #             target_location_max_concurrency: "MaxConcurrency",
-    #             target_location_max_errors: "MaxErrors",
-    #             execution_role_name: "ExecutionRoleName",
-    #             target_location_alarm_configuration: {
-    #               ignore_poll_alarm_failure: false,
-    #               alarms: [ # required
-    #                 {
-    #                   name: "AlarmName", # required
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #         ],
-    #         schedule_offset: 1,
-    #         target_maps: [
-    #           {
-    #             "TargetMapKey" => ["TargetMapValue"],
-    #           },
-    #         ],
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         alarm_configuration: {
-    #           ignore_poll_alarm_failure: false,
-    #           alarms: [ # required
-    #             {
-    #               name: "AlarmName", # required
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the SSM Command document or Automation runbook that
     #   contains the configuration information for the managed node.
@@ -3661,38 +3231,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDocumentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         content: "DocumentContent", # required
-    #         requires: [
-    #           {
-    #             name: "DocumentARN", # required
-    #             version: "DocumentVersion",
-    #           },
-    #         ],
-    #         attachments: [
-    #           {
-    #             key: "SourceUrl", # accepts SourceUrl, S3FileUrl, AttachmentReference
-    #             values: ["AttachmentsSourceValue"],
-    #             name: "AttachmentIdentifier",
-    #           },
-    #         ],
-    #         name: "DocumentName", # required
-    #         display_name: "DocumentDisplayName",
-    #         version_name: "DocumentVersionName",
-    #         document_type: "Command", # accepts Command, Policy, Automation, Session, Package, ApplicationConfiguration, ApplicationConfigurationSchema, DeploymentStrategy, ChangeCalendar, Automation.ChangeTemplate, ProblemAnalysis, ProblemAnalysisTemplate, CloudFormation, ConformancePackTemplate
-    #         document_format: "YAML", # accepts YAML, JSON, TEXT
-    #         target_type: "TargetType",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] content
     #   The content for the new SSM document in JSON or YAML format. We
     #   recommend storing the contents for your new document in an external
@@ -3835,29 +3373,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateMaintenanceWindowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "MaintenanceWindowName", # required
-    #         description: "MaintenanceWindowDescription",
-    #         start_date: "MaintenanceWindowStringDateTime",
-    #         end_date: "MaintenanceWindowStringDateTime",
-    #         schedule: "MaintenanceWindowSchedule", # required
-    #         schedule_timezone: "MaintenanceWindowTimezone",
-    #         schedule_offset: 1,
-    #         duration: 1, # required
-    #         cutoff: 1, # required
-    #         allow_unassociated_targets: false, # required
-    #         client_token: "ClientToken",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the maintenance window.
     #   @return [String]
@@ -3991,46 +3506,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateOpsItemRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "OpsItemDescription", # required
-    #         ops_item_type: "OpsItemType",
-    #         operational_data: {
-    #           "OpsItemDataKey" => {
-    #             value: "OpsItemDataValueString",
-    #             type: "SearchableString", # accepts SearchableString, String
-    #           },
-    #         },
-    #         notifications: [
-    #           {
-    #             arn: "String",
-    #           },
-    #         ],
-    #         priority: 1,
-    #         related_ops_items: [
-    #           {
-    #             ops_item_id: "String", # required
-    #           },
-    #         ],
-    #         source: "OpsItemSource", # required
-    #         title: "OpsItemTitle", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         category: "OpsItemCategory",
-    #         severity: "OpsItemSeverity",
-    #         actual_start_time: Time.now,
-    #         actual_end_time: Time.now,
-    #         planned_start_time: Time.now,
-    #         planned_end_time: Time.now,
-    #         account_id: "OpsItemAccountId",
-    #       }
-    #
     # @!attribute [rw] description
     #   Information about the OpsItem.
     #   @return [String]
@@ -4219,24 +3694,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateOpsMetadataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_id: "OpsMetadataResourceId", # required
-    #         metadata: {
-    #           "MetadataKey" => {
-    #             value: "MetadataValueString",
-    #           },
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_id
     #   A resource ID for a new Application Manager application.
     #   @return [String]
@@ -4282,60 +3739,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreatePatchBaselineRequest
-    #   data as a hash:
-    #
-    #       {
-    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, AMAZON_LINUX_2022, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS, RASPBIAN, ROCKY_LINUX
-    #         name: "BaselineName", # required
-    #         global_filters: {
-    #           patch_filters: [ # required
-    #             {
-    #               key: "ARCH", # required, accepts ARCH, ADVISORY_ID, BUGZILLA_ID, PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, CVE_ID, EPOCH, MSRC_SEVERITY, NAME, PATCH_ID, SECTION, PRIORITY, REPOSITORY, RELEASE, SEVERITY, SECURITY, VERSION
-    #               values: ["PatchFilterValue"], # required
-    #             },
-    #           ],
-    #         },
-    #         approval_rules: {
-    #           patch_rules: [ # required
-    #             {
-    #               patch_filter_group: { # required
-    #                 patch_filters: [ # required
-    #                   {
-    #                     key: "ARCH", # required, accepts ARCH, ADVISORY_ID, BUGZILLA_ID, PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, CVE_ID, EPOCH, MSRC_SEVERITY, NAME, PATCH_ID, SECTION, PRIORITY, REPOSITORY, RELEASE, SEVERITY, SECURITY, VERSION
-    #                     values: ["PatchFilterValue"], # required
-    #                   },
-    #                 ],
-    #               },
-    #               compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
-    #               approve_after_days: 1,
-    #               approve_until_date: "PatchStringDateTime",
-    #               enable_non_security: false,
-    #             },
-    #           ],
-    #         },
-    #         approved_patches: ["PatchId"],
-    #         approved_patches_compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
-    #         approved_patches_enable_non_security: false,
-    #         rejected_patches: ["PatchId"],
-    #         rejected_patches_action: "ALLOW_AS_DEPENDENCY", # accepts ALLOW_AS_DEPENDENCY, BLOCK
-    #         description: "BaselineDescription",
-    #         sources: [
-    #           {
-    #             name: "PatchSourceName", # required
-    #             products: ["PatchSourceProduct"], # required
-    #             configuration: "PatchSourceConfiguration", # required
-    #           },
-    #         ],
-    #         client_token: "ClientToken",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] operating_system
     #   Defines the operating system the patch baseline applies to. The
     #   default value is `WINDOWS`.
@@ -4476,38 +3879,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateResourceDataSyncRequest
-    #   data as a hash:
-    #
-    #       {
-    #         sync_name: "ResourceDataSyncName", # required
-    #         s3_destination: {
-    #           bucket_name: "ResourceDataSyncS3BucketName", # required
-    #           prefix: "ResourceDataSyncS3Prefix",
-    #           sync_format: "JsonSerDe", # required, accepts JsonSerDe
-    #           region: "ResourceDataSyncS3Region", # required
-    #           awskms_key_arn: "ResourceDataSyncAWSKMSKeyARN",
-    #           destination_data_sharing: {
-    #             destination_data_sharing_type: "ResourceDataSyncDestinationDataSharingType",
-    #           },
-    #         },
-    #         sync_type: "ResourceDataSyncType",
-    #         sync_source: {
-    #           source_type: "ResourceDataSyncSourceType", # required
-    #           aws_organizations_source: {
-    #             organization_source_type: "ResourceDataSyncOrganizationSourceType", # required
-    #             organizational_units: [
-    #               {
-    #                 organizational_unit_id: "ResourceDataSyncOrganizationalUnitId",
-    #               },
-    #             ],
-    #           },
-    #           source_regions: ["ResourceDataSyncSourceRegion"], # required
-    #           include_future_regions: false,
-    #           enable_all_ops_data_sources: false,
-    #         },
-    #       }
-    #
     # @!attribute [rw] sync_name
     #   A name for the configuration.
     #   @return [String]
@@ -4562,13 +3933,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteActivationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         activation_id: "ActivationId", # required
-    #       }
-    #
     # @!attribute [rw] activation_id
     #   The ID of the activation that you want to delete.
     #   @return [String]
@@ -4585,15 +3949,6 @@ module Aws::SSM
     #
     class DeleteActivationResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteAssociationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "DocumentARN",
-    #         instance_id: "InstanceId",
-    #         association_id: "AssociationId",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the SSM document.
     #   @return [String]
@@ -4631,16 +3986,6 @@ module Aws::SSM
     #
     class DeleteAssociationResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteDocumentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "DocumentName", # required
-    #         document_version: "DocumentVersion",
-    #         version_name: "DocumentVersionName",
-    #         force: false,
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the document.
     #   @return [String]
@@ -4678,16 +4023,6 @@ module Aws::SSM
     #
     class DeleteDocumentResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteInventoryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         type_name: "InventoryItemTypeName", # required
-    #         schema_delete_option: "DisableSchema", # accepts DisableSchema, DeleteSchema
-    #         dry_run: false,
-    #         client_token: "UUID",
-    #       }
-    #
     # @!attribute [rw] type_name
     #   The name of the custom inventory type for which you want to delete
     #   either all previously collected data or the inventory type itself.
@@ -4765,13 +4100,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteMaintenanceWindowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         window_id: "MaintenanceWindowId", # required
-    #       }
-    #
     # @!attribute [rw] window_id
     #   The ID of the maintenance window to delete.
     #   @return [String]
@@ -4796,13 +4124,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteOpsMetadataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         ops_metadata_arn: "OpsMetadataArn", # required
-    #       }
-    #
     # @!attribute [rw] ops_metadata_arn
     #   The Amazon Resource Name (ARN) of an OpsMetadata Object to delete.
     #   @return [String]
@@ -4819,13 +4140,6 @@ module Aws::SSM
     #
     class DeleteOpsMetadataResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteParameterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "PSParameterName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the parameter to delete.
     #   @return [String]
@@ -4842,13 +4156,6 @@ module Aws::SSM
     #
     class DeleteParameterResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteParametersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         names: ["PSParameterName"], # required
-    #       }
-    #
     # @!attribute [rw] names
     #   The names of the parameters to delete. After deleting a parameter,
     #   wait for at least 30 seconds to create a parameter with the same
@@ -4881,13 +4188,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeletePatchBaselineRequest
-    #   data as a hash:
-    #
-    #       {
-    #         baseline_id: "BaselineId", # required
-    #       }
-    #
     # @!attribute [rw] baseline_id
     #   The ID of the patch baseline to delete.
     #   @return [String]
@@ -4912,14 +4212,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteResourceDataSyncRequest
-    #   data as a hash:
-    #
-    #       {
-    #         sync_name: "ResourceDataSyncName", # required
-    #         sync_type: "ResourceDataSyncType",
-    #       }
-    #
     # @!attribute [rw] sync_name
     #   The name of the configuration to delete.
     #   @return [String]
@@ -4941,15 +4233,6 @@ module Aws::SSM
     #
     class DeleteResourceDataSyncResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteResourcePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArnString", # required
-    #         policy_id: "PolicyId", # required
-    #         policy_hash: "PolicyHash", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   Amazon Resource Name (ARN) of the resource to which the policies are
     #   attached.
@@ -4978,13 +4261,6 @@ module Aws::SSM
     #
     class DeleteResourcePolicyResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeregisterManagedInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "ManagedInstanceId", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The ID assigned to the managed node when you registered it using the
     #   activation process.
@@ -5002,14 +4278,6 @@ module Aws::SSM
     #
     class DeregisterManagedInstanceResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeregisterPatchBaselineForPatchGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         baseline_id: "BaselineId", # required
-    #         patch_group: "PatchGroup", # required
-    #       }
-    #
     # @!attribute [rw] baseline_id
     #   The ID of the patch baseline to deregister the patch group from.
     #   @return [String]
@@ -5045,15 +4313,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeregisterTargetFromMaintenanceWindowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         window_id: "MaintenanceWindowId", # required
-    #         window_target_id: "MaintenanceWindowTargetId", # required
-    #         safe: false,
-    #       }
-    #
     # @!attribute [rw] window_id
     #   The ID of the maintenance window the target should be removed from.
     #   @return [String]
@@ -5095,14 +4354,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeregisterTaskFromMaintenanceWindowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         window_id: "MaintenanceWindowId", # required
-    #         window_task_id: "MaintenanceWindowTaskId", # required
-    #       }
-    #
     # @!attribute [rw] window_id
     #   The ID of the maintenance window the task should be removed from.
     #   @return [String]
@@ -5139,14 +4390,6 @@ module Aws::SSM
 
     # Filter for the DescribeActivation API.
     #
-    # @note When making an API call, you may pass DescribeActivationsFilter
-    #   data as a hash:
-    #
-    #       {
-    #         filter_key: "ActivationIds", # accepts ActivationIds, DefaultInstanceName, IamRole
-    #         filter_values: ["String"],
-    #       }
-    #
     # @!attribute [rw] filter_key
     #   The name of the filter.
     #   @return [String]
@@ -5164,20 +4407,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeActivationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             filter_key: "ActivationIds", # accepts ActivationIds, DefaultInstanceName, IamRole
-    #             filter_values: ["String"],
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] filters
     #   A filter to view information about your activations.
     #   @return [Array<Types::DescribeActivationsFilter>]
@@ -5221,22 +4450,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAssociationExecutionTargetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         association_id: "AssociationId", # required
-    #         execution_id: "AssociationExecutionId", # required
-    #         filters: [
-    #           {
-    #             key: "Status", # required, accepts Status, ResourceId, ResourceType
-    #             value: "AssociationExecutionTargetsFilterValue", # required
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] association_id
     #   The association ID that includes the execution for which you want to
     #   view details.
@@ -5298,22 +4511,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAssociationExecutionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         association_id: "AssociationId", # required
-    #         filters: [
-    #           {
-    #             key: "ExecutionId", # required, accepts ExecutionId, Status, CreatedTime
-    #             value: "AssociationExecutionFilterValue", # required
-    #             type: "EQUAL", # required, accepts EQUAL, LESS_THAN, GREATER_THAN
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] association_id
     #   The association ID for which you want to view execution history
     #   details.
@@ -5370,16 +4567,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAssociationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "DocumentARN",
-    #         instance_id: "InstanceId",
-    #         association_id: "AssociationId",
-    #         association_version: "AssociationVersion",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the SSM document.
     #   @return [String]
@@ -5423,20 +4610,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAutomationExecutionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             key: "DocumentNamePrefix", # required, accepts DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter, AutomationType, TagKey, TargetResourceGroup, AutomationSubtype, OpsItemId
-    #             values: ["AutomationExecutionFilterValue"], # required
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] filters
     #   Filters used to limit the scope of executions that are requested.
     #   @return [Array<Types::AutomationExecutionFilter>]
@@ -5481,22 +4654,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAutomationStepExecutionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         automation_execution_id: "AutomationExecutionId", # required
-    #         filters: [
-    #           {
-    #             key: "StartTimeBefore", # required, accepts StartTimeBefore, StartTimeAfter, StepExecutionStatus, StepExecutionId, StepName, Action
-    #             values: ["StepExecutionFilterValue"], # required
-    #           },
-    #         ],
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         reverse_order: false,
-    #       }
-    #
     # @!attribute [rw] automation_execution_id
     #   The Automation execution ID for which you want step execution
     #   descriptions.
@@ -5554,20 +4711,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAvailablePatchesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             key: "PatchOrchestratorFilterKey",
-    #             values: ["PatchOrchestratorFilterValue"],
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] filters
     #   Each element in the array is a structure containing a key-value
     #   pair.
@@ -5702,16 +4845,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDocumentPermissionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "DocumentName", # required
-    #         permission_type: "Share", # required, accepts Share
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the document for which you are the owner.
     #   @return [String]
@@ -5768,15 +4901,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDocumentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "DocumentARN", # required
-    #         document_version: "DocumentVersion",
-    #         version_name: "DocumentVersionName",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the SSM document.
     #   @return [String]
@@ -5814,15 +4938,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEffectiveInstanceAssociationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The managed node ID for which you want to view all associations.
     #   @return [String]
@@ -5866,15 +4981,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEffectivePatchesForPatchBaselineRequest
-    #   data as a hash:
-    #
-    #       {
-    #         baseline_id: "BaselineId", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] baseline_id
     #   The ID of the patch baseline to retrieve the effective patches for.
     #   @return [String]
@@ -5916,15 +5022,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeInstanceAssociationsStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The managed node IDs for which you want association status
     #   information.
@@ -5969,26 +5066,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeInstanceInformationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_information_filter_list: [
-    #           {
-    #             key: "InstanceIds", # required, accepts InstanceIds, AgentVersion, PingStatus, PlatformTypes, ActivationIds, IamRole, ResourceType, AssociationStatus
-    #             value_set: ["InstanceInformationFilterValue"], # required
-    #           },
-    #         ],
-    #         filters: [
-    #           {
-    #             key: "InstanceInformationStringFilterKey", # required
-    #             values: ["InstanceInformationFilterValue"], # required
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] instance_information_filter_list
     #   This is a legacy method. We recommend that you don't use this
     #   method. Instead, use the `Filters` data type. `Filters` enables you
@@ -6048,22 +5125,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeInstancePatchStatesForPatchGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         patch_group: "PatchGroup", # required
-    #         filters: [
-    #           {
-    #             key: "InstancePatchStateFilterKey", # required
-    #             values: ["InstancePatchStateFilterValue"], # required
-    #             type: "Equal", # required, accepts Equal, NotEqual, LessThan, GreaterThan
-    #           },
-    #         ],
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] patch_group
     #   The name of the patch group for which the patch state information
     #   should be retrieved.
@@ -6118,15 +5179,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeInstancePatchStatesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_ids: ["InstanceId"], # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] instance_ids
     #   The ID of the managed node for which patch state information should
     #   be retrieved.
@@ -6169,21 +5221,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeInstancePatchesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         filters: [
-    #           {
-    #             key: "PatchOrchestratorFilterKey",
-    #             values: ["PatchOrchestratorFilterValue"],
-    #           },
-    #         ],
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The ID of the managed node whose patch state information should be
     #   retrieved.
@@ -6265,15 +5302,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeInventoryDeletionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         deletion_id: "UUID",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] deletion_id
     #   Specify the delete inventory ID for which you want information. This
     #   ID was returned by the `DeleteInventory` operation.
@@ -6318,22 +5346,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeMaintenanceWindowExecutionTaskInvocationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         window_execution_id: "MaintenanceWindowExecutionId", # required
-    #         task_id: "MaintenanceWindowExecutionTaskId", # required
-    #         filters: [
-    #           {
-    #             key: "MaintenanceWindowFilterKey",
-    #             values: ["MaintenanceWindowFilterValue"],
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] window_execution_id
     #   The ID of the maintenance window execution the task is part of.
     #   @return [String]
@@ -6391,21 +5403,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeMaintenanceWindowExecutionTasksRequest
-    #   data as a hash:
-    #
-    #       {
-    #         window_execution_id: "MaintenanceWindowExecutionId", # required
-    #         filters: [
-    #           {
-    #             key: "MaintenanceWindowFilterKey",
-    #             values: ["MaintenanceWindowFilterValue"],
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] window_execution_id
     #   The ID of the maintenance window execution whose task executions
     #   should be retrieved.
@@ -6458,21 +5455,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeMaintenanceWindowExecutionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         window_id: "MaintenanceWindowId", # required
-    #         filters: [
-    #           {
-    #             key: "MaintenanceWindowFilterKey",
-    #             values: ["MaintenanceWindowFilterValue"],
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] window_id
     #   The ID of the maintenance window whose executions should be
     #   retrieved.
@@ -6529,28 +5511,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeMaintenanceWindowScheduleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         window_id: "MaintenanceWindowId",
-    #         targets: [
-    #           {
-    #             key: "TargetKey",
-    #             values: ["TargetValue"],
-    #           },
-    #         ],
-    #         resource_type: "INSTANCE", # accepts INSTANCE, RESOURCE_GROUP
-    #         filters: [
-    #           {
-    #             key: "PatchOrchestratorFilterKey",
-    #             values: ["PatchOrchestratorFilterValue"],
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] window_id
     #   The ID of the maintenance window to retrieve information about.
     #   @return [String]
@@ -6613,21 +5573,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeMaintenanceWindowTargetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         window_id: "MaintenanceWindowId", # required
-    #         filters: [
-    #           {
-    #             key: "MaintenanceWindowFilterKey",
-    #             values: ["MaintenanceWindowFilterValue"],
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] window_id
     #   The ID of the maintenance window whose targets should be retrieved.
     #   @return [String]
@@ -6678,21 +5623,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeMaintenanceWindowTasksRequest
-    #   data as a hash:
-    #
-    #       {
-    #         window_id: "MaintenanceWindowId", # required
-    #         filters: [
-    #           {
-    #             key: "MaintenanceWindowFilterKey",
-    #             values: ["MaintenanceWindowFilterValue"],
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] window_id
     #   The ID of the maintenance window whose tasks should be retrieved.
     #   @return [String]
@@ -6743,21 +5673,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeMaintenanceWindowsForTargetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         targets: [ # required
-    #           {
-    #             key: "TargetKey",
-    #             values: ["TargetValue"],
-    #           },
-    #         ],
-    #         resource_type: "INSTANCE", # required, accepts INSTANCE, RESOURCE_GROUP
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] targets
     #   The managed node ID or key-value pair to retrieve information about.
     #   @return [Array<Types::Target>]
@@ -6808,20 +5723,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeMaintenanceWindowsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             key: "MaintenanceWindowFilterKey",
-    #             values: ["MaintenanceWindowFilterValue"],
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] filters
     #   Optional filters used to narrow down the scope of the returned
     #   maintenance windows. Supported filter keys are `Name` and `Enabled`.
@@ -6867,21 +5768,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeOpsItemsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         ops_item_filters: [
-    #           {
-    #             key: "Status", # required, accepts Status, CreatedBy, Source, Priority, Title, OpsItemId, CreatedTime, LastModifiedTime, ActualStartTime, ActualEndTime, PlannedStartTime, PlannedEndTime, OperationalData, OperationalDataKey, OperationalDataValue, ResourceId, AutomationId, Category, Severity, OpsItemType, ChangeRequestByRequesterArn, ChangeRequestByRequesterName, ChangeRequestByApproverArn, ChangeRequestByApproverName, ChangeRequestByTemplate, ChangeRequestByTargetsResourceGroup, InsightByType, AccountId
-    #             values: ["OpsItemFilterValue"], # required
-    #             operator: "Equal", # required, accepts Equal, Contains, GreaterThan, LessThan
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] ops_item_filters
     #   One or more filters to limit the response.
     #
@@ -6985,27 +5871,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeParametersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             key: "Name", # required, accepts Name, Type, KeyId
-    #             values: ["ParametersFilterValue"], # required
-    #           },
-    #         ],
-    #         parameter_filters: [
-    #           {
-    #             key: "ParameterStringFilterKey", # required
-    #             option: "ParameterStringQueryOption",
-    #             values: ["ParameterStringFilterValue"],
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] filters
     #   This data type is deprecated. Instead, use `ParameterFilters`.
     #   @return [Array<Types::ParametersFilter>]
@@ -7053,20 +5918,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribePatchBaselinesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             key: "PatchOrchestratorFilterKey",
-    #             values: ["PatchOrchestratorFilterValue"],
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] filters
     #   Each element in the array is a structure containing a key-value
     #   pair.
@@ -7123,13 +5974,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribePatchGroupStateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         patch_group: "PatchGroup", # required
-    #       }
-    #
     # @!attribute [rw] patch_group
     #   The name of the patch group whose patch snapshot should be
     #   retrieved.
@@ -7237,20 +6081,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribePatchGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         filters: [
-    #           {
-    #             key: "PatchOrchestratorFilterKey",
-    #             values: ["PatchOrchestratorFilterValue"],
-    #           },
-    #         ],
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of patch groups to return (per page).
     #   @return [Integer]
@@ -7308,17 +6138,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribePatchPropertiesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         operating_system: "WINDOWS", # required, accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, AMAZON_LINUX_2022, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS, RASPBIAN, ROCKY_LINUX
-    #         property: "PRODUCT", # required, accepts PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY, PRIORITY, SEVERITY
-    #         patch_set: "OS", # accepts OS, APPLICATION
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] operating_system
     #   The operating system type for which to list patches.
     #   @return [String]
@@ -7375,21 +6194,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeSessionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         state: "Active", # required, accepts Active, History
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         filters: [
-    #           {
-    #             key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Target, Owner, Status, SessionId
-    #             value: "SessionFilterValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] state
     #   The session status to retrieve a list of sessions for. For example,
     #   "Active".
@@ -7440,14 +6244,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateOpsItemRelatedItemRequest
-    #   data as a hash:
-    #
-    #       {
-    #         ops_item_id: "OpsItemId", # required
-    #         association_id: "OpsItemRelatedItemAssociationId", # required
-    #       }
-    #
     # @!attribute [rw] ops_item_id
     #   The ID of the OpsItem for which you want to delete an association
     #   between the OpsItem and a related item.
@@ -7699,14 +6495,6 @@ module Aws::SSM
 
     # This data type is deprecated. Instead, use DocumentKeyValuesFilter.
     #
-    # @note When making an API call, you may pass DocumentFilter
-    #   data as a hash:
-    #
-    #       {
-    #         key: "Name", # required, accepts Name, Owner, PlatformTypes, DocumentType
-    #         value: "DocumentFilterValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The name of the filter.
     #   @return [String]
@@ -7898,14 +6686,6 @@ module Aws::SSM
     #
     # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
     #
-    # @note When making an API call, you may pass DocumentKeyValuesFilter
-    #   data as a hash:
-    #
-    #       {
-    #         key: "DocumentKeyValuesFilterKey",
-    #         values: ["DocumentKeyValuesFilterValue"],
-    #       }
-    #
     # @!attribute [rw] key
     #   The name of the filter key.
     #   @return [String]
@@ -8006,14 +6786,6 @@ module Aws::SSM
 
     # An SSM document required by the current document.
     #
-    # @note When making an API call, you may pass DocumentRequires
-    #   data as a hash:
-    #
-    #       {
-    #         name: "DocumentARN", # required
-    #         version: "DocumentVersion",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the required SSM document. The name can be an Amazon
     #   Resource Name (ARN).
@@ -8033,14 +6805,6 @@ module Aws::SSM
     end
 
     # Information about comments added to a document review request.
-    #
-    # @note When making an API call, you may pass DocumentReviewCommentSource
-    #   data as a hash:
-    #
-    #       {
-    #         type: "Comment", # accepts Comment
-    #         content: "DocumentReviewComment",
-    #       }
     #
     # @!attribute [rw] type
     #   The type of information added to a review request. Currently, only
@@ -8108,19 +6872,6 @@ module Aws::SSM
     end
 
     # Information about a document approval review.
-    #
-    # @note When making an API call, you may pass DocumentReviews
-    #   data as a hash:
-    #
-    #       {
-    #         action: "SendForReview", # required, accepts SendForReview, UpdateReview, Approve, Reject
-    #         comment: [
-    #           {
-    #             type: "Comment", # accepts Comment
-    #             content: "DocumentReviewComment",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] action
     #   The action to take on a document approval review request.
@@ -8372,13 +7123,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAutomationExecutionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         automation_execution_id: "AutomationExecutionId", # required
-    #       }
-    #
     # @!attribute [rw] automation_execution_id
     #   The unique identifier for an existing automation execution to
     #   examine. The execution ID is returned by StartAutomationExecution
@@ -8406,14 +7150,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetCalendarStateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         calendar_names: ["CalendarNameOrARN"], # required
-    #         at_time: "ISO8601String",
-    #       }
-    #
     # @!attribute [rw] calendar_names
     #   The names or Amazon Resource Names (ARNs) of the Systems Manager
     #   documents (SSM documents) that represent the calendar entries for
@@ -8476,15 +7212,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetCommandInvocationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         command_id: "CommandId", # required
-    #         instance_id: "InstanceId", # required
-    #         plugin_name: "CommandPluginName",
-    #       }
-    #
     # @!attribute [rw] command_id
     #   (Required) The parent command ID of the invocation plugin.
     #   @return [String]
@@ -8703,13 +7430,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetConnectionStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         target: "SessionTarget", # required
-    #       }
-    #
     # @!attribute [rw] target
     #   The managed node ID.
     #   @return [String]
@@ -8740,13 +7460,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDefaultPatchBaselineRequest
-    #   data as a hash:
-    #
-    #       {
-    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, AMAZON_LINUX_2022, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS, RASPBIAN, ROCKY_LINUX
-    #       }
-    #
     # @!attribute [rw] operating_system
     #   Returns the default patch baseline for the specified operating
     #   system.
@@ -8777,55 +7490,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDeployablePatchSnapshotForInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         snapshot_id: "SnapshotId", # required
-    #         baseline_override: {
-    #           operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, AMAZON_LINUX_2022, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS, RASPBIAN, ROCKY_LINUX
-    #           global_filters: {
-    #             patch_filters: [ # required
-    #               {
-    #                 key: "ARCH", # required, accepts ARCH, ADVISORY_ID, BUGZILLA_ID, PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, CVE_ID, EPOCH, MSRC_SEVERITY, NAME, PATCH_ID, SECTION, PRIORITY, REPOSITORY, RELEASE, SEVERITY, SECURITY, VERSION
-    #                 values: ["PatchFilterValue"], # required
-    #               },
-    #             ],
-    #           },
-    #           approval_rules: {
-    #             patch_rules: [ # required
-    #               {
-    #                 patch_filter_group: { # required
-    #                   patch_filters: [ # required
-    #                     {
-    #                       key: "ARCH", # required, accepts ARCH, ADVISORY_ID, BUGZILLA_ID, PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, CVE_ID, EPOCH, MSRC_SEVERITY, NAME, PATCH_ID, SECTION, PRIORITY, REPOSITORY, RELEASE, SEVERITY, SECURITY, VERSION
-    #                       values: ["PatchFilterValue"], # required
-    #                     },
-    #                   ],
-    #                 },
-    #                 compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
-    #                 approve_after_days: 1,
-    #                 approve_until_date: "PatchStringDateTime",
-    #                 enable_non_security: false,
-    #               },
-    #             ],
-    #           },
-    #           approved_patches: ["PatchId"],
-    #           approved_patches_compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
-    #           rejected_patches: ["PatchId"],
-    #           rejected_patches_action: "ALLOW_AS_DEPENDENCY", # accepts ALLOW_AS_DEPENDENCY, BLOCK
-    #           approved_patches_enable_non_security: false,
-    #           sources: [
-    #             {
-    #               name: "PatchSourceName", # required
-    #               products: ["PatchSourceProduct"], # required
-    #               configuration: "PatchSourceConfiguration", # required
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The ID of the managed node for which the appropriate patch snapshot
     #   should be retrieved.
@@ -8880,16 +7544,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDocumentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "DocumentARN", # required
-    #         version_name: "DocumentVersionName",
-    #         document_version: "DocumentVersion",
-    #         document_format: "YAML", # accepts YAML, JSON, TEXT
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the SSM document.
     #   @return [String]
@@ -9013,46 +7667,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetInventoryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             key: "InventoryFilterKey", # required
-    #             values: ["InventoryFilterValue"], # required
-    #             type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
-    #           },
-    #         ],
-    #         aggregators: [
-    #           {
-    #             expression: "InventoryAggregatorExpression",
-    #             aggregators: {
-    #               # recursive InventoryAggregatorList
-    #             },
-    #             groups: [
-    #               {
-    #                 name: "InventoryGroupName", # required
-    #                 filters: [ # required
-    #                   {
-    #                     key: "InventoryFilterKey", # required
-    #                     values: ["InventoryFilterValue"], # required
-    #                     type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
-    #                   },
-    #                 ],
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         result_attributes: [
-    #           {
-    #             type_name: "InventoryItemTypeName", # required
-    #           },
-    #         ],
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] filters
     #   One or more filters. Use a filter to return a more specific list of
     #   results.
@@ -9112,17 +7726,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetInventorySchemaRequest
-    #   data as a hash:
-    #
-    #       {
-    #         type_name: "InventoryItemTypeNameFilter",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         aggregator: false,
-    #         sub_type: false,
-    #       }
-    #
     # @!attribute [rw] type_name
     #   The type of inventory item to return.
     #   @return [String]
@@ -9179,13 +7782,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetMaintenanceWindowExecutionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         window_execution_id: "MaintenanceWindowExecutionId", # required
-    #       }
-    #
     # @!attribute [rw] window_execution_id
     #   The ID of the maintenance window execution that includes the task.
     #   @return [String]
@@ -9236,15 +7832,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetMaintenanceWindowExecutionTaskInvocationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         window_execution_id: "MaintenanceWindowExecutionId", # required
-    #         task_id: "MaintenanceWindowExecutionTaskId", # required
-    #         invocation_id: "MaintenanceWindowExecutionTaskInvocationId", # required
-    #       }
-    #
     # @!attribute [rw] window_execution_id
     #   The ID of the maintenance window execution for which the task is a
     #   part.
@@ -9339,14 +7926,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetMaintenanceWindowExecutionTaskRequest
-    #   data as a hash:
-    #
-    #       {
-    #         window_execution_id: "MaintenanceWindowExecutionId", # required
-    #         task_id: "MaintenanceWindowExecutionTaskId", # required
-    #       }
-    #
     # @!attribute [rw] window_execution_id
     #   The ID of the maintenance window execution that includes the task.
     #   @return [String]
@@ -9467,13 +8046,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetMaintenanceWindowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         window_id: "MaintenanceWindowId", # required
-    #       }
-    #
     # @!attribute [rw] window_id
     #   The ID of the maintenance window for which you want to retrieve
     #   information.
@@ -9588,14 +8160,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetMaintenanceWindowTaskRequest
-    #   data as a hash:
-    #
-    #       {
-    #         window_id: "MaintenanceWindowId", # required
-    #         window_task_id: "MaintenanceWindowTaskId", # required
-    #       }
-    #
     # @!attribute [rw] window_id
     #   The maintenance window ID that includes the task to retrieve.
     #   @return [String]
@@ -9752,14 +8316,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetOpsItemRequest
-    #   data as a hash:
-    #
-    #       {
-    #         ops_item_id: "OpsItemId", # required
-    #         ops_item_arn: "OpsItemArn",
-    #       }
-    #
     # @!attribute [rw] ops_item_id
     #   The ID of the OpsItem that you want to get.
     #   @return [String]
@@ -9789,15 +8345,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetOpsMetadataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         ops_metadata_arn: "OpsMetadataArn", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] ops_metadata_arn
     #   The Amazon Resource Name (ARN) of an OpsMetadata Object to view.
     #   @return [String]
@@ -9846,47 +8393,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetOpsSummaryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         sync_name: "ResourceDataSyncName",
-    #         filters: [
-    #           {
-    #             key: "OpsFilterKey", # required
-    #             values: ["OpsFilterValue"], # required
-    #             type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
-    #           },
-    #         ],
-    #         aggregators: [
-    #           {
-    #             aggregator_type: "OpsAggregatorType",
-    #             type_name: "OpsDataTypeName",
-    #             attribute_name: "OpsDataAttributeName",
-    #             values: {
-    #               "OpsAggregatorValueKey" => "OpsAggregatorValue",
-    #             },
-    #             filters: [
-    #               {
-    #                 key: "OpsFilterKey", # required
-    #                 values: ["OpsFilterValue"], # required
-    #                 type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
-    #               },
-    #             ],
-    #             aggregators: {
-    #               # recursive OpsAggregatorList
-    #             },
-    #           },
-    #         ],
-    #         result_attributes: [
-    #           {
-    #             type_name: "OpsDataTypeName", # required
-    #           },
-    #         ],
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] sync_name
     #   Specify the name of a resource data sync to get.
     #   @return [String]
@@ -9946,16 +8452,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetParameterHistoryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "PSParameterName", # required
-    #         with_decryption: false,
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the parameter for which you want to review history.
     #   @return [String]
@@ -10005,14 +8501,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetParameterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "PSParameterName", # required
-    #         with_decryption: false,
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the parameter you want to query.
     #
@@ -10046,24 +8534,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetParametersByPathRequest
-    #   data as a hash:
-    #
-    #       {
-    #         path: "PSParameterName", # required
-    #         recursive: false,
-    #         parameter_filters: [
-    #           {
-    #             key: "ParameterStringFilterKey", # required
-    #             option: "ParameterStringQueryOption",
-    #             values: ["ParameterStringFilterValue"],
-    #           },
-    #         ],
-    #         with_decryption: false,
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] path
     #   The hierarchy for the parameter. Hierarchies start with a forward
     #   slash (/). The hierarchy is the parameter name except the last part
@@ -10143,14 +8613,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetParametersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         names: ["PSParameterName"], # required
-    #         with_decryption: false,
-    #       }
-    #
     # @!attribute [rw] names
     #   Names of the parameters for which you want to query information.
     #
@@ -10191,14 +8653,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetPatchBaselineForPatchGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         patch_group: "PatchGroup", # required
-    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, AMAZON_LINUX_2022, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS, RASPBIAN, ROCKY_LINUX
-    #       }
-    #
     # @!attribute [rw] patch_group
     #   The name of the patch group whose patch baseline should be
     #   retrieved.
@@ -10242,13 +8696,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetPatchBaselineRequest
-    #   data as a hash:
-    #
-    #       {
-    #         baseline_id: "BaselineId", # required
-    #       }
-    #
     # @!attribute [rw] baseline_id
     #   The ID of the patch baseline to retrieve.
     #
@@ -10360,15 +8807,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetResourcePoliciesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArnString", # required
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   Amazon Resource Name (ARN) of the resource to which the policies are
     #   attached.
@@ -10450,13 +8888,6 @@ module Aws::SSM
     end
 
     # The request body of the GetServiceSetting API operation.
-    #
-    # @note When making an API call, you may pass GetServiceSettingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         setting_id: "ServiceSettingId", # required
-    #       }
     #
     # @!attribute [rw] setting_id
     #   The ID of the service setting to get. The setting ID can be one of
@@ -10632,17 +9063,6 @@ module Aws::SSM
     #
     #
     # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-state-assoc.html
-    #
-    # @note When making an API call, you may pass InstanceAssociationOutputLocation
-    #   data as a hash:
-    #
-    #       {
-    #         s3_location: {
-    #           output_s3_region: "S3Region",
-    #           output_s3_bucket_name: "S3BucketName",
-    #           output_s3_key_prefix: "S3KeyPrefix",
-    #         },
-    #       }
     #
     # @!attribute [rw] s3_location
     #   An S3 bucket where you want to store the results of this request.
@@ -10910,14 +9330,6 @@ module Aws::SSM
     # method. The `InstanceInformationFilterList` method is a legacy method
     # and doesn't support tags.
     #
-    # @note When making an API call, you may pass InstanceInformationFilter
-    #   data as a hash:
-    #
-    #       {
-    #         key: "InstanceIds", # required, accepts InstanceIds, AgentVersion, PingStatus, PlatformTypes, ActivationIds, IamRole, ResourceType, AssociationStatus
-    #         value_set: ["InstanceInformationFilterValue"], # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The name of the filter.
     #   @return [String]
@@ -10936,14 +9348,6 @@ module Aws::SSM
     end
 
     # The filters to describe or get information about your managed nodes.
-    #
-    # @note When making an API call, you may pass InstanceInformationStringFilter
-    #   data as a hash:
-    #
-    #       {
-    #         key: "InstanceInformationStringFilterKey", # required
-    #         values: ["InstanceInformationFilterValue"], # required
-    #       }
     #
     # @!attribute [rw] key
     #   The filter key name to describe your managed nodes.
@@ -11186,15 +9590,6 @@ module Aws::SSM
     # * Value for `Type`\: `GreaterThan`
     #
     # * Value for `Values`\: `3`
-    #
-    # @note When making an API call, you may pass InstancePatchStateFilter
-    #   data as a hash:
-    #
-    #       {
-    #         key: "InstancePatchStateFilterKey", # required
-    #         values: ["InstancePatchStateFilterValue"], # required
-    #         type: "Equal", # required, accepts Equal, NotEqual, LessThan, GreaterThan
-    #       }
     #
     # @!attribute [rw] key
     #   The key for the filter. Supported values include the following:
@@ -11900,45 +10295,6 @@ module Aws::SSM
     # Specifies the inventory type and attribute for the aggregation
     # execution.
     #
-    # @note When making an API call, you may pass InventoryAggregator
-    #   data as a hash:
-    #
-    #       {
-    #         expression: "InventoryAggregatorExpression",
-    #         aggregators: [
-    #           {
-    #             expression: "InventoryAggregatorExpression",
-    #             aggregators: {
-    #               # recursive InventoryAggregatorList
-    #             },
-    #             groups: [
-    #               {
-    #                 name: "InventoryGroupName", # required
-    #                 filters: [ # required
-    #                   {
-    #                     key: "InventoryFilterKey", # required
-    #                     values: ["InventoryFilterValue"], # required
-    #                     type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
-    #                   },
-    #                 ],
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         groups: [
-    #           {
-    #             name: "InventoryGroupName", # required
-    #             filters: [ # required
-    #               {
-    #                 key: "InventoryFilterKey", # required
-    #                 values: ["InventoryFilterValue"], # required
-    #                 type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] expression
     #   The inventory type and attribute name for aggregation.
     #   @return [String]
@@ -12068,15 +10424,6 @@ module Aws::SSM
     # One or more filters. Use a filter to return a more specific list of
     # results.
     #
-    # @note When making an API call, you may pass InventoryFilter
-    #   data as a hash:
-    #
-    #       {
-    #         key: "InventoryFilterKey", # required
-    #         values: ["InventoryFilterValue"], # required
-    #         type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
-    #       }
-    #
     # @!attribute [rw] key
     #   The name of the filter key.
     #   @return [String]
@@ -12116,20 +10463,6 @@ module Aws::SSM
     # inventory data. Groups return a count of resources that match and
     # don't match the specified criteria.
     #
-    # @note When making an API call, you may pass InventoryGroup
-    #   data as a hash:
-    #
-    #       {
-    #         name: "InventoryGroupName", # required
-    #         filters: [ # required
-    #           {
-    #             key: "InventoryFilterKey", # required
-    #             values: ["InventoryFilterValue"], # required
-    #             type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the group.
     #   @return [String]
@@ -12152,24 +10485,6 @@ module Aws::SSM
 
     # Information collected from managed nodes based on your inventory
     # policy document
-    #
-    # @note When making an API call, you may pass InventoryItem
-    #   data as a hash:
-    #
-    #       {
-    #         type_name: "InventoryItemTypeName", # required
-    #         schema_version: "InventoryItemSchemaVersion", # required
-    #         capture_time: "InventoryItemCaptureTime", # required
-    #         content_hash: "InventoryItemContentHash",
-    #         content: [
-    #           {
-    #             "AttributeName" => "AttributeValue",
-    #           },
-    #         ],
-    #         context: {
-    #           "AttributeName" => "AttributeValue",
-    #         },
-    #       }
     #
     # @!attribute [rw] type_name
     #   The name of the inventory type. Default inventory item type names
@@ -12375,15 +10690,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass LabelParameterVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "PSParameterName", # required
-    #         parameter_version: 1,
-    #         labels: ["ParameterLabel"], # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The parameter name on which you want to attach one or more labels.
     #   @return [String]
@@ -12431,15 +10737,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAssociationVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         association_id: "AssociationId", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] association_id
     #   The association ID for which you want to view all versions.
     #   @return [String]
@@ -12484,20 +10781,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAssociationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         association_filter_list: [
-    #           {
-    #             key: "InstanceId", # required, accepts InstanceId, Name, AssociationId, AssociationStatusName, LastExecutedBefore, LastExecutedAfter, AssociationName, ResourceGroupName
-    #             value: "AssociationFilterValue", # required
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] association_filter_list
     #   One or more filters. Use a filter to return a more specific list of
     #   results.
@@ -12549,23 +10832,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCommandInvocationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         command_id: "CommandId",
-    #         instance_id: "InstanceId",
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         filters: [
-    #           {
-    #             key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status, ExecutionStage, DocumentName
-    #             value: "CommandFilterValue", # required
-    #           },
-    #         ],
-    #         details: false,
-    #       }
-    #
     # @!attribute [rw] command_id
     #   (Optional) The invocations for a specific command ID.
     #   @return [String]
@@ -12627,22 +10893,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCommandsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         command_id: "CommandId",
-    #         instance_id: "InstanceId",
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         filters: [
-    #           {
-    #             key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status, ExecutionStage, DocumentName
-    #             value: "CommandFilterValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] command_id
     #   (Optional) If provided, lists only the specified command.
     #   @return [String]
@@ -12703,23 +10953,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListComplianceItemsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             key: "ComplianceStringFilterKey",
-    #             values: ["ComplianceFilterValue"],
-    #             type: "EQUAL", # accepts EQUAL, NOT_EQUAL, BEGIN_WITH, LESS_THAN, GREATER_THAN
-    #           },
-    #         ],
-    #         resource_ids: ["ComplianceResourceId"],
-    #         resource_types: ["ComplianceResourceType"],
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] filters
     #   One or more compliance filters. Use a filter to return a more
     #   specific list of results.
@@ -12776,21 +11009,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListComplianceSummariesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             key: "ComplianceStringFilterKey",
-    #             values: ["ComplianceFilterValue"],
-    #             type: "EQUAL", # accepts EQUAL, NOT_EQUAL, BEGIN_WITH, LESS_THAN, GREATER_THAN
-    #           },
-    #         ],
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] filters
     #   One or more compliance or inventory filters. Use a filter to return
     #   a more specific list of results.
@@ -12838,17 +11056,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDocumentMetadataHistoryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "DocumentName", # required
-    #         document_version: "DocumentVersion",
-    #         metadata: "DocumentReviews", # required, accepts DocumentReviews
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the change template.
     #   @return [String]
@@ -12921,15 +11128,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDocumentVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "DocumentARN", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the document. You can specify an Amazon Resource Name
     #   (ARN).
@@ -12974,26 +11172,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDocumentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         document_filter_list: [
-    #           {
-    #             key: "Name", # required, accepts Name, Owner, PlatformTypes, DocumentType
-    #             value: "DocumentFilterValue", # required
-    #           },
-    #         ],
-    #         filters: [
-    #           {
-    #             key: "DocumentKeyValuesFilterKey",
-    #             values: ["DocumentKeyValuesFilterValue"],
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] document_filter_list
     #   This data type is deprecated. Instead, use `Filters`.
     #   @return [Array<Types::DocumentFilter>]
@@ -13054,23 +11232,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListInventoryEntriesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         type_name: "InventoryItemTypeName", # required
-    #         filters: [
-    #           {
-    #             key: "InventoryFilterKey", # required
-    #             values: ["InventoryFilterValue"], # required
-    #             type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
-    #           },
-    #         ],
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The managed node ID for which you want inventory information.
     #   @return [String]
@@ -13147,21 +11308,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListOpsItemEventsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             key: "OpsItemId", # required, accepts OpsItemId
-    #             values: ["OpsItemEventFilterValue"], # required
-    #             operator: "Equal", # required, accepts Equal
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] filters
     #   One or more OpsItem filters. Use a filter to return a more specific
     #   list of results.
@@ -13206,22 +11352,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListOpsItemRelatedItemsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         ops_item_id: "OpsItemId",
-    #         filters: [
-    #           {
-    #             key: "ResourceType", # required, accepts ResourceType, AssociationId, ResourceUri
-    #             values: ["OpsItemRelatedItemsFilterValue"], # required
-    #             operator: "Equal", # required, accepts Equal
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] ops_item_id
     #   The ID of the OpsItem for which you want to list all related-item
     #   resources.
@@ -13272,20 +11402,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListOpsMetadataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             key: "OpsMetadataFilterKey", # required
-    #             values: ["OpsMetadataFilterValue"], # required
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] filters
     #   One or more filters to limit the number of OpsMetadata objects
     #   returned by the call.
@@ -13330,21 +11446,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListResourceComplianceSummariesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             key: "ComplianceStringFilterKey",
-    #             values: ["ComplianceFilterValue"],
-    #             type: "EQUAL", # accepts EQUAL, NOT_EQUAL, BEGIN_WITH, LESS_THAN, GREATER_THAN
-    #           },
-    #         ],
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] filters
     #   One or more filters. Use a filter to return a more specific list of
     #   results.
@@ -13392,15 +11493,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListResourceDataSyncRequest
-    #   data as a hash:
-    #
-    #       {
-    #         sync_type: "ResourceDataSyncType",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] sync_type
     #   View a list of resource data syncs according to the sync type.
     #   Specify `SyncToDestination` to view resource data syncs that
@@ -13449,14 +11541,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem, OpsMetadata, Automation, Association
-    #         resource_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] resource_type
     #   Returns a list of tags for a specific resource type.
     #   @return [String]
@@ -13499,15 +11583,6 @@ module Aws::SSM
     #
     #  </note>
     #
-    # @note When making an API call, you may pass LoggingInfo
-    #   data as a hash:
-    #
-    #       {
-    #         s3_bucket_name: "S3BucketName", # required
-    #         s3_key_prefix: "S3KeyPrefix",
-    #         s3_region: "S3Region", # required
-    #       }
-    #
     # @!attribute [rw] s3_bucket_name
     #   The name of an S3 bucket where execution logs are stored.
     #   @return [String]
@@ -13531,16 +11606,6 @@ module Aws::SSM
     end
 
     # The parameters for an `AUTOMATION` task type.
-    #
-    # @note When making an API call, you may pass MaintenanceWindowAutomationParameters
-    #   data as a hash:
-    #
-    #       {
-    #         document_version: "DocumentVersion",
-    #         parameters: {
-    #           "AutomationParameterKey" => ["AutomationParameterValue"],
-    #         },
-    #       }
     #
     # @!attribute [rw] document_version
     #   The version of an Automation runbook to use during task execution.
@@ -13781,14 +11846,6 @@ module Aws::SSM
     #
     # * DescribeMaintenanceWindowTasks
     #
-    # @note When making an API call, you may pass MaintenanceWindowFilter
-    #   data as a hash:
-    #
-    #       {
-    #         key: "MaintenanceWindowFilterKey",
-    #         values: ["MaintenanceWindowFilterValue"],
-    #       }
-    #
     # @!attribute [rw] key
     #   The name of the filter.
     #   @return [String]
@@ -13927,15 +11984,6 @@ module Aws::SSM
     #
     #  </note>
     #
-    # @note When making an API call, you may pass MaintenanceWindowLambdaParameters
-    #   data as a hash:
-    #
-    #       {
-    #         client_context: "MaintenanceWindowLambdaClientContext",
-    #         qualifier: "MaintenanceWindowLambdaQualifier",
-    #         payload: "data",
-    #       }
-    #
     # @!attribute [rw] client_context
     #   Pass client-specific information to the Lambda function that you are
     #   invoking. You can then process the client information in your Lambda
@@ -13988,32 +12036,6 @@ module Aws::SSM
     # `TaskInvocationParameters`.
     #
     #  </note>
-    #
-    # @note When making an API call, you may pass MaintenanceWindowRunCommandParameters
-    #   data as a hash:
-    #
-    #       {
-    #         comment: "Comment",
-    #         cloud_watch_output_config: {
-    #           cloud_watch_log_group_name: "CloudWatchLogGroupName",
-    #           cloud_watch_output_enabled: false,
-    #         },
-    #         document_hash: "DocumentHash",
-    #         document_hash_type: "Sha256", # accepts Sha256, Sha1
-    #         document_version: "DocumentVersion",
-    #         notification_config: {
-    #           notification_arn: "NotificationArn",
-    #           notification_events: ["All"], # accepts All, InProgress, Success, TimedOut, Cancelled, Failed
-    #           notification_type: "Command", # accepts Command, Invocation
-    #         },
-    #         output_s3_bucket_name: "S3BucketName",
-    #         output_s3_key_prefix: "S3KeyPrefix",
-    #         parameters: {
-    #           "ParameterName" => ["ParameterValue"],
-    #         },
-    #         service_role_arn: "ServiceRole",
-    #         timeout_seconds: 1,
-    #       }
     #
     # @!attribute [rw] comment
     #   Information about the commands to run.
@@ -14118,14 +12140,6 @@ module Aws::SSM
     # for `TaskParameters` and `LoggingInfo`.
     #
     #  </note>
-    #
-    # @note When making an API call, you may pass MaintenanceWindowStepFunctionsParameters
-    #   data as a hash:
-    #
-    #       {
-    #         input: "MaintenanceWindowStepFunctionsInput",
-    #         name: "MaintenanceWindowStepFunctionsName",
-    #       }
     #
     # @!attribute [rw] input
     #   The inputs for the `STEP_FUNCTIONS` task.
@@ -14348,49 +12362,6 @@ module Aws::SSM
 
     # The parameters for task execution.
     #
-    # @note When making an API call, you may pass MaintenanceWindowTaskInvocationParameters
-    #   data as a hash:
-    #
-    #       {
-    #         run_command: {
-    #           comment: "Comment",
-    #           cloud_watch_output_config: {
-    #             cloud_watch_log_group_name: "CloudWatchLogGroupName",
-    #             cloud_watch_output_enabled: false,
-    #           },
-    #           document_hash: "DocumentHash",
-    #           document_hash_type: "Sha256", # accepts Sha256, Sha1
-    #           document_version: "DocumentVersion",
-    #           notification_config: {
-    #             notification_arn: "NotificationArn",
-    #             notification_events: ["All"], # accepts All, InProgress, Success, TimedOut, Cancelled, Failed
-    #             notification_type: "Command", # accepts Command, Invocation
-    #           },
-    #           output_s3_bucket_name: "S3BucketName",
-    #           output_s3_key_prefix: "S3KeyPrefix",
-    #           parameters: {
-    #             "ParameterName" => ["ParameterValue"],
-    #           },
-    #           service_role_arn: "ServiceRole",
-    #           timeout_seconds: 1,
-    #         },
-    #         automation: {
-    #           document_version: "DocumentVersion",
-    #           parameters: {
-    #             "AutomationParameterKey" => ["AutomationParameterValue"],
-    #           },
-    #         },
-    #         step_functions: {
-    #           input: "MaintenanceWindowStepFunctionsInput",
-    #           name: "MaintenanceWindowStepFunctionsName",
-    #         },
-    #         lambda: {
-    #           client_context: "MaintenanceWindowLambdaClientContext",
-    #           qualifier: "MaintenanceWindowLambdaQualifier",
-    #           payload: "data",
-    #         },
-    #       }
-    #
     # @!attribute [rw] run_command
     #   The parameters for a `RUN_COMMAND` task type.
     #   @return [Types::MaintenanceWindowRunCommandParameters]
@@ -14420,13 +12391,6 @@ module Aws::SSM
 
     # Defines the values for a task parameter.
     #
-    # @note When making an API call, you may pass MaintenanceWindowTaskParameterValueExpression
-    #   data as a hash:
-    #
-    #       {
-    #         values: ["MaintenanceWindowTaskParameterValue"],
-    #       }
-    #
     # @!attribute [rw] values
     #   This field contains an array of 0 or more strings, each 1 to 255
     #   characters in length.
@@ -14455,13 +12419,6 @@ module Aws::SSM
 
     # Metadata to assign to an Application Manager application.
     #
-    # @note When making an API call, you may pass MetadataValue
-    #   data as a hash:
-    #
-    #       {
-    #         value: "MetadataValueString",
-    #       }
-    #
     # @!attribute [rw] value
     #   Metadata value to assign to an Application Manager application.
     #   @return [String]
@@ -14474,17 +12431,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyDocumentPermissionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "DocumentName", # required
-    #         permission_type: "Share", # required, accepts Share
-    #         account_ids_to_add: ["AccountId"],
-    #         account_ids_to_remove: ["AccountId"],
-    #         shared_document_version: "SharedDocumentVersion",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the document that you want to share.
     #   @return [String]
@@ -14552,15 +12498,6 @@ module Aws::SSM
 
     # Configurations for sending notifications.
     #
-    # @note When making an API call, you may pass NotificationConfig
-    #   data as a hash:
-    #
-    #       {
-    #         notification_arn: "NotificationArn",
-    #         notification_events: ["All"], # accepts All, InProgress, Success, TimedOut, Cancelled, Failed
-    #         notification_type: "Command", # accepts Command, Invocation
-    #       }
-    #
     # @!attribute [rw] notification_arn
     #   An Amazon Resource Name (ARN) for an Amazon Simple Notification
     #   Service (Amazon SNS) topic. Run Command pushes notifications about
@@ -14602,45 +12539,6 @@ module Aws::SSM
     # One or more aggregators for viewing counts of OpsData using different
     # dimensions such as `Source`, `CreatedTime`, or `Source and
     # CreatedTime`, to name a few.
-    #
-    # @note When making an API call, you may pass OpsAggregator
-    #   data as a hash:
-    #
-    #       {
-    #         aggregator_type: "OpsAggregatorType",
-    #         type_name: "OpsDataTypeName",
-    #         attribute_name: "OpsDataAttributeName",
-    #         values: {
-    #           "OpsAggregatorValueKey" => "OpsAggregatorValue",
-    #         },
-    #         filters: [
-    #           {
-    #             key: "OpsFilterKey", # required
-    #             values: ["OpsFilterValue"], # required
-    #             type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
-    #           },
-    #         ],
-    #         aggregators: [
-    #           {
-    #             aggregator_type: "OpsAggregatorType",
-    #             type_name: "OpsDataTypeName",
-    #             attribute_name: "OpsDataAttributeName",
-    #             values: {
-    #               "OpsAggregatorValueKey" => "OpsAggregatorValue",
-    #             },
-    #             filters: [
-    #               {
-    #                 key: "OpsFilterKey", # required
-    #                 values: ["OpsFilterValue"], # required
-    #                 type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
-    #               },
-    #             ],
-    #             aggregators: {
-    #               # recursive OpsAggregatorList
-    #             },
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] aggregator_type
     #   Either a `Range` or `Count` aggregator for limiting an OpsData
@@ -14720,15 +12618,6 @@ module Aws::SSM
     end
 
     # A filter for viewing OpsData summaries.
-    #
-    # @note When making an API call, you may pass OpsFilter
-    #   data as a hash:
-    #
-    #       {
-    #         key: "OpsFilterKey", # required
-    #         values: ["OpsFilterValue"], # required
-    #         type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
-    #       }
     #
     # @!attribute [rw] key
     #   The name of the filter.
@@ -14998,14 +12887,6 @@ module Aws::SSM
     # An object that defines the value of the key and its type in the
     # OperationalData map.
     #
-    # @note When making an API call, you may pass OpsItemDataValue
-    #   data as a hash:
-    #
-    #       {
-    #         value: "OpsItemDataValueString",
-    #         type: "SearchableString", # accepts SearchableString, String
-    #       }
-    #
     # @!attribute [rw] value
     #   The value of the OperationalData key.
     #   @return [String]
@@ -15027,15 +12908,6 @@ module Aws::SSM
     # Describes a filter for a specific list of OpsItem events. You can
     # filter event information by using tags. You specify tags by using a
     # key-value pair mapping.
-    #
-    # @note When making an API call, you may pass OpsItemEventFilter
-    #   data as a hash:
-    #
-    #       {
-    #         key: "OpsItemId", # required, accepts OpsItemId
-    #         values: ["OpsItemEventFilterValue"], # required
-    #         operator: "Equal", # required, accepts Equal
-    #       }
     #
     # @!attribute [rw] key
     #   The name of the filter key. Currently, the only supported value is
@@ -15108,15 +12980,6 @@ module Aws::SSM
     end
 
     # Describes an OpsItem filter.
-    #
-    # @note When making an API call, you may pass OpsItemFilter
-    #   data as a hash:
-    #
-    #       {
-    #         key: "Status", # required, accepts Status, CreatedBy, Source, Priority, Title, OpsItemId, CreatedTime, LastModifiedTime, ActualStartTime, ActualEndTime, PlannedStartTime, PlannedEndTime, OperationalData, OperationalDataKey, OperationalDataValue, ResourceId, AutomationId, Category, Severity, OpsItemType, ChangeRequestByRequesterArn, ChangeRequestByRequesterName, ChangeRequestByApproverArn, ChangeRequestByApproverName, ChangeRequestByTemplate, ChangeRequestByTargetsResourceGroup, InsightByType, AccountId
-    #         values: ["OpsItemFilterValue"], # required
-    #         operator: "Equal", # required, accepts Equal, Contains, GreaterThan, LessThan
-    #       }
     #
     # @!attribute [rw] key
     #   The name of the filter.
@@ -15218,13 +13081,6 @@ module Aws::SSM
     end
 
     # A notification about the OpsItem.
-    #
-    # @note When making an API call, you may pass OpsItemNotification
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "String",
-    #       }
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of an Amazon Simple Notification
@@ -15332,15 +13188,6 @@ module Aws::SSM
     end
 
     # Describes a filter for a specific list of related-item resources.
-    #
-    # @note When making an API call, you may pass OpsItemRelatedItemsFilter
-    #   data as a hash:
-    #
-    #       {
-    #         key: "ResourceType", # required, accepts ResourceType, AssociationId, ResourceUri
-    #         values: ["OpsItemRelatedItemsFilterValue"], # required
-    #         operator: "Equal", # required, accepts Equal
-    #       }
     #
     # @!attribute [rw] key
     #   The name of the filter key. Supported values include `ResourceUri`,
@@ -15537,14 +13384,6 @@ module Aws::SSM
 
     # A filter to limit the number of OpsMetadata objects displayed.
     #
-    # @note When making an API call, you may pass OpsMetadataFilter
-    #   data as a hash:
-    #
-    #       {
-    #         key: "OpsMetadataFilterKey", # required
-    #         values: ["OpsMetadataFilterValue"], # required
-    #       }
-    #
     # @!attribute [rw] key
     #   A filter key.
     #   @return [String]
@@ -15632,13 +13471,6 @@ module Aws::SSM
     end
 
     # The OpsItem data type to return.
-    #
-    # @note When making an API call, you may pass OpsResultAttribute
-    #   data as a hash:
-    #
-    #       {
-    #         type_name: "OpsDataTypeName", # required
-    #       }
     #
     # @!attribute [rw] type_name
     #   Name of the data type. Valid value: `AWS:OpsItem`,
@@ -16028,15 +13860,6 @@ module Aws::SSM
     # One or more filters. Use a filter to return a more specific list of
     # results.
     #
-    # @note When making an API call, you may pass ParameterStringFilter
-    #   data as a hash:
-    #
-    #       {
-    #         key: "ParameterStringFilterKey", # required
-    #         option: "ParameterStringQueryOption",
-    #         values: ["ParameterStringFilterValue"],
-    #       }
-    #
     # @!attribute [rw] key
     #   The name of the filter.
     #
@@ -16113,14 +13936,6 @@ module Aws::SSM
     end
 
     # This data type is deprecated. Instead, use ParameterStringFilter.
-    #
-    # @note When making an API call, you may pass ParametersFilter
-    #   data as a hash:
-    #
-    #       {
-    #         key: "Name", # required, accepts Name, Type, KeyId
-    #         values: ["ParametersFilterValue"], # required
-    #       }
     #
     # @!attribute [rw] key
     #   The name of the filter.
@@ -16405,14 +14220,6 @@ module Aws::SSM
     # patch properties can be used with each major operating system, see
     # DescribePatchProperties.
     #
-    # @note When making an API call, you may pass PatchFilter
-    #   data as a hash:
-    #
-    #       {
-    #         key: "ARCH", # required, accepts ARCH, ADVISORY_ID, BUGZILLA_ID, PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, CVE_ID, EPOCH, MSRC_SEVERITY, NAME, PATCH_ID, SECTION, PRIORITY, REPOSITORY, RELEASE, SEVERITY, SECURITY, VERSION
-    #         values: ["PatchFilterValue"], # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The key for the filter.
     #
@@ -16437,18 +14244,6 @@ module Aws::SSM
     end
 
     # A set of patch filters, typically used for approval rules.
-    #
-    # @note When making an API call, you may pass PatchFilterGroup
-    #   data as a hash:
-    #
-    #       {
-    #         patch_filters: [ # required
-    #           {
-    #             key: "ARCH", # required, accepts ARCH, ADVISORY_ID, BUGZILLA_ID, PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, CVE_ID, EPOCH, MSRC_SEVERITY, NAME, PATCH_ID, SECTION, PRIORITY, REPOSITORY, RELEASE, SEVERITY, SECURITY, VERSION
-    #             values: ["PatchFilterValue"], # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] patch_filters
     #   The set of patch filters that make up the group.
@@ -16495,14 +14290,6 @@ module Aws::SSM
     #
     # * DescribePatchGroups
     #
-    # @note When making an API call, you may pass PatchOrchestratorFilter
-    #   data as a hash:
-    #
-    #       {
-    #         key: "PatchOrchestratorFilterKey",
-    #         values: ["PatchOrchestratorFilterValue"],
-    #       }
-    #
     # @!attribute [rw] key
     #   The key for the filter.
     #   @return [String]
@@ -16521,24 +14308,6 @@ module Aws::SSM
     end
 
     # Defines an approval rule for a patch baseline.
-    #
-    # @note When making an API call, you may pass PatchRule
-    #   data as a hash:
-    #
-    #       {
-    #         patch_filter_group: { # required
-    #           patch_filters: [ # required
-    #             {
-    #               key: "ARCH", # required, accepts ARCH, ADVISORY_ID, BUGZILLA_ID, PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, CVE_ID, EPOCH, MSRC_SEVERITY, NAME, PATCH_ID, SECTION, PRIORITY, REPOSITORY, RELEASE, SEVERITY, SECURITY, VERSION
-    #               values: ["PatchFilterValue"], # required
-    #             },
-    #           ],
-    #         },
-    #         compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
-    #         approve_after_days: 1,
-    #         approve_until_date: "PatchStringDateTime",
-    #         enable_non_security: false,
-    #       }
     #
     # @!attribute [rw] patch_filter_group
     #   The patch filter group that defines the criteria for the rule.
@@ -16586,28 +14355,6 @@ module Aws::SSM
 
     # A set of rules defining the approval rules for a patch baseline.
     #
-    # @note When making an API call, you may pass PatchRuleGroup
-    #   data as a hash:
-    #
-    #       {
-    #         patch_rules: [ # required
-    #           {
-    #             patch_filter_group: { # required
-    #               patch_filters: [ # required
-    #                 {
-    #                   key: "ARCH", # required, accepts ARCH, ADVISORY_ID, BUGZILLA_ID, PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, CVE_ID, EPOCH, MSRC_SEVERITY, NAME, PATCH_ID, SECTION, PRIORITY, REPOSITORY, RELEASE, SEVERITY, SECURITY, VERSION
-    #                   values: ["PatchFilterValue"], # required
-    #                 },
-    #               ],
-    #             },
-    #             compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
-    #             approve_after_days: 1,
-    #             approve_until_date: "PatchStringDateTime",
-    #             enable_non_security: false,
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] patch_rules
     #   The rules that make up the rule group.
     #   @return [Array<Types::PatchRule>]
@@ -16623,15 +14370,6 @@ module Aws::SSM
     # Information about the patches to use to update the managed nodes,
     # including target operating systems and source repository. Applies to
     # Linux managed nodes only.
-    #
-    # @note When making an API call, you may pass PatchSource
-    #   data as a hash:
-    #
-    #       {
-    #         name: "PatchSourceName", # required
-    #         products: ["PatchSourceProduct"], # required
-    #         configuration: "PatchSourceConfiguration", # required
-    #       }
     #
     # @!attribute [rw] name
     #   The name specified to identify the patch source.
@@ -16760,33 +14498,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutComplianceItemsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_id: "ComplianceResourceId", # required
-    #         resource_type: "ComplianceResourceType", # required
-    #         compliance_type: "ComplianceTypeName", # required
-    #         execution_summary: { # required
-    #           execution_time: Time.now, # required
-    #           execution_id: "ComplianceExecutionId",
-    #           execution_type: "ComplianceExecutionType",
-    #         },
-    #         items: [ # required
-    #           {
-    #             id: "ComplianceItemId",
-    #             title: "ComplianceItemTitle",
-    #             severity: "CRITICAL", # required, accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
-    #             status: "COMPLIANT", # required, accepts COMPLIANT, NON_COMPLIANT
-    #             details: {
-    #               "AttributeName" => "AttributeValue",
-    #             },
-    #           },
-    #         ],
-    #         item_content_hash: "ComplianceItemContentHash",
-    #         upload_type: "COMPLETE", # accepts COMPLETE, PARTIAL
-    #       }
-    #
     # @!attribute [rw] resource_id
     #   Specify an ID for this resource. For a managed node, this is the
     #   node ID.
@@ -16856,29 +14567,6 @@ module Aws::SSM
     #
     class PutComplianceItemsResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass PutInventoryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         items: [ # required
-    #           {
-    #             type_name: "InventoryItemTypeName", # required
-    #             schema_version: "InventoryItemSchemaVersion", # required
-    #             capture_time: "InventoryItemCaptureTime", # required
-    #             content_hash: "InventoryItemContentHash",
-    #             content: [
-    #               {
-    #                 "AttributeName" => "AttributeValue",
-    #               },
-    #             ],
-    #             context: {
-    #               "AttributeName" => "AttributeValue",
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   An managed node ID where you want to add or update inventory items.
     #   @return [String]
@@ -16908,28 +14596,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutParameterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "PSParameterName", # required
-    #         description: "ParameterDescription",
-    #         value: "PSParameterValue", # required
-    #         type: "String", # accepts String, StringList, SecureString
-    #         key_id: "ParameterKeyId",
-    #         overwrite: false,
-    #         allowed_pattern: "AllowedPattern",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         tier: "Standard", # accepts Standard, Advanced, Intelligent-Tiering
-    #         policies: "ParameterPolicies",
-    #         data_type: "ParameterDataType",
-    #       }
-    #
     # @!attribute [rw] name
     #   The fully qualified name of the parameter that you want to add to
     #   the system. The fully qualified name includes the complete hierarchy
@@ -17239,16 +14905,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutResourcePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArnString", # required
-    #         policy: "Policy", # required
-    #         policy_id: "PolicyId",
-    #         policy_hash: "PolicyHash",
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   Amazon Resource Name (ARN) of the resource to which the policies are
     #   attached.
@@ -17298,13 +14954,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RegisterDefaultPatchBaselineRequest
-    #   data as a hash:
-    #
-    #       {
-    #         baseline_id: "BaselineId", # required
-    #       }
-    #
     # @!attribute [rw] baseline_id
     #   The ID of the patch baseline that should be the default patch
     #   baseline.
@@ -17330,14 +14979,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RegisterPatchBaselineForPatchGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         baseline_id: "BaselineId", # required
-    #         patch_group: "PatchGroup", # required
-    #       }
-    #
     # @!attribute [rw] baseline_id
     #   The ID of the patch baseline to register with the patch group.
     #   @return [String]
@@ -17373,24 +15014,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RegisterTargetWithMaintenanceWindowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         window_id: "MaintenanceWindowId", # required
-    #         resource_type: "INSTANCE", # required, accepts INSTANCE, RESOURCE_GROUP
-    #         targets: [ # required
-    #           {
-    #             key: "TargetKey",
-    #             values: ["TargetValue"],
-    #           },
-    #         ],
-    #         owner_information: "OwnerInformation",
-    #         name: "MaintenanceWindowName",
-    #         description: "MaintenanceWindowDescription",
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] window_id
     #   The ID of the maintenance window the target should be registered
     #   with.
@@ -17500,86 +15123,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RegisterTaskWithMaintenanceWindowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         window_id: "MaintenanceWindowId", # required
-    #         targets: [
-    #           {
-    #             key: "TargetKey",
-    #             values: ["TargetValue"],
-    #           },
-    #         ],
-    #         task_arn: "MaintenanceWindowTaskArn", # required
-    #         service_role_arn: "ServiceRole",
-    #         task_type: "RUN_COMMAND", # required, accepts RUN_COMMAND, AUTOMATION, STEP_FUNCTIONS, LAMBDA
-    #         task_parameters: {
-    #           "MaintenanceWindowTaskParameterName" => {
-    #             values: ["MaintenanceWindowTaskParameterValue"],
-    #           },
-    #         },
-    #         task_invocation_parameters: {
-    #           run_command: {
-    #             comment: "Comment",
-    #             cloud_watch_output_config: {
-    #               cloud_watch_log_group_name: "CloudWatchLogGroupName",
-    #               cloud_watch_output_enabled: false,
-    #             },
-    #             document_hash: "DocumentHash",
-    #             document_hash_type: "Sha256", # accepts Sha256, Sha1
-    #             document_version: "DocumentVersion",
-    #             notification_config: {
-    #               notification_arn: "NotificationArn",
-    #               notification_events: ["All"], # accepts All, InProgress, Success, TimedOut, Cancelled, Failed
-    #               notification_type: "Command", # accepts Command, Invocation
-    #             },
-    #             output_s3_bucket_name: "S3BucketName",
-    #             output_s3_key_prefix: "S3KeyPrefix",
-    #             parameters: {
-    #               "ParameterName" => ["ParameterValue"],
-    #             },
-    #             service_role_arn: "ServiceRole",
-    #             timeout_seconds: 1,
-    #           },
-    #           automation: {
-    #             document_version: "DocumentVersion",
-    #             parameters: {
-    #               "AutomationParameterKey" => ["AutomationParameterValue"],
-    #             },
-    #           },
-    #           step_functions: {
-    #             input: "MaintenanceWindowStepFunctionsInput",
-    #             name: "MaintenanceWindowStepFunctionsName",
-    #           },
-    #           lambda: {
-    #             client_context: "MaintenanceWindowLambdaClientContext",
-    #             qualifier: "MaintenanceWindowLambdaQualifier",
-    #             payload: "data",
-    #           },
-    #         },
-    #         priority: 1,
-    #         max_concurrency: "MaxConcurrency",
-    #         max_errors: "MaxErrors",
-    #         logging_info: {
-    #           s3_bucket_name: "S3BucketName", # required
-    #           s3_key_prefix: "S3KeyPrefix",
-    #           s3_region: "S3Region", # required
-    #         },
-    #         name: "MaintenanceWindowName",
-    #         description: "MaintenanceWindowDescription",
-    #         client_token: "ClientToken",
-    #         cutoff_behavior: "CONTINUE_TASK", # accepts CONTINUE_TASK, CANCEL_TASK
-    #         alarm_configuration: {
-    #           ignore_poll_alarm_failure: false,
-    #           alarms: [ # required
-    #             {
-    #               name: "AlarmName", # required
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] window_id
     #   The ID of the maintenance window the task should be added to.
     #   @return [String]
@@ -17797,14 +15340,6 @@ module Aws::SSM
 
     # Reserved for internal use.
     #
-    # @note When making an API call, you may pass RegistrationMetadataItem
-    #   data as a hash:
-    #
-    #       {
-    #         key: "RegistrationMetadataKey", # required
-    #         value: "RegistrationMetadataValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   Reserved for internal use.
     #   @return [String]
@@ -17826,13 +15361,6 @@ module Aws::SSM
     # For example, related OpsItems can include OpsItems with similar error
     # messages, impacted resources, or statuses for the impacted resource.
     #
-    # @note When making an API call, you may pass RelatedOpsItem
-    #   data as a hash:
-    #
-    #       {
-    #         ops_item_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] ops_item_id
     #   The ID of an OpsItem related to the current OpsItem.
     #   @return [String]
@@ -17845,15 +15373,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RemoveTagsFromResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem, OpsMetadata, Automation, Association
-    #         resource_id: "ResourceId", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_type
     #   The type of resource from which you want to remove a tag.
     #
@@ -17914,13 +15433,6 @@ module Aws::SSM
     class RemoveTagsFromResourceResult < Aws::EmptyStructure; end
 
     # The request body of the ResetServiceSetting API operation.
-    #
-    # @note When making an API call, you may pass ResetServiceSettingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         setting_id: "ServiceSettingId", # required
-    #       }
     #
     # @!attribute [rw] setting_id
     #   The Amazon Resource Name (ARN) of the service setting to reset. The
@@ -18054,18 +15566,6 @@ module Aws::SSM
     # Organizations or, if an Amazon Web Services organization isn't
     # present, from multiple Amazon Web Services Regions.
     #
-    # @note When making an API call, you may pass ResourceDataSyncAwsOrganizationsSource
-    #   data as a hash:
-    #
-    #       {
-    #         organization_source_type: "ResourceDataSyncOrganizationSourceType", # required
-    #         organizational_units: [
-    #           {
-    #             organizational_unit_id: "ResourceDataSyncOrganizationalUnitId",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] organization_source_type
     #   If an Amazon Web Services organization is present, this is either
     #   `OrganizationalUnits` or `EntireOrganization`. For
@@ -18119,13 +15619,6 @@ module Aws::SSM
     # centralized Amazon S3 bucket. Data is synchronized to individual key
     # prefixes in the central bucket. Each key prefix represents a different
     # Amazon Web Services account ID.
-    #
-    # @note When making an API call, you may pass ResourceDataSyncDestinationDataSharing
-    #   data as a hash:
-    #
-    #       {
-    #         destination_data_sharing_type: "ResourceDataSyncDestinationDataSharingType",
-    #       }
     #
     # @!attribute [rw] destination_data_sharing_type
     #   The sharing data type. Only `Organization` is supported.
@@ -18240,13 +15733,6 @@ module Aws::SSM
 
     # The Organizations organizational unit data source for the sync.
     #
-    # @note When making an API call, you may pass ResourceDataSyncOrganizationalUnit
-    #   data as a hash:
-    #
-    #       {
-    #         organizational_unit_id: "ResourceDataSyncOrganizationalUnitId",
-    #       }
-    #
     # @!attribute [rw] organizational_unit_id
     #   The Organizations unit ID data source for the sync.
     #   @return [String]
@@ -18260,20 +15746,6 @@ module Aws::SSM
     end
 
     # Information about the target S3 bucket for the resource data sync.
-    #
-    # @note When making an API call, you may pass ResourceDataSyncS3Destination
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_name: "ResourceDataSyncS3BucketName", # required
-    #         prefix: "ResourceDataSyncS3Prefix",
-    #         sync_format: "JsonSerDe", # required, accepts JsonSerDe
-    #         region: "ResourceDataSyncS3Region", # required
-    #         awskms_key_arn: "ResourceDataSyncAWSKMSKeyARN",
-    #         destination_data_sharing: {
-    #           destination_data_sharing_type: "ResourceDataSyncDestinationDataSharingType",
-    #         },
-    #       }
     #
     # @!attribute [rw] bucket_name
     #   The name of the S3 bucket where the aggregated data is stored.
@@ -18317,24 +15789,6 @@ module Aws::SSM
 
     # Information about the source of the data included in the resource data
     # sync.
-    #
-    # @note When making an API call, you may pass ResourceDataSyncSource
-    #   data as a hash:
-    #
-    #       {
-    #         source_type: "ResourceDataSyncSourceType", # required
-    #         aws_organizations_source: {
-    #           organization_source_type: "ResourceDataSyncOrganizationSourceType", # required
-    #           organizational_units: [
-    #             {
-    #               organizational_unit_id: "ResourceDataSyncOrganizationalUnitId",
-    #             },
-    #           ],
-    #         },
-    #         source_regions: ["ResourceDataSyncSourceRegion"], # required
-    #         include_future_regions: false,
-    #         enable_all_ops_data_sources: false,
-    #       }
     #
     # @!attribute [rw] source_type
     #   The type of data source for the resource data sync. `SourceType` is
@@ -18559,13 +16013,6 @@ module Aws::SSM
 
     # The inventory item result attribute.
     #
-    # @note When making an API call, you may pass ResultAttribute
-    #   data as a hash:
-    #
-    #       {
-    #         type_name: "InventoryItemTypeName", # required
-    #       }
-    #
     # @!attribute [rw] type_name
     #   Name of the inventory item type. Valid value:
     #   `AWS:InstanceInformation`. Default Value: `AWS:InstanceInformation`.
@@ -18579,13 +16026,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ResumeSessionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         session_id: "SessionId", # required
-    #       }
-    #
     # @!attribute [rw] session_id
     #   The ID of the disconnected session to resume.
     #   @return [String]
@@ -18672,48 +16112,6 @@ module Aws::SSM
     #
     #  </note>
     #
-    # @note When making an API call, you may pass Runbook
-    #   data as a hash:
-    #
-    #       {
-    #         document_name: "DocumentARN", # required
-    #         document_version: "DocumentVersion",
-    #         parameters: {
-    #           "AutomationParameterKey" => ["AutomationParameterValue"],
-    #         },
-    #         target_parameter_name: "AutomationParameterKey",
-    #         targets: [
-    #           {
-    #             key: "TargetKey",
-    #             values: ["TargetValue"],
-    #           },
-    #         ],
-    #         target_maps: [
-    #           {
-    #             "TargetMapKey" => ["TargetMapValue"],
-    #           },
-    #         ],
-    #         max_concurrency: "MaxConcurrency",
-    #         max_errors: "MaxErrors",
-    #         target_locations: [
-    #           {
-    #             accounts: ["Account"],
-    #             regions: ["Region"],
-    #             target_location_max_concurrency: "MaxConcurrency",
-    #             target_location_max_errors: "MaxErrors",
-    #             execution_role_name: "ExecutionRoleName",
-    #             target_location_alarm_configuration: {
-    #               ignore_poll_alarm_failure: false,
-    #               alarms: [ # required
-    #                 {
-    #                   name: "AlarmName", # required
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] document_name
     #   The name of the Automation runbook used in a runbook workflow.
     #   @return [String]
@@ -18776,15 +16174,6 @@ module Aws::SSM
     end
 
     # An S3 bucket where you want to store the results of this request.
-    #
-    # @note When making an API call, you may pass S3OutputLocation
-    #   data as a hash:
-    #
-    #       {
-    #         output_s3_region: "S3Region",
-    #         output_s3_bucket_name: "S3BucketName",
-    #         output_s3_key_prefix: "S3KeyPrefix",
-    #       }
     #
     # @!attribute [rw] output_s3_region
     #   The Amazon Web Services Region of the S3 bucket.
@@ -18849,17 +16238,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SendAutomationSignalRequest
-    #   data as a hash:
-    #
-    #       {
-    #         automation_execution_id: "AutomationExecutionId", # required
-    #         signal_type: "Approve", # required, accepts Approve, Reject, StartStep, StopStep, Resume
-    #         payload: {
-    #           "AutomationParameterKey" => ["AutomationParameterValue"],
-    #         },
-    #       }
-    #
     # @!attribute [rw] automation_execution_id
     #   The unique identifier for an existing Automation execution that you
     #   want to send the signal to.
@@ -18903,51 +16281,6 @@ module Aws::SSM
     #
     class SendAutomationSignalResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass SendCommandRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_ids: ["InstanceId"],
-    #         targets: [
-    #           {
-    #             key: "TargetKey",
-    #             values: ["TargetValue"],
-    #           },
-    #         ],
-    #         document_name: "DocumentARN", # required
-    #         document_version: "DocumentVersion",
-    #         document_hash: "DocumentHash",
-    #         document_hash_type: "Sha256", # accepts Sha256, Sha1
-    #         timeout_seconds: 1,
-    #         comment: "Comment",
-    #         parameters: {
-    #           "ParameterName" => ["ParameterValue"],
-    #         },
-    #         output_s3_region: "S3Region",
-    #         output_s3_bucket_name: "S3BucketName",
-    #         output_s3_key_prefix: "S3KeyPrefix",
-    #         max_concurrency: "MaxConcurrency",
-    #         max_errors: "MaxErrors",
-    #         service_role_arn: "ServiceRole",
-    #         notification_config: {
-    #           notification_arn: "NotificationArn",
-    #           notification_events: ["All"], # accepts All, InProgress, Success, TimedOut, Cancelled, Failed
-    #           notification_type: "Command", # accepts Command, Invocation
-    #         },
-    #         cloud_watch_output_config: {
-    #           cloud_watch_log_group_name: "CloudWatchLogGroupName",
-    #           cloud_watch_output_enabled: false,
-    #         },
-    #         alarm_configuration: {
-    #           ignore_poll_alarm_failure: false,
-    #           alarms: [ # required
-    #             {
-    #               name: "AlarmName", # required
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] instance_ids
     #   The IDs of the managed nodes where the command should run.
     #   Specifying managed node IDs is most useful when you are targeting a
@@ -19321,14 +16654,6 @@ module Aws::SSM
 
     # Describes a filter for Session Manager information.
     #
-    # @note When making an API call, you may pass SessionFilter
-    #   data as a hash:
-    #
-    #       {
-    #         key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Target, Owner, Status, SessionId
-    #         value: "SessionFilterValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The name of the filter.
     #   @return [String]
@@ -19449,13 +16774,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartAssociationsOnceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         association_ids: ["AssociationId"], # required
-    #       }
-    #
     # @!attribute [rw] association_ids
     #   The association IDs that you want to run immediately and only one
     #   time.
@@ -19473,64 +16791,6 @@ module Aws::SSM
     #
     class StartAssociationsOnceResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass StartAutomationExecutionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         document_name: "DocumentARN", # required
-    #         document_version: "DocumentVersion",
-    #         parameters: {
-    #           "AutomationParameterKey" => ["AutomationParameterValue"],
-    #         },
-    #         client_token: "IdempotencyToken",
-    #         mode: "Auto", # accepts Auto, Interactive
-    #         target_parameter_name: "AutomationParameterKey",
-    #         targets: [
-    #           {
-    #             key: "TargetKey",
-    #             values: ["TargetValue"],
-    #           },
-    #         ],
-    #         target_maps: [
-    #           {
-    #             "TargetMapKey" => ["TargetMapValue"],
-    #           },
-    #         ],
-    #         max_concurrency: "MaxConcurrency",
-    #         max_errors: "MaxErrors",
-    #         target_locations: [
-    #           {
-    #             accounts: ["Account"],
-    #             regions: ["Region"],
-    #             target_location_max_concurrency: "MaxConcurrency",
-    #             target_location_max_errors: "MaxErrors",
-    #             execution_role_name: "ExecutionRoleName",
-    #             target_location_alarm_configuration: {
-    #               ignore_poll_alarm_failure: false,
-    #               alarms: [ # required
-    #                 {
-    #                   name: "AlarmName", # required
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #         ],
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         alarm_configuration: {
-    #           ignore_poll_alarm_failure: false,
-    #           alarms: [ # required
-    #             {
-    #               name: "AlarmName", # required
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] document_name
     #   The name of the SSM document to run. This can be a public document
     #   or a custom document. To run a shared document belonging to another
@@ -19670,69 +16930,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartChangeRequestExecutionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         scheduled_time: Time.now,
-    #         document_name: "DocumentARN", # required
-    #         document_version: "DocumentVersion",
-    #         parameters: {
-    #           "AutomationParameterKey" => ["AutomationParameterValue"],
-    #         },
-    #         change_request_name: "ChangeRequestName",
-    #         client_token: "IdempotencyToken",
-    #         auto_approve: false,
-    #         runbooks: [ # required
-    #           {
-    #             document_name: "DocumentARN", # required
-    #             document_version: "DocumentVersion",
-    #             parameters: {
-    #               "AutomationParameterKey" => ["AutomationParameterValue"],
-    #             },
-    #             target_parameter_name: "AutomationParameterKey",
-    #             targets: [
-    #               {
-    #                 key: "TargetKey",
-    #                 values: ["TargetValue"],
-    #               },
-    #             ],
-    #             target_maps: [
-    #               {
-    #                 "TargetMapKey" => ["TargetMapValue"],
-    #               },
-    #             ],
-    #             max_concurrency: "MaxConcurrency",
-    #             max_errors: "MaxErrors",
-    #             target_locations: [
-    #               {
-    #                 accounts: ["Account"],
-    #                 regions: ["Region"],
-    #                 target_location_max_concurrency: "MaxConcurrency",
-    #                 target_location_max_errors: "MaxErrors",
-    #                 execution_role_name: "ExecutionRoleName",
-    #                 target_location_alarm_configuration: {
-    #                   ignore_poll_alarm_failure: false,
-    #                   alarms: [ # required
-    #                     {
-    #                       name: "AlarmName", # required
-    #                     },
-    #                   ],
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         scheduled_end_time: Time.now,
-    #         change_details: "ChangeDetailsValue",
-    #       }
-    #
     # @!attribute [rw] scheduled_time
     #   The date and time specified in the change request to run the
     #   Automation runbooks.
@@ -19853,18 +17050,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartSessionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         target: "SessionTarget", # required
-    #         document_name: "DocumentARN",
-    #         reason: "SessionReason",
-    #         parameters: {
-    #           "SessionManagerParameterName" => ["SessionManagerParameterValue"],
-    #         },
-    #       }
-    #
     # @!attribute [rw] target
     #   The managed node to connect to for the session.
     #   @return [String]
@@ -20094,14 +17279,6 @@ module Aws::SSM
     # A filter to limit the amount of step execution information returned by
     # the call.
     #
-    # @note When making an API call, you may pass StepExecutionFilter
-    #   data as a hash:
-    #
-    #       {
-    #         key: "StartTimeBefore", # required, accepts StartTimeBefore, StartTimeAfter, StepExecutionStatus, StepExecutionId, StepName, Action
-    #         values: ["StepExecutionFilterValue"], # required
-    #       }
-    #
     # @!attribute [rw] key
     #   One or more keys to limit the results. Valid filter keys include the
     #   following: StepName, Action, StepExecutionId, StepExecutionStatus,
@@ -20121,14 +17298,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopAutomationExecutionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         automation_execution_id: "AutomationExecutionId", # required
-    #         type: "Complete", # accepts Complete, Cancel
-    #       }
-    #
     # @!attribute [rw] automation_execution_id
     #   The execution ID of the Automation to stop.
     #   @return [String]
@@ -20170,14 +17339,6 @@ module Aws::SSM
     # Systems Manager, you can apply tags to Systems Manager documents (SSM
     # documents), managed nodes, maintenance windows, parameters, patch
     # baselines, OpsItems, and OpsMetadata.
-    #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
     #
     # @!attribute [rw] key
     #   The name of the tag.
@@ -20264,14 +17425,6 @@ module Aws::SSM
     # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html
     # [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-targeting
     #
-    # @note When making an API call, you may pass Target
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TargetKey",
-    #         values: ["TargetValue"],
-    #       }
-    #
     # @!attribute [rw] key
     #   User-defined criteria for sending commands that target managed nodes
     #   that meet the criteria.
@@ -20313,25 +17466,6 @@ module Aws::SSM
 
     # The combination of Amazon Web Services Regions and Amazon Web Services
     # accounts targeted by the current Automation execution.
-    #
-    # @note When making an API call, you may pass TargetLocation
-    #   data as a hash:
-    #
-    #       {
-    #         accounts: ["Account"],
-    #         regions: ["Region"],
-    #         target_location_max_concurrency: "MaxConcurrency",
-    #         target_location_max_errors: "MaxErrors",
-    #         execution_role_name: "ExecutionRoleName",
-    #         target_location_alarm_configuration: {
-    #           ignore_poll_alarm_failure: false,
-    #           alarms: [ # required
-    #             {
-    #               name: "AlarmName", # required
-    #             },
-    #           ],
-    #         },
-    #       }
     #
     # @!attribute [rw] accounts
     #   The Amazon Web Services accounts targeted by the current Automation
@@ -20400,13 +17534,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TerminateSessionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         session_id: "SessionId", # required
-    #       }
-    #
     # @!attribute [rw] session_id
     #   The ID of the session to terminate.
     #   @return [String]
@@ -20466,15 +17593,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UnlabelParameterVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "PSParameterName", # required
-    #         parameter_version: 1, # required
-    #         labels: ["ParameterLabel"], # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the parameter from which you want to delete one or more
     #   labels.
@@ -20627,72 +17745,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateAssociationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         association_id: "AssociationId", # required
-    #         parameters: {
-    #           "ParameterName" => ["ParameterValue"],
-    #         },
-    #         document_version: "DocumentVersion",
-    #         schedule_expression: "ScheduleExpression",
-    #         output_location: {
-    #           s3_location: {
-    #             output_s3_region: "S3Region",
-    #             output_s3_bucket_name: "S3BucketName",
-    #             output_s3_key_prefix: "S3KeyPrefix",
-    #           },
-    #         },
-    #         name: "DocumentARN",
-    #         targets: [
-    #           {
-    #             key: "TargetKey",
-    #             values: ["TargetValue"],
-    #           },
-    #         ],
-    #         association_name: "AssociationName",
-    #         association_version: "AssociationVersion",
-    #         automation_target_parameter_name: "AutomationTargetParameterName",
-    #         max_errors: "MaxErrors",
-    #         max_concurrency: "MaxConcurrency",
-    #         compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
-    #         sync_compliance: "AUTO", # accepts AUTO, MANUAL
-    #         apply_only_at_cron_interval: false,
-    #         calendar_names: ["CalendarNameOrARN"],
-    #         target_locations: [
-    #           {
-    #             accounts: ["Account"],
-    #             regions: ["Region"],
-    #             target_location_max_concurrency: "MaxConcurrency",
-    #             target_location_max_errors: "MaxErrors",
-    #             execution_role_name: "ExecutionRoleName",
-    #             target_location_alarm_configuration: {
-    #               ignore_poll_alarm_failure: false,
-    #               alarms: [ # required
-    #                 {
-    #                   name: "AlarmName", # required
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #         ],
-    #         schedule_offset: 1,
-    #         target_maps: [
-    #           {
-    #             "TargetMapKey" => ["TargetMapValue"],
-    #           },
-    #         ],
-    #         alarm_configuration: {
-    #           ignore_poll_alarm_failure: false,
-    #           alarms: [ # required
-    #             {
-    #               name: "AlarmName", # required
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] association_id
     #   The ID of the association you want to update.
     #   @return [String]
@@ -20936,20 +17988,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateAssociationStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "DocumentARN", # required
-    #         instance_id: "InstanceId", # required
-    #         association_status: { # required
-    #           date: Time.now, # required
-    #           name: "Pending", # required, accepts Pending, Success, Failed
-    #           message: "StatusMessage", # required
-    #           additional_info: "StatusAdditionalInfo",
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the SSM document.
     #   @return [String]
@@ -20984,14 +18022,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateDocumentDefaultVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "DocumentName", # required
-    #         document_version: "DocumentVersionNumber", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of a custom document that you want to set as the default
     #   version.
@@ -21024,23 +18054,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateDocumentMetadataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "DocumentName", # required
-    #         document_version: "DocumentVersion",
-    #         document_reviews: { # required
-    #           action: "SendForReview", # required, accepts SendForReview, UpdateReview, Approve, Reject
-    #           comment: [
-    #             {
-    #               type: "Comment", # accepts Comment
-    #               content: "DocumentReviewComment",
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the change template for which a version's metadata is
     #   to be updated.
@@ -21069,26 +18082,6 @@ module Aws::SSM
     #
     class UpdateDocumentMetadataResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateDocumentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         content: "DocumentContent", # required
-    #         attachments: [
-    #           {
-    #             key: "SourceUrl", # accepts SourceUrl, S3FileUrl, AttachmentReference
-    #             values: ["AttachmentsSourceValue"],
-    #             name: "AttachmentIdentifier",
-    #           },
-    #         ],
-    #         name: "DocumentName", # required
-    #         display_name: "DocumentDisplayName",
-    #         version_name: "DocumentVersionName",
-    #         document_version: "DocumentVersion",
-    #         document_format: "YAML", # accepts YAML, JSON, TEXT
-    #         target_type: "TargetType",
-    #       }
-    #
     # @!attribute [rw] content
     #   A valid JSON or YAML string.
     #   @return [String]
@@ -21166,25 +18159,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateMaintenanceWindowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         window_id: "MaintenanceWindowId", # required
-    #         name: "MaintenanceWindowName",
-    #         description: "MaintenanceWindowDescription",
-    #         start_date: "MaintenanceWindowStringDateTime",
-    #         end_date: "MaintenanceWindowStringDateTime",
-    #         schedule: "MaintenanceWindowSchedule",
-    #         schedule_timezone: "MaintenanceWindowTimezone",
-    #         schedule_offset: 1,
-    #         duration: 1,
-    #         cutoff: 1,
-    #         allow_unassociated_targets: false,
-    #         enabled: false,
-    #         replace: false,
-    #       }
-    #
     # @!attribute [rw] window_id
     #   The ID of the maintenance window to update.
     #   @return [String]
@@ -21370,24 +18344,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateMaintenanceWindowTargetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         window_id: "MaintenanceWindowId", # required
-    #         window_target_id: "MaintenanceWindowTargetId", # required
-    #         targets: [
-    #           {
-    #             key: "TargetKey",
-    #             values: ["TargetValue"],
-    #           },
-    #         ],
-    #         owner_information: "OwnerInformation",
-    #         name: "MaintenanceWindowName",
-    #         description: "MaintenanceWindowDescription",
-    #         replace: false,
-    #       }
-    #
     # @!attribute [rw] window_id
     #   The maintenance window ID with which to modify the target.
     #   @return [String]
@@ -21472,86 +18428,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateMaintenanceWindowTaskRequest
-    #   data as a hash:
-    #
-    #       {
-    #         window_id: "MaintenanceWindowId", # required
-    #         window_task_id: "MaintenanceWindowTaskId", # required
-    #         targets: [
-    #           {
-    #             key: "TargetKey",
-    #             values: ["TargetValue"],
-    #           },
-    #         ],
-    #         task_arn: "MaintenanceWindowTaskArn",
-    #         service_role_arn: "ServiceRole",
-    #         task_parameters: {
-    #           "MaintenanceWindowTaskParameterName" => {
-    #             values: ["MaintenanceWindowTaskParameterValue"],
-    #           },
-    #         },
-    #         task_invocation_parameters: {
-    #           run_command: {
-    #             comment: "Comment",
-    #             cloud_watch_output_config: {
-    #               cloud_watch_log_group_name: "CloudWatchLogGroupName",
-    #               cloud_watch_output_enabled: false,
-    #             },
-    #             document_hash: "DocumentHash",
-    #             document_hash_type: "Sha256", # accepts Sha256, Sha1
-    #             document_version: "DocumentVersion",
-    #             notification_config: {
-    #               notification_arn: "NotificationArn",
-    #               notification_events: ["All"], # accepts All, InProgress, Success, TimedOut, Cancelled, Failed
-    #               notification_type: "Command", # accepts Command, Invocation
-    #             },
-    #             output_s3_bucket_name: "S3BucketName",
-    #             output_s3_key_prefix: "S3KeyPrefix",
-    #             parameters: {
-    #               "ParameterName" => ["ParameterValue"],
-    #             },
-    #             service_role_arn: "ServiceRole",
-    #             timeout_seconds: 1,
-    #           },
-    #           automation: {
-    #             document_version: "DocumentVersion",
-    #             parameters: {
-    #               "AutomationParameterKey" => ["AutomationParameterValue"],
-    #             },
-    #           },
-    #           step_functions: {
-    #             input: "MaintenanceWindowStepFunctionsInput",
-    #             name: "MaintenanceWindowStepFunctionsName",
-    #           },
-    #           lambda: {
-    #             client_context: "MaintenanceWindowLambdaClientContext",
-    #             qualifier: "MaintenanceWindowLambdaQualifier",
-    #             payload: "data",
-    #           },
-    #         },
-    #         priority: 1,
-    #         max_concurrency: "MaxConcurrency",
-    #         max_errors: "MaxErrors",
-    #         logging_info: {
-    #           s3_bucket_name: "S3BucketName", # required
-    #           s3_key_prefix: "S3KeyPrefix",
-    #           s3_region: "S3Region", # required
-    #         },
-    #         name: "MaintenanceWindowName",
-    #         description: "MaintenanceWindowDescription",
-    #         replace: false,
-    #         cutoff_behavior: "CONTINUE_TASK", # accepts CONTINUE_TASK, CANCEL_TASK
-    #         alarm_configuration: {
-    #           ignore_poll_alarm_failure: false,
-    #           alarms: [ # required
-    #             {
-    #               name: "AlarmName", # required
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] window_id
     #   The maintenance window ID that contains the task to modify.
     #   @return [String]
@@ -21874,14 +18750,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateManagedInstanceRoleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "ManagedInstanceId", # required
-    #         iam_role: "IamRole", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The ID of the managed node where you want to update the role.
     #   @return [String]
@@ -21917,41 +18785,6 @@ module Aws::SSM
     #
     class UpdateManagedInstanceRoleResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateOpsItemRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "OpsItemDescription",
-    #         operational_data: {
-    #           "OpsItemDataKey" => {
-    #             value: "OpsItemDataValueString",
-    #             type: "SearchableString", # accepts SearchableString, String
-    #           },
-    #         },
-    #         operational_data_to_delete: ["String"],
-    #         notifications: [
-    #           {
-    #             arn: "String",
-    #           },
-    #         ],
-    #         priority: 1,
-    #         related_ops_items: [
-    #           {
-    #             ops_item_id: "String", # required
-    #           },
-    #         ],
-    #         status: "Open", # accepts Open, InProgress, Resolved, Pending, TimedOut, Cancelling, Cancelled, Failed, CompletedWithSuccess, CompletedWithFailure, Scheduled, RunbookInProgress, PendingChangeCalendarOverride, ChangeCalendarOverrideApproved, ChangeCalendarOverrideRejected, PendingApproval, Approved, Rejected, Closed
-    #         ops_item_id: "OpsItemId", # required
-    #         title: "OpsItemTitle",
-    #         category: "OpsItemCategory",
-    #         severity: "OpsItemSeverity",
-    #         actual_start_time: Time.now,
-    #         actual_end_time: Time.now,
-    #         planned_start_time: Time.now,
-    #         planned_end_time: Time.now,
-    #         ops_item_arn: "OpsItemArn",
-    #       }
-    #
     # @!attribute [rw] description
     #   Update the information about the OpsItem. Provide enough information
     #   so that users reading this OpsItem for the first time understand the
@@ -22093,19 +18926,6 @@ module Aws::SSM
     #
     class UpdateOpsItemResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateOpsMetadataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         ops_metadata_arn: "OpsMetadataArn", # required
-    #         metadata_to_update: {
-    #           "MetadataKey" => {
-    #             value: "MetadataValueString",
-    #           },
-    #         },
-    #         keys_to_delete: ["MetadataKey"],
-    #       }
-    #
     # @!attribute [rw] ops_metadata_arn
     #   The Amazon Resource Name (ARN) of the OpsMetadata Object to update.
     #   @return [String]
@@ -22141,54 +18961,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdatePatchBaselineRequest
-    #   data as a hash:
-    #
-    #       {
-    #         baseline_id: "BaselineId", # required
-    #         name: "BaselineName",
-    #         global_filters: {
-    #           patch_filters: [ # required
-    #             {
-    #               key: "ARCH", # required, accepts ARCH, ADVISORY_ID, BUGZILLA_ID, PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, CVE_ID, EPOCH, MSRC_SEVERITY, NAME, PATCH_ID, SECTION, PRIORITY, REPOSITORY, RELEASE, SEVERITY, SECURITY, VERSION
-    #               values: ["PatchFilterValue"], # required
-    #             },
-    #           ],
-    #         },
-    #         approval_rules: {
-    #           patch_rules: [ # required
-    #             {
-    #               patch_filter_group: { # required
-    #                 patch_filters: [ # required
-    #                   {
-    #                     key: "ARCH", # required, accepts ARCH, ADVISORY_ID, BUGZILLA_ID, PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, CVE_ID, EPOCH, MSRC_SEVERITY, NAME, PATCH_ID, SECTION, PRIORITY, REPOSITORY, RELEASE, SEVERITY, SECURITY, VERSION
-    #                     values: ["PatchFilterValue"], # required
-    #                   },
-    #                 ],
-    #               },
-    #               compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
-    #               approve_after_days: 1,
-    #               approve_until_date: "PatchStringDateTime",
-    #               enable_non_security: false,
-    #             },
-    #           ],
-    #         },
-    #         approved_patches: ["PatchId"],
-    #         approved_patches_compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
-    #         approved_patches_enable_non_security: false,
-    #         rejected_patches: ["PatchId"],
-    #         rejected_patches_action: "ALLOW_AS_DEPENDENCY", # accepts ALLOW_AS_DEPENDENCY, BLOCK
-    #         description: "BaselineDescription",
-    #         sources: [
-    #           {
-    #             name: "PatchSourceName", # required
-    #             products: ["PatchSourceProduct"], # required
-    #             configuration: "PatchSourceConfiguration", # required
-    #           },
-    #         ],
-    #         replace: false,
-    #       }
-    #
     # @!attribute [rw] baseline_id
     #   The ID of the patch baseline to update.
     #   @return [String]
@@ -22380,28 +19152,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateResourceDataSyncRequest
-    #   data as a hash:
-    #
-    #       {
-    #         sync_name: "ResourceDataSyncName", # required
-    #         sync_type: "ResourceDataSyncType", # required
-    #         sync_source: { # required
-    #           source_type: "ResourceDataSyncSourceType", # required
-    #           aws_organizations_source: {
-    #             organization_source_type: "ResourceDataSyncOrganizationSourceType", # required
-    #             organizational_units: [
-    #               {
-    #                 organizational_unit_id: "ResourceDataSyncOrganizationalUnitId",
-    #               },
-    #             ],
-    #           },
-    #           source_regions: ["ResourceDataSyncSourceRegion"], # required
-    #           include_future_regions: false,
-    #           enable_all_ops_data_sources: false,
-    #         },
-    #       }
-    #
     # @!attribute [rw] sync_name
     #   The name of the resource data sync you want to update.
     #   @return [String]
@@ -22430,14 +19180,6 @@ module Aws::SSM
     class UpdateResourceDataSyncResult < Aws::EmptyStructure; end
 
     # The request body of the UpdateServiceSetting API operation.
-    #
-    # @note When making an API call, you may pass UpdateServiceSettingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         setting_id: "ServiceSettingId", # required
-    #         setting_value: "ServiceSettingValue", # required
-    #       }
     #
     # @!attribute [rw] setting_id
     #   The Amazon Resource Name (ARN) of the service setting to reset. For

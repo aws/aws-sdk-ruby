@@ -13,15 +13,6 @@ module Aws::AuditManager
     # The wrapper of Amazon Web Services account details, such as account ID
     # or email address.
     #
-    # @note When making an API call, you may pass AWSAccount
-    #   data as a hash:
-    #
-    #       {
-    #         id: "AccountId",
-    #         email_address: "EmailAddress",
-    #         name: "AccountName",
-    #       }
-    #
     # @!attribute [rw] id
     #   The identifier for the Amazon Web Services account.
     #   @return [String]
@@ -46,13 +37,6 @@ module Aws::AuditManager
     end
 
     # An Amazon Web Service such as Amazon S3 or CloudTrail.
-    #
-    # @note When making an API call, you may pass AWSService
-    #   data as a hash:
-    #
-    #       {
-    #         service_name: "AWSServiceName",
-    #       }
     #
     # @!attribute [rw] service_name
     #   The name of the Amazon Web Service.
@@ -769,14 +753,6 @@ module Aws::AuditManager
     # The location where Audit Manager saves assessment reports for the
     # given assessment.
     #
-    # @note When making an API call, you may pass AssessmentReportsDestination
-    #   data as a hash:
-    #
-    #       {
-    #         destination_type: "S3", # accepts S3
-    #         destination: "S3Url",
-    #       }
-    #
     # @!attribute [rw] destination_type
     #   The destination type, such as Amazon S3.
     #   @return [String]
@@ -794,14 +770,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateAssessmentReportEvidenceFolderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_id: "UUID", # required
-    #         evidence_folder_id: "UUID", # required
-    #       }
-    #
     # @!attribute [rw] assessment_id
     #   The identifier for the assessment.
     #   @return [String]
@@ -823,15 +791,6 @@ module Aws::AuditManager
     #
     class AssociateAssessmentReportEvidenceFolderResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass BatchAssociateAssessmentReportEvidenceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_id: "UUID", # required
-    #         evidence_folder_id: "UUID", # required
-    #         evidence_ids: ["UUID"], # required
-    #       }
-    #
     # @!attribute [rw] assessment_id
     #   The identifier for the assessment.
     #   @return [String]
@@ -900,21 +859,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchCreateDelegationByAssessmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         create_delegation_requests: [ # required
-    #           {
-    #             comment: "DelegationComment",
-    #             control_set_id: "ControlSetId",
-    #             role_arn: "IamArn",
-    #             role_type: "PROCESS_OWNER", # accepts PROCESS_OWNER, RESOURCE_OWNER
-    #           },
-    #         ],
-    #         assessment_id: "UUID", # required
-    #       }
-    #
     # @!attribute [rw] create_delegation_requests
     #   The API request to batch create delegations in Audit Manager.
     #   @return [Array<Types::CreateDelegationRequest>]
@@ -978,14 +922,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchDeleteDelegationByAssessmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         delegation_ids: ["UUID"], # required
-    #         assessment_id: "UUID", # required
-    #       }
-    #
     # @!attribute [rw] delegation_ids
     #   The identifiers for the delegations.
     #   @return [Array<String>]
@@ -1016,15 +952,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchDisassociateAssessmentReportEvidenceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_id: "UUID", # required
-    #         evidence_folder_id: "UUID", # required
-    #         evidence_ids: ["UUID"], # required
-    #       }
-    #
     # @!attribute [rw] assessment_id
     #   The identifier for the assessment.
     #   @return [String]
@@ -1094,20 +1021,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchImportEvidenceToAssessmentControlRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_id: "UUID", # required
-    #         control_set_id: "ControlSetId", # required
-    #         control_id: "UUID", # required
-    #         manual_evidence: [ # required
-    #           {
-    #             s3_resource_path: "S3Url",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] assessment_id
     #   The identifier for the assessment.
     #   @return [String]
@@ -1420,23 +1333,6 @@ module Aws::AuditManager
     # The data source that determines where Audit Manager collects evidence
     # from for the control.
     #
-    # @note When making an API call, you may pass ControlMappingSource
-    #   data as a hash:
-    #
-    #       {
-    #         source_id: "UUID",
-    #         source_name: "SourceName",
-    #         source_description: "SourceDescription",
-    #         source_set_up_option: "System_Controls_Mapping", # accepts System_Controls_Mapping, Procedural_Controls_Mapping
-    #         source_type: "AWS_Cloudtrail", # accepts AWS_Cloudtrail, AWS_Config, AWS_Security_Hub, AWS_API_Call, MANUAL
-    #         source_keyword: {
-    #           keyword_input_type: "SELECT_FROM_LIST", # accepts SELECT_FROM_LIST
-    #           keyword_value: "KeywordValue",
-    #         },
-    #         source_frequency: "DAILY", # accepts DAILY, WEEKLY, MONTHLY
-    #         troubleshooting_text: "TroubleshootingText",
-    #       }
-    #
     # @!attribute [rw] source_id
     #   The unique identifier for the source.
     #   @return [String]
@@ -1575,13 +1471,6 @@ module Aws::AuditManager
     # The control entity attributes that uniquely identify an existing
     # control to be added to a framework in Audit Manager.
     #
-    # @note When making an API call, you may pass CreateAssessmentFrameworkControl
-    #   data as a hash:
-    #
-    #       {
-    #         id: "UUID", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The unique identifier of the control.
     #   @return [String]
@@ -1596,18 +1485,6 @@ module Aws::AuditManager
 
     # A `controlSet` entity that represents a collection of controls in
     # Audit Manager. This doesn't contain the control set ID.
-    #
-    # @note When making an API call, you may pass CreateAssessmentFrameworkControlSet
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ControlSetName", # required
-    #         controls: [
-    #           {
-    #             id: "UUID", # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the control set.
@@ -1627,28 +1504,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAssessmentFrameworkRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "FrameworkName", # required
-    #         description: "FrameworkDescription",
-    #         compliance_type: "ComplianceType",
-    #         control_sets: [ # required
-    #           {
-    #             name: "ControlSetName", # required
-    #             controls: [
-    #               {
-    #                 id: "UUID", # required
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the new custom framework.
     #   @return [String]
@@ -1695,16 +1550,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAssessmentReportRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "AssessmentReportName", # required
-    #         description: "AssessmentReportDescription",
-    #         assessment_id: "UUID", # required
-    #         query_statement: "QueryStatement",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the new assessment report.
     #   @return [String]
@@ -1767,42 +1612,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAssessmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "AssessmentName", # required
-    #         description: "AssessmentDescription",
-    #         assessment_reports_destination: { # required
-    #           destination_type: "S3", # accepts S3
-    #           destination: "S3Url",
-    #         },
-    #         scope: { # required
-    #           aws_accounts: [
-    #             {
-    #               id: "AccountId",
-    #               email_address: "EmailAddress",
-    #               name: "AccountName",
-    #             },
-    #           ],
-    #           aws_services: [
-    #             {
-    #               service_name: "AWSServiceName",
-    #             },
-    #           ],
-    #         },
-    #         roles: [ # required
-    #           {
-    #             role_type: "PROCESS_OWNER", # required, accepts PROCESS_OWNER, RESOURCE_OWNER
-    #             role_arn: "IamArn", # required
-    #           },
-    #         ],
-    #         framework_id: "UUID", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the assessment to be created.
     #   @return [String]
@@ -1865,22 +1674,6 @@ module Aws::AuditManager
     # The control mapping fields that represent the source for evidence
     # collection, along with related parameters and metadata. This doesn't
     # contain `mappingID`.
-    #
-    # @note When making an API call, you may pass CreateControlMappingSource
-    #   data as a hash:
-    #
-    #       {
-    #         source_name: "SourceName",
-    #         source_description: "SourceDescription",
-    #         source_set_up_option: "System_Controls_Mapping", # accepts System_Controls_Mapping, Procedural_Controls_Mapping
-    #         source_type: "AWS_Cloudtrail", # accepts AWS_Cloudtrail, AWS_Config, AWS_Security_Hub, AWS_API_Call, MANUAL
-    #         source_keyword: {
-    #           keyword_input_type: "SELECT_FROM_LIST", # accepts SELECT_FROM_LIST
-    #           keyword_value: "KeywordValue",
-    #         },
-    #         source_frequency: "DAILY", # accepts DAILY, WEEKLY, MONTHLY
-    #         troubleshooting_text: "TroubleshootingText",
-    #       }
     #
     # @!attribute [rw] source_name
     #   The name of the control mapping data source.
@@ -1947,34 +1740,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateControlRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ControlName", # required
-    #         description: "ControlDescription",
-    #         testing_information: "TestingInformation",
-    #         action_plan_title: "ActionPlanTitle",
-    #         action_plan_instructions: "ActionPlanInstructions",
-    #         control_mapping_sources: [ # required
-    #           {
-    #             source_name: "SourceName",
-    #             source_description: "SourceDescription",
-    #             source_set_up_option: "System_Controls_Mapping", # accepts System_Controls_Mapping, Procedural_Controls_Mapping
-    #             source_type: "AWS_Cloudtrail", # accepts AWS_Cloudtrail, AWS_Config, AWS_Security_Hub, AWS_API_Call, MANUAL
-    #             source_keyword: {
-    #               keyword_input_type: "SELECT_FROM_LIST", # accepts SELECT_FROM_LIST
-    #               keyword_value: "KeywordValue",
-    #             },
-    #             source_frequency: "DAILY", # accepts DAILY, WEEKLY, MONTHLY
-    #             troubleshooting_text: "TroubleshootingText",
-    #           },
-    #         ],
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the control.
     #   @return [String]
@@ -2032,16 +1797,6 @@ module Aws::AuditManager
 
     # A collection of attributes that's used to create a delegation for an
     # assessment in Audit Manager.
-    #
-    # @note When making an API call, you may pass CreateDelegationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         comment: "DelegationComment",
-    #         control_set_id: "ControlSetId",
-    #         role_arn: "IamArn",
-    #         role_type: "PROCESS_OWNER", # accepts PROCESS_OWNER, RESOURCE_OWNER
-    #       }
     #
     # @!attribute [rw] comment
     #   A comment that's related to the delegation request.
@@ -2198,13 +1953,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAssessmentFrameworkRequest
-    #   data as a hash:
-    #
-    #       {
-    #         framework_id: "UUID", # required
-    #       }
-    #
     # @!attribute [rw] framework_id
     #   The identifier for the custom framework.
     #   @return [String]
@@ -2221,14 +1969,6 @@ module Aws::AuditManager
     #
     class DeleteAssessmentFrameworkResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteAssessmentFrameworkShareRequest
-    #   data as a hash:
-    #
-    #       {
-    #         request_id: "UUID", # required
-    #         request_type: "SENT", # required, accepts SENT, RECEIVED
-    #       }
-    #
     # @!attribute [rw] request_id
     #   The unique identifier for the share request to be deleted.
     #   @return [String]
@@ -2251,14 +1991,6 @@ module Aws::AuditManager
     #
     class DeleteAssessmentFrameworkShareResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteAssessmentReportRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_id: "UUID", # required
-    #         assessment_report_id: "UUID", # required
-    #       }
-    #
     # @!attribute [rw] assessment_id
     #   The unique identifier for the assessment.
     #   @return [String]
@@ -2280,13 +2012,6 @@ module Aws::AuditManager
     #
     class DeleteAssessmentReportResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteAssessmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_id: "UUID", # required
-    #       }
-    #
     # @!attribute [rw] assessment_id
     #   The identifier for the assessment.
     #   @return [String]
@@ -2303,13 +2028,6 @@ module Aws::AuditManager
     #
     class DeleteAssessmentResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteControlRequest
-    #   data as a hash:
-    #
-    #       {
-    #         control_id: "UUID", # required
-    #       }
-    #
     # @!attribute [rw] control_id
     #   The unique identifier for the control.
     #   @return [String]
@@ -2326,8 +2044,6 @@ module Aws::AuditManager
     #
     class DeleteControlResponse < Aws::EmptyStructure; end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/DeregisterAccountRequest AWS API Documentation
     #
     class DeregisterAccountRequest < Aws::EmptyStructure; end
@@ -2344,13 +2060,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeregisterOrganizationAdminAccountRequest
-    #   data as a hash:
-    #
-    #       {
-    #         admin_account_id: "AccountId",
-    #       }
-    #
     # @!attribute [rw] admin_account_id
     #   The identifier for the administrator account.
     #   @return [String]
@@ -2367,14 +2076,6 @@ module Aws::AuditManager
     #
     class DeregisterOrganizationAdminAccountResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DisassociateAssessmentReportEvidenceFolderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_id: "UUID", # required
-    #         evidence_folder_id: "UUID", # required
-    #       }
-    #
     # @!attribute [rw] assessment_id
     #   The unique identifier for the assessment.
     #   @return [String]
@@ -2726,8 +2427,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetAccountStatusRequest AWS API Documentation
     #
     class GetAccountStatusRequest < Aws::EmptyStructure; end
@@ -2744,13 +2443,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAssessmentFrameworkRequest
-    #   data as a hash:
-    #
-    #       {
-    #         framework_id: "UUID", # required
-    #       }
-    #
     # @!attribute [rw] framework_id
     #   The identifier for the framework.
     #   @return [String]
@@ -2775,14 +2467,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAssessmentReportUrlRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_report_id: "UUID", # required
-    #         assessment_id: "UUID", # required
-    #       }
-    #
     # @!attribute [rw] assessment_report_id
     #   The unique identifier for the assessment report.
     #   @return [String]
@@ -2813,13 +2497,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAssessmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_id: "UUID", # required
-    #       }
-    #
     # @!attribute [rw] assessment_id
     #   The unique identifier for the assessment.
     #   @return [String]
@@ -2853,17 +2530,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetChangeLogsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_id: "UUID", # required
-    #         control_set_id: "ControlSetId",
-    #         control_id: "UUID",
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] assessment_id
     #   The unique identifier for the assessment.
     #   @return [String]
@@ -2914,13 +2580,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetControlRequest
-    #   data as a hash:
-    #
-    #       {
-    #         control_id: "UUID", # required
-    #       }
-    #
     # @!attribute [rw] control_id
     #   The identifier for the control.
     #   @return [String]
@@ -2945,14 +2604,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDelegationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
@@ -2988,17 +2639,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetEvidenceByEvidenceFolderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_id: "UUID", # required
-    #         control_set_id: "ControlSetId", # required
-    #         evidence_folder_id: "UUID", # required
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] assessment_id
     #   The identifier for the assessment.
     #   @return [String]
@@ -3050,15 +2690,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetEvidenceFolderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_id: "UUID", # required
-    #         control_set_id: "ControlSetId", # required
-    #         evidence_folder_id: "UUID", # required
-    #       }
-    #
     # @!attribute [rw] assessment_id
     #   The unique identifier for the assessment.
     #   @return [String]
@@ -3093,17 +2724,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetEvidenceFoldersByAssessmentControlRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_id: "UUID", # required
-    #         control_set_id: "ControlSetId", # required
-    #         control_id: "UUID", # required
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] assessment_id
     #   The identifier for the assessment.
     #   @return [String]
@@ -3155,15 +2775,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetEvidenceFoldersByAssessmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_id: "UUID", # required
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] assessment_id
     #   The unique identifier for the assessment.
     #   @return [String]
@@ -3205,16 +2816,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetEvidenceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_id: "UUID", # required
-    #         control_set_id: "ControlSetId", # required
-    #         evidence_folder_id: "UUID", # required
-    #         evidence_id: "UUID", # required
-    #       }
-    #
     # @!attribute [rw] assessment_id
     #   The unique identifier for the assessment.
     #   @return [String]
@@ -3254,13 +2855,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetInsightsByAssessmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_id: "UUID", # required
-    #       }
-    #
     # @!attribute [rw] assessment_id
     #   The unique identifier for the assessment.
     #   @return [String]
@@ -3286,8 +2880,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetInsightsRequest AWS API Documentation
     #
     class GetInsightsRequest < Aws::EmptyStructure; end
@@ -3304,8 +2896,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetOrganizationAdminAccountRequest AWS API Documentation
     #
     class GetOrganizationAdminAccountRequest < Aws::EmptyStructure; end
@@ -3327,8 +2917,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetServicesInScopeRequest AWS API Documentation
     #
     class GetServicesInScopeRequest < Aws::EmptyStructure; end
@@ -3345,13 +2933,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         attribute: "ALL", # required, accepts ALL, IS_AWS_ORG_ENABLED, SNS_TOPIC, DEFAULT_ASSESSMENT_REPORTS_DESTINATION, DEFAULT_PROCESS_OWNERS, EVIDENCE_FINDER_ENABLEMENT
-    #       }
-    #
     # @!attribute [rw] attribute
     #   The list of `SettingAttribute` enum values.
     #   @return [String]
@@ -3557,16 +3138,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAssessmentControlInsightsByControlDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         control_domain_id: "UUID", # required
-    #         assessment_id: "UUID", # required
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] control_domain_id
     #   The unique identifier for the control domain.
     #   @return [String]
@@ -3613,15 +3184,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAssessmentFrameworkShareRequestsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         request_type: "SENT", # required, accepts SENT, RECEIVED
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] request_type
     #   Specifies whether the share request is a sent request or a received
     #   request.
@@ -3664,15 +3226,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAssessmentFrameworksRequest
-    #   data as a hash:
-    #
-    #       {
-    #         framework_type: "Standard", # required, accepts Standard, Custom
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] framework_type
     #   The type of framework, such as a standard framework or a custom
     #   framework.
@@ -3714,14 +3267,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAssessmentReportsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
@@ -3758,15 +3303,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAssessmentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         status: "ACTIVE", # accepts ACTIVE, INACTIVE
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] status
     #   The current status of the assessment.
     #   @return [String]
@@ -3807,15 +3343,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListControlDomainInsightsByAssessmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_id: "UUID", # required
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] assessment_id
     #   The unique identifier for the active assessment.
     #   @return [String]
@@ -3857,14 +3384,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListControlDomainInsightsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
@@ -3901,15 +3420,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListControlInsightsByControlDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         control_domain_id: "UUID", # required
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] control_domain_id
     #   The unique identifier for the control domain.
     #   @return [String]
@@ -3951,15 +3461,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListControlsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         control_type: "Standard", # required, accepts Standard, Custom
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] control_type
     #   The type of control, such as a standard control or a custom control.
     #   @return [String]
@@ -4001,15 +3502,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListKeywordsForDataSourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source: "AWS_Cloudtrail", # required, accepts AWS_Cloudtrail, AWS_Config, AWS_Security_Hub, AWS_API_Call, MANUAL
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] source
     #   The control mapping data source that the keywords apply to.
     #   @return [String]
@@ -4050,14 +3542,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListNotificationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
@@ -4093,13 +3577,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AuditManagerArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -4125,13 +3602,6 @@ module Aws::AuditManager
     end
 
     # Evidence that's uploaded to Audit Manager manually.
-    #
-    # @note When making an API call, you may pass ManualEvidence
-    #   data as a hash:
-    #
-    #       {
-    #         s3_resource_path: "S3Url",
-    #       }
     #
     # @!attribute [rw] s3_resource_path
     #   The Amazon S3 URL that points to a manual evidence object.
@@ -4197,14 +3667,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RegisterAccountRequest
-    #   data as a hash:
-    #
-    #       {
-    #         kms_key: "KmsKey",
-    #         delegated_admin_account: "AccountId",
-    #       }
-    #
     # @!attribute [rw] kms_key
     #   The KMS key details.
     #   @return [String]
@@ -4234,13 +3696,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RegisterOrganizationAdminAccountRequest
-    #   data as a hash:
-    #
-    #       {
-    #         admin_account_id: "AccountId", # required
-    #       }
-    #
     # @!attribute [rw] admin_account_id
     #   The identifier for the delegated administrator account.
     #   @return [String]
@@ -4339,14 +3794,6 @@ module Aws::AuditManager
     # current user. This includes the role type and IAM Amazon Resource Name
     # (ARN).
     #
-    # @note When making an API call, you may pass Role
-    #   data as a hash:
-    #
-    #       {
-    #         role_type: "PROCESS_OWNER", # required, accepts PROCESS_OWNER, RESOURCE_OWNER
-    #         role_arn: "IamArn", # required
-    #       }
-    #
     # @!attribute [rw] role_type
     #   The type of customer persona.
     #
@@ -4375,24 +3822,6 @@ module Aws::AuditManager
 
     # The wrapper that contains the Amazon Web Services accounts and
     # services that are in scope for the assessment.
-    #
-    # @note When making an API call, you may pass Scope
-    #   data as a hash:
-    #
-    #       {
-    #         aws_accounts: [
-    #           {
-    #             id: "AccountId",
-    #             email_address: "EmailAddress",
-    #             name: "AccountName",
-    #           },
-    #         ],
-    #         aws_services: [
-    #           {
-    #             service_name: "AWSServiceName",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] aws_accounts
     #   The Amazon Web Services accounts that are included in the scope of
@@ -4527,14 +3956,6 @@ module Aws::AuditManager
     # [3]: https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-api.html
     # [4]: https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-cloudtrail.html
     #
-    # @note When making an API call, you may pass SourceKeyword
-    #   data as a hash:
-    #
-    #       {
-    #         keyword_input_type: "SELECT_FROM_LIST", # accepts SELECT_FROM_LIST
-    #         keyword_value: "KeywordValue",
-    #       }
-    #
     # @!attribute [rw] keyword_input_type
     #   The input method for the keyword.
     #   @return [String]
@@ -4597,16 +4018,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartAssessmentFrameworkShareRequest
-    #   data as a hash:
-    #
-    #       {
-    #         framework_id: "UUID", # required
-    #         destination_account: "AccountId", # required
-    #         destination_region: "Region", # required
-    #         comment: "ShareRequestComment",
-    #       }
-    #
     # @!attribute [rw] framework_id
     #   The unique identifier for the custom framework to be shared.
     #   @return [String]
@@ -4647,16 +4058,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AuditManagerArn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -4711,14 +4112,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AuditManagerArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the specified resource.
     #   @return [String]
@@ -4740,17 +4133,6 @@ module Aws::AuditManager
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateAssessmentControlRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_id: "UUID", # required
-    #         control_set_id: "ControlSetId", # required
-    #         control_id: "UUID", # required
-    #         control_status: "UNDER_REVIEW", # accepts UNDER_REVIEW, REVIEWED, INACTIVE
-    #         comment_body: "ControlCommentBody",
-    #       }
-    #
     # @!attribute [rw] assessment_id
     #   The unique identifier for the assessment.
     #   @return [String]
@@ -4796,16 +4178,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateAssessmentControlSetStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_id: "UUID", # required
-    #         control_set_id: "String", # required
-    #         status: "ACTIVE", # required, accepts ACTIVE, UNDER_REVIEW, REVIEWED
-    #         comment: "DelegationComment", # required
-    #       }
-    #
     # @!attribute [rw] assessment_id
     #   The unique identifier for the assessment.
     #   @return [String]
@@ -4849,19 +4221,6 @@ module Aws::AuditManager
     # A `controlSet` entity that represents a collection of controls in
     # Audit Manager. This doesn't contain the control set ID.
     #
-    # @note When making an API call, you may pass UpdateAssessmentFrameworkControlSet
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ControlSetName",
-    #         name: "ControlSetName", # required
-    #         controls: [ # required
-    #           {
-    #             id: "UUID", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] id
     #   The unique identifier for the control set.
     #   @return [String]
@@ -4884,27 +4243,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateAssessmentFrameworkRequest
-    #   data as a hash:
-    #
-    #       {
-    #         framework_id: "UUID", # required
-    #         name: "FrameworkName", # required
-    #         description: "FrameworkDescription",
-    #         compliance_type: "ComplianceType",
-    #         control_sets: [ # required
-    #           {
-    #             id: "ControlSetName",
-    #             name: "ControlSetName", # required
-    #             controls: [ # required
-    #               {
-    #                 id: "UUID", # required
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] framework_id
     #   The unique identifier for the framework.
     #   @return [String]
@@ -4950,15 +4288,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateAssessmentFrameworkShareRequest
-    #   data as a hash:
-    #
-    #       {
-    #         request_id: "UUID", # required
-    #         request_type: "SENT", # required, accepts SENT, RECEIVED
-    #         action: "ACCEPT", # required, accepts ACCEPT, DECLINE, REVOKE
-    #       }
-    #
     # @!attribute [rw] request_id
     #   The unique identifier for the share request.
     #   @return [String]
@@ -4995,39 +4324,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateAssessmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_id: "UUID", # required
-    #         assessment_name: "AssessmentName",
-    #         assessment_description: "AssessmentDescription",
-    #         scope: { # required
-    #           aws_accounts: [
-    #             {
-    #               id: "AccountId",
-    #               email_address: "EmailAddress",
-    #               name: "AccountName",
-    #             },
-    #           ],
-    #           aws_services: [
-    #             {
-    #               service_name: "AWSServiceName",
-    #             },
-    #           ],
-    #         },
-    #         assessment_reports_destination: {
-    #           destination_type: "S3", # accepts S3
-    #           destination: "S3Url",
-    #         },
-    #         roles: [
-    #           {
-    #             role_type: "PROCESS_OWNER", # required, accepts PROCESS_OWNER, RESOURCE_OWNER
-    #             role_arn: "IamArn", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] assessment_id
     #   The unique identifier for the assessment.
     #   @return [String]
@@ -5079,14 +4375,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateAssessmentStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_id: "UUID", # required
-    #         status: "ACTIVE", # required, accepts ACTIVE, INACTIVE
-    #       }
-    #
     # @!attribute [rw] assessment_id
     #   The unique identifier for the assessment.
     #   @return [String]
@@ -5117,33 +4405,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateControlRequest
-    #   data as a hash:
-    #
-    #       {
-    #         control_id: "UUID", # required
-    #         name: "ControlName", # required
-    #         description: "ControlDescription",
-    #         testing_information: "TestingInformation",
-    #         action_plan_title: "ActionPlanTitle",
-    #         action_plan_instructions: "ActionPlanInstructions",
-    #         control_mapping_sources: [ # required
-    #           {
-    #             source_id: "UUID",
-    #             source_name: "SourceName",
-    #             source_description: "SourceDescription",
-    #             source_set_up_option: "System_Controls_Mapping", # accepts System_Controls_Mapping, Procedural_Controls_Mapping
-    #             source_type: "AWS_Cloudtrail", # accepts AWS_Cloudtrail, AWS_Config, AWS_Security_Hub, AWS_API_Call, MANUAL
-    #             source_keyword: {
-    #               keyword_input_type: "SELECT_FROM_LIST", # accepts SELECT_FROM_LIST
-    #               keyword_value: "KeywordValue",
-    #             },
-    #             source_frequency: "DAILY", # accepts DAILY, WEEKLY, MONTHLY
-    #             troubleshooting_text: "TroubleshootingText",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] control_id
     #   The identifier for the control.
     #   @return [String]
@@ -5200,25 +4461,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         sns_topic: "SnsArn",
-    #         default_assessment_reports_destination: {
-    #           destination_type: "S3", # accepts S3
-    #           destination: "S3Url",
-    #         },
-    #         default_process_owners: [
-    #           {
-    #             role_type: "PROCESS_OWNER", # required, accepts PROCESS_OWNER, RESOURCE_OWNER
-    #             role_arn: "IamArn", # required
-    #           },
-    #         ],
-    #         kms_key: "KmsKey",
-    #         evidence_finder_enabled: false,
-    #       }
-    #
     # @!attribute [rw] sns_topic
     #   The Amazon Simple Notification Service (Amazon SNS) topic that Audit
     #   Manager sends notifications to.
@@ -5281,13 +4523,6 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ValidateAssessmentReportIntegrityRequest
-    #   data as a hash:
-    #
-    #       {
-    #         s3_relative_path: "S3Url", # required
-    #       }
-    #
     # @!attribute [rw] s3_relative_path
     #   The relative path of the Amazon S3 bucket that the assessment report
     #   is stored in.

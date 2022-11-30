@@ -10,16 +10,6 @@
 module Aws::SimpleDB
   module Types
 
-    # @note When making an API call, you may pass Attribute
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #         alternate_name_encoding: "String",
-    #         value: "String", # required
-    #         alternate_value_encoding: "String",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the attribute.
     #   @return [String]
@@ -54,26 +44,6 @@ module Aws::SimpleDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchDeleteAttributesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "String", # required
-    #         items: [ # required
-    #           {
-    #             name: "String", # required
-    #             attributes: [
-    #               {
-    #                 name: "String", # required
-    #                 alternate_name_encoding: "String",
-    #                 value: "String", # required
-    #                 alternate_value_encoding: "String",
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The name of the domain in which the attributes are being deleted.
     #   @return [String]
@@ -89,25 +59,6 @@ module Aws::SimpleDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchPutAttributesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "String", # required
-    #         items: [ # required
-    #           {
-    #             name: "String", # required
-    #             attributes: [ # required
-    #               {
-    #                 name: "String", # required
-    #                 value: "String", # required
-    #                 replace: false,
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The name of the domain in which the attributes are being stored.
     #   @return [String]
@@ -123,13 +74,6 @@ module Aws::SimpleDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The name of the domain to create. The name can range between 3 and
     #   255 characters and can contain the following characters: a-z, A-Z,
@@ -142,21 +86,6 @@ module Aws::SimpleDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeletableItem
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #         attributes: [
-    #           {
-    #             name: "String", # required
-    #             alternate_name_encoding: "String",
-    #             value: "String", # required
-    #             alternate_value_encoding: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   @return [String]
     #
@@ -170,27 +99,6 @@ module Aws::SimpleDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAttributesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "String", # required
-    #         item_name: "String", # required
-    #         attributes: [
-    #           {
-    #             name: "String", # required
-    #             alternate_name_encoding: "String",
-    #             value: "String", # required
-    #             alternate_value_encoding: "String",
-    #           },
-    #         ],
-    #         expected: {
-    #           name: "String",
-    #           value: "String",
-    #           exists: false,
-    #         },
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The name of the domain in which to perform the operation.
     #   @return [String]
@@ -223,13 +131,6 @@ module Aws::SimpleDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The name of the domain to delete.
     #   @return [String]
@@ -240,13 +141,6 @@ module Aws::SimpleDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DomainMetadataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The name of the domain for which to display the metadata of.
     #   @return [String]
@@ -310,16 +204,6 @@ module Aws::SimpleDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAttributesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "String", # required
-    #         item_name: "String", # required
-    #         attribute_names: ["String"],
-    #         consistent_read: false,
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The name of the domain in which to perform the operation.
     #   @return [String]
@@ -429,14 +313,6 @@ module Aws::SimpleDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDomainsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_number_of_domains: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] max_number_of_domains
     #   The maximum number of domain names you want returned. The range is 1
     #   to 100. The default setting is 100.
@@ -557,26 +433,6 @@ module Aws::SimpleDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutAttributesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "String", # required
-    #         item_name: "String", # required
-    #         attributes: [ # required
-    #           {
-    #             name: "String", # required
-    #             value: "String", # required
-    #             replace: false,
-    #           },
-    #         ],
-    #         expected: {
-    #           name: "String",
-    #           value: "String",
-    #           exists: false,
-    #         },
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The name of the domain in which to perform the operation.
     #   @return [String]
@@ -605,15 +461,6 @@ module Aws::SimpleDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ReplaceableAttribute
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #         value: "String", # required
-    #         replace: false,
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the replaceable attribute.
     #   @return [String]
@@ -634,20 +481,6 @@ module Aws::SimpleDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ReplaceableItem
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #         attributes: [ # required
-    #           {
-    #             name: "String", # required
-    #             value: "String", # required
-    #             replace: false,
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the replaceable item.
     #   @return [String]
@@ -675,15 +508,6 @@ module Aws::SimpleDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SelectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         select_expression: "String", # required
-    #         next_token: "String",
-    #         consistent_read: false,
-    #       }
-    #
     # @!attribute [rw] select_expression
     #   The expression used to query the domain.
     #   @return [String]
@@ -735,15 +559,6 @@ module Aws::SimpleDB
     # updated if the condition is satisfied. For example, if an attribute
     # with a specific name and value exists, or if a specific attribute
     # doesn't exist.
-    #
-    # @note When making an API call, you may pass UpdateCondition
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String",
-    #         value: "String",
-    #         exists: false,
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the attribute involved in the condition.

@@ -42,13 +42,6 @@ module Aws::DataSync
 
     # CancelTaskExecutionRequest
     #
-    # @note When making an API call, you may pass CancelTaskExecutionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         task_execution_arn: "TaskExecutionArn", # required
-    #       }
-    #
     # @!attribute [rw] task_execution_arn
     #   The Amazon Resource Name (ARN) of the task execution to stop.
     #   @return [String]
@@ -66,23 +59,6 @@ module Aws::DataSync
     class CancelTaskExecutionResponse < Aws::EmptyStructure; end
 
     # CreateAgentRequest
-    #
-    # @note When making an API call, you may pass CreateAgentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         activation_key: "ActivationKey", # required
-    #         agent_name: "TagValue",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         vpc_endpoint_id: "VpcEndpointId",
-    #         subnet_arns: ["Ec2SubnetArn"],
-    #         security_group_arns: ["Ec2SecurityGroupArn"],
-    #       }
     #
     # @!attribute [rw] activation_key
     #   Your agent activation key. You can get the activation key either by
@@ -183,27 +159,6 @@ module Aws::DataSync
 
     # CreateLocationEfsRequest
     #
-    # @note When making an API call, you may pass CreateLocationEfsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         subdirectory: "EfsSubdirectory",
-    #         efs_filesystem_arn: "EfsFilesystemArn", # required
-    #         ec2_config: { # required
-    #           subnet_arn: "Ec2SubnetArn", # required
-    #           security_group_arns: ["Ec2SecurityGroupArn"], # required
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         access_point_arn: "EfsAccessPointArn",
-    #         file_system_access_role_arn: "IamRoleArn",
-    #         in_transit_encryption: "NONE", # accepts NONE, TLS1_2
-    #       }
-    #
     # @!attribute [rw] subdirectory
     #   Specifies a mount path for your Amazon EFS file system. This is
     #   where DataSync reads or writes data (depending on if this is a
@@ -281,21 +236,6 @@ module Aws::DataSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateLocationFsxLustreRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fsx_filesystem_arn: "FsxFilesystemArn", # required
-    #         security_group_arns: ["Ec2SecurityGroupArn"], # required
-    #         subdirectory: "FsxLustreSubdirectory",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] fsx_filesystem_arn
     #   The Amazon Resource Name (ARN) for the FSx for Lustre file system.
     #   @return [String]
@@ -342,36 +282,6 @@ module Aws::DataSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateLocationFsxOntapRequest
-    #   data as a hash:
-    #
-    #       {
-    #         protocol: { # required
-    #           nfs: {
-    #             mount_options: {
-    #               version: "AUTOMATIC", # accepts AUTOMATIC, NFS3, NFS4_0, NFS4_1
-    #             },
-    #           },
-    #           smb: {
-    #             domain: "SmbDomain",
-    #             mount_options: {
-    #               version: "AUTOMATIC", # accepts AUTOMATIC, SMB2, SMB3
-    #             },
-    #             password: "SmbPassword", # required
-    #             user: "SmbUser", # required
-    #           },
-    #         },
-    #         security_group_arns: ["Ec2SecurityGroupArn"], # required
-    #         storage_virtual_machine_arn: "StorageVirtualMachineArn", # required
-    #         subdirectory: "FsxOntapSubdirectory",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] protocol
     #   Specifies the data transfer protocol that DataSync uses to access
     #   your Amazon FSx file system.
@@ -443,36 +353,6 @@ module Aws::DataSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateLocationFsxOpenZfsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fsx_filesystem_arn: "FsxFilesystemArn", # required
-    #         protocol: { # required
-    #           nfs: {
-    #             mount_options: {
-    #               version: "AUTOMATIC", # accepts AUTOMATIC, NFS3, NFS4_0, NFS4_1
-    #             },
-    #           },
-    #           smb: {
-    #             domain: "SmbDomain",
-    #             mount_options: {
-    #               version: "AUTOMATIC", # accepts AUTOMATIC, SMB2, SMB3
-    #             },
-    #             password: "SmbPassword", # required
-    #             user: "SmbUser", # required
-    #           },
-    #         },
-    #         security_group_arns: ["Ec2SecurityGroupArn"], # required
-    #         subdirectory: "FsxOpenZfsSubdirectory",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] fsx_filesystem_arn
     #   The Amazon Resource Name (ARN) of the FSx for OpenZFS file system.
     #   @return [String]
@@ -524,24 +404,6 @@ module Aws::DataSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateLocationFsxWindowsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         subdirectory: "FsxWindowsSubdirectory",
-    #         fsx_filesystem_arn: "FsxFilesystemArn", # required
-    #         security_group_arns: ["Ec2SecurityGroupArn"], # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         user: "SmbUser", # required
-    #         domain: "SmbDomain",
-    #         password: "SmbPassword", # required
-    #       }
-    #
     # @!attribute [rw] subdirectory
     #   Specifies a mount path for your file system using forward slashes.
     #   This is where DataSync reads or writes data (depending on if this is
@@ -621,38 +483,6 @@ module Aws::DataSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateLocationHdfsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         subdirectory: "HdfsSubdirectory",
-    #         name_nodes: [ # required
-    #           {
-    #             hostname: "HdfsServerHostname", # required
-    #             port: 1, # required
-    #           },
-    #         ],
-    #         block_size: 1,
-    #         replication_factor: 1,
-    #         kms_key_provider_uri: "KmsKeyProviderUri",
-    #         qop_configuration: {
-    #           rpc_protection: "DISABLED", # accepts DISABLED, AUTHENTICATION, INTEGRITY, PRIVACY
-    #           data_transfer_protection: "DISABLED", # accepts DISABLED, AUTHENTICATION, INTEGRITY, PRIVACY
-    #         },
-    #         authentication_type: "SIMPLE", # required, accepts SIMPLE, KERBEROS
-    #         simple_user: "HdfsUser",
-    #         kerberos_principal: "KerberosPrincipal",
-    #         kerberos_keytab: "data",
-    #         kerberos_krb_5_conf: "data",
-    #         agent_arns: ["AgentArn"], # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] subdirectory
     #   A subdirectory in the HDFS cluster. This subdirectory is used to
     #   read data from or write data to the HDFS cluster. If the
@@ -786,26 +616,6 @@ module Aws::DataSync
 
     # CreateLocationNfsRequest
     #
-    # @note When making an API call, you may pass CreateLocationNfsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         subdirectory: "NfsSubdirectory", # required
-    #         server_hostname: "ServerHostname", # required
-    #         on_prem_config: { # required
-    #           agent_arns: ["AgentArn"], # required
-    #         },
-    #         mount_options: {
-    #           version: "AUTOMATIC", # accepts AUTOMATIC, NFS3, NFS4_0, NFS4_1
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] subdirectory
     #   The subdirectory in the NFS file system that is used to read data
     #   from the NFS source location or write data to the NFS destination.
@@ -909,27 +719,6 @@ module Aws::DataSync
 
     # CreateLocationObjectStorageRequest
     #
-    # @note When making an API call, you may pass CreateLocationObjectStorageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         server_hostname: "ServerHostname", # required
-    #         server_port: 1,
-    #         server_protocol: "HTTPS", # accepts HTTPS, HTTP
-    #         subdirectory: "S3Subdirectory",
-    #         bucket_name: "ObjectStorageBucketName", # required
-    #         access_key: "ObjectStorageAccessKey",
-    #         secret_key: "ObjectStorageSecretKey",
-    #         agent_arns: ["AgentArn"], # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         server_certificate: "data",
-    #       }
-    #
     # @!attribute [rw] server_hostname
     #   Specifies the domain name or IP address of the object storage
     #   server. A DataSync agent uses this hostname to mount the object
@@ -1024,25 +813,6 @@ module Aws::DataSync
 
     # CreateLocationS3Request
     #
-    # @note When making an API call, you may pass CreateLocationS3Request
-    #   data as a hash:
-    #
-    #       {
-    #         subdirectory: "S3Subdirectory",
-    #         s3_bucket_arn: "S3BucketArn", # required
-    #         s3_storage_class: "STANDARD", # accepts STANDARD, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS
-    #         s3_config: { # required
-    #           bucket_access_role_arn: "IamRoleArn", # required
-    #         },
-    #         agent_arns: ["AgentArn"],
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] subdirectory
     #   A subdirectory in the Amazon S3 bucket. This subdirectory in Amazon
     #   S3 is used to read data from the S3 source location or write data to
@@ -1128,27 +898,6 @@ module Aws::DataSync
     end
 
     # CreateLocationSmbRequest
-    #
-    # @note When making an API call, you may pass CreateLocationSmbRequest
-    #   data as a hash:
-    #
-    #       {
-    #         subdirectory: "SmbSubdirectory", # required
-    #         server_hostname: "ServerHostname", # required
-    #         user: "SmbUser", # required
-    #         domain: "SmbDomain",
-    #         password: "SmbPassword", # required
-    #         agent_arns: ["AgentArn"], # required
-    #         mount_options: {
-    #           version: "AUTOMATIC", # accepts AUTOMATIC, SMB2, SMB3
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] subdirectory
     #   The subdirectory in the SMB file system that is used to read data
@@ -1250,54 +999,6 @@ module Aws::DataSync
 
     # CreateTaskRequest
     #
-    # @note When making an API call, you may pass CreateTaskRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source_location_arn: "LocationArn", # required
-    #         destination_location_arn: "LocationArn", # required
-    #         cloud_watch_log_group_arn: "LogGroupArn",
-    #         name: "TagValue",
-    #         options: {
-    #           verify_mode: "POINT_IN_TIME_CONSISTENT", # accepts POINT_IN_TIME_CONSISTENT, ONLY_FILES_TRANSFERRED, NONE
-    #           overwrite_mode: "ALWAYS", # accepts ALWAYS, NEVER
-    #           atime: "NONE", # accepts NONE, BEST_EFFORT
-    #           mtime: "NONE", # accepts NONE, PRESERVE
-    #           uid: "NONE", # accepts NONE, INT_VALUE, NAME, BOTH
-    #           gid: "NONE", # accepts NONE, INT_VALUE, NAME, BOTH
-    #           preserve_deleted_files: "PRESERVE", # accepts PRESERVE, REMOVE
-    #           preserve_devices: "NONE", # accepts NONE, PRESERVE
-    #           posix_permissions: "NONE", # accepts NONE, PRESERVE
-    #           bytes_per_second: 1,
-    #           task_queueing: "ENABLED", # accepts ENABLED, DISABLED
-    #           log_level: "OFF", # accepts OFF, BASIC, TRANSFER
-    #           transfer_mode: "CHANGED", # accepts CHANGED, ALL
-    #           security_descriptor_copy_flags: "NONE", # accepts NONE, OWNER_DACL, OWNER_DACL_SACL
-    #           object_tags: "PRESERVE", # accepts PRESERVE, NONE
-    #         },
-    #         excludes: [
-    #           {
-    #             filter_type: "SIMPLE_PATTERN", # accepts SIMPLE_PATTERN
-    #             value: "FilterValue",
-    #           },
-    #         ],
-    #         schedule: {
-    #           schedule_expression: "ScheduleExpressionCron", # required
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         includes: [
-    #           {
-    #             filter_type: "SIMPLE_PATTERN", # accepts SIMPLE_PATTERN
-    #             value: "FilterValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] source_location_arn
     #   The Amazon Resource Name (ARN) of the source location for the task.
     #   @return [String]
@@ -1395,13 +1096,6 @@ module Aws::DataSync
 
     # DeleteAgentRequest
     #
-    # @note When making an API call, you may pass DeleteAgentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         agent_arn: "AgentArn", # required
-    #       }
-    #
     # @!attribute [rw] agent_arn
     #   The Amazon Resource Name (ARN) of the agent to delete. Use the
     #   `ListAgents` operation to return a list of agents for your account
@@ -1422,13 +1116,6 @@ module Aws::DataSync
 
     # DeleteLocation
     #
-    # @note When making an API call, you may pass DeleteLocationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         location_arn: "LocationArn", # required
-    #       }
-    #
     # @!attribute [rw] location_arn
     #   The Amazon Resource Name (ARN) of the location to delete.
     #   @return [String]
@@ -1447,13 +1134,6 @@ module Aws::DataSync
 
     # DeleteTask
     #
-    # @note When making an API call, you may pass DeleteTaskRequest
-    #   data as a hash:
-    #
-    #       {
-    #         task_arn: "TaskArn", # required
-    #       }
-    #
     # @!attribute [rw] task_arn
     #   The Amazon Resource Name (ARN) of the task to delete.
     #   @return [String]
@@ -1471,13 +1151,6 @@ module Aws::DataSync
     class DeleteTaskResponse < Aws::EmptyStructure; end
 
     # DescribeAgent
-    #
-    # @note When making an API call, you may pass DescribeAgentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         agent_arn: "AgentArn", # required
-    #       }
     #
     # @!attribute [rw] agent_arn
     #   The Amazon Resource Name (ARN) of the agent to describe.
@@ -1546,13 +1219,6 @@ module Aws::DataSync
 
     # DescribeLocationEfsRequest
     #
-    # @note When making an API call, you may pass DescribeLocationEfsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         location_arn: "LocationArn", # required
-    #       }
-    #
     # @!attribute [rw] location_arn
     #   The Amazon Resource Name (ARN) of the Amazon EFS file system
     #   location that you want information about.
@@ -1614,13 +1280,6 @@ module Aws::DataSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeLocationFsxLustreRequest
-    #   data as a hash:
-    #
-    #       {
-    #         location_arn: "LocationArn", # required
-    #       }
-    #
     # @!attribute [rw] location_arn
     #   The Amazon Resource Name (ARN) of the FSx for Lustre location to
     #   describe.
@@ -1663,13 +1322,6 @@ module Aws::DataSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeLocationFsxOntapRequest
-    #   data as a hash:
-    #
-    #       {
-    #         location_arn: "LocationArn", # required
-    #       }
-    #
     # @!attribute [rw] location_arn
     #   Specifies the Amazon Resource Name (ARN) of the FSx for ONTAP file
     #   system location that you want information about.
@@ -1729,13 +1381,6 @@ module Aws::DataSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeLocationFsxOpenZfsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         location_arn: "LocationArn", # required
-    #       }
-    #
     # @!attribute [rw] location_arn
     #   The Amazon Resource Name (ARN) of the FSx for OpenZFS location to
     #   describe.
@@ -1785,13 +1430,6 @@ module Aws::DataSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeLocationFsxWindowsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         location_arn: "LocationArn", # required
-    #       }
-    #
     # @!attribute [rw] location_arn
     #   The Amazon Resource Name (ARN) of the FSx for Windows File Server
     #   location to describe.
@@ -1847,13 +1485,6 @@ module Aws::DataSync
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeLocationHdfsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         location_arn: "LocationArn", # required
-    #       }
-    #
     # @!attribute [rw] location_arn
     #   The Amazon Resource Name (ARN) of the HDFS cluster location to
     #   describe.
@@ -1944,13 +1575,6 @@ module Aws::DataSync
 
     # DescribeLocationNfsRequest
     #
-    # @note When making an API call, you may pass DescribeLocationNfsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         location_arn: "LocationArn", # required
-    #       }
-    #
     # @!attribute [rw] location_arn
     #   The Amazon Resource Name (ARN) of the NFS location to describe.
     #   @return [String]
@@ -2000,13 +1624,6 @@ module Aws::DataSync
     end
 
     # DescribeLocationObjectStorageRequest
-    #
-    # @note When making an API call, you may pass DescribeLocationObjectStorageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         location_arn: "LocationArn", # required
-    #       }
     #
     # @!attribute [rw] location_arn
     #   The Amazon Resource Name (ARN) of the object storage system location
@@ -2075,13 +1692,6 @@ module Aws::DataSync
     end
 
     # DescribeLocationS3Request
-    #
-    # @note When making an API call, you may pass DescribeLocationS3Request
-    #   data as a hash:
-    #
-    #       {
-    #         location_arn: "LocationArn", # required
-    #       }
     #
     # @!attribute [rw] location_arn
     #   The Amazon Resource Name (ARN) of the Amazon S3 bucket location to
@@ -2160,13 +1770,6 @@ module Aws::DataSync
 
     # DescribeLocationSmbRequest
     #
-    # @note When making an API call, you may pass DescribeLocationSmbRequest
-    #   data as a hash:
-    #
-    #       {
-    #         location_arn: "LocationArn", # required
-    #       }
-    #
     # @!attribute [rw] location_arn
     #   The Amazon Resource Name (ARN) of the SMB location to describe.
     #   @return [String]
@@ -2228,13 +1831,6 @@ module Aws::DataSync
     end
 
     # DescribeTaskExecutionRequest
-    #
-    # @note When making an API call, you may pass DescribeTaskExecutionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         task_execution_arn: "TaskExecutionArn", # required
-    #       }
     #
     # @!attribute [rw] task_execution_arn
     #   The Amazon Resource Name (ARN) of the task that is being executed.
@@ -2372,13 +1968,6 @@ module Aws::DataSync
     end
 
     # DescribeTaskRequest
-    #
-    # @note When making an API call, you may pass DescribeTaskRequest
-    #   data as a hash:
-    #
-    #       {
-    #         task_arn: "TaskArn", # required
-    #       }
     #
     # @!attribute [rw] task_arn
     #   The Amazon Resource Name (ARN) of the task to describe.
@@ -2518,14 +2107,6 @@ module Aws::DataSync
     # The subnet and security groups that DataSync uses to access your
     # Amazon EFS file system.
     #
-    # @note When making an API call, you may pass Ec2Config
-    #   data as a hash:
-    #
-    #       {
-    #         subnet_arn: "Ec2SubnetArn", # required
-    #         security_group_arns: ["Ec2SecurityGroupArn"], # required
-    #       }
-    #
     # @!attribute [rw] subnet_arn
     #   Specifies the ARN of a subnet where DataSync creates the [network
     #   interfaces][1] for managing traffic during your transfer.
@@ -2565,14 +2146,6 @@ module Aws::DataSync
     # Specifies which files, folders, and objects to include or exclude when
     # transferring files from source to destination.
     #
-    # @note When making an API call, you may pass FilterRule
-    #   data as a hash:
-    #
-    #       {
-    #         filter_type: "SIMPLE_PATTERN", # accepts SIMPLE_PATTERN
-    #         value: "FilterValue",
-    #       }
-    #
     # @!attribute [rw] filter_type
     #   The type of filter rule to apply. DataSync only supports the
     #   SIMPLE\_PATTERN rule type.
@@ -2595,25 +2168,6 @@ module Aws::DataSync
 
     # Specifies the data transfer protocol that DataSync uses to access your
     # Amazon FSx file system.
-    #
-    # @note When making an API call, you may pass FsxProtocol
-    #   data as a hash:
-    #
-    #       {
-    #         nfs: {
-    #           mount_options: {
-    #             version: "AUTOMATIC", # accepts AUTOMATIC, NFS3, NFS4_0, NFS4_1
-    #           },
-    #         },
-    #         smb: {
-    #           domain: "SmbDomain",
-    #           mount_options: {
-    #             version: "AUTOMATIC", # accepts AUTOMATIC, SMB2, SMB3
-    #           },
-    #           password: "SmbPassword", # required
-    #           user: "SmbUser", # required
-    #         },
-    #       }
     #
     # @!attribute [rw] nfs
     #   Specifies the Network File System (NFS) protocol configuration that
@@ -2639,15 +2193,6 @@ module Aws::DataSync
     # DataSync uses to access your Amazon FSx for OpenZFS or Amazon FSx for
     # NetApp ONTAP file system.
     #
-    # @note When making an API call, you may pass FsxProtocolNfs
-    #   data as a hash:
-    #
-    #       {
-    #         mount_options: {
-    #           version: "AUTOMATIC", # accepts AUTOMATIC, NFS3, NFS4_0, NFS4_1
-    #         },
-    #       }
-    #
     # @!attribute [rw] mount_options
     #   Specifies how DataSync can access a location using the NFS protocol.
     #   @return [Types::NfsMountOptions]
@@ -2667,18 +2212,6 @@ module Aws::DataSync
     #
     #
     # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-ontap-location.html#create-ontap-location-access
-    #
-    # @note When making an API call, you may pass FsxProtocolSmb
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "SmbDomain",
-    #         mount_options: {
-    #           version: "AUTOMATIC", # accepts AUTOMATIC, SMB2, SMB3
-    #         },
-    #         password: "SmbPassword", # required
-    #         user: "SmbUser", # required
-    #       }
     #
     # @!attribute [rw] domain
     #   Specifies the fully qualified domain name (FQDN) of the Microsoft
@@ -2745,14 +2278,6 @@ module Aws::DataSync
     # directories. The NameNode contains the information to map blocks of
     # data to the DataNodes.
     #
-    # @note When making an API call, you may pass HdfsNameNode
-    #   data as a hash:
-    #
-    #       {
-    #         hostname: "HdfsServerHostname", # required
-    #         port: 1, # required
-    #       }
-    #
     # @!attribute [rw] hostname
     #   The hostname of the NameNode in the HDFS cluster. This value is the
     #   IP address or Domain Name Service (DNS) name of the NameNode. An
@@ -2813,14 +2338,6 @@ module Aws::DataSync
 
     # ListAgentsRequest
     #
-    # @note When making an API call, you may pass ListAgentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of agents to list.
     #   @return [Integer]
@@ -2860,21 +2377,6 @@ module Aws::DataSync
     end
 
     # ListLocationsRequest
-    #
-    # @note When making an API call, you may pass ListLocationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         filters: [
-    #           {
-    #             name: "LocationUri", # required, accepts LocationUri, LocationType, CreationTime
-    #             values: ["FilterAttributeValue"], # required
-    #             operator: "Equals", # required, accepts Equals, NotEquals, In, LessThanOrEqual, LessThan, GreaterThanOrEqual, GreaterThan, Contains, NotContains, BeginsWith
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] max_results
     #   The maximum number of locations to return.
@@ -2924,15 +2426,6 @@ module Aws::DataSync
 
     # ListTagsForResourceRequest
     #
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "TaggableResourceArn", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource whose tags to list.
     #   @return [String]
@@ -2977,15 +2470,6 @@ module Aws::DataSync
     end
 
     # ListTaskExecutions
-    #
-    # @note When making an API call, you may pass ListTaskExecutionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         task_arn: "TaskArn",
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
     #
     # @!attribute [rw] task_arn
     #   The Amazon Resource Name (ARN) of the task whose tasks you want to
@@ -3032,21 +2516,6 @@ module Aws::DataSync
     end
 
     # ListTasksRequest
-    #
-    # @note When making an API call, you may pass ListTasksRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         filters: [
-    #           {
-    #             name: "LocationId", # required, accepts LocationId, CreationTime
-    #             values: ["FilterAttributeValue"], # required
-    #             operator: "Equals", # required, accepts Equals, NotEquals, In, LessThanOrEqual, LessThan, GreaterThanOrEqual, GreaterThan, Contains, NotContains, BeginsWith
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] max_results
     #   The maximum number of tasks to return.
@@ -3104,15 +2573,6 @@ module Aws::DataSync
     #
     #
     # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/query-resources.html
-    #
-    # @note When making an API call, you may pass LocationFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "LocationUri", # required, accepts LocationUri, LocationType, CreationTime
-    #         values: ["FilterAttributeValue"], # required
-    #         operator: "Equals", # required, accepts Equals, NotEquals, In, LessThanOrEqual, LessThan, GreaterThanOrEqual, GreaterThan, Contains, NotContains, BeginsWith
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the filter being used. Each API call supports a list of
@@ -3193,13 +2653,6 @@ module Aws::DataSync
 
     # Specifies how DataSync can access a location using the NFS protocol.
     #
-    # @note When making an API call, you may pass NfsMountOptions
-    #   data as a hash:
-    #
-    #       {
-    #         version: "AUTOMATIC", # accepts AUTOMATIC, NFS3, NFS4_0, NFS4_1
-    #       }
-    #
     # @!attribute [rw] version
     #   Specifies the NFS version that you want DataSync to use when
     #   mounting your NFS share. If the server refuses to use the version
@@ -3236,13 +2689,6 @@ module Aws::DataSync
     # A list of Amazon Resource Names (ARNs) of agents to use for a Network
     # File System (NFS) location.
     #
-    # @note When making an API call, you may pass OnPremConfig
-    #   data as a hash:
-    #
-    #       {
-    #         agent_arns: ["AgentArn"], # required
-    #       }
-    #
     # @!attribute [rw] agent_arns
     #   ARNs of the agents to use for an NFS location.
     #   @return [Array<String>]
@@ -3269,27 +2715,6 @@ module Aws::DataSync
     #
     #
     # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html
-    #
-    # @note When making an API call, you may pass Options
-    #   data as a hash:
-    #
-    #       {
-    #         verify_mode: "POINT_IN_TIME_CONSISTENT", # accepts POINT_IN_TIME_CONSISTENT, ONLY_FILES_TRANSFERRED, NONE
-    #         overwrite_mode: "ALWAYS", # accepts ALWAYS, NEVER
-    #         atime: "NONE", # accepts NONE, BEST_EFFORT
-    #         mtime: "NONE", # accepts NONE, PRESERVE
-    #         uid: "NONE", # accepts NONE, INT_VALUE, NAME, BOTH
-    #         gid: "NONE", # accepts NONE, INT_VALUE, NAME, BOTH
-    #         preserve_deleted_files: "PRESERVE", # accepts PRESERVE, REMOVE
-    #         preserve_devices: "NONE", # accepts NONE, PRESERVE
-    #         posix_permissions: "NONE", # accepts NONE, PRESERVE
-    #         bytes_per_second: 1,
-    #         task_queueing: "ENABLED", # accepts ENABLED, DISABLED
-    #         log_level: "OFF", # accepts OFF, BASIC, TRANSFER
-    #         transfer_mode: "CHANGED", # accepts CHANGED, ALL
-    #         security_descriptor_copy_flags: "NONE", # accepts NONE, OWNER_DACL, OWNER_DACL_SACL
-    #         object_tags: "PRESERVE", # accepts PRESERVE, NONE
-    #       }
     #
     # @!attribute [rw] verify_mode
     #   A value that determines whether a data integrity verification should
@@ -3654,14 +3079,6 @@ module Aws::DataSync
     # Procedure Call (RPC) and data transfer privacy settings configured on
     # the Hadoop Distributed File System (HDFS) cluster.
     #
-    # @note When making an API call, you may pass QopConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         rpc_protection: "DISABLED", # accepts DISABLED, AUTHENTICATION, INTEGRITY, PRIVACY
-    #         data_transfer_protection: "DISABLED", # accepts DISABLED, AUTHENTICATION, INTEGRITY, PRIVACY
-    #       }
-    #
     # @!attribute [rw] rpc_protection
     #   The RPC protection setting configured on the HDFS cluster. This
     #   setting corresponds to your `hadoop.rpc.protection` setting in your
@@ -3689,13 +3106,6 @@ module Aws::DataSync
     # For detailed information about using such a role, see Creating a
     # Location for Amazon S3 in the *DataSync User Guide*.
     #
-    # @note When making an API call, you may pass S3Config
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_access_role_arn: "IamRoleArn", # required
-    #       }
-    #
     # @!attribute [rw] bucket_access_role_arn
     #   The ARN of the IAM role for accessing the S3 bucket.
     #   @return [String]
@@ -3709,13 +3119,6 @@ module Aws::DataSync
     end
 
     # Specifies how DataSync can access a location using the SMB protocol.
-    #
-    # @note When making an API call, you may pass SmbMountOptions
-    #   data as a hash:
-    #
-    #       {
-    #         version: "AUTOMATIC", # accepts AUTOMATIC, SMB2, SMB3
-    #       }
     #
     # @!attribute [rw] version
     #   Specifies the SMB version that you want DataSync to use when
@@ -3733,42 +3136,6 @@ module Aws::DataSync
     end
 
     # StartTaskExecutionRequest
-    #
-    # @note When making an API call, you may pass StartTaskExecutionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         task_arn: "TaskArn", # required
-    #         override_options: {
-    #           verify_mode: "POINT_IN_TIME_CONSISTENT", # accepts POINT_IN_TIME_CONSISTENT, ONLY_FILES_TRANSFERRED, NONE
-    #           overwrite_mode: "ALWAYS", # accepts ALWAYS, NEVER
-    #           atime: "NONE", # accepts NONE, BEST_EFFORT
-    #           mtime: "NONE", # accepts NONE, PRESERVE
-    #           uid: "NONE", # accepts NONE, INT_VALUE, NAME, BOTH
-    #           gid: "NONE", # accepts NONE, INT_VALUE, NAME, BOTH
-    #           preserve_deleted_files: "PRESERVE", # accepts PRESERVE, REMOVE
-    #           preserve_devices: "NONE", # accepts NONE, PRESERVE
-    #           posix_permissions: "NONE", # accepts NONE, PRESERVE
-    #           bytes_per_second: 1,
-    #           task_queueing: "ENABLED", # accepts ENABLED, DISABLED
-    #           log_level: "OFF", # accepts OFF, BASIC, TRANSFER
-    #           transfer_mode: "CHANGED", # accepts CHANGED, ALL
-    #           security_descriptor_copy_flags: "NONE", # accepts NONE, OWNER_DACL, OWNER_DACL_SACL
-    #           object_tags: "PRESERVE", # accepts PRESERVE, NONE
-    #         },
-    #         includes: [
-    #           {
-    #             filter_type: "SIMPLE_PATTERN", # accepts SIMPLE_PATTERN
-    #             value: "FilterValue",
-    #           },
-    #         ],
-    #         excludes: [
-    #           {
-    #             filter_type: "SIMPLE_PATTERN", # accepts SIMPLE_PATTERN
-    #             value: "FilterValue",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] task_arn
     #   The Amazon Resource Name (ARN) of the task to start.
@@ -3840,14 +3207,6 @@ module Aws::DataSync
     #
     # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_ListTagsForResource.html
     #
-    # @note When making an API call, you may pass TagListEntry
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue",
-    #       }
-    #
     # @!attribute [rw] key
     #   The key for an Amazon Web Services resource tag.
     #   @return [String]
@@ -3866,19 +3225,6 @@ module Aws::DataSync
     end
 
     # TagResourceRequest
-    #
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "TaggableResourceArn", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource to apply the tag to.
@@ -4001,15 +3347,6 @@ module Aws::DataSync
     #
     # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/query-resources.html
     #
-    # @note When making an API call, you may pass TaskFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "LocationId", # required, accepts LocationId, CreationTime
-    #         values: ["FilterAttributeValue"], # required
-    #         operator: "Equals", # required, accepts Equals, NotEquals, In, LessThanOrEqual, LessThan, GreaterThanOrEqual, GreaterThan, Contains, NotContains, BeginsWith
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the filter being used. Each API call supports a list of
     #   filters that are available for it. For example, `LocationId` for
@@ -4075,13 +3412,6 @@ module Aws::DataSync
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html
     #
-    # @note When making an API call, you may pass TaskSchedule
-    #   data as a hash:
-    #
-    #       {
-    #         schedule_expression: "ScheduleExpressionCron", # required
-    #       }
-    #
     # @!attribute [rw] schedule_expression
     #   A cron expression that specifies when DataSync initiates a scheduled
     #   transfer from a source to a destination location.
@@ -4096,14 +3426,6 @@ module Aws::DataSync
     end
 
     # UntagResourceRequest
-    #
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "TaggableResourceArn", # required
-    #         keys: ["TagKey"], # required
-    #       }
     #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource to remove the tag
@@ -4129,14 +3451,6 @@ module Aws::DataSync
 
     # UpdateAgentRequest
     #
-    # @note When making an API call, you may pass UpdateAgentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         agent_arn: "AgentArn", # required
-    #         name: "TagValue",
-    #       }
-    #
     # @!attribute [rw] agent_arn
     #   The Amazon Resource Name (ARN) of the agent to update.
     #   @return [String]
@@ -4158,33 +3472,6 @@ module Aws::DataSync
     #
     class UpdateAgentResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateLocationHdfsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         location_arn: "LocationArn", # required
-    #         subdirectory: "HdfsSubdirectory",
-    #         name_nodes: [
-    #           {
-    #             hostname: "HdfsServerHostname", # required
-    #             port: 1, # required
-    #           },
-    #         ],
-    #         block_size: 1,
-    #         replication_factor: 1,
-    #         kms_key_provider_uri: "KmsKeyProviderUri",
-    #         qop_configuration: {
-    #           rpc_protection: "DISABLED", # accepts DISABLED, AUTHENTICATION, INTEGRITY, PRIVACY
-    #           data_transfer_protection: "DISABLED", # accepts DISABLED, AUTHENTICATION, INTEGRITY, PRIVACY
-    #         },
-    #         authentication_type: "SIMPLE", # accepts SIMPLE, KERBEROS
-    #         simple_user: "HdfsUser",
-    #         kerberos_principal: "KerberosPrincipal",
-    #         kerberos_keytab: "data",
-    #         kerberos_krb_5_conf: "data",
-    #         agent_arns: ["AgentArn"],
-    #       }
-    #
     # @!attribute [rw] location_arn
     #   The Amazon Resource Name (ARN) of the source HDFS cluster location.
     #   @return [String]
@@ -4278,20 +3565,6 @@ module Aws::DataSync
     #
     class UpdateLocationHdfsResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateLocationNfsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         location_arn: "LocationArn", # required
-    #         subdirectory: "NfsSubdirectory",
-    #         on_prem_config: {
-    #           agent_arns: ["AgentArn"], # required
-    #         },
-    #         mount_options: {
-    #           version: "AUTOMATIC", # accepts AUTOMATIC, NFS3, NFS4_0, NFS4_1
-    #         },
-    #       }
-    #
     # @!attribute [rw] location_arn
     #   The Amazon Resource Name (ARN) of the NFS location to update.
     #   @return [String]
@@ -4353,20 +3626,6 @@ module Aws::DataSync
     #
     class UpdateLocationNfsResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateLocationObjectStorageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         location_arn: "LocationArn", # required
-    #         server_port: 1,
-    #         server_protocol: "HTTPS", # accepts HTTPS, HTTP
-    #         subdirectory: "S3Subdirectory",
-    #         access_key: "ObjectStorageAccessKey",
-    #         secret_key: "ObjectStorageSecretKey",
-    #         agent_arns: ["AgentArn"],
-    #         server_certificate: "data",
-    #       }
-    #
     # @!attribute [rw] location_arn
     #   Specifies the ARN of the object storage system location that you're
     #   updating.
@@ -4436,21 +3695,6 @@ module Aws::DataSync
     #
     class UpdateLocationObjectStorageResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateLocationSmbRequest
-    #   data as a hash:
-    #
-    #       {
-    #         location_arn: "LocationArn", # required
-    #         subdirectory: "SmbSubdirectory",
-    #         user: "SmbUser",
-    #         domain: "SmbDomain",
-    #         password: "SmbPassword",
-    #         agent_arns: ["AgentArn"],
-    #         mount_options: {
-    #           version: "AUTOMATIC", # accepts AUTOMATIC, SMB2, SMB3
-    #         },
-    #       }
-    #
     # @!attribute [rw] location_arn
     #   The Amazon Resource Name (ARN) of the SMB location to update.
     #   @return [String]
@@ -4524,30 +3768,6 @@ module Aws::DataSync
     #
     class UpdateLocationSmbResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateTaskExecutionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         task_execution_arn: "TaskExecutionArn", # required
-    #         options: { # required
-    #           verify_mode: "POINT_IN_TIME_CONSISTENT", # accepts POINT_IN_TIME_CONSISTENT, ONLY_FILES_TRANSFERRED, NONE
-    #           overwrite_mode: "ALWAYS", # accepts ALWAYS, NEVER
-    #           atime: "NONE", # accepts NONE, BEST_EFFORT
-    #           mtime: "NONE", # accepts NONE, PRESERVE
-    #           uid: "NONE", # accepts NONE, INT_VALUE, NAME, BOTH
-    #           gid: "NONE", # accepts NONE, INT_VALUE, NAME, BOTH
-    #           preserve_deleted_files: "PRESERVE", # accepts PRESERVE, REMOVE
-    #           preserve_devices: "NONE", # accepts NONE, PRESERVE
-    #           posix_permissions: "NONE", # accepts NONE, PRESERVE
-    #           bytes_per_second: 1,
-    #           task_queueing: "ENABLED", # accepts ENABLED, DISABLED
-    #           log_level: "OFF", # accepts OFF, BASIC, TRANSFER
-    #           transfer_mode: "CHANGED", # accepts CHANGED, ALL
-    #           security_descriptor_copy_flags: "NONE", # accepts NONE, OWNER_DACL, OWNER_DACL_SACL
-    #           object_tags: "PRESERVE", # accepts PRESERVE, NONE
-    #         },
-    #       }
-    #
     # @!attribute [rw] task_execution_arn
     #   The Amazon Resource Name (ARN) of the specific task execution that
     #   is being updated.
@@ -4585,47 +3805,6 @@ module Aws::DataSync
     class UpdateTaskExecutionResponse < Aws::EmptyStructure; end
 
     # UpdateTaskResponse
-    #
-    # @note When making an API call, you may pass UpdateTaskRequest
-    #   data as a hash:
-    #
-    #       {
-    #         task_arn: "TaskArn", # required
-    #         options: {
-    #           verify_mode: "POINT_IN_TIME_CONSISTENT", # accepts POINT_IN_TIME_CONSISTENT, ONLY_FILES_TRANSFERRED, NONE
-    #           overwrite_mode: "ALWAYS", # accepts ALWAYS, NEVER
-    #           atime: "NONE", # accepts NONE, BEST_EFFORT
-    #           mtime: "NONE", # accepts NONE, PRESERVE
-    #           uid: "NONE", # accepts NONE, INT_VALUE, NAME, BOTH
-    #           gid: "NONE", # accepts NONE, INT_VALUE, NAME, BOTH
-    #           preserve_deleted_files: "PRESERVE", # accepts PRESERVE, REMOVE
-    #           preserve_devices: "NONE", # accepts NONE, PRESERVE
-    #           posix_permissions: "NONE", # accepts NONE, PRESERVE
-    #           bytes_per_second: 1,
-    #           task_queueing: "ENABLED", # accepts ENABLED, DISABLED
-    #           log_level: "OFF", # accepts OFF, BASIC, TRANSFER
-    #           transfer_mode: "CHANGED", # accepts CHANGED, ALL
-    #           security_descriptor_copy_flags: "NONE", # accepts NONE, OWNER_DACL, OWNER_DACL_SACL
-    #           object_tags: "PRESERVE", # accepts PRESERVE, NONE
-    #         },
-    #         excludes: [
-    #           {
-    #             filter_type: "SIMPLE_PATTERN", # accepts SIMPLE_PATTERN
-    #             value: "FilterValue",
-    #           },
-    #         ],
-    #         schedule: {
-    #           schedule_expression: "ScheduleExpressionCron", # required
-    #         },
-    #         name: "TagValue",
-    #         cloud_watch_log_group_arn: "LogGroupArn",
-    #         includes: [
-    #           {
-    #             filter_type: "SIMPLE_PATTERN", # accepts SIMPLE_PATTERN
-    #             value: "FilterValue",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] task_arn
     #   The Amazon Resource Name (ARN) of the resource name of the task to

@@ -69,24 +69,6 @@ module Aws::LookoutforVision
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDatasetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_name: "ProjectName", # required
-    #         dataset_type: "DatasetType", # required
-    #         dataset_source: {
-    #           ground_truth_manifest: {
-    #             s3_object: {
-    #               bucket: "S3BucketName", # required
-    #               key: "S3ObjectKey", # required
-    #               version_id: "S3ObjectVersion",
-    #             },
-    #           },
-    #         },
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] project_name
     #   The name of the project in which you want to create a dataset.
     #   @return [String]
@@ -155,28 +137,6 @@ module Aws::LookoutforVision
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateModelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_name: "ProjectName", # required
-    #         description: "ModelDescriptionMessage",
-    #         client_token: "ClientToken",
-    #         output_config: { # required
-    #           s3_location: { # required
-    #             bucket: "S3BucketName", # required
-    #             prefix: "S3KeyPrefix",
-    #           },
-    #         },
-    #         kms_key_id: "KmsKeyId",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] project_name
     #   The name of the project in which you want to create a model version.
     #   @return [String]
@@ -249,14 +209,6 @@ module Aws::LookoutforVision
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateProjectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_name: "ProjectName", # required
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] project_name
     #   The name for the project.
     #   @return [String]
@@ -355,17 +307,6 @@ module Aws::LookoutforVision
     # Location information about a manifest file. You can use a manifest
     # file to create a dataset.
     #
-    # @note When making an API call, you may pass DatasetGroundTruthManifest
-    #   data as a hash:
-    #
-    #       {
-    #         s3_object: {
-    #           bucket: "S3BucketName", # required
-    #           key: "S3ObjectKey", # required
-    #           version_id: "S3ObjectVersion",
-    #         },
-    #       }
-    #
     # @!attribute [rw] s3_object
     #   The S3 bucket location for the manifest file.
     #   @return [Types::InputS3Object]
@@ -441,19 +382,6 @@ module Aws::LookoutforVision
     # Information about the location of a manifest file that Amazon Lookout
     # for Vision uses to to create a dataset.
     #
-    # @note When making an API call, you may pass DatasetSource
-    #   data as a hash:
-    #
-    #       {
-    #         ground_truth_manifest: {
-    #           s3_object: {
-    #             bucket: "S3BucketName", # required
-    #             key: "S3ObjectKey", # required
-    #             version_id: "S3ObjectVersion",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] ground_truth_manifest
     #   Location information for the manifest file.
     #   @return [Types::DatasetGroundTruthManifest]
@@ -466,15 +394,6 @@ module Aws::LookoutforVision
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDatasetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_name: "ProjectName", # required
-    #         dataset_type: "DatasetType", # required
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] project_name
     #   The name of the project that contains the dataset that you want to
     #   delete.
@@ -521,15 +440,6 @@ module Aws::LookoutforVision
     #
     class DeleteDatasetResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteModelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_name: "ProjectName", # required
-    #         model_version: "ModelVersionNoLatest", # required
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] project_name
     #   The name of the project that contains the model that you want to
     #   delete.
@@ -582,14 +492,6 @@ module Aws::LookoutforVision
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteProjectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_name: "ProjectName", # required
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] project_name
     #   The name of the project to delete.
     #   @return [String]
@@ -636,14 +538,6 @@ module Aws::LookoutforVision
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDatasetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_name: "ProjectName", # required
-    #         dataset_type: "DatasetType", # required
-    #       }
-    #
     # @!attribute [rw] project_name
     #   The name of the project that contains the dataset that you want to
     #   describe.
@@ -676,14 +570,6 @@ module Aws::LookoutforVision
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeModelPackagingJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_name: "ProjectName", # required
-    #         job_name: "ModelPackagingJobName", # required
-    #       }
-    #
     # @!attribute [rw] project_name
     #   The name of the project that contains the model packaging job that
     #   you want to describe.
@@ -714,14 +600,6 @@ module Aws::LookoutforVision
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeModelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_name: "ProjectName", # required
-    #         model_version: "ModelVersion", # required
-    #       }
-    #
     # @!attribute [rw] project_name
     #   The project that contains the version of a model that you want to
     #   describe.
@@ -752,13 +630,6 @@ module Aws::LookoutforVision
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeProjectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_name: "ProjectName", # required
-    #       }
-    #
     # @!attribute [rw] project_name
     #   The name of the project that you want to describe.
     #   @return [String]
@@ -783,16 +654,6 @@ module Aws::LookoutforVision
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DetectAnomaliesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_name: "ProjectName", # required
-    #         model_version: "ModelVersion", # required
-    #         body: "data", # required
-    #         content_type: "ContentType", # required
-    #       }
-    #
     # @!attribute [rw] project_name
     #   The name of the project that contains the model version that you
     #   want to use.
@@ -908,32 +769,6 @@ module Aws::LookoutforVision
     #
     #  </note>
     #
-    # @note When making an API call, you may pass GreengrassConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         compiler_options: "CompilerOptions",
-    #         target_device: "jetson_xavier", # accepts jetson_xavier
-    #         target_platform: {
-    #           os: "LINUX", # required, accepts LINUX
-    #           arch: "ARM64", # required, accepts ARM64, X86_64
-    #           accelerator: "NVIDIA", # accepts NVIDIA
-    #         },
-    #         s3_output_location: { # required
-    #           bucket: "S3BucketName", # required
-    #           prefix: "S3KeyPrefix",
-    #         },
-    #         component_name: "ComponentName", # required
-    #         component_version: "ComponentVersion",
-    #         component_description: "ComponentDescription",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] compiler_options
     #   Additional compiler options for the Greengrass component. Currently,
     #   only NVIDIA Graphics Processing Units (GPU) and CPU accelerators are
@@ -1034,15 +869,6 @@ module Aws::LookoutforVision
 
     # Amazon S3 Location information for an input manifest file.
     #
-    # @note When making an API call, you may pass InputS3Object
-    #   data as a hash:
-    #
-    #       {
-    #         bucket: "S3BucketName", # required
-    #         key: "S3ObjectKey", # required
-    #         version_id: "S3ObjectVersion",
-    #       }
-    #
     # @!attribute [rw] bucket
     #   The Amazon S3 bucket that contains the manifest.
     #   @return [String]
@@ -1084,21 +910,6 @@ module Aws::LookoutforVision
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDatasetEntriesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_name: "ProjectName", # required
-    #         dataset_type: "DatasetType", # required
-    #         labeled: false,
-    #         anomaly_class: "AnomalyClassFilter",
-    #         before_creation_date: Time.now,
-    #         after_creation_date: Time.now,
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #         source_ref_contains: "QueryString",
-    #       }
-    #
     # @!attribute [rw] project_name
     #   The name of the project that contains the dataset that you want to
     #   list.
@@ -1187,15 +998,6 @@ module Aws::LookoutforVision
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListModelPackagingJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_name: "ProjectName", # required
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] project_name
     #   The name of the project for which you want to list the model
     #   packaging jobs.
@@ -1246,15 +1048,6 @@ module Aws::LookoutforVision
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListModelsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_name: "ProjectName", # required
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] project_name
     #   The name of the project that contains the model versions that you
     #   want to list.
@@ -1303,14 +1096,6 @@ module Aws::LookoutforVision
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListProjectsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If the previous response was incomplete (because there is more data
     #   to retrieve), Amazon Lookout for Vision returns a pagination token
@@ -1353,13 +1138,6 @@ module Aws::LookoutforVision
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "TagArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the model for which you want to
     #   list tags.
@@ -1518,34 +1296,6 @@ module Aws::LookoutforVision
 
     # Configuration information for a Amazon Lookout for Vision model
     # packaging job. For more information, see StartModelPackagingJob.
-    #
-    # @note When making an API call, you may pass ModelPackagingConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         greengrass: { # required
-    #           compiler_options: "CompilerOptions",
-    #           target_device: "jetson_xavier", # accepts jetson_xavier
-    #           target_platform: {
-    #             os: "LINUX", # required, accepts LINUX
-    #             arch: "ARM64", # required, accepts ARM64, X86_64
-    #             accelerator: "NVIDIA", # accepts NVIDIA
-    #           },
-    #           s3_output_location: { # required
-    #             bucket: "S3BucketName", # required
-    #             prefix: "S3KeyPrefix",
-    #           },
-    #           component_name: "ComponentName", # required
-    #           component_version: "ComponentVersion",
-    #           component_description: "ComponentDescription",
-    #           tags: [
-    #             {
-    #               key: "TagKey", # required
-    #               value: "TagValue", # required
-    #             },
-    #           ],
-    #         },
-    #       }
     #
     # @!attribute [rw] greengrass
     #   Configuration information for the AWS IoT Greengrass component in a
@@ -1730,16 +1480,6 @@ module Aws::LookoutforVision
     # The S3 location where Amazon Lookout for Vision saves model training
     # files.
     #
-    # @note When making an API call, you may pass OutputConfig
-    #   data as a hash:
-    #
-    #       {
-    #         s3_location: { # required
-    #           bucket: "S3BucketName", # required
-    #           prefix: "S3KeyPrefix",
-    #         },
-    #       }
-    #
     # @!attribute [rw] s3_location
     #   The S3 location for the output.
     #   @return [Types::S3Location]
@@ -1876,14 +1616,6 @@ module Aws::LookoutforVision
     # Information about the location of training output or the output of a
     # model packaging job.
     #
-    # @note When making an API call, you may pass S3Location
-    #   data as a hash:
-    #
-    #       {
-    #         bucket: "S3BucketName", # required
-    #         prefix: "S3KeyPrefix",
-    #       }
-    #
     # @!attribute [rw] bucket
     #   The S3 bucket that contains the training or model packaging job
     #   output. If you are training a model, the bucket must in your AWS
@@ -1941,41 +1673,6 @@ module Aws::LookoutforVision
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartModelPackagingJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_name: "ProjectName", # required
-    #         model_version: "ModelVersion", # required
-    #         job_name: "ModelPackagingJobName",
-    #         configuration: { # required
-    #           greengrass: { # required
-    #             compiler_options: "CompilerOptions",
-    #             target_device: "jetson_xavier", # accepts jetson_xavier
-    #             target_platform: {
-    #               os: "LINUX", # required, accepts LINUX
-    #               arch: "ARM64", # required, accepts ARM64, X86_64
-    #               accelerator: "NVIDIA", # accepts NVIDIA
-    #             },
-    #             s3_output_location: { # required
-    #               bucket: "S3BucketName", # required
-    #               prefix: "S3KeyPrefix",
-    #             },
-    #             component_name: "ComponentName", # required
-    #             component_version: "ComponentVersion",
-    #             component_description: "ComponentDescription",
-    #             tags: [
-    #               {
-    #                 key: "TagKey", # required
-    #                 value: "TagValue", # required
-    #               },
-    #             ],
-    #           },
-    #         },
-    #         description: "ModelPackagingJobDescription",
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] project_name
     #   The name of the project which contains the version of the model that
     #   you want to package.
@@ -2048,17 +1745,6 @@ module Aws::LookoutforVision
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartModelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_name: "ProjectName", # required
-    #         model_version: "ModelVersion", # required
-    #         min_inference_units: 1, # required
-    #         client_token: "ClientToken",
-    #         max_inference_units: 1,
-    #       }
-    #
     # @!attribute [rw] project_name
     #   The name of the project that contains the model that you want to
     #   start.
@@ -2126,15 +1812,6 @@ module Aws::LookoutforVision
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopModelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_name: "ProjectName", # required
-    #         model_version: "ModelVersion", # required
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] project_name
     #   The name of the project that contains the model that you want to
     #   stop.
@@ -2190,14 +1867,6 @@ module Aws::LookoutforVision
     # A key and value pair that is attached to the specified Amazon Lookout
     # for Vision model.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The key of the tag that is attached to the specified model.
     #   @return [String]
@@ -2215,19 +1884,6 @@ module Aws::LookoutforVision
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "TagArn", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the model to assign the tags.
     #   @return [String]
@@ -2251,15 +1907,6 @@ module Aws::LookoutforVision
 
     # The platform on which a model runs on an AWS IoT Greengrass core
     # device.
-    #
-    # @note When making an API call, you may pass TargetPlatform
-    #   data as a hash:
-    #
-    #       {
-    #         os: "LINUX", # required, accepts LINUX
-    #         arch: "ARM64", # required, accepts ARM64, X86_64
-    #         accelerator: "NVIDIA", # accepts NVIDIA
-    #       }
     #
     # @!attribute [rw] os
     #   The target operating system for the model. Linux is the only
@@ -2328,14 +1975,6 @@ module Aws::LookoutforVision
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "TagArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the model from which you want to
     #   remove tags.
@@ -2358,16 +1997,6 @@ module Aws::LookoutforVision
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateDatasetEntriesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_name: "ProjectName", # required
-    #         dataset_type: "DatasetType", # required
-    #         changes: "data", # required
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] project_name
     #   The name of the project that contains the dataset that you want to
     #   update.

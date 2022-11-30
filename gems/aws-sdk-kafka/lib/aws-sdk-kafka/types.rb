@@ -12,14 +12,6 @@ module Aws::Kafka
 
     # Request body for BatchAssociateScramSecret.
     #
-    # @note When making an API call, you may pass BatchAssociateScramSecretRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_arn: "__string", # required
-    #         secret_arn_list: ["__string"], # required
-    #       }
-    #
     # @!attribute [rw] cluster_arn
     #   @return [String]
     #
@@ -76,18 +68,6 @@ module Aws::Kafka
     # must be set to the keyword ALL. This means the changes apply to all
     # the brokers in the cluster.
     #
-    # @note When making an API call, you may pass BrokerEBSVolumeInfo
-    #   data as a hash:
-    #
-    #       {
-    #         kafka_broker_node_id: "__string", # required
-    #         provisioned_throughput: {
-    #           enabled: false,
-    #           volume_throughput: 1,
-    #         },
-    #         volume_size_gb: 1,
-    #       }
-    #
     # @!attribute [rw] kafka_broker_node_id
     #   The ID of the broker to update.
     #   @return [String]
@@ -111,25 +91,6 @@ module Aws::Kafka
     end
 
     # The broker logs configuration for this MSK cluster.
-    #
-    # @note When making an API call, you may pass BrokerLogs
-    #   data as a hash:
-    #
-    #       {
-    #         cloud_watch_logs: {
-    #           enabled: false, # required
-    #           log_group: "__string",
-    #         },
-    #         firehose: {
-    #           delivery_stream: "__string",
-    #           enabled: false, # required
-    #         },
-    #         s3: {
-    #           bucket: "__string",
-    #           enabled: false, # required
-    #           prefix: "__string",
-    #         },
-    #       }
     #
     # @!attribute [rw] cloud_watch_logs
     #   Details of the CloudWatch Logs destination for broker logs.
@@ -156,30 +117,6 @@ module Aws::Kafka
 
     # Describes the setup to be used for Apache Kafka broker nodes in the
     # cluster.
-    #
-    # @note When making an API call, you may pass BrokerNodeGroupInfo
-    #   data as a hash:
-    #
-    #       {
-    #         broker_az_distribution: "DEFAULT", # accepts DEFAULT
-    #         client_subnets: ["__string"], # required
-    #         instance_type: "__stringMin5Max32", # required
-    #         security_groups: ["__string"],
-    #         storage_info: {
-    #           ebs_storage_info: {
-    #             provisioned_throughput: {
-    #               enabled: false,
-    #               volume_throughput: 1,
-    #             },
-    #             volume_size: 1,
-    #           },
-    #         },
-    #         connectivity_info: {
-    #           public_access: {
-    #             type: "__string",
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] broker_az_distribution
     #   The distribution of broker nodes across Availability Zones.
@@ -297,27 +234,6 @@ module Aws::Kafka
 
     # Includes all client authentication information.
     #
-    # @note When making an API call, you may pass ClientAuthentication
-    #   data as a hash:
-    #
-    #       {
-    #         sasl: {
-    #           scram: {
-    #             enabled: false,
-    #           },
-    #           iam: {
-    #             enabled: false,
-    #           },
-    #         },
-    #         tls: {
-    #           certificate_authority_arn_list: ["__string"],
-    #           enabled: false,
-    #         },
-    #         unauthenticated: {
-    #           enabled: false,
-    #         },
-    #       }
-    #
     # @!attribute [rw] sasl
     #   @return [Types::Sasl]
     #
@@ -340,14 +256,6 @@ module Aws::Kafka
     end
 
     # Details of the CloudWatch Logs destination for broker logs.
-    #
-    # @note When making an API call, you may pass CloudWatchLogs
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false, # required
-    #         log_group: "__string",
-    #       }
     #
     # @!attribute [rw] enabled
     #   Specifies whether broker logs get sent to the specified CloudWatch
@@ -652,14 +560,6 @@ module Aws::Kafka
 
     # Specifies the configuration to use for the brokers.
     #
-    # @note When making an API call, you may pass ConfigurationInfo
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "__string", # required
-    #         revision: 1, # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   ARN of the configuration to use.
     #   @return [String]
@@ -720,15 +620,6 @@ module Aws::Kafka
 
     # Information about the broker access configuration.
     #
-    # @note When making an API call, you may pass ConnectivityInfo
-    #   data as a hash:
-    #
-    #       {
-    #         public_access: {
-    #           type: "__string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] public_access
     #   Public access control for brokers.
     #   @return [Types::PublicAccess]
@@ -742,97 +633,6 @@ module Aws::Kafka
     end
 
     # Creates a cluster.
-    #
-    # @note When making an API call, you may pass CreateClusterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         broker_node_group_info: { # required
-    #           broker_az_distribution: "DEFAULT", # accepts DEFAULT
-    #           client_subnets: ["__string"], # required
-    #           instance_type: "__stringMin5Max32", # required
-    #           security_groups: ["__string"],
-    #           storage_info: {
-    #             ebs_storage_info: {
-    #               provisioned_throughput: {
-    #                 enabled: false,
-    #                 volume_throughput: 1,
-    #               },
-    #               volume_size: 1,
-    #             },
-    #           },
-    #           connectivity_info: {
-    #             public_access: {
-    #               type: "__string",
-    #             },
-    #           },
-    #         },
-    #         client_authentication: {
-    #           sasl: {
-    #             scram: {
-    #               enabled: false,
-    #             },
-    #             iam: {
-    #               enabled: false,
-    #             },
-    #           },
-    #           tls: {
-    #             certificate_authority_arn_list: ["__string"],
-    #             enabled: false,
-    #           },
-    #           unauthenticated: {
-    #             enabled: false,
-    #           },
-    #         },
-    #         cluster_name: "__stringMin1Max64", # required
-    #         configuration_info: {
-    #           arn: "__string", # required
-    #           revision: 1, # required
-    #         },
-    #         encryption_info: {
-    #           encryption_at_rest: {
-    #             data_volume_kms_key_id: "__string", # required
-    #           },
-    #           encryption_in_transit: {
-    #             client_broker: "TLS", # accepts TLS, TLS_PLAINTEXT, PLAINTEXT
-    #             in_cluster: false,
-    #           },
-    #         },
-    #         enhanced_monitoring: "DEFAULT", # accepts DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, PER_TOPIC_PER_PARTITION
-    #         kafka_version: "__stringMin1Max128", # required
-    #         logging_info: {
-    #           broker_logs: { # required
-    #             cloud_watch_logs: {
-    #               enabled: false, # required
-    #               log_group: "__string",
-    #             },
-    #             firehose: {
-    #               delivery_stream: "__string",
-    #               enabled: false, # required
-    #             },
-    #             s3: {
-    #               bucket: "__string",
-    #               enabled: false, # required
-    #               prefix: "__string",
-    #             },
-    #           },
-    #         },
-    #         number_of_broker_nodes: 1, # required
-    #         open_monitoring: {
-    #           prometheus: { # required
-    #             jmx_exporter: {
-    #               enabled_in_broker: false, # required
-    #             },
-    #             node_exporter: {
-    #               enabled_in_broker: false, # required
-    #             },
-    #           },
-    #         },
-    #         tags: {
-    #           "__string" => "__string",
-    #         },
-    #         storage_mode: "LOCAL", # accepts LOCAL, TIERED
-    #       }
     #
     # @!attribute [rw] broker_node_group_info
     #   Information about the brokers.
@@ -932,16 +732,6 @@ module Aws::Kafka
 
     # Request body for CreateConfiguration.
     #
-    # @note When making an API call, you may pass CreateConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "__string",
-    #         kafka_versions: ["__string"],
-    #         name: "__string", # required
-    #         server_properties: "data", # required
-    #       }
-    #
     # @!attribute [rw] description
     #   The description of the configuration.
     #   @return [String]
@@ -1006,14 +796,6 @@ module Aws::Kafka
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteClusterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_arn: "__string", # required
-    #         current_version: "__string",
-    #       }
-    #
     # @!attribute [rw] cluster_arn
     #   @return [String]
     #
@@ -1052,13 +834,6 @@ module Aws::Kafka
 
     # Request body for DeleteConfiguration.
     #
-    # @note When making an API call, you may pass DeleteConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the configuration.
     #   @return [String]
@@ -1091,13 +866,6 @@ module Aws::Kafka
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeClusterOperationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_operation_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] cluster_operation_arn
     #   @return [String]
     #
@@ -1123,13 +891,6 @@ module Aws::Kafka
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeClusterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] cluster_arn
     #   @return [String]
     #
@@ -1155,13 +916,6 @@ module Aws::Kafka
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   @return [String]
     #
@@ -1220,14 +974,6 @@ module Aws::Kafka
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeConfigurationRevisionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "__string", # required
-    #         revision: 1, # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   @return [String]
     #
@@ -1278,14 +1024,6 @@ module Aws::Kafka
 
     # Request body for BatchDisassociateScramSecret.
     #
-    # @note When making an API call, you may pass BatchDisassociateScramSecretRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_arn: "__string", # required
-    #         secret_arn_list: ["__string"], # required
-    #       }
-    #
     # @!attribute [rw] cluster_arn
     #   @return [String]
     #
@@ -1324,17 +1062,6 @@ module Aws::Kafka
     # Contains information about the EBS storage volumes attached to Apache
     # Kafka broker nodes.
     #
-    # @note When making an API call, you may pass EBSStorageInfo
-    #   data as a hash:
-    #
-    #       {
-    #         provisioned_throughput: {
-    #           enabled: false,
-    #           volume_throughput: 1,
-    #         },
-    #         volume_size: 1,
-    #       }
-    #
     # @!attribute [rw] provisioned_throughput
     #   EBS volume provisioned throughput information.
     #   @return [Types::ProvisionedThroughput]
@@ -1355,13 +1082,6 @@ module Aws::Kafka
 
     # The data-volume encryption details.
     #
-    # @note When making an API call, you may pass EncryptionAtRest
-    #   data as a hash:
-    #
-    #       {
-    #         data_volume_kms_key_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] data_volume_kms_key_id
     #   The ARN of the AWS KMS key for encrypting data at rest. If you
     #   don't specify a KMS key, MSK creates one for you and uses it.
@@ -1376,14 +1096,6 @@ module Aws::Kafka
     end
 
     # The settings for encrypting data in transit.
-    #
-    # @note When making an API call, you may pass EncryptionInTransit
-    #   data as a hash:
-    #
-    #       {
-    #         client_broker: "TLS", # accepts TLS, TLS_PLAINTEXT, PLAINTEXT
-    #         in_cluster: false,
-    #       }
     #
     # @!attribute [rw] client_broker
     #   Indicates the encryption setting for data in transit between clients
@@ -1420,19 +1132,6 @@ module Aws::Kafka
     # Includes encryption-related information, such as the AWS KMS key used
     # for encrypting data at rest and whether you want MSK to encrypt your
     # data in transit.
-    #
-    # @note When making an API call, you may pass EncryptionInfo
-    #   data as a hash:
-    #
-    #       {
-    #         encryption_at_rest: {
-    #           data_volume_kms_key_id: "__string", # required
-    #         },
-    #         encryption_in_transit: {
-    #           client_broker: "TLS", # accepts TLS, TLS_PLAINTEXT, PLAINTEXT
-    #           in_cluster: false,
-    #         },
-    #       }
     #
     # @!attribute [rw] encryption_at_rest
     #   The data-volume encryption details.
@@ -1471,14 +1170,6 @@ module Aws::Kafka
     end
 
     # Firehose details for BrokerLogs.
-    #
-    # @note When making an API call, you may pass Firehose
-    #   data as a hash:
-    #
-    #       {
-    #         delivery_stream: "__string",
-    #         enabled: false, # required
-    #       }
     #
     # @!attribute [rw] delivery_stream
     #   The Kinesis Data Firehose delivery stream that is the destination
@@ -1535,13 +1226,6 @@ module Aws::Kafka
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetBootstrapBrokersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] cluster_arn
     #   @return [String]
     #
@@ -1615,13 +1299,6 @@ module Aws::Kafka
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetCompatibleKafkaVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_arn: "__string",
-    #       }
-    #
     # @!attribute [rw] cluster_arn
     #   @return [String]
     #
@@ -1683,15 +1360,6 @@ module Aws::Kafka
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListClusterOperationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_arn: "__string", # required
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] cluster_arn
     #   @return [String]
     #
@@ -1733,16 +1401,6 @@ module Aws::Kafka
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListClustersV2Request
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_name_filter: "__string",
-    #         cluster_type_filter: "__string",
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] cluster_name_filter
     #   Specify a prefix of the names of the clusters that you want to list.
     #   The service lists all the clusters whose names start with this
@@ -1800,114 +1458,6 @@ module Aws::Kafka
 
     # Creates a new Amazon MSK cluster of either the provisioned or the
     # serverless type.
-    #
-    # @note When making an API call, you may pass CreateClusterV2Request
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_name: "__stringMin1Max64", # required
-    #         tags: {
-    #           "__string" => "__string",
-    #         },
-    #         provisioned: {
-    #           broker_node_group_info: { # required
-    #             broker_az_distribution: "DEFAULT", # accepts DEFAULT
-    #             client_subnets: ["__string"], # required
-    #             instance_type: "__stringMin5Max32", # required
-    #             security_groups: ["__string"],
-    #             storage_info: {
-    #               ebs_storage_info: {
-    #                 provisioned_throughput: {
-    #                   enabled: false,
-    #                   volume_throughput: 1,
-    #                 },
-    #                 volume_size: 1,
-    #               },
-    #             },
-    #             connectivity_info: {
-    #               public_access: {
-    #                 type: "__string",
-    #               },
-    #             },
-    #           },
-    #           client_authentication: {
-    #             sasl: {
-    #               scram: {
-    #                 enabled: false,
-    #               },
-    #               iam: {
-    #                 enabled: false,
-    #               },
-    #             },
-    #             tls: {
-    #               certificate_authority_arn_list: ["__string"],
-    #               enabled: false,
-    #             },
-    #             unauthenticated: {
-    #               enabled: false,
-    #             },
-    #           },
-    #           configuration_info: {
-    #             arn: "__string", # required
-    #             revision: 1, # required
-    #           },
-    #           encryption_info: {
-    #             encryption_at_rest: {
-    #               data_volume_kms_key_id: "__string", # required
-    #             },
-    #             encryption_in_transit: {
-    #               client_broker: "TLS", # accepts TLS, TLS_PLAINTEXT, PLAINTEXT
-    #               in_cluster: false,
-    #             },
-    #           },
-    #           enhanced_monitoring: "DEFAULT", # accepts DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, PER_TOPIC_PER_PARTITION
-    #           open_monitoring: {
-    #             prometheus: { # required
-    #               jmx_exporter: {
-    #                 enabled_in_broker: false, # required
-    #               },
-    #               node_exporter: {
-    #                 enabled_in_broker: false, # required
-    #               },
-    #             },
-    #           },
-    #           kafka_version: "__stringMin1Max128", # required
-    #           logging_info: {
-    #             broker_logs: { # required
-    #               cloud_watch_logs: {
-    #                 enabled: false, # required
-    #                 log_group: "__string",
-    #               },
-    #               firehose: {
-    #                 delivery_stream: "__string",
-    #                 enabled: false, # required
-    #               },
-    #               s3: {
-    #                 bucket: "__string",
-    #                 enabled: false, # required
-    #                 prefix: "__string",
-    #               },
-    #             },
-    #           },
-    #           number_of_broker_nodes: 1, # required
-    #           storage_mode: "LOCAL", # accepts LOCAL, TIERED
-    #         },
-    #         serverless: {
-    #           vpc_configs: [ # required
-    #             {
-    #               subnet_ids: ["__string"], # required
-    #               security_group_ids: ["__string"],
-    #             },
-    #           ],
-    #           client_authentication: {
-    #             sasl: {
-    #               iam: {
-    #                 enabled: false,
-    #               },
-    #             },
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] cluster_name
     #   The name of the cluster.
@@ -1969,13 +1519,6 @@ module Aws::Kafka
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeClusterV2Request
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] cluster_arn
     #   The Amazon Resource Name (ARN) that uniquely identifies the cluster.
     #   @return [String]
@@ -2072,93 +1615,6 @@ module Aws::Kafka
     end
 
     # Creates a provisioned cluster.
-    #
-    # @note When making an API call, you may pass ProvisionedRequest
-    #   data as a hash:
-    #
-    #       {
-    #         broker_node_group_info: { # required
-    #           broker_az_distribution: "DEFAULT", # accepts DEFAULT
-    #           client_subnets: ["__string"], # required
-    #           instance_type: "__stringMin5Max32", # required
-    #           security_groups: ["__string"],
-    #           storage_info: {
-    #             ebs_storage_info: {
-    #               provisioned_throughput: {
-    #                 enabled: false,
-    #                 volume_throughput: 1,
-    #               },
-    #               volume_size: 1,
-    #             },
-    #           },
-    #           connectivity_info: {
-    #             public_access: {
-    #               type: "__string",
-    #             },
-    #           },
-    #         },
-    #         client_authentication: {
-    #           sasl: {
-    #             scram: {
-    #               enabled: false,
-    #             },
-    #             iam: {
-    #               enabled: false,
-    #             },
-    #           },
-    #           tls: {
-    #             certificate_authority_arn_list: ["__string"],
-    #             enabled: false,
-    #           },
-    #           unauthenticated: {
-    #             enabled: false,
-    #           },
-    #         },
-    #         configuration_info: {
-    #           arn: "__string", # required
-    #           revision: 1, # required
-    #         },
-    #         encryption_info: {
-    #           encryption_at_rest: {
-    #             data_volume_kms_key_id: "__string", # required
-    #           },
-    #           encryption_in_transit: {
-    #             client_broker: "TLS", # accepts TLS, TLS_PLAINTEXT, PLAINTEXT
-    #             in_cluster: false,
-    #           },
-    #         },
-    #         enhanced_monitoring: "DEFAULT", # accepts DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, PER_TOPIC_PER_PARTITION
-    #         open_monitoring: {
-    #           prometheus: { # required
-    #             jmx_exporter: {
-    #               enabled_in_broker: false, # required
-    #             },
-    #             node_exporter: {
-    #               enabled_in_broker: false, # required
-    #             },
-    #           },
-    #         },
-    #         kafka_version: "__stringMin1Max128", # required
-    #         logging_info: {
-    #           broker_logs: { # required
-    #             cloud_watch_logs: {
-    #               enabled: false, # required
-    #               log_group: "__string",
-    #             },
-    #             firehose: {
-    #               delivery_stream: "__string",
-    #               enabled: false, # required
-    #             },
-    #             s3: {
-    #               bucket: "__string",
-    #               enabled: false, # required
-    #               prefix: "__string",
-    #             },
-    #           },
-    #         },
-    #         number_of_broker_nodes: 1, # required
-    #         storage_mode: "LOCAL", # accepts LOCAL, TIERED
-    #       }
     #
     # @!attribute [rw] broker_node_group_info
     #   Information about the brokers.
@@ -2299,14 +1755,6 @@ module Aws::Kafka
 
     # The configuration of the Amazon VPCs for the cluster.
     #
-    # @note When making an API call, you may pass VpcConfig
-    #   data as a hash:
-    #
-    #       {
-    #         subnet_ids: ["__string"], # required
-    #         security_group_ids: ["__string"],
-    #       }
-    #
     # @!attribute [rw] subnet_ids
     #   The IDs of the subnets associated with the cluster.
     #   @return [Array<String>]
@@ -2325,25 +1773,6 @@ module Aws::Kafka
     end
 
     # Creates serverless cluster.
-    #
-    # @note When making an API call, you may pass ServerlessRequest
-    #   data as a hash:
-    #
-    #       {
-    #         vpc_configs: [ # required
-    #           {
-    #             subnet_ids: ["__string"], # required
-    #             security_group_ids: ["__string"],
-    #           },
-    #         ],
-    #         client_authentication: {
-    #           sasl: {
-    #             iam: {
-    #               enabled: false,
-    #             },
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] vpc_configs
     #   Information on vpc config for the serverless cluster.
@@ -2364,17 +1793,6 @@ module Aws::Kafka
 
     # Describes the serverless cluster client authentication.
     #
-    # @note When making an API call, you may pass ServerlessClientAuthentication
-    #   data as a hash:
-    #
-    #       {
-    #         sasl: {
-    #           iam: {
-    #             enabled: false,
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] sasl
     #   Serverless cluster SASL information.
     #   @return [Types::ServerlessSasl]
@@ -2388,15 +1806,6 @@ module Aws::Kafka
     end
 
     # Describes the serverless cluster SASL information.
-    #
-    # @note When making an API call, you may pass ServerlessSasl
-    #   data as a hash:
-    #
-    #       {
-    #         iam: {
-    #           enabled: false,
-    #         },
-    #       }
     #
     # @!attribute [rw] iam
     #   Indicates whether IAM access control is enabled.
@@ -2429,15 +1838,6 @@ module Aws::Kafka
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListClustersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_name_filter: "__string",
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] cluster_name_filter
     #   @return [String]
     #
@@ -2480,15 +1880,6 @@ module Aws::Kafka
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListConfigurationRevisionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "__string", # required
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] arn
     #   @return [String]
     #
@@ -2527,14 +1918,6 @@ module Aws::Kafka
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListConfigurationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [Integer]
     #
@@ -2573,14 +1956,6 @@ module Aws::Kafka
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListKafkaVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [Integer]
     #
@@ -2615,15 +1990,6 @@ module Aws::Kafka
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListNodesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_arn: "__string", # required
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] cluster_arn
     #   @return [String]
     #
@@ -2665,15 +2031,6 @@ module Aws::Kafka
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListScramSecretsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_arn: "__string", # required
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] cluster_arn
     #   @return [String]
     #
@@ -2712,13 +2069,6 @@ module Aws::Kafka
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   @return [String]
     #
@@ -2747,27 +2097,6 @@ module Aws::Kafka
     # You can configure your MSK cluster to send broker logs to different
     # destination types. This is a container for the configuration details
     # related to broker logs.
-    #
-    # @note When making an API call, you may pass LoggingInfo
-    #   data as a hash:
-    #
-    #       {
-    #         broker_logs: { # required
-    #           cloud_watch_logs: {
-    #             enabled: false, # required
-    #             log_group: "__string",
-    #           },
-    #           firehose: {
-    #             delivery_stream: "__string",
-    #             enabled: false, # required
-    #           },
-    #           s3: {
-    #             bucket: "__string",
-    #             enabled: false, # required
-    #             prefix: "__string",
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] broker_logs
     #   You can configure your MSK cluster to send broker logs to different
@@ -2911,18 +2240,6 @@ module Aws::Kafka
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass Sasl
-    #   data as a hash:
-    #
-    #       {
-    #         scram: {
-    #           enabled: false,
-    #         },
-    #         iam: {
-    #           enabled: false,
-    #         },
-    #       }
-    #
     # @!attribute [rw] scram
     #   @return [Types::Scram]
     #
@@ -2938,13 +2255,6 @@ module Aws::Kafka
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass Scram
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false,
-    #       }
-    #
     # @!attribute [rw] enabled
     #   SASL/SCRAM authentication is enabled or not.
     #   @return [Boolean]
@@ -2957,13 +2267,6 @@ module Aws::Kafka
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass Iam
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false,
-    #       }
-    #
     # @!attribute [rw] enabled
     #   @return [Boolean]
     #
@@ -3016,19 +2319,6 @@ module Aws::Kafka
     # Contains information about storage volumes attached to MSK broker
     # nodes.
     #
-    # @note When making an API call, you may pass StorageInfo
-    #   data as a hash:
-    #
-    #       {
-    #         ebs_storage_info: {
-    #           provisioned_throughput: {
-    #             enabled: false,
-    #             volume_throughput: 1,
-    #           },
-    #           volume_size: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] ebs_storage_info
     #   EBS volume information.
     #   @return [Types::EBSStorageInfo]
@@ -3042,16 +2332,6 @@ module Aws::Kafka
     end
 
     # Tag a resource.
-    #
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "__string", # required
-    #         tags: { # required
-    #           "__string" => "__string",
-    #         },
-    #       }
     #
     # @!attribute [rw] resource_arn
     #   @return [String]
@@ -3070,14 +2350,6 @@ module Aws::Kafka
     end
 
     # Details for client authentication using TLS.
-    #
-    # @note When making an API call, you may pass Tls
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_authority_arn_list: ["__string"],
-    #         enabled: false,
-    #       }
     #
     # @!attribute [rw] certificate_authority_arn_list
     #   List of ACM Certificate Authority ARNs.
@@ -3114,13 +2386,6 @@ module Aws::Kafka
     end
 
     # Contains information about unauthenticated traffic to the cluster.
-    #
-    # @note When making an API call, you may pass Unauthenticated
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false,
-    #       }
     #
     # @!attribute [rw] enabled
     #   Specifies whether you want to enable or disable unauthenticated
@@ -3171,14 +2436,6 @@ module Aws::Kafka
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "__string", # required
-    #         tag_keys: ["__string"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   @return [String]
     #
@@ -3195,15 +2452,6 @@ module Aws::Kafka
     end
 
     # Request body for UpdateBrokerType.
-    #
-    # @note When making an API call, you may pass UpdateBrokerTypeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_arn: "__string", # required
-    #         current_version: "__string", # required
-    #         target_instance_type: "__string", # required
-    #       }
     #
     # @!attribute [rw] cluster_arn
     #   @return [String]
@@ -3248,15 +2496,6 @@ module Aws::Kafka
 
     # Request body for UpdateBrokerCount.
     #
-    # @note When making an API call, you may pass UpdateBrokerCountRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_arn: "__string", # required
-    #         current_version: "__string", # required
-    #         target_number_of_broker_nodes: 1, # required
-    #       }
-    #
     # @!attribute [rw] cluster_arn
     #   @return [String]
     #
@@ -3299,24 +2538,6 @@ module Aws::Kafka
     end
 
     # Request object for UpdateBrokerStorage.
-    #
-    # @note When making an API call, you may pass UpdateBrokerStorageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_arn: "__string", # required
-    #         current_version: "__string", # required
-    #         target_broker_ebs_volume_info: [ # required
-    #           {
-    #             kafka_broker_node_id: "__string", # required
-    #             provisioned_throughput: {
-    #               enabled: false,
-    #               volume_throughput: 1,
-    #             },
-    #             volume_size_gb: 1,
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] cluster_arn
     #   @return [String]
@@ -3368,18 +2589,6 @@ module Aws::Kafka
 
     # Request body for UpdateClusterConfiguration.
     #
-    # @note When making an API call, you may pass UpdateClusterConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_arn: "__string", # required
-    #         configuration_info: { # required
-    #           arn: "__string", # required
-    #           revision: 1, # required
-    #         },
-    #         current_version: "__string", # required
-    #       }
-    #
     # @!attribute [rw] cluster_arn
     #   @return [String]
     #
@@ -3422,19 +2631,6 @@ module Aws::Kafka
     end
 
     # Request body for UpdateClusterKafkaVersion.
-    #
-    # @note When making an API call, you may pass UpdateClusterKafkaVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_arn: "__string", # required
-    #         configuration_info: {
-    #           arn: "__string", # required
-    #           revision: 1, # required
-    #         },
-    #         current_version: "__string", # required
-    #         target_kafka_version: "__string", # required
-    #       }
     #
     # @!attribute [rw] cluster_arn
     #   @return [String]
@@ -3483,15 +2679,6 @@ module Aws::Kafka
 
     # Request body for UpdateConfiguration.
     #
-    # @note When making an API call, you may pass UpdateConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "__string", # required
-    #         description: "__string",
-    #         server_properties: "data", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the configuration.
     #   @return [String]
@@ -3534,19 +2721,6 @@ module Aws::Kafka
 
     # Request body for UpdateConnectivity.
     #
-    # @note When making an API call, you may pass UpdateConnectivityRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_arn: "__string", # required
-    #         connectivity_info: { # required
-    #           public_access: {
-    #             type: "__string",
-    #           },
-    #         },
-    #         current_version: "__string", # required
-    #       }
-    #
     # @!attribute [rw] cluster_arn
     #   @return [String]
     #
@@ -3588,42 +2762,6 @@ module Aws::Kafka
     end
 
     # Request body for UpdateMonitoring.
-    #
-    # @note When making an API call, you may pass UpdateMonitoringRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_arn: "__string", # required
-    #         current_version: "__string", # required
-    #         enhanced_monitoring: "DEFAULT", # accepts DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, PER_TOPIC_PER_PARTITION
-    #         open_monitoring: {
-    #           prometheus: { # required
-    #             jmx_exporter: {
-    #               enabled_in_broker: false, # required
-    #             },
-    #             node_exporter: {
-    #               enabled_in_broker: false, # required
-    #             },
-    #           },
-    #         },
-    #         logging_info: {
-    #           broker_logs: { # required
-    #             cloud_watch_logs: {
-    #               enabled: false, # required
-    #               log_group: "__string",
-    #             },
-    #             firehose: {
-    #               delivery_stream: "__string",
-    #               enabled: false, # required
-    #             },
-    #             s3: {
-    #               bucket: "__string",
-    #               enabled: false, # required
-    #               prefix: "__string",
-    #             },
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] cluster_arn
     #   @return [String]
@@ -3679,40 +2817,6 @@ module Aws::Kafka
 
     # Request body for UpdateSecurity.
     #
-    # @note When making an API call, you may pass UpdateSecurityRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_authentication: {
-    #           sasl: {
-    #             scram: {
-    #               enabled: false,
-    #             },
-    #             iam: {
-    #               enabled: false,
-    #             },
-    #           },
-    #           tls: {
-    #             certificate_authority_arn_list: ["__string"],
-    #             enabled: false,
-    #           },
-    #           unauthenticated: {
-    #             enabled: false,
-    #           },
-    #         },
-    #         cluster_arn: "__string", # required
-    #         current_version: "__string", # required
-    #         encryption_info: {
-    #           encryption_at_rest: {
-    #             data_volume_kms_key_id: "__string", # required
-    #           },
-    #           encryption_in_transit: {
-    #             client_broker: "TLS", # accepts TLS, TLS_PLAINTEXT, PLAINTEXT
-    #             in_cluster: false,
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_authentication
     #   Includes all client authentication related information.
     #   @return [Types::ClientAuthentication]
@@ -3761,20 +2865,6 @@ module Aws::Kafka
     end
 
     # Request object for UpdateStorageApi.
-    #
-    # @note When making an API call, you may pass UpdateStorageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_arn: "__string", # required
-    #         current_version: "__string", # required
-    #         provisioned_throughput: {
-    #           enabled: false,
-    #           volume_throughput: 1,
-    #         },
-    #         storage_mode: "LOCAL", # accepts LOCAL, TIERED
-    #         volume_size_gb: 1,
-    #       }
     #
     # @!attribute [rw] cluster_arn
     #   @return [String]
@@ -3877,20 +2967,6 @@ module Aws::Kafka
 
     # JMX and Node monitoring for the MSK cluster.
     #
-    # @note When making an API call, you may pass OpenMonitoringInfo
-    #   data as a hash:
-    #
-    #       {
-    #         prometheus: { # required
-    #           jmx_exporter: {
-    #             enabled_in_broker: false, # required
-    #           },
-    #           node_exporter: {
-    #             enabled_in_broker: false, # required
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] prometheus
     #   Prometheus settings.
     #   @return [Types::PrometheusInfo]
@@ -3924,18 +3000,6 @@ module Aws::Kafka
 
     # Prometheus settings.
     #
-    # @note When making an API call, you may pass PrometheusInfo
-    #   data as a hash:
-    #
-    #       {
-    #         jmx_exporter: {
-    #           enabled_in_broker: false, # required
-    #         },
-    #         node_exporter: {
-    #           enabled_in_broker: false, # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] jmx_exporter
     #   JMX Exporter settings.
     #   @return [Types::JmxExporterInfo]
@@ -3955,14 +3019,6 @@ module Aws::Kafka
 
     # Contains information about provisioned throughput for EBS storage
     # volumes attached to kafka broker nodes.
-    #
-    # @note When making an API call, you may pass ProvisionedThroughput
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false,
-    #         volume_throughput: 1,
-    #       }
     #
     # @!attribute [rw] enabled
     #   Provisioned throughput is enabled or not.
@@ -3984,13 +3040,6 @@ module Aws::Kafka
 
     # Broker public access control.
     #
-    # @note When making an API call, you may pass PublicAccess
-    #   data as a hash:
-    #
-    #       {
-    #         type: "__string",
-    #       }
-    #
     # @!attribute [rw] type
     #   The value DISABLED indicates that public access is disabled.
     #   SERVICE\_PROVIDED\_EIPS indicates that public access is enabled.
@@ -4005,14 +3054,6 @@ module Aws::Kafka
     end
 
     # Request body for RebootBrokerNode action.
-    #
-    # @note When making an API call, you may pass RebootBrokerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         broker_ids: ["__string"], # required
-    #         cluster_arn: "__string", # required
-    #       }
     #
     # @!attribute [rw] broker_ids
     #   The list of broker ids to be rebooted.
@@ -4050,15 +3091,6 @@ module Aws::Kafka
     end
 
     # The details of the Amazon S3 destination for broker logs.
-    #
-    # @note When making an API call, you may pass S3
-    #   data as a hash:
-    #
-    #       {
-    #         bucket: "__string",
-    #         enabled: false, # required
-    #         prefix: "__string",
-    #       }
     #
     # @!attribute [rw] bucket
     #   The name of the S3 bucket that is the destination for broker logs.
@@ -4099,13 +3131,6 @@ module Aws::Kafka
 
     # Indicates whether you want to enable or disable the JMX Exporter.
     #
-    # @note When making an API call, you may pass JmxExporterInfo
-    #   data as a hash:
-    #
-    #       {
-    #         enabled_in_broker: false, # required
-    #       }
-    #
     # @!attribute [rw] enabled_in_broker
     #   JMX Exporter being enabled in broker.
     #   @return [Boolean]
@@ -4133,13 +3158,6 @@ module Aws::Kafka
     end
 
     # Indicates whether you want to enable or disable the Node Exporter.
-    #
-    # @note When making an API call, you may pass NodeExporterInfo
-    #   data as a hash:
-    #
-    #       {
-    #         enabled_in_broker: false, # required
-    #       }
     #
     # @!attribute [rw] enabled_in_broker
     #   Node Exporter being enabled in broker.

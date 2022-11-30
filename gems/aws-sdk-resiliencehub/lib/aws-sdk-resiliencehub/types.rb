@@ -25,29 +25,6 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AddDraftAppVersionResourceMappingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_arn: "Arn", # required
-    #         resource_mappings: [ # required
-    #           {
-    #             app_registry_app_name: "EntityName",
-    #             logical_stack_name: "String255",
-    #             mapping_type: "CfnStack", # required, accepts CfnStack, Resource, AppRegistryApp, ResourceGroup, Terraform
-    #             physical_resource_id: { # required
-    #               aws_account_id: "CustomerId",
-    #               aws_region: "AwsRegion",
-    #               identifier: "String255", # required
-    #               type: "Arn", # required, accepts Arn, Native
-    #             },
-    #             resource_group_name: "EntityName",
-    #             resource_name: "EntityName",
-    #             terraform_source_name: "String255",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] app_arn
     #   The Amazon Resource Name (ARN) of the application. The format for
     #   this ARN is:
@@ -711,20 +688,6 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAppRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_schedule: "Disabled", # accepts Disabled, Daily
-    #         client_token: "ClientToken",
-    #         description: "EntityDescription",
-    #         name: "EntityName", # required
-    #         policy_arn: "Arn",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] assessment_schedule
     #   Assessment execution schedule with 'Daily' or 'Disabled' values.
     #   @return [String]
@@ -791,22 +754,6 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateRecommendationTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_arn: "Arn", # required
-    #         bucket_name: "EntityName",
-    #         client_token: "ClientToken",
-    #         format: "CfnYaml", # accepts CfnYaml, CfnJson
-    #         name: "EntityName", # required
-    #         recommendation_ids: ["Uuid"],
-    #         recommendation_types: ["Alarm"], # accepts Alarm, Sop, Test
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] assessment_arn
     #   The Amazon Resource Name (ARN) of the assessment. The format for
     #   this ARN is:
@@ -906,26 +853,6 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateResiliencyPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         data_location_constraint: "AnyLocation", # accepts AnyLocation, SameContinent, SameCountry
-    #         policy: { # required
-    #           "Software" => {
-    #             rpo_in_secs: 1, # required
-    #             rto_in_secs: 1, # required
-    #           },
-    #         },
-    #         policy_description: "EntityDescription",
-    #         policy_name: "EntityName", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         tier: "MissionCritical", # required, accepts MissionCritical, Critical, Important, CoreServices, NonCritical
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Used for an idempotency token. A client token is a unique,
     #   case-sensitive string of up to 64 ASCII characters. You should not
@@ -992,14 +919,6 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAppAssessmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_arn: "Arn", # required
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] assessment_arn
     #   The Amazon Resource Name (ARN) of the assessment. The format for
     #   this ARN is:
@@ -1055,15 +974,6 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAppRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_arn: "Arn", # required
-    #         client_token: "ClientToken",
-    #         force_delete: false,
-    #       }
-    #
     # @!attribute [rw] app_arn
     #   The Amazon Resource Name (ARN) of the application. The format for
     #   this ARN is:
@@ -1120,14 +1030,6 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteRecommendationTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         recommendation_template_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Used for an idempotency token. A client token is a unique,
     #   case-sensitive string of up to 64 ASCII characters. You should not
@@ -1167,14 +1069,6 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteResiliencyPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         policy_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Used for an idempotency token. A client token is a unique,
     #   case-sensitive string of up to 64 ASCII characters. You should not
@@ -1225,13 +1119,6 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAppAssessmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] assessment_arn
     #   The Amazon Resource Name (ARN) of the assessment. The format for
     #   this ARN is:
@@ -1267,13 +1154,6 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAppRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] app_arn
     #   The Amazon Resource Name (ARN) of the application. The format for
     #   this ARN is:
@@ -1308,15 +1188,6 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAppVersionResourcesResolutionStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_arn: "Arn", # required
-    #         app_version: "EntityVersion", # required
-    #         resolution_id: "String255",
-    #       }
-    #
     # @!attribute [rw] app_arn
     #   The Amazon Resource Name (ARN) of the application. The format for
     #   this ARN is:
@@ -1387,14 +1258,6 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAppVersionTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_arn: "Arn", # required
-    #         app_version: "EntityVersion", # required
-    #       }
-    #
     # @!attribute [rw] app_arn
     #   The Amazon Resource Name (ARN) of the application. The format for
     #   this ARN is:
@@ -1450,13 +1313,6 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDraftAppVersionResourcesImportStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] app_arn
     #   The Amazon Resource Name (ARN) of the application. The format for
     #   this ARN is:
@@ -1517,13 +1373,6 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeResiliencyPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] policy_arn
     #   The Amazon Resource Name (ARN) of the resiliency policy. The format
     #   for this ARN is:
@@ -1621,14 +1470,6 @@ module Aws::ResilienceHub
 
     # Defines a failure policy.
     #
-    # @note When making an API call, you may pass FailurePolicy
-    #   data as a hash:
-    #
-    #       {
-    #         rpo_in_secs: 1, # required
-    #         rto_in_secs: 1, # required
-    #       }
-    #
     # @!attribute [rw] rpo_in_secs
     #   The Recovery Point Objective (RPO), in seconds.
     #   @return [Integer]
@@ -1646,19 +1487,6 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ImportResourcesToDraftAppVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_arn: "Arn", # required
-    #         source_arns: ["Arn"],
-    #         terraform_sources: [
-    #           {
-    #             s3_state_file_url: "S3Url", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] app_arn
     #   The Amazon Resource Name (ARN) of the application. The format for
     #   this ARN is:
@@ -1745,15 +1573,6 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAlarmRecommendationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_arn: "Arn", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] assessment_arn
     #   The Amazon Resource Name (ARN) of the assessment. The format for
     #   this ARN is:
@@ -1809,20 +1628,6 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAppAssessmentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_arn: "Arn",
-    #         assessment_name: "EntityName",
-    #         assessment_status: ["Pending"], # accepts Pending, InProgress, Failed, Success
-    #         compliance_status: "PolicyBreached", # accepts PolicyBreached, PolicyMet
-    #         invoker: "User", # accepts User, System
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         reverse_order: false,
-    #       }
-    #
     # @!attribute [rw] app_arn
     #   The Amazon Resource Name (ARN) of the application. The format for
     #   this ARN is:
@@ -1905,15 +1710,6 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAppComponentCompliancesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_arn: "Arn", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] assessment_arn
     #   The Amazon Resource Name (ARN) of the assessment. The format for
     #   this ARN is:
@@ -1968,15 +1764,6 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAppComponentRecommendationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_arn: "Arn", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] assessment_arn
     #   The Amazon Resource Name (ARN) of the assessment. The format for
     #   this ARN is:
@@ -2031,16 +1818,6 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAppVersionResourceMappingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_arn: "Arn", # required
-    #         app_version: "EntityVersion", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] app_arn
     #   The Amazon Resource Name (ARN) of the application. The format for
     #   this ARN is:
@@ -2103,17 +1880,6 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAppVersionResourcesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_arn: "Arn", # required
-    #         app_version: "EntityVersion", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         resolution_id: "String255",
-    #       }
-    #
     # @!attribute [rw] app_arn
     #   The Amazon Resource Name (ARN) of the application. The format for
     #   this ARN is:
@@ -2181,15 +1947,6 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAppVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_arn: "Arn", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] app_arn
     #   The Amazon Resource Name (ARN) of the application. The format for
     #   this ARN is:
@@ -2242,16 +1999,6 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAppsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_arn: "Arn",
-    #         max_results: 1,
-    #         name: "EntityName",
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] app_arn
     #   The Amazon Resource Name (ARN) of the application. The format for
     #   this ARN is:
@@ -2309,19 +2056,6 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRecommendationTemplatesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_arn: "Arn", # required
-    #         max_results: 1,
-    #         name: "EntityName",
-    #         next_token: "NextToken",
-    #         recommendation_template_arn: "Arn",
-    #         reverse_order: false,
-    #         status: ["Pending"], # accepts Pending, InProgress, Failed, Success
-    #       }
-    #
     # @!attribute [rw] assessment_arn
     #   The Amazon Resource Name (ARN) of the assessment. The format for
     #   this ARN is:
@@ -2395,15 +2129,6 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListResiliencyPoliciesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         policy_name: "EntityName",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to include in the response. If more
     #   results exist than the specified `MaxResults` value, a token is
@@ -2448,15 +2173,6 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSopRecommendationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_arn: "Arn", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] assessment_arn
     #   The Amazon Resource Name (ARN) of the assessment. The format for
     #   this ARN is:
@@ -2510,14 +2226,6 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSuggestedResiliencyPoliciesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to include in the response. If more
     #   results exist than the specified `MaxResults` value, a token is
@@ -2558,13 +2266,6 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) for a specific resource in your
     #   Resilience Hub application.
@@ -2592,15 +2293,6 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTestRecommendationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_arn: "Arn", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] assessment_arn
     #   The Amazon Resource Name (ARN) of the assessment. The format for
     #   this ARN is:
@@ -2653,17 +2345,6 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListUnsupportedAppVersionResourcesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_arn: "Arn", # required
-    #         app_version: "EntityVersion", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         resolution_id: "String255",
-    #       }
-    #
     # @!attribute [rw] app_arn
     #   The Amazon Resource Name (ARN) of the application. The format for
     #   this ARN is:
@@ -2798,16 +2479,6 @@ module Aws::ResilienceHub
 
     # Defines a physical resource identifier.
     #
-    # @note When making an API call, you may pass PhysicalResourceId
-    #   data as a hash:
-    #
-    #       {
-    #         aws_account_id: "CustomerId",
-    #         aws_region: "AwsRegion",
-    #         identifier: "String255", # required
-    #         type: "Arn", # required, accepts Arn, Native
-    #       }
-    #
     # @!attribute [rw] aws_account_id
     #   The Amazon Web Services account that owns the physical resource.
     #   @return [String]
@@ -2844,13 +2515,6 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PublishAppVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] app_arn
     #   The Amazon Resource Name (ARN) of the application. The format for
     #   this ARN is:
@@ -2896,14 +2560,6 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutDraftAppVersionTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_arn: "Arn", # required
-    #         app_template_body: "AppTemplateBody", # required
-    #       }
-    #
     # @!attribute [rw] app_arn
     #   The Amazon Resource Name (ARN) of the application. The format for
     #   this ARN is:
@@ -3142,18 +2798,6 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RemoveDraftAppVersionResourceMappingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_arn: "Arn", # required
-    #         app_registry_app_names: ["EntityName"],
-    #         logical_stack_names: ["String255"],
-    #         resource_group_names: ["EntityName"],
-    #         resource_names: ["EntityName"],
-    #         terraform_source_names: ["String255"],
-    #       }
-    #
     # @!attribute [rw] app_arn
     #   The Amazon Resource Name (ARN) of the application. The format for
     #   this ARN is:
@@ -3313,14 +2957,6 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ResolveAppVersionResourcesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_arn: "Arn", # required
-    #         app_version: "EntityVersion", # required
-    #       }
-    #
     # @!attribute [rw] app_arn
     #   The Amazon Resource Name (ARN) of the application. The format for
     #   this ARN is:
@@ -3426,24 +3062,6 @@ module Aws::ResilienceHub
     end
 
     # Defines a resource mapping.
-    #
-    # @note When making an API call, you may pass ResourceMapping
-    #   data as a hash:
-    #
-    #       {
-    #         app_registry_app_name: "EntityName",
-    #         logical_stack_name: "String255",
-    #         mapping_type: "CfnStack", # required, accepts CfnStack, Resource, AppRegistryApp, ResourceGroup, Terraform
-    #         physical_resource_id: { # required
-    #           aws_account_id: "CustomerId",
-    #           aws_region: "AwsRegion",
-    #           identifier: "String255", # required
-    #           type: "Arn", # required, accepts Arn, Native
-    #         },
-    #         resource_group_name: "EntityName",
-    #         resource_name: "EntityName",
-    #         terraform_source_name: "String255",
-    #       }
     #
     # @!attribute [rw] app_registry_app_name
     #   The name of the application this resource is mapped to.
@@ -3614,19 +3232,6 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartAppAssessmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_arn: "Arn", # required
-    #         app_version: "EntityVersion", # required
-    #         assessment_name: "EntityName", # required
-    #         client_token: "ClientToken",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] app_arn
     #   The Amazon Resource Name (ARN) of the application. The format for
     #   this ARN is:
@@ -3686,16 +3291,6 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -3719,13 +3314,6 @@ module Aws::ResilienceHub
     class TagResourceResponse < Aws::EmptyStructure; end
 
     # The Terraform s3 state file you need to import.
-    #
-    # @note When making an API call, you may pass TerraformSource
-    #   data as a hash:
-    #
-    #       {
-    #         s3_state_file_url: "S3Url", # required
-    #       }
     #
     # @!attribute [rw] s3_state_file_url
     #   The Terraform s3 state file you need to import.
@@ -3846,14 +3434,6 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -3875,17 +3455,6 @@ module Aws::ResilienceHub
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateAppRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_arn: "Arn", # required
-    #         assessment_schedule: "Disabled", # accepts Disabled, Daily
-    #         clear_resiliency_policy_arn: false,
-    #         description: "EntityDescription",
-    #         policy_arn: "Arn",
-    #       }
-    #
     # @!attribute [rw] app_arn
     #   The Amazon Resource Name (ARN) of the application. The format for
     #   this ARN is:
@@ -3948,23 +3517,6 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateResiliencyPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         data_location_constraint: "AnyLocation", # accepts AnyLocation, SameContinent, SameCountry
-    #         policy: {
-    #           "Software" => {
-    #             rpo_in_secs: 1, # required
-    #             rto_in_secs: 1, # required
-    #           },
-    #         },
-    #         policy_arn: "Arn", # required
-    #         policy_description: "EntityDescription",
-    #         policy_name: "EntityName",
-    #         tier: "MissionCritical", # accepts MissionCritical, Critical, Important, CoreServices, NonCritical
-    #       }
-    #
     # @!attribute [rw] data_location_constraint
     #   Specifies a high-level geographical location constraint for where
     #   your resilience policy data can be stored.

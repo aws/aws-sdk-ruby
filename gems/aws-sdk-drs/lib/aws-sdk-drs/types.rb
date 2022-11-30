@@ -123,16 +123,6 @@ module Aws::Drs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateExtendedSourceServerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source_server_arn: "SourceServerARN", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] source_server_arn
     #   This defines the ARN of the source server in staging Account based
     #   on which you want to create an extended source server.
@@ -163,38 +153,6 @@ module Aws::Drs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateReplicationConfigurationTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         associate_default_security_group: false, # required
-    #         bandwidth_throttling: 1, # required
-    #         create_public_ip: false, # required
-    #         data_plane_routing: "PRIVATE_IP", # required, accepts PRIVATE_IP, PUBLIC_IP
-    #         default_large_staging_disk_type: "GP2", # required, accepts GP2, GP3, ST1, AUTO
-    #         ebs_encryption: "DEFAULT", # required, accepts DEFAULT, CUSTOM
-    #         ebs_encryption_key_arn: "ARN",
-    #         pit_policy: [ # required
-    #           {
-    #             enabled: false,
-    #             interval: 1, # required
-    #             retention_duration: 1, # required
-    #             rule_id: 1,
-    #             units: "MINUTE", # required, accepts MINUTE, HOUR, DAY
-    #           },
-    #         ],
-    #         replication_server_instance_type: "EC2InstanceType", # required
-    #         replication_servers_security_groups_i_ds: ["SecurityGroupID"], # required
-    #         staging_area_subnet_id: "SubnetID", # required
-    #         staging_area_tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         use_dedicated_replication_server: false, # required
-    #       }
-    #
     # @!attribute [rw] associate_default_security_group
     #   Whether to associate the default Elastic Disaster Recovery Security
     #   group with the Replication Configuration Template.
@@ -415,13 +373,6 @@ module Aws::Drs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobID", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The ID of the Job to be deleted.
     #   @return [String]
@@ -438,13 +389,6 @@ module Aws::Drs
     #
     class DeleteJobResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteRecoveryInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         recovery_instance_id: "RecoveryInstanceID", # required
-    #       }
-    #
     # @!attribute [rw] recovery_instance_id
     #   The ID of the Recovery Instance to be deleted.
     #   @return [String]
@@ -457,13 +401,6 @@ module Aws::Drs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteReplicationConfigurationTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         replication_configuration_template_id: "ReplicationConfigurationTemplateID", # required
-    #       }
-    #
     # @!attribute [rw] replication_configuration_template_id
     #   The ID of the Replication Configuration Template to be deleted.
     #   @return [String]
@@ -480,13 +417,6 @@ module Aws::Drs
     #
     class DeleteReplicationConfigurationTemplateResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteSourceServerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source_server_id: "SourceServerID", # required
-    #       }
-    #
     # @!attribute [rw] source_server_id
     #   The ID of the Source Server to be deleted.
     #   @return [String]
@@ -503,15 +433,6 @@ module Aws::Drs
     #
     class DeleteSourceServerResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeJobLogItemsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobID", # required
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The ID of the Job for which Job log items will be retrieved.
     #   @return [String]
@@ -551,19 +472,6 @@ module Aws::Drs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: {
-    #           from_date: "ISO8601DatetimeString",
-    #           job_i_ds: ["JobID"],
-    #           to_date: "ISO8601DatetimeString",
-    #         },
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] filters
     #   A set of filters by which to return Jobs.
     #   @return [Types::DescribeJobsRequestFilters]
@@ -587,15 +495,6 @@ module Aws::Drs
     end
 
     # A set of filters by which to return Jobs.
-    #
-    # @note When making an API call, you may pass DescribeJobsRequestFilters
-    #   data as a hash:
-    #
-    #       {
-    #         from_date: "ISO8601DatetimeString",
-    #         job_i_ds: ["JobID"],
-    #         to_date: "ISO8601DatetimeString",
-    #       }
     #
     # @!attribute [rw] from_date
     #   The start date in a date range query.
@@ -637,18 +536,6 @@ module Aws::Drs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeRecoveryInstancesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: {
-    #           recovery_instance_i_ds: ["RecoveryInstanceID"],
-    #           source_server_i_ds: ["SourceServerID"],
-    #         },
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] filters
     #   A set of filters by which to return Recovery Instances.
     #   @return [Types::DescribeRecoveryInstancesRequestFilters]
@@ -672,14 +559,6 @@ module Aws::Drs
     end
 
     # A set of filters by which to return Recovery Instances.
-    #
-    # @note When making an API call, you may pass DescribeRecoveryInstancesRequestFilters
-    #   data as a hash:
-    #
-    #       {
-    #         recovery_instance_i_ds: ["RecoveryInstanceID"],
-    #         source_server_i_ds: ["SourceServerID"],
-    #       }
     #
     # @!attribute [rw] recovery_instance_i_ds
     #   An array of Recovery Instance IDs that should be returned. An empty
@@ -717,20 +596,6 @@ module Aws::Drs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeRecoverySnapshotsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: {
-    #           from_date_time: "ISO8601DatetimeString",
-    #           to_date_time: "ISO8601DatetimeString",
-    #         },
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #         order: "ASC", # accepts ASC, DESC
-    #         source_server_id: "SourceServerID", # required
-    #       }
-    #
     # @!attribute [rw] filters
     #   A set of filters by which to return Recovery Snapshots.
     #   @return [Types::DescribeRecoverySnapshotsRequestFilters]
@@ -764,14 +629,6 @@ module Aws::Drs
     end
 
     # A set of filters by which to return Recovery Snapshots.
-    #
-    # @note When making an API call, you may pass DescribeRecoverySnapshotsRequestFilters
-    #   data as a hash:
-    #
-    #       {
-    #         from_date_time: "ISO8601DatetimeString",
-    #         to_date_time: "ISO8601DatetimeString",
-    #       }
     #
     # @!attribute [rw] from_date_time
     #   The start date in a date range query.
@@ -807,15 +664,6 @@ module Aws::Drs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeReplicationConfigurationTemplatesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #         replication_configuration_template_i_ds: ["ReplicationConfigurationTemplateID"],
-    #       }
-    #
     # @!attribute [rw] max_results
     #   Maximum number of Replication Configuration Templates to retrieve.
     #   @return [Integer]
@@ -858,19 +706,6 @@ module Aws::Drs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeSourceServersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: {
-    #           hardware_id: "BoundedString",
-    #           source_server_i_ds: ["SourceServerID"],
-    #           staging_account_i_ds: ["AccountID"],
-    #         },
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] filters
     #   A set of filters by which to return Source Servers.
     #   @return [Types::DescribeSourceServersRequestFilters]
@@ -894,15 +729,6 @@ module Aws::Drs
     end
 
     # A set of filters by which to return Source Servers.
-    #
-    # @note When making an API call, you may pass DescribeSourceServersRequestFilters
-    #   data as a hash:
-    #
-    #       {
-    #         hardware_id: "BoundedString",
-    #         source_server_i_ds: ["SourceServerID"],
-    #         staging_account_i_ds: ["AccountID"],
-    #       }
     #
     # @!attribute [rw] hardware_id
     #   An ID that describes the hardware of the Source Server. This is
@@ -946,13 +772,6 @@ module Aws::Drs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisconnectRecoveryInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         recovery_instance_id: "RecoveryInstanceID", # required
-    #       }
-    #
     # @!attribute [rw] recovery_instance_id
     #   The ID of the Recovery Instance to disconnect.
     #   @return [String]
@@ -965,13 +784,6 @@ module Aws::Drs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisconnectSourceServerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source_server_id: "SourceServerID", # required
-    #       }
-    #
     # @!attribute [rw] source_server_id
     #   The ID of the Source Server to disconnect.
     #   @return [String]
@@ -1003,13 +815,6 @@ module Aws::Drs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetFailbackReplicationConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         recovery_instance_id: "RecoveryInstanceID", # required
-    #       }
-    #
     # @!attribute [rw] recovery_instance_id
     #   The ID of the Recovery Instance whose failback replication
     #   configuration should be returned.
@@ -1052,13 +857,6 @@ module Aws::Drs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLaunchConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source_server_id: "SourceServerID", # required
-    #       }
-    #
     # @!attribute [rw] source_server_id
     #   The ID of the Source Server that we want to retrieve a Launch
     #   Configuration for.
@@ -1072,13 +870,6 @@ module Aws::Drs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetReplicationConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source_server_id: "SourceServerID", # required
-    #       }
-    #
     # @!attribute [rw] source_server_id
     #   The ID of the Source Serve for this Replication Configuration.r
     #   @return [String]
@@ -1120,8 +911,6 @@ module Aws::Drs
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/InitializeServiceRequest AWS API Documentation
     #
     class InitializeServiceRequest < Aws::EmptyStructure; end
@@ -1317,13 +1106,6 @@ module Aws::Drs
 
     # Configuration of a machine's license.
     #
-    # @note When making an API call, you may pass Licensing
-    #   data as a hash:
-    #
-    #       {
-    #         os_byol: false,
-    #       }
-    #
     # @!attribute [rw] os_byol
     #   Whether to enable "Bring your own license" or not.
     #   @return [Boolean]
@@ -1414,15 +1196,6 @@ module Aws::Drs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListExtensibleSourceServersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #         staging_account_id: "AccountID", # required
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of extensible source servers to retrieve.
     #   @return [Integer]
@@ -1463,14 +1236,6 @@ module Aws::Drs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListStagingAccountsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of staging Accounts to retrieve.
     #   @return [Integer]
@@ -1505,13 +1270,6 @@ module Aws::Drs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource whose tags should be returned.
     #   @return [String]
@@ -1576,17 +1334,6 @@ module Aws::Drs
 
     # A rule in the Point in Time (PIT) policy representing when to take
     # snapshots and how long to retain them for.
-    #
-    # @note When making an API call, you may pass PITPolicyRule
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false,
-    #         interval: 1, # required
-    #         retention_duration: 1, # required
-    #         rule_id: 1,
-    #         units: "MINUTE", # required, accepts MINUTE, HOUR, DAY
-    #       }
     #
     # @!attribute [rw] enabled
     #   Whether this rule is enabled or not.
@@ -2121,18 +1868,6 @@ module Aws::Drs
 
     # The configuration of a disk of the Source Server to be replicated.
     #
-    # @note When making an API call, you may pass ReplicationConfigurationReplicatedDisk
-    #   data as a hash:
-    #
-    #       {
-    #         device_name: "BoundedString",
-    #         iops: 1,
-    #         is_boot_disk: false,
-    #         optimized_staging_disk_type: "AUTO", # accepts AUTO, GP2, GP3, IO1, SC1, ST1, STANDARD
-    #         staging_disk_type: "AUTO", # accepts AUTO, GP2, GP3, IO1, SC1, ST1, STANDARD
-    #         throughput: 1,
-    #       }
-    #
     # @!attribute [rw] device_name
     #   The name of the device.
     #   @return [String]
@@ -2294,13 +2029,6 @@ module Aws::Drs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RetryDataReplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source_server_id: "SourceServerID", # required
-    #       }
-    #
     # @!attribute [rw] source_server_id
     #   The ID of the Source Server whose data replication should be
     #   retried.
@@ -2314,13 +2042,6 @@ module Aws::Drs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ReverseReplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         recovery_instance_id: "RecoveryInstanceID", # required
-    #       }
-    #
     # @!attribute [rw] recovery_instance_id
     #   The ID of the Recovery Instance that we want to reverse the
     #   replication for.
@@ -2593,16 +2314,6 @@ module Aws::Drs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartFailbackLaunchRequest
-    #   data as a hash:
-    #
-    #       {
-    #         recovery_instance_i_ds: ["RecoveryInstanceID"], # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] recovery_instance_i_ds
     #   The IDs of the Recovery Instance whose failback launch we want to
     #   request.
@@ -2633,22 +2344,6 @@ module Aws::Drs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartRecoveryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         is_drill: false,
-    #         source_servers: [ # required
-    #           {
-    #             recovery_snapshot_id: "RecoverySnapshotID",
-    #             source_server_id: "SourceServerID", # required
-    #           },
-    #         ],
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] is_drill
     #   Whether this Source Server Recovery operation is a drill or not.
     #   @return [Boolean]
@@ -2672,14 +2367,6 @@ module Aws::Drs
     end
 
     # An object representing the Source Server to recover.
-    #
-    # @note When making an API call, you may pass StartRecoveryRequestSourceServer
-    #   data as a hash:
-    #
-    #       {
-    #         recovery_snapshot_id: "RecoverySnapshotID",
-    #         source_server_id: "SourceServerID", # required
-    #       }
     #
     # @!attribute [rw] recovery_snapshot_id
     #   The ID of a Recovery Snapshot we want to recover from. Omit this
@@ -2712,13 +2399,6 @@ module Aws::Drs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartReplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source_server_id: "SourceServerID", # required
-    #       }
-    #
     # @!attribute [rw] source_server_id
     #   The ID of the Source Server to start replication for.
     #   @return [String]
@@ -2743,13 +2423,6 @@ module Aws::Drs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopFailbackRequest
-    #   data as a hash:
-    #
-    #       {
-    #         recovery_instance_id: "RecoveryInstanceID", # required
-    #       }
-    #
     # @!attribute [rw] recovery_instance_id
     #   The ID of the Recovery Instance we want to stop failback for.
     #   @return [String]
@@ -2762,13 +2435,6 @@ module Aws::Drs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopReplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source_server_id: "SourceServerID", # required
-    #       }
-    #
     # @!attribute [rw] source_server_id
     #   The ID of the Source Server to stop replication for.
     #   @return [String]
@@ -2793,16 +2459,6 @@ module Aws::Drs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ARN", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   ARN of the resource for which tags are to be added or updated.
     #   @return [String]
@@ -2820,13 +2476,6 @@ module Aws::Drs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TerminateRecoveryInstancesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         recovery_instance_i_ds: ["RecoveryInstanceID"], # required
-    #       }
-    #
     # @!attribute [rw] recovery_instance_i_ds
     #   The IDs of the Recovery Instances that should be terminated.
     #   @return [Array<String>]
@@ -2897,14 +2546,6 @@ module Aws::Drs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ARN", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   ARN of the resource for which tags are to be removed.
     #   @return [String]
@@ -2922,16 +2563,6 @@ module Aws::Drs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateFailbackReplicationConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         bandwidth_throttling: 1,
-    #         name: "BoundedString",
-    #         recovery_instance_id: "RecoveryInstanceID", # required
-    #         use_private_ip: false,
-    #       }
-    #
     # @!attribute [rw] bandwidth_throttling
     #   Configure bandwidth throttling for the outbound data transfer rate
     #   of the Recovery Instance in Mbps.
@@ -2961,21 +2592,6 @@ module Aws::Drs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateLaunchConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         copy_private_ip: false,
-    #         copy_tags: false,
-    #         launch_disposition: "STOPPED", # accepts STOPPED, STARTED
-    #         licensing: {
-    #           os_byol: false,
-    #         },
-    #         name: "SmallBoundedString",
-    #         source_server_id: "SourceServerID", # required
-    #         target_instance_type_right_sizing_method: "NONE", # accepts NONE, BASIC
-    #       }
-    #
     # @!attribute [rw] copy_private_ip
     #   Whether we should copy the Private IP of the Source Server to the
     #   Recovery Instance.
@@ -3025,47 +2641,6 @@ module Aws::Drs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateReplicationConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         associate_default_security_group: false,
-    #         bandwidth_throttling: 1,
-    #         create_public_ip: false,
-    #         data_plane_routing: "PRIVATE_IP", # accepts PRIVATE_IP, PUBLIC_IP
-    #         default_large_staging_disk_type: "GP2", # accepts GP2, GP3, ST1, AUTO
-    #         ebs_encryption: "DEFAULT", # accepts DEFAULT, CUSTOM
-    #         ebs_encryption_key_arn: "ARN",
-    #         name: "SmallBoundedString",
-    #         pit_policy: [
-    #           {
-    #             enabled: false,
-    #             interval: 1, # required
-    #             retention_duration: 1, # required
-    #             rule_id: 1,
-    #             units: "MINUTE", # required, accepts MINUTE, HOUR, DAY
-    #           },
-    #         ],
-    #         replicated_disks: [
-    #           {
-    #             device_name: "BoundedString",
-    #             iops: 1,
-    #             is_boot_disk: false,
-    #             optimized_staging_disk_type: "AUTO", # accepts AUTO, GP2, GP3, IO1, SC1, ST1, STANDARD
-    #             staging_disk_type: "AUTO", # accepts AUTO, GP2, GP3, IO1, SC1, ST1, STANDARD
-    #             throughput: 1,
-    #           },
-    #         ],
-    #         replication_server_instance_type: "EC2InstanceType",
-    #         replication_servers_security_groups_i_ds: ["SecurityGroupID"],
-    #         source_server_id: "SourceServerID", # required
-    #         staging_area_subnet_id: "SubnetID",
-    #         staging_area_tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         use_dedicated_replication_server: false,
-    #       }
-    #
     # @!attribute [rw] associate_default_security_group
     #   Whether to associate the default Elastic Disaster Recovery Security
     #   group with the Replication Configuration.
@@ -3160,37 +2735,6 @@ module Aws::Drs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateReplicationConfigurationTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "ARN",
-    #         associate_default_security_group: false,
-    #         bandwidth_throttling: 1,
-    #         create_public_ip: false,
-    #         data_plane_routing: "PRIVATE_IP", # accepts PRIVATE_IP, PUBLIC_IP
-    #         default_large_staging_disk_type: "GP2", # accepts GP2, GP3, ST1, AUTO
-    #         ebs_encryption: "DEFAULT", # accepts DEFAULT, CUSTOM
-    #         ebs_encryption_key_arn: "ARN",
-    #         pit_policy: [
-    #           {
-    #             enabled: false,
-    #             interval: 1, # required
-    #             retention_duration: 1, # required
-    #             rule_id: 1,
-    #             units: "MINUTE", # required, accepts MINUTE, HOUR, DAY
-    #           },
-    #         ],
-    #         replication_configuration_template_id: "ReplicationConfigurationTemplateID", # required
-    #         replication_server_instance_type: "EC2InstanceType",
-    #         replication_servers_security_groups_i_ds: ["SecurityGroupID"],
-    #         staging_area_subnet_id: "SubnetID",
-    #         staging_area_tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         use_dedicated_replication_server: false,
-    #       }
-    #
     # @!attribute [rw] arn
     #   The Replication Configuration Template ARN.
     #   @return [String]

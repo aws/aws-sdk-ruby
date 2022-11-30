@@ -27,20 +27,6 @@ module Aws::Braket
     # image the job uses and the paths to the Python scripts used for entry
     # and training.
     #
-    # @note When making an API call, you may pass AlgorithmSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         container_image: {
-    #           uri: "Uri", # required
-    #         },
-    #         script_mode_config: {
-    #           compression_type: "NONE", # accepts NONE, GZIP
-    #           entry_point: "String", # required
-    #           s3_uri: "S3Path", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] container_image
     #   The container image used to create an Amazon Braket job.
     #   @return [Types::ContainerImage]
@@ -59,13 +45,6 @@ module Aws::Braket
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CancelJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_arn: "JobArn", # required
-    #       }
-    #
     # @!attribute [rw] job_arn
     #   The ARN of the Amazon Braket job to cancel.
     #   @return [String]
@@ -95,14 +74,6 @@ module Aws::Braket
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CancelQuantumTaskRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "String64", # required
-    #         quantum_task_arn: "QuantumTaskArn", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   The client token associated with the request.
     #
@@ -155,13 +126,6 @@ module Aws::Braket
 
     # The container image used to create an Amazon Braket job.
     #
-    # @note When making an API call, you may pass ContainerImage
-    #   data as a hash:
-    #
-    #       {
-    #         uri: "Uri", # required
-    #       }
-    #
     # @!attribute [rw] uri
     #   The URI locating the container image.
     #   @return [String]
@@ -174,61 +138,6 @@ module Aws::Braket
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         algorithm_specification: { # required
-    #           container_image: {
-    #             uri: "Uri", # required
-    #           },
-    #           script_mode_config: {
-    #             compression_type: "NONE", # accepts NONE, GZIP
-    #             entry_point: "String", # required
-    #             s3_uri: "S3Path", # required
-    #           },
-    #         },
-    #         checkpoint_config: {
-    #           local_path: "String4096",
-    #           s3_uri: "S3Path", # required
-    #         },
-    #         client_token: "String64", # required
-    #         device_config: { # required
-    #           device: "String256", # required
-    #         },
-    #         hyper_parameters: {
-    #           "String256" => "HyperParametersValueString",
-    #         },
-    #         input_data_config: [
-    #           {
-    #             channel_name: "InputFileConfigChannelNameString", # required
-    #             content_type: "String256",
-    #             data_source: { # required
-    #               s3_data_source: { # required
-    #                 s3_uri: "S3Path", # required
-    #               },
-    #             },
-    #           },
-    #         ],
-    #         instance_config: { # required
-    #           instance_count: 1,
-    #           instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
-    #           volume_size_in_gb: 1, # required
-    #         },
-    #         job_name: "CreateJobRequestJobNameString", # required
-    #         output_data_config: { # required
-    #           kms_key_id: "String2048",
-    #           s3_path: "S3Path", # required
-    #         },
-    #         role_arn: "RoleArn", # required
-    #         stopping_condition: {
-    #           max_runtime_in_seconds: 1,
-    #         },
-    #         tags: {
-    #           "String" => "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] algorithm_specification
     #   Definition of the Amazon Braket job to be created. Specifies the
     #   container image the job uses and information about the Python
@@ -325,23 +234,6 @@ module Aws::Braket
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateQuantumTaskRequest
-    #   data as a hash:
-    #
-    #       {
-    #         action: "JsonValue", # required
-    #         client_token: "String64", # required
-    #         device_arn: "DeviceArn", # required
-    #         device_parameters: "CreateQuantumTaskRequestDeviceParametersString",
-    #         job_token: "JobToken",
-    #         output_s3_bucket: "CreateQuantumTaskRequestOutputS3BucketString", # required
-    #         output_s3_key_prefix: "CreateQuantumTaskRequestOutputS3KeyPrefixString", # required
-    #         shots: 1, # required
-    #         tags: {
-    #           "String" => "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] action
     #   The action associated with the task.
     #   @return [String]
@@ -414,15 +306,6 @@ module Aws::Braket
     # Information about the source of the data used by the Amazon Braket
     # job.
     #
-    # @note When making an API call, you may pass DataSource
-    #   data as a hash:
-    #
-    #       {
-    #         s3_data_source: { # required
-    #           s3_uri: "S3Path", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] s3_data_source
     #   Information about the data stored in Amazon S3 used by the Amazon
     #   Braket job.
@@ -438,13 +321,6 @@ module Aws::Braket
 
     # Configures the quantum processing units (QPUs) or simulator used to
     # create and run an Amazon Braket job.
-    #
-    # @note When making an API call, you may pass DeviceConfig
-    #   data as a hash:
-    #
-    #       {
-    #         device: "String256", # required
-    #       }
     #
     # @!attribute [rw] device
     #   The primary quantum processing unit (QPU) or simulator used to
@@ -519,13 +395,6 @@ module Aws::Braket
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDeviceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_arn: "DeviceArn", # required
-    #       }
-    #
     # @!attribute [rw] device_arn
     #   The ARN of the device to retrieve.
     #   @return [String]
@@ -575,13 +444,6 @@ module Aws::Braket
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_arn: "JobArn", # required
-    #       }
-    #
     # @!attribute [rw] job_arn
     #   The ARN of the job to retrieve.
     #   @return [String]
@@ -712,13 +574,6 @@ module Aws::Braket
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetQuantumTaskRequest
-    #   data as a hash:
-    #
-    #       {
-    #         quantum_task_arn: "QuantumTaskArn", # required
-    #       }
-    #
     # @!attribute [rw] quantum_task_arn
     #   the ARN of the task to retrieve.
     #   @return [String]
@@ -801,19 +656,6 @@ module Aws::Braket
     # A list of parameters that specify the input channels, type of input
     # data, and where it is located.
     #
-    # @note When making an API call, you may pass InputFileConfig
-    #   data as a hash:
-    #
-    #       {
-    #         channel_name: "InputFileConfigChannelNameString", # required
-    #         content_type: "String256",
-    #         data_source: { # required
-    #           s3_data_source: { # required
-    #             s3_uri: "S3Path", # required
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] channel_name
     #   A named input source that an Amazon Braket job can consume.
     #   @return [String]
@@ -838,15 +680,6 @@ module Aws::Braket
 
     # Configures the resource instances to use while running the Amazon
     # Braket hybrid job on Amazon Braket.
-    #
-    # @note When making an API call, you may pass InstanceConfig
-    #   data as a hash:
-    #
-    #       {
-    #         instance_count: 1,
-    #         instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
-    #         volume_size_in_gb: 1, # required
-    #       }
     #
     # @!attribute [rw] instance_count
     #   Configures the number of resource instances to use while running an
@@ -888,14 +721,6 @@ module Aws::Braket
 
     # Contains information about the output locations for job checkpoint
     # data.
-    #
-    # @note When making an API call, you may pass JobCheckpointConfig
-    #   data as a hash:
-    #
-    #       {
-    #         local_path: "String4096",
-    #         s3_uri: "S3Path", # required
-    #       }
     #
     # @!attribute [rw] local_path
     #   (Optional) The local directory where checkpoints are written. The
@@ -945,14 +770,6 @@ module Aws::Braket
     # Specifies the path to the S3 location where you want to store job
     # artifacts and the encryption key used to store them.
     #
-    # @note When making an API call, you may pass JobOutputDataConfig
-    #   data as a hash:
-    #
-    #       {
-    #         kms_key_id: "String2048",
-    #         s3_path: "S3Path", # required
-    #       }
-    #
     # @!attribute [rw] kms_key_id
     #   The AWS Key Management Service (AWS KMS) key that Amazon Braket uses
     #   to encrypt the job training artifacts at rest using Amazon S3
@@ -974,13 +791,6 @@ module Aws::Braket
     end
 
     # Specifies limits for how long an Amazon Braket job can run.
-    #
-    # @note When making an API call, you may pass JobStoppingCondition
-    #   data as a hash:
-    #
-    #       {
-    #         max_runtime_in_seconds: 1,
-    #       }
     #
     # @!attribute [rw] max_runtime_in_seconds
     #   The maximum length of time, in seconds, that an Amazon Braket job
@@ -1046,13 +856,6 @@ module Aws::Braket
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   Specify the `resourceArn` for the resource whose tags to display.
     #   @return [String]
@@ -1148,13 +951,6 @@ module Aws::Braket
     # Information about the data stored in Amazon S3 used by the Amazon
     # Braket job.
     #
-    # @note When making an API call, you may pass S3DataSource
-    #   data as a hash:
-    #
-    #       {
-    #         s3_uri: "S3Path", # required
-    #       }
-    #
     # @!attribute [rw] s3_uri
     #   Depending on the value specified for the `S3DataType`, identifies
     #   either a key name prefix or a manifest that locates the S3 data
@@ -1171,15 +967,6 @@ module Aws::Braket
 
     # Contains information about the Python scripts used for entry and by an
     # Amazon Braket job.
-    #
-    # @note When making an API call, you may pass ScriptModeConfig
-    #   data as a hash:
-    #
-    #       {
-    #         compression_type: "NONE", # accepts NONE, GZIP
-    #         entry_point: "String", # required
-    #         s3_uri: "S3Path", # required
-    #       }
     #
     # @!attribute [rw] compression_type
     #   The type of compression used by the Python scripts for an Amazon
@@ -1208,14 +995,6 @@ module Aws::Braket
 
     # The filter to use for searching devices.
     #
-    # @note When making an API call, you may pass SearchDevicesFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "SearchDevicesFilterNameString", # required
-    #         values: ["String256"], # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name to use to filter results.
     #   @return [String]
@@ -1233,20 +1012,6 @@ module Aws::Braket
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SearchDevicesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [ # required
-    #           {
-    #             name: "SearchDevicesFilterNameString", # required
-    #             values: ["String256"], # required
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] filters
     #   The filter values to use to search for a device.
     #   @return [Array<Types::SearchDevicesFilter>]
@@ -1293,15 +1058,6 @@ module Aws::Braket
 
     # A filter used to search for Amazon Braket jobs.
     #
-    # @note When making an API call, you may pass SearchJobsFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String64", # required
-    #         operator: "LT", # required, accepts LT, LTE, EQUAL, GT, GTE, BETWEEN, CONTAINS
-    #         values: ["String256"], # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name to use for the jobs filter.
     #   @return [String]
@@ -1324,21 +1080,6 @@ module Aws::Braket
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SearchJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [ # required
-    #           {
-    #             name: "String64", # required
-    #             operator: "LT", # required, accepts LT, LTE, EQUAL, GT, GTE, BETWEEN, CONTAINS
-    #             values: ["String256"], # required
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] filters
     #   The filter values to use when searching for a job.
     #   @return [Array<Types::SearchJobsFilter>]
@@ -1385,15 +1126,6 @@ module Aws::Braket
 
     # A filter to use to search for tasks.
     #
-    # @note When making an API call, you may pass SearchQuantumTasksFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String64", # required
-    #         operator: "LT", # required, accepts LT, LTE, EQUAL, GT, GTE, BETWEEN
-    #         values: ["String256"], # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the device used for the task.
     #   @return [String]
@@ -1416,21 +1148,6 @@ module Aws::Braket
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SearchQuantumTasksRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [ # required
-    #           {
-    #             name: "String64", # required
-    #             operator: "LT", # required, accepts LT, LTE, EQUAL, GT, GTE, BETWEEN
-    #             values: ["String256"], # required
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] filters
     #   Array of `SearchQuantumTasksFilter` objects.
     #   @return [Array<Types::SearchQuantumTasksFilter>]
@@ -1488,16 +1205,6 @@ module Aws::Braket
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #         tags: { # required
-    #           "String" => "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   Specify the `resourceArn` of the resource to which a tag will be
     #   added.
@@ -1533,14 +1240,6 @@ module Aws::Braket
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #         tag_keys: ["String"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   Specify the `resourceArn` for the resource from which to remove the
     #   tags.

@@ -12,15 +12,6 @@ module Aws::CognitoIdentity
 
     # A provider representing an Amazon Cognito user pool and its client ID.
     #
-    # @note When making an API call, you may pass CognitoIdentityProvider
-    #   data as a hash:
-    #
-    #       {
-    #         provider_name: "CognitoIdentityProviderName",
-    #         client_id: "CognitoIdentityProviderClientId",
-    #         server_side_token_check: false,
-    #       }
-    #
     # @!attribute [rw] provider_name
     #   The provider name for an Amazon Cognito user pool. For example,
     #   `cognito-idp.us-east-1.amazonaws.com/us-east-1_123456789`.
@@ -69,31 +60,6 @@ module Aws::CognitoIdentity
     end
 
     # Input to the CreateIdentityPool action.
-    #
-    # @note When making an API call, you may pass CreateIdentityPoolInput
-    #   data as a hash:
-    #
-    #       {
-    #         identity_pool_name: "IdentityPoolName", # required
-    #         allow_unauthenticated_identities: false, # required
-    #         allow_classic_flow: false,
-    #         supported_login_providers: {
-    #           "IdentityProviderName" => "IdentityProviderId",
-    #         },
-    #         developer_provider_name: "DeveloperProviderName",
-    #         open_id_connect_provider_arns: ["ARNString"],
-    #         cognito_identity_providers: [
-    #           {
-    #             provider_name: "CognitoIdentityProviderName",
-    #             client_id: "CognitoIdentityProviderClientId",
-    #             server_side_token_check: false,
-    #           },
-    #         ],
-    #         saml_provider_arns: ["ARNString"],
-    #         identity_pool_tags: {
-    #           "TagKeysType" => "TagValueType",
-    #         },
-    #       }
     #
     # @!attribute [rw] identity_pool_name
     #   A string that you provide.
@@ -194,13 +160,6 @@ module Aws::CognitoIdentity
 
     # Input to the `DeleteIdentities` action.
     #
-    # @note When making an API call, you may pass DeleteIdentitiesInput
-    #   data as a hash:
-    #
-    #       {
-    #         identity_ids_to_delete: ["IdentityId"], # required
-    #       }
-    #
     # @!attribute [rw] identity_ids_to_delete
     #   A list of 1-60 identities that you want to delete.
     #   @return [Array<String>]
@@ -230,13 +189,6 @@ module Aws::CognitoIdentity
 
     # Input to the DeleteIdentityPool action.
     #
-    # @note When making an API call, you may pass DeleteIdentityPoolInput
-    #   data as a hash:
-    #
-    #       {
-    #         identity_pool_id: "IdentityPoolId", # required
-    #       }
-    #
     # @!attribute [rw] identity_pool_id
     #   An identity pool ID in the format REGION:GUID.
     #   @return [String]
@@ -251,13 +203,6 @@ module Aws::CognitoIdentity
 
     # Input to the `DescribeIdentity` action.
     #
-    # @note When making an API call, you may pass DescribeIdentityInput
-    #   data as a hash:
-    #
-    #       {
-    #         identity_id: "IdentityId", # required
-    #       }
-    #
     # @!attribute [rw] identity_id
     #   A unique identifier in the format REGION:GUID.
     #   @return [String]
@@ -271,13 +216,6 @@ module Aws::CognitoIdentity
     end
 
     # Input to the DescribeIdentityPool action.
-    #
-    # @note When making an API call, you may pass DescribeIdentityPoolInput
-    #   data as a hash:
-    #
-    #       {
-    #         identity_pool_id: "IdentityPoolId", # required
-    #       }
     #
     # @!attribute [rw] identity_pool_id
     #   An identity pool ID in the format REGION:GUID.
@@ -322,17 +260,6 @@ module Aws::CognitoIdentity
     end
 
     # Input to the `GetCredentialsForIdentity` action.
-    #
-    # @note When making an API call, you may pass GetCredentialsForIdentityInput
-    #   data as a hash:
-    #
-    #       {
-    #         identity_id: "IdentityId", # required
-    #         logins: {
-    #           "IdentityProviderName" => "IdentityProviderToken",
-    #         },
-    #         custom_role_arn: "ARNString",
-    #       }
     #
     # @!attribute [rw] identity_id
     #   A unique identifier in the format REGION:GUID.
@@ -396,17 +323,6 @@ module Aws::CognitoIdentity
 
     # Input to the GetId action.
     #
-    # @note When making an API call, you may pass GetIdInput
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         identity_pool_id: "IdentityPoolId", # required
-    #         logins: {
-    #           "IdentityProviderName" => "IdentityProviderToken",
-    #         },
-    #       }
-    #
     # @!attribute [rw] account_id
     #   A standard AWS account ID (9+ digits).
     #   @return [String]
@@ -462,13 +378,6 @@ module Aws::CognitoIdentity
 
     # Input to the `GetIdentityPoolRoles` action.
     #
-    # @note When making an API call, you may pass GetIdentityPoolRolesInput
-    #   data as a hash:
-    #
-    #       {
-    #         identity_pool_id: "IdentityPoolId", # required
-    #       }
-    #
     # @!attribute [rw] identity_pool_id
     #   An identity pool ID in the format REGION:GUID.
     #   @return [String]
@@ -510,21 +419,6 @@ module Aws::CognitoIdentity
     end
 
     # Input to the `GetOpenIdTokenForDeveloperIdentity` action.
-    #
-    # @note When making an API call, you may pass GetOpenIdTokenForDeveloperIdentityInput
-    #   data as a hash:
-    #
-    #       {
-    #         identity_pool_id: "IdentityPoolId", # required
-    #         identity_id: "IdentityId",
-    #         logins: { # required
-    #           "IdentityProviderName" => "IdentityProviderToken",
-    #         },
-    #         principal_tags: {
-    #           "PrincipalTagID" => "PrincipalTagValue",
-    #         },
-    #         token_duration: 1,
-    #       }
     #
     # @!attribute [rw] identity_pool_id
     #   An identity pool ID in the format REGION:GUID.
@@ -603,16 +497,6 @@ module Aws::CognitoIdentity
 
     # Input to the GetOpenIdToken action.
     #
-    # @note When making an API call, you may pass GetOpenIdTokenInput
-    #   data as a hash:
-    #
-    #       {
-    #         identity_id: "IdentityId", # required
-    #         logins: {
-    #           "IdentityProviderName" => "IdentityProviderToken",
-    #         },
-    #       }
-    #
     # @!attribute [rw] identity_id
     #   A unique identifier in the format REGION:GUID.
     #   @return [String]
@@ -654,14 +538,6 @@ module Aws::CognitoIdentity
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetPrincipalTagAttributeMapInput
-    #   data as a hash:
-    #
-    #       {
-    #         identity_pool_id: "IdentityPoolId", # required
-    #         identity_provider_name: "IdentityProviderName", # required
-    #       }
-    #
     # @!attribute [rw] identity_pool_id
     #   You can use this operation to get the ID of the Identity Pool you
     #   setup attribute mappings for.
@@ -740,32 +616,6 @@ module Aws::CognitoIdentity
     end
 
     # An object representing an Amazon Cognito identity pool.
-    #
-    # @note When making an API call, you may pass IdentityPool
-    #   data as a hash:
-    #
-    #       {
-    #         identity_pool_id: "IdentityPoolId", # required
-    #         identity_pool_name: "IdentityPoolName", # required
-    #         allow_unauthenticated_identities: false, # required
-    #         allow_classic_flow: false,
-    #         supported_login_providers: {
-    #           "IdentityProviderName" => "IdentityProviderId",
-    #         },
-    #         developer_provider_name: "DeveloperProviderName",
-    #         open_id_connect_provider_arns: ["ARNString"],
-    #         cognito_identity_providers: [
-    #           {
-    #             provider_name: "CognitoIdentityProviderName",
-    #             client_id: "CognitoIdentityProviderClientId",
-    #             server_side_token_check: false,
-    #           },
-    #         ],
-    #         saml_provider_arns: ["ARNString"],
-    #         identity_pool_tags: {
-    #           "TagKeysType" => "TagValueType",
-    #         },
-    #       }
     #
     # @!attribute [rw] identity_pool_id
     #   An identity pool ID in the format REGION:GUID.
@@ -915,16 +765,6 @@ module Aws::CognitoIdentity
 
     # Input to the ListIdentities action.
     #
-    # @note When making an API call, you may pass ListIdentitiesInput
-    #   data as a hash:
-    #
-    #       {
-    #         identity_pool_id: "IdentityPoolId", # required
-    #         max_results: 1, # required
-    #         next_token: "PaginationKey",
-    #         hide_disabled: false,
-    #       }
-    #
     # @!attribute [rw] identity_pool_id
     #   An identity pool ID in the format REGION:GUID.
     #   @return [String]
@@ -980,14 +820,6 @@ module Aws::CognitoIdentity
 
     # Input to the ListIdentityPools action.
     #
-    # @note When making an API call, you may pass ListIdentityPoolsInput
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1, # required
-    #         next_token: "PaginationKey",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of identities to return.
     #   @return [Integer]
@@ -1024,13 +856,6 @@ module Aws::CognitoIdentity
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ARNString", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the identity pool that the tags
     #   are assigned to.
@@ -1057,17 +882,6 @@ module Aws::CognitoIdentity
     end
 
     # Input to the `LookupDeveloperIdentityInput` action.
-    #
-    # @note When making an API call, you may pass LookupDeveloperIdentityInput
-    #   data as a hash:
-    #
-    #       {
-    #         identity_pool_id: "IdentityPoolId", # required
-    #         identity_id: "IdentityId",
-    #         developer_user_identifier: "DeveloperUserIdentifier",
-    #         max_results: 1,
-    #         next_token: "PaginationKey",
-    #       }
     #
     # @!attribute [rw] identity_pool_id
     #   An identity pool ID in the format REGION:GUID.
@@ -1144,16 +958,6 @@ module Aws::CognitoIdentity
     # A rule that maps a claim name, a claim value, and a match type to a
     # role ARN.
     #
-    # @note When making an API call, you may pass MappingRule
-    #   data as a hash:
-    #
-    #       {
-    #         claim: "ClaimName", # required
-    #         match_type: "Equals", # required, accepts Equals, Contains, StartsWith, NotEqual
-    #         value: "ClaimValue", # required
-    #         role_arn: "ARNString", # required
-    #       }
-    #
     # @!attribute [rw] claim
     #   The claim name that must be present in the token, for example,
     #   "isAdmin" or "paid".
@@ -1185,16 +989,6 @@ module Aws::CognitoIdentity
     end
 
     # Input to the `MergeDeveloperIdentities` action.
-    #
-    # @note When making an API call, you may pass MergeDeveloperIdentitiesInput
-    #   data as a hash:
-    #
-    #       {
-    #         source_user_identifier: "DeveloperUserIdentifier", # required
-    #         destination_user_identifier: "DeveloperUserIdentifier", # required
-    #         developer_provider_name: "DeveloperProviderName", # required
-    #         identity_pool_id: "IdentityPoolId", # required
-    #       }
     #
     # @!attribute [rw] source_user_identifier
     #   User identifier for the source user. The value should be a
@@ -1291,24 +1085,6 @@ module Aws::CognitoIdentity
 
     # A role mapping.
     #
-    # @note When making an API call, you may pass RoleMapping
-    #   data as a hash:
-    #
-    #       {
-    #         type: "Token", # required, accepts Token, Rules
-    #         ambiguous_role_resolution: "AuthenticatedRole", # accepts AuthenticatedRole, Deny
-    #         rules_configuration: {
-    #           rules: [ # required
-    #             {
-    #               claim: "ClaimName", # required
-    #               match_type: "Equals", # required, accepts Equals, Contains, StartsWith, NotEqual
-    #               value: "ClaimValue", # required
-    #               role_arn: "ARNString", # required
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] type
     #   The role mapping type. Token will use `cognito:roles` and
     #   `cognito:preferred_role` claims from the Cognito identity provider
@@ -1345,20 +1121,6 @@ module Aws::CognitoIdentity
 
     # A container for rules.
     #
-    # @note When making an API call, you may pass RulesConfigurationType
-    #   data as a hash:
-    #
-    #       {
-    #         rules: [ # required
-    #           {
-    #             claim: "ClaimName", # required
-    #             match_type: "Equals", # required, accepts Equals, Contains, StartsWith, NotEqual
-    #             value: "ClaimValue", # required
-    #             role_arn: "ARNString", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] rules
     #   An array of rules. You can specify up to 25 rules per identity
     #   provider.
@@ -1376,32 +1138,6 @@ module Aws::CognitoIdentity
     end
 
     # Input to the `SetIdentityPoolRoles` action.
-    #
-    # @note When making an API call, you may pass SetIdentityPoolRolesInput
-    #   data as a hash:
-    #
-    #       {
-    #         identity_pool_id: "IdentityPoolId", # required
-    #         roles: { # required
-    #           "RoleType" => "ARNString",
-    #         },
-    #         role_mappings: {
-    #           "IdentityProviderName" => {
-    #             type: "Token", # required, accepts Token, Rules
-    #             ambiguous_role_resolution: "AuthenticatedRole", # accepts AuthenticatedRole, Deny
-    #             rules_configuration: {
-    #               rules: [ # required
-    #                 {
-    #                   claim: "ClaimName", # required
-    #                   match_type: "Equals", # required, accepts Equals, Contains, StartsWith, NotEqual
-    #                   value: "ClaimValue", # required
-    #                   role_arn: "ARNString", # required
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] identity_pool_id
     #   An identity pool ID in the format REGION:GUID.
@@ -1432,18 +1168,6 @@ module Aws::CognitoIdentity
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SetPrincipalTagAttributeMapInput
-    #   data as a hash:
-    #
-    #       {
-    #         identity_pool_id: "IdentityPoolId", # required
-    #         identity_provider_name: "IdentityProviderName", # required
-    #         use_defaults: false,
-    #         principal_tags: {
-    #           "PrincipalTagID" => "PrincipalTagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] identity_pool_id
     #   The ID of the Identity Pool you want to set attribute mappings for.
     #   @return [String]
@@ -1502,16 +1226,6 @@ module Aws::CognitoIdentity
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ARNString", # required
-    #         tags: { # required
-    #           "TagKeysType" => "TagValueType",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the identity pool.
     #   @return [String]
@@ -1549,16 +1263,6 @@ module Aws::CognitoIdentity
 
     # Input to the `UnlinkDeveloperIdentity` action.
     #
-    # @note When making an API call, you may pass UnlinkDeveloperIdentityInput
-    #   data as a hash:
-    #
-    #       {
-    #         identity_id: "IdentityId", # required
-    #         identity_pool_id: "IdentityPoolId", # required
-    #         developer_provider_name: "DeveloperProviderName", # required
-    #         developer_user_identifier: "DeveloperUserIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] identity_id
     #   A unique identifier in the format REGION:GUID.
     #   @return [String]
@@ -1588,17 +1292,6 @@ module Aws::CognitoIdentity
     end
 
     # Input to the UnlinkIdentity action.
-    #
-    # @note When making an API call, you may pass UnlinkIdentityInput
-    #   data as a hash:
-    #
-    #       {
-    #         identity_id: "IdentityId", # required
-    #         logins: { # required
-    #           "IdentityProviderName" => "IdentityProviderToken",
-    #         },
-    #         logins_to_remove: ["IdentityProviderName"], # required
-    #       }
     #
     # @!attribute [rw] identity_id
     #   A unique identifier in the format REGION:GUID.
@@ -1643,14 +1336,6 @@ module Aws::CognitoIdentity
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ARNString", # required
-    #         tag_keys: ["TagKeysType"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the identity pool.
     #   @return [String]

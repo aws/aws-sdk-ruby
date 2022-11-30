@@ -76,17 +76,6 @@ module Aws::EBS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CompleteSnapshotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         snapshot_id: "SnapshotId", # required
-    #         changed_blocks_count: 1, # required
-    #         checksum: "Checksum",
-    #         checksum_algorithm: "SHA256", # accepts SHA256
-    #         checksum_aggregation_method: "LINEAR", # accepts LINEAR
-    #       }
-    #
     # @!attribute [rw] snapshot_id
     #   The ID of the snapshot.
     #   @return [String]
@@ -173,15 +162,6 @@ module Aws::EBS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSnapshotBlockRequest
-    #   data as a hash:
-    #
-    #       {
-    #         snapshot_id: "SnapshotId", # required
-    #         block_index: 1, # required
-    #         block_token: "BlockToken", # required
-    #       }
-    #
     # @!attribute [rw] snapshot_id
     #   The ID of the snapshot containing the block from which to get data.
     #
@@ -260,17 +240,6 @@ module Aws::EBS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListChangedBlocksRequest
-    #   data as a hash:
-    #
-    #       {
-    #         first_snapshot_id: "SnapshotId",
-    #         second_snapshot_id: "SnapshotId", # required
-    #         next_token: "PageToken",
-    #         max_results: 1,
-    #         starting_block_index: 1,
-    #       }
-    #
     # @!attribute [rw] first_snapshot_id
     #   The ID of the first snapshot to use for the comparison.
     #
@@ -359,16 +328,6 @@ module Aws::EBS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSnapshotBlocksRequest
-    #   data as a hash:
-    #
-    #       {
-    #         snapshot_id: "SnapshotId", # required
-    #         next_token: "PageToken",
-    #         max_results: 1,
-    #         starting_block_index: 1,
-    #       }
-    #
     # @!attribute [rw] snapshot_id
     #   The ID of the snapshot from which to get block indexes and block
     #   tokens.
@@ -446,19 +405,6 @@ module Aws::EBS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutSnapshotBlockRequest
-    #   data as a hash:
-    #
-    #       {
-    #         snapshot_id: "SnapshotId", # required
-    #         block_index: 1, # required
-    #         block_data: "data", # required
-    #         data_length: 1, # required
-    #         progress: 1,
-    #         checksum: "Checksum", # required
-    #         checksum_algorithm: "SHA256", # required, accepts SHA256
-    #       }
-    #
     # @!attribute [rw] snapshot_id
     #   The ID of the snapshot.
     #
@@ -607,25 +553,6 @@ module Aws::EBS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartSnapshotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         volume_size: 1, # required
-    #         parent_snapshot_id: "SnapshotId",
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         description: "Description",
-    #         client_token: "IdempotencyToken",
-    #         encrypted: false,
-    #         kms_key_arn: "KmsKeyArn",
-    #         timeout: 1,
-    #       }
-    #
     # @!attribute [rw] volume_size
     #   The size of the volume, in GiB. The maximum size is `65536` GiB (64
     #   TiB).
@@ -828,14 +755,6 @@ module Aws::EBS
     end
 
     # Describes a tag.
-    #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey",
-    #         value: "TagValue",
-    #       }
     #
     # @!attribute [rw] key
     #   The key of the tag.

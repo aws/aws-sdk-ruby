@@ -88,14 +88,6 @@ module Aws::CloudHSMV2
 
     # A policy that defines the number of days to retain backups.
     #
-    # @note When making an API call, you may pass BackupRetentionPolicy
-    #   data as a hash:
-    #
-    #       {
-    #         type: "DAYS", # accepts DAYS
-    #         value: "BackupRetentionValue",
-    #       }
-    #
     # @!attribute [rw] type
     #   The type of backup retention policy. For the `DAYS` type, the value
     #   is the number of days to retain backups.
@@ -323,20 +315,6 @@ module Aws::CloudHSMV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CopyBackupToRegionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         destination_region: "Region", # required
-    #         backup_id: "BackupId", # required
-    #         tag_list: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] destination_region
     #   The AWS region that will contain your copied CloudHSM cluster
     #   backup.
@@ -382,25 +360,6 @@ module Aws::CloudHSMV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateClusterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         backup_retention_policy: {
-    #           type: "DAYS", # accepts DAYS
-    #           value: "BackupRetentionValue",
-    #         },
-    #         hsm_type: "HsmType", # required
-    #         source_backup_id: "BackupId",
-    #         subnet_ids: ["SubnetId"], # required
-    #         tag_list: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] backup_retention_policy
     #   A policy that defines how the service retains backups.
     #   @return [Types::BackupRetentionPolicy]
@@ -454,15 +413,6 @@ module Aws::CloudHSMV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateHsmRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_id: "ClusterId", # required
-    #         availability_zone: "ExternalAz", # required
-    #         ip_address: "IpAddress",
-    #       }
-    #
     # @!attribute [rw] cluster_id
     #   The identifier (ID) of the HSM's cluster. To find the cluster ID,
     #   use DescribeClusters.
@@ -502,13 +452,6 @@ module Aws::CloudHSMV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteBackupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         backup_id: "BackupId", # required
-    #       }
-    #
     # @!attribute [rw] backup_id
     #   The ID of the backup to be deleted. To find the ID of a backup, use
     #   the DescribeBackups operation.
@@ -534,13 +477,6 @@ module Aws::CloudHSMV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteClusterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_id: "ClusterId", # required
-    #       }
-    #
     # @!attribute [rw] cluster_id
     #   The identifier (ID) of the cluster that you are deleting. To find
     #   the cluster ID, use DescribeClusters.
@@ -566,16 +502,6 @@ module Aws::CloudHSMV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteHsmRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_id: "ClusterId", # required
-    #         hsm_id: "HsmId",
-    #         eni_id: "EniId",
-    #         eni_ip: "IpAddress",
-    #       }
-    #
     # @!attribute [rw] cluster_id
     #   The identifier (ID) of the cluster that contains the HSM that you
     #   are deleting.
@@ -618,18 +544,6 @@ module Aws::CloudHSMV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeBackupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         filters: {
-    #           "Field" => ["String"],
-    #         },
-    #         sort_ascending: false,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The `NextToken` value that you received in the previous response.
     #   Use this value to get more backups.
@@ -699,17 +613,6 @@ module Aws::CloudHSMV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeClustersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: {
-    #           "Field" => ["String"],
-    #         },
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] filters
     #   One or more filters to limit the items returned in the response.
     #
@@ -847,15 +750,6 @@ module Aws::CloudHSMV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass InitializeClusterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_id: "ClusterId", # required
-    #         signed_cert: "Cert", # required
-    #         trust_anchor: "Cert", # required
-    #       }
-    #
     # @!attribute [rw] cluster_id
     #   The identifier (ID) of the cluster that you are claiming. To find
     #   the cluster ID, use DescribeClusters.
@@ -903,15 +797,6 @@ module Aws::CloudHSMV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_id: "ResourceId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] resource_id
     #   The cluster identifier (ID) for the cluster whose tags you are
     #   getting. To find the cluster ID, use DescribeClusters.
@@ -957,14 +842,6 @@ module Aws::CloudHSMV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyBackupAttributesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         backup_id: "BackupId", # required
-    #         never_expires: false, # required
-    #       }
-    #
     # @!attribute [rw] backup_id
     #   The identifier (ID) of the backup to modify. To find the ID of a
     #   backup, use the DescribeBackups operation.
@@ -1004,17 +881,6 @@ module Aws::CloudHSMV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyClusterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         backup_retention_policy: { # required
-    #           type: "DAYS", # accepts DAYS
-    #           value: "BackupRetentionValue",
-    #         },
-    #         cluster_id: "ClusterId", # required
-    #       }
-    #
     # @!attribute [rw] backup_retention_policy
     #   A policy that defines how the service retains backups.
     #   @return [Types::BackupRetentionPolicy]
@@ -1045,13 +911,6 @@ module Aws::CloudHSMV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RestoreBackupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         backup_id: "BackupId", # required
-    #       }
-    #
     # @!attribute [rw] backup_id
     #   The ID of the backup to be restored. To find the ID of a backup, use
     #   the DescribeBackups operation.
@@ -1079,14 +938,6 @@ module Aws::CloudHSMV2
 
     # Contains a tag. A tag is a key-value pair.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The key of the tag.
     #   @return [String]
@@ -1104,19 +955,6 @@ module Aws::CloudHSMV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_id: "ResourceId", # required
-    #         tag_list: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_id
     #   The cluster identifier (ID) for the cluster that you are tagging. To
     #   find the cluster ID, use DescribeClusters.
@@ -1139,14 +977,6 @@ module Aws::CloudHSMV2
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_id: "ResourceId", # required
-    #         tag_key_list: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_id
     #   The cluster identifier (ID) for the cluster whose tags you are
     #   removing. To find the cluster ID, use DescribeClusters.

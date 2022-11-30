@@ -14,16 +14,6 @@ module Aws::Synthetics
     # including the encryption-at-rest settings for artifacts that the
     # canary uploads to Amazon S3.
     #
-    # @note When making an API call, you may pass ArtifactConfigInput
-    #   data as a hash:
-    #
-    #       {
-    #         s3_encryption: {
-    #           encryption_mode: "SSE_S3", # accepts SSE_S3, SSE_KMS
-    #           kms_key_arn: "KmsKeyArn",
-    #         },
-    #       }
-    #
     # @!attribute [rw] s3_encryption
     #   A structure that contains the configuration of the
     #   encryption-at-rest settings for artifacts that the canary uploads to
@@ -62,14 +52,6 @@ module Aws::Synthetics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         group_identifier: "GroupIdentifier", # required
-    #         resource_arn: "CanaryArn", # required
-    #       }
-    #
     # @!attribute [rw] group_identifier
     #   Specifies the group. You can specify the group name, the ARN, or the
     #   group ID as the `GroupIdentifier`.
@@ -108,14 +90,6 @@ module Aws::Synthetics
 
     # A structure representing a screenshot that is used as a baseline
     # during visual monitoring comparisons made by the canary.
-    #
-    # @note When making an API call, you may pass BaseScreenshot
-    #   data as a hash:
-    #
-    #       {
-    #         screenshot_name: "String", # required
-    #         ignore_coordinates: ["BaseScreenshotConfigIgnoreCoordinate"],
-    #       }
     #
     # @!attribute [rw] screenshot_name
     #   The name of the screenshot. This is generated the first time the
@@ -276,17 +250,6 @@ module Aws::Synthetics
     # script was passed into the canary directly, the script code is
     # contained in the value of `Zipfile`.
     #
-    # @note When making an API call, you may pass CanaryCodeInput
-    #   data as a hash:
-    #
-    #       {
-    #         s3_bucket: "String",
-    #         s3_key: "String",
-    #         s3_version: "String",
-    #         zip_file: "data",
-    #         handler: "CodeHandler", # required
-    #       }
-    #
     # @!attribute [rw] s3_bucket
     #   If your canary script is located in S3, specify the bucket name
     #   here. Do not include `s3://` as the start of the bucket name.
@@ -415,18 +378,6 @@ module Aws::Synthetics
     end
 
     # A structure that contains input information for a canary run.
-    #
-    # @note When making an API call, you may pass CanaryRunConfigInput
-    #   data as a hash:
-    #
-    #       {
-    #         timeout_in_seconds: 1,
-    #         memory_in_mb: 1,
-    #         active_tracing: false,
-    #         environment_variables: {
-    #           "EnvironmentVariableName" => "EnvironmentVariableValue",
-    #         },
-    #       }
     #
     # @!attribute [rw] timeout_in_seconds
     #   How long the canary is allowed to run before it must stop. You
@@ -563,14 +514,6 @@ module Aws::Synthetics
 
     # This structure specifies how often a canary is to make runs and the
     # date and time when it should stop making runs.
-    #
-    # @note When making an API call, you may pass CanaryScheduleInput
-    #   data as a hash:
-    #
-    #       {
-    #         expression: "String", # required
-    #         duration_in_seconds: 1,
-    #       }
     #
     # @!attribute [rw] expression
     #   A `rate` expression or a `cron` expression that defines how often
@@ -724,50 +667,6 @@ module Aws::Synthetics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateCanaryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "CanaryName", # required
-    #         code: { # required
-    #           s3_bucket: "String",
-    #           s3_key: "String",
-    #           s3_version: "String",
-    #           zip_file: "data",
-    #           handler: "CodeHandler", # required
-    #         },
-    #         artifact_s3_location: "String", # required
-    #         execution_role_arn: "RoleArn", # required
-    #         schedule: { # required
-    #           expression: "String", # required
-    #           duration_in_seconds: 1,
-    #         },
-    #         run_config: {
-    #           timeout_in_seconds: 1,
-    #           memory_in_mb: 1,
-    #           active_tracing: false,
-    #           environment_variables: {
-    #             "EnvironmentVariableName" => "EnvironmentVariableValue",
-    #           },
-    #         },
-    #         success_retention_period_in_days: 1,
-    #         failure_retention_period_in_days: 1,
-    #         runtime_version: "String", # required
-    #         vpc_config: {
-    #           subnet_ids: ["SubnetId"],
-    #           security_group_ids: ["SecurityGroupId"],
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         artifact_config: {
-    #           s3_encryption: {
-    #             encryption_mode: "SSE_S3", # accepts SSE_S3, SSE_KMS
-    #             kms_key_arn: "KmsKeyArn",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name for this canary. Be sure to give it a descriptive name that
     #   distinguishes it from other canaries in your account.
@@ -909,16 +808,6 @@ module Aws::Synthetics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "GroupName", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name for the group. It can include any Unicode characters.
     #
@@ -958,14 +847,6 @@ module Aws::Synthetics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteCanaryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "CanaryName", # required
-    #         delete_lambda: false,
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the canary that you want to delete. To find the names of
     #   your canaries, use [DescribeCanaries][1].
@@ -995,13 +876,6 @@ module Aws::Synthetics
     #
     class DeleteCanaryResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         group_identifier: "GroupIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] group_identifier
     #   Specifies which group to delete. You can specify the group name, the
     #   ARN, or the group ID as the `GroupIdentifier`.
@@ -1019,15 +893,6 @@ module Aws::Synthetics
     #
     class DeleteGroupResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeCanariesLastRunRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "Token",
-    #         max_results: 1,
-    #         names: ["CanaryName"],
-    #       }
-    #
     # @!attribute [rw] next_token
     #   A token that indicates that there is more data available. You can
     #   use this token in a subsequent `DescribeCanariesLastRun` operation
@@ -1089,15 +954,6 @@ module Aws::Synthetics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeCanariesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "Token",
-    #         max_results: 1,
-    #         names: ["CanaryName"],
-    #       }
-    #
     # @!attribute [rw] next_token
     #   A token that indicates that there is more data available. You can
     #   use this token in a subsequent operation to retrieve the next set of
@@ -1159,14 +1015,6 @@ module Aws::Synthetics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeRuntimeVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   A token that indicates that there is more data available. You can
     #   use this token in a subsequent `DescribeRuntimeVersions` operation
@@ -1208,14 +1056,6 @@ module Aws::Synthetics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         group_identifier: "GroupIdentifier", # required
-    #         resource_arn: "CanaryArn", # required
-    #       }
-    #
     # @!attribute [rw] group_identifier
     #   Specifies the group. You can specify the group name, the ARN, or the
     #   group ID as the `GroupIdentifier`.
@@ -1239,13 +1079,6 @@ module Aws::Synthetics
     #
     class DisassociateResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass GetCanaryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "CanaryName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the canary that you want details for.
     #   @return [String]
@@ -1270,15 +1103,6 @@ module Aws::Synthetics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetCanaryRunsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "CanaryName", # required
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the canary that you want to see runs for.
     #   @return [String]
@@ -1325,13 +1149,6 @@ module Aws::Synthetics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         group_identifier: "GroupIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] group_identifier
     #   Specifies the group to return information for. You can specify the
     #   group name, the ARN, or the group ID as the `GroupIdentifier`.
@@ -1446,15 +1263,6 @@ module Aws::Synthetics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAssociatedGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #         resource_arn: "CanaryArn", # required
-    #       }
-    #
     # @!attribute [rw] next_token
     #   A token that indicates that there is more data available. You can
     #   use this token in a subsequent operation to retrieve the next set of
@@ -1501,15 +1309,6 @@ module Aws::Synthetics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListGroupResourcesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #         group_identifier: "GroupIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] next_token
     #   A token that indicates that there is more data available. You can
     #   use this token in a subsequent operation to retrieve the next set of
@@ -1557,14 +1356,6 @@ module Aws::Synthetics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   A token that indicates that there is more data available. You can
     #   use this token in a subsequent operation to retrieve the next set of
@@ -1606,13 +1397,6 @@ module Aws::Synthetics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the canary or group that you want to view tags for.
     #
@@ -1733,14 +1517,6 @@ module Aws::Synthetics
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_artifact_encryption.html
     #
-    # @note When making an API call, you may pass S3EncryptionConfig
-    #   data as a hash:
-    #
-    #       {
-    #         encryption_mode: "SSE_S3", # accepts SSE_S3, SSE_KMS
-    #         kms_key_arn: "KmsKeyArn",
-    #       }
-    #
     # @!attribute [rw] encryption_mode
     #   The encryption method to use for artifacts created by this canary.
     #   Specify `SSE_S3` to use server-side encryption (SSE) with an Amazon
@@ -1778,13 +1554,6 @@ module Aws::Synthetics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartCanaryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "CanaryName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the canary that you want to run. To find canary names,
     #   use [DescribeCanaries][1].
@@ -1806,13 +1575,6 @@ module Aws::Synthetics
     #
     class StartCanaryResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass StopCanaryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "CanaryName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the canary that you want to stop. To find the names of
     #   your canaries, use [ListCanaries][1].
@@ -1834,16 +1596,6 @@ module Aws::Synthetics
     #
     class StopCanaryResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the canary or group that you're adding tags to.
     #
@@ -1884,14 +1636,6 @@ module Aws::Synthetics
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the canary or group that you're removing tags from.
     #
@@ -1919,56 +1663,6 @@ module Aws::Synthetics
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateCanaryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "CanaryName", # required
-    #         code: {
-    #           s3_bucket: "String",
-    #           s3_key: "String",
-    #           s3_version: "String",
-    #           zip_file: "data",
-    #           handler: "CodeHandler", # required
-    #         },
-    #         execution_role_arn: "RoleArn",
-    #         runtime_version: "String",
-    #         schedule: {
-    #           expression: "String", # required
-    #           duration_in_seconds: 1,
-    #         },
-    #         run_config: {
-    #           timeout_in_seconds: 1,
-    #           memory_in_mb: 1,
-    #           active_tracing: false,
-    #           environment_variables: {
-    #             "EnvironmentVariableName" => "EnvironmentVariableValue",
-    #           },
-    #         },
-    #         success_retention_period_in_days: 1,
-    #         failure_retention_period_in_days: 1,
-    #         vpc_config: {
-    #           subnet_ids: ["SubnetId"],
-    #           security_group_ids: ["SecurityGroupId"],
-    #         },
-    #         visual_reference: {
-    #           base_screenshots: [
-    #             {
-    #               screenshot_name: "String", # required
-    #               ignore_coordinates: ["BaseScreenshotConfigIgnoreCoordinate"],
-    #             },
-    #           ],
-    #           base_canary_run_id: "String", # required
-    #         },
-    #         artifact_s3_location: "String",
-    #         artifact_config: {
-    #           s3_encryption: {
-    #             encryption_mode: "SSE_S3", # accepts SSE_S3, SSE_KMS
-    #             kms_key_arn: "KmsKeyArn",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the canary that you want to update. To find the names of
     #   your canaries, use [DescribeCanaries][1].
@@ -2128,19 +1822,6 @@ module Aws::Synthetics
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Library_SyntheticsLogger_VisualTesting.html
     # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Blueprints_VisualTesting.html
     #
-    # @note When making an API call, you may pass VisualReferenceInput
-    #   data as a hash:
-    #
-    #       {
-    #         base_screenshots: [
-    #           {
-    #             screenshot_name: "String", # required
-    #             ignore_coordinates: ["BaseScreenshotConfigIgnoreCoordinate"],
-    #           },
-    #         ],
-    #         base_canary_run_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] base_screenshots
     #   An array of screenshots that will be used as the baseline for visual
     #   monitoring in future runs of this canary. If there is a screenshot
@@ -2204,14 +1885,6 @@ module Aws::Synthetics
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_VPC.html
-    #
-    # @note When making an API call, you may pass VpcConfigInput
-    #   data as a hash:
-    #
-    #       {
-    #         subnet_ids: ["SubnetId"],
-    #         security_group_ids: ["SecurityGroupId"],
-    #       }
     #
     # @!attribute [rw] subnet_ids
     #   The IDs of the subnets where this canary is to run.

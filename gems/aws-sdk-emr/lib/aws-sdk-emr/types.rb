@@ -10,69 +10,6 @@
 module Aws::EMR
   module Types
 
-    # @note When making an API call, you may pass AddInstanceFleetInput
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_id: "XmlStringMaxLen256", # required
-    #         instance_fleet: { # required
-    #           name: "XmlStringMaxLen256",
-    #           instance_fleet_type: "MASTER", # required, accepts MASTER, CORE, TASK
-    #           target_on_demand_capacity: 1,
-    #           target_spot_capacity: 1,
-    #           instance_type_configs: [
-    #             {
-    #               instance_type: "InstanceType", # required
-    #               weighted_capacity: 1,
-    #               bid_price: "XmlStringMaxLen256",
-    #               bid_price_as_percentage_of_on_demand_price: 1.0,
-    #               ebs_configuration: {
-    #                 ebs_block_device_configs: [
-    #                   {
-    #                     volume_specification: { # required
-    #                       volume_type: "String", # required
-    #                       iops: 1,
-    #                       size_in_gb: 1, # required
-    #                       throughput: 1,
-    #                     },
-    #                     volumes_per_instance: 1,
-    #                   },
-    #                 ],
-    #                 ebs_optimized: false,
-    #               },
-    #               configurations: [
-    #                 {
-    #                   classification: "String",
-    #                   configurations: {
-    #                     # recursive ConfigurationList
-    #                   },
-    #                   properties: {
-    #                     "String" => "String",
-    #                   },
-    #                 },
-    #               ],
-    #               custom_ami_id: "XmlStringMaxLen256",
-    #             },
-    #           ],
-    #           launch_specifications: {
-    #             spot_specification: {
-    #               timeout_duration_minutes: 1, # required
-    #               timeout_action: "SWITCH_TO_ON_DEMAND", # required, accepts SWITCH_TO_ON_DEMAND, TERMINATE_CLUSTER
-    #               block_duration_minutes: 1,
-    #               allocation_strategy: "capacity-optimized", # accepts capacity-optimized
-    #             },
-    #             on_demand_specification: {
-    #               allocation_strategy: "lowest-price", # required, accepts lowest-price
-    #               capacity_reservation_options: {
-    #                 usage_strategy: "use-capacity-reservations-first", # accepts use-capacity-reservations-first
-    #                 capacity_reservation_preference: "open", # accepts open, none
-    #                 capacity_reservation_resource_group_arn: "XmlStringMaxLen256",
-    #               },
-    #             },
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] cluster_id
     #   The unique identifier of the cluster.
     #   @return [String]
@@ -113,87 +50,6 @@ module Aws::EMR
     end
 
     # Input to an AddInstanceGroups call.
-    #
-    # @note When making an API call, you may pass AddInstanceGroupsInput
-    #   data as a hash:
-    #
-    #       {
-    #         instance_groups: [ # required
-    #           {
-    #             name: "XmlStringMaxLen256",
-    #             market: "ON_DEMAND", # accepts ON_DEMAND, SPOT
-    #             instance_role: "MASTER", # required, accepts MASTER, CORE, TASK
-    #             bid_price: "XmlStringMaxLen256",
-    #             instance_type: "InstanceType", # required
-    #             instance_count: 1, # required
-    #             configurations: [
-    #               {
-    #                 classification: "String",
-    #                 configurations: {
-    #                   # recursive ConfigurationList
-    #                 },
-    #                 properties: {
-    #                   "String" => "String",
-    #                 },
-    #               },
-    #             ],
-    #             ebs_configuration: {
-    #               ebs_block_device_configs: [
-    #                 {
-    #                   volume_specification: { # required
-    #                     volume_type: "String", # required
-    #                     iops: 1,
-    #                     size_in_gb: 1, # required
-    #                     throughput: 1,
-    #                   },
-    #                   volumes_per_instance: 1,
-    #                 },
-    #               ],
-    #               ebs_optimized: false,
-    #             },
-    #             auto_scaling_policy: {
-    #               constraints: { # required
-    #                 min_capacity: 1, # required
-    #                 max_capacity: 1, # required
-    #               },
-    #               rules: [ # required
-    #                 {
-    #                   name: "String", # required
-    #                   description: "String",
-    #                   action: { # required
-    #                     market: "ON_DEMAND", # accepts ON_DEMAND, SPOT
-    #                     simple_scaling_policy_configuration: { # required
-    #                       adjustment_type: "CHANGE_IN_CAPACITY", # accepts CHANGE_IN_CAPACITY, PERCENT_CHANGE_IN_CAPACITY, EXACT_CAPACITY
-    #                       scaling_adjustment: 1, # required
-    #                       cool_down: 1,
-    #                     },
-    #                   },
-    #                   trigger: { # required
-    #                     cloud_watch_alarm_definition: { # required
-    #                       comparison_operator: "GREATER_THAN_OR_EQUAL", # required, accepts GREATER_THAN_OR_EQUAL, GREATER_THAN, LESS_THAN, LESS_THAN_OR_EQUAL
-    #                       evaluation_periods: 1,
-    #                       metric_name: "String", # required
-    #                       namespace: "String",
-    #                       period: 1, # required
-    #                       statistic: "SAMPLE_COUNT", # accepts SAMPLE_COUNT, AVERAGE, SUM, MINIMUM, MAXIMUM
-    #                       threshold: 1.0, # required
-    #                       unit: "NONE", # accepts NONE, SECONDS, MICRO_SECONDS, MILLI_SECONDS, BYTES, KILO_BYTES, MEGA_BYTES, GIGA_BYTES, TERA_BYTES, BITS, KILO_BITS, MEGA_BITS, GIGA_BITS, TERA_BITS, PERCENT, COUNT, BYTES_PER_SECOND, KILO_BYTES_PER_SECOND, MEGA_BYTES_PER_SECOND, GIGA_BYTES_PER_SECOND, TERA_BYTES_PER_SECOND, BITS_PER_SECOND, KILO_BITS_PER_SECOND, MEGA_BITS_PER_SECOND, GIGA_BITS_PER_SECOND, TERA_BITS_PER_SECOND, COUNT_PER_SECOND
-    #                       dimensions: [
-    #                         {
-    #                           key: "String",
-    #                           value: "String",
-    #                         },
-    #                       ],
-    #                     },
-    #                   },
-    #                 },
-    #               ],
-    #             },
-    #             custom_ami_id: "XmlStringMaxLen256",
-    #           },
-    #         ],
-    #         job_flow_id: "XmlStringMaxLen256", # required
-    #       }
     #
     # @!attribute [rw] instance_groups
     #   Instance groups to add.
@@ -237,31 +93,6 @@ module Aws::EMR
     end
 
     # The input argument to the AddJobFlowSteps operation.
-    #
-    # @note When making an API call, you may pass AddJobFlowStepsInput
-    #   data as a hash:
-    #
-    #       {
-    #         job_flow_id: "XmlStringMaxLen256", # required
-    #         steps: [ # required
-    #           {
-    #             name: "XmlStringMaxLen256", # required
-    #             action_on_failure: "TERMINATE_JOB_FLOW", # accepts TERMINATE_JOB_FLOW, TERMINATE_CLUSTER, CANCEL_AND_WAIT, CONTINUE
-    #             hadoop_jar_step: { # required
-    #               properties: [
-    #                 {
-    #                   key: "XmlString",
-    #                   value: "XmlString",
-    #                 },
-    #               ],
-    #               jar: "XmlString", # required
-    #               main_class: "XmlString",
-    #               args: ["XmlString"],
-    #             },
-    #           },
-    #         ],
-    #         execution_role_arn: "ArnType",
-    #       }
     #
     # @!attribute [rw] job_flow_id
     #   A string that uniquely identifies the job flow. This identifier is
@@ -310,19 +141,6 @@ module Aws::EMR
     # This input identifies an Amazon EMR resource and a list of tags to
     # attach.
     #
-    # @note When making an API call, you may pass AddTagsInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_id: "ResourceId", # required
-    #         tags: [ # required
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_id
     #   The Amazon EMR resource identifier to which tags will be added. For
     #   example, a cluster identifier or an Amazon EMR Studio ID.
@@ -366,18 +184,6 @@ module Aws::EMR
     #
     # [1]: https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-configure-apps.html
     #
-    # @note When making an API call, you may pass Application
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String",
-    #         version: "String",
-    #         args: ["String"],
-    #         additional_info: {
-    #           "String" => "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the application.
     #   @return [String]
@@ -412,48 +218,6 @@ module Aws::EMR
     # how an instance group dynamically adds and terminates EC2 instances in
     # response to the value of a CloudWatch metric. See
     # PutAutoScalingPolicy.
-    #
-    # @note When making an API call, you may pass AutoScalingPolicy
-    #   data as a hash:
-    #
-    #       {
-    #         constraints: { # required
-    #           min_capacity: 1, # required
-    #           max_capacity: 1, # required
-    #         },
-    #         rules: [ # required
-    #           {
-    #             name: "String", # required
-    #             description: "String",
-    #             action: { # required
-    #               market: "ON_DEMAND", # accepts ON_DEMAND, SPOT
-    #               simple_scaling_policy_configuration: { # required
-    #                 adjustment_type: "CHANGE_IN_CAPACITY", # accepts CHANGE_IN_CAPACITY, PERCENT_CHANGE_IN_CAPACITY, EXACT_CAPACITY
-    #                 scaling_adjustment: 1, # required
-    #                 cool_down: 1,
-    #               },
-    #             },
-    #             trigger: { # required
-    #               cloud_watch_alarm_definition: { # required
-    #                 comparison_operator: "GREATER_THAN_OR_EQUAL", # required, accepts GREATER_THAN_OR_EQUAL, GREATER_THAN, LESS_THAN, LESS_THAN_OR_EQUAL
-    #                 evaluation_periods: 1,
-    #                 metric_name: "String", # required
-    #                 namespace: "String",
-    #                 period: 1, # required
-    #                 statistic: "SAMPLE_COUNT", # accepts SAMPLE_COUNT, AVERAGE, SUM, MINIMUM, MAXIMUM
-    #                 threshold: 1.0, # required
-    #                 unit: "NONE", # accepts NONE, SECONDS, MICRO_SECONDS, MILLI_SECONDS, BYTES, KILO_BYTES, MEGA_BYTES, GIGA_BYTES, TERA_BYTES, BITS, KILO_BITS, MEGA_BITS, GIGA_BITS, TERA_BITS, PERCENT, COUNT, BYTES_PER_SECOND, KILO_BYTES_PER_SECOND, MEGA_BYTES_PER_SECOND, GIGA_BYTES_PER_SECOND, TERA_BYTES_PER_SECOND, BITS_PER_SECOND, KILO_BITS_PER_SECOND, MEGA_BITS_PER_SECOND, GIGA_BITS_PER_SECOND, TERA_BITS_PER_SECOND, COUNT_PER_SECOND
-    #                 dimensions: [
-    #                   {
-    #                     key: "String",
-    #                     value: "String",
-    #                   },
-    #                 ],
-    #               },
-    #             },
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] constraints
     #   The upper and lower EC2 instance limits for an automatic scaling
@@ -558,13 +322,6 @@ module Aws::EMR
     #
     # [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-termination.html
     #
-    # @note When making an API call, you may pass AutoTerminationPolicy
-    #   data as a hash:
-    #
-    #       {
-    #         idle_timeout: 1,
-    #       }
-    #
     # @!attribute [rw] idle_timeout
     #   Specifies the amount of idle time in seconds after which the cluster
     #   automatically terminates. You can specify a minimum of 60 seconds
@@ -585,19 +342,6 @@ module Aws::EMR
     # that allows inbound traffic from 0.0.0.0/0 or ::/0 on a port, unless
     # the port is specified as an exception using
     # `PermittedPublicSecurityGroupRuleRanges`.
-    #
-    # @note When making an API call, you may pass BlockPublicAccessConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         block_public_security_group_rules: false, # required
-    #         permitted_public_security_group_rule_ranges: [
-    #           {
-    #             min_range: 1, # required
-    #             max_range: 1,
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] block_public_security_group_rules
     #   Indicates whether Amazon EMR block public access is enabled (`true`)
@@ -654,17 +398,6 @@ module Aws::EMR
     end
 
     # Configuration of a bootstrap action.
-    #
-    # @note When making an API call, you may pass BootstrapActionConfig
-    #   data as a hash:
-    #
-    #       {
-    #         name: "XmlStringMaxLen256", # required
-    #         script_bootstrap_action: { # required
-    #           path: "XmlString", # required
-    #           args: ["XmlString"],
-    #         },
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the bootstrap action.
@@ -726,15 +459,6 @@ module Aws::EMR
 
     # The input argument to the CancelSteps operation.
     #
-    # @note When making an API call, you may pass CancelStepsInput
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_id: "XmlStringMaxLen256", # required
-    #         step_ids: ["XmlStringMaxLen256"], # required
-    #         step_cancellation_option: "SEND_INTERRUPT", # accepts SEND_INTERRUPT, TERMINATE_PROCESS
-    #       }
-    #
     # @!attribute [rw] cluster_id
     #   The `ClusterID` for the specified steps that will be canceled. Use
     #   RunJobFlow and ListClusters to get ClusterIDs.
@@ -778,26 +502,6 @@ module Aws::EMR
     # The definition of a CloudWatch metric alarm, which determines when an
     # automatic scaling activity is triggered. When the defined alarm
     # conditions are satisfied, scaling activity begins.
-    #
-    # @note When making an API call, you may pass CloudWatchAlarmDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         comparison_operator: "GREATER_THAN_OR_EQUAL", # required, accepts GREATER_THAN_OR_EQUAL, GREATER_THAN, LESS_THAN, LESS_THAN_OR_EQUAL
-    #         evaluation_periods: 1,
-    #         metric_name: "String", # required
-    #         namespace: "String",
-    #         period: 1, # required
-    #         statistic: "SAMPLE_COUNT", # accepts SAMPLE_COUNT, AVERAGE, SUM, MINIMUM, MAXIMUM
-    #         threshold: 1.0, # required
-    #         unit: "NONE", # accepts NONE, SECONDS, MICRO_SECONDS, MILLI_SECONDS, BYTES, KILO_BYTES, MEGA_BYTES, GIGA_BYTES, TERA_BYTES, BITS, KILO_BITS, MEGA_BITS, GIGA_BITS, TERA_BITS, PERCENT, COUNT, BYTES_PER_SECOND, KILO_BYTES_PER_SECOND, MEGA_BYTES_PER_SECOND, GIGA_BYTES_PER_SECOND, TERA_BYTES_PER_SECOND, BITS_PER_SECOND, KILO_BITS_PER_SECOND, MEGA_BITS_PER_SECOND, GIGA_BITS_PER_SECOND, TERA_BITS_PER_SECOND, COUNT_PER_SECOND
-    #         dimensions: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] comparison_operator
     #   Determines how the metric specified by `MetricName` is compared to
@@ -1252,17 +956,6 @@ module Aws::EMR
     # limit only applies to the core and task nodes. The master node cannot
     # be scaled after initial configuration.
     #
-    # @note When making an API call, you may pass ComputeLimits
-    #   data as a hash:
-    #
-    #       {
-    #         unit_type: "InstanceFleetUnits", # required, accepts InstanceFleetUnits, Instances, VCPU
-    #         minimum_capacity_units: 1, # required
-    #         maximum_capacity_units: 1, # required
-    #         maximum_on_demand_capacity_units: 1,
-    #         maximum_core_capacity_units: 1,
-    #       }
-    #
     # @!attribute [rw] unit_type
     #   The unit type used for specifying a managed scaling policy.
     #   @return [String]
@@ -1327,27 +1020,6 @@ module Aws::EMR
     #
     # [1]: https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-configure-apps.html
     #
-    # @note When making an API call, you may pass Configuration
-    #   data as a hash:
-    #
-    #       {
-    #         classification: "String",
-    #         configurations: [
-    #           {
-    #             classification: "String",
-    #             configurations: {
-    #               # recursive ConfigurationList
-    #             },
-    #             properties: {
-    #               "String" => "String",
-    #             },
-    #           },
-    #         ],
-    #         properties: {
-    #           "String" => "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] classification
     #   The classification within a configuration.
     #   @return [String]
@@ -1371,14 +1043,6 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateSecurityConfigurationInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "XmlString", # required
-    #         security_configuration: "String", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the security configuration.
     #   @return [String]
@@ -1419,30 +1083,6 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateStudioInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "XmlStringMaxLen256", # required
-    #         description: "XmlStringMaxLen256",
-    #         auth_mode: "SSO", # required, accepts SSO, IAM
-    #         vpc_id: "XmlStringMaxLen256", # required
-    #         subnet_ids: ["String"], # required
-    #         service_role: "XmlString", # required
-    #         user_role: "XmlString",
-    #         workspace_security_group_id: "XmlStringMaxLen256", # required
-    #         engine_security_group_id: "XmlStringMaxLen256", # required
-    #         default_s3_location: "XmlString", # required
-    #         idp_auth_url: "XmlString",
-    #         idp_relay_state_parameter_name: "XmlStringMaxLen256",
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   A descriptive name for the Amazon EMR Studio.
     #   @return [String]
@@ -1560,17 +1200,6 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateStudioSessionMappingInput
-    #   data as a hash:
-    #
-    #       {
-    #         studio_id: "XmlStringMaxLen256", # required
-    #         identity_id: "XmlStringMaxLen256",
-    #         identity_name: "XmlStringMaxLen256",
-    #         identity_type: "USER", # required, accepts USER, GROUP
-    #         session_policy_arn: "XmlStringMaxLen256", # required
-    #       }
-    #
     # @!attribute [rw] studio_id
     #   The ID of the Amazon EMR Studio to which the user or group will be
     #   mapped.
@@ -1630,13 +1259,6 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteSecurityConfigurationInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "XmlString", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the security configuration.
     #   @return [String]
@@ -1653,13 +1275,6 @@ module Aws::EMR
     #
     class DeleteSecurityConfigurationOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteStudioInput
-    #   data as a hash:
-    #
-    #       {
-    #         studio_id: "XmlStringMaxLen256", # required
-    #       }
-    #
     # @!attribute [rw] studio_id
     #   The ID of the Amazon EMR Studio.
     #   @return [String]
@@ -1672,16 +1287,6 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteStudioSessionMappingInput
-    #   data as a hash:
-    #
-    #       {
-    #         studio_id: "XmlStringMaxLen256", # required
-    #         identity_id: "XmlStringMaxLen256",
-    #         identity_name: "XmlStringMaxLen256",
-    #         identity_type: "USER", # required, accepts USER, GROUP
-    #       }
-    #
     # @!attribute [rw] studio_id
     #   The ID of the Amazon EMR Studio.
     #   @return [String]
@@ -1728,13 +1333,6 @@ module Aws::EMR
 
     # This input determines which cluster to describe.
     #
-    # @note When making an API call, you may pass DescribeClusterInput
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_id: "ClusterId", # required
-    #       }
-    #
     # @!attribute [rw] cluster_id
     #   The identifier of the cluster to describe.
     #   @return [String]
@@ -1762,16 +1360,6 @@ module Aws::EMR
     end
 
     # The input for the DescribeJobFlows operation.
-    #
-    # @note When making an API call, you may pass DescribeJobFlowsInput
-    #   data as a hash:
-    #
-    #       {
-    #         created_after: Time.now,
-    #         created_before: Time.now,
-    #         job_flow_ids: ["XmlString"],
-    #         job_flow_states: ["STARTING"], # accepts STARTING, BOOTSTRAPPING, RUNNING, WAITING, SHUTTING_DOWN, TERMINATED, COMPLETED, FAILED
-    #       }
     #
     # @!attribute [rw] created_after
     #   Return only job flows created after this date and time.
@@ -1814,13 +1402,6 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeNotebookExecutionInput
-    #   data as a hash:
-    #
-    #       {
-    #         notebook_execution_id: "XmlStringMaxLen256", # required
-    #       }
-    #
     # @!attribute [rw] notebook_execution_id
     #   The unique identifier of the notebook execution.
     #   @return [String]
@@ -1845,15 +1426,6 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeReleaseLabelInput
-    #   data as a hash:
-    #
-    #       {
-    #         release_label: "String",
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] release_label
     #   The target release label to be described.
     #   @return [String]
@@ -1915,13 +1487,6 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeSecurityConfigurationInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "XmlString", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the security configuration.
     #   @return [String]
@@ -1958,14 +1523,6 @@ module Aws::EMR
 
     # This input determines which step to describe.
     #
-    # @note When making an API call, you may pass DescribeStepInput
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_id: "ClusterId", # required
-    #         step_id: "StepId", # required
-    #       }
-    #
     # @!attribute [rw] cluster_id
     #   The identifier of the cluster with steps to describe.
     #   @return [String]
@@ -1997,13 +1554,6 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeStudioInput
-    #   data as a hash:
-    #
-    #       {
-    #         studio_id: "XmlStringMaxLen256", # required
-    #       }
-    #
     # @!attribute [rw] studio_id
     #   The Amazon EMR Studio ID.
     #   @return [String]
@@ -2054,19 +1604,6 @@ module Aws::EMR
     # instance group with count of volumes that are associated to every
     # instance.
     #
-    # @note When making an API call, you may pass EbsBlockDeviceConfig
-    #   data as a hash:
-    #
-    #       {
-    #         volume_specification: { # required
-    #           volume_type: "String", # required
-    #           iops: 1,
-    #           size_in_gb: 1, # required
-    #           throughput: 1,
-    #         },
-    #         volumes_per_instance: 1,
-    #       }
-    #
     # @!attribute [rw] volume_specification
     #   EBS volume specifications such as volume type, IOPS, size (GiB) and
     #   throughput (MiB/s) that are requested for the EBS volume attached to
@@ -2088,24 +1625,6 @@ module Aws::EMR
     end
 
     # The Amazon EBS configuration of a cluster instance.
-    #
-    # @note When making an API call, you may pass EbsConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         ebs_block_device_configs: [
-    #           {
-    #             volume_specification: { # required
-    #               volume_type: "String", # required
-    #               iops: 1,
-    #               size_in_gb: 1, # required
-    #               throughput: 1,
-    #             },
-    #             volumes_per_instance: 1,
-    #           },
-    #         ],
-    #         ebs_optimized: false,
-    #       }
     #
     # @!attribute [rw] ebs_block_device_configs
     #   An array of Amazon EBS volume specifications attached to a cluster
@@ -2241,15 +1760,6 @@ module Aws::EMR
     # Specifies the execution engine (cluster) to run the notebook and
     # perform the notebook execution, for example, an EMR cluster.
     #
-    # @note When making an API call, you may pass ExecutionEngineConfig
-    #   data as a hash:
-    #
-    #       {
-    #         id: "XmlStringMaxLen256", # required
-    #         type: "EMR", # accepts EMR
-    #         master_instance_security_group_id: "XmlStringMaxLen256",
-    #       }
-    #
     # @!attribute [rw] id
     #   The unique identifier of the execution engine. For an EMR cluster,
     #   this is the cluster ID.
@@ -2311,13 +1821,6 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAutoTerminationPolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_id: "ClusterId", # required
-    #       }
-    #
     # @!attribute [rw] cluster_id
     #   Specifies the ID of the Amazon EMR cluster for which the
     #   auto-termination policy will be fetched.
@@ -2344,8 +1847,6 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/GetBlockPublicAccessConfigurationInput AWS API Documentation
     #
     class GetBlockPublicAccessConfigurationInput < Aws::EmptyStructure; end
@@ -2391,13 +1892,6 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetManagedScalingPolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_id: "ClusterId", # required
-    #       }
-    #
     # @!attribute [rw] cluster_id
     #   Specifies the ID of the cluster for which the managed scaling policy
     #   will be fetched.
@@ -2424,16 +1918,6 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetStudioSessionMappingInput
-    #   data as a hash:
-    #
-    #       {
-    #         studio_id: "XmlStringMaxLen256", # required
-    #         identity_id: "XmlStringMaxLen256",
-    #         identity_name: "XmlStringMaxLen256",
-    #         identity_type: "USER", # required, accepts USER, GROUP
-    #       }
-    #
     # @!attribute [rw] studio_id
     #   The ID of the Amazon EMR Studio.
     #   @return [String]
@@ -2493,21 +1977,6 @@ module Aws::EMR
     # A job flow step consisting of a JAR file whose main function will be
     # executed. The main function submits a job for Hadoop to execute and
     # waits for the job to finish or fail.
-    #
-    # @note When making an API call, you may pass HadoopJarStepConfig
-    #   data as a hash:
-    #
-    #       {
-    #         properties: [
-    #           {
-    #             key: "XmlString",
-    #             value: "XmlString",
-    #           },
-    #         ],
-    #         jar: "XmlString", # required
-    #         main_class: "XmlString",
-    #         args: ["XmlString"],
-    #       }
     #
     # @!attribute [rw] properties
     #   A list of Java properties that are set when the step runs. You can
@@ -2772,66 +2241,6 @@ module Aws::EMR
     #
     #  </note>
     #
-    # @note When making an API call, you may pass InstanceFleetConfig
-    #   data as a hash:
-    #
-    #       {
-    #         name: "XmlStringMaxLen256",
-    #         instance_fleet_type: "MASTER", # required, accepts MASTER, CORE, TASK
-    #         target_on_demand_capacity: 1,
-    #         target_spot_capacity: 1,
-    #         instance_type_configs: [
-    #           {
-    #             instance_type: "InstanceType", # required
-    #             weighted_capacity: 1,
-    #             bid_price: "XmlStringMaxLen256",
-    #             bid_price_as_percentage_of_on_demand_price: 1.0,
-    #             ebs_configuration: {
-    #               ebs_block_device_configs: [
-    #                 {
-    #                   volume_specification: { # required
-    #                     volume_type: "String", # required
-    #                     iops: 1,
-    #                     size_in_gb: 1, # required
-    #                     throughput: 1,
-    #                   },
-    #                   volumes_per_instance: 1,
-    #                 },
-    #               ],
-    #               ebs_optimized: false,
-    #             },
-    #             configurations: [
-    #               {
-    #                 classification: "String",
-    #                 configurations: {
-    #                   # recursive ConfigurationList
-    #                 },
-    #                 properties: {
-    #                   "String" => "String",
-    #                 },
-    #               },
-    #             ],
-    #             custom_ami_id: "XmlStringMaxLen256",
-    #           },
-    #         ],
-    #         launch_specifications: {
-    #           spot_specification: {
-    #             timeout_duration_minutes: 1, # required
-    #             timeout_action: "SWITCH_TO_ON_DEMAND", # required, accepts SWITCH_TO_ON_DEMAND, TERMINATE_CLUSTER
-    #             block_duration_minutes: 1,
-    #             allocation_strategy: "capacity-optimized", # accepts capacity-optimized
-    #           },
-    #           on_demand_specification: {
-    #             allocation_strategy: "lowest-price", # required, accepts lowest-price
-    #             capacity_reservation_options: {
-    #               usage_strategy: "use-capacity-reservations-first", # accepts use-capacity-reservations-first
-    #               capacity_reservation_preference: "open", # accepts open, none
-    #               capacity_reservation_resource_group_arn: "XmlStringMaxLen256",
-    #             },
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The friendly name of the instance fleet.
     #   @return [String]
@@ -2918,15 +2327,6 @@ module Aws::EMR
     #
     #  </note>
     #
-    # @note When making an API call, you may pass InstanceFleetModifyConfig
-    #   data as a hash:
-    #
-    #       {
-    #         instance_fleet_id: "InstanceFleetId", # required
-    #         target_on_demand_capacity: 1,
-    #         target_spot_capacity: 1,
-    #       }
-    #
     # @!attribute [rw] instance_fleet_id
     #   A unique identifier for the instance fleet.
     #   @return [String]
@@ -2961,26 +2361,6 @@ module Aws::EMR
     # 5.12.1 and later.
     #
     #  </note>
-    #
-    # @note When making an API call, you may pass InstanceFleetProvisioningSpecifications
-    #   data as a hash:
-    #
-    #       {
-    #         spot_specification: {
-    #           timeout_duration_minutes: 1, # required
-    #           timeout_action: "SWITCH_TO_ON_DEMAND", # required, accepts SWITCH_TO_ON_DEMAND, TERMINATE_CLUSTER
-    #           block_duration_minutes: 1,
-    #           allocation_strategy: "capacity-optimized", # accepts capacity-optimized
-    #         },
-    #         on_demand_specification: {
-    #           allocation_strategy: "lowest-price", # required, accepts lowest-price
-    #           capacity_reservation_options: {
-    #             usage_strategy: "use-capacity-reservations-first", # accepts use-capacity-reservations-first
-    #             capacity_reservation_preference: "open", # accepts open, none
-    #             capacity_reservation_resource_group_arn: "XmlStringMaxLen256",
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] spot_specification
     #   The launch specification for Spot Instances in the fleet, which
@@ -3239,82 +2619,6 @@ module Aws::EMR
 
     # Configuration defining a new instance group.
     #
-    # @note When making an API call, you may pass InstanceGroupConfig
-    #   data as a hash:
-    #
-    #       {
-    #         name: "XmlStringMaxLen256",
-    #         market: "ON_DEMAND", # accepts ON_DEMAND, SPOT
-    #         instance_role: "MASTER", # required, accepts MASTER, CORE, TASK
-    #         bid_price: "XmlStringMaxLen256",
-    #         instance_type: "InstanceType", # required
-    #         instance_count: 1, # required
-    #         configurations: [
-    #           {
-    #             classification: "String",
-    #             configurations: {
-    #               # recursive ConfigurationList
-    #             },
-    #             properties: {
-    #               "String" => "String",
-    #             },
-    #           },
-    #         ],
-    #         ebs_configuration: {
-    #           ebs_block_device_configs: [
-    #             {
-    #               volume_specification: { # required
-    #                 volume_type: "String", # required
-    #                 iops: 1,
-    #                 size_in_gb: 1, # required
-    #                 throughput: 1,
-    #               },
-    #               volumes_per_instance: 1,
-    #             },
-    #           ],
-    #           ebs_optimized: false,
-    #         },
-    #         auto_scaling_policy: {
-    #           constraints: { # required
-    #             min_capacity: 1, # required
-    #             max_capacity: 1, # required
-    #           },
-    #           rules: [ # required
-    #             {
-    #               name: "String", # required
-    #               description: "String",
-    #               action: { # required
-    #                 market: "ON_DEMAND", # accepts ON_DEMAND, SPOT
-    #                 simple_scaling_policy_configuration: { # required
-    #                   adjustment_type: "CHANGE_IN_CAPACITY", # accepts CHANGE_IN_CAPACITY, PERCENT_CHANGE_IN_CAPACITY, EXACT_CAPACITY
-    #                   scaling_adjustment: 1, # required
-    #                   cool_down: 1,
-    #                 },
-    #               },
-    #               trigger: { # required
-    #                 cloud_watch_alarm_definition: { # required
-    #                   comparison_operator: "GREATER_THAN_OR_EQUAL", # required, accepts GREATER_THAN_OR_EQUAL, GREATER_THAN, LESS_THAN, LESS_THAN_OR_EQUAL
-    #                   evaluation_periods: 1,
-    #                   metric_name: "String", # required
-    #                   namespace: "String",
-    #                   period: 1, # required
-    #                   statistic: "SAMPLE_COUNT", # accepts SAMPLE_COUNT, AVERAGE, SUM, MINIMUM, MAXIMUM
-    #                   threshold: 1.0, # required
-    #                   unit: "NONE", # accepts NONE, SECONDS, MICRO_SECONDS, MILLI_SECONDS, BYTES, KILO_BYTES, MEGA_BYTES, GIGA_BYTES, TERA_BYTES, BITS, KILO_BITS, MEGA_BITS, GIGA_BITS, TERA_BITS, PERCENT, COUNT, BYTES_PER_SECOND, KILO_BYTES_PER_SECOND, MEGA_BYTES_PER_SECOND, GIGA_BYTES_PER_SECOND, TERA_BYTES_PER_SECOND, BITS_PER_SECOND, KILO_BITS_PER_SECOND, MEGA_BITS_PER_SECOND, GIGA_BITS_PER_SECOND, TERA_BITS_PER_SECOND, COUNT_PER_SECOND
-    #                   dimensions: [
-    #                     {
-    #                       key: "String",
-    #                       value: "String",
-    #                     },
-    #                   ],
-    #                 },
-    #               },
-    #             },
-    #           ],
-    #         },
-    #         custom_ami_id: "XmlStringMaxLen256",
-    #       }
-    #
     # @!attribute [rw] name
     #   Friendly name given to the instance group.
     #   @return [String]
@@ -3476,35 +2780,6 @@ module Aws::EMR
 
     # Modify the size or configurations of an instance group.
     #
-    # @note When making an API call, you may pass InstanceGroupModifyConfig
-    #   data as a hash:
-    #
-    #       {
-    #         instance_group_id: "XmlStringMaxLen256", # required
-    #         instance_count: 1,
-    #         ec2_instance_ids_to_terminate: ["InstanceId"],
-    #         shrink_policy: {
-    #           decommission_timeout: 1,
-    #           instance_resize_policy: {
-    #             instances_to_terminate: ["InstanceId"],
-    #             instances_to_protect: ["InstanceId"],
-    #             instance_termination_timeout: 1,
-    #           },
-    #         },
-    #         reconfiguration_type: "OVERWRITE", # accepts OVERWRITE, MERGE
-    #         configurations: [
-    #           {
-    #             classification: "String",
-    #             configurations: {
-    #               # recursive ConfigurationList
-    #             },
-    #             properties: {
-    #               "String" => "String",
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] instance_group_id
     #   Unique ID of the instance group to modify.
     #   @return [String]
@@ -3616,15 +2891,6 @@ module Aws::EMR
     # Custom policy for requesting termination protection or termination of
     # specific instances when shrinking an instance group.
     #
-    # @note When making an API call, you may pass InstanceResizePolicy
-    #   data as a hash:
-    #
-    #       {
-    #         instances_to_terminate: ["InstanceId"],
-    #         instances_to_protect: ["InstanceId"],
-    #         instance_termination_timeout: 1,
-    #       }
-    #
     # @!attribute [rw] instances_to_terminate
     #   Specific list of instances to be terminated when shrinking an
     #   instance group.
@@ -3734,42 +3000,6 @@ module Aws::EMR
     #
     #
     # [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-instance-fleet.html
-    #
-    # @note When making an API call, you may pass InstanceTypeConfig
-    #   data as a hash:
-    #
-    #       {
-    #         instance_type: "InstanceType", # required
-    #         weighted_capacity: 1,
-    #         bid_price: "XmlStringMaxLen256",
-    #         bid_price_as_percentage_of_on_demand_price: 1.0,
-    #         ebs_configuration: {
-    #           ebs_block_device_configs: [
-    #             {
-    #               volume_specification: { # required
-    #                 volume_type: "String", # required
-    #                 iops: 1,
-    #                 size_in_gb: 1, # required
-    #                 throughput: 1,
-    #               },
-    #               volumes_per_instance: 1,
-    #             },
-    #           ],
-    #           ebs_optimized: false,
-    #         },
-    #         configurations: [
-    #           {
-    #             classification: "String",
-    #             configurations: {
-    #               # recursive ConfigurationList
-    #             },
-    #             properties: {
-    #               "String" => "String",
-    #             },
-    #           },
-    #         ],
-    #         custom_ami_id: "XmlStringMaxLen256",
-    #       }
     #
     # @!attribute [rw] instance_type
     #   An EC2 instance type, such as `m3.xlarge`.
@@ -4104,162 +3334,6 @@ module Aws::EMR
     # (all three must be present), but we don't recommend this
     # configuration.
     #
-    # @note When making an API call, you may pass JobFlowInstancesConfig
-    #   data as a hash:
-    #
-    #       {
-    #         master_instance_type: "InstanceType",
-    #         slave_instance_type: "InstanceType",
-    #         instance_count: 1,
-    #         instance_groups: [
-    #           {
-    #             name: "XmlStringMaxLen256",
-    #             market: "ON_DEMAND", # accepts ON_DEMAND, SPOT
-    #             instance_role: "MASTER", # required, accepts MASTER, CORE, TASK
-    #             bid_price: "XmlStringMaxLen256",
-    #             instance_type: "InstanceType", # required
-    #             instance_count: 1, # required
-    #             configurations: [
-    #               {
-    #                 classification: "String",
-    #                 configurations: {
-    #                   # recursive ConfigurationList
-    #                 },
-    #                 properties: {
-    #                   "String" => "String",
-    #                 },
-    #               },
-    #             ],
-    #             ebs_configuration: {
-    #               ebs_block_device_configs: [
-    #                 {
-    #                   volume_specification: { # required
-    #                     volume_type: "String", # required
-    #                     iops: 1,
-    #                     size_in_gb: 1, # required
-    #                     throughput: 1,
-    #                   },
-    #                   volumes_per_instance: 1,
-    #                 },
-    #               ],
-    #               ebs_optimized: false,
-    #             },
-    #             auto_scaling_policy: {
-    #               constraints: { # required
-    #                 min_capacity: 1, # required
-    #                 max_capacity: 1, # required
-    #               },
-    #               rules: [ # required
-    #                 {
-    #                   name: "String", # required
-    #                   description: "String",
-    #                   action: { # required
-    #                     market: "ON_DEMAND", # accepts ON_DEMAND, SPOT
-    #                     simple_scaling_policy_configuration: { # required
-    #                       adjustment_type: "CHANGE_IN_CAPACITY", # accepts CHANGE_IN_CAPACITY, PERCENT_CHANGE_IN_CAPACITY, EXACT_CAPACITY
-    #                       scaling_adjustment: 1, # required
-    #                       cool_down: 1,
-    #                     },
-    #                   },
-    #                   trigger: { # required
-    #                     cloud_watch_alarm_definition: { # required
-    #                       comparison_operator: "GREATER_THAN_OR_EQUAL", # required, accepts GREATER_THAN_OR_EQUAL, GREATER_THAN, LESS_THAN, LESS_THAN_OR_EQUAL
-    #                       evaluation_periods: 1,
-    #                       metric_name: "String", # required
-    #                       namespace: "String",
-    #                       period: 1, # required
-    #                       statistic: "SAMPLE_COUNT", # accepts SAMPLE_COUNT, AVERAGE, SUM, MINIMUM, MAXIMUM
-    #                       threshold: 1.0, # required
-    #                       unit: "NONE", # accepts NONE, SECONDS, MICRO_SECONDS, MILLI_SECONDS, BYTES, KILO_BYTES, MEGA_BYTES, GIGA_BYTES, TERA_BYTES, BITS, KILO_BITS, MEGA_BITS, GIGA_BITS, TERA_BITS, PERCENT, COUNT, BYTES_PER_SECOND, KILO_BYTES_PER_SECOND, MEGA_BYTES_PER_SECOND, GIGA_BYTES_PER_SECOND, TERA_BYTES_PER_SECOND, BITS_PER_SECOND, KILO_BITS_PER_SECOND, MEGA_BITS_PER_SECOND, GIGA_BITS_PER_SECOND, TERA_BITS_PER_SECOND, COUNT_PER_SECOND
-    #                       dimensions: [
-    #                         {
-    #                           key: "String",
-    #                           value: "String",
-    #                         },
-    #                       ],
-    #                     },
-    #                   },
-    #                 },
-    #               ],
-    #             },
-    #             custom_ami_id: "XmlStringMaxLen256",
-    #           },
-    #         ],
-    #         instance_fleets: [
-    #           {
-    #             name: "XmlStringMaxLen256",
-    #             instance_fleet_type: "MASTER", # required, accepts MASTER, CORE, TASK
-    #             target_on_demand_capacity: 1,
-    #             target_spot_capacity: 1,
-    #             instance_type_configs: [
-    #               {
-    #                 instance_type: "InstanceType", # required
-    #                 weighted_capacity: 1,
-    #                 bid_price: "XmlStringMaxLen256",
-    #                 bid_price_as_percentage_of_on_demand_price: 1.0,
-    #                 ebs_configuration: {
-    #                   ebs_block_device_configs: [
-    #                     {
-    #                       volume_specification: { # required
-    #                         volume_type: "String", # required
-    #                         iops: 1,
-    #                         size_in_gb: 1, # required
-    #                         throughput: 1,
-    #                       },
-    #                       volumes_per_instance: 1,
-    #                     },
-    #                   ],
-    #                   ebs_optimized: false,
-    #                 },
-    #                 configurations: [
-    #                   {
-    #                     classification: "String",
-    #                     configurations: {
-    #                       # recursive ConfigurationList
-    #                     },
-    #                     properties: {
-    #                       "String" => "String",
-    #                     },
-    #                   },
-    #                 ],
-    #                 custom_ami_id: "XmlStringMaxLen256",
-    #               },
-    #             ],
-    #             launch_specifications: {
-    #               spot_specification: {
-    #                 timeout_duration_minutes: 1, # required
-    #                 timeout_action: "SWITCH_TO_ON_DEMAND", # required, accepts SWITCH_TO_ON_DEMAND, TERMINATE_CLUSTER
-    #                 block_duration_minutes: 1,
-    #                 allocation_strategy: "capacity-optimized", # accepts capacity-optimized
-    #               },
-    #               on_demand_specification: {
-    #                 allocation_strategy: "lowest-price", # required, accepts lowest-price
-    #                 capacity_reservation_options: {
-    #                   usage_strategy: "use-capacity-reservations-first", # accepts use-capacity-reservations-first
-    #                   capacity_reservation_preference: "open", # accepts open, none
-    #                   capacity_reservation_resource_group_arn: "XmlStringMaxLen256",
-    #                 },
-    #               },
-    #             },
-    #           },
-    #         ],
-    #         ec2_key_name: "XmlStringMaxLen256",
-    #         placement: {
-    #           availability_zone: "XmlString",
-    #           availability_zones: ["XmlStringMaxLen256"],
-    #         },
-    #         keep_job_flow_alive_when_no_steps: false,
-    #         termination_protected: false,
-    #         hadoop_version: "XmlStringMaxLen256",
-    #         ec2_subnet_id: "XmlStringMaxLen256",
-    #         ec2_subnet_ids: ["XmlStringMaxLen256"],
-    #         emr_managed_master_security_group: "XmlStringMaxLen256",
-    #         emr_managed_slave_security_group: "XmlStringMaxLen256",
-    #         service_access_security_group: "XmlStringMaxLen256",
-    #         additional_master_security_groups: ["XmlStringMaxLen256"],
-    #         additional_slave_security_groups: ["XmlStringMaxLen256"],
-    #       }
-    #
     # @!attribute [rw] master_instance_type
     #   The EC2 instance type of the master node.
     #   @return [String]
@@ -4492,17 +3566,6 @@ module Aws::EMR
     #
     # [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html
     #
-    # @note When making an API call, you may pass KerberosAttributes
-    #   data as a hash:
-    #
-    #       {
-    #         realm: "XmlStringMaxLen256", # required
-    #         kdc_admin_password: "XmlStringMaxLen256", # required
-    #         cross_realm_trust_principal_password: "XmlStringMaxLen256",
-    #         ad_domain_join_user: "XmlStringMaxLen256",
-    #         ad_domain_join_password: "XmlStringMaxLen256",
-    #       }
-    #
     # @!attribute [rw] realm
     #   The name of the Kerberos realm to which all nodes in a cluster
     #   belong. For example, `EC2.INTERNAL`.
@@ -4544,14 +3607,6 @@ module Aws::EMR
 
     # A key-value pair.
     #
-    # @note When making an API call, you may pass KeyValue
-    #   data as a hash:
-    #
-    #       {
-    #         key: "XmlString",
-    #         value: "XmlString",
-    #       }
-    #
     # @!attribute [rw] key
     #   The unique identifier of a key-value pair.
     #   @return [String]
@@ -4570,14 +3625,6 @@ module Aws::EMR
     end
 
     # This input determines which bootstrap actions to retrieve.
-    #
-    # @note When making an API call, you may pass ListBootstrapActionsInput
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_id: "ClusterId", # required
-    #         marker: "Marker",
-    #       }
     #
     # @!attribute [rw] cluster_id
     #   The cluster identifier for the bootstrap actions to list.
@@ -4619,16 +3666,6 @@ module Aws::EMR
 
     # This input determines how the ListClusters action filters the list of
     # clusters that it returns.
-    #
-    # @note When making an API call, you may pass ListClustersInput
-    #   data as a hash:
-    #
-    #       {
-    #         created_after: Time.now,
-    #         created_before: Time.now,
-    #         cluster_states: ["STARTING"], # accepts STARTING, BOOTSTRAPPING, RUNNING, WAITING, TERMINATING, TERMINATED, TERMINATED_WITH_ERRORS
-    #         marker: "Marker",
-    #       }
     #
     # @!attribute [rw] created_after
     #   The creation date and time beginning value filter for listing
@@ -4682,14 +3719,6 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListInstanceFleetsInput
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_id: "ClusterId", # required
-    #         marker: "Marker",
-    #       }
-    #
     # @!attribute [rw] cluster_id
     #   The unique identifier of the cluster.
     #   @return [String]
@@ -4727,14 +3756,6 @@ module Aws::EMR
     end
 
     # This input determines which instance groups to retrieve.
-    #
-    # @note When making an API call, you may pass ListInstanceGroupsInput
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_id: "ClusterId", # required
-    #         marker: "Marker",
-    #       }
     #
     # @!attribute [rw] cluster_id
     #   The identifier of the cluster for which to list the instance groups.
@@ -4775,19 +3796,6 @@ module Aws::EMR
     end
 
     # This input determines which instances to list.
-    #
-    # @note When making an API call, you may pass ListInstancesInput
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_id: "ClusterId", # required
-    #         instance_group_id: "InstanceGroupId",
-    #         instance_group_types: ["MASTER"], # accepts MASTER, CORE, TASK
-    #         instance_fleet_id: "InstanceFleetId",
-    #         instance_fleet_type: "MASTER", # accepts MASTER, CORE, TASK
-    #         instance_states: ["AWAITING_FULFILLMENT"], # accepts AWAITING_FULFILLMENT, PROVISIONING, BOOTSTRAPPING, RUNNING, TERMINATED
-    #         marker: "Marker",
-    #       }
     #
     # @!attribute [rw] cluster_id
     #   The identifier of the cluster for which to list the instances.
@@ -4855,17 +3863,6 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListNotebookExecutionsInput
-    #   data as a hash:
-    #
-    #       {
-    #         editor_id: "XmlStringMaxLen256",
-    #         status: "START_PENDING", # accepts START_PENDING, STARTING, RUNNING, FINISHING, FINISHED, FAILING, FAILED, STOP_PENDING, STOPPING, STOPPED
-    #         from: Time.now,
-    #         to: Time.now,
-    #         marker: "Marker",
-    #       }
-    #
     # @!attribute [rw] editor_id
     #   The unique ID of the editor associated with the notebook execution.
     #   @return [String]
@@ -4950,18 +3947,6 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListReleaseLabelsInput
-    #   data as a hash:
-    #
-    #       {
-    #         filters: {
-    #           prefix: "String",
-    #           application: "String",
-    #         },
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] filters
     #   Filters the results of the request. `Prefix` specifies the prefix of
     #   release labels to return. `Application` specifies the application
@@ -5012,13 +3997,6 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSecurityConfigurationsInput
-    #   data as a hash:
-    #
-    #       {
-    #         marker: "Marker",
-    #       }
-    #
     # @!attribute [rw] marker
     #   The pagination token that indicates the set of results to retrieve.
     #   @return [String]
@@ -5052,16 +4030,6 @@ module Aws::EMR
     end
 
     # This input determines which steps to list.
-    #
-    # @note When making an API call, you may pass ListStepsInput
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_id: "ClusterId", # required
-    #         step_states: ["PENDING"], # accepts PENDING, CANCEL_PENDING, RUNNING, COMPLETED, CANCELLED, FAILED, INTERRUPTED
-    #         step_ids: ["XmlString"],
-    #         marker: "Marker",
-    #       }
     #
     # @!attribute [rw] cluster_id
     #   The identifier of the cluster for which to list the steps.
@@ -5118,15 +4086,6 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListStudioSessionMappingsInput
-    #   data as a hash:
-    #
-    #       {
-    #         studio_id: "XmlStringMaxLen256",
-    #         identity_type: "USER", # accepts USER, GROUP
-    #         marker: "Marker",
-    #       }
-    #
     # @!attribute [rw] studio_id
     #   The ID of the Amazon EMR Studio.
     #   @return [String]
@@ -5171,13 +4130,6 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListStudiosInput
-    #   data as a hash:
-    #
-    #       {
-    #         marker: "Marker",
-    #       }
-    #
     # @!attribute [rw] marker
     #   The pagination token that indicates the set of results to retrieve.
     #   @return [String]
@@ -5213,19 +4165,6 @@ module Aws::EMR
     # cluster. The policy only applies to the core and task nodes. The
     # master node cannot be scaled after initial configuration.
     #
-    # @note When making an API call, you may pass ManagedScalingPolicy
-    #   data as a hash:
-    #
-    #       {
-    #         compute_limits: {
-    #           unit_type: "InstanceFleetUnits", # required, accepts InstanceFleetUnits, Instances, VCPU
-    #           minimum_capacity_units: 1, # required
-    #           maximum_capacity_units: 1, # required
-    #           maximum_on_demand_capacity_units: 1,
-    #           maximum_core_capacity_units: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] compute_limits
     #   The EC2 unit limits for a managed scaling policy. The managed
     #   scaling activity of a cluster is not allowed to go above or below
@@ -5247,14 +4186,6 @@ module Aws::EMR
     # representing the cluster ID, which is `$\{emr.clusterId\}`. This
     # enables the rule to bootstrap when the cluster ID becomes available.
     #
-    # @note When making an API call, you may pass MetricDimension
-    #   data as a hash:
-    #
-    #       {
-    #         key: "String",
-    #         value: "String",
-    #       }
-    #
     # @!attribute [rw] key
     #   The dimension name.
     #   @return [String]
@@ -5272,14 +4203,6 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyClusterInput
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_id: "String", # required
-    #         step_concurrency_level: 1,
-    #       }
-    #
     # @!attribute [rw] cluster_id
     #   The unique identifier of the cluster.
     #   @return [String]
@@ -5313,18 +4236,6 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyInstanceFleetInput
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_id: "ClusterId", # required
-    #         instance_fleet: { # required
-    #           instance_fleet_id: "InstanceFleetId", # required
-    #           target_on_demand_capacity: 1,
-    #           target_spot_capacity: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] cluster_id
     #   The unique identifier of the cluster.
     #   @return [String]
@@ -5343,40 +4254,6 @@ module Aws::EMR
     end
 
     # Change the size of some instance groups.
-    #
-    # @note When making an API call, you may pass ModifyInstanceGroupsInput
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_id: "ClusterId",
-    #         instance_groups: [
-    #           {
-    #             instance_group_id: "XmlStringMaxLen256", # required
-    #             instance_count: 1,
-    #             ec2_instance_ids_to_terminate: ["InstanceId"],
-    #             shrink_policy: {
-    #               decommission_timeout: 1,
-    #               instance_resize_policy: {
-    #                 instances_to_terminate: ["InstanceId"],
-    #                 instances_to_protect: ["InstanceId"],
-    #                 instance_termination_timeout: 1,
-    #               },
-    #             },
-    #             reconfiguration_type: "OVERWRITE", # accepts OVERWRITE, MERGE
-    #             configurations: [
-    #               {
-    #                 classification: "String",
-    #                 configurations: {
-    #                   # recursive ConfigurationList
-    #                 },
-    #                 properties: {
-    #                   "String" => "String",
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] cluster_id
     #   The ID of the cluster to which the instance group belongs.
@@ -5607,15 +4484,6 @@ module Aws::EMR
     # Describes the strategy for using unused Capacity Reservations for
     # fulfilling On-Demand capacity.
     #
-    # @note When making an API call, you may pass OnDemandCapacityReservationOptions
-    #   data as a hash:
-    #
-    #       {
-    #         usage_strategy: "use-capacity-reservations-first", # accepts use-capacity-reservations-first
-    #         capacity_reservation_preference: "open", # accepts open, none
-    #         capacity_reservation_resource_group_arn: "XmlStringMaxLen256",
-    #       }
-    #
     # @!attribute [rw] usage_strategy
     #   Indicates whether to use unused Capacity Reservations for fulfilling
     #   On-Demand capacity.
@@ -5671,18 +4539,6 @@ module Aws::EMR
     #
     #  </note>
     #
-    # @note When making an API call, you may pass OnDemandProvisioningSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         allocation_strategy: "lowest-price", # required, accepts lowest-price
-    #         capacity_reservation_options: {
-    #           usage_strategy: "use-capacity-reservations-first", # accepts use-capacity-reservations-first
-    #           capacity_reservation_preference: "open", # accepts open, none
-    #           capacity_reservation_resource_group_arn: "XmlStringMaxLen256",
-    #         },
-    #       }
-    #
     # @!attribute [rw] allocation_strategy
     #   Specifies the strategy to use in launching On-Demand instance
     #   fleets. Currently, the only option is `lowest-price` (the default),
@@ -5710,14 +4566,6 @@ module Aws::EMR
     # To use this configuration, consider attaching managed policy
     # AmazonElasticMapReducePlacementGroupPolicy to the EMR role.
     #
-    # @note When making an API call, you may pass PlacementGroupConfig
-    #   data as a hash:
-    #
-    #       {
-    #         instance_role: "MASTER", # required, accepts MASTER, CORE, TASK
-    #         placement_strategy: "SPREAD", # accepts SPREAD, PARTITION, CLUSTER, NONE
-    #       }
-    #
     # @!attribute [rw] instance_role
     #   Role of the instance in the cluster.
     #
@@ -5743,14 +4591,6 @@ module Aws::EMR
 
     # The Amazon EC2 Availability Zone configuration of the cluster (job
     # flow).
-    #
-    # @note When making an API call, you may pass PlacementType
-    #   data as a hash:
-    #
-    #       {
-    #         availability_zone: "XmlString",
-    #         availability_zones: ["XmlStringMaxLen256"],
-    #       }
     #
     # @!attribute [rw] availability_zone
     #   The Amazon EC2 Availability Zone for the cluster. `AvailabilityZone`
@@ -5783,14 +4623,6 @@ module Aws::EMR
     # all public IP addresses. To specify a single port, use the same value
     # for `MinRange` and `MaxRange`.
     #
-    # @note When making an API call, you may pass PortRange
-    #   data as a hash:
-    #
-    #       {
-    #         min_range: 1, # required
-    #         max_range: 1,
-    #       }
-    #
     # @!attribute [rw] min_range
     #   The smallest port number in a specified range of port numbers.
     #   @return [Integer]
@@ -5808,52 +4640,6 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutAutoScalingPolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_id: "ClusterId", # required
-    #         instance_group_id: "InstanceGroupId", # required
-    #         auto_scaling_policy: { # required
-    #           constraints: { # required
-    #             min_capacity: 1, # required
-    #             max_capacity: 1, # required
-    #           },
-    #           rules: [ # required
-    #             {
-    #               name: "String", # required
-    #               description: "String",
-    #               action: { # required
-    #                 market: "ON_DEMAND", # accepts ON_DEMAND, SPOT
-    #                 simple_scaling_policy_configuration: { # required
-    #                   adjustment_type: "CHANGE_IN_CAPACITY", # accepts CHANGE_IN_CAPACITY, PERCENT_CHANGE_IN_CAPACITY, EXACT_CAPACITY
-    #                   scaling_adjustment: 1, # required
-    #                   cool_down: 1,
-    #                 },
-    #               },
-    #               trigger: { # required
-    #                 cloud_watch_alarm_definition: { # required
-    #                   comparison_operator: "GREATER_THAN_OR_EQUAL", # required, accepts GREATER_THAN_OR_EQUAL, GREATER_THAN, LESS_THAN, LESS_THAN_OR_EQUAL
-    #                   evaluation_periods: 1,
-    #                   metric_name: "String", # required
-    #                   namespace: "String",
-    #                   period: 1, # required
-    #                   statistic: "SAMPLE_COUNT", # accepts SAMPLE_COUNT, AVERAGE, SUM, MINIMUM, MAXIMUM
-    #                   threshold: 1.0, # required
-    #                   unit: "NONE", # accepts NONE, SECONDS, MICRO_SECONDS, MILLI_SECONDS, BYTES, KILO_BYTES, MEGA_BYTES, GIGA_BYTES, TERA_BYTES, BITS, KILO_BITS, MEGA_BITS, GIGA_BITS, TERA_BITS, PERCENT, COUNT, BYTES_PER_SECOND, KILO_BYTES_PER_SECOND, MEGA_BYTES_PER_SECOND, GIGA_BYTES_PER_SECOND, TERA_BYTES_PER_SECOND, BITS_PER_SECOND, KILO_BITS_PER_SECOND, MEGA_BITS_PER_SECOND, GIGA_BITS_PER_SECOND, TERA_BITS_PER_SECOND, COUNT_PER_SECOND
-    #                   dimensions: [
-    #                     {
-    #                       key: "String",
-    #                       value: "String",
-    #                     },
-    #                   ],
-    #                 },
-    #               },
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] cluster_id
     #   Specifies the ID of a cluster. The instance group to which the
     #   automatic scaling policy is applied is within this cluster.
@@ -5907,16 +4693,6 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutAutoTerminationPolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_id: "ClusterId", # required
-    #         auto_termination_policy: {
-    #           idle_timeout: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] cluster_id
     #   Specifies the ID of the Amazon EMR cluster to which the
     #   auto-termination policy will be attached.
@@ -5939,21 +4715,6 @@ module Aws::EMR
     #
     class PutAutoTerminationPolicyOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass PutBlockPublicAccessConfigurationInput
-    #   data as a hash:
-    #
-    #       {
-    #         block_public_access_configuration: { # required
-    #           block_public_security_group_rules: false, # required
-    #           permitted_public_security_group_rule_ranges: [
-    #             {
-    #               min_range: 1, # required
-    #               max_range: 1,
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] block_public_access_configuration
     #   A configuration for Amazon EMR block public access. The
     #   configuration applies to all clusters created in your account for
@@ -5989,22 +4750,6 @@ module Aws::EMR
     #
     class PutBlockPublicAccessConfigurationOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass PutManagedScalingPolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_id: "ClusterId", # required
-    #         managed_scaling_policy: { # required
-    #           compute_limits: {
-    #             unit_type: "InstanceFleetUnits", # required, accepts InstanceFleetUnits, Instances, VCPU
-    #             minimum_capacity_units: 1, # required
-    #             maximum_capacity_units: 1, # required
-    #             maximum_on_demand_capacity_units: 1,
-    #             maximum_core_capacity_units: 1,
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] cluster_id
     #   Specifies the ID of an EMR cluster where the managed scaling policy
     #   is attached.
@@ -6029,14 +4774,6 @@ module Aws::EMR
 
     # The release label filters by application or version prefix.
     #
-    # @note When making an API call, you may pass ReleaseLabelFilter
-    #   data as a hash:
-    #
-    #       {
-    #         prefix: "String",
-    #         application: "String",
-    #       }
-    #
     # @!attribute [rw] prefix
     #   Optional release label version prefix filter. For example, `emr-5`.
     #   @return [String]
@@ -6055,14 +4792,6 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RemoveAutoScalingPolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_id: "ClusterId", # required
-    #         instance_group_id: "InstanceGroupId", # required
-    #       }
-    #
     # @!attribute [rw] cluster_id
     #   Specifies the ID of a cluster. The instance group to which the
     #   automatic scaling policy is applied is within this cluster.
@@ -6086,13 +4815,6 @@ module Aws::EMR
     #
     class RemoveAutoScalingPolicyOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass RemoveAutoTerminationPolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_id: "ClusterId", # required
-    #       }
-    #
     # @!attribute [rw] cluster_id
     #   Specifies the ID of the Amazon EMR cluster from which the
     #   auto-termination policy will be removed.
@@ -6110,13 +4832,6 @@ module Aws::EMR
     #
     class RemoveAutoTerminationPolicyOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass RemoveManagedScalingPolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_id: "ClusterId", # required
-    #       }
-    #
     # @!attribute [rw] cluster_id
     #   Specifies the ID of the cluster from which the managed scaling
     #   policy will be removed.
@@ -6136,14 +4851,6 @@ module Aws::EMR
 
     # This input identifies an Amazon EMR resource and a list of tags to
     # remove.
-    #
-    # @note When making an API call, you may pass RemoveTagsInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_id: "ResourceId", # required
-    #         tag_keys: ["String"], # required
-    #       }
     #
     # @!attribute [rw] resource_id
     #   The Amazon EMR resource identifier from which tags will be removed.
@@ -6170,266 +4877,6 @@ module Aws::EMR
     class RemoveTagsOutput < Aws::EmptyStructure; end
 
     # Input to the RunJobFlow operation.
-    #
-    # @note When making an API call, you may pass RunJobFlowInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "XmlStringMaxLen256", # required
-    #         log_uri: "XmlString",
-    #         log_encryption_kms_key_id: "XmlString",
-    #         additional_info: "XmlString",
-    #         ami_version: "XmlStringMaxLen256",
-    #         release_label: "XmlStringMaxLen256",
-    #         instances: { # required
-    #           master_instance_type: "InstanceType",
-    #           slave_instance_type: "InstanceType",
-    #           instance_count: 1,
-    #           instance_groups: [
-    #             {
-    #               name: "XmlStringMaxLen256",
-    #               market: "ON_DEMAND", # accepts ON_DEMAND, SPOT
-    #               instance_role: "MASTER", # required, accepts MASTER, CORE, TASK
-    #               bid_price: "XmlStringMaxLen256",
-    #               instance_type: "InstanceType", # required
-    #               instance_count: 1, # required
-    #               configurations: [
-    #                 {
-    #                   classification: "String",
-    #                   configurations: {
-    #                     # recursive ConfigurationList
-    #                   },
-    #                   properties: {
-    #                     "String" => "String",
-    #                   },
-    #                 },
-    #               ],
-    #               ebs_configuration: {
-    #                 ebs_block_device_configs: [
-    #                   {
-    #                     volume_specification: { # required
-    #                       volume_type: "String", # required
-    #                       iops: 1,
-    #                       size_in_gb: 1, # required
-    #                       throughput: 1,
-    #                     },
-    #                     volumes_per_instance: 1,
-    #                   },
-    #                 ],
-    #                 ebs_optimized: false,
-    #               },
-    #               auto_scaling_policy: {
-    #                 constraints: { # required
-    #                   min_capacity: 1, # required
-    #                   max_capacity: 1, # required
-    #                 },
-    #                 rules: [ # required
-    #                   {
-    #                     name: "String", # required
-    #                     description: "String",
-    #                     action: { # required
-    #                       market: "ON_DEMAND", # accepts ON_DEMAND, SPOT
-    #                       simple_scaling_policy_configuration: { # required
-    #                         adjustment_type: "CHANGE_IN_CAPACITY", # accepts CHANGE_IN_CAPACITY, PERCENT_CHANGE_IN_CAPACITY, EXACT_CAPACITY
-    #                         scaling_adjustment: 1, # required
-    #                         cool_down: 1,
-    #                       },
-    #                     },
-    #                     trigger: { # required
-    #                       cloud_watch_alarm_definition: { # required
-    #                         comparison_operator: "GREATER_THAN_OR_EQUAL", # required, accepts GREATER_THAN_OR_EQUAL, GREATER_THAN, LESS_THAN, LESS_THAN_OR_EQUAL
-    #                         evaluation_periods: 1,
-    #                         metric_name: "String", # required
-    #                         namespace: "String",
-    #                         period: 1, # required
-    #                         statistic: "SAMPLE_COUNT", # accepts SAMPLE_COUNT, AVERAGE, SUM, MINIMUM, MAXIMUM
-    #                         threshold: 1.0, # required
-    #                         unit: "NONE", # accepts NONE, SECONDS, MICRO_SECONDS, MILLI_SECONDS, BYTES, KILO_BYTES, MEGA_BYTES, GIGA_BYTES, TERA_BYTES, BITS, KILO_BITS, MEGA_BITS, GIGA_BITS, TERA_BITS, PERCENT, COUNT, BYTES_PER_SECOND, KILO_BYTES_PER_SECOND, MEGA_BYTES_PER_SECOND, GIGA_BYTES_PER_SECOND, TERA_BYTES_PER_SECOND, BITS_PER_SECOND, KILO_BITS_PER_SECOND, MEGA_BITS_PER_SECOND, GIGA_BITS_PER_SECOND, TERA_BITS_PER_SECOND, COUNT_PER_SECOND
-    #                         dimensions: [
-    #                           {
-    #                             key: "String",
-    #                             value: "String",
-    #                           },
-    #                         ],
-    #                       },
-    #                     },
-    #                   },
-    #                 ],
-    #               },
-    #               custom_ami_id: "XmlStringMaxLen256",
-    #             },
-    #           ],
-    #           instance_fleets: [
-    #             {
-    #               name: "XmlStringMaxLen256",
-    #               instance_fleet_type: "MASTER", # required, accepts MASTER, CORE, TASK
-    #               target_on_demand_capacity: 1,
-    #               target_spot_capacity: 1,
-    #               instance_type_configs: [
-    #                 {
-    #                   instance_type: "InstanceType", # required
-    #                   weighted_capacity: 1,
-    #                   bid_price: "XmlStringMaxLen256",
-    #                   bid_price_as_percentage_of_on_demand_price: 1.0,
-    #                   ebs_configuration: {
-    #                     ebs_block_device_configs: [
-    #                       {
-    #                         volume_specification: { # required
-    #                           volume_type: "String", # required
-    #                           iops: 1,
-    #                           size_in_gb: 1, # required
-    #                           throughput: 1,
-    #                         },
-    #                         volumes_per_instance: 1,
-    #                       },
-    #                     ],
-    #                     ebs_optimized: false,
-    #                   },
-    #                   configurations: [
-    #                     {
-    #                       classification: "String",
-    #                       configurations: {
-    #                         # recursive ConfigurationList
-    #                       },
-    #                       properties: {
-    #                         "String" => "String",
-    #                       },
-    #                     },
-    #                   ],
-    #                   custom_ami_id: "XmlStringMaxLen256",
-    #                 },
-    #               ],
-    #               launch_specifications: {
-    #                 spot_specification: {
-    #                   timeout_duration_minutes: 1, # required
-    #                   timeout_action: "SWITCH_TO_ON_DEMAND", # required, accepts SWITCH_TO_ON_DEMAND, TERMINATE_CLUSTER
-    #                   block_duration_minutes: 1,
-    #                   allocation_strategy: "capacity-optimized", # accepts capacity-optimized
-    #                 },
-    #                 on_demand_specification: {
-    #                   allocation_strategy: "lowest-price", # required, accepts lowest-price
-    #                   capacity_reservation_options: {
-    #                     usage_strategy: "use-capacity-reservations-first", # accepts use-capacity-reservations-first
-    #                     capacity_reservation_preference: "open", # accepts open, none
-    #                     capacity_reservation_resource_group_arn: "XmlStringMaxLen256",
-    #                   },
-    #                 },
-    #               },
-    #             },
-    #           ],
-    #           ec2_key_name: "XmlStringMaxLen256",
-    #           placement: {
-    #             availability_zone: "XmlString",
-    #             availability_zones: ["XmlStringMaxLen256"],
-    #           },
-    #           keep_job_flow_alive_when_no_steps: false,
-    #           termination_protected: false,
-    #           hadoop_version: "XmlStringMaxLen256",
-    #           ec2_subnet_id: "XmlStringMaxLen256",
-    #           ec2_subnet_ids: ["XmlStringMaxLen256"],
-    #           emr_managed_master_security_group: "XmlStringMaxLen256",
-    #           emr_managed_slave_security_group: "XmlStringMaxLen256",
-    #           service_access_security_group: "XmlStringMaxLen256",
-    #           additional_master_security_groups: ["XmlStringMaxLen256"],
-    #           additional_slave_security_groups: ["XmlStringMaxLen256"],
-    #         },
-    #         steps: [
-    #           {
-    #             name: "XmlStringMaxLen256", # required
-    #             action_on_failure: "TERMINATE_JOB_FLOW", # accepts TERMINATE_JOB_FLOW, TERMINATE_CLUSTER, CANCEL_AND_WAIT, CONTINUE
-    #             hadoop_jar_step: { # required
-    #               properties: [
-    #                 {
-    #                   key: "XmlString",
-    #                   value: "XmlString",
-    #                 },
-    #               ],
-    #               jar: "XmlString", # required
-    #               main_class: "XmlString",
-    #               args: ["XmlString"],
-    #             },
-    #           },
-    #         ],
-    #         bootstrap_actions: [
-    #           {
-    #             name: "XmlStringMaxLen256", # required
-    #             script_bootstrap_action: { # required
-    #               path: "XmlString", # required
-    #               args: ["XmlString"],
-    #             },
-    #           },
-    #         ],
-    #         supported_products: ["XmlStringMaxLen256"],
-    #         new_supported_products: [
-    #           {
-    #             name: "XmlStringMaxLen256",
-    #             args: ["XmlString"],
-    #           },
-    #         ],
-    #         applications: [
-    #           {
-    #             name: "String",
-    #             version: "String",
-    #             args: ["String"],
-    #             additional_info: {
-    #               "String" => "String",
-    #             },
-    #           },
-    #         ],
-    #         configurations: [
-    #           {
-    #             classification: "String",
-    #             configurations: {
-    #               # recursive ConfigurationList
-    #             },
-    #             properties: {
-    #               "String" => "String",
-    #             },
-    #           },
-    #         ],
-    #         visible_to_all_users: false,
-    #         job_flow_role: "XmlString",
-    #         service_role: "XmlString",
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #         security_configuration: "XmlString",
-    #         auto_scaling_role: "XmlString",
-    #         scale_down_behavior: "TERMINATE_AT_INSTANCE_HOUR", # accepts TERMINATE_AT_INSTANCE_HOUR, TERMINATE_AT_TASK_COMPLETION
-    #         custom_ami_id: "XmlStringMaxLen256",
-    #         ebs_root_volume_size: 1,
-    #         repo_upgrade_on_boot: "SECURITY", # accepts SECURITY, NONE
-    #         kerberos_attributes: {
-    #           realm: "XmlStringMaxLen256", # required
-    #           kdc_admin_password: "XmlStringMaxLen256", # required
-    #           cross_realm_trust_principal_password: "XmlStringMaxLen256",
-    #           ad_domain_join_user: "XmlStringMaxLen256",
-    #           ad_domain_join_password: "XmlStringMaxLen256",
-    #         },
-    #         step_concurrency_level: 1,
-    #         managed_scaling_policy: {
-    #           compute_limits: {
-    #             unit_type: "InstanceFleetUnits", # required, accepts InstanceFleetUnits, Instances, VCPU
-    #             minimum_capacity_units: 1, # required
-    #             maximum_capacity_units: 1, # required
-    #             maximum_on_demand_capacity_units: 1,
-    #             maximum_core_capacity_units: 1,
-    #           },
-    #         },
-    #         placement_group_configs: [
-    #           {
-    #             instance_role: "MASTER", # required, accepts MASTER, CORE, TASK
-    #             placement_strategy: "SPREAD", # accepts SPREAD, PARTITION, CLUSTER, NONE
-    #           },
-    #         ],
-    #         auto_termination_policy: {
-    #           idle_timeout: 1,
-    #         },
-    #         os_release_label: "XmlStringMaxLen256",
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the job flow.
@@ -6765,18 +5212,6 @@ module Aws::EMR
     # The type of adjustment the automatic scaling activity makes when
     # triggered, and the periodicity of the adjustment.
     #
-    # @note When making an API call, you may pass ScalingAction
-    #   data as a hash:
-    #
-    #       {
-    #         market: "ON_DEMAND", # accepts ON_DEMAND, SPOT
-    #         simple_scaling_policy_configuration: { # required
-    #           adjustment_type: "CHANGE_IN_CAPACITY", # accepts CHANGE_IN_CAPACITY, PERCENT_CHANGE_IN_CAPACITY, EXACT_CAPACITY
-    #           scaling_adjustment: 1, # required
-    #           cool_down: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] market
     #   Not available for instance groups. Instance groups use the market
     #   type specified for the group.
@@ -6800,14 +5235,6 @@ module Aws::EMR
     # policy. Automatic scaling activities triggered by automatic scaling
     # rules will not cause an instance group to grow above or below these
     # limits.
-    #
-    # @note When making an API call, you may pass ScalingConstraints
-    #   data as a hash:
-    #
-    #       {
-    #         min_capacity: 1, # required
-    #         max_capacity: 1, # required
-    #       }
     #
     # @!attribute [rw] min_capacity
     #   The lower boundary of EC2 instances in an instance group below which
@@ -6835,40 +5262,6 @@ module Aws::EMR
     # are added or removed, and the periodicity of adjustments. The
     # automatic scaling policy for an instance group can comprise one or
     # more automatic scaling rules.
-    #
-    # @note When making an API call, you may pass ScalingRule
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #         description: "String",
-    #         action: { # required
-    #           market: "ON_DEMAND", # accepts ON_DEMAND, SPOT
-    #           simple_scaling_policy_configuration: { # required
-    #             adjustment_type: "CHANGE_IN_CAPACITY", # accepts CHANGE_IN_CAPACITY, PERCENT_CHANGE_IN_CAPACITY, EXACT_CAPACITY
-    #             scaling_adjustment: 1, # required
-    #             cool_down: 1,
-    #           },
-    #         },
-    #         trigger: { # required
-    #           cloud_watch_alarm_definition: { # required
-    #             comparison_operator: "GREATER_THAN_OR_EQUAL", # required, accepts GREATER_THAN_OR_EQUAL, GREATER_THAN, LESS_THAN, LESS_THAN_OR_EQUAL
-    #             evaluation_periods: 1,
-    #             metric_name: "String", # required
-    #             namespace: "String",
-    #             period: 1, # required
-    #             statistic: "SAMPLE_COUNT", # accepts SAMPLE_COUNT, AVERAGE, SUM, MINIMUM, MAXIMUM
-    #             threshold: 1.0, # required
-    #             unit: "NONE", # accepts NONE, SECONDS, MICRO_SECONDS, MILLI_SECONDS, BYTES, KILO_BYTES, MEGA_BYTES, GIGA_BYTES, TERA_BYTES, BITS, KILO_BITS, MEGA_BITS, GIGA_BITS, TERA_BITS, PERCENT, COUNT, BYTES_PER_SECOND, KILO_BYTES_PER_SECOND, MEGA_BYTES_PER_SECOND, GIGA_BYTES_PER_SECOND, TERA_BYTES_PER_SECOND, BITS_PER_SECOND, KILO_BITS_PER_SECOND, MEGA_BITS_PER_SECOND, GIGA_BITS_PER_SECOND, TERA_BITS_PER_SECOND, COUNT_PER_SECOND
-    #             dimensions: [
-    #               {
-    #                 key: "String",
-    #                 value: "String",
-    #               },
-    #             ],
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] name
     #   The name used to identify an automatic scaling rule. Rule names must
@@ -6901,28 +5294,6 @@ module Aws::EMR
 
     # The conditions that trigger an automatic scaling activity.
     #
-    # @note When making an API call, you may pass ScalingTrigger
-    #   data as a hash:
-    #
-    #       {
-    #         cloud_watch_alarm_definition: { # required
-    #           comparison_operator: "GREATER_THAN_OR_EQUAL", # required, accepts GREATER_THAN_OR_EQUAL, GREATER_THAN, LESS_THAN, LESS_THAN_OR_EQUAL
-    #           evaluation_periods: 1,
-    #           metric_name: "String", # required
-    #           namespace: "String",
-    #           period: 1, # required
-    #           statistic: "SAMPLE_COUNT", # accepts SAMPLE_COUNT, AVERAGE, SUM, MINIMUM, MAXIMUM
-    #           threshold: 1.0, # required
-    #           unit: "NONE", # accepts NONE, SECONDS, MICRO_SECONDS, MILLI_SECONDS, BYTES, KILO_BYTES, MEGA_BYTES, GIGA_BYTES, TERA_BYTES, BITS, KILO_BITS, MEGA_BITS, GIGA_BITS, TERA_BITS, PERCENT, COUNT, BYTES_PER_SECOND, KILO_BYTES_PER_SECOND, MEGA_BYTES_PER_SECOND, GIGA_BYTES_PER_SECOND, TERA_BYTES_PER_SECOND, BITS_PER_SECOND, KILO_BITS_PER_SECOND, MEGA_BITS_PER_SECOND, GIGA_BITS_PER_SECOND, TERA_BITS_PER_SECOND, COUNT_PER_SECOND
-    #           dimensions: [
-    #             {
-    #               key: "String",
-    #               value: "String",
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] cloud_watch_alarm_definition
     #   The definition of a CloudWatch metric alarm. When the defined alarm
     #   conditions are met along with other trigger parameters, scaling
@@ -6938,14 +5309,6 @@ module Aws::EMR
     end
 
     # Configuration of the script to run during a bootstrap action.
-    #
-    # @note When making an API call, you may pass ScriptBootstrapActionConfig
-    #   data as a hash:
-    #
-    #       {
-    #         path: "XmlString", # required
-    #         args: ["XmlString"],
-    #       }
     #
     # @!attribute [rw] path
     #   Location in Amazon S3 of the script to run during a bootstrap
@@ -7091,14 +5454,6 @@ module Aws::EMR
 
     # The input argument to the TerminationProtection operation.
     #
-    # @note When making an API call, you may pass SetTerminationProtectionInput
-    #   data as a hash:
-    #
-    #       {
-    #         job_flow_ids: ["XmlString"], # required
-    #         termination_protected: false, # required
-    #       }
-    #
     # @!attribute [rw] job_flow_ids
     #   A list of strings that uniquely identify the clusters to protect.
     #   This identifier is returned by RunJobFlow and can also be obtained
@@ -7121,14 +5476,6 @@ module Aws::EMR
     end
 
     # The input to the SetVisibleToAllUsers action.
-    #
-    # @note When making an API call, you may pass SetVisibleToAllUsersInput
-    #   data as a hash:
-    #
-    #       {
-    #         job_flow_ids: ["XmlString"], # required
-    #         visible_to_all_users: false, # required
-    #       }
     #
     # @!attribute [rw] job_flow_ids
     #   The unique identifier of the job flow (cluster).
@@ -7155,18 +5502,6 @@ module Aws::EMR
     # Policy for customizing shrink operations. Allows configuration of
     # decommissioning timeout and targeted instance shrinking.
     #
-    # @note When making an API call, you may pass ShrinkPolicy
-    #   data as a hash:
-    #
-    #       {
-    #         decommission_timeout: 1,
-    #         instance_resize_policy: {
-    #           instances_to_terminate: ["InstanceId"],
-    #           instances_to_protect: ["InstanceId"],
-    #           instance_termination_timeout: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] decommission_timeout
     #   The desired timeout for decommissioning an instance. Overrides the
     #   default YARN decommissioning timeout.
@@ -7190,15 +5525,6 @@ module Aws::EMR
     # adds or removes instances, the cooldown period, and the number of EC2
     # instances that will be added each time the CloudWatch metric alarm
     # condition is satisfied.
-    #
-    # @note When making an API call, you may pass SimpleScalingPolicyConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         adjustment_type: "CHANGE_IN_CAPACITY", # accepts CHANGE_IN_CAPACITY, PERCENT_CHANGE_IN_CAPACITY, EXACT_CAPACITY
-    #         scaling_adjustment: 1, # required
-    #         cool_down: 1,
-    #       }
     #
     # @!attribute [rw] adjustment_type
     #   The way in which EC2 instances are added (if `ScalingAdjustment` is
@@ -7281,16 +5607,6 @@ module Aws::EMR
     #
     #  </note>
     #
-    # @note When making an API call, you may pass SpotProvisioningSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         timeout_duration_minutes: 1, # required
-    #         timeout_action: "SWITCH_TO_ON_DEMAND", # required, accepts SWITCH_TO_ON_DEMAND, TERMINATE_CLUSTER
-    #         block_duration_minutes: 1,
-    #         allocation_strategy: "capacity-optimized", # accepts capacity-optimized
-    #       }
-    #
     # @!attribute [rw] timeout_duration_minutes
     #   The spot provisioning timeout period in minutes. If Spot Instances
     #   are not provisioned within this time period, the `TimeOutAction` is
@@ -7347,29 +5663,6 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartNotebookExecutionInput
-    #   data as a hash:
-    #
-    #       {
-    #         editor_id: "XmlStringMaxLen256", # required
-    #         relative_path: "XmlString", # required
-    #         notebook_execution_name: "XmlStringMaxLen256",
-    #         notebook_params: "XmlString",
-    #         execution_engine: { # required
-    #           id: "XmlStringMaxLen256", # required
-    #           type: "EMR", # accepts EMR
-    #           master_instance_security_group_id: "XmlStringMaxLen256",
-    #         },
-    #         service_role: "XmlString", # required
-    #         notebook_instance_security_group_id: "XmlStringMaxLen256",
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] editor_id
     #   The unique identifier of the EMR Notebook to use for notebook
     #   execution.
@@ -7508,25 +5801,6 @@ module Aws::EMR
     end
 
     # Specification for a cluster (job flow) step.
-    #
-    # @note When making an API call, you may pass StepConfig
-    #   data as a hash:
-    #
-    #       {
-    #         name: "XmlStringMaxLen256", # required
-    #         action_on_failure: "TERMINATE_JOB_FLOW", # accepts TERMINATE_JOB_FLOW, TERMINATE_CLUSTER, CANCEL_AND_WAIT, CONTINUE
-    #         hadoop_jar_step: { # required
-    #           properties: [
-    #             {
-    #               key: "XmlString",
-    #               value: "XmlString",
-    #             },
-    #           ],
-    #           jar: "XmlString", # required
-    #           main_class: "XmlString",
-    #           args: ["XmlString"],
-    #         },
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the step.
@@ -7739,13 +6013,6 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopNotebookExecutionInput
-    #   data as a hash:
-    #
-    #       {
-    #         notebook_execution_id: "XmlStringMaxLen256", # required
-    #       }
-    #
     # @!attribute [rw] notebook_execution_id
     #   The unique identifier of the notebook execution.
     #   @return [String]
@@ -7917,14 +6184,6 @@ module Aws::EMR
     # arguments. EMR accepts these arguments and forwards them to the
     # corresponding installation script as bootstrap action arguments.
     #
-    # @note When making an API call, you may pass SupportedProductConfig
-    #   data as a hash:
-    #
-    #       {
-    #         name: "XmlStringMaxLen256",
-    #         args: ["XmlString"],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the product configuration.
     #   @return [String]
@@ -7951,14 +6210,6 @@ module Aws::EMR
     #
     #
     # [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html
-    #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "String",
-    #         value: "String",
-    #       }
     #
     # @!attribute [rw] key
     #   A user-defined key, which is the minimum required information for a
@@ -7989,13 +6240,6 @@ module Aws::EMR
 
     # Input to the TerminateJobFlows operation.
     #
-    # @note When making an API call, you may pass TerminateJobFlowsInput
-    #   data as a hash:
-    #
-    #       {
-    #         job_flow_ids: ["XmlString"], # required
-    #       }
-    #
     # @!attribute [rw] job_flow_ids
     #   A list of job flows to be shut down.
     #   @return [Array<String>]
@@ -8008,17 +6252,6 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateStudioInput
-    #   data as a hash:
-    #
-    #       {
-    #         studio_id: "XmlStringMaxLen256", # required
-    #         name: "XmlStringMaxLen256",
-    #         description: "XmlStringMaxLen256",
-    #         subnet_ids: ["String"],
-    #         default_s3_location: "XmlString",
-    #       }
-    #
     # @!attribute [rw] studio_id
     #   The ID of the Amazon EMR Studio to update.
     #   @return [String]
@@ -8056,17 +6289,6 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateStudioSessionMappingInput
-    #   data as a hash:
-    #
-    #       {
-    #         studio_id: "XmlStringMaxLen256", # required
-    #         identity_id: "XmlStringMaxLen256",
-    #         identity_name: "XmlStringMaxLen256",
-    #         identity_type: "USER", # required, accepts USER, GROUP
-    #         session_policy_arn: "XmlStringMaxLen256", # required
-    #       }
-    #
     # @!attribute [rw] studio_id
     #   The ID of the Amazon EMR Studio.
     #   @return [String]
@@ -8119,16 +6341,6 @@ module Aws::EMR
     # EBS volume specifications such as volume type, IOPS, size (GiB) and
     # throughput (MiB/s) that are requested for the EBS volume attached to
     # an EC2 instance in the cluster.
-    #
-    # @note When making an API call, you may pass VolumeSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         volume_type: "String", # required
-    #         iops: 1,
-    #         size_in_gb: 1, # required
-    #         throughput: 1,
-    #       }
     #
     # @!attribute [rw] volume_type
     #   The volume type. Volume types supported are gp2, io1, and standard.

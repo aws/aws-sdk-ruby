@@ -159,14 +159,6 @@ module Aws::Lightsail
     #
     # [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-understanding-bucket-permissions
     #
-    # @note When making an API call, you may pass AccessRules
-    #   data as a hash:
-    #
-    #       {
-    #         get_object: "public", # accepts public, private
-    #         allow_public_overrides: false,
-    #       }
-    #
     # @!attribute [rw] get_object
     #   Specifies the anonymous access to all objects in a bucket.
     #
@@ -400,16 +392,6 @@ module Aws::Lightsail
     #
     # [1]: https://aws.amazon.com/lightsail/pricing/
     #
-    # @note When making an API call, you may pass AddOnRequest
-    #   data as a hash:
-    #
-    #       {
-    #         add_on_type: "AutoSnapshot", # required, accepts AutoSnapshot
-    #         auto_snapshot_add_on_request: {
-    #           snapshot_time_of_day: "TimeOfDay",
-    #         },
-    #       }
-    #
     # @!attribute [rw] add_on_type
     #   The add-on type.
     #   @return [String]
@@ -600,13 +582,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AllocateStaticIpRequest
-    #   data as a hash:
-    #
-    #       {
-    #         static_ip_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] static_ip_name
     #   The name of the static IP address.
     #   @return [String]
@@ -633,14 +608,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AttachCertificateToDistributionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         distribution_name: "ResourceName", # required
-    #         certificate_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] distribution_name
     #   The name of the distribution that the certificate will be attached
     #   to.
@@ -690,15 +657,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AttachDiskRequest
-    #   data as a hash:
-    #
-    #       {
-    #         disk_name: "ResourceName", # required
-    #         instance_name: "ResourceName", # required
-    #         disk_path: "NonEmptyString", # required
-    #       }
-    #
     # @!attribute [rw] disk_name
     #   The unique Lightsail disk name (e.g., `my-disk`).
     #   @return [String]
@@ -736,14 +694,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AttachInstancesToLoadBalancerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_name: "ResourceName", # required
-    #         instance_names: ["ResourceName"], # required
-    #       }
-    #
     # @!attribute [rw] load_balancer_name
     #   The name of the load balancer.
     #   @return [String]
@@ -783,14 +733,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AttachLoadBalancerTlsCertificateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_name: "ResourceName", # required
-    #         certificate_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] load_balancer_name
     #   The name of the load balancer to which you want to associate the
     #   SSL/TLS certificate.
@@ -827,14 +769,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AttachStaticIpRequest
-    #   data as a hash:
-    #
-    #       {
-    #         static_ip_name: "ResourceName", # required
-    #         instance_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] static_ip_name
     #   The name of the static IP.
     #   @return [String]
@@ -920,13 +854,6 @@ module Aws::Lightsail
     #   current day. This ensures that a snapshot is created for the current
     #   day, because 30 minutes is required between your current time and
     #   the new snapshot time that you specify.
-    #
-    # @note When making an API call, you may pass AutoSnapshotAddOnRequest
-    #   data as a hash:
-    #
-    #       {
-    #         snapshot_time_of_day: "TimeOfDay",
-    #       }
     #
     # @!attribute [rw] snapshot_time_of_day
     #   The daily time when an automatic snapshot will be created.
@@ -1227,15 +1154,6 @@ module Aws::Lightsail
     #
     # [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-bucket-access-logs
     #
-    # @note When making an API call, you may pass BucketAccessLogConfig
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false, # required
-    #         destination: "BucketName",
-    #         prefix: "BucketAccessLogPrefix",
-    #       }
-    #
     # @!attribute [rw] enabled
     #   A Boolean value that indicates whether bucket access logging is
     #   enabled for the bucket.
@@ -1424,13 +1342,6 @@ module Aws::Lightsail
     # Describes the default cache behavior of an Amazon Lightsail content
     # delivery network (CDN) distribution.
     #
-    # @note When making an API call, you may pass CacheBehavior
-    #   data as a hash:
-    #
-    #       {
-    #         behavior: "dont-cache", # accepts dont-cache, cache
-    #       }
-    #
     # @!attribute [rw] behavior
     #   The cache behavior of the distribution.
     #
@@ -1471,14 +1382,6 @@ module Aws::Lightsail
     # `cacheBehavior` is `dont-cache`, then a per-path cache behavior can be
     # used to specify a directory, file, or file type that your distribution
     # will not cache.
-    #
-    # @note When making an API call, you may pass CacheBehaviorPerPath
-    #   data as a hash:
-    #
-    #       {
-    #         path: "string",
-    #         behavior: "dont-cache", # accepts dont-cache, cache
-    #       }
     #
     # @!attribute [rw] path
     #   The path to a directory or file to cached, or not cache. Use an
@@ -1546,29 +1449,6 @@ module Aws::Lightsail
     # These settings apply only to your distribution's `cacheBehaviors`
     # (including the `defaultCacheBehavior`) that have a `behavior` of
     # `cache`.
-    #
-    # @note When making an API call, you may pass CacheSettings
-    #   data as a hash:
-    #
-    #       {
-    #         default_ttl: 1,
-    #         minimum_ttl: 1,
-    #         maximum_ttl: 1,
-    #         allowed_http_methods: "NonEmptyString",
-    #         cached_http_methods: "NonEmptyString",
-    #         forwarded_cookies: {
-    #           option: "none", # accepts none, allow-list, all
-    #           cookies_allow_list: ["string"],
-    #         },
-    #         forwarded_headers: {
-    #           option: "none", # accepts none, allow-list, all
-    #           headers_allow_list: ["Accept"], # accepts Accept, Accept-Charset, Accept-Datetime, Accept-Encoding, Accept-Language, Authorization, CloudFront-Forwarded-Proto, CloudFront-Is-Desktop-Viewer, CloudFront-Is-Mobile-Viewer, CloudFront-Is-SmartTV-Viewer, CloudFront-Is-Tablet-Viewer, CloudFront-Viewer-Country, Host, Origin, Referer
-    #         },
-    #         forwarded_query_strings: {
-    #           option: false,
-    #           query_strings_allow_list: ["string"],
-    #         },
-    #       }
     #
     # @!attribute [rw] default_ttl
     #   The default amount of time that objects stay in the distribution's
@@ -1905,21 +1785,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CloseInstancePublicPortsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         port_info: { # required
-    #           from_port: 1,
-    #           to_port: 1,
-    #           protocol: "tcp", # accepts tcp, all, udp, icmp
-    #           cidrs: ["string"],
-    #           ipv6_cidrs: ["string"],
-    #           cidr_list_aliases: ["string"],
-    #         },
-    #         instance_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] port_info
     #   An object to describe the ports to close for the specified instance.
     #   @return [Types::PortInfo]
@@ -2114,20 +1979,6 @@ module Aws::Lightsail
 
     # Describes the settings of a container that will be launched, or that
     # is launched, to an Amazon Lightsail container service.
-    #
-    # @note When making an API call, you may pass Container
-    #   data as a hash:
-    #
-    #       {
-    #         image: "string",
-    #         command: ["string"],
-    #         environment: {
-    #           "string" => "string",
-    #         },
-    #         ports: {
-    #           "string" => "HTTP", # accepts HTTP, HTTPS, TCP, UDP
-    #         },
-    #       }
     #
     # @!attribute [rw] image
     #   The name of the image used for the container.
@@ -2445,36 +2296,6 @@ module Aws::Lightsail
     # A deployment specifies the settings, such as the ports and launch
     # command, of containers that are deployed to your container service.
     #
-    # @note When making an API call, you may pass ContainerServiceDeploymentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         containers: {
-    #           "ContainerName" => {
-    #             image: "string",
-    #             command: ["string"],
-    #             environment: {
-    #               "string" => "string",
-    #             },
-    #             ports: {
-    #               "string" => "HTTP", # accepts HTTP, HTTPS, TCP, UDP
-    #             },
-    #           },
-    #         },
-    #         public_endpoint: {
-    #           container_name: "string", # required
-    #           container_port: 1, # required
-    #           health_check: {
-    #             healthy_threshold: 1,
-    #             unhealthy_threshold: 1,
-    #             timeout_seconds: 1,
-    #             interval_seconds: 1,
-    #             path: "string",
-    #             success_codes: "string",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] containers
     #   An object that describes the configuration for the containers of the
     #   deployment.
@@ -2546,13 +2367,6 @@ module Aws::Lightsail
     #
     # [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-container-service-ecr-private-repo-access
     #
-    # @note When making an API call, you may pass ContainerServiceECRImagePullerRoleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         is_active: false,
-    #       }
-    #
     # @!attribute [rw] is_active
     #   A Boolean value that indicates whether to activate the role.
     #   @return [Boolean]
@@ -2595,18 +2409,6 @@ module Aws::Lightsail
 
     # Describes the health check configuration of an Amazon Lightsail
     # container service.
-    #
-    # @note When making an API call, you may pass ContainerServiceHealthCheckConfig
-    #   data as a hash:
-    #
-    #       {
-    #         healthy_threshold: 1,
-    #         unhealthy_threshold: 1,
-    #         timeout_seconds: 1,
-    #         interval_seconds: 1,
-    #         path: "string",
-    #         success_codes: "string",
-    #       }
     #
     # @!attribute [rw] healthy_threshold
     #   The number of consecutive health checks successes required before
@@ -2837,14 +2639,6 @@ module Aws::Lightsail
     # versions of the specified content based on the cookie values in viewer
     # requests.
     #
-    # @note When making an API call, you may pass CookieObject
-    #   data as a hash:
-    #
-    #       {
-    #         option: "none", # accepts none, allow-list, all
-    #         cookies_allow_list: ["string"],
-    #       }
-    #
     # @!attribute [rw] option
     #   Specifies which cookies to forward to the distribution's origin for
     #   a cache behavior: `all`, `none`, or `allow-list` to forward only the
@@ -2864,18 +2658,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CopySnapshotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source_snapshot_name: "ResourceName",
-    #         source_resource_name: "string",
-    #         restore_date: "string",
-    #         use_latest_restorable_auto_snapshot: false,
-    #         target_snapshot_name: "ResourceName", # required
-    #         source_region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ca-central-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, eu-north-1
-    #       }
-    #
     # @!attribute [rw] source_snapshot_name
     #   The name of the source manual snapshot to copy.
     #
@@ -2982,13 +2764,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateBucketAccessKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_name: "BucketName", # required
-    #       }
-    #
     # @!attribute [rw] bucket_name
     #   The name of the bucket that the new access key will belong to, and
     #   grant access to.
@@ -3021,21 +2796,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateBucketRequest
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_name: "BucketName", # required
-    #         bundle_id: "NonEmptyString", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         enable_object_versioning: false,
-    #       }
-    #
     # @!attribute [rw] bucket_name
     #   The name for the bucket.
     #
@@ -3120,21 +2880,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateCertificateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_name: "CertificateName", # required
-    #         domain_name: "DomainName", # required
-    #         subject_alternative_names: ["DomainName"],
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] certificate_name
     #   The name for the certificate.
     #   @return [String]
@@ -3191,21 +2936,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateCloudFormationStackRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instances: [ # required
-    #           {
-    #             source_name: "ResourceName", # required
-    #             instance_type: "NonEmptyString", # required
-    #             port_info_source: "DEFAULT", # required, accepts DEFAULT, INSTANCE, NONE, CLOSED
-    #             user_data: "string",
-    #             availability_zone: "string", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] instances
     #   An array of parameters that will be used to create the new Amazon
     #   EC2 instance. You can only pass one instance entry at a time in this
@@ -3235,14 +2965,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateContactMethodRequest
-    #   data as a hash:
-    #
-    #       {
-    #         protocol: "Email", # required, accepts Email, SMS
-    #         contact_endpoint: "StringMax256", # required
-    #       }
-    #
     # @!attribute [rw] protocol
     #   The protocol of the contact method, such as `Email` or `SMS` (text
     #   messaging).
@@ -3316,37 +3038,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateContainerServiceDeploymentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_name: "ContainerServiceName", # required
-    #         containers: {
-    #           "ContainerName" => {
-    #             image: "string",
-    #             command: ["string"],
-    #             environment: {
-    #               "string" => "string",
-    #             },
-    #             ports: {
-    #               "string" => "HTTP", # accepts HTTP, HTTPS, TCP, UDP
-    #             },
-    #           },
-    #         },
-    #         public_endpoint: {
-    #           container_name: "string", # required
-    #           container_port: 1, # required
-    #           health_check: {
-    #             healthy_threshold: 1,
-    #             unhealthy_threshold: 1,
-    #             timeout_seconds: 1,
-    #             interval_seconds: 1,
-    #             path: "string",
-    #             success_codes: "string",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] service_name
     #   The name of the container service for which to create the
     #   deployment.
@@ -3384,8 +3075,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateContainerServiceRegistryLoginRequest AWS API Documentation
     #
     class CreateContainerServiceRegistryLoginRequest < Aws::EmptyStructure; end
@@ -3403,55 +3092,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateContainerServiceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_name: "ContainerServiceName", # required
-    #         power: "nano", # required, accepts nano, micro, small, medium, large, xlarge
-    #         scale: 1, # required
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         public_domain_names: {
-    #           "string" => ["string"],
-    #         },
-    #         deployment: {
-    #           containers: {
-    #             "ContainerName" => {
-    #               image: "string",
-    #               command: ["string"],
-    #               environment: {
-    #                 "string" => "string",
-    #               },
-    #               ports: {
-    #                 "string" => "HTTP", # accepts HTTP, HTTPS, TCP, UDP
-    #               },
-    #             },
-    #           },
-    #           public_endpoint: {
-    #             container_name: "string", # required
-    #             container_port: 1, # required
-    #             health_check: {
-    #               healthy_threshold: 1,
-    #               unhealthy_threshold: 1,
-    #               timeout_seconds: 1,
-    #               interval_seconds: 1,
-    #               path: "string",
-    #               success_codes: "string",
-    #             },
-    #           },
-    #         },
-    #         private_registry_access: {
-    #           ecr_image_puller_role: {
-    #             is_active: false,
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] service_name
     #   The name for the container service.
     #
@@ -3589,33 +3229,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDiskFromSnapshotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         disk_name: "ResourceName", # required
-    #         disk_snapshot_name: "ResourceName",
-    #         availability_zone: "NonEmptyString", # required
-    #         size_in_gb: 1, # required
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         add_ons: [
-    #           {
-    #             add_on_type: "AutoSnapshot", # required, accepts AutoSnapshot
-    #             auto_snapshot_add_on_request: {
-    #               snapshot_time_of_day: "TimeOfDay",
-    #             },
-    #           },
-    #         ],
-    #         source_disk_name: "string",
-    #         restore_date: "string",
-    #         use_latest_restorable_auto_snapshot: false,
-    #       }
-    #
     # @!attribute [rw] disk_name
     #   The unique Lightsail disk name (e.g., `my-disk`).
     #   @return [String]
@@ -3749,29 +3362,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDiskRequest
-    #   data as a hash:
-    #
-    #       {
-    #         disk_name: "ResourceName", # required
-    #         availability_zone: "NonEmptyString", # required
-    #         size_in_gb: 1, # required
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         add_ons: [
-    #           {
-    #             add_on_type: "AutoSnapshot", # required, accepts AutoSnapshot
-    #             auto_snapshot_add_on_request: {
-    #               snapshot_time_of_day: "TimeOfDay",
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] disk_name
     #   The unique Lightsail disk name (e.g., `my-disk`).
     #   @return [String]
@@ -3827,21 +3417,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDiskSnapshotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         disk_name: "ResourceName",
-    #         disk_snapshot_name: "ResourceName", # required
-    #         instance_name: "ResourceName",
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] disk_name
     #   The unique name of the source disk (e.g., `Disk-Virginia-1`).
     #
@@ -3901,54 +3476,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDistributionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         distribution_name: "ResourceName", # required
-    #         origin: { # required
-    #           name: "ResourceName",
-    #           region_name: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ca-central-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, eu-north-1
-    #           protocol_policy: "http-only", # accepts http-only, https-only
-    #         },
-    #         default_cache_behavior: { # required
-    #           behavior: "dont-cache", # accepts dont-cache, cache
-    #         },
-    #         cache_behavior_settings: {
-    #           default_ttl: 1,
-    #           minimum_ttl: 1,
-    #           maximum_ttl: 1,
-    #           allowed_http_methods: "NonEmptyString",
-    #           cached_http_methods: "NonEmptyString",
-    #           forwarded_cookies: {
-    #             option: "none", # accepts none, allow-list, all
-    #             cookies_allow_list: ["string"],
-    #           },
-    #           forwarded_headers: {
-    #             option: "none", # accepts none, allow-list, all
-    #             headers_allow_list: ["Accept"], # accepts Accept, Accept-Charset, Accept-Datetime, Accept-Encoding, Accept-Language, Authorization, CloudFront-Forwarded-Proto, CloudFront-Is-Desktop-Viewer, CloudFront-Is-Mobile-Viewer, CloudFront-Is-SmartTV-Viewer, CloudFront-Is-Tablet-Viewer, CloudFront-Viewer-Country, Host, Origin, Referer
-    #           },
-    #           forwarded_query_strings: {
-    #             option: false,
-    #             query_strings_allow_list: ["string"],
-    #           },
-    #         },
-    #         cache_behaviors: [
-    #           {
-    #             path: "string",
-    #             behavior: "dont-cache", # accepts dont-cache, cache
-    #           },
-    #         ],
-    #         bundle_id: "string", # required
-    #         ip_address_type: "dualstack", # accepts dualstack, ipv4
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] distribution_name
     #   The name for the distribution.
     #   @return [String]
@@ -4036,23 +3563,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDomainEntryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         domain_entry: { # required
-    #           id: "NonEmptyString",
-    #           name: "DomainName",
-    #           target: "string",
-    #           is_alias: false,
-    #           type: "DomainEntryType",
-    #           options: {
-    #             "DomainEntryOptionsKeys" => "string",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The domain name (e.g., `example.com`) for which you want to create
     #   the domain entry.
@@ -4086,19 +3596,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The domain name to manage (e.g., `example.com`).
     #
@@ -4141,20 +3638,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateInstanceSnapshotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_snapshot_name: "ResourceName", # required
-    #         instance_name: "ResourceName", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] instance_snapshot_name
     #   The name for your new snapshot.
     #   @return [String]
@@ -4194,44 +3677,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateInstancesFromSnapshotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_names: ["string"], # required
-    #         attached_disk_mapping: {
-    #           "ResourceName" => [
-    #             {
-    #               original_disk_path: "NonEmptyString",
-    #               new_disk_name: "ResourceName",
-    #             },
-    #           ],
-    #         },
-    #         availability_zone: "string", # required
-    #         instance_snapshot_name: "ResourceName",
-    #         bundle_id: "NonEmptyString", # required
-    #         user_data: "string",
-    #         key_pair_name: "ResourceName",
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         add_ons: [
-    #           {
-    #             add_on_type: "AutoSnapshot", # required, accepts AutoSnapshot
-    #             auto_snapshot_add_on_request: {
-    #               snapshot_time_of_day: "TimeOfDay",
-    #             },
-    #           },
-    #         ],
-    #         ip_address_type: "dualstack", # accepts dualstack, ipv4
-    #         source_instance_name: "string",
-    #         restore_date: "string",
-    #         use_latest_restorable_auto_snapshot: false,
-    #       }
-    #
     # @!attribute [rw] instance_names
     #   The names for your new instances.
     #   @return [Array<String>]
@@ -4408,34 +3853,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateInstancesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_names: ["string"], # required
-    #         availability_zone: "string", # required
-    #         custom_image_name: "ResourceName",
-    #         blueprint_id: "NonEmptyString", # required
-    #         bundle_id: "NonEmptyString", # required
-    #         user_data: "string",
-    #         key_pair_name: "ResourceName",
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         add_ons: [
-    #           {
-    #             add_on_type: "AutoSnapshot", # required, accepts AutoSnapshot
-    #             auto_snapshot_add_on_request: {
-    #               snapshot_time_of_day: "TimeOfDay",
-    #             },
-    #           },
-    #         ],
-    #         ip_address_type: "dualstack", # accepts dualstack, ipv4
-    #       }
-    #
     # @!attribute [rw] instance_names
     #   The names to use for your new Lightsail instances. Separate multiple
     #   values using quotation marks and commas, for example:
@@ -4556,19 +3973,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateKeyPairRequest
-    #   data as a hash:
-    #
-    #       {
-    #         key_pair_name: "ResourceName", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] key_pair_name
     #   The name for your new key pair.
     #   @return [String]
@@ -4619,26 +4023,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateLoadBalancerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_name: "ResourceName", # required
-    #         instance_port: 1, # required
-    #         health_check_path: "string",
-    #         certificate_name: "ResourceName",
-    #         certificate_domain_name: "DomainName",
-    #         certificate_alternative_names: ["DomainName"],
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         ip_address_type: "dualstack", # accepts dualstack, ipv4
-    #         tls_policy_name: "string",
-    #       }
-    #
     # @!attribute [rw] load_balancer_name
     #   The name of your load balancer.
     #   @return [String]
@@ -4740,22 +4124,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateLoadBalancerTlsCertificateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_name: "ResourceName", # required
-    #         certificate_name: "ResourceName", # required
-    #         certificate_domain_name: "DomainName", # required
-    #         certificate_alternative_names: ["DomainName"],
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] load_balancer_name
     #   The load balancer name where you want to create the SSL/TLS
     #   certificate.
@@ -4820,26 +4188,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateRelationalDatabaseFromSnapshotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         relational_database_name: "ResourceName", # required
-    #         availability_zone: "string",
-    #         publicly_accessible: false,
-    #         relational_database_snapshot_name: "ResourceName",
-    #         relational_database_bundle_id: "string",
-    #         source_relational_database_name: "ResourceName",
-    #         restore_time: Time.now,
-    #         use_latest_restorable_time: false,
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] relational_database_name
     #   The name to use for your new Lightsail database resource.
     #
@@ -4952,28 +4300,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateRelationalDatabaseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         relational_database_name: "ResourceName", # required
-    #         availability_zone: "string",
-    #         relational_database_blueprint_id: "string", # required
-    #         relational_database_bundle_id: "string", # required
-    #         master_database_name: "string", # required
-    #         master_username: "string", # required
-    #         master_user_password: "SensitiveString",
-    #         preferred_backup_window: "string",
-    #         preferred_maintenance_window: "string",
-    #         publicly_accessible: false,
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] relational_database_name
     #   The name to use for your new Lightsail database resource.
     #
@@ -5217,20 +4543,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateRelationalDatabaseSnapshotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         relational_database_name: "ResourceName", # required
-    #         relational_database_snapshot_name: "ResourceName", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] relational_database_name
     #   The name of the database on which to base your new snapshot.
     #   @return [String]
@@ -5276,13 +4588,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAlarmRequest
-    #   data as a hash:
-    #
-    #       {
-    #         alarm_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] alarm_name
     #   The name of the alarm to delete.
     #   @return [String]
@@ -5309,14 +4614,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAutoSnapshotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_name: "ResourceName", # required
-    #         date: "AutoSnapshotDate", # required
-    #       }
-    #
     # @!attribute [rw] resource_name
     #   The name of the source instance or disk from which to delete the
     #   automatic snapshot.
@@ -5351,14 +4648,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteBucketAccessKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_name: "BucketName", # required
-    #         access_key_id: "NonEmptyString", # required
-    #       }
-    #
     # @!attribute [rw] bucket_name
     #   The name of the bucket that the access key belongs to.
     #   @return [String]
@@ -5397,14 +4686,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteBucketRequest
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_name: "BucketName", # required
-    #         force_delete: false,
-    #       }
-    #
     # @!attribute [rw] bucket_name
     #   The name of the bucket to delete.
     #
@@ -5463,13 +4744,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteCertificateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_name: "CertificateName", # required
-    #       }
-    #
     # @!attribute [rw] certificate_name
     #   The name of the certificate to delete.
     #
@@ -5499,13 +4773,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteContactMethodRequest
-    #   data as a hash:
-    #
-    #       {
-    #         protocol: "Email", # required, accepts Email, SMS
-    #       }
-    #
     # @!attribute [rw] protocol
     #   The protocol that will be deleted, such as `Email` or `SMS` (text
     #   messaging).
@@ -5539,14 +4806,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteContainerImageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_name: "ContainerServiceName", # required
-    #         image: "string", # required
-    #       }
-    #
     # @!attribute [rw] service_name
     #   The name of the container service for which to delete a registered
     #   container image.
@@ -5581,13 +4840,6 @@ module Aws::Lightsail
     #
     class DeleteContainerImageResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteContainerServiceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_name: "ContainerServiceName", # required
-    #       }
-    #
     # @!attribute [rw] service_name
     #   The name of the container service to delete.
     #   @return [String]
@@ -5604,14 +4856,6 @@ module Aws::Lightsail
     #
     class DeleteContainerServiceResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteDiskRequest
-    #   data as a hash:
-    #
-    #       {
-    #         disk_name: "ResourceName", # required
-    #         force_delete_add_ons: false,
-    #       }
-    #
     # @!attribute [rw] disk_name
     #   The unique name of the disk you want to delete (e.g., `my-disk`).
     #   @return [String]
@@ -5644,13 +4888,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDiskSnapshotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         disk_snapshot_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] disk_snapshot_name
     #   The name of the disk snapshot you want to delete (e.g.,
     #   `my-disk-snapshot`).
@@ -5678,13 +4915,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDistributionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         distribution_name: "ResourceName",
-    #       }
-    #
     # @!attribute [rw] distribution_name
     #   The name of the distribution to delete.
     #
@@ -5714,23 +4944,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDomainEntryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         domain_entry: { # required
-    #           id: "NonEmptyString",
-    #           name: "DomainName",
-    #           target: "string",
-    #           is_alias: false,
-    #           type: "DomainEntryType",
-    #           options: {
-    #             "DomainEntryOptionsKeys" => "string",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The name of the domain entry to delete.
     #   @return [String]
@@ -5763,13 +4976,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The specific domain name to delete.
     #   @return [String]
@@ -5796,14 +5002,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_name: "ResourceName", # required
-    #         force_delete_add_ons: false,
-    #       }
-    #
     # @!attribute [rw] instance_name
     #   The name of the instance to delete.
     #   @return [String]
@@ -5836,13 +5034,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteInstanceSnapshotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_snapshot_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] instance_snapshot_name
     #   The name of the snapshot to delete.
     #   @return [String]
@@ -5869,14 +5060,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteKeyPairRequest
-    #   data as a hash:
-    #
-    #       {
-    #         key_pair_name: "ResourceName", # required
-    #         expected_fingerprint: "string",
-    #       }
-    #
     # @!attribute [rw] key_pair_name
     #   The name of the key pair to delete.
     #   @return [String]
@@ -5913,13 +5096,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteKnownHostKeysRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] instance_name
     #   The name of the instance for which you want to reset the host key or
     #   certificate.
@@ -5947,13 +5123,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteLoadBalancerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] load_balancer_name
     #   The name of the load balancer you want to delete.
     #   @return [String]
@@ -5980,15 +5149,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteLoadBalancerTlsCertificateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_name: "ResourceName", # required
-    #         certificate_name: "ResourceName", # required
-    #         force: false,
-    #       }
-    #
     # @!attribute [rw] load_balancer_name
     #   The load balancer name.
     #   @return [String]
@@ -6030,15 +5190,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteRelationalDatabaseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         relational_database_name: "ResourceName", # required
-    #         skip_final_snapshot: false,
-    #         final_relational_database_snapshot_name: "ResourceName",
-    #       }
-    #
     # @!attribute [rw] relational_database_name
     #   The name of the database that you are deleting.
     #   @return [String]
@@ -6095,13 +5246,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteRelationalDatabaseSnapshotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         relational_database_snapshot_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] relational_database_snapshot_name
     #   The name of the database snapshot that you are deleting.
     #   @return [String]
@@ -6147,13 +5291,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DetachCertificateFromDistributionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         distribution_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] distribution_name
     #   The name of the distribution from which to detach the certificate.
     #
@@ -6183,13 +5320,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DetachDiskRequest
-    #   data as a hash:
-    #
-    #       {
-    #         disk_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] disk_name
     #   The unique name of the disk you want to detach from your instance
     #   (e.g., `my-disk`).
@@ -6217,14 +5347,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DetachInstancesFromLoadBalancerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_name: "ResourceName", # required
-    #         instance_names: ["ResourceName"], # required
-    #       }
-    #
     # @!attribute [rw] load_balancer_name
     #   The name of the Lightsail load balancer.
     #   @return [String]
@@ -6257,13 +5379,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DetachStaticIpRequest
-    #   data as a hash:
-    #
-    #       {
-    #         static_ip_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] static_ip_name
     #   The name of the static IP to detach from the instance.
     #   @return [String]
@@ -6290,14 +5405,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisableAddOnRequest
-    #   data as a hash:
-    #
-    #       {
-    #         add_on_type: "AutoSnapshot", # required, accepts AutoSnapshot
-    #         resource_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] add_on_type
     #   The add-on type to disable.
     #   @return [String]
@@ -6476,14 +5583,6 @@ module Aws::Lightsail
     end
 
     # Describes a block storage disk mapping.
-    #
-    # @note When making an API call, you may pass DiskMap
-    #   data as a hash:
-    #
-    #       {
-    #         original_disk_path: "NonEmptyString",
-    #         new_disk_name: "ResourceName",
-    #       }
     #
     # @!attribute [rw] original_disk_path
     #   The original disk path exposed to the instance (for example,
@@ -6766,20 +5865,6 @@ module Aws::Lightsail
 
     # Describes a domain recordset entry.
     #
-    # @note When making an API call, you may pass DomainEntry
-    #   data as a hash:
-    #
-    #       {
-    #         id: "NonEmptyString",
-    #         name: "DomainName",
-    #         target: "string",
-    #         is_alias: false,
-    #         type: "DomainEntryType",
-    #         options: {
-    #           "DomainEntryOptionsKeys" => "string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the domain recordset entry.
     #   @return [String]
@@ -6891,8 +5976,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DownloadDefaultKeyPairRequest AWS API Documentation
     #
     class DownloadDefaultKeyPairRequest < Aws::EmptyStructure; end
@@ -6919,19 +6002,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass EnableAddOnRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_name: "ResourceName", # required
-    #         add_on_request: { # required
-    #           add_on_type: "AutoSnapshot", # required, accepts AutoSnapshot
-    #           auto_snapshot_add_on_request: {
-    #             snapshot_time_of_day: "TimeOfDay",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_name
     #   The name of the source resource for which to enable or modify the
     #   add-on.
@@ -6966,22 +6036,6 @@ module Aws::Lightsail
 
     # Describes the settings of a public endpoint for an Amazon Lightsail
     # container service.
-    #
-    # @note When making an API call, you may pass EndpointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         container_name: "string", # required
-    #         container_port: 1, # required
-    #         health_check: {
-    #           healthy_threshold: 1,
-    #           unhealthy_threshold: 1,
-    #           timeout_seconds: 1,
-    #           interval_seconds: 1,
-    #           path: "string",
-    #           success_codes: "string",
-    #         },
-    #       }
     #
     # @!attribute [rw] container_name
     #   The name of the container for the endpoint.
@@ -7110,13 +6164,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ExportSnapshotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source_snapshot_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] source_snapshot_name
     #   The name of the instance or disk snapshot to be exported to Amazon
     #   EC2.
@@ -7144,13 +6191,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetActiveNamesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         page_token: "string",
-    #       }
-    #
     # @!attribute [rw] page_token
     #   The token to advance to the next page of results from your request.
     #
@@ -7192,15 +6232,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAlarmsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         alarm_name: "ResourceName",
-    #         page_token: "string",
-    #         monitored_resource_name: "ResourceName",
-    #       }
-    #
     # @!attribute [rw] alarm_name
     #   The name of the alarm.
     #
@@ -7255,13 +6286,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAutoSnapshotsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] resource_name
     #   The name of the source instance or disk from which to get automatic
     #   snapshot information.
@@ -7298,14 +6322,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetBlueprintsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         include_inactive: false,
-    #         page_token: "string",
-    #       }
-    #
     # @!attribute [rw] include_inactive
     #   A Boolean value that indicates whether to include inactive
     #   (unavailable) blueprints in the response of your request.
@@ -7354,13 +6370,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetBucketAccessKeysRequest
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_name: "BucketName", # required
-    #       }
-    #
     # @!attribute [rw] bucket_name
     #   The name of the bucket for which to return access keys.
     #   @return [String]
@@ -7385,13 +6394,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetBucketBundlesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         include_inactive: false,
-    #       }
-    #
     # @!attribute [rw] include_inactive
     #   A Boolean value that indicates whether to include inactive
     #   (unavailable) bundles in the response of your request.
@@ -7417,19 +6419,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetBucketMetricDataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_name: "BucketName", # required
-    #         metric_name: "BucketSizeBytes", # required, accepts BucketSizeBytes, NumberOfObjects
-    #         start_time: Time.now, # required
-    #         end_time: Time.now, # required
-    #         period: 1, # required
-    #         statistics: ["Minimum"], # required, accepts Minimum, Maximum, Sum, Average, SampleCount
-    #         unit: "Seconds", # required, accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
-    #       }
-    #
     # @!attribute [rw] bucket_name
     #   The name of the bucket for which to get metric data.
     #   @return [String]
@@ -7550,15 +6539,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetBucketsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_name: "BucketName",
-    #         page_token: "string",
-    #         include_connected_resources: false,
-    #       }
-    #
     # @!attribute [rw] bucket_name
     #   The name of the bucket for which to return information.
     #
@@ -7634,14 +6614,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetBundlesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         include_inactive: false,
-    #         page_token: "string",
-    #       }
-    #
     # @!attribute [rw] include_inactive
     #   A Boolean value that indicates whether to include inactive
     #   (unavailable) bundles in the response of your request.
@@ -7690,15 +6662,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetCertificatesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_statuses: ["PENDING_VALIDATION"], # accepts PENDING_VALIDATION, ISSUED, INACTIVE, EXPIRED, VALIDATION_TIMED_OUT, REVOKED, FAILED
-    #         include_certificate_details: false,
-    #         certificate_name: "CertificateName",
-    #       }
-    #
     # @!attribute [rw] certificate_statuses
     #   The status of the certificates for which to return information.
     #
@@ -7747,13 +6710,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetCloudFormationStackRecordsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         page_token: "string",
-    #       }
-    #
     # @!attribute [rw] page_token
     #   The token to advance to the next page of results from your request.
     #
@@ -7795,13 +6751,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetContactMethodsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         protocols: ["Email"], # accepts Email, SMS
-    #       }
-    #
     # @!attribute [rw] protocols
     #   The protocols used to send notifications, such as `Email`, or `SMS`
     #   (text messaging).
@@ -7830,8 +6779,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetContainerAPIMetadataRequest AWS API Documentation
     #
     class GetContainerAPIMetadataRequest < Aws::EmptyStructure; end
@@ -7849,13 +6796,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetContainerImagesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_name: "ContainerServiceName", # required
-    #       }
-    #
     # @!attribute [rw] service_name
     #   The name of the container service for which to return registered
     #   container images.
@@ -7882,18 +6822,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetContainerLogRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_name: "ContainerServiceName", # required
-    #         container_name: "string", # required
-    #         start_time: Time.now,
-    #         end_time: Time.now,
-    #         filter_pattern: "string",
-    #         page_token: "string",
-    #       }
-    #
     # @!attribute [rw] service_name
     #   The name of the container service for which to get a container log.
     #   @return [String]
@@ -8011,13 +6939,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetContainerServiceDeploymentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_name: "ContainerServiceName", # required
-    #       }
-    #
     # @!attribute [rw] service_name
     #   The name of the container service for which to return deployments.
     #   @return [String]
@@ -8043,18 +6964,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetContainerServiceMetricDataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_name: "ContainerServiceName", # required
-    #         metric_name: "CPUUtilization", # required, accepts CPUUtilization, MemoryUtilization
-    #         start_time: Time.now, # required
-    #         end_time: Time.now, # required
-    #         period: 1, # required
-    #         statistics: ["Minimum"], # required, accepts Minimum, Maximum, Sum, Average, SampleCount
-    #       }
-    #
     # @!attribute [rw] service_name
     #   The name of the container service for which to get metric data.
     #   @return [String]
@@ -8160,8 +7069,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetContainerServicePowersRequest AWS API Documentation
     #
     class GetContainerServicePowersRequest < Aws::EmptyStructure; end
@@ -8179,13 +7086,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetContainerServicesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_name: "ContainerServiceName",
-    #       }
-    #
     # @!attribute [rw] service_name
     #   The name of the container service for which to return information.
     #
@@ -8201,13 +7101,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDiskRequest
-    #   data as a hash:
-    #
-    #       {
-    #         disk_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] disk_name
     #   The name of the disk (e.g., `my-disk`).
     #   @return [String]
@@ -8232,13 +7125,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDiskSnapshotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         disk_snapshot_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] disk_snapshot_name
     #   The name of the disk snapshot (e.g., `my-disk-snapshot`).
     #   @return [String]
@@ -8263,13 +7149,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDiskSnapshotsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         page_token: "string",
-    #       }
-    #
     # @!attribute [rw] page_token
     #   The token to advance to the next page of results from your request.
     #
@@ -8312,13 +7191,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDisksRequest
-    #   data as a hash:
-    #
-    #       {
-    #         page_token: "string",
-    #       }
-    #
     # @!attribute [rw] page_token
     #   The token to advance to the next page of results from your request.
     #
@@ -8359,8 +7231,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDistributionBundlesRequest AWS API Documentation
     #
     class GetDistributionBundlesRequest < Aws::EmptyStructure; end
@@ -8377,13 +7247,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDistributionLatestCacheResetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         distribution_name: "ResourceName",
-    #       }
-    #
     # @!attribute [rw] distribution_name
     #   The name of the distribution for which to return the timestamp of
     #   the last cache reset.
@@ -8421,19 +7284,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDistributionMetricDataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         distribution_name: "ResourceName", # required
-    #         metric_name: "Requests", # required, accepts Requests, BytesDownloaded, BytesUploaded, TotalErrorRate, Http4xxErrorRate, Http5xxErrorRate
-    #         start_time: Time.now, # required
-    #         end_time: Time.now, # required
-    #         period: 1, # required
-    #         unit: "Seconds", # required, accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
-    #         statistics: ["Minimum"], # required, accepts Minimum, Maximum, Sum, Average, SampleCount
-    #       }
-    #
     # @!attribute [rw] distribution_name
     #   The name of the distribution for which to get metric data.
     #
@@ -8611,14 +7461,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDistributionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         distribution_name: "ResourceName",
-    #         page_token: "string",
-    #       }
-    #
     # @!attribute [rw] distribution_name
     #   The name of the distribution for which to return information.
     #
@@ -8668,13 +7510,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The domain name for which your want to return information about.
     #   @return [String]
@@ -8700,13 +7535,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDomainsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         page_token: "string",
-    #       }
-    #
     # @!attribute [rw] page_token
     #   The token to advance to the next page of results from your request.
     #
@@ -8749,13 +7577,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetExportSnapshotRecordsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         page_token: "string",
-    #       }
-    #
     # @!attribute [rw] page_token
     #   The token to advance to the next page of results from your request.
     #
@@ -8797,14 +7618,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetInstanceAccessDetailsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_name: "ResourceName", # required
-    #         protocol: "ssh", # accepts ssh, rdp
-    #       }
-    #
     # @!attribute [rw] instance_name
     #   The name of the instance to access.
     #   @return [String]
@@ -8835,19 +7648,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetInstanceMetricDataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_name: "ResourceName", # required
-    #         metric_name: "CPUUtilization", # required, accepts CPUUtilization, NetworkIn, NetworkOut, StatusCheckFailed, StatusCheckFailed_Instance, StatusCheckFailed_System, BurstCapacityTime, BurstCapacityPercentage, MetadataNoToken
-    #         period: 1, # required
-    #         start_time: Time.now, # required
-    #         end_time: Time.now, # required
-    #         unit: "Seconds", # required, accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
-    #         statistics: ["Minimum"], # required, accepts Minimum, Maximum, Sum, Average, SampleCount
-    #       }
-    #
     # @!attribute [rw] instance_name
     #   The name of the instance for which you want to get metrics data.
     #   @return [String]
@@ -9052,13 +7852,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetInstancePortStatesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] instance_name
     #   The name of the instance for which to return firewall port states.
     #   @return [String]
@@ -9084,13 +7877,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] instance_name
     #   The name of the instance.
     #   @return [String]
@@ -9116,13 +7902,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetInstanceSnapshotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_snapshot_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] instance_snapshot_name
     #   The name of the snapshot for which you are requesting information.
     #   @return [String]
@@ -9148,13 +7927,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetInstanceSnapshotsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         page_token: "string",
-    #       }
-    #
     # @!attribute [rw] page_token
     #   The token to advance to the next page of results from your request.
     #
@@ -9197,13 +7969,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetInstanceStateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] instance_name
     #   The name of the instance to get state information about.
     #   @return [String]
@@ -9228,13 +7993,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetInstancesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         page_token: "string",
-    #       }
-    #
     # @!attribute [rw] page_token
     #   The token to advance to the next page of results from your request.
     #
@@ -9277,13 +8035,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetKeyPairRequest
-    #   data as a hash:
-    #
-    #       {
-    #         key_pair_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] key_pair_name
     #   The name of the key pair for which you are requesting information.
     #   @return [String]
@@ -9309,14 +8060,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetKeyPairsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         page_token: "string",
-    #         include_default_key_pair: false,
-    #       }
-    #
     # @!attribute [rw] page_token
     #   The token to advance to the next page of results from your request.
     #
@@ -9365,19 +8108,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLoadBalancerMetricDataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_name: "ResourceName", # required
-    #         metric_name: "ClientTLSNegotiationErrorCount", # required, accepts ClientTLSNegotiationErrorCount, HealthyHostCount, UnhealthyHostCount, HTTPCode_LB_4XX_Count, HTTPCode_LB_5XX_Count, HTTPCode_Instance_2XX_Count, HTTPCode_Instance_3XX_Count, HTTPCode_Instance_4XX_Count, HTTPCode_Instance_5XX_Count, InstanceResponseTime, RejectedConnectionCount, RequestCount
-    #         period: 1, # required
-    #         start_time: Time.now, # required
-    #         end_time: Time.now, # required
-    #         unit: "Seconds", # required, accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
-    #         statistics: ["Minimum"], # required, accepts Minimum, Maximum, Sum, Average, SampleCount
-    #       }
-    #
     # @!attribute [rw] load_balancer_name
     #   The name of the load balancer.
     #   @return [String]
@@ -9583,13 +8313,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLoadBalancerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] load_balancer_name
     #   The name of the load balancer.
     #   @return [String]
@@ -9614,13 +8337,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLoadBalancerTlsCertificatesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] load_balancer_name
     #   The name of the load balancer you associated with your SSL/TLS
     #   certificate.
@@ -9647,13 +8363,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLoadBalancerTlsPoliciesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         page_token: "string",
-    #       }
-    #
     # @!attribute [rw] page_token
     #   The token to advance to the next page of results from your request.
     #
@@ -9696,13 +8405,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLoadBalancersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         page_token: "string",
-    #       }
-    #
     # @!attribute [rw] page_token
     #   The token to advance to the next page of results from your request.
     #
@@ -9744,13 +8446,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetOperationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         operation_id: "NonEmptyString", # required
-    #       }
-    #
     # @!attribute [rw] operation_id
     #   A GUID used to identify the operation.
     #   @return [String]
@@ -9777,14 +8472,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetOperationsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_name: "ResourceName", # required
-    #         page_token: "string",
-    #       }
-    #
     # @!attribute [rw] resource_name
     #   The name of the resource for which you are requesting information.
     #   @return [String]
@@ -9844,13 +8531,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetOperationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         page_token: "string",
-    #       }
-    #
     # @!attribute [rw] page_token
     #   The token to advance to the next page of results from your request.
     #
@@ -9894,14 +8574,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRegionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         include_availability_zones: false,
-    #         include_relational_database_availability_zones: false,
-    #       }
-    #
     # @!attribute [rw] include_availability_zones
     #   A Boolean value indicating whether to also include Availability
     #   Zones in your get regions request. Availability Zones are indicated
@@ -9936,13 +8608,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRelationalDatabaseBlueprintsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         page_token: "string",
-    #       }
-    #
     # @!attribute [rw] page_token
     #   The token to advance to the next page of results from your request.
     #
@@ -9985,14 +8650,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRelationalDatabaseBundlesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         page_token: "string",
-    #         include_inactive: false,
-    #       }
-    #
     # @!attribute [rw] page_token
     #   The token to advance to the next page of results from your request.
     #
@@ -10041,15 +8698,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRelationalDatabaseEventsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         relational_database_name: "ResourceName", # required
-    #         duration_in_minutes: 1,
-    #         page_token: "string",
-    #       }
-    #
     # @!attribute [rw] relational_database_name
     #   The name of the database from which to get events.
     #   @return [String]
@@ -10107,18 +8755,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRelationalDatabaseLogEventsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         relational_database_name: "ResourceName", # required
-    #         log_stream_name: "string", # required
-    #         start_time: Time.now,
-    #         end_time: Time.now,
-    #         start_from_head: false,
-    #         page_token: "string",
-    #       }
-    #
     # @!attribute [rw] relational_database_name
     #   The name of your database for which to get log events.
     #   @return [String]
@@ -10217,13 +8853,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRelationalDatabaseLogStreamsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         relational_database_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] relational_database_name
     #   The name of your database for which to get log streams.
     #   @return [String]
@@ -10249,14 +8878,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRelationalDatabaseMasterUserPasswordRequest
-    #   data as a hash:
-    #
-    #       {
-    #         relational_database_name: "ResourceName", # required
-    #         password_version: "CURRENT", # accepts CURRENT, PREVIOUS, PENDING
-    #       }
-    #
     # @!attribute [rw] relational_database_name
     #   The name of your database for which to get the master user password.
     #   @return [String]
@@ -10300,19 +8921,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRelationalDatabaseMetricDataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         relational_database_name: "ResourceName", # required
-    #         metric_name: "CPUUtilization", # required, accepts CPUUtilization, DatabaseConnections, DiskQueueDepth, FreeStorageSpace, NetworkReceiveThroughput, NetworkTransmitThroughput
-    #         period: 1, # required
-    #         start_time: Time.now, # required
-    #         end_time: Time.now, # required
-    #         unit: "Seconds", # required, accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
-    #         statistics: ["Minimum"], # required, accepts Minimum, Maximum, Sum, Average, SampleCount
-    #       }
-    #
     # @!attribute [rw] relational_database_name
     #   The name of your database from which to get metric data.
     #   @return [String]
@@ -10471,14 +9079,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRelationalDatabaseParametersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         relational_database_name: "ResourceName", # required
-    #         page_token: "string",
-    #       }
-    #
     # @!attribute [rw] relational_database_name
     #   The name of your database for which to get parameters.
     #   @return [String]
@@ -10526,13 +9126,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRelationalDatabaseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         relational_database_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] relational_database_name
     #   The name of the database that you are looking up.
     #   @return [String]
@@ -10557,13 +9150,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRelationalDatabaseSnapshotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         relational_database_snapshot_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] relational_database_snapshot_name
     #   The name of the database snapshot for which to get information.
     #   @return [String]
@@ -10588,13 +9174,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRelationalDatabaseSnapshotsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         page_token: "string",
-    #       }
-    #
     # @!attribute [rw] page_token
     #   The token to advance to the next page of results from your request.
     #
@@ -10637,13 +9216,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRelationalDatabasesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         page_token: "string",
-    #       }
-    #
     # @!attribute [rw] page_token
     #   The token to advance to the next page of results from your request.
     #
@@ -10686,13 +9258,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetStaticIpRequest
-    #   data as a hash:
-    #
-    #       {
-    #         static_ip_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] static_ip_name
     #   The name of the static IP in Lightsail.
     #   @return [String]
@@ -10718,13 +9283,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetStaticIpsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         page_token: "string",
-    #       }
-    #
     # @!attribute [rw] page_token
     #   The token to advance to the next page of results from your request.
     #
@@ -10778,14 +9336,6 @@ module Aws::Lightsail
     # values in the `product` header. Your distribution forwards the
     # `product` header to the origin and caches the response from the origin
     # once for each header value.
-    #
-    # @note When making an API call, you may pass HeaderObject
-    #   data as a hash:
-    #
-    #       {
-    #         option: "none", # accepts none, allow-list, all
-    #         headers_allow_list: ["Accept"], # accepts Accept, Accept-Charset, Accept-Datetime, Accept-Encoding, Accept-Language, Authorization, CloudFront-Forwarded-Proto, CloudFront-Is-Desktop-Viewer, CloudFront-Is-Mobile-Viewer, CloudFront-Is-SmartTV-Viewer, CloudFront-Is-Tablet-Viewer, CloudFront-Viewer-Country, Host, Origin, Referer
-    #       }
     #
     # @!attribute [rw] option
     #   The headers that you want your distribution to forward to your
@@ -10885,14 +9435,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ImportKeyPairRequest
-    #   data as a hash:
-    #
-    #       {
-    #         key_pair_name: "ResourceName", # required
-    #         public_key_base_64: "Base64", # required
-    #       }
-    #
     # @!attribute [rw] key_pair_name
     #   The name of the key pair for which you want to import the public
     #   key.
@@ -10931,15 +9473,6 @@ module Aws::Lightsail
     # An origin can be a Lightsail instance, bucket, or load balancer. A
     # distribution pulls content from an origin, caches it, and serves it to
     # viewers via a worldwide network of edge servers.
-    #
-    # @note When making an API call, you may pass InputOrigin
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ResourceName",
-    #         region_name: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ca-central-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, eu-north-1
-    #         protocol_policy: "http-only", # accepts http-only, https-only
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the origin resource.
@@ -11187,17 +9720,6 @@ module Aws::Lightsail
     # Describes the Amazon Elastic Compute Cloud instance and related
     # resources to be created using the `create cloud formation stack`
     # operation.
-    #
-    # @note When making an API call, you may pass InstanceEntry
-    #   data as a hash:
-    #
-    #       {
-    #         source_name: "ResourceName", # required
-    #         instance_type: "NonEmptyString", # required
-    #         port_info_source: "DEFAULT", # required, accepts DEFAULT, INSTANCE, NONE, CLOSED
-    #         user_data: "string",
-    #         availability_zone: "string", # required
-    #       }
     #
     # @!attribute [rw] source_name
     #   The name of the export snapshot record, which contains the exported
@@ -11992,8 +10514,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/IsVpcPeeredRequest AWS API Documentation
     #
     class IsVpcPeeredRequest < Aws::EmptyStructure; end
@@ -12987,21 +11507,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass OpenInstancePublicPortsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         port_info: { # required
-    #           from_port: 1,
-    #           to_port: 1,
-    #           protocol: "tcp", # accepts tcp, all, udp, icmp
-    #           cidrs: ["string"],
-    #           ipv6_cidrs: ["string"],
-    #           cidr_list_aliases: ["string"],
-    #         },
-    #         instance_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] port_info
     #   An object to describe the ports to open for the specified instance.
     #   @return [Types::PortInfo]
@@ -13205,8 +11710,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/PeerVpcRequest AWS API Documentation
     #
     class PeerVpcRequest < Aws::EmptyStructure; end
@@ -13276,18 +11779,6 @@ module Aws::Lightsail
 
     # Describes ports to open on an instance, the IP addresses allowed to
     # connect to the instance through the ports, and the protocol.
-    #
-    # @note When making an API call, you may pass PortInfo
-    #   data as a hash:
-    #
-    #       {
-    #         from_port: 1,
-    #         to_port: 1,
-    #         protocol: "tcp", # accepts tcp, all, udp, icmp
-    #         cidrs: ["string"],
-    #         ipv6_cidrs: ["string"],
-    #         cidr_list_aliases: ["string"],
-    #       }
     #
     # @!attribute [rw] from_port
     #   The first port in a range of open ports on an instance.
@@ -13477,15 +11968,6 @@ module Aws::Lightsail
     #
     # [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-container-service-ecr-private-repo-access
     #
-    # @note When making an API call, you may pass PrivateRegistryAccessRequest
-    #   data as a hash:
-    #
-    #       {
-    #         ecr_image_puller_role: {
-    #           is_active: false,
-    #         },
-    #       }
-    #
     # @!attribute [rw] ecr_image_puller_role
     #   An object to describe a request to activate or deactivate the role
     #   that you can use to grant an Amazon Lightsail container service
@@ -13501,23 +11983,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutAlarmRequest
-    #   data as a hash:
-    #
-    #       {
-    #         alarm_name: "ResourceName", # required
-    #         metric_name: "CPUUtilization", # required, accepts CPUUtilization, NetworkIn, NetworkOut, StatusCheckFailed, StatusCheckFailed_Instance, StatusCheckFailed_System, ClientTLSNegotiationErrorCount, HealthyHostCount, UnhealthyHostCount, HTTPCode_LB_4XX_Count, HTTPCode_LB_5XX_Count, HTTPCode_Instance_2XX_Count, HTTPCode_Instance_3XX_Count, HTTPCode_Instance_4XX_Count, HTTPCode_Instance_5XX_Count, InstanceResponseTime, RejectedConnectionCount, RequestCount, DatabaseConnections, DiskQueueDepth, FreeStorageSpace, NetworkReceiveThroughput, NetworkTransmitThroughput, BurstCapacityTime, BurstCapacityPercentage
-    #         monitored_resource_name: "ResourceName", # required
-    #         comparison_operator: "GreaterThanOrEqualToThreshold", # required, accepts GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, LessThanOrEqualToThreshold
-    #         threshold: 1.0, # required
-    #         evaluation_periods: 1, # required
-    #         datapoints_to_alarm: 1,
-    #         treat_missing_data: "breaching", # accepts breaching, notBreaching, ignore, missing
-    #         contact_protocols: ["Email"], # accepts Email, SMS
-    #         notification_triggers: ["OK"], # accepts OK, ALARM, INSUFFICIENT_DATA
-    #         notification_enabled: false,
-    #       }
-    #
     # @!attribute [rw] alarm_name
     #   The name for the alarm. Specify the name of an existing alarm to
     #   update, and overwrite the previous configuration of the alarm.
@@ -13702,23 +12167,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutInstancePublicPortsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         port_infos: [ # required
-    #           {
-    #             from_port: 1,
-    #             to_port: 1,
-    #             protocol: "tcp", # accepts tcp, all, udp, icmp
-    #             cidrs: ["string"],
-    #             ipv6_cidrs: ["string"],
-    #             cidr_list_aliases: ["string"],
-    #           },
-    #         ],
-    #         instance_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] port_infos
     #   An array of objects to describe the ports to open for the specified
     #   instance.
@@ -13757,14 +12205,6 @@ module Aws::Lightsail
     # For the query strings that you specify, your distribution caches
     # separate versions of the specified content based on the query string
     # values in viewer requests.
-    #
-    # @note When making an API call, you may pass QueryStringObject
-    #   data as a hash:
-    #
-    #       {
-    #         option: false,
-    #         query_strings_allow_list: ["string"],
-    #       }
     #
     # @!attribute [rw] option
     #   Indicates whether the distribution forwards and caches based on
@@ -13823,13 +12263,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RebootInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] instance_name
     #   The name of the instance to reboot.
     #   @return [String]
@@ -13856,13 +12289,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RebootRelationalDatabaseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         relational_database_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] relational_database_name
     #   The name of your database to reboot.
     #   @return [String]
@@ -13932,15 +12358,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RegisterContainerImageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_name: "ContainerServiceName", # required
-    #         label: "ContainerLabel", # required
-    #         digest: "string", # required
-    #       }
-    #
     # @!attribute [rw] service_name
     #   The name of the container service for which to register a container
     #   image.
@@ -14394,20 +12811,6 @@ module Aws::Lightsail
 
     # Describes the parameters of a database.
     #
-    # @note When making an API call, you may pass RelationalDatabaseParameter
-    #   data as a hash:
-    #
-    #       {
-    #         allowed_values: "string",
-    #         apply_method: "string",
-    #         apply_type: "string",
-    #         data_type: "string",
-    #         description: "string",
-    #         is_modifiable: false,
-    #         parameter_name: "string",
-    #         parameter_value: "string",
-    #       }
-    #
     # @!attribute [rw] allowed_values
     #   Specifies the valid range of values for the parameter.
     #   @return [String]
@@ -14558,13 +12961,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ReleaseStaticIpRequest
-    #   data as a hash:
-    #
-    #       {
-    #         static_ip_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] static_ip_name
     #   The name of the static IP to delete.
     #   @return [String]
@@ -14644,13 +13040,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ResetDistributionCacheRequest
-    #   data as a hash:
-    #
-    #       {
-    #         distribution_name: "ResourceName",
-    #       }
-    #
     # @!attribute [rw] distribution_name
     #   The name of the distribution for which to reset cache.
     #
@@ -14756,13 +13145,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SendContactMethodVerificationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         protocol: "Email", # required, accepts Email
-    #       }
-    #
     # @!attribute [rw] protocol
     #   The protocol to verify, such as `Email` or `SMS` (text messaging).
     #   @return [String]
@@ -14814,15 +13196,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SetIpAddressTypeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_type: "ContainerService", # required, accepts ContainerService, Instance, StaticIp, KeyPair, InstanceSnapshot, Domain, PeeredVpc, LoadBalancer, LoadBalancerTlsCertificate, Disk, DiskSnapshot, RelationalDatabase, RelationalDatabaseSnapshot, ExportSnapshotRecord, CloudFormationStackRecord, Alarm, ContactMethod, Distribution, Certificate, Bucket
-    #         resource_name: "ResourceName", # required
-    #         ip_address_type: "dualstack", # required, accepts dualstack, ipv4
-    #       }
-    #
     # @!attribute [rw] resource_type
     #   The resource type.
     #
@@ -14872,15 +13245,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SetResourceAccessForBucketRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_name: "ResourceName", # required
-    #         bucket_name: "BucketName", # required
-    #         access: "allow", # required, accepts allow, deny
-    #       }
-    #
     # @!attribute [rw] resource_name
     #   The name of the Lightsail instance for which to set bucket access.
     #   The instance must be in a running or stopped state.
@@ -14926,13 +13290,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] instance_name
     #   The name of the instance (a virtual private server) to start.
     #   @return [String]
@@ -14959,13 +13316,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartRelationalDatabaseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         relational_database_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] relational_database_name
     #   The name of your database to start.
     #   @return [String]
@@ -15052,14 +13402,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_name: "ResourceName", # required
-    #         force: false,
-    #       }
-    #
     # @!attribute [rw] instance_name
     #   The name of the instance (a virtual private server) to stop.
     #   @return [String]
@@ -15096,14 +13438,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopRelationalDatabaseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         relational_database_name: "ResourceName", # required
-    #         relational_database_snapshot_name: "ResourceName",
-    #       }
-    #
     # @!attribute [rw] relational_database_name
     #   The name of your database to stop.
     #   @return [String]
@@ -15146,14 +13480,6 @@ module Aws::Lightsail
     #
     # [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey",
-    #         value: "TagValue",
-    #       }
-    #
     # @!attribute [rw] key
     #   The key of the tag.
     #
@@ -15177,20 +13503,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_name: "ResourceName", # required
-    #         resource_arn: "ResourceArn",
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_name
     #   The name of the resource to which you are adding tags.
     #   @return [String]
@@ -15228,14 +13540,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TestAlarmRequest
-    #   data as a hash:
-    #
-    #       {
-    #         alarm_name: "ResourceName", # required
-    #         state: "OK", # required, accepts OK, ALARM, INSUFFICIENT_DATA
-    #       }
-    #
     # @!attribute [rw] alarm_name
     #   The name of the alarm to test.
     #   @return [String]
@@ -15303,8 +13607,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UnpeerVpcRequest AWS API Documentation
     #
     class UnpeerVpcRequest < Aws::EmptyStructure; end
@@ -15323,15 +13625,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_name: "ResourceName", # required
-    #         resource_arn: "ResourceArn",
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_name
     #   The name of the resource from which you are removing a tag.
     #   @return [String]
@@ -15369,14 +13662,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateBucketBundleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_name: "BucketName", # required
-    #         bundle_id: "NonEmptyString", # required
-    #       }
-    #
     # @!attribute [rw] bucket_name
     #   The name of the bucket for which to update the bundle.
     #   @return [String]
@@ -15415,24 +13700,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateBucketRequest
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_name: "BucketName", # required
-    #         access_rules: {
-    #           get_object: "public", # accepts public, private
-    #           allow_public_overrides: false,
-    #         },
-    #         versioning: "NonEmptyString",
-    #         readonly_access_accounts: ["NonEmptyString"],
-    #         access_log_config: {
-    #           enabled: false, # required
-    #           destination: "BucketName",
-    #           prefix: "BucketAccessLogPrefix",
-    #         },
-    #       }
-    #
     # @!attribute [rw] bucket_name
     #   The name of the bucket to update.
     #   @return [String]
@@ -15498,24 +13765,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateContainerServiceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_name: "ContainerServiceName", # required
-    #         power: "nano", # accepts nano, micro, small, medium, large, xlarge
-    #         scale: 1,
-    #         is_disabled: false,
-    #         public_domain_names: {
-    #           "string" => ["string"],
-    #         },
-    #         private_registry_access: {
-    #           ecr_image_puller_role: {
-    #             is_active: false,
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] service_name
     #   The name of the container service to update.
     #   @return [String]
@@ -15609,14 +13858,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateDistributionBundleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         distribution_name: "ResourceName",
-    #         bundle_id: "string",
-    #       }
-    #
     # @!attribute [rw] distribution_name
     #   The name of the distribution for which to update the bundle.
     #
@@ -15654,47 +13895,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateDistributionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         distribution_name: "ResourceName", # required
-    #         origin: {
-    #           name: "ResourceName",
-    #           region_name: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ca-central-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, eu-north-1
-    #           protocol_policy: "http-only", # accepts http-only, https-only
-    #         },
-    #         default_cache_behavior: {
-    #           behavior: "dont-cache", # accepts dont-cache, cache
-    #         },
-    #         cache_behavior_settings: {
-    #           default_ttl: 1,
-    #           minimum_ttl: 1,
-    #           maximum_ttl: 1,
-    #           allowed_http_methods: "NonEmptyString",
-    #           cached_http_methods: "NonEmptyString",
-    #           forwarded_cookies: {
-    #             option: "none", # accepts none, allow-list, all
-    #             cookies_allow_list: ["string"],
-    #           },
-    #           forwarded_headers: {
-    #             option: "none", # accepts none, allow-list, all
-    #             headers_allow_list: ["Accept"], # accepts Accept, Accept-Charset, Accept-Datetime, Accept-Encoding, Accept-Language, Authorization, CloudFront-Forwarded-Proto, CloudFront-Is-Desktop-Viewer, CloudFront-Is-Mobile-Viewer, CloudFront-Is-SmartTV-Viewer, CloudFront-Is-Tablet-Viewer, CloudFront-Viewer-Country, Host, Origin, Referer
-    #           },
-    #           forwarded_query_strings: {
-    #             option: false,
-    #             query_strings_allow_list: ["string"],
-    #           },
-    #         },
-    #         cache_behaviors: [
-    #           {
-    #             path: "string",
-    #             behavior: "dont-cache", # accepts dont-cache, cache
-    #           },
-    #         ],
-    #         is_enabled: false,
-    #       }
-    #
     # @!attribute [rw] distribution_name
     #   The name of the distribution to update.
     #
@@ -15761,23 +13961,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateDomainEntryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         domain_entry: { # required
-    #           id: "NonEmptyString",
-    #           name: "DomainName",
-    #           target: "string",
-    #           is_alias: false,
-    #           type: "DomainEntryType",
-    #           options: {
-    #             "DomainEntryOptionsKeys" => "string",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The name of the domain recordset to update.
     #   @return [String]
@@ -15810,17 +13993,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateInstanceMetadataOptionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_name: "ResourceName", # required
-    #         http_tokens: "optional", # accepts optional, required
-    #         http_endpoint: "disabled", # accepts disabled, enabled
-    #         http_put_response_hop_limit: 1,
-    #         http_protocol_ipv_6: "disabled", # accepts disabled, enabled
-    #       }
-    #
     # @!attribute [rw] instance_name
     #   The name of the instance for which to update metadata parameters.
     #   @return [String]
@@ -15893,15 +14065,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateLoadBalancerAttributeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_name: "ResourceName", # required
-    #         attribute_name: "HealthCheckPath", # required, accepts HealthCheckPath, SessionStickinessEnabled, SessionStickiness_LB_CookieDurationSeconds, HttpsRedirectionEnabled, TlsPolicyName
-    #         attribute_value: "StringMax256", # required
-    #       }
-    #
     # @!attribute [rw] load_balancer_name
     #   The name of the load balancer that you want to modify (e.g.,
     #   `my-load-balancer`.
@@ -15973,25 +14136,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateRelationalDatabaseParametersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         relational_database_name: "ResourceName", # required
-    #         parameters: [ # required
-    #           {
-    #             allowed_values: "string",
-    #             apply_method: "string",
-    #             apply_type: "string",
-    #             data_type: "string",
-    #             description: "string",
-    #             is_modifiable: false,
-    #             parameter_name: "string",
-    #             parameter_value: "string",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] relational_database_name
     #   The name of your database for which to update parameters.
     #   @return [String]
@@ -16023,22 +14167,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateRelationalDatabaseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         relational_database_name: "ResourceName", # required
-    #         master_user_password: "SensitiveString",
-    #         rotate_master_user_password: false,
-    #         preferred_backup_window: "string",
-    #         preferred_maintenance_window: "string",
-    #         enable_backup_retention: false,
-    #         disable_backup_retention: false,
-    #         publicly_accessible: false,
-    #         apply_immediately: false,
-    #         ca_certificate_identifier: "string",
-    #       }
-    #
     # @!attribute [rw] relational_database_name
     #   The name of your Lightsail database resource to update.
     #   @return [String]

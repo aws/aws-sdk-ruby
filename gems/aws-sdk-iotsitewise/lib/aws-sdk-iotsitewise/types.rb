@@ -123,14 +123,6 @@ module Aws::IoTSiteWise
     #
     # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/appguide/monitor-alarms.html
     #
-    # @note When making an API call, you may pass Alarms
-    #   data as a hash:
-    #
-    #       {
-    #         alarm_role_arn: "ARN", # required
-    #         notification_lambda_arn: "ARN",
-    #       }
-    #
     # @!attribute [rw] alarm_role_arn
     #   The [ARN][1] of the IAM role that allows the alarm to perform
     #   actions and access Amazon Web Services resources and services, such
@@ -262,76 +254,6 @@ module Aws::IoTSiteWise
     # object contains the asset property definitions that you define in the
     # composite model.
     #
-    # @note When making an API call, you may pass AssetModelCompositeModel
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         description: "Description",
-    #         type: "Name", # required
-    #         properties: [
-    #           {
-    #             id: "ID",
-    #             name: "Name", # required
-    #             data_type: "STRING", # required, accepts STRING, INTEGER, DOUBLE, BOOLEAN, STRUCT
-    #             data_type_spec: "Name",
-    #             unit: "PropertyUnit",
-    #             type: { # required
-    #               attribute: {
-    #                 default_value: "DefaultValue",
-    #               },
-    #               measurement: {
-    #                 processing_config: {
-    #                   forwarding_config: { # required
-    #                     state: "DISABLED", # required, accepts DISABLED, ENABLED
-    #                   },
-    #                 },
-    #               },
-    #               transform: {
-    #                 expression: "Expression", # required
-    #                 variables: [ # required
-    #                   {
-    #                     name: "VariableName", # required
-    #                     value: { # required
-    #                       property_id: "Macro", # required
-    #                       hierarchy_id: "Macro",
-    #                     },
-    #                   },
-    #                 ],
-    #                 processing_config: {
-    #                   compute_location: "EDGE", # required, accepts EDGE, CLOUD
-    #                   forwarding_config: {
-    #                     state: "DISABLED", # required, accepts DISABLED, ENABLED
-    #                   },
-    #                 },
-    #               },
-    #               metric: {
-    #                 expression: "Expression", # required
-    #                 variables: [ # required
-    #                   {
-    #                     name: "VariableName", # required
-    #                     value: { # required
-    #                       property_id: "Macro", # required
-    #                       hierarchy_id: "Macro",
-    #                     },
-    #                   },
-    #                 ],
-    #                 window: { # required
-    #                   tumbling: {
-    #                     interval: "Interval", # required
-    #                     offset: "Offset",
-    #                   },
-    #                 },
-    #                 processing_config: {
-    #                   compute_location: "EDGE", # required, accepts EDGE, CLOUD
-    #                 },
-    #               },
-    #             },
-    #           },
-    #         ],
-    #         id: "ID",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the composite model.
     #   @return [String]
@@ -367,74 +289,6 @@ module Aws::IoTSiteWise
     # composite model definition is applied to all assets created from the
     # asset model.
     #
-    # @note When making an API call, you may pass AssetModelCompositeModelDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         description: "Description",
-    #         type: "Name", # required
-    #         properties: [
-    #           {
-    #             name: "Name", # required
-    #             data_type: "STRING", # required, accepts STRING, INTEGER, DOUBLE, BOOLEAN, STRUCT
-    #             data_type_spec: "Name",
-    #             unit: "PropertyUnit",
-    #             type: { # required
-    #               attribute: {
-    #                 default_value: "DefaultValue",
-    #               },
-    #               measurement: {
-    #                 processing_config: {
-    #                   forwarding_config: { # required
-    #                     state: "DISABLED", # required, accepts DISABLED, ENABLED
-    #                   },
-    #                 },
-    #               },
-    #               transform: {
-    #                 expression: "Expression", # required
-    #                 variables: [ # required
-    #                   {
-    #                     name: "VariableName", # required
-    #                     value: { # required
-    #                       property_id: "Macro", # required
-    #                       hierarchy_id: "Macro",
-    #                     },
-    #                   },
-    #                 ],
-    #                 processing_config: {
-    #                   compute_location: "EDGE", # required, accepts EDGE, CLOUD
-    #                   forwarding_config: {
-    #                     state: "DISABLED", # required, accepts DISABLED, ENABLED
-    #                   },
-    #                 },
-    #               },
-    #               metric: {
-    #                 expression: "Expression", # required
-    #                 variables: [ # required
-    #                   {
-    #                     name: "VariableName", # required
-    #                     value: { # required
-    #                       property_id: "Macro", # required
-    #                       hierarchy_id: "Macro",
-    #                     },
-    #                   },
-    #                 ],
-    #                 window: { # required
-    #                   tumbling: {
-    #                     interval: "Interval", # required
-    #                     offset: "Offset",
-    #                   },
-    #                 },
-    #                 processing_config: {
-    #                   compute_location: "EDGE", # required, accepts EDGE, CLOUD
-    #                 },
-    #               },
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the composite model.
     #   @return [String]
@@ -464,15 +318,6 @@ module Aws::IoTSiteWise
     # Describes an asset hierarchy that contains a hierarchy's name, ID,
     # and child asset model ID that specifies the type of asset that can be
     # in this hierarchy.
-    #
-    # @note When making an API call, you may pass AssetModelHierarchy
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ID",
-    #         name: "Name", # required
-    #         child_asset_model_id: "ID", # required
-    #       }
     #
     # @!attribute [rw] id
     #   The ID of the asset model hierarchy. This ID is a `hierarchyId`.
@@ -505,14 +350,6 @@ module Aws::IoTSiteWise
     # asset model hierarchy determines the kind (or type) of asset that can
     # belong to a hierarchy.
     #
-    # @note When making an API call, you may pass AssetModelHierarchyDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         child_asset_model_id: "ID", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the asset model hierarchy definition (as specified in
     #   the [CreateAssetModel][1] or [UpdateAssetModel][2] API operation).
@@ -535,68 +372,6 @@ module Aws::IoTSiteWise
     end
 
     # Contains information about an asset model property.
-    #
-    # @note When making an API call, you may pass AssetModelProperty
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ID",
-    #         name: "Name", # required
-    #         data_type: "STRING", # required, accepts STRING, INTEGER, DOUBLE, BOOLEAN, STRUCT
-    #         data_type_spec: "Name",
-    #         unit: "PropertyUnit",
-    #         type: { # required
-    #           attribute: {
-    #             default_value: "DefaultValue",
-    #           },
-    #           measurement: {
-    #             processing_config: {
-    #               forwarding_config: { # required
-    #                 state: "DISABLED", # required, accepts DISABLED, ENABLED
-    #               },
-    #             },
-    #           },
-    #           transform: {
-    #             expression: "Expression", # required
-    #             variables: [ # required
-    #               {
-    #                 name: "VariableName", # required
-    #                 value: { # required
-    #                   property_id: "Macro", # required
-    #                   hierarchy_id: "Macro",
-    #                 },
-    #               },
-    #             ],
-    #             processing_config: {
-    #               compute_location: "EDGE", # required, accepts EDGE, CLOUD
-    #               forwarding_config: {
-    #                 state: "DISABLED", # required, accepts DISABLED, ENABLED
-    #               },
-    #             },
-    #           },
-    #           metric: {
-    #             expression: "Expression", # required
-    #             variables: [ # required
-    #               {
-    #                 name: "VariableName", # required
-    #                 value: { # required
-    #                   property_id: "Macro", # required
-    #                   hierarchy_id: "Macro",
-    #                 },
-    #               },
-    #             ],
-    #             window: { # required
-    #               tumbling: {
-    #                 interval: "Interval", # required
-    #                 offset: "Offset",
-    #               },
-    #             },
-    #             processing_config: {
-    #               compute_location: "EDGE", # required, accepts EDGE, CLOUD
-    #             },
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] id
     #   The ID of the asset model property.
@@ -636,67 +411,6 @@ module Aws::IoTSiteWise
 
     # Contains an asset model property definition. This property definition
     # is applied to all assets created from the asset model.
-    #
-    # @note When making an API call, you may pass AssetModelPropertyDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         data_type: "STRING", # required, accepts STRING, INTEGER, DOUBLE, BOOLEAN, STRUCT
-    #         data_type_spec: "Name",
-    #         unit: "PropertyUnit",
-    #         type: { # required
-    #           attribute: {
-    #             default_value: "DefaultValue",
-    #           },
-    #           measurement: {
-    #             processing_config: {
-    #               forwarding_config: { # required
-    #                 state: "DISABLED", # required, accepts DISABLED, ENABLED
-    #               },
-    #             },
-    #           },
-    #           transform: {
-    #             expression: "Expression", # required
-    #             variables: [ # required
-    #               {
-    #                 name: "VariableName", # required
-    #                 value: { # required
-    #                   property_id: "Macro", # required
-    #                   hierarchy_id: "Macro",
-    #                 },
-    #               },
-    #             ],
-    #             processing_config: {
-    #               compute_location: "EDGE", # required, accepts EDGE, CLOUD
-    #               forwarding_config: {
-    #                 state: "DISABLED", # required, accepts DISABLED, ENABLED
-    #               },
-    #             },
-    #           },
-    #           metric: {
-    #             expression: "Expression", # required
-    #             variables: [ # required
-    #               {
-    #                 name: "VariableName", # required
-    #                 value: { # required
-    #                   property_id: "Macro", # required
-    #                   hierarchy_id: "Macro",
-    #                 },
-    #               },
-    #             ],
-    #             window: { # required
-    #               tumbling: {
-    #                 interval: "Interval", # required
-    #                 offset: "Offset",
-    #               },
-    #             },
-    #             processing_config: {
-    #               compute_location: "EDGE", # required, accepts EDGE, CLOUD
-    #             },
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the property definition.
@@ -959,23 +673,6 @@ module Aws::IoTSiteWise
 
     # Contains asset property value information.
     #
-    # @note When making an API call, you may pass AssetPropertyValue
-    #   data as a hash:
-    #
-    #       {
-    #         value: { # required
-    #           string_value: "PropertyValueStringValue",
-    #           integer_value: 1,
-    #           double_value: 1.0,
-    #           boolean_value: false,
-    #         },
-    #         timestamp: { # required
-    #           time_in_seconds: 1, # required
-    #           offset_in_nanos: 1,
-    #         },
-    #         quality: "GOOD", # accepts GOOD, BAD, UNCERTAIN
-    #       }
-    #
     # @!attribute [rw] value
     #   The value of the asset property (see `Variant`).
     #   @return [Types::Variant]
@@ -1104,16 +801,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateAssetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         asset_id: "ID", # required
-    #         hierarchy_id: "ID", # required
-    #         child_asset_id: "ID", # required
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] asset_id
     #   The ID of the parent asset.
     #   @return [String]
@@ -1151,16 +838,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateTimeSeriesToAssetPropertyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         alias: "PropertyAlias", # required
-    #         asset_id: "ID", # required
-    #         property_id: "ID", # required
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] alias
     #   The alias that identifies the time series.
     #   @return [String]
@@ -1257,13 +934,6 @@ module Aws::IoTSiteWise
     #
     # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html#attributes
     #
-    # @note When making an API call, you may pass Attribute
-    #   data as a hash:
-    #
-    #       {
-    #         default_value: "DefaultValue",
-    #       }
-    #
     # @!attribute [rw] default_value
     #   The default value of the asset model property attribute. All assets
     #   that you create from the asset model contain this attribute value.
@@ -1282,15 +952,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchAssociateProjectAssetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_id: "ID", # required
-    #         asset_ids: ["ID"], # required
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] project_id
     #   The ID of the project to which to associate the assets.
     #   @return [String]
@@ -1326,15 +987,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchDisassociateProjectAssetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_id: "ID", # required
-    #         asset_ids: ["ID"], # required
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] project_id
     #   The ID of the project from which to disassociate the assets.
     #   @return [String]
@@ -1385,22 +1037,6 @@ module Aws::IoTSiteWise
     #
     # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyAggregates.html
     # [2]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html
-    #
-    # @note When making an API call, you may pass BatchGetAssetPropertyAggregatesEntry
-    #   data as a hash:
-    #
-    #       {
-    #         entry_id: "EntryId", # required
-    #         asset_id: "ID",
-    #         property_id: "ID",
-    #         property_alias: "AssetPropertyAlias",
-    #         aggregate_types: ["AVERAGE"], # required, accepts AVERAGE, COUNT, MAXIMUM, MINIMUM, SUM, STANDARD_DEVIATION
-    #         resolution: "Resolution", # required
-    #         start_date: Time.now, # required
-    #         end_date: Time.now, # required
-    #         qualities: ["GOOD"], # accepts GOOD, BAD, UNCERTAIN
-    #         time_ordering: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #       }
     #
     # @!attribute [rw] entry_id
     #   The ID of the entry.
@@ -1519,28 +1155,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchGetAssetPropertyAggregatesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         entries: [ # required
-    #           {
-    #             entry_id: "EntryId", # required
-    #             asset_id: "ID",
-    #             property_id: "ID",
-    #             property_alias: "AssetPropertyAlias",
-    #             aggregate_types: ["AVERAGE"], # required, accepts AVERAGE, COUNT, MAXIMUM, MINIMUM, SUM, STANDARD_DEVIATION
-    #             resolution: "Resolution", # required
-    #             start_date: Time.now, # required
-    #             end_date: Time.now, # required
-    #             qualities: ["GOOD"], # accepts GOOD, BAD, UNCERTAIN
-    #             time_ordering: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #           },
-    #         ],
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] entries
     #   The list of asset property aggregate entries for the batch get
     #   request. You can specify up to 16 entries per request.
@@ -1671,16 +1285,6 @@ module Aws::IoTSiteWise
     # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html
     # [2]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html
     #
-    # @note When making an API call, you may pass BatchGetAssetPropertyValueEntry
-    #   data as a hash:
-    #
-    #       {
-    #         entry_id: "EntryId", # required
-    #         asset_id: "ID",
-    #         property_id: "ID",
-    #         property_alias: "AssetPropertyAlias",
-    #       }
-    #
     # @!attribute [rw] entry_id
     #   The ID of the entry.
     #   @return [String]
@@ -1773,20 +1377,6 @@ module Aws::IoTSiteWise
     #
     # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html
     # [2]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html
-    #
-    # @note When making an API call, you may pass BatchGetAssetPropertyValueHistoryEntry
-    #   data as a hash:
-    #
-    #       {
-    #         entry_id: "EntryId", # required
-    #         asset_id: "ID",
-    #         property_id: "ID",
-    #         property_alias: "AssetPropertyAlias",
-    #         start_date: Time.now,
-    #         end_date: Time.now,
-    #         qualities: ["GOOD"], # accepts GOOD, BAD, UNCERTAIN
-    #         time_ordering: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #       }
     #
     # @!attribute [rw] entry_id
     #   The ID of the entry.
@@ -1885,26 +1475,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchGetAssetPropertyValueHistoryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         entries: [ # required
-    #           {
-    #             entry_id: "EntryId", # required
-    #             asset_id: "ID",
-    #             property_id: "ID",
-    #             property_alias: "AssetPropertyAlias",
-    #             start_date: Time.now,
-    #             end_date: Time.now,
-    #             qualities: ["GOOD"], # accepts GOOD, BAD, UNCERTAIN
-    #             time_ordering: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #           },
-    #         ],
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] entries
     #   The list of asset property historical value entries for the batch
     #   get request. You can specify up to 16 entries per request.
@@ -2018,21 +1588,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchGetAssetPropertyValueRequest
-    #   data as a hash:
-    #
-    #       {
-    #         entries: [ # required
-    #           {
-    #             entry_id: "EntryId", # required
-    #             asset_id: "ID",
-    #             property_id: "ID",
-    #             property_alias: "AssetPropertyAlias",
-    #           },
-    #         ],
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] entries
     #   The list of asset property value entries for the batch get request.
     #   You can specify up to 16 entries per request.
@@ -2180,35 +1735,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchPutAssetPropertyValueRequest
-    #   data as a hash:
-    #
-    #       {
-    #         entries: [ # required
-    #           {
-    #             entry_id: "EntryId", # required
-    #             asset_id: "ID",
-    #             property_id: "ID",
-    #             property_alias: "AssetPropertyAlias",
-    #             property_values: [ # required
-    #               {
-    #                 value: { # required
-    #                   string_value: "PropertyValueStringValue",
-    #                   integer_value: 1,
-    #                   double_value: 1.0,
-    #                   boolean_value: false,
-    #                 },
-    #                 timestamp: { # required
-    #                   time_in_seconds: 1, # required
-    #                   offset_in_nanos: 1,
-    #                 },
-    #                 quality: "GOOD", # accepts GOOD, BAD, UNCERTAIN
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] entries
     #   The list of asset property value entries for the batch put request.
     #   You can specify up to 10 entries per request.
@@ -2315,39 +1841,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAccessPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         access_policy_identity: { # required
-    #           user: {
-    #             id: "IdentityId", # required
-    #           },
-    #           group: {
-    #             id: "IdentityId", # required
-    #           },
-    #           iam_user: {
-    #             arn: "ARN", # required
-    #           },
-    #           iam_role: {
-    #             arn: "ARN", # required
-    #           },
-    #         },
-    #         access_policy_resource: { # required
-    #           portal: {
-    #             id: "ID", # required
-    #           },
-    #           project: {
-    #             id: "ID", # required
-    #           },
-    #         },
-    #         access_policy_permission: "ADMINISTRATOR", # required, accepts ADMINISTRATOR, VIEWER
-    #         client_token: "ClientToken",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] access_policy_identity
     #   The identity for this access policy. Choose an IAM Identity Center
     #   user, an IAM Identity Center group, or an IAM user.
@@ -2413,149 +1906,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAssetModelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         asset_model_name: "Name", # required
-    #         asset_model_description: "Description",
-    #         asset_model_properties: [
-    #           {
-    #             name: "Name", # required
-    #             data_type: "STRING", # required, accepts STRING, INTEGER, DOUBLE, BOOLEAN, STRUCT
-    #             data_type_spec: "Name",
-    #             unit: "PropertyUnit",
-    #             type: { # required
-    #               attribute: {
-    #                 default_value: "DefaultValue",
-    #               },
-    #               measurement: {
-    #                 processing_config: {
-    #                   forwarding_config: { # required
-    #                     state: "DISABLED", # required, accepts DISABLED, ENABLED
-    #                   },
-    #                 },
-    #               },
-    #               transform: {
-    #                 expression: "Expression", # required
-    #                 variables: [ # required
-    #                   {
-    #                     name: "VariableName", # required
-    #                     value: { # required
-    #                       property_id: "Macro", # required
-    #                       hierarchy_id: "Macro",
-    #                     },
-    #                   },
-    #                 ],
-    #                 processing_config: {
-    #                   compute_location: "EDGE", # required, accepts EDGE, CLOUD
-    #                   forwarding_config: {
-    #                     state: "DISABLED", # required, accepts DISABLED, ENABLED
-    #                   },
-    #                 },
-    #               },
-    #               metric: {
-    #                 expression: "Expression", # required
-    #                 variables: [ # required
-    #                   {
-    #                     name: "VariableName", # required
-    #                     value: { # required
-    #                       property_id: "Macro", # required
-    #                       hierarchy_id: "Macro",
-    #                     },
-    #                   },
-    #                 ],
-    #                 window: { # required
-    #                   tumbling: {
-    #                     interval: "Interval", # required
-    #                     offset: "Offset",
-    #                   },
-    #                 },
-    #                 processing_config: {
-    #                   compute_location: "EDGE", # required, accepts EDGE, CLOUD
-    #                 },
-    #               },
-    #             },
-    #           },
-    #         ],
-    #         asset_model_hierarchies: [
-    #           {
-    #             name: "Name", # required
-    #             child_asset_model_id: "ID", # required
-    #           },
-    #         ],
-    #         asset_model_composite_models: [
-    #           {
-    #             name: "Name", # required
-    #             description: "Description",
-    #             type: "Name", # required
-    #             properties: [
-    #               {
-    #                 name: "Name", # required
-    #                 data_type: "STRING", # required, accepts STRING, INTEGER, DOUBLE, BOOLEAN, STRUCT
-    #                 data_type_spec: "Name",
-    #                 unit: "PropertyUnit",
-    #                 type: { # required
-    #                   attribute: {
-    #                     default_value: "DefaultValue",
-    #                   },
-    #                   measurement: {
-    #                     processing_config: {
-    #                       forwarding_config: { # required
-    #                         state: "DISABLED", # required, accepts DISABLED, ENABLED
-    #                       },
-    #                     },
-    #                   },
-    #                   transform: {
-    #                     expression: "Expression", # required
-    #                     variables: [ # required
-    #                       {
-    #                         name: "VariableName", # required
-    #                         value: { # required
-    #                           property_id: "Macro", # required
-    #                           hierarchy_id: "Macro",
-    #                         },
-    #                       },
-    #                     ],
-    #                     processing_config: {
-    #                       compute_location: "EDGE", # required, accepts EDGE, CLOUD
-    #                       forwarding_config: {
-    #                         state: "DISABLED", # required, accepts DISABLED, ENABLED
-    #                       },
-    #                     },
-    #                   },
-    #                   metric: {
-    #                     expression: "Expression", # required
-    #                     variables: [ # required
-    #                       {
-    #                         name: "VariableName", # required
-    #                         value: { # required
-    #                           property_id: "Macro", # required
-    #                           hierarchy_id: "Macro",
-    #                         },
-    #                       },
-    #                     ],
-    #                     window: { # required
-    #                       tumbling: {
-    #                         interval: "Interval", # required
-    #                         offset: "Offset",
-    #                       },
-    #                     },
-    #                     processing_config: {
-    #                       compute_location: "EDGE", # required, accepts EDGE, CLOUD
-    #                     },
-    #                   },
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         client_token: "ClientToken",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] asset_model_name
     #   A unique, friendly name for the asset model.
     #   @return [String]
@@ -2659,19 +2009,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAssetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         asset_name: "Name", # required
-    #         asset_model_id: "ID", # required
-    #         client_token: "ClientToken",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         asset_description: "Description",
-    #       }
-    #
     # @!attribute [rw] asset_name
     #   A friendly name for the asset.
     #   @return [String]
@@ -2741,32 +2078,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateBulkImportJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_name: "Name", # required
-    #         job_role_arn: "ARN", # required
-    #         files: [ # required
-    #           {
-    #             bucket: "Bucket", # required
-    #             key: "String", # required
-    #             version_id: "String",
-    #           },
-    #         ],
-    #         error_report_location: { # required
-    #           bucket: "Bucket", # required
-    #           prefix: "String", # required
-    #         },
-    #         job_configuration: { # required
-    #           file_format: { # required
-    #             csv: {
-    #               column_names: ["ALIAS"], # accepts ALIAS, ASSET_ID, PROPERTY_ID, DATA_TYPE, TIMESTAMP_SECONDS, TIMESTAMP_NANO_OFFSET, QUALITY, VALUE
-    #             },
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] job_name
     #   The unique name that helps identify the job request.
     #   @return [String]
@@ -2844,20 +2155,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDashboardRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_id: "ID", # required
-    #         dashboard_name: "Name", # required
-    #         dashboard_description: "Description",
-    #         dashboard_definition: "DashboardDefinition", # required
-    #         client_token: "ClientToken",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] project_id
     #   The ID of the project in which to create the dashboard.
     #   @return [String]
@@ -2931,24 +2228,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateGatewayRequest
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_name: "Name", # required
-    #         gateway_platform: { # required
-    #           greengrass: {
-    #             group_arn: "ARN", # required
-    #           },
-    #           greengrass_v2: {
-    #             core_device_thing_name: "CoreDeviceThingName", # required
-    #           },
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] gateway_name
     #   A unique, friendly name for the gateway.
     #   @return [String]
@@ -2998,30 +2277,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreatePortalRequest
-    #   data as a hash:
-    #
-    #       {
-    #         portal_name: "Name", # required
-    #         portal_description: "Description",
-    #         portal_contact_email: "Email", # required
-    #         client_token: "ClientToken",
-    #         portal_logo_image_file: {
-    #           data: "data", # required
-    #           type: "PNG", # required, accepts PNG
-    #         },
-    #         role_arn: "ARN", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         portal_auth_mode: "IAM", # accepts IAM, SSO
-    #         notification_sender_email: "Email",
-    #         alarms: {
-    #           alarm_role_arn: "ARN", # required
-    #           notification_lambda_arn: "ARN",
-    #         },
-    #       }
-    #
     # @!attribute [rw] portal_name
     #   A friendly name for the portal.
     #   @return [String]
@@ -3175,19 +2430,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateProjectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         portal_id: "ID", # required
-    #         project_name: "Name", # required
-    #         project_description: "Description",
-    #         client_token: "ClientToken",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] portal_id
     #   The ID of the portal in which to create the project.
     #   @return [String]
@@ -3252,13 +2494,6 @@ module Aws::IoTSiteWise
 
     # A .csv file.
     #
-    # @note When making an API call, you may pass Csv
-    #   data as a hash:
-    #
-    #       {
-    #         column_names: ["ALIAS"], # accepts ALIAS, ASSET_ID, PROPERTY_ID, DATA_TYPE, TIMESTAMP_SECONDS, TIMESTAMP_NANO_OFFSET, QUALITY, VALUE
-    #       }
-    #
     # @!attribute [rw] column_names
     #   The column names specified in the .csv file.
     #   @return [Array<String>]
@@ -3270,14 +2505,6 @@ module Aws::IoTSiteWise
     end
 
     # Contains information about a customer managed Amazon S3 bucket.
-    #
-    # @note When making an API call, you may pass CustomerManagedS3Storage
-    #   data as a hash:
-    #
-    #       {
-    #         s3_resource_arn: "ARN", # required
-    #         role_arn: "ARN", # required
-    #       }
     #
     # @!attribute [rw] s3_resource_arn
     #   The [ARN][1] of the Amazon S3 object. For more information about how
@@ -3338,14 +2565,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAccessPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         access_policy_id: "ID", # required
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] access_policy_id
     #   The ID of the access policy to be deleted.
     #   @return [String]
@@ -3368,14 +2587,6 @@ module Aws::IoTSiteWise
 
     class DeleteAccessPolicyResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteAssetModelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         asset_model_id: "ID", # required
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] asset_model_id
     #   The ID of the asset model to delete.
     #   @return [String]
@@ -3407,14 +2618,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAssetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         asset_id: "ID", # required
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] asset_id
     #   The ID of the asset to delete.
     #   @return [String]
@@ -3446,14 +2649,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDashboardRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dashboard_id: "ID", # required
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] dashboard_id
     #   The ID of the dashboard to delete.
     #   @return [String]
@@ -3476,13 +2671,6 @@ module Aws::IoTSiteWise
 
     class DeleteDashboardResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteGatewayRequest
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_id: "ID", # required
-    #       }
-    #
     # @!attribute [rw] gateway_id
     #   The ID of the gateway to delete.
     #   @return [String]
@@ -3493,14 +2681,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeletePortalRequest
-    #   data as a hash:
-    #
-    #       {
-    #         portal_id: "ID", # required
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] portal_id
     #   The ID of the portal to delete.
     #   @return [String]
@@ -3532,14 +2712,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteProjectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_id: "ID", # required
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] project_id
     #   The ID of the project.
     #   @return [String]
@@ -3562,16 +2734,6 @@ module Aws::IoTSiteWise
 
     class DeleteProjectResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteTimeSeriesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         alias: "PropertyAlias",
-    #         asset_id: "ID",
-    #         property_id: "ID",
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] alias
     #   The alias that identifies the time series.
     #   @return [String]
@@ -3602,13 +2764,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAccessPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         access_policy_id: "ID", # required
-    #       }
-    #
     # @!attribute [rw] access_policy_id
     #   The ID of the access policy.
     #   @return [String]
@@ -3668,14 +2823,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAssetModelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         asset_model_id: "ID", # required
-    #         exclude_properties: false,
-    #       }
-    #
     # @!attribute [rw] asset_model_id
     #   The ID of the asset model.
     #   @return [String]
@@ -3760,14 +2907,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAssetPropertyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         asset_id: "ID", # required
-    #         property_id: "ID", # required
-    #       }
-    #
     # @!attribute [rw] asset_id
     #   The ID of the asset.
     #   @return [String]
@@ -3818,14 +2957,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAssetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         asset_id: "ID", # required
-    #         exclude_properties: false,
-    #       }
-    #
     # @!attribute [rw] asset_id
     #   The ID of the asset.
     #   @return [String]
@@ -3913,13 +3044,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeBulkImportJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "ID", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The ID of the job.
     #   @return [String]
@@ -4007,13 +3131,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDashboardRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dashboard_id: "ID", # required
-    #       }
-    #
     # @!attribute [rw] dashboard_id
     #   The ID of the dashboard.
     #   @return [String]
@@ -4080,8 +3197,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @api private
-    #
     class DescribeDefaultEncryptionConfigurationRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] encryption_type
@@ -4107,14 +3222,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeGatewayCapabilityConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_id: "ID", # required
-    #         capability_namespace: "CapabilityNamespace", # required
-    #       }
-    #
     # @!attribute [rw] gateway_id
     #   The ID of the gateway that defines the capability configuration.
     #   @return [String]
@@ -4173,13 +3280,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeGatewayRequest
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_id: "ID", # required
-    #       }
-    #
     # @!attribute [rw] gateway_id
     #   The ID of the gateway device.
     #   @return [String]
@@ -4243,8 +3343,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @api private
-    #
     class DescribeLoggingOptionsRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] logging_options
@@ -4257,13 +3355,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribePortalRequest
-    #   data as a hash:
-    #
-    #       {
-    #         portal_id: "ID", # required
-    #       }
-    #
     # @!attribute [rw] portal_id
     #   The ID of the portal.
     #   @return [String]
@@ -4375,13 +3466,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeProjectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_id: "ID", # required
-    #       }
-    #
     # @!attribute [rw] project_id
     #   The ID of the project.
     #   @return [String]
@@ -4438,8 +3522,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @api private
-    #
     class DescribeStorageConfigurationRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] storage_type
@@ -4505,15 +3587,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeTimeSeriesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         alias: "PropertyAlias",
-    #         asset_id: "ID",
-    #         property_id: "ID",
-    #       }
-    #
     # @!attribute [rw] alias
     #   The alias that identifies the time series.
     #   @return [String]
@@ -4605,16 +3678,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateAssetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         asset_id: "ID", # required
-    #         hierarchy_id: "ID", # required
-    #         child_asset_id: "ID", # required
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] asset_id
     #   The ID of the parent asset from which to disassociate the child
     #   asset.
@@ -4654,16 +3717,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateTimeSeriesFromAssetPropertyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         alias: "PropertyAlias", # required
-    #         asset_id: "ID", # required
-    #         property_id: "ID", # required
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] alias
     #   The alias that identifies the time series.
     #   @return [String]
@@ -4719,14 +3772,6 @@ module Aws::IoTSiteWise
     # The Amazon S3 destination where errors associated with the job
     # creation request are saved.
     #
-    # @note When making an API call, you may pass ErrorReportLocation
-    #   data as a hash:
-    #
-    #       {
-    #         bucket: "Bucket", # required
-    #         prefix: "String", # required
-    #       }
-    #
     # @!attribute [rw] bucket
     #   The name of the Amazon S3 bucket to which errors associated with the
     #   bulk import job are sent.
@@ -4754,17 +3799,6 @@ module Aws::IoTSiteWise
 
     # Contains expression variable information.
     #
-    # @note When making an API call, you may pass ExpressionVariable
-    #   data as a hash:
-    #
-    #       {
-    #         name: "VariableName", # required
-    #         value: { # required
-    #           property_id: "Macro", # required
-    #           hierarchy_id: "Macro",
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The friendly name of the variable to be used in the expression.
     #   @return [String]
@@ -4782,15 +3816,6 @@ module Aws::IoTSiteWise
     end
 
     # The file in Amazon S3 where your data is saved.
-    #
-    # @note When making an API call, you may pass File
-    #   data as a hash:
-    #
-    #       {
-    #         bucket: "Bucket", # required
-    #         key: "String", # required
-    #         version_id: "String",
-    #       }
     #
     # @!attribute [rw] bucket
     #   The name of the Amazon S3 bucket from which data is imported.
@@ -4817,15 +3842,6 @@ module Aws::IoTSiteWise
 
     # The file format of the data.
     #
-    # @note When making an API call, you may pass FileFormat
-    #   data as a hash:
-    #
-    #       {
-    #         csv: {
-    #           column_names: ["ALIAS"], # accepts ALIAS, ASSET_ID, PROPERTY_ID, DATA_TYPE, TIMESTAMP_SECONDS, TIMESTAMP_NANO_OFFSET, QUALITY, VALUE
-    #         },
-    #       }
-    #
     # @!attribute [rw] csv
     #   The .csv file format.
     #   @return [Types::Csv]
@@ -4837,13 +3853,6 @@ module Aws::IoTSiteWise
     end
 
     # The forwarding configuration for a given property.
-    #
-    # @note When making an API call, you may pass ForwardingConfig
-    #   data as a hash:
-    #
-    #       {
-    #         state: "DISABLED", # required, accepts DISABLED, ENABLED
-    #       }
     #
     # @!attribute [rw] state
     #   The forwarding state for the given property.
@@ -4885,18 +3894,6 @@ module Aws::IoTSiteWise
     end
 
     # Contains a gateway's platform information.
-    #
-    # @note When making an API call, you may pass GatewayPlatform
-    #   data as a hash:
-    #
-    #       {
-    #         greengrass: {
-    #           group_arn: "ARN", # required
-    #         },
-    #         greengrass_v2: {
-    #           core_device_thing_name: "CoreDeviceThingName", # required
-    #         },
-    #       }
     #
     # @!attribute [rw] greengrass
     #   A gateway that runs on IoT Greengrass.
@@ -4957,23 +3954,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAssetPropertyAggregatesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         asset_id: "ID",
-    #         property_id: "ID",
-    #         property_alias: "AssetPropertyAlias",
-    #         aggregate_types: ["AVERAGE"], # required, accepts AVERAGE, COUNT, MAXIMUM, MINIMUM, SUM, STANDARD_DEVIATION
-    #         resolution: "Resolution", # required
-    #         qualities: ["GOOD"], # accepts GOOD, BAD, UNCERTAIN
-    #         start_date: Time.now, # required
-    #         end_date: Time.now, # required
-    #         time_ordering: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] asset_id
     #   The ID of the asset.
     #   @return [String]
@@ -5064,21 +4044,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAssetPropertyValueHistoryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         asset_id: "ID",
-    #         property_id: "ID",
-    #         property_alias: "AssetPropertyAlias",
-    #         start_date: Time.now,
-    #         end_date: Time.now,
-    #         qualities: ["GOOD"], # accepts GOOD, BAD, UNCERTAIN
-    #         time_ordering: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] asset_id
     #   The ID of the asset.
     #   @return [String]
@@ -5159,15 +4124,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAssetPropertyValueRequest
-    #   data as a hash:
-    #
-    #       {
-    #         asset_id: "ID",
-    #         property_id: "ID",
-    #         property_alias: "AssetPropertyAlias",
-    #       }
-    #
     # @!attribute [rw] asset_id
     #   The ID of the asset.
     #   @return [String]
@@ -5206,25 +4162,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetInterpolatedAssetPropertyValuesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         asset_id: "ID",
-    #         property_id: "ID",
-    #         property_alias: "AssetPropertyAlias",
-    #         start_time_in_seconds: 1, # required
-    #         start_time_offset_in_nanos: 1,
-    #         end_time_in_seconds: 1, # required
-    #         end_time_offset_in_nanos: 1,
-    #         quality: "GOOD", # required, accepts GOOD, BAD, UNCERTAIN
-    #         interval_in_seconds: 1, # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         type: "InterpolationType", # required
-    #         interval_window_in_seconds: 1,
-    #       }
-    #
     # @!attribute [rw] asset_id
     #   The ID of the asset.
     #   @return [String]
@@ -5390,13 +4327,6 @@ module Aws::IoTSiteWise
     #
     # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/gateway-connector.html
     #
-    # @note When making an API call, you may pass Greengrass
-    #   data as a hash:
-    #
-    #       {
-    #         group_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] group_arn
     #   The [ARN][1] of the Greengrass group. For more information about how
     #   to find a group's ARN, see [ListGroups][2] and [GetGroup][3] in the
@@ -5427,13 +4357,6 @@ module Aws::IoTSiteWise
     # [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/device-service-role.html
     # [2]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/sw-gateways.html
     #
-    # @note When making an API call, you may pass GreengrassV2
-    #   data as a hash:
-    #
-    #       {
-    #         core_device_thing_name: "CoreDeviceThingName", # required
-    #       }
-    #
     # @!attribute [rw] core_device_thing_name
     #   The name of the IoT thing for your IoT Greengrass V2 core device.
     #   @return [String]
@@ -5445,13 +4368,6 @@ module Aws::IoTSiteWise
     end
 
     # Contains information for a group identity in an access policy.
-    #
-    # @note When making an API call, you may pass GroupIdentity
-    #   data as a hash:
-    #
-    #       {
-    #         id: "IdentityId", # required
-    #       }
     #
     # @!attribute [rw] id
     #   The IAM Identity Center ID of the group.
@@ -5470,13 +4386,6 @@ module Aws::IoTSiteWise
     #
     # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html
     #
-    # @note When making an API call, you may pass IAMRoleIdentity
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The ARN of the IAM role. For more information, see [IAM ARNs][1] in
     #   the *IAM User Guide*.
@@ -5493,13 +4402,6 @@ module Aws::IoTSiteWise
     end
 
     # Contains information about an Identity and Access Management user.
-    #
-    # @note When making an API call, you may pass IAMUserIdentity
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "ARN", # required
-    #       }
     #
     # @!attribute [rw] arn
     #   The ARN of the IAM user. For more information, see [IAM ARNs][1] in
@@ -5535,24 +4437,6 @@ module Aws::IoTSiteWise
     #
     # [1]: https://console.aws.amazon.com/singlesignon
     #
-    # @note When making an API call, you may pass Identity
-    #   data as a hash:
-    #
-    #       {
-    #         user: {
-    #           id: "IdentityId", # required
-    #         },
-    #         group: {
-    #           id: "IdentityId", # required
-    #         },
-    #         iam_user: {
-    #           arn: "ARN", # required
-    #         },
-    #         iam_role: {
-    #           arn: "ARN", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] user
     #   An IAM Identity Center user identity.
     #   @return [Types::UserIdentity]
@@ -5585,17 +4469,6 @@ module Aws::IoTSiteWise
     # * The ID of an existing image. Choose this option to keep an existing
     #   image.
     #
-    # @note When making an API call, you may pass Image
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ID",
-    #         file: {
-    #           data: "data", # required
-    #           type: "PNG", # required, accepts PNG
-    #         },
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of an existing image. Specify this parameter to keep an
     #   existing image.
@@ -5613,14 +4486,6 @@ module Aws::IoTSiteWise
     end
 
     # Contains an image file.
-    #
-    # @note When making an API call, you may pass ImageFile
-    #   data as a hash:
-    #
-    #       {
-    #         data: "data", # required
-    #         type: "PNG", # required, accepts PNG
-    #       }
     #
     # @!attribute [rw] data
     #   The image file contents, represented as a base64-encoded string. The
@@ -5701,17 +4566,6 @@ module Aws::IoTSiteWise
     # Contains the configuration information of a job, such as the file
     # format used to save data in Amazon S3.
     #
-    # @note When making an API call, you may pass JobConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         file_format: { # required
-    #           csv: {
-    #             column_names: ["ALIAS"], # accepts ALIAS, ASSET_ID, PROPERTY_ID, DATA_TYPE, TIMESTAMP_SECONDS, TIMESTAMP_NANO_OFFSET, QUALITY, VALUE
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] file_format
     #   The file format of the data in Amazon S3.
     #   @return [Types::FileFormat]
@@ -5785,19 +4639,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAccessPoliciesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity_type: "USER", # accepts USER, GROUP, IAM
-    #         identity_id: "IdentityId",
-    #         resource_type: "PORTAL", # accepts PORTAL, PROJECT
-    #         resource_id: "ID",
-    #         iam_arn: "ARN",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] identity_type
     #   The type of identity (IAM Identity Center user, IAM Identity Center
     #   group, or IAM user). This parameter is required if you specify
@@ -5867,16 +4708,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAssetModelPropertiesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         asset_model_id: "ID", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         filter: "ALL", # accepts ALL, BASE
-    #       }
-    #
     # @!attribute [rw] asset_model_id
     #   The ID of the asset model.
     #   @return [String]
@@ -5929,14 +4760,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAssetModelsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The token to be used for the next set of paginated results.
     #   @return [String]
@@ -5970,16 +4793,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAssetPropertiesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         asset_id: "ID", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         filter: "ALL", # accepts ALL, BASE
-    #       }
-    #
     # @!attribute [rw] asset_id
     #   The ID of the asset.
     #   @return [String]
@@ -6032,16 +4845,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAssetRelationshipsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         asset_id: "ID", # required
-    #         traversal_type: "PATH_TO_ROOT", # required, accepts PATH_TO_ROOT
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] asset_id
     #   The ID of the asset.
     #   @return [String]
@@ -6091,16 +4894,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAssetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         asset_model_id: "ID",
-    #         filter: "ALL", # accepts ALL, TOP_LEVEL
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The token to be used for the next set of paginated results.
     #   @return [String]
@@ -6154,17 +4947,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAssociatedAssetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         asset_id: "ID", # required
-    #         hierarchy_id: "ID",
-    #         traversal_direction: "PARENT", # accepts PARENT, CHILD
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] asset_id
     #   The ID of the asset to query.
     #   @return [String]
@@ -6234,15 +5016,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListBulkImportJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         filter: "ALL", # accepts ALL, PENDING, RUNNING, CANCELLED, FAILED, COMPLETED_WITH_FAILURES, COMPLETED
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The token to be used for the next set of paginated results.
     #   @return [String]
@@ -6280,15 +5053,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDashboardsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_id: "ID", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] project_id
     #   The ID of the project.
     #   @return [String]
@@ -6327,14 +5091,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListGatewaysRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The token to be used for the next set of paginated results.
     #   @return [String]
@@ -6368,14 +5124,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPortalsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The token to be used for the next set of paginated results.
     #   @return [String]
@@ -6409,15 +5157,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListProjectAssetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_id: "ID", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] project_id
     #   The ID of the project.
     #   @return [String]
@@ -6457,15 +5196,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListProjectsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         portal_id: "ID", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] portal_id
     #   The ID of the portal.
     #   @return [String]
@@ -6504,13 +5234,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The [ARN][1] of the resource.
     #
@@ -6541,17 +5264,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTimeSeriesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         asset_id: "ID",
-    #         alias_prefix: "PropertyAlias",
-    #         time_series_type: "ASSOCIATED", # accepts ASSOCIATED, DISASSOCIATED
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The token to be used for the next set of paginated results.
     #   @return [String]
@@ -6607,13 +5319,6 @@ module Aws::IoTSiteWise
 
     # Contains logging options.
     #
-    # @note When making an API call, you may pass LoggingOptions
-    #   data as a hash:
-    #
-    #       {
-    #         level: "ERROR", # required, accepts ERROR, INFO, OFF
-    #       }
-    #
     # @!attribute [rw] level
     #   The IoT SiteWise logging verbosity level.
     #   @return [String]
@@ -6630,17 +5335,6 @@ module Aws::IoTSiteWise
     #
     #
     # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html#measurements
-    #
-    # @note When making an API call, you may pass Measurement
-    #   data as a hash:
-    #
-    #       {
-    #         processing_config: {
-    #           forwarding_config: { # required
-    #             state: "DISABLED", # required, accepts DISABLED, ENABLED
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] processing_config
     #   The processing configuration for the given measurement property. You
@@ -6659,15 +5353,6 @@ module Aws::IoTSiteWise
     # can configure measurements to be kept at the edge or forwarded to the
     # Amazon Web Services Cloud. By default, measurements are forwarded to
     # the cloud.
-    #
-    # @note When making an API call, you may pass MeasurementProcessingConfig
-    #   data as a hash:
-    #
-    #       {
-    #         forwarding_config: { # required
-    #           state: "DISABLED", # required, accepts DISABLED, ENABLED
-    #         },
-    #       }
     #
     # @!attribute [rw] forwarding_config
     #   The forwarding configuration for the given measurement property.
@@ -6696,31 +5381,6 @@ module Aws::IoTSiteWise
     #
     #
     # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html#metrics
-    #
-    # @note When making an API call, you may pass Metric
-    #   data as a hash:
-    #
-    #       {
-    #         expression: "Expression", # required
-    #         variables: [ # required
-    #           {
-    #             name: "VariableName", # required
-    #             value: { # required
-    #               property_id: "Macro", # required
-    #               hierarchy_id: "Macro",
-    #             },
-    #           },
-    #         ],
-    #         window: { # required
-    #           tumbling: {
-    #             interval: "Interval", # required
-    #             offset: "Offset",
-    #           },
-    #         },
-    #         processing_config: {
-    #           compute_location: "EDGE", # required, accepts EDGE, CLOUD
-    #         },
-    #       }
     #
     # @!attribute [rw] expression
     #   The mathematical expression that defines the metric aggregation
@@ -6764,13 +5424,6 @@ module Aws::IoTSiteWise
     # configure metrics to be computed at the edge or in the Amazon Web
     # Services Cloud. By default, metrics are forwarded to the cloud.
     #
-    # @note When making an API call, you may pass MetricProcessingConfig
-    #   data as a hash:
-    #
-    #       {
-    #         compute_location: "EDGE", # required, accepts EDGE, CLOUD
-    #       }
-    #
     # @!attribute [rw] compute_location
     #   The compute location for the given metric property.
     #   @return [String]
@@ -6783,16 +5436,6 @@ module Aws::IoTSiteWise
 
     # Contains a time interval window used for data aggregate computations
     # (for example, average, sum, count, and so on).
-    #
-    # @note When making an API call, you may pass MetricWindow
-    #   data as a hash:
-    #
-    #       {
-    #         tumbling: {
-    #           interval: "Interval", # required
-    #           offset: "Offset",
-    #         },
-    #       }
     #
     # @!attribute [rw] tumbling
     #   The tumbling time interval window.
@@ -6823,16 +5466,6 @@ module Aws::IoTSiteWise
 
     # Contains information about the storage destination.
     #
-    # @note When making an API call, you may pass MultiLayerStorage
-    #   data as a hash:
-    #
-    #       {
-    #         customer_managed_s3_storage: { # required
-    #           s3_resource_arn: "ARN", # required
-    #           role_arn: "ARN", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] customer_managed_s3_storage
     #   Contains information about a customer managed Amazon S3 bucket.
     #   @return [Types::CustomerManagedS3Storage]
@@ -6844,13 +5477,6 @@ module Aws::IoTSiteWise
     end
 
     # Identifies an IoT SiteWise Monitor portal.
-    #
-    # @note When making an API call, you may pass PortalResource
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ID", # required
-    #       }
     #
     # @!attribute [rw] id
     #   The ID of the portal.
@@ -6938,13 +5564,6 @@ module Aws::IoTSiteWise
     end
 
     # Identifies a specific IoT SiteWise Monitor project.
-    #
-    # @note When making an API call, you may pass ProjectResource
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ID", # required
-    #       }
     #
     # @!attribute [rw] id
     #   The ID of the project.
@@ -7072,61 +5691,6 @@ module Aws::IoTSiteWise
     # Contains a property type, which can be one of `attribute`,
     # `measurement`, `metric`, or `transform`.
     #
-    # @note When making an API call, you may pass PropertyType
-    #   data as a hash:
-    #
-    #       {
-    #         attribute: {
-    #           default_value: "DefaultValue",
-    #         },
-    #         measurement: {
-    #           processing_config: {
-    #             forwarding_config: { # required
-    #               state: "DISABLED", # required, accepts DISABLED, ENABLED
-    #             },
-    #           },
-    #         },
-    #         transform: {
-    #           expression: "Expression", # required
-    #           variables: [ # required
-    #             {
-    #               name: "VariableName", # required
-    #               value: { # required
-    #                 property_id: "Macro", # required
-    #                 hierarchy_id: "Macro",
-    #               },
-    #             },
-    #           ],
-    #           processing_config: {
-    #             compute_location: "EDGE", # required, accepts EDGE, CLOUD
-    #             forwarding_config: {
-    #               state: "DISABLED", # required, accepts DISABLED, ENABLED
-    #             },
-    #           },
-    #         },
-    #         metric: {
-    #           expression: "Expression", # required
-    #           variables: [ # required
-    #             {
-    #               name: "VariableName", # required
-    #               value: { # required
-    #                 property_id: "Macro", # required
-    #                 hierarchy_id: "Macro",
-    #               },
-    #             },
-    #           ],
-    #           window: { # required
-    #             tumbling: {
-    #               interval: "Interval", # required
-    #               offset: "Offset",
-    #             },
-    #           },
-    #           processing_config: {
-    #             compute_location: "EDGE", # required, accepts EDGE, CLOUD
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] attribute
     #   Specifies an asset attribute property. An attribute generally
     #   contains static information, such as the serial number of an
@@ -7174,31 +5738,6 @@ module Aws::IoTSiteWise
     #
     # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchPutAssetPropertyValue.html
     #
-    # @note When making an API call, you may pass PutAssetPropertyValueEntry
-    #   data as a hash:
-    #
-    #       {
-    #         entry_id: "EntryId", # required
-    #         asset_id: "ID",
-    #         property_id: "ID",
-    #         property_alias: "AssetPropertyAlias",
-    #         property_values: [ # required
-    #           {
-    #             value: { # required
-    #               string_value: "PropertyValueStringValue",
-    #               integer_value: 1,
-    #               double_value: 1.0,
-    #               boolean_value: false,
-    #             },
-    #             timestamp: { # required
-    #               time_in_seconds: 1, # required
-    #               offset_in_nanos: 1,
-    #             },
-    #             quality: "GOOD", # accepts GOOD, BAD, UNCERTAIN
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] entry_id
     #   The user specified ID for the entry. You can use this ID to identify
     #   which entries failed.
@@ -7239,14 +5778,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutDefaultEncryptionConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         encryption_type: "SITEWISE_DEFAULT_ENCRYPTION", # required, accepts SITEWISE_DEFAULT_ENCRYPTION, KMS_BASED_ENCRYPTION
-    #         kms_key_id: "KmsKeyId",
-    #       }
-    #
     # @!attribute [rw] encryption_type
     #   The type of encryption used for the encryption configuration.
     #   @return [String]
@@ -7286,15 +5817,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutLoggingOptionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         logging_options: { # required
-    #           level: "ERROR", # required, accepts ERROR, INFO, OFF
-    #         },
-    #       }
-    #
     # @!attribute [rw] logging_options
     #   The logging options to set.
     #   @return [Types::LoggingOptions]
@@ -7307,24 +5829,6 @@ module Aws::IoTSiteWise
 
     class PutLoggingOptionsResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass PutStorageConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         storage_type: "SITEWISE_DEFAULT_STORAGE", # required, accepts SITEWISE_DEFAULT_STORAGE, MULTI_LAYER_STORAGE
-    #         multi_layer_storage: {
-    #           customer_managed_s3_storage: { # required
-    #             s3_resource_arn: "ARN", # required
-    #             role_arn: "ARN", # required
-    #           },
-    #         },
-    #         disassociated_data_storage: "ENABLED", # accepts ENABLED, DISABLED
-    #         retention_period: {
-    #           number_of_days: 1,
-    #           unlimited: false,
-    #         },
-    #       }
-    #
     # @!attribute [rw] storage_type
     #   The storage tier that you specified for your data. The `storageType`
     #   parameter can be one of the following values:
@@ -7438,18 +5942,6 @@ module Aws::IoTSiteWise
 
     # Contains an IoT SiteWise Monitor resource ID for a portal or project.
     #
-    # @note When making an API call, you may pass Resource
-    #   data as a hash:
-    #
-    #       {
-    #         portal: {
-    #           id: "ID", # required
-    #         },
-    #         project: {
-    #           id: "ID", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] portal
     #   A portal resource.
     #   @return [Types::PortalResource]
@@ -7500,14 +5992,6 @@ module Aws::IoTSiteWise
     # How many days your data is kept in the hot tier. By default, your data
     # is kept indefinitely in the hot tier.
     #
-    # @note When making an API call, you may pass RetentionPeriod
-    #   data as a hash:
-    #
-    #       {
-    #         number_of_days: 1,
-    #         unlimited: false,
-    #       }
-    #
     # @!attribute [rw] number_of_days
     #   The number of days that your data is kept.
     #
@@ -7544,16 +6028,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The [ARN][1] of the resource to tag.
     #
@@ -7602,14 +6076,6 @@ module Aws::IoTSiteWise
     end
 
     # Contains a timestamp with optional nanosecond granularity.
-    #
-    # @note When making an API call, you may pass TimeInNanos
-    #   data as a hash:
-    #
-    #       {
-    #         time_in_seconds: 1, # required
-    #         offset_in_nanos: 1,
-    #       }
     #
     # @!attribute [rw] time_in_seconds
     #   The timestamp date, in seconds, in the Unix epoch format. Fractional
@@ -7720,28 +6186,6 @@ module Aws::IoTSiteWise
     #
     # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html#transforms
     #
-    # @note When making an API call, you may pass Transform
-    #   data as a hash:
-    #
-    #       {
-    #         expression: "Expression", # required
-    #         variables: [ # required
-    #           {
-    #             name: "VariableName", # required
-    #             value: { # required
-    #               property_id: "Macro", # required
-    #               hierarchy_id: "Macro",
-    #             },
-    #           },
-    #         ],
-    #         processing_config: {
-    #           compute_location: "EDGE", # required, accepts EDGE, CLOUD
-    #           forwarding_config: {
-    #             state: "DISABLED", # required, accepts DISABLED, ENABLED
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] expression
     #   The mathematical expression that defines the transformation
     #   function. You can specify up to 10 variables per expression. You can
@@ -7779,16 +6223,6 @@ module Aws::IoTSiteWise
     # Web Services Cloud. You can also configure transforms to be computed
     # at the edge or in the cloud.
     #
-    # @note When making an API call, you may pass TransformProcessingConfig
-    #   data as a hash:
-    #
-    #       {
-    #         compute_location: "EDGE", # required, accepts EDGE, CLOUD
-    #         forwarding_config: {
-    #           state: "DISABLED", # required, accepts DISABLED, ENABLED
-    #         },
-    #       }
-    #
     # @!attribute [rw] compute_location
     #   The compute location for the given transform property.
     #   @return [String]
@@ -7820,14 +6254,6 @@ module Aws::IoTSiteWise
     #
     #
     # [1]: https://en.wikipedia.org/wiki/ISO_8601
-    #
-    # @note When making an API call, you may pass TumblingWindow
-    #   data as a hash:
-    #
-    #       {
-    #         interval: "Interval", # required
-    #         offset: "Offset",
-    #       }
     #
     # @!attribute [rw] interval
     #   The time interval for the tumbling window. The interval time must be
@@ -7913,14 +6339,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The [ARN][1] of the resource to untag.
     #
@@ -7942,37 +6360,6 @@ module Aws::IoTSiteWise
 
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateAccessPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         access_policy_id: "ID", # required
-    #         access_policy_identity: { # required
-    #           user: {
-    #             id: "IdentityId", # required
-    #           },
-    #           group: {
-    #             id: "IdentityId", # required
-    #           },
-    #           iam_user: {
-    #             arn: "ARN", # required
-    #           },
-    #           iam_role: {
-    #             arn: "ARN", # required
-    #           },
-    #         },
-    #         access_policy_resource: { # required
-    #           portal: {
-    #             id: "ID", # required
-    #           },
-    #           project: {
-    #             id: "ID", # required
-    #           },
-    #         },
-    #         access_policy_permission: "ADMINISTRATOR", # required, accepts ADMINISTRATOR, VIEWER
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] access_policy_id
     #   The ID of the access policy.
     #   @return [String]
@@ -8013,151 +6400,6 @@ module Aws::IoTSiteWise
 
     class UpdateAccessPolicyResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateAssetModelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         asset_model_id: "ID", # required
-    #         asset_model_name: "Name", # required
-    #         asset_model_description: "Description",
-    #         asset_model_properties: [
-    #           {
-    #             id: "ID",
-    #             name: "Name", # required
-    #             data_type: "STRING", # required, accepts STRING, INTEGER, DOUBLE, BOOLEAN, STRUCT
-    #             data_type_spec: "Name",
-    #             unit: "PropertyUnit",
-    #             type: { # required
-    #               attribute: {
-    #                 default_value: "DefaultValue",
-    #               },
-    #               measurement: {
-    #                 processing_config: {
-    #                   forwarding_config: { # required
-    #                     state: "DISABLED", # required, accepts DISABLED, ENABLED
-    #                   },
-    #                 },
-    #               },
-    #               transform: {
-    #                 expression: "Expression", # required
-    #                 variables: [ # required
-    #                   {
-    #                     name: "VariableName", # required
-    #                     value: { # required
-    #                       property_id: "Macro", # required
-    #                       hierarchy_id: "Macro",
-    #                     },
-    #                   },
-    #                 ],
-    #                 processing_config: {
-    #                   compute_location: "EDGE", # required, accepts EDGE, CLOUD
-    #                   forwarding_config: {
-    #                     state: "DISABLED", # required, accepts DISABLED, ENABLED
-    #                   },
-    #                 },
-    #               },
-    #               metric: {
-    #                 expression: "Expression", # required
-    #                 variables: [ # required
-    #                   {
-    #                     name: "VariableName", # required
-    #                     value: { # required
-    #                       property_id: "Macro", # required
-    #                       hierarchy_id: "Macro",
-    #                     },
-    #                   },
-    #                 ],
-    #                 window: { # required
-    #                   tumbling: {
-    #                     interval: "Interval", # required
-    #                     offset: "Offset",
-    #                   },
-    #                 },
-    #                 processing_config: {
-    #                   compute_location: "EDGE", # required, accepts EDGE, CLOUD
-    #                 },
-    #               },
-    #             },
-    #           },
-    #         ],
-    #         asset_model_hierarchies: [
-    #           {
-    #             id: "ID",
-    #             name: "Name", # required
-    #             child_asset_model_id: "ID", # required
-    #           },
-    #         ],
-    #         asset_model_composite_models: [
-    #           {
-    #             name: "Name", # required
-    #             description: "Description",
-    #             type: "Name", # required
-    #             properties: [
-    #               {
-    #                 id: "ID",
-    #                 name: "Name", # required
-    #                 data_type: "STRING", # required, accepts STRING, INTEGER, DOUBLE, BOOLEAN, STRUCT
-    #                 data_type_spec: "Name",
-    #                 unit: "PropertyUnit",
-    #                 type: { # required
-    #                   attribute: {
-    #                     default_value: "DefaultValue",
-    #                   },
-    #                   measurement: {
-    #                     processing_config: {
-    #                       forwarding_config: { # required
-    #                         state: "DISABLED", # required, accepts DISABLED, ENABLED
-    #                       },
-    #                     },
-    #                   },
-    #                   transform: {
-    #                     expression: "Expression", # required
-    #                     variables: [ # required
-    #                       {
-    #                         name: "VariableName", # required
-    #                         value: { # required
-    #                           property_id: "Macro", # required
-    #                           hierarchy_id: "Macro",
-    #                         },
-    #                       },
-    #                     ],
-    #                     processing_config: {
-    #                       compute_location: "EDGE", # required, accepts EDGE, CLOUD
-    #                       forwarding_config: {
-    #                         state: "DISABLED", # required, accepts DISABLED, ENABLED
-    #                       },
-    #                     },
-    #                   },
-    #                   metric: {
-    #                     expression: "Expression", # required
-    #                     variables: [ # required
-    #                       {
-    #                         name: "VariableName", # required
-    #                         value: { # required
-    #                           property_id: "Macro", # required
-    #                           hierarchy_id: "Macro",
-    #                         },
-    #                       },
-    #                     ],
-    #                     window: { # required
-    #                       tumbling: {
-    #                         interval: "Interval", # required
-    #                         offset: "Offset",
-    #                       },
-    #                     },
-    #                     processing_config: {
-    #                       compute_location: "EDGE", # required, accepts EDGE, CLOUD
-    #                     },
-    #                   },
-    #                 },
-    #               },
-    #             ],
-    #             id: "ID",
-    #           },
-    #         ],
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] asset_model_id
     #   The ID of the asset model to update.
     #   @return [String]
@@ -8239,18 +6481,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateAssetPropertyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         asset_id: "ID", # required
-    #         property_id: "ID", # required
-    #         property_alias: "PropertyAlias",
-    #         property_notification_state: "ENABLED", # accepts ENABLED, DISABLED
-    #         client_token: "ClientToken",
-    #         property_unit: "PropertyUnit",
-    #       }
-    #
     # @!attribute [rw] asset_id
     #   The ID of the asset to be updated.
     #   @return [String]
@@ -8314,16 +6544,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateAssetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         asset_id: "ID", # required
-    #         asset_name: "Name", # required
-    #         client_token: "ClientToken",
-    #         asset_description: "Description",
-    #       }
-    #
     # @!attribute [rw] asset_id
     #   The ID of the asset to update.
     #   @return [String]
@@ -8365,17 +6585,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateDashboardRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dashboard_id: "ID", # required
-    #         dashboard_name: "Name", # required
-    #         dashboard_description: "Description",
-    #         dashboard_definition: "DashboardDefinition", # required
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] dashboard_id
     #   The ID of the dashboard to update.
     #   @return [String]
@@ -8419,15 +6628,6 @@ module Aws::IoTSiteWise
 
     class UpdateDashboardResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateGatewayCapabilityConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_id: "ID", # required
-    #         capability_namespace: "CapabilityNamespace", # required
-    #         capability_configuration: "CapabilityConfiguration", # required
-    #       }
-    #
     # @!attribute [rw] gateway_id
     #   The ID of the gateway to be updated.
     #   @return [String]
@@ -8485,14 +6685,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateGatewayRequest
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_id: "ID", # required
-    #         gateway_name: "Name", # required
-    #       }
-    #
     # @!attribute [rw] gateway_id
     #   The ID of the gateway to update.
     #   @return [String]
@@ -8508,30 +6700,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdatePortalRequest
-    #   data as a hash:
-    #
-    #       {
-    #         portal_id: "ID", # required
-    #         portal_name: "Name", # required
-    #         portal_description: "Description",
-    #         portal_contact_email: "Email", # required
-    #         portal_logo_image: {
-    #           id: "ID",
-    #           file: {
-    #             data: "data", # required
-    #             type: "PNG", # required, accepts PNG
-    #           },
-    #         },
-    #         role_arn: "ARN", # required
-    #         client_token: "ClientToken",
-    #         notification_sender_email: "Email",
-    #         alarms: {
-    #           alarm_role_arn: "ARN", # required
-    #           notification_lambda_arn: "ARN",
-    #         },
-    #       }
-    #
     # @!attribute [rw] portal_id
     #   The ID of the portal to update.
     #   @return [String]
@@ -8619,16 +6787,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateProjectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_id: "ID", # required
-    #         project_name: "Name", # required
-    #         project_description: "Description",
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] project_id
     #   The ID of the project to update.
     #   @return [String]
@@ -8663,13 +6821,6 @@ module Aws::IoTSiteWise
 
     # Contains information for a user identity in an access policy.
     #
-    # @note When making an API call, you may pass UserIdentity
-    #   data as a hash:
-    #
-    #       {
-    #         id: "IdentityId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The IAM Identity Center ID of the user.
     #   @return [String]
@@ -8681,14 +6832,6 @@ module Aws::IoTSiteWise
     end
 
     # Identifies a property value used in an expression.
-    #
-    # @note When making an API call, you may pass VariableValue
-    #   data as a hash:
-    #
-    #       {
-    #         property_id: "Macro", # required
-    #         hierarchy_id: "Macro",
-    #       }
     #
     # @!attribute [rw] property_id
     #   The ID of the property to use as the variable. You can use the
@@ -8718,16 +6861,6 @@ module Aws::IoTSiteWise
     end
 
     # Contains an asset property value (of a single type only).
-    #
-    # @note When making an API call, you may pass Variant
-    #   data as a hash:
-    #
-    #       {
-    #         string_value: "PropertyValueStringValue",
-    #         integer_value: 1,
-    #         double_value: 1.0,
-    #         boolean_value: false,
-    #       }
     #
     # @!attribute [rw] string_value
     #   Asset property data of type string (sequence of characters).

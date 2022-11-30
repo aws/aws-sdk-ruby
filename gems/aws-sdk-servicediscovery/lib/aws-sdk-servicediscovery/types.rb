@@ -10,21 +10,6 @@
 module Aws::ServiceDiscovery
   module Types
 
-    # @note When making an API call, you may pass CreateHttpNamespaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "NamespaceNameHttp", # required
-    #         creator_request_id: "ResourceId",
-    #         description: "ResourceDescription",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name that you want to assign to this namespace.
     #   @return [String]
@@ -79,29 +64,6 @@ module Aws::ServiceDiscovery
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreatePrivateDnsNamespaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "NamespaceNamePrivate", # required
-    #         creator_request_id: "ResourceId",
-    #         description: "ResourceDescription",
-    #         vpc: "ResourceId", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         properties: {
-    #           dns_properties: { # required
-    #             soa: { # required
-    #               ttl: 1, # required
-    #             },
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name that you want to assign to this namespace. When you create
     #   a private DNS namespace, Cloud Map automatically creates an Amazon
@@ -170,28 +132,6 @@ module Aws::ServiceDiscovery
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreatePublicDnsNamespaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "NamespaceNamePublic", # required
-    #         creator_request_id: "ResourceId",
-    #         description: "ResourceDescription",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         properties: {
-    #           dns_properties: { # required
-    #             soa: { # required
-    #               ttl: 1, # required
-    #             },
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name that you want to assign to this namespace.
     #
@@ -256,41 +196,6 @@ module Aws::ServiceDiscovery
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateServiceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ServiceName", # required
-    #         namespace_id: "ResourceId",
-    #         creator_request_id: "ResourceId",
-    #         description: "ResourceDescription",
-    #         dns_config: {
-    #           namespace_id: "ResourceId",
-    #           routing_policy: "MULTIVALUE", # accepts MULTIVALUE, WEIGHTED
-    #           dns_records: [ # required
-    #             {
-    #               type: "SRV", # required, accepts SRV, A, AAAA, CNAME
-    #               ttl: 1, # required
-    #             },
-    #           ],
-    #         },
-    #         health_check_config: {
-    #           type: "HTTP", # required, accepts HTTP, HTTPS, TCP
-    #           resource_path: "ResourcePath",
-    #           failure_threshold: 1,
-    #         },
-    #         health_check_custom_config: {
-    #           failure_threshold: 1,
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         type: "HTTP", # accepts HTTP
-    #       }
-    #
     # @!attribute [rw] name
     #   The name that you want to assign to the service.
     #
@@ -437,13 +342,6 @@ module Aws::ServiceDiscovery
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteNamespaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the namespace that you want to delete.
     #   @return [String]
@@ -474,13 +372,6 @@ module Aws::ServiceDiscovery
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteServiceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the service that you want to delete.
     #   @return [String]
@@ -497,14 +388,6 @@ module Aws::ServiceDiscovery
     #
     class DeleteServiceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeregisterInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_id: "ResourceId", # required
-    #         instance_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] service_id
     #   The ID of the service that the instance is associated with.
     #   @return [String]
@@ -545,22 +428,6 @@ module Aws::ServiceDiscovery
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DiscoverInstancesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         namespace_name: "NamespaceName", # required
-    #         service_name: "ServiceName", # required
-    #         max_results: 1,
-    #         query_parameters: {
-    #           "AttrKey" => "AttrValue",
-    #         },
-    #         optional_parameters: {
-    #           "AttrKey" => "AttrValue",
-    #         },
-    #         health_status: "HEALTHY", # accepts HEALTHY, UNHEALTHY, ALL, HEALTHY_OR_ELSE_ALL
-    #       }
-    #
     # @!attribute [rw] namespace_name
     #   The `HttpName` name of the namespace. It's found in the
     #   `HttpProperties` member of the `Properties` member of the namespace.
@@ -648,20 +515,6 @@ module Aws::ServiceDiscovery
     #
     # The record types of a service can only be changed by deleting the
     # service and recreating it with a new `Dnsconfig`.
-    #
-    # @note When making an API call, you may pass DnsConfig
-    #   data as a hash:
-    #
-    #       {
-    #         namespace_id: "ResourceId",
-    #         routing_policy: "MULTIVALUE", # accepts MULTIVALUE, WEIGHTED
-    #         dns_records: [ # required
-    #           {
-    #             type: "SRV", # required, accepts SRV, A, AAAA, CNAME
-    #             ttl: 1, # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] namespace_id
     #   *Use NamespaceId in [Service][1] instead.*
@@ -751,18 +604,6 @@ module Aws::ServiceDiscovery
     # A complex type that contains information about changes to the Route 53
     # DNS records that Cloud Map creates when you register an instance.
     #
-    # @note When making an API call, you may pass DnsConfigChange
-    #   data as a hash:
-    #
-    #       {
-    #         dns_records: [ # required
-    #           {
-    #             type: "SRV", # required, accepts SRV, A, AAAA, CNAME
-    #             ttl: 1, # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] dns_records
     #   An array that contains one `DnsRecord` object for each Route 53
     #   record that you want Cloud Map to create when you register an
@@ -801,14 +642,6 @@ module Aws::ServiceDiscovery
     # A complex type that contains information about the Route 53 DNS
     # records that you want Cloud Map to create when you register an
     # instance.
-    #
-    # @note When making an API call, you may pass DnsRecord
-    #   data as a hash:
-    #
-    #       {
-    #         type: "SRV", # required, accepts SRV, A, AAAA, CNAME
-    #         ttl: 1, # required
-    #       }
     #
     # @!attribute [rw] type
     #   The type of the resource, which indicates the type of value that
@@ -956,14 +789,6 @@ module Aws::ServiceDiscovery
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_id: "ResourceId", # required
-    #         instance_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] service_id
     #   The ID of the service that the instance is associated with.
     #   @return [String]
@@ -993,16 +818,6 @@ module Aws::ServiceDiscovery
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetInstancesHealthStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_id: "ResourceId", # required
-    #         instances: ["ResourceId"],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] service_id
     #   The ID of the service that the instance is associated with.
     #   @return [String]
@@ -1073,13 +888,6 @@ module Aws::ServiceDiscovery
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetNamespaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the namespace that you want to get information about.
     #   @return [String]
@@ -1105,13 +913,6 @@ module Aws::ServiceDiscovery
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetOperationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         operation_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] operation_id
     #   The ID of the operation that you want to get more information about.
     #   @return [String]
@@ -1136,13 +937,6 @@ module Aws::ServiceDiscovery
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetServiceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the service that you want to get settings for.
     #   @return [String]
@@ -1237,15 +1031,6 @@ module Aws::ServiceDiscovery
     # [1]: http://aws.amazon.com/route53/pricing/
     # [2]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_HealthCheckConfig.html#Route53-Type-HealthCheckConfig-Regions
     # [3]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html#Route53-Type-AliasTarget-EvaluateTargetHealth
-    #
-    # @note When making an API call, you may pass HealthCheckConfig
-    #   data as a hash:
-    #
-    #       {
-    #         type: "HTTP", # required, accepts HTTP, HTTPS, TCP
-    #         resource_path: "ResourcePath",
-    #         failure_threshold: 1,
-    #       }
     #
     # @!attribute [rw] type
     #   The type of health check that you want to create, which indicates
@@ -1362,13 +1147,6 @@ module Aws::ServiceDiscovery
     #     arrive during that time to change the status back to healthy,
     #     Cloud Map stops routing traffic to the resource.
     #
-    # @note When making an API call, you may pass HealthCheckCustomConfig
-    #   data as a hash:
-    #
-    #       {
-    #         failure_threshold: 1,
-    #       }
-    #
     # @!attribute [rw] failure_threshold
     #   This parameter is no longer supported and is always set to 1. Cloud
     #   Map waits for approximately 30 seconds after receiving an
@@ -1440,13 +1218,6 @@ module Aws::ServiceDiscovery
     end
 
     # Updated properties for the HTTP namespace.
-    #
-    # @note When making an API call, you may pass HttpNamespaceChange
-    #   data as a hash:
-    #
-    #       {
-    #         description: "ResourceDescription", # required
-    #       }
     #
     # @!attribute [rw] description
     #   An updated description for the HTTP namespace.
@@ -1733,15 +1504,6 @@ module Aws::ServiceDiscovery
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListInstancesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_id: "ResourceId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] service_id
     #   The ID of the service that you want to list instances for.
     #   @return [String]
@@ -1792,21 +1554,6 @@ module Aws::ServiceDiscovery
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListNamespacesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         filters: [
-    #           {
-    #             name: "TYPE", # required, accepts TYPE, NAME, HTTP_NAME
-    #             values: ["FilterValue"], # required
-    #             condition: "EQ", # accepts EQ, IN, BETWEEN, BEGINS_WITH
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] next_token
     #   For the first `ListNamespaces` request, omit this value.
     #
@@ -1877,21 +1624,6 @@ module Aws::ServiceDiscovery
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListOperationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         filters: [
-    #           {
-    #             name: "NAMESPACE_ID", # required, accepts NAMESPACE_ID, SERVICE_ID, STATUS, TYPE, UPDATE_DATE
-    #             values: ["FilterValue"], # required
-    #             condition: "EQ", # accepts EQ, IN, BETWEEN, BEGINS_WITH
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] next_token
     #   For the first `ListOperations` request, omit this value.
     #
@@ -1963,21 +1695,6 @@ module Aws::ServiceDiscovery
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListServicesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         filters: [
-    #           {
-    #             name: "NAMESPACE_ID", # required, accepts NAMESPACE_ID
-    #             values: ["FilterValue"], # required
-    #             condition: "EQ", # accepts EQ, IN, BETWEEN, BEGINS_WITH
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] next_token
     #   For the first `ListServices` request, omit this value.
     #
@@ -2046,13 +1763,6 @@ module Aws::ServiceDiscovery
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource that you want to
     #   retrieve tags for.
@@ -2181,15 +1891,6 @@ module Aws::ServiceDiscovery
 
     # A complex type that identifies the namespaces that you want to list.
     # You can choose to list public or private namespaces.
-    #
-    # @note When making an API call, you may pass NamespaceFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "TYPE", # required, accepts TYPE, NAME, HTTP_NAME
-    #         values: ["FilterValue"], # required
-    #         condition: "EQ", # accepts EQ, IN, BETWEEN, BEGINS_WITH
-    #       }
     #
     # @!attribute [rw] name
     #   Specify the namespaces that you want to get using one of the
@@ -2430,15 +2131,6 @@ module Aws::ServiceDiscovery
     # A complex type that lets you select the operations that you want to
     # list.
     #
-    # @note When making an API call, you may pass OperationFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "NAMESPACE_ID", # required, accepts NAMESPACE_ID, SERVICE_ID, STATUS, TYPE, UPDATE_DATE
-    #         values: ["FilterValue"], # required
-    #         condition: "EQ", # accepts EQ, IN, BETWEEN, BEGINS_WITH
-    #       }
-    #
     # @!attribute [rw] name
     #   Specify the operations that you want to get:
     #
@@ -2555,20 +2247,6 @@ module Aws::ServiceDiscovery
 
     # Updated properties for the private DNS namespace.
     #
-    # @note When making an API call, you may pass PrivateDnsNamespaceChange
-    #   data as a hash:
-    #
-    #       {
-    #         description: "ResourceDescription",
-    #         properties: {
-    #           dns_properties: { # required
-    #             soa: { # required
-    #               ttl: 1, # required
-    #             },
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] description
     #   An updated description for the private DNS namespace.
     #   @return [String]
@@ -2588,17 +2266,6 @@ module Aws::ServiceDiscovery
 
     # DNS properties for the private DNS namespace.
     #
-    # @note When making an API call, you may pass PrivateDnsNamespaceProperties
-    #   data as a hash:
-    #
-    #       {
-    #         dns_properties: { # required
-    #           soa: { # required
-    #             ttl: 1, # required
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] dns_properties
     #   DNS properties for the private DNS namespace.
     #   @return [Types::PrivateDnsPropertiesMutable]
@@ -2613,17 +2280,6 @@ module Aws::ServiceDiscovery
 
     # Updated properties for the private DNS namespace.
     #
-    # @note When making an API call, you may pass PrivateDnsNamespacePropertiesChange
-    #   data as a hash:
-    #
-    #       {
-    #         dns_properties: { # required
-    #           soa: { # required
-    #             ttl: 1, # required
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] dns_properties
     #   Updated DNS properties for the private DNS namespace.
     #   @return [Types::PrivateDnsPropertiesMutableChange]
@@ -2637,15 +2293,6 @@ module Aws::ServiceDiscovery
     end
 
     # DNS properties for the private DNS namespace.
-    #
-    # @note When making an API call, you may pass PrivateDnsPropertiesMutable
-    #   data as a hash:
-    #
-    #       {
-    #         soa: { # required
-    #           ttl: 1, # required
-    #         },
-    #       }
     #
     # @!attribute [rw] soa
     #   Fields for the Start of Authority (SOA) record for the hosted zone
@@ -2662,15 +2309,6 @@ module Aws::ServiceDiscovery
 
     # Updated DNS properties for the private DNS namespace.
     #
-    # @note When making an API call, you may pass PrivateDnsPropertiesMutableChange
-    #   data as a hash:
-    #
-    #       {
-    #         soa: { # required
-    #           ttl: 1, # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] soa
     #   Updated fields for the Start of Authority (SOA) record for the
     #   hosted zone for the private DNS namespace.
@@ -2685,20 +2323,6 @@ module Aws::ServiceDiscovery
     end
 
     # Updated properties for the public DNS namespace.
-    #
-    # @note When making an API call, you may pass PublicDnsNamespaceChange
-    #   data as a hash:
-    #
-    #       {
-    #         description: "ResourceDescription",
-    #         properties: {
-    #           dns_properties: { # required
-    #             soa: { # required
-    #               ttl: 1, # required
-    #             },
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] description
     #   An updated description for the public DNS namespace.
@@ -2719,17 +2343,6 @@ module Aws::ServiceDiscovery
 
     # DNS properties for the public DNS namespace.
     #
-    # @note When making an API call, you may pass PublicDnsNamespaceProperties
-    #   data as a hash:
-    #
-    #       {
-    #         dns_properties: { # required
-    #           soa: { # required
-    #             ttl: 1, # required
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] dns_properties
     #   DNS properties for the public DNS namespace.
     #   @return [Types::PublicDnsPropertiesMutable]
@@ -2743,17 +2356,6 @@ module Aws::ServiceDiscovery
     end
 
     # Updated properties for the public DNS namespace.
-    #
-    # @note When making an API call, you may pass PublicDnsNamespacePropertiesChange
-    #   data as a hash:
-    #
-    #       {
-    #         dns_properties: { # required
-    #           soa: { # required
-    #             ttl: 1, # required
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] dns_properties
     #   Updated DNS properties for the hosted zone for the public DNS
@@ -2770,15 +2372,6 @@ module Aws::ServiceDiscovery
 
     # DNS properties for the public DNS namespace.
     #
-    # @note When making an API call, you may pass PublicDnsPropertiesMutable
-    #   data as a hash:
-    #
-    #       {
-    #         soa: { # required
-    #           ttl: 1, # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] soa
     #   Start of Authority (SOA) record for the hosted zone for the public
     #   DNS namespace.
@@ -2794,15 +2387,6 @@ module Aws::ServiceDiscovery
 
     # Updated DNS properties for the public DNS namespace.
     #
-    # @note When making an API call, you may pass PublicDnsPropertiesMutableChange
-    #   data as a hash:
-    #
-    #       {
-    #         soa: { # required
-    #           ttl: 1, # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] soa
     #   Updated fields for the Start of Authority (SOA) record for the
     #   hosted zone for the public DNS namespace.
@@ -2816,18 +2400,6 @@ module Aws::ServiceDiscovery
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RegisterInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_id: "ResourceId", # required
-    #         instance_id: "InstanceId", # required
-    #         creator_request_id: "ResourceId",
-    #         attributes: { # required
-    #           "AttrKey" => "AttrValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] service_id
     #   The ID of the service that you want to use for settings for the
     #   instance.
@@ -3094,13 +2666,6 @@ module Aws::ServiceDiscovery
     # Start of Authority (SOA) properties for a public or private DNS
     # namespace.
     #
-    # @note When making an API call, you may pass SOA
-    #   data as a hash:
-    #
-    #       {
-    #         ttl: 1, # required
-    #       }
-    #
     # @!attribute [rw] ttl
     #   The time to live (TTL) for purposes of negative caching.
     #   @return [Integer]
@@ -3115,13 +2680,6 @@ module Aws::ServiceDiscovery
 
     # Updated Start of Authority (SOA) properties for a public or private
     # DNS namespace.
-    #
-    # @note When making an API call, you may pass SOAChange
-    #   data as a hash:
-    #
-    #       {
-    #         ttl: 1, # required
-    #       }
     #
     # @!attribute [rw] ttl
     #   The updated time to live (TTL) for purposes of negative caching.
@@ -3274,26 +2832,6 @@ module Aws::ServiceDiscovery
 
     # A complex type that contains changes to an existing service.
     #
-    # @note When making an API call, you may pass ServiceChange
-    #   data as a hash:
-    #
-    #       {
-    #         description: "ResourceDescription",
-    #         dns_config: {
-    #           dns_records: [ # required
-    #             {
-    #               type: "SRV", # required, accepts SRV, A, AAAA, CNAME
-    #               ttl: 1, # required
-    #             },
-    #           ],
-    #         },
-    #         health_check_config: {
-    #           type: "HTTP", # required, accepts HTTP, HTTPS, TCP
-    #           resource_path: "ResourcePath",
-    #           failure_threshold: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] description
     #   A description for the service.
     #   @return [String]
@@ -3322,15 +2860,6 @@ module Aws::ServiceDiscovery
 
     # A complex type that lets you specify the namespaces that you want to
     # list services for.
-    #
-    # @note When making an API call, you may pass ServiceFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "NAMESPACE_ID", # required, accepts NAMESPACE_ID
-    #         values: ["FilterValue"], # required
-    #         condition: "EQ", # accepts EQ, IN, BETWEEN, BEGINS_WITH
-    #       }
     #
     # @!attribute [rw] name
     #   Specify `NAMESPACE_ID`.
@@ -3474,14 +3003,6 @@ module Aws::ServiceDiscovery
 
     # A custom key-value pair that's associated with a resource.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The key identifier, or name, of the tag.
     #   @return [String]
@@ -3501,19 +3022,6 @@ module Aws::ServiceDiscovery
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource that you want to
     #   retrieve tags for.
@@ -3557,14 +3065,6 @@ module Aws::ServiceDiscovery
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource that you want to
     #   retrieve tags for.
@@ -3587,17 +3087,6 @@ module Aws::ServiceDiscovery
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateHttpNamespaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ResourceId", # required
-    #         updater_request_id: "ResourceId",
-    #         namespace: { # required
-    #           description: "ResourceDescription", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the namespace that you want to update.
     #   @return [String]
@@ -3644,15 +3133,6 @@ module Aws::ServiceDiscovery
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateInstanceCustomHealthStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_id: "ResourceId", # required
-    #         instance_id: "ResourceId", # required
-    #         status: "HEALTHY", # required, accepts HEALTHY, UNHEALTHY
-    #       }
-    #
     # @!attribute [rw] service_id
     #   The ID of the service that includes the configuration for the custom
     #   health check that you want to change the status for.
@@ -3677,24 +3157,6 @@ module Aws::ServiceDiscovery
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdatePrivateDnsNamespaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ResourceId", # required
-    #         updater_request_id: "ResourceId",
-    #         namespace: { # required
-    #           description: "ResourceDescription",
-    #           properties: {
-    #             dns_properties: { # required
-    #               soa: { # required
-    #                 ttl: 1, # required
-    #               },
-    #             },
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the namespace that you want to update.
     #   @return [String]
@@ -3741,24 +3203,6 @@ module Aws::ServiceDiscovery
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdatePublicDnsNamespaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ResourceId", # required
-    #         updater_request_id: "ResourceId",
-    #         namespace: { # required
-    #           description: "ResourceDescription",
-    #           properties: {
-    #             dns_properties: { # required
-    #               soa: { # required
-    #                 ttl: 1, # required
-    #               },
-    #             },
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the namespace being updated.
     #   @return [String]
@@ -3805,29 +3249,6 @@ module Aws::ServiceDiscovery
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateServiceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ResourceId", # required
-    #         service: { # required
-    #           description: "ResourceDescription",
-    #           dns_config: {
-    #             dns_records: [ # required
-    #               {
-    #                 type: "SRV", # required, accepts SRV, A, AAAA, CNAME
-    #                 ttl: 1, # required
-    #               },
-    #             ],
-    #           },
-    #           health_check_config: {
-    #             type: "HTTP", # required, accepts HTTP, HTTPS, TCP
-    #             resource_path: "ResourcePath",
-    #             failure_threshold: 1,
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the service that you want to update.
     #   @return [String]

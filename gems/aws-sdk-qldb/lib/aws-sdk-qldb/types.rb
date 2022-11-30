@@ -10,14 +10,6 @@
 module Aws::QLDB
   module Types
 
-    # @note When making an API call, you may pass CancelJournalKinesisStreamRequest
-    #   data as a hash:
-    #
-    #       {
-    #         ledger_name: "LedgerName", # required
-    #         stream_id: "UniqueId", # required
-    #       }
-    #
     # @!attribute [rw] ledger_name
     #   The name of the ledger.
     #   @return [String]
@@ -48,19 +40,6 @@ module Aws::QLDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateLedgerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "LedgerName", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         permissions_mode: "ALLOW_ALL", # required, accepts ALLOW_ALL, STANDARD
-    #         deletion_protection: false,
-    #         kms_key: "KmsKey",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the ledger that you want to create. The name must be
     #   unique among all of the ledgers in your Amazon Web Services account
@@ -236,13 +215,6 @@ module Aws::QLDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteLedgerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "LedgerName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the ledger that you want to delete.
     #   @return [String]
@@ -255,14 +227,6 @@ module Aws::QLDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeJournalKinesisStreamRequest
-    #   data as a hash:
-    #
-    #       {
-    #         ledger_name: "LedgerName", # required
-    #         stream_id: "UniqueId", # required
-    #       }
-    #
     # @!attribute [rw] ledger_name
     #   The name of the ledger.
     #   @return [String]
@@ -294,14 +258,6 @@ module Aws::QLDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeJournalS3ExportRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "LedgerName", # required
-    #         export_id: "UniqueId", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the ledger.
     #   @return [String]
@@ -333,13 +289,6 @@ module Aws::QLDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeLedgerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "LedgerName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the ledger that you want to describe.
     #   @return [String]
@@ -404,25 +353,6 @@ module Aws::QLDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ExportJournalToS3Request
-    #   data as a hash:
-    #
-    #       {
-    #         name: "LedgerName", # required
-    #         inclusive_start_time: Time.now, # required
-    #         exclusive_end_time: Time.now, # required
-    #         s3_export_configuration: { # required
-    #           bucket: "S3Bucket", # required
-    #           prefix: "S3Prefix", # required
-    #           encryption_configuration: { # required
-    #             object_encryption_type: "SSE_KMS", # required, accepts SSE_KMS, SSE_S3, NO_ENCRYPTION
-    #             kms_key_arn: "Arn",
-    #           },
-    #         },
-    #         role_arn: "Arn", # required
-    #         output_format: "ION_BINARY", # accepts ION_BINARY, ION_TEXT, JSON
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the ledger.
     #   @return [String]
@@ -508,19 +438,6 @@ module Aws::QLDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetBlockRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "LedgerName", # required
-    #         block_address: { # required
-    #           ion_text: "IonText",
-    #         },
-    #         digest_tip_address: {
-    #           ion_text: "IonText",
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the ledger.
     #   @return [String]
@@ -571,13 +488,6 @@ module Aws::QLDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDigestRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "LedgerName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the ledger.
     #   @return [String]
@@ -610,20 +520,6 @@ module Aws::QLDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRevisionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "LedgerName", # required
-    #         block_address: { # required
-    #           ion_text: "IonText",
-    #         },
-    #         document_id: "UniqueId", # required
-    #         digest_tip_address: {
-    #           ion_text: "IonText",
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the ledger.
     #   @return [String]
@@ -847,14 +743,6 @@ module Aws::QLDB
     # The configuration settings of the Amazon Kinesis Data Streams
     # destination for an Amazon QLDB journal stream.
     #
-    # @note When making an API call, you may pass KinesisConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         stream_arn: "Arn", # required
-    #         aggregation_enabled: false,
-    #       }
-    #
     # @!attribute [rw] stream_arn
     #   The Amazon Resource Name (ARN) of the Kinesis Data Streams resource.
     #   @return [String]
@@ -996,15 +884,6 @@ module Aws::QLDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListJournalKinesisStreamsForLedgerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         ledger_name: "LedgerName", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] ledger_name
     #   The name of the ledger.
     #   @return [String]
@@ -1055,15 +934,6 @@ module Aws::QLDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListJournalS3ExportsForLedgerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "LedgerName", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the ledger.
     #   @return [String]
@@ -1114,14 +984,6 @@ module Aws::QLDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListJournalS3ExportsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to return in a single
     #   `ListJournalS3Exports` request. (The actual number of results
@@ -1168,14 +1030,6 @@ module Aws::QLDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListLedgersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to return in a single `ListLedgers`
     #   request. (The actual number of results returned might be fewer.)
@@ -1223,13 +1077,6 @@ module Aws::QLDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) for which to list the tags. For
     #   example:
@@ -1353,14 +1200,6 @@ module Aws::QLDB
     # The encryption settings that are used by a journal export job to write
     # data in an Amazon Simple Storage Service (Amazon S3) bucket.
     #
-    # @note When making an API call, you may pass S3EncryptionConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         object_encryption_type: "SSE_KMS", # required, accepts SSE_KMS, SSE_S3, NO_ENCRYPTION
-    #         kms_key_arn: "Arn",
-    #       }
-    #
     # @!attribute [rw] object_encryption_type
     #   The Amazon S3 object encryption type.
     #
@@ -1395,18 +1234,6 @@ module Aws::QLDB
 
     # The Amazon Simple Storage Service (Amazon S3) bucket location in which
     # a journal export job writes the journal contents.
-    #
-    # @note When making an API call, you may pass S3ExportConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         bucket: "S3Bucket", # required
-    #         prefix: "S3Prefix", # required
-    #         encryption_configuration: { # required
-    #           object_encryption_type: "SSE_KMS", # required, accepts SSE_KMS, SSE_S3, NO_ENCRYPTION
-    #           kms_key_arn: "Arn",
-    #         },
-    #       }
     #
     # @!attribute [rw] bucket
     #   The Amazon S3 bucket name in which a journal export job writes the
@@ -1457,24 +1284,6 @@ module Aws::QLDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StreamJournalToKinesisRequest
-    #   data as a hash:
-    #
-    #       {
-    #         ledger_name: "LedgerName", # required
-    #         role_arn: "Arn", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         inclusive_start_time: Time.now, # required
-    #         exclusive_end_time: Time.now,
-    #         kinesis_configuration: { # required
-    #           stream_arn: "Arn", # required
-    #           aggregation_enabled: false,
-    #         },
-    #         stream_name: "StreamName", # required
-    #       }
-    #
     # @!attribute [rw] ledger_name
     #   The name of the ledger.
     #   @return [String]
@@ -1566,16 +1375,6 @@ module Aws::QLDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) to which you want to add the tags.
     #   For example:
@@ -1603,14 +1402,6 @@ module Aws::QLDB
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) from which to remove the tags. For
     #   example:
@@ -1635,14 +1426,6 @@ module Aws::QLDB
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateLedgerPermissionsModeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "LedgerName", # required
-    #         permissions_mode: "ALLOW_ALL", # required, accepts ALLOW_ALL, STANDARD
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the ledger.
     #   @return [String]
@@ -1713,15 +1496,6 @@ module Aws::QLDB
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateLedgerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "LedgerName", # required
-    #         deletion_protection: false,
-    #         kms_key: "KmsKey",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the ledger.
     #   @return [String]
@@ -1840,13 +1614,6 @@ module Aws::QLDB
     end
 
     # A structure that can contain a value in multiple encoding formats.
-    #
-    # @note When making an API call, you may pass ValueHolder
-    #   data as a hash:
-    #
-    #       {
-    #         ion_text: "IonText",
-    #       }
     #
     # @!attribute [rw] ion_text
     #   An Amazon Ion plaintext value contained in a `ValueHolder`

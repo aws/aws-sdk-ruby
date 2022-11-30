@@ -30,14 +30,6 @@ module Aws::RedshiftServerless
     # An array of key-value pairs to set for advanced control over Amazon
     # Redshift Serverless.
     #
-    # @note When making an API call, you may pass ConfigParameter
-    #   data as a hash:
-    #
-    #       {
-    #         parameter_key: "ParameterKey",
-    #         parameter_value: "ParameterValue",
-    #       }
-    #
     # @!attribute [rw] parameter_key
     #   The key of the parameter. The options are `datestyle`,
     #   `enable_user_activity_logging`, `query_group`, `search_path`, and
@@ -70,15 +62,6 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ConvertRecoveryPointToSnapshotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         recovery_point_id: "String", # required
-    #         retention_period: 1,
-    #         snapshot_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] recovery_point_id
     #   The unique identifier of the recovery point.
     #   @return [String]
@@ -113,16 +96,6 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateEndpointAccessRequest
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_name: "String", # required
-    #         subnet_ids: ["SubnetId"], # required
-    #         vpc_security_group_ids: ["VpcSecurityGroupId"],
-    #         workgroup_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] endpoint_name
     #   The name of the VPC endpoint. An endpoint name must contain 1-30
     #   characters. Valid characters are A-Z, a-z, 0-9, and hyphen(-). The
@@ -168,26 +141,6 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateNamespaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         admin_user_password: "DbPassword",
-    #         admin_username: "DbUser",
-    #         db_name: "String",
-    #         default_iam_role_arn: "String",
-    #         iam_roles: ["IamRoleArn"],
-    #         kms_key_id: "String",
-    #         log_exports: ["useractivitylog"], # accepts useractivitylog, userlog, connectionlog
-    #         namespace_name: "NamespaceName", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] admin_user_password
     #   The password of the administrator for the first database created in
     #   the namespace.
@@ -257,15 +210,6 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateSnapshotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         namespace_name: "String", # required
-    #         retention_period: 1,
-    #         snapshot_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] namespace_name
     #   The namespace to create a snapshot for.
     #   @return [String]
@@ -300,17 +244,6 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateUsageLimitRequest
-    #   data as a hash:
-    #
-    #       {
-    #         amount: 1, # required
-    #         breach_action: "log", # accepts log, emit-metric, deactivate
-    #         period: "daily", # accepts daily, weekly, monthly
-    #         resource_arn: "String", # required
-    #         usage_type: "serverless-compute", # required, accepts serverless-compute, cross-region-datasharing
-    #       }
-    #
     # @!attribute [rw] amount
     #   The limit amount. If time-based, this amount is in Redshift
     #   Processing Units (RPU) consumed per hour. If data-based, this amount
@@ -362,31 +295,6 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateWorkgroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         base_capacity: 1,
-    #         config_parameters: [
-    #           {
-    #             parameter_key: "ParameterKey",
-    #             parameter_value: "ParameterValue",
-    #           },
-    #         ],
-    #         enhanced_vpc_routing: false,
-    #         namespace_name: "NamespaceName", # required
-    #         publicly_accessible: false,
-    #         security_group_ids: ["SecurityGroupId"],
-    #         subnet_ids: ["SubnetId"],
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         workgroup_name: "WorkgroupName", # required
-    #       }
-    #
     # @!attribute [rw] base_capacity
     #   The base data warehouse capacity of the workgroup in Redshift
     #   Processing Units (RPUs).
@@ -458,13 +366,6 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteEndpointAccessRequest
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] endpoint_name
     #   The name of the VPC endpoint to delete.
     #   @return [String]
@@ -489,15 +390,6 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteNamespaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         final_snapshot_name: "String",
-    #         final_snapshot_retention_period: 1,
-    #         namespace_name: "NamespaceName", # required
-    #       }
-    #
     # @!attribute [rw] final_snapshot_name
     #   The name of the snapshot to be created before the namespace is
     #   deleted.
@@ -533,13 +425,6 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteResourcePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the policy to delete.
     #   @return [String]
@@ -556,13 +441,6 @@ module Aws::RedshiftServerless
     #
     class DeleteResourcePolicyResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteSnapshotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         snapshot_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] snapshot_name
     #   The name of the snapshot to be deleted.
     #   @return [String]
@@ -587,13 +465,6 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteUsageLimitRequest
-    #   data as a hash:
-    #
-    #       {
-    #         usage_limit_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] usage_limit_id
     #   The unique identifier of the usage limit to delete.
     #   @return [String]
@@ -618,13 +489,6 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteWorkgroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workgroup_name: "WorkgroupName", # required
-    #       }
-    #
     # @!attribute [rw] workgroup_name
     #   The name of the workgroup to be deleted.
     #   @return [String]
@@ -735,15 +599,6 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetCredentialsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         db_name: "DbName",
-    #         duration_seconds: 1,
-    #         workgroup_name: "WorkgroupName", # required
-    #       }
-    #
     # @!attribute [rw] db_name
     #   The name of the database to get temporary authorization to log on
     #   to.
@@ -820,13 +675,6 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetEndpointAccessRequest
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] endpoint_name
     #   The name of the VPC endpoint to return information for.
     #   @return [String]
@@ -851,13 +699,6 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetNamespaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         namespace_name: "NamespaceName", # required
-    #       }
-    #
     # @!attribute [rw] namespace_name
     #   The name of the namespace to retrieve information for.
     #   @return [String]
@@ -882,13 +723,6 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRecoveryPointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         recovery_point_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] recovery_point_id
     #   The unique identifier of the recovery point to return information
     #   for.
@@ -914,13 +748,6 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetResourcePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource to return.
     #   @return [String]
@@ -945,15 +772,6 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSnapshotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         owner_account: "String",
-    #         snapshot_arn: "String",
-    #         snapshot_name: "String",
-    #       }
-    #
     # @!attribute [rw] owner_account
     #   The owner Amazon Web Services account of a snapshot shared with
     #   another user.
@@ -989,13 +807,6 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetUsageLimitRequest
-    #   data as a hash:
-    #
-    #       {
-    #         usage_limit_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] usage_limit_id
     #   The unique identifier of the usage limit to return information for.
     #   @return [String]
@@ -1020,13 +831,6 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetWorkgroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workgroup_name: "WorkgroupName", # required
-    #       }
-    #
     # @!attribute [rw] workgroup_name
     #   The name of the workgroup to return information for.
     #   @return [String]
@@ -1091,16 +895,6 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEndpointAccessRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "String",
-    #         vpc_id: "String",
-    #         workgroup_name: "String",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   An optional parameter that specifies the maximum number of results
     #   to return. You can use `nextToken` to get the next page of results.
@@ -1154,14 +948,6 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListNamespacesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   An optional parameter that specifies the maximum number of results
     #   to return. You can use `nextToken` to get the next page of results.
@@ -1202,17 +988,6 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRecoveryPointsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         end_time: Time.now,
-    #         max_results: 1,
-    #         namespace_name: "NamespaceName",
-    #         next_token: "String",
-    #         start_time: Time.now,
-    #       }
-    #
     # @!attribute [rw] end_time
     #   The time when creation of the recovery point finished.
     #   @return [Time]
@@ -1269,19 +1044,6 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSnapshotsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         end_time: Time.now,
-    #         max_results: 1,
-    #         namespace_arn: "String",
-    #         namespace_name: "String",
-    #         next_token: "String",
-    #         owner_account: "String",
-    #         start_time: Time.now,
-    #       }
-    #
     # @!attribute [rw] end_time
     #   The timestamp showing when the snapshot creation finished.
     #   @return [Time]
@@ -1349,13 +1111,6 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource to list tags for.
     #   @return [String]
@@ -1380,16 +1135,6 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListUsageLimitsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #         resource_arn: "String",
-    #         usage_type: "serverless-compute", # accepts serverless-compute, cross-region-datasharing
-    #       }
-    #
     # @!attribute [rw] max_results
     #   An optional parameter that specifies the maximum number of results
     #   to return. You can use `nextToken` to get the next page of results.
@@ -1443,14 +1188,6 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListWorkgroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   An optional parameter that specifies the maximum number of results
     #   to return. You can use `nextToken` to get the next page of results.
@@ -1596,14 +1333,6 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutResourcePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy: "String", # required
-    #         resource_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] policy
     #   The policy to create or update. For example, the following policy
     #   grants a user authorization to restore a snapshot.
@@ -1714,15 +1443,6 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RestoreFromRecoveryPointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         namespace_name: "NamespaceName", # required
-    #         recovery_point_id: "String", # required
-    #         workgroup_name: "WorkgroupName", # required
-    #       }
-    #
     # @!attribute [rw] namespace_name
     #   The name of the namespace to restore data into.
     #   @return [String]
@@ -1762,17 +1482,6 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RestoreFromSnapshotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         namespace_name: "NamespaceName", # required
-    #         owner_account: "String",
-    #         snapshot_arn: "String",
-    #         snapshot_name: "String",
-    #         workgroup_name: "WorkgroupName", # required
-    #       }
-    #
     # @!attribute [rw] namespace_name
     #   The name of the namespace to restore the snapshot to.
     #   @return [String]
@@ -1958,14 +1667,6 @@ module Aws::RedshiftServerless
 
     # A map of key-value pairs.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The key to use in the tag.
     #   @return [String]
@@ -1983,19 +1684,6 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource to tag.
     #   @return [String]
@@ -2053,14 +1741,6 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource to remove tags from.
     #   @return [String]
@@ -2082,14 +1762,6 @@ module Aws::RedshiftServerless
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateEndpointAccessRequest
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_name: "String", # required
-    #         vpc_security_group_ids: ["VpcSecurityGroupId"],
-    #       }
-    #
     # @!attribute [rw] endpoint_name
     #   The name of the VPC endpoint to update.
     #   @return [String]
@@ -2120,19 +1792,6 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateNamespaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         admin_user_password: "DbPassword",
-    #         admin_username: "DbUser",
-    #         default_iam_role_arn: "String",
-    #         iam_roles: ["IamRoleArn"],
-    #         kms_key_id: "String",
-    #         log_exports: ["useractivitylog"], # accepts useractivitylog, userlog, connectionlog
-    #         namespace_name: "NamespaceName", # required
-    #       }
-    #
     # @!attribute [rw] admin_user_password
     #   The password of the administrator for the first database created in
     #   the namespace.
@@ -2192,14 +1851,6 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateSnapshotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         retention_period: 1,
-    #         snapshot_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] retention_period
     #   The new retention period of the snapshot.
     #   @return [Integer]
@@ -2229,15 +1880,6 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateUsageLimitRequest
-    #   data as a hash:
-    #
-    #       {
-    #         amount: 1,
-    #         breach_action: "log", # accepts log, emit-metric, deactivate
-    #         usage_limit_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] amount
     #   The new limit amount. For more information about this parameter.
     #   @return [Integer]
@@ -2273,24 +1915,6 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateWorkgroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         base_capacity: 1,
-    #         config_parameters: [
-    #           {
-    #             parameter_key: "ParameterKey",
-    #             parameter_value: "ParameterValue",
-    #           },
-    #         ],
-    #         enhanced_vpc_routing: false,
-    #         publicly_accessible: false,
-    #         security_group_ids: ["SecurityGroupId"],
-    #         subnet_ids: ["SubnetId"],
-    #         workgroup_name: "WorkgroupName", # required
-    #       }
-    #
     # @!attribute [rw] base_capacity
     #   The new base data warehouse capacity in Redshift Processing Units
     #   (RPUs).

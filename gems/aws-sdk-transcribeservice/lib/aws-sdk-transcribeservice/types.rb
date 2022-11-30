@@ -28,16 +28,6 @@ module Aws::TranscribeService
     #
     # If you prefer to use percentage instead of milliseconds, see .
     #
-    # @note When making an API call, you may pass AbsoluteTimeRange
-    #   data as a hash:
-    #
-    #       {
-    #         start_time: 1,
-    #         end_time: 1,
-    #         first: 1,
-    #         last: 1,
-    #       }
-    #
     # @!attribute [rw] start_time
     #   The time, in milliseconds, when Amazon Transcribe starts searching
     #   for the specified criteria in your audio. If you include `StartTime`
@@ -280,29 +270,6 @@ module Aws::TranscribeService
     # apply custom language models, custom vocabulary filters, and custom
     # vocabularies.
     #
-    # @note When making an API call, you may pass CallAnalyticsJobSettings
-    #   data as a hash:
-    #
-    #       {
-    #         vocabulary_name: "VocabularyName",
-    #         vocabulary_filter_name: "VocabularyFilterName",
-    #         vocabulary_filter_method: "remove", # accepts remove, mask, tag
-    #         language_model_name: "ModelName",
-    #         content_redaction: {
-    #           redaction_type: "PII", # required, accepts PII
-    #           redaction_output: "redacted", # required, accepts redacted, redacted_and_unredacted
-    #           pii_entity_types: ["BANK_ACCOUNT_NUMBER"], # accepts BANK_ACCOUNT_NUMBER, BANK_ROUTING, CREDIT_DEBIT_NUMBER, CREDIT_DEBIT_CVV, CREDIT_DEBIT_EXPIRY, PIN, EMAIL, ADDRESS, NAME, PHONE, SSN, ALL
-    #         },
-    #         language_options: ["af-ZA"], # accepts af-ZA, ar-AE, ar-SA, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
-    #         language_id_settings: {
-    #           "af-ZA" => {
-    #             vocabulary_name: "VocabularyName",
-    #             vocabulary_filter_name: "VocabularyFilterName",
-    #             language_model_name: "ModelName",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] vocabulary_name
     #   The name of the custom vocabulary you want to include in your Call
     #   Analytics transcription request. Custom vocabulary names are case
@@ -543,14 +510,6 @@ module Aws::TranscribeService
     # `ParticipantRole` to `AGENT` (to indicate that it's the agent
     # speaking).
     #
-    # @note When making an API call, you may pass ChannelDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         channel_id: 1,
-    #         participant_role: "AGENT", # accepts AGENT, CUSTOMER
-    #       }
-    #
     # @!attribute [rw] channel_id
     #   Specify the audio channel you want to define.
     #   @return [Integer]
@@ -588,15 +547,6 @@ module Aws::TranscribeService
     # you must also include the sub-parameters: `PiiEntityTypes`,
     # `RedactionOutput`, and `RedactionType`.
     #
-    # @note When making an API call, you may pass ContentRedaction
-    #   data as a hash:
-    #
-    #       {
-    #         redaction_type: "PII", # required, accepts PII
-    #         redaction_output: "redacted", # required, accepts redacted, redacted_and_unredacted
-    #         pii_entity_types: ["BANK_ACCOUNT_NUMBER"], # accepts BANK_ACCOUNT_NUMBER, BANK_ROUTING, CREDIT_DEBIT_NUMBER, CREDIT_DEBIT_CVV, CREDIT_DEBIT_EXPIRY, PIN, EMAIL, ADDRESS, NAME, PHONE, SSN, ALL
-    #       }
-    #
     # @!attribute [rw] redaction_type
     #   Specify the category of information you want to redact; `PII`
     #   (personally identifiable information) is the only valid value. You
@@ -631,86 +581,6 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateCallAnalyticsCategoryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         category_name: "CategoryName", # required
-    #         rules: [ # required
-    #           {
-    #             non_talk_time_filter: {
-    #               threshold: 1,
-    #               absolute_time_range: {
-    #                 start_time: 1,
-    #                 end_time: 1,
-    #                 first: 1,
-    #                 last: 1,
-    #               },
-    #               relative_time_range: {
-    #                 start_percentage: 1,
-    #                 end_percentage: 1,
-    #                 first: 1,
-    #                 last: 1,
-    #               },
-    #               negate: false,
-    #             },
-    #             interruption_filter: {
-    #               threshold: 1,
-    #               participant_role: "AGENT", # accepts AGENT, CUSTOMER
-    #               absolute_time_range: {
-    #                 start_time: 1,
-    #                 end_time: 1,
-    #                 first: 1,
-    #                 last: 1,
-    #               },
-    #               relative_time_range: {
-    #                 start_percentage: 1,
-    #                 end_percentage: 1,
-    #                 first: 1,
-    #                 last: 1,
-    #               },
-    #               negate: false,
-    #             },
-    #             transcript_filter: {
-    #               transcript_filter_type: "EXACT", # required, accepts EXACT
-    #               absolute_time_range: {
-    #                 start_time: 1,
-    #                 end_time: 1,
-    #                 first: 1,
-    #                 last: 1,
-    #               },
-    #               relative_time_range: {
-    #                 start_percentage: 1,
-    #                 end_percentage: 1,
-    #                 first: 1,
-    #                 last: 1,
-    #               },
-    #               participant_role: "AGENT", # accepts AGENT, CUSTOMER
-    #               negate: false,
-    #               targets: ["NonEmptyString"], # required
-    #             },
-    #             sentiment_filter: {
-    #               sentiments: ["POSITIVE"], # required, accepts POSITIVE, NEGATIVE, NEUTRAL, MIXED
-    #               absolute_time_range: {
-    #                 start_time: 1,
-    #                 end_time: 1,
-    #                 first: 1,
-    #                 last: 1,
-    #               },
-    #               relative_time_range: {
-    #                 start_percentage: 1,
-    #                 end_percentage: 1,
-    #                 first: 1,
-    #                 last: 1,
-    #               },
-    #               participant_role: "AGENT", # accepts AGENT, CUSTOMER
-    #               negate: false,
-    #             },
-    #           },
-    #         ],
-    #         input_type: "REAL_TIME", # accepts REAL_TIME, POST_CALL
-    #       }
-    #
     # @!attribute [rw] category_name
     #   A unique name, chosen by you, for your Call Analytics category.
     #   It's helpful to use a detailed naming system that will make sense
@@ -769,26 +639,6 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateLanguageModelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         language_code: "en-US", # required, accepts en-US, hi-IN, es-US, en-GB, en-AU
-    #         base_model_name: "NarrowBand", # required, accepts NarrowBand, WideBand
-    #         model_name: "ModelName", # required
-    #         input_data_config: { # required
-    #           s3_uri: "Uri", # required
-    #           tuning_data_s3_uri: "Uri",
-    #           data_access_role_arn: "DataAccessRoleArn", # required
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] language_code
     #   The language code that represents the language of your model. Each
     #   custom language model must contain terms in only one language, and
@@ -905,21 +755,6 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateMedicalVocabularyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         vocabulary_name: "VocabularyName", # required
-    #         language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
-    #         vocabulary_file_uri: "Uri", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] vocabulary_name
     #   A unique name, chosen by you, for your new custom medical
     #   vocabulary.
@@ -1015,22 +850,6 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateVocabularyFilterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         vocabulary_filter_name: "VocabularyFilterName", # required
-    #         language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
-    #         words: ["Word"],
-    #         vocabulary_filter_file_uri: "Uri",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] vocabulary_filter_name
     #   A unique name, chosen by you, for your new custom vocabulary filter.
     #
@@ -1143,22 +962,6 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateVocabularyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         vocabulary_name: "VocabularyName", # required
-    #         language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
-    #         phrases: ["Phrase"],
-    #         vocabulary_file_uri: "Uri",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] vocabulary_name
     #   A unique name, chosen by you, for your new custom vocabulary.
     #
@@ -1289,13 +1092,6 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteCallAnalyticsCategoryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         category_name: "CategoryName", # required
-    #       }
-    #
     # @!attribute [rw] category_name
     #   The name of the Call Analytics category you want to delete. Category
     #   names are case sensitive.
@@ -1313,13 +1109,6 @@ module Aws::TranscribeService
     #
     class DeleteCallAnalyticsCategoryResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteCallAnalyticsJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         call_analytics_job_name: "CallAnalyticsJobName", # required
-    #       }
-    #
     # @!attribute [rw] call_analytics_job_name
     #   The name of the Call Analytics job you want to delete. Job names are
     #   case sensitive.
@@ -1337,13 +1126,6 @@ module Aws::TranscribeService
     #
     class DeleteCallAnalyticsJobResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteLanguageModelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         model_name: "ModelName", # required
-    #       }
-    #
     # @!attribute [rw] model_name
     #   The name of the custom language model you want to delete. Model
     #   names are case sensitive.
@@ -1357,13 +1139,6 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteMedicalTranscriptionJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         medical_transcription_job_name: "TranscriptionJobName", # required
-    #       }
-    #
     # @!attribute [rw] medical_transcription_job_name
     #   The name of the medical transcription job you want to delete. Job
     #   names are case sensitive.
@@ -1377,13 +1152,6 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteMedicalVocabularyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         vocabulary_name: "VocabularyName", # required
-    #       }
-    #
     # @!attribute [rw] vocabulary_name
     #   The name of the custom medical vocabulary you want to delete. Custom
     #   medical vocabulary names are case sensitive.
@@ -1397,13 +1165,6 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteTranscriptionJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         transcription_job_name: "TranscriptionJobName", # required
-    #       }
-    #
     # @!attribute [rw] transcription_job_name
     #   The name of the transcription job you want to delete. Job names are
     #   case sensitive.
@@ -1417,13 +1178,6 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteVocabularyFilterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         vocabulary_filter_name: "VocabularyFilterName", # required
-    #       }
-    #
     # @!attribute [rw] vocabulary_filter_name
     #   The name of the custom vocabulary filter you want to delete. Custom
     #   vocabulary filter names are case sensitive.
@@ -1437,13 +1191,6 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteVocabularyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         vocabulary_name: "VocabularyName", # required
-    #       }
-    #
     # @!attribute [rw] vocabulary_name
     #   The name of the custom vocabulary you want to delete. Custom
     #   vocabulary names are case sensitive.
@@ -1457,13 +1204,6 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeLanguageModelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         model_name: "ModelName", # required
-    #       }
-    #
     # @!attribute [rw] model_name
     #   The name of the custom language model you want information about.
     #   Model names are case sensitive.
@@ -1498,13 +1238,6 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetCallAnalyticsCategoryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         category_name: "CategoryName", # required
-    #       }
-    #
     # @!attribute [rw] category_name
     #   The name of the Call Analytics category you want information about.
     #   Category names are case sensitive.
@@ -1531,13 +1264,6 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetCallAnalyticsJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         call_analytics_job_name: "CallAnalyticsJobName", # required
-    #       }
-    #
     # @!attribute [rw] call_analytics_job_name
     #   The name of the Call Analytics job you want information about. Job
     #   names are case sensitive.
@@ -1564,13 +1290,6 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetMedicalTranscriptionJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         medical_transcription_job_name: "TranscriptionJobName", # required
-    #       }
-    #
     # @!attribute [rw] medical_transcription_job_name
     #   The name of the medical transcription job you want information
     #   about. Job names are case sensitive.
@@ -1598,13 +1317,6 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetMedicalVocabularyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         vocabulary_name: "VocabularyName", # required
-    #       }
-    #
     # @!attribute [rw] vocabulary_name
     #   The name of the custom medical vocabulary you want information
     #   about. Custom medical vocabulary names are case sensitive.
@@ -1672,13 +1384,6 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetTranscriptionJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         transcription_job_name: "TranscriptionJobName", # required
-    #       }
-    #
     # @!attribute [rw] transcription_job_name
     #   The name of the transcription job you want information about. Job
     #   names are case sensitive.
@@ -1705,13 +1410,6 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetVocabularyFilterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         vocabulary_filter_name: "VocabularyFilterName", # required
-    #       }
-    #
     # @!attribute [rw] vocabulary_filter_name
     #   The name of the custom vocabulary filter you want information about.
     #   Custom vocabulary filter names are case sensitive.
@@ -1759,13 +1457,6 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetVocabularyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         vocabulary_name: "VocabularyName", # required
-    #       }
-    #
     # @!attribute [rw] vocabulary_name
     #   The name of the custom vocabulary you want information about. Custom
     #   vocabulary names are case sensitive.
@@ -1836,15 +1527,6 @@ module Aws::TranscribeService
     # When using `InputDataConfig`, you must include these sub-parameters:
     # `S3Uri` and `DataAccessRoleArn`. You can optionally include
     # `TuningDataS3Uri`.
-    #
-    # @note When making an API call, you may pass InputDataConfig
-    #   data as a hash:
-    #
-    #       {
-    #         s3_uri: "Uri", # required
-    #         tuning_data_s3_uri: "Uri",
-    #         data_access_role_arn: "DataAccessRoleArn", # required
-    #       }
     #
     # @!attribute [rw] s3_uri
     #   The Amazon S3 location (URI) of the text files you want to use to
@@ -1922,27 +1604,6 @@ module Aws::TranscribeService
     #
     # [1]: https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-batch.html#tca-rules-batch
     #
-    # @note When making an API call, you may pass InterruptionFilter
-    #   data as a hash:
-    #
-    #       {
-    #         threshold: 1,
-    #         participant_role: "AGENT", # accepts AGENT, CUSTOMER
-    #         absolute_time_range: {
-    #           start_time: 1,
-    #           end_time: 1,
-    #           first: 1,
-    #           last: 1,
-    #         },
-    #         relative_time_range: {
-    #           start_percentage: 1,
-    #           end_percentage: 1,
-    #           first: 1,
-    #           last: 1,
-    #         },
-    #         negate: false,
-    #       }
-    #
     # @!attribute [rw] threshold
     #   Specify the duration of the interruptions in milliseconds. For
     #   example, you can flag speech that contains more than 10,000
@@ -1991,14 +1652,6 @@ module Aws::TranscribeService
     # If you include `JobExecutionSettings` in your request, you must also
     # include the sub-parameters: `AllowDeferredExecution` and
     # `DataAccessRoleArn`.
-    #
-    # @note When making an API call, you may pass JobExecutionSettings
-    #   data as a hash:
-    #
-    #       {
-    #         allow_deferred_execution: false,
-    #         data_access_role_arn: "DataAccessRoleArn",
-    #       }
     #
     # @!attribute [rw] allow_deferred_execution
     #   Makes it possible to enable job queuing when your concurrent request
@@ -2098,15 +1751,6 @@ module Aws::TranscribeService
     # identification, use instead the  parameter with the VocabularyName or
     # VocabularyFilterName (or both) sub-parameter.</p>
     # `
-    #
-    # @note When making an API call, you may pass LanguageIdSettings
-    #   data as a hash:
-    #
-    #       {
-    #         vocabulary_name: "VocabularyName",
-    #         vocabulary_filter_name: "VocabularyFilterName",
-    #         language_model_name: "ModelName",
-    #       }
     #
     # @!attribute [rw] vocabulary_name
     #   The name of the custom vocabulary you want to use when processing
@@ -2272,14 +1916,6 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCallAnalyticsCategoriesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If your `ListCallAnalyticsCategories` request returns more results
     #   than can be displayed, `NextToken` is displayed in the response with
@@ -2327,16 +1963,6 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCallAnalyticsJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         status: "QUEUED", # accepts QUEUED, IN_PROGRESS, FAILED, COMPLETED
-    #         job_name_contains: "CallAnalyticsJobName",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] status
     #   Returns only Call Analytics jobs with the specified status. Jobs are
     #   ordered by creation date, with the newest job first. If you don't
@@ -2403,16 +2029,6 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListLanguageModelsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         status_equals: "IN_PROGRESS", # accepts IN_PROGRESS, FAILED, COMPLETED
-    #         name_contains: "ModelName",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] status_equals
     #   Returns only custom language models with the specified status.
     #   Language models are ordered by creation date, with the newest model
@@ -2474,16 +2090,6 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListMedicalTranscriptionJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         status: "QUEUED", # accepts QUEUED, IN_PROGRESS, FAILED, COMPLETED
-    #         job_name_contains: "TranscriptionJobName",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] status
     #   Returns only medical transcription jobs with the specified status.
     #   Jobs are ordered by creation date, with the newest job first. If you
@@ -2551,16 +2157,6 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListMedicalVocabulariesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         state_equals: "PENDING", # accepts PENDING, READY, FAILED
-    #         name_contains: "VocabularyName",
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If your `ListMedicalVocabularies` request returns more results than
     #   can be displayed, `NextToken` is displayed in the response with an
@@ -2629,13 +2225,6 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "TranscribeArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   Returns a list of all tags associated with the specified Amazon
     #   Resource Name (ARN). ARNs have the format
@@ -2675,16 +2264,6 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTranscriptionJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         status: "QUEUED", # accepts QUEUED, IN_PROGRESS, FAILED, COMPLETED
-    #         job_name_contains: "TranscriptionJobName",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] status
     #   Returns only transcription jobs with the specified status. Jobs are
     #   ordered by creation date, with the newest job first. If you don't
@@ -2751,16 +2330,6 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListVocabulariesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         state_equals: "PENDING", # accepts PENDING, READY, FAILED
-    #         name_contains: "VocabularyName",
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If your `ListVocabularies` request returns more results than can be
     #   displayed, `NextToken` is displayed in the response with an
@@ -2829,15 +2398,6 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListVocabularyFiltersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         name_contains: "VocabularyFilterName",
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If your `ListVocabularyFilters` request returns more results than
     #   can be displayed, `NextToken` is displayed in the response with an
@@ -2902,14 +2462,6 @@ module Aws::TranscribeService
     #
     # [1]: https://docs.aws.amazon.com/APIReference/API_StartTranscriptionJob.html#transcribe-StartTranscriptionJob-request-MediaFormat
     # [2]: https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio
-    #
-    # @note When making an API call, you may pass Media
-    #   data as a hash:
-    #
-    #       {
-    #         media_file_uri: "Uri",
-    #         redacted_media_file_uri: "Uri",
-    #       }
     #
     # @!attribute [rw] media_file_uri
     #   The Amazon S3 location of the media file you want to transcribe. For
@@ -3269,18 +2821,6 @@ module Aws::TranscribeService
     # You can use that to apply custom vocabularies to your medical
     # transcription job.
     #
-    # @note When making an API call, you may pass MedicalTranscriptionSetting
-    #   data as a hash:
-    #
-    #       {
-    #         show_speaker_labels: false,
-    #         max_speaker_labels: 1,
-    #         channel_identification: false,
-    #         show_alternatives: false,
-    #         max_alternatives: 1,
-    #         vocabulary_name: "VocabularyName",
-    #       }
-    #
     # @!attribute [rw] show_speaker_labels
     #   Enables speaker partitioning (diarization) in your transcription
     #   output. Speaker partitioning labels the speech from individual
@@ -3401,13 +2941,6 @@ module Aws::TranscribeService
     # LanguageModelName sub-parameter.</p>
     # `
     #
-    # @note When making an API call, you may pass ModelSettings
-    #   data as a hash:
-    #
-    #       {
-    #         language_model_name: "ModelName",
-    #       }
-    #
     # @!attribute [rw] language_model_name
     #   The name of the custom language model you want to use when
     #   processing your transcription job. Note that custom language model
@@ -3441,26 +2974,6 @@ module Aws::TranscribeService
     #
     #
     # [1]: https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-batch.html#tca-rules-batch
-    #
-    # @note When making an API call, you may pass NonTalkTimeFilter
-    #   data as a hash:
-    #
-    #       {
-    #         threshold: 1,
-    #         absolute_time_range: {
-    #           start_time: 1,
-    #           end_time: 1,
-    #           first: 1,
-    #           last: 1,
-    #         },
-    #         relative_time_range: {
-    #           start_percentage: 1,
-    #           end_percentage: 1,
-    #           first: 1,
-    #           last: 1,
-    #         },
-    #         negate: false,
-    #       }
     #
     # @!attribute [rw] threshold
     #   Specify the duration, in milliseconds, of the period of silence that
@@ -3526,16 +3039,6 @@ module Aws::TranscribeService
     #
     # If you prefer to use milliseconds instead of percentage, see .
     #
-    # @note When making an API call, you may pass RelativeTimeRange
-    #   data as a hash:
-    #
-    #       {
-    #         start_percentage: 1,
-    #         end_percentage: 1,
-    #         first: 1,
-    #         last: 1,
-    #       }
-    #
     # @!attribute [rw] start_percentage
     #   The time, in percentage, when Amazon Transcribe starts searching for
     #   the specified criteria in your media file. If you include
@@ -3590,10 +3093,6 @@ module Aws::TranscribeService
     # [1]: https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-batch.html
     # [2]: https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-stream.html
     # [3]: https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics.html
-    #
-    # @note Rule is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note Rule is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Rule corresponding to the set member.
     #
     # @!attribute [rw] non_talk_time_filter
     #   Flag the presence or absence of periods of silence in your Call
@@ -3657,27 +3156,6 @@ module Aws::TranscribeService
     #
     # [1]: https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-batch.html#tca-rules-batch
     #
-    # @note When making an API call, you may pass SentimentFilter
-    #   data as a hash:
-    #
-    #       {
-    #         sentiments: ["POSITIVE"], # required, accepts POSITIVE, NEGATIVE, NEUTRAL, MIXED
-    #         absolute_time_range: {
-    #           start_time: 1,
-    #           end_time: 1,
-    #           first: 1,
-    #           last: 1,
-    #         },
-    #         relative_time_range: {
-    #           start_percentage: 1,
-    #           end_percentage: 1,
-    #           first: 1,
-    #           last: 1,
-    #         },
-    #         participant_role: "AGENT", # accepts AGENT, CUSTOMER
-    #         negate: false,
-    #       }
-    #
     # @!attribute [rw] sentiments
     #   Specify the sentiments that you want to flag.
     #   @return [Array<String>]
@@ -3721,20 +3199,6 @@ module Aws::TranscribeService
     # identification, alternative transcriptions, and speaker partitioning.
     # You can use that to apply custom vocabularies to your transcription
     # job.
-    #
-    # @note When making an API call, you may pass Settings
-    #   data as a hash:
-    #
-    #       {
-    #         vocabulary_name: "VocabularyName",
-    #         show_speaker_labels: false,
-    #         max_speaker_labels: 1,
-    #         channel_identification: false,
-    #         show_alternatives: false,
-    #         max_alternatives: 1,
-    #         vocabulary_filter_name: "VocabularyFilterName",
-    #         vocabulary_filter_method: "remove", # accepts remove, mask, tag
-    #       }
     #
     # @!attribute [rw] vocabulary_name
     #   The name of the custom vocabulary you want to use in your
@@ -3864,45 +3328,6 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartCallAnalyticsJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         call_analytics_job_name: "CallAnalyticsJobName", # required
-    #         media: { # required
-    #           media_file_uri: "Uri",
-    #           redacted_media_file_uri: "Uri",
-    #         },
-    #         output_location: "Uri",
-    #         output_encryption_kms_key_id: "KMSKeyId",
-    #         data_access_role_arn: "DataAccessRoleArn",
-    #         settings: {
-    #           vocabulary_name: "VocabularyName",
-    #           vocabulary_filter_name: "VocabularyFilterName",
-    #           vocabulary_filter_method: "remove", # accepts remove, mask, tag
-    #           language_model_name: "ModelName",
-    #           content_redaction: {
-    #             redaction_type: "PII", # required, accepts PII
-    #             redaction_output: "redacted", # required, accepts redacted, redacted_and_unredacted
-    #             pii_entity_types: ["BANK_ACCOUNT_NUMBER"], # accepts BANK_ACCOUNT_NUMBER, BANK_ROUTING, CREDIT_DEBIT_NUMBER, CREDIT_DEBIT_CVV, CREDIT_DEBIT_EXPIRY, PIN, EMAIL, ADDRESS, NAME, PHONE, SSN, ALL
-    #           },
-    #           language_options: ["af-ZA"], # accepts af-ZA, ar-AE, ar-SA, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
-    #           language_id_settings: {
-    #             "af-ZA" => {
-    #               vocabulary_name: "VocabularyName",
-    #               vocabulary_filter_name: "VocabularyFilterName",
-    #               language_model_name: "ModelName",
-    #             },
-    #           },
-    #         },
-    #         channel_definitions: [
-    #           {
-    #             channel_id: 1,
-    #             participant_role: "AGENT", # accepts AGENT, CUSTOMER
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] call_analytics_job_name
     #   A unique name, chosen by you, for your Call Analytics job.
     #
@@ -4040,43 +3465,6 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartMedicalTranscriptionJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         medical_transcription_job_name: "TranscriptionJobName", # required
-    #         language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
-    #         media_sample_rate_hertz: 1,
-    #         media_format: "mp3", # accepts mp3, mp4, wav, flac, ogg, amr, webm
-    #         media: { # required
-    #           media_file_uri: "Uri",
-    #           redacted_media_file_uri: "Uri",
-    #         },
-    #         output_bucket_name: "OutputBucketName", # required
-    #         output_key: "OutputKey",
-    #         output_encryption_kms_key_id: "KMSKeyId",
-    #         kms_encryption_context: {
-    #           "NonEmptyString" => "NonEmptyString",
-    #         },
-    #         settings: {
-    #           show_speaker_labels: false,
-    #           max_speaker_labels: 1,
-    #           channel_identification: false,
-    #           show_alternatives: false,
-    #           max_alternatives: 1,
-    #           vocabulary_name: "VocabularyName",
-    #         },
-    #         content_identification_type: "PHI", # accepts PHI
-    #         specialty: "PRIMARYCARE", # required, accepts PRIMARYCARE
-    #         type: "CONVERSATION", # required, accepts CONVERSATION, DICTATION
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] medical_transcription_job_name
     #   A unique name, chosen by you, for your medical transcription job.
     #   The name that you specify is also used as the default name of your
@@ -4321,68 +3709,6 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartTranscriptionJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         transcription_job_name: "TranscriptionJobName", # required
-    #         language_code: "af-ZA", # accepts af-ZA, ar-AE, ar-SA, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
-    #         media_sample_rate_hertz: 1,
-    #         media_format: "mp3", # accepts mp3, mp4, wav, flac, ogg, amr, webm
-    #         media: { # required
-    #           media_file_uri: "Uri",
-    #           redacted_media_file_uri: "Uri",
-    #         },
-    #         output_bucket_name: "OutputBucketName",
-    #         output_key: "OutputKey",
-    #         output_encryption_kms_key_id: "KMSKeyId",
-    #         kms_encryption_context: {
-    #           "NonEmptyString" => "NonEmptyString",
-    #         },
-    #         settings: {
-    #           vocabulary_name: "VocabularyName",
-    #           show_speaker_labels: false,
-    #           max_speaker_labels: 1,
-    #           channel_identification: false,
-    #           show_alternatives: false,
-    #           max_alternatives: 1,
-    #           vocabulary_filter_name: "VocabularyFilterName",
-    #           vocabulary_filter_method: "remove", # accepts remove, mask, tag
-    #         },
-    #         model_settings: {
-    #           language_model_name: "ModelName",
-    #         },
-    #         job_execution_settings: {
-    #           allow_deferred_execution: false,
-    #           data_access_role_arn: "DataAccessRoleArn",
-    #         },
-    #         content_redaction: {
-    #           redaction_type: "PII", # required, accepts PII
-    #           redaction_output: "redacted", # required, accepts redacted, redacted_and_unredacted
-    #           pii_entity_types: ["BANK_ACCOUNT_NUMBER"], # accepts BANK_ACCOUNT_NUMBER, BANK_ROUTING, CREDIT_DEBIT_NUMBER, CREDIT_DEBIT_CVV, CREDIT_DEBIT_EXPIRY, PIN, EMAIL, ADDRESS, NAME, PHONE, SSN, ALL
-    #         },
-    #         identify_language: false,
-    #         identify_multiple_languages: false,
-    #         language_options: ["af-ZA"], # accepts af-ZA, ar-AE, ar-SA, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
-    #         subtitles: {
-    #           formats: ["vtt"], # accepts vtt, srt
-    #           output_start_index: 1,
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         language_id_settings: {
-    #           "af-ZA" => {
-    #             vocabulary_name: "VocabularyName",
-    #             vocabulary_filter_name: "VocabularyFilterName",
-    #             language_model_name: "ModelName",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] transcription_job_name
     #   A unique name, chosen by you, for your transcription job. The name
     #   that you specify is also used as the default name of your
@@ -4774,14 +4100,6 @@ module Aws::TranscribeService
     # Note that your subtitle files are placed in the same location as your
     # transcription output.
     #
-    # @note When making an API call, you may pass Subtitles
-    #   data as a hash:
-    #
-    #       {
-    #         formats: ["vtt"], # accepts vtt, srt
-    #         output_start_index: 1,
-    #       }
-    #
     # @!attribute [rw] formats
     #   Specify the output format for your subtitle file; if you select both
     #   WebVTT (`vtt`) and SubRip (`srt`) formats, two output files are
@@ -4869,14 +4187,6 @@ module Aws::TranscribeService
     #
     # [1]: https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The first part of a key:value pair that forms a tag associated with
     #   a given resource. For example, in the tag `Department:Sales`, the
@@ -4902,19 +4212,6 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "TranscribeArn", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource you want to tag. ARNs
     #   have the format
@@ -5028,28 +4325,6 @@ module Aws::TranscribeService
     #
     # [1]: https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-batch.html#tca-rules-batch
     # [2]: https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-stream.html#tca-rules-stream
-    #
-    # @note When making an API call, you may pass TranscriptFilter
-    #   data as a hash:
-    #
-    #       {
-    #         transcript_filter_type: "EXACT", # required, accepts EXACT
-    #         absolute_time_range: {
-    #           start_time: 1,
-    #           end_time: 1,
-    #           first: 1,
-    #           last: 1,
-    #         },
-    #         relative_time_range: {
-    #           start_percentage: 1,
-    #           end_percentage: 1,
-    #           first: 1,
-    #           last: 1,
-    #         },
-    #         participant_role: "AGENT", # accepts AGENT, CUSTOMER
-    #         negate: false,
-    #         targets: ["NonEmptyString"], # required
-    #       }
     #
     # @!attribute [rw] transcript_filter_type
     #   Flag the presence or absence of an exact match to the phrases that
@@ -5461,14 +4736,6 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "TranscribeArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the Amazon Transcribe resource you
     #   want to remove tags from. ARNs have the format
@@ -5500,86 +4767,6 @@ module Aws::TranscribeService
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateCallAnalyticsCategoryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         category_name: "CategoryName", # required
-    #         rules: [ # required
-    #           {
-    #             non_talk_time_filter: {
-    #               threshold: 1,
-    #               absolute_time_range: {
-    #                 start_time: 1,
-    #                 end_time: 1,
-    #                 first: 1,
-    #                 last: 1,
-    #               },
-    #               relative_time_range: {
-    #                 start_percentage: 1,
-    #                 end_percentage: 1,
-    #                 first: 1,
-    #                 last: 1,
-    #               },
-    #               negate: false,
-    #             },
-    #             interruption_filter: {
-    #               threshold: 1,
-    #               participant_role: "AGENT", # accepts AGENT, CUSTOMER
-    #               absolute_time_range: {
-    #                 start_time: 1,
-    #                 end_time: 1,
-    #                 first: 1,
-    #                 last: 1,
-    #               },
-    #               relative_time_range: {
-    #                 start_percentage: 1,
-    #                 end_percentage: 1,
-    #                 first: 1,
-    #                 last: 1,
-    #               },
-    #               negate: false,
-    #             },
-    #             transcript_filter: {
-    #               transcript_filter_type: "EXACT", # required, accepts EXACT
-    #               absolute_time_range: {
-    #                 start_time: 1,
-    #                 end_time: 1,
-    #                 first: 1,
-    #                 last: 1,
-    #               },
-    #               relative_time_range: {
-    #                 start_percentage: 1,
-    #                 end_percentage: 1,
-    #                 first: 1,
-    #                 last: 1,
-    #               },
-    #               participant_role: "AGENT", # accepts AGENT, CUSTOMER
-    #               negate: false,
-    #               targets: ["NonEmptyString"], # required
-    #             },
-    #             sentiment_filter: {
-    #               sentiments: ["POSITIVE"], # required, accepts POSITIVE, NEGATIVE, NEUTRAL, MIXED
-    #               absolute_time_range: {
-    #                 start_time: 1,
-    #                 end_time: 1,
-    #                 first: 1,
-    #                 last: 1,
-    #               },
-    #               relative_time_range: {
-    #                 start_percentage: 1,
-    #                 end_percentage: 1,
-    #                 first: 1,
-    #                 last: 1,
-    #               },
-    #               participant_role: "AGENT", # accepts AGENT, CUSTOMER
-    #               negate: false,
-    #             },
-    #           },
-    #         ],
-    #         input_type: "REAL_TIME", # accepts REAL_TIME, POST_CALL
-    #       }
-    #
     # @!attribute [rw] category_name
     #   The name of the Call Analytics category you want to update. Category
     #   names are case sensitive.
@@ -5622,15 +4809,6 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateMedicalVocabularyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         vocabulary_name: "VocabularyName", # required
-    #         language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
-    #         vocabulary_file_uri: "Uri", # required
-    #       }
-    #
     # @!attribute [rw] vocabulary_name
     #   The name of the custom medical vocabulary you want to update. Custom
     #   medical vocabulary names are case sensitive.
@@ -5697,15 +4875,6 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateVocabularyFilterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         vocabulary_filter_name: "VocabularyFilterName", # required
-    #         words: ["Word"],
-    #         vocabulary_filter_file_uri: "Uri",
-    #       }
-    #
     # @!attribute [rw] vocabulary_filter_name
     #   The name of the custom vocabulary filter you want to update. Custom
     #   vocabulary filter names are case sensitive.
@@ -5782,16 +4951,6 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateVocabularyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         vocabulary_name: "VocabularyName", # required
-    #         language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
-    #         phrases: ["Phrase"],
-    #         vocabulary_file_uri: "Uri",
-    #       }
-    #
     # @!attribute [rw] vocabulary_name
     #   The name of the custom vocabulary you want to update. Custom
     #   vocabulary names are case sensitive.

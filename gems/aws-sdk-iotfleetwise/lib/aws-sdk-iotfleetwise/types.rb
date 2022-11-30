@@ -30,20 +30,6 @@ module Aws::IoTFleetWise
     #
     #  </note>
     #
-    # @note When making an API call, you may pass Actuator
-    #   data as a hash:
-    #
-    #       {
-    #         fully_qualified_name: "string", # required
-    #         data_type: "INT8", # required, accepts INT8, UINT8, INT16, UINT16, INT32, UINT32, INT64, UINT64, BOOLEAN, FLOAT, DOUBLE, STRING, UNIX_TIMESTAMP, INT8_ARRAY, UINT8_ARRAY, INT16_ARRAY, UINT16_ARRAY, INT32_ARRAY, UINT32_ARRAY, INT64_ARRAY, UINT64_ARRAY, BOOLEAN_ARRAY, FLOAT_ARRAY, DOUBLE_ARRAY, STRING_ARRAY, UNIX_TIMESTAMP_ARRAY, UNKNOWN
-    #         description: "description",
-    #         unit: "string",
-    #         allowed_values: ["string"],
-    #         min: 1.0,
-    #         max: 1.0,
-    #         assigned_value: "string",
-    #       }
-    #
     # @!attribute [rw] fully_qualified_name
     #   The fully qualified name of the actuator. For example, the fully
     #   qualified name of an actuator might be
@@ -91,14 +77,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateVehicleFleetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         vehicle_name: "vehicleName", # required
-    #         fleet_id: "fleetId", # required
-    #       }
-    #
     # @!attribute [rw] vehicle_name
     #   The unique ID of the vehicle to associate with the fleet.
     #   @return [String]
@@ -118,21 +96,6 @@ module Aws::IoTFleetWise
 
     # A signal that represents static information about the vehicle, such as
     # engine type or manufacturing date.
-    #
-    # @note When making an API call, you may pass Attribute
-    #   data as a hash:
-    #
-    #       {
-    #         fully_qualified_name: "string", # required
-    #         data_type: "INT8", # required, accepts INT8, UINT8, INT16, UINT16, INT32, UINT32, INT64, UINT64, BOOLEAN, FLOAT, DOUBLE, STRING, UNIX_TIMESTAMP, INT8_ARRAY, UINT8_ARRAY, INT16_ARRAY, UINT16_ARRAY, INT32_ARRAY, UINT32_ARRAY, INT64_ARRAY, UINT64_ARRAY, BOOLEAN_ARRAY, FLOAT_ARRAY, DOUBLE_ARRAY, STRING_ARRAY, UNIX_TIMESTAMP_ARRAY, UNKNOWN
-    #         description: "description",
-    #         unit: "string",
-    #         allowed_values: ["string"],
-    #         min: 1.0,
-    #         max: 1.0,
-    #         assigned_value: "string",
-    #         default_value: "string",
-    #       }
     #
     # @!attribute [rw] fully_qualified_name
     #   The fully qualified name of the attribute. For example, the fully
@@ -185,29 +148,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchCreateVehicleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         vehicles: [ # required
-    #           {
-    #             vehicle_name: "vehicleName", # required
-    #             model_manifest_arn: "arn", # required
-    #             decoder_manifest_arn: "arn", # required
-    #             attributes: {
-    #               "attributeName" => "attributeValue",
-    #             },
-    #             association_behavior: "CreateIotThing", # accepts CreateIotThing, ValidateIotThingExists
-    #             tags: [
-    #               {
-    #                 key: "TagKey", # required
-    #                 value: "TagValue", # required
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] vehicles
     #   A list of information about each vehicle to create. For more
     #   information, see the API data type.
@@ -236,23 +176,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchUpdateVehicleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         vehicles: [ # required
-    #           {
-    #             vehicle_name: "vehicleName", # required
-    #             model_manifest_arn: "arn",
-    #             decoder_manifest_arn: "arn",
-    #             attributes: {
-    #               "attributeName" => "attributeValue",
-    #             },
-    #             attribute_update_mode: "Overwrite", # accepts Overwrite, Merge
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] vehicles
     #   A list of information about the vehicles to update. For more
     #   information, see the API data type.
@@ -286,14 +209,6 @@ module Aws::IoTFleetWise
     end
 
     # A group of signals that are defined in a hierarchical structure.
-    #
-    # @note When making an API call, you may pass Branch
-    #   data as a hash:
-    #
-    #       {
-    #         fully_qualified_name: "string", # required
-    #         description: "description",
-    #       }
     #
     # @!attribute [rw] fully_qualified_name
     #   The fully qualified name of the branch. For example, the fully
@@ -376,17 +291,6 @@ module Aws::IoTFleetWise
 
     # Configurations used to create a decoder manifest.
     #
-    # @note When making an API call, you may pass CanDbcDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         network_interface: "InterfaceId", # required
-    #         can_dbc_files: ["data"], # required
-    #         signals_map: {
-    #           "string" => "string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] network_interface
     #   Contains information about a network interface.
     #   @return [String]
@@ -412,15 +316,6 @@ module Aws::IoTFleetWise
 
     # A single controller area network (CAN) device interface.
     #
-    # @note When making an API call, you may pass CanInterface
-    #   data as a hash:
-    #
-    #       {
-    #         name: "CanInterfaceName", # required
-    #         protocol_name: "ProtocolName",
-    #         protocol_version: "ProtocolVersion",
-    #       }
-    #
     # @!attribute [rw] name
     #   The unique name of the interface.
     #   @return [String]
@@ -443,20 +338,6 @@ module Aws::IoTFleetWise
 
     # Information about a single controller area network (CAN) signal and
     # the messages it receives and transmits.
-    #
-    # @note When making an API call, you may pass CanSignal
-    #   data as a hash:
-    #
-    #       {
-    #         message_id: 1, # required
-    #         is_big_endian: false, # required
-    #         is_signed: false, # required
-    #         start_bit: 1, # required
-    #         offset: 1.0, # required
-    #         factor: 1.0, # required
-    #         length: 1, # required
-    #         name: "CanSignalName",
-    #       }
     #
     # @!attribute [rw] message_id
     #   The ID of the message.
@@ -505,14 +386,6 @@ module Aws::IoTFleetWise
 
     # The log delivery option to send data to Amazon CloudWatch Logs.
     #
-    # @note When making an API call, you may pass CloudWatchLogDeliveryOptions
-    #   data as a hash:
-    #
-    #       {
-    #         log_type: "OFF", # required, accepts OFF, ERROR
-    #         log_group_name: "CloudWatchLogGroupName",
-    #       }
-    #
     # @!attribute [rw] log_type
     #   The type of log to send data to Amazon CloudWatch Logs.
     #   @return [String]
@@ -529,10 +402,6 @@ module Aws::IoTFleetWise
     end
 
     # Specifies what data to collect and how often or when to collect it.
-    #
-    # @note CollectionScheme is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note CollectionScheme is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of CollectionScheme corresponding to the set member.
     #
     # @!attribute [rw] time_based_collection_scheme
     #   Information about a collection scheme that uses a time period to
@@ -559,16 +428,6 @@ module Aws::IoTFleetWise
 
     # Information about a collection scheme that uses a simple logical
     # expression to recognize what data to collect.
-    #
-    # @note When making an API call, you may pass ConditionBasedCollectionScheme
-    #   data as a hash:
-    #
-    #       {
-    #         expression: "eventExpression", # required
-    #         minimum_trigger_interval_ms: 1,
-    #         trigger_mode: "ALWAYS", # accepts ALWAYS, RISING_EDGE
-    #         condition_language_version: 1,
-    #       }
     #
     # @!attribute [rw] expression
     #   The logical expression used to recognize what data to collect. For
@@ -630,48 +489,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateCampaignRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "campaignName", # required
-    #         description: "description",
-    #         signal_catalog_arn: "arn", # required
-    #         target_arn: "arn", # required
-    #         start_time: Time.now,
-    #         expiry_time: Time.now,
-    #         post_trigger_collection_duration: 1,
-    #         diagnostics_mode: "OFF", # accepts OFF, SEND_ACTIVE_DTCS
-    #         spooling_mode: "OFF", # accepts OFF, TO_DISK
-    #         compression: "OFF", # accepts OFF, SNAPPY
-    #         priority: 1,
-    #         signals_to_collect: [
-    #           {
-    #             name: "wildcardSignalName", # required
-    #             max_sample_count: 1,
-    #             minimum_sampling_interval_ms: 1,
-    #           },
-    #         ],
-    #         collection_scheme: { # required
-    #           time_based_collection_scheme: {
-    #             period_ms: 1, # required
-    #           },
-    #           condition_based_collection_scheme: {
-    #             expression: "eventExpression", # required
-    #             minimum_trigger_interval_ms: 1,
-    #             trigger_mode: "ALWAYS", # accepts ALWAYS, RISING_EDGE
-    #             condition_language_version: 1,
-    #           },
-    #         },
-    #         data_extra_dimensions: ["NodePath"],
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the campaign to create.
     #   @return [String]
@@ -811,69 +628,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDecoderManifestRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "resourceName", # required
-    #         description: "description",
-    #         model_manifest_arn: "arn", # required
-    #         signal_decoders: [
-    #           {
-    #             fully_qualified_name: "FullyQualifiedName", # required
-    #             type: "CAN_SIGNAL", # required, accepts CAN_SIGNAL, OBD_SIGNAL
-    #             interface_id: "InterfaceId", # required
-    #             can_signal: {
-    #               message_id: 1, # required
-    #               is_big_endian: false, # required
-    #               is_signed: false, # required
-    #               start_bit: 1, # required
-    #               offset: 1.0, # required
-    #               factor: 1.0, # required
-    #               length: 1, # required
-    #               name: "CanSignalName",
-    #             },
-    #             obd_signal: {
-    #               pid_response_length: 1, # required
-    #               service_mode: 1, # required
-    #               pid: 1, # required
-    #               scaling: 1.0, # required
-    #               offset: 1.0, # required
-    #               start_byte: 1, # required
-    #               byte_length: 1, # required
-    #               bit_right_shift: 1,
-    #               bit_mask_length: 1,
-    #             },
-    #           },
-    #         ],
-    #         network_interfaces: [
-    #           {
-    #             interface_id: "InterfaceId", # required
-    #             type: "CAN_INTERFACE", # required, accepts CAN_INTERFACE, OBD_INTERFACE
-    #             can_interface: {
-    #               name: "CanInterfaceName", # required
-    #               protocol_name: "ProtocolName",
-    #               protocol_version: "ProtocolVersion",
-    #             },
-    #             obd_interface: {
-    #               name: "ObdInterfaceName", # required
-    #               request_message_id: 1, # required
-    #               obd_standard: "ObdStandard",
-    #               pid_request_interval_seconds: 1,
-    #               dtc_request_interval_seconds: 1,
-    #               use_extended_ids: false,
-    #               has_transmission_ecu: false,
-    #             },
-    #           },
-    #         ],
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The unique name of the decoder manifest to create.
     #   @return [String]
@@ -925,21 +679,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateFleetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_id: "fleetId", # required
-    #         description: "description",
-    #         signal_catalog_arn: "arn", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] fleet_id
     #   The unique ID of the fleet to create.
     #   @return [String]
@@ -980,22 +719,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateModelManifestRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "resourceName", # required
-    #         description: "description",
-    #         nodes: ["string"], # required
-    #         signal_catalog_arn: "arn", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the vehicle model to create.
     #   @return [String]
@@ -1041,58 +764,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateSignalCatalogRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "resourceName", # required
-    #         description: "description",
-    #         nodes: [
-    #           {
-    #             branch: {
-    #               fully_qualified_name: "string", # required
-    #               description: "description",
-    #             },
-    #             sensor: {
-    #               fully_qualified_name: "string", # required
-    #               data_type: "INT8", # required, accepts INT8, UINT8, INT16, UINT16, INT32, UINT32, INT64, UINT64, BOOLEAN, FLOAT, DOUBLE, STRING, UNIX_TIMESTAMP, INT8_ARRAY, UINT8_ARRAY, INT16_ARRAY, UINT16_ARRAY, INT32_ARRAY, UINT32_ARRAY, INT64_ARRAY, UINT64_ARRAY, BOOLEAN_ARRAY, FLOAT_ARRAY, DOUBLE_ARRAY, STRING_ARRAY, UNIX_TIMESTAMP_ARRAY, UNKNOWN
-    #               description: "description",
-    #               unit: "string",
-    #               allowed_values: ["string"],
-    #               min: 1.0,
-    #               max: 1.0,
-    #             },
-    #             actuator: {
-    #               fully_qualified_name: "string", # required
-    #               data_type: "INT8", # required, accepts INT8, UINT8, INT16, UINT16, INT32, UINT32, INT64, UINT64, BOOLEAN, FLOAT, DOUBLE, STRING, UNIX_TIMESTAMP, INT8_ARRAY, UINT8_ARRAY, INT16_ARRAY, UINT16_ARRAY, INT32_ARRAY, UINT32_ARRAY, INT64_ARRAY, UINT64_ARRAY, BOOLEAN_ARRAY, FLOAT_ARRAY, DOUBLE_ARRAY, STRING_ARRAY, UNIX_TIMESTAMP_ARRAY, UNKNOWN
-    #               description: "description",
-    #               unit: "string",
-    #               allowed_values: ["string"],
-    #               min: 1.0,
-    #               max: 1.0,
-    #               assigned_value: "string",
-    #             },
-    #             attribute: {
-    #               fully_qualified_name: "string", # required
-    #               data_type: "INT8", # required, accepts INT8, UINT8, INT16, UINT16, INT32, UINT32, INT64, UINT64, BOOLEAN, FLOAT, DOUBLE, STRING, UNIX_TIMESTAMP, INT8_ARRAY, UINT8_ARRAY, INT16_ARRAY, UINT16_ARRAY, INT32_ARRAY, UINT32_ARRAY, INT64_ARRAY, UINT64_ARRAY, BOOLEAN_ARRAY, FLOAT_ARRAY, DOUBLE_ARRAY, STRING_ARRAY, UNIX_TIMESTAMP_ARRAY, UNKNOWN
-    #               description: "description",
-    #               unit: "string",
-    #               allowed_values: ["string"],
-    #               min: 1.0,
-    #               max: 1.0,
-    #               assigned_value: "string",
-    #               default_value: "string",
-    #             },
-    #           },
-    #         ],
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the signal catalog to create.
     #   @return [String]
@@ -1156,25 +827,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateVehicleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         vehicle_name: "vehicleName", # required
-    #         model_manifest_arn: "arn", # required
-    #         decoder_manifest_arn: "arn", # required
-    #         attributes: {
-    #           "attributeName" => "attributeValue",
-    #         },
-    #         association_behavior: "CreateIotThing", # accepts CreateIotThing, ValidateIotThingExists
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] vehicle_name
     #   The unique ID of the vehicle to create.
     #   @return [String]
@@ -1216,25 +868,6 @@ module Aws::IoTFleetWise
     end
 
     # Information about the vehicle to create.
-    #
-    # @note When making an API call, you may pass CreateVehicleRequestItem
-    #   data as a hash:
-    #
-    #       {
-    #         vehicle_name: "vehicleName", # required
-    #         model_manifest_arn: "arn", # required
-    #         decoder_manifest_arn: "arn", # required
-    #         attributes: {
-    #           "attributeName" => "attributeValue",
-    #         },
-    #         association_behavior: "CreateIotThing", # accepts CreateIotThing, ValidateIotThingExists
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] vehicle_name
     #   The unique ID of the vehicle to create.
@@ -1386,13 +1019,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteCampaignRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "campaignName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the campaign to delete.
     #   @return [String]
@@ -1422,13 +1048,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDecoderManifestRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "resourceName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the decoder manifest to delete.
     #   @return [String]
@@ -1454,13 +1073,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteFleetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_id: "fleetId", # required
-    #       }
-    #
     # @!attribute [rw] fleet_id
     #   The ID of the fleet to delete.
     #   @return [String]
@@ -1486,13 +1098,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteModelManifestRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "resourceName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the model manifest to delete.
     #   @return [String]
@@ -1518,13 +1123,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteSignalCatalogRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "resourceName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the signal catalog to delete.
     #   @return [String]
@@ -1550,13 +1148,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteVehicleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         vehicle_name: "vehicleName", # required
-    #       }
-    #
     # @!attribute [rw] vehicle_name
     #   The ID of the vehicle to delete.
     #   @return [String]
@@ -1582,14 +1173,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateVehicleFleetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         vehicle_name: "vehicleName", # required
-    #         fleet_id: "fleetId", # required
-    #       }
-    #
     # @!attribute [rw] vehicle_name
     #   The unique ID of the vehicle to disassociate from the fleet.
     #   @return [String]
@@ -1653,8 +1236,6 @@ module Aws::IoTFleetWise
     # describe and model signals in vehicle networks. The JSON file collects
     # signal specificiations in a VSS format.
     #
-    # @note FormattedVss is a union - when making an API calls you must set exactly one of the members.
-    #
     # @!attribute [rw] vss_json
     #   Provides the VSS in JSON format.
     #   @return [String]
@@ -1670,13 +1251,6 @@ module Aws::IoTFleetWise
       class Unknown < FormattedVss; end
     end
 
-    # @note When making an API call, you may pass GetCampaignRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "campaignName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the campaign to retrieve information about.
     #   @return [String]
@@ -1796,13 +1370,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDecoderManifestRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "resourceName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the decoder manifest to retrieve information about.
     #   @return [String]
@@ -1858,13 +1425,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetFleetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_id: "fleetId", # required
-    #       }
-    #
     # @!attribute [rw] fleet_id
     #   The ID of the fleet to retrieve information about.
     #   @return [String]
@@ -1912,8 +1472,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @api private
-    #
     class GetLoggingOptionsRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] cloud_watch_log_delivery
@@ -1926,13 +1484,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetModelManifestRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "resourceName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the vehicle model to retrieve information about.
     #   @return [String]
@@ -1986,8 +1537,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @api private
-    #
     class GetRegisterAccountStatusRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] customer_account_id
@@ -2040,13 +1589,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSignalCatalogRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "resourceName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the signal catalog to retrieve information about.
     #   @return [String]
@@ -2093,13 +1635,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetVehicleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         vehicle_name: "vehicleName", # required
-    #       }
-    #
     # @!attribute [rw] vehicle_name
     #   The ID of the vehicle to retrieve information about.
     #   @return [String]
@@ -2156,15 +1691,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetVehicleStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "nextToken",
-    #         max_results: 1,
-    #         vehicle_name: "vehicleName", # required
-    #       }
-    #
     # @!attribute [rw] next_token
     #   A pagination token for the next set of results.
     #
@@ -2244,13 +1770,6 @@ module Aws::IoTFleetWise
     #
     # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html
     #
-    # @note When making an API call, you may pass IamResources
-    #   data as a hash:
-    #
-    #       {
-    #         role_arn: "IAMRoleArn", # required
-    #       }
-    #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the IAM resource that allows
     #   Amazon Web Services IoT FleetWise to send data to Amazon Timestream.
@@ -2263,24 +1782,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ImportDecoderManifestRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "resourceName", # required
-    #         network_file_definitions: [ # required
-    #           {
-    #             can_dbc: {
-    #               network_interface: "InterfaceId", # required
-    #               can_dbc_files: ["data"], # required
-    #               signals_map: {
-    #                 "string" => "string",
-    #               },
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the decoder manifest to import.
     #   @return [String]
@@ -2312,23 +1813,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ImportSignalCatalogRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "resourceName", # required
-    #         description: "description",
-    #         vss: {
-    #           vss_json: "String",
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the signal catalog to import.
     #   @return [String]
@@ -2496,15 +1980,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCampaignsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "nextToken",
-    #         max_results: 1,
-    #         status: "status",
-    #       }
-    #
     # @!attribute [rw] next_token
     #   A pagination token for the next set of results.
     #
@@ -2549,15 +2024,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDecoderManifestNetworkInterfacesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "resourceName", # required
-    #         next_token: "nextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the decoder manifest to list information about.
     #   @return [String]
@@ -2600,15 +2066,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDecoderManifestSignalsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "resourceName", # required
-    #         next_token: "nextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the decoder manifest to list information about.
     #   @return [String]
@@ -2651,15 +2108,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDecoderManifestsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         model_manifest_arn: "arn",
-    #         next_token: "nextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] model_manifest_arn
     #   The Amazon Resource Name (ARN) of a vehicle model (model manifest)
     #   associated with the decoder manifest.
@@ -2703,15 +2151,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFleetsForVehicleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         vehicle_name: "vehicleName", # required
-    #         next_token: "nextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] vehicle_name
     #   The ID of the vehicle to retrieve information about.
     #   @return [String]
@@ -2754,14 +2193,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFleetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "nextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   A pagination token for the next set of results.
     #
@@ -2799,15 +2230,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListModelManifestNodesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "resourceName", # required
-    #         next_token: "nextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the vehicle model to list information about.
     #   @return [String]
@@ -2850,15 +2272,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListModelManifestsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         signal_catalog_arn: "arn",
-    #         next_token: "nextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] signal_catalog_arn
     #   The ARN of a signal catalog. If you specify a signal catalog, only
     #   the vehicle models associated with it are returned.
@@ -2902,15 +2315,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSignalCatalogNodesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "resourceName", # required
-    #         next_token: "nextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the signal catalog to list information about.
     #   @return [String]
@@ -2953,14 +2357,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSignalCatalogsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "nextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   A pagination token for the next set of results.
     #
@@ -2998,13 +2394,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource.
     #   @return [String]
@@ -3025,15 +2414,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListVehiclesInFleetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_id: "fleetId", # required
-    #         next_token: "nextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] fleet_id
     #   The ID of a fleet.
     #   @return [String]
@@ -3076,15 +2456,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListVehiclesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         model_manifest_arn: "arn",
-    #         next_token: "nextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] model_manifest_arn
     #   The Amazon Resource Name (ARN) of a vehicle model (model manifest).
     #   You can use this optional parameter to list only the vehicles
@@ -3179,8 +2550,6 @@ module Aws::IoTFleetWise
 
     # Specifications for defining a vehicle network.
     #
-    # @note NetworkFileDefinition is a union - when making an API calls you must set exactly one of the members.
-    #
     # @!attribute [rw] can_dbc
     #   Information, including CAN DBC files, about the configurations used
     #   to create a decoder manifest.
@@ -3203,28 +2572,6 @@ module Aws::IoTFleetWise
     #
     # To return this information about all the network interfaces specified
     # in a decoder manifest, use the API operation.
-    #
-    # @note When making an API call, you may pass NetworkInterface
-    #   data as a hash:
-    #
-    #       {
-    #         interface_id: "InterfaceId", # required
-    #         type: "CAN_INTERFACE", # required, accepts CAN_INTERFACE, OBD_INTERFACE
-    #         can_interface: {
-    #           name: "CanInterfaceName", # required
-    #           protocol_name: "ProtocolName",
-    #           protocol_version: "ProtocolVersion",
-    #         },
-    #         obd_interface: {
-    #           name: "ObdInterfaceName", # required
-    #           request_message_id: 1, # required
-    #           obd_standard: "ObdStandard",
-    #           pid_request_interval_seconds: 1,
-    #           dtc_request_interval_seconds: 1,
-    #           use_extended_ids: false,
-    #           has_transmission_ecu: false,
-    #         },
-    #       }
     #
     # @!attribute [rw] interface_id
     #   The ID of the network interface.
@@ -3258,10 +2605,6 @@ module Aws::IoTFleetWise
 
     # A general abstraction of a signal. A node can be specified as an
     # actuator, attribute, branch, or sensor.
-    #
-    # @note Node is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note Node is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Node corresponding to the set member.
     #
     # @!attribute [rw] branch
     #   Information about a node specified as a branch.
@@ -3354,19 +2697,6 @@ module Aws::IoTFleetWise
     # A network interface that specifies the On-board diagnostic (OBD) II
     # network protocol.
     #
-    # @note When making an API call, you may pass ObdInterface
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ObdInterfaceName", # required
-    #         request_message_id: 1, # required
-    #         obd_standard: "ObdStandard",
-    #         pid_request_interval_seconds: 1,
-    #         dtc_request_interval_seconds: 1,
-    #         use_extended_ids: false,
-    #         has_transmission_ecu: false,
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the interface.
     #   @return [String]
@@ -3410,21 +2740,6 @@ module Aws::IoTFleetWise
 
     # Information about signal messages using the on-board diagnostics (OBD)
     # II protocol in a vehicle.
-    #
-    # @note When making an API call, you may pass ObdSignal
-    #   data as a hash:
-    #
-    #       {
-    #         pid_response_length: 1, # required
-    #         service_mode: 1, # required
-    #         pid: 1, # required
-    #         scaling: 1.0, # required
-    #         offset: 1.0, # required
-    #         start_byte: 1, # required
-    #         byte_length: 1, # required
-    #         bit_right_shift: 1,
-    #         bit_mask_length: 1,
-    #       }
     #
     # @!attribute [rw] pid_response_length
     #   The length of the requested data.
@@ -3477,16 +2792,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutLoggingOptionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cloud_watch_log_delivery: { # required
-    #           log_type: "OFF", # required, accepts OFF, ERROR
-    #           log_group_name: "CloudWatchLogGroupName",
-    #         },
-    #       }
-    #
     # @!attribute [rw] cloud_watch_log_delivery
     #   Creates or updates the log delivery option to Amazon CloudWatch
     #   Logs.
@@ -3500,19 +2805,6 @@ module Aws::IoTFleetWise
 
     class PutLoggingOptionsResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass RegisterAccountRequest
-    #   data as a hash:
-    #
-    #       {
-    #         timestream_resources: { # required
-    #           timestream_database_name: "TimestreamDatabaseName", # required
-    #           timestream_table_name: "TimestreamTableName", # required
-    #         },
-    #         iam_resources: {
-    #           role_arn: "IAMRoleArn", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] timestream_resources
     #   The registered Amazon Timestream resources that Amazon Web Services
     #   IoT FleetWise edge agent software can transfer your vehicle data to.
@@ -3594,19 +2886,6 @@ module Aws::IoTFleetWise
     #
     #  </note>
     #
-    # @note When making an API call, you may pass Sensor
-    #   data as a hash:
-    #
-    #       {
-    #         fully_qualified_name: "string", # required
-    #         data_type: "INT8", # required, accepts INT8, UINT8, INT16, UINT16, INT32, UINT32, INT64, UINT64, BOOLEAN, FLOAT, DOUBLE, STRING, UNIX_TIMESTAMP, INT8_ARRAY, UINT8_ARRAY, INT16_ARRAY, UINT16_ARRAY, INT32_ARRAY, UINT32_ARRAY, INT64_ARRAY, UINT64_ARRAY, BOOLEAN_ARRAY, FLOAT_ARRAY, DOUBLE_ARRAY, STRING_ARRAY, UNIX_TIMESTAMP_ARRAY, UNKNOWN
-    #         description: "description",
-    #         unit: "string",
-    #         allowed_values: ["string"],
-    #         min: 1.0,
-    #         max: 1.0,
-    #       }
-    #
     # @!attribute [rw] fully_qualified_name
     #   The fully qualified name of the sensor. For example, the fully
     #   qualified name of a sensor might be `Vehicle.Body.Engine.Battery`.
@@ -3680,36 +2959,6 @@ module Aws::IoTFleetWise
 
     # Information about a signal decoder.
     #
-    # @note When making an API call, you may pass SignalDecoder
-    #   data as a hash:
-    #
-    #       {
-    #         fully_qualified_name: "FullyQualifiedName", # required
-    #         type: "CAN_SIGNAL", # required, accepts CAN_SIGNAL, OBD_SIGNAL
-    #         interface_id: "InterfaceId", # required
-    #         can_signal: {
-    #           message_id: 1, # required
-    #           is_big_endian: false, # required
-    #           is_signed: false, # required
-    #           start_bit: 1, # required
-    #           offset: 1.0, # required
-    #           factor: 1.0, # required
-    #           length: 1, # required
-    #           name: "CanSignalName",
-    #         },
-    #         obd_signal: {
-    #           pid_response_length: 1, # required
-    #           service_mode: 1, # required
-    #           pid: 1, # required
-    #           scaling: 1.0, # required
-    #           offset: 1.0, # required
-    #           start_byte: 1, # required
-    #           byte_length: 1, # required
-    #           bit_right_shift: 1,
-    #           bit_mask_length: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] fully_qualified_name
     #   The fully qualified name of a signal decoder as defined in a vehicle
     #   model.
@@ -3749,15 +2998,6 @@ module Aws::IoTFleetWise
 
     # Information about a signal.
     #
-    # @note When making an API call, you may pass SignalInformation
-    #   data as a hash:
-    #
-    #       {
-    #         name: "wildcardSignalName", # required
-    #         max_sample_count: 1,
-    #         minimum_sampling_interval_ms: 1,
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the signal.
     #   @return [String]
@@ -3786,14 +3026,6 @@ module Aws::IoTFleetWise
 
     # A set of key/value pairs that are used to manage the resource.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The tag's key.
     #   @return [String]
@@ -3809,19 +3041,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource.
     #   @return [String]
@@ -3869,13 +3088,6 @@ module Aws::IoTFleetWise
 
     # Information about a collection scheme that uses a time period to
     # decide how often to collect data.
-    #
-    # @note When making an API call, you may pass TimeBasedCollectionScheme
-    #   data as a hash:
-    #
-    #       {
-    #         period_ms: 1, # required
-    #       }
     #
     # @!attribute [rw] period_ms
     #   The time period (in milliseconds) to decide how often to collect
@@ -3932,14 +3144,6 @@ module Aws::IoTFleetWise
     # The registered Amazon Timestream resources that Amazon Web Services
     # IoT FleetWise edge agent software can transfer your vehicle data to.
     #
-    # @note When making an API call, you may pass TimestreamResources
-    #   data as a hash:
-    #
-    #       {
-    #         timestream_database_name: "TimestreamDatabaseName", # required
-    #         timestream_table_name: "TimestreamTableName", # required
-    #       }
-    #
     # @!attribute [rw] timestream_database_name
     #   The name of the registered Amazon Timestream database.
     #   @return [String]
@@ -3955,14 +3159,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource.
     #   @return [String]
@@ -3980,16 +3176,6 @@ module Aws::IoTFleetWise
 
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateCampaignRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "campaignName", # required
-    #         description: "description",
-    #         data_extra_dimensions: ["NodePath"],
-    #         action: "APPROVE", # required, accepts APPROVE, SUSPEND, RESUME, UPDATE
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the campaign to update.
     #   @return [String]
@@ -4060,113 +3246,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateDecoderManifestRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "resourceName", # required
-    #         description: "description",
-    #         signal_decoders_to_add: [
-    #           {
-    #             fully_qualified_name: "FullyQualifiedName", # required
-    #             type: "CAN_SIGNAL", # required, accepts CAN_SIGNAL, OBD_SIGNAL
-    #             interface_id: "InterfaceId", # required
-    #             can_signal: {
-    #               message_id: 1, # required
-    #               is_big_endian: false, # required
-    #               is_signed: false, # required
-    #               start_bit: 1, # required
-    #               offset: 1.0, # required
-    #               factor: 1.0, # required
-    #               length: 1, # required
-    #               name: "CanSignalName",
-    #             },
-    #             obd_signal: {
-    #               pid_response_length: 1, # required
-    #               service_mode: 1, # required
-    #               pid: 1, # required
-    #               scaling: 1.0, # required
-    #               offset: 1.0, # required
-    #               start_byte: 1, # required
-    #               byte_length: 1, # required
-    #               bit_right_shift: 1,
-    #               bit_mask_length: 1,
-    #             },
-    #           },
-    #         ],
-    #         signal_decoders_to_update: [
-    #           {
-    #             fully_qualified_name: "FullyQualifiedName", # required
-    #             type: "CAN_SIGNAL", # required, accepts CAN_SIGNAL, OBD_SIGNAL
-    #             interface_id: "InterfaceId", # required
-    #             can_signal: {
-    #               message_id: 1, # required
-    #               is_big_endian: false, # required
-    #               is_signed: false, # required
-    #               start_bit: 1, # required
-    #               offset: 1.0, # required
-    #               factor: 1.0, # required
-    #               length: 1, # required
-    #               name: "CanSignalName",
-    #             },
-    #             obd_signal: {
-    #               pid_response_length: 1, # required
-    #               service_mode: 1, # required
-    #               pid: 1, # required
-    #               scaling: 1.0, # required
-    #               offset: 1.0, # required
-    #               start_byte: 1, # required
-    #               byte_length: 1, # required
-    #               bit_right_shift: 1,
-    #               bit_mask_length: 1,
-    #             },
-    #           },
-    #         ],
-    #         signal_decoders_to_remove: ["FullyQualifiedName"],
-    #         network_interfaces_to_add: [
-    #           {
-    #             interface_id: "InterfaceId", # required
-    #             type: "CAN_INTERFACE", # required, accepts CAN_INTERFACE, OBD_INTERFACE
-    #             can_interface: {
-    #               name: "CanInterfaceName", # required
-    #               protocol_name: "ProtocolName",
-    #               protocol_version: "ProtocolVersion",
-    #             },
-    #             obd_interface: {
-    #               name: "ObdInterfaceName", # required
-    #               request_message_id: 1, # required
-    #               obd_standard: "ObdStandard",
-    #               pid_request_interval_seconds: 1,
-    #               dtc_request_interval_seconds: 1,
-    #               use_extended_ids: false,
-    #               has_transmission_ecu: false,
-    #             },
-    #           },
-    #         ],
-    #         network_interfaces_to_update: [
-    #           {
-    #             interface_id: "InterfaceId", # required
-    #             type: "CAN_INTERFACE", # required, accepts CAN_INTERFACE, OBD_INTERFACE
-    #             can_interface: {
-    #               name: "CanInterfaceName", # required
-    #               protocol_name: "ProtocolName",
-    #               protocol_version: "ProtocolVersion",
-    #             },
-    #             obd_interface: {
-    #               name: "ObdInterfaceName", # required
-    #               request_message_id: 1, # required
-    #               obd_standard: "ObdStandard",
-    #               pid_request_interval_seconds: 1,
-    #               dtc_request_interval_seconds: 1,
-    #               use_extended_ids: false,
-    #               has_transmission_ecu: false,
-    #             },
-    #           },
-    #         ],
-    #         network_interfaces_to_remove: ["InterfaceId"],
-    #         status: "ACTIVE", # accepts ACTIVE, DRAFT
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the decoder manifest to update.
     #   @return [String]
@@ -4238,14 +3317,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateFleetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_id: "fleetId", # required
-    #         description: "description",
-    #       }
-    #
     # @!attribute [rw] fleet_id
     #   The ID of the fleet to update.
     #   @return [String]
@@ -4276,17 +3347,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateModelManifestRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "resourceName", # required
-    #         description: "description",
-    #         nodes_to_add: ["NodePath"],
-    #         nodes_to_remove: ["NodePath"],
-    #         status: "ACTIVE", # accepts ACTIVE, DRAFT
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the vehicle model to update.
     #   @return [String]
@@ -4336,91 +3396,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateSignalCatalogRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "resourceName", # required
-    #         description: "description",
-    #         nodes_to_add: [
-    #           {
-    #             branch: {
-    #               fully_qualified_name: "string", # required
-    #               description: "description",
-    #             },
-    #             sensor: {
-    #               fully_qualified_name: "string", # required
-    #               data_type: "INT8", # required, accepts INT8, UINT8, INT16, UINT16, INT32, UINT32, INT64, UINT64, BOOLEAN, FLOAT, DOUBLE, STRING, UNIX_TIMESTAMP, INT8_ARRAY, UINT8_ARRAY, INT16_ARRAY, UINT16_ARRAY, INT32_ARRAY, UINT32_ARRAY, INT64_ARRAY, UINT64_ARRAY, BOOLEAN_ARRAY, FLOAT_ARRAY, DOUBLE_ARRAY, STRING_ARRAY, UNIX_TIMESTAMP_ARRAY, UNKNOWN
-    #               description: "description",
-    #               unit: "string",
-    #               allowed_values: ["string"],
-    #               min: 1.0,
-    #               max: 1.0,
-    #             },
-    #             actuator: {
-    #               fully_qualified_name: "string", # required
-    #               data_type: "INT8", # required, accepts INT8, UINT8, INT16, UINT16, INT32, UINT32, INT64, UINT64, BOOLEAN, FLOAT, DOUBLE, STRING, UNIX_TIMESTAMP, INT8_ARRAY, UINT8_ARRAY, INT16_ARRAY, UINT16_ARRAY, INT32_ARRAY, UINT32_ARRAY, INT64_ARRAY, UINT64_ARRAY, BOOLEAN_ARRAY, FLOAT_ARRAY, DOUBLE_ARRAY, STRING_ARRAY, UNIX_TIMESTAMP_ARRAY, UNKNOWN
-    #               description: "description",
-    #               unit: "string",
-    #               allowed_values: ["string"],
-    #               min: 1.0,
-    #               max: 1.0,
-    #               assigned_value: "string",
-    #             },
-    #             attribute: {
-    #               fully_qualified_name: "string", # required
-    #               data_type: "INT8", # required, accepts INT8, UINT8, INT16, UINT16, INT32, UINT32, INT64, UINT64, BOOLEAN, FLOAT, DOUBLE, STRING, UNIX_TIMESTAMP, INT8_ARRAY, UINT8_ARRAY, INT16_ARRAY, UINT16_ARRAY, INT32_ARRAY, UINT32_ARRAY, INT64_ARRAY, UINT64_ARRAY, BOOLEAN_ARRAY, FLOAT_ARRAY, DOUBLE_ARRAY, STRING_ARRAY, UNIX_TIMESTAMP_ARRAY, UNKNOWN
-    #               description: "description",
-    #               unit: "string",
-    #               allowed_values: ["string"],
-    #               min: 1.0,
-    #               max: 1.0,
-    #               assigned_value: "string",
-    #               default_value: "string",
-    #             },
-    #           },
-    #         ],
-    #         nodes_to_update: [
-    #           {
-    #             branch: {
-    #               fully_qualified_name: "string", # required
-    #               description: "description",
-    #             },
-    #             sensor: {
-    #               fully_qualified_name: "string", # required
-    #               data_type: "INT8", # required, accepts INT8, UINT8, INT16, UINT16, INT32, UINT32, INT64, UINT64, BOOLEAN, FLOAT, DOUBLE, STRING, UNIX_TIMESTAMP, INT8_ARRAY, UINT8_ARRAY, INT16_ARRAY, UINT16_ARRAY, INT32_ARRAY, UINT32_ARRAY, INT64_ARRAY, UINT64_ARRAY, BOOLEAN_ARRAY, FLOAT_ARRAY, DOUBLE_ARRAY, STRING_ARRAY, UNIX_TIMESTAMP_ARRAY, UNKNOWN
-    #               description: "description",
-    #               unit: "string",
-    #               allowed_values: ["string"],
-    #               min: 1.0,
-    #               max: 1.0,
-    #             },
-    #             actuator: {
-    #               fully_qualified_name: "string", # required
-    #               data_type: "INT8", # required, accepts INT8, UINT8, INT16, UINT16, INT32, UINT32, INT64, UINT64, BOOLEAN, FLOAT, DOUBLE, STRING, UNIX_TIMESTAMP, INT8_ARRAY, UINT8_ARRAY, INT16_ARRAY, UINT16_ARRAY, INT32_ARRAY, UINT32_ARRAY, INT64_ARRAY, UINT64_ARRAY, BOOLEAN_ARRAY, FLOAT_ARRAY, DOUBLE_ARRAY, STRING_ARRAY, UNIX_TIMESTAMP_ARRAY, UNKNOWN
-    #               description: "description",
-    #               unit: "string",
-    #               allowed_values: ["string"],
-    #               min: 1.0,
-    #               max: 1.0,
-    #               assigned_value: "string",
-    #             },
-    #             attribute: {
-    #               fully_qualified_name: "string", # required
-    #               data_type: "INT8", # required, accepts INT8, UINT8, INT16, UINT16, INT32, UINT32, INT64, UINT64, BOOLEAN, FLOAT, DOUBLE, STRING, UNIX_TIMESTAMP, INT8_ARRAY, UINT8_ARRAY, INT16_ARRAY, UINT16_ARRAY, INT32_ARRAY, UINT32_ARRAY, INT64_ARRAY, UINT64_ARRAY, BOOLEAN_ARRAY, FLOAT_ARRAY, DOUBLE_ARRAY, STRING_ARRAY, UNIX_TIMESTAMP_ARRAY, UNKNOWN
-    #               description: "description",
-    #               unit: "string",
-    #               allowed_values: ["string"],
-    #               min: 1.0,
-    #               max: 1.0,
-    #               assigned_value: "string",
-    #               default_value: "string",
-    #             },
-    #           },
-    #         ],
-    #         nodes_to_remove: ["NodePath"],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the signal catalog to update.
     #   @return [String]
@@ -4489,19 +3464,6 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateVehicleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         vehicle_name: "vehicleName", # required
-    #         model_manifest_arn: "arn",
-    #         decoder_manifest_arn: "arn",
-    #         attributes: {
-    #           "attributeName" => "attributeValue",
-    #         },
-    #         attribute_update_mode: "Overwrite", # accepts Overwrite, Merge
-    #       }
-    #
     # @!attribute [rw] vehicle_name
     #   The unique ID of the vehicle to update.
     #   @return [String]
@@ -4541,19 +3503,6 @@ module Aws::IoTFleetWise
     end
 
     # Information about the vehicle to update.
-    #
-    # @note When making an API call, you may pass UpdateVehicleRequestItem
-    #   data as a hash:
-    #
-    #       {
-    #         vehicle_name: "vehicleName", # required
-    #         model_manifest_arn: "arn",
-    #         decoder_manifest_arn: "arn",
-    #         attributes: {
-    #           "attributeName" => "attributeValue",
-    #         },
-    #         attribute_update_mode: "Overwrite", # accepts Overwrite, Merge
-    #       }
     #
     # @!attribute [rw] vehicle_name
     #   The unique ID of the vehicle to update.

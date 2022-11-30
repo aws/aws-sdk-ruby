@@ -10,13 +10,6 @@
 module Aws::Detective
   module Types
 
-    # @note When making an API call, you may pass AcceptInvitationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         graph_arn: "GraphArn", # required
-    #       }
-    #
     # @!attribute [rw] graph_arn
     #   The ARN of the behavior graph that the member account is accepting
     #   the invitation for.
@@ -34,14 +27,6 @@ module Aws::Detective
 
     # An Amazon Web Services account that is the administrator account of or
     # a member of a behavior graph.
-    #
-    # @note When making an API call, you may pass Account
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId", # required
-    #         email_address: "EmailAddress", # required
-    #       }
     #
     # @!attribute [rw] account_id
     #   The account identifier of the Amazon Web Services account.
@@ -89,14 +74,6 @@ module Aws::Detective
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchGetGraphMemberDatasourcesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         graph_arn: "GraphArn", # required
-    #         account_ids: ["AccountId"], # required
-    #       }
-    #
     # @!attribute [rw] graph_arn
     #   The ARN of the behavior graph.
     #   @return [String]
@@ -134,13 +111,6 @@ module Aws::Detective
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchGetMembershipDatasourcesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         graph_arns: ["GraphArn"], # required
-    #       }
-    #
     # @!attribute [rw] graph_arns
     #   The ARN of the behavior graph.
     #   @return [Array<String>]
@@ -185,15 +155,6 @@ module Aws::Detective
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateGraphRequest
-    #   data as a hash:
-    #
-    #       {
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] tags
     #   The tags to assign to the new behavior graph. You can add up to 50
     #   tags. For each tag, you provide the tag key and the tag value. Each
@@ -221,21 +182,6 @@ module Aws::Detective
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateMembersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         graph_arn: "GraphArn", # required
-    #         message: "EmailMessage",
-    #         disable_email_notification: false,
-    #         accounts: [ # required
-    #           {
-    #             account_id: "AccountId", # required
-    #             email_address: "EmailAddress", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] graph_arn
     #   The ARN of the behavior graph.
     #   @return [String]
@@ -342,13 +288,6 @@ module Aws::Detective
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteGraphRequest
-    #   data as a hash:
-    #
-    #       {
-    #         graph_arn: "GraphArn", # required
-    #       }
-    #
     # @!attribute [rw] graph_arn
     #   The ARN of the behavior graph to disable.
     #   @return [String]
@@ -361,14 +300,6 @@ module Aws::Detective
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteMembersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         graph_arn: "GraphArn", # required
-    #         account_ids: ["AccountId"], # required
-    #       }
-    #
     # @!attribute [rw] graph_arn
     #   The ARN of the behavior graph to remove members from.
     #   @return [String]
@@ -409,13 +340,6 @@ module Aws::Detective
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeOrganizationConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         graph_arn: "GraphArn", # required
-    #       }
-    #
     # @!attribute [rw] graph_arn
     #   The ARN of the organization behavior graph.
     #   @return [String]
@@ -441,13 +365,6 @@ module Aws::Detective
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateMembershipRequest
-    #   data as a hash:
-    #
-    #       {
-    #         graph_arn: "GraphArn", # required
-    #       }
-    #
     # @!attribute [rw] graph_arn
     #   The ARN of the behavior graph to remove the member account from.
     #
@@ -463,13 +380,6 @@ module Aws::Detective
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass EnableOrganizationAdminAccountRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The Amazon Web Services account identifier of the account to
     #   designate as the Detective administrator account for the
@@ -484,14 +394,6 @@ module Aws::Detective
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetMembersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         graph_arn: "GraphArn", # required
-    #         account_ids: ["AccountId"], # required
-    #       }
-    #
     # @!attribute [rw] graph_arn
     #   The ARN of the behavior graph for which to request the member
     #   details.
@@ -572,15 +474,6 @@ module Aws::Detective
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDatasourcePackagesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         graph_arn: "GraphArn", # required
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] graph_arn
     #   The ARN of the behavior graph.
     #   @return [String]
@@ -624,14 +517,6 @@ module Aws::Detective
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListGraphsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   For requests to get the next page of results, the pagination token
     #   that was returned with the previous set of results. The initial
@@ -673,14 +558,6 @@ module Aws::Detective
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListInvitationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   For requests to retrieve the next page of results, the pagination
     #   token that was returned with the previous page of results. The
@@ -722,15 +599,6 @@ module Aws::Detective
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListMembersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         graph_arn: "GraphArn", # required
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] graph_arn
     #   The ARN of the behavior graph for which to retrieve the list of
     #   member accounts.
@@ -785,14 +653,6 @@ module Aws::Detective
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListOrganizationAdminAccountsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   For requests to get the next page of results, the pagination token
     #   that was returned with the previous set of results. The initial
@@ -830,13 +690,6 @@ module Aws::Detective
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "GraphArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the behavior graph for which to retrieve the tag values.
     #   @return [String]
@@ -1051,13 +904,6 @@ module Aws::Detective
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RejectInvitationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         graph_arn: "GraphArn", # required
-    #       }
-    #
     # @!attribute [rw] graph_arn
     #   The ARN of the behavior graph to reject the invitation to.
     #
@@ -1115,14 +961,6 @@ module Aws::Detective
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartMonitoringMemberRequest
-    #   data as a hash:
-    #
-    #       {
-    #         graph_arn: "GraphArn", # required
-    #         account_id: "AccountId", # required
-    #       }
-    #
     # @!attribute [rw] graph_arn
     #   The ARN of the behavior graph.
     #   @return [String]
@@ -1143,16 +981,6 @@ module Aws::Detective
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "GraphArn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the behavior graph to assign the tags to.
     #   @return [String]
@@ -1248,14 +1076,6 @@ module Aws::Detective
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "GraphArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the behavior graph to remove the tags from.
     #   @return [String]
@@ -1278,14 +1098,6 @@ module Aws::Detective
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateDatasourcePackagesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         graph_arn: "GraphArn", # required
-    #         datasource_packages: ["DETECTIVE_CORE"], # required, accepts DETECTIVE_CORE, EKS_AUDIT
-    #       }
-    #
     # @!attribute [rw] graph_arn
     #   The ARN of the behavior graph.
     #   @return [String]
@@ -1303,14 +1115,6 @@ module Aws::Detective
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateOrganizationConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         graph_arn: "GraphArn", # required
-    #         auto_enable: false,
-    #       }
-    #
     # @!attribute [rw] graph_arn
     #   The ARN of the organization behavior graph.
     #   @return [String]

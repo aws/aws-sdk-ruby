@@ -41,15 +41,6 @@ module Aws::Keyspaces
     #
     # [1]: https://docs.aws.amazon.com/keyspaces/latest/devguide/ReadWriteCapacityMode.html
     #
-    # @note When making an API call, you may pass CapacitySpecification
-    #   data as a hash:
-    #
-    #       {
-    #         throughput_mode: "PAY_PER_REQUEST", # required, accepts PAY_PER_REQUEST, PROVISIONED
-    #         read_capacity_units: 1,
-    #         write_capacity_units: 1,
-    #       }
-    #
     # @!attribute [rw] throughput_mode
     #   The read/write throughput capacity mode for a table. The options
     #   are:
@@ -150,14 +141,6 @@ module Aws::Keyspaces
     # The optional clustering column portion of your primary key determines
     # how the data is clustered and sorted within each partition.
     #
-    # @note When making an API call, you may pass ClusteringKey
-    #   data as a hash:
-    #
-    #       {
-    #         name: "GenericString", # required
-    #         order_by: "ASC", # required, accepts ASC, DESC
-    #       }
-    #
     # @!attribute [rw] name
     #   The name(s) of the clustering column(s).
     #   @return [String]
@@ -176,14 +159,6 @@ module Aws::Keyspaces
     end
 
     # The names and data types of regular columns.
-    #
-    # @note When making an API call, you may pass ColumnDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         name: "GenericString", # required
-    #         type: "GenericString", # required
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the column.
@@ -208,13 +183,6 @@ module Aws::Keyspaces
     end
 
     # An optional comment that describes the table.
-    #
-    # @note When making an API call, you may pass Comment
-    #   data as a hash:
-    #
-    #       {
-    #         message: "String", # required
-    #       }
     #
     # @!attribute [rw] message
     #   An optional description of the table.
@@ -244,19 +212,6 @@ module Aws::Keyspaces
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateKeyspaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         keyspace_name: "KeyspaceName", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] keyspace_name
     #   The name of the keyspace to be created.
     #   @return [String]
@@ -294,63 +249,6 @@ module Aws::Keyspaces
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateTableRequest
-    #   data as a hash:
-    #
-    #       {
-    #         keyspace_name: "KeyspaceName", # required
-    #         table_name: "TableName", # required
-    #         schema_definition: { # required
-    #           all_columns: [ # required
-    #             {
-    #               name: "GenericString", # required
-    #               type: "GenericString", # required
-    #             },
-    #           ],
-    #           partition_keys: [ # required
-    #             {
-    #               name: "GenericString", # required
-    #             },
-    #           ],
-    #           clustering_keys: [
-    #             {
-    #               name: "GenericString", # required
-    #               order_by: "ASC", # required, accepts ASC, DESC
-    #             },
-    #           ],
-    #           static_columns: [
-    #             {
-    #               name: "GenericString", # required
-    #             },
-    #           ],
-    #         },
-    #         comment: {
-    #           message: "String", # required
-    #         },
-    #         capacity_specification: {
-    #           throughput_mode: "PAY_PER_REQUEST", # required, accepts PAY_PER_REQUEST, PROVISIONED
-    #           read_capacity_units: 1,
-    #           write_capacity_units: 1,
-    #         },
-    #         encryption_specification: {
-    #           type: "CUSTOMER_MANAGED_KMS_KEY", # required, accepts CUSTOMER_MANAGED_KMS_KEY, AWS_OWNED_KMS_KEY
-    #           kms_key_identifier: "kmsKeyARN",
-    #         },
-    #         point_in_time_recovery: {
-    #           status: "ENABLED", # required, accepts ENABLED, DISABLED
-    #         },
-    #         ttl: {
-    #           status: "ENABLED", # required, accepts ENABLED
-    #         },
-    #         default_time_to_live: 1,
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] keyspace_name
     #   The name of the keyspace that the table is going to be created in.
     #   @return [String]
@@ -532,13 +430,6 @@ module Aws::Keyspaces
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteKeyspaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         keyspace_name: "KeyspaceName", # required
-    #       }
-    #
     # @!attribute [rw] keyspace_name
     #   The name of the keyspace to be deleted.
     #   @return [String]
@@ -555,14 +446,6 @@ module Aws::Keyspaces
     #
     class DeleteKeyspaceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteTableRequest
-    #   data as a hash:
-    #
-    #       {
-    #         keyspace_name: "KeyspaceName", # required
-    #         table_name: "TableName", # required
-    #       }
-    #
     # @!attribute [rw] keyspace_name
     #   The name of the keyspace of the to be deleted table.
     #   @return [String]
@@ -606,14 +489,6 @@ module Aws::Keyspaces
     #
     # [1]: https://docs.aws.amazon.com/keyspaces/latest/devguide/EncryptionAtRest.html
     #
-    # @note When making an API call, you may pass EncryptionSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         type: "CUSTOMER_MANAGED_KMS_KEY", # required, accepts CUSTOMER_MANAGED_KMS_KEY, AWS_OWNED_KMS_KEY
-    #         kms_key_identifier: "kmsKeyARN",
-    #       }
-    #
     # @!attribute [rw] type
     #   The encryption option specified for the table. You can choose one of
     #   the following KMS keys (KMS keys):
@@ -649,13 +524,6 @@ module Aws::Keyspaces
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetKeyspaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         keyspace_name: "KeyspaceName", # required
-    #       }
-    #
     # @!attribute [rw] keyspace_name
     #   The name of the keyspace.
     #   @return [String]
@@ -685,14 +553,6 @@ module Aws::Keyspaces
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetTableRequest
-    #   data as a hash:
-    #
-    #       {
-    #         keyspace_name: "KeyspaceName", # required
-    #         table_name: "TableName", # required
-    #       }
-    #
     # @!attribute [rw] keyspace_name
     #   The name of the keyspace that the table is stored in.
     #   @return [String]
@@ -816,14 +676,6 @@ module Aws::Keyspaces
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListKeyspacesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The pagination token. To resume pagination, provide the `NextToken`
     #   value as argument of a subsequent API invocation.
@@ -863,15 +715,6 @@ module Aws::Keyspaces
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTablesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         keyspace_name: "KeyspaceName", # required
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The pagination token. To resume pagination, provide the `NextToken`
     #   value as an argument of a subsequent API invocation.
@@ -916,15 +759,6 @@ module Aws::Keyspaces
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ARN", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the Amazon Keyspaces resource.
     #   @return [String]
@@ -974,13 +808,6 @@ module Aws::Keyspaces
     # be a single column, or it can be a compound value composed of two or
     # more columns.
     #
-    # @note When making an API call, you may pass PartitionKey
-    #   data as a hash:
-    #
-    #       {
-    #         name: "GenericString", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name(s) of the partition key column(s).
     #   @return [String]
@@ -1003,13 +830,6 @@ module Aws::Keyspaces
     #
     #
     # [1]: https://docs.aws.amazon.com/keyspaces/latest/devguide/PointInTimeRecovery.html
-    #
-    # @note When making an API call, you may pass PointInTimeRecovery
-    #   data as a hash:
-    #
-    #       {
-    #         status: "ENABLED", # required, accepts ENABLED, DISABLED
-    #       }
     #
     # @!attribute [rw] status
     #   The options are:
@@ -1069,35 +889,6 @@ module Aws::Keyspaces
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RestoreTableRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source_keyspace_name: "KeyspaceName", # required
-    #         source_table_name: "TableName", # required
-    #         target_keyspace_name: "KeyspaceName", # required
-    #         target_table_name: "TableName", # required
-    #         restore_timestamp: Time.now,
-    #         capacity_specification_override: {
-    #           throughput_mode: "PAY_PER_REQUEST", # required, accepts PAY_PER_REQUEST, PROVISIONED
-    #           read_capacity_units: 1,
-    #           write_capacity_units: 1,
-    #         },
-    #         encryption_specification_override: {
-    #           type: "CUSTOMER_MANAGED_KMS_KEY", # required, accepts CUSTOMER_MANAGED_KMS_KEY, AWS_OWNED_KMS_KEY
-    #           kms_key_identifier: "kmsKeyARN",
-    #         },
-    #         point_in_time_recovery_override: {
-    #           status: "ENABLED", # required, accepts ENABLED, DISABLED
-    #         },
-    #         tags_override: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] source_keyspace_name
     #   The keyspace name of the source table.
     #   @return [String]
@@ -1217,34 +1008,6 @@ module Aws::Keyspaces
 
     # Describes the schema of the table.
     #
-    # @note When making an API call, you may pass SchemaDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         all_columns: [ # required
-    #           {
-    #             name: "GenericString", # required
-    #             type: "GenericString", # required
-    #           },
-    #         ],
-    #         partition_keys: [ # required
-    #           {
-    #             name: "GenericString", # required
-    #           },
-    #         ],
-    #         clustering_keys: [
-    #           {
-    #             name: "GenericString", # required
-    #             order_by: "ASC", # required, accepts ASC, DESC
-    #           },
-    #         ],
-    #         static_columns: [
-    #           {
-    #             name: "GenericString", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] all_columns
     #   The regular columns of the table.
     #   @return [Array<Types::ColumnDefinition>]
@@ -1294,13 +1057,6 @@ module Aws::Keyspaces
 
     # The static columns of the table. Static columns store values that are
     # shared by all rows in the same partition.
-    #
-    # @note When making an API call, you may pass StaticColumn
-    #   data as a hash:
-    #
-    #       {
-    #         name: "GenericString", # required
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the static column.
@@ -1357,14 +1113,6 @@ module Aws::Keyspaces
     #
     # [1]: https://docs.aws.amazon.com/keyspaces/latest/devguide/tagging-keyspaces.html
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The key of the tag. Tag keys are case sensitive. Each Amazon
     #   Keyspaces resource can only have up to one tag with the same key. If
@@ -1385,19 +1133,6 @@ module Aws::Keyspaces
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ARN", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the Amazon Keyspaces resource to
     #   which to add tags.
@@ -1430,13 +1165,6 @@ module Aws::Keyspaces
     #
     # [1]: https://docs.aws.amazon.com/keyspaces/latest/devguide/TTL-how-it-works.html#ttl-howitworks_enabling
     #
-    # @note When making an API call, you may pass TimeToLive
-    #   data as a hash:
-    #
-    #       {
-    #         status: "ENABLED", # required, accepts ENABLED
-    #       }
-    #
     # @!attribute [rw] status
     #   Shows how to enable custom Time to Live (TTL) settings for the
     #   specified table.
@@ -1450,19 +1178,6 @@ module Aws::Keyspaces
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ARN", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Keyspaces resource that the tags will be removed from.
     #   This value is an Amazon Resource Name (ARN).
@@ -1486,36 +1201,6 @@ module Aws::Keyspaces
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateTableRequest
-    #   data as a hash:
-    #
-    #       {
-    #         keyspace_name: "KeyspaceName", # required
-    #         table_name: "TableName", # required
-    #         add_columns: [
-    #           {
-    #             name: "GenericString", # required
-    #             type: "GenericString", # required
-    #           },
-    #         ],
-    #         capacity_specification: {
-    #           throughput_mode: "PAY_PER_REQUEST", # required, accepts PAY_PER_REQUEST, PROVISIONED
-    #           read_capacity_units: 1,
-    #           write_capacity_units: 1,
-    #         },
-    #         encryption_specification: {
-    #           type: "CUSTOMER_MANAGED_KMS_KEY", # required, accepts CUSTOMER_MANAGED_KMS_KEY, AWS_OWNED_KMS_KEY
-    #           kms_key_identifier: "kmsKeyARN",
-    #         },
-    #         point_in_time_recovery: {
-    #           status: "ENABLED", # required, accepts ENABLED, DISABLED
-    #         },
-    #         ttl: {
-    #           status: "ENABLED", # required, accepts ENABLED
-    #         },
-    #         default_time_to_live: 1,
-    #       }
-    #
     # @!attribute [rw] keyspace_name
     #   The name of the keyspace the specified table is stored in.
     #   @return [String]

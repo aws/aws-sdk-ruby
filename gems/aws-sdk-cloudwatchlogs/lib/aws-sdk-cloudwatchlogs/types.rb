@@ -10,14 +10,6 @@
 module Aws::CloudWatchLogs
   module Types
 
-    # @note When making an API call, you may pass AssociateKmsKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         log_group_name: "LogGroupName", # required
-    #         kms_key_id: "KmsKeyId", # required
-    #       }
-    #
     # @!attribute [rw] log_group_name
     #   The name of the log group.
     #   @return [String]
@@ -43,13 +35,6 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CancelExportTaskRequest
-    #   data as a hash:
-    #
-    #       {
-    #         task_id: "ExportTaskId", # required
-    #       }
-    #
     # @!attribute [rw] task_id
     #   The ID of the export task.
     #   @return [String]
@@ -62,19 +47,6 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateExportTaskRequest
-    #   data as a hash:
-    #
-    #       {
-    #         task_name: "ExportTaskName",
-    #         log_group_name: "LogGroupName", # required
-    #         log_stream_name_prefix: "LogStreamName",
-    #         from: 1, # required
-    #         to: 1, # required
-    #         destination: "ExportDestinationBucket", # required
-    #         destination_prefix: "ExportDestinationPrefix",
-    #       }
-    #
     # @!attribute [rw] task_name
     #   The name of the export task.
     #   @return [String]
@@ -139,17 +111,6 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateLogGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         log_group_name: "LogGroupName", # required
-    #         kms_key_id: "KmsKeyId",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] log_group_name
     #   The name of the log group.
     #   @return [String]
@@ -187,14 +148,6 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateLogStreamRequest
-    #   data as a hash:
-    #
-    #       {
-    #         log_group_name: "LogGroupName", # required
-    #         log_stream_name: "LogStreamName", # required
-    #       }
-    #
     # @!attribute [rw] log_group_name
     #   The name of the log group.
     #   @return [String]
@@ -225,13 +178,6 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDataProtectionPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         log_group_identifier: "LogGroupIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] log_group_identifier
     #   The name or ARN of the log group that you want to delete the data
     #   protection policy for.
@@ -245,13 +191,6 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDestinationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         destination_name: "DestinationName", # required
-    #       }
-    #
     # @!attribute [rw] destination_name
     #   The name of the destination.
     #   @return [String]
@@ -264,13 +203,6 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteLogGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         log_group_name: "LogGroupName", # required
-    #       }
-    #
     # @!attribute [rw] log_group_name
     #   The name of the log group.
     #   @return [String]
@@ -283,14 +215,6 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteLogStreamRequest
-    #   data as a hash:
-    #
-    #       {
-    #         log_group_name: "LogGroupName", # required
-    #         log_stream_name: "LogStreamName", # required
-    #       }
-    #
     # @!attribute [rw] log_group_name
     #   The name of the log group.
     #   @return [String]
@@ -308,14 +232,6 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteMetricFilterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         log_group_name: "LogGroupName", # required
-    #         filter_name: "FilterName", # required
-    #       }
-    #
     # @!attribute [rw] log_group_name
     #   The name of the log group.
     #   @return [String]
@@ -333,13 +249,6 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteQueryDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         query_definition_id: "QueryId", # required
-    #       }
-    #
     # @!attribute [rw] query_definition_id
     #   The ID of the query definition that you want to delete. You can use
     #   [DescribeQueryDefinitions][1] to retrieve the IDs of your saved
@@ -371,13 +280,6 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteResourcePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy_name: "PolicyName",
-    #       }
-    #
     # @!attribute [rw] policy_name
     #   The name of the policy to be revoked. This parameter is required.
     #   @return [String]
@@ -390,13 +292,6 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteRetentionPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         log_group_name: "LogGroupName", # required
-    #       }
-    #
     # @!attribute [rw] log_group_name
     #   The name of the log group.
     #   @return [String]
@@ -409,14 +304,6 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteSubscriptionFilterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         log_group_name: "LogGroupName", # required
-    #         filter_name: "FilterName", # required
-    #       }
-    #
     # @!attribute [rw] log_group_name
     #   The name of the log group.
     #   @return [String]
@@ -434,15 +321,6 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDestinationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         destination_name_prefix: "DestinationName",
-    #         next_token: "NextToken",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] destination_name_prefix
     #   The prefix to match. If you don't specify a value, no prefix filter
     #   is applied.
@@ -486,16 +364,6 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeExportTasksRequest
-    #   data as a hash:
-    #
-    #       {
-    #         task_id: "ExportTaskId",
-    #         status_code: "CANCELLED", # accepts CANCELLED, COMPLETED, FAILED, PENDING, PENDING_CANCEL, RUNNING
-    #         next_token: "NextToken",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] task_id
     #   The ID of the export task. Specifying a task ID filters the results
     #   to one or zero export tasks.
@@ -545,18 +413,6 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeLogGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_identifiers: ["AccountId"],
-    #         log_group_name_prefix: "LogGroupName",
-    #         log_group_name_pattern: "LogGroupNamePattern",
-    #         next_token: "NextToken",
-    #         limit: 1,
-    #         include_linked_accounts: false,
-    #       }
-    #
     # @!attribute [rw] account_identifiers
     #   When `includeLinkedAccounts` is set to `True`, use this parameter to
     #   specify the list of accounts to search. You can specify as many as
@@ -646,19 +502,6 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeLogStreamsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         log_group_name: "LogGroupName", # required
-    #         log_group_identifier: "LogGroupIdentifier",
-    #         log_stream_name_prefix: "LogStreamName",
-    #         order_by: "LogStreamName", # accepts LogStreamName, LastEventTime
-    #         descending: false,
-    #         next_token: "NextToken",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] log_group_name
     #   The name of the log group.
     #
@@ -749,18 +592,6 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeMetricFiltersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         log_group_name: "LogGroupName",
-    #         filter_name_prefix: "FilterName",
-    #         next_token: "NextToken",
-    #         limit: 1,
-    #         metric_name: "MetricName",
-    #         metric_namespace: "MetricNamespace",
-    #       }
-    #
     # @!attribute [rw] log_group_name
     #   The name of the log group.
     #   @return [String]
@@ -824,16 +655,6 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeQueriesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         log_group_name: "LogGroupName",
-    #         status: "Scheduled", # accepts Scheduled, Running, Complete, Failed, Cancelled, Timeout, Unknown
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] log_group_name
     #   Limits the returned queries to only those for the specified log
     #   group.
@@ -883,15 +704,6 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeQueryDefinitionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         query_definition_name_prefix: "QueryDefinitionName",
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] query_definition_name_prefix
     #   Use this parameter to filter your results to only the query
     #   definitions that have names that start with the prefix you specify.
@@ -935,14 +747,6 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeResourcePoliciesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The token for the next set of items to return. The token expires
     #   after 24 hours.
@@ -980,16 +784,6 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeSubscriptionFiltersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         log_group_name: "LogGroupName", # required
-    #         filter_name_prefix: "FilterName",
-    #         next_token: "NextToken",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] log_group_name
     #   The name of the log group.
     #   @return [String]
@@ -1082,13 +876,6 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateKmsKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         log_group_name: "LogGroupName", # required
-    #       }
-    #
     # @!attribute [rw] log_group_name
     #   The name of the log group.
     #   @return [String]
@@ -1200,23 +987,6 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass FilterLogEventsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         log_group_name: "LogGroupName", # required
-    #         log_group_identifier: "LogGroupIdentifier",
-    #         log_stream_names: ["LogStreamName"],
-    #         log_stream_name_prefix: "LogStreamName",
-    #         start_time: 1,
-    #         end_time: 1,
-    #         filter_pattern: "FilterPattern",
-    #         next_token: "NextToken",
-    #         limit: 1,
-    #         interleaved: false,
-    #         unmask: false,
-    #       }
-    #
     # @!attribute [rw] log_group_name
     #   The name of the log group to search.
     #
@@ -1389,13 +1159,6 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDataProtectionPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         log_group_identifier: "LogGroupIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] log_group_identifier
     #   The name or ARN of the log group that contains the data protection
     #   policy that you want to see.
@@ -1431,21 +1194,6 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLogEventsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         log_group_name: "LogGroupName", # required
-    #         log_group_identifier: "LogGroupIdentifier",
-    #         log_stream_name: "LogStreamName", # required
-    #         start_time: 1,
-    #         end_time: 1,
-    #         next_token: "NextToken",
-    #         limit: 1,
-    #         start_from_head: false,
-    #         unmask: false,
-    #       }
-    #
     # @!attribute [rw] log_group_name
     #   The name of the log group.
     #
@@ -1555,15 +1303,6 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLogGroupFieldsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         log_group_name: "LogGroupName", # required
-    #         time: 1,
-    #         log_group_identifier: "LogGroupIdentifier",
-    #       }
-    #
     # @!attribute [rw] log_group_name
     #   The name of the log group to search.
     #
@@ -1615,14 +1354,6 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLogRecordRequest
-    #   data as a hash:
-    #
-    #       {
-    #         log_record_pointer: "LogRecordPointer", # required
-    #         unmask: false,
-    #       }
-    #
     # @!attribute [rw] log_record_pointer
     #   The pointer corresponding to the log event record you want to
     #   retrieve. You get this from the response of a `GetQueryResults`
@@ -1660,13 +1391,6 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetQueryResultsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         query_id: "QueryId", # required
-    #       }
-    #
     # @!attribute [rw] query_id
     #   The ID number of the query.
     #   @return [String]
@@ -1717,14 +1441,6 @@ module Aws::CloudWatchLogs
 
     # Represents a log event, which is a record of activity that was
     # recorded by the application or resource being monitored.
-    #
-    # @note When making an API call, you may pass InputLogEvent
-    #   data as a hash:
-    #
-    #       {
-    #         timestamp: 1, # required
-    #         message: "EventMessage", # required
-    #       }
     #
     # @!attribute [rw] timestamp
     #   The time the event occurred, expressed as the number of milliseconds
@@ -1777,13 +1493,6 @@ module Aws::CloudWatchLogs
     #
     class LimitExceededException < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource that you want to view tags for.
     #
@@ -1821,13 +1530,6 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsLogGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         log_group_name: "LogGroupName", # required
-    #       }
-    #
     # @!attribute [rw] log_group_name
     #   The name of the log group.
     #   @return [String]
@@ -2093,20 +1795,6 @@ module Aws::CloudWatchLogs
     # Indicates how to transform ingested log events to metric data in a
     # CloudWatch metric.
     #
-    # @note When making an API call, you may pass MetricTransformation
-    #   data as a hash:
-    #
-    #       {
-    #         metric_name: "MetricName", # required
-    #         metric_namespace: "MetricNamespace", # required
-    #         metric_value: "MetricValue", # required
-    #         default_value: 1.0,
-    #         dimensions: {
-    #           "DimensionsKey" => "DimensionsValue",
-    #         },
-    #         unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
-    #       }
-    #
     # @!attribute [rw] metric_name
     #   The name of the CloudWatch metric.
     #   @return [String]
@@ -2207,14 +1895,6 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutDataProtectionPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         log_group_identifier: "LogGroupIdentifier", # required
-    #         policy_document: "DataProtectionPolicyDocument", # required
-    #       }
-    #
     # @!attribute [rw] log_group_identifier
     #   Specify either the log group name or log group ARN.
     #   @return [String]
@@ -2288,15 +1968,6 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutDestinationPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         destination_name: "DestinationName", # required
-    #         access_policy: "AccessPolicy", # required
-    #         force_update: false,
-    #       }
-    #
     # @!attribute [rw] destination_name
     #   A name for an existing destination.
     #   @return [String]
@@ -2335,18 +2006,6 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutDestinationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         destination_name: "DestinationName", # required
-    #         target_arn: "TargetArn", # required
-    #         role_arn: "RoleArn", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] destination_name
     #   A name for the destination.
     #   @return [String]
@@ -2396,21 +2055,6 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutLogEventsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         log_group_name: "LogGroupName", # required
-    #         log_stream_name: "LogStreamName", # required
-    #         log_events: [ # required
-    #           {
-    #             timestamp: 1, # required
-    #             message: "EventMessage", # required
-    #           },
-    #         ],
-    #         sequence_token: "SequenceToken",
-    #       }
-    #
     # @!attribute [rw] log_group_name
     #   The name of the log group.
     #   @return [String]
@@ -2465,27 +2109,6 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutMetricFilterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         log_group_name: "LogGroupName", # required
-    #         filter_name: "FilterName", # required
-    #         filter_pattern: "FilterPattern", # required
-    #         metric_transformations: [ # required
-    #           {
-    #             metric_name: "MetricName", # required
-    #             metric_namespace: "MetricNamespace", # required
-    #             metric_value: "MetricValue", # required
-    #             default_value: 1.0,
-    #             dimensions: {
-    #               "DimensionsKey" => "DimensionsValue",
-    #             },
-    #             unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] log_group_name
     #   The name of the log group.
     #   @return [String]
@@ -2515,16 +2138,6 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutQueryDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "QueryDefinitionName", # required
-    #         query_definition_id: "QueryId",
-    #         log_group_names: ["LogGroupName"],
-    #         query_string: "QueryDefinitionString", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   A name for the query definition. If you are saving numerous query
     #   definitions, we recommend that you name them. This way, you can find
@@ -2592,14 +2205,6 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutResourcePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy_name: "PolicyName",
-    #         policy_document: "PolicyDocument",
-    #       }
-    #
     # @!attribute [rw] policy_name
     #   Name of the new policy. This parameter is required.
     #   @return [String]
@@ -2659,14 +2264,6 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutRetentionPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         log_group_name: "LogGroupName", # required
-    #         retention_in_days: 1, # required
-    #       }
-    #
     # @!attribute [rw] log_group_name
     #   The name of the log group.
     #   @return [String]
@@ -2693,18 +2290,6 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutSubscriptionFilterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         log_group_name: "LogGroupName", # required
-    #         filter_name: "FilterName", # required
-    #         filter_pattern: "FilterPattern", # required
-    #         destination_arn: "DestinationArn", # required
-    #         role_arn: "RoleArn",
-    #         distribution: "Random", # accepts Random, ByLogStream
-    #       }
-    #
     # @!attribute [rw] log_group_name
     #   The name of the log group.
     #   @return [String]
@@ -3033,19 +2618,6 @@ module Aws::CloudWatchLogs
     #
     class ServiceUnavailableException < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass StartQueryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         log_group_name: "LogGroupName",
-    #         log_group_names: ["LogGroupName"],
-    #         log_group_identifiers: ["LogGroupIdentifier"],
-    #         start_time: 1, # required
-    #         end_time: 1, # required
-    #         query_string: "QueryString", # required
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] log_group_name
     #   The log group on which to perform the query.
     #
@@ -3137,13 +2709,6 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopQueryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         query_id: "QueryId", # required
-    #       }
-    #
     # @!attribute [rw] query_id
     #   The ID number of the query to stop. To find this ID number, use
     #   `DescribeQueries`.
@@ -3217,16 +2782,6 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagLogGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         log_group_name: "LogGroupName", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] log_group_name
     #   The name of the log group.
     #   @return [String]
@@ -3244,16 +2799,6 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource that you're adding tags to.
     #
@@ -3284,14 +2829,6 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TestMetricFilterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter_pattern: "FilterPattern", # required
-    #         log_event_messages: ["EventMessage"], # required
-    #       }
-    #
     # @!attribute [rw] filter_pattern
     #   A symbolic description of how CloudWatch Logs should interpret the
     #   data in each log event. For example, a log event can contain
@@ -3349,14 +2886,6 @@ module Aws::CloudWatchLogs
     #
     class UnrecognizedClientException < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UntagLogGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         log_group_name: "LogGroupName", # required
-    #         tags: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] log_group_name
     #   The name of the log group.
     #   @return [String]
@@ -3374,14 +2903,6 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the CloudWatch Logs resource that you're removing tags
     #   from.

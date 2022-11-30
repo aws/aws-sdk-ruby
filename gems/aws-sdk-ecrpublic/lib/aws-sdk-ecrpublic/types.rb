@@ -34,15 +34,6 @@ module Aws::ECRPublic
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchCheckLayerAvailabilityRequest
-    #   data as a hash:
-    #
-    #       {
-    #         registry_id: "RegistryIdOrAlias",
-    #         repository_name: "RepositoryName", # required
-    #         layer_digests: ["BatchedOperationLayerDigest"], # required
-    #       }
-    #
     # @!attribute [rw] registry_id
     #   The AWS account ID associated with the public registry that contains
     #   the image layers to check. If you do not specify a registry, the
@@ -86,20 +77,6 @@ module Aws::ECRPublic
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchDeleteImageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         registry_id: "RegistryId",
-    #         repository_name: "RepositoryName", # required
-    #         image_ids: [ # required
-    #           {
-    #             image_digest: "ImageDigest",
-    #             image_tag: "ImageTag",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] registry_id
     #   The AWS account ID associated with the registry that contains the
     #   image to delete. If you do not specify a registry, the default
@@ -144,16 +121,6 @@ module Aws::ECRPublic
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CompleteLayerUploadRequest
-    #   data as a hash:
-    #
-    #       {
-    #         registry_id: "RegistryIdOrAlias",
-    #         repository_name: "RepositoryName", # required
-    #         upload_id: "UploadId", # required
-    #         layer_digests: ["LayerDigest"], # required
-    #       }
-    #
     # @!attribute [rw] registry_id
     #   The AWS account ID associated with the registry to which to upload
     #   layers. If you do not specify a registry, the default public
@@ -212,27 +179,6 @@ module Aws::ECRPublic
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateRepositoryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         repository_name: "RepositoryName", # required
-    #         catalog_data: {
-    #           description: "RepositoryDescription",
-    #           architectures: ["Architecture"],
-    #           operating_systems: ["OperatingSystem"],
-    #           logo_image_blob: "data",
-    #           about_text: "AboutText",
-    #           usage_text: "UsageText",
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] repository_name
     #   The name to use for the repository. This appears publicly in the
     #   Amazon ECR Public Gallery. The repository name may be specified on
@@ -282,14 +228,6 @@ module Aws::ECRPublic
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteRepositoryPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         registry_id: "RegistryId",
-    #         repository_name: "RepositoryName", # required
-    #       }
-    #
     # @!attribute [rw] registry_id
     #   The AWS account ID associated with the public registry that contains
     #   the repository policy to delete. If you do not specify a registry,
@@ -332,15 +270,6 @@ module Aws::ECRPublic
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteRepositoryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         registry_id: "RegistryId",
-    #         repository_name: "RepositoryName", # required
-    #         force: false,
-    #       }
-    #
     # @!attribute [rw] registry_id
     #   The AWS account ID associated with the public registry that contains
     #   the repository to delete. If you do not specify a registry, the
@@ -377,16 +306,6 @@ module Aws::ECRPublic
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeImageTagsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         registry_id: "RegistryId",
-    #         repository_name: "RepositoryName", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] registry_id
     #   The AWS account ID associated with the public registry that contains
     #   the repository in which to describe images. If you do not specify a
@@ -453,22 +372,6 @@ module Aws::ECRPublic
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeImagesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         registry_id: "RegistryId",
-    #         repository_name: "RepositoryName", # required
-    #         image_ids: [
-    #           {
-    #             image_digest: "ImageDigest",
-    #             image_tag: "ImageTag",
-    #           },
-    #         ],
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] registry_id
     #   The AWS account ID associated with the public registry that contains
     #   the repository in which to describe images. If you do not specify a
@@ -538,14 +441,6 @@ module Aws::ECRPublic
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeRegistriesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The `nextToken` value returned from a previous paginated
     #   `DescribeRegistries` request where `maxResults` was used and the
@@ -603,16 +498,6 @@ module Aws::ECRPublic
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeRepositoriesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         registry_id: "RegistryId",
-    #         repository_names: ["RepositoryName"],
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] registry_id
     #   The AWS account ID associated with the registry that contains the
     #   repositories to be described. If you do not specify a registry, the
@@ -698,8 +583,6 @@ module Aws::ECRPublic
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/GetAuthorizationTokenRequest AWS API Documentation
     #
     class GetAuthorizationTokenRequest < Aws::EmptyStructure; end
@@ -717,8 +600,6 @@ module Aws::ECRPublic
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/GetRegistryCatalogDataRequest AWS API Documentation
     #
     class GetRegistryCatalogDataRequest < Aws::EmptyStructure; end
@@ -735,14 +616,6 @@ module Aws::ECRPublic
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRepositoryCatalogDataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         registry_id: "RegistryId",
-    #         repository_name: "RepositoryName", # required
-    #       }
-    #
     # @!attribute [rw] registry_id
     #   The AWS account ID associated with the registry that contains the
     #   repositories to be described. If you do not specify a registry, the
@@ -774,14 +647,6 @@ module Aws::ECRPublic
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRepositoryPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         registry_id: "RegistryId",
-    #         repository_name: "RepositoryName", # required
-    #       }
-    #
     # @!attribute [rw] registry_id
     #   The AWS account ID associated with the public registry that contains
     #   the repository. If you do not specify a registry, the default public
@@ -977,14 +842,6 @@ module Aws::ECRPublic
 
     # An object with identifying information for an Amazon ECR image.
     #
-    # @note When making an API call, you may pass ImageIdentifier
-    #   data as a hash:
-    #
-    #       {
-    #         image_digest: "ImageDigest",
-    #         image_tag: "ImageTag",
-    #       }
-    #
     # @!attribute [rw] image_digest
     #   The `sha256` digest of the image manifest.
     #   @return [String]
@@ -1053,14 +910,6 @@ module Aws::ECRPublic
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass InitiateLayerUploadRequest
-    #   data as a hash:
-    #
-    #       {
-    #         registry_id: "RegistryIdOrAlias",
-    #         repository_name: "RepositoryName", # required
-    #       }
-    #
     # @!attribute [rw] registry_id
     #   The AWS account ID associated with the registry to which you intend
     #   to upload layers. If you do not specify a registry, the default
@@ -1290,13 +1139,6 @@ module Aws::ECRPublic
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) that identifies the resource for
     #   which to list the tags. Currently, the supported resource is an
@@ -1323,18 +1165,6 @@ module Aws::ECRPublic
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutImageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         registry_id: "RegistryIdOrAlias",
-    #         repository_name: "RepositoryName", # required
-    #         image_manifest: "ImageManifest", # required
-    #         image_manifest_media_type: "MediaType",
-    #         image_tag: "ImageTag",
-    #         image_digest: "ImageDigest",
-    #       }
-    #
     # @!attribute [rw] registry_id
     #   The AWS account ID associated with the public registry that contains
     #   the repository in which to put the image. If you do not specify a
@@ -1390,13 +1220,6 @@ module Aws::ECRPublic
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutRegistryCatalogDataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         display_name: "RegistryDisplayName",
-    #       }
-    #
     # @!attribute [rw] display_name
     #   The display name for a public registry. The display name is shown as
     #   the repository author in the Amazon ECR Public Gallery.
@@ -1427,22 +1250,6 @@ module Aws::ECRPublic
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutRepositoryCatalogDataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         registry_id: "RegistryId",
-    #         repository_name: "RepositoryName", # required
-    #         catalog_data: { # required
-    #           description: "RepositoryDescription",
-    #           architectures: ["Architecture"],
-    #           operating_systems: ["OperatingSystem"],
-    #           logo_image_blob: "data",
-    #           about_text: "AboutText",
-    #           usage_text: "UsageText",
-    #         },
-    #       }
-    #
     # @!attribute [rw] registry_id
     #   The AWS account ID associated with the public registry the
     #   repository is in. If you do not specify a registry, the default
@@ -1773,18 +1580,6 @@ module Aws::ECRPublic
     # An object containing the catalog data for a repository. This data is
     # publicly visible in the Amazon ECR Public Gallery.
     #
-    # @note When making an API call, you may pass RepositoryCatalogDataInput
-    #   data as a hash:
-    #
-    #       {
-    #         description: "RepositoryDescription",
-    #         architectures: ["Architecture"],
-    #         operating_systems: ["OperatingSystem"],
-    #         logo_image_blob: "data",
-    #         about_text: "AboutText",
-    #         usage_text: "UsageText",
-    #       }
-    #
     # @!attribute [rw] description
     #   A short description of the contents of the repository. This text
     #   appears in both the image details and also when searching for
@@ -1924,16 +1719,6 @@ module Aws::ECRPublic
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SetRepositoryPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         registry_id: "RegistryId",
-    #         repository_name: "RepositoryName", # required
-    #         policy_text: "RepositoryPolicyText", # required
-    #         force: false,
-    #       }
-    #
     # @!attribute [rw] registry_id
     #   The AWS account ID associated with the registry that contains the
     #   repository. If you do not specify a registry, the default public
@@ -2000,14 +1785,6 @@ module Aws::ECRPublic
     # 128 characters, and tag values can have a maximum length of 256
     # characters.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey",
-    #         value: "TagValue",
-    #       }
-    #
     # @!attribute [rw] key
     #   One part of a key-value pair that make up a tag. A `key` is a
     #   general label that acts like a category for more specific tag
@@ -2028,19 +1805,6 @@ module Aws::ECRPublic
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource to which to add tags.
     #   Currently, the supported resource is an Amazon ECR Public
@@ -2094,14 +1858,6 @@ module Aws::ECRPublic
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource from which to delete
     #   tags. Currently, the supported resource is an Amazon ECR Public
@@ -2125,18 +1881,6 @@ module Aws::ECRPublic
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UploadLayerPartRequest
-    #   data as a hash:
-    #
-    #       {
-    #         registry_id: "RegistryIdOrAlias",
-    #         repository_name: "RepositoryName", # required
-    #         upload_id: "UploadId", # required
-    #         part_first_byte: 1, # required
-    #         part_last_byte: 1, # required
-    #         layer_part_blob: "data", # required
-    #       }
-    #
     # @!attribute [rw] registry_id
     #   The AWS account ID associated with the registry to which you are
     #   uploading layer parts. If you do not specify a registry, the default

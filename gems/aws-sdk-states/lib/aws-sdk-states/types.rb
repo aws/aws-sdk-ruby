@@ -255,13 +255,6 @@ module Aws::States
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CloudWatchLogsLogGroup
-    #   data as a hash:
-    #
-    #       {
-    #         log_group_arn: "Arn",
-    #       }
-    #
     # @!attribute [rw] log_group_arn
     #   The ARN of the the CloudWatch log group to which you want your logs
     #   emitted to. The ARN must end with `:*`
@@ -275,19 +268,6 @@ module Aws::States
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateActivityInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the activity to create. This name must be unique for
     #   your Amazon Web Services account and region for 90 days. For more
@@ -356,36 +336,6 @@ module Aws::States
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateStateMachineInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         definition: "Definition", # required
-    #         role_arn: "Arn", # required
-    #         type: "STANDARD", # accepts STANDARD, EXPRESS
-    #         logging_configuration: {
-    #           level: "ALL", # accepts ALL, ERROR, FATAL, OFF
-    #           include_execution_data: false,
-    #           destinations: [
-    #             {
-    #               cloud_watch_logs_log_group: {
-    #                 log_group_arn: "Arn",
-    #               },
-    #             },
-    #           ],
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         tracing_configuration: {
-    #           enabled: false,
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the state machine.
     #
@@ -491,13 +441,6 @@ module Aws::States
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteActivityInput
-    #   data as a hash:
-    #
-    #       {
-    #         activity_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] activity_arn
     #   The Amazon Resource Name (ARN) of the activity to delete.
     #   @return [String]
@@ -514,13 +457,6 @@ module Aws::States
     #
     class DeleteActivityOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteStateMachineInput
-    #   data as a hash:
-    #
-    #       {
-    #         state_machine_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] state_machine_arn
     #   The Amazon Resource Name (ARN) of the state machine to delete.
     #   @return [String]
@@ -537,13 +473,6 @@ module Aws::States
     #
     class DeleteStateMachineOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeActivityInput
-    #   data as a hash:
-    #
-    #       {
-    #         activity_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] activity_arn
     #   The Amazon Resource Name (ARN) of the activity to describe.
     #   @return [String]
@@ -593,13 +522,6 @@ module Aws::States
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeExecutionInput
-    #   data as a hash:
-    #
-    #       {
-    #         execution_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] execution_arn
     #   The Amazon Resource Name (ARN) of the execution to describe.
     #   @return [String]
@@ -697,13 +619,6 @@ module Aws::States
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeStateMachineForExecutionInput
-    #   data as a hash:
-    #
-    #       {
-    #         execution_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] execution_arn
     #   The Amazon Resource Name (ARN) of the execution you want state
     #   machine information for.
@@ -769,13 +684,6 @@ module Aws::States
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeStateMachineInput
-    #   data as a hash:
-    #
-    #       {
-    #         state_machine_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] state_machine_arn
     #   The Amazon Resource Name (ARN) of the state machine to describe.
     #   @return [String]
@@ -1067,14 +975,6 @@ module Aws::States
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetActivityTaskInput
-    #   data as a hash:
-    #
-    #       {
-    #         activity_arn: "Arn", # required
-    #         worker_name: "Name",
-    #       }
-    #
     # @!attribute [rw] activity_arn
     #   The Amazon Resource Name (ARN) of the activity to retrieve tasks
     #   from (assigned when you create the task using CreateActivity.)
@@ -1117,17 +1017,6 @@ module Aws::States
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetExecutionHistoryInput
-    #   data as a hash:
-    #
-    #       {
-    #         execution_arn: "Arn", # required
-    #         max_results: 1,
-    #         reverse_order: false,
-    #         next_token: "PageToken",
-    #         include_execution_data: false,
-    #       }
-    #
     # @!attribute [rw] execution_arn
     #   The Amazon Resource Name (ARN) of the execution.
     #   @return [String]
@@ -1650,14 +1539,6 @@ module Aws::States
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListActivitiesInput
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "PageToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results that are returned per call. You can
     #   use `nextToken` to obtain further pages of results. The default is
@@ -1708,16 +1589,6 @@ module Aws::States
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListExecutionsInput
-    #   data as a hash:
-    #
-    #       {
-    #         state_machine_arn: "Arn", # required
-    #         status_filter: "RUNNING", # accepts RUNNING, SUCCEEDED, FAILED, TIMED_OUT, ABORTED
-    #         max_results: 1,
-    #         next_token: "ListExecutionsPageToken",
-    #       }
-    #
     # @!attribute [rw] state_machine_arn
     #   The Amazon Resource Name (ARN) of the state machine whose executions
     #   is listed.
@@ -1780,14 +1651,6 @@ module Aws::States
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListStateMachinesInput
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "PageToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results that are returned per call. You can
     #   use `nextToken` to obtain further pages of results. The default is
@@ -1837,13 +1700,6 @@ module Aws::States
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) for the Step Functions state machine
     #   or activity.
@@ -1869,15 +1725,6 @@ module Aws::States
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass LogDestination
-    #   data as a hash:
-    #
-    #       {
-    #         cloud_watch_logs_log_group: {
-    #           log_group_arn: "Arn",
-    #         },
-    #       }
-    #
     # @!attribute [rw] cloud_watch_logs_log_group
     #   An object describing a CloudWatch log group. For more information,
     #   see [AWS::Logs::LogGroup][1] in the CloudFormation User Guide.
@@ -1897,21 +1744,6 @@ module Aws::States
 
     # The `LoggingConfiguration` data type is used to set CloudWatch Logs
     # options.
-    #
-    # @note When making an API call, you may pass LoggingConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         level: "ALL", # accepts ALL, ERROR, FATAL, OFF
-    #         include_execution_data: false,
-    #         destinations: [
-    #           {
-    #             cloud_watch_logs_log_group: {
-    #               log_group_arn: "Arn",
-    #             },
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] level
     #   Defines which category of execution history events are logged.
@@ -2003,15 +1835,6 @@ module Aws::States
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SendTaskFailureInput
-    #   data as a hash:
-    #
-    #       {
-    #         task_token: "TaskToken", # required
-    #         error: "SensitiveError",
-    #         cause: "SensitiveCause",
-    #       }
-    #
     # @!attribute [rw] task_token
     #   The token that represents this task. Task tokens are generated by
     #   Step Functions when tasks are assigned to a worker, or in the
@@ -2045,13 +1868,6 @@ module Aws::States
     #
     class SendTaskFailureOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass SendTaskHeartbeatInput
-    #   data as a hash:
-    #
-    #       {
-    #         task_token: "TaskToken", # required
-    #       }
-    #
     # @!attribute [rw] task_token
     #   The token that represents this task. Task tokens are generated by
     #   Step Functions when tasks are assigned to a worker, or in the
@@ -2075,14 +1891,6 @@ module Aws::States
     #
     class SendTaskHeartbeatOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass SendTaskSuccessInput
-    #   data as a hash:
-    #
-    #       {
-    #         task_token: "TaskToken", # required
-    #         output: "SensitiveData", # required
-    #       }
-    #
     # @!attribute [rw] task_token
     #   The token that represents this task. Task tokens are generated by
     #   Step Functions when tasks are assigned to a worker, or in the
@@ -2112,16 +1920,6 @@ module Aws::States
     #
     class SendTaskSuccessOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass StartExecutionInput
-    #   data as a hash:
-    #
-    #       {
-    #         state_machine_arn: "Arn", # required
-    #         name: "Name",
-    #         input: "SensitiveData",
-    #         trace_header: "TraceHeader",
-    #       }
-    #
     # @!attribute [rw] state_machine_arn
     #   The Amazon Resource Name (ARN) of the state machine to execute.
     #   @return [String]
@@ -2200,16 +1998,6 @@ module Aws::States
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartSyncExecutionInput
-    #   data as a hash:
-    #
-    #       {
-    #         state_machine_arn: "Arn", # required
-    #         name: "Name",
-    #         input: "SensitiveData",
-    #         trace_header: "TraceHeader",
-    #       }
-    #
     # @!attribute [rw] state_machine_arn
     #   The Amazon Resource Name (ARN) of the state machine to execute.
     #   @return [String]
@@ -2509,15 +2297,6 @@ module Aws::States
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopExecutionInput
-    #   data as a hash:
-    #
-    #       {
-    #         execution_arn: "Arn", # required
-    #         error: "SensitiveError",
-    #         cause: "SensitiveCause",
-    #       }
-    #
     # @!attribute [rw] execution_arn
     #   The Amazon Resource Name (ARN) of the execution to stop.
     #   @return [String]
@@ -2567,14 +2346,6 @@ module Aws::States
     # [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
     # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey",
-    #         value: "TagValue",
-    #       }
-    #
     # @!attribute [rw] key
     #   The key of a tag.
     #   @return [String]
@@ -2592,19 +2363,6 @@ module Aws::States
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) for the Step Functions state machine
     #   or activity.
@@ -2940,13 +2698,6 @@ module Aws::States
     # Selects whether or not the state machine's X-Ray tracing is enabled.
     # Default is `false`
     #
-    # @note When making an API call, you may pass TracingConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false,
-    #       }
-    #
     # @!attribute [rw] enabled
     #   When set to `true`, X-Ray tracing is enabled.
     #   @return [Boolean]
@@ -2959,14 +2710,6 @@ module Aws::States
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) for the Step Functions state machine
     #   or activity.
@@ -2989,29 +2732,6 @@ module Aws::States
     #
     class UntagResourceOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateStateMachineInput
-    #   data as a hash:
-    #
-    #       {
-    #         state_machine_arn: "Arn", # required
-    #         definition: "Definition",
-    #         role_arn: "Arn",
-    #         logging_configuration: {
-    #           level: "ALL", # accepts ALL, ERROR, FATAL, OFF
-    #           include_execution_data: false,
-    #           destinations: [
-    #             {
-    #               cloud_watch_logs_log_group: {
-    #                 log_group_arn: "Arn",
-    #               },
-    #             },
-    #           ],
-    #         },
-    #         tracing_configuration: {
-    #           enabled: false,
-    #         },
-    #       }
-    #
     # @!attribute [rw] state_machine_arn
     #   The Amazon Resource Name (ARN) of the state machine.
     #   @return [String]

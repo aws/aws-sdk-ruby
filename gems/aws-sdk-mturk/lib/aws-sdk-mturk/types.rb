@@ -10,14 +10,6 @@
 module Aws::MTurk
   module Types
 
-    # @note When making an API call, you may pass AcceptQualificationRequestRequest
-    #   data as a hash:
-    #
-    #       {
-    #         qualification_request_id: "String", # required
-    #         integer_value: 1,
-    #       }
-    #
     # @!attribute [rw] qualification_request_id
     #   The ID of the Qualification request, as returned by the
     #   `GetQualificationRequests` operation.
@@ -42,15 +34,6 @@ module Aws::MTurk
     #
     class AcceptQualificationRequestResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass ApproveAssignmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assignment_id: "EntityId", # required
-    #         requester_feedback: "String",
-    #         override_rejection: false,
-    #       }
-    #
     # @!attribute [rw] assignment_id
     #   The ID of the assignment. The assignment must correspond to a HIT
     #   created by the Requester.
@@ -171,16 +154,6 @@ module Aws::MTurk
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateQualificationWithWorkerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         qualification_type_id: "EntityId", # required
-    #         worker_id: "CustomerId", # required
-    #         integer_value: 1,
-    #         send_notification: false,
-    #       }
-    #
     # @!attribute [rw] qualification_type_id
     #   The ID of the Qualification type to use for the assigned
     #   Qualification.
@@ -251,15 +224,6 @@ module Aws::MTurk
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAdditionalAssignmentsForHITRequest
-    #   data as a hash:
-    #
-    #       {
-    #         hit_id: "EntityId", # required
-    #         number_of_additional_assignments: 1, # required
-    #         unique_request_token: "IdempotencyToken",
-    #       }
-    #
     # @!attribute [rw] hit_id
     #   The ID of the HIT to extend.
     #   @return [String]
@@ -292,75 +256,6 @@ module Aws::MTurk
     #
     class CreateAdditionalAssignmentsForHITResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass CreateHITRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_assignments: 1,
-    #         auto_approval_delay_in_seconds: 1,
-    #         lifetime_in_seconds: 1, # required
-    #         assignment_duration_in_seconds: 1, # required
-    #         reward: "CurrencyAmount", # required
-    #         title: "String", # required
-    #         keywords: "String",
-    #         description: "String", # required
-    #         question: "String",
-    #         requester_annotation: "String",
-    #         qualification_requirements: [
-    #           {
-    #             qualification_type_id: "String", # required
-    #             comparator: "LessThan", # required, accepts LessThan, LessThanOrEqualTo, GreaterThan, GreaterThanOrEqualTo, EqualTo, NotEqualTo, Exists, DoesNotExist, In, NotIn
-    #             integer_values: [1],
-    #             locale_values: [
-    #               {
-    #                 country: "CountryParameters", # required
-    #                 subdivision: "CountryParameters",
-    #               },
-    #             ],
-    #             required_to_preview: false,
-    #             actions_guarded: "Accept", # accepts Accept, PreviewAndAccept, DiscoverPreviewAndAccept
-    #           },
-    #         ],
-    #         unique_request_token: "IdempotencyToken",
-    #         assignment_review_policy: {
-    #           policy_name: "String", # required
-    #           parameters: [
-    #             {
-    #               key: "String",
-    #               values: ["String"],
-    #               map_entries: [
-    #                 {
-    #                   key: "String",
-    #                   values: ["String"],
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #         hit_review_policy: {
-    #           policy_name: "String", # required
-    #           parameters: [
-    #             {
-    #               key: "String",
-    #               values: ["String"],
-    #               map_entries: [
-    #                 {
-    #                   key: "String",
-    #                   values: ["String"],
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #         hit_layout_id: "EntityId",
-    #         hit_layout_parameters: [
-    #           {
-    #             name: "String", # required
-    #             value: "String", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] max_assignments
     #   The number of times the HIT can be accepted and completed before the
     #   HIT becomes unavailable.
@@ -529,33 +424,6 @@ module Aws::MTurk
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateHITTypeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         auto_approval_delay_in_seconds: 1,
-    #         assignment_duration_in_seconds: 1, # required
-    #         reward: "CurrencyAmount", # required
-    #         title: "String", # required
-    #         keywords: "String",
-    #         description: "String", # required
-    #         qualification_requirements: [
-    #           {
-    #             qualification_type_id: "String", # required
-    #             comparator: "LessThan", # required, accepts LessThan, LessThanOrEqualTo, GreaterThan, GreaterThanOrEqualTo, EqualTo, NotEqualTo, Exists, DoesNotExist, In, NotIn
-    #             integer_values: [1],
-    #             locale_values: [
-    #               {
-    #                 country: "CountryParameters", # required
-    #                 subdivision: "CountryParameters",
-    #               },
-    #             ],
-    #             required_to_preview: false,
-    #             actions_guarded: "Accept", # accepts Accept, PreviewAndAccept, DiscoverPreviewAndAccept
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] auto_approval_delay_in_seconds
     #   The number of seconds after an assignment for the HIT has been
     #   submitted, after which the assignment is considered Approved
@@ -632,55 +500,6 @@ module Aws::MTurk
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateHITWithHITTypeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         hit_type_id: "EntityId", # required
-    #         max_assignments: 1,
-    #         lifetime_in_seconds: 1, # required
-    #         question: "String",
-    #         requester_annotation: "String",
-    #         unique_request_token: "IdempotencyToken",
-    #         assignment_review_policy: {
-    #           policy_name: "String", # required
-    #           parameters: [
-    #             {
-    #               key: "String",
-    #               values: ["String"],
-    #               map_entries: [
-    #                 {
-    #                   key: "String",
-    #                   values: ["String"],
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #         hit_review_policy: {
-    #           policy_name: "String", # required
-    #           parameters: [
-    #             {
-    #               key: "String",
-    #               values: ["String"],
-    #               map_entries: [
-    #                 {
-    #                   key: "String",
-    #                   values: ["String"],
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #         hit_layout_id: "EntityId",
-    #         hit_layout_parameters: [
-    #           {
-    #             name: "String", # required
-    #             value: "String", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] hit_type_id
     #   The HIT type ID you want to create this HIT with.
     #   @return [String]
@@ -797,22 +616,6 @@ module Aws::MTurk
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateQualificationTypeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #         keywords: "String",
-    #         description: "String", # required
-    #         qualification_type_status: "Active", # required, accepts Active, Inactive
-    #         retry_delay_in_seconds: 1,
-    #         test: "String",
-    #         answer_key: "String",
-    #         test_duration_in_seconds: 1,
-    #         auto_granted: false,
-    #         auto_granted_value: 1,
-    #       }
-    #
     # @!attribute [rw] name
     #   The name you give to the Qualification type. The type name is used
     #   to represent the Qualification to Workers, and to find the type
@@ -924,14 +727,6 @@ module Aws::MTurk
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateWorkerBlockRequest
-    #   data as a hash:
-    #
-    #       {
-    #         worker_id: "CustomerId", # required
-    #         reason: "String", # required
-    #       }
-    #
     # @!attribute [rw] worker_id
     #   The ID of the Worker to block.
     #   @return [String]
@@ -955,13 +750,6 @@ module Aws::MTurk
     #
     class CreateWorkerBlockResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteHITRequest
-    #   data as a hash:
-    #
-    #       {
-    #         hit_id: "EntityId", # required
-    #       }
-    #
     # @!attribute [rw] hit_id
     #   The ID of the HIT to be deleted.
     #   @return [String]
@@ -978,13 +766,6 @@ module Aws::MTurk
     #
     class DeleteHITResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteQualificationTypeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         qualification_type_id: "EntityId", # required
-    #       }
-    #
     # @!attribute [rw] qualification_type_id
     #   The ID of the QualificationType to dispose.
     #   @return [String]
@@ -1001,14 +782,6 @@ module Aws::MTurk
     #
     class DeleteQualificationTypeResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteWorkerBlockRequest
-    #   data as a hash:
-    #
-    #       {
-    #         worker_id: "CustomerId", # required
-    #         reason: "String",
-    #       }
-    #
     # @!attribute [rw] worker_id
     #   The ID of the Worker to unblock.
     #   @return [String]
@@ -1031,15 +804,6 @@ module Aws::MTurk
     #
     class DeleteWorkerBlockResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DisassociateQualificationFromWorkerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         worker_id: "CustomerId", # required
-    #         qualification_type_id: "EntityId", # required
-    #         reason: "String",
-    #       }
-    #
     # @!attribute [rw] worker_id
     #   The ID of the Worker who possesses the Qualification to be revoked.
     #   @return [String]
@@ -1067,8 +831,6 @@ module Aws::MTurk
     #
     class DisassociateQualificationFromWorkerResponse < Aws::EmptyStructure; end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetAccountBalanceRequest AWS API Documentation
     #
     class GetAccountBalanceRequest < Aws::EmptyStructure; end
@@ -1090,13 +852,6 @@ module Aws::MTurk
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAssignmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assignment_id: "EntityId", # required
-    #       }
-    #
     # @!attribute [rw] assignment_id
     #   The ID of the Assignment to be retrieved.
     #   @return [String]
@@ -1127,14 +882,6 @@ module Aws::MTurk
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetFileUploadURLRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assignment_id: "EntityId", # required
-    #         question_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] assignment_id
     #   The ID of the assignment that contains the question with a
     #   FileUploadAnswer.
@@ -1167,13 +914,6 @@ module Aws::MTurk
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetHITRequest
-    #   data as a hash:
-    #
-    #       {
-    #         hit_id: "EntityId", # required
-    #       }
-    #
     # @!attribute [rw] hit_id
     #   The ID of the HIT to be retrieved.
     #   @return [String]
@@ -1198,14 +938,6 @@ module Aws::MTurk
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetQualificationScoreRequest
-    #   data as a hash:
-    #
-    #       {
-    #         qualification_type_id: "EntityId", # required
-    #         worker_id: "CustomerId", # required
-    #       }
-    #
     # @!attribute [rw] qualification_type_id
     #   The ID of the QualificationType.
     #   @return [String]
@@ -1236,13 +968,6 @@ module Aws::MTurk
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetQualificationTypeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         qualification_type_id: "EntityId", # required
-    #       }
-    #
     # @!attribute [rw] qualification_type_id
     #   The ID of the QualificationType.
     #   @return [String]
@@ -1409,14 +1134,6 @@ module Aws::MTurk
     # project template used to provide Human Intelligence Task (HIT)
     # question data for CreateHIT.
     #
-    # @note When making an API call, you may pass HITLayoutParameter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #         value: "String", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the parameter in the HITLayout.
     #   @return [String]
@@ -1434,16 +1151,6 @@ module Aws::MTurk
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAssignmentsForHITRequest
-    #   data as a hash:
-    #
-    #       {
-    #         hit_id: "EntityId", # required
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #         assignment_statuses: ["Submitted"], # accepts Submitted, Approved, Rejected
-    #       }
-    #
     # @!attribute [rw] hit_id
     #   The ID of the HIT.
     #   @return [String]
@@ -1497,16 +1204,6 @@ module Aws::MTurk
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListBonusPaymentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         hit_id: "EntityId",
-    #         assignment_id: "EntityId",
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] hit_id
     #   The ID of the HIT associated with the bonus payments to retrieve. If
     #   not specified, all bonus payments for all assignments for the given
@@ -1567,15 +1264,6 @@ module Aws::MTurk
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListHITsForQualificationTypeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         qualification_type_id: "EntityId", # required
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] qualification_type_id
     #   The ID of the Qualification type to use when querying HITs.
     #   @return [String]
@@ -1624,14 +1312,6 @@ module Aws::MTurk
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListHITsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   Pagination token
     #   @return [String]
@@ -1674,15 +1354,6 @@ module Aws::MTurk
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListQualificationRequestsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         qualification_type_id: "EntityId",
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] qualification_type_id
     #   The ID of the QualificationType.
     #   @return [String]
@@ -1737,17 +1408,6 @@ module Aws::MTurk
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListQualificationTypesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         query: "String",
-    #         must_be_requestable: false, # required
-    #         must_be_owned_by_caller: false,
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] query
     #   A text query against all of the searchable attributes of
     #   Qualification types.
@@ -1819,18 +1479,6 @@ module Aws::MTurk
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListReviewPolicyResultsForHITRequest
-    #   data as a hash:
-    #
-    #       {
-    #         hit_id: "EntityId", # required
-    #         policy_levels: ["Assignment"], # accepts Assignment, HIT
-    #         retrieve_actions: false,
-    #         retrieve_results: false,
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] hit_id
     #   The unique identifier of the HIT to retrieve review results for.
     #   @return [String]
@@ -1917,16 +1565,6 @@ module Aws::MTurk
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListReviewableHITsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         hit_type_id: "EntityId",
-    #         status: "Reviewable", # accepts Reviewable, Reviewing
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] hit_type_id
     #   The ID of the HIT type of the HITs to consider for the query. If not
     #   specified, all HITs for the Reviewer are considered
@@ -1982,14 +1620,6 @@ module Aws::MTurk
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListWorkerBlocksRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   Pagination token
     #   @return [String]
@@ -2033,16 +1663,6 @@ module Aws::MTurk
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListWorkersWithQualificationTypeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         qualification_type_id: "EntityId", # required
-    #         status: "Granted", # accepts Granted, Revoked
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] qualification_type_id
     #   The ID of the Qualification type of the Qualifications to return.
     #   @return [String]
@@ -2101,14 +1721,6 @@ module Aws::MTurk
     # The Locale data structure represents a geographical region or
     # location.
     #
-    # @note When making an API call, you may pass Locale
-    #   data as a hash:
-    #
-    #       {
-    #         country: "CountryParameters", # required
-    #         subdivision: "CountryParameters",
-    #       }
-    #
     # @!attribute [rw] country
     #   The country of the locale. Must be a valid ISO 3166 country code.
     #   For example, the code US refers to the United States of America.
@@ -2131,16 +1743,6 @@ module Aws::MTurk
 
     # The NotificationSpecification data structure describes a HIT event
     # notification for a HIT type.
-    #
-    # @note When making an API call, you may pass NotificationSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         destination: "String", # required
-    #         transport: "Email", # required, accepts Email, SQS, SNS
-    #         version: "String", # required
-    #         event_types: ["AssignmentAccepted"], # required, accepts AssignmentAccepted, AssignmentAbandoned, AssignmentReturned, AssignmentSubmitted, AssignmentRejected, AssignmentApproved, HITCreated, HITExpired, HITReviewable, HITExtended, HITDisposed, Ping
-    #       }
     #
     # @!attribute [rw] destination
     #   The target for notification messages. The Destination’s format is
@@ -2208,15 +1810,6 @@ module Aws::MTurk
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass NotifyWorkersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         subject: "String", # required
-    #         message_text: "String", # required
-    #         worker_ids: ["CustomerId"], # required
-    #       }
-    #
     # @!attribute [rw] subject
     #   The subject line of the email message to send. Can include up to 200
     #   characters.
@@ -2259,14 +1852,6 @@ module Aws::MTurk
     # This data structure is the data type for the AnswerKey parameter of
     # the ScoreMyKnownAnswers/2011-09-01 Review Policy.
     #
-    # @note When making an API call, you may pass ParameterMapEntry
-    #   data as a hash:
-    #
-    #       {
-    #         key: "String",
-    #         values: ["String"],
-    #       }
-    #
     # @!attribute [rw] key
     #   The QuestionID from the HIT that is used to identify which question
     #   requires Mechanical Turk to score as part of the
@@ -2289,20 +1874,6 @@ module Aws::MTurk
     end
 
     # Name of the parameter from the Review policy.
-    #
-    # @note When making an API call, you may pass PolicyParameter
-    #   data as a hash:
-    #
-    #       {
-    #         key: "String",
-    #         values: ["String"],
-    #         map_entries: [
-    #           {
-    #             key: "String",
-    #             values: ["String"],
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] key
     #   Name of the parameter from the list of Review Polices.
@@ -2429,23 +2000,6 @@ module Aws::MTurk
     # A requirement may optionally state that a Worker must have the
     # Qualification in order to preview the HIT, or see the HIT in search
     # results.
-    #
-    # @note When making an API call, you may pass QualificationRequirement
-    #   data as a hash:
-    #
-    #       {
-    #         qualification_type_id: "String", # required
-    #         comparator: "LessThan", # required, accepts LessThan, LessThanOrEqualTo, GreaterThan, GreaterThanOrEqualTo, EqualTo, NotEqualTo, Exists, DoesNotExist, In, NotIn
-    #         integer_values: [1],
-    #         locale_values: [
-    #           {
-    #             country: "CountryParameters", # required
-    #             subdivision: "CountryParameters",
-    #           },
-    #         ],
-    #         required_to_preview: false,
-    #         actions_guarded: "Accept", # accepts Accept, PreviewAndAccept, DiscoverPreviewAndAccept
-    #       }
     #
     # @!attribute [rw] qualification_type_id
     #   The ID of the Qualification type for the requirement.
@@ -2643,14 +2197,6 @@ module Aws::MTurk
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RejectAssignmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assignment_id: "EntityId", # required
-    #         requester_feedback: "String", # required
-    #       }
-    #
     # @!attribute [rw] assignment_id
     #   The ID of the assignment. The assignment must correspond to a HIT
     #   created by the Requester.
@@ -2674,14 +2220,6 @@ module Aws::MTurk
     #
     class RejectAssignmentResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass RejectQualificationRequestRequest
-    #   data as a hash:
-    #
-    #       {
-    #         qualification_request_id: "String", # required
-    #         reason: "String",
-    #       }
-    #
     # @!attribute [rw] qualification_request_id
     #   The ID of the Qualification request, as returned by the
     #   `ListQualificationRequests` operation.
@@ -2780,25 +2318,6 @@ module Aws::MTurk
     # HIT Review Policy data structures represent HIT review policies, which
     # you specify when you create a HIT.
     #
-    # @note When making an API call, you may pass ReviewPolicy
-    #   data as a hash:
-    #
-    #       {
-    #         policy_name: "String", # required
-    #         parameters: [
-    #           {
-    #             key: "String",
-    #             values: ["String"],
-    #             map_entries: [
-    #               {
-    #                 key: "String",
-    #                 values: ["String"],
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] policy_name
     #   Name of a Review Policy: SimplePlurality/2011-09-01 or
     #   ScoreMyKnownAnswers/2011-09-01
@@ -2888,17 +2407,6 @@ module Aws::MTurk
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SendBonusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         worker_id: "CustomerId", # required
-    #         bonus_amount: "CurrencyAmount", # required
-    #         assignment_id: "EntityId", # required
-    #         reason: "String", # required
-    #         unique_request_token: "IdempotencyToken",
-    #       }
-    #
     # @!attribute [rw] worker_id
     #   The ID of the Worker being paid the bonus.
     #   @return [String]
@@ -2944,19 +2452,6 @@ module Aws::MTurk
     #
     class SendBonusResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass SendTestEventNotificationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         notification: { # required
-    #           destination: "String", # required
-    #           transport: "Email", # required, accepts Email, SQS, SNS
-    #           version: "String", # required
-    #           event_types: ["AssignmentAccepted"], # required, accepts AssignmentAccepted, AssignmentAbandoned, AssignmentReturned, AssignmentSubmitted, AssignmentRejected, AssignmentApproved, HITCreated, HITExpired, HITReviewable, HITExtended, HITDisposed, Ping
-    #         },
-    #         test_event_type: "AssignmentAccepted", # required, accepts AssignmentAccepted, AssignmentAbandoned, AssignmentReturned, AssignmentSubmitted, AssignmentRejected, AssignmentApproved, HITCreated, HITExpired, HITReviewable, HITExtended, HITDisposed, Ping
-    #       }
-    #
     # @!attribute [rw] notification
     #   The notification specification to test. This value is identical to
     #   the value you would provide to the UpdateNotificationSettings
@@ -3002,14 +2497,6 @@ module Aws::MTurk
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateExpirationForHITRequest
-    #   data as a hash:
-    #
-    #       {
-    #         hit_id: "EntityId", # required
-    #         expire_at: Time.now, # required
-    #       }
-    #
     # @!attribute [rw] hit_id
     #   The HIT to update.
     #   @return [String]
@@ -3031,14 +2518,6 @@ module Aws::MTurk
     #
     class UpdateExpirationForHITResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateHITReviewStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         hit_id: "EntityId", # required
-    #         revert: false,
-    #       }
-    #
     # @!attribute [rw] hit_id
     #   The ID of the HIT to update.
     #   @return [String]
@@ -3066,14 +2545,6 @@ module Aws::MTurk
     #
     class UpdateHITReviewStatusResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateHITTypeOfHITRequest
-    #   data as a hash:
-    #
-    #       {
-    #         hit_id: "EntityId", # required
-    #         hit_type_id: "EntityId", # required
-    #       }
-    #
     # @!attribute [rw] hit_id
     #   The HIT to update.
     #   @return [String]
@@ -3095,20 +2566,6 @@ module Aws::MTurk
     #
     class UpdateHITTypeOfHITResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateNotificationSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         hit_type_id: "EntityId", # required
-    #         notification: {
-    #           destination: "String", # required
-    #           transport: "Email", # required, accepts Email, SQS, SNS
-    #           version: "String", # required
-    #           event_types: ["AssignmentAccepted"], # required, accepts AssignmentAccepted, AssignmentAbandoned, AssignmentReturned, AssignmentSubmitted, AssignmentRejected, AssignmentApproved, HITCreated, HITExpired, HITReviewable, HITExtended, HITDisposed, Ping
-    #         },
-    #         active: false,
-    #       }
-    #
     # @!attribute [rw] hit_type_id
     #   The ID of the HIT type whose notification specification is being
     #   updated.
@@ -3139,21 +2596,6 @@ module Aws::MTurk
     #
     class UpdateNotificationSettingsResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateQualificationTypeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         qualification_type_id: "EntityId", # required
-    #         description: "String",
-    #         qualification_type_status: "Active", # accepts Active, Inactive
-    #         test: "String",
-    #         answer_key: "String",
-    #         test_duration_in_seconds: 1,
-    #         retry_delay_in_seconds: 1,
-    #         auto_granted: false,
-    #         auto_granted_value: 1,
-    #       }
-    #
     # @!attribute [rw] qualification_type_id
     #   The ID of the Qualification type to update.
     #   @return [String]

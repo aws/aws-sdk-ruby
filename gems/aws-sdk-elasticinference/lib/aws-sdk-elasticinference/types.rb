@@ -78,14 +78,6 @@ module Aws::ElasticInference
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAcceleratorOfferingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         location_type: "region", # required, accepts region, availability-zone, availability-zone-id
-    #         accelerator_types: ["AcceleratorTypeName"],
-    #       }
-    #
     # @!attribute [rw] location_type
     #   The location type that you want to describe accelerator type
     #   offerings for. It can assume the following values: region: will
@@ -121,8 +113,6 @@ module Aws::ElasticInference
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elastic-inference-2017-07-25/DescribeAcceleratorTypesRequest AWS API Documentation
     #
     class DescribeAcceleratorTypesRequest < Aws::EmptyStructure; end
@@ -139,21 +129,6 @@ module Aws::ElasticInference
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAcceleratorsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         accelerator_ids: ["AcceleratorId"],
-    #         filters: [
-    #           {
-    #             name: "FilterName",
-    #             values: ["String"],
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] accelerator_ids
     #   The IDs of the accelerators to describe.
     #   @return [Array<String>]
@@ -260,14 +235,6 @@ module Aws::ElasticInference
 
     # A filter expression for the Elastic Inference Accelerator list.
     #
-    # @note When making an API call, you may pass Filter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "FilterName",
-    #         values: ["String"],
-    #       }
-    #
     # @!attribute [rw] name
     #   The filter name for the Elastic Inference Accelerator list. It can
     #   assume the following values: accelerator-type: the type of Elastic
@@ -323,13 +290,6 @@ module Aws::ElasticInference
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceARN", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the Elastic Inference Accelerator to list the tags for.
     #   @return [String]
@@ -381,16 +341,6 @@ module Aws::ElasticInference
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceARN", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the Elastic Inference Accelerator to tag.
     #   @return [String]
@@ -412,14 +362,6 @@ module Aws::ElasticInference
     #
     class TagResourceResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceARN", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the Elastic Inference Accelerator to untag.
     #   @return [String]

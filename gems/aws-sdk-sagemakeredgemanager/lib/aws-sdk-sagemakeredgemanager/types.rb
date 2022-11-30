@@ -56,20 +56,6 @@ module Aws::SagemakerEdgeManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeploymentModel
-    #   data as a hash:
-    #
-    #       {
-    #         model_handle: "EntityName",
-    #         model_name: "ModelName",
-    #         model_version: "Version",
-    #         desired_state: "DEPLOY", # accepts DEPLOY, UNDEPLOY
-    #         state: "DEPLOY", # accepts DEPLOY, UNDEPLOY
-    #         status: "SUCCESS", # accepts SUCCESS, FAIL
-    #         status_reason: "String",
-    #         rollback_failure_reason: "String",
-    #       }
-    #
     # @!attribute [rw] model_handle
     #   The unique handle of the model.
     #   @return [String]
@@ -119,29 +105,6 @@ module Aws::SagemakerEdgeManager
 
     # Information about the result of a deployment on an edge device that is
     # registered with SageMaker Edge Manager.
-    #
-    # @note When making an API call, you may pass DeploymentResult
-    #   data as a hash:
-    #
-    #       {
-    #         deployment_name: "EntityName",
-    #         deployment_status: "EntityName",
-    #         deployment_status_message: "String",
-    #         deployment_start_time: Time.now,
-    #         deployment_end_time: Time.now,
-    #         deployment_models: [
-    #           {
-    #             model_handle: "EntityName",
-    #             model_name: "ModelName",
-    #             model_version: "Version",
-    #             desired_state: "DEPLOY", # accepts DEPLOY, UNDEPLOY
-    #             state: "DEPLOY", # accepts DEPLOY, UNDEPLOY
-    #             status: "SUCCESS", # accepts SUCCESS, FAIL
-    #             status_reason: "String",
-    #             rollback_failure_reason: "String",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] deployment_name
     #   The name and unique ID of the deployment.
@@ -214,16 +177,6 @@ module Aws::SagemakerEdgeManager
 
     # Information required for edge device metrics.
     #
-    # @note When making an API call, you may pass EdgeMetric
-    #   data as a hash:
-    #
-    #       {
-    #         dimension: "Dimension",
-    #         metric_name: "Metric",
-    #         value: 1.0,
-    #         timestamp: Time.now,
-    #       }
-    #
     # @!attribute [rw] dimension
     #   The dimension of metrics published.
     #   @return [String]
@@ -251,14 +204,6 @@ module Aws::SagemakerEdgeManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDeploymentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_name: "DeviceName", # required
-    #         device_fleet_name: "DeviceFleetName", # required
-    #       }
-    #
     # @!attribute [rw] device_name
     #   The unique name of the device you want to get the configuration of
     #   active deployments from.
@@ -290,14 +235,6 @@ module Aws::SagemakerEdgeManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDeviceRegistrationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_name: "DeviceName", # required
-    #         device_fleet_name: "DeviceFleetName", # required
-    #       }
-    #
     # @!attribute [rw] device_name
     #   The unique name of the device you want to get the registration
     #   status from.
@@ -352,24 +289,6 @@ module Aws::SagemakerEdgeManager
     # Information about a model deployed on an edge device that is
     # registered with SageMaker Edge Manager.
     #
-    # @note When making an API call, you may pass Model
-    #   data as a hash:
-    #
-    #       {
-    #         model_name: "ModelName",
-    #         model_version: "Version",
-    #         latest_sample_time: Time.now,
-    #         latest_inference: Time.now,
-    #         model_metrics: [
-    #           {
-    #             dimension: "Dimension",
-    #             metric_name: "Metric",
-    #             value: 1.0,
-    #             timestamp: Time.now,
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] model_name
     #   The name of the model.
     #   @return [String]
@@ -402,58 +321,6 @@ module Aws::SagemakerEdgeManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SendHeartbeatRequest
-    #   data as a hash:
-    #
-    #       {
-    #         agent_metrics: [
-    #           {
-    #             dimension: "Dimension",
-    #             metric_name: "Metric",
-    #             value: 1.0,
-    #             timestamp: Time.now,
-    #           },
-    #         ],
-    #         models: [
-    #           {
-    #             model_name: "ModelName",
-    #             model_version: "Version",
-    #             latest_sample_time: Time.now,
-    #             latest_inference: Time.now,
-    #             model_metrics: [
-    #               {
-    #                 dimension: "Dimension",
-    #                 metric_name: "Metric",
-    #                 value: 1.0,
-    #                 timestamp: Time.now,
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         agent_version: "Version", # required
-    #         device_name: "DeviceName", # required
-    #         device_fleet_name: "DeviceFleetName", # required
-    #         deployment_result: {
-    #           deployment_name: "EntityName",
-    #           deployment_status: "EntityName",
-    #           deployment_status_message: "String",
-    #           deployment_start_time: Time.now,
-    #           deployment_end_time: Time.now,
-    #           deployment_models: [
-    #             {
-    #               model_handle: "EntityName",
-    #               model_name: "ModelName",
-    #               model_version: "Version",
-    #               desired_state: "DEPLOY", # accepts DEPLOY, UNDEPLOY
-    #               state: "DEPLOY", # accepts DEPLOY, UNDEPLOY
-    #               status: "SUCCESS", # accepts SUCCESS, FAIL
-    #               status_reason: "String",
-    #               rollback_failure_reason: "String",
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] agent_metrics
     #   For internal use. Returns a list of SageMaker Edge Manager agent
     #   operating metrics.

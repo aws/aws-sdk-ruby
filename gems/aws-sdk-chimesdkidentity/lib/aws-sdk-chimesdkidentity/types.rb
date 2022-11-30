@@ -86,15 +86,6 @@ module Aws::ChimeSDKIdentity
 
     # The details of the data-retention settings for an `AppInstance`.
     #
-    # @note When making an API call, you may pass AppInstanceRetentionSettings
-    #   data as a hash:
-    #
-    #       {
-    #         channel_retention_settings: {
-    #           retention_days: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] channel_retention_settings
     #   The length of time in days to retain the messages in a channel.
     #   @return [Types::ChannelRetentionSettings]
@@ -331,13 +322,6 @@ module Aws::ChimeSDKIdentity
 
     # The details of the retention settings for a channel.
     #
-    # @note When making an API call, you may pass ChannelRetentionSettings
-    #   data as a hash:
-    #
-    #       {
-    #         retention_days: 1,
-    #       }
-    #
     # @!attribute [rw] retention_days
     #   The time in days to retain the messages in a channel.
     #   @return [Integer]
@@ -368,14 +352,6 @@ module Aws::ChimeSDKIdentity
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAppInstanceAdminRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_instance_admin_arn: "ChimeArn", # required
-    #         app_instance_arn: "ChimeArn", # required
-    #       }
-    #
     # @!attribute [rw] app_instance_admin_arn
     #   The ARN of the administrator of the current `AppInstance`.
     #   @return [String]
@@ -410,21 +386,6 @@ module Aws::ChimeSDKIdentity
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAppInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "NonEmptyResourceName", # required
-    #         metadata: "Metadata",
-    #         client_request_token: "ClientRequestToken", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the `AppInstance`.
     #   @return [String]
@@ -467,23 +428,6 @@ module Aws::ChimeSDKIdentity
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAppInstanceUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_instance_arn: "ChimeArn", # required
-    #         app_instance_user_id: "UserId", # required
-    #         name: "UserName", # required
-    #         metadata: "Metadata",
-    #         client_request_token: "ClientRequestToken", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] app_instance_arn
     #   The ARN of the `AppInstance` request.
     #   @return [String]
@@ -536,14 +480,6 @@ module Aws::ChimeSDKIdentity
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAppInstanceAdminRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_instance_admin_arn: "ChimeArn", # required
-    #         app_instance_arn: "ChimeArn", # required
-    #       }
-    #
     # @!attribute [rw] app_instance_admin_arn
     #   The ARN of the `AppInstance`'s administrator.
     #   @return [String]
@@ -561,13 +497,6 @@ module Aws::ChimeSDKIdentity
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAppInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_instance_arn: "ChimeArn", # required
-    #       }
-    #
     # @!attribute [rw] app_instance_arn
     #   The ARN of the `AppInstance`.
     #   @return [String]
@@ -580,13 +509,6 @@ module Aws::ChimeSDKIdentity
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAppInstanceUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_instance_user_arn: "ChimeArn", # required
-    #       }
-    #
     # @!attribute [rw] app_instance_user_arn
     #   The ARN of the user request being deleted.
     #   @return [String]
@@ -599,14 +521,6 @@ module Aws::ChimeSDKIdentity
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeregisterAppInstanceUserEndpointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_instance_user_arn: "SensitiveChimeArn", # required
-    #         endpoint_id: "SensitiveString64", # required
-    #       }
-    #
     # @!attribute [rw] app_instance_user_arn
     #   The ARN of the `AppInstanceUser`.
     #   @return [String]
@@ -624,14 +538,6 @@ module Aws::ChimeSDKIdentity
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAppInstanceAdminRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_instance_admin_arn: "ChimeArn", # required
-    #         app_instance_arn: "ChimeArn", # required
-    #       }
-    #
     # @!attribute [rw] app_instance_admin_arn
     #   The ARN of the `AppInstanceAdmin`.
     #   @return [String]
@@ -663,13 +569,6 @@ module Aws::ChimeSDKIdentity
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAppInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_instance_arn: "ChimeArn", # required
-    #       }
-    #
     # @!attribute [rw] app_instance_arn
     #   The ARN of the `AppInstance`.
     #   @return [String]
@@ -695,14 +594,6 @@ module Aws::ChimeSDKIdentity
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAppInstanceUserEndpointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_instance_user_arn: "SensitiveString1600", # required
-    #         endpoint_id: "SensitiveString64", # required
-    #       }
-    #
     # @!attribute [rw] app_instance_user_arn
     #   The ARN of the `AppInstanceUser`.
     #   @return [String]
@@ -735,13 +626,6 @@ module Aws::ChimeSDKIdentity
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAppInstanceUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_instance_user_arn: "ChimeArn", # required
-    #       }
-    #
     # @!attribute [rw] app_instance_user_arn
     #   The ARN of the `AppInstanceUser`.
     #   @return [String]
@@ -767,14 +651,6 @@ module Aws::ChimeSDKIdentity
     end
 
     # The attributes of an `Endpoint`.
-    #
-    # @note When making an API call, you may pass EndpointAttributes
-    #   data as a hash:
-    #
-    #       {
-    #         device_token: "NonEmptySensitiveString1600", # required
-    #         voip_device_token: "NonEmptySensitiveString1600",
-    #       }
     #
     # @!attribute [rw] device_token
     #   The device token for the GCM, APNS, and APNS\_SANDBOX endpoint
@@ -846,13 +722,6 @@ module Aws::ChimeSDKIdentity
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAppInstanceRetentionSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_instance_arn: "ChimeArn", # required
-    #       }
-    #
     # @!attribute [rw] app_instance_arn
     #   The ARN of the `AppInstance`.
     #   @return [String]
@@ -902,15 +771,6 @@ module Aws::ChimeSDKIdentity
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAppInstanceAdminsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_instance_arn: "ChimeArn", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] app_instance_arn
     #   The ARN of the `AppInstance`.
     #   @return [String]
@@ -957,15 +817,6 @@ module Aws::ChimeSDKIdentity
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAppInstanceUserEndpointsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_instance_user_arn: "SensitiveChimeArn", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] app_instance_user_arn
     #   The ARN of the `AppInstanceUser`.
     #   @return [String]
@@ -1007,15 +858,6 @@ module Aws::ChimeSDKIdentity
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAppInstanceUsersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_instance_arn: "ChimeArn", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] app_instance_arn
     #   The ARN of the `AppInstance`.
     #   @return [String]
@@ -1062,14 +904,6 @@ module Aws::ChimeSDKIdentity
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAppInstancesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of `AppInstance`s that you want to return.
     #   @return [Integer]
@@ -1106,13 +940,6 @@ module Aws::ChimeSDKIdentity
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ChimeArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource.
     #   @return [String]
@@ -1137,18 +964,6 @@ module Aws::ChimeSDKIdentity
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutAppInstanceRetentionSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_instance_arn: "ChimeArn", # required
-    #         app_instance_retention_settings: { # required
-    #           channel_retention_settings: {
-    #             retention_days: 1,
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] app_instance_arn
     #   The ARN of the `AppInstance`.
     #   @return [String]
@@ -1183,22 +998,6 @@ module Aws::ChimeSDKIdentity
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RegisterAppInstanceUserEndpointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_instance_user_arn: "SensitiveChimeArn", # required
-    #         name: "SensitiveString1600",
-    #         type: "APNS", # required, accepts APNS, APNS_SANDBOX, GCM
-    #         resource_arn: "SensitiveChimeArn", # required
-    #         endpoint_attributes: { # required
-    #           device_token: "NonEmptySensitiveString1600", # required
-    #           voip_device_token: "NonEmptySensitiveString1600",
-    #         },
-    #         client_request_token: "ClientRequestToken", # required
-    #         allow_messages: "ALL", # accepts ALL, NONE
-    #       }
-    #
     # @!attribute [rw] app_instance_user_arn
     #   The ARN of the `AppInstanceUser`.
     #   @return [String]
@@ -1325,14 +1124,6 @@ module Aws::ChimeSDKIdentity
 
     # A tag object containing a key-value pair.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The key in a tag.
     #   @return [String]
@@ -1350,19 +1141,6 @@ module Aws::ChimeSDKIdentity
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ChimeArn", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The resource ARN.
     #   @return [String]
@@ -1414,14 +1192,6 @@ module Aws::ChimeSDKIdentity
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ChimeArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The resource ARN.
     #   @return [String]
@@ -1439,15 +1209,6 @@ module Aws::ChimeSDKIdentity
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateAppInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_instance_arn: "ChimeArn", # required
-    #         name: "NonEmptyResourceName", # required
-    #         metadata: "Metadata", # required
-    #       }
-    #
     # @!attribute [rw] app_instance_arn
     #   The ARN of the `AppInstance`.
     #   @return [String]
@@ -1482,16 +1243,6 @@ module Aws::ChimeSDKIdentity
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateAppInstanceUserEndpointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_instance_user_arn: "SensitiveChimeArn", # required
-    #         endpoint_id: "SensitiveString64", # required
-    #         name: "SensitiveString1600",
-    #         allow_messages: "ALL", # accepts ALL, NONE
-    #       }
-    #
     # @!attribute [rw] app_instance_user_arn
     #   The ARN of the `AppInstanceUser`.
     #   @return [String]
@@ -1539,15 +1290,6 @@ module Aws::ChimeSDKIdentity
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateAppInstanceUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_instance_user_arn: "ChimeArn", # required
-    #         name: "UserName", # required
-    #         metadata: "Metadata", # required
-    #       }
-    #
     # @!attribute [rw] app_instance_user_arn
     #   The ARN of the `AppInstanceUser`.
     #   @return [String]

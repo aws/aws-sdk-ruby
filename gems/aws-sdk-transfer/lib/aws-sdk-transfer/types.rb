@@ -27,20 +27,6 @@ module Aws::Transfer
     # used for AS2 outbound processes, to connect the Transfer Family
     # customer with the trading partner.
     #
-    # @note When making an API call, you may pass As2ConnectorConfig
-    #   data as a hash:
-    #
-    #       {
-    #         local_profile_id: "ProfileId",
-    #         partner_profile_id: "ProfileId",
-    #         message_subject: "MessageSubject",
-    #         compression: "ZLIB", # accepts ZLIB, DISABLED
-    #         encryption_algorithm: "AES128_CBC", # accepts AES128_CBC, AES192_CBC, AES256_CBC, NONE
-    #         signing_algorithm: "SHA256", # accepts SHA256, SHA384, SHA512, SHA1, NONE
-    #         mdn_signing_algorithm: "SHA256", # accepts SHA256, SHA384, SHA512, SHA1, NONE, DEFAULT
-    #         mdn_response: "SYNC", # accepts SYNC, NONE
-    #       }
-    #
     # @!attribute [rw] local_profile_id
     #   A unique identifier for the AS2 local profile.
     #   @return [String]
@@ -125,25 +111,6 @@ module Aws::Transfer
 
     # Each step type has its own `StepDetails` structure.
     #
-    # @note When making an API call, you may pass CopyStepDetails
-    #   data as a hash:
-    #
-    #       {
-    #         name: "WorkflowStepName",
-    #         destination_file_location: {
-    #           s3_file_location: {
-    #             bucket: "S3Bucket",
-    #             key: "S3Key",
-    #           },
-    #           efs_file_location: {
-    #             file_system_id: "EfsFileSystemId",
-    #             path: "EfsPath",
-    #           },
-    #         },
-    #         overwrite_existing: "TRUE", # accepts TRUE, FALSE
-    #         source_file_location: "SourceFileLocation",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the step, used as an identifier.
     #   @return [String]
@@ -183,29 +150,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAccessRequest
-    #   data as a hash:
-    #
-    #       {
-    #         home_directory: "HomeDirectory",
-    #         home_directory_type: "PATH", # accepts PATH, LOGICAL
-    #         home_directory_mappings: [
-    #           {
-    #             entry: "MapEntry", # required
-    #             target: "MapTarget", # required
-    #           },
-    #         ],
-    #         policy: "Policy",
-    #         posix_profile: {
-    #           uid: 1, # required
-    #           gid: 1, # required
-    #           secondary_gids: [1],
-    #         },
-    #         role: "Role", # required
-    #         server_id: "ServerId", # required
-    #         external_id: "ExternalId", # required
-    #       }
-    #
     # @!attribute [rw] home_directory
     #   The landing directory (folder) for a user when they log in to the
     #   server using the client.
@@ -356,25 +300,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAgreementRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "Description",
-    #         server_id: "ServerId", # required
-    #         local_profile_id: "ProfileId", # required
-    #         partner_profile_id: "ProfileId", # required
-    #         base_directory: "HomeDirectory", # required
-    #         access_role: "Role", # required
-    #         status: "ACTIVE", # accepts ACTIVE, INACTIVE
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] description
     #   A name or short description to identify the agreement.
     #   @return [String]
@@ -453,31 +378,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateConnectorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         url: "Url", # required
-    #         as_2_config: { # required
-    #           local_profile_id: "ProfileId",
-    #           partner_profile_id: "ProfileId",
-    #           message_subject: "MessageSubject",
-    #           compression: "ZLIB", # accepts ZLIB, DISABLED
-    #           encryption_algorithm: "AES128_CBC", # accepts AES128_CBC, AES192_CBC, AES256_CBC, NONE
-    #           signing_algorithm: "SHA256", # accepts SHA256, SHA384, SHA512, SHA1, NONE
-    #           mdn_signing_algorithm: "SHA256", # accepts SHA256, SHA384, SHA512, SHA1, NONE, DEFAULT
-    #           mdn_response: "SYNC", # accepts SYNC, NONE
-    #         },
-    #         access_role: "Role", # required
-    #         logging_role: "Role",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] url
     #   The URL of the partner's AS2 endpoint.
     #   @return [String]
@@ -538,21 +438,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         as_2_id: "As2Id", # required
-    #         profile_type: "LOCAL", # required, accepts LOCAL, PARTNER
-    #         certificate_ids: ["CertificateId"],
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] as_2_id
     #   The `As2Id` is the *AS2-name*, as defined in the [RFC 4130][1]. For
     #   inbound transfers, this is the `AS2-From` header for the AS2
@@ -610,61 +495,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateServerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         certificate: "Certificate",
-    #         domain: "S3", # accepts S3, EFS
-    #         endpoint_details: {
-    #           address_allocation_ids: ["AddressAllocationId"],
-    #           subnet_ids: ["SubnetId"],
-    #           vpc_endpoint_id: "VpcEndpointId",
-    #           vpc_id: "VpcId",
-    #           security_group_ids: ["SecurityGroupId"],
-    #         },
-    #         endpoint_type: "PUBLIC", # accepts PUBLIC, VPC, VPC_ENDPOINT
-    #         host_key: "HostKey",
-    #         identity_provider_details: {
-    #           url: "Url",
-    #           invocation_role: "Role",
-    #           directory_id: "DirectoryId",
-    #           function: "Function",
-    #         },
-    #         identity_provider_type: "SERVICE_MANAGED", # accepts SERVICE_MANAGED, API_GATEWAY, AWS_DIRECTORY_SERVICE, AWS_LAMBDA
-    #         logging_role: "Role",
-    #         post_authentication_login_banner: "PostAuthenticationLoginBanner",
-    #         pre_authentication_login_banner: "PreAuthenticationLoginBanner",
-    #         protocols: ["SFTP"], # accepts SFTP, FTP, FTPS, AS2
-    #         protocol_details: {
-    #           passive_ip: "PassiveIp",
-    #           tls_session_resumption_mode: "DISABLED", # accepts DISABLED, ENABLED, ENFORCED
-    #           set_stat_option: "DEFAULT", # accepts DEFAULT, ENABLE_NO_OP
-    #           as_2_transports: ["HTTP"], # accepts HTTP
-    #         },
-    #         security_policy_name: "SecurityPolicyName",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         workflow_details: {
-    #           on_upload: [
-    #             {
-    #               workflow_id: "WorkflowId", # required
-    #               execution_role: "Role", # required
-    #             },
-    #           ],
-    #           on_partial_upload: [
-    #             {
-    #               workflow_id: "WorkflowId", # required
-    #               execution_role: "Role", # required
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] certificate
     #   The Amazon Resource Name (ARN) of the Certificate Manager (ACM)
     #   certificate. Required when `Protocols` is set to `FTPS`.
@@ -969,36 +799,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         home_directory: "HomeDirectory",
-    #         home_directory_type: "PATH", # accepts PATH, LOGICAL
-    #         home_directory_mappings: [
-    #           {
-    #             entry: "MapEntry", # required
-    #             target: "MapTarget", # required
-    #           },
-    #         ],
-    #         policy: "Policy",
-    #         posix_profile: {
-    #           uid: 1, # required
-    #           gid: 1, # required
-    #           secondary_gids: [1],
-    #         },
-    #         role: "Role", # required
-    #         server_id: "ServerId", # required
-    #         ssh_public_key_body: "SshPublicKeyBody",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         user_name: "UserName", # required
-    #       }
-    #
     # @!attribute [rw] home_directory
     #   The landing directory (folder) for a user when they log in to the
     #   server using the client.
@@ -1162,99 +962,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateWorkflowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "WorkflowDescription",
-    #         steps: [ # required
-    #           {
-    #             type: "COPY", # accepts COPY, CUSTOM, TAG, DELETE
-    #             copy_step_details: {
-    #               name: "WorkflowStepName",
-    #               destination_file_location: {
-    #                 s3_file_location: {
-    #                   bucket: "S3Bucket",
-    #                   key: "S3Key",
-    #                 },
-    #                 efs_file_location: {
-    #                   file_system_id: "EfsFileSystemId",
-    #                   path: "EfsPath",
-    #                 },
-    #               },
-    #               overwrite_existing: "TRUE", # accepts TRUE, FALSE
-    #               source_file_location: "SourceFileLocation",
-    #             },
-    #             custom_step_details: {
-    #               name: "WorkflowStepName",
-    #               target: "CustomStepTarget",
-    #               timeout_seconds: 1,
-    #               source_file_location: "SourceFileLocation",
-    #             },
-    #             delete_step_details: {
-    #               name: "WorkflowStepName",
-    #               source_file_location: "SourceFileLocation",
-    #             },
-    #             tag_step_details: {
-    #               name: "WorkflowStepName",
-    #               tags: [
-    #                 {
-    #                   key: "S3TagKey", # required
-    #                   value: "S3TagValue", # required
-    #                 },
-    #               ],
-    #               source_file_location: "SourceFileLocation",
-    #             },
-    #           },
-    #         ],
-    #         on_exception_steps: [
-    #           {
-    #             type: "COPY", # accepts COPY, CUSTOM, TAG, DELETE
-    #             copy_step_details: {
-    #               name: "WorkflowStepName",
-    #               destination_file_location: {
-    #                 s3_file_location: {
-    #                   bucket: "S3Bucket",
-    #                   key: "S3Key",
-    #                 },
-    #                 efs_file_location: {
-    #                   file_system_id: "EfsFileSystemId",
-    #                   path: "EfsPath",
-    #                 },
-    #               },
-    #               overwrite_existing: "TRUE", # accepts TRUE, FALSE
-    #               source_file_location: "SourceFileLocation",
-    #             },
-    #             custom_step_details: {
-    #               name: "WorkflowStepName",
-    #               target: "CustomStepTarget",
-    #               timeout_seconds: 1,
-    #               source_file_location: "SourceFileLocation",
-    #             },
-    #             delete_step_details: {
-    #               name: "WorkflowStepName",
-    #               source_file_location: "SourceFileLocation",
-    #             },
-    #             tag_step_details: {
-    #               name: "WorkflowStepName",
-    #               tags: [
-    #                 {
-    #                   key: "S3TagKey", # required
-    #                   value: "S3TagValue", # required
-    #                 },
-    #               ],
-    #               source_file_location: "SourceFileLocation",
-    #             },
-    #           },
-    #         ],
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] description
     #   A textual description for the workflow.
     #   @return [String]
@@ -1324,16 +1031,6 @@ module Aws::Transfer
 
     # Each step type has its own `StepDetails` structure.
     #
-    # @note When making an API call, you may pass CustomStepDetails
-    #   data as a hash:
-    #
-    #       {
-    #         name: "WorkflowStepName",
-    #         target: "CustomStepTarget",
-    #         timeout_seconds: 1,
-    #         source_file_location: "SourceFileLocation",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the step, used as an identifier.
     #   @return [String]
@@ -1370,14 +1067,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAccessRequest
-    #   data as a hash:
-    #
-    #       {
-    #         server_id: "ServerId", # required
-    #         external_id: "ExternalId", # required
-    #       }
-    #
     # @!attribute [rw] server_id
     #   A system-assigned unique identifier for a server that has this user
     #   assigned.
@@ -1412,14 +1101,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAgreementRequest
-    #   data as a hash:
-    #
-    #       {
-    #         agreement_id: "AgreementId", # required
-    #         server_id: "ServerId", # required
-    #       }
-    #
     # @!attribute [rw] agreement_id
     #   A unique identifier for the agreement. This identifier is returned
     #   when you create an agreement.
@@ -1439,13 +1120,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteCertificateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_id: "CertificateId", # required
-    #       }
-    #
     # @!attribute [rw] certificate_id
     #   The identifier of the certificate object that you are deleting.
     #   @return [String]
@@ -1458,13 +1132,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteConnectorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connector_id: "ConnectorId", # required
-    #       }
-    #
     # @!attribute [rw] connector_id
     #   The unique identifier for the connector.
     #   @return [String]
@@ -1477,14 +1144,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteHostKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         server_id: "ServerId", # required
-    #         host_key_id: "HostKeyId", # required
-    #       }
-    #
     # @!attribute [rw] server_id
     #   The identifier of the server that contains the host key that you are
     #   deleting.
@@ -1503,13 +1162,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         profile_id: "ProfileId", # required
-    #       }
-    #
     # @!attribute [rw] profile_id
     #   The identifier of the profile that you are deleting.
     #   @return [String]
@@ -1522,13 +1174,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteServerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         server_id: "ServerId", # required
-    #       }
-    #
     # @!attribute [rw] server_id
     #   A unique system-assigned identifier for a server instance.
     #   @return [String]
@@ -1541,15 +1186,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteSshPublicKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         server_id: "ServerId", # required
-    #         ssh_public_key_id: "SshPublicKeyId", # required
-    #         user_name: "UserName", # required
-    #       }
-    #
     # @!attribute [rw] server_id
     #   A system-assigned unique identifier for a file transfer
     #   protocol-enabled server instance that has the user assigned to it.
@@ -1575,14 +1211,6 @@ module Aws::Transfer
     end
 
     # The name of the step, used to identify the delete step.
-    #
-    # @note When making an API call, you may pass DeleteStepDetails
-    #   data as a hash:
-    #
-    #       {
-    #         name: "WorkflowStepName",
-    #         source_file_location: "SourceFileLocation",
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the step, used as an identifier.
@@ -1610,14 +1238,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         server_id: "ServerId", # required
-    #         user_name: "UserName", # required
-    #       }
-    #
     # @!attribute [rw] server_id
     #   A system-assigned unique identifier for a server instance that has
     #   the user assigned to it.
@@ -1637,13 +1257,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteWorkflowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workflow_id: "WorkflowId", # required
-    #       }
-    #
     # @!attribute [rw] workflow_id
     #   A unique identifier for the workflow.
     #   @return [String]
@@ -1656,14 +1269,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAccessRequest
-    #   data as a hash:
-    #
-    #       {
-    #         server_id: "ServerId", # required
-    #         external_id: "ExternalId", # required
-    #       }
-    #
     # @!attribute [rw] server_id
     #   A system-assigned unique identifier for a server that has this
     #   access assigned.
@@ -1717,14 +1322,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAgreementRequest
-    #   data as a hash:
-    #
-    #       {
-    #         agreement_id: "AgreementId", # required
-    #         server_id: "ServerId", # required
-    #       }
-    #
     # @!attribute [rw] agreement_id
     #   A unique identifier for the agreement. This identifier is returned
     #   when you create an agreement.
@@ -1756,13 +1353,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeCertificateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_id: "CertificateId", # required
-    #       }
-    #
     # @!attribute [rw] certificate_id
     #   An array of identifiers for the imported certificates. You use this
     #   identifier for working with profiles and partner profiles.
@@ -1788,13 +1378,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeConnectorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connector_id: "ConnectorId", # required
-    #       }
-    #
     # @!attribute [rw] connector_id
     #   The unique identifier for the connector.
     #   @return [String]
@@ -1819,14 +1402,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeExecutionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         execution_id: "ExecutionId", # required
-    #         workflow_id: "WorkflowId", # required
-    #       }
-    #
     # @!attribute [rw] execution_id
     #   A unique identifier for the execution of a workflow.
     #   @return [String]
@@ -1861,14 +1436,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeHostKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         server_id: "ServerId", # required
-    #         host_key_id: "HostKeyId", # required
-    #       }
-    #
     # @!attribute [rw] server_id
     #   The identifier of the server that contains the host key that you
     #   want described.
@@ -1899,13 +1466,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         profile_id: "ProfileId", # required
-    #       }
-    #
     # @!attribute [rw] profile_id
     #   The identifier of the profile that you want described.
     #   @return [String]
@@ -1930,13 +1490,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeSecurityPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         security_policy_name: "SecurityPolicyName", # required
-    #       }
-    #
     # @!attribute [rw] security_policy_name
     #   Specifies the name of the security policy that is attached to the
     #   server.
@@ -1962,13 +1515,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeServerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         server_id: "ServerId", # required
-    #       }
-    #
     # @!attribute [rw] server_id
     #   A system-assigned unique identifier for a server.
     #   @return [String]
@@ -1994,14 +1540,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         server_id: "ServerId", # required
-    #         user_name: "UserName", # required
-    #       }
-    #
     # @!attribute [rw] server_id
     #   A system-assigned unique identifier for a server that has this user
     #   assigned.
@@ -2041,13 +1579,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeWorkflowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workflow_id: "WorkflowId", # required
-    #       }
-    #
     # @!attribute [rw] workflow_id
     #   A unique identifier for the workflow.
     #   @return [String]
@@ -2986,14 +2517,6 @@ module Aws::Transfer
 
     # Reserved for future use.
     #
-    # @note When making an API call, you may pass EfsFileLocation
-    #   data as a hash:
-    #
-    #       {
-    #         file_system_id: "EfsFileSystemId",
-    #         path: "EfsPath",
-    #       }
-    #
     # @!attribute [rw] file_system_id
     #   The identifier of the file system, assigned by Amazon EFS.
     #   @return [String]
@@ -3028,17 +2551,6 @@ module Aws::Transfer
     # https://docs.aws.amazon.com/transfer/latest/userguide/create-server-in-vpc.html#deprecate-vpc-endpoint.
     #
     #  </note>
-    #
-    # @note When making an API call, you may pass EndpointDetails
-    #   data as a hash:
-    #
-    #       {
-    #         address_allocation_ids: ["AddressAllocationId"],
-    #         subnet_ids: ["SubnetId"],
-    #         vpc_endpoint_id: "VpcEndpointId",
-    #         vpc_id: "VpcId",
-    #         security_group_ids: ["SecurityGroupId"],
-    #       }
     #
     # @!attribute [rw] address_allocation_ids
     #   A list of address allocation IDs that are required to attach an
@@ -3249,14 +2761,6 @@ module Aws::Transfer
     #
     # `[ \{ "Entry": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
     #
-    # @note When making an API call, you may pass HomeDirectoryMapEntry
-    #   data as a hash:
-    #
-    #       {
-    #         entry: "MapEntry", # required
-    #         target: "MapTarget", # required
-    #       }
-    #
     # @!attribute [rw] entry
     #   Represents an entry for `HomeDirectoryMappings`.
     #   @return [String]
@@ -3277,16 +2781,6 @@ module Aws::Transfer
     # Returns information related to the type of user authentication that is
     # in use for a file transfer protocol-enabled server's users. A server
     # can have only one method of authentication.
-    #
-    # @note When making an API call, you may pass IdentityProviderDetails
-    #   data as a hash:
-    #
-    #       {
-    #         url: "Url",
-    #         invocation_role: "Role",
-    #         directory_id: "DirectoryId",
-    #         function: "Function",
-    #       }
     #
     # @!attribute [rw] url
     #   Provides the location of the service endpoint used to authenticate
@@ -3318,25 +2812,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ImportCertificateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         usage: "SIGNING", # required, accepts SIGNING, ENCRYPTION
-    #         certificate: "CertificateBodyType", # required
-    #         certificate_chain: "CertificateChainType",
-    #         private_key: "PrivateKeyType",
-    #         active_date: Time.now,
-    #         inactive_date: Time.now,
-    #         description: "Description",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] usage
     #   Specifies whether this certificate is used for signing or
     #   encryption.
@@ -3402,21 +2877,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ImportHostKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         server_id: "ServerId", # required
-    #         host_key_body: "HostKey", # required
-    #         description: "HostKeyDescription",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] server_id
     #   The identifier of the server that contains the host key that you are
     #   importing.
@@ -3464,15 +2924,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ImportSshPublicKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         server_id: "ServerId", # required
-    #         ssh_public_key_body: "SshPublicKeyBody", # required
-    #         user_name: "UserName", # required
-    #       }
-    #
     # @!attribute [rw] server_id
     #   A system-assigned unique identifier for a server.
     #   @return [String]
@@ -3526,20 +2977,6 @@ module Aws::Transfer
 
     # Specifies the location for the file being copied. Only applicable for
     # the Copy type of workflow steps.
-    #
-    # @note When making an API call, you may pass InputFileLocation
-    #   data as a hash:
-    #
-    #       {
-    #         s3_file_location: {
-    #           bucket: "S3Bucket",
-    #           key: "S3Key",
-    #         },
-    #         efs_file_location: {
-    #           file_system_id: "EfsFileSystemId",
-    #           path: "EfsPath",
-    #         },
-    #       }
     #
     # @!attribute [rw] s3_file_location
     #   Specifies the details for the S3 file being copied.
@@ -3598,15 +3035,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAccessesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         server_id: "ServerId", # required
-    #       }
-    #
     # @!attribute [rw] max_results
     #   Specifies the maximum number of access SIDs to return.
     #   @return [Integer]
@@ -3660,15 +3088,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAgreementsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         server_id: "ServerId", # required
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of agreements to return.
     #   @return [Integer]
@@ -3714,14 +3133,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCertificatesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of certificates to return.
     #   @return [Integer]
@@ -3761,14 +3172,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListConnectorsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of connectors to return.
     #   @return [Integer]
@@ -3808,15 +3211,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListExecutionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         workflow_id: "WorkflowId", # required
-    #       }
-    #
     # @!attribute [rw] max_results
     #   Specifies the maximum number of executions to return.
     #   @return [Integer]
@@ -3894,15 +3288,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListHostKeysRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         server_id: "ServerId", # required
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of host keys to return.
     #   @return [Integer]
@@ -3952,15 +3337,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListProfilesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         profile_type: "LOCAL", # accepts LOCAL, PARTNER
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of profiles to return.
     #   @return [Integer]
@@ -4005,14 +3381,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSecurityPoliciesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   Specifies the number of security policies to return as a response to
     #   the `ListSecurityPolicies` query.
@@ -4054,14 +3422,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListServersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   Specifies the number of servers to return as a response to the
     #   `ListServers` query.
@@ -4103,15 +3463,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "Arn", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] arn
     #   Requests the tags associated with a particular Amazon Resource Name
     #   (ARN). An ARN is an identifier for a specific Amazon Web Services
@@ -4167,15 +3518,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListUsersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         server_id: "ServerId", # required
-    #       }
-    #
     # @!attribute [rw] max_results
     #   Specifies the number of users to return as a response to the
     #   `ListUsers` request.
@@ -4230,14 +3572,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListWorkflowsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   Specifies the maximum number of workflows to return.
     #   @return [Integer]
@@ -4801,15 +4135,6 @@ module Aws::Transfer
     # the level of access your users get when transferring files into and
     # out of your Amazon EFS file systems.
     #
-    # @note When making an API call, you may pass PosixProfile
-    #   data as a hash:
-    #
-    #       {
-    #         uid: 1, # required
-    #         gid: 1, # required
-    #         secondary_gids: [1],
-    #       }
-    #
     # @!attribute [rw] uid
     #   The POSIX user ID used for all EFS operations by this user.
     #   @return [Integer]
@@ -4834,16 +4159,6 @@ module Aws::Transfer
     end
 
     # The protocol settings that are configured for your server.
-    #
-    # @note When making an API call, you may pass ProtocolDetails
-    #   data as a hash:
-    #
-    #       {
-    #         passive_ip: "PassiveIp",
-    #         tls_session_resumption_mode: "DISABLED", # accepts DISABLED, ENABLED, ENFORCED
-    #         set_stat_option: "DEFAULT", # accepts DEFAULT, ENABLE_NO_OP
-    #         as_2_transports: ["HTTP"], # accepts HTTP
-    #       }
     #
     # @!attribute [rw] passive_ip
     #   Indicates passive mode, for FTP and FTPS protocols. Enter a single
@@ -5056,14 +4371,6 @@ module Aws::Transfer
     # `shared-files` folder and named `today`\: each upload overwrites the
     # previous version of the *bob* file.
     #
-    # @note When making an API call, you may pass S3InputFileLocation
-    #   data as a hash:
-    #
-    #       {
-    #         bucket: "S3Bucket",
-    #         key: "S3Key",
-    #       }
-    #
     # @!attribute [rw] bucket
     #   Specifies the S3 bucket for the customer input file.
     #   @return [String]
@@ -5085,14 +4392,6 @@ module Aws::Transfer
     # Specifies the key-value pair that are assigned to a file during the
     # execution of a Tagging step.
     #
-    # @note When making an API call, you may pass S3Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "S3TagKey", # required
-    #         value: "S3TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The name assigned to the tag that you create.
     #   @return [String]
@@ -5110,16 +4409,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SendWorkflowStepStateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workflow_id: "WorkflowId", # required
-    #         execution_id: "ExecutionId", # required
-    #         token: "CallbackToken", # required
-    #         status: "SUCCESS", # required, accepts SUCCESS, FAILURE
-    #       }
-    #
     # @!attribute [rw] workflow_id
     #   A unique identifier for the workflow.
     #   @return [String]
@@ -5216,14 +4505,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartFileTransferRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connector_id: "ConnectorId", # required
-    #         send_file_paths: ["FilePath"], # required
-    #       }
-    #
     # @!attribute [rw] connector_id
     #   The unique identifier for the connector.
     #   @return [String]
@@ -5255,13 +4536,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartServerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         server_id: "ServerId", # required
-    #       }
-    #
     # @!attribute [rw] server_id
     #   A system-assigned unique identifier for a server that you start.
     #   @return [String]
@@ -5274,13 +4548,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopServerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         server_id: "ServerId", # required
-    #       }
-    #
     # @!attribute [rw] server_id
     #   A system-assigned unique identifier for a server that you stopped.
     #   @return [String]
@@ -5300,14 +4567,6 @@ module Aws::Transfer
     # accounting purposes, you might create a tag called `Group` and assign
     # the values `Research` and `Accounting` to that group.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The name assigned to the tag that you create.
     #   @return [String]
@@ -5326,19 +4585,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "Arn", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] arn
     #   An Amazon Resource Name (ARN) for a specific Amazon Web Services
     #   resource, such as a server, user, or role.
@@ -5363,20 +4609,6 @@ module Aws::Transfer
     #
     # The key/value pairs used to tag a file during the execution of a
     # workflow step.
-    #
-    # @note When making an API call, you may pass TagStepDetails
-    #   data as a hash:
-    #
-    #       {
-    #         name: "WorkflowStepName",
-    #         tags: [
-    #           {
-    #             key: "S3TagKey", # required
-    #             value: "S3TagValue", # required
-    #           },
-    #         ],
-    #         source_file_location: "SourceFileLocation",
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the step, used as an identifier.
@@ -5409,17 +4641,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TestIdentityProviderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         server_id: "ServerId", # required
-    #         server_protocol: "SFTP", # accepts SFTP, FTP, FTPS, AS2
-    #         source_ip: "SourceIp",
-    #         user_name: "UserName", # required
-    #         user_password: "UserPassword",
-    #       }
-    #
     # @!attribute [rw] server_id
     #   A system-assigned identifier for a specific server. That server's
     #   user authentication method is tested with a user name and password.
@@ -5506,14 +4727,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "Arn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The value of the resource that will have the tag removed. An Amazon
     #   Resource Name (ARN) is an identifier for a specific Amazon Web
@@ -5535,29 +4748,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateAccessRequest
-    #   data as a hash:
-    #
-    #       {
-    #         home_directory: "HomeDirectory",
-    #         home_directory_type: "PATH", # accepts PATH, LOGICAL
-    #         home_directory_mappings: [
-    #           {
-    #             entry: "MapEntry", # required
-    #             target: "MapTarget", # required
-    #           },
-    #         ],
-    #         policy: "Policy",
-    #         posix_profile: {
-    #           uid: 1, # required
-    #           gid: 1, # required
-    #           secondary_gids: [1],
-    #         },
-    #         role: "Role",
-    #         server_id: "ServerId", # required
-    #         external_id: "ExternalId", # required
-    #       }
-    #
     # @!attribute [rw] home_directory
     #   The landing directory (folder) for a user when they log in to the
     #   server using the client.
@@ -5708,20 +4898,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateAgreementRequest
-    #   data as a hash:
-    #
-    #       {
-    #         agreement_id: "AgreementId", # required
-    #         server_id: "ServerId", # required
-    #         description: "Description",
-    #         status: "ACTIVE", # accepts ACTIVE, INACTIVE
-    #         local_profile_id: "ProfileId",
-    #         partner_profile_id: "ProfileId",
-    #         base_directory: "HomeDirectory",
-    #         access_role: "Role",
-    #       }
-    #
     # @!attribute [rw] agreement_id
     #   A unique identifier for the agreement. This identifier is returned
     #   when you create an agreement.
@@ -5802,16 +4978,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateCertificateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_id: "CertificateId", # required
-    #         active_date: Time.now,
-    #         inactive_date: Time.now,
-    #         description: "Description",
-    #       }
-    #
     # @!attribute [rw] certificate_id
     #   The identifier of the certificate object that you are updating.
     #   @return [String]
@@ -5853,26 +5019,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateConnectorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connector_id: "ConnectorId", # required
-    #         url: "Url",
-    #         as_2_config: {
-    #           local_profile_id: "ProfileId",
-    #           partner_profile_id: "ProfileId",
-    #           message_subject: "MessageSubject",
-    #           compression: "ZLIB", # accepts ZLIB, DISABLED
-    #           encryption_algorithm: "AES128_CBC", # accepts AES128_CBC, AES192_CBC, AES256_CBC, NONE
-    #           signing_algorithm: "SHA256", # accepts SHA256, SHA384, SHA512, SHA1, NONE
-    #           mdn_signing_algorithm: "SHA256", # accepts SHA256, SHA384, SHA512, SHA1, NONE, DEFAULT
-    #           mdn_response: "SYNC", # accepts SYNC, NONE
-    #         },
-    #         access_role: "Role",
-    #         logging_role: "Role",
-    #       }
-    #
     # @!attribute [rw] connector_id
     #   The unique identifier for the connector.
     #   @return [String]
@@ -5932,15 +5078,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateHostKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         server_id: "ServerId", # required
-    #         host_key_id: "HostKeyId", # required
-    #         description: "HostKeyDescription", # required
-    #       }
-    #
     # @!attribute [rw] server_id
     #   The identifier of the server that contains the host key that you are
     #   updating.
@@ -5982,14 +5119,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         profile_id: "ProfileId", # required
-    #         certificate_ids: ["CertificateId"],
-    #       }
-    #
     # @!attribute [rw] profile_id
     #   The identifier of the profile object that you are updating.
     #   @return [String]
@@ -6020,54 +5149,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateServerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         certificate: "Certificate",
-    #         protocol_details: {
-    #           passive_ip: "PassiveIp",
-    #           tls_session_resumption_mode: "DISABLED", # accepts DISABLED, ENABLED, ENFORCED
-    #           set_stat_option: "DEFAULT", # accepts DEFAULT, ENABLE_NO_OP
-    #           as_2_transports: ["HTTP"], # accepts HTTP
-    #         },
-    #         endpoint_details: {
-    #           address_allocation_ids: ["AddressAllocationId"],
-    #           subnet_ids: ["SubnetId"],
-    #           vpc_endpoint_id: "VpcEndpointId",
-    #           vpc_id: "VpcId",
-    #           security_group_ids: ["SecurityGroupId"],
-    #         },
-    #         endpoint_type: "PUBLIC", # accepts PUBLIC, VPC, VPC_ENDPOINT
-    #         host_key: "HostKey",
-    #         identity_provider_details: {
-    #           url: "Url",
-    #           invocation_role: "Role",
-    #           directory_id: "DirectoryId",
-    #           function: "Function",
-    #         },
-    #         logging_role: "NullableRole",
-    #         post_authentication_login_banner: "PostAuthenticationLoginBanner",
-    #         pre_authentication_login_banner: "PreAuthenticationLoginBanner",
-    #         protocols: ["SFTP"], # accepts SFTP, FTP, FTPS, AS2
-    #         security_policy_name: "SecurityPolicyName",
-    #         server_id: "ServerId", # required
-    #         workflow_details: {
-    #           on_upload: [
-    #             {
-    #               workflow_id: "WorkflowId", # required
-    #               execution_role: "Role", # required
-    #             },
-    #           ],
-    #           on_partial_upload: [
-    #             {
-    #               workflow_id: "WorkflowId", # required
-    #               execution_role: "Role", # required
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] certificate
     #   The Amazon Resource Name (ARN) of the Amazon Web ServicesCertificate
     #   Manager (ACM) certificate. Required when `Protocols` is set to
@@ -6343,29 +5424,6 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         home_directory: "HomeDirectory",
-    #         home_directory_type: "PATH", # accepts PATH, LOGICAL
-    #         home_directory_mappings: [
-    #           {
-    #             entry: "MapEntry", # required
-    #             target: "MapTarget", # required
-    #           },
-    #         ],
-    #         policy: "Policy",
-    #         posix_profile: {
-    #           uid: 1, # required
-    #           gid: 1, # required
-    #           secondary_gids: [1],
-    #         },
-    #         role: "Role",
-    #         server_id: "ServerId", # required
-    #         user_name: "UserName", # required
-    #       }
-    #
     # @!attribute [rw] home_directory
     #   The landing directory (folder) for a user when they log in to the
     #   server using the client.
@@ -6545,14 +5603,6 @@ module Aws::Transfer
     # execution role) for a workflow to execute on partial upload. A partial
     # upload occurs when a file is open when the session disconnects.
     #
-    # @note When making an API call, you may pass WorkflowDetail
-    #   data as a hash:
-    #
-    #       {
-    #         workflow_id: "WorkflowId", # required
-    #         execution_role: "Role", # required
-    #       }
-    #
     # @!attribute [rw] workflow_id
     #   A unique identifier for the workflow.
     #   @return [String]
@@ -6574,24 +5624,6 @@ module Aws::Transfer
 
     # Container for the `WorkflowDetail` data type. It is used by actions
     # that trigger a workflow to begin execution.
-    #
-    # @note When making an API call, you may pass WorkflowDetails
-    #   data as a hash:
-    #
-    #       {
-    #         on_upload: [
-    #           {
-    #             workflow_id: "WorkflowId", # required
-    #             execution_role: "Role", # required
-    #           },
-    #         ],
-    #         on_partial_upload: [
-    #           {
-    #             workflow_id: "WorkflowId", # required
-    #             execution_role: "Role", # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] on_upload
     #   A trigger that starts a workflow: the workflow begins to execute
@@ -6623,48 +5655,6 @@ module Aws::Transfer
     end
 
     # The basic building block of a workflow.
-    #
-    # @note When making an API call, you may pass WorkflowStep
-    #   data as a hash:
-    #
-    #       {
-    #         type: "COPY", # accepts COPY, CUSTOM, TAG, DELETE
-    #         copy_step_details: {
-    #           name: "WorkflowStepName",
-    #           destination_file_location: {
-    #             s3_file_location: {
-    #               bucket: "S3Bucket",
-    #               key: "S3Key",
-    #             },
-    #             efs_file_location: {
-    #               file_system_id: "EfsFileSystemId",
-    #               path: "EfsPath",
-    #             },
-    #           },
-    #           overwrite_existing: "TRUE", # accepts TRUE, FALSE
-    #           source_file_location: "SourceFileLocation",
-    #         },
-    #         custom_step_details: {
-    #           name: "WorkflowStepName",
-    #           target: "CustomStepTarget",
-    #           timeout_seconds: 1,
-    #           source_file_location: "SourceFileLocation",
-    #         },
-    #         delete_step_details: {
-    #           name: "WorkflowStepName",
-    #           source_file_location: "SourceFileLocation",
-    #         },
-    #         tag_step_details: {
-    #           name: "WorkflowStepName",
-    #           tags: [
-    #             {
-    #               key: "S3TagKey", # required
-    #               value: "S3TagValue", # required
-    #             },
-    #           ],
-    #           source_file_location: "SourceFileLocation",
-    #         },
-    #       }
     #
     # @!attribute [rw] type
     #   Currently, the following step types are supported.

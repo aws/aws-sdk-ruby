@@ -10,13 +10,6 @@
 module Aws::WorkMailMessageFlow
   module Types
 
-    # @note When making an API call, you may pass GetRawMessageContentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         message_id: "messageIdType", # required
-    #       }
-    #
     # @!attribute [rw] message_id
     #   The identifier of the email message to retrieve.
     #   @return [String]
@@ -96,20 +89,6 @@ module Aws::WorkMailMessageFlow
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutRawMessageContentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         message_id: "messageIdType", # required
-    #         content: { # required
-    #           s3_reference: { # required
-    #             bucket: "s3BucketIdType", # required
-    #             key: "s3KeyIdType", # required
-    #             object_version: "s3VersionType",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] message_id
     #   The identifier of the email message being updated.
     #   @return [String]
@@ -160,17 +139,6 @@ module Aws::WorkMailMessageFlow
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/mime-types-appendix.html
     # [2]: https://tools.ietf.org/html/rfc5321#section-4.5.3.1.6
     #
-    # @note When making an API call, you may pass RawMessageContent
-    #   data as a hash:
-    #
-    #       {
-    #         s3_reference: { # required
-    #           bucket: "s3BucketIdType", # required
-    #           key: "s3KeyIdType", # required
-    #           object_version: "s3VersionType",
-    #         },
-    #       }
-    #
     # @!attribute [rw] s3_reference
     #   The S3 reference of an email message.
     #   @return [Types::S3Reference]
@@ -209,15 +177,6 @@ module Aws::WorkMailMessageFlow
     #
     #
     # [1]: https://docs.aws.amazon.com/workmail/latest/adminguide/update-with-lambda.html
-    #
-    # @note When making an API call, you may pass S3Reference
-    #   data as a hash:
-    #
-    #       {
-    #         bucket: "s3BucketIdType", # required
-    #         key: "s3KeyIdType", # required
-    #         object_version: "s3VersionType",
-    #       }
     #
     # @!attribute [rw] bucket
     #   The S3 bucket name.

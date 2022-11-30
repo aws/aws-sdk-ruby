@@ -74,22 +74,6 @@ module Aws::ApplicationAutoScaling
     # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html
     # [3]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html
     #
-    # @note When making an API call, you may pass CustomizedMetricSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         metric_name: "MetricName", # required
-    #         namespace: "MetricNamespace", # required
-    #         dimensions: [
-    #           {
-    #             name: "MetricDimensionName", # required
-    #             value: "MetricDimensionValue", # required
-    #           },
-    #         ],
-    #         statistic: "Average", # required, accepts Average, Minimum, Maximum, SampleCount, Sum
-    #         unit: "MetricUnit",
-    #       }
-    #
     # @!attribute [rw] metric_name
     #   The name of the metric.
     #   @return [String]
@@ -125,16 +109,6 @@ module Aws::ApplicationAutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteScalingPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy_name: "ResourceIdMaxLen1600", # required
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka, elasticache, neptune
-    #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize, elasticache:replication-group:NodeGroups, elasticache:replication-group:Replicas, neptune:cluster:ReadReplicaCount
-    #       }
-    #
     # @!attribute [rw] policy_name
     #   The name of the scaling policy.
     #   @return [String]
@@ -302,16 +276,6 @@ module Aws::ApplicationAutoScaling
     #
     class DeleteScalingPolicyResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteScheduledActionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka, elasticache, neptune
-    #         scheduled_action_name: "ResourceIdMaxLen1600", # required
-    #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize, elasticache:replication-group:NodeGroups, elasticache:replication-group:Replicas, neptune:cluster:ReadReplicaCount
-    #       }
-    #
     # @!attribute [rw] service_namespace
     #   The namespace of the Amazon Web Services service that provides the
     #   resource. For a resource provided by your own application or
@@ -479,15 +443,6 @@ module Aws::ApplicationAutoScaling
     #
     class DeleteScheduledActionResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeregisterScalableTargetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka, elasticache, neptune
-    #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize, elasticache:replication-group:NodeGroups, elasticache:replication-group:Replicas, neptune:cluster:ReadReplicaCount
-    #       }
-    #
     # @!attribute [rw] service_namespace
     #   The namespace of the Amazon Web Services service that provides the
     #   resource. For a resource provided by your own application or
@@ -651,17 +606,6 @@ module Aws::ApplicationAutoScaling
     #
     class DeregisterScalableTargetResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeScalableTargetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka, elasticache, neptune
-    #         resource_ids: ["ResourceIdMaxLen1600"],
-    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize, elasticache:replication-group:NodeGroups, elasticache:replication-group:Replicas, neptune:cluster:ReadReplicaCount
-    #         max_results: 1,
-    #         next_token: "XmlString",
-    #       }
-    #
     # @!attribute [rw] service_namespace
     #   The namespace of the Amazon Web Services service that provides the
     #   resource. For a resource provided by your own application or
@@ -857,17 +801,6 @@ module Aws::ApplicationAutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeScalingActivitiesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka, elasticache, neptune
-    #         resource_id: "ResourceIdMaxLen1600",
-    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize, elasticache:replication-group:NodeGroups, elasticache:replication-group:Replicas, neptune:cluster:ReadReplicaCount
-    #         max_results: 1,
-    #         next_token: "XmlString",
-    #       }
-    #
     # @!attribute [rw] service_namespace
     #   The namespace of the Amazon Web Services service that provides the
     #   resource. For a resource provided by your own application or
@@ -1062,18 +995,6 @@ module Aws::ApplicationAutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeScalingPoliciesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy_names: ["ResourceIdMaxLen1600"],
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka, elasticache, neptune
-    #         resource_id: "ResourceIdMaxLen1600",
-    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize, elasticache:replication-group:NodeGroups, elasticache:replication-group:Replicas, neptune:cluster:ReadReplicaCount
-    #         max_results: 1,
-    #         next_token: "XmlString",
-    #       }
-    #
     # @!attribute [rw] policy_names
     #   The names of the scaling policies to describe.
     #   @return [Array<String>]
@@ -1273,18 +1194,6 @@ module Aws::ApplicationAutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeScheduledActionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         scheduled_action_names: ["ResourceIdMaxLen1600"],
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka, elasticache, neptune
-    #         resource_id: "ResourceIdMaxLen1600",
-    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize, elasticache:replication-group:NodeGroups, elasticache:replication-group:Replicas, neptune:cluster:ReadReplicaCount
-    #         max_results: 1,
-    #         next_token: "XmlString",
-    #       }
-    #
     # @!attribute [rw] scheduled_action_names
     #   The names of the scheduled actions to describe.
     #   @return [Array<String>]
@@ -1551,14 +1460,6 @@ module Aws::ApplicationAutoScaling
 
     # Describes the dimension names and values associated with a metric.
     #
-    # @note When making an API call, you may pass MetricDimension
-    #   data as a hash:
-    #
-    #       {
-    #         name: "MetricDimensionName", # required
-    #         value: "MetricDimensionValue", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the dimension.
     #   @return [String]
@@ -1607,14 +1508,6 @@ module Aws::ApplicationAutoScaling
     #
     # [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/monitoring-cloudwatch.html
     #
-    # @note When making an API call, you may pass PredefinedMetricSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut, SageMakerVariantInvocationsPerInstance, ECSServiceAverageCPUUtilization, ECSServiceAverageMemoryUtilization, AppStreamAverageCapacityUtilization, ComprehendInferenceUtilization, LambdaProvisionedConcurrencyUtilization, CassandraReadCapacityUtilization, CassandraWriteCapacityUtilization, KafkaBrokerStorageUtilization, ElastiCachePrimaryEngineCPUUtilization, ElastiCacheReplicaEngineCPUUtilization, ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage, NeptuneReaderAverageCPUUtilization
-    #         resource_label: "ResourceLabel",
-    #       }
-    #
     # @!attribute [rw] predefined_metric_type
     #   The metric type. The `ALBRequestCountPerTarget` metric type applies
     #   only to Spot Fleet requests and ECS services.
@@ -1660,52 +1553,6 @@ module Aws::ApplicationAutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutScalingPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy_name: "PolicyName", # required
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka, elasticache, neptune
-    #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize, elasticache:replication-group:NodeGroups, elasticache:replication-group:Replicas, neptune:cluster:ReadReplicaCount
-    #         policy_type: "StepScaling", # accepts StepScaling, TargetTrackingScaling
-    #         step_scaling_policy_configuration: {
-    #           adjustment_type: "ChangeInCapacity", # accepts ChangeInCapacity, PercentChangeInCapacity, ExactCapacity
-    #           step_adjustments: [
-    #             {
-    #               metric_interval_lower_bound: 1.0,
-    #               metric_interval_upper_bound: 1.0,
-    #               scaling_adjustment: 1, # required
-    #             },
-    #           ],
-    #           min_adjustment_magnitude: 1,
-    #           cooldown: 1,
-    #           metric_aggregation_type: "Average", # accepts Average, Minimum, Maximum
-    #         },
-    #         target_tracking_scaling_policy_configuration: {
-    #           target_value: 1.0, # required
-    #           predefined_metric_specification: {
-    #             predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut, SageMakerVariantInvocationsPerInstance, ECSServiceAverageCPUUtilization, ECSServiceAverageMemoryUtilization, AppStreamAverageCapacityUtilization, ComprehendInferenceUtilization, LambdaProvisionedConcurrencyUtilization, CassandraReadCapacityUtilization, CassandraWriteCapacityUtilization, KafkaBrokerStorageUtilization, ElastiCachePrimaryEngineCPUUtilization, ElastiCacheReplicaEngineCPUUtilization, ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage, NeptuneReaderAverageCPUUtilization
-    #             resource_label: "ResourceLabel",
-    #           },
-    #           customized_metric_specification: {
-    #             metric_name: "MetricName", # required
-    #             namespace: "MetricNamespace", # required
-    #             dimensions: [
-    #               {
-    #                 name: "MetricDimensionName", # required
-    #                 value: "MetricDimensionValue", # required
-    #               },
-    #             ],
-    #             statistic: "Average", # required, accepts Average, Minimum, Maximum, SampleCount, Sum
-    #             unit: "MetricUnit",
-    #           },
-    #           scale_out_cooldown: 1,
-    #           scale_in_cooldown: 1,
-    #           disable_scale_in: false,
-    #         },
-    #       }
-    #
     # @!attribute [rw] policy_name
     #   The name of the scaling policy.
     #   @return [String]
@@ -1926,24 +1773,6 @@ module Aws::ApplicationAutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutScheduledActionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka, elasticache, neptune
-    #         schedule: "ResourceIdMaxLen1600",
-    #         timezone: "ResourceIdMaxLen1600",
-    #         scheduled_action_name: "ScheduledActionName", # required
-    #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize, elasticache:replication-group:NodeGroups, elasticache:replication-group:Replicas, neptune:cluster:ReadReplicaCount
-    #         start_time: Time.now,
-    #         end_time: Time.now,
-    #         scalable_target_action: {
-    #           min_capacity: 1,
-    #           max_capacity: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] service_namespace
     #   The namespace of the Amazon Web Services service that provides the
     #   resource. For a resource provided by your own application or
@@ -2182,23 +2011,6 @@ module Aws::ApplicationAutoScaling
     #
     class PutScheduledActionResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass RegisterScalableTargetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka, elasticache, neptune
-    #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize, elasticache:replication-group:NodeGroups, elasticache:replication-group:Replicas, neptune:cluster:ReadReplicaCount
-    #         min_capacity: 1,
-    #         max_capacity: 1,
-    #         role_arn: "ResourceIdMaxLen1600",
-    #         suspended_state: {
-    #           dynamic_scaling_in_suspended: false,
-    #           dynamic_scaling_out_suspended: false,
-    #           scheduled_scaling_suspended: false,
-    #         },
-    #       }
-    #
     # @!attribute [rw] service_namespace
     #   The namespace of the Amazon Web Services service that provides the
     #   resource. For a resource provided by your own application or
@@ -2634,14 +2446,6 @@ module Aws::ApplicationAutoScaling
     end
 
     # Represents the minimum and maximum capacity for a scheduled action.
-    #
-    # @note When making an API call, you may pass ScalableTargetAction
-    #   data as a hash:
-    #
-    #       {
-    #         min_capacity: 1,
-    #         max_capacity: 1,
-    #       }
     #
     # @!attribute [rw] min_capacity
     #   The minimum capacity.
@@ -3350,15 +3154,6 @@ module Aws::ApplicationAutoScaling
     #
     # [1]: https://docs.aws.amazon.com/autoscaling/application/APIReference/API_StepScalingPolicyConfiguration.html
     #
-    # @note When making an API call, you may pass StepAdjustment
-    #   data as a hash:
-    #
-    #       {
-    #         metric_interval_lower_bound: 1.0,
-    #         metric_interval_upper_bound: 1.0,
-    #         scaling_adjustment: 1, # required
-    #       }
-    #
     # @!attribute [rw] metric_interval_lower_bound
     #   The lower bound for the difference between the alarm threshold and
     #   the CloudWatch metric. If the metric value is above the breach
@@ -3398,23 +3193,6 @@ module Aws::ApplicationAutoScaling
 
     # Represents a step scaling policy configuration to use with Application
     # Auto Scaling.
-    #
-    # @note When making an API call, you may pass StepScalingPolicyConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         adjustment_type: "ChangeInCapacity", # accepts ChangeInCapacity, PercentChangeInCapacity, ExactCapacity
-    #         step_adjustments: [
-    #           {
-    #             metric_interval_lower_bound: 1.0,
-    #             metric_interval_upper_bound: 1.0,
-    #             scaling_adjustment: 1, # required
-    #           },
-    #         ],
-    #         min_adjustment_magnitude: 1,
-    #         cooldown: 1,
-    #         metric_aggregation_type: "Average", # accepts Average, Minimum, Maximum
-    #       }
     #
     # @!attribute [rw] adjustment_type
     #   Specifies how the `ScalingAdjustment` value in a [StepAdjustment][1]
@@ -3530,15 +3308,6 @@ module Aws::ApplicationAutoScaling
     # Specifies whether the scaling activities for a scalable target are in
     # a suspended state.
     #
-    # @note When making an API call, you may pass SuspendedState
-    #   data as a hash:
-    #
-    #       {
-    #         dynamic_scaling_in_suspended: false,
-    #         dynamic_scaling_out_suspended: false,
-    #         scheduled_scaling_suspended: false,
-    #       }
-    #
     # @!attribute [rw] dynamic_scaling_in_suspended
     #   Whether scale in by a target tracking scaling policy or a step
     #   scaling policy is suspended. Set the value to `true` if you don't
@@ -3571,32 +3340,6 @@ module Aws::ApplicationAutoScaling
 
     # Represents a target tracking scaling policy configuration to use with
     # Application Auto Scaling.
-    #
-    # @note When making an API call, you may pass TargetTrackingScalingPolicyConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         target_value: 1.0, # required
-    #         predefined_metric_specification: {
-    #           predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut, SageMakerVariantInvocationsPerInstance, ECSServiceAverageCPUUtilization, ECSServiceAverageMemoryUtilization, AppStreamAverageCapacityUtilization, ComprehendInferenceUtilization, LambdaProvisionedConcurrencyUtilization, CassandraReadCapacityUtilization, CassandraWriteCapacityUtilization, KafkaBrokerStorageUtilization, ElastiCachePrimaryEngineCPUUtilization, ElastiCacheReplicaEngineCPUUtilization, ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage, NeptuneReaderAverageCPUUtilization
-    #           resource_label: "ResourceLabel",
-    #         },
-    #         customized_metric_specification: {
-    #           metric_name: "MetricName", # required
-    #           namespace: "MetricNamespace", # required
-    #           dimensions: [
-    #             {
-    #               name: "MetricDimensionName", # required
-    #               value: "MetricDimensionValue", # required
-    #             },
-    #           ],
-    #           statistic: "Average", # required, accepts Average, Minimum, Maximum, SampleCount, Sum
-    #           unit: "MetricUnit",
-    #         },
-    #         scale_out_cooldown: 1,
-    #         scale_in_cooldown: 1,
-    #         disable_scale_in: false,
-    #       }
     #
     # @!attribute [rw] target_value
     #   The target value for the metric. Although this property accepts

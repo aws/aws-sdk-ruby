@@ -64,29 +64,6 @@ module Aws::Translate
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateParallelDataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ResourceName", # required
-    #         description: "Description",
-    #         parallel_data_config: { # required
-    #           s3_uri: "S3Uri", # required
-    #           format: "TSV", # required, accepts TSV, CSV, TMX
-    #         },
-    #         encryption_key: {
-    #           type: "KMS", # required, accepts KMS
-    #           id: "EncryptionKeyID", # required
-    #         },
-    #         client_token: "ClientTokenString", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   A custom name for the parallel data resource in Amazon Translate.
     #   You must assign a name that is unique in the account and region.
@@ -155,13 +132,6 @@ module Aws::Translate
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteParallelDataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the parallel data resource that is being deleted.
     #   @return [String]
@@ -191,13 +161,6 @@ module Aws::Translate
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteTerminologyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the custom terminology being deleted.
     #   @return [String]
@@ -210,13 +173,6 @@ module Aws::Translate
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeTextTranslationJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The identifier that Amazon Translate generated for the job. The
     #   StartTextTranslationJob operation returns this identifier in its
@@ -274,14 +230,6 @@ module Aws::Translate
 
     # The encryption key used to encrypt this object.
     #
-    # @note When making an API call, you may pass EncryptionKey
-    #   data as a hash:
-    #
-    #       {
-    #         type: "KMS", # required, accepts KMS
-    #         id: "EncryptionKeyID", # required
-    #       }
-    #
     # @!attribute [rw] type
     #   The type of encryption key used by Amazon Translate to encrypt this
     #   object.
@@ -301,13 +249,6 @@ module Aws::Translate
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetParallelDataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the parallel data resource that is being retrieved.
     #   @return [String]
@@ -370,14 +311,6 @@ module Aws::Translate
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetTerminologyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ResourceName", # required
-    #         terminology_data_format: "CSV", # accepts CSV, TMX, TSV
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the custom terminology being retrieved.
     #   @return [String]
@@ -445,30 +378,6 @@ module Aws::Translate
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ImportTerminologyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ResourceName", # required
-    #         merge_strategy: "OVERWRITE", # required, accepts OVERWRITE
-    #         description: "Description",
-    #         terminology_data: { # required
-    #           file: "data", # required
-    #           format: "CSV", # required, accepts CSV, TMX, TSV
-    #           directionality: "UNI", # accepts UNI, MULTI
-    #         },
-    #         encryption_key: {
-    #           type: "KMS", # required, accepts KMS
-    #           id: "EncryptionKeyID", # required
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the custom terminology being imported.
     #   @return [String]
@@ -538,14 +447,6 @@ module Aws::Translate
 
     # The input configuration properties for requesting a batch translation
     # job.
-    #
-    # @note When making an API call, you may pass InputDataConfig
-    #   data as a hash:
-    #
-    #       {
-    #         s3_uri: "S3Uri", # required
-    #         content_type: "ContentType", # required
-    #       }
     #
     # @!attribute [rw] s3_uri
     #   The URI of the AWS S3 folder that contains the input files. Amazon
@@ -721,15 +622,6 @@ module Aws::Translate
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListLanguagesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         display_language_code: "de", # accepts de, en, es, fr, it, ja, ko, pt, zh, zh-TW
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] display_language_code
     #   The language code for the language to use to display the language
     #   names in the response. The language code is `en` by default.
@@ -778,14 +670,6 @@ module Aws::Translate
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListParallelDataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   A string that specifies the next page of results to return in a
     #   paginated response.
@@ -825,13 +709,6 @@ module Aws::Translate
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the given Amazon Translate
     #   resource you are querying.
@@ -861,14 +738,6 @@ module Aws::Translate
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTerminologiesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If the result of the request to ListTerminologies was truncated,
     #   include the NextToken to fetch the next group of custom
@@ -908,20 +777,6 @@ module Aws::Translate
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTextTranslationJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter: {
-    #           job_name: "JobName",
-    #           job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, COMPLETED_WITH_ERROR, FAILED, STOP_REQUESTED, STOPPED
-    #           submitted_before_time: Time.now,
-    #           submitted_after_time: Time.now,
-    #         },
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] filter
     #   The parameters that specify which batch translation jobs to
     #   retrieve. Filters include job name, job status, and submission time.
@@ -967,17 +822,6 @@ module Aws::Translate
 
     # The output configuration properties for a batch translation job.
     #
-    # @note When making an API call, you may pass OutputDataConfig
-    #   data as a hash:
-    #
-    #       {
-    #         s3_uri: "S3Uri", # required
-    #         encryption_key: {
-    #           type: "KMS", # required, accepts KMS
-    #           id: "EncryptionKeyID", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] s3_uri
     #   The URI of the S3 folder that contains a translation job's output
     #   file. The folder must be in the same Region as the API endpoint that
@@ -998,14 +842,6 @@ module Aws::Translate
     end
 
     # Specifies the format and S3 location of the parallel data input file.
-    #
-    # @note When making an API call, you may pass ParallelDataConfig
-    #   data as a hash:
-    #
-    #       {
-    #         s3_uri: "S3Uri", # required
-    #         format: "TSV", # required, accepts TSV, CSV, TMX
-    #       }
     #
     # @!attribute [rw] s3_uri
     #   The URI of the Amazon S3 folder that contains the parallel data
@@ -1198,34 +1034,6 @@ module Aws::Translate
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartTextTranslationJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_name: "JobName",
-    #         input_data_config: { # required
-    #           s3_uri: "S3Uri", # required
-    #           content_type: "ContentType", # required
-    #         },
-    #         output_data_config: { # required
-    #           s3_uri: "S3Uri", # required
-    #           encryption_key: {
-    #             type: "KMS", # required, accepts KMS
-    #             id: "EncryptionKeyID", # required
-    #           },
-    #         },
-    #         data_access_role_arn: "IamRoleArn", # required
-    #         source_language_code: "LanguageCodeString", # required
-    #         target_language_codes: ["LanguageCodeString"], # required
-    #         terminology_names: ["ResourceName"],
-    #         parallel_data_names: ["ResourceName"],
-    #         client_token: "ClientTokenString", # required
-    #         settings: {
-    #           formality: "FORMAL", # accepts FORMAL, INFORMAL
-    #           profanity: "MASK", # accepts MASK
-    #         },
-    #       }
-    #
     # @!attribute [rw] job_name
     #   The name of the batch translation job to be performed.
     #   @return [String]
@@ -1393,13 +1201,6 @@ module Aws::Translate
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopTextTranslationJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The job ID of the job to be stopped.
     #   @return [String]
@@ -1433,14 +1234,6 @@ module Aws::Translate
     # A key-value pair that adds as a metadata to a resource used by Amazon
     # Translate.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The initial part of a key-value pair that forms a tag associated
     #   with a given resource.
@@ -1460,19 +1253,6 @@ module Aws::Translate
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the given Amazon Translate
     #   resource to which you want to associate the tags.
@@ -1524,15 +1304,6 @@ module Aws::Translate
     #
     #
     # [1]: https://docs.aws.amazon.com/translate/latest/dg/creating-custom-terminology.html
-    #
-    # @note When making an API call, you may pass TerminologyData
-    #   data as a hash:
-    #
-    #       {
-    #         file: "data", # required
-    #         format: "CSV", # required, accepts CSV, TMX, TSV
-    #         directionality: "UNI", # accepts UNI, MULTI
-    #       }
     #
     # @!attribute [rw] file
     #   The file containing the custom terminology data. Your version of the
@@ -1731,16 +1502,6 @@ module Aws::Translate
     # Provides information for filtering a list of translation jobs. For
     # more information, see ListTextTranslationJobs.
     #
-    # @note When making an API call, you may pass TextTranslationJobFilter
-    #   data as a hash:
-    #
-    #       {
-    #         job_name: "JobName",
-    #         job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, COMPLETED_WITH_ERROR, FAILED, STOP_REQUESTED, STOPPED
-    #         submitted_before_time: Time.now,
-    #         submitted_after_time: Time.now,
-    #       }
-    #
     # @!attribute [rw] job_name
     #   Filters the list of jobs by name.
     #   @return [String]
@@ -1900,20 +1661,6 @@ module Aws::Translate
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TranslateTextRequest
-    #   data as a hash:
-    #
-    #       {
-    #         text: "BoundedLengthString", # required
-    #         terminology_names: ["ResourceName"],
-    #         source_language_code: "LanguageCodeString", # required
-    #         target_language_code: "LanguageCodeString", # required
-    #         settings: {
-    #           formality: "FORMAL", # accepts FORMAL, INFORMAL
-    #           profanity: "MASK", # accepts MASK
-    #         },
-    #       }
-    #
     # @!attribute [rw] text
     #   The text to translate. The text string can be a maximum of 5,000
     #   bytes long. Depending on your character set, this may be fewer than
@@ -2007,14 +1754,6 @@ module Aws::Translate
 
     # Optional settings that configure the translation output. Use these
     # settings for real time translations and asynchronous translation jobs.
-    #
-    # @note When making an API call, you may pass TranslationSettings
-    #   data as a hash:
-    #
-    #       {
-    #         formality: "FORMAL", # accepts FORMAL, INFORMAL
-    #         profanity: "MASK", # accepts MASK
-    #       }
     #
     # @!attribute [rw] formality
     #   You can optionally specify the desired level of formality for
@@ -2116,14 +1855,6 @@ module Aws::Translate
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the given Amazon Translate
     #   resource from which you want to remove the tags.
@@ -2148,19 +1879,6 @@ module Aws::Translate
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateParallelDataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ResourceName", # required
-    #         description: "Description",
-    #         parallel_data_config: { # required
-    #           s3_uri: "S3Uri", # required
-    #           format: "TSV", # required, accepts TSV, CSV, TMX
-    #         },
-    #         client_token: "ClientTokenString", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the parallel data resource being updated.
     #   @return [String]

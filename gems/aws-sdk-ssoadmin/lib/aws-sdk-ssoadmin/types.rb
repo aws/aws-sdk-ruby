@@ -18,16 +18,6 @@ module Aws::SSOAdmin
     # the attribute values of the authenticated user into IAM for use in
     # policy evaluation.
     #
-    # @note When making an API call, you may pass AccessControlAttribute
-    #   data as a hash:
-    #
-    #       {
-    #         key: "AccessControlAttributeKey", # required
-    #         value: { # required
-    #           source: ["AccessControlAttributeValueSource"], # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] key
     #   The name of the attribute associated with your identities in your
     #   identity source. This is used to map a specified attribute in your
@@ -55,13 +45,6 @@ module Aws::SSOAdmin
     #
     #
     # [1]: https://docs.aws.amazon.com/singlesignon/latest/userguide/attributemappingsconcept.html
-    #
-    # @note When making an API call, you may pass AccessControlAttributeValue
-    #   data as a hash:
-    #
-    #       {
-    #         source: ["AccessControlAttributeValueSource"], # required
-    #       }
     #
     # @!attribute [rw] source
     #   The identity source to use when mapping a specified attribute to IAM
@@ -223,18 +206,6 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AttachCustomerManagedPolicyReferenceToPermissionSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_arn: "InstanceArn", # required
-    #         permission_set_arn: "PermissionSetArn", # required
-    #         customer_managed_policy_reference: { # required
-    #           name: "ManagedPolicyName", # required
-    #           path: "ManagedPolicyPath",
-    #         },
-    #       }
-    #
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed.
@@ -264,15 +235,6 @@ module Aws::SSOAdmin
     #
     class AttachCustomerManagedPolicyReferenceToPermissionSetResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass AttachManagedPolicyToPermissionSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_arn: "InstanceArn", # required
-    #         permission_set_arn: "PermissionSetArn", # required
-    #         managed_policy_arn: "ManagedPolicyArn", # required
-    #       }
-    #
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
@@ -343,18 +305,6 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAccountAssignmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_arn: "InstanceArn", # required
-    #         target_id: "TargetId", # required
-    #         target_type: "AWS_ACCOUNT", # required, accepts AWS_ACCOUNT
-    #         permission_set_arn: "PermissionSetArn", # required
-    #         principal_type: "USER", # required, accepts USER, GROUP
-    #         principal_id: "PrincipalId", # required
-    #       }
-    #
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
@@ -415,23 +365,6 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateInstanceAccessControlAttributeConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_arn: "InstanceArn", # required
-    #         instance_access_control_attribute_configuration: { # required
-    #           access_control_attributes: [ # required
-    #             {
-    #               key: "AccessControlAttributeKey", # required
-    #               value: { # required
-    #                 source: ["AccessControlAttributeValueSource"], # required
-    #               },
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed.
@@ -461,23 +394,6 @@ module Aws::SSOAdmin
     #
     class CreateInstanceAccessControlAttributeConfigurationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass CreatePermissionSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "PermissionSetName", # required
-    #         description: "PermissionSetDescription",
-    #         instance_arn: "InstanceArn", # required
-    #         session_duration: "Duration",
-    #         relay_state: "RelayState",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the PermissionSet.
     #   @return [String]
@@ -537,14 +453,6 @@ module Aws::SSOAdmin
     # have an IAM policy that matches the name and path in each AWS account
     # where you want to deploy your permission set.
     #
-    # @note When making an API call, you may pass CustomerManagedPolicyReference
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ManagedPolicyName", # required
-    #         path: "ManagedPolicyPath",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the IAM policy that you have configured in each account
     #   where you want to deploy your permission set.
@@ -570,18 +478,6 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAccountAssignmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_arn: "InstanceArn", # required
-    #         target_id: "TargetId", # required
-    #         target_type: "AWS_ACCOUNT", # required, accepts AWS_ACCOUNT
-    #         permission_set_arn: "PermissionSetArn", # required
-    #         principal_type: "USER", # required, accepts USER, GROUP
-    #         principal_id: "PrincipalId", # required
-    #       }
-    #
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
@@ -641,14 +537,6 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteInlinePolicyFromPermissionSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_arn: "InstanceArn", # required
-    #         permission_set_arn: "PermissionSetArn", # required
-    #       }
-    #
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
@@ -674,13 +562,6 @@ module Aws::SSOAdmin
     #
     class DeleteInlinePolicyFromPermissionSetResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteInstanceAccessControlAttributeConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_arn: "InstanceArn", # required
-    #       }
-    #
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed.
@@ -698,14 +579,6 @@ module Aws::SSOAdmin
     #
     class DeleteInstanceAccessControlAttributeConfigurationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeletePermissionSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_arn: "InstanceArn", # required
-    #         permission_set_arn: "PermissionSetArn", # required
-    #       }
-    #
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
@@ -731,14 +604,6 @@ module Aws::SSOAdmin
     #
     class DeletePermissionSetResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeletePermissionsBoundaryFromPermissionSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_arn: "InstanceArn", # required
-    #         permission_set_arn: "PermissionSetArn", # required
-    #       }
-    #
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed.
@@ -761,14 +626,6 @@ module Aws::SSOAdmin
     #
     class DeletePermissionsBoundaryFromPermissionSetResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeAccountAssignmentCreationStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_arn: "InstanceArn", # required
-    #         account_assignment_creation_request_id: "UUId", # required
-    #       }
-    #
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
@@ -802,14 +659,6 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAccountAssignmentDeletionStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_arn: "InstanceArn", # required
-    #         account_assignment_deletion_request_id: "UUId", # required
-    #       }
-    #
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
@@ -843,13 +692,6 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeInstanceAccessControlAttributeConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_arn: "InstanceArn", # required
-    #       }
-    #
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed.
@@ -887,14 +729,6 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribePermissionSetProvisioningStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_arn: "InstanceArn", # required
-    #         provision_permission_set_request_id: "UUId", # required
-    #       }
-    #
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
@@ -929,14 +763,6 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribePermissionSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_arn: "InstanceArn", # required
-    #         permission_set_arn: "PermissionSetArn", # required
-    #       }
-    #
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
@@ -970,18 +796,6 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DetachCustomerManagedPolicyReferenceFromPermissionSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_arn: "InstanceArn", # required
-    #         permission_set_arn: "PermissionSetArn", # required
-    #         customer_managed_policy_reference: { # required
-    #           name: "ManagedPolicyName", # required
-    #           path: "ManagedPolicyPath",
-    #         },
-    #       }
-    #
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed.
@@ -1011,15 +825,6 @@ module Aws::SSOAdmin
     #
     class DetachCustomerManagedPolicyReferenceFromPermissionSetResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DetachManagedPolicyFromPermissionSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_arn: "InstanceArn", # required
-    #         permission_set_arn: "PermissionSetArn", # required
-    #         managed_policy_arn: "ManagedPolicyArn", # required
-    #       }
-    #
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
@@ -1051,14 +856,6 @@ module Aws::SSOAdmin
     #
     class DetachManagedPolicyFromPermissionSetResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass GetInlinePolicyForPermissionSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_arn: "InstanceArn", # required
-    #         permission_set_arn: "PermissionSetArn", # required
-    #       }
-    #
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
@@ -1092,14 +889,6 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetPermissionsBoundaryForPermissionSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_arn: "InstanceArn", # required
-    #         permission_set_arn: "PermissionSetArn", # required
-    #       }
-    #
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed.
@@ -1132,20 +921,6 @@ module Aws::SSOAdmin
 
     # Specifies the attributes to add to your attribute-based access control
     # (ABAC) configuration.
-    #
-    # @note When making an API call, you may pass InstanceAccessControlAttributeConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         access_control_attributes: [ # required
-    #           {
-    #             key: "AccessControlAttributeKey", # required
-    #             value: { # required
-    #               source: ["AccessControlAttributeValueSource"], # required
-    #             },
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] access_control_attributes
     #   Lists the attributes that are configured for ABAC in the specified
@@ -1198,18 +973,6 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAccountAssignmentCreationStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_arn: "InstanceArn", # required
-    #         max_results: 1,
-    #         next_token: "Token",
-    #         filter: {
-    #           status: "IN_PROGRESS", # accepts IN_PROGRESS, FAILED, SUCCEEDED
-    #         },
-    #       }
-    #
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
@@ -1260,18 +1023,6 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAccountAssignmentDeletionStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_arn: "InstanceArn", # required
-    #         max_results: 1,
-    #         next_token: "Token",
-    #         filter: {
-    #           status: "IN_PROGRESS", # accepts IN_PROGRESS, FAILED, SUCCEEDED
-    #         },
-    #       }
-    #
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
@@ -1322,17 +1073,6 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAccountAssignmentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_arn: "InstanceArn", # required
-    #         account_id: "TargetId", # required
-    #         permission_set_arn: "PermissionSetArn", # required
-    #         max_results: 1,
-    #         next_token: "Token",
-    #       }
-    #
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
@@ -1390,17 +1130,6 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAccountsForProvisionedPermissionSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_arn: "InstanceArn", # required
-    #         permission_set_arn: "PermissionSetArn", # required
-    #         provisioning_status: "LATEST_PERMISSION_SET_PROVISIONED", # accepts LATEST_PERMISSION_SET_PROVISIONED, LATEST_PERMISSION_SET_NOT_PROVISIONED
-    #         max_results: 1,
-    #         next_token: "Token",
-    #       }
-    #
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
@@ -1457,16 +1186,6 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCustomerManagedPolicyReferencesInPermissionSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_arn: "InstanceArn", # required
-    #         permission_set_arn: "PermissionSetArn", # required
-    #         max_results: 1,
-    #         next_token: "Token",
-    #       }
-    #
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed.
@@ -1515,14 +1234,6 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListInstancesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "Token",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to display for the instance.
     #   @return [Integer]
@@ -1560,16 +1271,6 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListManagedPoliciesInPermissionSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_arn: "InstanceArn", # required
-    #         permission_set_arn: "PermissionSetArn", # required
-    #         max_results: 1,
-    #         next_token: "Token",
-    #       }
-    #
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
@@ -1620,18 +1321,6 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPermissionSetProvisioningStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_arn: "InstanceArn", # required
-    #         max_results: 1,
-    #         next_token: "Token",
-    #         filter: {
-    #           status: "IN_PROGRESS", # accepts IN_PROGRESS, FAILED, SUCCEEDED
-    #         },
-    #       }
-    #
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
@@ -1682,17 +1371,6 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPermissionSetsProvisionedToAccountRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_arn: "InstanceArn", # required
-    #         account_id: "AccountId", # required
-    #         provisioning_status: "LATEST_PERMISSION_SET_PROVISIONED", # accepts LATEST_PERMISSION_SET_PROVISIONED, LATEST_PERMISSION_SET_NOT_PROVISIONED
-    #         max_results: 1,
-    #         next_token: "Token",
-    #       }
-    #
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
@@ -1749,15 +1427,6 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPermissionSetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_arn: "InstanceArn", # required
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
@@ -1803,15 +1472,6 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_arn: "InstanceArn", # required
-    #         resource_arn: "TaggableResourceArn", # required
-    #         next_token: "Token",
-    #       }
-    #
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
@@ -1858,13 +1518,6 @@ module Aws::SSOAdmin
     end
 
     # Filters he operation status list based on the passed attribute value.
-    #
-    # @note When making an API call, you may pass OperationStatusFilter
-    #   data as a hash:
-    #
-    #       {
-    #         status: "IN_PROGRESS", # accepts IN_PROGRESS, FAILED, SUCCEEDED
-    #       }
     #
     # @!attribute [rw] status
     #   Filters the list operations result based on the status attribute.
@@ -2012,17 +1665,6 @@ module Aws::SSOAdmin
     # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
     # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html
     #
-    # @note When making an API call, you may pass PermissionsBoundary
-    #   data as a hash:
-    #
-    #       {
-    #         customer_managed_policy_reference: {
-    #           name: "ManagedPolicyName", # required
-    #           path: "ManagedPolicyPath",
-    #         },
-    #         managed_policy_arn: "ManagedPolicyArn",
-    #       }
-    #
     # @!attribute [rw] customer_managed_policy_reference
     #   Specifies the name and path of a customer managed policy. You must
     #   have an IAM policy that matches the name and path in each AWS
@@ -2043,16 +1685,6 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ProvisionPermissionSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_arn: "InstanceArn", # required
-    #         permission_set_arn: "PermissionSetArn", # required
-    #         target_id: "TargetId",
-    #         target_type: "AWS_ACCOUNT", # required, accepts AWS_ACCOUNT, ALL_PROVISIONED_ACCOUNTS
-    #       }
-    #
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
@@ -2097,15 +1729,6 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutInlinePolicyToPermissionSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_arn: "InstanceArn", # required
-    #         permission_set_arn: "PermissionSetArn", # required
-    #         inline_policy: "PermissionSetPolicyDocument", # required
-    #       }
-    #
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
@@ -2136,21 +1759,6 @@ module Aws::SSOAdmin
     #
     class PutInlinePolicyToPermissionSetResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass PutPermissionsBoundaryToPermissionSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_arn: "InstanceArn", # required
-    #         permission_set_arn: "PermissionSetArn", # required
-    #         permissions_boundary: { # required
-    #           customer_managed_policy_reference: {
-    #             name: "ManagedPolicyName", # required
-    #             path: "ManagedPolicyPath",
-    #           },
-    #           managed_policy_arn: "ManagedPolicyArn",
-    #         },
-    #       }
-    #
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed.
@@ -2210,14 +1818,6 @@ module Aws::SSOAdmin
     # can only be applied to permission sets and cannot be applied to
     # corresponding roles that IAM Identity Center creates in AWS accounts.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The key for the tag.
     #   @return [String]
@@ -2235,20 +1835,6 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_arn: "InstanceArn", # required
-    #         resource_arn: "TaggableResourceArn", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
@@ -2293,15 +1879,6 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_arn: "InstanceArn", # required
-    #         resource_arn: "TaggableResourceArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
@@ -2332,23 +1909,6 @@ module Aws::SSOAdmin
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateInstanceAccessControlAttributeConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_arn: "InstanceArn", # required
-    #         instance_access_control_attribute_configuration: { # required
-    #           access_control_attributes: [ # required
-    #             {
-    #               key: "AccessControlAttributeKey", # required
-    #               value: { # required
-    #                 source: ["AccessControlAttributeValueSource"], # required
-    #               },
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed.
@@ -2371,17 +1931,6 @@ module Aws::SSOAdmin
     #
     class UpdateInstanceAccessControlAttributeConfigurationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdatePermissionSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_arn: "InstanceArn", # required
-    #         permission_set_arn: "PermissionSetArn", # required
-    #         description: "PermissionSetDescription",
-    #         session_duration: "Duration",
-    #         relay_state: "RelayState",
-    #       }
-    #
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see

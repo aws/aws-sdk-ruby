@@ -42,20 +42,6 @@ module Aws::OpsWorksCM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateNodeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         server_name: "ServerName", # required
-    #         node_name: "NodeName", # required
-    #         engine_attributes: [ # required
-    #           {
-    #             name: "EngineAttributeName",
-    #             value: "EngineAttributeValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] server_name
     #   The name of the server with which to associate the node.
     #   @return [String]
@@ -255,20 +241,6 @@ module Aws::OpsWorksCM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateBackupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         server_name: "ServerName", # required
-    #         description: "String",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] server_name
     #   The name of the server that you want to back up.
     #   @return [String]
@@ -320,43 +292,6 @@ module Aws::OpsWorksCM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateServerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         associate_public_ip_address: false,
-    #         custom_domain: "CustomDomain",
-    #         custom_certificate: "CustomCertificate",
-    #         custom_private_key: "CustomPrivateKey",
-    #         disable_automated_backup: false,
-    #         engine: "String", # required
-    #         engine_model: "String",
-    #         engine_version: "String",
-    #         engine_attributes: [
-    #           {
-    #             name: "EngineAttributeName",
-    #             value: "EngineAttributeValue",
-    #           },
-    #         ],
-    #         backup_retention_count: 1,
-    #         server_name: "ServerName", # required
-    #         instance_profile_arn: "InstanceProfileArn", # required
-    #         instance_type: "String", # required
-    #         key_pair: "KeyPair",
-    #         preferred_maintenance_window: "TimeWindowDefinition",
-    #         preferred_backup_window: "TimeWindowDefinition",
-    #         security_group_ids: ["String"],
-    #         service_role_arn: "ServiceRoleArn", # required
-    #         subnet_ids: ["String"],
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         backup_id: "BackupId",
-    #       }
-    #
     # @!attribute [rw] associate_public_ip_address
     #   Associate a public IP address with a server that you are launching.
     #   Valid values are `true` or `false`. The default value is `true`.
@@ -636,13 +571,6 @@ module Aws::OpsWorksCM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteBackupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         backup_id: "BackupId", # required
-    #       }
-    #
     # @!attribute [rw] backup_id
     #   The ID of the backup to delete. Run the DescribeBackups command to
     #   get a list of backup IDs. Backup IDs are in the format
@@ -661,13 +589,6 @@ module Aws::OpsWorksCM
     #
     class DeleteBackupResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteServerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         server_name: "ServerName", # required
-    #       }
-    #
     # @!attribute [rw] server_name
     #   The ID of the server to delete.
     #   @return [String]
@@ -684,8 +605,6 @@ module Aws::OpsWorksCM
     #
     class DeleteServerResponse < Aws::EmptyStructure; end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeAccountAttributesRequest AWS API Documentation
     #
     class DescribeAccountAttributesRequest < Aws::EmptyStructure; end
@@ -702,16 +621,6 @@ module Aws::OpsWorksCM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeBackupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         backup_id: "BackupId",
-    #         server_name: "ServerName",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] backup_id
     #   Describes a single backup.
     #   @return [String]
@@ -756,15 +665,6 @@ module Aws::OpsWorksCM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEventsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         server_name: "ServerName", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] server_name
     #   The name of the server for which you want to view events.
     #   @return [String]
@@ -824,14 +724,6 @@ module Aws::OpsWorksCM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeNodeAssociationStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         node_association_status_token: "NodeAssociationStatusToken", # required
-    #         server_name: "ServerName", # required
-    #       }
-    #
     # @!attribute [rw] node_association_status_token
     #   The token returned in either the AssociateNodeResponse or the
     #   DisassociateNodeResponse.
@@ -878,15 +770,6 @@ module Aws::OpsWorksCM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeServersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         server_name: "ServerName",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] server_name
     #   Describes the server with the specified ServerName.
     #   @return [String]
@@ -951,20 +834,6 @@ module Aws::OpsWorksCM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateNodeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         server_name: "ServerName", # required
-    #         node_name: "NodeName", # required
-    #         engine_attributes: [
-    #           {
-    #             name: "EngineAttributeName",
-    #             value: "EngineAttributeValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] server_name
     #   The name of the server from which to disassociate the node.
     #   @return [String]
@@ -1012,14 +881,6 @@ module Aws::OpsWorksCM
 
     # A name and value pair that is specific to the engine of the server.
     #
-    # @note When making an API call, you may pass EngineAttribute
-    #   data as a hash:
-    #
-    #       {
-    #         name: "EngineAttributeName",
-    #         value: "EngineAttributeValue",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the engine attribute.
     #   @return [String]
@@ -1037,20 +898,6 @@ module Aws::OpsWorksCM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ExportServerEngineAttributeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         export_attribute_name: "String", # required
-    #         server_name: "ServerName", # required
-    #         input_attributes: [
-    #           {
-    #             name: "EngineAttributeName",
-    #             value: "EngineAttributeValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] export_attribute_name
     #   The name of the export attribute. Currently, the supported export
     #   attribute is `Userdata`. This exports a user data script that
@@ -1159,15 +1006,6 @@ module Aws::OpsWorksCM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AWSOpsWorksCMResourceArn", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Number (ARN) of an AWS OpsWorks for Chef
     #   Automate or AWS OpsWorks for Puppet Enterprise server for which you
@@ -1253,16 +1091,6 @@ module Aws::OpsWorksCM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RestoreServerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         backup_id: "BackupId", # required
-    #         server_name: "ServerName", # required
-    #         instance_type: "String",
-    #         key_pair: "KeyPair",
-    #       }
-    #
     # @!attribute [rw] backup_id
     #   The ID of the backup that you want to use to restore a server.
     #   @return [String]
@@ -1513,19 +1341,6 @@ module Aws::OpsWorksCM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartMaintenanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         server_name: "ServerName", # required
-    #         engine_attributes: [
-    #           {
-    #             name: "EngineAttributeName",
-    #             value: "EngineAttributeValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] server_name
     #   The name of the server on which to run maintenance.
     #   @return [String]
@@ -1576,14 +1391,6 @@ module Aws::OpsWorksCM
     # key and value. A maximum of 50 user-applied tags is allowed for
     # tag-supported AWS OpsWorks-CM resources.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   A tag key, such as `Stage` or `Name`. A tag key cannot be empty. The
     #   key can be a maximum of 127 characters, and can contain only Unicode
@@ -1607,19 +1414,6 @@ module Aws::OpsWorksCM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AWSOpsWorksCMResourceArn", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Number (ARN) of a resource to which you want to
     #   apply tags. For example,
@@ -1660,14 +1454,6 @@ module Aws::OpsWorksCM
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AWSOpsWorksCMResourceArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Number (ARN) of a resource from which you want
     #   to remove tags. For example,
@@ -1691,15 +1477,6 @@ module Aws::OpsWorksCM
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateServerEngineAttributesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         server_name: "ServerName", # required
-    #         attribute_name: "AttributeName", # required
-    #         attribute_value: "AttributeValue",
-    #       }
-    #
     # @!attribute [rw] server_name
     #   The name of the server to update.
     #   @return [String]
@@ -1734,17 +1511,6 @@ module Aws::OpsWorksCM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateServerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         disable_automated_backup: false,
-    #         backup_retention_count: 1,
-    #         server_name: "ServerName", # required
-    #         preferred_maintenance_window: "TimeWindowDefinition",
-    #         preferred_backup_window: "TimeWindowDefinition",
-    #       }
-    #
     # @!attribute [rw] disable_automated_backup
     #   Setting DisableAutomatedBackup to `true` disables automated or
     #   scheduled backups. Automated backups are enabled by default.

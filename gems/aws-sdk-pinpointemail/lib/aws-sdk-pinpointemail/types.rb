@@ -59,20 +59,6 @@ module Aws::PinpointEmail
 
     # Represents the body of the email message.
     #
-    # @note When making an API call, you may pass Body
-    #   data as a hash:
-    #
-    #       {
-    #         text: {
-    #           data: "MessageData", # required
-    #           charset: "Charset",
-    #         },
-    #         html: {
-    #           data: "MessageData", # required
-    #           charset: "Charset",
-    #         },
-    #       }
-    #
     # @!attribute [rw] text
     #   An object that represents the version of the message that is
     #   displayed in email clients that don't support HTML, or clients
@@ -98,19 +84,6 @@ module Aws::PinpointEmail
     # events. You can use Amazon CloudWatch to monitor and gain insights on
     # your email sending metrics.
     #
-    # @note When making an API call, you may pass CloudWatchDestination
-    #   data as a hash:
-    #
-    #       {
-    #         dimension_configurations: [ # required
-    #           {
-    #             dimension_name: "DimensionName", # required
-    #             dimension_value_source: "MESSAGE_TAG", # required, accepts MESSAGE_TAG, EMAIL_HEADER, LINK_TAG
-    #             default_dimension_value: "DefaultDimensionValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] dimension_configurations
     #   An array of objects that define the dimensions to use when you send
     #   email events to Amazon CloudWatch.
@@ -126,15 +99,6 @@ module Aws::PinpointEmail
 
     # An object that defines the dimension configuration to use when you
     # send Amazon Pinpoint email events to Amazon CloudWatch.
-    #
-    # @note When making an API call, you may pass CloudWatchDimensionConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         dimension_name: "DimensionName", # required
-    #         dimension_value_source: "MESSAGE_TAG", # required, accepts MESSAGE_TAG, EMAIL_HEADER, LINK_TAG
-    #         default_dimension_value: "DefaultDimensionValue", # required
-    #       }
     #
     # @!attribute [rw] dimension_name
     #   The name of an Amazon CloudWatch dimension associated with an email
@@ -186,14 +150,6 @@ module Aws::PinpointEmail
     # An object that represents the content of the email, and optionally a
     # character set specification.
     #
-    # @note When making an API call, you may pass Content
-    #   data as a hash:
-    #
-    #       {
-    #         data: "MessageData", # required
-    #         charset: "Charset",
-    #       }
-    #
     # @!attribute [rw] data
     #   The content of the message itself.
     #   @return [String]
@@ -216,37 +172,6 @@ module Aws::PinpointEmail
     end
 
     # A request to add an event destination to a configuration set.
-    #
-    # @note When making an API call, you may pass CreateConfigurationSetEventDestinationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_set_name: "ConfigurationSetName", # required
-    #         event_destination_name: "EventDestinationName", # required
-    #         event_destination: { # required
-    #           enabled: false,
-    #           matching_event_types: ["SEND"], # accepts SEND, REJECT, BOUNCE, COMPLAINT, DELIVERY, OPEN, CLICK, RENDERING_FAILURE
-    #           kinesis_firehose_destination: {
-    #             iam_role_arn: "AmazonResourceName", # required
-    #             delivery_stream_arn: "AmazonResourceName", # required
-    #           },
-    #           cloud_watch_destination: {
-    #             dimension_configurations: [ # required
-    #               {
-    #                 dimension_name: "DimensionName", # required
-    #                 dimension_value_source: "MESSAGE_TAG", # required, accepts MESSAGE_TAG, EMAIL_HEADER, LINK_TAG
-    #                 default_dimension_value: "DefaultDimensionValue", # required
-    #               },
-    #             ],
-    #           },
-    #           sns_destination: {
-    #             topic_arn: "AmazonResourceName", # required
-    #           },
-    #           pinpoint_destination: {
-    #             application_arn: "AmazonResourceName",
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] configuration_set_name
     #   The name of the configuration set that you want to add an event
@@ -280,33 +205,6 @@ module Aws::PinpointEmail
     class CreateConfigurationSetEventDestinationResponse < Aws::EmptyStructure; end
 
     # A request to create a configuration set.
-    #
-    # @note When making an API call, you may pass CreateConfigurationSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_set_name: "ConfigurationSetName", # required
-    #         tracking_options: {
-    #           custom_redirect_domain: "CustomRedirectDomain", # required
-    #         },
-    #         delivery_options: {
-    #           tls_policy: "REQUIRE", # accepts REQUIRE, OPTIONAL
-    #           sending_pool_name: "PoolName",
-    #         },
-    #         reputation_options: {
-    #           reputation_metrics_enabled: false,
-    #           last_fresh_start: Time.now,
-    #         },
-    #         sending_options: {
-    #           sending_enabled: false,
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] configuration_set_name
     #   The name of the configuration set.
@@ -360,19 +258,6 @@ module Aws::PinpointEmail
 
     # A request to create a new dedicated IP pool.
     #
-    # @note When making an API call, you may pass CreateDedicatedIpPoolRequest
-    #   data as a hash:
-    #
-    #       {
-    #         pool_name: "PoolName", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] pool_name
     #   The name of the dedicated IP pool.
     #   @return [String]
@@ -407,45 +292,6 @@ module Aws::PinpointEmail
     # across several major email providers. After about 24 hours, the test
     # is complete, and you can use the `GetDeliverabilityTestReport`
     # operation to view the results of the test.
-    #
-    # @note When making an API call, you may pass CreateDeliverabilityTestReportRequest
-    #   data as a hash:
-    #
-    #       {
-    #         report_name: "ReportName",
-    #         from_email_address: "EmailAddress", # required
-    #         content: { # required
-    #           simple: {
-    #             subject: { # required
-    #               data: "MessageData", # required
-    #               charset: "Charset",
-    #             },
-    #             body: { # required
-    #               text: {
-    #                 data: "MessageData", # required
-    #                 charset: "Charset",
-    #               },
-    #               html: {
-    #                 data: "MessageData", # required
-    #                 charset: "Charset",
-    #               },
-    #             },
-    #           },
-    #           raw: {
-    #             data: "data", # required
-    #           },
-    #           template: {
-    #             template_arn: "TemplateArn",
-    #             template_data: "TemplateData",
-    #           },
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] report_name
     #   A unique name that helps you to identify the predictive inbox
@@ -505,19 +351,6 @@ module Aws::PinpointEmail
 
     # A request to begin the verification process for an email identity (an
     # email address or domain).
-    #
-    # @note When making an API call, you may pass CreateEmailIdentityRequest
-    #   data as a hash:
-    #
-    #       {
-    #         email_identity: "Identity", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] email_identity
     #   The email address or domain that you want to verify.
@@ -647,14 +480,6 @@ module Aws::PinpointEmail
 
     # A request to delete an event destination from a configuration set.
     #
-    # @note When making an API call, you may pass DeleteConfigurationSetEventDestinationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_set_name: "ConfigurationSetName", # required
-    #         event_destination_name: "EventDestinationName", # required
-    #       }
-    #
     # @!attribute [rw] configuration_set_name
     #   The name of the configuration set that contains the event
     #   destination that you want to delete.
@@ -682,13 +507,6 @@ module Aws::PinpointEmail
 
     # A request to delete a configuration set.
     #
-    # @note When making an API call, you may pass DeleteConfigurationSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_set_name: "ConfigurationSetName", # required
-    #       }
-    #
     # @!attribute [rw] configuration_set_name
     #   The name of the configuration set that you want to delete.
     #   @return [String]
@@ -709,13 +527,6 @@ module Aws::PinpointEmail
     class DeleteConfigurationSetResponse < Aws::EmptyStructure; end
 
     # A request to delete a dedicated IP pool.
-    #
-    # @note When making an API call, you may pass DeleteDedicatedIpPoolRequest
-    #   data as a hash:
-    #
-    #       {
-    #         pool_name: "PoolName", # required
-    #       }
     #
     # @!attribute [rw] pool_name
     #   The name of the dedicated IP pool that you want to delete.
@@ -740,13 +551,6 @@ module Aws::PinpointEmail
     # identity, you lose the ability to use Amazon Pinpoint to send email
     # from that identity. You can restore your ability to send email by
     # completing the verification process for the identity again.
-    #
-    # @note When making an API call, you may pass DeleteEmailIdentityRequest
-    #   data as a hash:
-    #
-    #       {
-    #         email_identity: "Identity", # required
-    #       }
     #
     # @!attribute [rw] email_identity
     #   The identity (that is, the email address or domain) that you want to
@@ -819,14 +623,6 @@ module Aws::PinpointEmail
 
     # Used to associate a configuration set with a dedicated IP pool.
     #
-    # @note When making an API call, you may pass DeliveryOptions
-    #   data as a hash:
-    #
-    #       {
-    #         tls_policy: "REQUIRE", # accepts REQUIRE, OPTIONAL
-    #         sending_pool_name: "PoolName",
-    #       }
-    #
     # @!attribute [rw] tls_policy
     #   Specifies whether messages that use the configuration set are
     #   required to use Transport Layer Security (TLS). If the value is
@@ -850,15 +646,6 @@ module Aws::PinpointEmail
     end
 
     # An object that describes the recipients for an email.
-    #
-    # @note When making an API call, you may pass Destination
-    #   data as a hash:
-    #
-    #       {
-    #         to_addresses: ["EmailAddress"],
-    #         cc_addresses: ["EmailAddress"],
-    #         bcc_addresses: ["EmailAddress"],
-    #       }
     #
     # @!attribute [rw] to_addresses
     #   An array that contains the email addresses of the "To" recipients
@@ -1049,18 +836,6 @@ module Aws::PinpointEmail
     # access to reputation, inbox placement, and other metrics for the
     # domain.
     #
-    # @note When making an API call, you may pass DomainDeliverabilityTrackingOption
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "Domain",
-    #         subscription_start_date: Time.now,
-    #         inbox_placement_tracking_option: {
-    #           global: false,
-    #           tracked_isps: ["IspName"],
-    #         },
-    #       }
-    #
     # @!attribute [rw] domain
     #   A verified domain that’s associated with your AWS account and
     #   currently has an active Deliverability dashboard subscription.
@@ -1136,35 +911,6 @@ module Aws::PinpointEmail
     # versions of the message body. You can also create raw messages, in
     # which you specify a complete MIME-formatted message. Raw messages can
     # include attachments and custom headers.
-    #
-    # @note When making an API call, you may pass EmailContent
-    #   data as a hash:
-    #
-    #       {
-    #         simple: {
-    #           subject: { # required
-    #             data: "MessageData", # required
-    #             charset: "Charset",
-    #           },
-    #           body: { # required
-    #             text: {
-    #               data: "MessageData", # required
-    #               charset: "Charset",
-    #             },
-    #             html: {
-    #               data: "MessageData", # required
-    #               charset: "Charset",
-    #             },
-    #           },
-    #         },
-    #         raw: {
-    #           data: "data", # required
-    #         },
-    #         template: {
-    #           template_arn: "TemplateArn",
-    #           template_data: "TemplateData",
-    #         },
-    #       }
     #
     # @!attribute [rw] simple
     #   The simple email message. The message consists of a subject and a
@@ -1284,33 +1030,6 @@ module Aws::PinpointEmail
     # set that the event destination is associated with. Also defines the
     # types of events that are sent to the event destination.
     #
-    # @note When making an API call, you may pass EventDestinationDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false,
-    #         matching_event_types: ["SEND"], # accepts SEND, REJECT, BOUNCE, COMPLAINT, DELIVERY, OPEN, CLICK, RENDERING_FAILURE
-    #         kinesis_firehose_destination: {
-    #           iam_role_arn: "AmazonResourceName", # required
-    #           delivery_stream_arn: "AmazonResourceName", # required
-    #         },
-    #         cloud_watch_destination: {
-    #           dimension_configurations: [ # required
-    #             {
-    #               dimension_name: "DimensionName", # required
-    #               dimension_value_source: "MESSAGE_TAG", # required, accepts MESSAGE_TAG, EMAIL_HEADER, LINK_TAG
-    #               default_dimension_value: "DefaultDimensionValue", # required
-    #             },
-    #           ],
-    #         },
-    #         sns_destination: {
-    #           topic_arn: "AmazonResourceName", # required
-    #         },
-    #         pinpoint_destination: {
-    #           application_arn: "AmazonResourceName",
-    #         },
-    #       }
-    #
     # @!attribute [rw] enabled
     #   If `true`, the event destination is enabled. When the event
     #   destination is enabled, the specified event types are sent to the
@@ -1366,8 +1085,6 @@ module Aws::PinpointEmail
 
     # A request to obtain information about the email-sending capabilities
     # of your Amazon Pinpoint account.
-    #
-    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetAccountRequest AWS API Documentation
     #
@@ -1441,13 +1158,6 @@ module Aws::PinpointEmail
     # A request to retrieve a list of the blacklists that your dedicated IP
     # addresses appear on.
     #
-    # @note When making an API call, you may pass GetBlacklistReportsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         blacklist_item_names: ["BlacklistItemName"], # required
-    #       }
-    #
     # @!attribute [rw] blacklist_item_names
     #   A list of IP addresses that you want to retrieve blacklist
     #   information about. You can only specify the dedicated IP addresses
@@ -1480,13 +1190,6 @@ module Aws::PinpointEmail
     # A request to obtain information about the event destinations for a
     # configuration set.
     #
-    # @note When making an API call, you may pass GetConfigurationSetEventDestinationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_set_name: "ConfigurationSetName", # required
-    #       }
-    #
     # @!attribute [rw] configuration_set_name
     #   The name of the configuration set that contains the event
     #   destination.
@@ -1516,13 +1219,6 @@ module Aws::PinpointEmail
     end
 
     # A request to obtain information about a configuration set.
-    #
-    # @note When making an API call, you may pass GetConfigurationSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_set_name: "ConfigurationSetName", # required
-    #       }
     #
     # @!attribute [rw] configuration_set_name
     #   The name of the configuration set that you want to obtain more
@@ -1584,13 +1280,6 @@ module Aws::PinpointEmail
 
     # A request to obtain more information about a dedicated IP address.
     #
-    # @note When making an API call, you may pass GetDedicatedIpRequest
-    #   data as a hash:
-    #
-    #       {
-    #         ip: "Ip", # required
-    #       }
-    #
     # @!attribute [rw] ip
     #   The IP address that you want to obtain more information about. The
     #   value you specify has to be a dedicated IP address that's
@@ -1620,15 +1309,6 @@ module Aws::PinpointEmail
     end
 
     # A request to obtain more information about dedicated IP pools.
-    #
-    # @note When making an API call, you may pass GetDedicatedIpsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         pool_name: "PoolName",
-    #         next_token: "NextToken",
-    #         page_size: 1,
-    #       }
     #
     # @!attribute [rw] pool_name
     #   The name of the IP pool that the dedicated IP address is associated
@@ -1700,8 +1380,6 @@ module Aws::PinpointEmail
     #
     # [1]: http://aws.amazon.com/pinpoint/pricing/
     #
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetDeliverabilityDashboardOptionsRequest AWS API Documentation
     #
     class GetDeliverabilityDashboardOptionsRequest < Aws::EmptyStructure; end
@@ -1757,13 +1435,6 @@ module Aws::PinpointEmail
 
     # A request to retrieve the results of a predictive inbox placement
     # test.
-    #
-    # @note When making an API call, you may pass GetDeliverabilityTestReportRequest
-    #   data as a hash:
-    #
-    #       {
-    #         report_id: "ReportId", # required
-    #       }
     #
     # @!attribute [rw] report_id
     #   A unique string that identifies the predictive inbox placement test.
@@ -1823,13 +1494,6 @@ module Aws::PinpointEmail
     # using a domain that the Deliverability dashboard is enabled for
     # (`PutDeliverabilityDashboardOption` operation).
     #
-    # @note When making an API call, you may pass GetDomainDeliverabilityCampaignRequest
-    #   data as a hash:
-    #
-    #       {
-    #         campaign_id: "CampaignId", # required
-    #       }
-    #
     # @!attribute [rw] campaign_id
     #   The unique identifier for the campaign. Amazon Pinpoint
     #   automatically generates and assigns this identifier to a campaign.
@@ -1864,15 +1528,6 @@ module Aws::PinpointEmail
     end
 
     # A request to obtain deliverability metrics for a domain.
-    #
-    # @note When making an API call, you may pass GetDomainStatisticsReportRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "Identity", # required
-    #         start_date: Time.now, # required
-    #         end_date: Time.now, # required
-    #       }
     #
     # @!attribute [rw] domain
     #   The domain that you want to obtain deliverability metrics for.
@@ -1924,13 +1579,6 @@ module Aws::PinpointEmail
     end
 
     # A request to return details about an email identity.
-    #
-    # @note When making an API call, you may pass GetEmailIdentityRequest
-    #   data as a hash:
-    #
-    #       {
-    #         email_identity: "Identity", # required
-    #       }
     #
     # @!attribute [rw] email_identity
     #   The email identity that you want to retrieve details for.
@@ -2051,14 +1699,6 @@ module Aws::PinpointEmail
     # dashboard for the domain (`PutDeliverabilityDashboardOption`
     # operation).
     #
-    # @note When making an API call, you may pass InboxPlacementTrackingOption
-    #   data as a hash:
-    #
-    #       {
-    #         global: false,
-    #         tracked_isps: ["IspName"],
-    #       }
-    #
     # @!attribute [rw] global
     #   Specifies whether inbox placement data is being tracked for the
     #   domain.
@@ -2104,14 +1744,6 @@ module Aws::PinpointEmail
     # email events. You can use Amazon Kinesis Data Firehose to stream data
     # to other services, such as Amazon S3 and Amazon Redshift.
     #
-    # @note When making an API call, you may pass KinesisFirehoseDestination
-    #   data as a hash:
-    #
-    #       {
-    #         iam_role_arn: "AmazonResourceName", # required
-    #         delivery_stream_arn: "AmazonResourceName", # required
-    #       }
-    #
     # @!attribute [rw] iam_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that Amazon Pinpoint
     #   uses when sending email events to the Amazon Kinesis Data Firehose
@@ -2140,14 +1772,6 @@ module Aws::PinpointEmail
 
     # A request to obtain a list of configuration sets for your Amazon
     # Pinpoint account in the current AWS Region.
-    #
-    # @note When making an API call, you may pass ListConfigurationSetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         page_size: 1,
-    #       }
     #
     # @!attribute [rw] next_token
     #   A token returned from a previous call to `ListConfigurationSets` to
@@ -2196,14 +1820,6 @@ module Aws::PinpointEmail
 
     # A request to obtain a list of dedicated IP pools.
     #
-    # @note When making an API call, you may pass ListDedicatedIpPoolsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         page_size: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   A token returned from a previous call to `ListDedicatedIpPools` to
     #   indicate the position in the list of dedicated IP pools.
@@ -2250,14 +1866,6 @@ module Aws::PinpointEmail
 
     # A request to list all of the predictive inbox placement tests that
     # you've performed.
-    #
-    # @note When making an API call, you may pass ListDeliverabilityTestReportsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         page_size: 1,
-    #       }
     #
     # @!attribute [rw] next_token
     #   A token returned from a previous call to
@@ -2316,17 +1924,6 @@ module Aws::PinpointEmail
     # is available for a domain only if you enabled the Deliverability
     # dashboard (`PutDeliverabilityDashboardOption` operation) for the
     # domain.
-    #
-    # @note When making an API call, you may pass ListDomainDeliverabilityCampaignsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         start_date: Time.now, # required
-    #         end_date: Time.now, # required
-    #         subscribed_domain: "Domain", # required
-    #         next_token: "NextToken",
-    #         page_size: 1,
-    #       }
     #
     # @!attribute [rw] start_date
     #   The first day, in Unix time format, that you want to obtain
@@ -2400,14 +1997,6 @@ module Aws::PinpointEmail
     # already verified, identities that are unverified, and identities that
     # were verified in the past, but are no longer verified.
     #
-    # @note When making an API call, you may pass ListEmailIdentitiesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         page_size: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   A token returned from a previous call to `ListEmailIdentities` to
     #   indicate the position in the list of identities.
@@ -2457,13 +2046,6 @@ module Aws::PinpointEmail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource that you want to
     #   retrieve tag information for.
@@ -2548,26 +2130,6 @@ module Aws::PinpointEmail
     # Represents the email message that you're sending. The `Message`
     # object consists of a subject line and a message body.
     #
-    # @note When making an API call, you may pass Message
-    #   data as a hash:
-    #
-    #       {
-    #         subject: { # required
-    #           data: "MessageData", # required
-    #           charset: "Charset",
-    #         },
-    #         body: { # required
-    #           text: {
-    #             data: "MessageData", # required
-    #             charset: "Charset",
-    #           },
-    #           html: {
-    #             data: "MessageData", # required
-    #             charset: "Charset",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] subject
     #   The subject line of the email. The subject line can only contain
     #   7-bit ASCII characters. However, you can specify non-ASCII
@@ -2601,14 +2163,6 @@ module Aws::PinpointEmail
 
     # Contains the name and value of a tag that you apply to an email. You
     # can use message tags when you publish email sending events.
-    #
-    # @note When making an API call, you may pass MessageTag
-    #   data as a hash:
-    #
-    #       {
-    #         name: "MessageTagName", # required
-    #         value: "MessageTagValue", # required
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the message tag. The message tag name has to meet the
@@ -2678,13 +2232,6 @@ module Aws::PinpointEmail
     # Pinpoint projects. You can use these attributes to create segments for
     # your campaigns.
     #
-    # @note When making an API call, you may pass PinpointDestination
-    #   data as a hash:
-    #
-    #       {
-    #         application_arn: "AmazonResourceName",
-    #       }
-    #
     # @!attribute [rw] application_arn
     #   The Amazon Resource Name (ARN) of the Amazon Pinpoint project that
     #   you want to send email events to.
@@ -2740,13 +2287,6 @@ module Aws::PinpointEmail
     # A request to enable or disable the automatic IP address warm-up
     # feature.
     #
-    # @note When making an API call, you may pass PutAccountDedicatedIpWarmupAttributesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         auto_warmup_enabled: false,
-    #       }
-    #
     # @!attribute [rw] auto_warmup_enabled
     #   Enables or disables the automatic warm-up feature for dedicated IP
     #   addresses that are associated with your Amazon Pinpoint account in
@@ -2770,13 +2310,6 @@ module Aws::PinpointEmail
     class PutAccountDedicatedIpWarmupAttributesResponse < Aws::EmptyStructure; end
 
     # A request to change the ability of your account to send email.
-    #
-    # @note When making an API call, you may pass PutAccountSendingAttributesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         sending_enabled: false,
-    #       }
     #
     # @!attribute [rw] sending_enabled
     #   Enables or disables your account's ability to send email. Set to
@@ -2805,15 +2338,6 @@ module Aws::PinpointEmail
     class PutAccountSendingAttributesResponse < Aws::EmptyStructure; end
 
     # A request to associate a configuration set with a dedicated IP pool.
-    #
-    # @note When making an API call, you may pass PutConfigurationSetDeliveryOptionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_set_name: "ConfigurationSetName", # required
-    #         tls_policy: "REQUIRE", # accepts REQUIRE, OPTIONAL
-    #         sending_pool_name: "SendingPoolName",
-    #       }
     #
     # @!attribute [rw] configuration_set_name
     #   The name of the configuration set that you want to associate with a
@@ -2853,14 +2377,6 @@ module Aws::PinpointEmail
     # A request to enable or disable tracking of reputation metrics for a
     # configuration set.
     #
-    # @note When making an API call, you may pass PutConfigurationSetReputationOptionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_set_name: "ConfigurationSetName", # required
-    #         reputation_metrics_enabled: false,
-    #       }
-    #
     # @!attribute [rw] configuration_set_name
     #   The name of the configuration set that you want to enable or disable
     #   reputation metric tracking for.
@@ -2891,14 +2407,6 @@ module Aws::PinpointEmail
     # A request to enable or disable the ability of Amazon Pinpoint to send
     # emails that use a specific configuration set.
     #
-    # @note When making an API call, you may pass PutConfigurationSetSendingOptionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_set_name: "ConfigurationSetName", # required
-    #         sending_enabled: false,
-    #       }
-    #
     # @!attribute [rw] configuration_set_name
     #   The name of the configuration set that you want to enable or disable
     #   email sending for.
@@ -2928,14 +2436,6 @@ module Aws::PinpointEmail
     # A request to add a custom domain for tracking open and click events to
     # a configuration set.
     #
-    # @note When making an API call, you may pass PutConfigurationSetTrackingOptionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_set_name: "ConfigurationSetName", # required
-    #         custom_redirect_domain: "CustomRedirectDomain",
-    #       }
-    #
     # @!attribute [rw] configuration_set_name
     #   The name of the configuration set that you want to add a custom
     #   tracking domain to.
@@ -2962,14 +2462,6 @@ module Aws::PinpointEmail
     class PutConfigurationSetTrackingOptionsResponse < Aws::EmptyStructure; end
 
     # A request to move a dedicated IP address to a dedicated IP pool.
-    #
-    # @note When making an API call, you may pass PutDedicatedIpInPoolRequest
-    #   data as a hash:
-    #
-    #       {
-    #         ip: "Ip", # required
-    #         destination_pool_name: "PoolName", # required
-    #       }
     #
     # @!attribute [rw] ip
     #   The IP address that you want to move to the dedicated IP pool. The
@@ -3001,14 +2493,6 @@ module Aws::PinpointEmail
     # A request to change the warm-up attributes for a dedicated IP address.
     # This operation is useful when you want to resume the warm-up process
     # for an existing IP address.
-    #
-    # @note When making an API call, you may pass PutDedicatedIpWarmupAttributesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         ip: "Ip", # required
-    #         warmup_percentage: 1, # required
-    #       }
     #
     # @!attribute [rw] ip
     #   The dedicated IP address that you want to update the warm-up
@@ -3052,23 +2536,6 @@ module Aws::PinpointEmail
     #
     # [1]: http://aws.amazon.com/pinpoint/pricing/
     #
-    # @note When making an API call, you may pass PutDeliverabilityDashboardOptionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dashboard_enabled: false, # required
-    #         subscribed_domains: [
-    #           {
-    #             domain: "Domain",
-    #             subscription_start_date: Time.now,
-    #             inbox_placement_tracking_option: {
-    #               global: false,
-    #               tracked_isps: ["IspName"],
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] dashboard_enabled
     #   Specifies whether to enable the Deliverability dashboard for your
     #   Amazon Pinpoint account. To enable the dashboard, set this value to
@@ -3098,14 +2565,6 @@ module Aws::PinpointEmail
 
     # A request to enable or disable DKIM signing of email that you send
     # from an email identity.
-    #
-    # @note When making an API call, you may pass PutEmailIdentityDkimAttributesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         email_identity: "Identity", # required
-    #         signing_enabled: false,
-    #       }
     #
     # @!attribute [rw] email_identity
     #   The email identity that you want to change the DKIM settings for.
@@ -3138,14 +2597,6 @@ module Aws::PinpointEmail
 
     # A request to set the attributes that control how bounce and complaint
     # events are processed.
-    #
-    # @note When making an API call, you may pass PutEmailIdentityFeedbackAttributesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         email_identity: "Identity", # required
-    #         email_forwarding_enabled: false,
-    #       }
     #
     # @!attribute [rw] email_identity
     #   The email identity that you want to configure bounce and complaint
@@ -3187,15 +2638,6 @@ module Aws::PinpointEmail
 
     # A request to configure the custom MAIL FROM domain for a verified
     # identity.
-    #
-    # @note When making an API call, you may pass PutEmailIdentityMailFromAttributesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         email_identity: "Identity", # required
-    #         mail_from_domain: "MailFromDomainName",
-    #         behavior_on_mx_failure: "USE_DEFAULT_VALUE", # accepts USE_DEFAULT_VALUE, REJECT_MESSAGE
-    #       }
     #
     # @!attribute [rw] email_identity
     #   The verified email identity that you want to set up the custom MAIL
@@ -3246,13 +2688,6 @@ module Aws::PinpointEmail
 
     # The raw email message.
     #
-    # @note When making an API call, you may pass RawMessage
-    #   data as a hash:
-    #
-    #       {
-    #         data: "data", # required
-    #       }
-    #
     # @!attribute [rw] data
     #   The raw email message. The message has to meet the following
     #   criteria:
@@ -3293,14 +2728,6 @@ module Aws::PinpointEmail
     # Enable or disable collection of reputation metrics for emails that you
     # send using this configuration set in the current AWS Region.
     #
-    # @note When making an API call, you may pass ReputationOptions
-    #   data as a hash:
-    #
-    #       {
-    #         reputation_metrics_enabled: false,
-    #         last_fresh_start: Time.now,
-    #       }
-    #
     # @!attribute [rw] reputation_metrics_enabled
     #   If `true`, tracking of reputation metrics is enabled for the
     #   configuration set. If `false`, tracking of reputation metrics is
@@ -3324,52 +2751,6 @@ module Aws::PinpointEmail
     end
 
     # A request to send an email message.
-    #
-    # @note When making an API call, you may pass SendEmailRequest
-    #   data as a hash:
-    #
-    #       {
-    #         from_email_address: "EmailAddress",
-    #         destination: { # required
-    #           to_addresses: ["EmailAddress"],
-    #           cc_addresses: ["EmailAddress"],
-    #           bcc_addresses: ["EmailAddress"],
-    #         },
-    #         reply_to_addresses: ["EmailAddress"],
-    #         feedback_forwarding_email_address: "EmailAddress",
-    #         content: { # required
-    #           simple: {
-    #             subject: { # required
-    #               data: "MessageData", # required
-    #               charset: "Charset",
-    #             },
-    #             body: { # required
-    #               text: {
-    #                 data: "MessageData", # required
-    #                 charset: "Charset",
-    #               },
-    #               html: {
-    #                 data: "MessageData", # required
-    #                 charset: "Charset",
-    #               },
-    #             },
-    #           },
-    #           raw: {
-    #             data: "data", # required
-    #           },
-    #           template: {
-    #             template_arn: "TemplateArn",
-    #             template_data: "TemplateData",
-    #           },
-    #         },
-    #         email_tags: [
-    #           {
-    #             name: "MessageTagName", # required
-    #             value: "MessageTagValue", # required
-    #           },
-    #         ],
-    #         configuration_set_name: "ConfigurationSetName",
-    #       }
     #
     # @!attribute [rw] from_email_address
     #   The email address that you want to use as the "From" address for
@@ -3479,13 +2860,6 @@ module Aws::PinpointEmail
     # Used to enable or disable email sending for messages that use this
     # configuration set in the current AWS Region.
     #
-    # @note When making an API call, you may pass SendingOptions
-    #   data as a hash:
-    #
-    #       {
-    #         sending_enabled: false,
-    #       }
-    #
     # @!attribute [rw] sending_enabled
     #   If `true`, email sending is enabled for the configuration set. If
     #   `false`, email sending is disabled for the configuration set.
@@ -3509,13 +2883,6 @@ module Aws::PinpointEmail
     # An object that defines an Amazon SNS destination for email events. You
     # can use Amazon SNS to send notification when certain email events
     # occur.
-    #
-    # @note When making an API call, you may pass SnsDestination
-    #   data as a hash:
-    #
-    #       {
-    #         topic_arn: "AmazonResourceName", # required
-    #       }
     #
     # @!attribute [rw] topic_arn
     #   The Amazon Resource Name (ARN) of the Amazon SNS topic that you want
@@ -3566,14 +2933,6 @@ module Aws::PinpointEmail
     #   resources that are located in the specified AWS Region for your AWS
     #   account.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   One part of a key-value pair that defines a tag. The maximum length
     #   of a tag key is 128 characters. The minimum length is 1 character.
@@ -3596,19 +2955,6 @@ module Aws::PinpointEmail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource that you want to add
     #   one or more tags to.
@@ -3634,14 +2980,6 @@ module Aws::PinpointEmail
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass Template
-    #   data as a hash:
-    #
-    #       {
-    #         template_arn: "TemplateArn",
-    #         template_data: "TemplateData",
-    #       }
-    #
     # @!attribute [rw] template_arn
     #   The Amazon Resource Name (ARN) of the template.
     #   @return [String]
@@ -3678,13 +3016,6 @@ module Aws::PinpointEmail
     # You can optionally configure Amazon Pinpoint to use a domain that you
     # operate for these images and links.
     #
-    # @note When making an API call, you may pass TrackingOptions
-    #   data as a hash:
-    #
-    #       {
-    #         custom_redirect_domain: "CustomRedirectDomain", # required
-    #       }
-    #
     # @!attribute [rw] custom_redirect_domain
     #   The domain that you want to use for tracking open and click events.
     #   @return [String]
@@ -3697,14 +3028,6 @@ module Aws::PinpointEmail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource that you want to
     #   remove one or more tags from.
@@ -3736,37 +3059,6 @@ module Aws::PinpointEmail
 
     # A request to change the settings for an event destination for a
     # configuration set.
-    #
-    # @note When making an API call, you may pass UpdateConfigurationSetEventDestinationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_set_name: "ConfigurationSetName", # required
-    #         event_destination_name: "EventDestinationName", # required
-    #         event_destination: { # required
-    #           enabled: false,
-    #           matching_event_types: ["SEND"], # accepts SEND, REJECT, BOUNCE, COMPLAINT, DELIVERY, OPEN, CLICK, RENDERING_FAILURE
-    #           kinesis_firehose_destination: {
-    #             iam_role_arn: "AmazonResourceName", # required
-    #             delivery_stream_arn: "AmazonResourceName", # required
-    #           },
-    #           cloud_watch_destination: {
-    #             dimension_configurations: [ # required
-    #               {
-    #                 dimension_name: "DimensionName", # required
-    #                 dimension_value_source: "MESSAGE_TAG", # required, accepts MESSAGE_TAG, EMAIL_HEADER, LINK_TAG
-    #                 default_dimension_value: "DefaultDimensionValue", # required
-    #               },
-    #             ],
-    #           },
-    #           sns_destination: {
-    #             topic_arn: "AmazonResourceName", # required
-    #           },
-    #           pinpoint_destination: {
-    #             application_arn: "AmazonResourceName",
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] configuration_set_name
     #   The name of the configuration set that contains the event

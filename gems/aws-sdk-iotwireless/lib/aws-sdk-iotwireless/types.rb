@@ -12,18 +12,6 @@ module Aws::IoTWireless
 
     # ABP device object for LoRaWAN specification v1.0.x
     #
-    # @note When making an API call, you may pass AbpV1_0_x
-    #   data as a hash:
-    #
-    #       {
-    #         dev_addr: "DevAddr",
-    #         session_keys: {
-    #           nwk_s_key: "NwkSKey",
-    #           app_s_key: "AppSKey",
-    #         },
-    #         f_cnt_start: 1,
-    #       }
-    #
     # @!attribute [rw] dev_addr
     #   The DevAddr value.
     #   @return [String]
@@ -45,20 +33,6 @@ module Aws::IoTWireless
     end
 
     # ABP device object for LoRaWAN specification v1.1
-    #
-    # @note When making an API call, you may pass AbpV1_1
-    #   data as a hash:
-    #
-    #       {
-    #         dev_addr: "DevAddr",
-    #         session_keys: {
-    #           f_nwk_s_int_key: "FNwkSIntKey",
-    #           s_nwk_s_int_key: "SNwkSIntKey",
-    #           nwk_s_enc_key: "NwkSEncKey",
-    #           app_s_key: "AppSKey",
-    #         },
-    #         f_cnt_start: 1,
-    #       }
     #
     # @!attribute [rw] dev_addr
     #   The DevAddr value.
@@ -119,15 +93,6 @@ module Aws::IoTWireless
     # LoRaWAN application configuration, which can be used to perform
     # geolocation.
     #
-    # @note When making an API call, you may pass ApplicationConfig
-    #   data as a hash:
-    #
-    #       {
-    #         f_port: 1,
-    #         type: "SemtechGeolocation", # accepts SemtechGeolocation
-    #         destination_name: "DestinationName",
-    #       }
-    #
     # @!attribute [rw] f_port
     #   The Fport value.
     #   @return [Integer]
@@ -151,23 +116,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateAwsAccountWithPartnerAccountRequest
-    #   data as a hash:
-    #
-    #       {
-    #         sidewalk: { # required
-    #           amazon_id: "AmazonId",
-    #           app_server_private_key: "AppServerPrivateKey",
-    #         },
-    #         client_request_token: "ClientRequestToken",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] sidewalk
     #   The Sidewalk account credentials.
     #   @return [Types::SidewalkAccountInfo]
@@ -210,14 +158,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateMulticastGroupWithFuotaTaskRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "FuotaTaskId", # required
-    #         multicast_group_id: "MulticastGroupId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of a FUOTA task.
     #   @return [String]
@@ -235,14 +175,6 @@ module Aws::IoTWireless
 
     class AssociateMulticastGroupWithFuotaTaskResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass AssociateWirelessDeviceWithFuotaTaskRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "FuotaTaskId", # required
-    #         wireless_device_id: "WirelessDeviceId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of a FUOTA task.
     #   @return [String]
@@ -260,14 +192,6 @@ module Aws::IoTWireless
 
     class AssociateWirelessDeviceWithFuotaTaskResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass AssociateWirelessDeviceWithMulticastGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "MulticastGroupId", # required
-    #         wireless_device_id: "WirelessDeviceId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the multicast group.
     #   @return [String]
@@ -285,14 +209,6 @@ module Aws::IoTWireless
 
     class AssociateWirelessDeviceWithMulticastGroupResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass AssociateWirelessDeviceWithThingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "WirelessDeviceId", # required
-    #         thing_arn: "ThingArn", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the resource to update.
     #   @return [String]
@@ -310,14 +226,6 @@ module Aws::IoTWireless
 
     class AssociateWirelessDeviceWithThingResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass AssociateWirelessGatewayWithCertificateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "WirelessGatewayId", # required
-    #         iot_certificate_id: "IotCertificateId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the resource to update.
     #   @return [String]
@@ -343,14 +251,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateWirelessGatewayWithThingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "WirelessGatewayId", # required
-    #         thing_arn: "ThingArn", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the resource to update.
     #   @return [String]
@@ -370,14 +270,6 @@ module Aws::IoTWireless
 
     # Beaconing parameters for configuring the wireless gateways.
     #
-    # @note When making an API call, you may pass Beaconing
-    #   data as a hash:
-    #
-    #       {
-    #         data_rate: 1,
-    #         frequencies: [1],
-    #       }
-    #
     # @!attribute [rw] data_rate
     #   The data rate for gateways that are sending the beacons.
     #   @return [Integer]
@@ -393,13 +285,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CancelMulticastGroupSessionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "MulticastGroupId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the multicast group.
     #   @return [String]
@@ -414,14 +299,6 @@ module Aws::IoTWireless
 
     # CDMA local ID information, which corresponds to the local
     # identification parameters of a CDMA cell.
-    #
-    # @note When making an API call, you may pass CdmaLocalId
-    #   data as a hash:
-    #
-    #       {
-    #         pn_offset: 1, # required
-    #         cdma_channel: 1, # required
-    #       }
     #
     # @!attribute [rw] pn_offset
     #   Pseudo-noise offset, which is a characteristic of the signal from a
@@ -440,16 +317,6 @@ module Aws::IoTWireless
     end
 
     # CDMA object for network measurement reports.
-    #
-    # @note When making an API call, you may pass CdmaNmrObj
-    #   data as a hash:
-    #
-    #       {
-    #         pn_offset: 1, # required
-    #         cdma_channel: 1, # required
-    #         pilot_power: 1,
-    #         base_station_id: 1,
-    #       }
     #
     # @!attribute [rw] pn_offset
     #   Pseudo-noise offset, which is a characteristic of the signal from a
@@ -479,31 +346,6 @@ module Aws::IoTWireless
     end
 
     # CDMA (Code-division multiple access) object.
-    #
-    # @note When making an API call, you may pass CdmaObj
-    #   data as a hash:
-    #
-    #       {
-    #         system_id: 1, # required
-    #         network_id: 1, # required
-    #         base_station_id: 1, # required
-    #         registration_zone: 1,
-    #         cdma_local_id: {
-    #           pn_offset: 1, # required
-    #           cdma_channel: 1, # required
-    #         },
-    #         pilot_power: 1,
-    #         base_lat: 1.0,
-    #         base_lng: 1.0,
-    #         cdma_nmr: [
-    #           {
-    #             pn_offset: 1, # required
-    #             cdma_channel: 1, # required
-    #             pilot_power: 1,
-    #             base_station_id: 1,
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] system_id
     #   CDMA system ID (SID).
@@ -557,132 +399,6 @@ module Aws::IoTWireless
     end
 
     # The cell towers that were used to perform the measurements.
-    #
-    # @note When making an API call, you may pass CellTowers
-    #   data as a hash:
-    #
-    #       {
-    #         gsm: [
-    #           {
-    #             mcc: 1, # required
-    #             mnc: 1, # required
-    #             lac: 1, # required
-    #             geran_cid: 1, # required
-    #             gsm_local_id: {
-    #               bsic: 1, # required
-    #               bcch: 1, # required
-    #             },
-    #             gsm_timing_advance: 1,
-    #             rx_level: 1,
-    #             gsm_nmr: [
-    #               {
-    #                 bsic: 1, # required
-    #                 bcch: 1, # required
-    #                 rx_level: 1,
-    #                 global_identity: {
-    #                   lac: 1, # required
-    #                   geran_cid: 1, # required
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         wcdma: [
-    #           {
-    #             mcc: 1, # required
-    #             mnc: 1, # required
-    #             lac: 1,
-    #             utran_cid: 1, # required
-    #             wcdma_local_id: {
-    #               uarfcndl: 1, # required
-    #               psc: 1, # required
-    #             },
-    #             rscp: 1,
-    #             path_loss: 1,
-    #             wcdma_nmr: [
-    #               {
-    #                 uarfcndl: 1, # required
-    #                 psc: 1, # required
-    #                 utran_cid: 1, # required
-    #                 rscp: 1,
-    #                 path_loss: 1,
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         tdscdma: [
-    #           {
-    #             mcc: 1, # required
-    #             mnc: 1, # required
-    #             lac: 1,
-    #             utran_cid: 1, # required
-    #             tdscdma_local_id: {
-    #               uarfcn: 1, # required
-    #               cell_params: 1, # required
-    #             },
-    #             tdscdma_timing_advance: 1,
-    #             rscp: 1,
-    #             path_loss: 1,
-    #             tdscdma_nmr: [
-    #               {
-    #                 uarfcn: 1, # required
-    #                 cell_params: 1, # required
-    #                 utran_cid: 1,
-    #                 rscp: 1,
-    #                 path_loss: 1,
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         lte: [
-    #           {
-    #             mcc: 1, # required
-    #             mnc: 1, # required
-    #             eutran_cid: 1, # required
-    #             tac: 1,
-    #             lte_local_id: {
-    #               pci: 1, # required
-    #               earfcn: 1, # required
-    #             },
-    #             lte_timing_advance: 1,
-    #             rsrp: 1,
-    #             rsrq: 1.0,
-    #             nr_capable: false,
-    #             lte_nmr: [
-    #               {
-    #                 pci: 1, # required
-    #                 earfcn: 1, # required
-    #                 eutran_cid: 1, # required
-    #                 rsrp: 1,
-    #                 rsrq: 1.0,
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         cdma: [
-    #           {
-    #             system_id: 1, # required
-    #             network_id: 1, # required
-    #             base_station_id: 1, # required
-    #             registration_zone: 1,
-    #             cdma_local_id: {
-    #               pn_offset: 1, # required
-    #               cdma_channel: 1, # required
-    #             },
-    #             pilot_power: 1,
-    #             base_lat: 1.0,
-    #             base_lng: 1.0,
-    #             cdma_nmr: [
-    #               {
-    #                 pn_offset: 1, # required
-    #                 cdma_channel: 1, # required
-    #                 pilot_power: 1,
-    #                 base_station_id: 1,
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] gsm
     #   GSM object information.
@@ -756,16 +472,6 @@ module Aws::IoTWireless
     # Connection status event configuration object for enabling or disabling
     # topic.
     #
-    # @note When making an API call, you may pass ConnectionStatusEventConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         lo_ra_wan: {
-    #           gateway_eui_event_topic: "Enabled", # accepts Enabled, Disabled
-    #         },
-    #         wireless_gateway_id_event_topic: "Enabled", # accepts Enabled, Disabled
-    #       }
-    #
     # @!attribute [rw] lo_ra_wan
     #   Connection status event configuration object for enabling or
     #   disabling LoRaWAN related event topics.
@@ -786,15 +492,6 @@ module Aws::IoTWireless
     # Connection status resource type event configuration object for
     # enabling or disabling topic.
     #
-    # @note When making an API call, you may pass ConnectionStatusResourceTypeEventConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         lo_ra_wan: {
-    #           wireless_gateway_event_topic: "Enabled", # accepts Enabled, Disabled
-    #         },
-    #       }
-    #
     # @!attribute [rw] lo_ra_wan
     #   Connection status resource type event configuration object for
     #   enabling or disabling LoRaWAN related event topics.
@@ -806,24 +503,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDestinationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "DestinationName", # required
-    #         expression_type: "RuleName", # required, accepts RuleName, MqttTopic
-    #         expression: "Expression", # required
-    #         description: "Description",
-    #         role_arn: "RoleArn", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         client_request_token: "ClientRequestToken",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the new resource.
     #   @return [String]
@@ -886,41 +565,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDeviceProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "DeviceProfileName",
-    #         lo_ra_wan: {
-    #           supports_class_b: false,
-    #           class_b_timeout: 1,
-    #           ping_slot_period: 1,
-    #           ping_slot_dr: 1,
-    #           ping_slot_freq: 1,
-    #           supports_class_c: false,
-    #           class_c_timeout: 1,
-    #           mac_version: "MacVersion",
-    #           reg_params_revision: "RegParamsRevision",
-    #           rx_delay_1: 1,
-    #           rx_dr_offset_1: 1,
-    #           rx_data_rate_2: 1,
-    #           rx_freq_2: 1,
-    #           factory_preset_freqs_list: [1],
-    #           max_eirp: 1,
-    #           max_duty_cycle: 1,
-    #           rf_region: "RfRegion",
-    #           supports_join: false,
-    #           supports_32_bit_f_cnt: false,
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         client_request_token: "ClientRequestToken",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the new resource.
     #   @return [String]
@@ -968,26 +612,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateFuotaTaskRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "FuotaTaskName",
-    #         description: "Description",
-    #         client_request_token: "ClientRequestToken",
-    #         lo_ra_wan: {
-    #           rf_region: "EU868", # accepts EU868, US915, AU915, AS923-1
-    #         },
-    #         firmware_update_image: "FirmwareUpdateImage", # required
-    #         firmware_update_role: "FirmwareUpdateRole", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of a FUOTA task.
     #   @return [String]
@@ -1051,25 +675,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateMulticastGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "MulticastGroupName",
-    #         description: "Description",
-    #         client_request_token: "ClientRequestToken",
-    #         lo_ra_wan: { # required
-    #           rf_region: "EU868", # accepts EU868, US915, AU915, AS923-1
-    #           dl_class: "ClassB", # accepts ClassB, ClassC
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the multicast group.
     #   @return [String]
@@ -1122,27 +727,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateNetworkAnalyzerConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "NetworkAnalyzerConfigurationName", # required
-    #         trace_content: {
-    #           wireless_device_frame_info: "ENABLED", # accepts ENABLED, DISABLED
-    #           log_level: "INFO", # accepts INFO, ERROR, DISABLED
-    #         },
-    #         wireless_devices: ["WirelessDeviceId"],
-    #         wireless_gateways: ["WirelessGatewayId"],
-    #         description: "Description",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         client_request_token: "ClientRequestToken",
-    #       }
-    #
     # @!attribute [rw] name
     #   Name of the network analyzer configuration.
     #   @return [String]
@@ -1210,25 +794,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateServiceProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ServiceProfileName",
-    #         lo_ra_wan: {
-    #           add_gw_metadata: false,
-    #           dr_min: 1,
-    #           dr_max: 1,
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         client_request_token: "ClientRequestToken",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the new resource.
     #   @return [String]
@@ -1277,74 +842,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateWirelessDeviceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         type: "Sidewalk", # required, accepts Sidewalk, LoRaWAN
-    #         name: "WirelessDeviceName",
-    #         description: "Description",
-    #         destination_name: "DestinationName", # required
-    #         client_request_token: "ClientRequestToken",
-    #         lo_ra_wan: {
-    #           dev_eui: "DevEui",
-    #           device_profile_id: "DeviceProfileId",
-    #           service_profile_id: "ServiceProfileId",
-    #           otaa_v1_1: {
-    #             app_key: "AppKey",
-    #             nwk_key: "NwkKey",
-    #             join_eui: "JoinEui",
-    #           },
-    #           otaa_v1_0_x: {
-    #             app_key: "AppKey",
-    #             app_eui: "AppEui",
-    #             gen_app_key: "GenAppKey",
-    #           },
-    #           abp_v1_1: {
-    #             dev_addr: "DevAddr",
-    #             session_keys: {
-    #               f_nwk_s_int_key: "FNwkSIntKey",
-    #               s_nwk_s_int_key: "SNwkSIntKey",
-    #               nwk_s_enc_key: "NwkSEncKey",
-    #               app_s_key: "AppSKey",
-    #             },
-    #             f_cnt_start: 1,
-    #           },
-    #           abp_v1_0_x: {
-    #             dev_addr: "DevAddr",
-    #             session_keys: {
-    #               nwk_s_key: "NwkSKey",
-    #               app_s_key: "AppSKey",
-    #             },
-    #             f_cnt_start: 1,
-    #           },
-    #           f_ports: {
-    #             fuota: 1,
-    #             multicast: 1,
-    #             clock_sync: 1,
-    #             positioning: {
-    #               clock_sync: 1,
-    #               stream: 1,
-    #               gnss: 1,
-    #             },
-    #             applications: [
-    #               {
-    #                 f_port: 1,
-    #                 type: "SemtechGeolocation", # accepts SemtechGeolocation
-    #                 destination_name: "DestinationName",
-    #               },
-    #             ],
-    #           },
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         positioning: "Enabled", # accepts Enabled, Disabled
-    #       }
-    #
     # @!attribute [rw] type
     #   The wireless device type.
     #   @return [String]
@@ -1414,34 +911,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateWirelessGatewayRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "WirelessGatewayName",
-    #         description: "Description",
-    #         lo_ra_wan: { # required
-    #           gateway_eui: "GatewayEui",
-    #           rf_region: "RfRegion",
-    #           join_eui_filters: [
-    #             ["JoinEui"],
-    #           ],
-    #           net_id_filters: ["NetId"],
-    #           sub_bands: [1],
-    #           beaconing: {
-    #             data_rate: 1,
-    #             frequencies: [1],
-    #           },
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         client_request_token: "ClientRequestToken",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the new resource.
     #   @return [String]
@@ -1495,39 +964,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateWirelessGatewayTaskDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         auto_create_tasks: false, # required
-    #         name: "WirelessGatewayTaskName",
-    #         update: {
-    #           update_data_source: "UpdateDataSource",
-    #           update_data_role: "UpdateDataSource",
-    #           lo_ra_wan: {
-    #             update_signature: "UpdateSignature",
-    #             sig_key_crc: 1,
-    #             current_version: {
-    #               package_version: "PackageVersion",
-    #               model: "Model",
-    #               station: "Station",
-    #             },
-    #             update_version: {
-    #               package_version: "PackageVersion",
-    #               model: "Model",
-    #               station: "Station",
-    #             },
-    #           },
-    #         },
-    #         client_request_token: "ClientRequestToken",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] auto_create_tasks
     #   Whether to automatically create tasks using this task definition for
     #   all gateways with the specified current version. If `false`, the
@@ -1582,14 +1018,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateWirelessGatewayTaskRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "WirelessGatewayId", # required
-    #         wireless_gateway_task_definition_id: "WirelessGatewayTaskDefinitionId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the resource to update.
     #   @return [String]
@@ -1620,13 +1048,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDestinationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "DestinationName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the resource to delete.
     #   @return [String]
@@ -1639,13 +1060,6 @@ module Aws::IoTWireless
 
     class DeleteDestinationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteDeviceProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "DeviceProfileId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the resource to delete.
     #   @return [String]
@@ -1658,13 +1072,6 @@ module Aws::IoTWireless
 
     class DeleteDeviceProfileResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteFuotaTaskRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "FuotaTaskId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of a FUOTA task.
     #   @return [String]
@@ -1677,13 +1084,6 @@ module Aws::IoTWireless
 
     class DeleteFuotaTaskResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteMulticastGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "MulticastGroupId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the multicast group.
     #   @return [String]
@@ -1696,13 +1096,6 @@ module Aws::IoTWireless
 
     class DeleteMulticastGroupResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteNetworkAnalyzerConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_name: "NetworkAnalyzerConfigurationName", # required
-    #       }
-    #
     # @!attribute [rw] configuration_name
     #   Name of the network analyzer configuration.
     #   @return [String]
@@ -1715,15 +1108,6 @@ module Aws::IoTWireless
 
     class DeleteNetworkAnalyzerConfigurationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteQueuedMessagesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "WirelessDeviceId", # required
-    #         message_id: "MessageId", # required
-    #         wireless_device_type: "Sidewalk", # accepts Sidewalk, LoRaWAN
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of a given wireless device for which downlink messages will
     #   be deleted.
@@ -1749,13 +1133,6 @@ module Aws::IoTWireless
 
     class DeleteQueuedMessagesResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteServiceProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ServiceProfileId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the resource to delete.
     #   @return [String]
@@ -1768,13 +1145,6 @@ module Aws::IoTWireless
 
     class DeleteServiceProfileResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteWirelessDeviceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "WirelessDeviceId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the resource to delete.
     #   @return [String]
@@ -1787,13 +1157,6 @@ module Aws::IoTWireless
 
     class DeleteWirelessDeviceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteWirelessGatewayRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "WirelessGatewayId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the resource to delete.
     #   @return [String]
@@ -1806,13 +1169,6 @@ module Aws::IoTWireless
 
     class DeleteWirelessGatewayResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteWirelessGatewayTaskDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "WirelessGatewayTaskDefinitionId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the resource to delete.
     #   @return [String]
@@ -1825,13 +1181,6 @@ module Aws::IoTWireless
 
     class DeleteWirelessGatewayTaskDefinitionResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteWirelessGatewayTaskRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "WirelessGatewayId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the resource to delete.
     #   @return [String]
@@ -1906,16 +1255,6 @@ module Aws::IoTWireless
     # Device registration state event configuration object for enabling and
     # disabling relevant topics.
     #
-    # @note When making an API call, you may pass DeviceRegistrationStateEventConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         sidewalk: {
-    #           amazon_id_event_topic: "Enabled", # accepts Enabled, Disabled
-    #         },
-    #         wireless_device_id_event_topic: "Enabled", # accepts Enabled, Disabled
-    #       }
-    #
     # @!attribute [rw] sidewalk
     #   Device registration state event configuration object for enabling or
     #   disabling Sidewalk related event topics.
@@ -1936,15 +1275,6 @@ module Aws::IoTWireless
     # Device registration state resource type event configuration object for
     # enabling or disabling topic.
     #
-    # @note When making an API call, you may pass DeviceRegistrationStateResourceTypeEventConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         sidewalk: {
-    #           wireless_device_event_topic: "Enabled", # accepts Enabled, Disabled
-    #         },
-    #       }
-    #
     # @!attribute [rw] sidewalk
     #   Device registration resource type state event configuration object
     #   for enabling or disabling Sidewalk related event topics.
@@ -1956,14 +1286,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateAwsAccountFromPartnerAccountRequest
-    #   data as a hash:
-    #
-    #       {
-    #         partner_account_id: "PartnerAccountId", # required
-    #         partner_type: "Sidewalk", # required, accepts Sidewalk
-    #       }
-    #
     # @!attribute [rw] partner_account_id
     #   The partner account ID to disassociate from the AWS account.
     #   @return [String]
@@ -1981,14 +1303,6 @@ module Aws::IoTWireless
 
     class DisassociateAwsAccountFromPartnerAccountResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DisassociateMulticastGroupFromFuotaTaskRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "FuotaTaskId", # required
-    #         multicast_group_id: "MulticastGroupId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of a FUOTA task.
     #   @return [String]
@@ -2006,14 +1320,6 @@ module Aws::IoTWireless
 
     class DisassociateMulticastGroupFromFuotaTaskResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DisassociateWirelessDeviceFromFuotaTaskRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "FuotaTaskId", # required
-    #         wireless_device_id: "WirelessDeviceId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of a FUOTA task.
     #   @return [String]
@@ -2031,14 +1337,6 @@ module Aws::IoTWireless
 
     class DisassociateWirelessDeviceFromFuotaTaskResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DisassociateWirelessDeviceFromMulticastGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "MulticastGroupId", # required
-    #         wireless_device_id: "WirelessDeviceId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the multicast group.
     #   @return [String]
@@ -2056,13 +1354,6 @@ module Aws::IoTWireless
 
     class DisassociateWirelessDeviceFromMulticastGroupResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DisassociateWirelessDeviceFromThingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "WirelessDeviceId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the resource to update.
     #   @return [String]
@@ -2075,13 +1366,6 @@ module Aws::IoTWireless
 
     class DisassociateWirelessDeviceFromThingResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DisassociateWirelessGatewayFromCertificateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "WirelessGatewayId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the resource to update.
     #   @return [String]
@@ -2094,13 +1378,6 @@ module Aws::IoTWireless
 
     class DisassociateWirelessGatewayFromCertificateResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DisassociateWirelessGatewayFromThingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "WirelessGatewayId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the resource to update.
     #   @return [String]
@@ -2211,27 +1488,6 @@ module Aws::IoTWireless
     # List of FPort assigned for different LoRaWAN application packages to
     # use
     #
-    # @note When making an API call, you may pass FPorts
-    #   data as a hash:
-    #
-    #       {
-    #         fuota: 1,
-    #         multicast: 1,
-    #         clock_sync: 1,
-    #         positioning: {
-    #           clock_sync: 1,
-    #           stream: 1,
-    #           gnss: 1,
-    #         },
-    #         applications: [
-    #           {
-    #             f_port: 1,
-    #             type: "SemtechGeolocation", # accepts SemtechGeolocation
-    #             destination_name: "DestinationName",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] fuota
     #   The Fport value.
     #   @return [Integer]
@@ -2289,14 +1545,6 @@ module Aws::IoTWireless
     # Gateway list item object that specifies the frequency and list of
     # gateways for which the downlink message should be sent.
     #
-    # @note When making an API call, you may pass GatewayListItem
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_id: "WirelessGatewayId", # required
-    #         downlink_frequency: 1, # required
-    #       }
-    #
     # @!attribute [rw] gateway_id
     #   The ID of the wireless gateways that you want to add to the list of
     #   gateways when sending downlink messages.
@@ -2314,13 +1562,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDestinationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "DestinationName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the resource to get.
     #   @return [String]
@@ -2366,13 +1607,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDeviceProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "DeviceProfileId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the resource to get.
     #   @return [String]
@@ -2408,8 +1642,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @api private
-    #
     class GetEventConfigurationByResourceTypesRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] device_registration_state
@@ -2444,13 +1676,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetFuotaTaskRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "FuotaTaskId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of a FUOTA task.
     #   @return [String]
@@ -2512,8 +1737,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @api private
-    #
     class GetLogLevelsByResourceTypesRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] default_log_level
@@ -2538,13 +1761,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetMulticastGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "MulticastGroupId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the multicast group.
     #   @return [String]
@@ -2596,13 +1812,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetMulticastGroupSessionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "MulticastGroupId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the multicast group.
     #   @return [String]
@@ -2623,13 +1832,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetNetworkAnalyzerConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_name: "NetworkAnalyzerConfigurationName", # required
-    #       }
-    #
     # @!attribute [rw] configuration_name
     #   Name of the network analyzer configuration.
     #   @return [String]
@@ -2678,14 +1880,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetPartnerAccountRequest
-    #   data as a hash:
-    #
-    #       {
-    #         partner_account_id: "PartnerAccountId", # required
-    #         partner_type: "Sidewalk", # required, accepts Sidewalk
-    #       }
-    #
     # @!attribute [rw] partner_account_id
     #   The partner account ID to disassociate from the AWS account.
     #   @return [String]
@@ -2716,14 +1910,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetPositionConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_identifier: "PositionResourceIdentifier", # required
-    #         resource_type: "WirelessDevice", # required, accepts WirelessDevice, WirelessGateway
-    #       }
-    #
     # @!attribute [rw] resource_identifier
     #   Resource identifier used in a position configuration.
     #   @return [String]
@@ -2757,152 +1943,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetPositionEstimateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         wi_fi_access_points: [
-    #           {
-    #             mac_address: "MacAddress", # required
-    #             rss: 1, # required
-    #           },
-    #         ],
-    #         cell_towers: {
-    #           gsm: [
-    #             {
-    #               mcc: 1, # required
-    #               mnc: 1, # required
-    #               lac: 1, # required
-    #               geran_cid: 1, # required
-    #               gsm_local_id: {
-    #                 bsic: 1, # required
-    #                 bcch: 1, # required
-    #               },
-    #               gsm_timing_advance: 1,
-    #               rx_level: 1,
-    #               gsm_nmr: [
-    #                 {
-    #                   bsic: 1, # required
-    #                   bcch: 1, # required
-    #                   rx_level: 1,
-    #                   global_identity: {
-    #                     lac: 1, # required
-    #                     geran_cid: 1, # required
-    #                   },
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #           wcdma: [
-    #             {
-    #               mcc: 1, # required
-    #               mnc: 1, # required
-    #               lac: 1,
-    #               utran_cid: 1, # required
-    #               wcdma_local_id: {
-    #                 uarfcndl: 1, # required
-    #                 psc: 1, # required
-    #               },
-    #               rscp: 1,
-    #               path_loss: 1,
-    #               wcdma_nmr: [
-    #                 {
-    #                   uarfcndl: 1, # required
-    #                   psc: 1, # required
-    #                   utran_cid: 1, # required
-    #                   rscp: 1,
-    #                   path_loss: 1,
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #           tdscdma: [
-    #             {
-    #               mcc: 1, # required
-    #               mnc: 1, # required
-    #               lac: 1,
-    #               utran_cid: 1, # required
-    #               tdscdma_local_id: {
-    #                 uarfcn: 1, # required
-    #                 cell_params: 1, # required
-    #               },
-    #               tdscdma_timing_advance: 1,
-    #               rscp: 1,
-    #               path_loss: 1,
-    #               tdscdma_nmr: [
-    #                 {
-    #                   uarfcn: 1, # required
-    #                   cell_params: 1, # required
-    #                   utran_cid: 1,
-    #                   rscp: 1,
-    #                   path_loss: 1,
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #           lte: [
-    #             {
-    #               mcc: 1, # required
-    #               mnc: 1, # required
-    #               eutran_cid: 1, # required
-    #               tac: 1,
-    #               lte_local_id: {
-    #                 pci: 1, # required
-    #                 earfcn: 1, # required
-    #               },
-    #               lte_timing_advance: 1,
-    #               rsrp: 1,
-    #               rsrq: 1.0,
-    #               nr_capable: false,
-    #               lte_nmr: [
-    #                 {
-    #                   pci: 1, # required
-    #                   earfcn: 1, # required
-    #                   eutran_cid: 1, # required
-    #                   rsrp: 1,
-    #                   rsrq: 1.0,
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #           cdma: [
-    #             {
-    #               system_id: 1, # required
-    #               network_id: 1, # required
-    #               base_station_id: 1, # required
-    #               registration_zone: 1,
-    #               cdma_local_id: {
-    #                 pn_offset: 1, # required
-    #                 cdma_channel: 1, # required
-    #               },
-    #               pilot_power: 1,
-    #               base_lat: 1.0,
-    #               base_lng: 1.0,
-    #               cdma_nmr: [
-    #                 {
-    #                   pn_offset: 1, # required
-    #                   cdma_channel: 1, # required
-    #                   pilot_power: 1,
-    #                   base_station_id: 1,
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #         ip: {
-    #           ip_address: "IPAddress", # required
-    #         },
-    #         gnss: {
-    #           payload: "GnssNav", # required
-    #           capture_time: 1.0,
-    #           capture_time_accuracy: 1.0,
-    #           assist_position: [1.0],
-    #           assist_altitude: 1.0,
-    #           use_2_d_solver: false,
-    #         },
-    #         timestamp: Time.now,
-    #       }
-    #
     # @!attribute [rw] wi_fi_access_points
     #   Retrieves an estimated device position by resolving WLAN measurement
     #   data. The position is resolved using HERE's Wi-Fi based solver.
@@ -2960,14 +2000,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetPositionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_identifier: "PositionResourceIdentifier", # required
-    #         resource_type: "WirelessDevice", # required, accepts WirelessDevice, WirelessGateway
-    #       }
-    #
     # @!attribute [rw] resource_identifier
     #   Resource identifier used to retrieve the position information.
     #   @return [String]
@@ -3023,15 +2055,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetResourceEventConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identifier: "Identifier", # required
-    #         identifier_type: "PartnerAccountId", # required, accepts PartnerAccountId, DevEui, GatewayEui, WirelessDeviceId, WirelessGatewayId
-    #         partner_type: "Sidewalk", # accepts Sidewalk
-    #       }
-    #
     # @!attribute [rw] identifier
     #   Resource identifier to opt in for event messaging.
     #   @return [String]
@@ -3084,14 +2107,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetResourceLogLevelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_identifier: "ResourceIdentifier", # required
-    #         resource_type: "ResourceType", # required
-    #       }
-    #
     # @!attribute [rw] resource_identifier
     #   The identifier of the resource. For a Wireless Device, it is the
     #   wireless device ID. For a wireless gateway, it is the wireless
@@ -3122,14 +2137,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetResourcePositionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_identifier: "PositionResourceIdentifier", # required
-    #         resource_type: "WirelessDevice", # required, accepts WirelessDevice, WirelessGateway
-    #       }
-    #
     # @!attribute [rw] resource_identifier
     #   The identifier of the resource for which position information is
     #   retrieved. It can be the wireless device ID or the wireless gateway
@@ -3165,13 +2172,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetServiceEndpointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_type: "CUPS", # accepts CUPS, LNS
-    #       }
-    #
     # @!attribute [rw] service_type
     #   The service type for which to get endpoint information about. Can be
     #   `CUPS` for the Configuration and Update Server endpoint, or `LNS`
@@ -3205,13 +2205,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetServiceProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ServiceProfileId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the resource to get.
     #   @return [String]
@@ -3247,14 +2240,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetWirelessDeviceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identifier: "Identifier", # required
-    #         identifier_type: "WirelessDeviceId", # required, accepts WirelessDeviceId, DevEui, ThingName, SidewalkManufacturingSn
-    #       }
-    #
     # @!attribute [rw] identifier
     #   The identifier of the wireless device to get.
     #   @return [String]
@@ -3332,13 +2317,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetWirelessDeviceStatisticsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         wireless_device_id: "WirelessDeviceId", # required
-    #       }
-    #
     # @!attribute [rw] wireless_device_id
     #   The ID of the wireless device for which to get the data.
     #   @return [String]
@@ -3374,13 +2352,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetWirelessGatewayCertificateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "WirelessGatewayId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the resource to get.
     #   @return [String]
@@ -3407,13 +2378,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetWirelessGatewayFirmwareInformationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "WirelessGatewayId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the resource to get.
     #   @return [String]
@@ -3434,14 +2398,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetWirelessGatewayRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identifier: "Identifier", # required
-    #         identifier_type: "GatewayEui", # required, accepts GatewayEui, WirelessGatewayId, ThingName
-    #       }
-    #
     # @!attribute [rw] identifier
     #   The identifier of the wireless gateway to get.
     #   @return [String]
@@ -3498,13 +2454,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetWirelessGatewayStatisticsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         wireless_gateway_id: "WirelessGatewayId", # required
-    #       }
-    #
     # @!attribute [rw] wireless_gateway_id
     #   The ID of the wireless gateway for which to get the data.
     #   @return [String]
@@ -3535,13 +2484,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetWirelessGatewayTaskDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "WirelessGatewayTaskDefinitionId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the resource to get.
     #   @return [String]
@@ -3579,13 +2521,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetWirelessGatewayTaskRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "WirelessGatewayId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the resource to get.
     #   @return [String]
@@ -3628,14 +2563,6 @@ module Aws::IoTWireless
 
     # Global identity information.
     #
-    # @note When making an API call, you may pass GlobalIdentity
-    #   data as a hash:
-    #
-    #       {
-    #         lac: 1, # required
-    #         geran_cid: 1, # required
-    #       }
-    #
     # @!attribute [rw] lac
     #   Location area code of the global identity.
     #   @return [Integer]
@@ -3652,18 +2579,6 @@ module Aws::IoTWireless
     end
 
     # Global navigation satellite system (GNSS) object used for positioning.
-    #
-    # @note When making an API call, you may pass Gnss
-    #   data as a hash:
-    #
-    #       {
-    #         payload: "GnssNav", # required
-    #         capture_time: 1.0,
-    #         capture_time_accuracy: 1.0,
-    #         assist_position: [1.0],
-    #         assist_altitude: 1.0,
-    #         use_2_d_solver: false,
-    #       }
     #
     # @!attribute [rw] payload
     #   Payload that contains the GNSS scan result, or NAV message, in
@@ -3715,14 +2630,6 @@ module Aws::IoTWireless
     # GSM local ID information, which corresponds to the local
     # identification parameters of a GSM cell.
     #
-    # @note When making an API call, you may pass GsmLocalId
-    #   data as a hash:
-    #
-    #       {
-    #         bsic: 1, # required
-    #         bcch: 1, # required
-    #       }
-    #
     # @!attribute [rw] bsic
     #   GSM base station identity code (BSIC).
     #   @return [Integer]
@@ -3739,19 +2646,6 @@ module Aws::IoTWireless
     end
 
     # GSM object for network measurement reports.
-    #
-    # @note When making an API call, you may pass GsmNmrObj
-    #   data as a hash:
-    #
-    #       {
-    #         bsic: 1, # required
-    #         bcch: 1, # required
-    #         rx_level: 1,
-    #         global_identity: {
-    #           lac: 1, # required
-    #           geran_cid: 1, # required
-    #         },
-    #       }
     #
     # @!attribute [rw] bsic
     #   GSM base station identity code (BSIC).
@@ -3780,33 +2674,6 @@ module Aws::IoTWireless
     end
 
     # GSM object.
-    #
-    # @note When making an API call, you may pass GsmObj
-    #   data as a hash:
-    #
-    #       {
-    #         mcc: 1, # required
-    #         mnc: 1, # required
-    #         lac: 1, # required
-    #         geran_cid: 1, # required
-    #         gsm_local_id: {
-    #           bsic: 1, # required
-    #           bcch: 1, # required
-    #         },
-    #         gsm_timing_advance: 1,
-    #         rx_level: 1,
-    #         gsm_nmr: [
-    #           {
-    #             bsic: 1, # required
-    #             bcch: 1, # required
-    #             rx_level: 1,
-    #             global_identity: {
-    #               lac: 1, # required
-    #               geran_cid: 1, # required
-    #             },
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] mcc
     #   Mobile Country Code.
@@ -3868,13 +2735,6 @@ module Aws::IoTWireless
 
     # IP address used for resolving device location.
     #
-    # @note When making an API call, you may pass Ip
-    #   data as a hash:
-    #
-    #       {
-    #         ip_address: "IPAddress", # required
-    #       }
-    #
     # @!attribute [rw] ip_address
     #   IP address information.
     #   @return [String]
@@ -3886,16 +2746,6 @@ module Aws::IoTWireless
     end
 
     # Join event configuration object for enabling or disabling topic.
-    #
-    # @note When making an API call, you may pass JoinEventConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         lo_ra_wan: {
-    #           dev_eui_event_topic: "Enabled", # accepts Enabled, Disabled
-    #         },
-    #         wireless_device_id_event_topic: "Enabled", # accepts Enabled, Disabled
-    #       }
     #
     # @!attribute [rw] lo_ra_wan
     #   Join event configuration object for enabling or disabling LoRaWAN
@@ -3917,15 +2767,6 @@ module Aws::IoTWireless
     # Join resource type event configuration object for enabling or
     # disabling topic.
     #
-    # @note When making an API call, you may pass JoinResourceTypeEventConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         lo_ra_wan: {
-    #           wireless_device_event_topic: "Enabled", # accepts Enabled, Disabled
-    #         },
-    #       }
-    #
     # @!attribute [rw] lo_ra_wan
     #   Join resource type event configuration object for enabling or
     #   disabling LoRaWAN related event topics.
@@ -3937,14 +2778,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDestinationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to return in this operation.
     #   @return [Integer]
@@ -3978,14 +2811,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDeviceProfilesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   To retrieve the next set of results, the `nextToken` value from a
     #   previous response; otherwise **null** to receive the first set of
@@ -4019,15 +2844,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEventConfigurationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_type: "SidewalkAccount", # required, accepts SidewalkAccount, WirelessDevice, WirelessGateway
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] resource_type
     #   Resource type to filter event configurations.
     #   @return [String]
@@ -4067,14 +2883,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFuotaTasksRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   To retrieve the next set of results, the `nextToken` value from a
     #   previous response; otherwise **null** to receive the first set of
@@ -4109,15 +2917,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListMulticastGroupsByFuotaTaskRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "FuotaTaskId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of a FUOTA task.
     #   @return [String]
@@ -4157,14 +2956,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListMulticastGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   To retrieve the next set of results, the `nextToken` value from a
     #   previous response; otherwise **null** to receive the first set of
@@ -4199,14 +2990,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListNetworkAnalyzerConfigurationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to return in this operation.
     #   @return [Integer]
@@ -4240,14 +3023,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPartnerAccountsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   To retrieve the next set of results, the `nextToken` value from a
     #   previous response; otherwise **null** to receive the first set of
@@ -4281,15 +3056,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPositionConfigurationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_type: "WirelessDevice", # accepts WirelessDevice, WirelessGateway
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] resource_type
     #   Resource type for which position configurations are listed.
     #   @return [String]
@@ -4328,16 +3094,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListQueuedMessagesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "WirelessDeviceId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         wireless_device_type: "Sidewalk", # accepts Sidewalk, LoRaWAN
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of a given wireless device which the downlink message packets
     #   are being sent.
@@ -4383,14 +3139,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListServiceProfilesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   To retrieve the next set of results, the `nextToken` value from a
     #   previous response; otherwise **null** to receive the first set of
@@ -4424,13 +3172,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource for which you want to list tags.
     #   @return [String]
@@ -4452,20 +3193,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListWirelessDevicesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         destination_name: "DestinationName",
-    #         device_profile_id: "DeviceProfileId",
-    #         service_profile_id: "ServiceProfileId",
-    #         wireless_device_type: "Sidewalk", # accepts Sidewalk, LoRaWAN
-    #         fuota_task_id: "FuotaTaskId",
-    #         multicast_group_id: "MulticastGroupId",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to return in this operation.
     #   @return [Integer]
@@ -4533,15 +3260,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListWirelessGatewayTaskDefinitionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         task_definition_type: "UPDATE", # accepts UPDATE
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to return in this operation.
     #   @return [Integer]
@@ -4581,14 +3299,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListWirelessGatewaysRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   To retrieve the next set of results, the `nextToken` value from a
     #   previous response; otherwise **null** to receive the first set of
@@ -4625,13 +3335,6 @@ module Aws::IoTWireless
     # Object for LoRaWAN connection status resource type event
     # configuration.
     #
-    # @note When making an API call, you may pass LoRaWANConnectionStatusEventNotificationConfigurations
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_eui_event_topic: "Enabled", # accepts Enabled, Disabled
-    #       }
-    #
     # @!attribute [rw] gateway_eui_event_topic
     #   Denotes whether the gateway EUI connection status event topic is
     #   enabled or disabled.
@@ -4646,13 +3349,6 @@ module Aws::IoTWireless
     # Object for LoRaWAN connection status resource type event
     # configuration.
     #
-    # @note When making an API call, you may pass LoRaWANConnectionStatusResourceTypeEventConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         wireless_gateway_event_topic: "Enabled", # accepts Enabled, Disabled
-    #       }
-    #
     # @!attribute [rw] wireless_gateway_event_topic
     #   Denotes whether the wireless gateway connection status event topic
     #   is enabled or disabled.
@@ -4665,60 +3361,6 @@ module Aws::IoTWireless
     end
 
     # LoRaWAN object for create functions.
-    #
-    # @note When making an API call, you may pass LoRaWANDevice
-    #   data as a hash:
-    #
-    #       {
-    #         dev_eui: "DevEui",
-    #         device_profile_id: "DeviceProfileId",
-    #         service_profile_id: "ServiceProfileId",
-    #         otaa_v1_1: {
-    #           app_key: "AppKey",
-    #           nwk_key: "NwkKey",
-    #           join_eui: "JoinEui",
-    #         },
-    #         otaa_v1_0_x: {
-    #           app_key: "AppKey",
-    #           app_eui: "AppEui",
-    #           gen_app_key: "GenAppKey",
-    #         },
-    #         abp_v1_1: {
-    #           dev_addr: "DevAddr",
-    #           session_keys: {
-    #             f_nwk_s_int_key: "FNwkSIntKey",
-    #             s_nwk_s_int_key: "SNwkSIntKey",
-    #             nwk_s_enc_key: "NwkSEncKey",
-    #             app_s_key: "AppSKey",
-    #           },
-    #           f_cnt_start: 1,
-    #         },
-    #         abp_v1_0_x: {
-    #           dev_addr: "DevAddr",
-    #           session_keys: {
-    #             nwk_s_key: "NwkSKey",
-    #             app_s_key: "AppSKey",
-    #           },
-    #           f_cnt_start: 1,
-    #         },
-    #         f_ports: {
-    #           fuota: 1,
-    #           multicast: 1,
-    #           clock_sync: 1,
-    #           positioning: {
-    #             clock_sync: 1,
-    #             stream: 1,
-    #             gnss: 1,
-    #           },
-    #           applications: [
-    #             {
-    #               f_port: 1,
-    #               type: "SemtechGeolocation", # accepts SemtechGeolocation
-    #               destination_name: "DestinationName",
-    #             },
-    #           ],
-    #         },
-    #       }
     #
     # @!attribute [rw] dev_eui
     #   The DevEUI value.
@@ -4804,31 +3446,6 @@ module Aws::IoTWireless
     end
 
     # LoRaWANDeviceProfile object.
-    #
-    # @note When making an API call, you may pass LoRaWANDeviceProfile
-    #   data as a hash:
-    #
-    #       {
-    #         supports_class_b: false,
-    #         class_b_timeout: 1,
-    #         ping_slot_period: 1,
-    #         ping_slot_dr: 1,
-    #         ping_slot_freq: 1,
-    #         supports_class_c: false,
-    #         class_c_timeout: 1,
-    #         mac_version: "MacVersion",
-    #         reg_params_revision: "RegParamsRevision",
-    #         rx_delay_1: 1,
-    #         rx_dr_offset_1: 1,
-    #         rx_data_rate_2: 1,
-    #         rx_freq_2: 1,
-    #         factory_preset_freqs_list: [1],
-    #         max_eirp: 1,
-    #         max_duty_cycle: 1,
-    #         rf_region: "RfRegion",
-    #         supports_join: false,
-    #         supports_32_bit_f_cnt: false,
-    #       }
     #
     # @!attribute [rw] supports_class_b
     #   The SupportsClassB value.
@@ -4933,13 +3550,6 @@ module Aws::IoTWireless
 
     # The LoRaWAN information used with a FUOTA task.
     #
-    # @note When making an API call, you may pass LoRaWANFuotaTask
-    #   data as a hash:
-    #
-    #       {
-    #         rf_region: "EU868", # accepts EU868, US915, AU915, AS923-1
-    #       }
-    #
     # @!attribute [rw] rf_region
     #   Supported RfRegions
     #   @return [String]
@@ -4968,23 +3578,6 @@ module Aws::IoTWireless
     end
 
     # LoRaWANGateway object.
-    #
-    # @note When making an API call, you may pass LoRaWANGateway
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_eui: "GatewayEui",
-    #         rf_region: "RfRegion",
-    #         join_eui_filters: [
-    #           ["JoinEui"],
-    #         ],
-    #         net_id_filters: ["NetId"],
-    #         sub_bands: [1],
-    #         beaconing: {
-    #           data_rate: 1,
-    #           frequencies: [1],
-    #         },
-    #       }
     #
     # @!attribute [rw] gateway_eui
     #   The gateway's EUI value.
@@ -5059,15 +3652,6 @@ module Aws::IoTWireless
     end
 
     # LoRaWANGatewayVersion object.
-    #
-    # @note When making an API call, you may pass LoRaWANGatewayVersion
-    #   data as a hash:
-    #
-    #       {
-    #         package_version: "PackageVersion",
-    #         model: "Model",
-    #         station: "Station",
-    #       }
     #
     # @!attribute [rw] package_version
     #   The version of the wireless gateway firmware.
@@ -5196,13 +3780,6 @@ module Aws::IoTWireless
 
     # Object for LoRaWAN join resource type event configuration.
     #
-    # @note When making an API call, you may pass LoRaWANJoinEventNotificationConfigurations
-    #   data as a hash:
-    #
-    #       {
-    #         dev_eui_event_topic: "Enabled", # accepts Enabled, Disabled
-    #       }
-    #
     # @!attribute [rw] dev_eui_event_topic
     #   Denotes whether the Dev EUI join event topic is enabled or disabled.
     #   @return [String]
@@ -5214,13 +3791,6 @@ module Aws::IoTWireless
     end
 
     # Object for LoRaWAN join resource type event configuration.
-    #
-    # @note When making an API call, you may pass LoRaWANJoinResourceTypeEventConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         wireless_device_event_topic: "Enabled", # accepts Enabled, Disabled
-    #       }
     #
     # @!attribute [rw] wireless_device_event_topic
     #   Denotes whether the wireless device join event topic is enabled or
@@ -5246,14 +3816,6 @@ module Aws::IoTWireless
     end
 
     # The LoRaWAN information that is to be used with the multicast group.
-    #
-    # @note When making an API call, you may pass LoRaWANMulticast
-    #   data as a hash:
-    #
-    #       {
-    #         rf_region: "EU868", # accepts EU868, US915, AU915, AS923-1
-    #         dl_class: "ClassB", # accepts ClassB, ClassC
-    #       }
     #
     # @!attribute [rw] rf_region
     #   Supported RfRegions
@@ -5301,13 +3863,6 @@ module Aws::IoTWireless
 
     # The metadata information of the LoRaWAN multicast group.
     #
-    # @note When making an API call, you may pass LoRaWANMulticastMetadata
-    #   data as a hash:
-    #
-    #       {
-    #         f_port: 1,
-    #       }
-    #
     # @!attribute [rw] f_port
     #   The Fport value.
     #   @return [Integer]
@@ -5319,16 +3874,6 @@ module Aws::IoTWireless
     end
 
     # The LoRaWAN information used with the multicast session.
-    #
-    # @note When making an API call, you may pass LoRaWANMulticastSession
-    #   data as a hash:
-    #
-    #       {
-    #         dl_dr: 1,
-    #         dl_freq: 1,
-    #         session_start_time: Time.now,
-    #         session_timeout: 1,
-    #       }
     #
     # @!attribute [rw] dl_dr
     #   Downlink data rate.
@@ -5357,23 +3902,6 @@ module Aws::IoTWireless
 
     # LoRaWAN router info.
     #
-    # @note When making an API call, you may pass LoRaWANSendDataToDevice
-    #   data as a hash:
-    #
-    #       {
-    #         f_port: 1,
-    #         participating_gateways: {
-    #           downlink_mode: "SEQUENTIAL", # required, accepts SEQUENTIAL, CONCURRENT, USING_UPLINK_GATEWAY
-    #           gateway_list: [ # required
-    #             {
-    #               gateway_id: "WirelessGatewayId", # required
-    #               downlink_frequency: 1, # required
-    #             },
-    #           ],
-    #           transmission_interval: 1, # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] f_port
     #   The Fport value.
     #   @return [Integer]
@@ -5392,15 +3920,6 @@ module Aws::IoTWireless
     end
 
     # LoRaWANServiceProfile object.
-    #
-    # @note When making an API call, you may pass LoRaWANServiceProfile
-    #   data as a hash:
-    #
-    #       {
-    #         add_gw_metadata: false,
-    #         dr_min: 1,
-    #         dr_max: 1,
-    #       }
     #
     # @!attribute [rw] add_gw_metadata
     #   The AddGWMetaData value.
@@ -5424,13 +3943,6 @@ module Aws::IoTWireless
 
     # The LoRaWAN information used to start a FUOTA task.
     #
-    # @note When making an API call, you may pass LoRaWANStartFuotaTask
-    #   data as a hash:
-    #
-    #       {
-    #         start_time: Time.now,
-    #       }
-    #
     # @!attribute [rw] start_time
     #   Start time of a FUOTA task.
     #   @return [Time]
@@ -5442,34 +3954,6 @@ module Aws::IoTWireless
     end
 
     # LoRaWAN object for update functions.
-    #
-    # @note When making an API call, you may pass LoRaWANUpdateDevice
-    #   data as a hash:
-    #
-    #       {
-    #         device_profile_id: "DeviceProfileId",
-    #         service_profile_id: "ServiceProfileId",
-    #         abp_v1_1: {
-    #           f_cnt_start: 1,
-    #         },
-    #         abp_v1_0_x: {
-    #           f_cnt_start: 1,
-    #         },
-    #         f_ports: {
-    #           positioning: {
-    #             clock_sync: 1,
-    #             stream: 1,
-    #             gnss: 1,
-    #           },
-    #           applications: [
-    #             {
-    #               f_port: 1,
-    #               type: "SemtechGeolocation", # accepts SemtechGeolocation
-    #               destination_name: "DestinationName",
-    #             },
-    #           ],
-    #         },
-    #       }
     #
     # @!attribute [rw] device_profile_id
     #   The ID of the device profile for the wireless device.
@@ -5502,24 +3986,6 @@ module Aws::IoTWireless
     end
 
     # LoRaWANUpdateGatewayTaskCreate object.
-    #
-    # @note When making an API call, you may pass LoRaWANUpdateGatewayTaskCreate
-    #   data as a hash:
-    #
-    #       {
-    #         update_signature: "UpdateSignature",
-    #         sig_key_crc: 1,
-    #         current_version: {
-    #           package_version: "PackageVersion",
-    #           model: "Model",
-    #           station: "Station",
-    #         },
-    #         update_version: {
-    #           package_version: "PackageVersion",
-    #           model: "Model",
-    #           station: "Station",
-    #         },
-    #       }
     #
     # @!attribute [rw] update_signature
     #   The signature used to verify the update firmware.
@@ -5565,14 +4031,6 @@ module Aws::IoTWireless
 
     # LTE local identification (local ID) information.
     #
-    # @note When making an API call, you may pass LteLocalId
-    #   data as a hash:
-    #
-    #       {
-    #         pci: 1, # required
-    #         earfcn: 1, # required
-    #       }
-    #
     # @!attribute [rw] pci
     #   Physical cell ID.
     #   @return [Integer]
@@ -5590,17 +4048,6 @@ module Aws::IoTWireless
     end
 
     # LTE object for network measurement reports.
-    #
-    # @note When making an API call, you may pass LteNmrObj
-    #   data as a hash:
-    #
-    #       {
-    #         pci: 1, # required
-    #         earfcn: 1, # required
-    #         eutran_cid: 1, # required
-    #         rsrp: 1,
-    #         rsrq: 1.0,
-    #       }
     #
     # @!attribute [rw] pci
     #   Physical cell ID.
@@ -5637,33 +4084,6 @@ module Aws::IoTWireless
     end
 
     # LTE object.
-    #
-    # @note When making an API call, you may pass LteObj
-    #   data as a hash:
-    #
-    #       {
-    #         mcc: 1, # required
-    #         mnc: 1, # required
-    #         eutran_cid: 1, # required
-    #         tac: 1,
-    #         lte_local_id: {
-    #           pci: 1, # required
-    #           earfcn: 1, # required
-    #         },
-    #         lte_timing_advance: 1,
-    #         rsrp: 1,
-    #         rsrq: 1.0,
-    #         nr_capable: false,
-    #         lte_nmr: [
-    #           {
-    #             pci: 1, # required
-    #             earfcn: 1, # required
-    #             eutran_cid: 1, # required
-    #             rsrp: 1,
-    #             rsrq: 1.0,
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] mcc
     #   Mobile Country Code.
@@ -5727,16 +4147,6 @@ module Aws::IoTWireless
     # Message delivery status event configuration object for enabling and
     # disabling relevant topics.
     #
-    # @note When making an API call, you may pass MessageDeliveryStatusEventConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         sidewalk: {
-    #           amazon_id_event_topic: "Enabled", # accepts Enabled, Disabled
-    #         },
-    #         wireless_device_id_event_topic: "Enabled", # accepts Enabled, Disabled
-    #       }
-    #
     # @!attribute [rw] sidewalk
     #   `SidewalkEventNotificationConfigurations` object, which is the event
     #   configuration object for Sidewalk-related event topics.
@@ -5756,15 +4166,6 @@ module Aws::IoTWireless
 
     # Message delivery status resource type event configuration object for
     # enabling or disabling relevant topic.
-    #
-    # @note When making an API call, you may pass MessageDeliveryStatusResourceTypeEventConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         sidewalk: {
-    #           wireless_device_event_topic: "Enabled", # accepts Enabled, Disabled
-    #         },
-    #       }
     #
     # @!attribute [rw] sidewalk
     #   Sidewalk resource type event configuration object for enabling or
@@ -5813,15 +4214,6 @@ module Aws::IoTWireless
 
     # Wireless metadata that is to be sent to multicast group.
     #
-    # @note When making an API call, you may pass MulticastWirelessMetadata
-    #   data as a hash:
-    #
-    #       {
-    #         lo_ra_wan: {
-    #           f_port: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] lo_ra_wan
     #   The metadata information of the LoRaWAN multicast group.
     #   @return [Types::LoRaWANMulticastMetadata]
@@ -5851,15 +4243,6 @@ module Aws::IoTWireless
 
     # OTAA device object for v1.0.x
     #
-    # @note When making an API call, you may pass OtaaV1_0_x
-    #   data as a hash:
-    #
-    #       {
-    #         app_key: "AppKey",
-    #         app_eui: "AppEui",
-    #         gen_app_key: "GenAppKey",
-    #       }
-    #
     # @!attribute [rw] app_key
     #   The AppKey value.
     #   @return [String]
@@ -5881,15 +4264,6 @@ module Aws::IoTWireless
     end
 
     # OTAA device object for v1.1
-    #
-    # @note When making an API call, you may pass OtaaV1_1
-    #   data as a hash:
-    #
-    #       {
-    #         app_key: "AppKey",
-    #         nwk_key: "NwkKey",
-    #         join_eui: "JoinEui",
-    #       }
     #
     # @!attribute [rw] app_key
     #   The AppKey value.
@@ -5914,20 +4288,6 @@ module Aws::IoTWireless
     # Specify the list of gateways to which you want to send downlink data
     # traffic when the wireless device is running in class B or class C
     # mode.
-    #
-    # @note When making an API call, you may pass ParticipatingGateways
-    #   data as a hash:
-    #
-    #       {
-    #         downlink_mode: "SEQUENTIAL", # required, accepts SEQUENTIAL, CONCURRENT, USING_UPLINK_GATEWAY
-    #         gateway_list: [ # required
-    #           {
-    #             gateway_id: "WirelessGatewayId", # required
-    #             downlink_frequency: 1, # required
-    #           },
-    #         ],
-    #         transmission_interval: 1, # required
-    #       }
     #
     # @!attribute [rw] downlink_mode
     #   Indicates whether to send the downlink message in sequential mode or
@@ -5985,16 +4345,6 @@ module Aws::IoTWireless
 
     # The wrapper for position solver configurations.
     #
-    # @note When making an API call, you may pass PositionSolverConfigurations
-    #   data as a hash:
-    #
-    #       {
-    #         semtech_gnss: {
-    #           status: "Enabled", # required, accepts Enabled, Disabled
-    #           fec: "ROSE", # required, accepts ROSE, NONE
-    #         },
-    #       }
-    #
     # @!attribute [rw] semtech_gnss
     #   The Semtech GNSS solver configuration object.
     #   @return [Types::SemtechGnssConfiguration]
@@ -6019,15 +4369,6 @@ module Aws::IoTWireless
 
     # The FPorts for the position information.
     #
-    # @note When making an API call, you may pass Positioning
-    #   data as a hash:
-    #
-    #       {
-    #         clock_sync: 1,
-    #         stream: 1,
-    #         gnss: 1,
-    #       }
-    #
     # @!attribute [rw] clock_sync
     #   The Fport value.
     #   @return [Integer]
@@ -6051,16 +4392,6 @@ module Aws::IoTWireless
     # Proximity event configuration object for enabling and disabling
     # relevant topics.
     #
-    # @note When making an API call, you may pass ProximityEventConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         sidewalk: {
-    #           amazon_id_event_topic: "Enabled", # accepts Enabled, Disabled
-    #         },
-    #         wireless_device_id_event_topic: "Enabled", # accepts Enabled, Disabled
-    #       }
-    #
     # @!attribute [rw] sidewalk
     #   Proximity event configuration object for enabling or disabling
     #   Sidewalk related event topics.
@@ -6081,15 +4412,6 @@ module Aws::IoTWireless
     # Proximity resource type event configuration object for enabling or
     # disabling topic.
     #
-    # @note When making an API call, you may pass ProximityResourceTypeEventConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         sidewalk: {
-    #           wireless_device_event_topic: "Enabled", # accepts Enabled, Disabled
-    #         },
-    #       }
-    #
     # @!attribute [rw] sidewalk
     #   Proximity resource type event configuration object for enabling and
     #   disabling wireless device topic.
@@ -6101,21 +4423,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutPositionConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_identifier: "PositionResourceIdentifier", # required
-    #         resource_type: "WirelessDevice", # required, accepts WirelessDevice, WirelessGateway
-    #         solvers: {
-    #           semtech_gnss: {
-    #             status: "Enabled", # required, accepts Enabled, Disabled
-    #             fec: "ROSE", # required, accepts ROSE, NONE
-    #           },
-    #         },
-    #         destination: "DestinationName",
-    #       }
-    #
     # @!attribute [rw] resource_identifier
     #   Resource identifier used to update the position configuration.
     #   @return [String]
@@ -6147,15 +4454,6 @@ module Aws::IoTWireless
 
     class PutPositionConfigurationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass PutResourceLogLevelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_identifier: "ResourceIdentifier", # required
-    #         resource_type: "ResourceType", # required
-    #         log_level: "INFO", # required, accepts INFO, ERROR, DISABLED
-    #       }
-    #
     # @!attribute [rw] resource_identifier
     #   The identifier of the resource. For a Wireless Device, it is the
     #   wireless device ID. For a wireless gateway, it is the wireless
@@ -6183,20 +4481,10 @@ module Aws::IoTWireless
 
     class PutResourceLogLevelResponse < Aws::EmptyStructure; end
 
-    # @api private
-    #
     class ResetAllResourceLogLevelsRequest < Aws::EmptyStructure; end
 
     class ResetAllResourceLogLevelsResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass ResetResourceLogLevelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_identifier: "ResourceIdentifier", # required
-    #         resource_type: "ResourceType", # required
-    #       }
-    #
     # @!attribute [rw] resource_identifier
     #   The identifier of the resource. For a Wireless Device, it is the
     #   wireless device ID. For a wireless gateway, it is the wireless
@@ -6240,14 +4528,6 @@ module Aws::IoTWireless
 
     # Information about the Semtech GNSS solver configuration.
     #
-    # @note When making an API call, you may pass SemtechGnssConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         status: "Enabled", # required, accepts Enabled, Disabled
-    #         fec: "ROSE", # required, accepts ROSE, NONE
-    #       }
-    #
     # @!attribute [rw] status
     #   The status indicating whether the solver is enabled.
     #   @return [String]
@@ -6290,19 +4570,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SendDataToMulticastGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "MulticastGroupId", # required
-    #         payload_data: "PayloadData", # required
-    #         wireless_metadata: { # required
-    #           lo_ra_wan: {
-    #             f_port: 1,
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the multicast group.
     #   @return [String]
@@ -6333,35 +4600,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SendDataToWirelessDeviceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "WirelessDeviceId", # required
-    #         transmit_mode: 1, # required
-    #         payload_data: "PayloadData", # required
-    #         wireless_metadata: {
-    #           lo_ra_wan: {
-    #             f_port: 1,
-    #             participating_gateways: {
-    #               downlink_mode: "SEQUENTIAL", # required, accepts SEQUENTIAL, CONCURRENT, USING_UPLINK_GATEWAY
-    #               gateway_list: [ # required
-    #                 {
-    #                   gateway_id: "WirelessGatewayId", # required
-    #                   downlink_frequency: 1, # required
-    #                 },
-    #               ],
-    #               transmission_interval: 1, # required
-    #             },
-    #           },
-    #           sidewalk: {
-    #             seq: 1,
-    #             message_type: "CUSTOM_COMMAND_ID_NOTIFY", # accepts CUSTOM_COMMAND_ID_NOTIFY, CUSTOM_COMMAND_ID_GET, CUSTOM_COMMAND_ID_SET, CUSTOM_COMMAND_ID_RESP
-    #             ack_mode_retry_duration_secs: 1,
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the wireless device to receive the data.
     #   @return [String]
@@ -6423,14 +4661,6 @@ module Aws::IoTWireless
 
     # Session keys for ABP v1.1
     #
-    # @note When making an API call, you may pass SessionKeysAbpV1_0_x
-    #   data as a hash:
-    #
-    #       {
-    #         nwk_s_key: "NwkSKey",
-    #         app_s_key: "AppSKey",
-    #       }
-    #
     # @!attribute [rw] nwk_s_key
     #   The NwkSKey value.
     #   @return [String]
@@ -6447,16 +4677,6 @@ module Aws::IoTWireless
     end
 
     # Session keys for ABP v1.1
-    #
-    # @note When making an API call, you may pass SessionKeysAbpV1_1
-    #   data as a hash:
-    #
-    #       {
-    #         f_nwk_s_int_key: "FNwkSIntKey",
-    #         s_nwk_s_int_key: "SNwkSIntKey",
-    #         nwk_s_enc_key: "NwkSEncKey",
-    #         app_s_key: "AppSKey",
-    #       }
     #
     # @!attribute [rw] f_nwk_s_int_key
     #   The FNwkSIntKey value.
@@ -6484,14 +4704,6 @@ module Aws::IoTWireless
     end
 
     # Information about a Sidewalk account.
-    #
-    # @note When making an API call, you may pass SidewalkAccountInfo
-    #   data as a hash:
-    #
-    #       {
-    #         amazon_id: "AmazonId",
-    #         app_server_private_key: "AppServerPrivateKey",
-    #       }
     #
     # @!attribute [rw] amazon_id
     #   The Sidewalk Amazon ID.
@@ -6587,13 +4799,6 @@ module Aws::IoTWireless
     # `SidewalkEventNotificationConfigurations` object, which is the event
     # configuration object for Sidewalk-related event topics.
     #
-    # @note When making an API call, you may pass SidewalkEventNotificationConfigurations
-    #   data as a hash:
-    #
-    #       {
-    #         amazon_id_event_topic: "Enabled", # accepts Enabled, Disabled
-    #       }
-    #
     # @!attribute [rw] amazon_id_event_topic
     #   Denotes whether the Amazon ID event topic is enabled or disabled.
     #   @return [String]
@@ -6634,13 +4839,6 @@ module Aws::IoTWireless
     # Sidewalk resource type event configuration object for enabling or
     # disabling topic.
     #
-    # @note When making an API call, you may pass SidewalkResourceTypeEventConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         wireless_device_event_topic: "Enabled", # accepts Enabled, Disabled
-    #       }
-    #
     # @!attribute [rw] wireless_device_event_topic
     #   Denotes whether the wireless device join event topic is enabled or
     #   disabled.
@@ -6653,15 +4851,6 @@ module Aws::IoTWireless
     end
 
     # Information about a Sidewalk router.
-    #
-    # @note When making an API call, you may pass SidewalkSendDataToDevice
-    #   data as a hash:
-    #
-    #       {
-    #         seq: 1,
-    #         message_type: "CUSTOM_COMMAND_ID_NOTIFY", # accepts CUSTOM_COMMAND_ID_NOTIFY, CUSTOM_COMMAND_ID_GET, CUSTOM_COMMAND_ID_SET, CUSTOM_COMMAND_ID_RESP
-    #         ack_mode_retry_duration_secs: 1,
-    #       }
     #
     # @!attribute [rw] seq
     #   The sequence number.
@@ -6686,13 +4875,6 @@ module Aws::IoTWireless
 
     # Sidewalk update.
     #
-    # @note When making an API call, you may pass SidewalkUpdateAccount
-    #   data as a hash:
-    #
-    #       {
-    #         app_server_private_key: "AppServerPrivateKey",
-    #       }
-    #
     # @!attribute [rw] app_server_private_key
     #   The new Sidewalk application server private key.
     #   @return [String]
@@ -6703,20 +4885,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartBulkAssociateWirelessDeviceWithMulticastGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "MulticastGroupId", # required
-    #         query_string: "QueryString",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the multicast group.
     #   @return [String]
@@ -6741,20 +4909,6 @@ module Aws::IoTWireless
 
     class StartBulkAssociateWirelessDeviceWithMulticastGroupResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass StartBulkDisassociateWirelessDeviceFromMulticastGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "MulticastGroupId", # required
-    #         query_string: "QueryString",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the multicast group.
     #   @return [String]
@@ -6779,16 +4933,6 @@ module Aws::IoTWireless
 
     class StartBulkDisassociateWirelessDeviceFromMulticastGroupResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass StartFuotaTaskRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "FuotaTaskId", # required
-    #         lo_ra_wan: {
-    #           start_time: Time.now,
-    #         },
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of a FUOTA task.
     #   @return [String]
@@ -6806,19 +4950,6 @@ module Aws::IoTWireless
 
     class StartFuotaTaskResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass StartMulticastGroupSessionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "MulticastGroupId", # required
-    #         lo_ra_wan: { # required
-    #           dl_dr: 1,
-    #           dl_freq: 1,
-    #           session_start_time: Time.now,
-    #           session_timeout: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the multicast group.
     #   @return [String]
@@ -6838,14 +4969,6 @@ module Aws::IoTWireless
 
     # A simple label consisting of a customer-defined key-value pair
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The tag's key value.
     #   @return [String]
@@ -6861,19 +4984,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource to add tags to.
     #   @return [String]
@@ -6894,14 +5004,6 @@ module Aws::IoTWireless
 
     # TD-SCDMA local identification (local Id) information.
     #
-    # @note When making an API call, you may pass TdscdmaLocalId
-    #   data as a hash:
-    #
-    #       {
-    #         uarfcn: 1, # required
-    #         cell_params: 1, # required
-    #       }
-    #
     # @!attribute [rw] uarfcn
     #   TD-SCDMA UTRA (Universal Terrestrial Radio Access Network) absolute
     #   RF channel number (UARFCN).
@@ -6919,17 +5021,6 @@ module Aws::IoTWireless
     end
 
     # TD-SCDMA object for network measurement reports.
-    #
-    # @note When making an API call, you may pass TdscdmaNmrObj
-    #   data as a hash:
-    #
-    #       {
-    #         uarfcn: 1, # required
-    #         cell_params: 1, # required
-    #         utran_cid: 1,
-    #         rscp: 1,
-    #         path_loss: 1,
-    #       }
     #
     # @!attribute [rw] uarfcn
     #   TD-SCDMA UTRA (Universal Terrestrial Radio Access Network) absolute
@@ -6966,32 +5057,6 @@ module Aws::IoTWireless
     end
 
     # TD-SCDMA object.
-    #
-    # @note When making an API call, you may pass TdscdmaObj
-    #   data as a hash:
-    #
-    #       {
-    #         mcc: 1, # required
-    #         mnc: 1, # required
-    #         lac: 1,
-    #         utran_cid: 1, # required
-    #         tdscdma_local_id: {
-    #           uarfcn: 1, # required
-    #           cell_params: 1, # required
-    #         },
-    #         tdscdma_timing_advance: 1,
-    #         rscp: 1,
-    #         path_loss: 1,
-    #         tdscdma_nmr: [
-    #           {
-    #             uarfcn: 1, # required
-    #             cell_params: 1, # required
-    #             utran_cid: 1,
-    #             rscp: 1,
-    #             path_loss: 1,
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] mcc
     #   Mobile Country Code.
@@ -7046,13 +5111,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TestWirelessDeviceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "WirelessDeviceId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the wireless device to test.
     #   @return [String]
@@ -7103,14 +5161,6 @@ module Aws::IoTWireless
 
     # Trace content for your wireless gateway and wireless device resources.
     #
-    # @note When making an API call, you may pass TraceContent
-    #   data as a hash:
-    #
-    #       {
-    #         wireless_device_frame_info: "ENABLED", # accepts ENABLED, DISABLED
-    #         log_level: "INFO", # accepts INFO, ERROR, DISABLED
-    #       }
-    #
     # @!attribute [rw] wireless_device_frame_info
     #   `FrameInfo` of your wireless device resources for the trace content.
     #   Use FrameInfo to debug the communication between your LoRaWAN end
@@ -7130,14 +5180,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource to remove tags from.
     #   @return [String]
@@ -7157,13 +5199,6 @@ module Aws::IoTWireless
 
     # ABP device object for LoRaWAN specification v1.0.x
     #
-    # @note When making an API call, you may pass UpdateAbpV1_0_x
-    #   data as a hash:
-    #
-    #       {
-    #         f_cnt_start: 1,
-    #       }
-    #
     # @!attribute [rw] f_cnt_start
     #   The FCnt init value.
     #   @return [Integer]
@@ -7176,13 +5211,6 @@ module Aws::IoTWireless
 
     # ABP device object for LoRaWAN specification v1.1
     #
-    # @note When making an API call, you may pass UpdateAbpV1_1
-    #   data as a hash:
-    #
-    #       {
-    #         f_cnt_start: 1,
-    #       }
-    #
     # @!attribute [rw] f_cnt_start
     #   The FCnt init value.
     #   @return [Integer]
@@ -7193,17 +5221,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateDestinationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "DestinationName", # required
-    #         expression_type: "RuleName", # accepts RuleName, MqttTopic
-    #         expression: "Expression",
-    #         description: "Description",
-    #         role_arn: "RoleArn",
-    #       }
-    #
     # @!attribute [rw] name
     #   The new name of the resource.
     #   @return [String]
@@ -7236,37 +5253,6 @@ module Aws::IoTWireless
 
     class UpdateDestinationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateEventConfigurationByResourceTypesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_registration_state: {
-    #           sidewalk: {
-    #             wireless_device_event_topic: "Enabled", # accepts Enabled, Disabled
-    #           },
-    #         },
-    #         proximity: {
-    #           sidewalk: {
-    #             wireless_device_event_topic: "Enabled", # accepts Enabled, Disabled
-    #           },
-    #         },
-    #         join: {
-    #           lo_ra_wan: {
-    #             wireless_device_event_topic: "Enabled", # accepts Enabled, Disabled
-    #           },
-    #         },
-    #         connection_status: {
-    #           lo_ra_wan: {
-    #             wireless_gateway_event_topic: "Enabled", # accepts Enabled, Disabled
-    #           },
-    #         },
-    #         message_delivery_status: {
-    #           sidewalk: {
-    #             wireless_device_event_topic: "Enabled", # accepts Enabled, Disabled
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] device_registration_state
     #   Device registration state resource type event configuration object
     #   for enabling and disabling wireless gateway topic.
@@ -7306,24 +5292,6 @@ module Aws::IoTWireless
 
     # Object for updating the FPorts information.
     #
-    # @note When making an API call, you may pass UpdateFPorts
-    #   data as a hash:
-    #
-    #       {
-    #         positioning: {
-    #           clock_sync: 1,
-    #           stream: 1,
-    #           gnss: 1,
-    #         },
-    #         applications: [
-    #           {
-    #             f_port: 1,
-    #             type: "SemtechGeolocation", # accepts SemtechGeolocation
-    #             destination_name: "DestinationName",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] positioning
     #   Positioning FPorts for the ClockSync, Stream, and GNSS functions.
     #   @return [Types::Positioning]
@@ -7340,20 +5308,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateFuotaTaskRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "FuotaTaskId", # required
-    #         name: "FuotaTaskName",
-    #         description: "Description",
-    #         lo_ra_wan: {
-    #           rf_region: "EU868", # accepts EU868, US915, AU915, AS923-1
-    #         },
-    #         firmware_update_image: "FirmwareUpdateImage",
-    #         firmware_update_role: "FirmwareUpdateRole",
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of a FUOTA task.
     #   @return [String]
@@ -7392,37 +5346,6 @@ module Aws::IoTWireless
 
     class UpdateFuotaTaskResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateLogLevelsByResourceTypesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         default_log_level: "INFO", # accepts INFO, ERROR, DISABLED
-    #         wireless_device_log_options: [
-    #           {
-    #             type: "Sidewalk", # required, accepts Sidewalk, LoRaWAN
-    #             log_level: "INFO", # required, accepts INFO, ERROR, DISABLED
-    #             events: [
-    #               {
-    #                 event: "Join", # required, accepts Join, Rejoin, Uplink_Data, Downlink_Data, Registration
-    #                 log_level: "INFO", # required, accepts INFO, ERROR, DISABLED
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         wireless_gateway_log_options: [
-    #           {
-    #             type: "LoRaWAN", # required, accepts LoRaWAN
-    #             log_level: "INFO", # required, accepts INFO, ERROR, DISABLED
-    #             events: [
-    #               {
-    #                 event: "CUPS_Request", # required, accepts CUPS_Request, Certificate
-    #                 log_level: "INFO", # required, accepts INFO, ERROR, DISABLED
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] default_log_level
     #   The log level for a log message. The log levels can be disabled, or
     #   set to `ERROR` to display less verbose logs containing only error
@@ -7447,19 +5370,6 @@ module Aws::IoTWireless
 
     class UpdateLogLevelsByResourceTypesResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateMulticastGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "MulticastGroupId", # required
-    #         name: "MulticastGroupName",
-    #         description: "Description",
-    #         lo_ra_wan: {
-    #           rf_region: "EU868", # accepts EU868, US915, AU915, AS923-1
-    #           dl_class: "ClassB", # accepts ClassB, ClassC
-    #         },
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the multicast group.
     #   @return [String]
@@ -7487,22 +5397,6 @@ module Aws::IoTWireless
 
     class UpdateMulticastGroupResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateNetworkAnalyzerConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_name: "NetworkAnalyzerConfigurationName", # required
-    #         trace_content: {
-    #           wireless_device_frame_info: "ENABLED", # accepts ENABLED, DISABLED
-    #           log_level: "INFO", # accepts INFO, ERROR, DISABLED
-    #         },
-    #         wireless_devices_to_add: ["WirelessDeviceId"],
-    #         wireless_devices_to_remove: ["WirelessDeviceId"],
-    #         wireless_gateways_to_add: ["WirelessGatewayId"],
-    #         wireless_gateways_to_remove: ["WirelessGatewayId"],
-    #         description: "Description",
-    #       }
-    #
     # @!attribute [rw] configuration_name
     #   Name of the network analyzer configuration.
     #   @return [String]
@@ -7554,17 +5448,6 @@ module Aws::IoTWireless
 
     class UpdateNetworkAnalyzerConfigurationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdatePartnerAccountRequest
-    #   data as a hash:
-    #
-    #       {
-    #         sidewalk: { # required
-    #           app_server_private_key: "AppServerPrivateKey",
-    #         },
-    #         partner_account_id: "PartnerAccountId", # required
-    #         partner_type: "Sidewalk", # required, accepts Sidewalk
-    #       }
-    #
     # @!attribute [rw] sidewalk
     #   The Sidewalk account credentials.
     #   @return [Types::SidewalkUpdateAccount]
@@ -7587,15 +5470,6 @@ module Aws::IoTWireless
 
     class UpdatePartnerAccountResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdatePositionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_identifier: "PositionResourceIdentifier", # required
-    #         resource_type: "WirelessDevice", # required, accepts WirelessDevice, WirelessGateway
-    #         position: [1.0], # required
-    #       }
-    #
     # @!attribute [rw] resource_identifier
     #   Resource identifier of the resource for which position is updated.
     #   @return [String]
@@ -7618,45 +5492,6 @@ module Aws::IoTWireless
 
     class UpdatePositionResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateResourceEventConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identifier: "Identifier", # required
-    #         identifier_type: "PartnerAccountId", # required, accepts PartnerAccountId, DevEui, GatewayEui, WirelessDeviceId, WirelessGatewayId
-    #         partner_type: "Sidewalk", # accepts Sidewalk
-    #         device_registration_state: {
-    #           sidewalk: {
-    #             amazon_id_event_topic: "Enabled", # accepts Enabled, Disabled
-    #           },
-    #           wireless_device_id_event_topic: "Enabled", # accepts Enabled, Disabled
-    #         },
-    #         proximity: {
-    #           sidewalk: {
-    #             amazon_id_event_topic: "Enabled", # accepts Enabled, Disabled
-    #           },
-    #           wireless_device_id_event_topic: "Enabled", # accepts Enabled, Disabled
-    #         },
-    #         join: {
-    #           lo_ra_wan: {
-    #             dev_eui_event_topic: "Enabled", # accepts Enabled, Disabled
-    #           },
-    #           wireless_device_id_event_topic: "Enabled", # accepts Enabled, Disabled
-    #         },
-    #         connection_status: {
-    #           lo_ra_wan: {
-    #             gateway_eui_event_topic: "Enabled", # accepts Enabled, Disabled
-    #           },
-    #           wireless_gateway_id_event_topic: "Enabled", # accepts Enabled, Disabled
-    #         },
-    #         message_delivery_status: {
-    #           sidewalk: {
-    #             amazon_id_event_topic: "Enabled", # accepts Enabled, Disabled
-    #           },
-    #           wireless_device_id_event_topic: "Enabled", # accepts Enabled, Disabled
-    #         },
-    #       }
-    #
     # @!attribute [rw] identifier
     #   Resource identifier to opt in for event messaging.
     #   @return [String]
@@ -7706,15 +5541,6 @@ module Aws::IoTWireless
 
     class UpdateResourceEventConfigurationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateResourcePositionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_identifier: "PositionResourceIdentifier", # required
-    #         resource_type: "WirelessDevice", # required, accepts WirelessDevice, WirelessGateway
-    #         geo_json_payload: "data",
-    #       }
-    #
     # @!attribute [rw] resource_identifier
     #   The identifier of the resource for which position information is
     #   updated. It can be the wireless device ID or the wireless gateway ID
@@ -7747,41 +5573,6 @@ module Aws::IoTWireless
 
     class UpdateResourcePositionResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateWirelessDeviceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "WirelessDeviceId", # required
-    #         destination_name: "DestinationName",
-    #         name: "WirelessDeviceName",
-    #         description: "Description",
-    #         lo_ra_wan: {
-    #           device_profile_id: "DeviceProfileId",
-    #           service_profile_id: "ServiceProfileId",
-    #           abp_v1_1: {
-    #             f_cnt_start: 1,
-    #           },
-    #           abp_v1_0_x: {
-    #             f_cnt_start: 1,
-    #           },
-    #           f_ports: {
-    #             positioning: {
-    #               clock_sync: 1,
-    #               stream: 1,
-    #               gnss: 1,
-    #             },
-    #             applications: [
-    #               {
-    #                 f_port: 1,
-    #                 type: "SemtechGeolocation", # accepts SemtechGeolocation
-    #                 destination_name: "DestinationName",
-    #               },
-    #             ],
-    #           },
-    #         },
-    #         positioning: "Enabled", # accepts Enabled, Disabled
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the resource to update.
     #   @return [String]
@@ -7820,19 +5611,6 @@ module Aws::IoTWireless
 
     class UpdateWirelessDeviceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateWirelessGatewayRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "WirelessGatewayId", # required
-    #         name: "WirelessGatewayName",
-    #         description: "Description",
-    #         join_eui_filters: [
-    #           ["JoinEui"],
-    #         ],
-    #         net_id_filters: ["NetId"],
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the resource to update.
     #   @return [String]
@@ -7867,28 +5645,6 @@ module Aws::IoTWireless
     class UpdateWirelessGatewayResponse < Aws::EmptyStructure; end
 
     # UpdateWirelessGatewayTaskCreate object.
-    #
-    # @note When making an API call, you may pass UpdateWirelessGatewayTaskCreate
-    #   data as a hash:
-    #
-    #       {
-    #         update_data_source: "UpdateDataSource",
-    #         update_data_role: "UpdateDataSource",
-    #         lo_ra_wan: {
-    #           update_signature: "UpdateSignature",
-    #           sig_key_crc: 1,
-    #           current_version: {
-    #             package_version: "PackageVersion",
-    #             model: "Model",
-    #             station: "Station",
-    #           },
-    #           update_version: {
-    #             package_version: "PackageVersion",
-    #             model: "Model",
-    #             station: "Station",
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] update_data_source
     #   The link to the S3 bucket.
@@ -7945,14 +5701,6 @@ module Aws::IoTWireless
 
     # WCDMA local identification (local ID) information.
     #
-    # @note When making an API call, you may pass WcdmaLocalId
-    #   data as a hash:
-    #
-    #       {
-    #         uarfcndl: 1, # required
-    #         psc: 1, # required
-    #       }
-    #
     # @!attribute [rw] uarfcndl
     #   WCDMA UTRA Absolute RF Channel Number downlink.
     #   @return [Integer]
@@ -7969,17 +5717,6 @@ module Aws::IoTWireless
     end
 
     # Network Measurement Reports.
-    #
-    # @note When making an API call, you may pass WcdmaNmrObj
-    #   data as a hash:
-    #
-    #       {
-    #         uarfcndl: 1, # required
-    #         psc: 1, # required
-    #         utran_cid: 1, # required
-    #         rscp: 1,
-    #         path_loss: 1,
-    #       }
     #
     # @!attribute [rw] uarfcndl
     #   WCDMA UTRA Absolute RF Channel Number downlink.
@@ -8014,31 +5751,6 @@ module Aws::IoTWireless
     end
 
     # WCDMA.
-    #
-    # @note When making an API call, you may pass WcdmaObj
-    #   data as a hash:
-    #
-    #       {
-    #         mcc: 1, # required
-    #         mnc: 1, # required
-    #         lac: 1,
-    #         utran_cid: 1, # required
-    #         wcdma_local_id: {
-    #           uarfcndl: 1, # required
-    #           psc: 1, # required
-    #         },
-    #         rscp: 1,
-    #         path_loss: 1,
-    #         wcdma_nmr: [
-    #           {
-    #             uarfcndl: 1, # required
-    #             psc: 1, # required
-    #             utran_cid: 1, # required
-    #             rscp: 1,
-    #             path_loss: 1,
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] mcc
     #   Mobile Country Code.
@@ -8089,14 +5801,6 @@ module Aws::IoTWireless
 
     # Wi-Fi access point.
     #
-    # @note When making an API call, you may pass WiFiAccessPoint
-    #   data as a hash:
-    #
-    #       {
-    #         mac_address: "MacAddress", # required
-    #         rss: 1, # required
-    #       }
-    #
     # @!attribute [rw] mac_address
     #   Wi-Fi MAC Address.
     #   @return [String]
@@ -8120,14 +5824,6 @@ module Aws::IoTWireless
     # possible events for a log message are `Registration`, `Downlink_Data`,
     # and `Uplink_Data`.
     #
-    # @note When making an API call, you may pass WirelessDeviceEventLogOption
-    #   data as a hash:
-    #
-    #       {
-    #         event: "Join", # required, accepts Join, Rejoin, Uplink_Data, Downlink_Data, Registration
-    #         log_level: "INFO", # required, accepts INFO, ERROR, DISABLED
-    #       }
-    #
     # @!attribute [rw] event
     #   The event for a log message, if the log message is tied to a
     #   wireless device.
@@ -8148,20 +5844,6 @@ module Aws::IoTWireless
 
     # The log options for wireless devices and can be used to set log levels
     # for a specific type of wireless device.
-    #
-    # @note When making an API call, you may pass WirelessDeviceLogOption
-    #   data as a hash:
-    #
-    #       {
-    #         type: "Sidewalk", # required, accepts Sidewalk, LoRaWAN
-    #         log_level: "INFO", # required, accepts INFO, ERROR, DISABLED
-    #         events: [
-    #           {
-    #             event: "Join", # required, accepts Join, Rejoin, Uplink_Data, Downlink_Data, Registration
-    #             log_level: "INFO", # required, accepts INFO, ERROR, DISABLED
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] type
     #   The wireless device type.
@@ -8253,14 +5935,6 @@ module Aws::IoTWireless
     # For a LoRaWAN gateway, possible events for a log message are
     # `CUPS_Request` and `Certificate`.
     #
-    # @note When making an API call, you may pass WirelessGatewayEventLogOption
-    #   data as a hash:
-    #
-    #       {
-    #         event: "CUPS_Request", # required, accepts CUPS_Request, Certificate
-    #         log_level: "INFO", # required, accepts INFO, ERROR, DISABLED
-    #       }
-    #
     # @!attribute [rw] event
     #   The event for a log message, if the log message is tied to a
     #   wireless gateway.
@@ -8281,20 +5955,6 @@ module Aws::IoTWireless
 
     # The log options for wireless gateways and can be used to set log
     # levels for a specific type of wireless gateway.
-    #
-    # @note When making an API call, you may pass WirelessGatewayLogOption
-    #   data as a hash:
-    #
-    #       {
-    #         type: "LoRaWAN", # required, accepts LoRaWAN
-    #         log_level: "INFO", # required, accepts INFO, ERROR, DISABLED
-    #         events: [
-    #           {
-    #             event: "CUPS_Request", # required, accepts CUPS_Request, Certificate
-    #             log_level: "INFO", # required, accepts INFO, ERROR, DISABLED
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] type
     #   The wireless gateway type.
@@ -8356,30 +6016,6 @@ module Aws::IoTWireless
     end
 
     # WirelessMetadata object.
-    #
-    # @note When making an API call, you may pass WirelessMetadata
-    #   data as a hash:
-    #
-    #       {
-    #         lo_ra_wan: {
-    #           f_port: 1,
-    #           participating_gateways: {
-    #             downlink_mode: "SEQUENTIAL", # required, accepts SEQUENTIAL, CONCURRENT, USING_UPLINK_GATEWAY
-    #             gateway_list: [ # required
-    #               {
-    #                 gateway_id: "WirelessGatewayId", # required
-    #                 downlink_frequency: 1, # required
-    #               },
-    #             ],
-    #             transmission_interval: 1, # required
-    #           },
-    #         },
-    #         sidewalk: {
-    #           seq: 1,
-    #           message_type: "CUSTOM_COMMAND_ID_NOTIFY", # accepts CUSTOM_COMMAND_ID_NOTIFY, CUSTOM_COMMAND_ID_GET, CUSTOM_COMMAND_ID_SET, CUSTOM_COMMAND_ID_RESP
-    #           ack_mode_retry_duration_secs: 1,
-    #         },
-    #       }
     #
     # @!attribute [rw] lo_ra_wan
     #   LoRaWAN device info.

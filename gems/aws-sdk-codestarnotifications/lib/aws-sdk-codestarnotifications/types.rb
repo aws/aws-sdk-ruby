@@ -52,27 +52,6 @@ module Aws::CodeStarNotifications
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateNotificationRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "NotificationRuleName", # required
-    #         event_type_ids: ["EventTypeId"], # required
-    #         resource: "NotificationRuleResource", # required
-    #         targets: [ # required
-    #           {
-    #             target_type: "TargetType",
-    #             target_address: "TargetAddress",
-    #           },
-    #         ],
-    #         detail_type: "BASIC", # required, accepts BASIC, FULL
-    #         client_request_token: "ClientRequestToken",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         status: "ENABLED", # accepts ENABLED, DISABLED
-    #       }
-    #
     # @!attribute [rw] name
     #   The name for the notification rule. Notification rule names must be
     #   unique in your Amazon Web Services account.
@@ -160,13 +139,6 @@ module Aws::CodeStarNotifications
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteNotificationRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "NotificationRuleArn", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the notification rule you want to
     #   delete.
@@ -192,14 +164,6 @@ module Aws::CodeStarNotifications
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteTargetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         target_address: "TargetAddress", # required
-    #         force_unsubscribe_all: false,
-    #       }
-    #
     # @!attribute [rw] target_address
     #   The Amazon Resource Name (ARN) of the Chatbot topic or Chatbot
     #   client to delete.
@@ -225,13 +189,6 @@ module Aws::CodeStarNotifications
     #
     class DeleteTargetResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeNotificationRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "NotificationRuleArn", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the notification rule.
     #   @return [String]
@@ -384,14 +341,6 @@ module Aws::CodeStarNotifications
     # Information about a filter to apply to the list of returned event
     # types. You can filter by resource type or service name.
     #
-    # @note When making an API call, you may pass ListEventTypesFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "RESOURCE_TYPE", # required, accepts RESOURCE_TYPE, SERVICE_NAME
-    #         value: "ListEventTypesFilterValue", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The system-generated name of the filter type you want to filter by.
     #   @return [String]
@@ -410,20 +359,6 @@ module Aws::CodeStarNotifications
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEventTypesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             name: "RESOURCE_TYPE", # required, accepts RESOURCE_TYPE, SERVICE_NAME
-    #             value: "ListEventTypesFilterValue", # required
-    #           },
-    #         ],
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] filters
     #   The filters to use to return information by service or resource
     #   type.
@@ -473,14 +408,6 @@ module Aws::CodeStarNotifications
     # notification rules. You can filter by event type, owner, resource, or
     # target.
     #
-    # @note When making an API call, you may pass ListNotificationRulesFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "EVENT_TYPE_ID", # required, accepts EVENT_TYPE_ID, CREATED_BY, RESOURCE, TARGET_ADDRESS
-    #         value: "ListNotificationRulesFilterValue", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the attribute you want to use to filter the returned
     #   notification rules.
@@ -502,20 +429,6 @@ module Aws::CodeStarNotifications
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListNotificationRulesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             name: "EVENT_TYPE_ID", # required, accepts EVENT_TYPE_ID, CREATED_BY, RESOURCE, TARGET_ADDRESS
-    #             value: "ListNotificationRulesFilterValue", # required
-    #           },
-    #         ],
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] filters
     #   The filters to use to return information by service or resource
     #   type. For valid values, see ListNotificationRulesFilter.
@@ -566,13 +479,6 @@ module Aws::CodeStarNotifications
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "NotificationRuleArn", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) for the notification rule.
     #   @return [String]
@@ -604,14 +510,6 @@ module Aws::CodeStarNotifications
     # and a Value of `SNS`, and a Name of `TARGET_STATUS` and a Value of
     # `ACTIVE`.
     #
-    # @note When making an API call, you may pass ListTargetsFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "TARGET_TYPE", # required, accepts TARGET_TYPE, TARGET_ADDRESS, TARGET_STATUS
-    #         value: "ListTargetsFilterValue", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the attribute you want to use to filter the returned
     #   targets.
@@ -633,20 +531,6 @@ module Aws::CodeStarNotifications
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTargetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             name: "TARGET_TYPE", # required, accepts TARGET_TYPE, TARGET_ADDRESS, TARGET_STATUS
-    #             value: "ListTargetsFilterValue", # required
-    #           },
-    #         ],
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] filters
     #   The filters to use to return information by service or resource
     #   type. Valid filters include target type, target address, and target
@@ -744,18 +628,6 @@ module Aws::CodeStarNotifications
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SubscribeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "NotificationRuleArn", # required
-    #         target: { # required
-    #           target_type: "TargetType",
-    #           target_address: "TargetAddress",
-    #         },
-    #         client_request_token: "ClientRequestToken",
-    #       }
-    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the notification rule for which
     #   you want to create the association.
@@ -794,16 +666,6 @@ module Aws::CodeStarNotifications
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "NotificationRuleArn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the notification rule to tag.
     #   @return [String]
@@ -836,14 +698,6 @@ module Aws::CodeStarNotifications
 
     # Information about the Chatbot topics or Chatbot clients associated
     # with a notification rule.
-    #
-    # @note When making an API call, you may pass Target
-    #   data as a hash:
-    #
-    #       {
-    #         target_type: "TargetType",
-    #         target_address: "TargetAddress",
-    #       }
     #
     # @!attribute [rw] target_type
     #   The target type. Can be an Chatbot topic or Chatbot client.
@@ -896,14 +750,6 @@ module Aws::CodeStarNotifications
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UnsubscribeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "NotificationRuleArn", # required
-    #         target_address: "TargetAddress", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the notification rule.
     #   @return [String]
@@ -935,14 +781,6 @@ module Aws::CodeStarNotifications
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "NotificationRuleArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the notification rule from which
     #   to remove the tags.
@@ -965,23 +803,6 @@ module Aws::CodeStarNotifications
     #
     class UntagResourceResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateNotificationRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "NotificationRuleArn", # required
-    #         name: "NotificationRuleName",
-    #         status: "ENABLED", # accepts ENABLED, DISABLED
-    #         event_type_ids: ["EventTypeId"],
-    #         targets: [
-    #           {
-    #             target_type: "TargetType",
-    #             target_address: "TargetAddress",
-    #           },
-    #         ],
-    #         detail_type: "BASIC", # accepts BASIC, FULL
-    #       }
-    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the notification rule.
     #   @return [String]

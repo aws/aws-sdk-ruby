@@ -10,15 +10,6 @@
 module Aws::WorkDocs
   module Types
 
-    # @note When making an API call, you may pass AbortDocumentVersionUploadRequest
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_token: "AuthenticationHeaderType",
-    #         document_id: "ResourceIdType", # required
-    #         version_id: "DocumentVersionIdType", # required
-    #       }
-    #
     # @!attribute [rw] authentication_token
     #   Amazon WorkDocs authentication token. Not required when using AWS
     #   administrator credentials to access the API.
@@ -42,14 +33,6 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ActivateUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_id: "IdType", # required
-    #         authentication_token: "AuthenticationHeaderType",
-    #       }
-    #
     # @!attribute [rw] user_id
     #   The ID of the user.
     #   @return [String]
@@ -143,25 +126,6 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AddResourcePermissionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_token: "AuthenticationHeaderType",
-    #         resource_id: "ResourceIdType", # required
-    #         principals: [ # required
-    #           {
-    #             id: "IdType", # required
-    #             type: "USER", # required, accepts USER, GROUP, INVITE, ANONYMOUS, ORGANIZATION
-    #             role: "VIEWER", # required, accepts VIEWER, CONTRIBUTOR, OWNER, COOWNER
-    #           },
-    #         ],
-    #         notification_options: {
-    #           send_email: false,
-    #           email_message: "MessageType",
-    #         },
-    #       }
-    #
     # @!attribute [rw] authentication_token
     #   Amazon WorkDocs authentication token. Not required when using AWS
     #   administrator credentials to access the API.
@@ -321,20 +285,6 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateCommentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_token: "AuthenticationHeaderType",
-    #         document_id: "ResourceIdType", # required
-    #         version_id: "DocumentVersionIdType", # required
-    #         parent_id: "CommentIdType",
-    #         thread_id: "CommentIdType",
-    #         text: "CommentTextType", # required
-    #         visibility: "PUBLIC", # accepts PUBLIC, PRIVATE
-    #         notify_collaborators: false,
-    #       }
-    #
     # @!attribute [rw] authentication_token
     #   Amazon WorkDocs authentication token. Not required when using AWS
     #   administrator credentials to access the API.
@@ -399,18 +349,6 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateCustomMetadataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_token: "AuthenticationHeaderType",
-    #         resource_id: "ResourceIdType", # required
-    #         version_id: "DocumentVersionIdType",
-    #         custom_metadata: { # required
-    #           "CustomMetadataKeyType" => "CustomMetadataValueType",
-    #         },
-    #       }
-    #
     # @!attribute [rw] authentication_token
     #   Amazon WorkDocs authentication token. Not required when using AWS
     #   administrator credentials to access the API.
@@ -444,15 +382,6 @@ module Aws::WorkDocs
     #
     class CreateCustomMetadataResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass CreateFolderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_token: "AuthenticationHeaderType",
-    #         name: "ResourceNameType",
-    #         parent_folder_id: "ResourceIdType", # required
-    #       }
-    #
     # @!attribute [rw] authentication_token
     #   Amazon WorkDocs authentication token. Not required when using AWS
     #   administrator credentials to access the API.
@@ -488,15 +417,6 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateLabelsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_id: "ResourceIdType", # required
-    #         labels: ["SharedLabel"], # required
-    #         authentication_token: "AuthenticationHeaderType",
-    #       }
-    #
     # @!attribute [rw] resource_id
     #   The ID of the resource.
     #   @return [String]
@@ -524,16 +444,6 @@ module Aws::WorkDocs
     #
     class CreateLabelsResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass CreateNotificationSubscriptionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "IdType", # required
-    #         endpoint: "SubscriptionEndPointType", # required
-    #         protocol: "HTTPS", # required, accepts HTTPS, SQS
-    #         subscription_type: "ALL", # required, accepts ALL
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The ID of the organization.
     #   @return [String]
@@ -575,24 +485,6 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "IdType",
-    #         username: "UsernameType", # required
-    #         email_address: "EmailAddressType",
-    #         given_name: "UserAttributeValueType", # required
-    #         surname: "UserAttributeValueType", # required
-    #         password: "PasswordType", # required
-    #         time_zone_id: "TimeZoneIdType",
-    #         storage_rule: {
-    #           storage_allocated_in_bytes: 1,
-    #           storage_type: "UNLIMITED", # accepts UNLIMITED, QUOTA
-    #         },
-    #         authentication_token: "AuthenticationHeaderType",
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The ID of the organization.
     #   @return [String]
@@ -672,14 +564,6 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeactivateUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_id: "IdType", # required
-    #         authentication_token: "AuthenticationHeaderType",
-    #       }
-    #
     # @!attribute [rw] user_id
     #   The ID of the user.
     #   @return [String]
@@ -704,16 +588,6 @@ module Aws::WorkDocs
     #
     class DeactivatingLastSystemUserException < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteCommentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_token: "AuthenticationHeaderType",
-    #         document_id: "ResourceIdType", # required
-    #         version_id: "DocumentVersionIdType", # required
-    #         comment_id: "CommentIdType", # required
-    #       }
-    #
     # @!attribute [rw] authentication_token
     #   Amazon WorkDocs authentication token. Not required when using AWS
     #   administrator credentials to access the API.
@@ -742,17 +616,6 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteCustomMetadataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_token: "AuthenticationHeaderType",
-    #         resource_id: "ResourceIdType", # required
-    #         version_id: "DocumentVersionIdType",
-    #         keys: ["CustomMetadataKeyType"],
-    #         delete_all: false,
-    #       }
-    #
     # @!attribute [rw] authentication_token
     #   Amazon WorkDocs authentication token. Not required when using AWS
     #   administrator credentials to access the API.
@@ -792,14 +655,6 @@ module Aws::WorkDocs
     #
     class DeleteCustomMetadataResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteDocumentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_token: "AuthenticationHeaderType",
-    #         document_id: "ResourceIdType", # required
-    #       }
-    #
     # @!attribute [rw] authentication_token
     #   Amazon WorkDocs authentication token. Not required when using AWS
     #   administrator credentials to access the API.
@@ -818,16 +673,6 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDocumentVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_token: "AuthenticationHeaderType",
-    #         document_id: "ResourceIdType", # required
-    #         version_id: "DocumentVersionIdType", # required
-    #         delete_prior_versions: false, # required
-    #       }
-    #
     # @!attribute [rw] authentication_token
     #   Amazon WorkDocs authentication token. Not required when using AWS
     #   administrator credentials to access the API.
@@ -857,14 +702,6 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteFolderContentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_token: "AuthenticationHeaderType",
-    #         folder_id: "ResourceIdType", # required
-    #       }
-    #
     # @!attribute [rw] authentication_token
     #   Amazon WorkDocs authentication token. Not required when using AWS
     #   administrator credentials to access the API.
@@ -883,14 +720,6 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteFolderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_token: "AuthenticationHeaderType",
-    #         folder_id: "ResourceIdType", # required
-    #       }
-    #
     # @!attribute [rw] authentication_token
     #   Amazon WorkDocs authentication token. Not required when using AWS
     #   administrator credentials to access the API.
@@ -909,16 +738,6 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteLabelsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_id: "ResourceIdType", # required
-    #         authentication_token: "AuthenticationHeaderType",
-    #         labels: ["SharedLabel"],
-    #         delete_all: false,
-    #       }
-    #
     # @!attribute [rw] resource_id
     #   The ID of the resource.
     #   @return [String]
@@ -951,14 +770,6 @@ module Aws::WorkDocs
     #
     class DeleteLabelsResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteNotificationSubscriptionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         subscription_id: "IdType", # required
-    #         organization_id: "IdType", # required
-    #       }
-    #
     # @!attribute [rw] subscription_id
     #   The ID of the subscription.
     #   @return [String]
@@ -976,14 +787,6 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_token: "AuthenticationHeaderType",
-    #         user_id: "IdType", # required
-    #       }
-    #
     # @!attribute [rw] authentication_token
     #   Amazon WorkDocs authentication token. Do not set this field when
     #   using administrative API actions, as in accessing the API using AWS
@@ -1003,22 +806,6 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeActivitiesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_token: "AuthenticationHeaderType",
-    #         start_time: Time.now,
-    #         end_time: Time.now,
-    #         organization_id: "IdType",
-    #         activity_types: "ActivityNamesFilterType",
-    #         resource_id: "IdType",
-    #         user_id: "IdType",
-    #         include_indirect_activities: false,
-    #         limit: 1,
-    #         marker: "SearchMarkerType",
-    #       }
-    #
     # @!attribute [rw] authentication_token
     #   Amazon WorkDocs authentication token. Not required when using AWS
     #   administrator credentials to access the API.
@@ -1105,17 +892,6 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeCommentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_token: "AuthenticationHeaderType",
-    #         document_id: "ResourceIdType", # required
-    #         version_id: "DocumentVersionIdType", # required
-    #         limit: 1,
-    #         marker: "MarkerType",
-    #       }
-    #
     # @!attribute [rw] authentication_token
     #   Amazon WorkDocs authentication token. Not required when using AWS
     #   administrator credentials to access the API.
@@ -1168,18 +944,6 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDocumentVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_token: "AuthenticationHeaderType",
-    #         document_id: "ResourceIdType", # required
-    #         marker: "PageMarkerType",
-    #         limit: 1,
-    #         include: "FieldNamesType",
-    #         fields: "FieldNamesType",
-    #       }
-    #
     # @!attribute [rw] authentication_token
     #   Amazon WorkDocs authentication token. Not required when using AWS
     #   administrator credentials to access the API.
@@ -1239,20 +1003,6 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeFolderContentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_token: "AuthenticationHeaderType",
-    #         folder_id: "ResourceIdType", # required
-    #         sort: "DATE", # accepts DATE, NAME
-    #         order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #         limit: 1,
-    #         marker: "PageMarkerType",
-    #         type: "ALL", # accepts ALL, DOCUMENT, FOLDER
-    #         include: "FieldNamesType",
-    #       }
-    #
     # @!attribute [rw] authentication_token
     #   Amazon WorkDocs authentication token. Not required when using AWS
     #   administrator credentials to access the API.
@@ -1326,17 +1076,6 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_token: "AuthenticationHeaderType",
-    #         search_query: "SearchQueryType", # required
-    #         organization_id: "IdType",
-    #         marker: "MarkerType",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] authentication_token
     #   Amazon WorkDocs authentication token. Not required when using AWS
     #   administrator credentials to access the API.
@@ -1389,15 +1128,6 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeNotificationSubscriptionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "IdType", # required
-    #         marker: "PageMarkerType",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The ID of the organization.
     #   @return [String]
@@ -1439,17 +1169,6 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeResourcePermissionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_token: "AuthenticationHeaderType",
-    #         resource_id: "ResourceIdType", # required
-    #         principal_id: "IdType",
-    #         limit: 1,
-    #         marker: "PageMarkerType",
-    #       }
-    #
     # @!attribute [rw] authentication_token
     #   Amazon WorkDocs authentication token. Not required when using AWS
     #   administrator credentials to access the API.
@@ -1502,15 +1221,6 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeRootFoldersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_token: "AuthenticationHeaderType", # required
-    #         limit: 1,
-    #         marker: "PageMarkerType",
-    #       }
-    #
     # @!attribute [rw] authentication_token
     #   Amazon WorkDocs authentication token.
     #   @return [String]
@@ -1551,22 +1261,6 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeUsersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_token: "AuthenticationHeaderType",
-    #         organization_id: "IdType",
-    #         user_ids: "UserIdsType",
-    #         query: "SearchQueryType",
-    #         include: "ALL", # accepts ALL, ACTIVE_PENDING
-    #         order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #         sort: "USER_NAME", # accepts USER_NAME, FULL_NAME, STORAGE_LIMIT, USER_STATUS, STORAGE_USED
-    #         marker: "PageMarkerType",
-    #         limit: 1,
-    #         fields: "FieldNamesType",
-    #       }
-    #
     # @!attribute [rw] authentication_token
     #   Amazon WorkDocs authentication token. Not required when using AWS
     #   administrator credentials to access the API.
@@ -1935,13 +1629,6 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetCurrentUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_token: "AuthenticationHeaderType", # required
-    #       }
-    #
     # @!attribute [rw] authentication_token
     #   Amazon WorkDocs authentication token.
     #   @return [String]
@@ -1966,17 +1653,6 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDocumentPathRequest
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_token: "AuthenticationHeaderType",
-    #         document_id: "IdType", # required
-    #         limit: 1,
-    #         fields: "FieldNamesType",
-    #         marker: "PageMarkerType",
-    #       }
-    #
     # @!attribute [rw] authentication_token
     #   Amazon WorkDocs authentication token. Not required when using AWS
     #   administrator credentials to access the API.
@@ -2023,15 +1699,6 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDocumentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_token: "AuthenticationHeaderType",
-    #         document_id: "ResourceIdType", # required
-    #         include_custom_metadata: false,
-    #       }
-    #
     # @!attribute [rw] authentication_token
     #   Amazon WorkDocs authentication token. Not required when using AWS
     #   administrator credentials to access the API.
@@ -2072,17 +1739,6 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDocumentVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_token: "AuthenticationHeaderType",
-    #         document_id: "ResourceIdType", # required
-    #         version_id: "DocumentVersionIdType", # required
-    #         fields: "FieldNamesType",
-    #         include_custom_metadata: false,
-    #       }
-    #
     # @!attribute [rw] authentication_token
     #   Amazon WorkDocs authentication token. Not required when using AWS
     #   administrator credentials to access the API.
@@ -2134,17 +1790,6 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetFolderPathRequest
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_token: "AuthenticationHeaderType",
-    #         folder_id: "IdType", # required
-    #         limit: 1,
-    #         fields: "FieldNamesType",
-    #         marker: "PageMarkerType",
-    #       }
-    #
     # @!attribute [rw] authentication_token
     #   Amazon WorkDocs authentication token. Not required when using AWS
     #   administrator credentials to access the API.
@@ -2191,15 +1836,6 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetFolderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_token: "AuthenticationHeaderType",
-    #         folder_id: "ResourceIdType", # required
-    #         include_custom_metadata: false,
-    #       }
-    #
     # @!attribute [rw] authentication_token
     #   Amazon WorkDocs authentication token. Not required when using AWS
     #   administrator credentials to access the API.
@@ -2240,17 +1876,6 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetResourcesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_token: "AuthenticationHeaderType",
-    #         user_id: "IdType",
-    #         collection_type: "SHARED_WITH_ME", # accepts SHARED_WITH_ME
-    #         limit: 1,
-    #         marker: "PageMarkerType",
-    #       }
-    #
     # @!attribute [rw] authentication_token
     #   The Amazon WorkDocs authentication token. Not required when using
     #   AWS administrator credentials to access the API.
@@ -2341,20 +1966,6 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass InitiateDocumentVersionUploadRequest
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_token: "AuthenticationHeaderType",
-    #         id: "ResourceIdType",
-    #         name: "ResourceNameType",
-    #         content_created_timestamp: Time.now,
-    #         content_modified_timestamp: Time.now,
-    #         content_type: "DocumentContentType",
-    #         document_size_in_bytes: 1,
-    #         parent_folder_id: "ResourceIdType",
-    #       }
-    #
     # @!attribute [rw] authentication_token
     #   Amazon WorkDocs authentication token. Not required when using AWS
     #   administrator credentials to access the API.
@@ -2490,14 +2101,6 @@ module Aws::WorkDocs
 
     # Set of options which defines notification preferences of given action.
     #
-    # @note When making an API call, you may pass NotificationOptions
-    #   data as a hash:
-    #
-    #       {
-    #         send_email: false,
-    #         email_message: "MessageType",
-    #       }
-    #
     # @!attribute [rw] send_email
     #   Boolean value to indicate an email notification should be sent to
     #   the receipients.
@@ -2591,14 +2194,6 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RemoveAllResourcePermissionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_token: "AuthenticationHeaderType",
-    #         resource_id: "ResourceIdType", # required
-    #       }
-    #
     # @!attribute [rw] authentication_token
     #   Amazon WorkDocs authentication token. Not required when using AWS
     #   administrator credentials to access the API.
@@ -2617,16 +2212,6 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RemoveResourcePermissionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_token: "AuthenticationHeaderType",
-    #         resource_id: "ResourceIdType", # required
-    #         principal_id: "IdType", # required
-    #         principal_type: "USER", # accepts USER, GROUP, INVITE, ANONYMOUS, ORGANIZATION
-    #       }
-    #
     # @!attribute [rw] authentication_token
     #   Amazon WorkDocs authentication token. Not required when using AWS
     #   administrator credentials to access the API.
@@ -2760,14 +2345,6 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RestoreDocumentVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_token: "AuthenticationHeaderType",
-    #         document_id: "ResourceIdType", # required
-    #       }
-    #
     # @!attribute [rw] authentication_token
     #   Amazon WorkDocs authentication token. Not required when using AWS
     #   administrator credentials to access the API.
@@ -2800,15 +2377,6 @@ module Aws::WorkDocs
     end
 
     # Describes the recipient type and ID, if available.
-    #
-    # @note When making an API call, you may pass SharePrincipal
-    #   data as a hash:
-    #
-    #       {
-    #         id: "IdType", # required
-    #         type: "USER", # required, accepts USER, GROUP, INVITE, ANONYMOUS, ORGANIZATION
-    #         role: "VIEWER", # required, accepts VIEWER, CONTRIBUTOR, OWNER, COOWNER
-    #       }
     #
     # @!attribute [rw] id
     #   The ID of the recipient.
@@ -2899,14 +2467,6 @@ module Aws::WorkDocs
 
     # Describes the storage for a user.
     #
-    # @note When making an API call, you may pass StorageRuleType
-    #   data as a hash:
-    #
-    #       {
-    #         storage_allocated_in_bytes: 1,
-    #         storage_type: "UNLIMITED", # accepts UNLIMITED, QUOTA
-    #       }
-    #
     # @!attribute [rw] storage_allocated_in_bytes
     #   The amount of storage allocated, in bytes.
     #   @return [Integer]
@@ -2995,17 +2555,6 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateDocumentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_token: "AuthenticationHeaderType",
-    #         document_id: "ResourceIdType", # required
-    #         name: "ResourceNameType",
-    #         parent_folder_id: "ResourceIdType",
-    #         resource_state: "ACTIVE", # accepts ACTIVE, RESTORING, RECYCLING, RECYCLED
-    #       }
-    #
     # @!attribute [rw] authentication_token
     #   Amazon WorkDocs authentication token. Not required when using AWS
     #   administrator credentials to access the API.
@@ -3040,16 +2589,6 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateDocumentVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_token: "AuthenticationHeaderType",
-    #         document_id: "ResourceIdType", # required
-    #         version_id: "DocumentVersionIdType", # required
-    #         version_status: "ACTIVE", # accepts ACTIVE
-    #       }
-    #
     # @!attribute [rw] authentication_token
     #   Amazon WorkDocs authentication token. Not required when using AWS
     #   administrator credentials to access the API.
@@ -3078,17 +2617,6 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateFolderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_token: "AuthenticationHeaderType",
-    #         folder_id: "ResourceIdType", # required
-    #         name: "ResourceNameType",
-    #         parent_folder_id: "ResourceIdType",
-    #         resource_state: "ACTIVE", # accepts ACTIVE, RESTORING, RECYCLING, RECYCLED
-    #       }
-    #
     # @!attribute [rw] authentication_token
     #   Amazon WorkDocs authentication token. Not required when using AWS
     #   administrator credentials to access the API.
@@ -3123,24 +2651,6 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_token: "AuthenticationHeaderType",
-    #         user_id: "IdType", # required
-    #         given_name: "UserAttributeValueType",
-    #         surname: "UserAttributeValueType",
-    #         type: "USER", # accepts USER, ADMIN, POWERUSER, MINIMALUSER, WORKSPACESUSER
-    #         storage_rule: {
-    #           storage_allocated_in_bytes: 1,
-    #           storage_type: "UNLIMITED", # accepts UNLIMITED, QUOTA
-    #         },
-    #         time_zone_id: "TimeZoneIdType",
-    #         locale: "en", # accepts en, fr, ko, de, es, ja, ru, zh_CN, zh_TW, pt_BR, default
-    #         grant_poweruser_privileges: "TRUE", # accepts TRUE, FALSE
-    #       }
-    #
     # @!attribute [rw] authentication_token
     #   Amazon WorkDocs authentication token. Not required when using AWS
     #   administrator credentials to access the API.

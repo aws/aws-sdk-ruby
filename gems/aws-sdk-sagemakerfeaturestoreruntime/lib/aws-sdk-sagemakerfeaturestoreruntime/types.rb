@@ -65,15 +65,6 @@ module Aws::SageMakerFeatureStoreRuntime
     # The identifier that identifies the batch of Records you are retrieving
     # in a batch.
     #
-    # @note When making an API call, you may pass BatchGetRecordIdentifier
-    #   data as a hash:
-    #
-    #       {
-    #         feature_group_name: "FeatureGroupName", # required
-    #         record_identifiers_value_as_string: ["ValueAsString"], # required
-    #         feature_names: ["FeatureName"],
-    #       }
-    #
     # @!attribute [rw] feature_group_name
     #   A `FeatureGroupName` containing Records you are retrieving in a
     #   batch.
@@ -98,19 +89,6 @@ module Aws::SageMakerFeatureStoreRuntime
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchGetRecordRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identifiers: [ # required
-    #           {
-    #             feature_group_name: "FeatureGroupName", # required
-    #             record_identifiers_value_as_string: ["ValueAsString"], # required
-    #             feature_names: ["FeatureName"],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] identifiers
     #   A list of `FeatureGroup` names, with their corresponding
     #   `RecordIdentifier` value, and Feature name that have been requested
@@ -173,15 +151,6 @@ module Aws::SageMakerFeatureStoreRuntime
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteRecordRequest
-    #   data as a hash:
-    #
-    #       {
-    #         feature_group_name: "FeatureGroupName", # required
-    #         record_identifier_value_as_string: "ValueAsString", # required
-    #         event_time: "ValueAsString", # required
-    #       }
-    #
     # @!attribute [rw] feature_group_name
     #   The name of the feature group to delete the record from.
     #   @return [String]
@@ -208,14 +177,6 @@ module Aws::SageMakerFeatureStoreRuntime
 
     # The value associated with a feature.
     #
-    # @note When making an API call, you may pass FeatureValue
-    #   data as a hash:
-    #
-    #       {
-    #         feature_name: "FeatureName", # required
-    #         value_as_string: "ValueAsString", # required
-    #       }
-    #
     # @!attribute [rw] feature_name
     #   The name of a feature that a feature value corresponds to.
     #   @return [String]
@@ -235,15 +196,6 @@ module Aws::SageMakerFeatureStoreRuntime
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRecordRequest
-    #   data as a hash:
-    #
-    #       {
-    #         feature_group_name: "FeatureGroupName", # required
-    #         record_identifier_value_as_string: "ValueAsString", # required
-    #         feature_names: ["FeatureName"],
-    #       }
-    #
     # @!attribute [rw] feature_group_name
     #   The name of the feature group in which you want to put the records.
     #   @return [String]
@@ -294,19 +246,6 @@ module Aws::SageMakerFeatureStoreRuntime
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutRecordRequest
-    #   data as a hash:
-    #
-    #       {
-    #         feature_group_name: "FeatureGroupName", # required
-    #         record: [ # required
-    #           {
-    #             feature_name: "FeatureName", # required
-    #             value_as_string: "ValueAsString", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] feature_group_name
     #   The name of the feature group that you want to insert the record
     #   into.

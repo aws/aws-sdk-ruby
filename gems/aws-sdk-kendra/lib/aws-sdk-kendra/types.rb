@@ -32,13 +32,6 @@ module Aws::Kendra
     #
     # [1]: https://docs.aws.amazon.com/kendra/latest/dg/s3-acl.html
     #
-    # @note When making an API call, you may pass AccessControlListConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         key_path: "S3ObjectKey",
-    #       }
-    #
     # @!attribute [rw] key_path
     #   Path to the Amazon S3 bucket that contains the ACL files.
     #   @return [String]
@@ -68,13 +61,6 @@ module Aws::Kendra
 
     # Provides information about the column that should be used for
     # filtering the query response by groups.
-    #
-    # @note When making an API call, you may pass AclConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         allowed_groups_column_name: "ColumnName", # required
-    #       }
     #
     # @!attribute [rw] allowed_groups_column_name
     #   A list of groups, separated by semi-colons, that filters a query
@@ -142,49 +128,6 @@ module Aws::Kendra
     #
     #
     # [1]: http://aws.amazon.com/contact-us/
-    #
-    # @note When making an API call, you may pass AlfrescoConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         site_url: "SiteUrl", # required
-    #         site_id: "SiteId", # required
-    #         secret_arn: "SecretArn", # required
-    #         ssl_certificate_s3_path: { # required
-    #           bucket: "S3BucketName", # required
-    #           key: "S3ObjectKey", # required
-    #         },
-    #         crawl_system_folders: false,
-    #         crawl_comments: false,
-    #         entity_filter: ["wiki"], # accepts wiki, blog, documentLibrary
-    #         document_library_field_mappings: [
-    #           {
-    #             data_source_field_name: "DataSourceFieldName", # required
-    #             date_field_format: "DataSourceDateFieldFormat",
-    #             index_field_name: "IndexFieldName", # required
-    #           },
-    #         ],
-    #         blog_field_mappings: [
-    #           {
-    #             data_source_field_name: "DataSourceFieldName", # required
-    #             date_field_format: "DataSourceDateFieldFormat",
-    #             index_field_name: "IndexFieldName", # required
-    #           },
-    #         ],
-    #         wiki_field_mappings: [
-    #           {
-    #             data_source_field_name: "DataSourceFieldName", # required
-    #             date_field_format: "DataSourceDateFieldFormat",
-    #             index_field_name: "IndexFieldName", # required
-    #           },
-    #         ],
-    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #         vpc_configuration: {
-    #           subnet_ids: ["SubnetId"], # required
-    #           security_group_ids: ["VpcSecurityGroupId"], # required
-    #         },
-    #       }
     #
     # @!attribute [rw] site_url
     #   The URL of the Alfresco site. For example, *https://hostname:8080*.
@@ -319,20 +262,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateEntitiesToExperienceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ExperienceId", # required
-    #         index_id: "IndexId", # required
-    #         entity_list: [ # required
-    #           {
-    #             entity_id: "EntityId", # required
-    #             entity_type: "USER", # required, accepts USER, GROUP
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] id
     #   The identifier of your Amazon Kendra experience.
     #   @return [String]
@@ -369,20 +298,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociatePersonasToEntitiesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ExperienceId", # required
-    #         index_id: "IndexId", # required
-    #         personas: [ # required
-    #           {
-    #             entity_id: "EntityId", # required
-    #             persona: "OWNER", # required, accepts OWNER, VIEWER
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] id
     #   The identifier of your Amazon Kendra experience.
     #   @return [String]
@@ -447,305 +362,6 @@ module Aws::Kendra
     # `AndAllFilters` or `OrAllFilters`, you receive a `ValidationException`
     # with the message "`AttributeFilter` cannot have a length of more than
     # 10".
-    #
-    # @note When making an API call, you may pass AttributeFilter
-    #   data as a hash:
-    #
-    #       {
-    #         and_all_filters: [
-    #           {
-    #             and_all_filters: {
-    #               # recursive AttributeFilterList
-    #             },
-    #             or_all_filters: {
-    #               # recursive AttributeFilterList
-    #             },
-    #             not_filter: {
-    #               # recursive AttributeFilter
-    #             },
-    #             equals_to: {
-    #               key: "DocumentAttributeKey", # required
-    #               value: { # required
-    #                 string_value: "DocumentAttributeStringValue",
-    #                 string_list_value: ["String"],
-    #                 long_value: 1,
-    #                 date_value: Time.now,
-    #               },
-    #             },
-    #             contains_all: {
-    #               key: "DocumentAttributeKey", # required
-    #               value: { # required
-    #                 string_value: "DocumentAttributeStringValue",
-    #                 string_list_value: ["String"],
-    #                 long_value: 1,
-    #                 date_value: Time.now,
-    #               },
-    #             },
-    #             contains_any: {
-    #               key: "DocumentAttributeKey", # required
-    #               value: { # required
-    #                 string_value: "DocumentAttributeStringValue",
-    #                 string_list_value: ["String"],
-    #                 long_value: 1,
-    #                 date_value: Time.now,
-    #               },
-    #             },
-    #             greater_than: {
-    #               key: "DocumentAttributeKey", # required
-    #               value: { # required
-    #                 string_value: "DocumentAttributeStringValue",
-    #                 string_list_value: ["String"],
-    #                 long_value: 1,
-    #                 date_value: Time.now,
-    #               },
-    #             },
-    #             greater_than_or_equals: {
-    #               key: "DocumentAttributeKey", # required
-    #               value: { # required
-    #                 string_value: "DocumentAttributeStringValue",
-    #                 string_list_value: ["String"],
-    #                 long_value: 1,
-    #                 date_value: Time.now,
-    #               },
-    #             },
-    #             less_than: {
-    #               key: "DocumentAttributeKey", # required
-    #               value: { # required
-    #                 string_value: "DocumentAttributeStringValue",
-    #                 string_list_value: ["String"],
-    #                 long_value: 1,
-    #                 date_value: Time.now,
-    #               },
-    #             },
-    #             less_than_or_equals: {
-    #               key: "DocumentAttributeKey", # required
-    #               value: { # required
-    #                 string_value: "DocumentAttributeStringValue",
-    #                 string_list_value: ["String"],
-    #                 long_value: 1,
-    #                 date_value: Time.now,
-    #               },
-    #             },
-    #           },
-    #         ],
-    #         or_all_filters: [
-    #           {
-    #             and_all_filters: {
-    #               # recursive AttributeFilterList
-    #             },
-    #             or_all_filters: {
-    #               # recursive AttributeFilterList
-    #             },
-    #             not_filter: {
-    #               # recursive AttributeFilter
-    #             },
-    #             equals_to: {
-    #               key: "DocumentAttributeKey", # required
-    #               value: { # required
-    #                 string_value: "DocumentAttributeStringValue",
-    #                 string_list_value: ["String"],
-    #                 long_value: 1,
-    #                 date_value: Time.now,
-    #               },
-    #             },
-    #             contains_all: {
-    #               key: "DocumentAttributeKey", # required
-    #               value: { # required
-    #                 string_value: "DocumentAttributeStringValue",
-    #                 string_list_value: ["String"],
-    #                 long_value: 1,
-    #                 date_value: Time.now,
-    #               },
-    #             },
-    #             contains_any: {
-    #               key: "DocumentAttributeKey", # required
-    #               value: { # required
-    #                 string_value: "DocumentAttributeStringValue",
-    #                 string_list_value: ["String"],
-    #                 long_value: 1,
-    #                 date_value: Time.now,
-    #               },
-    #             },
-    #             greater_than: {
-    #               key: "DocumentAttributeKey", # required
-    #               value: { # required
-    #                 string_value: "DocumentAttributeStringValue",
-    #                 string_list_value: ["String"],
-    #                 long_value: 1,
-    #                 date_value: Time.now,
-    #               },
-    #             },
-    #             greater_than_or_equals: {
-    #               key: "DocumentAttributeKey", # required
-    #               value: { # required
-    #                 string_value: "DocumentAttributeStringValue",
-    #                 string_list_value: ["String"],
-    #                 long_value: 1,
-    #                 date_value: Time.now,
-    #               },
-    #             },
-    #             less_than: {
-    #               key: "DocumentAttributeKey", # required
-    #               value: { # required
-    #                 string_value: "DocumentAttributeStringValue",
-    #                 string_list_value: ["String"],
-    #                 long_value: 1,
-    #                 date_value: Time.now,
-    #               },
-    #             },
-    #             less_than_or_equals: {
-    #               key: "DocumentAttributeKey", # required
-    #               value: { # required
-    #                 string_value: "DocumentAttributeStringValue",
-    #                 string_list_value: ["String"],
-    #                 long_value: 1,
-    #                 date_value: Time.now,
-    #               },
-    #             },
-    #           },
-    #         ],
-    #         not_filter: {
-    #           and_all_filters: [
-    #             {
-    #               # recursive AttributeFilter
-    #             },
-    #           ],
-    #           or_all_filters: [
-    #             {
-    #               # recursive AttributeFilter
-    #             },
-    #           ],
-    #           not_filter: {
-    #             # recursive AttributeFilter
-    #           },
-    #           equals_to: {
-    #             key: "DocumentAttributeKey", # required
-    #             value: { # required
-    #               string_value: "DocumentAttributeStringValue",
-    #               string_list_value: ["String"],
-    #               long_value: 1,
-    #               date_value: Time.now,
-    #             },
-    #           },
-    #           contains_all: {
-    #             key: "DocumentAttributeKey", # required
-    #             value: { # required
-    #               string_value: "DocumentAttributeStringValue",
-    #               string_list_value: ["String"],
-    #               long_value: 1,
-    #               date_value: Time.now,
-    #             },
-    #           },
-    #           contains_any: {
-    #             key: "DocumentAttributeKey", # required
-    #             value: { # required
-    #               string_value: "DocumentAttributeStringValue",
-    #               string_list_value: ["String"],
-    #               long_value: 1,
-    #               date_value: Time.now,
-    #             },
-    #           },
-    #           greater_than: {
-    #             key: "DocumentAttributeKey", # required
-    #             value: { # required
-    #               string_value: "DocumentAttributeStringValue",
-    #               string_list_value: ["String"],
-    #               long_value: 1,
-    #               date_value: Time.now,
-    #             },
-    #           },
-    #           greater_than_or_equals: {
-    #             key: "DocumentAttributeKey", # required
-    #             value: { # required
-    #               string_value: "DocumentAttributeStringValue",
-    #               string_list_value: ["String"],
-    #               long_value: 1,
-    #               date_value: Time.now,
-    #             },
-    #           },
-    #           less_than: {
-    #             key: "DocumentAttributeKey", # required
-    #             value: { # required
-    #               string_value: "DocumentAttributeStringValue",
-    #               string_list_value: ["String"],
-    #               long_value: 1,
-    #               date_value: Time.now,
-    #             },
-    #           },
-    #           less_than_or_equals: {
-    #             key: "DocumentAttributeKey", # required
-    #             value: { # required
-    #               string_value: "DocumentAttributeStringValue",
-    #               string_list_value: ["String"],
-    #               long_value: 1,
-    #               date_value: Time.now,
-    #             },
-    #           },
-    #         },
-    #         equals_to: {
-    #           key: "DocumentAttributeKey", # required
-    #           value: { # required
-    #             string_value: "DocumentAttributeStringValue",
-    #             string_list_value: ["String"],
-    #             long_value: 1,
-    #             date_value: Time.now,
-    #           },
-    #         },
-    #         contains_all: {
-    #           key: "DocumentAttributeKey", # required
-    #           value: { # required
-    #             string_value: "DocumentAttributeStringValue",
-    #             string_list_value: ["String"],
-    #             long_value: 1,
-    #             date_value: Time.now,
-    #           },
-    #         },
-    #         contains_any: {
-    #           key: "DocumentAttributeKey", # required
-    #           value: { # required
-    #             string_value: "DocumentAttributeStringValue",
-    #             string_list_value: ["String"],
-    #             long_value: 1,
-    #             date_value: Time.now,
-    #           },
-    #         },
-    #         greater_than: {
-    #           key: "DocumentAttributeKey", # required
-    #           value: { # required
-    #             string_value: "DocumentAttributeStringValue",
-    #             string_list_value: ["String"],
-    #             long_value: 1,
-    #             date_value: Time.now,
-    #           },
-    #         },
-    #         greater_than_or_equals: {
-    #           key: "DocumentAttributeKey", # required
-    #           value: { # required
-    #             string_value: "DocumentAttributeStringValue",
-    #             string_list_value: ["String"],
-    #             long_value: 1,
-    #             date_value: Time.now,
-    #           },
-    #         },
-    #         less_than: {
-    #           key: "DocumentAttributeKey", # required
-    #           value: { # required
-    #             string_value: "DocumentAttributeStringValue",
-    #             string_list_value: ["String"],
-    #             long_value: 1,
-    #             date_value: Time.now,
-    #           },
-    #         },
-    #         less_than_or_equals: {
-    #           key: "DocumentAttributeKey", # required
-    #           value: { # required
-    #             string_value: "DocumentAttributeStringValue",
-    #             string_list_value: ["String"],
-    #             long_value: 1,
-    #             date_value: Time.now,
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] and_all_filters
     #   Performs a logical `AND` operation on all supplied filters.
@@ -820,19 +436,6 @@ module Aws::Kendra
     # Provides the configuration information to connect to websites that
     # require user authentication.
     #
-    # @note When making an API call, you may pass AuthenticationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         basic_authentication: [
-    #           {
-    #             host: "Host", # required
-    #             port: 1, # required
-    #             credentials: "SecretArn", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] basic_authentication
     #   The list of configuration information that's required to connect to
     #   and crawl a website host using basic authentication credentials.
@@ -850,15 +453,6 @@ module Aws::Kendra
 
     # Provides the configuration information to connect to websites that
     # require basic user authentication.
-    #
-    # @note When making an API call, you may pass BasicAuthenticationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         host: "Host", # required
-    #         port: 1, # required
-    #         credentials: "SecretArn", # required
-    #       }
     #
     # @!attribute [rw] host
     #   The name of the website host you want to connect to using
@@ -898,18 +492,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchDeleteDocumentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         index_id: "IndexId", # required
-    #         document_id_list: ["DocumentId"], # required
-    #         data_source_sync_job_metric_target: {
-    #           data_source_id: "DataSourceId", # required
-    #           data_source_sync_job_id: "DataSourceSyncJobId",
-    #         },
-    #       }
-    #
     # @!attribute [rw] index_id
     #   The identifier of the index that contains the documents to delete.
     #   @return [String]
@@ -974,29 +556,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchGetDocumentStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         index_id: "IndexId", # required
-    #         document_info_list: [ # required
-    #           {
-    #             document_id: "DocumentId", # required
-    #             attributes: [
-    #               {
-    #                 key: "DocumentAttributeKey", # required
-    #                 value: { # required
-    #                   string_value: "DocumentAttributeStringValue",
-    #                   string_list_value: ["String"],
-    #                   long_value: 1,
-    #                   date_value: Time.now,
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] index_id
     #   The identifier of the index to add documents to. The index ID is
     #   returned by the [CreateIndex ][1] API.
@@ -1070,114 +629,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchPutDocumentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         index_id: "IndexId", # required
-    #         role_arn: "RoleArn",
-    #         documents: [ # required
-    #           {
-    #             id: "DocumentId", # required
-    #             title: "Title",
-    #             blob: "data",
-    #             s3_path: {
-    #               bucket: "S3BucketName", # required
-    #               key: "S3ObjectKey", # required
-    #             },
-    #             attributes: [
-    #               {
-    #                 key: "DocumentAttributeKey", # required
-    #                 value: { # required
-    #                   string_value: "DocumentAttributeStringValue",
-    #                   string_list_value: ["String"],
-    #                   long_value: 1,
-    #                   date_value: Time.now,
-    #                 },
-    #               },
-    #             ],
-    #             access_control_list: [
-    #               {
-    #                 name: "PrincipalName", # required
-    #                 type: "USER", # required, accepts USER, GROUP
-    #                 access: "ALLOW", # required, accepts ALLOW, DENY
-    #                 data_source_id: "DataSourceId",
-    #               },
-    #             ],
-    #             hierarchical_access_control_list: [
-    #               {
-    #                 principal_list: [ # required
-    #                   {
-    #                     name: "PrincipalName", # required
-    #                     type: "USER", # required, accepts USER, GROUP
-    #                     access: "ALLOW", # required, accepts ALLOW, DENY
-    #                     data_source_id: "DataSourceId",
-    #                   },
-    #                 ],
-    #               },
-    #             ],
-    #             content_type: "PDF", # accepts PDF, HTML, MS_WORD, PLAIN_TEXT, PPT
-    #             access_control_configuration_id: "AccessControlConfigurationId",
-    #           },
-    #         ],
-    #         custom_document_enrichment_configuration: {
-    #           inline_configurations: [
-    #             {
-    #               condition: {
-    #                 condition_document_attribute_key: "DocumentAttributeKey", # required
-    #                 operator: "GreaterThan", # required, accepts GreaterThan, GreaterThanOrEquals, LessThan, LessThanOrEquals, Equals, NotEquals, Contains, NotContains, Exists, NotExists, BeginsWith
-    #                 condition_on_value: {
-    #                   string_value: "DocumentAttributeStringValue",
-    #                   string_list_value: ["String"],
-    #                   long_value: 1,
-    #                   date_value: Time.now,
-    #                 },
-    #               },
-    #               target: {
-    #                 target_document_attribute_key: "DocumentAttributeKey",
-    #                 target_document_attribute_value_deletion: false,
-    #                 target_document_attribute_value: {
-    #                   string_value: "DocumentAttributeStringValue",
-    #                   string_list_value: ["String"],
-    #                   long_value: 1,
-    #                   date_value: Time.now,
-    #                 },
-    #               },
-    #               document_content_deletion: false,
-    #             },
-    #           ],
-    #           pre_extraction_hook_configuration: {
-    #             invocation_condition: {
-    #               condition_document_attribute_key: "DocumentAttributeKey", # required
-    #               operator: "GreaterThan", # required, accepts GreaterThan, GreaterThanOrEquals, LessThan, LessThanOrEquals, Equals, NotEquals, Contains, NotContains, Exists, NotExists, BeginsWith
-    #               condition_on_value: {
-    #                 string_value: "DocumentAttributeStringValue",
-    #                 string_list_value: ["String"],
-    #                 long_value: 1,
-    #                 date_value: Time.now,
-    #               },
-    #             },
-    #             lambda_arn: "LambdaArn", # required
-    #             s3_bucket: "S3BucketName", # required
-    #           },
-    #           post_extraction_hook_configuration: {
-    #             invocation_condition: {
-    #               condition_document_attribute_key: "DocumentAttributeKey", # required
-    #               operator: "GreaterThan", # required, accepts GreaterThan, GreaterThanOrEquals, LessThan, LessThanOrEquals, Equals, NotEquals, Contains, NotContains, Exists, NotExists, BeginsWith
-    #               condition_on_value: {
-    #                 string_value: "DocumentAttributeStringValue",
-    #                 string_list_value: ["String"],
-    #                 long_value: 1,
-    #                 date_value: Time.now,
-    #               },
-    #             },
-    #             lambda_arn: "LambdaArn", # required
-    #             s3_bucket: "S3BucketName", # required
-    #           },
-    #           role_arn: "RoleArn",
-    #         },
-    #       }
-    #
     # @!attribute [rw] index_id
     #   The identifier of the index to add the documents to. You need to
     #   create the index first using the `CreateIndex` API.
@@ -1288,52 +739,6 @@ module Aws::Kendra
 
     # Provides the configuration information to connect to Box as your data
     # source.
-    #
-    # @note When making an API call, you may pass BoxConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         enterprise_id: "EnterpriseId", # required
-    #         secret_arn: "SecretArn", # required
-    #         use_change_log: false,
-    #         crawl_comments: false,
-    #         crawl_tasks: false,
-    #         crawl_web_links: false,
-    #         file_field_mappings: [
-    #           {
-    #             data_source_field_name: "DataSourceFieldName", # required
-    #             date_field_format: "DataSourceDateFieldFormat",
-    #             index_field_name: "IndexFieldName", # required
-    #           },
-    #         ],
-    #         task_field_mappings: [
-    #           {
-    #             data_source_field_name: "DataSourceFieldName", # required
-    #             date_field_format: "DataSourceDateFieldFormat",
-    #             index_field_name: "IndexFieldName", # required
-    #           },
-    #         ],
-    #         comment_field_mappings: [
-    #           {
-    #             data_source_field_name: "DataSourceFieldName", # required
-    #             date_field_format: "DataSourceDateFieldFormat",
-    #             index_field_name: "IndexFieldName", # required
-    #           },
-    #         ],
-    #         web_link_field_mappings: [
-    #           {
-    #             data_source_field_name: "DataSourceFieldName", # required
-    #             date_field_format: "DataSourceDateFieldFormat",
-    #             index_field_name: "IndexFieldName", # required
-    #           },
-    #         ],
-    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #         vpc_configuration: {
-    #           subnet_ids: ["SubnetId"], # required
-    #           security_group_ids: ["VpcSecurityGroupId"], # required
-    #         },
-    #       }
     #
     # @!attribute [rw] enterprise_id
     #   The identifier of the Box Enterprise platform. You can find the
@@ -1494,14 +899,6 @@ module Aws::Kendra
     # Edition index. You can add and remove capacity units to fit your usage
     # requirements.
     #
-    # @note When making an API call, you may pass CapacityUnitsConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         storage_capacity_units: 1, # required
-    #         query_capacity_units: 1, # required
-    #       }
-    #
     # @!attribute [rw] storage_capacity_units
     #   The amount of extra storage capacity for an index. A single capacity
     #   unit provides 30 GB of storage space or 100,000 documents, whichever
@@ -1539,13 +936,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ClearQuerySuggestionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         index_id: "IndexId", # required
-    #       }
-    #
     # @!attribute [rw] index_id
     #   The identifier of the index you want to clear query suggestions
     #   from.
@@ -1562,14 +952,6 @@ module Aws::Kendra
     # Gathers information about when a particular result was clicked by a
     # user. Your application uses the `SubmitFeedback` API to provide click
     # information.
-    #
-    # @note When making an API call, you may pass ClickFeedback
-    #   data as a hash:
-    #
-    #       {
-    #         result_id: "ResultId", # required
-    #         click_time: Time.now, # required
-    #       }
     #
     # @!attribute [rw] result_id
     #   The identifier of the search result that was clicked.
@@ -1590,23 +972,6 @@ module Aws::Kendra
 
     # Provides information about how Amazon Kendra should use the columns of
     # a database in an index.
-    #
-    # @note When making an API call, you may pass ColumnConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         document_id_column_name: "ColumnName", # required
-    #         document_data_column_name: "ColumnName", # required
-    #         document_title_column_name: "ColumnName",
-    #         field_mappings: [
-    #           {
-    #             data_source_field_name: "DataSourceFieldName", # required
-    #             date_field_format: "DataSourceDateFieldFormat",
-    #             index_field_name: "IndexFieldName", # required
-    #           },
-    #         ],
-    #         change_detecting_columns: ["ColumnName"], # required
-    #       }
     #
     # @!attribute [rw] document_id_column_name
     #   The column that provides the document's identifier.
@@ -1661,20 +1026,6 @@ module Aws::Kendra
     # Attachment settings are optional, if you don't specify settings
     # attachments, Amazon Kendra won't index them.
     #
-    # @note When making an API call, you may pass ConfluenceAttachmentConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         crawl_attachments: false,
-    #         attachment_field_mappings: [
-    #           {
-    #             data_source_field_name: "AUTHOR", # accepts AUTHOR, CONTENT_TYPE, CREATED_DATE, DISPLAY_URL, FILE_SIZE, ITEM_TYPE, PARENT_ID, SPACE_KEY, SPACE_NAME, URL, VERSION
-    #             date_field_format: "DataSourceDateFieldFormat",
-    #             index_field_name: "IndexFieldName",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] crawl_attachments
     #   `TRUE` to index attachments of pages and blogs in Confluence.
     #   @return [Boolean]
@@ -1714,15 +1065,6 @@ module Aws::Kendra
     #
     # [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
     #
-    # @note When making an API call, you may pass ConfluenceAttachmentToIndexFieldMapping
-    #   data as a hash:
-    #
-    #       {
-    #         data_source_field_name: "AUTHOR", # accepts AUTHOR, CONTENT_TYPE, CREATED_DATE, DISPLAY_URL, FILE_SIZE, ITEM_TYPE, PARENT_ID, SPACE_KEY, SPACE_NAME, URL, VERSION
-    #         date_field_format: "DataSourceDateFieldFormat",
-    #         index_field_name: "IndexFieldName",
-    #       }
-    #
     # @!attribute [rw] data_source_field_name
     #   The name of the field in the data source.
     #
@@ -1755,19 +1097,6 @@ module Aws::Kendra
     # are always indexed unless filtered from the index by the
     # `ExclusionPatterns` or `InclusionPatterns` fields in the
     # `ConfluenceConfiguration` object.
-    #
-    # @note When making an API call, you may pass ConfluenceBlogConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         blog_field_mappings: [
-    #           {
-    #             data_source_field_name: "AUTHOR", # accepts AUTHOR, DISPLAY_URL, ITEM_TYPE, LABELS, PUBLISH_DATE, SPACE_KEY, SPACE_NAME, URL, VERSION
-    #             date_field_format: "DataSourceDateFieldFormat",
-    #             index_field_name: "IndexFieldName",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] blog_field_mappings
     #   Maps attributes or field names of Confluence blogs to Amazon Kendra
@@ -1802,15 +1131,6 @@ module Aws::Kendra
     #
     # [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
     #
-    # @note When making an API call, you may pass ConfluenceBlogToIndexFieldMapping
-    #   data as a hash:
-    #
-    #       {
-    #         data_source_field_name: "AUTHOR", # accepts AUTHOR, DISPLAY_URL, ITEM_TYPE, LABELS, PUBLISH_DATE, SPACE_KEY, SPACE_NAME, URL, VERSION
-    #         date_field_format: "DataSourceDateFieldFormat",
-    #         index_field_name: "IndexFieldName",
-    #       }
-    #
     # @!attribute [rw] data_source_field_name
     #   The name of the field in the data source.
     #   @return [String]
@@ -1839,68 +1159,6 @@ module Aws::Kendra
 
     # Provides the configuration information to connect to Confluence as
     # your data source.
-    #
-    # @note When making an API call, you may pass ConfluenceConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         server_url: "Url", # required
-    #         secret_arn: "SecretArn", # required
-    #         version: "CLOUD", # required, accepts CLOUD, SERVER
-    #         space_configuration: {
-    #           crawl_personal_spaces: false,
-    #           crawl_archived_spaces: false,
-    #           include_spaces: ["ConfluenceSpaceIdentifier"],
-    #           exclude_spaces: ["ConfluenceSpaceIdentifier"],
-    #           space_field_mappings: [
-    #             {
-    #               data_source_field_name: "DISPLAY_URL", # accepts DISPLAY_URL, ITEM_TYPE, SPACE_KEY, URL
-    #               date_field_format: "DataSourceDateFieldFormat",
-    #               index_field_name: "IndexFieldName",
-    #             },
-    #           ],
-    #         },
-    #         page_configuration: {
-    #           page_field_mappings: [
-    #             {
-    #               data_source_field_name: "AUTHOR", # accepts AUTHOR, CONTENT_STATUS, CREATED_DATE, DISPLAY_URL, ITEM_TYPE, LABELS, MODIFIED_DATE, PARENT_ID, SPACE_KEY, SPACE_NAME, URL, VERSION
-    #               date_field_format: "DataSourceDateFieldFormat",
-    #               index_field_name: "IndexFieldName",
-    #             },
-    #           ],
-    #         },
-    #         blog_configuration: {
-    #           blog_field_mappings: [
-    #             {
-    #               data_source_field_name: "AUTHOR", # accepts AUTHOR, DISPLAY_URL, ITEM_TYPE, LABELS, PUBLISH_DATE, SPACE_KEY, SPACE_NAME, URL, VERSION
-    #               date_field_format: "DataSourceDateFieldFormat",
-    #               index_field_name: "IndexFieldName",
-    #             },
-    #           ],
-    #         },
-    #         attachment_configuration: {
-    #           crawl_attachments: false,
-    #           attachment_field_mappings: [
-    #             {
-    #               data_source_field_name: "AUTHOR", # accepts AUTHOR, CONTENT_TYPE, CREATED_DATE, DISPLAY_URL, FILE_SIZE, ITEM_TYPE, PARENT_ID, SPACE_KEY, SPACE_NAME, URL, VERSION
-    #               date_field_format: "DataSourceDateFieldFormat",
-    #               index_field_name: "IndexFieldName",
-    #             },
-    #           ],
-    #         },
-    #         vpc_configuration: {
-    #           subnet_ids: ["SubnetId"], # required
-    #           security_group_ids: ["VpcSecurityGroupId"], # required
-    #         },
-    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #         proxy_configuration: {
-    #           host: "Host", # required
-    #           port: 1, # required
-    #           credentials: "SecretArn",
-    #         },
-    #         authentication_type: "HTTP_BASIC", # accepts HTTP_BASIC, PAT
-    #       }
     #
     # @!attribute [rw] server_url
     #   The URL of your Confluence instance. Use the full URL of the server.
@@ -2023,19 +1281,6 @@ module Aws::Kendra
 
     # Configuration of the page settings for the Confluence data source.
     #
-    # @note When making an API call, you may pass ConfluencePageConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         page_field_mappings: [
-    #           {
-    #             data_source_field_name: "AUTHOR", # accepts AUTHOR, CONTENT_STATUS, CREATED_DATE, DISPLAY_URL, ITEM_TYPE, LABELS, MODIFIED_DATE, PARENT_ID, SPACE_KEY, SPACE_NAME, URL, VERSION
-    #             date_field_format: "DataSourceDateFieldFormat",
-    #             index_field_name: "IndexFieldName",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] page_field_mappings
     #   Maps attributes or field names of Confluence pages to Amazon Kendra
     #   index field names. To create custom fields, use the `UpdateIndex`
@@ -2069,15 +1314,6 @@ module Aws::Kendra
     #
     # [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
     #
-    # @note When making an API call, you may pass ConfluencePageToIndexFieldMapping
-    #   data as a hash:
-    #
-    #       {
-    #         data_source_field_name: "AUTHOR", # accepts AUTHOR, CONTENT_STATUS, CREATED_DATE, DISPLAY_URL, ITEM_TYPE, LABELS, MODIFIED_DATE, PARENT_ID, SPACE_KEY, SPACE_NAME, URL, VERSION
-    #         date_field_format: "DataSourceDateFieldFormat",
-    #         index_field_name: "IndexFieldName",
-    #       }
-    #
     # @!attribute [rw] data_source_field_name
     #   The name of the field in the data source.
     #   @return [String]
@@ -2105,23 +1341,6 @@ module Aws::Kendra
     end
 
     # Configuration information for indexing Confluence spaces.
-    #
-    # @note When making an API call, you may pass ConfluenceSpaceConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         crawl_personal_spaces: false,
-    #         crawl_archived_spaces: false,
-    #         include_spaces: ["ConfluenceSpaceIdentifier"],
-    #         exclude_spaces: ["ConfluenceSpaceIdentifier"],
-    #         space_field_mappings: [
-    #           {
-    #             data_source_field_name: "DISPLAY_URL", # accepts DISPLAY_URL, ITEM_TYPE, SPACE_KEY, URL
-    #             date_field_format: "DataSourceDateFieldFormat",
-    #             index_field_name: "IndexFieldName",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] crawl_personal_spaces
     #   `TRUE` to index personal spaces. You can add restrictions to items
@@ -2192,15 +1411,6 @@ module Aws::Kendra
     #
     # [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
     #
-    # @note When making an API call, you may pass ConfluenceSpaceToIndexFieldMapping
-    #   data as a hash:
-    #
-    #       {
-    #         data_source_field_name: "DISPLAY_URL", # accepts DISPLAY_URL, ITEM_TYPE, SPACE_KEY, URL
-    #         date_field_format: "DataSourceDateFieldFormat",
-    #         index_field_name: "IndexFieldName",
-    #       }
-    #
     # @!attribute [rw] data_source_field_name
     #   The name of the field in the data source.
     #   @return [String]
@@ -2229,17 +1439,6 @@ module Aws::Kendra
 
     # Provides the configuration information that's required to connect to
     # a database.
-    #
-    # @note When making an API call, you may pass ConnectionConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         database_host: "DatabaseHost", # required
-    #         database_port: 1, # required
-    #         database_name: "DatabaseName", # required
-    #         table_name: "TableName", # required
-    #         secret_arn: "SecretArn", # required
-    #       }
     #
     # @!attribute [rw] database_host
     #   The name of the host for the database. Can be either a string
@@ -2290,15 +1489,6 @@ module Aws::Kendra
     #
     #
     # [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_BatchPutDocument.html
-    #
-    # @note When making an API call, you may pass ContentSourceConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         data_source_ids: ["DataSourceId"],
-    #         faq_ids: ["FaqId"],
-    #         direct_put_content: false,
-    #       }
     #
     # @!attribute [rw] data_source_ids
     #   The identifier of the data sources you want to use for your Amazon
@@ -2356,36 +1546,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAccessControlConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         index_id: "IndexId", # required
-    #         name: "AccessControlConfigurationName", # required
-    #         description: "Description",
-    #         access_control_list: [
-    #           {
-    #             name: "PrincipalName", # required
-    #             type: "USER", # required, accepts USER, GROUP
-    #             access: "ALLOW", # required, accepts ALLOW, DENY
-    #             data_source_id: "DataSourceId",
-    #           },
-    #         ],
-    #         hierarchical_access_control_list: [
-    #           {
-    #             principal_list: [ # required
-    #               {
-    #                 name: "PrincipalName", # required
-    #                 type: "USER", # required, accepts USER, GROUP
-    #                 access: "ALLOW", # required, accepts ALLOW, DENY
-    #                 data_source_id: "DataSourceId",
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         client_token: "ClientTokenName",
-    #       }
-    #
     # @!attribute [rw] index_id
     #   The identifier of the index to create an access control
     #   configuration for your documents.
@@ -2451,716 +1611,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDataSourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "DataSourceName", # required
-    #         index_id: "IndexId", # required
-    #         type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE, GOOGLEDRIVE, WEBCRAWLER, WORKDOCS, FSX, SLACK, BOX, QUIP, JIRA, GITHUB, ALFRESCO, TEMPLATE
-    #         configuration: {
-    #           s3_configuration: {
-    #             bucket_name: "S3BucketName", # required
-    #             inclusion_prefixes: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             documents_metadata_configuration: {
-    #               s3_prefix: "S3ObjectKey",
-    #             },
-    #             access_control_list_configuration: {
-    #               key_path: "S3ObjectKey",
-    #             },
-    #           },
-    #           share_point_configuration: {
-    #             share_point_version: "SHAREPOINT_2013", # required, accepts SHAREPOINT_2013, SHAREPOINT_2016, SHAREPOINT_ONLINE, SHAREPOINT_2019
-    #             urls: ["Url"], # required
-    #             secret_arn: "SecretArn", # required
-    #             crawl_attachments: false,
-    #             use_change_log: false,
-    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             vpc_configuration: {
-    #               subnet_ids: ["SubnetId"], # required
-    #               security_group_ids: ["VpcSecurityGroupId"], # required
-    #             },
-    #             field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             document_title_field_name: "DataSourceFieldName",
-    #             disable_local_groups: false,
-    #             ssl_certificate_s3_path: {
-    #               bucket: "S3BucketName", # required
-    #               key: "S3ObjectKey", # required
-    #             },
-    #             authentication_type: "HTTP_BASIC", # accepts HTTP_BASIC, OAUTH2
-    #             proxy_configuration: {
-    #               host: "Host", # required
-    #               port: 1, # required
-    #               credentials: "SecretArn",
-    #             },
-    #           },
-    #           database_configuration: {
-    #             database_engine_type: "RDS_AURORA_MYSQL", # required, accepts RDS_AURORA_MYSQL, RDS_AURORA_POSTGRESQL, RDS_MYSQL, RDS_POSTGRESQL
-    #             connection_configuration: { # required
-    #               database_host: "DatabaseHost", # required
-    #               database_port: 1, # required
-    #               database_name: "DatabaseName", # required
-    #               table_name: "TableName", # required
-    #               secret_arn: "SecretArn", # required
-    #             },
-    #             vpc_configuration: {
-    #               subnet_ids: ["SubnetId"], # required
-    #               security_group_ids: ["VpcSecurityGroupId"], # required
-    #             },
-    #             column_configuration: { # required
-    #               document_id_column_name: "ColumnName", # required
-    #               document_data_column_name: "ColumnName", # required
-    #               document_title_column_name: "ColumnName",
-    #               field_mappings: [
-    #                 {
-    #                   data_source_field_name: "DataSourceFieldName", # required
-    #                   date_field_format: "DataSourceDateFieldFormat",
-    #                   index_field_name: "IndexFieldName", # required
-    #                 },
-    #               ],
-    #               change_detecting_columns: ["ColumnName"], # required
-    #             },
-    #             acl_configuration: {
-    #               allowed_groups_column_name: "ColumnName", # required
-    #             },
-    #             sql_configuration: {
-    #               query_identifiers_enclosing_option: "DOUBLE_QUOTES", # accepts DOUBLE_QUOTES, NONE
-    #             },
-    #           },
-    #           salesforce_configuration: {
-    #             server_url: "Url", # required
-    #             secret_arn: "SecretArn", # required
-    #             standard_object_configurations: [
-    #               {
-    #                 name: "ACCOUNT", # required, accepts ACCOUNT, CAMPAIGN, CASE, CONTACT, CONTRACT, DOCUMENT, GROUP, IDEA, LEAD, OPPORTUNITY, PARTNER, PRICEBOOK, PRODUCT, PROFILE, SOLUTION, TASK, USER
-    #                 document_data_field_name: "DataSourceFieldName", # required
-    #                 document_title_field_name: "DataSourceFieldName",
-    #                 field_mappings: [
-    #                   {
-    #                     data_source_field_name: "DataSourceFieldName", # required
-    #                     date_field_format: "DataSourceDateFieldFormat",
-    #                     index_field_name: "IndexFieldName", # required
-    #                   },
-    #                 ],
-    #               },
-    #             ],
-    #             knowledge_article_configuration: {
-    #               included_states: ["DRAFT"], # required, accepts DRAFT, PUBLISHED, ARCHIVED
-    #               standard_knowledge_article_type_configuration: {
-    #                 document_data_field_name: "DataSourceFieldName", # required
-    #                 document_title_field_name: "DataSourceFieldName",
-    #                 field_mappings: [
-    #                   {
-    #                     data_source_field_name: "DataSourceFieldName", # required
-    #                     date_field_format: "DataSourceDateFieldFormat",
-    #                     index_field_name: "IndexFieldName", # required
-    #                   },
-    #                 ],
-    #               },
-    #               custom_knowledge_article_type_configurations: [
-    #                 {
-    #                   name: "SalesforceCustomKnowledgeArticleTypeName", # required
-    #                   document_data_field_name: "DataSourceFieldName", # required
-    #                   document_title_field_name: "DataSourceFieldName",
-    #                   field_mappings: [
-    #                     {
-    #                       data_source_field_name: "DataSourceFieldName", # required
-    #                       date_field_format: "DataSourceDateFieldFormat",
-    #                       index_field_name: "IndexFieldName", # required
-    #                     },
-    #                   ],
-    #                 },
-    #               ],
-    #             },
-    #             chatter_feed_configuration: {
-    #               document_data_field_name: "DataSourceFieldName", # required
-    #               document_title_field_name: "DataSourceFieldName",
-    #               field_mappings: [
-    #                 {
-    #                   data_source_field_name: "DataSourceFieldName", # required
-    #                   date_field_format: "DataSourceDateFieldFormat",
-    #                   index_field_name: "IndexFieldName", # required
-    #                 },
-    #               ],
-    #               include_filter_types: ["ACTIVE_USER"], # accepts ACTIVE_USER, STANDARD_USER
-    #             },
-    #             crawl_attachments: false,
-    #             standard_object_attachment_configuration: {
-    #               document_title_field_name: "DataSourceFieldName",
-    #               field_mappings: [
-    #                 {
-    #                   data_source_field_name: "DataSourceFieldName", # required
-    #                   date_field_format: "DataSourceDateFieldFormat",
-    #                   index_field_name: "IndexFieldName", # required
-    #                 },
-    #               ],
-    #             },
-    #             include_attachment_file_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             exclude_attachment_file_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #           },
-    #           one_drive_configuration: {
-    #             tenant_domain: "TenantDomain", # required
-    #             secret_arn: "SecretArn", # required
-    #             one_drive_users: { # required
-    #               one_drive_user_list: ["OneDriveUser"],
-    #               one_drive_user_s3_path: {
-    #                 bucket: "S3BucketName", # required
-    #                 key: "S3ObjectKey", # required
-    #               },
-    #             },
-    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             disable_local_groups: false,
-    #           },
-    #           service_now_configuration: {
-    #             host_url: "ServiceNowHostUrl", # required
-    #             secret_arn: "SecretArn", # required
-    #             service_now_build_version: "LONDON", # required, accepts LONDON, OTHERS
-    #             knowledge_article_configuration: {
-    #               crawl_attachments: false,
-    #               include_attachment_file_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #               exclude_attachment_file_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #               document_data_field_name: "DataSourceFieldName", # required
-    #               document_title_field_name: "DataSourceFieldName",
-    #               field_mappings: [
-    #                 {
-    #                   data_source_field_name: "DataSourceFieldName", # required
-    #                   date_field_format: "DataSourceDateFieldFormat",
-    #                   index_field_name: "IndexFieldName", # required
-    #                 },
-    #               ],
-    #               filter_query: "ServiceNowKnowledgeArticleFilterQuery",
-    #             },
-    #             service_catalog_configuration: {
-    #               crawl_attachments: false,
-    #               include_attachment_file_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #               exclude_attachment_file_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #               document_data_field_name: "DataSourceFieldName", # required
-    #               document_title_field_name: "DataSourceFieldName",
-    #               field_mappings: [
-    #                 {
-    #                   data_source_field_name: "DataSourceFieldName", # required
-    #                   date_field_format: "DataSourceDateFieldFormat",
-    #                   index_field_name: "IndexFieldName", # required
-    #                 },
-    #               ],
-    #             },
-    #             authentication_type: "HTTP_BASIC", # accepts HTTP_BASIC, OAUTH2
-    #           },
-    #           confluence_configuration: {
-    #             server_url: "Url", # required
-    #             secret_arn: "SecretArn", # required
-    #             version: "CLOUD", # required, accepts CLOUD, SERVER
-    #             space_configuration: {
-    #               crawl_personal_spaces: false,
-    #               crawl_archived_spaces: false,
-    #               include_spaces: ["ConfluenceSpaceIdentifier"],
-    #               exclude_spaces: ["ConfluenceSpaceIdentifier"],
-    #               space_field_mappings: [
-    #                 {
-    #                   data_source_field_name: "DISPLAY_URL", # accepts DISPLAY_URL, ITEM_TYPE, SPACE_KEY, URL
-    #                   date_field_format: "DataSourceDateFieldFormat",
-    #                   index_field_name: "IndexFieldName",
-    #                 },
-    #               ],
-    #             },
-    #             page_configuration: {
-    #               page_field_mappings: [
-    #                 {
-    #                   data_source_field_name: "AUTHOR", # accepts AUTHOR, CONTENT_STATUS, CREATED_DATE, DISPLAY_URL, ITEM_TYPE, LABELS, MODIFIED_DATE, PARENT_ID, SPACE_KEY, SPACE_NAME, URL, VERSION
-    #                   date_field_format: "DataSourceDateFieldFormat",
-    #                   index_field_name: "IndexFieldName",
-    #                 },
-    #               ],
-    #             },
-    #             blog_configuration: {
-    #               blog_field_mappings: [
-    #                 {
-    #                   data_source_field_name: "AUTHOR", # accepts AUTHOR, DISPLAY_URL, ITEM_TYPE, LABELS, PUBLISH_DATE, SPACE_KEY, SPACE_NAME, URL, VERSION
-    #                   date_field_format: "DataSourceDateFieldFormat",
-    #                   index_field_name: "IndexFieldName",
-    #                 },
-    #               ],
-    #             },
-    #             attachment_configuration: {
-    #               crawl_attachments: false,
-    #               attachment_field_mappings: [
-    #                 {
-    #                   data_source_field_name: "AUTHOR", # accepts AUTHOR, CONTENT_TYPE, CREATED_DATE, DISPLAY_URL, FILE_SIZE, ITEM_TYPE, PARENT_ID, SPACE_KEY, SPACE_NAME, URL, VERSION
-    #                   date_field_format: "DataSourceDateFieldFormat",
-    #                   index_field_name: "IndexFieldName",
-    #                 },
-    #               ],
-    #             },
-    #             vpc_configuration: {
-    #               subnet_ids: ["SubnetId"], # required
-    #               security_group_ids: ["VpcSecurityGroupId"], # required
-    #             },
-    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             proxy_configuration: {
-    #               host: "Host", # required
-    #               port: 1, # required
-    #               credentials: "SecretArn",
-    #             },
-    #             authentication_type: "HTTP_BASIC", # accepts HTTP_BASIC, PAT
-    #           },
-    #           google_drive_configuration: {
-    #             secret_arn: "SecretArn", # required
-    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             exclude_mime_types: ["MimeType"],
-    #             exclude_user_accounts: ["UserAccount"],
-    #             exclude_shared_drives: ["SharedDriveId"],
-    #           },
-    #           web_crawler_configuration: {
-    #             urls: { # required
-    #               seed_url_configuration: {
-    #                 seed_urls: ["SeedUrl"], # required
-    #                 web_crawler_mode: "HOST_ONLY", # accepts HOST_ONLY, SUBDOMAINS, EVERYTHING
-    #               },
-    #               site_maps_configuration: {
-    #                 site_maps: ["SiteMap"], # required
-    #               },
-    #             },
-    #             crawl_depth: 1,
-    #             max_links_per_page: 1,
-    #             max_content_size_per_page_in_mega_bytes: 1.0,
-    #             max_urls_per_minute_crawl_rate: 1,
-    #             url_inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             url_exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             proxy_configuration: {
-    #               host: "Host", # required
-    #               port: 1, # required
-    #               credentials: "SecretArn",
-    #             },
-    #             authentication_configuration: {
-    #               basic_authentication: [
-    #                 {
-    #                   host: "Host", # required
-    #                   port: 1, # required
-    #                   credentials: "SecretArn", # required
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #           work_docs_configuration: {
-    #             organization_id: "OrganizationId", # required
-    #             crawl_comments: false,
-    #             use_change_log: false,
-    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #           },
-    #           fsx_configuration: {
-    #             file_system_id: "FileSystemId", # required
-    #             file_system_type: "WINDOWS", # required, accepts WINDOWS
-    #             vpc_configuration: { # required
-    #               subnet_ids: ["SubnetId"], # required
-    #               security_group_ids: ["VpcSecurityGroupId"], # required
-    #             },
-    #             secret_arn: "SecretArn",
-    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #           },
-    #           slack_configuration: {
-    #             team_id: "TeamId", # required
-    #             secret_arn: "SecretArn", # required
-    #             vpc_configuration: {
-    #               subnet_ids: ["SubnetId"], # required
-    #               security_group_ids: ["VpcSecurityGroupId"], # required
-    #             },
-    #             slack_entity_list: ["PUBLIC_CHANNEL"], # required, accepts PUBLIC_CHANNEL, PRIVATE_CHANNEL, GROUP_MESSAGE, DIRECT_MESSAGE
-    #             use_change_log: false,
-    #             crawl_bot_message: false,
-    #             exclude_archived: false,
-    #             since_crawl_date: "SinceCrawlDate", # required
-    #             look_back_period: 1,
-    #             private_channel_filter: ["String"],
-    #             public_channel_filter: ["String"],
-    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #           },
-    #           box_configuration: {
-    #             enterprise_id: "EnterpriseId", # required
-    #             secret_arn: "SecretArn", # required
-    #             use_change_log: false,
-    #             crawl_comments: false,
-    #             crawl_tasks: false,
-    #             crawl_web_links: false,
-    #             file_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             task_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             comment_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             web_link_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             vpc_configuration: {
-    #               subnet_ids: ["SubnetId"], # required
-    #               security_group_ids: ["VpcSecurityGroupId"], # required
-    #             },
-    #           },
-    #           quip_configuration: {
-    #             domain: "Domain", # required
-    #             secret_arn: "SecretArn", # required
-    #             crawl_file_comments: false,
-    #             crawl_chat_rooms: false,
-    #             crawl_attachments: false,
-    #             folder_ids: ["FolderId"],
-    #             thread_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             message_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             attachment_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             vpc_configuration: {
-    #               subnet_ids: ["SubnetId"], # required
-    #               security_group_ids: ["VpcSecurityGroupId"], # required
-    #             },
-    #           },
-    #           jira_configuration: {
-    #             jira_account_url: "JiraAccountUrl", # required
-    #             secret_arn: "SecretArn", # required
-    #             use_change_log: false,
-    #             project: ["String"],
-    #             issue_type: ["String"],
-    #             status: ["String"],
-    #             issue_sub_entity_filter: ["COMMENTS"], # accepts COMMENTS, ATTACHMENTS, WORKLOGS
-    #             attachment_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             comment_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             issue_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             project_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             work_log_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             vpc_configuration: {
-    #               subnet_ids: ["SubnetId"], # required
-    #               security_group_ids: ["VpcSecurityGroupId"], # required
-    #             },
-    #           },
-    #           git_hub_configuration: {
-    #             saa_s_configuration: {
-    #               organization_name: "OrganizationName", # required
-    #               host_url: "Url", # required
-    #             },
-    #             on_premise_configuration: {
-    #               host_url: "Url", # required
-    #               organization_name: "OrganizationName", # required
-    #               ssl_certificate_s3_path: { # required
-    #                 bucket: "S3BucketName", # required
-    #                 key: "S3ObjectKey", # required
-    #               },
-    #             },
-    #             type: "SAAS", # accepts SAAS, ON_PREMISE
-    #             secret_arn: "SecretArn", # required
-    #             use_change_log: false,
-    #             git_hub_document_crawl_properties: {
-    #               crawl_repository_documents: false,
-    #               crawl_issue: false,
-    #               crawl_issue_comment: false,
-    #               crawl_issue_comment_attachment: false,
-    #               crawl_pull_request: false,
-    #               crawl_pull_request_comment: false,
-    #               crawl_pull_request_comment_attachment: false,
-    #             },
-    #             repository_filter: ["RepositoryName"],
-    #             inclusion_folder_name_patterns: ["String"],
-    #             inclusion_file_type_patterns: ["String"],
-    #             inclusion_file_name_patterns: ["String"],
-    #             exclusion_folder_name_patterns: ["String"],
-    #             exclusion_file_type_patterns: ["String"],
-    #             exclusion_file_name_patterns: ["String"],
-    #             vpc_configuration: {
-    #               subnet_ids: ["SubnetId"], # required
-    #               security_group_ids: ["VpcSecurityGroupId"], # required
-    #             },
-    #             git_hub_repository_configuration_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             git_hub_commit_configuration_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             git_hub_issue_document_configuration_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             git_hub_issue_comment_configuration_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             git_hub_issue_attachment_configuration_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             git_hub_pull_request_comment_configuration_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             git_hub_pull_request_document_configuration_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             git_hub_pull_request_document_attachment_configuration_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #           },
-    #           alfresco_configuration: {
-    #             site_url: "SiteUrl", # required
-    #             site_id: "SiteId", # required
-    #             secret_arn: "SecretArn", # required
-    #             ssl_certificate_s3_path: { # required
-    #               bucket: "S3BucketName", # required
-    #               key: "S3ObjectKey", # required
-    #             },
-    #             crawl_system_folders: false,
-    #             crawl_comments: false,
-    #             entity_filter: ["wiki"], # accepts wiki, blog, documentLibrary
-    #             document_library_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             blog_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             wiki_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             vpc_configuration: {
-    #               subnet_ids: ["SubnetId"], # required
-    #               security_group_ids: ["VpcSecurityGroupId"], # required
-    #             },
-    #           },
-    #           template_configuration: {
-    #             template: {
-    #             },
-    #           },
-    #         },
-    #         vpc_configuration: {
-    #           subnet_ids: ["SubnetId"], # required
-    #           security_group_ids: ["VpcSecurityGroupId"], # required
-    #         },
-    #         description: "Description",
-    #         schedule: "ScanSchedule",
-    #         role_arn: "RoleArn",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         client_token: "ClientTokenName",
-    #         language_code: "LanguageCode",
-    #         custom_document_enrichment_configuration: {
-    #           inline_configurations: [
-    #             {
-    #               condition: {
-    #                 condition_document_attribute_key: "DocumentAttributeKey", # required
-    #                 operator: "GreaterThan", # required, accepts GreaterThan, GreaterThanOrEquals, LessThan, LessThanOrEquals, Equals, NotEquals, Contains, NotContains, Exists, NotExists, BeginsWith
-    #                 condition_on_value: {
-    #                   string_value: "DocumentAttributeStringValue",
-    #                   string_list_value: ["String"],
-    #                   long_value: 1,
-    #                   date_value: Time.now,
-    #                 },
-    #               },
-    #               target: {
-    #                 target_document_attribute_key: "DocumentAttributeKey",
-    #                 target_document_attribute_value_deletion: false,
-    #                 target_document_attribute_value: {
-    #                   string_value: "DocumentAttributeStringValue",
-    #                   string_list_value: ["String"],
-    #                   long_value: 1,
-    #                   date_value: Time.now,
-    #                 },
-    #               },
-    #               document_content_deletion: false,
-    #             },
-    #           ],
-    #           pre_extraction_hook_configuration: {
-    #             invocation_condition: {
-    #               condition_document_attribute_key: "DocumentAttributeKey", # required
-    #               operator: "GreaterThan", # required, accepts GreaterThan, GreaterThanOrEquals, LessThan, LessThanOrEquals, Equals, NotEquals, Contains, NotContains, Exists, NotExists, BeginsWith
-    #               condition_on_value: {
-    #                 string_value: "DocumentAttributeStringValue",
-    #                 string_list_value: ["String"],
-    #                 long_value: 1,
-    #                 date_value: Time.now,
-    #               },
-    #             },
-    #             lambda_arn: "LambdaArn", # required
-    #             s3_bucket: "S3BucketName", # required
-    #           },
-    #           post_extraction_hook_configuration: {
-    #             invocation_condition: {
-    #               condition_document_attribute_key: "DocumentAttributeKey", # required
-    #               operator: "GreaterThan", # required, accepts GreaterThan, GreaterThanOrEquals, LessThan, LessThanOrEquals, Equals, NotEquals, Contains, NotContains, Exists, NotExists, BeginsWith
-    #               condition_on_value: {
-    #                 string_value: "DocumentAttributeStringValue",
-    #                 string_list_value: ["String"],
-    #                 long_value: 1,
-    #                 date_value: Time.now,
-    #               },
-    #             },
-    #             lambda_arn: "LambdaArn", # required
-    #             s3_bucket: "S3BucketName", # required
-    #           },
-    #           role_arn: "RoleArn",
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   A name for the data source connector.
     #   @return [String]
@@ -3298,27 +1748,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateExperienceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ExperienceName", # required
-    #         index_id: "IndexId", # required
-    #         role_arn: "RoleArn",
-    #         configuration: {
-    #           content_source_configuration: {
-    #             data_source_ids: ["DataSourceId"],
-    #             faq_ids: ["FaqId"],
-    #             direct_put_content: false,
-    #           },
-    #           user_identity_configuration: {
-    #             identity_attribute_name: "IdentityAttributeName",
-    #           },
-    #         },
-    #         description: "Description",
-    #         client_token: "ClientTokenName",
-    #       }
-    #
     # @!attribute [rw] name
     #   A name for your Amazon Kendra experience.
     #   @return [String]
@@ -3385,29 +1814,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateFaqRequest
-    #   data as a hash:
-    #
-    #       {
-    #         index_id: "IndexId", # required
-    #         name: "FaqName", # required
-    #         description: "Description",
-    #         s3_path: { # required
-    #           bucket: "S3BucketName", # required
-    #           key: "S3ObjectKey", # required
-    #         },
-    #         role_arn: "RoleArn", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         file_format: "CSV", # accepts CSV, CSV_WITH_HEADER, JSON
-    #         client_token: "ClientTokenName",
-    #         language_code: "LanguageCode",
-    #       }
-    #
     # @!attribute [rw] index_id
     #   The identifier of the index for the FAQ.
     #   @return [String]
@@ -3503,47 +1909,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateIndexRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "IndexName", # required
-    #         edition: "DEVELOPER_EDITION", # accepts DEVELOPER_EDITION, ENTERPRISE_EDITION
-    #         role_arn: "RoleArn", # required
-    #         server_side_encryption_configuration: {
-    #           kms_key_id: "KmsKeyId",
-    #         },
-    #         description: "Description",
-    #         client_token: "ClientTokenName",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         user_token_configurations: [
-    #           {
-    #             jwt_token_type_configuration: {
-    #               key_location: "URL", # required, accepts URL, SECRET_MANAGER
-    #               url: "Url",
-    #               secret_manager_arn: "RoleArn",
-    #               user_name_attribute_field: "UserNameAttributeField",
-    #               group_attribute_field: "GroupAttributeField",
-    #               issuer: "Issuer",
-    #               claim_regex: "ClaimRegex",
-    #             },
-    #             json_token_type_configuration: {
-    #               user_name_attribute_field: "String", # required
-    #               group_attribute_field: "String", # required
-    #             },
-    #           },
-    #         ],
-    #         user_context_policy: "ATTRIBUTE_FILTER", # accepts ATTRIBUTE_FILTER, USER_TOKEN
-    #         user_group_resolution_configuration: {
-    #           user_group_resolution_mode: "AWS_SSO", # required, accepts AWS_SSO, NONE
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   A name for the index.
     #   @return [String]
@@ -3660,27 +2025,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateQuerySuggestionsBlockListRequest
-    #   data as a hash:
-    #
-    #       {
-    #         index_id: "IndexId", # required
-    #         name: "QuerySuggestionsBlockListName", # required
-    #         description: "Description",
-    #         source_s3_path: { # required
-    #           bucket: "S3BucketName", # required
-    #           key: "S3ObjectKey", # required
-    #         },
-    #         client_token: "ClientTokenName",
-    #         role_arn: "RoleArn", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] index_id
     #   The identifier of the index you want to create a query suggestions
     #   block list for.
@@ -3764,27 +2108,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateThesaurusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         index_id: "IndexId", # required
-    #         name: "ThesaurusName", # required
-    #         description: "Description",
-    #         role_arn: "RoleArn", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         source_s3_path: { # required
-    #           bucket: "S3BucketName", # required
-    #           key: "S3ObjectKey", # required
-    #         },
-    #         client_token: "ClientTokenName",
-    #       }
-    #
     # @!attribute [rw] index_id
     #   The identifier of the index for the thesaurus.
     #   @return [String]
@@ -3857,66 +2180,6 @@ module Aws::Kendra
     #
     # [1]: https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html
     #
-    # @note When making an API call, you may pass CustomDocumentEnrichmentConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         inline_configurations: [
-    #           {
-    #             condition: {
-    #               condition_document_attribute_key: "DocumentAttributeKey", # required
-    #               operator: "GreaterThan", # required, accepts GreaterThan, GreaterThanOrEquals, LessThan, LessThanOrEquals, Equals, NotEquals, Contains, NotContains, Exists, NotExists, BeginsWith
-    #               condition_on_value: {
-    #                 string_value: "DocumentAttributeStringValue",
-    #                 string_list_value: ["String"],
-    #                 long_value: 1,
-    #                 date_value: Time.now,
-    #               },
-    #             },
-    #             target: {
-    #               target_document_attribute_key: "DocumentAttributeKey",
-    #               target_document_attribute_value_deletion: false,
-    #               target_document_attribute_value: {
-    #                 string_value: "DocumentAttributeStringValue",
-    #                 string_list_value: ["String"],
-    #                 long_value: 1,
-    #                 date_value: Time.now,
-    #               },
-    #             },
-    #             document_content_deletion: false,
-    #           },
-    #         ],
-    #         pre_extraction_hook_configuration: {
-    #           invocation_condition: {
-    #             condition_document_attribute_key: "DocumentAttributeKey", # required
-    #             operator: "GreaterThan", # required, accepts GreaterThan, GreaterThanOrEquals, LessThan, LessThanOrEquals, Equals, NotEquals, Contains, NotContains, Exists, NotExists, BeginsWith
-    #             condition_on_value: {
-    #               string_value: "DocumentAttributeStringValue",
-    #               string_list_value: ["String"],
-    #               long_value: 1,
-    #               date_value: Time.now,
-    #             },
-    #           },
-    #           lambda_arn: "LambdaArn", # required
-    #           s3_bucket: "S3BucketName", # required
-    #         },
-    #         post_extraction_hook_configuration: {
-    #           invocation_condition: {
-    #             condition_document_attribute_key: "DocumentAttributeKey", # required
-    #             operator: "GreaterThan", # required, accepts GreaterThan, GreaterThanOrEquals, LessThan, LessThanOrEquals, Equals, NotEquals, Contains, NotContains, Exists, NotExists, BeginsWith
-    #             condition_on_value: {
-    #               string_value: "DocumentAttributeStringValue",
-    #               string_list_value: ["String"],
-    #               long_value: 1,
-    #               date_value: Time.now,
-    #             },
-    #           },
-    #           lambda_arn: "LambdaArn", # required
-    #           s3_bucket: "S3BucketName", # required
-    #         },
-    #         role_arn: "RoleArn",
-    #       }
-    #
     # @!attribute [rw] inline_configurations
     #   Configuration information to alter document attributes or metadata
     #   fields and content when ingesting documents into Amazon Kendra.
@@ -3971,640 +2234,6 @@ module Aws::Kendra
 
     # Provides the configuration information for an Amazon Kendra data
     # source.
-    #
-    # @note When making an API call, you may pass DataSourceConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         s3_configuration: {
-    #           bucket_name: "S3BucketName", # required
-    #           inclusion_prefixes: ["DataSourceInclusionsExclusionsStringsMember"],
-    #           inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #           exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #           documents_metadata_configuration: {
-    #             s3_prefix: "S3ObjectKey",
-    #           },
-    #           access_control_list_configuration: {
-    #             key_path: "S3ObjectKey",
-    #           },
-    #         },
-    #         share_point_configuration: {
-    #           share_point_version: "SHAREPOINT_2013", # required, accepts SHAREPOINT_2013, SHAREPOINT_2016, SHAREPOINT_ONLINE, SHAREPOINT_2019
-    #           urls: ["Url"], # required
-    #           secret_arn: "SecretArn", # required
-    #           crawl_attachments: false,
-    #           use_change_log: false,
-    #           inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #           exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #           vpc_configuration: {
-    #             subnet_ids: ["SubnetId"], # required
-    #             security_group_ids: ["VpcSecurityGroupId"], # required
-    #           },
-    #           field_mappings: [
-    #             {
-    #               data_source_field_name: "DataSourceFieldName", # required
-    #               date_field_format: "DataSourceDateFieldFormat",
-    #               index_field_name: "IndexFieldName", # required
-    #             },
-    #           ],
-    #           document_title_field_name: "DataSourceFieldName",
-    #           disable_local_groups: false,
-    #           ssl_certificate_s3_path: {
-    #             bucket: "S3BucketName", # required
-    #             key: "S3ObjectKey", # required
-    #           },
-    #           authentication_type: "HTTP_BASIC", # accepts HTTP_BASIC, OAUTH2
-    #           proxy_configuration: {
-    #             host: "Host", # required
-    #             port: 1, # required
-    #             credentials: "SecretArn",
-    #           },
-    #         },
-    #         database_configuration: {
-    #           database_engine_type: "RDS_AURORA_MYSQL", # required, accepts RDS_AURORA_MYSQL, RDS_AURORA_POSTGRESQL, RDS_MYSQL, RDS_POSTGRESQL
-    #           connection_configuration: { # required
-    #             database_host: "DatabaseHost", # required
-    #             database_port: 1, # required
-    #             database_name: "DatabaseName", # required
-    #             table_name: "TableName", # required
-    #             secret_arn: "SecretArn", # required
-    #           },
-    #           vpc_configuration: {
-    #             subnet_ids: ["SubnetId"], # required
-    #             security_group_ids: ["VpcSecurityGroupId"], # required
-    #           },
-    #           column_configuration: { # required
-    #             document_id_column_name: "ColumnName", # required
-    #             document_data_column_name: "ColumnName", # required
-    #             document_title_column_name: "ColumnName",
-    #             field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             change_detecting_columns: ["ColumnName"], # required
-    #           },
-    #           acl_configuration: {
-    #             allowed_groups_column_name: "ColumnName", # required
-    #           },
-    #           sql_configuration: {
-    #             query_identifiers_enclosing_option: "DOUBLE_QUOTES", # accepts DOUBLE_QUOTES, NONE
-    #           },
-    #         },
-    #         salesforce_configuration: {
-    #           server_url: "Url", # required
-    #           secret_arn: "SecretArn", # required
-    #           standard_object_configurations: [
-    #             {
-    #               name: "ACCOUNT", # required, accepts ACCOUNT, CAMPAIGN, CASE, CONTACT, CONTRACT, DOCUMENT, GROUP, IDEA, LEAD, OPPORTUNITY, PARTNER, PRICEBOOK, PRODUCT, PROFILE, SOLUTION, TASK, USER
-    #               document_data_field_name: "DataSourceFieldName", # required
-    #               document_title_field_name: "DataSourceFieldName",
-    #               field_mappings: [
-    #                 {
-    #                   data_source_field_name: "DataSourceFieldName", # required
-    #                   date_field_format: "DataSourceDateFieldFormat",
-    #                   index_field_name: "IndexFieldName", # required
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #           knowledge_article_configuration: {
-    #             included_states: ["DRAFT"], # required, accepts DRAFT, PUBLISHED, ARCHIVED
-    #             standard_knowledge_article_type_configuration: {
-    #               document_data_field_name: "DataSourceFieldName", # required
-    #               document_title_field_name: "DataSourceFieldName",
-    #               field_mappings: [
-    #                 {
-    #                   data_source_field_name: "DataSourceFieldName", # required
-    #                   date_field_format: "DataSourceDateFieldFormat",
-    #                   index_field_name: "IndexFieldName", # required
-    #                 },
-    #               ],
-    #             },
-    #             custom_knowledge_article_type_configurations: [
-    #               {
-    #                 name: "SalesforceCustomKnowledgeArticleTypeName", # required
-    #                 document_data_field_name: "DataSourceFieldName", # required
-    #                 document_title_field_name: "DataSourceFieldName",
-    #                 field_mappings: [
-    #                   {
-    #                     data_source_field_name: "DataSourceFieldName", # required
-    #                     date_field_format: "DataSourceDateFieldFormat",
-    #                     index_field_name: "IndexFieldName", # required
-    #                   },
-    #                 ],
-    #               },
-    #             ],
-    #           },
-    #           chatter_feed_configuration: {
-    #             document_data_field_name: "DataSourceFieldName", # required
-    #             document_title_field_name: "DataSourceFieldName",
-    #             field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             include_filter_types: ["ACTIVE_USER"], # accepts ACTIVE_USER, STANDARD_USER
-    #           },
-    #           crawl_attachments: false,
-    #           standard_object_attachment_configuration: {
-    #             document_title_field_name: "DataSourceFieldName",
-    #             field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #           },
-    #           include_attachment_file_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #           exclude_attachment_file_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #         },
-    #         one_drive_configuration: {
-    #           tenant_domain: "TenantDomain", # required
-    #           secret_arn: "SecretArn", # required
-    #           one_drive_users: { # required
-    #             one_drive_user_list: ["OneDriveUser"],
-    #             one_drive_user_s3_path: {
-    #               bucket: "S3BucketName", # required
-    #               key: "S3ObjectKey", # required
-    #             },
-    #           },
-    #           inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #           exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #           field_mappings: [
-    #             {
-    #               data_source_field_name: "DataSourceFieldName", # required
-    #               date_field_format: "DataSourceDateFieldFormat",
-    #               index_field_name: "IndexFieldName", # required
-    #             },
-    #           ],
-    #           disable_local_groups: false,
-    #         },
-    #         service_now_configuration: {
-    #           host_url: "ServiceNowHostUrl", # required
-    #           secret_arn: "SecretArn", # required
-    #           service_now_build_version: "LONDON", # required, accepts LONDON, OTHERS
-    #           knowledge_article_configuration: {
-    #             crawl_attachments: false,
-    #             include_attachment_file_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             exclude_attachment_file_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             document_data_field_name: "DataSourceFieldName", # required
-    #             document_title_field_name: "DataSourceFieldName",
-    #             field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             filter_query: "ServiceNowKnowledgeArticleFilterQuery",
-    #           },
-    #           service_catalog_configuration: {
-    #             crawl_attachments: false,
-    #             include_attachment_file_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             exclude_attachment_file_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             document_data_field_name: "DataSourceFieldName", # required
-    #             document_title_field_name: "DataSourceFieldName",
-    #             field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #           },
-    #           authentication_type: "HTTP_BASIC", # accepts HTTP_BASIC, OAUTH2
-    #         },
-    #         confluence_configuration: {
-    #           server_url: "Url", # required
-    #           secret_arn: "SecretArn", # required
-    #           version: "CLOUD", # required, accepts CLOUD, SERVER
-    #           space_configuration: {
-    #             crawl_personal_spaces: false,
-    #             crawl_archived_spaces: false,
-    #             include_spaces: ["ConfluenceSpaceIdentifier"],
-    #             exclude_spaces: ["ConfluenceSpaceIdentifier"],
-    #             space_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DISPLAY_URL", # accepts DISPLAY_URL, ITEM_TYPE, SPACE_KEY, URL
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName",
-    #               },
-    #             ],
-    #           },
-    #           page_configuration: {
-    #             page_field_mappings: [
-    #               {
-    #                 data_source_field_name: "AUTHOR", # accepts AUTHOR, CONTENT_STATUS, CREATED_DATE, DISPLAY_URL, ITEM_TYPE, LABELS, MODIFIED_DATE, PARENT_ID, SPACE_KEY, SPACE_NAME, URL, VERSION
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName",
-    #               },
-    #             ],
-    #           },
-    #           blog_configuration: {
-    #             blog_field_mappings: [
-    #               {
-    #                 data_source_field_name: "AUTHOR", # accepts AUTHOR, DISPLAY_URL, ITEM_TYPE, LABELS, PUBLISH_DATE, SPACE_KEY, SPACE_NAME, URL, VERSION
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName",
-    #               },
-    #             ],
-    #           },
-    #           attachment_configuration: {
-    #             crawl_attachments: false,
-    #             attachment_field_mappings: [
-    #               {
-    #                 data_source_field_name: "AUTHOR", # accepts AUTHOR, CONTENT_TYPE, CREATED_DATE, DISPLAY_URL, FILE_SIZE, ITEM_TYPE, PARENT_ID, SPACE_KEY, SPACE_NAME, URL, VERSION
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName",
-    #               },
-    #             ],
-    #           },
-    #           vpc_configuration: {
-    #             subnet_ids: ["SubnetId"], # required
-    #             security_group_ids: ["VpcSecurityGroupId"], # required
-    #           },
-    #           inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #           exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #           proxy_configuration: {
-    #             host: "Host", # required
-    #             port: 1, # required
-    #             credentials: "SecretArn",
-    #           },
-    #           authentication_type: "HTTP_BASIC", # accepts HTTP_BASIC, PAT
-    #         },
-    #         google_drive_configuration: {
-    #           secret_arn: "SecretArn", # required
-    #           inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #           exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #           field_mappings: [
-    #             {
-    #               data_source_field_name: "DataSourceFieldName", # required
-    #               date_field_format: "DataSourceDateFieldFormat",
-    #               index_field_name: "IndexFieldName", # required
-    #             },
-    #           ],
-    #           exclude_mime_types: ["MimeType"],
-    #           exclude_user_accounts: ["UserAccount"],
-    #           exclude_shared_drives: ["SharedDriveId"],
-    #         },
-    #         web_crawler_configuration: {
-    #           urls: { # required
-    #             seed_url_configuration: {
-    #               seed_urls: ["SeedUrl"], # required
-    #               web_crawler_mode: "HOST_ONLY", # accepts HOST_ONLY, SUBDOMAINS, EVERYTHING
-    #             },
-    #             site_maps_configuration: {
-    #               site_maps: ["SiteMap"], # required
-    #             },
-    #           },
-    #           crawl_depth: 1,
-    #           max_links_per_page: 1,
-    #           max_content_size_per_page_in_mega_bytes: 1.0,
-    #           max_urls_per_minute_crawl_rate: 1,
-    #           url_inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #           url_exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #           proxy_configuration: {
-    #             host: "Host", # required
-    #             port: 1, # required
-    #             credentials: "SecretArn",
-    #           },
-    #           authentication_configuration: {
-    #             basic_authentication: [
-    #               {
-    #                 host: "Host", # required
-    #                 port: 1, # required
-    #                 credentials: "SecretArn", # required
-    #               },
-    #             ],
-    #           },
-    #         },
-    #         work_docs_configuration: {
-    #           organization_id: "OrganizationId", # required
-    #           crawl_comments: false,
-    #           use_change_log: false,
-    #           inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #           exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #           field_mappings: [
-    #             {
-    #               data_source_field_name: "DataSourceFieldName", # required
-    #               date_field_format: "DataSourceDateFieldFormat",
-    #               index_field_name: "IndexFieldName", # required
-    #             },
-    #           ],
-    #         },
-    #         fsx_configuration: {
-    #           file_system_id: "FileSystemId", # required
-    #           file_system_type: "WINDOWS", # required, accepts WINDOWS
-    #           vpc_configuration: { # required
-    #             subnet_ids: ["SubnetId"], # required
-    #             security_group_ids: ["VpcSecurityGroupId"], # required
-    #           },
-    #           secret_arn: "SecretArn",
-    #           inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #           exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #           field_mappings: [
-    #             {
-    #               data_source_field_name: "DataSourceFieldName", # required
-    #               date_field_format: "DataSourceDateFieldFormat",
-    #               index_field_name: "IndexFieldName", # required
-    #             },
-    #           ],
-    #         },
-    #         slack_configuration: {
-    #           team_id: "TeamId", # required
-    #           secret_arn: "SecretArn", # required
-    #           vpc_configuration: {
-    #             subnet_ids: ["SubnetId"], # required
-    #             security_group_ids: ["VpcSecurityGroupId"], # required
-    #           },
-    #           slack_entity_list: ["PUBLIC_CHANNEL"], # required, accepts PUBLIC_CHANNEL, PRIVATE_CHANNEL, GROUP_MESSAGE, DIRECT_MESSAGE
-    #           use_change_log: false,
-    #           crawl_bot_message: false,
-    #           exclude_archived: false,
-    #           since_crawl_date: "SinceCrawlDate", # required
-    #           look_back_period: 1,
-    #           private_channel_filter: ["String"],
-    #           public_channel_filter: ["String"],
-    #           inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #           exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #           field_mappings: [
-    #             {
-    #               data_source_field_name: "DataSourceFieldName", # required
-    #               date_field_format: "DataSourceDateFieldFormat",
-    #               index_field_name: "IndexFieldName", # required
-    #             },
-    #           ],
-    #         },
-    #         box_configuration: {
-    #           enterprise_id: "EnterpriseId", # required
-    #           secret_arn: "SecretArn", # required
-    #           use_change_log: false,
-    #           crawl_comments: false,
-    #           crawl_tasks: false,
-    #           crawl_web_links: false,
-    #           file_field_mappings: [
-    #             {
-    #               data_source_field_name: "DataSourceFieldName", # required
-    #               date_field_format: "DataSourceDateFieldFormat",
-    #               index_field_name: "IndexFieldName", # required
-    #             },
-    #           ],
-    #           task_field_mappings: [
-    #             {
-    #               data_source_field_name: "DataSourceFieldName", # required
-    #               date_field_format: "DataSourceDateFieldFormat",
-    #               index_field_name: "IndexFieldName", # required
-    #             },
-    #           ],
-    #           comment_field_mappings: [
-    #             {
-    #               data_source_field_name: "DataSourceFieldName", # required
-    #               date_field_format: "DataSourceDateFieldFormat",
-    #               index_field_name: "IndexFieldName", # required
-    #             },
-    #           ],
-    #           web_link_field_mappings: [
-    #             {
-    #               data_source_field_name: "DataSourceFieldName", # required
-    #               date_field_format: "DataSourceDateFieldFormat",
-    #               index_field_name: "IndexFieldName", # required
-    #             },
-    #           ],
-    #           inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #           exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #           vpc_configuration: {
-    #             subnet_ids: ["SubnetId"], # required
-    #             security_group_ids: ["VpcSecurityGroupId"], # required
-    #           },
-    #         },
-    #         quip_configuration: {
-    #           domain: "Domain", # required
-    #           secret_arn: "SecretArn", # required
-    #           crawl_file_comments: false,
-    #           crawl_chat_rooms: false,
-    #           crawl_attachments: false,
-    #           folder_ids: ["FolderId"],
-    #           thread_field_mappings: [
-    #             {
-    #               data_source_field_name: "DataSourceFieldName", # required
-    #               date_field_format: "DataSourceDateFieldFormat",
-    #               index_field_name: "IndexFieldName", # required
-    #             },
-    #           ],
-    #           message_field_mappings: [
-    #             {
-    #               data_source_field_name: "DataSourceFieldName", # required
-    #               date_field_format: "DataSourceDateFieldFormat",
-    #               index_field_name: "IndexFieldName", # required
-    #             },
-    #           ],
-    #           attachment_field_mappings: [
-    #             {
-    #               data_source_field_name: "DataSourceFieldName", # required
-    #               date_field_format: "DataSourceDateFieldFormat",
-    #               index_field_name: "IndexFieldName", # required
-    #             },
-    #           ],
-    #           inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #           exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #           vpc_configuration: {
-    #             subnet_ids: ["SubnetId"], # required
-    #             security_group_ids: ["VpcSecurityGroupId"], # required
-    #           },
-    #         },
-    #         jira_configuration: {
-    #           jira_account_url: "JiraAccountUrl", # required
-    #           secret_arn: "SecretArn", # required
-    #           use_change_log: false,
-    #           project: ["String"],
-    #           issue_type: ["String"],
-    #           status: ["String"],
-    #           issue_sub_entity_filter: ["COMMENTS"], # accepts COMMENTS, ATTACHMENTS, WORKLOGS
-    #           attachment_field_mappings: [
-    #             {
-    #               data_source_field_name: "DataSourceFieldName", # required
-    #               date_field_format: "DataSourceDateFieldFormat",
-    #               index_field_name: "IndexFieldName", # required
-    #             },
-    #           ],
-    #           comment_field_mappings: [
-    #             {
-    #               data_source_field_name: "DataSourceFieldName", # required
-    #               date_field_format: "DataSourceDateFieldFormat",
-    #               index_field_name: "IndexFieldName", # required
-    #             },
-    #           ],
-    #           issue_field_mappings: [
-    #             {
-    #               data_source_field_name: "DataSourceFieldName", # required
-    #               date_field_format: "DataSourceDateFieldFormat",
-    #               index_field_name: "IndexFieldName", # required
-    #             },
-    #           ],
-    #           project_field_mappings: [
-    #             {
-    #               data_source_field_name: "DataSourceFieldName", # required
-    #               date_field_format: "DataSourceDateFieldFormat",
-    #               index_field_name: "IndexFieldName", # required
-    #             },
-    #           ],
-    #           work_log_field_mappings: [
-    #             {
-    #               data_source_field_name: "DataSourceFieldName", # required
-    #               date_field_format: "DataSourceDateFieldFormat",
-    #               index_field_name: "IndexFieldName", # required
-    #             },
-    #           ],
-    #           inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #           exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #           vpc_configuration: {
-    #             subnet_ids: ["SubnetId"], # required
-    #             security_group_ids: ["VpcSecurityGroupId"], # required
-    #           },
-    #         },
-    #         git_hub_configuration: {
-    #           saa_s_configuration: {
-    #             organization_name: "OrganizationName", # required
-    #             host_url: "Url", # required
-    #           },
-    #           on_premise_configuration: {
-    #             host_url: "Url", # required
-    #             organization_name: "OrganizationName", # required
-    #             ssl_certificate_s3_path: { # required
-    #               bucket: "S3BucketName", # required
-    #               key: "S3ObjectKey", # required
-    #             },
-    #           },
-    #           type: "SAAS", # accepts SAAS, ON_PREMISE
-    #           secret_arn: "SecretArn", # required
-    #           use_change_log: false,
-    #           git_hub_document_crawl_properties: {
-    #             crawl_repository_documents: false,
-    #             crawl_issue: false,
-    #             crawl_issue_comment: false,
-    #             crawl_issue_comment_attachment: false,
-    #             crawl_pull_request: false,
-    #             crawl_pull_request_comment: false,
-    #             crawl_pull_request_comment_attachment: false,
-    #           },
-    #           repository_filter: ["RepositoryName"],
-    #           inclusion_folder_name_patterns: ["String"],
-    #           inclusion_file_type_patterns: ["String"],
-    #           inclusion_file_name_patterns: ["String"],
-    #           exclusion_folder_name_patterns: ["String"],
-    #           exclusion_file_type_patterns: ["String"],
-    #           exclusion_file_name_patterns: ["String"],
-    #           vpc_configuration: {
-    #             subnet_ids: ["SubnetId"], # required
-    #             security_group_ids: ["VpcSecurityGroupId"], # required
-    #           },
-    #           git_hub_repository_configuration_field_mappings: [
-    #             {
-    #               data_source_field_name: "DataSourceFieldName", # required
-    #               date_field_format: "DataSourceDateFieldFormat",
-    #               index_field_name: "IndexFieldName", # required
-    #             },
-    #           ],
-    #           git_hub_commit_configuration_field_mappings: [
-    #             {
-    #               data_source_field_name: "DataSourceFieldName", # required
-    #               date_field_format: "DataSourceDateFieldFormat",
-    #               index_field_name: "IndexFieldName", # required
-    #             },
-    #           ],
-    #           git_hub_issue_document_configuration_field_mappings: [
-    #             {
-    #               data_source_field_name: "DataSourceFieldName", # required
-    #               date_field_format: "DataSourceDateFieldFormat",
-    #               index_field_name: "IndexFieldName", # required
-    #             },
-    #           ],
-    #           git_hub_issue_comment_configuration_field_mappings: [
-    #             {
-    #               data_source_field_name: "DataSourceFieldName", # required
-    #               date_field_format: "DataSourceDateFieldFormat",
-    #               index_field_name: "IndexFieldName", # required
-    #             },
-    #           ],
-    #           git_hub_issue_attachment_configuration_field_mappings: [
-    #             {
-    #               data_source_field_name: "DataSourceFieldName", # required
-    #               date_field_format: "DataSourceDateFieldFormat",
-    #               index_field_name: "IndexFieldName", # required
-    #             },
-    #           ],
-    #           git_hub_pull_request_comment_configuration_field_mappings: [
-    #             {
-    #               data_source_field_name: "DataSourceFieldName", # required
-    #               date_field_format: "DataSourceDateFieldFormat",
-    #               index_field_name: "IndexFieldName", # required
-    #             },
-    #           ],
-    #           git_hub_pull_request_document_configuration_field_mappings: [
-    #             {
-    #               data_source_field_name: "DataSourceFieldName", # required
-    #               date_field_format: "DataSourceDateFieldFormat",
-    #               index_field_name: "IndexFieldName", # required
-    #             },
-    #           ],
-    #           git_hub_pull_request_document_attachment_configuration_field_mappings: [
-    #             {
-    #               data_source_field_name: "DataSourceFieldName", # required
-    #               date_field_format: "DataSourceDateFieldFormat",
-    #               index_field_name: "IndexFieldName", # required
-    #             },
-    #           ],
-    #         },
-    #         alfresco_configuration: {
-    #           site_url: "SiteUrl", # required
-    #           site_id: "SiteId", # required
-    #           secret_arn: "SecretArn", # required
-    #           ssl_certificate_s3_path: { # required
-    #             bucket: "S3BucketName", # required
-    #             key: "S3ObjectKey", # required
-    #           },
-    #           crawl_system_folders: false,
-    #           crawl_comments: false,
-    #           entity_filter: ["wiki"], # accepts wiki, blog, documentLibrary
-    #           document_library_field_mappings: [
-    #             {
-    #               data_source_field_name: "DataSourceFieldName", # required
-    #               date_field_format: "DataSourceDateFieldFormat",
-    #               index_field_name: "IndexFieldName", # required
-    #             },
-    #           ],
-    #           blog_field_mappings: [
-    #             {
-    #               data_source_field_name: "DataSourceFieldName", # required
-    #               date_field_format: "DataSourceDateFieldFormat",
-    #               index_field_name: "IndexFieldName", # required
-    #             },
-    #           ],
-    #           wiki_field_mappings: [
-    #             {
-    #               data_source_field_name: "DataSourceFieldName", # required
-    #               date_field_format: "DataSourceDateFieldFormat",
-    #               index_field_name: "IndexFieldName", # required
-    #             },
-    #           ],
-    #           inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #           exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #           vpc_configuration: {
-    #             subnet_ids: ["SubnetId"], # required
-    #             security_group_ids: ["VpcSecurityGroupId"], # required
-    #           },
-    #         },
-    #         template_configuration: {
-    #           template: {
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] s3_configuration
     #   Provides the configuration information to connect to an Amazon S3
@@ -4722,14 +2351,6 @@ module Aws::Kendra
     end
 
     # Data source information for user context filtering.
-    #
-    # @note When making an API call, you may pass DataSourceGroup
-    #   data as a hash:
-    #
-    #       {
-    #         group_id: "PrincipalName", # required
-    #         data_source_id: "DataSourceId", # required
-    #       }
     #
     # @!attribute [rw] group_id
     #   The identifier of the group you want to add to your list of groups.
@@ -4865,14 +2486,6 @@ module Aws::Kendra
 
     # Maps a particular data source sync job to a particular data source.
     #
-    # @note When making an API call, you may pass DataSourceSyncJobMetricTarget
-    #   data as a hash:
-    #
-    #       {
-    #         data_source_id: "DataSourceId", # required
-    #         data_source_sync_job_id: "DataSourceSyncJobId",
-    #       }
-    #
     # @!attribute [rw] data_source_id
     #   The ID of the data source that is running the sync job.
     #   @return [String]
@@ -4943,15 +2556,6 @@ module Aws::Kendra
     # Maps a column or attribute in the data source to an index field. You
     # must first create the fields in the index using the `UpdateIndex` API.
     #
-    # @note When making an API call, you may pass DataSourceToIndexFieldMapping
-    #   data as a hash:
-    #
-    #       {
-    #         data_source_field_name: "DataSourceFieldName", # required
-    #         date_field_format: "DataSourceDateFieldFormat",
-    #         index_field_name: "IndexFieldName", # required
-    #       }
-    #
     # @!attribute [rw] data_source_field_name
     #   The name of the column or attribute in the data source.
     #   @return [String]
@@ -4976,14 +2580,6 @@ module Aws::Kendra
 
     # Provides the configuration information to connect to an Amazon VPC.
     #
-    # @note When making an API call, you may pass DataSourceVpcConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         subnet_ids: ["SubnetId"], # required
-    #         security_group_ids: ["VpcSecurityGroupId"], # required
-    #       }
-    #
     # @!attribute [rw] subnet_ids
     #   A list of identifiers for subnets within your Amazon VPC. The
     #   subnets should be able to connect to each other in the VPC, and they
@@ -5006,43 +2602,6 @@ module Aws::Kendra
     end
 
     # Provides the configuration information to connect to a index.
-    #
-    # @note When making an API call, you may pass DatabaseConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         database_engine_type: "RDS_AURORA_MYSQL", # required, accepts RDS_AURORA_MYSQL, RDS_AURORA_POSTGRESQL, RDS_MYSQL, RDS_POSTGRESQL
-    #         connection_configuration: { # required
-    #           database_host: "DatabaseHost", # required
-    #           database_port: 1, # required
-    #           database_name: "DatabaseName", # required
-    #           table_name: "TableName", # required
-    #           secret_arn: "SecretArn", # required
-    #         },
-    #         vpc_configuration: {
-    #           subnet_ids: ["SubnetId"], # required
-    #           security_group_ids: ["VpcSecurityGroupId"], # required
-    #         },
-    #         column_configuration: { # required
-    #           document_id_column_name: "ColumnName", # required
-    #           document_data_column_name: "ColumnName", # required
-    #           document_title_column_name: "ColumnName",
-    #           field_mappings: [
-    #             {
-    #               data_source_field_name: "DataSourceFieldName", # required
-    #               date_field_format: "DataSourceDateFieldFormat",
-    #               index_field_name: "IndexFieldName", # required
-    #             },
-    #           ],
-    #           change_detecting_columns: ["ColumnName"], # required
-    #         },
-    #         acl_configuration: {
-    #           allowed_groups_column_name: "ColumnName", # required
-    #         },
-    #         sql_configuration: {
-    #           query_identifiers_enclosing_option: "DOUBLE_QUOTES", # accepts DOUBLE_QUOTES, NONE
-    #         },
-    #       }
     #
     # @!attribute [rw] database_engine_type
     #   The type of database engine that runs the database.
@@ -5084,14 +2643,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAccessControlConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         index_id: "IndexId", # required
-    #         id: "AccessControlConfigurationId", # required
-    #       }
-    #
     # @!attribute [rw] index_id
     #   The identifier of the index for an access control configuration.
     #   @return [String]
@@ -5114,14 +2665,6 @@ module Aws::Kendra
     #
     class DeleteAccessControlConfigurationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteDataSourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "DataSourceId", # required
-    #         index_id: "IndexId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The identifier of the data source connector you want to delete.
     #   @return [String]
@@ -5139,14 +2682,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteExperienceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ExperienceId", # required
-    #         index_id: "IndexId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The identifier of your Amazon Kendra experience you want to delete.
     #   @return [String]
@@ -5168,14 +2703,6 @@ module Aws::Kendra
     #
     class DeleteExperienceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteFaqRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "FaqId", # required
-    #         index_id: "IndexId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The identifier of the FAQ you want to remove.
     #   @return [String]
@@ -5193,13 +2720,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteIndexRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "IndexId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The identifier of the index you want to delete.
     #   @return [String]
@@ -5212,16 +2732,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeletePrincipalMappingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         index_id: "IndexId", # required
-    #         data_source_id: "DataSourceId",
-    #         group_id: "GroupId", # required
-    #         ordering_id: 1,
-    #       }
-    #
     # @!attribute [rw] index_id
     #   The identifier of the index you want to delete a group from.
     #   @return [String]
@@ -5274,14 +2784,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteQuerySuggestionsBlockListRequest
-    #   data as a hash:
-    #
-    #       {
-    #         index_id: "IndexId", # required
-    #         id: "QuerySuggestionsBlockListId", # required
-    #       }
-    #
     # @!attribute [rw] index_id
     #   The identifier of the index for the block list.
     #   @return [String]
@@ -5299,14 +2801,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteThesaurusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ThesaurusId", # required
-    #         index_id: "IndexId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The identifier of the thesaurus you want to delete.
     #   @return [String]
@@ -5324,14 +2818,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAccessControlConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         index_id: "IndexId", # required
-    #         id: "AccessControlConfigurationId", # required
-    #       }
-    #
     # @!attribute [rw] index_id
     #   The identifier of the index for an access control configuration.
     #   @return [String]
@@ -5391,14 +2877,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDataSourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "DataSourceId", # required
-    #         index_id: "IndexId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The identifier of the data source connector.
     #   @return [String]
@@ -5531,14 +3009,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeExperienceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ExperienceId", # required
-    #         index_id: "IndexId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The identifier of your Amazon Kendra experience you want to get
     #   information on.
@@ -5629,14 +3099,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeFaqRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "FaqId", # required
-    #         index_id: "IndexId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The identifier of the FAQ you want to get information on.
     #   @return [String]
@@ -5731,13 +3193,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeIndexRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "IndexId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The identifier of the index you want to get information on.
     #   @return [String]
@@ -5858,15 +3313,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribePrincipalMappingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         index_id: "IndexId", # required
-    #         data_source_id: "DataSourceId",
-    #         group_id: "GroupId", # required
-    #       }
-    #
     # @!attribute [rw] index_id
     #   The identifier of the index required to check the processing of
     #   `PUT` and `DELETE` actions for mapping users to their groups.
@@ -5938,14 +3384,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeQuerySuggestionsBlockListRequest
-    #   data as a hash:
-    #
-    #       {
-    #         index_id: "IndexId", # required
-    #         id: "QuerySuggestionsBlockListId", # required
-    #       }
-    #
     # @!attribute [rw] index_id
     #   The identifier of the index for the block list.
     #   @return [String]
@@ -6049,13 +3487,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeQuerySuggestionsConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         index_id: "IndexId", # required
-    #       }
-    #
     # @!attribute [rw] index_id
     #   The identifier of the index with query suggestions that you want to
     #   get information on.
@@ -6147,14 +3578,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeThesaurusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ThesaurusId", # required
-    #         index_id: "IndexId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The identifier of the thesaurus you want to get information on.
     #   @return [String]
@@ -6253,20 +3676,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateEntitiesFromExperienceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ExperienceId", # required
-    #         index_id: "IndexId", # required
-    #         entity_list: [ # required
-    #           {
-    #             entity_id: "EntityId", # required
-    #             entity_type: "USER", # required, accepts USER, GROUP
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] id
     #   The identifier of your Amazon Kendra experience.
     #   @return [String]
@@ -6303,15 +3712,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociatePersonasFromEntitiesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ExperienceId", # required
-    #         index_id: "IndexId", # required
-    #         entity_ids: ["EntityId"], # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The identifier of your Amazon Kendra experience.
     #   @return [String]
@@ -6350,52 +3750,6 @@ module Aws::Kendra
     end
 
     # A document in an index.
-    #
-    # @note When making an API call, you may pass Document
-    #   data as a hash:
-    #
-    #       {
-    #         id: "DocumentId", # required
-    #         title: "Title",
-    #         blob: "data",
-    #         s3_path: {
-    #           bucket: "S3BucketName", # required
-    #           key: "S3ObjectKey", # required
-    #         },
-    #         attributes: [
-    #           {
-    #             key: "DocumentAttributeKey", # required
-    #             value: { # required
-    #               string_value: "DocumentAttributeStringValue",
-    #               string_list_value: ["String"],
-    #               long_value: 1,
-    #               date_value: Time.now,
-    #             },
-    #           },
-    #         ],
-    #         access_control_list: [
-    #           {
-    #             name: "PrincipalName", # required
-    #             type: "USER", # required, accepts USER, GROUP
-    #             access: "ALLOW", # required, accepts ALLOW, DENY
-    #             data_source_id: "DataSourceId",
-    #           },
-    #         ],
-    #         hierarchical_access_control_list: [
-    #           {
-    #             principal_list: [ # required
-    #               {
-    #                 name: "PrincipalName", # required
-    #                 type: "USER", # required, accepts USER, GROUP
-    #                 access: "ALLOW", # required, accepts ALLOW, DENY
-    #                 data_source_id: "DataSourceId",
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         content_type: "PDF", # accepts PDF, HTML, MS_WORD, PLAIN_TEXT, PPT
-    #         access_control_configuration_id: "AccessControlConfigurationId",
-    #       }
     #
     # @!attribute [rw] id
     #   A identifier of the document in the index.
@@ -6486,19 +3840,6 @@ module Aws::Kendra
     #
     # [1]: https://docs.aws.amazon.com/kendra/latest/dg/custom-attributes.html
     #
-    # @note When making an API call, you may pass DocumentAttribute
-    #   data as a hash:
-    #
-    #       {
-    #         key: "DocumentAttributeKey", # required
-    #         value: { # required
-    #           string_value: "DocumentAttributeStringValue",
-    #           string_list_value: ["String"],
-    #           long_value: 1,
-    #           date_value: Time.now,
-    #         },
-    #       }
-    #
     # @!attribute [rw] key
     #   The identifier for the attribute.
     #   @return [String]
@@ -6536,20 +3877,6 @@ module Aws::Kendra
     #
     #
     # [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_DocumentAttributeTarget.html
-    #
-    # @note When making an API call, you may pass DocumentAttributeCondition
-    #   data as a hash:
-    #
-    #       {
-    #         condition_document_attribute_key: "DocumentAttributeKey", # required
-    #         operator: "GreaterThan", # required, accepts GreaterThan, GreaterThanOrEquals, LessThan, LessThanOrEquals, Equals, NotEquals, Contains, NotContains, Exists, NotExists, BeginsWith
-    #         condition_on_value: {
-    #           string_value: "DocumentAttributeStringValue",
-    #           string_list_value: ["String"],
-    #           long_value: 1,
-    #           date_value: Time.now,
-    #         },
-    #       }
     #
     # @!attribute [rw] condition_document_attribute_key
     #   The identifier of the document attribute used for the condition.
@@ -6608,20 +3935,6 @@ module Aws::Kendra
     #
     # [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_DocumentAttributeCondition.html
     #
-    # @note When making an API call, you may pass DocumentAttributeTarget
-    #   data as a hash:
-    #
-    #       {
-    #         target_document_attribute_key: "DocumentAttributeKey",
-    #         target_document_attribute_value_deletion: false,
-    #         target_document_attribute_value: {
-    #           string_value: "DocumentAttributeStringValue",
-    #           string_list_value: ["String"],
-    #           long_value: 1,
-    #           date_value: Time.now,
-    #         },
-    #       }
-    #
     # @!attribute [rw] target_document_attribute_key
     #   The identifier of the target document attribute or metadata field.
     #
@@ -6656,16 +3969,6 @@ module Aws::Kendra
 
     # The value of a document attribute. You can only provide one value for
     # a document attribute.
-    #
-    # @note When making an API call, you may pass DocumentAttributeValue
-    #   data as a hash:
-    #
-    #       {
-    #         string_value: "DocumentAttributeStringValue",
-    #         string_list_value: ["String"],
-    #         long_value: 1,
-    #         date_value: Time.now,
-    #       }
     #
     # @!attribute [rw] string_value
     #   A string, such as "department".
@@ -6739,24 +4042,6 @@ module Aws::Kendra
 
     # Identifies a document for which to retrieve status information
     #
-    # @note When making an API call, you may pass DocumentInfo
-    #   data as a hash:
-    #
-    #       {
-    #         document_id: "DocumentId", # required
-    #         attributes: [
-    #           {
-    #             key: "DocumentAttributeKey", # required
-    #             value: { # required
-    #               string_value: "DocumentAttributeStringValue",
-    #               string_list_value: ["String"],
-    #               long_value: 1,
-    #               date_value: Time.now,
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] document_id
     #   The identifier of the document.
     #   @return [String]
@@ -6795,29 +4080,6 @@ module Aws::Kendra
     # Specifies the properties, such as relevance tuning and searchability,
     # of an index field.
     #
-    # @note When making an API call, you may pass DocumentMetadataConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         name: "DocumentMetadataConfigurationName", # required
-    #         type: "STRING_VALUE", # required, accepts STRING_VALUE, STRING_LIST_VALUE, LONG_VALUE, DATE_VALUE
-    #         relevance: {
-    #           freshness: false,
-    #           importance: 1,
-    #           duration: "Duration",
-    #           rank_order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #           value_importance_map: {
-    #             "ValueImportanceMapKey" => 1,
-    #           },
-    #         },
-    #         search: {
-    #           facetable: false,
-    #           searchable: false,
-    #           displayable: false,
-    #           sortable: false,
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the index field.
     #   @return [String]
@@ -6848,22 +4110,6 @@ module Aws::Kendra
 
     # Overrides the document relevance properties of a custom index field.
     #
-    # @note When making an API call, you may pass DocumentRelevanceConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         name: "DocumentMetadataConfigurationName", # required
-    #         relevance: { # required
-    #           freshness: false,
-    #           importance: 1,
-    #           duration: "Duration",
-    #           rank_order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #           value_importance_map: {
-    #             "ValueImportanceMapKey" => 1,
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the index field.
     #   @return [String]
@@ -6889,13 +4135,6 @@ module Aws::Kendra
     # attributes. Each metadata file contains metadata about a single
     # document.
     #
-    # @note When making an API call, you may pass DocumentsMetadataConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         s3_prefix: "S3ObjectKey",
-    #       }
-    #
     # @!attribute [rw] s3_prefix
     #   A prefix used to filter metadata configuration files in the Amazon
     #   Web Services S3 bucket. The S3 bucket might contain multiple
@@ -6914,14 +4153,6 @@ module Aws::Kendra
     # Provides the configuration information for users or groups in your IAM
     # Identity Center identity source to grant access your Amazon Kendra
     # experience.
-    #
-    # @note When making an API call, you may pass EntityConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         entity_id: "EntityId", # required
-    #         entity_type: "USER", # required, accepts USER, GROUP
-    #       }
     #
     # @!attribute [rw] entity_id
     #   The identifier of a user or group in your IAM Identity Center
@@ -6980,14 +4211,6 @@ module Aws::Kendra
     # experience. Specific permissions are defined for each user or group
     # once they are granted access to your Amazon Kendra experience.
     #
-    # @note When making an API call, you may pass EntityPersonaConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         entity_id: "EntityId", # required
-    #         persona: "OWNER", # required, accepts OWNER, VIEWER
-    #       }
-    #
     # @!attribute [rw] entity_id
     #   The identifier of a user or group in your IAM Identity Center
     #   identity source. For example, a user ID could be an email.
@@ -7017,20 +4240,6 @@ module Aws::Kendra
     # Provides the configuration information for your Amazon Kendra
     # experience. This includes the data source IDs and/or FAQ IDs, and user
     # or group information to grant access to your Amazon Kendra experience.
-    #
-    # @note When making an API call, you may pass ExperienceConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         content_source_configuration: {
-    #           data_source_ids: ["DataSourceId"],
-    #           faq_ids: ["FaqId"],
-    #           direct_put_content: false,
-    #         },
-    #         user_identity_configuration: {
-    #           identity_attribute_name: "IdentityAttributeName",
-    #         },
-    #       }
     #
     # @!attribute [rw] content_source_configuration
     #   The identifiers of your data sources and FAQs. Or, you can specify
@@ -7164,23 +4373,6 @@ module Aws::Kendra
     #
     #
     # [1]: http://aws.amazon.com/contact-us/
-    #
-    # @note When making an API call, you may pass Facet
-    #   data as a hash:
-    #
-    #       {
-    #         document_attribute_key: "DocumentAttributeKey",
-    #         facets: [
-    #           {
-    #             document_attribute_key: "DocumentAttributeKey",
-    #             facets: {
-    #               # recursive FacetList
-    #             },
-    #             max_results: 1,
-    #           },
-    #         ],
-    #         max_results: 1,
-    #       }
     #
     # @!attribute [rw] document_attribute_key
     #   The unique key for the document attribute.
@@ -7352,28 +4544,6 @@ module Aws::Kendra
     # Provides the configuration information to connect to Amazon FSx as
     # your data source.
     #
-    # @note When making an API call, you may pass FsxConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         file_system_id: "FileSystemId", # required
-    #         file_system_type: "WINDOWS", # required, accepts WINDOWS
-    #         vpc_configuration: { # required
-    #           subnet_ids: ["SubnetId"], # required
-    #           security_group_ids: ["VpcSecurityGroupId"], # required
-    #         },
-    #         secret_arn: "SecretArn",
-    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #         field_mappings: [
-    #           {
-    #             data_source_field_name: "DataSourceFieldName", # required
-    #             date_field_format: "DataSourceDateFieldFormat",
-    #             index_field_name: "IndexFieldName", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] file_system_id
     #   The identifier of the Amazon FSx file system.
     #
@@ -7459,15 +4629,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetQuerySuggestionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         index_id: "IndexId", # required
-    #         query_text: "SuggestionQueryText", # required
-    #         max_suggestions_count: 1,
-    #       }
-    #
     # @!attribute [rw] index_id
     #   The identifier of the index you want to get query suggestions from.
     #   @return [String]
@@ -7516,17 +4677,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSnapshotsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         index_id: "IndexId", # required
-    #         interval: "THIS_MONTH", # required, accepts THIS_MONTH, THIS_WEEK, ONE_WEEK_AGO, TWO_WEEKS_AGO, ONE_MONTH_AGO, TWO_MONTHS_AGO
-    #         metric_type: "QUERIES_BY_COUNT", # required, accepts QUERIES_BY_COUNT, QUERIES_BY_ZERO_CLICK_RATE, QUERIES_BY_ZERO_RESULT_RATE, DOCS_BY_CLICK_COUNT, AGG_QUERY_DOC_METRICS, TREND_QUERY_DOC_METRICS
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] index_id
     #   The identifier of the index to get search metrics data.
     #   @return [String]
@@ -7623,103 +4773,6 @@ module Aws::Kendra
 
     # Provides the configuration information to connect to GitHub as your
     # data source.
-    #
-    # @note When making an API call, you may pass GitHubConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         saa_s_configuration: {
-    #           organization_name: "OrganizationName", # required
-    #           host_url: "Url", # required
-    #         },
-    #         on_premise_configuration: {
-    #           host_url: "Url", # required
-    #           organization_name: "OrganizationName", # required
-    #           ssl_certificate_s3_path: { # required
-    #             bucket: "S3BucketName", # required
-    #             key: "S3ObjectKey", # required
-    #           },
-    #         },
-    #         type: "SAAS", # accepts SAAS, ON_PREMISE
-    #         secret_arn: "SecretArn", # required
-    #         use_change_log: false,
-    #         git_hub_document_crawl_properties: {
-    #           crawl_repository_documents: false,
-    #           crawl_issue: false,
-    #           crawl_issue_comment: false,
-    #           crawl_issue_comment_attachment: false,
-    #           crawl_pull_request: false,
-    #           crawl_pull_request_comment: false,
-    #           crawl_pull_request_comment_attachment: false,
-    #         },
-    #         repository_filter: ["RepositoryName"],
-    #         inclusion_folder_name_patterns: ["String"],
-    #         inclusion_file_type_patterns: ["String"],
-    #         inclusion_file_name_patterns: ["String"],
-    #         exclusion_folder_name_patterns: ["String"],
-    #         exclusion_file_type_patterns: ["String"],
-    #         exclusion_file_name_patterns: ["String"],
-    #         vpc_configuration: {
-    #           subnet_ids: ["SubnetId"], # required
-    #           security_group_ids: ["VpcSecurityGroupId"], # required
-    #         },
-    #         git_hub_repository_configuration_field_mappings: [
-    #           {
-    #             data_source_field_name: "DataSourceFieldName", # required
-    #             date_field_format: "DataSourceDateFieldFormat",
-    #             index_field_name: "IndexFieldName", # required
-    #           },
-    #         ],
-    #         git_hub_commit_configuration_field_mappings: [
-    #           {
-    #             data_source_field_name: "DataSourceFieldName", # required
-    #             date_field_format: "DataSourceDateFieldFormat",
-    #             index_field_name: "IndexFieldName", # required
-    #           },
-    #         ],
-    #         git_hub_issue_document_configuration_field_mappings: [
-    #           {
-    #             data_source_field_name: "DataSourceFieldName", # required
-    #             date_field_format: "DataSourceDateFieldFormat",
-    #             index_field_name: "IndexFieldName", # required
-    #           },
-    #         ],
-    #         git_hub_issue_comment_configuration_field_mappings: [
-    #           {
-    #             data_source_field_name: "DataSourceFieldName", # required
-    #             date_field_format: "DataSourceDateFieldFormat",
-    #             index_field_name: "IndexFieldName", # required
-    #           },
-    #         ],
-    #         git_hub_issue_attachment_configuration_field_mappings: [
-    #           {
-    #             data_source_field_name: "DataSourceFieldName", # required
-    #             date_field_format: "DataSourceDateFieldFormat",
-    #             index_field_name: "IndexFieldName", # required
-    #           },
-    #         ],
-    #         git_hub_pull_request_comment_configuration_field_mappings: [
-    #           {
-    #             data_source_field_name: "DataSourceFieldName", # required
-    #             date_field_format: "DataSourceDateFieldFormat",
-    #             index_field_name: "IndexFieldName", # required
-    #           },
-    #         ],
-    #         git_hub_pull_request_document_configuration_field_mappings: [
-    #           {
-    #             data_source_field_name: "DataSourceFieldName", # required
-    #             date_field_format: "DataSourceDateFieldFormat",
-    #             index_field_name: "IndexFieldName", # required
-    #           },
-    #         ],
-    #         git_hub_pull_request_document_attachment_configuration_field_mappings: [
-    #           {
-    #             data_source_field_name: "DataSourceFieldName", # required
-    #             date_field_format: "DataSourceDateFieldFormat",
-    #             index_field_name: "IndexFieldName", # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] saa_s_configuration
     #   Configuration information to connect to GitHub Enterprise Cloud
@@ -7973,19 +5026,6 @@ module Aws::Kendra
     # also include issues and pull requests, comments, and comment
     # attachments.
     #
-    # @note When making an API call, you may pass GitHubDocumentCrawlProperties
-    #   data as a hash:
-    #
-    #       {
-    #         crawl_repository_documents: false,
-    #         crawl_issue: false,
-    #         crawl_issue_comment: false,
-    #         crawl_issue_comment_attachment: false,
-    #         crawl_pull_request: false,
-    #         crawl_pull_request_comment: false,
-    #         crawl_pull_request_comment_attachment: false,
-    #       }
-    #
     # @!attribute [rw] crawl_repository_documents
     #   `TRUE` to index all files with a repository.
     #   @return [Boolean]
@@ -8030,25 +5070,6 @@ module Aws::Kendra
 
     # Provides the configuration information to connect to Google Drive as
     # your data source.
-    #
-    # @note When making an API call, you may pass GoogleDriveConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         secret_arn: "SecretArn", # required
-    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #         field_mappings: [
-    #           {
-    #             data_source_field_name: "DataSourceFieldName", # required
-    #             date_field_format: "DataSourceDateFieldFormat",
-    #             index_field_name: "IndexFieldName", # required
-    #           },
-    #         ],
-    #         exclude_mime_types: ["MimeType"],
-    #         exclude_user_accounts: ["UserAccount"],
-    #         exclude_shared_drives: ["SharedDriveId"],
-    #       }
     #
     # @!attribute [rw] secret_arn
     #   The Amazon Resource Name (ARN) of a Secrets Managersecret that
@@ -8132,27 +5153,6 @@ module Aws::Kendra
     # A list of users or sub groups that belong to a group. This is useful
     # for user context filtering, where search results are filtered based on
     # the user or their group access to documents.
-    #
-    # @note When making an API call, you may pass GroupMembers
-    #   data as a hash:
-    #
-    #       {
-    #         member_groups: [
-    #           {
-    #             group_id: "GroupId", # required
-    #             data_source_id: "DataSourceId",
-    #           },
-    #         ],
-    #         member_users: [
-    #           {
-    #             user_id: "UserId", # required
-    #           },
-    #         ],
-    #         s3_pathfor_group_members: {
-    #           bucket: "S3BucketName", # required
-    #           key: "S3ObjectKey", # required
-    #         },
-    #       }
     #
     # @!attribute [rw] member_groups
     #   A list of sub groups that belong to a group. For example, the sub
@@ -8256,20 +5256,6 @@ module Aws::Kendra
     # Information to define the hierarchy for which documents users should
     # have access to.
     #
-    # @note When making an API call, you may pass HierarchicalPrincipal
-    #   data as a hash:
-    #
-    #       {
-    #         principal_list: [ # required
-    #           {
-    #             name: "PrincipalName", # required
-    #             type: "USER", # required, accepts USER, GROUP
-    #             access: "ALLOW", # required, accepts ALLOW, DENY
-    #             data_source_id: "DataSourceId",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] principal_list
     #   A list of [principal][1] lists that define the hierarchy for which
     #   documents users should have access to. Each hierarchical list
@@ -8340,24 +5326,6 @@ module Aws::Kendra
     #
     # [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_CustomDocumentEnrichmentConfiguration.html
     # [2]: https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html
-    #
-    # @note When making an API call, you may pass HookConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         invocation_condition: {
-    #           condition_document_attribute_key: "DocumentAttributeKey", # required
-    #           operator: "GreaterThan", # required, accepts GreaterThan, GreaterThanOrEquals, LessThan, LessThanOrEquals, Equals, NotEquals, Contains, NotContains, Exists, NotExists, BeginsWith
-    #           condition_on_value: {
-    #             string_value: "DocumentAttributeStringValue",
-    #             string_list_value: ["String"],
-    #             long_value: 1,
-    #             date_value: Time.now,
-    #           },
-    #         },
-    #         lambda_arn: "LambdaArn", # required
-    #         s3_bucket: "S3BucketName", # required
-    #       }
     #
     # @!attribute [rw] invocation_condition
     #   The condition used for when a Lambda function should be invoked.
@@ -8474,33 +5442,6 @@ module Aws::Kendra
     # [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_HookConfiguration.html
     # [2]: https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html
     #
-    # @note When making an API call, you may pass InlineCustomDocumentEnrichmentConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         condition: {
-    #           condition_document_attribute_key: "DocumentAttributeKey", # required
-    #           operator: "GreaterThan", # required, accepts GreaterThan, GreaterThanOrEquals, LessThan, LessThanOrEquals, Equals, NotEquals, Contains, NotContains, Exists, NotExists, BeginsWith
-    #           condition_on_value: {
-    #             string_value: "DocumentAttributeStringValue",
-    #             string_list_value: ["String"],
-    #             long_value: 1,
-    #             date_value: Time.now,
-    #           },
-    #         },
-    #         target: {
-    #           target_document_attribute_key: "DocumentAttributeKey",
-    #           target_document_attribute_value_deletion: false,
-    #           target_document_attribute_value: {
-    #             string_value: "DocumentAttributeStringValue",
-    #             string_list_value: ["String"],
-    #             long_value: 1,
-    #             date_value: Time.now,
-    #           },
-    #         },
-    #         document_content_deletion: false,
-    #       }
-    #
     # @!attribute [rw] condition
     #   Configuration of the condition used for the target document
     #   attribute or metadata field when ingesting documents into Amazon
@@ -8563,60 +5504,6 @@ module Aws::Kendra
 
     # Provides the configuration information to connect to Jira as your data
     # source.
-    #
-    # @note When making an API call, you may pass JiraConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         jira_account_url: "JiraAccountUrl", # required
-    #         secret_arn: "SecretArn", # required
-    #         use_change_log: false,
-    #         project: ["String"],
-    #         issue_type: ["String"],
-    #         status: ["String"],
-    #         issue_sub_entity_filter: ["COMMENTS"], # accepts COMMENTS, ATTACHMENTS, WORKLOGS
-    #         attachment_field_mappings: [
-    #           {
-    #             data_source_field_name: "DataSourceFieldName", # required
-    #             date_field_format: "DataSourceDateFieldFormat",
-    #             index_field_name: "IndexFieldName", # required
-    #           },
-    #         ],
-    #         comment_field_mappings: [
-    #           {
-    #             data_source_field_name: "DataSourceFieldName", # required
-    #             date_field_format: "DataSourceDateFieldFormat",
-    #             index_field_name: "IndexFieldName", # required
-    #           },
-    #         ],
-    #         issue_field_mappings: [
-    #           {
-    #             data_source_field_name: "DataSourceFieldName", # required
-    #             date_field_format: "DataSourceDateFieldFormat",
-    #             index_field_name: "IndexFieldName", # required
-    #           },
-    #         ],
-    #         project_field_mappings: [
-    #           {
-    #             data_source_field_name: "DataSourceFieldName", # required
-    #             date_field_format: "DataSourceDateFieldFormat",
-    #             index_field_name: "IndexFieldName", # required
-    #           },
-    #         ],
-    #         work_log_field_mappings: [
-    #           {
-    #             data_source_field_name: "DataSourceFieldName", # required
-    #             date_field_format: "DataSourceDateFieldFormat",
-    #             index_field_name: "IndexFieldName", # required
-    #           },
-    #         ],
-    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #         vpc_configuration: {
-    #           subnet_ids: ["SubnetId"], # required
-    #           security_group_ids: ["VpcSecurityGroupId"], # required
-    #         },
-    #       }
     #
     # @!attribute [rw] jira_account_url
     #   The URL of the Jira account. For example, *company.atlassian.net* or
@@ -8779,14 +5666,6 @@ module Aws::Kendra
 
     # Provides the configuration information for the JSON token type.
     #
-    # @note When making an API call, you may pass JsonTokenTypeConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         user_name_attribute_field: "String", # required
-    #         group_attribute_field: "String", # required
-    #       }
-    #
     # @!attribute [rw] user_name_attribute_field
     #   The user name attribute field.
     #   @return [String]
@@ -8805,19 +5684,6 @@ module Aws::Kendra
     end
 
     # Provides the configuration information for the JWT token type.
-    #
-    # @note When making an API call, you may pass JwtTokenTypeConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         key_location: "URL", # required, accepts URL, SECRET_MANAGER
-    #         url: "Url",
-    #         secret_manager_arn: "RoleArn",
-    #         user_name_attribute_field: "UserNameAttributeField",
-    #         group_attribute_field: "GroupAttributeField",
-    #         issuer: "Issuer",
-    #         claim_regex: "ClaimRegex",
-    #       }
     #
     # @!attribute [rw] key_location
     #   The location of the key.
@@ -8861,15 +5727,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAccessControlConfigurationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         index_id: "IndexId", # required
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] index_id
     #   The identifier of the index for the access control configuration.
     #   @return [String]
@@ -8914,21 +5771,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDataSourceSyncJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "DataSourceId", # required
-    #         index_id: "IndexId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         start_time_filter: {
-    #           start_time: Time.now,
-    #           end_time: Time.now,
-    #         },
-    #         status_filter: "FAILED", # accepts FAILED, SUCCEEDED, SYNCING, INCOMPLETE, STOPPING, ABORTED, SYNCING_INDEXING
-    #       }
-    #
     # @!attribute [rw] id
     #   The identifier of the data source connector.
     #   @return [String]
@@ -8992,15 +5834,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDataSourcesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         index_id: "IndexId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] index_id
     #   The identifier of the index used with one or more data source
     #   connectors.
@@ -9047,16 +5880,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEntityPersonasRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ExperienceId", # required
-    #         index_id: "IndexId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] id
     #   The identifier of your Amazon Kendra experience.
     #   @return [String]
@@ -9106,15 +5929,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListExperienceEntitiesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ExperienceId", # required
-    #         index_id: "IndexId", # required
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] id
     #   The identifier of your Amazon Kendra experience.
     #   @return [String]
@@ -9159,15 +5973,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListExperiencesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         index_id: "IndexId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] index_id
     #   The identifier of the index for your Amazon Kendra experience.
     #   @return [String]
@@ -9213,15 +6018,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFaqsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         index_id: "IndexId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] index_id
     #   The index that contains the FAQ lists.
     #   @return [String]
@@ -9268,17 +6064,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListGroupsOlderThanOrderingIdRequest
-    #   data as a hash:
-    #
-    #       {
-    #         index_id: "IndexId", # required
-    #         data_source_id: "DataSourceId",
-    #         ordering_id: 1, # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] index_id
     #   The identifier of the index for getting a list of groups mapped to
     #   users before a given ordering or timestamp identifier.
@@ -9340,14 +6125,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListIndicesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If the previous response was incomplete (because there is more data
     #   to retrieve), Amazon Kendra returns a pagination token in the
@@ -9388,15 +6165,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListQuerySuggestionsBlockListsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         index_id: "IndexId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] index_id
     #   The identifier of the index for a list of all block lists that exist
     #   for that index.
@@ -9460,13 +6228,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the index, FAQ, or data source to
     #   get a list of tags for.
@@ -9492,15 +6253,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListThesauriRequest
-    #   data as a hash:
-    #
-    #       {
-    #         index_id: "IndexId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] index_id
     #   The identifier of the index with one or more thesauri.
     #   @return [String]
@@ -9548,14 +6300,6 @@ module Aws::Kendra
 
     # The sub groups that belong to a group.
     #
-    # @note When making an API call, you may pass MemberGroup
-    #   data as a hash:
-    #
-    #       {
-    #         group_id: "GroupId", # required
-    #         data_source_id: "DataSourceId",
-    #       }
-    #
     # @!attribute [rw] group_id
     #   The identifier of the sub group you want to map to a group.
     #   @return [String]
@@ -9576,13 +6320,6 @@ module Aws::Kendra
 
     # The users that belong to a group.
     #
-    # @note When making an API call, you may pass MemberUser
-    #   data as a hash:
-    #
-    #       {
-    #         user_id: "UserId", # required
-    #       }
-    #
     # @!attribute [rw] user_id
     #   The identifier of the user you want to map to a group.
     #   @return [String]
@@ -9597,18 +6334,6 @@ module Aws::Kendra
 
     # Provides the configuration information to connect to GitHub Enterprise
     # Server (on premises).
-    #
-    # @note When making an API call, you may pass OnPremiseConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         host_url: "Url", # required
-    #         organization_name: "OrganizationName", # required
-    #         ssl_certificate_s3_path: { # required
-    #           bucket: "S3BucketName", # required
-    #           key: "S3ObjectKey", # required
-    #         },
-    #       }
     #
     # @!attribute [rw] host_url
     #   The GitHub host URL or API endpoint URL. For example,
@@ -9648,31 +6373,6 @@ module Aws::Kendra
 
     # Provides the configuration information to connect to OneDrive as your
     # data source.
-    #
-    # @note When making an API call, you may pass OneDriveConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         tenant_domain: "TenantDomain", # required
-    #         secret_arn: "SecretArn", # required
-    #         one_drive_users: { # required
-    #           one_drive_user_list: ["OneDriveUser"],
-    #           one_drive_user_s3_path: {
-    #             bucket: "S3BucketName", # required
-    #             key: "S3ObjectKey", # required
-    #           },
-    #         },
-    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #         field_mappings: [
-    #           {
-    #             data_source_field_name: "DataSourceFieldName", # required
-    #             date_field_format: "DataSourceDateFieldFormat",
-    #             index_field_name: "IndexFieldName", # required
-    #           },
-    #         ],
-    #         disable_local_groups: false,
-    #       }
     #
     # @!attribute [rw] tenant_domain
     #   The Azure Active Directory domain of the organization.
@@ -9743,17 +6443,6 @@ module Aws::Kendra
     end
 
     # User accounts whose documents should be indexed.
-    #
-    # @note When making an API call, you may pass OneDriveUsers
-    #   data as a hash:
-    #
-    #       {
-    #         one_drive_user_list: ["OneDriveUser"],
-    #         one_drive_user_s3_path: {
-    #           bucket: "S3BucketName", # required
-    #           key: "S3ObjectKey", # required
-    #         },
-    #       }
     #
     # @!attribute [rw] one_drive_user_list
     #   A list of users whose documents should be indexed. Specify the user
@@ -9831,16 +6520,6 @@ module Aws::Kendra
     #
     # [1]: https://docs.aws.amazon.com/kendra/latest/dg/user-context-filter.html
     #
-    # @note When making an API call, you may pass Principal
-    #   data as a hash:
-    #
-    #       {
-    #         name: "PrincipalName", # required
-    #         type: "USER", # required, accepts USER, GROUP
-    #         access: "ALLOW", # required, accepts ALLOW, DENY
-    #         data_source_id: "DataSourceId",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the user or group.
     #   @return [String]
@@ -9871,15 +6550,6 @@ module Aws::Kendra
 
     # Provides the configuration information for a web proxy to connect to
     # website hosts.
-    #
-    # @note When making an API call, you may pass ProxyConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         host: "Host", # required
-    #         port: 1, # required
-    #         credentials: "SecretArn",
-    #       }
     #
     # @!attribute [rw] host
     #   The name of the website host you want to connect to via a web proxy
@@ -9920,34 +6590,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutPrincipalMappingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         index_id: "IndexId", # required
-    #         data_source_id: "DataSourceId",
-    #         group_id: "GroupId", # required
-    #         group_members: { # required
-    #           member_groups: [
-    #             {
-    #               group_id: "GroupId", # required
-    #               data_source_id: "DataSourceId",
-    #             },
-    #           ],
-    #           member_users: [
-    #             {
-    #               user_id: "UserId", # required
-    #             },
-    #           ],
-    #           s3_pathfor_group_members: {
-    #             bucket: "S3BucketName", # required
-    #             key: "S3ObjectKey", # required
-    #           },
-    #         },
-    #         ordering_id: 1,
-    #         role_arn: "RoleArn",
-    #       }
-    #
     # @!attribute [rw] index_id
     #   The identifier of the index you want to map users to their groups.
     #   @return [String]
@@ -10028,138 +6670,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass QueryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         index_id: "IndexId", # required
-    #         query_text: "QueryText",
-    #         attribute_filter: {
-    #           and_all_filters: [
-    #             {
-    #               # recursive AttributeFilter
-    #             },
-    #           ],
-    #           or_all_filters: [
-    #             {
-    #               # recursive AttributeFilter
-    #             },
-    #           ],
-    #           not_filter: {
-    #             # recursive AttributeFilter
-    #           },
-    #           equals_to: {
-    #             key: "DocumentAttributeKey", # required
-    #             value: { # required
-    #               string_value: "DocumentAttributeStringValue",
-    #               string_list_value: ["String"],
-    #               long_value: 1,
-    #               date_value: Time.now,
-    #             },
-    #           },
-    #           contains_all: {
-    #             key: "DocumentAttributeKey", # required
-    #             value: { # required
-    #               string_value: "DocumentAttributeStringValue",
-    #               string_list_value: ["String"],
-    #               long_value: 1,
-    #               date_value: Time.now,
-    #             },
-    #           },
-    #           contains_any: {
-    #             key: "DocumentAttributeKey", # required
-    #             value: { # required
-    #               string_value: "DocumentAttributeStringValue",
-    #               string_list_value: ["String"],
-    #               long_value: 1,
-    #               date_value: Time.now,
-    #             },
-    #           },
-    #           greater_than: {
-    #             key: "DocumentAttributeKey", # required
-    #             value: { # required
-    #               string_value: "DocumentAttributeStringValue",
-    #               string_list_value: ["String"],
-    #               long_value: 1,
-    #               date_value: Time.now,
-    #             },
-    #           },
-    #           greater_than_or_equals: {
-    #             key: "DocumentAttributeKey", # required
-    #             value: { # required
-    #               string_value: "DocumentAttributeStringValue",
-    #               string_list_value: ["String"],
-    #               long_value: 1,
-    #               date_value: Time.now,
-    #             },
-    #           },
-    #           less_than: {
-    #             key: "DocumentAttributeKey", # required
-    #             value: { # required
-    #               string_value: "DocumentAttributeStringValue",
-    #               string_list_value: ["String"],
-    #               long_value: 1,
-    #               date_value: Time.now,
-    #             },
-    #           },
-    #           less_than_or_equals: {
-    #             key: "DocumentAttributeKey", # required
-    #             value: { # required
-    #               string_value: "DocumentAttributeStringValue",
-    #               string_list_value: ["String"],
-    #               long_value: 1,
-    #               date_value: Time.now,
-    #             },
-    #           },
-    #         },
-    #         facets: [
-    #           {
-    #             document_attribute_key: "DocumentAttributeKey",
-    #             facets: {
-    #               # recursive FacetList
-    #             },
-    #             max_results: 1,
-    #           },
-    #         ],
-    #         requested_document_attributes: ["DocumentAttributeKey"],
-    #         query_result_type_filter: "DOCUMENT", # accepts DOCUMENT, QUESTION_ANSWER, ANSWER
-    #         document_relevance_override_configurations: [
-    #           {
-    #             name: "DocumentMetadataConfigurationName", # required
-    #             relevance: { # required
-    #               freshness: false,
-    #               importance: 1,
-    #               duration: "Duration",
-    #               rank_order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #               value_importance_map: {
-    #                 "ValueImportanceMapKey" => 1,
-    #               },
-    #             },
-    #           },
-    #         ],
-    #         page_number: 1,
-    #         page_size: 1,
-    #         sorting_configuration: {
-    #           document_attribute_key: "DocumentAttributeKey", # required
-    #           sort_order: "DESC", # required, accepts DESC, ASC
-    #         },
-    #         user_context: {
-    #           token: "Token",
-    #           user_id: "PrincipalName",
-    #           groups: ["PrincipalName"],
-    #           data_source_groups: [
-    #             {
-    #               group_id: "PrincipalName", # required
-    #               data_source_id: "DataSourceId", # required
-    #             },
-    #           ],
-    #         },
-    #         visitor_id: "VisitorId",
-    #         spell_correction_configuration: {
-    #           include_query_spell_check_suggestions: false, # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] index_id
     #   The identifier of the index to search. The identifier is returned in
     #   the response from the `CreateIndex` API.
@@ -10480,45 +6990,6 @@ module Aws::Kendra
     # Provides the configuration information to connect to Quip as your data
     # source.
     #
-    # @note When making an API call, you may pass QuipConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "Domain", # required
-    #         secret_arn: "SecretArn", # required
-    #         crawl_file_comments: false,
-    #         crawl_chat_rooms: false,
-    #         crawl_attachments: false,
-    #         folder_ids: ["FolderId"],
-    #         thread_field_mappings: [
-    #           {
-    #             data_source_field_name: "DataSourceFieldName", # required
-    #             date_field_format: "DataSourceDateFieldFormat",
-    #             index_field_name: "IndexFieldName", # required
-    #           },
-    #         ],
-    #         message_field_mappings: [
-    #           {
-    #             data_source_field_name: "DataSourceFieldName", # required
-    #             date_field_format: "DataSourceDateFieldFormat",
-    #             index_field_name: "IndexFieldName", # required
-    #           },
-    #         ],
-    #         attachment_field_mappings: [
-    #           {
-    #             data_source_field_name: "DataSourceFieldName", # required
-    #             date_field_format: "DataSourceDateFieldFormat",
-    #             index_field_name: "IndexFieldName", # required
-    #           },
-    #         ],
-    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #         vpc_configuration: {
-    #           subnet_ids: ["SubnetId"], # required
-    #           security_group_ids: ["VpcSecurityGroupId"], # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] domain
     #   The Quip site domain. For example,
     #   *https://quip-company.quipdomain.com/browse*. The domain in this
@@ -10651,19 +7122,6 @@ module Aws::Kendra
     # When a query includes terms that match the field, the results are
     # given a boost in the response based on these tuning parameters.
     #
-    # @note When making an API call, you may pass Relevance
-    #   data as a hash:
-    #
-    #       {
-    #         freshness: false,
-    #         importance: 1,
-    #         duration: "Duration",
-    #         rank_order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #         value_importance_map: {
-    #           "ValueImportanceMapKey" => 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] freshness
     #   Indicates that this field determines how "fresh" a document is.
     #   For example, if document 1 was created on November 5, and document 2
@@ -10733,14 +7191,6 @@ module Aws::Kendra
     # Provides feedback on how relevant a document is to a search. Your
     # application uses the `SubmitFeedback` API to provide relevance
     # information.
-    #
-    # @note When making an API call, you may pass RelevanceFeedback
-    #   data as a hash:
-    #
-    #       {
-    #         result_id: "ResultId", # required
-    #         relevance_value: "RELEVANT", # required, accepts RELEVANT, NOT_RELEVANT
-    #       }
     #
     # @!attribute [rw] result_id
     #   The identifier of the search result that the user provided relevance
@@ -10818,22 +7268,6 @@ module Aws::Kendra
 
     # Provides the configuration information to connect to an Amazon S3
     # bucket.
-    #
-    # @note When making an API call, you may pass S3DataSourceConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_name: "S3BucketName", # required
-    #         inclusion_prefixes: ["DataSourceInclusionsExclusionsStringsMember"],
-    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #         documents_metadata_configuration: {
-    #           s3_prefix: "S3ObjectKey",
-    #         },
-    #         access_control_list_configuration: {
-    #           key_path: "S3ObjectKey",
-    #         },
-    #       }
     #
     # @!attribute [rw] bucket_name
     #   The name of the bucket that contains the documents.
@@ -10920,14 +7354,6 @@ module Aws::Kendra
 
     # Information required to find a specific file in an Amazon S3 bucket.
     #
-    # @note When making an API call, you may pass S3Path
-    #   data as a hash:
-    #
-    #       {
-    #         bucket: "S3BucketName", # required
-    #         key: "S3ObjectKey", # required
-    #       }
-    #
     # @!attribute [rw] bucket
     #   The name of the S3 bucket that contains the file.
     #   @return [String]
@@ -10947,14 +7373,6 @@ module Aws::Kendra
 
     # Provides the configuration information to connect to GitHub Enterprise
     # Cloud (SaaS).
-    #
-    # @note When making an API call, you may pass SaaSConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         organization_name: "OrganizationName", # required
-    #         host_url: "Url", # required
-    #       }
     #
     # @!attribute [rw] organization_name
     #   The name of the organization of the GitHub Enterprise Cloud (SaaS)
@@ -10979,22 +7397,6 @@ module Aws::Kendra
 
     # The configuration information for syncing a Salesforce chatter feed.
     # The contents of the object comes from the Salesforce FeedItem table.
-    #
-    # @note When making an API call, you may pass SalesforceChatterFeedConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         document_data_field_name: "DataSourceFieldName", # required
-    #         document_title_field_name: "DataSourceFieldName",
-    #         field_mappings: [
-    #           {
-    #             data_source_field_name: "DataSourceFieldName", # required
-    #             date_field_format: "DataSourceDateFieldFormat",
-    #             index_field_name: "IndexFieldName", # required
-    #           },
-    #         ],
-    #         include_filter_types: ["ACTIVE_USER"], # accepts ACTIVE_USER, STANDARD_USER
-    #       }
     #
     # @!attribute [rw] document_data_field_name
     #   The name of the column in the Salesforce FeedItem table that
@@ -11033,81 +7435,6 @@ module Aws::Kendra
 
     # Provides the configuration information to connect to Salesforce as
     # your data source.
-    #
-    # @note When making an API call, you may pass SalesforceConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         server_url: "Url", # required
-    #         secret_arn: "SecretArn", # required
-    #         standard_object_configurations: [
-    #           {
-    #             name: "ACCOUNT", # required, accepts ACCOUNT, CAMPAIGN, CASE, CONTACT, CONTRACT, DOCUMENT, GROUP, IDEA, LEAD, OPPORTUNITY, PARTNER, PRICEBOOK, PRODUCT, PROFILE, SOLUTION, TASK, USER
-    #             document_data_field_name: "DataSourceFieldName", # required
-    #             document_title_field_name: "DataSourceFieldName",
-    #             field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         knowledge_article_configuration: {
-    #           included_states: ["DRAFT"], # required, accepts DRAFT, PUBLISHED, ARCHIVED
-    #           standard_knowledge_article_type_configuration: {
-    #             document_data_field_name: "DataSourceFieldName", # required
-    #             document_title_field_name: "DataSourceFieldName",
-    #             field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #           },
-    #           custom_knowledge_article_type_configurations: [
-    #             {
-    #               name: "SalesforceCustomKnowledgeArticleTypeName", # required
-    #               document_data_field_name: "DataSourceFieldName", # required
-    #               document_title_field_name: "DataSourceFieldName",
-    #               field_mappings: [
-    #                 {
-    #                   data_source_field_name: "DataSourceFieldName", # required
-    #                   date_field_format: "DataSourceDateFieldFormat",
-    #                   index_field_name: "IndexFieldName", # required
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #         chatter_feed_configuration: {
-    #           document_data_field_name: "DataSourceFieldName", # required
-    #           document_title_field_name: "DataSourceFieldName",
-    #           field_mappings: [
-    #             {
-    #               data_source_field_name: "DataSourceFieldName", # required
-    #               date_field_format: "DataSourceDateFieldFormat",
-    #               index_field_name: "IndexFieldName", # required
-    #             },
-    #           ],
-    #           include_filter_types: ["ACTIVE_USER"], # accepts ACTIVE_USER, STANDARD_USER
-    #         },
-    #         crawl_attachments: false,
-    #         standard_object_attachment_configuration: {
-    #           document_title_field_name: "DataSourceFieldName",
-    #           field_mappings: [
-    #             {
-    #               data_source_field_name: "DataSourceFieldName", # required
-    #               date_field_format: "DataSourceDateFieldFormat",
-    #               index_field_name: "IndexFieldName", # required
-    #             },
-    #           ],
-    #         },
-    #         include_attachment_file_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #         exclude_attachment_file_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #       }
     #
     # @!attribute [rw] server_url
     #   The instance URL for the Salesforce site that you want to index.
@@ -11205,22 +7532,6 @@ module Aws::Kendra
     # Provides the configuration information for indexing Salesforce custom
     # articles.
     #
-    # @note When making an API call, you may pass SalesforceCustomKnowledgeArticleTypeConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         name: "SalesforceCustomKnowledgeArticleTypeName", # required
-    #         document_data_field_name: "DataSourceFieldName", # required
-    #         document_title_field_name: "DataSourceFieldName",
-    #         field_mappings: [
-    #           {
-    #             data_source_field_name: "DataSourceFieldName", # required
-    #             date_field_format: "DataSourceDateFieldFormat",
-    #             index_field_name: "IndexFieldName", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the configuration.
     #   @return [String]
@@ -11264,38 +7575,6 @@ module Aws::Kendra
     # articles and the standard fields of knowledge articles, or the custom
     # fields of custom knowledge articles, but not both
     #
-    # @note When making an API call, you may pass SalesforceKnowledgeArticleConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         included_states: ["DRAFT"], # required, accepts DRAFT, PUBLISHED, ARCHIVED
-    #         standard_knowledge_article_type_configuration: {
-    #           document_data_field_name: "DataSourceFieldName", # required
-    #           document_title_field_name: "DataSourceFieldName",
-    #           field_mappings: [
-    #             {
-    #               data_source_field_name: "DataSourceFieldName", # required
-    #               date_field_format: "DataSourceDateFieldFormat",
-    #               index_field_name: "IndexFieldName", # required
-    #             },
-    #           ],
-    #         },
-    #         custom_knowledge_article_type_configurations: [
-    #           {
-    #             name: "SalesforceCustomKnowledgeArticleTypeName", # required
-    #             document_data_field_name: "DataSourceFieldName", # required
-    #             document_title_field_name: "DataSourceFieldName",
-    #             field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] included_states
     #   Specifies the document states that should be included when Amazon
     #   Kendra indexes knowledge articles. You must specify at least one
@@ -11323,21 +7602,6 @@ module Aws::Kendra
 
     # Provides the configuration information for standard Salesforce
     # knowledge articles.
-    #
-    # @note When making an API call, you may pass SalesforceStandardKnowledgeArticleTypeConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         document_data_field_name: "DataSourceFieldName", # required
-    #         document_title_field_name: "DataSourceFieldName",
-    #         field_mappings: [
-    #           {
-    #             data_source_field_name: "DataSourceFieldName", # required
-    #             date_field_format: "DataSourceDateFieldFormat",
-    #             index_field_name: "IndexFieldName", # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] document_data_field_name
     #   The name of the field that contains the document data to index.
@@ -11373,20 +7637,6 @@ module Aws::Kendra
     # Provides the configuration information for processing attachments to
     # Salesforce standard objects.
     #
-    # @note When making an API call, you may pass SalesforceStandardObjectAttachmentConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         document_title_field_name: "DataSourceFieldName",
-    #         field_mappings: [
-    #           {
-    #             data_source_field_name: "DataSourceFieldName", # required
-    #             date_field_format: "DataSourceDateFieldFormat",
-    #             index_field_name: "IndexFieldName", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] document_title_field_name
     #   The name of the field used for the document title.
     #   @return [String]
@@ -11407,22 +7657,6 @@ module Aws::Kendra
 
     # Provides the configuration information for indexing a single standard
     # object.
-    #
-    # @note When making an API call, you may pass SalesforceStandardObjectConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ACCOUNT", # required, accepts ACCOUNT, CAMPAIGN, CASE, CONTACT, CONTRACT, DOCUMENT, GROUP, IDEA, LEAD, OPPORTUNITY, PARTNER, PRICEBOOK, PRODUCT, PROFILE, SOLUTION, TASK, USER
-    #         document_data_field_name: "DataSourceFieldName", # required
-    #         document_title_field_name: "DataSourceFieldName",
-    #         field_mappings: [
-    #           {
-    #             data_source_field_name: "DataSourceFieldName", # required
-    #             date_field_format: "DataSourceDateFieldFormat",
-    #             index_field_name: "IndexFieldName", # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the standard object.
@@ -11480,16 +7714,6 @@ module Aws::Kendra
     # Provides information about how a custom index field is used during a
     # search.
     #
-    # @note When making an API call, you may pass Search
-    #   data as a hash:
-    #
-    #       {
-    #         facetable: false,
-    #         searchable: false,
-    #         displayable: false,
-    #         sortable: false,
-    #       }
-    #
     # @!attribute [rw] facetable
     #   Indicates that the field can be used to create search facets, a
     #   count of results for each value in the field. The default is `false`
@@ -11539,14 +7763,6 @@ module Aws::Kendra
     #
     # [1]: https://aws.amazon.com/aup/
     #
-    # @note When making an API call, you may pass SeedUrlConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         seed_urls: ["SeedUrl"], # required
-    #         web_crawler_mode: "HOST_ONLY", # accepts HOST_ONLY, SUBDOMAINS, EVERYTHING
-    #       }
-    #
     # @!attribute [rw] seed_urls
     #   The list of seed or starting point URLs of the websites you want to
     #   crawl.
@@ -11583,13 +7799,6 @@ module Aws::Kendra
     # Provides the identifier of the KMS key used to encrypt data indexed by
     # Amazon Kendra. Amazon Kendra doesn't support asymmetric keys.
     #
-    # @note When making an API call, you may pass ServerSideEncryptionConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         kms_key_id: "KmsKeyId",
-    #       }
-    #
     # @!attribute [rw] kms_key_id
     #   The identifier of the KMS key. Amazon Kendra doesn't support
     #   asymmetric keys.
@@ -11605,45 +7814,6 @@ module Aws::Kendra
 
     # Provides the configuration information to connect to ServiceNow as
     # your data source.
-    #
-    # @note When making an API call, you may pass ServiceNowConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         host_url: "ServiceNowHostUrl", # required
-    #         secret_arn: "SecretArn", # required
-    #         service_now_build_version: "LONDON", # required, accepts LONDON, OTHERS
-    #         knowledge_article_configuration: {
-    #           crawl_attachments: false,
-    #           include_attachment_file_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #           exclude_attachment_file_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #           document_data_field_name: "DataSourceFieldName", # required
-    #           document_title_field_name: "DataSourceFieldName",
-    #           field_mappings: [
-    #             {
-    #               data_source_field_name: "DataSourceFieldName", # required
-    #               date_field_format: "DataSourceDateFieldFormat",
-    #               index_field_name: "IndexFieldName", # required
-    #             },
-    #           ],
-    #           filter_query: "ServiceNowKnowledgeArticleFilterQuery",
-    #         },
-    #         service_catalog_configuration: {
-    #           crawl_attachments: false,
-    #           include_attachment_file_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #           exclude_attachment_file_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #           document_data_field_name: "DataSourceFieldName", # required
-    #           document_title_field_name: "DataSourceFieldName",
-    #           field_mappings: [
-    #             {
-    #               data_source_field_name: "DataSourceFieldName", # required
-    #               date_field_format: "DataSourceDateFieldFormat",
-    #               index_field_name: "IndexFieldName", # required
-    #             },
-    #           ],
-    #         },
-    #         authentication_type: "HTTP_BASIC", # accepts HTTP_BASIC, OAUTH2
-    #       }
     #
     # @!attribute [rw] host_url
     #   The ServiceNow instance that the data source connects to. The host
@@ -11710,25 +7880,6 @@ module Aws::Kendra
 
     # Provides the configuration information for crawling knowledge articles
     # in the ServiceNow site.
-    #
-    # @note When making an API call, you may pass ServiceNowKnowledgeArticleConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         crawl_attachments: false,
-    #         include_attachment_file_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #         exclude_attachment_file_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #         document_data_field_name: "DataSourceFieldName", # required
-    #         document_title_field_name: "DataSourceFieldName",
-    #         field_mappings: [
-    #           {
-    #             data_source_field_name: "DataSourceFieldName", # required
-    #             date_field_format: "DataSourceDateFieldFormat",
-    #             index_field_name: "IndexFieldName", # required
-    #           },
-    #         ],
-    #         filter_query: "ServiceNowKnowledgeArticleFilterQuery",
-    #       }
     #
     # @!attribute [rw] crawl_attachments
     #   `TRUE` to index attachments to knowledge articles.
@@ -11812,24 +7963,6 @@ module Aws::Kendra
     # Provides the configuration information for crawling service catalog
     # items in the ServiceNow site
     #
-    # @note When making an API call, you may pass ServiceNowServiceCatalogConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         crawl_attachments: false,
-    #         include_attachment_file_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #         exclude_attachment_file_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #         document_data_field_name: "DataSourceFieldName", # required
-    #         document_title_field_name: "DataSourceFieldName",
-    #         field_mappings: [
-    #           {
-    #             data_source_field_name: "DataSourceFieldName", # required
-    #             date_field_format: "DataSourceDateFieldFormat",
-    #             index_field_name: "IndexFieldName", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] crawl_attachments
     #   `TRUE` to index attachments to service catalog items.
     #   @return [Boolean]
@@ -11912,42 +8045,6 @@ module Aws::Kendra
 
     # Provides the configuration information to connect to Microsoft
     # SharePoint as your data source.
-    #
-    # @note When making an API call, you may pass SharePointConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         share_point_version: "SHAREPOINT_2013", # required, accepts SHAREPOINT_2013, SHAREPOINT_2016, SHAREPOINT_ONLINE, SHAREPOINT_2019
-    #         urls: ["Url"], # required
-    #         secret_arn: "SecretArn", # required
-    #         crawl_attachments: false,
-    #         use_change_log: false,
-    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #         vpc_configuration: {
-    #           subnet_ids: ["SubnetId"], # required
-    #           security_group_ids: ["VpcSecurityGroupId"], # required
-    #         },
-    #         field_mappings: [
-    #           {
-    #             data_source_field_name: "DataSourceFieldName", # required
-    #             date_field_format: "DataSourceDateFieldFormat",
-    #             index_field_name: "IndexFieldName", # required
-    #           },
-    #         ],
-    #         document_title_field_name: "DataSourceFieldName",
-    #         disable_local_groups: false,
-    #         ssl_certificate_s3_path: {
-    #           bucket: "S3BucketName", # required
-    #           key: "S3ObjectKey", # required
-    #         },
-    #         authentication_type: "HTTP_BASIC", # accepts HTTP_BASIC, OAUTH2
-    #         proxy_configuration: {
-    #           host: "Host", # required
-    #           port: 1, # required
-    #           credentials: "SecretArn",
-    #         },
-    #       }
     #
     # @!attribute [rw] share_point_version
     #   The version of Microsoft SharePoint that you use.
@@ -12115,13 +8212,6 @@ module Aws::Kendra
     #
     # [1]: https://aws.amazon.com/aup/
     #
-    # @note When making an API call, you may pass SiteMapsConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         site_maps: ["SiteMap"], # required
-    #       }
-    #
     # @!attribute [rw] site_maps
     #   The list of sitemap URLs of the websites you want to crawl.
     #
@@ -12138,35 +8228,6 @@ module Aws::Kendra
 
     # Provides the configuration information to connect to Slack as your
     # data source.
-    #
-    # @note When making an API call, you may pass SlackConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         team_id: "TeamId", # required
-    #         secret_arn: "SecretArn", # required
-    #         vpc_configuration: {
-    #           subnet_ids: ["SubnetId"], # required
-    #           security_group_ids: ["VpcSecurityGroupId"], # required
-    #         },
-    #         slack_entity_list: ["PUBLIC_CHANNEL"], # required, accepts PUBLIC_CHANNEL, PRIVATE_CHANNEL, GROUP_MESSAGE, DIRECT_MESSAGE
-    #         use_change_log: false,
-    #         crawl_bot_message: false,
-    #         exclude_archived: false,
-    #         since_crawl_date: "SinceCrawlDate", # required
-    #         look_back_period: 1,
-    #         private_channel_filter: ["String"],
-    #         public_channel_filter: ["String"],
-    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #         field_mappings: [
-    #           {
-    #             data_source_field_name: "DataSourceFieldName", # required
-    #             date_field_format: "DataSourceDateFieldFormat",
-    #             index_field_name: "IndexFieldName", # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] team_id
     #   The identifier of the team in the Slack workspace. For example,
@@ -12329,14 +8390,6 @@ module Aws::Kendra
     #
     # ^
     #
-    # @note When making an API call, you may pass SortingConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         document_attribute_key: "DocumentAttributeKey", # required
-    #         sort_order: "DESC", # required, accepts DESC, ASC
-    #       }
-    #
     # @!attribute [rw] document_attribute_key
     #   The name of the document attribute used to sort the response. You
     #   can use any field that has the `Sortable` flag set to true.
@@ -12403,13 +8456,6 @@ module Aws::Kendra
     #
     # [1]: https://docs.aws.amazon.com/kendra/latest/dg/query-spell-check.html
     #
-    # @note When making an API call, you may pass SpellCorrectionConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         include_query_spell_check_suggestions: false, # required
-    #       }
-    #
     # @!attribute [rw] include_query_spell_check_suggestions
     #   `TRUE` to suggest spell corrections for queries.
     #   @return [Boolean]
@@ -12423,13 +8469,6 @@ module Aws::Kendra
     end
 
     # Provides the configuration information to use a SQL database.
-    #
-    # @note When making an API call, you may pass SqlConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         query_identifiers_enclosing_option: "DOUBLE_QUOTES", # accepts DOUBLE_QUOTES, NONE
-    #       }
     #
     # @!attribute [rw] query_identifiers_enclosing_option
     #   Determines whether Amazon Kendra encloses SQL identifiers for tables
@@ -12456,14 +8495,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartDataSourceSyncJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "DataSourceId", # required
-    #         index_id: "IndexId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The identifier of the data source connector to synchronize.
     #   @return [String]
@@ -12528,14 +8559,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopDataSourceSyncJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "DataSourceId", # required
-    #         index_id: "IndexId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The identifier of the data source connector for which to stop the
     #   synchronization jobs.
@@ -12554,26 +8577,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SubmitFeedbackRequest
-    #   data as a hash:
-    #
-    #       {
-    #         index_id: "IndexId", # required
-    #         query_id: "QueryId", # required
-    #         click_feedback_items: [
-    #           {
-    #             result_id: "ResultId", # required
-    #             click_time: Time.now, # required
-    #           },
-    #         ],
-    #         relevance_feedback_items: [
-    #           {
-    #             result_id: "ResultId", # required
-    #             relevance_value: "RELEVANT", # required, accepts RELEVANT, NOT_RELEVANT
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] index_id
     #   The identifier of the index that was queried.
     #   @return [String]
@@ -12762,14 +8765,6 @@ module Aws::Kendra
     # Tag keys and values can consist of Unicode letters, digits, white
     # space, and any of the following symbols: \_ . : / = + - @.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The key for the tag. Keys are not case sensitive and must be unique
     #   for the index, FAQ, or data source.
@@ -12789,19 +8784,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the index, FAQ, or data source to
     #   tag.
@@ -12828,14 +8810,6 @@ module Aws::Kendra
 
     # Provides a template for the configuration information to connect to
     # your data source.
-    #
-    # @note When making an API call, you may pass TemplateConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         template: {
-    #         },
-    #       }
     #
     # @!attribute [rw] template
     #   The template schema used for the data source, where templates
@@ -12944,14 +8918,6 @@ module Aws::Kendra
 
     # Provides a range of time.
     #
-    # @note When making an API call, you may pass TimeRange
-    #   data as a hash:
-    #
-    #       {
-    #         start_time: Time.now,
-    #         end_time: Time.now,
-    #       }
-    #
     # @!attribute [rw] start_time
     #   The UNIX datetime of the beginning of the time range.
     #   @return [Time]
@@ -12969,14 +8935,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the index, FAQ, or data source to
     #   remove the tag from.
@@ -13000,36 +8958,6 @@ module Aws::Kendra
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateAccessControlConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         index_id: "IndexId", # required
-    #         id: "AccessControlConfigurationId", # required
-    #         name: "AccessControlConfigurationName",
-    #         description: "Description",
-    #         access_control_list: [
-    #           {
-    #             name: "PrincipalName", # required
-    #             type: "USER", # required, accepts USER, GROUP
-    #             access: "ALLOW", # required, accepts ALLOW, DENY
-    #             data_source_id: "DataSourceId",
-    #           },
-    #         ],
-    #         hierarchical_access_control_list: [
-    #           {
-    #             principal_list: [ # required
-    #               {
-    #                 name: "PrincipalName", # required
-    #                 type: "USER", # required, accepts USER, GROUP
-    #                 access: "ALLOW", # required, accepts ALLOW, DENY
-    #                 data_source_id: "DataSourceId",
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] index_id
     #   The identifier of the index for an access control configuration.
     #   @return [String]
@@ -13080,709 +9008,6 @@ module Aws::Kendra
     #
     class UpdateAccessControlConfigurationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateDataSourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "DataSourceId", # required
-    #         name: "DataSourceName",
-    #         index_id: "IndexId", # required
-    #         configuration: {
-    #           s3_configuration: {
-    #             bucket_name: "S3BucketName", # required
-    #             inclusion_prefixes: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             documents_metadata_configuration: {
-    #               s3_prefix: "S3ObjectKey",
-    #             },
-    #             access_control_list_configuration: {
-    #               key_path: "S3ObjectKey",
-    #             },
-    #           },
-    #           share_point_configuration: {
-    #             share_point_version: "SHAREPOINT_2013", # required, accepts SHAREPOINT_2013, SHAREPOINT_2016, SHAREPOINT_ONLINE, SHAREPOINT_2019
-    #             urls: ["Url"], # required
-    #             secret_arn: "SecretArn", # required
-    #             crawl_attachments: false,
-    #             use_change_log: false,
-    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             vpc_configuration: {
-    #               subnet_ids: ["SubnetId"], # required
-    #               security_group_ids: ["VpcSecurityGroupId"], # required
-    #             },
-    #             field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             document_title_field_name: "DataSourceFieldName",
-    #             disable_local_groups: false,
-    #             ssl_certificate_s3_path: {
-    #               bucket: "S3BucketName", # required
-    #               key: "S3ObjectKey", # required
-    #             },
-    #             authentication_type: "HTTP_BASIC", # accepts HTTP_BASIC, OAUTH2
-    #             proxy_configuration: {
-    #               host: "Host", # required
-    #               port: 1, # required
-    #               credentials: "SecretArn",
-    #             },
-    #           },
-    #           database_configuration: {
-    #             database_engine_type: "RDS_AURORA_MYSQL", # required, accepts RDS_AURORA_MYSQL, RDS_AURORA_POSTGRESQL, RDS_MYSQL, RDS_POSTGRESQL
-    #             connection_configuration: { # required
-    #               database_host: "DatabaseHost", # required
-    #               database_port: 1, # required
-    #               database_name: "DatabaseName", # required
-    #               table_name: "TableName", # required
-    #               secret_arn: "SecretArn", # required
-    #             },
-    #             vpc_configuration: {
-    #               subnet_ids: ["SubnetId"], # required
-    #               security_group_ids: ["VpcSecurityGroupId"], # required
-    #             },
-    #             column_configuration: { # required
-    #               document_id_column_name: "ColumnName", # required
-    #               document_data_column_name: "ColumnName", # required
-    #               document_title_column_name: "ColumnName",
-    #               field_mappings: [
-    #                 {
-    #                   data_source_field_name: "DataSourceFieldName", # required
-    #                   date_field_format: "DataSourceDateFieldFormat",
-    #                   index_field_name: "IndexFieldName", # required
-    #                 },
-    #               ],
-    #               change_detecting_columns: ["ColumnName"], # required
-    #             },
-    #             acl_configuration: {
-    #               allowed_groups_column_name: "ColumnName", # required
-    #             },
-    #             sql_configuration: {
-    #               query_identifiers_enclosing_option: "DOUBLE_QUOTES", # accepts DOUBLE_QUOTES, NONE
-    #             },
-    #           },
-    #           salesforce_configuration: {
-    #             server_url: "Url", # required
-    #             secret_arn: "SecretArn", # required
-    #             standard_object_configurations: [
-    #               {
-    #                 name: "ACCOUNT", # required, accepts ACCOUNT, CAMPAIGN, CASE, CONTACT, CONTRACT, DOCUMENT, GROUP, IDEA, LEAD, OPPORTUNITY, PARTNER, PRICEBOOK, PRODUCT, PROFILE, SOLUTION, TASK, USER
-    #                 document_data_field_name: "DataSourceFieldName", # required
-    #                 document_title_field_name: "DataSourceFieldName",
-    #                 field_mappings: [
-    #                   {
-    #                     data_source_field_name: "DataSourceFieldName", # required
-    #                     date_field_format: "DataSourceDateFieldFormat",
-    #                     index_field_name: "IndexFieldName", # required
-    #                   },
-    #                 ],
-    #               },
-    #             ],
-    #             knowledge_article_configuration: {
-    #               included_states: ["DRAFT"], # required, accepts DRAFT, PUBLISHED, ARCHIVED
-    #               standard_knowledge_article_type_configuration: {
-    #                 document_data_field_name: "DataSourceFieldName", # required
-    #                 document_title_field_name: "DataSourceFieldName",
-    #                 field_mappings: [
-    #                   {
-    #                     data_source_field_name: "DataSourceFieldName", # required
-    #                     date_field_format: "DataSourceDateFieldFormat",
-    #                     index_field_name: "IndexFieldName", # required
-    #                   },
-    #                 ],
-    #               },
-    #               custom_knowledge_article_type_configurations: [
-    #                 {
-    #                   name: "SalesforceCustomKnowledgeArticleTypeName", # required
-    #                   document_data_field_name: "DataSourceFieldName", # required
-    #                   document_title_field_name: "DataSourceFieldName",
-    #                   field_mappings: [
-    #                     {
-    #                       data_source_field_name: "DataSourceFieldName", # required
-    #                       date_field_format: "DataSourceDateFieldFormat",
-    #                       index_field_name: "IndexFieldName", # required
-    #                     },
-    #                   ],
-    #                 },
-    #               ],
-    #             },
-    #             chatter_feed_configuration: {
-    #               document_data_field_name: "DataSourceFieldName", # required
-    #               document_title_field_name: "DataSourceFieldName",
-    #               field_mappings: [
-    #                 {
-    #                   data_source_field_name: "DataSourceFieldName", # required
-    #                   date_field_format: "DataSourceDateFieldFormat",
-    #                   index_field_name: "IndexFieldName", # required
-    #                 },
-    #               ],
-    #               include_filter_types: ["ACTIVE_USER"], # accepts ACTIVE_USER, STANDARD_USER
-    #             },
-    #             crawl_attachments: false,
-    #             standard_object_attachment_configuration: {
-    #               document_title_field_name: "DataSourceFieldName",
-    #               field_mappings: [
-    #                 {
-    #                   data_source_field_name: "DataSourceFieldName", # required
-    #                   date_field_format: "DataSourceDateFieldFormat",
-    #                   index_field_name: "IndexFieldName", # required
-    #                 },
-    #               ],
-    #             },
-    #             include_attachment_file_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             exclude_attachment_file_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #           },
-    #           one_drive_configuration: {
-    #             tenant_domain: "TenantDomain", # required
-    #             secret_arn: "SecretArn", # required
-    #             one_drive_users: { # required
-    #               one_drive_user_list: ["OneDriveUser"],
-    #               one_drive_user_s3_path: {
-    #                 bucket: "S3BucketName", # required
-    #                 key: "S3ObjectKey", # required
-    #               },
-    #             },
-    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             disable_local_groups: false,
-    #           },
-    #           service_now_configuration: {
-    #             host_url: "ServiceNowHostUrl", # required
-    #             secret_arn: "SecretArn", # required
-    #             service_now_build_version: "LONDON", # required, accepts LONDON, OTHERS
-    #             knowledge_article_configuration: {
-    #               crawl_attachments: false,
-    #               include_attachment_file_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #               exclude_attachment_file_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #               document_data_field_name: "DataSourceFieldName", # required
-    #               document_title_field_name: "DataSourceFieldName",
-    #               field_mappings: [
-    #                 {
-    #                   data_source_field_name: "DataSourceFieldName", # required
-    #                   date_field_format: "DataSourceDateFieldFormat",
-    #                   index_field_name: "IndexFieldName", # required
-    #                 },
-    #               ],
-    #               filter_query: "ServiceNowKnowledgeArticleFilterQuery",
-    #             },
-    #             service_catalog_configuration: {
-    #               crawl_attachments: false,
-    #               include_attachment_file_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #               exclude_attachment_file_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #               document_data_field_name: "DataSourceFieldName", # required
-    #               document_title_field_name: "DataSourceFieldName",
-    #               field_mappings: [
-    #                 {
-    #                   data_source_field_name: "DataSourceFieldName", # required
-    #                   date_field_format: "DataSourceDateFieldFormat",
-    #                   index_field_name: "IndexFieldName", # required
-    #                 },
-    #               ],
-    #             },
-    #             authentication_type: "HTTP_BASIC", # accepts HTTP_BASIC, OAUTH2
-    #           },
-    #           confluence_configuration: {
-    #             server_url: "Url", # required
-    #             secret_arn: "SecretArn", # required
-    #             version: "CLOUD", # required, accepts CLOUD, SERVER
-    #             space_configuration: {
-    #               crawl_personal_spaces: false,
-    #               crawl_archived_spaces: false,
-    #               include_spaces: ["ConfluenceSpaceIdentifier"],
-    #               exclude_spaces: ["ConfluenceSpaceIdentifier"],
-    #               space_field_mappings: [
-    #                 {
-    #                   data_source_field_name: "DISPLAY_URL", # accepts DISPLAY_URL, ITEM_TYPE, SPACE_KEY, URL
-    #                   date_field_format: "DataSourceDateFieldFormat",
-    #                   index_field_name: "IndexFieldName",
-    #                 },
-    #               ],
-    #             },
-    #             page_configuration: {
-    #               page_field_mappings: [
-    #                 {
-    #                   data_source_field_name: "AUTHOR", # accepts AUTHOR, CONTENT_STATUS, CREATED_DATE, DISPLAY_URL, ITEM_TYPE, LABELS, MODIFIED_DATE, PARENT_ID, SPACE_KEY, SPACE_NAME, URL, VERSION
-    #                   date_field_format: "DataSourceDateFieldFormat",
-    #                   index_field_name: "IndexFieldName",
-    #                 },
-    #               ],
-    #             },
-    #             blog_configuration: {
-    #               blog_field_mappings: [
-    #                 {
-    #                   data_source_field_name: "AUTHOR", # accepts AUTHOR, DISPLAY_URL, ITEM_TYPE, LABELS, PUBLISH_DATE, SPACE_KEY, SPACE_NAME, URL, VERSION
-    #                   date_field_format: "DataSourceDateFieldFormat",
-    #                   index_field_name: "IndexFieldName",
-    #                 },
-    #               ],
-    #             },
-    #             attachment_configuration: {
-    #               crawl_attachments: false,
-    #               attachment_field_mappings: [
-    #                 {
-    #                   data_source_field_name: "AUTHOR", # accepts AUTHOR, CONTENT_TYPE, CREATED_DATE, DISPLAY_URL, FILE_SIZE, ITEM_TYPE, PARENT_ID, SPACE_KEY, SPACE_NAME, URL, VERSION
-    #                   date_field_format: "DataSourceDateFieldFormat",
-    #                   index_field_name: "IndexFieldName",
-    #                 },
-    #               ],
-    #             },
-    #             vpc_configuration: {
-    #               subnet_ids: ["SubnetId"], # required
-    #               security_group_ids: ["VpcSecurityGroupId"], # required
-    #             },
-    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             proxy_configuration: {
-    #               host: "Host", # required
-    #               port: 1, # required
-    #               credentials: "SecretArn",
-    #             },
-    #             authentication_type: "HTTP_BASIC", # accepts HTTP_BASIC, PAT
-    #           },
-    #           google_drive_configuration: {
-    #             secret_arn: "SecretArn", # required
-    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             exclude_mime_types: ["MimeType"],
-    #             exclude_user_accounts: ["UserAccount"],
-    #             exclude_shared_drives: ["SharedDriveId"],
-    #           },
-    #           web_crawler_configuration: {
-    #             urls: { # required
-    #               seed_url_configuration: {
-    #                 seed_urls: ["SeedUrl"], # required
-    #                 web_crawler_mode: "HOST_ONLY", # accepts HOST_ONLY, SUBDOMAINS, EVERYTHING
-    #               },
-    #               site_maps_configuration: {
-    #                 site_maps: ["SiteMap"], # required
-    #               },
-    #             },
-    #             crawl_depth: 1,
-    #             max_links_per_page: 1,
-    #             max_content_size_per_page_in_mega_bytes: 1.0,
-    #             max_urls_per_minute_crawl_rate: 1,
-    #             url_inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             url_exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             proxy_configuration: {
-    #               host: "Host", # required
-    #               port: 1, # required
-    #               credentials: "SecretArn",
-    #             },
-    #             authentication_configuration: {
-    #               basic_authentication: [
-    #                 {
-    #                   host: "Host", # required
-    #                   port: 1, # required
-    #                   credentials: "SecretArn", # required
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #           work_docs_configuration: {
-    #             organization_id: "OrganizationId", # required
-    #             crawl_comments: false,
-    #             use_change_log: false,
-    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #           },
-    #           fsx_configuration: {
-    #             file_system_id: "FileSystemId", # required
-    #             file_system_type: "WINDOWS", # required, accepts WINDOWS
-    #             vpc_configuration: { # required
-    #               subnet_ids: ["SubnetId"], # required
-    #               security_group_ids: ["VpcSecurityGroupId"], # required
-    #             },
-    #             secret_arn: "SecretArn",
-    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #           },
-    #           slack_configuration: {
-    #             team_id: "TeamId", # required
-    #             secret_arn: "SecretArn", # required
-    #             vpc_configuration: {
-    #               subnet_ids: ["SubnetId"], # required
-    #               security_group_ids: ["VpcSecurityGroupId"], # required
-    #             },
-    #             slack_entity_list: ["PUBLIC_CHANNEL"], # required, accepts PUBLIC_CHANNEL, PRIVATE_CHANNEL, GROUP_MESSAGE, DIRECT_MESSAGE
-    #             use_change_log: false,
-    #             crawl_bot_message: false,
-    #             exclude_archived: false,
-    #             since_crawl_date: "SinceCrawlDate", # required
-    #             look_back_period: 1,
-    #             private_channel_filter: ["String"],
-    #             public_channel_filter: ["String"],
-    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #           },
-    #           box_configuration: {
-    #             enterprise_id: "EnterpriseId", # required
-    #             secret_arn: "SecretArn", # required
-    #             use_change_log: false,
-    #             crawl_comments: false,
-    #             crawl_tasks: false,
-    #             crawl_web_links: false,
-    #             file_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             task_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             comment_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             web_link_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             vpc_configuration: {
-    #               subnet_ids: ["SubnetId"], # required
-    #               security_group_ids: ["VpcSecurityGroupId"], # required
-    #             },
-    #           },
-    #           quip_configuration: {
-    #             domain: "Domain", # required
-    #             secret_arn: "SecretArn", # required
-    #             crawl_file_comments: false,
-    #             crawl_chat_rooms: false,
-    #             crawl_attachments: false,
-    #             folder_ids: ["FolderId"],
-    #             thread_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             message_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             attachment_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             vpc_configuration: {
-    #               subnet_ids: ["SubnetId"], # required
-    #               security_group_ids: ["VpcSecurityGroupId"], # required
-    #             },
-    #           },
-    #           jira_configuration: {
-    #             jira_account_url: "JiraAccountUrl", # required
-    #             secret_arn: "SecretArn", # required
-    #             use_change_log: false,
-    #             project: ["String"],
-    #             issue_type: ["String"],
-    #             status: ["String"],
-    #             issue_sub_entity_filter: ["COMMENTS"], # accepts COMMENTS, ATTACHMENTS, WORKLOGS
-    #             attachment_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             comment_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             issue_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             project_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             work_log_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             vpc_configuration: {
-    #               subnet_ids: ["SubnetId"], # required
-    #               security_group_ids: ["VpcSecurityGroupId"], # required
-    #             },
-    #           },
-    #           git_hub_configuration: {
-    #             saa_s_configuration: {
-    #               organization_name: "OrganizationName", # required
-    #               host_url: "Url", # required
-    #             },
-    #             on_premise_configuration: {
-    #               host_url: "Url", # required
-    #               organization_name: "OrganizationName", # required
-    #               ssl_certificate_s3_path: { # required
-    #                 bucket: "S3BucketName", # required
-    #                 key: "S3ObjectKey", # required
-    #               },
-    #             },
-    #             type: "SAAS", # accepts SAAS, ON_PREMISE
-    #             secret_arn: "SecretArn", # required
-    #             use_change_log: false,
-    #             git_hub_document_crawl_properties: {
-    #               crawl_repository_documents: false,
-    #               crawl_issue: false,
-    #               crawl_issue_comment: false,
-    #               crawl_issue_comment_attachment: false,
-    #               crawl_pull_request: false,
-    #               crawl_pull_request_comment: false,
-    #               crawl_pull_request_comment_attachment: false,
-    #             },
-    #             repository_filter: ["RepositoryName"],
-    #             inclusion_folder_name_patterns: ["String"],
-    #             inclusion_file_type_patterns: ["String"],
-    #             inclusion_file_name_patterns: ["String"],
-    #             exclusion_folder_name_patterns: ["String"],
-    #             exclusion_file_type_patterns: ["String"],
-    #             exclusion_file_name_patterns: ["String"],
-    #             vpc_configuration: {
-    #               subnet_ids: ["SubnetId"], # required
-    #               security_group_ids: ["VpcSecurityGroupId"], # required
-    #             },
-    #             git_hub_repository_configuration_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             git_hub_commit_configuration_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             git_hub_issue_document_configuration_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             git_hub_issue_comment_configuration_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             git_hub_issue_attachment_configuration_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             git_hub_pull_request_comment_configuration_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             git_hub_pull_request_document_configuration_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             git_hub_pull_request_document_attachment_configuration_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #           },
-    #           alfresco_configuration: {
-    #             site_url: "SiteUrl", # required
-    #             site_id: "SiteId", # required
-    #             secret_arn: "SecretArn", # required
-    #             ssl_certificate_s3_path: { # required
-    #               bucket: "S3BucketName", # required
-    #               key: "S3ObjectKey", # required
-    #             },
-    #             crawl_system_folders: false,
-    #             crawl_comments: false,
-    #             entity_filter: ["wiki"], # accepts wiki, blog, documentLibrary
-    #             document_library_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             blog_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             wiki_field_mappings: [
-    #               {
-    #                 data_source_field_name: "DataSourceFieldName", # required
-    #                 date_field_format: "DataSourceDateFieldFormat",
-    #                 index_field_name: "IndexFieldName", # required
-    #               },
-    #             ],
-    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #             vpc_configuration: {
-    #               subnet_ids: ["SubnetId"], # required
-    #               security_group_ids: ["VpcSecurityGroupId"], # required
-    #             },
-    #           },
-    #           template_configuration: {
-    #             template: {
-    #             },
-    #           },
-    #         },
-    #         vpc_configuration: {
-    #           subnet_ids: ["SubnetId"], # required
-    #           security_group_ids: ["VpcSecurityGroupId"], # required
-    #         },
-    #         description: "Description",
-    #         schedule: "ScanSchedule",
-    #         role_arn: "RoleArn",
-    #         language_code: "LanguageCode",
-    #         custom_document_enrichment_configuration: {
-    #           inline_configurations: [
-    #             {
-    #               condition: {
-    #                 condition_document_attribute_key: "DocumentAttributeKey", # required
-    #                 operator: "GreaterThan", # required, accepts GreaterThan, GreaterThanOrEquals, LessThan, LessThanOrEquals, Equals, NotEquals, Contains, NotContains, Exists, NotExists, BeginsWith
-    #                 condition_on_value: {
-    #                   string_value: "DocumentAttributeStringValue",
-    #                   string_list_value: ["String"],
-    #                   long_value: 1,
-    #                   date_value: Time.now,
-    #                 },
-    #               },
-    #               target: {
-    #                 target_document_attribute_key: "DocumentAttributeKey",
-    #                 target_document_attribute_value_deletion: false,
-    #                 target_document_attribute_value: {
-    #                   string_value: "DocumentAttributeStringValue",
-    #                   string_list_value: ["String"],
-    #                   long_value: 1,
-    #                   date_value: Time.now,
-    #                 },
-    #               },
-    #               document_content_deletion: false,
-    #             },
-    #           ],
-    #           pre_extraction_hook_configuration: {
-    #             invocation_condition: {
-    #               condition_document_attribute_key: "DocumentAttributeKey", # required
-    #               operator: "GreaterThan", # required, accepts GreaterThan, GreaterThanOrEquals, LessThan, LessThanOrEquals, Equals, NotEquals, Contains, NotContains, Exists, NotExists, BeginsWith
-    #               condition_on_value: {
-    #                 string_value: "DocumentAttributeStringValue",
-    #                 string_list_value: ["String"],
-    #                 long_value: 1,
-    #                 date_value: Time.now,
-    #               },
-    #             },
-    #             lambda_arn: "LambdaArn", # required
-    #             s3_bucket: "S3BucketName", # required
-    #           },
-    #           post_extraction_hook_configuration: {
-    #             invocation_condition: {
-    #               condition_document_attribute_key: "DocumentAttributeKey", # required
-    #               operator: "GreaterThan", # required, accepts GreaterThan, GreaterThanOrEquals, LessThan, LessThanOrEquals, Equals, NotEquals, Contains, NotContains, Exists, NotExists, BeginsWith
-    #               condition_on_value: {
-    #                 string_value: "DocumentAttributeStringValue",
-    #                 string_list_value: ["String"],
-    #                 long_value: 1,
-    #                 date_value: Time.now,
-    #               },
-    #             },
-    #             lambda_arn: "LambdaArn", # required
-    #             s3_bucket: "S3BucketName", # required
-    #           },
-    #           role_arn: "RoleArn",
-    #         },
-    #       }
-    #
     # @!attribute [rw] id
     #   The identifier of the data source connector you want to update.
     #   @return [String]
@@ -13871,27 +9096,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateExperienceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ExperienceId", # required
-    #         name: "ExperienceName",
-    #         index_id: "IndexId", # required
-    #         role_arn: "RoleArn",
-    #         configuration: {
-    #           content_source_configuration: {
-    #             data_source_ids: ["DataSourceId"],
-    #             faq_ids: ["FaqId"],
-    #             direct_put_content: false,
-    #           },
-    #           user_identity_configuration: {
-    #             identity_attribute_name: "IdentityAttributeName",
-    #           },
-    #         },
-    #         description: "Description",
-    #       }
-    #
     # @!attribute [rw] id
     #   The identifier of your Amazon Kendra experience you want to update.
     #   @return [String]
@@ -13937,62 +9141,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateIndexRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "IndexId", # required
-    #         name: "IndexName",
-    #         role_arn: "RoleArn",
-    #         description: "Description",
-    #         document_metadata_configuration_updates: [
-    #           {
-    #             name: "DocumentMetadataConfigurationName", # required
-    #             type: "STRING_VALUE", # required, accepts STRING_VALUE, STRING_LIST_VALUE, LONG_VALUE, DATE_VALUE
-    #             relevance: {
-    #               freshness: false,
-    #               importance: 1,
-    #               duration: "Duration",
-    #               rank_order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #               value_importance_map: {
-    #                 "ValueImportanceMapKey" => 1,
-    #               },
-    #             },
-    #             search: {
-    #               facetable: false,
-    #               searchable: false,
-    #               displayable: false,
-    #               sortable: false,
-    #             },
-    #           },
-    #         ],
-    #         capacity_units: {
-    #           storage_capacity_units: 1, # required
-    #           query_capacity_units: 1, # required
-    #         },
-    #         user_token_configurations: [
-    #           {
-    #             jwt_token_type_configuration: {
-    #               key_location: "URL", # required, accepts URL, SECRET_MANAGER
-    #               url: "Url",
-    #               secret_manager_arn: "RoleArn",
-    #               user_name_attribute_field: "UserNameAttributeField",
-    #               group_attribute_field: "GroupAttributeField",
-    #               issuer: "Issuer",
-    #               claim_regex: "ClaimRegex",
-    #             },
-    #             json_token_type_configuration: {
-    #               user_name_attribute_field: "String", # required
-    #               group_attribute_field: "String", # required
-    #             },
-    #           },
-    #         ],
-    #         user_context_policy: "ATTRIBUTE_FILTER", # accepts ATTRIBUTE_FILTER, USER_TOKEN
-    #         user_group_resolution_configuration: {
-    #           user_group_resolution_mode: "AWS_SSO", # required, accepts AWS_SSO, NONE
-    #         },
-    #       }
-    #
     # @!attribute [rw] id
     #   The identifier of the index you want to update.
     #   @return [String]
@@ -14061,21 +9209,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateQuerySuggestionsBlockListRequest
-    #   data as a hash:
-    #
-    #       {
-    #         index_id: "IndexId", # required
-    #         id: "QuerySuggestionsBlockListId", # required
-    #         name: "QuerySuggestionsBlockListName",
-    #         description: "Description",
-    #         source_s3_path: {
-    #           bucket: "S3BucketName", # required
-    #           key: "S3ObjectKey", # required
-    #         },
-    #         role_arn: "RoleArn",
-    #       }
-    #
     # @!attribute [rw] index_id
     #   The identifier of the index for the block list.
     #   @return [String]
@@ -14124,18 +9257,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateQuerySuggestionsConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         index_id: "IndexId", # required
-    #         mode: "ENABLED", # accepts ENABLED, LEARN_ONLY
-    #         query_log_look_back_window_in_days: 1,
-    #         include_queries_without_user_information: false,
-    #         minimum_number_of_querying_users: 1,
-    #         minimum_query_count: 1,
-    #       }
-    #
     # @!attribute [rw] index_id
     #   The identifier of the index with query suggestions you want to
     #   update.
@@ -14213,21 +9334,6 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateThesaurusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ThesaurusId", # required
-    #         name: "ThesaurusName",
-    #         index_id: "IndexId", # required
-    #         description: "Description",
-    #         role_arn: "RoleArn",
-    #         source_s3_path: {
-    #           bucket: "S3BucketName", # required
-    #           key: "S3ObjectKey", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] id
     #   The identifier of the thesaurus you want to update.
     #   @return [String]
@@ -14282,19 +9388,6 @@ module Aws::Kendra
     #
     # [1]: https://aws.amazon.com/aup/
     #
-    # @note When making an API call, you may pass Urls
-    #   data as a hash:
-    #
-    #       {
-    #         seed_url_configuration: {
-    #           seed_urls: ["SeedUrl"], # required
-    #           web_crawler_mode: "HOST_ONLY", # accepts HOST_ONLY, SUBDOMAINS, EVERYTHING
-    #         },
-    #         site_maps_configuration: {
-    #           site_maps: ["SiteMap"], # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] seed_url_configuration
     #   Configuration of the seed or starting point URLs of the websites you
     #   want to crawl.
@@ -14341,21 +9434,6 @@ module Aws::Kendra
     #   groups can access.
     #
     # If you provide both, an exception is thrown.
-    #
-    # @note When making an API call, you may pass UserContext
-    #   data as a hash:
-    #
-    #       {
-    #         token: "Token",
-    #         user_id: "PrincipalName",
-    #         groups: ["PrincipalName"],
-    #         data_source_groups: [
-    #           {
-    #             group_id: "PrincipalName", # required
-    #             data_source_id: "DataSourceId", # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] token
     #   The user context token for filtering search results for a user. It
@@ -14414,13 +9492,6 @@ module Aws::Kendra
     # [2]: https://docs.aws.amazon.com/kendra/latest/dg/getting-started-aws-sso.html
     # [3]: https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html#iam-roles-aws-sso
     #
-    # @note When making an API call, you may pass UserGroupResolutionConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         user_group_resolution_mode: "AWS_SSO", # required, accepts AWS_SSO, NONE
-    #       }
-    #
     # @!attribute [rw] user_group_resolution_mode
     #   The identity store provider (mode) you want to use to fetch access
     #   levels of groups and users. IAM Identity Center (successor to Single
@@ -14439,13 +9510,6 @@ module Aws::Kendra
 
     # Provides the configuration information for the identifiers of your
     # users.
-    #
-    # @note When making an API call, you may pass UserIdentityConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         identity_attribute_name: "IdentityAttributeName",
-    #       }
     #
     # @!attribute [rw] identity_attribute_name
     #   The IAM Identity Center field name that contains the identifiers of
@@ -14471,25 +9535,6 @@ module Aws::Kendra
     end
 
     # Provides the configuration information for a token.
-    #
-    # @note When making an API call, you may pass UserTokenConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         jwt_token_type_configuration: {
-    #           key_location: "URL", # required, accepts URL, SECRET_MANAGER
-    #           url: "Url",
-    #           secret_manager_arn: "RoleArn",
-    #           user_name_attribute_field: "UserNameAttributeField",
-    #           group_attribute_field: "GroupAttributeField",
-    #           issuer: "Issuer",
-    #           claim_regex: "ClaimRegex",
-    #         },
-    #         json_token_type_configuration: {
-    #           user_name_attribute_field: "String", # required
-    #           group_attribute_field: "String", # required
-    #         },
-    #       }
     #
     # @!attribute [rw] jwt_token_type_configuration
     #   Information about the JWT token type configuration.
@@ -14543,41 +9588,6 @@ module Aws::Kendra
 
     # Provides the configuration information required for Amazon Kendra Web
     # Crawler.
-    #
-    # @note When making an API call, you may pass WebCrawlerConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         urls: { # required
-    #           seed_url_configuration: {
-    #             seed_urls: ["SeedUrl"], # required
-    #             web_crawler_mode: "HOST_ONLY", # accepts HOST_ONLY, SUBDOMAINS, EVERYTHING
-    #           },
-    #           site_maps_configuration: {
-    #             site_maps: ["SiteMap"], # required
-    #           },
-    #         },
-    #         crawl_depth: 1,
-    #         max_links_per_page: 1,
-    #         max_content_size_per_page_in_mega_bytes: 1.0,
-    #         max_urls_per_minute_crawl_rate: 1,
-    #         url_inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #         url_exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #         proxy_configuration: {
-    #           host: "Host", # required
-    #           port: 1, # required
-    #           credentials: "SecretArn",
-    #         },
-    #         authentication_configuration: {
-    #           basic_authentication: [
-    #             {
-    #               host: "Host", # required
-    #               port: 1, # required
-    #               credentials: "SecretArn", # required
-    #             },
-    #           ],
-    #         },
-    #       }
     #
     # @!attribute [rw] urls
     #   Specifies the seed or starting point URLs of the websites or the
@@ -14714,24 +9724,6 @@ module Aws::Kendra
     #
     # Amazon WorkDocs connector is available in Oregon, North Virginia,
     # Sydney, Singapore and Ireland regions.
-    #
-    # @note When making an API call, you may pass WorkDocsConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         crawl_comments: false,
-    #         use_change_log: false,
-    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
-    #         field_mappings: [
-    #           {
-    #             data_source_field_name: "DataSourceFieldName", # required
-    #             date_field_format: "DataSourceDateFieldFormat",
-    #             index_field_name: "IndexFieldName", # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] organization_id
     #   The identifier of the directory corresponding to your Amazon

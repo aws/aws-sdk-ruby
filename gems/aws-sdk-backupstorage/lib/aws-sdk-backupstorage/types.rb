@@ -118,14 +118,6 @@ module Aws::BackupStorage
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteObjectInput
-    #   data as a hash:
-    #
-    #       {
-    #         backup_job_id: "string", # required
-    #         object_name: "string", # required
-    #       }
-    #
     # @!attribute [rw] backup_job_id
     #   Backup job Id for the in-progress backup.
     #   @return [String]
@@ -143,14 +135,6 @@ module Aws::BackupStorage
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetChunkInput
-    #   data as a hash:
-    #
-    #       {
-    #         storage_job_id: "string", # required
-    #         chunk_token: "string", # required
-    #       }
-    #
     # @!attribute [rw] storage_job_id
     #   Storage job id
     #   @return [String]
@@ -195,14 +179,6 @@ module Aws::BackupStorage
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetObjectMetadataInput
-    #   data as a hash:
-    #
-    #       {
-    #         storage_job_id: "string", # required
-    #         object_token: "string", # required
-    #       }
-    #
     # @!attribute [rw] storage_job_id
     #   Backup job id for the in-progress backup.
     #   @return [String]
@@ -280,16 +256,6 @@ module Aws::BackupStorage
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListChunksInput
-    #   data as a hash:
-    #
-    #       {
-    #         storage_job_id: "string", # required
-    #         object_token: "string", # required
-    #         max_results: 1,
-    #         next_token: "string",
-    #       }
-    #
     # @!attribute [rw] storage_job_id
     #   Storage job id
     #   @return [String]
@@ -334,19 +300,6 @@ module Aws::BackupStorage
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListObjectsInput
-    #   data as a hash:
-    #
-    #       {
-    #         storage_job_id: "string", # required
-    #         starting_object_name: "string",
-    #         starting_object_prefix: "string",
-    #         max_results: 1,
-    #         next_token: "string",
-    #         created_before: Time.now,
-    #         created_after: Time.now,
-    #       }
-    #
     # @!attribute [rw] storage_job_id
     #   Storage job id
     #   @return [String]
@@ -422,21 +375,6 @@ module Aws::BackupStorage
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass NotifyObjectCompleteInput
-    #   data as a hash:
-    #
-    #       {
-    #         backup_job_id: "string", # required
-    #         upload_id: "string", # required
-    #         object_checksum: "string", # required
-    #         object_checksum_algorithm: "SUMMARY", # required, accepts SUMMARY
-    #         metadata_string: "MetadataString",
-    #         metadata_blob: "data",
-    #         metadata_blob_length: 1,
-    #         metadata_blob_checksum: "string",
-    #         metadata_blob_checksum_algorithm: "SHA256", # accepts SHA256
-    #       }
-    #
     # @!attribute [rw] backup_job_id
     #   Backup job Id for the in-progress backup
     #   @return [String]
@@ -507,19 +445,6 @@ module Aws::BackupStorage
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutChunkInput
-    #   data as a hash:
-    #
-    #       {
-    #         backup_job_id: "string", # required
-    #         upload_id: "string", # required
-    #         chunk_index: 1, # required
-    #         data: "data", # required
-    #         length: 1, # required
-    #         checksum: "string", # required
-    #         checksum_algorithm: "SHA256", # required, accepts SHA256
-    #       }
-    #
     # @!attribute [rw] backup_job_id
     #   Backup job Id for the in-progress backup.
     #   @return [String]
@@ -579,22 +504,6 @@ module Aws::BackupStorage
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutObjectInput
-    #   data as a hash:
-    #
-    #       {
-    #         backup_job_id: "string", # required
-    #         object_name: "string", # required
-    #         metadata_string: "string",
-    #         inline_chunk: "data",
-    #         inline_chunk_length: 1,
-    #         inline_chunk_checksum: "string",
-    #         inline_chunk_checksum_algorithm: "string",
-    #         object_checksum: "string",
-    #         object_checksum_algorithm: "SUMMARY", # accepts SUMMARY
-    #         throw_on_duplicate: false,
-    #       }
-    #
     # @!attribute [rw] backup_job_id
     #   Backup job Id for the in-progress backup.
     #   @return [String]
@@ -734,15 +643,6 @@ module Aws::BackupStorage
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartObjectInput
-    #   data as a hash:
-    #
-    #       {
-    #         backup_job_id: "string", # required
-    #         object_name: "string", # required
-    #         throw_on_duplicate: false,
-    #       }
-    #
     # @!attribute [rw] backup_job_id
     #   Backup job Id for the in-progress backup
     #   @return [String]

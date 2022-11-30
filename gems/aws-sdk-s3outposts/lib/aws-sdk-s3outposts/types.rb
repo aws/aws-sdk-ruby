@@ -36,17 +36,6 @@ module Aws::S3Outposts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateEndpointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         outpost_id: "OutpostId", # required
-    #         subnet_id: "SubnetId", # required
-    #         security_group_id: "SecurityGroupId", # required
-    #         access_type: "Private", # accepts Private, CustomerOwnedIp
-    #         customer_owned_ipv_4_pool: "CustomerOwnedIpv4Pool",
-    #       }
-    #
     # @!attribute [rw] outpost_id
     #   The ID of the Outposts.
     #   @return [String]
@@ -102,14 +91,6 @@ module Aws::S3Outposts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteEndpointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_id: "EndpointId", # required
-    #         outpost_id: "OutpostId", # required
-    #       }
-    #
     # @!attribute [rw] endpoint_id
     #   The ID of the endpoint.
     #   @return [String]
@@ -215,14 +196,6 @@ module Aws::S3Outposts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEndpointsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If a previous response from this operation included a `NextToken`
     #   value, provide that value here to retrieve the next page of results.
@@ -261,15 +234,6 @@ module Aws::S3Outposts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSharedEndpointsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         outpost_id: "OutpostId", # required
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If a previous response from this operation included a `NextToken`
     #   value, you can provide that value here to retrieve the next page of

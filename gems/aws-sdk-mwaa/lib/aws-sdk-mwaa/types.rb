@@ -29,13 +29,6 @@ module Aws::MWAA
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateCliTokenRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "EnvironmentName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the Amazon MWAA environment. For example,
     #   `MyMWAAEnvironment`.
@@ -74,60 +67,6 @@ module Aws::MWAA
     #
     #
     # [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/get-started.html
-    #
-    # @note When making an API call, you may pass CreateEnvironmentInput
-    #   data as a hash:
-    #
-    #       {
-    #         airflow_configuration_options: {
-    #           "ConfigKey" => "ConfigValue",
-    #         },
-    #         airflow_version: "AirflowVersion",
-    #         dag_s3_path: "RelativePath", # required
-    #         environment_class: "EnvironmentClass",
-    #         execution_role_arn: "IamRoleArn", # required
-    #         kms_key: "KmsKey",
-    #         logging_configuration: {
-    #           dag_processing_logs: {
-    #             enabled: false, # required
-    #             log_level: "CRITICAL", # required, accepts CRITICAL, ERROR, WARNING, INFO, DEBUG
-    #           },
-    #           scheduler_logs: {
-    #             enabled: false, # required
-    #             log_level: "CRITICAL", # required, accepts CRITICAL, ERROR, WARNING, INFO, DEBUG
-    #           },
-    #           task_logs: {
-    #             enabled: false, # required
-    #             log_level: "CRITICAL", # required, accepts CRITICAL, ERROR, WARNING, INFO, DEBUG
-    #           },
-    #           webserver_logs: {
-    #             enabled: false, # required
-    #             log_level: "CRITICAL", # required, accepts CRITICAL, ERROR, WARNING, INFO, DEBUG
-    #           },
-    #           worker_logs: {
-    #             enabled: false, # required
-    #             log_level: "CRITICAL", # required, accepts CRITICAL, ERROR, WARNING, INFO, DEBUG
-    #           },
-    #         },
-    #         max_workers: 1,
-    #         min_workers: 1,
-    #         name: "EnvironmentName", # required
-    #         network_configuration: { # required
-    #           security_group_ids: ["SecurityGroupId"],
-    #           subnet_ids: ["SubnetId"],
-    #         },
-    #         plugins_s3_object_version: "S3ObjectVersion",
-    #         plugins_s3_path: "RelativePath",
-    #         requirements_s3_object_version: "S3ObjectVersion",
-    #         requirements_s3_path: "RelativePath",
-    #         schedulers: 1,
-    #         source_bucket_arn: "S3BucketArn", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         webserver_access_mode: "PRIVATE_ONLY", # accepts PRIVATE_ONLY, PUBLIC_ONLY
-    #         weekly_maintenance_window_start: "WeeklyMaintenanceWindowStart",
-    #       }
     #
     # @!attribute [rw] airflow_configuration_options
     #   A list of key-value pairs containing the Apache Airflow
@@ -361,13 +300,6 @@ module Aws::MWAA
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateWebLoginTokenRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "EnvironmentName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the Amazon MWAA environment. For example,
     #   `MyMWAAEnvironment`.
@@ -398,13 +330,6 @@ module Aws::MWAA
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteEnvironmentInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "EnvironmentName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the Amazon MWAA environment. For example,
     #   `MyMWAAEnvironment`.
@@ -429,14 +354,6 @@ module Aws::MWAA
     #
     #
     # [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/cw-metrics.html
-    #
-    # @note When making an API call, you may pass Dimension
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #         value: "String", # required
-    #       }
     #
     # @!attribute [rw] name
     #   **Internal only**. The name of the dimension.
@@ -719,13 +636,6 @@ module Aws::MWAA
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetEnvironmentInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "EnvironmentName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the Amazon MWAA environment. For example,
     #   `MyMWAAEnvironment`.
@@ -796,14 +706,6 @@ module Aws::MWAA
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEnvironmentsInput
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to retrieve per page. For example, `5`
     #   environments per page.
@@ -839,13 +741,6 @@ module Aws::MWAA
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "EnvironmentArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the Amazon MWAA environment. For
     #   example,
@@ -919,32 +814,6 @@ module Aws::MWAA
 
     # Defines the Apache Airflow log types to send to CloudWatch Logs.
     #
-    # @note When making an API call, you may pass LoggingConfigurationInput
-    #   data as a hash:
-    #
-    #       {
-    #         dag_processing_logs: {
-    #           enabled: false, # required
-    #           log_level: "CRITICAL", # required, accepts CRITICAL, ERROR, WARNING, INFO, DEBUG
-    #         },
-    #         scheduler_logs: {
-    #           enabled: false, # required
-    #           log_level: "CRITICAL", # required, accepts CRITICAL, ERROR, WARNING, INFO, DEBUG
-    #         },
-    #         task_logs: {
-    #           enabled: false, # required
-    #           log_level: "CRITICAL", # required, accepts CRITICAL, ERROR, WARNING, INFO, DEBUG
-    #         },
-    #         webserver_logs: {
-    #           enabled: false, # required
-    #           log_level: "CRITICAL", # required, accepts CRITICAL, ERROR, WARNING, INFO, DEBUG
-    #         },
-    #         worker_logs: {
-    #           enabled: false, # required
-    #           log_level: "CRITICAL", # required, accepts CRITICAL, ERROR, WARNING, INFO, DEBUG
-    #         },
-    #       }
-    #
     # @!attribute [rw] dag_processing_logs
     #   Publishes Airflow DAG processing logs to CloudWatch Logs.
     #   @return [Types::ModuleLoggingConfigurationInput]
@@ -984,28 +853,6 @@ module Aws::MWAA
     #
     #
     # [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/cw-metrics.html
-    #
-    # @note When making an API call, you may pass MetricDatum
-    #   data as a hash:
-    #
-    #       {
-    #         dimensions: [
-    #           {
-    #             name: "String", # required
-    #             value: "String", # required
-    #           },
-    #         ],
-    #         metric_name: "String", # required
-    #         statistic_values: {
-    #           maximum: 1.0,
-    #           minimum: 1.0,
-    #           sample_count: 1,
-    #           sum: 1.0,
-    #         },
-    #         timestamp: Time.now, # required
-    #         unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
-    #         value: 1.0,
-    #       }
     #
     # @!attribute [rw] dimensions
     #   **Internal only**. The dimensions associated with the metric.
@@ -1077,14 +924,6 @@ module Aws::MWAA
     # Enables the Apache Airflow log type (e.g. `DagProcessingLogs`) and
     # defines the log level to send to CloudWatch Logs (e.g. `INFO`).
     #
-    # @note When making an API call, you may pass ModuleLoggingConfigurationInput
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false, # required
-    #         log_level: "CRITICAL", # required, accepts CRITICAL, ERROR, WARNING, INFO, DEBUG
-    #       }
-    #
     # @!attribute [rw] enabled
     #   Indicates whether to enable the Apache Airflow log type (e.g.
     #   `DagProcessingLogs`).
@@ -1111,14 +950,6 @@ module Aws::MWAA
     #
     #
     # [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html
-    #
-    # @note When making an API call, you may pass NetworkConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         security_group_ids: ["SecurityGroupId"],
-    #         subnet_ids: ["SubnetId"],
-    #       }
     #
     # @!attribute [rw] security_group_ids
     #   A list of security group IDs. To learn more, see [Security in your
@@ -1147,33 +978,6 @@ module Aws::MWAA
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PublishMetricsInput
-    #   data as a hash:
-    #
-    #       {
-    #         environment_name: "EnvironmentName", # required
-    #         metric_data: [ # required
-    #           {
-    #             dimensions: [
-    #               {
-    #                 name: "String", # required
-    #                 value: "String", # required
-    #               },
-    #             ],
-    #             metric_name: "String", # required
-    #             statistic_values: {
-    #               maximum: 1.0,
-    #               minimum: 1.0,
-    #               sample_count: 1,
-    #               sum: 1.0,
-    #             },
-    #             timestamp: Time.now, # required
-    #             unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
-    #             value: 1.0,
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] environment_name
     #   **Internal only**. The name of the environment.
     #   @return [String]
@@ -1223,16 +1027,6 @@ module Aws::MWAA
     #
     # [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/cw-metrics.html
     #
-    # @note When making an API call, you may pass StatisticSet
-    #   data as a hash:
-    #
-    #       {
-    #         maximum: 1.0,
-    #         minimum: 1.0,
-    #         sample_count: 1,
-    #         sum: 1.0,
-    #       }
-    #
     # @!attribute [rw] maximum
     #   **Internal only**. The maximum value of the sample set.
     #   @return [Float]
@@ -1260,16 +1054,6 @@ module Aws::MWAA
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "EnvironmentArn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the Amazon MWAA environment. For
     #   example,
@@ -1299,14 +1083,6 @@ module Aws::MWAA
     #
     class TagResourceOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UntagResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "EnvironmentArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the Amazon MWAA environment. For
     #   example,
@@ -1331,55 +1107,6 @@ module Aws::MWAA
     #
     class UntagResourceOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateEnvironmentInput
-    #   data as a hash:
-    #
-    #       {
-    #         airflow_configuration_options: {
-    #           "ConfigKey" => "ConfigValue",
-    #         },
-    #         airflow_version: "AirflowVersion",
-    #         dag_s3_path: "RelativePath",
-    #         environment_class: "EnvironmentClass",
-    #         execution_role_arn: "IamRoleArn",
-    #         logging_configuration: {
-    #           dag_processing_logs: {
-    #             enabled: false, # required
-    #             log_level: "CRITICAL", # required, accepts CRITICAL, ERROR, WARNING, INFO, DEBUG
-    #           },
-    #           scheduler_logs: {
-    #             enabled: false, # required
-    #             log_level: "CRITICAL", # required, accepts CRITICAL, ERROR, WARNING, INFO, DEBUG
-    #           },
-    #           task_logs: {
-    #             enabled: false, # required
-    #             log_level: "CRITICAL", # required, accepts CRITICAL, ERROR, WARNING, INFO, DEBUG
-    #           },
-    #           webserver_logs: {
-    #             enabled: false, # required
-    #             log_level: "CRITICAL", # required, accepts CRITICAL, ERROR, WARNING, INFO, DEBUG
-    #           },
-    #           worker_logs: {
-    #             enabled: false, # required
-    #             log_level: "CRITICAL", # required, accepts CRITICAL, ERROR, WARNING, INFO, DEBUG
-    #           },
-    #         },
-    #         max_workers: 1,
-    #         min_workers: 1,
-    #         name: "EnvironmentName", # required
-    #         network_configuration: {
-    #           security_group_ids: ["SecurityGroupId"], # required
-    #         },
-    #         plugins_s3_object_version: "S3ObjectVersion",
-    #         plugins_s3_path: "RelativePath",
-    #         requirements_s3_object_version: "S3ObjectVersion",
-    #         requirements_s3_path: "RelativePath",
-    #         schedulers: 1,
-    #         source_bucket_arn: "S3BucketArn",
-    #         webserver_access_mode: "PRIVATE_ONLY", # accepts PRIVATE_ONLY, PUBLIC_ONLY
-    #         weekly_maintenance_window_start: "WeeklyMaintenanceWindowStart",
-    #       }
-    #
     # @!attribute [rw] airflow_configuration_options
     #   A list of key-value pairs containing the Apache Airflow
     #   configuration options you want to attach to your environment. To
@@ -1606,13 +1333,6 @@ module Aws::MWAA
     #
     #
     # [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html
-    #
-    # @note When making an API call, you may pass UpdateNetworkConfigurationInput
-    #   data as a hash:
-    #
-    #       {
-    #         security_group_ids: ["SecurityGroupId"], # required
-    #       }
     #
     # @!attribute [rw] security_group_ids
     #   A list of security group IDs. A security group must be attached to

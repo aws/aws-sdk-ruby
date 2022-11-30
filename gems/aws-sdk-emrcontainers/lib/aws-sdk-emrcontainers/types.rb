@@ -10,14 +10,6 @@
 module Aws::EMRContainers
   module Types
 
-    # @note When making an API call, you may pass CancelJobRunRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ResourceIdString", # required
-    #         virtual_cluster_id: "ResourceIdString", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the job run to cancel.
     #   @return [String]
@@ -78,14 +70,6 @@ module Aws::EMRContainers
     # A configuration for CloudWatch monitoring. You can configure your jobs
     # to send log information to CloudWatch Logs.
     #
-    # @note When making an API call, you may pass CloudWatchMonitoringConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         log_group_name: "LogGroupName", # required
-    #         log_stream_name_prefix: "String256",
-    #       }
-    #
     # @!attribute [rw] log_group_name
     #   The name of the log group for log publishing.
     #   @return [String]
@@ -109,27 +93,6 @@ module Aws::EMRContainers
     # classification, properties, and optional nested configurations. A
     # classification refers to an application-specific configuration file.
     # Properties are the settings you want to change in that file.
-    #
-    # @note When making an API call, you may pass Configuration
-    #   data as a hash:
-    #
-    #       {
-    #         classification: "String1024", # required
-    #         properties: {
-    #           "String1024" => "String1024",
-    #         },
-    #         configurations: [
-    #           {
-    #             classification: "String1024", # required
-    #             properties: {
-    #               "String1024" => "String1024",
-    #             },
-    #             configurations: {
-    #               # recursive ConfigurationList
-    #             },
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] classification
     #   The classification within a configuration.
@@ -157,33 +120,6 @@ module Aws::EMRContainers
     # A configuration specification to be used to override existing
     # configurations.
     #
-    # @note When making an API call, you may pass ConfigurationOverrides
-    #   data as a hash:
-    #
-    #       {
-    #         application_configuration: [
-    #           {
-    #             classification: "String1024", # required
-    #             properties: {
-    #               "String1024" => "String1024",
-    #             },
-    #             configurations: {
-    #               # recursive ConfigurationList
-    #             },
-    #           },
-    #         ],
-    #         monitoring_configuration: {
-    #           persistent_app_ui: "ENABLED", # accepts ENABLED, DISABLED
-    #           cloud_watch_monitoring_configuration: {
-    #             log_group_name: "LogGroupName", # required
-    #             log_stream_name_prefix: "String256",
-    #           },
-    #           s3_monitoring_configuration: {
-    #             log_uri: "UriString", # required
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] application_configuration
     #   The configurations for the application running by the job run.
     #   @return [Array<Types::Configuration>]
@@ -204,10 +140,6 @@ module Aws::EMRContainers
     # The information about the container used for a job run or a managed
     # endpoint.
     #
-    # @note ContainerInfo is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note ContainerInfo is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ContainerInfo corresponding to the set member.
-    #
     # @!attribute [rw] eks_info
     #   The information about the EKS cluster.
     #   @return [Types::EksInfo]
@@ -226,19 +158,6 @@ module Aws::EMRContainers
     end
 
     # The information about the container provider.
-    #
-    # @note When making an API call, you may pass ContainerProvider
-    #   data as a hash:
-    #
-    #       {
-    #         type: "EKS", # required, accepts EKS
-    #         id: "ClusterId", # required
-    #         info: {
-    #           eks_info: {
-    #             namespace: "KubernetesNamespace",
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] type
     #   The type of the container provider. EKS is the only supported type
@@ -263,65 +182,6 @@ module Aws::EMRContainers
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateJobTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ResourceNameString", # required
-    #         client_token: "ClientToken", # required
-    #         job_template_data: { # required
-    #           execution_role_arn: "ParametricIAMRoleArn", # required
-    #           release_label: "ParametricReleaseLabel", # required
-    #           configuration_overrides: {
-    #             application_configuration: [
-    #               {
-    #                 classification: "String1024", # required
-    #                 properties: {
-    #                   "String1024" => "String1024",
-    #                 },
-    #                 configurations: {
-    #                   # recursive ConfigurationList
-    #                 },
-    #               },
-    #             ],
-    #             monitoring_configuration: {
-    #               persistent_app_ui: "TemplateParameter",
-    #               cloud_watch_monitoring_configuration: {
-    #                 log_group_name: "TemplateParameter",
-    #                 log_stream_name_prefix: "String256",
-    #               },
-    #               s3_monitoring_configuration: {
-    #                 log_uri: "UriString",
-    #               },
-    #             },
-    #           },
-    #           job_driver: { # required
-    #             spark_submit_job_driver: {
-    #               entry_point: "EntryPointPath", # required
-    #               entry_point_arguments: ["EntryPointArgument"],
-    #               spark_submit_parameters: "SparkSubmitParameters",
-    #             },
-    #             spark_sql_job_driver: {
-    #               entry_point: "EntryPointPath",
-    #               spark_sql_parameters: "SparkSqlParameters",
-    #             },
-    #           },
-    #           parameter_configuration: {
-    #             "TemplateParameterName" => {
-    #               type: "NUMBER", # accepts NUMBER, STRING
-    #               default_value: "String1024",
-    #             },
-    #           },
-    #           job_tags: {
-    #             "String128" => "StringEmpty256",
-    #           },
-    #         },
-    #         tags: {
-    #           "String128" => "StringEmpty256",
-    #         },
-    #         kms_key_arn: "KmsKeyArn",
-    #       }
-    #
     # @!attribute [rw] name
     #   The specified name of the job template.
     #   @return [String]
@@ -385,45 +245,6 @@ module Aws::EMRContainers
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateManagedEndpointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ResourceNameString", # required
-    #         virtual_cluster_id: "ResourceIdString", # required
-    #         type: "EndpointType", # required
-    #         release_label: "ReleaseLabel", # required
-    #         execution_role_arn: "IAMRoleArn", # required
-    #         certificate_arn: "ACMCertArn",
-    #         configuration_overrides: {
-    #           application_configuration: [
-    #             {
-    #               classification: "String1024", # required
-    #               properties: {
-    #                 "String1024" => "String1024",
-    #               },
-    #               configurations: {
-    #                 # recursive ConfigurationList
-    #               },
-    #             },
-    #           ],
-    #           monitoring_configuration: {
-    #             persistent_app_ui: "ENABLED", # accepts ENABLED, DISABLED
-    #             cloud_watch_monitoring_configuration: {
-    #               log_group_name: "LogGroupName", # required
-    #               log_stream_name_prefix: "String256",
-    #             },
-    #             s3_monitoring_configuration: {
-    #               log_uri: "UriString", # required
-    #             },
-    #           },
-    #         },
-    #         client_token: "ClientToken", # required
-    #         tags: {
-    #           "String128" => "StringEmpty256",
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the managed endpoint.
     #   @return [String]
@@ -509,26 +330,6 @@ module Aws::EMRContainers
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateVirtualClusterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ResourceNameString", # required
-    #         container_provider: { # required
-    #           type: "EKS", # required, accepts EKS
-    #           id: "ClusterId", # required
-    #           info: {
-    #             eks_info: {
-    #               namespace: "KubernetesNamespace",
-    #             },
-    #           },
-    #         },
-    #         client_token: "ClientToken", # required
-    #         tags: {
-    #           "String128" => "StringEmpty256",
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The specified name of the virtual cluster.
     #   @return [String]
@@ -581,13 +382,6 @@ module Aws::EMRContainers
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteJobTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ResourceIdString", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the job template that will be deleted.
     #   @return [String]
@@ -612,14 +406,6 @@ module Aws::EMRContainers
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteManagedEndpointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ResourceIdString", # required
-    #         virtual_cluster_id: "ResourceIdString", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the managed endpoint.
     #   @return [String]
@@ -654,13 +440,6 @@ module Aws::EMRContainers
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteVirtualClusterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ResourceIdString", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the virtual cluster that will be deleted.
     #   @return [String]
@@ -686,14 +465,6 @@ module Aws::EMRContainers
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeJobRunRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ResourceIdString", # required
-    #         virtual_cluster_id: "ResourceIdString", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the job run request.
     #   @return [String]
@@ -723,13 +494,6 @@ module Aws::EMRContainers
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeJobTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ResourceIdString", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the job template that will be described.
     #   @return [String]
@@ -754,14 +518,6 @@ module Aws::EMRContainers
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeManagedEndpointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ResourceIdString", # required
-    #         virtual_cluster_id: "ResourceIdString", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   This output displays ID of the managed endpoint.
     #   @return [String]
@@ -791,13 +547,6 @@ module Aws::EMRContainers
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeVirtualClusterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ResourceIdString", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the virtual cluster that will be described.
     #   @return [String]
@@ -824,13 +573,6 @@ module Aws::EMRContainers
     end
 
     # The information about the EKS cluster.
-    #
-    # @note When making an API call, you may pass EksInfo
-    #   data as a hash:
-    #
-    #       {
-    #         namespace: "KubernetesNamespace",
-    #       }
     #
     # @!attribute [rw] namespace
     #   The namespaces of the EKS cluster.
@@ -963,21 +705,6 @@ module Aws::EMRContainers
     # Specify the driver that the job runs on. Exactly one of the two
     # available job drivers is required, either sparkSqlJobDriver or
     # sparkSubmitJobDriver.
-    #
-    # @note When making an API call, you may pass JobDriver
-    #   data as a hash:
-    #
-    #       {
-    #         spark_submit_job_driver: {
-    #           entry_point: "EntryPointPath", # required
-    #           entry_point_arguments: ["EntryPointArgument"],
-    #           spark_submit_parameters: "SparkSubmitParameters",
-    #         },
-    #         spark_sql_job_driver: {
-    #           entry_point: "EntryPointPath",
-    #           spark_sql_parameters: "SparkSqlParameters",
-    #         },
-    #       }
     #
     # @!attribute [rw] spark_submit_job_driver
     #   The job driver parameters specified for spark submit.
@@ -1149,57 +876,6 @@ module Aws::EMRContainers
     # The values of StartJobRun API requests used in job runs started using
     # the job template.
     #
-    # @note When making an API call, you may pass JobTemplateData
-    #   data as a hash:
-    #
-    #       {
-    #         execution_role_arn: "ParametricIAMRoleArn", # required
-    #         release_label: "ParametricReleaseLabel", # required
-    #         configuration_overrides: {
-    #           application_configuration: [
-    #             {
-    #               classification: "String1024", # required
-    #               properties: {
-    #                 "String1024" => "String1024",
-    #               },
-    #               configurations: {
-    #                 # recursive ConfigurationList
-    #               },
-    #             },
-    #           ],
-    #           monitoring_configuration: {
-    #             persistent_app_ui: "TemplateParameter",
-    #             cloud_watch_monitoring_configuration: {
-    #               log_group_name: "TemplateParameter",
-    #               log_stream_name_prefix: "String256",
-    #             },
-    #             s3_monitoring_configuration: {
-    #               log_uri: "UriString",
-    #             },
-    #           },
-    #         },
-    #         job_driver: { # required
-    #           spark_submit_job_driver: {
-    #             entry_point: "EntryPointPath", # required
-    #             entry_point_arguments: ["EntryPointArgument"],
-    #             spark_submit_parameters: "SparkSubmitParameters",
-    #           },
-    #           spark_sql_job_driver: {
-    #             entry_point: "EntryPointPath",
-    #             spark_sql_parameters: "SparkSqlParameters",
-    #           },
-    #         },
-    #         parameter_configuration: {
-    #           "TemplateParameterName" => {
-    #             type: "NUMBER", # accepts NUMBER, STRING
-    #             default_value: "String1024",
-    #           },
-    #         },
-    #         job_tags: {
-    #           "String128" => "StringEmpty256",
-    #         },
-    #       }
-    #
     # @!attribute [rw] execution_role_arn
     #   The execution role ARN of the job run.
     #   @return [String]
@@ -1240,19 +916,6 @@ module Aws::EMRContainers
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListJobRunsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         virtual_cluster_id: "ResourceIdString", # required
-    #         created_before: Time.now,
-    #         created_after: Time.now,
-    #         name: "ResourceNameString",
-    #         states: ["PENDING"], # accepts PENDING, SUBMITTED, RUNNING, FAILED, CANCELLED, CANCEL_PENDING, COMPLETED
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] virtual_cluster_id
     #   The ID of the virtual cluster for which to list the job run.
     #   @return [String]
@@ -1312,16 +975,6 @@ module Aws::EMRContainers
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListJobTemplatesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         created_after: Time.now,
-    #         created_before: Time.now,
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] created_after
     #   The date and time after which the job templates were created.
     #   @return [Time]
@@ -1366,19 +1019,6 @@ module Aws::EMRContainers
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListManagedEndpointsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         virtual_cluster_id: "ResourceIdString", # required
-    #         created_before: Time.now,
-    #         created_after: Time.now,
-    #         types: ["EndpointType"],
-    #         states: ["CREATING"], # accepts CREATING, ACTIVE, TERMINATING, TERMINATED, TERMINATED_WITH_ERRORS
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] virtual_cluster_id
     #   The ID of the virtual cluster.
     #   @return [String]
@@ -1438,13 +1078,6 @@ module Aws::EMRContainers
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "RsiArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of tagged resources.
     #   @return [String]
@@ -1469,19 +1102,6 @@ module Aws::EMRContainers
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListVirtualClustersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         container_provider_id: "String1024",
-    #         container_provider_type: "EKS", # accepts EKS
-    #         created_after: Time.now,
-    #         created_before: Time.now,
-    #         states: ["RUNNING"], # accepts RUNNING, TERMINATING, TERMINATED, ARRESTED
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] container_provider_id
     #   The container provider ID of the virtual cluster.
     #   @return [String]
@@ -1544,20 +1164,6 @@ module Aws::EMRContainers
 
     # Configuration setting for monitoring.
     #
-    # @note When making an API call, you may pass MonitoringConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         persistent_app_ui: "ENABLED", # accepts ENABLED, DISABLED
-    #         cloud_watch_monitoring_configuration: {
-    #           log_group_name: "LogGroupName", # required
-    #           log_stream_name_prefix: "String256",
-    #         },
-    #         s3_monitoring_configuration: {
-    #           log_uri: "UriString", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] persistent_app_ui
     #   Monitoring configurations for the persistent application UI.
     #   @return [String]
@@ -1584,14 +1190,6 @@ module Aws::EMRContainers
     # to send log information to CloudWatch Logs. This data type allows job
     # template parameters to be specified within.
     #
-    # @note When making an API call, you may pass ParametricCloudWatchMonitoringConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         log_group_name: "TemplateParameter",
-    #         log_stream_name_prefix: "String256",
-    #       }
-    #
     # @!attribute [rw] log_group_name
     #   The name of the log group for log publishing.
     #   @return [String]
@@ -1613,33 +1211,6 @@ module Aws::EMRContainers
     # configurations. This data type allows job template parameters to be
     # specified within.
     #
-    # @note When making an API call, you may pass ParametricConfigurationOverrides
-    #   data as a hash:
-    #
-    #       {
-    #         application_configuration: [
-    #           {
-    #             classification: "String1024", # required
-    #             properties: {
-    #               "String1024" => "String1024",
-    #             },
-    #             configurations: {
-    #               # recursive ConfigurationList
-    #             },
-    #           },
-    #         ],
-    #         monitoring_configuration: {
-    #           persistent_app_ui: "TemplateParameter",
-    #           cloud_watch_monitoring_configuration: {
-    #             log_group_name: "TemplateParameter",
-    #             log_stream_name_prefix: "String256",
-    #           },
-    #           s3_monitoring_configuration: {
-    #             log_uri: "UriString",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] application_configuration
     #   The configurations for the application running by the job run.
     #   @return [Array<Types::Configuration>]
@@ -1659,20 +1230,6 @@ module Aws::EMRContainers
 
     # Configuration setting for monitoring. This data type allows job
     # template parameters to be specified within.
-    #
-    # @note When making an API call, you may pass ParametricMonitoringConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         persistent_app_ui: "TemplateParameter",
-    #         cloud_watch_monitoring_configuration: {
-    #           log_group_name: "TemplateParameter",
-    #           log_stream_name_prefix: "String256",
-    #         },
-    #         s3_monitoring_configuration: {
-    #           log_uri: "UriString",
-    #         },
-    #       }
     #
     # @!attribute [rw] persistent_app_ui
     #   Monitoring configurations for the persistent application UI.
@@ -1699,13 +1256,6 @@ module Aws::EMRContainers
     # Amazon S3 configuration for monitoring log publishing. You can
     # configure your jobs to send log information to Amazon S3. This data
     # type allows job template parameters to be specified within.
-    #
-    # @note When making an API call, you may pass ParametricS3MonitoringConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         log_uri: "UriString",
-    #       }
     #
     # @!attribute [rw] log_uri
     #   Amazon S3 destination URI for log publishing.
@@ -1735,13 +1285,6 @@ module Aws::EMRContainers
     # Amazon S3 configuration for monitoring log publishing. You can
     # configure your jobs to send log information to Amazon S3.
     #
-    # @note When making an API call, you may pass S3MonitoringConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         log_uri: "UriString", # required
-    #       }
-    #
     # @!attribute [rw] log_uri
     #   Amazon S3 destination URI for log publishing.
     #   @return [String]
@@ -1755,14 +1298,6 @@ module Aws::EMRContainers
     end
 
     # The job driver for job type.
-    #
-    # @note When making an API call, you may pass SparkSqlJobDriver
-    #   data as a hash:
-    #
-    #       {
-    #         entry_point: "EntryPointPath",
-    #         spark_sql_parameters: "SparkSqlParameters",
-    #       }
     #
     # @!attribute [rw] entry_point
     #   The SQL file to be executed.
@@ -1782,15 +1317,6 @@ module Aws::EMRContainers
     end
 
     # The information about job driver for Spark submit.
-    #
-    # @note When making an API call, you may pass SparkSubmitJobDriver
-    #   data as a hash:
-    #
-    #       {
-    #         entry_point: "EntryPointPath", # required
-    #         entry_point_arguments: ["EntryPointArgument"],
-    #         spark_submit_parameters: "SparkSubmitParameters",
-    #       }
     #
     # @!attribute [rw] entry_point
     #   The entry point of job application.
@@ -1814,58 +1340,6 @@ module Aws::EMRContainers
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartJobRunRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ResourceNameString",
-    #         virtual_cluster_id: "ResourceIdString", # required
-    #         client_token: "ClientToken", # required
-    #         execution_role_arn: "IAMRoleArn",
-    #         release_label: "ReleaseLabel",
-    #         job_driver: {
-    #           spark_submit_job_driver: {
-    #             entry_point: "EntryPointPath", # required
-    #             entry_point_arguments: ["EntryPointArgument"],
-    #             spark_submit_parameters: "SparkSubmitParameters",
-    #           },
-    #           spark_sql_job_driver: {
-    #             entry_point: "EntryPointPath",
-    #             spark_sql_parameters: "SparkSqlParameters",
-    #           },
-    #         },
-    #         configuration_overrides: {
-    #           application_configuration: [
-    #             {
-    #               classification: "String1024", # required
-    #               properties: {
-    #                 "String1024" => "String1024",
-    #               },
-    #               configurations: {
-    #                 # recursive ConfigurationList
-    #               },
-    #             },
-    #           ],
-    #           monitoring_configuration: {
-    #             persistent_app_ui: "ENABLED", # accepts ENABLED, DISABLED
-    #             cloud_watch_monitoring_configuration: {
-    #               log_group_name: "LogGroupName", # required
-    #               log_stream_name_prefix: "String256",
-    #             },
-    #             s3_monitoring_configuration: {
-    #               log_uri: "UriString", # required
-    #             },
-    #           },
-    #         },
-    #         tags: {
-    #           "String128" => "StringEmpty256",
-    #         },
-    #         job_template_id: "ResourceIdString",
-    #         job_template_parameters: {
-    #           "TemplateParameterName" => "String1024",
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the job run.
     #   @return [String]
@@ -1954,16 +1428,6 @@ module Aws::EMRContainers
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "RsiArn", # required
-    #         tags: { # required
-    #           "String128" => "StringEmpty256",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of resources.
     #   @return [String]
@@ -1987,14 +1451,6 @@ module Aws::EMRContainers
 
     # The configuration of a job template parameter.
     #
-    # @note When making an API call, you may pass TemplateParameterConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         type: "NUMBER", # accepts NUMBER, STRING
-    #         default_value: "String1024",
-    #       }
-    #
     # @!attribute [rw] type
     #   The type of the job template parameter. Allowed values are:
     #   ‘String’, ‘Number’.
@@ -2013,14 +1469,6 @@ module Aws::EMRContainers
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "RsiArn", # required
-    #         tag_keys: ["String128"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of resources.
     #   @return [String]

@@ -12,20 +12,6 @@ module Aws::CodeGuruProfiler
 
     # The structure representing the AddNotificationChannelsRequest.
     #
-    # @note When making an API call, you may pass AddNotificationChannelsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channels: [ # required
-    #           {
-    #             event_publishers: ["AnomalyDetection"], # required, accepts AnomalyDetection
-    #             id: "ChannelId",
-    #             uri: "ChannelUri", # required
-    #           },
-    #         ],
-    #         profiling_group_name: "ProfilingGroupName", # required
-    #       }
-    #
     # @!attribute [rw] channels
     #   One or 2 channels to report to when anomalies are detected.
     #   @return [Array<Types::Channel>]
@@ -120,13 +106,6 @@ module Aws::CodeGuruProfiler
     #
     #
     # [1]: https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ConfigureAgent.html
-    #
-    # @note When making an API call, you may pass AgentOrchestrationConfig
-    #   data as a hash:
-    #
-    #       {
-    #         profiling_enabled: false, # required
-    #       }
     #
     # @!attribute [rw] profiling_enabled
     #   A `Boolean` that specifies whether the profiling agent collects
@@ -247,24 +226,6 @@ module Aws::CodeGuruProfiler
     end
 
     # The structure representing the BatchGetFrameMetricDataRequest.
-    #
-    # @note When making an API call, you may pass BatchGetFrameMetricDataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         end_time: Time.now,
-    #         frame_metrics: [
-    #           {
-    #             frame_name: "String", # required
-    #             thread_states: ["String"], # required
-    #             type: "AggregatedRelativeTotalTime", # required, accepts AggregatedRelativeTotalTime
-    #           },
-    #         ],
-    #         period: "Period",
-    #         profiling_group_name: "ProfilingGroupName", # required
-    #         start_time: Time.now,
-    #         target_resolution: "PT5M", # accepts PT5M, PT1H, P1D
-    #       }
     #
     # @!attribute [rw] end_time
     #   The end time of the time period for the returned time series values.
@@ -388,15 +349,6 @@ module Aws::CodeGuruProfiler
     # Notification medium for users to get alerted for events that occur in
     # application profile. We support SNS topic as a notification channel.
     #
-    # @note When making an API call, you may pass Channel
-    #   data as a hash:
-    #
-    #       {
-    #         event_publishers: ["AnomalyDetection"], # required, accepts AnomalyDetection
-    #         id: "ChannelId",
-    #         uri: "ChannelUri", # required
-    #       }
-    #
     # @!attribute [rw] event_publishers
     #   List of publishers for different type of events that may be detected
     #   in an application from the profile. Anomaly detection is the only
@@ -426,17 +378,6 @@ module Aws::CodeGuruProfiler
     end
 
     # The structure representing the configureAgentRequest.
-    #
-    # @note When making an API call, you may pass ConfigureAgentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_instance_id: "FleetInstanceId",
-    #         metadata: {
-    #           "ComputePlatform" => "String",
-    #         },
-    #         profiling_group_name: "ProfilingGroupName", # required
-    #       }
     #
     # @!attribute [rw] fleet_instance_id
     #   A universally unique identifier (UUID) for a profiling instance. For
@@ -527,21 +468,6 @@ module Aws::CodeGuruProfiler
 
     # The structure representing the createProfiliingGroupRequest.
     #
-    # @note When making an API call, you may pass CreateProfilingGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         agent_orchestration_config: {
-    #           profiling_enabled: false, # required
-    #         },
-    #         client_token: "ClientToken", # required
-    #         compute_platform: "Default", # accepts Default, AWSLambda
-    #         profiling_group_name: "ProfilingGroupName", # required
-    #         tags: {
-    #           "String" => "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] agent_orchestration_config
     #   Specifies whether profiling is enabled or disabled for the created
     #   profiling group.
@@ -605,13 +531,6 @@ module Aws::CodeGuruProfiler
 
     # The structure representing the deleteProfilingGroupRequest.
     #
-    # @note When making an API call, you may pass DeleteProfilingGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         profiling_group_name: "ProfilingGroupName", # required
-    #       }
-    #
     # @!attribute [rw] profiling_group_name
     #   The name of the profiling group to delete.
     #   @return [String]
@@ -631,13 +550,6 @@ module Aws::CodeGuruProfiler
     class DeleteProfilingGroupResponse < Aws::EmptyStructure; end
 
     # The structure representing the describeProfilingGroupRequest.
-    #
-    # @note When making an API call, you may pass DescribeProfilingGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         profiling_group_name: "ProfilingGroupName", # required
-    #       }
     #
     # @!attribute [rw] profiling_group_name
     #   The name of the profiling group to get information about.
@@ -717,15 +629,6 @@ module Aws::CodeGuruProfiler
     # The frame name, metric type, and thread states. These are used to
     # derive the value of the metric for the frame.
     #
-    # @note When making an API call, you may pass FrameMetric
-    #   data as a hash:
-    #
-    #       {
-    #         frame_name: "String", # required
-    #         thread_states: ["String"], # required
-    #         type: "AggregatedRelativeTotalTime", # required, accepts AggregatedRelativeTotalTime
-    #       }
-    #
     # @!attribute [rw] frame_name
     #   Name of the method common across the multiple occurrences of a frame
     #   in an application profile.
@@ -774,15 +677,6 @@ module Aws::CodeGuruProfiler
     end
 
     # The structure representing the GetFindingsReportAccountSummaryRequest.
-    #
-    # @note When making an API call, you may pass GetFindingsReportAccountSummaryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         daily_reports_only: false,
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
     #
     # @!attribute [rw] daily_reports_only
     #   A `Boolean` value indicating whether to only return reports from
@@ -857,13 +751,6 @@ module Aws::CodeGuruProfiler
 
     # The structure representing the GetNotificationConfigurationRequest.
     #
-    # @note When making an API call, you may pass GetNotificationConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         profiling_group_name: "ProfilingGroupName", # required
-    #       }
-    #
     # @!attribute [rw] profiling_group_name
     #   The name of the profiling group we want to get the notification
     #   configuration for.
@@ -892,13 +779,6 @@ module Aws::CodeGuruProfiler
     end
 
     # The structure representing the `getPolicyRequest`.
-    #
-    # @note When making an API call, you may pass GetPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         profiling_group_name: "ProfilingGroupName", # required
-    #       }
     #
     # @!attribute [rw] profiling_group_name
     #   The name of the profiling group.
@@ -933,18 +813,6 @@ module Aws::CodeGuruProfiler
     end
 
     # The structure representing the getProfileRequest.
-    #
-    # @note When making an API call, you may pass GetProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         accept: "String",
-    #         end_time: Time.now,
-    #         max_depth: 1,
-    #         period: "Period",
-    #         profiling_group_name: "ProfilingGroupName", # required
-    #         start_time: Time.now,
-    #       }
     #
     # @!attribute [rw] accept
     #   The format of the returned profiling data. The format maps to the
@@ -1031,16 +899,6 @@ module Aws::CodeGuruProfiler
     end
 
     # The structure representing the GetRecommendationsRequest.
-    #
-    # @note When making an API call, you may pass GetRecommendationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         end_time: Time.now, # required
-    #         locale: "Locale",
-    #         profiling_group_name: "ProfilingGroupName", # required
-    #         start_time: Time.now, # required
-    #       }
     #
     # @!attribute [rw] end_time
     #   The start time of the profile to get analysis data about. You must
@@ -1155,18 +1013,6 @@ module Aws::CodeGuruProfiler
 
     # The structure representing the ListFindingsReportsRequest.
     #
-    # @note When making an API call, you may pass ListFindingsReportsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         daily_reports_only: false,
-    #         end_time: Time.now, # required
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #         profiling_group_name: "ProfilingGroupName", # required
-    #         start_time: Time.now, # required
-    #       }
-    #
     # @!attribute [rw] daily_reports_only
     #   A `Boolean` value indicating whether to only return reports from
     #   daily profiles. If set to `True`, only analysis data from daily
@@ -1253,19 +1099,6 @@ module Aws::CodeGuruProfiler
     end
 
     # The structure representing the listProfileTimesRequest.
-    #
-    # @note When making an API call, you may pass ListProfileTimesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         end_time: Time.now, # required
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #         order_by: "TimestampDescending", # accepts TimestampDescending, TimestampAscending
-    #         period: "PT5M", # required, accepts PT5M, PT1H, P1D
-    #         profiling_group_name: "ProfilingGroupName", # required
-    #         start_time: Time.now, # required
-    #       }
     #
     # @!attribute [rw] end_time
     #   The end time of the time range from which to list the profiles.
@@ -1359,15 +1192,6 @@ module Aws::CodeGuruProfiler
 
     # The structure representing the listProfilingGroupsRequest.
     #
-    # @note When making an API call, you may pass ListProfilingGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         include_description: false,
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] include_description
     #   A `Boolean` value indicating whether to include a description. If
     #   `true`, then a list of [ `ProfilingGroupDescription` ][1] objects
@@ -1454,13 +1278,6 @@ module Aws::CodeGuruProfiler
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ProfilingGroupArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource that contains the
     #   tags to return.
@@ -1614,16 +1431,6 @@ module Aws::CodeGuruProfiler
     end
 
     # The structure representing the postAgentProfileRequest.
-    #
-    # @note When making an API call, you may pass PostAgentProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         agent_profile: "data", # required
-    #         content_type: "String", # required
-    #         profile_token: "ClientToken",
-    #         profiling_group_name: "ProfilingGroupName", # required
-    #       }
     #
     # @!attribute [rw] agent_profile
     #   The submitted profiling data.
@@ -1794,16 +1601,6 @@ module Aws::CodeGuruProfiler
 
     # The structure representing the `putPermissionRequest`.
     #
-    # @note When making an API call, you may pass PutPermissionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         action_group: "agentPermissions", # required, accepts agentPermissions
-    #         principals: ["Principal"], # required
-    #         profiling_group_name: "ProfilingGroupName", # required
-    #         revision_id: "RevisionId",
-    #       }
-    #
     # @!attribute [rw] action_group
     #   Specifies an action group that contains permissions to add to a
     #   profiling group resource. One action group is supported,
@@ -1911,14 +1708,6 @@ module Aws::CodeGuruProfiler
 
     # The structure representing the RemoveNotificationChannelRequest.
     #
-    # @note When making an API call, you may pass RemoveNotificationChannelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_id: "ChannelId", # required
-    #         profiling_group_name: "ProfilingGroupName", # required
-    #       }
-    #
     # @!attribute [rw] channel_id
     #   The id of the channel that we want to stop receiving notifications.
     #   @return [String]
@@ -1953,15 +1742,6 @@ module Aws::CodeGuruProfiler
 
     # The structure representing the
     # <code>removePermissionRequest</code>.</p>
-    #
-    # @note When making an API call, you may pass RemovePermissionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         action_group: "agentPermissions", # required, accepts agentPermissions
-    #         profiling_group_name: "ProfilingGroupName", # required
-    #         revision_id: "RevisionId", # required
-    #       }
     #
     # @!attribute [rw] action_group
     #   Specifies an action group that contains the permissions to remove
@@ -2046,16 +1826,6 @@ module Aws::CodeGuruProfiler
 
     # The structure representing the SubmitFeedbackRequest.
     #
-    # @note When making an API call, you may pass SubmitFeedbackRequest
-    #   data as a hash:
-    #
-    #       {
-    #         anomaly_instance_id: "AnomalyInstanceId", # required
-    #         comment: "String",
-    #         profiling_group_name: "ProfilingGroupName", # required
-    #         type: "Positive", # required, accepts Positive, Negative
-    #       }
-    #
     # @!attribute [rw] anomaly_instance_id
     #   The universally unique identifier (UUID) of the [ `AnomalyInstance`
     #   ][1] object that is included in the analysis data.
@@ -2096,16 +1866,6 @@ module Aws::CodeGuruProfiler
     #
     class SubmitFeedbackResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ProfilingGroupArn", # required
-    #         tags: { # required
-    #           "String" => "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource that the tags are
     #   added to.
@@ -2159,14 +1919,6 @@ module Aws::CodeGuruProfiler
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ProfilingGroupArn", # required
-    #         tag_keys: ["String"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource that contains the
     #   tags to remove.
@@ -2191,16 +1943,6 @@ module Aws::CodeGuruProfiler
     class UntagResourceResponse < Aws::EmptyStructure; end
 
     # The structure representing the updateProfilingGroupRequest.
-    #
-    # @note When making an API call, you may pass UpdateProfilingGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         agent_orchestration_config: { # required
-    #           profiling_enabled: false, # required
-    #         },
-    #         profiling_group_name: "ProfilingGroupName", # required
-    #       }
     #
     # @!attribute [rw] agent_orchestration_config
     #   Specifies whether profiling is enabled or disabled for a profiling

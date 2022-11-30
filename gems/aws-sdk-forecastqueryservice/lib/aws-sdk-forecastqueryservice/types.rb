@@ -101,19 +101,6 @@ module Aws::ForecastQueryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass QueryForecastRequest
-    #   data as a hash:
-    #
-    #       {
-    #         forecast_arn: "Arn", # required
-    #         start_date: "DateTime",
-    #         end_date: "DateTime",
-    #         filters: { # required
-    #           "AttributeName" => "AttributeValue",
-    #         },
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] forecast_arn
     #   The Amazon Resource Name (ARN) of the forecast to query.
     #   @return [String]
@@ -175,19 +162,6 @@ module Aws::ForecastQueryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass QueryWhatIfForecastRequest
-    #   data as a hash:
-    #
-    #       {
-    #         what_if_forecast_arn: "LongArn", # required
-    #         start_date: "DateTime",
-    #         end_date: "DateTime",
-    #         filters: { # required
-    #           "AttributeName" => "AttributeValue",
-    #         },
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] what_if_forecast_arn
     #   The Amazon Resource Name (ARN) of the what-if forecast to query.
     #   @return [String]

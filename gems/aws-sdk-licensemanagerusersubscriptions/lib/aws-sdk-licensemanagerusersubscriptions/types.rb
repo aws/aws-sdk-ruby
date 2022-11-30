@@ -25,13 +25,6 @@ module Aws::LicenseManagerUserSubscriptions
 
     # Details about an Active Directory identity provider.
     #
-    # @note When making an API call, you may pass ActiveDirectoryIdentityProvider
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "String",
-    #       }
-    #
     # @!attribute [rw] directory_id
     #   The directory ID for an Active Directory identity provider.
     #   @return [String]
@@ -44,20 +37,6 @@ module Aws::LicenseManagerUserSubscriptions
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "String",
-    #         identity_provider: { # required
-    #           active_directory_identity_provider: {
-    #             directory_id: "String",
-    #           },
-    #         },
-    #         instance_id: "String", # required
-    #         username: "String", # required
-    #       }
-    #
     # @!attribute [rw] domain
     #   The domain name of the user.
     #   @return [String]
@@ -111,18 +90,6 @@ module Aws::LicenseManagerUserSubscriptions
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeregisterIdentityProviderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity_provider: { # required
-    #           active_directory_identity_provider: {
-    #             directory_id: "String",
-    #           },
-    #         },
-    #         product: "String", # required
-    #       }
-    #
     # @!attribute [rw] identity_provider
     #   An object that specifies details for the identity provider.
     #   @return [Types::IdentityProvider]
@@ -153,20 +120,6 @@ module Aws::LicenseManagerUserSubscriptions
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "String",
-    #         identity_provider: { # required
-    #           active_directory_identity_provider: {
-    #             directory_id: "String",
-    #           },
-    #         },
-    #         instance_id: "String", # required
-    #         username: "String", # required
-    #       }
-    #
     # @!attribute [rw] domain
     #   The domain name of the user.
     #   @return [String]
@@ -210,15 +163,6 @@ module Aws::LicenseManagerUserSubscriptions
     # results from a describe operation. Filters can be used to match a set
     # of resources by specific criteria, such as tags, attributes, or IDs.
     #
-    # @note When making an API call, you may pass Filter
-    #   data as a hash:
-    #
-    #       {
-    #         attribute: "String",
-    #         operation: "String",
-    #         value: "String",
-    #       }
-    #
     # @!attribute [rw] attribute
     #   The name of an attribute to use as a filter.
     #   @return [String]
@@ -242,10 +186,6 @@ module Aws::LicenseManagerUserSubscriptions
     end
 
     # Details about an identity provider.
-    #
-    # @note IdentityProvider is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note IdentityProvider is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of IdentityProvider corresponding to the set member.
     #
     # @!attribute [rw] active_directory_identity_provider
     #   An object that details an Active Directory identity provider.
@@ -396,14 +336,6 @@ module Aws::LicenseManagerUserSubscriptions
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListIdentityProvidersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   Maximum number of results to return in a single call.
     #   @return [Integer]
@@ -438,21 +370,6 @@ module Aws::LicenseManagerUserSubscriptions
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListInstancesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             attribute: "String",
-    #             operation: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] filters
     #   An array of structures that you can use to filter the results to
     #   those that match one or more sets of key-value pairs that you
@@ -494,27 +411,6 @@ module Aws::LicenseManagerUserSubscriptions
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListProductSubscriptionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             attribute: "String",
-    #             operation: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #         identity_provider: { # required
-    #           active_directory_identity_provider: {
-    #             directory_id: "String",
-    #           },
-    #         },
-    #         max_results: 1,
-    #         next_token: "String",
-    #         product: "String", # required
-    #       }
-    #
     # @!attribute [rw] filters
     #   An array of structures that you can use to filter the results to
     #   those that match one or more sets of key-value pairs that you
@@ -566,27 +462,6 @@ module Aws::LicenseManagerUserSubscriptions
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListUserAssociationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             attribute: "String",
-    #             operation: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #         identity_provider: { # required
-    #           active_directory_identity_provider: {
-    #             directory_id: "String",
-    #           },
-    #         },
-    #         instance_id: "String", # required
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] filters
     #   An array of structures that you can use to filter the results to
     #   those that match one or more sets of key-value pairs that you
@@ -687,22 +562,6 @@ module Aws::LicenseManagerUserSubscriptions
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RegisterIdentityProviderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity_provider: { # required
-    #           active_directory_identity_provider: {
-    #             directory_id: "String",
-    #           },
-    #         },
-    #         product: "String", # required
-    #         settings: {
-    #           security_group_id: "SecurityGroup", # required
-    #           subnets: ["Subnet"], # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] identity_provider
     #   An object that specifies details for the identity provider.
     #   @return [Types::IdentityProvider]
@@ -771,14 +630,6 @@ module Aws::LicenseManagerUserSubscriptions
     # security group should permit inbound TCP port 1688 communication from
     # resources in the VPC.
     #
-    # @note When making an API call, you may pass Settings
-    #   data as a hash:
-    #
-    #       {
-    #         security_group_id: "SecurityGroup", # required
-    #         subnets: ["Subnet"], # required
-    #       }
-    #
     # @!attribute [rw] security_group_id
     #   A security group ID that allows inbound TCP port 1688 communication
     #   between resources in your VPC and the VPC endpoint for activation
@@ -798,20 +649,6 @@ module Aws::LicenseManagerUserSubscriptions
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartProductSubscriptionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "String",
-    #         identity_provider: { # required
-    #           active_directory_identity_provider: {
-    #             directory_id: "String",
-    #           },
-    #         },
-    #         product: "String", # required
-    #         username: "String", # required
-    #       }
-    #
     # @!attribute [rw] domain
     #   The domain name of the user.
     #   @return [String]
@@ -851,20 +688,6 @@ module Aws::LicenseManagerUserSubscriptions
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopProductSubscriptionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "String",
-    #         identity_provider: { # required
-    #           active_directory_identity_provider: {
-    #             directory_id: "String",
-    #           },
-    #         },
-    #         product: "String", # required
-    #         username: "String", # required
-    #       }
-    #
     # @!attribute [rw] domain
     #   The domain name of the user.
     #   @return [String]
@@ -918,23 +741,6 @@ module Aws::LicenseManagerUserSubscriptions
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateIdentityProviderSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity_provider: { # required
-    #           active_directory_identity_provider: {
-    #             directory_id: "String",
-    #           },
-    #         },
-    #         product: "String", # required
-    #         update_settings: { # required
-    #           add_subnets: ["Subnet"], # required
-    #           remove_subnets: ["Subnet"], # required
-    #           security_group_id: "SecurityGroup",
-    #         },
-    #       }
-    #
     # @!attribute [rw] identity_provider
     #   Details about an identity provider.
     #   @return [Types::IdentityProvider]
@@ -979,15 +785,6 @@ module Aws::LicenseManagerUserSubscriptions
 
     # Updates the registered identity provider’s product related
     # configuration settings such as the subnets to provision VPC endpoints.
-    #
-    # @note When making an API call, you may pass UpdateSettings
-    #   data as a hash:
-    #
-    #       {
-    #         add_subnets: ["Subnet"], # required
-    #         remove_subnets: ["Subnet"], # required
-    #         security_group_id: "SecurityGroup",
-    #       }
     #
     # @!attribute [rw] add_subnets
     #   The ID of one or more subnets in which License Manager will create a

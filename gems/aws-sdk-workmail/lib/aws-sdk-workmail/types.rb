@@ -88,15 +88,6 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateDelegateToResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         resource_id: "ResourceId", # required
-    #         entity_id: "WorkMailIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The organization under which the resource exists.
     #   @return [String]
@@ -123,15 +114,6 @@ module Aws::WorkMail
     #
     class AssociateDelegateToResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass AssociateMemberToGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         group_id: "WorkMailIdentifier", # required
-    #         member_id: "WorkMailIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The organization under which the group exists.
     #   @return [String]
@@ -158,14 +140,6 @@ module Aws::WorkMail
     #
     class AssociateMemberToGroupResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass AssumeImpersonationRoleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         impersonation_role_id: "ImpersonationRoleId", # required
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The WorkMail organization under which the impersonation role will be
     #   assumed.
@@ -248,15 +222,6 @@ module Aws::WorkMail
     # At least one delegate must be associated to the resource to disable
     # automatic replies from the resource.
     #
-    # @note When making an API call, you may pass BookingOptions
-    #   data as a hash:
-    #
-    #       {
-    #         auto_accept_requests: false,
-    #         auto_decline_recurring_requests: false,
-    #         auto_decline_conflicting_requests: false,
-    #       }
-    #
     # @!attribute [rw] auto_accept_requests
     #   The resource's ability to automatically reply to requests. If
     #   disabled, delegates must be associated to the resource.
@@ -282,15 +247,6 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CancelMailboxExportJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "IdempotencyClientToken", # required
-    #         job_id: "MailboxExportJobId", # required
-    #         organization_id: "OrganizationId", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   The idempotency token for the client request.
     #
@@ -320,15 +276,6 @@ module Aws::WorkMail
     #
     class CancelMailboxExportJobResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass CreateAliasRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         entity_id: "WorkMailIdentifier", # required
-    #         alias: "EmailAddress", # required
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The organization under which the member (user or group) exists.
     #   @return [String]
@@ -355,23 +302,6 @@ module Aws::WorkMail
     #
     class CreateAliasResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass CreateAvailabilityConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "IdempotencyClientToken",
-    #         organization_id: "OrganizationId", # required
-    #         domain_name: "DomainName", # required
-    #         ews_provider: {
-    #           ews_endpoint: "Url", # required
-    #           ews_username: "ExternalUserName", # required
-    #           ews_password: "Password", # required
-    #         },
-    #         lambda_provider: {
-    #           lambda_arn: "LambdaArn", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_token
     #   An idempotent token that ensures that an API request is executed
     #   only once.
@@ -417,14 +347,6 @@ module Aws::WorkMail
     #
     class CreateAvailabilityConfigurationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass CreateGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         name: "GroupName", # required
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The organization under which the group is to be created.
     #   @return [String]
@@ -454,27 +376,6 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateImpersonationRoleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "IdempotencyClientToken",
-    #         organization_id: "OrganizationId", # required
-    #         name: "ImpersonationRoleName", # required
-    #         type: "FULL_ACCESS", # required, accepts FULL_ACCESS, READ_ONLY
-    #         description: "ImpersonationRoleDescription",
-    #         rules: [ # required
-    #           {
-    #             impersonation_rule_id: "ImpersonationRuleId", # required
-    #             name: "ImpersonationRuleName",
-    #             description: "ImpersonationRuleDescription",
-    #             effect: "ALLOW", # required, accepts ALLOW, DENY
-    #             target_users: ["EntityIdentifier"],
-    #             not_target_users: ["EntityIdentifier"],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] client_token
     #   The idempotency token for the client request.
     #
@@ -529,25 +430,6 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateMobileDeviceAccessRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         client_token: "IdempotencyClientToken",
-    #         name: "MobileDeviceAccessRuleName", # required
-    #         description: "MobileDeviceAccessRuleDescription",
-    #         effect: "ALLOW", # required, accepts ALLOW, DENY
-    #         device_types: ["DeviceType"],
-    #         not_device_types: ["DeviceType"],
-    #         device_models: ["DeviceModel"],
-    #         not_device_models: ["DeviceModel"],
-    #         device_operating_systems: ["DeviceOperatingSystem"],
-    #         not_device_operating_systems: ["DeviceOperatingSystem"],
-    #         device_user_agents: ["DeviceUserAgent"],
-    #         not_device_user_agents: ["DeviceUserAgent"],
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The WorkMail organization under which the rule will be created.
     #   @return [String]
@@ -640,23 +522,6 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateOrganizationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         directory_id: "DirectoryId",
-    #         alias: "OrganizationName", # required
-    #         client_token: "IdempotencyClientToken",
-    #         domains: [
-    #           {
-    #             domain_name: "DomainName",
-    #             hosted_zone_id: "HostedZoneId",
-    #           },
-    #         ],
-    #         kms_key_arn: "KmsKeyArn",
-    #         enable_interoperability: false,
-    #       }
-    #
     # @!attribute [rw] directory_id
     #   The AWS Directory Service directory ID.
     #   @return [String]
@@ -712,15 +577,6 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         name: "ResourceName", # required
-    #         type: "ROOM", # required, accepts ROOM, EQUIPMENT
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The identifier associated with the organization for which the
     #   resource is created.
@@ -757,16 +613,6 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         name: "UserName", # required
-    #         display_name: "String", # required
-    #         password: "Password", # required
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The identifier of the organization for which the user is created.
     #   @return [String]
@@ -828,14 +674,6 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAccessControlRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         name: "AccessControlRuleName", # required
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The identifier for the organization.
     #   @return [String]
@@ -857,15 +695,6 @@ module Aws::WorkMail
     #
     class DeleteAccessControlRuleResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteAliasRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         entity_id: "WorkMailIdentifier", # required
-    #         alias: "EmailAddress", # required
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The identifier for the organization under which the user exists.
     #   @return [String]
@@ -895,14 +724,6 @@ module Aws::WorkMail
     #
     class DeleteAliasResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteAvailabilityConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         domain_name: "DomainName", # required
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The WorkMail organization for which the `AvailabilityConfiguration`
     #   will be deleted.
@@ -926,13 +747,6 @@ module Aws::WorkMail
     #
     class DeleteAvailabilityConfigurationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteEmailMonitoringConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The ID of the organization from which the email monitoring
     #   configuration is deleted.
@@ -950,14 +764,6 @@ module Aws::WorkMail
     #
     class DeleteEmailMonitoringConfigurationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         group_id: "WorkMailIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The organization that contains the group.
     #   @return [String]
@@ -979,14 +785,6 @@ module Aws::WorkMail
     #
     class DeleteGroupResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteImpersonationRoleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         impersonation_role_id: "ImpersonationRoleId", # required
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The WorkMail organization from which to delete the impersonation
     #   role.
@@ -1009,15 +807,6 @@ module Aws::WorkMail
     #
     class DeleteImpersonationRoleResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteMailboxPermissionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         entity_id: "WorkMailIdentifier", # required
-    #         grantee_id: "WorkMailIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The identifier of the organization under which the member (user or
     #   group) exists.
@@ -1046,15 +835,6 @@ module Aws::WorkMail
     #
     class DeleteMailboxPermissionsResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteMobileDeviceAccessOverrideRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         user_id: "EntityIdentifier", # required
-    #         device_id: "DeviceId", # required
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The WorkMail organization for which the access override will be
     #   deleted.
@@ -1091,14 +871,6 @@ module Aws::WorkMail
     #
     class DeleteMobileDeviceAccessOverrideResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteMobileDeviceAccessRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         mobile_device_access_rule_id: "MobileDeviceAccessRuleId", # required
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The WorkMail organization under which the rule will be deleted.
     #   @return [String]
@@ -1120,15 +892,6 @@ module Aws::WorkMail
     #
     class DeleteMobileDeviceAccessRuleResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteOrganizationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "IdempotencyClientToken",
-    #         organization_id: "OrganizationId", # required
-    #         delete_directory: false, # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   The idempotency token associated with the request.
     #
@@ -1172,14 +935,6 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         resource_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The identifier associated with the organization from which the
     #   resource is deleted.
@@ -1202,14 +957,6 @@ module Aws::WorkMail
     #
     class DeleteResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteRetentionPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         id: "ShortString", # required
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The organization ID.
     #   @return [String]
@@ -1231,14 +978,6 @@ module Aws::WorkMail
     #
     class DeleteRetentionPolicyResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         user_id: "WorkMailIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The organization that contains the user to be deleted.
     #   @return [String]
@@ -1260,14 +999,6 @@ module Aws::WorkMail
     #
     class DeleteUserResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeregisterFromWorkMailRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         entity_id: "WorkMailIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The identifier for the organization under which the WorkMail entity
     #   exists.
@@ -1290,14 +1021,6 @@ module Aws::WorkMail
     #
     class DeregisterFromWorkMailResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeregisterMailDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         domain_name: "WorkMailDomainName", # required
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The WorkMail organization for which the domain will be deregistered.
     #   @return [String]
@@ -1319,13 +1042,6 @@ module Aws::WorkMail
     #
     class DeregisterMailDomainResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeEmailMonitoringConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The ID of the organization for which the email monitoring
     #   configuration is described.
@@ -1358,14 +1074,6 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         group_id: "WorkMailIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The identifier for the organization under which the group exists.
     #   @return [String]
@@ -1423,13 +1131,6 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeInboundDmarcSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   Lists the ID of the given organization.
     #   @return [String]
@@ -1454,14 +1155,6 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeMailboxExportJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "MailboxExportJobId", # required
-    #         organization_id: "OrganizationId", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The mailbox export job ID.
     #   @return [String]
@@ -1551,13 +1244,6 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeOrganizationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The identifier for the organization to be described.
     #   @return [String]
@@ -1625,14 +1311,6 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         resource_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The identifier associated with the organization for which the
     #   resource is described.
@@ -1701,14 +1379,6 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         user_id: "WorkMailIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The identifier for the organization under which the user exists.
     #   @return [String]
@@ -1824,15 +1494,6 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateDelegateFromResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         resource_id: "ResourceId", # required
-    #         entity_id: "WorkMailIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The identifier for the organization under which the resource exists.
     #   @return [String]
@@ -1861,15 +1522,6 @@ module Aws::WorkMail
     #
     class DisassociateDelegateFromResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DisassociateMemberFromGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         group_id: "WorkMailIdentifier", # required
-    #         member_id: "WorkMailIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The identifier for the organization under which the group exists.
     #   @return [String]
@@ -1931,14 +1583,6 @@ module Aws::WorkMail
     #
     #
     # [1]: https://docs.aws.amazon.com/workmail/latest/adminguide/add_domain.html
-    #
-    # @note When making an API call, you may pass Domain
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName",
-    #         hosted_zone_id: "HostedZoneId",
-    #       }
     #
     # @!attribute [rw] domain_name
     #   The fully qualified domain name.
@@ -2017,15 +1661,6 @@ module Aws::WorkMail
     # Describes an EWS based availability provider. This is only used as
     # input to the service.
     #
-    # @note When making an API call, you may pass EwsAvailabilityProvider
-    #   data as a hash:
-    #
-    #       {
-    #         ews_endpoint: "Url", # required
-    #         ews_username: "ExternalUserName", # required
-    #         ews_password: "Password", # required
-    #       }
-    #
     # @!attribute [rw] ews_endpoint
     #   The endpoint of the remote EWS server.
     #   @return [String]
@@ -2051,15 +1686,6 @@ module Aws::WorkMail
     # The configuration applied to an organization's folders by its
     # retention policy.
     #
-    # @note When making an API call, you may pass FolderConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         name: "INBOX", # required, accepts INBOX, DELETED_ITEMS, SENT_ITEMS, DRAFTS, JUNK_EMAIL
-    #         action: "NONE", # required, accepts NONE, DELETE, PERMANENTLY_DELETE
-    #         period: 1,
-    #       }
-    #
     # @!attribute [rw] name
     #   The folder name.
     #   @return [String]
@@ -2084,17 +1710,6 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAccessControlEffectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         ip_address: "IpAddress", # required
-    #         action: "AccessControlRuleAction", # required
-    #         user_id: "WorkMailIdentifier",
-    #         impersonation_role_id: "ImpersonationRoleId",
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The identifier for the organization.
     #   @return [String]
@@ -2146,13 +1761,6 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDefaultRetentionPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The organization ID.
     #   @return [String]
@@ -2192,15 +1800,6 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetImpersonationRoleEffectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         impersonation_role_id: "ImpersonationRoleId", # required
-    #         target_user: "EntityIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The WorkMail organization where the impersonation role is defined.
     #   @return [String]
@@ -2256,14 +1855,6 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetImpersonationRoleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         impersonation_role_id: "ImpersonationRoleId", # required
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The WorkMail organization from which to retrieve the impersonation
     #   role.
@@ -2324,14 +1915,6 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetMailDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         domain_name: "WorkMailDomainName", # required
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The WorkMail organization for which the domain is retrieved.
     #   @return [String]
@@ -2386,14 +1969,6 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetMailboxDetailsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         user_id: "WorkMailIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The identifier for the organization that contains the user whose
     #   mailbox details are being requested.
@@ -2430,17 +2005,6 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetMobileDeviceAccessEffectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         device_type: "DeviceType",
-    #         device_model: "DeviceModel",
-    #         device_operating_system: "DeviceOperatingSystem",
-    #         device_user_agent: "DeviceUserAgent",
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The WorkMail organization to simulate the access effect for.
     #   @return [String]
@@ -2493,15 +2057,6 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetMobileDeviceAccessOverrideRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         user_id: "EntityIdentifier", # required
-    #         device_id: "DeviceId", # required
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The WorkMail organization to which you want to apply the override.
     #   @return [String]
@@ -2664,18 +2219,6 @@ module Aws::WorkMail
 
     # The rules for the given impersonation role.
     #
-    # @note When making an API call, you may pass ImpersonationRule
-    #   data as a hash:
-    #
-    #       {
-    #         impersonation_rule_id: "ImpersonationRuleId", # required
-    #         name: "ImpersonationRuleName",
-    #         description: "ImpersonationRuleDescription",
-    #         effect: "ALLOW", # required, accepts ALLOW, DENY
-    #         target_users: ["EntityIdentifier"],
-    #         not_target_users: ["EntityIdentifier"],
-    #       }
-    #
     # @!attribute [rw] impersonation_rule_id
     #   The identifier of the rule.
     #   @return [String]
@@ -2778,13 +2321,6 @@ module Aws::WorkMail
 
     # Describes a Lambda based availability provider.
     #
-    # @note When making an API call, you may pass LambdaAvailabilityProvider
-    #   data as a hash:
-    #
-    #       {
-    #         lambda_arn: "LambdaArn", # required
-    #       }
-    #
     # @!attribute [rw] lambda_arn
     #   The Amazon Resource Name (ARN) of the Lambda that acts as the
     #   availability provider.
@@ -2811,13 +2347,6 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAccessControlRulesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The identifier for the organization.
     #   @return [String]
@@ -2842,16 +2371,6 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAliasesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         entity_id: "WorkMailIdentifier", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The identifier for the organization under which the entity exists.
     #   @return [String]
@@ -2898,15 +2417,6 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAvailabilityConfigurationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The WorkMail organization for which the
     #   `AvailabilityConfiguration`'s will be listed.
@@ -2950,16 +2460,6 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListGroupMembersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         group_id: "WorkMailIdentifier", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The identifier for the organization under which the group exists.
     #   @return [String]
@@ -3007,15 +2507,6 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The identifier for the organization under which the groups exist.
     #   @return [String]
@@ -3057,15 +2548,6 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListImpersonationRolesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The WorkMail organization to which the listed impersonation roles
     #   belong.
@@ -3109,15 +2591,6 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListMailDomainsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The WorkMail organization for which to list domains.
     #   @return [String]
@@ -3161,15 +2634,6 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListMailboxExportJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The organization ID.
     #   @return [String]
@@ -3209,16 +2673,6 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListMailboxPermissionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         entity_id: "WorkMailIdentifier", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The identifier of the organization under which the user, group, or
     #   resource exists.
@@ -3267,17 +2721,6 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListMobileDeviceAccessOverridesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         user_id: "EntityIdentifier",
-    #         device_id: "DeviceId",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The WorkMail organization under which to list mobile device access
     #   overrides.
@@ -3339,13 +2782,6 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListMobileDeviceAccessRulesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The WorkMail organization for which to list the rules.
     #   @return [String]
@@ -3371,14 +2807,6 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListOrganizationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The token to use to retrieve the next page of results. The first
     #   call does not contain any tokens.
@@ -3416,16 +2844,6 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListResourceDelegatesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         resource_id: "WorkMailIdentifier", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The identifier for the organization that contains the resource for
     #   which delegates are listed.
@@ -3474,15 +2892,6 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListResourcesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The identifier for the organization under which the resources exist.
     #   @return [String]
@@ -3525,13 +2934,6 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The resource ARN.
     #   @return [String]
@@ -3556,15 +2958,6 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListUsersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The identifier for the organization under which the users exist.
     #   @return [String]
@@ -4015,24 +3408,6 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutAccessControlRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "AccessControlRuleName", # required
-    #         effect: "ALLOW", # required, accepts ALLOW, DENY
-    #         description: "AccessControlRuleDescription", # required
-    #         ip_ranges: ["IpRange"],
-    #         not_ip_ranges: ["IpRange"],
-    #         actions: ["AccessControlRuleAction"],
-    #         not_actions: ["AccessControlRuleAction"],
-    #         user_ids: ["WorkMailIdentifier"],
-    #         not_user_ids: ["WorkMailIdentifier"],
-    #         organization_id: "OrganizationId", # required
-    #         impersonation_role_ids: ["ImpersonationRoleId"],
-    #         not_impersonation_role_ids: ["ImpersonationRoleId"],
-    #       }
-    #
     # @!attribute [rw] name
     #   The rule name.
     #   @return [String]
@@ -4108,15 +3483,6 @@ module Aws::WorkMail
     #
     class PutAccessControlRuleResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass PutEmailMonitoringConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         role_arn: "RoleArn", # required
-    #         log_group_arn: "LogGroupArn", # required
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The ID of the organization for which the email monitoring
     #   configuration is set.
@@ -4146,14 +3512,6 @@ module Aws::WorkMail
     #
     class PutEmailMonitoringConfigurationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass PutInboundDmarcSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         enforced: false, # required
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The ID of the organization that you are applying the DMARC policy
     #   to.
@@ -4176,16 +3534,6 @@ module Aws::WorkMail
     #
     class PutInboundDmarcSettingsResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass PutMailboxPermissionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         entity_id: "WorkMailIdentifier", # required
-    #         grantee_id: "WorkMailIdentifier", # required
-    #         permission_values: ["FULL_ACCESS"], # required, accepts FULL_ACCESS, SEND_AS, SEND_ON_BEHALF
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The identifier of the organization under which the user, group, or
     #   resource exists.
@@ -4226,17 +3574,6 @@ module Aws::WorkMail
     #
     class PutMailboxPermissionsResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass PutMobileDeviceAccessOverrideRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         user_id: "EntityIdentifier", # required
-    #         device_id: "DeviceId", # required
-    #         effect: "ALLOW", # required, accepts ALLOW, DENY
-    #         description: "MobileDeviceAccessRuleDescription",
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   Identifies the WorkMail organization for which you create the
     #   override.
@@ -4283,23 +3620,6 @@ module Aws::WorkMail
     #
     class PutMobileDeviceAccessOverrideResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass PutRetentionPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         id: "ShortString",
-    #         name: "ShortString", # required
-    #         description: "PolicyDescription",
-    #         folder_configurations: [ # required
-    #           {
-    #             name: "INBOX", # required, accepts INBOX, DELETED_ITEMS, SENT_ITEMS, DRAFTS, JUNK_EMAIL
-    #             action: "NONE", # required, accepts NONE, DELETE, PERMANENTLY_DELETE
-    #             period: 1,
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The organization ID.
     #   @return [String]
@@ -4356,15 +3676,6 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RegisterMailDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "IdempotencyClientToken",
-    #         organization_id: "OrganizationId", # required
-    #         domain_name: "WorkMailDomainName", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Idempotency token used when retrying requests.
     #
@@ -4394,15 +3705,6 @@ module Aws::WorkMail
     #
     class RegisterMailDomainResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass RegisterToWorkMailRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         entity_id: "WorkMailIdentifier", # required
-    #         email: "EmailAddress", # required
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The identifier for the organization under which the user, group, or
     #   resource exists.
@@ -4443,15 +3745,6 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ResetPasswordRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         user_id: "WorkMailIdentifier", # required
-    #         password: "Password", # required
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The identifier of the organization that contains the user for which
     #   the password is reset.
@@ -4538,20 +3831,6 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartMailboxExportJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "IdempotencyClientToken", # required
-    #         organization_id: "OrganizationId", # required
-    #         entity_id: "WorkMailIdentifier", # required
-    #         description: "Description",
-    #         role_arn: "RoleArn", # required
-    #         kms_key_arn: "KmsKeyArn", # required
-    #         s3_bucket_name: "S3BucketName", # required
-    #         s3_prefix: "S3ObjectKey", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   The idempotency token for the client request.
     #
@@ -4618,14 +3897,6 @@ module Aws::WorkMail
 
     # Describes a tag applied to a resource.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The key of the tag.
     #   @return [String]
@@ -4643,19 +3914,6 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The resource ARN.
     #   @return [String]
@@ -4677,22 +3935,6 @@ module Aws::WorkMail
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass TestAvailabilityConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         domain_name: "DomainName",
-    #         ews_provider: {
-    #           ews_endpoint: "Url", # required
-    #           ews_username: "ExternalUserName", # required
-    #           ews_password: "Password", # required
-    #         },
-    #         lambda_provider: {
-    #           lambda_arn: "LambdaArn", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The WorkMail organization where the availability provider will be
     #   tested.
@@ -4768,14 +4010,6 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The resource ARN.
     #   @return [String]
@@ -4797,22 +4031,6 @@ module Aws::WorkMail
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateAvailabilityConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         domain_name: "DomainName", # required
-    #         ews_provider: {
-    #           ews_endpoint: "Url", # required
-    #           ews_username: "ExternalUserName", # required
-    #           ews_password: "Password", # required
-    #         },
-    #         lambda_provider: {
-    #           lambda_arn: "LambdaArn", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The WorkMail organization for which the `AvailabilityConfiguration`
     #   will be updated.
@@ -4852,14 +4070,6 @@ module Aws::WorkMail
     #
     class UpdateAvailabilityConfigurationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateDefaultMailDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         domain_name: "WorkMailDomainName", # required
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The WorkMail organization for which to list domains.
     #   @return [String]
@@ -4881,27 +4091,6 @@ module Aws::WorkMail
     #
     class UpdateDefaultMailDomainResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateImpersonationRoleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         impersonation_role_id: "ImpersonationRoleId", # required
-    #         name: "ImpersonationRoleName", # required
-    #         type: "FULL_ACCESS", # required, accepts FULL_ACCESS, READ_ONLY
-    #         description: "ImpersonationRoleDescription",
-    #         rules: [ # required
-    #           {
-    #             impersonation_rule_id: "ImpersonationRuleId", # required
-    #             name: "ImpersonationRuleName",
-    #             description: "ImpersonationRuleDescription",
-    #             effect: "ALLOW", # required, accepts ALLOW, DENY
-    #             target_users: ["EntityIdentifier"],
-    #             not_target_users: ["EntityIdentifier"],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The WorkMail organization that contains the impersonation role to
     #   update.
@@ -4944,15 +4133,6 @@ module Aws::WorkMail
     #
     class UpdateImpersonationRoleResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateMailboxQuotaRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         user_id: "WorkMailIdentifier", # required
-    #         mailbox_quota: 1, # required
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The identifier for the organization that contains the user for whom
     #   to update the mailbox quota.
@@ -4980,25 +4160,6 @@ module Aws::WorkMail
     #
     class UpdateMailboxQuotaResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateMobileDeviceAccessRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         mobile_device_access_rule_id: "MobileDeviceAccessRuleId", # required
-    #         name: "MobileDeviceAccessRuleName", # required
-    #         description: "MobileDeviceAccessRuleDescription",
-    #         effect: "ALLOW", # required, accepts ALLOW, DENY
-    #         device_types: ["DeviceType"],
-    #         not_device_types: ["DeviceType"],
-    #         device_models: ["DeviceModel"],
-    #         not_device_models: ["DeviceModel"],
-    #         device_operating_systems: ["DeviceOperatingSystem"],
-    #         not_device_operating_systems: ["DeviceOperatingSystem"],
-    #         device_user_agents: ["DeviceUserAgent"],
-    #         not_device_user_agents: ["DeviceUserAgent"],
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The WorkMail organization under which the rule will be updated.
     #   @return [String]
@@ -5080,15 +4241,6 @@ module Aws::WorkMail
     #
     class UpdateMobileDeviceAccessRuleResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdatePrimaryEmailAddressRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         entity_id: "WorkMailIdentifier", # required
-    #         email: "EmailAddress", # required
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The organization that contains the user, group, or resource to
     #   update.
@@ -5116,20 +4268,6 @@ module Aws::WorkMail
     #
     class UpdatePrimaryEmailAddressResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_id: "OrganizationId", # required
-    #         resource_id: "ResourceId", # required
-    #         name: "ResourceName",
-    #         booking_options: {
-    #           auto_accept_requests: false,
-    #           auto_decline_recurring_requests: false,
-    #           auto_decline_conflicting_requests: false,
-    #         },
-    #       }
-    #
     # @!attribute [rw] organization_id
     #   The identifier associated with the organization for which the
     #   resource is updated.

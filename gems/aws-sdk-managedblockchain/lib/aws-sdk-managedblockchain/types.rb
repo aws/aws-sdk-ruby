@@ -137,15 +137,6 @@ module Aws::ManagedBlockchain
     #
     # Applies only to Hyperledger Fabric.
     #
-    # @note When making an API call, you may pass ApprovalThresholdPolicy
-    #   data as a hash:
-    #
-    #       {
-    #         threshold_percentage: 1,
-    #         proposal_duration_in_hours: 1,
-    #         threshold_comparator: "GREATER_THAN", # accepts GREATER_THAN, GREATER_THAN_OR_EQUAL_TO
-    #       }
-    #
     # @!attribute [rw] threshold_percentage
     #   The percentage of votes among all members that must be `YES` for a
     #   proposal to be approved. For example, a `ThresholdPercentage` value
@@ -180,14 +171,6 @@ module Aws::ManagedBlockchain
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAccessorInput
-    #   data as a hash:
-    #
-    #       {
-    #         client_request_token: "ClientRequestTokenString", # required
-    #         accessor_type: "BILLING_TOKEN", # required, accepts BILLING_TOKEN
-    #       }
-    #
     # @!attribute [rw] client_request_token
     #   This is a unique, case-sensitive identifier that you provide to
     #   ensure the idempotency of the operation. An idempotent operation
@@ -237,38 +220,6 @@ module Aws::ManagedBlockchain
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateMemberInput
-    #   data as a hash:
-    #
-    #       {
-    #         client_request_token: "ClientRequestTokenString", # required
-    #         invitation_id: "ResourceIdString", # required
-    #         network_id: "ResourceIdString", # required
-    #         member_configuration: { # required
-    #           name: "NetworkMemberNameString", # required
-    #           description: "DescriptionString",
-    #           framework_configuration: { # required
-    #             fabric: {
-    #               admin_username: "UsernameString", # required
-    #               admin_password: "PasswordString", # required
-    #             },
-    #           },
-    #           log_publishing_configuration: {
-    #             fabric: {
-    #               ca_logs: {
-    #                 cloudwatch: {
-    #                   enabled: false,
-    #                 },
-    #               },
-    #             },
-    #           },
-    #           tags: {
-    #             "TagKey" => "TagValue",
-    #           },
-    #           kms_key_arn: "ArnString",
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_request_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the operation. An idempotent operation completes no
@@ -316,55 +267,6 @@ module Aws::ManagedBlockchain
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateNetworkInput
-    #   data as a hash:
-    #
-    #       {
-    #         client_request_token: "ClientRequestTokenString", # required
-    #         name: "NameString", # required
-    #         description: "DescriptionString",
-    #         framework: "HYPERLEDGER_FABRIC", # required, accepts HYPERLEDGER_FABRIC, ETHEREUM
-    #         framework_version: "FrameworkVersionString", # required
-    #         framework_configuration: {
-    #           fabric: {
-    #             edition: "STARTER", # required, accepts STARTER, STANDARD
-    #           },
-    #         },
-    #         voting_policy: { # required
-    #           approval_threshold_policy: {
-    #             threshold_percentage: 1,
-    #             proposal_duration_in_hours: 1,
-    #             threshold_comparator: "GREATER_THAN", # accepts GREATER_THAN, GREATER_THAN_OR_EQUAL_TO
-    #           },
-    #         },
-    #         member_configuration: { # required
-    #           name: "NetworkMemberNameString", # required
-    #           description: "DescriptionString",
-    #           framework_configuration: { # required
-    #             fabric: {
-    #               admin_username: "UsernameString", # required
-    #               admin_password: "PasswordString", # required
-    #             },
-    #           },
-    #           log_publishing_configuration: {
-    #             fabric: {
-    #               ca_logs: {
-    #                 cloudwatch: {
-    #                   enabled: false,
-    #                 },
-    #               },
-    #             },
-    #           },
-    #           tags: {
-    #             "TagKey" => "TagValue",
-    #           },
-    #           kms_key_arn: "ArnString",
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_request_token
     #   This is a unique, case-sensitive identifier that you provide to
     #   ensure the idempotency of the operation. An idempotent operation
@@ -459,37 +361,6 @@ module Aws::ManagedBlockchain
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateNodeInput
-    #   data as a hash:
-    #
-    #       {
-    #         client_request_token: "ClientRequestTokenString", # required
-    #         network_id: "ResourceIdString", # required
-    #         member_id: "ResourceIdString",
-    #         node_configuration: { # required
-    #           instance_type: "InstanceTypeString", # required
-    #           availability_zone: "AvailabilityZoneString",
-    #           log_publishing_configuration: {
-    #             fabric: {
-    #               chaincode_logs: {
-    #                 cloudwatch: {
-    #                   enabled: false,
-    #                 },
-    #               },
-    #               peer_logs: {
-    #                 cloudwatch: {
-    #                   enabled: false,
-    #                 },
-    #               },
-    #             },
-    #           },
-    #           state_db: "LevelDB", # accepts LevelDB, CouchDB
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_request_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the operation. An idempotent operation completes no
@@ -568,31 +439,6 @@ module Aws::ManagedBlockchain
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateProposalInput
-    #   data as a hash:
-    #
-    #       {
-    #         client_request_token: "ClientRequestTokenString", # required
-    #         network_id: "ResourceIdString", # required
-    #         member_id: "ResourceIdString", # required
-    #         actions: { # required
-    #           invitations: [
-    #             {
-    #               principal: "PrincipalString", # required
-    #             },
-    #           ],
-    #           removals: [
-    #             {
-    #               member_id: "ResourceIdString", # required
-    #             },
-    #           ],
-    #         },
-    #         description: "DescriptionString",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_request_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the operation. An idempotent operation completes no
@@ -672,13 +518,6 @@ module Aws::ManagedBlockchain
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAccessorInput
-    #   data as a hash:
-    #
-    #       {
-    #         accessor_id: "ResourceIdString", # required
-    #       }
-    #
     # @!attribute [rw] accessor_id
     #   The unique identifier of the accessor.
     #   @return [String]
@@ -695,14 +534,6 @@ module Aws::ManagedBlockchain
     #
     class DeleteAccessorOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteMemberInput
-    #   data as a hash:
-    #
-    #       {
-    #         network_id: "ResourceIdString", # required
-    #         member_id: "ResourceIdString", # required
-    #       }
-    #
     # @!attribute [rw] network_id
     #   The unique identifier of the network from which the member is
     #   removed.
@@ -725,15 +556,6 @@ module Aws::ManagedBlockchain
     #
     class DeleteMemberOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteNodeInput
-    #   data as a hash:
-    #
-    #       {
-    #         network_id: "ResourceIdString", # required
-    #         member_id: "ResourceIdString",
-    #         node_id: "ResourceIdString", # required
-    #       }
-    #
     # @!attribute [rw] network_id
     #   The unique identifier of the network that the node is on.
     #
@@ -773,13 +595,6 @@ module Aws::ManagedBlockchain
     #
     class DeleteNodeOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass GetAccessorInput
-    #   data as a hash:
-    #
-    #       {
-    #         accessor_id: "ResourceIdString", # required
-    #       }
-    #
     # @!attribute [rw] accessor_id
     #   The unique identifier of the accessor.
     #   @return [String]
@@ -804,14 +619,6 @@ module Aws::ManagedBlockchain
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetMemberInput
-    #   data as a hash:
-    #
-    #       {
-    #         network_id: "ResourceIdString", # required
-    #         member_id: "ResourceIdString", # required
-    #       }
-    #
     # @!attribute [rw] network_id
     #   The unique identifier of the network to which the member belongs.
     #   @return [String]
@@ -841,13 +648,6 @@ module Aws::ManagedBlockchain
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetNetworkInput
-    #   data as a hash:
-    #
-    #       {
-    #         network_id: "ResourceIdString", # required
-    #       }
-    #
     # @!attribute [rw] network_id
     #   The unique identifier of the network to get information about.
     #   @return [String]
@@ -872,15 +672,6 @@ module Aws::ManagedBlockchain
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetNodeInput
-    #   data as a hash:
-    #
-    #       {
-    #         network_id: "ResourceIdString", # required
-    #         member_id: "ResourceIdString",
-    #         node_id: "ResourceIdString", # required
-    #       }
-    #
     # @!attribute [rw] network_id
     #   The unique identifier of the network that the node is on.
     #   @return [String]
@@ -918,14 +709,6 @@ module Aws::ManagedBlockchain
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetProposalInput
-    #   data as a hash:
-    #
-    #       {
-    #         network_id: "ResourceIdString", # required
-    #         proposal_id: "ResourceIdString", # required
-    #       }
-    #
     # @!attribute [rw] network_id
     #   The unique identifier of the network for which the proposal is made.
     #   @return [String]
@@ -1059,13 +842,6 @@ module Aws::ManagedBlockchain
     #
     # Applies only to Hyperledger Fabric.
     #
-    # @note When making an API call, you may pass InviteAction
-    #   data as a hash:
-    #
-    #       {
-    #         principal: "PrincipalString", # required
-    #       }
-    #
     # @!attribute [rw] principal
     #   The Amazon Web Services account ID to invite.
     #   @return [String]
@@ -1078,14 +854,6 @@ module Aws::ManagedBlockchain
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAccessorsInput
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of accessors to list.
     #   @return [Integer]
@@ -1123,14 +891,6 @@ module Aws::ManagedBlockchain
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListInvitationsInput
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of invitations to return.
     #   @return [Integer]
@@ -1167,18 +927,6 @@ module Aws::ManagedBlockchain
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListMembersInput
-    #   data as a hash:
-    #
-    #       {
-    #         network_id: "ResourceIdString", # required
-    #         name: "String",
-    #         status: "CREATING", # accepts CREATING, AVAILABLE, CREATE_FAILED, UPDATING, DELETING, DELETED, INACCESSIBLE_ENCRYPTION_KEY
-    #         is_owned: false,
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] network_id
     #   The unique identifier of the network for which to list members.
     #   @return [String]
@@ -1240,17 +988,6 @@ module Aws::ManagedBlockchain
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListNetworksInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String",
-    #         framework: "HYPERLEDGER_FABRIC", # accepts HYPERLEDGER_FABRIC, ETHEREUM
-    #         status: "CREATING", # accepts CREATING, AVAILABLE, CREATE_FAILED, DELETING, DELETED
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the network.
     #   @return [String]
@@ -1307,17 +1044,6 @@ module Aws::ManagedBlockchain
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListNodesInput
-    #   data as a hash:
-    #
-    #       {
-    #         network_id: "ResourceIdString", # required
-    #         member_id: "ResourceIdString",
-    #         status: "CREATING", # accepts CREATING, AVAILABLE, UNHEALTHY, CREATE_FAILED, UPDATING, DELETING, DELETED, FAILED, INACCESSIBLE_ENCRYPTION_KEY
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] network_id
     #   The unique identifier of the network for which to list nodes.
     #   @return [String]
@@ -1374,16 +1100,6 @@ module Aws::ManagedBlockchain
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListProposalVotesInput
-    #   data as a hash:
-    #
-    #       {
-    #         network_id: "ResourceIdString", # required
-    #         proposal_id: "ResourceIdString", # required
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] network_id
     #   The unique identifier of the network.
     #   @return [String]
@@ -1430,15 +1146,6 @@ module Aws::ManagedBlockchain
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListProposalsInput
-    #   data as a hash:
-    #
-    #       {
-    #         network_id: "ResourceIdString", # required
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] network_id
     #   The unique identifier of the network.
     #   @return [String]
@@ -1480,13 +1187,6 @@ module Aws::ManagedBlockchain
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ArnString", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource. For more information
     #   about ARNs and their format, see [Amazon Resource Names (ARNs)][1]
@@ -1519,13 +1219,6 @@ module Aws::ManagedBlockchain
 
     # A configuration for logging events.
     #
-    # @note When making an API call, you may pass LogConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false,
-    #       }
-    #
     # @!attribute [rw] enabled
     #   Indicates whether logging is enabled.
     #   @return [Boolean]
@@ -1539,15 +1232,6 @@ module Aws::ManagedBlockchain
     end
 
     # A collection of log configurations.
-    #
-    # @note When making an API call, you may pass LogConfigurations
-    #   data as a hash:
-    #
-    #       {
-    #         cloudwatch: {
-    #           enabled: false,
-    #         },
-    #       }
     #
     # @!attribute [rw] cloudwatch
     #   Parameters for publishing logs to Amazon CloudWatch Logs.
@@ -1690,33 +1374,6 @@ module Aws::ManagedBlockchain
     #
     # Applies only to Hyperledger Fabric.
     #
-    # @note When making an API call, you may pass MemberConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         name: "NetworkMemberNameString", # required
-    #         description: "DescriptionString",
-    #         framework_configuration: { # required
-    #           fabric: {
-    #             admin_username: "UsernameString", # required
-    #             admin_password: "PasswordString", # required
-    #           },
-    #         },
-    #         log_publishing_configuration: {
-    #           fabric: {
-    #             ca_logs: {
-    #               cloudwatch: {
-    #                 enabled: false,
-    #               },
-    #             },
-    #           },
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         kms_key_arn: "ArnString",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the member.
     #   @return [String]
@@ -1814,14 +1471,6 @@ module Aws::ManagedBlockchain
     # Configuration properties for Hyperledger Fabric for a member in a
     # Managed Blockchain network using the Hyperledger Fabric framework.
     #
-    # @note When making an API call, you may pass MemberFabricConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         admin_username: "UsernameString", # required
-    #         admin_password: "PasswordString", # required
-    #       }
-    #
     # @!attribute [rw] admin_username
     #   The user name for the member's initial administrative user.
     #   @return [String]
@@ -1847,17 +1496,6 @@ module Aws::ManagedBlockchain
     # Configuration properties for logging events associated with a member
     # of a Managed Blockchain network using the Hyperledger Fabric
     # framework.
-    #
-    # @note When making an API call, you may pass MemberFabricLogPublishingConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         ca_logs: {
-    #           cloudwatch: {
-    #             enabled: false,
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] ca_logs
     #   Configuration properties for logging events associated with a
@@ -1893,16 +1531,6 @@ module Aws::ManagedBlockchain
     # Configuration properties relevant to a member for the blockchain
     # framework that the Managed Blockchain network uses.
     #
-    # @note When making an API call, you may pass MemberFrameworkConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         fabric: {
-    #           admin_username: "UsernameString", # required
-    #           admin_password: "PasswordString", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] fabric
     #   Attributes of Hyperledger Fabric for a member on a Managed
     #   Blockchain network that uses Hyperledger Fabric.
@@ -1918,19 +1546,6 @@ module Aws::ManagedBlockchain
 
     # Configuration properties for logging events associated with a member
     # of a Managed Blockchain network.
-    #
-    # @note When making an API call, you may pass MemberLogPublishingConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         fabric: {
-    #           ca_logs: {
-    #             cloudwatch: {
-    #               enabled: false,
-    #             },
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] fabric
     #   Configuration properties for logging events associated with a member
@@ -2171,13 +1786,6 @@ module Aws::ManagedBlockchain
 
     # Hyperledger Fabric configuration properties for the network.
     #
-    # @note When making an API call, you may pass NetworkFabricConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         edition: "STARTER", # required, accepts STARTER, STANDARD
-    #       }
-    #
     # @!attribute [rw] edition
     #   The edition of Amazon Managed Blockchain that the network uses. For
     #   more information, see [Amazon Managed Blockchain Pricing][1].
@@ -2219,15 +1827,6 @@ module Aws::ManagedBlockchain
 
     # Configuration properties relevant to the network for the blockchain
     # framework that the network uses.
-    #
-    # @note When making an API call, you may pass NetworkFrameworkConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         fabric: {
-    #           edition: "STARTER", # required, accepts STARTER, STANDARD
-    #         },
-    #       }
     #
     # @!attribute [rw] fabric
     #   Hyperledger Fabric configuration properties for a Managed Blockchain
@@ -2444,29 +2043,6 @@ module Aws::ManagedBlockchain
 
     # Configuration properties of a node.
     #
-    # @note When making an API call, you may pass NodeConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         instance_type: "InstanceTypeString", # required
-    #         availability_zone: "AvailabilityZoneString",
-    #         log_publishing_configuration: {
-    #           fabric: {
-    #             chaincode_logs: {
-    #               cloudwatch: {
-    #                 enabled: false,
-    #               },
-    #             },
-    #             peer_logs: {
-    #               cloudwatch: {
-    #                 enabled: false,
-    #               },
-    #             },
-    #           },
-    #         },
-    #         state_db: "LevelDB", # accepts LevelDB, CouchDB
-    #       }
-    #
     # @!attribute [rw] instance_type
     #   The Amazon Managed Blockchain instance type for the node.
     #   @return [String]
@@ -2560,22 +2136,6 @@ module Aws::ManagedBlockchain
     # Configuration properties for logging events associated with a peer
     # node owned by a member in a Managed Blockchain network.
     #
-    # @note When making an API call, you may pass NodeFabricLogPublishingConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         chaincode_logs: {
-    #           cloudwatch: {
-    #             enabled: false,
-    #           },
-    #         },
-    #         peer_logs: {
-    #           cloudwatch: {
-    #             enabled: false,
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] chaincode_logs
     #   Configuration properties for logging events associated with
     #   chaincode execution on a peer node. Chaincode logs contain the
@@ -2625,24 +2185,6 @@ module Aws::ManagedBlockchain
 
     # Configuration properties for logging events associated with a peer
     # node on a Hyperledger Fabric network on Managed Blockchain.
-    #
-    # @note When making an API call, you may pass NodeLogPublishingConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         fabric: {
-    #           chaincode_logs: {
-    #             cloudwatch: {
-    #               enabled: false,
-    #             },
-    #           },
-    #           peer_logs: {
-    #             cloudwatch: {
-    #               enabled: false,
-    #             },
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] fabric
     #   Configuration properties for logging events associated with a node
@@ -2832,22 +2374,6 @@ module Aws::ManagedBlockchain
     #
     # Applies only to Hyperledger Fabric.
     #
-    # @note When making an API call, you may pass ProposalActions
-    #   data as a hash:
-    #
-    #       {
-    #         invitations: [
-    #           {
-    #             principal: "PrincipalString", # required
-    #           },
-    #         ],
-    #         removals: [
-    #           {
-    #             member_id: "ResourceIdString", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] invitations
     #   The actions to perform for an `APPROVED` proposal to invite an
     #   Amazon Web Services account to create a member and join the network.
@@ -2949,13 +2475,6 @@ module Aws::ManagedBlockchain
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RejectInvitationInput
-    #   data as a hash:
-    #
-    #       {
-    #         invitation_id: "ResourceIdString", # required
-    #       }
-    #
     # @!attribute [rw] invitation_id
     #   The unique identifier of the invitation to reject.
     #   @return [String]
@@ -2977,13 +2496,6 @@ module Aws::ManagedBlockchain
     # associated resources are deleted from the network.
     #
     # Applies only to Hyperledger Fabric.
-    #
-    # @note When making an API call, you may pass RemoveAction
-    #   data as a hash:
-    #
-    #       {
-    #         member_id: "ResourceIdString", # required
-    #       }
     #
     # @!attribute [rw] member_id
     #   The unique identifier of the member to remove.
@@ -3059,16 +2571,6 @@ module Aws::ManagedBlockchain
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ArnString", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource. For more information
     #   about ARNs and their format, see [Amazon Resource Names (ARNs)][1]
@@ -3123,14 +2625,6 @@ module Aws::ManagedBlockchain
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ArnString", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource. For more information
     #   about ARNs and their format, see [Amazon Resource Names (ARNs)][1]
@@ -3158,23 +2652,6 @@ module Aws::ManagedBlockchain
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateMemberInput
-    #   data as a hash:
-    #
-    #       {
-    #         network_id: "ResourceIdString", # required
-    #         member_id: "ResourceIdString", # required
-    #         log_publishing_configuration: {
-    #           fabric: {
-    #             ca_logs: {
-    #               cloudwatch: {
-    #                 enabled: false,
-    #               },
-    #             },
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] network_id
     #   The unique identifier of the Managed Blockchain network to which the
     #   member belongs.
@@ -3202,29 +2679,6 @@ module Aws::ManagedBlockchain
     #
     class UpdateMemberOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateNodeInput
-    #   data as a hash:
-    #
-    #       {
-    #         network_id: "ResourceIdString", # required
-    #         member_id: "ResourceIdString",
-    #         node_id: "ResourceIdString", # required
-    #         log_publishing_configuration: {
-    #           fabric: {
-    #             chaincode_logs: {
-    #               cloudwatch: {
-    #                 enabled: false,
-    #               },
-    #             },
-    #             peer_logs: {
-    #               cloudwatch: {
-    #                 enabled: false,
-    #               },
-    #             },
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] network_id
     #   The unique identifier of the network that the node is on.
     #   @return [String]
@@ -3258,16 +2712,6 @@ module Aws::ManagedBlockchain
     #
     class UpdateNodeOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass VoteOnProposalInput
-    #   data as a hash:
-    #
-    #       {
-    #         network_id: "ResourceIdString", # required
-    #         proposal_id: "ResourceIdString", # required
-    #         voter_member_id: "ResourceIdString", # required
-    #         vote: "YES", # required, accepts YES, NO
-    #       }
-    #
     # @!attribute [rw] network_id
     #   The unique identifier of the network.
     #   @return [String]
@@ -3328,17 +2772,6 @@ module Aws::ManagedBlockchain
     # The voting rules for the network to decide if a proposal is accepted
     #
     # Applies only to Hyperledger Fabric.
-    #
-    # @note When making an API call, you may pass VotingPolicy
-    #   data as a hash:
-    #
-    #       {
-    #         approval_threshold_policy: {
-    #           threshold_percentage: 1,
-    #           proposal_duration_in_hours: 1,
-    #           threshold_comparator: "GREATER_THAN", # accepts GREATER_THAN, GREATER_THAN_OR_EQUAL_TO
-    #         },
-    #       }
     #
     # @!attribute [rw] approval_threshold_policy
     #   Defines the rules for the network for voting on proposals, such as

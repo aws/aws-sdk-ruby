@@ -27,23 +27,6 @@ module Aws::GroundStation
     # Information about how AWS Ground Station should configure an antenna
     # for downlink during a contact.
     #
-    # @note When making an API call, you may pass AntennaDownlinkConfig
-    #   data as a hash:
-    #
-    #       {
-    #         spectrum_config: { # required
-    #           bandwidth: { # required
-    #             units: "GHz", # required, accepts GHz, MHz, kHz
-    #             value: 1.0, # required
-    #           },
-    #           center_frequency: { # required
-    #             units: "GHz", # required, accepts GHz, MHz, kHz
-    #             value: 1.0, # required
-    #           },
-    #           polarization: "LEFT_HAND", # accepts LEFT_HAND, NONE, RIGHT_HAND
-    #         },
-    #       }
-    #
     # @!attribute [rw] spectrum_config
     #   Object that describes a spectral `Config`.
     #   @return [Types::SpectrumConfig]
@@ -58,29 +41,6 @@ module Aws::GroundStation
 
     # Information about how AWS Ground Station should conﬁgure an antenna
     # for downlink demod decode during a contact.
-    #
-    # @note When making an API call, you may pass AntennaDownlinkDemodDecodeConfig
-    #   data as a hash:
-    #
-    #       {
-    #         decode_config: { # required
-    #           unvalidated_json: "JsonString", # required
-    #         },
-    #         demodulation_config: { # required
-    #           unvalidated_json: "JsonString", # required
-    #         },
-    #         spectrum_config: { # required
-    #           bandwidth: { # required
-    #             units: "GHz", # required, accepts GHz, MHz, kHz
-    #             value: 1.0, # required
-    #           },
-    #           center_frequency: { # required
-    #             units: "GHz", # required, accepts GHz, MHz, kHz
-    #             value: 1.0, # required
-    #           },
-    #           polarization: "LEFT_HAND", # accepts LEFT_HAND, NONE, RIGHT_HAND
-    #         },
-    #       }
     #
     # @!attribute [rw] decode_config
     #   Information about the decode `Config`.
@@ -106,24 +66,6 @@ module Aws::GroundStation
 
     # Information about the uplink `Config` of an antenna.
     #
-    # @note When making an API call, you may pass AntennaUplinkConfig
-    #   data as a hash:
-    #
-    #       {
-    #         spectrum_config: { # required
-    #           center_frequency: { # required
-    #             units: "GHz", # required, accepts GHz, MHz, kHz
-    #             value: 1.0, # required
-    #           },
-    #           polarization: "LEFT_HAND", # accepts LEFT_HAND, NONE, RIGHT_HAND
-    #         },
-    #         target_eirp: { # required
-    #           units: "dBW", # required, accepts dBW
-    #           value: 1.0, # required
-    #         },
-    #         transmit_disabled: false,
-    #       }
-    #
     # @!attribute [rw] spectrum_config
     #   Information about the uplink spectral `Config`.
     #   @return [Types::UplinkSpectrumConfig]
@@ -146,13 +88,6 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CancelContactRequest
-    #   data as a hash:
-    #
-    #       {
-    #         contact_id: "Uuid", # required
-    #       }
-    #
     # @!attribute [rw] contact_id
     #   UUID of a contact.
     #   @return [String]
@@ -166,8 +101,6 @@ module Aws::GroundStation
     end
 
     # Details for certain `Config` object types in a contact.
-    #
-    # @note ConfigDetails is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ConfigDetails corresponding to the set member.
     #
     # @!attribute [rw] antenna_demod_decode_details
     #   Details for antenna demod decode `Config` in a contact.
@@ -252,10 +185,6 @@ module Aws::GroundStation
     # Object containing the parameters of a `Config`.
     #
     # See the subtype definitions for what each type of `Config` contains.
-    #
-    # @note ConfigTypeData is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note ConfigTypeData is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ConfigTypeData corresponding to the set member.
     #
     # @!attribute [rw] antenna_downlink_config
     #   Information about how AWS Ground Station should configure an antenna
@@ -406,80 +335,6 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         config_data: { # required
-    #           antenna_downlink_config: {
-    #             spectrum_config: { # required
-    #               bandwidth: { # required
-    #                 units: "GHz", # required, accepts GHz, MHz, kHz
-    #                 value: 1.0, # required
-    #               },
-    #               center_frequency: { # required
-    #                 units: "GHz", # required, accepts GHz, MHz, kHz
-    #                 value: 1.0, # required
-    #               },
-    #               polarization: "LEFT_HAND", # accepts LEFT_HAND, NONE, RIGHT_HAND
-    #             },
-    #           },
-    #           antenna_downlink_demod_decode_config: {
-    #             decode_config: { # required
-    #               unvalidated_json: "JsonString", # required
-    #             },
-    #             demodulation_config: { # required
-    #               unvalidated_json: "JsonString", # required
-    #             },
-    #             spectrum_config: { # required
-    #               bandwidth: { # required
-    #                 units: "GHz", # required, accepts GHz, MHz, kHz
-    #                 value: 1.0, # required
-    #               },
-    #               center_frequency: { # required
-    #                 units: "GHz", # required, accepts GHz, MHz, kHz
-    #                 value: 1.0, # required
-    #               },
-    #               polarization: "LEFT_HAND", # accepts LEFT_HAND, NONE, RIGHT_HAND
-    #             },
-    #           },
-    #           antenna_uplink_config: {
-    #             spectrum_config: { # required
-    #               center_frequency: { # required
-    #                 units: "GHz", # required, accepts GHz, MHz, kHz
-    #                 value: 1.0, # required
-    #               },
-    #               polarization: "LEFT_HAND", # accepts LEFT_HAND, NONE, RIGHT_HAND
-    #             },
-    #             target_eirp: { # required
-    #               units: "dBW", # required, accepts dBW
-    #               value: 1.0, # required
-    #             },
-    #             transmit_disabled: false,
-    #           },
-    #           dataflow_endpoint_config: {
-    #             dataflow_endpoint_name: "String", # required
-    #             dataflow_endpoint_region: "String",
-    #           },
-    #           s3_recording_config: {
-    #             bucket_arn: "BucketArn", # required
-    #             prefix: "S3KeyPrefix",
-    #             role_arn: "RoleArn", # required
-    #           },
-    #           tracking_config: {
-    #             autotrack: "PREFERRED", # required, accepts PREFERRED, REMOVED, REQUIRED
-    #           },
-    #           uplink_echo_config: {
-    #             antenna_uplink_config_arn: "ConfigArn", # required
-    #             enabled: false, # required
-    #           },
-    #         },
-    #         name: "SafeName", # required
-    #         tags: {
-    #           "String" => "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] config_data
     #   Parameters of a `Config`.
     #   @return [Types::ConfigTypeData]
@@ -502,33 +357,6 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDataflowEndpointGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_details: [ # required
-    #           {
-    #             endpoint: {
-    #               address: {
-    #                 name: "String", # required
-    #                 port: 1, # required
-    #               },
-    #               mtu: 1,
-    #               name: "SafeName",
-    #               status: "created", # accepts created, creating, deleted, deleting, failed
-    #             },
-    #             security_details: {
-    #               role_arn: "RoleArn", # required
-    #               security_group_ids: ["String"], # required
-    #               subnet_ids: ["String"], # required
-    #             },
-    #           },
-    #         ],
-    #         tags: {
-    #           "String" => "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] endpoint_details
     #   Endpoint details of each endpoint in the dataflow endpoint group.
     #   @return [Array<Types::EndpointDetails>]
@@ -546,48 +374,6 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateEphemerisRequest
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false,
-    #         ephemeris: {
-    #           oem: {
-    #             oem_data: "UnboundedString",
-    #             s3_object: {
-    #               bucket: "S3BucketName",
-    #               key: "S3ObjectKey",
-    #               version: "S3VersionId",
-    #             },
-    #           },
-    #           tle: {
-    #             s3_object: {
-    #               bucket: "S3BucketName",
-    #               key: "S3ObjectKey",
-    #               version: "S3VersionId",
-    #             },
-    #             tle_data: [
-    #               {
-    #                 tle_line_1: "TleLineOne", # required
-    #                 tle_line_2: "TleLineTwo", # required
-    #                 valid_time_range: { # required
-    #                   end_time: Time.now, # required
-    #                   start_time: Time.now, # required
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #         },
-    #         expiration_time: Time.now,
-    #         kms_key_arn: "KeyArn",
-    #         name: "SafeName", # required
-    #         priority: 1,
-    #         satellite_id: "Uuid", # required
-    #         tags: {
-    #           "String" => "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] enabled
     #   Whether to set the ephemeris status to `ENABLED` after validation.
     #
@@ -647,23 +433,6 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateMissionProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         contact_post_pass_duration_seconds: 1,
-    #         contact_pre_pass_duration_seconds: 1,
-    #         dataflow_edges: [ # required
-    #           ["ConfigArn"],
-    #         ],
-    #         minimum_viable_contact_duration_seconds: 1, # required
-    #         name: "SafeName", # required
-    #         tags: {
-    #           "String" => "String",
-    #         },
-    #         tracking_config_arn: "ConfigArn", # required
-    #       }
-    #
     # @!attribute [rw] contact_post_pass_duration_seconds
     #   Amount of time after a contact ends that you’d like to receive a
     #   CloudWatch event indicating the pass has finished.
@@ -737,19 +506,6 @@ module Aws::GroundStation
 
     # Information about a dataflow endpoint.
     #
-    # @note When making an API call, you may pass DataflowEndpoint
-    #   data as a hash:
-    #
-    #       {
-    #         address: {
-    #           name: "String", # required
-    #           port: 1, # required
-    #         },
-    #         mtu: 1,
-    #         name: "SafeName",
-    #         status: "created", # accepts created, creating, deleted, deleting, failed
-    #       }
-    #
     # @!attribute [rw] address
     #   Socket address of a dataflow endpoint.
     #   @return [Types::SocketAddress]
@@ -779,14 +535,6 @@ module Aws::GroundStation
     end
 
     # Information about the dataflow endpoint `Config`.
-    #
-    # @note When making an API call, you may pass DataflowEndpointConfig
-    #   data as a hash:
-    #
-    #       {
-    #         dataflow_endpoint_name: "String", # required
-    #         dataflow_endpoint_region: "String",
-    #       }
     #
     # @!attribute [rw] dataflow_endpoint_name
     #   Name of a dataflow endpoint.
@@ -838,13 +586,6 @@ module Aws::GroundStation
 
     # Information about the decode `Config`.
     #
-    # @note When making an API call, you may pass DecodeConfig
-    #   data as a hash:
-    #
-    #       {
-    #         unvalidated_json: "JsonString", # required
-    #       }
-    #
     # @!attribute [rw] unvalidated_json
     #   Unvalidated JSON of a decode `Config`.
     #   @return [String]
@@ -857,14 +598,6 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         config_id: "Uuid", # required
-    #         config_type: "antenna-downlink", # required, accepts antenna-downlink, antenna-downlink-demod-decode, antenna-uplink, dataflow-endpoint, tracking, uplink-echo, s3-recording
-    #       }
-    #
     # @!attribute [rw] config_id
     #   UUID of a `Config`.
     #   @return [String]
@@ -882,13 +615,6 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDataflowEndpointGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dataflow_endpoint_group_id: "Uuid", # required
-    #       }
-    #
     # @!attribute [rw] dataflow_endpoint_group_id
     #   UUID of a dataflow endpoint group.
     #   @return [String]
@@ -901,13 +627,6 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteEphemerisRequest
-    #   data as a hash:
-    #
-    #       {
-    #         ephemeris_id: "Uuid", # required
-    #       }
-    #
     # @!attribute [rw] ephemeris_id
     #   The AWS Ground Station ephemeris ID.
     #   @return [String]
@@ -920,13 +639,6 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteMissionProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         mission_profile_id: "Uuid", # required
-    #       }
-    #
     # @!attribute [rw] mission_profile_id
     #   UUID of a mission profile.
     #   @return [String]
@@ -940,13 +652,6 @@ module Aws::GroundStation
     end
 
     # Information about the demodulation `Config`.
-    #
-    # @note When making an API call, you may pass DemodulationConfig
-    #   data as a hash:
-    #
-    #       {
-    #         unvalidated_json: "JsonString", # required
-    #       }
     #
     # @!attribute [rw] unvalidated_json
     #   Unvalidated JSON of a demodulation `Config`.
@@ -977,13 +682,6 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeContactRequest
-    #   data as a hash:
-    #
-    #       {
-    #         contact_id: "Uuid", # required
-    #       }
-    #
     # @!attribute [rw] contact_id
     #   UUID of a contact.
     #   @return [String]
@@ -1076,13 +774,6 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEphemerisRequest
-    #   data as a hash:
-    #
-    #       {
-    #         ephemeris_id: "Uuid", # required
-    #       }
-    #
     # @!attribute [rw] ephemeris_id
     #   The AWS Ground Station ephemeris ID.
     #   @return [String]
@@ -1192,14 +883,6 @@ module Aws::GroundStation
 
     # Object that represents EIRP.
     #
-    # @note When making an API call, you may pass Eirp
-    #   data as a hash:
-    #
-    #       {
-    #         units: "dBW", # required, accepts dBW
-    #         value: 1.0, # required
-    #       }
-    #
     # @!attribute [rw] units
     #   Units of an EIRP.
     #   @return [String]
@@ -1238,26 +921,6 @@ module Aws::GroundStation
 
     # Information about the endpoint details.
     #
-    # @note When making an API call, you may pass EndpointDetails
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint: {
-    #           address: {
-    #             name: "String", # required
-    #             port: 1, # required
-    #           },
-    #           mtu: 1,
-    #           name: "SafeName",
-    #           status: "created", # accepts created, creating, deleted, deleting, failed
-    #         },
-    #         security_details: {
-    #           role_arn: "RoleArn", # required
-    #           security_group_ids: ["String"], # required
-    #           subnet_ids: ["String"], # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] endpoint
     #   A dataflow endpoint.
     #   @return [Types::DataflowEndpoint]
@@ -1277,8 +940,6 @@ module Aws::GroundStation
     end
 
     # Ephemeris data.
-    #
-    # @note EphemerisData is a union - when making an API calls you must set exactly one of the members.
     #
     # @!attribute [rw] oem
     #   Ephemeris data in Orbit Ephemeris Message (OEM) format.
@@ -1423,8 +1084,6 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
-    # @note EphemerisTypeDescription is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of EphemerisTypeDescription corresponding to the set member.
-    #
     # @!attribute [rw] oem
     #   Description of ephemeris.
     #   @return [Types::EphemerisDescription]
@@ -1450,14 +1109,6 @@ module Aws::GroundStation
 
     # Object that describes the frequency.
     #
-    # @note When making an API call, you may pass Frequency
-    #   data as a hash:
-    #
-    #       {
-    #         units: "GHz", # required, accepts GHz, MHz, kHz
-    #         value: 1.0, # required
-    #       }
-    #
     # @!attribute [rw] units
     #   Frequency units.
     #   @return [String]
@@ -1477,14 +1128,6 @@ module Aws::GroundStation
     end
 
     # Object that describes the frequency bandwidth.
-    #
-    # @note When making an API call, you may pass FrequencyBandwidth
-    #   data as a hash:
-    #
-    #       {
-    #         units: "GHz", # required, accepts GHz, MHz, kHz
-    #         value: 1.0, # required
-    #       }
     #
     # @!attribute [rw] units
     #   Frequency bandwidth units.
@@ -1513,14 +1156,6 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         config_id: "Uuid", # required
-    #         config_type: "antenna-downlink", # required, accepts antenna-downlink, antenna-downlink-demod-decode, antenna-uplink, dataflow-endpoint, tracking, uplink-echo, s3-recording
-    #       }
-    #
     # @!attribute [rw] config_id
     #   UUID of a `Config`.
     #   @return [String]
@@ -1575,13 +1210,6 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDataflowEndpointGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dataflow_endpoint_group_id: "Uuid", # required
-    #       }
-    #
     # @!attribute [rw] dataflow_endpoint_group_id
     #   UUID of a dataflow endpoint group.
     #   @return [String]
@@ -1621,14 +1249,6 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetMinuteUsageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         month: 1, # required
-    #         year: 1, # required
-    #       }
-    #
     # @!attribute [rw] month
     #   The month being requested, with a value of 1-12.
     #   @return [Integer]
@@ -1683,13 +1303,6 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetMissionProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         mission_profile_id: "Uuid", # required
-    #       }
-    #
     # @!attribute [rw] mission_profile_id
     #   UUID of a mission profile.
     #   @return [String]
@@ -1764,13 +1377,6 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSatelliteRequest
-    #   data as a hash:
-    #
-    #       {
-    #         satellite_id: "Uuid", # required
-    #       }
-    #
     # @!attribute [rw] satellite_id
     #   UUID of a satellite.
     #   @return [String]
@@ -1857,14 +1463,6 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListConfigsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   Maximum number of `Configs` returned.
     #   @return [Integer]
@@ -1901,20 +1499,6 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListContactsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         end_time: Time.now, # required
-    #         ground_station: "GroundStationName",
-    #         max_results: 1,
-    #         mission_profile_arn: "MissionProfileArn",
-    #         next_token: "PaginationToken",
-    #         satellite_arn: "satelliteArn",
-    #         start_time: Time.now, # required
-    #         status_list: ["AVAILABLE"], # required, accepts AVAILABLE, AWS_CANCELLED, AWS_FAILED, CANCELLED, CANCELLING, COMPLETED, FAILED, FAILED_TO_SCHEDULE, PASS, POSTPASS, PREPASS, SCHEDULED, SCHEDULING
-    #       }
-    #
     # @!attribute [rw] end_time
     #   End time of a contact in UTC.
     #   @return [Time]
@@ -1981,14 +1565,6 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDataflowEndpointGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   Maximum number of dataflow endpoint groups returned.
     #   @return [Integer]
@@ -2027,18 +1603,6 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEphemeridesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         end_time: Time.now, # required
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #         satellite_id: "Uuid", # required
-    #         start_time: Time.now, # required
-    #         status_list: ["VALIDATING"], # accepts VALIDATING, INVALID, ERROR, ENABLED, DISABLED, EXPIRED
-    #       }
-    #
     # @!attribute [rw] end_time
     #   The end time to list in UTC. The operation will return an ephemeris
     #   if its expiration time is within the time range defined by the
@@ -2097,15 +1661,6 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListGroundStationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #         satellite_id: "Uuid",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   Maximum number of ground stations returned.
     #   @return [Integer]
@@ -2147,14 +1702,6 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListMissionProfilesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   Maximum number of mission profiles returned.
     #   @return [Integer]
@@ -2191,14 +1738,6 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSatellitesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   Maximum number of satellites returned.
     #   @return [Integer]
@@ -2235,13 +1774,6 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AnyArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   ARN of a resource.
     #   @return [String]
@@ -2309,18 +1841,6 @@ module Aws::GroundStation
 
     # Ephemeris data in Orbit Ephemeris Message (OEM) format.
     #
-    # @note When making an API call, you may pass OEMEphemeris
-    #   data as a hash:
-    #
-    #       {
-    #         oem_data: "UnboundedString",
-    #         s3_object: {
-    #           bucket: "S3BucketName",
-    #           key: "S3ObjectKey",
-    #           version: "S3VersionId",
-    #         },
-    #       }
-    #
     # @!attribute [rw] oem_data
     #   The data for an OEM ephemeris, supplied directly in the request
     #   rather than through an S3 object.
@@ -2339,20 +1859,6 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ReserveContactRequest
-    #   data as a hash:
-    #
-    #       {
-    #         end_time: Time.now, # required
-    #         ground_station: "GroundStationName", # required
-    #         mission_profile_arn: "MissionProfileArn", # required
-    #         satellite_arn: "satelliteArn", # required
-    #         start_time: Time.now, # required
-    #         tags: {
-    #           "String" => "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] end_time
     #   End time of a contact in UTC.
     #   @return [Time]
@@ -2422,15 +1928,6 @@ module Aws::GroundStation
 
     # Object stored in S3 containing ephemeris data.
     #
-    # @note When making an API call, you may pass S3Object
-    #   data as a hash:
-    #
-    #       {
-    #         bucket: "S3BucketName",
-    #         key: "S3ObjectKey",
-    #         version: "S3VersionId",
-    #       }
-    #
     # @!attribute [rw] bucket
     #   An Amazon S3 Bucket name.
     #   @return [String]
@@ -2454,15 +1951,6 @@ module Aws::GroundStation
     end
 
     # Information about an S3 recording `Config`.
-    #
-    # @note When making an API call, you may pass S3RecordingConfig
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_arn: "BucketArn", # required
-    #         prefix: "S3KeyPrefix",
-    #         role_arn: "RoleArn", # required
-    #       }
     #
     # @!attribute [rw] bucket_arn
     #   ARN of the bucket to record to.
@@ -2542,15 +2030,6 @@ module Aws::GroundStation
 
     # Information about endpoints.
     #
-    # @note When making an API call, you may pass SecurityDetails
-    #   data as a hash:
-    #
-    #       {
-    #         role_arn: "RoleArn", # required
-    #         security_group_ids: ["String"], # required
-    #         subnet_ids: ["String"], # required
-    #       }
-    #
     # @!attribute [rw] role_arn
     #   ARN to a role needed for connecting streams to your instances.
     #   @return [String]
@@ -2575,14 +2054,6 @@ module Aws::GroundStation
     end
 
     # Information about the socket address.
-    #
-    # @note When making an API call, you may pass SocketAddress
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #         port: 1, # required
-    #       }
     #
     # @!attribute [rw] name
     #   Name of a socket address.
@@ -2633,21 +2104,6 @@ module Aws::GroundStation
 
     # Object that describes a spectral `Config`.
     #
-    # @note When making an API call, you may pass SpectrumConfig
-    #   data as a hash:
-    #
-    #       {
-    #         bandwidth: { # required
-    #           units: "GHz", # required, accepts GHz, MHz, kHz
-    #           value: 1.0, # required
-    #         },
-    #         center_frequency: { # required
-    #           units: "GHz", # required, accepts GHz, MHz, kHz
-    #           value: 1.0, # required
-    #         },
-    #         polarization: "LEFT_HAND", # accepts LEFT_HAND, NONE, RIGHT_HAND
-    #       }
-    #
     # @!attribute [rw] bandwidth
     #   Bandwidth of a spectral `Config`. AWS Ground Station currently has
     #   the following bandwidth limitations:
@@ -2685,18 +2141,6 @@ module Aws::GroundStation
 
     # Two-line element set (TLE) data.
     #
-    # @note When making an API call, you may pass TLEData
-    #   data as a hash:
-    #
-    #       {
-    #         tle_line_1: "TleLineOne", # required
-    #         tle_line_2: "TleLineTwo", # required
-    #         valid_time_range: { # required
-    #           end_time: Time.now, # required
-    #           start_time: Time.now, # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] tle_line_1
     #   First line of two-line element set (TLE) data.
     #   @return [String]
@@ -2721,27 +2165,6 @@ module Aws::GroundStation
 
     # Two-line element set (TLE) ephemeris.
     #
-    # @note When making an API call, you may pass TLEEphemeris
-    #   data as a hash:
-    #
-    #       {
-    #         s3_object: {
-    #           bucket: "S3BucketName",
-    #           key: "S3ObjectKey",
-    #           version: "S3VersionId",
-    #         },
-    #         tle_data: [
-    #           {
-    #             tle_line_1: "TleLineOne", # required
-    #             tle_line_2: "TleLineTwo", # required
-    #             valid_time_range: { # required
-    #               end_time: Time.now, # required
-    #               start_time: Time.now, # required
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] s3_object
     #   Identifies the S3 object to be used as the ephemeris.
     #   @return [Types::S3Object]
@@ -2760,16 +2183,6 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AnyArn", # required
-    #         tags: { # required
-    #           "String" => "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   ARN of a resource tag.
     #   @return [String]
@@ -2793,14 +2206,6 @@ module Aws::GroundStation
 
     # A time range with a start and end time.
     #
-    # @note When making an API call, you may pass TimeRange
-    #   data as a hash:
-    #
-    #       {
-    #         end_time: Time.now, # required
-    #         start_time: Time.now, # required
-    #       }
-    #
     # @!attribute [rw] end_time
     #   Time in UTC at which the time range ends.
     #   @return [Time]
@@ -2821,13 +2226,6 @@ module Aws::GroundStation
     # Object that determines whether tracking should be used during a
     # contact executed with this `Config` in the mission profile.
     #
-    # @note When making an API call, you may pass TrackingConfig
-    #   data as a hash:
-    #
-    #       {
-    #         autotrack: "PREFERRED", # required, accepts PREFERRED, REMOVED, REQUIRED
-    #       }
-    #
     # @!attribute [rw] autotrack
     #   Current setting for autotrack.
     #   @return [String]
@@ -2840,14 +2238,6 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AnyArn", # required
-    #         tag_keys: ["UnboundedString"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   ARN of a resource.
     #   @return [String]
@@ -2869,79 +2259,6 @@ module Aws::GroundStation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         config_data: { # required
-    #           antenna_downlink_config: {
-    #             spectrum_config: { # required
-    #               bandwidth: { # required
-    #                 units: "GHz", # required, accepts GHz, MHz, kHz
-    #                 value: 1.0, # required
-    #               },
-    #               center_frequency: { # required
-    #                 units: "GHz", # required, accepts GHz, MHz, kHz
-    #                 value: 1.0, # required
-    #               },
-    #               polarization: "LEFT_HAND", # accepts LEFT_HAND, NONE, RIGHT_HAND
-    #             },
-    #           },
-    #           antenna_downlink_demod_decode_config: {
-    #             decode_config: { # required
-    #               unvalidated_json: "JsonString", # required
-    #             },
-    #             demodulation_config: { # required
-    #               unvalidated_json: "JsonString", # required
-    #             },
-    #             spectrum_config: { # required
-    #               bandwidth: { # required
-    #                 units: "GHz", # required, accepts GHz, MHz, kHz
-    #                 value: 1.0, # required
-    #               },
-    #               center_frequency: { # required
-    #                 units: "GHz", # required, accepts GHz, MHz, kHz
-    #                 value: 1.0, # required
-    #               },
-    #               polarization: "LEFT_HAND", # accepts LEFT_HAND, NONE, RIGHT_HAND
-    #             },
-    #           },
-    #           antenna_uplink_config: {
-    #             spectrum_config: { # required
-    #               center_frequency: { # required
-    #                 units: "GHz", # required, accepts GHz, MHz, kHz
-    #                 value: 1.0, # required
-    #               },
-    #               polarization: "LEFT_HAND", # accepts LEFT_HAND, NONE, RIGHT_HAND
-    #             },
-    #             target_eirp: { # required
-    #               units: "dBW", # required, accepts dBW
-    #               value: 1.0, # required
-    #             },
-    #             transmit_disabled: false,
-    #           },
-    #           dataflow_endpoint_config: {
-    #             dataflow_endpoint_name: "String", # required
-    #             dataflow_endpoint_region: "String",
-    #           },
-    #           s3_recording_config: {
-    #             bucket_arn: "BucketArn", # required
-    #             prefix: "S3KeyPrefix",
-    #             role_arn: "RoleArn", # required
-    #           },
-    #           tracking_config: {
-    #             autotrack: "PREFERRED", # required, accepts PREFERRED, REMOVED, REQUIRED
-    #           },
-    #           uplink_echo_config: {
-    #             antenna_uplink_config_arn: "ConfigArn", # required
-    #             enabled: false, # required
-    #           },
-    #         },
-    #         config_id: "Uuid", # required
-    #         config_type: "antenna-downlink", # required, accepts antenna-downlink, antenna-downlink-demod-decode, antenna-uplink, dataflow-endpoint, tracking, uplink-echo, s3-recording
-    #         name: "SafeName", # required
-    #       }
-    #
     # @!attribute [rw] config_data
     #   Parameters of a `Config`.
     #   @return [Types::ConfigTypeData]
@@ -2969,16 +2286,6 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateEphemerisRequest
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false, # required
-    #         ephemeris_id: "Uuid", # required
-    #         name: "SafeName",
-    #         priority: 1,
-    #       }
-    #
     # @!attribute [rw] enabled
     #   Whether the ephemeris is enabled or not. Changing this value will
     #   not require the ephemeris to be re-validated.
@@ -3014,21 +2321,6 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateMissionProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         contact_post_pass_duration_seconds: 1,
-    #         contact_pre_pass_duration_seconds: 1,
-    #         dataflow_edges: [
-    #           ["ConfigArn"],
-    #         ],
-    #         minimum_viable_contact_duration_seconds: 1,
-    #         mission_profile_id: "Uuid", # required
-    #         name: "SafeName",
-    #         tracking_config_arn: "ConfigArn",
-    #       }
-    #
     # @!attribute [rw] contact_post_pass_duration_seconds
     #   Amount of time after a contact ends that you’d like to receive a
     #   CloudWatch event indicating the pass has finished.
@@ -3082,14 +2374,6 @@ module Aws::GroundStation
     # specified `AntennaUplinkConfigArn`, are used when this
     # `UplinkEchoConfig` is used in a contact.
     #
-    # @note When making an API call, you may pass UplinkEchoConfig
-    #   data as a hash:
-    #
-    #       {
-    #         antenna_uplink_config_arn: "ConfigArn", # required
-    #         enabled: false, # required
-    #       }
-    #
     # @!attribute [rw] antenna_uplink_config_arn
     #   ARN of an uplink `Config`.
     #   @return [String]
@@ -3108,17 +2392,6 @@ module Aws::GroundStation
     end
 
     # Information about the uplink spectral `Config`.
-    #
-    # @note When making an API call, you may pass UplinkSpectrumConfig
-    #   data as a hash:
-    #
-    #       {
-    #         center_frequency: { # required
-    #           units: "GHz", # required, accepts GHz, MHz, kHz
-    #           value: 1.0, # required
-    #         },
-    #         polarization: "LEFT_HAND", # accepts LEFT_HAND, NONE, RIGHT_HAND
-    #       }
     #
     # @!attribute [rw] center_frequency
     #   Center frequency of an uplink spectral `Config`. Valid values are

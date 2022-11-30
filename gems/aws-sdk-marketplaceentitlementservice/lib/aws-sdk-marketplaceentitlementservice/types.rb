@@ -98,18 +98,6 @@ module Aws::MarketplaceEntitlementService
     # The GetEntitlementsRequest contains parameters for the GetEntitlements
     # operation.
     #
-    # @note When making an API call, you may pass GetEntitlementsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         product_code: "ProductCode", # required
-    #         filter: {
-    #           "CUSTOMER_IDENTIFIER" => ["FilterValue"],
-    #         },
-    #         next_token: "NonEmptyString",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] product_code
     #   Product code is used to uniquely identify a product in AWS
     #   Marketplace. The product code will be provided by AWS Marketplace

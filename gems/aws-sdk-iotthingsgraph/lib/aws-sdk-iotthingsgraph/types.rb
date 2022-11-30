@@ -10,15 +10,6 @@
 module Aws::IoTThingsGraph
   module Types
 
-    # @note When making an API call, you may pass AssociateEntityToThingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         thing_name: "ThingName", # required
-    #         entity_id: "Urn", # required
-    #         namespace_version: 1,
-    #       }
-    #
     # @!attribute [rw] thing_name
     #   The name of the thing to which the entity is to be associated.
     #   @return [String]
@@ -46,17 +37,6 @@ module Aws::IoTThingsGraph
 
     class AssociateEntityToThingResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass CreateFlowTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         definition: { # required
-    #           language: "GRAPHQL", # required, accepts GRAPHQL
-    #           text: "DefinitionText", # required
-    #         },
-    #         compatible_namespace_version: 1,
-    #       }
-    #
     # @!attribute [rw] definition
     #   The workflow `DefinitionDocument`.
     #   @return [Types::DefinitionDocument]
@@ -84,30 +64,6 @@ module Aws::IoTThingsGraph
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateSystemInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         definition: { # required
-    #           language: "GRAPHQL", # required, accepts GRAPHQL
-    #           text: "DefinitionText", # required
-    #         },
-    #         target: "GREENGRASS", # required, accepts GREENGRASS, CLOUD
-    #         greengrass_group_name: "GroupName",
-    #         s3_bucket_name: "S3BucketName",
-    #         metrics_configuration: {
-    #           cloud_metric_enabled: false,
-    #           metric_rule_role_arn: "RoleArn",
-    #         },
-    #         flow_actions_role_arn: "RoleArn",
-    #       }
-    #
     # @!attribute [rw] tags
     #   Metadata, consisting of key-value pairs, that can be used to
     #   categorize your system instances.
@@ -170,17 +126,6 @@ module Aws::IoTThingsGraph
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateSystemTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         definition: { # required
-    #           language: "GRAPHQL", # required, accepts GRAPHQL
-    #           text: "DefinitionText", # required
-    #         },
-    #         compatible_namespace_version: 1,
-    #       }
-    #
     # @!attribute [rw] definition
     #   The `DefinitionDocument` used to create the system.
     #   @return [Types::DefinitionDocument]
@@ -210,14 +155,6 @@ module Aws::IoTThingsGraph
 
     # A document that defines an entity.
     #
-    # @note When making an API call, you may pass DefinitionDocument
-    #   data as a hash:
-    #
-    #       {
-    #         language: "GRAPHQL", # required, accepts GRAPHQL
-    #         text: "DefinitionText", # required
-    #       }
-    #
     # @!attribute [rw] language
     #   The language used to define the entity. `GRAPHQL` is the only valid
     #   value.
@@ -234,13 +171,6 @@ module Aws::IoTThingsGraph
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteFlowTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "Urn", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the workflow to be deleted.
     #
@@ -257,8 +187,6 @@ module Aws::IoTThingsGraph
 
     class DeleteFlowTemplateResponse < Aws::EmptyStructure; end
 
-    # @api private
-    #
     class DeleteNamespaceRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] namespace_arn
@@ -276,13 +204,6 @@ module Aws::IoTThingsGraph
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteSystemInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "Urn",
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the system instance to be deleted.
     #   @return [String]
@@ -295,13 +216,6 @@ module Aws::IoTThingsGraph
 
     class DeleteSystemInstanceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteSystemTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "Urn", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the system to be deleted.
     #
@@ -336,13 +250,6 @@ module Aws::IoTThingsGraph
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeploySystemInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "Urn",
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the system instance. This value is returned by the
     #   `CreateSystemInstance` action.
@@ -375,13 +282,6 @@ module Aws::IoTThingsGraph
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeprecateFlowTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "Urn", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the workflow to be deleted.
     #
@@ -398,13 +298,6 @@ module Aws::IoTThingsGraph
 
     class DeprecateFlowTemplateResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeprecateSystemTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "Urn", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the system to delete.
     #
@@ -421,13 +314,6 @@ module Aws::IoTThingsGraph
 
     class DeprecateSystemTemplateResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeNamespaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         namespace_name: "NamespaceName",
-    #       }
-    #
     # @!attribute [rw] namespace_name
     #   The name of the user's namespace. Set this to `aws` to get the
     #   public namespace.
@@ -471,14 +357,6 @@ module Aws::IoTThingsGraph
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DissociateEntityFromThingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         thing_name: "ThingName", # required
-    #         entity_type: "DEVICE", # required, accepts DEVICE, SERVICE, DEVICE_MODEL, CAPABILITY, STATE, ACTION, EVENT, PROPERTY, MAPPING, ENUM
-    #       }
-    #
     # @!attribute [rw] thing_name
     #   The name of the thing to disassociate.
     #   @return [String]
@@ -533,14 +411,6 @@ module Aws::IoTThingsGraph
     # `NAMESPACE` and a `REFERENCED_ENTITY_ID` filter searches for entities
     # in the specified namespace that use the entity specified by the value
     # of `REFERENCED_ENTITY_ID`.
-    #
-    # @note When making an API call, you may pass EntityFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "NAME", # accepts NAME, NAMESPACE, SEMANTIC_TYPE_PATH, REFERENCED_ENTITY_ID
-    #         value: ["EntityFilterValue"],
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the entity search filter field. `REFERENCED_ENTITY_ID`
@@ -651,14 +521,6 @@ module Aws::IoTThingsGraph
 
     # An object that filters a workflow search.
     #
-    # @note When making an API call, you may pass FlowTemplateFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "DEVICE_MODEL_ID", # required, accepts DEVICE_MODEL_ID
-    #         value: ["FlowTemplateFilterValue"], # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the search filter field.
     #   @return [String]
@@ -702,14 +564,6 @@ module Aws::IoTThingsGraph
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetEntitiesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         ids: ["Urn"], # required
-    #         namespace_version: 1,
-    #       }
-    #
     # @!attribute [rw] ids
     #   An array of entity IDs.
     #
@@ -740,14 +594,6 @@ module Aws::IoTThingsGraph
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetFlowTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "Urn", # required
-    #         revision_number: 1,
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the workflow.
     #
@@ -777,15 +623,6 @@ module Aws::IoTThingsGraph
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetFlowTemplateRevisionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "Urn", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the workflow.
     #
@@ -827,8 +664,6 @@ module Aws::IoTThingsGraph
       include Aws::Structure
     end
 
-    # @api private
-    #
     class GetNamespaceDeletionStatusRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] namespace_arn
@@ -861,13 +696,6 @@ module Aws::IoTThingsGraph
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSystemInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "Urn", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the system deployment instance. This value is returned by
     #   `CreateSystemInstance`.
@@ -893,14 +721,6 @@ module Aws::IoTThingsGraph
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSystemTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "Urn", # required
-    #         revision_number: 1,
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the system to get. This ID must be in the user's
     #   namespace.
@@ -931,15 +751,6 @@ module Aws::IoTThingsGraph
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSystemTemplateRevisionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "Urn", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the system template.
     #
@@ -982,13 +793,6 @@ module Aws::IoTThingsGraph
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetUploadStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         upload_id: "UploadId", # required
-    #       }
-    #
     # @!attribute [rw] upload_id
     #   The ID of the upload. This value is returned by the
     #   `UploadEntityDefinitions` action.
@@ -1069,15 +873,6 @@ module Aws::IoTThingsGraph
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFlowExecutionMessagesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         flow_execution_id: "FlowExecutionId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] flow_execution_id
     #   The ID of the flow execution.
     #   @return [String]
@@ -1116,15 +911,6 @@ module Aws::IoTThingsGraph
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         resource_arn: "ResourceArn", # required
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of tags to return.
     #   @return [Integer]
@@ -1163,14 +949,6 @@ module Aws::IoTThingsGraph
 
     # An object that specifies whether cloud metrics are collected in a
     # deployment and, if so, what role is used to collect metrics.
-    #
-    # @note When making an API call, you may pass MetricsConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         cloud_metric_enabled: false,
-    #         metric_rule_role_arn: "RoleArn",
-    #       }
     #
     # @!attribute [rw] cloud_metric_enabled
     #   A Boolean that specifies whether cloud metrics are collected.
@@ -1214,22 +992,6 @@ module Aws::IoTThingsGraph
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SearchEntitiesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         entity_types: ["DEVICE"], # required, accepts DEVICE, SERVICE, DEVICE_MODEL, CAPABILITY, STATE, ACTION, EVENT, PROPERTY, MAPPING, ENUM
-    #         filters: [
-    #           {
-    #             name: "NAME", # accepts NAME, NAMESPACE, SEMANTIC_TYPE_PATH, REFERENCED_ENTITY_ID
-    #             value: ["EntityFilterValue"],
-    #           },
-    #         ],
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         namespace_version: 1,
-    #       }
-    #
     # @!attribute [rw] entity_types
     #   The entity types for which to search.
     #   @return [Array<String>]
@@ -1286,18 +1048,6 @@ module Aws::IoTThingsGraph
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SearchFlowExecutionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         system_instance_id: "Urn", # required
-    #         flow_execution_id: "FlowExecutionId",
-    #         start_time: Time.now,
-    #         end_time: Time.now,
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] system_instance_id
     #   The ID of the system instance that contains the flow.
     #   @return [String]
@@ -1351,20 +1101,6 @@ module Aws::IoTThingsGraph
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SearchFlowTemplatesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             name: "DEVICE_MODEL_ID", # required, accepts DEVICE_MODEL_ID
-    #             value: ["FlowTemplateFilterValue"], # required
-    #           },
-    #         ],
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] filters
     #   An array of objects that limit the result set. The only valid filter
     #   is `DEVICE_MODEL_ID`.
@@ -1404,20 +1140,6 @@ module Aws::IoTThingsGraph
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SearchSystemInstancesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             name: "SYSTEM_TEMPLATE_ID", # accepts SYSTEM_TEMPLATE_ID, STATUS, GREENGRASS_GROUP_NAME
-    #             value: ["SystemInstanceFilterValue"],
-    #           },
-    #         ],
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] filters
     #   Optional filter to apply to the search. Valid filters are
     #   `SYSTEM_TEMPLATE_ID`, `STATUS`, and `GREENGRASS_GROUP_NAME`.
@@ -1460,20 +1182,6 @@ module Aws::IoTThingsGraph
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SearchSystemTemplatesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             name: "FLOW_TEMPLATE_ID", # required, accepts FLOW_TEMPLATE_ID
-    #             value: ["SystemTemplateFilterValue"], # required
-    #           },
-    #         ],
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] filters
     #   An array of filters that limit the result set. The only valid filter
     #   is `FLOW_TEMPLATE_ID`.
@@ -1513,16 +1221,6 @@ module Aws::IoTThingsGraph
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SearchThingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         entity_id: "Urn", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         namespace_version: 1,
-    #       }
-    #
     # @!attribute [rw] entity_id
     #   The ID of the entity to which the things are associated.
     #
@@ -1626,14 +1324,6 @@ module Aws::IoTThingsGraph
     # system instances in the specified Greengrass group that have the
     # specified status.
     #
-    # @note When making an API call, you may pass SystemInstanceFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "SYSTEM_TEMPLATE_ID", # accepts SYSTEM_TEMPLATE_ID, STATUS, GREENGRASS_GROUP_NAME
-    #         value: ["SystemInstanceFilterValue"],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the search filter field.
     #   @return [String]
@@ -1731,14 +1421,6 @@ module Aws::IoTThingsGraph
 
     # An object that filters a system search.
     #
-    # @note When making an API call, you may pass SystemTemplateFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "FLOW_TEMPLATE_ID", # required, accepts FLOW_TEMPLATE_ID
-    #         value: ["SystemTemplateFilterValue"], # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the system search filter field.
     #   @return [String]
@@ -1785,14 +1467,6 @@ module Aws::IoTThingsGraph
     # Metadata assigned to an AWS IoT Things Graph resource consisting of a
     # key-value pair.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The required name of the tag. The string value can be from 1 to 128
     #   Unicode characters in length.
@@ -1810,19 +1484,6 @@ module Aws::IoTThingsGraph
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource whose tags are
     #   returned.
@@ -1867,13 +1528,6 @@ module Aws::IoTThingsGraph
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UndeploySystemInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "Urn",
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the system instance to remove from its target.
     #   @return [String]
@@ -1895,14 +1549,6 @@ module Aws::IoTThingsGraph
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource whose tags are to be
     #   removed.
@@ -1932,18 +1578,6 @@ module Aws::IoTThingsGraph
 
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateFlowTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "Urn", # required
-    #         definition: { # required
-    #           language: "GRAPHQL", # required, accepts GRAPHQL
-    #           text: "DefinitionText", # required
-    #         },
-    #         compatible_namespace_version: 1,
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the workflow to be updated.
     #
@@ -1983,18 +1617,6 @@ module Aws::IoTThingsGraph
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateSystemTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "Urn", # required
-    #         definition: { # required
-    #           language: "GRAPHQL", # required, accepts GRAPHQL
-    #           text: "DefinitionText", # required
-    #         },
-    #         compatible_namespace_version: 1,
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the system to be updated.
     #
@@ -2033,18 +1655,6 @@ module Aws::IoTThingsGraph
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UploadEntityDefinitionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         document: {
-    #           language: "GRAPHQL", # required, accepts GRAPHQL
-    #           text: "DefinitionText", # required
-    #         },
-    #         sync_with_public_namespace: false,
-    #         deprecate_existing_entities: false,
-    #       }
-    #
     # @!attribute [rw] document
     #   The `DefinitionDocument` that defines the updated entities.
     #   @return [Types::DefinitionDocument]

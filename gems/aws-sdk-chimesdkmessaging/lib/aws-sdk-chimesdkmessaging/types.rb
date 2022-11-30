@@ -35,15 +35,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateChannelFlowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_arn: "ChimeArn", # required
-    #         channel_flow_arn: "ChimeArn", # required
-    #         chime_bearer: "ChimeArn", # required
-    #       }
-    #
     # @!attribute [rw] channel_arn
     #   The ARN of the channel.
     #   @return [String]
@@ -143,17 +134,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchCreateChannelMembershipRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_arn: "ChimeArn", # required
-    #         type: "DEFAULT", # accepts DEFAULT, HIDDEN
-    #         member_arns: ["ChimeArn"], # required
-    #         chime_bearer: "ChimeArn", # required
-    #         sub_channel_id: "SubChannelId",
-    #       }
-    #
     # @!attribute [rw] channel_arn
     #   The ARN of the channel to which you're adding users.
     #   @return [String]
@@ -391,31 +371,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ChannelFlowCallbackRequest
-    #   data as a hash:
-    #
-    #       {
-    #         callback_id: "CallbackIdType", # required
-    #         channel_arn: "ChimeArn", # required
-    #         delete_resource: false,
-    #         channel_message: { # required
-    #           message_id: "MessageId", # required
-    #           content: "NonEmptyContent",
-    #           metadata: "Metadata",
-    #           push_notification: {
-    #             title: "PushNotificationTitle",
-    #             body: "PushNotificationBody",
-    #             type: "DEFAULT", # accepts DEFAULT, VOIP
-    #           },
-    #           message_attributes: {
-    #             "MessageAttributeName" => {
-    #               string_values: ["MessageAttributeStringValue"],
-    #             },
-    #           },
-    #           sub_channel_id: "SubChannelId",
-    #         },
-    #       }
-    #
     # @!attribute [rw] callback_id
     #   The identifier passed to the processor by the service when invoked.
     #   Use the identifier to call back the service.
@@ -554,16 +509,6 @@ module Aws::ChimeSDKMessaging
 
     # The channel membership preferences for an `AppInstanceUser`.
     #
-    # @note When making an API call, you may pass ChannelMembershipPreferences
-    #   data as a hash:
-    #
-    #       {
-    #         push_notifications: {
-    #           allow_notifications: "ALL", # required, accepts ALL, NONE, FILTERED
-    #           filter_rule: "FilterRule",
-    #         },
-    #       }
-    #
     # @!attribute [rw] push_notifications
     #   The push notification configuration of a message.
     #   @return [Types::PushNotificationPreferences]
@@ -671,26 +616,6 @@ module Aws::ChimeSDKMessaging
     end
 
     # Stores information about a callback.
-    #
-    # @note When making an API call, you may pass ChannelMessageCallback
-    #   data as a hash:
-    #
-    #       {
-    #         message_id: "MessageId", # required
-    #         content: "NonEmptyContent",
-    #         metadata: "Metadata",
-    #         push_notification: {
-    #           title: "PushNotificationTitle",
-    #           body: "PushNotificationBody",
-    #           type: "DEFAULT", # accepts DEFAULT, VOIP
-    #         },
-    #         message_attributes: {
-    #           "MessageAttributeName" => {
-    #             string_values: ["MessageAttributeStringValue"],
-    #           },
-    #         },
-    #         sub_channel_id: "SubChannelId",
-    #       }
     #
     # @!attribute [rw] message_id
     #   The message ID.
@@ -929,15 +854,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateChannelBanRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_arn: "ChimeArn", # required
-    #         member_arn: "ChimeArn", # required
-    #         chime_bearer: "ChimeArn", # required
-    #       }
-    #
     # @!attribute [rw] channel_arn
     #   The ARN of the ban request.
     #   @return [String]
@@ -978,34 +894,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateChannelFlowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_instance_arn: "ChimeArn", # required
-    #         processors: [ # required
-    #           {
-    #             name: "NonEmptyResourceName", # required
-    #             configuration: { # required
-    #               lambda: { # required
-    #                 resource_arn: "LambdaFunctionArn", # required
-    #                 invocation_type: "ASYNC", # required, accepts ASYNC
-    #               },
-    #             },
-    #             execution_order: 1, # required
-    #             fallback_action: "CONTINUE", # required, accepts CONTINUE, ABORT
-    #           },
-    #         ],
-    #         name: "NonEmptyResourceName", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         client_request_token: "ClientRequestToken", # required
-    #       }
-    #
     # @!attribute [rw] app_instance_arn
     #   The ARN of the channel flow request.
     #   @return [String]
@@ -1050,17 +938,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateChannelMembershipRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_arn: "ChimeArn", # required
-    #         member_arn: "ChimeArn", # required
-    #         type: "DEFAULT", # required, accepts DEFAULT, HIDDEN
-    #         chime_bearer: "ChimeArn", # required
-    #         sub_channel_id: "SubChannelId",
-    #       }
-    #
     # @!attribute [rw] channel_arn
     #   The ARN of the channel to which you're adding users.
     #   @return [String]
@@ -1125,15 +1002,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateChannelModeratorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_arn: "ChimeArn", # required
-    #         channel_moderator_arn: "ChimeArn", # required
-    #         chime_bearer: "ChimeArn", # required
-    #       }
-    #
     # @!attribute [rw] channel_arn
     #   The ARN of the channel.
     #   @return [String]
@@ -1173,33 +1041,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateChannelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_instance_arn: "ChimeArn", # required
-    #         name: "NonEmptyResourceName", # required
-    #         mode: "UNRESTRICTED", # accepts UNRESTRICTED, RESTRICTED
-    #         privacy: "PUBLIC", # accepts PUBLIC, PRIVATE
-    #         metadata: "Metadata",
-    #         client_request_token: "ClientRequestToken", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         chime_bearer: "ChimeArn", # required
-    #         channel_id: "ChannelId",
-    #         member_arns: ["ChimeArn"],
-    #         moderator_arns: ["ChimeArn"],
-    #         elastic_channel_configuration: {
-    #           maximum_sub_channels: 1, # required
-    #           target_memberships_per_sub_channel: 1, # required
-    #           minimum_membership_percentage: 1, # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] app_instance_arn
     #   The ARN of the channel request.
     #   @return [String]
@@ -1289,15 +1130,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteChannelBanRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_arn: "ChimeArn", # required
-    #         member_arn: "ChimeArn", # required
-    #         chime_bearer: "ChimeArn", # required
-    #       }
-    #
     # @!attribute [rw] channel_arn
     #   The ARN of the channel from which the `AppInstanceUser` was banned.
     #   @return [String]
@@ -1320,13 +1152,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteChannelFlowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_flow_arn: "ChimeArn", # required
-    #       }
-    #
     # @!attribute [rw] channel_flow_arn
     #   The ARN of the channel flow.
     #   @return [String]
@@ -1339,16 +1164,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteChannelMembershipRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_arn: "ChimeArn", # required
-    #         member_arn: "ChimeArn", # required
-    #         chime_bearer: "ChimeArn", # required
-    #         sub_channel_id: "SubChannelId",
-    #       }
-    #
     # @!attribute [rw] channel_arn
     #   The ARN of the channel from which you want to remove the user.
     #   @return [String]
@@ -1381,16 +1196,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteChannelMessageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_arn: "ChimeArn", # required
-    #         message_id: "MessageId", # required
-    #         chime_bearer: "ChimeArn", # required
-    #         sub_channel_id: "SubChannelId",
-    #       }
-    #
     # @!attribute [rw] channel_arn
     #   The ARN of the channel.
     #   @return [String]
@@ -1423,15 +1228,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteChannelModeratorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_arn: "ChimeArn", # required
-    #         channel_moderator_arn: "ChimeArn", # required
-    #         chime_bearer: "ChimeArn", # required
-    #       }
-    #
     # @!attribute [rw] channel_arn
     #   The ARN of the channel.
     #   @return [String]
@@ -1454,15 +1250,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteChannelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_arn: "ChimeArn", # required
-    #         chime_bearer: "ChimeArn", # required
-    #         sub_channel_id: "SubChannelId",
-    #       }
-    #
     # @!attribute [rw] channel_arn
     #   The ARN of the channel being deleted.
     #   @return [String]
@@ -1485,15 +1272,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeChannelBanRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_arn: "ChimeArn", # required
-    #         member_arn: "ChimeArn", # required
-    #         chime_bearer: "ChimeArn", # required
-    #       }
-    #
     # @!attribute [rw] channel_arn
     #   The ARN of the channel from which the user is banned.
     #   @return [String]
@@ -1528,13 +1306,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeChannelFlowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_flow_arn: "ChimeArn", # required
-    #       }
-    #
     # @!attribute [rw] channel_flow_arn
     #   The ARN of the channel flow.
     #   @return [String]
@@ -1559,15 +1330,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeChannelMembershipForAppInstanceUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_arn: "ChimeArn", # required
-    #         app_instance_user_arn: "ChimeArn", # required
-    #         chime_bearer: "ChimeArn", # required
-    #       }
-    #
     # @!attribute [rw] channel_arn
     #   The ARN of the channel to which the user belongs.
     #   @return [String]
@@ -1602,16 +1364,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeChannelMembershipRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_arn: "ChimeArn", # required
-    #         member_arn: "ChimeArn", # required
-    #         chime_bearer: "ChimeArn", # required
-    #         sub_channel_id: "SubChannelId",
-    #       }
-    #
     # @!attribute [rw] channel_arn
     #   The ARN of the channel.
     #   @return [String]
@@ -1656,15 +1408,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeChannelModeratedByAppInstanceUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_arn: "ChimeArn", # required
-    #         app_instance_user_arn: "ChimeArn", # required
-    #         chime_bearer: "ChimeArn", # required
-    #       }
-    #
     # @!attribute [rw] channel_arn
     #   The ARN of the moderated channel.
     #   @return [String]
@@ -1699,15 +1442,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeChannelModeratorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_arn: "ChimeArn", # required
-    #         channel_moderator_arn: "ChimeArn", # required
-    #         chime_bearer: "ChimeArn", # required
-    #       }
-    #
     # @!attribute [rw] channel_arn
     #   The ARN of the channel.
     #   @return [String]
@@ -1742,14 +1476,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeChannelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_arn: "ChimeArn", # required
-    #         chime_bearer: "ChimeArn", # required
-    #       }
-    #
     # @!attribute [rw] channel_arn
     #   The ARN of the channel.
     #   @return [String]
@@ -1779,15 +1505,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateChannelFlowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_arn: "ChimeArn", # required
-    #         channel_flow_arn: "ChimeArn", # required
-    #         chime_bearer: "ChimeArn", # required
-    #       }
-    #
     # @!attribute [rw] channel_arn
     #   The ARN of the channel.
     #   @return [String]
@@ -1812,15 +1529,6 @@ module Aws::ChimeSDKMessaging
 
     # The attributes required to configure and create an elastic channel. An
     # elastic channel can support a maximum of 1-million members.
-    #
-    # @note When making an API call, you may pass ElasticChannelConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         maximum_sub_channels: 1, # required
-    #         target_memberships_per_sub_channel: 1, # required
-    #         minimum_membership_percentage: 1, # required
-    #       }
     #
     # @!attribute [rw] maximum_sub_channels
     #   The maximum number of SubChannels that you want to allow in the
@@ -1864,15 +1572,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetChannelMembershipPreferencesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_arn: "ChimeArn", # required
-    #         member_arn: "ChimeArn", # required
-    #         chime_bearer: "ChimeArn", # required
-    #       }
-    #
     # @!attribute [rw] channel_arn
     #   The ARN of the channel.
     #   @return [String]
@@ -1917,16 +1616,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetChannelMessageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_arn: "ChimeArn", # required
-    #         message_id: "MessageId", # required
-    #         chime_bearer: "ChimeArn", # required
-    #         sub_channel_id: "SubChannelId",
-    #       }
-    #
     # @!attribute [rw] channel_arn
     #   The ARN of the channel.
     #   @return [String]
@@ -1971,16 +1660,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetChannelMessageStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_arn: "ChimeArn", # required
-    #         message_id: "MessageId", # required
-    #         chime_bearer: "ChimeArn", # required
-    #         sub_channel_id: "SubChannelId",
-    #       }
-    #
     # @!attribute [rw] channel_arn
     #   The ARN of the channel
     #   @return [String]
@@ -2025,8 +1704,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/GetMessagingSessionEndpointRequest AWS API Documentation
     #
     class GetMessagingSessionEndpointRequest < Aws::EmptyStructure; end
@@ -2064,14 +1741,6 @@ module Aws::ChimeSDKMessaging
 
     # Stores metadata about a Lambda processor.
     #
-    # @note When making an API call, you may pass LambdaConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "LambdaFunctionArn", # required
-    #         invocation_type: "ASYNC", # required, accepts ASYNC
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the Lambda message processing function.
     #   @return [String]
@@ -2089,16 +1758,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListChannelBansRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_arn: "ChimeArn", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         chime_bearer: "ChimeArn", # required
-    #       }
-    #
     # @!attribute [rw] channel_arn
     #   The ARN of the channel.
     #   @return [String]
@@ -2150,15 +1809,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListChannelFlowsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_instance_arn: "ChimeArn", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] app_instance_arn
     #   The ARN of the app instance.
     #   @return [String]
@@ -2200,16 +1850,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListChannelMembershipsForAppInstanceUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_instance_user_arn: "ChimeArn",
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         chime_bearer: "ChimeArn", # required
-    #       }
-    #
     # @!attribute [rw] app_instance_user_arn
     #   The ARN of the `AppInstanceUser`s
     #   @return [String]
@@ -2256,18 +1896,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListChannelMembershipsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_arn: "ChimeArn", # required
-    #         type: "DEFAULT", # accepts DEFAULT, HIDDEN
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         chime_bearer: "ChimeArn", # required
-    #         sub_channel_id: "SubChannelId",
-    #       }
-    #
     # @!attribute [rw] channel_arn
     #   The maximum number of channel memberships that you want returned.
     #   @return [String]
@@ -2337,20 +1965,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListChannelMessagesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_arn: "ChimeArn", # required
-    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #         not_before: Time.now,
-    #         not_after: Time.now,
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         chime_bearer: "ChimeArn", # required
-    #         sub_channel_id: "SubChannelId",
-    #       }
-    #
     # @!attribute [rw] channel_arn
     #   The ARN of the channel.
     #   @return [String]
@@ -2433,16 +2047,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListChannelModeratorsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_arn: "ChimeArn", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         chime_bearer: "ChimeArn", # required
-    #       }
-    #
     # @!attribute [rw] channel_arn
     #   The ARN of the channel.
     #   @return [String]
@@ -2494,15 +2098,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListChannelsAssociatedWithChannelFlowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_flow_arn: "ChimeArn", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] channel_flow_arn
     #   The ARN of the channel flow.
     #   @return [String]
@@ -2544,16 +2139,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListChannelsModeratedByAppInstanceUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_instance_user_arn: "ChimeArn",
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         chime_bearer: "ChimeArn", # required
-    #       }
-    #
     # @!attribute [rw] app_instance_user_arn
     #   The ARN of the user in the moderated channel.
     #   @return [String]
@@ -2600,17 +2185,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListChannelsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_instance_arn: "ChimeArn", # required
-    #         privacy: "PUBLIC", # accepts PUBLIC, PRIVATE
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         chime_bearer: "ChimeArn", # required
-    #       }
-    #
     # @!attribute [rw] app_instance_arn
     #   The ARN of the `AppInstance`.
     #   @return [String]
@@ -2664,16 +2238,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSubChannelsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_arn: "ChimeArn", # required
-    #         chime_bearer: "ChimeArn", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] channel_arn
     #   The ARN of elastic channel.
     #   @return [String]
@@ -2725,13 +2289,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ChimeArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource.
     #   @return [String]
@@ -2757,13 +2314,6 @@ module Aws::ChimeSDKMessaging
     end
 
     # A list of message attribute values.
-    #
-    # @note When making an API call, you may pass MessageAttributeValue
-    #   data as a hash:
-    #
-    #       {
-    #         string_values: ["MessageAttributeStringValue"],
-    #       }
     #
     # @!attribute [rw] string_values
     #   The strings in a message attribute value.
@@ -2811,21 +2361,6 @@ module Aws::ChimeSDKMessaging
 
     # The information about a processor in a channel flow.
     #
-    # @note When making an API call, you may pass Processor
-    #   data as a hash:
-    #
-    #       {
-    #         name: "NonEmptyResourceName", # required
-    #         configuration: { # required
-    #           lambda: { # required
-    #             resource_arn: "LambdaFunctionArn", # required
-    #             invocation_type: "ASYNC", # required, accepts ASYNC
-    #           },
-    #         },
-    #         execution_order: 1, # required
-    #         fallback_action: "CONTINUE", # required, accepts CONTINUE, ABORT
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the channel flow.
     #   @return [String]
@@ -2865,16 +2400,6 @@ module Aws::ChimeSDKMessaging
 
     # A processor's metadata.
     #
-    # @note When making an API call, you may pass ProcessorConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         lambda: { # required
-    #           resource_arn: "LambdaFunctionArn", # required
-    #           invocation_type: "ASYNC", # required, accepts ASYNC
-    #         },
-    #       }
-    #
     # @!attribute [rw] lambda
     #   Indicates that the processor is of type Lambda.
     #   @return [Types::LambdaConfiguration]
@@ -2888,15 +2413,6 @@ module Aws::ChimeSDKMessaging
     end
 
     # The push notification configuration of the message.
-    #
-    # @note When making an API call, you may pass PushNotificationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         title: "PushNotificationTitle",
-    #         body: "PushNotificationBody",
-    #         type: "DEFAULT", # accepts DEFAULT, VOIP
-    #       }
     #
     # @!attribute [rw] title
     #   The title of the push notification.
@@ -2924,14 +2440,6 @@ module Aws::ChimeSDKMessaging
 
     # The channel membership preferences for push notification.
     #
-    # @note When making an API call, you may pass PushNotificationPreferences
-    #   data as a hash:
-    #
-    #       {
-    #         allow_notifications: "ALL", # required, accepts ALL, NONE, FILTERED
-    #         filter_rule: "FilterRule",
-    #       }
-    #
     # @!attribute [rw] allow_notifications
     #   Enum value that indicates which push notifications to send to the
     #   requested member of a channel. `ALL` sends all push notifications,
@@ -2953,21 +2461,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutChannelMembershipPreferencesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_arn: "ChimeArn", # required
-    #         member_arn: "ChimeArn", # required
-    #         chime_bearer: "ChimeArn", # required
-    #         preferences: { # required
-    #           push_notifications: {
-    #             allow_notifications: "ALL", # required, accepts ALL, NONE, FILTERED
-    #             filter_rule: "FilterRule",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] channel_arn
     #   The ARN of the channel.
     #   @return [String]
@@ -3017,16 +2510,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RedactChannelMessageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_arn: "ChimeArn", # required
-    #         message_id: "MessageId", # required
-    #         chime_bearer: "ChimeArn", # required
-    #         sub_channel_id: "SubChannelId",
-    #       }
-    #
     # @!attribute [rw] channel_arn
     #   The ARN of the channel containing the messages that you want to
     #   redact.
@@ -3100,22 +2583,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SearchChannelsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         chime_bearer: "ChimeArn",
-    #         fields: [ # required
-    #           {
-    #             key: "MEMBERS", # required, accepts MEMBERS
-    #             values: ["SearchFieldValue"], # required
-    #             operator: "EQUALS", # required, accepts EQUALS, INCLUDES
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] chime_bearer
     #   The `AppInstanceUserArn` of the user making the API call.
     #   @return [String]
@@ -3164,15 +2631,6 @@ module Aws::ChimeSDKMessaging
 
     # A `Field` of the channel that you want to search.
     #
-    # @note When making an API call, you may pass SearchField
-    #   data as a hash:
-    #
-    #       {
-    #         key: "MEMBERS", # required, accepts MEMBERS
-    #         values: ["SearchFieldValue"], # required
-    #         operator: "EQUALS", # required, accepts EQUALS, INCLUDES
-    #       }
-    #
     # @!attribute [rw] key
     #   An `enum` value that indicates the key to search the channel on.
     #   `MEMBERS` allows you to search channels based on memberships. You
@@ -3209,30 +2667,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SendChannelMessageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_arn: "ChimeArn", # required
-    #         content: "NonEmptyContent", # required
-    #         type: "STANDARD", # required, accepts STANDARD, CONTROL
-    #         persistence: "PERSISTENT", # required, accepts PERSISTENT, NON_PERSISTENT
-    #         metadata: "Metadata",
-    #         client_request_token: "ClientRequestToken", # required
-    #         chime_bearer: "ChimeArn", # required
-    #         push_notification: {
-    #           title: "PushNotificationTitle",
-    #           body: "PushNotificationBody",
-    #           type: "DEFAULT", # accepts DEFAULT, VOIP
-    #         },
-    #         message_attributes: {
-    #           "MessageAttributeName" => {
-    #             string_values: ["MessageAttributeStringValue"],
-    #           },
-    #         },
-    #         sub_channel_id: "SubChannelId",
-    #       }
-    #
     # @!attribute [rw] channel_arn
     #   The ARN of the channel.
     #   @return [String]
@@ -3377,14 +2811,6 @@ module Aws::ChimeSDKMessaging
 
     # A tag object containing a key-value pair.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The key in a tag.
     #   @return [String]
@@ -3402,19 +2828,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ChimeArn", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The resource ARN.
     #   @return [String]
@@ -3466,14 +2879,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ChimeArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The resource ARN.
     #   @return [String]
@@ -3491,27 +2896,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateChannelFlowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_flow_arn: "ChimeArn", # required
-    #         processors: [ # required
-    #           {
-    #             name: "NonEmptyResourceName", # required
-    #             configuration: { # required
-    #               lambda: { # required
-    #                 resource_arn: "LambdaFunctionArn", # required
-    #                 invocation_type: "ASYNC", # required, accepts ASYNC
-    #               },
-    #             },
-    #             execution_order: 1, # required
-    #             fallback_action: "CONTINUE", # required, accepts CONTINUE, ABORT
-    #           },
-    #         ],
-    #         name: "NonEmptyResourceName", # required
-    #       }
-    #
     # @!attribute [rw] channel_flow_arn
     #   The ARN of the channel flow.
     #   @return [String]
@@ -3546,18 +2930,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateChannelMessageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_arn: "ChimeArn", # required
-    #         message_id: "MessageId", # required
-    #         content: "Content",
-    #         metadata: "Metadata",
-    #         chime_bearer: "ChimeArn", # required
-    #         sub_channel_id: "SubChannelId",
-    #       }
-    #
     # @!attribute [rw] channel_arn
     #   The ARN of the channel.
     #   @return [String]
@@ -3627,15 +2999,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateChannelReadMarkerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_arn: "ChimeArn", # required
-    #         chime_bearer: "ChimeArn", # required
-    #         sub_channel_id: "SubChannelId",
-    #       }
-    #
     # @!attribute [rw] channel_arn
     #   The ARN of the channel.
     #   @return [String]
@@ -3675,17 +3038,6 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateChannelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_arn: "ChimeArn", # required
-    #         name: "NonEmptyResourceName",
-    #         mode: "UNRESTRICTED", # accepts UNRESTRICTED, RESTRICTED
-    #         metadata: "Metadata",
-    #         chime_bearer: "ChimeArn", # required
-    #       }
-    #
     # @!attribute [rw] channel_arn
     #   The ARN of the channel.
     #   @return [String]

@@ -52,14 +52,6 @@ module Aws::Route53
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ActivateKeySigningKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         hosted_zone_id: "ResourceId", # required
-    #         name: "SigningKeyName", # required
-    #       }
-    #
     # @!attribute [rw] hosted_zone_id
     #   A unique string used to identify a hosted zone.
     #   @return [String]
@@ -95,14 +87,6 @@ module Aws::Route53
     # A complex type that identifies the CloudWatch alarm that you want
     # Amazon Route 53 health checkers to use to determine whether the
     # specified health check is healthy.
-    #
-    # @note When making an API call, you may pass AlarmIdentifier
-    #   data as a hash:
-    #
-    #       {
-    #         region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-central-2, eu-west-1, eu-west-2, eu-west-3, ap-east-1, me-south-1, me-central-1, ap-south-1, ap-south-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-northwest-1, cn-north-1, af-south-1, eu-south-1, eu-south-2, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1
-    #         name: "AlarmName", # required
-    #       }
     #
     # @!attribute [rw] region
     #   For the CloudWatch alarm that you want Route 53 health checkers to
@@ -164,15 +148,6 @@ module Aws::Route53
     #
     #
     # [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-private-hosted-zones.html
-    #
-    # @note When making an API call, you may pass AliasTarget
-    #   data as a hash:
-    #
-    #       {
-    #         hosted_zone_id: "ResourceId", # required
-    #         dns_name: "DNSName", # required
-    #         evaluate_target_health: false, # required
-    #       }
     #
     # @!attribute [rw] hosted_zone_id
     #   *Alias resource records sets only*\: The value used depends on where
@@ -556,18 +531,6 @@ module Aws::Route53
     # A complex type that contains information about the request to
     # associate a VPC with a private hosted zone.
     #
-    # @note When making an API call, you may pass AssociateVPCWithHostedZoneRequest
-    #   data as a hash:
-    #
-    #       {
-    #         hosted_zone_id: "ResourceId", # required
-    #         vpc: { # required
-    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-central-2, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, me-central-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-south-1, ap-south-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1, eu-south-2
-    #           vpc_id: "VPCId",
-    #         },
-    #         comment: "AssociateVPCComment",
-    #       }
-    #
     # @!attribute [rw] hosted_zone_id
     #   The ID of the private hosted zone that you want to associate an
     #   Amazon VPC with.
@@ -612,44 +575,6 @@ module Aws::Route53
 
     # The information for each resource record set that you want to change.
     #
-    # @note When making an API call, you may pass Change
-    #   data as a hash:
-    #
-    #       {
-    #         action: "CREATE", # required, accepts CREATE, DELETE, UPSERT
-    #         resource_record_set: { # required
-    #           name: "DNSName", # required
-    #           type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA, DS
-    #           set_identifier: "ResourceRecordSetIdentifier",
-    #           weight: 1,
-    #           region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-central-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-north-1, cn-northwest-1, ap-east-1, me-south-1, me-central-1, ap-south-1, ap-south-2, af-south-1, eu-south-1, eu-south-2
-    #           geo_location: {
-    #             continent_code: "GeoLocationContinentCode",
-    #             country_code: "GeoLocationCountryCode",
-    #             subdivision_code: "GeoLocationSubdivisionCode",
-    #           },
-    #           failover: "PRIMARY", # accepts PRIMARY, SECONDARY
-    #           multi_value_answer: false,
-    #           ttl: 1,
-    #           resource_records: [
-    #             {
-    #               value: "RData", # required
-    #             },
-    #           ],
-    #           alias_target: {
-    #             hosted_zone_id: "ResourceId", # required
-    #             dns_name: "DNSName", # required
-    #             evaluate_target_health: false, # required
-    #           },
-    #           health_check_id: "HealthCheckId",
-    #           traffic_policy_instance_id: "TrafficPolicyInstanceId",
-    #           cidr_routing_config: {
-    #             collection_id: "UUID", # required
-    #             location_name: "CidrLocationNameDefaultAllowed", # required
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] action
     #   The action to perform:
     #
@@ -691,49 +616,6 @@ module Aws::Route53
 
     # The information for a change request.
     #
-    # @note When making an API call, you may pass ChangeBatch
-    #   data as a hash:
-    #
-    #       {
-    #         comment: "ResourceDescription",
-    #         changes: [ # required
-    #           {
-    #             action: "CREATE", # required, accepts CREATE, DELETE, UPSERT
-    #             resource_record_set: { # required
-    #               name: "DNSName", # required
-    #               type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA, DS
-    #               set_identifier: "ResourceRecordSetIdentifier",
-    #               weight: 1,
-    #               region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-central-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-north-1, cn-northwest-1, ap-east-1, me-south-1, me-central-1, ap-south-1, ap-south-2, af-south-1, eu-south-1, eu-south-2
-    #               geo_location: {
-    #                 continent_code: "GeoLocationContinentCode",
-    #                 country_code: "GeoLocationCountryCode",
-    #                 subdivision_code: "GeoLocationSubdivisionCode",
-    #               },
-    #               failover: "PRIMARY", # accepts PRIMARY, SECONDARY
-    #               multi_value_answer: false,
-    #               ttl: 1,
-    #               resource_records: [
-    #                 {
-    #                   value: "RData", # required
-    #                 },
-    #               ],
-    #               alias_target: {
-    #                 hosted_zone_id: "ResourceId", # required
-    #                 dns_name: "DNSName", # required
-    #                 evaluate_target_health: false, # required
-    #               },
-    #               health_check_id: "HealthCheckId",
-    #               traffic_policy_instance_id: "TrafficPolicyInstanceId",
-    #               cidr_routing_config: {
-    #                 collection_id: "UUID", # required
-    #                 location_name: "CidrLocationNameDefaultAllowed", # required
-    #               },
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] comment
     #   *Optional:* Any comments you want to include about a change batch
     #   request.
@@ -752,21 +634,6 @@ module Aws::Route53
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ChangeCidrCollectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "UUID", # required
-    #         collection_version: 1,
-    #         changes: [ # required
-    #           {
-    #             location_name: "CidrLocationNameDefaultNotAllowed", # required
-    #             action: "PUT", # required, accepts PUT, DELETE_IF_EXISTS
-    #             cidr_list: ["Cidr"], # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] id
     #   The UUID of the CIDR collection to update.
     #   @return [String]
@@ -866,52 +733,6 @@ module Aws::Route53
     # A complex type that contains change information for the resource
     # record set.
     #
-    # @note When making an API call, you may pass ChangeResourceRecordSetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         hosted_zone_id: "ResourceId", # required
-    #         change_batch: { # required
-    #           comment: "ResourceDescription",
-    #           changes: [ # required
-    #             {
-    #               action: "CREATE", # required, accepts CREATE, DELETE, UPSERT
-    #               resource_record_set: { # required
-    #                 name: "DNSName", # required
-    #                 type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA, DS
-    #                 set_identifier: "ResourceRecordSetIdentifier",
-    #                 weight: 1,
-    #                 region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-central-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-north-1, cn-northwest-1, ap-east-1, me-south-1, me-central-1, ap-south-1, ap-south-2, af-south-1, eu-south-1, eu-south-2
-    #                 geo_location: {
-    #                   continent_code: "GeoLocationContinentCode",
-    #                   country_code: "GeoLocationCountryCode",
-    #                   subdivision_code: "GeoLocationSubdivisionCode",
-    #                 },
-    #                 failover: "PRIMARY", # accepts PRIMARY, SECONDARY
-    #                 multi_value_answer: false,
-    #                 ttl: 1,
-    #                 resource_records: [
-    #                   {
-    #                     value: "RData", # required
-    #                   },
-    #                 ],
-    #                 alias_target: {
-    #                   hosted_zone_id: "ResourceId", # required
-    #                   dns_name: "DNSName", # required
-    #                   evaluate_target_health: false, # required
-    #                 },
-    #                 health_check_id: "HealthCheckId",
-    #                 traffic_policy_instance_id: "TrafficPolicyInstanceId",
-    #                 cidr_routing_config: {
-    #                   collection_id: "UUID", # required
-    #                   location_name: "CidrLocationNameDefaultAllowed", # required
-    #                 },
-    #               },
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] hosted_zone_id
     #   The ID of the hosted zone that contains the resource record sets
     #   that you want to change.
@@ -955,21 +776,6 @@ module Aws::Route53
 
     # A complex type that contains information about the tags that you want
     # to add, edit, or delete.
-    #
-    # @note When making an API call, you may pass ChangeTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_type: "healthcheck", # required, accepts healthcheck, hostedzone
-    #         resource_id: "TagResourceId", # required
-    #         add_tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         remove_tag_keys: ["TagKey"],
-    #       }
     #
     # @!attribute [rw] resource_type
     #   The type of the resource.
@@ -1096,15 +902,6 @@ module Aws::Route53
     # A complex type that contains information about the CIDR collection
     # change.
     #
-    # @note When making an API call, you may pass CidrCollectionChange
-    #   data as a hash:
-    #
-    #       {
-    #         location_name: "CidrLocationNameDefaultNotAllowed", # required
-    #         action: "PUT", # required, accepts PUT, DELETE_IF_EXISTS
-    #         cidr_list: ["Cidr"], # required
-    #       }
-    #
     # @!attribute [rw] location_name
     #   Name of the location that is associated with the CIDR collection.
     #   @return [String]
@@ -1159,14 +956,6 @@ module Aws::Route53
     #
     # A `LocationName` with an asterisk “*” can be used to create a default
     # CIDR record. `CollectionId` is still required for default record.
-    #
-    # @note When making an API call, you may pass CidrRoutingConfig
-    #   data as a hash:
-    #
-    #       {
-    #         collection_id: "UUID", # required
-    #         location_name: "CidrLocationNameDefaultAllowed", # required
-    #       }
     #
     # @!attribute [rw] collection_id
     #   The CIDR collection ID.
@@ -1355,14 +1144,6 @@ module Aws::Route53
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateCidrCollectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "CollectionName", # required
-    #         caller_reference: "CidrNonce", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   A unique identifier for the account that can be used to reference
     #   the collection from other API calls.
@@ -1401,36 +1182,6 @@ module Aws::Route53
     end
 
     # A complex type that contains the health check request information.
-    #
-    # @note When making an API call, you may pass CreateHealthCheckRequest
-    #   data as a hash:
-    #
-    #       {
-    #         caller_reference: "HealthCheckNonce", # required
-    #         health_check_config: { # required
-    #           ip_address: "IPAddress",
-    #           port: 1,
-    #           type: "HTTP", # required, accepts HTTP, HTTPS, HTTP_STR_MATCH, HTTPS_STR_MATCH, TCP, CALCULATED, CLOUDWATCH_METRIC, RECOVERY_CONTROL
-    #           resource_path: "ResourcePath",
-    #           fully_qualified_domain_name: "FullyQualifiedDomainName",
-    #           search_string: "SearchString",
-    #           request_interval: 1,
-    #           failure_threshold: 1,
-    #           measure_latency: false,
-    #           inverted: false,
-    #           disabled: false,
-    #           health_threshold: 1,
-    #           child_health_checks: ["HealthCheckId"],
-    #           enable_sni: false,
-    #           regions: ["us-east-1"], # accepts us-east-1, us-west-1, us-west-2, eu-west-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, sa-east-1
-    #           alarm_identifier: {
-    #             region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-central-2, eu-west-1, eu-west-2, eu-west-3, ap-east-1, me-south-1, me-central-1, ap-south-1, ap-south-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-northwest-1, cn-north-1, af-south-1, eu-south-1, eu-south-2, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1
-    #             name: "AlarmName", # required
-    #           },
-    #           insufficient_data_health_status: "Healthy", # accepts Healthy, Unhealthy, LastKnownStatus
-    #           routing_control_arn: "RoutingControlArn",
-    #         },
-    #       }
     #
     # @!attribute [rw] caller_reference
     #   A unique string that identifies the request and that allows you to
@@ -1492,23 +1243,6 @@ module Aws::Route53
 
     # A complex type that contains information about the request to create a
     # public or private hosted zone.
-    #
-    # @note When making an API call, you may pass CreateHostedZoneRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "DNSName", # required
-    #         vpc: {
-    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-central-2, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, me-central-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-south-1, ap-south-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1, eu-south-2
-    #           vpc_id: "VPCId",
-    #         },
-    #         caller_reference: "Nonce", # required
-    #         hosted_zone_config: {
-    #           comment: "ResourceDescription",
-    #           private_zone: false,
-    #         },
-    #         delegation_set_id: "ResourceId",
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the domain. Specify a fully qualified domain name, for
@@ -1622,17 +1356,6 @@ module Aws::Route53
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateKeySigningKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         caller_reference: "Nonce", # required
-    #         hosted_zone_id: "ResourceId", # required
-    #         key_management_service_arn: "SigningKeyString", # required
-    #         name: "SigningKeyName", # required
-    #         status: "SigningKeyStatus", # required
-    #       }
-    #
     # @!attribute [rw] caller_reference
     #   A unique string that identifies the request.
     #   @return [String]
@@ -1734,14 +1457,6 @@ module Aws::Route53
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateQueryLoggingConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         hosted_zone_id: "ResourceId", # required
-    #         cloud_watch_logs_log_group_arn: "CloudWatchLogsLogGroupArn", # required
-    #       }
-    #
     # @!attribute [rw] hosted_zone_id
     #   The ID of the hosted zone that you want to log queries for. You can
     #   log queries only for public hosted zones.
@@ -1794,14 +1509,6 @@ module Aws::Route53
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateReusableDelegationSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         caller_reference: "Nonce", # required
-    #         hosted_zone_id: "ResourceId",
-    #       }
-    #
     # @!attribute [rw] caller_reference
     #   A unique string that identifies the request, and that allows you to
     #   retry failed `CreateReusableDelegationSet` requests without the risk
@@ -1844,17 +1551,6 @@ module Aws::Route53
 
     # A complex type that contains information about the resource record
     # sets that you want to create based on a specified traffic policy.
-    #
-    # @note When making an API call, you may pass CreateTrafficPolicyInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         hosted_zone_id: "ResourceId", # required
-    #         name: "DNSName", # required
-    #         ttl: 1, # required
-    #         traffic_policy_id: "TrafficPolicyId", # required
-    #         traffic_policy_version: 1, # required
-    #       }
     #
     # @!attribute [rw] hosted_zone_id
     #   The ID of the hosted zone that you want Amazon Route 53 to create
@@ -1921,15 +1617,6 @@ module Aws::Route53
     # A complex type that contains information about the traffic policy that
     # you want to create.
     #
-    # @note When making an API call, you may pass CreateTrafficPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "TrafficPolicyName", # required
-    #         document: "TrafficPolicyDocument", # required
-    #         comment: "TrafficPolicyComment",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the traffic policy.
     #   @return [String]
@@ -1980,15 +1667,6 @@ module Aws::Route53
 
     # A complex type that contains information about the traffic policy that
     # you want to create a new version for.
-    #
-    # @note When making an API call, you may pass CreateTrafficPolicyVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "TrafficPolicyId", # required
-    #         document: "TrafficPolicyDocument", # required
-    #         comment: "TrafficPolicyComment",
-    #       }
     #
     # @!attribute [rw] id
     #   The ID of the traffic policy for which you want to create a new
@@ -2046,17 +1724,6 @@ module Aws::Route53
     # authorize associating a VPC with your private hosted zone.
     # Authorization is only required when a private hosted zone and a VPC
     # were created by using different accounts.
-    #
-    # @note When making an API call, you may pass CreateVPCAssociationAuthorizationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         hosted_zone_id: "ResourceId", # required
-    #         vpc: { # required
-    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-central-2, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, me-central-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-south-1, ap-south-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1, eu-south-2
-    #           vpc_id: "VPCId",
-    #         },
-    #       }
     #
     # @!attribute [rw] hosted_zone_id
     #   The ID of the private hosted zone that you want to authorize
@@ -2162,14 +1829,6 @@ module Aws::Route53
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeactivateKeySigningKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         hosted_zone_id: "ResourceId", # required
-    #         name: "SigningKeyName", # required
-    #       }
-    #
     # @!attribute [rw] hosted_zone_id
     #   A unique string used to identify a hosted zone.
     #   @return [String]
@@ -2298,13 +1957,6 @@ module Aws::Route53
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteCidrCollectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "UUID", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The UUID of the collection to delete.
     #   @return [String]
@@ -2322,13 +1974,6 @@ module Aws::Route53
     class DeleteCidrCollectionResponse < Aws::EmptyStructure; end
 
     # This action deletes a health check.
-    #
-    # @note When making an API call, you may pass DeleteHealthCheckRequest
-    #   data as a hash:
-    #
-    #       {
-    #         health_check_id: "HealthCheckId", # required
-    #       }
     #
     # @!attribute [rw] health_check_id
     #   The ID of the health check that you want to delete.
@@ -2349,13 +1994,6 @@ module Aws::Route53
     class DeleteHealthCheckResponse < Aws::EmptyStructure; end
 
     # A request to delete a hosted zone.
-    #
-    # @note When making an API call, you may pass DeleteHostedZoneRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ResourceId", # required
-    #       }
     #
     # @!attribute [rw] id
     #   The ID of the hosted zone you want to delete.
@@ -2385,14 +2023,6 @@ module Aws::Route53
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteKeySigningKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         hosted_zone_id: "ResourceId", # required
-    #         name: "SigningKeyName", # required
-    #       }
-    #
     # @!attribute [rw] hosted_zone_id
     #   A unique string used to identify a hosted zone.
     #   @return [String]
@@ -2423,13 +2053,6 @@ module Aws::Route53
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteQueryLoggingConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "QueryLoggingConfigId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the configuration that you want to delete.
     #   @return [String]
@@ -2447,13 +2070,6 @@ module Aws::Route53
     class DeleteQueryLoggingConfigResponse < Aws::EmptyStructure; end
 
     # A request to delete a reusable delegation set.
-    #
-    # @note When making an API call, you may pass DeleteReusableDelegationSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ResourceId", # required
-    #       }
     #
     # @!attribute [rw] id
     #   The ID of the reusable delegation set that you want to delete.
@@ -2474,13 +2090,6 @@ module Aws::Route53
     class DeleteReusableDelegationSetResponse < Aws::EmptyStructure; end
 
     # A request to delete a specified traffic policy instance.
-    #
-    # @note When making an API call, you may pass DeleteTrafficPolicyInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "TrafficPolicyInstanceId", # required
-    #       }
     #
     # @!attribute [rw] id
     #   The ID of the traffic policy instance that you want to delete.
@@ -2505,14 +2114,6 @@ module Aws::Route53
     class DeleteTrafficPolicyInstanceResponse < Aws::EmptyStructure; end
 
     # A request to delete a specified traffic policy version.
-    #
-    # @note When making an API call, you may pass DeleteTrafficPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "TrafficPolicyId", # required
-    #         version: 1, # required
-    #       }
     #
     # @!attribute [rw] id
     #   The ID of the traffic policy that you want to delete.
@@ -2541,17 +2142,6 @@ module Aws::Route53
     # authorization to associate a VPC that was created by one Amazon Web
     # Services account with a hosted zone that was created with a different
     # Amazon Web Services account.
-    #
-    # @note When making an API call, you may pass DeleteVPCAssociationAuthorizationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         hosted_zone_id: "ResourceId", # required
-    #         vpc: { # required
-    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-central-2, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, me-central-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-south-1, ap-south-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1, eu-south-2
-    #           vpc_id: "VPCId",
-    #         },
-    #       }
     #
     # @!attribute [rw] hosted_zone_id
     #   When removing authorization to associate a VPC that was created by
@@ -2604,13 +2194,6 @@ module Aws::Route53
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisableHostedZoneDNSSECRequest
-    #   data as a hash:
-    #
-    #       {
-    #         hosted_zone_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] hosted_zone_id
     #   A unique string used to identify a hosted zone.
     #   @return [String]
@@ -2638,18 +2221,6 @@ module Aws::Route53
 
     # A complex type that contains information about the VPC that you want
     # to disassociate from a specified private hosted zone.
-    #
-    # @note When making an API call, you may pass DisassociateVPCFromHostedZoneRequest
-    #   data as a hash:
-    #
-    #       {
-    #         hosted_zone_id: "ResourceId", # required
-    #         vpc: { # required
-    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-central-2, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, me-central-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-south-1, ap-south-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1, eu-south-2
-    #           vpc_id: "VPCId",
-    #         },
-    #         comment: "DisassociateVPCComment",
-    #       }
     #
     # @!attribute [rw] hosted_zone_id
     #   The ID of the private hosted zone that you want to disassociate a
@@ -2691,13 +2262,6 @@ module Aws::Route53
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass EnableHostedZoneDNSSECRequest
-    #   data as a hash:
-    #
-    #       {
-    #         hosted_zone_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] hosted_zone_id
     #   A unique string used to identify a hosted zone.
     #   @return [String]
@@ -2724,15 +2288,6 @@ module Aws::Route53
     end
 
     # A complex type that contains information about a geographic location.
-    #
-    # @note When making an API call, you may pass GeoLocation
-    #   data as a hash:
-    #
-    #       {
-    #         continent_code: "GeoLocationContinentCode",
-    #         country_code: "GeoLocationCountryCode",
-    #         subdivision_code: "GeoLocationSubdivisionCode",
-    #       }
     #
     # @!attribute [rw] continent_code
     #   The two-letter code for the continent.
@@ -2847,13 +2402,6 @@ module Aws::Route53
     # A complex type that contains information about the request to create a
     # hosted zone.
     #
-    # @note When making an API call, you may pass GetAccountLimitRequest
-    #   data as a hash:
-    #
-    #       {
-    #         type: "MAX_HEALTH_CHECKS_BY_OWNER", # required, accepts MAX_HEALTH_CHECKS_BY_OWNER, MAX_HOSTED_ZONES_BY_OWNER, MAX_TRAFFIC_POLICY_INSTANCES_BY_OWNER, MAX_REUSABLE_DELEGATION_SETS_BY_OWNER, MAX_TRAFFIC_POLICIES_BY_OWNER
-    #       }
-    #
     # @!attribute [rw] type
     #   The limit that you want to get. Valid values include the following:
     #
@@ -2912,13 +2460,6 @@ module Aws::Route53
 
     # The input for a GetChange request.
     #
-    # @note When making an API call, you may pass GetChangeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ChangeId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the change batch request. The value that you specify here
     #   is the value that `ChangeResourceRecordSets` returned in the `Id`
@@ -2950,8 +2491,6 @@ module Aws::Route53
 
     # Empty request.
     #
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetCheckerIpRangesRequest AWS API Documentation
     #
     class GetCheckerIpRangesRequest < Aws::EmptyStructure; end
@@ -2971,13 +2510,6 @@ module Aws::Route53
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDNSSECRequest
-    #   data as a hash:
-    #
-    #       {
-    #         hosted_zone_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] hosted_zone_id
     #   A unique string used to identify a hosted zone.
     #   @return [String]
@@ -3010,15 +2542,6 @@ module Aws::Route53
     # A request for information about whether a specified geographic
     # location is supported for Amazon Route 53 geolocation resource record
     # sets.
-    #
-    # @note When making an API call, you may pass GetGeoLocationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         continent_code: "GeoLocationContinentCode",
-    #         country_code: "GeoLocationCountryCode",
-    #         subdivision_code: "GeoLocationSubdivisionCode",
-    #       }
     #
     # @!attribute [rw] continent_code
     #   For geolocation resource record sets, a two-letter abbreviation that
@@ -3091,8 +2614,6 @@ module Aws::Route53
     # A request for the number of health checks that are associated with the
     # current Amazon Web Services account.
     #
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHealthCheckCountRequest AWS API Documentation
     #
     class GetHealthCheckCountRequest < Aws::EmptyStructure; end
@@ -3114,13 +2635,6 @@ module Aws::Route53
     end
 
     # A request for the reason that a health check failed most recently.
-    #
-    # @note When making an API call, you may pass GetHealthCheckLastFailureReasonRequest
-    #   data as a hash:
-    #
-    #       {
-    #         health_check_id: "HealthCheckId", # required
-    #       }
     #
     # @!attribute [rw] health_check_id
     #   The ID for the health check for which you want the last failure
@@ -3161,13 +2675,6 @@ module Aws::Route53
 
     # A request to get information about a specified health check.
     #
-    # @note When making an API call, you may pass GetHealthCheckRequest
-    #   data as a hash:
-    #
-    #       {
-    #         health_check_id: "HealthCheckId", # required
-    #       }
-    #
     # @!attribute [rw] health_check_id
     #   The identifier that Amazon Route 53 assigned to the health check
     #   when you created it. When you add or update a resource record set,
@@ -3200,13 +2707,6 @@ module Aws::Route53
     end
 
     # A request to get the status for a health check.
-    #
-    # @note When making an API call, you may pass GetHealthCheckStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         health_check_id: "HealthCheckId", # required
-    #       }
     #
     # @!attribute [rw] health_check_id
     #   The ID for the health check that you want the current status for.
@@ -3249,8 +2749,6 @@ module Aws::Route53
     # A request to retrieve a count of all the hosted zones that are
     # associated with the current Amazon Web Services account.
     #
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHostedZoneCountRequest AWS API Documentation
     #
     class GetHostedZoneCountRequest < Aws::EmptyStructure; end
@@ -3273,14 +2771,6 @@ module Aws::Route53
 
     # A complex type that contains information about the request to create a
     # hosted zone.
-    #
-    # @note When making an API call, you may pass GetHostedZoneLimitRequest
-    #   data as a hash:
-    #
-    #       {
-    #         type: "MAX_RRSETS_BY_ZONE", # required, accepts MAX_RRSETS_BY_ZONE, MAX_VPCS_ASSOCIATED_BY_ZONE
-    #         hosted_zone_id: "ResourceId", # required
-    #       }
     #
     # @!attribute [rw] type
     #   The limit that you want to get. Valid values include the following:
@@ -3334,13 +2824,6 @@ module Aws::Route53
 
     # A request to get information about a specified hosted zone.
     #
-    # @note When making an API call, you may pass GetHostedZoneRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the hosted zone that you want to get information about.
     #   @return [String]
@@ -3380,13 +2863,6 @@ module Aws::Route53
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetQueryLoggingConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "QueryLoggingConfigId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the configuration for DNS query logging that you want to
     #   get information about.
@@ -3420,14 +2896,6 @@ module Aws::Route53
 
     # A complex type that contains information about the request to create a
     # hosted zone.
-    #
-    # @note When making an API call, you may pass GetReusableDelegationSetLimitRequest
-    #   data as a hash:
-    #
-    #       {
-    #         type: "MAX_ZONES_BY_REUSABLE_DELEGATION_SET", # required, accepts MAX_ZONES_BY_REUSABLE_DELEGATION_SET
-    #         delegation_set_id: "ResourceId", # required
-    #       }
     #
     # @!attribute [rw] type
     #   Specify `MAX_ZONES_BY_REUSABLE_DELEGATION_SET` to get the maximum
@@ -3472,13 +2940,6 @@ module Aws::Route53
     # A request to get information about a specified reusable delegation
     # set.
     #
-    # @note When making an API call, you may pass GetReusableDelegationSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the reusable delegation set that you want to get a list of
     #   name servers for.
@@ -3511,8 +2972,6 @@ module Aws::Route53
     # Request to get the number of traffic policy instances that are
     # associated with the current Amazon Web Services account.
     #
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetTrafficPolicyInstanceCountRequest AWS API Documentation
     #
     class GetTrafficPolicyInstanceCountRequest < Aws::EmptyStructure; end
@@ -3534,13 +2993,6 @@ module Aws::Route53
     end
 
     # Gets information about a specified traffic policy instance.
-    #
-    # @note When making an API call, you may pass GetTrafficPolicyInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "TrafficPolicyInstanceId", # required
-    #       }
     #
     # @!attribute [rw] id
     #   The ID of the traffic policy instance that you want to get
@@ -3572,14 +3024,6 @@ module Aws::Route53
     end
 
     # Gets information about a specific traffic policy version.
-    #
-    # @note When making an API call, you may pass GetTrafficPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "TrafficPolicyId", # required
-    #         version: 1, # required
-    #       }
     #
     # @!attribute [rw] id
     #   The ID of the traffic policy that you want to get information about.
@@ -3688,33 +3132,6 @@ module Aws::Route53
     end
 
     # A complex type that contains information about the health check.
-    #
-    # @note When making an API call, you may pass HealthCheckConfig
-    #   data as a hash:
-    #
-    #       {
-    #         ip_address: "IPAddress",
-    #         port: 1,
-    #         type: "HTTP", # required, accepts HTTP, HTTPS, HTTP_STR_MATCH, HTTPS_STR_MATCH, TCP, CALCULATED, CLOUDWATCH_METRIC, RECOVERY_CONTROL
-    #         resource_path: "ResourcePath",
-    #         fully_qualified_domain_name: "FullyQualifiedDomainName",
-    #         search_string: "SearchString",
-    #         request_interval: 1,
-    #         failure_threshold: 1,
-    #         measure_latency: false,
-    #         inverted: false,
-    #         disabled: false,
-    #         health_threshold: 1,
-    #         child_health_checks: ["HealthCheckId"],
-    #         enable_sni: false,
-    #         regions: ["us-east-1"], # accepts us-east-1, us-west-1, us-west-2, eu-west-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, sa-east-1
-    #         alarm_identifier: {
-    #           region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-central-2, eu-west-1, eu-west-2, eu-west-3, ap-east-1, me-south-1, me-central-1, ap-south-1, ap-south-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-northwest-1, cn-north-1, af-south-1, eu-south-1, eu-south-2, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1
-    #           name: "AlarmName", # required
-    #         },
-    #         insufficient_data_health_status: "Healthy", # accepts Healthy, Unhealthy, LastKnownStatus
-    #         routing_control_arn: "RoutingControlArn",
-    #       }
     #
     # @!attribute [rw] ip_address
     #   The IPv4 or IPv6 IP address of the endpoint that you want Amazon
@@ -4250,14 +3667,6 @@ module Aws::Route53
     # A complex type that contains an optional comment about your hosted
     # zone. If you don't want to specify a comment, omit both the
     # `HostedZoneConfig` and `Comment` elements.
-    #
-    # @note When making an API call, you may pass HostedZoneConfig
-    #   data as a hash:
-    #
-    #       {
-    #         comment: "ResourceDescription",
-    #         private_zone: false,
-    #       }
     #
     # @!attribute [rw] comment
     #   Any comments that you want to include about the hosted zone.
@@ -4943,16 +4352,6 @@ module Aws::Route53
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCidrBlocksRequest
-    #   data as a hash:
-    #
-    #       {
-    #         collection_id: "UUID", # required
-    #         location_name: "CidrLocationNameDefaultNotAllowed",
-    #         next_token: "PaginationToken",
-    #         max_results: "MaxResults",
-    #       }
-    #
     # @!attribute [rw] collection_id
     #   The UUID of the CIDR collection.
     #   @return [String]
@@ -5002,14 +4401,6 @@ module Aws::Route53
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCidrCollectionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "PaginationToken",
-    #         max_results: "MaxResults",
-    #       }
-    #
     # @!attribute [rw] next_token
     #   An opaque pagination token to indicate where the service is to begin
     #   enumerating results.
@@ -5052,15 +4443,6 @@ module Aws::Route53
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCidrLocationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         collection_id: "UUID", # required
-    #         next_token: "PaginationToken",
-    #         max_results: "MaxResults",
-    #       }
-    #
     # @!attribute [rw] collection_id
     #   The CIDR collection ID.
     #   @return [String]
@@ -5112,16 +4494,6 @@ module Aws::Route53
 
     # A request to get a list of geographic locations that Amazon Route 53
     # supports for geolocation resource record sets.
-    #
-    # @note When making an API call, you may pass ListGeoLocationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         start_continent_code: "GeoLocationContinentCode",
-    #         start_country_code: "GeoLocationCountryCode",
-    #         start_subdivision_code: "GeoLocationSubdivisionCode",
-    #         max_items: 1,
-    #       }
     #
     # @!attribute [rw] start_continent_code
     #   The code for the continent with which you want to start listing
@@ -5231,14 +4603,6 @@ module Aws::Route53
     # A request to retrieve a list of the health checks that are associated
     # with the current Amazon Web Services account.
     #
-    # @note When making an API call, you may pass ListHealthChecksRequest
-    #   data as a hash:
-    #
-    #       {
-    #         marker: "PageMarker",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] marker
     #   If the value of `IsTruncated` in the previous response was `true`,
     #   you have more health checks. To get another group, submit another
@@ -5317,15 +4681,6 @@ module Aws::Route53
     # Retrieves a list of the public and private hosted zones that are
     # associated with the current Amazon Web Services account in ASCII order
     # by domain name.
-    #
-    # @note When making an API call, you may pass ListHostedZonesByNameRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dns_name: "DNSName",
-    #         hosted_zone_id: "ResourceId",
-    #         max_items: 1,
-    #       }
     #
     # @!attribute [rw] dns_name
     #   (Optional) For your first request to `ListHostedZonesByName`,
@@ -5439,16 +4794,6 @@ module Aws::Route53
     # with, regardless of which Amazon Web Services account created the
     # hosted zones.
     #
-    # @note When making an API call, you may pass ListHostedZonesByVPCRequest
-    #   data as a hash:
-    #
-    #       {
-    #         vpc_id: "VPCId", # required
-    #         vpc_region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-central-2, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, me-central-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-south-1, ap-south-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1, eu-south-2
-    #         max_items: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] vpc_id
     #   The ID of the Amazon VPC that you want to list hosted zones for.
     #   @return [String]
@@ -5519,15 +4864,6 @@ module Aws::Route53
 
     # A request to retrieve a list of the public and private hosted zones
     # that are associated with the current Amazon Web Services account.
-    #
-    # @note When making an API call, you may pass ListHostedZonesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         marker: "PageMarker",
-    #         max_items: 1,
-    #         delegation_set_id: "ResourceId",
-    #       }
     #
     # @!attribute [rw] marker
     #   If the value of `IsTruncated` in the previous response was `true`,
@@ -5610,15 +4946,6 @@ module Aws::Route53
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListQueryLoggingConfigsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         hosted_zone_id: "ResourceId",
-    #         next_token: "PaginationToken",
-    #         max_results: "MaxResults",
-    #       }
-    #
     # @!attribute [rw] hosted_zone_id
     #   (Optional) If you want to list the query logging configuration that
     #   is associated with a hosted zone, specify the ID in `HostedZoneId`.
@@ -5702,17 +5029,6 @@ module Aws::Route53
 
     # A request for the resource record sets that are associated with a
     # specified hosted zone.
-    #
-    # @note When making an API call, you may pass ListResourceRecordSetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         hosted_zone_id: "ResourceId", # required
-    #         start_record_name: "DNSName",
-    #         start_record_type: "SOA", # accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA, DS
-    #         start_record_identifier: "ResourceRecordSetIdentifier",
-    #         max_items: 1,
-    #       }
     #
     # @!attribute [rw] hosted_zone_id
     #   The ID of the hosted zone that contains the resource record sets
@@ -5849,14 +5165,6 @@ module Aws::Route53
     # A request to get a list of the reusable delegation sets that are
     # associated with the current Amazon Web Services account.
     #
-    # @note When making an API call, you may pass ListReusableDelegationSetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         marker: "PageMarker",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] marker
     #   If the value of `IsTruncated` in the previous response was `true`,
     #   you have more reusable delegation sets. To get another group, submit
@@ -5935,14 +5243,6 @@ module Aws::Route53
     # A complex type containing information about a request for a list of
     # the tags that are associated with an individual resource.
     #
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_type: "healthcheck", # required, accepts healthcheck, hostedzone
-    #         resource_id: "TagResourceId", # required
-    #       }
-    #
     # @!attribute [rw] resource_type
     #   The type of the resource.
     #
@@ -5982,14 +5282,6 @@ module Aws::Route53
 
     # A complex type that contains information about the health checks or
     # hosted zones for which you want to list tags.
-    #
-    # @note When making an API call, you may pass ListTagsForResourcesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_type: "healthcheck", # required, accepts healthcheck, hostedzone
-    #         resource_ids: ["TagResourceId"], # required
-    #       }
     #
     # @!attribute [rw] resource_type
     #   The type of the resources.
@@ -6031,14 +5323,6 @@ module Aws::Route53
     # A complex type that contains the information about the request to list
     # the traffic policies that are associated with the current Amazon Web
     # Services account.
-    #
-    # @note When making an API call, you may pass ListTrafficPoliciesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         traffic_policy_id_marker: "TrafficPolicyId",
-    #         max_items: 1,
-    #       }
     #
     # @!attribute [rw] traffic_policy_id_marker
     #   (Conditional) For your first request to `ListTrafficPolicies`,
@@ -6110,16 +5394,6 @@ module Aws::Route53
 
     # A request for the traffic policy instances that you created in a
     # specified hosted zone.
-    #
-    # @note When making an API call, you may pass ListTrafficPolicyInstancesByHostedZoneRequest
-    #   data as a hash:
-    #
-    #       {
-    #         hosted_zone_id: "ResourceId", # required
-    #         traffic_policy_instance_name_marker: "DNSName",
-    #         traffic_policy_instance_type_marker: "SOA", # accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA, DS
-    #         max_items: 1,
-    #       }
     #
     # @!attribute [rw] hosted_zone_id
     #   The ID of the hosted zone that you want to list traffic policy
@@ -6224,18 +5498,6 @@ module Aws::Route53
 
     # A complex type that contains the information about the request to list
     # your traffic policy instances.
-    #
-    # @note When making an API call, you may pass ListTrafficPolicyInstancesByPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         traffic_policy_id: "TrafficPolicyId", # required
-    #         traffic_policy_version: 1, # required
-    #         hosted_zone_id_marker: "ResourceId",
-    #         traffic_policy_instance_name_marker: "DNSName",
-    #         traffic_policy_instance_type_marker: "SOA", # accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA, DS
-    #         max_items: 1,
-    #       }
     #
     # @!attribute [rw] traffic_policy_id
     #   The ID of the traffic policy for which you want to list traffic
@@ -6375,16 +5637,6 @@ module Aws::Route53
     # A request to get information about the traffic policy instances that
     # you created by using the current Amazon Web Services account.
     #
-    # @note When making an API call, you may pass ListTrafficPolicyInstancesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         hosted_zone_id_marker: "ResourceId",
-    #         traffic_policy_instance_name_marker: "DNSName",
-    #         traffic_policy_instance_type_marker: "SOA", # accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA, DS
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] hosted_zone_id_marker
     #   If the value of `IsTruncated` in the previous response was `true`,
     #   you have more traffic policy instances. To get more traffic policy
@@ -6504,15 +5756,6 @@ module Aws::Route53
     # A complex type that contains the information about the request to list
     # your traffic policies.
     #
-    # @note When making an API call, you may pass ListTrafficPolicyVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "TrafficPolicyId", # required
-    #         traffic_policy_version_marker: "TrafficPolicyVersionMarker",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] id
     #   Specify the value of `Id` of the traffic policy for which you want
     #   to list all versions.
@@ -6594,15 +5837,6 @@ module Aws::Route53
 
     # A complex type that contains information about that can be associated
     # with your hosted zone.
-    #
-    # @note When making an API call, you may pass ListVPCAssociationAuthorizationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         hosted_zone_id: "ResourceId", # required
-    #         next_token: "PaginationToken",
-    #         max_results: "MaxResults",
-    #       }
     #
     # @!attribute [rw] hosted_zone_id
     #   The ID of the hosted zone for which you want a list of VPCs that can
@@ -6935,13 +6169,6 @@ module Aws::Route53
     #
     #  </note>
     #
-    # @note When making an API call, you may pass ResourceRecord
-    #   data as a hash:
-    #
-    #       {
-    #         value: "RData", # required
-    #       }
-    #
     # @!attribute [rw] value
     #   The current or new DNS record value, not to exceed 4,000 characters.
     #   In the case of a `DELETE` action, if the current value does not
@@ -6970,41 +6197,6 @@ module Aws::Route53
     end
 
     # Information about the resource record set to create or delete.
-    #
-    # @note When making an API call, you may pass ResourceRecordSet
-    #   data as a hash:
-    #
-    #       {
-    #         name: "DNSName", # required
-    #         type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA, DS
-    #         set_identifier: "ResourceRecordSetIdentifier",
-    #         weight: 1,
-    #         region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-central-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-north-1, cn-northwest-1, ap-east-1, me-south-1, me-central-1, ap-south-1, ap-south-2, af-south-1, eu-south-1, eu-south-2
-    #         geo_location: {
-    #           continent_code: "GeoLocationContinentCode",
-    #           country_code: "GeoLocationCountryCode",
-    #           subdivision_code: "GeoLocationSubdivisionCode",
-    #         },
-    #         failover: "PRIMARY", # accepts PRIMARY, SECONDARY
-    #         multi_value_answer: false,
-    #         ttl: 1,
-    #         resource_records: [
-    #           {
-    #             value: "RData", # required
-    #           },
-    #         ],
-    #         alias_target: {
-    #           hosted_zone_id: "ResourceId", # required
-    #           dns_name: "DNSName", # required
-    #           evaluate_target_health: false, # required
-    #         },
-    #         health_check_id: "HealthCheckId",
-    #         traffic_policy_instance_id: "TrafficPolicyInstanceId",
-    #         cidr_routing_config: {
-    #           collection_id: "UUID", # required
-    #           location_name: "CidrLocationNameDefaultAllowed", # required
-    #         },
-    #       }
     #
     # @!attribute [rw] name
     #   For `ChangeResourceRecordSets` requests, the name of the record that
@@ -7654,14 +6846,6 @@ module Aws::Route53
     # A complex type that contains information about a tag that you want to
     # add or edit for the specified health check or hosted zone.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey",
-    #         value: "TagValue",
-    #       }
-    #
     # @!attribute [rw] key
     #   The value of `Key` depends on the operation that you want to
     #   perform:
@@ -7705,18 +6889,6 @@ module Aws::Route53
     # request for a specified record name and type. You can optionally
     # specify the IP address of a DNS resolver, an EDNS0 client subnet IP
     # address, and a subnet mask.
-    #
-    # @note When making an API call, you may pass TestDNSAnswerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         hosted_zone_id: "ResourceId", # required
-    #         record_name: "DNSName", # required
-    #         record_type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA, DS
-    #         resolver_ip: "IPAddress",
-    #         edns0_client_subnet_ip: "IPAddress",
-    #         edns0_client_subnet_mask: "SubnetMask",
-    #       }
     #
     # @!attribute [rw] hosted_zone_id
     #   The ID of the hosted zone that you want Amazon Route 53 to simulate
@@ -8239,32 +7411,6 @@ module Aws::Route53
     # A complex type that contains information about a request to update a
     # health check.
     #
-    # @note When making an API call, you may pass UpdateHealthCheckRequest
-    #   data as a hash:
-    #
-    #       {
-    #         health_check_id: "HealthCheckId", # required
-    #         health_check_version: 1,
-    #         ip_address: "IPAddress",
-    #         port: 1,
-    #         resource_path: "ResourcePath",
-    #         fully_qualified_domain_name: "FullyQualifiedDomainName",
-    #         search_string: "SearchString",
-    #         failure_threshold: 1,
-    #         inverted: false,
-    #         disabled: false,
-    #         health_threshold: 1,
-    #         child_health_checks: ["HealthCheckId"],
-    #         enable_sni: false,
-    #         regions: ["us-east-1"], # accepts us-east-1, us-west-1, us-west-2, eu-west-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, sa-east-1
-    #         alarm_identifier: {
-    #           region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-central-2, eu-west-1, eu-west-2, eu-west-3, ap-east-1, me-south-1, me-central-1, ap-south-1, ap-south-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-northwest-1, cn-north-1, af-south-1, eu-south-1, eu-south-2, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1
-    #           name: "AlarmName", # required
-    #         },
-    #         insufficient_data_health_status: "Healthy", # accepts Healthy, Unhealthy, LastKnownStatus
-    #         reset_elements: ["FullyQualifiedDomainName"], # accepts FullyQualifiedDomainName, Regions, ResourcePath, ChildHealthChecks
-    #       }
-    #
     # @!attribute [rw] health_check_id
     #   The ID for the health check for which you want detailed information.
     #   When you created the health check, `CreateHealthCheck` returned the
@@ -8649,14 +7795,6 @@ module Aws::Route53
 
     # A request to update the comment for a hosted zone.
     #
-    # @note When making an API call, you may pass UpdateHostedZoneCommentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ResourceId", # required
-    #         comment: "ResourceDescription",
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID for the hosted zone that you want to update the comment for.
     #   @return [String]
@@ -8694,15 +7832,6 @@ module Aws::Route53
 
     # A complex type that contains information about the traffic policy that
     # you want to update the comment for.
-    #
-    # @note When making an API call, you may pass UpdateTrafficPolicyCommentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "TrafficPolicyId", # required
-    #         version: 1, # required
-    #         comment: "TrafficPolicyComment", # required
-    #       }
     #
     # @!attribute [rw] id
     #   The value of `Id` for the traffic policy that you want to update the
@@ -8747,16 +7876,6 @@ module Aws::Route53
     # A complex type that contains information about the resource record
     # sets that you want to update based on a specified traffic policy
     # instance.
-    #
-    # @note When making an API call, you may pass UpdateTrafficPolicyInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "TrafficPolicyInstanceId", # required
-    #         ttl: 1, # required
-    #         traffic_policy_id: "TrafficPolicyId", # required
-    #         traffic_policy_version: 1, # required
-    #       }
     #
     # @!attribute [rw] id
     #   The ID of the traffic policy instance that you want to update.
@@ -8816,14 +7935,6 @@ module Aws::Route53
     #
     #
     # [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateHostedZone.html
-    #
-    # @note When making an API call, you may pass VPC
-    #   data as a hash:
-    #
-    #       {
-    #         vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-central-2, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, me-central-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-south-1, ap-south-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1, eu-south-2
-    #         vpc_id: "VPCId",
-    #       }
     #
     # @!attribute [rw] vpc_region
     #   (Private hosted zones only) The region that an Amazon VPC was

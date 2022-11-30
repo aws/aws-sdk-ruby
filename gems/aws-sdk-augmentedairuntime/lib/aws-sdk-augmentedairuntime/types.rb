@@ -25,13 +25,6 @@ module Aws::AugmentedAIRuntime
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteHumanLoopRequest
-    #   data as a hash:
-    #
-    #       {
-    #         human_loop_name: "HumanLoopName", # required
-    #       }
-    #
     # @!attribute [rw] human_loop_name
     #   The name of the human loop that you want to delete.
     #   @return [String]
@@ -48,13 +41,6 @@ module Aws::AugmentedAIRuntime
     #
     class DeleteHumanLoopResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeHumanLoopRequest
-    #   data as a hash:
-    #
-    #       {
-    #         human_loop_name: "HumanLoopName", # required
-    #       }
-    #
     # @!attribute [rw] human_loop_name
     #   The name of the human loop that you want information about.
     #   @return [String]
@@ -123,13 +109,6 @@ module Aws::AugmentedAIRuntime
     # Attributes of the data specified by the customer. Use these to
     # describe the data to be labeled.
     #
-    # @note When making an API call, you may pass HumanLoopDataAttributes
-    #   data as a hash:
-    #
-    #       {
-    #         content_classifiers: ["FreeOfPersonallyIdentifiableInformation"], # required, accepts FreeOfPersonallyIdentifiableInformation, FreeOfAdultContent
-    #       }
-    #
     # @!attribute [rw] content_classifiers
     #   Declares that your content is free of personally identifiable
     #   information or adult content.
@@ -147,13 +126,6 @@ module Aws::AugmentedAIRuntime
     end
 
     # An object containing the human loop input in JSON format.
-    #
-    # @note When making an API call, you may pass HumanLoopInput
-    #   data as a hash:
-    #
-    #       {
-    #         input_content: "InputContent", # required
-    #       }
     #
     # @!attribute [rw] input_content
     #   Serialized input from the human loop. The input must be a string
@@ -233,18 +205,6 @@ module Aws::AugmentedAIRuntime
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListHumanLoopsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         creation_time_after: Time.now,
-    #         creation_time_before: Time.now,
-    #         flow_definition_arn: "FlowDefinitionArn", # required
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] creation_time_after
     #   (Optional) The timestamp of the date when you want the human loops
     #   to begin in ISO 8601 format. For example, `2020-02-24`.
@@ -344,20 +304,6 @@ module Aws::AugmentedAIRuntime
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartHumanLoopRequest
-    #   data as a hash:
-    #
-    #       {
-    #         human_loop_name: "HumanLoopName", # required
-    #         flow_definition_arn: "FlowDefinitionArn", # required
-    #         human_loop_input: { # required
-    #           input_content: "InputContent", # required
-    #         },
-    #         data_attributes: {
-    #           content_classifiers: ["FreeOfPersonallyIdentifiableInformation"], # required, accepts FreeOfPersonallyIdentifiableInformation, FreeOfAdultContent
-    #         },
-    #       }
-    #
     # @!attribute [rw] human_loop_name
     #   The name of the human loop.
     #   @return [String]
@@ -400,13 +346,6 @@ module Aws::AugmentedAIRuntime
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopHumanLoopRequest
-    #   data as a hash:
-    #
-    #       {
-    #         human_loop_name: "HumanLoopName", # required
-    #       }
-    #
     # @!attribute [rw] human_loop_name
     #   The name of the human loop that you want to stop.
     #   @return [String]

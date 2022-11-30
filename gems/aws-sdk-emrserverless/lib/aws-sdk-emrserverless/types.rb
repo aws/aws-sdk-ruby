@@ -168,13 +168,6 @@ module Aws::EMRServerless
     # The configuration for an application to automatically start on job
     # submission.
     #
-    # @note When making an API call, you may pass AutoStartConfig
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false,
-    #       }
-    #
     # @!attribute [rw] enabled
     #   Enables the application to automatically start on job submission.
     #   Defaults to true.
@@ -190,14 +183,6 @@ module Aws::EMRServerless
 
     # The configuration for an application to automatically stop after a
     # certain amount of time being idle.
-    #
-    # @note When making an API call, you may pass AutoStopConfig
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false,
-    #         idle_timeout_minutes: 1,
-    #       }
     #
     # @!attribute [rw] enabled
     #   Enables the application to automatically stop after a certain amount
@@ -218,14 +203,6 @@ module Aws::EMRServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CancelJobRunRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "ApplicationId", # required
-    #         job_run_id: "JobRunId", # required
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The ID of the application on which the job run will be canceled.
     #   @return [String]
@@ -267,27 +244,6 @@ module Aws::EMRServerless
     # application-specific configuration file. Properties are the settings
     # you want to change in that file.
     #
-    # @note When making an API call, you may pass Configuration
-    #   data as a hash:
-    #
-    #       {
-    #         classification: "String1024", # required
-    #         properties: {
-    #           "String1024" => "String1024",
-    #         },
-    #         configurations: [
-    #           {
-    #             classification: "String1024", # required
-    #             properties: {
-    #               "String1024" => "String1024",
-    #             },
-    #             configurations: {
-    #               # recursive ConfigurationList
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] classification
     #   The classification within a configuration.
     #   @return [String]
@@ -313,33 +269,6 @@ module Aws::EMRServerless
 
     # A configuration specification to be used to override existing
     # configurations.
-    #
-    # @note When making an API call, you may pass ConfigurationOverrides
-    #   data as a hash:
-    #
-    #       {
-    #         application_configuration: [
-    #           {
-    #             classification: "String1024", # required
-    #             properties: {
-    #               "String1024" => "String1024",
-    #             },
-    #             configurations: {
-    #               # recursive ConfigurationList
-    #             },
-    #           },
-    #         ],
-    #         monitoring_configuration: {
-    #           s3_monitoring_configuration: {
-    #             log_uri: "UriString",
-    #             encryption_key_arn: "EncryptionKeyArn",
-    #           },
-    #           managed_persistence_monitoring_configuration: {
-    #             enabled: false,
-    #             encryption_key_arn: "EncryptionKeyArn",
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] application_configuration
     #   The override configurations for the application.
@@ -372,46 +301,6 @@ module Aws::EMRServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ApplicationName",
-    #         release_label: "ReleaseLabel", # required
-    #         type: "EngineType", # required
-    #         client_token: "ClientToken", # required
-    #         initial_capacity: {
-    #           "WorkerTypeString" => {
-    #             worker_count: 1, # required
-    #             worker_configuration: {
-    #               cpu: "CpuSize", # required
-    #               memory: "MemorySize", # required
-    #               disk: "DiskSize",
-    #             },
-    #           },
-    #         },
-    #         maximum_capacity: {
-    #           cpu: "CpuSize", # required
-    #           memory: "MemorySize", # required
-    #           disk: "DiskSize",
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         auto_start_configuration: {
-    #           enabled: false,
-    #         },
-    #         auto_stop_configuration: {
-    #           enabled: false,
-    #           idle_timeout_minutes: 1,
-    #         },
-    #         network_configuration: {
-    #           subnet_ids: ["SubnetString"],
-    #           security_group_ids: ["SecurityGroupString"],
-    #         },
-    #         architecture: "ARM64", # accepts ARM64, X86_64
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the application.
     #   @return [String]
@@ -505,13 +394,6 @@ module Aws::EMRServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "ApplicationId", # required
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The ID of the application that will be deleted.
     #   @return [String]
@@ -528,13 +410,6 @@ module Aws::EMRServerless
     #
     class DeleteApplicationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass GetApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "ApplicationId", # required
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The ID of the application that will be described.
     #   @return [String]
@@ -559,14 +434,6 @@ module Aws::EMRServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDashboardForJobRunRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "ApplicationId", # required
-    #         job_run_id: "JobRunId", # required
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The ID of the application.
     #   @return [String]
@@ -596,14 +463,6 @@ module Aws::EMRServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetJobRunRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "ApplicationId", # required
-    #         job_run_id: "JobRunId", # required
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The ID of the application on which the job run is submitted.
     #   @return [String]
@@ -635,15 +494,6 @@ module Aws::EMRServerless
 
     # The configurations for the Hive job driver.
     #
-    # @note When making an API call, you may pass Hive
-    #   data as a hash:
-    #
-    #       {
-    #         query: "Query", # required
-    #         init_query_file: "InitScriptPath",
-    #         parameters: "HiveCliParameters",
-    #       }
-    #
     # @!attribute [rw] query
     #   The query for the Hive job run.
     #   @return [String]
@@ -667,18 +517,6 @@ module Aws::EMRServerless
     end
 
     # The initial capacity configuration per worker.
-    #
-    # @note When making an API call, you may pass InitialCapacityConfig
-    #   data as a hash:
-    #
-    #       {
-    #         worker_count: 1, # required
-    #         worker_configuration: {
-    #           cpu: "CpuSize", # required
-    #           memory: "MemorySize", # required
-    #           disk: "DiskSize",
-    #         },
-    #       }
     #
     # @!attribute [rw] worker_count
     #   The number of workers in the initial capacity configuration.
@@ -712,10 +550,6 @@ module Aws::EMRServerless
     end
 
     # The driver that the job runs on.
-    #
-    # @note JobDriver is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note JobDriver is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of JobDriver corresponding to the set member.
     #
     # @!attribute [rw] spark_submit
     #   The job driver parameters specified for Spark.
@@ -912,15 +746,6 @@ module Aws::EMRServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListApplicationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         states: ["CREATING"], # accepts CREATING, CREATED, STARTING, STARTED, STOPPING, STOPPED, TERMINATED
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The token for the next set of application results.
     #   @return [String]
@@ -964,18 +789,6 @@ module Aws::EMRServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListJobRunsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "ApplicationId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         created_at_after: Time.now,
-    #         created_at_before: Time.now,
-    #         states: ["SUBMITTED"], # accepts SUBMITTED, PENDING, SCHEDULED, RUNNING, SUCCESS, FAILED, CANCELLING, CANCELLED
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The ID of the application for which to list the job run.
     #   @return [String]
@@ -1034,13 +847,6 @@ module Aws::EMRServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) that identifies the resource to list
     #   the tags for. Currently, the supported resources are Amazon EMR
@@ -1069,14 +875,6 @@ module Aws::EMRServerless
 
     # The managed log persistence configuration for a job run.
     #
-    # @note When making an API call, you may pass ManagedPersistenceMonitoringConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false,
-    #         encryption_key_arn: "EncryptionKeyArn",
-    #       }
-    #
     # @!attribute [rw] enabled
     #   Enables managed logging and defaults to true. If set to false,
     #   managed logging will be turned off.
@@ -1098,15 +896,6 @@ module Aws::EMRServerless
 
     # The maximum allowed cumulative resources for an application. No new
     # resources will be created once the limit is hit.
-    #
-    # @note When making an API call, you may pass MaximumAllowedResources
-    #   data as a hash:
-    #
-    #       {
-    #         cpu: "CpuSize", # required
-    #         memory: "MemorySize", # required
-    #         disk: "DiskSize",
-    #       }
     #
     # @!attribute [rw] cpu
     #   The maximum allowed CPU for an application.
@@ -1132,20 +921,6 @@ module Aws::EMRServerless
 
     # The configuration setting for monitoring.
     #
-    # @note When making an API call, you may pass MonitoringConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         s3_monitoring_configuration: {
-    #           log_uri: "UriString",
-    #           encryption_key_arn: "EncryptionKeyArn",
-    #         },
-    #         managed_persistence_monitoring_configuration: {
-    #           enabled: false,
-    #           encryption_key_arn: "EncryptionKeyArn",
-    #         },
-    #       }
-    #
     # @!attribute [rw] s3_monitoring_configuration
     #   The Amazon S3 configuration for monitoring log publishing.
     #   @return [Types::S3MonitoringConfiguration]
@@ -1164,14 +939,6 @@ module Aws::EMRServerless
     end
 
     # The network configuration for customer VPC connectivity.
-    #
-    # @note When making an API call, you may pass NetworkConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         subnet_ids: ["SubnetString"],
-    #         security_group_ids: ["SecurityGroupString"],
-    #       }
     #
     # @!attribute [rw] subnet_ids
     #   The array of subnet Ids for customer VPC connectivity.
@@ -1206,14 +973,6 @@ module Aws::EMRServerless
     # The Amazon S3 configuration for monitoring log publishing. You can
     # configure your jobs to send log information to Amazon S3.
     #
-    # @note When making an API call, you may pass S3MonitoringConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         log_uri: "UriString",
-    #         encryption_key_arn: "EncryptionKeyArn",
-    #       }
-    #
     # @!attribute [rw] log_uri
     #   The Amazon S3 destination URI for log publishing.
     #   @return [String]
@@ -1247,15 +1006,6 @@ module Aws::EMRServerless
 
     # The configurations for the Spark submit job driver.
     #
-    # @note When making an API call, you may pass SparkSubmit
-    #   data as a hash:
-    #
-    #       {
-    #         entry_point: "EntryPointPath", # required
-    #         entry_point_arguments: ["EntryPointArgument"],
-    #         spark_submit_parameters: "SparkSubmitParameters",
-    #       }
-    #
     # @!attribute [rw] entry_point
     #   The entry point for the Spark submit job run.
     #   @return [String]
@@ -1278,13 +1028,6 @@ module Aws::EMRServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "ApplicationId", # required
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The ID of the application to start.
     #   @return [String]
@@ -1301,55 +1044,6 @@ module Aws::EMRServerless
     #
     class StartApplicationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass StartJobRunRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "ApplicationId", # required
-    #         client_token: "ClientToken", # required
-    #         execution_role_arn: "IAMRoleArn", # required
-    #         job_driver: {
-    #           spark_submit: {
-    #             entry_point: "EntryPointPath", # required
-    #             entry_point_arguments: ["EntryPointArgument"],
-    #             spark_submit_parameters: "SparkSubmitParameters",
-    #           },
-    #           hive: {
-    #             query: "Query", # required
-    #             init_query_file: "InitScriptPath",
-    #             parameters: "HiveCliParameters",
-    #           },
-    #         },
-    #         configuration_overrides: {
-    #           application_configuration: [
-    #             {
-    #               classification: "String1024", # required
-    #               properties: {
-    #                 "String1024" => "String1024",
-    #               },
-    #               configurations: {
-    #                 # recursive ConfigurationList
-    #               },
-    #             },
-    #           ],
-    #           monitoring_configuration: {
-    #             s3_monitoring_configuration: {
-    #               log_uri: "UriString",
-    #               encryption_key_arn: "EncryptionKeyArn",
-    #             },
-    #             managed_persistence_monitoring_configuration: {
-    #               enabled: false,
-    #               encryption_key_arn: "EncryptionKeyArn",
-    #             },
-    #           },
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         execution_timeout_minutes: 1,
-    #         name: "String256",
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The ID of the application on which to run the job.
     #   @return [String]
@@ -1425,13 +1119,6 @@ module Aws::EMRServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "ApplicationId", # required
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The ID of the application to stop.
     #   @return [String]
@@ -1448,16 +1135,6 @@ module Aws::EMRServerless
     #
     class StopApplicationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) that identifies the resource to list
     #   the tags for. Currently, the supported resources are Amazon EMR
@@ -1511,14 +1188,6 @@ module Aws::EMRServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) that identifies the resource to list
     #   the tags for. Currently, the supported resources are Amazon EMR
@@ -1542,41 +1211,6 @@ module Aws::EMRServerless
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "ApplicationId", # required
-    #         client_token: "ClientToken", # required
-    #         initial_capacity: {
-    #           "WorkerTypeString" => {
-    #             worker_count: 1, # required
-    #             worker_configuration: {
-    #               cpu: "CpuSize", # required
-    #               memory: "MemorySize", # required
-    #               disk: "DiskSize",
-    #             },
-    #           },
-    #         },
-    #         maximum_capacity: {
-    #           cpu: "CpuSize", # required
-    #           memory: "MemorySize", # required
-    #           disk: "DiskSize",
-    #         },
-    #         auto_start_configuration: {
-    #           enabled: false,
-    #         },
-    #         auto_stop_configuration: {
-    #           enabled: false,
-    #           idle_timeout_minutes: 1,
-    #         },
-    #         network_configuration: {
-    #           subnet_ids: ["SubnetString"],
-    #           security_group_ids: ["SecurityGroupString"],
-    #         },
-    #         architecture: "ARM64", # accepts ARM64, X86_64
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The ID of the application to update.
     #   @return [String]
@@ -1661,15 +1295,6 @@ module Aws::EMRServerless
 
     # The cumulative configuration requirements for every worker instance of
     # the worker type.
-    #
-    # @note When making an API call, you may pass WorkerResourceConfig
-    #   data as a hash:
-    #
-    #       {
-    #         cpu: "CpuSize", # required
-    #         memory: "MemorySize", # required
-    #         disk: "DiskSize",
-    #       }
     #
     # @!attribute [rw] cpu
     #   The CPU requirements for every worker instance of the worker type.

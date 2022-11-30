@@ -71,14 +71,6 @@ module Aws::MigrationHubRefactorSpaces
 
     # A wrapper object holding the Amazon API Gateway endpoint input.
     #
-    # @note When making an API call, you may pass ApiGatewayProxyInput
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_type: "REGIONAL", # accepts REGIONAL, PRIVATE
-    #         stage_name: "StageName",
-    #       }
-    #
     # @!attribute [rw] endpoint_type
     #   The type of endpoint to use for the API Gateway proxy. If no value
     #   is specified in the request, the value is set to `REGIONAL` by
@@ -253,24 +245,6 @@ module Aws::MigrationHubRefactorSpaces
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         api_gateway_proxy: {
-    #           endpoint_type: "REGIONAL", # accepts REGIONAL, PRIVATE
-    #           stage_name: "StageName",
-    #         },
-    #         client_token: "ClientToken",
-    #         environment_identifier: "EnvironmentId", # required
-    #         name: "ApplicationName", # required
-    #         proxy_type: "API_GATEWAY", # required, accepts API_GATEWAY
-    #         tags: {
-    #           "TagMapKeyString" => "TagMapValueString",
-    #         },
-    #         vpc_id: "VpcId", # required
-    #       }
-    #
     # @!attribute [rw] api_gateway_proxy
     #   A wrapper object holding the API Gateway endpoint type and stage
     #   name for the proxy.
@@ -404,19 +378,6 @@ module Aws::MigrationHubRefactorSpaces
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateEnvironmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         description: "Description",
-    #         name: "EnvironmentName", # required
-    #         network_fabric_type: "TRANSIT_GATEWAY", # required, accepts TRANSIT_GATEWAY
-    #         tags: {
-    #           "TagMapKeyString" => "TagMapValueString",
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
@@ -514,29 +475,6 @@ module Aws::MigrationHubRefactorSpaces
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateRouteRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_identifier: "ApplicationId", # required
-    #         client_token: "ClientToken",
-    #         default_route: {
-    #           activation_state: "ACTIVE", # accepts ACTIVE, INACTIVE
-    #         },
-    #         environment_identifier: "EnvironmentId", # required
-    #         route_type: "DEFAULT", # required, accepts DEFAULT, URI_PATH
-    #         service_identifier: "ServiceId", # required
-    #         tags: {
-    #           "TagMapKeyString" => "TagMapValueString",
-    #         },
-    #         uri_path_route: {
-    #           activation_state: "ACTIVE", # required, accepts ACTIVE, INACTIVE
-    #           include_child_paths: false,
-    #           methods: ["DELETE"], # accepts DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT
-    #           source_path: "UriPath", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] application_identifier
     #   The ID of the application within which the route is being created.
     #   @return [String]
@@ -675,29 +613,6 @@ module Aws::MigrationHubRefactorSpaces
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateServiceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_identifier: "ApplicationId", # required
-    #         client_token: "ClientToken",
-    #         description: "Description",
-    #         endpoint_type: "LAMBDA", # required, accepts LAMBDA, URL
-    #         environment_identifier: "EnvironmentId", # required
-    #         lambda_endpoint: {
-    #           arn: "LambdaArn", # required
-    #         },
-    #         name: "ServiceName", # required
-    #         tags: {
-    #           "TagMapKeyString" => "TagMapValueString",
-    #         },
-    #         url_endpoint: {
-    #           health_url: "Uri",
-    #           url: "Uri", # required
-    #         },
-    #         vpc_id: "VpcId",
-    #       }
-    #
     # @!attribute [rw] application_identifier
     #   The ID of the application which the service is created.
     #   @return [String]
@@ -853,13 +768,6 @@ module Aws::MigrationHubRefactorSpaces
 
     # The configuration for the default route type.
     #
-    # @note When making an API call, you may pass DefaultRouteInput
-    #   data as a hash:
-    #
-    #       {
-    #         activation_state: "ACTIVE", # accepts ACTIVE, INACTIVE
-    #       }
-    #
     # @!attribute [rw] activation_state
     #   If set to `ACTIVE`, traffic is forwarded to this route’s service
     #   after the route is created.
@@ -873,14 +781,6 @@ module Aws::MigrationHubRefactorSpaces
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_identifier: "ApplicationId", # required
-    #         environment_identifier: "EnvironmentId", # required
-    #       }
-    #
     # @!attribute [rw] application_identifier
     #   The ID of the application.
     #   @return [String]
@@ -935,13 +835,6 @@ module Aws::MigrationHubRefactorSpaces
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteEnvironmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         environment_identifier: "EnvironmentId", # required
-    #       }
-    #
     # @!attribute [rw] environment_identifier
     #   The ID of the environment.
     #   @return [String]
@@ -986,13 +879,6 @@ module Aws::MigrationHubRefactorSpaces
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteResourcePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identifier: "ResourcePolicyIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] identifier
     #   Amazon Resource Name (ARN) of the resource associated with the
     #   policy.
@@ -1010,15 +896,6 @@ module Aws::MigrationHubRefactorSpaces
     #
     class DeleteResourcePolicyResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteRouteRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_identifier: "ApplicationId", # required
-    #         environment_identifier: "EnvironmentId", # required
-    #         route_identifier: "RouteId", # required
-    #       }
-    #
     # @!attribute [rw] application_identifier
     #   The ID of the application to delete the route from.
     #   @return [String]
@@ -1078,15 +955,6 @@ module Aws::MigrationHubRefactorSpaces
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteServiceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_identifier: "ApplicationId", # required
-    #         environment_identifier: "EnvironmentId", # required
-    #         service_identifier: "ServiceId", # required
-    #       }
-    #
     # @!attribute [rw] application_identifier
     #   Deletes a Refactor Spaces service.
     #
@@ -1315,14 +1183,6 @@ module Aws::MigrationHubRefactorSpaces
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_identifier: "ApplicationId", # required
-    #         environment_identifier: "EnvironmentId", # required
-    #       }
-    #
     # @!attribute [rw] application_identifier
     #   The ID of the application.
     #   @return [String]
@@ -1420,13 +1280,6 @@ module Aws::MigrationHubRefactorSpaces
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetEnvironmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         environment_identifier: "EnvironmentId", # required
-    #       }
-    #
     # @!attribute [rw] environment_identifier
     #   The ID of the environment.
     #   @return [String]
@@ -1508,13 +1361,6 @@ module Aws::MigrationHubRefactorSpaces
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetResourcePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identifier: "ResourcePolicyIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] identifier
     #   The Amazon Resource Name (ARN) of the resource associated with the
     #   policy.
@@ -1541,15 +1387,6 @@ module Aws::MigrationHubRefactorSpaces
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRouteRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_identifier: "ApplicationId", # required
-    #         environment_identifier: "EnvironmentId", # required
-    #         route_identifier: "RouteId", # required
-    #       }
-    #
     # @!attribute [rw] application_identifier
     #   The ID of the application.
     #   @return [String]
@@ -1677,15 +1514,6 @@ module Aws::MigrationHubRefactorSpaces
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetServiceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_identifier: "ApplicationId", # required
-    #         environment_identifier: "EnvironmentId", # required
-    #         service_identifier: "ServiceId", # required
-    #       }
-    #
     # @!attribute [rw] application_identifier
     #   The ID of the application.
     #   @return [String]
@@ -1851,13 +1679,6 @@ module Aws::MigrationHubRefactorSpaces
 
     # The input for the Lambda endpoint type.
     #
-    # @note When making an API call, you may pass LambdaEndpointInput
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "LambdaArn", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the Lambda endpoint.
     #   @return [String]
@@ -1884,15 +1705,6 @@ module Aws::MigrationHubRefactorSpaces
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListApplicationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         environment_identifier: "EnvironmentId", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] environment_identifier
     #   The ID of the environment.
     #   @return [String]
@@ -1934,15 +1746,6 @@ module Aws::MigrationHubRefactorSpaces
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEnvironmentVpcsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         environment_identifier: "EnvironmentId", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] environment_identifier
     #   The ID of the environment.
     #   @return [String]
@@ -1984,14 +1787,6 @@ module Aws::MigrationHubRefactorSpaces
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEnvironmentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to return with a single call. To
     #   retrieve the remaining results, make another call with the returned
@@ -2028,16 +1823,6 @@ module Aws::MigrationHubRefactorSpaces
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRoutesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_identifier: "ApplicationId", # required
-    #         environment_identifier: "EnvironmentId", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] application_identifier
     #   The ID of the application.
     #   @return [String]
@@ -2084,16 +1869,6 @@ module Aws::MigrationHubRefactorSpaces
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListServicesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_identifier: "ApplicationId", # required
-    #         environment_identifier: "EnvironmentId", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] application_identifier
     #   The ID of the application.
     #   @return [String]
@@ -2140,13 +1915,6 @@ module Aws::MigrationHubRefactorSpaces
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -2171,14 +1939,6 @@ module Aws::MigrationHubRefactorSpaces
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutResourcePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy: "PolicyString", # required
-    #         resource_arn: "ResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] policy
     #   A JSON-formatted string for an Amazon Web Services resource-based
     #   policy.
@@ -2453,16 +2213,6 @@ module Aws::MigrationHubRefactorSpaces
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #         tags: { # required
-    #           "TagMapKeyString" => "TagMapValueString",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -2514,14 +2264,6 @@ module Aws::MigrationHubRefactorSpaces
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #         tag_keys: ["String"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -2543,16 +2285,6 @@ module Aws::MigrationHubRefactorSpaces
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateRouteRequest
-    #   data as a hash:
-    #
-    #       {
-    #         activation_state: "ACTIVE", # required, accepts ACTIVE, INACTIVE
-    #         application_identifier: "ApplicationId", # required
-    #         environment_identifier: "EnvironmentId", # required
-    #         route_identifier: "RouteId", # required
-    #       }
-    #
     # @!attribute [rw] activation_state
     #   If set to `ACTIVE`, traffic is forwarded to this route’s service
     #   after the route is updated.
@@ -2629,16 +2361,6 @@ module Aws::MigrationHubRefactorSpaces
 
     # The configuration for the URI path route type.
     #
-    # @note When making an API call, you may pass UriPathRouteInput
-    #   data as a hash:
-    #
-    #       {
-    #         activation_state: "ACTIVE", # required, accepts ACTIVE, INACTIVE
-    #         include_child_paths: false,
-    #         methods: ["DELETE"], # accepts DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT
-    #         source_path: "UriPath", # required
-    #       }
-    #
     # @!attribute [rw] activation_state
     #   If set to `ACTIVE`, traffic is forwarded to this route’s service
     #   after the route is created.
@@ -2692,14 +2414,6 @@ module Aws::MigrationHubRefactorSpaces
     end
 
     # The configuration for the URL endpoint type.
-    #
-    # @note When making an API call, you may pass UrlEndpointInput
-    #   data as a hash:
-    #
-    #       {
-    #         health_url: "Uri",
-    #         url: "Uri", # required
-    #       }
     #
     # @!attribute [rw] health_url
     #   The health check URL of the URL endpoint type. If the URL is a

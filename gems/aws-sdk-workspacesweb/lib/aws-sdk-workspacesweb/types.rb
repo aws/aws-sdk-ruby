@@ -23,14 +23,6 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateBrowserSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         browser_settings_arn: "ARN", # required
-    #         portal_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] browser_settings_arn
     #   The ARN of the browser settings.
     #   @return [String]
@@ -65,14 +57,6 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateNetworkSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         network_settings_arn: "ARN", # required
-    #         portal_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] network_settings_arn
     #   The ARN of the network settings.
     #   @return [String]
@@ -107,14 +91,6 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateTrustStoreRequest
-    #   data as a hash:
-    #
-    #       {
-    #         portal_arn: "ARN", # required
-    #         trust_store_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] portal_arn
     #   The ARN of the web portal.
     #   @return [String]
@@ -149,14 +125,6 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateUserAccessLoggingSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         portal_arn: "ARN", # required
-    #         user_access_logging_settings_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] portal_arn
     #   The ARN of the web portal.
     #   @return [String]
@@ -191,14 +159,6 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateUserSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         portal_arn: "ARN", # required
-    #         user_settings_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] portal_arn
     #   The ARN of the web portal.
     #   @return [String]
@@ -372,24 +332,6 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateBrowserSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         additional_encryption_context: {
-    #           "StringType" => "StringType",
-    #         },
-    #         browser_policy: "BrowserPolicy", # required
-    #         client_token: "ClientToken",
-    #         customer_managed_key: "keyArn",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] additional_encryption_context
     #   Additional encryption context of the browser settings.
     #   @return [Hash<String,String>]
@@ -447,19 +389,6 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateIdentityProviderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         identity_provider_details: { # required
-    #           "StringType" => "StringType",
-    #         },
-    #         identity_provider_name: "IdentityProviderName", # required
-    #         identity_provider_type: "SAML", # required, accepts SAML, Facebook, Google, LoginWithAmazon, SignInWithApple, OIDC
-    #         portal_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Idempotency ensures that an API request
@@ -576,22 +505,6 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateNetworkSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         security_group_ids: ["SecurityGroupId"], # required
-    #         subnet_ids: ["SubnetId"], # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         vpc_id: "VpcId", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Idempotency ensures that an API request
@@ -651,24 +564,6 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreatePortalRequest
-    #   data as a hash:
-    #
-    #       {
-    #         additional_encryption_context: {
-    #           "StringType" => "StringType",
-    #         },
-    #         client_token: "ClientToken",
-    #         customer_managed_key: "keyArn",
-    #         display_name: "DisplayName",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] additional_encryption_context
     #   The additional encryption context of the portal.
     #   @return [Hash<String,String>]
@@ -731,20 +626,6 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateTrustStoreRequest
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_list: ["data"], # required
-    #         client_token: "ClientToken",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] certificate_list
     #   A list of CA certificates to be added to the trust store.
     #   @return [Array<String>]
@@ -790,20 +671,6 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateUserAccessLoggingSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         kinesis_stream_arn: "KinesisStreamArn", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Idempotency ensures that an API request
@@ -850,26 +717,6 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateUserSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         copy_allowed: "Disabled", # required, accepts Disabled, Enabled
-    #         disconnect_timeout_in_minutes: 1,
-    #         download_allowed: "Disabled", # required, accepts Disabled, Enabled
-    #         idle_disconnect_timeout_in_minutes: 1,
-    #         paste_allowed: "Disabled", # required, accepts Disabled, Enabled
-    #         print_allowed: "Disabled", # required, accepts Disabled, Enabled
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         upload_allowed: "Disabled", # required, accepts Disabled, Enabled
-    #       }
-    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Idempotency ensures that an API request
@@ -953,13 +800,6 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteBrowserSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         browser_settings_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] browser_settings_arn
     #   The ARN of the browser settings.
     #   @return [String]
@@ -976,13 +816,6 @@ module Aws::WorkSpacesWeb
     #
     class DeleteBrowserSettingsResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteIdentityProviderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity_provider_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] identity_provider_arn
     #   The ARN of the identity provider.
     #   @return [String]
@@ -999,13 +832,6 @@ module Aws::WorkSpacesWeb
     #
     class DeleteIdentityProviderResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteNetworkSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         network_settings_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] network_settings_arn
     #   The ARN of the network settings.
     #   @return [String]
@@ -1022,13 +848,6 @@ module Aws::WorkSpacesWeb
     #
     class DeleteNetworkSettingsResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeletePortalRequest
-    #   data as a hash:
-    #
-    #       {
-    #         portal_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] portal_arn
     #   The ARN of the web portal.
     #   @return [String]
@@ -1045,13 +864,6 @@ module Aws::WorkSpacesWeb
     #
     class DeletePortalResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteTrustStoreRequest
-    #   data as a hash:
-    #
-    #       {
-    #         trust_store_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] trust_store_arn
     #   The ARN of the trust store.
     #   @return [String]
@@ -1068,13 +880,6 @@ module Aws::WorkSpacesWeb
     #
     class DeleteTrustStoreResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteUserAccessLoggingSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_access_logging_settings_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] user_access_logging_settings_arn
     #   The ARN of the user access logging settings.
     #   @return [String]
@@ -1091,13 +896,6 @@ module Aws::WorkSpacesWeb
     #
     class DeleteUserAccessLoggingSettingsResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteUserSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_settings_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] user_settings_arn
     #   The ARN of the user settings.
     #   @return [String]
@@ -1114,13 +912,6 @@ module Aws::WorkSpacesWeb
     #
     class DeleteUserSettingsResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DisassociateBrowserSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         portal_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] portal_arn
     #   The ARN of the web portal.
     #   @return [String]
@@ -1137,13 +928,6 @@ module Aws::WorkSpacesWeb
     #
     class DisassociateBrowserSettingsResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DisassociateNetworkSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         portal_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] portal_arn
     #   The ARN of the web portal.
     #   @return [String]
@@ -1160,13 +944,6 @@ module Aws::WorkSpacesWeb
     #
     class DisassociateNetworkSettingsResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DisassociateTrustStoreRequest
-    #   data as a hash:
-    #
-    #       {
-    #         portal_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] portal_arn
     #   The ARN of the web portal.
     #   @return [String]
@@ -1183,13 +960,6 @@ module Aws::WorkSpacesWeb
     #
     class DisassociateTrustStoreResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DisassociateUserAccessLoggingSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         portal_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] portal_arn
     #   The ARN of the web portal.
     #   @return [String]
@@ -1206,13 +976,6 @@ module Aws::WorkSpacesWeb
     #
     class DisassociateUserAccessLoggingSettingsResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DisassociateUserSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         portal_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] portal_arn
     #   The ARN of the web portal.
     #   @return [String]
@@ -1229,13 +992,6 @@ module Aws::WorkSpacesWeb
     #
     class DisassociateUserSettingsResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass GetBrowserSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         browser_settings_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] browser_settings_arn
     #   The ARN of the browser settings.
     #   @return [String]
@@ -1260,13 +1016,6 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetIdentityProviderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity_provider_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] identity_provider_arn
     #   The ARN of the identity provider.
     #   @return [String]
@@ -1291,13 +1040,6 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetNetworkSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         network_settings_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] network_settings_arn
     #   The ARN of the network settings.
     #   @return [String]
@@ -1322,13 +1064,6 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetPortalRequest
-    #   data as a hash:
-    #
-    #       {
-    #         portal_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] portal_arn
     #   The ARN of the web portal.
     #   @return [String]
@@ -1353,13 +1088,6 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetPortalServiceProviderMetadataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         portal_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] portal_arn
     #   The ARN of the web portal.
     #   @return [String]
@@ -1389,14 +1117,6 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetTrustStoreCertificateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         thumbprint: "CertificateThumbprint", # required
-    #         trust_store_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] thumbprint
     #   The thumbprint of the trust store certificate.
     #   @return [String]
@@ -1431,13 +1151,6 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetTrustStoreRequest
-    #   data as a hash:
-    #
-    #       {
-    #         trust_store_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] trust_store_arn
     #   The ARN of the trust store.
     #   @return [String]
@@ -1462,13 +1175,6 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetUserAccessLoggingSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_access_logging_settings_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] user_access_logging_settings_arn
     #   The ARN of the user access logging settings.
     #   @return [String]
@@ -1493,13 +1199,6 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetUserSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_settings_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] user_settings_arn
     #   The ARN of the user settings.
     #   @return [String]
@@ -1656,14 +1355,6 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListBrowserSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to be included in the next page.
     #   @return [Integer]
@@ -1700,15 +1391,6 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListIdentityProvidersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #         portal_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to be included in the next page.
     #   @return [Integer]
@@ -1750,14 +1432,6 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListNetworkSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to be included in the next page.
     #   @return [Integer]
@@ -1794,14 +1468,6 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPortalsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to be included in the next page.
     #   @return [Integer]
@@ -1838,13 +1504,6 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource.
     #   @return [String]
@@ -1869,15 +1528,6 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTrustStoreCertificatesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #         trust_store_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to be included in the next page.
     #   @return [Integer]
@@ -1924,14 +1574,6 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTrustStoresRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to be included in the next page.
     #   @return [Integer]
@@ -1968,14 +1610,6 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListUserAccessLoggingSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to be included in the next page.
     #   @return [Integer]
@@ -2012,14 +1646,6 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListUserSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to be included in the next page.
     #   @return [Integer]
@@ -2324,14 +1950,6 @@ module Aws::WorkSpacesWeb
 
     # The tag.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The key of the tag.
     #   @return [String]
@@ -2349,20 +1967,6 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         resource_arn: "ARN", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Idempotency ensures that an API request
@@ -2485,14 +2089,6 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ARN", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource.
     #   @return [String]
@@ -2514,15 +2110,6 @@ module Aws::WorkSpacesWeb
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateBrowserSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         browser_policy: "BrowserPolicy",
-    #         browser_settings_arn: "ARN", # required
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] browser_policy
     #   A JSON string containing Chrome Enterprise policies that will be
     #   applied to all streaming sessions.
@@ -2568,19 +2155,6 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateIdentityProviderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         identity_provider_arn: "ARN", # required
-    #         identity_provider_details: {
-    #           "StringType" => "StringType",
-    #         },
-    #         identity_provider_name: "IdentityProviderName",
-    #         identity_provider_type: "SAML", # accepts SAML, Facebook, Google, LoginWithAmazon, SignInWithApple, OIDC
-    #       }
-    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Idempotency ensures that an API request
@@ -2696,17 +2270,6 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateNetworkSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         network_settings_arn: "ARN", # required
-    #         security_group_ids: ["SecurityGroupId"],
-    #         subnet_ids: ["SubnetId"],
-    #         vpc_id: "VpcId",
-    #       }
-    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Idempotency ensures that an API request
@@ -2764,14 +2327,6 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdatePortalRequest
-    #   data as a hash:
-    #
-    #       {
-    #         display_name: "DisplayName",
-    #         portal_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] display_name
     #   The name of the web portal. This is not visible to users who log
     #   into the web portal.
@@ -2802,16 +2357,6 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateTrustStoreRequest
-    #   data as a hash:
-    #
-    #       {
-    #         certificates_to_add: ["data"],
-    #         certificates_to_delete: ["CertificateThumbprint"],
-    #         client_token: "ClientToken",
-    #         trust_store_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] certificates_to_add
     #   A list of CA certificates to add to the trust store.
     #   @return [Array<String>]
@@ -2861,15 +2406,6 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateUserAccessLoggingSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         kinesis_stream_arn: "KinesisStreamArn",
-    #         user_access_logging_settings_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Idempotency ensures that an API request
@@ -2914,21 +2450,6 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateUserSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         copy_allowed: "Disabled", # accepts Disabled, Enabled
-    #         disconnect_timeout_in_minutes: 1,
-    #         download_allowed: "Disabled", # accepts Disabled, Enabled
-    #         idle_disconnect_timeout_in_minutes: 1,
-    #         paste_allowed: "Disabled", # accepts Disabled, Enabled
-    #         print_allowed: "Disabled", # accepts Disabled, Enabled
-    #         upload_allowed: "Disabled", # accepts Disabled, Enabled
-    #         user_settings_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Idempotency ensures that an API request

@@ -10,19 +10,6 @@
 module Aws::CloudHSM
   module Types
 
-    # @note When making an API call, you may pass AddTagsToResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #         tag_list: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the AWS CloudHSM resource to tag.
     #   @return [String]
@@ -79,13 +66,6 @@ module Aws::CloudHSM
 
     # Contains the inputs for the CreateHapgRequest action.
     #
-    # @note When making an API call, you may pass CreateHapgRequest
-    #   data as a hash:
-    #
-    #       {
-    #         label: "Label", # required
-    #       }
-    #
     # @!attribute [rw] label
     #   The label of the new high-availability partition group.
     #   @return [String]
@@ -113,20 +93,6 @@ module Aws::CloudHSM
     end
 
     # Contains the inputs for the `CreateHsm` operation.
-    #
-    # @note When making an API call, you may pass CreateHsmRequest
-    #   data as a hash:
-    #
-    #       {
-    #         subnet_id: "SubnetId", # required
-    #         ssh_key: "SshKey", # required
-    #         eni_ip: "IpAddress",
-    #         iam_role_arn: "IamRoleArn", # required
-    #         external_id: "ExternalId",
-    #         subscription_type: "PRODUCTION", # required, accepts PRODUCTION
-    #         client_token: "ClientToken",
-    #         syslog_ip: "IpAddress",
-    #       }
     #
     # @!attribute [rw] subnet_id
     #   The identifier of the subnet in your VPC in which to place the HSM.
@@ -202,14 +168,6 @@ module Aws::CloudHSM
 
     # Contains the inputs for the CreateLunaClient action.
     #
-    # @note When making an API call, you may pass CreateLunaClientRequest
-    #   data as a hash:
-    #
-    #       {
-    #         label: "ClientLabel",
-    #         certificate: "Certificate", # required
-    #       }
-    #
     # @!attribute [rw] label
     #   The label for the client.
     #   @return [String]
@@ -244,13 +202,6 @@ module Aws::CloudHSM
 
     # Contains the inputs for the DeleteHapg action.
     #
-    # @note When making an API call, you may pass DeleteHapgRequest
-    #   data as a hash:
-    #
-    #       {
-    #         hapg_arn: "HapgArn", # required
-    #       }
-    #
     # @!attribute [rw] hapg_arn
     #   The ARN of the high-availability partition group to delete.
     #   @return [String]
@@ -279,13 +230,6 @@ module Aws::CloudHSM
 
     # Contains the inputs for the DeleteHsm operation.
     #
-    # @note When making an API call, you may pass DeleteHsmRequest
-    #   data as a hash:
-    #
-    #       {
-    #         hsm_arn: "HsmArn", # required
-    #       }
-    #
     # @!attribute [rw] hsm_arn
     #   The ARN of the HSM to delete.
     #   @return [String]
@@ -312,13 +256,6 @@ module Aws::CloudHSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteLunaClientRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_arn: "ClientArn", # required
-    #       }
-    #
     # @!attribute [rw] client_arn
     #   The ARN of the client to delete.
     #   @return [String]
@@ -344,13 +281,6 @@ module Aws::CloudHSM
     end
 
     # Contains the inputs for the DescribeHapg action.
-    #
-    # @note When making an API call, you may pass DescribeHapgRequest
-    #   data as a hash:
-    #
-    #       {
-    #         hapg_arn: "HapgArn", # required
-    #       }
     #
     # @!attribute [rw] hapg_arn
     #   The ARN of the high-availability partition group to describe.
@@ -418,14 +348,6 @@ module Aws::CloudHSM
     end
 
     # Contains the inputs for the DescribeHsm operation.
-    #
-    # @note When making an API call, you may pass DescribeHsmRequest
-    #   data as a hash:
-    #
-    #       {
-    #         hsm_arn: "HsmArn",
-    #         hsm_serial_number: "HsmSerialNumber",
-    #       }
     #
     # @!attribute [rw] hsm_arn
     #   The ARN of the HSM. Either the `HsmArn` or the `SerialNumber`
@@ -566,14 +488,6 @@ module Aws::CloudHSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeLunaClientRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_arn: "ClientArn",
-    #         certificate_fingerprint: "CertificateFingerprint",
-    #       }
-    #
     # @!attribute [rw] client_arn
     #   The ARN of the client.
     #   @return [String]
@@ -623,15 +537,6 @@ module Aws::CloudHSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_arn: "ClientArn", # required
-    #         client_version: "5.1", # required, accepts 5.1, 5.3
-    #         hapg_list: ["HapgArn"], # required
-    #       }
-    #
     # @!attribute [rw] client_arn
     #   The ARN of the client.
     #   @return [String]
@@ -685,8 +590,6 @@ module Aws::CloudHSM
 
     # Contains the inputs for the ListAvailableZones action.
     #
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListAvailableZonesRequest AWS API Documentation
     #
     class ListAvailableZonesRequest < Aws::EmptyStructure; end
@@ -704,13 +607,6 @@ module Aws::CloudHSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListHapgsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The `NextToken` value from a previous call to `ListHapgs`. Pass null
     #   if this is the first call.
@@ -742,13 +638,6 @@ module Aws::CloudHSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListHsmsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The `NextToken` value from a previous call to `ListHsms`. Pass null
     #   if this is the first call.
@@ -782,13 +671,6 @@ module Aws::CloudHSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListLunaClientsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The `NextToken` value from a previous call to `ListLunaClients`.
     #   Pass null if this is the first call.
@@ -820,13 +702,6 @@ module Aws::CloudHSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the AWS CloudHSM resource.
     #   @return [String]
@@ -851,15 +726,6 @@ module Aws::CloudHSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyHapgRequest
-    #   data as a hash:
-    #
-    #       {
-    #         hapg_arn: "HapgArn", # required
-    #         label: "Label",
-    #         partition_serial_list: ["PartitionSerial"],
-    #       }
-    #
     # @!attribute [rw] hapg_arn
     #   The ARN of the high-availability partition group to modify.
     #   @return [String]
@@ -896,18 +762,6 @@ module Aws::CloudHSM
     end
 
     # Contains the inputs for the ModifyHsm operation.
-    #
-    # @note When making an API call, you may pass ModifyHsmRequest
-    #   data as a hash:
-    #
-    #       {
-    #         hsm_arn: "HsmArn", # required
-    #         subnet_id: "SubnetId",
-    #         eni_ip: "IpAddress",
-    #         iam_role_arn: "IamRoleArn",
-    #         external_id: "ExternalId",
-    #         syslog_ip: "IpAddress",
-    #       }
     #
     # @!attribute [rw] hsm_arn
     #   The ARN of the HSM to modify.
@@ -967,14 +821,6 @@ module Aws::CloudHSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyLunaClientRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_arn: "ClientArn", # required
-    #         certificate: "Certificate", # required
-    #       }
-    #
     # @!attribute [rw] client_arn
     #   The ARN of the client.
     #   @return [String]
@@ -1004,14 +850,6 @@ module Aws::CloudHSM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RemoveTagsFromResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #         tag_key_list: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the AWS CloudHSM resource.
     #   @return [String]
@@ -1046,14 +884,6 @@ module Aws::CloudHSM
 
     # A key-value pair that identifies or specifies metadata about an AWS
     # CloudHSM resource.
-    #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
     #
     # @!attribute [rw] key
     #   The key of the tag.

@@ -10,20 +10,6 @@
 module Aws::DirectConnect
   module Types
 
-    # @note When making an API call, you may pass AcceptDirectConnectGatewayAssociationProposalRequest
-    #   data as a hash:
-    #
-    #       {
-    #         direct_connect_gateway_id: "DirectConnectGatewayId", # required
-    #         proposal_id: "DirectConnectGatewayAssociationProposalId", # required
-    #         associated_gateway_owner_account: "OwnerAccount", # required
-    #         override_allowed_prefixes_to_direct_connect_gateway: [
-    #           {
-    #             cidr: "CIDR",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] direct_connect_gateway_id
     #   The ID of the Direct Connect gateway.
     #   @return [String]
@@ -73,17 +59,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AllocateConnectionOnInterconnectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         bandwidth: "Bandwidth", # required
-    #         connection_name: "ConnectionName", # required
-    #         owner_account: "OwnerAccount", # required
-    #         interconnect_id: "InterconnectId", # required
-    #         vlan: 1, # required
-    #       }
-    #
     # @!attribute [rw] bandwidth
     #   The bandwidth of the connection. The possible values are 50Mbps,
     #   100Mbps, 200Mbps, 300Mbps, 400Mbps, 500Mbps, 1Gbps, 2Gbps, 5Gbps,
@@ -122,23 +97,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AllocateHostedConnectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connection_id: "ConnectionId", # required
-    #         owner_account: "OwnerAccount", # required
-    #         bandwidth: "Bandwidth", # required
-    #         connection_name: "ConnectionName", # required
-    #         vlan: 1, # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] connection_id
     #   The ID of the interconnect or LAG.
     #   @return [String]
@@ -181,30 +139,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AllocatePrivateVirtualInterfaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connection_id: "ConnectionId", # required
-    #         owner_account: "OwnerAccount", # required
-    #         new_private_virtual_interface_allocation: { # required
-    #           virtual_interface_name: "VirtualInterfaceName", # required
-    #           vlan: 1, # required
-    #           asn: 1, # required
-    #           mtu: 1,
-    #           auth_key: "BGPAuthKey",
-    #           amazon_address: "AmazonAddress",
-    #           address_family: "ipv4", # accepts ipv4, ipv6
-    #           customer_address: "CustomerAddress",
-    #           tags: [
-    #             {
-    #               key: "TagKey", # required
-    #               value: "TagValue",
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] connection_id
     #   The ID of the connection on which the private virtual interface is
     #   provisioned.
@@ -229,34 +163,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AllocatePublicVirtualInterfaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connection_id: "ConnectionId", # required
-    #         owner_account: "OwnerAccount", # required
-    #         new_public_virtual_interface_allocation: { # required
-    #           virtual_interface_name: "VirtualInterfaceName", # required
-    #           vlan: 1, # required
-    #           asn: 1, # required
-    #           auth_key: "BGPAuthKey",
-    #           amazon_address: "AmazonAddress",
-    #           customer_address: "CustomerAddress",
-    #           address_family: "ipv4", # accepts ipv4, ipv6
-    #           route_filter_prefixes: [
-    #             {
-    #               cidr: "CIDR",
-    #             },
-    #           ],
-    #           tags: [
-    #             {
-    #               key: "TagKey", # required
-    #               value: "TagValue",
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] connection_id
     #   The ID of the connection on which the public virtual interface is
     #   provisioned.
@@ -281,30 +187,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AllocateTransitVirtualInterfaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connection_id: "ConnectionId", # required
-    #         owner_account: "OwnerAccount", # required
-    #         new_transit_virtual_interface_allocation: { # required
-    #           virtual_interface_name: "VirtualInterfaceName",
-    #           vlan: 1,
-    #           asn: 1,
-    #           mtu: 1,
-    #           auth_key: "BGPAuthKey",
-    #           amazon_address: "AmazonAddress",
-    #           customer_address: "CustomerAddress",
-    #           address_family: "ipv4", # accepts ipv4, ipv6
-    #           tags: [
-    #             {
-    #               key: "TagKey", # required
-    #               value: "TagValue",
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] connection_id
     #   The ID of the connection on which the transit virtual interface is
     #   provisioned.
@@ -341,14 +223,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateConnectionWithLagRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connection_id: "ConnectionId", # required
-    #         lag_id: "LagId", # required
-    #       }
-    #
     # @!attribute [rw] connection_id
     #   The ID of the connection.
     #   @return [String]
@@ -366,14 +240,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateHostedConnectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connection_id: "ConnectionId", # required
-    #         parent_connection_id: "ConnectionId", # required
-    #       }
-    #
     # @!attribute [rw] connection_id
     #   The ID of the hosted connection.
     #   @return [String]
@@ -391,16 +257,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateMacSecKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connection_id: "ConnectionId", # required
-    #         secret_arn: "SecretARN",
-    #         ckn: "Ckn",
-    #         cak: "Cak",
-    #       }
-    #
     # @!attribute [rw] connection_id
     #   The ID of the dedicated connection (dxcon-xxxx), or the ID of the
     #   LAG (dxlag-xxxx).
@@ -474,14 +330,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateVirtualInterfaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         virtual_interface_id: "VirtualInterfaceId", # required
-    #         connection_id: "ConnectionId", # required
-    #       }
-    #
     # @!attribute [rw] virtual_interface_id
     #   The ID of the virtual interface.
     #   @return [String]
@@ -614,13 +462,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ConfirmConnectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connection_id: "ConnectionId", # required
-    #       }
-    #
     # @!attribute [rw] connection_id
     #   The ID of the hosted connection.
     #   @return [String]
@@ -671,13 +512,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ConfirmCustomerAgreementRequest
-    #   data as a hash:
-    #
-    #       {
-    #         agreement_name: "AgreementName",
-    #       }
-    #
     # @!attribute [rw] agreement_name
     #   The name of the customer agreement.
     #   @return [String]
@@ -703,15 +537,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ConfirmPrivateVirtualInterfaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         virtual_interface_id: "VirtualInterfaceId", # required
-    #         virtual_gateway_id: "VirtualGatewayId",
-    #         direct_connect_gateway_id: "DirectConnectGatewayId",
-    #       }
-    #
     # @!attribute [rw] virtual_interface_id
     #   The ID of the virtual interface.
     #   @return [String]
@@ -778,13 +603,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ConfirmPublicVirtualInterfaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         virtual_interface_id: "VirtualInterfaceId", # required
-    #       }
-    #
     # @!attribute [rw] virtual_interface_id
     #   The ID of the virtual interface.
     #   @return [String]
@@ -841,14 +659,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ConfirmTransitVirtualInterfaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         virtual_interface_id: "VirtualInterfaceId", # required
-    #         direct_connect_gateway_id: "DirectConnectGatewayId", # required
-    #       }
-    #
     # @!attribute [rw] virtual_interface_id
     #   The ID of the virtual interface.
     #   @return [String]
@@ -1079,20 +889,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateBGPPeerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         virtual_interface_id: "VirtualInterfaceId",
-    #         new_bgp_peer: {
-    #           asn: 1,
-    #           auth_key: "BGPAuthKey",
-    #           address_family: "ipv4", # accepts ipv4, ipv6
-    #           amazon_address: "AmazonAddress",
-    #           customer_address: "CustomerAddress",
-    #         },
-    #       }
-    #
     # @!attribute [rw] virtual_interface_id
     #   The ID of the virtual interface.
     #   @return [String]
@@ -1122,24 +918,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateConnectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         location: "LocationCode", # required
-    #         bandwidth: "Bandwidth", # required
-    #         connection_name: "ConnectionName", # required
-    #         lag_id: "LagId",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         provider_name: "ProviderName",
-    #         request_mac_sec: false,
-    #       }
-    #
     # @!attribute [rw] location
     #   The location of the connection.
     #   @return [String]
@@ -1192,25 +970,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDirectConnectGatewayAssociationProposalRequest
-    #   data as a hash:
-    #
-    #       {
-    #         direct_connect_gateway_id: "DirectConnectGatewayId", # required
-    #         direct_connect_gateway_owner_account: "OwnerAccount", # required
-    #         gateway_id: "GatewayIdToAssociate", # required
-    #         add_allowed_prefixes_to_direct_connect_gateway: [
-    #           {
-    #             cidr: "CIDR",
-    #           },
-    #         ],
-    #         remove_allowed_prefixes_to_direct_connect_gateway: [
-    #           {
-    #             cidr: "CIDR",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] direct_connect_gateway_id
     #   The ID of the Direct Connect gateway.
     #   @return [String]
@@ -1257,20 +1016,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDirectConnectGatewayAssociationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         direct_connect_gateway_id: "DirectConnectGatewayId", # required
-    #         gateway_id: "GatewayIdToAssociate",
-    #         add_allowed_prefixes_to_direct_connect_gateway: [
-    #           {
-    #             cidr: "CIDR",
-    #           },
-    #         ],
-    #         virtual_gateway_id: "VirtualGatewayId",
-    #       }
-    #
     # @!attribute [rw] direct_connect_gateway_id
     #   The ID of the Direct Connect gateway.
     #   @return [String]
@@ -1320,14 +1065,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDirectConnectGatewayRequest
-    #   data as a hash:
-    #
-    #       {
-    #         direct_connect_gateway_name: "DirectConnectGatewayName", # required
-    #         amazon_side_asn: 1,
-    #       }
-    #
     # @!attribute [rw] direct_connect_gateway_name
     #   The name of the Direct Connect gateway.
     #   @return [String]
@@ -1360,23 +1097,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateInterconnectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         interconnect_name: "InterconnectName", # required
-    #         bandwidth: "Bandwidth", # required
-    #         location: "LocationCode", # required
-    #         lag_id: "LagId",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         provider_name: "ProviderName",
-    #       }
-    #
     # @!attribute [rw] interconnect_name
     #   The name of the interconnect.
     #   @return [String]
@@ -1414,31 +1134,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateLagRequest
-    #   data as a hash:
-    #
-    #       {
-    #         number_of_connections: 1, # required
-    #         location: "LocationCode", # required
-    #         connections_bandwidth: "Bandwidth", # required
-    #         lag_name: "LagName", # required
-    #         connection_id: "ConnectionId",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         child_connection_tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         provider_name: "ProviderName",
-    #         request_mac_sec: false,
-    #       }
-    #
     # @!attribute [rw] number_of_connections
     #   The number of physical dedicated connections initially provisioned
     #   and bundled by the LAG.
@@ -1504,32 +1199,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreatePrivateVirtualInterfaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connection_id: "ConnectionId", # required
-    #         new_private_virtual_interface: { # required
-    #           virtual_interface_name: "VirtualInterfaceName", # required
-    #           vlan: 1, # required
-    #           asn: 1, # required
-    #           mtu: 1,
-    #           auth_key: "BGPAuthKey",
-    #           amazon_address: "AmazonAddress",
-    #           customer_address: "CustomerAddress",
-    #           address_family: "ipv4", # accepts ipv4, ipv6
-    #           virtual_gateway_id: "VirtualGatewayId",
-    #           direct_connect_gateway_id: "DirectConnectGatewayId",
-    #           tags: [
-    #             {
-    #               key: "TagKey", # required
-    #               value: "TagValue",
-    #             },
-    #           ],
-    #           enable_site_link: false,
-    #         },
-    #       }
-    #
     # @!attribute [rw] connection_id
     #   The ID of the connection.
     #   @return [String]
@@ -1547,33 +1216,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreatePublicVirtualInterfaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connection_id: "ConnectionId", # required
-    #         new_public_virtual_interface: { # required
-    #           virtual_interface_name: "VirtualInterfaceName", # required
-    #           vlan: 1, # required
-    #           asn: 1, # required
-    #           auth_key: "BGPAuthKey",
-    #           amazon_address: "AmazonAddress",
-    #           customer_address: "CustomerAddress",
-    #           address_family: "ipv4", # accepts ipv4, ipv6
-    #           route_filter_prefixes: [
-    #             {
-    #               cidr: "CIDR",
-    #             },
-    #           ],
-    #           tags: [
-    #             {
-    #               key: "TagKey", # required
-    #               value: "TagValue",
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] connection_id
     #   The ID of the connection.
     #   @return [String]
@@ -1591,31 +1233,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateTransitVirtualInterfaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connection_id: "ConnectionId", # required
-    #         new_transit_virtual_interface: { # required
-    #           virtual_interface_name: "VirtualInterfaceName",
-    #           vlan: 1,
-    #           asn: 1,
-    #           mtu: 1,
-    #           auth_key: "BGPAuthKey",
-    #           amazon_address: "AmazonAddress",
-    #           customer_address: "CustomerAddress",
-    #           address_family: "ipv4", # accepts ipv4, ipv6
-    #           direct_connect_gateway_id: "DirectConnectGatewayId",
-    #           tags: [
-    #             {
-    #               key: "TagKey", # required
-    #               value: "TagValue",
-    #             },
-    #           ],
-    #           enable_site_link: false,
-    #         },
-    #       }
-    #
     # @!attribute [rw] connection_id
     #   The ID of the connection.
     #   @return [String]
@@ -1665,16 +1282,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteBGPPeerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         virtual_interface_id: "VirtualInterfaceId",
-    #         asn: 1,
-    #         customer_address: "CustomerAddress",
-    #         bgp_peer_id: "BGPPeerId",
-    #       }
-    #
     # @!attribute [rw] virtual_interface_id
     #   The ID of the virtual interface.
     #   @return [String]
@@ -1715,13 +1322,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteConnectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connection_id: "ConnectionId", # required
-    #       }
-    #
     # @!attribute [rw] connection_id
     #   The ID of the connection.
     #   @return [String]
@@ -1734,13 +1334,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDirectConnectGatewayAssociationProposalRequest
-    #   data as a hash:
-    #
-    #       {
-    #         proposal_id: "DirectConnectGatewayAssociationProposalId", # required
-    #       }
-    #
     # @!attribute [rw] proposal_id
     #   The ID of the proposal.
     #   @return [String]
@@ -1765,15 +1358,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDirectConnectGatewayAssociationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         association_id: "DirectConnectGatewayAssociationId",
-    #         direct_connect_gateway_id: "DirectConnectGatewayId",
-    #         virtual_gateway_id: "VirtualGatewayId",
-    #       }
-    #
     # @!attribute [rw] association_id
     #   The ID of the Direct Connect gateway association.
     #   @return [String]
@@ -1808,13 +1392,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDirectConnectGatewayRequest
-    #   data as a hash:
-    #
-    #       {
-    #         direct_connect_gateway_id: "DirectConnectGatewayId", # required
-    #       }
-    #
     # @!attribute [rw] direct_connect_gateway_id
     #   The ID of the Direct Connect gateway.
     #   @return [String]
@@ -1839,13 +1416,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteInterconnectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         interconnect_id: "InterconnectId", # required
-    #       }
-    #
     # @!attribute [rw] interconnect_id
     #   The ID of the interconnect.
     #   @return [String]
@@ -1889,13 +1459,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteLagRequest
-    #   data as a hash:
-    #
-    #       {
-    #         lag_id: "LagId", # required
-    #       }
-    #
     # @!attribute [rw] lag_id
     #   The ID of the LAG.
     #   @return [String]
@@ -1908,13 +1471,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteVirtualInterfaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         virtual_interface_id: "VirtualInterfaceId", # required
-    #       }
-    #
     # @!attribute [rw] virtual_interface_id
     #   The ID of the virtual interface.
     #   @return [String]
@@ -1971,15 +1527,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeConnectionLoaRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connection_id: "ConnectionId", # required
-    #         provider_name: "ProviderName",
-    #         loa_content_type: "application/pdf", # accepts application/pdf
-    #       }
-    #
     # @!attribute [rw] connection_id
     #   The ID of the connection.
     #   @return [String]
@@ -2019,13 +1566,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeConnectionsOnInterconnectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         interconnect_id: "InterconnectId", # required
-    #       }
-    #
     # @!attribute [rw] interconnect_id
     #   The ID of the interconnect.
     #   @return [String]
@@ -2038,13 +1578,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeConnectionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connection_id: "ConnectionId",
-    #       }
-    #
     # @!attribute [rw] connection_id
     #   The ID of the connection.
     #   @return [String]
@@ -2083,17 +1616,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDirectConnectGatewayAssociationProposalsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         direct_connect_gateway_id: "DirectConnectGatewayId",
-    #         proposal_id: "DirectConnectGatewayAssociationProposalId",
-    #         associated_gateway_id: "AssociatedGatewayId",
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] direct_connect_gateway_id
     #   The ID of the Direct Connect gateway.
     #   @return [String]
@@ -2149,18 +1671,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDirectConnectGatewayAssociationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         association_id: "DirectConnectGatewayAssociationId",
-    #         associated_gateway_id: "AssociatedGatewayId",
-    #         direct_connect_gateway_id: "DirectConnectGatewayId",
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #         virtual_gateway_id: "VirtualGatewayId",
-    #       }
-    #
     # @!attribute [rw] association_id
     #   The ID of the Direct Connect gateway association.
     #   @return [String]
@@ -2220,16 +1730,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDirectConnectGatewayAttachmentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         direct_connect_gateway_id: "DirectConnectGatewayId",
-    #         virtual_interface_id: "VirtualInterfaceId",
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] direct_connect_gateway_id
     #   The ID of the Direct Connect gateway.
     #   @return [String]
@@ -2279,15 +1779,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDirectConnectGatewaysRequest
-    #   data as a hash:
-    #
-    #       {
-    #         direct_connect_gateway_id: "DirectConnectGatewayId",
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] direct_connect_gateway_id
     #   The ID of the Direct Connect gateway.
     #   @return [String]
@@ -2332,13 +1823,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeHostedConnectionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connection_id: "ConnectionId", # required
-    #       }
-    #
     # @!attribute [rw] connection_id
     #   The ID of the interconnect or LAG.
     #   @return [String]
@@ -2351,15 +1835,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeInterconnectLoaRequest
-    #   data as a hash:
-    #
-    #       {
-    #         interconnect_id: "InterconnectId", # required
-    #         provider_name: "ProviderName",
-    #         loa_content_type: "application/pdf", # accepts application/pdf
-    #       }
-    #
     # @!attribute [rw] interconnect_id
     #   The ID of the interconnect.
     #   @return [String]
@@ -2399,13 +1874,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeInterconnectsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         interconnect_id: "InterconnectId",
-    #       }
-    #
     # @!attribute [rw] interconnect_id
     #   The ID of the interconnect.
     #   @return [String]
@@ -2418,13 +1886,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeLagsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         lag_id: "LagId",
-    #       }
-    #
     # @!attribute [rw] lag_id
     #   The ID of the LAG.
     #   @return [String]
@@ -2437,15 +1898,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeLoaRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connection_id: "ConnectionId", # required
-    #         provider_name: "ProviderName",
-    #         loa_content_type: "application/pdf", # accepts application/pdf
-    #       }
-    #
     # @!attribute [rw] connection_id
     #   The ID of a connection, LAG, or interconnect.
     #   @return [String]
@@ -2473,14 +1925,6 @@ module Aws::DirectConnect
     end
 
     # Provides the details about a virtual interface's router.
-    #
-    # @note When making an API call, you may pass DescribeRouterConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         virtual_interface_id: "VirtualInterfaceId", # required
-    #         router_type_identifier: "RouterTypeIdentifier",
-    #       }
     #
     # @!attribute [rw] virtual_interface_id
     #   The ID of the virtual interface.
@@ -2528,13 +1972,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeTagsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arns: ["ResourceArn"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arns
     #   The Amazon Resource Names (ARNs) of the resources.
     #   @return [Array<String>]
@@ -2559,14 +1996,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeVirtualInterfacesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connection_id: "ConnectionId",
-    #         virtual_interface_id: "VirtualInterfaceId",
-    #       }
-    #
     # @!attribute [rw] connection_id
     #   The ID of the connection.
     #   @return [String]
@@ -2861,14 +2290,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateConnectionFromLagRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connection_id: "ConnectionId", # required
-    #         lag_id: "LagId", # required
-    #       }
-    #
     # @!attribute [rw] connection_id
     #   The ID of the connection.
     #   @return [String]
@@ -2886,14 +2307,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateMacSecKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connection_id: "ConnectionId", # required
-    #         secret_arn: "SecretARN", # required
-    #       }
-    #
     # @!attribute [rw] connection_id
     #   The ID of the dedicated connection (dxcon-xxxx), or the ID of the
     #   LAG (dxlag-xxxx).
@@ -3215,18 +2628,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListVirtualInterfaceTestHistoryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         test_id: "TestId",
-    #         virtual_interface_id: "VirtualInterfaceId",
-    #         bgp_peers: ["BGPPeerId"],
-    #         status: "FailureTestHistoryStatus",
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] test_id
     #   The ID of the virtual interface failover test.
     #   @return [String]
@@ -3408,17 +2809,6 @@ module Aws::DirectConnect
 
     # Information about a new BGP peer.
     #
-    # @note When making an API call, you may pass NewBGPPeer
-    #   data as a hash:
-    #
-    #       {
-    #         asn: 1,
-    #         auth_key: "BGPAuthKey",
-    #         address_family: "ipv4", # accepts ipv4, ipv6
-    #         amazon_address: "AmazonAddress",
-    #         customer_address: "CustomerAddress",
-    #       }
-    #
     # @!attribute [rw] asn
     #   The autonomous system (AS) number for Border Gateway Protocol (BGP)
     #   configuration.
@@ -3455,29 +2845,6 @@ module Aws::DirectConnect
     end
 
     # Information about a private virtual interface.
-    #
-    # @note When making an API call, you may pass NewPrivateVirtualInterface
-    #   data as a hash:
-    #
-    #       {
-    #         virtual_interface_name: "VirtualInterfaceName", # required
-    #         vlan: 1, # required
-    #         asn: 1, # required
-    #         mtu: 1,
-    #         auth_key: "BGPAuthKey",
-    #         amazon_address: "AmazonAddress",
-    #         customer_address: "CustomerAddress",
-    #         address_family: "ipv4", # accepts ipv4, ipv6
-    #         virtual_gateway_id: "VirtualGatewayId",
-    #         direct_connect_gateway_id: "DirectConnectGatewayId",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         enable_site_link: false,
-    #       }
     #
     # @!attribute [rw] virtual_interface_name
     #   The name of the virtual interface assigned by the customer network.
@@ -3557,26 +2924,6 @@ module Aws::DirectConnect
     # Information about a private virtual interface to be provisioned on a
     # connection.
     #
-    # @note When making an API call, you may pass NewPrivateVirtualInterfaceAllocation
-    #   data as a hash:
-    #
-    #       {
-    #         virtual_interface_name: "VirtualInterfaceName", # required
-    #         vlan: 1, # required
-    #         asn: 1, # required
-    #         mtu: 1,
-    #         auth_key: "BGPAuthKey",
-    #         amazon_address: "AmazonAddress",
-    #         address_family: "ipv4", # accepts ipv4, ipv6
-    #         customer_address: "CustomerAddress",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] virtual_interface_name
     #   The name of the virtual interface assigned by the customer network.
     #   The name has a maximum of 100 characters. The following are valid
@@ -3638,30 +2985,6 @@ module Aws::DirectConnect
     end
 
     # Information about a public virtual interface.
-    #
-    # @note When making an API call, you may pass NewPublicVirtualInterface
-    #   data as a hash:
-    #
-    #       {
-    #         virtual_interface_name: "VirtualInterfaceName", # required
-    #         vlan: 1, # required
-    #         asn: 1, # required
-    #         auth_key: "BGPAuthKey",
-    #         amazon_address: "AmazonAddress",
-    #         customer_address: "CustomerAddress",
-    #         address_family: "ipv4", # accepts ipv4, ipv6
-    #         route_filter_prefixes: [
-    #           {
-    #             cidr: "CIDR",
-    #           },
-    #         ],
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] virtual_interface_name
     #   The name of the virtual interface assigned by the customer network.
@@ -3726,30 +3049,6 @@ module Aws::DirectConnect
     # Information about a public virtual interface to be provisioned on a
     # connection.
     #
-    # @note When making an API call, you may pass NewPublicVirtualInterfaceAllocation
-    #   data as a hash:
-    #
-    #       {
-    #         virtual_interface_name: "VirtualInterfaceName", # required
-    #         vlan: 1, # required
-    #         asn: 1, # required
-    #         auth_key: "BGPAuthKey",
-    #         amazon_address: "AmazonAddress",
-    #         customer_address: "CustomerAddress",
-    #         address_family: "ipv4", # accepts ipv4, ipv6
-    #         route_filter_prefixes: [
-    #           {
-    #             cidr: "CIDR",
-    #           },
-    #         ],
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] virtual_interface_name
     #   The name of the virtual interface assigned by the customer network.
     #   The name has a maximum of 100 characters. The following are valid
@@ -3811,28 +3110,6 @@ module Aws::DirectConnect
     end
 
     # Information about a transit virtual interface.
-    #
-    # @note When making an API call, you may pass NewTransitVirtualInterface
-    #   data as a hash:
-    #
-    #       {
-    #         virtual_interface_name: "VirtualInterfaceName",
-    #         vlan: 1,
-    #         asn: 1,
-    #         mtu: 1,
-    #         auth_key: "BGPAuthKey",
-    #         amazon_address: "AmazonAddress",
-    #         customer_address: "CustomerAddress",
-    #         address_family: "ipv4", # accepts ipv4, ipv6
-    #         direct_connect_gateway_id: "DirectConnectGatewayId",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         enable_site_link: false,
-    #       }
     #
     # @!attribute [rw] virtual_interface_name
     #   The name of the virtual interface assigned by the customer network.
@@ -3906,26 +3183,6 @@ module Aws::DirectConnect
 
     # Information about a transit virtual interface to be provisioned on a
     # connection.
-    #
-    # @note When making an API call, you may pass NewTransitVirtualInterfaceAllocation
-    #   data as a hash:
-    #
-    #       {
-    #         virtual_interface_name: "VirtualInterfaceName",
-    #         vlan: 1,
-    #         asn: 1,
-    #         mtu: 1,
-    #         auth_key: "BGPAuthKey",
-    #         amazon_address: "AmazonAddress",
-    #         customer_address: "CustomerAddress",
-    #         address_family: "ipv4", # accepts ipv4, ipv6
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] virtual_interface_name
     #   The name of the virtual interface assigned by the customer network.
@@ -4009,13 +3266,6 @@ module Aws::DirectConnect
     # Information about a route filter prefix that a customer can advertise
     # through Border Gateway Protocol (BGP) over a public virtual interface.
     #
-    # @note When making an API call, you may pass RouteFilterPrefix
-    #   data as a hash:
-    #
-    #       {
-    #         cidr: "CIDR",
-    #       }
-    #
     # @!attribute [rw] cidr
     #   The CIDR block for the advertised route. Separate multiple routes
     #   using commas. An IPv6 CIDR must use /64 or shorter.
@@ -4071,15 +3321,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartBgpFailoverTestRequest
-    #   data as a hash:
-    #
-    #       {
-    #         virtual_interface_id: "VirtualInterfaceId", # required
-    #         bgp_peers: ["BGPPeerId"],
-    #         test_duration_in_minutes: 1,
-    #       }
-    #
     # @!attribute [rw] virtual_interface_id
     #   The ID of the virtual interface you want to test.
     #   @return [String]
@@ -4119,13 +3360,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopBgpFailoverTestRequest
-    #   data as a hash:
-    #
-    #       {
-    #         virtual_interface_id: "VirtualInterfaceId", # required
-    #       }
-    #
     # @!attribute [rw] virtual_interface_id
     #   The ID of the virtual interface you no longer want to test.
     #   @return [String]
@@ -4152,14 +3386,6 @@ module Aws::DirectConnect
 
     # Information about a tag.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue",
-    #       }
-    #
     # @!attribute [rw] key
     #   The key.
     #   @return [String]
@@ -4177,19 +3403,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -4217,14 +3430,6 @@ module Aws::DirectConnect
     #
     class TooManyTagsException < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -4246,15 +3451,6 @@ module Aws::DirectConnect
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateConnectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connection_id: "ConnectionId", # required
-    #         connection_name: "ConnectionName",
-    #         encryption_mode: "EncryptionMode",
-    #       }
-    #
     # @!attribute [rw] connection_id
     #   The ID of the dedicated connection.
     #
@@ -4282,23 +3478,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateDirectConnectGatewayAssociationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         association_id: "DirectConnectGatewayAssociationId",
-    #         add_allowed_prefixes_to_direct_connect_gateway: [
-    #           {
-    #             cidr: "CIDR",
-    #           },
-    #         ],
-    #         remove_allowed_prefixes_to_direct_connect_gateway: [
-    #           {
-    #             cidr: "CIDR",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] association_id
     #   The ID of the Direct Connect gateway association.
     #   @return [String]
@@ -4335,14 +3514,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateDirectConnectGatewayRequest
-    #   data as a hash:
-    #
-    #       {
-    #         direct_connect_gateway_id: "DirectConnectGatewayId", # required
-    #         new_direct_connect_gateway_name: "DirectConnectGatewayName", # required
-    #       }
-    #
     # @!attribute [rw] direct_connect_gateway_id
     #   The ID of the Direct Connect gateway to update.
     #   @return [String]
@@ -4374,16 +3545,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateLagRequest
-    #   data as a hash:
-    #
-    #       {
-    #         lag_id: "LagId", # required
-    #         lag_name: "LagName",
-    #         minimum_links: 1,
-    #         encryption_mode: "EncryptionMode",
-    #       }
-    #
     # @!attribute [rw] lag_id
     #   The ID of the LAG.
     #   @return [String]
@@ -4415,16 +3576,6 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateVirtualInterfaceAttributesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         virtual_interface_id: "VirtualInterfaceId", # required
-    #         mtu: 1,
-    #         enable_site_link: false,
-    #         virtual_interface_name: "VirtualInterfaceName",
-    #       }
-    #
     # @!attribute [rw] virtual_interface_id
     #   The ID of the virtual private interface.
     #   @return [String]

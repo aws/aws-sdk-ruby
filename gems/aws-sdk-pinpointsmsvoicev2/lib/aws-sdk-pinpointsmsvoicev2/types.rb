@@ -75,16 +75,6 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateOriginationIdentityRequest
-    #   data as a hash:
-    #
-    #       {
-    #         pool_id: "PoolIdOrArn", # required
-    #         origination_identity: "PhoneOrSenderIdOrArn", # required
-    #         iso_country_code: "IsoCountryCode", # required
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] pool_id
     #   The pool to update with the new Identity. This value can be either
     #   the PoolId or PoolArn, and you can find these values using
@@ -163,14 +153,6 @@ module Aws::PinpointSMSVoiceV2
     # Contains the destination configuration to use when publishing message
     # sending events.
     #
-    # @note When making an API call, you may pass CloudWatchLogsDestination
-    #   data as a hash:
-    #
-    #       {
-    #         iam_role_arn: "IamRoleArn", # required
-    #         log_group_arn: "LogGroupArn", # required
-    #       }
-    #
     # @!attribute [rw] iam_role_arn
     #   The Amazon Resource Name (ARN) of an Amazon Identity and Access
     #   Management (IAM) role that is able to write event data to an Amazon
@@ -192,14 +174,6 @@ module Aws::PinpointSMSVoiceV2
     end
 
     # The information for configuration sets that meet a specified criteria.
-    #
-    # @note When making an API call, you may pass ConfigurationSetFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "event-destination-name", # required, accepts event-destination-name, matching-event-types, default-message-type, default-sender-id
-    #         values: ["FilterValue"], # required
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the attribute to filter on.
@@ -297,20 +271,6 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateConfigurationSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_set_name: "ConfigurationSetName", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] configuration_set_name
     #   The name to use for the new configuration set.
     #   @return [String]
@@ -374,27 +334,6 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateEventDestinationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_set_name: "ConfigurationSetNameOrArn", # required
-    #         event_destination_name: "EventDestinationName", # required
-    #         matching_event_types: ["ALL"], # required, accepts ALL, TEXT_ALL, TEXT_SENT, TEXT_PENDING, TEXT_QUEUED, TEXT_SUCCESSFUL, TEXT_DELIVERED, TEXT_INVALID, TEXT_INVALID_MESSAGE, TEXT_UNREACHABLE, TEXT_CARRIER_UNREACHABLE, TEXT_BLOCKED, TEXT_CARRIER_BLOCKED, TEXT_SPAM, TEXT_UNKNOWN, TEXT_TTL_EXPIRED, VOICE_ALL, VOICE_INITIATED, VOICE_RINGING, VOICE_ANSWERED, VOICE_COMPLETED, VOICE_BUSY, VOICE_NO_ANSWER, VOICE_FAILED, VOICE_TTL_EXPIRED
-    #         cloud_watch_logs_destination: {
-    #           iam_role_arn: "IamRoleArn", # required
-    #           log_group_arn: "LogGroupArn", # required
-    #         },
-    #         kinesis_firehose_destination: {
-    #           iam_role_arn: "IamRoleArn", # required
-    #           delivery_stream_arn: "DeliveryStreamArn", # required
-    #         },
-    #         sns_destination: {
-    #           topic_arn: "SnsTopicArn", # required
-    #         },
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] configuration_set_name
     #   Either the name of the configuration set or the configuration set
     #   ARN to apply event logging to. The ConfigurateSetName and
@@ -472,20 +411,6 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateOptOutListRequest
-    #   data as a hash:
-    #
-    #       {
-    #         opt_out_list_name: "OptOutListName", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] opt_out_list_name
     #   The name of the new OptOutList.
     #   @return [String]
@@ -547,23 +472,6 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreatePoolRequest
-    #   data as a hash:
-    #
-    #       {
-    #         origination_identity: "PhoneOrSenderIdOrArn", # required
-    #         iso_country_code: "IsoCountryCode", # required
-    #         message_type: "TRANSACTIONAL", # required, accepts TRANSACTIONAL, PROMOTIONAL
-    #         deletion_protection_enabled: false,
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] origination_identity
     #   The origination identity to use such as a PhoneNumberId,
     #   PhoneNumberArn, SenderId or SenderIdArn. You can use
@@ -700,13 +608,6 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteConfigurationSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_set_name: "ConfigurationSetNameOrArn", # required
-    #       }
-    #
     # @!attribute [rw] configuration_set_name
     #   The name of the configuration set or the configuration set ARN that
     #   you want to delete. The ConfigurationSetName and ConfigurationSetArn
@@ -764,13 +665,6 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDefaultMessageTypeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_set_name: "ConfigurationSetNameOrArn", # required
-    #       }
-    #
     # @!attribute [rw] configuration_set_name
     #   The name of the configuration set or the configuration set Amazon
     #   Resource Name (ARN) to delete the default message type from. The
@@ -808,13 +702,6 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDefaultSenderIdRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_set_name: "ConfigurationSetNameOrArn", # required
-    #       }
-    #
     # @!attribute [rw] configuration_set_name
     #   The name of the configuration set or the configuration set Amazon
     #   Resource Name (ARN) to delete the default sender ID from. The
@@ -852,14 +739,6 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteEventDestinationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_set_name: "ConfigurationSetNameOrArn", # required
-    #         event_destination_name: "EventDestinationName", # required
-    #       }
-    #
     # @!attribute [rw] configuration_set_name
     #   The name of the configuration set or the configuration set's Amazon
     #   Resource Name (ARN) to remove the event destination from. The
@@ -903,14 +782,6 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteKeywordRequest
-    #   data as a hash:
-    #
-    #       {
-    #         origination_identity: "PhoneOrPoolIdOrArn", # required
-    #         keyword: "Keyword", # required
-    #       }
-    #
     # @!attribute [rw] origination_identity
     #   The origination identity to use such as a PhoneNumberId,
     #   PhoneNumberArn, PoolId or PoolArn. You can use DescribePhoneNumbers
@@ -963,13 +834,6 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteOptOutListRequest
-    #   data as a hash:
-    #
-    #       {
-    #         opt_out_list_name: "OptOutListNameOrArn", # required
-    #       }
-    #
     # @!attribute [rw] opt_out_list_name
     #   The OptOutListName or OptOutListArn of the OptOutList to delete. You
     #   can use DescribeOptOutLists to find the values for OptOutListName
@@ -1011,14 +875,6 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteOptedOutNumberRequest
-    #   data as a hash:
-    #
-    #       {
-    #         opt_out_list_name: "OptOutListNameOrArn", # required
-    #         opted_out_number: "PhoneNumber", # required
-    #       }
-    #
     # @!attribute [rw] opt_out_list_name
     #   The OptOutListName or OptOutListArn to remove the phone number from.
     #   @return [String]
@@ -1074,13 +930,6 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeletePoolRequest
-    #   data as a hash:
-    #
-    #       {
-    #         pool_id: "PoolIdOrArn", # required
-    #       }
-    #
     # @!attribute [rw] pool_id
     #   The PoolId or PoolArn of the pool to delete. You can use
     #   DescribePools to find the values for PoolId and PoolArn .
@@ -1169,8 +1018,6 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DeleteTextMessageSpendLimitOverrideRequest AWS API Documentation
     #
     class DeleteTextMessageSpendLimitOverrideRequest < Aws::EmptyStructure; end
@@ -1187,8 +1034,6 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DeleteVoiceMessageSpendLimitOverrideRequest AWS API Documentation
     #
     class DeleteVoiceMessageSpendLimitOverrideRequest < Aws::EmptyStructure; end
@@ -1205,14 +1050,6 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAccountAttributesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The token to be used for the next set of paginated results. You
     #   don't need to supply a value for this field in the initial request.
@@ -1249,14 +1086,6 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAccountLimitsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The token to be used for the next set of paginated results. You
     #   don't need to supply a value for this field in the initial request.
@@ -1293,21 +1122,6 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeConfigurationSetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_set_names: ["ConfigurationSetNameOrArn"],
-    #         filters: [
-    #           {
-    #             name: "event-destination-name", # required, accepts event-destination-name, matching-event-types, default-message-type, default-sender-id
-    #             values: ["FilterValue"], # required
-    #           },
-    #         ],
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] configuration_set_names
     #   An array of strings. Each element can be either a
     #   ConfigurationSetName or ConfigurationSetArn.
@@ -1355,22 +1169,6 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeKeywordsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         origination_identity: "PhoneOrPoolIdOrArn", # required
-    #         keywords: ["Keyword"],
-    #         filters: [
-    #           {
-    #             name: "keyword-action", # required, accepts keyword-action
-    #             values: ["FilterValue"], # required
-    #           },
-    #         ],
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] origination_identity
     #   The origination identity to use such as a PhoneNumberId,
     #   PhoneNumberArn, SenderId or SenderIdArn. You can use
@@ -1438,15 +1236,6 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeOptOutListsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         opt_out_list_names: ["OptOutListNameOrArn"],
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] opt_out_list_names
     #   The OptOutLists to show the details of. This is an array of strings
     #   that can be either the OptOutListName or OptOutListArn.
@@ -1490,22 +1279,6 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeOptedOutNumbersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         opt_out_list_name: "OptOutListNameOrArn", # required
-    #         opted_out_numbers: ["PhoneNumber"],
-    #         filters: [
-    #           {
-    #             name: "end-user-opted-out", # required, accepts end-user-opted-out
-    #             values: ["FilterValue"], # required
-    #           },
-    #         ],
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] opt_out_list_name
     #   The OptOutListName or OptOutListArn of the OptOutList. You can use
     #   DescribeOptOutLists to find the values for OptOutListName and
@@ -1570,21 +1343,6 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribePhoneNumbersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         phone_number_ids: ["PhoneNumberIdOrArn"],
-    #         filters: [
-    #           {
-    #             name: "status", # required, accepts status, iso-country-code, message-type, number-capability, number-type, two-way-enabled, self-managed-opt-outs-enabled, opt-out-list-name, deletion-protection-enabled
-    #             values: ["FilterValue"], # required
-    #           },
-    #         ],
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] phone_number_ids
     #   The unique identifier of phone numbers to find information about.
     #   This is an array of strings that can be either the PhoneNumberId or
@@ -1634,21 +1392,6 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribePoolsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         pool_ids: ["PoolIdOrArn"],
-    #         filters: [
-    #           {
-    #             name: "status", # required, accepts status, message-type, two-way-enabled, self-managed-opt-outs-enabled, opt-out-list-name, shared-routes-enabled, deletion-protection-enabled
-    #             values: ["FilterValue"], # required
-    #           },
-    #         ],
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] pool_ids
     #   The unique identifier of pools to find. This is an array of strings
     #   that can be either the PoolId or PoolArn.
@@ -1697,26 +1440,6 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeSenderIdsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         sender_ids: [
-    #           {
-    #             sender_id: "SenderIdOrArn", # required
-    #             iso_country_code: "IsoCountryCode", # required
-    #           },
-    #         ],
-    #         filters: [
-    #           {
-    #             name: "sender-id", # required, accepts sender-id, iso-country-code, message-type
-    #             values: ["FilterValue"], # required
-    #           },
-    #         ],
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] sender_ids
     #   An array of SenderIdAndCountry objects to search for.
     #   @return [Array<Types::SenderIdAndCountry>]
@@ -1764,14 +1487,6 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeSpendLimitsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The token to be used for the next set of paginated results. You
     #   don't need to supply a value for this field in the initial request.
@@ -1809,16 +1524,6 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateOriginationIdentityRequest
-    #   data as a hash:
-    #
-    #       {
-    #         pool_id: "PoolIdOrArn", # required
-    #         origination_identity: "PhoneOrSenderIdOrArn", # required
-    #         iso_country_code: "IsoCountryCode", # required
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] pool_id
     #   The unique identifier for the pool to disassociate with the
     #   origination identity. This value can be either the PoolId or
@@ -1961,14 +1666,6 @@ module Aws::PinpointSMSVoiceV2
 
     # The information for keywords that meet a specified criteria.
     #
-    # @note When making an API call, you may pass KeywordFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "keyword-action", # required, accepts keyword-action
-    #         values: ["FilterValue"], # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the attribute to filter on.
     #   @return [String]
@@ -2018,14 +1715,6 @@ module Aws::PinpointSMSVoiceV2
     # configuration sets, which enable you to publish message sending
     # events.
     #
-    # @note When making an API call, you may pass KinesisFirehoseDestination
-    #   data as a hash:
-    #
-    #       {
-    #         iam_role_arn: "IamRoleArn", # required
-    #         delivery_stream_arn: "DeliveryStreamArn", # required
-    #       }
-    #
     # @!attribute [rw] iam_role_arn
     #   The ARN of an Amazon Identity and Access Management (IAM) role that
     #   is able to write event data to an Amazon Firehose destination.
@@ -2044,21 +1733,6 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPoolOriginationIdentitiesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         pool_id: "PoolIdOrArn", # required
-    #         filters: [
-    #           {
-    #             name: "iso-country-code", # required, accepts iso-country-code, number-capability
-    #             values: ["FilterValue"], # required
-    #           },
-    #         ],
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] pool_id
     #   The unique identifier for the pool. This value can be either the
     #   PoolId or PoolArn.
@@ -2117,13 +1791,6 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource to query for.
     #   @return [String]
@@ -2184,14 +1851,6 @@ module Aws::PinpointSMSVoiceV2
     end
 
     # The information for opted out numbers that meet a specified criteria.
-    #
-    # @note When making an API call, you may pass OptedOutFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "end-user-opted-out", # required, accepts end-user-opted-out
-    #         values: ["FilterValue"], # required
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the attribute to filter on.
@@ -2272,14 +1931,6 @@ module Aws::PinpointSMSVoiceV2
     end
 
     # The information for a phone number that meets a specified criteria.
-    #
-    # @note When making an API call, you may pass PhoneNumberFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "status", # required, accepts status, iso-country-code, message-type, number-capability, number-type, two-way-enabled, self-managed-opt-outs-enabled, opt-out-list-name, deletion-protection-enabled
-    #         values: ["FilterValue"], # required
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the attribute to filter on.
@@ -2410,14 +2061,6 @@ module Aws::PinpointSMSVoiceV2
 
     # The information for a pool that meets a specified criteria.
     #
-    # @note When making an API call, you may pass PoolFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "status", # required, accepts status, message-type, two-way-enabled, self-managed-opt-outs-enabled, opt-out-list-name, shared-routes-enabled, deletion-protection-enabled
-    #         values: ["FilterValue"], # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the attribute to filter on.
     #   @return [String]
@@ -2526,14 +2169,6 @@ module Aws::PinpointSMSVoiceV2
     # Information about origination identities associated with a pool that
     # meets a specified criteria.
     #
-    # @note When making an API call, you may pass PoolOriginationIdentitiesFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "iso-country-code", # required, accepts iso-country-code, number-capability
-    #         values: ["FilterValue"], # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the attribute to filter on.
     #   @return [String]
@@ -2551,16 +2186,6 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutKeywordRequest
-    #   data as a hash:
-    #
-    #       {
-    #         origination_identity: "PhoneOrPoolIdOrArn", # required
-    #         keyword: "Keyword", # required
-    #         keyword_message: "KeywordMessage", # required
-    #         keyword_action: "AUTOMATIC_RESPONSE", # accepts AUTOMATIC_RESPONSE, OPT_OUT, OPT_IN
-    #       }
-    #
     # @!attribute [rw] origination_identity
     #   The origination identity to use such as a PhoneNumberId,
     #   PhoneNumberArn, SenderId or SenderIdArn. You can use
@@ -2630,14 +2255,6 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutOptedOutNumberRequest
-    #   data as a hash:
-    #
-    #       {
-    #         opt_out_list_name: "OptOutListNameOrArn", # required
-    #         opted_out_number: "PhoneNumber", # required
-    #       }
-    #
     # @!attribute [rw] opt_out_list_name
     #   The OptOutListName or OptOutListArn to add the phone number to.
     #   @return [String]
@@ -2693,13 +2310,6 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ReleasePhoneNumberRequest
-    #   data as a hash:
-    #
-    #       {
-    #         phone_number_id: "PhoneNumberIdOrArn", # required
-    #       }
-    #
     # @!attribute [rw] phone_number_id
     #   The PhoneNumberId or PhoneNumberArn of the phone number to release.
     #   You can use DescribePhoneNumbers to get the values for PhoneNumberId
@@ -2805,27 +2415,6 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RequestPhoneNumberRequest
-    #   data as a hash:
-    #
-    #       {
-    #         iso_country_code: "IsoCountryCode", # required
-    #         message_type: "TRANSACTIONAL", # required, accepts TRANSACTIONAL, PROMOTIONAL
-    #         number_capabilities: ["SMS"], # required, accepts SMS, VOICE
-    #         number_type: "LONG_CODE", # required, accepts LONG_CODE, TOLL_FREE, TEN_DLC
-    #         opt_out_list_name: "OptOutListNameOrArn",
-    #         pool_id: "PoolIdOrArn",
-    #         registration_id: "RegistrationId",
-    #         deletion_protection_enabled: false,
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] iso_country_code
     #   The two-character code, in ISO 3166-1 alpha-2 format, for the
     #   country or region.
@@ -3031,27 +2620,6 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SendTextMessageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         destination_phone_number: "PhoneNumber", # required
-    #         origination_identity: "TextMessageOriginationIdentity",
-    #         message_body: "TextMessageBody",
-    #         message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
-    #         keyword: "Keyword",
-    #         configuration_set_name: "ConfigurationSetNameOrArn",
-    #         max_price: "MaxPrice",
-    #         time_to_live: 1,
-    #         context: {
-    #           "ContextKey" => "ContextValue",
-    #         },
-    #         destination_country_parameters: {
-    #           "IN_TEMPLATE_ID" => "DestinationCountryParameterValue",
-    #         },
-    #         dry_run: false,
-    #       }
-    #
     # @!attribute [rw] destination_phone_number
     #   The destination phone number in E.164 format.
     #   @return [String]
@@ -3143,24 +2711,6 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SendVoiceMessageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         destination_phone_number: "PhoneNumber", # required
-    #         origination_identity: "VoiceMessageOriginationIdentity", # required
-    #         message_body: "VoiceMessageBody",
-    #         message_body_text_type: "TEXT", # accepts TEXT, SSML
-    #         voice_id: "AMY", # accepts AMY, ASTRID, BIANCA, BRIAN, CAMILA, CARLA, CARMEN, CELINE, CHANTAL, CONCHITA, CRISTIANO, DORA, EMMA, ENRIQUE, EWA, FILIZ, GERAINT, GIORGIO, GWYNETH, HANS, INES, IVY, JACEK, JAN, JOANNA, JOEY, JUSTIN, KARL, KENDRA, KIMBERLY, LEA, LIV, LOTTE, LUCIA, LUPE, MADS, MAJA, MARLENE, MATHIEU, MATTHEW, MAXIM, MIA, MIGUEL, MIZUKI, NAJA, NICOLE, PENELOPE, RAVEENA, RICARDO, RUBEN, RUSSELL, SALLI, SEOYEON, TAKUMI, TATYANA, VICKI, VITORIA, ZEINA, ZHIYU
-    #         configuration_set_name: "ConfigurationSetNameOrArn",
-    #         max_price_per_minute: "MaxPrice",
-    #         time_to_live: 1,
-    #         context: {
-    #           "ContextKey" => "ContextValue",
-    #         },
-    #         dry_run: false,
-    #       }
-    #
     # @!attribute [rw] destination_phone_number
     #   The destination phone number in E.164 format.
     #   @return [String]
@@ -3260,14 +2810,6 @@ module Aws::PinpointSMSVoiceV2
     #
     # [1]: https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-awssupport-sender-id.html
     #
-    # @note When making an API call, you may pass SenderIdAndCountry
-    #   data as a hash:
-    #
-    #       {
-    #         sender_id: "SenderIdOrArn", # required
-    #         iso_country_code: "IsoCountryCode", # required
-    #       }
-    #
     # @!attribute [rw] sender_id
     #   The unique identifier of the sender.
     #   @return [String]
@@ -3287,14 +2829,6 @@ module Aws::PinpointSMSVoiceV2
     end
 
     # The information for a sender ID that meets a specified criteria.
-    #
-    # @note When making an API call, you may pass SenderIdFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "sender-id", # required, accepts sender-id, iso-country-code, message-type
-    #         values: ["FilterValue"], # required
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the attribute to filter on.
@@ -3369,14 +2903,6 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SetDefaultMessageTypeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_set_name: "ConfigurationSetNameOrArn", # required
-    #         message_type: "TRANSACTIONAL", # required, accepts TRANSACTIONAL, PROMOTIONAL
-    #       }
-    #
     # @!attribute [rw] configuration_set_name
     #   The configuration set to update with a new default message type.
     #   This field can be the ConsigurationSetName or ConfigurationSetArn.
@@ -3419,14 +2945,6 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SetDefaultSenderIdRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_set_name: "ConfigurationSetNameOrArn", # required
-    #         sender_id: "SenderId", # required
-    #       }
-    #
     # @!attribute [rw] configuration_set_name
     #   The configuration set to updated with a new default SenderId. This
     #   field can be the ConsigurationSetName or ConfigurationSetArn.
@@ -3472,13 +2990,6 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SetTextMessageSpendLimitOverrideRequest
-    #   data as a hash:
-    #
-    #       {
-    #         monthly_limit: 1, # required
-    #       }
-    #
     # @!attribute [rw] monthly_limit
     #   The new monthly limit to enforce on text messages.
     #   @return [Integer]
@@ -3503,13 +3014,6 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SetVoiceMessageSpendLimitOverrideRequest
-    #   data as a hash:
-    #
-    #       {
-    #         monthly_limit: 1, # required
-    #       }
-    #
     # @!attribute [rw] monthly_limit
     #   The new monthly limit to enforce on voice messages.
     #   @return [Integer]
@@ -3536,13 +3040,6 @@ module Aws::PinpointSMSVoiceV2
 
     # An object that defines an Amazon SNS destination for events. You can
     # use Amazon SNS to send notification when certain events occur.
-    #
-    # @note When making an API call, you may pass SnsDestination
-    #   data as a hash:
-    #
-    #       {
-    #         topic_arn: "SnsTopicArn", # required
-    #       }
     #
     # @!attribute [rw] topic_arn
     #   The Amazon Resource Name (ARN) of the Amazon SNS topic that you want
@@ -3603,14 +3100,6 @@ module Aws::PinpointSMSVoiceV2
 
     # The list of tags to be added to the specified topic.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The key identifier, or name, of the tag.
     #   @return [String]
@@ -3628,19 +3117,6 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -3677,14 +3153,6 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -3706,27 +3174,6 @@ module Aws::PinpointSMSVoiceV2
     #
     class UntagResourceResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateEventDestinationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_set_name: "ConfigurationSetNameOrArn", # required
-    #         event_destination_name: "EventDestinationName", # required
-    #         enabled: false,
-    #         matching_event_types: ["ALL"], # accepts ALL, TEXT_ALL, TEXT_SENT, TEXT_PENDING, TEXT_QUEUED, TEXT_SUCCESSFUL, TEXT_DELIVERED, TEXT_INVALID, TEXT_INVALID_MESSAGE, TEXT_UNREACHABLE, TEXT_CARRIER_UNREACHABLE, TEXT_BLOCKED, TEXT_CARRIER_BLOCKED, TEXT_SPAM, TEXT_UNKNOWN, TEXT_TTL_EXPIRED, VOICE_ALL, VOICE_INITIATED, VOICE_RINGING, VOICE_ANSWERED, VOICE_COMPLETED, VOICE_BUSY, VOICE_NO_ANSWER, VOICE_FAILED, VOICE_TTL_EXPIRED
-    #         cloud_watch_logs_destination: {
-    #           iam_role_arn: "IamRoleArn", # required
-    #           log_group_arn: "LogGroupArn", # required
-    #         },
-    #         kinesis_firehose_destination: {
-    #           iam_role_arn: "IamRoleArn", # required
-    #           delivery_stream_arn: "DeliveryStreamArn", # required
-    #         },
-    #         sns_destination: {
-    #           topic_arn: "SnsTopicArn", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] configuration_set_name
     #   The configuration set to update with the new event destination.
     #   Valid values for this can be the ConfigurationSetName or
@@ -3798,18 +3245,6 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdatePhoneNumberRequest
-    #   data as a hash:
-    #
-    #       {
-    #         phone_number_id: "PhoneNumberIdOrArn", # required
-    #         two_way_enabled: false,
-    #         two_way_channel_arn: "TwoWayChannelArn",
-    #         self_managed_opt_outs_enabled: false,
-    #         opt_out_list_name: "OptOutListNameOrArn",
-    #         deletion_protection_enabled: false,
-    #       }
-    #
     # @!attribute [rw] phone_number_id
     #   The unique identifier of the phone number. Valid values for this
     #   field can be either the PhoneNumberId or PhoneNumberArn.
@@ -3948,19 +3383,6 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdatePoolRequest
-    #   data as a hash:
-    #
-    #       {
-    #         pool_id: "PoolIdOrArn", # required
-    #         two_way_enabled: false,
-    #         two_way_channel_arn: "TwoWayChannelArn",
-    #         self_managed_opt_outs_enabled: false,
-    #         opt_out_list_name: "OptOutListNameOrArn",
-    #         shared_routes_enabled: false,
-    #         deletion_protection_enabled: false,
-    #       }
-    #
     # @!attribute [rw] pool_id
     #   The unique identifier of the pool to update. Valid values are either
     #   the PoolId or PoolArn.

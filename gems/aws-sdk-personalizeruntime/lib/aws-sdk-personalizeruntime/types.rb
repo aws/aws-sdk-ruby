@@ -10,22 +10,6 @@
 module Aws::PersonalizeRuntime
   module Types
 
-    # @note When making an API call, you may pass GetPersonalizedRankingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         campaign_arn: "Arn", # required
-    #         input_list: ["ItemID"], # required
-    #         user_id: "UserID", # required
-    #         context: {
-    #           "AttributeName" => "AttributeValue",
-    #         },
-    #         filter_arn: "Arn",
-    #         filter_values: {
-    #           "FilterAttributeName" => "FilterAttributeValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] campaign_arn
     #   The Amazon Resource Name (ARN) of the campaign to use for generating
     #   the personalized ranking.
@@ -111,34 +95,6 @@ module Aws::PersonalizeRuntime
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRecommendationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         campaign_arn: "Arn",
-    #         item_id: "ItemID",
-    #         user_id: "UserID",
-    #         num_results: 1,
-    #         context: {
-    #           "AttributeName" => "AttributeValue",
-    #         },
-    #         filter_arn: "Arn",
-    #         filter_values: {
-    #           "FilterAttributeName" => "FilterAttributeValue",
-    #         },
-    #         recommender_arn: "Arn",
-    #         promotions: [
-    #           {
-    #             name: "Name",
-    #             percent_promoted_items: 1,
-    #             filter_arn: "Arn",
-    #             filter_values: {
-    #               "FilterAttributeName" => "FilterAttributeValue",
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] campaign_arn
     #   The Amazon Resource Name (ARN) of the campaign to use for getting
     #   recommendations.
@@ -291,18 +247,6 @@ module Aws::PersonalizeRuntime
     # Contains information on a promotion. A promotion defines additional
     # business rules that apply to a configurable subset of recommended
     # items.
-    #
-    # @note When making an API call, you may pass Promotion
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name",
-    #         percent_promoted_items: 1,
-    #         filter_arn: "Arn",
-    #         filter_values: {
-    #           "FilterAttributeName" => "FilterAttributeValue",
-    #         },
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the promotion.

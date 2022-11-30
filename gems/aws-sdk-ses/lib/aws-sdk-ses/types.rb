@@ -30,14 +30,6 @@ module Aws::SES
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-add-header.html
     #
-    # @note When making an API call, you may pass AddHeaderAction
-    #   data as a hash:
-    #
-    #       {
-    #         header_name: "HeaderName", # required
-    #         header_value: "HeaderValue", # required
-    #       }
-    #
     # @!attribute [rw] header_name
     #   The name of the header to add. Must be between 1 and 50 characters,
     #   inclusive, and consist of alphanumeric (a-z, A-Z, 0-9) characters
@@ -78,20 +70,6 @@ module Aws::SES
     # both. If you use both, then the message should display correctly in
     # the widest variety of email clients.
     #
-    # @note When making an API call, you may pass Body
-    #   data as a hash:
-    #
-    #       {
-    #         text: {
-    #           data: "MessageData", # required
-    #           charset: "Charset",
-    #         },
-    #         html: {
-    #           data: "MessageData", # required
-    #           charset: "Charset",
-    #         },
-    #       }
-    #
     # @!attribute [rw] text
     #   The content of the message, in text format. Use this for text-based
     #   email clients, or clients on high-latency networks (such as mobile
@@ -124,17 +102,6 @@ module Aws::SES
     #
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-bounce.html
-    #
-    # @note When making an API call, you may pass BounceAction
-    #   data as a hash:
-    #
-    #       {
-    #         topic_arn: "AmazonResourceName",
-    #         smtp_reply_code: "BounceSmtpReplyCode", # required
-    #         status_code: "BounceStatusCode",
-    #         message: "BounceMessage", # required
-    #         sender: "Address", # required
-    #       }
     #
     # @!attribute [rw] topic_arn
     #   The Amazon Resource Name (ARN) of the Amazon SNS topic to notify
@@ -196,29 +163,6 @@ module Aws::SES
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email.html
     #
-    # @note When making an API call, you may pass BouncedRecipientInfo
-    #   data as a hash:
-    #
-    #       {
-    #         recipient: "Address", # required
-    #         recipient_arn: "AmazonResourceName",
-    #         bounce_type: "DoesNotExist", # accepts DoesNotExist, MessageTooLarge, ExceededQuota, ContentRejected, Undefined, TemporaryFailure
-    #         recipient_dsn_fields: {
-    #           final_recipient: "Address",
-    #           action: "failed", # required, accepts failed, delayed, delivered, relayed, expanded
-    #           remote_mta: "RemoteMta",
-    #           status: "DsnStatus", # required
-    #           diagnostic_code: "DiagnosticCode",
-    #           last_attempt_date: Time.now,
-    #           extension_fields: [
-    #             {
-    #               name: "ExtensionFieldName", # required
-    #               value: "ExtensionFieldValue", # required
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] recipient
     #   The email address of the recipient of the bounced email.
     #   @return [String]
@@ -259,24 +203,6 @@ module Aws::SES
 
     # An array that contains one or more Destinations, as well as the tags
     # and replacement data associated with each of those Destinations.
-    #
-    # @note When making an API call, you may pass BulkEmailDestination
-    #   data as a hash:
-    #
-    #       {
-    #         destination: { # required
-    #           to_addresses: ["Address"],
-    #           cc_addresses: ["Address"],
-    #           bcc_addresses: ["Address"],
-    #         },
-    #         replacement_tags: [
-    #           {
-    #             name: "MessageTagName", # required
-    #             value: "MessageTagValue", # required
-    #           },
-    #         ],
-    #         replacement_template_data: "TemplateData",
-    #       }
     #
     # @!attribute [rw] destination
     #   Represents the destination of the message, consisting of To:, CC:,
@@ -422,14 +348,6 @@ module Aws::SES
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
     #
-    # @note When making an API call, you may pass CloneReceiptRuleSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rule_set_name: "ReceiptRuleSetName", # required
-    #         original_rule_set_name: "ReceiptRuleSetName", # required
-    #       }
-    #
     # @!attribute [rw] rule_set_name
     #   The name of the rule set to create. The name must:
     #
@@ -472,19 +390,6 @@ module Aws::SES
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
     #
-    # @note When making an API call, you may pass CloudWatchDestination
-    #   data as a hash:
-    #
-    #       {
-    #         dimension_configurations: [ # required
-    #           {
-    #             dimension_name: "DimensionName", # required
-    #             dimension_value_source: "messageTag", # required, accepts messageTag, emailHeader, linkTag
-    #             default_dimension_value: "DefaultDimensionValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] dimension_configurations
     #   A list of dimensions upon which to categorize your emails when you
     #   publish email sending events to Amazon CloudWatch.
@@ -507,15 +412,6 @@ module Aws::SES
     #
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
-    #
-    # @note When making an API call, you may pass CloudWatchDimensionConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         dimension_name: "DimensionName", # required
-    #         dimension_value_source: "messageTag", # required, accepts messageTag, emailHeader, linkTag
-    #         default_dimension_value: "DefaultDimensionValue", # required
-    #       }
     #
     # @!attribute [rw] dimension_name
     #   The name of an Amazon CloudWatch dimension associated with an email
@@ -567,13 +463,6 @@ module Aws::SES
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/using-configuration-sets.html
     # [2]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/
-    #
-    # @note When making an API call, you may pass ConfigurationSet
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ConfigurationSetName", # required
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the configuration set. The name must meet the following
@@ -647,14 +536,6 @@ module Aws::SES
     # you must also specify a character set. Examples include UTF-8,
     # ISO-8859-1, and Shift\_JIS.
     #
-    # @note When making an API call, you may pass Content
-    #   data as a hash:
-    #
-    #       {
-    #         data: "MessageData", # required
-    #         charset: "Charset",
-    #       }
-    #
     # @!attribute [rw] data
     #   The textual data of the content.
     #   @return [String]
@@ -682,34 +563,6 @@ module Aws::SES
     #
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
-    #
-    # @note When making an API call, you may pass CreateConfigurationSetEventDestinationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_set_name: "ConfigurationSetName", # required
-    #         event_destination: { # required
-    #           name: "EventDestinationName", # required
-    #           enabled: false,
-    #           matching_event_types: ["send"], # required, accepts send, reject, bounce, complaint, delivery, open, click, renderingFailure
-    #           kinesis_firehose_destination: {
-    #             iam_role_arn: "AmazonResourceName", # required
-    #             delivery_stream_arn: "AmazonResourceName", # required
-    #           },
-    #           cloud_watch_destination: {
-    #             dimension_configurations: [ # required
-    #               {
-    #                 dimension_name: "DimensionName", # required
-    #                 dimension_value_source: "messageTag", # required, accepts messageTag, emailHeader, linkTag
-    #                 default_dimension_value: "DefaultDimensionValue", # required
-    #               },
-    #             ],
-    #           },
-    #           sns_destination: {
-    #             topic_arn: "AmazonResourceName", # required
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] configuration_set_name
     #   The name of the configuration set that the event destination should
@@ -744,15 +597,6 @@ module Aws::SES
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
     #
-    # @note When making an API call, you may pass CreateConfigurationSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_set: { # required
-    #           name: "ConfigurationSetName", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] configuration_set
     #   A data structure that contains the name of the configuration set.
     #   @return [Types::ConfigurationSet]
@@ -773,16 +617,6 @@ module Aws::SES
 
     # Represents a request to create an open and click tracking option
     # object in a configuration set.
-    #
-    # @note When making an API call, you may pass CreateConfigurationSetTrackingOptionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_set_name: "ConfigurationSetName", # required
-    #         tracking_options: { # required
-    #           custom_redirect_domain: "CustomRedirectDomain",
-    #         },
-    #       }
     #
     # @!attribute [rw] configuration_set_name
     #   The name of the configuration set that the tracking options should
@@ -818,18 +652,6 @@ module Aws::SES
     class CreateConfigurationSetTrackingOptionsResponse < Aws::EmptyStructure; end
 
     # Represents a request to create a custom verification email template.
-    #
-    # @note When making an API call, you may pass CreateCustomVerificationEmailTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         template_name: "TemplateName", # required
-    #         from_email_address: "FromAddress", # required
-    #         template_subject: "Subject", # required
-    #         template_content: "TemplateContent", # required
-    #         success_redirection_url: "SuccessRedirectionURL", # required
-    #         failure_redirection_url: "FailureRedirectionURL", # required
-    #       }
     #
     # @!attribute [rw] template_name
     #   The name of the custom verification email template.
@@ -886,19 +708,6 @@ module Aws::SES
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
     #
-    # @note When making an API call, you may pass CreateReceiptFilterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter: { # required
-    #           name: "ReceiptFilterName", # required
-    #           ip_filter: { # required
-    #             policy: "Block", # required, accepts Block, Allow
-    #             cidr: "Cidr", # required
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] filter
     #   A data structure that describes the IP address filter to create,
     #   which consists of a name, an IP address range, and whether to allow
@@ -926,59 +735,6 @@ module Aws::SES
     #
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
-    #
-    # @note When making an API call, you may pass CreateReceiptRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rule_set_name: "ReceiptRuleSetName", # required
-    #         after: "ReceiptRuleName",
-    #         rule: { # required
-    #           name: "ReceiptRuleName", # required
-    #           enabled: false,
-    #           tls_policy: "Require", # accepts Require, Optional
-    #           recipients: ["Recipient"],
-    #           actions: [
-    #             {
-    #               s3_action: {
-    #                 topic_arn: "AmazonResourceName",
-    #                 bucket_name: "S3BucketName", # required
-    #                 object_key_prefix: "S3KeyPrefix",
-    #                 kms_key_arn: "AmazonResourceName",
-    #               },
-    #               bounce_action: {
-    #                 topic_arn: "AmazonResourceName",
-    #                 smtp_reply_code: "BounceSmtpReplyCode", # required
-    #                 status_code: "BounceStatusCode",
-    #                 message: "BounceMessage", # required
-    #                 sender: "Address", # required
-    #               },
-    #               workmail_action: {
-    #                 topic_arn: "AmazonResourceName",
-    #                 organization_arn: "AmazonResourceName", # required
-    #               },
-    #               lambda_action: {
-    #                 topic_arn: "AmazonResourceName",
-    #                 function_arn: "AmazonResourceName", # required
-    #                 invocation_type: "Event", # accepts Event, RequestResponse
-    #               },
-    #               stop_action: {
-    #                 scope: "RuleSet", # required, accepts RuleSet
-    #                 topic_arn: "AmazonResourceName",
-    #               },
-    #               add_header_action: {
-    #                 header_name: "HeaderName", # required
-    #                 header_value: "HeaderValue", # required
-    #               },
-    #               sns_action: {
-    #                 topic_arn: "AmazonResourceName", # required
-    #                 encoding: "UTF-8", # accepts UTF-8, Base64
-    #               },
-    #             },
-    #           ],
-    #           scan_enabled: false,
-    #         },
-    #       }
     #
     # @!attribute [rw] rule_set_name
     #   The name of the rule set that the receipt rule will be added to.
@@ -1019,13 +775,6 @@ module Aws::SES
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
     #
-    # @note When making an API call, you may pass CreateReceiptRuleSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rule_set_name: "ReceiptRuleSetName", # required
-    #       }
-    #
     # @!attribute [rw] rule_set_name
     #   The name of the rule set to create. The name must:
     #
@@ -1057,18 +806,6 @@ module Aws::SES
     #
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html
-    #
-    # @note When making an API call, you may pass CreateTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         template: { # required
-    #           template_name: "TemplateName", # required
-    #           subject_part: "SubjectPart",
-    #           text_part: "TextPart",
-    #           html_part: "HtmlPart",
-    #         },
-    #       }
     #
     # @!attribute [rw] template
     #   The content of the email, composed of a subject line, an HTML part,
@@ -1172,14 +909,6 @@ module Aws::SES
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
     #
-    # @note When making an API call, you may pass DeleteConfigurationSetEventDestinationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_set_name: "ConfigurationSetName", # required
-    #         event_destination_name: "EventDestinationName", # required
-    #       }
-    #
     # @!attribute [rw] configuration_set_name
     #   The name of the configuration set from which to delete the event
     #   destination.
@@ -1212,13 +941,6 @@ module Aws::SES
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
     #
-    # @note When making an API call, you may pass DeleteConfigurationSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_set_name: "ConfigurationSetName", # required
-    #       }
-    #
     # @!attribute [rw] configuration_set_name
     #   The name of the configuration set to delete.
     #   @return [String]
@@ -1239,13 +961,6 @@ module Aws::SES
 
     # Represents a request to delete open and click tracking options in a
     # configuration set.
-    #
-    # @note When making an API call, you may pass DeleteConfigurationSetTrackingOptionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_set_name: "ConfigurationSetName", # required
-    #       }
     #
     # @!attribute [rw] configuration_set_name
     #   The name of the configuration set from which you want to delete the
@@ -1269,13 +984,6 @@ module Aws::SES
     # Represents a request to delete an existing custom verification email
     # template.
     #
-    # @note When making an API call, you may pass DeleteCustomVerificationEmailTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         template_name: "TemplateName", # required
-    #       }
-    #
     # @!attribute [rw] template_name
     #   The name of the custom verification email template that you want to
     #   delete.
@@ -1297,14 +1005,6 @@ module Aws::SES
     #
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
-    #
-    # @note When making an API call, you may pass DeleteIdentityPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity: "Identity", # required
-    #         policy_name: "PolicyName", # required
-    #       }
     #
     # @!attribute [rw] identity
     #   The identity that is associated with the policy that you want to
@@ -1338,13 +1038,6 @@ module Aws::SES
     # Represents a request to delete one of your Amazon SES identities (an
     # email address or domain).
     #
-    # @note When making an API call, you may pass DeleteIdentityRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity: "Identity", # required
-    #       }
-    #
     # @!attribute [rw] identity
     #   The identity to be removed from the list of identities for the AWS
     #   Account.
@@ -1372,13 +1065,6 @@ module Aws::SES
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
     #
-    # @note When making an API call, you may pass DeleteReceiptFilterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter_name: "ReceiptFilterName", # required
-    #       }
-    #
     # @!attribute [rw] filter_name
     #   The name of the IP address filter to delete.
     #   @return [String]
@@ -1404,14 +1090,6 @@ module Aws::SES
     #
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
-    #
-    # @note When making an API call, you may pass DeleteReceiptRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rule_set_name: "ReceiptRuleSetName", # required
-    #         rule_name: "ReceiptRuleName", # required
-    #       }
     #
     # @!attribute [rw] rule_set_name
     #   The name of the receipt rule set that contains the receipt rule to
@@ -1446,13 +1124,6 @@ module Aws::SES
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
     #
-    # @note When making an API call, you may pass DeleteReceiptRuleSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rule_set_name: "ReceiptRuleSetName", # required
-    #       }
-    #
     # @!attribute [rw] rule_set_name
     #   The name of the receipt rule set to delete.
     #   @return [String]
@@ -1478,13 +1149,6 @@ module Aws::SES
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html
     #
-    # @note When making an API call, you may pass DeleteTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         template_name: "TemplateName", # required
-    #       }
-    #
     # @!attribute [rw] template_name
     #   The name of the template to be deleted.
     #   @return [String]
@@ -1504,13 +1168,6 @@ module Aws::SES
     # Represents a request to delete an email address from the list of email
     # addresses you have attempted to verify under your AWS account.
     #
-    # @note When making an API call, you may pass DeleteVerifiedEmailAddressRequest
-    #   data as a hash:
-    #
-    #       {
-    #         email_address: "Address", # required
-    #       }
-    #
     # @!attribute [rw] email_address
     #   An email address to be removed from the list of verified addresses.
     #   @return [String]
@@ -1525,13 +1182,6 @@ module Aws::SES
 
     # Specifies whether messages that use the configuration set are required
     # to use Transport Layer Security (TLS).
-    #
-    # @note When making an API call, you may pass DeliveryOptions
-    #   data as a hash:
-    #
-    #       {
-    #         tls_policy: "Require", # accepts Require, Optional
-    #       }
     #
     # @!attribute [rw] tls_policy
     #   Specifies whether messages that use the configuration set are
@@ -1557,8 +1207,6 @@ module Aws::SES
     #
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
-    #
-    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DescribeActiveReceiptRuleSetRequest AWS API Documentation
     #
@@ -1594,14 +1242,6 @@ module Aws::SES
     #
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
-    #
-    # @note When making an API call, you may pass DescribeConfigurationSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_set_name: "ConfigurationSetName", # required
-    #         configuration_set_attribute_names: ["eventDestinations"], # accepts eventDestinations, trackingOptions, deliveryOptions, reputationOptions
-    #       }
     #
     # @!attribute [rw] configuration_set_name
     #   The name of the configuration set to describe.
@@ -1672,14 +1312,6 @@ module Aws::SES
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
     #
-    # @note When making an API call, you may pass DescribeReceiptRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rule_set_name: "ReceiptRuleSetName", # required
-    #         rule_name: "ReceiptRuleName", # required
-    #       }
-    #
     # @!attribute [rw] rule_set_name
     #   The name of the receipt rule set that the receipt rule belongs to.
     #   @return [String]
@@ -1720,13 +1352,6 @@ module Aws::SES
     #
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
-    #
-    # @note When making an API call, you may pass DescribeReceiptRuleSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rule_set_name: "ReceiptRuleSetName", # required
-    #       }
     #
     # @!attribute [rw] rule_set_name
     #   The name of the receipt rule set to describe.
@@ -1779,15 +1404,6 @@ module Aws::SES
     # [2]: https://en.wikipedia.org/wiki/Email_address#Local-part
     # [3]: https://tools.ietf.org/html/rfc3492.html
     #
-    # @note When making an API call, you may pass Destination
-    #   data as a hash:
-    #
-    #       {
-    #         to_addresses: ["Address"],
-    #         cc_addresses: ["Address"],
-    #         bcc_addresses: ["Address"],
-    #       }
-    #
     # @!attribute [rw] to_addresses
     #   The recipients to place on the To: line of the message.
     #   @return [Array<String>]
@@ -1829,31 +1445,6 @@ module Aws::SES
     #
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
-    #
-    # @note When making an API call, you may pass EventDestination
-    #   data as a hash:
-    #
-    #       {
-    #         name: "EventDestinationName", # required
-    #         enabled: false,
-    #         matching_event_types: ["send"], # required, accepts send, reject, bounce, complaint, delivery, open, click, renderingFailure
-    #         kinesis_firehose_destination: {
-    #           iam_role_arn: "AmazonResourceName", # required
-    #           delivery_stream_arn: "AmazonResourceName", # required
-    #         },
-    #         cloud_watch_destination: {
-    #           dimension_configurations: [ # required
-    #             {
-    #               dimension_name: "DimensionName", # required
-    #               dimension_value_source: "messageTag", # required, accepts messageTag, emailHeader, linkTag
-    #               default_dimension_value: "DefaultDimensionValue", # required
-    #             },
-    #           ],
-    #         },
-    #         sns_destination: {
-    #           topic_arn: "AmazonResourceName", # required
-    #         },
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the event destination. The name must:
@@ -1955,14 +1546,6 @@ module Aws::SES
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email.html
     #
-    # @note When making an API call, you may pass ExtensionField
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ExtensionFieldName", # required
-    #         value: "ExtensionFieldValue", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the header to add. Must be between 1 and 50 characters,
     #   inclusive, and consist of alphanumeric (a-z, A-Z, 0-9) characters
@@ -2018,13 +1601,6 @@ module Aws::SES
 
     # Represents a request to retrieve an existing custom verification email
     # template.
-    #
-    # @note When making an API call, you may pass GetCustomVerificationEmailTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         template_name: "TemplateName", # required
-    #       }
     #
     # @!attribute [rw] template_name
     #   The name of the custom verification email template that you want to
@@ -2091,13 +1667,6 @@ module Aws::SES
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html
     #
-    # @note When making an API call, you may pass GetIdentityDkimAttributesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identities: ["Identity"], # required
-    #       }
-    #
     # @!attribute [rw] identities
     #   A list of one or more verified identities - email addresses,
     #   domains, or both.
@@ -2136,13 +1705,6 @@ module Aws::SES
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from.html
     #
-    # @note When making an API call, you may pass GetIdentityMailFromDomainAttributesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identities: ["Identity"], # required
-    #       }
-    #
     # @!attribute [rw] identities
     #   A list of one or more identities.
     #   @return [Array<String>]
@@ -2176,13 +1738,6 @@ module Aws::SES
     #
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html
-    #
-    # @note When making an API call, you may pass GetIdentityNotificationAttributesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identities: ["Identity"], # required
-    #       }
     #
     # @!attribute [rw] identities
     #   A list of one or more identities. You can specify an identity by
@@ -2221,14 +1776,6 @@ module Aws::SES
     #
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
-    #
-    # @note When making an API call, you may pass GetIdentityPoliciesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity: "Identity", # required
-    #         policy_names: ["PolicyName"], # required
-    #       }
     #
     # @!attribute [rw] identity
     #   The identity for which the policies will be retrieved. You can
@@ -2277,13 +1824,6 @@ module Aws::SES
     #
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html
-    #
-    # @note When making an API call, you may pass GetIdentityVerificationAttributesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identities: ["Identity"], # required
-    #       }
     #
     # @!attribute [rw] identities
     #   A list of identities.
@@ -2360,13 +1900,6 @@ module Aws::SES
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         template_name: "TemplateName", # required
-    #       }
-    #
     # @!attribute [rw] template_name
     #   The name of the template you want to retrieve.
     #   @return [String]
@@ -2760,14 +2293,6 @@ module Aws::SES
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
     #
-    # @note When making an API call, you may pass KinesisFirehoseDestination
-    #   data as a hash:
-    #
-    #       {
-    #         iam_role_arn: "AmazonResourceName", # required
-    #         delivery_stream_arn: "AmazonResourceName", # required
-    #       }
-    #
     # @!attribute [rw] iam_role_arn
     #   The ARN of the IAM role under which Amazon SES publishes email
     #   sending events to the Amazon Kinesis Firehose stream.
@@ -2803,15 +2328,6 @@ module Aws::SES
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html
     # [2]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-lambda.html
-    #
-    # @note When making an API call, you may pass LambdaAction
-    #   data as a hash:
-    #
-    #       {
-    #         topic_arn: "AmazonResourceName",
-    #         function_arn: "AmazonResourceName", # required
-    #         invocation_type: "Event", # accepts Event, RequestResponse
-    #       }
     #
     # @!attribute [rw] topic_arn
     #   The Amazon Resource Name (ARN) of the Amazon SNS topic to notify
@@ -2886,14 +2402,6 @@ module Aws::SES
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
     #
-    # @note When making an API call, you may pass ListConfigurationSetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   A token returned from a previous call to `ListConfigurationSets` to
     #   indicate the position of the configuration set in the configuration
@@ -2952,14 +2460,6 @@ module Aws::SES
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html
     #
-    # @note When making an API call, you may pass ListCustomVerificationEmailTemplatesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   An array the contains the name and creation time stamp for each
     #   template in your Amazon SES account.
@@ -3007,15 +2507,6 @@ module Aws::SES
     # Represents a request to return a list of all identities (email
     # addresses and domains) that you have attempted to verify under your
     # AWS account, regardless of verification status.
-    #
-    # @note When making an API call, you may pass ListIdentitiesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity_type: "EmailAddress", # accepts EmailAddress, Domain
-    #         next_token: "NextToken",
-    #         max_items: 1,
-    #       }
     #
     # @!attribute [rw] identity_type
     #   The type of the identities to list. Possible values are
@@ -3072,13 +2563,6 @@ module Aws::SES
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
     #
-    # @note When making an API call, you may pass ListIdentityPoliciesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity: "Identity", # required
-    #       }
-    #
     # @!attribute [rw] identity
     #   The identity that is associated with the policy for which the
     #   policies will be listed. You can specify an identity by using its
@@ -3121,8 +2605,6 @@ module Aws::SES
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
     #
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListReceiptFiltersRequest AWS API Documentation
     #
     class ListReceiptFiltersRequest < Aws::EmptyStructure; end
@@ -3151,13 +2633,6 @@ module Aws::SES
     #
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
-    #
-    # @note When making an API call, you may pass ListReceiptRuleSetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #       }
     #
     # @!attribute [rw] next_token
     #   A token returned from a previous call to `ListReceiptRuleSets` to
@@ -3196,14 +2671,6 @@ module Aws::SES
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTemplatesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   A token returned from a previous call to `ListTemplates` to indicate
     #   the position in the list of email templates.
@@ -3275,26 +2742,6 @@ module Aws::SES
 
     # Represents the message to be sent, composed of a subject and a body.
     #
-    # @note When making an API call, you may pass Message
-    #   data as a hash:
-    #
-    #       {
-    #         subject: { # required
-    #           data: "MessageData", # required
-    #           charset: "Charset",
-    #         },
-    #         body: { # required
-    #           text: {
-    #             data: "MessageData", # required
-    #             charset: "Charset",
-    #           },
-    #           html: {
-    #             data: "MessageData", # required
-    #             charset: "Charset",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] subject
     #   The subject of the message: A short summary of the content, which
     #   will appear in the recipient's inbox.
@@ -3323,20 +2770,6 @@ module Aws::SES
     #
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email.html
-    #
-    # @note When making an API call, you may pass MessageDsn
-    #   data as a hash:
-    #
-    #       {
-    #         reporting_mta: "ReportingMta", # required
-    #         arrival_date: Time.now,
-    #         extension_fields: [
-    #           {
-    #             name: "ExtensionFieldName", # required
-    #             value: "ExtensionFieldValue", # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] reporting_mta
     #   The reporting MTA that attempted to deliver the message, formatted
@@ -3390,14 +2823,6 @@ module Aws::SES
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
     #
-    # @note When making an API call, you may pass MessageTag
-    #   data as a hash:
-    #
-    #       {
-    #         name: "MessageTagName", # required
-    #         value: "MessageTagValue", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the tag. The name must:
     #
@@ -3449,16 +2874,6 @@ module Aws::SES
 
     # A request to modify the delivery options for a configuration set.
     #
-    # @note When making an API call, you may pass PutConfigurationSetDeliveryOptionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_set_name: "ConfigurationSetName", # required
-    #         delivery_options: {
-    #           tls_policy: "Require", # accepts Require, Optional
-    #         },
-    #       }
-    #
     # @!attribute [rw] configuration_set_name
     #   The name of the configuration set that you want to specify the
     #   delivery options for.
@@ -3493,15 +2908,6 @@ module Aws::SES
     #
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
-    #
-    # @note When making an API call, you may pass PutIdentityPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity: "Identity", # required
-    #         policy_name: "PolicyName", # required
-    #         policy: "Policy", # required
-    #       }
     #
     # @!attribute [rw] identity
     #   The identity that the policy will apply to. You can specify an
@@ -3549,13 +2955,6 @@ module Aws::SES
 
     # Represents the raw data of the message.
     #
-    # @note When making an API call, you may pass RawMessage
-    #   data as a hash:
-    #
-    #       {
-    #         data: "data", # required
-    #       }
-    #
     # @!attribute [rw] data
     #   The raw data of the message. This data needs to base64-encoded if
     #   you are accessing Amazon SES directly through the HTTPS interface.
@@ -3601,46 +3000,6 @@ module Aws::SES
     #
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rules.html
-    #
-    # @note When making an API call, you may pass ReceiptAction
-    #   data as a hash:
-    #
-    #       {
-    #         s3_action: {
-    #           topic_arn: "AmazonResourceName",
-    #           bucket_name: "S3BucketName", # required
-    #           object_key_prefix: "S3KeyPrefix",
-    #           kms_key_arn: "AmazonResourceName",
-    #         },
-    #         bounce_action: {
-    #           topic_arn: "AmazonResourceName",
-    #           smtp_reply_code: "BounceSmtpReplyCode", # required
-    #           status_code: "BounceStatusCode",
-    #           message: "BounceMessage", # required
-    #           sender: "Address", # required
-    #         },
-    #         workmail_action: {
-    #           topic_arn: "AmazonResourceName",
-    #           organization_arn: "AmazonResourceName", # required
-    #         },
-    #         lambda_action: {
-    #           topic_arn: "AmazonResourceName",
-    #           function_arn: "AmazonResourceName", # required
-    #           invocation_type: "Event", # accepts Event, RequestResponse
-    #         },
-    #         stop_action: {
-    #           scope: "RuleSet", # required, accepts RuleSet
-    #           topic_arn: "AmazonResourceName",
-    #         },
-    #         add_header_action: {
-    #           header_name: "HeaderName", # required
-    #           header_value: "HeaderValue", # required
-    #         },
-    #         sns_action: {
-    #           topic_arn: "AmazonResourceName", # required
-    #           encoding: "UTF-8", # accepts UTF-8, Base64
-    #         },
-    #       }
     #
     # @!attribute [rw] s3_action
     #   Saves the received message to an Amazon Simple Storage Service
@@ -3702,17 +3061,6 @@ module Aws::SES
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-ip-filters.html
     #
-    # @note When making an API call, you may pass ReceiptFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ReceiptFilterName", # required
-    #         ip_filter: { # required
-    #           policy: "Block", # required, accepts Block, Allow
-    #           cidr: "Cidr", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the IP address filter. The name must:
     #
@@ -3748,14 +3096,6 @@ module Aws::SES
     #
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-ip-filters.html
-    #
-    # @note When making an API call, you may pass ReceiptIpFilter
-    #   data as a hash:
-    #
-    #       {
-    #         policy: "Block", # required, accepts Block, Allow
-    #         cidr: "Cidr", # required
-    #       }
     #
     # @!attribute [rw] policy
     #   Indicates whether to block or allow incoming mail from the specified
@@ -3798,55 +3138,6 @@ module Aws::SES
     #
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rules.html
-    #
-    # @note When making an API call, you may pass ReceiptRule
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ReceiptRuleName", # required
-    #         enabled: false,
-    #         tls_policy: "Require", # accepts Require, Optional
-    #         recipients: ["Recipient"],
-    #         actions: [
-    #           {
-    #             s3_action: {
-    #               topic_arn: "AmazonResourceName",
-    #               bucket_name: "S3BucketName", # required
-    #               object_key_prefix: "S3KeyPrefix",
-    #               kms_key_arn: "AmazonResourceName",
-    #             },
-    #             bounce_action: {
-    #               topic_arn: "AmazonResourceName",
-    #               smtp_reply_code: "BounceSmtpReplyCode", # required
-    #               status_code: "BounceStatusCode",
-    #               message: "BounceMessage", # required
-    #               sender: "Address", # required
-    #             },
-    #             workmail_action: {
-    #               topic_arn: "AmazonResourceName",
-    #               organization_arn: "AmazonResourceName", # required
-    #             },
-    #             lambda_action: {
-    #               topic_arn: "AmazonResourceName",
-    #               function_arn: "AmazonResourceName", # required
-    #               invocation_type: "Event", # accepts Event, RequestResponse
-    #             },
-    #             stop_action: {
-    #               scope: "RuleSet", # required, accepts RuleSet
-    #               topic_arn: "AmazonResourceName",
-    #             },
-    #             add_header_action: {
-    #               header_name: "HeaderName", # required
-    #               header_value: "HeaderValue", # required
-    #             },
-    #             sns_action: {
-    #               topic_arn: "AmazonResourceName", # required
-    #               encoding: "UTF-8", # accepts UTF-8, Base64
-    #             },
-    #           },
-    #         ],
-    #         scan_enabled: false,
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the receipt rule. The name must:
@@ -3948,24 +3239,6 @@ module Aws::SES
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email.html
     #
-    # @note When making an API call, you may pass RecipientDsnFields
-    #   data as a hash:
-    #
-    #       {
-    #         final_recipient: "Address",
-    #         action: "failed", # required, accepts failed, delayed, delivered, relayed, expanded
-    #         remote_mta: "RemoteMta",
-    #         status: "DsnStatus", # required
-    #         diagnostic_code: "DiagnosticCode",
-    #         last_attempt_date: Time.now,
-    #         extension_fields: [
-    #           {
-    #             name: "ExtensionFieldName", # required
-    #             value: "ExtensionFieldValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] final_recipient
     #   The email address that the message was ultimately delivered to. This
     #   corresponds to the `Final-Recipient` in the DSN. If not specified,
@@ -4058,14 +3331,6 @@ module Aws::SES
     #
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
-    #
-    # @note When making an API call, you may pass ReorderReceiptRuleSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rule_set_name: "ReceiptRuleSetName", # required
-    #         rule_names: ["ReceiptRuleName"], # required
-    #       }
     #
     # @!attribute [rw] rule_set_name
     #   The name of the receipt rule set to reorder.
@@ -4190,16 +3455,6 @@ module Aws::SES
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html
     # [2]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-s3.html
     #
-    # @note When making an API call, you may pass S3Action
-    #   data as a hash:
-    #
-    #       {
-    #         topic_arn: "AmazonResourceName",
-    #         bucket_name: "S3BucketName", # required
-    #         object_key_prefix: "S3KeyPrefix",
-    #         kms_key_arn: "AmazonResourceName",
-    #       }
-    #
     # @!attribute [rw] topic_arn
     #   The ARN of the Amazon SNS topic to notify when the message is saved
     #   to the Amazon S3 bucket. An example of an Amazon SNS topic ARN is
@@ -4303,14 +3558,6 @@ module Aws::SES
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html
     # [2]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-sns.html
     #
-    # @note When making an API call, you may pass SNSAction
-    #   data as a hash:
-    #
-    #       {
-    #         topic_arn: "AmazonResourceName", # required
-    #         encoding: "UTF-8", # accepts UTF-8, Base64
-    #       }
-    #
     # @!attribute [rw] topic_arn
     #   The Amazon Resource Name (ARN) of the Amazon SNS topic to notify. An
     #   example of an Amazon SNS topic ARN is
@@ -4351,13 +3598,6 @@ module Aws::SES
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
     #
-    # @note When making an API call, you may pass SNSDestination
-    #   data as a hash:
-    #
-    #       {
-    #         topic_arn: "AmazonResourceName", # required
-    #       }
-    #
     # @!attribute [rw] topic_arn
     #   The ARN of the Amazon SNS topic that email sending events will be
     #   published to. An example of an Amazon SNS topic ARN is
@@ -4379,47 +3619,6 @@ module Aws::SES
 
     # Represents a request to send a bounce message to the sender of an
     # email you received through Amazon SES.
-    #
-    # @note When making an API call, you may pass SendBounceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         original_message_id: "MessageId", # required
-    #         bounce_sender: "Address", # required
-    #         explanation: "Explanation",
-    #         message_dsn: {
-    #           reporting_mta: "ReportingMta", # required
-    #           arrival_date: Time.now,
-    #           extension_fields: [
-    #             {
-    #               name: "ExtensionFieldName", # required
-    #               value: "ExtensionFieldValue", # required
-    #             },
-    #           ],
-    #         },
-    #         bounced_recipient_info_list: [ # required
-    #           {
-    #             recipient: "Address", # required
-    #             recipient_arn: "AmazonResourceName",
-    #             bounce_type: "DoesNotExist", # accepts DoesNotExist, MessageTooLarge, ExceededQuota, ContentRejected, Undefined, TemporaryFailure
-    #             recipient_dsn_fields: {
-    #               final_recipient: "Address",
-    #               action: "failed", # required, accepts failed, delayed, delivered, relayed, expanded
-    #               remote_mta: "RemoteMta",
-    #               status: "DsnStatus", # required
-    #               diagnostic_code: "DiagnosticCode",
-    #               last_attempt_date: Time.now,
-    #               extension_fields: [
-    #                 {
-    #                   name: "ExtensionFieldName", # required
-    #                   value: "ExtensionFieldValue", # required
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #         ],
-    #         bounce_sender_arn: "AmazonResourceName",
-    #       }
     #
     # @!attribute [rw] original_message_id
     #   The message ID of the message to be bounced.
@@ -4494,43 +3693,6 @@ module Aws::SES
     #
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html
-    #
-    # @note When making an API call, you may pass SendBulkTemplatedEmailRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source: "Address", # required
-    #         source_arn: "AmazonResourceName",
-    #         reply_to_addresses: ["Address"],
-    #         return_path: "Address",
-    #         return_path_arn: "AmazonResourceName",
-    #         configuration_set_name: "ConfigurationSetName",
-    #         default_tags: [
-    #           {
-    #             name: "MessageTagName", # required
-    #             value: "MessageTagValue", # required
-    #           },
-    #         ],
-    #         template: "TemplateName", # required
-    #         template_arn: "AmazonResourceName",
-    #         default_template_data: "TemplateData",
-    #         destinations: [ # required
-    #           {
-    #             destination: { # required
-    #               to_addresses: ["Address"],
-    #               cc_addresses: ["Address"],
-    #               bcc_addresses: ["Address"],
-    #             },
-    #             replacement_tags: [
-    #               {
-    #                 name: "MessageTagName", # required
-    #                 value: "MessageTagValue", # required
-    #               },
-    #             ],
-    #             replacement_template_data: "TemplateData",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] source
     #   The email address that is sending the email. This email address must
@@ -4696,15 +3858,6 @@ module Aws::SES
     # Represents a request to send a custom verification email to a
     # specified recipient.
     #
-    # @note When making an API call, you may pass SendCustomVerificationEmailRequest
-    #   data as a hash:
-    #
-    #       {
-    #         email_address: "Address", # required
-    #         template_name: "TemplateName", # required
-    #         configuration_set_name: "ConfigurationSetName",
-    #       }
-    #
     # @!attribute [rw] email_address
     #   The email address to verify.
     #   @return [String]
@@ -4786,45 +3939,6 @@ module Aws::SES
     #
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-formatted.html
-    #
-    # @note When making an API call, you may pass SendEmailRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source: "Address", # required
-    #         destination: { # required
-    #           to_addresses: ["Address"],
-    #           cc_addresses: ["Address"],
-    #           bcc_addresses: ["Address"],
-    #         },
-    #         message: { # required
-    #           subject: { # required
-    #             data: "MessageData", # required
-    #             charset: "Charset",
-    #           },
-    #           body: { # required
-    #             text: {
-    #               data: "MessageData", # required
-    #               charset: "Charset",
-    #             },
-    #             html: {
-    #               data: "MessageData", # required
-    #               charset: "Charset",
-    #             },
-    #           },
-    #         },
-    #         reply_to_addresses: ["Address"],
-    #         return_path: "Address",
-    #         source_arn: "AmazonResourceName",
-    #         return_path_arn: "AmazonResourceName",
-    #         tags: [
-    #           {
-    #             name: "MessageTagName", # required
-    #             value: "MessageTagValue", # required
-    #           },
-    #         ],
-    #         configuration_set_name: "ConfigurationSetName",
-    #       }
     #
     # @!attribute [rw] source
     #   The email address that is sending the email. This email address must
@@ -4977,27 +4091,6 @@ module Aws::SES
     #
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-raw.html
-    #
-    # @note When making an API call, you may pass SendRawEmailRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source: "Address",
-    #         destinations: ["Address"],
-    #         raw_message: { # required
-    #           data: "data", # required
-    #         },
-    #         from_arn: "AmazonResourceName",
-    #         source_arn: "AmazonResourceName",
-    #         return_path_arn: "AmazonResourceName",
-    #         tags: [
-    #           {
-    #             name: "MessageTagName", # required
-    #             value: "MessageTagValue", # required
-    #           },
-    #         ],
-    #         configuration_set_name: "ConfigurationSetName",
-    #       }
     #
     # @!attribute [rw] source
     #   The identity's email address. If you do not provide a value for
@@ -5197,32 +4290,6 @@ module Aws::SES
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html
     #
-    # @note When making an API call, you may pass SendTemplatedEmailRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source: "Address", # required
-    #         destination: { # required
-    #           to_addresses: ["Address"],
-    #           cc_addresses: ["Address"],
-    #           bcc_addresses: ["Address"],
-    #         },
-    #         reply_to_addresses: ["Address"],
-    #         return_path: "Address",
-    #         source_arn: "AmazonResourceName",
-    #         return_path_arn: "AmazonResourceName",
-    #         tags: [
-    #           {
-    #             name: "MessageTagName", # required
-    #             value: "MessageTagValue", # required
-    #           },
-    #         ],
-    #         configuration_set_name: "ConfigurationSetName",
-    #         template: "TemplateName", # required
-    #         template_arn: "AmazonResourceName",
-    #         template_data: "TemplateData", # required
-    #       }
-    #
     # @!attribute [rw] source
     #   The email address that is sending the email. This email address must
     #   be either individually verified with Amazon SES, or from a domain
@@ -5388,13 +4455,6 @@ module Aws::SES
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
     #
-    # @note When making an API call, you may pass SetActiveReceiptRuleSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rule_set_name: "ReceiptRuleSetName",
-    #       }
-    #
     # @!attribute [rw] rule_set_name
     #   The name of the receipt rule set to make active. Setting this value
     #   to null disables all email receiving.
@@ -5421,14 +4481,6 @@ module Aws::SES
     #
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html
-    #
-    # @note When making an API call, you may pass SetIdentityDkimEnabledRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity: "Identity", # required
-    #         dkim_enabled: false, # required
-    #       }
     #
     # @!attribute [rw] identity
     #   The identity for which DKIM signing should be enabled or disabled.
@@ -5462,14 +4514,6 @@ module Aws::SES
     #
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications-via-email.html
-    #
-    # @note When making an API call, you may pass SetIdentityFeedbackForwardingEnabledRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity: "Identity", # required
-    #         forwarding_enabled: false, # required
-    #       }
     #
     # @!attribute [rw] identity
     #   The identity for which to set bounce and complaint notification
@@ -5510,15 +4554,6 @@ module Aws::SES
     #
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications-via-sns.html
-    #
-    # @note When making an API call, you may pass SetIdentityHeadersInNotificationsEnabledRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity: "Identity", # required
-    #         notification_type: "Bounce", # required, accepts Bounce, Complaint, Delivery
-    #         enabled: false, # required
-    #       }
     #
     # @!attribute [rw] identity
     #   The identity for which to enable or disable headers in
@@ -5564,15 +4599,6 @@ module Aws::SES
     #
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from.html
-    #
-    # @note When making an API call, you may pass SetIdentityMailFromDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity: "Identity", # required
-    #         mail_from_domain: "MailFromDomainName",
-    #         behavior_on_mx_failure: "UseDefaultValue", # accepts UseDefaultValue, RejectMessage
-    #       }
     #
     # @!attribute [rw] identity
     #   The verified identity for which you want to enable or disable the
@@ -5631,15 +4657,6 @@ module Aws::SES
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications-via-sns.html
     #
-    # @note When making an API call, you may pass SetIdentityNotificationTopicRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity: "Identity", # required
-    #         notification_type: "Bounce", # required, accepts Bounce, Complaint, Delivery
-    #         sns_topic: "NotificationTopic",
-    #       }
-    #
     # @!attribute [rw] identity
     #   The identity (email address or domain) that you want to set the
     #   Amazon SNS topic for.
@@ -5688,15 +4705,6 @@ module Aws::SES
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
     #
-    # @note When making an API call, you may pass SetReceiptRulePositionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rule_set_name: "ReceiptRuleSetName", # required
-    #         rule_name: "ReceiptRuleName", # required
-    #         after: "ReceiptRuleName",
-    #       }
-    #
     # @!attribute [rw] rule_set_name
     #   The name of the receipt rule set that contains the receipt rule to
     #   reposition.
@@ -5738,14 +4746,6 @@ module Aws::SES
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-stop.html
     #
-    # @note When making an API call, you may pass StopAction
-    #   data as a hash:
-    #
-    #       {
-    #         scope: "RuleSet", # required, accepts RuleSet
-    #         topic_arn: "AmazonResourceName",
-    #       }
-    #
     # @!attribute [rw] scope
     #   The scope of the StopAction. The only acceptable value is `RuleSet`.
     #   @return [String]
@@ -5773,16 +4773,6 @@ module Aws::SES
 
     # The content of the email, composed of a subject line, an HTML part,
     # and a text-only part.
-    #
-    # @note When making an API call, you may pass Template
-    #   data as a hash:
-    #
-    #       {
-    #         template_name: "TemplateName", # required
-    #         subject_part: "SubjectPart",
-    #         text_part: "TextPart",
-    #         html_part: "HtmlPart",
-    #       }
     #
     # @!attribute [rw] template_name
     #   The name of the template. You will refer to this name when you send
@@ -5847,14 +4837,6 @@ module Aws::SES
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TestRenderTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         template_name: "TemplateName", # required
-    #         template_data: "TemplateData", # required
-    #       }
-    #
     # @!attribute [rw] template_name
     #   The name of the template that you want to render.
     #   @return [String]
@@ -5899,13 +4881,6 @@ module Aws::SES
     #
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/configure-custom-open-click-domains.html
-    #
-    # @note When making an API call, you may pass TrackingOptions
-    #   data as a hash:
-    #
-    #       {
-    #         custom_redirect_domain: "CustomRedirectDomain",
-    #       }
     #
     # @!attribute [rw] custom_redirect_domain
     #   The custom subdomain that will be used to redirect email recipients
@@ -5955,13 +4930,6 @@ module Aws::SES
     # Represents a request to enable or disable the email sending
     # capabilities for your entire Amazon SES account.
     #
-    # @note When making an API call, you may pass UpdateAccountSendingEnabledRequest
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false,
-    #       }
-    #
     # @!attribute [rw] enabled
     #   Describes whether email sending is enabled or disabled for your
     #   Amazon SES account in the current AWS Region.
@@ -5983,34 +4951,6 @@ module Aws::SES
     #
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
-    #
-    # @note When making an API call, you may pass UpdateConfigurationSetEventDestinationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_set_name: "ConfigurationSetName", # required
-    #         event_destination: { # required
-    #           name: "EventDestinationName", # required
-    #           enabled: false,
-    #           matching_event_types: ["send"], # required, accepts send, reject, bounce, complaint, delivery, open, click, renderingFailure
-    #           kinesis_firehose_destination: {
-    #             iam_role_arn: "AmazonResourceName", # required
-    #             delivery_stream_arn: "AmazonResourceName", # required
-    #           },
-    #           cloud_watch_destination: {
-    #             dimension_configurations: [ # required
-    #               {
-    #                 dimension_name: "DimensionName", # required
-    #                 dimension_value_source: "messageTag", # required, accepts messageTag, emailHeader, linkTag
-    #                 default_dimension_value: "DefaultDimensionValue", # required
-    #               },
-    #             ],
-    #           },
-    #           sns_destination: {
-    #             topic_arn: "AmazonResourceName", # required
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] configuration_set_name
     #   The name of the configuration set that contains the event
@@ -6040,14 +4980,6 @@ module Aws::SES
     # Represents a request to modify the reputation metric publishing
     # settings for a configuration set.
     #
-    # @note When making an API call, you may pass UpdateConfigurationSetReputationMetricsEnabledRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_set_name: "ConfigurationSetName", # required
-    #         enabled: false, # required
-    #       }
-    #
     # @!attribute [rw] configuration_set_name
     #   The name of the configuration set that you want to update.
     #   @return [String]
@@ -6070,14 +5002,6 @@ module Aws::SES
     # Represents a request to enable or disable the email sending
     # capabilities for a specific configuration set.
     #
-    # @note When making an API call, you may pass UpdateConfigurationSetSendingEnabledRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_set_name: "ConfigurationSetName", # required
-    #         enabled: false, # required
-    #       }
-    #
     # @!attribute [rw] configuration_set_name
     #   The name of the configuration set that you want to update.
     #   @return [String]
@@ -6098,16 +5022,6 @@ module Aws::SES
 
     # Represents a request to update the tracking options for a
     # configuration set.
-    #
-    # @note When making an API call, you may pass UpdateConfigurationSetTrackingOptionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_set_name: "ConfigurationSetName", # required
-    #         tracking_options: { # required
-    #           custom_redirect_domain: "CustomRedirectDomain",
-    #         },
-    #       }
     #
     # @!attribute [rw] configuration_set_name
     #   The name of the configuration set for which you want to update the
@@ -6144,18 +5058,6 @@ module Aws::SES
 
     # Represents a request to update an existing custom verification email
     # template.
-    #
-    # @note When making an API call, you may pass UpdateCustomVerificationEmailTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         template_name: "TemplateName", # required
-    #         from_email_address: "FromAddress",
-    #         template_subject: "Subject",
-    #         template_content: "TemplateContent",
-    #         success_redirection_url: "SuccessRedirectionURL",
-    #         failure_redirection_url: "FailureRedirectionURL",
-    #       }
     #
     # @!attribute [rw] template_name
     #   The name of the custom verification email template that you want to
@@ -6213,58 +5115,6 @@ module Aws::SES
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
     #
-    # @note When making an API call, you may pass UpdateReceiptRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rule_set_name: "ReceiptRuleSetName", # required
-    #         rule: { # required
-    #           name: "ReceiptRuleName", # required
-    #           enabled: false,
-    #           tls_policy: "Require", # accepts Require, Optional
-    #           recipients: ["Recipient"],
-    #           actions: [
-    #             {
-    #               s3_action: {
-    #                 topic_arn: "AmazonResourceName",
-    #                 bucket_name: "S3BucketName", # required
-    #                 object_key_prefix: "S3KeyPrefix",
-    #                 kms_key_arn: "AmazonResourceName",
-    #               },
-    #               bounce_action: {
-    #                 topic_arn: "AmazonResourceName",
-    #                 smtp_reply_code: "BounceSmtpReplyCode", # required
-    #                 status_code: "BounceStatusCode",
-    #                 message: "BounceMessage", # required
-    #                 sender: "Address", # required
-    #               },
-    #               workmail_action: {
-    #                 topic_arn: "AmazonResourceName",
-    #                 organization_arn: "AmazonResourceName", # required
-    #               },
-    #               lambda_action: {
-    #                 topic_arn: "AmazonResourceName",
-    #                 function_arn: "AmazonResourceName", # required
-    #                 invocation_type: "Event", # accepts Event, RequestResponse
-    #               },
-    #               stop_action: {
-    #                 scope: "RuleSet", # required, accepts RuleSet
-    #                 topic_arn: "AmazonResourceName",
-    #               },
-    #               add_header_action: {
-    #                 header_name: "HeaderName", # required
-    #                 header_value: "HeaderValue", # required
-    #               },
-    #               sns_action: {
-    #                 topic_arn: "AmazonResourceName", # required
-    #                 encoding: "UTF-8", # accepts UTF-8, Base64
-    #               },
-    #             },
-    #           ],
-    #           scan_enabled: false,
-    #         },
-    #       }
-    #
     # @!attribute [rw] rule_set_name
     #   The name of the receipt rule set that the receipt rule belongs to.
     #   @return [String]
@@ -6288,18 +5138,6 @@ module Aws::SES
     #
     class UpdateReceiptRuleResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         template: { # required
-    #           template_name: "TemplateName", # required
-    #           subject_part: "SubjectPart",
-    #           text_part: "TextPart",
-    #           html_part: "HtmlPart",
-    #         },
-    #       }
-    #
     # @!attribute [rw] template
     #   The content of the email, composed of a subject line, an HTML part,
     #   and a text-only part.
@@ -6324,13 +5162,6 @@ module Aws::SES
     #
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html
-    #
-    # @note When making an API call, you may pass VerifyDomainDkimRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "Domain", # required
-    #       }
     #
     # @!attribute [rw] domain
     #   The name of the domain to be verified for Easy DKIM signing.
@@ -6385,13 +5216,6 @@ module Aws::SES
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-domains.html
     #
-    # @note When making an API call, you may pass VerifyDomainIdentityRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "Domain", # required
-    #       }
-    #
     # @!attribute [rw] domain
     #   The domain to be verified.
     #   @return [String]
@@ -6436,13 +5260,6 @@ module Aws::SES
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses.html
     #
-    # @note When making an API call, you may pass VerifyEmailAddressRequest
-    #   data as a hash:
-    #
-    #       {
-    #         email_address: "Address", # required
-    #       }
-    #
     # @!attribute [rw] email_address
     #   The email address to be verified.
     #   @return [String]
@@ -6462,13 +5279,6 @@ module Aws::SES
     #
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses.html
-    #
-    # @note When making an API call, you may pass VerifyEmailIdentityRequest
-    #   data as a hash:
-    #
-    #       {
-    #         email_address: "Address", # required
-    #       }
     #
     # @!attribute [rw] email_address
     #   The email address to be verified.
@@ -6500,14 +5310,6 @@ module Aws::SES
     #
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-workmail.html
-    #
-    # @note When making an API call, you may pass WorkmailAction
-    #   data as a hash:
-    #
-    #       {
-    #         topic_arn: "AmazonResourceName",
-    #         organization_arn: "AmazonResourceName", # required
-    #       }
     #
     # @!attribute [rw] topic_arn
     #   The Amazon Resource Name (ARN) of the Amazon SNS topic to notify

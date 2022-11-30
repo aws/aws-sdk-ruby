@@ -28,36 +28,6 @@ module Aws::RecycleBin
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         retention_period: { # required
-    #           retention_period_value: 1, # required
-    #           retention_period_unit: "DAYS", # required, accepts DAYS
-    #         },
-    #         description: "Description",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         resource_type: "EBS_SNAPSHOT", # required, accepts EBS_SNAPSHOT, EC2_IMAGE
-    #         resource_tags: [
-    #           {
-    #             resource_tag_key: "ResourceTagKey", # required
-    #             resource_tag_value: "ResourceTagValue",
-    #           },
-    #         ],
-    #         lock_configuration: {
-    #           unlock_delay: { # required
-    #             unlock_delay_value: 1, # required
-    #             unlock_delay_unit: "DAYS", # required, accepts DAYS
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] retention_period
     #   Information about the retention period for which the retention rule
     #   is to retain resources.
@@ -185,13 +155,6 @@ module Aws::RecycleBin
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identifier: "RuleIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] identifier
     #   The unique ID of the retention rule.
     #   @return [String]
@@ -208,13 +171,6 @@ module Aws::RecycleBin
     #
     class DeleteRuleResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass GetRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identifier: "RuleIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] identifier
     #   The unique ID of the retention rule.
     #   @return [String]
@@ -314,22 +270,6 @@ module Aws::RecycleBin
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRulesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         resource_type: "EBS_SNAPSHOT", # required, accepts EBS_SNAPSHOT, EC2_IMAGE
-    #         resource_tags: [
-    #           {
-    #             resource_tag_key: "ResourceTagKey", # required
-    #             resource_tag_value: "ResourceTagValue",
-    #           },
-    #         ],
-    #         lock_state: "locked", # accepts locked, pending_unlock, unlocked
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to return with a single call. To
     #   retrieve the remaining results, make another call with the returned
@@ -389,13 +329,6 @@ module Aws::RecycleBin
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "RuleArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the retention rule.
     #   @return [String]
@@ -422,16 +355,6 @@ module Aws::RecycleBin
 
     # Information about a retention rule lock configuration.
     #
-    # @note When making an API call, you may pass LockConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         unlock_delay: { # required
-    #           unlock_delay_value: 1, # required
-    #           unlock_delay_unit: "DAYS", # required, accepts DAYS
-    #         },
-    #       }
-    #
     # @!attribute [rw] unlock_delay
     #   Information about the retention rule unlock delay.
     #   @return [Types::UnlockDelay]
@@ -444,19 +367,6 @@ module Aws::RecycleBin
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass LockRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identifier: "RuleIdentifier", # required
-    #         lock_configuration: { # required
-    #           unlock_delay: { # required
-    #             unlock_delay_value: 1, # required
-    #             unlock_delay_unit: "DAYS", # required, accepts DAYS
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] identifier
     #   The unique ID of the retention rule.
     #   @return [String]
@@ -561,14 +471,6 @@ module Aws::RecycleBin
     # Information about the resource tags used to identify resources that
     # are retained by the retention rule.
     #
-    # @note When making an API call, you may pass ResourceTag
-    #   data as a hash:
-    #
-    #       {
-    #         resource_tag_key: "ResourceTagKey", # required
-    #         resource_tag_value: "ResourceTagValue",
-    #       }
-    #
     # @!attribute [rw] resource_tag_key
     #   The tag key.
     #   @return [String]
@@ -588,14 +490,6 @@ module Aws::RecycleBin
 
     # Information about the retention period for which the retention rule is
     # to retain resources.
-    #
-    # @note When making an API call, you may pass RetentionPeriod
-    #   data as a hash:
-    #
-    #       {
-    #         retention_period_value: 1, # required
-    #         retention_period_unit: "DAYS", # required, accepts DAYS
-    #       }
     #
     # @!attribute [rw] retention_period_value
     #   The period value for which the retention rule is to retain
@@ -684,14 +578,6 @@ module Aws::RecycleBin
 
     # Information about the tags to assign to the retention rule.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The tag key.
     #   @return [String]
@@ -709,19 +595,6 @@ module Aws::RecycleBin
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "RuleArn", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the retention rule.
     #   @return [String]
@@ -749,14 +622,6 @@ module Aws::RecycleBin
     # The retention rule can't be modified or deleted during the unlock
     # delay.
     #
-    # @note When making an API call, you may pass UnlockDelay
-    #   data as a hash:
-    #
-    #       {
-    #         unlock_delay_value: 1, # required
-    #         unlock_delay_unit: "DAYS", # required, accepts DAYS
-    #       }
-    #
     # @!attribute [rw] unlock_delay_value
     #   The unlock delay period, measured in the unit specified for <b>
     #   UnlockDelayUnit</b>.
@@ -776,13 +641,6 @@ module Aws::RecycleBin
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UnlockRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identifier: "RuleIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] identifier
     #   The unique ID of the retention rule.
     #   @return [String]
@@ -868,14 +726,6 @@ module Aws::RecycleBin
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "RuleArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the retention rule.
     #   @return [String]
@@ -898,25 +748,6 @@ module Aws::RecycleBin
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identifier: "RuleIdentifier", # required
-    #         retention_period: {
-    #           retention_period_value: 1, # required
-    #           retention_period_unit: "DAYS", # required, accepts DAYS
-    #         },
-    #         description: "Description",
-    #         resource_type: "EBS_SNAPSHOT", # accepts EBS_SNAPSHOT, EC2_IMAGE
-    #         resource_tags: [
-    #           {
-    #             resource_tag_key: "ResourceTagKey", # required
-    #             resource_tag_value: "ResourceTagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] identifier
     #   The unique ID of the retention rule.
     #   @return [String]

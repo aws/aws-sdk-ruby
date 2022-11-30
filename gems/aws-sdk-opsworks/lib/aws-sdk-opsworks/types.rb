@@ -125,14 +125,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssignInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "String", # required
-    #         layer_ids: ["String"], # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The instance ID.
     #   @return [String]
@@ -151,14 +143,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssignVolumeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         volume_id: "String", # required
-    #         instance_id: "String",
-    #       }
-    #
     # @!attribute [rw] volume_id
     #   The volume ID.
     #   @return [String]
@@ -176,14 +160,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateElasticIpRequest
-    #   data as a hash:
-    #
-    #       {
-    #         elastic_ip: "String", # required
-    #         instance_id: "String",
-    #       }
-    #
     # @!attribute [rw] elastic_ip
     #   The Elastic IP address.
     #   @return [String]
@@ -201,14 +177,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AttachElasticLoadBalancerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         elastic_load_balancer_name: "String", # required
-    #         layer_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] elastic_load_balancer_name
     #   The Elastic Load Balancing instance's name.
     #   @return [String]
@@ -230,19 +198,6 @@ module Aws::OpsWorks
     # Describes a load-based auto scaling upscaling or downscaling threshold
     # configuration, which specifies when AWS OpsWorks Stacks starts or
     # stops load-based instances.
-    #
-    # @note When making an API call, you may pass AutoScalingThresholds
-    #   data as a hash:
-    #
-    #       {
-    #         instance_count: 1,
-    #         thresholds_wait_time: 1,
-    #         ignore_metrics_time: 1,
-    #         cpu_threshold: 1.0,
-    #         memory_threshold: 1.0,
-    #         load_threshold: 1.0,
-    #         alarms: ["String"],
-    #       }
     #
     # @!attribute [rw] instance_count
     #   The number of instances to add or remove when the load exceeds a
@@ -324,22 +279,6 @@ module Aws::OpsWorks
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_BlockDeviceMapping.html
     #
-    # @note When making an API call, you may pass BlockDeviceMapping
-    #   data as a hash:
-    #
-    #       {
-    #         device_name: "String",
-    #         no_device: "String",
-    #         virtual_name: "String",
-    #         ebs: {
-    #           snapshot_id: "String",
-    #           iops: 1,
-    #           volume_size: 1,
-    #           volume_type: "gp2", # accepts gp2, io1, standard
-    #           delete_on_termination: false,
-    #         },
-    #       }
-    #
     # @!attribute [rw] device_name
     #   The device name that is exposed to the instance, such as `/dev/sdh`.
     #   For the root device, you can use the explicit device name or you can
@@ -379,14 +318,6 @@ module Aws::OpsWorks
 
     # Describes the Chef configuration.
     #
-    # @note When making an API call, you may pass ChefConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         manage_berkshelf: false,
-    #         berkshelf_version: "String",
-    #       }
-    #
     # @!attribute [rw] manage_berkshelf
     #   Whether to enable Berkshelf.
     #   @return [Boolean]
@@ -404,49 +335,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CloneStackRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source_stack_id: "String", # required
-    #         name: "String",
-    #         region: "String",
-    #         vpc_id: "String",
-    #         attributes: {
-    #           "Color" => "String",
-    #         },
-    #         service_role_arn: "String", # required
-    #         default_instance_profile_arn: "String",
-    #         default_os: "String",
-    #         hostname_theme: "String",
-    #         default_availability_zone: "String",
-    #         default_subnet_id: "String",
-    #         custom_json: "String",
-    #         configuration_manager: {
-    #           name: "String",
-    #           version: "String",
-    #         },
-    #         chef_configuration: {
-    #           manage_berkshelf: false,
-    #           berkshelf_version: "String",
-    #         },
-    #         use_custom_cookbooks: false,
-    #         use_opsworks_security_groups: false,
-    #         custom_cookbooks_source: {
-    #           type: "git", # accepts git, svn, archive, s3
-    #           url: "String",
-    #           username: "String",
-    #           password: "String",
-    #           ssh_key: "String",
-    #           revision: "String",
-    #         },
-    #         default_ssh_key_name: "String",
-    #         clone_permissions: false,
-    #         clone_app_ids: ["String"],
-    #         default_root_device_type: "ebs", # accepts ebs, instance-store
-    #         agent_version: "String",
-    #       }
-    #
     # @!attribute [rw] source_stack_id
     #   The source stack ID.
     #   @return [String]
@@ -814,28 +702,6 @@ module Aws::OpsWorks
 
     # Describes the Amazon CloudWatch logs configuration for a layer.
     #
-    # @note When making an API call, you may pass CloudWatchLogsConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false,
-    #         log_streams: [
-    #           {
-    #             log_group_name: "String",
-    #             datetime_format: "String",
-    #             time_zone: "LOCAL", # accepts LOCAL, UTC
-    #             file: "String",
-    #             file_fingerprint_lines: "String",
-    #             multi_line_start_pattern: "String",
-    #             initial_position: "start_of_file", # accepts start_of_file, end_of_file
-    #             encoding: "ascii", # accepts ascii, big5, big5hkscs, cp037, cp424, cp437, cp500, cp720, cp737, cp775, cp850, cp852, cp855, cp856, cp857, cp858, cp860, cp861, cp862, cp863, cp864, cp865, cp866, cp869, cp874, cp875, cp932, cp949, cp950, cp1006, cp1026, cp1140, cp1250, cp1251, cp1252, cp1253, cp1254, cp1255, cp1256, cp1257, cp1258, euc_jp, euc_jis_2004, euc_jisx0213, euc_kr, gb2312, gbk, gb18030, hz, iso2022_jp, iso2022_jp_1, iso2022_jp_2, iso2022_jp_2004, iso2022_jp_3, iso2022_jp_ext, iso2022_kr, latin_1, iso8859_2, iso8859_3, iso8859_4, iso8859_5, iso8859_6, iso8859_7, iso8859_8, iso8859_9, iso8859_10, iso8859_13, iso8859_14, iso8859_15, iso8859_16, johab, koi8_r, koi8_u, mac_cyrillic, mac_greek, mac_iceland, mac_latin2, mac_roman, mac_turkish, ptcp154, shift_jis, shift_jis_2004, shift_jisx0213, utf_32, utf_32_be, utf_32_le, utf_16, utf_16_be, utf_16_le, utf_7, utf_8, utf_8_sig
-    #             buffer_duration: 1,
-    #             batch_count: 1,
-    #             batch_size: 1,
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] enabled
     #   Whether CloudWatch Logs is enabled for a layer.
     #   @return [Boolean]
@@ -860,23 +726,6 @@ module Aws::OpsWorks
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AgentReference.html
-    #
-    # @note When making an API call, you may pass CloudWatchLogsLogStream
-    #   data as a hash:
-    #
-    #       {
-    #         log_group_name: "String",
-    #         datetime_format: "String",
-    #         time_zone: "LOCAL", # accepts LOCAL, UTC
-    #         file: "String",
-    #         file_fingerprint_lines: "String",
-    #         multi_line_start_pattern: "String",
-    #         initial_position: "start_of_file", # accepts start_of_file, end_of_file
-    #         encoding: "ascii", # accepts ascii, big5, big5hkscs, cp037, cp424, cp437, cp500, cp720, cp737, cp775, cp850, cp852, cp855, cp856, cp857, cp858, cp860, cp861, cp862, cp863, cp864, cp865, cp866, cp869, cp874, cp875, cp932, cp949, cp950, cp1006, cp1026, cp1140, cp1250, cp1251, cp1252, cp1253, cp1254, cp1255, cp1256, cp1257, cp1258, euc_jp, euc_jis_2004, euc_jisx0213, euc_kr, gb2312, gbk, gb18030, hz, iso2022_jp, iso2022_jp_1, iso2022_jp_2, iso2022_jp_2004, iso2022_jp_3, iso2022_jp_ext, iso2022_kr, latin_1, iso8859_2, iso8859_3, iso8859_4, iso8859_5, iso8859_6, iso8859_7, iso8859_8, iso8859_9, iso8859_10, iso8859_13, iso8859_14, iso8859_15, iso8859_16, johab, koi8_r, koi8_u, mac_cyrillic, mac_greek, mac_iceland, mac_latin2, mac_roman, mac_turkish, ptcp154, shift_jis, shift_jis_2004, shift_jisx0213, utf_32, utf_32_be, utf_32_le, utf_16, utf_16_be, utf_16_le, utf_7, utf_8, utf_8_sig
-    #         buffer_duration: 1,
-    #         batch_count: 1,
-    #         batch_size: 1,
-    #       }
     #
     # @!attribute [rw] log_group_name
     #   Specifies the destination log group. A log group is created
@@ -1067,49 +916,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAppRequest
-    #   data as a hash:
-    #
-    #       {
-    #         stack_id: "String", # required
-    #         shortname: "String",
-    #         name: "String", # required
-    #         description: "String",
-    #         data_sources: [
-    #           {
-    #             type: "String",
-    #             arn: "String",
-    #             database_name: "String",
-    #           },
-    #         ],
-    #         type: "aws-flow-ruby", # required, accepts aws-flow-ruby, java, rails, php, nodejs, static, other
-    #         app_source: {
-    #           type: "git", # accepts git, svn, archive, s3
-    #           url: "String",
-    #           username: "String",
-    #           password: "String",
-    #           ssh_key: "String",
-    #           revision: "String",
-    #         },
-    #         domains: ["String"],
-    #         enable_ssl: false,
-    #         ssl_configuration: {
-    #           certificate: "String", # required
-    #           private_key: "String", # required
-    #           chain: "String",
-    #         },
-    #         attributes: {
-    #           "DocumentRoot" => "String",
-    #         },
-    #         environment: [
-    #           {
-    #             key: "String", # required
-    #             value: "String", # required
-    #             secure: false,
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] stack_id
     #   The stack ID.
     #   @return [String]
@@ -1217,24 +1023,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDeploymentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         stack_id: "String", # required
-    #         app_id: "String",
-    #         instance_ids: ["String"],
-    #         layer_ids: ["String"],
-    #         command: { # required
-    #           name: "install_dependencies", # required, accepts install_dependencies, update_dependencies, update_custom_cookbooks, execute_recipes, configure, setup, deploy, rollback, start, stop, restart, undeploy
-    #           args: {
-    #             "String" => ["String"],
-    #           },
-    #         },
-    #         comment: "String",
-    #         custom_json: "String",
-    #       }
-    #
     # @!attribute [rw] stack_id
     #   The stack ID.
     #   @return [String]
@@ -1307,43 +1095,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         stack_id: "String", # required
-    #         layer_ids: ["String"], # required
-    #         instance_type: "String", # required
-    #         auto_scaling_type: "load", # accepts load, timer
-    #         hostname: "String",
-    #         os: "String",
-    #         ami_id: "String",
-    #         ssh_key_name: "String",
-    #         availability_zone: "String",
-    #         virtualization_type: "String",
-    #         subnet_id: "String",
-    #         architecture: "x86_64", # accepts x86_64, i386
-    #         root_device_type: "ebs", # accepts ebs, instance-store
-    #         block_device_mappings: [
-    #           {
-    #             device_name: "String",
-    #             no_device: "String",
-    #             virtual_name: "String",
-    #             ebs: {
-    #               snapshot_id: "String",
-    #               iops: 1,
-    #               volume_size: 1,
-    #               volume_type: "gp2", # accepts gp2, io1, standard
-    #               delete_on_termination: false,
-    #             },
-    #           },
-    #         ],
-    #         install_updates_on_boot: false,
-    #         ebs_optimized: false,
-    #         agent_version: "String",
-    #         tenancy: "String",
-    #       }
-    #
     # @!attribute [rw] stack_id
     #   The stack ID.
     #   @return [String]
@@ -1579,70 +1330,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateLayerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         stack_id: "String", # required
-    #         type: "aws-flow-ruby", # required, accepts aws-flow-ruby, ecs-cluster, java-app, lb, web, php-app, rails-app, nodejs-app, memcached, db-master, monitoring-master, custom
-    #         name: "String", # required
-    #         shortname: "String", # required
-    #         attributes: {
-    #           "EcsClusterArn" => "String",
-    #         },
-    #         cloud_watch_logs_configuration: {
-    #           enabled: false,
-    #           log_streams: [
-    #             {
-    #               log_group_name: "String",
-    #               datetime_format: "String",
-    #               time_zone: "LOCAL", # accepts LOCAL, UTC
-    #               file: "String",
-    #               file_fingerprint_lines: "String",
-    #               multi_line_start_pattern: "String",
-    #               initial_position: "start_of_file", # accepts start_of_file, end_of_file
-    #               encoding: "ascii", # accepts ascii, big5, big5hkscs, cp037, cp424, cp437, cp500, cp720, cp737, cp775, cp850, cp852, cp855, cp856, cp857, cp858, cp860, cp861, cp862, cp863, cp864, cp865, cp866, cp869, cp874, cp875, cp932, cp949, cp950, cp1006, cp1026, cp1140, cp1250, cp1251, cp1252, cp1253, cp1254, cp1255, cp1256, cp1257, cp1258, euc_jp, euc_jis_2004, euc_jisx0213, euc_kr, gb2312, gbk, gb18030, hz, iso2022_jp, iso2022_jp_1, iso2022_jp_2, iso2022_jp_2004, iso2022_jp_3, iso2022_jp_ext, iso2022_kr, latin_1, iso8859_2, iso8859_3, iso8859_4, iso8859_5, iso8859_6, iso8859_7, iso8859_8, iso8859_9, iso8859_10, iso8859_13, iso8859_14, iso8859_15, iso8859_16, johab, koi8_r, koi8_u, mac_cyrillic, mac_greek, mac_iceland, mac_latin2, mac_roman, mac_turkish, ptcp154, shift_jis, shift_jis_2004, shift_jisx0213, utf_32, utf_32_be, utf_32_le, utf_16, utf_16_be, utf_16_le, utf_7, utf_8, utf_8_sig
-    #               buffer_duration: 1,
-    #               batch_count: 1,
-    #               batch_size: 1,
-    #             },
-    #           ],
-    #         },
-    #         custom_instance_profile_arn: "String",
-    #         custom_json: "String",
-    #         custom_security_group_ids: ["String"],
-    #         packages: ["String"],
-    #         volume_configurations: [
-    #           {
-    #             mount_point: "String", # required
-    #             raid_level: 1,
-    #             number_of_disks: 1, # required
-    #             size: 1, # required
-    #             volume_type: "String",
-    #             iops: 1,
-    #             encrypted: false,
-    #           },
-    #         ],
-    #         enable_auto_healing: false,
-    #         auto_assign_elastic_ips: false,
-    #         auto_assign_public_ips: false,
-    #         custom_recipes: {
-    #           setup: ["String"],
-    #           configure: ["String"],
-    #           deploy: ["String"],
-    #           undeploy: ["String"],
-    #           shutdown: ["String"],
-    #         },
-    #         install_updates_on_boot: false,
-    #         use_ebs_optimized_instances: false,
-    #         lifecycle_event_configuration: {
-    #           shutdown: {
-    #             execution_timeout: 1,
-    #             delay_until_elb_connections_drained: false,
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] stack_id
     #   The layer stack ID.
     #   @return [String]
@@ -1812,46 +1499,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateStackRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #         region: "String", # required
-    #         vpc_id: "String",
-    #         attributes: {
-    #           "Color" => "String",
-    #         },
-    #         service_role_arn: "String", # required
-    #         default_instance_profile_arn: "String", # required
-    #         default_os: "String",
-    #         hostname_theme: "String",
-    #         default_availability_zone: "String",
-    #         default_subnet_id: "String",
-    #         custom_json: "String",
-    #         configuration_manager: {
-    #           name: "String",
-    #           version: "String",
-    #         },
-    #         chef_configuration: {
-    #           manage_berkshelf: false,
-    #           berkshelf_version: "String",
-    #         },
-    #         use_custom_cookbooks: false,
-    #         use_opsworks_security_groups: false,
-    #         custom_cookbooks_source: {
-    #           type: "git", # accepts git, svn, archive, s3
-    #           url: "String",
-    #           username: "String",
-    #           password: "String",
-    #           ssh_key: "String",
-    #           revision: "String",
-    #         },
-    #         default_ssh_key_name: "String",
-    #         default_root_device_type: "ebs", # accepts ebs, instance-store
-    #         agent_version: "String",
-    #       }
-    #
     # @!attribute [rw] name
     #   The stack name.
     #   @return [String]
@@ -2212,16 +1859,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateUserProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         iam_user_arn: "String", # required
-    #         ssh_username: "String",
-    #         ssh_public_key: "String",
-    #         allow_self_management: false,
-    #       }
-    #
     # @!attribute [rw] iam_user_arn
     #   The user's IAM ARN; this can also be a federated user's ARN.
     #   @return [String]
@@ -2276,15 +1913,6 @@ module Aws::OpsWorks
 
     # Describes an app's data source.
     #
-    # @note When making an API call, you may pass DataSource
-    #   data as a hash:
-    #
-    #       {
-    #         type: "String",
-    #         arn: "String",
-    #         database_name: "String",
-    #       }
-    #
     # @!attribute [rw] type
     #   The data source's type, `AutoSelectOpsworksMysqlInstance`,
     #   `OpsworksMysqlInstance`, `RdsDbInstance`, or `None`.
@@ -2308,13 +1936,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAppRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] app_id
     #   The app ID.
     #   @return [String]
@@ -2327,15 +1948,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "String", # required
-    #         delete_elastic_ip: false,
-    #         delete_volumes: false,
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The instance ID.
     #   @return [String]
@@ -2358,13 +1970,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteLayerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         layer_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] layer_id
     #   The layer ID.
     #   @return [String]
@@ -2377,13 +1982,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteStackRequest
-    #   data as a hash:
-    #
-    #       {
-    #         stack_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] stack_id
     #   The stack ID.
     #   @return [String]
@@ -2396,13 +1994,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteUserProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         iam_user_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] iam_user_arn
     #   The user's IAM ARN. This can also be a federated user's ARN.
     #   @return [String]
@@ -2504,16 +2095,6 @@ module Aws::OpsWorks
 
     # Used to specify a stack or deployment command.
     #
-    # @note When making an API call, you may pass DeploymentCommand
-    #   data as a hash:
-    #
-    #       {
-    #         name: "install_dependencies", # required, accepts install_dependencies, update_dependencies, update_custom_cookbooks, execute_recipes, configure, setup, deploy, rollback, start, stop, restart, undeploy
-    #         args: {
-    #           "String" => ["String"],
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   Specifies the operation. You can specify only one command.
     #
@@ -2592,13 +2173,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeregisterEcsClusterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         ecs_cluster_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] ecs_cluster_arn
     #   The cluster's Amazon Resource Number (ARN).
     #   @return [String]
@@ -2611,13 +2185,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeregisterElasticIpRequest
-    #   data as a hash:
-    #
-    #       {
-    #         elastic_ip: "String", # required
-    #       }
-    #
     # @!attribute [rw] elastic_ip
     #   The Elastic IP address.
     #   @return [String]
@@ -2630,13 +2197,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeregisterInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The instance ID.
     #   @return [String]
@@ -2649,13 +2209,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeregisterRdsDbInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rds_db_instance_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] rds_db_instance_arn
     #   The Amazon RDS instance's ARN.
     #   @return [String]
@@ -2668,13 +2221,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeregisterVolumeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         volume_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] volume_id
     #   The AWS OpsWorks Stacks volume ID, which is the GUID that AWS
     #   OpsWorks Stacks assigned to the instance when you registered the
@@ -2689,17 +2235,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAgentVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         stack_id: "String",
-    #         configuration_manager: {
-    #           name: "String",
-    #           version: "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] stack_id
     #   The stack ID.
     #   @return [String]
@@ -2733,14 +2268,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAppsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         stack_id: "String",
-    #         app_ids: ["String"],
-    #       }
-    #
     # @!attribute [rw] stack_id
     #   The app stack ID. If you use this parameter, `DescribeApps` returns
     #   a description of the apps in the specified stack.
@@ -2775,15 +2302,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeCommandsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         deployment_id: "String",
-    #         instance_id: "String",
-    #         command_ids: ["String"],
-    #       }
-    #
     # @!attribute [rw] deployment_id
     #   The deployment ID. If you include this parameter, `DescribeCommands`
     #   returns a description of the commands associated with the specified
@@ -2827,15 +2345,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDeploymentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         stack_id: "String",
-    #         app_id: "String",
-    #         deployment_ids: ["String"],
-    #       }
-    #
     # @!attribute [rw] stack_id
     #   The stack ID. If you include this parameter, the command returns a
     #   description of the commands associated with the specified stack.
@@ -2877,16 +2386,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEcsClustersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         ecs_cluster_arns: ["String"],
-    #         stack_id: "String",
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] ecs_cluster_arns
     #   A list of ARNs, one for each cluster to be described.
     #   @return [Array<String>]
@@ -2948,15 +2447,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeElasticIpsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "String",
-    #         stack_id: "String",
-    #         ips: ["String"],
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The instance ID. If you include this parameter, `DescribeElasticIps`
     #   returns a description of the Elastic IP addresses associated with
@@ -3001,14 +2491,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeElasticLoadBalancersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         stack_id: "String",
-    #         layer_ids: ["String"],
-    #       }
-    #
     # @!attribute [rw] stack_id
     #   A stack ID. The action describes the stack's Elastic Load Balancing
     #   instances.
@@ -3043,15 +2525,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeInstancesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         stack_id: "String",
-    #         layer_id: "String",
-    #         instance_ids: ["String"],
-    #       }
-    #
     # @!attribute [rw] stack_id
     #   A stack ID. If you use this parameter, `DescribeInstances` returns
     #   descriptions of the instances associated with the specified stack.
@@ -3092,14 +2565,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeLayersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         stack_id: "String",
-    #         layer_ids: ["String"],
-    #       }
-    #
     # @!attribute [rw] stack_id
     #   The stack ID.
     #   @return [String]
@@ -3133,13 +2598,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeLoadBasedAutoScalingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         layer_ids: ["String"], # required
-    #       }
-    #
     # @!attribute [rw] layer_ids
     #   An array of layer IDs.
     #   @return [Array<String>]
@@ -3196,14 +2654,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribePermissionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         iam_user_arn: "String",
-    #         stack_id: "String",
-    #       }
-    #
     # @!attribute [rw] iam_user_arn
     #   The user's IAM ARN. This can also be a federated user's ARN. For
     #   more information about IAM ARNs, see [Using Identifiers][1].
@@ -3253,15 +2703,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeRaidArraysRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "String",
-    #         stack_id: "String",
-    #         raid_array_ids: ["String"],
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The instance ID. If you use this parameter, `DescribeRaidArrays`
     #   returns descriptions of the RAID arrays associated with the
@@ -3302,14 +2743,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeRdsDbInstancesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         stack_id: "String", # required
-    #         rds_db_instance_arns: ["String"],
-    #       }
-    #
     # @!attribute [rw] stack_id
     #   The ID of the stack with which the instances are registered. The
     #   operation returns descriptions of all registered Amazon RDS
@@ -3343,15 +2776,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeServiceErrorsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         stack_id: "String",
-    #         instance_id: "String",
-    #         service_error_ids: ["String"],
-    #       }
-    #
     # @!attribute [rw] stack_id
     #   The stack ID. If you use this parameter, `DescribeServiceErrors`
     #   returns descriptions of the errors associated with the specified
@@ -3395,13 +2819,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeStackProvisioningParametersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         stack_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] stack_id
     #   The stack ID.
     #   @return [String]
@@ -3434,13 +2851,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeStackSummaryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         stack_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] stack_id
     #   The stack ID.
     #   @return [String]
@@ -3467,13 +2877,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeStacksRequest
-    #   data as a hash:
-    #
-    #       {
-    #         stack_ids: ["String"],
-    #       }
-    #
     # @!attribute [rw] stack_ids
     #   An array of stack IDs that specify the stacks to be described. If
     #   you omit this parameter, `DescribeStacks` returns a description of
@@ -3502,13 +2905,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeTimeBasedAutoScalingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_ids: ["String"], # required
-    #       }
-    #
     # @!attribute [rw] instance_ids
     #   An array of instance IDs.
     #   @return [Array<String>]
@@ -3536,13 +2932,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeUserProfilesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         iam_user_arns: ["String"],
-    #       }
-    #
     # @!attribute [rw] iam_user_arns
     #   An array of IAM or federated user ARNs that identify the users to be
     #   described.
@@ -3570,16 +2959,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeVolumesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "String",
-    #         stack_id: "String",
-    #         raid_array_id: "String",
-    #         volume_ids: ["String"],
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The instance ID. If you use this parameter, `DescribeVolumes`
     #   returns descriptions of the volumes associated with the specified
@@ -3628,14 +3007,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DetachElasticLoadBalancerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         elastic_load_balancer_name: "String", # required
-    #         layer_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] elastic_load_balancer_name
     #   The Elastic Load Balancing instance's name.
     #   @return [String]
@@ -3654,13 +3025,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateElasticIpRequest
-    #   data as a hash:
-    #
-    #       {
-    #         elastic_ip: "String", # required
-    #       }
-    #
     # @!attribute [rw] elastic_ip
     #   The Elastic IP address.
     #   @return [String]
@@ -3679,17 +3043,6 @@ module Aws::OpsWorks
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EbsBlockDevice.html
-    #
-    # @note When making an API call, you may pass EbsBlockDevice
-    #   data as a hash:
-    #
-    #       {
-    #         snapshot_id: "String",
-    #         iops: 1,
-    #         volume_size: 1,
-    #         volume_type: "gp2", # accepts gp2, io1, standard
-    #         delete_on_termination: false,
-    #       }
     #
     # @!attribute [rw] snapshot_id
     #   The snapshot ID.
@@ -3867,15 +3220,6 @@ module Aws::OpsWorks
 
     # Represents an app's environment variable.
     #
-    # @note When making an API call, you may pass EnvironmentVariable
-    #   data as a hash:
-    #
-    #       {
-    #         key: "String", # required
-    #         value: "String", # required
-    #         secure: false,
-    #       }
-    #
     # @!attribute [rw] key
     #   (Required) The environment variable's name, which can consist of up
     #   to 64 characters and must be specified. The name can contain upper-
@@ -3907,13 +3251,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetHostnameSuggestionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         layer_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] layer_id
     #   The layer ID.
     #   @return [String]
@@ -3945,14 +3282,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GrantAccessRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "String", # required
-    #         valid_for_in_minutes: 1,
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The instance's AWS OpsWorks Stacks ID.
     #   @return [String]
@@ -4281,14 +3610,6 @@ module Aws::OpsWorks
     #
     # [1]: https://docs.aws.amazon.com/sdkfornet/latest/apidocs/Index.html
     #
-    # @note When making an API call, you may pass InstanceIdentity
-    #   data as a hash:
-    #
-    #       {
-    #         document: "String",
-    #         signature: "String",
-    #       }
-    #
     # @!attribute [rw] document
     #   A JSON document that contains the metadata.
     #   @return [String]
@@ -4595,16 +3916,6 @@ module Aws::OpsWorks
 
     # Specifies the lifecycle event configuration
     #
-    # @note When making an API call, you may pass LifecycleEventConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         shutdown: {
-    #           execution_timeout: 1,
-    #           delay_until_elb_connections_drained: false,
-    #         },
-    #       }
-    #
     # @!attribute [rw] shutdown
     #   A `ShutdownEventConfiguration` object that specifies the Shutdown
     #   event configuration.
@@ -4618,15 +3929,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The stack or layer's Amazon Resource Number (ARN).
     #   @return [String]
@@ -4977,13 +4279,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RebootInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The instance ID.
     #   @return [String]
@@ -5010,17 +4305,6 @@ module Aws::OpsWorks
     # recipe's file name without the .rb extension. For example:
     # phpapp2::dbsetup specifies the dbsetup.rb recipe in the repository's
     # phpapp2 folder.
-    #
-    # @note When making an API call, you may pass Recipes
-    #   data as a hash:
-    #
-    #       {
-    #         setup: ["String"],
-    #         configure: ["String"],
-    #         deploy: ["String"],
-    #         undeploy: ["String"],
-    #         shutdown: ["String"],
-    #       }
     #
     # @!attribute [rw] setup
     #   An array of custom recipe names to be run following a `setup` event.
@@ -5058,14 +4342,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RegisterEcsClusterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         ecs_cluster_arn: "String", # required
-    #         stack_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] ecs_cluster_arn
     #   The cluster's ARN.
     #   @return [String]
@@ -5097,14 +4373,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RegisterElasticIpRequest
-    #   data as a hash:
-    #
-    #       {
-    #         elastic_ip: "String", # required
-    #         stack_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] elastic_ip
     #   The Elastic IP address.
     #   @return [String]
@@ -5136,22 +4404,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RegisterInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         stack_id: "String", # required
-    #         hostname: "String",
-    #         public_ip: "String",
-    #         private_ip: "String",
-    #         rsa_public_key: "String",
-    #         rsa_public_key_fingerprint: "String",
-    #         instance_identity: {
-    #           document: "String",
-    #           signature: "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] stack_id
     #   The ID of the stack that the instance is to be registered with.
     #   @return [String]
@@ -5209,16 +4461,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RegisterRdsDbInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         stack_id: "String", # required
-    #         rds_db_instance_arn: "String", # required
-    #         db_user: "String", # required
-    #         db_password: "String", # required
-    #       }
-    #
     # @!attribute [rw] stack_id
     #   The stack ID.
     #   @return [String]
@@ -5246,14 +4488,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RegisterVolumeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         ec2_volume_id: "String",
-    #         stack_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] ec2_volume_id
     #   The Amazon EBS volume ID.
     #   @return [String]
@@ -5391,32 +4625,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SetLoadBasedAutoScalingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         layer_id: "String", # required
-    #         enable: false,
-    #         up_scaling: {
-    #           instance_count: 1,
-    #           thresholds_wait_time: 1,
-    #           ignore_metrics_time: 1,
-    #           cpu_threshold: 1.0,
-    #           memory_threshold: 1.0,
-    #           load_threshold: 1.0,
-    #           alarms: ["String"],
-    #         },
-    #         down_scaling: {
-    #           instance_count: 1,
-    #           thresholds_wait_time: 1,
-    #           ignore_metrics_time: 1,
-    #           cpu_threshold: 1.0,
-    #           memory_threshold: 1.0,
-    #           load_threshold: 1.0,
-    #           alarms: ["String"],
-    #         },
-    #       }
-    #
     # @!attribute [rw] layer_id
     #   The layer ID.
     #   @return [String]
@@ -5450,17 +4658,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SetPermissionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         stack_id: "String", # required
-    #         iam_user_arn: "String", # required
-    #         allow_ssh: false,
-    #         allow_sudo: false,
-    #         level: "String",
-    #       }
-    #
     # @!attribute [rw] stack_id
     #   The stack ID.
     #   @return [String]
@@ -5511,36 +4708,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SetTimeBasedAutoScalingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "String", # required
-    #         auto_scaling_schedule: {
-    #           monday: {
-    #             "Hour" => "Switch",
-    #           },
-    #           tuesday: {
-    #             "Hour" => "Switch",
-    #           },
-    #           wednesday: {
-    #             "Hour" => "Switch",
-    #           },
-    #           thursday: {
-    #             "Hour" => "Switch",
-    #           },
-    #           friday: {
-    #             "Hour" => "Switch",
-    #           },
-    #           saturday: {
-    #             "Hour" => "Switch",
-    #           },
-    #           sunday: {
-    #             "Hour" => "Switch",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The instance ID.
     #   @return [String]
@@ -5559,14 +4726,6 @@ module Aws::OpsWorks
     end
 
     # The Shutdown event configuration.
-    #
-    # @note When making an API call, you may pass ShutdownEventConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         execution_timeout: 1,
-    #         delay_until_elb_connections_drained: false,
-    #       }
     #
     # @!attribute [rw] execution_timeout
     #   The time, in seconds, that AWS OpsWorks Stacks will wait after
@@ -5599,18 +4758,6 @@ module Aws::OpsWorks
     #
     # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html
     # [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html
-    #
-    # @note When making an API call, you may pass Source
-    #   data as a hash:
-    #
-    #       {
-    #         type: "git", # accepts git, svn, archive, s3
-    #         url: "String",
-    #         username: "String",
-    #         password: "String",
-    #         ssh_key: "String",
-    #         revision: "String",
-    #       }
     #
     # @!attribute [rw] type
     #   The repository type.
@@ -5681,15 +4828,6 @@ module Aws::OpsWorks
     end
 
     # Describes an app's SSL configuration.
-    #
-    # @note When making an API call, you may pass SslConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         certificate: "String", # required
-    #         private_key: "String", # required
-    #         chain: "String",
-    #       }
     #
     # @!attribute [rw] certificate
     #   The contents of the certificate's domain.crt file.
@@ -5888,14 +5026,6 @@ module Aws::OpsWorks
 
     # Describes the configuration manager.
     #
-    # @note When making an API call, you may pass StackConfigurationManager
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String",
-    #         version: "String",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name. This parameter must be set to "Chef".
     #   @return [String]
@@ -5955,13 +5085,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The instance ID.
     #   @return [String]
@@ -5974,13 +5097,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartStackRequest
-    #   data as a hash:
-    #
-    #       {
-    #         stack_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] stack_id
     #   The stack ID.
     #   @return [String]
@@ -5993,14 +5109,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "String", # required
-    #         force: false,
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The instance ID.
     #   @return [String]
@@ -6024,13 +5132,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopStackRequest
-    #   data as a hash:
-    #
-    #       {
-    #         stack_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] stack_id
     #   The stack ID.
     #   @return [String]
@@ -6043,16 +5144,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The stack or layer's Amazon Resource Number (ARN).
     #   @return [String]
@@ -6138,13 +5229,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UnassignInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The instance ID.
     #   @return [String]
@@ -6157,13 +5241,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UnassignVolumeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         volume_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] volume_id
     #   The volume ID.
     #   @return [String]
@@ -6176,14 +5253,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The stack or layer's Amazon Resource Number (ARN).
     #   @return [String]
@@ -6201,48 +5270,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateAppRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_id: "String", # required
-    #         name: "String",
-    #         description: "String",
-    #         data_sources: [
-    #           {
-    #             type: "String",
-    #             arn: "String",
-    #             database_name: "String",
-    #           },
-    #         ],
-    #         type: "aws-flow-ruby", # accepts aws-flow-ruby, java, rails, php, nodejs, static, other
-    #         app_source: {
-    #           type: "git", # accepts git, svn, archive, s3
-    #           url: "String",
-    #           username: "String",
-    #           password: "String",
-    #           ssh_key: "String",
-    #           revision: "String",
-    #         },
-    #         domains: ["String"],
-    #         enable_ssl: false,
-    #         ssl_configuration: {
-    #           certificate: "String", # required
-    #           private_key: "String", # required
-    #           chain: "String",
-    #         },
-    #         attributes: {
-    #           "DocumentRoot" => "String",
-    #         },
-    #         environment: [
-    #           {
-    #             key: "String", # required
-    #             value: "String", # required
-    #             secure: false,
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] app_id
     #   The app ID.
     #   @return [String]
@@ -6326,14 +5353,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateElasticIpRequest
-    #   data as a hash:
-    #
-    #       {
-    #         elastic_ip: "String", # required
-    #         name: "String",
-    #       }
-    #
     # @!attribute [rw] elastic_ip
     #   The IP address for which you want to update the name.
     #   @return [String]
@@ -6351,24 +5370,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "String", # required
-    #         layer_ids: ["String"],
-    #         instance_type: "String",
-    #         auto_scaling_type: "load", # accepts load, timer
-    #         hostname: "String",
-    #         os: "String",
-    #         ami_id: "String",
-    #         ssh_key_name: "String",
-    #         architecture: "x86_64", # accepts x86_64, i386
-    #         install_updates_on_boot: false,
-    #         ebs_optimized: false,
-    #         agent_version: "String",
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The instance ID.
     #   @return [String]
@@ -6524,69 +5525,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateLayerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         layer_id: "String", # required
-    #         name: "String",
-    #         shortname: "String",
-    #         attributes: {
-    #           "EcsClusterArn" => "String",
-    #         },
-    #         cloud_watch_logs_configuration: {
-    #           enabled: false,
-    #           log_streams: [
-    #             {
-    #               log_group_name: "String",
-    #               datetime_format: "String",
-    #               time_zone: "LOCAL", # accepts LOCAL, UTC
-    #               file: "String",
-    #               file_fingerprint_lines: "String",
-    #               multi_line_start_pattern: "String",
-    #               initial_position: "start_of_file", # accepts start_of_file, end_of_file
-    #               encoding: "ascii", # accepts ascii, big5, big5hkscs, cp037, cp424, cp437, cp500, cp720, cp737, cp775, cp850, cp852, cp855, cp856, cp857, cp858, cp860, cp861, cp862, cp863, cp864, cp865, cp866, cp869, cp874, cp875, cp932, cp949, cp950, cp1006, cp1026, cp1140, cp1250, cp1251, cp1252, cp1253, cp1254, cp1255, cp1256, cp1257, cp1258, euc_jp, euc_jis_2004, euc_jisx0213, euc_kr, gb2312, gbk, gb18030, hz, iso2022_jp, iso2022_jp_1, iso2022_jp_2, iso2022_jp_2004, iso2022_jp_3, iso2022_jp_ext, iso2022_kr, latin_1, iso8859_2, iso8859_3, iso8859_4, iso8859_5, iso8859_6, iso8859_7, iso8859_8, iso8859_9, iso8859_10, iso8859_13, iso8859_14, iso8859_15, iso8859_16, johab, koi8_r, koi8_u, mac_cyrillic, mac_greek, mac_iceland, mac_latin2, mac_roman, mac_turkish, ptcp154, shift_jis, shift_jis_2004, shift_jisx0213, utf_32, utf_32_be, utf_32_le, utf_16, utf_16_be, utf_16_le, utf_7, utf_8, utf_8_sig
-    #               buffer_duration: 1,
-    #               batch_count: 1,
-    #               batch_size: 1,
-    #             },
-    #           ],
-    #         },
-    #         custom_instance_profile_arn: "String",
-    #         custom_json: "String",
-    #         custom_security_group_ids: ["String"],
-    #         packages: ["String"],
-    #         volume_configurations: [
-    #           {
-    #             mount_point: "String", # required
-    #             raid_level: 1,
-    #             number_of_disks: 1, # required
-    #             size: 1, # required
-    #             volume_type: "String",
-    #             iops: 1,
-    #             encrypted: false,
-    #           },
-    #         ],
-    #         enable_auto_healing: false,
-    #         auto_assign_elastic_ips: false,
-    #         auto_assign_public_ips: false,
-    #         custom_recipes: {
-    #           setup: ["String"],
-    #           configure: ["String"],
-    #           deploy: ["String"],
-    #           undeploy: ["String"],
-    #           shutdown: ["String"],
-    #         },
-    #         install_updates_on_boot: false,
-    #         use_ebs_optimized_instances: false,
-    #         lifecycle_event_configuration: {
-    #           shutdown: {
-    #             execution_timeout: 1,
-    #             delay_until_elb_connections_drained: false,
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] layer_id
     #   The layer ID.
     #   @return [String]
@@ -6729,13 +5667,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateMyUserProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         ssh_public_key: "String",
-    #       }
-    #
     # @!attribute [rw] ssh_public_key
     #   The user's SSH public key.
     #   @return [String]
@@ -6748,15 +5679,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateRdsDbInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rds_db_instance_arn: "String", # required
-    #         db_user: "String",
-    #         db_password: "String",
-    #       }
-    #
     # @!attribute [rw] rds_db_instance_arn
     #   The Amazon RDS instance's ARN.
     #   @return [String]
@@ -6779,45 +5701,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateStackRequest
-    #   data as a hash:
-    #
-    #       {
-    #         stack_id: "String", # required
-    #         name: "String",
-    #         attributes: {
-    #           "Color" => "String",
-    #         },
-    #         service_role_arn: "String",
-    #         default_instance_profile_arn: "String",
-    #         default_os: "String",
-    #         hostname_theme: "String",
-    #         default_availability_zone: "String",
-    #         default_subnet_id: "String",
-    #         custom_json: "String",
-    #         configuration_manager: {
-    #           name: "String",
-    #           version: "String",
-    #         },
-    #         chef_configuration: {
-    #           manage_berkshelf: false,
-    #           berkshelf_version: "String",
-    #         },
-    #         use_custom_cookbooks: false,
-    #         custom_cookbooks_source: {
-    #           type: "git", # accepts git, svn, archive, s3
-    #           url: "String",
-    #           username: "String",
-    #           password: "String",
-    #           ssh_key: "String",
-    #           revision: "String",
-    #         },
-    #         default_ssh_key_name: "String",
-    #         default_root_device_type: "ebs", # accepts ebs, instance-store
-    #         use_opsworks_security_groups: false,
-    #         agent_version: "String",
-    #       }
-    #
     # @!attribute [rw] stack_id
     #   The stack ID.
     #   @return [String]
@@ -7091,16 +5974,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateUserProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         iam_user_arn: "String", # required
-    #         ssh_username: "String",
-    #         ssh_public_key: "String",
-    #         allow_self_management: false,
-    #       }
-    #
     # @!attribute [rw] iam_user_arn
     #   The user IAM ARN. This can also be a federated user's ARN.
     #   @return [String]
@@ -7139,15 +6012,6 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateVolumeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         volume_id: "String", # required
-    #         name: "String",
-    #         mount_point: "String",
-    #       }
-    #
     # @!attribute [rw] volume_id
     #   The volume ID.
     #   @return [String]
@@ -7345,19 +6209,6 @@ module Aws::OpsWorks
 
     # Describes an Amazon EBS volume configuration.
     #
-    # @note When making an API call, you may pass VolumeConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         mount_point: "String", # required
-    #         raid_level: 1,
-    #         number_of_disks: 1, # required
-    #         size: 1, # required
-    #         volume_type: "String",
-    #         iops: 1,
-    #         encrypted: false,
-    #       }
-    #
     # @!attribute [rw] mount_point
     #   The volume mount point. For example "/dev/sdh".
     #   @return [String]
@@ -7449,33 +6300,6 @@ module Aws::OpsWorks
     # the day.
     #
     # ` \{ "12":"on", "13":"on", "14":"on", "15":"on" \} `
-    #
-    # @note When making an API call, you may pass WeeklyAutoScalingSchedule
-    #   data as a hash:
-    #
-    #       {
-    #         monday: {
-    #           "Hour" => "Switch",
-    #         },
-    #         tuesday: {
-    #           "Hour" => "Switch",
-    #         },
-    #         wednesday: {
-    #           "Hour" => "Switch",
-    #         },
-    #         thursday: {
-    #           "Hour" => "Switch",
-    #         },
-    #         friday: {
-    #           "Hour" => "Switch",
-    #         },
-    #         saturday: {
-    #           "Hour" => "Switch",
-    #         },
-    #         sunday: {
-    #           "Hour" => "Switch",
-    #         },
-    #       }
     #
     # @!attribute [rw] monday
     #   The schedule for Monday.

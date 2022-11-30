@@ -17,32 +17,6 @@ module Aws::ACMPCA
     # name (DN). A DN is a sequence of relative distinguished names (RDNs).
     # The RDNs are separated by commas in the certificate.
     #
-    # @note When making an API call, you may pass ASN1Subject
-    #   data as a hash:
-    #
-    #       {
-    #         country: "CountryCodeString",
-    #         organization: "String64",
-    #         organizational_unit: "String64",
-    #         distinguished_name_qualifier: "ASN1PrintableString64",
-    #         state: "String128",
-    #         common_name: "String64",
-    #         serial_number: "ASN1PrintableString64",
-    #         locality: "String128",
-    #         title: "String64",
-    #         surname: "String40",
-    #         given_name: "String16",
-    #         initials: "String5",
-    #         pseudonym: "String128",
-    #         generation_qualifier: "String3",
-    #         custom_attributes: [
-    #           {
-    #             object_identifier: "CustomObjectIdentifier", # required
-    #             value: "String1To256", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] country
     #   Two-digit code that specifies the country in which the certificate
     #   subject located.
@@ -161,53 +135,6 @@ module Aws::ACMPCA
     #
     # [1]: https://datatracker.ietf.org/doc/html/rfc5280
     #
-    # @note When making an API call, you may pass AccessDescription
-    #   data as a hash:
-    #
-    #       {
-    #         access_method: { # required
-    #           custom_object_identifier: "CustomObjectIdentifier",
-    #           access_method_type: "CA_REPOSITORY", # accepts CA_REPOSITORY, RESOURCE_PKI_MANIFEST, RESOURCE_PKI_NOTIFY
-    #         },
-    #         access_location: { # required
-    #           other_name: {
-    #             type_id: "CustomObjectIdentifier", # required
-    #             value: "String256", # required
-    #           },
-    #           rfc_822_name: "String256",
-    #           dns_name: "String253",
-    #           directory_name: {
-    #             country: "CountryCodeString",
-    #             organization: "String64",
-    #             organizational_unit: "String64",
-    #             distinguished_name_qualifier: "ASN1PrintableString64",
-    #             state: "String128",
-    #             common_name: "String64",
-    #             serial_number: "ASN1PrintableString64",
-    #             locality: "String128",
-    #             title: "String64",
-    #             surname: "String40",
-    #             given_name: "String16",
-    #             initials: "String5",
-    #             pseudonym: "String128",
-    #             generation_qualifier: "String3",
-    #             custom_attributes: [
-    #               {
-    #                 object_identifier: "CustomObjectIdentifier", # required
-    #                 value: "String1To256", # required
-    #               },
-    #             ],
-    #           },
-    #           edi_party_name: {
-    #             party_name: "String256", # required
-    #             name_assigner: "String256",
-    #           },
-    #           uniform_resource_identifier: "String253",
-    #           ip_address: "String39",
-    #           registered_id: "CustomObjectIdentifier",
-    #         },
-    #       }
-    #
     # @!attribute [rw] access_method
     #   The type and format of `AccessDescription` information.
     #   @return [Types::AccessMethod]
@@ -228,14 +155,6 @@ module Aws::ACMPCA
     # Describes the type and format of extension access. Only one of
     # `CustomObjectIdentifier` or `AccessMethodType` may be provided.
     # Providing both results in `InvalidArgsException`.
-    #
-    # @note When making an API call, you may pass AccessMethod
-    #   data as a hash:
-    #
-    #       {
-    #         custom_object_identifier: "CustomObjectIdentifier",
-    #         access_method_type: "CA_REPOSITORY", # accepts CA_REPOSITORY, RESOURCE_PKI_MANIFEST, RESOURCE_PKI_NOTIFY
-    #       }
     #
     # @!attribute [rw] custom_object_identifier
     #   An object identifier (OID) specifying the `AccessMethod`. The OID
@@ -271,112 +190,6 @@ module Aws::ACMPCA
     #
     #
     # [1]: https://docs.aws.amazon.com/acm-pca/latest/userguide/UsingTemplates.html#template-order-of-operations
-    #
-    # @note When making an API call, you may pass ApiPassthrough
-    #   data as a hash:
-    #
-    #       {
-    #         extensions: {
-    #           certificate_policies: [
-    #             {
-    #               cert_policy_id: "CustomObjectIdentifier", # required
-    #               policy_qualifiers: [
-    #                 {
-    #                   policy_qualifier_id: "CPS", # required, accepts CPS
-    #                   qualifier: { # required
-    #                     cps_uri: "String256", # required
-    #                   },
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #           extended_key_usage: [
-    #             {
-    #               extended_key_usage_type: "SERVER_AUTH", # accepts SERVER_AUTH, CLIENT_AUTH, CODE_SIGNING, EMAIL_PROTECTION, TIME_STAMPING, OCSP_SIGNING, SMART_CARD_LOGIN, DOCUMENT_SIGNING, CERTIFICATE_TRANSPARENCY
-    #               extended_key_usage_object_identifier: "CustomObjectIdentifier",
-    #             },
-    #           ],
-    #           key_usage: {
-    #             digital_signature: false,
-    #             non_repudiation: false,
-    #             key_encipherment: false,
-    #             data_encipherment: false,
-    #             key_agreement: false,
-    #             key_cert_sign: false,
-    #             crl_sign: false,
-    #             encipher_only: false,
-    #             decipher_only: false,
-    #           },
-    #           subject_alternative_names: [
-    #             {
-    #               other_name: {
-    #                 type_id: "CustomObjectIdentifier", # required
-    #                 value: "String256", # required
-    #               },
-    #               rfc_822_name: "String256",
-    #               dns_name: "String253",
-    #               directory_name: {
-    #                 country: "CountryCodeString",
-    #                 organization: "String64",
-    #                 organizational_unit: "String64",
-    #                 distinguished_name_qualifier: "ASN1PrintableString64",
-    #                 state: "String128",
-    #                 common_name: "String64",
-    #                 serial_number: "ASN1PrintableString64",
-    #                 locality: "String128",
-    #                 title: "String64",
-    #                 surname: "String40",
-    #                 given_name: "String16",
-    #                 initials: "String5",
-    #                 pseudonym: "String128",
-    #                 generation_qualifier: "String3",
-    #                 custom_attributes: [
-    #                   {
-    #                     object_identifier: "CustomObjectIdentifier", # required
-    #                     value: "String1To256", # required
-    #                   },
-    #                 ],
-    #               },
-    #               edi_party_name: {
-    #                 party_name: "String256", # required
-    #                 name_assigner: "String256",
-    #               },
-    #               uniform_resource_identifier: "String253",
-    #               ip_address: "String39",
-    #               registered_id: "CustomObjectIdentifier",
-    #             },
-    #           ],
-    #           custom_extensions: [
-    #             {
-    #               object_identifier: "CustomObjectIdentifier", # required
-    #               value: "Base64String1To4096", # required
-    #               critical: false,
-    #             },
-    #           ],
-    #         },
-    #         subject: {
-    #           country: "CountryCodeString",
-    #           organization: "String64",
-    #           organizational_unit: "String64",
-    #           distinguished_name_qualifier: "ASN1PrintableString64",
-    #           state: "String128",
-    #           common_name: "String64",
-    #           serial_number: "ASN1PrintableString64",
-    #           locality: "String128",
-    #           title: "String64",
-    #           surname: "String40",
-    #           given_name: "String16",
-    #           initials: "String5",
-    #           pseudonym: "String128",
-    #           generation_qualifier: "String3",
-    #           custom_attributes: [
-    #             {
-    #               object_identifier: "CustomObjectIdentifier", # required
-    #               value: "String1To256", # required
-    #             },
-    #           ],
-    #         },
-    #       }
     #
     # @!attribute [rw] extensions
     #   Specifies X.509 extension information for a certificate.
@@ -539,94 +352,6 @@ module Aws::ACMPCA
     #
     # [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html
     #
-    # @note When making an API call, you may pass CertificateAuthorityConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         key_algorithm: "RSA_2048", # required, accepts RSA_2048, RSA_4096, EC_prime256v1, EC_secp384r1
-    #         signing_algorithm: "SHA256WITHECDSA", # required, accepts SHA256WITHECDSA, SHA384WITHECDSA, SHA512WITHECDSA, SHA256WITHRSA, SHA384WITHRSA, SHA512WITHRSA
-    #         subject: { # required
-    #           country: "CountryCodeString",
-    #           organization: "String64",
-    #           organizational_unit: "String64",
-    #           distinguished_name_qualifier: "ASN1PrintableString64",
-    #           state: "String128",
-    #           common_name: "String64",
-    #           serial_number: "ASN1PrintableString64",
-    #           locality: "String128",
-    #           title: "String64",
-    #           surname: "String40",
-    #           given_name: "String16",
-    #           initials: "String5",
-    #           pseudonym: "String128",
-    #           generation_qualifier: "String3",
-    #           custom_attributes: [
-    #             {
-    #               object_identifier: "CustomObjectIdentifier", # required
-    #               value: "String1To256", # required
-    #             },
-    #           ],
-    #         },
-    #         csr_extensions: {
-    #           key_usage: {
-    #             digital_signature: false,
-    #             non_repudiation: false,
-    #             key_encipherment: false,
-    #             data_encipherment: false,
-    #             key_agreement: false,
-    #             key_cert_sign: false,
-    #             crl_sign: false,
-    #             encipher_only: false,
-    #             decipher_only: false,
-    #           },
-    #           subject_information_access: [
-    #             {
-    #               access_method: { # required
-    #                 custom_object_identifier: "CustomObjectIdentifier",
-    #                 access_method_type: "CA_REPOSITORY", # accepts CA_REPOSITORY, RESOURCE_PKI_MANIFEST, RESOURCE_PKI_NOTIFY
-    #               },
-    #               access_location: { # required
-    #                 other_name: {
-    #                   type_id: "CustomObjectIdentifier", # required
-    #                   value: "String256", # required
-    #                 },
-    #                 rfc_822_name: "String256",
-    #                 dns_name: "String253",
-    #                 directory_name: {
-    #                   country: "CountryCodeString",
-    #                   organization: "String64",
-    #                   organizational_unit: "String64",
-    #                   distinguished_name_qualifier: "ASN1PrintableString64",
-    #                   state: "String128",
-    #                   common_name: "String64",
-    #                   serial_number: "ASN1PrintableString64",
-    #                   locality: "String128",
-    #                   title: "String64",
-    #                   surname: "String40",
-    #                   given_name: "String16",
-    #                   initials: "String5",
-    #                   pseudonym: "String128",
-    #                   generation_qualifier: "String3",
-    #                   custom_attributes: [
-    #                     {
-    #                       object_identifier: "CustomObjectIdentifier", # required
-    #                       value: "String1To256", # required
-    #                     },
-    #                   ],
-    #                 },
-    #                 edi_party_name: {
-    #                   party_name: "String256", # required
-    #                   name_assigner: "String256",
-    #                 },
-    #                 uniform_resource_identifier: "String253",
-    #                 ip_address: "String39",
-    #                 registered_id: "CustomObjectIdentifier",
-    #               },
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] key_algorithm
     #   Type of the public key algorithm and size, in bits, of the key pair
     #   that your CA creates when it issues a certificate. When you create a
@@ -690,15 +415,6 @@ module Aws::ACMPCA
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateCertificateAuthorityAuditReportRequest
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_authority_arn: "Arn", # required
-    #         s3_bucket_name: "S3BucketName", # required
-    #         audit_report_response_format: "JSON", # required, accepts JSON, CSV
-    #       }
-    #
     # @!attribute [rw] certificate_authority_arn
     #   The Amazon Resource Name (ARN) of the CA to be audited. This is of
     #   the form:
@@ -744,119 +460,6 @@ module Aws::ACMPCA
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateCertificateAuthorityRequest
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_authority_configuration: { # required
-    #           key_algorithm: "RSA_2048", # required, accepts RSA_2048, RSA_4096, EC_prime256v1, EC_secp384r1
-    #           signing_algorithm: "SHA256WITHECDSA", # required, accepts SHA256WITHECDSA, SHA384WITHECDSA, SHA512WITHECDSA, SHA256WITHRSA, SHA384WITHRSA, SHA512WITHRSA
-    #           subject: { # required
-    #             country: "CountryCodeString",
-    #             organization: "String64",
-    #             organizational_unit: "String64",
-    #             distinguished_name_qualifier: "ASN1PrintableString64",
-    #             state: "String128",
-    #             common_name: "String64",
-    #             serial_number: "ASN1PrintableString64",
-    #             locality: "String128",
-    #             title: "String64",
-    #             surname: "String40",
-    #             given_name: "String16",
-    #             initials: "String5",
-    #             pseudonym: "String128",
-    #             generation_qualifier: "String3",
-    #             custom_attributes: [
-    #               {
-    #                 object_identifier: "CustomObjectIdentifier", # required
-    #                 value: "String1To256", # required
-    #               },
-    #             ],
-    #           },
-    #           csr_extensions: {
-    #             key_usage: {
-    #               digital_signature: false,
-    #               non_repudiation: false,
-    #               key_encipherment: false,
-    #               data_encipherment: false,
-    #               key_agreement: false,
-    #               key_cert_sign: false,
-    #               crl_sign: false,
-    #               encipher_only: false,
-    #               decipher_only: false,
-    #             },
-    #             subject_information_access: [
-    #               {
-    #                 access_method: { # required
-    #                   custom_object_identifier: "CustomObjectIdentifier",
-    #                   access_method_type: "CA_REPOSITORY", # accepts CA_REPOSITORY, RESOURCE_PKI_MANIFEST, RESOURCE_PKI_NOTIFY
-    #                 },
-    #                 access_location: { # required
-    #                   other_name: {
-    #                     type_id: "CustomObjectIdentifier", # required
-    #                     value: "String256", # required
-    #                   },
-    #                   rfc_822_name: "String256",
-    #                   dns_name: "String253",
-    #                   directory_name: {
-    #                     country: "CountryCodeString",
-    #                     organization: "String64",
-    #                     organizational_unit: "String64",
-    #                     distinguished_name_qualifier: "ASN1PrintableString64",
-    #                     state: "String128",
-    #                     common_name: "String64",
-    #                     serial_number: "ASN1PrintableString64",
-    #                     locality: "String128",
-    #                     title: "String64",
-    #                     surname: "String40",
-    #                     given_name: "String16",
-    #                     initials: "String5",
-    #                     pseudonym: "String128",
-    #                     generation_qualifier: "String3",
-    #                     custom_attributes: [
-    #                       {
-    #                         object_identifier: "CustomObjectIdentifier", # required
-    #                         value: "String1To256", # required
-    #                       },
-    #                     ],
-    #                   },
-    #                   edi_party_name: {
-    #                     party_name: "String256", # required
-    #                     name_assigner: "String256",
-    #                   },
-    #                   uniform_resource_identifier: "String253",
-    #                   ip_address: "String39",
-    #                   registered_id: "CustomObjectIdentifier",
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #         },
-    #         revocation_configuration: {
-    #           crl_configuration: {
-    #             enabled: false, # required
-    #             expiration_in_days: 1,
-    #             custom_cname: "String253",
-    #             s3_bucket_name: "String3To255",
-    #             s3_object_acl: "PUBLIC_READ", # accepts PUBLIC_READ, BUCKET_OWNER_FULL_CONTROL
-    #           },
-    #           ocsp_configuration: {
-    #             enabled: false, # required
-    #             ocsp_custom_cname: "String253",
-    #           },
-    #         },
-    #         certificate_authority_type: "ROOT", # required, accepts ROOT, SUBORDINATE
-    #         idempotency_token: "IdempotencyToken",
-    #         key_storage_security_standard: "FIPS_140_2_LEVEL_2_OR_HIGHER", # accepts FIPS_140_2_LEVEL_2_OR_HIGHER, FIPS_140_2_LEVEL_3_OR_HIGHER
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         usage_mode: "GENERAL_PURPOSE", # accepts GENERAL_PURPOSE, SHORT_LIVED_CERTIFICATE
-    #       }
-    #
     # @!attribute [rw] certificate_authority_configuration
     #   Name and bit size of the private key algorithm, the name of the
     #   signing algorithm, and X.500 certificate subject information.
@@ -963,16 +566,6 @@ module Aws::ACMPCA
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreatePermissionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_authority_arn: "Arn", # required
-    #         principal: "Principal", # required
-    #         source_account: "AccountId",
-    #         actions: ["IssueCertificate"], # required, accepts IssueCertificate, GetCertificate, ListPermissions
-    #       }
-    #
     # @!attribute [rw] certificate_authority_arn
     #   The Amazon Resource Name (ARN) of the CA that grants the
     #   permissions. You can find the ARN by calling the
@@ -1094,17 +687,6 @@ module Aws::ACMPCA
     # [1]: https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCreateCa.html#crl-encryption
     # [2]: https://docs.aws.amazon.com/acm-pca/latest/userguide/crl-planning.html
     #
-    # @note When making an API call, you may pass CrlConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false, # required
-    #         expiration_in_days: 1,
-    #         custom_cname: "String253",
-    #         s3_bucket_name: "String3To255",
-    #         s3_object_acl: "PUBLIC_READ", # accepts PUBLIC_READ, BUCKET_OWNER_FULL_CONTROL
-    #       }
-    #
     # @!attribute [rw] enabled
     #   Boolean value that specifies whether certificate revocation lists
     #   (CRLs) are enabled. You can use this value to enable certificate
@@ -1185,68 +767,6 @@ module Aws::ACMPCA
     # Describes the certificate extensions to be added to the certificate
     # signing request (CSR).
     #
-    # @note When making an API call, you may pass CsrExtensions
-    #   data as a hash:
-    #
-    #       {
-    #         key_usage: {
-    #           digital_signature: false,
-    #           non_repudiation: false,
-    #           key_encipherment: false,
-    #           data_encipherment: false,
-    #           key_agreement: false,
-    #           key_cert_sign: false,
-    #           crl_sign: false,
-    #           encipher_only: false,
-    #           decipher_only: false,
-    #         },
-    #         subject_information_access: [
-    #           {
-    #             access_method: { # required
-    #               custom_object_identifier: "CustomObjectIdentifier",
-    #               access_method_type: "CA_REPOSITORY", # accepts CA_REPOSITORY, RESOURCE_PKI_MANIFEST, RESOURCE_PKI_NOTIFY
-    #             },
-    #             access_location: { # required
-    #               other_name: {
-    #                 type_id: "CustomObjectIdentifier", # required
-    #                 value: "String256", # required
-    #               },
-    #               rfc_822_name: "String256",
-    #               dns_name: "String253",
-    #               directory_name: {
-    #                 country: "CountryCodeString",
-    #                 organization: "String64",
-    #                 organizational_unit: "String64",
-    #                 distinguished_name_qualifier: "ASN1PrintableString64",
-    #                 state: "String128",
-    #                 common_name: "String64",
-    #                 serial_number: "ASN1PrintableString64",
-    #                 locality: "String128",
-    #                 title: "String64",
-    #                 surname: "String40",
-    #                 given_name: "String16",
-    #                 initials: "String5",
-    #                 pseudonym: "String128",
-    #                 generation_qualifier: "String3",
-    #                 custom_attributes: [
-    #                   {
-    #                     object_identifier: "CustomObjectIdentifier", # required
-    #                     value: "String1To256", # required
-    #                   },
-    #                 ],
-    #               },
-    #               edi_party_name: {
-    #                 party_name: "String256", # required
-    #                 name_assigner: "String256",
-    #               },
-    #               uniform_resource_identifier: "String253",
-    #               ip_address: "String39",
-    #               registered_id: "CustomObjectIdentifier",
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] key_usage
     #   Indicates the purpose of the certificate and of the key contained in
     #   the certificate.
@@ -1272,14 +792,6 @@ module Aws::ACMPCA
     end
 
     # Defines the X.500 relative distinguished name (RDN).
-    #
-    # @note When making an API call, you may pass CustomAttribute
-    #   data as a hash:
-    #
-    #       {
-    #         object_identifier: "CustomObjectIdentifier", # required
-    #         value: "String1To256", # required
-    #       }
     #
     # @!attribute [rw] object_identifier
     #   Specifies the object identifier (OID) of the attribute type of the
@@ -1308,15 +820,6 @@ module Aws::ACMPCA
     #
     # [1]: https://docs.aws.amazon.com/acm-pca/latest/userguide/UsingTemplates.html#template-order-of-operations
     #
-    # @note When making an API call, you may pass CustomExtension
-    #   data as a hash:
-    #
-    #       {
-    #         object_identifier: "CustomObjectIdentifier", # required
-    #         value: "Base64String1To4096", # required
-    #         critical: false,
-    #       }
-    #
     # @!attribute [rw] object_identifier
     #   Specifies the object identifier (OID) of the X.509 extension. For
     #   more information, see the [Global OID reference database.][1]
@@ -1344,14 +847,6 @@ module Aws::ACMPCA
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteCertificateAuthorityRequest
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_authority_arn: "Arn", # required
-    #         permanent_deletion_time_in_days: 1,
-    #       }
-    #
     # @!attribute [rw] certificate_authority_arn
     #   The Amazon Resource Name (ARN) that was returned when you called
     #   [CreateCertificateAuthority][1]. This must have the following form:
@@ -1379,15 +874,6 @@ module Aws::ACMPCA
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeletePermissionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_authority_arn: "Arn", # required
-    #         principal: "Principal", # required
-    #         source_account: "AccountId",
-    #       }
-    #
     # @!attribute [rw] certificate_authority_arn
     #   The Amazon Resource Number (ARN) of the private CA that issued the
     #   permissions. You can find the CA's ARN by calling the
@@ -1422,13 +908,6 @@ module Aws::ACMPCA
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeletePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Number (ARN) of the private CA that will have
     #   its policy deleted. You can find the CA's ARN by calling the
@@ -1449,14 +928,6 @@ module Aws::ACMPCA
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeCertificateAuthorityAuditReportRequest
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_authority_arn: "Arn", # required
-    #         audit_report_id: "AuditReportId", # required
-    #       }
-    #
     # @!attribute [rw] certificate_authority_arn
     #   The Amazon Resource Name (ARN) of the private CA. This must be of
     #   the form:
@@ -1512,13 +983,6 @@ module Aws::ACMPCA
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeCertificateAuthorityRequest
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_authority_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] certificate_authority_arn
     #   The Amazon Resource Name (ARN) that was returned when you called
     #   [CreateCertificateAuthority][1]. This must be of the form:
@@ -1563,14 +1027,6 @@ module Aws::ACMPCA
     #
     # [1]: https://datatracker.ietf.org/doc/html/rfc5280
     #
-    # @note When making an API call, you may pass EdiPartyName
-    #   data as a hash:
-    #
-    #       {
-    #         party_name: "String256", # required
-    #         name_assigner: "String256",
-    #       }
-    #
     # @!attribute [rw] party_name
     #   Specifies the party name.
     #   @return [String]
@@ -1591,14 +1047,6 @@ module Aws::ACMPCA
     # Specifies additional purposes for which the certified public key may
     # be used other than basic purposes indicated in the `KeyUsage`
     # extension.
-    #
-    # @note When making an API call, you may pass ExtendedKeyUsage
-    #   data as a hash:
-    #
-    #       {
-    #         extended_key_usage_type: "SERVER_AUTH", # accepts SERVER_AUTH, CLIENT_AUTH, CODE_SIGNING, EMAIL_PROTECTION, TIME_STAMPING, OCSP_SIGNING, SMART_CARD_LOGIN, DOCUMENT_SIGNING, CERTIFICATE_TRANSPARENCY
-    #         extended_key_usage_object_identifier: "CustomObjectIdentifier",
-    #       }
     #
     # @!attribute [rw] extended_key_usage_type
     #   Specifies a standard `ExtendedKeyUsage` as defined as in [RFC
@@ -1624,88 +1072,6 @@ module Aws::ACMPCA
     end
 
     # Contains X.509 extension information for a certificate.
-    #
-    # @note When making an API call, you may pass Extensions
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_policies: [
-    #           {
-    #             cert_policy_id: "CustomObjectIdentifier", # required
-    #             policy_qualifiers: [
-    #               {
-    #                 policy_qualifier_id: "CPS", # required, accepts CPS
-    #                 qualifier: { # required
-    #                   cps_uri: "String256", # required
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         extended_key_usage: [
-    #           {
-    #             extended_key_usage_type: "SERVER_AUTH", # accepts SERVER_AUTH, CLIENT_AUTH, CODE_SIGNING, EMAIL_PROTECTION, TIME_STAMPING, OCSP_SIGNING, SMART_CARD_LOGIN, DOCUMENT_SIGNING, CERTIFICATE_TRANSPARENCY
-    #             extended_key_usage_object_identifier: "CustomObjectIdentifier",
-    #           },
-    #         ],
-    #         key_usage: {
-    #           digital_signature: false,
-    #           non_repudiation: false,
-    #           key_encipherment: false,
-    #           data_encipherment: false,
-    #           key_agreement: false,
-    #           key_cert_sign: false,
-    #           crl_sign: false,
-    #           encipher_only: false,
-    #           decipher_only: false,
-    #         },
-    #         subject_alternative_names: [
-    #           {
-    #             other_name: {
-    #               type_id: "CustomObjectIdentifier", # required
-    #               value: "String256", # required
-    #             },
-    #             rfc_822_name: "String256",
-    #             dns_name: "String253",
-    #             directory_name: {
-    #               country: "CountryCodeString",
-    #               organization: "String64",
-    #               organizational_unit: "String64",
-    #               distinguished_name_qualifier: "ASN1PrintableString64",
-    #               state: "String128",
-    #               common_name: "String64",
-    #               serial_number: "ASN1PrintableString64",
-    #               locality: "String128",
-    #               title: "String64",
-    #               surname: "String40",
-    #               given_name: "String16",
-    #               initials: "String5",
-    #               pseudonym: "String128",
-    #               generation_qualifier: "String3",
-    #               custom_attributes: [
-    #                 {
-    #                   object_identifier: "CustomObjectIdentifier", # required
-    #                   value: "String1To256", # required
-    #                 },
-    #               ],
-    #             },
-    #             edi_party_name: {
-    #               party_name: "String256", # required
-    #               name_assigner: "String256",
-    #             },
-    #             uniform_resource_identifier: "String253",
-    #             ip_address: "String39",
-    #             registered_id: "CustomObjectIdentifier",
-    #           },
-    #         ],
-    #         custom_extensions: [
-    #           {
-    #             object_identifier: "CustomObjectIdentifier", # required
-    #             value: "Base64String1To4096", # required
-    #             critical: false,
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] certificate_policies
     #   Contains a sequence of one or more policy information terms, each of
@@ -1772,47 +1138,6 @@ module Aws::ACMPCA
     #
     # [1]: https://datatracker.ietf.org/doc/html/rfc5280
     #
-    # @note When making an API call, you may pass GeneralName
-    #   data as a hash:
-    #
-    #       {
-    #         other_name: {
-    #           type_id: "CustomObjectIdentifier", # required
-    #           value: "String256", # required
-    #         },
-    #         rfc_822_name: "String256",
-    #         dns_name: "String253",
-    #         directory_name: {
-    #           country: "CountryCodeString",
-    #           organization: "String64",
-    #           organizational_unit: "String64",
-    #           distinguished_name_qualifier: "ASN1PrintableString64",
-    #           state: "String128",
-    #           common_name: "String64",
-    #           serial_number: "ASN1PrintableString64",
-    #           locality: "String128",
-    #           title: "String64",
-    #           surname: "String40",
-    #           given_name: "String16",
-    #           initials: "String5",
-    #           pseudonym: "String128",
-    #           generation_qualifier: "String3",
-    #           custom_attributes: [
-    #             {
-    #               object_identifier: "CustomObjectIdentifier", # required
-    #               value: "String1To256", # required
-    #             },
-    #           ],
-    #         },
-    #         edi_party_name: {
-    #           party_name: "String256", # required
-    #           name_assigner: "String256",
-    #         },
-    #         uniform_resource_identifier: "String253",
-    #         ip_address: "String39",
-    #         registered_id: "CustomObjectIdentifier",
-    #       }
-    #
     # @!attribute [rw] other_name
     #   Represents `GeneralName` using an `OtherName` object.
     #   @return [Types::OtherName]
@@ -1870,13 +1195,6 @@ module Aws::ACMPCA
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetCertificateAuthorityCertificateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_authority_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] certificate_authority_arn
     #   The Amazon Resource Name (ARN) of your private CA. This is of the
     #   form:
@@ -1913,13 +1231,6 @@ module Aws::ACMPCA
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetCertificateAuthorityCsrRequest
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_authority_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] certificate_authority_arn
     #   The Amazon Resource Name (ARN) that was returned when you called the
     #   [CreateCertificateAuthority][1] action. This must be of the form:
@@ -1953,14 +1264,6 @@ module Aws::ACMPCA
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetCertificateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_authority_arn: "Arn", # required
-    #         certificate_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] certificate_authority_arn
     #   The Amazon Resource Name (ARN) that was returned when you called
     #   [CreateCertificateAuthority][1]. This must be of the form:
@@ -2009,13 +1312,6 @@ module Aws::ACMPCA
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Number (ARN) of the private CA that will have
     #   its policy retrieved. You can find the CA's ARN by calling the
@@ -2042,15 +1338,6 @@ module Aws::ACMPCA
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ImportCertificateAuthorityCertificateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_authority_arn: "Arn", # required
-    #         certificate: "data", # required
-    #         certificate_chain: "data",
-    #       }
-    #
     # @!attribute [rw] certificate_authority_arn
     #   The Amazon Resource Name (ARN) that was returned when you called
     #   [CreateCertificateAuthority][1]. This must be of the form:
@@ -2195,127 +1482,6 @@ module Aws::ACMPCA
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass IssueCertificateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         api_passthrough: {
-    #           extensions: {
-    #             certificate_policies: [
-    #               {
-    #                 cert_policy_id: "CustomObjectIdentifier", # required
-    #                 policy_qualifiers: [
-    #                   {
-    #                     policy_qualifier_id: "CPS", # required, accepts CPS
-    #                     qualifier: { # required
-    #                       cps_uri: "String256", # required
-    #                     },
-    #                   },
-    #                 ],
-    #               },
-    #             ],
-    #             extended_key_usage: [
-    #               {
-    #                 extended_key_usage_type: "SERVER_AUTH", # accepts SERVER_AUTH, CLIENT_AUTH, CODE_SIGNING, EMAIL_PROTECTION, TIME_STAMPING, OCSP_SIGNING, SMART_CARD_LOGIN, DOCUMENT_SIGNING, CERTIFICATE_TRANSPARENCY
-    #                 extended_key_usage_object_identifier: "CustomObjectIdentifier",
-    #               },
-    #             ],
-    #             key_usage: {
-    #               digital_signature: false,
-    #               non_repudiation: false,
-    #               key_encipherment: false,
-    #               data_encipherment: false,
-    #               key_agreement: false,
-    #               key_cert_sign: false,
-    #               crl_sign: false,
-    #               encipher_only: false,
-    #               decipher_only: false,
-    #             },
-    #             subject_alternative_names: [
-    #               {
-    #                 other_name: {
-    #                   type_id: "CustomObjectIdentifier", # required
-    #                   value: "String256", # required
-    #                 },
-    #                 rfc_822_name: "String256",
-    #                 dns_name: "String253",
-    #                 directory_name: {
-    #                   country: "CountryCodeString",
-    #                   organization: "String64",
-    #                   organizational_unit: "String64",
-    #                   distinguished_name_qualifier: "ASN1PrintableString64",
-    #                   state: "String128",
-    #                   common_name: "String64",
-    #                   serial_number: "ASN1PrintableString64",
-    #                   locality: "String128",
-    #                   title: "String64",
-    #                   surname: "String40",
-    #                   given_name: "String16",
-    #                   initials: "String5",
-    #                   pseudonym: "String128",
-    #                   generation_qualifier: "String3",
-    #                   custom_attributes: [
-    #                     {
-    #                       object_identifier: "CustomObjectIdentifier", # required
-    #                       value: "String1To256", # required
-    #                     },
-    #                   ],
-    #                 },
-    #                 edi_party_name: {
-    #                   party_name: "String256", # required
-    #                   name_assigner: "String256",
-    #                 },
-    #                 uniform_resource_identifier: "String253",
-    #                 ip_address: "String39",
-    #                 registered_id: "CustomObjectIdentifier",
-    #               },
-    #             ],
-    #             custom_extensions: [
-    #               {
-    #                 object_identifier: "CustomObjectIdentifier", # required
-    #                 value: "Base64String1To4096", # required
-    #                 critical: false,
-    #               },
-    #             ],
-    #           },
-    #           subject: {
-    #             country: "CountryCodeString",
-    #             organization: "String64",
-    #             organizational_unit: "String64",
-    #             distinguished_name_qualifier: "ASN1PrintableString64",
-    #             state: "String128",
-    #             common_name: "String64",
-    #             serial_number: "ASN1PrintableString64",
-    #             locality: "String128",
-    #             title: "String64",
-    #             surname: "String40",
-    #             given_name: "String16",
-    #             initials: "String5",
-    #             pseudonym: "String128",
-    #             generation_qualifier: "String3",
-    #             custom_attributes: [
-    #               {
-    #                 object_identifier: "CustomObjectIdentifier", # required
-    #                 value: "String1To256", # required
-    #               },
-    #             ],
-    #           },
-    #         },
-    #         certificate_authority_arn: "Arn", # required
-    #         csr: "data", # required
-    #         signing_algorithm: "SHA256WITHECDSA", # required, accepts SHA256WITHECDSA, SHA384WITHECDSA, SHA512WITHECDSA, SHA256WITHRSA, SHA384WITHRSA, SHA512WITHRSA
-    #         template_arn: "Arn",
-    #         validity: { # required
-    #           value: 1, # required
-    #           type: "END_DATE", # required, accepts END_DATE, ABSOLUTE, DAYS, MONTHS, YEARS
-    #         },
-    #         validity_not_before: {
-    #           value: 1, # required
-    #           type: "END_DATE", # required, accepts END_DATE, ABSOLUTE, DAYS, MONTHS, YEARS
-    #         },
-    #         idempotency_token: "IdempotencyToken",
-    #       }
-    #
     # @!attribute [rw] api_passthrough
     #   Specifies X.509 certificate information to be included in the issued
     #   certificate. An `APIPassthrough` or `APICSRPassthrough` template
@@ -2493,21 +1659,6 @@ module Aws::ACMPCA
     # Defines one or more purposes for which the key contained in the
     # certificate can be used. Default value for each option is false.
     #
-    # @note When making an API call, you may pass KeyUsage
-    #   data as a hash:
-    #
-    #       {
-    #         digital_signature: false,
-    #         non_repudiation: false,
-    #         key_encipherment: false,
-    #         data_encipherment: false,
-    #         key_agreement: false,
-    #         key_cert_sign: false,
-    #         crl_sign: false,
-    #         encipher_only: false,
-    #         decipher_only: false,
-    #       }
-    #
     # @!attribute [rw] digital_signature
     #   Key can be used for digital signing.
     #   @return [Boolean]
@@ -2574,15 +1725,6 @@ module Aws::ACMPCA
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCertificateAuthoritiesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         resource_owner: "SELF", # accepts SELF, OTHER_ACCOUNTS
-    #       }
-    #
     # @!attribute [rw] next_token
     #   Use this parameter when paginating results in a subsequent request
     #   after you receive a response with truncated results. Set it to the
@@ -2632,15 +1774,6 @@ module Aws::ACMPCA
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPermissionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_authority_arn: "Arn", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] certificate_authority_arn
     #   The Amazon Resource Number (ARN) of the private CA to inspect. You
     #   can find the ARN by calling the [ListCertificateAuthorities][1]
@@ -2698,15 +1831,6 @@ module Aws::ACMPCA
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_authority_arn: "Arn", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] certificate_authority_arn
     #   The Amazon Resource Name (ARN) that was returned when you called the
     #   [CreateCertificateAuthority][1] action. This must be of the form:
@@ -2809,14 +1933,6 @@ module Aws::ACMPCA
     # When you revoke a certificate, OCSP responses may take up to 60
     # minutes to reflect the new status.
     #
-    # @note When making an API call, you may pass OcspConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false, # required
-    #         ocsp_custom_cname: "String253",
-    #       }
-    #
     # @!attribute [rw] enabled
     #   Flag enabling use of the Online Certificate Status Protocol (OCSP)
     #   for validating certificate revocation status.
@@ -2857,14 +1973,6 @@ module Aws::ACMPCA
     #
     #
     # [1]: https://csrc.nist.gov/glossary/term/Object_Identifier
-    #
-    # @note When making an API call, you may pass OtherName
-    #   data as a hash:
-    #
-    #       {
-    #         type_id: "CustomObjectIdentifier", # required
-    #         value: "String256", # required
-    #       }
     #
     # @!attribute [rw] type_id
     #   Specifies an OID.
@@ -2953,21 +2061,6 @@ module Aws::ACMPCA
 
     # Defines the X.509 `CertificatePolicies` extension.
     #
-    # @note When making an API call, you may pass PolicyInformation
-    #   data as a hash:
-    #
-    #       {
-    #         cert_policy_id: "CustomObjectIdentifier", # required
-    #         policy_qualifiers: [
-    #           {
-    #             policy_qualifier_id: "CPS", # required, accepts CPS
-    #             qualifier: { # required
-    #               cps_uri: "String256", # required
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] cert_policy_id
     #   Specifies the object identifier (OID) of the certificate policy
     #   under which the certificate was issued. For more information, see
@@ -2996,16 +2089,6 @@ module Aws::ACMPCA
     # qualifier. ACM Private CA supports the certification practice
     # statement (CPS) qualifier.
     #
-    # @note When making an API call, you may pass PolicyQualifierInfo
-    #   data as a hash:
-    #
-    #       {
-    #         policy_qualifier_id: "CPS", # required, accepts CPS
-    #         qualifier: { # required
-    #           cps_uri: "String256", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] policy_qualifier_id
     #   Identifies the qualifier modifying a `CertPolicyId`.
     #   @return [String]
@@ -3024,14 +2107,6 @@ module Aws::ACMPCA
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         policy: "AWSPolicy", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Number (ARN) of the private CA to associate with
     #   the policy. The ARN of the CA can be found by calling the
@@ -3073,13 +2148,6 @@ module Aws::ACMPCA
     #
     #
     # [1]: https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.4
-    #
-    # @note When making an API call, you may pass Qualifier
-    #   data as a hash:
-    #
-    #       {
-    #         cps_uri: "String256", # required
-    #       }
     #
     # @!attribute [rw] cps_uri
     #   Contains a pointer to a certification practice statement (CPS)
@@ -3147,13 +2215,6 @@ module Aws::ACMPCA
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RestoreCertificateAuthorityRequest
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_authority_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] certificate_authority_arn
     #   The Amazon Resource Name (ARN) that was returned when you called the
     #   [CreateCertificateAuthority][1] action. This must be of the form:
@@ -3191,23 +2252,6 @@ module Aws::ACMPCA
     # [3]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_RevokeCertificate.html
     # [4]: https://docs.aws.amazon.com/acm-pca/latest/userguide/revocation-setup.html
     #
-    # @note When making an API call, you may pass RevocationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         crl_configuration: {
-    #           enabled: false, # required
-    #           expiration_in_days: 1,
-    #           custom_cname: "String253",
-    #           s3_bucket_name: "String3To255",
-    #           s3_object_acl: "PUBLIC_READ", # accepts PUBLIC_READ, BUCKET_OWNER_FULL_CONTROL
-    #         },
-    #         ocsp_configuration: {
-    #           enabled: false, # required
-    #           ocsp_custom_cname: "String253",
-    #         },
-    #       }
-    #
     # @!attribute [rw] crl_configuration
     #   Configuration of the certificate revocation list (CRL), if any,
     #   maintained by your private CA. A CRL is typically updated
@@ -3232,15 +2276,6 @@ module Aws::ACMPCA
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RevokeCertificateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_authority_arn: "Arn", # required
-    #         certificate_serial: "String128", # required
-    #         revocation_reason: "UNSPECIFIED", # required, accepts UNSPECIFIED, KEY_COMPROMISE, CERTIFICATE_AUTHORITY_COMPROMISE, AFFILIATION_CHANGED, SUPERSEDED, CESSATION_OF_OPERATION, PRIVILEGE_WITHDRAWN, A_A_COMPROMISE
-    #       }
-    #
     # @!attribute [rw] certificate_authority_arn
     #   Amazon Resource Name (ARN) of the private CA that issued the
     #   certificate to be revoked. This must be of the form:
@@ -3295,14 +2330,6 @@ module Aws::ACMPCA
     # [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_TagCertificateAuthority.html
     # [2]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UntagCertificateAuthority.html
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue",
-    #       }
-    #
     # @!attribute [rw] key
     #   Key (name) of the tag.
     #   @return [String]
@@ -3320,19 +2347,6 @@ module Aws::ACMPCA
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagCertificateAuthorityRequest
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_authority_arn: "Arn", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] certificate_authority_arn
     #   The Amazon Resource Name (ARN) that was returned when you called
     #   [CreateCertificateAuthority][1]. This must be of the form:
@@ -3372,19 +2386,6 @@ module Aws::ACMPCA
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagCertificateAuthorityRequest
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_authority_arn: "Arn", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] certificate_authority_arn
     #   The Amazon Resource Name (ARN) that was returned when you called
     #   [CreateCertificateAuthority][1]. This must be of the form:
@@ -3410,27 +2411,6 @@ module Aws::ACMPCA
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateCertificateAuthorityRequest
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_authority_arn: "Arn", # required
-    #         revocation_configuration: {
-    #           crl_configuration: {
-    #             enabled: false, # required
-    #             expiration_in_days: 1,
-    #             custom_cname: "String253",
-    #             s3_bucket_name: "String3To255",
-    #             s3_object_acl: "PUBLIC_READ", # accepts PUBLIC_READ, BUCKET_OWNER_FULL_CONTROL
-    #           },
-    #           ocsp_configuration: {
-    #             enabled: false, # required
-    #             ocsp_custom_cname: "String253",
-    #           },
-    #         },
-    #         status: "CREATING", # accepts CREATING, PENDING_CERTIFICATE, ACTIVE, DELETED, DISABLED, EXPIRED, FAILED
-    #       }
-    #
     # @!attribute [rw] certificate_authority_arn
     #   Amazon Resource Name (ARN) of the private CA that issued the
     #   certificate to be revoked. This must be of the form:
@@ -3483,14 +2463,6 @@ module Aws::ACMPCA
     #
     #
     # [1]: https://tools.ietf.org/html/rfc5280#section-4.1.2.5
-    #
-    # @note When making an API call, you may pass Validity
-    #   data as a hash:
-    #
-    #       {
-    #         value: 1, # required
-    #         type: "END_DATE", # required, accepts END_DATE, ABSOLUTE, DAYS, MONTHS, YEARS
-    #       }
     #
     # @!attribute [rw] value
     #   A long integer interpreted according to the value of `Type`, below.

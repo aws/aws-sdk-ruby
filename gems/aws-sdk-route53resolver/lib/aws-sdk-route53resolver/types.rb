@@ -24,24 +24,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateFirewallRuleGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         creator_request_id: "CreatorRequestId", # required
-    #         firewall_rule_group_id: "ResourceId", # required
-    #         vpc_id: "ResourceId", # required
-    #         priority: 1, # required
-    #         name: "Name", # required
-    #         mutation_protection: "ENABLED", # accepts ENABLED, DISABLED
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] creator_request_id
     #   A unique string that identifies the request and that allows failed
     #   requests to be retried without the risk of running the operation
@@ -120,18 +102,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateResolverEndpointIpAddressRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resolver_endpoint_id: "ResourceId", # required
-    #         ip_address: { # required
-    #           ip_id: "ResourceId",
-    #           subnet_id: "SubnetId",
-    #           ip: "Ip",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resolver_endpoint_id
     #   The ID of the Resolver endpoint that you want to associate IP
     #   addresses with.
@@ -164,14 +134,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateResolverQueryLogConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resolver_query_log_config_id: "ResourceId", # required
-    #         resource_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] resolver_query_log_config_id
     #   The ID of the query logging configuration that you want to associate
     #   a VPC with.
@@ -209,15 +171,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateResolverRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resolver_rule_id: "ResourceId", # required
-    #         name: "Name",
-    #         vpc_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] resolver_rule_id
     #   The ID of the Resolver rule that you want to associate with the VPC.
     #   To list the existing Resolver rules, use [ListResolverRules][1].
@@ -270,20 +223,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateFirewallDomainListRequest
-    #   data as a hash:
-    #
-    #       {
-    #         creator_request_id: "CreatorRequestId", # required
-    #         name: "Name", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] creator_request_id
     #   A unique string that identifies the request and that allows you to
     #   retry failed requests without the risk of running the operation
@@ -325,20 +264,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateFirewallRuleGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         creator_request_id: "CreatorRequestId", # required
-    #         name: "Name", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] creator_request_id
     #   A unique string defined by you to identify the request. This allows
     #   you to retry failed requests without the risk of running the
@@ -380,22 +305,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateFirewallRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         creator_request_id: "CreatorRequestId", # required
-    #         firewall_rule_group_id: "ResourceId", # required
-    #         firewall_domain_list_id: "ResourceId", # required
-    #         priority: 1, # required
-    #         action: "ALLOW", # required, accepts ALLOW, BLOCK, ALERT
-    #         block_response: "NODATA", # accepts NODATA, NXDOMAIN, OVERRIDE
-    #         block_override_domain: "BlockOverrideDomain",
-    #         block_override_dns_type: "CNAME", # accepts CNAME
-    #         block_override_ttl: 1,
-    #         name: "Name", # required
-    #       }
-    #
     # @!attribute [rw] creator_request_id
     #   A unique string that identifies the request and that allows you to
     #   retry failed requests without the risk of running the operation
@@ -516,28 +425,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateResolverEndpointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         creator_request_id: "CreatorRequestId", # required
-    #         name: "Name",
-    #         security_group_ids: ["ResourceId"], # required
-    #         direction: "INBOUND", # required, accepts INBOUND, OUTBOUND
-    #         ip_addresses: [ # required
-    #           {
-    #             subnet_id: "SubnetId", # required
-    #             ip: "Ip",
-    #           },
-    #         ],
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] creator_request_id
     #   A unique string that identifies the request and that allows failed
     #   requests to be retried without the risk of running the operation
@@ -607,21 +494,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateResolverQueryLogConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ResolverQueryLogConfigName", # required
-    #         destination_arn: "DestinationArn", # required
-    #         creator_request_id: "CreatorRequestId", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name that you want to give the query logging configuration.
     #   @return [String]
@@ -688,29 +560,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateResolverRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         creator_request_id: "CreatorRequestId", # required
-    #         name: "Name",
-    #         rule_type: "FORWARD", # required, accepts FORWARD, SYSTEM, RECURSIVE
-    #         domain_name: "DomainName", # required
-    #         target_ips: [
-    #           {
-    #             ip: "Ip", # required
-    #             port: 1,
-    #           },
-    #         ],
-    #         resolver_endpoint_id: "ResourceId",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] creator_request_id
     #   A unique string that identifies the request and that allows failed
     #   requests to be retried without the risk of running the operation
@@ -795,13 +644,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteFirewallDomainListRequest
-    #   data as a hash:
-    #
-    #       {
-    #         firewall_domain_list_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] firewall_domain_list_id
     #   The ID of the domain list that you want to delete.
     #   @return [String]
@@ -826,13 +668,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteFirewallRuleGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         firewall_rule_group_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] firewall_rule_group_id
     #   The unique identifier of the firewall rule group that you want to
     #   delete.
@@ -858,14 +693,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteFirewallRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         firewall_rule_group_id: "ResourceId", # required
-    #         firewall_domain_list_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] firewall_rule_group_id
     #   The unique identifier of the firewall rule group that you want to
     #   delete the rule from.
@@ -896,13 +723,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteResolverEndpointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resolver_endpoint_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] resolver_endpoint_id
     #   The ID of the Resolver endpoint that you want to delete.
     #   @return [String]
@@ -928,13 +748,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteResolverQueryLogConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resolver_query_log_config_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] resolver_query_log_config_id
     #   The ID of the query logging configuration that you want to delete.
     #   @return [String]
@@ -960,13 +773,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteResolverRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resolver_rule_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] resolver_rule_id
     #   The ID of the Resolver rule that you want to delete.
     #   @return [String]
@@ -992,13 +798,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateFirewallRuleGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         firewall_rule_group_association_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] firewall_rule_group_association_id
     #   The identifier of the FirewallRuleGroupAssociation.
     #   @return [String]
@@ -1023,18 +822,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateResolverEndpointIpAddressRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resolver_endpoint_id: "ResourceId", # required
-    #         ip_address: { # required
-    #           ip_id: "ResourceId",
-    #           subnet_id: "SubnetId",
-    #           ip: "Ip",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resolver_endpoint_id
     #   The ID of the Resolver endpoint that you want to disassociate an IP
     #   address from.
@@ -1065,14 +852,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateResolverQueryLogConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resolver_query_log_config_id: "ResourceId", # required
-    #         resource_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] resolver_query_log_config_id
     #   The ID of the query logging configuration that you want to
     #   disassociate a specified VPC from.
@@ -1105,14 +884,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateResolverRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         vpc_id: "ResourceId", # required
-    #         resolver_rule_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] vpc_id
     #   The ID of the VPC that you want to disassociate the Resolver rule
     #   from.
@@ -1165,14 +936,6 @@ module Aws::Route53Resolver
     # [4]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverQueryLogConfigs.html
     # [5]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverQueryLogConfigAssociations.html
     # [6]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverDnssecConfigs.html
-    #
-    # @note When making an API call, you may pass Filter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "FilterName",
-    #         values: ["FilterValue"],
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the parameter that you want to use to filter objects.
@@ -1857,13 +1620,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetFirewallConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] resource_id
     #   The ID of the VPC from Amazon VPC that the configuration is for.
     #   @return [String]
@@ -1889,13 +1645,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetFirewallDomainListRequest
-    #   data as a hash:
-    #
-    #       {
-    #         firewall_domain_list_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] firewall_domain_list_id
     #   The ID of the domain list.
     #   @return [String]
@@ -1920,13 +1669,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetFirewallRuleGroupAssociationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         firewall_rule_group_association_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] firewall_rule_group_association_id
     #   The identifier of the FirewallRuleGroupAssociation.
     #   @return [String]
@@ -1951,13 +1693,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetFirewallRuleGroupPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The ARN (Amazon Resource Name) for the rule group.
     #   @return [String]
@@ -1984,13 +1719,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetFirewallRuleGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         firewall_rule_group_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] firewall_rule_group_id
     #   The unique identifier of the firewall rule group.
     #   @return [String]
@@ -2015,13 +1743,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetResolverConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] resource_id
     #   Resource ID of the Amazon VPC that you want to get information
     #   about.
@@ -2049,13 +1770,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetResolverDnssecConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] resource_id
     #   The ID of the virtual private cloud (VPC) for the DNSSEC validation
     #   status.
@@ -2081,13 +1795,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetResolverEndpointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resolver_endpoint_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] resolver_endpoint_id
     #   The ID of the Resolver endpoint that you want to get information
     #   about.
@@ -2114,13 +1821,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetResolverQueryLogConfigAssociationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resolver_query_log_config_association_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] resolver_query_log_config_association_id
     #   The ID of the Resolver query logging configuration association that
     #   you want to get information about.
@@ -2148,13 +1848,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetResolverQueryLogConfigPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The ARN of the query logging configuration that you want to get the
     #   query logging policy for.
@@ -2182,13 +1875,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetResolverQueryLogConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resolver_query_log_config_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] resolver_query_log_config_id
     #   The ID of the Resolver query logging configuration that you want to
     #   get information about.
@@ -2215,13 +1901,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetResolverRuleAssociationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resolver_rule_association_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] resolver_rule_association_id
     #   The ID of the Resolver rule association that you want to get
     #   information about.
@@ -2248,13 +1927,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetResolverRulePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The ID of the Resolver rule that you want to get the Resolver rule
     #   policy for.
@@ -2281,13 +1953,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetResolverRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resolver_rule_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] resolver_rule_id
     #   The ID of the Resolver rule that you want to get information about.
     #   @return [String]
@@ -2313,15 +1978,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ImportFirewallDomainsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         firewall_domain_list_id: "ResourceId", # required
-    #         operation: "REPLACE", # required, accepts REPLACE
-    #         domain_file_url: "DomainListFileUrl", # required
-    #       }
-    #
     # @!attribute [rw] firewall_domain_list_id
     #   The ID of the domain list that you want to modify with the import
     #   operation.
@@ -2473,14 +2129,6 @@ module Aws::Route53Resolver
     #
     # [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_CreateResolverEndpoint.html
     #
-    # @note When making an API call, you may pass IpAddressRequest
-    #   data as a hash:
-    #
-    #       {
-    #         subnet_id: "SubnetId", # required
-    #         ip: "Ip",
-    #       }
-    #
     # @!attribute [rw] subnet_id
     #   The ID of the subnet that contains the IP address.
     #   @return [String]
@@ -2558,15 +2206,6 @@ module Aws::Route53Resolver
     #
     # [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_UpdateResolverEndpoint.html
     #
-    # @note When making an API call, you may pass IpAddressUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         ip_id: "ResourceId",
-    #         subnet_id: "SubnetId",
-    #         ip: "Ip",
-    #       }
-    #
     # @!attribute [rw] ip_id
     #   *Only when removing an IP address from a Resolver endpoint*\: The ID
     #   of the IP address that you want to remove. To get this ID, use
@@ -2619,14 +2258,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFirewallConfigsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of objects that you want Resolver to return for
     #   this request. If more objects are available, in the response,
@@ -2676,14 +2307,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFirewallDomainListsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of objects that you want Resolver to return for
     #   this request. If more objects are available, in the response,
@@ -2735,15 +2358,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFirewallDomainsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         firewall_domain_list_id: "ResourceId", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] firewall_domain_list_id
     #   The ID of the domain list whose domains you want to retrieve.
     #   @return [String]
@@ -2800,18 +2414,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFirewallRuleGroupAssociationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         firewall_rule_group_id: "ResourceId",
-    #         vpc_id: "ResourceId",
-    #         priority: 1,
-    #         status: "COMPLETE", # accepts COMPLETE, DELETING, UPDATING
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] firewall_rule_group_id
     #   The unique identifier of the firewall rule group that you want to
     #   retrieve the associations for. Leave this blank to retrieve
@@ -2892,14 +2494,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFirewallRuleGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of objects that you want Resolver to return for
     #   this request. If more objects are available, in the response,
@@ -2951,17 +2545,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFirewallRulesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         firewall_rule_group_id: "ResourceId", # required
-    #         priority: 1,
-    #         action: "ALLOW", # accepts ALLOW, BLOCK, ALERT
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] firewall_rule_group_id
     #   The unique identifier of the firewall rule group that you want to
     #   retrieve the rules for.
@@ -3045,14 +2628,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListResolverConfigsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of Resolver configurations that you want to
     #   return in the response to a `ListResolverConfigs` request. If you
@@ -3108,20 +2683,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListResolverDnssecConfigsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         filters: [
-    #           {
-    #             name: "FilterName",
-    #             values: ["FilterValue"],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] max_results
     #   *Optional*\: An integer that specifies the maximum number of DNSSEC
     #   configuration results that you want Amazon Route 53 to return. If
@@ -3190,15 +2751,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListResolverEndpointIpAddressesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resolver_endpoint_id: "ResourceId", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] resolver_endpoint_id
     #   The ID of the Resolver endpoint that you want to get IP addresses
     #   for.
@@ -3258,20 +2810,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListResolverEndpointsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         filters: [
-    #           {
-    #             name: "FilterName",
-    #             values: ["FilterValue"],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of Resolver endpoints that you want to return in
     #   the response to a `ListResolverEndpoints` request. If you don't
@@ -3335,22 +2873,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListResolverQueryLogConfigAssociationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         filters: [
-    #           {
-    #             name: "FilterName",
-    #             values: ["FilterValue"],
-    #           },
-    #         ],
-    #         sort_by: "SortByKey",
-    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of query logging associations that you want to
     #   return in the response to a `ListResolverQueryLogConfigAssociations`
@@ -3502,22 +3024,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListResolverQueryLogConfigsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         filters: [
-    #           {
-    #             name: "FilterName",
-    #             values: ["FilterValue"],
-    #           },
-    #         ],
-    #         sort_by: "SortByKey",
-    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of query logging configurations that you want to
     #   return in the response to a `ListResolverQueryLogConfigs` request.
@@ -3670,20 +3176,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListResolverRuleAssociationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         filters: [
-    #           {
-    #             name: "FilterName",
-    #             values: ["FilterValue"],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of rule associations that you want to return in
     #   the response to a `ListResolverRuleAssociations` request. If you
@@ -3749,20 +3241,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListResolverRulesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         filters: [
-    #           {
-    #             name: "FilterName",
-    #             values: ["FilterValue"],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of Resolver rules that you want to return in the
     #   response to a `ListResolverRules` request. If you don't specify a
@@ -3826,15 +3304,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) for the resource that you want to
     #   list tags for.
@@ -3886,14 +3355,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutFirewallRuleGroupPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "Arn", # required
-    #         firewall_rule_group_policy: "FirewallRuleGroupPolicy", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The ARN (Amazon Resource Name) for the rule group that you want to
     #   share.
@@ -3924,14 +3385,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutResolverQueryLogConfigPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "Arn", # required
-    #         resolver_query_log_config_policy: "ResolverQueryLogConfigPolicy", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the account that you want to share
     #   rules with.
@@ -3981,14 +3434,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutResolverRulePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "Arn", # required
-    #         resolver_rule_policy: "ResolverRulePolicy", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the rule that you want to share
     #   with another account.
@@ -4642,20 +4087,6 @@ module Aws::Route53Resolver
     #
     # [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_UpdateResolverRule.html
     #
-    # @note When making an API call, you may pass ResolverRuleConfig
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name",
-    #         target_ips: [
-    #           {
-    #             ip: "Ip", # required
-    #             port: 1,
-    #           },
-    #         ],
-    #         resolver_endpoint_id: "ResourceId",
-    #       }
-    #
     # @!attribute [rw] name
     #   The new name for the Resolver rule. The name that you specify
     #   appears in the Resolver dashboard in the Route 53 console.
@@ -4761,14 +4192,6 @@ module Aws::Route53Resolver
     # One tag that you want to add to the specified resource. A tag consists
     # of a `Key` (a name for the tag) and a `Value`.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The name for the tag. For example, if you want to associate Resolver
     #   resources with the account IDs of your customers for billing
@@ -4790,19 +4213,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) for the resource that you want to add
     #   tags to. To get the ARN for a resource, use the applicable `Get` or
@@ -4854,14 +4264,6 @@ module Aws::Route53Resolver
     #
     # [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_CreateResolverRule.html
     #
-    # @note When making an API call, you may pass TargetAddress
-    #   data as a hash:
-    #
-    #       {
-    #         ip: "Ip", # required
-    #         port: 1,
-    #       }
-    #
     # @!attribute [rw] ip
     #   One IP address that you want to forward DNS queries to. You can
     #   specify only IPv4 addresses.
@@ -4906,14 +4308,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) for the resource that you want to
     #   remove tags from. To get the ARN for a resource, use the applicable
@@ -4958,14 +4352,6 @@ module Aws::Route53Resolver
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateFirewallConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_id: "ResourceId", # required
-    #         firewall_fail_open: "ENABLED", # required, accepts ENABLED, DISABLED
-    #       }
-    #
     # @!attribute [rw] resource_id
     #   The ID of the VPC that the configuration is for.
     #   @return [String]
@@ -5009,15 +4395,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateFirewallDomainsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         firewall_domain_list_id: "ResourceId", # required
-    #         operation: "ADD", # required, accepts ADD, REMOVE, REPLACE
-    #         domains: ["FirewallDomainName"], # required
-    #       }
-    #
     # @!attribute [rw] firewall_domain_list_id
     #   The ID of the domain list whose domains you want to update.
     #   @return [String]
@@ -5087,16 +4464,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateFirewallRuleGroupAssociationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         firewall_rule_group_association_id: "ResourceId", # required
-    #         priority: 1,
-    #         mutation_protection: "ENABLED", # accepts ENABLED, DISABLED
-    #         name: "Name",
-    #       }
-    #
     # @!attribute [rw] firewall_rule_group_association_id
     #   The identifier of the FirewallRuleGroupAssociation.
     #   @return [String]
@@ -5147,21 +4514,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateFirewallRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         firewall_rule_group_id: "ResourceId", # required
-    #         firewall_domain_list_id: "ResourceId", # required
-    #         priority: 1,
-    #         action: "ALLOW", # accepts ALLOW, BLOCK, ALERT
-    #         block_response: "NODATA", # accepts NODATA, NXDOMAIN, OVERRIDE
-    #         block_override_domain: "BlockOverrideDomain",
-    #         block_override_dns_type: "CNAME", # accepts CNAME
-    #         block_override_ttl: 1,
-    #         name: "Name",
-    #       }
-    #
     # @!attribute [rw] firewall_rule_group_id
     #   The unique identifier of the firewall rule group for the rule.
     #   @return [String]
@@ -5259,14 +4611,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateResolverConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_id: "ResourceId", # required
-    #         autodefined_reverse_flag: "ENABLE", # required, accepts ENABLE, DISABLE
-    #       }
-    #
     # @!attribute [rw] resource_id
     #   Resource ID of the Amazon VPC that you want to update the Resolver
     #   configuration for.
@@ -5311,14 +4655,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateResolverDnssecConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_id: "ResourceId", # required
-    #         validation: "ENABLE", # required, accepts ENABLE, DISABLE
-    #       }
-    #
     # @!attribute [rw] resource_id
     #   The ID of the virtual private cloud (VPC) that you're updating the
     #   DNSSEC validation status for.
@@ -5352,14 +4688,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateResolverEndpointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resolver_endpoint_id: "ResourceId", # required
-    #         name: "Name",
-    #       }
-    #
     # @!attribute [rw] resolver_endpoint_id
     #   The ID of the Resolver endpoint that you want to update.
     #   @return [String]
@@ -5389,23 +4717,6 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateResolverRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resolver_rule_id: "ResourceId", # required
-    #         config: { # required
-    #           name: "Name",
-    #           target_ips: [
-    #             {
-    #               ip: "Ip", # required
-    #               port: 1,
-    #             },
-    #           ],
-    #           resolver_endpoint_id: "ResourceId",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resolver_rule_id
     #   The ID of the Resolver rule that you want to update.
     #   @return [String]

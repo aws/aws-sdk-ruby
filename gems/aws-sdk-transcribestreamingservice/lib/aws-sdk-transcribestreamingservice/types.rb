@@ -47,13 +47,6 @@ module Aws::TranscribeStreamingService
     #
     # [1]: https://docs.aws.amazon.com/transcribe/latest/dg/event-stream.html
     #
-    # @note When making an API call, you may pass AudioEvent
-    #   data as a hash:
-    #
-    #       {
-    #         audio_chunk: "data",
-    #       }
-    #
     # @!attribute [rw] audio_chunk
     #   An audio blob that contains the next part of the audio that you want
     #   to transcribe. The maximum audio chunk size is 32 KB.
@@ -223,14 +216,6 @@ module Aws::TranscribeStreamingService
     # `ParticipantRole` to `AGENT` (to indicate that it's the agent
     # speaking).
     #
-    # @note When making an API call, you may pass ChannelDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         channel_id: 1, # required
-    #         participant_role: "AGENT", # required, accepts AGENT, CUSTOMER
-    #       }
-    #
     # @!attribute [rw] channel_id
     #   Specify the audio channel you want to define.
     #   @return [Integer]
@@ -276,24 +261,6 @@ module Aws::TranscribeStreamingService
 
     # Allows you to set audio channel definitions and post-call analytics
     # settings.
-    #
-    # @note When making an API call, you may pass ConfigurationEvent
-    #   data as a hash:
-    #
-    #       {
-    #         channel_definitions: [
-    #           {
-    #             channel_id: 1, # required
-    #             participant_role: "AGENT", # required, accepts AGENT, CUSTOMER
-    #           },
-    #         ],
-    #         post_call_analytics_settings: {
-    #           output_location: "String", # required
-    #           data_access_role_arn: "String", # required
-    #           content_redaction_output: "redacted", # accepts redacted, redacted_and_unredacted
-    #           output_encryption_kms_key_id: "String",
-    #         },
-    #       }
     #
     # @!attribute [rw] channel_definitions
     #   Indicates which speaker is on which audio channel.
@@ -754,16 +721,6 @@ module Aws::TranscribeStreamingService
     # `ContentRedactionOutput`, `DataAccessRoleArn`, and `OutputLocation`
     # are required fields.
     #
-    # @note When making an API call, you may pass PostCallAnalyticsSettings
-    #   data as a hash:
-    #
-    #       {
-    #         output_location: "String", # required
-    #         data_access_role_arn: "String", # required
-    #         content_redaction_output: "redacted", # accepts redacted, redacted_and_unredacted
-    #         output_encryption_kms_key_id: "String",
-    #       }
-    #
     # @!attribute [rw] output_location
     #   The Amazon S3 location where you want your Call Analytics post-call
     #   transcription output stored. You can use any of the following
@@ -926,26 +883,6 @@ module Aws::TranscribeStreamingService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartCallAnalyticsStreamTranscriptionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         language_code: "en-US", # required, accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR
-    #         media_sample_rate_hertz: 1, # required
-    #         media_encoding: "pcm", # required, accepts pcm, ogg-opus, flac
-    #         vocabulary_name: "VocabularyName",
-    #         session_id: "SessionId",
-    #         input_event_stream_hander: EventStreams::AudioStream.new,
-    #         vocabulary_filter_name: "VocabularyFilterName",
-    #         vocabulary_filter_method: "remove", # accepts remove, mask, tag
-    #         language_model_name: "ModelName",
-    #         enable_partial_results_stabilization: false,
-    #         partial_results_stability: "high", # accepts high, medium, low
-    #         content_identification_type: "PII", # accepts PII
-    #         content_redaction_type: "PII", # accepts PII
-    #         pii_entity_types: "PiiEntityTypes",
-    #       }
-    #
     # @!attribute [rw] language_code
     #   Specify the language code that represents the language spoken in
     #   your audio.
@@ -1262,24 +1199,6 @@ module Aws::TranscribeStreamingService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartMedicalStreamTranscriptionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         language_code: "en-US", # required, accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN, hi-IN, th-TH
-    #         media_sample_rate_hertz: 1, # required
-    #         media_encoding: "pcm", # required, accepts pcm, ogg-opus, flac
-    #         vocabulary_name: "VocabularyName",
-    #         specialty: "PRIMARYCARE", # required, accepts PRIMARYCARE, CARDIOLOGY, NEUROLOGY, ONCOLOGY, RADIOLOGY, UROLOGY
-    #         type: "CONVERSATION", # required, accepts CONVERSATION, DICTATION
-    #         show_speaker_label: false,
-    #         session_id: "SessionId",
-    #         input_event_stream_hander: EventStreams::AudioStream.new,
-    #         enable_channel_identification: false,
-    #         number_of_channels: 1,
-    #         content_identification_type: "PHI", # accepts PHI
-    #       }
-    #
     # @!attribute [rw] language_code
     #   Specify the language code that represents the language spoken in
     #   your audio.
@@ -1492,34 +1411,6 @@ module Aws::TranscribeStreamingService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartStreamTranscriptionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         language_code: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN, hi-IN, th-TH
-    #         media_sample_rate_hertz: 1, # required
-    #         media_encoding: "pcm", # required, accepts pcm, ogg-opus, flac
-    #         vocabulary_name: "VocabularyName",
-    #         session_id: "SessionId",
-    #         input_event_stream_hander: EventStreams::AudioStream.new,
-    #         vocabulary_filter_name: "VocabularyFilterName",
-    #         vocabulary_filter_method: "remove", # accepts remove, mask, tag
-    #         show_speaker_label: false,
-    #         enable_channel_identification: false,
-    #         number_of_channels: 1,
-    #         enable_partial_results_stabilization: false,
-    #         partial_results_stability: "high", # accepts high, medium, low
-    #         content_identification_type: "PII", # accepts PII
-    #         content_redaction_type: "PII", # accepts PII
-    #         pii_entity_types: "PiiEntityTypes",
-    #         language_model_name: "ModelName",
-    #         identify_language: false,
-    #         language_options: "LanguageOptions",
-    #         preferred_language: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN, hi-IN, th-TH
-    #         vocabulary_names: "VocabularyNames",
-    #         vocabulary_filter_names: "VocabularyFilterNames",
-    #       }
-    #
     # @!attribute [rw] language_code
     #   Specify the language code that represents the language spoken in
     #   your audio.
@@ -2174,29 +2065,6 @@ module Aws::TranscribeStreamingService
     #
     #
     # [1]: https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html
-    #
-    # @note When making an API call, you may pass AudioStream
-    #   data as a hash:
-    #
-    #       {
-    #         audio_event: {
-    #           audio_chunk: "data",
-    #         },
-    #         configuration_event: {
-    #           channel_definitions: [
-    #             {
-    #               channel_id: 1, # required
-    #               participant_role: "AGENT", # required, accepts AGENT, CUSTOMER
-    #             },
-    #           ],
-    #           post_call_analytics_settings: {
-    #             output_location: "String", # required
-    #             data_access_role_arn: "String", # required
-    #             content_redaction_output: "redacted", # accepts redacted, redacted_and_unredacted
-    #             output_encryption_kms_key_id: "String",
-    #           },
-    #         },
-    #       }
     #
     # EventStream is an Enumerator of Events.
     #  #event_types #=> Array, returns all modeled event types in the stream

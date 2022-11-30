@@ -23,13 +23,6 @@ module Aws::ApplicationCostProfiler
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteReportDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         report_id: "ReportId", # required
-    #       }
-    #
     # @!attribute [rw] report_id
     #   Required. ID of the report to delete.
     #   @return [String]
@@ -54,13 +47,6 @@ module Aws::ApplicationCostProfiler
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetReportDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         report_id: "ReportId", # required
-    #       }
-    #
     # @!attribute [rw] report_id
     #   ID of the report to retrieve.
     #   @return [String]
@@ -117,17 +103,6 @@ module Aws::ApplicationCostProfiler
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ImportApplicationUsageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source_s3_location: { # required
-    #           bucket: "S3Bucket", # required
-    #           key: "S3Key", # required
-    #           region: "ap-east-1", # accepts ap-east-1, me-south-1, eu-south-1, af-south-1
-    #         },
-    #       }
-    #
     # @!attribute [rw] source_s3_location
     #   Amazon S3 location to import application usage data from.
     #   @return [Types::SourceS3Location]
@@ -165,14 +140,6 @@ module Aws::ApplicationCostProfiler
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListReportDefinitionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The token value from a previous call to access the next page of
     #   results.
@@ -209,20 +176,6 @@ module Aws::ApplicationCostProfiler
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutReportDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         report_id: "ReportId", # required
-    #         report_description: "ReportDescription", # required
-    #         report_frequency: "MONTHLY", # required, accepts MONTHLY, DAILY, ALL
-    #         format: "CSV", # required, accepts CSV, PARQUET
-    #         destination_s3_location: { # required
-    #           bucket: "S3Bucket", # required
-    #           prefix: "S3Prefix", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] report_id
     #   Required. ID of the report. You can choose any valid string matching
     #   the pattern for the ID.
@@ -319,14 +272,6 @@ module Aws::ApplicationCostProfiler
     # where AWS Application Cost Profiler reports are generated and then
     # written to.
     #
-    # @note When making an API call, you may pass S3Location
-    #   data as a hash:
-    #
-    #       {
-    #         bucket: "S3Bucket", # required
-    #         prefix: "S3Prefix", # required
-    #       }
-    #
     # @!attribute [rw] bucket
     #   Name of the S3 bucket.
     #   @return [String]
@@ -359,15 +304,6 @@ module Aws::ApplicationCostProfiler
 
     # Represents the Amazon Simple Storage Service (Amazon S3) location
     # where usage data is read from.
-    #
-    # @note When making an API call, you may pass SourceS3Location
-    #   data as a hash:
-    #
-    #       {
-    #         bucket: "S3Bucket", # required
-    #         key: "S3Key", # required
-    #         region: "ap-east-1", # accepts ap-east-1, me-south-1, eu-south-1, af-south-1
-    #       }
     #
     # @!attribute [rw] bucket
     #   Name of the bucket.
@@ -412,20 +348,6 @@ module Aws::ApplicationCostProfiler
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateReportDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         report_id: "ReportId", # required
-    #         report_description: "ReportDescription", # required
-    #         report_frequency: "MONTHLY", # required, accepts MONTHLY, DAILY, ALL
-    #         format: "CSV", # required, accepts CSV, PARQUET
-    #         destination_s3_location: { # required
-    #           bucket: "S3Bucket", # required
-    #           prefix: "S3Prefix", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] report_id
     #   Required. ID of the report to update.
     #   @return [String]

@@ -132,14 +132,6 @@ module Aws::Budgets
 
     # The trigger threshold of the action.
     #
-    # @note When making an API call, you may pass ActionThreshold
-    #   data as a hash:
-    #
-    #       {
-    #         action_threshold_value: 1.0, # required
-    #         action_threshold_type: "PERCENTAGE", # required, accepts PERCENTAGE, ABSOLUTE_VALUE
-    #       }
-    #
     # @!attribute [rw] action_threshold_value
     #   The threshold of a notification.
     #   @return [Float]
@@ -157,18 +149,6 @@ module Aws::Budgets
 
     # The parameters that determine the budget amount for an auto-adjusting
     # budget.
-    #
-    # @note When making an API call, you may pass AutoAdjustData
-    #   data as a hash:
-    #
-    #       {
-    #         auto_adjust_type: "HISTORICAL", # required, accepts HISTORICAL, FORECAST
-    #         historical_options: {
-    #           budget_adjustment_period: 1, # required
-    #           look_back_available_periods: 1,
-    #         },
-    #         last_auto_adjust_time: Time.now,
-    #       }
     #
     # @!attribute [rw] auto_adjust_type
     #   The string that defines whether your budget auto-adjusts based on
@@ -199,64 +179,6 @@ module Aws::Budgets
     # This is the Amazon Resource Name (ARN) pattern for a budget:
     #
     # `arn:aws:budgets::AccountId:budget/budgetName`
-    #
-    # @note When making an API call, you may pass Budget
-    #   data as a hash:
-    #
-    #       {
-    #         budget_name: "BudgetName", # required
-    #         budget_limit: {
-    #           amount: "NumericValue", # required
-    #           unit: "UnitValue", # required
-    #         },
-    #         planned_budget_limits: {
-    #           "GenericString" => {
-    #             amount: "NumericValue", # required
-    #             unit: "UnitValue", # required
-    #           },
-    #         },
-    #         cost_filters: {
-    #           "GenericString" => ["DimensionValue"],
-    #         },
-    #         cost_types: {
-    #           include_tax: false,
-    #           include_subscription: false,
-    #           use_blended: false,
-    #           include_refund: false,
-    #           include_credit: false,
-    #           include_upfront: false,
-    #           include_recurring: false,
-    #           include_other_subscription: false,
-    #           include_support: false,
-    #           include_discount: false,
-    #           use_amortized: false,
-    #         },
-    #         time_unit: "DAILY", # required, accepts DAILY, MONTHLY, QUARTERLY, ANNUALLY
-    #         time_period: {
-    #           start: Time.now,
-    #           end: Time.now,
-    #         },
-    #         calculated_spend: {
-    #           actual_spend: { # required
-    #             amount: "NumericValue", # required
-    #             unit: "UnitValue", # required
-    #           },
-    #           forecasted_spend: {
-    #             amount: "NumericValue", # required
-    #             unit: "UnitValue", # required
-    #           },
-    #         },
-    #         budget_type: "USAGE", # required, accepts USAGE, COST, RI_UTILIZATION, RI_COVERAGE, SAVINGS_PLANS_UTILIZATION, SAVINGS_PLANS_COVERAGE
-    #         last_updated_time: Time.now,
-    #         auto_adjust_data: {
-    #           auto_adjust_type: "HISTORICAL", # required, accepts HISTORICAL, FORECAST
-    #           historical_options: {
-    #             budget_adjustment_period: 1, # required
-    #             look_back_available_periods: 1,
-    #           },
-    #           last_auto_adjust_time: Time.now,
-    #         },
-    #       }
     #
     # @!attribute [rw] budget_name
     #   The name of a budget. The name must be unique within an account. The
@@ -497,20 +419,6 @@ module Aws::Budgets
     # dollars on Amazon EC2, your `actualSpend` is `50 USD`, and your
     # `forecastedSpend` is `75 USD`.
     #
-    # @note When making an API call, you may pass CalculatedSpend
-    #   data as a hash:
-    #
-    #       {
-    #         actual_spend: { # required
-    #           amount: "NumericValue", # required
-    #           unit: "UnitValue", # required
-    #         },
-    #         forecasted_spend: {
-    #           amount: "NumericValue", # required
-    #           unit: "UnitValue", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] actual_spend
     #   The amount of cost, usage, RI units, or Savings Plans units that you
     #   used.
@@ -533,23 +441,6 @@ module Aws::Budgets
     #
     # `USAGE`, `RI_UTILIZATION`, `RI_COVERAGE`, `SAVINGS_PLANS_UTILIZATION`,
     # and `SAVINGS_PLANS_COVERAGE` budgets don't have `CostTypes`.
-    #
-    # @note When making an API call, you may pass CostTypes
-    #   data as a hash:
-    #
-    #       {
-    #         include_tax: false,
-    #         include_subscription: false,
-    #         use_blended: false,
-    #         include_refund: false,
-    #         include_credit: false,
-    #         include_upfront: false,
-    #         include_recurring: false,
-    #         include_other_subscription: false,
-    #         include_support: false,
-    #         include_discount: false,
-    #         use_amortized: false,
-    #       }
     #
     # @!attribute [rw] include_tax
     #   Specifies whether a budget includes taxes.
@@ -634,45 +525,6 @@ module Aws::Budgets
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateBudgetActionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId", # required
-    #         budget_name: "BudgetName", # required
-    #         notification_type: "ACTUAL", # required, accepts ACTUAL, FORECASTED
-    #         action_type: "APPLY_IAM_POLICY", # required, accepts APPLY_IAM_POLICY, APPLY_SCP_POLICY, RUN_SSM_DOCUMENTS
-    #         action_threshold: { # required
-    #           action_threshold_value: 1.0, # required
-    #           action_threshold_type: "PERCENTAGE", # required, accepts PERCENTAGE, ABSOLUTE_VALUE
-    #         },
-    #         definition: { # required
-    #           iam_action_definition: {
-    #             policy_arn: "PolicyArn", # required
-    #             roles: ["Role"],
-    #             groups: ["Group"],
-    #             users: ["User"],
-    #           },
-    #           scp_action_definition: {
-    #             policy_id: "PolicyId", # required
-    #             target_ids: ["TargetId"], # required
-    #           },
-    #           ssm_action_definition: {
-    #             action_sub_type: "STOP_EC2_INSTANCES", # required, accepts STOP_EC2_INSTANCES, STOP_RDS_INSTANCES
-    #             region: "Region", # required
-    #             instance_ids: ["InstanceId"], # required
-    #           },
-    #         },
-    #         execution_role_arn: "RoleArn", # required
-    #         approval_model: "AUTOMATIC", # required, accepts AUTOMATIC, MANUAL
-    #         subscribers: [ # required
-    #           {
-    #             subscription_type: "SNS", # required, accepts SNS, EMAIL
-    #             address: "SubscriberAddress", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The account ID of the user. It's a 12-digit number.
     #   @return [String]
@@ -751,84 +603,6 @@ module Aws::Budgets
 
     # Request of CreateBudget
     #
-    # @note When making an API call, you may pass CreateBudgetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId", # required
-    #         budget: { # required
-    #           budget_name: "BudgetName", # required
-    #           budget_limit: {
-    #             amount: "NumericValue", # required
-    #             unit: "UnitValue", # required
-    #           },
-    #           planned_budget_limits: {
-    #             "GenericString" => {
-    #               amount: "NumericValue", # required
-    #               unit: "UnitValue", # required
-    #             },
-    #           },
-    #           cost_filters: {
-    #             "GenericString" => ["DimensionValue"],
-    #           },
-    #           cost_types: {
-    #             include_tax: false,
-    #             include_subscription: false,
-    #             use_blended: false,
-    #             include_refund: false,
-    #             include_credit: false,
-    #             include_upfront: false,
-    #             include_recurring: false,
-    #             include_other_subscription: false,
-    #             include_support: false,
-    #             include_discount: false,
-    #             use_amortized: false,
-    #           },
-    #           time_unit: "DAILY", # required, accepts DAILY, MONTHLY, QUARTERLY, ANNUALLY
-    #           time_period: {
-    #             start: Time.now,
-    #             end: Time.now,
-    #           },
-    #           calculated_spend: {
-    #             actual_spend: { # required
-    #               amount: "NumericValue", # required
-    #               unit: "UnitValue", # required
-    #             },
-    #             forecasted_spend: {
-    #               amount: "NumericValue", # required
-    #               unit: "UnitValue", # required
-    #             },
-    #           },
-    #           budget_type: "USAGE", # required, accepts USAGE, COST, RI_UTILIZATION, RI_COVERAGE, SAVINGS_PLANS_UTILIZATION, SAVINGS_PLANS_COVERAGE
-    #           last_updated_time: Time.now,
-    #           auto_adjust_data: {
-    #             auto_adjust_type: "HISTORICAL", # required, accepts HISTORICAL, FORECAST
-    #             historical_options: {
-    #               budget_adjustment_period: 1, # required
-    #               look_back_available_periods: 1,
-    #             },
-    #             last_auto_adjust_time: Time.now,
-    #           },
-    #         },
-    #         notifications_with_subscribers: [
-    #           {
-    #             notification: { # required
-    #               notification_type: "ACTUAL", # required, accepts ACTUAL, FORECASTED
-    #               comparison_operator: "GREATER_THAN", # required, accepts GREATER_THAN, LESS_THAN, EQUAL_TO
-    #               threshold: 1.0, # required
-    #               threshold_type: "PERCENTAGE", # accepts PERCENTAGE, ABSOLUTE_VALUE
-    #               notification_state: "OK", # accepts OK, ALARM
-    #             },
-    #             subscribers: [ # required
-    #               {
-    #                 subscription_type: "SNS", # required, accepts SNS, EMAIL
-    #                 address: "SubscriberAddress", # required
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The `accountId` that is associated with the budget.
     #   @return [String]
@@ -858,27 +632,6 @@ module Aws::Budgets
     class CreateBudgetResponse < Aws::EmptyStructure; end
 
     # Request of CreateNotification
-    #
-    # @note When making an API call, you may pass CreateNotificationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId", # required
-    #         budget_name: "BudgetName", # required
-    #         notification: { # required
-    #           notification_type: "ACTUAL", # required, accepts ACTUAL, FORECASTED
-    #           comparison_operator: "GREATER_THAN", # required, accepts GREATER_THAN, LESS_THAN, EQUAL_TO
-    #           threshold: 1.0, # required
-    #           threshold_type: "PERCENTAGE", # accepts PERCENTAGE, ABSOLUTE_VALUE
-    #           notification_state: "OK", # accepts OK, ALARM
-    #         },
-    #         subscribers: [ # required
-    #           {
-    #             subscription_type: "SNS", # required, accepts SNS, EMAIL
-    #             address: "SubscriberAddress", # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] account_id
     #   The `accountId` that is associated with the budget that you want to
@@ -914,25 +667,6 @@ module Aws::Budgets
     class CreateNotificationResponse < Aws::EmptyStructure; end
 
     # Request of CreateSubscriber
-    #
-    # @note When making an API call, you may pass CreateSubscriberRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId", # required
-    #         budget_name: "BudgetName", # required
-    #         notification: { # required
-    #           notification_type: "ACTUAL", # required, accepts ACTUAL, FORECASTED
-    #           comparison_operator: "GREATER_THAN", # required, accepts GREATER_THAN, LESS_THAN, EQUAL_TO
-    #           threshold: 1.0, # required
-    #           threshold_type: "PERCENTAGE", # accepts PERCENTAGE, ABSOLUTE_VALUE
-    #           notification_state: "OK", # accepts OK, ALARM
-    #         },
-    #         subscriber: { # required
-    #           subscription_type: "SNS", # required, accepts SNS, EMAIL
-    #           address: "SubscriberAddress", # required
-    #         },
-    #       }
     #
     # @!attribute [rw] account_id
     #   The `accountId` that is associated with the budget that you want to
@@ -980,27 +714,6 @@ module Aws::Budgets
 
     # Specifies all of the type-specific parameters.
     #
-    # @note When making an API call, you may pass Definition
-    #   data as a hash:
-    #
-    #       {
-    #         iam_action_definition: {
-    #           policy_arn: "PolicyArn", # required
-    #           roles: ["Role"],
-    #           groups: ["Group"],
-    #           users: ["User"],
-    #         },
-    #         scp_action_definition: {
-    #           policy_id: "PolicyId", # required
-    #           target_ids: ["TargetId"], # required
-    #         },
-    #         ssm_action_definition: {
-    #           action_sub_type: "STOP_EC2_INSTANCES", # required, accepts STOP_EC2_INSTANCES, STOP_RDS_INSTANCES
-    #           region: "Region", # required
-    #           instance_ids: ["InstanceId"], # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] iam_action_definition
     #   The Identity and Access Management (IAM) action definition details.
     #   @return [Types::IamActionDefinition]
@@ -1022,15 +735,6 @@ module Aws::Budgets
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteBudgetActionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId", # required
-    #         budget_name: "BudgetName", # required
-    #         action_id: "ActionId", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The account ID of the user. It's a 12-digit number.
     #   @return [String]
@@ -1076,14 +780,6 @@ module Aws::Budgets
 
     # Request of DeleteBudget
     #
-    # @note When making an API call, you may pass DeleteBudgetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId", # required
-    #         budget_name: "BudgetName", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The `accountId` that is associated with the budget that you want to
     #   delete.
@@ -1105,21 +801,6 @@ module Aws::Budgets
     class DeleteBudgetResponse < Aws::EmptyStructure; end
 
     # Request of DeleteNotification
-    #
-    # @note When making an API call, you may pass DeleteNotificationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId", # required
-    #         budget_name: "BudgetName", # required
-    #         notification: { # required
-    #           notification_type: "ACTUAL", # required, accepts ACTUAL, FORECASTED
-    #           comparison_operator: "GREATER_THAN", # required, accepts GREATER_THAN, LESS_THAN, EQUAL_TO
-    #           threshold: 1.0, # required
-    #           threshold_type: "PERCENTAGE", # accepts PERCENTAGE, ABSOLUTE_VALUE
-    #           notification_state: "OK", # accepts OK, ALARM
-    #         },
-    #       }
     #
     # @!attribute [rw] account_id
     #   The `accountId` that is associated with the budget whose
@@ -1147,25 +828,6 @@ module Aws::Budgets
     class DeleteNotificationResponse < Aws::EmptyStructure; end
 
     # Request of DeleteSubscriber
-    #
-    # @note When making an API call, you may pass DeleteSubscriberRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId", # required
-    #         budget_name: "BudgetName", # required
-    #         notification: { # required
-    #           notification_type: "ACTUAL", # required, accepts ACTUAL, FORECASTED
-    #           comparison_operator: "GREATER_THAN", # required, accepts GREATER_THAN, LESS_THAN, EQUAL_TO
-    #           threshold: 1.0, # required
-    #           threshold_type: "PERCENTAGE", # accepts PERCENTAGE, ABSOLUTE_VALUE
-    #           notification_state: "OK", # accepts OK, ALARM
-    #         },
-    #         subscriber: { # required
-    #           subscription_type: "SNS", # required, accepts SNS, EMAIL
-    #           address: "SubscriberAddress", # required
-    #         },
-    #       }
     #
     # @!attribute [rw] account_id
     #   The `accountId` that is associated with the budget whose subscriber
@@ -1197,21 +859,6 @@ module Aws::Budgets
     #
     class DeleteSubscriberResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeBudgetActionHistoriesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId", # required
-    #         budget_name: "BudgetName", # required
-    #         action_id: "ActionId", # required
-    #         time_period: {
-    #           start: Time.now,
-    #           end: Time.now,
-    #         },
-    #         max_results: 1,
-    #         next_token: "GenericString",
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The account ID of the user. It's a 12-digit number.
     #   @return [String]
@@ -1267,15 +914,6 @@ module Aws::Budgets
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeBudgetActionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId", # required
-    #         budget_name: "BudgetName", # required
-    #         action_id: "ActionId", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The account ID of the user. It's a 12-digit number.
     #   @return [String]
@@ -1319,15 +957,6 @@ module Aws::Budgets
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeBudgetActionsForAccountRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId", # required
-    #         max_results: 1,
-    #         next_token: "GenericString",
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The account ID of the user. It's a 12-digit number.
     #   @return [String]
@@ -1364,16 +993,6 @@ module Aws::Budgets
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeBudgetActionsForBudgetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId", # required
-    #         budget_name: "BudgetName", # required
-    #         max_results: 1,
-    #         next_token: "GenericString",
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The account ID of the user. It's a 12-digit number.
     #   @return [String]
@@ -1416,15 +1035,6 @@ module Aws::Budgets
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeBudgetNotificationsForAccountRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId", # required
-    #         max_results: 1,
-    #         next_token: "GenericString",
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The account ID of the user. It's a 12-digit number.
     #   @return [String]
@@ -1461,20 +1071,6 @@ module Aws::Budgets
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeBudgetPerformanceHistoryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId", # required
-    #         budget_name: "BudgetName", # required
-    #         time_period: {
-    #           start: Time.now,
-    #           end: Time.now,
-    #         },
-    #         max_results: 1,
-    #         next_token: "GenericString",
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The account ID of the user. It's a 12-digit number.
     #   @return [String]
@@ -1531,14 +1127,6 @@ module Aws::Budgets
 
     # Request of DescribeBudget
     #
-    # @note When making an API call, you may pass DescribeBudgetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId", # required
-    #         budget_name: "BudgetName", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The `accountId` that is associated with the budget that you want a
     #   description of.
@@ -1568,15 +1156,6 @@ module Aws::Budgets
     end
 
     # Request of DescribeBudgets
-    #
-    # @note When making an API call, you may pass DescribeBudgetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId", # required
-    #         max_results: 1,
-    #         next_token: "GenericString",
-    #       }
     #
     # @!attribute [rw] account_id
     #   The `accountId` that is associated with the budgets that you want
@@ -1620,16 +1199,6 @@ module Aws::Budgets
     end
 
     # Request of DescribeNotificationsForBudget
-    #
-    # @note When making an API call, you may pass DescribeNotificationsForBudgetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId", # required
-    #         budget_name: "BudgetName", # required
-    #         max_results: 1,
-    #         next_token: "GenericString",
-    #       }
     #
     # @!attribute [rw] account_id
     #   The `accountId` that is associated with the budget whose
@@ -1678,23 +1247,6 @@ module Aws::Budgets
     end
 
     # Request of DescribeSubscribersForNotification
-    #
-    # @note When making an API call, you may pass DescribeSubscribersForNotificationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId", # required
-    #         budget_name: "BudgetName", # required
-    #         notification: { # required
-    #           notification_type: "ACTUAL", # required, accepts ACTUAL, FORECASTED
-    #           comparison_operator: "GREATER_THAN", # required, accepts GREATER_THAN, LESS_THAN, EQUAL_TO
-    #           threshold: 1.0, # required
-    #           threshold_type: "PERCENTAGE", # accepts PERCENTAGE, ABSOLUTE_VALUE
-    #           notification_state: "OK", # accepts OK, ALARM
-    #         },
-    #         max_results: 1,
-    #         next_token: "GenericString",
-    #       }
     #
     # @!attribute [rw] account_id
     #   The `accountId` that is associated with the budget whose subscribers
@@ -1760,16 +1312,6 @@ module Aws::Budgets
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ExecuteBudgetActionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId", # required
-    #         budget_name: "BudgetName", # required
-    #         action_id: "ActionId", # required
-    #         execution_type: "APPROVE_BUDGET_ACTION", # required, accepts APPROVE_BUDGET_ACTION, RETRY_BUDGET_ACTION, REVERSE_BUDGET_ACTION, RESET_BUDGET_ACTION
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The account ID of the user. It's a 12-digit number.
     #   @return [String]
@@ -1839,14 +1381,6 @@ module Aws::Budgets
     # The parameters that define or describe the historical data that your
     # auto-adjusting budget is based on.
     #
-    # @note When making an API call, you may pass HistoricalOptions
-    #   data as a hash:
-    #
-    #       {
-    #         budget_adjustment_period: 1, # required
-    #         look_back_available_periods: 1,
-    #       }
-    #
     # @!attribute [rw] budget_adjustment_period
     #   The number of budget periods included in the moving-average
     #   calculation that determines your auto-adjusted budget amount. The
@@ -1886,16 +1420,6 @@ module Aws::Budgets
     end
 
     # The Identity and Access Management (IAM) action definition details.
-    #
-    # @note When making an API call, you may pass IamActionDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         policy_arn: "PolicyArn", # required
-    #         roles: ["Role"],
-    #         groups: ["Group"],
-    #         users: ["User"],
-    #       }
     #
     # @!attribute [rw] policy_arn
     #   The Amazon Resource Name (ARN) of the policy to be attached.
@@ -1991,17 +1515,6 @@ module Aws::Budgets
     #
     # * A notification `threshold` of `80`
     #
-    # @note When making an API call, you may pass Notification
-    #   data as a hash:
-    #
-    #       {
-    #         notification_type: "ACTUAL", # required, accepts ACTUAL, FORECASTED
-    #         comparison_operator: "GREATER_THAN", # required, accepts GREATER_THAN, LESS_THAN, EQUAL_TO
-    #         threshold: 1.0, # required
-    #         threshold_type: "PERCENTAGE", # accepts PERCENTAGE, ABSOLUTE_VALUE
-    #         notification_state: "OK", # accepts OK, ALARM
-    #       }
-    #
     # @!attribute [rw] notification_type
     #   Specifies whether the notification is for how much you have spent
     #   (`ACTUAL`) or for how much that you're forecasted to spend
@@ -2050,25 +1563,6 @@ module Aws::Budgets
     # subscriber and up to 10 email subscribers, for a total of 11
     # subscribers.
     #
-    # @note When making an API call, you may pass NotificationWithSubscribers
-    #   data as a hash:
-    #
-    #       {
-    #         notification: { # required
-    #           notification_type: "ACTUAL", # required, accepts ACTUAL, FORECASTED
-    #           comparison_operator: "GREATER_THAN", # required, accepts GREATER_THAN, LESS_THAN, EQUAL_TO
-    #           threshold: 1.0, # required
-    #           threshold_type: "PERCENTAGE", # accepts PERCENTAGE, ABSOLUTE_VALUE
-    #           notification_state: "OK", # accepts OK, ALARM
-    #         },
-    #         subscribers: [ # required
-    #           {
-    #             subscription_type: "SNS", # required, accepts SNS, EMAIL
-    #             address: "SubscriberAddress", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] notification
     #   The notification that's associated with a budget.
     #   @return [Types::Notification]
@@ -2099,14 +1593,6 @@ module Aws::Budgets
 
     # The service control policies (SCP) action definition details.
     #
-    # @note When making an API call, you may pass ScpActionDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         policy_id: "PolicyId", # required
-    #         target_ids: ["TargetId"], # required
-    #       }
-    #
     # @!attribute [rw] policy_id
     #   The policy ID attached.
     #   @return [String]
@@ -2131,14 +1617,6 @@ module Aws::Budgets
     #
     # * A `unit` of `GB`
     #
-    # @note When making an API call, you may pass Spend
-    #   data as a hash:
-    #
-    #       {
-    #         amount: "NumericValue", # required
-    #         unit: "UnitValue", # required
-    #       }
-    #
     # @!attribute [rw] amount
     #   The cost or usage amount that's associated with a budget forecast,
     #   actual spend, or budget threshold.
@@ -2158,15 +1636,6 @@ module Aws::Budgets
 
     # The Amazon Web Services Systems Manager (SSM) action definition
     # details.
-    #
-    # @note When making an API call, you may pass SsmActionDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         action_sub_type: "STOP_EC2_INSTANCES", # required, accepts STOP_EC2_INSTANCES, STOP_RDS_INSTANCES
-    #         region: "Region", # required
-    #         instance_ids: ["InstanceId"], # required
-    #       }
     #
     # @!attribute [rw] action_sub_type
     #   The action subType.
@@ -2196,14 +1665,6 @@ module Aws::Budgets
     # * A `subscriptionType` of `EMAIL`
     #
     # * An `address` of `example@example.com`
-    #
-    # @note When making an API call, you may pass Subscriber
-    #   data as a hash:
-    #
-    #       {
-    #         subscription_type: "SNS", # required, accepts SNS, EMAIL
-    #         address: "SubscriberAddress", # required
-    #       }
     #
     # @!attribute [rw] subscription_type
     #   The type of notification that Amazon Web Services sends to a
@@ -2242,14 +1703,6 @@ module Aws::Budgets
     # date and an end date. The start date must come before the end date.
     # There are no restrictions on the end date.
     #
-    # @note When making an API call, you may pass TimePeriod
-    #   data as a hash:
-    #
-    #       {
-    #         start: Time.now,
-    #         end: Time.now,
-    #       }
-    #
     # @!attribute [rw] start
     #   The start date for a budget. If you created your budget and didn't
     #   specify a start date, Amazon Web Services defaults to the start of
@@ -2282,45 +1735,6 @@ module Aws::Budgets
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateBudgetActionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId", # required
-    #         budget_name: "BudgetName", # required
-    #         action_id: "ActionId", # required
-    #         notification_type: "ACTUAL", # accepts ACTUAL, FORECASTED
-    #         action_threshold: {
-    #           action_threshold_value: 1.0, # required
-    #           action_threshold_type: "PERCENTAGE", # required, accepts PERCENTAGE, ABSOLUTE_VALUE
-    #         },
-    #         definition: {
-    #           iam_action_definition: {
-    #             policy_arn: "PolicyArn", # required
-    #             roles: ["Role"],
-    #             groups: ["Group"],
-    #             users: ["User"],
-    #           },
-    #           scp_action_definition: {
-    #             policy_id: "PolicyId", # required
-    #             target_ids: ["TargetId"], # required
-    #           },
-    #           ssm_action_definition: {
-    #             action_sub_type: "STOP_EC2_INSTANCES", # required, accepts STOP_EC2_INSTANCES, STOP_RDS_INSTANCES
-    #             region: "Region", # required
-    #             instance_ids: ["InstanceId"], # required
-    #           },
-    #         },
-    #         execution_role_arn: "RoleArn",
-    #         approval_model: "AUTOMATIC", # accepts AUTOMATIC, MANUAL
-    #         subscribers: [
-    #           {
-    #             subscription_type: "SNS", # required, accepts SNS, EMAIL
-    #             address: "SubscriberAddress", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The account ID of the user. It's a 12-digit number.
     #   @return [String]
@@ -2402,67 +1816,6 @@ module Aws::Budgets
 
     # Request of UpdateBudget
     #
-    # @note When making an API call, you may pass UpdateBudgetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId", # required
-    #         new_budget: { # required
-    #           budget_name: "BudgetName", # required
-    #           budget_limit: {
-    #             amount: "NumericValue", # required
-    #             unit: "UnitValue", # required
-    #           },
-    #           planned_budget_limits: {
-    #             "GenericString" => {
-    #               amount: "NumericValue", # required
-    #               unit: "UnitValue", # required
-    #             },
-    #           },
-    #           cost_filters: {
-    #             "GenericString" => ["DimensionValue"],
-    #           },
-    #           cost_types: {
-    #             include_tax: false,
-    #             include_subscription: false,
-    #             use_blended: false,
-    #             include_refund: false,
-    #             include_credit: false,
-    #             include_upfront: false,
-    #             include_recurring: false,
-    #             include_other_subscription: false,
-    #             include_support: false,
-    #             include_discount: false,
-    #             use_amortized: false,
-    #           },
-    #           time_unit: "DAILY", # required, accepts DAILY, MONTHLY, QUARTERLY, ANNUALLY
-    #           time_period: {
-    #             start: Time.now,
-    #             end: Time.now,
-    #           },
-    #           calculated_spend: {
-    #             actual_spend: { # required
-    #               amount: "NumericValue", # required
-    #               unit: "UnitValue", # required
-    #             },
-    #             forecasted_spend: {
-    #               amount: "NumericValue", # required
-    #               unit: "UnitValue", # required
-    #             },
-    #           },
-    #           budget_type: "USAGE", # required, accepts USAGE, COST, RI_UTILIZATION, RI_COVERAGE, SAVINGS_PLANS_UTILIZATION, SAVINGS_PLANS_COVERAGE
-    #           last_updated_time: Time.now,
-    #           auto_adjust_data: {
-    #             auto_adjust_type: "HISTORICAL", # required, accepts HISTORICAL, FORECAST
-    #             historical_options: {
-    #               budget_adjustment_period: 1, # required
-    #               look_back_available_periods: 1,
-    #             },
-    #             last_auto_adjust_time: Time.now,
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The `accountId` that is associated with the budget that you want to
     #   update.
@@ -2484,28 +1837,6 @@ module Aws::Budgets
     class UpdateBudgetResponse < Aws::EmptyStructure; end
 
     # Request of UpdateNotification
-    #
-    # @note When making an API call, you may pass UpdateNotificationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId", # required
-    #         budget_name: "BudgetName", # required
-    #         old_notification: { # required
-    #           notification_type: "ACTUAL", # required, accepts ACTUAL, FORECASTED
-    #           comparison_operator: "GREATER_THAN", # required, accepts GREATER_THAN, LESS_THAN, EQUAL_TO
-    #           threshold: 1.0, # required
-    #           threshold_type: "PERCENTAGE", # accepts PERCENTAGE, ABSOLUTE_VALUE
-    #           notification_state: "OK", # accepts OK, ALARM
-    #         },
-    #         new_notification: { # required
-    #           notification_type: "ACTUAL", # required, accepts ACTUAL, FORECASTED
-    #           comparison_operator: "GREATER_THAN", # required, accepts GREATER_THAN, LESS_THAN, EQUAL_TO
-    #           threshold: 1.0, # required
-    #           threshold_type: "PERCENTAGE", # accepts PERCENTAGE, ABSOLUTE_VALUE
-    #           notification_state: "OK", # accepts OK, ALARM
-    #         },
-    #       }
     #
     # @!attribute [rw] account_id
     #   The `accountId` that is associated with the budget whose
@@ -2538,29 +1869,6 @@ module Aws::Budgets
     class UpdateNotificationResponse < Aws::EmptyStructure; end
 
     # Request of UpdateSubscriber
-    #
-    # @note When making an API call, you may pass UpdateSubscriberRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId", # required
-    #         budget_name: "BudgetName", # required
-    #         notification: { # required
-    #           notification_type: "ACTUAL", # required, accepts ACTUAL, FORECASTED
-    #           comparison_operator: "GREATER_THAN", # required, accepts GREATER_THAN, LESS_THAN, EQUAL_TO
-    #           threshold: 1.0, # required
-    #           threshold_type: "PERCENTAGE", # accepts PERCENTAGE, ABSOLUTE_VALUE
-    #           notification_state: "OK", # accepts OK, ALARM
-    #         },
-    #         old_subscriber: { # required
-    #           subscription_type: "SNS", # required, accepts SNS, EMAIL
-    #           address: "SubscriberAddress", # required
-    #         },
-    #         new_subscriber: { # required
-    #           subscription_type: "SNS", # required, accepts SNS, EMAIL
-    #           address: "SubscriberAddress", # required
-    #         },
-    #       }
     #
     # @!attribute [rw] account_id
     #   The `accountId` that is associated with the budget whose subscriber

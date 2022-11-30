@@ -37,8 +37,6 @@ module Aws::ServiceQuotas
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/AssociateServiceQuotaTemplateRequest AWS API Documentation
     #
     class AssociateServiceQuotaTemplateRequest < Aws::EmptyStructure; end
@@ -47,15 +45,6 @@ module Aws::ServiceQuotas
     #
     class AssociateServiceQuotaTemplateResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteServiceQuotaIncreaseRequestFromTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_code: "ServiceCode", # required
-    #         quota_code: "QuotaCode", # required
-    #         aws_region: "AwsRegion", # required
-    #       }
-    #
     # @!attribute [rw] service_code
     #   The service identifier.
     #   @return [String]
@@ -96,8 +85,6 @@ module Aws::ServiceQuotas
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/DisassociateServiceQuotaTemplateRequest AWS API Documentation
     #
     class DisassociateServiceQuotaTemplateRequest < Aws::EmptyStructure; end
@@ -137,14 +124,6 @@ module Aws::ServiceQuotas
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAWSDefaultServiceQuotaRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_code: "ServiceCode", # required
-    #         quota_code: "QuotaCode", # required
-    #       }
-    #
     # @!attribute [rw] service_code
     #   The service identifier.
     #   @return [String]
@@ -174,8 +153,6 @@ module Aws::ServiceQuotas
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/GetAssociationForServiceQuotaTemplateRequest AWS API Documentation
     #
     class GetAssociationForServiceQuotaTemplateRequest < Aws::EmptyStructure; end
@@ -194,13 +171,6 @@ module Aws::ServiceQuotas
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRequestedServiceQuotaChangeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         request_id: "RequestId", # required
-    #       }
-    #
     # @!attribute [rw] request_id
     #   The ID of the quota increase request.
     #   @return [String]
@@ -225,15 +195,6 @@ module Aws::ServiceQuotas
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetServiceQuotaIncreaseRequestFromTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_code: "ServiceCode", # required
-    #         quota_code: "QuotaCode", # required
-    #         aws_region: "AwsRegion", # required
-    #       }
-    #
     # @!attribute [rw] service_code
     #   The service identifier.
     #   @return [String]
@@ -268,14 +229,6 @@ module Aws::ServiceQuotas
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetServiceQuotaRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_code: "ServiceCode", # required
-    #         quota_code: "QuotaCode", # required
-    #       }
-    #
     # @!attribute [rw] service_code
     #   The service identifier.
     #   @return [String]
@@ -344,15 +297,6 @@ module Aws::ServiceQuotas
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAWSDefaultServiceQuotasRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_code: "ServiceCode", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] service_code
     #   The service identifier.
     #   @return [String]
@@ -395,17 +339,6 @@ module Aws::ServiceQuotas
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRequestedServiceQuotaChangeHistoryByQuotaRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_code: "ServiceCode", # required
-    #         quota_code: "QuotaCode", # required
-    #         status: "PENDING", # accepts PENDING, CASE_OPENED, APPROVED, DENIED, CASE_CLOSED
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] service_code
     #   The service identifier.
     #   @return [String]
@@ -458,16 +391,6 @@ module Aws::ServiceQuotas
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRequestedServiceQuotaChangeHistoryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_code: "ServiceCode",
-    #         status: "PENDING", # accepts PENDING, CASE_OPENED, APPROVED, DENIED, CASE_CLOSED
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] service_code
     #   The service identifier.
     #   @return [String]
@@ -515,16 +438,6 @@ module Aws::ServiceQuotas
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListServiceQuotaIncreaseRequestsInTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_code: "ServiceCode",
-    #         aws_region: "AwsRegion",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] service_code
     #   The service identifier.
     #   @return [String]
@@ -572,15 +485,6 @@ module Aws::ServiceQuotas
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListServiceQuotasRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_code: "ServiceCode", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] service_code
     #   The service identifier.
     #   @return [String]
@@ -623,14 +527,6 @@ module Aws::ServiceQuotas
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListServicesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The token for the next page of results.
     #   @return [String]
@@ -668,13 +564,6 @@ module Aws::ServiceQuotas
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) for the applied quota for which you
     #   want to list tags. You can get this information by using the Service
@@ -779,16 +668,6 @@ module Aws::ServiceQuotas
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutServiceQuotaIncreaseRequestIntoTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         quota_code: "QuotaCode", # required
-    #         service_code: "ServiceCode", # required
-    #         aws_region: "AwsRegion", # required
-    #         desired_value: 1.0, # required
-    #       }
-    #
     # @!attribute [rw] quota_code
     #   The quota identifier.
     #   @return [String]
@@ -862,15 +741,6 @@ module Aws::ServiceQuotas
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RequestServiceQuotaIncreaseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_code: "ServiceCode", # required
-    #         quota_code: "QuotaCode", # required
-    #         desired_value: 1.0, # required
-    #       }
-    #
     # @!attribute [rw] service_code
     #   The service identifier.
     #   @return [String]
@@ -1163,14 +1033,6 @@ module Aws::ServiceQuotas
 
     # A complex data type that contains a tag key and tag value.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   A string that contains a tag key. The string length should be
     #   between 1 and 128 characters. Valid characters include a-z, A-Z,
@@ -1205,19 +1067,6 @@ module Aws::ServiceQuotas
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) for the applied quota. You can get
     #   this information by using the Service Quotas console, or by listing
@@ -1293,14 +1142,6 @@ module Aws::ServiceQuotas
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) for the applied quota that you want
     #   to untag. You can get this information by using the Service Quotas

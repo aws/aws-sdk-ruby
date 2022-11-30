@@ -50,19 +50,6 @@ module Aws::MigrationHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateCreatedArtifactRequest
-    #   data as a hash:
-    #
-    #       {
-    #         progress_update_stream: "ProgressUpdateStream", # required
-    #         migration_task_name: "MigrationTaskName", # required
-    #         created_artifact: { # required
-    #           name: "CreatedArtifactName", # required
-    #           description: "CreatedArtifactDescription",
-    #         },
-    #         dry_run: false,
-    #       }
-    #
     # @!attribute [rw] progress_update_stream
     #   The name of the ProgressUpdateStream.
     #   @return [String]
@@ -97,19 +84,6 @@ module Aws::MigrationHub
     #
     class AssociateCreatedArtifactResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass AssociateDiscoveredResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         progress_update_stream: "ProgressUpdateStream", # required
-    #         migration_task_name: "MigrationTaskName", # required
-    #         discovered_resource: { # required
-    #           configuration_id: "ConfigurationId", # required
-    #           description: "DiscoveredResourceDescription",
-    #         },
-    #         dry_run: false,
-    #       }
-    #
     # @!attribute [rw] progress_update_stream
     #   The name of the ProgressUpdateStream.
     #   @return [String]
@@ -143,14 +117,6 @@ module Aws::MigrationHub
     #
     class AssociateDiscoveredResourceResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass CreateProgressUpdateStreamRequest
-    #   data as a hash:
-    #
-    #       {
-    #         progress_update_stream_name: "ProgressUpdateStream", # required
-    #         dry_run: false,
-    #       }
-    #
     # @!attribute [rw] progress_update_stream_name
     #   The name of the ProgressUpdateStream. *Do not store personal data in
     #   this field.*
@@ -177,14 +143,6 @@ module Aws::MigrationHub
     # An ARN of the AWS cloud resource target receiving the migration (e.g.,
     # AMI, EC2 instance, RDS instance, etc.).
     #
-    # @note When making an API call, you may pass CreatedArtifact
-    #   data as a hash:
-    #
-    #       {
-    #         name: "CreatedArtifactName", # required
-    #         description: "CreatedArtifactDescription",
-    #       }
-    #
     # @!attribute [rw] name
     #   An ARN that uniquely identifies the result of a migration task.
     #   @return [String]
@@ -203,14 +161,6 @@ module Aws::MigrationHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteProgressUpdateStreamRequest
-    #   data as a hash:
-    #
-    #       {
-    #         progress_update_stream_name: "ProgressUpdateStream", # required
-    #         dry_run: false,
-    #       }
-    #
     # @!attribute [rw] progress_update_stream_name
     #   The name of the ProgressUpdateStream. *Do not store personal data in
     #   this field.*
@@ -234,13 +184,6 @@ module Aws::MigrationHub
     #
     class DeleteProgressUpdateStreamResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeApplicationStateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "ApplicationId", # required
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The configurationId in Application Discovery Service that uniquely
     #   identifies the grouped application.
@@ -271,14 +214,6 @@ module Aws::MigrationHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeMigrationTaskRequest
-    #   data as a hash:
-    #
-    #       {
-    #         progress_update_stream: "ProgressUpdateStream", # required
-    #         migration_task_name: "MigrationTaskName", # required
-    #       }
-    #
     # @!attribute [rw] progress_update_stream
     #   The name of the ProgressUpdateStream.
     #   @return [String]
@@ -309,16 +244,6 @@ module Aws::MigrationHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateCreatedArtifactRequest
-    #   data as a hash:
-    #
-    #       {
-    #         progress_update_stream: "ProgressUpdateStream", # required
-    #         migration_task_name: "MigrationTaskName", # required
-    #         created_artifact_name: "CreatedArtifactName", # required
-    #         dry_run: false,
-    #       }
-    #
     # @!attribute [rw] progress_update_stream
     #   The name of the ProgressUpdateStream.
     #   @return [String]
@@ -354,16 +279,6 @@ module Aws::MigrationHub
     #
     class DisassociateCreatedArtifactResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DisassociateDiscoveredResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         progress_update_stream: "ProgressUpdateStream", # required
-    #         migration_task_name: "MigrationTaskName", # required
-    #         configuration_id: "ConfigurationId", # required
-    #         dry_run: false,
-    #       }
-    #
     # @!attribute [rw] progress_update_stream
     #   The name of the ProgressUpdateStream.
     #   @return [String]
@@ -399,14 +314,6 @@ module Aws::MigrationHub
     class DisassociateDiscoveredResourceResult < Aws::EmptyStructure; end
 
     # Object representing the on-premises resource being migrated.
-    #
-    # @note When making an API call, you may pass DiscoveredResource
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_id: "ConfigurationId", # required
-    #         description: "DiscoveredResourceDescription",
-    #       }
     #
     # @!attribute [rw] configuration_id
     #   The configurationId in Application Discovery Service that uniquely
@@ -454,15 +361,6 @@ module Aws::MigrationHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ImportMigrationTaskRequest
-    #   data as a hash:
-    #
-    #       {
-    #         progress_update_stream: "ProgressUpdateStream", # required
-    #         migration_task_name: "MigrationTaskName", # required
-    #         dry_run: false,
-    #       }
-    #
     # @!attribute [rw] progress_update_stream
     #   The name of the ProgressUpdateStream. &gt;
     #   @return [String]
@@ -519,15 +417,6 @@ module Aws::MigrationHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListApplicationStatesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_ids: ["ApplicationId"],
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] application_ids
     #   The configurationIds from the Application Discovery Service that
     #   uniquely identifies your applications.
@@ -572,16 +461,6 @@ module Aws::MigrationHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCreatedArtifactsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         progress_update_stream: "ProgressUpdateStream", # required
-    #         migration_task_name: "MigrationTaskName", # required
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] progress_update_stream
     #   The name of the ProgressUpdateStream.
     #   @return [String]
@@ -632,16 +511,6 @@ module Aws::MigrationHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDiscoveredResourcesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         progress_update_stream: "ProgressUpdateStream", # required
-    #         migration_task_name: "MigrationTaskName", # required
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] progress_update_stream
     #   The name of the ProgressUpdateStream.
     #   @return [String]
@@ -692,15 +561,6 @@ module Aws::MigrationHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListMigrationTasksRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "Token",
-    #         max_results: 1,
-    #         resource_name: "ResourceName",
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If a `NextToken` was returned by a previous call, there are more
     #   results available. To retrieve the next page of results, make the
@@ -746,14 +606,6 @@ module Aws::MigrationHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListProgressUpdateStreamsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If a `NextToken` was returned by a previous call, there are more
     #   results available. To retrieve the next page of results, make the
@@ -873,16 +725,6 @@ module Aws::MigrationHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass NotifyApplicationStateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "ApplicationId", # required
-    #         status: "NOT_STARTED", # required, accepts NOT_STARTED, IN_PROGRESS, COMPLETED
-    #         update_date_time: Time.now,
-    #         dry_run: false,
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The configurationId in Application Discovery Service that uniquely
     #   identifies the grouped application.
@@ -916,22 +758,6 @@ module Aws::MigrationHub
     #
     class NotifyApplicationStateResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass NotifyMigrationTaskStateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         progress_update_stream: "ProgressUpdateStream", # required
-    #         migration_task_name: "MigrationTaskName", # required
-    #         task: { # required
-    #           status: "NOT_STARTED", # required, accepts NOT_STARTED, IN_PROGRESS, FAILED, COMPLETED
-    #           status_detail: "StatusDetail",
-    #           progress_percent: 1,
-    #         },
-    #         update_date_time: Time.now, # required
-    #         next_update_seconds: 1, # required
-    #         dry_run: false,
-    #       }
-    #
     # @!attribute [rw] progress_update_stream
     #   The name of the ProgressUpdateStream.
     #   @return [String]
@@ -1010,21 +836,6 @@ module Aws::MigrationHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutResourceAttributesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         progress_update_stream: "ProgressUpdateStream", # required
-    #         migration_task_name: "MigrationTaskName", # required
-    #         resource_attribute_list: [ # required
-    #           {
-    #             type: "IPV4_ADDRESS", # required, accepts IPV4_ADDRESS, IPV6_ADDRESS, MAC_ADDRESS, FQDN, VM_MANAGER_ID, VM_MANAGED_OBJECT_REFERENCE, VM_NAME, VM_PATH, BIOS_ID, MOTHERBOARD_SERIAL_NUMBER
-    #             value: "ResourceAttributeValue", # required
-    #           },
-    #         ],
-    #         dry_run: false,
-    #       }
-    #
     # @!attribute [rw] progress_update_stream
     #   The name of the ProgressUpdateStream.
     #   @return [String]
@@ -1109,14 +920,6 @@ module Aws::MigrationHub
     #
     # : `^[^<>\{\}\\\\/?,=\\p\{Cntrl\}]\{1,256\}$`
     #
-    # @note When making an API call, you may pass ResourceAttribute
-    #   data as a hash:
-    #
-    #       {
-    #         type: "IPV4_ADDRESS", # required, accepts IPV4_ADDRESS, IPV6_ADDRESS, MAC_ADDRESS, FQDN, VM_MANAGER_ID, VM_MANAGED_OBJECT_REFERENCE, VM_NAME, VM_PATH, BIOS_ID, MOTHERBOARD_SERIAL_NUMBER
-    #         value: "ResourceAttributeValue", # required
-    #       }
-    #
     # @!attribute [rw] type
     #   Type of resource.
     #   @return [String]
@@ -1165,15 +968,6 @@ module Aws::MigrationHub
     end
 
     # Task object encapsulating task information.
-    #
-    # @note When making an API call, you may pass Task
-    #   data as a hash:
-    #
-    #       {
-    #         status: "NOT_STARTED", # required, accepts NOT_STARTED, IN_PROGRESS, FAILED, COMPLETED
-    #         status_detail: "StatusDetail",
-    #         progress_percent: 1,
-    #       }
     #
     # @!attribute [rw] status
     #   Status of the task - Not Started, In-Progress, Complete.

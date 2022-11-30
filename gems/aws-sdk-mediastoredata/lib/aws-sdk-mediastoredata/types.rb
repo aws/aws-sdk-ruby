@@ -23,13 +23,6 @@ module Aws::MediaStoreData
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteObjectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         path: "PathNaming", # required
-    #       }
-    #
     # @!attribute [rw] path
     #   The path (including the file name) where the object is stored in the
     #   container. Format: &lt;folder name&gt;/&lt;folder name&gt;/&lt;file
@@ -48,13 +41,6 @@ module Aws::MediaStoreData
     #
     class DeleteObjectResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeObjectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         path: "PathNaming", # required
-    #       }
-    #
     # @!attribute [rw] path
     #   The path (including the file name) where the object is stored in the
     #   container. Format: &lt;folder name&gt;/&lt;folder name&gt;/&lt;file
@@ -110,14 +96,6 @@ module Aws::MediaStoreData
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetObjectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         path: "PathNaming", # required
-    #         range: "RangePattern",
-    #       }
-    #
     # @!attribute [rw] path
     #   The path (including the file name) where the object is stored in the
     #   container. Format: &lt;folder name&gt;/&lt;folder name&gt;/&lt;file
@@ -283,15 +261,6 @@ module Aws::MediaStoreData
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListItemsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         path: "ListPathNaming",
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] path
     #   The path in the container from which to retrieve items. Format:
     #   &lt;folder name&gt;/&lt;folder name&gt;/&lt;file name&gt;
@@ -366,18 +335,6 @@ module Aws::MediaStoreData
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutObjectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         body: "data", # required
-    #         path: "PathNaming", # required
-    #         content_type: "ContentType",
-    #         cache_control: "StringPrimitive",
-    #         storage_class: "TEMPORAL", # accepts TEMPORAL
-    #         upload_availability: "STANDARD", # accepts STANDARD, STREAMING
-    #       }
-    #
     # @!attribute [rw] body
     #   The bytes to be stored.
     #   @return [IO]

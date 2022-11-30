@@ -222,28 +222,6 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchCreateVariableRequest
-    #   data as a hash:
-    #
-    #       {
-    #         variable_entries: [ # required
-    #           {
-    #             name: "string",
-    #             data_type: "string",
-    #             data_source: "string",
-    #             default_value: "string",
-    #             description: "string",
-    #             variable_type: "string",
-    #           },
-    #         ],
-    #         tags: [
-    #           {
-    #             key: "tagKey", # required
-    #             value: "tagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] variable_entries
     #   The list of variables for the batch create variable request.
     #   @return [Array<Types::VariableEntry>]
@@ -297,13 +275,6 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchGetVariableRequest
-    #   data as a hash:
-    #
-    #       {
-    #         names: ["string"], # required
-    #       }
-    #
     # @!attribute [rw] names
     #   The list of variable names to get.
     #   @return [Array<String>]
@@ -492,13 +463,6 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CancelBatchImportJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "identifier", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The ID of an in-progress batch import job to cancel.
     #
@@ -518,13 +482,6 @@ module Aws::FraudDetector
     #
     class CancelBatchImportJobResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass CancelBatchPredictionJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "identifier", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The ID of the batch prediction job to cancel.
     #   @return [String]
@@ -555,23 +512,6 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateBatchImportJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "identifier", # required
-    #         input_path: "s3BucketLocation", # required
-    #         output_path: "s3BucketLocation", # required
-    #         event_type_name: "identifier", # required
-    #         iam_role_arn: "iamRoleArn", # required
-    #         tags: [
-    #           {
-    #             key: "tagKey", # required
-    #             value: "tagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The ID of the batch import job. The ID cannot be of a past job,
     #   unless the job exists in `CREATE_FAILED` state.
@@ -625,25 +565,6 @@ module Aws::FraudDetector
     #
     class CreateBatchImportJobResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass CreateBatchPredictionJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "identifier", # required
-    #         input_path: "s3BucketLocation", # required
-    #         output_path: "s3BucketLocation", # required
-    #         event_type_name: "identifier", # required
-    #         detector_name: "identifier", # required
-    #         detector_version: "wholeNumberVersionString",
-    #         iam_role_arn: "iamRoleArn", # required
-    #         tags: [
-    #           {
-    #             key: "tagKey", # required
-    #             value: "tagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The ID of the batch prediction job.
     #   @return [String]
@@ -704,37 +625,6 @@ module Aws::FraudDetector
     #
     class CreateBatchPredictionJobResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass CreateDetectorVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "identifier", # required
-    #         description: "description",
-    #         external_model_endpoints: ["string"],
-    #         rules: [ # required
-    #           {
-    #             detector_id: "identifier", # required
-    #             rule_id: "identifier", # required
-    #             rule_version: "wholeNumberVersionString", # required
-    #           },
-    #         ],
-    #         model_versions: [
-    #           {
-    #             model_id: "modelIdentifier", # required
-    #             model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS, ACCOUNT_TAKEOVER_INSIGHTS
-    #             model_version_number: "floatVersionString", # required
-    #             arn: "fraudDetectorArn",
-    #           },
-    #         ],
-    #         rule_execution_mode: "ALL_MATCHED", # accepts ALL_MATCHED, FIRST_MATCHED
-    #         tags: [
-    #           {
-    #             key: "tagKey", # required
-    #             value: "tagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The ID of the detector under which you want to create a new version.
     #   @return [String]
@@ -814,22 +704,6 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateModelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         model_id: "modelIdentifier", # required
-    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS, ACCOUNT_TAKEOVER_INSIGHTS
-    #         description: "description",
-    #         event_type_name: "string", # required
-    #         tags: [
-    #           {
-    #             key: "tagKey", # required
-    #             value: "tagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] model_id
     #   The model ID.
     #   @return [String]
@@ -866,40 +740,6 @@ module Aws::FraudDetector
     #
     class CreateModelResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass CreateModelVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         model_id: "modelIdentifier", # required
-    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS, ACCOUNT_TAKEOVER_INSIGHTS
-    #         training_data_source: "EXTERNAL_EVENTS", # required, accepts EXTERNAL_EVENTS, INGESTED_EVENTS
-    #         training_data_schema: { # required
-    #           model_variables: ["string"], # required
-    #           label_schema: {
-    #             label_mapper: {
-    #               "string" => ["string"],
-    #             },
-    #             unlabeled_events_treatment: "IGNORE", # accepts IGNORE, FRAUD, LEGIT
-    #           },
-    #         },
-    #         external_events_detail: {
-    #           data_location: "s3BucketLocation", # required
-    #           data_access_role_arn: "iamRoleArn", # required
-    #         },
-    #         ingested_events_detail: {
-    #           ingested_events_time_window: { # required
-    #             start_time: "time", # required
-    #             end_time: "time", # required
-    #           },
-    #         },
-    #         tags: [
-    #           {
-    #             key: "tagKey", # required
-    #             value: "tagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] model_id
     #   The model ID.
     #   @return [String]
@@ -971,24 +811,6 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rule_id: "identifier", # required
-    #         detector_id: "identifier", # required
-    #         description: "description",
-    #         expression: "ruleExpression", # required
-    #         language: "DETECTORPL", # required, accepts DETECTORPL
-    #         outcomes: ["string"], # required
-    #         tags: [
-    #           {
-    #             key: "tagKey", # required
-    #             value: "tagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] rule_id
     #   The rule ID.
     #   @return [String]
@@ -1043,24 +865,6 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateVariableRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "string", # required
-    #         data_type: "STRING", # required, accepts STRING, INTEGER, FLOAT, BOOLEAN
-    #         data_source: "EVENT", # required, accepts EVENT, MODEL_SCORE, EXTERNAL_MODEL_SCORE
-    #         default_value: "string", # required
-    #         description: "string",
-    #         variable_type: "string",
-    #         tags: [
-    #           {
-    #             key: "tagKey", # required
-    #             value: "tagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the variable.
     #   @return [String]
@@ -1140,13 +944,6 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteBatchImportJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "identifier", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The ID of the batch import job to delete.
     #   @return [String]
@@ -1163,13 +960,6 @@ module Aws::FraudDetector
     #
     class DeleteBatchImportJobResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteBatchPredictionJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "identifier", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The ID of the batch prediction job to delete.
     #   @return [String]
@@ -1186,13 +976,6 @@ module Aws::FraudDetector
     #
     class DeleteBatchPredictionJobResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteDetectorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "identifier", # required
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The ID of the detector to delete.
     #   @return [String]
@@ -1209,14 +992,6 @@ module Aws::FraudDetector
     #
     class DeleteDetectorResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteDetectorVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "identifier", # required
-    #         detector_version_id: "wholeNumberVersionString", # required
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The ID of the parent detector for the detector version to delete.
     #   @return [String]
@@ -1238,13 +1013,6 @@ module Aws::FraudDetector
     #
     class DeleteDetectorVersionResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteEntityTypeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "identifier", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the entity type to delete.
     #   @return [String]
@@ -1261,15 +1029,6 @@ module Aws::FraudDetector
     #
     class DeleteEntityTypeResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteEventRequest
-    #   data as a hash:
-    #
-    #       {
-    #         event_id: "identifier", # required
-    #         event_type_name: "identifier", # required
-    #         delete_audit_history: false,
-    #       }
-    #
     # @!attribute [rw] event_id
     #   The ID of the event to delete.
     #   @return [String]
@@ -1297,13 +1056,6 @@ module Aws::FraudDetector
     #
     class DeleteEventResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteEventTypeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "identifier", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the event type to delete.
     #   @return [String]
@@ -1320,13 +1072,6 @@ module Aws::FraudDetector
     #
     class DeleteEventTypeResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteEventsByEventTypeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         event_type_name: "identifier", # required
-    #       }
-    #
     # @!attribute [rw] event_type_name
     #   The name of the event type.
     #   @return [String]
@@ -1356,13 +1101,6 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteExternalModelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         model_endpoint: "sageMakerEndpointIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] model_endpoint
     #   The endpoint of the Amazon Sagemaker model to delete.
     #   @return [String]
@@ -1379,13 +1117,6 @@ module Aws::FraudDetector
     #
     class DeleteExternalModelResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteLabelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "identifier", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the label to delete.
     #   @return [String]
@@ -1402,14 +1133,6 @@ module Aws::FraudDetector
     #
     class DeleteLabelResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteModelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         model_id: "modelIdentifier", # required
-    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS, ACCOUNT_TAKEOVER_INSIGHTS
-    #       }
-    #
     # @!attribute [rw] model_id
     #   The model ID of the model to delete.
     #   @return [String]
@@ -1431,15 +1154,6 @@ module Aws::FraudDetector
     #
     class DeleteModelResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteModelVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         model_id: "modelIdentifier", # required
-    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS, ACCOUNT_TAKEOVER_INSIGHTS
-    #         model_version_number: "floatVersionString", # required
-    #       }
-    #
     # @!attribute [rw] model_id
     #   The model ID of the model version to delete.
     #   @return [String]
@@ -1466,13 +1180,6 @@ module Aws::FraudDetector
     #
     class DeleteModelVersionResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteOutcomeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "identifier", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the outcome to delete.
     #   @return [String]
@@ -1489,17 +1196,6 @@ module Aws::FraudDetector
     #
     class DeleteOutcomeResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rule: { # required
-    #           detector_id: "identifier", # required
-    #           rule_id: "identifier", # required
-    #           rule_version: "wholeNumberVersionString", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] rule
     #   A rule.
     #   @return [Types::Rule]
@@ -1516,13 +1212,6 @@ module Aws::FraudDetector
     #
     class DeleteRuleResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteVariableRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "string", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the variable to delete.
     #   @return [String]
@@ -1539,15 +1228,6 @@ module Aws::FraudDetector
     #
     class DeleteVariableResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeDetectorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "identifier", # required
-    #         next_token: "string",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The detector ID.
     #   @return [String]
@@ -1597,17 +1277,6 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeModelVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         model_id: "modelIdentifier",
-    #         model_version_number: "floatVersionString",
-    #         model_type: "ONLINE_FRAUD_INSIGHTS", # accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS, ACCOUNT_TAKEOVER_INSIGHTS
-    #         next_token: "string",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] model_id
     #   The model ID.
     #   @return [String]
@@ -1726,14 +1395,6 @@ module Aws::FraudDetector
     end
 
     # The entity details.
-    #
-    # @note When making an API call, you may pass Entity
-    #   data as a hash:
-    #
-    #       {
-    #         entity_type: "string", # required
-    #         entity_id: "entityRestrictedString", # required
-    #       }
     #
     # @!attribute [rw] entity_type
     #   The entity type.
@@ -2070,14 +1731,6 @@ module Aws::FraudDetector
 
     # Details for the external events data used for model version training.
     #
-    # @note When making an API call, you may pass ExternalEventsDetail
-    #   data as a hash:
-    #
-    #       {
-    #         data_location: "s3BucketLocation", # required
-    #         data_access_role_arn: "iamRoleArn", # required
-    #       }
-    #
     # @!attribute [rw] data_location
     #   The Amazon S3 bucket location for the data.
     #   @return [String]
@@ -2248,13 +1901,6 @@ module Aws::FraudDetector
 
     # A conditional statement for filtering a list of past predictions.
     #
-    # @note When making an API call, you may pass FilterCondition
-    #   data as a hash:
-    #
-    #       {
-    #         value: "filterString",
-    #       }
-    #
     # @!attribute [rw] value
     #   A statement containing a resource property and a value to specify
     #   filter condition.
@@ -2268,15 +1914,6 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetBatchImportJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "identifier",
-    #         max_results: 1,
-    #         next_token: "string",
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The ID of the batch import job to get.
     #   @return [String]
@@ -2316,15 +1953,6 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetBatchPredictionJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "identifier",
-    #         max_results: 1,
-    #         next_token: "string",
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The batch prediction job for which to get the details.
     #   @return [String]
@@ -2364,13 +1992,6 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDeleteEventsByEventTypeStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         event_type_name: "identifier", # required
-    #       }
-    #
     # @!attribute [rw] event_type_name
     #   Name of event type for which to get the deletion status.
     #   @return [String]
@@ -2400,14 +2021,6 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDetectorVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "identifier", # required
-    #         detector_version_id: "wholeNumberVersionString", # required
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The detector ID.
     #   @return [String]
@@ -2498,15 +2111,6 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDetectorsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "identifier",
-    #         next_token: "string",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The detector ID.
     #   @return [String]
@@ -2546,15 +2150,6 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetEntityTypesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "identifier",
-    #         next_token: "string",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] name
     #   The name.
     #   @return [String]
@@ -2594,17 +2189,6 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetEventPredictionMetadataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         event_id: "identifier", # required
-    #         event_type_name: "identifier", # required
-    #         detector_id: "identifier", # required
-    #         detector_version_id: "wholeNumberVersionString", # required
-    #         prediction_timestamp: "time", # required
-    #       }
-    #
     # @!attribute [rw] event_id
     #   The event ID.
     #   @return [String]
@@ -2733,32 +2317,6 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetEventPredictionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "string", # required
-    #         detector_version_id: "wholeNumberVersionString",
-    #         event_id: "string", # required
-    #         event_type_name: "string", # required
-    #         entities: [ # required
-    #           {
-    #             entity_type: "string", # required
-    #             entity_id: "entityRestrictedString", # required
-    #           },
-    #         ],
-    #         event_timestamp: "utcTimestampISO8601", # required
-    #         event_variables: { # required
-    #           "variableName" => "variableValue",
-    #         },
-    #         external_model_endpoint_data_blobs: {
-    #           "sageMakerEndpointIdentifier" => {
-    #             byte_buffer: "data",
-    #             content_type: "contentType",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The detector ID.
     #   @return [String]
@@ -2860,14 +2418,6 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetEventRequest
-    #   data as a hash:
-    #
-    #       {
-    #         event_id: "string", # required
-    #         event_type_name: "string", # required
-    #       }
-    #
     # @!attribute [rw] event_id
     #   The ID of the event to retrieve.
     #   @return [String]
@@ -2897,15 +2447,6 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetEventTypesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "identifier",
-    #         next_token: "string",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] name
     #   The name.
     #   @return [String]
@@ -2945,15 +2486,6 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetExternalModelsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         model_endpoint: "string",
-    #         next_token: "string",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] model_endpoint
     #   The Amazon SageMaker model endpoint.
     #   @return [String]
@@ -3005,15 +2537,6 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLabelsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "identifier",
-    #         next_token: "string",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the label or labels to get.
     #   @return [String]
@@ -3053,15 +2576,6 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetModelVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         model_id: "modelIdentifier", # required
-    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS, ACCOUNT_TAKEOVER_INSIGHTS
-    #         model_version_number: "floatVersionString", # required
-    #       }
-    #
     # @!attribute [rw] model_id
     #   The model ID.
     #   @return [String]
@@ -3160,16 +2674,6 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetModelsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         model_id: "modelIdentifier",
-    #         model_type: "ONLINE_FRAUD_INSIGHTS", # accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS, ACCOUNT_TAKEOVER_INSIGHTS
-    #         next_token: "string",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] model_id
     #   The model ID.
     #   @return [String]
@@ -3214,15 +2718,6 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetOutcomesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "identifier",
-    #         next_token: "string",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the outcome or outcomes to get.
     #   @return [String]
@@ -3262,17 +2757,6 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRulesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rule_id: "identifier",
-    #         detector_id: "identifier", # required
-    #         rule_version: "wholeNumberVersionString",
-    #         next_token: "string",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] rule_id
     #   The rule ID.
     #   @return [String]
@@ -3322,15 +2806,6 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetVariablesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "string",
-    #         next_token: "string",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the variable.
     #   @return [String]
@@ -3406,16 +2881,6 @@ module Aws::FraudDetector
 
     # The details of the ingested event.
     #
-    # @note When making an API call, you may pass IngestedEventsDetail
-    #   data as a hash:
-    #
-    #       {
-    #         ingested_events_time_window: { # required
-    #           start_time: "time", # required
-    #           end_time: "time", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] ingested_events_time_window
     #   The start and stop time of the ingested events.
     #   @return [Types::IngestedEventsTimeWindow]
@@ -3429,14 +2894,6 @@ module Aws::FraudDetector
     end
 
     # The start and stop time of the ingested events.
-    #
-    # @note When making an API call, you may pass IngestedEventsTimeWindow
-    #   data as a hash:
-    #
-    #       {
-    #         start_time: "time", # required
-    #         end_time: "time", # required
-    #       }
     #
     # @!attribute [rw] start_time
     #   Timestamp of the first ingensted event.
@@ -3518,16 +2975,6 @@ module Aws::FraudDetector
 
     # The label schema.
     #
-    # @note When making an API call, you may pass LabelSchema
-    #   data as a hash:
-    #
-    #       {
-    #         label_mapper: {
-    #           "string" => ["string"],
-    #         },
-    #         unlabeled_events_treatment: "IGNORE", # accepts IGNORE, FRAUD, LEGIT
-    #       }
-    #
     # @!attribute [rw] label_mapper
     #   The label mapper maps the Amazon Fraud Detector supported model
     #   classification labels (`FRAUD`, `LEGIT`) to the appropriate event
@@ -3553,30 +3000,6 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEventPredictionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         event_id: {
-    #           value: "filterString",
-    #         },
-    #         event_type: {
-    #           value: "filterString",
-    #         },
-    #         detector_id: {
-    #           value: "filterString",
-    #         },
-    #         detector_version_id: {
-    #           value: "filterString",
-    #         },
-    #         prediction_time_range: {
-    #           start_time: "time", # required
-    #           end_time: "time", # required
-    #         },
-    #         next_token: "string",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] event_id
     #   The event ID.
     #   @return [Types::FilterCondition]
@@ -3640,15 +3063,6 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "fraudDetectorArn", # required
-    #         next_token: "string",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN that specifies the resource whose tags you want to list.
     #   @return [String]
@@ -3799,14 +3213,6 @@ module Aws::FraudDetector
     # detector version includes an imported Amazon SageMaker model endpoint
     # with pass-through input configuration.
     #
-    # @note When making an API call, you may pass ModelEndpointDataBlob
-    #   data as a hash:
-    #
-    #       {
-    #         byte_buffer: "data",
-    #         content_type: "contentType",
-    #       }
-    #
     # @!attribute [rw] byte_buffer
     #   The byte buffer of the Amazon SageMaker model endpoint input data
     #   blob.
@@ -3827,17 +3233,6 @@ module Aws::FraudDetector
     end
 
     # The Amazon SageMaker model input configuration.
-    #
-    # @note When making an API call, you may pass ModelInputConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         event_type_name: "identifier",
-    #         format: "TEXT_CSV", # accepts TEXT_CSV, APPLICATION_JSON
-    #         use_event_variables: false, # required
-    #         json_input_template: "modelInputTemplate",
-    #         csv_input_template: "modelInputTemplate",
-    #       }
     #
     # @!attribute [rw] event_type_name
     #   The event type name.
@@ -3880,19 +3275,6 @@ module Aws::FraudDetector
     end
 
     # Provides the Amazon Sagemaker model output configuration.
-    #
-    # @note When making an API call, you may pass ModelOutputConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         format: "TEXT_CSV", # required, accepts TEXT_CSV, APPLICATION_JSONLINES
-    #         json_key_to_variable_map: {
-    #           "string" => "string",
-    #         },
-    #         csv_index_to_variable_map: {
-    #           "string" => "string",
-    #         },
-    #       }
     #
     # @!attribute [rw] format
     #   The format of the model output configuration.
@@ -3938,16 +3320,6 @@ module Aws::FraudDetector
     end
 
     # The model version.
-    #
-    # @note When making an API call, you may pass ModelVersion
-    #   data as a hash:
-    #
-    #       {
-    #         model_id: "modelIdentifier", # required
-    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS, ACCOUNT_TAKEOVER_INSIGHTS
-    #         model_version_number: "floatVersionString", # required
-    #         arn: "fraudDetectorArn",
-    #       }
     #
     # @!attribute [rw] model_id
     #   The model ID.
@@ -4212,14 +3584,6 @@ module Aws::FraudDetector
 
     # The time period for when the predictions were generated.
     #
-    # @note When making an API call, you may pass PredictionTimeRange
-    #   data as a hash:
-    #
-    #       {
-    #         start_time: "time", # required
-    #         end_time: "time", # required
-    #       }
-    #
     # @!attribute [rw] start_time
     #   The start time of the time period for when the predictions were
     #   generated.
@@ -4239,21 +3603,6 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutDetectorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "identifier", # required
-    #         description: "description",
-    #         event_type_name: "identifier", # required
-    #         tags: [
-    #           {
-    #             key: "tagKey", # required
-    #             value: "tagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The detector ID.
     #   @return [String]
@@ -4285,20 +3634,6 @@ module Aws::FraudDetector
     #
     class PutDetectorResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass PutEntityTypeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "identifier", # required
-    #         description: "description",
-    #         tags: [
-    #           {
-    #             key: "tagKey", # required
-    #             value: "tagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the entity type.
     #   @return [String]
@@ -4325,24 +3660,6 @@ module Aws::FraudDetector
     #
     class PutEntityTypeResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass PutEventTypeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "identifier", # required
-    #         description: "description",
-    #         event_variables: ["string"], # required
-    #         labels: ["string"],
-    #         entity_types: ["string"], # required
-    #         event_ingestion: "ENABLED", # accepts ENABLED, DISABLED
-    #         tags: [
-    #           {
-    #             key: "tagKey", # required
-    #             value: "tagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name.
     #   @return [String]
@@ -4390,38 +3707,6 @@ module Aws::FraudDetector
     #
     class PutEventTypeResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass PutExternalModelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         model_endpoint: "sageMakerEndpointIdentifier", # required
-    #         model_source: "SAGEMAKER", # required, accepts SAGEMAKER
-    #         invoke_model_endpoint_role_arn: "string", # required
-    #         input_configuration: { # required
-    #           event_type_name: "identifier",
-    #           format: "TEXT_CSV", # accepts TEXT_CSV, APPLICATION_JSON
-    #           use_event_variables: false, # required
-    #           json_input_template: "modelInputTemplate",
-    #           csv_input_template: "modelInputTemplate",
-    #         },
-    #         output_configuration: { # required
-    #           format: "TEXT_CSV", # required, accepts TEXT_CSV, APPLICATION_JSONLINES
-    #           json_key_to_variable_map: {
-    #             "string" => "string",
-    #           },
-    #           csv_index_to_variable_map: {
-    #             "string" => "string",
-    #           },
-    #         },
-    #         model_endpoint_status: "ASSOCIATED", # required, accepts ASSOCIATED, DISSOCIATED
-    #         tags: [
-    #           {
-    #             key: "tagKey", # required
-    #             value: "tagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] model_endpoint
     #   The model endpoints name.
     #   @return [String]
@@ -4468,13 +3753,6 @@ module Aws::FraudDetector
     #
     class PutExternalModelResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass PutKMSEncryptionKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         kms_encryption_key_arn: "KmsEncryptionKeyArn", # required
-    #       }
-    #
     # @!attribute [rw] kms_encryption_key_arn
     #   The KMS encryption key ARN.
     #
@@ -4494,20 +3772,6 @@ module Aws::FraudDetector
     #
     class PutKMSEncryptionKeyResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass PutLabelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "identifier", # required
-    #         description: "description",
-    #         tags: [
-    #           {
-    #             key: "tagKey", # required
-    #             value: "tagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The label name.
     #   @return [String]
@@ -4533,20 +3797,6 @@ module Aws::FraudDetector
     #
     class PutLabelResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass PutOutcomeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "identifier", # required
-    #         description: "description",
-    #         tags: [
-    #           {
-    #             key: "tagKey", # required
-    #             value: "tagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the outcome.
     #   @return [String]
@@ -4601,15 +3851,6 @@ module Aws::FraudDetector
     end
 
     # A rule.
-    #
-    # @note When making an API call, you may pass Rule
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "identifier", # required
-    #         rule_id: "identifier", # required
-    #         rule_version: "wholeNumberVersionString", # required
-    #       }
     #
     # @!attribute [rw] detector_id
     #   The detector for which the rule is associated.
@@ -4711,26 +3952,6 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SendEventRequest
-    #   data as a hash:
-    #
-    #       {
-    #         event_id: "identifier", # required
-    #         event_type_name: "identifier", # required
-    #         event_timestamp: "utcTimestampISO8601", # required
-    #         event_variables: { # required
-    #           "variableName" => "variableValue",
-    #         },
-    #         assigned_label: "identifier",
-    #         label_timestamp: "utcTimestampISO8601",
-    #         entities: [ # required
-    #           {
-    #             entity_type: "string", # required
-    #             entity_id: "entityRestrictedString", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] event_id
     #   The event ID to upload.
     #   @return [String]
@@ -4854,14 +4075,6 @@ module Aws::FraudDetector
 
     # A key and value pair.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "tagKey", # required
-    #         value: "tagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   A tag key.
     #   @return [String]
@@ -4879,19 +4092,6 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "fraudDetectorArn", # required
-    #         tags: [ # required
-    #           {
-    #             key: "tagKey", # required
-    #             value: "tagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The resource ARN.
     #   @return [String]
@@ -4927,19 +4127,6 @@ module Aws::FraudDetector
     end
 
     # The training data schema.
-    #
-    # @note When making an API call, you may pass TrainingDataSchema
-    #   data as a hash:
-    #
-    #       {
-    #         model_variables: ["string"], # required
-    #         label_schema: {
-    #           label_mapper: {
-    #             "string" => ["string"],
-    #           },
-    #           unlabeled_events_treatment: "IGNORE", # accepts IGNORE, FRAUD, LEGIT
-    #         },
-    #       }
     #
     # @!attribute [rw] model_variables
     #   The training data schema variables.
@@ -5064,14 +4251,6 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "fraudDetectorArn", # required
-    #         tag_keys: ["tagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource from which to remove the tag.
     #   @return [String]
@@ -5093,15 +4272,6 @@ module Aws::FraudDetector
     #
     class UntagResourceResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateDetectorVersionMetadataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "identifier", # required
-    #         detector_version_id: "wholeNumberVersionString", # required
-    #         description: "description", # required
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The detector ID.
     #   @return [String]
@@ -5128,32 +4298,6 @@ module Aws::FraudDetector
     #
     class UpdateDetectorVersionMetadataResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateDetectorVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "identifier", # required
-    #         detector_version_id: "wholeNumberVersionString", # required
-    #         external_model_endpoints: ["string"], # required
-    #         rules: [ # required
-    #           {
-    #             detector_id: "identifier", # required
-    #             rule_id: "identifier", # required
-    #             rule_version: "wholeNumberVersionString", # required
-    #           },
-    #         ],
-    #         description: "description",
-    #         model_versions: [
-    #           {
-    #             model_id: "modelIdentifier", # required
-    #             model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS, ACCOUNT_TAKEOVER_INSIGHTS
-    #             model_version_number: "floatVersionString", # required
-    #             arn: "fraudDetectorArn",
-    #           },
-    #         ],
-    #         rule_execution_mode: "ALL_MATCHED", # accepts ALL_MATCHED, FIRST_MATCHED
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The parent detector ID for the detector version you want to update.
     #   @return [String]
@@ -5213,15 +4357,6 @@ module Aws::FraudDetector
     #
     class UpdateDetectorVersionResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateDetectorVersionStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "identifier", # required
-    #         detector_version_id: "wholeNumberVersionString", # required
-    #         status: "DRAFT", # required, accepts DRAFT, ACTIVE, INACTIVE
-    #       }
-    #
     # @!attribute [rw] detector_id
     #   The detector ID.
     #   @return [String]
@@ -5250,16 +4385,6 @@ module Aws::FraudDetector
     #
     class UpdateDetectorVersionStatusResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateEventLabelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         event_id: "identifier", # required
-    #         event_type_name: "identifier", # required
-    #         assigned_label: "identifier", # required
-    #         label_timestamp: "utcTimestampISO8601", # required
-    #       }
-    #
     # @!attribute [rw] event_id
     #   The ID of the event associated with the label to update.
     #   @return [String]
@@ -5292,15 +4417,6 @@ module Aws::FraudDetector
     #
     class UpdateEventLabelResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateModelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         model_id: "modelIdentifier", # required
-    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS, ACCOUNT_TAKEOVER_INSIGHTS
-    #         description: "description",
-    #       }
-    #
     # @!attribute [rw] model_id
     #   The model ID.
     #   @return [String]
@@ -5327,31 +4443,6 @@ module Aws::FraudDetector
     #
     class UpdateModelResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateModelVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         model_id: "modelIdentifier", # required
-    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS, ACCOUNT_TAKEOVER_INSIGHTS
-    #         major_version_number: "wholeNumberVersionString", # required
-    #         external_events_detail: {
-    #           data_location: "s3BucketLocation", # required
-    #           data_access_role_arn: "iamRoleArn", # required
-    #         },
-    #         ingested_events_detail: {
-    #           ingested_events_time_window: { # required
-    #             start_time: "time", # required
-    #             end_time: "time", # required
-    #           },
-    #         },
-    #         tags: [
-    #           {
-    #             key: "tagKey", # required
-    #             value: "tagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] model_id
     #   The model ID.
     #   @return [String]
@@ -5418,16 +4509,6 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateModelVersionStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         model_id: "modelIdentifier", # required
-    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS, ACCOUNT_TAKEOVER_INSIGHTS
-    #         model_version_number: "floatVersionString", # required
-    #         status: "ACTIVE", # required, accepts ACTIVE, INACTIVE, TRAINING_CANCELLED
-    #       }
-    #
     # @!attribute [rw] model_id
     #   The model ID of the model version to update.
     #   @return [String]
@@ -5459,18 +4540,6 @@ module Aws::FraudDetector
     #
     class UpdateModelVersionStatusResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateRuleMetadataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rule: { # required
-    #           detector_id: "identifier", # required
-    #           rule_id: "identifier", # required
-    #           rule_version: "wholeNumberVersionString", # required
-    #         },
-    #         description: "description", # required
-    #       }
-    #
     # @!attribute [rw] rule
     #   The rule to update.
     #   @return [Types::Rule]
@@ -5492,27 +4561,6 @@ module Aws::FraudDetector
     #
     class UpdateRuleMetadataResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateRuleVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rule: { # required
-    #           detector_id: "identifier", # required
-    #           rule_id: "identifier", # required
-    #           rule_version: "wholeNumberVersionString", # required
-    #         },
-    #         description: "description",
-    #         expression: "ruleExpression", # required
-    #         language: "DETECTORPL", # required, accepts DETECTORPL
-    #         outcomes: ["string"], # required
-    #         tags: [
-    #           {
-    #             key: "tagKey", # required
-    #             value: "tagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] rule
     #   The rule to update.
     #   @return [Types::Rule]
@@ -5562,16 +4610,6 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateVariableRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "string", # required
-    #         default_value: "string",
-    #         description: "string",
-    #         variable_type: "string",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the variable.
     #   @return [String]
@@ -5691,18 +4729,6 @@ module Aws::FraudDetector
 
     # A variable in the list of variables for the batch create variable
     # request.
-    #
-    # @note When making an API call, you may pass VariableEntry
-    #   data as a hash:
-    #
-    #       {
-    #         name: "string",
-    #         data_type: "string",
-    #         data_source: "string",
-    #         default_value: "string",
-    #         description: "string",
-    #         variable_type: "string",
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the variable.

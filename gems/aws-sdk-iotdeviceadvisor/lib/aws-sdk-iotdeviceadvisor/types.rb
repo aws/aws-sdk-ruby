@@ -22,29 +22,6 @@ module Aws::IoTDeviceAdvisor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateSuiteDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         suite_definition_configuration: {
-    #           suite_definition_name: "SuiteDefinitionName",
-    #           devices: [
-    #             {
-    #               thing_arn: "AmazonResourceName",
-    #               certificate_arn: "AmazonResourceName",
-    #             },
-    #           ],
-    #           intended_for_qualification: false,
-    #           is_long_duration_test: false,
-    #           root_group: "RootGroup",
-    #           device_permission_role_arn: "AmazonResourceName",
-    #           protocol: "MqttV3_1_1", # accepts MqttV3_1_1, MqttV5
-    #         },
-    #         tags: {
-    #           "String128" => "String256",
-    #         },
-    #       }
-    #
     # @!attribute [rw] suite_definition_configuration
     #   Creates a Device Advisor test suite with suite definition
     #   configuration.
@@ -87,13 +64,6 @@ module Aws::IoTDeviceAdvisor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteSuiteDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         suite_definition_id: "UUID", # required
-    #       }
-    #
     # @!attribute [rw] suite_definition_id
     #   Suite definition ID of the test suite to be deleted.
     #   @return [String]
@@ -108,14 +78,6 @@ module Aws::IoTDeviceAdvisor
 
     # Information of a test device. A thing ARN or a certificate ARN is
     # required.
-    #
-    # @note When making an API call, you may pass DeviceUnderTest
-    #   data as a hash:
-    #
-    #       {
-    #         thing_arn: "AmazonResourceName",
-    #         certificate_arn: "AmazonResourceName",
-    #       }
     #
     # @!attribute [rw] thing_arn
     #   Lists devices thing ARN.
@@ -132,14 +94,6 @@ module Aws::IoTDeviceAdvisor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetEndpointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         thing_arn: "AmazonResourceName",
-    #         certificate_arn: "AmazonResourceName",
-    #       }
-    #
     # @!attribute [rw] thing_arn
     #   The thing ARN of the device. This is an optional parameter.
     #   @return [String]
@@ -165,14 +119,6 @@ module Aws::IoTDeviceAdvisor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSuiteDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         suite_definition_id: "UUID", # required
-    #         suite_definition_version: "SuiteDefinitionVersion",
-    #       }
-    #
     # @!attribute [rw] suite_definition_id
     #   Suite definition ID of the test suite to get.
     #   @return [String]
@@ -234,14 +180,6 @@ module Aws::IoTDeviceAdvisor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSuiteRunReportRequest
-    #   data as a hash:
-    #
-    #       {
-    #         suite_definition_id: "UUID", # required
-    #         suite_run_id: "UUID", # required
-    #       }
-    #
     # @!attribute [rw] suite_definition_id
     #   Suite definition ID of the test suite.
     #   @return [String]
@@ -267,14 +205,6 @@ module Aws::IoTDeviceAdvisor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSuiteRunRequest
-    #   data as a hash:
-    #
-    #       {
-    #         suite_definition_id: "UUID", # required
-    #         suite_run_id: "UUID", # required
-    #       }
-    #
     # @!attribute [rw] suite_definition_id
     #   Suite definition ID for the test suite run.
     #   @return [String]
@@ -384,14 +314,6 @@ module Aws::IoTDeviceAdvisor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSuiteDefinitionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "Token",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to return at once.
     #   @return [Integer]
@@ -423,16 +345,6 @@ module Aws::IoTDeviceAdvisor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSuiteRunsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         suite_definition_id: "UUID",
-    #         suite_definition_version: "SuiteDefinitionVersion",
-    #         max_results: 1,
-    #         next_token: "Token",
-    #       }
-    #
     # @!attribute [rw] suite_definition_id
     #   Lists the test suite runs of the specified test suite based on suite
     #   definition ID.
@@ -476,13 +388,6 @@ module Aws::IoTDeviceAdvisor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the IoT Device Advisor resource.
     #   @return [String]
@@ -515,25 +420,6 @@ module Aws::IoTDeviceAdvisor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartSuiteRunRequest
-    #   data as a hash:
-    #
-    #       {
-    #         suite_definition_id: "UUID", # required
-    #         suite_definition_version: "SuiteDefinitionVersion",
-    #         suite_run_configuration: {
-    #           primary_device: {
-    #             thing_arn: "AmazonResourceName",
-    #             certificate_arn: "AmazonResourceName",
-    #           },
-    #           selected_test_list: ["UUID"],
-    #           parallel_run: false,
-    #         },
-    #         tags: {
-    #           "String128" => "String256",
-    #         },
-    #       }
-    #
     # @!attribute [rw] suite_definition_id
     #   Suite definition ID of the test suite.
     #   @return [String]
@@ -579,14 +465,6 @@ module Aws::IoTDeviceAdvisor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopSuiteRunRequest
-    #   data as a hash:
-    #
-    #       {
-    #         suite_definition_id: "UUID", # required
-    #         suite_run_id: "UUID", # required
-    #       }
-    #
     # @!attribute [rw] suite_definition_id
     #   Suite definition ID of the test suite run to be stopped.
     #   @return [String]
@@ -605,24 +483,6 @@ module Aws::IoTDeviceAdvisor
     class StopSuiteRunResponse < Aws::EmptyStructure; end
 
     # Gets Suite Definition Configuration.
-    #
-    # @note When making an API call, you may pass SuiteDefinitionConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         suite_definition_name: "SuiteDefinitionName",
-    #         devices: [
-    #           {
-    #             thing_arn: "AmazonResourceName",
-    #             certificate_arn: "AmazonResourceName",
-    #           },
-    #         ],
-    #         intended_for_qualification: false,
-    #         is_long_duration_test: false,
-    #         root_group: "RootGroup",
-    #         device_permission_role_arn: "AmazonResourceName",
-    #         protocol: "MqttV3_1_1", # accepts MqttV3_1_1, MqttV5
-    #       }
     #
     # @!attribute [rw] suite_definition_name
     #   Gets Suite Definition Configuration name.
@@ -708,18 +568,6 @@ module Aws::IoTDeviceAdvisor
 
     # Gets suite run configuration.
     #
-    # @note When making an API call, you may pass SuiteRunConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         primary_device: {
-    #           thing_arn: "AmazonResourceName",
-    #           certificate_arn: "AmazonResourceName",
-    #         },
-    #         selected_test_list: ["UUID"],
-    #         parallel_run: false,
-    #       }
-    #
     # @!attribute [rw] primary_device
     #   Gets the primary device for suite run.
     #   @return [Types::DeviceUnderTest]
@@ -803,16 +651,6 @@ module Aws::IoTDeviceAdvisor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tags: { # required
-    #           "String128" => "String256",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The resource ARN of an IoT Device Advisor resource.
     #   @return [String]
@@ -973,14 +811,6 @@ module Aws::IoTDeviceAdvisor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tag_keys: ["String128"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The resource ARN of an IoT Device Advisor resource.
     #   @return [String]
@@ -998,27 +828,6 @@ module Aws::IoTDeviceAdvisor
 
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateSuiteDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         suite_definition_id: "UUID", # required
-    #         suite_definition_configuration: {
-    #           suite_definition_name: "SuiteDefinitionName",
-    #           devices: [
-    #             {
-    #               thing_arn: "AmazonResourceName",
-    #               certificate_arn: "AmazonResourceName",
-    #             },
-    #           ],
-    #           intended_for_qualification: false,
-    #           is_long_duration_test: false,
-    #           root_group: "RootGroup",
-    #           device_permission_role_arn: "AmazonResourceName",
-    #           protocol: "MqttV3_1_1", # accepts MqttV3_1_1, MqttV5
-    #         },
-    #       }
-    #
     # @!attribute [rw] suite_definition_id
     #   Suite definition ID of the test suite to be updated.
     #   @return [String]

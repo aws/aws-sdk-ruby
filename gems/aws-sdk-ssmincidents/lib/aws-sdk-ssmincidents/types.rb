@@ -26,10 +26,6 @@ module Aws::SSMIncidents
     # The action that starts at the beginning of an incident. The response
     # plan defines the action.
     #
-    # @note Action is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note Action is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Action corresponding to the set member.
-    #
     # @!attribute [rw] ssm_automation
     #   The Systems Manager automation document to start as the runbook at
     #   the beginning of the incident.
@@ -51,14 +47,6 @@ module Aws::SSMIncidents
     # Defines the Amazon Web Services Region and KMS key to add to the
     # replication set.
     #
-    # @note When making an API call, you may pass AddRegionAction
-    #   data as a hash:
-    #
-    #       {
-    #         region_name: "RegionName", # required
-    #         sse_kms_key_id: "SseKmsKey",
-    #       }
-    #
     # @!attribute [rw] region_name
     #   The Amazon Web Services Region name to add to the replication set.
     #   @return [String]
@@ -77,8 +65,6 @@ module Aws::SSMIncidents
     end
 
     # Use the AttributeValueList to filter by string or integer values.
-    #
-    # @note AttributeValueList is a union - when making an API calls you must set exactly one of the members.
     #
     # @!attribute [rw] integer_values
     #   The list of integer values that the filter matches.
@@ -106,8 +92,6 @@ module Aws::SSMIncidents
     # The Systems Manager automation document process to start as the
     # runbook at the beginning of the incident.
     #
-    # @note AutomationExecution is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AutomationExecution corresponding to the set member.
-    #
     # @!attribute [rw] ssm_execution_arn
     #   The Amazon Resource Name (ARN) of the automation process.
     #   @return [String]
@@ -126,10 +110,6 @@ module Aws::SSMIncidents
     end
 
     # The Chatbot chat channel used for collaboration during an incident.
-    #
-    # @note ChatChannel is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note ChatChannel is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ChatChannel corresponding to the set member.
     #
     # @!attribute [rw] chatbot_sns
     #   The Amazon SNS targets that Chatbot uses to notify the chat channel
@@ -162,8 +142,6 @@ module Aws::SSMIncidents
     # multiple conditions are specified, the conditionals become an `AND`ed
     # statement. If multiple values are specified for a conditional, the
     # values are `OR`d.
-    #
-    # @note Condition is a union - when making an API calls you must set exactly one of the members.
     #
     # @!attribute [rw] after
     #   After the specified timestamp.
@@ -223,21 +201,6 @@ module Aws::SSMIncidents
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateReplicationSetInput
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         regions: { # required
-    #           "RegionName" => {
-    #             sse_kms_key_id: "SseKmsKey",
-    #           },
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_token
     #   A token that ensures that the operation is called only once with the
     #   specified details.
@@ -277,67 +240,6 @@ module Aws::SSMIncidents
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateResponsePlanInput
-    #   data as a hash:
-    #
-    #       {
-    #         actions: [
-    #           {
-    #             ssm_automation: {
-    #               document_name: "SsmAutomationDocumentNameString", # required
-    #               document_version: "SsmAutomationDocumentVersionString",
-    #               dynamic_parameters: {
-    #                 "DynamicSsmParametersKeyString" => {
-    #                   variable: "INCIDENT_RECORD_ARN", # accepts INCIDENT_RECORD_ARN, INVOLVED_RESOURCES
-    #                 },
-    #               },
-    #               parameters: {
-    #                 "SsmParametersKeyString" => ["SsmParameterValuesMemberString"],
-    #               },
-    #               role_arn: "RoleArn", # required
-    #               target_account: "RESPONSE_PLAN_OWNER_ACCOUNT", # accepts RESPONSE_PLAN_OWNER_ACCOUNT, IMPACTED_ACCOUNT
-    #             },
-    #           },
-    #         ],
-    #         chat_channel: {
-    #           chatbot_sns: ["SnsArn"],
-    #           empty: {
-    #           },
-    #         },
-    #         client_token: "ClientToken",
-    #         display_name: "ResponsePlanDisplayName",
-    #         engagements: ["SsmContactsArn"],
-    #         incident_template: { # required
-    #           dedupe_string: "DedupeString",
-    #           impact: 1, # required
-    #           incident_tags: {
-    #             "TagKey" => "TagValue",
-    #           },
-    #           notification_targets: [
-    #             {
-    #               sns_topic_arn: "Arn",
-    #             },
-    #           ],
-    #           summary: "IncidentSummary",
-    #           title: "IncidentTitle", # required
-    #         },
-    #         integrations: [
-    #           {
-    #             pager_duty_configuration: {
-    #               name: "PagerDutyConfigurationNameString", # required
-    #               pager_duty_incident_configuration: { # required
-    #                 service_id: "PagerDutyIncidentConfigurationServiceIdString", # required
-    #               },
-    #               secret_id: "PagerDutyConfigurationSecretIdString", # required
-    #             },
-    #           },
-    #         ],
-    #         name: "ResponsePlanName", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] actions
     #   The actions that the response plan starts at the beginning of an
     #   incident.
@@ -410,23 +312,6 @@ module Aws::SSMIncidents
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateTimelineEventInput
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         event_data: "EventData", # required
-    #         event_references: [
-    #           {
-    #             related_item_id: "GeneratedId",
-    #             resource: "Arn",
-    #           },
-    #         ],
-    #         event_time: Time.now, # required
-    #         event_type: "TimelineEventType", # required
-    #         incident_record_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   A token ensuring that the action is called only once with the
     #   specified details.
@@ -494,13 +379,6 @@ module Aws::SSMIncidents
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteIncidentRecordInput
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the incident record you are
     #   deleting.
@@ -521,13 +399,6 @@ module Aws::SSMIncidents
     # Defines the information about the Amazon Web Services Region you're
     # deleting from your replication set.
     #
-    # @note When making an API call, you may pass DeleteRegionAction
-    #   data as a hash:
-    #
-    #       {
-    #         region_name: "RegionName", # required
-    #       }
-    #
     # @!attribute [rw] region_name
     #   The name of the Amazon Web Services Region you're deleting from the
     #   replication set.
@@ -541,13 +412,6 @@ module Aws::SSMIncidents
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteReplicationSetInput
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the replication set you're
     #   deleting.
@@ -565,14 +429,6 @@ module Aws::SSMIncidents
     #
     class DeleteReplicationSetOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteResourcePolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         policy_id: "PolicyId", # required
-    #         resource_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] policy_id
     #   The ID of the resource policy you're deleting.
     #   @return [String]
@@ -595,13 +451,6 @@ module Aws::SSMIncidents
     #
     class DeleteResourcePolicyOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteResponsePlanInput
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the response plan.
     #   @return [String]
@@ -618,14 +467,6 @@ module Aws::SSMIncidents
     #
     class DeleteResponsePlanOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteTimelineEventInput
-    #   data as a hash:
-    #
-    #       {
-    #         event_id: "UUID", # required
-    #         incident_record_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] event_id
     #   The ID of the event you are updating. You can find this by using
     #   `ListTimelineEvents`.
@@ -651,10 +492,6 @@ module Aws::SSMIncidents
 
     # The dynamic SSM parameter value.
     #
-    # @note DynamicSsmParameterValue is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note DynamicSsmParameterValue is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of DynamicSsmParameterValue corresponding to the set member.
-    #
     # @!attribute [rw] variable
     #   Variable dynamic parameters. A parameter value is determined when an
     #   incident is created.
@@ -676,8 +513,6 @@ module Aws::SSMIncidents
     # Used to remove the chat channel from an incident record or response
     # plan.
     #
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/EmptyChatChannel AWS API Documentation
     #
     class EmptyChatChannel < Aws::EmptyStructure; end
@@ -685,10 +520,6 @@ module Aws::SSMIncidents
     # An item referenced in a `TimelineEvent` that is involved in or somehow
     # associated with an incident. You can specify an Amazon Resource Name
     # (ARN) for an Amazon Web Services resource or a `RelatedItem` ID.
-    #
-    # @note EventReference is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note EventReference is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of EventReference corresponding to the set member.
     #
     # @!attribute [rw] related_item_id
     #   The ID of a `RelatedItem` referenced in a `TimelineEvent`.
@@ -756,21 +587,6 @@ module Aws::SSMIncidents
 
     # Filter the selection by using a condition.
     #
-    # @note When making an API call, you may pass Filter
-    #   data as a hash:
-    #
-    #       {
-    #         condition: { # required
-    #           after: Time.now,
-    #           before: Time.now,
-    #           equals: {
-    #             integer_values: [1],
-    #             string_values: ["StringListMemberString"],
-    #           },
-    #         },
-    #         key: "FilterKeyString", # required
-    #       }
-    #
     # @!attribute [rw] condition
     #   The condition accepts before or after a specified time, equal to a
     #   string, or equal to an integer.
@@ -789,13 +605,6 @@ module Aws::SSMIncidents
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetIncidentRecordInput
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the incident record.
     #   @return [String]
@@ -820,13 +629,6 @@ module Aws::SSMIncidents
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetReplicationSetInput
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the replication set you want to
     #   retrieve.
@@ -852,15 +654,6 @@ module Aws::SSMIncidents
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetResourcePoliciesInput
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         resource_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of resource policies to display for each page of
     #   results.
@@ -902,13 +695,6 @@ module Aws::SSMIncidents
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetResponsePlanInput
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the response plan.
     #   @return [String]
@@ -972,14 +758,6 @@ module Aws::SSMIncidents
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetTimelineEventInput
-    #   data as a hash:
-    #
-    #       {
-    #         event_id: "UUID", # required
-    #         incident_record_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] event_id
     #   The ID of the event. You can get an event's ID when you create it,
     #   or by using `ListTimelineEvents`.
@@ -1177,24 +955,6 @@ module Aws::SSMIncidents
     # Basic details used in creating a response plan. The response plan is
     # then used to create an incident record.
     #
-    # @note When making an API call, you may pass IncidentTemplate
-    #   data as a hash:
-    #
-    #       {
-    #         dedupe_string: "DedupeString",
-    #         impact: 1, # required
-    #         incident_tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         notification_targets: [
-    #           {
-    #             sns_topic_arn: "Arn",
-    #           },
-    #         ],
-    #         summary: "IncidentSummary",
-    #         title: "IncidentTitle", # required
-    #       }
-    #
     # @!attribute [rw] dedupe_string
     #   Used to stop Incident Manager from creating multiple incident
     #   records for the same incident.
@@ -1240,10 +1000,6 @@ module Aws::SSMIncidents
     # Information about third-party services integrated into a response
     # plan.
     #
-    # @note Integration is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note Integration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Integration corresponding to the set member.
-    #
     # @!attribute [rw] pager_duty_configuration
     #   Information about the PagerDuty service where the response plan
     #   creates an incident.
@@ -1278,23 +1034,6 @@ module Aws::SSMIncidents
 
     # Details and type of a related item.
     #
-    # @note When making an API call, you may pass ItemIdentifier
-    #   data as a hash:
-    #
-    #       {
-    #         type: "ANALYSIS", # required, accepts ANALYSIS, INCIDENT, METRIC, PARENT, ATTACHMENT, OTHER, AUTOMATION, INVOLVED_RESOURCE, TASK
-    #         value: { # required
-    #           arn: "Arn",
-    #           metric_definition: "MetricDefinition",
-    #           pager_duty_incident_detail: {
-    #             auto_resolve: false,
-    #             id: "PagerDutyIncidentDetailIdString", # required
-    #             secret_id: "PagerDutyIncidentDetailSecretIdString",
-    #           },
-    #           url: "Url",
-    #         },
-    #       }
-    #
     # @!attribute [rw] type
     #   The type of related item.
     #   @return [String]
@@ -1313,10 +1052,6 @@ module Aws::SSMIncidents
     end
 
     # Describes a related item.
-    #
-    # @note ItemValue is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note ItemValue is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ItemValue corresponding to the set member.
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the related item, if the related
@@ -1356,27 +1091,6 @@ module Aws::SSMIncidents
       class Unknown < ItemValue; end
     end
 
-    # @note When making an API call, you may pass ListIncidentRecordsInput
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             condition: { # required
-    #               after: Time.now,
-    #               before: Time.now,
-    #               equals: {
-    #                 integer_values: [1],
-    #                 string_values: ["StringListMemberString"],
-    #               },
-    #             },
-    #             key: "FilterKeyString", # required
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] filters
     #   Filters the list of incident records through which you are
     #   searching. You can filter on the following keys:
@@ -1436,15 +1150,6 @@ module Aws::SSMIncidents
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRelatedItemsInput
-    #   data as a hash:
-    #
-    #       {
-    #         incident_record_arn: "Arn", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] incident_record_arn
     #   The Amazon Resource Name (ARN) of the incident record containing the
     #   listed related items.
@@ -1485,14 +1190,6 @@ module Aws::SSMIncidents
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListReplicationSetsInput
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results per page.
     #   @return [Integer]
@@ -1527,14 +1224,6 @@ module Aws::SSMIncidents
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListResponsePlansInput
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of response plans per page.
     #   @return [Integer]
@@ -1569,13 +1258,6 @@ module Aws::SSMIncidents
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the response plan.
     #   @return [String]
@@ -1600,30 +1282,6 @@ module Aws::SSMIncidents
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTimelineEventsInput
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             condition: { # required
-    #               after: Time.now,
-    #               before: Time.now,
-    #               equals: {
-    #                 integer_values: [1],
-    #                 string_values: ["StringListMemberString"],
-    #               },
-    #             },
-    #             key: "FilterKeyString", # required
-    #           },
-    #         ],
-    #         incident_record_arn: "Arn", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         sort_by: "EVENT_TIME", # accepts EVENT_TIME
-    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #       }
-    #
     # @!attribute [rw] filters
     #   Filters the timeline events based on the provided conditional
     #   values. You can filter timeline events using the following keys:
@@ -1699,10 +1357,6 @@ module Aws::SSMIncidents
     # The SNS targets that are notified when updates are made to an
     # incident.
     #
-    # @note NotificationTargetItem is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note NotificationTargetItem is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of NotificationTargetItem corresponding to the set member.
-    #
     # @!attribute [rw] sns_topic_arn
     #   The Amazon Resource Name (ARN) of the SNS topic.
     #   @return [String]
@@ -1721,17 +1375,6 @@ module Aws::SSMIncidents
     end
 
     # Details about the PagerDuty configuration for a response plan.
-    #
-    # @note When making an API call, you may pass PagerDutyConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         name: "PagerDutyConfigurationNameString", # required
-    #         pager_duty_incident_configuration: { # required
-    #           service_id: "PagerDutyIncidentConfigurationServiceIdString", # required
-    #         },
-    #         secret_id: "PagerDutyConfigurationSecretIdString", # required
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the PagerDuty configuration.
@@ -1761,13 +1404,6 @@ module Aws::SSMIncidents
     # Details about the PagerDuty service where the response plan creates an
     # incident.
     #
-    # @note When making an API call, you may pass PagerDutyIncidentConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         service_id: "PagerDutyIncidentConfigurationServiceIdString", # required
-    #       }
-    #
     # @!attribute [rw] service_id
     #   The ID of the PagerDuty service that the response plan associates
     #   with an incident when it launches.
@@ -1783,15 +1419,6 @@ module Aws::SSMIncidents
 
     # Details about the PagerDuty incident associated with an incident
     # created by an Incident Manager response plan.
-    #
-    # @note When making an API call, you may pass PagerDutyIncidentDetail
-    #   data as a hash:
-    #
-    #       {
-    #         auto_resolve: false,
-    #         id: "PagerDutyIncidentDetailIdString", # required
-    #         secret_id: "PagerDutyIncidentDetailSecretIdString",
-    #       }
     #
     # @!attribute [rw] auto_resolve
     #   Indicates whether to resolve the PagerDuty incident when you resolve
@@ -1819,14 +1446,6 @@ module Aws::SSMIncidents
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutResourcePolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         policy: "Policy", # required
-    #         resource_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] policy
     #   Details of the resource policy.
     #   @return [String]
@@ -1893,13 +1512,6 @@ module Aws::SSMIncidents
     # The mapping between a Amazon Web Services Region and the key that's
     # used to encrypt the data.
     #
-    # @note When making an API call, you may pass RegionMapInputValue
-    #   data as a hash:
-    #
-    #       {
-    #         sse_kms_key_id: "SseKmsKey",
-    #       }
-    #
     # @!attribute [rw] sse_kms_key_id
     #   The KMS key used to encrypt the data in your replication set.
     #   @return [String]
@@ -1913,27 +1525,6 @@ module Aws::SSMIncidents
     end
 
     # Resources that responders use to triage and mitigate the incident.
-    #
-    # @note When making an API call, you may pass RelatedItem
-    #   data as a hash:
-    #
-    #       {
-    #         generated_id: "GeneratedId",
-    #         identifier: { # required
-    #           type: "ANALYSIS", # required, accepts ANALYSIS, INCIDENT, METRIC, PARENT, ATTACHMENT, OTHER, AUTOMATION, INVOLVED_RESOURCE, TASK
-    #           value: { # required
-    #             arn: "Arn",
-    #             metric_definition: "MetricDefinition",
-    #             pager_duty_incident_detail: {
-    #               auto_resolve: false,
-    #               id: "PagerDutyIncidentDetailIdString", # required
-    #               secret_id: "PagerDutyIncidentDetailSecretIdString",
-    #             },
-    #             url: "Url",
-    #           },
-    #         },
-    #         title: "RelatedItemTitleString",
-    #       }
     #
     # @!attribute [rw] generated_id
     #   A unique ID for a `RelatedItem`.
@@ -1961,8 +1552,6 @@ module Aws::SSMIncidents
     end
 
     # Details about the related item you're adding.
-    #
-    # @note RelatedItemsUpdate is a union - when making an API calls you must set exactly one of the members.
     #
     # @!attribute [rw] item_to_add
     #   Details about the related item you're adding.
@@ -2151,24 +1740,6 @@ module Aws::SSMIncidents
     # Details about the Systems Manager automation document that will be
     # used as a runbook during an incident.
     #
-    # @note When making an API call, you may pass SsmAutomation
-    #   data as a hash:
-    #
-    #       {
-    #         document_name: "SsmAutomationDocumentNameString", # required
-    #         document_version: "SsmAutomationDocumentVersionString",
-    #         dynamic_parameters: {
-    #           "DynamicSsmParametersKeyString" => {
-    #             variable: "INCIDENT_RECORD_ARN", # accepts INCIDENT_RECORD_ARN, INVOLVED_RESOURCES
-    #           },
-    #         },
-    #         parameters: {
-    #           "SsmParametersKeyString" => ["SsmParameterValuesMemberString"],
-    #         },
-    #         role_arn: "RoleArn", # required
-    #         target_account: "RESPONSE_PLAN_OWNER_ACCOUNT", # accepts RESPONSE_PLAN_OWNER_ACCOUNT, IMPACTED_ACCOUNT
-    #       }
-    #
     # @!attribute [rw] document_name
     #   The automation document's name.
     #   @return [String]
@@ -2210,41 +1781,6 @@ module Aws::SSMIncidents
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartIncidentInput
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         impact: 1,
-    #         related_items: [
-    #           {
-    #             generated_id: "GeneratedId",
-    #             identifier: { # required
-    #               type: "ANALYSIS", # required, accepts ANALYSIS, INCIDENT, METRIC, PARENT, ATTACHMENT, OTHER, AUTOMATION, INVOLVED_RESOURCE, TASK
-    #               value: { # required
-    #                 arn: "Arn",
-    #                 metric_definition: "MetricDefinition",
-    #                 pager_duty_incident_detail: {
-    #                   auto_resolve: false,
-    #                   id: "PagerDutyIncidentDetailIdString", # required
-    #                   secret_id: "PagerDutyIncidentDetailSecretIdString",
-    #                 },
-    #                 url: "Url",
-    #               },
-    #             },
-    #             title: "RelatedItemTitleString",
-    #           },
-    #         ],
-    #         response_plan_arn: "Arn", # required
-    #         title: "IncidentTitle",
-    #         trigger_details: {
-    #           raw_data: "RawData",
-    #           source: "IncidentSource", # required
-    #           timestamp: Time.now, # required
-    #           trigger_arn: "Arn",
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_token
     #   A token ensuring that the operation is called only once with the
     #   specified details.
@@ -2321,16 +1857,6 @@ module Aws::SSMIncidents
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the response plan you're adding
     #   the tags to.
@@ -2425,16 +1951,6 @@ module Aws::SSMIncidents
     # Details about what caused the incident to be created in Incident
     # Manager.
     #
-    # @note When making an API call, you may pass TriggerDetails
-    #   data as a hash:
-    #
-    #       {
-    #         raw_data: "RawData",
-    #         source: "IncidentSource", # required
-    #         timestamp: Time.now, # required
-    #         trigger_arn: "Arn",
-    #       }
-    #
     # @!attribute [rw] raw_data
     #   Raw data passed from either Amazon EventBridge, Amazon CloudWatch,
     #   or Incident Manager when an incident is created.
@@ -2468,14 +1984,6 @@ module Aws::SSMIncidents
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the response plan you're removing
     #   a tag from.
@@ -2498,15 +2006,6 @@ module Aws::SSMIncidents
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateDeletionProtectionInput
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "Arn", # required
-    #         client_token: "ClientToken",
-    #         deletion_protected: false, # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the replication set to update.
     #   @return [String]
@@ -2538,28 +2037,6 @@ module Aws::SSMIncidents
     #
     class UpdateDeletionProtectionOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateIncidentRecordInput
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "Arn", # required
-    #         chat_channel: {
-    #           chatbot_sns: ["SnsArn"],
-    #           empty: {
-    #           },
-    #         },
-    #         client_token: "ClientToken",
-    #         impact: 1,
-    #         notification_targets: [
-    #           {
-    #             sns_topic_arn: "Arn",
-    #           },
-    #         ],
-    #         status: "OPEN", # accepts OPEN, RESOLVED
-    #         summary: "IncidentSummary",
-    #         title: "IncidentTitle",
-    #       }
-    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the incident record you are
     #   updating.
@@ -2638,46 +2115,6 @@ module Aws::SSMIncidents
     #
     class UpdateIncidentRecordOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateRelatedItemsInput
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         incident_record_arn: "Arn", # required
-    #         related_items_update: { # required
-    #           item_to_add: {
-    #             generated_id: "GeneratedId",
-    #             identifier: { # required
-    #               type: "ANALYSIS", # required, accepts ANALYSIS, INCIDENT, METRIC, PARENT, ATTACHMENT, OTHER, AUTOMATION, INVOLVED_RESOURCE, TASK
-    #               value: { # required
-    #                 arn: "Arn",
-    #                 metric_definition: "MetricDefinition",
-    #                 pager_duty_incident_detail: {
-    #                   auto_resolve: false,
-    #                   id: "PagerDutyIncidentDetailIdString", # required
-    #                   secret_id: "PagerDutyIncidentDetailSecretIdString",
-    #                 },
-    #                 url: "Url",
-    #               },
-    #             },
-    #             title: "RelatedItemTitleString",
-    #           },
-    #           item_to_remove: {
-    #             type: "ANALYSIS", # required, accepts ANALYSIS, INCIDENT, METRIC, PARENT, ATTACHMENT, OTHER, AUTOMATION, INVOLVED_RESOURCE, TASK
-    #             value: { # required
-    #               arn: "Arn",
-    #               metric_definition: "MetricDefinition",
-    #               pager_duty_incident_detail: {
-    #                 auto_resolve: false,
-    #                 id: "PagerDutyIncidentDetailIdString", # required
-    #                 secret_id: "PagerDutyIncidentDetailSecretIdString",
-    #               },
-    #               url: "Url",
-    #             },
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_token
     #   A token ensuring that the operation is called only once with the
     #   specified details.
@@ -2711,8 +2148,6 @@ module Aws::SSMIncidents
 
     # Details used when updating the replication set.
     #
-    # @note UpdateReplicationSetAction is a union - when making an API calls you must set exactly one of the members.
-    #
     # @!attribute [rw] add_region_action
     #   Details about the Amazon Web Services Region that you're adding to
     #   the replication set.
@@ -2738,25 +2173,6 @@ module Aws::SSMIncidents
       class Unknown < UpdateReplicationSetAction; end
     end
 
-    # @note When making an API call, you may pass UpdateReplicationSetInput
-    #   data as a hash:
-    #
-    #       {
-    #         actions: [ # required
-    #           {
-    #             add_region_action: {
-    #               region_name: "RegionName", # required
-    #               sse_kms_key_id: "SseKmsKey",
-    #             },
-    #             delete_region_action: {
-    #               region_name: "RegionName", # required
-    #             },
-    #           },
-    #         ],
-    #         arn: "Arn", # required
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] actions
     #   An action to add or delete a Region.
     #   @return [Array<Types::UpdateReplicationSetAction>]
@@ -2788,62 +2204,6 @@ module Aws::SSMIncidents
     #
     class UpdateReplicationSetOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateResponsePlanInput
-    #   data as a hash:
-    #
-    #       {
-    #         actions: [
-    #           {
-    #             ssm_automation: {
-    #               document_name: "SsmAutomationDocumentNameString", # required
-    #               document_version: "SsmAutomationDocumentVersionString",
-    #               dynamic_parameters: {
-    #                 "DynamicSsmParametersKeyString" => {
-    #                   variable: "INCIDENT_RECORD_ARN", # accepts INCIDENT_RECORD_ARN, INVOLVED_RESOURCES
-    #                 },
-    #               },
-    #               parameters: {
-    #                 "SsmParametersKeyString" => ["SsmParameterValuesMemberString"],
-    #               },
-    #               role_arn: "RoleArn", # required
-    #               target_account: "RESPONSE_PLAN_OWNER_ACCOUNT", # accepts RESPONSE_PLAN_OWNER_ACCOUNT, IMPACTED_ACCOUNT
-    #             },
-    #           },
-    #         ],
-    #         arn: "Arn", # required
-    #         chat_channel: {
-    #           chatbot_sns: ["SnsArn"],
-    #           empty: {
-    #           },
-    #         },
-    #         client_token: "ClientToken",
-    #         display_name: "ResponsePlanDisplayName",
-    #         engagements: ["SsmContactsArn"],
-    #         incident_template_dedupe_string: "DedupeString",
-    #         incident_template_impact: 1,
-    #         incident_template_notification_targets: [
-    #           {
-    #             sns_topic_arn: "Arn",
-    #           },
-    #         ],
-    #         incident_template_summary: "IncidentSummary",
-    #         incident_template_tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         incident_template_title: "IncidentTitle",
-    #         integrations: [
-    #           {
-    #             pager_duty_configuration: {
-    #               name: "PagerDutyConfigurationNameString", # required
-    #               pager_duty_incident_configuration: { # required
-    #                 service_id: "PagerDutyIncidentConfigurationServiceIdString", # required
-    #               },
-    #               secret_id: "PagerDutyConfigurationSecretIdString", # required
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] actions
     #   The actions that this response plan takes at the beginning of an
     #   incident.
@@ -2952,24 +2312,6 @@ module Aws::SSMIncidents
     #
     class UpdateResponsePlanOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateTimelineEventInput
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         event_data: "EventData",
-    #         event_id: "UUID", # required
-    #         event_references: [
-    #           {
-    #             related_item_id: "GeneratedId",
-    #             resource: "Arn",
-    #           },
-    #         ],
-    #         event_time: Time.now,
-    #         event_type: "TimelineEventType",
-    #         incident_record_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   A token ensuring that the operation is called only once with the
     #   specified details.

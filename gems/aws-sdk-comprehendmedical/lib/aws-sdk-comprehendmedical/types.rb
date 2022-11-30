@@ -100,16 +100,6 @@ module Aws::ComprehendMedical
 
     # Provides information for filtering a list of detection jobs.
     #
-    # @note When making an API call, you may pass ComprehendMedicalAsyncJobFilter
-    #   data as a hash:
-    #
-    #       {
-    #         job_name: "JobName",
-    #         job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, PARTIAL_SUCCESS, FAILED, STOP_REQUESTED, STOPPED
-    #         submit_time_before: Time.now,
-    #         submit_time_after: Time.now,
-    #       }
-    #
     # @!attribute [rw] job_name
     #   Filters on the name of the job.
     #   @return [String]
@@ -234,13 +224,6 @@ module Aws::ComprehendMedical
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEntitiesDetectionV2JobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The identifier that Comprehend Medical; generated for the job. The
     #   `StartEntitiesDetectionV2Job` operation returns this identifier in
@@ -268,13 +251,6 @@ module Aws::ComprehendMedical
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeICD10CMInferenceJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The identifier that Amazon Comprehend Medical generated for the job.
     #   `The StartICD10CMInferenceJob` operation returns this identifier in
@@ -302,13 +278,6 @@ module Aws::ComprehendMedical
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribePHIDetectionJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The identifier that Comprehend Medical; generated for the job. The
     #   `StartPHIDetectionJob` operation returns this identifier in its
@@ -336,13 +305,6 @@ module Aws::ComprehendMedical
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeRxNormInferenceJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The identifier that Amazon Comprehend Medical generated for the job.
     #   The StartRxNormInferenceJob operation returns this identifier in its
@@ -370,13 +332,6 @@ module Aws::ComprehendMedical
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeSNOMEDCTInferenceJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The identifier that Amazon Comprehend Medical generated for the job.
     #   The StartSNOMEDCTInferenceJob operation returns this identifier in
@@ -403,13 +358,6 @@ module Aws::ComprehendMedical
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DetectEntitiesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         text: "BoundedLengthString", # required
-    #       }
-    #
     # @!attribute [rw] text
     #   A UTF-8 text string containing the clinical content being examined
     #   for entities. Each string must contain fewer than 20,000 bytes of
@@ -461,13 +409,6 @@ module Aws::ComprehendMedical
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DetectEntitiesV2Request
-    #   data as a hash:
-    #
-    #       {
-    #         text: "BoundedLengthString", # required
-    #       }
-    #
     # @!attribute [rw] text
     #   A UTF-8 string containing the clinical content being examined for
     #   entities. Each string must contain fewer than 20,000 bytes of
@@ -517,13 +458,6 @@ module Aws::ComprehendMedical
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DetectPHIRequest
-    #   data as a hash:
-    #
-    #       {
-    #         text: "BoundedLengthString", # required
-    #       }
-    #
     # @!attribute [rw] text
     #   A UTF-8 text string containing the clinical content being examined
     #   for PHI entities. Each string must contain fewer than 20,000 bytes
@@ -828,13 +762,6 @@ module Aws::ComprehendMedical
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass InferICD10CMRequest
-    #   data as a hash:
-    #
-    #       {
-    #         text: "OntologyLinkingBoundedLengthString", # required
-    #       }
-    #
     # @!attribute [rw] text
     #   The input text used for analysis. The input for InferICD10CM is a
     #   string from 1 to 10000 characters.
@@ -876,13 +803,6 @@ module Aws::ComprehendMedical
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass InferRxNormRequest
-    #   data as a hash:
-    #
-    #       {
-    #         text: "OntologyLinkingBoundedLengthString", # required
-    #       }
-    #
     # @!attribute [rw] text
     #   The input text used for analysis. The input for InferRxNorm is a
     #   string from 1 to 10000 characters.
@@ -924,13 +844,6 @@ module Aws::ComprehendMedical
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass InferSNOMEDCTRequest
-    #   data as a hash:
-    #
-    #       {
-    #         text: "OntologyLinkingBoundedLengthString", # required
-    #       }
-    #
     # @!attribute [rw] text
     #   The input text to be analyzed using InferSNOMEDCT. The text should
     #   be a string with 1 to 10000 characters.
@@ -987,14 +900,6 @@ module Aws::ComprehendMedical
 
     # The input properties for an entities detection job. This includes the
     # name of the S3 bucket and the path to the files to be analyzed.
-    #
-    # @note When making an API call, you may pass InputDataConfig
-    #   data as a hash:
-    #
-    #       {
-    #         s3_bucket: "S3Bucket", # required
-    #         s3_key: "S3Key",
-    #       }
     #
     # @!attribute [rw] s3_bucket
     #   The URI of the S3 bucket that contains the input data. The bucket
@@ -1058,20 +963,6 @@ module Aws::ComprehendMedical
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEntitiesDetectionV2JobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter: {
-    #           job_name: "JobName",
-    #           job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, PARTIAL_SUCCESS, FAILED, STOP_REQUESTED, STOPPED
-    #           submit_time_before: Time.now,
-    #           submit_time_after: Time.now,
-    #         },
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] filter
     #   Filters the jobs that are returned. You can filter jobs based on
     #   their names, status, or the date and time that they were submitted.
@@ -1114,20 +1005,6 @@ module Aws::ComprehendMedical
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListICD10CMInferenceJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter: {
-    #           job_name: "JobName",
-    #           job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, PARTIAL_SUCCESS, FAILED, STOP_REQUESTED, STOPPED
-    #           submit_time_before: Time.now,
-    #           submit_time_after: Time.now,
-    #         },
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] filter
     #   Filters the jobs that are returned. You can filter jobs based on
     #   their names, status, or the date and time that they were submitted.
@@ -1170,20 +1047,6 @@ module Aws::ComprehendMedical
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPHIDetectionJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter: {
-    #           job_name: "JobName",
-    #           job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, PARTIAL_SUCCESS, FAILED, STOP_REQUESTED, STOPPED
-    #           submit_time_before: Time.now,
-    #           submit_time_after: Time.now,
-    #         },
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] filter
     #   Filters the jobs that are returned. You can filter jobs based on
     #   their names, status, or the date and time that they were submitted.
@@ -1226,20 +1089,6 @@ module Aws::ComprehendMedical
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRxNormInferenceJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter: {
-    #           job_name: "JobName",
-    #           job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, PARTIAL_SUCCESS, FAILED, STOP_REQUESTED, STOPPED
-    #           submit_time_before: Time.now,
-    #           submit_time_after: Time.now,
-    #         },
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] filter
     #   Filters the jobs that are returned. You can filter jobs based on
     #   their names, status, or the date and time that they were submitted.
@@ -1282,20 +1131,6 @@ module Aws::ComprehendMedical
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSNOMEDCTInferenceJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter: {
-    #           job_name: "JobName",
-    #           job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, PARTIAL_SUCCESS, FAILED, STOP_REQUESTED, STOPPED
-    #           submit_time_before: Time.now,
-    #           submit_time_after: Time.now,
-    #         },
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] filter
     #   Provides information for filtering a list of detection jobs.
     #   @return [Types::ComprehendMedicalAsyncJobFilter]
@@ -1337,14 +1172,6 @@ module Aws::ComprehendMedical
     end
 
     # The output properties for a detection job.
-    #
-    # @note When making an API call, you may pass OutputDataConfig
-    #   data as a hash:
-    #
-    #       {
-    #         s3_bucket: "S3Bucket", # required
-    #         s3_key: "S3Key",
-    #       }
     #
     # @!attribute [rw] s3_bucket
     #   When you use the `OutputDataConfig` object with asynchronous
@@ -1815,25 +1642,6 @@ module Aws::ComprehendMedical
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartEntitiesDetectionV2JobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         input_data_config: { # required
-    #           s3_bucket: "S3Bucket", # required
-    #           s3_key: "S3Key",
-    #         },
-    #         output_data_config: { # required
-    #           s3_bucket: "S3Bucket", # required
-    #           s3_key: "S3Key",
-    #         },
-    #         data_access_role_arn: "IamRoleArn", # required
-    #         job_name: "JobName",
-    #         client_request_token: "ClientRequestTokenString",
-    #         kms_key: "KMSKey",
-    #         language_code: "en", # required, accepts en
-    #       }
-    #
     # @!attribute [rw] input_data_config
     #   The input configuration that specifies the format and location of
     #   the input data for the job.
@@ -1906,25 +1714,6 @@ module Aws::ComprehendMedical
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartICD10CMInferenceJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         input_data_config: { # required
-    #           s3_bucket: "S3Bucket", # required
-    #           s3_key: "S3Key",
-    #         },
-    #         output_data_config: { # required
-    #           s3_bucket: "S3Bucket", # required
-    #           s3_key: "S3Key",
-    #         },
-    #         data_access_role_arn: "IamRoleArn", # required
-    #         job_name: "JobName",
-    #         client_request_token: "ClientRequestTokenString",
-    #         kms_key: "KMSKey",
-    #         language_code: "en", # required, accepts en
-    #       }
-    #
     # @!attribute [rw] input_data_config
     #   Specifies the format and location of the input data for the job.
     #   @return [Types::InputDataConfig]
@@ -1993,25 +1782,6 @@ module Aws::ComprehendMedical
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartPHIDetectionJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         input_data_config: { # required
-    #           s3_bucket: "S3Bucket", # required
-    #           s3_key: "S3Key",
-    #         },
-    #         output_data_config: { # required
-    #           s3_bucket: "S3Bucket", # required
-    #           s3_key: "S3Key",
-    #         },
-    #         data_access_role_arn: "IamRoleArn", # required
-    #         job_name: "JobName",
-    #         client_request_token: "ClientRequestTokenString",
-    #         kms_key: "KMSKey",
-    #         language_code: "en", # required, accepts en
-    #       }
-    #
     # @!attribute [rw] input_data_config
     #   Specifies the format and location of the input data for the job.
     #   @return [Types::InputDataConfig]
@@ -2080,25 +1850,6 @@ module Aws::ComprehendMedical
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartRxNormInferenceJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         input_data_config: { # required
-    #           s3_bucket: "S3Bucket", # required
-    #           s3_key: "S3Key",
-    #         },
-    #         output_data_config: { # required
-    #           s3_bucket: "S3Bucket", # required
-    #           s3_key: "S3Key",
-    #         },
-    #         data_access_role_arn: "IamRoleArn", # required
-    #         job_name: "JobName",
-    #         client_request_token: "ClientRequestTokenString",
-    #         kms_key: "KMSKey",
-    #         language_code: "en", # required, accepts en
-    #       }
-    #
     # @!attribute [rw] input_data_config
     #   Specifies the format and location of the input data for the job.
     #   @return [Types::InputDataConfig]
@@ -2166,25 +1917,6 @@ module Aws::ComprehendMedical
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartSNOMEDCTInferenceJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         input_data_config: { # required
-    #           s3_bucket: "S3Bucket", # required
-    #           s3_key: "S3Key",
-    #         },
-    #         output_data_config: { # required
-    #           s3_bucket: "S3Bucket", # required
-    #           s3_key: "S3Key",
-    #         },
-    #         data_access_role_arn: "IamRoleArn", # required
-    #         job_name: "JobName",
-    #         client_request_token: "ClientRequestTokenString",
-    #         kms_key: "KMSKey",
-    #         language_code: "en", # required, accepts en
-    #       }
-    #
     # @!attribute [rw] input_data_config
     #   The input properties for an entities detection job. This includes
     #   the name of the S3 bucket and the path to the files to be analyzed.
@@ -2249,13 +1981,6 @@ module Aws::ComprehendMedical
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopEntitiesDetectionV2JobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The identifier of the medical entities job to stop.
     #   @return [String]
@@ -2281,13 +2006,6 @@ module Aws::ComprehendMedical
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopICD10CMInferenceJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The identifier of the job.
     #   @return [String]
@@ -2313,13 +2031,6 @@ module Aws::ComprehendMedical
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopPHIDetectionJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The identifier of the PHI detection job to stop.
     #   @return [String]
@@ -2344,13 +2055,6 @@ module Aws::ComprehendMedical
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopRxNormInferenceJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The identifier of the job.
     #   @return [String]
@@ -2376,13 +2080,6 @@ module Aws::ComprehendMedical
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopSNOMEDCTInferenceJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The job id of the asynchronous InferSNOMEDCT job to be stopped.
     #   @return [String]

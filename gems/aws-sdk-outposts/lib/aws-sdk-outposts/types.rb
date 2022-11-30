@@ -25,23 +25,6 @@ module Aws::Outposts
 
     # Information about an address.
     #
-    # @note When making an API call, you may pass Address
-    #   data as a hash:
-    #
-    #       {
-    #         contact_name: "ContactName",
-    #         contact_phone_number: "ContactPhoneNumber",
-    #         address_line_1: "AddressLine1", # required
-    #         address_line_2: "AddressLine2",
-    #         address_line_3: "AddressLine3",
-    #         city: "City", # required
-    #         state_or_region: "StateOrRegion", # required
-    #         district_or_county: "DistrictOrCounty",
-    #         postal_code: "PostalCode", # required
-    #         country_code: "CountryCode", # required
-    #         municipality: "Municipality",
-    #       }
-    #
     # @!attribute [rw] contact_name
     #   The name of the contact.
     #   @return [String]
@@ -152,13 +135,6 @@ module Aws::Outposts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CancelOrderInput
-    #   data as a hash:
-    #
-    #       {
-    #         order_id: "OrderId", # required
-    #       }
-    #
     # @!attribute [rw] order_id
     #   The ID of the order.
     #   @return [String]
@@ -313,21 +289,6 @@ module Aws::Outposts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateOrderInput
-    #   data as a hash:
-    #
-    #       {
-    #         outpost_identifier: "OutpostIdentifier", # required
-    #         line_items: [ # required
-    #           {
-    #             catalog_item_id: "SkuCode",
-    #             quantity: 1,
-    #           },
-    #         ],
-    #         payment_option: "ALL_UPFRONT", # required, accepts ALL_UPFRONT, NO_UPFRONT, PARTIAL_UPFRONT
-    #         payment_term: "THREE_YEARS", # accepts THREE_YEARS, ONE_YEAR
-    #       }
-    #
     # @!attribute [rw] outpost_identifier
     #   The ID or the Amazon Resource Name (ARN) of the Outpost.
     #   @return [String]
@@ -367,21 +328,6 @@ module Aws::Outposts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateOutpostInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "OutpostName", # required
-    #         description: "OutpostDescription",
-    #         site_id: "SiteId", # required
-    #         availability_zone: "AvailabilityZone",
-    #         availability_zone_id: "AvailabilityZoneId",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         supported_hardware_type: "RACK", # accepts RACK, SERVER
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the Outpost.
     #   @return [String]
@@ -436,55 +382,6 @@ module Aws::Outposts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateSiteInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "SiteName", # required
-    #         description: "SiteDescription",
-    #         notes: "SiteNotes",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         operating_address: {
-    #           contact_name: "ContactName",
-    #           contact_phone_number: "ContactPhoneNumber",
-    #           address_line_1: "AddressLine1", # required
-    #           address_line_2: "AddressLine2",
-    #           address_line_3: "AddressLine3",
-    #           city: "City", # required
-    #           state_or_region: "StateOrRegion", # required
-    #           district_or_county: "DistrictOrCounty",
-    #           postal_code: "PostalCode", # required
-    #           country_code: "CountryCode", # required
-    #           municipality: "Municipality",
-    #         },
-    #         shipping_address: {
-    #           contact_name: "ContactName",
-    #           contact_phone_number: "ContactPhoneNumber",
-    #           address_line_1: "AddressLine1", # required
-    #           address_line_2: "AddressLine2",
-    #           address_line_3: "AddressLine3",
-    #           city: "City", # required
-    #           state_or_region: "StateOrRegion", # required
-    #           district_or_county: "DistrictOrCounty",
-    #           postal_code: "PostalCode", # required
-    #           country_code: "CountryCode", # required
-    #           municipality: "Municipality",
-    #         },
-    #         rack_physical_properties: {
-    #           power_draw_kva: "POWER_5_KVA", # accepts POWER_5_KVA, POWER_10_KVA, POWER_15_KVA
-    #           power_phase: "SINGLE_PHASE", # accepts SINGLE_PHASE, THREE_PHASE
-    #           power_connector: "L6_30P", # accepts L6_30P, IEC309, AH530P7W, AH532P6W
-    #           power_feed_drop: "ABOVE_RACK", # accepts ABOVE_RACK, BELOW_RACK
-    #           uplink_gbps: "UPLINK_1G", # accepts UPLINK_1G, UPLINK_10G, UPLINK_40G, UPLINK_100G
-    #           uplink_count: "UPLINK_COUNT_1", # accepts UPLINK_COUNT_1, UPLINK_COUNT_2, UPLINK_COUNT_3, UPLINK_COUNT_4, UPLINK_COUNT_5, UPLINK_COUNT_6, UPLINK_COUNT_7, UPLINK_COUNT_8, UPLINK_COUNT_12, UPLINK_COUNT_16
-    #           fiber_optic_cable_type: "SINGLE_MODE", # accepts SINGLE_MODE, MULTI_MODE
-    #           optical_standard: "OPTIC_10GBASE_SR", # accepts OPTIC_10GBASE_SR, OPTIC_10GBASE_IR, OPTIC_10GBASE_LR, OPTIC_40GBASE_SR, OPTIC_40GBASE_ESR, OPTIC_40GBASE_IR4_LR4L, OPTIC_40GBASE_LR4, OPTIC_100GBASE_SR4, OPTIC_100GBASE_CWDM4, OPTIC_100GBASE_LR4, OPTIC_100G_PSM4_MSA, OPTIC_1000BASE_LX, OPTIC_1000BASE_SX
-    #           maximum_supported_weight_lbs: "NO_LIMIT", # accepts NO_LIMIT, MAX_1400_LBS, MAX_1600_LBS, MAX_1800_LBS, MAX_2000_LBS
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the site.
     #   @return [String]
@@ -551,13 +448,6 @@ module Aws::Outposts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteOutpostInput
-    #   data as a hash:
-    #
-    #       {
-    #         outpost_id: "OutpostId", # required
-    #       }
-    #
     # @!attribute [rw] outpost_id
     #   The ID or the Amazon Resource Name (ARN) of the Outpost.
     #   @return [String]
@@ -574,13 +464,6 @@ module Aws::Outposts
     #
     class DeleteOutpostOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteSiteInput
-    #   data as a hash:
-    #
-    #       {
-    #         site_id: "SiteId", # required
-    #       }
-    #
     # @!attribute [rw] site_id
     #   The ID or the Amazon Resource Name (ARN) of the site.
     #   @return [String]
@@ -621,13 +504,6 @@ module Aws::Outposts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetCatalogItemInput
-    #   data as a hash:
-    #
-    #       {
-    #         catalog_item_id: "SkuCode", # required
-    #       }
-    #
     # @!attribute [rw] catalog_item_id
     #   The ID of the catalog item.
     #   @return [String]
@@ -652,13 +528,6 @@ module Aws::Outposts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetConnectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connection_id: "ConnectionId", # required
-    #       }
-    #
     # @!attribute [rw] connection_id
     #   The ID of the connection.
     #   @return [String]
@@ -688,13 +557,6 @@ module Aws::Outposts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetOrderInput
-    #   data as a hash:
-    #
-    #       {
-    #         order_id: "OrderId", # required
-    #       }
-    #
     # @!attribute [rw] order_id
     #   The ID of the order.
     #   @return [String]
@@ -719,13 +581,6 @@ module Aws::Outposts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetOutpostInput
-    #   data as a hash:
-    #
-    #       {
-    #         outpost_id: "OutpostId", # required
-    #       }
-    #
     # @!attribute [rw] outpost_id
     #   The ID or the Amazon Resource Name (ARN) of the Outpost.
     #   @return [String]
@@ -738,15 +593,6 @@ module Aws::Outposts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetOutpostInstanceTypesInput
-    #   data as a hash:
-    #
-    #       {
-    #         outpost_id: "OutpostId", # required
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] outpost_id
     #   The ID or the Amazon Resource Name (ARN) of the Outpost.
     #   @return [String]
@@ -808,14 +654,6 @@ module Aws::Outposts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSiteAddressInput
-    #   data as a hash:
-    #
-    #       {
-    #         site_id: "SiteId", # required
-    #         address_type: "SHIPPING_ADDRESS", # required, accepts SHIPPING_ADDRESS, OPERATING_ADDRESS
-    #       }
-    #
     # @!attribute [rw] site_id
     #   The ID or the Amazon Resource Name (ARN) of the site.
     #   @return [String]
@@ -855,13 +693,6 @@ module Aws::Outposts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSiteInput
-    #   data as a hash:
-    #
-    #       {
-    #         site_id: "SiteId", # required
-    #       }
-    #
     # @!attribute [rw] site_id
     #   The ID or the Amazon Resource Name (ARN) of the site.
     #   @return [String]
@@ -973,14 +804,6 @@ module Aws::Outposts
 
     # Information about a line item request.
     #
-    # @note When making an API call, you may pass LineItemRequest
-    #   data as a hash:
-    #
-    #       {
-    #         catalog_item_id: "SkuCode",
-    #         quantity: 1,
-    #       }
-    #
     # @!attribute [rw] catalog_item_id
     #   The ID of the catalog item.
     #   @return [String]
@@ -998,17 +821,6 @@ module Aws::Outposts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAssetsInput
-    #   data as a hash:
-    #
-    #       {
-    #         outpost_identifier: "OutpostIdentifier", # required
-    #         host_id_filter: ["HostId"],
-    #         max_results: 1,
-    #         next_token: "Token",
-    #         status_filter: ["ACTIVE"], # accepts ACTIVE, RETIRING
-    #       }
-    #
     # @!attribute [rw] outpost_identifier
     #   The ID or the Amazon Resource Name (ARN) of the Outpost.
     #   @return [String]
@@ -1058,17 +870,6 @@ module Aws::Outposts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCatalogItemsInput
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "Token",
-    #         max_results: 1,
-    #         item_class_filter: ["RACK"], # accepts RACK, SERVER
-    #         supported_storage_filter: ["EBS"], # accepts EBS, S3
-    #         ec2_family_filter: ["Family"],
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The pagination token.
     #   @return [String]
@@ -1118,15 +919,6 @@ module Aws::Outposts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListOrdersInput
-    #   data as a hash:
-    #
-    #       {
-    #         outpost_identifier_filter: "OutpostIdentifier",
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] outpost_identifier_filter
     #   The ID or the Amazon Resource Name (ARN) of the Outpost.
     #   @return [String]
@@ -1166,17 +958,6 @@ module Aws::Outposts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListOutpostsInput
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "Token",
-    #         max_results: 1,
-    #         life_cycle_status_filter: ["LifeCycleStatus"],
-    #         availability_zone_filter: ["AvailabilityZone"],
-    #         availability_zone_id_filter: ["AvailabilityZoneId"],
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The pagination token.
     #   @return [String]
@@ -1227,17 +1008,6 @@ module Aws::Outposts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSitesInput
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "Token",
-    #         max_results: 1,
-    #         operating_address_country_code_filter: ["CountryCode"],
-    #         operating_address_state_or_region_filter: ["StateOrRegion"],
-    #         operating_address_city_filter: ["City"],
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The pagination token.
     #   @return [String]
@@ -1287,13 +1057,6 @@ module Aws::Outposts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -1529,21 +1292,6 @@ module Aws::Outposts
     #
     # [1]: https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#checklist
     #
-    # @note When making an API call, you may pass RackPhysicalProperties
-    #   data as a hash:
-    #
-    #       {
-    #         power_draw_kva: "POWER_5_KVA", # accepts POWER_5_KVA, POWER_10_KVA, POWER_15_KVA
-    #         power_phase: "SINGLE_PHASE", # accepts SINGLE_PHASE, THREE_PHASE
-    #         power_connector: "L6_30P", # accepts L6_30P, IEC309, AH530P7W, AH532P6W
-    #         power_feed_drop: "ABOVE_RACK", # accepts ABOVE_RACK, BELOW_RACK
-    #         uplink_gbps: "UPLINK_1G", # accepts UPLINK_1G, UPLINK_10G, UPLINK_40G, UPLINK_100G
-    #         uplink_count: "UPLINK_COUNT_1", # accepts UPLINK_COUNT_1, UPLINK_COUNT_2, UPLINK_COUNT_3, UPLINK_COUNT_4, UPLINK_COUNT_5, UPLINK_COUNT_6, UPLINK_COUNT_7, UPLINK_COUNT_8, UPLINK_COUNT_12, UPLINK_COUNT_16
-    #         fiber_optic_cable_type: "SINGLE_MODE", # accepts SINGLE_MODE, MULTI_MODE
-    #         optical_standard: "OPTIC_10GBASE_SR", # accepts OPTIC_10GBASE_SR, OPTIC_10GBASE_IR, OPTIC_10GBASE_LR, OPTIC_40GBASE_SR, OPTIC_40GBASE_ESR, OPTIC_40GBASE_IR4_LR4L, OPTIC_40GBASE_LR4, OPTIC_100GBASE_SR4, OPTIC_100GBASE_CWDM4, OPTIC_100GBASE_LR4, OPTIC_100G_PSM4_MSA, OPTIC_1000BASE_LX, OPTIC_1000BASE_SX
-    #         maximum_supported_weight_lbs: "NO_LIMIT", # accepts NO_LIMIT, MAX_1400_LBS, MAX_1600_LBS, MAX_1800_LBS, MAX_2000_LBS
-    #       }
-    #
     # @!attribute [rw] power_draw_kva
     #   The power draw available at the hardware placement position for the
     #   rack.
@@ -1704,16 +1452,6 @@ module Aws::Outposts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartConnectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_serial_number: "DeviceSerialNumber", # required
-    #         asset_id: "AssetId", # required
-    #         client_public_key: "WireGuardPublicKey", # required
-    #         network_interface_device_index: 1, # required
-    #       }
-    #
     # @!attribute [rw] device_serial_number
     #   The serial number of the dongle.
     #   @return [String]
@@ -1758,16 +1496,6 @@ module Aws::Outposts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -1789,14 +1517,6 @@ module Aws::Outposts
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -1818,16 +1538,6 @@ module Aws::Outposts
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateOutpostInput
-    #   data as a hash:
-    #
-    #       {
-    #         outpost_id: "OutpostId", # required
-    #         name: "OutpostName",
-    #         description: "OutpostDescription",
-    #         supported_hardware_type: "RACK", # accepts RACK, SERVER
-    #       }
-    #
     # @!attribute [rw] outpost_id
     #   The ID or the Amazon Resource Name (ARN) of the Outpost.
     #   @return [String]
@@ -1867,27 +1577,6 @@ module Aws::Outposts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateSiteAddressInput
-    #   data as a hash:
-    #
-    #       {
-    #         site_id: "SiteId", # required
-    #         address_type: "SHIPPING_ADDRESS", # required, accepts SHIPPING_ADDRESS, OPERATING_ADDRESS
-    #         address: { # required
-    #           contact_name: "ContactName",
-    #           contact_phone_number: "ContactPhoneNumber",
-    #           address_line_1: "AddressLine1", # required
-    #           address_line_2: "AddressLine2",
-    #           address_line_3: "AddressLine3",
-    #           city: "City", # required
-    #           state_or_region: "StateOrRegion", # required
-    #           district_or_county: "DistrictOrCounty",
-    #           postal_code: "PostalCode", # required
-    #           country_code: "CountryCode", # required
-    #           municipality: "Municipality",
-    #         },
-    #       }
-    #
     # @!attribute [rw] site_id
     #   The ID or the Amazon Resource Name (ARN) of the site.
     #   @return [String]
@@ -1927,16 +1616,6 @@ module Aws::Outposts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateSiteInput
-    #   data as a hash:
-    #
-    #       {
-    #         site_id: "SiteId", # required
-    #         name: "SiteName",
-    #         description: "SiteDescription",
-    #         notes: "SiteNotes",
-    #       }
-    #
     # @!attribute [rw] site_id
     #   The ID or the Amazon Resource Name (ARN) of the site.
     #   @return [String]
@@ -1976,22 +1655,6 @@ module Aws::Outposts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateSiteRackPhysicalPropertiesInput
-    #   data as a hash:
-    #
-    #       {
-    #         site_id: "SiteId", # required
-    #         power_draw_kva: "POWER_5_KVA", # accepts POWER_5_KVA, POWER_10_KVA, POWER_15_KVA
-    #         power_phase: "SINGLE_PHASE", # accepts SINGLE_PHASE, THREE_PHASE
-    #         power_connector: "L6_30P", # accepts L6_30P, IEC309, AH530P7W, AH532P6W
-    #         power_feed_drop: "ABOVE_RACK", # accepts ABOVE_RACK, BELOW_RACK
-    #         uplink_gbps: "UPLINK_1G", # accepts UPLINK_1G, UPLINK_10G, UPLINK_40G, UPLINK_100G
-    #         uplink_count: "UPLINK_COUNT_1", # accepts UPLINK_COUNT_1, UPLINK_COUNT_2, UPLINK_COUNT_3, UPLINK_COUNT_4, UPLINK_COUNT_5, UPLINK_COUNT_6, UPLINK_COUNT_7, UPLINK_COUNT_8, UPLINK_COUNT_12, UPLINK_COUNT_16
-    #         fiber_optic_cable_type: "SINGLE_MODE", # accepts SINGLE_MODE, MULTI_MODE
-    #         optical_standard: "OPTIC_10GBASE_SR", # accepts OPTIC_10GBASE_SR, OPTIC_10GBASE_IR, OPTIC_10GBASE_LR, OPTIC_40GBASE_SR, OPTIC_40GBASE_ESR, OPTIC_40GBASE_IR4_LR4L, OPTIC_40GBASE_LR4, OPTIC_100GBASE_SR4, OPTIC_100GBASE_CWDM4, OPTIC_100GBASE_LR4, OPTIC_100G_PSM4_MSA, OPTIC_1000BASE_LX, OPTIC_1000BASE_SX
-    #         maximum_supported_weight_lbs: "NO_LIMIT", # accepts NO_LIMIT, MAX_1400_LBS, MAX_1600_LBS, MAX_1800_LBS, MAX_2000_LBS
-    #       }
-    #
     # @!attribute [rw] site_id
     #   The ID or the Amazon Resource Name (ARN) of the site.
     #   @return [String]

@@ -117,14 +117,6 @@ module Aws::ApplicationDiscoveryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateConfigurationItemsToApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_configuration_id: "ApplicationId", # required
-    #         configuration_ids: ["ConfigurationId"], # required
-    #       }
-    #
     # @!attribute [rw] application_configuration_id
     #   The configuration ID of an application with which items are to be
     #   associated.
@@ -180,13 +172,6 @@ module Aws::ApplicationDiscoveryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchDeleteImportDataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         import_task_ids: ["ImportTaskIdentifier"], # required
-    #       }
-    #
     # @!attribute [rw] import_task_ids
     #   The IDs for the import tasks that you want to delete.
     #   @return [Array<String>]
@@ -411,14 +396,6 @@ module Aws::ApplicationDiscoveryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ApplicationName", # required
-    #         description: "ApplicationDescription",
-    #       }
-    #
     # @!attribute [rw] name
     #   Name of the application to be created.
     #   @return [String]
@@ -444,19 +421,6 @@ module Aws::ApplicationDiscoveryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateTagsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_ids: ["ConfigurationId"], # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] configuration_ids
     #   A list of configuration items that you want to tag.
     #   @return [Array<String>]
@@ -637,13 +601,6 @@ module Aws::ApplicationDiscoveryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteApplicationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_ids: ["ApplicationId"], # required
-    #       }
-    #
     # @!attribute [rw] configuration_ids
     #   Configuration ID of an application to be deleted.
     #   @return [Array<String>]
@@ -656,19 +613,6 @@ module Aws::ApplicationDiscoveryService
 
     class DeleteApplicationsResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteTagsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_ids: ["ConfigurationId"], # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] configuration_ids
     #   A list of configuration items with tags that you want to delete.
     #   @return [Array<String>]
@@ -690,22 +634,6 @@ module Aws::ApplicationDiscoveryService
 
     class DeleteTagsResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeAgentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         agent_ids: ["AgentId"],
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["FilterValue"], # required
-    #             condition: "Condition", # required
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] agent_ids
     #   The agent or the Connector IDs for which you want information. If
     #   you specify no IDs, the system returns information about all
@@ -766,13 +694,6 @@ module Aws::ApplicationDiscoveryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeConfigurationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_ids: ["ConfigurationId"], # required
-    #       }
-    #
     # @!attribute [rw] configuration_ids
     #   One or more configuration IDs.
     #   @return [Array<String>]
@@ -793,15 +714,6 @@ module Aws::ApplicationDiscoveryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeContinuousExportsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         export_ids: ["ConfigurationsExportId"],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] export_ids
     #   The unique IDs assigned to the exports.
     #   @return [Array<String>]
@@ -838,15 +750,6 @@ module Aws::ApplicationDiscoveryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeExportConfigurationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         export_ids: ["ConfigurationsExportId"],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] export_ids
     #   A list of continuous export IDs to search for.
     #   @return [Array<String>]
@@ -882,22 +785,6 @@ module Aws::ApplicationDiscoveryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeExportTasksRequest
-    #   data as a hash:
-    #
-    #       {
-    #         export_ids: ["ConfigurationsExportId"],
-    #         filters: [
-    #           {
-    #             name: "FilterName", # required
-    #             values: ["FilterValue"], # required
-    #             condition: "Condition", # required
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] export_ids
     #   One or more unique identifiers used to query the status of an export
     #   request.
@@ -956,20 +843,6 @@ module Aws::ApplicationDiscoveryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeImportTasksRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             name: "IMPORT_TASK_ID", # accepts IMPORT_TASK_ID, STATUS, NAME
-    #             values: ["ImportTaskFilterValue"],
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] filters
     #   An array of name-value pairs that you provide to filter the results
     #   for the `DescribeImportTask` request to a specific subset of
@@ -1009,20 +882,6 @@ module Aws::ApplicationDiscoveryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeTagsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             name: "FilterName", # required
-    #             values: ["FilterValue"], # required
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] filters
     #   You can filter the list using a *key*-*value* format. You can
     #   separate these items by using logical operators. Allowed filters
@@ -1065,14 +924,6 @@ module Aws::ApplicationDiscoveryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateConfigurationItemsFromApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_configuration_id: "ApplicationId", # required
-    #         configuration_ids: ["ConfigurationId"], # required
-    #       }
-    #
     # @!attribute [rw] application_configuration_id
     #   Configuration ID of an application from which each item is
     #   disassociated.
@@ -1108,15 +959,6 @@ module Aws::ApplicationDiscoveryService
     #
     #
     # [1]: http://docs.aws.amazon.com/application-discovery/latest/APIReference/API_StartExportTask.html
-    #
-    # @note When making an API call, you may pass ExportFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "FilterName", # required
-    #         values: ["FilterValue"], # required
-    #         condition: "Condition", # required
-    #       }
     #
     # @!attribute [rw] name
     #   A single `ExportFilter` name. Supported filters: `agentIds`.
@@ -1209,15 +1051,6 @@ module Aws::ApplicationDiscoveryService
     #
     # [1]: https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html
     #
-    # @note When making an API call, you may pass Filter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #         values: ["FilterValue"], # required
-    #         condition: "Condition", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the filter.
     #   @return [String]
@@ -1246,8 +1079,6 @@ module Aws::ApplicationDiscoveryService
       include Aws::Structure
     end
 
-    # @api private
-    #
     class GetDiscoverySummaryRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] servers
@@ -1421,14 +1252,6 @@ module Aws::ApplicationDiscoveryService
     #
     #  </note>
     #
-    # @note When making an API call, you may pass ImportTaskFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "IMPORT_TASK_ID", # accepts IMPORT_TASK_ID, STATUS, NAME
-    #         values: ["ImportTaskFilterValue"],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name, status, or import task ID for a specific import task.
     #   @return [String]
@@ -1470,28 +1293,6 @@ module Aws::ApplicationDiscoveryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListConfigurationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_type: "SERVER", # required, accepts SERVER, PROCESS, CONNECTION, APPLICATION
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["FilterValue"], # required
-    #             condition: "Condition", # required
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         order_by: [
-    #           {
-    #             field_name: "OrderByElementFieldName", # required
-    #             sort_order: "ASC", # accepts ASC, DESC
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] configuration_type
     #   A valid configuration identified by Application Discovery Service.
     #   @return [String]
@@ -1564,17 +1365,6 @@ module Aws::ApplicationDiscoveryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListServerNeighborsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_id: "ConfigurationId", # required
-    #         port_information_needed: false,
-    #         neighbor_configuration_ids: ["ConfigurationId"],
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] configuration_id
     #   Configuration ID of the server for which neighbors are being listed.
     #   @return [String]
@@ -1683,14 +1473,6 @@ module Aws::ApplicationDiscoveryService
 
     # A field and direction for ordered output.
     #
-    # @note When making an API call, you may pass OrderByElement
-    #   data as a hash:
-    #
-    #       {
-    #         field_name: "OrderByElementFieldName", # required
-    #         sort_order: "ASC", # accepts ASC, DESC
-    #       }
-    #
     # @!attribute [rw] field_name
     #   The field on which to order.
     #   @return [String]
@@ -1744,8 +1526,6 @@ module Aws::ApplicationDiscoveryService
       include Aws::Structure
     end
 
-    # @api private
-    #
     class StartContinuousExportRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] export_id
@@ -1785,13 +1565,6 @@ module Aws::ApplicationDiscoveryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartDataCollectionByAgentIdsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         agent_ids: ["AgentId"], # required
-    #       }
-    #
     # @!attribute [rw] agent_ids
     #   The IDs of the agents or connectors from which to start collecting
     #   data. If you send a request to an agent/connector ID that you do not
@@ -1823,22 +1596,6 @@ module Aws::ApplicationDiscoveryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartExportTaskRequest
-    #   data as a hash:
-    #
-    #       {
-    #         export_data_format: ["CSV"], # accepts CSV, GRAPHML
-    #         filters: [
-    #           {
-    #             name: "FilterName", # required
-    #             values: ["FilterValue"], # required
-    #             condition: "Condition", # required
-    #           },
-    #         ],
-    #         start_time: Time.now,
-    #         end_time: Time.now,
-    #       }
-    #
     # @!attribute [rw] export_data_format
     #   The file format for the returned export data. Default value is
     #   `CSV`. **Note:** *The* `GRAPHML` *option has been deprecated.*
@@ -1885,15 +1642,6 @@ module Aws::ApplicationDiscoveryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartImportTaskRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_request_token: "ClientRequestToken",
-    #         name: "ImportTaskName", # required
-    #         import_url: "ImportURL", # required
-    #       }
-    #
     # @!attribute [rw] client_request_token
     #   Optional. A unique token that you can provide to prevent the same
     #   import request from occurring more than once. If you don't provide
@@ -1943,13 +1691,6 @@ module Aws::ApplicationDiscoveryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopContinuousExportRequest
-    #   data as a hash:
-    #
-    #       {
-    #         export_id: "ConfigurationsExportId", # required
-    #       }
-    #
     # @!attribute [rw] export_id
     #   The unique ID assigned to this export.
     #   @return [String]
@@ -1976,13 +1717,6 @@ module Aws::ApplicationDiscoveryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopDataCollectionByAgentIdsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         agent_ids: ["AgentId"], # required
-    #       }
-    #
     # @!attribute [rw] agent_ids
     #   The IDs of the agents or connectors from which to stop collecting
     #   data.
@@ -2011,14 +1745,6 @@ module Aws::ApplicationDiscoveryService
     #
     # Do not store sensitive information (like personal data) in tags.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The type of tag on which to filter.
     #   @return [String]
@@ -2037,14 +1763,6 @@ module Aws::ApplicationDiscoveryService
     # The tag filter. Valid names are: `tagKey`, `tagValue`,
     # `configurationId`.
     #
-    # @note When making an API call, you may pass TagFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "FilterName", # required
-    #         values: ["FilterValue"], # required
-    #       }
-    #
     # @!attribute [rw] name
     #   A name of the tag filter.
     #   @return [String]
@@ -2060,15 +1778,6 @@ module Aws::ApplicationDiscoveryService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_id: "ApplicationId", # required
-    #         name: "ApplicationName",
-    #         description: "ApplicationDescription",
-    #       }
-    #
     # @!attribute [rw] configuration_id
     #   Configuration ID of the application to be updated.
     #   @return [String]

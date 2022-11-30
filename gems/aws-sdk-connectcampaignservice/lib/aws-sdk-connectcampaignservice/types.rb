@@ -31,13 +31,6 @@ module Aws::ConnectCampaignService
 
     # Answering Machine Detection config
     #
-    # @note When making an API call, you may pass AnswerMachineDetectionConfig
-    #   data as a hash:
-    #
-    #       {
-    #         enable_answer_machine_detection: false, # required
-    #       }
-    #
     # @!attribute [rw] enable_answer_machine_detection
     #   Enable or disable answering machine detection
     #   @return [Boolean]
@@ -95,16 +88,6 @@ module Aws::ConnectCampaignService
     end
 
     # Filter model by type
-    #
-    # @note When making an API call, you may pass CampaignFilters
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id_filter: {
-    #           operator: "Eq", # required, accepts Eq
-    #           value: "InstanceId", # required
-    #         },
-    #       }
     #
     # @!attribute [rw] instance_id_filter
     #   Connect instance identifier filter
@@ -169,33 +152,6 @@ module Aws::ConnectCampaignService
 
     # The request for Create Campaign API.
     #
-    # @note When making an API call, you may pass CreateCampaignRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connect_instance_id: "InstanceId", # required
-    #         dialer_config: { # required
-    #           predictive_dialer_config: {
-    #             bandwidth_allocation: 1.0, # required
-    #           },
-    #           progressive_dialer_config: {
-    #             bandwidth_allocation: 1.0, # required
-    #           },
-    #         },
-    #         name: "CampaignName", # required
-    #         outbound_call_config: { # required
-    #           answer_machine_detection_config: {
-    #             enable_answer_machine_detection: false, # required
-    #           },
-    #           connect_contact_flow_id: "ContactFlowId", # required
-    #           connect_queue_id: "QueueId", # required
-    #           connect_source_phone_number: "SourcePhoneNumber",
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] connect_instance_id
     #   Amazon Connect Instance Id
     #   @return [String]
@@ -254,13 +210,6 @@ module Aws::ConnectCampaignService
 
     # DeleteCampaignRequest
     #
-    # @note When making an API call, you may pass DeleteCampaignRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "CampaignId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   Identifier representing a Campaign
     #   @return [String]
@@ -274,13 +223,6 @@ module Aws::ConnectCampaignService
     end
 
     # DeleteCampaignRequest
-    #
-    # @note When making an API call, you may pass DeleteConnectInstanceConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connect_instance_id: "InstanceId", # required
-    #       }
     #
     # @!attribute [rw] connect_instance_id
     #   Amazon Connect Instance Id
@@ -296,13 +238,6 @@ module Aws::ConnectCampaignService
 
     # The request for DeleteInstanceOnboardingJob API.
     #
-    # @note When making an API call, you may pass DeleteInstanceOnboardingJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connect_instance_id: "InstanceId", # required
-    #       }
-    #
     # @!attribute [rw] connect_instance_id
     #   Amazon Connect Instance Id
     #   @return [String]
@@ -316,13 +251,6 @@ module Aws::ConnectCampaignService
     end
 
     # DescribeCampaignRequests
-    #
-    # @note When making an API call, you may pass DescribeCampaignRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "CampaignId", # required
-    #       }
     #
     # @!attribute [rw] id
     #   Identifier representing a Campaign
@@ -351,18 +279,6 @@ module Aws::ConnectCampaignService
     end
 
     # A dial request for a campaign.
-    #
-    # @note When making an API call, you may pass DialRequest
-    #   data as a hash:
-    #
-    #       {
-    #         attributes: { # required
-    #           "AttributeName" => "AttributeValue",
-    #         },
-    #         client_token: "ClientToken", # required
-    #         expiration_time: Time.now, # required
-    #         phone_number: "DestinationPhoneNumber", # required
-    #       }
     #
     # @!attribute [rw] attributes
     #   A custom key-value pair using an attribute map. The attributes are
@@ -396,10 +312,6 @@ module Aws::ConnectCampaignService
 
     # The possible types of dialer config parameters
     #
-    # @note DialerConfig is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note DialerConfig is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of DialerConfig corresponding to the set member.
-    #
     # @!attribute [rw] predictive_dialer_config
     #   Predictive Dialer config
     #   @return [Types::PredictiveDialerConfig]
@@ -427,15 +339,6 @@ module Aws::ConnectCampaignService
     # always be encrypted. If disabled, service will perform encryption with
     # its own key. If enabled, a KMS key id needs to be provided and KMS
     # charges will apply. KMS is only type supported
-    #
-    # @note When making an API call, you may pass EncryptionConfig
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false, # required
-    #         encryption_type: "KMS", # accepts KMS
-    #         key_arn: "EncryptionKey",
-    #       }
     #
     # @!attribute [rw] enabled
     #   Boolean to indicate if custom encryption has been enabled.
@@ -506,13 +409,6 @@ module Aws::ConnectCampaignService
 
     # GetCampaignStateBatchRequest
     #
-    # @note When making an API call, you may pass GetCampaignStateBatchRequest
-    #   data as a hash:
-    #
-    #       {
-    #         campaign_ids: ["CampaignId"], # required
-    #       }
-    #
     # @!attribute [rw] campaign_ids
     #   List of CampaignId
     #   @return [Array<String>]
@@ -546,13 +442,6 @@ module Aws::ConnectCampaignService
 
     # GetCampaignStateRequest
     #
-    # @note When making an API call, you may pass GetCampaignStateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "CampaignId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   Identifier representing a Campaign
     #   @return [String]
@@ -581,13 +470,6 @@ module Aws::ConnectCampaignService
 
     # GetConnectInstanceConfigRequest
     #
-    # @note When making an API call, you may pass GetConnectInstanceConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connect_instance_id: "InstanceId", # required
-    #       }
-    #
     # @!attribute [rw] connect_instance_id
     #   Amazon Connect Instance Id
     #   @return [String]
@@ -615,13 +497,6 @@ module Aws::ConnectCampaignService
     end
 
     # GetInstanceOnboardingJobStatusRequest
-    #
-    # @note When making an API call, you may pass GetInstanceOnboardingJobStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connect_instance_id: "InstanceId", # required
-    #       }
     #
     # @!attribute [rw] connect_instance_id
     #   Amazon Connect Instance Id
@@ -677,14 +552,6 @@ module Aws::ConnectCampaignService
     end
 
     # Connect instance identifier filter
-    #
-    # @note When making an API call, you may pass InstanceIdFilter
-    #   data as a hash:
-    #
-    #       {
-    #         operator: "Eq", # required, accepts Eq
-    #         value: "InstanceId", # required
-    #       }
     #
     # @!attribute [rw] operator
     #   Operators for Connect instance identifier filter
@@ -795,20 +662,6 @@ module Aws::ConnectCampaignService
 
     # ListCampaignsRequest
     #
-    # @note When making an API call, you may pass ListCampaignsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: {
-    #           instance_id_filter: {
-    #             operator: "Eq", # required, accepts Eq
-    #             value: "InstanceId", # required
-    #           },
-    #         },
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] filters
     #   Filter model by type
     #   @return [Types::CampaignFilters]
@@ -852,13 +705,6 @@ module Aws::ConnectCampaignService
 
     # ListTagsForResource
     #
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   Arn
     #   @return [String]
@@ -886,18 +732,6 @@ module Aws::ConnectCampaignService
     end
 
     # The configuration used for outbound calls.
-    #
-    # @note When making an API call, you may pass OutboundCallConfig
-    #   data as a hash:
-    #
-    #       {
-    #         answer_machine_detection_config: {
-    #           enable_answer_machine_detection: false, # required
-    #         },
-    #         connect_contact_flow_id: "ContactFlowId", # required
-    #         connect_queue_id: "QueueId", # required
-    #         connect_source_phone_number: "SourcePhoneNumber",
-    #       }
     #
     # @!attribute [rw] answer_machine_detection_config
     #   Answering Machine Detection config
@@ -934,13 +768,6 @@ module Aws::ConnectCampaignService
 
     # PauseCampaignRequest
     #
-    # @note When making an API call, you may pass PauseCampaignRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "CampaignId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   Identifier representing a Campaign
     #   @return [String]
@@ -954,13 +781,6 @@ module Aws::ConnectCampaignService
     end
 
     # Predictive Dialer config
-    #
-    # @note When making an API call, you may pass PredictiveDialerConfig
-    #   data as a hash:
-    #
-    #       {
-    #         bandwidth_allocation: 1.0, # required
-    #       }
     #
     # @!attribute [rw] bandwidth_allocation
     #   The bandwidth allocation of a queue resource.
@@ -976,13 +796,6 @@ module Aws::ConnectCampaignService
 
     # Progressive Dialer config
     #
-    # @note When making an API call, you may pass ProgressiveDialerConfig
-    #   data as a hash:
-    #
-    #       {
-    #         bandwidth_allocation: 1.0, # required
-    #       }
-    #
     # @!attribute [rw] bandwidth_allocation
     #   The bandwidth allocation of a queue resource.
     #   @return [Float]
@@ -996,23 +809,6 @@ module Aws::ConnectCampaignService
     end
 
     # PutDialRequestBatchRequest
-    #
-    # @note When making an API call, you may pass PutDialRequestBatchRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dial_requests: [ # required
-    #           {
-    #             attributes: { # required
-    #               "AttributeName" => "AttributeValue",
-    #             },
-    #             client_token: "ClientToken", # required
-    #             expiration_time: Time.now, # required
-    #             phone_number: "DestinationPhoneNumber", # required
-    #           },
-    #         ],
-    #         id: "CampaignId", # required
-    #       }
     #
     # @!attribute [rw] dial_requests
     #   A list of dial requests.
@@ -1071,13 +867,6 @@ module Aws::ConnectCampaignService
 
     # ResumeCampaignRequest
     #
-    # @note When making an API call, you may pass ResumeCampaignRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "CampaignId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   Identifier representing a Campaign
     #   @return [String]
@@ -1111,13 +900,6 @@ module Aws::ConnectCampaignService
 
     # StartCampaignRequest
     #
-    # @note When making an API call, you may pass StartCampaignRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "CampaignId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   Identifier representing a Campaign
     #   @return [String]
@@ -1131,18 +913,6 @@ module Aws::ConnectCampaignService
     end
 
     # The request for StartInstanceOnboardingJob API.
-    #
-    # @note When making an API call, you may pass StartInstanceOnboardingJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connect_instance_id: "InstanceId", # required
-    #         encryption_config: { # required
-    #           enabled: false, # required
-    #           encryption_type: "KMS", # accepts KMS
-    #           key_arn: "EncryptionKey",
-    #         },
-    #       }
     #
     # @!attribute [rw] connect_instance_id
     #   Amazon Connect Instance Id
@@ -1179,13 +949,6 @@ module Aws::ConnectCampaignService
     end
 
     # StopCampaignRequest
-    #
-    # @note When making an API call, you may pass StopCampaignRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "CampaignId", # required
-    #       }
     #
     # @!attribute [rw] id
     #   Identifier representing a Campaign
@@ -1240,16 +1003,6 @@ module Aws::ConnectCampaignService
 
     # TagResourceRequest
     #
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "Arn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] arn
     #   Arn
     #   @return [String]
@@ -1288,14 +1041,6 @@ module Aws::ConnectCampaignService
 
     # UntagResourceRequest
     #
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "Arn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   Arn
     #   @return [String]
@@ -1314,21 +1059,6 @@ module Aws::ConnectCampaignService
     end
 
     # UpdateCampaignDialerConfigRequest
-    #
-    # @note When making an API call, you may pass UpdateCampaignDialerConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dialer_config: { # required
-    #           predictive_dialer_config: {
-    #             bandwidth_allocation: 1.0, # required
-    #           },
-    #           progressive_dialer_config: {
-    #             bandwidth_allocation: 1.0, # required
-    #           },
-    #         },
-    #         id: "CampaignId", # required
-    #       }
     #
     # @!attribute [rw] dialer_config
     #   The possible types of dialer config parameters
@@ -1349,14 +1079,6 @@ module Aws::ConnectCampaignService
 
     # UpdateCampaignNameRequest
     #
-    # @note When making an API call, you may pass UpdateCampaignNameRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "CampaignId", # required
-    #         name: "CampaignName", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   Identifier representing a Campaign
     #   @return [String]
@@ -1375,18 +1097,6 @@ module Aws::ConnectCampaignService
     end
 
     # UpdateCampaignOutboundCallConfigRequest
-    #
-    # @note When making an API call, you may pass UpdateCampaignOutboundCallConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         answer_machine_detection_config: {
-    #           enable_answer_machine_detection: false, # required
-    #         },
-    #         connect_contact_flow_id: "ContactFlowId",
-    #         connect_source_phone_number: "SourcePhoneNumber",
-    #         id: "CampaignId", # required
-    #       }
     #
     # @!attribute [rw] answer_machine_detection_config
     #   Answering Machine Detection config

@@ -259,10 +259,6 @@ module Aws::AccessAnalyzer
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketAcl.html
     #
-    # @note AclGrantee is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note AclGrantee is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AclGrantee corresponding to the set member.
-    #
     # @!attribute [rw] id
     #   The value specified is the canonical user ID of an Amazon Web
     #   Services account.
@@ -447,15 +443,6 @@ module Aws::AccessAnalyzer
 
     # Retroactively applies an archive rule.
     #
-    # @note When making an API call, you may pass ApplyArchiveRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         analyzer_arn: "AnalyzerArn", # required
-    #         rule_name: "Name", # required
-    #         client_token: "String",
-    #       }
-    #
     # @!attribute [rw] analyzer_arn
     #   The Amazon resource name (ARN) of the analyzer.
     #   @return [String]
@@ -510,13 +497,6 @@ module Aws::AccessAnalyzer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CancelPolicyGenerationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The `JobId` that is returned by the `StartPolicyGeneration`
     #   operation. The `JobId` can be used with `GetGeneratedPolicy` to
@@ -537,22 +517,6 @@ module Aws::AccessAnalyzer
     class CancelPolicyGenerationResponse < Aws::EmptyStructure; end
 
     # Contains information about CloudTrail access.
-    #
-    # @note When making an API call, you may pass CloudTrailDetails
-    #   data as a hash:
-    #
-    #       {
-    #         trails: [ # required
-    #           {
-    #             cloud_trail_arn: "CloudTrailArn", # required
-    #             regions: ["String"],
-    #             all_regions: false,
-    #           },
-    #         ],
-    #         access_role: "RoleArn", # required
-    #         start_time: Time.now, # required
-    #         end_time: Time.now,
-    #       }
     #
     # @!attribute [rw] trails
     #   A `Trail` object that contains settings for a trail.
@@ -620,10 +584,6 @@ module Aws::AccessAnalyzer
     # Access control configuration structures for your resource. You specify
     # the configuration as a type-value pair. You can specify only one type
     # of access control configuration.
-    #
-    # @note Configuration is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note Configuration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Configuration corresponding to the set member.
     #
     # @!attribute [rw] ebs_snapshot
     #   The access control configuration is for an Amazon EBS volume
@@ -727,111 +687,6 @@ module Aws::AccessAnalyzer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAccessPreviewRequest
-    #   data as a hash:
-    #
-    #       {
-    #         analyzer_arn: "AnalyzerArn", # required
-    #         configurations: { # required
-    #           "ConfigurationsMapKey" => {
-    #             ebs_snapshot: {
-    #               user_ids: ["EbsUserId"],
-    #               groups: ["EbsGroup"],
-    #               kms_key_id: "EbsSnapshotDataEncryptionKeyId",
-    #             },
-    #             ecr_repository: {
-    #               repository_policy: "EcrRepositoryPolicy",
-    #             },
-    #             iam_role: {
-    #               trust_policy: "IamTrustPolicy",
-    #             },
-    #             efs_file_system: {
-    #               file_system_policy: "EfsFileSystemPolicy",
-    #             },
-    #             kms_key: {
-    #               key_policies: {
-    #                 "PolicyName" => "KmsKeyPolicy",
-    #               },
-    #               grants: [
-    #                 {
-    #                   operations: ["CreateGrant"], # required, accepts CreateGrant, Decrypt, DescribeKey, Encrypt, GenerateDataKey, GenerateDataKeyPair, GenerateDataKeyPairWithoutPlaintext, GenerateDataKeyWithoutPlaintext, GetPublicKey, ReEncryptFrom, ReEncryptTo, RetireGrant, Sign, Verify
-    #                   grantee_principal: "GranteePrincipal", # required
-    #                   retiring_principal: "RetiringPrincipal",
-    #                   constraints: {
-    #                     encryption_context_equals: {
-    #                       "KmsConstraintsKey" => "KmsConstraintsValue",
-    #                     },
-    #                     encryption_context_subset: {
-    #                       "KmsConstraintsKey" => "KmsConstraintsValue",
-    #                     },
-    #                   },
-    #                   issuing_account: "IssuingAccount", # required
-    #                 },
-    #               ],
-    #             },
-    #             rds_db_cluster_snapshot: {
-    #               attributes: {
-    #                 "RdsDbClusterSnapshotAttributeName" => {
-    #                   account_ids: ["RdsDbClusterSnapshotAccountId"],
-    #                 },
-    #               },
-    #               kms_key_id: "RdsDbClusterSnapshotKmsKeyId",
-    #             },
-    #             rds_db_snapshot: {
-    #               attributes: {
-    #                 "RdsDbSnapshotAttributeName" => {
-    #                   account_ids: ["RdsDbSnapshotAccountId"],
-    #                 },
-    #               },
-    #               kms_key_id: "RdsDbSnapshotKmsKeyId",
-    #             },
-    #             secrets_manager_secret: {
-    #               kms_key_id: "SecretsManagerSecretKmsId",
-    #               secret_policy: "SecretsManagerSecretPolicy",
-    #             },
-    #             s3_bucket: {
-    #               bucket_policy: "S3BucketPolicy",
-    #               bucket_acl_grants: [
-    #                 {
-    #                   permission: "READ", # required, accepts READ, WRITE, READ_ACP, WRITE_ACP, FULL_CONTROL
-    #                   grantee: { # required
-    #                     id: "AclCanonicalId",
-    #                     uri: "AclUri",
-    #                   },
-    #                 },
-    #               ],
-    #               bucket_public_access_block: {
-    #                 ignore_public_acls: false, # required
-    #                 restrict_public_buckets: false, # required
-    #               },
-    #               access_points: {
-    #                 "AccessPointArn" => {
-    #                   access_point_policy: "AccessPointPolicy",
-    #                   public_access_block: {
-    #                     ignore_public_acls: false, # required
-    #                     restrict_public_buckets: false, # required
-    #                   },
-    #                   network_origin: {
-    #                     vpc_configuration: {
-    #                       vpc_id: "VpcId", # required
-    #                     },
-    #                     internet_configuration: {
-    #                     },
-    #                   },
-    #                 },
-    #               },
-    #             },
-    #             sns_topic: {
-    #               topic_policy: "SnsTopicPolicy",
-    #             },
-    #             sqs_queue: {
-    #               queue_policy: "SqsQueuePolicy",
-    #             },
-    #           },
-    #         },
-    #         client_token: "String",
-    #       }
-    #
     # @!attribute [rw] analyzer_arn
     #   The [ARN of the account analyzer][1] used to generate the access
     #   preview. You can only create an access preview for analyzers with an
@@ -880,31 +735,6 @@ module Aws::AccessAnalyzer
     end
 
     # Creates an analyzer.
-    #
-    # @note When making an API call, you may pass CreateAnalyzerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         analyzer_name: "Name", # required
-    #         type: "ACCOUNT", # required, accepts ACCOUNT, ORGANIZATION
-    #         archive_rules: [
-    #           {
-    #             rule_name: "Name", # required
-    #             filter: { # required
-    #               "String" => {
-    #                 eq: ["String"],
-    #                 neq: ["String"],
-    #                 contains: ["String"],
-    #                 exists: false,
-    #               },
-    #             },
-    #           },
-    #         ],
-    #         tags: {
-    #           "String" => "String",
-    #         },
-    #         client_token: "String",
-    #       }
     #
     # @!attribute [rw] analyzer_name
     #   The name of the analyzer to create.
@@ -962,23 +792,6 @@ module Aws::AccessAnalyzer
 
     # Creates an archive rule.
     #
-    # @note When making an API call, you may pass CreateArchiveRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         analyzer_name: "Name", # required
-    #         rule_name: "Name", # required
-    #         filter: { # required
-    #           "String" => {
-    #             eq: ["String"],
-    #             neq: ["String"],
-    #             contains: ["String"],
-    #             exists: false,
-    #           },
-    #         },
-    #         client_token: "String",
-    #       }
-    #
     # @!attribute [rw] analyzer_name
     #   The name of the created analyzer.
     #   @return [String]
@@ -1010,16 +823,6 @@ module Aws::AccessAnalyzer
     end
 
     # The criteria to use in the filter that defines the archive rule.
-    #
-    # @note When making an API call, you may pass Criterion
-    #   data as a hash:
-    #
-    #       {
-    #         eq: ["String"],
-    #         neq: ["String"],
-    #         contains: ["String"],
-    #         exists: false,
-    #       }
     #
     # @!attribute [rw] eq
     #   An "equals" operator to match for the filter used to create the
@@ -1054,14 +857,6 @@ module Aws::AccessAnalyzer
 
     # Deletes an analyzer.
     #
-    # @note When making an API call, you may pass DeleteAnalyzerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         analyzer_name: "Name", # required
-    #         client_token: "String",
-    #       }
-    #
     # @!attribute [rw] analyzer_name
     #   The name of the analyzer to delete.
     #   @return [String]
@@ -1083,15 +878,6 @@ module Aws::AccessAnalyzer
     end
 
     # Deletes an archive rule.
-    #
-    # @note When making an API call, you may pass DeleteArchiveRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         analyzer_name: "Name", # required
-    #         rule_name: "Name", # required
-    #         client_token: "String",
-    #       }
     #
     # @!attribute [rw] analyzer_name
     #   The name of the analyzer that associated with the archive rule to
@@ -1128,15 +914,6 @@ module Aws::AccessAnalyzer
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifySnapshotAttribute.html
-    #
-    # @note When making an API call, you may pass EbsSnapshotConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         user_ids: ["EbsUserId"],
-    #         groups: ["EbsGroup"],
-    #         kms_key_id: "EbsSnapshotDataEncryptionKeyId",
-    #       }
     #
     # @!attribute [rw] user_ids
     #   The IDs of the Amazon Web Services accounts that have access to the
@@ -1217,13 +994,6 @@ module Aws::AccessAnalyzer
     #
     # [1]: https://docs.aws.amazon.com/AmazonECR/latest/APIReference/API_Repository.html
     #
-    # @note When making an API call, you may pass EcrRepositoryConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         repository_policy: "EcrRepositoryPolicy",
-    #       }
-    #
     # @!attribute [rw] repository_policy
     #   The JSON repository policy text to apply to the Amazon ECR
     #   repository. For more information, see [Private repository policy
@@ -1262,13 +1032,6 @@ module Aws::AccessAnalyzer
     #
     #
     # [1]: https://docs.aws.amazon.com/efs/latest/ug/using-fs.html
-    #
-    # @note When making an API call, you may pass EfsFileSystemConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         file_system_policy: "EfsFileSystemPolicy",
-    #       }
     #
     # @!attribute [rw] file_system_policy
     #   The JSON policy definition to apply to the Amazon EFS file system.
@@ -1569,14 +1332,6 @@ module Aws::AccessAnalyzer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAccessPreviewRequest
-    #   data as a hash:
-    #
-    #       {
-    #         access_preview_id: "AccessPreviewId", # required
-    #         analyzer_arn: "AnalyzerArn", # required
-    #       }
-    #
     # @!attribute [rw] access_preview_id
     #   The unique ID for the access preview.
     #   @return [String]
@@ -1611,14 +1366,6 @@ module Aws::AccessAnalyzer
     end
 
     # Retrieves an analyzed resource.
-    #
-    # @note When making an API call, you may pass GetAnalyzedResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         analyzer_arn: "AnalyzerArn", # required
-    #         resource_arn: "ResourceArn", # required
-    #       }
     #
     # @!attribute [rw] analyzer_arn
     #   The [ARN of the analyzer][1] to retrieve information from.
@@ -1658,13 +1405,6 @@ module Aws::AccessAnalyzer
 
     # Retrieves an analyzer.
     #
-    # @note When making an API call, you may pass GetAnalyzerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         analyzer_name: "Name", # required
-    #       }
-    #
     # @!attribute [rw] analyzer_name
     #   The name of the analyzer retrieved.
     #   @return [String]
@@ -1693,14 +1433,6 @@ module Aws::AccessAnalyzer
     end
 
     # Retrieves an archive rule.
-    #
-    # @note When making an API call, you may pass GetArchiveRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         analyzer_name: "Name", # required
-    #         rule_name: "Name", # required
-    #       }
     #
     # @!attribute [rw] analyzer_name
     #   The name of the analyzer to retrieve rules from.
@@ -1734,14 +1466,6 @@ module Aws::AccessAnalyzer
     end
 
     # Retrieves a finding.
-    #
-    # @note When making an API call, you may pass GetFindingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         analyzer_arn: "AnalyzerArn", # required
-    #         id: "FindingId", # required
-    #       }
     #
     # @!attribute [rw] analyzer_arn
     #   The [ARN of the analyzer][1] that generated the finding.
@@ -1778,15 +1502,6 @@ module Aws::AccessAnalyzer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetGeneratedPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #         include_resource_placeholders: false,
-    #         include_service_level_template: false,
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The `JobId` that is returned by the `StartPolicyGeneration`
     #   operation. The `JobId` can be used with `GetGeneratedPolicy` to
@@ -1856,13 +1571,6 @@ module Aws::AccessAnalyzer
     #
     # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html
     #
-    # @note When making an API call, you may pass IamRoleConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         trust_policy: "IamTrustPolicy",
-    #       }
-    #
     # @!attribute [rw] trust_policy
     #   The proposed trust policy for the IAM role.
     #   @return [String]
@@ -1877,21 +1585,6 @@ module Aws::AccessAnalyzer
 
     # An criterion statement in an archive rule. Each archive rule may have
     # multiple criteria.
-    #
-    # @note When making an API call, you may pass InlineArchiveRule
-    #   data as a hash:
-    #
-    #       {
-    #         rule_name: "Name", # required
-    #         filter: { # required
-    #           "String" => {
-    #             eq: ["String"],
-    #             neq: ["String"],
-    #             contains: ["String"],
-    #             exists: false,
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] rule_name
     #   The name of the rule.
@@ -1930,8 +1623,6 @@ module Aws::AccessAnalyzer
 
     # This configuration sets the network origin for the Amazon S3 access
     # point or multi-region access point to `Internet`.
-    #
-    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/InternetConfiguration AWS API Documentation
     #
@@ -2001,24 +1692,6 @@ module Aws::AccessAnalyzer
     #
     # [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateGrant.html
     #
-    # @note When making an API call, you may pass KmsGrantConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         operations: ["CreateGrant"], # required, accepts CreateGrant, Decrypt, DescribeKey, Encrypt, GenerateDataKey, GenerateDataKeyPair, GenerateDataKeyPairWithoutPlaintext, GenerateDataKeyWithoutPlaintext, GetPublicKey, ReEncryptFrom, ReEncryptTo, RetireGrant, Sign, Verify
-    #         grantee_principal: "GranteePrincipal", # required
-    #         retiring_principal: "RetiringPrincipal",
-    #         constraints: {
-    #           encryption_context_equals: {
-    #             "KmsConstraintsKey" => "KmsConstraintsValue",
-    #           },
-    #           encryption_context_subset: {
-    #             "KmsConstraintsKey" => "KmsConstraintsValue",
-    #           },
-    #         },
-    #         issuing_account: "IssuingAccount", # required
-    #       }
-    #
     # @!attribute [rw] operations
     #   A list of operations that the grant permits.
     #   @return [Array<String>]
@@ -2078,18 +1751,6 @@ module Aws::AccessAnalyzer
     # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
     # [3]: https://docs.aws.amazon.com/kms/latest/APIReference/API_GrantConstraints.html
     #
-    # @note When making an API call, you may pass KmsGrantConstraints
-    #   data as a hash:
-    #
-    #       {
-    #         encryption_context_equals: {
-    #           "KmsConstraintsKey" => "KmsConstraintsValue",
-    #         },
-    #         encryption_context_subset: {
-    #           "KmsConstraintsKey" => "KmsConstraintsValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] encryption_context_equals
     #   A list of key-value pairs that must match the encryption context in
     #   the [cryptographic operation][1] request. The grant allows the
@@ -2140,31 +1801,6 @@ module Aws::AccessAnalyzer
     # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default
     # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/resource-limits.html
     #
-    # @note When making an API call, you may pass KmsKeyConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         key_policies: {
-    #           "PolicyName" => "KmsKeyPolicy",
-    #         },
-    #         grants: [
-    #           {
-    #             operations: ["CreateGrant"], # required, accepts CreateGrant, Decrypt, DescribeKey, Encrypt, GenerateDataKey, GenerateDataKeyPair, GenerateDataKeyPairWithoutPlaintext, GenerateDataKeyWithoutPlaintext, GetPublicKey, ReEncryptFrom, ReEncryptTo, RetireGrant, Sign, Verify
-    #             grantee_principal: "GranteePrincipal", # required
-    #             retiring_principal: "RetiringPrincipal",
-    #             constraints: {
-    #               encryption_context_equals: {
-    #                 "KmsConstraintsKey" => "KmsConstraintsValue",
-    #               },
-    #               encryption_context_subset: {
-    #                 "KmsConstraintsKey" => "KmsConstraintsValue",
-    #               },
-    #             },
-    #             issuing_account: "IssuingAccount", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] key_policies
     #   Resource policy configuration for the KMS key. The only valid value
     #   for the name of the key policy is `default`. For more information,
@@ -2192,24 +1828,6 @@ module Aws::AccessAnalyzer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAccessPreviewFindingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         access_preview_id: "AccessPreviewId", # required
-    #         analyzer_arn: "AnalyzerArn", # required
-    #         filter: {
-    #           "String" => {
-    #             eq: ["String"],
-    #             neq: ["String"],
-    #             contains: ["String"],
-    #             exists: false,
-    #           },
-    #         },
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] access_preview_id
     #   The unique ID for the access preview.
     #   @return [String]
@@ -2264,15 +1882,6 @@ module Aws::AccessAnalyzer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAccessPreviewsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         analyzer_arn: "AnalyzerArn", # required
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] analyzer_arn
     #   The [ARN of the analyzer][1] used to generate the access preview.
     #
@@ -2317,16 +1926,6 @@ module Aws::AccessAnalyzer
     end
 
     # Retrieves a list of resources that have been analyzed.
-    #
-    # @note When making an API call, you may pass ListAnalyzedResourcesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         analyzer_arn: "AnalyzerArn", # required
-    #         resource_type: "AWS::S3::Bucket", # accepts AWS::S3::Bucket, AWS::IAM::Role, AWS::SQS::Queue, AWS::Lambda::Function, AWS::Lambda::LayerVersion, AWS::KMS::Key, AWS::SecretsManager::Secret, AWS::EFS::FileSystem, AWS::EC2::Snapshot, AWS::ECR::Repository, AWS::RDS::DBSnapshot, AWS::RDS::DBClusterSnapshot, AWS::SNS::Topic
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
     #
     # @!attribute [rw] analyzer_arn
     #   The [ARN of the analyzer][1] to retrieve a list of analyzed
@@ -2381,15 +1980,6 @@ module Aws::AccessAnalyzer
 
     # Retrieves a list of analyzers.
     #
-    # @note When making an API call, you may pass ListAnalyzersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "Token",
-    #         max_results: 1,
-    #         type: "ACCOUNT", # accepts ACCOUNT, ORGANIZATION
-    #       }
-    #
     # @!attribute [rw] next_token
     #   A token used for pagination of results returned.
     #   @return [String]
@@ -2433,15 +2023,6 @@ module Aws::AccessAnalyzer
 
     # Retrieves a list of archive rules created for the specified analyzer.
     #
-    # @note When making an API call, you may pass ListArchiveRulesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         analyzer_name: "Name", # required
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] analyzer_name
     #   The name of the analyzer to retrieve rules from.
     #   @return [String]
@@ -2484,27 +2065,6 @@ module Aws::AccessAnalyzer
     end
 
     # Retrieves a list of findings generated by the specified analyzer.
-    #
-    # @note When making an API call, you may pass ListFindingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         analyzer_arn: "AnalyzerArn", # required
-    #         filter: {
-    #           "String" => {
-    #             eq: ["String"],
-    #             neq: ["String"],
-    #             contains: ["String"],
-    #             exists: false,
-    #           },
-    #         },
-    #         sort: {
-    #           attribute_name: "String",
-    #           order_by: "ASC", # accepts ASC, DESC
-    #         },
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
     #
     # @!attribute [rw] analyzer_arn
     #   The [ARN of the analyzer][1] to retrieve findings from.
@@ -2562,15 +2122,6 @@ module Aws::AccessAnalyzer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPolicyGenerationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         principal_arn: "PrincipalArn",
-    #         max_results: 1,
-    #         next_token: "Token",
-    #       }
-    #
     # @!attribute [rw] principal_arn
     #   The ARN of the IAM entity (user or role) for which you are
     #   generating a policy. Use this with `ListGeneratedPolicies` to filter
@@ -2614,13 +2165,6 @@ module Aws::AccessAnalyzer
     end
 
     # Retrieves a list of tags applied to the specified resource.
-    #
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #       }
     #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource to retrieve tags from.
@@ -2680,10 +2224,6 @@ module Aws::AccessAnalyzer
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/creating-access-points.html
     #
-    # @note NetworkOriginConfiguration is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note NetworkOriginConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of NetworkOriginConfiguration corresponding to the set member.
-    #
     # @!attribute [rw] vpc_configuration
     #   The proposed virtual private cloud (VPC) configuration for the
     #   Amazon S3 access point. VPC configuration does not apply to
@@ -2717,8 +2257,6 @@ module Aws::AccessAnalyzer
 
     # A single element in a path through the JSON representation of a
     # policy.
-    #
-    # @note PathElement is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of PathElement corresponding to the set member.
     #
     # @!attribute [rw] index
     #   Refers to an index in a JSON array.
@@ -2796,13 +2334,6 @@ module Aws::AccessAnalyzer
     # Contains the ARN details about the IAM entity for which the policy is
     # generated.
     #
-    # @note When making an API call, you may pass PolicyGenerationDetails
-    #   data as a hash:
-    #
-    #       {
-    #         principal_arn: "PrincipalArn", # required
-    #       }
-    #
     # @!attribute [rw] principal_arn
     #   The ARN of the IAM entity (user or role) for which you are
     #   generating a policy.
@@ -2842,10 +2373,6 @@ module Aws::AccessAnalyzer
     end
 
     # The values for a manual Amazon RDS DB cluster snapshot attribute.
-    #
-    # @note RdsDbClusterSnapshotAttributeValue is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note RdsDbClusterSnapshotAttributeValue is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of RdsDbClusterSnapshotAttributeValue corresponding to the set member.
     #
     # @!attribute [rw] account_ids
     #   The Amazon Web Services account IDs that have access to the manual
@@ -2892,18 +2419,6 @@ module Aws::AccessAnalyzer
     #
     # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBClusterSnapshotAttribute.html
     #
-    # @note When making an API call, you may pass RdsDbClusterSnapshotConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         attributes: {
-    #           "RdsDbClusterSnapshotAttributeName" => {
-    #             account_ids: ["RdsDbClusterSnapshotAccountId"],
-    #           },
-    #         },
-    #         kms_key_id: "RdsDbClusterSnapshotKmsKeyId",
-    #       }
-    #
     # @!attribute [rw] attributes
     #   The names and values of manual DB cluster snapshot attributes.
     #   Manual DB cluster snapshot attributes are used to authorize other
@@ -2939,10 +2454,6 @@ module Aws::AccessAnalyzer
     # The name and values of a manual Amazon RDS DB snapshot attribute.
     # Manual DB snapshot attributes are used to authorize other Amazon Web
     # Services accounts to restore a manual DB snapshot.
-    #
-    # @note RdsDbSnapshotAttributeValue is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note RdsDbSnapshotAttributeValue is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of RdsDbSnapshotAttributeValue corresponding to the set member.
     #
     # @!attribute [rw] account_ids
     #   The Amazon Web Services account IDs that have access to the manual
@@ -2987,18 +2498,6 @@ module Aws::AccessAnalyzer
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBSnapshotAttribute.html
-    #
-    # @note When making an API call, you may pass RdsDbSnapshotConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         attributes: {
-    #           "RdsDbSnapshotAttributeName" => {
-    #             account_ids: ["RdsDbSnapshotAccountId"],
-    #           },
-    #         },
-    #         kms_key_id: "RdsDbSnapshotKmsKeyId",
-    #       }
     #
     # @!attribute [rw] attributes
     #   The names and values of manual DB snapshot attributes. Manual DB
@@ -3070,24 +2569,6 @@ module Aws::AccessAnalyzer
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/creating-access-points.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points-restrictions-limitations.html
     #
-    # @note When making an API call, you may pass S3AccessPointConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         access_point_policy: "AccessPointPolicy",
-    #         public_access_block: {
-    #           ignore_public_acls: false, # required
-    #           restrict_public_buckets: false, # required
-    #         },
-    #         network_origin: {
-    #           vpc_configuration: {
-    #             vpc_id: "VpcId", # required
-    #           },
-    #           internet_configuration: {
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] access_point_policy
     #   The access point or multi-region access point policy.
     #   @return [String]
@@ -3124,17 +2605,6 @@ module Aws::AccessAnalyzer
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#setting-acls
     #
-    # @note When making an API call, you may pass S3BucketAclGrantConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         permission: "READ", # required, accepts READ, WRITE, READ_ACP, WRITE_ACP, FULL_CONTROL
-    #         grantee: { # required
-    #           id: "AclCanonicalId",
-    #           uri: "AclUri",
-    #         },
-    #       }
-    #
     # @!attribute [rw] permission
     #   The permissions being granted.
     #   @return [String]
@@ -3169,42 +2639,6 @@ module Aws::AccessAnalyzer
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies.html
-    #
-    # @note When making an API call, you may pass S3BucketConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_policy: "S3BucketPolicy",
-    #         bucket_acl_grants: [
-    #           {
-    #             permission: "READ", # required, accepts READ, WRITE, READ_ACP, WRITE_ACP, FULL_CONTROL
-    #             grantee: { # required
-    #               id: "AclCanonicalId",
-    #               uri: "AclUri",
-    #             },
-    #           },
-    #         ],
-    #         bucket_public_access_block: {
-    #           ignore_public_acls: false, # required
-    #           restrict_public_buckets: false, # required
-    #         },
-    #         access_points: {
-    #           "AccessPointArn" => {
-    #             access_point_policy: "AccessPointPolicy",
-    #             public_access_block: {
-    #               ignore_public_acls: false, # required
-    #               restrict_public_buckets: false, # required
-    #             },
-    #             network_origin: {
-    #               vpc_configuration: {
-    #                 vpc_id: "VpcId", # required
-    #               },
-    #               internet_configuration: {
-    #               },
-    #             },
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] bucket_policy
     #   The proposed bucket policy for the Amazon S3 bucket.
@@ -3255,14 +2689,6 @@ module Aws::AccessAnalyzer
     #
     # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-publicaccessblockconfiguration.html
     #
-    # @note When making an API call, you may pass S3PublicAccessBlockConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         ignore_public_acls: false, # required
-    #         restrict_public_buckets: false, # required
-    #       }
-    #
     # @!attribute [rw] ignore_public_acls
     #   Specifies whether Amazon S3 should ignore public ACLs for this
     #   bucket and objects in this bucket.
@@ -3304,14 +2730,6 @@ module Aws::AccessAnalyzer
     #
     # [1]: https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_CreateSecret.html
     # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_limits.html
-    #
-    # @note When making an API call, you may pass SecretsManagerSecretConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         kms_key_id: "SecretsManagerSecretKmsId",
-    #         secret_policy: "SecretsManagerSecretPolicy",
-    #       }
     #
     # @!attribute [rw] kms_key_id
     #   The proposed ARN, key ID, or alias of the KMS key.
@@ -3370,13 +2788,6 @@ module Aws::AccessAnalyzer
     #
     # [1]: https://docs.aws.amazon.com/sns/latest/api/API_Topic.html
     #
-    # @note When making an API call, you may pass SnsTopicConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         topic_policy: "SnsTopicPolicy",
-    #       }
-    #
     # @!attribute [rw] topic_policy
     #   The JSON policy text that defines who can access an Amazon SNS
     #   topic. For more information, see [Example cases for Amazon SNS
@@ -3396,14 +2807,6 @@ module Aws::AccessAnalyzer
     end
 
     # The criteria used to sort.
-    #
-    # @note When making an API call, you may pass SortCriteria
-    #   data as a hash:
-    #
-    #       {
-    #         attribute_name: "String",
-    #         order_by: "ASC", # accepts ASC, DESC
-    #       }
     #
     # @!attribute [rw] attribute_name
     #   The name of the attribute to sort on.
@@ -3458,13 +2861,6 @@ module Aws::AccessAnalyzer
     #
     # [1]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/quotas-policies.html
     #
-    # @note When making an API call, you may pass SqsQueueConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         queue_policy: "SqsQueuePolicy",
-    #       }
-    #
     # @!attribute [rw] queue_policy
     #   The proposed resource policy for the Amazon SQS queue.
     #   @return [String]
@@ -3477,28 +2873,6 @@ module Aws::AccessAnalyzer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartPolicyGenerationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy_generation_details: { # required
-    #           principal_arn: "PrincipalArn", # required
-    #         },
-    #         cloud_trail_details: {
-    #           trails: [ # required
-    #             {
-    #               cloud_trail_arn: "CloudTrailArn", # required
-    #               regions: ["String"],
-    #               all_regions: false,
-    #             },
-    #           ],
-    #           access_role: "RoleArn", # required
-    #           start_time: Time.now, # required
-    #           end_time: Time.now,
-    #         },
-    #         client_token: "String",
-    #       }
-    #
     # @!attribute [rw] policy_generation_details
     #   Contains the ARN of the IAM entity (user or role) for which you are
     #   generating a policy.
@@ -3550,15 +2924,6 @@ module Aws::AccessAnalyzer
     end
 
     # Starts a scan of the policies applied to the specified resource.
-    #
-    # @note When making an API call, you may pass StartResourceScanRequest
-    #   data as a hash:
-    #
-    #       {
-    #         analyzer_arn: "AnalyzerArn", # required
-    #         resource_arn: "ResourceArn", # required
-    #         resource_owner_account: "String",
-    #       }
     #
     # @!attribute [rw] analyzer_arn
     #   The [ARN of the analyzer][1] to use to scan the policies applied to
@@ -3628,16 +2993,6 @@ module Aws::AccessAnalyzer
 
     # Adds a tag to the specified resource.
     #
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #         tags: { # required
-    #           "String" => "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource to add the tag to.
     #   @return [String]
@@ -3681,15 +3036,6 @@ module Aws::AccessAnalyzer
 
     # Contains details about the CloudTrail trail being analyzed to generate
     # a policy.
-    #
-    # @note When making an API call, you may pass Trail
-    #   data as a hash:
-    #
-    #       {
-    #         cloud_trail_arn: "CloudTrailArn", # required
-    #         regions: ["String"],
-    #         all_regions: false,
-    #       }
     #
     # @!attribute [rw] cloud_trail_arn
     #   Specifies the ARN of the trail. The format of a trail ARN is
@@ -3748,14 +3094,6 @@ module Aws::AccessAnalyzer
 
     # Removes a tag from the specified resource.
     #
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #         tag_keys: ["String"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource to remove the tag from.
     #   @return [String]
@@ -3780,23 +3118,6 @@ module Aws::AccessAnalyzer
     class UntagResourceResponse < Aws::EmptyStructure; end
 
     # Updates the specified archive rule.
-    #
-    # @note When making an API call, you may pass UpdateArchiveRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         analyzer_name: "Name", # required
-    #         rule_name: "Name", # required
-    #         filter: { # required
-    #           "String" => {
-    #             eq: ["String"],
-    #             neq: ["String"],
-    #             contains: ["String"],
-    #             exists: false,
-    #           },
-    #         },
-    #         client_token: "String",
-    #       }
     #
     # @!attribute [rw] analyzer_name
     #   The name of the analyzer to update the archive rules for.
@@ -3830,17 +3151,6 @@ module Aws::AccessAnalyzer
     end
 
     # Updates findings with the new values provided in the request.
-    #
-    # @note When making an API call, you may pass UpdateFindingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         analyzer_arn: "AnalyzerArn", # required
-    #         status: "ACTIVE", # required, accepts ACTIVE, ARCHIVED
-    #         ids: ["FindingId"],
-    #         resource_arn: "ResourceArn",
-    #         client_token: "String",
-    #       }
     #
     # @!attribute [rw] analyzer_arn
     #   The [ARN of the analyzer][1] that generated the findings to update.
@@ -3934,18 +3244,6 @@ module Aws::AccessAnalyzer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ValidatePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         locale: "DE", # accepts DE, EN, ES, FR, IT, JA, KO, PT_BR, ZH_CN, ZH_TW
-    #         max_results: 1,
-    #         next_token: "Token",
-    #         policy_document: "PolicyDocument", # required
-    #         policy_type: "IDENTITY_POLICY", # required, accepts IDENTITY_POLICY, RESOURCE_POLICY, SERVICE_CONTROL_POLICY
-    #         validate_policy_resource_type: "AWS::S3::Bucket", # accepts AWS::S3::Bucket, AWS::S3::AccessPoint, AWS::S3::MultiRegionAccessPoint, AWS::S3ObjectLambda::AccessPoint, AWS::IAM::AssumeRolePolicyDocument
-    #       }
-    #
     # @!attribute [rw] locale
     #   The locale to use for localizing the findings.
     #   @return [String]
@@ -4071,13 +3369,6 @@ module Aws::AccessAnalyzer
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_VpcConfiguration.html
-    #
-    # @note When making an API call, you may pass VpcConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         vpc_id: "VpcId", # required
-    #       }
     #
     # @!attribute [rw] vpc_id
     #   If this field is specified, this access point will only allow

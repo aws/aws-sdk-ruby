@@ -14,15 +14,6 @@ module Aws::Scheduler
     # task, and whether a public IP address is to be used. This structure is
     # relevant only for ECS tasks that use the awsvpc network mode.
     #
-    # @note When making an API call, you may pass AwsVpcConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
-    #         security_groups: ["SecurityGroup"],
-    #         subnets: ["Subnet"], # required
-    #       }
-    #
     # @!attribute [rw] assign_public_ip
     #   Specifies whether the task's elastic network interface receives a
     #   public IP address. You can specify `ENABLED` only when `LaunchType`
@@ -52,15 +43,6 @@ module Aws::Scheduler
     end
 
     # The details of a capacity provider strategy.
-    #
-    # @note When making an API call, you may pass CapacityProviderStrategyItem
-    #   data as a hash:
-    #
-    #       {
-    #         base: 1,
-    #         capacity_provider: "CapacityProvider", # required
-    #         weight: 1,
-    #       }
     #
     # @!attribute [rw] base
     #   The base value designates how many tasks, at a minimum, to run on
@@ -103,20 +85,6 @@ module Aws::Scheduler
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateScheduleGroupInput
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         name: "ScheduleGroupName", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier you provide to ensure the
     #   idempotency of the request. If you do not specify a client token,
@@ -157,98 +125,6 @@ module Aws::Scheduler
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateScheduleInput
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         description: "Description",
-    #         end_date: Time.now,
-    #         flexible_time_window: { # required
-    #           maximum_window_in_minutes: 1,
-    #           mode: "OFF", # required, accepts OFF, FLEXIBLE
-    #         },
-    #         group_name: "ScheduleGroupName",
-    #         kms_key_arn: "KmsKeyArn",
-    #         name: "Name", # required
-    #         schedule_expression: "ScheduleExpression", # required
-    #         schedule_expression_timezone: "ScheduleExpressionTimezone",
-    #         start_date: Time.now,
-    #         state: "ENABLED", # accepts ENABLED, DISABLED
-    #         target: { # required
-    #           arn: "TargetArn", # required
-    #           dead_letter_config: {
-    #             arn: "DeadLetterConfigArnString",
-    #           },
-    #           ecs_parameters: {
-    #             capacity_provider_strategy: [
-    #               {
-    #                 base: 1,
-    #                 capacity_provider: "CapacityProvider", # required
-    #                 weight: 1,
-    #               },
-    #             ],
-    #             enable_ecs_managed_tags: false,
-    #             enable_execute_command: false,
-    #             group: "Group",
-    #             launch_type: "EC2", # accepts EC2, FARGATE, EXTERNAL
-    #             network_configuration: {
-    #               awsvpc_configuration: {
-    #                 assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
-    #                 security_groups: ["SecurityGroup"],
-    #                 subnets: ["Subnet"], # required
-    #               },
-    #             },
-    #             placement_constraints: [
-    #               {
-    #                 expression: "PlacementConstraintExpression",
-    #                 type: "distinctInstance", # accepts distinctInstance, memberOf
-    #               },
-    #             ],
-    #             placement_strategy: [
-    #               {
-    #                 field: "PlacementStrategyField",
-    #                 type: "random", # accepts random, spread, binpack
-    #               },
-    #             ],
-    #             platform_version: "PlatformVersion",
-    #             propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION
-    #             reference_id: "ReferenceId",
-    #             tags: [
-    #               {
-    #                 "TagKey" => "TagValue",
-    #               },
-    #             ],
-    #             task_count: 1,
-    #             task_definition_arn: "TaskDefinitionArn", # required
-    #           },
-    #           event_bridge_parameters: {
-    #             detail_type: "DetailType", # required
-    #             source: "Source", # required
-    #           },
-    #           input: "TargetInput",
-    #           kinesis_parameters: {
-    #             partition_key: "TargetPartitionKey", # required
-    #           },
-    #           retry_policy: {
-    #             maximum_event_age_in_seconds: 1,
-    #             maximum_retry_attempts: 1,
-    #           },
-    #           role_arn: "RoleArn", # required
-    #           sage_maker_pipeline_parameters: {
-    #             pipeline_parameter_list: [
-    #               {
-    #                 name: "SageMakerPipelineParameterName", # required
-    #                 value: "SageMakerPipelineParameterValue", # required
-    #               },
-    #             ],
-    #           },
-    #           sqs_parameters: {
-    #             message_group_id: "MessageGroupId",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier you provide to ensure the
     #   idempotency of the request. If you do not specify a client token,
@@ -378,13 +254,6 @@ module Aws::Scheduler
     # If specified, EventBridge Scheduler delivers failed events that could
     # not be successfully delivered to a target to the queue.
     #
-    # @note When making an API call, you may pass DeadLetterConfig
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "DeadLetterConfigArnString",
-    #       }
-    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the SQS queue specified as the
     #   destination for the dead-letter queue.
@@ -398,14 +267,6 @@ module Aws::Scheduler
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteScheduleGroupInput
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         name: "ScheduleGroupName", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier you provide to ensure the
     #   idempotency of the request. If you do not specify a client token,
@@ -433,15 +294,6 @@ module Aws::Scheduler
     #
     class DeleteScheduleGroupOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteScheduleInput
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         group_name: "ScheduleGroupName",
-    #         name: "Name", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier you provide to ensure the
     #   idempotency of the request. If you do not specify a client token,
@@ -481,52 +333,6 @@ module Aws::Scheduler
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html
-    #
-    # @note When making an API call, you may pass EcsParameters
-    #   data as a hash:
-    #
-    #       {
-    #         capacity_provider_strategy: [
-    #           {
-    #             base: 1,
-    #             capacity_provider: "CapacityProvider", # required
-    #             weight: 1,
-    #           },
-    #         ],
-    #         enable_ecs_managed_tags: false,
-    #         enable_execute_command: false,
-    #         group: "Group",
-    #         launch_type: "EC2", # accepts EC2, FARGATE, EXTERNAL
-    #         network_configuration: {
-    #           awsvpc_configuration: {
-    #             assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
-    #             security_groups: ["SecurityGroup"],
-    #             subnets: ["Subnet"], # required
-    #           },
-    #         },
-    #         placement_constraints: [
-    #           {
-    #             expression: "PlacementConstraintExpression",
-    #             type: "distinctInstance", # accepts distinctInstance, memberOf
-    #           },
-    #         ],
-    #         placement_strategy: [
-    #           {
-    #             field: "PlacementStrategyField",
-    #             type: "random", # accepts random, spread, binpack
-    #           },
-    #         ],
-    #         platform_version: "PlatformVersion",
-    #         propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION
-    #         reference_id: "ReferenceId",
-    #         tags: [
-    #           {
-    #             "TagKey" => "TagValue",
-    #           },
-    #         ],
-    #         task_count: 1,
-    #         task_definition_arn: "TaskDefinitionArn", # required
-    #       }
     #
     # @!attribute [rw] capacity_provider_strategy
     #   The capacity provider strategy to use for the task.
@@ -650,14 +456,6 @@ module Aws::Scheduler
     #
     # [1]: https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEvents.html
     #
-    # @note When making an API call, you may pass EventBridgeParameters
-    #   data as a hash:
-    #
-    #       {
-    #         detail_type: "DetailType", # required
-    #         source: "Source", # required
-    #       }
-    #
     # @!attribute [rw] detail_type
     #   A free-form string, with a maximum of 128 characters, used to decide
     #   what fields to expect in the event detail.
@@ -679,14 +477,6 @@ module Aws::Scheduler
     # Allows you to configure a time window during which EventBridge
     # Scheduler invokes the schedule.
     #
-    # @note When making an API call, you may pass FlexibleTimeWindow
-    #   data as a hash:
-    #
-    #       {
-    #         maximum_window_in_minutes: 1,
-    #         mode: "OFF", # required, accepts OFF, FLEXIBLE
-    #       }
-    #
     # @!attribute [rw] maximum_window_in_minutes
     #   The maximum time window during which a schedule can be invoked.
     #   @return [Integer]
@@ -705,13 +495,6 @@ module Aws::Scheduler
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetScheduleGroupInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ScheduleGroupName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the schedule group to retrieve.
     #   @return [String]
@@ -756,14 +539,6 @@ module Aws::Scheduler
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetScheduleInput
-    #   data as a hash:
-    #
-    #       {
-    #         group_name: "ScheduleGroupName",
-    #         name: "Name", # required
-    #       }
-    #
     # @!attribute [rw] group_name
     #   The name of the schedule group associated with this schedule. If you
     #   omit this, EventBridge Scheduler assumes that the schedule is
@@ -914,13 +689,6 @@ module Aws::Scheduler
     # The templated target type for the Amazon Kinesis [ `PutRecord`
     # ](kinesis/latest/APIReference/API_PutRecord.html) API operation.
     #
-    # @note When making an API call, you may pass KinesisParameters
-    #   data as a hash:
-    #
-    #       {
-    #         partition_key: "TargetPartitionKey", # required
-    #       }
-    #
     # @!attribute [rw] partition_key
     #   Specifies the shard to which EventBridge Scheduler sends the event.
     #   For more information, see [Amazon Kinesis Data Streams terminology
@@ -939,15 +707,6 @@ module Aws::Scheduler
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListScheduleGroupsInput
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         name_prefix: "ScheduleGroupNamePrefix",
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   If specified, limits the number of results returned by this
     #   operation. The operation also returns a `NextToken` which you can
@@ -992,17 +751,6 @@ module Aws::Scheduler
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSchedulesInput
-    #   data as a hash:
-    #
-    #       {
-    #         group_name: "ScheduleGroupName",
-    #         max_results: 1,
-    #         name_prefix: "NamePrefix",
-    #         next_token: "NextToken",
-    #         state: "ENABLED", # accepts ENABLED, DISABLED
-    #       }
-    #
     # @!attribute [rw] group_name
     #   If specified, only lists the schedules whose associated schedule
     #   group matches the given filter.
@@ -1058,13 +806,6 @@ module Aws::Scheduler
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "TagResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the EventBridge Scheduler resource for which you want to
     #   view tags.
@@ -1092,17 +833,6 @@ module Aws::Scheduler
 
     # Specifies the network configuration for an ECS task.
     #
-    # @note When making an API call, you may pass NetworkConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         awsvpc_configuration: {
-    #           assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
-    #           security_groups: ["SecurityGroup"],
-    #           subnets: ["Subnet"], # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] awsvpc_configuration
     #   Specifies the Amazon VPC subnets and security groups for the task,
     #   and whether a public IP address is to be used. This structure is
@@ -1118,14 +848,6 @@ module Aws::Scheduler
     end
 
     # An object representing a constraint on task placement.
-    #
-    # @note When making an API call, you may pass PlacementConstraint
-    #   data as a hash:
-    #
-    #       {
-    #         expression: "PlacementConstraintExpression",
-    #         type: "distinctInstance", # accepts distinctInstance, memberOf
-    #       }
     #
     # @!attribute [rw] expression
     #   A cluster query language expression to apply to the constraint. You
@@ -1155,14 +877,6 @@ module Aws::Scheduler
     end
 
     # The task placement strategy for a task or service.
-    #
-    # @note When making an API call, you may pass PlacementStrategy
-    #   data as a hash:
-    #
-    #       {
-    #         field: "PlacementStrategyField",
-    #         type: "random", # accepts random, spread, binpack
-    #       }
     #
     # @!attribute [rw] field
     #   The field to apply the placement strategy against. For the spread
@@ -1212,14 +926,6 @@ module Aws::Scheduler
     # maximum number of times EventBridge Scheduler will try to deliver the
     # event to a target.
     #
-    # @note When making an API call, you may pass RetryPolicy
-    #   data as a hash:
-    #
-    #       {
-    #         maximum_event_age_in_seconds: 1,
-    #         maximum_retry_attempts: 1,
-    #       }
-    #
     # @!attribute [rw] maximum_event_age_in_seconds
     #   The maximum amount of time, in seconds, to continue to make retry
     #   attempts.
@@ -1243,14 +949,6 @@ module Aws::Scheduler
 
     # The name and value pair of a parameter to use to start execution of a
     # SageMaker Model Building Pipeline.
-    #
-    # @note When making an API call, you may pass SageMakerPipelineParameter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "SageMakerPipelineParameterName", # required
-    #         value: "SageMakerPipelineParameterValue", # required
-    #       }
     #
     # @!attribute [rw] name
     #   Name of parameter to start execution of a SageMaker Model Building
@@ -1277,18 +975,6 @@ module Aws::Scheduler
     #
     #
     # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_StartPipelineExecution.html
-    #
-    # @note When making an API call, you may pass SageMakerPipelineParameters
-    #   data as a hash:
-    #
-    #       {
-    #         pipeline_parameter_list: [
-    #           {
-    #             name: "SageMakerPipelineParameterName", # required
-    #             value: "SageMakerPipelineParameterValue", # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] pipeline_parameter_list
     #   List of parameter names and values to use when executing the
@@ -1406,13 +1092,6 @@ module Aws::Scheduler
     # [1]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_SendMessage.html
     # [2]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagededuplicationid-property.html
     #
-    # @note When making an API call, you may pass SqsParameters
-    #   data as a hash:
-    #
-    #       {
-    #         message_group_id: "MessageGroupId",
-    #       }
-    #
     # @!attribute [rw] message_group_id
     #   The FIFO message group ID to use as the target.
     #   @return [String]
@@ -1426,14 +1105,6 @@ module Aws::Scheduler
     end
 
     # Tag to associate with a schedule group.
-    #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
     #
     # @!attribute [rw] key
     #   The key for the tag.
@@ -1452,19 +1123,6 @@ module Aws::Scheduler
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "TagResourceArn", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the schedule group that you are
     #   adding tags to.
@@ -1492,82 +1150,6 @@ module Aws::Scheduler
     # that you can customize to invoke over 6,000 API operations across more
     # than 270 services. You can only specify one templated or universal
     # target for a schedule.
-    #
-    # @note When making an API call, you may pass Target
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "TargetArn", # required
-    #         dead_letter_config: {
-    #           arn: "DeadLetterConfigArnString",
-    #         },
-    #         ecs_parameters: {
-    #           capacity_provider_strategy: [
-    #             {
-    #               base: 1,
-    #               capacity_provider: "CapacityProvider", # required
-    #               weight: 1,
-    #             },
-    #           ],
-    #           enable_ecs_managed_tags: false,
-    #           enable_execute_command: false,
-    #           group: "Group",
-    #           launch_type: "EC2", # accepts EC2, FARGATE, EXTERNAL
-    #           network_configuration: {
-    #             awsvpc_configuration: {
-    #               assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
-    #               security_groups: ["SecurityGroup"],
-    #               subnets: ["Subnet"], # required
-    #             },
-    #           },
-    #           placement_constraints: [
-    #             {
-    #               expression: "PlacementConstraintExpression",
-    #               type: "distinctInstance", # accepts distinctInstance, memberOf
-    #             },
-    #           ],
-    #           placement_strategy: [
-    #             {
-    #               field: "PlacementStrategyField",
-    #               type: "random", # accepts random, spread, binpack
-    #             },
-    #           ],
-    #           platform_version: "PlatformVersion",
-    #           propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION
-    #           reference_id: "ReferenceId",
-    #           tags: [
-    #             {
-    #               "TagKey" => "TagValue",
-    #             },
-    #           ],
-    #           task_count: 1,
-    #           task_definition_arn: "TaskDefinitionArn", # required
-    #         },
-    #         event_bridge_parameters: {
-    #           detail_type: "DetailType", # required
-    #           source: "Source", # required
-    #         },
-    #         input: "TargetInput",
-    #         kinesis_parameters: {
-    #           partition_key: "TargetPartitionKey", # required
-    #         },
-    #         retry_policy: {
-    #           maximum_event_age_in_seconds: 1,
-    #           maximum_retry_attempts: 1,
-    #         },
-    #         role_arn: "RoleArn", # required
-    #         sage_maker_pipeline_parameters: {
-    #           pipeline_parameter_list: [
-    #             {
-    #               name: "SageMakerPipelineParameterName", # required
-    #               value: "SageMakerPipelineParameterValue", # required
-    #             },
-    #           ],
-    #         },
-    #         sqs_parameters: {
-    #           message_group_id: "MessageGroupId",
-    #         },
-    #       }
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the target.
@@ -1691,14 +1273,6 @@ module Aws::Scheduler
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "TagResourceArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the schedule group from which you
     #   are removing tags.
@@ -1721,98 +1295,6 @@ module Aws::Scheduler
     #
     class UntagResourceOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateScheduleInput
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         description: "Description",
-    #         end_date: Time.now,
-    #         flexible_time_window: { # required
-    #           maximum_window_in_minutes: 1,
-    #           mode: "OFF", # required, accepts OFF, FLEXIBLE
-    #         },
-    #         group_name: "ScheduleGroupName",
-    #         kms_key_arn: "KmsKeyArn",
-    #         name: "Name", # required
-    #         schedule_expression: "ScheduleExpression", # required
-    #         schedule_expression_timezone: "ScheduleExpressionTimezone",
-    #         start_date: Time.now,
-    #         state: "ENABLED", # accepts ENABLED, DISABLED
-    #         target: { # required
-    #           arn: "TargetArn", # required
-    #           dead_letter_config: {
-    #             arn: "DeadLetterConfigArnString",
-    #           },
-    #           ecs_parameters: {
-    #             capacity_provider_strategy: [
-    #               {
-    #                 base: 1,
-    #                 capacity_provider: "CapacityProvider", # required
-    #                 weight: 1,
-    #               },
-    #             ],
-    #             enable_ecs_managed_tags: false,
-    #             enable_execute_command: false,
-    #             group: "Group",
-    #             launch_type: "EC2", # accepts EC2, FARGATE, EXTERNAL
-    #             network_configuration: {
-    #               awsvpc_configuration: {
-    #                 assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
-    #                 security_groups: ["SecurityGroup"],
-    #                 subnets: ["Subnet"], # required
-    #               },
-    #             },
-    #             placement_constraints: [
-    #               {
-    #                 expression: "PlacementConstraintExpression",
-    #                 type: "distinctInstance", # accepts distinctInstance, memberOf
-    #               },
-    #             ],
-    #             placement_strategy: [
-    #               {
-    #                 field: "PlacementStrategyField",
-    #                 type: "random", # accepts random, spread, binpack
-    #               },
-    #             ],
-    #             platform_version: "PlatformVersion",
-    #             propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION
-    #             reference_id: "ReferenceId",
-    #             tags: [
-    #               {
-    #                 "TagKey" => "TagValue",
-    #               },
-    #             ],
-    #             task_count: 1,
-    #             task_definition_arn: "TaskDefinitionArn", # required
-    #           },
-    #           event_bridge_parameters: {
-    #             detail_type: "DetailType", # required
-    #             source: "Source", # required
-    #           },
-    #           input: "TargetInput",
-    #           kinesis_parameters: {
-    #             partition_key: "TargetPartitionKey", # required
-    #           },
-    #           retry_policy: {
-    #             maximum_event_age_in_seconds: 1,
-    #             maximum_retry_attempts: 1,
-    #           },
-    #           role_arn: "RoleArn", # required
-    #           sage_maker_pipeline_parameters: {
-    #             pipeline_parameter_list: [
-    #               {
-    #                 name: "SageMakerPipelineParameterName", # required
-    #                 value: "SageMakerPipelineParameterValue", # required
-    #               },
-    #             ],
-    #           },
-    #           sqs_parameters: {
-    #             message_group_id: "MessageGroupId",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier you provide to ensure the
     #   idempotency of the request. If you do not specify a client token,

@@ -12,13 +12,6 @@ module Aws::Batch
 
     # An object that represents an Batch array job.
     #
-    # @note When making an API call, you may pass ArrayProperties
-    #   data as a hash:
-    #
-    #       {
-    #         size: 1,
-    #       }
-    #
     # @!attribute [rw] size
     #   The size of the array job.
     #   @return [Integer]
@@ -162,14 +155,6 @@ module Aws::Batch
     end
 
     # Contains the parameters for `CancelJob`.
-    #
-    # @note When making an API call, you may pass CancelJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "String", # required
-    #         reason: "String", # required
-    #       }
     #
     # @!attribute [rw] job_id
     #   The Batch job ID of the job to cancel.
@@ -358,14 +343,6 @@ module Aws::Batch
     #
     #  </note>
     #
-    # @note When making an API call, you may pass ComputeEnvironmentOrder
-    #   data as a hash:
-    #
-    #       {
-    #         order: 1, # required
-    #         compute_environment: "String", # required
-    #       }
-    #
     # @!attribute [rw] order
     #   The order of the compute environment. Compute environments are tried
     #   in ascending order. For example, if two compute environments are
@@ -392,41 +369,6 @@ module Aws::Batch
     #
     #
     # [1]: https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html
-    #
-    # @note When making an API call, you may pass ComputeResource
-    #   data as a hash:
-    #
-    #       {
-    #         type: "EC2", # required, accepts EC2, SPOT, FARGATE, FARGATE_SPOT
-    #         allocation_strategy: "BEST_FIT", # accepts BEST_FIT, BEST_FIT_PROGRESSIVE, SPOT_CAPACITY_OPTIMIZED
-    #         minv_cpus: 1,
-    #         maxv_cpus: 1, # required
-    #         desiredv_cpus: 1,
-    #         instance_types: ["String"],
-    #         image_id: "String",
-    #         subnets: ["String"], # required
-    #         security_group_ids: ["String"],
-    #         ec2_key_pair: "String",
-    #         instance_role: "String",
-    #         tags: {
-    #           "String" => "String",
-    #         },
-    #         placement_group: "String",
-    #         bid_percentage: 1,
-    #         spot_iam_fleet_role: "String",
-    #         launch_template: {
-    #           launch_template_id: "String",
-    #           launch_template_name: "String",
-    #           version: "String",
-    #         },
-    #         ec2_configuration: [
-    #           {
-    #             image_type: "ImageType", # required
-    #             image_id_override: "ImageIdOverride",
-    #             image_kubernetes_version: "KubernetesVersion",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] type
     #   The type of compute environment: `EC2`, `SPOT`, `FARGATE`, or
@@ -788,41 +730,6 @@ module Aws::Batch
     #
     #
     # [1]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
-    #
-    # @note When making an API call, you may pass ComputeResourceUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         minv_cpus: 1,
-    #         maxv_cpus: 1,
-    #         desiredv_cpus: 1,
-    #         subnets: ["String"],
-    #         security_group_ids: ["String"],
-    #         allocation_strategy: "BEST_FIT_PROGRESSIVE", # accepts BEST_FIT_PROGRESSIVE, SPOT_CAPACITY_OPTIMIZED
-    #         instance_types: ["String"],
-    #         ec2_key_pair: "String",
-    #         instance_role: "String",
-    #         tags: {
-    #           "String" => "String",
-    #         },
-    #         placement_group: "String",
-    #         bid_percentage: 1,
-    #         launch_template: {
-    #           launch_template_id: "String",
-    #           launch_template_name: "String",
-    #           version: "String",
-    #         },
-    #         ec2_configuration: [
-    #           {
-    #             image_type: "ImageType", # required
-    #             image_id_override: "ImageIdOverride",
-    #             image_kubernetes_version: "KubernetesVersion",
-    #           },
-    #         ],
-    #         update_to_latest_image_version: false,
-    #         type: "EC2", # accepts EC2, SPOT, FARGATE, FARGATE_SPOT
-    #         image_id: "String",
-    #       }
     #
     # @!attribute [rw] minv_cpus
     #   The minimum number of Amazon EC2 vCPUs that an environment should
@@ -1548,28 +1455,6 @@ module Aws::Batch
 
     # The overrides that should be sent to a container.
     #
-    # @note When making an API call, you may pass ContainerOverrides
-    #   data as a hash:
-    #
-    #       {
-    #         vcpus: 1,
-    #         memory: 1,
-    #         command: ["String"],
-    #         instance_type: "String",
-    #         environment: [
-    #           {
-    #             name: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #         resource_requirements: [
-    #           {
-    #             value: "String", # required
-    #             type: "GPU", # required, accepts GPU, VCPU, MEMORY
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] vcpus
     #   This parameter is deprecated, use `resourceRequirements` to override
     #   the `vcpus` parameter that's set in the job definition. It's not
@@ -1656,110 +1541,6 @@ module Aws::Batch
     # Container properties are used for Amazon ECS based job definitions.
     # These properties to describe the container that's launched as part of
     # a job.
-    #
-    # @note When making an API call, you may pass ContainerProperties
-    #   data as a hash:
-    #
-    #       {
-    #         image: "String",
-    #         vcpus: 1,
-    #         memory: 1,
-    #         command: ["String"],
-    #         job_role_arn: "String",
-    #         execution_role_arn: "String",
-    #         volumes: [
-    #           {
-    #             host: {
-    #               source_path: "String",
-    #             },
-    #             name: "String",
-    #             efs_volume_configuration: {
-    #               file_system_id: "String", # required
-    #               root_directory: "String",
-    #               transit_encryption: "ENABLED", # accepts ENABLED, DISABLED
-    #               transit_encryption_port: 1,
-    #               authorization_config: {
-    #                 access_point_id: "String",
-    #                 iam: "ENABLED", # accepts ENABLED, DISABLED
-    #               },
-    #             },
-    #           },
-    #         ],
-    #         environment: [
-    #           {
-    #             name: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #         mount_points: [
-    #           {
-    #             container_path: "String",
-    #             read_only: false,
-    #             source_volume: "String",
-    #           },
-    #         ],
-    #         readonly_root_filesystem: false,
-    #         privileged: false,
-    #         ulimits: [
-    #           {
-    #             hard_limit: 1, # required
-    #             name: "String", # required
-    #             soft_limit: 1, # required
-    #           },
-    #         ],
-    #         user: "String",
-    #         instance_type: "String",
-    #         resource_requirements: [
-    #           {
-    #             value: "String", # required
-    #             type: "GPU", # required, accepts GPU, VCPU, MEMORY
-    #           },
-    #         ],
-    #         linux_parameters: {
-    #           devices: [
-    #             {
-    #               host_path: "String", # required
-    #               container_path: "String",
-    #               permissions: ["READ"], # accepts READ, WRITE, MKNOD
-    #             },
-    #           ],
-    #           init_process_enabled: false,
-    #           shared_memory_size: 1,
-    #           tmpfs: [
-    #             {
-    #               container_path: "String", # required
-    #               size: 1, # required
-    #               mount_options: ["String"],
-    #             },
-    #           ],
-    #           max_swap: 1,
-    #           swappiness: 1,
-    #         },
-    #         log_configuration: {
-    #           log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk
-    #           options: {
-    #             "String" => "String",
-    #           },
-    #           secret_options: [
-    #             {
-    #               name: "String", # required
-    #               value_from: "String", # required
-    #             },
-    #           ],
-    #         },
-    #         secrets: [
-    #           {
-    #             name: "String", # required
-    #             value_from: "String", # required
-    #           },
-    #         ],
-    #         network_configuration: {
-    #           assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
-    #         },
-    #         fargate_platform_configuration: {
-    #           platform_version: "String",
-    #         },
-    #       }
     #
     # @!attribute [rw] image
     #   The image used to start a container. This string is passed directly
@@ -2103,55 +1884,6 @@ module Aws::Batch
 
     # Contains the parameters for `CreateComputeEnvironment`.
     #
-    # @note When making an API call, you may pass CreateComputeEnvironmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         compute_environment_name: "String", # required
-    #         type: "MANAGED", # required, accepts MANAGED, UNMANAGED
-    #         state: "ENABLED", # accepts ENABLED, DISABLED
-    #         unmanagedv_cpus: 1,
-    #         compute_resources: {
-    #           type: "EC2", # required, accepts EC2, SPOT, FARGATE, FARGATE_SPOT
-    #           allocation_strategy: "BEST_FIT", # accepts BEST_FIT, BEST_FIT_PROGRESSIVE, SPOT_CAPACITY_OPTIMIZED
-    #           minv_cpus: 1,
-    #           maxv_cpus: 1, # required
-    #           desiredv_cpus: 1,
-    #           instance_types: ["String"],
-    #           image_id: "String",
-    #           subnets: ["String"], # required
-    #           security_group_ids: ["String"],
-    #           ec2_key_pair: "String",
-    #           instance_role: "String",
-    #           tags: {
-    #             "String" => "String",
-    #           },
-    #           placement_group: "String",
-    #           bid_percentage: 1,
-    #           spot_iam_fleet_role: "String",
-    #           launch_template: {
-    #             launch_template_id: "String",
-    #             launch_template_name: "String",
-    #             version: "String",
-    #           },
-    #           ec2_configuration: [
-    #             {
-    #               image_type: "ImageType", # required
-    #               image_id_override: "ImageIdOverride",
-    #               image_kubernetes_version: "KubernetesVersion",
-    #             },
-    #           ],
-    #         },
-    #         service_role: "String",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         eks_configuration: {
-    #           eks_cluster_arn: "String", # required
-    #           kubernetes_namespace: "String", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] compute_environment_name
     #   The name for your compute environment. It can be up to 128
     #   characters long. It can contain uppercase and lowercase letters,
@@ -2302,25 +2034,6 @@ module Aws::Batch
 
     # Contains the parameters for `CreateJobQueue`.
     #
-    # @note When making an API call, you may pass CreateJobQueueRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_queue_name: "String", # required
-    #         state: "ENABLED", # accepts ENABLED, DISABLED
-    #         scheduling_policy_arn: "String",
-    #         priority: 1, # required
-    #         compute_environment_order: [ # required
-    #           {
-    #             order: 1, # required
-    #             compute_environment: "String", # required
-    #           },
-    #         ],
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] job_queue_name
     #   The name of the job queue. It can be up to 128 letters long. It can
     #   contain uppercase and lowercase letters, numbers, hyphens (-), and
@@ -2419,26 +2132,6 @@ module Aws::Batch
 
     # Contains the parameters for `CreateSchedulingPolicy`.
     #
-    # @note When making an API call, you may pass CreateSchedulingPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #         fairshare_policy: {
-    #           share_decay_seconds: 1,
-    #           compute_reservation: 1,
-    #           share_distribution: [
-    #             {
-    #               share_identifier: "String", # required
-    #               weight_factor: 1.0,
-    #             },
-    #           ],
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the scheduling policy. It can be up to 128 letters long.
     #   It can contain uppercase and lowercase letters, numbers, hyphens
@@ -2497,13 +2190,6 @@ module Aws::Batch
 
     # Contains the parameters for `DeleteComputeEnvironment`.
     #
-    # @note When making an API call, you may pass DeleteComputeEnvironmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         compute_environment: "String", # required
-    #       }
-    #
     # @!attribute [rw] compute_environment
     #   The name or Amazon Resource Name (ARN) of the compute environment to
     #   delete.
@@ -2522,13 +2208,6 @@ module Aws::Batch
     class DeleteComputeEnvironmentResponse < Aws::EmptyStructure; end
 
     # Contains the parameters for `DeleteJobQueue`.
-    #
-    # @note When making an API call, you may pass DeleteJobQueueRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_queue: "String", # required
-    #       }
     #
     # @!attribute [rw] job_queue
     #   The short name or full Amazon Resource Name (ARN) of the queue to
@@ -2549,13 +2228,6 @@ module Aws::Batch
 
     # Contains the parameters for `DeleteSchedulingPolicy`.
     #
-    # @note When making an API call, you may pass DeleteSchedulingPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the scheduling policy to delete.
     #   @return [String]
@@ -2572,13 +2244,6 @@ module Aws::Batch
     #
     class DeleteSchedulingPolicyResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeregisterJobDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_definition: "String", # required
-    #       }
-    #
     # @!attribute [rw] job_definition
     #   The name and revision (`name:revision`) or full Amazon Resource Name
     #   (ARN) of the job definition to deregister.
@@ -2597,15 +2262,6 @@ module Aws::Batch
     class DeregisterJobDefinitionResponse < Aws::EmptyStructure; end
 
     # Contains the parameters for `DescribeComputeEnvironments`.
-    #
-    # @note When making an API call, you may pass DescribeComputeEnvironmentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         compute_environments: ["String"],
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
     #
     # @!attribute [rw] compute_environments
     #   A list of up to 100 compute environment names or full Amazon
@@ -2672,17 +2328,6 @@ module Aws::Batch
     end
 
     # Contains the parameters for `DescribeJobDefinitions`.
-    #
-    # @note When making an API call, you may pass DescribeJobDefinitionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_definitions: ["String"],
-    #         max_results: 1,
-    #         job_definition_name: "String",
-    #         status: "String",
-    #         next_token: "String",
-    #       }
     #
     # @!attribute [rw] job_definitions
     #   A list of up to 100 job definitions. Each entry in the list can
@@ -2762,15 +2407,6 @@ module Aws::Batch
 
     # Contains the parameters for `DescribeJobQueues`.
     #
-    # @note When making an API call, you may pass DescribeJobQueuesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_queues: ["String"],
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] job_queues
     #   A list of up to 100 queue names or full queue Amazon Resource Name
     #   (ARN) entries.
@@ -2835,13 +2471,6 @@ module Aws::Batch
 
     # Contains the parameters for `DescribeJobs`.
     #
-    # @note When making an API call, you may pass DescribeJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         jobs: ["String"], # required
-    #       }
-    #
     # @!attribute [rw] jobs
     #   A list of up to 100 job IDs.
     #   @return [Array<String>]
@@ -2867,13 +2496,6 @@ module Aws::Batch
     end
 
     # Contains the parameters for `DescribeSchedulingPolicies`.
-    #
-    # @note When making an API call, you may pass DescribeSchedulingPoliciesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arns: ["String"], # required
-    #       }
     #
     # @!attribute [rw] arns
     #   A list of up to 100 scheduling policy Amazon Resource Name (ARN)
@@ -2907,15 +2529,6 @@ module Aws::Batch
     #
     #  </note>
     #
-    # @note When making an API call, you may pass Device
-    #   data as a hash:
-    #
-    #       {
-    #         host_path: "String", # required
-    #         container_path: "String",
-    #         permissions: ["READ"], # accepts READ, WRITE, MKNOD
-    #       }
-    #
     # @!attribute [rw] host_path
     #   The path for the device on the host container instance.
     #   @return [String]
@@ -2943,14 +2556,6 @@ module Aws::Batch
 
     # The authorization configuration details for the Amazon EFS file
     # system.
-    #
-    # @note When making an API call, you may pass EFSAuthorizationConfig
-    #   data as a hash:
-    #
-    #       {
-    #         access_point_id: "String",
-    #         iam: "ENABLED", # accepts ENABLED, DISABLED
-    #       }
     #
     # @!attribute [rw] access_point_id
     #   The Amazon EFS access point ID to use. If an access point is
@@ -2998,20 +2603,6 @@ module Aws::Batch
     #
     #
     # [1]: https://docs.aws.amazon.com/batch/latest/userguide/efs-volumes.html
-    #
-    # @note When making an API call, you may pass EFSVolumeConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         file_system_id: "String", # required
-    #         root_directory: "String",
-    #         transit_encryption: "ENABLED", # accepts ENABLED, DISABLED
-    #         transit_encryption_port: 1,
-    #         authorization_config: {
-    #           access_point_id: "String",
-    #           iam: "ENABLED", # accepts ENABLED, DISABLED
-    #         },
-    #       }
     #
     # @!attribute [rw] file_system_id
     #   The Amazon EFS file system ID to use.
@@ -3084,15 +2675,6 @@ module Aws::Batch
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#al2ami
-    #
-    # @note When making an API call, you may pass Ec2Configuration
-    #   data as a hash:
-    #
-    #       {
-    #         image_type: "ImageType", # required
-    #         image_id_override: "ImageIdOverride",
-    #         image_kubernetes_version: "KubernetesVersion",
-    #       }
     #
     # @!attribute [rw] image_type
     #   The image type to match with the instance type to select an AMI. The
@@ -3260,14 +2842,6 @@ module Aws::Batch
     # compute environment. The cluster must exist before the compute
     # environment can be created.
     #
-    # @note When making an API call, you may pass EksConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         eks_cluster_arn: "String", # required
-    #         kubernetes_namespace: "String", # required
-    #       }
-    #
     # @!attribute [rw] eks_cluster_arn
     #   The Amazon Resource Name (ARN) of the Amazon EKS cluster. An example
     #   is `arn:aws:eks:us-east-1:123456789012:cluster/ClusterForBatch `.
@@ -3299,45 +2873,6 @@ module Aws::Batch
     # based job definitions to describe the properties for a container node
     # in the pod that's launched as part of a job. This can't be specified
     # for Amazon ECS based job definitions.
-    #
-    # @note When making an API call, you may pass EksContainer
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String",
-    #         image: "String", # required
-    #         image_pull_policy: "String",
-    #         command: ["String"],
-    #         args: ["String"],
-    #         env: [
-    #           {
-    #             name: "String", # required
-    #             value: "String",
-    #           },
-    #         ],
-    #         resources: {
-    #           limits: {
-    #             "String" => "Quantity",
-    #           },
-    #           requests: {
-    #             "String" => "Quantity",
-    #           },
-    #         },
-    #         volume_mounts: [
-    #           {
-    #             name: "String",
-    #             mount_path: "String",
-    #             read_only: false,
-    #           },
-    #         ],
-    #         security_context: {
-    #           run_as_user: 1,
-    #           run_as_group: 1,
-    #           privileged: false,
-    #           read_only_root_filesystem: false,
-    #           run_as_non_root: false,
-    #         },
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the container. If the name isn't specified, the default
@@ -3597,14 +3132,6 @@ module Aws::Batch
 
     # An environment variable.
     #
-    # @note When making an API call, you may pass EksContainerEnvironmentVariable
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #         value: "String",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the environment variable.
     #   @return [String]
@@ -3624,29 +3151,6 @@ module Aws::Batch
 
     # Object representing any Kubernetes overrides to a job definition
     # that's used in a SubmitJob API operation.
-    #
-    # @note When making an API call, you may pass EksContainerOverride
-    #   data as a hash:
-    #
-    #       {
-    #         image: "String",
-    #         command: ["String"],
-    #         args: ["String"],
-    #         env: [
-    #           {
-    #             name: "String", # required
-    #             value: "String",
-    #           },
-    #         ],
-    #         resources: {
-    #           limits: {
-    #             "String" => "Quantity",
-    #           },
-    #           requests: {
-    #             "String" => "Quantity",
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] image
     #   The override of the Docker image that's used to start the
@@ -3715,18 +3219,6 @@ module Aws::Batch
     #
     #
     # [1]: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
-    #
-    # @note When making an API call, you may pass EksContainerResourceRequirements
-    #   data as a hash:
-    #
-    #       {
-    #         limits: {
-    #           "String" => "Quantity",
-    #         },
-    #         requests: {
-    #           "String" => "Quantity",
-    #         },
-    #       }
     #
     # @!attribute [rw] limits
     #   The type and quantity of the resources to reserve for the container.
@@ -3832,17 +3324,6 @@ module Aws::Batch
     #
     # [1]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
     #
-    # @note When making an API call, you may pass EksContainerSecurityContext
-    #   data as a hash:
-    #
-    #       {
-    #         run_as_user: 1,
-    #         run_as_group: 1,
-    #         privileged: false,
-    #         read_only_root_filesystem: false,
-    #         run_as_non_root: false,
-    #       }
-    #
     # @!attribute [rw] run_as_user
     #   When this parameter is specified, the container is run as the
     #   specified user ID (`uid`). If this parameter isn't specified, the
@@ -3926,15 +3407,6 @@ module Aws::Batch
     #
     # [1]: https://kubernetes.io/docs/concepts/storage/volumes/
     #
-    # @note When making an API call, you may pass EksContainerVolumeMount
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String",
-    #         mount_path: "String",
-    #         read_only: false,
-    #       }
-    #
     # @!attribute [rw] name
     #   The name the volume mount. This must match the name of one of the
     #   volumes in the pod.
@@ -3973,14 +3445,6 @@ module Aws::Batch
     #
     #
     # [1]: https://kubernetes.io/docs/concepts/storage/volumes/#emptydir
-    #
-    # @note When making an API call, you may pass EksEmptyDir
-    #   data as a hash:
-    #
-    #       {
-    #         medium: "String",
-    #         size_limit: "Quantity",
-    #       }
     #
     # @!attribute [rw] medium
     #   The medium to store the volume. The default value is an empty
@@ -4021,13 +3485,6 @@ module Aws::Batch
     #
     # [1]: https://kubernetes.io/docs/concepts/storage/volumes/#hostpath
     #
-    # @note When making an API call, you may pass EksHostPath
-    #   data as a hash:
-    #
-    #       {
-    #         path: "String",
-    #       }
-    #
     # @!attribute [rw] path
     #   The path of the file or directory on the host to mount into
     #   containers on the pod.
@@ -4042,68 +3499,6 @@ module Aws::Batch
     end
 
     # The properties for the pod.
-    #
-    # @note When making an API call, you may pass EksPodProperties
-    #   data as a hash:
-    #
-    #       {
-    #         service_account_name: "String",
-    #         host_network: false,
-    #         dns_policy: "String",
-    #         containers: [
-    #           {
-    #             name: "String",
-    #             image: "String", # required
-    #             image_pull_policy: "String",
-    #             command: ["String"],
-    #             args: ["String"],
-    #             env: [
-    #               {
-    #                 name: "String", # required
-    #                 value: "String",
-    #               },
-    #             ],
-    #             resources: {
-    #               limits: {
-    #                 "String" => "Quantity",
-    #               },
-    #               requests: {
-    #                 "String" => "Quantity",
-    #               },
-    #             },
-    #             volume_mounts: [
-    #               {
-    #                 name: "String",
-    #                 mount_path: "String",
-    #                 read_only: false,
-    #               },
-    #             ],
-    #             security_context: {
-    #               run_as_user: 1,
-    #               run_as_group: 1,
-    #               privileged: false,
-    #               read_only_root_filesystem: false,
-    #               run_as_non_root: false,
-    #             },
-    #           },
-    #         ],
-    #         volumes: [
-    #           {
-    #             name: "String", # required
-    #             host_path: {
-    #               path: "String",
-    #             },
-    #             empty_dir: {
-    #               medium: "String",
-    #               size_limit: "Quantity",
-    #             },
-    #             secret: {
-    #               secret_name: "String", # required
-    #               optional: false,
-    #             },
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] service_account_name
     #   The name of the service account that's used to run the pod. For
@@ -4262,33 +3657,6 @@ module Aws::Batch
     # An object that contains overrides for the Kubernetes pod properties of
     # a job.
     #
-    # @note When making an API call, you may pass EksPodPropertiesOverride
-    #   data as a hash:
-    #
-    #       {
-    #         containers: [
-    #           {
-    #             image: "String",
-    #             command: ["String"],
-    #             args: ["String"],
-    #             env: [
-    #               {
-    #                 name: "String", # required
-    #                 value: "String",
-    #               },
-    #             ],
-    #             resources: {
-    #               limits: {
-    #                 "String" => "Quantity",
-    #               },
-    #               requests: {
-    #                 "String" => "Quantity",
-    #               },
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] containers
     #   The overrides for the container that's used on the Amazon EKS pod.
     #   @return [Array<Types::EksContainerOverride>]
@@ -4303,70 +3671,6 @@ module Aws::Batch
 
     # An object that contains the properties for the Kubernetes resources of
     # a job.
-    #
-    # @note When making an API call, you may pass EksProperties
-    #   data as a hash:
-    #
-    #       {
-    #         pod_properties: {
-    #           service_account_name: "String",
-    #           host_network: false,
-    #           dns_policy: "String",
-    #           containers: [
-    #             {
-    #               name: "String",
-    #               image: "String", # required
-    #               image_pull_policy: "String",
-    #               command: ["String"],
-    #               args: ["String"],
-    #               env: [
-    #                 {
-    #                   name: "String", # required
-    #                   value: "String",
-    #                 },
-    #               ],
-    #               resources: {
-    #                 limits: {
-    #                   "String" => "Quantity",
-    #                 },
-    #                 requests: {
-    #                   "String" => "Quantity",
-    #                 },
-    #               },
-    #               volume_mounts: [
-    #                 {
-    #                   name: "String",
-    #                   mount_path: "String",
-    #                   read_only: false,
-    #                 },
-    #               ],
-    #               security_context: {
-    #                 run_as_user: 1,
-    #                 run_as_group: 1,
-    #                 privileged: false,
-    #                 read_only_root_filesystem: false,
-    #                 run_as_non_root: false,
-    #               },
-    #             },
-    #           ],
-    #           volumes: [
-    #             {
-    #               name: "String", # required
-    #               host_path: {
-    #                 path: "String",
-    #               },
-    #               empty_dir: {
-    #                 medium: "String",
-    #                 size_limit: "Quantity",
-    #               },
-    #               secret: {
-    #                 secret_name: "String", # required
-    #                 optional: false,
-    #               },
-    #             },
-    #           ],
-    #         },
-    #       }
     #
     # @!attribute [rw] pod_properties
     #   The properties for the Kubernetes pod resources of a job.
@@ -4398,35 +3702,6 @@ module Aws::Batch
     # An object that contains overrides for the Kubernetes resources of a
     # job.
     #
-    # @note When making an API call, you may pass EksPropertiesOverride
-    #   data as a hash:
-    #
-    #       {
-    #         pod_properties: {
-    #           containers: [
-    #             {
-    #               image: "String",
-    #               command: ["String"],
-    #               args: ["String"],
-    #               env: [
-    #                 {
-    #                   name: "String", # required
-    #                   value: "String",
-    #                 },
-    #               ],
-    #               resources: {
-    #                 limits: {
-    #                   "String" => "Quantity",
-    #                 },
-    #                 requests: {
-    #                   "String" => "Quantity",
-    #                 },
-    #               },
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] pod_properties
     #   The overrides for the Kubernetes pod resources of a job.
     #   @return [Types::EksPodPropertiesOverride]
@@ -4445,14 +3720,6 @@ module Aws::Batch
     #
     #
     # [1]: https://kubernetes.io/docs/concepts/storage/volumes/#secret
-    #
-    # @note When making an API call, you may pass EksSecret
-    #   data as a hash:
-    #
-    #       {
-    #         secret_name: "String", # required
-    #         optional: false,
-    #       }
     #
     # @!attribute [rw] secret_name
     #   The name of the secret. The name must be allowed as a DNS subdomain
@@ -4478,24 +3745,6 @@ module Aws::Batch
     end
 
     # Specifies an Amazon EKS volume for a job definition.
-    #
-    # @note When making an API call, you may pass EksVolume
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #         host_path: {
-    #           path: "String",
-    #         },
-    #         empty_dir: {
-    #           medium: "String",
-    #           size_limit: "Quantity",
-    #         },
-    #         secret: {
-    #           secret_name: "String", # required
-    #           optional: false,
-    #         },
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the volume. The name must be allowed as a DNS subdomain
@@ -4552,16 +3801,6 @@ module Aws::Batch
     # `EvaluateOnExit` conditions in a `RetryStrategy` match, then the job
     # is retried.
     #
-    # @note When making an API call, you may pass EvaluateOnExit
-    #   data as a hash:
-    #
-    #       {
-    #         on_status_reason: "String",
-    #         on_reason: "String",
-    #         on_exit_code: "String",
-    #         action: "RETRY", # required, accepts RETRY, EXIT
-    #       }
-    #
     # @!attribute [rw] on_status_reason
     #   Contains a glob pattern to match against the `StatusReason` returned
     #   for a job. The pattern can contain up to 512 characters. It can
@@ -4608,20 +3847,6 @@ module Aws::Batch
     end
 
     # The fair share policy for a scheduling policy.
-    #
-    # @note When making an API call, you may pass FairsharePolicy
-    #   data as a hash:
-    #
-    #       {
-    #         share_decay_seconds: 1,
-    #         compute_reservation: 1,
-    #         share_distribution: [
-    #           {
-    #             share_identifier: "String", # required
-    #             weight_factor: 1.0,
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] share_decay_seconds
     #   The amount of time (in seconds) to use to calculate a fair share
@@ -4671,13 +3896,6 @@ module Aws::Batch
     # resources. Jobs that run on EC2 resources must not specify this
     # parameter.
     #
-    # @note When making an API call, you may pass FargatePlatformConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         platform_version: "String",
-    #       }
-    #
     # @!attribute [rw] platform_version
     #   The Fargate platform version where the jobs are running. A platform
     #   version is specified only for jobs that are running on Fargate
@@ -4705,13 +3923,6 @@ module Aws::Batch
     # Docker daemon assigns a host path for your data volume. However, the
     # data isn't guaranteed to persist after the containers that are
     # associated with it stop running.
-    #
-    # @note When making an API call, you may pass Host
-    #   data as a hash:
-    #
-    #       {
-    #         source_path: "String",
-    #       }
     #
     # @!attribute [rw] source_path
     #   The path on the host container instance that's presented to the
@@ -4870,14 +4081,6 @@ module Aws::Batch
     end
 
     # An object that represents an Batch job dependency.
-    #
-    # @note When making an API call, you may pass JobDependency
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "String",
-    #         type: "N_TO_N", # accepts N_TO_N, SEQUENTIAL
-    #       }
     #
     # @!attribute [rw] job_id
     #   The job ID of the Batch job that's associated with this dependency.
@@ -5243,13 +4446,6 @@ module Aws::Batch
 
     # An object that represents a job timeout configuration.
     #
-    # @note When making an API call, you may pass JobTimeout
-    #   data as a hash:
-    #
-    #       {
-    #         attempt_duration_seconds: 1,
-    #       }
-    #
     # @!attribute [rw] attempt_duration_seconds
     #   The job timeout time (in seconds) that's measured from the job
     #   attempt's `startedAt` timestamp. After this time passes, Batch
@@ -5266,14 +4462,6 @@ module Aws::Batch
     end
 
     # A key-value pair object.
-    #
-    # @note When making an API call, you may pass KeyValuePair
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String",
-    #         value: "String",
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the key-value pair. For environment variables, this is
@@ -5296,14 +4484,6 @@ module Aws::Batch
 
     # A filter name and value pair that's used to return a more specific
     # list of results from a `ListJobs` API operation.
-    #
-    # @note When making an API call, you may pass KeyValuesPair
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String",
-    #         values: ["String"],
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the filter. Filter names are case sensitive.
@@ -5335,15 +4515,6 @@ module Aws::Batch
     # resources.
     #
     #  </note>
-    #
-    # @note When making an API call, you may pass LaunchTemplateSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         launch_template_id: "String",
-    #         launch_template_name: "String",
-    #         version: "String",
-    #       }
     #
     # @!attribute [rw] launch_template_id
     #   The ID of the launch template.
@@ -5392,30 +4563,6 @@ module Aws::Batch
 
     # Linux-specific modifications that are applied to the container, such
     # as details for device mappings.
-    #
-    # @note When making an API call, you may pass LinuxParameters
-    #   data as a hash:
-    #
-    #       {
-    #         devices: [
-    #           {
-    #             host_path: "String", # required
-    #             container_path: "String",
-    #             permissions: ["READ"], # accepts READ, WRITE, MKNOD
-    #           },
-    #         ],
-    #         init_process_enabled: false,
-    #         shared_memory_size: 1,
-    #         tmpfs: [
-    #           {
-    #             container_path: "String", # required
-    #             size: 1, # required
-    #             mount_options: ["String"],
-    #           },
-    #         ],
-    #         max_swap: 1,
-    #         swappiness: 1,
-    #       }
     #
     # @!attribute [rw] devices
     #   Any of the host devices to expose to the container. This parameter
@@ -5564,24 +4711,6 @@ module Aws::Batch
 
     # Contains the parameters for `ListJobs`.
     #
-    # @note When making an API call, you may pass ListJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_queue: "String",
-    #         array_job_id: "String",
-    #         multi_node_job_id: "String",
-    #         job_status: "SUBMITTED", # accepts SUBMITTED, PENDING, RUNNABLE, STARTING, RUNNING, SUCCEEDED, FAILED
-    #         max_results: 1,
-    #         next_token: "String",
-    #         filters: [
-    #           {
-    #             name: "String",
-    #             values: ["String"],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] job_queue
     #   The name or full Amazon Resource Name (ARN) of the job queue used to
     #   list jobs.
@@ -5716,14 +4845,6 @@ module Aws::Batch
 
     # Contains the parameters for `ListSchedulingPolicies`.
     #
-    # @note When making an API call, you may pass ListSchedulingPoliciesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results that's returned by
     #   `ListSchedulingPolicies` in paginated output. When this parameter is
@@ -5783,13 +4904,6 @@ module Aws::Batch
 
     # Contains the parameters for `ListTagsForResource`.
     #
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) that identifies the resource that
     #   tags are listed for. Batch resources that support tags are compute
@@ -5820,22 +4934,6 @@ module Aws::Batch
 
     # Log configuration options to send to a custom log driver for the
     # container.
-    #
-    # @note When making an API call, you may pass LogConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk
-    #         options: {
-    #           "String" => "String",
-    #         },
-    #         secret_options: [
-    #           {
-    #             name: "String", # required
-    #             value_from: "String", # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] log_driver
     #   The log driver to use for the container. The valid values that are
@@ -5958,15 +5056,6 @@ module Aws::Batch
     #
     # [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.19/#create-a-container
     #
-    # @note When making an API call, you may pass MountPoint
-    #   data as a hash:
-    #
-    #       {
-    #         container_path: "String",
-    #         read_only: false,
-    #         source_volume: "String",
-    #       }
-    #
     # @!attribute [rw] container_path
     #   The path on the container where the host volume is mounted.
     #   @return [String]
@@ -5994,13 +5083,6 @@ module Aws::Batch
     # The network configuration for jobs that are running on Fargate
     # resources. Jobs that are running on EC2 resources must not specify
     # this parameter.
-    #
-    # @note When making an API call, you may pass NetworkConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
-    #       }
     #
     # @!attribute [rw] assign_public_ip
     #   Indicates whether the job has a public IP address. For a job that's
@@ -6081,36 +5163,6 @@ module Aws::Batch
     #
     #  </note>
     #
-    # @note When making an API call, you may pass NodeOverrides
-    #   data as a hash:
-    #
-    #       {
-    #         num_nodes: 1,
-    #         node_property_overrides: [
-    #           {
-    #             target_nodes: "String", # required
-    #             container_overrides: {
-    #               vcpus: 1,
-    #               memory: 1,
-    #               command: ["String"],
-    #               instance_type: "String",
-    #               environment: [
-    #                 {
-    #                   name: "String",
-    #                   value: "String",
-    #                 },
-    #               ],
-    #               resource_requirements: [
-    #                 {
-    #                   value: "String", # required
-    #                   type: "GPU", # required, accepts GPU, VCPU, MEMORY
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] num_nodes
     #   The number of nodes to use with a multi-node parallel job. This
     #   value overrides the number of nodes that are specified in the job
@@ -6148,119 +5200,6 @@ module Aws::Batch
     # definitions.
     #
     #  </note>
-    #
-    # @note When making an API call, you may pass NodeProperties
-    #   data as a hash:
-    #
-    #       {
-    #         num_nodes: 1, # required
-    #         main_node: 1, # required
-    #         node_range_properties: [ # required
-    #           {
-    #             target_nodes: "String", # required
-    #             container: {
-    #               image: "String",
-    #               vcpus: 1,
-    #               memory: 1,
-    #               command: ["String"],
-    #               job_role_arn: "String",
-    #               execution_role_arn: "String",
-    #               volumes: [
-    #                 {
-    #                   host: {
-    #                     source_path: "String",
-    #                   },
-    #                   name: "String",
-    #                   efs_volume_configuration: {
-    #                     file_system_id: "String", # required
-    #                     root_directory: "String",
-    #                     transit_encryption: "ENABLED", # accepts ENABLED, DISABLED
-    #                     transit_encryption_port: 1,
-    #                     authorization_config: {
-    #                       access_point_id: "String",
-    #                       iam: "ENABLED", # accepts ENABLED, DISABLED
-    #                     },
-    #                   },
-    #                 },
-    #               ],
-    #               environment: [
-    #                 {
-    #                   name: "String",
-    #                   value: "String",
-    #                 },
-    #               ],
-    #               mount_points: [
-    #                 {
-    #                   container_path: "String",
-    #                   read_only: false,
-    #                   source_volume: "String",
-    #                 },
-    #               ],
-    #               readonly_root_filesystem: false,
-    #               privileged: false,
-    #               ulimits: [
-    #                 {
-    #                   hard_limit: 1, # required
-    #                   name: "String", # required
-    #                   soft_limit: 1, # required
-    #                 },
-    #               ],
-    #               user: "String",
-    #               instance_type: "String",
-    #               resource_requirements: [
-    #                 {
-    #                   value: "String", # required
-    #                   type: "GPU", # required, accepts GPU, VCPU, MEMORY
-    #                 },
-    #               ],
-    #               linux_parameters: {
-    #                 devices: [
-    #                   {
-    #                     host_path: "String", # required
-    #                     container_path: "String",
-    #                     permissions: ["READ"], # accepts READ, WRITE, MKNOD
-    #                   },
-    #                 ],
-    #                 init_process_enabled: false,
-    #                 shared_memory_size: 1,
-    #                 tmpfs: [
-    #                   {
-    #                     container_path: "String", # required
-    #                     size: 1, # required
-    #                     mount_options: ["String"],
-    #                   },
-    #                 ],
-    #                 max_swap: 1,
-    #                 swappiness: 1,
-    #               },
-    #               log_configuration: {
-    #                 log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk
-    #                 options: {
-    #                   "String" => "String",
-    #                 },
-    #                 secret_options: [
-    #                   {
-    #                     name: "String", # required
-    #                     value_from: "String", # required
-    #                   },
-    #                 ],
-    #               },
-    #               secrets: [
-    #                 {
-    #                   name: "String", # required
-    #                   value_from: "String", # required
-    #                 },
-    #               ],
-    #               network_configuration: {
-    #                 assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
-    #               },
-    #               fargate_platform_configuration: {
-    #                 platform_version: "String",
-    #               },
-    #             },
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] num_nodes
     #   The number of nodes that are associated with a multi-node parallel
@@ -6319,31 +5258,6 @@ module Aws::Batch
     # The object that represents any node overrides to a job definition
     # that's used in a SubmitJob API operation.
     #
-    # @note When making an API call, you may pass NodePropertyOverride
-    #   data as a hash:
-    #
-    #       {
-    #         target_nodes: "String", # required
-    #         container_overrides: {
-    #           vcpus: 1,
-    #           memory: 1,
-    #           command: ["String"],
-    #           instance_type: "String",
-    #           environment: [
-    #             {
-    #               name: "String",
-    #               value: "String",
-    #             },
-    #           ],
-    #           resource_requirements: [
-    #             {
-    #               value: "String", # required
-    #               type: "GPU", # required, accepts GPU, VCPU, MEMORY
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] target_nodes
     #   The range of nodes, using node index values, that's used to
     #   override. A range of `0:3` indicates nodes with index values of `0`
@@ -6368,113 +5282,6 @@ module Aws::Batch
 
     # An object that represents the properties of the node range for a
     # multi-node parallel job.
-    #
-    # @note When making an API call, you may pass NodeRangeProperty
-    #   data as a hash:
-    #
-    #       {
-    #         target_nodes: "String", # required
-    #         container: {
-    #           image: "String",
-    #           vcpus: 1,
-    #           memory: 1,
-    #           command: ["String"],
-    #           job_role_arn: "String",
-    #           execution_role_arn: "String",
-    #           volumes: [
-    #             {
-    #               host: {
-    #                 source_path: "String",
-    #               },
-    #               name: "String",
-    #               efs_volume_configuration: {
-    #                 file_system_id: "String", # required
-    #                 root_directory: "String",
-    #                 transit_encryption: "ENABLED", # accepts ENABLED, DISABLED
-    #                 transit_encryption_port: 1,
-    #                 authorization_config: {
-    #                   access_point_id: "String",
-    #                   iam: "ENABLED", # accepts ENABLED, DISABLED
-    #                 },
-    #               },
-    #             },
-    #           ],
-    #           environment: [
-    #             {
-    #               name: "String",
-    #               value: "String",
-    #             },
-    #           ],
-    #           mount_points: [
-    #             {
-    #               container_path: "String",
-    #               read_only: false,
-    #               source_volume: "String",
-    #             },
-    #           ],
-    #           readonly_root_filesystem: false,
-    #           privileged: false,
-    #           ulimits: [
-    #             {
-    #               hard_limit: 1, # required
-    #               name: "String", # required
-    #               soft_limit: 1, # required
-    #             },
-    #           ],
-    #           user: "String",
-    #           instance_type: "String",
-    #           resource_requirements: [
-    #             {
-    #               value: "String", # required
-    #               type: "GPU", # required, accepts GPU, VCPU, MEMORY
-    #             },
-    #           ],
-    #           linux_parameters: {
-    #             devices: [
-    #               {
-    #                 host_path: "String", # required
-    #                 container_path: "String",
-    #                 permissions: ["READ"], # accepts READ, WRITE, MKNOD
-    #               },
-    #             ],
-    #             init_process_enabled: false,
-    #             shared_memory_size: 1,
-    #             tmpfs: [
-    #               {
-    #                 container_path: "String", # required
-    #                 size: 1, # required
-    #                 mount_options: ["String"],
-    #               },
-    #             ],
-    #             max_swap: 1,
-    #             swappiness: 1,
-    #           },
-    #           log_configuration: {
-    #             log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk
-    #             options: {
-    #               "String" => "String",
-    #             },
-    #             secret_options: [
-    #               {
-    #                 name: "String", # required
-    #                 value_from: "String", # required
-    #               },
-    #             ],
-    #           },
-    #           secrets: [
-    #             {
-    #               name: "String", # required
-    #               value_from: "String", # required
-    #             },
-    #           ],
-    #           network_configuration: {
-    #             assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
-    #           },
-    #           fargate_platform_configuration: {
-    #             platform_version: "String",
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] target_nodes
     #   The range of nodes, using node index values. A range of `0:3`
@@ -6501,306 +5308,6 @@ module Aws::Batch
     end
 
     # Contains the parameters for `RegisterJobDefinition`.
-    #
-    # @note When making an API call, you may pass RegisterJobDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_definition_name: "String", # required
-    #         type: "container", # required, accepts container, multinode
-    #         parameters: {
-    #           "String" => "String",
-    #         },
-    #         scheduling_priority: 1,
-    #         container_properties: {
-    #           image: "String",
-    #           vcpus: 1,
-    #           memory: 1,
-    #           command: ["String"],
-    #           job_role_arn: "String",
-    #           execution_role_arn: "String",
-    #           volumes: [
-    #             {
-    #               host: {
-    #                 source_path: "String",
-    #               },
-    #               name: "String",
-    #               efs_volume_configuration: {
-    #                 file_system_id: "String", # required
-    #                 root_directory: "String",
-    #                 transit_encryption: "ENABLED", # accepts ENABLED, DISABLED
-    #                 transit_encryption_port: 1,
-    #                 authorization_config: {
-    #                   access_point_id: "String",
-    #                   iam: "ENABLED", # accepts ENABLED, DISABLED
-    #                 },
-    #               },
-    #             },
-    #           ],
-    #           environment: [
-    #             {
-    #               name: "String",
-    #               value: "String",
-    #             },
-    #           ],
-    #           mount_points: [
-    #             {
-    #               container_path: "String",
-    #               read_only: false,
-    #               source_volume: "String",
-    #             },
-    #           ],
-    #           readonly_root_filesystem: false,
-    #           privileged: false,
-    #           ulimits: [
-    #             {
-    #               hard_limit: 1, # required
-    #               name: "String", # required
-    #               soft_limit: 1, # required
-    #             },
-    #           ],
-    #           user: "String",
-    #           instance_type: "String",
-    #           resource_requirements: [
-    #             {
-    #               value: "String", # required
-    #               type: "GPU", # required, accepts GPU, VCPU, MEMORY
-    #             },
-    #           ],
-    #           linux_parameters: {
-    #             devices: [
-    #               {
-    #                 host_path: "String", # required
-    #                 container_path: "String",
-    #                 permissions: ["READ"], # accepts READ, WRITE, MKNOD
-    #               },
-    #             ],
-    #             init_process_enabled: false,
-    #             shared_memory_size: 1,
-    #             tmpfs: [
-    #               {
-    #                 container_path: "String", # required
-    #                 size: 1, # required
-    #                 mount_options: ["String"],
-    #               },
-    #             ],
-    #             max_swap: 1,
-    #             swappiness: 1,
-    #           },
-    #           log_configuration: {
-    #             log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk
-    #             options: {
-    #               "String" => "String",
-    #             },
-    #             secret_options: [
-    #               {
-    #                 name: "String", # required
-    #                 value_from: "String", # required
-    #               },
-    #             ],
-    #           },
-    #           secrets: [
-    #             {
-    #               name: "String", # required
-    #               value_from: "String", # required
-    #             },
-    #           ],
-    #           network_configuration: {
-    #             assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
-    #           },
-    #           fargate_platform_configuration: {
-    #             platform_version: "String",
-    #           },
-    #         },
-    #         node_properties: {
-    #           num_nodes: 1, # required
-    #           main_node: 1, # required
-    #           node_range_properties: [ # required
-    #             {
-    #               target_nodes: "String", # required
-    #               container: {
-    #                 image: "String",
-    #                 vcpus: 1,
-    #                 memory: 1,
-    #                 command: ["String"],
-    #                 job_role_arn: "String",
-    #                 execution_role_arn: "String",
-    #                 volumes: [
-    #                   {
-    #                     host: {
-    #                       source_path: "String",
-    #                     },
-    #                     name: "String",
-    #                     efs_volume_configuration: {
-    #                       file_system_id: "String", # required
-    #                       root_directory: "String",
-    #                       transit_encryption: "ENABLED", # accepts ENABLED, DISABLED
-    #                       transit_encryption_port: 1,
-    #                       authorization_config: {
-    #                         access_point_id: "String",
-    #                         iam: "ENABLED", # accepts ENABLED, DISABLED
-    #                       },
-    #                     },
-    #                   },
-    #                 ],
-    #                 environment: [
-    #                   {
-    #                     name: "String",
-    #                     value: "String",
-    #                   },
-    #                 ],
-    #                 mount_points: [
-    #                   {
-    #                     container_path: "String",
-    #                     read_only: false,
-    #                     source_volume: "String",
-    #                   },
-    #                 ],
-    #                 readonly_root_filesystem: false,
-    #                 privileged: false,
-    #                 ulimits: [
-    #                   {
-    #                     hard_limit: 1, # required
-    #                     name: "String", # required
-    #                     soft_limit: 1, # required
-    #                   },
-    #                 ],
-    #                 user: "String",
-    #                 instance_type: "String",
-    #                 resource_requirements: [
-    #                   {
-    #                     value: "String", # required
-    #                     type: "GPU", # required, accepts GPU, VCPU, MEMORY
-    #                   },
-    #                 ],
-    #                 linux_parameters: {
-    #                   devices: [
-    #                     {
-    #                       host_path: "String", # required
-    #                       container_path: "String",
-    #                       permissions: ["READ"], # accepts READ, WRITE, MKNOD
-    #                     },
-    #                   ],
-    #                   init_process_enabled: false,
-    #                   shared_memory_size: 1,
-    #                   tmpfs: [
-    #                     {
-    #                       container_path: "String", # required
-    #                       size: 1, # required
-    #                       mount_options: ["String"],
-    #                     },
-    #                   ],
-    #                   max_swap: 1,
-    #                   swappiness: 1,
-    #                 },
-    #                 log_configuration: {
-    #                   log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk
-    #                   options: {
-    #                     "String" => "String",
-    #                   },
-    #                   secret_options: [
-    #                     {
-    #                       name: "String", # required
-    #                       value_from: "String", # required
-    #                     },
-    #                   ],
-    #                 },
-    #                 secrets: [
-    #                   {
-    #                     name: "String", # required
-    #                     value_from: "String", # required
-    #                   },
-    #                 ],
-    #                 network_configuration: {
-    #                   assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
-    #                 },
-    #                 fargate_platform_configuration: {
-    #                   platform_version: "String",
-    #                 },
-    #               },
-    #             },
-    #           ],
-    #         },
-    #         retry_strategy: {
-    #           attempts: 1,
-    #           evaluate_on_exit: [
-    #             {
-    #               on_status_reason: "String",
-    #               on_reason: "String",
-    #               on_exit_code: "String",
-    #               action: "RETRY", # required, accepts RETRY, EXIT
-    #             },
-    #           ],
-    #         },
-    #         propagate_tags: false,
-    #         timeout: {
-    #           attempt_duration_seconds: 1,
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         platform_capabilities: ["EC2"], # accepts EC2, FARGATE
-    #         eks_properties: {
-    #           pod_properties: {
-    #             service_account_name: "String",
-    #             host_network: false,
-    #             dns_policy: "String",
-    #             containers: [
-    #               {
-    #                 name: "String",
-    #                 image: "String", # required
-    #                 image_pull_policy: "String",
-    #                 command: ["String"],
-    #                 args: ["String"],
-    #                 env: [
-    #                   {
-    #                     name: "String", # required
-    #                     value: "String",
-    #                   },
-    #                 ],
-    #                 resources: {
-    #                   limits: {
-    #                     "String" => "Quantity",
-    #                   },
-    #                   requests: {
-    #                     "String" => "Quantity",
-    #                   },
-    #                 },
-    #                 volume_mounts: [
-    #                   {
-    #                     name: "String",
-    #                     mount_path: "String",
-    #                     read_only: false,
-    #                   },
-    #                 ],
-    #                 security_context: {
-    #                   run_as_user: 1,
-    #                   run_as_group: 1,
-    #                   privileged: false,
-    #                   read_only_root_filesystem: false,
-    #                   run_as_non_root: false,
-    #                 },
-    #               },
-    #             ],
-    #             volumes: [
-    #               {
-    #                 name: "String", # required
-    #                 host_path: {
-    #                   path: "String",
-    #                 },
-    #                 empty_dir: {
-    #                   medium: "String",
-    #                   size_limit: "Quantity",
-    #                 },
-    #                 secret: {
-    #                   secret_name: "String", # required
-    #                   optional: false,
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] job_definition_name
     #   The name of the job definition to register. It can be up to 128
@@ -6984,14 +5491,6 @@ module Aws::Batch
     # The type and amount of a resource to assign to a container. The
     # supported resources include `GPU`, `MEMORY`, and `VCPU`.
     #
-    # @note When making an API call, you may pass ResourceRequirement
-    #   data as a hash:
-    #
-    #       {
-    #         value: "String", # required
-    #         type: "GPU", # required, accepts GPU, VCPU, MEMORY
-    #       }
-    #
     # @!attribute [rw] value
     #   The quantity of the specified resource to reserve for the container.
     #   The values vary based on the `type` specified.
@@ -7172,21 +5671,6 @@ module Aws::Batch
     #
     # [1]: https://docs.aws.amazon.com/batch/latest/userguide/job_retries.html
     #
-    # @note When making an API call, you may pass RetryStrategy
-    #   data as a hash:
-    #
-    #       {
-    #         attempts: 1,
-    #         evaluate_on_exit: [
-    #           {
-    #             on_status_reason: "String",
-    #             on_reason: "String",
-    #             on_exit_code: "String",
-    #             action: "RETRY", # required, accepts RETRY, EXIT
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] attempts
     #   The number of times to move a job to the `RUNNABLE` status. You can
     #   specify between 1 and 10 attempts. If the value of `attempts` is
@@ -7280,14 +5764,6 @@ module Aws::Batch
     #
     # [1]: https://docs.aws.amazon.com/batch/latest/userguide/specifying-sensitive-data.html
     #
-    # @note When making an API call, you may pass Secret
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #         value_from: "String", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the secret.
     #   @return [String]
@@ -7333,14 +5809,6 @@ module Aws::Batch
     # share policy. Fair share identifiers that aren't included have a
     # default weight of `1.0`.
     #
-    # @note When making an API call, you may pass ShareAttributes
-    #   data as a hash:
-    #
-    #       {
-    #         share_identifier: "String", # required
-    #         weight_factor: 1.0,
-    #       }
-    #
     # @!attribute [rw] share_identifier
     #   A fair share identifier or fair share identifier prefix. If the
     #   string ends with an asterisk (*), this entry specifies the weight
@@ -7378,116 +5846,6 @@ module Aws::Batch
     end
 
     # Contains the parameters for `SubmitJob`.
-    #
-    # @note When making an API call, you may pass SubmitJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_name: "String", # required
-    #         job_queue: "String", # required
-    #         share_identifier: "String",
-    #         scheduling_priority_override: 1,
-    #         array_properties: {
-    #           size: 1,
-    #         },
-    #         depends_on: [
-    #           {
-    #             job_id: "String",
-    #             type: "N_TO_N", # accepts N_TO_N, SEQUENTIAL
-    #           },
-    #         ],
-    #         job_definition: "String", # required
-    #         parameters: {
-    #           "String" => "String",
-    #         },
-    #         container_overrides: {
-    #           vcpus: 1,
-    #           memory: 1,
-    #           command: ["String"],
-    #           instance_type: "String",
-    #           environment: [
-    #             {
-    #               name: "String",
-    #               value: "String",
-    #             },
-    #           ],
-    #           resource_requirements: [
-    #             {
-    #               value: "String", # required
-    #               type: "GPU", # required, accepts GPU, VCPU, MEMORY
-    #             },
-    #           ],
-    #         },
-    #         node_overrides: {
-    #           num_nodes: 1,
-    #           node_property_overrides: [
-    #             {
-    #               target_nodes: "String", # required
-    #               container_overrides: {
-    #                 vcpus: 1,
-    #                 memory: 1,
-    #                 command: ["String"],
-    #                 instance_type: "String",
-    #                 environment: [
-    #                   {
-    #                     name: "String",
-    #                     value: "String",
-    #                   },
-    #                 ],
-    #                 resource_requirements: [
-    #                   {
-    #                     value: "String", # required
-    #                     type: "GPU", # required, accepts GPU, VCPU, MEMORY
-    #                   },
-    #                 ],
-    #               },
-    #             },
-    #           ],
-    #         },
-    #         retry_strategy: {
-    #           attempts: 1,
-    #           evaluate_on_exit: [
-    #             {
-    #               on_status_reason: "String",
-    #               on_reason: "String",
-    #               on_exit_code: "String",
-    #               action: "RETRY", # required, accepts RETRY, EXIT
-    #             },
-    #           ],
-    #         },
-    #         propagate_tags: false,
-    #         timeout: {
-    #           attempt_duration_seconds: 1,
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         eks_properties_override: {
-    #           pod_properties: {
-    #             containers: [
-    #               {
-    #                 image: "String",
-    #                 command: ["String"],
-    #                 args: ["String"],
-    #                 env: [
-    #                   {
-    #                     name: "String", # required
-    #                     value: "String",
-    #                   },
-    #                 ],
-    #                 resources: {
-    #                   limits: {
-    #                     "String" => "Quantity",
-    #                   },
-    #                   requests: {
-    #                     "String" => "Quantity",
-    #                   },
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] job_name
     #   The name of the job. It can be up to 128 letters long. The first
@@ -7669,16 +6027,6 @@ module Aws::Batch
 
     # Contains the parameters for `TagResource`.
     #
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource that tags are added
     #   to. Batch resources that support tags are compute environments,
@@ -7713,14 +6061,6 @@ module Aws::Batch
 
     # Contains the parameters for `TerminateJob`.
     #
-    # @note When making an API call, you may pass TerminateJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "String", # required
-    #         reason: "String", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The Batch job ID of the job to terminate.
     #   @return [String]
@@ -7751,15 +6091,6 @@ module Aws::Batch
     # resources.
     #
     #  </note>
-    #
-    # @note When making an API call, you may pass Tmpfs
-    #   data as a hash:
-    #
-    #       {
-    #         container_path: "String", # required
-    #         size: 1, # required
-    #         mount_options: ["String"],
-    #       }
     #
     # @!attribute [rw] container_path
     #   The absolute file path in the container where the `tmpfs` volume is
@@ -7802,15 +6133,6 @@ module Aws::Batch
     #
     #  </note>
     #
-    # @note When making an API call, you may pass Ulimit
-    #   data as a hash:
-    #
-    #       {
-    #         hard_limit: 1, # required
-    #         name: "String", # required
-    #         soft_limit: 1, # required
-    #       }
-    #
     # @!attribute [rw] hard_limit
     #   The hard limit for the `ulimit` type.
     #   @return [Integer]
@@ -7834,14 +6156,6 @@ module Aws::Batch
     end
 
     # Contains the parameters for `UntagResource`.
-    #
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
     #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource from which to delete
@@ -7869,51 +6183,6 @@ module Aws::Batch
     class UntagResourceResponse < Aws::EmptyStructure; end
 
     # Contains the parameters for `UpdateComputeEnvironment`.
-    #
-    # @note When making an API call, you may pass UpdateComputeEnvironmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         compute_environment: "String", # required
-    #         state: "ENABLED", # accepts ENABLED, DISABLED
-    #         unmanagedv_cpus: 1,
-    #         compute_resources: {
-    #           minv_cpus: 1,
-    #           maxv_cpus: 1,
-    #           desiredv_cpus: 1,
-    #           subnets: ["String"],
-    #           security_group_ids: ["String"],
-    #           allocation_strategy: "BEST_FIT_PROGRESSIVE", # accepts BEST_FIT_PROGRESSIVE, SPOT_CAPACITY_OPTIMIZED
-    #           instance_types: ["String"],
-    #           ec2_key_pair: "String",
-    #           instance_role: "String",
-    #           tags: {
-    #             "String" => "String",
-    #           },
-    #           placement_group: "String",
-    #           bid_percentage: 1,
-    #           launch_template: {
-    #             launch_template_id: "String",
-    #             launch_template_name: "String",
-    #             version: "String",
-    #           },
-    #           ec2_configuration: [
-    #             {
-    #               image_type: "ImageType", # required
-    #               image_id_override: "ImageIdOverride",
-    #               image_kubernetes_version: "KubernetesVersion",
-    #             },
-    #           ],
-    #           update_to_latest_image_version: false,
-    #           type: "EC2", # accepts EC2, SPOT, FARGATE, FARGATE_SPOT
-    #           image_id: "String",
-    #         },
-    #         service_role: "String",
-    #         update_policy: {
-    #           terminate_jobs_on_update: false,
-    #           job_execution_timeout_minutes: 1,
-    #         },
-    #       }
     #
     # @!attribute [rw] compute_environment
     #   The name or full Amazon Resource Name (ARN) of the compute
@@ -8035,22 +6304,6 @@ module Aws::Batch
 
     # Contains the parameters for `UpdateJobQueue`.
     #
-    # @note When making an API call, you may pass UpdateJobQueueRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_queue: "String", # required
-    #         state: "ENABLED", # accepts ENABLED, DISABLED
-    #         scheduling_policy_arn: "String",
-    #         priority: 1,
-    #         compute_environment_order: [
-    #           {
-    #             order: 1, # required
-    #             compute_environment: "String", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] job_queue
     #   The name or the Amazon Resource Name (ARN) of the job queue.
     #   @return [String]
@@ -8137,14 +6390,6 @@ module Aws::Batch
     #
     # [1]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
     #
-    # @note When making an API call, you may pass UpdatePolicy
-    #   data as a hash:
-    #
-    #       {
-    #         terminate_jobs_on_update: false,
-    #         job_execution_timeout_minutes: 1,
-    #       }
-    #
     # @!attribute [rw] terminate_jobs_on_update
     #   Specifies whether jobs are automatically terminated when the
     #   computer environment infrastructure is updated. The default value is
@@ -8166,23 +6411,6 @@ module Aws::Batch
     end
 
     # Contains the parameters for `UpdateSchedulingPolicy`.
-    #
-    # @note When making an API call, you may pass UpdateSchedulingPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "String", # required
-    #         fairshare_policy: {
-    #           share_decay_seconds: 1,
-    #           compute_reservation: 1,
-    #           share_distribution: [
-    #             {
-    #               share_identifier: "String", # required
-    #               weight_factor: 1.0,
-    #             },
-    #           ],
-    #         },
-    #       }
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the scheduling policy to update.
@@ -8206,26 +6434,6 @@ module Aws::Batch
     class UpdateSchedulingPolicyResponse < Aws::EmptyStructure; end
 
     # A data volume that's used in a job's container properties.
-    #
-    # @note When making an API call, you may pass Volume
-    #   data as a hash:
-    #
-    #       {
-    #         host: {
-    #           source_path: "String",
-    #         },
-    #         name: "String",
-    #         efs_volume_configuration: {
-    #           file_system_id: "String", # required
-    #           root_directory: "String",
-    #           transit_encryption: "ENABLED", # accepts ENABLED, DISABLED
-    #           transit_encryption_port: 1,
-    #           authorization_config: {
-    #             access_point_id: "String",
-    #             iam: "ENABLED", # accepts ENABLED, DISABLED
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] host
     #   The contents of the `host` parameter determine whether your data

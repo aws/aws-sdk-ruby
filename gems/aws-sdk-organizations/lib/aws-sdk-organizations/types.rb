@@ -25,13 +25,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AcceptHandshakeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         handshake_id: "HandshakeId", # required
-    #       }
-    #
     # @!attribute [rw] handshake_id
     #   The unique identifier (ID) of the handshake that you want to accept.
     #
@@ -267,14 +260,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AttachPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy_id: "PolicyId", # required
-    #         target_id: "PolicyTargetId", # required
-    #       }
-    #
     # @!attribute [rw] policy_id
     #   The unique identifier (ID) of the policy that you want to attach to
     #   the target. You can get the ID for the policy by calling the
@@ -323,13 +308,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CancelHandshakeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         handshake_id: "HandshakeId", # required
-    #       }
-    #
     # @!attribute [rw] handshake_id
     #   The unique identifier (ID) of the handshake that you want to cancel.
     #   You can get the ID from the ListHandshakesForOrganization operation.
@@ -411,13 +389,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CloseAccountRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   Retrieves the Amazon Web Services account Id for the current
     #   `CloseAccount` API request.
@@ -657,22 +628,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAccountRequest
-    #   data as a hash:
-    #
-    #       {
-    #         email: "Email", # required
-    #         account_name: "CreateAccountName", # required
-    #         role_name: "RoleName",
-    #         iam_user_access_to_billing: "ALLOW", # accepts ALLOW, DENY
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] email
     #   The email address of the owner to assign to the new member account.
     #   This email address must not already be associated with another
@@ -957,22 +912,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateGovCloudAccountRequest
-    #   data as a hash:
-    #
-    #       {
-    #         email: "Email", # required
-    #         account_name: "CreateAccountName", # required
-    #         role_name: "RoleName",
-    #         iam_user_access_to_billing: "ALLOW", # accepts ALLOW, DENY
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] email
     #   Specifies the email address of the owner to assign to the new member
     #   account in the commercial Region. This email address must not
@@ -1116,13 +1055,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateOrganizationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         feature_set: "ALL", # accepts ALL, CONSOLIDATED_BILLING
-    #       }
-    #
     # @!attribute [rw] feature_set
     #   Specifies the feature set supported by the new organization. Each
     #   feature set supports different levels of functionality.
@@ -1168,20 +1100,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateOrganizationalUnitRequest
-    #   data as a hash:
-    #
-    #       {
-    #         parent_id: "ParentId", # required
-    #         name: "OrganizationalUnitName", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] parent_id
     #   The unique identifier (ID) of the parent root or OU that you want to
     #   create the new OU in.
@@ -1247,22 +1165,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreatePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         content: "PolicyContent", # required
-    #         description: "PolicyDescription", # required
-    #         name: "PolicyName", # required
-    #         type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY, AISERVICES_OPT_OUT_POLICY
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] content
     #   The policy text content to add to the new policy. The text that you
     #   supply must adhere to the rules of the policy type you specify in
@@ -1346,13 +1248,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeclineHandshakeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         handshake_id: "HandshakeId", # required
-    #       }
-    #
     # @!attribute [rw] handshake_id
     #   The unique identifier (ID) of the handshake that you want to
     #   decline. You can get the ID from the ListHandshakesForAccount
@@ -1465,13 +1360,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteOrganizationalUnitRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organizational_unit_id: "OrganizationalUnitId", # required
-    #       }
-    #
     # @!attribute [rw] organizational_unit_id
     #   The unique identifier (ID) of the organizational unit that you want
     #   to delete. You can get the ID from the
@@ -1496,13 +1384,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeletePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy_id: "PolicyId", # required
-    #       }
-    #
     # @!attribute [rw] policy_id
     #   The unique identifier (ID) of the policy that you want to delete.
     #   You can get the ID from the ListPolicies or ListPoliciesForTarget
@@ -1525,14 +1406,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeregisterDelegatedAdministratorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId", # required
-    #         service_principal: "ServicePrincipal", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The account ID number of the member account in the organization that
     #   you want to deregister as a delegated administrator.
@@ -1558,13 +1431,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAccountRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The unique identifier (ID) of the Amazon Web Services account that
     #   you want information about. You can get the ID from the ListAccounts
@@ -1598,13 +1464,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeCreateAccountStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         create_account_request_id: "CreateAccountRequestId", # required
-    #       }
-    #
     # @!attribute [rw] create_account_request_id
     #   Specifies the `Id` value that uniquely identifies the
     #   `CreateAccount` request. You can get the value from the
@@ -1641,14 +1500,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEffectivePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy_type: "TAG_POLICY", # required, accepts TAG_POLICY, BACKUP_POLICY, AISERVICES_OPT_OUT_POLICY
-    #         target_id: "PolicyTargetId",
-    #       }
-    #
     # @!attribute [rw] policy_type
     #   The type of policy that you want information about. You can specify
     #   one of the following values:
@@ -1693,13 +1544,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeHandshakeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         handshake_id: "HandshakeId", # required
-    #       }
-    #
     # @!attribute [rw] handshake_id
     #   The unique identifier (ID) of the handshake that you want
     #   information about. You can get the ID from the original call to
@@ -1752,13 +1596,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeOrganizationalUnitRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organizational_unit_id: "OrganizationalUnitId", # required
-    #       }
-    #
     # @!attribute [rw] organizational_unit_id
     #   The unique identifier (ID) of the organizational unit that you want
     #   details about. You can get the ID from the
@@ -1795,13 +1632,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy_id: "PolicyId", # required
-    #       }
-    #
     # @!attribute [rw] policy_id
     #   The unique identifier (ID) of the policy that you want details
     #   about. You can get the ID from the ListPolicies or
@@ -1862,14 +1692,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DetachPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy_id: "PolicyId", # required
-    #         target_id: "PolicyTargetId", # required
-    #       }
-    #
     # @!attribute [rw] policy_id
     #   The unique identifier (ID) of the policy you want to detach. You can
     #   get the ID from the ListPolicies or ListPoliciesForTarget
@@ -1917,13 +1739,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisableAWSServiceAccessRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_principal: "ServicePrincipal", # required
-    #       }
-    #
     # @!attribute [rw] service_principal
     #   The service principal name of the Amazon Web Services service for
     #   which you want to disable integration with your organization. This
@@ -1939,14 +1754,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisablePolicyTypeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         root_id: "RootId", # required
-    #         policy_type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY, AISERVICES_OPT_OUT_POLICY
-    #       }
-    #
     # @!attribute [rw] root_id
     #   The unique identifier (ID) of the root in which you want to disable
     #   a policy type. You can get the ID from the ListRoots operation.
@@ -2119,13 +1926,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass EnableAWSServiceAccessRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_principal: "ServicePrincipal", # required
-    #       }
-    #
     # @!attribute [rw] service_principal
     #   The service principal name of the Amazon Web Services service for
     #   which you want to enable integration with your organization. This is
@@ -2141,8 +1941,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnableAllFeaturesRequest AWS API Documentation
     #
     class EnableAllFeaturesRequest < Aws::EmptyStructure; end
@@ -2160,14 +1958,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass EnablePolicyTypeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         root_id: "RootId", # required
-    #         policy_type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY, AISERVICES_OPT_OUT_POLICY
-    #       }
-    #
     # @!attribute [rw] root_id
     #   The unique identifier (ID) of the root in which you want to enable a
     #   policy type. You can get the ID from the ListRoots operation.
@@ -2471,14 +2261,6 @@ module Aws::Organizations
     # Specifies the criteria that are used to select the handshakes for the
     # operation.
     #
-    # @note When making an API call, you may pass HandshakeFilter
-    #   data as a hash:
-    #
-    #       {
-    #         action_type: "INVITE", # accepts INVITE, ENABLE_ALL_FEATURES, APPROVE_ALL_FEATURES, ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE
-    #         parent_handshake_id: "HandshakeId",
-    #       }
-    #
     # @!attribute [rw] action_type
     #   Specifies the type of handshake action.
     #
@@ -2524,14 +2306,6 @@ module Aws::Organizations
     end
 
     # Identifies a participant in a handshake.
-    #
-    # @note When making an API call, you may pass HandshakeParty
-    #   data as a hash:
-    #
-    #       {
-    #         id: "HandshakePartyId", # required
-    #         type: "ACCOUNT", # required, accepts ACCOUNT, ORGANIZATION, EMAIL
-    #       }
     #
     # @!attribute [rw] id
     #   The unique identifier (ID) for the party.
@@ -2712,23 +2486,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass InviteAccountToOrganizationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         target: { # required
-    #           id: "HandshakePartyId", # required
-    #           type: "ACCOUNT", # required, accepts ACCOUNT, ORGANIZATION, EMAIL
-    #         },
-    #         notes: "HandshakeNotes",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] target
     #   The identifier (ID) of the Amazon Web Services account that you want
     #   to invite to join your organization. This is a JSON object that
@@ -2805,14 +2562,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAWSServiceAccessForOrganizationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The parameter for receiving additional results if you receive a
     #   `NextToken` response in a previous request. A `NextToken` response
@@ -2867,15 +2616,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAccountsForParentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         parent_id: "ParentId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] parent_id
     #   The unique identifier (ID) for the parent root or organization unit
     #   (OU) whose accounts you want to list.
@@ -2933,14 +2673,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAccountsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The parameter for receiving additional results if you receive a
     #   `NextToken` response in a previous request. A `NextToken` response
@@ -2992,16 +2724,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListChildrenRequest
-    #   data as a hash:
-    #
-    #       {
-    #         parent_id: "ParentId", # required
-    #         child_type: "ACCOUNT", # required, accepts ACCOUNT, ORGANIZATIONAL_UNIT
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] parent_id
     #   The unique identifier (ID) for the parent root or OU whose children
     #   you want to list.
@@ -3080,15 +2802,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCreateAccountStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         states: ["IN_PROGRESS"], # accepts IN_PROGRESS, SUCCEEDED, FAILED
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] states
     #   A list of one or more states that you want included in the response.
     #   If this parameter isn't present, all requests are included in the
@@ -3149,15 +2862,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDelegatedAdministratorsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_principal: "ServicePrincipal",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] service_principal
     #   Specifies a service principal name. If specified, then the operation
     #   lists the delegated administrators only for the specified service.
@@ -3218,15 +2922,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDelegatedServicesForAccountRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The account ID number of a delegated administrator account in the
     #   organization.
@@ -3284,18 +2979,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListHandshakesForAccountRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter: {
-    #           action_type: "INVITE", # accepts INVITE, ENABLE_ALL_FEATURES, APPROVE_ALL_FEATURES, ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE
-    #           parent_handshake_id: "HandshakeId",
-    #         },
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] filter
     #   Filters the handshakes that you want included in the response. The
     #   default is all types. Use the `ActionType` element to limit the
@@ -3360,18 +3043,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListHandshakesForOrganizationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter: {
-    #           action_type: "INVITE", # accepts INVITE, ENABLE_ALL_FEATURES, APPROVE_ALL_FEATURES, ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE
-    #           parent_handshake_id: "HandshakeId",
-    #         },
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] filter
     #   A filter of the handshakes that you want included in the response.
     #   The default is all types. Use the `ActionType` element to limit the
@@ -3436,15 +3107,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListOrganizationalUnitsForParentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         parent_id: "ParentId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] parent_id
     #   The unique identifier (ID) of the root or OU whose child OUs you
     #   want to list.
@@ -3518,15 +3180,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListParentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         child_id: "ChildId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] child_id
     #   The unique identifier (ID) of the OU or account whose parent
     #   containers you want to list. Don't specify a root.
@@ -3599,16 +3252,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPoliciesForTargetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         target_id: "PolicyTargetId", # required
-    #         filter: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY, AISERVICES_OPT_OUT_POLICY
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] target_id
     #   The unique identifier (ID) of the root, organizational unit, or
     #   account whose policies you want to list.
@@ -3705,15 +3348,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPoliciesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY, AISERVICES_OPT_OUT_POLICY
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] filter
     #   Specifies the type of policy that you want to include in the
     #   response. You must specify one of the following values:
@@ -3788,14 +3422,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRootsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The parameter for receiving additional results if you receive a
     #   `NextToken` response in a previous request. A `NextToken` response
@@ -3847,14 +3473,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_id: "TaggableResourceId", # required
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] resource_id
     #   The ID of the resource with the tags to list.
     #
@@ -3910,15 +3528,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTargetsForPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy_id: "PolicyId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] policy_id
     #   The unique identifier (ID) of the policy whose attachments you want
     #   to know.
@@ -4021,15 +3630,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass MoveAccountRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId", # required
-    #         source_parent_id: "ParentId", # required
-    #         destination_parent_id: "ParentId", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The unique identifier (ID) of the account that you want to move.
     #
@@ -4613,19 +4213,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutResourcePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         content: "ResourcePolicyContent", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] content
     #   If provided, the new content for the resource policy. The text must
     #   be correctly formatted JSON that complies with the syntax for the
@@ -4679,14 +4266,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RegisterDelegatedAdministratorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId", # required
-    #         service_principal: "ServicePrincipal", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The account ID number of the member account in the organization to
     #   register as a delegated administrator.
@@ -4706,13 +4285,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RemoveAccountFromOrganizationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The unique identifier (ID) of the member account that you want to
     #   remove from the organization.
@@ -4903,14 +4475,6 @@ module Aws::Organizations
     #
     # * Policy
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The key identifier, or name, of the tag.
     #   @return [String]
@@ -4930,19 +4494,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_id: "TaggableResourceId", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_id
     #   The ID of the resource to add a tag to.
     #
@@ -5037,14 +4588,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_id: "TaggableResourceId", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_id
     #   The ID of the resource to remove a tag from.
     #
@@ -5075,14 +4618,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateOrganizationalUnitRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organizational_unit_id: "OrganizationalUnitId", # required
-    #         name: "OrganizationalUnitName",
-    #       }
-    #
     # @!attribute [rw] organizational_unit_id
     #   The unique identifier (ID) of the OU that you want to rename. You
     #   can get the ID from the ListOrganizationalUnitsForParent operation.
@@ -5131,16 +4666,6 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdatePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy_id: "PolicyId", # required
-    #         name: "PolicyName",
-    #         description: "PolicyDescription",
-    #         content: "PolicyContent",
-    #       }
-    #
     # @!attribute [rw] policy_id
     #   The unique identifier (ID) of the policy that you want to update.
     #

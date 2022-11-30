@@ -22,16 +22,6 @@ module Aws::IoTJobsDataPlane
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeJobExecutionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "DescribeJobExecutionJobId", # required
-    #         thing_name: "ThingName", # required
-    #         include_job_document: false,
-    #         execution_number: 1,
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The unique identifier assigned to this job when it was created.
     #   @return [String]
@@ -71,13 +61,6 @@ module Aws::IoTJobsDataPlane
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetPendingJobExecutionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         thing_name: "ThingName", # required
-    #       }
-    #
     # @!attribute [rw] thing_name
     #   The name of the thing that is executing the job.
     #   @return [String]
@@ -296,17 +279,6 @@ module Aws::IoTJobsDataPlane
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartNextPendingJobExecutionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         thing_name: "ThingName", # required
-    #         status_details: {
-    #           "DetailsKey" => "DetailsValue",
-    #         },
-    #         step_timeout_in_minutes: 1,
-    #       }
-    #
     # @!attribute [rw] thing_name
     #   The name of the thing associated with the device.
     #   @return [String]
@@ -374,23 +346,6 @@ module Aws::IoTJobsDataPlane
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateJobExecutionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #         thing_name: "ThingName", # required
-    #         status: "QUEUED", # required, accepts QUEUED, IN_PROGRESS, SUCCEEDED, FAILED, TIMED_OUT, REJECTED, REMOVED, CANCELED
-    #         status_details: {
-    #           "DetailsKey" => "DetailsValue",
-    #         },
-    #         step_timeout_in_minutes: 1,
-    #         expected_version: 1,
-    #         include_job_execution_state: false,
-    #         include_job_document: false,
-    #         execution_number: 1,
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The unique identifier assigned to this job when it was created.
     #   @return [String]

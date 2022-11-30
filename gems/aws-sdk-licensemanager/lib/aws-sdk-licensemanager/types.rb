@@ -10,13 +10,6 @@
 module Aws::LicenseManager
   module Types
 
-    # @note When making an API call, you may pass AcceptGrantRequest
-    #   data as a hash:
-    #
-    #       {
-    #         grant_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] grant_arn
     #   Amazon Resource Name (ARN) of the grant.
     #   @return [String]
@@ -94,14 +87,6 @@ module Aws::LicenseManager
 
     # Details about a borrow configuration.
     #
-    # @note When making an API call, you may pass BorrowConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         allow_early_check_in: false, # required
-    #         max_time_to_live_in_minutes: 1, # required
-    #       }
-    #
     # @!attribute [rw] allow_early_check_in
     #   Indicates whether early check-ins are allowed.
     #   @return [Boolean]
@@ -119,14 +104,6 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CheckInLicenseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         license_consumption_token: "String", # required
-    #         beneficiary: "String",
-    #       }
-    #
     # @!attribute [rw] license_consumption_token
     #   License consumption token.
     #   @return [String]
@@ -148,29 +125,6 @@ module Aws::LicenseManager
     #
     class CheckInLicenseResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass CheckoutBorrowLicenseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         license_arn: "Arn", # required
-    #         entitlements: [ # required
-    #           {
-    #             name: "String", # required
-    #             value: "String",
-    #             unit: "Count", # required, accepts Count, None, Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second
-    #           },
-    #         ],
-    #         digital_signature_method: "JWT_PS384", # required, accepts JWT_PS384
-    #         node_id: "String",
-    #         checkout_metadata: [
-    #           {
-    #             name: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #         client_token: "ClientToken", # required
-    #       }
-    #
     # @!attribute [rw] license_arn
     #   Amazon Resource Name (ARN) of the license. The license must use the
     #   borrow consumption configuration.
@@ -263,25 +217,6 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CheckoutLicenseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         product_sku: "String", # required
-    #         checkout_type: "PROVISIONAL", # required, accepts PROVISIONAL, PERPETUAL
-    #         key_fingerprint: "String", # required
-    #         entitlements: [ # required
-    #           {
-    #             name: "String", # required
-    #             value: "String",
-    #             unit: "Count", # required, accepts Count, None, Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second
-    #           },
-    #         ],
-    #         client_token: "ClientToken", # required
-    #         beneficiary: "String",
-    #         node_id: "String",
-    #       }
-    #
     # @!attribute [rw] product_sku
     #   Product SKU.
     #   @return [String]
@@ -406,20 +341,6 @@ module Aws::LicenseManager
 
     # Details about a consumption configuration.
     #
-    # @note When making an API call, you may pass ConsumptionConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         renew_type: "None", # accepts None, Weekly, Monthly
-    #         provisional_configuration: {
-    #           max_time_to_live_in_minutes: 1, # required
-    #         },
-    #         borrow_configuration: {
-    #           allow_early_check_in: false, # required
-    #           max_time_to_live_in_minutes: 1, # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] renew_type
     #   Renewal frequency.
     #   @return [String]
@@ -442,18 +363,6 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateGrantRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken", # required
-    #         grant_name: "String", # required
-    #         license_arn: "Arn", # required
-    #         principals: ["Arn"], # required
-    #         home_region: "String", # required
-    #         allowed_operations: ["CreateGrant"], # required, accepts CreateGrant, CheckoutLicense, CheckoutBorrowLicense, CheckInLicense, ExtendConsumptionLicense, ListPurchasedLicenses, CreateToken
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
@@ -515,19 +424,6 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateGrantVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken", # required
-    #         grant_arn: "Arn", # required
-    #         grant_name: "String",
-    #         allowed_operations: ["CreateGrant"], # accepts CreateGrant, CheckoutLicense, CheckoutBorrowLicense, CheckInLicense, ExtendConsumptionLicense, ListPurchasedLicenses, CreateToken
-    #         status: "PENDING_WORKFLOW", # accepts PENDING_WORKFLOW, PENDING_ACCEPT, REJECTED, ACTIVE, FAILED_WORKFLOW, DELETED, PENDING_DELETE, DISABLED, WORKFLOW_COMPLETED
-    #         status_reason: "StatusReasonMessage",
-    #         source_version: "String",
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
@@ -593,37 +489,6 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateLicenseConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #         description: "String",
-    #         license_counting_type: "vCPU", # required, accepts vCPU, Instance, Core, Socket
-    #         license_count: 1,
-    #         license_count_hard_limit: false,
-    #         license_rules: ["String"],
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #         disassociate_when_not_found: false,
-    #         product_information_list: [
-    #           {
-    #             resource_type: "String", # required
-    #             product_information_filter_list: [ # required
-    #               {
-    #                 product_information_filter_name: "String", # required
-    #                 product_information_filter_value: ["String"],
-    #                 product_information_filter_comparator: "String", # required
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   Name of the license configuration.
     #   @return [String]
@@ -709,19 +574,6 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateLicenseConversionTaskForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         source_license_context: { # required
-    #           usage_operation: "UsageOperation",
-    #         },
-    #         destination_license_context: { # required
-    #           usage_operation: "UsageOperation",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   Amazon Resource Name (ARN) of the resource you are converting the
     #   license type for.
@@ -771,29 +623,6 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateLicenseManagerReportGeneratorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         report_generator_name: "ReportGeneratorName", # required
-    #         type: ["LicenseConfigurationSummaryReport"], # required, accepts LicenseConfigurationSummaryReport, LicenseConfigurationUsageReport
-    #         report_context: { # required
-    #           license_configuration_arns: ["Arn"], # required
-    #         },
-    #         report_frequency: { # required
-    #           value: 1,
-    #           period: "DAY", # accepts DAY, WEEK, MONTH
-    #         },
-    #         client_token: "ClientRequestToken", # required
-    #         description: "String",
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] report_generator_name
     #   Name of the report generator.
     #   @return [String]
@@ -858,52 +687,6 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateLicenseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         license_name: "String", # required
-    #         product_name: "String", # required
-    #         product_sku: "String", # required
-    #         issuer: { # required
-    #           name: "String", # required
-    #           sign_key: "String",
-    #         },
-    #         home_region: "String", # required
-    #         validity: { # required
-    #           begin: "ISO8601DateTime", # required
-    #           end: "ISO8601DateTime",
-    #         },
-    #         entitlements: [ # required
-    #           {
-    #             name: "String", # required
-    #             value: "String",
-    #             max_count: 1,
-    #             overage: false,
-    #             unit: "Count", # required, accepts Count, None, Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second
-    #             allow_check_in: false,
-    #           },
-    #         ],
-    #         beneficiary: "String", # required
-    #         consumption_configuration: { # required
-    #           renew_type: "None", # accepts None, Weekly, Monthly
-    #           provisional_configuration: {
-    #             max_time_to_live_in_minutes: 1, # required
-    #           },
-    #           borrow_configuration: {
-    #             allow_early_check_in: false, # required
-    #             max_time_to_live_in_minutes: 1, # required
-    #           },
-    #         },
-    #         license_metadata: [
-    #           {
-    #             name: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #         client_token: "ClientToken", # required
-    #       }
-    #
     # @!attribute [rw] license_name
     #   License name.
     #   @return [String]
@@ -992,53 +775,6 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateLicenseVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         license_arn: "Arn", # required
-    #         license_name: "String", # required
-    #         product_name: "String", # required
-    #         issuer: { # required
-    #           name: "String", # required
-    #           sign_key: "String",
-    #         },
-    #         home_region: "String", # required
-    #         validity: { # required
-    #           begin: "ISO8601DateTime", # required
-    #           end: "ISO8601DateTime",
-    #         },
-    #         license_metadata: [
-    #           {
-    #             name: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #         entitlements: [ # required
-    #           {
-    #             name: "String", # required
-    #             value: "String",
-    #             max_count: 1,
-    #             overage: false,
-    #             unit: "Count", # required, accepts Count, None, Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second
-    #             allow_check_in: false,
-    #           },
-    #         ],
-    #         consumption_configuration: { # required
-    #           renew_type: "None", # accepts None, Weekly, Monthly
-    #           provisional_configuration: {
-    #             max_time_to_live_in_minutes: 1, # required
-    #           },
-    #           borrow_configuration: {
-    #             allow_early_check_in: false, # required
-    #             max_time_to_live_in_minutes: 1, # required
-    #           },
-    #         },
-    #         status: "AVAILABLE", # required, accepts AVAILABLE, PENDING_AVAILABLE, DEACTIVATED, SUSPENDED, EXPIRED, PENDING_DELETE, DELETED
-    #         client_token: "ClientToken", # required
-    #         source_version: "String",
-    #       }
-    #
     # @!attribute [rw] license_arn
     #   Amazon Resource Name (ARN) of the license.
     #   @return [String]
@@ -1132,17 +868,6 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateTokenRequest
-    #   data as a hash:
-    #
-    #       {
-    #         license_arn: "Arn", # required
-    #         role_arns: ["Arn"],
-    #         expiration_in_days: 1,
-    #         token_properties: ["String"],
-    #         client_token: "ClientToken", # required
-    #       }
-    #
     # @!attribute [rw] license_arn
     #   Amazon Resource Name (ARN) of the license. The ARN is mapped to the
     #   aud claim of the JWT token.
@@ -1203,14 +928,6 @@ module Aws::LicenseManager
 
     # Describes a time range, in ISO8601-UTC format.
     #
-    # @note When making an API call, you may pass DatetimeRange
-    #   data as a hash:
-    #
-    #       {
-    #         begin: "ISO8601DateTime", # required
-    #         end: "ISO8601DateTime",
-    #       }
-    #
     # @!attribute [rw] begin
     #   Start of the time range.
     #   @return [String]
@@ -1228,15 +945,6 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteGrantRequest
-    #   data as a hash:
-    #
-    #       {
-    #         grant_arn: "Arn", # required
-    #         status_reason: "StatusReasonMessage",
-    #         version: "String", # required
-    #       }
-    #
     # @!attribute [rw] grant_arn
     #   Amazon Resource Name (ARN) of the grant.
     #   @return [String]
@@ -1281,13 +989,6 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteLicenseConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         license_configuration_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] license_configuration_arn
     #   ID of the license configuration.
     #   @return [String]
@@ -1304,13 +1005,6 @@ module Aws::LicenseManager
     #
     class DeleteLicenseConfigurationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteLicenseManagerReportGeneratorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         license_manager_report_generator_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] license_manager_report_generator_arn
     #   Amazon Resource Name (ARN) of the report generator to be deleted.
     #   @return [String]
@@ -1327,14 +1021,6 @@ module Aws::LicenseManager
     #
     class DeleteLicenseManagerReportGeneratorResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteLicenseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         license_arn: "Arn", # required
-    #         source_version: "String", # required
-    #       }
-    #
     # @!attribute [rw] license_arn
     #   Amazon Resource Name (ARN) of the license.
     #   @return [String]
@@ -1369,13 +1055,6 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteTokenRequest
-    #   data as a hash:
-    #
-    #       {
-    #         token_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] token_id
     #   Token ID.
     #   @return [String]
@@ -1393,18 +1072,6 @@ module Aws::LicenseManager
     class DeleteTokenResponse < Aws::EmptyStructure; end
 
     # Describes a resource entitled for use with a license.
-    #
-    # @note When making an API call, you may pass Entitlement
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #         value: "String",
-    #         max_count: 1,
-    #         overage: false,
-    #         unit: "Count", # required, accepts Count, None, Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second
-    #         allow_check_in: false,
-    #       }
     #
     # @!attribute [rw] name
     #   Entitlement name.
@@ -1444,15 +1111,6 @@ module Aws::LicenseManager
     end
 
     # Data associated with an entitlement resource.
-    #
-    # @note When making an API call, you may pass EntitlementData
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #         value: "String",
-    #         unit: "Count", # required, accepts Count, None, Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second
-    #       }
     #
     # @!attribute [rw] name
     #   Entitlement data name.
@@ -1518,14 +1176,6 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ExtendLicenseConsumptionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         license_consumption_token: "String", # required
-    #         dry_run: false,
-    #       }
-    #
     # @!attribute [rw] license_consumption_token
     #   License consumption token.
     #   @return [String]
@@ -1583,14 +1233,6 @@ module Aws::LicenseManager
     # results from a describe operation. Filters can be used to match a set
     # of resources by specific criteria, such as tags, attributes, or IDs.
     #
-    # @note When making an API call, you may pass Filter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "FilterName",
-    #         values: ["FilterValue"],
-    #       }
-    #
     # @!attribute [rw] name
     #   Name of the filter. Filter names are case-sensitive.
     #   @return [String]
@@ -1621,14 +1263,6 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAccessTokenRequest
-    #   data as a hash:
-    #
-    #       {
-    #         token: "TokenString", # required
-    #         token_properties: ["String"],
-    #       }
-    #
     # @!attribute [rw] token
     #   Refresh token, encoded as a JWT token.
     #   @return [String]
@@ -1658,14 +1292,6 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetGrantRequest
-    #   data as a hash:
-    #
-    #       {
-    #         grant_arn: "Arn", # required
-    #         version: "String",
-    #       }
-    #
     # @!attribute [rw] grant_arn
     #   Amazon Resource Name (ARN) of the grant.
     #   @return [String]
@@ -1695,13 +1321,6 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLicenseConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         license_configuration_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] license_configuration_arn
     #   Amazon Resource Name (ARN) of the license configuration.
     #   @return [String]
@@ -1806,13 +1425,6 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLicenseConversionTaskRequest
-    #   data as a hash:
-    #
-    #       {
-    #         license_conversion_task_id: "LicenseConversionTaskId", # required
-    #       }
-    #
     # @!attribute [rw] license_conversion_task_id
     #   ID of the license type conversion task to retrieve information on.
     #   @return [String]
@@ -1878,13 +1490,6 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLicenseManagerReportGeneratorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         license_manager_report_generator_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] license_manager_report_generator_arn
     #   Amazon Resource Name (ARN) of the report generator.
     #   @return [String]
@@ -1910,14 +1515,6 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLicenseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         license_arn: "Arn", # required
-    #         version: "String",
-    #       }
-    #
     # @!attribute [rw] license_arn
     #   Amazon Resource Name (ARN) of the license.
     #   @return [String]
@@ -1947,13 +1544,6 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLicenseUsageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         license_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] license_arn
     #   Amazon Resource Name (ARN) of the license.
     #   @return [String]
@@ -1978,8 +1568,6 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/GetServiceSettingsRequest AWS API Documentation
     #
     class GetServiceSettingsRequest < Aws::EmptyStructure; end
@@ -2196,15 +1784,6 @@ module Aws::LicenseManager
 
     # An inventory filter.
     #
-    # @note When making an API call, you may pass InventoryFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #         condition: "EQUALS", # required, accepts EQUALS, NOT_EQUALS, BEGINS_WITH, CONTAINS
-    #         value: "String",
-    #       }
-    #
     # @!attribute [rw] name
     #   Name of the filter.
     #   @return [String]
@@ -2228,14 +1807,6 @@ module Aws::LicenseManager
     end
 
     # Details about the issuer of a license.
-    #
-    # @note When making an API call, you may pass Issuer
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #         sign_key: "String",
-    #       }
     #
     # @!attribute [rw] name
     #   Issuer name.
@@ -2536,13 +2107,6 @@ module Aws::LicenseManager
 
     # Information about a license type conversion task.
     #
-    # @note When making an API call, you may pass LicenseConversionContext
-    #   data as a hash:
-    #
-    #       {
-    #         usage_operation: "UsageOperation",
-    #       }
-    #
     # @!attribute [rw] usage_operation
     #   The Usage operation value that corresponds to the license type you
     #   are converting your resource from. For more information about which
@@ -2670,14 +2234,6 @@ module Aws::LicenseManager
 
     # Details for associating a license configuration with a resource.
     #
-    # @note When making an API call, you may pass LicenseSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         license_configuration_arn: "String", # required
-    #         ami_association_scope: "String",
-    #       }
-    #
     # @!attribute [rw] license_configuration_arn
     #   Amazon Resource Name (ARN) of the license configuration.
     #   @return [String]
@@ -2723,15 +2279,6 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAssociationsForLicenseConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         license_configuration_arn: "String", # required
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] license_configuration_arn
     #   Amazon Resource Name (ARN) of a license configuration.
     #   @return [String]
@@ -2771,21 +2318,6 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDistributedGrantsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         grant_arns: ["Arn"],
-    #         filters: [
-    #           {
-    #             name: "FilterName",
-    #             values: ["FilterValue"],
-    #           },
-    #         ],
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] grant_arns
     #   Amazon Resource Names (ARNs) of the grants.
     #   @return [Array<String>]
@@ -2840,15 +2372,6 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFailuresForLicenseConfigurationOperationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         license_configuration_arn: "String", # required
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] license_configuration_arn
     #   Amazon Resource Name of the license configuration.
     #   @return [String]
@@ -2888,21 +2411,6 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListLicenseConfigurationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         license_configuration_arns: ["String"],
-    #         max_results: 1,
-    #         next_token: "String",
-    #         filters: [
-    #           {
-    #             name: "FilterName",
-    #             values: ["FilterValue"],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] license_configuration_arns
     #   Amazon Resource Names (ARN) of the license configurations.
     #   @return [Array<String>]
@@ -2960,20 +2468,6 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListLicenseConversionTasksRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "String",
-    #         max_results: 1,
-    #         filters: [
-    #           {
-    #             name: "FilterName",
-    #             values: ["FilterValue"],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] next_token
     #   Token for the next set of results.
     #   @return [String]
@@ -3014,20 +2508,6 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListLicenseManagerReportGeneratorsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             name: "FilterName",
-    #             values: ["FilterValue"],
-    #           },
-    #         ],
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] filters
     #   Filters to scope the results. The following filters are supported:
     #
@@ -3072,15 +2552,6 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListLicenseSpecificationsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   Amazon Resource Name (ARN) of a resource that has an associated
     #   license configuration.
@@ -3121,15 +2592,6 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListLicenseVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         license_arn: "Arn", # required
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] license_arn
     #   Amazon Resource Name (ARN) of the license.
     #   @return [String]
@@ -3169,21 +2631,6 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListLicensesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         license_arns: ["Arn"],
-    #         filters: [
-    #           {
-    #             name: "FilterName",
-    #             values: ["FilterValue"],
-    #           },
-    #         ],
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] license_arns
     #   Amazon Resource Names (ARNs) of the licenses.
     #   @return [Array<String>]
@@ -3236,21 +2683,6 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListReceivedGrantsForOrganizationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         license_arn: "Arn", # required
-    #         filters: [
-    #           {
-    #             name: "FilterName",
-    #             values: ["FilterValue"],
-    #           },
-    #         ],
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] license_arn
     #   The Amazon Resource Name (ARN) of the received license.
     #   @return [String]
@@ -3299,21 +2731,6 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListReceivedGrantsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         grant_arns: ["Arn"],
-    #         filters: [
-    #           {
-    #             name: "FilterName",
-    #             values: ["FilterValue"],
-    #           },
-    #         ],
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] grant_arns
     #   Amazon Resource Names (ARNs) of the grants.
     #   @return [Array<String>]
@@ -3368,20 +2785,6 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListReceivedLicensesForOrganizationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             name: "FilterName",
-    #             values: ["FilterValue"],
-    #           },
-    #         ],
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] filters
     #   Filters to scope the results. The following filters are supported:
     #
@@ -3425,21 +2828,6 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListReceivedLicensesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         license_arns: ["Arn"],
-    #         filters: [
-    #           {
-    #             name: "FilterName",
-    #             values: ["FilterValue"],
-    #           },
-    #         ],
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] license_arns
     #   Amazon Resource Names (ARNs) of the licenses.
     #   @return [Array<String>]
@@ -3494,21 +2882,6 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListResourceInventoryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             condition: "EQUALS", # required, accepts EQUALS, NOT_EQUALS, BEGINS_WITH, CONTAINS
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] max_results
     #   Maximum number of results to return in a single call.
     #   @return [Integer]
@@ -3570,13 +2943,6 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   Amazon Resource Name (ARN) of the license configuration.
     #   @return [String]
@@ -3601,21 +2967,6 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTokensRequest
-    #   data as a hash:
-    #
-    #       {
-    #         token_ids: ["String"],
-    #         filters: [
-    #           {
-    #             name: "FilterName",
-    #             values: ["FilterValue"],
-    #           },
-    #         ],
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] token_ids
     #   Token IDs.
     #   @return [Array<String>]
@@ -3664,21 +3015,6 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListUsageForLicenseConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         license_configuration_arn: "String", # required
-    #         max_results: 1,
-    #         next_token: "String",
-    #         filters: [
-    #           {
-    #             name: "FilterName",
-    #             values: ["FilterValue"],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] license_configuration_arn
     #   Amazon Resource Name (ARN) of the license configuration.
     #   @return [String]
@@ -3755,14 +3091,6 @@ module Aws::LicenseManager
 
     # Describes key/value pairs.
     #
-    # @note When making an API call, you may pass Metadata
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String",
-    #         value: "String",
-    #       }
-    #
     # @!attribute [rw] name
     #   The key name.
     #   @return [String]
@@ -3796,13 +3124,6 @@ module Aws::LicenseManager
 
     # Configuration information for Organizations.
     #
-    # @note When making an API call, you may pass OrganizationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         enable_integration: false, # required
-    #       }
-    #
     # @!attribute [rw] enable_integration
     #   Enables Organizations integration.
     #   @return [Boolean]
@@ -3816,20 +3137,6 @@ module Aws::LicenseManager
     end
 
     # Describes product information for a license configuration.
-    #
-    # @note When making an API call, you may pass ProductInformation
-    #   data as a hash:
-    #
-    #       {
-    #         resource_type: "String", # required
-    #         product_information_filter_list: [ # required
-    #           {
-    #             product_information_filter_name: "String", # required
-    #             product_information_filter_value: ["String"],
-    #             product_information_filter_comparator: "String", # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] resource_type
     #   Resource type. The possible values are `SSM_MANAGED` \| `RDS`.
@@ -3902,15 +3209,6 @@ module Aws::LicenseManager
 
     # Describes product information filters.
     #
-    # @note When making an API call, you may pass ProductInformationFilter
-    #   data as a hash:
-    #
-    #       {
-    #         product_information_filter_name: "String", # required
-    #         product_information_filter_value: ["String"],
-    #         product_information_filter_comparator: "String", # required
-    #       }
-    #
     # @!attribute [rw] product_information_filter_name
     #   Filter name.
     #   @return [String]
@@ -3934,13 +3232,6 @@ module Aws::LicenseManager
     end
 
     # Details about a provisional configuration.
-    #
-    # @note When making an API call, you may pass ProvisionalConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         max_time_to_live_in_minutes: 1, # required
-    #       }
     #
     # @!attribute [rw] max_time_to_live_in_minutes
     #   Maximum time for the provisional configuration, in minutes.
@@ -4008,13 +3299,6 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RejectGrantRequest
-    #   data as a hash:
-    #
-    #       {
-    #         grant_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] grant_arn
     #   Amazon Resource Name (ARN) of the grant.
     #   @return [String]
@@ -4051,13 +3335,6 @@ module Aws::LicenseManager
 
     # Details of the license configuration that this generator reports on.
     #
-    # @note When making an API call, you may pass ReportContext
-    #   data as a hash:
-    #
-    #       {
-    #         license_configuration_arns: ["Arn"], # required
-    #       }
-    #
     # @!attribute [rw] license_configuration_arns
     #   Amazon Resource Name (ARN) of the license configuration that this
     #   generator reports on.
@@ -4072,14 +3349,6 @@ module Aws::LicenseManager
     end
 
     # Details about how frequently reports are generated.
-    #
-    # @note When making an API call, you may pass ReportFrequency
-    #   data as a hash:
-    #
-    #       {
-    #         value: 1,
-    #         period: "DAY", # accepts DAY, WEEK, MONTH
-    #       }
     #
     # @!attribute [rw] value
     #   Number of times within the frequency period that a report is
@@ -4276,14 +3545,6 @@ module Aws::LicenseManager
 
     # Details about a tag for a license configuration.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "String",
-    #         value: "String",
-    #       }
-    #
     # @!attribute [rw] key
     #   Tag key.
     #   @return [String]
@@ -4301,19 +3562,6 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #         tags: [ # required
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   Amazon Resource Name (ARN) of the license configuration.
     #   @return [String]
@@ -4392,14 +3640,6 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #         tag_keys: ["String"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   Amazon Resource Name (ARN) of the license configuration.
     #   @return [String]
@@ -4421,32 +3661,6 @@ module Aws::LicenseManager
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateLicenseConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         license_configuration_arn: "String", # required
-    #         license_configuration_status: "AVAILABLE", # accepts AVAILABLE, DISABLED
-    #         license_rules: ["String"],
-    #         license_count: 1,
-    #         license_count_hard_limit: false,
-    #         name: "String",
-    #         description: "String",
-    #         product_information_list: [
-    #           {
-    #             resource_type: "String", # required
-    #             product_information_filter_list: [ # required
-    #               {
-    #                 product_information_filter_name: "String", # required
-    #                 product_information_filter_value: ["String"],
-    #                 product_information_filter_comparator: "String", # required
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         disassociate_when_not_found: false,
-    #       }
-    #
     # @!attribute [rw] license_configuration_arn
     #   Amazon Resource Name (ARN) of the license configuration.
     #   @return [String]
@@ -4504,24 +3718,6 @@ module Aws::LicenseManager
     #
     class UpdateLicenseConfigurationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateLicenseManagerReportGeneratorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         license_manager_report_generator_arn: "String", # required
-    #         report_generator_name: "ReportGeneratorName", # required
-    #         type: ["LicenseConfigurationSummaryReport"], # required, accepts LicenseConfigurationSummaryReport, LicenseConfigurationUsageReport
-    #         report_context: { # required
-    #           license_configuration_arns: ["Arn"], # required
-    #         },
-    #         report_frequency: { # required
-    #           value: 1,
-    #           period: "DAY", # accepts DAY, WEEK, MONTH
-    #         },
-    #         client_token: "ClientRequestToken", # required
-    #         description: "String",
-    #       }
-    #
     # @!attribute [rw] license_manager_report_generator_arn
     #   Amazon Resource Name (ARN) of the report generator to update.
     #   @return [String]
@@ -4576,25 +3772,6 @@ module Aws::LicenseManager
     #
     class UpdateLicenseManagerReportGeneratorResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateLicenseSpecificationsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #         add_license_specifications: [
-    #           {
-    #             license_configuration_arn: "String", # required
-    #             ami_association_scope: "String",
-    #           },
-    #         ],
-    #         remove_license_specifications: [
-    #           {
-    #             license_configuration_arn: "String", # required
-    #             ami_association_scope: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   Amazon Resource Name (ARN) of the Amazon Web Services resource.
     #   @return [String]
@@ -4621,18 +3798,6 @@ module Aws::LicenseManager
     #
     class UpdateLicenseSpecificationsForResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateServiceSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         s3_bucket_arn: "String",
-    #         sns_topic_arn: "String",
-    #         organization_configuration: {
-    #           enable_integration: false, # required
-    #         },
-    #         enable_cross_accounts_discovery: false,
-    #       }
-    #
     # @!attribute [rw] s3_bucket_arn
     #   Amazon Resource Name (ARN) of the Amazon S3 bucket where the License
     #   Manager information is stored.

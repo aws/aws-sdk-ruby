@@ -34,19 +34,6 @@ module Aws::Inspector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AddAttributesToFindingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         finding_arns: ["Arn"], # required
-    #         attributes: [ # required
-    #           {
-    #             key: "AttributeKey", # required
-    #             value: "AttributeValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] finding_arns
     #   The ARNs that specify the findings that you want to assign
     #   attributes to.
@@ -103,14 +90,6 @@ module Aws::Inspector
 
     # Contains information about an Amazon Inspector agent. This data type
     # is used as a request parameter in the ListAssessmentRunAgents action.
-    #
-    # @note When making an API call, you may pass AgentFilter
-    #   data as a hash:
-    #
-    #       {
-    #         agent_healths: ["HEALTHY"], # required, accepts HEALTHY, UNHEALTHY, UNKNOWN
-    #         agent_health_codes: ["IDLE"], # required, accepts IDLE, RUNNING, SHUTDOWN, UNHEALTHY, THROTTLED, UNKNOWN
-    #       }
     #
     # @!attribute [rw] agent_healths
     #   The current health state of the agent. Values can be set to
@@ -356,31 +335,6 @@ module Aws::Inspector
 
     # Used as the request parameter in the ListAssessmentRuns action.
     #
-    # @note When making an API call, you may pass AssessmentRunFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name_pattern: "NamePattern",
-    #         states: ["CREATED"], # accepts CREATED, START_DATA_COLLECTION_PENDING, START_DATA_COLLECTION_IN_PROGRESS, COLLECTING_DATA, STOP_DATA_COLLECTION_PENDING, DATA_COLLECTED, START_EVALUATING_RULES_PENDING, EVALUATING_RULES, FAILED, ERROR, COMPLETED, COMPLETED_WITH_ERRORS, CANCELED
-    #         duration_range: {
-    #           min_seconds: 1,
-    #           max_seconds: 1,
-    #         },
-    #         rules_package_arns: ["Arn"],
-    #         start_time_range: {
-    #           begin_date: Time.now,
-    #           end_date: Time.now,
-    #         },
-    #         completion_time_range: {
-    #           begin_date: Time.now,
-    #           end_date: Time.now,
-    #         },
-    #         state_change_time_range: {
-    #           begin_date: Time.now,
-    #           end_date: Time.now,
-    #         },
-    #       }
-    #
     # @!attribute [rw] name_pattern
     #   For a record to match a filter, an explicit value or a string
     #   containing a wildcard that is specified for this data type property
@@ -570,13 +524,6 @@ module Aws::Inspector
 
     # Used as the request parameter in the ListAssessmentTargets action.
     #
-    # @note When making an API call, you may pass AssessmentTargetFilter
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_target_name_pattern: "NamePattern",
-    #       }
-    #
     # @!attribute [rw] assessment_target_name_pattern
     #   For a record to match a filter, an explicit value or a string that
     #   contains a wildcard that is specified for this data type property
@@ -656,18 +603,6 @@ module Aws::Inspector
     end
 
     # Used as the request parameter in the ListAssessmentTemplates action.
-    #
-    # @note When making an API call, you may pass AssessmentTemplateFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name_pattern: "NamePattern",
-    #         duration_range: {
-    #           min_seconds: 1,
-    #           max_seconds: 1,
-    #         },
-    #         rules_package_arns: ["Arn"],
-    #       }
     #
     # @!attribute [rw] name_pattern
     #   For a record to match a filter, an explicit value or a string that
@@ -758,14 +693,6 @@ module Aws::Inspector
     # This data type is used as a request parameter in the
     # AddAttributesToFindings and CreateAssessmentTemplate actions.
     #
-    # @note When making an API call, you may pass Attribute
-    #   data as a hash:
-    #
-    #       {
-    #         key: "AttributeKey", # required
-    #         value: "AttributeValue",
-    #       }
-    #
     # @!attribute [rw] key
     #   The attribute key.
     #   @return [String]
@@ -783,14 +710,6 @@ module Aws::Inspector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAssessmentTargetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_target_name: "AssessmentTargetName", # required
-    #         resource_group_arn: "Arn",
-    #       }
-    #
     # @!attribute [rw] assessment_target_name
     #   The user-defined name that identifies the assessment target that you
     #   want to create. The name must be unique within the AWS account.
@@ -824,22 +743,6 @@ module Aws::Inspector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAssessmentTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_target_arn: "Arn", # required
-    #         assessment_template_name: "AssessmentTemplateName", # required
-    #         duration_in_seconds: 1, # required
-    #         rules_package_arns: ["Arn"], # required
-    #         user_attributes_for_findings: [
-    #           {
-    #             key: "AttributeKey", # required
-    #             value: "AttributeValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] assessment_target_arn
     #   The ARN that specifies the assessment target for which you want to
     #   create the assessment template.
@@ -892,13 +795,6 @@ module Aws::Inspector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateExclusionsPreviewRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_template_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] assessment_template_arn
     #   The ARN that specifies the assessment template for which you want to
     #   create an exclusions preview.
@@ -926,18 +822,6 @@ module Aws::Inspector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateResourceGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_group_tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_group_tags
     #   A collection of keys and an array of possible values,
     #   '\[\\\{"key":"key1","values":\["Value1","Value2"\]\\},\\\{"key":"Key2","values":\["Value3"\]\\}\]'.
@@ -966,13 +850,6 @@ module Aws::Inspector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAssessmentRunRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_run_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] assessment_run_arn
     #   The ARN that specifies the assessment run that you want to delete.
     #   @return [String]
@@ -985,13 +862,6 @@ module Aws::Inspector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAssessmentTargetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_target_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] assessment_target_arn
     #   The ARN that specifies the assessment target that you want to
     #   delete.
@@ -1005,13 +875,6 @@ module Aws::Inspector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAssessmentTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_template_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] assessment_template_arn
     #   The ARN that specifies the assessment template that you want to
     #   delete.
@@ -1025,13 +888,6 @@ module Aws::Inspector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAssessmentRunsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_run_arns: ["Arn"], # required
-    #       }
-    #
     # @!attribute [rw] assessment_run_arns
     #   The ARN that specifies the assessment run that you want to describe.
     #   @return [Array<String>]
@@ -1062,13 +918,6 @@ module Aws::Inspector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAssessmentTargetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_target_arns: ["Arn"], # required
-    #       }
-    #
     # @!attribute [rw] assessment_target_arns
     #   The ARNs that specifies the assessment targets that you want to
     #   describe.
@@ -1100,13 +949,6 @@ module Aws::Inspector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAssessmentTemplatesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_template_arns: ["Arn"], # required
-    #       }
-    #
     # @!attribute [rw] assessment_template_arns
     #   @return [Array<String>]
     #
@@ -1161,14 +1003,6 @@ module Aws::Inspector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeExclusionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         exclusion_arns: ["Arn"], # required
-    #         locale: "EN_US", # accepts EN_US
-    #       }
-    #
     # @!attribute [rw] exclusion_arns
     #   The list of ARNs that specify the exclusions that you want to
     #   describe.
@@ -1206,14 +1040,6 @@ module Aws::Inspector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeFindingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         finding_arns: ["Arn"], # required
-    #         locale: "EN_US", # accepts EN_US
-    #       }
-    #
     # @!attribute [rw] finding_arns
     #   The ARN that specifies the finding that you want to describe.
     #   @return [Array<String>]
@@ -1251,13 +1077,6 @@ module Aws::Inspector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeResourceGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_group_arns: ["Arn"], # required
-    #       }
-    #
     # @!attribute [rw] resource_group_arns
     #   The ARN that specifies the resource group that you want to describe.
     #   @return [Array<String>]
@@ -1288,14 +1107,6 @@ module Aws::Inspector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeRulesPackagesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rules_package_arns: ["Arn"], # required
-    #         locale: "EN_US", # accepts EN_US
-    #       }
-    #
     # @!attribute [rw] rules_package_arns
     #   The ARN that specifies the rules package that you want to describe.
     #   @return [Array<String>]
@@ -1333,14 +1144,6 @@ module Aws::Inspector
     end
 
     # This data type is used in the AssessmentTemplateFilter data type.
-    #
-    # @note When making an API call, you may pass DurationRange
-    #   data as a hash:
-    #
-    #       {
-    #         min_seconds: 1,
-    #         max_seconds: 1,
-    #       }
     #
     # @!attribute [rw] min_seconds
     #   The minimum value of the duration range. Must be greater than zero.
@@ -1579,33 +1382,6 @@ module Aws::Inspector
     # This data type is used as a request parameter in the ListFindings
     # action.
     #
-    # @note When making an API call, you may pass FindingFilter
-    #   data as a hash:
-    #
-    #       {
-    #         agent_ids: ["AgentId"],
-    #         auto_scaling_groups: ["AutoScalingGroup"],
-    #         rule_names: ["RuleName"],
-    #         severities: ["Low"], # accepts Low, Medium, High, Informational, Undefined
-    #         rules_package_arns: ["Arn"],
-    #         attributes: [
-    #           {
-    #             key: "AttributeKey", # required
-    #             value: "AttributeValue",
-    #           },
-    #         ],
-    #         user_attributes: [
-    #           {
-    #             key: "AttributeKey", # required
-    #             value: "AttributeValue",
-    #           },
-    #         ],
-    #         creation_time_range: {
-    #           begin_date: Time.now,
-    #           end_date: Time.now,
-    #         },
-    #       }
-    #
     # @!attribute [rw] agent_ids
     #   For a record to match a filter, one of the values that is specified
     #   for this data type property must be the exact match of the value of
@@ -1667,15 +1443,6 @@ module Aws::Inspector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAssessmentReportRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_run_arn: "Arn", # required
-    #         report_file_format: "HTML", # required, accepts HTML, PDF
-    #         report_type: "FINDING", # required, accepts FINDING, FULL
-    #       }
-    #
     # @!attribute [rw] assessment_run_arn
     #   The ARN that specifies the assessment run for which you want to
     #   generate a report.
@@ -1727,17 +1494,6 @@ module Aws::Inspector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetExclusionsPreviewRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_template_arn: "Arn", # required
-    #         preview_token: "UUID", # required
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #         locale: "EN_US", # accepts EN_US
-    #       }
-    #
     # @!attribute [rw] assessment_template_arn
     #   The ARN that specifies the assessment template for which the
     #   exclusions preview was requested.
@@ -1805,13 +1561,6 @@ module Aws::Inspector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetTelemetryMetadataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_run_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] assessment_run_arn
     #   The ARN that specifies the assessment run that has the telemetry
     #   data that you want to obtain.
@@ -1956,19 +1705,6 @@ module Aws::Inspector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAssessmentRunAgentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_run_arn: "Arn", # required
-    #         filter: {
-    #           agent_healths: ["HEALTHY"], # required, accepts HEALTHY, UNHEALTHY, UNKNOWN
-    #           agent_health_codes: ["IDLE"], # required, accepts IDLE, RUNNING, SHUTDOWN, UNHEALTHY, THROTTLED, UNKNOWN
-    #         },
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] assessment_run_arn
     #   The ARN that specifies the assessment run whose agents you want to
     #   list.
@@ -2029,36 +1765,6 @@ module Aws::Inspector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAssessmentRunsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_template_arns: ["Arn"],
-    #         filter: {
-    #           name_pattern: "NamePattern",
-    #           states: ["CREATED"], # accepts CREATED, START_DATA_COLLECTION_PENDING, START_DATA_COLLECTION_IN_PROGRESS, COLLECTING_DATA, STOP_DATA_COLLECTION_PENDING, DATA_COLLECTED, START_EVALUATING_RULES_PENDING, EVALUATING_RULES, FAILED, ERROR, COMPLETED, COMPLETED_WITH_ERRORS, CANCELED
-    #           duration_range: {
-    #             min_seconds: 1,
-    #             max_seconds: 1,
-    #           },
-    #           rules_package_arns: ["Arn"],
-    #           start_time_range: {
-    #             begin_date: Time.now,
-    #             end_date: Time.now,
-    #           },
-    #           completion_time_range: {
-    #             begin_date: Time.now,
-    #             end_date: Time.now,
-    #           },
-    #           state_change_time_range: {
-    #             begin_date: Time.now,
-    #             end_date: Time.now,
-    #           },
-    #         },
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] assessment_template_arns
     #   The ARNs that specify the assessment templates whose assessment runs
     #   you want to list.
@@ -2120,17 +1826,6 @@ module Aws::Inspector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAssessmentTargetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter: {
-    #           assessment_target_name_pattern: "NamePattern",
-    #         },
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] filter
     #   You can use this parameter to specify a subset of data to be
     #   included in the action's response.
@@ -2186,23 +1881,6 @@ module Aws::Inspector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAssessmentTemplatesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_target_arns: ["Arn"],
-    #         filter: {
-    #           name_pattern: "NamePattern",
-    #           duration_range: {
-    #             min_seconds: 1,
-    #             max_seconds: 1,
-    #           },
-    #           rules_package_arns: ["Arn"],
-    #         },
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] assessment_target_arns
     #   A list of ARNs that specifies the assessment targets whose
     #   assessment templates you want to list.
@@ -2264,15 +1942,6 @@ module Aws::Inspector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEventSubscriptionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn",
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the assessment template for which you want to list the
     #   existing event subscriptions.
@@ -2323,15 +1992,6 @@ module Aws::Inspector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListExclusionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_run_arn: "Arn", # required
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] assessment_run_arn
     #   The ARN of the assessment run that generated the exclusions that you
     #   want to list.
@@ -2382,38 +2042,6 @@ module Aws::Inspector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFindingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_run_arns: ["Arn"],
-    #         filter: {
-    #           agent_ids: ["AgentId"],
-    #           auto_scaling_groups: ["AutoScalingGroup"],
-    #           rule_names: ["RuleName"],
-    #           severities: ["Low"], # accepts Low, Medium, High, Informational, Undefined
-    #           rules_package_arns: ["Arn"],
-    #           attributes: [
-    #             {
-    #               key: "AttributeKey", # required
-    #               value: "AttributeValue",
-    #             },
-    #           ],
-    #           user_attributes: [
-    #             {
-    #               key: "AttributeKey", # required
-    #               value: "AttributeValue",
-    #             },
-    #           ],
-    #           creation_time_range: {
-    #             begin_date: Time.now,
-    #             end_date: Time.now,
-    #           },
-    #         },
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] assessment_run_arns
     #   The ARNs of the assessment runs that generate the findings that you
     #   want to list.
@@ -2474,14 +2102,6 @@ module Aws::Inspector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRulesPackagesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   You can use this parameter when paginating results. Set the value of
     #   this parameter to null on your first call to the
@@ -2527,13 +2147,6 @@ module Aws::Inspector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN that specifies the assessment template whose tags you want
     #   to list.
@@ -2647,15 +2260,6 @@ module Aws::Inspector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PreviewAgentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         preview_agents_arn: "Arn", # required
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] preview_agents_arn
     #   The ARN of the assessment target whose agents you want to preview.
     #   @return [String]
@@ -2740,13 +2344,6 @@ module Aws::Inspector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RegisterCrossAccountAccessRoleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         role_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] role_arn
     #   The ARN of the IAM role that grants Amazon Inspector access to AWS
     #   Services needed to perform security assessments.
@@ -2760,14 +2357,6 @@ module Aws::Inspector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RemoveAttributesFromFindingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         finding_arns: ["Arn"], # required
-    #         attribute_keys: ["AttributeKey"], # required
-    #       }
-    #
     # @!attribute [rw] finding_arns
     #   The ARNs that specify the findings that you want to remove
     #   attributes from.
@@ -2830,14 +2419,6 @@ module Aws::Inspector
 
     # This data type is used as one of the elements of the ResourceGroup
     # data type.
-    #
-    # @note When making an API call, you may pass ResourceGroupTag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue",
-    #       }
     #
     # @!attribute [rw] key
     #   A tag key.
@@ -2952,19 +2533,6 @@ module Aws::Inspector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SetTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the assessment template that you want to set tags to.
     #   @return [String]
@@ -2983,14 +2551,6 @@ module Aws::Inspector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartAssessmentRunRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_template_arn: "Arn", # required
-    #         assessment_run_name: "AssessmentRunName",
-    #       }
-    #
     # @!attribute [rw] assessment_template_arn
     #   The ARN of the assessment template of the assessment run that you
     #   want to start.
@@ -3023,14 +2583,6 @@ module Aws::Inspector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopAssessmentRunRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_run_arn: "Arn", # required
-    #         stop_action: "START_EVALUATION", # accepts START_EVALUATION, SKIP_EVALUATION
-    #       }
-    #
     # @!attribute [rw] assessment_run_arn
     #   The ARN of the assessment run that you want to stop.
     #   @return [String]
@@ -3052,15 +2604,6 @@ module Aws::Inspector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SubscribeToEventRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         event: "ASSESSMENT_RUN_STARTED", # required, accepts ASSESSMENT_RUN_STARTED, ASSESSMENT_RUN_COMPLETED, ASSESSMENT_RUN_STATE_CHANGED, FINDING_REPORTED, OTHER
-    #         topic_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the assessment template that is used during the event for
     #   which you want to receive SNS notifications.
@@ -3115,14 +2658,6 @@ module Aws::Inspector
     # the SetTagsForResource action and a response element in the
     # ListTagsForResource action.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue",
-    #       }
-    #
     # @!attribute [rw] key
     #   A tag key.
     #   @return [String]
@@ -3170,14 +2705,6 @@ module Aws::Inspector
 
     # This data type is used in the AssessmentRunFilter data type.
     #
-    # @note When making an API call, you may pass TimestampRange
-    #   data as a hash:
-    #
-    #       {
-    #         begin_date: Time.now,
-    #         end_date: Time.now,
-    #       }
-    #
     # @!attribute [rw] begin_date
     #   The minimum value of the timestamp range.
     #   @return [Time]
@@ -3195,15 +2722,6 @@ module Aws::Inspector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UnsubscribeFromEventRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         event: "ASSESSMENT_RUN_STARTED", # required, accepts ASSESSMENT_RUN_STARTED, ASSESSMENT_RUN_COMPLETED, ASSESSMENT_RUN_STATE_CHANGED, FINDING_REPORTED, OTHER
-    #         topic_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the assessment template that is used during the event for
     #   which you want to stop receiving SNS notifications.
@@ -3248,15 +2766,6 @@ module Aws::Inspector
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateAssessmentTargetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_target_arn: "Arn", # required
-    #         assessment_target_name: "AssessmentTargetName", # required
-    #         resource_group_arn: "Arn",
-    #       }
-    #
     # @!attribute [rw] assessment_target_arn
     #   The ARN of the assessment target that you want to update.
     #   @return [String]

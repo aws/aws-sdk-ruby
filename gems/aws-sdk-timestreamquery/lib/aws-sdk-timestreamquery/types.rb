@@ -23,13 +23,6 @@ module Aws::TimestreamQuery
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CancelQueryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         query_id: "QueryId", # required
-    #       }
-    #
     # @!attribute [rw] query_id
     #   The ID of the query that needs to be cancelled. `QueryID` is
     #   returned as part of the query result.
@@ -93,77 +86,6 @@ module Aws::TimestreamQuery
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateScheduledQueryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ScheduledQueryName", # required
-    #         query_string: "QueryString", # required
-    #         schedule_configuration: { # required
-    #           schedule_expression: "ScheduleExpression", # required
-    #         },
-    #         notification_configuration: { # required
-    #           sns_configuration: { # required
-    #             topic_arn: "AmazonResourceName", # required
-    #           },
-    #         },
-    #         target_configuration: {
-    #           timestream_configuration: { # required
-    #             database_name: "ResourceName", # required
-    #             table_name: "ResourceName", # required
-    #             time_column: "SchemaName", # required
-    #             dimension_mappings: [ # required
-    #               {
-    #                 name: "SchemaName", # required
-    #                 dimension_value_type: "VARCHAR", # required, accepts VARCHAR
-    #               },
-    #             ],
-    #             multi_measure_mappings: {
-    #               target_multi_measure_name: "SchemaName",
-    #               multi_measure_attribute_mappings: [ # required
-    #                 {
-    #                   source_column: "SchemaName", # required
-    #                   target_multi_measure_attribute_name: "SchemaName",
-    #                   measure_value_type: "BIGINT", # required, accepts BIGINT, BOOLEAN, DOUBLE, VARCHAR, TIMESTAMP
-    #                 },
-    #               ],
-    #             },
-    #             mixed_measure_mappings: [
-    #               {
-    #                 measure_name: "SchemaName",
-    #                 source_column: "SchemaName",
-    #                 target_measure_name: "SchemaName",
-    #                 measure_value_type: "BIGINT", # required, accepts BIGINT, BOOLEAN, DOUBLE, VARCHAR, MULTI
-    #                 multi_measure_attribute_mappings: [
-    #                   {
-    #                     source_column: "SchemaName", # required
-    #                     target_multi_measure_attribute_name: "SchemaName",
-    #                     measure_value_type: "BIGINT", # required, accepts BIGINT, BOOLEAN, DOUBLE, VARCHAR, TIMESTAMP
-    #                   },
-    #                 ],
-    #               },
-    #             ],
-    #             measure_name_column: "SchemaName",
-    #           },
-    #         },
-    #         client_token: "ClientToken",
-    #         scheduled_query_execution_role_arn: "AmazonResourceName", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         kms_key_id: "StringValue2048",
-    #         error_report_configuration: { # required
-    #           s3_configuration: { # required
-    #             bucket_name: "S3BucketName", # required
-    #             object_key_prefix: "S3ObjectKeyPrefix",
-    #             encryption_option: "SSE_S3", # accepts SSE_S3, SSE_KMS
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   Name of the scheduled query.
     #   @return [String]
@@ -302,13 +224,6 @@ module Aws::TimestreamQuery
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteScheduledQueryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         scheduled_query_arn: "AmazonResourceName", # required
-    #       }
-    #
     # @!attribute [rw] scheduled_query_arn
     #   The ARN of the scheduled query.
     #   @return [String]
@@ -321,8 +236,6 @@ module Aws::TimestreamQuery
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-query-2018-11-01/DescribeEndpointsRequest AWS API Documentation
     #
     class DescribeEndpointsRequest < Aws::EmptyStructure; end
@@ -340,13 +253,6 @@ module Aws::TimestreamQuery
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeScheduledQueryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         scheduled_query_arn: "AmazonResourceName", # required
-    #       }
-    #
     # @!attribute [rw] scheduled_query_arn
     #   The ARN of the scheduled query.
     #   @return [String]
@@ -373,14 +279,6 @@ module Aws::TimestreamQuery
 
     # This type is used to map column(s) from the query result to a
     # dimension in the destination table.
-    #
-    # @note When making an API call, you may pass DimensionMapping
-    #   data as a hash:
-    #
-    #       {
-    #         name: "SchemaName", # required
-    #         dimension_value_type: "VARCHAR", # required, accepts VARCHAR
-    #       }
     #
     # @!attribute [rw] name
     #   Column name from query result.
@@ -421,17 +319,6 @@ module Aws::TimestreamQuery
 
     # Configuration required for error reporting.
     #
-    # @note When making an API call, you may pass ErrorReportConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         s3_configuration: { # required
-    #           bucket_name: "S3BucketName", # required
-    #           object_key_prefix: "S3ObjectKeyPrefix",
-    #           encryption_option: "SSE_S3", # accepts SSE_S3, SSE_KMS
-    #         },
-    #       }
-    #
     # @!attribute [rw] s3_configuration
     #   The S3 configuration for the error reports.
     #   @return [Types::S3Configuration]
@@ -459,15 +346,6 @@ module Aws::TimestreamQuery
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ExecuteScheduledQueryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         scheduled_query_arn: "AmazonResourceName", # required
-    #         invocation_time: Time.now, # required
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] scheduled_query_arn
     #   ARN of the scheduled query.
     #   @return [String]
@@ -558,14 +436,6 @@ module Aws::TimestreamQuery
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListScheduledQueriesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextScheduledQueriesResultsToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of items to return in the output. If the total
     #   number of items available is more than the value specified, a
@@ -605,15 +475,6 @@ module Aws::TimestreamQuery
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         max_results: 1,
-    #         next_token: "NextTagsForResourceResultsToken",
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Timestream resource with tags to be listed. This value is an
     #   Amazon Resource Name (ARN).
@@ -658,23 +519,6 @@ module Aws::TimestreamQuery
     # MixedMeasureMappings are mappings that can be used to ingest data into
     # a mixture of narrow and multi measures in the derived table.
     #
-    # @note When making an API call, you may pass MixedMeasureMapping
-    #   data as a hash:
-    #
-    #       {
-    #         measure_name: "SchemaName",
-    #         source_column: "SchemaName",
-    #         target_measure_name: "SchemaName",
-    #         measure_value_type: "BIGINT", # required, accepts BIGINT, BOOLEAN, DOUBLE, VARCHAR, MULTI
-    #         multi_measure_attribute_mappings: [
-    #           {
-    #             source_column: "SchemaName", # required
-    #             target_multi_measure_attribute_name: "SchemaName",
-    #             measure_value_type: "BIGINT", # required, accepts BIGINT, BOOLEAN, DOUBLE, VARCHAR, TIMESTAMP
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] measure_name
     #   Refers to the value of measure\_name in a result row. This field is
     #   required if MeasureNameColumn is provided.
@@ -715,15 +559,6 @@ module Aws::TimestreamQuery
 
     # Attribute mapping for MULTI value measures.
     #
-    # @note When making an API call, you may pass MultiMeasureAttributeMapping
-    #   data as a hash:
-    #
-    #       {
-    #         source_column: "SchemaName", # required
-    #         target_multi_measure_attribute_name: "SchemaName",
-    #         measure_value_type: "BIGINT", # required, accepts BIGINT, BOOLEAN, DOUBLE, VARCHAR, TIMESTAMP
-    #       }
-    #
     # @!attribute [rw] source_column
     #   Source column from where the attribute value is to be read.
     #   @return [String]
@@ -751,20 +586,6 @@ module Aws::TimestreamQuery
     # provided. MultiMeasureMappings can be used to ingest data as multi
     # measures in the derived table.
     #
-    # @note When making an API call, you may pass MultiMeasureMappings
-    #   data as a hash:
-    #
-    #       {
-    #         target_multi_measure_name: "SchemaName",
-    #         multi_measure_attribute_mappings: [ # required
-    #           {
-    #             source_column: "SchemaName", # required
-    #             target_multi_measure_attribute_name: "SchemaName",
-    #             measure_value_type: "BIGINT", # required, accepts BIGINT, BOOLEAN, DOUBLE, VARCHAR, TIMESTAMP
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] target_multi_measure_name
     #   The name of the target multi-measure name in the derived table. This
     #   input is required when measureNameColumn is not provided. If
@@ -789,15 +610,6 @@ module Aws::TimestreamQuery
     # Notification configuration for a scheduled query. A notification is
     # sent by Timestream when a scheduled query is created, its state is
     # updated or when it is deleted.
-    #
-    # @note When making an API call, you may pass NotificationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         sns_configuration: { # required
-    #           topic_arn: "AmazonResourceName", # required
-    #         },
-    #       }
     #
     # @!attribute [rw] sns_configuration
     #   Details on SNS configuration.
@@ -834,14 +646,6 @@ module Aws::TimestreamQuery
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PrepareQueryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         query_string: "QueryString", # required
-    #         validate_only: false,
-    #       }
-    #
     # @!attribute [rw] query_string
     #   The Timestream query string that you want to use as a prepared
     #   statement. Parameter names can be specified in the query string `@`
@@ -898,16 +702,6 @@ module Aws::TimestreamQuery
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass QueryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         query_string: "QueryString", # required
-    #         client_token: "ClientRequestToken",
-    #         next_token: "PaginationToken",
-    #         max_rows: 1,
-    #       }
-    #
     # @!attribute [rw] query_string
     #   The query to be run by Timestream.
     #   @return [String]
@@ -1104,15 +898,6 @@ module Aws::TimestreamQuery
     # Details on S3 location for error reports that result from running a
     # query.
     #
-    # @note When making an API call, you may pass S3Configuration
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_name: "S3BucketName", # required
-    #         object_key_prefix: "S3ObjectKeyPrefix",
-    #         encryption_option: "SSE_S3", # accepts SSE_S3, SSE_KMS
-    #       }
-    #
     # @!attribute [rw] bucket_name
     #   Name of the S3 bucket under which error reports will be created.
     #   @return [String]
@@ -1157,13 +942,6 @@ module Aws::TimestreamQuery
     end
 
     # Configuration of the schedule of the query.
-    #
-    # @note When making an API call, you may pass ScheduleConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         schedule_expression: "ScheduleExpression", # required
-    #       }
     #
     # @!attribute [rw] schedule_expression
     #   An expression that denotes when to trigger the scheduled query run.
@@ -1413,13 +1191,6 @@ module Aws::TimestreamQuery
 
     # Details on SNS that are required to send the notification.
     #
-    # @note When making an API call, you may pass SnsConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         topic_arn: "AmazonResourceName", # required
-    #       }
-    #
     # @!attribute [rw] topic_arn
     #   SNS topic ARN that the scheduled query status notifications will be
     #   sent to.
@@ -1438,14 +1209,6 @@ module Aws::TimestreamQuery
     # you define. Tags enable you to categorize databases and/or tables, for
     # example, by purpose, owner, or environment.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The key of the tag. Tag keys are case sensitive.
     #   @return [String]
@@ -1463,19 +1226,6 @@ module Aws::TimestreamQuery
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   Identifies the Timestream resource to which tags should be added.
     #   This value is an Amazon Resource Name (ARN).
@@ -1499,49 +1249,6 @@ module Aws::TimestreamQuery
     class TagResourceResponse < Aws::EmptyStructure; end
 
     # Configuration used for writing the output of a query.
-    #
-    # @note When making an API call, you may pass TargetConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         timestream_configuration: { # required
-    #           database_name: "ResourceName", # required
-    #           table_name: "ResourceName", # required
-    #           time_column: "SchemaName", # required
-    #           dimension_mappings: [ # required
-    #             {
-    #               name: "SchemaName", # required
-    #               dimension_value_type: "VARCHAR", # required, accepts VARCHAR
-    #             },
-    #           ],
-    #           multi_measure_mappings: {
-    #             target_multi_measure_name: "SchemaName",
-    #             multi_measure_attribute_mappings: [ # required
-    #               {
-    #                 source_column: "SchemaName", # required
-    #                 target_multi_measure_attribute_name: "SchemaName",
-    #                 measure_value_type: "BIGINT", # required, accepts BIGINT, BOOLEAN, DOUBLE, VARCHAR, TIMESTAMP
-    #               },
-    #             ],
-    #           },
-    #           mixed_measure_mappings: [
-    #             {
-    #               measure_name: "SchemaName",
-    #               source_column: "SchemaName",
-    #               target_measure_name: "SchemaName",
-    #               measure_value_type: "BIGINT", # required, accepts BIGINT, BOOLEAN, DOUBLE, VARCHAR, MULTI
-    #               multi_measure_attribute_mappings: [
-    #                 {
-    #                   source_column: "SchemaName", # required
-    #                   target_multi_measure_attribute_name: "SchemaName",
-    #                   measure_value_type: "BIGINT", # required, accepts BIGINT, BOOLEAN, DOUBLE, VARCHAR, TIMESTAMP
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #           measure_name_column: "SchemaName",
-    #         },
-    #       }
     #
     # @!attribute [rw] timestream_configuration
     #   Configuration needed to write data into the Timestream database and
@@ -1610,47 +1317,6 @@ module Aws::TimestreamQuery
     # Configuration to write data into Timestream database and table. This
     # configuration allows the user to map the query result select columns
     # into the destination table columns.
-    #
-    # @note When making an API call, you may pass TimestreamConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         database_name: "ResourceName", # required
-    #         table_name: "ResourceName", # required
-    #         time_column: "SchemaName", # required
-    #         dimension_mappings: [ # required
-    #           {
-    #             name: "SchemaName", # required
-    #             dimension_value_type: "VARCHAR", # required, accepts VARCHAR
-    #           },
-    #         ],
-    #         multi_measure_mappings: {
-    #           target_multi_measure_name: "SchemaName",
-    #           multi_measure_attribute_mappings: [ # required
-    #             {
-    #               source_column: "SchemaName", # required
-    #               target_multi_measure_attribute_name: "SchemaName",
-    #               measure_value_type: "BIGINT", # required, accepts BIGINT, BOOLEAN, DOUBLE, VARCHAR, TIMESTAMP
-    #             },
-    #           ],
-    #         },
-    #         mixed_measure_mappings: [
-    #           {
-    #             measure_name: "SchemaName",
-    #             source_column: "SchemaName",
-    #             target_measure_name: "SchemaName",
-    #             measure_value_type: "BIGINT", # required, accepts BIGINT, BOOLEAN, DOUBLE, VARCHAR, MULTI
-    #             multi_measure_attribute_mappings: [
-    #               {
-    #                 source_column: "SchemaName", # required
-    #                 target_multi_measure_attribute_name: "SchemaName",
-    #                 measure_value_type: "BIGINT", # required, accepts BIGINT, BOOLEAN, DOUBLE, VARCHAR, TIMESTAMP
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         measure_name_column: "SchemaName",
-    #       }
     #
     # @!attribute [rw] database_name
     #   Name of Timestream database to which the query result will be
@@ -1752,14 +1418,6 @@ module Aws::TimestreamQuery
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Timestream resource that the tags will be removed from. This
     #   value is an Amazon Resource Name (ARN).
@@ -1783,14 +1441,6 @@ module Aws::TimestreamQuery
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateScheduledQueryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         scheduled_query_arn: "AmazonResourceName", # required
-    #         state: "ENABLED", # required, accepts ENABLED, DISABLED
-    #       }
-    #
     # @!attribute [rw] scheduled_query_arn
     #   ARN of the scheuled query.
     #   @return [String]

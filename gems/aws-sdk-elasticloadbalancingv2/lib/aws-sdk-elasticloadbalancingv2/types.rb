@@ -22,68 +22,6 @@ module Aws::ElasticLoadBalancingV2
     # `forward`, `fixed-response`, or `redirect`, and it must be the last
     # action to be performed.
     #
-    # @note When making an API call, you may pass Action
-    #   data as a hash:
-    #
-    #       {
-    #         type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito, redirect, fixed-response
-    #         target_group_arn: "TargetGroupArn",
-    #         authenticate_oidc_config: {
-    #           issuer: "AuthenticateOidcActionIssuer", # required
-    #           authorization_endpoint: "AuthenticateOidcActionAuthorizationEndpoint", # required
-    #           token_endpoint: "AuthenticateOidcActionTokenEndpoint", # required
-    #           user_info_endpoint: "AuthenticateOidcActionUserInfoEndpoint", # required
-    #           client_id: "AuthenticateOidcActionClientId", # required
-    #           client_secret: "AuthenticateOidcActionClientSecret",
-    #           session_cookie_name: "AuthenticateOidcActionSessionCookieName",
-    #           scope: "AuthenticateOidcActionScope",
-    #           session_timeout: 1,
-    #           authentication_request_extra_params: {
-    #             "AuthenticateOidcActionAuthenticationRequestParamName" => "AuthenticateOidcActionAuthenticationRequestParamValue",
-    #           },
-    #           on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
-    #           use_existing_client_secret: false,
-    #         },
-    #         authenticate_cognito_config: {
-    #           user_pool_arn: "AuthenticateCognitoActionUserPoolArn", # required
-    #           user_pool_client_id: "AuthenticateCognitoActionUserPoolClientId", # required
-    #           user_pool_domain: "AuthenticateCognitoActionUserPoolDomain", # required
-    #           session_cookie_name: "AuthenticateCognitoActionSessionCookieName",
-    #           scope: "AuthenticateCognitoActionScope",
-    #           session_timeout: 1,
-    #           authentication_request_extra_params: {
-    #             "AuthenticateCognitoActionAuthenticationRequestParamName" => "AuthenticateCognitoActionAuthenticationRequestParamValue",
-    #           },
-    #           on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
-    #         },
-    #         order: 1,
-    #         redirect_config: {
-    #           protocol: "RedirectActionProtocol",
-    #           port: "RedirectActionPort",
-    #           host: "RedirectActionHost",
-    #           path: "RedirectActionPath",
-    #           query: "RedirectActionQuery",
-    #           status_code: "HTTP_301", # required, accepts HTTP_301, HTTP_302
-    #         },
-    #         fixed_response_config: {
-    #           message_body: "FixedResponseActionMessage",
-    #           status_code: "FixedResponseActionStatusCode", # required
-    #           content_type: "FixedResponseActionContentType",
-    #         },
-    #         forward_config: {
-    #           target_groups: [
-    #             {
-    #               target_group_arn: "TargetGroupArn",
-    #               weight: 1,
-    #             },
-    #           ],
-    #           target_group_stickiness_config: {
-    #             enabled: false,
-    #             duration_seconds: 1,
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] type
     #   The type of action.
     #   @return [String]
@@ -148,19 +86,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AddListenerCertificatesInput
-    #   data as a hash:
-    #
-    #       {
-    #         listener_arn: "ListenerArn", # required
-    #         certificates: [ # required
-    #           {
-    #             certificate_arn: "CertificateArn",
-    #             is_default: false,
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] listener_arn
     #   The Amazon Resource Name (ARN) of the listener.
     #   @return [String]
@@ -192,19 +117,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AddTagsInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arns: ["ResourceArn"], # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arns
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [Array<String>]
@@ -234,22 +146,6 @@ module Aws::ElasticLoadBalancingV2
 
     # Request parameters to use when integrating with Amazon Cognito to
     # authenticate users.
-    #
-    # @note When making an API call, you may pass AuthenticateCognitoActionConfig
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool_arn: "AuthenticateCognitoActionUserPoolArn", # required
-    #         user_pool_client_id: "AuthenticateCognitoActionUserPoolClientId", # required
-    #         user_pool_domain: "AuthenticateCognitoActionUserPoolDomain", # required
-    #         session_cookie_name: "AuthenticateCognitoActionSessionCookieName",
-    #         scope: "AuthenticateCognitoActionScope",
-    #         session_timeout: 1,
-    #         authentication_request_extra_params: {
-    #           "AuthenticateCognitoActionAuthenticationRequestParamName" => "AuthenticateCognitoActionAuthenticationRequestParamValue",
-    #         },
-    #         on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
-    #       }
     #
     # @!attribute [rw] user_pool_arn
     #   The Amazon Resource Name (ARN) of the Amazon Cognito user pool.
@@ -316,26 +212,6 @@ module Aws::ElasticLoadBalancingV2
 
     # Request parameters when using an identity provider (IdP) that is
     # compliant with OpenID Connect (OIDC) to authenticate users.
-    #
-    # @note When making an API call, you may pass AuthenticateOidcActionConfig
-    #   data as a hash:
-    #
-    #       {
-    #         issuer: "AuthenticateOidcActionIssuer", # required
-    #         authorization_endpoint: "AuthenticateOidcActionAuthorizationEndpoint", # required
-    #         token_endpoint: "AuthenticateOidcActionTokenEndpoint", # required
-    #         user_info_endpoint: "AuthenticateOidcActionUserInfoEndpoint", # required
-    #         client_id: "AuthenticateOidcActionClientId", # required
-    #         client_secret: "AuthenticateOidcActionClientSecret",
-    #         session_cookie_name: "AuthenticateOidcActionSessionCookieName",
-    #         scope: "AuthenticateOidcActionScope",
-    #         session_timeout: 1,
-    #         authentication_request_extra_params: {
-    #           "AuthenticateOidcActionAuthenticationRequestParamName" => "AuthenticateOidcActionAuthenticationRequestParamValue",
-    #         },
-    #         on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
-    #         use_existing_client_secret: false,
-    #       }
     #
     # @!attribute [rw] issuer
     #   The OIDC issuer identifier of the IdP. This must be a full URL,
@@ -469,14 +345,6 @@ module Aws::ElasticLoadBalancingV2
 
     # Information about an SSL server certificate.
     #
-    # @note When making an API call, you may pass Certificate
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_arn: "CertificateArn",
-    #         is_default: false,
-    #       }
-    #
     # @!attribute [rw] certificate_arn
     #   The Amazon Resource Name (ARN) of the certificate.
     #   @return [String]
@@ -522,89 +390,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateListenerInput
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_arn: "LoadBalancerArn", # required
-    #         protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS, UDP, TCP_UDP, GENEVE
-    #         port: 1,
-    #         ssl_policy: "SslPolicyName",
-    #         certificates: [
-    #           {
-    #             certificate_arn: "CertificateArn",
-    #             is_default: false,
-    #           },
-    #         ],
-    #         default_actions: [ # required
-    #           {
-    #             type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito, redirect, fixed-response
-    #             target_group_arn: "TargetGroupArn",
-    #             authenticate_oidc_config: {
-    #               issuer: "AuthenticateOidcActionIssuer", # required
-    #               authorization_endpoint: "AuthenticateOidcActionAuthorizationEndpoint", # required
-    #               token_endpoint: "AuthenticateOidcActionTokenEndpoint", # required
-    #               user_info_endpoint: "AuthenticateOidcActionUserInfoEndpoint", # required
-    #               client_id: "AuthenticateOidcActionClientId", # required
-    #               client_secret: "AuthenticateOidcActionClientSecret",
-    #               session_cookie_name: "AuthenticateOidcActionSessionCookieName",
-    #               scope: "AuthenticateOidcActionScope",
-    #               session_timeout: 1,
-    #               authentication_request_extra_params: {
-    #                 "AuthenticateOidcActionAuthenticationRequestParamName" => "AuthenticateOidcActionAuthenticationRequestParamValue",
-    #               },
-    #               on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
-    #               use_existing_client_secret: false,
-    #             },
-    #             authenticate_cognito_config: {
-    #               user_pool_arn: "AuthenticateCognitoActionUserPoolArn", # required
-    #               user_pool_client_id: "AuthenticateCognitoActionUserPoolClientId", # required
-    #               user_pool_domain: "AuthenticateCognitoActionUserPoolDomain", # required
-    #               session_cookie_name: "AuthenticateCognitoActionSessionCookieName",
-    #               scope: "AuthenticateCognitoActionScope",
-    #               session_timeout: 1,
-    #               authentication_request_extra_params: {
-    #                 "AuthenticateCognitoActionAuthenticationRequestParamName" => "AuthenticateCognitoActionAuthenticationRequestParamValue",
-    #               },
-    #               on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
-    #             },
-    #             order: 1,
-    #             redirect_config: {
-    #               protocol: "RedirectActionProtocol",
-    #               port: "RedirectActionPort",
-    #               host: "RedirectActionHost",
-    #               path: "RedirectActionPath",
-    #               query: "RedirectActionQuery",
-    #               status_code: "HTTP_301", # required, accepts HTTP_301, HTTP_302
-    #             },
-    #             fixed_response_config: {
-    #               message_body: "FixedResponseActionMessage",
-    #               status_code: "FixedResponseActionStatusCode", # required
-    #               content_type: "FixedResponseActionContentType",
-    #             },
-    #             forward_config: {
-    #               target_groups: [
-    #                 {
-    #                   target_group_arn: "TargetGroupArn",
-    #                   weight: 1,
-    #                 },
-    #               ],
-    #               target_group_stickiness_config: {
-    #                 enabled: false,
-    #                 duration_seconds: 1,
-    #               },
-    #             },
-    #           },
-    #         ],
-    #         alpn_policy: ["AlpnPolicyValue"],
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] load_balancer_arn
     #   The Amazon Resource Name (ARN) of the load balancer.
     #   @return [String]
@@ -701,33 +486,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateLoadBalancerInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "LoadBalancerName", # required
-    #         subnets: ["SubnetId"],
-    #         subnet_mappings: [
-    #           {
-    #             subnet_id: "SubnetId",
-    #             allocation_id: "AllocationId",
-    #             private_i_pv_4_address: "PrivateIPv4Address",
-    #             i_pv_6_address: "IPv6Address",
-    #           },
-    #         ],
-    #         security_groups: ["SecurityGroupId"],
-    #         scheme: "internet-facing", # accepts internet-facing, internal
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         type: "application", # accepts application, network, gateway
-    #         ip_address_type: "ipv4", # accepts ipv4, dualstack
-    #         customer_owned_ipv_4_pool: "CustomerOwnedIpv4Pool",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the load balancer.
     #
@@ -857,110 +615,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateRuleInput
-    #   data as a hash:
-    #
-    #       {
-    #         listener_arn: "ListenerArn", # required
-    #         conditions: [ # required
-    #           {
-    #             field: "ConditionFieldName",
-    #             values: ["StringValue"],
-    #             host_header_config: {
-    #               values: ["StringValue"],
-    #             },
-    #             path_pattern_config: {
-    #               values: ["StringValue"],
-    #             },
-    #             http_header_config: {
-    #               http_header_name: "HttpHeaderConditionName",
-    #               values: ["StringValue"],
-    #             },
-    #             query_string_config: {
-    #               values: [
-    #                 {
-    #                   key: "StringValue",
-    #                   value: "StringValue",
-    #                 },
-    #               ],
-    #             },
-    #             http_request_method_config: {
-    #               values: ["StringValue"],
-    #             },
-    #             source_ip_config: {
-    #               values: ["StringValue"],
-    #             },
-    #           },
-    #         ],
-    #         priority: 1, # required
-    #         actions: [ # required
-    #           {
-    #             type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito, redirect, fixed-response
-    #             target_group_arn: "TargetGroupArn",
-    #             authenticate_oidc_config: {
-    #               issuer: "AuthenticateOidcActionIssuer", # required
-    #               authorization_endpoint: "AuthenticateOidcActionAuthorizationEndpoint", # required
-    #               token_endpoint: "AuthenticateOidcActionTokenEndpoint", # required
-    #               user_info_endpoint: "AuthenticateOidcActionUserInfoEndpoint", # required
-    #               client_id: "AuthenticateOidcActionClientId", # required
-    #               client_secret: "AuthenticateOidcActionClientSecret",
-    #               session_cookie_name: "AuthenticateOidcActionSessionCookieName",
-    #               scope: "AuthenticateOidcActionScope",
-    #               session_timeout: 1,
-    #               authentication_request_extra_params: {
-    #                 "AuthenticateOidcActionAuthenticationRequestParamName" => "AuthenticateOidcActionAuthenticationRequestParamValue",
-    #               },
-    #               on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
-    #               use_existing_client_secret: false,
-    #             },
-    #             authenticate_cognito_config: {
-    #               user_pool_arn: "AuthenticateCognitoActionUserPoolArn", # required
-    #               user_pool_client_id: "AuthenticateCognitoActionUserPoolClientId", # required
-    #               user_pool_domain: "AuthenticateCognitoActionUserPoolDomain", # required
-    #               session_cookie_name: "AuthenticateCognitoActionSessionCookieName",
-    #               scope: "AuthenticateCognitoActionScope",
-    #               session_timeout: 1,
-    #               authentication_request_extra_params: {
-    #                 "AuthenticateCognitoActionAuthenticationRequestParamName" => "AuthenticateCognitoActionAuthenticationRequestParamValue",
-    #               },
-    #               on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
-    #             },
-    #             order: 1,
-    #             redirect_config: {
-    #               protocol: "RedirectActionProtocol",
-    #               port: "RedirectActionPort",
-    #               host: "RedirectActionHost",
-    #               path: "RedirectActionPath",
-    #               query: "RedirectActionQuery",
-    #               status_code: "HTTP_301", # required, accepts HTTP_301, HTTP_302
-    #             },
-    #             fixed_response_config: {
-    #               message_body: "FixedResponseActionMessage",
-    #               status_code: "FixedResponseActionStatusCode", # required
-    #               content_type: "FixedResponseActionContentType",
-    #             },
-    #             forward_config: {
-    #               target_groups: [
-    #                 {
-    #                   target_group_arn: "TargetGroupArn",
-    #                   weight: 1,
-    #                 },
-    #               ],
-    #               target_group_stickiness_config: {
-    #                 enabled: false,
-    #                 duration_seconds: 1,
-    #               },
-    #             },
-    #           },
-    #         ],
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] listener_arn
     #   The Amazon Resource Name (ARN) of the listener.
     #   @return [String]
@@ -1006,37 +660,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateTargetGroupInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "TargetGroupName", # required
-    #         protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS, UDP, TCP_UDP, GENEVE
-    #         protocol_version: "ProtocolVersion",
-    #         port: 1,
-    #         vpc_id: "VpcId",
-    #         health_check_protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS, UDP, TCP_UDP, GENEVE
-    #         health_check_port: "HealthCheckPort",
-    #         health_check_enabled: false,
-    #         health_check_path: "Path",
-    #         health_check_interval_seconds: 1,
-    #         health_check_timeout_seconds: 1,
-    #         healthy_threshold_count: 1,
-    #         unhealthy_threshold_count: 1,
-    #         matcher: {
-    #           http_code: "HttpCode",
-    #           grpc_code: "GrpcCode",
-    #         },
-    #         target_type: "instance", # accepts instance, ip, lambda, alb
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         ip_address_type: "ipv4", # accepts ipv4, ipv6
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the target group.
     #
@@ -1219,13 +842,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteListenerInput
-    #   data as a hash:
-    #
-    #       {
-    #         listener_arn: "ListenerArn", # required
-    #       }
-    #
     # @!attribute [rw] listener_arn
     #   The Amazon Resource Name (ARN) of the listener.
     #   @return [String]
@@ -1242,13 +858,6 @@ module Aws::ElasticLoadBalancingV2
     #
     class DeleteListenerOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteLoadBalancerInput
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_arn: "LoadBalancerArn", # required
-    #       }
-    #
     # @!attribute [rw] load_balancer_arn
     #   The Amazon Resource Name (ARN) of the load balancer.
     #   @return [String]
@@ -1265,13 +874,6 @@ module Aws::ElasticLoadBalancingV2
     #
     class DeleteLoadBalancerOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteRuleInput
-    #   data as a hash:
-    #
-    #       {
-    #         rule_arn: "RuleArn", # required
-    #       }
-    #
     # @!attribute [rw] rule_arn
     #   The Amazon Resource Name (ARN) of the rule.
     #   @return [String]
@@ -1288,13 +890,6 @@ module Aws::ElasticLoadBalancingV2
     #
     class DeleteRuleOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteTargetGroupInput
-    #   data as a hash:
-    #
-    #       {
-    #         target_group_arn: "TargetGroupArn", # required
-    #       }
-    #
     # @!attribute [rw] target_group_arn
     #   The Amazon Resource Name (ARN) of the target group.
     #   @return [String]
@@ -1311,20 +906,6 @@ module Aws::ElasticLoadBalancingV2
     #
     class DeleteTargetGroupOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeregisterTargetsInput
-    #   data as a hash:
-    #
-    #       {
-    #         target_group_arn: "TargetGroupArn", # required
-    #         targets: [ # required
-    #           {
-    #             id: "TargetId", # required
-    #             port: 1,
-    #             availability_zone: "ZoneName",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] target_group_arn
     #   The Amazon Resource Name (ARN) of the target group.
     #   @return [String]
@@ -1348,14 +929,6 @@ module Aws::ElasticLoadBalancingV2
     #
     class DeregisterTargetsOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeAccountLimitsInput
-    #   data as a hash:
-    #
-    #       {
-    #         marker: "Marker",
-    #         page_size: 1,
-    #       }
-    #
     # @!attribute [rw] marker
     #   The marker for the next set of results. (You received this marker
     #   from a previous call.)
@@ -1392,15 +965,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeListenerCertificatesInput
-    #   data as a hash:
-    #
-    #       {
-    #         listener_arn: "ListenerArn", # required
-    #         marker: "Marker",
-    #         page_size: 1,
-    #       }
-    #
     # @!attribute [rw] listener_arn
     #   The Amazon Resource Names (ARN) of the listener.
     #   @return [String]
@@ -1442,16 +1006,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeListenersInput
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_arn: "LoadBalancerArn",
-    #         listener_arns: ["ListenerArn"],
-    #         marker: "Marker",
-    #         page_size: 1,
-    #       }
-    #
     # @!attribute [rw] load_balancer_arn
     #   The Amazon Resource Name (ARN) of the load balancer.
     #   @return [String]
@@ -1498,13 +1052,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeLoadBalancerAttributesInput
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_arn: "LoadBalancerArn", # required
-    #       }
-    #
     # @!attribute [rw] load_balancer_arn
     #   The Amazon Resource Name (ARN) of the load balancer.
     #   @return [String]
@@ -1529,16 +1076,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeLoadBalancersInput
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_arns: ["LoadBalancerArn"],
-    #         names: ["LoadBalancerName"],
-    #         marker: "Marker",
-    #         page_size: 1,
-    #       }
-    #
     # @!attribute [rw] load_balancer_arns
     #   The Amazon Resource Names (ARN) of the load balancers. You can
     #   specify up to 20 load balancers in a single call.
@@ -1586,16 +1123,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeRulesInput
-    #   data as a hash:
-    #
-    #       {
-    #         listener_arn: "ListenerArn",
-    #         rule_arns: ["RuleArn"],
-    #         marker: "Marker",
-    #         page_size: 1,
-    #       }
-    #
     # @!attribute [rw] listener_arn
     #   The Amazon Resource Name (ARN) of the listener.
     #   @return [String]
@@ -1642,16 +1169,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeSSLPoliciesInput
-    #   data as a hash:
-    #
-    #       {
-    #         names: ["SslPolicyName"],
-    #         marker: "Marker",
-    #         page_size: 1,
-    #         load_balancer_type: "application", # accepts application, network, gateway
-    #       }
-    #
     # @!attribute [rw] names
     #   The names of the policies.
     #   @return [Array<String>]
@@ -1699,13 +1216,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeTagsInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arns: ["ResourceArn"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arns
     #   The Amazon Resource Names (ARN) of the resources. You can specify up
     #   to 20 resources in a single call.
@@ -1731,13 +1241,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeTargetGroupAttributesInput
-    #   data as a hash:
-    #
-    #       {
-    #         target_group_arn: "TargetGroupArn", # required
-    #       }
-    #
     # @!attribute [rw] target_group_arn
     #   The Amazon Resource Name (ARN) of the target group.
     #   @return [String]
@@ -1762,17 +1265,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeTargetGroupsInput
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_arn: "LoadBalancerArn",
-    #         target_group_arns: ["TargetGroupArn"],
-    #         names: ["TargetGroupName"],
-    #         marker: "Marker",
-    #         page_size: 1,
-    #       }
-    #
     # @!attribute [rw] load_balancer_arn
     #   The Amazon Resource Name (ARN) of the load balancer.
     #   @return [String]
@@ -1824,20 +1316,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeTargetHealthInput
-    #   data as a hash:
-    #
-    #       {
-    #         target_group_arn: "TargetGroupArn", # required
-    #         targets: [
-    #           {
-    #             id: "TargetId", # required
-    #             port: 1,
-    #             availability_zone: "ZoneName",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] target_group_arn
     #   The Amazon Resource Name (ARN) of the target group.
     #   @return [String]
@@ -1893,15 +1371,6 @@ module Aws::ElasticLoadBalancingV2
 
     # Information about an action that returns a custom HTTP response.
     #
-    # @note When making an API call, you may pass FixedResponseActionConfig
-    #   data as a hash:
-    #
-    #       {
-    #         message_body: "FixedResponseActionMessage",
-    #         status_code: "FixedResponseActionStatusCode", # required
-    #         content_type: "FixedResponseActionContentType",
-    #       }
-    #
     # @!attribute [rw] message_body
     #   The message.
     #   @return [String]
@@ -1928,22 +1397,6 @@ module Aws::ElasticLoadBalancingV2
     end
 
     # Information about a forward action.
-    #
-    # @note When making an API call, you may pass ForwardActionConfig
-    #   data as a hash:
-    #
-    #       {
-    #         target_groups: [
-    #           {
-    #             target_group_arn: "TargetGroupArn",
-    #             weight: 1,
-    #           },
-    #         ],
-    #         target_group_stickiness_config: {
-    #           enabled: false,
-    #           duration_seconds: 1,
-    #         },
-    #       }
     #
     # @!attribute [rw] target_groups
     #   The target groups. For Network Load Balancers, you can specify a
@@ -1972,13 +1425,6 @@ module Aws::ElasticLoadBalancingV2
 
     # Information about a host header condition.
     #
-    # @note When making an API call, you may pass HostHeaderConditionConfig
-    #   data as a hash:
-    #
-    #       {
-    #         values: ["StringValue"],
-    #       }
-    #
     # @!attribute [rw] values
     #   The host names. The maximum size of each name is 128 characters. The
     #   comparison is case insensitive. The following wildcard characters
@@ -2001,14 +1447,6 @@ module Aws::ElasticLoadBalancingV2
     #
     # There is a set of standard HTTP header fields. You can also define
     # custom HTTP header fields.
-    #
-    # @note When making an API call, you may pass HttpHeaderConditionConfig
-    #   data as a hash:
-    #
-    #       {
-    #         http_header_name: "HttpHeaderConditionName",
-    #         values: ["StringValue"],
-    #       }
     #
     # @!attribute [rw] http_header_name
     #   The name of the HTTP header field. The maximum size is 40
@@ -2052,13 +1490,6 @@ module Aws::ElasticLoadBalancingV2
     #
     #
     # [1]: https://www.iana.org/assignments/http-methods/http-methods.xhtml
-    #
-    # @note When making an API call, you may pass HttpRequestMethodConditionConfig
-    #   data as a hash:
-    #
-    #       {
-    #         values: ["StringValue"],
-    #       }
     #
     # @!attribute [rw] values
     #   The name of the request method. The maximum size is 40 characters.
@@ -2357,14 +1788,6 @@ module Aws::ElasticLoadBalancingV2
 
     # Information about a load balancer attribute.
     #
-    # @note When making an API call, you may pass LoadBalancerAttribute
-    #   data as a hash:
-    #
-    #       {
-    #         key: "LoadBalancerAttributeKey",
-    #         value: "LoadBalancerAttributeValue",
-    #       }
-    #
     # @!attribute [rw] key
     #   The name of the attribute.
     #
@@ -2515,14 +1938,6 @@ module Aws::ElasticLoadBalancingV2
     # target. If the protocol version is gRPC, these are gRPC codes.
     # Otherwise, these are HTTP codes.
     #
-    # @note When making an API call, you may pass Matcher
-    #   data as a hash:
-    #
-    #       {
-    #         http_code: "HttpCode",
-    #         grpc_code: "GrpcCode",
-    #       }
-    #
     # @!attribute [rw] http_code
     #   For Application Load Balancers, you can specify values between 200
     #   and 499, with the default value being 200. You can specify multiple
@@ -2555,83 +1970,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyListenerInput
-    #   data as a hash:
-    #
-    #       {
-    #         listener_arn: "ListenerArn", # required
-    #         port: 1,
-    #         protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS, UDP, TCP_UDP, GENEVE
-    #         ssl_policy: "SslPolicyName",
-    #         certificates: [
-    #           {
-    #             certificate_arn: "CertificateArn",
-    #             is_default: false,
-    #           },
-    #         ],
-    #         default_actions: [
-    #           {
-    #             type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito, redirect, fixed-response
-    #             target_group_arn: "TargetGroupArn",
-    #             authenticate_oidc_config: {
-    #               issuer: "AuthenticateOidcActionIssuer", # required
-    #               authorization_endpoint: "AuthenticateOidcActionAuthorizationEndpoint", # required
-    #               token_endpoint: "AuthenticateOidcActionTokenEndpoint", # required
-    #               user_info_endpoint: "AuthenticateOidcActionUserInfoEndpoint", # required
-    #               client_id: "AuthenticateOidcActionClientId", # required
-    #               client_secret: "AuthenticateOidcActionClientSecret",
-    #               session_cookie_name: "AuthenticateOidcActionSessionCookieName",
-    #               scope: "AuthenticateOidcActionScope",
-    #               session_timeout: 1,
-    #               authentication_request_extra_params: {
-    #                 "AuthenticateOidcActionAuthenticationRequestParamName" => "AuthenticateOidcActionAuthenticationRequestParamValue",
-    #               },
-    #               on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
-    #               use_existing_client_secret: false,
-    #             },
-    #             authenticate_cognito_config: {
-    #               user_pool_arn: "AuthenticateCognitoActionUserPoolArn", # required
-    #               user_pool_client_id: "AuthenticateCognitoActionUserPoolClientId", # required
-    #               user_pool_domain: "AuthenticateCognitoActionUserPoolDomain", # required
-    #               session_cookie_name: "AuthenticateCognitoActionSessionCookieName",
-    #               scope: "AuthenticateCognitoActionScope",
-    #               session_timeout: 1,
-    #               authentication_request_extra_params: {
-    #                 "AuthenticateCognitoActionAuthenticationRequestParamName" => "AuthenticateCognitoActionAuthenticationRequestParamValue",
-    #               },
-    #               on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
-    #             },
-    #             order: 1,
-    #             redirect_config: {
-    #               protocol: "RedirectActionProtocol",
-    #               port: "RedirectActionPort",
-    #               host: "RedirectActionHost",
-    #               path: "RedirectActionPath",
-    #               query: "RedirectActionQuery",
-    #               status_code: "HTTP_301", # required, accepts HTTP_301, HTTP_302
-    #             },
-    #             fixed_response_config: {
-    #               message_body: "FixedResponseActionMessage",
-    #               status_code: "FixedResponseActionStatusCode", # required
-    #               content_type: "FixedResponseActionContentType",
-    #             },
-    #             forward_config: {
-    #               target_groups: [
-    #                 {
-    #                   target_group_arn: "TargetGroupArn",
-    #                   weight: 1,
-    #                 },
-    #               ],
-    #               target_group_stickiness_config: {
-    #                 enabled: false,
-    #                 duration_seconds: 1,
-    #               },
-    #             },
-    #           },
-    #         ],
-    #         alpn_policy: ["AlpnPolicyValue"],
-    #       }
-    #
     # @!attribute [rw] listener_arn
     #   The Amazon Resource Name (ARN) of the listener.
     #   @return [String]
@@ -2723,19 +2061,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyLoadBalancerAttributesInput
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_arn: "LoadBalancerArn", # required
-    #         attributes: [ # required
-    #           {
-    #             key: "LoadBalancerAttributeKey",
-    #             value: "LoadBalancerAttributeValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] load_balancer_arn
     #   The Amazon Resource Name (ARN) of the load balancer.
     #   @return [String]
@@ -2765,103 +2090,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyRuleInput
-    #   data as a hash:
-    #
-    #       {
-    #         rule_arn: "RuleArn", # required
-    #         conditions: [
-    #           {
-    #             field: "ConditionFieldName",
-    #             values: ["StringValue"],
-    #             host_header_config: {
-    #               values: ["StringValue"],
-    #             },
-    #             path_pattern_config: {
-    #               values: ["StringValue"],
-    #             },
-    #             http_header_config: {
-    #               http_header_name: "HttpHeaderConditionName",
-    #               values: ["StringValue"],
-    #             },
-    #             query_string_config: {
-    #               values: [
-    #                 {
-    #                   key: "StringValue",
-    #                   value: "StringValue",
-    #                 },
-    #               ],
-    #             },
-    #             http_request_method_config: {
-    #               values: ["StringValue"],
-    #             },
-    #             source_ip_config: {
-    #               values: ["StringValue"],
-    #             },
-    #           },
-    #         ],
-    #         actions: [
-    #           {
-    #             type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito, redirect, fixed-response
-    #             target_group_arn: "TargetGroupArn",
-    #             authenticate_oidc_config: {
-    #               issuer: "AuthenticateOidcActionIssuer", # required
-    #               authorization_endpoint: "AuthenticateOidcActionAuthorizationEndpoint", # required
-    #               token_endpoint: "AuthenticateOidcActionTokenEndpoint", # required
-    #               user_info_endpoint: "AuthenticateOidcActionUserInfoEndpoint", # required
-    #               client_id: "AuthenticateOidcActionClientId", # required
-    #               client_secret: "AuthenticateOidcActionClientSecret",
-    #               session_cookie_name: "AuthenticateOidcActionSessionCookieName",
-    #               scope: "AuthenticateOidcActionScope",
-    #               session_timeout: 1,
-    #               authentication_request_extra_params: {
-    #                 "AuthenticateOidcActionAuthenticationRequestParamName" => "AuthenticateOidcActionAuthenticationRequestParamValue",
-    #               },
-    #               on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
-    #               use_existing_client_secret: false,
-    #             },
-    #             authenticate_cognito_config: {
-    #               user_pool_arn: "AuthenticateCognitoActionUserPoolArn", # required
-    #               user_pool_client_id: "AuthenticateCognitoActionUserPoolClientId", # required
-    #               user_pool_domain: "AuthenticateCognitoActionUserPoolDomain", # required
-    #               session_cookie_name: "AuthenticateCognitoActionSessionCookieName",
-    #               scope: "AuthenticateCognitoActionScope",
-    #               session_timeout: 1,
-    #               authentication_request_extra_params: {
-    #                 "AuthenticateCognitoActionAuthenticationRequestParamName" => "AuthenticateCognitoActionAuthenticationRequestParamValue",
-    #               },
-    #               on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
-    #             },
-    #             order: 1,
-    #             redirect_config: {
-    #               protocol: "RedirectActionProtocol",
-    #               port: "RedirectActionPort",
-    #               host: "RedirectActionHost",
-    #               path: "RedirectActionPath",
-    #               query: "RedirectActionQuery",
-    #               status_code: "HTTP_301", # required, accepts HTTP_301, HTTP_302
-    #             },
-    #             fixed_response_config: {
-    #               message_body: "FixedResponseActionMessage",
-    #               status_code: "FixedResponseActionStatusCode", # required
-    #               content_type: "FixedResponseActionContentType",
-    #             },
-    #             forward_config: {
-    #               target_groups: [
-    #                 {
-    #                   target_group_arn: "TargetGroupArn",
-    #                   weight: 1,
-    #                 },
-    #               ],
-    #               target_group_stickiness_config: {
-    #                 enabled: false,
-    #                 duration_seconds: 1,
-    #               },
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] rule_arn
     #   The Amazon Resource Name (ARN) of the rule.
     #   @return [String]
@@ -2896,19 +2124,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyTargetGroupAttributesInput
-    #   data as a hash:
-    #
-    #       {
-    #         target_group_arn: "TargetGroupArn", # required
-    #         attributes: [ # required
-    #           {
-    #             key: "TargetGroupAttributeKey",
-    #             value: "TargetGroupAttributeValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] target_group_arn
     #   The Amazon Resource Name (ARN) of the target group.
     #   @return [String]
@@ -2938,25 +2153,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyTargetGroupInput
-    #   data as a hash:
-    #
-    #       {
-    #         target_group_arn: "TargetGroupArn", # required
-    #         health_check_protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS, UDP, TCP_UDP, GENEVE
-    #         health_check_port: "HealthCheckPort",
-    #         health_check_path: "Path",
-    #         health_check_enabled: false,
-    #         health_check_interval_seconds: 1,
-    #         health_check_timeout_seconds: 1,
-    #         healthy_threshold_count: 1,
-    #         unhealthy_threshold_count: 1,
-    #         matcher: {
-    #           http_code: "HttpCode",
-    #           grpc_code: "GrpcCode",
-    #         },
-    #       }
-    #
     # @!attribute [rw] target_group_arn
     #   The Amazon Resource Name (ARN) of the target group.
     #   @return [String]
@@ -3058,13 +2254,6 @@ module Aws::ElasticLoadBalancingV2
 
     # Information about a path pattern condition.
     #
-    # @note When making an API call, you may pass PathPatternConditionConfig
-    #   data as a hash:
-    #
-    #       {
-    #         values: ["StringValue"],
-    #       }
-    #
     # @!attribute [rw] values
     #   The path patterns to compare against the request URL. The maximum
     #   size of each string is 128 characters. The comparison is case
@@ -3099,18 +2288,6 @@ module Aws::ElasticLoadBalancingV2
     # '&amp;' characters. The allowed characters are specified by RFC
     # 3986. Any character can be percentage encoded.
     #
-    # @note When making an API call, you may pass QueryStringConditionConfig
-    #   data as a hash:
-    #
-    #       {
-    #         values: [
-    #           {
-    #             key: "StringValue",
-    #             value: "StringValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] values
     #   The key/value pairs or values to find in the query string. The
     #   maximum size of each string is 128 characters. The comparison is
@@ -3133,14 +2310,6 @@ module Aws::ElasticLoadBalancingV2
     end
 
     # Information about a key/value pair.
-    #
-    # @note When making an API call, you may pass QueryStringKeyValuePair
-    #   data as a hash:
-    #
-    #       {
-    #         key: "StringValue",
-    #         value: "StringValue",
-    #       }
     #
     # @!attribute [rw] key
     #   The key. You can omit the key.
@@ -3182,18 +2351,6 @@ module Aws::ElasticLoadBalancingV2
     # For example, you can change the path to "/new/#\\\{path\\}", the
     # hostname to "example.#\\\{host\\}", or the query to
     # "#\\\{query\\}&amp;value=xyz".
-    #
-    # @note When making an API call, you may pass RedirectActionConfig
-    #   data as a hash:
-    #
-    #       {
-    #         protocol: "RedirectActionProtocol",
-    #         port: "RedirectActionPort",
-    #         host: "RedirectActionHost",
-    #         path: "RedirectActionPath",
-    #         query: "RedirectActionQuery",
-    #         status_code: "HTTP_301", # required, accepts HTTP_301, HTTP_302
-    #       }
     #
     # @!attribute [rw] protocol
     #   The protocol. You can specify HTTP, HTTPS, or #\\\{protocol\\}. You
@@ -3240,20 +2397,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RegisterTargetsInput
-    #   data as a hash:
-    #
-    #       {
-    #         target_group_arn: "TargetGroupArn", # required
-    #         targets: [ # required
-    #           {
-    #             id: "TargetId", # required
-    #             port: 1,
-    #             availability_zone: "ZoneName",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] target_group_arn
     #   The Amazon Resource Name (ARN) of the target group.
     #   @return [String]
@@ -3275,19 +2418,6 @@ module Aws::ElasticLoadBalancingV2
     #
     class RegisterTargetsOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass RemoveListenerCertificatesInput
-    #   data as a hash:
-    #
-    #       {
-    #         listener_arn: "ListenerArn", # required
-    #         certificates: [ # required
-    #           {
-    #             certificate_arn: "CertificateArn",
-    #             is_default: false,
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] listener_arn
     #   The Amazon Resource Name (ARN) of the listener.
     #   @return [String]
@@ -3311,14 +2441,6 @@ module Aws::ElasticLoadBalancingV2
     #
     class RemoveListenerCertificatesOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass RemoveTagsInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arns: ["ResourceArn"], # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arns
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [Array<String>]
@@ -3392,38 +2514,6 @@ module Aws::ElasticLoadBalancingV2
     # `source-ip`. Each rule can also optionally include one or more of each
     # of the following conditions: `http-header` and `query-string`. Note
     # that the value for a condition cannot be empty.
-    #
-    # @note When making an API call, you may pass RuleCondition
-    #   data as a hash:
-    #
-    #       {
-    #         field: "ConditionFieldName",
-    #         values: ["StringValue"],
-    #         host_header_config: {
-    #           values: ["StringValue"],
-    #         },
-    #         path_pattern_config: {
-    #           values: ["StringValue"],
-    #         },
-    #         http_header_config: {
-    #           http_header_name: "HttpHeaderConditionName",
-    #           values: ["StringValue"],
-    #         },
-    #         query_string_config: {
-    #           values: [
-    #             {
-    #               key: "StringValue",
-    #               value: "StringValue",
-    #             },
-    #           ],
-    #         },
-    #         http_request_method_config: {
-    #           values: ["StringValue"],
-    #         },
-    #         source_ip_config: {
-    #           values: ["StringValue"],
-    #         },
-    #       }
     #
     # @!attribute [rw] field
     #   The field in the HTTP request. The following are the possible
@@ -3532,14 +2622,6 @@ module Aws::ElasticLoadBalancingV2
 
     # Information about the priorities for the rules for a listener.
     #
-    # @note When making an API call, you may pass RulePriorityPair
-    #   data as a hash:
-    #
-    #       {
-    #         rule_arn: "RuleArn",
-    #         priority: 1,
-    #       }
-    #
     # @!attribute [rw] rule_arn
     #   The Amazon Resource Name (ARN) of the rule.
     #   @return [String]
@@ -3563,14 +2645,6 @@ module Aws::ElasticLoadBalancingV2
     #
     class SSLPolicyNotFoundException < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass SetIpAddressTypeInput
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_arn: "LoadBalancerArn", # required
-    #         ip_address_type: "ipv4", # required, accepts ipv4, dualstack
-    #       }
-    #
     # @!attribute [rw] load_balancer_arn
     #   The Amazon Resource Name (ARN) of the load balancer.
     #   @return [String]
@@ -3603,18 +2677,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SetRulePrioritiesInput
-    #   data as a hash:
-    #
-    #       {
-    #         rule_priorities: [ # required
-    #           {
-    #             rule_arn: "RuleArn",
-    #             priority: 1,
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] rule_priorities
     #   The rule priorities.
     #   @return [Array<Types::RulePriorityPair>]
@@ -3639,14 +2701,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SetSecurityGroupsInput
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_arn: "LoadBalancerArn", # required
-    #         security_groups: ["SecurityGroupId"], # required
-    #       }
-    #
     # @!attribute [rw] load_balancer_arn
     #   The Amazon Resource Name (ARN) of the load balancer.
     #   @return [String]
@@ -3676,23 +2730,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SetSubnetsInput
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_arn: "LoadBalancerArn", # required
-    #         subnets: ["SubnetId"],
-    #         subnet_mappings: [
-    #           {
-    #             subnet_id: "SubnetId",
-    #             allocation_id: "AllocationId",
-    #             private_i_pv_4_address: "PrivateIPv4Address",
-    #             i_pv_6_address: "IPv6Address",
-    #           },
-    #         ],
-    #         ip_address_type: "ipv4", # accepts ipv4, dualstack
-    #       }
-    #
     # @!attribute [rw] load_balancer_arn
     #   The Amazon Resource Name (ARN) of the load balancer.
     #   @return [String]
@@ -3782,13 +2819,6 @@ module Aws::ElasticLoadBalancingV2
     # proxy, this is the IP address of the proxy not the IP address of the
     # client.
     #
-    # @note When making an API call, you may pass SourceIpConditionConfig
-    #   data as a hash:
-    #
-    #       {
-    #         values: ["StringValue"],
-    #       }
-    #
     # @!attribute [rw] values
     #   The source IP addresses, in CIDR format. You can use both IPv4 and
     #   IPv6 addresses. Wildcards are not supported.
@@ -3839,16 +2869,6 @@ module Aws::ElasticLoadBalancingV2
 
     # Information about a subnet mapping.
     #
-    # @note When making an API call, you may pass SubnetMapping
-    #   data as a hash:
-    #
-    #       {
-    #         subnet_id: "SubnetId",
-    #         allocation_id: "AllocationId",
-    #         private_i_pv_4_address: "PrivateIPv4Address",
-    #         i_pv_6_address: "IPv6Address",
-    #       }
-    #
     # @!attribute [rw] subnet_id
     #   The ID of the subnet.
     #   @return [String]
@@ -3885,14 +2905,6 @@ module Aws::ElasticLoadBalancingV2
     class SubnetNotFoundException < Aws::EmptyStructure; end
 
     # Information about a tag.
-    #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue",
-    #       }
     #
     # @!attribute [rw] key
     #   The key of the tag.
@@ -3931,15 +2943,6 @@ module Aws::ElasticLoadBalancingV2
     end
 
     # Information about a target.
-    #
-    # @note When making an API call, you may pass TargetDescription
-    #   data as a hash:
-    #
-    #       {
-    #         id: "TargetId", # required
-    #         port: 1,
-    #         availability_zone: "ZoneName",
-    #       }
     #
     # @!attribute [rw] id
     #   The ID of the target. If the target type of the target group is
@@ -4118,14 +3121,6 @@ module Aws::ElasticLoadBalancingV2
 
     # Information about a target group attribute.
     #
-    # @note When making an API call, you may pass TargetGroupAttribute
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TargetGroupAttributeKey",
-    #         value: "TargetGroupAttributeValue",
-    #       }
-    #
     # @!attribute [rw] key
     #   The name of the attribute.
     #
@@ -4291,14 +3286,6 @@ module Aws::ElasticLoadBalancingV2
 
     # Information about the target group stickiness for a rule.
     #
-    # @note When making an API call, you may pass TargetGroupStickinessConfig
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false,
-    #         duration_seconds: 1,
-    #       }
-    #
     # @!attribute [rw] enabled
     #   Indicates whether target group stickiness is enabled.
     #   @return [Boolean]
@@ -4320,14 +3307,6 @@ module Aws::ElasticLoadBalancingV2
 
     # Information about how traffic will be distributed between multiple
     # target groups in a forward rule.
-    #
-    # @note When making an API call, you may pass TargetGroupTuple
-    #   data as a hash:
-    #
-    #       {
-    #         target_group_arn: "TargetGroupArn",
-    #         weight: 1,
-    #       }
     #
     # @!attribute [rw] target_group_arn
     #   The Amazon Resource Name (ARN) of the target group.

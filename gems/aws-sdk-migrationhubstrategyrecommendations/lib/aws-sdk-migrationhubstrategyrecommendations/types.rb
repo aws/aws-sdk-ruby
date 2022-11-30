@@ -202,23 +202,6 @@ module Aws::MigrationHubStrategyRecommendations
 
     # Application preferences that you specify.
     #
-    # @note When making an API call, you may pass ApplicationPreferences
-    #   data as a hash:
-    #
-    #       {
-    #         management_preference: {
-    #           aws_managed_resources: {
-    #             target_destination: ["None specified"], # required, accepts None specified, AWS Elastic BeanStalk, AWS Fargate
-    #           },
-    #           no_preference: {
-    #             target_destination: ["None specified"], # required, accepts None specified, AWS Elastic BeanStalk, AWS Fargate, Amazon Elastic Cloud Compute (EC2), Amazon Elastic Container Service (ECS), Amazon Elastic Kubernetes Service (EKS)
-    #           },
-    #           self_manage_resources: {
-    #             target_destination: ["None specified"], # required, accepts None specified, Amazon Elastic Cloud Compute (EC2), Amazon Elastic Container Service (ECS), Amazon Elastic Kubernetes Service (EKS)
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] management_preference
     #   Application preferences that you specify to prefer managed
     #   environment.
@@ -309,13 +292,6 @@ module Aws::MigrationHubStrategyRecommendations
     # Object containing the choice of application destination that you
     # specify.
     #
-    # @note When making an API call, you may pass AwsManagedResources
-    #   data as a hash:
-    #
-    #       {
-    #         target_destination: ["None specified"], # required, accepts None specified, AWS Elastic BeanStalk, AWS Fargate
-    #       }
-    #
     # @!attribute [rw] target_destination
     #   The choice of application destination that you specify.
     #   @return [Array<String>]
@@ -329,16 +305,6 @@ module Aws::MigrationHubStrategyRecommendations
     end
 
     # Business goals that you specify.
-    #
-    # @note When making an API call, you may pass BusinessGoals
-    #   data as a hash:
-    #
-    #       {
-    #         license_cost_reduction: 1,
-    #         modernize_infrastructure_with_cloud_native_technologies: 1,
-    #         reduce_operational_overhead_with_managed_services: 1,
-    #         speed_of_migration: 1,
-    #       }
     #
     # @!attribute [rw] license_cost_reduction
     #   Business goal to reduce license costs.
@@ -489,10 +455,6 @@ module Aws::MigrationHubStrategyRecommendations
 
     # Preferences for migrating a database to AWS.
     #
-    # @note DatabaseMigrationPreference is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note DatabaseMigrationPreference is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of DatabaseMigrationPreference corresponding to the set member.
-    #
     # @!attribute [rw] heterogeneous
     #   Indicates whether you are interested in moving from one type of
     #   database to another. For example, from SQL Server to Amazon Aurora
@@ -528,24 +490,6 @@ module Aws::MigrationHubStrategyRecommendations
 
     # Preferences on managing your databases on AWS.
     #
-    # @note When making an API call, you may pass DatabasePreferences
-    #   data as a hash:
-    #
-    #       {
-    #         database_management_preference: "AWS-managed", # accepts AWS-managed, Self-manage, No preference
-    #         database_migration_preference: {
-    #           heterogeneous: {
-    #             target_database_engine: ["None specified"], # required, accepts None specified, Amazon Aurora, AWS PostgreSQL, MySQL, Microsoft SQL Server, Oracle Database, MariaDB, SAP, Db2 LUW, MongoDB
-    #           },
-    #           homogeneous: {
-    #             target_database_engine: ["None specified"], # accepts None specified
-    #           },
-    #           no_preference: {
-    #             target_database_engine: ["None specified"], # required, accepts None specified, Amazon Aurora, AWS PostgreSQL, MySQL, Microsoft SQL Server, Oracle Database, MariaDB, SAP, Db2 LUW, MongoDB
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] database_management_preference
     #   Specifies whether you're interested in self-managed databases or
     #   databases managed by AWS.
@@ -564,13 +508,6 @@ module Aws::MigrationHubStrategyRecommendations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetApplicationComponentDetailsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_component_id: "ApplicationComponentId", # required
-    #       }
-    #
     # @!attribute [rw] application_component_id
     #   The ID of the application component. The ID is unique within an AWS
     #   account.
@@ -614,13 +551,6 @@ module Aws::MigrationHubStrategyRecommendations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetApplicationComponentStrategiesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_component_id: "ApplicationComponentId", # required
-    #       }
-    #
     # @!attribute [rw] application_component_id
     #   The ID of the application component. The ID is unique within an AWS
     #   account.
@@ -646,13 +576,6 @@ module Aws::MigrationHubStrategyRecommendations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAssessmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "AsyncTaskId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The `assessmentid` returned by StartAssessment.
     #   @return [String]
@@ -682,13 +605,6 @@ module Aws::MigrationHubStrategyRecommendations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetImportFileTaskRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "String", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the import file task. This ID is returned in the response
     #   of StartImportFileTask.
@@ -767,8 +683,6 @@ module Aws::MigrationHubStrategyRecommendations
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhubstrategy-2020-02-19/GetPortfolioPreferencesRequest AWS API Documentation
     #
     class GetPortfolioPreferencesRequest < Aws::EmptyStructure; end
@@ -795,8 +709,6 @@ module Aws::MigrationHubStrategyRecommendations
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhubstrategy-2020-02-19/GetPortfolioSummaryRequest AWS API Documentation
     #
     class GetPortfolioSummaryRequest < Aws::EmptyStructure; end
@@ -814,13 +726,6 @@ module Aws::MigrationHubStrategyRecommendations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRecommendationReportDetailsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "RecommendationTaskId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The recommendation report generation task `id` returned by
     #   StartRecommendationReportGeneration.
@@ -852,15 +757,6 @@ module Aws::MigrationHubStrategyRecommendations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetServerDetailsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         server_id: "ServerId", # required
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of items to include in the response. The maximum
     #   value is 100.
@@ -912,13 +808,6 @@ module Aws::MigrationHubStrategyRecommendations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetServerStrategiesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         server_id: "ServerId", # required
-    #       }
-    #
     # @!attribute [rw] server_id
     #   The ID of the server.
     #   @return [String]
@@ -946,14 +835,6 @@ module Aws::MigrationHubStrategyRecommendations
     # The object containing information about distinct imports or groups for
     # Strategy Recommendations.
     #
-    # @note When making an API call, you may pass Group
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ExternalId", # accepts ExternalId
-    #         value: "String",
-    #       }
-    #
     # @!attribute [rw] name
     #   The key of the specific import group.
     #   @return [String]
@@ -974,13 +855,6 @@ module Aws::MigrationHubStrategyRecommendations
     # The object containing details about heterogeneous database
     # preferences.
     #
-    # @note When making an API call, you may pass Heterogeneous
-    #   data as a hash:
-    #
-    #       {
-    #         target_database_engine: ["None specified"], # required, accepts None specified, Amazon Aurora, AWS PostgreSQL, MySQL, Microsoft SQL Server, Oracle Database, MariaDB, SAP, Db2 LUW, MongoDB
-    #       }
-    #
     # @!attribute [rw] target_database_engine
     #   The target database engine for heterogeneous database migration
     #   preference.
@@ -995,13 +869,6 @@ module Aws::MigrationHubStrategyRecommendations
     end
 
     # The object containing details about homogeneous database preferences.
-    #
-    # @note When making an API call, you may pass Homogeneous
-    #   data as a hash:
-    #
-    #       {
-    #         target_database_engine: ["None specified"], # accepts None specified
-    #       }
     #
     # @!attribute [rw] target_database_engine
     #   The target database engine for homogeneous database migration
@@ -1095,23 +962,6 @@ module Aws::MigrationHubStrategyRecommendations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListApplicationComponentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_component_criteria: "NOT_DEFINED", # accepts NOT_DEFINED, APP_NAME, SERVER_ID, APP_TYPE, STRATEGY, DESTINATION
-    #         filter_value: "ListApplicationComponentsRequestFilterValueString",
-    #         group_id_filter: [
-    #           {
-    #             name: "ExternalId", # accepts ExternalId
-    #             value: "String",
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         sort: "ASC", # accepts ASC, DESC
-    #       }
-    #
     # @!attribute [rw] application_component_criteria
     #   Criteria for filtering the list of application components.
     #   @return [String]
@@ -1178,14 +1028,6 @@ module Aws::MigrationHubStrategyRecommendations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCollectorsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of items to include in the response. The maximum
     #   value is 100.
@@ -1226,14 +1068,6 @@ module Aws::MigrationHubStrategyRecommendations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListImportFileTaskRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The total number of items to return. The maximum value is 100.
     #   @return [Integer]
@@ -1273,23 +1107,6 @@ module Aws::MigrationHubStrategyRecommendations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListServersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter_value: "String",
-    #         group_id_filter: [
-    #           {
-    #             name: "ExternalId", # accepts ExternalId
-    #             value: "String",
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         server_criteria: "NOT_DEFINED", # accepts NOT_DEFINED, OS_NAME, STRATEGY, DESTINATION, SERVER_ID
-    #         sort: "ASC", # accepts ASC, DESC
-    #       }
-    #
     # @!attribute [rw] filter_value
     #   Specifies the filter value, which is based on the type of server
     #   criteria. For example, if `serverCriteria` is `OS_NAME`, and the
@@ -1355,10 +1172,6 @@ module Aws::MigrationHubStrategyRecommendations
     end
 
     # Preferences for migrating an application to AWS.
-    #
-    # @note ManagementPreference is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note ManagementPreference is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ManagementPreference corresponding to the set member.
     #
     # @!attribute [rw] aws_managed_resources
     #   Indicates interest in solutions that are managed by AWS.
@@ -1426,13 +1239,6 @@ module Aws::MigrationHubStrategyRecommendations
     # The object containing details about database migration preferences,
     # when you have no particular preference.
     #
-    # @note When making an API call, you may pass NoDatabaseMigrationPreference
-    #   data as a hash:
-    #
-    #       {
-    #         target_database_engine: ["None specified"], # required, accepts None specified, Amazon Aurora, AWS PostgreSQL, MySQL, Microsoft SQL Server, Oracle Database, MariaDB, SAP, Db2 LUW, MongoDB
-    #       }
-    #
     # @!attribute [rw] target_database_engine
     #   The target database engine for database migration preference that
     #   you specify.
@@ -1448,13 +1254,6 @@ module Aws::MigrationHubStrategyRecommendations
 
     # Object containing the choice of application destination that you
     # specify.
-    #
-    # @note When making an API call, you may pass NoManagementPreference
-    #   data as a hash:
-    #
-    #       {
-    #         target_destination: ["None specified"], # required, accepts None specified, AWS Elastic BeanStalk, AWS Fargate, Amazon Elastic Cloud Compute (EC2), Amazon Elastic Container Service (ECS), Amazon Elastic Kubernetes Service (EKS)
-    #       }
     #
     # @!attribute [rw] target_destination
     #   The choice of application destination that you specify.
@@ -1489,18 +1288,6 @@ module Aws::MigrationHubStrategyRecommendations
 
     # Rank of business goals based on priority.
     #
-    # @note When making an API call, you may pass PrioritizeBusinessGoals
-    #   data as a hash:
-    #
-    #       {
-    #         business_goals: {
-    #           license_cost_reduction: 1,
-    #           modernize_infrastructure_with_cloud_native_technologies: 1,
-    #           reduce_operational_overhead_with_managed_services: 1,
-    #           speed_of_migration: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] business_goals
     #   Rank of business goals based on priority.
     #   @return [Types::BusinessGoals]
@@ -1513,47 +1300,6 @@ module Aws::MigrationHubStrategyRecommendations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutPortfolioPreferencesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_preferences: {
-    #           management_preference: {
-    #             aws_managed_resources: {
-    #               target_destination: ["None specified"], # required, accepts None specified, AWS Elastic BeanStalk, AWS Fargate
-    #             },
-    #             no_preference: {
-    #               target_destination: ["None specified"], # required, accepts None specified, AWS Elastic BeanStalk, AWS Fargate, Amazon Elastic Cloud Compute (EC2), Amazon Elastic Container Service (ECS), Amazon Elastic Kubernetes Service (EKS)
-    #             },
-    #             self_manage_resources: {
-    #               target_destination: ["None specified"], # required, accepts None specified, Amazon Elastic Cloud Compute (EC2), Amazon Elastic Container Service (ECS), Amazon Elastic Kubernetes Service (EKS)
-    #             },
-    #           },
-    #         },
-    #         database_preferences: {
-    #           database_management_preference: "AWS-managed", # accepts AWS-managed, Self-manage, No preference
-    #           database_migration_preference: {
-    #             heterogeneous: {
-    #               target_database_engine: ["None specified"], # required, accepts None specified, Amazon Aurora, AWS PostgreSQL, MySQL, Microsoft SQL Server, Oracle Database, MariaDB, SAP, Db2 LUW, MongoDB
-    #             },
-    #             homogeneous: {
-    #               target_database_engine: ["None specified"], # accepts None specified
-    #             },
-    #             no_preference: {
-    #               target_database_engine: ["None specified"], # required, accepts None specified, Amazon Aurora, AWS PostgreSQL, MySQL, Microsoft SQL Server, Oracle Database, MariaDB, SAP, Db2 LUW, MongoDB
-    #             },
-    #           },
-    #         },
-    #         prioritize_business_goals: {
-    #           business_goals: {
-    #             license_cost_reduction: 1,
-    #             modernize_infrastructure_with_cloud_native_technologies: 1,
-    #             reduce_operational_overhead_with_managed_services: 1,
-    #             speed_of_migration: 1,
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] application_preferences
     #   The transformation preferences for non-database applications.
     #   @return [Types::ApplicationPreferences]
@@ -1676,13 +1422,6 @@ module Aws::MigrationHubStrategyRecommendations
     end
 
     # Self-managed resources.
-    #
-    # @note When making an API call, you may pass SelfManageResources
-    #   data as a hash:
-    #
-    #       {
-    #         target_destination: ["None specified"], # required, accepts None specified, Amazon Elastic Cloud Compute (EC2), Amazon Elastic Container Service (ECS), Amazon Elastic Kubernetes Service (EKS)
-    #       }
     #
     # @!attribute [rw] target_destination
     #   Self-managed resources target destination.
@@ -1851,15 +1590,6 @@ module Aws::MigrationHubStrategyRecommendations
     # Object containing source code information that is linked to an
     # application component.
     #
-    # @note When making an API call, you may pass SourceCode
-    #   data as a hash:
-    #
-    #       {
-    #         location: "Location",
-    #         source_version: "SourceVersion",
-    #         version_control: "GITHUB", # accepts GITHUB, GITHUB_ENTERPRISE
-    #       }
-    #
     # @!attribute [rw] location
     #   The repository name for the source code.
     #   @return [String]
@@ -1907,14 +1637,6 @@ module Aws::MigrationHubStrategyRecommendations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartAssessmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         s3bucket_for_analysis_data: "StartAssessmentRequestS3bucketForAnalysisDataString",
-    #         s3bucket_for_report_data: "StartAssessmentRequestS3bucketForReportDataString",
-    #       }
-    #
     # @!attribute [rw] s3bucket_for_analysis_data
     #   The S3 bucket used by the collectors to send analysis data to the
     #   service. The bucket name must begin with `migrationhub-strategy-`.
@@ -1946,23 +1668,6 @@ module Aws::MigrationHubStrategyRecommendations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartImportFileTaskRequest
-    #   data as a hash:
-    #
-    #       {
-    #         s3_bucket: "importS3Bucket", # required
-    #         data_source_type: "ApplicationDiscoveryService", # accepts ApplicationDiscoveryService, MPA
-    #         group_id: [
-    #           {
-    #             name: "ExternalId", # accepts ExternalId
-    #             value: "String",
-    #           },
-    #         ],
-    #         name: "StartImportFileTaskRequestNameString", # required
-    #         s3bucket_for_report_data: "StartImportFileTaskRequestS3bucketForReportDataString",
-    #         s3key: "String", # required
-    #       }
-    #
     # @!attribute [rw] s3_bucket
     #   The S3 bucket where the import file is located. The bucket name is
     #   required to begin with `migrationhub-strategy-`.
@@ -2019,19 +1724,6 @@ module Aws::MigrationHubStrategyRecommendations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartRecommendationReportGenerationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         group_id_filter: [
-    #           {
-    #             name: "ExternalId", # accepts ExternalId
-    #             value: "String",
-    #           },
-    #         ],
-    #         output_format: "Excel", # accepts Excel, Json
-    #       }
-    #
     # @!attribute [rw] group_id_filter
     #   Groups the resources in the recommendation report with a unique
     #   name.
@@ -2063,13 +1755,6 @@ module Aws::MigrationHubStrategyRecommendations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopAssessmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assessment_id: "AsyncTaskId", # required
-    #       }
-    #
     # @!attribute [rw] assessment_id
     #   The `assessmentId` returned by StartAssessment.
     #   @return [String]
@@ -2088,16 +1773,6 @@ module Aws::MigrationHubStrategyRecommendations
 
     # Information about all the available strategy options for migrating and
     # modernizing an application component.
-    #
-    # @note When making an API call, you may pass StrategyOption
-    #   data as a hash:
-    #
-    #       {
-    #         is_preferred: false,
-    #         strategy: "Rehost", # accepts Rehost, Retirement, Refactor, Replatform, Retain, Relocate, Repurchase
-    #         target_destination: "None specified", # accepts None specified, AWS Elastic BeanStalk, AWS Fargate, Amazon Elastic Cloud Compute (EC2), Amazon Elastic Container Service (ECS), Amazon Elastic Kubernetes Service (EKS), Aurora MySQL, Aurora PostgreSQL, Amazon Relational Database Service on MySQL, Amazon Relational Database Service on PostgreSQL, Amazon DocumentDB, Amazon DynamoDB, Amazon Relational Database Service
-    #         tool_name: "App2Container", # accepts App2Container, Porting Assistant For .NET, End of Support Migration, Windows Web Application Migration Assistant, Application Migration Service, Strategy Recommendation Support, In Place Operating System Upgrade, Schema Conversion Tool, Database Migration Service, Native SQL Server Backup/Restore
-    #       }
     #
     # @!attribute [rw] is_preferred
     #   Indicates if a specific strategy is preferred for the application
@@ -2215,28 +1890,6 @@ module Aws::MigrationHubStrategyRecommendations
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateApplicationComponentConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_component_id: "ApplicationComponentId", # required
-    #         inclusion_status: "excludeFromAssessment", # accepts excludeFromAssessment, includeInAssessment
-    #         secrets_manager_key: "SecretsManagerKey",
-    #         source_code_list: [
-    #           {
-    #             location: "Location",
-    #             source_version: "SourceVersion",
-    #             version_control: "GITHUB", # accepts GITHUB, GITHUB_ENTERPRISE
-    #           },
-    #         ],
-    #         strategy_option: {
-    #           is_preferred: false,
-    #           strategy: "Rehost", # accepts Rehost, Retirement, Refactor, Replatform, Retain, Relocate, Repurchase
-    #           target_destination: "None specified", # accepts None specified, AWS Elastic BeanStalk, AWS Fargate, Amazon Elastic Cloud Compute (EC2), Amazon Elastic Container Service (ECS), Amazon Elastic Kubernetes Service (EKS), Aurora MySQL, Aurora PostgreSQL, Amazon Relational Database Service on MySQL, Amazon Relational Database Service on PostgreSQL, Amazon DocumentDB, Amazon DynamoDB, Amazon Relational Database Service
-    #           tool_name: "App2Container", # accepts App2Container, Porting Assistant For .NET, End of Support Migration, Windows Web Application Migration Assistant, Application Migration Service, Strategy Recommendation Support, In Place Operating System Upgrade, Schema Conversion Tool, Database Migration Service, Native SQL Server Backup/Restore
-    #         },
-    #       }
-    #
     # @!attribute [rw] application_component_id
     #   The ID of the application component. The ID is unique within an AWS
     #   account.
@@ -2277,19 +1930,6 @@ module Aws::MigrationHubStrategyRecommendations
     #
     class UpdateApplicationComponentConfigResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateServerConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         server_id: "ServerId", # required
-    #         strategy_option: {
-    #           is_preferred: false,
-    #           strategy: "Rehost", # accepts Rehost, Retirement, Refactor, Replatform, Retain, Relocate, Repurchase
-    #           target_destination: "None specified", # accepts None specified, AWS Elastic BeanStalk, AWS Fargate, Amazon Elastic Cloud Compute (EC2), Amazon Elastic Container Service (ECS), Amazon Elastic Kubernetes Service (EKS), Aurora MySQL, Aurora PostgreSQL, Amazon Relational Database Service on MySQL, Amazon Relational Database Service on PostgreSQL, Amazon DocumentDB, Amazon DynamoDB, Amazon Relational Database Service
-    #           tool_name: "App2Container", # accepts App2Container, Porting Assistant For .NET, End of Support Migration, Windows Web Application Migration Assistant, Application Migration Service, Strategy Recommendation Support, In Place Operating System Upgrade, Schema Conversion Tool, Database Migration Service, Native SQL Server Backup/Restore
-    #         },
-    #       }
-    #
     # @!attribute [rw] server_id
     #   The ID of the server.
     #   @return [String]

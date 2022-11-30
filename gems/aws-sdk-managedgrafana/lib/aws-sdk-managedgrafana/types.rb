@@ -27,18 +27,6 @@ module Aws::ManagedGrafana
     # be used to define information about the users authenticated by the IdP
     # to use the workspace.
     #
-    # @note When making an API call, you may pass AssertionAttributes
-    #   data as a hash:
-    #
-    #       {
-    #         email: "AssertionAttribute",
-    #         groups: "AssertionAttribute",
-    #         login: "AssertionAttribute",
-    #         name: "AssertionAttribute",
-    #         org: "AssertionAttribute",
-    #         role: "AssertionAttribute",
-    #       }
-    #
     # @!attribute [rw] email
     #   The name of the attribute within the SAML assertion to use as the
     #   email names for SAML users.
@@ -82,14 +70,6 @@ module Aws::ManagedGrafana
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateLicenseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         license_type: "ENTERPRISE", # required, accepts ENTERPRISE, ENTERPRISE_FREE_TRIAL
-    #         workspace_id: "WorkspaceId", # required
-    #       }
-    #
     # @!attribute [rw] license_type
     #   The type of license to associate with the workspace.
     #   @return [String]
@@ -213,16 +193,6 @@ module Aws::ManagedGrafana
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateWorkspaceApiKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         key_name: "ApiKeyName", # required
-    #         key_role: "String", # required
-    #         seconds_to_live: 1, # required
-    #         workspace_id: "WorkspaceId", # required
-    #       }
-    #
     # @!attribute [rw] key_name
     #   Specifies the name of the key. Keynames must be unique to the
     #   workspace.
@@ -277,32 +247,6 @@ module Aws::ManagedGrafana
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateWorkspaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_access_type: "CURRENT_ACCOUNT", # required, accepts CURRENT_ACCOUNT, ORGANIZATION
-    #         authentication_providers: ["AWS_SSO"], # required, accepts AWS_SSO, SAML
-    #         client_token: "ClientToken",
-    #         configuration: "OverridableConfigurationJson",
-    #         organization_role_name: "OrganizationRoleName",
-    #         permission_type: "CUSTOMER_MANAGED", # required, accepts CUSTOMER_MANAGED, SERVICE_MANAGED
-    #         stack_set_name: "StackSetName",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         vpc_configuration: {
-    #           security_group_ids: ["SecurityGroupId"], # required
-    #           subnet_ids: ["SubnetId"], # required
-    #         },
-    #         workspace_data_sources: ["AMAZON_OPENSEARCH_SERVICE"], # accepts AMAZON_OPENSEARCH_SERVICE, CLOUDWATCH, PROMETHEUS, XRAY, TIMESTREAM, SITEWISE, ATHENA, REDSHIFT, TWINMAKER
-    #         workspace_description: "Description",
-    #         workspace_name: "WorkspaceName",
-    #         workspace_notification_destinations: ["SNS"], # accepts SNS
-    #         workspace_organizational_units: ["OrganizationalUnit"],
-    #         workspace_role_arn: "IamRoleArn",
-    #       }
-    #
     # @!attribute [rw] account_access_type
     #   Specifies whether the workspace can access Amazon Web Services
     #   resources in this Amazon Web Services account only, or whether it
@@ -466,14 +410,6 @@ module Aws::ManagedGrafana
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteWorkspaceApiKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         key_name: "ApiKeyName", # required
-    #         workspace_id: "WorkspaceId", # required
-    #       }
-    #
     # @!attribute [rw] key_name
     #   The name of the API key to delete.
     #   @return [String]
@@ -508,13 +444,6 @@ module Aws::ManagedGrafana
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteWorkspaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workspace_id: "WorkspaceId", # required
-    #       }
-    #
     # @!attribute [rw] workspace_id
     #   The ID of the workspace to delete.
     #   @return [String]
@@ -540,13 +469,6 @@ module Aws::ManagedGrafana
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeWorkspaceAuthenticationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workspace_id: "WorkspaceId", # required
-    #       }
-    #
     # @!attribute [rw] workspace_id
     #   The ID of the workspace to return authentication information about.
     #   @return [String]
@@ -572,13 +494,6 @@ module Aws::ManagedGrafana
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeWorkspaceConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workspace_id: "WorkspaceId", # required
-    #       }
-    #
     # @!attribute [rw] workspace_id
     #   The ID of the workspace to get configuration information for.
     #   @return [String]
@@ -609,13 +524,6 @@ module Aws::ManagedGrafana
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeWorkspaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workspace_id: "WorkspaceId", # required
-    #       }
-    #
     # @!attribute [rw] workspace_id
     #   The ID of the workspace to display information about.
     #   @return [String]
@@ -640,14 +548,6 @@ module Aws::ManagedGrafana
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateLicenseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         license_type: "ENTERPRISE", # required, accepts ENTERPRISE, ENTERPRISE_FREE_TRIAL
-    #         workspace_id: "WorkspaceId", # required
-    #       }
-    #
     # @!attribute [rw] license_type
     #   The type of license to remove from the workspace.
     #   @return [String]
@@ -683,10 +583,6 @@ module Aws::ManagedGrafana
     # the metadata either by providing a URL to its location in the `url`
     # parameter, or by specifying the full metadata in XML format in the
     # `xml` parameter. Specifying both will cause an error.
-    #
-    # @note IdpMetadata is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note IdpMetadata is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of IdpMetadata corresponding to the set member.
     #
     # @!attribute [rw] url
     #   The URL of the location containing the IdP metadata.
@@ -730,18 +626,6 @@ module Aws::ManagedGrafana
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPermissionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         group_id: "SsoId",
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #         user_id: "SsoId",
-    #         user_type: "SSO_USER", # accepts SSO_USER, SSO_GROUP
-    #         workspace_id: "WorkspaceId", # required
-    #       }
-    #
     # @!attribute [rw] group_id
     #   (Optional) Limits the results to only the group that matches this
     #   ID.
@@ -802,13 +686,6 @@ module Aws::ManagedGrafana
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource the list of tags are associated with.
     #   @return [String]
@@ -833,14 +710,6 @@ module Aws::ManagedGrafana
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListWorkspacesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of workspaces to include in the results.
     #   @return [Integer]
@@ -927,14 +796,6 @@ module Aws::ManagedGrafana
     # in the workspace. SAML authenticated users not part of `Admin` or
     # `Editor` role groups have `Viewer` permission over the workspace.
     #
-    # @note When making an API call, you may pass RoleValues
-    #   data as a hash:
-    #
-    #       {
-    #         admin: ["RoleValue"],
-    #         editor: ["RoleValue"],
-    #       }
-    #
     # @!attribute [rw] admin
     #   A list of groups from the SAML assertion attribute to grant the
     #   Grafana `Admin` role to.
@@ -977,30 +838,6 @@ module Aws::ManagedGrafana
 
     # A structure containing information about how this workspace works with
     # SAML.
-    #
-    # @note When making an API call, you may pass SamlConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         allowed_organizations: ["AllowedOrganization"],
-    #         assertion_attributes: {
-    #           email: "AssertionAttribute",
-    #           groups: "AssertionAttribute",
-    #           login: "AssertionAttribute",
-    #           name: "AssertionAttribute",
-    #           org: "AssertionAttribute",
-    #           role: "AssertionAttribute",
-    #         },
-    #         idp_metadata: { # required
-    #           url: "IdpMetadataUrl",
-    #           xml: "String",
-    #         },
-    #         login_validity_duration: 1,
-    #         role_values: {
-    #           admin: ["RoleValue"],
-    #           editor: ["RoleValue"],
-    #         },
-    #       }
     #
     # @!attribute [rw] allowed_organizations
     #   Lists which organizations defined in the SAML assertion are allowed
@@ -1076,16 +913,6 @@ module Aws::ManagedGrafana
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource the tag is associated with.
     #   @return [String]
@@ -1139,14 +966,6 @@ module Aws::ManagedGrafana
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource the tag association is removed from.
     #   @return [String]
@@ -1204,20 +1023,6 @@ module Aws::ManagedGrafana
     #
     # [1]: https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdatePermissions.html
     #
-    # @note When making an API call, you may pass UpdateInstruction
-    #   data as a hash:
-    #
-    #       {
-    #         action: "ADD", # required, accepts ADD, REVOKE
-    #         role: "ADMIN", # required, accepts ADMIN, EDITOR, VIEWER
-    #         users: [ # required
-    #           {
-    #             id: "SsoId", # required
-    #             type: "SSO_USER", # required, accepts SSO_USER, SSO_GROUP
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] action
     #   Specifies whether this update is to add or revoke role permissions.
     #   @return [String]
@@ -1242,25 +1047,6 @@ module Aws::ManagedGrafana
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdatePermissionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         update_instruction_batch: [ # required
-    #           {
-    #             action: "ADD", # required, accepts ADD, REVOKE
-    #             role: "ADMIN", # required, accepts ADMIN, EDITOR, VIEWER
-    #             users: [ # required
-    #               {
-    #                 id: "SsoId", # required
-    #                 type: "SSO_USER", # required, accepts SSO_USER, SSO_GROUP
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         workspace_id: "WorkspaceId", # required
-    #       }
-    #
     # @!attribute [rw] update_instruction_batch
     #   An array of structures that contain the permission updates to make.
     #   @return [Array<Types::UpdateInstruction>]
@@ -1291,34 +1077,6 @@ module Aws::ManagedGrafana
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateWorkspaceAuthenticationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         authentication_providers: ["AWS_SSO"], # required, accepts AWS_SSO, SAML
-    #         saml_configuration: {
-    #           allowed_organizations: ["AllowedOrganization"],
-    #           assertion_attributes: {
-    #             email: "AssertionAttribute",
-    #             groups: "AssertionAttribute",
-    #             login: "AssertionAttribute",
-    #             name: "AssertionAttribute",
-    #             org: "AssertionAttribute",
-    #             role: "AssertionAttribute",
-    #           },
-    #           idp_metadata: { # required
-    #             url: "IdpMetadataUrl",
-    #             xml: "String",
-    #           },
-    #           login_validity_duration: 1,
-    #           role_values: {
-    #             admin: ["RoleValue"],
-    #             editor: ["RoleValue"],
-    #           },
-    #         },
-    #         workspace_id: "WorkspaceId", # required
-    #       }
-    #
     # @!attribute [rw] authentication_providers
     #   Specifies whether this workspace uses SAML 2.0, IAM Identity Center
     #   (successor to Single Sign-On), or both to authenticate users for
@@ -1364,14 +1122,6 @@ module Aws::ManagedGrafana
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateWorkspaceConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration: "OverridableConfigurationJson", # required
-    #         workspace_id: "WorkspaceId", # required
-    #       }
-    #
     # @!attribute [rw] configuration
     #   The new configuration string for the workspace. For more information
     #   about the format and configuration options available, see [Working
@@ -1399,28 +1149,6 @@ module Aws::ManagedGrafana
     #
     class UpdateWorkspaceConfigurationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateWorkspaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_access_type: "CURRENT_ACCOUNT", # accepts CURRENT_ACCOUNT, ORGANIZATION
-    #         organization_role_name: "OrganizationRoleName",
-    #         permission_type: "CUSTOMER_MANAGED", # accepts CUSTOMER_MANAGED, SERVICE_MANAGED
-    #         remove_vpc_configuration: false,
-    #         stack_set_name: "StackSetName",
-    #         vpc_configuration: {
-    #           security_group_ids: ["SecurityGroupId"], # required
-    #           subnet_ids: ["SubnetId"], # required
-    #         },
-    #         workspace_data_sources: ["AMAZON_OPENSEARCH_SERVICE"], # accepts AMAZON_OPENSEARCH_SERVICE, CLOUDWATCH, PROMETHEUS, XRAY, TIMESTREAM, SITEWISE, ATHENA, REDSHIFT, TWINMAKER
-    #         workspace_description: "Description",
-    #         workspace_id: "WorkspaceId", # required
-    #         workspace_name: "WorkspaceName",
-    #         workspace_notification_destinations: ["SNS"], # accepts SNS
-    #         workspace_organizational_units: ["OrganizationalUnit"],
-    #         workspace_role_arn: "IamRoleArn",
-    #       }
-    #
     # @!attribute [rw] account_access_type
     #   Specifies whether the workspace can access Amazon Web Services
     #   resources in this Amazon Web Services account only, or whether it
@@ -1557,14 +1285,6 @@ module Aws::ManagedGrafana
 
     # A structure that specifies one user or group in the workspace.
     #
-    # @note When making an API call, you may pass User
-    #   data as a hash:
-    #
-    #       {
-    #         id: "SsoId", # required
-    #         type: "SSO_USER", # required, accepts SSO_USER, SSO_GROUP
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the user or group.
     #
@@ -1631,14 +1351,6 @@ module Aws::ManagedGrafana
 
     # The configuration settings for an Amazon VPC that contains data
     # sources for your Grafana workspace to connect to.
-    #
-    # @note When making an API call, you may pass VpcConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         security_group_ids: ["SecurityGroupId"], # required
-    #         subnet_ids: ["SubnetId"], # required
-    #       }
     #
     # @!attribute [rw] security_group_ids
     #   The list of Amazon EC2 security group IDs attached to the Amazon VPC

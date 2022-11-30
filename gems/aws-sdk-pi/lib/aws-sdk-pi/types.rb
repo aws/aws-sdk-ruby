@@ -30,34 +30,6 @@ module Aws::PI
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDimensionKeysRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_type: "RDS", # required, accepts RDS, DOCDB
-    #         identifier: "RequestString", # required
-    #         start_time: Time.now, # required
-    #         end_time: Time.now, # required
-    #         metric: "RequestString", # required
-    #         period_in_seconds: 1,
-    #         group_by: { # required
-    #           group: "RequestString", # required
-    #           dimensions: ["RequestString"],
-    #           limit: 1,
-    #         },
-    #         additional_metrics: ["RequestString"],
-    #         partition_by: {
-    #           group: "RequestString", # required
-    #           dimensions: ["RequestString"],
-    #           limit: 1,
-    #         },
-    #         filter: {
-    #           "RequestString" => "RequestString",
-    #         },
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] service_type
     #   The Amazon Web Services service for which Performance Insights will
     #   return metrics. Valid values are as follows:
@@ -278,15 +250,6 @@ module Aws::PI
     # returned.
     #
     #  </note>
-    #
-    # @note When making an API call, you may pass DimensionGroup
-    #   data as a hash:
-    #
-    #       {
-    #         group: "RequestString", # required
-    #         dimensions: ["RequestString"],
-    #         limit: 1,
-    #       }
     #
     # @!attribute [rw] group
     #   The name of the dimension group. Valid values are as follows:
@@ -594,17 +557,6 @@ module Aws::PI
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDimensionKeyDetailsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_type: "RDS", # required, accepts RDS, DOCDB
-    #         identifier: "IdentifierString", # required
-    #         group: "RequestString", # required
-    #         group_identifier: "RequestString", # required
-    #         requested_dimensions: ["RequestString"],
-    #       }
-    #
     # @!attribute [rw] service_type
     #   The Amazon Web Services service for which Performance Insights
     #   returns data. The only valid value is `RDS`.
@@ -678,14 +630,6 @@ module Aws::PI
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetResourceMetadataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_type: "RDS", # required, accepts RDS, DOCDB
-    #         identifier: "RequestString", # required
-    #       }
-    #
     # @!attribute [rw] service_type
     #   The Amazon Web Services service for which Performance Insights
     #   returns metrics.
@@ -731,32 +675,6 @@ module Aws::PI
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetResourceMetricsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_type: "RDS", # required, accepts RDS, DOCDB
-    #         identifier: "RequestString", # required
-    #         metric_queries: [ # required
-    #           {
-    #             metric: "RequestString", # required
-    #             group_by: {
-    #               group: "RequestString", # required
-    #               dimensions: ["RequestString"],
-    #               limit: 1,
-    #             },
-    #             filter: {
-    #               "RequestString" => "RequestString",
-    #             },
-    #           },
-    #         ],
-    #         start_time: Time.now, # required
-    #         end_time: Time.now, # required
-    #         period_in_seconds: 1,
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] service_type
     #   The Amazon Web Services service for which Performance Insights
     #   returns metrics. Valid values are as follows:
@@ -923,17 +841,6 @@ module Aws::PI
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAvailableResourceDimensionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_type: "RDS", # required, accepts RDS, DOCDB
-    #         identifier: "RequestString", # required
-    #         metrics: ["RequestString"], # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] service_type
     #   The Amazon Web Services service for which Performance Insights
     #   returns metrics.
@@ -996,17 +903,6 @@ module Aws::PI
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAvailableResourceMetricsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_type: "RDS", # required, accepts RDS, DOCDB
-    #         identifier: "RequestString", # required
-    #         metric_types: ["RequestString"], # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] service_type
     #   The Amazon Web Services service for which Performance Insights
     #   returns metrics.
@@ -1125,21 +1021,6 @@ module Aws::PI
     # data points for the specified metric. Optionally, you can request that
     # the data points be aggregated by dimension group (`GroupBy`), and
     # return only those data points that match your criteria (`Filter`).
-    #
-    # @note When making an API call, you may pass MetricQuery
-    #   data as a hash:
-    #
-    #       {
-    #         metric: "RequestString", # required
-    #         group_by: {
-    #           group: "RequestString", # required
-    #           dimensions: ["RequestString"],
-    #           limit: 1,
-    #         },
-    #         filter: {
-    #           "RequestString" => "RequestString",
-    #         },
-    #       }
     #
     # @!attribute [rw] metric
     #   The name of a Performance Insights metric to be measured.

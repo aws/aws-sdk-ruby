@@ -13,14 +13,6 @@ module Aws::Route53Domains
     # The AcceptDomainTransferFromAnotherAwsAccount request includes the
     # following elements.
     #
-    # @note When making an API call, you may pass AcceptDomainTransferFromAnotherAwsAccountRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         password: "String", # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The name of the domain that was specified when another Amazon Web
     #   Services account submitted a [TransferDomainToAnotherAwsAccount][1]
@@ -116,13 +108,6 @@ module Aws::Route53Domains
     # The CancelDomainTransferToAnotherAwsAccount request includes the
     # following element.
     #
-    # @note When making an API call, you may pass CancelDomainTransferToAnotherAwsAccountRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The name of the domain for which you want to cancel the transfer to
     #   another Amazon Web Services account.
@@ -155,14 +140,6 @@ module Aws::Route53Domains
     end
 
     # The CheckDomainAvailability request contains the following elements.
-    #
-    # @note When making an API call, you may pass CheckDomainAvailabilityRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         idn_lang_code: "LangCode",
-    #       }
     #
     # @!attribute [rw] domain_name
     #   The name of the domain that you want to get availability for. The
@@ -273,14 +250,6 @@ module Aws::Route53Domains
     # The CheckDomainTransferability request contains the following
     # elements.
     #
-    # @note When making an API call, you may pass CheckDomainTransferabilityRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         auth_code: "DomainAuthCode",
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The name of the domain that you want to transfer to Route 53. The
     #   top-level domain (TLD), such as .com, must be a TLD that Route 53
@@ -337,31 +306,6 @@ module Aws::Route53Domains
     end
 
     # ContactDetail includes the following elements.
-    #
-    # @note When making an API call, you may pass ContactDetail
-    #   data as a hash:
-    #
-    #       {
-    #         first_name: "ContactName",
-    #         last_name: "ContactName",
-    #         contact_type: "PERSON", # accepts PERSON, COMPANY, ASSOCIATION, PUBLIC_BODY, RESELLER
-    #         organization_name: "ContactName",
-    #         address_line_1: "AddressLine",
-    #         address_line_2: "AddressLine",
-    #         city: "City",
-    #         state: "State",
-    #         country_code: "AC", # accepts AC, AD, AE, AF, AG, AI, AL, AM, AN, AO, AQ, AR, AS, AT, AU, AW, AX, AZ, BA, BB, BD, BE, BF, BG, BH, BI, BJ, BL, BM, BN, BO, BQ, BR, BS, BT, BV, BW, BY, BZ, CA, CC, CD, CF, CG, CH, CI, CK, CL, CM, CN, CO, CR, CU, CV, CW, CX, CY, CZ, DE, DJ, DK, DM, DO, DZ, EC, EE, EG, EH, ER, ES, ET, FI, FJ, FK, FM, FO, FR, GA, GB, GD, GE, GF, GG, GH, GI, GL, GM, GN, GP, GQ, GR, GS, GT, GU, GW, GY, HK, HM, HN, HR, HT, HU, ID, IE, IL, IM, IN, IO, IQ, IR, IS, IT, JE, JM, JO, JP, KE, KG, KH, KI, KM, KN, KP, KR, KW, KY, KZ, LA, LB, LC, LI, LK, LR, LS, LT, LU, LV, LY, MA, MC, MD, ME, MF, MG, MH, MK, ML, MM, MN, MO, MP, MQ, MR, MS, MT, MU, MV, MW, MX, MY, MZ, NA, NC, NE, NF, NG, NI, NL, NO, NP, NR, NU, NZ, OM, PA, PE, PF, PG, PH, PK, PL, PM, PN, PR, PS, PT, PW, PY, QA, RE, RO, RS, RU, RW, SA, SB, SC, SD, SE, SG, SH, SI, SJ, SK, SL, SM, SN, SO, SR, SS, ST, SV, SX, SY, SZ, TC, TD, TF, TG, TH, TJ, TK, TL, TM, TN, TO, TP, TR, TT, TV, TW, TZ, UA, UG, US, UY, UZ, VA, VC, VE, VG, VI, VN, VU, WF, WS, YE, YT, ZA, ZM, ZW
-    #         zip_code: "ZipCode",
-    #         phone_number: "ContactNumber",
-    #         email: "Email",
-    #         fax: "ContactNumber",
-    #         extra_params: [
-    #           {
-    #             name: "DUNS_NUMBER", # required, accepts DUNS_NUMBER, BRAND_NUMBER, BIRTH_DEPARTMENT, BIRTH_DATE_IN_YYYY_MM_DD, BIRTH_COUNTRY, BIRTH_CITY, DOCUMENT_NUMBER, AU_ID_NUMBER, AU_ID_TYPE, CA_LEGAL_TYPE, CA_BUSINESS_ENTITY_TYPE, CA_LEGAL_REPRESENTATIVE, CA_LEGAL_REPRESENTATIVE_CAPACITY, ES_IDENTIFICATION, ES_IDENTIFICATION_TYPE, ES_LEGAL_FORM, FI_BUSINESS_NUMBER, FI_ID_NUMBER, FI_NATIONALITY, FI_ORGANIZATION_TYPE, IT_NATIONALITY, IT_PIN, IT_REGISTRANT_ENTITY_TYPE, RU_PASSPORT_DATA, SE_ID_NUMBER, SG_ID_NUMBER, VAT_NUMBER, UK_CONTACT_TYPE, UK_COMPANY_NUMBER, EU_COUNTRY_OF_CITIZENSHIP
-    #             value: "ExtraParamValue", # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] first_name
     #   First name of contact.
@@ -467,13 +411,6 @@ module Aws::Route53Domains
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   Name of the domain to be deleted.
     #   @return [String]
@@ -505,14 +442,6 @@ module Aws::Route53Domains
 
     # The DeleteTagsForDomainRequest includes the following elements.
     #
-    # @note When making an API call, you may pass DeleteTagsForDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         tags_to_delete: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The domain for which you want to delete one or more tags.
     #   @return [String]
@@ -534,13 +463,6 @@ module Aws::Route53Domains
     #
     class DeleteTagsForDomainResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DisableDomainAutoRenewRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The name of the domain that you want to disable automatic renewal
     #   for.
@@ -559,13 +481,6 @@ module Aws::Route53Domains
     class DisableDomainAutoRenewResponse < Aws::EmptyStructure; end
 
     # The DisableDomainTransferLock request includes the following element.
-    #
-    # @note When making an API call, you may pass DisableDomainTransferLockRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #       }
     #
     # @!attribute [rw] domain_name
     #   The name of the domain that you want to remove the transfer lock
@@ -802,13 +717,6 @@ module Aws::Route53Domains
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass EnableDomainAutoRenewRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The name of the domain that you want to enable automatic renewal
     #   for.
@@ -827,13 +735,6 @@ module Aws::Route53Domains
     class EnableDomainAutoRenewResponse < Aws::EmptyStructure; end
 
     # A request to set the transfer lock for the specified domain.
-    #
-    # @note When making an API call, you may pass EnableDomainTransferLockRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #       }
     #
     # @!attribute [rw] domain_name
     #   The name of the domain that you want to set the transfer lock for.
@@ -863,14 +764,6 @@ module Aws::Route53Domains
     end
 
     # ExtraParam includes the following elements.
-    #
-    # @note When making an API call, you may pass ExtraParam
-    #   data as a hash:
-    #
-    #       {
-    #         name: "DUNS_NUMBER", # required, accepts DUNS_NUMBER, BRAND_NUMBER, BIRTH_DEPARTMENT, BIRTH_DATE_IN_YYYY_MM_DD, BIRTH_COUNTRY, BIRTH_CITY, DOCUMENT_NUMBER, AU_ID_NUMBER, AU_ID_TYPE, CA_LEGAL_TYPE, CA_BUSINESS_ENTITY_TYPE, CA_LEGAL_REPRESENTATIVE, CA_LEGAL_REPRESENTATIVE_CAPACITY, ES_IDENTIFICATION, ES_IDENTIFICATION_TYPE, ES_LEGAL_FORM, FI_BUSINESS_NUMBER, FI_ID_NUMBER, FI_NATIONALITY, FI_ORGANIZATION_TYPE, IT_NATIONALITY, IT_PIN, IT_REGISTRANT_ENTITY_TYPE, RU_PASSPORT_DATA, SE_ID_NUMBER, SG_ID_NUMBER, VAT_NUMBER, UK_CONTACT_TYPE, UK_COMPANY_NUMBER, EU_COUNTRY_OF_CITIZENSHIP
-    #         value: "ExtraParamValue", # required
-    #       }
     #
     # @!attribute [rw] name
     #   The name of an additional parameter that is required by a top-level
@@ -1283,15 +1176,6 @@ module Aws::Route53Domains
     #
     # [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains__ListDomains.html
     #
-    # @note When making an API call, you may pass FilterCondition
-    #   data as a hash:
-    #
-    #       {
-    #         name: "DomainName", # required, accepts DomainName, Expiry
-    #         operator: "LE", # required, accepts LE, GE, BEGINS_WITH
-    #         values: ["Value"], # required
-    #       }
-    #
     # @!attribute [rw] name
     #   Name of the field which should be used for filtering the list of
     #   domains.
@@ -1322,13 +1206,6 @@ module Aws::Route53Domains
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetContactReachabilityStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName",
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The name of the domain for which you want to know whether the
     #   registrant contact has confirmed that the email address is valid.
@@ -1375,13 +1252,6 @@ module Aws::Route53Domains
     end
 
     # The GetDomainDetail request includes the following element.
-    #
-    # @note When making an API call, you may pass GetDomainDetailRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #       }
     #
     # @!attribute [rw] domain_name
     #   The name of the domain that you want to get detailed information
@@ -1558,15 +1428,6 @@ module Aws::Route53Domains
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDomainSuggestionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         suggestion_count: 1, # required
-    #         only_available: false, # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   A domain name that you want to use as the basis for a list of
     #   possible domain names. The top-level domain (TLD), such as .com,
@@ -1638,13 +1499,6 @@ module Aws::Route53Domains
     #
     #
     # [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html
-    #
-    # @note When making an API call, you may pass GetOperationDetailRequest
-    #   data as a hash:
-    #
-    #       {
-    #         operation_id: "OperationId", # required
-    #       }
     #
     # @!attribute [rw] operation_id
     #   The identifier for the operation for which you want to get the
@@ -1722,25 +1576,6 @@ module Aws::Route53Domains
 
     # The ListDomains request includes the following elements.
     #
-    # @note When making an API call, you may pass ListDomainsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter_conditions: [
-    #           {
-    #             name: "DomainName", # required, accepts DomainName, Expiry
-    #             operator: "LE", # required, accepts LE, GE, BEGINS_WITH
-    #             values: ["Value"], # required
-    #           },
-    #         ],
-    #         sort_condition: {
-    #           name: "DomainName", # required, accepts DomainName, Expiry
-    #           sort_order: "ASC", # required, accepts ASC, DESC
-    #         },
-    #         marker: "PageMarker",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] filter_conditions
     #   A complex type that contains information about the filters applied
     #   during the `ListDomains` request. The filter conditions can include
@@ -1805,15 +1640,6 @@ module Aws::Route53Domains
 
     # The ListOperations request includes the following elements.
     #
-    # @note When making an API call, you may pass ListOperationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         submitted_since: Time.now,
-    #         marker: "PageMarker",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] submitted_since
     #   An optional parameter that lets you get information about all the
     #   operations that you submitted after a specified date and time.
@@ -1868,15 +1694,6 @@ module Aws::Route53Domains
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPricesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         tld: "TldName",
-    #         marker: "PageMarker",
-    #         max_items: 1,
-    #       }
-    #
     # @!attribute [rw] tld
     #   The TLD for which you want to receive the pricing information. For
     #   example. `.net`.
@@ -1939,13 +1756,6 @@ module Aws::Route53Domains
 
     # The ListTagsForDomainRequest includes the following elements.
     #
-    # @note When making an API call, you may pass ListTagsForDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The domain for which you want to get a list of tags.
     #   @return [String]
@@ -1973,14 +1783,6 @@ module Aws::Route53Domains
     end
 
     # Nameserver includes the following elements.
-    #
-    # @note When making an API call, you may pass Nameserver
-    #   data as a hash:
-    #
-    #       {
-    #         name: "HostName", # required
-    #         glue_ips: ["GlueIp"],
-    #       }
     #
     # @!attribute [rw] name
     #   The fully qualified host name of the name server.
@@ -2073,82 +1875,6 @@ module Aws::Route53Domains
     end
 
     # The RegisterDomain request includes the following elements.
-    #
-    # @note When making an API call, you may pass RegisterDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         idn_lang_code: "LangCode",
-    #         duration_in_years: 1, # required
-    #         auto_renew: false,
-    #         admin_contact: { # required
-    #           first_name: "ContactName",
-    #           last_name: "ContactName",
-    #           contact_type: "PERSON", # accepts PERSON, COMPANY, ASSOCIATION, PUBLIC_BODY, RESELLER
-    #           organization_name: "ContactName",
-    #           address_line_1: "AddressLine",
-    #           address_line_2: "AddressLine",
-    #           city: "City",
-    #           state: "State",
-    #           country_code: "AC", # accepts AC, AD, AE, AF, AG, AI, AL, AM, AN, AO, AQ, AR, AS, AT, AU, AW, AX, AZ, BA, BB, BD, BE, BF, BG, BH, BI, BJ, BL, BM, BN, BO, BQ, BR, BS, BT, BV, BW, BY, BZ, CA, CC, CD, CF, CG, CH, CI, CK, CL, CM, CN, CO, CR, CU, CV, CW, CX, CY, CZ, DE, DJ, DK, DM, DO, DZ, EC, EE, EG, EH, ER, ES, ET, FI, FJ, FK, FM, FO, FR, GA, GB, GD, GE, GF, GG, GH, GI, GL, GM, GN, GP, GQ, GR, GS, GT, GU, GW, GY, HK, HM, HN, HR, HT, HU, ID, IE, IL, IM, IN, IO, IQ, IR, IS, IT, JE, JM, JO, JP, KE, KG, KH, KI, KM, KN, KP, KR, KW, KY, KZ, LA, LB, LC, LI, LK, LR, LS, LT, LU, LV, LY, MA, MC, MD, ME, MF, MG, MH, MK, ML, MM, MN, MO, MP, MQ, MR, MS, MT, MU, MV, MW, MX, MY, MZ, NA, NC, NE, NF, NG, NI, NL, NO, NP, NR, NU, NZ, OM, PA, PE, PF, PG, PH, PK, PL, PM, PN, PR, PS, PT, PW, PY, QA, RE, RO, RS, RU, RW, SA, SB, SC, SD, SE, SG, SH, SI, SJ, SK, SL, SM, SN, SO, SR, SS, ST, SV, SX, SY, SZ, TC, TD, TF, TG, TH, TJ, TK, TL, TM, TN, TO, TP, TR, TT, TV, TW, TZ, UA, UG, US, UY, UZ, VA, VC, VE, VG, VI, VN, VU, WF, WS, YE, YT, ZA, ZM, ZW
-    #           zip_code: "ZipCode",
-    #           phone_number: "ContactNumber",
-    #           email: "Email",
-    #           fax: "ContactNumber",
-    #           extra_params: [
-    #             {
-    #               name: "DUNS_NUMBER", # required, accepts DUNS_NUMBER, BRAND_NUMBER, BIRTH_DEPARTMENT, BIRTH_DATE_IN_YYYY_MM_DD, BIRTH_COUNTRY, BIRTH_CITY, DOCUMENT_NUMBER, AU_ID_NUMBER, AU_ID_TYPE, CA_LEGAL_TYPE, CA_BUSINESS_ENTITY_TYPE, CA_LEGAL_REPRESENTATIVE, CA_LEGAL_REPRESENTATIVE_CAPACITY, ES_IDENTIFICATION, ES_IDENTIFICATION_TYPE, ES_LEGAL_FORM, FI_BUSINESS_NUMBER, FI_ID_NUMBER, FI_NATIONALITY, FI_ORGANIZATION_TYPE, IT_NATIONALITY, IT_PIN, IT_REGISTRANT_ENTITY_TYPE, RU_PASSPORT_DATA, SE_ID_NUMBER, SG_ID_NUMBER, VAT_NUMBER, UK_CONTACT_TYPE, UK_COMPANY_NUMBER, EU_COUNTRY_OF_CITIZENSHIP
-    #               value: "ExtraParamValue", # required
-    #             },
-    #           ],
-    #         },
-    #         registrant_contact: { # required
-    #           first_name: "ContactName",
-    #           last_name: "ContactName",
-    #           contact_type: "PERSON", # accepts PERSON, COMPANY, ASSOCIATION, PUBLIC_BODY, RESELLER
-    #           organization_name: "ContactName",
-    #           address_line_1: "AddressLine",
-    #           address_line_2: "AddressLine",
-    #           city: "City",
-    #           state: "State",
-    #           country_code: "AC", # accepts AC, AD, AE, AF, AG, AI, AL, AM, AN, AO, AQ, AR, AS, AT, AU, AW, AX, AZ, BA, BB, BD, BE, BF, BG, BH, BI, BJ, BL, BM, BN, BO, BQ, BR, BS, BT, BV, BW, BY, BZ, CA, CC, CD, CF, CG, CH, CI, CK, CL, CM, CN, CO, CR, CU, CV, CW, CX, CY, CZ, DE, DJ, DK, DM, DO, DZ, EC, EE, EG, EH, ER, ES, ET, FI, FJ, FK, FM, FO, FR, GA, GB, GD, GE, GF, GG, GH, GI, GL, GM, GN, GP, GQ, GR, GS, GT, GU, GW, GY, HK, HM, HN, HR, HT, HU, ID, IE, IL, IM, IN, IO, IQ, IR, IS, IT, JE, JM, JO, JP, KE, KG, KH, KI, KM, KN, KP, KR, KW, KY, KZ, LA, LB, LC, LI, LK, LR, LS, LT, LU, LV, LY, MA, MC, MD, ME, MF, MG, MH, MK, ML, MM, MN, MO, MP, MQ, MR, MS, MT, MU, MV, MW, MX, MY, MZ, NA, NC, NE, NF, NG, NI, NL, NO, NP, NR, NU, NZ, OM, PA, PE, PF, PG, PH, PK, PL, PM, PN, PR, PS, PT, PW, PY, QA, RE, RO, RS, RU, RW, SA, SB, SC, SD, SE, SG, SH, SI, SJ, SK, SL, SM, SN, SO, SR, SS, ST, SV, SX, SY, SZ, TC, TD, TF, TG, TH, TJ, TK, TL, TM, TN, TO, TP, TR, TT, TV, TW, TZ, UA, UG, US, UY, UZ, VA, VC, VE, VG, VI, VN, VU, WF, WS, YE, YT, ZA, ZM, ZW
-    #           zip_code: "ZipCode",
-    #           phone_number: "ContactNumber",
-    #           email: "Email",
-    #           fax: "ContactNumber",
-    #           extra_params: [
-    #             {
-    #               name: "DUNS_NUMBER", # required, accepts DUNS_NUMBER, BRAND_NUMBER, BIRTH_DEPARTMENT, BIRTH_DATE_IN_YYYY_MM_DD, BIRTH_COUNTRY, BIRTH_CITY, DOCUMENT_NUMBER, AU_ID_NUMBER, AU_ID_TYPE, CA_LEGAL_TYPE, CA_BUSINESS_ENTITY_TYPE, CA_LEGAL_REPRESENTATIVE, CA_LEGAL_REPRESENTATIVE_CAPACITY, ES_IDENTIFICATION, ES_IDENTIFICATION_TYPE, ES_LEGAL_FORM, FI_BUSINESS_NUMBER, FI_ID_NUMBER, FI_NATIONALITY, FI_ORGANIZATION_TYPE, IT_NATIONALITY, IT_PIN, IT_REGISTRANT_ENTITY_TYPE, RU_PASSPORT_DATA, SE_ID_NUMBER, SG_ID_NUMBER, VAT_NUMBER, UK_CONTACT_TYPE, UK_COMPANY_NUMBER, EU_COUNTRY_OF_CITIZENSHIP
-    #               value: "ExtraParamValue", # required
-    #             },
-    #           ],
-    #         },
-    #         tech_contact: { # required
-    #           first_name: "ContactName",
-    #           last_name: "ContactName",
-    #           contact_type: "PERSON", # accepts PERSON, COMPANY, ASSOCIATION, PUBLIC_BODY, RESELLER
-    #           organization_name: "ContactName",
-    #           address_line_1: "AddressLine",
-    #           address_line_2: "AddressLine",
-    #           city: "City",
-    #           state: "State",
-    #           country_code: "AC", # accepts AC, AD, AE, AF, AG, AI, AL, AM, AN, AO, AQ, AR, AS, AT, AU, AW, AX, AZ, BA, BB, BD, BE, BF, BG, BH, BI, BJ, BL, BM, BN, BO, BQ, BR, BS, BT, BV, BW, BY, BZ, CA, CC, CD, CF, CG, CH, CI, CK, CL, CM, CN, CO, CR, CU, CV, CW, CX, CY, CZ, DE, DJ, DK, DM, DO, DZ, EC, EE, EG, EH, ER, ES, ET, FI, FJ, FK, FM, FO, FR, GA, GB, GD, GE, GF, GG, GH, GI, GL, GM, GN, GP, GQ, GR, GS, GT, GU, GW, GY, HK, HM, HN, HR, HT, HU, ID, IE, IL, IM, IN, IO, IQ, IR, IS, IT, JE, JM, JO, JP, KE, KG, KH, KI, KM, KN, KP, KR, KW, KY, KZ, LA, LB, LC, LI, LK, LR, LS, LT, LU, LV, LY, MA, MC, MD, ME, MF, MG, MH, MK, ML, MM, MN, MO, MP, MQ, MR, MS, MT, MU, MV, MW, MX, MY, MZ, NA, NC, NE, NF, NG, NI, NL, NO, NP, NR, NU, NZ, OM, PA, PE, PF, PG, PH, PK, PL, PM, PN, PR, PS, PT, PW, PY, QA, RE, RO, RS, RU, RW, SA, SB, SC, SD, SE, SG, SH, SI, SJ, SK, SL, SM, SN, SO, SR, SS, ST, SV, SX, SY, SZ, TC, TD, TF, TG, TH, TJ, TK, TL, TM, TN, TO, TP, TR, TT, TV, TW, TZ, UA, UG, US, UY, UZ, VA, VC, VE, VG, VI, VN, VU, WF, WS, YE, YT, ZA, ZM, ZW
-    #           zip_code: "ZipCode",
-    #           phone_number: "ContactNumber",
-    #           email: "Email",
-    #           fax: "ContactNumber",
-    #           extra_params: [
-    #             {
-    #               name: "DUNS_NUMBER", # required, accepts DUNS_NUMBER, BRAND_NUMBER, BIRTH_DEPARTMENT, BIRTH_DATE_IN_YYYY_MM_DD, BIRTH_COUNTRY, BIRTH_CITY, DOCUMENT_NUMBER, AU_ID_NUMBER, AU_ID_TYPE, CA_LEGAL_TYPE, CA_BUSINESS_ENTITY_TYPE, CA_LEGAL_REPRESENTATIVE, CA_LEGAL_REPRESENTATIVE_CAPACITY, ES_IDENTIFICATION, ES_IDENTIFICATION_TYPE, ES_LEGAL_FORM, FI_BUSINESS_NUMBER, FI_ID_NUMBER, FI_NATIONALITY, FI_ORGANIZATION_TYPE, IT_NATIONALITY, IT_PIN, IT_REGISTRANT_ENTITY_TYPE, RU_PASSPORT_DATA, SE_ID_NUMBER, SG_ID_NUMBER, VAT_NUMBER, UK_CONTACT_TYPE, UK_COMPANY_NUMBER, EU_COUNTRY_OF_CITIZENSHIP
-    #               value: "ExtraParamValue", # required
-    #             },
-    #           ],
-    #         },
-    #         privacy_protect_admin_contact: false,
-    #         privacy_protect_registrant_contact: false,
-    #         privacy_protect_tech_contact: false,
-    #       }
     #
     # @!attribute [rw] domain_name
     #   The domain name that you want to register. The top-level domain
@@ -2320,13 +2046,6 @@ module Aws::Route53Domains
     # The RejectDomainTransferFromAnotherAwsAccount request includes the
     # following element.
     #
-    # @note When making an API call, you may pass RejectDomainTransferFromAnotherAwsAccountRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The name of the domain that was specified when another Amazon Web
     #   Services account submitted a [TransferDomainToAnotherAwsAccount][1]
@@ -2365,15 +2084,6 @@ module Aws::Route53Domains
 
     # A `RenewDomain` request includes the number of years that you want to
     # renew for and the current expiration year.
-    #
-    # @note When making an API call, you may pass RenewDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         duration_in_years: 1,
-    #         current_expiry_year: 1, # required
-    #       }
     #
     # @!attribute [rw] domain_name
     #   The name of the domain that you want to renew.
@@ -2425,13 +2135,6 @@ module Aws::Route53Domains
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ResendContactReachabilityEmailRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName",
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The name of the domain for which you want Route 53 to resend a
     #   confirmation email to the registrant contact.
@@ -2474,13 +2177,6 @@ module Aws::Route53Domains
     # transfer a domain to another registrar, you provide this value to the
     # new registrar.
     #
-    # @note When making an API call, you may pass RetrieveDomainAuthCodeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The name of the domain that you want to get an authorization code
     #   for.
@@ -2509,14 +2205,6 @@ module Aws::Route53Domains
     end
 
     # Information for sorting a list of domains.
-    #
-    # @note When making an API call, you may pass SortCondition
-    #   data as a hash:
-    #
-    #       {
-    #         name: "DomainName", # required, accepts DomainName, Expiry
-    #         sort_order: "ASC", # required, accepts ASC, DESC
-    #       }
     #
     # @!attribute [rw] name
     #   Field to be used for sorting the list of domains. It can be either
@@ -2560,14 +2248,6 @@ module Aws::Route53Domains
 
     # Each tag includes the following elements.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey",
-    #         value: "TagValue",
-    #       }
-    #
     # @!attribute [rw] key
     #   The key (name) of a tag.
     #
@@ -2594,89 +2274,6 @@ module Aws::Route53Domains
     end
 
     # The TransferDomain request includes the following elements.
-    #
-    # @note When making an API call, you may pass TransferDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         idn_lang_code: "LangCode",
-    #         duration_in_years: 1, # required
-    #         nameservers: [
-    #           {
-    #             name: "HostName", # required
-    #             glue_ips: ["GlueIp"],
-    #           },
-    #         ],
-    #         auth_code: "DomainAuthCode",
-    #         auto_renew: false,
-    #         admin_contact: { # required
-    #           first_name: "ContactName",
-    #           last_name: "ContactName",
-    #           contact_type: "PERSON", # accepts PERSON, COMPANY, ASSOCIATION, PUBLIC_BODY, RESELLER
-    #           organization_name: "ContactName",
-    #           address_line_1: "AddressLine",
-    #           address_line_2: "AddressLine",
-    #           city: "City",
-    #           state: "State",
-    #           country_code: "AC", # accepts AC, AD, AE, AF, AG, AI, AL, AM, AN, AO, AQ, AR, AS, AT, AU, AW, AX, AZ, BA, BB, BD, BE, BF, BG, BH, BI, BJ, BL, BM, BN, BO, BQ, BR, BS, BT, BV, BW, BY, BZ, CA, CC, CD, CF, CG, CH, CI, CK, CL, CM, CN, CO, CR, CU, CV, CW, CX, CY, CZ, DE, DJ, DK, DM, DO, DZ, EC, EE, EG, EH, ER, ES, ET, FI, FJ, FK, FM, FO, FR, GA, GB, GD, GE, GF, GG, GH, GI, GL, GM, GN, GP, GQ, GR, GS, GT, GU, GW, GY, HK, HM, HN, HR, HT, HU, ID, IE, IL, IM, IN, IO, IQ, IR, IS, IT, JE, JM, JO, JP, KE, KG, KH, KI, KM, KN, KP, KR, KW, KY, KZ, LA, LB, LC, LI, LK, LR, LS, LT, LU, LV, LY, MA, MC, MD, ME, MF, MG, MH, MK, ML, MM, MN, MO, MP, MQ, MR, MS, MT, MU, MV, MW, MX, MY, MZ, NA, NC, NE, NF, NG, NI, NL, NO, NP, NR, NU, NZ, OM, PA, PE, PF, PG, PH, PK, PL, PM, PN, PR, PS, PT, PW, PY, QA, RE, RO, RS, RU, RW, SA, SB, SC, SD, SE, SG, SH, SI, SJ, SK, SL, SM, SN, SO, SR, SS, ST, SV, SX, SY, SZ, TC, TD, TF, TG, TH, TJ, TK, TL, TM, TN, TO, TP, TR, TT, TV, TW, TZ, UA, UG, US, UY, UZ, VA, VC, VE, VG, VI, VN, VU, WF, WS, YE, YT, ZA, ZM, ZW
-    #           zip_code: "ZipCode",
-    #           phone_number: "ContactNumber",
-    #           email: "Email",
-    #           fax: "ContactNumber",
-    #           extra_params: [
-    #             {
-    #               name: "DUNS_NUMBER", # required, accepts DUNS_NUMBER, BRAND_NUMBER, BIRTH_DEPARTMENT, BIRTH_DATE_IN_YYYY_MM_DD, BIRTH_COUNTRY, BIRTH_CITY, DOCUMENT_NUMBER, AU_ID_NUMBER, AU_ID_TYPE, CA_LEGAL_TYPE, CA_BUSINESS_ENTITY_TYPE, CA_LEGAL_REPRESENTATIVE, CA_LEGAL_REPRESENTATIVE_CAPACITY, ES_IDENTIFICATION, ES_IDENTIFICATION_TYPE, ES_LEGAL_FORM, FI_BUSINESS_NUMBER, FI_ID_NUMBER, FI_NATIONALITY, FI_ORGANIZATION_TYPE, IT_NATIONALITY, IT_PIN, IT_REGISTRANT_ENTITY_TYPE, RU_PASSPORT_DATA, SE_ID_NUMBER, SG_ID_NUMBER, VAT_NUMBER, UK_CONTACT_TYPE, UK_COMPANY_NUMBER, EU_COUNTRY_OF_CITIZENSHIP
-    #               value: "ExtraParamValue", # required
-    #             },
-    #           ],
-    #         },
-    #         registrant_contact: { # required
-    #           first_name: "ContactName",
-    #           last_name: "ContactName",
-    #           contact_type: "PERSON", # accepts PERSON, COMPANY, ASSOCIATION, PUBLIC_BODY, RESELLER
-    #           organization_name: "ContactName",
-    #           address_line_1: "AddressLine",
-    #           address_line_2: "AddressLine",
-    #           city: "City",
-    #           state: "State",
-    #           country_code: "AC", # accepts AC, AD, AE, AF, AG, AI, AL, AM, AN, AO, AQ, AR, AS, AT, AU, AW, AX, AZ, BA, BB, BD, BE, BF, BG, BH, BI, BJ, BL, BM, BN, BO, BQ, BR, BS, BT, BV, BW, BY, BZ, CA, CC, CD, CF, CG, CH, CI, CK, CL, CM, CN, CO, CR, CU, CV, CW, CX, CY, CZ, DE, DJ, DK, DM, DO, DZ, EC, EE, EG, EH, ER, ES, ET, FI, FJ, FK, FM, FO, FR, GA, GB, GD, GE, GF, GG, GH, GI, GL, GM, GN, GP, GQ, GR, GS, GT, GU, GW, GY, HK, HM, HN, HR, HT, HU, ID, IE, IL, IM, IN, IO, IQ, IR, IS, IT, JE, JM, JO, JP, KE, KG, KH, KI, KM, KN, KP, KR, KW, KY, KZ, LA, LB, LC, LI, LK, LR, LS, LT, LU, LV, LY, MA, MC, MD, ME, MF, MG, MH, MK, ML, MM, MN, MO, MP, MQ, MR, MS, MT, MU, MV, MW, MX, MY, MZ, NA, NC, NE, NF, NG, NI, NL, NO, NP, NR, NU, NZ, OM, PA, PE, PF, PG, PH, PK, PL, PM, PN, PR, PS, PT, PW, PY, QA, RE, RO, RS, RU, RW, SA, SB, SC, SD, SE, SG, SH, SI, SJ, SK, SL, SM, SN, SO, SR, SS, ST, SV, SX, SY, SZ, TC, TD, TF, TG, TH, TJ, TK, TL, TM, TN, TO, TP, TR, TT, TV, TW, TZ, UA, UG, US, UY, UZ, VA, VC, VE, VG, VI, VN, VU, WF, WS, YE, YT, ZA, ZM, ZW
-    #           zip_code: "ZipCode",
-    #           phone_number: "ContactNumber",
-    #           email: "Email",
-    #           fax: "ContactNumber",
-    #           extra_params: [
-    #             {
-    #               name: "DUNS_NUMBER", # required, accepts DUNS_NUMBER, BRAND_NUMBER, BIRTH_DEPARTMENT, BIRTH_DATE_IN_YYYY_MM_DD, BIRTH_COUNTRY, BIRTH_CITY, DOCUMENT_NUMBER, AU_ID_NUMBER, AU_ID_TYPE, CA_LEGAL_TYPE, CA_BUSINESS_ENTITY_TYPE, CA_LEGAL_REPRESENTATIVE, CA_LEGAL_REPRESENTATIVE_CAPACITY, ES_IDENTIFICATION, ES_IDENTIFICATION_TYPE, ES_LEGAL_FORM, FI_BUSINESS_NUMBER, FI_ID_NUMBER, FI_NATIONALITY, FI_ORGANIZATION_TYPE, IT_NATIONALITY, IT_PIN, IT_REGISTRANT_ENTITY_TYPE, RU_PASSPORT_DATA, SE_ID_NUMBER, SG_ID_NUMBER, VAT_NUMBER, UK_CONTACT_TYPE, UK_COMPANY_NUMBER, EU_COUNTRY_OF_CITIZENSHIP
-    #               value: "ExtraParamValue", # required
-    #             },
-    #           ],
-    #         },
-    #         tech_contact: { # required
-    #           first_name: "ContactName",
-    #           last_name: "ContactName",
-    #           contact_type: "PERSON", # accepts PERSON, COMPANY, ASSOCIATION, PUBLIC_BODY, RESELLER
-    #           organization_name: "ContactName",
-    #           address_line_1: "AddressLine",
-    #           address_line_2: "AddressLine",
-    #           city: "City",
-    #           state: "State",
-    #           country_code: "AC", # accepts AC, AD, AE, AF, AG, AI, AL, AM, AN, AO, AQ, AR, AS, AT, AU, AW, AX, AZ, BA, BB, BD, BE, BF, BG, BH, BI, BJ, BL, BM, BN, BO, BQ, BR, BS, BT, BV, BW, BY, BZ, CA, CC, CD, CF, CG, CH, CI, CK, CL, CM, CN, CO, CR, CU, CV, CW, CX, CY, CZ, DE, DJ, DK, DM, DO, DZ, EC, EE, EG, EH, ER, ES, ET, FI, FJ, FK, FM, FO, FR, GA, GB, GD, GE, GF, GG, GH, GI, GL, GM, GN, GP, GQ, GR, GS, GT, GU, GW, GY, HK, HM, HN, HR, HT, HU, ID, IE, IL, IM, IN, IO, IQ, IR, IS, IT, JE, JM, JO, JP, KE, KG, KH, KI, KM, KN, KP, KR, KW, KY, KZ, LA, LB, LC, LI, LK, LR, LS, LT, LU, LV, LY, MA, MC, MD, ME, MF, MG, MH, MK, ML, MM, MN, MO, MP, MQ, MR, MS, MT, MU, MV, MW, MX, MY, MZ, NA, NC, NE, NF, NG, NI, NL, NO, NP, NR, NU, NZ, OM, PA, PE, PF, PG, PH, PK, PL, PM, PN, PR, PS, PT, PW, PY, QA, RE, RO, RS, RU, RW, SA, SB, SC, SD, SE, SG, SH, SI, SJ, SK, SL, SM, SN, SO, SR, SS, ST, SV, SX, SY, SZ, TC, TD, TF, TG, TH, TJ, TK, TL, TM, TN, TO, TP, TR, TT, TV, TW, TZ, UA, UG, US, UY, UZ, VA, VC, VE, VG, VI, VN, VU, WF, WS, YE, YT, ZA, ZM, ZW
-    #           zip_code: "ZipCode",
-    #           phone_number: "ContactNumber",
-    #           email: "Email",
-    #           fax: "ContactNumber",
-    #           extra_params: [
-    #             {
-    #               name: "DUNS_NUMBER", # required, accepts DUNS_NUMBER, BRAND_NUMBER, BIRTH_DEPARTMENT, BIRTH_DATE_IN_YYYY_MM_DD, BIRTH_COUNTRY, BIRTH_CITY, DOCUMENT_NUMBER, AU_ID_NUMBER, AU_ID_TYPE, CA_LEGAL_TYPE, CA_BUSINESS_ENTITY_TYPE, CA_LEGAL_REPRESENTATIVE, CA_LEGAL_REPRESENTATIVE_CAPACITY, ES_IDENTIFICATION, ES_IDENTIFICATION_TYPE, ES_LEGAL_FORM, FI_BUSINESS_NUMBER, FI_ID_NUMBER, FI_NATIONALITY, FI_ORGANIZATION_TYPE, IT_NATIONALITY, IT_PIN, IT_REGISTRANT_ENTITY_TYPE, RU_PASSPORT_DATA, SE_ID_NUMBER, SG_ID_NUMBER, VAT_NUMBER, UK_CONTACT_TYPE, UK_COMPANY_NUMBER, EU_COUNTRY_OF_CITIZENSHIP
-    #               value: "ExtraParamValue", # required
-    #             },
-    #           ],
-    #         },
-    #         privacy_protect_admin_contact: false,
-    #         privacy_protect_registrant_contact: false,
-    #         privacy_protect_tech_contact: false,
-    #       }
     #
     # @!attribute [rw] domain_name
     #   The name of the domain that you want to transfer to Route 53. The
@@ -2832,14 +2429,6 @@ module Aws::Route53Domains
     # The TransferDomainToAnotherAwsAccount request includes the following
     # elements.
     #
-    # @note When making an API call, you may pass TransferDomainToAnotherAwsAccountRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         account_id: "AccountId", # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The name of the domain that you want to transfer from the current
     #   Amazon Web Services account to another account.
@@ -2908,16 +2497,6 @@ module Aws::Route53Domains
 
     # The UpdateDomainContactPrivacy request includes the following
     # elements.
-    #
-    # @note When making an API call, you may pass UpdateDomainContactPrivacyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         admin_privacy: false,
-    #         registrant_privacy: false,
-    #         tech_privacy: false,
-    #       }
     #
     # @!attribute [rw] domain_name
     #   The name of the domain that you want to update the privacy setting
@@ -2995,76 +2574,6 @@ module Aws::Route53Domains
 
     # The UpdateDomainContact request includes the following elements.
     #
-    # @note When making an API call, you may pass UpdateDomainContactRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         admin_contact: {
-    #           first_name: "ContactName",
-    #           last_name: "ContactName",
-    #           contact_type: "PERSON", # accepts PERSON, COMPANY, ASSOCIATION, PUBLIC_BODY, RESELLER
-    #           organization_name: "ContactName",
-    #           address_line_1: "AddressLine",
-    #           address_line_2: "AddressLine",
-    #           city: "City",
-    #           state: "State",
-    #           country_code: "AC", # accepts AC, AD, AE, AF, AG, AI, AL, AM, AN, AO, AQ, AR, AS, AT, AU, AW, AX, AZ, BA, BB, BD, BE, BF, BG, BH, BI, BJ, BL, BM, BN, BO, BQ, BR, BS, BT, BV, BW, BY, BZ, CA, CC, CD, CF, CG, CH, CI, CK, CL, CM, CN, CO, CR, CU, CV, CW, CX, CY, CZ, DE, DJ, DK, DM, DO, DZ, EC, EE, EG, EH, ER, ES, ET, FI, FJ, FK, FM, FO, FR, GA, GB, GD, GE, GF, GG, GH, GI, GL, GM, GN, GP, GQ, GR, GS, GT, GU, GW, GY, HK, HM, HN, HR, HT, HU, ID, IE, IL, IM, IN, IO, IQ, IR, IS, IT, JE, JM, JO, JP, KE, KG, KH, KI, KM, KN, KP, KR, KW, KY, KZ, LA, LB, LC, LI, LK, LR, LS, LT, LU, LV, LY, MA, MC, MD, ME, MF, MG, MH, MK, ML, MM, MN, MO, MP, MQ, MR, MS, MT, MU, MV, MW, MX, MY, MZ, NA, NC, NE, NF, NG, NI, NL, NO, NP, NR, NU, NZ, OM, PA, PE, PF, PG, PH, PK, PL, PM, PN, PR, PS, PT, PW, PY, QA, RE, RO, RS, RU, RW, SA, SB, SC, SD, SE, SG, SH, SI, SJ, SK, SL, SM, SN, SO, SR, SS, ST, SV, SX, SY, SZ, TC, TD, TF, TG, TH, TJ, TK, TL, TM, TN, TO, TP, TR, TT, TV, TW, TZ, UA, UG, US, UY, UZ, VA, VC, VE, VG, VI, VN, VU, WF, WS, YE, YT, ZA, ZM, ZW
-    #           zip_code: "ZipCode",
-    #           phone_number: "ContactNumber",
-    #           email: "Email",
-    #           fax: "ContactNumber",
-    #           extra_params: [
-    #             {
-    #               name: "DUNS_NUMBER", # required, accepts DUNS_NUMBER, BRAND_NUMBER, BIRTH_DEPARTMENT, BIRTH_DATE_IN_YYYY_MM_DD, BIRTH_COUNTRY, BIRTH_CITY, DOCUMENT_NUMBER, AU_ID_NUMBER, AU_ID_TYPE, CA_LEGAL_TYPE, CA_BUSINESS_ENTITY_TYPE, CA_LEGAL_REPRESENTATIVE, CA_LEGAL_REPRESENTATIVE_CAPACITY, ES_IDENTIFICATION, ES_IDENTIFICATION_TYPE, ES_LEGAL_FORM, FI_BUSINESS_NUMBER, FI_ID_NUMBER, FI_NATIONALITY, FI_ORGANIZATION_TYPE, IT_NATIONALITY, IT_PIN, IT_REGISTRANT_ENTITY_TYPE, RU_PASSPORT_DATA, SE_ID_NUMBER, SG_ID_NUMBER, VAT_NUMBER, UK_CONTACT_TYPE, UK_COMPANY_NUMBER, EU_COUNTRY_OF_CITIZENSHIP
-    #               value: "ExtraParamValue", # required
-    #             },
-    #           ],
-    #         },
-    #         registrant_contact: {
-    #           first_name: "ContactName",
-    #           last_name: "ContactName",
-    #           contact_type: "PERSON", # accepts PERSON, COMPANY, ASSOCIATION, PUBLIC_BODY, RESELLER
-    #           organization_name: "ContactName",
-    #           address_line_1: "AddressLine",
-    #           address_line_2: "AddressLine",
-    #           city: "City",
-    #           state: "State",
-    #           country_code: "AC", # accepts AC, AD, AE, AF, AG, AI, AL, AM, AN, AO, AQ, AR, AS, AT, AU, AW, AX, AZ, BA, BB, BD, BE, BF, BG, BH, BI, BJ, BL, BM, BN, BO, BQ, BR, BS, BT, BV, BW, BY, BZ, CA, CC, CD, CF, CG, CH, CI, CK, CL, CM, CN, CO, CR, CU, CV, CW, CX, CY, CZ, DE, DJ, DK, DM, DO, DZ, EC, EE, EG, EH, ER, ES, ET, FI, FJ, FK, FM, FO, FR, GA, GB, GD, GE, GF, GG, GH, GI, GL, GM, GN, GP, GQ, GR, GS, GT, GU, GW, GY, HK, HM, HN, HR, HT, HU, ID, IE, IL, IM, IN, IO, IQ, IR, IS, IT, JE, JM, JO, JP, KE, KG, KH, KI, KM, KN, KP, KR, KW, KY, KZ, LA, LB, LC, LI, LK, LR, LS, LT, LU, LV, LY, MA, MC, MD, ME, MF, MG, MH, MK, ML, MM, MN, MO, MP, MQ, MR, MS, MT, MU, MV, MW, MX, MY, MZ, NA, NC, NE, NF, NG, NI, NL, NO, NP, NR, NU, NZ, OM, PA, PE, PF, PG, PH, PK, PL, PM, PN, PR, PS, PT, PW, PY, QA, RE, RO, RS, RU, RW, SA, SB, SC, SD, SE, SG, SH, SI, SJ, SK, SL, SM, SN, SO, SR, SS, ST, SV, SX, SY, SZ, TC, TD, TF, TG, TH, TJ, TK, TL, TM, TN, TO, TP, TR, TT, TV, TW, TZ, UA, UG, US, UY, UZ, VA, VC, VE, VG, VI, VN, VU, WF, WS, YE, YT, ZA, ZM, ZW
-    #           zip_code: "ZipCode",
-    #           phone_number: "ContactNumber",
-    #           email: "Email",
-    #           fax: "ContactNumber",
-    #           extra_params: [
-    #             {
-    #               name: "DUNS_NUMBER", # required, accepts DUNS_NUMBER, BRAND_NUMBER, BIRTH_DEPARTMENT, BIRTH_DATE_IN_YYYY_MM_DD, BIRTH_COUNTRY, BIRTH_CITY, DOCUMENT_NUMBER, AU_ID_NUMBER, AU_ID_TYPE, CA_LEGAL_TYPE, CA_BUSINESS_ENTITY_TYPE, CA_LEGAL_REPRESENTATIVE, CA_LEGAL_REPRESENTATIVE_CAPACITY, ES_IDENTIFICATION, ES_IDENTIFICATION_TYPE, ES_LEGAL_FORM, FI_BUSINESS_NUMBER, FI_ID_NUMBER, FI_NATIONALITY, FI_ORGANIZATION_TYPE, IT_NATIONALITY, IT_PIN, IT_REGISTRANT_ENTITY_TYPE, RU_PASSPORT_DATA, SE_ID_NUMBER, SG_ID_NUMBER, VAT_NUMBER, UK_CONTACT_TYPE, UK_COMPANY_NUMBER, EU_COUNTRY_OF_CITIZENSHIP
-    #               value: "ExtraParamValue", # required
-    #             },
-    #           ],
-    #         },
-    #         tech_contact: {
-    #           first_name: "ContactName",
-    #           last_name: "ContactName",
-    #           contact_type: "PERSON", # accepts PERSON, COMPANY, ASSOCIATION, PUBLIC_BODY, RESELLER
-    #           organization_name: "ContactName",
-    #           address_line_1: "AddressLine",
-    #           address_line_2: "AddressLine",
-    #           city: "City",
-    #           state: "State",
-    #           country_code: "AC", # accepts AC, AD, AE, AF, AG, AI, AL, AM, AN, AO, AQ, AR, AS, AT, AU, AW, AX, AZ, BA, BB, BD, BE, BF, BG, BH, BI, BJ, BL, BM, BN, BO, BQ, BR, BS, BT, BV, BW, BY, BZ, CA, CC, CD, CF, CG, CH, CI, CK, CL, CM, CN, CO, CR, CU, CV, CW, CX, CY, CZ, DE, DJ, DK, DM, DO, DZ, EC, EE, EG, EH, ER, ES, ET, FI, FJ, FK, FM, FO, FR, GA, GB, GD, GE, GF, GG, GH, GI, GL, GM, GN, GP, GQ, GR, GS, GT, GU, GW, GY, HK, HM, HN, HR, HT, HU, ID, IE, IL, IM, IN, IO, IQ, IR, IS, IT, JE, JM, JO, JP, KE, KG, KH, KI, KM, KN, KP, KR, KW, KY, KZ, LA, LB, LC, LI, LK, LR, LS, LT, LU, LV, LY, MA, MC, MD, ME, MF, MG, MH, MK, ML, MM, MN, MO, MP, MQ, MR, MS, MT, MU, MV, MW, MX, MY, MZ, NA, NC, NE, NF, NG, NI, NL, NO, NP, NR, NU, NZ, OM, PA, PE, PF, PG, PH, PK, PL, PM, PN, PR, PS, PT, PW, PY, QA, RE, RO, RS, RU, RW, SA, SB, SC, SD, SE, SG, SH, SI, SJ, SK, SL, SM, SN, SO, SR, SS, ST, SV, SX, SY, SZ, TC, TD, TF, TG, TH, TJ, TK, TL, TM, TN, TO, TP, TR, TT, TV, TW, TZ, UA, UG, US, UY, UZ, VA, VC, VE, VG, VI, VN, VU, WF, WS, YE, YT, ZA, ZM, ZW
-    #           zip_code: "ZipCode",
-    #           phone_number: "ContactNumber",
-    #           email: "Email",
-    #           fax: "ContactNumber",
-    #           extra_params: [
-    #             {
-    #               name: "DUNS_NUMBER", # required, accepts DUNS_NUMBER, BRAND_NUMBER, BIRTH_DEPARTMENT, BIRTH_DATE_IN_YYYY_MM_DD, BIRTH_COUNTRY, BIRTH_CITY, DOCUMENT_NUMBER, AU_ID_NUMBER, AU_ID_TYPE, CA_LEGAL_TYPE, CA_BUSINESS_ENTITY_TYPE, CA_LEGAL_REPRESENTATIVE, CA_LEGAL_REPRESENTATIVE_CAPACITY, ES_IDENTIFICATION, ES_IDENTIFICATION_TYPE, ES_LEGAL_FORM, FI_BUSINESS_NUMBER, FI_ID_NUMBER, FI_NATIONALITY, FI_ORGANIZATION_TYPE, IT_NATIONALITY, IT_PIN, IT_REGISTRANT_ENTITY_TYPE, RU_PASSPORT_DATA, SE_ID_NUMBER, SG_ID_NUMBER, VAT_NUMBER, UK_CONTACT_TYPE, UK_COMPANY_NUMBER, EU_COUNTRY_OF_CITIZENSHIP
-    #               value: "ExtraParamValue", # required
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The name of the domain that you want to update contact information
     #   for.
@@ -3122,20 +2631,6 @@ module Aws::Route53Domains
     # not completed successfully, the domain registrant will be notified by
     # email.
     #
-    # @note When making an API call, you may pass UpdateDomainNameserversRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         fi_auth_key: "FIAuthKey",
-    #         nameservers: [ # required
-    #           {
-    #             name: "HostName", # required
-    #             glue_ips: ["GlueIp"],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The name of the domain that you want to change name servers for.
     #   @return [String]
@@ -3179,19 +2674,6 @@ module Aws::Route53Domains
 
     # The UpdateTagsForDomainRequest includes the following elements.
     #
-    # @note When making an API call, you may pass UpdateTagsForDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         tags_to_update: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The domain for which you want to add or update tags.
     #   @return [String]
@@ -3216,16 +2698,6 @@ module Aws::Route53Domains
     class UpdateTagsForDomainResponse < Aws::EmptyStructure; end
 
     # The ViewBilling request includes the following elements.
-    #
-    # @note When making an API call, you may pass ViewBillingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         start: Time.now,
-    #         end: Time.now,
-    #         marker: "PageMarker",
-    #         max_items: 1,
-    #       }
     #
     # @!attribute [rw] start
     #   The beginning date and time for the time period for which you want a

@@ -19,15 +19,6 @@ module Aws::ForecastService
     # CreateWhatIfForecastRequest$TimeSeriesTransformations operation to
     # define a subset of attribute items that are modified.
     #
-    # @note When making an API call, you may pass Action
-    #   data as a hash:
-    #
-    #       {
-    #         attribute_name: "Name", # required
-    #         operation: "ADD", # required, accepts ADD, SUBTRACT, MULTIPLY, DIVIDE
-    #         value: 1.0, # required
-    #       }
-    #
     # @!attribute [rw] attribute_name
     #   The related time series that you are modifying. This value is case
     #   insensitive.
@@ -85,16 +76,6 @@ module Aws::ForecastService
     # [1]: https://docs.aws.amazon.com/forecast/latest/dg/weather.html
     # [2]: http://jollyday.sourceforge.net/data.html
     # [3]: https://docs.aws.amazon.com/forecast/latest/dg/holidays.html
-    #
-    # @note When making an API call, you may pass AdditionalDataset
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         configuration: {
-    #           "Name" => ["Value"],
-    #         },
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the additional dataset. Valid names: `"holiday"` and
@@ -269,16 +250,6 @@ module Aws::ForecastService
     #
     # `\}`
     #
-    # @note When making an API call, you may pass AttributeConfig
-    #   data as a hash:
-    #
-    #       {
-    #         attribute_name: "Name", # required
-    #         transformations: { # required
-    #           "Name" => "Value",
-    #         },
-    #       }
-    #
     # @!attribute [rw] attribute_name
     #   The name of the attribute as specified in the schema. Amazon
     #   Forecast supports the target field of the target time series and the
@@ -374,14 +345,6 @@ module Aws::ForecastService
     # Specifies a categorical hyperparameter and it's range of tunable
     # values. This object is part of the ParameterRanges object.
     #
-    # @note When making an API call, you may pass CategoricalParameterRange
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         values: ["Value"], # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the categorical hyperparameter to tune.
     #   @return [String]
@@ -401,16 +364,6 @@ module Aws::ForecastService
 
     # Specifies a continuous hyperparameter and it's range of tunable
     # values. This object is part of the ParameterRanges object.
-    #
-    # @note When making an API call, you may pass ContinuousParameterRange
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         max_value: 1.0, # required
-    #         min_value: 1.0, # required
-    #         scaling_type: "Auto", # accepts Auto, Linear, Logarithmic, ReverseLogarithmic
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the hyperparameter to tune.
@@ -473,58 +426,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAutoPredictorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         predictor_name: "Name", # required
-    #         forecast_horizon: 1,
-    #         forecast_types: ["ForecastType"],
-    #         forecast_dimensions: ["Name"],
-    #         forecast_frequency: "Frequency",
-    #         data_config: {
-    #           dataset_group_arn: "Arn", # required
-    #           attribute_configs: [
-    #             {
-    #               attribute_name: "Name", # required
-    #               transformations: { # required
-    #                 "Name" => "Value",
-    #               },
-    #             },
-    #           ],
-    #           additional_datasets: [
-    #             {
-    #               name: "Name", # required
-    #               configuration: {
-    #                 "Name" => ["Value"],
-    #               },
-    #             },
-    #           ],
-    #         },
-    #         encryption_config: {
-    #           role_arn: "Arn", # required
-    #           kms_key_arn: "KMSKeyArn", # required
-    #         },
-    #         reference_predictor_arn: "Arn",
-    #         optimization_metric: "WAPE", # accepts WAPE, RMSE, AverageWeightedQuantileLoss, MASE, MAPE
-    #         explain_predictor: false,
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         monitor_config: {
-    #           monitor_name: "Name", # required
-    #         },
-    #         time_alignment_boundary: {
-    #           month: "JANUARY", # accepts JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE, JULY, AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER
-    #           day_of_month: 1,
-    #           day_of_week: "MONDAY", # accepts MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
-    #           hour: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] predictor_name
     #   A unique name for the predictor
     #   @return [String]
@@ -696,21 +597,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDatasetGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_group_name: "Name", # required
-    #         domain: "RETAIL", # required, accepts RETAIL, CUSTOM, INVENTORY_PLANNING, EC2_CAPACITY, WORK_FORCE, WEB_TRAFFIC, METRICS
-    #         dataset_arns: ["Arn"],
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] dataset_group_name
     #   A name for the dataset group.
     #   @return [String]
@@ -794,32 +680,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDatasetImportJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_import_job_name: "Name", # required
-    #         dataset_arn: "Arn", # required
-    #         data_source: { # required
-    #           s3_config: { # required
-    #             path: "S3Path", # required
-    #             role_arn: "Arn", # required
-    #             kms_key_arn: "KMSKeyArn",
-    #           },
-    #         },
-    #         timestamp_format: "TimestampFormat",
-    #         time_zone: "TimeZone",
-    #         use_geolocation_for_time_zone: false,
-    #         geolocation_format: "GeolocationFormat",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         format: "Format",
-    #       }
-    #
     # @!attribute [rw] dataset_import_job_name
     #   The name for the dataset import job. We recommend including the
     #   current timestamp in the name, for example, `20190721DatasetImport`.
@@ -964,34 +824,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDatasetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_name: "Name", # required
-    #         domain: "RETAIL", # required, accepts RETAIL, CUSTOM, INVENTORY_PLANNING, EC2_CAPACITY, WORK_FORCE, WEB_TRAFFIC, METRICS
-    #         dataset_type: "TARGET_TIME_SERIES", # required, accepts TARGET_TIME_SERIES, RELATED_TIME_SERIES, ITEM_METADATA
-    #         data_frequency: "Frequency",
-    #         schema: { # required
-    #           attributes: [
-    #             {
-    #               attribute_name: "Name",
-    #               attribute_type: "string", # accepts string, integer, float, timestamp, geolocation
-    #             },
-    #           ],
-    #         },
-    #         encryption_config: {
-    #           role_arn: "Arn", # required
-    #           kms_key_arn: "KMSKeyArn", # required
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] dataset_name
     #   A name for the dataset.
     #   @return [String]
@@ -1106,28 +938,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateExplainabilityExportRequest
-    #   data as a hash:
-    #
-    #       {
-    #         explainability_export_name: "Name", # required
-    #         explainability_arn: "Arn", # required
-    #         destination: { # required
-    #           s3_config: { # required
-    #             path: "S3Path", # required
-    #             role_arn: "Arn", # required
-    #             kms_key_arn: "KMSKeyArn",
-    #           },
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         format: "Format",
-    #       }
-    #
     # @!attribute [rw] explainability_export_name
     #   A unique name for the Explainability export.
     #   @return [String]
@@ -1201,42 +1011,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateExplainabilityRequest
-    #   data as a hash:
-    #
-    #       {
-    #         explainability_name: "Name", # required
-    #         resource_arn: "Arn", # required
-    #         explainability_config: { # required
-    #           time_series_granularity: "ALL", # required, accepts ALL, SPECIFIC
-    #           time_point_granularity: "ALL", # required, accepts ALL, SPECIFIC
-    #         },
-    #         data_source: {
-    #           s3_config: { # required
-    #             path: "S3Path", # required
-    #             role_arn: "Arn", # required
-    #             kms_key_arn: "KMSKeyArn",
-    #           },
-    #         },
-    #         schema: {
-    #           attributes: [
-    #             {
-    #               attribute_name: "Name",
-    #               attribute_type: "string", # accepts string, integer, float, timestamp, geolocation
-    #             },
-    #           ],
-    #         },
-    #         enable_visualization: false,
-    #         start_date_time: "LocalDateTime",
-    #         end_date_time: "LocalDateTime",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] explainability_name
     #   A unique name for the Explainability.
     #   @return [String]
@@ -1340,28 +1114,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateForecastExportJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         forecast_export_job_name: "Name", # required
-    #         forecast_arn: "Arn", # required
-    #         destination: { # required
-    #           s3_config: { # required
-    #             path: "S3Path", # required
-    #             role_arn: "Arn", # required
-    #             kms_key_arn: "KMSKeyArn",
-    #           },
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         format: "Format",
-    #       }
-    #
     # @!attribute [rw] forecast_export_job_name
     #   The name for the forecast export job.
     #   @return [String]
@@ -1444,41 +1196,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateForecastRequest
-    #   data as a hash:
-    #
-    #       {
-    #         forecast_name: "Name", # required
-    #         predictor_arn: "Arn", # required
-    #         forecast_types: ["ForecastType"],
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         time_series_selector: {
-    #           time_series_identifiers: {
-    #             data_source: {
-    #               s3_config: { # required
-    #                 path: "S3Path", # required
-    #                 role_arn: "Arn", # required
-    #                 kms_key_arn: "KMSKeyArn",
-    #               },
-    #             },
-    #             schema: {
-    #               attributes: [
-    #                 {
-    #                   attribute_name: "Name",
-    #                   attribute_type: "string", # accepts string, integer, float, timestamp, geolocation
-    #                 },
-    #               ],
-    #             },
-    #             format: "Format",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] forecast_name
     #   A name for the forecast.
     #   @return [String]
@@ -1571,20 +1288,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateMonitorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         monitor_name: "Name", # required
-    #         resource_arn: "Arn", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] monitor_name
     #   The name of the monitor resource.
     #   @return [String]
@@ -1623,28 +1326,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreatePredictorBacktestExportJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         predictor_backtest_export_job_name: "Name", # required
-    #         predictor_arn: "Arn", # required
-    #         destination: { # required
-    #           s3_config: { # required
-    #             path: "S3Path", # required
-    #             role_arn: "Arn", # required
-    #             kms_key_arn: "KMSKeyArn",
-    #           },
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         format: "Format",
-    #       }
-    #
     # @!attribute [rw] predictor_backtest_export_job_name
     #   The name for the backtest export job.
     #   @return [String]
@@ -1721,89 +1402,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreatePredictorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         predictor_name: "Name", # required
-    #         algorithm_arn: "Arn",
-    #         forecast_horizon: 1, # required
-    #         forecast_types: ["ForecastType"],
-    #         perform_auto_ml: false,
-    #         auto_ml_override_strategy: "LatencyOptimized", # accepts LatencyOptimized, AccuracyOptimized
-    #         perform_hpo: false,
-    #         training_parameters: {
-    #           "ParameterKey" => "ParameterValue",
-    #         },
-    #         evaluation_parameters: {
-    #           number_of_backtest_windows: 1,
-    #           back_test_window_offset: 1,
-    #         },
-    #         hpo_config: {
-    #           parameter_ranges: {
-    #             categorical_parameter_ranges: [
-    #               {
-    #                 name: "Name", # required
-    #                 values: ["Value"], # required
-    #               },
-    #             ],
-    #             continuous_parameter_ranges: [
-    #               {
-    #                 name: "Name", # required
-    #                 max_value: 1.0, # required
-    #                 min_value: 1.0, # required
-    #                 scaling_type: "Auto", # accepts Auto, Linear, Logarithmic, ReverseLogarithmic
-    #               },
-    #             ],
-    #             integer_parameter_ranges: [
-    #               {
-    #                 name: "Name", # required
-    #                 max_value: 1, # required
-    #                 min_value: 1, # required
-    #                 scaling_type: "Auto", # accepts Auto, Linear, Logarithmic, ReverseLogarithmic
-    #               },
-    #             ],
-    #           },
-    #         },
-    #         input_data_config: { # required
-    #           dataset_group_arn: "Arn", # required
-    #           supplementary_features: [
-    #             {
-    #               name: "Name", # required
-    #               value: "Value", # required
-    #             },
-    #           ],
-    #         },
-    #         featurization_config: { # required
-    #           forecast_frequency: "Frequency", # required
-    #           forecast_dimensions: ["Name"],
-    #           featurizations: [
-    #             {
-    #               attribute_name: "Name", # required
-    #               featurization_pipeline: [
-    #                 {
-    #                   featurization_method_name: "filling", # required, accepts filling
-    #                   featurization_method_parameters: {
-    #                     "ParameterKey" => "ParameterValue",
-    #                   },
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #         encryption_config: {
-    #           role_arn: "Arn", # required
-    #           kms_key_arn: "KMSKeyArn", # required
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         optimization_metric: "WAPE", # accepts WAPE, RMSE, AverageWeightedQuantileLoss, MASE, MAPE
-    #       }
-    #
     # @!attribute [rw] predictor_name
     #   A name for the predictor.
     #   @return [String]
@@ -2011,40 +1609,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateWhatIfAnalysisRequest
-    #   data as a hash:
-    #
-    #       {
-    #         what_if_analysis_name: "Name", # required
-    #         forecast_arn: "Arn", # required
-    #         time_series_selector: {
-    #           time_series_identifiers: {
-    #             data_source: {
-    #               s3_config: { # required
-    #                 path: "S3Path", # required
-    #                 role_arn: "Arn", # required
-    #                 kms_key_arn: "KMSKeyArn",
-    #               },
-    #             },
-    #             schema: {
-    #               attributes: [
-    #                 {
-    #                   attribute_name: "Name",
-    #                   attribute_type: "string", # accepts string, integer, float, timestamp, geolocation
-    #                 },
-    #               ],
-    #             },
-    #             format: "Format",
-    #           },
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] what_if_analysis_name
     #   The name of the what-if analysis. Each name must be unique.
     #   @return [String]
@@ -2098,28 +1662,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateWhatIfForecastExportRequest
-    #   data as a hash:
-    #
-    #       {
-    #         what_if_forecast_export_name: "Name", # required
-    #         what_if_forecast_arns: ["LongArn"], # required
-    #         destination: { # required
-    #           s3_config: { # required
-    #             path: "S3Path", # required
-    #             role_arn: "Arn", # required
-    #             kms_key_arn: "KMSKeyArn",
-    #           },
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         format: "Format",
-    #       }
-    #
     # @!attribute [rw] what_if_forecast_export_name
     #   The name of the what-if forecast to export.
     #   @return [String]
@@ -2175,53 +1717,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateWhatIfForecastRequest
-    #   data as a hash:
-    #
-    #       {
-    #         what_if_forecast_name: "Name", # required
-    #         what_if_analysis_arn: "Arn", # required
-    #         time_series_transformations: [
-    #           {
-    #             action: {
-    #               attribute_name: "Name", # required
-    #               operation: "ADD", # required, accepts ADD, SUBTRACT, MULTIPLY, DIVIDE
-    #               value: 1.0, # required
-    #             },
-    #             time_series_conditions: [
-    #               {
-    #                 attribute_name: "Name", # required
-    #                 attribute_value: "AttributeValue", # required
-    #                 condition: "EQUALS", # required, accepts EQUALS, NOT_EQUALS, LESS_THAN, GREATER_THAN
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         time_series_replacements_data_source: {
-    #           s3_config: { # required
-    #             path: "S3Path", # required
-    #             role_arn: "Arn", # required
-    #             kms_key_arn: "KMSKeyArn",
-    #           },
-    #           schema: { # required
-    #             attributes: [
-    #               {
-    #                 attribute_name: "Name",
-    #                 attribute_type: "string", # accepts string, integer, float, timestamp, geolocation
-    #               },
-    #             ],
-    #           },
-    #           format: "Format",
-    #           timestamp_format: "TimestampFormat",
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] what_if_forecast_name
     #   The name of the what-if forecast. Names must be unique within each
     #   what-if analysis.
@@ -2292,29 +1787,6 @@ module Aws::ForecastService
     # The data configuration for your dataset group and any additional
     # datasets.
     #
-    # @note When making an API call, you may pass DataConfig
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_group_arn: "Arn", # required
-    #         attribute_configs: [
-    #           {
-    #             attribute_name: "Name", # required
-    #             transformations: { # required
-    #               "Name" => "Value",
-    #             },
-    #           },
-    #         ],
-    #         additional_datasets: [
-    #           {
-    #             name: "Name", # required
-    #             configuration: {
-    #               "Name" => ["Value"],
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] dataset_group_arn
     #   The ARN of the dataset group used to train the predictor.
     #   @return [String]
@@ -2342,17 +1814,6 @@ module Aws::ForecastService
     # and Access Management (IAM) role that allows Amazon Forecast to access
     # the location, and an AWS Key Management Service (KMS) key (optional).
     #
-    # @note When making an API call, you may pass DataDestination
-    #   data as a hash:
-    #
-    #       {
-    #         s3_config: { # required
-    #           path: "S3Path", # required
-    #           role_arn: "Arn", # required
-    #           kms_key_arn: "KMSKeyArn",
-    #         },
-    #       }
-    #
     # @!attribute [rw] s3_config
     #   The path to an Amazon Simple Storage Service (Amazon S3) bucket
     #   along with the credentials to access the bucket.
@@ -2369,17 +1830,6 @@ module Aws::ForecastService
     # The source of your data, an AWS Identity and Access Management (IAM)
     # role that allows Amazon Forecast to access the data and, optionally,
     # an AWS Key Management Service (KMS) key.
-    #
-    # @note When making an API call, you may pass DataSource
-    #   data as a hash:
-    #
-    #       {
-    #         s3_config: { # required
-    #           path: "S3Path", # required
-    #           role_arn: "Arn", # required
-    #           kms_key_arn: "KMSKeyArn",
-    #         },
-    #       }
     #
     # @!attribute [rw] s3_config
     #   The path to the data stored in an Amazon Simple Storage Service
@@ -2569,13 +2019,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDatasetGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_group_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] dataset_group_arn
     #   The Amazon Resource Name (ARN) of the dataset group to delete.
     #   @return [String]
@@ -2588,13 +2031,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDatasetImportJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_import_job_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] dataset_import_job_arn
     #   The Amazon Resource Name (ARN) of the dataset import job to delete.
     #   @return [String]
@@ -2607,13 +2043,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDatasetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] dataset_arn
     #   The Amazon Resource Name (ARN) of the dataset to delete.
     #   @return [String]
@@ -2626,13 +2055,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteExplainabilityExportRequest
-    #   data as a hash:
-    #
-    #       {
-    #         explainability_export_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] explainability_export_arn
     #   The Amazon Resource Name (ARN) of the Explainability export to
     #   delete.
@@ -2646,13 +2068,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteExplainabilityRequest
-    #   data as a hash:
-    #
-    #       {
-    #         explainability_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] explainability_arn
     #   The Amazon Resource Name (ARN) of the Explainability resource to
     #   delete.
@@ -2666,13 +2081,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteForecastExportJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         forecast_export_job_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] forecast_export_job_arn
     #   The Amazon Resource Name (ARN) of the forecast export job to delete.
     #   @return [String]
@@ -2685,13 +2093,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteForecastRequest
-    #   data as a hash:
-    #
-    #       {
-    #         forecast_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] forecast_arn
     #   The Amazon Resource Name (ARN) of the forecast to delete.
     #   @return [String]
@@ -2704,13 +2105,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteMonitorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         monitor_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] monitor_arn
     #   The Amazon Resource Name (ARN) of the monitor resource to delete.
     #   @return [String]
@@ -2723,13 +2117,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeletePredictorBacktestExportJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         predictor_backtest_export_job_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] predictor_backtest_export_job_arn
     #   The Amazon Resource Name (ARN) of the predictor backtest export job
     #   to delete.
@@ -2743,13 +2130,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeletePredictorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         predictor_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] predictor_arn
     #   The Amazon Resource Name (ARN) of the predictor to delete.
     #   @return [String]
@@ -2762,13 +2142,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteResourceTreeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the parent resource to delete. All
     #   child resources of the parent resource will also be deleted.
@@ -2782,13 +2155,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteWhatIfAnalysisRequest
-    #   data as a hash:
-    #
-    #       {
-    #         what_if_analysis_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] what_if_analysis_arn
     #   The Amazon Resource Name (ARN) of the what-if analysis that you want
     #   to delete.
@@ -2802,13 +2168,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteWhatIfForecastExportRequest
-    #   data as a hash:
-    #
-    #       {
-    #         what_if_forecast_export_arn: "LongArn", # required
-    #       }
-    #
     # @!attribute [rw] what_if_forecast_export_arn
     #   The Amazon Resource Name (ARN) of the what-if forecast export that
     #   you want to delete.
@@ -2822,13 +2181,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteWhatIfForecastRequest
-    #   data as a hash:
-    #
-    #       {
-    #         what_if_forecast_arn: "LongArn", # required
-    #       }
-    #
     # @!attribute [rw] what_if_forecast_arn
     #   The Amazon Resource Name (ARN) of the what-if forecast that you want
     #   to delete.
@@ -2842,13 +2194,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAutoPredictorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         predictor_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] predictor_arn
     #   The Amazon Resource Name (ARN) of the predictor.
     #   @return [String]
@@ -2999,13 +2344,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDatasetGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_group_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] dataset_group_arn
     #   The Amazon Resource Name (ARN) of the dataset group.
     #   @return [String]
@@ -3088,13 +2426,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDatasetImportJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_import_job_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] dataset_import_job_arn
     #   The Amazon Resource Name (ARN) of the dataset import job.
     #   @return [String]
@@ -3234,13 +2565,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDatasetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] dataset_arn
     #   The Amazon Resource Name (ARN) of the dataset.
     #   @return [String]
@@ -3350,13 +2674,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeExplainabilityExportRequest
-    #   data as a hash:
-    #
-    #       {
-    #         explainability_export_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] explainability_export_arn
     #   The Amazon Resource Name (ARN) of the Explainability export.
     #   @return [String]
@@ -3443,13 +2760,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeExplainabilityRequest
-    #   data as a hash:
-    #
-    #       {
-    #         explainability_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] explainability_arn
     #   The Amazon Resource Name (ARN) of the Explaianability to describe.
     #   @return [String]
@@ -3566,13 +2876,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeForecastExportJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         forecast_export_job_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] forecast_export_job_arn
     #   The Amazon Resource Name (ARN) of the forecast export job.
     #   @return [String]
@@ -3662,13 +2965,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeForecastRequest
-    #   data as a hash:
-    #
-    #       {
-    #         forecast_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] forecast_arn
     #   The Amazon Resource Name (ARN) of the forecast.
     #   @return [String]
@@ -3769,13 +3065,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeMonitorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         monitor_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] monitor_arn
     #   The Amazon Resource Name (ARN) of the monitor resource to describe.
     #   @return [String]
@@ -3853,13 +3142,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribePredictorBacktestExportJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         predictor_backtest_export_job_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] predictor_backtest_export_job_arn
     #   The Amazon Resource Name (ARN) of the predictor backtest export job.
     #   @return [String]
@@ -3947,13 +3229,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribePredictorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         predictor_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] predictor_arn
     #   The Amazon Resource Name (ARN) of the predictor that you want
     #   information about.
@@ -4146,13 +3421,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeWhatIfAnalysisRequest
-    #   data as a hash:
-    #
-    #       {
-    #         what_if_analysis_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] what_if_analysis_arn
     #   The Amazon Resource Name (ARN) of the what-if analysis that you are
     #   interested in.
@@ -4252,13 +3520,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeWhatIfForecastExportRequest
-    #   data as a hash:
-    #
-    #       {
-    #         what_if_forecast_export_arn: "LongArn", # required
-    #       }
-    #
     # @!attribute [rw] what_if_forecast_export_arn
     #   The Amazon Resource Name (ARN) of the what-if forecast export that
     #   you are interested in.
@@ -4358,13 +3619,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeWhatIfForecastRequest
-    #   data as a hash:
-    #
-    #       {
-    #         what_if_forecast_arn: "LongArn", # required
-    #       }
-    #
     # @!attribute [rw] what_if_forecast_arn
     #   The Amazon Resource Name (ARN) of the what-if forecast that you are
     #   interested in.
@@ -4476,14 +3730,6 @@ module Aws::ForecastService
     # key. You can specify this optional object in the CreateDataset and
     # CreatePredictor requests.
     #
-    # @note When making an API call, you may pass EncryptionConfig
-    #   data as a hash:
-    #
-    #       {
-    #         role_arn: "Arn", # required
-    #         kms_key_arn: "KMSKeyArn", # required
-    #       }
-    #
     # @!attribute [rw] role_arn
     #   The ARN of the IAM role that Amazon Forecast can assume to access
     #   the AWS KMS key.
@@ -4546,14 +3792,6 @@ module Aws::ForecastService
     # parameters are specified in the predefined algorithms but you can
     # override them in the CreatePredictor request.
     #
-    # @note When making an API call, you may pass EvaluationParameters
-    #   data as a hash:
-    #
-    #       {
-    #         number_of_backtest_windows: 1,
-    #         back_test_window_offset: 1,
-    #       }
-    #
     # @!attribute [rw] number_of_backtest_windows
     #   The number of times to split the input data. The default is 1. Valid
     #   values are 1 through 5.
@@ -4614,14 +3852,6 @@ module Aws::ForecastService
     # If you provide a forecast ARN for `ResourceArn`, you can set
     # `TimePointGranularity` and `TimeSeriesGranularity` to either “ALL” or
     # “Specific”.
-    #
-    # @note When making an API call, you may pass ExplainabilityConfig
-    #   data as a hash:
-    #
-    #       {
-    #         time_series_granularity: "ALL", # required, accepts ALL, SPECIFIC
-    #         time_point_granularity: "ALL", # required, accepts ALL, SPECIFIC
-    #       }
     #
     # @!attribute [rw] time_series_granularity
     #   To create an Explainability for all time series in your datasets,
@@ -4846,21 +4076,6 @@ module Aws::ForecastService
     #
     # `\}`
     #
-    # @note When making an API call, you may pass Featurization
-    #   data as a hash:
-    #
-    #       {
-    #         attribute_name: "Name", # required
-    #         featurization_pipeline: [
-    #           {
-    #             featurization_method_name: "filling", # required, accepts filling
-    #             featurization_method_parameters: {
-    #               "ParameterKey" => "ParameterValue",
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] attribute_name
     #   The name of the schema attribute that specifies the data field to be
     #   featurized. Amazon Forecast supports the target field of the
@@ -4904,27 +4119,6 @@ module Aws::ForecastService
     # You can create multiple featurization configurations. For example, you
     # might call the `CreatePredictor` operation twice by specifying
     # different featurization configurations.
-    #
-    # @note When making an API call, you may pass FeaturizationConfig
-    #   data as a hash:
-    #
-    #       {
-    #         forecast_frequency: "Frequency", # required
-    #         forecast_dimensions: ["Name"],
-    #         featurizations: [
-    #           {
-    #             attribute_name: "Name", # required
-    #             featurization_pipeline: [
-    #               {
-    #                 featurization_method_name: "filling", # required, accepts filling
-    #                 featurization_method_parameters: {
-    #                   "ParameterKey" => "ParameterValue",
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] forecast_frequency
     #   The frequency of predictions in a forecast.
@@ -4988,16 +4182,6 @@ module Aws::ForecastService
     #
     # `\}`
     #
-    # @note When making an API call, you may pass FeaturizationMethod
-    #   data as a hash:
-    #
-    #       {
-    #         featurization_method_name: "filling", # required, accepts filling
-    #         featurization_method_parameters: {
-    #           "ParameterKey" => "ParameterValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] featurization_method_name
     #   The name of the method. The "filling" method is the only supported
     #   method.
@@ -5052,15 +4236,6 @@ module Aws::ForecastService
     # `IS` or `IS_NOT`, which specifies whether to include or exclude the
     # objects that match the statement, respectively. The match statement
     # consists of a key and a value.
-    #
-    # @note When making an API call, you may pass Filter
-    #   data as a hash:
-    #
-    #       {
-    #         key: "String", # required
-    #         value: "Arn", # required
-    #         condition: "IS", # required, accepts IS, IS_NOT
-    #       }
     #
     # @!attribute [rw] key
     #   The name of the parameter to filter on.
@@ -5240,13 +4415,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAccuracyMetricsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         predictor_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] predictor_arn
     #   The Amazon Resource Name (ARN) of the predictor to get metrics for.
     #   @return [String]
@@ -5311,36 +4479,6 @@ module Aws::ForecastService
     # hyperparameter values. The optimum set of values depends on the
     # algorithm, the training data, and the specified metric objective.
     #
-    # @note When making an API call, you may pass HyperParameterTuningJobConfig
-    #   data as a hash:
-    #
-    #       {
-    #         parameter_ranges: {
-    #           categorical_parameter_ranges: [
-    #             {
-    #               name: "Name", # required
-    #               values: ["Value"], # required
-    #             },
-    #           ],
-    #           continuous_parameter_ranges: [
-    #             {
-    #               name: "Name", # required
-    #               max_value: 1.0, # required
-    #               min_value: 1.0, # required
-    #               scaling_type: "Auto", # accepts Auto, Linear, Logarithmic, ReverseLogarithmic
-    #             },
-    #           ],
-    #           integer_parameter_ranges: [
-    #             {
-    #               name: "Name", # required
-    #               max_value: 1, # required
-    #               min_value: 1, # required
-    #               scaling_type: "Auto", # accepts Auto, Linear, Logarithmic, ReverseLogarithmic
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] parameter_ranges
     #   Specifies the ranges of valid values for the hyperparameters.
     #   @return [Types::ParameterRanges]
@@ -5362,19 +4500,6 @@ module Aws::ForecastService
     # and any supplementary features. You specify this object in the
     # CreatePredictor request.
     #
-    # @note When making an API call, you may pass InputDataConfig
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_group_arn: "Arn", # required
-    #         supplementary_features: [
-    #           {
-    #             name: "Name", # required
-    #             value: "Value", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] dataset_group_arn
     #   The Amazon Resource Name (ARN) of the dataset group.
     #   @return [String]
@@ -5395,16 +4520,6 @@ module Aws::ForecastService
 
     # Specifies an integer hyperparameter and it's range of tunable values.
     # This object is part of the ParameterRanges object.
-    #
-    # @note When making an API call, you may pass IntegerParameterRange
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         max_value: 1, # required
-    #         min_value: 1, # required
-    #         scaling_type: "Auto", # accepts Auto, Linear, Logarithmic, ReverseLogarithmic
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the hyperparameter to tune.
@@ -5506,14 +4621,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDatasetGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If the result of the previous request was truncated, the response
     #   includes a `NextToken`. To retrieve the next set of results, use the
@@ -5551,21 +4658,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDatasetImportJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         filters: [
-    #           {
-    #             key: "String", # required
-    #             value: "Arn", # required
-    #             condition: "IS", # required, accepts IS, IS_NOT
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If the result of the previous request was truncated, the response
     #   includes a `NextToken`. To retrieve the next set of results, use the
@@ -5630,14 +4722,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDatasetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If the result of the previous request was truncated, the response
     #   includes a `NextToken`. To retrieve the next set of results, use the
@@ -5675,21 +4759,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListExplainabilitiesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         filters: [
-    #           {
-    #             key: "String", # required
-    #             value: "Arn", # required
-    #             condition: "IS", # required, accepts IS, IS_NOT
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If the result of the previous request was truncated, the response
     #   includes a NextToken. To retrieve the next set of results, use the
@@ -5747,21 +4816,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListExplainabilityExportsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         filters: [
-    #           {
-    #             key: "String", # required
-    #             value: "Arn", # required
-    #             condition: "IS", # required, accepts IS, IS_NOT
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If the result of the previous request was truncated, the response
     #   includes a NextToken. To retrieve the next set of results, use the
@@ -5819,21 +4873,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListForecastExportJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         filters: [
-    #           {
-    #             key: "String", # required
-    #             value: "Arn", # required
-    #             condition: "IS", # required, accepts IS, IS_NOT
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If the result of the previous request was truncated, the response
     #   includes a `NextToken`. To retrieve the next set of results, use the
@@ -5899,21 +4938,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListForecastsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         filters: [
-    #           {
-    #             key: "String", # required
-    #             value: "Arn", # required
-    #             condition: "IS", # required, accepts IS, IS_NOT
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If the result of the previous request was truncated, the response
     #   includes a `NextToken`. To retrieve the next set of results, use the
@@ -5977,22 +5001,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListMonitorEvaluationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         monitor_arn: "Arn", # required
-    #         filters: [
-    #           {
-    #             key: "String", # required
-    #             value: "Arn", # required
-    #             condition: "IS", # required, accepts IS, IS_NOT
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If the result of the previous request was truncated, the response
     #   includes a `NextToken`. To retrieve the next set of results, use the
@@ -6072,21 +5080,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListMonitorsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         filters: [
-    #           {
-    #             key: "String", # required
-    #             value: "Arn", # required
-    #             condition: "IS", # required, accepts IS, IS_NOT
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If the result of the previous request was truncated, the response
     #   includes a `NextToken`. To retrieve the next set of results, use the
@@ -6149,21 +5142,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPredictorBacktestExportJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         filters: [
-    #           {
-    #             key: "String", # required
-    #             value: "Arn", # required
-    #             condition: "IS", # required, accepts IS, IS_NOT
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If the result of the previous request was truncated, the response
     #   includes a NextToken. To retrieve the next set of results, use the
@@ -6223,21 +5201,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPredictorsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         filters: [
-    #           {
-    #             key: "String", # required
-    #             value: "Arn", # required
-    #             condition: "IS", # required, accepts IS, IS_NOT
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If the result of the previous request was truncated, the response
     #   includes a `NextToken`. To retrieve the next set of results, use the
@@ -6301,13 +5264,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) that identifies the resource for
     #   which to list the tags.
@@ -6333,21 +5289,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListWhatIfAnalysesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         filters: [
-    #           {
-    #             key: "String", # required
-    #             value: "Arn", # required
-    #             condition: "IS", # required, accepts IS, IS_NOT
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If the result of the previous request was truncated, the response
     #   includes a `NextToken`. To retrieve the next set of results, use the
@@ -6415,21 +5356,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListWhatIfForecastExportsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         filters: [
-    #           {
-    #             key: "String", # required
-    #             value: "Arn", # required
-    #             condition: "IS", # required, accepts IS, IS_NOT
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If the result of the previous request was truncated, the response
     #   includes a `NextToken`. To retrieve the next set of results, use the
@@ -6497,21 +5423,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListWhatIfForecastsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         filters: [
-    #           {
-    #             key: "String", # required
-    #             value: "Arn", # required
-    #             condition: "IS", # required, accepts IS, IS_NOT
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If the result of the previous request was truncated, the response
     #   includes a `NextToken`. To retrieve the next set of results, use the
@@ -6645,13 +5556,6 @@ module Aws::ForecastService
     end
 
     # The configuration details for the predictor monitor.
-    #
-    # @note When making an API call, you may pass MonitorConfig
-    #   data as a hash:
-    #
-    #       {
-    #         monitor_name: "Name", # required
-    #       }
     #
     # @!attribute [rw] monitor_name
     #   The name of the monitor resource.
@@ -6787,34 +5691,6 @@ module Aws::ForecastService
     # determines which values that a hyperparameter tuning job can choose
     # for the specified hyperparameter. This object is part of the
     # HyperParameterTuningJobConfig object.
-    #
-    # @note When making an API call, you may pass ParameterRanges
-    #   data as a hash:
-    #
-    #       {
-    #         categorical_parameter_ranges: [
-    #           {
-    #             name: "Name", # required
-    #             values: ["Value"], # required
-    #           },
-    #         ],
-    #         continuous_parameter_ranges: [
-    #           {
-    #             name: "Name", # required
-    #             max_value: 1.0, # required
-    #             min_value: 1.0, # required
-    #             scaling_type: "Auto", # accepts Auto, Linear, Logarithmic, ReverseLogarithmic
-    #           },
-    #         ],
-    #         integer_parameter_ranges: [
-    #           {
-    #             name: "Name", # required
-    #             max_value: 1, # required
-    #             min_value: 1, # required
-    #             scaling_type: "Auto", # accepts Auto, Linear, Logarithmic, ReverseLogarithmic
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] categorical_parameter_ranges
     #   Specifies the tunable range for each categorical hyperparameter.
@@ -7211,13 +6087,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ResumeResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the monitor resource to resume.
     #   @return [String]
@@ -7236,15 +6105,6 @@ module Aws::ForecastService
     # an AWS Key Management Service (KMS) key. This object is part of the
     # DataSource object that is submitted in the CreateDatasetImportJob
     # request, and part of the DataDestination object.
-    #
-    # @note When making an API call, you may pass S3Config
-    #   data as a hash:
-    #
-    #       {
-    #         path: "S3Path", # required
-    #         role_arn: "Arn", # required
-    #         kms_key_arn: "KMSKeyArn",
-    #       }
     #
     # @!attribute [rw] path
     #   The path to an Amazon Simple Storage Service (Amazon S3) bucket or
@@ -7279,18 +6139,6 @@ module Aws::ForecastService
 
     # Defines the fields of a dataset.
     #
-    # @note When making an API call, you may pass Schema
-    #   data as a hash:
-    #
-    #       {
-    #         attributes: [
-    #           {
-    #             attribute_name: "Name",
-    #             attribute_type: "string", # accepts string, integer, float, timestamp, geolocation
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] attributes
     #   An array of attributes specifying the name and type of each field in
     #   a dataset.
@@ -7311,14 +6159,6 @@ module Aws::ForecastService
     #
     #
     # [1]: https://docs.aws.amazon.com/forecast/latest/dg/API_Schema.html
-    #
-    # @note When making an API call, you may pass SchemaAttribute
-    #   data as a hash:
-    #
-    #       {
-    #         attribute_name: "Name",
-    #         attribute_type: "string", # accepts string, integer, float, timestamp, geolocation
-    #       }
     #
     # @!attribute [rw] attribute_name
     #   The name of the dataset field.
@@ -7425,13 +6265,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) that identifies the resource to stop.
     #   The supported ARNs are `DatasetImportJobArn`, `PredictorArn`,
@@ -7478,14 +6311,6 @@ module Aws::ForecastService
     # [1]: https://docs.aws.amazon.com/forecast/latest/dg/weather.html
     # [2]: http://jollyday.sourceforge.net/data.html
     # [3]: https://docs.aws.amazon.com/forecast/latest/dg/holidays.html
-    #
-    # @note When making an API call, you may pass SupplementaryFeature
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         value: "Value", # required
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the feature. Valid values: `"holiday"` and `"weather"`.
@@ -7674,14 +6499,6 @@ module Aws::ForecastService
     #   the limit of 50 tags. Tags with only the key prefix of `aws` do not
     #   count against your tags per resource limit.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   One part of a key-value pair that makes up a tag. A `key` is a
     #   general label that acts like a category for more specific tag
@@ -7702,19 +6519,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) that identifies the resource for
     #   which to list the tags.
@@ -7816,16 +6620,6 @@ module Aws::ForecastService
     # [2]: https://docs.aws.amazon.com/forecast/latest/dg/data-aggregation.html
     # [3]: https://docs.aws.amazon.com/forecast/latest/dg/data-aggregation.html#specifying-time-boundary
     #
-    # @note When making an API call, you may pass TimeAlignmentBoundary
-    #   data as a hash:
-    #
-    #       {
-    #         month: "JANUARY", # accepts JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE, JULY, AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER
-    #         day_of_month: 1,
-    #         day_of_week: "MONDAY", # accepts MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
-    #         hour: 1,
-    #       }
-    #
     # @!attribute [rw] month
     #   The month to use for time alignment during aggregation. The month
     #   must be in uppercase.
@@ -7863,15 +6657,6 @@ module Aws::ForecastService
     # CreateWhatIfForecastRequest$TimeSeriesTransformations operation to
     # define how the attribute is modified.
     #
-    # @note When making an API call, you may pass TimeSeriesCondition
-    #   data as a hash:
-    #
-    #       {
-    #         attribute_name: "Name", # required
-    #         attribute_value: "AttributeValue", # required
-    #         condition: "EQUALS", # required, accepts EQUALS, NOT_EQUALS, LESS_THAN, GREATER_THAN
-    #       }
-    #
     # @!attribute [rw] attribute_name
     #   The item\_id, dimension name, IM name, or timestamp that you are
     #   modifying.
@@ -7898,28 +6683,6 @@ module Aws::ForecastService
 
     # Details about the import file that contains the time series for which
     # you want to create forecasts.
-    #
-    # @note When making an API call, you may pass TimeSeriesIdentifiers
-    #   data as a hash:
-    #
-    #       {
-    #         data_source: {
-    #           s3_config: { # required
-    #             path: "S3Path", # required
-    #             role_arn: "Arn", # required
-    #             kms_key_arn: "KMSKeyArn",
-    #           },
-    #         },
-    #         schema: {
-    #           attributes: [
-    #             {
-    #               attribute_name: "Name",
-    #               attribute_type: "string", # accepts string, integer, float, timestamp, geolocation
-    #             },
-    #           ],
-    #         },
-    #         format: "Format",
-    #       }
     #
     # @!attribute [rw] data_source
     #   The source of your data, an AWS Identity and Access Management (IAM)
@@ -7952,27 +6715,6 @@ module Aws::ForecastService
     # well as at least 1 changed time series. This dataset is merged with
     # the baseline related time series to create a transformed dataset that
     # is used for the what-if forecast.
-    #
-    # @note When making an API call, you may pass TimeSeriesReplacementsDataSource
-    #   data as a hash:
-    #
-    #       {
-    #         s3_config: { # required
-    #           path: "S3Path", # required
-    #           role_arn: "Arn", # required
-    #           kms_key_arn: "KMSKeyArn",
-    #         },
-    #         schema: { # required
-    #           attributes: [
-    #             {
-    #               attribute_name: "Name",
-    #               attribute_type: "string", # accepts string, integer, float, timestamp, geolocation
-    #             },
-    #           ],
-    #         },
-    #         format: "Format",
-    #         timestamp_format: "TimestampFormat",
-    #       }
     #
     # @!attribute [rw] s3_config
     #   The path to the file(s) in an Amazon Simple Storage Service (Amazon
@@ -8018,30 +6760,6 @@ module Aws::ForecastService
     #
     # * `Schema`
     #
-    # @note When making an API call, you may pass TimeSeriesSelector
-    #   data as a hash:
-    #
-    #       {
-    #         time_series_identifiers: {
-    #           data_source: {
-    #             s3_config: { # required
-    #               path: "S3Path", # required
-    #               role_arn: "Arn", # required
-    #               kms_key_arn: "KMSKeyArn",
-    #             },
-    #           },
-    #           schema: {
-    #             attributes: [
-    #               {
-    #                 attribute_name: "Name",
-    #                 attribute_type: "string", # accepts string, integer, float, timestamp, geolocation
-    #               },
-    #             ],
-    #           },
-    #           format: "Format",
-    #         },
-    #       }
-    #
     # @!attribute [rw] time_series_identifiers
     #   Details about the import file that contains the time series for
     #   which you want to create forecasts.
@@ -8063,24 +6781,6 @@ module Aws::ForecastService
     # transformation to be applied. Transformations are applied in the order
     # that they are listed.
     #
-    # @note When making an API call, you may pass TimeSeriesTransformation
-    #   data as a hash:
-    #
-    #       {
-    #         action: {
-    #           attribute_name: "Name", # required
-    #           operation: "ADD", # required, accepts ADD, SUBTRACT, MULTIPLY, DIVIDE
-    #           value: 1.0, # required
-    #         },
-    #         time_series_conditions: [
-    #           {
-    #             attribute_name: "Name", # required
-    #             attribute_value: "AttributeValue", # required
-    #             condition: "EQUALS", # required, accepts EQUALS, NOT_EQUALS, LESS_THAN, GREATER_THAN
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] action
     #   An array of actions that define a time series and how it is
     #   transformed. These transformations create a new time series that is
@@ -8101,14 +6801,6 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) that identifies the resource for
     #   which to list the tags.
@@ -8131,14 +6823,6 @@ module Aws::ForecastService
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateDatasetGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_group_arn: "Arn", # required
-    #         dataset_arns: ["Arn"], # required
-    #       }
-    #
     # @!attribute [rw] dataset_group_arn
     #   The ARN of the dataset group.
     #   @return [String]

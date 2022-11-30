@@ -23,13 +23,6 @@ module Aws::SnowDeviceManagement
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CancelTaskInput
-    #   data as a hash:
-    #
-    #       {
-    #         task_id: "TaskId", # required
-    #       }
-    #
     # @!attribute [rw] task_id
     #   The ID of the task that you are attempting to cancel. You can
     #   retrieve a task ID by using the `ListTasks` operation.
@@ -91,8 +84,6 @@ module Aws::SnowDeviceManagement
 
     # The command given to the device to execute.
     #
-    # @note Command is a union - when making an API calls you must set exactly one of the members.
-    #
     # @!attribute [rw] reboot
     #   Reboots the device.
     #   @return [Types::Reboot]
@@ -135,24 +126,6 @@ module Aws::SnowDeviceManagement
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateTaskInput
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "IdempotencyToken",
-    #         command: { # required
-    #           reboot: {
-    #           },
-    #           unlock: {
-    #           },
-    #         },
-    #         description: "TaskDescriptionString",
-    #         tags: {
-    #           "String" => "String",
-    #         },
-    #         targets: ["String"], # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   A token ensuring that the action is called only once with the
     #   specified details.
@@ -209,14 +182,6 @@ module Aws::SnowDeviceManagement
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDeviceEc2Input
-    #   data as a hash:
-    #
-    #       {
-    #         instance_ids: ["String"], # required
-    #         managed_device_id: "ManagedDeviceId", # required
-    #       }
-    #
     # @!attribute [rw] instance_ids
     #   A list of instance IDs associated with the managed device.
     #   @return [Array<String>]
@@ -246,13 +211,6 @@ module Aws::SnowDeviceManagement
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDeviceInput
-    #   data as a hash:
-    #
-    #       {
-    #         managed_device_id: "ManagedDeviceId", # required
-    #       }
-    #
     # @!attribute [rw] managed_device_id
     #   The ID of the device that you are checking the information of.
     #   @return [String]
@@ -331,14 +289,6 @@ module Aws::SnowDeviceManagement
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeExecutionInput
-    #   data as a hash:
-    #
-    #       {
-    #         managed_device_id: "ManagedDeviceId", # required
-    #         task_id: "TaskId", # required
-    #       }
-    #
     # @!attribute [rw] managed_device_id
     #   The ID of the managed device.
     #   @return [String]
@@ -393,13 +343,6 @@ module Aws::SnowDeviceManagement
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeTaskInput
-    #   data as a hash:
-    #
-    #       {
-    #         task_id: "TaskId", # required
-    #       }
-    #
     # @!attribute [rw] task_id
     #   The ID of the task to be described.
     #   @return [String]
@@ -730,16 +673,6 @@ module Aws::SnowDeviceManagement
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDeviceResourcesInput
-    #   data as a hash:
-    #
-    #       {
-    #         managed_device_id: "ManagedDeviceId", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         type: "ListDeviceResourcesInputTypeString",
-    #       }
-    #
     # @!attribute [rw] managed_device_id
     #   The ID of the managed device that you are listing the resources of.
     #   @return [String]
@@ -785,15 +718,6 @@ module Aws::SnowDeviceManagement
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDevicesInput
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId",
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The ID of the job used to order the device.
     #   @return [String]
@@ -834,16 +758,6 @@ module Aws::SnowDeviceManagement
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListExecutionsInput
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         state: "QUEUED", # accepts QUEUED, IN_PROGRESS, CANCELED, FAILED, SUCCEEDED, REJECTED, TIMED_OUT
-    #         task_id: "TaskId", # required
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of tasks to list per page.
     #   @return [Integer]
@@ -890,13 +804,6 @@ module Aws::SnowDeviceManagement
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the device or task.
     #   @return [String]
@@ -921,15 +828,6 @@ module Aws::SnowDeviceManagement
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTasksInput
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         state: "IN_PROGRESS", # accepts IN_PROGRESS, CANCELED, COMPLETED
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of tasks per page.
     #   @return [Integer]
@@ -1015,8 +913,6 @@ module Aws::SnowDeviceManagement
     end
 
     # A structure used to reboot the device.
-    #
-    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snow-device-management-2021-08-04/Reboot AWS API Documentation
     #
@@ -1116,16 +1012,6 @@ module Aws::SnowDeviceManagement
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #         tags: { # required
-    #           "String" => "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the device or task.
     #   @return [String]
@@ -1191,20 +1077,10 @@ module Aws::SnowDeviceManagement
 
     # A structure used to unlock a device.
     #
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snow-device-management-2021-08-04/Unlock AWS API Documentation
     #
     class Unlock < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UntagResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #         tag_keys: ["String"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the device or task.
     #   @return [String]

@@ -10,15 +10,6 @@
 module Aws::NimbleStudio
   module Types
 
-    # @note When making an API call, you may pass AcceptEulasRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         eula_ids: ["String"],
-    #         studio_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
@@ -87,14 +78,6 @@ module Aws::NimbleStudio
     # An LDAP attribute of an Active Directory computer account, in the form
     # of a name:value pair.
     #
-    # @note When making an API call, you may pass ActiveDirectoryComputerAttribute
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ActiveDirectoryComputerAttributeName",
-    #         value: "ActiveDirectoryComputerAttributeValue",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name for the LDAP attribute.
     #   @return [String]
@@ -114,20 +97,6 @@ module Aws::NimbleStudio
 
     # The configuration for a Microsoft Active Directory (Microsoft AD)
     # studio resource.
-    #
-    # @note When making an API call, you may pass ActiveDirectoryConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         computer_attributes: [
-    #           {
-    #             name: "ActiveDirectoryComputerAttributeName",
-    #             value: "ActiveDirectoryComputerAttributeValue",
-    #           },
-    #         ],
-    #         directory_id: "DirectoryId",
-    #         organizational_unit_distinguished_name: "ActiveDirectoryOrganizationalUnitDistinguishedName",
-    #       }
     #
     # @!attribute [rw] computer_attributes
     #   A collection of custom attributes for an Active Directory computer.
@@ -155,14 +124,6 @@ module Aws::NimbleStudio
 
     # The configuration for a render farm that is associated with a studio
     # resource.
-    #
-    # @note When making an API call, you may pass ComputeFarmConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         active_directory_user: "String",
-    #         endpoint: "SensitiveString",
-    #       }
     #
     # @!attribute [rw] active_directory_user
     #   The name of an Active Directory user that is used on ComputeFarm
@@ -207,36 +168,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateLaunchProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         description: "LaunchProfileDescription",
-    #         ec2_subnet_ids: ["EC2SubnetId"], # required
-    #         launch_profile_protocol_versions: ["LaunchProfileProtocolVersion"], # required
-    #         name: "LaunchProfileName", # required
-    #         stream_configuration: { # required
-    #           clipboard_mode: "ENABLED", # required, accepts ENABLED, DISABLED
-    #           ec2_instance_types: ["g4dn.xlarge"], # required, accepts g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge, g3.4xlarge, g3s.xlarge, g5.xlarge, g5.2xlarge, g5.4xlarge, g5.8xlarge, g5.16xlarge
-    #           max_session_length_in_minutes: 1,
-    #           max_stopped_session_length_in_minutes: 1,
-    #           session_storage: {
-    #             mode: ["UPLOAD"], # required, accepts UPLOAD
-    #             root: {
-    #               linux: "StreamingSessionStorageRootPathLinux",
-    #               windows: "StreamingSessionStorageRootPathWindows",
-    #             },
-    #           },
-    #           streaming_image_ids: ["StreamingImageId"], # required
-    #         },
-    #         studio_component_ids: ["String"], # required
-    #         studio_id: "String", # required
-    #         tags: {
-    #           "String" => "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
@@ -312,20 +243,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateStreamingImageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         description: "StreamingImageDescription",
-    #         ec2_image_id: "EC2ImageId", # required
-    #         name: "StreamingImageName", # required
-    #         studio_id: "String", # required
-    #         tags: {
-    #           "String" => "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
@@ -383,21 +300,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateStreamingSessionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         ec2_instance_type: "g4dn.xlarge", # accepts g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge, g3.4xlarge, g3s.xlarge, g5.xlarge, g5.2xlarge, g5.4xlarge, g5.8xlarge, g5.16xlarge
-    #         launch_profile_id: "String",
-    #         owned_by: "String",
-    #         streaming_image_id: "StreamingImageId",
-    #         studio_id: "String", # required
-    #         tags: {
-    #           "String" => "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
@@ -461,16 +363,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateStreamingSessionStreamRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         expiration_in_seconds: 1,
-    #         session_id: "String", # required
-    #         studio_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
@@ -516,64 +408,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateStudioComponentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         configuration: {
-    #           active_directory_configuration: {
-    #             computer_attributes: [
-    #               {
-    #                 name: "ActiveDirectoryComputerAttributeName",
-    #                 value: "ActiveDirectoryComputerAttributeValue",
-    #               },
-    #             ],
-    #             directory_id: "DirectoryId",
-    #             organizational_unit_distinguished_name: "ActiveDirectoryOrganizationalUnitDistinguishedName",
-    #           },
-    #           compute_farm_configuration: {
-    #             active_directory_user: "String",
-    #             endpoint: "SensitiveString",
-    #           },
-    #           license_service_configuration: {
-    #             endpoint: "SensitiveString",
-    #           },
-    #           shared_file_system_configuration: {
-    #             endpoint: "SensitiveString",
-    #             file_system_id: "String",
-    #             linux_mount_point: "LinuxMountPoint",
-    #             share_name: "SensitiveString",
-    #             windows_mount_drive: "WindowsMountDrive",
-    #           },
-    #         },
-    #         description: "StudioComponentDescription",
-    #         ec2_security_group_ids: ["SecurityGroupId"],
-    #         initialization_scripts: [
-    #           {
-    #             launch_profile_protocol_version: "LaunchProfileProtocolVersion",
-    #             platform: "LINUX", # accepts LINUX, WINDOWS
-    #             run_context: "SYSTEM_INITIALIZATION", # accepts SYSTEM_INITIALIZATION, USER_INITIALIZATION
-    #             script: "StudioComponentInitializationScriptContent",
-    #           },
-    #         ],
-    #         name: "StudioComponentName", # required
-    #         runtime_role_arn: "RoleArn",
-    #         script_parameters: [
-    #           {
-    #             key: "ScriptParameterKey",
-    #             value: "ScriptParameterValue",
-    #           },
-    #         ],
-    #         secure_initialization_role_arn: "RoleArn",
-    #         studio_id: "String", # required
-    #         subtype: "AWS_MANAGED_MICROSOFT_AD", # accepts AWS_MANAGED_MICROSOFT_AD, AMAZON_FSX_FOR_WINDOWS, AMAZON_FSX_FOR_LUSTRE, CUSTOM
-    #         tags: {
-    #           "String" => "String",
-    #         },
-    #         type: "ACTIVE_DIRECTORY", # required, accepts ACTIVE_DIRECTORY, SHARED_FILE_SYSTEM, COMPUTE_FARM, LICENSE_SERVICE, CUSTOM
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
@@ -669,24 +503,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateStudioRequest
-    #   data as a hash:
-    #
-    #       {
-    #         admin_role_arn: "RoleArn", # required
-    #         client_token: "ClientToken",
-    #         display_name: "StudioDisplayName", # required
-    #         studio_encryption_configuration: {
-    #           key_arn: "StudioEncryptionConfigurationKeyArn",
-    #           key_type: "AWS_OWNED_KEY", # required, accepts AWS_OWNED_KEY, CUSTOMER_MANAGED_KEY
-    #         },
-    #         studio_name: "StudioName", # required
-    #         tags: {
-    #           "String" => "String",
-    #         },
-    #         user_role_arn: "RoleArn", # required
-    #       }
-    #
     # @!attribute [rw] admin_role_arn
     #   The IAM role that Studio Admins will assume when logging in to the
     #   Nimble Studio portal.
@@ -751,16 +567,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteLaunchProfileMemberRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         launch_profile_id: "String", # required
-    #         principal_id: "String", # required
-    #         studio_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
@@ -799,15 +605,6 @@ module Aws::NimbleStudio
     #
     class DeleteLaunchProfileMemberResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteLaunchProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         launch_profile_id: "String", # required
-    #         studio_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
@@ -848,15 +645,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteStreamingImageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         streaming_image_id: "String", # required
-    #         studio_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
@@ -897,15 +685,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteStreamingSessionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         session_id: "String", # required
-    #         studio_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
@@ -946,15 +725,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteStudioComponentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         studio_component_id: "String", # required
-    #         studio_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
@@ -995,15 +765,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteStudioMemberRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         principal_id: "String", # required
-    #         studio_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
@@ -1037,14 +798,6 @@ module Aws::NimbleStudio
     #
     class DeleteStudioMemberResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteStudioRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         studio_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
@@ -1151,13 +904,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetEulaRequest
-    #   data as a hash:
-    #
-    #       {
-    #         eula_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] eula_id
     #   The EULA ID.
     #   @return [String]
@@ -1182,14 +928,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLaunchProfileDetailsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         launch_profile_id: "String", # required
-    #         studio_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] launch_profile_id
     #   The Launch Profile ID.
     #   @return [String]
@@ -1229,17 +967,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLaunchProfileInitializationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         launch_profile_id: "String", # required
-    #         launch_profile_protocol_versions: ["String"], # required
-    #         launch_purpose: "String", # required
-    #         platform: "String", # required
-    #         studio_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] launch_profile_id
     #   The Launch Profile ID.
     #   @return [String]
@@ -1285,15 +1012,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLaunchProfileMemberRequest
-    #   data as a hash:
-    #
-    #       {
-    #         launch_profile_id: "String", # required
-    #         principal_id: "String", # required
-    #         studio_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] launch_profile_id
     #   The Launch Profile ID.
     #   @return [String]
@@ -1329,14 +1047,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLaunchProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         launch_profile_id: "String", # required
-    #         studio_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] launch_profile_id
     #   The Launch Profile ID.
     #   @return [String]
@@ -1366,14 +1076,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetStreamingImageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         streaming_image_id: "String", # required
-    #         studio_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] streaming_image_id
     #   The streaming image ID.
     #   @return [String]
@@ -1403,14 +1105,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetStreamingSessionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         session_id: "String", # required
-    #         studio_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] session_id
     #   The streaming session ID.
     #   @return [String]
@@ -1440,15 +1134,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetStreamingSessionStreamRequest
-    #   data as a hash:
-    #
-    #       {
-    #         session_id: "String", # required
-    #         stream_id: "String", # required
-    #         studio_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] session_id
     #   The streaming session ID.
     #   @return [String]
@@ -1483,14 +1168,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetStudioComponentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         studio_component_id: "String", # required
-    #         studio_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] studio_component_id
     #   The studio component ID.
     #   @return [String]
@@ -1520,14 +1197,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetStudioMemberRequest
-    #   data as a hash:
-    #
-    #       {
-    #         principal_id: "String", # required
-    #         studio_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] principal_id
     #   The principal ID. This currently supports a IAM Identity Center
     #   UserId.
@@ -1558,13 +1227,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetStudioRequest
-    #   data as a hash:
-    #
-    #       {
-    #         studio_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] studio_id
     #   The studio ID.
     #   @return [String]
@@ -1914,13 +1576,6 @@ module Aws::NimbleStudio
     # The configuration for a license service that is associated with a
     # studio resource.
     #
-    # @note When making an API call, you may pass LicenseServiceConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint: "SensitiveString",
-    #       }
-    #
     # @!attribute [rw] endpoint
     #   The endpoint of the license service that is accessed by the studio
     #   component resource.
@@ -1934,15 +1589,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEulaAcceptancesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         eula_ids: ["String"],
-    #         next_token: "String",
-    #         studio_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] eula_ids
     #   The list of EULA IDs that have been previously accepted.
     #   @return [Array<String>]
@@ -1983,14 +1629,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEulasRequest
-    #   data as a hash:
-    #
-    #       {
-    #         eula_ids: ["String"],
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] eula_ids
     #   The list of EULA IDs that should be returned
     #   @return [Array<String>]
@@ -2026,16 +1664,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListLaunchProfileMembersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         launch_profile_id: "String", # required
-    #         max_results: 1,
-    #         next_token: "String",
-    #         studio_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] launch_profile_id
     #   The Launch Profile ID.
     #   @return [String]
@@ -2081,17 +1709,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListLaunchProfilesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "String",
-    #         principal_id: "String",
-    #         states: ["CREATE_IN_PROGRESS"], # accepts CREATE_IN_PROGRESS, READY, UPDATE_IN_PROGRESS, DELETE_IN_PROGRESS, DELETED, DELETE_FAILED, CREATE_FAILED, UPDATE_FAILED
-    #         studio_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The max number of results to return in the response.
     #   @return [Integer]
@@ -2143,15 +1760,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListStreamingImagesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "String",
-    #         owner: "String",
-    #         studio_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The token to request the next page of results.
     #   @return [String]
@@ -2192,17 +1800,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListStreamingSessionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         created_by: "String",
-    #         next_token: "String",
-    #         owned_by: "String",
-    #         session_ids: "String",
-    #         studio_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] created_by
     #   Filters the request to streaming sessions created by the given user.
     #   @return [String]
@@ -2253,17 +1850,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListStudioComponentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "String",
-    #         states: ["CREATE_IN_PROGRESS"], # accepts CREATE_IN_PROGRESS, READY, UPDATE_IN_PROGRESS, DELETE_IN_PROGRESS, DELETED, DELETE_FAILED, CREATE_FAILED, UPDATE_FAILED
-    #         studio_id: "String", # required
-    #         types: ["ACTIVE_DIRECTORY"], # accepts ACTIVE_DIRECTORY, SHARED_FILE_SYSTEM, COMPUTE_FARM, LICENSE_SERVICE, CUSTOM
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The max number of results to return in the response.
     #   @return [Integer]
@@ -2316,15 +1902,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListStudioMembersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "String",
-    #         studio_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The max number of results to return in the response.
     #   @return [Integer]
@@ -2365,13 +1942,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListStudiosRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The token to request the next page of results.
     #   @return [String]
@@ -2402,13 +1972,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource for which you want to
     #   list tags.
@@ -2437,14 +2000,6 @@ module Aws::NimbleStudio
 
     # A new member that is added to a launch profile.
     #
-    # @note When making an API call, you may pass NewLaunchProfileMember
-    #   data as a hash:
-    #
-    #       {
-    #         persona: "USER", # required, accepts USER
-    #         principal_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] persona
     #   The persona.
     #   @return [String]
@@ -2464,14 +2019,6 @@ module Aws::NimbleStudio
 
     # A new studio user's membership.
     #
-    # @note When making an API call, you may pass NewStudioMember
-    #   data as a hash:
-    #
-    #       {
-    #         persona: "ADMINISTRATOR", # required, accepts ADMINISTRATOR
-    #         principal_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] persona
     #   The persona.
     #   @return [String]
@@ -2489,22 +2036,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutLaunchProfileMembersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         identity_store_id: "String", # required
-    #         launch_profile_id: "String", # required
-    #         members: [ # required
-    #           {
-    #             persona: "USER", # required, accepts USER
-    #             principal_id: "String", # required
-    #           },
-    #         ],
-    #         studio_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
@@ -2547,21 +2078,6 @@ module Aws::NimbleStudio
     #
     class PutLaunchProfileMembersResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass PutStudioMembersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         identity_store_id: "String", # required
-    #         members: [ # required
-    #           {
-    #             persona: "ADMINISTRATOR", # required, accepts ADMINISTRATOR
-    #             principal_id: "String", # required
-    #           },
-    #         ],
-    #         studio_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
@@ -2626,14 +2142,6 @@ module Aws::NimbleStudio
     # A parameter for a studio component script, in the form of a key:value
     # pair.
     #
-    # @note When making an API call, you may pass ScriptParameterKeyValue
-    #   data as a hash:
-    #
-    #       {
-    #         key: "ScriptParameterKey",
-    #         value: "ScriptParameterValue",
-    #       }
-    #
     # @!attribute [rw] key
     #   A script parameter key.
     #   @return [String]
@@ -2682,17 +2190,6 @@ module Aws::NimbleStudio
     # The configuration for a shared file storage system that is associated
     # with a studio resource.
     #
-    # @note When making an API call, you may pass SharedFileSystemConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint: "SensitiveString",
-    #         file_system_id: "String",
-    #         linux_mount_point: "LinuxMountPoint",
-    #         share_name: "SensitiveString",
-    #         windows_mount_drive: "WindowsMountDrive",
-    #       }
-    #
     # @!attribute [rw] endpoint
     #   The endpoint of the shared file system that is accessed by the
     #   studio component resource.
@@ -2728,15 +2225,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartStreamingSessionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         session_id: "String", # required
-    #         studio_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
@@ -2778,14 +2266,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartStudioSSOConfigurationRepairRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         studio_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
@@ -2821,15 +2301,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopStreamingSessionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         session_id: "String", # required
-    #         studio_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
@@ -2934,24 +2405,6 @@ module Aws::NimbleStudio
     # Configuration for streaming workstations created using this launch
     # profile.
     #
-    # @note When making an API call, you may pass StreamConfigurationCreate
-    #   data as a hash:
-    #
-    #       {
-    #         clipboard_mode: "ENABLED", # required, accepts ENABLED, DISABLED
-    #         ec2_instance_types: ["g4dn.xlarge"], # required, accepts g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge, g3.4xlarge, g3s.xlarge, g5.xlarge, g5.2xlarge, g5.4xlarge, g5.8xlarge, g5.16xlarge
-    #         max_session_length_in_minutes: 1,
-    #         max_stopped_session_length_in_minutes: 1,
-    #         session_storage: {
-    #           mode: ["UPLOAD"], # required, accepts UPLOAD
-    #           root: {
-    #             linux: "StreamingSessionStorageRootPathLinux",
-    #             windows: "StreamingSessionStorageRootPathWindows",
-    #           },
-    #         },
-    #         streaming_image_ids: ["StreamingImageId"], # required
-    #       }
-    #
     # @!attribute [rw] clipboard_mode
     #   Enable or disable the use of the system clipboard to copy and paste
     #   between the streaming session and streaming client.
@@ -3012,17 +2465,6 @@ module Aws::NimbleStudio
     end
 
     # The configuration for a streaming session’s upload storage.
-    #
-    # @note When making an API call, you may pass StreamConfigurationSessionStorage
-    #   data as a hash:
-    #
-    #       {
-    #         mode: ["UPLOAD"], # required, accepts UPLOAD
-    #         root: {
-    #           linux: "StreamingSessionStorageRootPathLinux",
-    #           windows: "StreamingSessionStorageRootPathWindows",
-    #         },
-    #       }
     #
     # @!attribute [rw] mode
     #   Allows artists to upload files to their workstations. The only valid
@@ -3272,14 +2714,6 @@ module Aws::NimbleStudio
 
     # The upload storage root location (folder) on streaming workstations
     # where files are uploaded.
-    #
-    # @note When making an API call, you may pass StreamingSessionStorageRoot
-    #   data as a hash:
-    #
-    #       {
-    #         linux: "StreamingSessionStorageRootPathLinux",
-    #         windows: "StreamingSessionStorageRootPathWindows",
-    #       }
     #
     # @!attribute [rw] linux
     #   The folder path in Linux workstations where files are uploaded.
@@ -3602,10 +3036,6 @@ module Aws::NimbleStudio
 
     # The configuration of the studio component, based on component type.
     #
-    # @note StudioComponentConfiguration is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note StudioComponentConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of StudioComponentConfiguration corresponding to the set member.
-    #
     # @!attribute [rw] active_directory_configuration
     #   The configuration for a Microsoft Active Directory (Microsoft AD)
     #   studio resource.
@@ -3646,16 +3076,6 @@ module Aws::NimbleStudio
     end
 
     # Initialization scripts for studio components.
-    #
-    # @note When making an API call, you may pass StudioComponentInitializationScript
-    #   data as a hash:
-    #
-    #       {
-    #         launch_profile_protocol_version: "LaunchProfileProtocolVersion",
-    #         platform: "LINUX", # accepts LINUX, WINDOWS
-    #         run_context: "SYSTEM_INITIALIZATION", # accepts SYSTEM_INITIALIZATION, USER_INITIALIZATION
-    #         script: "StudioComponentInitializationScriptContent",
-    #       }
     #
     # @!attribute [rw] launch_profile_protocol_version
     #   The version number of the protocol that is used by the launch
@@ -3743,14 +3163,6 @@ module Aws::NimbleStudio
 
     # Configuration of the encryption method that is used for the studio.
     #
-    # @note When making an API call, you may pass StudioEncryptionConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         key_arn: "StudioEncryptionConfigurationKeyArn",
-    #         key_type: "AWS_OWNED_KEY", # required, accepts AWS_OWNED_KEY, CUSTOMER_MANAGED_KEY
-    #       }
-    #
     # @!attribute [rw] key_arn
     #   The ARN for a KMS key that is used to encrypt studio data.
     #   @return [String]
@@ -3810,16 +3222,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #         tags: {
-    #           "String" => "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource you want to add tags
     #   to.
@@ -3867,14 +3269,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #         tag_keys: ["String"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   Identifies the Amazon Resource Name(ARN) key from which you are
     #   removing tags.
@@ -3897,17 +3291,6 @@ module Aws::NimbleStudio
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateLaunchProfileMemberRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         launch_profile_id: "String", # required
-    #         persona: "USER", # required, accepts USER
-    #         principal_id: "String", # required
-    #         studio_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
@@ -3959,33 +3342,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateLaunchProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         description: "LaunchProfileDescription",
-    #         launch_profile_id: "String", # required
-    #         launch_profile_protocol_versions: ["LaunchProfileProtocolVersion"],
-    #         name: "LaunchProfileName",
-    #         stream_configuration: {
-    #           clipboard_mode: "ENABLED", # required, accepts ENABLED, DISABLED
-    #           ec2_instance_types: ["g4dn.xlarge"], # required, accepts g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge, g3.4xlarge, g3s.xlarge, g5.xlarge, g5.2xlarge, g5.4xlarge, g5.8xlarge, g5.16xlarge
-    #           max_session_length_in_minutes: 1,
-    #           max_stopped_session_length_in_minutes: 1,
-    #           session_storage: {
-    #             mode: ["UPLOAD"], # required, accepts UPLOAD
-    #             root: {
-    #               linux: "StreamingSessionStorageRootPathLinux",
-    #               windows: "StreamingSessionStorageRootPathWindows",
-    #             },
-    #           },
-    #           streaming_image_ids: ["StreamingImageId"], # required
-    #         },
-    #         studio_component_ids: ["String"],
-    #         studio_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
@@ -4053,17 +3409,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateStreamingImageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         description: "StreamingImageDescription",
-    #         name: "StreamingImageName",
-    #         streaming_image_id: "String", # required
-    #         studio_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
@@ -4125,62 +3470,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateStudioComponentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         configuration: {
-    #           active_directory_configuration: {
-    #             computer_attributes: [
-    #               {
-    #                 name: "ActiveDirectoryComputerAttributeName",
-    #                 value: "ActiveDirectoryComputerAttributeValue",
-    #               },
-    #             ],
-    #             directory_id: "DirectoryId",
-    #             organizational_unit_distinguished_name: "ActiveDirectoryOrganizationalUnitDistinguishedName",
-    #           },
-    #           compute_farm_configuration: {
-    #             active_directory_user: "String",
-    #             endpoint: "SensitiveString",
-    #           },
-    #           license_service_configuration: {
-    #             endpoint: "SensitiveString",
-    #           },
-    #           shared_file_system_configuration: {
-    #             endpoint: "SensitiveString",
-    #             file_system_id: "String",
-    #             linux_mount_point: "LinuxMountPoint",
-    #             share_name: "SensitiveString",
-    #             windows_mount_drive: "WindowsMountDrive",
-    #           },
-    #         },
-    #         description: "StudioComponentDescription",
-    #         ec2_security_group_ids: ["SecurityGroupId"],
-    #         initialization_scripts: [
-    #           {
-    #             launch_profile_protocol_version: "LaunchProfileProtocolVersion",
-    #             platform: "LINUX", # accepts LINUX, WINDOWS
-    #             run_context: "SYSTEM_INITIALIZATION", # accepts SYSTEM_INITIALIZATION, USER_INITIALIZATION
-    #             script: "StudioComponentInitializationScriptContent",
-    #           },
-    #         ],
-    #         name: "StudioComponentName",
-    #         runtime_role_arn: "RoleArn",
-    #         script_parameters: [
-    #           {
-    #             key: "ScriptParameterKey",
-    #             value: "ScriptParameterValue",
-    #           },
-    #         ],
-    #         secure_initialization_role_arn: "RoleArn",
-    #         studio_component_id: "String", # required
-    #         studio_id: "String", # required
-    #         subtype: "AWS_MANAGED_MICROSOFT_AD", # accepts AWS_MANAGED_MICROSOFT_AD, AMAZON_FSX_FOR_WINDOWS, AMAZON_FSX_FOR_LUSTRE, CUSTOM
-    #         type: "ACTIVE_DIRECTORY", # accepts ACTIVE_DIRECTORY, SHARED_FILE_SYSTEM, COMPUTE_FARM, LICENSE_SERVICE, CUSTOM
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
@@ -4275,17 +3564,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateStudioRequest
-    #   data as a hash:
-    #
-    #       {
-    #         admin_role_arn: "RoleArn",
-    #         client_token: "ClientToken",
-    #         display_name: "StudioDisplayName",
-    #         studio_id: "String", # required
-    #         user_role_arn: "RoleArn",
-    #       }
-    #
     # @!attribute [rw] admin_role_arn
     #   The IAM role that Studio Admins will assume when logging in to the
     #   Nimble Studio portal.

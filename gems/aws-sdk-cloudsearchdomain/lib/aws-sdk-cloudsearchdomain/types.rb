@@ -229,26 +229,6 @@ module Aws::CloudSearchDomain
 
     # Container for the parameters to the `Search` request.
     #
-    # @note When making an API call, you may pass SearchRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cursor: "Cursor",
-    #         expr: "Expr",
-    #         facet: "Facet",
-    #         filter_query: "FilterQuery",
-    #         highlight: "Highlight",
-    #         partial: false,
-    #         query: "Query", # required
-    #         query_options: "QueryOptions",
-    #         query_parser: "simple", # accepts simple, structured, lucene, dismax
-    #         return: "Return",
-    #         size: 1,
-    #         sort: "Sort",
-    #         start: 1,
-    #         stats: "Stat",
-    #       }
-    #
     # @!attribute [rw] cursor
     #   Retrieves a cursor value you can use to page through large result
     #   sets. Use the `size` parameter to control the number of hits to
@@ -721,15 +701,6 @@ module Aws::CloudSearchDomain
 
     # Container for the parameters to the `Suggest` request.
     #
-    # @note When making an API call, you may pass SuggestRequest
-    #   data as a hash:
-    #
-    #       {
-    #         query: "Query", # required
-    #         suggester: "Suggester", # required
-    #         size: 1,
-    #       }
-    #
     # @!attribute [rw] query
     #   Specifies the string for which you want to get suggestions.
     #   @return [String]
@@ -812,14 +783,6 @@ module Aws::CloudSearchDomain
     end
 
     # Container for the parameters to the `UploadDocuments` request.
-    #
-    # @note When making an API call, you may pass UploadDocumentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         documents: "data", # required
-    #         content_type: "application/json", # required, accepts application/json, application/xml
-    #       }
     #
     # @!attribute [rw] documents
     #   A batch of documents formatted in JSON or HTML.

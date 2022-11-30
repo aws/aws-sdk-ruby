@@ -12,20 +12,6 @@ module Aws::DataPipeline
 
     # Contains the parameters for ActivatePipeline.
     #
-    # @note When making an API call, you may pass ActivatePipelineInput
-    #   data as a hash:
-    #
-    #       {
-    #         pipeline_id: "id", # required
-    #         parameter_values: [
-    #           {
-    #             id: "fieldNameString", # required
-    #             string_value: "fieldStringValue", # required
-    #           },
-    #         ],
-    #         start_timestamp: Time.now,
-    #       }
-    #
     # @!attribute [rw] pipeline_id
     #   The ID of the pipeline.
     #   @return [String]
@@ -57,19 +43,6 @@ module Aws::DataPipeline
 
     # Contains the parameters for AddTags.
     #
-    # @note When making an API call, you may pass AddTagsInput
-    #   data as a hash:
-    #
-    #       {
-    #         pipeline_id: "id", # required
-    #         tags: [ # required
-    #           {
-    #             key: "tagKey", # required
-    #             value: "tagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] pipeline_id
     #   The ID of the pipeline.
     #   @return [String]
@@ -94,21 +67,6 @@ module Aws::DataPipeline
     class AddTagsOutput < Aws::EmptyStructure; end
 
     # Contains the parameters for CreatePipeline.
-    #
-    # @note When making an API call, you may pass CreatePipelineInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "id", # required
-    #         unique_id: "id", # required
-    #         description: "string",
-    #         tags: [
-    #           {
-    #             key: "tagKey", # required
-    #             value: "tagValue", # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] name
     #   The name for the pipeline. You can use the same name for multiple
@@ -175,14 +133,6 @@ module Aws::DataPipeline
 
     # Contains the parameters for DeactivatePipeline.
     #
-    # @note When making an API call, you may pass DeactivatePipelineInput
-    #   data as a hash:
-    #
-    #       {
-    #         pipeline_id: "id", # required
-    #         cancel_active: false,
-    #       }
-    #
     # @!attribute [rw] pipeline_id
     #   The ID of the pipeline.
     #   @return [String]
@@ -211,13 +161,6 @@ module Aws::DataPipeline
 
     # Contains the parameters for DeletePipeline.
     #
-    # @note When making an API call, you may pass DeletePipelineInput
-    #   data as a hash:
-    #
-    #       {
-    #         pipeline_id: "id", # required
-    #       }
-    #
     # @!attribute [rw] pipeline_id
     #   The ID of the pipeline.
     #   @return [String]
@@ -231,16 +174,6 @@ module Aws::DataPipeline
     end
 
     # Contains the parameters for DescribeObjects.
-    #
-    # @note When making an API call, you may pass DescribeObjectsInput
-    #   data as a hash:
-    #
-    #       {
-    #         pipeline_id: "id", # required
-    #         object_ids: ["id"], # required
-    #         evaluate_expressions: false,
-    #         marker: "string",
-    #       }
     #
     # @!attribute [rw] pipeline_id
     #   The ID of the pipeline that contains the object definitions.
@@ -303,13 +236,6 @@ module Aws::DataPipeline
 
     # Contains the parameters for DescribePipelines.
     #
-    # @note When making an API call, you may pass DescribePipelinesInput
-    #   data as a hash:
-    #
-    #       {
-    #         pipeline_ids: ["id"], # required
-    #       }
-    #
     # @!attribute [rw] pipeline_ids
     #   The IDs of the pipelines to describe. You can pass as many as 25
     #   identifiers in a single call. To obtain pipeline IDs, call
@@ -339,15 +265,6 @@ module Aws::DataPipeline
     end
 
     # Contains the parameters for EvaluateExpression.
-    #
-    # @note When making an API call, you may pass EvaluateExpressionInput
-    #   data as a hash:
-    #
-    #       {
-    #         pipeline_id: "id", # required
-    #         object_id: "id", # required
-    #         expression: "longString", # required
-    #       }
     #
     # @!attribute [rw] pipeline_id
     #   The ID of the pipeline.
@@ -389,15 +306,6 @@ module Aws::DataPipeline
     # value is specified as either a string value (`StringValue`) or a
     # reference to another object (`RefValue`) but not as both.
     #
-    # @note When making an API call, you may pass Field
-    #   data as a hash:
-    #
-    #       {
-    #         key: "fieldNameString", # required
-    #         string_value: "fieldStringValue",
-    #         ref_value: "fieldNameString",
-    #       }
-    #
     # @!attribute [rw] key
     #   The field identifier.
     #   @return [String]
@@ -421,14 +329,6 @@ module Aws::DataPipeline
     end
 
     # Contains the parameters for GetPipelineDefinition.
-    #
-    # @note When making an API call, you may pass GetPipelineDefinitionInput
-    #   data as a hash:
-    #
-    #       {
-    #         pipeline_id: "id", # required
-    #         version: "string",
-    #       }
     #
     # @!attribute [rw] pipeline_id
     #   The ID of the pipeline.
@@ -486,14 +386,6 @@ module Aws::DataPipeline
     #
     # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AESDG-chapter-instancedata.html
     #
-    # @note When making an API call, you may pass InstanceIdentity
-    #   data as a hash:
-    #
-    #       {
-    #         document: "string",
-    #         signature: "string",
-    #       }
-    #
     # @!attribute [rw] document
     #   A description of an EC2 instance that is generated when the instance
     #   is launched and exposed to the instance via the instance metadata
@@ -548,13 +440,6 @@ module Aws::DataPipeline
 
     # Contains the parameters for ListPipelines.
     #
-    # @note When making an API call, you may pass ListPipelinesInput
-    #   data as a hash:
-    #
-    #       {
-    #         marker: "string",
-    #       }
-    #
     # @!attribute [rw] marker
     #   The starting point for the results to be returned. For the first
     #   call, this value should be empty. As long as there are more results,
@@ -601,14 +486,6 @@ module Aws::DataPipeline
 
     # Contains a logical operation for comparing the value of a field with a
     # specified value.
-    #
-    # @note When making an API call, you may pass Operator
-    #   data as a hash:
-    #
-    #       {
-    #         type: "EQ", # accepts EQ, REF_EQ, LE, GE, BETWEEN
-    #         values: ["string"],
-    #       }
     #
     # @!attribute [rw] type
     #   The logical operation to be performed: equal (`EQ`), equal reference
@@ -661,14 +538,6 @@ module Aws::DataPipeline
 
     # The attributes allowed or specified with a parameter object.
     #
-    # @note When making an API call, you may pass ParameterAttribute
-    #   data as a hash:
-    #
-    #       {
-    #         key: "attributeNameString", # required
-    #         string_value: "attributeValueString", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The field identifier.
     #   @return [String]
@@ -688,19 +557,6 @@ module Aws::DataPipeline
 
     # Contains information about a parameter object.
     #
-    # @note When making an API call, you may pass ParameterObject
-    #   data as a hash:
-    #
-    #       {
-    #         id: "fieldNameString", # required
-    #         attributes: [ # required
-    #           {
-    #             key: "attributeNameString", # required
-    #             string_value: "attributeValueString", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the parameter object.
     #   @return [String]
@@ -719,14 +575,6 @@ module Aws::DataPipeline
     end
 
     # A value or list of parameter values.
-    #
-    # @note When making an API call, you may pass ParameterValue
-    #   data as a hash:
-    #
-    #       {
-    #         id: "fieldNameString", # required
-    #         string_value: "fieldStringValue", # required
-    #       }
     #
     # @!attribute [rw] id
     #   The ID of the parameter value.
@@ -840,21 +688,6 @@ module Aws::DataPipeline
     # physical, or physical attempt pipeline object. The complete set of
     # components of a pipeline defines the pipeline.
     #
-    # @note When making an API call, you may pass PipelineObject
-    #   data as a hash:
-    #
-    #       {
-    #         id: "id", # required
-    #         name: "id", # required
-    #         fields: [ # required
-    #           {
-    #             key: "fieldNameString", # required
-    #             string_value: "fieldStringValue",
-    #             ref_value: "fieldNameString",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the object.
     #   @return [String]
@@ -878,18 +711,6 @@ module Aws::DataPipeline
     end
 
     # Contains the parameters for PollForTask.
-    #
-    # @note When making an API call, you may pass PollForTaskInput
-    #   data as a hash:
-    #
-    #       {
-    #         worker_group: "string", # required
-    #         hostname: "id",
-    #         instance_identity: {
-    #           document: "string",
-    #           signature: "string",
-    #         },
-    #       }
     #
     # @!attribute [rw] worker_group
     #   The type of task the task runner is configured to accept and
@@ -947,43 +768,6 @@ module Aws::DataPipeline
     end
 
     # Contains the parameters for PutPipelineDefinition.
-    #
-    # @note When making an API call, you may pass PutPipelineDefinitionInput
-    #   data as a hash:
-    #
-    #       {
-    #         pipeline_id: "id", # required
-    #         pipeline_objects: [ # required
-    #           {
-    #             id: "id", # required
-    #             name: "id", # required
-    #             fields: [ # required
-    #               {
-    #                 key: "fieldNameString", # required
-    #                 string_value: "fieldStringValue",
-    #                 ref_value: "fieldNameString",
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         parameter_objects: [
-    #           {
-    #             id: "fieldNameString", # required
-    #             attributes: [ # required
-    #               {
-    #                 key: "attributeNameString", # required
-    #                 string_value: "attributeValueString", # required
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         parameter_values: [
-    #           {
-    #             id: "fieldNameString", # required
-    #             string_value: "fieldStringValue", # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] pipeline_id
     #   The ID of the pipeline.
@@ -1044,21 +828,6 @@ module Aws::DataPipeline
 
     # Defines the query to run against an object.
     #
-    # @note When making an API call, you may pass Query
-    #   data as a hash:
-    #
-    #       {
-    #         selectors: [
-    #           {
-    #             field_name: "string",
-    #             operator: {
-    #               type: "EQ", # accepts EQ, REF_EQ, LE, GE, BETWEEN
-    #               values: ["string"],
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] selectors
     #   List of selectors that define the query. An object must satisfy all
     #   of the selectors to match the query.
@@ -1073,27 +842,6 @@ module Aws::DataPipeline
     end
 
     # Contains the parameters for QueryObjects.
-    #
-    # @note When making an API call, you may pass QueryObjectsInput
-    #   data as a hash:
-    #
-    #       {
-    #         pipeline_id: "id", # required
-    #         query: {
-    #           selectors: [
-    #             {
-    #               field_name: "string",
-    #               operator: {
-    #                 type: "EQ", # accepts EQ, REF_EQ, LE, GE, BETWEEN
-    #                 values: ["string"],
-    #               },
-    #             },
-    #           ],
-    #         },
-    #         sphere: "string", # required
-    #         marker: "string",
-    #         limit: 1,
-    #       }
     #
     # @!attribute [rw] pipeline_id
     #   The ID of the pipeline.
@@ -1164,14 +912,6 @@ module Aws::DataPipeline
 
     # Contains the parameters for RemoveTags.
     #
-    # @note When making an API call, you may pass RemoveTagsInput
-    #   data as a hash:
-    #
-    #       {
-    #         pipeline_id: "id", # required
-    #         tag_keys: ["string"], # required
-    #       }
-    #
     # @!attribute [rw] pipeline_id
     #   The ID of the pipeline.
     #   @return [String]
@@ -1196,20 +936,6 @@ module Aws::DataPipeline
     class RemoveTagsOutput < Aws::EmptyStructure; end
 
     # Contains the parameters for ReportTaskProgress.
-    #
-    # @note When making an API call, you may pass ReportTaskProgressInput
-    #   data as a hash:
-    #
-    #       {
-    #         task_id: "taskId", # required
-    #         fields: [
-    #           {
-    #             key: "fieldNameString", # required
-    #             string_value: "fieldStringValue",
-    #             ref_value: "fieldNameString",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] task_id
     #   The ID of the task assigned to the task runner. This value is
@@ -1247,15 +973,6 @@ module Aws::DataPipeline
     end
 
     # Contains the parameters for ReportTaskRunnerHeartbeat.
-    #
-    # @note When making an API call, you may pass ReportTaskRunnerHeartbeatInput
-    #   data as a hash:
-    #
-    #       {
-    #         taskrunner_id: "id", # required
-    #         worker_group: "string",
-    #         hostname: "id",
-    #       }
     #
     # @!attribute [rw] taskrunner_id
     #   The ID of the task runner. This value should be unique across your
@@ -1305,17 +1022,6 @@ module Aws::DataPipeline
     # A comparision that is used to determine whether a query should return
     # this object.
     #
-    # @note When making an API call, you may pass Selector
-    #   data as a hash:
-    #
-    #       {
-    #         field_name: "string",
-    #         operator: {
-    #           type: "EQ", # accepts EQ, REF_EQ, LE, GE, BETWEEN
-    #           values: ["string"],
-    #         },
-    #       }
-    #
     # @!attribute [rw] field_name
     #   The name of the field that the operator will be applied to. The
     #   field name is the "key" portion of the field definition in the
@@ -1338,15 +1044,6 @@ module Aws::DataPipeline
     end
 
     # Contains the parameters for SetStatus.
-    #
-    # @note When making an API call, you may pass SetStatusInput
-    #   data as a hash:
-    #
-    #       {
-    #         pipeline_id: "id", # required
-    #         object_ids: ["id"], # required
-    #         status: "string", # required
-    #       }
     #
     # @!attribute [rw] pipeline_id
     #   The ID of the pipeline that contains the objects.
@@ -1374,17 +1071,6 @@ module Aws::DataPipeline
     end
 
     # Contains the parameters for SetTaskStatus.
-    #
-    # @note When making an API call, you may pass SetTaskStatusInput
-    #   data as a hash:
-    #
-    #       {
-    #         task_id: "taskId", # required
-    #         task_status: "FINISHED", # required, accepts FINISHED, FAILED, FALSE
-    #         error_id: "string",
-    #         error_message: "errorMessage",
-    #         error_stack_trace: "string",
-    #       }
     #
     # @!attribute [rw] task_id
     #   The ID of the task assigned to the task runner. This value is
@@ -1443,14 +1129,6 @@ module Aws::DataPipeline
     #
     #
     # [1]: http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html
-    #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "tagKey", # required
-    #         value: "tagValue", # required
-    #       }
     #
     # @!attribute [rw] key
     #   The key name of a tag defined by a user. For more information, see
@@ -1529,43 +1207,6 @@ module Aws::DataPipeline
     end
 
     # Contains the parameters for ValidatePipelineDefinition.
-    #
-    # @note When making an API call, you may pass ValidatePipelineDefinitionInput
-    #   data as a hash:
-    #
-    #       {
-    #         pipeline_id: "id", # required
-    #         pipeline_objects: [ # required
-    #           {
-    #             id: "id", # required
-    #             name: "id", # required
-    #             fields: [ # required
-    #               {
-    #                 key: "fieldNameString", # required
-    #                 string_value: "fieldStringValue",
-    #                 ref_value: "fieldNameString",
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         parameter_objects: [
-    #           {
-    #             id: "fieldNameString", # required
-    #             attributes: [ # required
-    #               {
-    #                 key: "attributeNameString", # required
-    #                 string_value: "attributeValueString", # required
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         parameter_values: [
-    #           {
-    #             id: "fieldNameString", # required
-    #             string_value: "fieldStringValue", # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] pipeline_id
     #   The ID of the pipeline.

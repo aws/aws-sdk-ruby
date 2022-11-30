@@ -23,25 +23,6 @@ module Aws::RolesAnywhere
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         duration_seconds: 1,
-    #         enabled: false,
-    #         managed_policy_arns: ["ManagedPolicyListMemberString"],
-    #         name: "ResourceName", # required
-    #         require_instance_properties: false,
-    #         role_arns: ["RoleArn"], # required
-    #         session_policy: "String",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] duration_seconds
     #   The number of seconds the vended session credentials are valid for.
     #   @return [Integer]
@@ -101,27 +82,6 @@ module Aws::RolesAnywhere
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateTrustAnchorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false,
-    #         name: "ResourceName", # required
-    #         source: { # required
-    #           source_data: {
-    #             acm_pca_arn: "String",
-    #             x509_certificate_data: "String",
-    #           },
-    #           source_type: "AWS_ACM_PCA", # accepts AWS_ACM_PCA, CERTIFICATE_BUNDLE, SELF_SIGNED_REPOSITORY
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] enabled
     #   Specifies whether the trust anchor is enabled.
     #   @return [Boolean]
@@ -269,22 +229,6 @@ module Aws::RolesAnywhere
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ImportCrlRequest
-    #   data as a hash:
-    #
-    #       {
-    #         crl_data: "data", # required
-    #         enabled: false,
-    #         name: "ResourceName", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         trust_anchor_arn: "TrustAnchorArn", # required
-    #       }
-    #
     # @!attribute [rw] crl_data
     #   The x509 v3 specified certificate revocation list
     #   @return [String]
@@ -390,14 +334,6 @@ module Aws::RolesAnywhere
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "ListRequestNextTokenString",
-    #         page_size: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   A token that indicates where the output should continue from, if a
     #   previous operation did not show all results. To get the next
@@ -436,13 +372,6 @@ module Aws::RolesAnywhere
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource.
     #   @return [String]
@@ -592,13 +521,6 @@ module Aws::RolesAnywhere
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ScalarCrlRequest
-    #   data as a hash:
-    #
-    #       {
-    #         crl_id: "Uuid", # required
-    #       }
-    #
     # @!attribute [rw] crl_id
     #   The unique identifier of the certificate revocation list (CRL).
     #   @return [String]
@@ -611,13 +533,6 @@ module Aws::RolesAnywhere
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ScalarProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         profile_id: "Uuid", # required
-    #       }
-    #
     # @!attribute [rw] profile_id
     #   The unique identifier of the profile.
     #   @return [String]
@@ -630,13 +545,6 @@ module Aws::RolesAnywhere
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ScalarSubjectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         subject_id: "Uuid", # required
-    #       }
-    #
     # @!attribute [rw] subject_id
     #   The unique identifier of the subject.
     #   @return [String]
@@ -649,13 +557,6 @@ module Aws::RolesAnywhere
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ScalarTrustAnchorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         trust_anchor_id: "Uuid", # required
-    #       }
-    #
     # @!attribute [rw] trust_anchor_id
     #   The unique identifier of the trust anchor.
     #   @return [String]
@@ -669,17 +570,6 @@ module Aws::RolesAnywhere
     end
 
     # The trust anchor type and its related certificate data.
-    #
-    # @note When making an API call, you may pass Source
-    #   data as a hash:
-    #
-    #       {
-    #         source_data: {
-    #           acm_pca_arn: "String",
-    #           x509_certificate_data: "String",
-    #         },
-    #         source_type: "AWS_ACM_PCA", # accepts AWS_ACM_PCA, CERTIFICATE_BUNDLE, SELF_SIGNED_REPOSITORY
-    #       }
     #
     # @!attribute [rw] source_data
     #   The data field of the trust anchor depending on its type.
@@ -699,10 +589,6 @@ module Aws::RolesAnywhere
     end
 
     # The data field of the trust anchor depending on its type.
-    #
-    # @note SourceData is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note SourceData is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of SourceData corresponding to the set member.
     #
     # @!attribute [rw] acm_pca_arn
     #   The root certificate of the Certificate Manager Private Certificate
@@ -860,14 +746,6 @@ module Aws::RolesAnywhere
 
     # A label that consists of a key and value you define.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The tag key.
     #   @return [String]
@@ -885,19 +763,6 @@ module Aws::RolesAnywhere
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource.
     #   @return [String]
@@ -988,14 +853,6 @@ module Aws::RolesAnywhere
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource.
     #   @return [String]
@@ -1017,15 +874,6 @@ module Aws::RolesAnywhere
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateCrlRequest
-    #   data as a hash:
-    #
-    #       {
-    #         crl_data: "data",
-    #         crl_id: "Uuid", # required
-    #         name: "ResourceName",
-    #       }
-    #
     # @!attribute [rw] crl_data
     #   The x509 v3 specified certificate revocation list
     #   @return [String]
@@ -1048,18 +896,6 @@ module Aws::RolesAnywhere
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         duration_seconds: 1,
-    #         managed_policy_arns: ["ManagedPolicyListMemberString"],
-    #         name: "ResourceName",
-    #         profile_id: "Uuid", # required
-    #         role_arns: ["RoleArn"],
-    #         session_policy: "UpdateProfileRequestSessionPolicyString",
-    #       }
-    #
     # @!attribute [rw] duration_seconds
     #   The number of seconds the vended session credentials are valid for.
     #   @return [Integer]
@@ -1104,21 +940,6 @@ module Aws::RolesAnywhere
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateTrustAnchorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ResourceName",
-    #         source: {
-    #           source_data: {
-    #             acm_pca_arn: "String",
-    #             x509_certificate_data: "String",
-    #           },
-    #           source_type: "AWS_ACM_PCA", # accepts AWS_ACM_PCA, CERTIFICATE_BUNDLE, SELF_SIGNED_REPOSITORY
-    #         },
-    #         trust_anchor_id: "Uuid", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the trust anchor.
     #   @return [String]

@@ -10,15 +10,6 @@
 module Aws::ServiceCatalog
   module Types
 
-    # @note When making an API call, you may pass AcceptPortfolioShareInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         portfolio_id: "Id", # required
-    #         portfolio_share_type: "IMPORTED", # accepts IMPORTED, AWS_SERVICECATALOG, AWS_ORGANIZATIONS
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -66,14 +57,6 @@ module Aws::ServiceCatalog
 
     # The access level to use to filter results.
     #
-    # @note When making an API call, you may pass AccessLevelFilter
-    #   data as a hash:
-    #
-    #       {
-    #         key: "Account", # accepts Account, Role, User
-    #         value: "AccessLevelFilterValue",
-    #       }
-    #
     # @!attribute [rw] key
     #   The access level.
     #
@@ -99,14 +82,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateBudgetWithResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         budget_name: "BudgetName", # required
-    #         resource_id: "Id", # required
-    #       }
-    #
     # @!attribute [rw] budget_name
     #   The name of the budget you want to associate.
     #   @return [String]
@@ -128,16 +103,6 @@ module Aws::ServiceCatalog
     #
     class AssociateBudgetWithResourceOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass AssociatePrincipalWithPortfolioInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         portfolio_id: "Id", # required
-    #         principal_arn: "PrincipalARN", # required
-    #         principal_type: "IAM", # required, accepts IAM, IAM_PATTERN
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -183,16 +148,6 @@ module Aws::ServiceCatalog
     #
     class AssociatePrincipalWithPortfolioOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass AssociateProductWithPortfolioInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         product_id: "Id", # required
-    #         portfolio_id: "Id", # required
-    #         source_portfolio_id: "Id",
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -230,16 +185,6 @@ module Aws::ServiceCatalog
     #
     class AssociateProductWithPortfolioOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass AssociateServiceActionWithProvisioningArtifactInput
-    #   data as a hash:
-    #
-    #       {
-    #         product_id: "Id", # required
-    #         provisioning_artifact_id: "Id", # required
-    #         service_action_id: "Id", # required
-    #         accept_language: "AcceptLanguage",
-    #       }
-    #
     # @!attribute [rw] product_id
     #   The product identifier. For example, `prod-abcdzk7xy33qa`.
     #   @return [String]
@@ -279,14 +224,6 @@ module Aws::ServiceCatalog
     #
     class AssociateServiceActionWithProvisioningArtifactOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass AssociateTagOptionWithResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_id: "ResourceId", # required
-    #         tag_option_id: "TagOptionId", # required
-    #       }
-    #
     # @!attribute [rw] resource_id
     #   The resource identifier.
     #   @return [String]
@@ -308,20 +245,6 @@ module Aws::ServiceCatalog
     #
     class AssociateTagOptionWithResourceOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass BatchAssociateServiceActionWithProvisioningArtifactInput
-    #   data as a hash:
-    #
-    #       {
-    #         service_action_associations: [ # required
-    #           {
-    #             service_action_id: "Id", # required
-    #             product_id: "Id", # required
-    #             provisioning_artifact_id: "Id", # required
-    #           },
-    #         ],
-    #         accept_language: "AcceptLanguage",
-    #       }
-    #
     # @!attribute [rw] service_action_associations
     #   One or more associations, each consisting of the Action ID, the
     #   Product ID, and the Provisioning Artifact ID.
@@ -359,20 +282,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchDisassociateServiceActionFromProvisioningArtifactInput
-    #   data as a hash:
-    #
-    #       {
-    #         service_action_associations: [ # required
-    #           {
-    #             service_action_id: "Id", # required
-    #             product_id: "Id", # required
-    #             provisioning_artifact_id: "Id", # required
-    #           },
-    #         ],
-    #         accept_language: "AcceptLanguage",
-    #       }
-    #
     # @!attribute [rw] service_action_associations
     #   One or more associations, each consisting of the Action ID, the
     #   Product ID, and the Provisioning Artifact ID.
@@ -439,16 +348,6 @@ module Aws::ServiceCatalog
     end
 
     # The subtype containing details about the Codestar connection `Type`.
-    #
-    # @note When making an API call, you may pass CodeStarParameters
-    #   data as a hash:
-    #
-    #       {
-    #         connection_arn: "CodeStarConnectionArn", # required
-    #         repository: "Repository", # required
-    #         branch: "RepositoryBranch", # required
-    #         artifact_path: "RepositoryArtifactPath", # required
-    #       }
     #
     # @!attribute [rw] connection_arn
     #   The CodeStar ARN, which is the connection between Service Catalog
@@ -558,23 +457,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CopyProductInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         source_product_arn: "ProductArn", # required
-    #         target_product_id: "Id",
-    #         target_product_name: "ProductViewName",
-    #         source_provisioning_artifact_identifiers: [
-    #           {
-    #             "Id" => "ProvisioningArtifactPropertyValue",
-    #           },
-    #         ],
-    #         copy_options: ["CopyTags"], # accepts CopyTags
-    #         idempotency_token: "IdempotencyToken", # required
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -645,19 +527,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateConstraintInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         portfolio_id: "Id", # required
-    #         product_id: "Id", # required
-    #         parameters: "ConstraintParameters", # required
-    #         type: "ConstraintType", # required
-    #         description: "ConstraintDescription",
-    #         idempotency_token: "IdempotencyToken", # required
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -815,23 +684,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreatePortfolioInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         display_name: "PortfolioDisplayName", # required
-    #         description: "PortfolioDescription",
-    #         provider_name: "ProviderName", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         idempotency_token: "IdempotencyToken", # required
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -897,21 +749,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreatePortfolioShareInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         portfolio_id: "Id", # required
-    #         account_id: "AccountId",
-    #         organization_node: {
-    #           type: "ORGANIZATION", # accepts ORGANIZATION, ORGANIZATIONAL_UNIT, ACCOUNT
-    #           value: "OrganizationNodeValue",
-    #         },
-    #         share_tag_options: false,
-    #         share_principals: false,
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -984,48 +821,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateProductInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         name: "ProductViewName", # required
-    #         owner: "ProductViewOwner", # required
-    #         description: "ProductViewShortDescription",
-    #         distributor: "ProductViewOwner",
-    #         support_description: "SupportDescription",
-    #         support_email: "SupportEmail",
-    #         support_url: "SupportUrl",
-    #         product_type: "CLOUD_FORMATION_TEMPLATE", # required, accepts CLOUD_FORMATION_TEMPLATE, MARKETPLACE
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         provisioning_artifact_parameters: {
-    #           name: "ProvisioningArtifactName",
-    #           description: "ProvisioningArtifactDescription",
-    #           info: {
-    #             "ProvisioningArtifactInfoKey" => "ProvisioningArtifactInfoValue",
-    #           },
-    #           type: "CLOUD_FORMATION_TEMPLATE", # accepts CLOUD_FORMATION_TEMPLATE, MARKETPLACE_AMI, MARKETPLACE_CAR
-    #           disable_template_validation: false,
-    #         },
-    #         idempotency_token: "IdempotencyToken", # required
-    #         source_connection: {
-    #           type: "CODESTAR", # accepts CODESTAR
-    #           connection_parameters: { # required
-    #             code_star: {
-    #               connection_arn: "CodeStarConnectionArn", # required
-    #               repository: "Repository", # required
-    #               branch: "RepositoryBranch", # required
-    #               artifact_path: "RepositoryArtifactPath", # required
-    #             },
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -1140,34 +935,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateProvisionedProductPlanInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         plan_name: "ProvisionedProductPlanName", # required
-    #         plan_type: "CLOUDFORMATION", # required, accepts CLOUDFORMATION
-    #         notification_arns: ["NotificationArn"],
-    #         path_id: "Id",
-    #         product_id: "Id", # required
-    #         provisioned_product_name: "ProvisionedProductName", # required
-    #         provisioning_artifact_id: "Id", # required
-    #         provisioning_parameters: [
-    #           {
-    #             key: "ParameterKey",
-    #             value: "ParameterValue",
-    #             use_previous_value: false,
-    #           },
-    #         ],
-    #         idempotency_token: "IdempotencyToken", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -1284,24 +1051,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateProvisioningArtifactInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         product_id: "Id", # required
-    #         parameters: { # required
-    #           name: "ProvisioningArtifactName",
-    #           description: "ProvisioningArtifactDescription",
-    #           info: {
-    #             "ProvisioningArtifactInfoKey" => "ProvisioningArtifactInfoValue",
-    #           },
-    #           type: "CLOUD_FORMATION_TEMPLATE", # accepts CLOUD_FORMATION_TEMPLATE, MARKETPLACE_AMI, MARKETPLACE_CAR
-    #           disable_template_validation: false,
-    #         },
-    #         idempotency_token: "IdempotencyToken", # required
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -1377,20 +1126,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateServiceActionInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ServiceActionName", # required
-    #         definition_type: "SSM_AUTOMATION", # required, accepts SSM_AUTOMATION
-    #         definition: { # required
-    #           "Name" => "ServiceActionDefinitionValue",
-    #         },
-    #         description: "ServiceActionDescription",
-    #         accept_language: "AcceptLanguage",
-    #         idempotency_token: "IdempotencyToken", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The self-service action name.
     #   @return [String]
@@ -1480,14 +1215,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateTagOptionInput
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagOptionKey", # required
-    #         value: "TagOptionValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The TagOption key.
     #   @return [String]
@@ -1517,14 +1244,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteConstraintInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         id: "Id", # required
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -1552,14 +1271,6 @@ module Aws::ServiceCatalog
     #
     class DeleteConstraintOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeletePortfolioInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         id: "Id", # required
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -1587,19 +1298,6 @@ module Aws::ServiceCatalog
     #
     class DeletePortfolioOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeletePortfolioShareInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         portfolio_id: "Id", # required
-    #         account_id: "AccountId",
-    #         organization_node: {
-    #           type: "ORGANIZATION", # accepts ORGANIZATION, ORGANIZATIONAL_UNIT, ACCOUNT
-    #           value: "OrganizationNodeValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -1646,14 +1344,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteProductInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         id: "Id", # required
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -1681,15 +1371,6 @@ module Aws::ServiceCatalog
     #
     class DeleteProductOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteProvisionedProductPlanInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         plan_id: "Id", # required
-    #         ignore_errors: false,
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -1724,15 +1405,6 @@ module Aws::ServiceCatalog
     #
     class DeleteProvisionedProductPlanOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteProvisioningArtifactInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         product_id: "Id", # required
-    #         provisioning_artifact_id: "Id", # required
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -1765,14 +1437,6 @@ module Aws::ServiceCatalog
     #
     class DeleteProvisioningArtifactOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteServiceActionInput
-    #   data as a hash:
-    #
-    #       {
-    #         id: "Id", # required
-    #         accept_language: "AcceptLanguage",
-    #       }
-    #
     # @!attribute [rw] id
     #   The self-service action identifier. For example,
     #   `act-fs7abcd89wxyz`.
@@ -1801,13 +1465,6 @@ module Aws::ServiceCatalog
     #
     class DeleteServiceActionOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteTagOptionInput
-    #   data as a hash:
-    #
-    #       {
-    #         id: "TagOptionId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The TagOption identifier.
     #   @return [String]
@@ -1824,14 +1481,6 @@ module Aws::ServiceCatalog
     #
     class DeleteTagOptionOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeConstraintInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         id: "Id", # required
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -1877,14 +1526,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeCopyProductStatusInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         copy_product_token: "Id", # required
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -1931,14 +1572,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribePortfolioInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         id: "Id", # required
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -1989,13 +1622,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribePortfolioShareStatusInput
-    #   data as a hash:
-    #
-    #       {
-    #         portfolio_share_token: "Id", # required
-    #       }
-    #
     # @!attribute [rw] portfolio_share_token
     #   The token for the portfolio share operation. This token is returned
     #   either by CreatePortfolioShare or by DeletePortfolioShare.
@@ -2043,16 +1669,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribePortfolioSharesInput
-    #   data as a hash:
-    #
-    #       {
-    #         portfolio_id: "Id", # required
-    #         type: "ACCOUNT", # required, accepts ACCOUNT, ORGANIZATION, ORGANIZATIONAL_UNIT, ORGANIZATION_MEMBER_ACCOUNT
-    #         page_token: "PageToken",
-    #         page_size: 1,
-    #       }
-    #
     # @!attribute [rw] portfolio_id
     #   The unique identifier of the portfolio for which shares will be
     #   retrieved.
@@ -2113,16 +1729,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeProductAsAdminInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         id: "Id",
-    #         name: "ProductViewName",
-    #         source_portfolio_id: "Id",
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -2196,15 +1802,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeProductInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         id: "Id",
-    #         name: "ProductViewName",
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -2261,14 +1858,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeProductViewInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         id: "Id", # required
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -2314,15 +1903,6 @@ module Aws::ServiceCatalog
     # provisioned product identifier. Name - \[Optional\] Another
     # provisioned product identifier. Customers must provide either Id or
     # Name.
-    #
-    # @note When making an API call, you may pass DescribeProvisionedProductInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         id: "Id",
-    #         name: "ProvisionedProductName",
-    #       }
     #
     # @!attribute [rw] accept_language
     #   The language code.
@@ -2378,16 +1958,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeProvisionedProductPlanInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         plan_id: "Id", # required
-    #         page_size: 1,
-    #         page_token: "PageToken",
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -2446,18 +2016,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeProvisioningArtifactInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         provisioning_artifact_id: "Id",
-    #         product_id: "Id",
-    #         provisioning_artifact_name: "ProvisioningArtifactName",
-    #         product_name: "ProductViewName",
-    #         verbose: false,
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -2524,19 +2082,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeProvisioningParametersInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         product_id: "Id",
-    #         product_name: "ProductViewName",
-    #         provisioning_artifact_id: "Id",
-    #         provisioning_artifact_name: "ProvisioningArtifactName",
-    #         path_id: "Id",
-    #         path_name: "PortfolioDisplayName",
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -2639,16 +2184,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeRecordInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         id: "Id", # required
-    #         page_token: "PageToken",
-    #         page_size: 1,
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -2709,15 +2244,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeServiceActionExecutionParametersInput
-    #   data as a hash:
-    #
-    #       {
-    #         provisioned_product_id: "Id", # required
-    #         service_action_id: "Id", # required
-    #         accept_language: "AcceptLanguage",
-    #       }
-    #
     # @!attribute [rw] provisioned_product_id
     #   The identifier of the provisioned product.
     #   @return [String]
@@ -2758,14 +2284,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeServiceActionInput
-    #   data as a hash:
-    #
-    #       {
-    #         id: "Id", # required
-    #         accept_language: "AcceptLanguage",
-    #       }
-    #
     # @!attribute [rw] id
     #   The self-service action identifier.
     #   @return [String]
@@ -2801,13 +2319,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeTagOptionInput
-    #   data as a hash:
-    #
-    #       {
-    #         id: "TagOptionId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The TagOption identifier.
     #   @return [String]
@@ -2832,8 +2343,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisableAWSOrganizationsAccessInput AWS API Documentation
     #
     class DisableAWSOrganizationsAccessInput < Aws::EmptyStructure; end
@@ -2842,14 +2351,6 @@ module Aws::ServiceCatalog
     #
     class DisableAWSOrganizationsAccessOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DisassociateBudgetFromResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         budget_name: "BudgetName", # required
-    #         resource_id: "Id", # required
-    #       }
-    #
     # @!attribute [rw] budget_name
     #   The name of the budget you want to disassociate.
     #   @return [String]
@@ -2872,16 +2373,6 @@ module Aws::ServiceCatalog
     #
     class DisassociateBudgetFromResourceOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DisassociatePrincipalFromPortfolioInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         portfolio_id: "Id", # required
-    #         principal_arn: "PrincipalARN", # required
-    #         principal_type: "IAM", # accepts IAM, IAM_PATTERN
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -2922,15 +2413,6 @@ module Aws::ServiceCatalog
     #
     class DisassociatePrincipalFromPortfolioOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DisassociateProductFromPortfolioInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         product_id: "Id", # required
-    #         portfolio_id: "Id", # required
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -2963,16 +2445,6 @@ module Aws::ServiceCatalog
     #
     class DisassociateProductFromPortfolioOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DisassociateServiceActionFromProvisioningArtifactInput
-    #   data as a hash:
-    #
-    #       {
-    #         product_id: "Id", # required
-    #         provisioning_artifact_id: "Id", # required
-    #         service_action_id: "Id", # required
-    #         accept_language: "AcceptLanguage",
-    #       }
-    #
     # @!attribute [rw] product_id
     #   The product identifier. For example, `prod-abcdzk7xy33qa`.
     #   @return [String]
@@ -3012,14 +2484,6 @@ module Aws::ServiceCatalog
     #
     class DisassociateServiceActionFromProvisioningArtifactOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DisassociateTagOptionFromResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_id: "ResourceId", # required
-    #         tag_option_id: "TagOptionId", # required
-    #       }
-    #
     # @!attribute [rw] resource_id
     #   The resource identifier.
     #   @return [String]
@@ -3047,8 +2511,6 @@ module Aws::ServiceCatalog
     #
     class DuplicateResourceException < Aws::EmptyStructure; end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/EnableAWSOrganizationsAccessInput AWS API Documentation
     #
     class EnableAWSOrganizationsAccessInput < Aws::EmptyStructure; end
@@ -3057,15 +2519,6 @@ module Aws::ServiceCatalog
     #
     class EnableAWSOrganizationsAccessOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass ExecuteProvisionedProductPlanInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         plan_id: "Id", # required
-    #         idempotency_token: "IdempotencyToken", # required
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -3111,19 +2564,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ExecuteProvisionedProductServiceActionInput
-    #   data as a hash:
-    #
-    #       {
-    #         provisioned_product_id: "Id", # required
-    #         service_action_id: "Id", # required
-    #         execute_token: "IdempotencyToken", # required
-    #         accept_language: "AcceptLanguage",
-    #         parameters: {
-    #           "ExecutionParameterKey" => ["ExecutionParameterValue"],
-    #         },
-    #       }
-    #
     # @!attribute [rw] provisioned_product_id
     #   The identifier of the provisioned product.
     #   @return [String]
@@ -3247,8 +2687,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/GetAWSOrganizationsAccessStatusInput AWS API Documentation
     #
     class GetAWSOrganizationsAccessStatusInput < Aws::EmptyStructure; end
@@ -3265,18 +2703,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetProvisionedProductOutputsInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         provisioned_product_id: "Id",
-    #         provisioned_product_name: "ProvisionedProductName",
-    #         output_keys: ["OutputKey"],
-    #         page_size: 1,
-    #         page_token: "PageToken",
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -3344,18 +2770,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ImportAsProvisionedProductInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         product_id: "Id", # required
-    #         provisioning_artifact_id: "Id", # required
-    #         provisioned_product_name: "ProvisionedProductName", # required
-    #         physical_id: "PhysicalId", # required
-    #         idempotency_token: "IdempotencyToken", # required
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -3538,16 +2952,6 @@ module Aws::ServiceCatalog
     #
     class LimitExceededException < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass ListAcceptedPortfolioSharesInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         page_token: "PageToken",
-    #         page_size: 1,
-    #         portfolio_share_type: "IMPORTED", # accepts IMPORTED, AWS_SERVICECATALOG, AWS_ORGANIZATIONS
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -3610,16 +3014,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListBudgetsForResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         resource_id: "Id", # required
-    #         page_size: 1,
-    #         page_token: "PageToken",
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -3672,17 +3066,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListConstraintsForPortfolioInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         portfolio_id: "Id", # required
-    #         product_id: "Id",
-    #         page_size: 1,
-    #         page_token: "PageToken",
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -3740,16 +3123,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListLaunchPathsInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         product_id: "Id", # required
-    #         page_size: 1,
-    #         page_token: "PageToken",
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -3802,17 +3175,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListOrganizationPortfolioAccessInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         portfolio_id: "Id", # required
-    #         organization_node_type: "ORGANIZATION", # required, accepts ORGANIZATION, ORGANIZATIONAL_UNIT, ACCOUNT
-    #         page_token: "PageToken",
-    #         page_size: 1,
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -3878,17 +3240,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPortfolioAccessInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         portfolio_id: "Id", # required
-    #         organization_parent_id: "Id",
-    #         page_token: "PageToken",
-    #         page_size: 1,
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -3949,16 +3300,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPortfoliosForProductInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         product_id: "Id", # required
-    #         page_token: "PageToken",
-    #         page_size: 1,
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -4011,15 +3352,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPortfoliosInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         page_token: "PageToken",
-    #         page_size: 1,
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -4067,16 +3399,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPrincipalsForPortfolioInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         portfolio_id: "Id", # required
-    #         page_size: 1,
-    #         page_token: "PageToken",
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -4130,20 +3452,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListProvisionedProductPlansInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         provision_product_id: "Id",
-    #         page_size: 1,
-    #         page_token: "PageToken",
-    #         access_level_filter: {
-    #           key: "Account", # accepts Account, Role, User
-    #           value: "AccessLevelFilterValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -4201,16 +3509,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListProvisioningArtifactsForServiceActionInput
-    #   data as a hash:
-    #
-    #       {
-    #         service_action_id: "Id", # required
-    #         page_size: 1,
-    #         page_token: "PageToken",
-    #         accept_language: "AcceptLanguage",
-    #       }
-    #
     # @!attribute [rw] service_action_id
     #   The self-service action identifier. For example,
     #   `act-fs7abcd89wxyz`.
@@ -4265,14 +3563,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListProvisioningArtifactsInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         product_id: "Id", # required
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -4314,23 +3604,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRecordHistoryInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         access_level_filter: {
-    #           key: "Account", # accepts Account, Role, User
-    #           value: "AccessLevelFilterValue",
-    #         },
-    #         search_filter: {
-    #           key: "SearchFilterKey",
-    #           value: "SearchFilterValue",
-    #         },
-    #         page_size: 1,
-    #         page_token: "PageToken",
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -4390,14 +3663,6 @@ module Aws::ServiceCatalog
 
     # The search filter to use when listing history records.
     #
-    # @note When making an API call, you may pass ListRecordHistorySearchFilter
-    #   data as a hash:
-    #
-    #       {
-    #         key: "SearchFilterKey",
-    #         value: "SearchFilterValue",
-    #       }
-    #
     # @!attribute [rw] key
     #   The filter key.
     #
@@ -4421,16 +3686,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListResourcesForTagOptionInput
-    #   data as a hash:
-    #
-    #       {
-    #         tag_option_id: "TagOptionId", # required
-    #         resource_type: "ResourceType",
-    #         page_size: 1,
-    #         page_token: "PageToken",
-    #       }
-    #
     # @!attribute [rw] tag_option_id
     #   The TagOption identifier.
     #   @return [String]
@@ -4481,17 +3736,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListServiceActionsForProvisioningArtifactInput
-    #   data as a hash:
-    #
-    #       {
-    #         product_id: "Id", # required
-    #         provisioning_artifact_id: "Id", # required
-    #         page_size: 1,
-    #         page_token: "PageToken",
-    #         accept_language: "AcceptLanguage",
-    #       }
-    #
     # @!attribute [rw] product_id
     #   The product identifier. For example, `prod-abcdzk7xy33qa`.
     #   @return [String]
@@ -4551,15 +3795,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListServiceActionsInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         page_size: 1,
-    #         page_token: "PageToken",
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -4608,16 +3843,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListStackInstancesForProvisionedProductInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         provisioned_product_id: "Id", # required
-    #         page_token: "PageToken",
-    #         page_size: 1,
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -4672,15 +3897,6 @@ module Aws::ServiceCatalog
 
     # Filters to use when listing TagOptions.
     #
-    # @note When making an API call, you may pass ListTagOptionsFilters
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagOptionKey",
-    #         value: "TagOptionValue",
-    #         active: false,
-    #       }
-    #
     # @!attribute [rw] key
     #   The TagOption key.
     #   @return [String]
@@ -4703,19 +3919,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagOptionsInput
-    #   data as a hash:
-    #
-    #       {
-    #         filters: {
-    #           key: "TagOptionKey",
-    #           value: "TagOptionValue",
-    #           active: false,
-    #         },
-    #         page_size: 1,
-    #         page_token: "PageToken",
-    #       }
-    #
     # @!attribute [rw] filters
     #   The search filters. If no search filters are specified, the output
     #   includes all TagOptions.
@@ -4765,14 +3968,6 @@ module Aws::ServiceCatalog
     class OperationNotSupportedException < Aws::EmptyStructure; end
 
     # Information about the organization node.
-    #
-    # @note When making an API call, you may pass OrganizationNode
-    #   data as a hash:
-    #
-    #       {
-    #         type: "ORGANIZATION", # accepts ORGANIZATION, ORGANIZATIONAL_UNIT, ACCOUNT
-    #         value: "OrganizationNodeValue",
-    #       }
     #
     # @!attribute [rw] type
     #   The organization node type.
@@ -5101,42 +4296,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ProvisionProductInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         product_id: "Id",
-    #         product_name: "ProductViewName",
-    #         provisioning_artifact_id: "Id",
-    #         provisioning_artifact_name: "ProvisioningArtifactName",
-    #         path_id: "Id",
-    #         path_name: "PortfolioDisplayName",
-    #         provisioned_product_name: "ProvisionedProductName", # required
-    #         provisioning_parameters: [
-    #           {
-    #             key: "ParameterKey",
-    #             value: "ParameterValue",
-    #           },
-    #         ],
-    #         provisioning_preferences: {
-    #           stack_set_accounts: ["AccountId"],
-    #           stack_set_regions: ["Region"],
-    #           stack_set_failure_tolerance_count: 1,
-    #           stack_set_failure_tolerance_percentage: 1,
-    #           stack_set_max_concurrency_count: 1,
-    #           stack_set_max_concurrency_percentage: 1,
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         notification_arns: ["NotificationArn"],
-    #         provision_token: "IdempotencyToken", # required
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -5851,19 +5010,6 @@ module Aws::ServiceCatalog
     # Information about a provisioning artifact (also known as a version)
     # for a product.
     #
-    # @note When making an API call, you may pass ProvisioningArtifactProperties
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ProvisioningArtifactName",
-    #         description: "ProvisioningArtifactDescription",
-    #         info: {
-    #           "ProvisioningArtifactInfoKey" => "ProvisioningArtifactInfoValue",
-    #         },
-    #         type: "CLOUD_FORMATION_TEMPLATE", # accepts CLOUD_FORMATION_TEMPLATE, MARKETPLACE_AMI, MARKETPLACE_CAR
-    #         disable_template_validation: false,
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the provisioning artifact (for example, v1 v2beta). No
     #   spaces are allowed.
@@ -5979,14 +5125,6 @@ module Aws::ServiceCatalog
 
     # Information about a parameter used to provision a product.
     #
-    # @note When making an API call, you may pass ProvisioningParameter
-    #   data as a hash:
-    #
-    #       {
-    #         key: "ParameterKey",
-    #         value: "ParameterValue",
-    #       }
-    #
     # @!attribute [rw] key
     #   The parameter key.
     #   @return [String]
@@ -6020,18 +5158,6 @@ module Aws::ServiceCatalog
     #
     # If no values are specified, the default value is all accounts from the
     # `STACKSET` constraint.
-    #
-    # @note When making an API call, you may pass ProvisioningPreferences
-    #   data as a hash:
-    #
-    #       {
-    #         stack_set_accounts: ["AccountId"],
-    #         stack_set_regions: ["Region"],
-    #         stack_set_failure_tolerance_count: 1,
-    #         stack_set_failure_tolerance_percentage: 1,
-    #         stack_set_max_concurrency_count: 1,
-    #         stack_set_max_concurrency_percentage: 1,
-    #       }
     #
     # @!attribute [rw] stack_set_accounts
     #   One or more Amazon Web Services accounts where the provisioned
@@ -6305,15 +5431,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RejectPortfolioShareInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         portfolio_id: "Id", # required
-    #         portfolio_share_type: "IMPORTED", # accepts IMPORTED, AWS_SERVICECATALOG, AWS_ORGANIZATIONS
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -6505,19 +5622,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ScanProvisionedProductsInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         access_level_filter: {
-    #           key: "Account", # accepts Account, Role, User
-    #           value: "AccessLevelFilterValue",
-    #         },
-    #         page_size: 1,
-    #         page_token: "PageToken",
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -6570,22 +5674,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SearchProductsAsAdminInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         portfolio_id: "Id",
-    #         filters: {
-    #           "FullTextSearch" => ["ProductViewFilterValue"],
-    #         },
-    #         sort_by: "Title", # accepts Title, VersionCount, CreationDate
-    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #         page_token: "PageToken",
-    #         page_size: 1,
-    #         product_source: "ACCOUNT", # accepts ACCOUNT
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -6661,20 +5749,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SearchProductsInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         filters: {
-    #           "FullTextSearch" => ["ProductViewFilterValue"],
-    #         },
-    #         page_size: 1,
-    #         sort_by: "Title", # accepts Title, VersionCount, CreationDate
-    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #         page_token: "PageToken",
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -6745,24 +5819,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SearchProvisionedProductsInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         access_level_filter: {
-    #           key: "Account", # accepts Account, Role, User
-    #           value: "AccessLevelFilterValue",
-    #         },
-    #         filters: {
-    #           "SearchQuery" => ["ProvisionedProductViewFilterValue"],
-    #         },
-    #         sort_by: "SortField",
-    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #         page_size: 1,
-    #         page_token: "PageToken",
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -6849,15 +5905,6 @@ module Aws::ServiceCatalog
 
     # A self-service action association consisting of the Action ID, the
     # Product ID, and the Provisioning Artifact ID.
-    #
-    # @note When making an API call, you may pass ServiceActionAssociation
-    #   data as a hash:
-    #
-    #       {
-    #         service_action_id: "Id", # required
-    #         product_id: "Id", # required
-    #         provisioning_artifact_id: "Id", # required
-    #       }
     #
     # @!attribute [rw] service_action_id
     #   The self-service action identifier. For example,
@@ -6983,21 +6030,6 @@ module Aws::ServiceCatalog
     # the `ConnectionParameters` request, with the addition of the
     # `LastSync` response.
     #
-    # @note When making an API call, you may pass SourceConnection
-    #   data as a hash:
-    #
-    #       {
-    #         type: "CODESTAR", # accepts CODESTAR
-    #         connection_parameters: { # required
-    #           code_star: {
-    #             connection_arn: "CodeStarConnectionArn", # required
-    #             repository: "Repository", # required
-    #             branch: "RepositoryBranch", # required
-    #             artifact_path: "RepositoryArtifactPath", # required
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] type
     #   The only supported `SourceConnection` type is Codestar.
     #   @return [String]
@@ -7051,18 +6083,6 @@ module Aws::ServiceCatalog
     end
 
     # Provides connection details.
-    #
-    # @note When making an API call, you may pass SourceConnectionParameters
-    #   data as a hash:
-    #
-    #       {
-    #         code_star: {
-    #           connection_arn: "CodeStarConnectionArn", # required
-    #           repository: "Repository", # required
-    #           branch: "RepositoryBranch", # required
-    #           artifact_path: "RepositoryArtifactPath", # required
-    #         },
-    #       }
     #
     # @!attribute [rw] code_star
     #   Provides `ConnectionType` details.
@@ -7127,14 +6147,6 @@ module Aws::ServiceCatalog
 
     # Information about a tag. A tag is a key-value pair. Tags are
     # propagated to the resources created when provisioning a product.
-    #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
     #
     # @!attribute [rw] key
     #   The tag key.
@@ -7216,18 +6228,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TerminateProvisionedProductInput
-    #   data as a hash:
-    #
-    #       {
-    #         provisioned_product_name: "ProvisionedProductNameOrArn",
-    #         provisioned_product_id: "Id",
-    #         terminate_token: "IdempotencyToken", # required
-    #         ignore_errors: false,
-    #         accept_language: "AcceptLanguage",
-    #         retain_physical_resources: false,
-    #       }
-    #
     # @!attribute [rw] provisioned_product_name
     #   The name of the provisioned product. You cannot specify both
     #   `ProvisionedProductName` and `ProvisionedProductId`.
@@ -7298,16 +6298,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateConstraintInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         id: "Id", # required
-    #         description: "ConstraintDescription",
-    #         parameters: "ConstraintParameters",
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -7435,24 +6425,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdatePortfolioInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         id: "Id", # required
-    #         display_name: "PortfolioDisplayName",
-    #         description: "PortfolioDescription",
-    #         provider_name: "ProviderName",
-    #         add_tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         remove_tags: ["TagKey"],
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -7518,21 +6490,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdatePortfolioShareInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         portfolio_id: "Id", # required
-    #         account_id: "AccountId",
-    #         organization_node: {
-    #           type: "ORGANIZATION", # accepts ORGANIZATION, ORGANIZATIONAL_UNIT, ACCOUNT
-    #           value: "OrganizationNodeValue",
-    #         },
-    #         share_tag_options: false,
-    #         share_principals: false,
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -7603,39 +6560,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateProductInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         id: "Id", # required
-    #         name: "ProductViewName",
-    #         owner: "ProductViewOwner",
-    #         description: "ProductViewShortDescription",
-    #         distributor: "ProductViewOwner",
-    #         support_description: "SupportDescription",
-    #         support_email: "SupportEmail",
-    #         support_url: "SupportUrl",
-    #         add_tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         remove_tags: ["TagKey"],
-    #         source_connection: {
-    #           type: "CODESTAR", # accepts CODESTAR
-    #           connection_parameters: { # required
-    #             code_star: {
-    #               connection_arn: "CodeStarConnectionArn", # required
-    #               repository: "Repository", # required
-    #               branch: "RepositoryBranch", # required
-    #               artifact_path: "RepositoryArtifactPath", # required
-    #             },
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -7733,44 +6657,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateProvisionedProductInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         provisioned_product_name: "ProvisionedProductNameOrArn",
-    #         provisioned_product_id: "Id",
-    #         product_id: "Id",
-    #         product_name: "ProductViewName",
-    #         provisioning_artifact_id: "Id",
-    #         provisioning_artifact_name: "ProvisioningArtifactName",
-    #         path_id: "Id",
-    #         path_name: "PortfolioDisplayName",
-    #         provisioning_parameters: [
-    #           {
-    #             key: "ParameterKey",
-    #             value: "ParameterValue",
-    #             use_previous_value: false,
-    #           },
-    #         ],
-    #         provisioning_preferences: {
-    #           stack_set_accounts: ["AccountId"],
-    #           stack_set_regions: ["Region"],
-    #           stack_set_failure_tolerance_count: 1,
-    #           stack_set_failure_tolerance_percentage: 1,
-    #           stack_set_max_concurrency_count: 1,
-    #           stack_set_max_concurrency_percentage: 1,
-    #           stack_set_operation_type: "CREATE", # accepts CREATE, UPDATE, DELETE
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         update_token: "IdempotencyToken", # required
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -7875,18 +6761,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateProvisionedProductPropertiesInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         provisioned_product_id: "Id", # required
-    #         provisioned_product_properties: { # required
-    #           "OWNER" => "PropertyValue",
-    #         },
-    #         idempotency_token: "IdempotencyToken", # required
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -7982,19 +6856,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateProvisioningArtifactInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_language: "AcceptLanguage",
-    #         product_id: "Id", # required
-    #         provisioning_artifact_id: "Id", # required
-    #         name: "ProvisioningArtifactName",
-    #         description: "ProvisioningArtifactDescription",
-    #         active: false,
-    #         guidance: "DEFAULT", # accepts DEFAULT, DEPRECATED
-    #       }
-    #
     # @!attribute [rw] accept_language
     #   The language code.
     #
@@ -8080,15 +6941,6 @@ module Aws::ServiceCatalog
 
     # The parameter key-value pair used to update a provisioned product.
     #
-    # @note When making an API call, you may pass UpdateProvisioningParameter
-    #   data as a hash:
-    #
-    #       {
-    #         key: "ParameterKey",
-    #         value: "ParameterValue",
-    #         use_previous_value: false,
-    #       }
-    #
     # @!attribute [rw] key
     #   The parameter key.
     #   @return [String]
@@ -8115,19 +6967,6 @@ module Aws::ServiceCatalog
     # The user-defined preferences that will be applied when updating a
     # provisioned product. Not all preferences are applicable to all
     # provisioned product types.
-    #
-    # @note When making an API call, you may pass UpdateProvisioningPreferences
-    #   data as a hash:
-    #
-    #       {
-    #         stack_set_accounts: ["AccountId"],
-    #         stack_set_regions: ["Region"],
-    #         stack_set_failure_tolerance_count: 1,
-    #         stack_set_failure_tolerance_percentage: 1,
-    #         stack_set_max_concurrency_count: 1,
-    #         stack_set_max_concurrency_percentage: 1,
-    #         stack_set_operation_type: "CREATE", # accepts CREATE, UPDATE, DELETE
-    #       }
     #
     # @!attribute [rw] stack_set_accounts
     #   One or more Amazon Web Services accounts that will have access to
@@ -8263,19 +7102,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateServiceActionInput
-    #   data as a hash:
-    #
-    #       {
-    #         id: "Id", # required
-    #         name: "ServiceActionName",
-    #         definition: {
-    #           "Name" => "ServiceActionDefinitionValue",
-    #         },
-    #         description: "ServiceActionDescription",
-    #         accept_language: "AcceptLanguage",
-    #       }
-    #
     # @!attribute [rw] id
     #   The self-service action identifier.
     #   @return [String]
@@ -8326,15 +7152,6 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateTagOptionInput
-    #   data as a hash:
-    #
-    #       {
-    #         id: "TagOptionId", # required
-    #         value: "TagOptionValue",
-    #         active: false,
-    #       }
-    #
     # @!attribute [rw] id
     #   The TagOption identifier.
     #   @return [String]

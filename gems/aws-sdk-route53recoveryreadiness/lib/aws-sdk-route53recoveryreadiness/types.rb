@@ -68,17 +68,6 @@ module Aws::Route53RecoveryReadiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateCellRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cell_name: "__string", # required
-    #         cells: ["__string"],
-    #         tags: {
-    #           "__string" => "__string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] cell_name
     #   @return [String]
     #
@@ -127,13 +116,6 @@ module Aws::Route53RecoveryReadiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateCrossAccountAuthorizationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cross_account_authorization: "CrossAccountAuthorization", # required
-    #       }
-    #
     # @!attribute [rw] cross_account_authorization
     #   CrossAccountAuthorization
     #   @return [String]
@@ -158,17 +140,6 @@ module Aws::Route53RecoveryReadiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateReadinessCheckRequest
-    #   data as a hash:
-    #
-    #       {
-    #         readiness_check_name: "__string", # required
-    #         resource_set_name: "__string", # required
-    #         tags: {
-    #           "__string" => "__string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] readiness_check_name
     #   @return [String]
     #
@@ -213,17 +184,6 @@ module Aws::Route53RecoveryReadiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateRecoveryGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cells: ["__string"],
-    #         recovery_group_name: "__string", # required
-    #         tags: {
-    #           "__string" => "__string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] cells
     #   @return [Array<String>]
     #
@@ -268,39 +228,6 @@ module Aws::Route53RecoveryReadiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateResourceSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_set_name: "__string", # required
-    #         resource_set_type: "__stringPatternAWSAZaZ09AZaZ09", # required
-    #         resources: [ # required
-    #           {
-    #             component_id: "__string",
-    #             dns_target_resource: {
-    #               domain_name: "__string",
-    #               hosted_zone_arn: "__string",
-    #               record_set_id: "__string",
-    #               record_type: "__string",
-    #               target_resource: {
-    #                 nlb_resource: {
-    #                   arn: "__string",
-    #                 },
-    #                 r53_resource: {
-    #                   domain_name: "__string",
-    #                   record_set_id: "__string",
-    #                 },
-    #               },
-    #             },
-    #             readiness_scopes: ["__string"],
-    #             resource_arn: "__string",
-    #           },
-    #         ],
-    #         tags: {
-    #           "__string" => "__string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_set_name
     #   @return [String]
     #
@@ -356,25 +283,6 @@ module Aws::Route53RecoveryReadiness
     # A component for DNS/routing control readiness checks and architecture
     # checks.
     #
-    # @note When making an API call, you may pass DNSTargetResource
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "__string",
-    #         hosted_zone_arn: "__string",
-    #         record_set_id: "__string",
-    #         record_type: "__string",
-    #         target_resource: {
-    #           nlb_resource: {
-    #             arn: "__string",
-    #           },
-    #           r53_resource: {
-    #             domain_name: "__string",
-    #             record_set_id: "__string",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The domain name that acts as an ingress point to a portion of the
     #   customer application.
@@ -410,13 +318,6 @@ module Aws::Route53RecoveryReadiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteCellRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cell_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] cell_name
     #   @return [String]
     #
@@ -428,13 +329,6 @@ module Aws::Route53RecoveryReadiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteCrossAccountAuthorizationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cross_account_authorization: "__string", # required
-    #       }
-    #
     # @!attribute [rw] cross_account_authorization
     #   @return [String]
     #
@@ -450,13 +344,6 @@ module Aws::Route53RecoveryReadiness
     #
     class DeleteCrossAccountAuthorizationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteReadinessCheckRequest
-    #   data as a hash:
-    #
-    #       {
-    #         readiness_check_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] readiness_check_name
     #   @return [String]
     #
@@ -468,13 +355,6 @@ module Aws::Route53RecoveryReadiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteRecoveryGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         recovery_group_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] recovery_group_name
     #   @return [String]
     #
@@ -486,13 +366,6 @@ module Aws::Route53RecoveryReadiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteResourceSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_set_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] resource_set_name
     #   @return [String]
     #
@@ -504,15 +377,6 @@ module Aws::Route53RecoveryReadiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetArchitectureRecommendationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #         recovery_group_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [Integer]
     #
@@ -553,15 +417,6 @@ module Aws::Route53RecoveryReadiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetCellReadinessSummaryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cell_name: "__string", # required
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] cell_name
     #   @return [String]
     #
@@ -601,13 +456,6 @@ module Aws::Route53RecoveryReadiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetCellRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cell_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] cell_name
     #   @return [String]
     #
@@ -647,13 +495,6 @@ module Aws::Route53RecoveryReadiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetReadinessCheckRequest
-    #   data as a hash:
-    #
-    #       {
-    #         readiness_check_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] readiness_check_name
     #   @return [String]
     #
@@ -665,16 +506,6 @@ module Aws::Route53RecoveryReadiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetReadinessCheckResourceStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #         readiness_check_name: "__string", # required
-    #         resource_identifier: "__string", # required
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [Integer]
     #
@@ -742,15 +573,6 @@ module Aws::Route53RecoveryReadiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetReadinessCheckStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #         readiness_check_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [Integer]
     #
@@ -794,15 +616,6 @@ module Aws::Route53RecoveryReadiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRecoveryGroupReadinessSummaryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #         recovery_group_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [Integer]
     #
@@ -842,13 +655,6 @@ module Aws::Route53RecoveryReadiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRecoveryGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         recovery_group_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] recovery_group_name
     #   @return [String]
     #
@@ -884,13 +690,6 @@ module Aws::Route53RecoveryReadiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetResourceSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_set_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] resource_set_name
     #   @return [String]
     #
@@ -941,14 +740,6 @@ module Aws::Route53RecoveryReadiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCellsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [Integer]
     #
@@ -979,14 +770,6 @@ module Aws::Route53RecoveryReadiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCrossAccountAuthorizationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [Integer]
     #
@@ -1017,14 +800,6 @@ module Aws::Route53RecoveryReadiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListReadinessChecksRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [Integer]
     #
@@ -1055,14 +830,6 @@ module Aws::Route53RecoveryReadiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRecoveryGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [Integer]
     #
@@ -1093,14 +860,6 @@ module Aws::Route53RecoveryReadiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListResourceSetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [Integer]
     #
@@ -1156,15 +915,6 @@ module Aws::Route53RecoveryReadiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRulesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #         resource_type: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [Integer]
     #
@@ -1199,13 +949,6 @@ module Aws::Route53RecoveryReadiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourcesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   @return [String]
     #
@@ -1246,13 +989,6 @@ module Aws::Route53RecoveryReadiness
     # The Network Load Balancer resource that a DNS target resource points
     # to.
     #
-    # @note When making an API call, you may pass NLBResource
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "__string",
-    #       }
-    #
     # @!attribute [rw] arn
     #   The Network Load Balancer resource Amazon Resource Name (ARN).
     #   @return [String]
@@ -1266,14 +1002,6 @@ module Aws::Route53RecoveryReadiness
     end
 
     # The Route 53 resource that a DNS target resource record points to.
-    #
-    # @note When making an API call, you may pass R53ResourceRecord
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "__string",
-    #         record_set_id: "__string",
-    #       }
     #
     # @!attribute [rw] domain_name
     #   The DNS target domain name.
@@ -1388,30 +1116,6 @@ module Aws::Route53RecoveryReadiness
     end
 
     # The resource element of a resource set.
-    #
-    # @note When making an API call, you may pass Resource
-    #   data as a hash:
-    #
-    #       {
-    #         component_id: "__string",
-    #         dns_target_resource: {
-    #           domain_name: "__string",
-    #           hosted_zone_arn: "__string",
-    #           record_set_id: "__string",
-    #           record_type: "__string",
-    #           target_resource: {
-    #             nlb_resource: {
-    #               arn: "__string",
-    #             },
-    #             r53_resource: {
-    #               domain_name: "__string",
-    #               record_set_id: "__string",
-    #             },
-    #           },
-    #         },
-    #         readiness_scopes: ["__string"],
-    #         resource_arn: "__string",
-    #       }
     #
     # @!attribute [rw] component_id
     #   The component identifier of the resource, generated when DNS target
@@ -1560,16 +1264,6 @@ module Aws::Route53RecoveryReadiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "__string", # required
-    #         tags: { # required
-    #           "__string" => "__string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   @return [String]
     #
@@ -1591,19 +1285,6 @@ module Aws::Route53RecoveryReadiness
     class TagResourceResponse < Aws::EmptyStructure; end
 
     # The target resource that the Route 53 record points to.
-    #
-    # @note When making an API call, you may pass TargetResource
-    #   data as a hash:
-    #
-    #       {
-    #         nlb_resource: {
-    #           arn: "__string",
-    #         },
-    #         r53_resource: {
-    #           domain_name: "__string",
-    #           record_set_id: "__string",
-    #         },
-    #       }
     #
     # @!attribute [rw] nlb_resource
     #   The Network Load Balancer Resource.
@@ -1633,14 +1314,6 @@ module Aws::Route53RecoveryReadiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "__string", # required
-    #         tag_keys: ["__string"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   @return [String]
     #
@@ -1656,14 +1329,6 @@ module Aws::Route53RecoveryReadiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateCellRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cell_name: "__string", # required
-    #         cells: ["__string"], # required
-    #       }
-    #
     # @!attribute [rw] cell_name
     #   @return [String]
     #
@@ -1707,14 +1372,6 @@ module Aws::Route53RecoveryReadiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateReadinessCheckRequest
-    #   data as a hash:
-    #
-    #       {
-    #         readiness_check_name: "__string", # required
-    #         resource_set_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] readiness_check_name
     #   @return [String]
     #
@@ -1754,14 +1411,6 @@ module Aws::Route53RecoveryReadiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateRecoveryGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cells: ["__string"], # required
-    #         recovery_group_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] cells
     #   @return [Array<String>]
     #
@@ -1801,36 +1450,6 @@ module Aws::Route53RecoveryReadiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateResourceSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_set_name: "__string", # required
-    #         resource_set_type: "__stringPatternAWSAZaZ09AZaZ09", # required
-    #         resources: [ # required
-    #           {
-    #             component_id: "__string",
-    #             dns_target_resource: {
-    #               domain_name: "__string",
-    #               hosted_zone_arn: "__string",
-    #               record_set_id: "__string",
-    #               record_type: "__string",
-    #               target_resource: {
-    #                 nlb_resource: {
-    #                   arn: "__string",
-    #                 },
-    #                 r53_resource: {
-    #                   domain_name: "__string",
-    #                   record_set_id: "__string",
-    #                 },
-    #               },
-    #             },
-    #             readiness_scopes: ["__string"],
-    #             resource_arn: "__string",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_set_name
     #   @return [String]
     #

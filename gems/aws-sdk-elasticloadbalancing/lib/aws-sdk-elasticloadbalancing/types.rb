@@ -12,16 +12,6 @@ module Aws::ElasticLoadBalancing
 
     # Information about the `AccessLog` attribute.
     #
-    # @note When making an API call, you may pass AccessLog
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false, # required
-    #         s3_bucket_name: "S3BucketName",
-    #         emit_interval: 1,
-    #         s3_bucket_prefix: "AccessLogPrefix",
-    #       }
-    #
     # @!attribute [rw] enabled
     #   Specifies whether access logs are enabled for the load balancer.
     #   @return [Boolean]
@@ -62,14 +52,6 @@ module Aws::ElasticLoadBalancing
 
     # Contains the parameters for EnableAvailabilityZonesForLoadBalancer.
     #
-    # @note When making an API call, you may pass AddAvailabilityZonesInput
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_name: "AccessPointName", # required
-    #         availability_zones: ["AvailabilityZone"], # required
-    #       }
-    #
     # @!attribute [rw] load_balancer_name
     #   The name of the load balancer.
     #   @return [String]
@@ -104,19 +86,6 @@ module Aws::ElasticLoadBalancing
 
     # Contains the parameters for AddTags.
     #
-    # @note When making an API call, you may pass AddTagsInput
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_names: ["AccessPointName"], # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] load_balancer_names
     #   The name of the load balancer. You can specify one load balancer
     #   only.
@@ -142,14 +111,6 @@ module Aws::ElasticLoadBalancing
     class AddTagsOutput < Aws::EmptyStructure; end
 
     # Information about additional load balancer attributes.
-    #
-    # @note When making an API call, you may pass AdditionalAttribute
-    #   data as a hash:
-    #
-    #       {
-    #         key: "AdditionalAttributeKey",
-    #         value: "AdditionalAttributeValue",
-    #       }
     #
     # @!attribute [rw] key
     #   The name of the attribute.
@@ -200,14 +161,6 @@ module Aws::ElasticLoadBalancing
 
     # Contains the parameters for ApplySecurityGroupsToLoadBalancer.
     #
-    # @note When making an API call, you may pass ApplySecurityGroupsToLoadBalancerInput
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_name: "AccessPointName", # required
-    #         security_groups: ["SecurityGroupId"], # required
-    #       }
-    #
     # @!attribute [rw] load_balancer_name
     #   The name of the load balancer.
     #   @return [String]
@@ -241,14 +194,6 @@ module Aws::ElasticLoadBalancing
     end
 
     # Contains the parameters for AttachLoaBalancerToSubnets.
-    #
-    # @note When making an API call, you may pass AttachLoadBalancerToSubnetsInput
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_name: "AccessPointName", # required
-    #         subnets: ["SubnetId"], # required
-    #       }
     #
     # @!attribute [rw] load_balancer_name
     #   The name of the load balancer.
@@ -312,20 +257,6 @@ module Aws::ElasticLoadBalancing
 
     # Contains the parameters for ConfigureHealthCheck.
     #
-    # @note When making an API call, you may pass ConfigureHealthCheckInput
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_name: "AccessPointName", # required
-    #         health_check: { # required
-    #           target: "HealthCheckTarget", # required
-    #           interval: 1, # required
-    #           timeout: 1, # required
-    #           unhealthy_threshold: 1, # required
-    #           healthy_threshold: 1, # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] load_balancer_name
     #   The name of the load balancer.
     #   @return [String]
@@ -359,14 +290,6 @@ module Aws::ElasticLoadBalancing
 
     # Information about the `ConnectionDraining` attribute.
     #
-    # @note When making an API call, you may pass ConnectionDraining
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false, # required
-    #         timeout: 1,
-    #       }
-    #
     # @!attribute [rw] enabled
     #   Specifies whether connection draining is enabled for the load
     #   balancer.
@@ -388,13 +311,6 @@ module Aws::ElasticLoadBalancing
 
     # Information about the `ConnectionSettings` attribute.
     #
-    # @note When making an API call, you may pass ConnectionSettings
-    #   data as a hash:
-    #
-    #       {
-    #         idle_timeout: 1, # required
-    #       }
-    #
     # @!attribute [rw] idle_timeout
     #   The time, in seconds, that the connection is allowed to be idle (no
     #   data has been sent over the connection) before it is closed by the
@@ -410,32 +326,6 @@ module Aws::ElasticLoadBalancing
     end
 
     # Contains the parameters for CreateLoadBalancer.
-    #
-    # @note When making an API call, you may pass CreateAccessPointInput
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_name: "AccessPointName", # required
-    #         listeners: [ # required
-    #           {
-    #             protocol: "Protocol", # required
-    #             load_balancer_port: 1, # required
-    #             instance_protocol: "Protocol",
-    #             instance_port: 1, # required
-    #             ssl_certificate_id: "SSLCertificateId",
-    #           },
-    #         ],
-    #         availability_zones: ["AvailabilityZone"],
-    #         subnets: ["SubnetId"],
-    #         security_groups: ["SecurityGroupId"],
-    #         scheme: "LoadBalancerScheme",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] load_balancer_name
     #   The name of the load balancer.
@@ -535,15 +425,6 @@ module Aws::ElasticLoadBalancing
 
     # Contains the parameters for CreateAppCookieStickinessPolicy.
     #
-    # @note When making an API call, you may pass CreateAppCookieStickinessPolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_name: "AccessPointName", # required
-    #         policy_name: "PolicyName", # required
-    #         cookie_name: "CookieName", # required
-    #       }
-    #
     # @!attribute [rw] load_balancer_name
     #   The name of the load balancer.
     #   @return [String]
@@ -575,15 +456,6 @@ module Aws::ElasticLoadBalancing
     class CreateAppCookieStickinessPolicyOutput < Aws::EmptyStructure; end
 
     # Contains the parameters for CreateLBCookieStickinessPolicy.
-    #
-    # @note When making an API call, you may pass CreateLBCookieStickinessPolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_name: "AccessPointName", # required
-    #         policy_name: "PolicyName", # required
-    #         cookie_expiration_period: 1,
-    #       }
     #
     # @!attribute [rw] load_balancer_name
     #   The name of the load balancer.
@@ -620,22 +492,6 @@ module Aws::ElasticLoadBalancing
 
     # Contains the parameters for CreateLoadBalancerListeners.
     #
-    # @note When making an API call, you may pass CreateLoadBalancerListenerInput
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_name: "AccessPointName", # required
-    #         listeners: [ # required
-    #           {
-    #             protocol: "Protocol", # required
-    #             load_balancer_port: 1, # required
-    #             instance_protocol: "Protocol",
-    #             instance_port: 1, # required
-    #             ssl_certificate_id: "SSLCertificateId",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] load_balancer_name
     #   The name of the load balancer.
     #   @return [String]
@@ -660,21 +516,6 @@ module Aws::ElasticLoadBalancing
     class CreateLoadBalancerListenerOutput < Aws::EmptyStructure; end
 
     # Contains the parameters for CreateLoadBalancerPolicy.
-    #
-    # @note When making an API call, you may pass CreateLoadBalancerPolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_name: "AccessPointName", # required
-    #         policy_name: "PolicyName", # required
-    #         policy_type_name: "PolicyTypeName", # required
-    #         policy_attributes: [
-    #           {
-    #             attribute_name: "AttributeName",
-    #             attribute_value: "AttributeValue",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] load_balancer_name
     #   The name of the load balancer.
@@ -713,13 +554,6 @@ module Aws::ElasticLoadBalancing
 
     # Information about the `CrossZoneLoadBalancing` attribute.
     #
-    # @note When making an API call, you may pass CrossZoneLoadBalancing
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false, # required
-    #       }
-    #
     # @!attribute [rw] enabled
     #   Specifies whether cross-zone load balancing is enabled for the load
     #   balancer.
@@ -734,13 +568,6 @@ module Aws::ElasticLoadBalancing
     end
 
     # Contains the parameters for DeleteLoadBalancer.
-    #
-    # @note When making an API call, you may pass DeleteAccessPointInput
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_name: "AccessPointName", # required
-    #       }
     #
     # @!attribute [rw] load_balancer_name
     #   The name of the load balancer.
@@ -761,14 +588,6 @@ module Aws::ElasticLoadBalancing
     class DeleteAccessPointOutput < Aws::EmptyStructure; end
 
     # Contains the parameters for DeleteLoadBalancerListeners.
-    #
-    # @note When making an API call, you may pass DeleteLoadBalancerListenerInput
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_name: "AccessPointName", # required
-    #         load_balancer_ports: [1], # required
-    #       }
     #
     # @!attribute [rw] load_balancer_name
     #   The name of the load balancer.
@@ -794,14 +613,6 @@ module Aws::ElasticLoadBalancing
     class DeleteLoadBalancerListenerOutput < Aws::EmptyStructure; end
 
     # Contains the parameters for DeleteLoadBalancerPolicy.
-    #
-    # @note When making an API call, you may pass DeleteLoadBalancerPolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_name: "AccessPointName", # required
-    #         policy_name: "PolicyName", # required
-    #       }
     #
     # @!attribute [rw] load_balancer_name
     #   The name of the load balancer.
@@ -835,18 +646,6 @@ module Aws::ElasticLoadBalancing
 
     # Contains the parameters for DeregisterInstancesFromLoadBalancer.
     #
-    # @note When making an API call, you may pass DeregisterEndPointsInput
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_name: "AccessPointName", # required
-    #         instances: [ # required
-    #           {
-    #             instance_id: "InstanceId",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] load_balancer_name
     #   The name of the load balancer.
     #   @return [String]
@@ -879,15 +678,6 @@ module Aws::ElasticLoadBalancing
     end
 
     # Contains the parameters for DescribeLoadBalancers.
-    #
-    # @note When making an API call, you may pass DescribeAccessPointsInput
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_names: ["AccessPointName"],
-    #         marker: "Marker",
-    #         page_size: 1,
-    #       }
     #
     # @!attribute [rw] load_balancer_names
     #   The names of the load balancers.
@@ -933,14 +723,6 @@ module Aws::ElasticLoadBalancing
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAccountLimitsInput
-    #   data as a hash:
-    #
-    #       {
-    #         marker: "Marker",
-    #         page_size: 1,
-    #       }
-    #
     # @!attribute [rw] marker
     #   The marker for the next set of results. (You received this marker
     #   from a previous call.)
@@ -979,18 +761,6 @@ module Aws::ElasticLoadBalancing
 
     # Contains the parameters for DescribeInstanceHealth.
     #
-    # @note When making an API call, you may pass DescribeEndPointStateInput
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_name: "AccessPointName", # required
-    #         instances: [
-    #           {
-    #             instance_id: "InstanceId",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] load_balancer_name
     #   The name of the load balancer.
     #   @return [String]
@@ -1024,13 +794,6 @@ module Aws::ElasticLoadBalancing
 
     # Contains the parameters for DescribeLoadBalancerAttributes.
     #
-    # @note When making an API call, you may pass DescribeLoadBalancerAttributesInput
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_name: "AccessPointName", # required
-    #       }
-    #
     # @!attribute [rw] load_balancer_name
     #   The name of the load balancer.
     #   @return [String]
@@ -1058,14 +821,6 @@ module Aws::ElasticLoadBalancing
     end
 
     # Contains the parameters for DescribeLoadBalancerPolicies.
-    #
-    # @note When making an API call, you may pass DescribeLoadBalancerPoliciesInput
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_name: "AccessPointName",
-    #         policy_names: ["PolicyName"],
-    #       }
     #
     # @!attribute [rw] load_balancer_name
     #   The name of the load balancer.
@@ -1100,13 +855,6 @@ module Aws::ElasticLoadBalancing
 
     # Contains the parameters for DescribeLoadBalancerPolicyTypes.
     #
-    # @note When making an API call, you may pass DescribeLoadBalancerPolicyTypesInput
-    #   data as a hash:
-    #
-    #       {
-    #         policy_type_names: ["PolicyTypeName"],
-    #       }
-    #
     # @!attribute [rw] policy_type_names
     #   The names of the policy types. If no names are specified, describes
     #   all policy types defined by Elastic Load Balancing.
@@ -1136,13 +884,6 @@ module Aws::ElasticLoadBalancing
 
     # Contains the parameters for DescribeTags.
     #
-    # @note When making an API call, you may pass DescribeTagsInput
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_names: ["AccessPointName"], # required
-    #       }
-    #
     # @!attribute [rw] load_balancer_names
     #   The names of the load balancers.
     #   @return [Array<String>]
@@ -1170,14 +911,6 @@ module Aws::ElasticLoadBalancing
     end
 
     # Contains the parameters for DetachLoadBalancerFromSubnets.
-    #
-    # @note When making an API call, you may pass DetachLoadBalancerFromSubnetsInput
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_name: "AccessPointName", # required
-    #         subnets: ["SubnetId"], # required
-    #       }
     #
     # @!attribute [rw] load_balancer_name
     #   The name of the load balancer.
@@ -1239,17 +972,6 @@ module Aws::ElasticLoadBalancing
 
     # Information about a health check.
     #
-    # @note When making an API call, you may pass HealthCheck
-    #   data as a hash:
-    #
-    #       {
-    #         target: "HealthCheckTarget", # required
-    #         interval: 1, # required
-    #         timeout: 1, # required
-    #         unhealthy_threshold: 1, # required
-    #         healthy_threshold: 1, # required
-    #       }
-    #
     # @!attribute [rw] target
     #   The instance being checked. The protocol is either TCP, HTTP, HTTPS,
     #   or SSL. The range of valid ports is one (1) through 65535.
@@ -1307,13 +1029,6 @@ module Aws::ElasticLoadBalancing
     end
 
     # The ID of an EC2 instance.
-    #
-    # @note When making an API call, you may pass Instance
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId",
-    #       }
     #
     # @!attribute [rw] instance_id
     #   The instance ID.
@@ -1479,17 +1194,6 @@ module Aws::ElasticLoadBalancing
     #
     # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html
     #
-    # @note When making an API call, you may pass Listener
-    #   data as a hash:
-    #
-    #       {
-    #         protocol: "Protocol", # required
-    #         load_balancer_port: 1, # required
-    #         instance_protocol: "Protocol",
-    #         instance_port: 1, # required
-    #         ssl_certificate_id: "SSLCertificateId",
-    #       }
-    #
     # @!attribute [rw] protocol
     #   The load balancer transport protocol to use for routing: HTTP,
     #   HTTPS, TCP, or SSL.
@@ -1572,34 +1276,6 @@ module Aws::ElasticLoadBalancing
     class LoadBalancerAttributeNotFoundException < Aws::EmptyStructure; end
 
     # The attributes for a load balancer.
-    #
-    # @note When making an API call, you may pass LoadBalancerAttributes
-    #   data as a hash:
-    #
-    #       {
-    #         cross_zone_load_balancing: {
-    #           enabled: false, # required
-    #         },
-    #         access_log: {
-    #           enabled: false, # required
-    #           s3_bucket_name: "S3BucketName",
-    #           emit_interval: 1,
-    #           s3_bucket_prefix: "AccessLogPrefix",
-    #         },
-    #         connection_draining: {
-    #           enabled: false, # required
-    #           timeout: 1,
-    #         },
-    #         connection_settings: {
-    #           idle_timeout: 1, # required
-    #         },
-    #         additional_attributes: [
-    #           {
-    #             key: "AdditionalAttributeKey",
-    #             value: "AdditionalAttributeValue",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] cross_zone_load_balancing
     #   If enabled, the load balancer routes the request traffic evenly
@@ -1777,37 +1453,6 @@ module Aws::ElasticLoadBalancing
 
     # Contains the parameters for ModifyLoadBalancerAttributes.
     #
-    # @note When making an API call, you may pass ModifyLoadBalancerAttributesInput
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_name: "AccessPointName", # required
-    #         load_balancer_attributes: { # required
-    #           cross_zone_load_balancing: {
-    #             enabled: false, # required
-    #           },
-    #           access_log: {
-    #             enabled: false, # required
-    #             s3_bucket_name: "S3BucketName",
-    #             emit_interval: 1,
-    #             s3_bucket_prefix: "AccessLogPrefix",
-    #           },
-    #           connection_draining: {
-    #             enabled: false, # required
-    #             timeout: 1,
-    #           },
-    #           connection_settings: {
-    #             idle_timeout: 1, # required
-    #           },
-    #           additional_attributes: [
-    #             {
-    #               key: "AdditionalAttributeKey",
-    #               value: "AdditionalAttributeValue",
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] load_balancer_name
     #   The name of the load balancer.
     #   @return [String]
@@ -1877,14 +1522,6 @@ module Aws::ElasticLoadBalancing
     end
 
     # Information about a policy attribute.
-    #
-    # @note When making an API call, you may pass PolicyAttribute
-    #   data as a hash:
-    #
-    #       {
-    #         attribute_name: "AttributeName",
-    #         attribute_value: "AttributeValue",
-    #       }
     #
     # @!attribute [rw] attribute_name
     #   The name of the attribute.
@@ -2029,18 +1666,6 @@ module Aws::ElasticLoadBalancing
 
     # Contains the parameters for RegisterInstancesWithLoadBalancer.
     #
-    # @note When making an API call, you may pass RegisterEndPointsInput
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_name: "AccessPointName", # required
-    #         instances: [ # required
-    #           {
-    #             instance_id: "InstanceId",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] load_balancer_name
     #   The name of the load balancer.
     #   @return [String]
@@ -2073,14 +1698,6 @@ module Aws::ElasticLoadBalancing
     end
 
     # Contains the parameters for DisableAvailabilityZonesForLoadBalancer.
-    #
-    # @note When making an API call, you may pass RemoveAvailabilityZonesInput
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_name: "AccessPointName", # required
-    #         availability_zones: ["AvailabilityZone"], # required
-    #       }
     #
     # @!attribute [rw] load_balancer_name
     #   The name of the load balancer.
@@ -2115,18 +1732,6 @@ module Aws::ElasticLoadBalancing
 
     # Contains the parameters for RemoveTags.
     #
-    # @note When making an API call, you may pass RemoveTagsInput
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_names: ["AccessPointName"], # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] load_balancer_names
     #   The name of the load balancer. You can specify a maximum of one load
     #   balancer name.
@@ -2152,15 +1757,6 @@ module Aws::ElasticLoadBalancing
     class RemoveTagsOutput < Aws::EmptyStructure; end
 
     # Contains the parameters for SetLoadBalancerListenerSSLCertificate.
-    #
-    # @note When making an API call, you may pass SetLoadBalancerListenerSSLCertificateInput
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_name: "AccessPointName", # required
-    #         load_balancer_port: 1, # required
-    #         ssl_certificate_id: "SSLCertificateId", # required
-    #       }
     #
     # @!attribute [rw] load_balancer_name
     #   The name of the load balancer.
@@ -2192,15 +1788,6 @@ module Aws::ElasticLoadBalancing
 
     # Contains the parameters for SetLoadBalancerPoliciesForBackendServer.
     #
-    # @note When making an API call, you may pass SetLoadBalancerPoliciesForBackendServerInput
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_name: "AccessPointName", # required
-    #         instance_port: 1, # required
-    #         policy_names: ["PolicyName"], # required
-    #       }
-    #
     # @!attribute [rw] load_balancer_name
     #   The name of the load balancer.
     #   @return [String]
@@ -2231,15 +1818,6 @@ module Aws::ElasticLoadBalancing
     class SetLoadBalancerPoliciesForBackendServerOutput < Aws::EmptyStructure; end
 
     # Contains the parameters for SetLoadBalancePoliciesOfListener.
-    #
-    # @note When making an API call, you may pass SetLoadBalancerPoliciesOfListenerInput
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_name: "AccessPointName", # required
-    #         load_balancer_port: 1, # required
-    #         policy_names: ["PolicyName"], # required
-    #       }
     #
     # @!attribute [rw] load_balancer_name
     #   The name of the load balancer.
@@ -2298,14 +1876,6 @@ module Aws::ElasticLoadBalancing
 
     # Information about a tag.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue",
-    #       }
-    #
     # @!attribute [rw] key
     #   The key of the tag.
     #   @return [String]
@@ -2343,13 +1913,6 @@ module Aws::ElasticLoadBalancing
     end
 
     # The key of a tag.
-    #
-    # @note When making an API call, you may pass TagKeyOnly
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey",
-    #       }
     #
     # @!attribute [rw] key
     #   The name of the key.

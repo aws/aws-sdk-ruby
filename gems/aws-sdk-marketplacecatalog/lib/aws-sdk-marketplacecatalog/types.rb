@@ -23,14 +23,6 @@ module Aws::MarketplaceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CancelChangeSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         catalog: "Catalog", # required
-    #         change_set_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] catalog
     #   Required. The catalog related to the request. Fixed value:
     #   `AWSMarketplace`.
@@ -68,25 +60,6 @@ module Aws::MarketplaceCatalog
     end
 
     # An object that contains the `ChangeType`, `Details`, and `Entity`.
-    #
-    # @note When making an API call, you may pass Change
-    #   data as a hash:
-    #
-    #       {
-    #         change_type: "ChangeType", # required
-    #         entity: { # required
-    #           type: "EntityType", # required
-    #           identifier: "Identifier",
-    #         },
-    #         entity_tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         details: "Json", # required
-    #         change_name: "ChangeName",
-    #       }
     #
     # @!attribute [rw] change_type
     #   Change types are single string values that describe your intention
@@ -218,14 +191,6 @@ module Aws::MarketplaceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeChangeSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         catalog: "Catalog", # required
-    #         change_set_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] catalog
     #   Required. The catalog related to the request. Fixed value:
     #   `AWSMarketplace`
@@ -308,14 +273,6 @@ module Aws::MarketplaceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEntityRequest
-    #   data as a hash:
-    #
-    #       {
-    #         catalog: "Catalog", # required
-    #         entity_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] catalog
     #   Required. The catalog related to the request. Fixed value:
     #   `AWSMarketplace`
@@ -371,14 +328,6 @@ module Aws::MarketplaceCatalog
 
     # An entity contains data that describes your product, its supported
     # features, and how it can be used or launched by your customer.
-    #
-    # @note When making an API call, you may pass Entity
-    #   data as a hash:
-    #
-    #       {
-    #         type: "EntityType", # required
-    #         identifier: "Identifier",
-    #       }
     #
     # @!attribute [rw] type
     #   The type of entity.
@@ -466,14 +415,6 @@ module Aws::MarketplaceCatalog
     # A filter object, used to optionally filter results from calls to the
     # `ListEntities` and `ListChangeSets` actions.
     #
-    # @note When making an API call, you may pass Filter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "FilterName",
-    #         value_list: ["FilterValueContent"],
-    #       }
-    #
     # @!attribute [rw] name
     #   For `ListEntities`, the supported value for this is an `EntityId`.
     #
@@ -531,25 +472,6 @@ module Aws::MarketplaceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListChangeSetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         catalog: "Catalog", # required
-    #         filter_list: [
-    #           {
-    #             name: "FilterName",
-    #             value_list: ["FilterValueContent"],
-    #           },
-    #         ],
-    #         sort: {
-    #           sort_by: "SortBy",
-    #           sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #         },
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] catalog
     #   The catalog related to the request. Fixed value: `AWSMarketplace`
     #   @return [String]
@@ -603,26 +525,6 @@ module Aws::MarketplaceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEntitiesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         catalog: "Catalog", # required
-    #         entity_type: "EntityType", # required
-    #         filter_list: [
-    #           {
-    #             name: "FilterName",
-    #             value_list: ["FilterValueContent"],
-    #           },
-    #         ],
-    #         sort: {
-    #           sort_by: "SortBy",
-    #           sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #         },
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] catalog
     #   The catalog related to the request. Fixed value: `AWSMarketplace`
     #   @return [String]
@@ -681,13 +583,6 @@ module Aws::MarketplaceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceARN", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   Required. The Amazon Resource Name (ARN) associated with the
     #   resource you want to list tags on.
@@ -774,14 +669,6 @@ module Aws::MarketplaceCatalog
 
     # An object that contains two attributes, `SortBy` and `SortOrder`.
     #
-    # @note When making an API call, you may pass Sort
-    #   data as a hash:
-    #
-    #       {
-    #         sort_by: "SortBy",
-    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #       }
-    #
     # @!attribute [rw] sort_by
     #   For `ListEntities`, supported attributes include `LastModifiedDate`
     #   (default), `Visibility`, `EntityId`, and `Name`.
@@ -804,38 +691,6 @@ module Aws::MarketplaceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartChangeSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         catalog: "Catalog", # required
-    #         change_set: [ # required
-    #           {
-    #             change_type: "ChangeType", # required
-    #             entity: { # required
-    #               type: "EntityType", # required
-    #               identifier: "Identifier",
-    #             },
-    #             entity_tags: [
-    #               {
-    #                 key: "TagKey", # required
-    #                 value: "TagValue", # required
-    #               },
-    #             ],
-    #             details: "Json", # required
-    #             change_name: "ChangeName",
-    #           },
-    #         ],
-    #         change_set_name: "ChangeSetName",
-    #         client_request_token: "ClientRequestToken",
-    #         change_set_tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] catalog
     #   The catalog related to the request. Fixed value: `AWSMarketplace`
     #   @return [String]
@@ -893,14 +748,6 @@ module Aws::MarketplaceCatalog
 
     # A list of objects specifying each key name and value.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The key associated with the tag.
     #   @return [String]
@@ -918,19 +765,6 @@ module Aws::MarketplaceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceARN", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   Required. The Amazon Resource Name (ARN) associated with the
     #   resource you want to tag.
@@ -967,14 +801,6 @@ module Aws::MarketplaceCatalog
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceARN", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   Required. The Amazon Resource Name (ARN) associated with the
     #   resource you want to remove the tag from.

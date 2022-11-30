@@ -37,19 +37,6 @@ module Aws::SageMakerRuntime
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass InvokeEndpointAsyncInput
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_name: "EndpointName", # required
-    #         content_type: "Header",
-    #         accept: "Header",
-    #         custom_attributes: "CustomAttributesHeader",
-    #         inference_id: "InferenceId",
-    #         input_location: "InputLocationHeader", # required
-    #         request_ttl_seconds: 1,
-    #       }
-    #
     # @!attribute [rw] endpoint_name
     #   The name of the endpoint that you specified when you created the
     #   endpoint using the [ `CreateEndpoint` ][1] API.
@@ -139,22 +126,6 @@ module Aws::SageMakerRuntime
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass InvokeEndpointInput
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_name: "EndpointName", # required
-    #         body: "data", # required
-    #         content_type: "Header",
-    #         accept: "Header",
-    #         custom_attributes: "CustomAttributesHeader",
-    #         target_model: "TargetModelHeader",
-    #         target_variant: "TargetVariantHeader",
-    #         target_container_hostname: "TargetContainerHostnameHeader",
-    #         inference_id: "InferenceId",
-    #         enable_explanations: "EnableExplanationsHeader",
-    #       }
-    #
     # @!attribute [rw] endpoint_name
     #   The name of the endpoint that you specified when you created the
     #   endpoint using the [CreateEndpoint][1] API.

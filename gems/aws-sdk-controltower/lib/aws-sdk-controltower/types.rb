@@ -71,14 +71,6 @@ module Aws::ControlTower
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisableControlInput
-    #   data as a hash:
-    #
-    #       {
-    #         control_identifier: "ControlIdentifier", # required
-    #         target_identifier: "TargetIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] control_identifier
     #   The ARN of the control. Only **Strongly recommended** and
     #   **Elective** controls are permitted, with the exception of the
@@ -111,14 +103,6 @@ module Aws::ControlTower
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass EnableControlInput
-    #   data as a hash:
-    #
-    #       {
-    #         control_identifier: "ControlIdentifier", # required
-    #         target_identifier: "TargetIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] control_identifier
     #   The ARN of the control. Only **Strongly recommended** and
     #   **Elective** controls are permitted, with the exception of the
@@ -167,13 +151,6 @@ module Aws::ControlTower
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetControlOperationInput
-    #   data as a hash:
-    #
-    #       {
-    #         operation_identifier: "OperationIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] operation_identifier
     #   The ID of the asynchronous operation, which is used to track status.
     #   The operation is available for 90 days.
@@ -211,15 +188,6 @@ module Aws::ControlTower
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEnabledControlsInput
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "String",
-    #         target_identifier: "TargetIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] max_results
     #   How many results to return per API call.
     #   @return [Integer]

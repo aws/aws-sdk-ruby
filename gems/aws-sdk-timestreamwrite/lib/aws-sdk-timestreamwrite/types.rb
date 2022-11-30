@@ -37,20 +37,6 @@ module Aws::TimestreamWrite
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDatabaseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         database_name: "ResourceCreateAPIName", # required
-    #         kms_key_id: "StringValue2048",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] database_name
     #   The name of the Timestream database.
     #   @return [String]
@@ -92,35 +78,6 @@ module Aws::TimestreamWrite
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateTableRequest
-    #   data as a hash:
-    #
-    #       {
-    #         database_name: "ResourceCreateAPIName", # required
-    #         table_name: "ResourceCreateAPIName", # required
-    #         retention_properties: {
-    #           memory_store_retention_period_in_hours: 1, # required
-    #           magnetic_store_retention_period_in_days: 1, # required
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         magnetic_store_write_properties: {
-    #           enable_magnetic_store_writes: false, # required
-    #           magnetic_store_rejected_data_location: {
-    #             s3_configuration: {
-    #               bucket_name: "S3BucketName",
-    #               object_key_prefix: "S3ObjectKeyPrefix",
-    #               encryption_option: "SSE_S3", # accepts SSE_S3, SSE_KMS
-    #               kms_key_id: "StringValue2048",
-    #             },
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] database_name
     #   The name of the Timestream database.
     #   @return [String]
@@ -210,13 +167,6 @@ module Aws::TimestreamWrite
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDatabaseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         database_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] database_name
     #   The name of the Timestream database to be deleted.
     #   @return [String]
@@ -229,14 +179,6 @@ module Aws::TimestreamWrite
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteTableRequest
-    #   data as a hash:
-    #
-    #       {
-    #         database_name: "ResourceName", # required
-    #         table_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] database_name
     #   The name of the database where the Timestream database is to be
     #   deleted.
@@ -255,13 +197,6 @@ module Aws::TimestreamWrite
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDatabaseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         database_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] database_name
     #   The name of the Timestream database.
     #   @return [String]
@@ -286,8 +221,6 @@ module Aws::TimestreamWrite
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/DescribeEndpointsRequest AWS API Documentation
     #
     class DescribeEndpointsRequest < Aws::EmptyStructure; end
@@ -305,14 +238,6 @@ module Aws::TimestreamWrite
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeTableRequest
-    #   data as a hash:
-    #
-    #       {
-    #         database_name: "ResourceName", # required
-    #         table_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] database_name
     #   The name of the Timestream database.
     #   @return [String]
@@ -345,15 +270,6 @@ module Aws::TimestreamWrite
     # Dimension represents the meta data attributes of the time series. For
     # example, the name and availability zone of an EC2 instance or the name
     # of the manufacturer of a wind turbine are dimensions.
-    #
-    # @note When making an API call, you may pass Dimension
-    #   data as a hash:
-    #
-    #       {
-    #         name: "SchemaName", # required
-    #         value: "SchemaValue", # required
-    #         dimension_value_type: "VARCHAR", # accepts VARCHAR
-    #       }
     #
     # @!attribute [rw] name
     #   Dimension represents the meta data attributes of the time series.
@@ -432,14 +348,6 @@ module Aws::TimestreamWrite
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDatabasesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The pagination token. To resume pagination, provide the NextToken
     #   value as argument of a subsequent API invocation.
@@ -479,15 +387,6 @@ module Aws::TimestreamWrite
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTablesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         database_name: "ResourceName",
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] database_name
     #   The name of the Timestream database.
     #   @return [String]
@@ -532,13 +431,6 @@ module Aws::TimestreamWrite
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Timestream resource with tags to be listed. This value is an
     #   Amazon Resource Name (ARN).
@@ -567,18 +459,6 @@ module Aws::TimestreamWrite
     # The location to write error reports for records rejected,
     # asynchronously, during magnetic store writes.
     #
-    # @note When making an API call, you may pass MagneticStoreRejectedDataLocation
-    #   data as a hash:
-    #
-    #       {
-    #         s3_configuration: {
-    #           bucket_name: "S3BucketName",
-    #           object_key_prefix: "S3ObjectKeyPrefix",
-    #           encryption_option: "SSE_S3", # accepts SSE_S3, SSE_KMS
-    #           kms_key_id: "StringValue2048",
-    #         },
-    #       }
-    #
     # @!attribute [rw] s3_configuration
     #   Configuration of an S3 location to write error reports for records
     #   rejected, asynchronously, during magnetic store writes.
@@ -594,21 +474,6 @@ module Aws::TimestreamWrite
 
     # The set of properties on a table for configuring magnetic store
     # writes.
-    #
-    # @note When making an API call, you may pass MagneticStoreWriteProperties
-    #   data as a hash:
-    #
-    #       {
-    #         enable_magnetic_store_writes: false, # required
-    #         magnetic_store_rejected_data_location: {
-    #           s3_configuration: {
-    #             bucket_name: "S3BucketName",
-    #             object_key_prefix: "S3ObjectKeyPrefix",
-    #             encryption_option: "SSE_S3", # accepts SSE_S3, SSE_KMS
-    #             kms_key_id: "StringValue2048",
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] enable_magnetic_store_writes
     #   A flag to enable magnetic store writes.
@@ -635,15 +500,6 @@ module Aws::TimestreamWrite
     # MeasureValue is only allowed for type `MULTI`. Using `MULTI` type, you
     # can pass multiple data attributes associated with the same time series
     # in a single record
-    #
-    # @note When making an API call, you may pass MeasureValue
-    #   data as a hash:
-    #
-    #       {
-    #         name: "SchemaName", # required
-    #         value: "StringValue2048", # required
-    #         type: "DOUBLE", # required, accepts DOUBLE, BIGINT, VARCHAR, BOOLEAN, TIMESTAMP, MULTI
-    #       }
     #
     # @!attribute [rw] name
     #   Name of the MeasureValue.
@@ -693,32 +549,6 @@ module Aws::TimestreamWrite
     # the write request is higher than that of the existing record.
     # Timestream defaults to a `Version` of `1` for records without the
     # `Version` field.
-    #
-    # @note When making an API call, you may pass Record
-    #   data as a hash:
-    #
-    #       {
-    #         dimensions: [
-    #           {
-    #             name: "SchemaName", # required
-    #             value: "SchemaValue", # required
-    #             dimension_value_type: "VARCHAR", # accepts VARCHAR
-    #           },
-    #         ],
-    #         measure_name: "SchemaName",
-    #         measure_value: "StringValue2048",
-    #         measure_value_type: "DOUBLE", # accepts DOUBLE, BIGINT, VARCHAR, BOOLEAN, TIMESTAMP, MULTI
-    #         time: "StringValue256",
-    #         time_unit: "MILLISECONDS", # accepts MILLISECONDS, SECONDS, MICROSECONDS, NANOSECONDS
-    #         version: 1,
-    #         measure_values: [
-    #           {
-    #             name: "SchemaName", # required
-    #             value: "StringValue2048", # required
-    #             type: "DOUBLE", # required, accepts DOUBLE, BIGINT, VARCHAR, BOOLEAN, TIMESTAMP, MULTI
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] dimensions
     #   Contains the list of dimensions for time series data points.
@@ -940,14 +770,6 @@ module Aws::TimestreamWrite
     # Retention properties contain the duration for which your time series
     # data must be stored in the magnetic store and the memory store.
     #
-    # @note When making an API call, you may pass RetentionProperties
-    #   data as a hash:
-    #
-    #       {
-    #         memory_store_retention_period_in_hours: 1, # required
-    #         magnetic_store_retention_period_in_days: 1, # required
-    #       }
-    #
     # @!attribute [rw] memory_store_retention_period_in_hours
     #   The duration for which data must be stored in the memory store.
     #   @return [Integer]
@@ -966,16 +788,6 @@ module Aws::TimestreamWrite
     end
 
     # Configuration specifing an S3 location.
-    #
-    # @note When making an API call, you may pass S3Configuration
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_name: "S3BucketName",
-    #         object_key_prefix: "S3ObjectKeyPrefix",
-    #         encryption_option: "SSE_S3", # accepts SSE_S3, SSE_KMS
-    #         kms_key_id: "StringValue2048",
-    #       }
     #
     # @!attribute [rw] bucket_name
     #   &gt;Bucket name of the customer S3 bucket.
@@ -1080,14 +892,6 @@ module Aws::TimestreamWrite
     # you define. Tags enable you to categorize databases and/or tables, for
     # example, by purpose, owner, or environment.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The key of the tag. Tag keys are case sensitive.
     #   @return [String]
@@ -1105,19 +909,6 @@ module Aws::TimestreamWrite
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   Identifies the Timestream resource to which tags should be added.
     #   This value is an Amazon Resource Name (ARN).
@@ -1154,14 +945,6 @@ module Aws::TimestreamWrite
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Timestream resource that the tags will be removed from. This
     #   value is an Amazon Resource Name (ARN).
@@ -1185,14 +968,6 @@ module Aws::TimestreamWrite
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateDatabaseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         database_name: "ResourceName", # required
-    #         kms_key_id: "StringValue2048", # required
-    #       }
-    #
     # @!attribute [rw] database_name
     #   The name of the database.
     #   @return [String]
@@ -1238,29 +1013,6 @@ module Aws::TimestreamWrite
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateTableRequest
-    #   data as a hash:
-    #
-    #       {
-    #         database_name: "ResourceName", # required
-    #         table_name: "ResourceName", # required
-    #         retention_properties: {
-    #           memory_store_retention_period_in_hours: 1, # required
-    #           magnetic_store_retention_period_in_days: 1, # required
-    #         },
-    #         magnetic_store_write_properties: {
-    #           enable_magnetic_store_writes: false, # required
-    #           magnetic_store_rejected_data_location: {
-    #             s3_configuration: {
-    #               bucket_name: "S3BucketName",
-    #               object_key_prefix: "S3ObjectKeyPrefix",
-    #               encryption_option: "SSE_S3", # accepts SSE_S3, SSE_KMS
-    #               kms_key_id: "StringValue2048",
-    #             },
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] database_name
     #   The name of the Timestream database.
     #   @return [String]
@@ -1314,60 +1066,6 @@ module Aws::TimestreamWrite
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass WriteRecordsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         database_name: "ResourceName", # required
-    #         table_name: "ResourceName", # required
-    #         common_attributes: {
-    #           dimensions: [
-    #             {
-    #               name: "SchemaName", # required
-    #               value: "SchemaValue", # required
-    #               dimension_value_type: "VARCHAR", # accepts VARCHAR
-    #             },
-    #           ],
-    #           measure_name: "SchemaName",
-    #           measure_value: "StringValue2048",
-    #           measure_value_type: "DOUBLE", # accepts DOUBLE, BIGINT, VARCHAR, BOOLEAN, TIMESTAMP, MULTI
-    #           time: "StringValue256",
-    #           time_unit: "MILLISECONDS", # accepts MILLISECONDS, SECONDS, MICROSECONDS, NANOSECONDS
-    #           version: 1,
-    #           measure_values: [
-    #             {
-    #               name: "SchemaName", # required
-    #               value: "StringValue2048", # required
-    #               type: "DOUBLE", # required, accepts DOUBLE, BIGINT, VARCHAR, BOOLEAN, TIMESTAMP, MULTI
-    #             },
-    #           ],
-    #         },
-    #         records: [ # required
-    #           {
-    #             dimensions: [
-    #               {
-    #                 name: "SchemaName", # required
-    #                 value: "SchemaValue", # required
-    #                 dimension_value_type: "VARCHAR", # accepts VARCHAR
-    #               },
-    #             ],
-    #             measure_name: "SchemaName",
-    #             measure_value: "StringValue2048",
-    #             measure_value_type: "DOUBLE", # accepts DOUBLE, BIGINT, VARCHAR, BOOLEAN, TIMESTAMP, MULTI
-    #             time: "StringValue256",
-    #             time_unit: "MILLISECONDS", # accepts MILLISECONDS, SECONDS, MICROSECONDS, NANOSECONDS
-    #             version: 1,
-    #             measure_values: [
-    #               {
-    #                 name: "SchemaName", # required
-    #                 value: "StringValue2048", # required
-    #                 type: "DOUBLE", # required, accepts DOUBLE, BIGINT, VARCHAR, BOOLEAN, TIMESTAMP, MULTI
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] database_name
     #   The name of the Timestream database.
     #   @return [String]

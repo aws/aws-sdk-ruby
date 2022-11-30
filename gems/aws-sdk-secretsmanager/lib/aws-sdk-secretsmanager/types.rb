@@ -10,13 +10,6 @@
 module Aws::SecretsManager
   module Types
 
-    # @note When making an API call, you may pass CancelRotateSecretRequest
-    #   data as a hash:
-    #
-    #       {
-    #         secret_id: "SecretIdType", # required
-    #       }
-    #
     # @!attribute [rw] secret_id
     #   The ARN or name of the secret.
     #
@@ -63,31 +56,6 @@ module Aws::SecretsManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateSecretRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "NameType", # required
-    #         client_request_token: "ClientRequestTokenType",
-    #         description: "DescriptionType",
-    #         kms_key_id: "KmsKeyIdType",
-    #         secret_binary: "data",
-    #         secret_string: "SecretStringType",
-    #         tags: [
-    #           {
-    #             key: "TagKeyType",
-    #             value: "TagValueType",
-    #           },
-    #         ],
-    #         add_replica_regions: [
-    #           {
-    #             region: "RegionType",
-    #             kms_key_id: "KmsKeyIdType",
-    #           },
-    #         ],
-    #         force_overwrite_replica_secret: false,
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the new secret.
     #
@@ -328,13 +296,6 @@ module Aws::SecretsManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteResourcePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         secret_id: "SecretIdType", # required
-    #       }
-    #
     # @!attribute [rw] secret_id
     #   The ARN or name of the secret to delete the attached resource-based
     #   policy for.
@@ -374,15 +335,6 @@ module Aws::SecretsManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteSecretRequest
-    #   data as a hash:
-    #
-    #       {
-    #         secret_id: "SecretIdType", # required
-    #         recovery_window_in_days: 1,
-    #         force_delete_without_recovery: false,
-    #       }
-    #
     # @!attribute [rw] secret_id
     #   The ARN or name of the secret to delete.
     #
@@ -456,13 +408,6 @@ module Aws::SecretsManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeSecretRequest
-    #   data as a hash:
-    #
-    #       {
-    #         secret_id: "SecretIdType", # required
-    #       }
-    #
     # @!attribute [rw] secret_id
     #   The ARN or name of the secret.
     #
@@ -665,14 +610,6 @@ module Aws::SecretsManager
     #
     # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage_search-secret.html
     #
-    # @note When making an API call, you may pass Filter
-    #   data as a hash:
-    #
-    #       {
-    #         key: "description", # accepts description, name, tag-key, tag-value, primary-region, all
-    #         values: ["FilterValueStringType"],
-    #       }
-    #
     # @!attribute [rw] key
     #   The following are keys you can use:
     #
@@ -706,20 +643,6 @@ module Aws::SecretsManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRandomPasswordRequest
-    #   data as a hash:
-    #
-    #       {
-    #         password_length: 1,
-    #         exclude_characters: "ExcludeCharactersType",
-    #         exclude_numbers: false,
-    #         exclude_punctuation: false,
-    #         exclude_uppercase: false,
-    #         exclude_lowercase: false,
-    #         include_space: false,
-    #         require_each_included_type: false,
-    #       }
-    #
     # @!attribute [rw] password_length
     #   The length of the password. If you don't include this parameter,
     #   the default length is 32 characters.
@@ -791,13 +714,6 @@ module Aws::SecretsManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetResourcePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         secret_id: "SecretIdType", # required
-    #       }
-    #
     # @!attribute [rw] secret_id
     #   The ARN or name of the secret to retrieve the attached
     #   resource-based policy for.
@@ -849,15 +765,6 @@ module Aws::SecretsManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSecretValueRequest
-    #   data as a hash:
-    #
-    #       {
-    #         secret_id: "SecretIdType", # required
-    #         version_id: "SecretVersionIdType",
-    #         version_stage: "SecretVersionStageType",
-    #       }
-    #
     # @!attribute [rw] secret_id
     #   The ARN or name of the secret to retrieve.
     #
@@ -1048,16 +955,6 @@ module Aws::SecretsManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSecretVersionIdsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         secret_id: "SecretIdType", # required
-    #         max_results: 1,
-    #         next_token: "NextTokenType",
-    #         include_deprecated: false,
-    #       }
-    #
     # @!attribute [rw] secret_id
     #   The ARN or name of the secret whose versions you want to list.
     #
@@ -1132,21 +1029,6 @@ module Aws::SecretsManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSecretsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextTokenType",
-    #         filters: [
-    #           {
-    #             key: "description", # accepts description, name, tag-key, tag-value, primary-region, all
-    #             values: ["FilterValueStringType"],
-    #           },
-    #         ],
-    #         sort_order: "asc", # accepts asc, desc
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The number of results to include in the response.
     #
@@ -1242,15 +1124,6 @@ module Aws::SecretsManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutResourcePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         secret_id: "SecretIdType", # required
-    #         resource_policy: "NonEmptyResourcePolicyType", # required
-    #         block_public_policy: false,
-    #       }
-    #
     # @!attribute [rw] secret_id
     #   The ARN or name of the secret to attach the resource-based policy.
     #
@@ -1304,17 +1177,6 @@ module Aws::SecretsManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutSecretValueRequest
-    #   data as a hash:
-    #
-    #       {
-    #         secret_id: "SecretIdType", # required
-    #         client_request_token: "ClientRequestTokenType",
-    #         secret_binary: "data",
-    #         secret_string: "SecretStringType",
-    #         version_stages: ["SecretVersionStageType"],
-    #       }
-    #
     # @!attribute [rw] secret_id
     #   The ARN or name of the secret to add a new version to.
     #
@@ -1448,14 +1310,6 @@ module Aws::SecretsManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RemoveRegionsFromReplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         secret_id: "SecretIdType", # required
-    #         remove_replica_regions: ["RegionType"], # required
-    #       }
-    #
     # @!attribute [rw] secret_id
     #   The ARN or name of the secret.
     #   @return [String]
@@ -1493,14 +1347,6 @@ module Aws::SecretsManager
     # A custom type that specifies a `Region` and the `KmsKeyId` for a
     # replica secret.
     #
-    # @note When making an API call, you may pass ReplicaRegionType
-    #   data as a hash:
-    #
-    #       {
-    #         region: "RegionType",
-    #         kms_key_id: "KmsKeyIdType",
-    #       }
-    #
     # @!attribute [rw] region
     #   A Region code. For a list of Region codes, see [Name and code of
     #   Regions][1].
@@ -1525,20 +1371,6 @@ module Aws::SecretsManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ReplicateSecretToRegionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         secret_id: "SecretIdType", # required
-    #         add_replica_regions: [ # required
-    #           {
-    #             region: "RegionType",
-    #             kms_key_id: "KmsKeyIdType",
-    #           },
-    #         ],
-    #         force_overwrite_replica_secret: false,
-    #       }
-    #
     # @!attribute [rw] secret_id
     #   The ARN or name of the secret to replicate.
     #   @return [String]
@@ -1642,13 +1474,6 @@ module Aws::SecretsManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RestoreSecretRequest
-    #   data as a hash:
-    #
-    #       {
-    #         secret_id: "SecretIdType", # required
-    #       }
-    #
     # @!attribute [rw] secret_id
     #   The ARN or name of the secret to restore.
     #
@@ -1685,21 +1510,6 @@ module Aws::SecretsManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RotateSecretRequest
-    #   data as a hash:
-    #
-    #       {
-    #         secret_id: "SecretIdType", # required
-    #         client_request_token: "ClientRequestTokenType",
-    #         rotation_lambda_arn: "RotationLambdaARNType",
-    #         rotation_rules: {
-    #           automatically_after_days: 1,
-    #           duration: "DurationType",
-    #           schedule_expression: "ScheduleExpressionType",
-    #         },
-    #         rotate_immediately: false,
-    #       }
-    #
     # @!attribute [rw] secret_id
     #   The ARN or name of the secret to rotate.
     #
@@ -1802,15 +1612,6 @@ module Aws::SecretsManager
     end
 
     # A structure that defines the rotation configuration for the secret.
-    #
-    # @note When making an API call, you may pass RotationRulesType
-    #   data as a hash:
-    #
-    #       {
-    #         automatically_after_days: 1,
-    #         duration: "DurationType",
-    #         schedule_expression: "ScheduleExpressionType",
-    #       }
     #
     # @!attribute [rw] automatically_after_days
     #   The number of days between automatic scheduled rotations of the
@@ -2054,13 +1855,6 @@ module Aws::SecretsManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopReplicationToReplicaRequest
-    #   data as a hash:
-    #
-    #       {
-    #         secret_id: "SecretIdType", # required
-    #       }
-    #
     # @!attribute [rw] secret_id
     #   The ARN of the primary secret.
     #   @return [String]
@@ -2088,14 +1882,6 @@ module Aws::SecretsManager
 
     # A structure that contains information about a tag.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKeyType",
-    #         value: "TagValueType",
-    #       }
-    #
     # @!attribute [rw] key
     #   The key identifier, or name, of the tag.
     #   @return [String]
@@ -2113,19 +1899,6 @@ module Aws::SecretsManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         secret_id: "SecretIdType", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKeyType",
-    #             value: "TagValueType",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] secret_id
     #   The identifier for the secret to attach tags to. You can specify
     #   either the Amazon Resource Name (ARN) or the friendly name of the
@@ -2162,14 +1935,6 @@ module Aws::SecretsManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         secret_id: "SecretIdType", # required
-    #         tag_keys: ["TagKeyType"], # required
-    #       }
-    #
     # @!attribute [rw] secret_id
     #   The ARN or name of the secret.
     #
@@ -2207,18 +1972,6 @@ module Aws::SecretsManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateSecretRequest
-    #   data as a hash:
-    #
-    #       {
-    #         secret_id: "SecretIdType", # required
-    #         client_request_token: "ClientRequestTokenType",
-    #         description: "DescriptionType",
-    #         kms_key_id: "KmsKeyIdType",
-    #         secret_binary: "data",
-    #         secret_string: "SecretStringType",
-    #       }
-    #
     # @!attribute [rw] secret_id
     #   The ARN or name of the secret.
     #
@@ -2346,16 +2099,6 @@ module Aws::SecretsManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateSecretVersionStageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         secret_id: "SecretIdType", # required
-    #         version_stage: "SecretVersionStageType", # required
-    #         remove_from_version_id: "SecretVersionIdType",
-    #         move_to_version_id: "SecretVersionIdType",
-    #       }
-    #
     # @!attribute [rw] secret_id
     #   The ARN or the name of the secret with the version and staging
     #   labelsto modify.
@@ -2419,14 +2162,6 @@ module Aws::SecretsManager
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ValidateResourcePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         secret_id: "SecretIdType",
-    #         resource_policy: "NonEmptyResourcePolicyType", # required
-    #       }
-    #
     # @!attribute [rw] secret_id
     #   This field is reserved for internal use.
     #   @return [String]

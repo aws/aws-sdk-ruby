@@ -12,8 +12,6 @@ module Aws::QLDBSession
 
     # Contains the details of the transaction to abort.
     #
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-session-2019-07-11/AbortTransactionRequest AWS API Documentation
     #
     class AbortTransactionRequest < Aws::EmptyStructure; end
@@ -65,14 +63,6 @@ module Aws::QLDBSession
     end
 
     # Contains the details of the transaction to commit.
-    #
-    # @note When making an API call, you may pass CommitTransactionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         transaction_id: "TransactionId", # required
-    #         commit_digest: "data", # required
-    #       }
     #
     # @!attribute [rw] transaction_id
     #   Specifies the transaction ID of the transaction to commit.
@@ -131,8 +121,6 @@ module Aws::QLDBSession
 
     # Specifies a request to end the session.
     #
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-session-2019-07-11/EndSessionRequest AWS API Documentation
     #
     class EndSessionRequest < Aws::EmptyStructure; end
@@ -152,20 +140,6 @@ module Aws::QLDBSession
     end
 
     # Specifies a request to execute a statement.
-    #
-    # @note When making an API call, you may pass ExecuteStatementRequest
-    #   data as a hash:
-    #
-    #       {
-    #         transaction_id: "TransactionId", # required
-    #         statement: "Statement", # required
-    #         parameters: [
-    #           {
-    #             ion_binary: "data",
-    #             ion_text: "IonText",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] transaction_id
     #   Specifies the transaction ID of the request.
@@ -216,14 +190,6 @@ module Aws::QLDBSession
     end
 
     # Specifies the details of the page to be fetched.
-    #
-    # @note When making an API call, you may pass FetchPageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         transaction_id: "TransactionId", # required
-    #         next_page_token: "PageToken", # required
-    #       }
     #
     # @!attribute [rw] transaction_id
     #   Specifies the transaction ID of the page to be fetched.
@@ -365,40 +331,6 @@ module Aws::QLDBSession
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SendCommandRequest
-    #   data as a hash:
-    #
-    #       {
-    #         session_token: "SessionToken",
-    #         start_session: {
-    #           ledger_name: "LedgerName", # required
-    #         },
-    #         start_transaction: {
-    #         },
-    #         end_session: {
-    #         },
-    #         commit_transaction: {
-    #           transaction_id: "TransactionId", # required
-    #           commit_digest: "data", # required
-    #         },
-    #         abort_transaction: {
-    #         },
-    #         execute_statement: {
-    #           transaction_id: "TransactionId", # required
-    #           statement: "Statement", # required
-    #           parameters: [
-    #             {
-    #               ion_binary: "data",
-    #               ion_text: "IonText",
-    #             },
-    #           ],
-    #         },
-    #         fetch_page: {
-    #           transaction_id: "TransactionId", # required
-    #           next_page_token: "PageToken", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] session_token
     #   Specifies the session token for the current command. A session token
     #   is constant throughout the life of the session.
@@ -498,13 +430,6 @@ module Aws::QLDBSession
 
     # Specifies a request to start a new session.
     #
-    # @note When making an API call, you may pass StartSessionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         ledger_name: "LedgerName", # required
-    #       }
-    #
     # @!attribute [rw] ledger_name
     #   The name of the ledger to start a new session against.
     #   @return [String]
@@ -539,8 +464,6 @@ module Aws::QLDBSession
     end
 
     # Specifies a request to start a transaction.
-    #
-    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-session-2019-07-11/StartTransactionRequest AWS API Documentation
     #
@@ -583,14 +506,6 @@ module Aws::QLDBSession
     end
 
     # A structure that can contain a value in multiple encoding formats.
-    #
-    # @note When making an API call, you may pass ValueHolder
-    #   data as a hash:
-    #
-    #       {
-    #         ion_binary: "data",
-    #         ion_text: "IonText",
-    #       }
     #
     # @!attribute [rw] ion_binary
     #   An Amazon Ion binary value contained in a `ValueHolder` structure.

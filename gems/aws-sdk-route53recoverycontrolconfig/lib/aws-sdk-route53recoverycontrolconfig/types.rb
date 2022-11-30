@@ -92,15 +92,6 @@ module Aws::Route53RecoveryControlConfig
     # evaluation period (wait period). If you don't specify one of the
     # items to update, the item is unchanged.
     #
-    # @note When making an API call, you may pass AssertionRuleUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         name: "__stringMin1Max64PatternS", # required
-    #         safety_rule_arn: "__stringMin1Max256PatternAZaZ09", # required
-    #         wait_period_ms: 1, # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the assertion rule. You can use any non-white space
     #   character in the name.
@@ -251,17 +242,6 @@ module Aws::Route53RecoveryControlConfig
 
     # The properties of a request to create a cluster.
     #
-    # @note When making an API call, you may pass CreateClusterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "__stringMin1Max64PatternS",
-    #         cluster_name: "__stringMin1Max64PatternS", # required
-    #         tags: {
-    #           "__string" => "__stringMin0Max256PatternS",
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive string of up to 64 ASCII characters. To
     #   make an idempotent API request with an action, specify a client
@@ -304,18 +284,6 @@ module Aws::Route53RecoveryControlConfig
     end
 
     # A request to create a control panel.
-    #
-    # @note When making an API call, you may pass CreateControlPanelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "__stringMin1Max64PatternS",
-    #         cluster_arn: "__stringMin1Max256PatternAZaZ09", # required
-    #         control_panel_name: "__stringMin1Max64PatternS", # required
-    #         tags: {
-    #           "__string" => "__stringMin0Max256PatternS",
-    #         },
-    #       }
     #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive string of up to 64 ASCII characters. To
@@ -366,16 +334,6 @@ module Aws::Route53RecoveryControlConfig
     # A request to create a routing control. If you don't specify
     # ControlPanelArn, Amazon Route 53 Application Recovery Controller
     # creates the routing control in DefaultControlPanel.
-    #
-    # @note When making an API call, you may pass CreateRoutingControlRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "__stringMin1Max64PatternS",
-    #         cluster_arn: "__stringMin1Max256PatternAZaZ09", # required
-    #         control_panel_arn: "__stringMin1Max256PatternAZaZ09",
-    #         routing_control_name: "__stringMin1Max64PatternS", # required
-    #       }
     #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive string of up to 64 ASCII characters. To
@@ -428,39 +386,6 @@ module Aws::Route53RecoveryControlConfig
     # Request to create a safety rule. You can create either an assertion
     # rule or a gating rule with a CreateSafetyRuleRequest call.
     #
-    # @note When making an API call, you may pass CreateSafetyRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assertion_rule: {
-    #           asserted_controls: ["__stringMin1Max256PatternAZaZ09"], # required
-    #           control_panel_arn: "__stringMin1Max256PatternAZaZ09", # required
-    #           name: "__stringMin1Max64PatternS", # required
-    #           rule_config: { # required
-    #             inverted: false, # required
-    #             threshold: 1, # required
-    #             type: "ATLEAST", # required, accepts ATLEAST, AND, OR
-    #           },
-    #           wait_period_ms: 1, # required
-    #         },
-    #         client_token: "__stringMin1Max64PatternS",
-    #         gating_rule: {
-    #           control_panel_arn: "__stringMin1Max256PatternAZaZ09", # required
-    #           gating_controls: ["__stringMin1Max256PatternAZaZ09"], # required
-    #           name: "__stringMin1Max64PatternS", # required
-    #           rule_config: { # required
-    #             inverted: false, # required
-    #             threshold: 1, # required
-    #             type: "ATLEAST", # required, accepts ATLEAST, AND, OR
-    #           },
-    #           target_controls: ["__stringMin1Max256PatternAZaZ09"], # required
-    #           wait_period_ms: 1, # required
-    #         },
-    #         tags: {
-    #           "__string" => "__stringMin0Max256PatternS",
-    #         },
-    #       }
-    #
     # @!attribute [rw] assertion_rule
     #   The assertion rule requested.
     #   @return [Types::NewAssertionRule]
@@ -512,13 +437,6 @@ module Aws::Route53RecoveryControlConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteClusterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] cluster_arn
     #   @return [String]
     #
@@ -536,13 +454,6 @@ module Aws::Route53RecoveryControlConfig
     #
     class DeleteClusterResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteControlPanelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         control_panel_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] control_panel_arn
     #   @return [String]
     #
@@ -560,13 +471,6 @@ module Aws::Route53RecoveryControlConfig
     #
     class DeleteControlPanelResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteRoutingControlRequest
-    #   data as a hash:
-    #
-    #       {
-    #         routing_control_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] routing_control_arn
     #   @return [String]
     #
@@ -584,13 +488,6 @@ module Aws::Route53RecoveryControlConfig
     #
     class DeleteRoutingControlResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteSafetyRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         safety_rule_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] safety_rule_arn
     #   @return [String]
     #
@@ -610,13 +507,6 @@ module Aws::Route53RecoveryControlConfig
     #
     class DeleteSafetyRuleResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeClusterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] cluster_arn
     #   @return [String]
     #
@@ -642,13 +532,6 @@ module Aws::Route53RecoveryControlConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeControlPanelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         control_panel_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] control_panel_arn
     #   @return [String]
     #
@@ -674,13 +557,6 @@ module Aws::Route53RecoveryControlConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeRoutingControlRequest
-    #   data as a hash:
-    #
-    #       {
-    #         routing_control_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] routing_control_arn
     #   @return [String]
     #
@@ -706,13 +582,6 @@ module Aws::Route53RecoveryControlConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeSafetyRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         safety_rule_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] safety_rule_arn
     #   @return [String]
     #
@@ -822,15 +691,6 @@ module Aws::Route53RecoveryControlConfig
     # period (wait period). If you don't specify one of the items to
     # update, the item is unchanged.
     #
-    # @note When making an API call, you may pass GatingRuleUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         name: "__stringMin1Max64PatternS", # required
-    #         safety_rule_arn: "__stringMin1Max256PatternAZaZ09", # required
-    #         wait_period_ms: 1, # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name for the gating rule. You can use any non-white space
     #   character in the name.
@@ -871,15 +731,6 @@ module Aws::Route53RecoveryControlConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAssociatedRoute53HealthChecksRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #         routing_control_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [Integer]
     #
@@ -918,14 +769,6 @@ module Aws::Route53RecoveryControlConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListClustersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [Integer]
     #
@@ -960,15 +803,6 @@ module Aws::Route53RecoveryControlConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListControlPanelsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_arn: "__string",
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] cluster_arn
     #   @return [String]
     #
@@ -1007,15 +841,6 @@ module Aws::Route53RecoveryControlConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRoutingControlsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         control_panel_arn: "__string", # required
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] control_panel_arn
     #   @return [String]
     #
@@ -1054,15 +879,6 @@ module Aws::Route53RecoveryControlConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSafetyRulesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         control_panel_arn: "__string", # required
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] control_panel_arn
     #   @return [String]
     #
@@ -1101,13 +917,6 @@ module Aws::Route53RecoveryControlConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   @return [String]
     #
@@ -1134,21 +943,6 @@ module Aws::Route53RecoveryControlConfig
     end
 
     # A new assertion rule for a control panel.
-    #
-    # @note When making an API call, you may pass NewAssertionRule
-    #   data as a hash:
-    #
-    #       {
-    #         asserted_controls: ["__stringMin1Max256PatternAZaZ09"], # required
-    #         control_panel_arn: "__stringMin1Max256PatternAZaZ09", # required
-    #         name: "__stringMin1Max64PatternS", # required
-    #         rule_config: { # required
-    #           inverted: false, # required
-    #           threshold: 1, # required
-    #           type: "ATLEAST", # required, accepts ATLEAST, AND, OR
-    #         },
-    #         wait_period_ms: 1, # required
-    #       }
     #
     # @!attribute [rw] asserted_controls
     #   The routing controls that are part of transactions that are
@@ -1196,22 +990,6 @@ module Aws::Route53RecoveryControlConfig
     end
 
     # A new gating rule for a control panel.
-    #
-    # @note When making an API call, you may pass NewGatingRule
-    #   data as a hash:
-    #
-    #       {
-    #         control_panel_arn: "__stringMin1Max256PatternAZaZ09", # required
-    #         gating_controls: ["__stringMin1Max256PatternAZaZ09"], # required
-    #         name: "__stringMin1Max64PatternS", # required
-    #         rule_config: { # required
-    #           inverted: false, # required
-    #           threshold: 1, # required
-    #           type: "ATLEAST", # required, accepts ATLEAST, AND, OR
-    #         },
-    #         target_controls: ["__stringMin1Max256PatternAZaZ09"], # required
-    #         wait_period_ms: 1, # required
-    #       }
     #
     # @!attribute [rw] control_panel_arn
     #   The Amazon Resource Name (ARN) of the control panel.
@@ -1355,15 +1133,6 @@ module Aws::Route53RecoveryControlConfig
     # specify how many control states must be ON after a transaction
     # completes.
     #
-    # @note When making an API call, you may pass RuleConfig
-    #   data as a hash:
-    #
-    #       {
-    #         inverted: false, # required
-    #         threshold: 1, # required
-    #         type: "ATLEAST", # required, accepts ATLEAST, AND, OR
-    #       }
-    #
     # @!attribute [rw] inverted
     #   Logical negation of the rule. If the rule would usually evaluate
     #   true, it's evaluated as false, and vice versa.
@@ -1405,16 +1174,6 @@ module Aws::Route53RecoveryControlConfig
 
     # Request to tag a resource.
     #
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "__string", # required
-    #         tags: { # required
-    #           "__string" => "__stringMin0Max256PatternS",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   @return [String]
     #
@@ -1450,14 +1209,6 @@ module Aws::Route53RecoveryControlConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "__string", # required
-    #         tag_keys: ["__string"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   @return [String]
     #
@@ -1480,14 +1231,6 @@ module Aws::Route53RecoveryControlConfig
     class UntagResourceResponse < Aws::EmptyStructure; end
 
     # Updates an existing control panel.
-    #
-    # @note When making an API call, you may pass UpdateControlPanelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         control_panel_arn: "__stringMin1Max256PatternAZaZ09", # required
-    #         control_panel_name: "__stringMin1Max64PatternS", # required
-    #       }
     #
     # @!attribute [rw] control_panel_arn
     #   The Amazon Resource Name (ARN) of the control panel.
@@ -1522,14 +1265,6 @@ module Aws::Route53RecoveryControlConfig
 
     # A request to update a routing control.
     #
-    # @note When making an API call, you may pass UpdateRoutingControlRequest
-    #   data as a hash:
-    #
-    #       {
-    #         routing_control_arn: "__stringMin1Max256PatternAZaZ09", # required
-    #         routing_control_name: "__stringMin1Max64PatternS", # required
-    #       }
-    #
     # @!attribute [rw] routing_control_arn
     #   The Amazon Resource Name (ARN) of the routing control.
     #   @return [String]
@@ -1563,22 +1298,6 @@ module Aws::Route53RecoveryControlConfig
 
     # Request to update a safety rule. A safety rule can be an assertion
     # rule or a gating rule.
-    #
-    # @note When making an API call, you may pass UpdateSafetyRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         assertion_rule_update: {
-    #           name: "__stringMin1Max64PatternS", # required
-    #           safety_rule_arn: "__stringMin1Max256PatternAZaZ09", # required
-    #           wait_period_ms: 1, # required
-    #         },
-    #         gating_rule_update: {
-    #           name: "__stringMin1Max64PatternS", # required
-    #           safety_rule_arn: "__stringMin1Max256PatternAZaZ09", # required
-    #           wait_period_ms: 1, # required
-    #         },
-    #       }
     #
     # @!attribute [rw] assertion_rule_update
     #   The assertion rule to update.

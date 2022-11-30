@@ -113,25 +113,6 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ActivateTypeInput
-    #   data as a hash:
-    #
-    #       {
-    #         type: "RESOURCE", # accepts RESOURCE, MODULE, HOOK
-    #         public_type_arn: "ThirdPartyTypeArn",
-    #         publisher_id: "PublisherId",
-    #         type_name: "TypeName",
-    #         type_name_alias: "TypeName",
-    #         auto_update: false,
-    #         logging_config: {
-    #           log_role_arn: "RoleArn", # required
-    #           log_group_name: "LogGroupName", # required
-    #         },
-    #         execution_role_arn: "RoleArn",
-    #         version_bump: "MAJOR", # accepts MAJOR, MINOR
-    #         major_version: 1,
-    #       }
-    #
     # @!attribute [rw] type
     #   The extension type.
     #
@@ -250,14 +231,6 @@ module Aws::CloudFormation
     # automatically deploys to Organizations accounts that are added to a
     # target organization or organizational unit (OU).
     #
-    # @note When making an API call, you may pass AutoDeployment
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false,
-    #         retain_stacks_on_account_removal: false,
-    #       }
-    #
     # @!attribute [rw] enabled
     #   If set to `true`, StackSets automatically deploys additional stack
     #   instances to Organizations accounts that are added to a target
@@ -307,21 +280,6 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchDescribeTypeConfigurationsInput
-    #   data as a hash:
-    #
-    #       {
-    #         type_configuration_identifiers: [ # required
-    #           {
-    #             type_arn: "TypeArn",
-    #             type_configuration_alias: "TypeConfigurationAlias",
-    #             type_configuration_arn: "TypeConfigurationArn",
-    #             type: "RESOURCE", # accepts RESOURCE, MODULE, HOOK
-    #             type_name: "TypeName",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] type_configuration_identifiers
     #   The list of identifiers for the desired extension configurations.
     #   @return [Array<Types::TypeConfigurationIdentifier>]
@@ -373,14 +331,6 @@ module Aws::CloudFormation
     end
 
     # The input for the CancelUpdateStack action.
-    #
-    # @note When making an API call, you may pass CancelUpdateStackInput
-    #   data as a hash:
-    #
-    #       {
-    #         stack_name: "StackName", # required
-    #         client_request_token: "ClientRequestToken",
-    #       }
     #
     # @!attribute [rw] stack_name
     #   The name or the unique stack ID that's associated with the stack.
@@ -627,16 +577,6 @@ module Aws::CloudFormation
 
     # The input for the ContinueUpdateRollback action.
     #
-    # @note When making an API call, you may pass ContinueUpdateRollbackInput
-    #   data as a hash:
-    #
-    #       {
-    #         stack_name: "StackNameOrId", # required
-    #         role_arn: "RoleARN",
-    #         resources_to_skip: ["ResourceToSkip"],
-    #         client_request_token: "ClientRequestToken",
-    #       }
-    #
     # @!attribute [rw] stack_name
     #   The name or the unique ID of the stack that you want to continue
     #   rolling back.
@@ -737,57 +677,6 @@ module Aws::CloudFormation
     class ContinueUpdateRollbackOutput < Aws::EmptyStructure; end
 
     # The input for the CreateChangeSet action.
-    #
-    # @note When making an API call, you may pass CreateChangeSetInput
-    #   data as a hash:
-    #
-    #       {
-    #         stack_name: "StackNameOrId", # required
-    #         template_body: "TemplateBody",
-    #         template_url: "TemplateURL",
-    #         use_previous_template: false,
-    #         parameters: [
-    #           {
-    #             parameter_key: "ParameterKey",
-    #             parameter_value: "ParameterValue",
-    #             use_previous_value: false,
-    #             resolved_value: "ParameterValue",
-    #           },
-    #         ],
-    #         capabilities: ["CAPABILITY_IAM"], # accepts CAPABILITY_IAM, CAPABILITY_NAMED_IAM, CAPABILITY_AUTO_EXPAND
-    #         resource_types: ["ResourceType"],
-    #         role_arn: "RoleARN",
-    #         rollback_configuration: {
-    #           rollback_triggers: [
-    #             {
-    #               arn: "Arn", # required
-    #               type: "Type", # required
-    #             },
-    #           ],
-    #           monitoring_time_in_minutes: 1,
-    #         },
-    #         notification_arns: ["NotificationARN"],
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         change_set_name: "ChangeSetName", # required
-    #         client_token: "ClientToken",
-    #         description: "Description",
-    #         change_set_type: "CREATE", # accepts CREATE, UPDATE, IMPORT
-    #         resources_to_import: [
-    #           {
-    #             resource_type: "ResourceType", # required
-    #             logical_resource_id: "LogicalResourceId", # required
-    #             resource_identifier: { # required
-    #               "ResourceIdentifierPropertyKey" => "ResourceIdentifierPropertyValue",
-    #             },
-    #           },
-    #         ],
-    #         include_nested_stacks: false,
-    #       }
     #
     # @!attribute [rw] stack_name
     #   The name or the unique ID of the stack for which you are creating a
@@ -1060,49 +949,6 @@ module Aws::CloudFormation
     end
 
     # The input for CreateStack action.
-    #
-    # @note When making an API call, you may pass CreateStackInput
-    #   data as a hash:
-    #
-    #       {
-    #         stack_name: "StackName", # required
-    #         template_body: "TemplateBody",
-    #         template_url: "TemplateURL",
-    #         parameters: [
-    #           {
-    #             parameter_key: "ParameterKey",
-    #             parameter_value: "ParameterValue",
-    #             use_previous_value: false,
-    #             resolved_value: "ParameterValue",
-    #           },
-    #         ],
-    #         disable_rollback: false,
-    #         rollback_configuration: {
-    #           rollback_triggers: [
-    #             {
-    #               arn: "Arn", # required
-    #               type: "Type", # required
-    #             },
-    #           ],
-    #           monitoring_time_in_minutes: 1,
-    #         },
-    #         timeout_in_minutes: 1,
-    #         notification_arns: ["NotificationARN"],
-    #         capabilities: ["CAPABILITY_IAM"], # accepts CAPABILITY_IAM, CAPABILITY_NAMED_IAM, CAPABILITY_AUTO_EXPAND
-    #         resource_types: ["ResourceType"],
-    #         role_arn: "RoleARN",
-    #         on_failure: "DO_NOTHING", # accepts DO_NOTHING, ROLLBACK, DELETE
-    #         stack_policy_body: "StackPolicyBody",
-    #         stack_policy_url: "StackPolicyURL",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         client_request_token: "ClientRequestToken",
-    #         enable_termination_protection: false,
-    #       }
     #
     # @!attribute [rw] stack_name
     #   The name that's associated with the stack. The name must be unique
@@ -1403,39 +1249,6 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateStackInstancesInput
-    #   data as a hash:
-    #
-    #       {
-    #         stack_set_name: "StackSetName", # required
-    #         accounts: ["Account"],
-    #         deployment_targets: {
-    #           accounts: ["Account"],
-    #           accounts_url: "AccountsUrl",
-    #           organizational_unit_ids: ["OrganizationalUnitId"],
-    #           account_filter_type: "NONE", # accepts NONE, INTERSECTION, DIFFERENCE, UNION
-    #         },
-    #         regions: ["Region"], # required
-    #         parameter_overrides: [
-    #           {
-    #             parameter_key: "ParameterKey",
-    #             parameter_value: "ParameterValue",
-    #             use_previous_value: false,
-    #             resolved_value: "ParameterValue",
-    #           },
-    #         ],
-    #         operation_preferences: {
-    #           region_concurrency_type: "SEQUENTIAL", # accepts SEQUENTIAL, PARALLEL
-    #           region_order: ["Region"],
-    #           failure_tolerance_count: 1,
-    #           failure_tolerance_percentage: 1,
-    #           max_concurrent_count: 1,
-    #           max_concurrent_percentage: 1,
-    #         },
-    #         operation_id: "ClientRequestToken",
-    #         call_as: "SELF", # accepts SELF, DELEGATED_ADMIN
-    #       }
-    #
     # @!attribute [rw] stack_set_name
     #   The name or unique ID of the stack set that you want to create stack
     #   instances from.
@@ -1587,44 +1400,6 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateStackSetInput
-    #   data as a hash:
-    #
-    #       {
-    #         stack_set_name: "StackSetName", # required
-    #         description: "Description",
-    #         template_body: "TemplateBody",
-    #         template_url: "TemplateURL",
-    #         stack_id: "StackId",
-    #         parameters: [
-    #           {
-    #             parameter_key: "ParameterKey",
-    #             parameter_value: "ParameterValue",
-    #             use_previous_value: false,
-    #             resolved_value: "ParameterValue",
-    #           },
-    #         ],
-    #         capabilities: ["CAPABILITY_IAM"], # accepts CAPABILITY_IAM, CAPABILITY_NAMED_IAM, CAPABILITY_AUTO_EXPAND
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         administration_role_arn: "RoleARN",
-    #         execution_role_name: "ExecutionRoleName",
-    #         permission_model: "SERVICE_MANAGED", # accepts SERVICE_MANAGED, SELF_MANAGED
-    #         auto_deployment: {
-    #           enabled: false,
-    #           retain_stacks_on_account_removal: false,
-    #         },
-    #         call_as: "SELF", # accepts SELF, DELEGATED_ADMIN
-    #         client_request_token: "ClientRequestToken",
-    #         managed_execution: {
-    #           active: false,
-    #         },
-    #       }
-    #
     # @!attribute [rw] stack_set_name
     #   The name to associate with the stack set. The name must be unique in
     #   the Region where you create your stack set.
@@ -1910,15 +1685,6 @@ module Aws::CloudFormation
     #
     class CreatedButModifiedException < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeactivateTypeInput
-    #   data as a hash:
-    #
-    #       {
-    #         type_name: "TypeName",
-    #         type: "RESOURCE", # accepts RESOURCE, MODULE, HOOK
-    #         arn: "PrivateTypeArn",
-    #       }
-    #
     # @!attribute [rw] type_name
     #   The type name of the extension, in this account and region. If you
     #   specified a type name alias when enabling the extension, use the
@@ -1959,14 +1725,6 @@ module Aws::CloudFormation
 
     # The input for the DeleteChangeSet action.
     #
-    # @note When making an API call, you may pass DeleteChangeSetInput
-    #   data as a hash:
-    #
-    #       {
-    #         change_set_name: "ChangeSetNameOrId", # required
-    #         stack_name: "StackNameOrId",
-    #       }
-    #
     # @!attribute [rw] change_set_name
     #   The name or Amazon Resource Name (ARN) of the change set that you
     #   want to delete.
@@ -1993,16 +1751,6 @@ module Aws::CloudFormation
     class DeleteChangeSetOutput < Aws::EmptyStructure; end
 
     # The input for DeleteStack action.
-    #
-    # @note When making an API call, you may pass DeleteStackInput
-    #   data as a hash:
-    #
-    #       {
-    #         stack_name: "StackName", # required
-    #         retain_resources: ["LogicalResourceId"],
-    #         role_arn: "RoleARN",
-    #         client_request_token: "ClientRequestToken",
-    #       }
     #
     # @!attribute [rw] stack_name
     #   The name or the unique stack ID that's associated with the stack.
@@ -2063,32 +1811,6 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteStackInstancesInput
-    #   data as a hash:
-    #
-    #       {
-    #         stack_set_name: "StackSetName", # required
-    #         accounts: ["Account"],
-    #         deployment_targets: {
-    #           accounts: ["Account"],
-    #           accounts_url: "AccountsUrl",
-    #           organizational_unit_ids: ["OrganizationalUnitId"],
-    #           account_filter_type: "NONE", # accepts NONE, INTERSECTION, DIFFERENCE, UNION
-    #         },
-    #         regions: ["Region"], # required
-    #         operation_preferences: {
-    #           region_concurrency_type: "SEQUENTIAL", # accepts SEQUENTIAL, PARALLEL
-    #           region_order: ["Region"],
-    #           failure_tolerance_count: 1,
-    #           failure_tolerance_percentage: 1,
-    #           max_concurrent_count: 1,
-    #           max_concurrent_percentage: 1,
-    #         },
-    #         retain_stacks: false, # required
-    #         operation_id: "ClientRequestToken",
-    #         call_as: "SELF", # accepts SELF, DELEGATED_ADMIN
-    #       }
-    #
     # @!attribute [rw] stack_set_name
     #   The name or unique ID of the stack set that you want to delete stack
     #   instances for.
@@ -2199,14 +1921,6 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteStackSetInput
-    #   data as a hash:
-    #
-    #       {
-    #         stack_set_name: "StackSetName", # required
-    #         call_as: "SELF", # accepts SELF, DELEGATED_ADMIN
-    #       }
-    #
     # @!attribute [rw] stack_set_name
     #   The name or unique ID of the stack set that you're deleting. You
     #   can obtain this value by running ListStackSets.
@@ -2256,16 +1970,6 @@ module Aws::CloudFormation
     # For update operations, you can specify either `Accounts` or
     # `OrganizationalUnitIds`. For create and delete operations, specify
     # `OrganizationalUnitIds`.
-    #
-    # @note When making an API call, you may pass DeploymentTargets
-    #   data as a hash:
-    #
-    #       {
-    #         accounts: ["Account"],
-    #         accounts_url: "AccountsUrl",
-    #         organizational_unit_ids: ["OrganizationalUnitId"],
-    #         account_filter_type: "NONE", # accepts NONE, INTERSECTION, DIFFERENCE, UNION
-    #       }
     #
     # @!attribute [rw] accounts
     #   The names of one or more Amazon Web Services accounts for which you
@@ -2318,16 +2022,6 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeregisterTypeInput
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "PrivateTypeArn",
-    #         type: "RESOURCE", # accepts RESOURCE, MODULE, HOOK
-    #         type_name: "TypeName",
-    #         version_id: "TypeVersionId",
-    #       }
-    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the extension.
     #
@@ -2372,13 +2066,6 @@ module Aws::CloudFormation
 
     # The input for the DescribeAccountLimits action.
     #
-    # @note When making an API call, you may pass DescribeAccountLimitsInput
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] next_token
     #   A string that identifies the next page of limits that you want to
     #   retrieve.
@@ -2414,16 +2101,6 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeChangeSetHooksInput
-    #   data as a hash:
-    #
-    #       {
-    #         change_set_name: "ChangeSetNameOrId", # required
-    #         stack_name: "StackNameOrId",
-    #         next_token: "NextToken",
-    #         logical_resource_id: "LogicalResourceId",
-    #       }
-    #
     # @!attribute [rw] change_set_name
     #   The name or Amazon Resource Name (ARN) of the change set that you
     #   want to describe.
@@ -2499,15 +2176,6 @@ module Aws::CloudFormation
     end
 
     # The input for the DescribeChangeSet action.
-    #
-    # @note When making an API call, you may pass DescribeChangeSetInput
-    #   data as a hash:
-    #
-    #       {
-    #         change_set_name: "ChangeSetNameOrId", # required
-    #         stack_name: "StackNameOrId",
-    #         next_token: "NextToken",
-    #       }
     #
     # @!attribute [rw] change_set_name
     #   The name or Amazon Resource Name (ARN) of the change set that you
@@ -2662,13 +2330,6 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribePublisherInput
-    #   data as a hash:
-    #
-    #       {
-    #         publisher_id: "PublisherId",
-    #       }
-    #
     # @!attribute [rw] publisher_id
     #   The ID of the extension publisher.
     #
@@ -2714,13 +2375,6 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeStackDriftDetectionStatusInput
-    #   data as a hash:
-    #
-    #       {
-    #         stack_drift_detection_id: "StackDriftDetectionId", # required
-    #       }
-    #
     # @!attribute [rw] stack_drift_detection_id
     #   The ID of the drift detection results of this operation.
     #
@@ -2821,14 +2475,6 @@ module Aws::CloudFormation
 
     # The input for DescribeStackEvents action.
     #
-    # @note When making an API call, you may pass DescribeStackEventsInput
-    #   data as a hash:
-    #
-    #       {
-    #         stack_name: "StackName",
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] stack_name
     #   The name or the unique stack ID that's associated with the stack,
     #   which aren't always interchangeable:
@@ -2876,16 +2522,6 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeStackInstanceInput
-    #   data as a hash:
-    #
-    #       {
-    #         stack_set_name: "StackSetName", # required
-    #         stack_instance_account: "Account", # required
-    #         stack_instance_region: "Region", # required
-    #         call_as: "SELF", # accepts SELF, DELEGATED_ADMIN
-    #       }
-    #
     # @!attribute [rw] stack_set_name
     #   The name or the unique stack ID of the stack set that you want to
     #   get stack instance information for.
@@ -2946,16 +2582,6 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeStackResourceDriftsInput
-    #   data as a hash:
-    #
-    #       {
-    #         stack_name: "StackNameOrId", # required
-    #         stack_resource_drift_status_filters: ["IN_SYNC"], # accepts IN_SYNC, MODIFIED, DELETED, NOT_CHECKED
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] stack_name
     #   The name of the stack for which you want drift information.
     #   @return [String]
@@ -3037,14 +2663,6 @@ module Aws::CloudFormation
 
     # The input for DescribeStackResource action.
     #
-    # @note When making an API call, you may pass DescribeStackResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         stack_name: "StackName", # required
-    #         logical_resource_id: "LogicalResourceId", # required
-    #       }
-    #
     # @!attribute [rw] stack_name
     #   The name or the unique stack ID that's associated with the stack,
     #   which aren't always interchangeable:
@@ -3088,15 +2706,6 @@ module Aws::CloudFormation
     end
 
     # The input for DescribeStackResources action.
-    #
-    # @note When making an API call, you may pass DescribeStackResourcesInput
-    #   data as a hash:
-    #
-    #       {
-    #         stack_name: "StackName",
-    #         logical_resource_id: "LogicalResourceId",
-    #         physical_resource_id: "PhysicalResourceId",
-    #       }
     #
     # @!attribute [rw] stack_name
     #   The name or the unique stack ID that is associated with the stack,
@@ -3159,14 +2768,6 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeStackSetInput
-    #   data as a hash:
-    #
-    #       {
-    #         stack_set_name: "StackSetName", # required
-    #         call_as: "SELF", # accepts SELF, DELEGATED_ADMIN
-    #       }
-    #
     # @!attribute [rw] stack_set_name
     #   The name or unique ID of the stack set whose description you want.
     #   @return [String]
@@ -3203,15 +2804,6 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeStackSetOperationInput
-    #   data as a hash:
-    #
-    #       {
-    #         stack_set_name: "StackSetName", # required
-    #         operation_id: "ClientRequestToken", # required
-    #         call_as: "SELF", # accepts SELF, DELEGATED_ADMIN
-    #       }
-    #
     # @!attribute [rw] stack_set_name
     #   The name or the unique stack ID of the stack set for the stack
     #   operation.
@@ -3280,14 +2872,6 @@ module Aws::CloudFormation
 
     # The input for DescribeStacks action.
     #
-    # @note When making an API call, you may pass DescribeStacksInput
-    #   data as a hash:
-    #
-    #       {
-    #         stack_name: "StackName",
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] stack_name
     #   The name or the unique stack ID that's associated with the stack,
     #   which aren't always interchangeable:
@@ -3335,18 +2919,6 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeTypeInput
-    #   data as a hash:
-    #
-    #       {
-    #         type: "RESOURCE", # accepts RESOURCE, MODULE, HOOK
-    #         type_name: "TypeName",
-    #         arn: "TypeArn",
-    #         version_id: "TypeVersionId",
-    #         publisher_id: "PublisherId",
-    #         public_version_number: "PublicVersionNumber",
-    #       }
-    #
     # @!attribute [rw] type
     #   The kind of extension.
     #
@@ -3738,13 +3310,6 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeTypeRegistrationInput
-    #   data as a hash:
-    #
-    #       {
-    #         registration_token: "RegistrationToken", # required
-    #       }
-    #
     # @!attribute [rw] registration_token
     #   The identifier for this registration request.
     #
@@ -3794,14 +3359,6 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DetectStackDriftInput
-    #   data as a hash:
-    #
-    #       {
-    #         stack_name: "StackNameOrId", # required
-    #         logical_resource_ids: ["LogicalResourceId"],
-    #       }
-    #
     # @!attribute [rw] stack_name
     #   The name of the stack for which you want to detect drift.
     #   @return [String]
@@ -3836,14 +3393,6 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DetectStackResourceDriftInput
-    #   data as a hash:
-    #
-    #       {
-    #         stack_name: "StackNameOrId", # required
-    #         logical_resource_id: "LogicalResourceId", # required
-    #       }
-    #
     # @!attribute [rw] stack_name
     #   The name of the stack to which the resource belongs.
     #   @return [String]
@@ -3876,23 +3425,6 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DetectStackSetDriftInput
-    #   data as a hash:
-    #
-    #       {
-    #         stack_set_name: "StackSetNameOrId", # required
-    #         operation_preferences: {
-    #           region_concurrency_type: "SEQUENTIAL", # accepts SEQUENTIAL, PARALLEL
-    #           region_order: ["Region"],
-    #           failure_tolerance_count: 1,
-    #           failure_tolerance_percentage: 1,
-    #           max_concurrent_count: 1,
-    #           max_concurrent_percentage: 1,
-    #         },
-    #         operation_id: "ClientRequestToken",
-    #         call_as: "SELF", # accepts SELF, DELEGATED_ADMIN
-    #       }
-    #
     # @!attribute [rw] stack_set_name
     #   The name of the stack set on which to perform the drift detection
     #   operation.
@@ -3968,22 +3500,6 @@ module Aws::CloudFormation
 
     # The input for an EstimateTemplateCost action.
     #
-    # @note When making an API call, you may pass EstimateTemplateCostInput
-    #   data as a hash:
-    #
-    #       {
-    #         template_body: "TemplateBody",
-    #         template_url: "TemplateURL",
-    #         parameters: [
-    #           {
-    #             parameter_key: "ParameterKey",
-    #             parameter_value: "ParameterValue",
-    #             use_previous_value: false,
-    #             resolved_value: "ParameterValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] template_body
     #   Structure containing the template body with a minimum length of 1
     #   byte and a maximum length of 51,200 bytes. (For more information, go
@@ -4041,16 +3557,6 @@ module Aws::CloudFormation
     end
 
     # The input for the ExecuteChangeSet action.
-    #
-    # @note When making an API call, you may pass ExecuteChangeSetInput
-    #   data as a hash:
-    #
-    #       {
-    #         change_set_name: "ChangeSetNameOrId", # required
-    #         stack_name: "StackNameOrId",
-    #         client_request_token: "ClientRequestToken",
-    #         disable_rollback: false,
-    #       }
     #
     # @!attribute [rw] change_set_name
     #   The name or Amazon Resource Name (ARN) of the change set that you
@@ -4127,13 +3633,6 @@ module Aws::CloudFormation
 
     # The input for the GetStackPolicy action.
     #
-    # @note When making an API call, you may pass GetStackPolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         stack_name: "StackName", # required
-    #       }
-    #
     # @!attribute [rw] stack_name
     #   The name or unique stack ID that's associated with the stack whose
     #   policy you want to get.
@@ -4168,15 +3667,6 @@ module Aws::CloudFormation
     end
 
     # The input for a GetTemplate action.
-    #
-    # @note When making an API call, you may pass GetTemplateInput
-    #   data as a hash:
-    #
-    #       {
-    #         stack_name: "StackName",
-    #         change_set_name: "ChangeSetNameOrId",
-    #         template_stage: "Original", # accepts Original, Processed
-    #       }
     #
     # @!attribute [rw] stack_name
     #   The name or the unique stack ID that's associated with the stack,
@@ -4249,17 +3739,6 @@ module Aws::CloudFormation
     end
 
     # The input for the GetTemplateSummary action.
-    #
-    # @note When making an API call, you may pass GetTemplateSummaryInput
-    #   data as a hash:
-    #
-    #       {
-    #         template_body: "TemplateBody",
-    #         template_url: "TemplateURL",
-    #         stack_name: "StackNameOrId",
-    #         stack_set_name: "StackSetNameOrId",
-    #         call_as: "SELF", # accepts SELF, DELEGATED_ADMIN
-    #       }
     #
     # @!attribute [rw] template_body
     #   Structure containing the template body with a minimum length of 1
@@ -4419,26 +3898,6 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ImportStacksToStackSetInput
-    #   data as a hash:
-    #
-    #       {
-    #         stack_set_name: "StackSetNameOrId", # required
-    #         stack_ids: ["StackId"],
-    #         stack_ids_url: "StackIdsUrl",
-    #         organizational_unit_ids: ["OrganizationalUnitId"],
-    #         operation_preferences: {
-    #           region_concurrency_type: "SEQUENTIAL", # accepts SEQUENTIAL, PARALLEL
-    #           region_order: ["Region"],
-    #           failure_tolerance_count: 1,
-    #           failure_tolerance_percentage: 1,
-    #           max_concurrent_count: 1,
-    #           max_concurrent_percentage: 1,
-    #         },
-    #         operation_id: "ClientRequestToken",
-    #         call_as: "SELF", # accepts SELF, DELEGATED_ADMIN
-    #       }
-    #
     # @!attribute [rw] stack_set_name
     #   The name of the stack set. The name must be unique in the Region
     #   where you create your stack set.
@@ -4563,14 +4022,6 @@ module Aws::CloudFormation
 
     # The input for the ListChangeSets action.
     #
-    # @note When making an API call, you may pass ListChangeSetsInput
-    #   data as a hash:
-    #
-    #       {
-    #         stack_name: "StackNameOrId", # required
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] stack_name
     #   The name or the Amazon Resource Name (ARN) of the stack for which
     #   you want to list change sets.
@@ -4612,13 +4063,6 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListExportsInput
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] next_token
     #   A string (provided by the ListExports response output) that
     #   identifies the next page of exported output values that you asked to
@@ -4652,14 +4096,6 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListImportsInput
-    #   data as a hash:
-    #
-    #       {
-    #         export_name: "ExportName", # required
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] export_name
     #   The name of the exported output value. CloudFormation returns the
     #   stack names that are importing this value.
@@ -4699,24 +4135,6 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListStackInstancesInput
-    #   data as a hash:
-    #
-    #       {
-    #         stack_set_name: "StackSetName", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         filters: [
-    #           {
-    #             name: "DETAILED_STATUS", # accepts DETAILED_STATUS, LAST_OPERATION_ID
-    #             values: "StackInstanceFilterValues",
-    #           },
-    #         ],
-    #         stack_instance_account: "Account",
-    #         stack_instance_region: "Region",
-    #         call_as: "SELF", # accepts SELF, DELEGATED_ADMIN
-    #       }
-    #
     # @!attribute [rw] stack_set_name
     #   The name or unique ID of the stack set that you want to list stack
     #   instances for.
@@ -4812,14 +4230,6 @@ module Aws::CloudFormation
 
     # The input for the ListStackResource action.
     #
-    # @note When making an API call, you may pass ListStackResourcesInput
-    #   data as a hash:
-    #
-    #       {
-    #         stack_name: "StackName", # required
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] stack_name
     #   The name or the unique stack ID that is associated with the stack,
     #   which aren't always interchangeable:
@@ -4867,23 +4277,6 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListStackSetOperationResultsInput
-    #   data as a hash:
-    #
-    #       {
-    #         stack_set_name: "StackSetName", # required
-    #         operation_id: "ClientRequestToken", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         call_as: "SELF", # accepts SELF, DELEGATED_ADMIN
-    #         filters: [
-    #           {
-    #             name: "OPERATION_RESULT_STATUS", # accepts OPERATION_RESULT_STATUS
-    #             values: "OperationResultFilterValues",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] stack_set_name
     #   The name or unique ID of the stack set that you want to get
     #   operation results for.
@@ -4973,16 +4366,6 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListStackSetOperationsInput
-    #   data as a hash:
-    #
-    #       {
-    #         stack_set_name: "StackSetName", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         call_as: "SELF", # accepts SELF, DELEGATED_ADMIN
-    #       }
-    #
     # @!attribute [rw] stack_set_name
     #   The name or unique ID of the stack set that you want to get
     #   operation summaries for.
@@ -5061,16 +4444,6 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListStackSetsInput
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         status: "ACTIVE", # accepts ACTIVE, DELETED
-    #         call_as: "SELF", # accepts SELF, DELEGATED_ADMIN
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If the previous paginated request didn't return all the remaining
     #   results, the response object's `NextToken` parameter value is set
@@ -5150,14 +4523,6 @@ module Aws::CloudFormation
 
     # The input for ListStacks action.
     #
-    # @note When making an API call, you may pass ListStacksInput
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         stack_status_filter: ["CREATE_IN_PROGRESS"], # accepts CREATE_IN_PROGRESS, CREATE_FAILED, CREATE_COMPLETE, ROLLBACK_IN_PROGRESS, ROLLBACK_FAILED, ROLLBACK_COMPLETE, DELETE_IN_PROGRESS, DELETE_FAILED, DELETE_COMPLETE, UPDATE_IN_PROGRESS, UPDATE_COMPLETE_CLEANUP_IN_PROGRESS, UPDATE_COMPLETE, UPDATE_FAILED, UPDATE_ROLLBACK_IN_PROGRESS, UPDATE_ROLLBACK_FAILED, UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS, UPDATE_ROLLBACK_COMPLETE, REVIEW_IN_PROGRESS, IMPORT_IN_PROGRESS, IMPORT_COMPLETE, IMPORT_ROLLBACK_IN_PROGRESS, IMPORT_ROLLBACK_FAILED, IMPORT_ROLLBACK_COMPLETE
-    #       }
-    #
     # @!attribute [rw] next_token
     #   A string that identifies the next page of stacks that you want to
     #   retrieve.
@@ -5201,18 +4566,6 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTypeRegistrationsInput
-    #   data as a hash:
-    #
-    #       {
-    #         type: "RESOURCE", # accepts RESOURCE, MODULE, HOOK
-    #         type_name: "TypeName",
-    #         type_arn: "TypeArn",
-    #         registration_status_filter: "COMPLETE", # accepts COMPLETE, IN_PROGRESS, FAILED
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] type
     #   The kind of extension.
     #
@@ -5293,19 +4646,6 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTypeVersionsInput
-    #   data as a hash:
-    #
-    #       {
-    #         type: "RESOURCE", # accepts RESOURCE, MODULE, HOOK
-    #         type_name: "TypeName",
-    #         arn: "TypeArn",
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         deprecated_status: "LIVE", # accepts LIVE, DEPRECATED
-    #         publisher_id: "PublisherId",
-    #       }
-    #
     # @!attribute [rw] type
     #   The kind of the extension.
     #
@@ -5403,23 +4743,6 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTypesInput
-    #   data as a hash:
-    #
-    #       {
-    #         visibility: "PUBLIC", # accepts PUBLIC, PRIVATE
-    #         provisioning_type: "NON_PROVISIONABLE", # accepts NON_PROVISIONABLE, IMMUTABLE, FULLY_MUTABLE
-    #         deprecated_status: "LIVE", # accepts LIVE, DEPRECATED
-    #         type: "RESOURCE", # accepts RESOURCE, MODULE, HOOK
-    #         filters: {
-    #           category: "REGISTERED", # accepts REGISTERED, ACTIVATED, THIRD_PARTY, AWS_TYPES
-    #           publisher_id: "PublisherId",
-    #           type_name_prefix: "TypeNamePrefix",
-    #         },
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] visibility
     #   The scope at which the extensions are visible and usable in
     #   CloudFormation operations.
@@ -5545,14 +4868,6 @@ module Aws::CloudFormation
 
     # Contains logging configuration information for an extension.
     #
-    # @note When making an API call, you may pass LoggingConfig
-    #   data as a hash:
-    #
-    #       {
-    #         log_role_arn: "RoleArn", # required
-    #         log_group_name: "LogGroupName", # required
-    #       }
-    #
     # @!attribute [rw] log_role_arn
     #   The Amazon Resource Name (ARN) of the role that CloudFormation
     #   should assume when sending log entries to CloudWatch Logs.
@@ -5574,13 +4889,6 @@ module Aws::CloudFormation
 
     # Describes whether StackSets performs non-conflicting operations
     # concurrently and queues conflicting operations.
-    #
-    # @note When making an API call, you may pass ManagedExecution
-    #   data as a hash:
-    #
-    #       {
-    #         active: false,
-    #       }
     #
     # @!attribute [rw] active
     #   When `true`, StackSets performs non-conflicting operations
@@ -5680,14 +4988,6 @@ module Aws::CloudFormation
 
     # The status that operation results are filtered by.
     #
-    # @note When making an API call, you may pass OperationResultFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "OPERATION_RESULT_STATUS", # accepts OPERATION_RESULT_STATUS
-    #         values: "OperationResultFilterValues",
-    #       }
-    #
     # @!attribute [rw] name
     #   The type of filter to apply.
     #   @return [String]
@@ -5746,16 +5046,6 @@ module Aws::CloudFormation
     end
 
     # The Parameter data type.
-    #
-    # @note When making an API call, you may pass Parameter
-    #   data as a hash:
-    #
-    #       {
-    #         parameter_key: "ParameterKey",
-    #         parameter_value: "ParameterValue",
-    #         use_previous_value: false,
-    #         resolved_value: "ParameterValue",
-    #       }
     #
     # @!attribute [rw] parameter_key
     #   The key associated with the parameter. If you don't specify a key
@@ -5922,16 +5212,6 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PublishTypeInput
-    #   data as a hash:
-    #
-    #       {
-    #         type: "RESOURCE", # accepts RESOURCE, MODULE, HOOK
-    #         arn: "PrivateTypeArn",
-    #         type_name: "TypeName",
-    #         public_version_number: "PublicVersionNumber",
-    #       }
-    #
     # @!attribute [rw] type
     #   The type of the extension.
     #
@@ -5996,19 +5276,6 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RecordHandlerProgressInput
-    #   data as a hash:
-    #
-    #       {
-    #         bearer_token: "ClientToken", # required
-    #         operation_status: "PENDING", # required, accepts PENDING, IN_PROGRESS, SUCCESS, FAILED
-    #         current_operation_status: "PENDING", # accepts PENDING, IN_PROGRESS, SUCCESS, FAILED
-    #         status_message: "StatusMessage",
-    #         error_code: "NotUpdatable", # accepts NotUpdatable, InvalidRequest, AccessDenied, InvalidCredentials, AlreadyExists, NotFound, ResourceConflict, Throttling, ServiceLimitExceeded, NotStabilized, GeneralServiceException, ServiceInternalError, NetworkFailure, InternalFailure, InvalidTypeConfiguration, HandlerInternalFailure, NonCompliant, Unknown, UnsupportedTarget
-    #         resource_model: "ResourceModel",
-    #         client_request_token: "ClientRequestToken",
-    #       }
-    #
     # @!attribute [rw] bearer_token
     #   Reserved for use by the [CloudFormation CLI][1].
     #
@@ -6083,14 +5350,6 @@ module Aws::CloudFormation
     #
     class RecordHandlerProgressOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass RegisterPublisherInput
-    #   data as a hash:
-    #
-    #       {
-    #         accept_terms_and_conditions: false,
-    #         connection_arn: "ConnectionArn",
-    #       }
-    #
     # @!attribute [rw] accept_terms_and_conditions
     #   Whether you accept the [Terms and Conditions][1] for publishing
     #   extensions in the CloudFormation registry. You must accept the terms
@@ -6140,21 +5399,6 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RegisterTypeInput
-    #   data as a hash:
-    #
-    #       {
-    #         type: "RESOURCE", # accepts RESOURCE, MODULE, HOOK
-    #         type_name: "TypeName", # required
-    #         schema_handler_package: "S3Url", # required
-    #         logging_config: {
-    #           log_role_arn: "RoleArn", # required
-    #           log_group_name: "LogGroupName", # required
-    #         },
-    #         execution_role_arn: "RoleArn",
-    #         client_request_token: "RequestToken",
-    #       }
-    #
     # @!attribute [rw] type
     #   The kind of extension.
     #   @return [String]
@@ -6560,17 +5804,6 @@ module Aws::CloudFormation
 
     # Describes the target resource of an import operation.
     #
-    # @note When making an API call, you may pass ResourceToImport
-    #   data as a hash:
-    #
-    #       {
-    #         resource_type: "ResourceType", # required
-    #         logical_resource_id: "LogicalResourceId", # required
-    #         resource_identifier: { # required
-    #           "ResourceIdentifierPropertyKey" => "ResourceIdentifierPropertyValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_type
     #   The type of resource to import into your stack, such as
     #   `AWS::S3::Bucket`. For a list of supported resource types, see
@@ -6616,19 +5849,6 @@ module Aws::CloudFormation
     #
     #
     # [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-rollback-triggers.html
-    #
-    # @note When making an API call, you may pass RollbackConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         rollback_triggers: [
-    #           {
-    #             arn: "Arn", # required
-    #             type: "Type", # required
-    #           },
-    #         ],
-    #         monitoring_time_in_minutes: 1,
-    #       }
     #
     # @!attribute [rw] rollback_triggers
     #   The triggers to monitor during stack creation or update actions.
@@ -6689,15 +5909,6 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RollbackStackInput
-    #   data as a hash:
-    #
-    #       {
-    #         stack_name: "StackNameOrId", # required
-    #         role_arn: "RoleARN",
-    #         client_request_token: "ClientRequestToken",
-    #       }
-    #
     # @!attribute [rw] stack_name
     #   The name that's associated with the stack.
     #   @return [String]
@@ -6739,14 +5950,6 @@ module Aws::CloudFormation
     # period afterwards, CloudFormation rolls back the entire stack
     # operation.
     #
-    # @note When making an API call, you may pass RollbackTrigger
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "Arn", # required
-    #         type: "Type", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the rollback trigger.
     #
@@ -6775,15 +5978,6 @@ module Aws::CloudFormation
     end
 
     # The input for the SetStackPolicy action.
-    #
-    # @note When making an API call, you may pass SetStackPolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         stack_name: "StackName", # required
-    #         stack_policy_body: "StackPolicyBody",
-    #         stack_policy_url: "StackPolicyURL",
-    #       }
     #
     # @!attribute [rw] stack_name
     #   The name or unique stack ID that you want to associate a policy
@@ -6819,17 +6013,6 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SetTypeConfigurationInput
-    #   data as a hash:
-    #
-    #       {
-    #         type_arn: "TypeArn",
-    #         configuration: "TypeConfiguration", # required
-    #         configuration_alias: "TypeConfigurationAlias",
-    #         type_name: "TypeName",
-    #         type: "RESOURCE", # accepts RESOURCE, MODULE, HOOK
-    #       }
-    #
     # @!attribute [rw] type_arn
     #   The Amazon Resource Name (ARN) for the extension, in this account
     #   and region.
@@ -6914,16 +6097,6 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SetTypeDefaultVersionInput
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "PrivateTypeArn",
-    #         type: "RESOURCE", # accepts RESOURCE, MODULE, HOOK
-    #         type_name: "TypeName",
-    #         version_id: "TypeVersionId",
-    #       }
-    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the extension for which you want
     #   version summary information.
@@ -6968,16 +6141,6 @@ module Aws::CloudFormation
     class SetTypeDefaultVersionOutput < Aws::EmptyStructure; end
 
     # The input for the SignalResource action.
-    #
-    # @note When making an API call, you may pass SignalResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         stack_name: "StackNameOrId", # required
-    #         logical_resource_id: "LogicalResourceId", # required
-    #         unique_id: "ResourceSignalUniqueId", # required
-    #         status: "SUCCESS", # required, accepts SUCCESS, FAILURE
-    #       }
     #
     # @!attribute [rw] stack_name
     #   The stack name or unique stack ID that includes the resource that
@@ -7536,14 +6699,6 @@ module Aws::CloudFormation
     end
 
     # The filter to apply to stack instances
-    #
-    # @note When making an API call, you may pass StackInstanceFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "DETAILED_STATUS", # accepts DETAILED_STATUS, LAST_OPERATION_ID
-    #         values: "StackInstanceFilterValues",
-    #       }
     #
     # @!attribute [rw] name
     #   The type of filter to apply.
@@ -8565,18 +7720,6 @@ module Aws::CloudFormation
     #
     # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options
     #
-    # @note When making an API call, you may pass StackSetOperationPreferences
-    #   data as a hash:
-    #
-    #       {
-    #         region_concurrency_type: "SEQUENTIAL", # accepts SEQUENTIAL, PARALLEL
-    #         region_order: ["Region"],
-    #         failure_tolerance_count: 1,
-    #         failure_tolerance_percentage: 1,
-    #         max_concurrent_count: 1,
-    #         max_concurrent_percentage: 1,
-    #       }
-    #
     # @!attribute [rw] region_concurrency_type
     #   The concurrency type of deploying StackSets operations in Regions,
     #   could be in parallel or one Region at a time.
@@ -9042,15 +8185,6 @@ module Aws::CloudFormation
     #
     class StaleRequestException < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass StopStackSetOperationInput
-    #   data as a hash:
-    #
-    #       {
-    #         stack_set_name: "StackSetName", # required
-    #         operation_id: "ClientRequestToken", # required
-    #         call_as: "SELF", # accepts SELF, DELEGATED_ADMIN
-    #       }
-    #
     # @!attribute [rw] stack_set_name
     #   The name or unique ID of the stack set that you want to stop the
     #   operation for.
@@ -9099,14 +8233,6 @@ module Aws::CloudFormation
 
     # The Tag type enables you to specify a key-value pair that can be used
     # to store information about an CloudFormation stack.
-    #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
     #
     # @!attribute [rw] key
     #   *Required*. A string used to identify this tag. You can specify a
@@ -9158,17 +8284,6 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TestTypeInput
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "TypeArn",
-    #         type: "RESOURCE", # accepts RESOURCE, MODULE, HOOK
-    #         type_name: "TypeName",
-    #         version_id: "TypeVersionId",
-    #         log_delivery_bucket: "S3Bucket",
-    #       }
-    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the extension.
     #
@@ -9328,17 +8443,6 @@ module Aws::CloudFormation
     # Identifying information for the configuration of a CloudFormation
     # extension.
     #
-    # @note When making an API call, you may pass TypeConfigurationIdentifier
-    #   data as a hash:
-    #
-    #       {
-    #         type_arn: "TypeArn",
-    #         type_configuration_alias: "TypeConfigurationAlias",
-    #         type_configuration_arn: "TypeConfigurationArn",
-    #         type: "RESOURCE", # accepts RESOURCE, MODULE, HOOK
-    #         type_name: "TypeName",
-    #       }
-    #
     # @!attribute [rw] type_arn
     #   The Amazon Resource Name (ARN) for the extension, in this account
     #   and region.
@@ -9391,15 +8495,6 @@ module Aws::CloudFormation
     class TypeConfigurationNotFoundException < Aws::EmptyStructure; end
 
     # Filter criteria to use in determining which extensions to return.
-    #
-    # @note When making an API call, you may pass TypeFilters
-    #   data as a hash:
-    #
-    #       {
-    #         category: "REGISTERED", # accepts REGISTERED, ACTIVATED, THIRD_PARTY, AWS_TYPES
-    #         publisher_id: "PublisherId",
-    #         type_name_prefix: "TypeNamePrefix",
-    #       }
     #
     # @!attribute [rw] category
     #   The category of extensions to return.
@@ -9683,49 +8778,6 @@ module Aws::CloudFormation
     end
 
     # The input for an UpdateStack action.
-    #
-    # @note When making an API call, you may pass UpdateStackInput
-    #   data as a hash:
-    #
-    #       {
-    #         stack_name: "StackName", # required
-    #         template_body: "TemplateBody",
-    #         template_url: "TemplateURL",
-    #         use_previous_template: false,
-    #         stack_policy_during_update_body: "StackPolicyDuringUpdateBody",
-    #         stack_policy_during_update_url: "StackPolicyDuringUpdateURL",
-    #         parameters: [
-    #           {
-    #             parameter_key: "ParameterKey",
-    #             parameter_value: "ParameterValue",
-    #             use_previous_value: false,
-    #             resolved_value: "ParameterValue",
-    #           },
-    #         ],
-    #         capabilities: ["CAPABILITY_IAM"], # accepts CAPABILITY_IAM, CAPABILITY_NAMED_IAM, CAPABILITY_AUTO_EXPAND
-    #         resource_types: ["ResourceType"],
-    #         role_arn: "RoleARN",
-    #         rollback_configuration: {
-    #           rollback_triggers: [
-    #             {
-    #               arn: "Arn", # required
-    #               type: "Type", # required
-    #             },
-    #           ],
-    #           monitoring_time_in_minutes: 1,
-    #         },
-    #         stack_policy_body: "StackPolicyBody",
-    #         stack_policy_url: "StackPolicyURL",
-    #         notification_arns: ["NotificationARN"],
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         disable_rollback: false,
-    #         client_request_token: "ClientRequestToken",
-    #       }
     #
     # @!attribute [rw] stack_name
     #   The name or unique stack ID of the stack to update.
@@ -10023,39 +9075,6 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateStackInstancesInput
-    #   data as a hash:
-    #
-    #       {
-    #         stack_set_name: "StackSetNameOrId", # required
-    #         accounts: ["Account"],
-    #         deployment_targets: {
-    #           accounts: ["Account"],
-    #           accounts_url: "AccountsUrl",
-    #           organizational_unit_ids: ["OrganizationalUnitId"],
-    #           account_filter_type: "NONE", # accepts NONE, INTERSECTION, DIFFERENCE, UNION
-    #         },
-    #         regions: ["Region"], # required
-    #         parameter_overrides: [
-    #           {
-    #             parameter_key: "ParameterKey",
-    #             parameter_value: "ParameterValue",
-    #             use_previous_value: false,
-    #             resolved_value: "ParameterValue",
-    #           },
-    #         ],
-    #         operation_preferences: {
-    #           region_concurrency_type: "SEQUENTIAL", # accepts SEQUENTIAL, PARALLEL
-    #           region_order: ["Region"],
-    #           failure_tolerance_count: 1,
-    #           failure_tolerance_percentage: 1,
-    #           max_concurrent_count: 1,
-    #           max_concurrent_percentage: 1,
-    #         },
-    #         operation_id: "ClientRequestToken",
-    #         call_as: "SELF", # accepts SELF, DELEGATED_ADMIN
-    #       }
-    #
     # @!attribute [rw] stack_set_name
     #   The name or unique ID of the stack set associated with the stack
     #   instances.
@@ -10216,60 +9235,6 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateStackSetInput
-    #   data as a hash:
-    #
-    #       {
-    #         stack_set_name: "StackSetName", # required
-    #         description: "Description",
-    #         template_body: "TemplateBody",
-    #         template_url: "TemplateURL",
-    #         use_previous_template: false,
-    #         parameters: [
-    #           {
-    #             parameter_key: "ParameterKey",
-    #             parameter_value: "ParameterValue",
-    #             use_previous_value: false,
-    #             resolved_value: "ParameterValue",
-    #           },
-    #         ],
-    #         capabilities: ["CAPABILITY_IAM"], # accepts CAPABILITY_IAM, CAPABILITY_NAMED_IAM, CAPABILITY_AUTO_EXPAND
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         operation_preferences: {
-    #           region_concurrency_type: "SEQUENTIAL", # accepts SEQUENTIAL, PARALLEL
-    #           region_order: ["Region"],
-    #           failure_tolerance_count: 1,
-    #           failure_tolerance_percentage: 1,
-    #           max_concurrent_count: 1,
-    #           max_concurrent_percentage: 1,
-    #         },
-    #         administration_role_arn: "RoleARN",
-    #         execution_role_name: "ExecutionRoleName",
-    #         deployment_targets: {
-    #           accounts: ["Account"],
-    #           accounts_url: "AccountsUrl",
-    #           organizational_unit_ids: ["OrganizationalUnitId"],
-    #           account_filter_type: "NONE", # accepts NONE, INTERSECTION, DIFFERENCE, UNION
-    #         },
-    #         permission_model: "SERVICE_MANAGED", # accepts SERVICE_MANAGED, SELF_MANAGED
-    #         auto_deployment: {
-    #           enabled: false,
-    #           retain_stacks_on_account_removal: false,
-    #         },
-    #         operation_id: "ClientRequestToken",
-    #         accounts: ["Account"],
-    #         regions: ["Region"],
-    #         call_as: "SELF", # accepts SELF, DELEGATED_ADMIN
-    #         managed_execution: {
-    #           active: false,
-    #         },
-    #       }
-    #
     # @!attribute [rw] stack_set_name
     #   The name or unique ID of the stack set that you want to update.
     #   @return [String]
@@ -10649,14 +9614,6 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateTerminationProtectionInput
-    #   data as a hash:
-    #
-    #       {
-    #         enable_termination_protection: false, # required
-    #         stack_name: "StackNameOrId", # required
-    #       }
-    #
     # @!attribute [rw] enable_termination_protection
     #   Whether to enable termination protection on the specified stack.
     #   @return [Boolean]
@@ -10688,14 +9645,6 @@ module Aws::CloudFormation
     end
 
     # The input for ValidateTemplate action.
-    #
-    # @note When making an API call, you may pass ValidateTemplateInput
-    #   data as a hash:
-    #
-    #       {
-    #         template_body: "TemplateBody",
-    #         template_url: "TemplateURL",
-    #       }
     #
     # @!attribute [rw] template_body
     #   Structure containing the template body with a minimum length of 1

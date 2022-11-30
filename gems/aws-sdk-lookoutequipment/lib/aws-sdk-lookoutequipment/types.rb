@@ -77,24 +77,6 @@ module Aws::LookoutEquipment
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDatasetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_name: "DatasetName", # required
-    #         dataset_schema: {
-    #           inline_data_schema: "InlineDataSchema",
-    #         },
-    #         server_side_kms_key_id: "NameOrArn",
-    #         client_token: "IdempotenceToken", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] dataset_name
     #   The name of the dataset being created.
     #   @return [String]
@@ -155,43 +137,6 @@ module Aws::LookoutEquipment
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateInferenceSchedulerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         model_name: "ModelName", # required
-    #         inference_scheduler_name: "InferenceSchedulerName", # required
-    #         data_delay_offset_in_minutes: 1,
-    #         data_upload_frequency: "PT5M", # required, accepts PT5M, PT10M, PT15M, PT30M, PT1H
-    #         data_input_configuration: { # required
-    #           s3_input_configuration: {
-    #             bucket: "S3Bucket", # required
-    #             prefix: "S3Prefix",
-    #           },
-    #           input_time_zone_offset: "TimeZoneOffset",
-    #           inference_input_name_configuration: {
-    #             timestamp_format: "FileNameTimestampFormat",
-    #             component_timestamp_delimiter: "ComponentTimestampDelimiter",
-    #           },
-    #         },
-    #         data_output_configuration: { # required
-    #           s3_output_configuration: { # required
-    #             bucket: "S3Bucket", # required
-    #             prefix: "S3Prefix",
-    #           },
-    #           kms_key_id: "NameOrArn",
-    #         },
-    #         role_arn: "IamRoleArn", # required
-    #         server_side_kms_key_id: "NameOrArn",
-    #         client_token: "IdempotenceToken", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] model_name
     #   The name of the previously trained ML model being used to create the
     #   inference scheduler.
@@ -307,21 +252,6 @@ module Aws::LookoutEquipment
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateLabelGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         label_group_name: "LabelGroupName", # required
-    #         fault_codes: ["FaultCode"],
-    #         client_token: "IdempotenceToken", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] label_group_name
     #   Names a group of labels.
     #
@@ -383,20 +313,6 @@ module Aws::LookoutEquipment
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateLabelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         label_group_name: "LabelGroupName", # required
-    #         start_time: Time.now, # required
-    #         end_time: Time.now, # required
-    #         rating: "ANOMALY", # required, accepts ANOMALY, NO_ANOMALY, NEUTRAL
-    #         fault_code: "FaultCode",
-    #         notes: "Comments",
-    #         equipment: "Equipment",
-    #         client_token: "IdempotenceToken", # required
-    #       }
-    #
     # @!attribute [rw] label_group_name
     #   The name of a group of labels.
     #
@@ -473,41 +389,6 @@ module Aws::LookoutEquipment
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateModelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         model_name: "ModelName", # required
-    #         dataset_name: "DatasetIdentifier", # required
-    #         dataset_schema: {
-    #           inline_data_schema: "InlineDataSchema",
-    #         },
-    #         labels_input_configuration: {
-    #           s3_input_configuration: {
-    #             bucket: "S3Bucket", # required
-    #             prefix: "S3Prefix",
-    #           },
-    #           label_group_name: "LabelGroupName",
-    #         },
-    #         client_token: "IdempotenceToken", # required
-    #         training_data_start_time: Time.now,
-    #         training_data_end_time: Time.now,
-    #         evaluation_data_start_time: Time.now,
-    #         evaluation_data_end_time: Time.now,
-    #         role_arn: "IamRoleArn",
-    #         data_pre_processing_configuration: {
-    #           target_sampling_rate: "PT1S", # accepts PT1S, PT5S, PT10S, PT15S, PT30S, PT1M, PT5M, PT10M, PT15M, PT30M, PT1H
-    #         },
-    #         server_side_kms_key_id: "NameOrArn",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         off_condition: "OffCondition",
-    #       }
-    #
     # @!attribute [rw] model_name
     #   The name for the ML model to be created.
     #   @return [String]
@@ -673,13 +554,6 @@ module Aws::LookoutEquipment
     # is therefore *PT1S*, the value for a 15 minute rate is *PT15M*, and
     # the value for a 1 hour rate is *PT1H*
     #
-    # @note When making an API call, you may pass DataPreProcessingConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         target_sampling_rate: "PT1S", # accepts PT1S, PT5S, PT10S, PT15S, PT30S, PT1M, PT5M, PT10M, PT15M, PT30M, PT1H
-    #       }
-    #
     # @!attribute [rw] target_sampling_rate
     #   The sampling rate of the data after post processing by Amazon
     #   Lookout for Equipment. For example, if you provide data that has
@@ -748,13 +622,6 @@ module Aws::LookoutEquipment
     # Provides information about the data schema used with the given
     # dataset.
     #
-    # @note When making an API call, you may pass DatasetSchema
-    #   data as a hash:
-    #
-    #       {
-    #         inline_data_schema: "InlineDataSchema",
-    #       }
-    #
     # @!attribute [rw] inline_data_schema
     #   @return [String]
     #
@@ -797,13 +664,6 @@ module Aws::LookoutEquipment
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDatasetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_name: "DatasetIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] dataset_name
     #   The name of the dataset to be deleted.
     #   @return [String]
@@ -816,13 +676,6 @@ module Aws::LookoutEquipment
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteInferenceSchedulerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         inference_scheduler_name: "InferenceSchedulerIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] inference_scheduler_name
     #   The name of the inference scheduler to be deleted.
     #   @return [String]
@@ -835,13 +688,6 @@ module Aws::LookoutEquipment
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteLabelGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         label_group_name: "LabelGroupName", # required
-    #       }
-    #
     # @!attribute [rw] label_group_name
     #   The name of the label group that you want to delete. Data in this
     #   field will be retained for service usage. Follow best practices for
@@ -856,14 +702,6 @@ module Aws::LookoutEquipment
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteLabelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         label_group_name: "LabelGroupName", # required
-    #         label_id: "LabelId", # required
-    #       }
-    #
     # @!attribute [rw] label_group_name
     #   The name of the label group that contains the label that you want to
     #   delete. Data in this field will be retained for service usage.
@@ -883,13 +721,6 @@ module Aws::LookoutEquipment
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteModelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         model_name: "ModelName", # required
-    #       }
-    #
     # @!attribute [rw] model_name
     #   The name of the ML model to be deleted.
     #   @return [String]
@@ -902,13 +733,6 @@ module Aws::LookoutEquipment
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDataIngestionJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "IngestionJobId", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The job ID of the data ingestion job.
     #   @return [String]
@@ -1005,13 +829,6 @@ module Aws::LookoutEquipment
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDatasetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_name: "DatasetIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] dataset_name
     #   The name of the dataset to be described.
     #   @return [String]
@@ -1110,13 +927,6 @@ module Aws::LookoutEquipment
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeInferenceSchedulerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         inference_scheduler_name: "InferenceSchedulerIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] inference_scheduler_name
     #   The name of the inference scheduler being described.
     #   @return [String]
@@ -1230,13 +1040,6 @@ module Aws::LookoutEquipment
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeLabelGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         label_group_name: "LabelGroupName", # required
-    #       }
-    #
     # @!attribute [rw] label_group_name
     #   Returns the name of the label group.
     #   @return [String]
@@ -1282,14 +1085,6 @@ module Aws::LookoutEquipment
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeLabelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         label_group_name: "LabelGroupName", # required
-    #         label_id: "LabelId", # required
-    #       }
-    #
     # @!attribute [rw] label_group_name
     #   Returns the name of the group containing the label.
     #   @return [String]
@@ -1370,13 +1165,6 @@ module Aws::LookoutEquipment
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeModelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         model_name: "ModelName", # required
-    #       }
-    #
     # @!attribute [rw] model_name
     #   The name of the ML model to be described.
     #   @return [String]
@@ -1669,21 +1457,6 @@ module Aws::LookoutEquipment
     # Specifies configuration information for the input data for the
     # inference, including Amazon S3 location of input data..
     #
-    # @note When making an API call, you may pass InferenceInputConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         s3_input_configuration: {
-    #           bucket: "S3Bucket", # required
-    #           prefix: "S3Prefix",
-    #         },
-    #         input_time_zone_offset: "TimeZoneOffset",
-    #         inference_input_name_configuration: {
-    #           timestamp_format: "FileNameTimestampFormat",
-    #           component_timestamp_delimiter: "ComponentTimestampDelimiter",
-    #         },
-    #       }
-    #
     # @!attribute [rw] s3_input_configuration
     #   Specifies configuration information for the input data for the
     #   inference, including Amazon S3 location of input data.
@@ -1712,14 +1485,6 @@ module Aws::LookoutEquipment
     # Specifies configuration information for the input data for the
     # inference, including timestamp format and delimiter.
     #
-    # @note When making an API call, you may pass InferenceInputNameConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         timestamp_format: "FileNameTimestampFormat",
-    #         component_timestamp_delimiter: "ComponentTimestampDelimiter",
-    #       }
-    #
     # @!attribute [rw] timestamp_format
     #   The format of the timestamp, whether Epoch time, or standard, with
     #   or without hyphens (-).
@@ -1740,17 +1505,6 @@ module Aws::LookoutEquipment
 
     # Specifies configuration information for the output results from for
     # the inference, including KMS key ID and output S3 location.
-    #
-    # @note When making an API call, you may pass InferenceOutputConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         s3_output_configuration: { # required
-    #           bucket: "S3Bucket", # required
-    #           prefix: "S3Prefix",
-    #         },
-    #         kms_key_id: "NameOrArn",
-    #       }
     #
     # @!attribute [rw] s3_output_configuration
     #   Specifies configuration information for the output results from for
@@ -1774,14 +1528,6 @@ module Aws::LookoutEquipment
     # Specifies configuration information for the input data for the
     # inference, including input data S3 location.
     #
-    # @note When making an API call, you may pass InferenceS3InputConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         bucket: "S3Bucket", # required
-    #         prefix: "S3Prefix",
-    #       }
-    #
     # @!attribute [rw] bucket
     #   The bucket containing the input dataset for the inference.
     #   @return [String]
@@ -1802,14 +1548,6 @@ module Aws::LookoutEquipment
 
     # Specifies configuration information for the output results from the
     # inference, including output S3 location.
-    #
-    # @note When making an API call, you may pass InferenceS3OutputConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         bucket: "S3Bucket", # required
-    #         prefix: "S3Prefix",
-    #       }
     #
     # @!attribute [rw] bucket
     #   The bucket containing the output results from the inference
@@ -1927,17 +1665,6 @@ module Aws::LookoutEquipment
     # Specifies configuration information for the input data for the data
     # ingestion job, including input data S3 location.
     #
-    # @note When making an API call, you may pass IngestionInputConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         s3_input_configuration: { # required
-    #           bucket: "S3Bucket", # required
-    #           prefix: "S3Prefix",
-    #           key_pattern: "KeyPattern",
-    #         },
-    #       }
-    #
     # @!attribute [rw] s3_input_configuration
     #   The location information for the S3 bucket used for input data for
     #   the data ingestion.
@@ -1953,15 +1680,6 @@ module Aws::LookoutEquipment
 
     # Specifies S3 configuration information for the input data for the data
     # ingestion job.
-    #
-    # @note When making an API call, you may pass IngestionS3InputConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         bucket: "S3Bucket", # required
-    #         prefix: "S3Prefix",
-    #         key_pattern: "KeyPattern",
-    #       }
     #
     # @!attribute [rw] bucket
     #   The name of the S3 bucket used for the input data for the data
@@ -2136,17 +1854,6 @@ module Aws::LookoutEquipment
     # Contains the configuration information for the S3 location being used
     # to hold label data.
     #
-    # @note When making an API call, you may pass LabelsInputConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         s3_input_configuration: {
-    #           bucket: "S3Bucket", # required
-    #           prefix: "S3Prefix",
-    #         },
-    #         label_group_name: "LabelGroupName",
-    #       }
-    #
     # @!attribute [rw] s3_input_configuration
     #   Contains location information for the S3 location being used for
     #   label data.
@@ -2167,14 +1874,6 @@ module Aws::LookoutEquipment
 
     # The location information (prefix and bucket name) for the s3 location
     # being used for label data.
-    #
-    # @note When making an API call, you may pass LabelsS3InputConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         bucket: "S3Bucket", # required
-    #         prefix: "S3Prefix",
-    #       }
     #
     # @!attribute [rw] bucket
     #   The name of the S3 bucket holding the label data.
@@ -2219,16 +1918,6 @@ module Aws::LookoutEquipment
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDataIngestionJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_name: "DatasetName",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         status: "IN_PROGRESS", # accepts IN_PROGRESS, SUCCESS, FAILED
-    #       }
-    #
     # @!attribute [rw] dataset_name
     #   The name of the dataset being used for the data ingestion job.
     #   @return [String]
@@ -2276,15 +1965,6 @@ module Aws::LookoutEquipment
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDatasetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         dataset_name_begins_with: "DatasetName",
-    #       }
-    #
     # @!attribute [rw] next_token
     #   An opaque pagination token indicating where to continue the listing
     #   of datasets.
@@ -2327,17 +2007,6 @@ module Aws::LookoutEquipment
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListInferenceEventsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         inference_scheduler_name: "InferenceSchedulerIdentifier", # required
-    #         interval_start_time: Time.now, # required
-    #         interval_end_time: Time.now, # required
-    #       }
-    #
     # @!attribute [rw] next_token
     #   An opaque pagination token indicating where to continue the listing
     #   of inference events.
@@ -2394,18 +2063,6 @@ module Aws::LookoutEquipment
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListInferenceExecutionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         inference_scheduler_name: "InferenceSchedulerIdentifier", # required
-    #         data_start_time_after: Time.now,
-    #         data_end_time_before: Time.now,
-    #         status: "IN_PROGRESS", # accepts IN_PROGRESS, SUCCESS, FAILED
-    #       }
-    #
     # @!attribute [rw] next_token
     #   An opaque pagination token indicating where to continue the listing
     #   of inference executions.
@@ -2468,16 +2125,6 @@ module Aws::LookoutEquipment
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListInferenceSchedulersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         inference_scheduler_name_begins_with: "InferenceSchedulerIdentifier",
-    #         model_name: "ModelName",
-    #       }
-    #
     # @!attribute [rw] next_token
     #   An opaque pagination token indicating where to continue the listing
     #   of inference schedulers.
@@ -2526,15 +2173,6 @@ module Aws::LookoutEquipment
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListLabelGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         label_group_name_begins_with: "LabelGroupName",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] label_group_name_begins_with
     #   The beginning of the name of the label groups to be listed.
     #   @return [String]
@@ -2576,19 +2214,6 @@ module Aws::LookoutEquipment
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListLabelsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         label_group_name: "LabelGroupName", # required
-    #         interval_start_time: Time.now,
-    #         interval_end_time: Time.now,
-    #         fault_code: "FaultCode",
-    #         equipment: "Equipment",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] label_group_name
     #   Retruns the name of the label group.
     #   @return [String]
@@ -2652,17 +2277,6 @@ module Aws::LookoutEquipment
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListModelsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         status: "IN_PROGRESS", # accepts IN_PROGRESS, SUCCESS, FAILED
-    #         model_name_begins_with: "ModelName",
-    #         dataset_name_begins_with: "DatasetName",
-    #       }
-    #
     # @!attribute [rw] next_token
     #   An opaque pagination token indicating where to continue the listing
     #   of ML models.
@@ -2716,16 +2330,6 @@ module Aws::LookoutEquipment
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSensorStatisticsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_name: "DatasetName", # required
-    #         ingestion_job_id: "IngestionJobId",
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] dataset_name
     #   The name of the dataset associated with the list of Sensor
     #   Statistics.
@@ -2779,13 +2383,6 @@ module Aws::LookoutEquipment
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource (such as the dataset
     #   or model) that is the focus of the `ListTagsForResource` operation.
@@ -3077,22 +2674,6 @@ module Aws::LookoutEquipment
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartDataIngestionJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_name: "DatasetIdentifier", # required
-    #         ingestion_input_configuration: { # required
-    #           s3_input_configuration: { # required
-    #             bucket: "S3Bucket", # required
-    #             prefix: "S3Prefix",
-    #             key_pattern: "KeyPattern",
-    #           },
-    #         },
-    #         role_arn: "IamRoleArn", # required
-    #         client_token: "IdempotenceToken", # required
-    #       }
-    #
     # @!attribute [rw] dataset_name
     #   The name of the dataset being used by the data ingestion job.
     #   @return [String]
@@ -3143,13 +2724,6 @@ module Aws::LookoutEquipment
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartInferenceSchedulerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         inference_scheduler_name: "InferenceSchedulerIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] inference_scheduler_name
     #   The name of the inference scheduler to be started.
     #   @return [String]
@@ -3196,13 +2770,6 @@ module Aws::LookoutEquipment
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopInferenceSchedulerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         inference_scheduler_name: "InferenceSchedulerIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] inference_scheduler_name
     #   The name of the inference scheduler to be stopped.
     #   @return [String]
@@ -3252,14 +2819,6 @@ module Aws::LookoutEquipment
 
     # A tag is a key-value pair that can be added to a resource as metadata.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The key for the specified tag.
     #   @return [String]
@@ -3277,19 +2836,6 @@ module Aws::LookoutEquipment
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceArn", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the specific resource to which the
     #   tag should be associated.
@@ -3342,14 +2888,6 @@ module Aws::LookoutEquipment
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource to which the tag is
     #   currently associated.
@@ -3373,34 +2911,6 @@ module Aws::LookoutEquipment
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateInferenceSchedulerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         inference_scheduler_name: "InferenceSchedulerIdentifier", # required
-    #         data_delay_offset_in_minutes: 1,
-    #         data_upload_frequency: "PT5M", # accepts PT5M, PT10M, PT15M, PT30M, PT1H
-    #         data_input_configuration: {
-    #           s3_input_configuration: {
-    #             bucket: "S3Bucket", # required
-    #             prefix: "S3Prefix",
-    #           },
-    #           input_time_zone_offset: "TimeZoneOffset",
-    #           inference_input_name_configuration: {
-    #             timestamp_format: "FileNameTimestampFormat",
-    #             component_timestamp_delimiter: "ComponentTimestampDelimiter",
-    #           },
-    #         },
-    #         data_output_configuration: {
-    #           s3_output_configuration: { # required
-    #             bucket: "S3Bucket", # required
-    #             prefix: "S3Prefix",
-    #           },
-    #           kms_key_id: "NameOrArn",
-    #         },
-    #         role_arn: "IamRoleArn",
-    #       }
-    #
     # @!attribute [rw] inference_scheduler_name
     #   The name of the inference scheduler to be updated.
     #   @return [String]
@@ -3455,14 +2965,6 @@ module Aws::LookoutEquipment
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateLabelGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         label_group_name: "LabelGroupName", # required
-    #         fault_codes: ["FaultCode"],
-    #       }
-    #
     # @!attribute [rw] label_group_name
     #   The name of the label group to be updated.
     #   @return [String]

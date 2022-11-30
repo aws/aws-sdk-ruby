@@ -10,16 +10,6 @@
 module Aws::WorkLink
   module Types
 
-    # @note When making an API call, you may pass AssociateDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_arn: "FleetArn", # required
-    #         domain_name: "DomainName", # required
-    #         display_name: "DisplayName",
-    #         acm_certificate_arn: "AcmCertificateArn", # required
-    #       }
-    #
     # @!attribute [rw] fleet_arn
     #   The Amazon Resource Name (ARN) of the fleet.
     #   @return [String]
@@ -52,15 +42,6 @@ module Aws::WorkLink
     #
     class AssociateDomainResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass AssociateWebsiteAuthorizationProviderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_arn: "FleetArn", # required
-    #         authorization_provider_type: "SAML", # required, accepts SAML
-    #         domain_name: "DomainName",
-    #       }
-    #
     # @!attribute [rw] fleet_arn
     #   The ARN of the fleet.
     #   @return [String]
@@ -96,15 +77,6 @@ module Aws::WorkLink
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateWebsiteCertificateAuthorityRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_arn: "FleetArn", # required
-    #         certificate: "Certificate", # required
-    #         display_name: "DisplayName",
-    #       }
-    #
     # @!attribute [rw] fleet_arn
     #   The ARN of the fleet.
     #   @return [String]
@@ -139,18 +111,6 @@ module Aws::WorkLink
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateFleetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_name: "FleetName", # required
-    #         display_name: "DisplayName",
-    #         optimize_for_end_user_location: false,
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] fleet_name
     #   A unique name for the fleet.
     #   @return [String]
@@ -192,13 +152,6 @@ module Aws::WorkLink
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteFleetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_arn: "FleetArn", # required
-    #       }
-    #
     # @!attribute [rw] fleet_arn
     #   The ARN of the fleet.
     #   @return [String]
@@ -215,13 +168,6 @@ module Aws::WorkLink
     #
     class DeleteFleetResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeAuditStreamConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_arn: "FleetArn", # required
-    #       }
-    #
     # @!attribute [rw] fleet_arn
     #   The ARN of the fleet.
     #   @return [String]
@@ -247,13 +193,6 @@ module Aws::WorkLink
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeCompanyNetworkConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_arn: "FleetArn", # required
-    #       }
-    #
     # @!attribute [rw] fleet_arn
     #   The ARN of the fleet.
     #   @return [String]
@@ -289,13 +228,6 @@ module Aws::WorkLink
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDevicePolicyConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_arn: "FleetArn", # required
-    #       }
-    #
     # @!attribute [rw] fleet_arn
     #   The ARN of the fleet.
     #   @return [String]
@@ -322,14 +254,6 @@ module Aws::WorkLink
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDeviceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_arn: "FleetArn", # required
-    #         device_id: "Id", # required
-    #       }
-    #
     # @!attribute [rw] fleet_arn
     #   The ARN of the fleet.
     #   @return [String]
@@ -399,14 +323,6 @@ module Aws::WorkLink
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_arn: "FleetArn", # required
-    #         domain_name: "DomainName", # required
-    #       }
-    #
     # @!attribute [rw] fleet_arn
     #   The ARN of the fleet.
     #   @return [String]
@@ -457,13 +373,6 @@ module Aws::WorkLink
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeFleetMetadataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_arn: "FleetArn", # required
-    #       }
-    #
     # @!attribute [rw] fleet_arn
     #   The Amazon Resource Name (ARN) of the fleet.
     #   @return [String]
@@ -525,13 +434,6 @@ module Aws::WorkLink
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeIdentityProviderConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_arn: "FleetArn", # required
-    #       }
-    #
     # @!attribute [rw] fleet_arn
     #   The ARN of the fleet.
     #   @return [String]
@@ -566,14 +468,6 @@ module Aws::WorkLink
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeWebsiteCertificateAuthorityRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_arn: "FleetArn", # required
-    #         website_ca_id: "Id", # required
-    #       }
-    #
     # @!attribute [rw] fleet_arn
     #   The ARN of the fleet.
     #   @return [String]
@@ -632,14 +526,6 @@ module Aws::WorkLink
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_arn: "FleetArn", # required
-    #         domain_name: "DomainName", # required
-    #       }
-    #
     # @!attribute [rw] fleet_arn
     #   The ARN of the fleet.
     #   @return [String]
@@ -661,14 +547,6 @@ module Aws::WorkLink
     #
     class DisassociateDomainResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DisassociateWebsiteAuthorizationProviderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_arn: "FleetArn", # required
-    #         authorization_provider_id: "Id", # required
-    #       }
-    #
     # @!attribute [rw] fleet_arn
     #   The ARN of the fleet.
     #   @return [String]
@@ -690,14 +568,6 @@ module Aws::WorkLink
     #
     class DisassociateWebsiteAuthorizationProviderResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DisassociateWebsiteCertificateAuthorityRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_arn: "FleetArn", # required
-    #         website_ca_id: "Id", # required
-    #       }
-    #
     # @!attribute [rw] fleet_arn
     #   The ARN of the fleet.
     #   @return [String]
@@ -823,15 +693,6 @@ module Aws::WorkLink
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDevicesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_arn: "FleetArn", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] fleet_arn
     #   The ARN of the fleet.
     #   @return [String]
@@ -873,15 +734,6 @@ module Aws::WorkLink
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDomainsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_arn: "FleetArn", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] fleet_arn
     #   The ARN of the fleet.
     #   @return [String]
@@ -923,14 +775,6 @@ module Aws::WorkLink
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFleetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The pagination token used to retrieve the next page of results for
     #   this operation. If this value is null, it retrieves the first page.
@@ -967,13 +811,6 @@ module Aws::WorkLink
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "FleetArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the fleet.
     #   @return [String]
@@ -998,15 +835,6 @@ module Aws::WorkLink
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListWebsiteAuthorizationProvidersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_arn: "FleetArn", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] fleet_arn
     #   The ARN of the fleet.
     #   @return [String]
@@ -1048,15 +876,6 @@ module Aws::WorkLink
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListWebsiteCertificateAuthoritiesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_arn: "FleetArn", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] fleet_arn
     #   The ARN of the fleet.
     #   @return [String]
@@ -1124,14 +943,6 @@ module Aws::WorkLink
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RestoreDomainAccessRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_arn: "FleetArn", # required
-    #         domain_name: "DomainName", # required
-    #       }
-    #
     # @!attribute [rw] fleet_arn
     #   The ARN of the fleet.
     #   @return [String]
@@ -1153,14 +964,6 @@ module Aws::WorkLink
     #
     class RestoreDomainAccessResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass RevokeDomainAccessRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_arn: "FleetArn", # required
-    #         domain_name: "DomainName", # required
-    #       }
-    #
     # @!attribute [rw] fleet_arn
     #   The ARN of the fleet.
     #   @return [String]
@@ -1182,14 +985,6 @@ module Aws::WorkLink
     #
     class RevokeDomainAccessResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass SignOutUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_arn: "FleetArn", # required
-    #         username: "Username", # required
-    #       }
-    #
     # @!attribute [rw] fleet_arn
     #   The ARN of the fleet.
     #   @return [String]
@@ -1211,16 +1006,6 @@ module Aws::WorkLink
     #
     class SignOutUserResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "FleetArn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the fleet.
     #   @return [String]
@@ -1268,14 +1053,6 @@ module Aws::WorkLink
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "FleetArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the fleet.
     #   @return [String]
@@ -1297,14 +1074,6 @@ module Aws::WorkLink
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateAuditStreamConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_arn: "FleetArn", # required
-    #         audit_stream_arn: "AuditStreamArn",
-    #       }
-    #
     # @!attribute [rw] fleet_arn
     #   The ARN of the fleet.
     #   @return [String]
@@ -1327,16 +1096,6 @@ module Aws::WorkLink
     #
     class UpdateAuditStreamConfigurationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateCompanyNetworkConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_arn: "FleetArn", # required
-    #         vpc_id: "VpcId", # required
-    #         subnet_ids: ["SubnetId"], # required
-    #         security_group_ids: ["SecurityGroupId"], # required
-    #       }
-    #
     # @!attribute [rw] fleet_arn
     #   The ARN of the fleet.
     #   @return [String]
@@ -1369,14 +1128,6 @@ module Aws::WorkLink
     #
     class UpdateCompanyNetworkConfigurationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateDevicePolicyConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_arn: "FleetArn", # required
-    #         device_ca_certificate: "CertificateChain",
-    #       }
-    #
     # @!attribute [rw] fleet_arn
     #   The ARN of the fleet.
     #   @return [String]
@@ -1400,15 +1151,6 @@ module Aws::WorkLink
     #
     class UpdateDevicePolicyConfigurationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateDomainMetadataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_arn: "FleetArn", # required
-    #         domain_name: "DomainName", # required
-    #         display_name: "DisplayName",
-    #       }
-    #
     # @!attribute [rw] fleet_arn
     #   The ARN of the fleet.
     #   @return [String]
@@ -1435,15 +1177,6 @@ module Aws::WorkLink
     #
     class UpdateDomainMetadataResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateFleetMetadataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_arn: "FleetArn", # required
-    #         display_name: "DisplayName",
-    #         optimize_for_end_user_location: false,
-    #       }
-    #
     # @!attribute [rw] fleet_arn
     #   The ARN of the fleet.
     #   @return [String]
@@ -1473,15 +1206,6 @@ module Aws::WorkLink
     #
     class UpdateFleetMetadataResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateIdentityProviderConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_arn: "FleetArn", # required
-    #         identity_provider_type: "SAML", # required, accepts SAML
-    #         identity_provider_saml_metadata: "SamlMetadata",
-    #       }
-    #
     # @!attribute [rw] fleet_arn
     #   The ARN of the fleet.
     #   @return [String]

@@ -111,15 +111,6 @@ module Aws::DynamoDBStreams
 
     # Represents the input of a `DescribeStream` operation.
     #
-    # @note When making an API call, you may pass DescribeStreamInput
-    #   data as a hash:
-    #
-    #       {
-    #         stream_arn: "StreamArn", # required
-    #         limit: 1,
-    #         exclusive_start_shard_id: "ShardId",
-    #       }
-    #
     # @!attribute [rw] stream_arn
     #   The Amazon Resource Name (ARN) for the stream.
     #   @return [String]
@@ -180,14 +171,6 @@ module Aws::DynamoDBStreams
 
     # Represents the input of a `GetRecords` operation.
     #
-    # @note When making an API call, you may pass GetRecordsInput
-    #   data as a hash:
-    #
-    #       {
-    #         shard_iterator: "ShardIterator", # required
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] shard_iterator
     #   A shard iterator that was retrieved from a previous GetShardIterator
     #   operation. This iterator can be used to access the stream records in
@@ -231,16 +214,6 @@ module Aws::DynamoDBStreams
     end
 
     # Represents the input of a `GetShardIterator` operation.
-    #
-    # @note When making an API call, you may pass GetShardIteratorInput
-    #   data as a hash:
-    #
-    #       {
-    #         stream_arn: "StreamArn", # required
-    #         shard_id: "ShardId", # required
-    #         shard_iterator_type: "TRIM_HORIZON", # required, accepts TRIM_HORIZON, LATEST, AT_SEQUENCE_NUMBER, AFTER_SEQUENCE_NUMBER
-    #         sequence_number: "SequenceNumber",
-    #       }
     #
     # @!attribute [rw] stream_arn
     #   The Amazon Resource Name (ARN) for the stream.
@@ -417,15 +390,6 @@ module Aws::DynamoDBStreams
     end
 
     # Represents the input of a `ListStreams` operation.
-    #
-    # @note When making an API call, you may pass ListStreamsInput
-    #   data as a hash:
-    #
-    #       {
-    #         table_name: "TableName",
-    #         limit: 1,
-    #         exclusive_start_stream_arn: "StreamArn",
-    #       }
     #
     # @!attribute [rw] table_name
     #   If this parameter is provided, then only the streams associated with

@@ -69,14 +69,6 @@ module Aws::CostExplorer
 
     # The time period for an anomaly.
     #
-    # @note When making an API call, you may pass AnomalyDateInterval
-    #   data as a hash:
-    #
-    #       {
-    #         start_date: "YearMonthDay", # required
-    #         end_date: "YearMonthDay",
-    #       }
-    #
     # @!attribute [rw] start_date
     #   The first date an anomaly was observed.
     #   @return [String]
@@ -98,50 +90,6 @@ module Aws::CostExplorer
     # anomalies. It's based on `MonitorType` and `MonitorSpecification`.
     # The content consists of detailed metadata and the current status of
     # the monitor object.
-    #
-    # @note When making an API call, you may pass AnomalyMonitor
-    #   data as a hash:
-    #
-    #       {
-    #         monitor_arn: "GenericString",
-    #         monitor_name: "GenericString", # required
-    #         creation_date: "YearMonthDay",
-    #         last_updated_date: "YearMonthDay",
-    #         last_evaluated_date: "YearMonthDay",
-    #         monitor_type: "DIMENSIONAL", # required, accepts DIMENSIONAL, CUSTOM
-    #         monitor_dimension: "SERVICE", # accepts SERVICE
-    #         monitor_specification: {
-    #           or: [
-    #             {
-    #               # recursive Expression
-    #             },
-    #           ],
-    #           and: [
-    #             {
-    #               # recursive Expression
-    #             },
-    #           ],
-    #           not: {
-    #             # recursive Expression
-    #           },
-    #           dimensions: {
-    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, LINKED_ACCOUNT_NAME, OPERATION, PURCHASE_TYPE, REGION, SERVICE, SERVICE_CODE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE, INVOICING_ENTITY
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #           tags: {
-    #             key: "TagKey",
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #           cost_categories: {
-    #             key: "CostCategoryName",
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #         },
-    #         dimensional_value_count: 1,
-    #       }
     #
     # @!attribute [rw] monitor_arn
     #   The Amazon Resource Name (ARN) value.
@@ -271,25 +219,6 @@ module Aws::CostExplorer
     # that exceeds a threshold. The content consists of the detailed
     # metadata and the current status of the `AnomalySubscription` object.
     #
-    # @note When making an API call, you may pass AnomalySubscription
-    #   data as a hash:
-    #
-    #       {
-    #         subscription_arn: "GenericString",
-    #         account_id: "GenericString",
-    #         monitor_arn_list: ["Arn"], # required
-    #         subscribers: [ # required
-    #           {
-    #             address: "SubscriberAddress",
-    #             type: "EMAIL", # accepts EMAIL, SNS
-    #             status: "CONFIRMED", # accepts CONFIRMED, DECLINED
-    #           },
-    #         ],
-    #         threshold: 1.0, # required
-    #         frequency: "DAILY", # required, accepts DAILY, IMMEDIATE, WEEKLY
-    #         subscription_name: "GenericString", # required
-    #       }
-    #
     # @!attribute [rw] subscription_arn
     #   The `AnomalySubscription` Amazon Resource Name (ARN).
     #   @return [String]
@@ -378,14 +307,6 @@ module Aws::CostExplorer
     # The cost allocation tag status. The status of a key can either be
     # active or inactive.
     #
-    # @note When making an API call, you may pass CostAllocationTagStatusEntry
-    #   data as a hash:
-    #
-    #       {
-    #         tag_key: "TagKey", # required
-    #         status: "Active", # required, accepts Active, Inactive
-    #       }
-    #
     # @!attribute [rw] tag_key
     #   The key for the cost allocation tag.
     #   @return [String]
@@ -470,14 +391,6 @@ module Aws::CostExplorer
     # want to dynamically group costs that are based on the value of a
     # specific tag key. First, choose an inherited value rule type, and then
     # choose the tag dimension and specify the tag key to use.
-    #
-    # @note When making an API call, you may pass CostCategoryInheritedValueDimension
-    #   data as a hash:
-    #
-    #       {
-    #         dimension_name: "LINKED_ACCOUNT_NAME", # accepts LINKED_ACCOUNT_NAME, TAG
-    #         dimension_key: "GenericString",
-    #       }
     #
     # @!attribute [rw] dimension_name
     #   The name of the dimension that's used to group costs.
@@ -579,48 +492,6 @@ module Aws::CostExplorer
     # the line item, then the first rule to match is used to determine that
     # Cost Category value.
     #
-    # @note When making an API call, you may pass CostCategoryRule
-    #   data as a hash:
-    #
-    #       {
-    #         value: "CostCategoryValue",
-    #         rule: {
-    #           or: [
-    #             {
-    #               # recursive Expression
-    #             },
-    #           ],
-    #           and: [
-    #             {
-    #               # recursive Expression
-    #             },
-    #           ],
-    #           not: {
-    #             # recursive Expression
-    #           },
-    #           dimensions: {
-    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, LINKED_ACCOUNT_NAME, OPERATION, PURCHASE_TYPE, REGION, SERVICE, SERVICE_CODE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE, INVOICING_ENTITY
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #           tags: {
-    #             key: "TagKey",
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #           cost_categories: {
-    #             key: "CostCategoryName",
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #         },
-    #         inherited_value: {
-    #           dimension_name: "LINKED_ACCOUNT_NAME", # accepts LINKED_ACCOUNT_NAME, TAG
-    #           dimension_key: "GenericString",
-    #         },
-    #         type: "REGULAR", # accepts REGULAR, INHERITED_VALUE
-    #       }
-    #
     # @!attribute [rw] value
     #   The default value for the cost category.
     #   @return [String]
@@ -677,21 +548,6 @@ module Aws::CostExplorer
     # Use the split charge rule to split the cost of one Cost Category value
     # across several other target values.
     #
-    # @note When making an API call, you may pass CostCategorySplitChargeRule
-    #   data as a hash:
-    #
-    #       {
-    #         source: "GenericString", # required
-    #         targets: ["GenericString"], # required
-    #         method: "FIXED", # required, accepts FIXED, PROPORTIONAL, EVEN
-    #         parameters: [
-    #           {
-    #             type: "ALLOCATION_PERCENTAGES", # required, accepts ALLOCATION_PERCENTAGES
-    #             values: ["GenericString"], # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] source
     #   The Cost Category value that you want to split. That value can't be
     #   used as a source or a target in other split charge rules. To
@@ -735,14 +591,6 @@ module Aws::CostExplorer
 
     # The parameters for a split charge method.
     #
-    # @note When making an API call, you may pass CostCategorySplitChargeRuleParameter
-    #   data as a hash:
-    #
-    #       {
-    #         type: "ALLOCATION_PERCENTAGES", # required, accepts ALLOCATION_PERCENTAGES
-    #         values: ["GenericString"], # required
-    #       }
-    #
     # @!attribute [rw] type
     #   The parameter type.
     #   @return [String]
@@ -769,15 +617,6 @@ module Aws::CostExplorer
     # If `Values` is provided and `Key` isn't specified, the `ABSENT`
     # `MatchOption` is applied to the Cost Categories `Key` only. That is,
     # it filters on resources without the given Cost Categories key.
-    #
-    # @note When making an API call, you may pass CostCategoryValues
-    #   data as a hash:
-    #
-    #       {
-    #         key: "CostCategoryName",
-    #         values: ["Value"],
-    #         match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #       }
     #
     # @!attribute [rw] key
     #   The unique name of the Cost Category.
@@ -944,58 +783,6 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAnomalyMonitorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         anomaly_monitor: { # required
-    #           monitor_arn: "GenericString",
-    #           monitor_name: "GenericString", # required
-    #           creation_date: "YearMonthDay",
-    #           last_updated_date: "YearMonthDay",
-    #           last_evaluated_date: "YearMonthDay",
-    #           monitor_type: "DIMENSIONAL", # required, accepts DIMENSIONAL, CUSTOM
-    #           monitor_dimension: "SERVICE", # accepts SERVICE
-    #           monitor_specification: {
-    #             or: [
-    #               {
-    #                 # recursive Expression
-    #               },
-    #             ],
-    #             and: [
-    #               {
-    #                 # recursive Expression
-    #               },
-    #             ],
-    #             not: {
-    #               # recursive Expression
-    #             },
-    #             dimensions: {
-    #               key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, LINKED_ACCOUNT_NAME, OPERATION, PURCHASE_TYPE, REGION, SERVICE, SERVICE_CODE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE, INVOICING_ENTITY
-    #               values: ["Value"],
-    #               match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #             },
-    #             tags: {
-    #               key: "TagKey",
-    #               values: ["Value"],
-    #               match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #             },
-    #             cost_categories: {
-    #               key: "CostCategoryName",
-    #               values: ["Value"],
-    #               match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #             },
-    #           },
-    #           dimensional_value_count: 1,
-    #         },
-    #         resource_tags: [
-    #           {
-    #             key: "ResourceTagKey", # required
-    #             value: "ResourceTagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] anomaly_monitor
     #   The cost anomaly detection monitor object that you want to create.
     #   @return [Types::AnomalyMonitor]
@@ -1054,33 +841,6 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAnomalySubscriptionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         anomaly_subscription: { # required
-    #           subscription_arn: "GenericString",
-    #           account_id: "GenericString",
-    #           monitor_arn_list: ["Arn"], # required
-    #           subscribers: [ # required
-    #             {
-    #               address: "SubscriberAddress",
-    #               type: "EMAIL", # accepts EMAIL, SNS
-    #               status: "CONFIRMED", # accepts CONFIRMED, DECLINED
-    #             },
-    #           ],
-    #           threshold: 1.0, # required
-    #           frequency: "DAILY", # required, accepts DAILY, IMMEDIATE, WEEKLY
-    #           subscription_name: "GenericString", # required
-    #         },
-    #         resource_tags: [
-    #           {
-    #             key: "ResourceTagKey", # required
-    #             value: "ResourceTagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] anomaly_subscription
     #   The cost anomaly subscription object that you want to create.
     #   @return [Types::AnomalySubscription]
@@ -1139,75 +899,6 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateCostCategoryDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "CostCategoryName", # required
-    #         effective_start: "ZonedDateTime",
-    #         rule_version: "CostCategoryExpression.v1", # required, accepts CostCategoryExpression.v1
-    #         rules: [ # required
-    #           {
-    #             value: "CostCategoryValue",
-    #             rule: {
-    #               or: [
-    #                 {
-    #                   # recursive Expression
-    #                 },
-    #               ],
-    #               and: [
-    #                 {
-    #                   # recursive Expression
-    #                 },
-    #               ],
-    #               not: {
-    #                 # recursive Expression
-    #               },
-    #               dimensions: {
-    #                 key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, LINKED_ACCOUNT_NAME, OPERATION, PURCHASE_TYPE, REGION, SERVICE, SERVICE_CODE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE, INVOICING_ENTITY
-    #                 values: ["Value"],
-    #                 match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #               },
-    #               tags: {
-    #                 key: "TagKey",
-    #                 values: ["Value"],
-    #                 match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #               },
-    #               cost_categories: {
-    #                 key: "CostCategoryName",
-    #                 values: ["Value"],
-    #                 match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #               },
-    #             },
-    #             inherited_value: {
-    #               dimension_name: "LINKED_ACCOUNT_NAME", # accepts LINKED_ACCOUNT_NAME, TAG
-    #               dimension_key: "GenericString",
-    #             },
-    #             type: "REGULAR", # accepts REGULAR, INHERITED_VALUE
-    #           },
-    #         ],
-    #         default_value: "CostCategoryValue",
-    #         split_charge_rules: [
-    #           {
-    #             source: "GenericString", # required
-    #             targets: ["GenericString"], # required
-    #             method: "FIXED", # required, accepts FIXED, PROPORTIONAL, EVEN
-    #             parameters: [
-    #               {
-    #                 type: "ALLOCATION_PERCENTAGES", # required, accepts ALLOCATION_PERCENTAGES
-    #                 values: ["GenericString"], # required
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         resource_tags: [
-    #           {
-    #             key: "ResourceTagKey", # required
-    #             value: "ResourceTagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The unique name of the Cost Category.
     #   @return [String]
@@ -1392,14 +1083,6 @@ module Aws::CostExplorer
 
     # The time period of the request.
     #
-    # @note When making an API call, you may pass DateInterval
-    #   data as a hash:
-    #
-    #       {
-    #         start: "YearMonthDay", # required
-    #         end: "YearMonthDay", # required
-    #       }
-    #
     # @!attribute [rw] start
     #   The beginning of the time period. The start date is inclusive. For
     #   example, if `start` is `2017-01-01`, Amazon Web Services retrieves
@@ -1424,13 +1107,6 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAnomalyMonitorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         monitor_arn: "GenericString", # required
-    #       }
-    #
     # @!attribute [rw] monitor_arn
     #   The unique identifier of the cost anomaly monitor that you want to
     #   delete.
@@ -1448,13 +1124,6 @@ module Aws::CostExplorer
     #
     class DeleteAnomalyMonitorResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteAnomalySubscriptionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         subscription_arn: "GenericString", # required
-    #       }
-    #
     # @!attribute [rw] subscription_arn
     #   The unique identifier of the cost anomaly subscription that you want
     #   to delete.
@@ -1472,13 +1141,6 @@ module Aws::CostExplorer
     #
     class DeleteAnomalySubscriptionResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteCostCategoryDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cost_category_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] cost_category_arn
     #   The unique identifier for your Cost Category.
     #   @return [String]
@@ -1510,14 +1172,6 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeCostCategoryDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cost_category_arn: "Arn", # required
-    #         effective_on: "ZonedDateTime",
-    #       }
-    #
     # @!attribute [rw] cost_category_arn
     #   The unique identifier for your Cost Category.
     #   @return [String]
@@ -1550,15 +1204,6 @@ module Aws::CostExplorer
 
     # The metadata that you can use to filter and group your results. You
     # can use `GetDimensionValues` to find specific values.
-    #
-    # @note When making an API call, you may pass DimensionValues
-    #   data as a hash:
-    #
-    #       {
-    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, LINKED_ACCOUNT_NAME, OPERATION, PURCHASE_TYPE, REGION, SERVICE, SERVICE_CODE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE, INVOICING_ENTITY
-    #         values: ["Value"],
-    #         match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #       }
     #
     # @!attribute [rw] key
     #   The names of the metadata types that you can use to filter and group
@@ -1832,13 +1477,6 @@ module Aws::CostExplorer
     # The Amazon EC2 hardware specifications that you want Amazon Web
     # Services to provide recommendations for.
     #
-    # @note When making an API call, you may pass EC2Specification
-    #   data as a hash:
-    #
-    #       {
-    #         offering_class: "STANDARD", # accepts STANDARD, CONVERTIBLE
-    #       }
-    #
     # @!attribute [rw] offering_class
     #   Indicates whether you want a recommendation for standard or
     #   convertible reservations.
@@ -1981,113 +1619,6 @@ module Aws::CostExplorer
     #
     #  </note>
     #
-    # @note When making an API call, you may pass Expression
-    #   data as a hash:
-    #
-    #       {
-    #         or: [
-    #           {
-    #             or: {
-    #               # recursive Expressions
-    #             },
-    #             and: {
-    #               # recursive Expressions
-    #             },
-    #             not: {
-    #               # recursive Expression
-    #             },
-    #             dimensions: {
-    #               key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, LINKED_ACCOUNT_NAME, OPERATION, PURCHASE_TYPE, REGION, SERVICE, SERVICE_CODE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE, INVOICING_ENTITY
-    #               values: ["Value"],
-    #               match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #             },
-    #             tags: {
-    #               key: "TagKey",
-    #               values: ["Value"],
-    #               match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #             },
-    #             cost_categories: {
-    #               key: "CostCategoryName",
-    #               values: ["Value"],
-    #               match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #             },
-    #           },
-    #         ],
-    #         and: [
-    #           {
-    #             or: {
-    #               # recursive Expressions
-    #             },
-    #             and: {
-    #               # recursive Expressions
-    #             },
-    #             not: {
-    #               # recursive Expression
-    #             },
-    #             dimensions: {
-    #               key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, LINKED_ACCOUNT_NAME, OPERATION, PURCHASE_TYPE, REGION, SERVICE, SERVICE_CODE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE, INVOICING_ENTITY
-    #               values: ["Value"],
-    #               match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #             },
-    #             tags: {
-    #               key: "TagKey",
-    #               values: ["Value"],
-    #               match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #             },
-    #             cost_categories: {
-    #               key: "CostCategoryName",
-    #               values: ["Value"],
-    #               match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #             },
-    #           },
-    #         ],
-    #         not: {
-    #           or: [
-    #             {
-    #               # recursive Expression
-    #             },
-    #           ],
-    #           and: [
-    #             {
-    #               # recursive Expression
-    #             },
-    #           ],
-    #           not: {
-    #             # recursive Expression
-    #           },
-    #           dimensions: {
-    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, LINKED_ACCOUNT_NAME, OPERATION, PURCHASE_TYPE, REGION, SERVICE, SERVICE_CODE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE, INVOICING_ENTITY
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #           tags: {
-    #             key: "TagKey",
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #           cost_categories: {
-    #             key: "CostCategoryName",
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #         },
-    #         dimensions: {
-    #           key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, LINKED_ACCOUNT_NAME, OPERATION, PURCHASE_TYPE, REGION, SERVICE, SERVICE_CODE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE, INVOICING_ENTITY
-    #           values: ["Value"],
-    #           match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #         },
-    #         tags: {
-    #           key: "TagKey",
-    #           values: ["Value"],
-    #           match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #         },
-    #         cost_categories: {
-    #           key: "CostCategoryName",
-    #           values: ["Value"],
-    #           match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #         },
-    #       }
-    #
     # @!attribute [rw] or
     #   Return results that match either `Dimension` object.
     #   @return [Array<Types::Expression>]
@@ -2154,25 +1685,6 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAnomaliesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         monitor_arn: "GenericString",
-    #         date_interval: { # required
-    #           start_date: "YearMonthDay", # required
-    #           end_date: "YearMonthDay",
-    #         },
-    #         feedback: "YES", # accepts YES, NO, PLANNED_ACTIVITY
-    #         total_impact: {
-    #           numeric_operator: "EQUAL", # required, accepts EQUAL, GREATER_THAN_OR_EQUAL, LESS_THAN_OR_EQUAL, GREATER_THAN, LESS_THAN, BETWEEN
-    #           start_value: 1.0, # required
-    #           end_value: 1.0,
-    #         },
-    #         next_page_token: "NextPageToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] monitor_arn
     #   Retrieves all of the cost anomalies detected for a specific cost
     #   anomaly monitor Amazon Resource Name (ARN).
@@ -2237,15 +1749,6 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAnomalyMonitorsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         monitor_arn_list: ["Value"],
-    #         next_page_token: "NextPageToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] monitor_arn_list
     #   A list of cost anomaly monitor ARNs.
     #   @return [Array<String>]
@@ -2290,16 +1793,6 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAnomalySubscriptionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         subscription_arn_list: ["Value"],
-    #         monitor_arn: "GenericString",
-    #         next_page_token: "NextPageToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] subscription_arn_list
     #   A list of cost anomaly subscription ARNs.
     #   @return [Array<String>]
@@ -2349,55 +1842,6 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetCostAndUsageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         time_period: { # required
-    #           start: "YearMonthDay", # required
-    #           end: "YearMonthDay", # required
-    #         },
-    #         granularity: "DAILY", # required, accepts DAILY, MONTHLY, HOURLY
-    #         filter: {
-    #           or: [
-    #             {
-    #               # recursive Expression
-    #             },
-    #           ],
-    #           and: [
-    #             {
-    #               # recursive Expression
-    #             },
-    #           ],
-    #           not: {
-    #             # recursive Expression
-    #           },
-    #           dimensions: {
-    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, LINKED_ACCOUNT_NAME, OPERATION, PURCHASE_TYPE, REGION, SERVICE, SERVICE_CODE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE, INVOICING_ENTITY
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #           tags: {
-    #             key: "TagKey",
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #           cost_categories: {
-    #             key: "CostCategoryName",
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #         },
-    #         metrics: ["MetricName"], # required
-    #         group_by: [
-    #           {
-    #             type: "DIMENSION", # accepts DIMENSION, TAG, COST_CATEGORY
-    #             key: "GroupDefinitionKey",
-    #           },
-    #         ],
-    #         next_page_token: "NextPageToken",
-    #       }
-    #
     # @!attribute [rw] time_period
     #   Sets the start date and end date for retrieving Amazon Web Services
     #   costs. The start date is inclusive, but the end date is exclusive.
@@ -2523,55 +1967,6 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetCostAndUsageWithResourcesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         time_period: { # required
-    #           start: "YearMonthDay", # required
-    #           end: "YearMonthDay", # required
-    #         },
-    #         granularity: "DAILY", # required, accepts DAILY, MONTHLY, HOURLY
-    #         filter: { # required
-    #           or: [
-    #             {
-    #               # recursive Expression
-    #             },
-    #           ],
-    #           and: [
-    #             {
-    #               # recursive Expression
-    #             },
-    #           ],
-    #           not: {
-    #             # recursive Expression
-    #           },
-    #           dimensions: {
-    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, LINKED_ACCOUNT_NAME, OPERATION, PURCHASE_TYPE, REGION, SERVICE, SERVICE_CODE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE, INVOICING_ENTITY
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #           tags: {
-    #             key: "TagKey",
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #           cost_categories: {
-    #             key: "CostCategoryName",
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #         },
-    #         metrics: ["MetricName"],
-    #         group_by: [
-    #           {
-    #             type: "DIMENSION", # accepts DIMENSION, TAG, COST_CATEGORY
-    #             key: "GroupDefinitionKey",
-    #           },
-    #         ],
-    #         next_page_token: "NextPageToken",
-    #       }
-    #
     # @!attribute [rw] time_period
     #   Sets the start and end dates for retrieving Amazon Web Services
     #   costs. The range must be within the last 14 days (the start date
@@ -2694,56 +2089,6 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetCostCategoriesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         search_string: "SearchString",
-    #         time_period: { # required
-    #           start: "YearMonthDay", # required
-    #           end: "YearMonthDay", # required
-    #         },
-    #         cost_category_name: "CostCategoryName",
-    #         filter: {
-    #           or: [
-    #             {
-    #               # recursive Expression
-    #             },
-    #           ],
-    #           and: [
-    #             {
-    #               # recursive Expression
-    #             },
-    #           ],
-    #           not: {
-    #             # recursive Expression
-    #           },
-    #           dimensions: {
-    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, LINKED_ACCOUNT_NAME, OPERATION, PURCHASE_TYPE, REGION, SERVICE, SERVICE_CODE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE, INVOICING_ENTITY
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #           tags: {
-    #             key: "TagKey",
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #           cost_categories: {
-    #             key: "CostCategoryName",
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #         },
-    #         sort_by: [
-    #           {
-    #             key: "SortDefinitionKey", # required
-    #             sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_page_token: "NextPageToken",
-    #       }
-    #
     # @!attribute [rw] search_string
     #   The value that you want to search the filter values for.
     #
@@ -2913,49 +2258,6 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetCostForecastRequest
-    #   data as a hash:
-    #
-    #       {
-    #         time_period: { # required
-    #           start: "YearMonthDay", # required
-    #           end: "YearMonthDay", # required
-    #         },
-    #         metric: "BLENDED_COST", # required, accepts BLENDED_COST, UNBLENDED_COST, AMORTIZED_COST, NET_UNBLENDED_COST, NET_AMORTIZED_COST, USAGE_QUANTITY, NORMALIZED_USAGE_AMOUNT
-    #         granularity: "DAILY", # required, accepts DAILY, MONTHLY, HOURLY
-    #         filter: {
-    #           or: [
-    #             {
-    #               # recursive Expression
-    #             },
-    #           ],
-    #           and: [
-    #             {
-    #               # recursive Expression
-    #             },
-    #           ],
-    #           not: {
-    #             # recursive Expression
-    #           },
-    #           dimensions: {
-    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, LINKED_ACCOUNT_NAME, OPERATION, PURCHASE_TYPE, REGION, SERVICE, SERVICE_CODE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE, INVOICING_ENTITY
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #           tags: {
-    #             key: "TagKey",
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #           cost_categories: {
-    #             key: "CostCategoryName",
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #         },
-    #         prediction_interval_level: 1,
-    #       }
-    #
     # @!attribute [rw] time_period
     #   The period of time that you want the forecast to cover. The start
     #   date must be equal to or no later than the current date to avoid a
@@ -3085,57 +2387,6 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDimensionValuesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         search_string: "SearchString",
-    #         time_period: { # required
-    #           start: "YearMonthDay", # required
-    #           end: "YearMonthDay", # required
-    #         },
-    #         dimension: "AZ", # required, accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, LINKED_ACCOUNT_NAME, OPERATION, PURCHASE_TYPE, REGION, SERVICE, SERVICE_CODE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE, INVOICING_ENTITY
-    #         context: "COST_AND_USAGE", # accepts COST_AND_USAGE, RESERVATIONS, SAVINGS_PLANS
-    #         filter: {
-    #           or: [
-    #             {
-    #               # recursive Expression
-    #             },
-    #           ],
-    #           and: [
-    #             {
-    #               # recursive Expression
-    #             },
-    #           ],
-    #           not: {
-    #             # recursive Expression
-    #           },
-    #           dimensions: {
-    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, LINKED_ACCOUNT_NAME, OPERATION, PURCHASE_TYPE, REGION, SERVICE, SERVICE_CODE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE, INVOICING_ENTITY
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #           tags: {
-    #             key: "TagKey",
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #           cost_categories: {
-    #             key: "CostCategoryName",
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #         },
-    #         sort_by: [
-    #           {
-    #             key: "SortDefinitionKey", # required
-    #             sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_page_token: "NextPageToken",
-    #       }
-    #
     # @!attribute [rw] search_string
     #   The value that you want to search the filter values for.
     #   @return [String]
@@ -3557,60 +2808,6 @@ module Aws::CostExplorer
     # You can use the following request parameters to query for how much of
     # your instance usage a reservation covered.
     #
-    # @note When making an API call, you may pass GetReservationCoverageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         time_period: { # required
-    #           start: "YearMonthDay", # required
-    #           end: "YearMonthDay", # required
-    #         },
-    #         group_by: [
-    #           {
-    #             type: "DIMENSION", # accepts DIMENSION, TAG, COST_CATEGORY
-    #             key: "GroupDefinitionKey",
-    #           },
-    #         ],
-    #         granularity: "DAILY", # accepts DAILY, MONTHLY, HOURLY
-    #         filter: {
-    #           or: [
-    #             {
-    #               # recursive Expression
-    #             },
-    #           ],
-    #           and: [
-    #             {
-    #               # recursive Expression
-    #             },
-    #           ],
-    #           not: {
-    #             # recursive Expression
-    #           },
-    #           dimensions: {
-    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, LINKED_ACCOUNT_NAME, OPERATION, PURCHASE_TYPE, REGION, SERVICE, SERVICE_CODE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE, INVOICING_ENTITY
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #           tags: {
-    #             key: "TagKey",
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #           cost_categories: {
-    #             key: "CostCategoryName",
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #         },
-    #         metrics: ["MetricName"],
-    #         next_page_token: "NextPageToken",
-    #         sort_by: {
-    #           key: "SortDefinitionKey", # required
-    #           sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #         },
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] time_period
     #   The start and end dates of the period that you want to retrieve data
     #   about reservation coverage for. You can retrieve data for a maximum
@@ -3789,55 +2986,6 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetReservationPurchaseRecommendationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "GenericString",
-    #         service: "GenericString", # required
-    #         filter: {
-    #           or: [
-    #             {
-    #               # recursive Expression
-    #             },
-    #           ],
-    #           and: [
-    #             {
-    #               # recursive Expression
-    #             },
-    #           ],
-    #           not: {
-    #             # recursive Expression
-    #           },
-    #           dimensions: {
-    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, LINKED_ACCOUNT_NAME, OPERATION, PURCHASE_TYPE, REGION, SERVICE, SERVICE_CODE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE, INVOICING_ENTITY
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #           tags: {
-    #             key: "TagKey",
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #           cost_categories: {
-    #             key: "CostCategoryName",
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #         },
-    #         account_scope: "PAYER", # accepts PAYER, LINKED
-    #         lookback_period_in_days: "SEVEN_DAYS", # accepts SEVEN_DAYS, THIRTY_DAYS, SIXTY_DAYS
-    #         term_in_years: "ONE_YEAR", # accepts ONE_YEAR, THREE_YEARS
-    #         payment_option: "NO_UPFRONT", # accepts NO_UPFRONT, PARTIAL_UPFRONT, ALL_UPFRONT, LIGHT_UTILIZATION, MEDIUM_UTILIZATION, HEAVY_UTILIZATION
-    #         service_specification: {
-    #           ec2_specification: {
-    #             offering_class: "STANDARD", # accepts STANDARD, CONVERTIBLE
-    #           },
-    #         },
-    #         page_size: 1,
-    #         next_page_token: "NextPageToken",
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The account ID that's associated with the recommendation.
     #   @return [String]
@@ -3978,59 +3126,6 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetReservationUtilizationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         time_period: { # required
-    #           start: "YearMonthDay", # required
-    #           end: "YearMonthDay", # required
-    #         },
-    #         group_by: [
-    #           {
-    #             type: "DIMENSION", # accepts DIMENSION, TAG, COST_CATEGORY
-    #             key: "GroupDefinitionKey",
-    #           },
-    #         ],
-    #         granularity: "DAILY", # accepts DAILY, MONTHLY, HOURLY
-    #         filter: {
-    #           or: [
-    #             {
-    #               # recursive Expression
-    #             },
-    #           ],
-    #           and: [
-    #             {
-    #               # recursive Expression
-    #             },
-    #           ],
-    #           not: {
-    #             # recursive Expression
-    #           },
-    #           dimensions: {
-    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, LINKED_ACCOUNT_NAME, OPERATION, PURCHASE_TYPE, REGION, SERVICE, SERVICE_CODE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE, INVOICING_ENTITY
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #           tags: {
-    #             key: "TagKey",
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #           cost_categories: {
-    #             key: "CostCategoryName",
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #         },
-    #         sort_by: {
-    #           key: "SortDefinitionKey", # required
-    #           sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #         },
-    #         next_page_token: "NextPageToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] time_period
     #   Sets the start and end dates for retrieving Reserved Instance (RI)
     #   utilization. The start date is inclusive, but the end date is
@@ -4185,49 +3280,6 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRightsizingRecommendationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter: {
-    #           or: [
-    #             {
-    #               # recursive Expression
-    #             },
-    #           ],
-    #           and: [
-    #             {
-    #               # recursive Expression
-    #             },
-    #           ],
-    #           not: {
-    #             # recursive Expression
-    #           },
-    #           dimensions: {
-    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, LINKED_ACCOUNT_NAME, OPERATION, PURCHASE_TYPE, REGION, SERVICE, SERVICE_CODE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE, INVOICING_ENTITY
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #           tags: {
-    #             key: "TagKey",
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #           cost_categories: {
-    #             key: "CostCategoryName",
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #         },
-    #         configuration: {
-    #           recommendation_target: "SAME_INSTANCE_FAMILY", # required, accepts SAME_INSTANCE_FAMILY, CROSS_INSTANCE_FAMILY
-    #           benefits_considered: false, # required
-    #         },
-    #         service: "GenericString", # required
-    #         page_size: 1,
-    #         next_page_token: "NextPageToken",
-    #       }
-    #
     # @!attribute [rw] filter
     #   Use `Expression` to filter by cost or by usage. There are two
     #   patterns:
@@ -4356,60 +3408,6 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSavingsPlansCoverageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         time_period: { # required
-    #           start: "YearMonthDay", # required
-    #           end: "YearMonthDay", # required
-    #         },
-    #         group_by: [
-    #           {
-    #             type: "DIMENSION", # accepts DIMENSION, TAG, COST_CATEGORY
-    #             key: "GroupDefinitionKey",
-    #           },
-    #         ],
-    #         granularity: "DAILY", # accepts DAILY, MONTHLY, HOURLY
-    #         filter: {
-    #           or: [
-    #             {
-    #               # recursive Expression
-    #             },
-    #           ],
-    #           and: [
-    #             {
-    #               # recursive Expression
-    #             },
-    #           ],
-    #           not: {
-    #             # recursive Expression
-    #           },
-    #           dimensions: {
-    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, LINKED_ACCOUNT_NAME, OPERATION, PURCHASE_TYPE, REGION, SERVICE, SERVICE_CODE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE, INVOICING_ENTITY
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #           tags: {
-    #             key: "TagKey",
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #           cost_categories: {
-    #             key: "CostCategoryName",
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #         },
-    #         metrics: ["MetricName"],
-    #         next_token: "NextPageToken",
-    #         max_results: 1,
-    #         sort_by: {
-    #           key: "SortDefinitionKey", # required
-    #           sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #         },
-    #       }
-    #
     # @!attribute [rw] time_period
     #   The time period that you want the usage and costs for. The `Start`
     #   date must be within 13 months. The `End` date must be after the
@@ -4527,49 +3525,6 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSavingsPlansPurchaseRecommendationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         savings_plans_type: "COMPUTE_SP", # required, accepts COMPUTE_SP, EC2_INSTANCE_SP, SAGEMAKER_SP
-    #         term_in_years: "ONE_YEAR", # required, accepts ONE_YEAR, THREE_YEARS
-    #         payment_option: "NO_UPFRONT", # required, accepts NO_UPFRONT, PARTIAL_UPFRONT, ALL_UPFRONT, LIGHT_UTILIZATION, MEDIUM_UTILIZATION, HEAVY_UTILIZATION
-    #         account_scope: "PAYER", # accepts PAYER, LINKED
-    #         next_page_token: "NextPageToken",
-    #         page_size: 1,
-    #         lookback_period_in_days: "SEVEN_DAYS", # required, accepts SEVEN_DAYS, THIRTY_DAYS, SIXTY_DAYS
-    #         filter: {
-    #           or: [
-    #             {
-    #               # recursive Expression
-    #             },
-    #           ],
-    #           and: [
-    #             {
-    #               # recursive Expression
-    #             },
-    #           ],
-    #           not: {
-    #             # recursive Expression
-    #           },
-    #           dimensions: {
-    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, LINKED_ACCOUNT_NAME, OPERATION, PURCHASE_TYPE, REGION, SERVICE, SERVICE_CODE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE, INVOICING_ENTITY
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #           tags: {
-    #             key: "TagKey",
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #           cost_categories: {
-    #             key: "CostCategoryName",
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] savings_plans_type
     #   The Savings Plans recommendation type that's requested.
     #   @return [String]
@@ -4661,53 +3616,6 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSavingsPlansUtilizationDetailsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         time_period: { # required
-    #           start: "YearMonthDay", # required
-    #           end: "YearMonthDay", # required
-    #         },
-    #         filter: {
-    #           or: [
-    #             {
-    #               # recursive Expression
-    #             },
-    #           ],
-    #           and: [
-    #             {
-    #               # recursive Expression
-    #             },
-    #           ],
-    #           not: {
-    #             # recursive Expression
-    #           },
-    #           dimensions: {
-    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, LINKED_ACCOUNT_NAME, OPERATION, PURCHASE_TYPE, REGION, SERVICE, SERVICE_CODE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE, INVOICING_ENTITY
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #           tags: {
-    #             key: "TagKey",
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #           cost_categories: {
-    #             key: "CostCategoryName",
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #         },
-    #         data_type: ["ATTRIBUTES"], # accepts ATTRIBUTES, UTILIZATION, AMORTIZED_COMMITMENT, SAVINGS
-    #         next_token: "NextPageToken",
-    #         max_results: 1,
-    #         sort_by: {
-    #           key: "SortDefinitionKey", # required
-    #           sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #         },
-    #       }
-    #
     # @!attribute [rw] time_period
     #   The time period that you want the usage and costs for. The `Start`
     #   date must be within 13 months. The `End` date must be after the
@@ -4819,51 +3727,6 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSavingsPlansUtilizationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         time_period: { # required
-    #           start: "YearMonthDay", # required
-    #           end: "YearMonthDay", # required
-    #         },
-    #         granularity: "DAILY", # accepts DAILY, MONTHLY, HOURLY
-    #         filter: {
-    #           or: [
-    #             {
-    #               # recursive Expression
-    #             },
-    #           ],
-    #           and: [
-    #             {
-    #               # recursive Expression
-    #             },
-    #           ],
-    #           not: {
-    #             # recursive Expression
-    #           },
-    #           dimensions: {
-    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, LINKED_ACCOUNT_NAME, OPERATION, PURCHASE_TYPE, REGION, SERVICE, SERVICE_CODE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE, INVOICING_ENTITY
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #           tags: {
-    #             key: "TagKey",
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #           cost_categories: {
-    #             key: "CostCategoryName",
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #         },
-    #         sort_by: {
-    #           key: "SortDefinitionKey", # required
-    #           sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #         },
-    #       }
-    #
     # @!attribute [rw] time_period
     #   The time period that you want the usage and costs for. The `Start`
     #   date must be within 13 months. The `End` date must be after the
@@ -4953,56 +3816,6 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetTagsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         search_string: "SearchString",
-    #         time_period: { # required
-    #           start: "YearMonthDay", # required
-    #           end: "YearMonthDay", # required
-    #         },
-    #         tag_key: "TagKey",
-    #         filter: {
-    #           or: [
-    #             {
-    #               # recursive Expression
-    #             },
-    #           ],
-    #           and: [
-    #             {
-    #               # recursive Expression
-    #             },
-    #           ],
-    #           not: {
-    #             # recursive Expression
-    #           },
-    #           dimensions: {
-    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, LINKED_ACCOUNT_NAME, OPERATION, PURCHASE_TYPE, REGION, SERVICE, SERVICE_CODE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE, INVOICING_ENTITY
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #           tags: {
-    #             key: "TagKey",
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #           cost_categories: {
-    #             key: "CostCategoryName",
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #         },
-    #         sort_by: [
-    #           {
-    #             key: "SortDefinitionKey", # required
-    #             sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_page_token: "NextPageToken",
-    #       }
-    #
     # @!attribute [rw] search_string
     #   The value that you want to search for.
     #   @return [String]
@@ -5160,49 +3973,6 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetUsageForecastRequest
-    #   data as a hash:
-    #
-    #       {
-    #         time_period: { # required
-    #           start: "YearMonthDay", # required
-    #           end: "YearMonthDay", # required
-    #         },
-    #         metric: "BLENDED_COST", # required, accepts BLENDED_COST, UNBLENDED_COST, AMORTIZED_COST, NET_UNBLENDED_COST, NET_AMORTIZED_COST, USAGE_QUANTITY, NORMALIZED_USAGE_AMOUNT
-    #         granularity: "DAILY", # required, accepts DAILY, MONTHLY, HOURLY
-    #         filter: {
-    #           or: [
-    #             {
-    #               # recursive Expression
-    #             },
-    #           ],
-    #           and: [
-    #             {
-    #               # recursive Expression
-    #             },
-    #           ],
-    #           not: {
-    #             # recursive Expression
-    #           },
-    #           dimensions: {
-    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, LINKED_ACCOUNT_NAME, OPERATION, PURCHASE_TYPE, REGION, SERVICE, SERVICE_CODE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE, INVOICING_ENTITY
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #           tags: {
-    #             key: "TagKey",
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #           cost_categories: {
-    #             key: "CostCategoryName",
-    #             values: ["Value"],
-    #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #           },
-    #         },
-    #         prediction_interval_level: 1,
-    #       }
-    #
     # @!attribute [rw] time_period
     #   The start and end dates of the period that you want to retrieve
     #   usage forecast for. The start date is included in the period, but
@@ -5345,14 +4115,6 @@ module Aws::CostExplorer
     # Represents a group when you specify a group by criteria or in the
     # response to a query with a specific grouping.
     #
-    # @note When making an API call, you may pass GroupDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         type: "DIMENSION", # accepts DIMENSION, TAG, COST_CATEGORY
-    #         key: "GroupDefinitionKey",
-    #       }
-    #
     # @!attribute [rw] type
     #   The string that represents the type of group.
     #   @return [String]
@@ -5455,17 +4217,6 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCostAllocationTagsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         status: "Active", # accepts Active, Inactive
-    #         tag_keys: ["TagKey"],
-    #         type: "AWSGenerated", # accepts AWSGenerated, UserDefined
-    #         next_token: "NextPageToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] status
     #   The status of cost allocation tag keys that are returned for this
     #   request.
@@ -5527,15 +4278,6 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCostCategoryDefinitionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         effective_on: "ZonedDateTime",
-    #         next_token: "NextPageToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] effective_on
     #   The date when the Cost Category was effective.
     #   @return [String]
@@ -5580,13 +4322,6 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource. For a list of
     #   supported resources, see [ResourceTag][1].
@@ -5683,14 +4418,6 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ProvideAnomalyFeedbackRequest
-    #   data as a hash:
-    #
-    #       {
-    #         anomaly_id: "GenericString", # required
-    #         feedback: "YES", # required, accepts YES, NO, PLANNED_ACTIVITY
-    #       }
-    #
     # @!attribute [rw] anomaly_id
     #   A cost anomaly ID.
     #   @return [String]
@@ -6259,14 +4986,6 @@ module Aws::CostExplorer
     # [2]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AnomalySubscription.html
     # [3]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategory.html
     #
-    # @note When making an API call, you may pass ResourceTag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "ResourceTagKey", # required
-    #         value: "ResourceTagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The key that's associated with the tag.
     #   @return [String]
@@ -6375,14 +5094,6 @@ module Aws::CostExplorer
     # estimated savings that are associated with recommendations with
     # consideration of existing Savings Plans or Reserved Instance (RI)
     # benefits, or neither.
-    #
-    # @note When making an API call, you may pass RightsizingRecommendationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         recommendation_target: "SAME_INSTANCE_FAMILY", # required, accepts SAME_INSTANCE_FAMILY, CROSS_INSTANCE_FAMILY
-    #         benefits_considered: false, # required
-    #       }
     #
     # @!attribute [rw] recommendation_target
     #   The option to see recommendations within the same instance family or
@@ -7052,15 +5763,6 @@ module Aws::CostExplorer
     # Hardware specifications for the service that you want recommendations
     # for.
     #
-    # @note When making an API call, you may pass ServiceSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         ec2_specification: {
-    #           offering_class: "STANDARD", # accepts STANDARD, CONVERTIBLE
-    #         },
-    #       }
-    #
     # @!attribute [rw] ec2_specification
     #   The Amazon EC2 hardware specifications that you want Amazon Web
     #   Services to provide recommendations for.
@@ -7075,14 +5777,6 @@ module Aws::CostExplorer
     end
 
     # The details for how to sort the data.
-    #
-    # @note When making an API call, you may pass SortDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         key: "SortDefinitionKey", # required
-    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #       }
     #
     # @!attribute [rw] key
     #   The key that's used to sort the data.
@@ -7102,15 +5796,6 @@ module Aws::CostExplorer
     end
 
     # The recipient of `AnomalySubscription` notifications.
-    #
-    # @note When making an API call, you may pass Subscriber
-    #   data as a hash:
-    #
-    #       {
-    #         address: "SubscriberAddress",
-    #         type: "EMAIL", # accepts EMAIL, SNS
-    #         status: "CONFIRMED", # accepts CONFIRMED, DECLINED
-    #       }
     #
     # @!attribute [rw] address
     #   The email address or SNS Amazon Resource Name (ARN). This depends on
@@ -7135,19 +5820,6 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         resource_tags: [ # required
-    #           {
-    #             key: "ResourceTagKey", # required
-    #             value: "ResourceTagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource. For a list of
     #   supported resources, see [ResourceTag][1].
@@ -7205,15 +5877,6 @@ module Aws::CostExplorer
     # If `Key` is provided and `Values` isn't specified, the `ABSENT`
     # `MatchOption` is applied to the tag `Key` only. That is, it's
     # filtered on resources without the given tag key.
-    #
-    # @note When making an API call, you may pass TagValues
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey",
-    #         values: ["Value"],
-    #         match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #       }
     #
     # @!attribute [rw] key
     #   The key for the tag.
@@ -7330,15 +5993,6 @@ module Aws::CostExplorer
 
     # Filters cost anomalies based on the total impact.
     #
-    # @note When making an API call, you may pass TotalImpactFilter
-    #   data as a hash:
-    #
-    #       {
-    #         numeric_operator: "EQUAL", # required, accepts EQUAL, GREATER_THAN_OR_EQUAL, LESS_THAN_OR_EQUAL, GREATER_THAN, LESS_THAN, BETWEEN
-    #         start_value: 1.0, # required
-    #         end_value: 1.0,
-    #       }
-    #
     # @!attribute [rw] numeric_operator
     #   The comparing value that's used in the filter.
     #   @return [String]
@@ -7402,14 +6056,6 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         resource_tag_keys: ["ResourceTagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource. For a list of
     #   supported resources, see [ResourceTag][1].
@@ -7440,14 +6086,6 @@ module Aws::CostExplorer
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateAnomalyMonitorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         monitor_arn: "GenericString", # required
-    #         monitor_name: "GenericString",
-    #       }
-    #
     # @!attribute [rw] monitor_arn
     #   Cost anomaly monitor Amazon Resource Names (ARNs).
     #   @return [String]
@@ -7477,24 +6115,6 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateAnomalySubscriptionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         subscription_arn: "GenericString", # required
-    #         threshold: 1.0,
-    #         frequency: "DAILY", # accepts DAILY, IMMEDIATE, WEEKLY
-    #         monitor_arn_list: ["Arn"],
-    #         subscribers: [
-    #           {
-    #             address: "SubscriberAddress",
-    #             type: "EMAIL", # accepts EMAIL, SNS
-    #             status: "CONFIRMED", # accepts CONFIRMED, DECLINED
-    #           },
-    #         ],
-    #         subscription_name: "GenericString",
-    #       }
-    #
     # @!attribute [rw] subscription_arn
     #   A cost anomaly subscription Amazon Resource Name (ARN).
     #   @return [String]
@@ -7570,18 +6190,6 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateCostAllocationTagsStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cost_allocation_tags_status: [ # required
-    #           {
-    #             tag_key: "TagKey", # required
-    #             status: "Active", # required, accepts Active, Inactive
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] cost_allocation_tags_status
     #   The list of `CostAllocationTagStatusEntry` objects that are used to
     #   update cost allocation tags status for this request.
@@ -7609,69 +6217,6 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateCostCategoryDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cost_category_arn: "Arn", # required
-    #         effective_start: "ZonedDateTime",
-    #         rule_version: "CostCategoryExpression.v1", # required, accepts CostCategoryExpression.v1
-    #         rules: [ # required
-    #           {
-    #             value: "CostCategoryValue",
-    #             rule: {
-    #               or: [
-    #                 {
-    #                   # recursive Expression
-    #                 },
-    #               ],
-    #               and: [
-    #                 {
-    #                   # recursive Expression
-    #                 },
-    #               ],
-    #               not: {
-    #                 # recursive Expression
-    #               },
-    #               dimensions: {
-    #                 key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, LINKED_ACCOUNT_NAME, OPERATION, PURCHASE_TYPE, REGION, SERVICE, SERVICE_CODE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE, INVOICING_ENTITY
-    #                 values: ["Value"],
-    #                 match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #               },
-    #               tags: {
-    #                 key: "TagKey",
-    #                 values: ["Value"],
-    #                 match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #               },
-    #               cost_categories: {
-    #                 key: "CostCategoryName",
-    #                 values: ["Value"],
-    #                 match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
-    #               },
-    #             },
-    #             inherited_value: {
-    #               dimension_name: "LINKED_ACCOUNT_NAME", # accepts LINKED_ACCOUNT_NAME, TAG
-    #               dimension_key: "GenericString",
-    #             },
-    #             type: "REGULAR", # accepts REGULAR, INHERITED_VALUE
-    #           },
-    #         ],
-    #         default_value: "CostCategoryValue",
-    #         split_charge_rules: [
-    #           {
-    #             source: "GenericString", # required
-    #             targets: ["GenericString"], # required
-    #             method: "FIXED", # required, accepts FIXED, PROPORTIONAL, EVEN
-    #             parameters: [
-    #               {
-    #                 type: "ALLOCATION_PERCENTAGES", # required, accepts ALLOCATION_PERCENTAGES
-    #                 values: ["GenericString"], # required
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] cost_category_arn
     #   The unique identifier for your Cost Category.
     #   @return [String]

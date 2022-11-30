@@ -58,53 +58,6 @@ module Aws::IoTTwinMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchPutPropertyValuesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workspace_id: "Id", # required
-    #         entries: [ # required
-    #           {
-    #             entity_property_reference: { # required
-    #               component_name: "Name",
-    #               external_id_property: {
-    #                 "String" => "String",
-    #               },
-    #               entity_id: "EntityId",
-    #               property_name: "Name", # required
-    #             },
-    #             property_values: [
-    #               {
-    #                 timestamp: Time.now,
-    #                 value: { # required
-    #                   boolean_value: false,
-    #                   double_value: 1.0,
-    #                   integer_value: 1,
-    #                   long_value: 1,
-    #                   string_value: "String",
-    #                   list_value: [
-    #                     {
-    #                       # recursive DataValue
-    #                     },
-    #                   ],
-    #                   map_value: {
-    #                     "String" => {
-    #                       # recursive DataValue
-    #                     },
-    #                   },
-    #                   relationship_value: {
-    #                     target_entity_id: "EntityId",
-    #                     target_component_name: "Name",
-    #                   },
-    #                   expression: "Expression",
-    #                 },
-    #                 time: "Time",
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] workspace_id
     #   The ID of the workspace that contains the properties to set.
     #   @return [String]
@@ -165,15 +118,6 @@ module Aws::IoTTwinMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ComponentPropertyGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         group_type: "TABULAR", # accepts TABULAR
-    #         property_names: ["Name"],
-    #         update_type: "UPDATE", # accepts UPDATE, DELETE, CREATE
-    #       }
-    #
     # @!attribute [rw] group_type
     #   The group type.
     #   @return [String]
@@ -219,112 +163,6 @@ module Aws::IoTTwinMaker
 
     # An object that sets information about a component type create or
     # update request.
-    #
-    # @note When making an API call, you may pass ComponentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "Description",
-    #         component_type_id: "ComponentTypeId",
-    #         properties: {
-    #           "Name" => {
-    #             definition: {
-    #               data_type: {
-    #                 type: "RELATIONSHIP", # required, accepts RELATIONSHIP, STRING, LONG, BOOLEAN, INTEGER, DOUBLE, LIST, MAP
-    #                 nested_type: {
-    #                   # recursive DataType
-    #                 },
-    #                 allowed_values: [
-    #                   {
-    #                     boolean_value: false,
-    #                     double_value: 1.0,
-    #                     integer_value: 1,
-    #                     long_value: 1,
-    #                     string_value: "String",
-    #                     list_value: {
-    #                       # recursive DataValueList
-    #                     },
-    #                     map_value: {
-    #                       "String" => {
-    #                         # recursive DataValue
-    #                       },
-    #                     },
-    #                     relationship_value: {
-    #                       target_entity_id: "EntityId",
-    #                       target_component_name: "Name",
-    #                     },
-    #                     expression: "Expression",
-    #                   },
-    #                 ],
-    #                 unit_of_measure: "String",
-    #                 relationship: {
-    #                   target_component_type_id: "ComponentTypeId",
-    #                   relationship_type: "String",
-    #                 },
-    #               },
-    #               is_required_in_entity: false,
-    #               is_external_id: false,
-    #               is_stored_externally: false,
-    #               is_time_series: false,
-    #               default_value: {
-    #                 boolean_value: false,
-    #                 double_value: 1.0,
-    #                 integer_value: 1,
-    #                 long_value: 1,
-    #                 string_value: "String",
-    #                 list_value: [
-    #                   {
-    #                     # recursive DataValue
-    #                   },
-    #                 ],
-    #                 map_value: {
-    #                   "String" => {
-    #                     # recursive DataValue
-    #                   },
-    #                 },
-    #                 relationship_value: {
-    #                   target_entity_id: "EntityId",
-    #                   target_component_name: "Name",
-    #                 },
-    #                 expression: "Expression",
-    #               },
-    #               configuration: {
-    #                 "Name" => "Value",
-    #               },
-    #             },
-    #             value: {
-    #               boolean_value: false,
-    #               double_value: 1.0,
-    #               integer_value: 1,
-    #               long_value: 1,
-    #               string_value: "String",
-    #               list_value: [
-    #                 {
-    #                   # recursive DataValue
-    #                 },
-    #               ],
-    #               map_value: {
-    #                 "String" => {
-    #                   # recursive DataValue
-    #                 },
-    #               },
-    #               relationship_value: {
-    #                 target_entity_id: "EntityId",
-    #                 target_component_name: "Name",
-    #               },
-    #               expression: "Expression",
-    #             },
-    #             update_type: "UPDATE", # accepts UPDATE, DELETE, CREATE
-    #           },
-    #         },
-    #         property_groups: {
-    #           "Name" => {
-    #             group_type: "TABULAR", # accepts TABULAR
-    #             property_names: ["Name"],
-    #             update_type: "UPDATE", # accepts UPDATE, DELETE, CREATE
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] description
     #   The description of the component request.
@@ -437,113 +275,6 @@ module Aws::IoTTwinMaker
 
     # The component update request.
     #
-    # @note When making an API call, you may pass ComponentUpdateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         update_type: "CREATE", # accepts CREATE, UPDATE, DELETE
-    #         description: "Description",
-    #         component_type_id: "ComponentTypeId",
-    #         property_updates: {
-    #           "Name" => {
-    #             definition: {
-    #               data_type: {
-    #                 type: "RELATIONSHIP", # required, accepts RELATIONSHIP, STRING, LONG, BOOLEAN, INTEGER, DOUBLE, LIST, MAP
-    #                 nested_type: {
-    #                   # recursive DataType
-    #                 },
-    #                 allowed_values: [
-    #                   {
-    #                     boolean_value: false,
-    #                     double_value: 1.0,
-    #                     integer_value: 1,
-    #                     long_value: 1,
-    #                     string_value: "String",
-    #                     list_value: {
-    #                       # recursive DataValueList
-    #                     },
-    #                     map_value: {
-    #                       "String" => {
-    #                         # recursive DataValue
-    #                       },
-    #                     },
-    #                     relationship_value: {
-    #                       target_entity_id: "EntityId",
-    #                       target_component_name: "Name",
-    #                     },
-    #                     expression: "Expression",
-    #                   },
-    #                 ],
-    #                 unit_of_measure: "String",
-    #                 relationship: {
-    #                   target_component_type_id: "ComponentTypeId",
-    #                   relationship_type: "String",
-    #                 },
-    #               },
-    #               is_required_in_entity: false,
-    #               is_external_id: false,
-    #               is_stored_externally: false,
-    #               is_time_series: false,
-    #               default_value: {
-    #                 boolean_value: false,
-    #                 double_value: 1.0,
-    #                 integer_value: 1,
-    #                 long_value: 1,
-    #                 string_value: "String",
-    #                 list_value: [
-    #                   {
-    #                     # recursive DataValue
-    #                   },
-    #                 ],
-    #                 map_value: {
-    #                   "String" => {
-    #                     # recursive DataValue
-    #                   },
-    #                 },
-    #                 relationship_value: {
-    #                   target_entity_id: "EntityId",
-    #                   target_component_name: "Name",
-    #                 },
-    #                 expression: "Expression",
-    #               },
-    #               configuration: {
-    #                 "Name" => "Value",
-    #               },
-    #             },
-    #             value: {
-    #               boolean_value: false,
-    #               double_value: 1.0,
-    #               integer_value: 1,
-    #               long_value: 1,
-    #               string_value: "String",
-    #               list_value: [
-    #                 {
-    #                   # recursive DataValue
-    #                 },
-    #               ],
-    #               map_value: {
-    #                 "String" => {
-    #                   # recursive DataValue
-    #                 },
-    #               },
-    #               relationship_value: {
-    #                 target_entity_id: "EntityId",
-    #                 target_component_name: "Name",
-    #               },
-    #               expression: "Expression",
-    #             },
-    #             update_type: "UPDATE", # accepts UPDATE, DELETE, CREATE
-    #           },
-    #         },
-    #         property_group_updates: {
-    #           "Name" => {
-    #             group_type: "TABULAR", # accepts TABULAR
-    #             property_names: ["Name"],
-    #             update_type: "UPDATE", # accepts UPDATE, DELETE, CREATE
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] update_type
     #   The update type of the component update request.
     #   @return [String]
@@ -609,104 +340,6 @@ module Aws::IoTTwinMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateComponentTypeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workspace_id: "Id", # required
-    #         is_singleton: false,
-    #         component_type_id: "ComponentTypeId", # required
-    #         description: "Description",
-    #         property_definitions: {
-    #           "Name" => {
-    #             data_type: {
-    #               type: "RELATIONSHIP", # required, accepts RELATIONSHIP, STRING, LONG, BOOLEAN, INTEGER, DOUBLE, LIST, MAP
-    #               nested_type: {
-    #                 # recursive DataType
-    #               },
-    #               allowed_values: [
-    #                 {
-    #                   boolean_value: false,
-    #                   double_value: 1.0,
-    #                   integer_value: 1,
-    #                   long_value: 1,
-    #                   string_value: "String",
-    #                   list_value: {
-    #                     # recursive DataValueList
-    #                   },
-    #                   map_value: {
-    #                     "String" => {
-    #                       # recursive DataValue
-    #                     },
-    #                   },
-    #                   relationship_value: {
-    #                     target_entity_id: "EntityId",
-    #                     target_component_name: "Name",
-    #                   },
-    #                   expression: "Expression",
-    #                 },
-    #               ],
-    #               unit_of_measure: "String",
-    #               relationship: {
-    #                 target_component_type_id: "ComponentTypeId",
-    #                 relationship_type: "String",
-    #               },
-    #             },
-    #             is_required_in_entity: false,
-    #             is_external_id: false,
-    #             is_stored_externally: false,
-    #             is_time_series: false,
-    #             default_value: {
-    #               boolean_value: false,
-    #               double_value: 1.0,
-    #               integer_value: 1,
-    #               long_value: 1,
-    #               string_value: "String",
-    #               list_value: [
-    #                 {
-    #                   # recursive DataValue
-    #                 },
-    #               ],
-    #               map_value: {
-    #                 "String" => {
-    #                   # recursive DataValue
-    #                 },
-    #               },
-    #               relationship_value: {
-    #                 target_entity_id: "EntityId",
-    #                 target_component_name: "Name",
-    #               },
-    #               expression: "Expression",
-    #             },
-    #             configuration: {
-    #               "Name" => "Value",
-    #             },
-    #           },
-    #         },
-    #         extends_from: ["ComponentTypeId"],
-    #         functions: {
-    #           "Name" => {
-    #             required_properties: ["Name"],
-    #             scope: "ENTITY", # accepts ENTITY, WORKSPACE
-    #             implemented_by: {
-    #               lambda: {
-    #                 arn: "LambdaArn", # required
-    #               },
-    #               is_native: false,
-    #             },
-    #           },
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         property_groups: {
-    #           "Name" => {
-    #             group_type: "TABULAR", # accepts TABULAR
-    #             property_names: ["Name"],
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] workspace_id
     #   The ID of the workspace that contains the component type.
     #   @return [String]
@@ -780,124 +413,6 @@ module Aws::IoTTwinMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateEntityRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workspace_id: "Id", # required
-    #         entity_id: "EntityId",
-    #         entity_name: "EntityName", # required
-    #         description: "Description",
-    #         components: {
-    #           "Name" => {
-    #             description: "Description",
-    #             component_type_id: "ComponentTypeId",
-    #             properties: {
-    #               "Name" => {
-    #                 definition: {
-    #                   data_type: {
-    #                     type: "RELATIONSHIP", # required, accepts RELATIONSHIP, STRING, LONG, BOOLEAN, INTEGER, DOUBLE, LIST, MAP
-    #                     nested_type: {
-    #                       # recursive DataType
-    #                     },
-    #                     allowed_values: [
-    #                       {
-    #                         boolean_value: false,
-    #                         double_value: 1.0,
-    #                         integer_value: 1,
-    #                         long_value: 1,
-    #                         string_value: "String",
-    #                         list_value: {
-    #                           # recursive DataValueList
-    #                         },
-    #                         map_value: {
-    #                           "String" => {
-    #                             # recursive DataValue
-    #                           },
-    #                         },
-    #                         relationship_value: {
-    #                           target_entity_id: "EntityId",
-    #                           target_component_name: "Name",
-    #                         },
-    #                         expression: "Expression",
-    #                       },
-    #                     ],
-    #                     unit_of_measure: "String",
-    #                     relationship: {
-    #                       target_component_type_id: "ComponentTypeId",
-    #                       relationship_type: "String",
-    #                     },
-    #                   },
-    #                   is_required_in_entity: false,
-    #                   is_external_id: false,
-    #                   is_stored_externally: false,
-    #                   is_time_series: false,
-    #                   default_value: {
-    #                     boolean_value: false,
-    #                     double_value: 1.0,
-    #                     integer_value: 1,
-    #                     long_value: 1,
-    #                     string_value: "String",
-    #                     list_value: [
-    #                       {
-    #                         # recursive DataValue
-    #                       },
-    #                     ],
-    #                     map_value: {
-    #                       "String" => {
-    #                         # recursive DataValue
-    #                       },
-    #                     },
-    #                     relationship_value: {
-    #                       target_entity_id: "EntityId",
-    #                       target_component_name: "Name",
-    #                     },
-    #                     expression: "Expression",
-    #                   },
-    #                   configuration: {
-    #                     "Name" => "Value",
-    #                   },
-    #                 },
-    #                 value: {
-    #                   boolean_value: false,
-    #                   double_value: 1.0,
-    #                   integer_value: 1,
-    #                   long_value: 1,
-    #                   string_value: "String",
-    #                   list_value: [
-    #                     {
-    #                       # recursive DataValue
-    #                     },
-    #                   ],
-    #                   map_value: {
-    #                     "String" => {
-    #                       # recursive DataValue
-    #                     },
-    #                   },
-    #                   relationship_value: {
-    #                     target_entity_id: "EntityId",
-    #                     target_component_name: "Name",
-    #                   },
-    #                   expression: "Expression",
-    #                 },
-    #                 update_type: "UPDATE", # accepts UPDATE, DELETE, CREATE
-    #               },
-    #             },
-    #             property_groups: {
-    #               "Name" => {
-    #                 group_type: "TABULAR", # accepts TABULAR
-    #                 property_names: ["Name"],
-    #                 update_type: "UPDATE", # accepts UPDATE, DELETE, CREATE
-    #               },
-    #             },
-    #           },
-    #         },
-    #         parent_entity_id: "ParentEntityId",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] workspace_id
     #   The ID of the workspace that contains the entity.
     #   @return [String]
@@ -964,20 +479,6 @@ module Aws::IoTTwinMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateSceneRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workspace_id: "Id", # required
-    #         scene_id: "Id", # required
-    #         content_location: "S3Url", # required
-    #         description: "Description",
-    #         capabilities: ["SceneCapability"],
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] workspace_id
     #   The ID of the workspace that contains the scene.
     #   @return [String]
@@ -1029,19 +530,6 @@ module Aws::IoTTwinMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateWorkspaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workspace_id: "Id", # required
-    #         description: "Description",
-    #         s3_location: "S3Location", # required
-    #         role: "RoleArn", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] workspace_id
     #   The ID of the workspace.
     #   @return [String]
@@ -1090,16 +578,6 @@ module Aws::IoTTwinMaker
 
     # The data connector.
     #
-    # @note When making an API call, you may pass DataConnector
-    #   data as a hash:
-    #
-    #       {
-    #         lambda: {
-    #           arn: "LambdaArn", # required
-    #         },
-    #         is_native: false,
-    #       }
-    #
     # @!attribute [rw] lambda
     #   The Lambda function associated with this data connector.
     #   @return [Types::LambdaFunction]
@@ -1117,73 +595,6 @@ module Aws::IoTTwinMaker
     end
 
     # An object that specifies the data type of a property.
-    #
-    # @note When making an API call, you may pass DataType
-    #   data as a hash:
-    #
-    #       {
-    #         type: "RELATIONSHIP", # required, accepts RELATIONSHIP, STRING, LONG, BOOLEAN, INTEGER, DOUBLE, LIST, MAP
-    #         nested_type: {
-    #           type: "RELATIONSHIP", # required, accepts RELATIONSHIP, STRING, LONG, BOOLEAN, INTEGER, DOUBLE, LIST, MAP
-    #           nested_type: {
-    #             # recursive DataType
-    #           },
-    #           allowed_values: [
-    #             {
-    #               boolean_value: false,
-    #               double_value: 1.0,
-    #               integer_value: 1,
-    #               long_value: 1,
-    #               string_value: "String",
-    #               list_value: {
-    #                 # recursive DataValueList
-    #               },
-    #               map_value: {
-    #                 "String" => {
-    #                   # recursive DataValue
-    #                 },
-    #               },
-    #               relationship_value: {
-    #                 target_entity_id: "EntityId",
-    #                 target_component_name: "Name",
-    #               },
-    #               expression: "Expression",
-    #             },
-    #           ],
-    #           unit_of_measure: "String",
-    #           relationship: {
-    #             target_component_type_id: "ComponentTypeId",
-    #             relationship_type: "String",
-    #           },
-    #         },
-    #         allowed_values: [
-    #           {
-    #             boolean_value: false,
-    #             double_value: 1.0,
-    #             integer_value: 1,
-    #             long_value: 1,
-    #             string_value: "String",
-    #             list_value: {
-    #               # recursive DataValueList
-    #             },
-    #             map_value: {
-    #               "String" => {
-    #                 # recursive DataValue
-    #               },
-    #             },
-    #             relationship_value: {
-    #               target_entity_id: "EntityId",
-    #               target_component_name: "Name",
-    #             },
-    #             expression: "Expression",
-    #           },
-    #         ],
-    #         unit_of_measure: "String",
-    #         relationship: {
-    #           target_component_type_id: "ComponentTypeId",
-    #           relationship_type: "String",
-    #         },
-    #       }
     #
     # @!attribute [rw] type
     #   The underlying type of the data type.
@@ -1216,66 +627,6 @@ module Aws::IoTTwinMaker
     end
 
     # An object that specifies a value for a property.
-    #
-    # @note When making an API call, you may pass DataValue
-    #   data as a hash:
-    #
-    #       {
-    #         boolean_value: false,
-    #         double_value: 1.0,
-    #         integer_value: 1,
-    #         long_value: 1,
-    #         string_value: "String",
-    #         list_value: [
-    #           {
-    #             boolean_value: false,
-    #             double_value: 1.0,
-    #             integer_value: 1,
-    #             long_value: 1,
-    #             string_value: "String",
-    #             list_value: {
-    #               # recursive DataValueList
-    #             },
-    #             map_value: {
-    #               "String" => {
-    #                 # recursive DataValue
-    #               },
-    #             },
-    #             relationship_value: {
-    #               target_entity_id: "EntityId",
-    #               target_component_name: "Name",
-    #             },
-    #             expression: "Expression",
-    #           },
-    #         ],
-    #         map_value: {
-    #           "String" => {
-    #             boolean_value: false,
-    #             double_value: 1.0,
-    #             integer_value: 1,
-    #             long_value: 1,
-    #             string_value: "String",
-    #             list_value: [
-    #               {
-    #                 # recursive DataValue
-    #               },
-    #             ],
-    #             map_value: {
-    #               # recursive DataValueMap
-    #             },
-    #             relationship_value: {
-    #               target_entity_id: "EntityId",
-    #               target_component_name: "Name",
-    #             },
-    #             expression: "Expression",
-    #           },
-    #         },
-    #         relationship_value: {
-    #           target_entity_id: "EntityId",
-    #           target_component_name: "Name",
-    #         },
-    #         expression: "Expression",
-    #       }
     #
     # @!attribute [rw] boolean_value
     #   A Boolean value.
@@ -1327,14 +678,6 @@ module Aws::IoTTwinMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteComponentTypeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workspace_id: "Id", # required
-    #         component_type_id: "ComponentTypeId", # required
-    #       }
-    #
     # @!attribute [rw] workspace_id
     #   The ID of the workspace that contains the component type.
     #   @return [String]
@@ -1360,15 +703,6 @@ module Aws::IoTTwinMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteEntityRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workspace_id: "Id", # required
-    #         entity_id: "EntityId", # required
-    #         is_recursive: false,
-    #       }
-    #
     # @!attribute [rw] workspace_id
     #   The ID of the workspace that contains the entity to delete.
     #   @return [String]
@@ -1400,14 +734,6 @@ module Aws::IoTTwinMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteSceneRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workspace_id: "Id", # required
-    #         scene_id: "Id", # required
-    #       }
-    #
     # @!attribute [rw] workspace_id
     #   The ID of the workspace.
     #   @return [String]
@@ -1425,13 +751,6 @@ module Aws::IoTTwinMaker
 
     class DeleteSceneResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteWorkspaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workspace_id: "Id", # required
-    #       }
-    #
     # @!attribute [rw] workspace_id
     #   The ID of the workspace to delete.
     #   @return [String]
@@ -1445,18 +764,6 @@ module Aws::IoTTwinMaker
     class DeleteWorkspaceResponse < Aws::EmptyStructure; end
 
     # An object that uniquely identifies an entity property.
-    #
-    # @note When making an API call, you may pass EntityPropertyReference
-    #   data as a hash:
-    #
-    #       {
-    #         component_name: "Name",
-    #         external_id_property: {
-    #           "String" => "String",
-    #         },
-    #         entity_id: "EntityId",
-    #         property_name: "Name", # required
-    #       }
     #
     # @!attribute [rw] component_name
     #   The name of the component.
@@ -1554,16 +861,6 @@ module Aws::IoTTwinMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ExecuteQueryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workspace_id: "Id", # required
-    #         query_statement: "QueryStatement", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] workspace_id
     #   The ID of the workspace.
     #   @return [String]
@@ -1614,20 +911,6 @@ module Aws::IoTTwinMaker
 
     # The function request body.
     #
-    # @note When making an API call, you may pass FunctionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         required_properties: ["Name"],
-    #         scope: "ENTITY", # accepts ENTITY, WORKSPACE
-    #         implemented_by: {
-    #           lambda: {
-    #             arn: "LambdaArn", # required
-    #           },
-    #           is_native: false,
-    #         },
-    #       }
-    #
     # @!attribute [rw] required_properties
     #   The required properties of the function.
     #   @return [Array<String>]
@@ -1675,14 +958,6 @@ module Aws::IoTTwinMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetComponentTypeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workspace_id: "Id", # required
-    #         component_type_id: "ComponentTypeId", # required
-    #       }
-    #
     # @!attribute [rw] workspace_id
     #   The ID of the workspace that contains the component type.
     #   @return [String]
@@ -1783,14 +1058,6 @@ module Aws::IoTTwinMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetEntityRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workspace_id: "Id", # required
-    #         entity_id: "EntityId", # required
-    #       }
-    #
     # @!attribute [rw] workspace_id
     #   The ID of the workspace.
     #   @return [String]
@@ -1868,8 +1135,6 @@ module Aws::IoTTwinMaker
       include Aws::Structure
     end
 
-    # @api private
-    #
     class GetPricingPlanRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] current_pricing_plan
@@ -1887,56 +1152,6 @@ module Aws::IoTTwinMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetPropertyValueHistoryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workspace_id: "Id", # required
-    #         entity_id: "EntityId",
-    #         component_name: "Name",
-    #         component_type_id: "ComponentTypeId",
-    #         selected_properties: ["String"], # required
-    #         property_filters: [
-    #           {
-    #             property_name: "String",
-    #             operator: "String",
-    #             value: {
-    #               boolean_value: false,
-    #               double_value: 1.0,
-    #               integer_value: 1,
-    #               long_value: 1,
-    #               string_value: "String",
-    #               list_value: [
-    #                 {
-    #                   # recursive DataValue
-    #                 },
-    #               ],
-    #               map_value: {
-    #                 "String" => {
-    #                   # recursive DataValue
-    #                 },
-    #               },
-    #               relationship_value: {
-    #                 target_entity_id: "EntityId",
-    #                 target_component_name: "Name",
-    #               },
-    #               expression: "Expression",
-    #             },
-    #           },
-    #         ],
-    #         start_date_time: Time.now,
-    #         end_date_time: Time.now,
-    #         interpolation: {
-    #           interpolation_type: "LINEAR", # accepts LINEAR
-    #           interval_in_seconds: 1,
-    #         },
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         order_by_time: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #         start_time: "Time",
-    #         end_time: "Time",
-    #       }
-    #
     # @!attribute [rw] workspace_id
     #   The ID of the workspace.
     #   @return [String]
@@ -2047,56 +1262,6 @@ module Aws::IoTTwinMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetPropertyValueRequest
-    #   data as a hash:
-    #
-    #       {
-    #         component_name: "Name",
-    #         component_type_id: "ComponentTypeId",
-    #         entity_id: "EntityId",
-    #         selected_properties: ["String"], # required
-    #         workspace_id: "Id", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         property_group_name: "Name",
-    #         tabular_conditions: {
-    #           order_by: [
-    #             {
-    #               order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #               property_name: "String", # required
-    #             },
-    #           ],
-    #           property_filters: [
-    #             {
-    #               property_name: "String",
-    #               operator: "String",
-    #               value: {
-    #                 boolean_value: false,
-    #                 double_value: 1.0,
-    #                 integer_value: 1,
-    #                 long_value: 1,
-    #                 string_value: "String",
-    #                 list_value: [
-    #                   {
-    #                     # recursive DataValue
-    #                   },
-    #                 ],
-    #                 map_value: {
-    #                   "String" => {
-    #                     # recursive DataValue
-    #                   },
-    #                 },
-    #                 relationship_value: {
-    #                   target_entity_id: "EntityId",
-    #                   target_component_name: "Name",
-    #                 },
-    #                 expression: "Expression",
-    #               },
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] component_name
     #   The name of the component whose property values the operation
     #   returns.
@@ -2174,14 +1339,6 @@ module Aws::IoTTwinMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSceneRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workspace_id: "Id", # required
-    #         scene_id: "Id", # required
-    #       }
-    #
     # @!attribute [rw] workspace_id
     #   The ID of the workspace that contains the scene.
     #   @return [String]
@@ -2243,13 +1400,6 @@ module Aws::IoTTwinMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetWorkspaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workspace_id: "IdOrArn", # required
-    #       }
-    #
     # @!attribute [rw] workspace_id
     #   The ID of the workspace.
     #   @return [String]
@@ -2314,14 +1464,6 @@ module Aws::IoTTwinMaker
 
     # An object that specifies how to interpolate data in a list.
     #
-    # @note When making an API call, you may pass InterpolationParameters
-    #   data as a hash:
-    #
-    #       {
-    #         interpolation_type: "LINEAR", # accepts LINEAR
-    #         interval_in_seconds: 1,
-    #       }
-    #
     # @!attribute [rw] interpolation_type
     #   The interpolation type.
     #   @return [String]
@@ -2339,13 +1481,6 @@ module Aws::IoTTwinMaker
 
     # The Lambda function.
     #
-    # @note When making an API call, you may pass LambdaFunction
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "LambdaArn", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The ARN of the Lambda function.
     #   @return [String]
@@ -2361,8 +1496,6 @@ module Aws::IoTTwinMaker
     # <note markdown="1"> Only one object is accepted as a valid input.
     #
     #  </note>
-    #
-    # @note ListComponentTypesFilter is a union - when making an API calls you must set exactly one of the members.
     #
     # @!attribute [rw] extends_from
     #   The component type that the component types in the list extend.
@@ -2392,22 +1525,6 @@ module Aws::IoTTwinMaker
       class Unknown < ListComponentTypesFilter; end
     end
 
-    # @note When making an API call, you may pass ListComponentTypesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workspace_id: "Id", # required
-    #         filters: [
-    #           {
-    #             extends_from: "ComponentTypeId",
-    #             namespace: "String",
-    #             is_abstract: false,
-    #           },
-    #         ],
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] workspace_id
     #   The ID of the workspace.
     #   @return [String]
@@ -2464,8 +1581,6 @@ module Aws::IoTTwinMaker
 
     # An object that filters items in a list of entities.
     #
-    # @note ListEntitiesFilter is a union - when making an API calls you must set exactly one of the members.
-    #
     # @!attribute [rw] parent_entity_id
     #   The parent of the entities in the list.
     #   @return [String]
@@ -2494,22 +1609,6 @@ module Aws::IoTTwinMaker
       class Unknown < ListEntitiesFilter; end
     end
 
-    # @note When making an API call, you may pass ListEntitiesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workspace_id: "Id", # required
-    #         filters: [
-    #           {
-    #             parent_entity_id: "ParentEntityId",
-    #             component_type_id: "ComponentTypeId",
-    #             external_id: "String",
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] workspace_id
     #   The ID of the workspace.
     #   @return [String]
@@ -2557,15 +1656,6 @@ module Aws::IoTTwinMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListScenesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workspace_id: "Id", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] workspace_id
     #   The ID of the workspace that contains the scenes.
     #   @return [String]
@@ -2601,15 +1691,6 @@ module Aws::IoTTwinMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "TwinMakerArn", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource.
     #   @return [String]
@@ -2648,14 +1729,6 @@ module Aws::IoTTwinMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListWorkspacesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to return at one time. The default is
     #   25.
@@ -2692,14 +1765,6 @@ module Aws::IoTTwinMaker
     # Filter criteria that orders the return output. It can be sorted in
     # ascending or descending order.
     #
-    # @note When making an API call, you may pass OrderBy
-    #   data as a hash:
-    #
-    #       {
-    #         order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #         property_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] order
     #   The set order that filters results.
     #   @return [String]
@@ -2716,14 +1781,6 @@ module Aws::IoTTwinMaker
     end
 
     # The parent entity update request.
-    #
-    # @note When making an API call, you may pass ParentEntityUpdateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         update_type: "UPDATE", # required, accepts UPDATE, DELETE
-    #         parent_entity_id: "ParentEntityId",
-    #       }
     #
     # @!attribute [rw] update_type
     #   The type of the update.
@@ -2778,74 +1835,6 @@ module Aws::IoTTwinMaker
     end
 
     # An object that sets information about a property.
-    #
-    # @note When making an API call, you may pass PropertyDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         data_type: {
-    #           type: "RELATIONSHIP", # required, accepts RELATIONSHIP, STRING, LONG, BOOLEAN, INTEGER, DOUBLE, LIST, MAP
-    #           nested_type: {
-    #             # recursive DataType
-    #           },
-    #           allowed_values: [
-    #             {
-    #               boolean_value: false,
-    #               double_value: 1.0,
-    #               integer_value: 1,
-    #               long_value: 1,
-    #               string_value: "String",
-    #               list_value: {
-    #                 # recursive DataValueList
-    #               },
-    #               map_value: {
-    #                 "String" => {
-    #                   # recursive DataValue
-    #                 },
-    #               },
-    #               relationship_value: {
-    #                 target_entity_id: "EntityId",
-    #                 target_component_name: "Name",
-    #               },
-    #               expression: "Expression",
-    #             },
-    #           ],
-    #           unit_of_measure: "String",
-    #           relationship: {
-    #             target_component_type_id: "ComponentTypeId",
-    #             relationship_type: "String",
-    #           },
-    #         },
-    #         is_required_in_entity: false,
-    #         is_external_id: false,
-    #         is_stored_externally: false,
-    #         is_time_series: false,
-    #         default_value: {
-    #           boolean_value: false,
-    #           double_value: 1.0,
-    #           integer_value: 1,
-    #           long_value: 1,
-    #           string_value: "String",
-    #           list_value: [
-    #             {
-    #               # recursive DataValue
-    #             },
-    #           ],
-    #           map_value: {
-    #             "String" => {
-    #               # recursive DataValue
-    #             },
-    #           },
-    #           relationship_value: {
-    #             target_entity_id: "EntityId",
-    #             target_component_name: "Name",
-    #           },
-    #           expression: "Expression",
-    #         },
-    #         configuration: {
-    #           "Name" => "Value",
-    #         },
-    #       }
     #
     # @!attribute [rw] data_type
     #   An object that contains information about the data type.
@@ -2960,36 +1949,6 @@ module Aws::IoTTwinMaker
 
     # An object that filters items returned by a property request.
     #
-    # @note When making an API call, you may pass PropertyFilter
-    #   data as a hash:
-    #
-    #       {
-    #         property_name: "String",
-    #         operator: "String",
-    #         value: {
-    #           boolean_value: false,
-    #           double_value: 1.0,
-    #           integer_value: 1,
-    #           long_value: 1,
-    #           string_value: "String",
-    #           list_value: [
-    #             {
-    #               # recursive DataValue
-    #             },
-    #           ],
-    #           map_value: {
-    #             "String" => {
-    #               # recursive DataValue
-    #             },
-    #           },
-    #           relationship_value: {
-    #             target_entity_id: "EntityId",
-    #             target_component_name: "Name",
-    #           },
-    #           expression: "Expression",
-    #         },
-    #       }
-    #
     # @!attribute [rw] property_name
     #   The property name associated with this property filter.
     #   @return [String]
@@ -3010,14 +1969,6 @@ module Aws::IoTTwinMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PropertyGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         group_type: "TABULAR", # accepts TABULAR
-    #         property_names: ["Name"],
-    #       }
-    #
     # @!attribute [rw] group_type
     #   The group type.
     #   @return [String]
@@ -3075,99 +2026,6 @@ module Aws::IoTTwinMaker
 
     # An object that sets information about a property.
     #
-    # @note When making an API call, you may pass PropertyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         definition: {
-    #           data_type: {
-    #             type: "RELATIONSHIP", # required, accepts RELATIONSHIP, STRING, LONG, BOOLEAN, INTEGER, DOUBLE, LIST, MAP
-    #             nested_type: {
-    #               # recursive DataType
-    #             },
-    #             allowed_values: [
-    #               {
-    #                 boolean_value: false,
-    #                 double_value: 1.0,
-    #                 integer_value: 1,
-    #                 long_value: 1,
-    #                 string_value: "String",
-    #                 list_value: {
-    #                   # recursive DataValueList
-    #                 },
-    #                 map_value: {
-    #                   "String" => {
-    #                     # recursive DataValue
-    #                   },
-    #                 },
-    #                 relationship_value: {
-    #                   target_entity_id: "EntityId",
-    #                   target_component_name: "Name",
-    #                 },
-    #                 expression: "Expression",
-    #               },
-    #             ],
-    #             unit_of_measure: "String",
-    #             relationship: {
-    #               target_component_type_id: "ComponentTypeId",
-    #               relationship_type: "String",
-    #             },
-    #           },
-    #           is_required_in_entity: false,
-    #           is_external_id: false,
-    #           is_stored_externally: false,
-    #           is_time_series: false,
-    #           default_value: {
-    #             boolean_value: false,
-    #             double_value: 1.0,
-    #             integer_value: 1,
-    #             long_value: 1,
-    #             string_value: "String",
-    #             list_value: [
-    #               {
-    #                 # recursive DataValue
-    #               },
-    #             ],
-    #             map_value: {
-    #               "String" => {
-    #                 # recursive DataValue
-    #               },
-    #             },
-    #             relationship_value: {
-    #               target_entity_id: "EntityId",
-    #               target_component_name: "Name",
-    #             },
-    #             expression: "Expression",
-    #           },
-    #           configuration: {
-    #             "Name" => "Value",
-    #           },
-    #         },
-    #         value: {
-    #           boolean_value: false,
-    #           double_value: 1.0,
-    #           integer_value: 1,
-    #           long_value: 1,
-    #           string_value: "String",
-    #           list_value: [
-    #             {
-    #               # recursive DataValue
-    #             },
-    #           ],
-    #           map_value: {
-    #             "String" => {
-    #               # recursive DataValue
-    #             },
-    #           },
-    #           relationship_value: {
-    #             target_entity_id: "EntityId",
-    #             target_component_name: "Name",
-    #           },
-    #           expression: "Expression",
-    #         },
-    #         update_type: "UPDATE", # accepts UPDATE, DELETE, CREATE
-    #       }
-    #
     # @!attribute [rw] definition
     #   An object that specifies information about a property.
     #   @return [Types::PropertyDefinitionRequest]
@@ -3207,36 +2065,6 @@ module Aws::IoTTwinMaker
 
     # An object that contains information about a value for a time series
     # property.
-    #
-    # @note When making an API call, you may pass PropertyValue
-    #   data as a hash:
-    #
-    #       {
-    #         timestamp: Time.now,
-    #         value: { # required
-    #           boolean_value: false,
-    #           double_value: 1.0,
-    #           integer_value: 1,
-    #           long_value: 1,
-    #           string_value: "String",
-    #           list_value: [
-    #             {
-    #               # recursive DataValue
-    #             },
-    #           ],
-    #           map_value: {
-    #             "String" => {
-    #               # recursive DataValue
-    #             },
-    #           },
-    #           relationship_value: {
-    #             target_entity_id: "EntityId",
-    #             target_component_name: "Name",
-    #           },
-    #           expression: "Expression",
-    #         },
-    #         time: "Time",
-    #       }
     #
     # @!attribute [rw] timestamp
     #   The timestamp of a value for a time series property.
@@ -3291,48 +2119,6 @@ module Aws::IoTTwinMaker
     #
     # [1]: https://docs.aws.amazon.com/iot-twinmaker/latest/apireference/API_BatchPutPropertyValues.html
     #
-    # @note When making an API call, you may pass PropertyValueEntry
-    #   data as a hash:
-    #
-    #       {
-    #         entity_property_reference: { # required
-    #           component_name: "Name",
-    #           external_id_property: {
-    #             "String" => "String",
-    #           },
-    #           entity_id: "EntityId",
-    #           property_name: "Name", # required
-    #         },
-    #         property_values: [
-    #           {
-    #             timestamp: Time.now,
-    #             value: { # required
-    #               boolean_value: false,
-    #               double_value: 1.0,
-    #               integer_value: 1,
-    #               long_value: 1,
-    #               string_value: "String",
-    #               list_value: [
-    #                 {
-    #                   # recursive DataValue
-    #                 },
-    #               ],
-    #               map_value: {
-    #                 "String" => {
-    #                   # recursive DataValue
-    #                 },
-    #               },
-    #               relationship_value: {
-    #                 target_entity_id: "EntityId",
-    #                 target_component_name: "Name",
-    #               },
-    #               expression: "Expression",
-    #             },
-    #             time: "Time",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] entity_property_reference
     #   An object that contains information about the entity that has the
     #   property.
@@ -3380,14 +2166,6 @@ module Aws::IoTTwinMaker
 
     # An object that specifies a relationship with another component type.
     #
-    # @note When making an API call, you may pass Relationship
-    #   data as a hash:
-    #
-    #       {
-    #         target_component_type_id: "ComponentTypeId",
-    #         relationship_type: "String",
-    #       }
-    #
     # @!attribute [rw] target_component_type_id
     #   The ID of the target component type associated with this
     #   relationship.
@@ -3405,14 +2183,6 @@ module Aws::IoTTwinMaker
     end
 
     # A value that associates a component and an entity.
-    #
-    # @note When making an API call, you may pass RelationshipValue
-    #   data as a hash:
-    #
-    #       {
-    #         target_entity_id: "EntityId",
-    #         target_component_name: "Name",
-    #       }
     #
     # @!attribute [rw] target_entity_id
     #   The ID of the target entity associated with this relationship value.
@@ -3523,46 +2293,6 @@ module Aws::IoTTwinMaker
 
     # The tabular conditions.
     #
-    # @note When making an API call, you may pass TabularConditions
-    #   data as a hash:
-    #
-    #       {
-    #         order_by: [
-    #           {
-    #             order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #             property_name: "String", # required
-    #           },
-    #         ],
-    #         property_filters: [
-    #           {
-    #             property_name: "String",
-    #             operator: "String",
-    #             value: {
-    #               boolean_value: false,
-    #               double_value: 1.0,
-    #               integer_value: 1,
-    #               long_value: 1,
-    #               string_value: "String",
-    #               list_value: [
-    #                 {
-    #                   # recursive DataValue
-    #                 },
-    #               ],
-    #               map_value: {
-    #                 "String" => {
-    #                   # recursive DataValue
-    #                 },
-    #               },
-    #               relationship_value: {
-    #                 target_entity_id: "EntityId",
-    #                 target_component_name: "Name",
-    #               },
-    #               expression: "Expression",
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] order_by
     #   Filter criteria that orders the output. It can be sorted in
     #   ascending or descending order.
@@ -3582,16 +2312,6 @@ module Aws::IoTTwinMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "TwinMakerArn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource.
     #   @return [String]
@@ -3631,14 +2351,6 @@ module Aws::IoTTwinMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "TwinMakerArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource.
     #   @return [String]
@@ -3658,101 +2370,6 @@ module Aws::IoTTwinMaker
 
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateComponentTypeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workspace_id: "Id", # required
-    #         is_singleton: false,
-    #         component_type_id: "ComponentTypeId", # required
-    #         description: "Description",
-    #         property_definitions: {
-    #           "Name" => {
-    #             data_type: {
-    #               type: "RELATIONSHIP", # required, accepts RELATIONSHIP, STRING, LONG, BOOLEAN, INTEGER, DOUBLE, LIST, MAP
-    #               nested_type: {
-    #                 # recursive DataType
-    #               },
-    #               allowed_values: [
-    #                 {
-    #                   boolean_value: false,
-    #                   double_value: 1.0,
-    #                   integer_value: 1,
-    #                   long_value: 1,
-    #                   string_value: "String",
-    #                   list_value: {
-    #                     # recursive DataValueList
-    #                   },
-    #                   map_value: {
-    #                     "String" => {
-    #                       # recursive DataValue
-    #                     },
-    #                   },
-    #                   relationship_value: {
-    #                     target_entity_id: "EntityId",
-    #                     target_component_name: "Name",
-    #                   },
-    #                   expression: "Expression",
-    #                 },
-    #               ],
-    #               unit_of_measure: "String",
-    #               relationship: {
-    #                 target_component_type_id: "ComponentTypeId",
-    #                 relationship_type: "String",
-    #               },
-    #             },
-    #             is_required_in_entity: false,
-    #             is_external_id: false,
-    #             is_stored_externally: false,
-    #             is_time_series: false,
-    #             default_value: {
-    #               boolean_value: false,
-    #               double_value: 1.0,
-    #               integer_value: 1,
-    #               long_value: 1,
-    #               string_value: "String",
-    #               list_value: [
-    #                 {
-    #                   # recursive DataValue
-    #                 },
-    #               ],
-    #               map_value: {
-    #                 "String" => {
-    #                   # recursive DataValue
-    #                 },
-    #               },
-    #               relationship_value: {
-    #                 target_entity_id: "EntityId",
-    #                 target_component_name: "Name",
-    #               },
-    #               expression: "Expression",
-    #             },
-    #             configuration: {
-    #               "Name" => "Value",
-    #             },
-    #           },
-    #         },
-    #         extends_from: ["ComponentTypeId"],
-    #         functions: {
-    #           "Name" => {
-    #             required_properties: ["Name"],
-    #             scope: "ENTITY", # accepts ENTITY, WORKSPACE
-    #             implemented_by: {
-    #               lambda: {
-    #                 arn: "LambdaArn", # required
-    #               },
-    #               is_native: false,
-    #             },
-    #           },
-    #         },
-    #         property_groups: {
-    #           "Name" => {
-    #             group_type: "TABULAR", # accepts TABULAR
-    #             property_names: ["Name"],
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] workspace_id
     #   The ID of the workspace that contains the component type.
     #   @return [String]
@@ -3827,125 +2444,6 @@ module Aws::IoTTwinMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateEntityRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workspace_id: "Id", # required
-    #         entity_id: "EntityId", # required
-    #         entity_name: "EntityName",
-    #         description: "Description",
-    #         component_updates: {
-    #           "Name" => {
-    #             update_type: "CREATE", # accepts CREATE, UPDATE, DELETE
-    #             description: "Description",
-    #             component_type_id: "ComponentTypeId",
-    #             property_updates: {
-    #               "Name" => {
-    #                 definition: {
-    #                   data_type: {
-    #                     type: "RELATIONSHIP", # required, accepts RELATIONSHIP, STRING, LONG, BOOLEAN, INTEGER, DOUBLE, LIST, MAP
-    #                     nested_type: {
-    #                       # recursive DataType
-    #                     },
-    #                     allowed_values: [
-    #                       {
-    #                         boolean_value: false,
-    #                         double_value: 1.0,
-    #                         integer_value: 1,
-    #                         long_value: 1,
-    #                         string_value: "String",
-    #                         list_value: {
-    #                           # recursive DataValueList
-    #                         },
-    #                         map_value: {
-    #                           "String" => {
-    #                             # recursive DataValue
-    #                           },
-    #                         },
-    #                         relationship_value: {
-    #                           target_entity_id: "EntityId",
-    #                           target_component_name: "Name",
-    #                         },
-    #                         expression: "Expression",
-    #                       },
-    #                     ],
-    #                     unit_of_measure: "String",
-    #                     relationship: {
-    #                       target_component_type_id: "ComponentTypeId",
-    #                       relationship_type: "String",
-    #                     },
-    #                   },
-    #                   is_required_in_entity: false,
-    #                   is_external_id: false,
-    #                   is_stored_externally: false,
-    #                   is_time_series: false,
-    #                   default_value: {
-    #                     boolean_value: false,
-    #                     double_value: 1.0,
-    #                     integer_value: 1,
-    #                     long_value: 1,
-    #                     string_value: "String",
-    #                     list_value: [
-    #                       {
-    #                         # recursive DataValue
-    #                       },
-    #                     ],
-    #                     map_value: {
-    #                       "String" => {
-    #                         # recursive DataValue
-    #                       },
-    #                     },
-    #                     relationship_value: {
-    #                       target_entity_id: "EntityId",
-    #                       target_component_name: "Name",
-    #                     },
-    #                     expression: "Expression",
-    #                   },
-    #                   configuration: {
-    #                     "Name" => "Value",
-    #                   },
-    #                 },
-    #                 value: {
-    #                   boolean_value: false,
-    #                   double_value: 1.0,
-    #                   integer_value: 1,
-    #                   long_value: 1,
-    #                   string_value: "String",
-    #                   list_value: [
-    #                     {
-    #                       # recursive DataValue
-    #                     },
-    #                   ],
-    #                   map_value: {
-    #                     "String" => {
-    #                       # recursive DataValue
-    #                     },
-    #                   },
-    #                   relationship_value: {
-    #                     target_entity_id: "EntityId",
-    #                     target_component_name: "Name",
-    #                   },
-    #                   expression: "Expression",
-    #                 },
-    #                 update_type: "UPDATE", # accepts UPDATE, DELETE, CREATE
-    #               },
-    #             },
-    #             property_group_updates: {
-    #               "Name" => {
-    #                 group_type: "TABULAR", # accepts TABULAR
-    #                 property_names: ["Name"],
-    #                 update_type: "UPDATE", # accepts UPDATE, DELETE, CREATE
-    #               },
-    #             },
-    #           },
-    #         },
-    #         parent_entity_update: {
-    #           update_type: "UPDATE", # required, accepts UPDATE, DELETE
-    #           parent_entity_id: "ParentEntityId",
-    #         },
-    #       }
-    #
     # @!attribute [rw] workspace_id
     #   The ID of the workspace that contains the entity.
     #   @return [String]
@@ -3997,14 +2495,6 @@ module Aws::IoTTwinMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdatePricingPlanRequest
-    #   data as a hash:
-    #
-    #       {
-    #         pricing_mode: "BASIC", # required, accepts BASIC, STANDARD, TIERED_BUNDLE
-    #         bundle_names: ["BundleName"],
-    #       }
-    #
     # @!attribute [rw] pricing_mode
     #   The pricing mode.
     #   @return [String]
@@ -4035,17 +2525,6 @@ module Aws::IoTTwinMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateSceneRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workspace_id: "Id", # required
-    #         scene_id: "Id", # required
-    #         content_location: "S3Url",
-    #         description: "Description",
-    #         capabilities: ["SceneCapability"],
-    #       }
-    #
     # @!attribute [rw] workspace_id
     #   The ID of the workspace that contains the scene.
     #   @return [String]
@@ -4087,15 +2566,6 @@ module Aws::IoTTwinMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateWorkspaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workspace_id: "Id", # required
-    #         description: "Description",
-    #         role: "RoleArn",
-    #       }
-    #
     # @!attribute [rw] workspace_id
     #   The ID of the workspace.
     #   @return [String]

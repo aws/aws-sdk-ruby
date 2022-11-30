@@ -12,15 +12,6 @@ module Aws::SageMaker
 
     # A structure describing the source of an action.
     #
-    # @note When making an API call, you may pass ActionSource
-    #   data as a hash:
-    #
-    #       {
-    #         source_uri: "String2048", # required
-    #         source_type: "String256",
-    #         source_id: "String256",
-    #       }
-    #
     # @!attribute [rw] source_uri
     #   The URI of the source.
     #   @return [String]
@@ -90,15 +81,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AddAssociationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source_arn: "AssociationEntityArn", # required
-    #         destination_arn: "AssociationEntityArn", # required
-    #         association_type: "ContributedTo", # accepts ContributedTo, AssociatedWith, DerivedFrom, Produced
-    #       }
-    #
     # @!attribute [rw] source_arn
     #   The ARN of the source.
     #   @return [String]
@@ -154,19 +136,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AddTagsInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource that you want to tag.
     #   @return [String]
@@ -206,36 +175,6 @@ module Aws::SageMaker
     # A structure of additional Inference Specification. Additional
     # Inference Specification specifies details about inference jobs that
     # can be run with models based on this model package
-    #
-    # @note When making an API call, you may pass AdditionalInferenceSpecificationDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         name: "EntityName", # required
-    #         description: "EntityDescription",
-    #         containers: [ # required
-    #           {
-    #             container_hostname: "ContainerHostname",
-    #             image: "ContainerImage", # required
-    #             image_digest: "ImageDigest",
-    #             model_data_url: "Url",
-    #             product_id: "ProductId",
-    #             environment: {
-    #               "EnvironmentKey" => "EnvironmentValue",
-    #             },
-    #             model_input: {
-    #               data_input_config: "DataInputConfig", # required
-    #             },
-    #             framework: "String",
-    #             framework_version: "ModelPackageFrameworkVersion",
-    #             nearest_model_name: "String",
-    #           },
-    #         ],
-    #         supported_transform_instance_types: ["ml.m4.xlarge"], # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
-    #         supported_realtime_inference_instance_types: ["ml.t2.medium"], # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge, ml.c6i.large, ml.c6i.xlarge, ml.c6i.2xlarge, ml.c6i.4xlarge, ml.c6i.8xlarge, ml.c6i.12xlarge, ml.c6i.16xlarge, ml.c6i.24xlarge, ml.c6i.32xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.12xlarge, ml.g5.16xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.p4d.24xlarge, ml.c7g.large, ml.c7g.xlarge, ml.c7g.2xlarge, ml.c7g.4xlarge, ml.c7g.8xlarge, ml.c7g.12xlarge, ml.c7g.16xlarge, ml.m6g.large, ml.m6g.xlarge, ml.m6g.2xlarge, ml.m6g.4xlarge, ml.m6g.8xlarge, ml.m6g.12xlarge, ml.m6g.16xlarge, ml.m6gd.large, ml.m6gd.xlarge, ml.m6gd.2xlarge, ml.m6gd.4xlarge, ml.m6gd.8xlarge, ml.m6gd.12xlarge, ml.m6gd.16xlarge, ml.c6g.large, ml.c6g.xlarge, ml.c6g.2xlarge, ml.c6g.4xlarge, ml.c6g.8xlarge, ml.c6g.12xlarge, ml.c6g.16xlarge, ml.c6gd.large, ml.c6gd.xlarge, ml.c6gd.2xlarge, ml.c6gd.4xlarge, ml.c6gd.8xlarge, ml.c6gd.12xlarge, ml.c6gd.16xlarge, ml.c6gn.large, ml.c6gn.xlarge, ml.c6gn.2xlarge, ml.c6gn.4xlarge, ml.c6gn.8xlarge, ml.c6gn.12xlarge, ml.c6gn.16xlarge, ml.r6g.large, ml.r6g.xlarge, ml.r6g.2xlarge, ml.r6g.4xlarge, ml.r6g.8xlarge, ml.r6g.12xlarge, ml.r6g.16xlarge, ml.r6gd.large, ml.r6gd.xlarge, ml.r6gd.2xlarge, ml.r6gd.4xlarge, ml.r6gd.8xlarge, ml.r6gd.12xlarge, ml.r6gd.16xlarge
-    #         supported_content_types: ["ContentType"],
-    #         supported_response_mime_types: ["ResponseMIMEType"],
-    #       }
     #
     # @!attribute [rw] name
     #   A unique name to identify the additional inference specification.
@@ -306,13 +245,6 @@ module Aws::SageMaker
     # An Amazon CloudWatch alarm configured to monitor metrics on an
     # endpoint.
     #
-    # @note When making an API call, you may pass Alarm
-    #   data as a hash:
-    #
-    #       {
-    #         alarm_name: "AlarmName",
-    #       }
-    #
     # @!attribute [rw] alarm_name
     #   The name of a CloudWatch alarm in your account.
     #   @return [String]
@@ -336,24 +268,6 @@ module Aws::SageMaker
     #
     # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
     # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html
-    #
-    # @note When making an API call, you may pass AlgorithmSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         training_image: "AlgorithmImage",
-    #         algorithm_name: "ArnOrName",
-    #         training_input_mode: "Pipe", # required, accepts Pipe, File, FastFile
-    #         metric_definitions: [
-    #           {
-    #             name: "MetricName", # required
-    #             regex: "MetricRegex", # required
-    #           },
-    #         ],
-    #         enable_sage_maker_metrics_time_series: false,
-    #         container_entrypoint: ["TrainingContainerEntrypointString"],
-    #         container_arguments: ["TrainingContainerArgument"],
-    #       }
     #
     # @!attribute [rw] training_image
     #   The registry path of the Docker image that contains the training
@@ -595,98 +509,6 @@ module Aws::SageMaker
     # The data provided in the validation profile is made available to your
     # buyers on Amazon Web Services Marketplace.
     #
-    # @note When making an API call, you may pass AlgorithmValidationProfile
-    #   data as a hash:
-    #
-    #       {
-    #         profile_name: "EntityName", # required
-    #         training_job_definition: { # required
-    #           training_input_mode: "Pipe", # required, accepts Pipe, File, FastFile
-    #           hyper_parameters: {
-    #             "HyperParameterKey" => "HyperParameterValue",
-    #           },
-    #           input_data_config: [ # required
-    #             {
-    #               channel_name: "ChannelName", # required
-    #               data_source: { # required
-    #                 s3_data_source: {
-    #                   s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
-    #                   s3_uri: "S3Uri", # required
-    #                   s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
-    #                   attribute_names: ["AttributeName"],
-    #                   instance_group_names: ["InstanceGroupName"],
-    #                 },
-    #                 file_system_data_source: {
-    #                   file_system_id: "FileSystemId", # required
-    #                   file_system_access_mode: "rw", # required, accepts rw, ro
-    #                   file_system_type: "EFS", # required, accepts EFS, FSxLustre
-    #                   directory_path: "DirectoryPath", # required
-    #                 },
-    #               },
-    #               content_type: "ContentType",
-    #               compression_type: "None", # accepts None, Gzip
-    #               record_wrapper_type: "None", # accepts None, RecordIO
-    #               input_mode: "Pipe", # accepts Pipe, File, FastFile
-    #               shuffle_config: {
-    #                 seed: 1, # required
-    #               },
-    #             },
-    #           ],
-    #           output_data_config: { # required
-    #             kms_key_id: "KmsKeyId",
-    #             s3_output_path: "S3Uri", # required
-    #           },
-    #           resource_config: { # required
-    #             instance_type: "ml.m4.xlarge", # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge
-    #             instance_count: 1,
-    #             volume_size_in_gb: 1, # required
-    #             volume_kms_key_id: "KmsKeyId",
-    #             instance_groups: [
-    #               {
-    #                 instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge
-    #                 instance_count: 1, # required
-    #                 instance_group_name: "InstanceGroupName", # required
-    #               },
-    #             ],
-    #             keep_alive_period_in_seconds: 1,
-    #           },
-    #           stopping_condition: { # required
-    #             max_runtime_in_seconds: 1,
-    #             max_wait_time_in_seconds: 1,
-    #           },
-    #         },
-    #         transform_job_definition: {
-    #           max_concurrent_transforms: 1,
-    #           max_payload_in_mb: 1,
-    #           batch_strategy: "MultiRecord", # accepts MultiRecord, SingleRecord
-    #           environment: {
-    #             "TransformEnvironmentKey" => "TransformEnvironmentValue",
-    #           },
-    #           transform_input: { # required
-    #             data_source: { # required
-    #               s3_data_source: { # required
-    #                 s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
-    #                 s3_uri: "S3Uri", # required
-    #               },
-    #             },
-    #             content_type: "ContentType",
-    #             compression_type: "None", # accepts None, Gzip
-    #             split_type: "None", # accepts None, Line, RecordIO, TFRecord
-    #           },
-    #           transform_output: { # required
-    #             s3_output_path: "S3Uri", # required
-    #             accept: "Accept",
-    #             assemble_with: "None", # accepts None, Line
-    #             kms_key_id: "KmsKeyId",
-    #           },
-    #           transform_resources: { # required
-    #             instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
-    #             instance_count: 1, # required
-    #             volume_kms_key_id: "KmsKeyId",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] profile_name
     #   The name of the profile for the algorithm. The name must have 1 to
     #   63 characters. Valid characters are a-z, A-Z, 0-9, and - (hyphen).
@@ -715,103 +537,6 @@ module Aws::SageMaker
     # Specifies configurations for one or more training jobs that SageMaker
     # runs to test the algorithm.
     #
-    # @note When making an API call, you may pass AlgorithmValidationSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         validation_role: "RoleArn", # required
-    #         validation_profiles: [ # required
-    #           {
-    #             profile_name: "EntityName", # required
-    #             training_job_definition: { # required
-    #               training_input_mode: "Pipe", # required, accepts Pipe, File, FastFile
-    #               hyper_parameters: {
-    #                 "HyperParameterKey" => "HyperParameterValue",
-    #               },
-    #               input_data_config: [ # required
-    #                 {
-    #                   channel_name: "ChannelName", # required
-    #                   data_source: { # required
-    #                     s3_data_source: {
-    #                       s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
-    #                       s3_uri: "S3Uri", # required
-    #                       s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
-    #                       attribute_names: ["AttributeName"],
-    #                       instance_group_names: ["InstanceGroupName"],
-    #                     },
-    #                     file_system_data_source: {
-    #                       file_system_id: "FileSystemId", # required
-    #                       file_system_access_mode: "rw", # required, accepts rw, ro
-    #                       file_system_type: "EFS", # required, accepts EFS, FSxLustre
-    #                       directory_path: "DirectoryPath", # required
-    #                     },
-    #                   },
-    #                   content_type: "ContentType",
-    #                   compression_type: "None", # accepts None, Gzip
-    #                   record_wrapper_type: "None", # accepts None, RecordIO
-    #                   input_mode: "Pipe", # accepts Pipe, File, FastFile
-    #                   shuffle_config: {
-    #                     seed: 1, # required
-    #                   },
-    #                 },
-    #               ],
-    #               output_data_config: { # required
-    #                 kms_key_id: "KmsKeyId",
-    #                 s3_output_path: "S3Uri", # required
-    #               },
-    #               resource_config: { # required
-    #                 instance_type: "ml.m4.xlarge", # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge
-    #                 instance_count: 1,
-    #                 volume_size_in_gb: 1, # required
-    #                 volume_kms_key_id: "KmsKeyId",
-    #                 instance_groups: [
-    #                   {
-    #                     instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge
-    #                     instance_count: 1, # required
-    #                     instance_group_name: "InstanceGroupName", # required
-    #                   },
-    #                 ],
-    #                 keep_alive_period_in_seconds: 1,
-    #               },
-    #               stopping_condition: { # required
-    #                 max_runtime_in_seconds: 1,
-    #                 max_wait_time_in_seconds: 1,
-    #               },
-    #             },
-    #             transform_job_definition: {
-    #               max_concurrent_transforms: 1,
-    #               max_payload_in_mb: 1,
-    #               batch_strategy: "MultiRecord", # accepts MultiRecord, SingleRecord
-    #               environment: {
-    #                 "TransformEnvironmentKey" => "TransformEnvironmentValue",
-    #               },
-    #               transform_input: { # required
-    #                 data_source: { # required
-    #                   s3_data_source: { # required
-    #                     s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
-    #                     s3_uri: "S3Uri", # required
-    #                   },
-    #                 },
-    #                 content_type: "ContentType",
-    #                 compression_type: "None", # accepts None, Gzip
-    #                 split_type: "None", # accepts None, Line, RecordIO, TFRecord
-    #               },
-    #               transform_output: { # required
-    #                 s3_output_path: "S3Uri", # required
-    #                 accept: "Accept",
-    #                 assemble_with: "None", # accepts None, Line
-    #                 kms_key_id: "KmsKeyId",
-    #               },
-    #               transform_resources: { # required
-    #                 instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
-    #                 instance_count: 1, # required
-    #                 volume_kms_key_id: "KmsKeyId",
-    #               },
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] validation_role
     #   The IAM roles that SageMaker uses to run the training jobs.
     #   @return [String]
@@ -833,13 +558,6 @@ module Aws::SageMaker
 
     # Configures how labels are consolidated across human workers and
     # processes output data.
-    #
-    # @note When making an API call, you may pass AnnotationConsolidationConfig
-    #   data as a hash:
-    #
-    #       {
-    #         annotation_consolidation_lambda_arn: "LambdaFunctionArn", # required
-    #       }
     #
     # @!attribute [rw] annotation_consolidation_lambda_arn
     #   The Amazon Resource Name (ARN) of a Lambda function implements the
@@ -1579,15 +1297,6 @@ module Aws::SageMaker
 
     # Configuration to run a processing job in a specified container image.
     #
-    # @note When making an API call, you may pass AppSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         image_uri: "ImageUri", # required
-    #         container_entrypoint: ["ContainerEntrypointString"],
-    #         container_arguments: ["ContainerArgument"],
-    #       }
-    #
     # @!attribute [rw] image_uri
     #   The container image to be run by the processing job.
     #   @return [String]
@@ -1612,19 +1321,6 @@ module Aws::SageMaker
 
     # A structure describing the source of an artifact.
     #
-    # @note When making an API call, you may pass ArtifactSource
-    #   data as a hash:
-    #
-    #       {
-    #         source_uri: "String2048", # required
-    #         source_types: [
-    #           {
-    #             source_id_type: "MD5Hash", # required, accepts MD5Hash, S3ETag, S3Version, Custom
-    #             value: "String256", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] source_uri
     #   The URI of the source.
     #   @return [String]
@@ -1643,14 +1339,6 @@ module Aws::SageMaker
     end
 
     # The ID and ID type of an artifact source.
-    #
-    # @note When making an API call, you may pass ArtifactSourceType
-    #   data as a hash:
-    #
-    #       {
-    #         source_id_type: "MD5Hash", # required, accepts MD5Hash, S3ETag, S3Version, Custom
-    #         value: "String256", # required
-    #       }
     #
     # @!attribute [rw] source_id_type
     #   The type of ID.
@@ -1710,14 +1398,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateTrialComponentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         trial_component_name: "ExperimentEntityName", # required
-    #         trial_name: "ExperimentEntityName", # required
-    #       }
-    #
     # @!attribute [rw] trial_component_name
     #   The name of the component to associated with the trial.
     #   @return [String]
@@ -1812,13 +1492,6 @@ module Aws::SageMaker
     # Configures the behavior of the client used by SageMaker to interact
     # with the model container during asynchronous inference.
     #
-    # @note When making an API call, you may pass AsyncInferenceClientConfig
-    #   data as a hash:
-    #
-    #       {
-    #         max_concurrent_invocations_per_instance: 1,
-    #       }
-    #
     # @!attribute [rw] max_concurrent_invocations_per_instance
     #   The maximum number of concurrent requests sent by the SageMaker
     #   client to the model container. If no value is provided, SageMaker
@@ -1835,23 +1508,6 @@ module Aws::SageMaker
 
     # Specifies configuration for how an endpoint performs asynchronous
     # inference.
-    #
-    # @note When making an API call, you may pass AsyncInferenceConfig
-    #   data as a hash:
-    #
-    #       {
-    #         client_config: {
-    #           max_concurrent_invocations_per_instance: 1,
-    #         },
-    #         output_config: { # required
-    #           kms_key_id: "KmsKeyId",
-    #           s3_output_path: "DestinationS3Uri", # required
-    #           notification_config: {
-    #             success_topic: "SnsTopicArn",
-    #             error_topic: "SnsTopicArn",
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] client_config
     #   Configures the behavior of the client used by SageMaker to interact
@@ -1875,14 +1531,6 @@ module Aws::SageMaker
     # Specifies the configuration for notifications of inference results for
     # asynchronous inference.
     #
-    # @note When making an API call, you may pass AsyncInferenceNotificationConfig
-    #   data as a hash:
-    #
-    #       {
-    #         success_topic: "SnsTopicArn",
-    #         error_topic: "SnsTopicArn",
-    #       }
-    #
     # @!attribute [rw] success_topic
     #   Amazon SNS topic to post a notification to when inference completes
     #   successfully. If no topic is provided, no notification is sent on
@@ -1905,18 +1553,6 @@ module Aws::SageMaker
 
     # Specifies the configuration for asynchronous inference invocation
     # outputs.
-    #
-    # @note When making an API call, you may pass AsyncInferenceOutputConfig
-    #   data as a hash:
-    #
-    #       {
-    #         kms_key_id: "KmsKeyId",
-    #         s3_output_path: "DestinationS3Uri", # required
-    #         notification_config: {
-    #           success_topic: "SnsTopicArn",
-    #           error_topic: "SnsTopicArn",
-    #         },
-    #       }
     #
     # @!attribute [rw] kms_key_id
     #   The Amazon Web Services Key Management Service (Amazon Web Services
@@ -1944,20 +1580,6 @@ module Aws::SageMaker
     end
 
     # Configuration for Athena Dataset Definition input.
-    #
-    # @note When making an API call, you may pass AthenaDatasetDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         catalog: "AthenaCatalog", # required
-    #         database: "AthenaDatabase", # required
-    #         query_string: "AthenaQueryString", # required
-    #         work_group: "AthenaWorkGroup",
-    #         output_s3_uri: "S3Uri", # required
-    #         kms_key_id: "KmsKeyId",
-    #         output_format: "PARQUET", # required, accepts PARQUET, ORC, AVRO, JSON, TEXTFILE
-    #         output_compression: "GZIP", # accepts GZIP, SNAPPY, ZLIB
-    #       }
     #
     # @!attribute [rw] catalog
     #   The name of the data catalog used in Athena query execution.
@@ -2077,13 +1699,6 @@ module Aws::SageMaker
     # Stores the config information for how a candidate is generated
     # (optional).
     #
-    # @note When making an API call, you may pass AutoMLCandidateGenerationConfig
-    #   data as a hash:
-    #
-    #       {
-    #         feature_specification_s3_uri: "S3Uri",
-    #       }
-    #
     # @!attribute [rw] feature_specification_s3_uri
     #   A URL to the Amazon S3 data source containing selected features from
     #   the input data source to run an Autopilot job. You can input
@@ -2164,22 +1779,6 @@ module Aws::SageMaker
     #
     #  </note>
     #
-    # @note When making an API call, you may pass AutoMLChannel
-    #   data as a hash:
-    #
-    #       {
-    #         data_source: { # required
-    #           s3_data_source: { # required
-    #             s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix
-    #             s3_uri: "S3Uri", # required
-    #           },
-    #         },
-    #         compression_type: "None", # accepts None, Gzip
-    #         target_attribute_name: "TargetAttributeName", # required
-    #         content_type: "ContentType",
-    #         channel_type: "training", # accepts training, validation
-    #       }
-    #
     # @!attribute [rw] data_source
     #   The data source for an AutoML channel.
     #   @return [Types::AutoMLDataSource]
@@ -2252,16 +1851,6 @@ module Aws::SageMaker
 
     # The data source for the Autopilot job.
     #
-    # @note When making an API call, you may pass AutoMLDataSource
-    #   data as a hash:
-    #
-    #       {
-    #         s3_data_source: { # required
-    #           s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix
-    #           s3_uri: "S3Uri", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] s3_data_source
     #   The Amazon S3 location of the input data.
     #   @return [Types::AutoMLS3DataSource]
@@ -2278,13 +1867,6 @@ module Aws::SageMaker
     # validation datasets. The validation and training datasets must contain
     # the same headers. The validation dataset must be less than 2 GB in
     # size.
-    #
-    # @note When making an API call, you may pass AutoMLDataSplitConfig
-    #   data as a hash:
-    #
-    #       {
-    #         validation_fraction: 1.0,
-    #       }
     #
     # @!attribute [rw] validation_fraction
     #   The validation fraction (optional) is a float that specifies the
@@ -2323,15 +1905,6 @@ module Aws::SageMaker
     # How long a job is allowed to run, or how many candidates a job is
     # allowed to generate.
     #
-    # @note When making an API call, you may pass AutoMLJobCompletionCriteria
-    #   data as a hash:
-    #
-    #       {
-    #         max_candidates: 1,
-    #         max_runtime_per_training_job_in_seconds: 1,
-    #         max_auto_ml_job_runtime_in_seconds: 1,
-    #       }
-    #
     # @!attribute [rw] max_candidates
     #   The maximum number of times a training job is allowed to run.
     #   @return [Integer]
@@ -2364,32 +1937,6 @@ module Aws::SageMaker
     end
 
     # A collection of settings used for an AutoML job.
-    #
-    # @note When making an API call, you may pass AutoMLJobConfig
-    #   data as a hash:
-    #
-    #       {
-    #         completion_criteria: {
-    #           max_candidates: 1,
-    #           max_runtime_per_training_job_in_seconds: 1,
-    #           max_auto_ml_job_runtime_in_seconds: 1,
-    #         },
-    #         security_config: {
-    #           volume_kms_key_id: "KmsKeyId",
-    #           enable_inter_container_traffic_encryption: false,
-    #           vpc_config: {
-    #             security_group_ids: ["SecurityGroupId"], # required
-    #             subnets: ["SubnetId"], # required
-    #           },
-    #         },
-    #         data_split_config: {
-    #           validation_fraction: 1.0,
-    #         },
-    #         candidate_generation_config: {
-    #           feature_specification_s3_uri: "S3Uri",
-    #         },
-    #         mode: "AUTO", # accepts AUTO, ENSEMBLING, HYPERPARAMETER_TUNING
-    #       }
     #
     # @!attribute [rw] completion_criteria
     #   How long an AutoML job is allowed to run, or how many candidates a
@@ -2454,13 +2001,6 @@ module Aws::SageMaker
     end
 
     # Specifies a metric to minimize or maximize as the objective of a job.
-    #
-    # @note When making an API call, you may pass AutoMLJobObjective
-    #   data as a hash:
-    #
-    #       {
-    #         metric_name: "Accuracy", # required, accepts Accuracy, MSE, F1, F1macro, AUC
-    #       }
     #
     # @!attribute [rw] metric_name
     #   The name of the objective metric used to measure the predictive
@@ -2605,14 +2145,6 @@ module Aws::SageMaker
 
     # The output data configuration.
     #
-    # @note When making an API call, you may pass AutoMLOutputDataConfig
-    #   data as a hash:
-    #
-    #       {
-    #         kms_key_id: "KmsKeyId",
-    #         s3_output_path: "S3Uri", # required
-    #       }
-    #
     # @!attribute [rw] kms_key_id
     #   The Amazon Web Services KMS encryption key ID.
     #   @return [String]
@@ -2646,14 +2178,6 @@ module Aws::SageMaker
     end
 
     # The Amazon S3 data source.
-    #
-    # @note When making an API call, you may pass AutoMLS3DataSource
-    #   data as a hash:
-    #
-    #       {
-    #         s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix
-    #         s3_uri: "S3Uri", # required
-    #       }
     #
     # @!attribute [rw] s3_data_type
     #   The data type.
@@ -2690,18 +2214,6 @@ module Aws::SageMaker
 
     # Security options.
     #
-    # @note When making an API call, you may pass AutoMLSecurityConfig
-    #   data as a hash:
-    #
-    #       {
-    #         volume_kms_key_id: "KmsKeyId",
-    #         enable_inter_container_traffic_encryption: false,
-    #         vpc_config: {
-    #           security_group_ids: ["SecurityGroupId"], # required
-    #           subnets: ["SubnetId"], # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] volume_kms_key_id
     #   The key used to encrypt stored data.
     #   @return [String]
@@ -2727,17 +2239,6 @@ module Aws::SageMaker
     # Automatic rollback configuration for handling endpoint deployment
     # failures and recovery.
     #
-    # @note When making an API call, you may pass AutoRollbackConfig
-    #   data as a hash:
-    #
-    #       {
-    #         alarms: [
-    #           {
-    #             alarm_name: "AlarmName",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] alarms
     #   List of CloudWatch alarms in your account that are configured to
     #   monitor metrics on an endpoint. If any alarms are tripped during a
@@ -2754,15 +2255,6 @@ module Aws::SageMaker
 
     # Configuration to control how SageMaker captures inference data for
     # batch transform jobs.
-    #
-    # @note When making an API call, you may pass BatchDataCaptureConfig
-    #   data as a hash:
-    #
-    #       {
-    #         destination_s3_uri: "S3Uri", # required
-    #         kms_key_id: "KmsKeyId",
-    #         generate_inference_id: false,
-    #       }
     #
     # @!attribute [rw] destination_s3_uri
     #   The Amazon S3 location being used to capture the data.
@@ -2818,13 +2310,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchDescribeModelPackageInput
-    #   data as a hash:
-    #
-    #       {
-    #         model_package_arn_list: ["ModelPackageArn"], # required
-    #       }
-    #
     # @!attribute [rw] model_package_arn_list
     #   The list of Amazon Resource Name (ARN) of the model package groups.
     #   @return [Array<String>]
@@ -2906,32 +2391,6 @@ module Aws::SageMaker
     end
 
     # Input object for the batch transform job.
-    #
-    # @note When making an API call, you may pass BatchTransformInput
-    #   data as a hash:
-    #
-    #       {
-    #         data_captured_destination_s3_uri: "DestinationS3Uri", # required
-    #         dataset_format: { # required
-    #           csv: {
-    #             header: false,
-    #           },
-    #           json: {
-    #             line: false,
-    #           },
-    #           parquet: {
-    #           },
-    #         },
-    #         local_path: "ProcessingLocalPath", # required
-    #         s3_input_mode: "Pipe", # accepts Pipe, File
-    #         s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
-    #         features_attribute: "String",
-    #         inference_attribute: "String",
-    #         probability_attribute: "String",
-    #         probability_threshold_attribute: 1.0,
-    #         start_time_offset: "MonitoringTimeOffsetString",
-    #         end_time_offset: "MonitoringTimeOffsetString",
-    #       }
     #
     # @!attribute [rw] data_captured_destination_s3_uri
     #   The Amazon S3 location being used to capture the data.
@@ -3017,27 +2476,6 @@ module Aws::SageMaker
 
     # Contains bias metrics for a model.
     #
-    # @note When making an API call, you may pass Bias
-    #   data as a hash:
-    #
-    #       {
-    #         report: {
-    #           content_type: "ContentType", # required
-    #           content_digest: "ContentDigest",
-    #           s3_uri: "S3Uri", # required
-    #         },
-    #         pre_training_report: {
-    #           content_type: "ContentType", # required
-    #           content_digest: "ContentDigest",
-    #           s3_uri: "S3Uri", # required
-    #         },
-    #         post_training_report: {
-    #           content_type: "ContentType", # required
-    #           content_digest: "ContentDigest",
-    #           s3_uri: "S3Uri", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] report
     #   The bias report for a model
     #   @return [Types::MetricsSource]
@@ -3067,26 +2505,6 @@ module Aws::SageMaker
     # update policy should be used in the deployment configuration. If no
     # update policy is specified, SageMaker uses a blue/green deployment
     # strategy with all at once traffic shifting by default.
-    #
-    # @note When making an API call, you may pass BlueGreenUpdatePolicy
-    #   data as a hash:
-    #
-    #       {
-    #         traffic_routing_configuration: { # required
-    #           type: "ALL_AT_ONCE", # required, accepts ALL_AT_ONCE, CANARY, LINEAR
-    #           wait_interval_in_seconds: 1, # required
-    #           canary_size: {
-    #             type: "INSTANCE_COUNT", # required, accepts INSTANCE_COUNT, CAPACITY_PERCENT
-    #             value: 1, # required
-    #           },
-    #           linear_step_size: {
-    #             type: "INSTANCE_COUNT", # required, accepts INSTANCE_COUNT, CAPACITY_PERCENT
-    #             value: 1, # required
-    #           },
-    #         },
-    #         termination_wait_in_seconds: 1,
-    #         maximum_execution_timeout_in_seconds: 1,
-    #       }
     #
     # @!attribute [rw] traffic_routing_configuration
     #   Defines the traffic routing strategy to shift traffic from the old
@@ -3197,16 +2615,6 @@ module Aws::SageMaker
 
     # The SageMaker Canvas app settings.
     #
-    # @note When making an API call, you may pass CanvasAppSettings
-    #   data as a hash:
-    #
-    #       {
-    #         time_series_forecasting_settings: {
-    #           status: "ENABLED", # accepts ENABLED, DISABLED
-    #           amazon_forecast_role_arn: "RoleArn",
-    #         },
-    #       }
-    #
     # @!attribute [rw] time_series_forecasting_settings
     #   Time series forecast settings for the Canvas app.
     #   @return [Types::TimeSeriesForecastingSettings]
@@ -3220,14 +2628,6 @@ module Aws::SageMaker
     end
 
     # Specifies the endpoint capacity to activate for production.
-    #
-    # @note When making an API call, you may pass CapacitySize
-    #   data as a hash:
-    #
-    #       {
-    #         type: "INSTANCE_COUNT", # required, accepts INSTANCE_COUNT, CAPACITY_PERCENT
-    #         value: 1, # required
-    #       }
     #
     # @!attribute [rw] type
     #   Specifies the endpoint capacity type.
@@ -3257,14 +2657,6 @@ module Aws::SageMaker
     # are specified SageMaker will by default base64 encode when capturing
     # the data.
     #
-    # @note When making an API call, you may pass CaptureContentTypeHeader
-    #   data as a hash:
-    #
-    #       {
-    #         csv_content_types: ["CsvContentType"],
-    #         json_content_types: ["JsonContentType"],
-    #       }
-    #
     # @!attribute [rw] csv_content_types
     #   The list of all content type headers that SageMaker will treat as
     #   CSV and capture accordingly.
@@ -3286,13 +2678,6 @@ module Aws::SageMaker
 
     # Specifies data Model Monitor will capture.
     #
-    # @note When making an API call, you may pass CaptureOption
-    #   data as a hash:
-    #
-    #       {
-    #         capture_mode: "Input", # required, accepts Input, Output
-    #       }
-    #
     # @!attribute [rw] capture_mode
     #   Specify the boundary of data to capture.
     #   @return [String]
@@ -3306,14 +2691,6 @@ module Aws::SageMaker
     end
 
     # Environment parameters you want to benchmark your load test against.
-    #
-    # @note When making an API call, you may pass CategoricalParameter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String64", # required
-    #         value: ["String128"], # required
-    #       }
     #
     # @!attribute [rw] name
     #   The Name of the environment variable.
@@ -3334,14 +2711,6 @@ module Aws::SageMaker
 
     # A list of categorical hyperparameters to tune.
     #
-    # @note When making an API call, you may pass CategoricalParameterRange
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ParameterKey", # required
-    #         values: ["ParameterValue"], # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the categorical hyperparameter to tune.
     #   @return [String]
@@ -3361,13 +2730,6 @@ module Aws::SageMaker
 
     # Defines the possible values for a categorical hyperparameter.
     #
-    # @note When making an API call, you may pass CategoricalParameterRangeSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         values: ["ParameterValue"], # required
-    #       }
-    #
     # @!attribute [rw] values
     #   The allowed categories for the hyperparameter.
     #   @return [Array<String>]
@@ -3382,35 +2744,6 @@ module Aws::SageMaker
 
     # A channel is a named input source that training algorithms can
     # consume.
-    #
-    # @note When making an API call, you may pass Channel
-    #   data as a hash:
-    #
-    #       {
-    #         channel_name: "ChannelName", # required
-    #         data_source: { # required
-    #           s3_data_source: {
-    #             s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
-    #             s3_uri: "S3Uri", # required
-    #             s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
-    #             attribute_names: ["AttributeName"],
-    #             instance_group_names: ["InstanceGroupName"],
-    #           },
-    #           file_system_data_source: {
-    #             file_system_id: "FileSystemId", # required
-    #             file_system_access_mode: "rw", # required, accepts rw, ro
-    #             file_system_type: "EFS", # required, accepts EFS, FSxLustre
-    #             directory_path: "DirectoryPath", # required
-    #           },
-    #         },
-    #         content_type: "ContentType",
-    #         compression_type: "None", # accepts None, Gzip
-    #         record_wrapper_type: "None", # accepts None, RecordIO
-    #         input_mode: "Pipe", # accepts Pipe, File, FastFile
-    #         shuffle_config: {
-    #           seed: 1, # required
-    #         },
-    #       }
     #
     # @!attribute [rw] channel_name
     #   The name of the channel.
@@ -3496,18 +2829,6 @@ module Aws::SageMaker
     # Defines a named input source, called a channel, to be used by an
     # algorithm.
     #
-    # @note When making an API call, you may pass ChannelSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ChannelName", # required
-    #         description: "EntityDescription",
-    #         is_required: false,
-    #         supported_content_types: ["ContentType"], # required
-    #         supported_compression_types: ["None"], # accepts None, Gzip
-    #         supported_input_modes: ["Pipe"], # required, accepts Pipe, File, FastFile
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the channel.
     #   @return [String]
@@ -3555,14 +2876,6 @@ module Aws::SageMaker
 
     # Contains information about the output location for managed spot
     # training checkpoint data.
-    #
-    # @note When making an API call, you may pass CheckpointConfig
-    #   data as a hash:
-    #
-    #       {
-    #         s3_uri: "S3Uri", # required
-    #         local_path: "DirectoryPath",
-    #       }
     #
     # @!attribute [rw] s3_uri
     #   Identifies the S3 path where you want SageMaker to store
@@ -3650,40 +2963,6 @@ module Aws::SageMaker
 
     # The configuration parameters for the SageMaker Clarify explainer.
     #
-    # @note When making an API call, you may pass ClarifyExplainerConfig
-    #   data as a hash:
-    #
-    #       {
-    #         enable_explanations: "ClarifyEnableExplanations",
-    #         inference_config: {
-    #           features_attribute: "ClarifyFeaturesAttribute",
-    #           content_template: "ClarifyContentTemplate",
-    #           max_record_count: 1,
-    #           max_payload_in_mb: 1,
-    #           probability_index: 1,
-    #           label_index: 1,
-    #           probability_attribute: "ClarifyProbabilityAttribute",
-    #           label_attribute: "ClarifyLabelAttribute",
-    #           label_headers: ["ClarifyHeader"],
-    #           feature_headers: ["ClarifyHeader"],
-    #           feature_types: ["numerical"], # accepts numerical, categorical, text
-    #         },
-    #         shap_config: { # required
-    #           shap_baseline_config: { # required
-    #             mime_type: "ClarifyMimeType",
-    #             shap_baseline: "ClarifyShapBaseline",
-    #             shap_baseline_uri: "Url",
-    #           },
-    #           number_of_samples: 1,
-    #           use_logit: false,
-    #           seed: 1,
-    #           text_config: {
-    #             language: "af", # required, accepts af, sq, ar, hy, eu, bn, bg, ca, zh, hr, cs, da, nl, en, et, fi, fr, de, el, gu, he, hi, hu, is, id, ga, it, kn, ky, lv, lt, lb, mk, ml, mr, ne, nb, fa, pl, pt, ro, ru, sa, sr, tn, si, sk, sl, es, sv, tl, ta, tt, te, tr, uk, ur, yo, lij, xx
-    #             granularity: "token", # required, accepts token, sentence, paragraph
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] enable_explanations
     #   A JMESPath boolean expression used to filter which records to
     #   explain. Explanations are activated by default. See [
@@ -3713,23 +2992,6 @@ module Aws::SageMaker
     end
 
     # The inference configuration parameter for the model container.
-    #
-    # @note When making an API call, you may pass ClarifyInferenceConfig
-    #   data as a hash:
-    #
-    #       {
-    #         features_attribute: "ClarifyFeaturesAttribute",
-    #         content_template: "ClarifyContentTemplate",
-    #         max_record_count: 1,
-    #         max_payload_in_mb: 1,
-    #         probability_index: 1,
-    #         label_index: 1,
-    #         probability_attribute: "ClarifyProbabilityAttribute",
-    #         label_attribute: "ClarifyLabelAttribute",
-    #         label_headers: ["ClarifyHeader"],
-    #         feature_headers: ["ClarifyHeader"],
-    #         feature_types: ["numerical"], # accepts numerical, categorical, text
-    #       }
     #
     # @!attribute [rw] features_attribute
     #   Provides the JMESPath expression to extract the features from a
@@ -3895,15 +3157,6 @@ module Aws::SageMaker
     # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-feature-attribute-shap-baselines.html
     # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-online-explainability-create-endpoint.html
     #
-    # @note When making an API call, you may pass ClarifyShapBaselineConfig
-    #   data as a hash:
-    #
-    #       {
-    #         mime_type: "ClarifyMimeType",
-    #         shap_baseline: "ClarifyShapBaseline",
-    #         shap_baseline_uri: "Url",
-    #       }
-    #
     # @!attribute [rw] mime_type
     #   The MIME type of the baseline data. Choose from `'text/csv'` or
     #   `'application/jsonlines'`. Defaults to `'text/csv'`.
@@ -3953,24 +3206,6 @@ module Aws::SageMaker
     end
 
     # The configuration for SHAP analysis using SageMaker Clarify Explainer.
-    #
-    # @note When making an API call, you may pass ClarifyShapConfig
-    #   data as a hash:
-    #
-    #       {
-    #         shap_baseline_config: { # required
-    #           mime_type: "ClarifyMimeType",
-    #           shap_baseline: "ClarifyShapBaseline",
-    #           shap_baseline_uri: "Url",
-    #         },
-    #         number_of_samples: 1,
-    #         use_logit: false,
-    #         seed: 1,
-    #         text_config: {
-    #           language: "af", # required, accepts af, sq, ar, hy, eu, bn, bg, ca, zh, hr, cs, da, nl, en, et, fi, fr, de, el, gu, he, hi, hu, is, id, ga, it, kn, ky, lv, lt, lb, mk, ml, mr, ne, nb, fa, pl, pt, ro, ru, sa, sr, tn, si, sk, sl, es, sv, tl, ta, tt, te, tr, uk, ur, yo, lij, xx
-    #           granularity: "token", # required, accepts token, sentence, paragraph
-    #         },
-    #       }
     #
     # @!attribute [rw] shap_baseline_config
     #   The configuration for the SHAP baseline of the Kernal SHAP
@@ -4027,14 +3262,6 @@ module Aws::SageMaker
     # text features as text so that explanations are provided for individual
     # units of text. Required only for natural language processing (NLP)
     # explainability.
-    #
-    # @note When making an API call, you may pass ClarifyTextConfig
-    #   data as a hash:
-    #
-    #       {
-    #         language: "af", # required, accepts af, sq, ar, hy, eu, bn, bg, ca, zh, hr, cs, da, nl, en, et, fi, fr, de, el, gu, he, hi, hu, is, id, ga, it, kn, ky, lv, lt, lb, mk, ml, mr, ne, nb, fa, pl, pt, ro, ru, sa, sr, tn, si, sk, sl, es, sv, tl, ta, tt, te, tr, uk, ur, yo, lij, xx
-    #         granularity: "token", # required, accepts token, sentence, paragraph
-    #       }
     #
     # @!attribute [rw] language
     #   Specifies the language of the text features in [ISO 639-1](
@@ -4111,14 +3338,6 @@ module Aws::SageMaker
     #
     # [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html
     #
-    # @note When making an API call, you may pass CognitoConfig
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool: "CognitoUserPool", # required
-    #         client_id: "ClientId", # required
-    #       }
-    #
     # @!attribute [rw] user_pool
     #   A [ user pool][1] is a user directory in Amazon Cognito. With a user
     #   pool, your users can sign in to your web or mobile app through
@@ -4147,15 +3366,6 @@ module Aws::SageMaker
     # Identifies a Amazon Cognito user group. A user group can be used in on
     # or more work teams.
     #
-    # @note When making an API call, you may pass CognitoMemberDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         user_pool: "CognitoUserPool", # required
-    #         user_group: "CognitoUserGroup", # required
-    #         client_id: "ClientId", # required
-    #       }
-    #
     # @!attribute [rw] user_pool
     #   An identifier for a user pool. The user pool must be in the same
     #   region as the service that you are calling.
@@ -4181,16 +3391,6 @@ module Aws::SageMaker
     end
 
     # Configuration information for the Debugger output tensor collections.
-    #
-    # @note When making an API call, you may pass CollectionConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         collection_name: "CollectionName",
-    #         collection_parameters: {
-    #           "ConfigKey" => "ConfigValue",
-    #         },
-    #       }
     #
     # @!attribute [rw] collection_name
     #   The name of the tensor collection. The name must be unique relative
@@ -4309,30 +3509,6 @@ module Aws::SageMaker
     end
 
     # Describes the container, as part of model definition.
-    #
-    # @note When making an API call, you may pass ContainerDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         container_hostname: "ContainerHostname",
-    #         image: "ContainerImage",
-    #         image_config: {
-    #           repository_access_mode: "Platform", # required, accepts Platform, Vpc
-    #           repository_auth_config: {
-    #             repository_credentials_provider_arn: "RepositoryCredentialsProviderArn", # required
-    #           },
-    #         },
-    #         mode: "SingleModel", # accepts SingleModel, MultiModel
-    #         model_data_url: "Url",
-    #         environment: {
-    #           "EnvironmentKey" => "EnvironmentValue",
-    #         },
-    #         model_package_name: "VersionedArnOrName",
-    #         inference_specification_name: "InferenceSpecificationName",
-    #         multi_model_config: {
-    #           model_cache_setting: "Enabled", # accepts Enabled, Disabled
-    #         },
-    #       }
     #
     # @!attribute [rw] container_hostname
     #   This parameter is ignored for models that contain only a
@@ -4457,15 +3633,6 @@ module Aws::SageMaker
 
     # A structure describing the source of a context.
     #
-    # @note When making an API call, you may pass ContextSource
-    #   data as a hash:
-    #
-    #       {
-    #         source_uri: "String2048", # required
-    #         source_type: "String256",
-    #         source_id: "String256",
-    #       }
-    #
     # @!attribute [rw] source_uri
     #   The URI of the source.
     #   @return [String]
@@ -4529,16 +3696,6 @@ module Aws::SageMaker
     end
 
     # A list of continuous hyperparameters to tune.
-    #
-    # @note When making an API call, you may pass ContinuousParameterRange
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ParameterKey", # required
-    #         min_value: "ParameterValue", # required
-    #         max_value: "ParameterValue", # required
-    #         scaling_type: "Auto", # accepts Auto, Linear, Logarithmic, ReverseLogarithmic
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the continuous hyperparameter to tune.
@@ -4605,14 +3762,6 @@ module Aws::SageMaker
 
     # Defines the possible values for a continuous hyperparameter.
     #
-    # @note When making an API call, you may pass ContinuousParameterRangeSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         min_value: "ParameterValue", # required
-    #         max_value: "ParameterValue", # required
-    #       }
-    #
     # @!attribute [rw] min_value
     #   The minimum floating-point value allowed.
     #   @return [String]
@@ -4630,36 +3779,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateActionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         action_name: "ExperimentEntityName", # required
-    #         source: { # required
-    #           source_uri: "String2048", # required
-    #           source_type: "String256",
-    #           source_id: "String256",
-    #         },
-    #         action_type: "String256", # required
-    #         description: "ExperimentDescription",
-    #         status: "Unknown", # accepts Unknown, InProgress, Completed, Failed, Stopping, Stopped
-    #         properties: {
-    #           "StringParameterValue" => "StringParameterValue",
-    #         },
-    #         metadata_properties: {
-    #           commit_id: "MetadataPropertyValue",
-    #           repository: "MetadataPropertyValue",
-    #           generated_by: "MetadataPropertyValue",
-    #           project_id: "MetadataPropertyValue",
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] action_name
     #   The name of the action. Must be unique to your account in an Amazon
     #   Web Services Region.
@@ -4721,189 +3840,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAlgorithmInput
-    #   data as a hash:
-    #
-    #       {
-    #         algorithm_name: "EntityName", # required
-    #         algorithm_description: "EntityDescription",
-    #         training_specification: { # required
-    #           training_image: "ContainerImage", # required
-    #           training_image_digest: "ImageDigest",
-    #           supported_hyper_parameters: [
-    #             {
-    #               name: "ParameterName", # required
-    #               description: "EntityDescription",
-    #               type: "Integer", # required, accepts Integer, Continuous, Categorical, FreeText
-    #               range: {
-    #                 integer_parameter_range_specification: {
-    #                   min_value: "ParameterValue", # required
-    #                   max_value: "ParameterValue", # required
-    #                 },
-    #                 continuous_parameter_range_specification: {
-    #                   min_value: "ParameterValue", # required
-    #                   max_value: "ParameterValue", # required
-    #                 },
-    #                 categorical_parameter_range_specification: {
-    #                   values: ["ParameterValue"], # required
-    #                 },
-    #               },
-    #               is_tunable: false,
-    #               is_required: false,
-    #               default_value: "HyperParameterValue",
-    #             },
-    #           ],
-    #           supported_training_instance_types: ["ml.m4.xlarge"], # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge
-    #           supports_distributed_training: false,
-    #           metric_definitions: [
-    #             {
-    #               name: "MetricName", # required
-    #               regex: "MetricRegex", # required
-    #             },
-    #           ],
-    #           training_channels: [ # required
-    #             {
-    #               name: "ChannelName", # required
-    #               description: "EntityDescription",
-    #               is_required: false,
-    #               supported_content_types: ["ContentType"], # required
-    #               supported_compression_types: ["None"], # accepts None, Gzip
-    #               supported_input_modes: ["Pipe"], # required, accepts Pipe, File, FastFile
-    #             },
-    #           ],
-    #           supported_tuning_job_objective_metrics: [
-    #             {
-    #               type: "Maximize", # required, accepts Maximize, Minimize
-    #               metric_name: "MetricName", # required
-    #             },
-    #           ],
-    #         },
-    #         inference_specification: {
-    #           containers: [ # required
-    #             {
-    #               container_hostname: "ContainerHostname",
-    #               image: "ContainerImage", # required
-    #               image_digest: "ImageDigest",
-    #               model_data_url: "Url",
-    #               product_id: "ProductId",
-    #               environment: {
-    #                 "EnvironmentKey" => "EnvironmentValue",
-    #               },
-    #               model_input: {
-    #                 data_input_config: "DataInputConfig", # required
-    #               },
-    #               framework: "String",
-    #               framework_version: "ModelPackageFrameworkVersion",
-    #               nearest_model_name: "String",
-    #             },
-    #           ],
-    #           supported_transform_instance_types: ["ml.m4.xlarge"], # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
-    #           supported_realtime_inference_instance_types: ["ml.t2.medium"], # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge, ml.c6i.large, ml.c6i.xlarge, ml.c6i.2xlarge, ml.c6i.4xlarge, ml.c6i.8xlarge, ml.c6i.12xlarge, ml.c6i.16xlarge, ml.c6i.24xlarge, ml.c6i.32xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.12xlarge, ml.g5.16xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.p4d.24xlarge, ml.c7g.large, ml.c7g.xlarge, ml.c7g.2xlarge, ml.c7g.4xlarge, ml.c7g.8xlarge, ml.c7g.12xlarge, ml.c7g.16xlarge, ml.m6g.large, ml.m6g.xlarge, ml.m6g.2xlarge, ml.m6g.4xlarge, ml.m6g.8xlarge, ml.m6g.12xlarge, ml.m6g.16xlarge, ml.m6gd.large, ml.m6gd.xlarge, ml.m6gd.2xlarge, ml.m6gd.4xlarge, ml.m6gd.8xlarge, ml.m6gd.12xlarge, ml.m6gd.16xlarge, ml.c6g.large, ml.c6g.xlarge, ml.c6g.2xlarge, ml.c6g.4xlarge, ml.c6g.8xlarge, ml.c6g.12xlarge, ml.c6g.16xlarge, ml.c6gd.large, ml.c6gd.xlarge, ml.c6gd.2xlarge, ml.c6gd.4xlarge, ml.c6gd.8xlarge, ml.c6gd.12xlarge, ml.c6gd.16xlarge, ml.c6gn.large, ml.c6gn.xlarge, ml.c6gn.2xlarge, ml.c6gn.4xlarge, ml.c6gn.8xlarge, ml.c6gn.12xlarge, ml.c6gn.16xlarge, ml.r6g.large, ml.r6g.xlarge, ml.r6g.2xlarge, ml.r6g.4xlarge, ml.r6g.8xlarge, ml.r6g.12xlarge, ml.r6g.16xlarge, ml.r6gd.large, ml.r6gd.xlarge, ml.r6gd.2xlarge, ml.r6gd.4xlarge, ml.r6gd.8xlarge, ml.r6gd.12xlarge, ml.r6gd.16xlarge
-    #           supported_content_types: ["ContentType"], # required
-    #           supported_response_mime_types: ["ResponseMIMEType"], # required
-    #         },
-    #         validation_specification: {
-    #           validation_role: "RoleArn", # required
-    #           validation_profiles: [ # required
-    #             {
-    #               profile_name: "EntityName", # required
-    #               training_job_definition: { # required
-    #                 training_input_mode: "Pipe", # required, accepts Pipe, File, FastFile
-    #                 hyper_parameters: {
-    #                   "HyperParameterKey" => "HyperParameterValue",
-    #                 },
-    #                 input_data_config: [ # required
-    #                   {
-    #                     channel_name: "ChannelName", # required
-    #                     data_source: { # required
-    #                       s3_data_source: {
-    #                         s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
-    #                         s3_uri: "S3Uri", # required
-    #                         s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
-    #                         attribute_names: ["AttributeName"],
-    #                         instance_group_names: ["InstanceGroupName"],
-    #                       },
-    #                       file_system_data_source: {
-    #                         file_system_id: "FileSystemId", # required
-    #                         file_system_access_mode: "rw", # required, accepts rw, ro
-    #                         file_system_type: "EFS", # required, accepts EFS, FSxLustre
-    #                         directory_path: "DirectoryPath", # required
-    #                       },
-    #                     },
-    #                     content_type: "ContentType",
-    #                     compression_type: "None", # accepts None, Gzip
-    #                     record_wrapper_type: "None", # accepts None, RecordIO
-    #                     input_mode: "Pipe", # accepts Pipe, File, FastFile
-    #                     shuffle_config: {
-    #                       seed: 1, # required
-    #                     },
-    #                   },
-    #                 ],
-    #                 output_data_config: { # required
-    #                   kms_key_id: "KmsKeyId",
-    #                   s3_output_path: "S3Uri", # required
-    #                 },
-    #                 resource_config: { # required
-    #                   instance_type: "ml.m4.xlarge", # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge
-    #                   instance_count: 1,
-    #                   volume_size_in_gb: 1, # required
-    #                   volume_kms_key_id: "KmsKeyId",
-    #                   instance_groups: [
-    #                     {
-    #                       instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge
-    #                       instance_count: 1, # required
-    #                       instance_group_name: "InstanceGroupName", # required
-    #                     },
-    #                   ],
-    #                   keep_alive_period_in_seconds: 1,
-    #                 },
-    #                 stopping_condition: { # required
-    #                   max_runtime_in_seconds: 1,
-    #                   max_wait_time_in_seconds: 1,
-    #                 },
-    #               },
-    #               transform_job_definition: {
-    #                 max_concurrent_transforms: 1,
-    #                 max_payload_in_mb: 1,
-    #                 batch_strategy: "MultiRecord", # accepts MultiRecord, SingleRecord
-    #                 environment: {
-    #                   "TransformEnvironmentKey" => "TransformEnvironmentValue",
-    #                 },
-    #                 transform_input: { # required
-    #                   data_source: { # required
-    #                     s3_data_source: { # required
-    #                       s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
-    #                       s3_uri: "S3Uri", # required
-    #                     },
-    #                   },
-    #                   content_type: "ContentType",
-    #                   compression_type: "None", # accepts None, Gzip
-    #                   split_type: "None", # accepts None, Line, RecordIO, TFRecord
-    #                 },
-    #                 transform_output: { # required
-    #                   s3_output_path: "S3Uri", # required
-    #                   accept: "Accept",
-    #                   assemble_with: "None", # accepts None, Line
-    #                   kms_key_id: "KmsKeyId",
-    #                 },
-    #                 transform_resources: { # required
-    #                   instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
-    #                   instance_count: 1, # required
-    #                   volume_kms_key_id: "KmsKeyId",
-    #                 },
-    #               },
-    #             },
-    #           ],
-    #         },
-    #         certify_for_marketplace: false,
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] algorithm_name
     #   The name of the algorithm.
     #   @return [String]
@@ -4998,32 +3934,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAppImageConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_image_config_name: "AppImageConfigName", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         kernel_gateway_image_config: {
-    #           kernel_specs: [ # required
-    #             {
-    #               name: "KernelName", # required
-    #               display_name: "KernelDisplayName",
-    #             },
-    #           ],
-    #           file_system_config: {
-    #             mount_path: "MountPath",
-    #             default_uid: 1,
-    #             default_gid: 1,
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] app_image_config_name
     #   The name of the AppImageConfig. Must be unique to your account.
     #   @return [String]
@@ -5061,28 +3971,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAppRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_id: "DomainId", # required
-    #         user_profile_name: "UserProfileName", # required
-    #         app_type: "JupyterServer", # required, accepts JupyterServer, KernelGateway, TensorBoard, RStudioServerPro, RSessionGateway
-    #         app_name: "AppName", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         resource_spec: {
-    #           sage_maker_image_arn: "ImageArn",
-    #           sage_maker_image_version_arn: "ImageVersionArn",
-    #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #           lifecycle_config_arn: "StudioLifecycleConfigArn",
-    #         },
-    #       }
-    #
     # @!attribute [rw] domain_id
     #   The domain ID.
     #   @return [String]
@@ -5143,38 +4031,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateArtifactRequest
-    #   data as a hash:
-    #
-    #       {
-    #         artifact_name: "ExperimentEntityName",
-    #         source: { # required
-    #           source_uri: "String2048", # required
-    #           source_types: [
-    #             {
-    #               source_id_type: "MD5Hash", # required, accepts MD5Hash, S3ETag, S3Version, Custom
-    #               value: "String256", # required
-    #             },
-    #           ],
-    #         },
-    #         artifact_type: "String256", # required
-    #         properties: {
-    #           "StringParameterValue" => "StringParameterValue",
-    #         },
-    #         metadata_properties: {
-    #           commit_id: "MetadataPropertyValue",
-    #           repository: "MetadataPropertyValue",
-    #           generated_by: "MetadataPropertyValue",
-    #           project_id: "MetadataPropertyValue",
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] artifact_name
     #   The name of the artifact. Must be unique to your account in an
     #   Amazon Web Services Region.
@@ -5226,69 +4082,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAutoMLJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         auto_ml_job_name: "AutoMLJobName", # required
-    #         input_data_config: [ # required
-    #           {
-    #             data_source: { # required
-    #               s3_data_source: { # required
-    #                 s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix
-    #                 s3_uri: "S3Uri", # required
-    #               },
-    #             },
-    #             compression_type: "None", # accepts None, Gzip
-    #             target_attribute_name: "TargetAttributeName", # required
-    #             content_type: "ContentType",
-    #             channel_type: "training", # accepts training, validation
-    #           },
-    #         ],
-    #         output_data_config: { # required
-    #           kms_key_id: "KmsKeyId",
-    #           s3_output_path: "S3Uri", # required
-    #         },
-    #         problem_type: "BinaryClassification", # accepts BinaryClassification, MulticlassClassification, Regression
-    #         auto_ml_job_objective: {
-    #           metric_name: "Accuracy", # required, accepts Accuracy, MSE, F1, F1macro, AUC
-    #         },
-    #         auto_ml_job_config: {
-    #           completion_criteria: {
-    #             max_candidates: 1,
-    #             max_runtime_per_training_job_in_seconds: 1,
-    #             max_auto_ml_job_runtime_in_seconds: 1,
-    #           },
-    #           security_config: {
-    #             volume_kms_key_id: "KmsKeyId",
-    #             enable_inter_container_traffic_encryption: false,
-    #             vpc_config: {
-    #               security_group_ids: ["SecurityGroupId"], # required
-    #               subnets: ["SubnetId"], # required
-    #             },
-    #           },
-    #           data_split_config: {
-    #             validation_fraction: 1.0,
-    #           },
-    #           candidate_generation_config: {
-    #             feature_specification_s3_uri: "S3Uri",
-    #           },
-    #           mode: "AUTO", # accepts AUTO, ENSEMBLING, HYPERPARAMETER_TUNING
-    #         },
-    #         role_arn: "RoleArn", # required
-    #         generate_candidate_definitions_only: false,
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         model_deploy_config: {
-    #           auto_generate_endpoint_name: false,
-    #           endpoint_name: "EndpointName",
-    #         },
-    #       }
-    #
     # @!attribute [rw] auto_ml_job_name
     #   Identifies an Autopilot job. The name must be unique to your account
     #   and is case-insensitive.
@@ -5377,24 +4170,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateCodeRepositoryInput
-    #   data as a hash:
-    #
-    #       {
-    #         code_repository_name: "EntityName", # required
-    #         git_config: { # required
-    #           repository_url: "GitConfigUrl", # required
-    #           branch: "Branch",
-    #           secret_arn: "SecretArn",
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] code_repository_name
     #   The name of the Git repository. The name must have 1 to 63
     #   characters. Valid characters are a-z, A-Z, 0-9, and - (hyphen).
@@ -5439,46 +4214,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateCompilationJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         compilation_job_name: "EntityName", # required
-    #         role_arn: "RoleArn", # required
-    #         model_package_version_arn: "ModelPackageArn",
-    #         input_config: {
-    #           s3_uri: "S3Uri", # required
-    #           data_input_config: "DataInputConfig", # required
-    #           framework: "TENSORFLOW", # required, accepts TENSORFLOW, KERAS, MXNET, ONNX, PYTORCH, XGBOOST, TFLITE, DARKNET, SKLEARN
-    #           framework_version: "FrameworkVersion",
-    #         },
-    #         output_config: { # required
-    #           s3_output_location: "S3Uri", # required
-    #           target_device: "lambda", # accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_g4dn, ml_inf1, ml_eia2, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, sitara_am57x, amba_cv2, amba_cv22, amba_cv25, x86_win32, x86_win64, coreml, jacinto_tda4vm, imx8mplus
-    #           target_platform: {
-    #             os: "ANDROID", # required, accepts ANDROID, LINUX
-    #             arch: "X86_64", # required, accepts X86_64, X86, ARM64, ARM_EABI, ARM_EABIHF
-    #             accelerator: "INTEL_GRAPHICS", # accepts INTEL_GRAPHICS, MALI, NVIDIA, NNA
-    #           },
-    #           compiler_options: "CompilerOptions",
-    #           kms_key_id: "KmsKeyId",
-    #         },
-    #         vpc_config: {
-    #           security_group_ids: ["NeoVpcSecurityGroupId"], # required
-    #           subnets: ["NeoVpcSubnetId"], # required
-    #         },
-    #         stopping_condition: { # required
-    #           max_runtime_in_seconds: 1,
-    #           max_wait_time_in_seconds: 1,
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] compilation_job_name
     #   A name for the model compilation job. The name must be unique within
     #   the Amazon Web Services Region and within your Amazon Web Services
@@ -5589,29 +4324,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateContextRequest
-    #   data as a hash:
-    #
-    #       {
-    #         context_name: "ExperimentEntityName", # required
-    #         source: { # required
-    #           source_uri: "String2048", # required
-    #           source_type: "String256",
-    #           source_id: "String256",
-    #         },
-    #         context_type: "String256", # required
-    #         description: "ExperimentDescription",
-    #         properties: {
-    #           "StringParameterValue" => "StringParameterValue",
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] context_name
     #   The name of the context. Must be unique to your account in an Amazon
     #   Web Services Region.
@@ -5662,106 +4374,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDataQualityJobDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_definition_name: "MonitoringJobDefinitionName", # required
-    #         data_quality_baseline_config: {
-    #           baselining_job_name: "ProcessingJobName",
-    #           constraints_resource: {
-    #             s3_uri: "S3Uri",
-    #           },
-    #           statistics_resource: {
-    #             s3_uri: "S3Uri",
-    #           },
-    #         },
-    #         data_quality_app_specification: { # required
-    #           image_uri: "ImageUri", # required
-    #           container_entrypoint: ["ContainerEntrypointString"],
-    #           container_arguments: ["ContainerArgument"],
-    #           record_preprocessor_source_uri: "S3Uri",
-    #           post_analytics_processor_source_uri: "S3Uri",
-    #           environment: {
-    #             "ProcessingEnvironmentKey" => "ProcessingEnvironmentValue",
-    #           },
-    #         },
-    #         data_quality_job_input: { # required
-    #           endpoint_input: {
-    #             endpoint_name: "EndpointName", # required
-    #             local_path: "ProcessingLocalPath", # required
-    #             s3_input_mode: "Pipe", # accepts Pipe, File
-    #             s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
-    #             features_attribute: "String",
-    #             inference_attribute: "String",
-    #             probability_attribute: "String",
-    #             probability_threshold_attribute: 1.0,
-    #             start_time_offset: "MonitoringTimeOffsetString",
-    #             end_time_offset: "MonitoringTimeOffsetString",
-    #           },
-    #           batch_transform_input: {
-    #             data_captured_destination_s3_uri: "DestinationS3Uri", # required
-    #             dataset_format: { # required
-    #               csv: {
-    #                 header: false,
-    #               },
-    #               json: {
-    #                 line: false,
-    #               },
-    #               parquet: {
-    #               },
-    #             },
-    #             local_path: "ProcessingLocalPath", # required
-    #             s3_input_mode: "Pipe", # accepts Pipe, File
-    #             s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
-    #             features_attribute: "String",
-    #             inference_attribute: "String",
-    #             probability_attribute: "String",
-    #             probability_threshold_attribute: 1.0,
-    #             start_time_offset: "MonitoringTimeOffsetString",
-    #             end_time_offset: "MonitoringTimeOffsetString",
-    #           },
-    #         },
-    #         data_quality_job_output_config: { # required
-    #           monitoring_outputs: [ # required
-    #             {
-    #               s3_output: { # required
-    #                 s3_uri: "MonitoringS3Uri", # required
-    #                 local_path: "ProcessingLocalPath", # required
-    #                 s3_upload_mode: "Continuous", # accepts Continuous, EndOfJob
-    #               },
-    #             },
-    #           ],
-    #           kms_key_id: "KmsKeyId",
-    #         },
-    #         job_resources: { # required
-    #           cluster_config: { # required
-    #             instance_count: 1, # required
-    #             instance_type: "ml.t3.medium", # required, accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
-    #             volume_size_in_gb: 1, # required
-    #             volume_kms_key_id: "KmsKeyId",
-    #           },
-    #         },
-    #         network_config: {
-    #           enable_inter_container_traffic_encryption: false,
-    #           enable_network_isolation: false,
-    #           vpc_config: {
-    #             security_group_ids: ["SecurityGroupId"], # required
-    #             subnets: ["SubnetId"], # required
-    #           },
-    #         },
-    #         role_arn: "RoleArn", # required
-    #         stopping_condition: {
-    #           max_runtime_in_seconds: 1, # required
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] job_definition_name
     #   The name for the monitoring job definition.
     #   @return [String]
@@ -5840,28 +4452,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDeviceFleetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_fleet_name: "EntityName", # required
-    #         role_arn: "RoleArn",
-    #         description: "DeviceFleetDescription",
-    #         output_config: { # required
-    #           s3_output_location: "S3Uri", # required
-    #           kms_key_id: "KmsKeyId",
-    #           preset_deployment_type: "GreengrassV2Component", # accepts GreengrassV2Component
-    #           preset_deployment_config: "String",
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         enable_iot_role_alias: false,
-    #       }
-    #
     # @!attribute [rw] device_fleet_name
     #   The name of the fleet that the device belongs to.
     #   @return [String]
@@ -5906,108 +4496,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "DomainName", # required
-    #         auth_mode: "SSO", # required, accepts SSO, IAM
-    #         default_user_settings: { # required
-    #           execution_role: "RoleArn",
-    #           security_groups: ["SecurityGroupId"],
-    #           sharing_settings: {
-    #             notebook_output_option: "Allowed", # accepts Allowed, Disabled
-    #             s3_output_path: "S3Uri",
-    #             s3_kms_key_id: "KmsKeyId",
-    #           },
-    #           jupyter_server_app_settings: {
-    #             default_resource_spec: {
-    #               sage_maker_image_arn: "ImageArn",
-    #               sage_maker_image_version_arn: "ImageVersionArn",
-    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
-    #             },
-    #             lifecycle_config_arns: ["StudioLifecycleConfigArn"],
-    #           },
-    #           kernel_gateway_app_settings: {
-    #             default_resource_spec: {
-    #               sage_maker_image_arn: "ImageArn",
-    #               sage_maker_image_version_arn: "ImageVersionArn",
-    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
-    #             },
-    #             custom_images: [
-    #               {
-    #                 image_name: "ImageName", # required
-    #                 image_version_number: 1,
-    #                 app_image_config_name: "AppImageConfigName", # required
-    #               },
-    #             ],
-    #             lifecycle_config_arns: ["StudioLifecycleConfigArn"],
-    #           },
-    #           tensor_board_app_settings: {
-    #             default_resource_spec: {
-    #               sage_maker_image_arn: "ImageArn",
-    #               sage_maker_image_version_arn: "ImageVersionArn",
-    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
-    #             },
-    #           },
-    #           r_studio_server_pro_app_settings: {
-    #             access_status: "ENABLED", # accepts ENABLED, DISABLED
-    #             user_group: "R_STUDIO_ADMIN", # accepts R_STUDIO_ADMIN, R_STUDIO_USER
-    #           },
-    #           r_session_app_settings: {
-    #             default_resource_spec: {
-    #               sage_maker_image_arn: "ImageArn",
-    #               sage_maker_image_version_arn: "ImageVersionArn",
-    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
-    #             },
-    #             custom_images: [
-    #               {
-    #                 image_name: "ImageName", # required
-    #                 image_version_number: 1,
-    #                 app_image_config_name: "AppImageConfigName", # required
-    #               },
-    #             ],
-    #           },
-    #           canvas_app_settings: {
-    #             time_series_forecasting_settings: {
-    #               status: "ENABLED", # accepts ENABLED, DISABLED
-    #               amazon_forecast_role_arn: "RoleArn",
-    #             },
-    #           },
-    #         },
-    #         subnet_ids: ["SubnetId"], # required
-    #         vpc_id: "VpcId", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         app_network_access_type: "PublicInternetOnly", # accepts PublicInternetOnly, VpcOnly
-    #         home_efs_file_system_kms_key_id: "KmsKeyId",
-    #         kms_key_id: "KmsKeyId",
-    #         app_security_group_management: "Service", # accepts Service, Customer
-    #         domain_settings: {
-    #           security_group_ids: ["SecurityGroupId"],
-    #           r_studio_server_pro_domain_settings: {
-    #             domain_execution_role_arn: "RoleArn", # required
-    #             r_studio_connect_url: "String",
-    #             r_studio_package_manager_url: "String",
-    #             default_resource_spec: {
-    #               sage_maker_image_arn: "ImageArn",
-    #               sage_maker_image_version_arn: "ImageVersionArn",
-    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
-    #             },
-    #           },
-    #           execution_role_identity_config: "USER_PROFILE_NAME", # accepts USER_PROFILE_NAME, DISABLED
-    #         },
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   A name for the domain.
     #   @return [String]
@@ -6113,40 +4601,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateEdgeDeploymentPlanRequest
-    #   data as a hash:
-    #
-    #       {
-    #         edge_deployment_plan_name: "EntityName", # required
-    #         model_configs: [ # required
-    #           {
-    #             model_handle: "EntityName", # required
-    #             edge_packaging_job_name: "EntityName", # required
-    #           },
-    #         ],
-    #         device_fleet_name: "EntityName", # required
-    #         stages: [
-    #           {
-    #             stage_name: "EntityName", # required
-    #             device_selection_config: { # required
-    #               device_subset_type: "PERCENTAGE", # required, accepts PERCENTAGE, SELECTION, NAMECONTAINS
-    #               percentage: 1,
-    #               device_names: ["DeviceName"],
-    #               device_name_contains: "DeviceName",
-    #             },
-    #             deployment_config: {
-    #               failure_handling_policy: "ROLLBACK_ON_FAILURE", # required, accepts ROLLBACK_ON_FAILURE, DO_NOTHING
-    #             },
-    #           },
-    #         ],
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] edge_deployment_plan_name
     #   The name of the edge deployment plan.
     #   @return [String]
@@ -6192,27 +4646,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateEdgeDeploymentStageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         edge_deployment_plan_name: "EntityName", # required
-    #         stages: [ # required
-    #           {
-    #             stage_name: "EntityName", # required
-    #             device_selection_config: { # required
-    #               device_subset_type: "PERCENTAGE", # required, accepts PERCENTAGE, SELECTION, NAMECONTAINS
-    #               percentage: 1,
-    #               device_names: ["DeviceName"],
-    #               device_name_contains: "DeviceName",
-    #             },
-    #             deployment_config: {
-    #               failure_handling_policy: "ROLLBACK_ON_FAILURE", # required, accepts ROLLBACK_ON_FAILURE, DO_NOTHING
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] edge_deployment_plan_name
     #   The name of the edge deployment plan.
     #   @return [String]
@@ -6230,30 +4663,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateEdgePackagingJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         edge_packaging_job_name: "EntityName", # required
-    #         compilation_job_name: "EntityName", # required
-    #         model_name: "EntityName", # required
-    #         model_version: "EdgeVersion", # required
-    #         role_arn: "RoleArn", # required
-    #         output_config: { # required
-    #           s3_output_location: "S3Uri", # required
-    #           kms_key_id: "KmsKeyId",
-    #           preset_deployment_type: "GreengrassV2Component", # accepts GreengrassV2Component
-    #           preset_deployment_config: "String",
-    #         },
-    #         resource_key: "KmsKeyId",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] edge_packaging_job_name
     #   The name of the edge packaging job.
     #   @return [String]
@@ -6306,101 +4715,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateEndpointConfigInput
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_config_name: "EndpointConfigName", # required
-    #         production_variants: [ # required
-    #           {
-    #             variant_name: "VariantName", # required
-    #             model_name: "ModelName", # required
-    #             initial_instance_count: 1,
-    #             instance_type: "ml.t2.medium", # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge, ml.c6i.large, ml.c6i.xlarge, ml.c6i.2xlarge, ml.c6i.4xlarge, ml.c6i.8xlarge, ml.c6i.12xlarge, ml.c6i.16xlarge, ml.c6i.24xlarge, ml.c6i.32xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.12xlarge, ml.g5.16xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.p4d.24xlarge, ml.c7g.large, ml.c7g.xlarge, ml.c7g.2xlarge, ml.c7g.4xlarge, ml.c7g.8xlarge, ml.c7g.12xlarge, ml.c7g.16xlarge, ml.m6g.large, ml.m6g.xlarge, ml.m6g.2xlarge, ml.m6g.4xlarge, ml.m6g.8xlarge, ml.m6g.12xlarge, ml.m6g.16xlarge, ml.m6gd.large, ml.m6gd.xlarge, ml.m6gd.2xlarge, ml.m6gd.4xlarge, ml.m6gd.8xlarge, ml.m6gd.12xlarge, ml.m6gd.16xlarge, ml.c6g.large, ml.c6g.xlarge, ml.c6g.2xlarge, ml.c6g.4xlarge, ml.c6g.8xlarge, ml.c6g.12xlarge, ml.c6g.16xlarge, ml.c6gd.large, ml.c6gd.xlarge, ml.c6gd.2xlarge, ml.c6gd.4xlarge, ml.c6gd.8xlarge, ml.c6gd.12xlarge, ml.c6gd.16xlarge, ml.c6gn.large, ml.c6gn.xlarge, ml.c6gn.2xlarge, ml.c6gn.4xlarge, ml.c6gn.8xlarge, ml.c6gn.12xlarge, ml.c6gn.16xlarge, ml.r6g.large, ml.r6g.xlarge, ml.r6g.2xlarge, ml.r6g.4xlarge, ml.r6g.8xlarge, ml.r6g.12xlarge, ml.r6g.16xlarge, ml.r6gd.large, ml.r6gd.xlarge, ml.r6gd.2xlarge, ml.r6gd.4xlarge, ml.r6gd.8xlarge, ml.r6gd.12xlarge, ml.r6gd.16xlarge
-    #             initial_variant_weight: 1.0,
-    #             accelerator_type: "ml.eia1.medium", # accepts ml.eia1.medium, ml.eia1.large, ml.eia1.xlarge, ml.eia2.medium, ml.eia2.large, ml.eia2.xlarge
-    #             core_dump_config: {
-    #               destination_s3_uri: "DestinationS3Uri", # required
-    #               kms_key_id: "KmsKeyId",
-    #             },
-    #             serverless_config: {
-    #               memory_size_in_mb: 1, # required
-    #               max_concurrency: 1, # required
-    #             },
-    #             volume_size_in_gb: 1,
-    #             model_data_download_timeout_in_seconds: 1,
-    #             container_startup_health_check_timeout_in_seconds: 1,
-    #           },
-    #         ],
-    #         data_capture_config: {
-    #           enable_capture: false,
-    #           initial_sampling_percentage: 1, # required
-    #           destination_s3_uri: "DestinationS3Uri", # required
-    #           kms_key_id: "KmsKeyId",
-    #           capture_options: [ # required
-    #             {
-    #               capture_mode: "Input", # required, accepts Input, Output
-    #             },
-    #           ],
-    #           capture_content_type_header: {
-    #             csv_content_types: ["CsvContentType"],
-    #             json_content_types: ["JsonContentType"],
-    #           },
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         kms_key_id: "KmsKeyId",
-    #         async_inference_config: {
-    #           client_config: {
-    #             max_concurrent_invocations_per_instance: 1,
-    #           },
-    #           output_config: { # required
-    #             kms_key_id: "KmsKeyId",
-    #             s3_output_path: "DestinationS3Uri", # required
-    #             notification_config: {
-    #               success_topic: "SnsTopicArn",
-    #               error_topic: "SnsTopicArn",
-    #             },
-    #           },
-    #         },
-    #         explainer_config: {
-    #           clarify_explainer_config: {
-    #             enable_explanations: "ClarifyEnableExplanations",
-    #             inference_config: {
-    #               features_attribute: "ClarifyFeaturesAttribute",
-    #               content_template: "ClarifyContentTemplate",
-    #               max_record_count: 1,
-    #               max_payload_in_mb: 1,
-    #               probability_index: 1,
-    #               label_index: 1,
-    #               probability_attribute: "ClarifyProbabilityAttribute",
-    #               label_attribute: "ClarifyLabelAttribute",
-    #               label_headers: ["ClarifyHeader"],
-    #               feature_headers: ["ClarifyHeader"],
-    #               feature_types: ["numerical"], # accepts numerical, categorical, text
-    #             },
-    #             shap_config: { # required
-    #               shap_baseline_config: { # required
-    #                 mime_type: "ClarifyMimeType",
-    #                 shap_baseline: "ClarifyShapBaseline",
-    #                 shap_baseline_uri: "Url",
-    #               },
-    #               number_of_samples: 1,
-    #               use_logit: false,
-    #               seed: 1,
-    #               text_config: {
-    #                 language: "af", # required, accepts af, sq, ar, hy, eu, bn, bg, ca, zh, hr, cs, da, nl, en, et, fi, fr, de, el, gu, he, hi, hu, is, id, ga, it, kn, ky, lv, lt, lb, mk, ml, mr, ne, nb, fa, pl, pt, ro, ru, sa, sr, tn, si, sk, sl, es, sv, tl, ta, tt, te, tr, uk, ur, yo, lij, xx
-    #                 granularity: "token", # required, accepts token, sentence, paragraph
-    #               },
-    #             },
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] endpoint_config_name
     #   The name of the endpoint configuration. You specify this name in a
     #   CreateEndpoint request.
@@ -6514,45 +4828,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateEndpointInput
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_name: "EndpointName", # required
-    #         endpoint_config_name: "EndpointConfigName", # required
-    #         deployment_config: {
-    #           blue_green_update_policy: { # required
-    #             traffic_routing_configuration: { # required
-    #               type: "ALL_AT_ONCE", # required, accepts ALL_AT_ONCE, CANARY, LINEAR
-    #               wait_interval_in_seconds: 1, # required
-    #               canary_size: {
-    #                 type: "INSTANCE_COUNT", # required, accepts INSTANCE_COUNT, CAPACITY_PERCENT
-    #                 value: 1, # required
-    #               },
-    #               linear_step_size: {
-    #                 type: "INSTANCE_COUNT", # required, accepts INSTANCE_COUNT, CAPACITY_PERCENT
-    #                 value: 1, # required
-    #               },
-    #             },
-    #             termination_wait_in_seconds: 1,
-    #             maximum_execution_timeout_in_seconds: 1,
-    #           },
-    #           auto_rollback_configuration: {
-    #             alarms: [
-    #               {
-    #                 alarm_name: "AlarmName",
-    #               },
-    #             ],
-    #           },
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] endpoint_name
     #   The name of the endpoint.The name must be unique within an Amazon
     #   Web Services Region in your Amazon Web Services account. The name is
@@ -6604,21 +4879,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateExperimentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         experiment_name: "ExperimentEntityName", # required
-    #         display_name: "ExperimentEntityName",
-    #         description: "ExperimentDescription",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] experiment_name
     #   The name of the experiment. The name must be unique in your Amazon
     #   Web Services account and is not case-sensitive.
@@ -6662,48 +4922,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateFeatureGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         feature_group_name: "FeatureGroupName", # required
-    #         record_identifier_feature_name: "FeatureName", # required
-    #         event_time_feature_name: "FeatureName", # required
-    #         feature_definitions: [ # required
-    #           {
-    #             feature_name: "FeatureName",
-    #             feature_type: "Integral", # accepts Integral, Fractional, String
-    #           },
-    #         ],
-    #         online_store_config: {
-    #           security_config: {
-    #             kms_key_id: "KmsKeyId",
-    #           },
-    #           enable_online_store: false,
-    #         },
-    #         offline_store_config: {
-    #           s3_storage_config: { # required
-    #             s3_uri: "S3Uri", # required
-    #             kms_key_id: "KmsKeyId",
-    #             resolved_output_s3_uri: "S3Uri",
-    #           },
-    #           disable_glue_table_creation: false,
-    #           data_catalog_config: {
-    #             table_name: "TableName", # required
-    #             catalog: "Catalog", # required
-    #             database: "Database", # required
-    #           },
-    #         },
-    #         role_arn: "RoleArn",
-    #         description: "Description",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] feature_group_name
     #   The name of the `FeatureGroup`. The name must be unique within an
     #   Amazon Web Services Region in an Amazon Web Services account. The
@@ -6844,49 +5062,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateFlowDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         flow_definition_name: "FlowDefinitionName", # required
-    #         human_loop_request_source: {
-    #           aws_managed_human_loop_request_source: "AWS/Rekognition/DetectModerationLabels/Image/V3", # required, accepts AWS/Rekognition/DetectModerationLabels/Image/V3, AWS/Textract/AnalyzeDocument/Forms/V1
-    #         },
-    #         human_loop_activation_config: {
-    #           human_loop_activation_conditions_config: { # required
-    #             human_loop_activation_conditions: "HumanLoopActivationConditions", # required
-    #           },
-    #         },
-    #         human_loop_config: { # required
-    #           workteam_arn: "WorkteamArn", # required
-    #           human_task_ui_arn: "HumanTaskUiArn", # required
-    #           task_title: "FlowDefinitionTaskTitle", # required
-    #           task_description: "FlowDefinitionTaskDescription", # required
-    #           task_count: 1, # required
-    #           task_availability_lifetime_in_seconds: 1,
-    #           task_time_limit_in_seconds: 1,
-    #           task_keywords: ["FlowDefinitionTaskKeyword"],
-    #           public_workforce_task_price: {
-    #             amount_in_usd: {
-    #               dollars: 1,
-    #               cents: 1,
-    #               tenth_fractions_of_a_cent: 1,
-    #             },
-    #           },
-    #         },
-    #         output_config: { # required
-    #           s3_output_path: "S3Uri", # required
-    #           kms_key_id: "KmsKeyId",
-    #         },
-    #         role_arn: "RoleArn", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] flow_definition_name
     #   The name of your flow definition.
     #   @return [String]
@@ -6950,22 +5125,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateHumanTaskUiRequest
-    #   data as a hash:
-    #
-    #       {
-    #         human_task_ui_name: "HumanTaskUiName", # required
-    #         ui_template: { # required
-    #           content: "TemplateContent", # required
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] human_task_ui_name
     #   The name of the user interface you are creating.
     #   @return [String]
@@ -7003,320 +5162,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateHyperParameterTuningJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         hyper_parameter_tuning_job_name: "HyperParameterTuningJobName", # required
-    #         hyper_parameter_tuning_job_config: { # required
-    #           strategy: "Bayesian", # required, accepts Bayesian, Random, Hyperband, Grid
-    #           strategy_config: {
-    #             hyperband_strategy_config: {
-    #               min_resource: 1,
-    #               max_resource: 1,
-    #             },
-    #           },
-    #           hyper_parameter_tuning_job_objective: {
-    #             type: "Maximize", # required, accepts Maximize, Minimize
-    #             metric_name: "MetricName", # required
-    #           },
-    #           resource_limits: { # required
-    #             max_number_of_training_jobs: 1,
-    #             max_parallel_training_jobs: 1, # required
-    #           },
-    #           parameter_ranges: {
-    #             integer_parameter_ranges: [
-    #               {
-    #                 name: "ParameterKey", # required
-    #                 min_value: "ParameterValue", # required
-    #                 max_value: "ParameterValue", # required
-    #                 scaling_type: "Auto", # accepts Auto, Linear, Logarithmic, ReverseLogarithmic
-    #               },
-    #             ],
-    #             continuous_parameter_ranges: [
-    #               {
-    #                 name: "ParameterKey", # required
-    #                 min_value: "ParameterValue", # required
-    #                 max_value: "ParameterValue", # required
-    #                 scaling_type: "Auto", # accepts Auto, Linear, Logarithmic, ReverseLogarithmic
-    #               },
-    #             ],
-    #             categorical_parameter_ranges: [
-    #               {
-    #                 name: "ParameterKey", # required
-    #                 values: ["ParameterValue"], # required
-    #               },
-    #             ],
-    #           },
-    #           training_job_early_stopping_type: "Off", # accepts Off, Auto
-    #           tuning_job_completion_criteria: {
-    #             target_objective_metric_value: 1.0, # required
-    #           },
-    #         },
-    #         training_job_definition: {
-    #           definition_name: "HyperParameterTrainingJobDefinitionName",
-    #           tuning_objective: {
-    #             type: "Maximize", # required, accepts Maximize, Minimize
-    #             metric_name: "MetricName", # required
-    #           },
-    #           hyper_parameter_ranges: {
-    #             integer_parameter_ranges: [
-    #               {
-    #                 name: "ParameterKey", # required
-    #                 min_value: "ParameterValue", # required
-    #                 max_value: "ParameterValue", # required
-    #                 scaling_type: "Auto", # accepts Auto, Linear, Logarithmic, ReverseLogarithmic
-    #               },
-    #             ],
-    #             continuous_parameter_ranges: [
-    #               {
-    #                 name: "ParameterKey", # required
-    #                 min_value: "ParameterValue", # required
-    #                 max_value: "ParameterValue", # required
-    #                 scaling_type: "Auto", # accepts Auto, Linear, Logarithmic, ReverseLogarithmic
-    #               },
-    #             ],
-    #             categorical_parameter_ranges: [
-    #               {
-    #                 name: "ParameterKey", # required
-    #                 values: ["ParameterValue"], # required
-    #               },
-    #             ],
-    #           },
-    #           static_hyper_parameters: {
-    #             "HyperParameterKey" => "HyperParameterValue",
-    #           },
-    #           algorithm_specification: { # required
-    #             training_image: "AlgorithmImage",
-    #             training_input_mode: "Pipe", # required, accepts Pipe, File, FastFile
-    #             algorithm_name: "ArnOrName",
-    #             metric_definitions: [
-    #               {
-    #                 name: "MetricName", # required
-    #                 regex: "MetricRegex", # required
-    #               },
-    #             ],
-    #           },
-    #           role_arn: "RoleArn", # required
-    #           input_data_config: [
-    #             {
-    #               channel_name: "ChannelName", # required
-    #               data_source: { # required
-    #                 s3_data_source: {
-    #                   s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
-    #                   s3_uri: "S3Uri", # required
-    #                   s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
-    #                   attribute_names: ["AttributeName"],
-    #                   instance_group_names: ["InstanceGroupName"],
-    #                 },
-    #                 file_system_data_source: {
-    #                   file_system_id: "FileSystemId", # required
-    #                   file_system_access_mode: "rw", # required, accepts rw, ro
-    #                   file_system_type: "EFS", # required, accepts EFS, FSxLustre
-    #                   directory_path: "DirectoryPath", # required
-    #                 },
-    #               },
-    #               content_type: "ContentType",
-    #               compression_type: "None", # accepts None, Gzip
-    #               record_wrapper_type: "None", # accepts None, RecordIO
-    #               input_mode: "Pipe", # accepts Pipe, File, FastFile
-    #               shuffle_config: {
-    #                 seed: 1, # required
-    #               },
-    #             },
-    #           ],
-    #           vpc_config: {
-    #             security_group_ids: ["SecurityGroupId"], # required
-    #             subnets: ["SubnetId"], # required
-    #           },
-    #           output_data_config: { # required
-    #             kms_key_id: "KmsKeyId",
-    #             s3_output_path: "S3Uri", # required
-    #           },
-    #           resource_config: {
-    #             instance_type: "ml.m4.xlarge", # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge
-    #             instance_count: 1,
-    #             volume_size_in_gb: 1, # required
-    #             volume_kms_key_id: "KmsKeyId",
-    #             instance_groups: [
-    #               {
-    #                 instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge
-    #                 instance_count: 1, # required
-    #                 instance_group_name: "InstanceGroupName", # required
-    #               },
-    #             ],
-    #             keep_alive_period_in_seconds: 1,
-    #           },
-    #           stopping_condition: { # required
-    #             max_runtime_in_seconds: 1,
-    #             max_wait_time_in_seconds: 1,
-    #           },
-    #           enable_network_isolation: false,
-    #           enable_inter_container_traffic_encryption: false,
-    #           enable_managed_spot_training: false,
-    #           checkpoint_config: {
-    #             s3_uri: "S3Uri", # required
-    #             local_path: "DirectoryPath",
-    #           },
-    #           retry_strategy: {
-    #             maximum_retry_attempts: 1, # required
-    #           },
-    #           hyper_parameter_tuning_resource_config: {
-    #             instance_type: "ml.m4.xlarge", # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge
-    #             instance_count: 1,
-    #             volume_size_in_gb: 1,
-    #             volume_kms_key_id: "KmsKeyId",
-    #             allocation_strategy: "Prioritized", # accepts Prioritized
-    #             instance_configs: [
-    #               {
-    #                 instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge
-    #                 instance_count: 1, # required
-    #                 volume_size_in_gb: 1, # required
-    #               },
-    #             ],
-    #           },
-    #         },
-    #         training_job_definitions: [
-    #           {
-    #             definition_name: "HyperParameterTrainingJobDefinitionName",
-    #             tuning_objective: {
-    #               type: "Maximize", # required, accepts Maximize, Minimize
-    #               metric_name: "MetricName", # required
-    #             },
-    #             hyper_parameter_ranges: {
-    #               integer_parameter_ranges: [
-    #                 {
-    #                   name: "ParameterKey", # required
-    #                   min_value: "ParameterValue", # required
-    #                   max_value: "ParameterValue", # required
-    #                   scaling_type: "Auto", # accepts Auto, Linear, Logarithmic, ReverseLogarithmic
-    #                 },
-    #               ],
-    #               continuous_parameter_ranges: [
-    #                 {
-    #                   name: "ParameterKey", # required
-    #                   min_value: "ParameterValue", # required
-    #                   max_value: "ParameterValue", # required
-    #                   scaling_type: "Auto", # accepts Auto, Linear, Logarithmic, ReverseLogarithmic
-    #                 },
-    #               ],
-    #               categorical_parameter_ranges: [
-    #                 {
-    #                   name: "ParameterKey", # required
-    #                   values: ["ParameterValue"], # required
-    #                 },
-    #               ],
-    #             },
-    #             static_hyper_parameters: {
-    #               "HyperParameterKey" => "HyperParameterValue",
-    #             },
-    #             algorithm_specification: { # required
-    #               training_image: "AlgorithmImage",
-    #               training_input_mode: "Pipe", # required, accepts Pipe, File, FastFile
-    #               algorithm_name: "ArnOrName",
-    #               metric_definitions: [
-    #                 {
-    #                   name: "MetricName", # required
-    #                   regex: "MetricRegex", # required
-    #                 },
-    #               ],
-    #             },
-    #             role_arn: "RoleArn", # required
-    #             input_data_config: [
-    #               {
-    #                 channel_name: "ChannelName", # required
-    #                 data_source: { # required
-    #                   s3_data_source: {
-    #                     s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
-    #                     s3_uri: "S3Uri", # required
-    #                     s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
-    #                     attribute_names: ["AttributeName"],
-    #                     instance_group_names: ["InstanceGroupName"],
-    #                   },
-    #                   file_system_data_source: {
-    #                     file_system_id: "FileSystemId", # required
-    #                     file_system_access_mode: "rw", # required, accepts rw, ro
-    #                     file_system_type: "EFS", # required, accepts EFS, FSxLustre
-    #                     directory_path: "DirectoryPath", # required
-    #                   },
-    #                 },
-    #                 content_type: "ContentType",
-    #                 compression_type: "None", # accepts None, Gzip
-    #                 record_wrapper_type: "None", # accepts None, RecordIO
-    #                 input_mode: "Pipe", # accepts Pipe, File, FastFile
-    #                 shuffle_config: {
-    #                   seed: 1, # required
-    #                 },
-    #               },
-    #             ],
-    #             vpc_config: {
-    #               security_group_ids: ["SecurityGroupId"], # required
-    #               subnets: ["SubnetId"], # required
-    #             },
-    #             output_data_config: { # required
-    #               kms_key_id: "KmsKeyId",
-    #               s3_output_path: "S3Uri", # required
-    #             },
-    #             resource_config: {
-    #               instance_type: "ml.m4.xlarge", # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge
-    #               instance_count: 1,
-    #               volume_size_in_gb: 1, # required
-    #               volume_kms_key_id: "KmsKeyId",
-    #               instance_groups: [
-    #                 {
-    #                   instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge
-    #                   instance_count: 1, # required
-    #                   instance_group_name: "InstanceGroupName", # required
-    #                 },
-    #               ],
-    #               keep_alive_period_in_seconds: 1,
-    #             },
-    #             stopping_condition: { # required
-    #               max_runtime_in_seconds: 1,
-    #               max_wait_time_in_seconds: 1,
-    #             },
-    #             enable_network_isolation: false,
-    #             enable_inter_container_traffic_encryption: false,
-    #             enable_managed_spot_training: false,
-    #             checkpoint_config: {
-    #               s3_uri: "S3Uri", # required
-    #               local_path: "DirectoryPath",
-    #             },
-    #             retry_strategy: {
-    #               maximum_retry_attempts: 1, # required
-    #             },
-    #             hyper_parameter_tuning_resource_config: {
-    #               instance_type: "ml.m4.xlarge", # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge
-    #               instance_count: 1,
-    #               volume_size_in_gb: 1,
-    #               volume_kms_key_id: "KmsKeyId",
-    #               allocation_strategy: "Prioritized", # accepts Prioritized
-    #               instance_configs: [
-    #                 {
-    #                   instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge
-    #                   instance_count: 1, # required
-    #                   volume_size_in_gb: 1, # required
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #         ],
-    #         warm_start_config: {
-    #           parent_hyper_parameter_tuning_jobs: [ # required
-    #             {
-    #               hyper_parameter_tuning_job_name: "HyperParameterTuningJobName",
-    #             },
-    #           ],
-    #           warm_start_type: "IdenticalDataAndAlgorithm", # required, accepts IdenticalDataAndAlgorithm, TransferLearning
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] hyper_parameter_tuning_job_name
     #   The name of the tuning job. This name is the prefix for the names of
     #   all training jobs that this tuning job launches. The name must be
@@ -7413,22 +5258,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateImageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "ImageDescription",
-    #         display_name: "ImageDisplayName",
-    #         image_name: "ImageName", # required
-    #         role_arn: "RoleArn", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] description
     #   The description of the image.
     #   @return [String]
@@ -7475,15 +5304,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateImageVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         base_image: "ImageBaseImage", # required
-    #         client_token: "ClientToken", # required
-    #         image_name: "ImageName", # required
-    #       }
-    #
     # @!attribute [rw] base_image
     #   The registry path of the container image to use as the starting
     #   point for this version. The path is an Amazon Elastic Container
@@ -7528,87 +5348,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateInferenceRecommendationsJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_name: "RecommendationJobName", # required
-    #         job_type: "Default", # required, accepts Default, Advanced
-    #         role_arn: "RoleArn", # required
-    #         input_config: { # required
-    #           model_package_version_arn: "ModelPackageArn", # required
-    #           job_duration_in_seconds: 1,
-    #           traffic_pattern: {
-    #             traffic_type: "PHASES", # accepts PHASES
-    #             phases: [
-    #               {
-    #                 initial_number_of_users: 1,
-    #                 spawn_rate: 1,
-    #                 duration_in_seconds: 1,
-    #               },
-    #             ],
-    #           },
-    #           resource_limit: {
-    #             max_number_of_tests: 1,
-    #             max_parallel_of_tests: 1,
-    #           },
-    #           endpoint_configurations: [
-    #             {
-    #               instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge, ml.c6i.large, ml.c6i.xlarge, ml.c6i.2xlarge, ml.c6i.4xlarge, ml.c6i.8xlarge, ml.c6i.12xlarge, ml.c6i.16xlarge, ml.c6i.24xlarge, ml.c6i.32xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.12xlarge, ml.g5.16xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.p4d.24xlarge, ml.c7g.large, ml.c7g.xlarge, ml.c7g.2xlarge, ml.c7g.4xlarge, ml.c7g.8xlarge, ml.c7g.12xlarge, ml.c7g.16xlarge, ml.m6g.large, ml.m6g.xlarge, ml.m6g.2xlarge, ml.m6g.4xlarge, ml.m6g.8xlarge, ml.m6g.12xlarge, ml.m6g.16xlarge, ml.m6gd.large, ml.m6gd.xlarge, ml.m6gd.2xlarge, ml.m6gd.4xlarge, ml.m6gd.8xlarge, ml.m6gd.12xlarge, ml.m6gd.16xlarge, ml.c6g.large, ml.c6g.xlarge, ml.c6g.2xlarge, ml.c6g.4xlarge, ml.c6g.8xlarge, ml.c6g.12xlarge, ml.c6g.16xlarge, ml.c6gd.large, ml.c6gd.xlarge, ml.c6gd.2xlarge, ml.c6gd.4xlarge, ml.c6gd.8xlarge, ml.c6gd.12xlarge, ml.c6gd.16xlarge, ml.c6gn.large, ml.c6gn.xlarge, ml.c6gn.2xlarge, ml.c6gn.4xlarge, ml.c6gn.8xlarge, ml.c6gn.12xlarge, ml.c6gn.16xlarge, ml.r6g.large, ml.r6g.xlarge, ml.r6g.2xlarge, ml.r6g.4xlarge, ml.r6g.8xlarge, ml.r6g.12xlarge, ml.r6g.16xlarge, ml.r6gd.large, ml.r6gd.xlarge, ml.r6gd.2xlarge, ml.r6gd.4xlarge, ml.r6gd.8xlarge, ml.r6gd.12xlarge, ml.r6gd.16xlarge
-    #               inference_specification_name: "InferenceSpecificationName",
-    #               environment_parameter_ranges: {
-    #                 categorical_parameter_ranges: [
-    #                   {
-    #                     name: "String64", # required
-    #                     value: ["String128"], # required
-    #                   },
-    #                 ],
-    #               },
-    #             },
-    #           ],
-    #           volume_kms_key_id: "KmsKeyId",
-    #           container_config: {
-    #             domain: "String",
-    #             task: "String",
-    #             framework: "String",
-    #             framework_version: "String",
-    #             payload_config: {
-    #               sample_payload_url: "String",
-    #               supported_content_types: ["String"],
-    #             },
-    #             nearest_model_name: "String",
-    #             supported_instance_types: ["String"],
-    #           },
-    #           endpoints: [
-    #             {
-    #               endpoint_name: "EndpointName", # required
-    #             },
-    #           ],
-    #         },
-    #         job_description: "RecommendationJobDescription",
-    #         stopping_conditions: {
-    #           max_invocations: 1,
-    #           model_latency_thresholds: [
-    #             {
-    #               percentile: "String64",
-    #               value_in_milliseconds: 1,
-    #             },
-    #           ],
-    #         },
-    #         output_config: {
-    #           kms_key_id: "KmsKeyId",
-    #           compiled_output_config: {
-    #             s3_output_uri: "S3Uri",
-    #           },
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] job_name
     #   A name for the recommendation job. The name must be unique within
     #   the Amazon Web Services Region and within your Amazon Web Services
@@ -7686,80 +5425,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateLabelingJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         labeling_job_name: "LabelingJobName", # required
-    #         label_attribute_name: "LabelAttributeName", # required
-    #         input_config: { # required
-    #           data_source: { # required
-    #             s3_data_source: {
-    #               manifest_s3_uri: "S3Uri", # required
-    #             },
-    #             sns_data_source: {
-    #               sns_topic_arn: "SnsTopicArn", # required
-    #             },
-    #           },
-    #           data_attributes: {
-    #             content_classifiers: ["FreeOfPersonallyIdentifiableInformation"], # accepts FreeOfPersonallyIdentifiableInformation, FreeOfAdultContent
-    #           },
-    #         },
-    #         output_config: { # required
-    #           s3_output_path: "S3Uri", # required
-    #           kms_key_id: "KmsKeyId",
-    #           sns_topic_arn: "SnsTopicArn",
-    #         },
-    #         role_arn: "RoleArn", # required
-    #         label_category_config_s3_uri: "S3Uri",
-    #         stopping_conditions: {
-    #           max_human_labeled_object_count: 1,
-    #           max_percentage_of_input_dataset_labeled: 1,
-    #         },
-    #         labeling_job_algorithms_config: {
-    #           labeling_job_algorithm_specification_arn: "LabelingJobAlgorithmSpecificationArn", # required
-    #           initial_active_learning_model_arn: "ModelArn",
-    #           labeling_job_resource_config: {
-    #             volume_kms_key_id: "KmsKeyId",
-    #             vpc_config: {
-    #               security_group_ids: ["SecurityGroupId"], # required
-    #               subnets: ["SubnetId"], # required
-    #             },
-    #           },
-    #         },
-    #         human_task_config: { # required
-    #           workteam_arn: "WorkteamArn", # required
-    #           ui_config: { # required
-    #             ui_template_s3_uri: "S3Uri",
-    #             human_task_ui_arn: "HumanTaskUiArn",
-    #           },
-    #           pre_human_task_lambda_arn: "LambdaFunctionArn", # required
-    #           task_keywords: ["TaskKeyword"],
-    #           task_title: "TaskTitle", # required
-    #           task_description: "TaskDescription", # required
-    #           number_of_human_workers_per_data_object: 1, # required
-    #           task_time_limit_in_seconds: 1, # required
-    #           task_availability_lifetime_in_seconds: 1,
-    #           max_concurrent_task_count: 1,
-    #           annotation_consolidation_config: { # required
-    #             annotation_consolidation_lambda_arn: "LambdaFunctionArn", # required
-    #           },
-    #           public_workforce_task_price: {
-    #             amount_in_usd: {
-    #               dollars: 1,
-    #               cents: 1,
-    #               tenth_fractions_of_a_cent: 1,
-    #             },
-    #           },
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] labeling_job_name
     #   The name of the labeling job. This name is used to identify the job
     #   in a list of labeling jobs. Labeling job names must be unique within
@@ -7971,103 +5636,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateModelBiasJobDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_definition_name: "MonitoringJobDefinitionName", # required
-    #         model_bias_baseline_config: {
-    #           baselining_job_name: "ProcessingJobName",
-    #           constraints_resource: {
-    #             s3_uri: "S3Uri",
-    #           },
-    #         },
-    #         model_bias_app_specification: { # required
-    #           image_uri: "ImageUri", # required
-    #           config_uri: "S3Uri", # required
-    #           environment: {
-    #             "ProcessingEnvironmentKey" => "ProcessingEnvironmentValue",
-    #           },
-    #         },
-    #         model_bias_job_input: { # required
-    #           endpoint_input: {
-    #             endpoint_name: "EndpointName", # required
-    #             local_path: "ProcessingLocalPath", # required
-    #             s3_input_mode: "Pipe", # accepts Pipe, File
-    #             s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
-    #             features_attribute: "String",
-    #             inference_attribute: "String",
-    #             probability_attribute: "String",
-    #             probability_threshold_attribute: 1.0,
-    #             start_time_offset: "MonitoringTimeOffsetString",
-    #             end_time_offset: "MonitoringTimeOffsetString",
-    #           },
-    #           batch_transform_input: {
-    #             data_captured_destination_s3_uri: "DestinationS3Uri", # required
-    #             dataset_format: { # required
-    #               csv: {
-    #                 header: false,
-    #               },
-    #               json: {
-    #                 line: false,
-    #               },
-    #               parquet: {
-    #               },
-    #             },
-    #             local_path: "ProcessingLocalPath", # required
-    #             s3_input_mode: "Pipe", # accepts Pipe, File
-    #             s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
-    #             features_attribute: "String",
-    #             inference_attribute: "String",
-    #             probability_attribute: "String",
-    #             probability_threshold_attribute: 1.0,
-    #             start_time_offset: "MonitoringTimeOffsetString",
-    #             end_time_offset: "MonitoringTimeOffsetString",
-    #           },
-    #           ground_truth_s3_input: { # required
-    #             s3_uri: "MonitoringS3Uri",
-    #           },
-    #         },
-    #         model_bias_job_output_config: { # required
-    #           monitoring_outputs: [ # required
-    #             {
-    #               s3_output: { # required
-    #                 s3_uri: "MonitoringS3Uri", # required
-    #                 local_path: "ProcessingLocalPath", # required
-    #                 s3_upload_mode: "Continuous", # accepts Continuous, EndOfJob
-    #               },
-    #             },
-    #           ],
-    #           kms_key_id: "KmsKeyId",
-    #         },
-    #         job_resources: { # required
-    #           cluster_config: { # required
-    #             instance_count: 1, # required
-    #             instance_type: "ml.t3.medium", # required, accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
-    #             volume_size_in_gb: 1, # required
-    #             volume_kms_key_id: "KmsKeyId",
-    #           },
-    #         },
-    #         network_config: {
-    #           enable_inter_container_traffic_encryption: false,
-    #           enable_network_isolation: false,
-    #           vpc_config: {
-    #             security_group_ids: ["SecurityGroupId"], # required
-    #             subnets: ["SubnetId"], # required
-    #           },
-    #         },
-    #         role_arn: "RoleArn", # required
-    #         stopping_condition: {
-    #           max_runtime_in_seconds: 1, # required
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] job_definition_name
     #   The name of the bias job definition. The name must be unique within
     #   an Amazon Web Services Region in the Amazon Web Services account.
@@ -8147,100 +5715,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateModelExplainabilityJobDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_definition_name: "MonitoringJobDefinitionName", # required
-    #         model_explainability_baseline_config: {
-    #           baselining_job_name: "ProcessingJobName",
-    #           constraints_resource: {
-    #             s3_uri: "S3Uri",
-    #           },
-    #         },
-    #         model_explainability_app_specification: { # required
-    #           image_uri: "ImageUri", # required
-    #           config_uri: "S3Uri", # required
-    #           environment: {
-    #             "ProcessingEnvironmentKey" => "ProcessingEnvironmentValue",
-    #           },
-    #         },
-    #         model_explainability_job_input: { # required
-    #           endpoint_input: {
-    #             endpoint_name: "EndpointName", # required
-    #             local_path: "ProcessingLocalPath", # required
-    #             s3_input_mode: "Pipe", # accepts Pipe, File
-    #             s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
-    #             features_attribute: "String",
-    #             inference_attribute: "String",
-    #             probability_attribute: "String",
-    #             probability_threshold_attribute: 1.0,
-    #             start_time_offset: "MonitoringTimeOffsetString",
-    #             end_time_offset: "MonitoringTimeOffsetString",
-    #           },
-    #           batch_transform_input: {
-    #             data_captured_destination_s3_uri: "DestinationS3Uri", # required
-    #             dataset_format: { # required
-    #               csv: {
-    #                 header: false,
-    #               },
-    #               json: {
-    #                 line: false,
-    #               },
-    #               parquet: {
-    #               },
-    #             },
-    #             local_path: "ProcessingLocalPath", # required
-    #             s3_input_mode: "Pipe", # accepts Pipe, File
-    #             s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
-    #             features_attribute: "String",
-    #             inference_attribute: "String",
-    #             probability_attribute: "String",
-    #             probability_threshold_attribute: 1.0,
-    #             start_time_offset: "MonitoringTimeOffsetString",
-    #             end_time_offset: "MonitoringTimeOffsetString",
-    #           },
-    #         },
-    #         model_explainability_job_output_config: { # required
-    #           monitoring_outputs: [ # required
-    #             {
-    #               s3_output: { # required
-    #                 s3_uri: "MonitoringS3Uri", # required
-    #                 local_path: "ProcessingLocalPath", # required
-    #                 s3_upload_mode: "Continuous", # accepts Continuous, EndOfJob
-    #               },
-    #             },
-    #           ],
-    #           kms_key_id: "KmsKeyId",
-    #         },
-    #         job_resources: { # required
-    #           cluster_config: { # required
-    #             instance_count: 1, # required
-    #             instance_type: "ml.t3.medium", # required, accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
-    #             volume_size_in_gb: 1, # required
-    #             volume_kms_key_id: "KmsKeyId",
-    #           },
-    #         },
-    #         network_config: {
-    #           enable_inter_container_traffic_encryption: false,
-    #           enable_network_isolation: false,
-    #           vpc_config: {
-    #             security_group_ids: ["SecurityGroupId"], # required
-    #             subnets: ["SubnetId"], # required
-    #           },
-    #         },
-    #         role_arn: "RoleArn", # required
-    #         stopping_condition: {
-    #           max_runtime_in_seconds: 1, # required
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] job_definition_name
     #   The name of the model explainability job definition. The name must
     #   be unique within an Amazon Web Services Region in the Amazon Web
@@ -8321,70 +5795,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateModelInput
-    #   data as a hash:
-    #
-    #       {
-    #         model_name: "ModelName", # required
-    #         primary_container: {
-    #           container_hostname: "ContainerHostname",
-    #           image: "ContainerImage",
-    #           image_config: {
-    #             repository_access_mode: "Platform", # required, accepts Platform, Vpc
-    #             repository_auth_config: {
-    #               repository_credentials_provider_arn: "RepositoryCredentialsProviderArn", # required
-    #             },
-    #           },
-    #           mode: "SingleModel", # accepts SingleModel, MultiModel
-    #           model_data_url: "Url",
-    #           environment: {
-    #             "EnvironmentKey" => "EnvironmentValue",
-    #           },
-    #           model_package_name: "VersionedArnOrName",
-    #           inference_specification_name: "InferenceSpecificationName",
-    #           multi_model_config: {
-    #             model_cache_setting: "Enabled", # accepts Enabled, Disabled
-    #           },
-    #         },
-    #         containers: [
-    #           {
-    #             container_hostname: "ContainerHostname",
-    #             image: "ContainerImage",
-    #             image_config: {
-    #               repository_access_mode: "Platform", # required, accepts Platform, Vpc
-    #               repository_auth_config: {
-    #                 repository_credentials_provider_arn: "RepositoryCredentialsProviderArn", # required
-    #               },
-    #             },
-    #             mode: "SingleModel", # accepts SingleModel, MultiModel
-    #             model_data_url: "Url",
-    #             environment: {
-    #               "EnvironmentKey" => "EnvironmentValue",
-    #             },
-    #             model_package_name: "VersionedArnOrName",
-    #             inference_specification_name: "InferenceSpecificationName",
-    #             multi_model_config: {
-    #               model_cache_setting: "Enabled", # accepts Enabled, Disabled
-    #             },
-    #           },
-    #         ],
-    #         inference_execution_config: {
-    #           mode: "Serial", # required, accepts Serial, Direct
-    #         },
-    #         execution_role_arn: "RoleArn", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         vpc_config: {
-    #           security_group_ids: ["SecurityGroupId"], # required
-    #           subnets: ["SubnetId"], # required
-    #         },
-    #         enable_network_isolation: false,
-    #       }
-    #
     # @!attribute [rw] model_name
     #   The name of the new model.
     #   @return [String]
@@ -8478,20 +5888,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateModelPackageGroupInput
-    #   data as a hash:
-    #
-    #       {
-    #         model_package_group_name: "EntityName", # required
-    #         model_package_group_description: "EntityDescription",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] model_package_group_name
     #   The name of the model group.
     #   @return [String]
@@ -8532,239 +5928,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateModelPackageInput
-    #   data as a hash:
-    #
-    #       {
-    #         model_package_name: "EntityName",
-    #         model_package_group_name: "ArnOrName",
-    #         model_package_description: "EntityDescription",
-    #         inference_specification: {
-    #           containers: [ # required
-    #             {
-    #               container_hostname: "ContainerHostname",
-    #               image: "ContainerImage", # required
-    #               image_digest: "ImageDigest",
-    #               model_data_url: "Url",
-    #               product_id: "ProductId",
-    #               environment: {
-    #                 "EnvironmentKey" => "EnvironmentValue",
-    #               },
-    #               model_input: {
-    #                 data_input_config: "DataInputConfig", # required
-    #               },
-    #               framework: "String",
-    #               framework_version: "ModelPackageFrameworkVersion",
-    #               nearest_model_name: "String",
-    #             },
-    #           ],
-    #           supported_transform_instance_types: ["ml.m4.xlarge"], # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
-    #           supported_realtime_inference_instance_types: ["ml.t2.medium"], # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge, ml.c6i.large, ml.c6i.xlarge, ml.c6i.2xlarge, ml.c6i.4xlarge, ml.c6i.8xlarge, ml.c6i.12xlarge, ml.c6i.16xlarge, ml.c6i.24xlarge, ml.c6i.32xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.12xlarge, ml.g5.16xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.p4d.24xlarge, ml.c7g.large, ml.c7g.xlarge, ml.c7g.2xlarge, ml.c7g.4xlarge, ml.c7g.8xlarge, ml.c7g.12xlarge, ml.c7g.16xlarge, ml.m6g.large, ml.m6g.xlarge, ml.m6g.2xlarge, ml.m6g.4xlarge, ml.m6g.8xlarge, ml.m6g.12xlarge, ml.m6g.16xlarge, ml.m6gd.large, ml.m6gd.xlarge, ml.m6gd.2xlarge, ml.m6gd.4xlarge, ml.m6gd.8xlarge, ml.m6gd.12xlarge, ml.m6gd.16xlarge, ml.c6g.large, ml.c6g.xlarge, ml.c6g.2xlarge, ml.c6g.4xlarge, ml.c6g.8xlarge, ml.c6g.12xlarge, ml.c6g.16xlarge, ml.c6gd.large, ml.c6gd.xlarge, ml.c6gd.2xlarge, ml.c6gd.4xlarge, ml.c6gd.8xlarge, ml.c6gd.12xlarge, ml.c6gd.16xlarge, ml.c6gn.large, ml.c6gn.xlarge, ml.c6gn.2xlarge, ml.c6gn.4xlarge, ml.c6gn.8xlarge, ml.c6gn.12xlarge, ml.c6gn.16xlarge, ml.r6g.large, ml.r6g.xlarge, ml.r6g.2xlarge, ml.r6g.4xlarge, ml.r6g.8xlarge, ml.r6g.12xlarge, ml.r6g.16xlarge, ml.r6gd.large, ml.r6gd.xlarge, ml.r6gd.2xlarge, ml.r6gd.4xlarge, ml.r6gd.8xlarge, ml.r6gd.12xlarge, ml.r6gd.16xlarge
-    #           supported_content_types: ["ContentType"], # required
-    #           supported_response_mime_types: ["ResponseMIMEType"], # required
-    #         },
-    #         validation_specification: {
-    #           validation_role: "RoleArn", # required
-    #           validation_profiles: [ # required
-    #             {
-    #               profile_name: "EntityName", # required
-    #               transform_job_definition: { # required
-    #                 max_concurrent_transforms: 1,
-    #                 max_payload_in_mb: 1,
-    #                 batch_strategy: "MultiRecord", # accepts MultiRecord, SingleRecord
-    #                 environment: {
-    #                   "TransformEnvironmentKey" => "TransformEnvironmentValue",
-    #                 },
-    #                 transform_input: { # required
-    #                   data_source: { # required
-    #                     s3_data_source: { # required
-    #                       s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
-    #                       s3_uri: "S3Uri", # required
-    #                     },
-    #                   },
-    #                   content_type: "ContentType",
-    #                   compression_type: "None", # accepts None, Gzip
-    #                   split_type: "None", # accepts None, Line, RecordIO, TFRecord
-    #                 },
-    #                 transform_output: { # required
-    #                   s3_output_path: "S3Uri", # required
-    #                   accept: "Accept",
-    #                   assemble_with: "None", # accepts None, Line
-    #                   kms_key_id: "KmsKeyId",
-    #                 },
-    #                 transform_resources: { # required
-    #                   instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
-    #                   instance_count: 1, # required
-    #                   volume_kms_key_id: "KmsKeyId",
-    #                 },
-    #               },
-    #             },
-    #           ],
-    #         },
-    #         source_algorithm_specification: {
-    #           source_algorithms: [ # required
-    #             {
-    #               model_data_url: "Url",
-    #               algorithm_name: "ArnOrName", # required
-    #             },
-    #           ],
-    #         },
-    #         certify_for_marketplace: false,
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         model_approval_status: "Approved", # accepts Approved, Rejected, PendingManualApproval
-    #         metadata_properties: {
-    #           commit_id: "MetadataPropertyValue",
-    #           repository: "MetadataPropertyValue",
-    #           generated_by: "MetadataPropertyValue",
-    #           project_id: "MetadataPropertyValue",
-    #         },
-    #         model_metrics: {
-    #           model_quality: {
-    #             statistics: {
-    #               content_type: "ContentType", # required
-    #               content_digest: "ContentDigest",
-    #               s3_uri: "S3Uri", # required
-    #             },
-    #             constraints: {
-    #               content_type: "ContentType", # required
-    #               content_digest: "ContentDigest",
-    #               s3_uri: "S3Uri", # required
-    #             },
-    #           },
-    #           model_data_quality: {
-    #             statistics: {
-    #               content_type: "ContentType", # required
-    #               content_digest: "ContentDigest",
-    #               s3_uri: "S3Uri", # required
-    #             },
-    #             constraints: {
-    #               content_type: "ContentType", # required
-    #               content_digest: "ContentDigest",
-    #               s3_uri: "S3Uri", # required
-    #             },
-    #           },
-    #           bias: {
-    #             report: {
-    #               content_type: "ContentType", # required
-    #               content_digest: "ContentDigest",
-    #               s3_uri: "S3Uri", # required
-    #             },
-    #             pre_training_report: {
-    #               content_type: "ContentType", # required
-    #               content_digest: "ContentDigest",
-    #               s3_uri: "S3Uri", # required
-    #             },
-    #             post_training_report: {
-    #               content_type: "ContentType", # required
-    #               content_digest: "ContentDigest",
-    #               s3_uri: "S3Uri", # required
-    #             },
-    #           },
-    #           explainability: {
-    #             report: {
-    #               content_type: "ContentType", # required
-    #               content_digest: "ContentDigest",
-    #               s3_uri: "S3Uri", # required
-    #             },
-    #           },
-    #         },
-    #         client_token: "ClientToken",
-    #         customer_metadata_properties: {
-    #           "CustomerMetadataKey" => "CustomerMetadataValue",
-    #         },
-    #         drift_check_baselines: {
-    #           bias: {
-    #             config_file: {
-    #               content_type: "ContentType",
-    #               content_digest: "ContentDigest",
-    #               s3_uri: "S3Uri", # required
-    #             },
-    #             pre_training_constraints: {
-    #               content_type: "ContentType", # required
-    #               content_digest: "ContentDigest",
-    #               s3_uri: "S3Uri", # required
-    #             },
-    #             post_training_constraints: {
-    #               content_type: "ContentType", # required
-    #               content_digest: "ContentDigest",
-    #               s3_uri: "S3Uri", # required
-    #             },
-    #           },
-    #           explainability: {
-    #             constraints: {
-    #               content_type: "ContentType", # required
-    #               content_digest: "ContentDigest",
-    #               s3_uri: "S3Uri", # required
-    #             },
-    #             config_file: {
-    #               content_type: "ContentType",
-    #               content_digest: "ContentDigest",
-    #               s3_uri: "S3Uri", # required
-    #             },
-    #           },
-    #           model_quality: {
-    #             statistics: {
-    #               content_type: "ContentType", # required
-    #               content_digest: "ContentDigest",
-    #               s3_uri: "S3Uri", # required
-    #             },
-    #             constraints: {
-    #               content_type: "ContentType", # required
-    #               content_digest: "ContentDigest",
-    #               s3_uri: "S3Uri", # required
-    #             },
-    #           },
-    #           model_data_quality: {
-    #             statistics: {
-    #               content_type: "ContentType", # required
-    #               content_digest: "ContentDigest",
-    #               s3_uri: "S3Uri", # required
-    #             },
-    #             constraints: {
-    #               content_type: "ContentType", # required
-    #               content_digest: "ContentDigest",
-    #               s3_uri: "S3Uri", # required
-    #             },
-    #           },
-    #         },
-    #         domain: "String",
-    #         task: "String",
-    #         sample_payload_url: "S3Uri",
-    #         additional_inference_specifications: [
-    #           {
-    #             name: "EntityName", # required
-    #             description: "EntityDescription",
-    #             containers: [ # required
-    #               {
-    #                 container_hostname: "ContainerHostname",
-    #                 image: "ContainerImage", # required
-    #                 image_digest: "ImageDigest",
-    #                 model_data_url: "Url",
-    #                 product_id: "ProductId",
-    #                 environment: {
-    #                   "EnvironmentKey" => "EnvironmentValue",
-    #                 },
-    #                 model_input: {
-    #                   data_input_config: "DataInputConfig", # required
-    #                 },
-    #                 framework: "String",
-    #                 framework_version: "ModelPackageFrameworkVersion",
-    #                 nearest_model_name: "String",
-    #               },
-    #             ],
-    #             supported_transform_instance_types: ["ml.m4.xlarge"], # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
-    #             supported_realtime_inference_instance_types: ["ml.t2.medium"], # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge, ml.c6i.large, ml.c6i.xlarge, ml.c6i.2xlarge, ml.c6i.4xlarge, ml.c6i.8xlarge, ml.c6i.12xlarge, ml.c6i.16xlarge, ml.c6i.24xlarge, ml.c6i.32xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.12xlarge, ml.g5.16xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.p4d.24xlarge, ml.c7g.large, ml.c7g.xlarge, ml.c7g.2xlarge, ml.c7g.4xlarge, ml.c7g.8xlarge, ml.c7g.12xlarge, ml.c7g.16xlarge, ml.m6g.large, ml.m6g.xlarge, ml.m6g.2xlarge, ml.m6g.4xlarge, ml.m6g.8xlarge, ml.m6g.12xlarge, ml.m6g.16xlarge, ml.m6gd.large, ml.m6gd.xlarge, ml.m6gd.2xlarge, ml.m6gd.4xlarge, ml.m6gd.8xlarge, ml.m6gd.12xlarge, ml.m6gd.16xlarge, ml.c6g.large, ml.c6g.xlarge, ml.c6g.2xlarge, ml.c6g.4xlarge, ml.c6g.8xlarge, ml.c6g.12xlarge, ml.c6g.16xlarge, ml.c6gd.large, ml.c6gd.xlarge, ml.c6gd.2xlarge, ml.c6gd.4xlarge, ml.c6gd.8xlarge, ml.c6gd.12xlarge, ml.c6gd.16xlarge, ml.c6gn.large, ml.c6gn.xlarge, ml.c6gn.2xlarge, ml.c6gn.4xlarge, ml.c6gn.8xlarge, ml.c6gn.12xlarge, ml.c6gn.16xlarge, ml.r6g.large, ml.r6g.xlarge, ml.r6g.2xlarge, ml.r6g.4xlarge, ml.r6g.8xlarge, ml.r6g.12xlarge, ml.r6g.16xlarge, ml.r6gd.large, ml.r6gd.xlarge, ml.r6gd.2xlarge, ml.r6gd.4xlarge, ml.r6gd.8xlarge, ml.r6gd.12xlarge, ml.r6gd.16xlarge
-    #             supported_content_types: ["ContentType"],
-    #             supported_response_mime_types: ["ResponseMIMEType"],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] model_package_name
     #   The name of the model package. The name must have 1 to 63
     #   characters. Valid characters are a-z, A-Z, 0-9, and - (hyphen).
@@ -8936,107 +6099,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateModelQualityJobDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_definition_name: "MonitoringJobDefinitionName", # required
-    #         model_quality_baseline_config: {
-    #           baselining_job_name: "ProcessingJobName",
-    #           constraints_resource: {
-    #             s3_uri: "S3Uri",
-    #           },
-    #         },
-    #         model_quality_app_specification: { # required
-    #           image_uri: "ImageUri", # required
-    #           container_entrypoint: ["ContainerEntrypointString"],
-    #           container_arguments: ["ContainerArgument"],
-    #           record_preprocessor_source_uri: "S3Uri",
-    #           post_analytics_processor_source_uri: "S3Uri",
-    #           problem_type: "BinaryClassification", # accepts BinaryClassification, MulticlassClassification, Regression
-    #           environment: {
-    #             "ProcessingEnvironmentKey" => "ProcessingEnvironmentValue",
-    #           },
-    #         },
-    #         model_quality_job_input: { # required
-    #           endpoint_input: {
-    #             endpoint_name: "EndpointName", # required
-    #             local_path: "ProcessingLocalPath", # required
-    #             s3_input_mode: "Pipe", # accepts Pipe, File
-    #             s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
-    #             features_attribute: "String",
-    #             inference_attribute: "String",
-    #             probability_attribute: "String",
-    #             probability_threshold_attribute: 1.0,
-    #             start_time_offset: "MonitoringTimeOffsetString",
-    #             end_time_offset: "MonitoringTimeOffsetString",
-    #           },
-    #           batch_transform_input: {
-    #             data_captured_destination_s3_uri: "DestinationS3Uri", # required
-    #             dataset_format: { # required
-    #               csv: {
-    #                 header: false,
-    #               },
-    #               json: {
-    #                 line: false,
-    #               },
-    #               parquet: {
-    #               },
-    #             },
-    #             local_path: "ProcessingLocalPath", # required
-    #             s3_input_mode: "Pipe", # accepts Pipe, File
-    #             s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
-    #             features_attribute: "String",
-    #             inference_attribute: "String",
-    #             probability_attribute: "String",
-    #             probability_threshold_attribute: 1.0,
-    #             start_time_offset: "MonitoringTimeOffsetString",
-    #             end_time_offset: "MonitoringTimeOffsetString",
-    #           },
-    #           ground_truth_s3_input: { # required
-    #             s3_uri: "MonitoringS3Uri",
-    #           },
-    #         },
-    #         model_quality_job_output_config: { # required
-    #           monitoring_outputs: [ # required
-    #             {
-    #               s3_output: { # required
-    #                 s3_uri: "MonitoringS3Uri", # required
-    #                 local_path: "ProcessingLocalPath", # required
-    #                 s3_upload_mode: "Continuous", # accepts Continuous, EndOfJob
-    #               },
-    #             },
-    #           ],
-    #           kms_key_id: "KmsKeyId",
-    #         },
-    #         job_resources: { # required
-    #           cluster_config: { # required
-    #             instance_count: 1, # required
-    #             instance_type: "ml.t3.medium", # required, accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
-    #             volume_size_in_gb: 1, # required
-    #             volume_kms_key_id: "KmsKeyId",
-    #           },
-    #         },
-    #         network_config: {
-    #           enable_inter_container_traffic_encryption: false,
-    #           enable_network_isolation: false,
-    #           vpc_config: {
-    #             security_group_ids: ["SecurityGroupId"], # required
-    #             subnets: ["SubnetId"], # required
-    #           },
-    #         },
-    #         role_arn: "RoleArn", # required
-    #         stopping_condition: {
-    #           max_runtime_in_seconds: 1, # required
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] job_definition_name
     #   The name of the monitoring job definition.
     #   @return [String]
@@ -9115,117 +6177,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateMonitoringScheduleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         monitoring_schedule_name: "MonitoringScheduleName", # required
-    #         monitoring_schedule_config: { # required
-    #           schedule_config: {
-    #             schedule_expression: "ScheduleExpression", # required
-    #           },
-    #           monitoring_job_definition: {
-    #             baseline_config: {
-    #               baselining_job_name: "ProcessingJobName",
-    #               constraints_resource: {
-    #                 s3_uri: "S3Uri",
-    #               },
-    #               statistics_resource: {
-    #                 s3_uri: "S3Uri",
-    #               },
-    #             },
-    #             monitoring_inputs: [ # required
-    #               {
-    #                 endpoint_input: {
-    #                   endpoint_name: "EndpointName", # required
-    #                   local_path: "ProcessingLocalPath", # required
-    #                   s3_input_mode: "Pipe", # accepts Pipe, File
-    #                   s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
-    #                   features_attribute: "String",
-    #                   inference_attribute: "String",
-    #                   probability_attribute: "String",
-    #                   probability_threshold_attribute: 1.0,
-    #                   start_time_offset: "MonitoringTimeOffsetString",
-    #                   end_time_offset: "MonitoringTimeOffsetString",
-    #                 },
-    #                 batch_transform_input: {
-    #                   data_captured_destination_s3_uri: "DestinationS3Uri", # required
-    #                   dataset_format: { # required
-    #                     csv: {
-    #                       header: false,
-    #                     },
-    #                     json: {
-    #                       line: false,
-    #                     },
-    #                     parquet: {
-    #                     },
-    #                   },
-    #                   local_path: "ProcessingLocalPath", # required
-    #                   s3_input_mode: "Pipe", # accepts Pipe, File
-    #                   s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
-    #                   features_attribute: "String",
-    #                   inference_attribute: "String",
-    #                   probability_attribute: "String",
-    #                   probability_threshold_attribute: 1.0,
-    #                   start_time_offset: "MonitoringTimeOffsetString",
-    #                   end_time_offset: "MonitoringTimeOffsetString",
-    #                 },
-    #               },
-    #             ],
-    #             monitoring_output_config: { # required
-    #               monitoring_outputs: [ # required
-    #                 {
-    #                   s3_output: { # required
-    #                     s3_uri: "MonitoringS3Uri", # required
-    #                     local_path: "ProcessingLocalPath", # required
-    #                     s3_upload_mode: "Continuous", # accepts Continuous, EndOfJob
-    #                   },
-    #                 },
-    #               ],
-    #               kms_key_id: "KmsKeyId",
-    #             },
-    #             monitoring_resources: { # required
-    #               cluster_config: { # required
-    #                 instance_count: 1, # required
-    #                 instance_type: "ml.t3.medium", # required, accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
-    #                 volume_size_in_gb: 1, # required
-    #                 volume_kms_key_id: "KmsKeyId",
-    #               },
-    #             },
-    #             monitoring_app_specification: { # required
-    #               image_uri: "ImageUri", # required
-    #               container_entrypoint: ["ContainerEntrypointString"],
-    #               container_arguments: ["ContainerArgument"],
-    #               record_preprocessor_source_uri: "S3Uri",
-    #               post_analytics_processor_source_uri: "S3Uri",
-    #             },
-    #             stopping_condition: {
-    #               max_runtime_in_seconds: 1, # required
-    #             },
-    #             environment: {
-    #               "ProcessingEnvironmentKey" => "ProcessingEnvironmentValue",
-    #             },
-    #             network_config: {
-    #               enable_inter_container_traffic_encryption: false,
-    #               enable_network_isolation: false,
-    #               vpc_config: {
-    #                 security_group_ids: ["SecurityGroupId"], # required
-    #                 subnets: ["SubnetId"], # required
-    #               },
-    #             },
-    #             role_arn: "RoleArn", # required
-    #           },
-    #           monitoring_job_definition_name: "MonitoringJobDefinitionName",
-    #           monitoring_type: "DataQuality", # accepts DataQuality, ModelQuality, ModelBias, ModelExplainability
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] monitoring_schedule_name
     #   The name of the monitoring schedule. The name must be unique within
     #   an Amazon Web Services Region within an Amazon Web Services account.
@@ -9265,35 +6216,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateNotebookInstanceInput
-    #   data as a hash:
-    #
-    #       {
-    #         notebook_instance_name: "NotebookInstanceName", # required
-    #         instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #         subnet_id: "SubnetId",
-    #         security_group_ids: ["SecurityGroupId"],
-    #         role_arn: "RoleArn", # required
-    #         kms_key_id: "KmsKeyId",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         lifecycle_config_name: "NotebookInstanceLifecycleConfigName",
-    #         direct_internet_access: "Enabled", # accepts Enabled, Disabled
-    #         volume_size_in_gb: 1,
-    #         accelerator_types: ["ml.eia1.medium"], # accepts ml.eia1.medium, ml.eia1.large, ml.eia1.xlarge, ml.eia2.medium, ml.eia2.large, ml.eia2.xlarge
-    #         default_code_repository: "CodeRepositoryNameOrUrl",
-    #         additional_code_repositories: ["CodeRepositoryNameOrUrl"],
-    #         root_access: "Enabled", # accepts Enabled, Disabled
-    #         platform_identifier: "PlatformIdentifier",
-    #         instance_metadata_service_configuration: {
-    #           minimum_instance_metadata_service_version: "MinimumInstanceMetadataServiceVersion", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] notebook_instance_name
     #   The name of the new notebook instance.
     #   @return [String]
@@ -9471,23 +6393,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateNotebookInstanceLifecycleConfigInput
-    #   data as a hash:
-    #
-    #       {
-    #         notebook_instance_lifecycle_config_name: "NotebookInstanceLifecycleConfigName", # required
-    #         on_create: [
-    #           {
-    #             content: "NotebookInstanceLifecycleConfigContent",
-    #           },
-    #         ],
-    #         on_start: [
-    #           {
-    #             content: "NotebookInstanceLifecycleConfigContent",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] notebook_instance_lifecycle_config_name
     #   The name of the lifecycle configuration.
     #   @return [String]
@@ -9537,32 +6442,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreatePipelineRequest
-    #   data as a hash:
-    #
-    #       {
-    #         pipeline_name: "PipelineName", # required
-    #         pipeline_display_name: "PipelineName",
-    #         pipeline_definition: "PipelineDefinition",
-    #         pipeline_definition_s3_location: {
-    #           bucket: "BucketName", # required
-    #           object_key: "Key", # required
-    #           version_id: "VersionId",
-    #         },
-    #         pipeline_description: "PipelineDescription",
-    #         client_request_token: "IdempotencyToken", # required
-    #         role_arn: "RoleArn", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         parallelism_configuration: {
-    #           max_parallel_execution_steps: 1, # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] pipeline_name
     #   The name of the pipeline.
     #   @return [String]
@@ -9637,16 +6516,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreatePresignedDomainUrlRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_id: "DomainId", # required
-    #         user_profile_name: "UserProfileName", # required
-    #         session_expiration_duration_in_seconds: 1,
-    #         expires_in_seconds: 1,
-    #       }
-    #
     # @!attribute [rw] domain_id
     #   The domain ID.
     #   @return [String]
@@ -9688,14 +6557,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreatePresignedNotebookInstanceUrlInput
-    #   data as a hash:
-    #
-    #       {
-    #         notebook_instance_name: "NotebookInstanceName", # required
-    #         session_expiration_duration_in_seconds: 1,
-    #       }
-    #
     # @!attribute [rw] notebook_instance_name
     #   The name of the notebook instance.
     #   @return [String]
@@ -9725,109 +6586,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateProcessingJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         processing_inputs: [
-    #           {
-    #             input_name: "String", # required
-    #             app_managed: false,
-    #             s3_input: {
-    #               s3_uri: "S3Uri", # required
-    #               local_path: "ProcessingLocalPath",
-    #               s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix
-    #               s3_input_mode: "Pipe", # accepts Pipe, File
-    #               s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
-    #               s3_compression_type: "None", # accepts None, Gzip
-    #             },
-    #             dataset_definition: {
-    #               athena_dataset_definition: {
-    #                 catalog: "AthenaCatalog", # required
-    #                 database: "AthenaDatabase", # required
-    #                 query_string: "AthenaQueryString", # required
-    #                 work_group: "AthenaWorkGroup",
-    #                 output_s3_uri: "S3Uri", # required
-    #                 kms_key_id: "KmsKeyId",
-    #                 output_format: "PARQUET", # required, accepts PARQUET, ORC, AVRO, JSON, TEXTFILE
-    #                 output_compression: "GZIP", # accepts GZIP, SNAPPY, ZLIB
-    #               },
-    #               redshift_dataset_definition: {
-    #                 cluster_id: "RedshiftClusterId", # required
-    #                 database: "RedshiftDatabase", # required
-    #                 db_user: "RedshiftUserName", # required
-    #                 query_string: "RedshiftQueryString", # required
-    #                 cluster_role_arn: "RoleArn", # required
-    #                 output_s3_uri: "S3Uri", # required
-    #                 kms_key_id: "KmsKeyId",
-    #                 output_format: "PARQUET", # required, accepts PARQUET, CSV
-    #                 output_compression: "None", # accepts None, GZIP, BZIP2, ZSTD, SNAPPY
-    #               },
-    #               local_path: "ProcessingLocalPath",
-    #               data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
-    #               input_mode: "Pipe", # accepts Pipe, File
-    #             },
-    #           },
-    #         ],
-    #         processing_output_config: {
-    #           outputs: [ # required
-    #             {
-    #               output_name: "String", # required
-    #               s3_output: {
-    #                 s3_uri: "S3Uri", # required
-    #                 local_path: "ProcessingLocalPath", # required
-    #                 s3_upload_mode: "Continuous", # required, accepts Continuous, EndOfJob
-    #               },
-    #               feature_store_output: {
-    #                 feature_group_name: "FeatureGroupName", # required
-    #               },
-    #               app_managed: false,
-    #             },
-    #           ],
-    #           kms_key_id: "KmsKeyId",
-    #         },
-    #         processing_job_name: "ProcessingJobName", # required
-    #         processing_resources: { # required
-    #           cluster_config: { # required
-    #             instance_count: 1, # required
-    #             instance_type: "ml.t3.medium", # required, accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
-    #             volume_size_in_gb: 1, # required
-    #             volume_kms_key_id: "KmsKeyId",
-    #           },
-    #         },
-    #         stopping_condition: {
-    #           max_runtime_in_seconds: 1, # required
-    #         },
-    #         app_specification: { # required
-    #           image_uri: "ImageUri", # required
-    #           container_entrypoint: ["ContainerEntrypointString"],
-    #           container_arguments: ["ContainerArgument"],
-    #         },
-    #         environment: {
-    #           "ProcessingEnvironmentKey" => "ProcessingEnvironmentValue",
-    #         },
-    #         network_config: {
-    #           enable_inter_container_traffic_encryption: false,
-    #           enable_network_isolation: false,
-    #           vpc_config: {
-    #             security_group_ids: ["SecurityGroupId"], # required
-    #             subnets: ["SubnetId"], # required
-    #           },
-    #         },
-    #         role_arn: "RoleArn", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         experiment_config: {
-    #           experiment_name: "ExperimentEntityName",
-    #           trial_name: "ExperimentEntityName",
-    #           trial_component_display_name: "ExperimentEntityName",
-    #         },
-    #       }
-    #
     # @!attribute [rw] processing_inputs
     #   An array of inputs configuring the data to download into the
     #   processing container.
@@ -9925,31 +6683,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateProjectInput
-    #   data as a hash:
-    #
-    #       {
-    #         project_name: "ProjectEntityName", # required
-    #         project_description: "EntityDescription",
-    #         service_catalog_provisioning_details: { # required
-    #           product_id: "ServiceCatalogEntityId", # required
-    #           provisioning_artifact_id: "ServiceCatalogEntityId",
-    #           path_id: "ServiceCatalogEntityId",
-    #           provisioning_parameters: [
-    #             {
-    #               key: "ProvisioningParameterKey",
-    #               value: "ProvisioningParameterValue",
-    #             },
-    #           ],
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] project_name
     #   The name of the project.
     #   @return [String]
@@ -10009,21 +6742,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateStudioLifecycleConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         studio_lifecycle_config_name: "StudioLifecycleConfigName", # required
-    #         studio_lifecycle_config_content: "StudioLifecycleConfigContent", # required
-    #         studio_lifecycle_config_app_type: "JupyterServer", # required, accepts JupyterServer, KernelGateway
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] studio_lifecycle_config_name
     #   The name of the Studio Lifecycle Configuration to create.
     #   @return [String]
@@ -10066,161 +6784,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateTrainingJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         training_job_name: "TrainingJobName", # required
-    #         hyper_parameters: {
-    #           "HyperParameterKey" => "HyperParameterValue",
-    #         },
-    #         algorithm_specification: { # required
-    #           training_image: "AlgorithmImage",
-    #           algorithm_name: "ArnOrName",
-    #           training_input_mode: "Pipe", # required, accepts Pipe, File, FastFile
-    #           metric_definitions: [
-    #             {
-    #               name: "MetricName", # required
-    #               regex: "MetricRegex", # required
-    #             },
-    #           ],
-    #           enable_sage_maker_metrics_time_series: false,
-    #           container_entrypoint: ["TrainingContainerEntrypointString"],
-    #           container_arguments: ["TrainingContainerArgument"],
-    #         },
-    #         role_arn: "RoleArn", # required
-    #         input_data_config: [
-    #           {
-    #             channel_name: "ChannelName", # required
-    #             data_source: { # required
-    #               s3_data_source: {
-    #                 s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
-    #                 s3_uri: "S3Uri", # required
-    #                 s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
-    #                 attribute_names: ["AttributeName"],
-    #                 instance_group_names: ["InstanceGroupName"],
-    #               },
-    #               file_system_data_source: {
-    #                 file_system_id: "FileSystemId", # required
-    #                 file_system_access_mode: "rw", # required, accepts rw, ro
-    #                 file_system_type: "EFS", # required, accepts EFS, FSxLustre
-    #                 directory_path: "DirectoryPath", # required
-    #               },
-    #             },
-    #             content_type: "ContentType",
-    #             compression_type: "None", # accepts None, Gzip
-    #             record_wrapper_type: "None", # accepts None, RecordIO
-    #             input_mode: "Pipe", # accepts Pipe, File, FastFile
-    #             shuffle_config: {
-    #               seed: 1, # required
-    #             },
-    #           },
-    #         ],
-    #         output_data_config: { # required
-    #           kms_key_id: "KmsKeyId",
-    #           s3_output_path: "S3Uri", # required
-    #         },
-    #         resource_config: { # required
-    #           instance_type: "ml.m4.xlarge", # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge
-    #           instance_count: 1,
-    #           volume_size_in_gb: 1, # required
-    #           volume_kms_key_id: "KmsKeyId",
-    #           instance_groups: [
-    #             {
-    #               instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge
-    #               instance_count: 1, # required
-    #               instance_group_name: "InstanceGroupName", # required
-    #             },
-    #           ],
-    #           keep_alive_period_in_seconds: 1,
-    #         },
-    #         vpc_config: {
-    #           security_group_ids: ["SecurityGroupId"], # required
-    #           subnets: ["SubnetId"], # required
-    #         },
-    #         stopping_condition: { # required
-    #           max_runtime_in_seconds: 1,
-    #           max_wait_time_in_seconds: 1,
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         enable_network_isolation: false,
-    #         enable_inter_container_traffic_encryption: false,
-    #         enable_managed_spot_training: false,
-    #         checkpoint_config: {
-    #           s3_uri: "S3Uri", # required
-    #           local_path: "DirectoryPath",
-    #         },
-    #         debug_hook_config: {
-    #           local_path: "DirectoryPath",
-    #           s3_output_path: "S3Uri", # required
-    #           hook_parameters: {
-    #             "ConfigKey" => "ConfigValue",
-    #           },
-    #           collection_configurations: [
-    #             {
-    #               collection_name: "CollectionName",
-    #               collection_parameters: {
-    #                 "ConfigKey" => "ConfigValue",
-    #               },
-    #             },
-    #           ],
-    #         },
-    #         debug_rule_configurations: [
-    #           {
-    #             rule_configuration_name: "RuleConfigurationName", # required
-    #             local_path: "DirectoryPath",
-    #             s3_output_path: "S3Uri",
-    #             rule_evaluator_image: "AlgorithmImage", # required
-    #             instance_type: "ml.t3.medium", # accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
-    #             volume_size_in_gb: 1,
-    #             rule_parameters: {
-    #               "ConfigKey" => "ConfigValue",
-    #             },
-    #           },
-    #         ],
-    #         tensor_board_output_config: {
-    #           local_path: "DirectoryPath",
-    #           s3_output_path: "S3Uri", # required
-    #         },
-    #         experiment_config: {
-    #           experiment_name: "ExperimentEntityName",
-    #           trial_name: "ExperimentEntityName",
-    #           trial_component_display_name: "ExperimentEntityName",
-    #         },
-    #         profiler_config: {
-    #           s3_output_path: "S3Uri",
-    #           profiling_interval_in_milliseconds: 1,
-    #           profiling_parameters: {
-    #             "ConfigKey" => "ConfigValue",
-    #           },
-    #           disable_profiler: false,
-    #         },
-    #         profiler_rule_configurations: [
-    #           {
-    #             rule_configuration_name: "RuleConfigurationName", # required
-    #             local_path: "DirectoryPath",
-    #             s3_output_path: "S3Uri",
-    #             rule_evaluator_image: "AlgorithmImage", # required
-    #             instance_type: "ml.t3.medium", # accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
-    #             volume_size_in_gb: 1,
-    #             rule_parameters: {
-    #               "ConfigKey" => "ConfigValue",
-    #             },
-    #           },
-    #         ],
-    #         environment: {
-    #           "TrainingEnvironmentKey" => "TrainingEnvironmentValue",
-    #         },
-    #         retry_strategy: {
-    #           maximum_retry_attempts: 1, # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] training_job_name
     #   The name of the training job. The name must be unique within an
     #   Amazon Web Services Region in an Amazon Web Services account.
@@ -10489,67 +7052,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateTransformJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         transform_job_name: "TransformJobName", # required
-    #         model_name: "ModelName", # required
-    #         max_concurrent_transforms: 1,
-    #         model_client_config: {
-    #           invocations_timeout_in_seconds: 1,
-    #           invocations_max_retries: 1,
-    #         },
-    #         max_payload_in_mb: 1,
-    #         batch_strategy: "MultiRecord", # accepts MultiRecord, SingleRecord
-    #         environment: {
-    #           "TransformEnvironmentKey" => "TransformEnvironmentValue",
-    #         },
-    #         transform_input: { # required
-    #           data_source: { # required
-    #             s3_data_source: { # required
-    #               s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
-    #               s3_uri: "S3Uri", # required
-    #             },
-    #           },
-    #           content_type: "ContentType",
-    #           compression_type: "None", # accepts None, Gzip
-    #           split_type: "None", # accepts None, Line, RecordIO, TFRecord
-    #         },
-    #         transform_output: { # required
-    #           s3_output_path: "S3Uri", # required
-    #           accept: "Accept",
-    #           assemble_with: "None", # accepts None, Line
-    #           kms_key_id: "KmsKeyId",
-    #         },
-    #         data_capture_config: {
-    #           destination_s3_uri: "S3Uri", # required
-    #           kms_key_id: "KmsKeyId",
-    #           generate_inference_id: false,
-    #         },
-    #         transform_resources: { # required
-    #           instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
-    #           instance_count: 1, # required
-    #           volume_kms_key_id: "KmsKeyId",
-    #         },
-    #         data_processing: {
-    #           input_filter: "JsonPath",
-    #           output_filter: "JsonPath",
-    #           join_source: "Input", # accepts Input, None
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         experiment_config: {
-    #           experiment_name: "ExperimentEntityName",
-    #           trial_name: "ExperimentEntityName",
-    #           trial_component_display_name: "ExperimentEntityName",
-    #         },
-    #       }
-    #
     # @!attribute [rw] transform_job_name
     #   The name of the transform job. The name must be unique within an
     #   Amazon Web Services Region in an Amazon Web Services account.
@@ -10712,50 +7214,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateTrialComponentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         trial_component_name: "ExperimentEntityName", # required
-    #         display_name: "ExperimentEntityName",
-    #         status: {
-    #           primary_status: "InProgress", # accepts InProgress, Completed, Failed, Stopping, Stopped
-    #           message: "TrialComponentStatusMessage",
-    #         },
-    #         start_time: Time.now,
-    #         end_time: Time.now,
-    #         parameters: {
-    #           "TrialComponentKey256" => {
-    #             string_value: "StringParameterValue",
-    #             number_value: 1.0,
-    #           },
-    #         },
-    #         input_artifacts: {
-    #           "TrialComponentKey64" => {
-    #             media_type: "MediaType",
-    #             value: "TrialComponentArtifactValue", # required
-    #           },
-    #         },
-    #         output_artifacts: {
-    #           "TrialComponentKey64" => {
-    #             media_type: "MediaType",
-    #             value: "TrialComponentArtifactValue", # required
-    #           },
-    #         },
-    #         metadata_properties: {
-    #           commit_id: "MetadataPropertyValue",
-    #           repository: "MetadataPropertyValue",
-    #           generated_by: "MetadataPropertyValue",
-    #           project_id: "MetadataPropertyValue",
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] trial_component_name
     #   The name of the component. The name must be unique in your Amazon
     #   Web Services account and is not case-sensitive.
@@ -10839,27 +7297,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateTrialRequest
-    #   data as a hash:
-    #
-    #       {
-    #         trial_name: "ExperimentEntityName", # required
-    #         display_name: "ExperimentEntityName",
-    #         experiment_name: "ExperimentEntityName", # required
-    #         metadata_properties: {
-    #           commit_id: "MetadataPropertyValue",
-    #           repository: "MetadataPropertyValue",
-    #           generated_by: "MetadataPropertyValue",
-    #           project_id: "MetadataPropertyValue",
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] trial_name
     #   The name of the trial. The name must be unique in your Amazon Web
     #   Services account and is not case-sensitive.
@@ -10908,89 +7345,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateUserProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_id: "DomainId", # required
-    #         user_profile_name: "UserProfileName", # required
-    #         single_sign_on_user_identifier: "SingleSignOnUserIdentifier",
-    #         single_sign_on_user_value: "String256",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         user_settings: {
-    #           execution_role: "RoleArn",
-    #           security_groups: ["SecurityGroupId"],
-    #           sharing_settings: {
-    #             notebook_output_option: "Allowed", # accepts Allowed, Disabled
-    #             s3_output_path: "S3Uri",
-    #             s3_kms_key_id: "KmsKeyId",
-    #           },
-    #           jupyter_server_app_settings: {
-    #             default_resource_spec: {
-    #               sage_maker_image_arn: "ImageArn",
-    #               sage_maker_image_version_arn: "ImageVersionArn",
-    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
-    #             },
-    #             lifecycle_config_arns: ["StudioLifecycleConfigArn"],
-    #           },
-    #           kernel_gateway_app_settings: {
-    #             default_resource_spec: {
-    #               sage_maker_image_arn: "ImageArn",
-    #               sage_maker_image_version_arn: "ImageVersionArn",
-    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
-    #             },
-    #             custom_images: [
-    #               {
-    #                 image_name: "ImageName", # required
-    #                 image_version_number: 1,
-    #                 app_image_config_name: "AppImageConfigName", # required
-    #               },
-    #             ],
-    #             lifecycle_config_arns: ["StudioLifecycleConfigArn"],
-    #           },
-    #           tensor_board_app_settings: {
-    #             default_resource_spec: {
-    #               sage_maker_image_arn: "ImageArn",
-    #               sage_maker_image_version_arn: "ImageVersionArn",
-    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
-    #             },
-    #           },
-    #           r_studio_server_pro_app_settings: {
-    #             access_status: "ENABLED", # accepts ENABLED, DISABLED
-    #             user_group: "R_STUDIO_ADMIN", # accepts R_STUDIO_ADMIN, R_STUDIO_USER
-    #           },
-    #           r_session_app_settings: {
-    #             default_resource_spec: {
-    #               sage_maker_image_arn: "ImageArn",
-    #               sage_maker_image_version_arn: "ImageVersionArn",
-    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
-    #             },
-    #             custom_images: [
-    #               {
-    #                 image_name: "ImageName", # required
-    #                 image_version_number: 1,
-    #                 app_image_config_name: "AppImageConfigName", # required
-    #               },
-    #             ],
-    #           },
-    #           canvas_app_settings: {
-    #             time_series_forecasting_settings: {
-    #               status: "ENABLED", # accepts ENABLED, DISABLED
-    #               amazon_forecast_role_arn: "RoleArn",
-    #             },
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] domain_id
     #   The ID of the associated Domain.
     #   @return [String]
@@ -11052,41 +7406,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateWorkforceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         cognito_config: {
-    #           user_pool: "CognitoUserPool", # required
-    #           client_id: "ClientId", # required
-    #         },
-    #         oidc_config: {
-    #           client_id: "ClientId", # required
-    #           client_secret: "ClientSecret", # required
-    #           issuer: "OidcEndpoint", # required
-    #           authorization_endpoint: "OidcEndpoint", # required
-    #           token_endpoint: "OidcEndpoint", # required
-    #           user_info_endpoint: "OidcEndpoint", # required
-    #           logout_endpoint: "OidcEndpoint", # required
-    #           jwks_uri: "OidcEndpoint", # required
-    #         },
-    #         source_ip_config: {
-    #           cidrs: ["Cidr"], # required
-    #         },
-    #         workforce_name: "WorkforceName", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         workforce_vpc_config: {
-    #           vpc_id: "WorkforceVpcId",
-    #           security_group_ids: ["WorkforceSecurityGroupId"],
-    #           subnets: ["WorkforceSubnetId"],
-    #         },
-    #       }
-    #
     # @!attribute [rw] cognito_config
     #   Use this parameter to configure an Amazon Cognito private workforce.
     #   A single Cognito workforce is created using and corresponds to a
@@ -11157,36 +7476,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateWorkteamRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workteam_name: "WorkteamName", # required
-    #         workforce_name: "WorkforceName",
-    #         member_definitions: [ # required
-    #           {
-    #             cognito_member_definition: {
-    #               user_pool: "CognitoUserPool", # required
-    #               user_group: "CognitoUserGroup", # required
-    #               client_id: "ClientId", # required
-    #             },
-    #             oidc_member_definition: {
-    #               groups: ["Group"], # required
-    #             },
-    #           },
-    #         ],
-    #         description: "String200", # required
-    #         notification_configuration: {
-    #           notification_topic_arn: "NotificationTopicArn",
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] workteam_name
     #   The name of the work team. Use this name to identify the work team.
     #   @return [String]
@@ -11277,15 +7566,6 @@ module Aws::SageMaker
     #
     # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/studio-byoi.html
     #
-    # @note When making an API call, you may pass CustomImage
-    #   data as a hash:
-    #
-    #       {
-    #         image_name: "ImageName", # required
-    #         image_version_number: 1,
-    #         app_image_config_name: "AppImageConfigName", # required
-    #       }
-    #
     # @!attribute [rw] image_name
     #   The name of the CustomImage. Must be unique to your account.
     #   @return [String]
@@ -11309,25 +7589,6 @@ module Aws::SageMaker
     end
 
     # Configuration to control how SageMaker captures inference data.
-    #
-    # @note When making an API call, you may pass DataCaptureConfig
-    #   data as a hash:
-    #
-    #       {
-    #         enable_capture: false,
-    #         initial_sampling_percentage: 1, # required
-    #         destination_s3_uri: "DestinationS3Uri", # required
-    #         kms_key_id: "KmsKeyId",
-    #         capture_options: [ # required
-    #           {
-    #             capture_mode: "Input", # required, accepts Input, Output
-    #           },
-    #         ],
-    #         capture_content_type_header: {
-    #           csv_content_types: ["CsvContentType"],
-    #           json_content_types: ["JsonContentType"],
-    #         },
-    #       }
     #
     # @!attribute [rw] enable_capture
     #   Whether data capture should be enabled or disabled (defaults to
@@ -11423,15 +7684,6 @@ module Aws::SageMaker
     # The meta data of the Glue table which serves as data catalog for the
     # `OfflineStore`.
     #
-    # @note When making an API call, you may pass DataCatalogConfig
-    #   data as a hash:
-    #
-    #       {
-    #         table_name: "TableName", # required
-    #         catalog: "Catalog", # required
-    #         database: "Database", # required
-    #       }
-    #
     # @!attribute [rw] table_name
     #   The name of the Glue table.
     #   @return [String]
@@ -11466,15 +7718,6 @@ module Aws::SageMaker
     #
     #
     # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html
-    #
-    # @note When making an API call, you may pass DataProcessing
-    #   data as a hash:
-    #
-    #       {
-    #         input_filter: "JsonPath",
-    #         output_filter: "JsonPath",
-    #         join_source: "Input", # accepts Input, None
-    #       }
     #
     # @!attribute [rw] input_filter
     #   A [JSONPath][1] expression used to select a portion of the input
@@ -11547,20 +7790,6 @@ module Aws::SageMaker
     # Information about the container that a data quality monitoring job
     # runs.
     #
-    # @note When making an API call, you may pass DataQualityAppSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         image_uri: "ImageUri", # required
-    #         container_entrypoint: ["ContainerEntrypointString"],
-    #         container_arguments: ["ContainerArgument"],
-    #         record_preprocessor_source_uri: "S3Uri",
-    #         post_analytics_processor_source_uri: "S3Uri",
-    #         environment: {
-    #           "ProcessingEnvironmentKey" => "ProcessingEnvironmentValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] image_uri
     #   The container image that the data quality monitoring job runs.
     #   @return [String]
@@ -11609,19 +7838,6 @@ module Aws::SageMaker
     # current job from the series of jobs scheduled to collect data
     # periodically.
     #
-    # @note When making an API call, you may pass DataQualityBaselineConfig
-    #   data as a hash:
-    #
-    #       {
-    #         baselining_job_name: "ProcessingJobName",
-    #         constraints_resource: {
-    #           s3_uri: "S3Uri",
-    #         },
-    #         statistics_resource: {
-    #           s3_uri: "S3Uri",
-    #         },
-    #       }
-    #
     # @!attribute [rw] baselining_job_name
     #   The name of the job that performs baselining for the data quality
     #   monitoring job.
@@ -11648,46 +7864,6 @@ module Aws::SageMaker
     # The input for the data quality monitoring job. Currently endpoints are
     # supported for input.
     #
-    # @note When making an API call, you may pass DataQualityJobInput
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_input: {
-    #           endpoint_name: "EndpointName", # required
-    #           local_path: "ProcessingLocalPath", # required
-    #           s3_input_mode: "Pipe", # accepts Pipe, File
-    #           s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
-    #           features_attribute: "String",
-    #           inference_attribute: "String",
-    #           probability_attribute: "String",
-    #           probability_threshold_attribute: 1.0,
-    #           start_time_offset: "MonitoringTimeOffsetString",
-    #           end_time_offset: "MonitoringTimeOffsetString",
-    #         },
-    #         batch_transform_input: {
-    #           data_captured_destination_s3_uri: "DestinationS3Uri", # required
-    #           dataset_format: { # required
-    #             csv: {
-    #               header: false,
-    #             },
-    #             json: {
-    #               line: false,
-    #             },
-    #             parquet: {
-    #             },
-    #           },
-    #           local_path: "ProcessingLocalPath", # required
-    #           s3_input_mode: "Pipe", # accepts Pipe, File
-    #           s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
-    #           features_attribute: "String",
-    #           inference_attribute: "String",
-    #           probability_attribute: "String",
-    #           probability_threshold_attribute: 1.0,
-    #           start_time_offset: "MonitoringTimeOffsetString",
-    #           end_time_offset: "MonitoringTimeOffsetString",
-    #         },
-    #       }
-    #
     # @!attribute [rw] endpoint_input
     #   Input object for the endpoint
     #   @return [Types::EndpointInput]
@@ -11706,25 +7882,6 @@ module Aws::SageMaker
     end
 
     # Describes the location of the channel data.
-    #
-    # @note When making an API call, you may pass DataSource
-    #   data as a hash:
-    #
-    #       {
-    #         s3_data_source: {
-    #           s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
-    #           s3_uri: "S3Uri", # required
-    #           s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
-    #           attribute_names: ["AttributeName"],
-    #           instance_group_names: ["InstanceGroupName"],
-    #         },
-    #         file_system_data_source: {
-    #           file_system_id: "FileSystemId", # required
-    #           file_system_access_mode: "rw", # required, accepts rw, ro
-    #           file_system_type: "EFS", # required, accepts EFS, FSxLustre
-    #           directory_path: "DirectoryPath", # required
-    #         },
-    #       }
     #
     # @!attribute [rw] s3_data_source
     #   The S3 location of the data source that is associated with a
@@ -11747,36 +7904,6 @@ module Aws::SageMaker
     # Configuration for Dataset Definition inputs. The Dataset Definition
     # input must specify exactly one of either `AthenaDatasetDefinition` or
     # `RedshiftDatasetDefinition` types.
-    #
-    # @note When making an API call, you may pass DatasetDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         athena_dataset_definition: {
-    #           catalog: "AthenaCatalog", # required
-    #           database: "AthenaDatabase", # required
-    #           query_string: "AthenaQueryString", # required
-    #           work_group: "AthenaWorkGroup",
-    #           output_s3_uri: "S3Uri", # required
-    #           kms_key_id: "KmsKeyId",
-    #           output_format: "PARQUET", # required, accepts PARQUET, ORC, AVRO, JSON, TEXTFILE
-    #           output_compression: "GZIP", # accepts GZIP, SNAPPY, ZLIB
-    #         },
-    #         redshift_dataset_definition: {
-    #           cluster_id: "RedshiftClusterId", # required
-    #           database: "RedshiftDatabase", # required
-    #           db_user: "RedshiftUserName", # required
-    #           query_string: "RedshiftQueryString", # required
-    #           cluster_role_arn: "RoleArn", # required
-    #           output_s3_uri: "S3Uri", # required
-    #           kms_key_id: "KmsKeyId",
-    #           output_format: "PARQUET", # required, accepts PARQUET, CSV
-    #           output_compression: "None", # accepts None, GZIP, BZIP2, ZSTD, SNAPPY
-    #         },
-    #         local_path: "ProcessingLocalPath",
-    #         data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
-    #         input_mode: "Pipe", # accepts Pipe, File
-    #       }
     #
     # @!attribute [rw] athena_dataset_definition
     #   Configuration for Athena Dataset Definition input.
@@ -11829,25 +7956,6 @@ module Aws::SageMaker
     #
     # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/debugger-createtrainingjob-api.html
     #
-    # @note When making an API call, you may pass DebugHookConfig
-    #   data as a hash:
-    #
-    #       {
-    #         local_path: "DirectoryPath",
-    #         s3_output_path: "S3Uri", # required
-    #         hook_parameters: {
-    #           "ConfigKey" => "ConfigValue",
-    #         },
-    #         collection_configurations: [
-    #           {
-    #             collection_name: "CollectionName",
-    #             collection_parameters: {
-    #               "ConfigKey" => "ConfigValue",
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] local_path
     #   Path to local storage location for metrics and tensors. Defaults to
     #   `/opt/ml/output/tensors/`.
@@ -11891,21 +7999,6 @@ module Aws::SageMaker
     #
     #
     # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/debugger-createtrainingjob-api.html
-    #
-    # @note When making an API call, you may pass DebugRuleConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         rule_configuration_name: "RuleConfigurationName", # required
-    #         local_path: "DirectoryPath",
-    #         s3_output_path: "S3Uri",
-    #         rule_evaluator_image: "AlgorithmImage", # required
-    #         instance_type: "ml.t3.medium", # accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
-    #         volume_size_in_gb: 1,
-    #         rule_parameters: {
-    #           "ConfigKey" => "ConfigValue",
-    #         },
-    #       }
     #
     # @!attribute [rw] rule_configuration_name
     #   The name of the rule configuration. It must be unique relative to
@@ -11988,13 +8081,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteActionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         action_name: "ExperimentEntityName", # required
-    #       }
-    #
     # @!attribute [rw] action_name
     #   The name of the action to delete.
     #   @return [String]
@@ -12019,13 +8105,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAlgorithmInput
-    #   data as a hash:
-    #
-    #       {
-    #         algorithm_name: "EntityName", # required
-    #       }
-    #
     # @!attribute [rw] algorithm_name
     #   The name of the algorithm to delete.
     #   @return [String]
@@ -12038,13 +8117,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAppImageConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_image_config_name: "AppImageConfigName", # required
-    #       }
-    #
     # @!attribute [rw] app_image_config_name
     #   The name of the AppImageConfig to delete.
     #   @return [String]
@@ -12057,16 +8129,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAppRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_id: "DomainId", # required
-    #         user_profile_name: "UserProfileName", # required
-    #         app_type: "JupyterServer", # required, accepts JupyterServer, KernelGateway, TensorBoard, RStudioServerPro, RSessionGateway
-    #         app_name: "AppName", # required
-    #       }
-    #
     # @!attribute [rw] domain_id
     #   The domain ID.
     #   @return [String]
@@ -12094,22 +8156,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteArtifactRequest
-    #   data as a hash:
-    #
-    #       {
-    #         artifact_arn: "ArtifactArn",
-    #         source: {
-    #           source_uri: "String2048", # required
-    #           source_types: [
-    #             {
-    #               source_id_type: "MD5Hash", # required, accepts MD5Hash, S3ETag, S3Version, Custom
-    #               value: "String256", # required
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] artifact_arn
     #   The Amazon Resource Name (ARN) of the artifact to delete.
     #   @return [String]
@@ -12139,14 +8185,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAssociationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source_arn: "AssociationEntityArn", # required
-    #         destination_arn: "AssociationEntityArn", # required
-    #       }
-    #
     # @!attribute [rw] source_arn
     #   The ARN of the source.
     #   @return [String]
@@ -12181,13 +8219,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteCodeRepositoryInput
-    #   data as a hash:
-    #
-    #       {
-    #         code_repository_name: "EntityName", # required
-    #       }
-    #
     # @!attribute [rw] code_repository_name
     #   The name of the Git repository to delete.
     #   @return [String]
@@ -12200,13 +8231,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteContextRequest
-    #   data as a hash:
-    #
-    #       {
-    #         context_name: "ExperimentEntityName", # required
-    #       }
-    #
     # @!attribute [rw] context_name
     #   The name of the context to delete.
     #   @return [String]
@@ -12231,13 +8255,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDataQualityJobDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_definition_name: "MonitoringJobDefinitionName", # required
-    #       }
-    #
     # @!attribute [rw] job_definition_name
     #   The name of the data quality monitoring job definition to delete.
     #   @return [String]
@@ -12250,13 +8267,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDeviceFleetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_fleet_name: "EntityName", # required
-    #       }
-    #
     # @!attribute [rw] device_fleet_name
     #   The name of the fleet to delete.
     #   @return [String]
@@ -12269,16 +8279,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_id: "DomainId", # required
-    #         retention_policy: {
-    #           home_efs_file_system: "Retain", # accepts Retain, Delete
-    #         },
-    #       }
-    #
     # @!attribute [rw] domain_id
     #   The domain ID.
     #   @return [String]
@@ -12298,13 +8298,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteEdgeDeploymentPlanRequest
-    #   data as a hash:
-    #
-    #       {
-    #         edge_deployment_plan_name: "EntityName", # required
-    #       }
-    #
     # @!attribute [rw] edge_deployment_plan_name
     #   The name of the edge deployment plan to delete.
     #   @return [String]
@@ -12317,14 +8310,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteEdgeDeploymentStageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         edge_deployment_plan_name: "EntityName", # required
-    #         stage_name: "EntityName", # required
-    #       }
-    #
     # @!attribute [rw] edge_deployment_plan_name
     #   The name of the edge deployment plan from which the stage will be
     #   deleted.
@@ -12343,13 +8328,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteEndpointConfigInput
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_config_name: "EndpointConfigName", # required
-    #       }
-    #
     # @!attribute [rw] endpoint_config_name
     #   The name of the endpoint configuration that you want to delete.
     #   @return [String]
@@ -12362,13 +8340,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteEndpointInput
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_name: "EndpointName", # required
-    #       }
-    #
     # @!attribute [rw] endpoint_name
     #   The name of the endpoint that you want to delete.
     #   @return [String]
@@ -12381,13 +8352,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteExperimentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         experiment_name: "ExperimentEntityName", # required
-    #       }
-    #
     # @!attribute [rw] experiment_name
     #   The name of the experiment to delete.
     #   @return [String]
@@ -12413,13 +8377,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteFeatureGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         feature_group_name: "FeatureGroupName", # required
-    #       }
-    #
     # @!attribute [rw] feature_group_name
     #   The name of the `FeatureGroup` you want to delete. The name must be
     #   unique within an Amazon Web Services Region in an Amazon Web
@@ -12434,13 +8391,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteFlowDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         flow_definition_name: "FlowDefinitionName", # required
-    #       }
-    #
     # @!attribute [rw] flow_definition_name
     #   The name of the flow definition you are deleting.
     #   @return [String]
@@ -12457,13 +8407,6 @@ module Aws::SageMaker
     #
     class DeleteFlowDefinitionResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteHumanTaskUiRequest
-    #   data as a hash:
-    #
-    #       {
-    #         human_task_ui_name: "HumanTaskUiName", # required
-    #       }
-    #
     # @!attribute [rw] human_task_ui_name
     #   The name of the human task user interface (work task template) you
     #   want to delete.
@@ -12481,13 +8424,6 @@ module Aws::SageMaker
     #
     class DeleteHumanTaskUiResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteImageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         image_name: "ImageName", # required
-    #       }
-    #
     # @!attribute [rw] image_name
     #   The name of the image to delete.
     #   @return [String]
@@ -12504,14 +8440,6 @@ module Aws::SageMaker
     #
     class DeleteImageResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteImageVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         image_name: "ImageName", # required
-    #         version: 1, # required
-    #       }
-    #
     # @!attribute [rw] image_name
     #   The name of the image.
     #   @return [String]
@@ -12533,13 +8461,6 @@ module Aws::SageMaker
     #
     class DeleteImageVersionResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteModelBiasJobDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_definition_name: "MonitoringJobDefinitionName", # required
-    #       }
-    #
     # @!attribute [rw] job_definition_name
     #   The name of the model bias job definition to delete.
     #   @return [String]
@@ -12552,13 +8473,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteModelExplainabilityJobDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_definition_name: "MonitoringJobDefinitionName", # required
-    #       }
-    #
     # @!attribute [rw] job_definition_name
     #   The name of the model explainability job definition to delete.
     #   @return [String]
@@ -12571,13 +8485,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteModelInput
-    #   data as a hash:
-    #
-    #       {
-    #         model_name: "ModelName", # required
-    #       }
-    #
     # @!attribute [rw] model_name
     #   The name of the model to delete.
     #   @return [String]
@@ -12590,13 +8497,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteModelPackageGroupInput
-    #   data as a hash:
-    #
-    #       {
-    #         model_package_group_name: "ArnOrName", # required
-    #       }
-    #
     # @!attribute [rw] model_package_group_name
     #   The name of the model group to delete.
     #   @return [String]
@@ -12609,13 +8509,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteModelPackageGroupPolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         model_package_group_name: "EntityName", # required
-    #       }
-    #
     # @!attribute [rw] model_package_group_name
     #   The name of the model group for which to delete the policy.
     #   @return [String]
@@ -12628,13 +8521,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteModelPackageInput
-    #   data as a hash:
-    #
-    #       {
-    #         model_package_name: "VersionedArnOrName", # required
-    #       }
-    #
     # @!attribute [rw] model_package_name
     #   The name or Amazon Resource Name (ARN) of the model package to
     #   delete.
@@ -12651,13 +8537,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteModelQualityJobDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_definition_name: "MonitoringJobDefinitionName", # required
-    #       }
-    #
     # @!attribute [rw] job_definition_name
     #   The name of the model quality monitoring job definition to delete.
     #   @return [String]
@@ -12670,13 +8549,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteMonitoringScheduleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         monitoring_schedule_name: "MonitoringScheduleName", # required
-    #       }
-    #
     # @!attribute [rw] monitoring_schedule_name
     #   The name of the monitoring schedule to delete.
     #   @return [String]
@@ -12689,13 +8561,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteNotebookInstanceInput
-    #   data as a hash:
-    #
-    #       {
-    #         notebook_instance_name: "NotebookInstanceName", # required
-    #       }
-    #
     # @!attribute [rw] notebook_instance_name
     #   The name of the SageMaker notebook instance to delete.
     #   @return [String]
@@ -12708,13 +8573,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteNotebookInstanceLifecycleConfigInput
-    #   data as a hash:
-    #
-    #       {
-    #         notebook_instance_lifecycle_config_name: "NotebookInstanceLifecycleConfigName", # required
-    #       }
-    #
     # @!attribute [rw] notebook_instance_lifecycle_config_name
     #   The name of the lifecycle configuration to delete.
     #   @return [String]
@@ -12727,14 +8585,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeletePipelineRequest
-    #   data as a hash:
-    #
-    #       {
-    #         pipeline_name: "PipelineName", # required
-    #         client_request_token: "IdempotencyToken", # required
-    #       }
-    #
     # @!attribute [rw] pipeline_name
     #   The name of the pipeline to delete.
     #   @return [String]
@@ -12769,13 +8619,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteProjectInput
-    #   data as a hash:
-    #
-    #       {
-    #         project_name: "ProjectEntityName", # required
-    #       }
-    #
     # @!attribute [rw] project_name
     #   The name of the project to delete.
     #   @return [String]
@@ -12788,13 +8631,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteStudioLifecycleConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         studio_lifecycle_config_name: "StudioLifecycleConfigName", # required
-    #       }
-    #
     # @!attribute [rw] studio_lifecycle_config_name
     #   The name of the Studio Lifecycle Configuration to delete.
     #   @return [String]
@@ -12807,14 +8643,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteTagsInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource whose tags you want
     #   to delete.
@@ -12837,13 +8665,6 @@ module Aws::SageMaker
     #
     class DeleteTagsOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteTrialComponentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         trial_component_name: "ExperimentEntityName", # required
-    #       }
-    #
     # @!attribute [rw] trial_component_name
     #   The name of the component to delete.
     #   @return [String]
@@ -12868,13 +8689,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteTrialRequest
-    #   data as a hash:
-    #
-    #       {
-    #         trial_name: "ExperimentEntityName", # required
-    #       }
-    #
     # @!attribute [rw] trial_name
     #   The name of the trial to delete.
     #   @return [String]
@@ -12899,14 +8713,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteUserProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_id: "DomainId", # required
-    #         user_profile_name: "UserProfileName", # required
-    #       }
-    #
     # @!attribute [rw] domain_id
     #   The domain ID.
     #   @return [String]
@@ -12924,13 +8730,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteWorkforceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workforce_name: "WorkforceName", # required
-    #       }
-    #
     # @!attribute [rw] workforce_name
     #   The name of the workforce.
     #   @return [String]
@@ -12947,13 +8746,6 @@ module Aws::SageMaker
     #
     class DeleteWorkforceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteWorkteamRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workteam_name: "WorkteamName", # required
-    #       }
-    #
     # @!attribute [rw] workteam_name
     #   The name of the work team to delete.
     #   @return [String]
@@ -13021,35 +8813,6 @@ module Aws::SageMaker
     # The deployment configuration for an endpoint, which contains the
     # desired deployment strategy and rollback configurations.
     #
-    # @note When making an API call, you may pass DeploymentConfig
-    #   data as a hash:
-    #
-    #       {
-    #         blue_green_update_policy: { # required
-    #           traffic_routing_configuration: { # required
-    #             type: "ALL_AT_ONCE", # required, accepts ALL_AT_ONCE, CANARY, LINEAR
-    #             wait_interval_in_seconds: 1, # required
-    #             canary_size: {
-    #               type: "INSTANCE_COUNT", # required, accepts INSTANCE_COUNT, CAPACITY_PERCENT
-    #               value: 1, # required
-    #             },
-    #             linear_step_size: {
-    #               type: "INSTANCE_COUNT", # required, accepts INSTANCE_COUNT, CAPACITY_PERCENT
-    #               value: 1, # required
-    #             },
-    #           },
-    #           termination_wait_in_seconds: 1,
-    #           maximum_execution_timeout_in_seconds: 1,
-    #         },
-    #         auto_rollback_configuration: {
-    #           alarms: [
-    #             {
-    #               alarm_name: "AlarmName",
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] blue_green_update_policy
     #   Update policy for a blue/green deployment. If this update policy is
     #   specified, SageMaker creates a new fleet during the deployment while
@@ -13075,22 +8838,6 @@ module Aws::SageMaker
     end
 
     # Contains information about a stage in an edge deployment plan.
-    #
-    # @note When making an API call, you may pass DeploymentStage
-    #   data as a hash:
-    #
-    #       {
-    #         stage_name: "EntityName", # required
-    #         device_selection_config: { # required
-    #           device_subset_type: "PERCENTAGE", # required, accepts PERCENTAGE, SELECTION, NAMECONTAINS
-    #           percentage: 1,
-    #           device_names: ["DeviceName"],
-    #           device_name_contains: "DeviceName",
-    #         },
-    #         deployment_config: {
-    #           failure_handling_policy: "ROLLBACK_ON_FAILURE", # required, accepts ROLLBACK_ON_FAILURE, DO_NOTHING
-    #         },
-    #       }
     #
     # @!attribute [rw] stage_name
     #   The name of the stage.
@@ -13143,14 +8890,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeregisterDevicesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_fleet_name: "EntityName", # required
-    #         device_names: ["DeviceName"], # required
-    #       }
-    #
     # @!attribute [rw] device_fleet_name
     #   The name of the fleet the devices belong to.
     #   @return [String]
@@ -13168,13 +8907,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeActionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         action_name: "ExperimentEntityName", # required
-    #       }
-    #
     # @!attribute [rw] action_name
     #   The name of the action to describe.
     #   @return [String]
@@ -13262,13 +8994,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAlgorithmInput
-    #   data as a hash:
-    #
-    #       {
-    #         algorithm_name: "ArnOrName", # required
-    #       }
-    #
     # @!attribute [rw] algorithm_name
     #   The name of the algorithm to describe.
     #   @return [String]
@@ -13345,13 +9070,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAppImageConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_image_config_name: "AppImageConfigName", # required
-    #       }
-    #
     # @!attribute [rw] app_image_config_name
     #   The name of the AppImageConfig to describe.
     #   @return [String]
@@ -13396,16 +9114,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAppRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_id: "DomainId", # required
-    #         user_profile_name: "UserProfileName", # required
-    #         app_type: "JupyterServer", # required, accepts JupyterServer, KernelGateway, TensorBoard, RStudioServerPro, RSessionGateway
-    #         app_name: "AppName", # required
-    #       }
-    #
     # @!attribute [rw] domain_id
     #   The domain ID.
     #   @return [String]
@@ -13499,13 +9207,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeArtifactRequest
-    #   data as a hash:
-    #
-    #       {
-    #         artifact_arn: "ArtifactArn", # required
-    #       }
-    #
     # @!attribute [rw] artifact_arn
     #   The Amazon Resource Name (ARN) of the artifact to describe.
     #   @return [String]
@@ -13583,13 +9284,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAutoMLJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         auto_ml_job_name: "AutoMLJobName", # required
-    #       }
-    #
     # @!attribute [rw] auto_ml_job_name
     #   Requests information about an AutoML job using its unique name.
     #   @return [String]
@@ -13723,13 +9417,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeCodeRepositoryInput
-    #   data as a hash:
-    #
-    #       {
-    #         code_repository_name: "EntityName", # required
-    #       }
-    #
     # @!attribute [rw] code_repository_name
     #   The name of the Git repository to describe.
     #   @return [String]
@@ -13777,13 +9464,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeCompilationJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         compilation_job_name: "EntityName", # required
-    #       }
-    #
     # @!attribute [rw] compilation_job_name
     #   The name of the model compilation job that you want information
     #   about.
@@ -13917,13 +9597,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeContextRequest
-    #   data as a hash:
-    #
-    #       {
-    #         context_name: "ExperimentEntityNameOrArn", # required
-    #       }
-    #
     # @!attribute [rw] context_name
     #   The name of the context to describe.
     #   @return [String]
@@ -14000,13 +9673,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDataQualityJobDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_definition_name: "MonitoringJobDefinitionName", # required
-    #       }
-    #
     # @!attribute [rw] job_definition_name
     #   The name of the data quality monitoring job definition to describe.
     #   @return [String]
@@ -14088,13 +9754,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDeviceFleetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_fleet_name: "EntityName", # required
-    #       }
-    #
     # @!attribute [rw] device_fleet_name
     #   The name of the fleet.
     #   @return [String]
@@ -14156,15 +9815,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDeviceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         device_name: "EntityName", # required
-    #         device_fleet_name: "EntityName", # required
-    #       }
-    #
     # @!attribute [rw] next_token
     #   Next token of device description.
     #   @return [String]
@@ -14251,13 +9901,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_id: "DomainId", # required
-    #       }
-    #
     # @!attribute [rw] domain_id
     #   The domain ID.
     #   @return [String]
@@ -14393,15 +10036,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEdgeDeploymentPlanRequest
-    #   data as a hash:
-    #
-    #       {
-    #         edge_deployment_plan_name: "EntityName", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] edge_deployment_plan_name
     #   The name of the deployment plan to describe.
     #   @return [String]
@@ -14489,13 +10123,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEdgePackagingJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         edge_packaging_job_name: "EntityName", # required
-    #       }
-    #
     # @!attribute [rw] edge_packaging_job_name
     #   The name of the edge packaging job.
     #   @return [String]
@@ -14594,13 +10221,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEndpointConfigInput
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_config_name: "EndpointConfigName", # required
-    #       }
-    #
     # @!attribute [rw] endpoint_config_name
     #   The name of the endpoint configuration.
     #   @return [String]
@@ -14667,13 +10287,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEndpointInput
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_name: "EndpointName", # required
-    #       }
-    #
     # @!attribute [rw] endpoint_name
     #   The name of the endpoint.
     #   @return [String]
@@ -14800,13 +10413,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeExperimentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         experiment_name: "ExperimentEntityName", # required
-    #       }
-    #
     # @!attribute [rw] experiment_name
     #   The name of the experiment to describe.
     #   @return [String]
@@ -14872,14 +10478,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeFeatureGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         feature_group_name: "FeatureGroupName", # required
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] feature_group_name
     #   The name of the `FeatureGroup` you want described.
     #   @return [String]
@@ -15011,14 +10609,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeFeatureMetadataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         feature_group_name: "FeatureGroupName", # required
-    #         feature_name: "FeatureName", # required
-    #       }
-    #
     # @!attribute [rw] feature_group_name
     #   The name of the feature group containing the feature.
     #   @return [String]
@@ -15086,13 +10676,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeFlowDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         flow_definition_name: "FlowDefinitionName", # required
-    #       }
-    #
     # @!attribute [rw] flow_definition_name
     #   The name of the flow definition.
     #   @return [String]
@@ -15167,13 +10750,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeHumanTaskUiRequest
-    #   data as a hash:
-    #
-    #       {
-    #         human_task_ui_name: "HumanTaskUiName", # required
-    #       }
-    #
     # @!attribute [rw] human_task_ui_name
     #   The name of the human task user interface (worker task template) you
     #   want information about.
@@ -15221,13 +10797,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeHyperParameterTuningJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         hyper_parameter_tuning_job_name: "HyperParameterTuningJobName", # required
-    #       }
-    #
     # @!attribute [rw] hyper_parameter_tuning_job_name
     #   The name of the tuning job.
     #   @return [String]
@@ -15338,13 +10907,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeImageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         image_name: "ImageName", # required
-    #       }
-    #
     # @!attribute [rw] image_name
     #   The name of the image to describe.
     #   @return [String]
@@ -15411,14 +10973,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeImageVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         image_name: "ImageName", # required
-    #         version: 1,
-    #       }
-    #
     # @!attribute [rw] image_name
     #   The name of the image.
     #   @return [String]
@@ -15491,13 +11045,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeInferenceRecommendationsJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_name: "RecommendationJobName", # required
-    #       }
-    #
     # @!attribute [rw] job_name
     #   The name of the job. The name must be unique within an Amazon Web
     #   Services Region in the Amazon Web Services account.
@@ -15595,13 +11142,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeLabelingJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         labeling_job_name: "LabelingJobName", # required
-    #       }
-    #
     # @!attribute [rw] labeling_job_name
     #   The name of the labeling job to return information for.
     #   @return [String]
@@ -15766,13 +11306,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeLineageGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         lineage_group_name: "ExperimentEntityName", # required
-    #       }
-    #
     # @!attribute [rw] lineage_group_name
     #   The name of the lineage group.
     #   @return [String]
@@ -15834,13 +11367,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeModelBiasJobDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_definition_name: "MonitoringJobDefinitionName", # required
-    #       }
-    #
     # @!attribute [rw] job_definition_name
     #   The name of the model bias job definition. The name must be unique
     #   within an Amazon Web Services Region in the Amazon Web Services
@@ -15923,13 +11449,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeModelExplainabilityJobDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_definition_name: "MonitoringJobDefinitionName", # required
-    #       }
-    #
     # @!attribute [rw] job_definition_name
     #   The name of the model explainability job definition. The name must
     #   be unique within an Amazon Web Services Region in the Amazon Web
@@ -16013,13 +11532,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeModelInput
-    #   data as a hash:
-    #
-    #       {
-    #         model_name: "ModelName", # required
-    #       }
-    #
     # @!attribute [rw] model_name
     #   The name of the model.
     #   @return [String]
@@ -16095,13 +11607,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeModelPackageGroupInput
-    #   data as a hash:
-    #
-    #       {
-    #         model_package_group_name: "ArnOrName", # required
-    #       }
-    #
     # @!attribute [rw] model_package_group_name
     #   The name of gthe model group to describe.
     #   @return [String]
@@ -16152,13 +11657,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeModelPackageInput
-    #   data as a hash:
-    #
-    #       {
-    #         model_package_name: "VersionedArnOrName", # required
-    #       }
-    #
     # @!attribute [rw] model_package_name
     #   The name or Amazon Resource Name (ARN) of the model package to
     #   describe.
@@ -16331,13 +11829,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeModelQualityJobDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_definition_name: "MonitoringJobDefinitionName", # required
-    #       }
-    #
     # @!attribute [rw] job_definition_name
     #   The name of the model quality job. The name must be unique within an
     #   Amazon Web Services Region in the Amazon Web Services account.
@@ -16418,13 +11909,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeMonitoringScheduleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         monitoring_schedule_name: "MonitoringScheduleName", # required
-    #       }
-    #
     # @!attribute [rw] monitoring_schedule_name
     #   Name of a previously created monitoring schedule.
     #   @return [String]
@@ -16508,13 +11992,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeNotebookInstanceInput
-    #   data as a hash:
-    #
-    #       {
-    #         notebook_instance_name: "NotebookInstanceName", # required
-    #       }
-    #
     # @!attribute [rw] notebook_instance_name
     #   The name of the notebook instance that you want information about.
     #   @return [String]
@@ -16527,13 +12004,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeNotebookInstanceLifecycleConfigInput
-    #   data as a hash:
-    #
-    #       {
-    #         notebook_instance_lifecycle_config_name: "NotebookInstanceLifecycleConfigName", # required
-    #       }
-    #
     # @!attribute [rw] notebook_instance_lifecycle_config_name
     #   The name of the lifecycle configuration to describe.
     #   @return [String]
@@ -16766,13 +12236,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribePipelineDefinitionForExecutionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         pipeline_execution_arn: "PipelineExecutionArn", # required
-    #       }
-    #
     # @!attribute [rw] pipeline_execution_arn
     #   The Amazon Resource Name (ARN) of the pipeline execution.
     #   @return [String]
@@ -16802,13 +12265,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribePipelineExecutionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         pipeline_execution_arn: "PipelineExecutionArn", # required
-    #       }
-    #
     # @!attribute [rw] pipeline_execution_arn
     #   The Amazon Resource Name (ARN) of the pipeline execution.
     #   @return [String]
@@ -16891,13 +12347,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribePipelineRequest
-    #   data as a hash:
-    #
-    #       {
-    #         pipeline_name: "PipelineName", # required
-    #       }
-    #
     # @!attribute [rw] pipeline_name
     #   The name of the pipeline to describe.
     #   @return [String]
@@ -16984,13 +12433,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeProcessingJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         processing_job_name: "ProcessingJobName", # required
-    #       }
-    #
     # @!attribute [rw] processing_job_name
     #   The name of the processing job. The name must be unique within an
     #   Amazon Web Services Region in the Amazon Web Services account.
@@ -17123,13 +12565,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeProjectInput
-    #   data as a hash:
-    #
-    #       {
-    #         project_name: "ProjectEntityName", # required
-    #       }
-    #
     # @!attribute [rw] project_name
     #   The name of the project to describe.
     #   @return [String]
@@ -17211,13 +12646,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeStudioLifecycleConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         studio_lifecycle_config_name: "StudioLifecycleConfigName", # required
-    #       }
-    #
     # @!attribute [rw] studio_lifecycle_config_name
     #   The name of the Studio Lifecycle Configuration to describe.
     #   @return [String]
@@ -17268,13 +12696,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeSubscribedWorkteamRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workteam_arn: "WorkteamArn", # required
-    #       }
-    #
     # @!attribute [rw] workteam_arn
     #   The Amazon Resource Name (ARN) of the subscribed work team to
     #   describe.
@@ -17300,13 +12721,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeTrainingJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         training_job_name: "TrainingJobName", # required
-    #       }
-    #
     # @!attribute [rw] training_job_name
     #   The name of the training job.
     #   @return [String]
@@ -17683,13 +13097,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeTransformJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         transform_job_name: "TransformJobName", # required
-    #       }
-    #
     # @!attribute [rw] transform_job_name
     #   The name of the transform job that you want to view details of.
     #   @return [String]
@@ -17858,13 +13265,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeTrialComponentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         trial_component_name: "ExperimentEntityNameOrArn", # required
-    #       }
-    #
     # @!attribute [rw] trial_component_name
     #   The name of the trial component to describe.
     #   @return [String]
@@ -17978,13 +13378,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeTrialRequest
-    #   data as a hash:
-    #
-    #       {
-    #         trial_name: "ExperimentEntityName", # required
-    #       }
-    #
     # @!attribute [rw] trial_name
     #   The name of the trial to describe.
     #   @return [String]
@@ -18057,14 +13450,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeUserProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_id: "DomainId", # required
-    #         user_profile_name: "UserProfileName", # required
-    #       }
-    #
     # @!attribute [rw] domain_id
     #   The domain ID.
     #   @return [String]
@@ -18145,13 +13530,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeWorkforceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workforce_name: "WorkforceName", # required
-    #       }
-    #
     # @!attribute [rw] workforce_name
     #   The name of the private workforce whose access you want to restrict.
     #   `WorkforceName` is automatically set to `default` when a workforce
@@ -18187,13 +13565,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeWorkteamRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workteam_name: "WorkteamName", # required
-    #       }
-    #
     # @!attribute [rw] workteam_name
     #   The name of the work team to return a description of.
     #   @return [String]
@@ -18220,15 +13591,6 @@ module Aws::SageMaker
 
     # Specifies weight and capacity values for a production variant.
     #
-    # @note When making an API call, you may pass DesiredWeightAndCapacity
-    #   data as a hash:
-    #
-    #       {
-    #         variant_name: "VariantName", # required
-    #         desired_weight: 1.0,
-    #         desired_instance_count: 1,
-    #       }
-    #
     # @!attribute [rw] variant_name
     #   The name of the variant to update.
     #   @return [String]
@@ -18252,15 +13614,6 @@ module Aws::SageMaker
     end
 
     # Information of a particular device.
-    #
-    # @note When making an API call, you may pass Device
-    #   data as a hash:
-    #
-    #       {
-    #         device_name: "DeviceName", # required
-    #         description: "DeviceDescription",
-    #         iot_thing_name: "ThingName",
-    #       }
     #
     # @!attribute [rw] device_name
     #   The name of the device.
@@ -18379,16 +13732,6 @@ module Aws::SageMaker
 
     # Contains information about the configurations of selected devices.
     #
-    # @note When making an API call, you may pass DeviceSelectionConfig
-    #   data as a hash:
-    #
-    #       {
-    #         device_subset_type: "PERCENTAGE", # required, accepts PERCENTAGE, SELECTION, NAMECONTAINS
-    #         percentage: 1,
-    #         device_names: ["DeviceName"],
-    #         device_name_contains: "DeviceName",
-    #       }
-    #
     # @!attribute [rw] device_subset_type
     #   Type of device subsets to deploy to the current stage.
     #   @return [String]
@@ -18490,8 +13833,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DisableSagemakerServicecatalogPortfolioInput AWS API Documentation
     #
     class DisableSagemakerServicecatalogPortfolioInput < Aws::EmptyStructure; end
@@ -18500,14 +13841,6 @@ module Aws::SageMaker
     #
     class DisableSagemakerServicecatalogPortfolioOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DisassociateTrialComponentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         trial_component_name: "ExperimentEntityName", # required
-    #         trial_name: "ExperimentEntityName", # required
-    #       }
-    #
     # @!attribute [rw] trial_component_name
     #   The name of the component to disassociate from the trial.
     #   @return [String]
@@ -18589,25 +13922,6 @@ module Aws::SageMaker
     # A collection of settings that apply to the `SageMaker Domain`. These
     # settings are specified through the `CreateDomain` API call.
     #
-    # @note When making an API call, you may pass DomainSettings
-    #   data as a hash:
-    #
-    #       {
-    #         security_group_ids: ["SecurityGroupId"],
-    #         r_studio_server_pro_domain_settings: {
-    #           domain_execution_role_arn: "RoleArn", # required
-    #           r_studio_connect_url: "String",
-    #           r_studio_package_manager_url: "String",
-    #           default_resource_spec: {
-    #             sage_maker_image_arn: "ImageArn",
-    #             sage_maker_image_version_arn: "ImageVersionArn",
-    #             instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #             lifecycle_config_arn: "StudioLifecycleConfigArn",
-    #           },
-    #         },
-    #         execution_role_identity_config: "USER_PROFILE_NAME", # accepts USER_PROFILE_NAME, DISABLED
-    #       }
-    #
     # @!attribute [rw] security_group_ids
     #   The security groups for the Amazon Virtual Private Cloud that the
     #   `Domain` uses for communication between Domain-level apps and user
@@ -18640,22 +13954,6 @@ module Aws::SageMaker
 
     # A collection of `Domain` configuration settings to update.
     #
-    # @note When making an API call, you may pass DomainSettingsForUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         r_studio_server_pro_domain_settings_for_update: {
-    #           domain_execution_role_arn: "RoleArn", # required
-    #           default_resource_spec: {
-    #             sage_maker_image_arn: "ImageArn",
-    #             sage_maker_image_version_arn: "ImageVersionArn",
-    #             instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #             lifecycle_config_arn: "StudioLifecycleConfigArn",
-    #           },
-    #         },
-    #         execution_role_identity_config: "USER_PROFILE_NAME", # accepts USER_PROFILE_NAME, DISABLED
-    #       }
-    #
     # @!attribute [rw] r_studio_server_pro_domain_settings_for_update
     #   A collection of `RStudioServerPro` Domain-level app settings to
     #   update.
@@ -18683,65 +13981,6 @@ module Aws::SageMaker
 
     # Represents the drift check baselines that can be used when the model
     # monitor is set using the model package.
-    #
-    # @note When making an API call, you may pass DriftCheckBaselines
-    #   data as a hash:
-    #
-    #       {
-    #         bias: {
-    #           config_file: {
-    #             content_type: "ContentType",
-    #             content_digest: "ContentDigest",
-    #             s3_uri: "S3Uri", # required
-    #           },
-    #           pre_training_constraints: {
-    #             content_type: "ContentType", # required
-    #             content_digest: "ContentDigest",
-    #             s3_uri: "S3Uri", # required
-    #           },
-    #           post_training_constraints: {
-    #             content_type: "ContentType", # required
-    #             content_digest: "ContentDigest",
-    #             s3_uri: "S3Uri", # required
-    #           },
-    #         },
-    #         explainability: {
-    #           constraints: {
-    #             content_type: "ContentType", # required
-    #             content_digest: "ContentDigest",
-    #             s3_uri: "S3Uri", # required
-    #           },
-    #           config_file: {
-    #             content_type: "ContentType",
-    #             content_digest: "ContentDigest",
-    #             s3_uri: "S3Uri", # required
-    #           },
-    #         },
-    #         model_quality: {
-    #           statistics: {
-    #             content_type: "ContentType", # required
-    #             content_digest: "ContentDigest",
-    #             s3_uri: "S3Uri", # required
-    #           },
-    #           constraints: {
-    #             content_type: "ContentType", # required
-    #             content_digest: "ContentDigest",
-    #             s3_uri: "S3Uri", # required
-    #           },
-    #         },
-    #         model_data_quality: {
-    #           statistics: {
-    #             content_type: "ContentType", # required
-    #             content_digest: "ContentDigest",
-    #             s3_uri: "S3Uri", # required
-    #           },
-    #           constraints: {
-    #             content_type: "ContentType", # required
-    #             content_digest: "ContentDigest",
-    #             s3_uri: "S3Uri", # required
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] bias
     #   Represents the drift check bias baselines that can be used when the
@@ -18777,27 +14016,6 @@ module Aws::SageMaker
     # Represents the drift check bias baselines that can be used when the
     # model monitor is set using the model package.
     #
-    # @note When making an API call, you may pass DriftCheckBias
-    #   data as a hash:
-    #
-    #       {
-    #         config_file: {
-    #           content_type: "ContentType",
-    #           content_digest: "ContentDigest",
-    #           s3_uri: "S3Uri", # required
-    #         },
-    #         pre_training_constraints: {
-    #           content_type: "ContentType", # required
-    #           content_digest: "ContentDigest",
-    #           s3_uri: "S3Uri", # required
-    #         },
-    #         post_training_constraints: {
-    #           content_type: "ContentType", # required
-    #           content_digest: "ContentDigest",
-    #           s3_uri: "S3Uri", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] config_file
     #   The bias config file for a model.
     #   @return [Types::FileSource]
@@ -18823,22 +14041,6 @@ module Aws::SageMaker
     # Represents the drift check explainability baselines that can be used
     # when the model monitor is set using the model package.
     #
-    # @note When making an API call, you may pass DriftCheckExplainability
-    #   data as a hash:
-    #
-    #       {
-    #         constraints: {
-    #           content_type: "ContentType", # required
-    #           content_digest: "ContentDigest",
-    #           s3_uri: "S3Uri", # required
-    #         },
-    #         config_file: {
-    #           content_type: "ContentType",
-    #           content_digest: "ContentDigest",
-    #           s3_uri: "S3Uri", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] constraints
     #   The drift check explainability constraints.
     #   @return [Types::MetricsSource]
@@ -18859,22 +14061,6 @@ module Aws::SageMaker
     # Represents the drift check data quality baselines that can be used
     # when the model monitor is set using the model package.
     #
-    # @note When making an API call, you may pass DriftCheckModelDataQuality
-    #   data as a hash:
-    #
-    #       {
-    #         statistics: {
-    #           content_type: "ContentType", # required
-    #           content_digest: "ContentDigest",
-    #           s3_uri: "S3Uri", # required
-    #         },
-    #         constraints: {
-    #           content_type: "ContentType", # required
-    #           content_digest: "ContentDigest",
-    #           s3_uri: "S3Uri", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] statistics
     #   The drift check model data quality statistics.
     #   @return [Types::MetricsSource]
@@ -18894,22 +14080,6 @@ module Aws::SageMaker
 
     # Represents the drift check model quality baselines that can be used
     # when the model monitor is set using the model package.
-    #
-    # @note When making an API call, you may pass DriftCheckModelQuality
-    #   data as a hash:
-    #
-    #       {
-    #         statistics: {
-    #           content_type: "ContentType", # required
-    #           content_digest: "ContentDigest",
-    #           s3_uri: "S3Uri", # required
-    #         },
-    #         constraints: {
-    #           content_type: "ContentType", # required
-    #           content_digest: "ContentDigest",
-    #           s3_uri: "S3Uri", # required
-    #         },
-    #       }
     #
     # @!attribute [rw] statistics
     #   The drift check model quality statistics.
@@ -18988,13 +14158,6 @@ module Aws::SageMaker
 
     # Contains information about the configuration of a deployment.
     #
-    # @note When making an API call, you may pass EdgeDeploymentConfig
-    #   data as a hash:
-    #
-    #       {
-    #         failure_handling_policy: "ROLLBACK_ON_FAILURE", # required, accepts ROLLBACK_ON_FAILURE, DO_NOTHING
-    #       }
-    #
     # @!attribute [rw] failure_handling_policy
     #   Toggle that determines whether to rollback to previous configuration
     #   if the current deployment fails. By default this is turned on. You
@@ -19011,14 +14174,6 @@ module Aws::SageMaker
 
     # Contains information about the configuration of a model in a
     # deployment.
-    #
-    # @note When making an API call, you may pass EdgeDeploymentModelConfig
-    #   data as a hash:
-    #
-    #       {
-    #         model_handle: "EntityName", # required
-    #         edge_packaging_job_name: "EntityName", # required
-    #       }
     #
     # @!attribute [rw] model_handle
     #   The name the device application uses to reference this model.
@@ -19222,16 +14377,6 @@ module Aws::SageMaker
 
     # The output configuration.
     #
-    # @note When making an API call, you may pass EdgeOutputConfig
-    #   data as a hash:
-    #
-    #       {
-    #         s3_output_location: "S3Uri", # required
-    #         kms_key_id: "KmsKeyId",
-    #         preset_deployment_type: "GreengrassV2Component", # accepts GreengrassV2Component
-    #         preset_deployment_config: "String",
-    #       }
-    #
     # @!attribute [rw] s3_output_location
     #   The Amazon Simple Storage (S3) bucker URI.
     #   @return [String]
@@ -19380,8 +14525,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EnableSagemakerServicecatalogPortfolioInput AWS API Documentation
     #
     class EnableSagemakerServicecatalogPortfolioInput < Aws::EmptyStructure; end
@@ -19494,13 +14637,6 @@ module Aws::SageMaker
     # Details about a customer endpoint that was compared in an Inference
     # Recommender job.
     #
-    # @note When making an API call, you may pass EndpointInfo
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_name: "EndpointName", # required
-    #       }
-    #
     # @!attribute [rw] endpoint_name
     #   The name of a customer's endpoint.
     #   @return [String]
@@ -19514,22 +14650,6 @@ module Aws::SageMaker
     end
 
     # Input object for the endpoint
-    #
-    # @note When making an API call, you may pass EndpointInput
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_name: "EndpointName", # required
-    #         local_path: "ProcessingLocalPath", # required
-    #         s3_input_mode: "Pipe", # accepts Pipe, File
-    #         s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
-    #         features_attribute: "String",
-    #         inference_attribute: "String",
-    #         probability_attribute: "String",
-    #         probability_threshold_attribute: 1.0,
-    #         start_time_offset: "MonitoringTimeOffsetString",
-    #         end_time_offset: "MonitoringTimeOffsetString",
-    #       }
     #
     # @!attribute [rw] endpoint_name
     #   An endpoint in customer's account which has enabled
@@ -19610,22 +14730,6 @@ module Aws::SageMaker
     end
 
     # The endpoint configuration for the load test.
-    #
-    # @note When making an API call, you may pass EndpointInputConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge, ml.c6i.large, ml.c6i.xlarge, ml.c6i.2xlarge, ml.c6i.4xlarge, ml.c6i.8xlarge, ml.c6i.12xlarge, ml.c6i.16xlarge, ml.c6i.24xlarge, ml.c6i.32xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.12xlarge, ml.g5.16xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.p4d.24xlarge, ml.c7g.large, ml.c7g.xlarge, ml.c7g.2xlarge, ml.c7g.4xlarge, ml.c7g.8xlarge, ml.c7g.12xlarge, ml.c7g.16xlarge, ml.m6g.large, ml.m6g.xlarge, ml.m6g.2xlarge, ml.m6g.4xlarge, ml.m6g.8xlarge, ml.m6g.12xlarge, ml.m6g.16xlarge, ml.m6gd.large, ml.m6gd.xlarge, ml.m6gd.2xlarge, ml.m6gd.4xlarge, ml.m6gd.8xlarge, ml.m6gd.12xlarge, ml.m6gd.16xlarge, ml.c6g.large, ml.c6g.xlarge, ml.c6g.2xlarge, ml.c6g.4xlarge, ml.c6g.8xlarge, ml.c6g.12xlarge, ml.c6g.16xlarge, ml.c6gd.large, ml.c6gd.xlarge, ml.c6gd.2xlarge, ml.c6gd.4xlarge, ml.c6gd.8xlarge, ml.c6gd.12xlarge, ml.c6gd.16xlarge, ml.c6gn.large, ml.c6gn.xlarge, ml.c6gn.2xlarge, ml.c6gn.4xlarge, ml.c6gn.8xlarge, ml.c6gn.12xlarge, ml.c6gn.16xlarge, ml.r6g.large, ml.r6g.xlarge, ml.r6g.2xlarge, ml.r6g.4xlarge, ml.r6g.8xlarge, ml.r6g.12xlarge, ml.r6g.16xlarge, ml.r6gd.large, ml.r6gd.xlarge, ml.r6gd.2xlarge, ml.r6gd.4xlarge, ml.r6gd.8xlarge, ml.r6gd.12xlarge, ml.r6gd.16xlarge
-    #         inference_specification_name: "InferenceSpecificationName",
-    #         environment_parameter_ranges: {
-    #           categorical_parameter_ranges: [
-    #             {
-    #               name: "String64", # required
-    #               value: ["String128"], # required
-    #             },
-    #           ],
-    #         },
-    #       }
     #
     # @!attribute [rw] instance_type
     #   The instance types to use for the load test.
@@ -19800,18 +14904,6 @@ module Aws::SageMaker
 
     # Specifies the range of environment parameters
     #
-    # @note When making an API call, you may pass EnvironmentParameterRanges
-    #   data as a hash:
-    #
-    #       {
-    #         categorical_parameter_ranges: [
-    #           {
-    #             name: "String64", # required
-    #             value: ["String128"], # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] categorical_parameter_ranges
     #   Specified a list of parameters for each category.
     #   @return [Array<Types::CategoricalParameter>]
@@ -19894,15 +14986,6 @@ module Aws::SageMaker
     # * CreateTrainingJob
     #
     # * CreateTransformJob
-    #
-    # @note When making an API call, you may pass ExperimentConfig
-    #   data as a hash:
-    #
-    #       {
-    #         experiment_name: "ExperimentEntityName",
-    #         trial_name: "ExperimentEntityName",
-    #         trial_component_display_name: "ExperimentEntityName",
-    #       }
     #
     # @!attribute [rw] experiment_name
     #   The name of an existing experiment to associate the trial component
@@ -19992,17 +15075,6 @@ module Aws::SageMaker
 
     # Contains explainability metrics for a model.
     #
-    # @note When making an API call, you may pass Explainability
-    #   data as a hash:
-    #
-    #       {
-    #         report: {
-    #           content_type: "ContentType", # required
-    #           content_digest: "ContentDigest",
-    #           s3_uri: "S3Uri", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] report
     #   The explainability report for a model.
     #   @return [Types::MetricsSource]
@@ -20016,42 +15088,6 @@ module Aws::SageMaker
     end
 
     # A parameter to activate explainers.
-    #
-    # @note When making an API call, you may pass ExplainerConfig
-    #   data as a hash:
-    #
-    #       {
-    #         clarify_explainer_config: {
-    #           enable_explanations: "ClarifyEnableExplanations",
-    #           inference_config: {
-    #             features_attribute: "ClarifyFeaturesAttribute",
-    #             content_template: "ClarifyContentTemplate",
-    #             max_record_count: 1,
-    #             max_payload_in_mb: 1,
-    #             probability_index: 1,
-    #             label_index: 1,
-    #             probability_attribute: "ClarifyProbabilityAttribute",
-    #             label_attribute: "ClarifyLabelAttribute",
-    #             label_headers: ["ClarifyHeader"],
-    #             feature_headers: ["ClarifyHeader"],
-    #             feature_types: ["numerical"], # accepts numerical, categorical, text
-    #           },
-    #           shap_config: { # required
-    #             shap_baseline_config: { # required
-    #               mime_type: "ClarifyMimeType",
-    #               shap_baseline: "ClarifyShapBaseline",
-    #               shap_baseline_uri: "Url",
-    #             },
-    #             number_of_samples: 1,
-    #             use_logit: false,
-    #             seed: 1,
-    #             text_config: {
-    #               language: "af", # required, accepts af, sq, ar, hy, eu, bn, bg, ca, zh, hr, cs, da, nl, en, et, fi, fr, de, el, gu, he, hi, hu, is, id, ga, it, kn, ky, lv, lt, lb, mk, ml, mr, ne, nb, fa, pl, pt, ro, ru, sa, sr, tn, si, sk, sl, es, sv, tl, ta, tt, te, tr, uk, ur, yo, lij, xx
-    #               granularity: "token", # required, accepts token, sentence, paragraph
-    #             },
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] clarify_explainer_config
     #   A member of `ExplainerConfig` that contains configuration parameters
@@ -20084,14 +15120,6 @@ module Aws::SageMaker
     # A list of features. You must include `FeatureName` and `FeatureType`.
     # Valid feature `FeatureType`s are `Integral`, `Fractional` and
     # `String`.
-    #
-    # @note When making an API call, you may pass FeatureDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         feature_name: "FeatureName",
-    #         feature_type: "Integral", # accepts Integral, Fractional, String
-    #       }
     #
     # @!attribute [rw] feature_name
     #   The name of a feature. The type must be a string. `FeatureName`
@@ -20330,14 +15358,6 @@ module Aws::SageMaker
 
     # A key-value pair that you specify to describe the feature.
     #
-    # @note When making an API call, you may pass FeatureParameter
-    #   data as a hash:
-    #
-    #       {
-    #         key: "FeatureParameterKey",
-    #         value: "FeatureParameterValue",
-    #       }
-    #
     # @!attribute [rw] key
     #   A key that must contain a value to describe the feature.
     #   @return [String]
@@ -20356,15 +15376,6 @@ module Aws::SageMaker
     end
 
     # Contains details regarding the file source.
-    #
-    # @note When making an API call, you may pass FileSource
-    #   data as a hash:
-    #
-    #       {
-    #         content_type: "ContentType",
-    #         content_digest: "ContentDigest",
-    #         s3_uri: "S3Uri", # required
-    #       }
     #
     # @!attribute [rw] content_type
     #   The type of content stored in the file source.
@@ -20390,15 +15401,6 @@ module Aws::SageMaker
 
     # The Amazon Elastic File System (EFS) storage configuration for a
     # SageMaker image.
-    #
-    # @note When making an API call, you may pass FileSystemConfig
-    #   data as a hash:
-    #
-    #       {
-    #         mount_path: "MountPath",
-    #         default_uid: 1,
-    #         default_gid: 1,
-    #       }
     #
     # @!attribute [rw] mount_path
     #   The path within the image to mount the user's EFS home directory.
@@ -20427,16 +15429,6 @@ module Aws::SageMaker
     end
 
     # Specifies a file system data source for a channel.
-    #
-    # @note When making an API call, you may pass FileSystemDataSource
-    #   data as a hash:
-    #
-    #       {
-    #         file_system_id: "FileSystemId", # required
-    #         file_system_access_mode: "rw", # required, accepts rw, ro
-    #         file_system_type: "EFS", # required, accepts EFS, FSxLustre
-    #         directory_path: "DirectoryPath", # required
-    #       }
     #
     # @!attribute [rw] file_system_id
     #   The file system id.
@@ -20516,15 +15508,6 @@ module Aws::SageMaker
     # Tags
     #
     # : To define a tag filter, enter a value with the form `Tags.<key>`.
-    #
-    # @note When making an API call, you may pass Filter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ResourcePropertyName", # required
-    #         operator: "Equals", # accepts Equals, NotEquals, GreaterThan, GreaterThanOrEqualTo, LessThan, LessThanOrEqualTo, Contains, Exists, NotExists, In
-    #         value: "FilterValue",
-    #       }
     #
     # @!attribute [rw] name
     #   A resource property name. For example, `TrainingJobName`. For valid
@@ -20687,14 +15670,6 @@ module Aws::SageMaker
 
     # Contains information about where human output will be stored.
     #
-    # @note When making an API call, you may pass FlowDefinitionOutputConfig
-    #   data as a hash:
-    #
-    #       {
-    #         s3_output_path: "S3Uri", # required
-    #         kms_key_id: "KmsKeyId",
-    #       }
-    #
     # @!attribute [rw] s3_output_path
     #   The Amazon S3 path where the object containing human output will be
     #   made available.
@@ -20756,13 +15731,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDeviceFleetReportRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_fleet_name: "EntityName", # required
-    #       }
-    #
     # @!attribute [rw] device_fleet_name
     #   The name of the fleet.
     #   @return [String]
@@ -20823,13 +15791,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLineageGroupPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         lineage_group_name: "LineageGroupNameOrArn", # required
-    #       }
-    #
     # @!attribute [rw] lineage_group_name
     #   The name or Amazon Resource Name (ARN) of the lineage group.
     #   @return [String]
@@ -20860,13 +15821,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetModelPackageGroupPolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         model_package_group_name: "EntityName", # required
-    #       }
-    #
     # @!attribute [rw] model_package_group_name
     #   The name of the model group for which to get the resource policy.
     #   @return [String]
@@ -20891,8 +15845,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/GetSagemakerServicecatalogPortfolioStatusInput AWS API Documentation
     #
     class GetSagemakerServicecatalogPortfolioStatusInput < Aws::EmptyStructure; end
@@ -20909,18 +15861,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSearchSuggestionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup, Project, FeatureMetadata, HyperParameterTuningJob
-    #         suggestion_query: {
-    #           property_name_query: {
-    #             property_name_hint: "PropertyNameHint", # required
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource
     #   The name of the Amazon SageMaker resource to search for.
     #   @return [String]
@@ -20954,15 +15894,6 @@ module Aws::SageMaker
     # Specifies configuration details for a Git repository in your Amazon
     # Web Services account.
     #
-    # @note When making an API call, you may pass GitConfig
-    #   data as a hash:
-    #
-    #       {
-    #         repository_url: "GitConfigUrl", # required
-    #         branch: "Branch",
-    #         secret_arn: "SecretArn",
-    #       }
-    #
     # @!attribute [rw] repository_url
     #   The URL where the Git repository is located.
     #   @return [String]
@@ -20993,13 +15924,6 @@ module Aws::SageMaker
     # Specifies configuration details for a Git repository when the
     # repository is updated.
     #
-    # @note When making an API call, you may pass GitConfigForUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         secret_arn: "SecretArn",
-    #       }
-    #
     # @!attribute [rw] secret_arn
     #   The Amazon Resource Name (ARN) of the Amazon Web Services Secrets
     #   Manager secret that contains the credentials used to access the git
@@ -21019,13 +15943,6 @@ module Aws::SageMaker
 
     # Defines under what conditions SageMaker creates a human loop. Used
     # within . See for the required format of activation conditions.
-    #
-    # @note When making an API call, you may pass HumanLoopActivationConditionsConfig
-    #   data as a hash:
-    #
-    #       {
-    #         human_loop_activation_conditions: "HumanLoopActivationConditions", # required
-    #       }
     #
     # @!attribute [rw] human_loop_activation_conditions
     #   JSON expressing use-case specific conditions declaratively. If any
@@ -21053,15 +15970,6 @@ module Aws::SageMaker
     # creates a human loop. If `HumanLoopActivationConfig` is not given,
     # then all requests go to humans.
     #
-    # @note When making an API call, you may pass HumanLoopActivationConfig
-    #   data as a hash:
-    #
-    #       {
-    #         human_loop_activation_conditions_config: { # required
-    #           human_loop_activation_conditions: "HumanLoopActivationConditions", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] human_loop_activation_conditions_config
     #   Container structure for defining under what conditions SageMaker
     #   creates a human loop.
@@ -21076,27 +15984,6 @@ module Aws::SageMaker
     end
 
     # Describes the work to be performed by human workers.
-    #
-    # @note When making an API call, you may pass HumanLoopConfig
-    #   data as a hash:
-    #
-    #       {
-    #         workteam_arn: "WorkteamArn", # required
-    #         human_task_ui_arn: "HumanTaskUiArn", # required
-    #         task_title: "FlowDefinitionTaskTitle", # required
-    #         task_description: "FlowDefinitionTaskDescription", # required
-    #         task_count: 1, # required
-    #         task_availability_lifetime_in_seconds: 1,
-    #         task_time_limit_in_seconds: 1,
-    #         task_keywords: ["FlowDefinitionTaskKeyword"],
-    #         public_workforce_task_price: {
-    #           amount_in_usd: {
-    #             dollars: 1,
-    #             cents: 1,
-    #             tenth_fractions_of_a_cent: 1,
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] workteam_arn
     #   Amazon Resource Name (ARN) of a team of workers. To learn more about
@@ -21386,13 +16273,6 @@ module Aws::SageMaker
 
     # Container for configuring the source of human task requests.
     #
-    # @note When making an API call, you may pass HumanLoopRequestSource
-    #   data as a hash:
-    #
-    #       {
-    #         aws_managed_human_loop_request_source: "AWS/Rekognition/DetectModerationLabels/Image/V3", # required, accepts AWS/Rekognition/DetectModerationLabels/Image/V3, AWS/Textract/AnalyzeDocument/Forms/V1
-    #       }
-    #
     # @!attribute [rw] aws_managed_human_loop_request_source
     #   Specifies whether Amazon Rekognition or Amazon Textract are used as
     #   the integration source. The default field settings and JSON parsing
@@ -21408,35 +16288,6 @@ module Aws::SageMaker
     end
 
     # Information required for human workers to complete a labeling task.
-    #
-    # @note When making an API call, you may pass HumanTaskConfig
-    #   data as a hash:
-    #
-    #       {
-    #         workteam_arn: "WorkteamArn", # required
-    #         ui_config: { # required
-    #           ui_template_s3_uri: "S3Uri",
-    #           human_task_ui_arn: "HumanTaskUiArn",
-    #         },
-    #         pre_human_task_lambda_arn: "LambdaFunctionArn", # required
-    #         task_keywords: ["TaskKeyword"],
-    #         task_title: "TaskTitle", # required
-    #         task_description: "TaskDescription", # required
-    #         number_of_human_workers_per_data_object: 1, # required
-    #         task_time_limit_in_seconds: 1, # required
-    #         task_availability_lifetime_in_seconds: 1,
-    #         max_concurrent_task_count: 1,
-    #         annotation_consolidation_config: { # required
-    #           annotation_consolidation_lambda_arn: "LambdaFunctionArn", # required
-    #         },
-    #         public_workforce_task_price: {
-    #           amount_in_usd: {
-    #             dollars: 1,
-    #             cents: 1,
-    #             tenth_fractions_of_a_cent: 1,
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] workteam_arn
     #   The Amazon Resource Name (ARN) of the work team assigned to complete
@@ -22221,21 +17072,6 @@ module Aws::SageMaker
     # Specifies which training algorithm to use for training jobs that a
     # hyperparameter tuning job launches and the metrics to monitor.
     #
-    # @note When making an API call, you may pass HyperParameterAlgorithmSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         training_image: "AlgorithmImage",
-    #         training_input_mode: "Pipe", # required, accepts Pipe, File, FastFile
-    #         algorithm_name: "ArnOrName",
-    #         metric_definitions: [
-    #           {
-    #             name: "MetricName", # required
-    #             regex: "MetricRegex", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] training_image
     #   The registry path of the Docker image that contains the training
     #   algorithm. For information about Docker registry paths for built-in
@@ -22321,31 +17157,6 @@ module Aws::SageMaker
 
     # Defines a hyperparameter to be used by an algorithm.
     #
-    # @note When making an API call, you may pass HyperParameterSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ParameterName", # required
-    #         description: "EntityDescription",
-    #         type: "Integer", # required, accepts Integer, Continuous, Categorical, FreeText
-    #         range: {
-    #           integer_parameter_range_specification: {
-    #             min_value: "ParameterValue", # required
-    #             max_value: "ParameterValue", # required
-    #           },
-    #           continuous_parameter_range_specification: {
-    #             min_value: "ParameterValue", # required
-    #             max_value: "ParameterValue", # required
-    #           },
-    #           categorical_parameter_range_specification: {
-    #             values: ["ParameterValue"], # required
-    #           },
-    #         },
-    #         is_tunable: false,
-    #         is_required: false,
-    #         default_value: "HyperParameterValue",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of this hyperparameter. The name must be unique.
     #   @return [String]
@@ -22392,133 +17203,6 @@ module Aws::SageMaker
     end
 
     # Defines the training jobs launched by a hyperparameter tuning job.
-    #
-    # @note When making an API call, you may pass HyperParameterTrainingJobDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         definition_name: "HyperParameterTrainingJobDefinitionName",
-    #         tuning_objective: {
-    #           type: "Maximize", # required, accepts Maximize, Minimize
-    #           metric_name: "MetricName", # required
-    #         },
-    #         hyper_parameter_ranges: {
-    #           integer_parameter_ranges: [
-    #             {
-    #               name: "ParameterKey", # required
-    #               min_value: "ParameterValue", # required
-    #               max_value: "ParameterValue", # required
-    #               scaling_type: "Auto", # accepts Auto, Linear, Logarithmic, ReverseLogarithmic
-    #             },
-    #           ],
-    #           continuous_parameter_ranges: [
-    #             {
-    #               name: "ParameterKey", # required
-    #               min_value: "ParameterValue", # required
-    #               max_value: "ParameterValue", # required
-    #               scaling_type: "Auto", # accepts Auto, Linear, Logarithmic, ReverseLogarithmic
-    #             },
-    #           ],
-    #           categorical_parameter_ranges: [
-    #             {
-    #               name: "ParameterKey", # required
-    #               values: ["ParameterValue"], # required
-    #             },
-    #           ],
-    #         },
-    #         static_hyper_parameters: {
-    #           "HyperParameterKey" => "HyperParameterValue",
-    #         },
-    #         algorithm_specification: { # required
-    #           training_image: "AlgorithmImage",
-    #           training_input_mode: "Pipe", # required, accepts Pipe, File, FastFile
-    #           algorithm_name: "ArnOrName",
-    #           metric_definitions: [
-    #             {
-    #               name: "MetricName", # required
-    #               regex: "MetricRegex", # required
-    #             },
-    #           ],
-    #         },
-    #         role_arn: "RoleArn", # required
-    #         input_data_config: [
-    #           {
-    #             channel_name: "ChannelName", # required
-    #             data_source: { # required
-    #               s3_data_source: {
-    #                 s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
-    #                 s3_uri: "S3Uri", # required
-    #                 s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
-    #                 attribute_names: ["AttributeName"],
-    #                 instance_group_names: ["InstanceGroupName"],
-    #               },
-    #               file_system_data_source: {
-    #                 file_system_id: "FileSystemId", # required
-    #                 file_system_access_mode: "rw", # required, accepts rw, ro
-    #                 file_system_type: "EFS", # required, accepts EFS, FSxLustre
-    #                 directory_path: "DirectoryPath", # required
-    #               },
-    #             },
-    #             content_type: "ContentType",
-    #             compression_type: "None", # accepts None, Gzip
-    #             record_wrapper_type: "None", # accepts None, RecordIO
-    #             input_mode: "Pipe", # accepts Pipe, File, FastFile
-    #             shuffle_config: {
-    #               seed: 1, # required
-    #             },
-    #           },
-    #         ],
-    #         vpc_config: {
-    #           security_group_ids: ["SecurityGroupId"], # required
-    #           subnets: ["SubnetId"], # required
-    #         },
-    #         output_data_config: { # required
-    #           kms_key_id: "KmsKeyId",
-    #           s3_output_path: "S3Uri", # required
-    #         },
-    #         resource_config: {
-    #           instance_type: "ml.m4.xlarge", # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge
-    #           instance_count: 1,
-    #           volume_size_in_gb: 1, # required
-    #           volume_kms_key_id: "KmsKeyId",
-    #           instance_groups: [
-    #             {
-    #               instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge
-    #               instance_count: 1, # required
-    #               instance_group_name: "InstanceGroupName", # required
-    #             },
-    #           ],
-    #           keep_alive_period_in_seconds: 1,
-    #         },
-    #         stopping_condition: { # required
-    #           max_runtime_in_seconds: 1,
-    #           max_wait_time_in_seconds: 1,
-    #         },
-    #         enable_network_isolation: false,
-    #         enable_inter_container_traffic_encryption: false,
-    #         enable_managed_spot_training: false,
-    #         checkpoint_config: {
-    #           s3_uri: "S3Uri", # required
-    #           local_path: "DirectoryPath",
-    #         },
-    #         retry_strategy: {
-    #           maximum_retry_attempts: 1, # required
-    #         },
-    #         hyper_parameter_tuning_resource_config: {
-    #           instance_type: "ml.m4.xlarge", # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge
-    #           instance_count: 1,
-    #           volume_size_in_gb: 1,
-    #           volume_kms_key_id: "KmsKeyId",
-    #           allocation_strategy: "Prioritized", # accepts Prioritized
-    #           instance_configs: [
-    #             {
-    #               instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge
-    #               instance_count: 1, # required
-    #               volume_size_in_gb: 1, # required
-    #             },
-    #           ],
-    #         },
-    #       }
     #
     # @!attribute [rw] definition_name
     #   The job definition name.
@@ -22779,15 +17463,6 @@ module Aws::SageMaker
     # instance configurations and allocation strategies to select resources
     # (optional).
     #
-    # @note When making an API call, you may pass HyperParameterTuningInstanceConfig
-    #   data as a hash:
-    #
-    #       {
-    #         instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge
-    #         instance_count: 1, # required
-    #         volume_size_in_gb: 1, # required
-    #       }
-    #
     # @!attribute [rw] instance_type
     #   The instance type used for processing of hyperparameter optimization
     #   jobs. Choose from general purpose (no GPUs) instance types:
@@ -22828,55 +17503,6 @@ module Aws::SageMaker
     end
 
     # Configures a hyperparameter tuning job.
-    #
-    # @note When making an API call, you may pass HyperParameterTuningJobConfig
-    #   data as a hash:
-    #
-    #       {
-    #         strategy: "Bayesian", # required, accepts Bayesian, Random, Hyperband, Grid
-    #         strategy_config: {
-    #           hyperband_strategy_config: {
-    #             min_resource: 1,
-    #             max_resource: 1,
-    #           },
-    #         },
-    #         hyper_parameter_tuning_job_objective: {
-    #           type: "Maximize", # required, accepts Maximize, Minimize
-    #           metric_name: "MetricName", # required
-    #         },
-    #         resource_limits: { # required
-    #           max_number_of_training_jobs: 1,
-    #           max_parallel_training_jobs: 1, # required
-    #         },
-    #         parameter_ranges: {
-    #           integer_parameter_ranges: [
-    #             {
-    #               name: "ParameterKey", # required
-    #               min_value: "ParameterValue", # required
-    #               max_value: "ParameterValue", # required
-    #               scaling_type: "Auto", # accepts Auto, Linear, Logarithmic, ReverseLogarithmic
-    #             },
-    #           ],
-    #           continuous_parameter_ranges: [
-    #             {
-    #               name: "ParameterKey", # required
-    #               min_value: "ParameterValue", # required
-    #               max_value: "ParameterValue", # required
-    #               scaling_type: "Auto", # accepts Auto, Linear, Logarithmic, ReverseLogarithmic
-    #             },
-    #           ],
-    #           categorical_parameter_ranges: [
-    #             {
-    #               name: "ParameterKey", # required
-    #               values: ["ParameterValue"], # required
-    #             },
-    #           ],
-    #         },
-    #         training_job_early_stopping_type: "Off", # accepts Off, Auto
-    #         tuning_job_completion_criteria: {
-    #           target_objective_metric_value: 1.0, # required
-    #         },
-    #       }
     #
     # @!attribute [rw] strategy
     #   Specifies how hyperparameter tuning chooses the combinations of
@@ -22958,14 +17584,6 @@ module Aws::SageMaker
     # training jobs it launches, and returns the training job that results
     # in either the highest or lowest value for this metric, depending on
     # the value you specify for the `Type` parameter.
-    #
-    # @note When making an API call, you may pass HyperParameterTuningJobObjective
-    #   data as a hash:
-    #
-    #       {
-    #         type: "Maximize", # required, accepts Maximize, Minimize
-    #         metric_name: "MetricName", # required
-    #       }
     #
     # @!attribute [rw] type
     #   Whether to minimize or maximize the objective metric.
@@ -23116,16 +17734,6 @@ module Aws::SageMaker
     #
     # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-how-it-works.html
     #
-    # @note When making an API call, you may pass HyperParameterTuningJobStrategyConfig
-    #   data as a hash:
-    #
-    #       {
-    #         hyperband_strategy_config: {
-    #           min_resource: 1,
-    #           max_resource: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] hyperband_strategy_config
     #   The configuration for the object that specifies the `Hyperband`
     #   strategy. This parameter is only supported for the `Hyperband`
@@ -23224,18 +17832,6 @@ module Aws::SageMaker
     #
     #  </note>
     #
-    # @note When making an API call, you may pass HyperParameterTuningJobWarmStartConfig
-    #   data as a hash:
-    #
-    #       {
-    #         parent_hyper_parameter_tuning_jobs: [ # required
-    #           {
-    #             hyper_parameter_tuning_job_name: "HyperParameterTuningJobName",
-    #           },
-    #         ],
-    #         warm_start_type: "IdenticalDataAndAlgorithm", # required, accepts IdenticalDataAndAlgorithm, TransferLearning
-    #       }
-    #
     # @!attribute [rw] parent_hyper_parameter_tuning_jobs
     #   An array of hyperparameter tuning jobs that are used as the starting
     #   point for the new hyperparameter tuning job. For more information
@@ -23301,24 +17897,6 @@ module Aws::SageMaker
     # management.
     #
     #  </note>
-    #
-    # @note When making an API call, you may pass HyperParameterTuningResourceConfig
-    #   data as a hash:
-    #
-    #       {
-    #         instance_type: "ml.m4.xlarge", # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge
-    #         instance_count: 1,
-    #         volume_size_in_gb: 1,
-    #         volume_kms_key_id: "KmsKeyId",
-    #         allocation_strategy: "Prioritized", # accepts Prioritized
-    #         instance_configs: [
-    #           {
-    #             instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge
-    #             instance_count: 1, # required
-    #             volume_size_in_gb: 1, # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] instance_type
     #   The instance type used to run hyperparameter optimization tuning
@@ -23433,14 +18011,6 @@ module Aws::SageMaker
     # should be provided only if `Hyperband` is selected as the
     # `StrategyConfig` under the `HyperParameterTuningJobConfig` API.
     #
-    # @note When making an API call, you may pass HyperbandStrategyConfig
-    #   data as a hash:
-    #
-    #       {
-    #         min_resource: 1,
-    #         max_resource: 1,
-    #       }
-    #
     # @!attribute [rw] min_resource
     #   The minimum number of resources (such as epochs) that can be used by
     #   a training job launched by a hyperparameter tuning job. If the value
@@ -23549,16 +18119,6 @@ module Aws::SageMaker
     # Docker registry accessible from your Amazon Virtual Private Cloud
     # (VPC).
     #
-    # @note When making an API call, you may pass ImageConfig
-    #   data as a hash:
-    #
-    #       {
-    #         repository_access_mode: "Platform", # required, accepts Platform, Vpc
-    #         repository_auth_config: {
-    #           repository_credentials_provider_arn: "RepositoryCredentialsProviderArn", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] repository_access_mode
     #   Set this to one of the following values:
     #
@@ -23632,13 +18192,6 @@ module Aws::SageMaker
 
     # Specifies details about how containers in a multi-container endpoint
     # are run.
-    #
-    # @note When making an API call, you may pass InferenceExecutionConfig
-    #   data as a hash:
-    #
-    #       {
-    #         mode: "Serial", # required, accepts Serial, Direct
-    #       }
     #
     # @!attribute [rw] mode
     #   How containers in a multi-container are run. The following values
@@ -23803,34 +18356,6 @@ module Aws::SageMaker
     # Defines how to perform inference generation after a training job is
     # run.
     #
-    # @note When making an API call, you may pass InferenceSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         containers: [ # required
-    #           {
-    #             container_hostname: "ContainerHostname",
-    #             image: "ContainerImage", # required
-    #             image_digest: "ImageDigest",
-    #             model_data_url: "Url",
-    #             product_id: "ProductId",
-    #             environment: {
-    #               "EnvironmentKey" => "EnvironmentValue",
-    #             },
-    #             model_input: {
-    #               data_input_config: "DataInputConfig", # required
-    #             },
-    #             framework: "String",
-    #             framework_version: "ModelPackageFrameworkVersion",
-    #             nearest_model_name: "String",
-    #           },
-    #         ],
-    #         supported_transform_instance_types: ["ml.m4.xlarge"], # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
-    #         supported_realtime_inference_instance_types: ["ml.t2.medium"], # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge, ml.c6i.large, ml.c6i.xlarge, ml.c6i.2xlarge, ml.c6i.4xlarge, ml.c6i.8xlarge, ml.c6i.12xlarge, ml.c6i.16xlarge, ml.c6i.24xlarge, ml.c6i.32xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.12xlarge, ml.g5.16xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.p4d.24xlarge, ml.c7g.large, ml.c7g.xlarge, ml.c7g.2xlarge, ml.c7g.4xlarge, ml.c7g.8xlarge, ml.c7g.12xlarge, ml.c7g.16xlarge, ml.m6g.large, ml.m6g.xlarge, ml.m6g.2xlarge, ml.m6g.4xlarge, ml.m6g.8xlarge, ml.m6g.12xlarge, ml.m6g.16xlarge, ml.m6gd.large, ml.m6gd.xlarge, ml.m6gd.2xlarge, ml.m6gd.4xlarge, ml.m6gd.8xlarge, ml.m6gd.12xlarge, ml.m6gd.16xlarge, ml.c6g.large, ml.c6g.xlarge, ml.c6g.2xlarge, ml.c6g.4xlarge, ml.c6g.8xlarge, ml.c6g.12xlarge, ml.c6g.16xlarge, ml.c6gd.large, ml.c6gd.xlarge, ml.c6gd.2xlarge, ml.c6gd.4xlarge, ml.c6gd.8xlarge, ml.c6gd.12xlarge, ml.c6gd.16xlarge, ml.c6gn.large, ml.c6gn.xlarge, ml.c6gn.2xlarge, ml.c6gn.4xlarge, ml.c6gn.8xlarge, ml.c6gn.12xlarge, ml.c6gn.16xlarge, ml.r6g.large, ml.r6g.xlarge, ml.r6g.2xlarge, ml.r6g.4xlarge, ml.r6g.8xlarge, ml.r6g.12xlarge, ml.r6g.16xlarge, ml.r6gd.large, ml.r6gd.xlarge, ml.r6gd.2xlarge, ml.r6gd.4xlarge, ml.r6gd.8xlarge, ml.r6gd.12xlarge, ml.r6gd.16xlarge
-    #         supported_content_types: ["ContentType"], # required
-    #         supported_response_mime_types: ["ResponseMIMEType"], # required
-    #       }
-    #
     # @!attribute [rw] containers
     #   The Amazon ECR registry path of the Docker image that contains the
     #   inference code.
@@ -23875,16 +18400,6 @@ module Aws::SageMaker
     # Contains information about the location of input model artifacts, the
     # name and shape of the expected data inputs, and the framework in which
     # the model was trained.
-    #
-    # @note When making an API call, you may pass InputConfig
-    #   data as a hash:
-    #
-    #       {
-    #         s3_uri: "S3Uri", # required
-    #         data_input_config: "DataInputConfig", # required
-    #         framework: "TENSORFLOW", # required, accepts TENSORFLOW, KERAS, MXNET, ONNX, PYTORCH, XGBOOST, TFLITE, DARKNET, SKLEARN
-    #         framework_version: "FrameworkVersion",
-    #       }
     #
     # @!attribute [rw] s3_uri
     #   The S3 path where the model artifacts, which result from model
@@ -24121,15 +18636,6 @@ module Aws::SageMaker
     #
     # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html
     #
-    # @note When making an API call, you may pass InstanceGroup
-    #   data as a hash:
-    #
-    #       {
-    #         instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge
-    #         instance_count: 1, # required
-    #         instance_group_name: "InstanceGroupName", # required
-    #       }
-    #
     # @!attribute [rw] instance_type
     #   Specifies the instance type of the instance group.
     #   @return [String]
@@ -24154,13 +18660,6 @@ module Aws::SageMaker
 
     # Information on the IMDS configuration of the notebook instance
     #
-    # @note When making an API call, you may pass InstanceMetadataServiceConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         minimum_instance_metadata_service_version: "MinimumInstanceMetadataServiceVersion", # required
-    #       }
-    #
     # @!attribute [rw] minimum_instance_metadata_service_version
     #   Indicates the minimum IMDS version that the notebook instance
     #   supports. When passed as part of `CreateNotebookInstance`, if no
@@ -24179,16 +18678,6 @@ module Aws::SageMaker
 
     # For a hyperparameter of the integer type, specifies the range that a
     # hyperparameter tuning job searches.
-    #
-    # @note When making an API call, you may pass IntegerParameterRange
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ParameterKey", # required
-    #         min_value: "ParameterValue", # required
-    #         max_value: "ParameterValue", # required
-    #         scaling_type: "Auto", # accepts Auto, Linear, Logarithmic, ReverseLogarithmic
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the hyperparameter to search.
@@ -24244,14 +18733,6 @@ module Aws::SageMaker
 
     # Defines the possible values for an integer hyperparameter.
     #
-    # @note When making an API call, you may pass IntegerParameterRangeSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         min_value: "ParameterValue", # required
-    #         max_value: "ParameterValue", # required
-    #       }
-    #
     # @!attribute [rw] min_value
     #   The minimum integer value allowed.
     #   @return [String]
@@ -24270,19 +18751,6 @@ module Aws::SageMaker
     end
 
     # The JupyterServer app settings.
-    #
-    # @note When making an API call, you may pass JupyterServerAppSettings
-    #   data as a hash:
-    #
-    #       {
-    #         default_resource_spec: {
-    #           sage_maker_image_arn: "ImageArn",
-    #           sage_maker_image_version_arn: "ImageVersionArn",
-    #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #           lifecycle_config_arn: "StudioLifecycleConfigArn",
-    #         },
-    #         lifecycle_config_arns: ["StudioLifecycleConfigArn"],
-    #       }
     #
     # @!attribute [rw] default_resource_spec
     #   The default instance type and the Amazon Resource Name (ARN) of the
@@ -24312,26 +18780,6 @@ module Aws::SageMaker
     end
 
     # The KernelGateway app settings.
-    #
-    # @note When making an API call, you may pass KernelGatewayAppSettings
-    #   data as a hash:
-    #
-    #       {
-    #         default_resource_spec: {
-    #           sage_maker_image_arn: "ImageArn",
-    #           sage_maker_image_version_arn: "ImageVersionArn",
-    #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #           lifecycle_config_arn: "StudioLifecycleConfigArn",
-    #         },
-    #         custom_images: [
-    #           {
-    #             image_name: "ImageName", # required
-    #             image_version_number: 1,
-    #             app_image_config_name: "AppImageConfigName", # required
-    #           },
-    #         ],
-    #         lifecycle_config_arns: ["StudioLifecycleConfigArn"],
-    #       }
     #
     # @!attribute [rw] default_resource_spec
     #   The default instance type and the Amazon Resource Name (ARN) of the
@@ -24374,23 +18822,6 @@ module Aws::SageMaker
     # The configuration for the file system and kernels in a SageMaker image
     # running as a KernelGateway app.
     #
-    # @note When making an API call, you may pass KernelGatewayImageConfig
-    #   data as a hash:
-    #
-    #       {
-    #         kernel_specs: [ # required
-    #           {
-    #             name: "KernelName", # required
-    #             display_name: "KernelDisplayName",
-    #           },
-    #         ],
-    #         file_system_config: {
-    #           mount_path: "MountPath",
-    #           default_uid: 1,
-    #           default_gid: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] kernel_specs
     #   The specification of the Jupyter kernels in the image.
     #   @return [Array<Types::KernelSpec>]
@@ -24410,14 +18841,6 @@ module Aws::SageMaker
     end
 
     # The specification of a Jupyter kernel.
-    #
-    # @note When making an API call, you may pass KernelSpec
-    #   data as a hash:
-    #
-    #       {
-    #         name: "KernelName", # required
-    #         display_name: "KernelDisplayName",
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the Jupyter kernel in the image. This value is case
@@ -24501,21 +18924,6 @@ module Aws::SageMaker
     # objects. A `LabelingJobAlgorithmsConfig` object must be supplied in
     # order to use auto-labeling.
     #
-    # @note When making an API call, you may pass LabelingJobAlgorithmsConfig
-    #   data as a hash:
-    #
-    #       {
-    #         labeling_job_algorithm_specification_arn: "LabelingJobAlgorithmSpecificationArn", # required
-    #         initial_active_learning_model_arn: "ModelArn",
-    #         labeling_job_resource_config: {
-    #           volume_kms_key_id: "KmsKeyId",
-    #           vpc_config: {
-    #             security_group_ids: ["SecurityGroupId"], # required
-    #             subnets: ["SubnetId"], # required
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] labeling_job_algorithm_specification_arn
     #   Specifies the Amazon Resource Name (ARN) of the algorithm used for
     #   auto-labeling. You must select one of the following ARNs:
@@ -24561,13 +18969,6 @@ module Aws::SageMaker
     # Attributes of the data specified by the customer. Use these to
     # describe the data to be labeled.
     #
-    # @note When making an API call, you may pass LabelingJobDataAttributes
-    #   data as a hash:
-    #
-    #       {
-    #         content_classifiers: ["FreeOfPersonallyIdentifiableInformation"], # accepts FreeOfPersonallyIdentifiableInformation, FreeOfAdultContent
-    #       }
-    #
     # @!attribute [rw] content_classifiers
     #   Declares that your content is free of personally identifiable
     #   information or adult content. SageMaker may restrict the Amazon
@@ -24596,18 +18997,6 @@ module Aws::SageMaker
     # streaming and one-time labeling jobs. Adding an `S3DataSource` is
     # optional if you use `SnsDataSource` to create a streaming labeling
     # job.
-    #
-    # @note When making an API call, you may pass LabelingJobDataSource
-    #   data as a hash:
-    #
-    #       {
-    #         s3_data_source: {
-    #           manifest_s3_uri: "S3Uri", # required
-    #         },
-    #         sns_data_source: {
-    #           sns_topic_arn: "SnsTopicArn", # required
-    #         },
-    #       }
     #
     # @!attribute [rw] s3_data_source
     #   The Amazon S3 location of the input data objects.
@@ -24674,23 +19063,6 @@ module Aws::SageMaker
 
     # Input configuration information for a labeling job.
     #
-    # @note When making an API call, you may pass LabelingJobInputConfig
-    #   data as a hash:
-    #
-    #       {
-    #         data_source: { # required
-    #           s3_data_source: {
-    #             manifest_s3_uri: "S3Uri", # required
-    #           },
-    #           sns_data_source: {
-    #             sns_topic_arn: "SnsTopicArn", # required
-    #           },
-    #         },
-    #         data_attributes: {
-    #           content_classifiers: ["FreeOfPersonallyIdentifiableInformation"], # accepts FreeOfPersonallyIdentifiableInformation, FreeOfAdultContent
-    #         },
-    #       }
-    #
     # @!attribute [rw] data_source
     #   The location of the input data.
     #   @return [Types::LabelingJobDataSource]
@@ -24729,15 +19101,6 @@ module Aws::SageMaker
     end
 
     # Output configuration information for a labeling job.
-    #
-    # @note When making an API call, you may pass LabelingJobOutputConfig
-    #   data as a hash:
-    #
-    #       {
-    #         s3_output_path: "S3Uri", # required
-    #         kms_key_id: "KmsKeyId",
-    #         sns_topic_arn: "SnsTopicArn",
-    #       }
     #
     # @!attribute [rw] s3_output_path
     #   The Amazon S3 location to write output data.
@@ -24799,17 +19162,6 @@ module Aws::SageMaker
     # instance used to run automated data labeling model training and
     # inference.
     #
-    # @note When making an API call, you may pass LabelingJobResourceConfig
-    #   data as a hash:
-    #
-    #       {
-    #         volume_kms_key_id: "KmsKeyId",
-    #         vpc_config: {
-    #           security_group_ids: ["SecurityGroupId"], # required
-    #           subnets: ["SubnetId"], # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] volume_kms_key_id
     #   The Amazon Web Services Key Management Service (Amazon Web Services
     #   KMS) key that Amazon SageMaker uses to encrypt data on the storage
@@ -24863,13 +19215,6 @@ module Aws::SageMaker
 
     # The Amazon S3 location of the input data objects.
     #
-    # @note When making an API call, you may pass LabelingJobS3DataSource
-    #   data as a hash:
-    #
-    #       {
-    #         manifest_s3_uri: "S3Uri", # required
-    #       }
-    #
     # @!attribute [rw] manifest_s3_uri
     #   The Amazon S3 location of the manifest file that describes the input
     #   data objects.
@@ -24904,13 +19249,6 @@ module Aws::SageMaker
 
     # An Amazon SNS data source used for streaming labeling jobs.
     #
-    # @note When making an API call, you may pass LabelingJobSnsDataSource
-    #   data as a hash:
-    #
-    #       {
-    #         sns_topic_arn: "SnsTopicArn", # required
-    #       }
-    #
     # @!attribute [rw] sns_topic_arn
     #   The Amazon SNS input topic Amazon Resource Name (ARN). Specify the
     #   ARN of the input topic you will use to send new data objects to a
@@ -24933,14 +19271,6 @@ module Aws::SageMaker
     # message.
     #
     #  </note>
-    #
-    # @note When making an API call, you may pass LabelingJobStoppingConditions
-    #   data as a hash:
-    #
-    #       {
-    #         max_human_labeled_object_count: 1,
-    #         max_percentage_of_input_dataset_labeled: 1,
-    #       }
     #
     # @!attribute [rw] max_human_labeled_object_count
     #   The maximum number of objects that can be labeled by human workers.
@@ -25113,20 +19443,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListActionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source_uri: "SourceUri",
-    #         action_type: "String256",
-    #         created_after: Time.now,
-    #         created_before: Time.now,
-    #         sort_by: "Name", # accepts Name, CreationTime
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] source_uri
     #   A filter that returns only actions with the specified source URI.
     #   @return [String]
@@ -25197,19 +19513,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAlgorithmsInput
-    #   data as a hash:
-    #
-    #       {
-    #         creation_time_after: Time.now,
-    #         creation_time_before: Time.now,
-    #         max_results: 1,
-    #         name_contains: "NameContains",
-    #         next_token: "NextToken",
-    #         sort_by: "Name", # accepts Name, CreationTime
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #       }
-    #
     # @!attribute [rw] creation_time_after
     #   A filter that returns only algorithms created after the specified
     #   time (timestamp).
@@ -25278,21 +19581,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAppImageConfigsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         name_contains: "AppImageConfigName",
-    #         creation_time_before: Time.now,
-    #         creation_time_after: Time.now,
-    #         modified_time_before: Time.now,
-    #         modified_time_after: Time.now,
-    #         sort_by: "CreationTime", # accepts CreationTime, LastModifiedTime, Name
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of AppImageConfigs to return in the response. The
     #   default value is 10.
@@ -25372,18 +19660,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAppsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #         sort_by: "CreationTime", # accepts CreationTime
-    #         domain_id_equals: "DomainId",
-    #         user_profile_name_equals: "UserProfileName",
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If the previous response was truncated, you will receive this token.
     #   Use it in your next request to receive the next set of results.
@@ -25441,20 +19717,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListArtifactsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source_uri: "SourceUri",
-    #         artifact_type: "String256",
-    #         created_after: Time.now,
-    #         created_before: Time.now,
-    #         sort_by: "CreationTime", # accepts CreationTime
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] source_uri
     #   A filter that returns only artifacts with the specified source URI.
     #   @return [String]
@@ -25525,23 +19787,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAssociationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source_arn: "AssociationEntityArn",
-    #         destination_arn: "AssociationEntityArn",
-    #         source_type: "String256",
-    #         destination_type: "String256",
-    #         association_type: "ContributedTo", # accepts ContributedTo, AssociatedWith, DerivedFrom, Produced
-    #         created_after: Time.now,
-    #         created_before: Time.now,
-    #         sort_by: "SourceArn", # accepts SourceArn, DestinationArn, SourceType, DestinationType, CreationTime
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] source_arn
     #   A filter that returns only associations with the specified source
     #   ARN.
@@ -25631,22 +19876,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAutoMLJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         creation_time_after: Time.now,
-    #         creation_time_before: Time.now,
-    #         last_modified_time_after: Time.now,
-    #         last_modified_time_before: Time.now,
-    #         name_contains: "AutoMLNameContains",
-    #         status_equals: "Completed", # accepts Completed, InProgress, Failed, Stopped, Stopping
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #         sort_by: "Name", # accepts Name, CreationTime, Status
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] creation_time_after
     #   Request a list of jobs, using a filter for time.
     #   @return [Time]
@@ -25723,19 +19952,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCandidatesForAutoMLJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         auto_ml_job_name: "AutoMLJobName", # required
-    #         status_equals: "Completed", # accepts Completed, InProgress, Failed, Stopped, Stopping
-    #         candidate_name_equals: "CandidateName",
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #         sort_by: "CreationTime", # accepts CreationTime, Status, FinalObjectiveMetricValue
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] auto_ml_job_name
     #   List the candidates created for the job by providing the job's
     #   name.
@@ -25799,21 +20015,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCodeRepositoriesInput
-    #   data as a hash:
-    #
-    #       {
-    #         creation_time_after: Time.now,
-    #         creation_time_before: Time.now,
-    #         last_modified_time_after: Time.now,
-    #         last_modified_time_before: Time.now,
-    #         max_results: 1,
-    #         name_contains: "CodeRepositoryNameContains",
-    #         next_token: "NextToken",
-    #         sort_by: "Name", # accepts Name, CreationTime, LastModifiedTime
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #       }
-    #
     # @!attribute [rw] creation_time_after
     #   A filter that returns only Git repositories that were created after
     #   the specified time.
@@ -25906,22 +20107,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCompilationJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         creation_time_after: Time.now,
-    #         creation_time_before: Time.now,
-    #         last_modified_time_after: Time.now,
-    #         last_modified_time_before: Time.now,
-    #         name_contains: "NameContains",
-    #         status_equals: "INPROGRESS", # accepts INPROGRESS, COMPLETED, FAILED, STARTING, STOPPING, STOPPED
-    #         sort_by: "Name", # accepts Name, CreationTime, Status
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If the result of the previous `ListCompilationJobs` request was
     #   truncated, the response includes a `NextToken`. To retrieve the next
@@ -26008,20 +20193,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListContextsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source_uri: "SourceUri",
-    #         context_type: "String256",
-    #         created_after: Time.now,
-    #         created_before: Time.now,
-    #         sort_by: "Name", # accepts Name, CreationTime
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] source_uri
     #   A filter that returns only contexts with the specified source URI.
     #   @return [String]
@@ -26092,20 +20263,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDataQualityJobDefinitionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_name: "EndpointName",
-    #         sort_by: "Name", # accepts Name, CreationTime
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         name_contains: "NameContains",
-    #         creation_time_before: Time.now,
-    #         creation_time_after: Time.now,
-    #       }
-    #
     # @!attribute [rw] endpoint_name
     #   A filter that lists the data quality job definitions associated with
     #   the specified endpoint.
@@ -26182,21 +20339,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDeviceFleetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         creation_time_after: Time.now,
-    #         creation_time_before: Time.now,
-    #         last_modified_time_after: Time.now,
-    #         last_modified_time_before: Time.now,
-    #         name_contains: "NameContains",
-    #         sort_by: "NAME", # accepts NAME, CREATION_TIME, LAST_MODIFIED_TIME
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The response from the last list when returning a list large enough
     #   to need tokening.
@@ -26269,17 +20411,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDevicesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         latest_heartbeat_after: Time.now,
-    #         model_name: "EntityName",
-    #         device_fleet_name: "EntityName",
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The response from the last list when returning a list large enough
     #   to need tokening.
@@ -26332,14 +20463,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDomainsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If the previous response was truncated, you will receive this token.
     #   Use it in your next request to receive the next set of results.
@@ -26376,22 +20499,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEdgeDeploymentPlansRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         creation_time_after: Time.now,
-    #         creation_time_before: Time.now,
-    #         last_modified_time_after: Time.now,
-    #         last_modified_time_before: Time.now,
-    #         name_contains: "NameContains",
-    #         device_fleet_name_contains: "NameContains",
-    #         sort_by: "NAME", # accepts NAME, DEVICE_FLEET_NAME, CREATION_TIME, LAST_MODIFIED_TIME
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The response from the last list when returning a list large enough
     #   to need tokening.
@@ -26471,23 +20578,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEdgePackagingJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         creation_time_after: Time.now,
-    #         creation_time_before: Time.now,
-    #         last_modified_time_after: Time.now,
-    #         last_modified_time_before: Time.now,
-    #         name_contains: "NameContains",
-    #         model_name_contains: "NameContains",
-    #         status_equals: "STARTING", # accepts STARTING, INPROGRESS, COMPLETED, FAILED, STOPPING, STOPPED
-    #         sort_by: "NAME", # accepts NAME, MODEL_NAME, CREATION_TIME, LAST_MODIFIED_TIME, STATUS
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The response from the last list when returning a list large enough
     #   to need tokening.
@@ -26568,19 +20658,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEndpointConfigsInput
-    #   data as a hash:
-    #
-    #       {
-    #         sort_by: "Name", # accepts Name, CreationTime
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #         name_contains: "EndpointConfigNameContains",
-    #         creation_time_before: Time.now,
-    #         creation_time_after: Time.now,
-    #       }
-    #
     # @!attribute [rw] sort_by
     #   The field to sort results by. The default is `CreationTime`.
     #   @return [String]
@@ -26648,22 +20725,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEndpointsInput
-    #   data as a hash:
-    #
-    #       {
-    #         sort_by: "Name", # accepts Name, CreationTime, Status
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #         name_contains: "EndpointNameContains",
-    #         creation_time_before: Time.now,
-    #         creation_time_after: Time.now,
-    #         last_modified_time_before: Time.now,
-    #         last_modified_time_after: Time.now,
-    #         status_equals: "OutOfService", # accepts OutOfService, Creating, Updating, SystemUpdating, RollingBack, InService, Deleting, Failed
-    #       }
-    #
     # @!attribute [rw] sort_by
     #   Sorts the list of results. The default is `CreationTime`.
     #   @return [String]
@@ -26748,18 +20809,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListExperimentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         created_after: Time.now,
-    #         created_before: Time.now,
-    #         sort_by: "Name", # accepts Name, CreationTime
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] created_after
     #   A filter that returns only experiments created after the specified
     #   time.
@@ -26820,21 +20869,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFeatureGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name_contains: "FeatureGroupNameContains",
-    #         feature_group_status_equals: "Creating", # accepts Creating, Created, CreateFailed, Deleting, DeleteFailed
-    #         offline_store_status_equals: "Active", # accepts Active, Blocked, Disabled
-    #         creation_time_after: Time.now,
-    #         creation_time_before: Time.now,
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #         sort_by: "Name", # accepts Name, FeatureGroupStatus, OfflineStoreStatus, CreationTime
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] name_contains
     #   A string that partially matches one or more `FeatureGroup`s names.
     #   Filters `FeatureGroup`s by name.
@@ -26907,17 +20941,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFlowDefinitionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         creation_time_after: Time.now,
-    #         creation_time_before: Time.now,
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] creation_time_after
     #   A filter that returns only flow definitions with a creation time
     #   greater than or equal to the specified timestamp.
@@ -26973,17 +20996,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListHumanTaskUisRequest
-    #   data as a hash:
-    #
-    #       {
-    #         creation_time_after: Time.now,
-    #         creation_time_before: Time.now,
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] creation_time_after
     #   A filter that returns only human task user interfaces with a
     #   creation time greater than or equal to the specified timestamp.
@@ -27039,22 +21051,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListHyperParameterTuningJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         sort_by: "Name", # accepts Name, Status, CreationTime
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #         name_contains: "NameContains",
-    #         creation_time_after: Time.now,
-    #         creation_time_before: Time.now,
-    #         last_modified_time_after: Time.now,
-    #         last_modified_time_before: Time.now,
-    #         status_equals: "Completed", # accepts Completed, InProgress, Failed, Stopped, Stopping
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If the result of the previous `ListHyperParameterTuningJobs` request
     #   was truncated, the response includes a `NextToken`. To retrieve the
@@ -27141,21 +21137,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListImageVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         creation_time_after: Time.now,
-    #         creation_time_before: Time.now,
-    #         image_name: "ImageName", # required
-    #         last_modified_time_after: Time.now,
-    #         last_modified_time_before: Time.now,
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         sort_by: "CREATION_TIME", # accepts CREATION_TIME, LAST_MODIFIED_TIME, VERSION
-    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #       }
-    #
     # @!attribute [rw] creation_time_after
     #   A filter that returns only versions created on or after the
     #   specified time.
@@ -27233,21 +21214,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListImagesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         creation_time_after: Time.now,
-    #         creation_time_before: Time.now,
-    #         last_modified_time_after: Time.now,
-    #         last_modified_time_before: Time.now,
-    #         max_results: 1,
-    #         name_contains: "ImageNameContains",
-    #         next_token: "NextToken",
-    #         sort_by: "CREATION_TIME", # accepts CREATION_TIME, LAST_MODIFIED_TIME, IMAGE_NAME
-    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #       }
-    #
     # @!attribute [rw] creation_time_after
     #   A filter that returns only images created on or after the specified
     #   time.
@@ -27325,17 +21291,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListInferenceRecommendationsJobStepsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_name: "RecommendationJobName", # required
-    #         status: "PENDING", # accepts PENDING, IN_PROGRESS, COMPLETED, FAILED, STOPPING, STOPPED
-    #         step_type: "BENCHMARK", # accepts BENCHMARK
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] job_name
     #   The name for the Inference Recommender job.
     #   @return [String]
@@ -27392,22 +21347,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListInferenceRecommendationsJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         creation_time_after: Time.now,
-    #         creation_time_before: Time.now,
-    #         last_modified_time_after: Time.now,
-    #         last_modified_time_before: Time.now,
-    #         name_contains: "NameContains",
-    #         status_equals: "PENDING", # accepts PENDING, IN_PROGRESS, COMPLETED, FAILED, STOPPING, STOPPED
-    #         sort_by: "Name", # accepts Name, CreationTime, Status
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] creation_time_after
     #   A filter that returns only jobs created after the specified time
     #   (timestamp).
@@ -27493,20 +21432,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListLabelingJobsForWorkteamRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workteam_arn: "WorkteamArn", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         creation_time_after: Time.now,
-    #         creation_time_before: Time.now,
-    #         job_reference_code_contains: "JobReferenceCodeContains",
-    #         sort_by: "CreationTime", # accepts CreationTime
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #       }
-    #
     # @!attribute [rw] workteam_arn
     #   The Amazon Resource Name (ARN) of the work team for which you want
     #   to see labeling jobs for.
@@ -27581,22 +21506,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListLabelingJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         creation_time_after: Time.now,
-    #         creation_time_before: Time.now,
-    #         last_modified_time_after: Time.now,
-    #         last_modified_time_before: Time.now,
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         name_contains: "NameContains",
-    #         sort_by: "Name", # accepts Name, CreationTime, Status
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #         status_equals: "Initializing", # accepts Initializing, InProgress, Completed, Failed, Stopping, Stopped
-    #       }
-    #
     # @!attribute [rw] creation_time_after
     #   A filter that returns only labeling jobs created after the specified
     #   time (timestamp).
@@ -27682,18 +21591,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListLineageGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         created_after: Time.now,
-    #         created_before: Time.now,
-    #         sort_by: "Name", # accepts Name, CreationTime
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] created_after
     #   A timestamp to filter against lineage groups created after a certain
     #   point in time.
@@ -27756,20 +21653,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListModelBiasJobDefinitionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_name: "EndpointName",
-    #         sort_by: "Name", # accepts Name, CreationTime
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         name_contains: "NameContains",
-    #         creation_time_before: Time.now,
-    #         creation_time_after: Time.now,
-    #       }
-    #
     # @!attribute [rw] endpoint_name
     #   Name of the endpoint to monitor for model bias.
     #   @return [String]
@@ -27842,20 +21725,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListModelExplainabilityJobDefinitionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_name: "EndpointName",
-    #         sort_by: "Name", # accepts Name, CreationTime
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         name_contains: "NameContains",
-    #         creation_time_before: Time.now,
-    #         creation_time_after: Time.now,
-    #       }
-    #
     # @!attribute [rw] endpoint_name
     #   Name of the endpoint to monitor for model explainability.
     #   @return [String]
@@ -27929,22 +21798,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListModelMetadataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         search_expression: {
-    #           filters: [
-    #             {
-    #               name: "Domain", # required, accepts Domain, Framework, Task, FrameworkVersion
-    #               value: "String256", # required
-    #             },
-    #           ],
-    #         },
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] search_expression
     #   One or more filters that searches for the specified resource or
     #   resources in a search. All resource objects that satisfy the
@@ -27991,19 +21844,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListModelPackageGroupsInput
-    #   data as a hash:
-    #
-    #       {
-    #         creation_time_after: Time.now,
-    #         creation_time_before: Time.now,
-    #         max_results: 1,
-    #         name_contains: "NameContains",
-    #         next_token: "NextToken",
-    #         sort_by: "Name", # accepts Name, CreationTime
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #       }
-    #
     # @!attribute [rw] creation_time_after
     #   A filter that returns only model groups created after the specified
     #   time.
@@ -28071,22 +21911,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListModelPackagesInput
-    #   data as a hash:
-    #
-    #       {
-    #         creation_time_after: Time.now,
-    #         creation_time_before: Time.now,
-    #         max_results: 1,
-    #         name_contains: "NameContains",
-    #         model_approval_status: "Approved", # accepts Approved, Rejected, PendingManualApproval
-    #         model_package_group_name: "ArnOrName",
-    #         model_package_type: "Versioned", # accepts Versioned, Unversioned, Both
-    #         next_token: "NextToken",
-    #         sort_by: "Name", # accepts Name, CreationTime
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #       }
-    #
     # @!attribute [rw] creation_time_after
     #   A filter that returns only model packages created after the
     #   specified time (timestamp).
@@ -28180,20 +22004,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListModelQualityJobDefinitionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_name: "EndpointName",
-    #         sort_by: "Name", # accepts Name, CreationTime
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         name_contains: "NameContains",
-    #         creation_time_before: Time.now,
-    #         creation_time_after: Time.now,
-    #       }
-    #
     # @!attribute [rw] endpoint_name
     #   A filter that returns only model quality monitoring job definitions
     #   that are associated with the specified endpoint.
@@ -28269,19 +22079,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListModelsInput
-    #   data as a hash:
-    #
-    #       {
-    #         sort_by: "Name", # accepts Name, CreationTime
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #         name_contains: "ModelNameContains",
-    #         creation_time_before: Time.now,
-    #         creation_time_after: Time.now,
-    #       }
-    #
     # @!attribute [rw] sort_by
     #   Sorts the list of results. The default is `CreationTime`.
     #   @return [String]
@@ -28347,27 +22144,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListMonitoringExecutionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         monitoring_schedule_name: "MonitoringScheduleName",
-    #         endpoint_name: "EndpointName",
-    #         sort_by: "CreationTime", # accepts CreationTime, ScheduledTime, Status
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         scheduled_time_before: Time.now,
-    #         scheduled_time_after: Time.now,
-    #         creation_time_before: Time.now,
-    #         creation_time_after: Time.now,
-    #         last_modified_time_before: Time.now,
-    #         last_modified_time_after: Time.now,
-    #         status_equals: "Pending", # accepts Pending, Completed, CompletedWithViolations, InProgress, Failed, Stopping, Stopped
-    #         monitoring_job_definition_name: "MonitoringJobDefinitionName",
-    #         monitoring_type_equals: "DataQuality", # accepts DataQuality, ModelQuality, ModelBias, ModelExplainability
-    #       }
-    #
     # @!attribute [rw] monitoring_schedule_name
     #   Name of a specific schedule to fetch jobs for.
     #   @return [String]
@@ -28475,25 +22251,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListMonitoringSchedulesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_name: "EndpointName",
-    #         sort_by: "Name", # accepts Name, CreationTime, Status
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         name_contains: "NameContains",
-    #         creation_time_before: Time.now,
-    #         creation_time_after: Time.now,
-    #         last_modified_time_before: Time.now,
-    #         last_modified_time_after: Time.now,
-    #         status_equals: "Pending", # accepts Pending, Failed, Scheduled, Stopped
-    #         monitoring_job_definition_name: "MonitoringJobDefinitionName",
-    #         monitoring_type_equals: "DataQuality", # accepts DataQuality, ModelQuality, ModelBias, ModelExplainability
-    #       }
-    #
     # @!attribute [rw] endpoint_name
     #   Name of a specific endpoint to fetch schedules for.
     #   @return [String]
@@ -28597,21 +22354,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListNotebookInstanceLifecycleConfigsInput
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         sort_by: "Name", # accepts Name, CreationTime, LastModifiedTime
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #         name_contains: "NotebookInstanceLifecycleConfigNameContains",
-    #         creation_time_before: Time.now,
-    #         creation_time_after: Time.now,
-    #         last_modified_time_before: Time.now,
-    #         last_modified_time_after: Time.now,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If the result of a `ListNotebookInstanceLifecycleConfigs` request
     #   was truncated, the response includes a `NextToken`. To get the next
@@ -28693,25 +22435,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListNotebookInstancesInput
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         sort_by: "Name", # accepts Name, CreationTime, Status
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #         name_contains: "NotebookInstanceNameContains",
-    #         creation_time_before: Time.now,
-    #         creation_time_after: Time.now,
-    #         last_modified_time_before: Time.now,
-    #         last_modified_time_after: Time.now,
-    #         status_equals: "Pending", # accepts Pending, InService, Stopping, Stopped, Failed, Deleting, Updating
-    #         notebook_instance_lifecycle_config_name_contains: "NotebookInstanceLifecycleConfigName",
-    #         default_code_repository_contains: "CodeRepositoryContains",
-    #         additional_code_repository_equals: "CodeRepositoryNameOrUrl",
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If the previous call to the `ListNotebookInstances` is truncated,
     #   the response includes a `NextToken`. You can use this token in your
@@ -28826,16 +22549,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPipelineExecutionStepsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         pipeline_execution_arn: "PipelineExecutionArn",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #       }
-    #
     # @!attribute [rw] pipeline_execution_arn
     #   The Amazon Resource Name (ARN) of the pipeline execution.
     #   @return [String]
@@ -28891,19 +22604,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPipelineExecutionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         pipeline_name: "PipelineName", # required
-    #         created_after: Time.now,
-    #         created_before: Time.now,
-    #         sort_by: "CreationTime", # accepts CreationTime, PipelineExecutionArn
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] pipeline_name
     #   The name of the pipeline.
     #   @return [String]
@@ -28972,15 +22672,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPipelineParametersForExecutionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         pipeline_execution_arn: "PipelineExecutionArn", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] pipeline_execution_arn
     #   The Amazon Resource Name (ARN) of the pipeline execution.
     #   @return [String]
@@ -29026,19 +22717,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPipelinesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         pipeline_name_prefix: "PipelineName",
-    #         created_after: Time.now,
-    #         created_before: Time.now,
-    #         sort_by: "Name", # accepts Name, CreationTime
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] pipeline_name_prefix
     #   The prefix of the pipeline name.
     #   @return [String]
@@ -29107,22 +22785,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListProcessingJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         creation_time_after: Time.now,
-    #         creation_time_before: Time.now,
-    #         last_modified_time_after: Time.now,
-    #         last_modified_time_before: Time.now,
-    #         name_contains: "String",
-    #         status_equals: "InProgress", # accepts InProgress, Completed, Failed, Stopping, Stopped
-    #         sort_by: "Name", # accepts Name, CreationTime, Status
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] creation_time_after
     #   A filter that returns only processing jobs created after the
     #   specified time.
@@ -29207,19 +22869,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListProjectsInput
-    #   data as a hash:
-    #
-    #       {
-    #         creation_time_after: Time.now,
-    #         creation_time_before: Time.now,
-    #         max_results: 1,
-    #         name_contains: "ProjectEntityName",
-    #         next_token: "NextToken",
-    #         sort_by: "Name", # accepts Name, CreationTime
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #       }
-    #
     # @!attribute [rw] creation_time_after
     #   A filter that returns the projects that were created after a
     #   specified time.
@@ -29286,17 +22935,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListStageDevicesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         edge_deployment_plan_name: "EntityName", # required
-    #         exclude_devices_deployed_in_other_stage: false,
-    #         stage_name: "EntityName", # required
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The response from the last list when returning a list large enough
     #   to neeed tokening.
@@ -29347,22 +22985,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListStudioLifecycleConfigsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         name_contains: "StudioLifecycleConfigName",
-    #         app_type_equals: "JupyterServer", # accepts JupyterServer, KernelGateway
-    #         creation_time_before: Time.now,
-    #         creation_time_after: Time.now,
-    #         modified_time_before: Time.now,
-    #         modified_time_after: Time.now,
-    #         sort_by: "CreationTime", # accepts CreationTime, LastModifiedTime, Name
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of Studio Lifecycle Configurations to return in
     #   the response. The default value is 10.
@@ -29448,15 +23070,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSubscribedWorkteamsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name_contains: "WorkteamName",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] name_contains
     #   A string in the work team name. This filter returns only work teams
     #   whose name contains the specified string.
@@ -29502,15 +23115,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource whose tags you want
     #   to retrieve.
@@ -29555,18 +23159,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTrainingJobsForHyperParameterTuningJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         hyper_parameter_tuning_job_name: "HyperParameterTuningJobName", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         status_equals: "InProgress", # accepts InProgress, Completed, Failed, Stopping, Stopped
-    #         sort_by: "Name", # accepts Name, CreationTime, Status, FinalObjectiveMetricValue
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #       }
-    #
     # @!attribute [rw] hyper_parameter_tuning_job_name
     #   The name of the tuning job whose training jobs you want to list.
     #   @return [String]
@@ -29634,23 +23226,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTrainingJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         creation_time_after: Time.now,
-    #         creation_time_before: Time.now,
-    #         last_modified_time_after: Time.now,
-    #         last_modified_time_before: Time.now,
-    #         name_contains: "NameContains",
-    #         status_equals: "InProgress", # accepts InProgress, Completed, Failed, Stopping, Stopped
-    #         sort_by: "Name", # accepts Name, CreationTime, Status
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #         warm_pool_status_equals: "Available", # accepts Available, Terminated, Reused, InUse
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If the result of the previous `ListTrainingJobs` request was
     #   truncated, the response includes a `NextToken`. To retrieve the next
@@ -29741,22 +23316,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTransformJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         creation_time_after: Time.now,
-    #         creation_time_before: Time.now,
-    #         last_modified_time_after: Time.now,
-    #         last_modified_time_before: Time.now,
-    #         name_contains: "NameContains",
-    #         status_equals: "InProgress", # accepts InProgress, Completed, Failed, Stopping, Stopped
-    #         sort_by: "Name", # accepts Name, CreationTime, Status
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] creation_time_after
     #   A filter that returns only transform jobs created after the
     #   specified time.
@@ -29841,21 +23400,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTrialComponentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         experiment_name: "ExperimentEntityName",
-    #         trial_name: "ExperimentEntityName",
-    #         source_arn: "String256",
-    #         created_after: Time.now,
-    #         created_before: Time.now,
-    #         sort_by: "Name", # accepts Name, CreationTime
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] experiment_name
     #   A filter that returns only components that are part of the specified
     #   experiment. If you specify `ExperimentName`, you can't filter by
@@ -29937,20 +23481,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTrialsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         experiment_name: "ExperimentEntityName",
-    #         trial_component_name: "ExperimentEntityName",
-    #         created_after: Time.now,
-    #         created_before: Time.now,
-    #         sort_by: "Name", # accepts Name, CreationTime
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] experiment_name
     #   A filter that returns only trials that are part of the specified
     #   experiment.
@@ -30020,18 +23550,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListUserProfilesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #         sort_by: "CreationTime", # accepts CreationTime, LastModifiedTime
-    #         domain_id_equals: "DomainId",
-    #         user_profile_name_contains: "UserProfileName",
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If the previous response was truncated, you will receive this token.
     #   Use it in your next request to receive the next set of results.
@@ -30089,17 +23607,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListWorkforcesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         sort_by: "Name", # accepts Name, CreateDate
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #         name_contains: "WorkforceName",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] sort_by
     #   Sort workforces using the workforce name or creation date.
     #   @return [String]
@@ -30150,17 +23657,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListWorkteamsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         sort_by: "Name", # accepts Name, CreateDate
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #         name_contains: "WorkteamName",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] sort_by
     #   The field to sort results by. The default is `CreationTime`.
     #   @return [String]
@@ -30219,20 +23715,6 @@ module Aws::SageMaker
     # Defines an Amazon Cognito or your own OIDC IdP user group that is part
     # of a work team.
     #
-    # @note When making an API call, you may pass MemberDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         cognito_member_definition: {
-    #           user_pool: "CognitoUserPool", # required
-    #           user_group: "CognitoUserGroup", # required
-    #           client_id: "ClientId", # required
-    #         },
-    #         oidc_member_definition: {
-    #           groups: ["Group"], # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] cognito_member_definition
     #   The Amazon Cognito user group that is part of the work team.
     #   @return [Types::CognitoMemberDefinition]
@@ -30256,16 +23738,6 @@ module Aws::SageMaker
     end
 
     # Metadata properties of the tracking entity, trial, or trial component.
-    #
-    # @note When making an API call, you may pass MetadataProperties
-    #   data as a hash:
-    #
-    #       {
-    #         commit_id: "MetadataPropertyValue",
-    #         repository: "MetadataPropertyValue",
-    #         generated_by: "MetadataPropertyValue",
-    #         project_id: "MetadataPropertyValue",
-    #       }
     #
     # @!attribute [rw] commit_id
     #   The commit ID.
@@ -30363,14 +23835,6 @@ module Aws::SageMaker
     # You specify one metric that a hyperparameter tuning job uses as its
     # objective metric to choose the best training job.
     #
-    # @note When making an API call, you may pass MetricDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         name: "MetricName", # required
-    #         regex: "MetricRegex", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the metric.
     #   @return [String]
@@ -30396,15 +23860,6 @@ module Aws::SageMaker
     end
 
     # Details about the metrics source.
-    #
-    # @note When making an API call, you may pass MetricsSource
-    #   data as a hash:
-    #
-    #       {
-    #         content_type: "ContentType", # required
-    #         content_digest: "ContentDigest",
-    #         s3_uri: "S3Uri", # required
-    #       }
     #
     # @!attribute [rw] content_type
     #   The metric source content type.
@@ -30450,17 +23905,6 @@ module Aws::SageMaker
 
     # Docker container image configuration object for the model bias job.
     #
-    # @note When making an API call, you may pass ModelBiasAppSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         image_uri: "ImageUri", # required
-    #         config_uri: "S3Uri", # required
-    #         environment: {
-    #           "ProcessingEnvironmentKey" => "ProcessingEnvironmentValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] image_uri
     #   The container image to be run by the model bias job.
     #   @return [String]
@@ -30491,16 +23935,6 @@ module Aws::SageMaker
 
     # The configuration for a baseline model bias job.
     #
-    # @note When making an API call, you may pass ModelBiasBaselineConfig
-    #   data as a hash:
-    #
-    #       {
-    #         baselining_job_name: "ProcessingJobName",
-    #         constraints_resource: {
-    #           s3_uri: "S3Uri",
-    #         },
-    #       }
-    #
     # @!attribute [rw] baselining_job_name
     #   The name of the baseline model bias job.
     #   @return [String]
@@ -30519,49 +23953,6 @@ module Aws::SageMaker
     end
 
     # Inputs for the model bias job.
-    #
-    # @note When making an API call, you may pass ModelBiasJobInput
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_input: {
-    #           endpoint_name: "EndpointName", # required
-    #           local_path: "ProcessingLocalPath", # required
-    #           s3_input_mode: "Pipe", # accepts Pipe, File
-    #           s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
-    #           features_attribute: "String",
-    #           inference_attribute: "String",
-    #           probability_attribute: "String",
-    #           probability_threshold_attribute: 1.0,
-    #           start_time_offset: "MonitoringTimeOffsetString",
-    #           end_time_offset: "MonitoringTimeOffsetString",
-    #         },
-    #         batch_transform_input: {
-    #           data_captured_destination_s3_uri: "DestinationS3Uri", # required
-    #           dataset_format: { # required
-    #             csv: {
-    #               header: false,
-    #             },
-    #             json: {
-    #               line: false,
-    #             },
-    #             parquet: {
-    #             },
-    #           },
-    #           local_path: "ProcessingLocalPath", # required
-    #           s3_input_mode: "Pipe", # accepts Pipe, File
-    #           s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
-    #           features_attribute: "String",
-    #           inference_attribute: "String",
-    #           probability_attribute: "String",
-    #           probability_threshold_attribute: 1.0,
-    #           start_time_offset: "MonitoringTimeOffsetString",
-    #           end_time_offset: "MonitoringTimeOffsetString",
-    #         },
-    #         ground_truth_s3_input: { # required
-    #           s3_uri: "MonitoringS3Uri",
-    #         },
-    #       }
     #
     # @!attribute [rw] endpoint_input
     #   Input object for the endpoint
@@ -30587,14 +23978,6 @@ module Aws::SageMaker
 
     # Configures the timeout and maximum number of retries for processing a
     # transform job invocation.
-    #
-    # @note When making an API call, you may pass ModelClientConfig
-    #   data as a hash:
-    #
-    #       {
-    #         invocations_timeout_in_seconds: 1,
-    #         invocations_max_retries: 1,
-    #       }
     #
     # @!attribute [rw] invocations_timeout_in_seconds
     #   The timeout value in seconds for an invocation request. The default
@@ -30638,22 +24021,6 @@ module Aws::SageMaker
 
     # Data quality constraints and statistics for a model.
     #
-    # @note When making an API call, you may pass ModelDataQuality
-    #   data as a hash:
-    #
-    #       {
-    #         statistics: {
-    #           content_type: "ContentType", # required
-    #           content_digest: "ContentDigest",
-    #           s3_uri: "S3Uri", # required
-    #         },
-    #         constraints: {
-    #           content_type: "ContentType", # required
-    #           content_digest: "ContentDigest",
-    #           s3_uri: "S3Uri", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] statistics
     #   Data quality statistics for a model.
     #   @return [Types::MetricsSource]
@@ -30673,14 +24040,6 @@ module Aws::SageMaker
 
     # Specifies how to generate the endpoint name for an automatic one-click
     # Autopilot model deployment.
-    #
-    # @note When making an API call, you may pass ModelDeployConfig
-    #   data as a hash:
-    #
-    #       {
-    #         auto_generate_endpoint_name: false,
-    #         endpoint_name: "EndpointName",
-    #       }
     #
     # @!attribute [rw] auto_generate_endpoint_name
     #   Set to `True` to automatically generate an endpoint name for a
@@ -30750,17 +24109,6 @@ module Aws::SageMaker
     # Docker container image configuration object for the model
     # explainability job.
     #
-    # @note When making an API call, you may pass ModelExplainabilityAppSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         image_uri: "ImageUri", # required
-    #         config_uri: "S3Uri", # required
-    #         environment: {
-    #           "ProcessingEnvironmentKey" => "ProcessingEnvironmentValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] image_uri
     #   The container image to be run by the model explainability job.
     #   @return [String]
@@ -30791,16 +24139,6 @@ module Aws::SageMaker
 
     # The configuration for a baseline model explainability job.
     #
-    # @note When making an API call, you may pass ModelExplainabilityBaselineConfig
-    #   data as a hash:
-    #
-    #       {
-    #         baselining_job_name: "ProcessingJobName",
-    #         constraints_resource: {
-    #           s3_uri: "S3Uri",
-    #         },
-    #       }
-    #
     # @!attribute [rw] baselining_job_name
     #   The name of the baseline model explainability job.
     #   @return [String]
@@ -30819,46 +24157,6 @@ module Aws::SageMaker
     end
 
     # Inputs for the model explainability job.
-    #
-    # @note When making an API call, you may pass ModelExplainabilityJobInput
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_input: {
-    #           endpoint_name: "EndpointName", # required
-    #           local_path: "ProcessingLocalPath", # required
-    #           s3_input_mode: "Pipe", # accepts Pipe, File
-    #           s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
-    #           features_attribute: "String",
-    #           inference_attribute: "String",
-    #           probability_attribute: "String",
-    #           probability_threshold_attribute: 1.0,
-    #           start_time_offset: "MonitoringTimeOffsetString",
-    #           end_time_offset: "MonitoringTimeOffsetString",
-    #         },
-    #         batch_transform_input: {
-    #           data_captured_destination_s3_uri: "DestinationS3Uri", # required
-    #           dataset_format: { # required
-    #             csv: {
-    #               header: false,
-    #             },
-    #             json: {
-    #               line: false,
-    #             },
-    #             parquet: {
-    #             },
-    #           },
-    #           local_path: "ProcessingLocalPath", # required
-    #           s3_input_mode: "Pipe", # accepts Pipe, File
-    #           s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
-    #           features_attribute: "String",
-    #           inference_attribute: "String",
-    #           probability_attribute: "String",
-    #           probability_threshold_attribute: 1.0,
-    #           start_time_offset: "MonitoringTimeOffsetString",
-    #           end_time_offset: "MonitoringTimeOffsetString",
-    #         },
-    #       }
     #
     # @!attribute [rw] endpoint_input
     #   Input object for the endpoint
@@ -30879,13 +24177,6 @@ module Aws::SageMaker
 
     # Input object for the model.
     #
-    # @note When making an API call, you may pass ModelInput
-    #   data as a hash:
-    #
-    #       {
-    #         data_input_config: "DataInputConfig", # required
-    #       }
-    #
     # @!attribute [rw] data_input_config
     #   The input configuration object for the model.
     #   @return [String]
@@ -30899,14 +24190,6 @@ module Aws::SageMaker
     end
 
     # The model latency threshold.
-    #
-    # @note When making an API call, you may pass ModelLatencyThreshold
-    #   data as a hash:
-    #
-    #       {
-    #         percentile: "String64",
-    #         value_in_milliseconds: 1,
-    #       }
     #
     # @!attribute [rw] percentile
     #   The model latency percentile threshold.
@@ -30928,14 +24211,6 @@ module Aws::SageMaker
     # Part of the search expression. You can specify the name and value
     # (domain, task, framework, framework version, task, and model).
     #
-    # @note When making an API call, you may pass ModelMetadataFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Domain", # required, accepts Domain, Framework, Task, FrameworkVersion
-    #         value: "String256", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the of the model to filter by.
     #   @return [String]
@@ -30956,18 +24231,6 @@ module Aws::SageMaker
     # One or more filters that searches for the specified resource or
     # resources in a search. All resource objects that satisfy the
     # expression's condition are included in the search results
-    #
-    # @note When making an API call, you may pass ModelMetadataSearchExpression
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             name: "Domain", # required, accepts Domain, Framework, Task, FrameworkVersion
-    #             value: "String256", # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] filters
     #   A list of filter objects.
@@ -31016,60 +24279,6 @@ module Aws::SageMaker
     end
 
     # Contains metrics captured from a model.
-    #
-    # @note When making an API call, you may pass ModelMetrics
-    #   data as a hash:
-    #
-    #       {
-    #         model_quality: {
-    #           statistics: {
-    #             content_type: "ContentType", # required
-    #             content_digest: "ContentDigest",
-    #             s3_uri: "S3Uri", # required
-    #           },
-    #           constraints: {
-    #             content_type: "ContentType", # required
-    #             content_digest: "ContentDigest",
-    #             s3_uri: "S3Uri", # required
-    #           },
-    #         },
-    #         model_data_quality: {
-    #           statistics: {
-    #             content_type: "ContentType", # required
-    #             content_digest: "ContentDigest",
-    #             s3_uri: "S3Uri", # required
-    #           },
-    #           constraints: {
-    #             content_type: "ContentType", # required
-    #             content_digest: "ContentDigest",
-    #             s3_uri: "S3Uri", # required
-    #           },
-    #         },
-    #         bias: {
-    #           report: {
-    #             content_type: "ContentType", # required
-    #             content_digest: "ContentDigest",
-    #             s3_uri: "S3Uri", # required
-    #           },
-    #           pre_training_report: {
-    #             content_type: "ContentType", # required
-    #             content_digest: "ContentDigest",
-    #             s3_uri: "S3Uri", # required
-    #           },
-    #           post_training_report: {
-    #             content_type: "ContentType", # required
-    #             content_digest: "ContentDigest",
-    #             s3_uri: "S3Uri", # required
-    #           },
-    #         },
-    #         explainability: {
-    #           report: {
-    #             content_type: "ContentType", # required
-    #             content_digest: "ContentDigest",
-    #             s3_uri: "S3Uri", # required
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] model_quality
     #   Metrics that measure the quality of a model.
@@ -31284,26 +24493,6 @@ module Aws::SageMaker
     end
 
     # Describes the Docker container for the model package.
-    #
-    # @note When making an API call, you may pass ModelPackageContainerDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         container_hostname: "ContainerHostname",
-    #         image: "ContainerImage", # required
-    #         image_digest: "ImageDigest",
-    #         model_data_url: "Url",
-    #         product_id: "ProductId",
-    #         environment: {
-    #           "EnvironmentKey" => "EnvironmentValue",
-    #         },
-    #         model_input: {
-    #           data_input_config: "DataInputConfig", # required
-    #         },
-    #         framework: "String",
-    #         framework_version: "ModelPackageFrameworkVersion",
-    #         nearest_model_name: "String",
-    #       }
     #
     # @!attribute [rw] container_hostname
     #   The DNS host name for the Docker container.
@@ -31595,43 +24784,6 @@ module Aws::SageMaker
     # The data provided in the validation profile is made available to your
     # buyers on Amazon Web Services Marketplace.
     #
-    # @note When making an API call, you may pass ModelPackageValidationProfile
-    #   data as a hash:
-    #
-    #       {
-    #         profile_name: "EntityName", # required
-    #         transform_job_definition: { # required
-    #           max_concurrent_transforms: 1,
-    #           max_payload_in_mb: 1,
-    #           batch_strategy: "MultiRecord", # accepts MultiRecord, SingleRecord
-    #           environment: {
-    #             "TransformEnvironmentKey" => "TransformEnvironmentValue",
-    #           },
-    #           transform_input: { # required
-    #             data_source: { # required
-    #               s3_data_source: { # required
-    #                 s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
-    #                 s3_uri: "S3Uri", # required
-    #               },
-    #             },
-    #             content_type: "ContentType",
-    #             compression_type: "None", # accepts None, Gzip
-    #             split_type: "None", # accepts None, Line, RecordIO, TFRecord
-    #           },
-    #           transform_output: { # required
-    #             s3_output_path: "S3Uri", # required
-    #             accept: "Accept",
-    #             assemble_with: "None", # accepts None, Line
-    #             kms_key_id: "KmsKeyId",
-    #           },
-    #           transform_resources: { # required
-    #             instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
-    #             instance_count: 1, # required
-    #             volume_kms_key_id: "KmsKeyId",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] profile_name
     #   The name of the profile for the model package.
     #   @return [String]
@@ -31652,48 +24804,6 @@ module Aws::SageMaker
 
     # Specifies batch transform jobs that SageMaker runs to validate your
     # model package.
-    #
-    # @note When making an API call, you may pass ModelPackageValidationSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         validation_role: "RoleArn", # required
-    #         validation_profiles: [ # required
-    #           {
-    #             profile_name: "EntityName", # required
-    #             transform_job_definition: { # required
-    #               max_concurrent_transforms: 1,
-    #               max_payload_in_mb: 1,
-    #               batch_strategy: "MultiRecord", # accepts MultiRecord, SingleRecord
-    #               environment: {
-    #                 "TransformEnvironmentKey" => "TransformEnvironmentValue",
-    #               },
-    #               transform_input: { # required
-    #                 data_source: { # required
-    #                   s3_data_source: { # required
-    #                     s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
-    #                     s3_uri: "S3Uri", # required
-    #                   },
-    #                 },
-    #                 content_type: "ContentType",
-    #                 compression_type: "None", # accepts None, Gzip
-    #                 split_type: "None", # accepts None, Line, RecordIO, TFRecord
-    #               },
-    #               transform_output: { # required
-    #                 s3_output_path: "S3Uri", # required
-    #                 accept: "Accept",
-    #                 assemble_with: "None", # accepts None, Line
-    #                 kms_key_id: "KmsKeyId",
-    #               },
-    #               transform_resources: { # required
-    #                 instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
-    #                 instance_count: 1, # required
-    #                 volume_kms_key_id: "KmsKeyId",
-    #               },
-    #             },
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] validation_role
     #   The IAM roles to be used for the validation of the model package.
@@ -31716,22 +24826,6 @@ module Aws::SageMaker
 
     # Model quality statistics and constraints.
     #
-    # @note When making an API call, you may pass ModelQuality
-    #   data as a hash:
-    #
-    #       {
-    #         statistics: {
-    #           content_type: "ContentType", # required
-    #           content_digest: "ContentDigest",
-    #           s3_uri: "S3Uri", # required
-    #         },
-    #         constraints: {
-    #           content_type: "ContentType", # required
-    #           content_digest: "ContentDigest",
-    #           s3_uri: "S3Uri", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] statistics
     #   Model quality statistics.
     #   @return [Types::MetricsSource]
@@ -31750,21 +24844,6 @@ module Aws::SageMaker
     end
 
     # Container image configuration object for the monitoring job.
-    #
-    # @note When making an API call, you may pass ModelQualityAppSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         image_uri: "ImageUri", # required
-    #         container_entrypoint: ["ContainerEntrypointString"],
-    #         container_arguments: ["ContainerArgument"],
-    #         record_preprocessor_source_uri: "S3Uri",
-    #         post_analytics_processor_source_uri: "S3Uri",
-    #         problem_type: "BinaryClassification", # accepts BinaryClassification, MulticlassClassification, Regression
-    #         environment: {
-    #           "ProcessingEnvironmentKey" => "ProcessingEnvironmentValue",
-    #         },
-    #       }
     #
     # @!attribute [rw] image_uri
     #   The address of the container image that the monitoring job runs.
@@ -31822,16 +24901,6 @@ module Aws::SageMaker
     # current job from the series of jobs scheduled to collect data
     # periodically.
     #
-    # @note When making an API call, you may pass ModelQualityBaselineConfig
-    #   data as a hash:
-    #
-    #       {
-    #         baselining_job_name: "ProcessingJobName",
-    #         constraints_resource: {
-    #           s3_uri: "S3Uri",
-    #         },
-    #       }
-    #
     # @!attribute [rw] baselining_job_name
     #   The name of the job that performs baselining for the monitoring job.
     #   @return [String]
@@ -31851,49 +24920,6 @@ module Aws::SageMaker
 
     # The input for the model quality monitoring job. Currently endponts are
     # supported for input for model quality monitoring jobs.
-    #
-    # @note When making an API call, you may pass ModelQualityJobInput
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_input: {
-    #           endpoint_name: "EndpointName", # required
-    #           local_path: "ProcessingLocalPath", # required
-    #           s3_input_mode: "Pipe", # accepts Pipe, File
-    #           s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
-    #           features_attribute: "String",
-    #           inference_attribute: "String",
-    #           probability_attribute: "String",
-    #           probability_threshold_attribute: 1.0,
-    #           start_time_offset: "MonitoringTimeOffsetString",
-    #           end_time_offset: "MonitoringTimeOffsetString",
-    #         },
-    #         batch_transform_input: {
-    #           data_captured_destination_s3_uri: "DestinationS3Uri", # required
-    #           dataset_format: { # required
-    #             csv: {
-    #               header: false,
-    #             },
-    #             json: {
-    #               line: false,
-    #             },
-    #             parquet: {
-    #             },
-    #           },
-    #           local_path: "ProcessingLocalPath", # required
-    #           s3_input_mode: "Pipe", # accepts Pipe, File
-    #           s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
-    #           features_attribute: "String",
-    #           inference_attribute: "String",
-    #           probability_attribute: "String",
-    #           probability_threshold_attribute: 1.0,
-    #           start_time_offset: "MonitoringTimeOffsetString",
-    #           end_time_offset: "MonitoringTimeOffsetString",
-    #         },
-    #         ground_truth_s3_input: { # required
-    #           s3_uri: "MonitoringS3Uri",
-    #         },
-    #       }
     #
     # @!attribute [rw] endpoint_input
     #   Input object for the endpoint
@@ -31957,17 +24983,6 @@ module Aws::SageMaker
 
     # Container image configuration object for the monitoring job.
     #
-    # @note When making an API call, you may pass MonitoringAppSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         image_uri: "ImageUri", # required
-    #         container_entrypoint: ["ContainerEntrypointString"],
-    #         container_arguments: ["ContainerArgument"],
-    #         record_preprocessor_source_uri: "S3Uri",
-    #         post_analytics_processor_source_uri: "S3Uri",
-    #       }
-    #
     # @!attribute [rw] image_uri
     #   The container image to be run by the monitoring job.
     #   @return [String]
@@ -32012,19 +25027,6 @@ module Aws::SageMaker
     # current job from the series of jobs scheduled to collect data
     # periodically.
     #
-    # @note When making an API call, you may pass MonitoringBaselineConfig
-    #   data as a hash:
-    #
-    #       {
-    #         baselining_job_name: "ProcessingJobName",
-    #         constraints_resource: {
-    #           s3_uri: "S3Uri",
-    #         },
-    #         statistics_resource: {
-    #           s3_uri: "S3Uri",
-    #         },
-    #       }
-    #
     # @!attribute [rw] baselining_job_name
     #   The name of the job that performs baselining for the monitoring job.
     #   @return [String]
@@ -32050,16 +25052,6 @@ module Aws::SageMaker
     end
 
     # Configuration for the cluster used to run model monitoring jobs.
-    #
-    # @note When making an API call, you may pass MonitoringClusterConfig
-    #   data as a hash:
-    #
-    #       {
-    #         instance_count: 1, # required
-    #         instance_type: "ml.t3.medium", # required, accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
-    #         volume_size_in_gb: 1, # required
-    #         volume_kms_key_id: "KmsKeyId",
-    #       }
     #
     # @!attribute [rw] instance_count
     #   The number of ML compute instances to use in the model monitoring
@@ -32096,13 +25088,6 @@ module Aws::SageMaker
 
     # The constraints resource for a monitoring job.
     #
-    # @note When making an API call, you may pass MonitoringConstraintsResource
-    #   data as a hash:
-    #
-    #       {
-    #         s3_uri: "S3Uri",
-    #       }
-    #
     # @!attribute [rw] s3_uri
     #   The Amazon S3 URI for the constraints resource.
     #   @return [String]
@@ -32117,13 +25102,6 @@ module Aws::SageMaker
 
     # Represents the CSV dataset format used when running a monitoring job.
     #
-    # @note When making an API call, you may pass MonitoringCsvDatasetFormat
-    #   data as a hash:
-    #
-    #       {
-    #         header: false,
-    #       }
-    #
     # @!attribute [rw] header
     #   Indicates if the CSV data has a header.
     #   @return [Boolean]
@@ -32137,20 +25115,6 @@ module Aws::SageMaker
     end
 
     # Represents the dataset format used when running a monitoring job.
-    #
-    # @note When making an API call, you may pass MonitoringDatasetFormat
-    #   data as a hash:
-    #
-    #       {
-    #         csv: {
-    #           header: false,
-    #         },
-    #         json: {
-    #           line: false,
-    #         },
-    #         parquet: {
-    #         },
-    #       }
     #
     # @!attribute [rw] csv
     #   The CSV dataset used in the monitoring job.
@@ -32236,13 +25200,6 @@ module Aws::SageMaker
 
     # The ground truth labels for the dataset used for the monitoring job.
     #
-    # @note When making an API call, you may pass MonitoringGroundTruthS3Input
-    #   data as a hash:
-    #
-    #       {
-    #         s3_uri: "MonitoringS3Uri",
-    #       }
-    #
     # @!attribute [rw] s3_uri
     #   The address of the Amazon S3 location of the ground truth labels.
     #   @return [String]
@@ -32256,46 +25213,6 @@ module Aws::SageMaker
     end
 
     # The inputs for a monitoring job.
-    #
-    # @note When making an API call, you may pass MonitoringInput
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_input: {
-    #           endpoint_name: "EndpointName", # required
-    #           local_path: "ProcessingLocalPath", # required
-    #           s3_input_mode: "Pipe", # accepts Pipe, File
-    #           s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
-    #           features_attribute: "String",
-    #           inference_attribute: "String",
-    #           probability_attribute: "String",
-    #           probability_threshold_attribute: 1.0,
-    #           start_time_offset: "MonitoringTimeOffsetString",
-    #           end_time_offset: "MonitoringTimeOffsetString",
-    #         },
-    #         batch_transform_input: {
-    #           data_captured_destination_s3_uri: "DestinationS3Uri", # required
-    #           dataset_format: { # required
-    #             csv: {
-    #               header: false,
-    #             },
-    #             json: {
-    #               line: false,
-    #             },
-    #             parquet: {
-    #             },
-    #           },
-    #           local_path: "ProcessingLocalPath", # required
-    #           s3_input_mode: "Pipe", # accepts Pipe, File
-    #           s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
-    #           features_attribute: "String",
-    #           inference_attribute: "String",
-    #           probability_attribute: "String",
-    #           probability_threshold_attribute: 1.0,
-    #           start_time_offset: "MonitoringTimeOffsetString",
-    #           end_time_offset: "MonitoringTimeOffsetString",
-    #         },
-    #       }
     #
     # @!attribute [rw] endpoint_input
     #   The endpoint for a monitoring job.
@@ -32315,101 +25232,6 @@ module Aws::SageMaker
     end
 
     # Defines the monitoring job.
-    #
-    # @note When making an API call, you may pass MonitoringJobDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         baseline_config: {
-    #           baselining_job_name: "ProcessingJobName",
-    #           constraints_resource: {
-    #             s3_uri: "S3Uri",
-    #           },
-    #           statistics_resource: {
-    #             s3_uri: "S3Uri",
-    #           },
-    #         },
-    #         monitoring_inputs: [ # required
-    #           {
-    #             endpoint_input: {
-    #               endpoint_name: "EndpointName", # required
-    #               local_path: "ProcessingLocalPath", # required
-    #               s3_input_mode: "Pipe", # accepts Pipe, File
-    #               s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
-    #               features_attribute: "String",
-    #               inference_attribute: "String",
-    #               probability_attribute: "String",
-    #               probability_threshold_attribute: 1.0,
-    #               start_time_offset: "MonitoringTimeOffsetString",
-    #               end_time_offset: "MonitoringTimeOffsetString",
-    #             },
-    #             batch_transform_input: {
-    #               data_captured_destination_s3_uri: "DestinationS3Uri", # required
-    #               dataset_format: { # required
-    #                 csv: {
-    #                   header: false,
-    #                 },
-    #                 json: {
-    #                   line: false,
-    #                 },
-    #                 parquet: {
-    #                 },
-    #               },
-    #               local_path: "ProcessingLocalPath", # required
-    #               s3_input_mode: "Pipe", # accepts Pipe, File
-    #               s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
-    #               features_attribute: "String",
-    #               inference_attribute: "String",
-    #               probability_attribute: "String",
-    #               probability_threshold_attribute: 1.0,
-    #               start_time_offset: "MonitoringTimeOffsetString",
-    #               end_time_offset: "MonitoringTimeOffsetString",
-    #             },
-    #           },
-    #         ],
-    #         monitoring_output_config: { # required
-    #           monitoring_outputs: [ # required
-    #             {
-    #               s3_output: { # required
-    #                 s3_uri: "MonitoringS3Uri", # required
-    #                 local_path: "ProcessingLocalPath", # required
-    #                 s3_upload_mode: "Continuous", # accepts Continuous, EndOfJob
-    #               },
-    #             },
-    #           ],
-    #           kms_key_id: "KmsKeyId",
-    #         },
-    #         monitoring_resources: { # required
-    #           cluster_config: { # required
-    #             instance_count: 1, # required
-    #             instance_type: "ml.t3.medium", # required, accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
-    #             volume_size_in_gb: 1, # required
-    #             volume_kms_key_id: "KmsKeyId",
-    #           },
-    #         },
-    #         monitoring_app_specification: { # required
-    #           image_uri: "ImageUri", # required
-    #           container_entrypoint: ["ContainerEntrypointString"],
-    #           container_arguments: ["ContainerArgument"],
-    #           record_preprocessor_source_uri: "S3Uri",
-    #           post_analytics_processor_source_uri: "S3Uri",
-    #         },
-    #         stopping_condition: {
-    #           max_runtime_in_seconds: 1, # required
-    #         },
-    #         environment: {
-    #           "ProcessingEnvironmentKey" => "ProcessingEnvironmentValue",
-    #         },
-    #         network_config: {
-    #           enable_inter_container_traffic_encryption: false,
-    #           enable_network_isolation: false,
-    #           vpc_config: {
-    #             security_group_ids: ["SecurityGroupId"], # required
-    #             subnets: ["SubnetId"], # required
-    #           },
-    #         },
-    #         role_arn: "RoleArn", # required
-    #       }
     #
     # @!attribute [rw] baseline_config
     #   Baseline configuration used to validate that the data conforms to
@@ -32502,13 +25324,6 @@ module Aws::SageMaker
 
     # Represents the JSON dataset format used when running a monitoring job.
     #
-    # @note When making an API call, you may pass MonitoringJsonDatasetFormat
-    #   data as a hash:
-    #
-    #       {
-    #         line: false,
-    #       }
-    #
     # @!attribute [rw] line
     #   Indicates if the file should be read as a json object per line.
     #   @return [Boolean]
@@ -32522,18 +25337,6 @@ module Aws::SageMaker
     end
 
     # The networking configuration for the monitoring job.
-    #
-    # @note When making an API call, you may pass MonitoringNetworkConfig
-    #   data as a hash:
-    #
-    #       {
-    #         enable_inter_container_traffic_encryption: false,
-    #         enable_network_isolation: false,
-    #         vpc_config: {
-    #           security_group_ids: ["SecurityGroupId"], # required
-    #           subnets: ["SubnetId"], # required
-    #         },
-    #       }
     #
     # @!attribute [rw] enable_inter_container_traffic_encryption
     #   Whether to encrypt all communications between the instances used for
@@ -32572,17 +25375,6 @@ module Aws::SageMaker
 
     # The output object for a monitoring job.
     #
-    # @note When making an API call, you may pass MonitoringOutput
-    #   data as a hash:
-    #
-    #       {
-    #         s3_output: { # required
-    #           s3_uri: "MonitoringS3Uri", # required
-    #           local_path: "ProcessingLocalPath", # required
-    #           s3_upload_mode: "Continuous", # accepts Continuous, EndOfJob
-    #         },
-    #       }
-    #
     # @!attribute [rw] s3_output
     #   The Amazon S3 storage location where the results of a monitoring job
     #   are saved.
@@ -32597,22 +25389,6 @@ module Aws::SageMaker
     end
 
     # The output configuration for monitoring jobs.
-    #
-    # @note When making an API call, you may pass MonitoringOutputConfig
-    #   data as a hash:
-    #
-    #       {
-    #         monitoring_outputs: [ # required
-    #           {
-    #             s3_output: { # required
-    #               s3_uri: "MonitoringS3Uri", # required
-    #               local_path: "ProcessingLocalPath", # required
-    #               s3_upload_mode: "Continuous", # accepts Continuous, EndOfJob
-    #             },
-    #           },
-    #         ],
-    #         kms_key_id: "KmsKeyId",
-    #       }
     #
     # @!attribute [rw] monitoring_outputs
     #   Monitoring outputs for monitoring jobs. This is where the output of
@@ -32637,25 +25413,11 @@ module Aws::SageMaker
     # Represents the Parquet dataset format used when running a monitoring
     # job.
     #
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MonitoringParquetDatasetFormat AWS API Documentation
     #
     class MonitoringParquetDatasetFormat < Aws::EmptyStructure; end
 
     # Identifies the resources to deploy for a monitoring job.
-    #
-    # @note When making an API call, you may pass MonitoringResources
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_config: { # required
-    #           instance_count: 1, # required
-    #           instance_type: "ml.t3.medium", # required, accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
-    #           volume_size_in_gb: 1, # required
-    #           volume_kms_key_id: "KmsKeyId",
-    #         },
-    #       }
     #
     # @!attribute [rw] cluster_config
     #   The configuration for the cluster resources used to run the
@@ -32672,15 +25434,6 @@ module Aws::SageMaker
 
     # Information about where and how you want to store the results of a
     # monitoring job.
-    #
-    # @note When making an API call, you may pass MonitoringS3Output
-    #   data as a hash:
-    #
-    #       {
-    #         s3_uri: "MonitoringS3Uri", # required
-    #         local_path: "ProcessingLocalPath", # required
-    #         s3_upload_mode: "Continuous", # accepts Continuous, EndOfJob
-    #       }
     #
     # @!attribute [rw] s3_uri
     #   A URI that identifies the Amazon S3 storage location where Amazon
@@ -32794,108 +25547,6 @@ module Aws::SageMaker
 
     # Configures the monitoring schedule and defines the monitoring job.
     #
-    # @note When making an API call, you may pass MonitoringScheduleConfig
-    #   data as a hash:
-    #
-    #       {
-    #         schedule_config: {
-    #           schedule_expression: "ScheduleExpression", # required
-    #         },
-    #         monitoring_job_definition: {
-    #           baseline_config: {
-    #             baselining_job_name: "ProcessingJobName",
-    #             constraints_resource: {
-    #               s3_uri: "S3Uri",
-    #             },
-    #             statistics_resource: {
-    #               s3_uri: "S3Uri",
-    #             },
-    #           },
-    #           monitoring_inputs: [ # required
-    #             {
-    #               endpoint_input: {
-    #                 endpoint_name: "EndpointName", # required
-    #                 local_path: "ProcessingLocalPath", # required
-    #                 s3_input_mode: "Pipe", # accepts Pipe, File
-    #                 s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
-    #                 features_attribute: "String",
-    #                 inference_attribute: "String",
-    #                 probability_attribute: "String",
-    #                 probability_threshold_attribute: 1.0,
-    #                 start_time_offset: "MonitoringTimeOffsetString",
-    #                 end_time_offset: "MonitoringTimeOffsetString",
-    #               },
-    #               batch_transform_input: {
-    #                 data_captured_destination_s3_uri: "DestinationS3Uri", # required
-    #                 dataset_format: { # required
-    #                   csv: {
-    #                     header: false,
-    #                   },
-    #                   json: {
-    #                     line: false,
-    #                   },
-    #                   parquet: {
-    #                   },
-    #                 },
-    #                 local_path: "ProcessingLocalPath", # required
-    #                 s3_input_mode: "Pipe", # accepts Pipe, File
-    #                 s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
-    #                 features_attribute: "String",
-    #                 inference_attribute: "String",
-    #                 probability_attribute: "String",
-    #                 probability_threshold_attribute: 1.0,
-    #                 start_time_offset: "MonitoringTimeOffsetString",
-    #                 end_time_offset: "MonitoringTimeOffsetString",
-    #               },
-    #             },
-    #           ],
-    #           monitoring_output_config: { # required
-    #             monitoring_outputs: [ # required
-    #               {
-    #                 s3_output: { # required
-    #                   s3_uri: "MonitoringS3Uri", # required
-    #                   local_path: "ProcessingLocalPath", # required
-    #                   s3_upload_mode: "Continuous", # accepts Continuous, EndOfJob
-    #                 },
-    #               },
-    #             ],
-    #             kms_key_id: "KmsKeyId",
-    #           },
-    #           monitoring_resources: { # required
-    #             cluster_config: { # required
-    #               instance_count: 1, # required
-    #               instance_type: "ml.t3.medium", # required, accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
-    #               volume_size_in_gb: 1, # required
-    #               volume_kms_key_id: "KmsKeyId",
-    #             },
-    #           },
-    #           monitoring_app_specification: { # required
-    #             image_uri: "ImageUri", # required
-    #             container_entrypoint: ["ContainerEntrypointString"],
-    #             container_arguments: ["ContainerArgument"],
-    #             record_preprocessor_source_uri: "S3Uri",
-    #             post_analytics_processor_source_uri: "S3Uri",
-    #           },
-    #           stopping_condition: {
-    #             max_runtime_in_seconds: 1, # required
-    #           },
-    #           environment: {
-    #             "ProcessingEnvironmentKey" => "ProcessingEnvironmentValue",
-    #           },
-    #           network_config: {
-    #             enable_inter_container_traffic_encryption: false,
-    #             enable_network_isolation: false,
-    #             vpc_config: {
-    #               security_group_ids: ["SecurityGroupId"], # required
-    #               subnets: ["SubnetId"], # required
-    #             },
-    #           },
-    #           role_arn: "RoleArn", # required
-    #         },
-    #         monitoring_job_definition_name: "MonitoringJobDefinitionName",
-    #         monitoring_type: "DataQuality", # accepts DataQuality, ModelQuality, ModelBias, ModelExplainability
-    #       }
-    #
     # @!attribute [rw] schedule_config
     #   Configures the monitoring schedule.
     #   @return [Types::ScheduleConfig]
@@ -32974,13 +25625,6 @@ module Aws::SageMaker
 
     # The statistics resource for a monitoring job.
     #
-    # @note When making an API call, you may pass MonitoringStatisticsResource
-    #   data as a hash:
-    #
-    #       {
-    #         s3_uri: "S3Uri",
-    #       }
-    #
     # @!attribute [rw] s3_uri
     #   The Amazon S3 URI for the statistics resource.
     #   @return [String]
@@ -32995,13 +25639,6 @@ module Aws::SageMaker
 
     # A time limit for how long the monitoring job is allowed to run before
     # stopping.
-    #
-    # @note When making an API call, you may pass MonitoringStoppingCondition
-    #   data as a hash:
-    #
-    #       {
-    #         max_runtime_in_seconds: 1, # required
-    #       }
     #
     # @!attribute [rw] max_runtime_in_seconds
     #   The maximum runtime allowed in seconds.
@@ -33023,13 +25660,6 @@ module Aws::SageMaker
     end
 
     # Specifies additional configuration for hosting multi-model endpoints.
-    #
-    # @note When making an API call, you may pass MultiModelConfig
-    #   data as a hash:
-    #
-    #       {
-    #         model_cache_setting: "Enabled", # accepts Enabled, Disabled
-    #       }
     #
     # @!attribute [rw] model_cache_setting
     #   Whether to cache models for a multi-model endpoint. By default,
@@ -33059,14 +25689,6 @@ module Aws::SageMaker
     #
     #
     # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/neo-vpc.html
-    #
-    # @note When making an API call, you may pass NeoVpcConfig
-    #   data as a hash:
-    #
-    #       {
-    #         security_group_ids: ["NeoVpcSecurityGroupId"], # required
-    #         subnets: ["NeoVpcSubnetId"], # required
-    #       }
     #
     # @!attribute [rw] security_group_ids
     #   The VPC security group IDs. IDs have the form of `sg-xxxxxxxx`.
@@ -33102,20 +25724,6 @@ module Aws::SageMaker
     # * `'\{Name:"InputDataConfig.DataSource.S3DataSource.S3Uri",
     #   "Operator":"Contains", "Value":"mybucket/catdata"\}'`
     #
-    # @note When making an API call, you may pass NestedFilters
-    #   data as a hash:
-    #
-    #       {
-    #         nested_property_name: "ResourcePropertyName", # required
-    #         filters: [ # required
-    #           {
-    #             name: "ResourcePropertyName", # required
-    #             operator: "Equals", # accepts Equals, NotEquals, GreaterThan, GreaterThanOrEqualTo, LessThan, LessThanOrEqualTo, Contains, Exists, NotExists, In
-    #             value: "FilterValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] nested_property_name
     #   The name of the property to use in the nested filters. The value
     #   must match a listed property name, such as `InputDataConfig`.
@@ -33142,18 +25750,6 @@ module Aws::SageMaker
     # between containers, whether to allow inbound and outbound network
     # calls to and from containers, and the VPC subnets and security groups
     # to use for VPC-enabled jobs.
-    #
-    # @note When making an API call, you may pass NetworkConfig
-    #   data as a hash:
-    #
-    #       {
-    #         enable_inter_container_traffic_encryption: false,
-    #         enable_network_isolation: false,
-    #         vpc_config: {
-    #           security_group_ids: ["SecurityGroupId"], # required
-    #           subnets: ["SubnetId"], # required
-    #         },
-    #       }
     #
     # @!attribute [rw] enable_inter_container_traffic_encryption
     #   Whether to encrypt all communications between distributed processing
@@ -33241,13 +25837,6 @@ module Aws::SageMaker
     #
     #
     # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
-    #
-    # @note When making an API call, you may pass NotebookInstanceLifecycleHook
-    #   data as a hash:
-    #
-    #       {
-    #         content: "NotebookInstanceLifecycleConfigContent",
-    #       }
     #
     # @!attribute [rw] content
     #   A base64-encoded string that contains a shell script for a notebook
@@ -33357,13 +25946,6 @@ module Aws::SageMaker
     # Configures Amazon SNS notifications of available or expiring work
     # items for work teams.
     #
-    # @note When making an API call, you may pass NotificationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         notification_topic_arn: "NotificationTopicArn",
-    #       }
-    #
     # @!attribute [rw] notification_topic_arn
     #   The ARN for the Amazon SNS topic to which notifications should be
     #   published.
@@ -33420,23 +26002,6 @@ module Aws::SageMaker
     # Amazon Web Services Key Management Service (KMS) key ID, or
     # `KMSKeyId`, in `S3StorageConfig`.
     #
-    # @note When making an API call, you may pass OfflineStoreConfig
-    #   data as a hash:
-    #
-    #       {
-    #         s3_storage_config: { # required
-    #           s3_uri: "S3Uri", # required
-    #           kms_key_id: "KmsKeyId",
-    #           resolved_output_s3_uri: "S3Uri",
-    #         },
-    #         disable_glue_table_creation: false,
-    #         data_catalog_config: {
-    #           table_name: "TableName", # required
-    #           catalog: "Catalog", # required
-    #           database: "Database", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] s3_storage_config
     #   The Amazon Simple Storage (Amazon S3) location of `OfflineStore`.
     #   @return [Types::S3StorageConfig]
@@ -33482,20 +26047,6 @@ module Aws::SageMaker
     end
 
     # Use this parameter to configure your OIDC Identity Provider (IdP).
-    #
-    # @note When making an API call, you may pass OidcConfig
-    #   data as a hash:
-    #
-    #       {
-    #         client_id: "ClientId", # required
-    #         client_secret: "ClientSecret", # required
-    #         issuer: "OidcEndpoint", # required
-    #         authorization_endpoint: "OidcEndpoint", # required
-    #         token_endpoint: "OidcEndpoint", # required
-    #         user_info_endpoint: "OidcEndpoint", # required
-    #         logout_endpoint: "OidcEndpoint", # required
-    #         jwks_uri: "OidcEndpoint", # required
-    #       }
     #
     # @!attribute [rw] client_id
     #   The OIDC IdP client ID used to configure your private workforce.
@@ -33605,13 +26156,6 @@ module Aws::SageMaker
     # to a private work team, all workers in that user group are added to
     # the work team.
     #
-    # @note When making an API call, you may pass OidcMemberDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         groups: ["Group"], # required
-    #       }
-    #
     # @!attribute [rw] groups
     #   A list of comma seperated strings that identifies user groups in
     #   your OIDC IdP. Each user group is made up of a group of private
@@ -33630,16 +26174,6 @@ module Aws::SageMaker
     # (KMS) Key ID, or `KMSKeyId`, for at rest data encryption. You can turn
     # `OnlineStore` on or off by specifying the `EnableOnlineStore` flag at
     # General Assembly; the default value is `False`.
-    #
-    # @note When making an API call, you may pass OnlineStoreConfig
-    #   data as a hash:
-    #
-    #       {
-    #         security_config: {
-    #           kms_key_id: "KmsKeyId",
-    #         },
-    #         enable_online_store: false,
-    #       }
     #
     # @!attribute [rw] security_config
     #   Use to specify KMS Key ID (`KMSKeyId`) for at-rest encryption of
@@ -33664,13 +26198,6 @@ module Aws::SageMaker
     end
 
     # The security configuration for `OnlineStore`.
-    #
-    # @note When making an API call, you may pass OnlineStoreSecurityConfig
-    #   data as a hash:
-    #
-    #       {
-    #         kms_key_id: "KmsKeyId",
-    #       }
     #
     # @!attribute [rw] kms_key_id
     #   The ID of the Amazon Web Services Key Management Service (Amazon Web
@@ -33727,21 +26254,6 @@ module Aws::SageMaker
     # use `TargetPlatform` to describe the platform of your edge device and
     # `CompilerOptions` if there are specific settings that are required or
     # recommended to use for particular TargetPlatform.
-    #
-    # @note When making an API call, you may pass OutputConfig
-    #   data as a hash:
-    #
-    #       {
-    #         s3_output_location: "S3Uri", # required
-    #         target_device: "lambda", # accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_g4dn, ml_inf1, ml_eia2, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, sitara_am57x, amba_cv2, amba_cv22, amba_cv25, x86_win32, x86_win64, coreml, jacinto_tda4vm, imx8mplus
-    #         target_platform: {
-    #           os: "ANDROID", # required, accepts ANDROID, LINUX
-    #           arch: "X86_64", # required, accepts X86_64, X86, ARM64, ARM_EABI, ARM_EABIHF
-    #           accelerator: "INTEL_GRAPHICS", # accepts INTEL_GRAPHICS, MALI, NVIDIA, NNA
-    #         },
-    #         compiler_options: "CompilerOptions",
-    #         kms_key_id: "KmsKeyId",
-    #       }
     #
     # @!attribute [rw] s3_output_location
     #   Identifies the S3 bucket where you want Amazon SageMaker to store
@@ -33944,14 +26456,6 @@ module Aws::SageMaker
     # Provides information about how to store model training results (model
     # artifacts).
     #
-    # @note When making an API call, you may pass OutputDataConfig
-    #   data as a hash:
-    #
-    #       {
-    #         kms_key_id: "KmsKeyId",
-    #         s3_output_path: "S3Uri", # required
-    #       }
-    #
     # @!attribute [rw] kms_key_id
     #   The Amazon Web Services Key Management Service (Amazon Web Services
     #   KMS) key that SageMaker uses to encrypt the model artifacts at rest
@@ -34013,14 +26517,6 @@ module Aws::SageMaker
 
     # An output parameter of a pipeline step.
     #
-    # @note When making an API call, you may pass OutputParameter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String256", # required
-    #         value: "String1024", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the output parameter.
     #   @return [String]
@@ -34042,13 +26538,6 @@ module Aws::SageMaker
     # default, the parallelism configuration specified applies to all
     # executions of the pipeline unless overridden.
     #
-    # @note When making an API call, you may pass ParallelismConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         max_parallel_execution_steps: 1, # required
-    #       }
-    #
     # @!attribute [rw] max_parallel_execution_steps
     #   The max number of steps that can be executed in parallel.
     #   @return [Integer]
@@ -34062,14 +26551,6 @@ module Aws::SageMaker
     end
 
     # Assigns a value to a named Pipeline parameter.
-    #
-    # @note When making an API call, you may pass Parameter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "PipelineParameterName", # required
-    #         value: "String1024", # required
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the parameter to assign a value to. This parameter name
@@ -34091,23 +26572,6 @@ module Aws::SageMaker
 
     # Defines the possible values for categorical, continuous, and integer
     # hyperparameters to be used by an algorithm.
-    #
-    # @note When making an API call, you may pass ParameterRange
-    #   data as a hash:
-    #
-    #       {
-    #         integer_parameter_range_specification: {
-    #           min_value: "ParameterValue", # required
-    #           max_value: "ParameterValue", # required
-    #         },
-    #         continuous_parameter_range_specification: {
-    #           min_value: "ParameterValue", # required
-    #           max_value: "ParameterValue", # required
-    #         },
-    #         categorical_parameter_range_specification: {
-    #           values: ["ParameterValue"], # required
-    #         },
-    #       }
     #
     # @!attribute [rw] integer_parameter_range_specification
     #   A `IntegerParameterRangeSpecification` object that defines the
@@ -34148,34 +26612,6 @@ module Aws::SageMaker
     # maximum number specified.
     #
     #  </note>
-    #
-    # @note When making an API call, you may pass ParameterRanges
-    #   data as a hash:
-    #
-    #       {
-    #         integer_parameter_ranges: [
-    #           {
-    #             name: "ParameterKey", # required
-    #             min_value: "ParameterValue", # required
-    #             max_value: "ParameterValue", # required
-    #             scaling_type: "Auto", # accepts Auto, Linear, Logarithmic, ReverseLogarithmic
-    #           },
-    #         ],
-    #         continuous_parameter_ranges: [
-    #           {
-    #             name: "ParameterKey", # required
-    #             min_value: "ParameterValue", # required
-    #             max_value: "ParameterValue", # required
-    #             scaling_type: "Auto", # accepts Auto, Linear, Logarithmic, ReverseLogarithmic
-    #           },
-    #         ],
-    #         categorical_parameter_ranges: [
-    #           {
-    #             name: "ParameterKey", # required
-    #             values: ["ParameterValue"], # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] integer_parameter_ranges
     #   The array of IntegerParameterRange objects that specify ranges of
@@ -34227,13 +26663,6 @@ module Aws::SageMaker
 
     # A previously completed or stopped hyperparameter tuning job to be used
     # as a starting point for a new hyperparameter tuning job.
-    #
-    # @note When making an API call, you may pass ParentHyperParameterTuningJob
-    #   data as a hash:
-    #
-    #       {
-    #         hyper_parameter_tuning_job_name: "HyperParameterTuningJobName",
-    #       }
     #
     # @!attribute [rw] hyper_parameter_tuning_job_name
     #   The name of the hyperparameter tuning job to be used as a starting
@@ -34357,15 +26786,6 @@ module Aws::SageMaker
 
     # Defines the traffic pattern.
     #
-    # @note When making an API call, you may pass Phase
-    #   data as a hash:
-    #
-    #       {
-    #         initial_number_of_users: 1,
-    #         spawn_rate: 1,
-    #         duration_in_seconds: 1,
-    #       }
-    #
     # @!attribute [rw] initial_number_of_users
     #   Specifies how many concurrent users to start with.
     #   @return [Integer]
@@ -34466,15 +26886,6 @@ module Aws::SageMaker
     end
 
     # The location of the pipeline definition stored in Amazon S3.
-    #
-    # @note When making an API call, you may pass PipelineDefinitionS3Location
-    #   data as a hash:
-    #
-    #       {
-    #         bucket: "BucketName", # required
-    #         object_key: "Key", # required
-    #         version_id: "VersionId",
-    #       }
     #
     # @!attribute [rw] bucket
     #   Name of the S3 bucket.
@@ -34879,16 +27290,6 @@ module Aws::SageMaker
 
     # Configuration for the cluster used to run a processing job.
     #
-    # @note When making an API call, you may pass ProcessingClusterConfig
-    #   data as a hash:
-    #
-    #       {
-    #         instance_count: 1, # required
-    #         instance_type: "ml.t3.medium", # required, accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
-    #         volume_size_in_gb: 1, # required
-    #         volume_kms_key_id: "KmsKeyId",
-    #       }
-    #
     # @!attribute [rw] instance_count
     #   The number of ML compute instances to use in the processing job. For
     #   distributed processing jobs, specify a value greater than 1. The
@@ -34960,13 +27361,6 @@ module Aws::SageMaker
     # Configuration for processing job outputs in Amazon SageMaker Feature
     # Store.
     #
-    # @note When making an API call, you may pass ProcessingFeatureStoreOutput
-    #   data as a hash:
-    #
-    #       {
-    #         feature_group_name: "FeatureGroupName", # required
-    #       }
-    #
     # @!attribute [rw] feature_group_name
     #   The name of the Amazon SageMaker FeatureGroup to use as the
     #   destination for processing job output. Note that your processing
@@ -34983,48 +27377,6 @@ module Aws::SageMaker
 
     # The inputs for a processing job. The processing input must specify
     # exactly one of either `S3Input` or `DatasetDefinition` types.
-    #
-    # @note When making an API call, you may pass ProcessingInput
-    #   data as a hash:
-    #
-    #       {
-    #         input_name: "String", # required
-    #         app_managed: false,
-    #         s3_input: {
-    #           s3_uri: "S3Uri", # required
-    #           local_path: "ProcessingLocalPath",
-    #           s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix
-    #           s3_input_mode: "Pipe", # accepts Pipe, File
-    #           s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
-    #           s3_compression_type: "None", # accepts None, Gzip
-    #         },
-    #         dataset_definition: {
-    #           athena_dataset_definition: {
-    #             catalog: "AthenaCatalog", # required
-    #             database: "AthenaDatabase", # required
-    #             query_string: "AthenaQueryString", # required
-    #             work_group: "AthenaWorkGroup",
-    #             output_s3_uri: "S3Uri", # required
-    #             kms_key_id: "KmsKeyId",
-    #             output_format: "PARQUET", # required, accepts PARQUET, ORC, AVRO, JSON, TEXTFILE
-    #             output_compression: "GZIP", # accepts GZIP, SNAPPY, ZLIB
-    #           },
-    #           redshift_dataset_definition: {
-    #             cluster_id: "RedshiftClusterId", # required
-    #             database: "RedshiftDatabase", # required
-    #             db_user: "RedshiftUserName", # required
-    #             query_string: "RedshiftQueryString", # required
-    #             cluster_role_arn: "RoleArn", # required
-    #             output_s3_uri: "S3Uri", # required
-    #             kms_key_id: "KmsKeyId",
-    #             output_format: "PARQUET", # required, accepts PARQUET, CSV
-    #             output_compression: "None", # accepts None, GZIP, BZIP2, ZSTD, SNAPPY
-    #           },
-    #           local_path: "ProcessingLocalPath",
-    #           data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
-    #           input_mode: "Pipe", # accepts Pipe, File
-    #         },
-    #       }
     #
     # @!attribute [rw] input_name
     #   The name for the processing job input.
@@ -35276,22 +27628,6 @@ module Aws::SageMaker
     # specify exactly one of either `S3Output` or `FeatureStoreOutput`
     # types.
     #
-    # @note When making an API call, you may pass ProcessingOutput
-    #   data as a hash:
-    #
-    #       {
-    #         output_name: "String", # required
-    #         s3_output: {
-    #           s3_uri: "S3Uri", # required
-    #           local_path: "ProcessingLocalPath", # required
-    #           s3_upload_mode: "Continuous", # required, accepts Continuous, EndOfJob
-    #         },
-    #         feature_store_output: {
-    #           feature_group_name: "FeatureGroupName", # required
-    #         },
-    #         app_managed: false,
-    #       }
-    #
     # @!attribute [rw] output_name
     #   The name for the processing job output.
     #   @return [String]
@@ -35325,27 +27661,6 @@ module Aws::SageMaker
 
     # Configuration for uploading output from the processing container.
     #
-    # @note When making an API call, you may pass ProcessingOutputConfig
-    #   data as a hash:
-    #
-    #       {
-    #         outputs: [ # required
-    #           {
-    #             output_name: "String", # required
-    #             s3_output: {
-    #               s3_uri: "S3Uri", # required
-    #               local_path: "ProcessingLocalPath", # required
-    #               s3_upload_mode: "Continuous", # required, accepts Continuous, EndOfJob
-    #             },
-    #             feature_store_output: {
-    #               feature_group_name: "FeatureGroupName", # required
-    #             },
-    #             app_managed: false,
-    #           },
-    #         ],
-    #         kms_key_id: "KmsKeyId",
-    #       }
-    #
     # @!attribute [rw] outputs
     #   An array of outputs configuring the data to upload from the
     #   processing container.
@@ -35372,18 +27687,6 @@ module Aws::SageMaker
     # to deploy for a processing job. In distributed training, you specify
     # more than one instance.
     #
-    # @note When making an API call, you may pass ProcessingResources
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_config: { # required
-    #           instance_count: 1, # required
-    #           instance_type: "ml.t3.medium", # required, accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
-    #           volume_size_in_gb: 1, # required
-    #           volume_kms_key_id: "KmsKeyId",
-    #         },
-    #       }
-    #
     # @!attribute [rw] cluster_config
     #   The configuration for the resources in a cluster used to run the
     #   processing job.
@@ -35399,18 +27702,6 @@ module Aws::SageMaker
 
     # Configuration for downloading input data from Amazon S3 into the
     # processing container.
-    #
-    # @note When making an API call, you may pass ProcessingS3Input
-    #   data as a hash:
-    #
-    #       {
-    #         s3_uri: "S3Uri", # required
-    #         local_path: "ProcessingLocalPath",
-    #         s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix
-    #         s3_input_mode: "Pipe", # accepts Pipe, File
-    #         s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
-    #         s3_compression_type: "None", # accepts None, Gzip
-    #       }
     #
     # @!attribute [rw] s3_uri
     #   The URI of the Amazon S3 prefix Amazon SageMaker downloads data
@@ -35474,15 +27765,6 @@ module Aws::SageMaker
     # Configuration for uploading output data to Amazon S3 from the
     # processing container.
     #
-    # @note When making an API call, you may pass ProcessingS3Output
-    #   data as a hash:
-    #
-    #       {
-    #         s3_uri: "S3Uri", # required
-    #         local_path: "ProcessingLocalPath", # required
-    #         s3_upload_mode: "Continuous", # required, accepts Continuous, EndOfJob
-    #       }
-    #
     # @!attribute [rw] s3_uri
     #   A URI that identifies the Amazon S3 bucket where you want Amazon
     #   SageMaker to save the results of a processing job.
@@ -35515,13 +27797,6 @@ module Aws::SageMaker
     # stopped, such as how long the processing job has been running. After
     # the condition is met, the processing job is stopped.
     #
-    # @note When making an API call, you may pass ProcessingStoppingCondition
-    #   data as a hash:
-    #
-    #       {
-    #         max_runtime_in_seconds: 1, # required
-    #       }
-    #
     # @!attribute [rw] max_runtime_in_seconds
     #   Specifies the maximum runtime in seconds.
     #   @return [Integer]
@@ -35538,29 +27813,6 @@ module Aws::SageMaker
     # deploy for hosting it. If you are deploying multiple models, tell
     # SageMaker how to distribute traffic among the models by specifying
     # variant weights.
-    #
-    # @note When making an API call, you may pass ProductionVariant
-    #   data as a hash:
-    #
-    #       {
-    #         variant_name: "VariantName", # required
-    #         model_name: "ModelName", # required
-    #         initial_instance_count: 1,
-    #         instance_type: "ml.t2.medium", # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge, ml.c6i.large, ml.c6i.xlarge, ml.c6i.2xlarge, ml.c6i.4xlarge, ml.c6i.8xlarge, ml.c6i.12xlarge, ml.c6i.16xlarge, ml.c6i.24xlarge, ml.c6i.32xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.12xlarge, ml.g5.16xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.p4d.24xlarge, ml.c7g.large, ml.c7g.xlarge, ml.c7g.2xlarge, ml.c7g.4xlarge, ml.c7g.8xlarge, ml.c7g.12xlarge, ml.c7g.16xlarge, ml.m6g.large, ml.m6g.xlarge, ml.m6g.2xlarge, ml.m6g.4xlarge, ml.m6g.8xlarge, ml.m6g.12xlarge, ml.m6g.16xlarge, ml.m6gd.large, ml.m6gd.xlarge, ml.m6gd.2xlarge, ml.m6gd.4xlarge, ml.m6gd.8xlarge, ml.m6gd.12xlarge, ml.m6gd.16xlarge, ml.c6g.large, ml.c6g.xlarge, ml.c6g.2xlarge, ml.c6g.4xlarge, ml.c6g.8xlarge, ml.c6g.12xlarge, ml.c6g.16xlarge, ml.c6gd.large, ml.c6gd.xlarge, ml.c6gd.2xlarge, ml.c6gd.4xlarge, ml.c6gd.8xlarge, ml.c6gd.12xlarge, ml.c6gd.16xlarge, ml.c6gn.large, ml.c6gn.xlarge, ml.c6gn.2xlarge, ml.c6gn.4xlarge, ml.c6gn.8xlarge, ml.c6gn.12xlarge, ml.c6gn.16xlarge, ml.r6g.large, ml.r6g.xlarge, ml.r6g.2xlarge, ml.r6g.4xlarge, ml.r6g.8xlarge, ml.r6g.12xlarge, ml.r6g.16xlarge, ml.r6gd.large, ml.r6gd.xlarge, ml.r6gd.2xlarge, ml.r6gd.4xlarge, ml.r6gd.8xlarge, ml.r6gd.12xlarge, ml.r6gd.16xlarge
-    #         initial_variant_weight: 1.0,
-    #         accelerator_type: "ml.eia1.medium", # accepts ml.eia1.medium, ml.eia1.large, ml.eia1.xlarge, ml.eia2.medium, ml.eia2.large, ml.eia2.xlarge
-    #         core_dump_config: {
-    #           destination_s3_uri: "DestinationS3Uri", # required
-    #           kms_key_id: "KmsKeyId",
-    #         },
-    #         serverless_config: {
-    #           memory_size_in_mb: 1, # required
-    #           max_concurrency: 1, # required
-    #         },
-    #         volume_size_in_gb: 1,
-    #         model_data_download_timeout_in_seconds: 1,
-    #         container_startup_health_check_timeout_in_seconds: 1,
-    #       }
     #
     # @!attribute [rw] variant_name
     #   The name of the production variant.
@@ -35653,14 +27905,6 @@ module Aws::SageMaker
     # Specifies configuration for a core dump from the model container when
     # the process crashes.
     #
-    # @note When making an API call, you may pass ProductionVariantCoreDumpConfig
-    #   data as a hash:
-    #
-    #       {
-    #         destination_s3_uri: "DestinationS3Uri", # required
-    #         kms_key_id: "KmsKeyId",
-    #       }
-    #
     # @!attribute [rw] destination_s3_uri
     #   The Amazon S3 bucket to send the core dump to.
     #   @return [String]
@@ -35720,14 +27964,6 @@ module Aws::SageMaker
     end
 
     # Specifies the serverless configuration for an endpoint variant.
-    #
-    # @note When making an API call, you may pass ProductionVariantServerlessConfig
-    #   data as a hash:
-    #
-    #       {
-    #         memory_size_in_mb: 1, # required
-    #         max_concurrency: 1, # required
-    #       }
     #
     # @!attribute [rw] memory_size_in_mb
     #   The memory size of your serverless endpoint. Valid values are in 1
@@ -35853,18 +28089,6 @@ module Aws::SageMaker
     # Configuration information for Debugger system monitoring, framework
     # profiling, and storage paths.
     #
-    # @note When making an API call, you may pass ProfilerConfig
-    #   data as a hash:
-    #
-    #       {
-    #         s3_output_path: "S3Uri",
-    #         profiling_interval_in_milliseconds: 1,
-    #         profiling_parameters: {
-    #           "ConfigKey" => "ConfigValue",
-    #         },
-    #         disable_profiler: false,
-    #       }
-    #
     # @!attribute [rw] s3_output_path
     #   Path to Amazon S3 storage location for system and framework metrics.
     #   @return [String]
@@ -35910,18 +28134,6 @@ module Aws::SageMaker
     # parameters, system and framework metrics configurations, and storage
     # paths.
     #
-    # @note When making an API call, you may pass ProfilerConfigForUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         s3_output_path: "S3Uri",
-    #         profiling_interval_in_milliseconds: 1,
-    #         profiling_parameters: {
-    #           "ConfigKey" => "ConfigValue",
-    #         },
-    #         disable_profiler: false,
-    #       }
-    #
     # @!attribute [rw] s3_output_path
     #   Path to Amazon S3 storage location for system and framework metrics.
     #   @return [String]
@@ -35964,21 +28176,6 @@ module Aws::SageMaker
     end
 
     # Configuration information for profiling rules.
-    #
-    # @note When making an API call, you may pass ProfilerRuleConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         rule_configuration_name: "RuleConfigurationName", # required
-    #         local_path: "DirectoryPath",
-    #         s3_output_path: "S3Uri",
-    #         rule_evaluator_image: "AlgorithmImage", # required
-    #         instance_type: "ml.t3.medium", # accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
-    #         volume_size_in_gb: 1,
-    #         rule_parameters: {
-    #           "ConfigKey" => "ConfigValue",
-    #         },
-    #       }
     #
     # @!attribute [rw] rule_configuration_name
     #   The name of the rule configuration. It must be unique relative to
@@ -36192,13 +28389,6 @@ module Aws::SageMaker
     # Part of the `SuggestionQuery` type. Specifies a hint for retrieving
     # property names that begin with the specified text.
     #
-    # @note When making an API call, you may pass PropertyNameQuery
-    #   data as a hash:
-    #
-    #       {
-    #         property_name_hint: "PropertyNameHint", # required
-    #       }
-    #
     # @!attribute [rw] property_name_hint
     #   Text that begins a property's name.
     #   @return [String]
@@ -36234,14 +28424,6 @@ module Aws::SageMaker
     #
     #
     # [1]: https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html
-    #
-    # @note When making an API call, you may pass ProvisioningParameter
-    #   data as a hash:
-    #
-    #       {
-    #         key: "ProvisioningParameterKey",
-    #         value: "ProvisioningParameterValue",
-    #       }
     #
     # @!attribute [rw] key
     #   The key that identifies a provisioning parameter.
@@ -36466,17 +28648,6 @@ module Aws::SageMaker
     #
     # * 0\.012
     #
-    # @note When making an API call, you may pass PublicWorkforceTaskPrice
-    #   data as a hash:
-    #
-    #       {
-    #         amount_in_usd: {
-    #           dollars: 1,
-    #           cents: 1,
-    #           tenth_fractions_of_a_cent: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] amount_in_usd
     #   Defines the amount of money paid to an Amazon Mechanical Turk worker
     #   in United States dollars.
@@ -36490,14 +28661,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutModelPackageGroupPolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         model_package_group_name: "EntityName", # required
-    #         resource_policy: "PolicyString", # required
-    #       }
-    #
     # @!attribute [rw] model_package_group_name
     #   The name of the model group to add a resource policy to.
     #   @return [String]
@@ -36606,21 +28769,6 @@ module Aws::SageMaker
     # A set of filters to narrow the set of lineage entities connected to
     # the `StartArn`(s) returned by the `QueryLineage` API action.
     #
-    # @note When making an API call, you may pass QueryFilters
-    #   data as a hash:
-    #
-    #       {
-    #         types: ["String40"],
-    #         lineage_types: ["TrialComponent"], # accepts TrialComponent, Artifact, Context, Action
-    #         created_before: Time.now,
-    #         created_after: Time.now,
-    #         modified_before: Time.now,
-    #         modified_after: Time.now,
-    #         properties: {
-    #           "String256" => "String256",
-    #         },
-    #       }
-    #
     # @!attribute [rw] types
     #   Filter the lineage entities connected to the `StartArn` by type. For
     #   example: `DataSet`, `Model`, `Endpoint`, or `ModelDeployment`.
@@ -36672,29 +28820,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass QueryLineageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         start_arns: ["AssociationEntityArn"],
-    #         direction: "Both", # accepts Both, Ascendants, Descendants
-    #         include_edges: false,
-    #         filters: {
-    #           types: ["String40"],
-    #           lineage_types: ["TrialComponent"], # accepts TrialComponent, Artifact, Context, Action
-    #           created_before: Time.now,
-    #           created_after: Time.now,
-    #           modified_before: Time.now,
-    #           modified_after: Time.now,
-    #           properties: {
-    #             "String256" => "String256",
-    #           },
-    #         },
-    #         max_depth: 1,
-    #         max_results: 1,
-    #         next_token: "String8192",
-    #       }
-    #
     # @!attribute [rw] start_arns
     #   A list of resource Amazon Resource Name (ARN) that represent the
     #   starting point for your lineage query.
@@ -36790,25 +28915,6 @@ module Aws::SageMaker
 
     # A collection of settings that apply to an `RSessionGateway` app.
     #
-    # @note When making an API call, you may pass RSessionAppSettings
-    #   data as a hash:
-    #
-    #       {
-    #         default_resource_spec: {
-    #           sage_maker_image_arn: "ImageArn",
-    #           sage_maker_image_version_arn: "ImageVersionArn",
-    #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #           lifecycle_config_arn: "StudioLifecycleConfigArn",
-    #         },
-    #         custom_images: [
-    #           {
-    #             image_name: "ImageName", # required
-    #             image_version_number: 1,
-    #             app_image_config_name: "AppImageConfigName", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] default_resource_spec
     #   Specifies the ARN's of a SageMaker image and SageMaker image
     #   version, and the instance type that the version runs on.
@@ -36833,14 +28939,6 @@ module Aws::SageMaker
     # updated. The `RStudioServerPro` app must be deleted and a new one
     # created to make any changes.
     #
-    # @note When making an API call, you may pass RStudioServerProAppSettings
-    #   data as a hash:
-    #
-    #       {
-    #         access_status: "ENABLED", # accepts ENABLED, DISABLED
-    #         user_group: "R_STUDIO_ADMIN", # accepts R_STUDIO_ADMIN, R_STUDIO_USER
-    #       }
-    #
     # @!attribute [rw] access_status
     #   Indicates whether the current user has access to the
     #   `RStudioServerPro` app.
@@ -36864,21 +28962,6 @@ module Aws::SageMaker
 
     # A collection of settings that configure the `RStudioServerPro`
     # Domain-level app.
-    #
-    # @note When making an API call, you may pass RStudioServerProDomainSettings
-    #   data as a hash:
-    #
-    #       {
-    #         domain_execution_role_arn: "RoleArn", # required
-    #         r_studio_connect_url: "String",
-    #         r_studio_package_manager_url: "String",
-    #         default_resource_spec: {
-    #           sage_maker_image_arn: "ImageArn",
-    #           sage_maker_image_version_arn: "ImageVersionArn",
-    #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #           lifecycle_config_arn: "StudioLifecycleConfigArn",
-    #         },
-    #       }
     #
     # @!attribute [rw] domain_execution_role_arn
     #   The ARN of the execution role for the `RStudioServerPro`
@@ -36912,19 +28995,6 @@ module Aws::SageMaker
     # A collection of settings that update the current configuration for the
     # `RStudioServerPro` Domain-level app.
     #
-    # @note When making an API call, you may pass RStudioServerProDomainSettingsForUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         domain_execution_role_arn: "RoleArn", # required
-    #         default_resource_spec: {
-    #           sage_maker_image_arn: "ImageArn",
-    #           sage_maker_image_version_arn: "ImageVersionArn",
-    #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #           lifecycle_config_arn: "StudioLifecycleConfigArn",
-    #         },
-    #       }
-    #
     # @!attribute [rw] domain_execution_role_arn
     #   The execution role for the `RStudioServerPro` Domain-level app.
     #   @return [String]
@@ -36945,13 +29015,6 @@ module Aws::SageMaker
 
     # Provides information about the output configuration for the compiled
     # model.
-    #
-    # @note When making an API call, you may pass RecommendationJobCompiledOutputConfig
-    #   data as a hash:
-    #
-    #       {
-    #         s3_output_uri: "S3Uri",
-    #       }
     #
     # @!attribute [rw] s3_output_uri
     #   Identifies the Amazon S3 bucket where you want SageMaker to store
@@ -36976,22 +29039,6 @@ module Aws::SageMaker
     #
     #
     # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateInferenceRecommendationsJob.html
-    #
-    # @note When making an API call, you may pass RecommendationJobContainerConfig
-    #   data as a hash:
-    #
-    #       {
-    #         domain: "String",
-    #         task: "String",
-    #         framework: "String",
-    #         framework_version: "String",
-    #         payload_config: {
-    #           sample_payload_url: "String",
-    #           supported_content_types: ["String"],
-    #         },
-    #         nearest_model_name: "String",
-    #         supported_instance_types: ["String"],
-    #       }
     #
     # @!attribute [rw] domain
     #   The machine learning domain of the model and its components.
@@ -37088,60 +29135,6 @@ module Aws::SageMaker
 
     # The input configuration of the recommendation job.
     #
-    # @note When making an API call, you may pass RecommendationJobInputConfig
-    #   data as a hash:
-    #
-    #       {
-    #         model_package_version_arn: "ModelPackageArn", # required
-    #         job_duration_in_seconds: 1,
-    #         traffic_pattern: {
-    #           traffic_type: "PHASES", # accepts PHASES
-    #           phases: [
-    #             {
-    #               initial_number_of_users: 1,
-    #               spawn_rate: 1,
-    #               duration_in_seconds: 1,
-    #             },
-    #           ],
-    #         },
-    #         resource_limit: {
-    #           max_number_of_tests: 1,
-    #           max_parallel_of_tests: 1,
-    #         },
-    #         endpoint_configurations: [
-    #           {
-    #             instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge, ml.c6i.large, ml.c6i.xlarge, ml.c6i.2xlarge, ml.c6i.4xlarge, ml.c6i.8xlarge, ml.c6i.12xlarge, ml.c6i.16xlarge, ml.c6i.24xlarge, ml.c6i.32xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.12xlarge, ml.g5.16xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.p4d.24xlarge, ml.c7g.large, ml.c7g.xlarge, ml.c7g.2xlarge, ml.c7g.4xlarge, ml.c7g.8xlarge, ml.c7g.12xlarge, ml.c7g.16xlarge, ml.m6g.large, ml.m6g.xlarge, ml.m6g.2xlarge, ml.m6g.4xlarge, ml.m6g.8xlarge, ml.m6g.12xlarge, ml.m6g.16xlarge, ml.m6gd.large, ml.m6gd.xlarge, ml.m6gd.2xlarge, ml.m6gd.4xlarge, ml.m6gd.8xlarge, ml.m6gd.12xlarge, ml.m6gd.16xlarge, ml.c6g.large, ml.c6g.xlarge, ml.c6g.2xlarge, ml.c6g.4xlarge, ml.c6g.8xlarge, ml.c6g.12xlarge, ml.c6g.16xlarge, ml.c6gd.large, ml.c6gd.xlarge, ml.c6gd.2xlarge, ml.c6gd.4xlarge, ml.c6gd.8xlarge, ml.c6gd.12xlarge, ml.c6gd.16xlarge, ml.c6gn.large, ml.c6gn.xlarge, ml.c6gn.2xlarge, ml.c6gn.4xlarge, ml.c6gn.8xlarge, ml.c6gn.12xlarge, ml.c6gn.16xlarge, ml.r6g.large, ml.r6g.xlarge, ml.r6g.2xlarge, ml.r6g.4xlarge, ml.r6g.8xlarge, ml.r6g.12xlarge, ml.r6g.16xlarge, ml.r6gd.large, ml.r6gd.xlarge, ml.r6gd.2xlarge, ml.r6gd.4xlarge, ml.r6gd.8xlarge, ml.r6gd.12xlarge, ml.r6gd.16xlarge
-    #             inference_specification_name: "InferenceSpecificationName",
-    #             environment_parameter_ranges: {
-    #               categorical_parameter_ranges: [
-    #                 {
-    #                   name: "String64", # required
-    #                   value: ["String128"], # required
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #         ],
-    #         volume_kms_key_id: "KmsKeyId",
-    #         container_config: {
-    #           domain: "String",
-    #           task: "String",
-    #           framework: "String",
-    #           framework_version: "String",
-    #           payload_config: {
-    #             sample_payload_url: "String",
-    #             supported_content_types: ["String"],
-    #           },
-    #           nearest_model_name: "String",
-    #           supported_instance_types: ["String"],
-    #         },
-    #         endpoints: [
-    #           {
-    #             endpoint_name: "EndpointName", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] model_package_version_arn
     #   The Amazon Resource Name (ARN) of a versioned model package.
     #   @return [String]
@@ -37231,16 +29224,6 @@ module Aws::SageMaker
     # Provides information about the output configuration for the compiled
     # model.
     #
-    # @note When making an API call, you may pass RecommendationJobOutputConfig
-    #   data as a hash:
-    #
-    #       {
-    #         kms_key_id: "KmsKeyId",
-    #         compiled_output_config: {
-    #           s3_output_uri: "S3Uri",
-    #         },
-    #       }
-    #
     # @!attribute [rw] kms_key_id
     #   The Amazon Resource Name (ARN) of a Amazon Web Services Key
     #   Management Service (Amazon Web Services KMS) key that Amazon
@@ -37291,14 +29274,6 @@ module Aws::SageMaker
 
     # The configuration for the payload for a recommendation job.
     #
-    # @note When making an API call, you may pass RecommendationJobPayloadConfig
-    #   data as a hash:
-    #
-    #       {
-    #         sample_payload_url: "String",
-    #         supported_content_types: ["String"],
-    #       }
-    #
     # @!attribute [rw] sample_payload_url
     #   The Amazon Simple Storage Service (Amazon S3) path where the sample
     #   payload is stored. This path must point to a single gzip compressed
@@ -37321,14 +29296,6 @@ module Aws::SageMaker
     # Specifies the maximum number of jobs that can run in parallel and the
     # maximum number of jobs that can run.
     #
-    # @note When making an API call, you may pass RecommendationJobResourceLimit
-    #   data as a hash:
-    #
-    #       {
-    #         max_number_of_tests: 1,
-    #         max_parallel_of_tests: 1,
-    #       }
-    #
     # @!attribute [rw] max_number_of_tests
     #   Defines the maximum number of load tests.
     #   @return [Integer]
@@ -37348,19 +29315,6 @@ module Aws::SageMaker
 
     # Specifies conditions for stopping a job. When a job reaches a stopping
     # condition limit, SageMaker ends the job.
-    #
-    # @note When making an API call, you may pass RecommendationJobStoppingConditions
-    #   data as a hash:
-    #
-    #       {
-    #         max_invocations: 1,
-    #         model_latency_thresholds: [
-    #           {
-    #             percentile: "String64",
-    #             value_in_milliseconds: 1,
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] max_invocations
     #   The maximum number of requests per minute expected for the endpoint.
@@ -37414,21 +29368,6 @@ module Aws::SageMaker
     end
 
     # Configuration for Redshift Dataset Definition input.
-    #
-    # @note When making an API call, you may pass RedshiftDatasetDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         cluster_id: "RedshiftClusterId", # required
-    #         database: "RedshiftDatabase", # required
-    #         db_user: "RedshiftUserName", # required
-    #         query_string: "RedshiftQueryString", # required
-    #         cluster_role_arn: "RoleArn", # required
-    #         output_s3_uri: "S3Uri", # required
-    #         kms_key_id: "KmsKeyId",
-    #         output_format: "PARQUET", # required, accepts PARQUET, CSV
-    #         output_compression: "None", # accepts None, GZIP, BZIP2, ZSTD, SNAPPY
-    #       }
     #
     # @!attribute [rw] cluster_id
     #   The Redshift cluster Identifier.
@@ -37486,26 +29425,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RegisterDevicesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_fleet_name: "EntityName", # required
-    #         devices: [ # required
-    #           {
-    #             device_name: "DeviceName", # required
-    #             description: "DeviceDescription",
-    #             iot_thing_name: "ThingName",
-    #           },
-    #         ],
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] device_fleet_name
     #   The name of the fleet.
     #   @return [String]
@@ -37542,20 +29461,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RenderUiTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         ui_template: {
-    #           content: "TemplateContent", # required
-    #         },
-    #         task: { # required
-    #           input: "TaskInput", # required
-    #         },
-    #         role_arn: "RoleArn", # required
-    #         human_task_ui_arn: "HumanTaskUiArn",
-    #       }
-    #
     # @!attribute [rw] ui_template
     #   A `Template` object containing the worker UI template to render.
     #   @return [Types::UiTemplate]
@@ -37611,13 +29516,6 @@ module Aws::SageMaker
 
     # Contains input values for a task.
     #
-    # @note When making an API call, you may pass RenderableTask
-    #   data as a hash:
-    #
-    #       {
-    #         input: "TaskInput", # required
-    #       }
-    #
     # @!attribute [rw] input
     #   A JSON object that contains values for the variables defined in the
     #   template. It is made available to the template under the
@@ -37659,13 +29557,6 @@ module Aws::SageMaker
     # `RepositoryAccessMode` field of the `ImageConfig` object that you
     # passed to a call to `CreateModel` and the private Docker registry
     # where the model image is hosted requires authentication.
-    #
-    # @note When making an API call, you may pass RepositoryAuthConfig
-    #   data as a hash:
-    #
-    #       {
-    #         repository_credentials_provider_arn: "RepositoryCredentialsProviderArn", # required
-    #       }
     #
     # @!attribute [rw] repository_credentials_provider_arn
     #   The Amazon Resource Name (ARN) of an Amazon Web Services Lambda
@@ -37716,24 +29607,6 @@ module Aws::SageMaker
 
     # Describes the resources, including ML compute instances and ML storage
     # volumes, to use for model training.
-    #
-    # @note When making an API call, you may pass ResourceConfig
-    #   data as a hash:
-    #
-    #       {
-    #         instance_type: "ml.m4.xlarge", # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge
-    #         instance_count: 1,
-    #         volume_size_in_gb: 1, # required
-    #         volume_kms_key_id: "KmsKeyId",
-    #         instance_groups: [
-    #           {
-    #             instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge
-    #             instance_count: 1, # required
-    #             instance_group_name: "InstanceGroupName", # required
-    #           },
-    #         ],
-    #         keep_alive_period_in_seconds: 1,
-    #       }
     #
     # @!attribute [rw] instance_type
     #   The ML compute instance type.
@@ -37840,13 +29713,6 @@ module Aws::SageMaker
     # The `ResourceConfig` to update `KeepAlivePeriodInSeconds`. Other
     # fields in the `ResourceConfig` cannot be updated.
     #
-    # @note When making an API call, you may pass ResourceConfigForUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         keep_alive_period_in_seconds: 1, # required
-    #       }
-    #
     # @!attribute [rw] keep_alive_period_in_seconds
     #   The `KeepAlivePeriodInSeconds` value specified in the
     #   `ResourceConfig` to update.
@@ -37890,14 +29756,6 @@ module Aws::SageMaker
     # Specifies the maximum number of training jobs and parallel training
     # jobs that a hyperparameter tuning job can launch.
     #
-    # @note When making an API call, you may pass ResourceLimits
-    #   data as a hash:
-    #
-    #       {
-    #         max_number_of_training_jobs: 1,
-    #         max_parallel_training_jobs: 1, # required
-    #       }
-    #
     # @!attribute [rw] max_number_of_training_jobs
     #   The maximum number of training jobs that a hyperparameter tuning job
     #   can launch.
@@ -37932,16 +29790,6 @@ module Aws::SageMaker
 
     # Specifies the ARN's of a SageMaker image and SageMaker image version,
     # and the instance type that the version runs on.
-    #
-    # @note When making an API call, you may pass ResourceSpec
-    #   data as a hash:
-    #
-    #       {
-    #         sage_maker_image_arn: "ImageArn",
-    #         sage_maker_image_version_arn: "ImageVersionArn",
-    #         instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #         lifecycle_config_arn: "StudioLifecycleConfigArn",
-    #       }
     #
     # @!attribute [rw] sage_maker_image_arn
     #   The ARN of the SageMaker image that the image version belongs to.
@@ -37982,13 +29830,6 @@ module Aws::SageMaker
     # The retention policy for data stored on an Amazon Elastic File System
     # (EFS) volume.
     #
-    # @note When making an API call, you may pass RetentionPolicy
-    #   data as a hash:
-    #
-    #       {
-    #         home_efs_file_system: "Retain", # accepts Retain, Delete
-    #       }
-    #
     # @!attribute [rw] home_efs_file_system
     #   The default is `Retain`, which specifies to keep the data stored on
     #   the EFS volume.
@@ -38004,17 +29845,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RetryPipelineExecutionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         pipeline_execution_arn: "PipelineExecutionArn", # required
-    #         client_request_token: "IdempotencyToken", # required
-    #         parallelism_configuration: {
-    #           max_parallel_execution_steps: 1, # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] pipeline_execution_arn
     #   The Amazon Resource Name (ARN) of the pipeline execution.
     #   @return [String]
@@ -38061,13 +29891,6 @@ module Aws::SageMaker
     # can add the `StoppingCondition` parameter to the request to limit the
     # training time for the complete job.
     #
-    # @note When making an API call, you may pass RetryStrategy
-    #   data as a hash:
-    #
-    #       {
-    #         maximum_retry_attempts: 1, # required
-    #       }
-    #
     # @!attribute [rw] maximum_retry_attempts
     #   The number of times to retry the job. When the job is retried, it's
     #   `SecondaryStatus` is changed to `STARTING`.
@@ -38082,17 +29905,6 @@ module Aws::SageMaker
     end
 
     # Describes the S3 data source.
-    #
-    # @note When making an API call, you may pass S3DataSource
-    #   data as a hash:
-    #
-    #       {
-    #         s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
-    #         s3_uri: "S3Uri", # required
-    #         s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
-    #         attribute_names: ["AttributeName"],
-    #         instance_group_names: ["InstanceGroupName"],
-    #       }
     #
     # @!attribute [rw] s3_data_type
     #   If you choose `S3Prefix`, `S3Uri` identifies a key name prefix.
@@ -38208,15 +30020,6 @@ module Aws::SageMaker
     # The Amazon Simple Storage (Amazon S3) location and and security
     # configuration for `OfflineStore`.
     #
-    # @note When making an API call, you may pass S3StorageConfig
-    #   data as a hash:
-    #
-    #       {
-    #         s3_uri: "S3Uri", # required
-    #         kms_key_id: "KmsKeyId",
-    #         resolved_output_s3_uri: "S3Uri",
-    #       }
-    #
     # @!attribute [rw] s3_uri
     #   The S3 URI, or location in Amazon S3, of `OfflineStore`.
     #
@@ -38252,13 +30055,6 @@ module Aws::SageMaker
     end
 
     # Configuration details about the monitoring schedule.
-    #
-    # @note When making an API call, you may pass ScheduleConfig
-    #   data as a hash:
-    #
-    #       {
-    #         schedule_expression: "ScheduleExpression", # required
-    #       }
     #
     # @!attribute [rw] schedule_expression
     #   A cron expression that describes details about the monitoring
@@ -38332,59 +30128,6 @@ module Aws::SageMaker
     #   be nested in a list of search expression objects.
     #
     # * A Boolean operator: `And` or `Or`.
-    #
-    # @note When making an API call, you may pass SearchExpression
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             name: "ResourcePropertyName", # required
-    #             operator: "Equals", # accepts Equals, NotEquals, GreaterThan, GreaterThanOrEqualTo, LessThan, LessThanOrEqualTo, Contains, Exists, NotExists, In
-    #             value: "FilterValue",
-    #           },
-    #         ],
-    #         nested_filters: [
-    #           {
-    #             nested_property_name: "ResourcePropertyName", # required
-    #             filters: [ # required
-    #               {
-    #                 name: "ResourcePropertyName", # required
-    #                 operator: "Equals", # accepts Equals, NotEquals, GreaterThan, GreaterThanOrEqualTo, LessThan, LessThanOrEqualTo, Contains, Exists, NotExists, In
-    #                 value: "FilterValue",
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         sub_expressions: [
-    #           {
-    #             filters: [
-    #               {
-    #                 name: "ResourcePropertyName", # required
-    #                 operator: "Equals", # accepts Equals, NotEquals, GreaterThan, GreaterThanOrEqualTo, LessThan, LessThanOrEqualTo, Contains, Exists, NotExists, In
-    #                 value: "FilterValue",
-    #               },
-    #             ],
-    #             nested_filters: [
-    #               {
-    #                 nested_property_name: "ResourcePropertyName", # required
-    #                 filters: [ # required
-    #                   {
-    #                     name: "ResourcePropertyName", # required
-    #                     operator: "Equals", # accepts Equals, NotEquals, GreaterThan, GreaterThanOrEqualTo, LessThan, LessThanOrEqualTo, Contains, Exists, NotExists, In
-    #                     value: "FilterValue",
-    #                   },
-    #                 ],
-    #               },
-    #             ],
-    #             sub_expressions: {
-    #               # recursive SearchExpressionList
-    #             },
-    #             operator: "And", # accepts And, Or
-    #           },
-    #         ],
-    #         operator: "And", # accepts And, Or
-    #       }
     #
     # @!attribute [rw] filters
     #   A list of filter objects.
@@ -38495,44 +30238,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SearchRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup, Project, FeatureMetadata, HyperParameterTuningJob
-    #         search_expression: {
-    #           filters: [
-    #             {
-    #               name: "ResourcePropertyName", # required
-    #               operator: "Equals", # accepts Equals, NotEquals, GreaterThan, GreaterThanOrEqualTo, LessThan, LessThanOrEqualTo, Contains, Exists, NotExists, In
-    #               value: "FilterValue",
-    #             },
-    #           ],
-    #           nested_filters: [
-    #             {
-    #               nested_property_name: "ResourcePropertyName", # required
-    #               filters: [ # required
-    #                 {
-    #                   name: "ResourcePropertyName", # required
-    #                   operator: "Equals", # accepts Equals, NotEquals, GreaterThan, GreaterThanOrEqualTo, LessThan, LessThanOrEqualTo, Contains, Exists, NotExists, In
-    #                   value: "FilterValue",
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #           sub_expressions: [
-    #             {
-    #               # recursive SearchExpression
-    #             },
-    #           ],
-    #           operator: "And", # accepts And, Or
-    #         },
-    #         sort_by: "ResourcePropertyName",
-    #         sort_order: "Ascending", # accepts Ascending, Descending
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] resource
     #   The name of the Amazon SageMaker resource to search for.
     #   @return [String]
@@ -38718,15 +30423,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SendPipelineExecutionStepFailureRequest
-    #   data as a hash:
-    #
-    #       {
-    #         callback_token: "CallbackToken", # required
-    #         failure_reason: "String256",
-    #         client_request_token: "IdempotencyToken",
-    #       }
-    #
     # @!attribute [rw] callback_token
     #   The pipeline generated token from the Amazon SQS queue.
     #   @return [String]
@@ -38766,20 +30462,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SendPipelineExecutionStepSuccessRequest
-    #   data as a hash:
-    #
-    #       {
-    #         callback_token: "CallbackToken", # required
-    #         output_parameters: [
-    #           {
-    #             name: "String256", # required
-    #             value: "String1024", # required
-    #           },
-    #         ],
-    #         client_request_token: "IdempotencyToken",
-    #       }
-    #
     # @!attribute [rw] callback_token
     #   The pipeline generated token from the Amazon SQS queue.
     #   @return [String]
@@ -38875,21 +30557,6 @@ module Aws::SageMaker
     #
     # [1]: https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html
     #
-    # @note When making an API call, you may pass ServiceCatalogProvisioningDetails
-    #   data as a hash:
-    #
-    #       {
-    #         product_id: "ServiceCatalogEntityId", # required
-    #         provisioning_artifact_id: "ServiceCatalogEntityId",
-    #         path_id: "ServiceCatalogEntityId",
-    #         provisioning_parameters: [
-    #           {
-    #             key: "ProvisioningParameterKey",
-    #             value: "ProvisioningParameterValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] product_id
     #   The ID of the product to provision.
     #   @return [String]
@@ -38928,19 +30595,6 @@ module Aws::SageMaker
     #
     # [1]: https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html
     #
-    # @note When making an API call, you may pass ServiceCatalogProvisioningUpdateDetails
-    #   data as a hash:
-    #
-    #       {
-    #         provisioning_artifact_id: "ServiceCatalogEntityId",
-    #         provisioning_parameters: [
-    #           {
-    #             key: "ProvisioningParameterKey",
-    #             value: "ProvisioningParameterValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] provisioning_artifact_id
     #   The ID of the provisioning artifact.
     #   @return [String]
@@ -38964,15 +30618,6 @@ module Aws::SageMaker
     # `CreateDomain` API is called, and as part of `UserSettings` when the
     # `CreateUserProfile` API is called. When `SharingSettings` is not
     # specified, notebook sharing isn't allowed.
-    #
-    # @note When making an API call, you may pass SharingSettings
-    #   data as a hash:
-    #
-    #       {
-    #         notebook_output_option: "Allowed", # accepts Allowed, Disabled
-    #         s3_output_path: "S3Uri",
-    #         s3_kms_key_id: "KmsKeyId",
-    #       }
     #
     # @!attribute [rw] notebook_output_option
     #   Whether to include the notebook cell output when sharing the
@@ -39017,13 +30662,6 @@ module Aws::SageMaker
     # across nodes so that the content sent to a particular node on the
     # first epoch might be sent to a different node on the second epoch.
     #
-    # @note When making an API call, you may pass ShuffleConfig
-    #   data as a hash:
-    #
-    #       {
-    #         seed: 1, # required
-    #       }
-    #
     # @!attribute [rw] seed
     #   Determines the shuffling order in `ShuffleConfig` value.
     #   @return [Integer]
@@ -39040,14 +30678,6 @@ module Aws::SageMaker
     # algorithm must be either an algorithm resource in your SageMaker
     # account or an algorithm in Amazon Web Services Marketplace that you
     # are subscribed to.
-    #
-    # @note When making an API call, you may pass SourceAlgorithm
-    #   data as a hash:
-    #
-    #       {
-    #         model_data_url: "Url",
-    #         algorithm_name: "ArnOrName", # required
-    #       }
     #
     # @!attribute [rw] model_data_url
     #   The Amazon S3 path where the model artifacts, which result from
@@ -39078,18 +30708,6 @@ module Aws::SageMaker
 
     # A list of algorithms that were used to create a model package.
     #
-    # @note When making an API call, you may pass SourceAlgorithmSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         source_algorithms: [ # required
-    #           {
-    #             model_data_url: "Url",
-    #             algorithm_name: "ArnOrName", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] source_algorithms
     #   A list of the algorithms that were used to create a model package.
     #   @return [Array<Types::SourceAlgorithm>]
@@ -39110,13 +30728,6 @@ module Aws::SageMaker
     #
     #
     # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html
-    #
-    # @note When making an API call, you may pass SourceIpConfig
-    #   data as a hash:
-    #
-    #       {
-    #         cidrs: ["Cidr"], # required
-    #       }
     #
     # @!attribute [rw] cidrs
     #   A list of one to ten [Classless Inter-Domain Routing][1] (CIDR)
@@ -39142,14 +30753,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartEdgeDeploymentStageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         edge_deployment_plan_name: "EntityName", # required
-    #         stage_name: "EntityName", # required
-    #       }
-    #
     # @!attribute [rw] edge_deployment_plan_name
     #   The name of the edge deployment plan to start.
     #   @return [String]
@@ -39167,13 +30770,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartMonitoringScheduleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         monitoring_schedule_name: "MonitoringScheduleName", # required
-    #       }
-    #
     # @!attribute [rw] monitoring_schedule_name
     #   The name of the schedule to start.
     #   @return [String]
@@ -39186,13 +30782,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartNotebookInstanceInput
-    #   data as a hash:
-    #
-    #       {
-    #         notebook_instance_name: "NotebookInstanceName", # required
-    #       }
-    #
     # @!attribute [rw] notebook_instance_name
     #   The name of the notebook instance to start.
     #   @return [String]
@@ -39205,25 +30794,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartPipelineExecutionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         pipeline_name: "PipelineName", # required
-    #         pipeline_execution_display_name: "PipelineExecutionName",
-    #         pipeline_parameters: [
-    #           {
-    #             name: "PipelineParameterName", # required
-    #             value: "String1024", # required
-    #           },
-    #         ],
-    #         pipeline_execution_description: "PipelineExecutionDescription",
-    #         client_request_token: "IdempotencyToken", # required
-    #         parallelism_configuration: {
-    #           max_parallel_execution_steps: 1, # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] pipeline_name
     #   The name of the pipeline.
     #   @return [String]
@@ -39279,13 +30849,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopAutoMLJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         auto_ml_job_name: "AutoMLJobName", # required
-    #       }
-    #
     # @!attribute [rw] auto_ml_job_name
     #   The name of the object you are requesting.
     #   @return [String]
@@ -39298,13 +30861,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopCompilationJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         compilation_job_name: "EntityName", # required
-    #       }
-    #
     # @!attribute [rw] compilation_job_name
     #   The name of the model compilation job to stop.
     #   @return [String]
@@ -39317,14 +30873,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopEdgeDeploymentStageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         edge_deployment_plan_name: "EntityName", # required
-    #         stage_name: "EntityName", # required
-    #       }
-    #
     # @!attribute [rw] edge_deployment_plan_name
     #   The name of the edge deployment plan to stop.
     #   @return [String]
@@ -39342,13 +30890,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopEdgePackagingJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         edge_packaging_job_name: "EntityName", # required
-    #       }
-    #
     # @!attribute [rw] edge_packaging_job_name
     #   The name of the edge packaging job.
     #   @return [String]
@@ -39361,13 +30902,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopHyperParameterTuningJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         hyper_parameter_tuning_job_name: "HyperParameterTuningJobName", # required
-    #       }
-    #
     # @!attribute [rw] hyper_parameter_tuning_job_name
     #   The name of the tuning job to stop.
     #   @return [String]
@@ -39380,13 +30914,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopInferenceRecommendationsJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_name: "RecommendationJobName", # required
-    #       }
-    #
     # @!attribute [rw] job_name
     #   The name of the job you want to stop.
     #   @return [String]
@@ -39399,13 +30926,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopLabelingJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         labeling_job_name: "LabelingJobName", # required
-    #       }
-    #
     # @!attribute [rw] labeling_job_name
     #   The name of the labeling job to stop.
     #   @return [String]
@@ -39418,13 +30938,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopMonitoringScheduleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         monitoring_schedule_name: "MonitoringScheduleName", # required
-    #       }
-    #
     # @!attribute [rw] monitoring_schedule_name
     #   The name of the schedule to stop.
     #   @return [String]
@@ -39437,13 +30950,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopNotebookInstanceInput
-    #   data as a hash:
-    #
-    #       {
-    #         notebook_instance_name: "NotebookInstanceName", # required
-    #       }
-    #
     # @!attribute [rw] notebook_instance_name
     #   The name of the notebook instance to terminate.
     #   @return [String]
@@ -39456,14 +30962,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopPipelineExecutionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         pipeline_execution_arn: "PipelineExecutionArn", # required
-    #         client_request_token: "IdempotencyToken", # required
-    #       }
-    #
     # @!attribute [rw] pipeline_execution_arn
     #   The Amazon Resource Name (ARN) of the pipeline execution.
     #   @return [String]
@@ -39498,13 +30996,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopProcessingJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         processing_job_name: "ProcessingJobName", # required
-    #       }
-    #
     # @!attribute [rw] processing_job_name
     #   The name of the processing job to stop.
     #   @return [String]
@@ -39517,13 +31008,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopTrainingJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         training_job_name: "TrainingJobName", # required
-    #       }
-    #
     # @!attribute [rw] training_job_name
     #   The name of the training job to stop.
     #   @return [String]
@@ -39536,13 +31020,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopTransformJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         transform_job_name: "TransformJobName", # required
-    #       }
-    #
     # @!attribute [rw] transform_job_name
     #   The name of the batch transform job to stop.
     #   @return [String]
@@ -39579,14 +31056,6 @@ module Aws::SageMaker
     # maximum runtime is sufficient for the training job to complete.
     #
     #  </note>
-    #
-    # @note When making an API call, you may pass StoppingCondition
-    #   data as a hash:
-    #
-    #       {
-    #         max_runtime_in_seconds: 1,
-    #         max_wait_time_in_seconds: 1,
-    #       }
     #
     # @!attribute [rw] max_runtime_in_seconds
     #   The maximum length of time, in seconds, that a training or
@@ -39702,15 +31171,6 @@ module Aws::SageMaker
     # Specified in the GetSearchSuggestions request. Limits the property
     # names that are included in the response.
     #
-    # @note When making an API call, you may pass SuggestionQuery
-    #   data as a hash:
-    #
-    #       {
-    #         property_name_query: {
-    #           property_name_hint: "PropertyNameHint", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] property_name_query
     #   Defines a property name hint. Only property names that begin with
     #   the specified hint are included in the response.
@@ -39744,14 +31204,6 @@ module Aws::SageMaker
     # [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     # [2]: https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The tag key. Tag keys must be unique per resource.
     #   @return [String]
@@ -39772,15 +31224,6 @@ module Aws::SageMaker
     # Contains information about a target platform that you want your model
     # to run on, such as OS, architecture, and accelerators. It is an
     # alternative of `TargetDevice`.
-    #
-    # @note When making an API call, you may pass TargetPlatform
-    #   data as a hash:
-    #
-    #       {
-    #         os: "ANDROID", # required, accepts ANDROID, LINUX
-    #         arch: "X86_64", # required, accepts X86_64, X86, ARM64, ARM_EABI, ARM_EABIHF
-    #         accelerator: "INTEL_GRAPHICS", # accepts INTEL_GRAPHICS, MALI, NVIDIA, NNA
-    #       }
     #
     # @!attribute [rw] os
     #   Specifies a target platform OS.
@@ -39830,18 +31273,6 @@ module Aws::SageMaker
 
     # The TensorBoard app settings.
     #
-    # @note When making an API call, you may pass TensorBoardAppSettings
-    #   data as a hash:
-    #
-    #       {
-    #         default_resource_spec: {
-    #           sage_maker_image_arn: "ImageArn",
-    #           sage_maker_image_version_arn: "ImageVersionArn",
-    #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #           lifecycle_config_arn: "StudioLifecycleConfigArn",
-    #         },
-    #       }
-    #
     # @!attribute [rw] default_resource_spec
     #   The default instance type and the Amazon Resource Name (ARN) of the
     #   SageMaker image created on the instance.
@@ -39857,14 +31288,6 @@ module Aws::SageMaker
 
     # Configuration of storage locations for the Debugger TensorBoard output
     # data.
-    #
-    # @note When making an API call, you may pass TensorBoardOutputConfig
-    #   data as a hash:
-    #
-    #       {
-    #         local_path: "DirectoryPath",
-    #         s3_output_path: "S3Uri", # required
-    #       }
     #
     # @!attribute [rw] local_path
     #   Path to local storage location for tensorBoard output. Defaults to
@@ -39885,14 +31308,6 @@ module Aws::SageMaker
     end
 
     # Time series forecast settings for the SageMaker Canvas app.
-    #
-    # @note When making an API call, you may pass TimeSeriesForecastingSettings
-    #   data as a hash:
-    #
-    #       {
-    #         status: "ENABLED", # accepts ENABLED, DISABLED
-    #         amazon_forecast_role_arn: "RoleArn",
-    #       }
     #
     # @!attribute [rw] status
     #   Describes whether time series forecasting is enabled or disabled in
@@ -39926,20 +31341,6 @@ module Aws::SageMaker
 
     # Defines the traffic pattern of the load test.
     #
-    # @note When making an API call, you may pass TrafficPattern
-    #   data as a hash:
-    #
-    #       {
-    #         traffic_type: "PHASES", # accepts PHASES
-    #         phases: [
-    #           {
-    #             initial_number_of_users: 1,
-    #             spawn_rate: 1,
-    #             duration_in_seconds: 1,
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] traffic_type
     #   Defines the traffic patterns.
     #   @return [String]
@@ -39959,22 +31360,6 @@ module Aws::SageMaker
 
     # Defines the traffic routing strategy during an endpoint deployment to
     # shift traffic from the old fleet to the new fleet.
-    #
-    # @note When making an API call, you may pass TrafficRoutingConfig
-    #   data as a hash:
-    #
-    #       {
-    #         type: "ALL_AT_ONCE", # required, accepts ALL_AT_ONCE, CANARY, LINEAR
-    #         wait_interval_in_seconds: 1, # required
-    #         canary_size: {
-    #           type: "INSTANCE_COUNT", # required, accepts INSTANCE_COUNT, CAPACITY_PERCENT
-    #           value: 1, # required
-    #         },
-    #         linear_step_size: {
-    #           type: "INSTANCE_COUNT", # required, accepts INSTANCE_COUNT, CAPACITY_PERCENT
-    #           value: 1, # required
-    #         },
-    #       }
     #
     # @!attribute [rw] type
     #   Traffic routing strategy type.
@@ -40355,65 +31740,6 @@ module Aws::SageMaker
 
     # Defines the input needed to run a training job using the algorithm.
     #
-    # @note When making an API call, you may pass TrainingJobDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         training_input_mode: "Pipe", # required, accepts Pipe, File, FastFile
-    #         hyper_parameters: {
-    #           "HyperParameterKey" => "HyperParameterValue",
-    #         },
-    #         input_data_config: [ # required
-    #           {
-    #             channel_name: "ChannelName", # required
-    #             data_source: { # required
-    #               s3_data_source: {
-    #                 s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
-    #                 s3_uri: "S3Uri", # required
-    #                 s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
-    #                 attribute_names: ["AttributeName"],
-    #                 instance_group_names: ["InstanceGroupName"],
-    #               },
-    #               file_system_data_source: {
-    #                 file_system_id: "FileSystemId", # required
-    #                 file_system_access_mode: "rw", # required, accepts rw, ro
-    #                 file_system_type: "EFS", # required, accepts EFS, FSxLustre
-    #                 directory_path: "DirectoryPath", # required
-    #               },
-    #             },
-    #             content_type: "ContentType",
-    #             compression_type: "None", # accepts None, Gzip
-    #             record_wrapper_type: "None", # accepts None, RecordIO
-    #             input_mode: "Pipe", # accepts Pipe, File, FastFile
-    #             shuffle_config: {
-    #               seed: 1, # required
-    #             },
-    #           },
-    #         ],
-    #         output_data_config: { # required
-    #           kms_key_id: "KmsKeyId",
-    #           s3_output_path: "S3Uri", # required
-    #         },
-    #         resource_config: { # required
-    #           instance_type: "ml.m4.xlarge", # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge
-    #           instance_count: 1,
-    #           volume_size_in_gb: 1, # required
-    #           volume_kms_key_id: "KmsKeyId",
-    #           instance_groups: [
-    #             {
-    #               instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge
-    #               instance_count: 1, # required
-    #               instance_group_name: "InstanceGroupName", # required
-    #             },
-    #           ],
-    #           keep_alive_period_in_seconds: 1,
-    #         },
-    #         stopping_condition: { # required
-    #           max_runtime_in_seconds: 1,
-    #           max_wait_time_in_seconds: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] training_input_mode
     #   The training input mode that the algorithm supports. For more
     #   information about input modes, see [Algorithms][1].
@@ -40608,61 +31934,6 @@ module Aws::SageMaker
 
     # Defines how the algorithm is used for a training job.
     #
-    # @note When making an API call, you may pass TrainingSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         training_image: "ContainerImage", # required
-    #         training_image_digest: "ImageDigest",
-    #         supported_hyper_parameters: [
-    #           {
-    #             name: "ParameterName", # required
-    #             description: "EntityDescription",
-    #             type: "Integer", # required, accepts Integer, Continuous, Categorical, FreeText
-    #             range: {
-    #               integer_parameter_range_specification: {
-    #                 min_value: "ParameterValue", # required
-    #                 max_value: "ParameterValue", # required
-    #               },
-    #               continuous_parameter_range_specification: {
-    #                 min_value: "ParameterValue", # required
-    #                 max_value: "ParameterValue", # required
-    #               },
-    #               categorical_parameter_range_specification: {
-    #                 values: ["ParameterValue"], # required
-    #               },
-    #             },
-    #             is_tunable: false,
-    #             is_required: false,
-    #             default_value: "HyperParameterValue",
-    #           },
-    #         ],
-    #         supported_training_instance_types: ["ml.m4.xlarge"], # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge
-    #         supports_distributed_training: false,
-    #         metric_definitions: [
-    #           {
-    #             name: "MetricName", # required
-    #             regex: "MetricRegex", # required
-    #           },
-    #         ],
-    #         training_channels: [ # required
-    #           {
-    #             name: "ChannelName", # required
-    #             description: "EntityDescription",
-    #             is_required: false,
-    #             supported_content_types: ["ContentType"], # required
-    #             supported_compression_types: ["None"], # accepts None, Gzip
-    #             supported_input_modes: ["Pipe"], # required, accepts Pipe, File, FastFile
-    #           },
-    #         ],
-    #         supported_tuning_job_objective_metrics: [
-    #           {
-    #             type: "Maximize", # required, accepts Maximize, Minimize
-    #             metric_name: "MetricName", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] training_image
     #   The Amazon ECR registry path of the Docker image that contains the
     #   training algorithm.
@@ -40722,16 +31993,6 @@ module Aws::SageMaker
 
     # Describes the location of the channel data.
     #
-    # @note When making an API call, you may pass TransformDataSource
-    #   data as a hash:
-    #
-    #       {
-    #         s3_data_source: { # required
-    #           s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
-    #           s3_uri: "S3Uri", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] s3_data_source
     #   The S3 location of the data source that is associated with a
     #   channel.
@@ -40747,21 +32008,6 @@ module Aws::SageMaker
 
     # Describes the input source of a transform job and the way the
     # transform job consumes it.
-    #
-    # @note When making an API call, you may pass TransformInput
-    #   data as a hash:
-    #
-    #       {
-    #         data_source: { # required
-    #           s3_data_source: { # required
-    #             s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
-    #             s3_uri: "S3Uri", # required
-    #           },
-    #         },
-    #         content_type: "ContentType",
-    #         compression_type: "None", # accepts None, Gzip
-    #         split_type: "None", # accepts None, Line, RecordIO, TFRecord
-    #       }
     #
     # @!attribute [rw] data_source
     #   Describes the location of the channel data, which is, the S3
@@ -41018,40 +32264,6 @@ module Aws::SageMaker
     # Defines the input needed to run a transform job using the inference
     # specification specified in the algorithm.
     #
-    # @note When making an API call, you may pass TransformJobDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         max_concurrent_transforms: 1,
-    #         max_payload_in_mb: 1,
-    #         batch_strategy: "MultiRecord", # accepts MultiRecord, SingleRecord
-    #         environment: {
-    #           "TransformEnvironmentKey" => "TransformEnvironmentValue",
-    #         },
-    #         transform_input: { # required
-    #           data_source: { # required
-    #             s3_data_source: { # required
-    #               s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
-    #               s3_uri: "S3Uri", # required
-    #             },
-    #           },
-    #           content_type: "ContentType",
-    #           compression_type: "None", # accepts None, Gzip
-    #           split_type: "None", # accepts None, Line, RecordIO, TFRecord
-    #         },
-    #         transform_output: { # required
-    #           s3_output_path: "S3Uri", # required
-    #           accept: "Accept",
-    #           assemble_with: "None", # accepts None, Line
-    #           kms_key_id: "KmsKeyId",
-    #         },
-    #         transform_resources: { # required
-    #           instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
-    #           instance_count: 1, # required
-    #           volume_kms_key_id: "KmsKeyId",
-    #         },
-    #       }
-    #
     # @!attribute [rw] max_concurrent_transforms
     #   The maximum number of parallel requests that can be sent to each
     #   instance in a transform job. The default value is 1.
@@ -41170,16 +32382,6 @@ module Aws::SageMaker
 
     # Describes the results of a transform job.
     #
-    # @note When making an API call, you may pass TransformOutput
-    #   data as a hash:
-    #
-    #       {
-    #         s3_output_path: "S3Uri", # required
-    #         accept: "Accept",
-    #         assemble_with: "None", # accepts None, Line
-    #         kms_key_id: "KmsKeyId",
-    #       }
-    #
     # @!attribute [rw] s3_output_path
     #   The Amazon S3 path where you want Amazon SageMaker to store the
     #   results of the transform job. For example,
@@ -41262,15 +32464,6 @@ module Aws::SageMaker
     # Describes the resources, including ML instance types and ML instance
     # count, to use for transform job.
     #
-    # @note When making an API call, you may pass TransformResources
-    #   data as a hash:
-    #
-    #       {
-    #         instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
-    #         instance_count: 1, # required
-    #         volume_kms_key_id: "KmsKeyId",
-    #       }
-    #
     # @!attribute [rw] instance_type
     #   The ML compute instance type for the transform job. If you are using
     #   built-in algorithms to transform moderately sized datasets, we
@@ -41331,14 +32524,6 @@ module Aws::SageMaker
     end
 
     # Describes the S3 data source.
-    #
-    # @note When making an API call, you may pass TransformS3DataSource
-    #   data as a hash:
-    #
-    #       {
-    #         s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
-    #         s3_uri: "S3Uri", # required
-    #       }
     #
     # @!attribute [rw] s3_data_type
     #   If you choose `S3Prefix`, `S3Uri` identifies a key name prefix.
@@ -41602,14 +32787,6 @@ module Aws::SageMaker
     # source code, and instance types. Examples of output artifacts are
     # metrics, snapshots, logs, and images.
     #
-    # @note When making an API call, you may pass TrialComponentArtifact
-    #   data as a hash:
-    #
-    #       {
-    #         media_type: "MediaType",
-    #         value: "TrialComponentArtifactValue", # required
-    #       }
-    #
     # @!attribute [rw] media_type
     #   The media type of the artifact, which indicates the type of data in
     #   the artifact file. The media type consists of a *type* and a
@@ -41689,14 +32866,6 @@ module Aws::SageMaker
     # `StringValue` can be specified.
     #
     # This object is specified in the CreateTrialComponent request.
-    #
-    # @note When making an API call, you may pass TrialComponentParameterValue
-    #   data as a hash:
-    #
-    #       {
-    #         string_value: "StringParameterValue",
-    #         number_value: 1.0,
-    #       }
     #
     # @!attribute [rw] string_value
     #   The string value of a categorical hyperparameter. If you specify a
@@ -41809,14 +32978,6 @@ module Aws::SageMaker
     end
 
     # The status of the trial component.
-    #
-    # @note When making an API call, you may pass TrialComponentStatus
-    #   data as a hash:
-    #
-    #       {
-    #         primary_status: "InProgress", # accepts InProgress, Completed, Failed, Stopping, Stopped
-    #         message: "TrialComponentStatusMessage",
-    #       }
     #
     # @!attribute [rw] primary_status
     #   The status of the trial component.
@@ -41971,13 +33132,6 @@ module Aws::SageMaker
 
     # The job completion criteria.
     #
-    # @note When making an API call, you may pass TuningJobCompletionCriteria
-    #   data as a hash:
-    #
-    #       {
-    #         target_objective_metric_value: 1.0, # required
-    #       }
-    #
     # @!attribute [rw] target_objective_metric_value
     #   The value of the objective metric.
     #   @return [Float]
@@ -42006,15 +33160,6 @@ module Aws::SageMaker
     end
 
     # Represents an amount of money in United States dollars.
-    #
-    # @note When making an API call, you may pass USD
-    #   data as a hash:
-    #
-    #       {
-    #         dollars: 1,
-    #         cents: 1,
-    #         tenth_fractions_of_a_cent: 1,
-    #       }
     #
     # @!attribute [rw] dollars
     #   The whole number of dollars in the amount.
@@ -42047,14 +33192,6 @@ module Aws::SageMaker
     # For all other Ground Truth built-in task types and custom task types,
     # use `UiTemplateS3Uri` to specify the location of a worker task
     # template in Amazon S3.
-    #
-    # @note When making an API call, you may pass UiConfig
-    #   data as a hash:
-    #
-    #       {
-    #         ui_template_s3_uri: "S3Uri",
-    #         human_task_ui_arn: "HumanTaskUiArn",
-    #       }
     #
     # @!attribute [rw] ui_template_s3_uri
     #   The Amazon S3 bucket location of the UI template, or worker task
@@ -42139,13 +33276,6 @@ module Aws::SageMaker
 
     # The Liquid template for the worker user interface.
     #
-    # @note When making an API call, you may pass UiTemplate
-    #   data as a hash:
-    #
-    #       {
-    #         content: "TemplateContent", # required
-    #       }
-    #
     # @!attribute [rw] content
     #   The content of the Liquid template for the worker user interface.
     #   @return [String]
@@ -42177,19 +33307,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateActionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         action_name: "ExperimentEntityName", # required
-    #         description: "ExperimentDescription",
-    #         status: "Unknown", # accepts Unknown, InProgress, Completed, Failed, Stopping, Stopped
-    #         properties: {
-    #           "StringParameterValue" => "StringParameterValue",
-    #         },
-    #         properties_to_remove: ["StringParameterValue"],
-    #       }
-    #
     # @!attribute [rw] action_name
     #   The name of the action to update.
     #   @return [String]
@@ -42234,26 +33351,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateAppImageConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_image_config_name: "AppImageConfigName", # required
-    #         kernel_gateway_image_config: {
-    #           kernel_specs: [ # required
-    #             {
-    #               name: "KernelName", # required
-    #               display_name: "KernelDisplayName",
-    #             },
-    #           ],
-    #           file_system_config: {
-    #             mount_path: "MountPath",
-    #             default_uid: 1,
-    #             default_gid: 1,
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] app_image_config_name
     #   The name of the AppImageConfig to update.
     #   @return [String]
@@ -42283,18 +33380,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateArtifactRequest
-    #   data as a hash:
-    #
-    #       {
-    #         artifact_arn: "ArtifactArn", # required
-    #         artifact_name: "ExperimentEntityName",
-    #         properties: {
-    #           "StringParameterValue" => "StringParameterValue",
-    #         },
-    #         properties_to_remove: ["StringParameterValue"],
-    #       }
-    #
     # @!attribute [rw] artifact_arn
     #   The Amazon Resource Name (ARN) of the artifact to update.
     #   @return [String]
@@ -42334,16 +33419,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateCodeRepositoryInput
-    #   data as a hash:
-    #
-    #       {
-    #         code_repository_name: "EntityName", # required
-    #         git_config: {
-    #           secret_arn: "SecretArn",
-    #         },
-    #       }
-    #
     # @!attribute [rw] code_repository_name
     #   The name of the Git repository to update.
     #   @return [String]
@@ -42379,18 +33454,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateContextRequest
-    #   data as a hash:
-    #
-    #       {
-    #         context_name: "ExperimentEntityName", # required
-    #         description: "ExperimentDescription",
-    #         properties: {
-    #           "StringParameterValue" => "StringParameterValue",
-    #         },
-    #         properties_to_remove: ["StringParameterValue"],
-    #       }
-    #
     # @!attribute [rw] context_name
     #   The name of the context to update.
     #   @return [String]
@@ -42430,22 +33493,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateDeviceFleetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_fleet_name: "EntityName", # required
-    #         role_arn: "RoleArn",
-    #         description: "DeviceFleetDescription",
-    #         output_config: { # required
-    #           s3_output_location: "S3Uri", # required
-    #           kms_key_id: "KmsKeyId",
-    #           preset_deployment_type: "GreengrassV2Component", # accepts GreengrassV2Component
-    #           preset_deployment_config: "String",
-    #         },
-    #         enable_iot_role_alias: false,
-    #       }
-    #
     # @!attribute [rw] device_fleet_name
     #   The name of the fleet.
     #   @return [String]
@@ -42483,20 +33530,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateDevicesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_fleet_name: "EntityName", # required
-    #         devices: [ # required
-    #           {
-    #             device_name: "DeviceName", # required
-    #             description: "DeviceDescription",
-    #             iot_thing_name: "ThingName",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] device_fleet_name
     #   The name of the fleet the devices belong to.
     #   @return [String]
@@ -42514,92 +33547,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_id: "DomainId", # required
-    #         default_user_settings: {
-    #           execution_role: "RoleArn",
-    #           security_groups: ["SecurityGroupId"],
-    #           sharing_settings: {
-    #             notebook_output_option: "Allowed", # accepts Allowed, Disabled
-    #             s3_output_path: "S3Uri",
-    #             s3_kms_key_id: "KmsKeyId",
-    #           },
-    #           jupyter_server_app_settings: {
-    #             default_resource_spec: {
-    #               sage_maker_image_arn: "ImageArn",
-    #               sage_maker_image_version_arn: "ImageVersionArn",
-    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
-    #             },
-    #             lifecycle_config_arns: ["StudioLifecycleConfigArn"],
-    #           },
-    #           kernel_gateway_app_settings: {
-    #             default_resource_spec: {
-    #               sage_maker_image_arn: "ImageArn",
-    #               sage_maker_image_version_arn: "ImageVersionArn",
-    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
-    #             },
-    #             custom_images: [
-    #               {
-    #                 image_name: "ImageName", # required
-    #                 image_version_number: 1,
-    #                 app_image_config_name: "AppImageConfigName", # required
-    #               },
-    #             ],
-    #             lifecycle_config_arns: ["StudioLifecycleConfigArn"],
-    #           },
-    #           tensor_board_app_settings: {
-    #             default_resource_spec: {
-    #               sage_maker_image_arn: "ImageArn",
-    #               sage_maker_image_version_arn: "ImageVersionArn",
-    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
-    #             },
-    #           },
-    #           r_studio_server_pro_app_settings: {
-    #             access_status: "ENABLED", # accepts ENABLED, DISABLED
-    #             user_group: "R_STUDIO_ADMIN", # accepts R_STUDIO_ADMIN, R_STUDIO_USER
-    #           },
-    #           r_session_app_settings: {
-    #             default_resource_spec: {
-    #               sage_maker_image_arn: "ImageArn",
-    #               sage_maker_image_version_arn: "ImageVersionArn",
-    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
-    #             },
-    #             custom_images: [
-    #               {
-    #                 image_name: "ImageName", # required
-    #                 image_version_number: 1,
-    #                 app_image_config_name: "AppImageConfigName", # required
-    #               },
-    #             ],
-    #           },
-    #           canvas_app_settings: {
-    #             time_series_forecasting_settings: {
-    #               status: "ENABLED", # accepts ENABLED, DISABLED
-    #               amazon_forecast_role_arn: "RoleArn",
-    #             },
-    #           },
-    #         },
-    #         domain_settings_for_update: {
-    #           r_studio_server_pro_domain_settings_for_update: {
-    #             domain_execution_role_arn: "RoleArn", # required
-    #             default_resource_spec: {
-    #               sage_maker_image_arn: "ImageArn",
-    #               sage_maker_image_version_arn: "ImageVersionArn",
-    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
-    #             },
-    #           },
-    #           execution_role_identity_config: "USER_PROFILE_NAME", # accepts USER_PROFILE_NAME, DISABLED
-    #         },
-    #       }
-    #
     # @!attribute [rw] domain_id
     #   The ID of the domain to be updated.
     #   @return [String]
@@ -42634,46 +33581,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateEndpointInput
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_name: "EndpointName", # required
-    #         endpoint_config_name: "EndpointConfigName", # required
-    #         retain_all_variant_properties: false,
-    #         exclude_retained_variant_properties: [
-    #           {
-    #             variant_property_type: "DesiredInstanceCount", # required, accepts DesiredInstanceCount, DesiredWeight, DataCaptureConfig
-    #           },
-    #         ],
-    #         deployment_config: {
-    #           blue_green_update_policy: { # required
-    #             traffic_routing_configuration: { # required
-    #               type: "ALL_AT_ONCE", # required, accepts ALL_AT_ONCE, CANARY, LINEAR
-    #               wait_interval_in_seconds: 1, # required
-    #               canary_size: {
-    #                 type: "INSTANCE_COUNT", # required, accepts INSTANCE_COUNT, CAPACITY_PERCENT
-    #                 value: 1, # required
-    #               },
-    #               linear_step_size: {
-    #                 type: "INSTANCE_COUNT", # required, accepts INSTANCE_COUNT, CAPACITY_PERCENT
-    #                 value: 1, # required
-    #               },
-    #             },
-    #             termination_wait_in_seconds: 1,
-    #             maximum_execution_timeout_in_seconds: 1,
-    #           },
-    #           auto_rollback_configuration: {
-    #             alarms: [
-    #               {
-    #                 alarm_name: "AlarmName",
-    #               },
-    #             ],
-    #           },
-    #         },
-    #         retain_deployment_config: false,
-    #       }
-    #
     # @!attribute [rw] endpoint_name
     #   The name of the endpoint whose configuration you want to update.
     #   @return [String]
@@ -42740,20 +33647,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateEndpointWeightsAndCapacitiesInput
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_name: "EndpointName", # required
-    #         desired_weights_and_capacities: [ # required
-    #           {
-    #             variant_name: "VariantName", # required
-    #             desired_weight: 1.0,
-    #             desired_instance_count: 1,
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] endpoint_name
     #   The name of an existing SageMaker endpoint.
     #   @return [String]
@@ -42784,15 +33677,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateExperimentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         experiment_name: "ExperimentEntityName", # required
-    #         display_name: "ExperimentEntityName",
-    #         description: "ExperimentDescription",
-    #       }
-    #
     # @!attribute [rw] experiment_name
     #   The name of the experiment to update.
     #   @return [String]
@@ -42829,19 +33713,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateFeatureGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         feature_group_name: "FeatureGroupName", # required
-    #         feature_additions: [
-    #           {
-    #             feature_name: "FeatureName",
-    #             feature_type: "Integral", # accepts Integral, Fractional, String
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] feature_group_name
     #   The name of the feature group that you're updating.
     #   @return [String]
@@ -42875,22 +33746,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateFeatureMetadataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         feature_group_name: "FeatureGroupName", # required
-    #         feature_name: "FeatureName", # required
-    #         description: "FeatureDescription",
-    #         parameter_additions: [
-    #           {
-    #             key: "FeatureParameterKey",
-    #             value: "FeatureParameterValue",
-    #           },
-    #         ],
-    #         parameter_removals: ["FeatureParameterKey"],
-    #       }
-    #
     # @!attribute [rw] feature_group_name
     #   The name of the feature group containing the feature that you're
     #   updating.
@@ -42926,17 +33781,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateImageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         delete_properties: ["ImageDeleteProperty"],
-    #         description: "ImageDescription",
-    #         display_name: "ImageDisplayName",
-    #         image_name: "ImageName", # required
-    #         role_arn: "RoleArn",
-    #       }
-    #
     # @!attribute [rw] delete_properties
     #   A list of properties to delete. Only the `Description` and
     #   `DisplayName` properties can be deleted.
@@ -42983,47 +33827,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateModelPackageInput
-    #   data as a hash:
-    #
-    #       {
-    #         model_package_arn: "ModelPackageArn", # required
-    #         model_approval_status: "Approved", # accepts Approved, Rejected, PendingManualApproval
-    #         approval_description: "ApprovalDescription",
-    #         customer_metadata_properties: {
-    #           "CustomerMetadataKey" => "CustomerMetadataValue",
-    #         },
-    #         customer_metadata_properties_to_remove: ["CustomerMetadataKey"],
-    #         additional_inference_specifications_to_add: [
-    #           {
-    #             name: "EntityName", # required
-    #             description: "EntityDescription",
-    #             containers: [ # required
-    #               {
-    #                 container_hostname: "ContainerHostname",
-    #                 image: "ContainerImage", # required
-    #                 image_digest: "ImageDigest",
-    #                 model_data_url: "Url",
-    #                 product_id: "ProductId",
-    #                 environment: {
-    #                   "EnvironmentKey" => "EnvironmentValue",
-    #                 },
-    #                 model_input: {
-    #                   data_input_config: "DataInputConfig", # required
-    #                 },
-    #                 framework: "String",
-    #                 framework_version: "ModelPackageFrameworkVersion",
-    #                 nearest_model_name: "String",
-    #               },
-    #             ],
-    #             supported_transform_instance_types: ["ml.m4.xlarge"], # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
-    #             supported_realtime_inference_instance_types: ["ml.t2.medium"], # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge, ml.c6i.large, ml.c6i.xlarge, ml.c6i.2xlarge, ml.c6i.4xlarge, ml.c6i.8xlarge, ml.c6i.12xlarge, ml.c6i.16xlarge, ml.c6i.24xlarge, ml.c6i.32xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.12xlarge, ml.g5.16xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.p4d.24xlarge, ml.c7g.large, ml.c7g.xlarge, ml.c7g.2xlarge, ml.c7g.4xlarge, ml.c7g.8xlarge, ml.c7g.12xlarge, ml.c7g.16xlarge, ml.m6g.large, ml.m6g.xlarge, ml.m6g.2xlarge, ml.m6g.4xlarge, ml.m6g.8xlarge, ml.m6g.12xlarge, ml.m6g.16xlarge, ml.m6gd.large, ml.m6gd.xlarge, ml.m6gd.2xlarge, ml.m6gd.4xlarge, ml.m6gd.8xlarge, ml.m6gd.12xlarge, ml.m6gd.16xlarge, ml.c6g.large, ml.c6g.xlarge, ml.c6g.2xlarge, ml.c6g.4xlarge, ml.c6g.8xlarge, ml.c6g.12xlarge, ml.c6g.16xlarge, ml.c6gd.large, ml.c6gd.xlarge, ml.c6gd.2xlarge, ml.c6gd.4xlarge, ml.c6gd.8xlarge, ml.c6gd.12xlarge, ml.c6gd.16xlarge, ml.c6gn.large, ml.c6gn.xlarge, ml.c6gn.2xlarge, ml.c6gn.4xlarge, ml.c6gn.8xlarge, ml.c6gn.12xlarge, ml.c6gn.16xlarge, ml.r6g.large, ml.r6g.xlarge, ml.r6g.2xlarge, ml.r6g.4xlarge, ml.r6g.8xlarge, ml.r6g.12xlarge, ml.r6g.16xlarge, ml.r6gd.large, ml.r6gd.xlarge, ml.r6gd.2xlarge, ml.r6gd.4xlarge, ml.r6gd.8xlarge, ml.r6gd.12xlarge, ml.r6gd.16xlarge
-    #             supported_content_types: ["ContentType"],
-    #             supported_response_mime_types: ["ResponseMIMEType"],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] model_package_arn
     #   The Amazon Resource Name (ARN) of the model package.
     #   @return [String]
@@ -43079,111 +33882,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateMonitoringScheduleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         monitoring_schedule_name: "MonitoringScheduleName", # required
-    #         monitoring_schedule_config: { # required
-    #           schedule_config: {
-    #             schedule_expression: "ScheduleExpression", # required
-    #           },
-    #           monitoring_job_definition: {
-    #             baseline_config: {
-    #               baselining_job_name: "ProcessingJobName",
-    #               constraints_resource: {
-    #                 s3_uri: "S3Uri",
-    #               },
-    #               statistics_resource: {
-    #                 s3_uri: "S3Uri",
-    #               },
-    #             },
-    #             monitoring_inputs: [ # required
-    #               {
-    #                 endpoint_input: {
-    #                   endpoint_name: "EndpointName", # required
-    #                   local_path: "ProcessingLocalPath", # required
-    #                   s3_input_mode: "Pipe", # accepts Pipe, File
-    #                   s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
-    #                   features_attribute: "String",
-    #                   inference_attribute: "String",
-    #                   probability_attribute: "String",
-    #                   probability_threshold_attribute: 1.0,
-    #                   start_time_offset: "MonitoringTimeOffsetString",
-    #                   end_time_offset: "MonitoringTimeOffsetString",
-    #                 },
-    #                 batch_transform_input: {
-    #                   data_captured_destination_s3_uri: "DestinationS3Uri", # required
-    #                   dataset_format: { # required
-    #                     csv: {
-    #                       header: false,
-    #                     },
-    #                     json: {
-    #                       line: false,
-    #                     },
-    #                     parquet: {
-    #                     },
-    #                   },
-    #                   local_path: "ProcessingLocalPath", # required
-    #                   s3_input_mode: "Pipe", # accepts Pipe, File
-    #                   s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
-    #                   features_attribute: "String",
-    #                   inference_attribute: "String",
-    #                   probability_attribute: "String",
-    #                   probability_threshold_attribute: 1.0,
-    #                   start_time_offset: "MonitoringTimeOffsetString",
-    #                   end_time_offset: "MonitoringTimeOffsetString",
-    #                 },
-    #               },
-    #             ],
-    #             monitoring_output_config: { # required
-    #               monitoring_outputs: [ # required
-    #                 {
-    #                   s3_output: { # required
-    #                     s3_uri: "MonitoringS3Uri", # required
-    #                     local_path: "ProcessingLocalPath", # required
-    #                     s3_upload_mode: "Continuous", # accepts Continuous, EndOfJob
-    #                   },
-    #                 },
-    #               ],
-    #               kms_key_id: "KmsKeyId",
-    #             },
-    #             monitoring_resources: { # required
-    #               cluster_config: { # required
-    #                 instance_count: 1, # required
-    #                 instance_type: "ml.t3.medium", # required, accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
-    #                 volume_size_in_gb: 1, # required
-    #                 volume_kms_key_id: "KmsKeyId",
-    #               },
-    #             },
-    #             monitoring_app_specification: { # required
-    #               image_uri: "ImageUri", # required
-    #               container_entrypoint: ["ContainerEntrypointString"],
-    #               container_arguments: ["ContainerArgument"],
-    #               record_preprocessor_source_uri: "S3Uri",
-    #               post_analytics_processor_source_uri: "S3Uri",
-    #             },
-    #             stopping_condition: {
-    #               max_runtime_in_seconds: 1, # required
-    #             },
-    #             environment: {
-    #               "ProcessingEnvironmentKey" => "ProcessingEnvironmentValue",
-    #             },
-    #             network_config: {
-    #               enable_inter_container_traffic_encryption: false,
-    #               enable_network_isolation: false,
-    #               vpc_config: {
-    #                 security_group_ids: ["SecurityGroupId"], # required
-    #                 subnets: ["SubnetId"], # required
-    #               },
-    #             },
-    #             role_arn: "RoleArn", # required
-    #           },
-    #           monitoring_job_definition_name: "MonitoringJobDefinitionName",
-    #           monitoring_type: "DataQuality", # accepts DataQuality, ModelQuality, ModelBias, ModelExplainability
-    #         },
-    #       }
-    #
     # @!attribute [rw] monitoring_schedule_name
     #   The name of the monitoring schedule. The name must be unique within
     #   an Amazon Web Services Region within an Amazon Web Services account.
@@ -43215,28 +33913,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateNotebookInstanceInput
-    #   data as a hash:
-    #
-    #       {
-    #         notebook_instance_name: "NotebookInstanceName", # required
-    #         instance_type: "ml.t2.medium", # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #         role_arn: "RoleArn",
-    #         lifecycle_config_name: "NotebookInstanceLifecycleConfigName",
-    #         disassociate_lifecycle_config: false,
-    #         volume_size_in_gb: 1,
-    #         default_code_repository: "CodeRepositoryNameOrUrl",
-    #         additional_code_repositories: ["CodeRepositoryNameOrUrl"],
-    #         accelerator_types: ["ml.eia1.medium"], # accepts ml.eia1.medium, ml.eia1.large, ml.eia1.xlarge, ml.eia2.medium, ml.eia2.large, ml.eia2.xlarge
-    #         disassociate_accelerator_types: false,
-    #         disassociate_default_code_repository: false,
-    #         disassociate_additional_code_repositories: false,
-    #         root_access: "Enabled", # accepts Enabled, Disabled
-    #         instance_metadata_service_configuration: {
-    #           minimum_instance_metadata_service_version: "MinimumInstanceMetadataServiceVersion", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] notebook_instance_name
     #   The name of the notebook instance to update.
     #   @return [String]
@@ -43388,23 +34064,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateNotebookInstanceLifecycleConfigInput
-    #   data as a hash:
-    #
-    #       {
-    #         notebook_instance_lifecycle_config_name: "NotebookInstanceLifecycleConfigName", # required
-    #         on_create: [
-    #           {
-    #             content: "NotebookInstanceLifecycleConfigContent",
-    #           },
-    #         ],
-    #         on_start: [
-    #           {
-    #             content: "NotebookInstanceLifecycleConfigContent",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] notebook_instance_lifecycle_config_name
     #   The name of the lifecycle configuration.
     #   @return [String]
@@ -43438,18 +34097,6 @@ module Aws::SageMaker
     #
     class UpdateNotebookInstanceOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdatePipelineExecutionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         pipeline_execution_arn: "PipelineExecutionArn", # required
-    #         pipeline_execution_description: "PipelineExecutionDescription",
-    #         pipeline_execution_display_name: "PipelineExecutionName",
-    #         parallelism_configuration: {
-    #           max_parallel_execution_steps: 1, # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] pipeline_execution_arn
     #   The Amazon Resource Name (ARN) of the pipeline execution.
     #   @return [String]
@@ -43490,25 +34137,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdatePipelineRequest
-    #   data as a hash:
-    #
-    #       {
-    #         pipeline_name: "PipelineName", # required
-    #         pipeline_display_name: "PipelineName",
-    #         pipeline_definition: "PipelineDefinition",
-    #         pipeline_definition_s3_location: {
-    #           bucket: "BucketName", # required
-    #           object_key: "Key", # required
-    #           version_id: "VersionId",
-    #         },
-    #         pipeline_description: "PipelineDescription",
-    #         role_arn: "RoleArn",
-    #         parallelism_configuration: {
-    #           max_parallel_execution_steps: 1, # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] pipeline_name
     #   The name of the pipeline to update.
     #   @return [String]
@@ -43566,29 +34194,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateProjectInput
-    #   data as a hash:
-    #
-    #       {
-    #         project_name: "ProjectEntityName", # required
-    #         project_description: "EntityDescription",
-    #         service_catalog_provisioning_update_details: {
-    #           provisioning_artifact_id: "ServiceCatalogEntityId",
-    #           provisioning_parameters: [
-    #             {
-    #               key: "ProvisioningParameterKey",
-    #               value: "ProvisioningParameterValue",
-    #             },
-    #           ],
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] project_name
     #   The name of the project.
     #   @return [String]
@@ -43647,37 +34252,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateTrainingJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         training_job_name: "TrainingJobName", # required
-    #         profiler_config: {
-    #           s3_output_path: "S3Uri",
-    #           profiling_interval_in_milliseconds: 1,
-    #           profiling_parameters: {
-    #             "ConfigKey" => "ConfigValue",
-    #           },
-    #           disable_profiler: false,
-    #         },
-    #         profiler_rule_configurations: [
-    #           {
-    #             rule_configuration_name: "RuleConfigurationName", # required
-    #             local_path: "DirectoryPath",
-    #             s3_output_path: "S3Uri",
-    #             rule_evaluator_image: "AlgorithmImage", # required
-    #             instance_type: "ml.t3.medium", # accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
-    #             volume_size_in_gb: 1,
-    #             rule_parameters: {
-    #               "ConfigKey" => "ConfigValue",
-    #             },
-    #           },
-    #         ],
-    #         resource_config: {
-    #           keep_alive_period_in_seconds: 1, # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] training_job_name
     #   The name of a training job to update the Debugger profiling
     #   configuration.
@@ -43721,41 +34295,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateTrialComponentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         trial_component_name: "ExperimentEntityName", # required
-    #         display_name: "ExperimentEntityName",
-    #         status: {
-    #           primary_status: "InProgress", # accepts InProgress, Completed, Failed, Stopping, Stopped
-    #           message: "TrialComponentStatusMessage",
-    #         },
-    #         start_time: Time.now,
-    #         end_time: Time.now,
-    #         parameters: {
-    #           "TrialComponentKey256" => {
-    #             string_value: "StringParameterValue",
-    #             number_value: 1.0,
-    #           },
-    #         },
-    #         parameters_to_remove: ["TrialComponentKey256"],
-    #         input_artifacts: {
-    #           "TrialComponentKey64" => {
-    #             media_type: "MediaType",
-    #             value: "TrialComponentArtifactValue", # required
-    #           },
-    #         },
-    #         input_artifacts_to_remove: ["TrialComponentKey256"],
-    #         output_artifacts: {
-    #           "TrialComponentKey64" => {
-    #             media_type: "MediaType",
-    #             value: "TrialComponentArtifactValue", # required
-    #           },
-    #         },
-    #         output_artifacts_to_remove: ["TrialComponentKey256"],
-    #       }
-    #
     # @!attribute [rw] trial_component_name
     #   The name of the component to update.
     #   @return [String]
@@ -43835,14 +34374,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateTrialRequest
-    #   data as a hash:
-    #
-    #       {
-    #         trial_name: "ExperimentEntityName", # required
-    #         display_name: "ExperimentEntityName",
-    #       }
-    #
     # @!attribute [rw] trial_name
     #   The name of the trial to update.
     #   @return [String]
@@ -43873,81 +34404,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateUserProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_id: "DomainId", # required
-    #         user_profile_name: "UserProfileName", # required
-    #         user_settings: {
-    #           execution_role: "RoleArn",
-    #           security_groups: ["SecurityGroupId"],
-    #           sharing_settings: {
-    #             notebook_output_option: "Allowed", # accepts Allowed, Disabled
-    #             s3_output_path: "S3Uri",
-    #             s3_kms_key_id: "KmsKeyId",
-    #           },
-    #           jupyter_server_app_settings: {
-    #             default_resource_spec: {
-    #               sage_maker_image_arn: "ImageArn",
-    #               sage_maker_image_version_arn: "ImageVersionArn",
-    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
-    #             },
-    #             lifecycle_config_arns: ["StudioLifecycleConfigArn"],
-    #           },
-    #           kernel_gateway_app_settings: {
-    #             default_resource_spec: {
-    #               sage_maker_image_arn: "ImageArn",
-    #               sage_maker_image_version_arn: "ImageVersionArn",
-    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
-    #             },
-    #             custom_images: [
-    #               {
-    #                 image_name: "ImageName", # required
-    #                 image_version_number: 1,
-    #                 app_image_config_name: "AppImageConfigName", # required
-    #               },
-    #             ],
-    #             lifecycle_config_arns: ["StudioLifecycleConfigArn"],
-    #           },
-    #           tensor_board_app_settings: {
-    #             default_resource_spec: {
-    #               sage_maker_image_arn: "ImageArn",
-    #               sage_maker_image_version_arn: "ImageVersionArn",
-    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
-    #             },
-    #           },
-    #           r_studio_server_pro_app_settings: {
-    #             access_status: "ENABLED", # accepts ENABLED, DISABLED
-    #             user_group: "R_STUDIO_ADMIN", # accepts R_STUDIO_ADMIN, R_STUDIO_USER
-    #           },
-    #           r_session_app_settings: {
-    #             default_resource_spec: {
-    #               sage_maker_image_arn: "ImageArn",
-    #               sage_maker_image_version_arn: "ImageVersionArn",
-    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
-    #             },
-    #             custom_images: [
-    #               {
-    #                 image_name: "ImageName", # required
-    #                 image_version_number: 1,
-    #                 app_image_config_name: "AppImageConfigName", # required
-    #               },
-    #             ],
-    #           },
-    #           canvas_app_settings: {
-    #             time_series_forecasting_settings: {
-    #               status: "ENABLED", # accepts ENABLED, DISABLED
-    #               amazon_forecast_role_arn: "RoleArn",
-    #             },
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] domain_id
     #   The domain ID.
     #   @return [String]
@@ -43982,31 +34438,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateWorkforceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workforce_name: "WorkforceName", # required
-    #         source_ip_config: {
-    #           cidrs: ["Cidr"], # required
-    #         },
-    #         oidc_config: {
-    #           client_id: "ClientId", # required
-    #           client_secret: "ClientSecret", # required
-    #           issuer: "OidcEndpoint", # required
-    #           authorization_endpoint: "OidcEndpoint", # required
-    #           token_endpoint: "OidcEndpoint", # required
-    #           user_info_endpoint: "OidcEndpoint", # required
-    #           logout_endpoint: "OidcEndpoint", # required
-    #           jwks_uri: "OidcEndpoint", # required
-    #         },
-    #         workforce_vpc_config: {
-    #           vpc_id: "WorkforceVpcId",
-    #           security_group_ids: ["WorkforceSecurityGroupId"],
-    #           subnets: ["WorkforceSubnetId"],
-    #         },
-    #       }
-    #
     # @!attribute [rw] workforce_name
     #   The name of the private workforce that you want to update. You can
     #   find your workforce name by using the operation.
@@ -44063,29 +34494,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateWorkteamRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workteam_name: "WorkteamName", # required
-    #         member_definitions: [
-    #           {
-    #             cognito_member_definition: {
-    #               user_pool: "CognitoUserPool", # required
-    #               user_group: "CognitoUserGroup", # required
-    #               client_id: "ClientId", # required
-    #             },
-    #             oidc_member_definition: {
-    #               groups: ["Group"], # required
-    #             },
-    #           },
-    #         ],
-    #         description: "String200",
-    #         notification_configuration: {
-    #           notification_topic_arn: "NotificationTopicArn",
-    #         },
-    #       }
-    #
     # @!attribute [rw] workteam_name
     #   The name of the work team to update.
     #   @return [String]
@@ -44223,77 +34631,6 @@ module Aws::SageMaker
     # `CreateUserProfile` take precedence over those specified in
     # `CreateDomain`.
     #
-    # @note When making an API call, you may pass UserSettings
-    #   data as a hash:
-    #
-    #       {
-    #         execution_role: "RoleArn",
-    #         security_groups: ["SecurityGroupId"],
-    #         sharing_settings: {
-    #           notebook_output_option: "Allowed", # accepts Allowed, Disabled
-    #           s3_output_path: "S3Uri",
-    #           s3_kms_key_id: "KmsKeyId",
-    #         },
-    #         jupyter_server_app_settings: {
-    #           default_resource_spec: {
-    #             sage_maker_image_arn: "ImageArn",
-    #             sage_maker_image_version_arn: "ImageVersionArn",
-    #             instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #             lifecycle_config_arn: "StudioLifecycleConfigArn",
-    #           },
-    #           lifecycle_config_arns: ["StudioLifecycleConfigArn"],
-    #         },
-    #         kernel_gateway_app_settings: {
-    #           default_resource_spec: {
-    #             sage_maker_image_arn: "ImageArn",
-    #             sage_maker_image_version_arn: "ImageVersionArn",
-    #             instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #             lifecycle_config_arn: "StudioLifecycleConfigArn",
-    #           },
-    #           custom_images: [
-    #             {
-    #               image_name: "ImageName", # required
-    #               image_version_number: 1,
-    #               app_image_config_name: "AppImageConfigName", # required
-    #             },
-    #           ],
-    #           lifecycle_config_arns: ["StudioLifecycleConfigArn"],
-    #         },
-    #         tensor_board_app_settings: {
-    #           default_resource_spec: {
-    #             sage_maker_image_arn: "ImageArn",
-    #             sage_maker_image_version_arn: "ImageVersionArn",
-    #             instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #             lifecycle_config_arn: "StudioLifecycleConfigArn",
-    #           },
-    #         },
-    #         r_studio_server_pro_app_settings: {
-    #           access_status: "ENABLED", # accepts ENABLED, DISABLED
-    #           user_group: "R_STUDIO_ADMIN", # accepts R_STUDIO_ADMIN, R_STUDIO_USER
-    #         },
-    #         r_session_app_settings: {
-    #           default_resource_spec: {
-    #             sage_maker_image_arn: "ImageArn",
-    #             sage_maker_image_version_arn: "ImageVersionArn",
-    #             instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
-    #             lifecycle_config_arn: "StudioLifecycleConfigArn",
-    #           },
-    #           custom_images: [
-    #             {
-    #               image_name: "ImageName", # required
-    #               image_version_number: 1,
-    #               app_image_config_name: "AppImageConfigName", # required
-    #             },
-    #           ],
-    #         },
-    #         canvas_app_settings: {
-    #           time_series_forecasting_settings: {
-    #             status: "ENABLED", # accepts ENABLED, DISABLED
-    #             amazon_forecast_role_arn: "RoleArn",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] execution_role
     #   The execution role for the user.
     #   @return [String]
@@ -44366,13 +34703,6 @@ module Aws::SageMaker
     # UpdateEndpointInput$ExcludeRetainedVariantProperties override the
     # existing variant properties of the endpoint.
     #
-    # @note When making an API call, you may pass VariantProperty
-    #   data as a hash:
-    #
-    #       {
-    #         variant_property_type: "DesiredInstanceCount", # required, accepts DesiredInstanceCount, DesiredWeight, DataCaptureConfig
-    #       }
-    #
     # @!attribute [rw] variant_property_type
     #   The type of variant property. The supported values are:
     #
@@ -44430,14 +34760,6 @@ module Aws::SageMaker
     #
     # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html
     # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html
-    #
-    # @note When making an API call, you may pass VpcConfig
-    #   data as a hash:
-    #
-    #       {
-    #         security_group_ids: ["SecurityGroupId"], # required
-    #         subnets: ["SubnetId"], # required
-    #       }
     #
     # @!attribute [rw] security_group_ids
     #   The VPC security group IDs, in the form sg-xxxxxxxx. Specify the
@@ -44601,15 +34923,6 @@ module Aws::SageMaker
     end
 
     # The VPC object you use to create or update a workforce.
-    #
-    # @note When making an API call, you may pass WorkforceVpcConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         vpc_id: "WorkforceVpcId",
-    #         security_group_ids: ["WorkforceSecurityGroupId"],
-    #         subnets: ["WorkforceSubnetId"],
-    #       }
     #
     # @!attribute [rw] vpc_id
     #   The ID of the VPC that the workforce uses for communication.

@@ -10,20 +10,6 @@
 module Aws::SavingsPlans
   module Types
 
-    # @note When making an API call, you may pass CreateSavingsPlanRequest
-    #   data as a hash:
-    #
-    #       {
-    #         savings_plan_offering_id: "SavingsPlanOfferingId", # required
-    #         commitment: "Amount", # required
-    #         upfront_payment_amount: "Amount",
-    #         purchase_time: Time.now,
-    #         client_token: "ClientToken",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] savings_plan_offering_id
     #   The ID of the offering.
     #   @return [String]
@@ -82,13 +68,6 @@ module Aws::SavingsPlans
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteQueuedSavingsPlanRequest
-    #   data as a hash:
-    #
-    #       {
-    #         savings_plan_id: "SavingsPlanId", # required
-    #       }
-    #
     # @!attribute [rw] savings_plan_id
     #   The ID of the Savings Plan.
     #   @return [String]
@@ -105,21 +84,6 @@ module Aws::SavingsPlans
     #
     class DeleteQueuedSavingsPlanResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeSavingsPlanRatesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         savings_plan_id: "SavingsPlanId", # required
-    #         filters: [
-    #           {
-    #             name: "region", # accepts region, instanceType, productDescription, tenancy, productType, serviceCode, usageType, operation
-    #             values: ["String"],
-    #           },
-    #         ],
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] savings_plan_id
     #   The ID of the Savings Plan.
     #   @return [String]
@@ -172,27 +136,6 @@ module Aws::SavingsPlans
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeSavingsPlansOfferingRatesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         savings_plan_offering_ids: ["UUID"],
-    #         savings_plan_payment_options: ["All Upfront"], # accepts All Upfront, Partial Upfront, No Upfront
-    #         savings_plan_types: ["Compute"], # accepts Compute, EC2Instance, SageMaker
-    #         products: ["EC2"], # accepts EC2, Fargate, Lambda, SageMaker
-    #         service_codes: ["AmazonEC2"], # accepts AmazonEC2, AmazonECS, AmazonEKS, AWSLambda, AmazonSageMaker
-    #         usage_types: ["SavingsPlanRateUsageType"],
-    #         operations: ["SavingsPlanRateOperation"],
-    #         filters: [
-    #           {
-    #             name: "region", # accepts region, instanceFamily, instanceType, productDescription, tenancy, productId
-    #             values: ["JsonSafeFilterValueString"],
-    #           },
-    #         ],
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] savings_plan_offering_ids
     #   The IDs of the offerings.
     #   @return [Array<String>]
@@ -270,30 +213,6 @@ module Aws::SavingsPlans
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeSavingsPlansOfferingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         offering_ids: ["UUID"],
-    #         payment_options: ["All Upfront"], # accepts All Upfront, Partial Upfront, No Upfront
-    #         product_type: "EC2", # accepts EC2, Fargate, Lambda, SageMaker
-    #         plan_types: ["Compute"], # accepts Compute, EC2Instance, SageMaker
-    #         durations: [1],
-    #         currencies: ["CNY"], # accepts CNY, USD
-    #         descriptions: ["SavingsPlanDescription"],
-    #         service_codes: ["SavingsPlanServiceCode"],
-    #         usage_types: ["SavingsPlanUsageType"],
-    #         operations: ["SavingsPlanOperation"],
-    #         filters: [
-    #           {
-    #             name: "region", # accepts region, instanceFamily
-    #             values: ["JsonSafeFilterValueString"],
-    #           },
-    #         ],
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] offering_ids
     #   The IDs of the offerings.
     #   @return [Array<String>]
@@ -386,23 +305,6 @@ module Aws::SavingsPlans
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeSavingsPlansRequest
-    #   data as a hash:
-    #
-    #       {
-    #         savings_plan_arns: ["SavingsPlanArn"],
-    #         savings_plan_ids: ["SavingsPlanId"],
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #         states: ["payment-pending"], # accepts payment-pending, payment-failed, active, retired, queued, queued-deleted
-    #         filters: [
-    #           {
-    #             name: "region", # accepts region, ec2-instance-family, commitment, upfront, term, savings-plan-type, payment-option, start, end
-    #             values: ["String"],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] savings_plan_arns
     #   The Amazon Resource Names (ARN) of the Savings Plans.
     #   @return [Array<String>]
@@ -473,13 +375,6 @@ module Aws::SavingsPlans
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "SavingsPlanArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -657,14 +552,6 @@ module Aws::SavingsPlans
 
     # Information about a filter.
     #
-    # @note When making an API call, you may pass SavingsPlanFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "region", # accepts region, ec2-instance-family, commitment, upfront, term, savings-plan-type, payment-option, start, end
-    #         values: ["String"],
-    #       }
-    #
     # @!attribute [rw] name
     #   The filter name.
     #   @return [String]
@@ -747,14 +634,6 @@ module Aws::SavingsPlans
     end
 
     # Information about a filter.
-    #
-    # @note When making an API call, you may pass SavingsPlanOfferingFilterElement
-    #   data as a hash:
-    #
-    #       {
-    #         name: "region", # accepts region, instanceFamily
-    #         values: ["JsonSafeFilterValueString"],
-    #       }
     #
     # @!attribute [rw] name
     #   The filter name.
@@ -843,14 +722,6 @@ module Aws::SavingsPlans
 
     # Information about a filter.
     #
-    # @note When making an API call, you may pass SavingsPlanOfferingRateFilterElement
-    #   data as a hash:
-    #
-    #       {
-    #         name: "region", # accepts region, instanceFamily, instanceType, productDescription, tenancy, productId
-    #         values: ["JsonSafeFilterValueString"],
-    #       }
-    #
     # @!attribute [rw] name
     #   The filter name.
     #   @return [String]
@@ -938,14 +809,6 @@ module Aws::SavingsPlans
 
     # Information about a filter.
     #
-    # @note When making an API call, you may pass SavingsPlanRateFilter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "region", # accepts region, instanceType, productDescription, tenancy, productType, serviceCode, usageType, operation
-    #         values: ["String"],
-    #       }
-    #
     # @!attribute [rw] name
     #   The filter name.
     #   @return [String]
@@ -995,16 +858,6 @@ module Aws::SavingsPlans
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "SavingsPlanArn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -1027,14 +880,6 @@ module Aws::SavingsPlans
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "SavingsPlanArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]

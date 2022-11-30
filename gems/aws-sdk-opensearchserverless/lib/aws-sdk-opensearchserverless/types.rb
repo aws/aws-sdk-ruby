@@ -129,14 +129,6 @@ module Aws::OpenSearchServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchGetCollectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         ids: ["CollectionId"],
-    #         names: ["CollectionName"],
-    #       }
-    #
     # @!attribute [rw] ids
     #   A list of collection IDs. You can't provide names and IDs in the
     #   same request. The ID is part of the collection endpoint. You can
@@ -178,13 +170,6 @@ module Aws::OpenSearchServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchGetVpcEndpointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         ids: ["VpcEndpointId"], # required
-    #       }
-    #
     # @!attribute [rw] ids
     #   A list of VPC endpoint identifiers.
     #   @return [Array<String>]
@@ -222,14 +207,6 @@ module Aws::OpenSearchServerless
     #
     #
     # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-overview.html#serverless-scaling
-    #
-    # @note When making an API call, you may pass CapacityLimits
-    #   data as a hash:
-    #
-    #       {
-    #         max_indexing_capacity_in_ocu: 1,
-    #         max_search_capacity_in_ocu: 1,
-    #       }
     #
     # @!attribute [rw] max_indexing_capacity_in_ocu
     #   The maximum indexing capacity for collections.
@@ -350,14 +327,6 @@ module Aws::OpenSearchServerless
     # List of filter keys that you can use for LIST, UPDATE, and DELETE
     # requests to OpenSearch Serverless collections.
     #
-    # @note When making an API call, you may pass CollectionFilters
-    #   data as a hash:
-    #
-    #       {
-    #         name: "CollectionName",
-    #         status: "CREATING", # accepts CREATING, DELETING, ACTIVE, FAILED
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the collection.
     #   @return [String]
@@ -419,17 +388,6 @@ module Aws::OpenSearchServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAccessPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         description: "PolicyDescription",
-    #         name: "PolicyName", # required
-    #         policy: "PolicyDocument", # required
-    #         type: "data", # required, accepts data
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier to ensure idempotency of the
     #   request.
@@ -534,22 +492,6 @@ module Aws::OpenSearchServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateCollectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         description: "CreateCollectionRequestDescriptionString",
-    #         name: "CollectionName", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         type: "SEARCH", # accepts SEARCH, TIMESERIES
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier to ensure idempotency of the
     #   request.
@@ -599,22 +541,6 @@ module Aws::OpenSearchServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateSecurityConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         description: "ConfigDescription",
-    #         name: "ConfigName", # required
-    #         saml_options: {
-    #           group_attribute: "samlGroupAttribute",
-    #           metadata: "samlMetadata", # required
-    #           session_timeout: 1,
-    #           user_attribute: "samlUserAttribute",
-    #         },
-    #         type: "saml", # required, accepts saml
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier to ensure idempotency of the
     #   request.
@@ -663,17 +589,6 @@ module Aws::OpenSearchServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateSecurityPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         description: "PolicyDescription",
-    #         name: "PolicyName", # required
-    #         policy: "PolicyDocument", # required
-    #         type: "encryption", # required, accepts encryption, network
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier to ensure idempotency of the
     #   request.
@@ -753,17 +668,6 @@ module Aws::OpenSearchServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateVpcEndpointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         name: "VpcEndpointName", # required
-    #         security_group_ids: ["SecurityGroupId"],
-    #         subnet_ids: ["SubnetId"], # required
-    #         vpc_id: "VpcId", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier to ensure idempotency of the
     #   request.
@@ -815,15 +719,6 @@ module Aws::OpenSearchServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAccessPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         name: "PolicyName", # required
-    #         type: "data", # required, accepts data
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier to ensure idempotency of the
     #   request.
@@ -878,14 +773,6 @@ module Aws::OpenSearchServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteCollectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         id: "CollectionId", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier to ensure idempotency of the
     #   request.
@@ -925,14 +812,6 @@ module Aws::OpenSearchServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteSecurityConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         id: "SecurityConfigId", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier to ensure idempotency of the
     #   request.
@@ -960,15 +839,6 @@ module Aws::OpenSearchServerless
     #
     class DeleteSecurityConfigResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteSecurityPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         name: "PolicyName", # required
-    #         type: "encryption", # required, accepts encryption, network
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier to ensure idempotency of the
     #   request.
@@ -1024,14 +894,6 @@ module Aws::OpenSearchServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteVpcEndpointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         id: "VpcEndpointId", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier to ensure idempotency of the
     #   request.
@@ -1065,14 +927,6 @@ module Aws::OpenSearchServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAccessPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "PolicyName", # required
-    #         type: "data", # required, accepts data
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the access policy.
     #   @return [String]
@@ -1102,8 +956,6 @@ module Aws::OpenSearchServerless
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/GetAccountSettingsRequest AWS API Documentation
     #
     class GetAccountSettingsRequest < Aws::EmptyStructure; end
@@ -1120,8 +972,6 @@ module Aws::OpenSearchServerless
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/GetPoliciesStatsRequest AWS API Documentation
     #
     class GetPoliciesStatsRequest < Aws::EmptyStructure; end
@@ -1154,13 +1004,6 @@ module Aws::OpenSearchServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSecurityConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "SecurityConfigId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The unique identifier of the security configuration.
     #   @return [String]
@@ -1185,14 +1028,6 @@ module Aws::OpenSearchServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSecurityPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "PolicyName", # required
-    #         type: "encryption", # required, accepts encryption, network
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the security policy.
     #   @return [String]
@@ -1236,16 +1071,6 @@ module Aws::OpenSearchServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAccessPoliciesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "String",
-    #         resource: ["Resource"],
-    #         type: "data", # required, accepts data
-    #       }
-    #
     # @!attribute [rw] max_results
     #   An optional parameter that specifies the maximum number of results
     #   to return. You can use `nextToken` to get the next page of results.
@@ -1299,18 +1124,6 @@ module Aws::OpenSearchServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCollectionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         collection_filters: {
-    #           name: "CollectionName",
-    #           status: "CREATING", # accepts CREATING, DELETING, ACTIVE, FAILED
-    #         },
-    #         max_results: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] collection_filters
     #   List of filter names and values that you can use for requests.
     #   @return [Types::CollectionFilters]
@@ -1357,15 +1170,6 @@ module Aws::OpenSearchServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSecurityConfigsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "String",
-    #         type: "saml", # required, accepts saml
-    #       }
-    #
     # @!attribute [rw] max_results
     #   An optional parameter that specifies the maximum number of results
     #   to return. You can use `nextToken` to get the next page of results.
@@ -1413,16 +1217,6 @@ module Aws::OpenSearchServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSecurityPoliciesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "String",
-    #         resource: ["Resource"],
-    #         type: "encryption", # required, accepts encryption, network
-    #       }
-    #
     # @!attribute [rw] max_results
     #   An optional parameter that specifies the maximum number of results
     #   to return. You can use `nextToken` to get the next page of results.
@@ -1476,13 +1270,6 @@ module Aws::OpenSearchServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource. The resource must be
     #   active (not in the `DELETING` state), and must be owned by the
@@ -1509,17 +1296,6 @@ module Aws::OpenSearchServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListVpcEndpointsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "String",
-    #         vpc_endpoint_filters: {
-    #           status: "PENDING", # accepts PENDING, DELETING, ACTIVE, FAILED
-    #         },
-    #       }
-    #
     # @!attribute [rw] max_results
     #   An optional parameter that specifies the maximum number of results
     #   to return. You can use `nextToken` to get the next page of results.
@@ -1585,16 +1361,6 @@ module Aws::OpenSearchServerless
 
     # Describes SAML options for an OpenSearch Serverless security
     # configuration in the form of a key-value map.
-    #
-    # @note When making an API call, you may pass SamlConfigOptions
-    #   data as a hash:
-    #
-    #       {
-    #         group_attribute: "samlGroupAttribute",
-    #         metadata: "samlMetadata", # required
-    #         session_timeout: 1,
-    #         user_attribute: "samlUserAttribute",
-    #       }
     #
     # @!attribute [rw] group_attribute
     #   The group attribute for this SAML integration.
@@ -1827,14 +1593,6 @@ module Aws::OpenSearchServerless
     # A map of key-value pairs associated to an OpenSearch Serverless
     # resource.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The key to use in the tag.
     #   @return [String]
@@ -1852,19 +1610,6 @@ module Aws::OpenSearchServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource. The resource must be
     #   active (not in the `DELETING` state), and must be owned by the
@@ -1889,14 +1634,6 @@ module Aws::OpenSearchServerless
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource to remove tags from.
     #   The resource must be active (not in the `DELETING` state), and must
@@ -1921,18 +1658,6 @@ module Aws::OpenSearchServerless
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateAccessPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         description: "PolicyDescription",
-    #         name: "PolicyName", # required
-    #         policy: "PolicyDocument",
-    #         policy_version: "PolicyVersion", # required
-    #         type: "data", # required, accepts data
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier to ensure idempotency of the
     #   request.
@@ -1987,16 +1712,6 @@ module Aws::OpenSearchServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateAccountSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         capacity_limits: {
-    #           max_indexing_capacity_in_ocu: 1,
-    #           max_search_capacity_in_ocu: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] capacity_limits
     #   The maximum capacity limits for all OpenSearch Serverless
     #   collections, in OpenSearch Compute Units (OCUs). These limits are
@@ -2078,15 +1793,6 @@ module Aws::OpenSearchServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateCollectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         description: "UpdateCollectionRequestDescriptionString",
-    #         id: "CollectionId", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier to ensure idempotency of the
     #   request.
@@ -2125,22 +1831,6 @@ module Aws::OpenSearchServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateSecurityConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         config_version: "PolicyVersion", # required
-    #         description: "ConfigDescription",
-    #         id: "SecurityConfigId", # required
-    #         saml_options: {
-    #           group_attribute: "samlGroupAttribute",
-    #           metadata: "samlMetadata", # required
-    #           session_timeout: 1,
-    #           user_attribute: "samlUserAttribute",
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier to ensure idempotency of the
     #   request.
@@ -2193,18 +1883,6 @@ module Aws::OpenSearchServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateSecurityPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         description: "PolicyDescription",
-    #         name: "PolicyName", # required
-    #         policy: "PolicyDocument",
-    #         policy_version: "PolicyVersion", # required
-    #         type: "encryption", # required, accepts encryption, network
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier to ensure idempotency of the
     #   request.
@@ -2301,18 +1979,6 @@ module Aws::OpenSearchServerless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateVpcEndpointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         add_security_group_ids: ["SecurityGroupId"],
-    #         add_subnet_ids: ["SubnetId"],
-    #         client_token: "ClientToken",
-    #         id: "VpcEndpointId", # required
-    #         remove_security_group_ids: ["SecurityGroupId"],
-    #         remove_subnet_ids: ["SubnetId"],
-    #       }
-    #
     # @!attribute [rw] add_security_group_ids
     #   The unique identifiers of the security groups to add to the
     #   endpoint. Security groups define the ports, protocols, and sources
@@ -2454,13 +2120,6 @@ module Aws::OpenSearchServerless
     end
 
     # Filter the results of a `ListVpcEndpoints` request.
-    #
-    # @note When making an API call, you may pass VpcEndpointFilters
-    #   data as a hash:
-    #
-    #       {
-    #         status: "PENDING", # accepts PENDING, DELETING, ACTIVE, FAILED
-    #       }
     #
     # @!attribute [rw] status
     #   The current status of the endpoint.

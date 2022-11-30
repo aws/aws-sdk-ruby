@@ -24,14 +24,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateTrackerConsumerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         consumer_arn: "Arn", # required
-    #         tracker_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] consumer_arn
     #   The Amazon Resource Name (ARN) for the geofence collection to be
     #   associated to tracker resource. Used when you need to specify a
@@ -81,14 +73,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchDeleteDevicePositionHistoryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_ids: ["Id"], # required
-    #         tracker_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] device_ids
     #   Devices whose position history you want to delete.
     #
@@ -145,14 +129,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchDeleteGeofenceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         collection_name: "ResourceName", # required
-    #         geofence_ids: ["Id"], # required
-    #       }
-    #
     # @!attribute [rw] collection_name
     #   The geofence collection storing the geofences to be deleted.
     #   @return [String]
@@ -212,26 +188,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchEvaluateGeofencesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         collection_name: "ResourceName", # required
-    #         device_position_updates: [ # required
-    #           {
-    #             accuracy: {
-    #               horizontal: 1.0, # required
-    #             },
-    #             device_id: "Id", # required
-    #             position: [1.0], # required
-    #             position_properties: {
-    #               "PropertyMapKeyString" => "PropertyMapValueString",
-    #             },
-    #             sample_time: Time.now, # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] collection_name
     #   The geofence collection used in evaluating the position of devices
     #   against its geofences.
@@ -283,14 +239,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchGetDevicePositionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_ids: ["Id"], # required
-    #         tracker_name: "BatchGetDevicePositionRequestTrackerNameString", # required
-    #       }
-    #
     # @!attribute [rw] device_ids
     #   Devices whose position you want to retrieve.
     #
@@ -371,29 +319,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchPutGeofenceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         collection_name: "ResourceName", # required
-    #         entries: [ # required
-    #           {
-    #             geofence_id: "Id", # required
-    #             geometry: { # required
-    #               circle: {
-    #                 center: [1.0], # required
-    #                 radius: 1.0, # required
-    #               },
-    #               polygon: [
-    #                 [
-    #                   [1.0],
-    #                 ],
-    #               ],
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] collection_name
     #   The geofence collection storing the geofences.
     #   @return [String]
@@ -412,24 +337,6 @@ module Aws::LocationService
     end
 
     # Contains geofence geometry details.
-    #
-    # @note When making an API call, you may pass BatchPutGeofenceRequestEntry
-    #   data as a hash:
-    #
-    #       {
-    #         geofence_id: "Id", # required
-    #         geometry: { # required
-    #           circle: {
-    #             center: [1.0], # required
-    #             radius: 1.0, # required
-    #           },
-    #           polygon: [
-    #             [
-    #               [1.0],
-    #             ],
-    #           ],
-    #         },
-    #       }
     #
     # @!attribute [rw] geofence_id
     #   The identifier for the geofence to be stored in a given geofence
@@ -544,26 +451,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchUpdateDevicePositionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         tracker_name: "ResourceName", # required
-    #         updates: [ # required
-    #           {
-    #             accuracy: {
-    #               horizontal: 1.0, # required
-    #             },
-    #             device_id: "Id", # required
-    #             position: [1.0], # required
-    #             position_properties: {
-    #               "PropertyMapKeyString" => "PropertyMapValueString",
-    #             },
-    #             sample_time: Time.now, # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] tracker_name
     #   The name of the tracker resource to update.
     #   @return [String]
@@ -597,14 +484,6 @@ module Aws::LocationService
     # Contains details about additional route preferences for requests that
     # specify `TravelMode` as `Car`.
     #
-    # @note When making an API call, you may pass CalculateRouteCarModeOptions
-    #   data as a hash:
-    #
-    #       {
-    #         avoid_ferries: false,
-    #         avoid_tolls: false,
-    #       }
-    #
     # @!attribute [rw] avoid_ferries
     #   Avoids ferries when calculating routes.
     #
@@ -630,41 +509,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CalculateRouteMatrixRequest
-    #   data as a hash:
-    #
-    #       {
-    #         calculator_name: "ResourceName", # required
-    #         car_mode_options: {
-    #           avoid_ferries: false,
-    #           avoid_tolls: false,
-    #         },
-    #         depart_now: false,
-    #         departure_positions: [ # required
-    #           [1.0],
-    #         ],
-    #         departure_time: Time.now,
-    #         destination_positions: [ # required
-    #           [1.0],
-    #         ],
-    #         distance_unit: "Kilometers", # accepts Kilometers, Miles
-    #         travel_mode: "Car", # accepts Car, Truck, Walking
-    #         truck_mode_options: {
-    #           avoid_ferries: false,
-    #           avoid_tolls: false,
-    #           dimensions: {
-    #             height: 1.0,
-    #             length: 1.0,
-    #             unit: "Meters", # accepts Meters, Feet
-    #             width: 1.0,
-    #           },
-    #           weight: {
-    #             total: 1.0,
-    #             unit: "Kilograms", # accepts Kilograms, Pounds
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] calculator_name
     #   The name of the route calculator resource that you want to use to
     #   calculate the route matrix.
@@ -890,41 +734,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CalculateRouteRequest
-    #   data as a hash:
-    #
-    #       {
-    #         calculator_name: "ResourceName", # required
-    #         car_mode_options: {
-    #           avoid_ferries: false,
-    #           avoid_tolls: false,
-    #         },
-    #         depart_now: false,
-    #         departure_position: [1.0], # required
-    #         departure_time: Time.now,
-    #         destination_position: [1.0], # required
-    #         distance_unit: "Kilometers", # accepts Kilometers, Miles
-    #         include_leg_geometry: false,
-    #         travel_mode: "Car", # accepts Car, Truck, Walking
-    #         truck_mode_options: {
-    #           avoid_ferries: false,
-    #           avoid_tolls: false,
-    #           dimensions: {
-    #             height: 1.0,
-    #             length: 1.0,
-    #             unit: "Meters", # accepts Meters, Feet
-    #             width: 1.0,
-    #           },
-    #           weight: {
-    #             total: 1.0,
-    #             unit: "Kilograms", # accepts Kilograms, Pounds
-    #           },
-    #         },
-    #         waypoint_positions: [
-    #           [1.0],
-    #         ],
-    #       }
-    #
     # @!attribute [rw] calculator_name
     #   The name of the route calculator resource that you want to use to
     #   calculate the route.
@@ -1219,24 +1028,6 @@ module Aws::LocationService
     # Contains details about additional route preferences for requests that
     # specify `TravelMode` as `Truck`.
     #
-    # @note When making an API call, you may pass CalculateRouteTruckModeOptions
-    #   data as a hash:
-    #
-    #       {
-    #         avoid_ferries: false,
-    #         avoid_tolls: false,
-    #         dimensions: {
-    #           height: 1.0,
-    #           length: 1.0,
-    #           unit: "Meters", # accepts Meters, Feet
-    #           width: 1.0,
-    #         },
-    #         weight: {
-    #           total: 1.0,
-    #           unit: "Kilograms", # accepts Kilograms, Pounds
-    #         },
-    #       }
-    #
     # @!attribute [rw] avoid_ferries
     #   Avoids ferries when calculating routes.
     #
@@ -1278,14 +1069,6 @@ module Aws::LocationService
 
     # A circle on the earth, as defined by a center point and a radius.
     #
-    # @note When making an API call, you may pass Circle
-    #   data as a hash:
-    #
-    #       {
-    #         center: [1.0], # required
-    #         radius: 1.0, # required
-    #       }
-    #
     # @!attribute [rw] center
     #   A single point geometry, specifying the center of the circle, using
     #   [WGS 84][1] coordinates, in the form `[longitude, latitude]`.
@@ -1322,20 +1105,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateGeofenceCollectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         collection_name: "ResourceName", # required
-    #         description: "ResourceDescription",
-    #         kms_key_id: "KmsKeyId",
-    #         pricing_plan: "RequestBasedUsage", # accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
-    #         pricing_plan_data_source: "String",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] collection_name
     #   A custom name for the geofence collection.
     #
@@ -1440,21 +1209,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateMapRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration: { # required
-    #           style: "MapStyle", # required
-    #         },
-    #         description: "ResourceDescription",
-    #         map_name: "ResourceName", # required
-    #         pricing_plan: "RequestBasedUsage", # accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] configuration
     #   Specifies the `MapConfiguration`, including the map style, for the
     #   map resource that you create. The map style defines the look of maps
@@ -1550,22 +1304,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreatePlaceIndexRequest
-    #   data as a hash:
-    #
-    #       {
-    #         data_source: "String", # required
-    #         data_source_configuration: {
-    #           intended_use: "SingleUse", # accepts SingleUse, Storage
-    #         },
-    #         description: "ResourceDescription",
-    #         index_name: "ResourceName", # required
-    #         pricing_plan: "RequestBasedUsage", # accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] data_source
     #   Specifies the geospatial data provider for the new place index.
     #
@@ -1699,19 +1437,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateRouteCalculatorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         calculator_name: "ResourceName", # required
-    #         data_source: "String", # required
-    #         description: "ResourceDescription",
-    #         pricing_plan: "RequestBasedUsage", # accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] calculator_name
     #   The name of the route calculator resource.
     #
@@ -1847,21 +1572,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateTrackerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "ResourceDescription",
-    #         kms_key_id: "KmsKeyId",
-    #         position_filtering: "TimeBased", # accepts TimeBased, DistanceBased, AccuracyBased
-    #         pricing_plan: "RequestBasedUsage", # accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
-    #         pricing_plan_data_source: "String",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         tracker_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] description
     #   An optional description for the tracker resource.
     #   @return [String]
@@ -2019,13 +1729,6 @@ module Aws::LocationService
     #
     # [1]: https://aws.amazon.com/service-terms/
     #
-    # @note When making an API call, you may pass DataSourceConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         intended_use: "SingleUse", # accepts SingleUse, Storage
-    #       }
-    #
     # @!attribute [rw] intended_use
     #   Specifies how the results of an operation will be stored by the
     #   caller.
@@ -2048,13 +1751,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteGeofenceCollectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         collection_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] collection_name
     #   The name of the geofence collection to be deleted.
     #   @return [String]
@@ -2071,13 +1767,6 @@ module Aws::LocationService
     #
     class DeleteGeofenceCollectionResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteMapRequest
-    #   data as a hash:
-    #
-    #       {
-    #         map_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] map_name
     #   The name of the map resource to be deleted.
     #   @return [String]
@@ -2094,13 +1783,6 @@ module Aws::LocationService
     #
     class DeleteMapResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeletePlaceIndexRequest
-    #   data as a hash:
-    #
-    #       {
-    #         index_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] index_name
     #   The name of the place index resource to be deleted.
     #   @return [String]
@@ -2117,13 +1799,6 @@ module Aws::LocationService
     #
     class DeletePlaceIndexResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteRouteCalculatorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         calculator_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] calculator_name
     #   The name of the route calculator resource to be deleted.
     #   @return [String]
@@ -2140,13 +1815,6 @@ module Aws::LocationService
     #
     class DeleteRouteCalculatorResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteTrackerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         tracker_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] tracker_name
     #   The name of the tracker resource to be deleted.
     #   @return [String]
@@ -2163,13 +1831,6 @@ module Aws::LocationService
     #
     class DeleteTrackerResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeGeofenceCollectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         collection_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] collection_name
     #   The name of the geofence collection.
     #   @return [String]
@@ -2255,13 +1916,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeMapRequest
-    #   data as a hash:
-    #
-    #       {
-    #         map_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] map_name
     #   The name of the map resource.
     #   @return [String]
@@ -2341,13 +1995,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribePlaceIndexRequest
-    #   data as a hash:
-    #
-    #       {
-    #         index_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] index_name
     #   The name of the place index resource.
     #   @return [String]
@@ -2440,13 +2087,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeRouteCalculatorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         calculator_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] calculator_name
     #   The name of the route calculator resource.
     #   @return [String]
@@ -2542,13 +2182,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeTrackerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         tracker_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] tracker_name
     #   The name of the tracker resource.
     #   @return [String]
@@ -2690,21 +2323,6 @@ module Aws::LocationService
 
     # Contains the position update details for a device.
     #
-    # @note When making an API call, you may pass DevicePositionUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         accuracy: {
-    #           horizontal: 1.0, # required
-    #         },
-    #         device_id: "Id", # required
-    #         position: [1.0], # required
-    #         position_properties: {
-    #           "PropertyMapKeyString" => "PropertyMapValueString",
-    #         },
-    #         sample_time: Time.now, # required
-    #       }
-    #
     # @!attribute [rw] accuracy
     #   The accuracy of the device position.
     #   @return [Types::PositionalAccuracy]
@@ -2751,14 +2369,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateTrackerConsumerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         consumer_arn: "Arn", # required
-    #         tracker_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] consumer_arn
     #   The Amazon Resource Name (ARN) for the geofence collection to be
     #   disassociated from the tracker resource. Used when you need to
@@ -2800,21 +2410,6 @@ module Aws::LocationService
     #
     #  </note>
     #
-    # @note When making an API call, you may pass GeofenceGeometry
-    #   data as a hash:
-    #
-    #       {
-    #         circle: {
-    #           center: [1.0], # required
-    #           radius: 1.0, # required
-    #         },
-    #         polygon: [
-    #           [
-    #             [1.0],
-    #           ],
-    #         ],
-    #       }
-    #
     # @!attribute [rw] circle
     #   A circle on the earth, as defined by a center point and a radius.
     #   @return [Types::Circle]
@@ -2852,18 +2447,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDevicePositionHistoryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_id: "Id", # required
-    #         end_time_exclusive: Time.now,
-    #         max_results: 1,
-    #         next_token: "Token",
-    #         start_time_inclusive: Time.now,
-    #         tracker_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] device_id
     #   The device whose position history you want to retrieve.
     #   @return [String]
@@ -2954,14 +2537,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDevicePositionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_id: "Id", # required
-    #         tracker_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] device_id
     #   The device whose position you want to retrieve.
     #   @return [String]
@@ -3026,14 +2601,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetGeofenceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         collection_name: "ResourceName", # required
-    #         geofence_id: "Id", # required
-    #       }
-    #
     # @!attribute [rw] collection_name
     #   The geofence collection storing the target geofence.
     #   @return [String]
@@ -3105,15 +2672,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetMapGlyphsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         font_stack: "String", # required
-    #         font_unicode_range: "GetMapGlyphsRequestFontUnicodeRangeString", # required
-    #         map_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] font_stack
     #   A comma-separated list of fonts to load glyphs from in order of
     #   preference. For example, `Noto Sans Regular, Arial Unicode`.
@@ -3189,14 +2747,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetMapSpritesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         file_name: "GetMapSpritesRequestFileNameString", # required
-    #         map_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] file_name
     #   The name of the sprite ﬁle. Use the following ﬁle names for the
     #   sprite sheet:
@@ -3245,13 +2795,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetMapStyleDescriptorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         map_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] map_name
     #   The map resource to retrieve the style descriptor from.
     #   @return [String]
@@ -3282,16 +2825,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetMapTileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         map_name: "ResourceName", # required
-    #         x: "GetMapTileRequestXString", # required
-    #         y: "GetMapTileRequestYString", # required
-    #         z: "GetMapTileRequestZString", # required
-    #       }
-    #
     # @!attribute [rw] map_name
     #   The map resource to retrieve the map tiles from.
     #   @return [String]
@@ -3337,15 +2870,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetPlaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         index_name: "ResourceName", # required
-    #         language: "LanguageTag",
-    #         place_id: "PlaceId", # required
-    #       }
-    #
     # @!attribute [rw] index_name
     #   The name of the place index resource that you want to use for the
     #   search.
@@ -3532,15 +3056,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDevicePositionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "Token",
-    #         tracker_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] max_results
     #   An optional limit for the number of entries returned in a single
     #   call.
@@ -3632,14 +3147,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListGeofenceCollectionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "Token",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   An optional limit for the number of resources returned in a single
     #   call.
@@ -3788,15 +3295,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListGeofencesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         collection_name: "ResourceName", # required
-    #         max_results: 1,
-    #         next_token: "Token",
-    #       }
-    #
     # @!attribute [rw] collection_name
     #   The name of the geofence collection storing the list of geofences.
     #   @return [String]
@@ -3845,14 +3343,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListMapsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "Token",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   An optional limit for the number of resources returned in a single
     #   call.
@@ -3945,14 +3435,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPlaceIndexesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "Token",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   An optional limit for the maximum number of results returned in a
     #   single call.
@@ -4057,14 +3539,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRouteCalculatorsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "Token",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   An optional maximum number of results returned in a single call.
     #
@@ -4176,13 +3650,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource whose tags you want
     #   to retrieve.
@@ -4218,15 +3685,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTrackerConsumersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "Token",
-    #         tracker_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] max_results
     #   An optional limit for the number of resources returned in a single
     #   call.
@@ -4277,14 +3735,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTrackersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "Token",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   An optional limit for the number of resources returned in a single
     #   call.
@@ -4380,13 +3830,6 @@ module Aws::LocationService
     end
 
     # Specifies the map tile style selected from an available provider.
-    #
-    # @note When making an API call, you may pass MapConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         style: "MapStyle", # required
-    #       }
     #
     # @!attribute [rw] style
     #   Specifies the map style selected from an available data provider.
@@ -4608,13 +4051,6 @@ module Aws::LocationService
 
     # Defines the level of certainty of the position.
     #
-    # @note When making an API call, you may pass PositionalAccuracy
-    #   data as a hash:
-    #
-    #       {
-    #         horizontal: 1.0, # required
-    #       }
-    #
     # @!attribute [rw] horizontal
     #   Estimated maximum distance, in meters, between the measured position
     #   and the true position of a device, along the Earth's surface.
@@ -4628,25 +4064,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutGeofenceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         collection_name: "ResourceName", # required
-    #         geofence_id: "Id", # required
-    #         geometry: { # required
-    #           circle: {
-    #             center: [1.0], # required
-    #             radius: 1.0, # required
-    #           },
-    #           polygon: [
-    #             [
-    #               [1.0],
-    #             ],
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] collection_name
     #   The geofence collection to store the geofence in.
     #   @return [String]
@@ -4919,16 +4336,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SearchPlaceIndexForPositionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         index_name: "ResourceName", # required
-    #         language: "LanguageTag",
-    #         max_results: 1,
-    #         position: [1.0], # required
-    #       }
-    #
     # @!attribute [rw] index_name
     #   The name of the place index resource you want to use for the search.
     #   @return [String]
@@ -5057,19 +4464,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SearchPlaceIndexForSuggestionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         bias_position: [1.0],
-    #         filter_b_box: [1.0],
-    #         filter_countries: ["CountryCode"],
-    #         index_name: "ResourceName", # required
-    #         language: "LanguageTag",
-    #         max_results: 1,
-    #         text: "SearchPlaceIndexForSuggestionsRequestTextString", # required
-    #       }
-    #
     # @!attribute [rw] bias_position
     #   An optional parameter that indicates a preference for place
     #   suggestions that are closer to a specified position.
@@ -5269,19 +4663,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SearchPlaceIndexForTextRequest
-    #   data as a hash:
-    #
-    #       {
-    #         bias_position: [1.0],
-    #         filter_b_box: [1.0],
-    #         filter_countries: ["CountryCode"],
-    #         index_name: "ResourceName", # required
-    #         language: "LanguageTag",
-    #         max_results: 1,
-    #         text: "SearchPlaceIndexForTextRequestTextString", # required
-    #       }
-    #
     # @!attribute [rw] bias_position
     #   An optional parameter that indicates a preference for places that
     #   are closer to a specified position.
@@ -5562,16 +4943,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource whose tags you want
     #   to update.
@@ -5662,16 +5033,6 @@ module Aws::LocationService
     # allow the specified dimensions for requests that specify `TravelMode`
     # as `Truck`.
     #
-    # @note When making an API call, you may pass TruckDimensions
-    #   data as a hash:
-    #
-    #       {
-    #         height: 1.0,
-    #         length: 1.0,
-    #         unit: "Meters", # accepts Meters, Feet
-    #         width: 1.0,
-    #       }
-    #
     # @!attribute [rw] height
     #   The height of the truck.
     #
@@ -5732,14 +5093,6 @@ module Aws::LocationService
     # avoid roads that can't support or allow the total weight for requests
     # that specify `TravelMode` as `Truck`.
     #
-    # @note When making an API call, you may pass TruckWeight
-    #   data as a hash:
-    #
-    #       {
-    #         total: 1.0,
-    #         unit: "Kilograms", # accepts Kilograms, Pounds
-    #       }
-    #
     # @!attribute [rw] total
     #   The total weight of the truck.
     #
@@ -5763,14 +5116,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tag_keys: ["String"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource from which you want
     #   to remove tags.
@@ -5798,16 +5143,6 @@ module Aws::LocationService
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateGeofenceCollectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         collection_name: "ResourceName", # required
-    #         description: "ResourceDescription",
-    #         pricing_plan: "RequestBasedUsage", # accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
-    #         pricing_plan_data_source: "String",
-    #       }
-    #
     # @!attribute [rw] collection_name
     #   The name of the geofence collection to update.
     #   @return [String]
@@ -5869,15 +5204,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateMapRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "ResourceDescription",
-    #         map_name: "ResourceName", # required
-    #         pricing_plan: "RequestBasedUsage", # accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
-    #       }
-    #
     # @!attribute [rw] description
     #   Updates the description for the map resource.
     #   @return [String]
@@ -5933,18 +5259,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdatePlaceIndexRequest
-    #   data as a hash:
-    #
-    #       {
-    #         data_source_configuration: {
-    #           intended_use: "SingleUse", # accepts SingleUse, Storage
-    #         },
-    #         description: "ResourceDescription",
-    #         index_name: "ResourceName", # required
-    #         pricing_plan: "RequestBasedUsage", # accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
-    #       }
-    #
     # @!attribute [rw] data_source_configuration
     #   Updates the data storage option for the place index resource.
     #   @return [Types::DataSourceConfiguration]
@@ -6006,15 +5320,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateRouteCalculatorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         calculator_name: "ResourceName", # required
-    #         description: "ResourceDescription",
-    #         pricing_plan: "RequestBasedUsage", # accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
-    #       }
-    #
     # @!attribute [rw] calculator_name
     #   The name of the route calculator resource to update.
     #   @return [String]
@@ -6071,17 +5376,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateTrackerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "ResourceDescription",
-    #         position_filtering: "TimeBased", # accepts TimeBased, DistanceBased, AccuracyBased
-    #         pricing_plan: "RequestBasedUsage", # accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
-    #         pricing_plan_data_source: "String",
-    #         tracker_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] description
     #   Updates the description for the tracker resource.
     #   @return [String]

@@ -31,13 +31,6 @@ module Aws::GreengrassV2
     #
     # [1]: https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchAssociateClientDeviceWithCoreDevice.html
     #
-    # @note When making an API call, you may pass AssociateClientDeviceWithCoreDeviceEntry
-    #   data as a hash:
-    #
-    #       {
-    #         thing_name: "IoTThingName", # required
-    #       }
-    #
     # @!attribute [rw] thing_name
     #   The name of the IoT thing that represents the client device to
     #   associate.
@@ -82,13 +75,6 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateServiceRoleToAccountRequest
-    #   data as a hash:
-    #
-    #       {
-    #         role_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the service role to associate with
     #   IoT Greengrass for your Amazon Web Services account in this Amazon
@@ -139,18 +125,6 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchAssociateClientDeviceWithCoreDeviceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         entries: [
-    #           {
-    #             thing_name: "IoTThingName", # required
-    #           },
-    #         ],
-    #         core_device_thing_name: "IoTThingName", # required
-    #       }
-    #
     # @!attribute [rw] entries
     #   The list of client devices to associate.
     #   @return [Array<Types::AssociateClientDeviceWithCoreDeviceEntry>]
@@ -181,18 +155,6 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchDisassociateClientDeviceFromCoreDeviceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         entries: [
-    #           {
-    #             thing_name: "IoTThingName", # required
-    #           },
-    #         ],
-    #         core_device_thing_name: "IoTThingName", # required
-    #       }
-    #
     # @!attribute [rw] entries
     #   The list of client devices to disassociate.
     #   @return [Array<Types::DisassociateClientDeviceFromCoreDeviceEntry>]
@@ -224,13 +186,6 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CancelDeploymentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         deployment_id: "NonEmptyString", # required
-    #       }
-    #
     # @!attribute [rw] deployment_id
     #   The ID of the deployment.
     #   @return [String]
@@ -343,17 +298,6 @@ module Aws::GreengrassV2
     # Contains information about a component that is a candidate to deploy
     # to a Greengrass core device.
     #
-    # @note When making an API call, you may pass ComponentCandidate
-    #   data as a hash:
-    #
-    #       {
-    #         component_name: "ComponentNameString",
-    #         component_version: "ComponentVersionString",
-    #         version_requirements: {
-    #           "NonEmptyString" => "NonEmptyString",
-    #         },
-    #       }
-    #
     # @!attribute [rw] component_name
     #   The name of the component.
     #   @return [String]
@@ -393,14 +337,6 @@ module Aws::GreengrassV2
     #
     #
     # [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/update-component-configurations.html
-    #
-    # @note When making an API call, you may pass ComponentConfigurationUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         merge: "ComponentConfigurationString",
-    #         reset: ["ComponentConfigurationPath"],
-    #       }
     #
     # @!attribute [rw] merge
     #   A serialized JSON string that contains the configuration object to
@@ -444,14 +380,6 @@ module Aws::GreengrassV2
     # Contains information about a component dependency for a Lambda
     # function component.
     #
-    # @note When making an API call, you may pass ComponentDependencyRequirement
-    #   data as a hash:
-    #
-    #       {
-    #         version_requirement: "NonEmptyString",
-    #         dependency_type: "HARD", # accepts HARD, SOFT
-    #       }
-    #
     # @!attribute [rw] version_requirement
     #   The component version requirement for the component dependency.
     #
@@ -484,25 +412,6 @@ module Aws::GreengrassV2
     end
 
     # Contains information about a component to deploy.
-    #
-    # @note When making an API call, you may pass ComponentDeploymentSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         component_version: "ComponentVersionString",
-    #         configuration_update: {
-    #           merge: "ComponentConfigurationString",
-    #           reset: ["ComponentConfigurationPath"],
-    #         },
-    #         run_with: {
-    #           posix_user: "NonEmptyString",
-    #           system_resource_limits: {
-    #             memory: 1,
-    #             cpus: 1.0,
-    #           },
-    #           windows_user: "NonEmptyString",
-    #         },
-    #       }
     #
     # @!attribute [rw] component_version
     #   The version of the component.
@@ -592,16 +501,6 @@ module Aws::GreengrassV2
 
     # Contains information about a platform that a component supports.
     #
-    # @note When making an API call, you may pass ComponentPlatform
-    #   data as a hash:
-    #
-    #       {
-    #         name: "NonEmptyString",
-    #         attributes: {
-    #           "NonEmptyString" => "NonEmptyString",
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The friendly name of the platform. This name helps you identify the
     #   platform.
@@ -640,18 +539,6 @@ module Aws::GreengrassV2
     #
     #
     # [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-user
-    #
-    # @note When making an API call, you may pass ComponentRunWith
-    #   data as a hash:
-    #
-    #       {
-    #         posix_user: "NonEmptyString",
-    #         system_resource_limits: {
-    #           memory: 1,
-    #           cpus: 1.0,
-    #         },
-    #         windows_user: "NonEmptyString",
-    #       }
     #
     # @!attribute [rw] posix_user
     #   The POSIX system user and, optionally, group to use to run this
@@ -768,16 +655,6 @@ module Aws::GreengrassV2
     # Contains information about an endpoint and port where client devices
     # can connect to an MQTT broker on a Greengrass core device.
     #
-    # @note When making an API call, you may pass ConnectivityInfo
-    #   data as a hash:
-    #
-    #       {
-    #         id: "String",
-    #         host_address: "String",
-    #         port_number: 1,
-    #         metadata: "String",
-    #       }
-    #
     # @!attribute [rw] id
     #   An ID for the connectivity information.
     #   @return [String]
@@ -842,77 +719,6 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateComponentVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         inline_recipe: "data",
-    #         lambda_function: {
-    #           lambda_arn: "NonEmptyString", # required
-    #           component_name: "ComponentNameString",
-    #           component_version: "ComponentVersionString",
-    #           component_platforms: [
-    #             {
-    #               name: "NonEmptyString",
-    #               attributes: {
-    #                 "NonEmptyString" => "NonEmptyString",
-    #               },
-    #             },
-    #           ],
-    #           component_dependencies: {
-    #             "NonEmptyString" => {
-    #               version_requirement: "NonEmptyString",
-    #               dependency_type: "HARD", # accepts HARD, SOFT
-    #             },
-    #           },
-    #           component_lambda_parameters: {
-    #             event_sources: [
-    #               {
-    #                 topic: "TopicString", # required
-    #                 type: "PUB_SUB", # required, accepts PUB_SUB, IOT_CORE
-    #               },
-    #             ],
-    #             max_queue_size: 1,
-    #             max_instances_count: 1,
-    #             max_idle_time_in_seconds: 1,
-    #             timeout_in_seconds: 1,
-    #             status_timeout_in_seconds: 1,
-    #             pinned: false,
-    #             input_payload_encoding_type: "json", # accepts json, binary
-    #             exec_args: ["LambdaExecArg"],
-    #             environment_variables: {
-    #               "NonEmptyString" => "String",
-    #             },
-    #             linux_process_params: {
-    #               isolation_mode: "GreengrassContainer", # accepts GreengrassContainer, NoContainer
-    #               container_params: {
-    #                 memory_size_in_kb: 1,
-    #                 mount_ro_sysfs: false,
-    #                 volumes: [
-    #                   {
-    #                     source_path: "FileSystemPath", # required
-    #                     destination_path: "FileSystemPath", # required
-    #                     permission: "ro", # accepts ro, rw
-    #                     add_group_owner: false,
-    #                   },
-    #                 ],
-    #                 devices: [
-    #                   {
-    #                     path: "FileSystemPath", # required
-    #                     permission: "ro", # accepts ro, rw
-    #                     add_group_owner: false,
-    #                   },
-    #                 ],
-    #               },
-    #             },
-    #           },
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         client_token: "ClientTokenString",
-    #       }
-    #
     # @!attribute [rw] inline_recipe
     #   The recipe to use to create the component. The recipe defines the
     #   component's metadata, parameters, dependencies, lifecycle,
@@ -1001,72 +807,6 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDeploymentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         target_arn: "TargetARN", # required
-    #         deployment_name: "DeploymentNameString",
-    #         components: {
-    #           "NonEmptyString" => {
-    #             component_version: "ComponentVersionString",
-    #             configuration_update: {
-    #               merge: "ComponentConfigurationString",
-    #               reset: ["ComponentConfigurationPath"],
-    #             },
-    #             run_with: {
-    #               posix_user: "NonEmptyString",
-    #               system_resource_limits: {
-    #                 memory: 1,
-    #                 cpus: 1.0,
-    #               },
-    #               windows_user: "NonEmptyString",
-    #             },
-    #           },
-    #         },
-    #         iot_job_configuration: {
-    #           job_executions_rollout_config: {
-    #             exponential_rate: {
-    #               base_rate_per_minute: 1, # required
-    #               increment_factor: 1.0, # required
-    #               rate_increase_criteria: { # required
-    #                 number_of_notified_things: 1,
-    #                 number_of_succeeded_things: 1,
-    #               },
-    #             },
-    #             maximum_per_minute: 1,
-    #           },
-    #           abort_config: {
-    #             criteria_list: [ # required
-    #               {
-    #                 failure_type: "FAILED", # required, accepts FAILED, REJECTED, TIMED_OUT, ALL
-    #                 action: "CANCEL", # required, accepts CANCEL
-    #                 threshold_percentage: 1.0, # required
-    #                 min_number_of_executed_things: 1, # required
-    #               },
-    #             ],
-    #           },
-    #           timeout_config: {
-    #             in_progress_timeout_in_minutes: 1,
-    #           },
-    #         },
-    #         deployment_policies: {
-    #           failure_handling_policy: "ROLLBACK", # accepts ROLLBACK, DO_NOTHING
-    #           component_update_policy: {
-    #             timeout_in_seconds: 1,
-    #             action: "NOTIFY_COMPONENTS", # accepts NOTIFY_COMPONENTS, SKIP_NOTIFY_COMPONENTS
-    #           },
-    #           configuration_validation_policy: {
-    #             timeout_in_seconds: 1,
-    #           },
-    #         },
-    #         parent_target_arn: "ThingGroupARN",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         client_token: "ClientTokenString",
-    #       }
-    #
     # @!attribute [rw] target_arn
     #   The [ARN][1] of the target IoT thing or thing group. When creating a
     #   subdeployment, the targetARN can only be a thing group.
@@ -1171,13 +911,6 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteComponentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "ComponentVersionARN", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The [ARN][1] of the component version.
     #
@@ -1194,13 +927,6 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteCoreDeviceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         core_device_thing_name: "CoreDeviceThingName", # required
-    #       }
-    #
     # @!attribute [rw] core_device_thing_name
     #   The name of the core device. This is also the name of the IoT thing.
     #   @return [String]
@@ -1213,13 +939,6 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDeploymentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         deployment_id: "NonEmptyString", # required
-    #       }
-    #
     # @!attribute [rw] deployment_id
     #   The ID of the deployment.
     #   @return [String]
@@ -1301,14 +1020,6 @@ module Aws::GreengrassV2
     # response. You specify the amount of time each component has to respond
     # to the update notification.
     #
-    # @note When making an API call, you may pass DeploymentComponentUpdatePolicy
-    #   data as a hash:
-    #
-    #       {
-    #         timeout_in_seconds: 1,
-    #         action: "NOTIFY_COMPONENTS", # accepts NOTIFY_COMPONENTS, SKIP_NOTIFY_COMPONENTS
-    #       }
-    #
     # @!attribute [rw] timeout_in_seconds
     #   The amount of time in seconds that each component on a device has to
     #   report that it's safe to update. If the component waits for longer
@@ -1365,13 +1076,6 @@ module Aws::GreengrassV2
     # [2]: https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-sendconfigurationvalidityreport
     # [3]: https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html
     #
-    # @note When making an API call, you may pass DeploymentConfigurationValidationPolicy
-    #   data as a hash:
-    #
-    #       {
-    #         timeout_in_seconds: 1,
-    #       }
-    #
     # @!attribute [rw] timeout_in_seconds
     #   The amount of time in seconds that a component can validate its
     #   configuration updates. If the validation time exceeds this timeout,
@@ -1389,36 +1093,6 @@ module Aws::GreengrassV2
     end
 
     # Contains information about an IoT job configuration.
-    #
-    # @note When making an API call, you may pass DeploymentIoTJobConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         job_executions_rollout_config: {
-    #           exponential_rate: {
-    #             base_rate_per_minute: 1, # required
-    #             increment_factor: 1.0, # required
-    #             rate_increase_criteria: { # required
-    #               number_of_notified_things: 1,
-    #               number_of_succeeded_things: 1,
-    #             },
-    #           },
-    #           maximum_per_minute: 1,
-    #         },
-    #         abort_config: {
-    #           criteria_list: [ # required
-    #             {
-    #               failure_type: "FAILED", # required, accepts FAILED, REJECTED, TIMED_OUT, ALL
-    #               action: "CANCEL", # required, accepts CANCEL
-    #               threshold_percentage: 1.0, # required
-    #               min_number_of_executed_things: 1, # required
-    #             },
-    #           ],
-    #         },
-    #         timeout_config: {
-    #           in_progress_timeout_in_minutes: 1,
-    #         },
-    #       }
     #
     # @!attribute [rw] job_executions_rollout_config
     #   The rollout configuration for the job. This configuration defines
@@ -1447,20 +1121,6 @@ module Aws::GreengrassV2
 
     # Contains information about policies that define how a deployment
     # updates components and handles failure.
-    #
-    # @note When making an API call, you may pass DeploymentPolicies
-    #   data as a hash:
-    #
-    #       {
-    #         failure_handling_policy: "ROLLBACK", # accepts ROLLBACK, DO_NOTHING
-    #         component_update_policy: {
-    #           timeout_in_seconds: 1,
-    #           action: "NOTIFY_COMPONENTS", # accepts NOTIFY_COMPONENTS, SKIP_NOTIFY_COMPONENTS
-    #         },
-    #         configuration_validation_policy: {
-    #           timeout_in_seconds: 1,
-    #         },
-    #       }
     #
     # @!attribute [rw] failure_handling_policy
     #   The failure handling policy for the configuration deployment. This
@@ -1491,13 +1151,6 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeComponentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "ComponentVersionARN", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The [ARN][1] of the component version.
     #
@@ -1587,13 +1240,6 @@ module Aws::GreengrassV2
     #
     # [1]: https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchDisassociateClientDeviceWithCoreDevice.html
     #
-    # @note When making an API call, you may pass DisassociateClientDeviceFromCoreDeviceEntry
-    #   data as a hash:
-    #
-    #       {
-    #         thing_name: "IoTThingName", # required
-    #       }
-    #
     # @!attribute [rw] thing_name
     #   The name of the IoT thing that represents the client device to
     #   disassociate.
@@ -1638,8 +1284,6 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/DisassociateServiceRoleFromAccountRequest AWS API Documentation
     #
     class DisassociateServiceRoleFromAccountRequest < Aws::EmptyStructure; end
@@ -1767,14 +1411,6 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetComponentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         recipe_output_format: "JSON", # accepts JSON, YAML
-    #         arn: "ComponentVersionARN", # required
-    #       }
-    #
     # @!attribute [rw] recipe_output_format
     #   The format of the recipe.
     #   @return [String]
@@ -1824,14 +1460,6 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetComponentVersionArtifactRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "ComponentVersionARN", # required
-    #         artifact_name: "NonEmptyString", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The [ARN][1] of the component version. Specify the ARN of a public
     #   or a Lambda component version.
@@ -1876,13 +1504,6 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetConnectivityInfoRequest
-    #   data as a hash:
-    #
-    #       {
-    #         thing_name: "CoreDeviceThingName", # required
-    #       }
-    #
     # @!attribute [rw] thing_name
     #   The name of the core device. This is also the name of the IoT thing.
     #   @return [String]
@@ -1912,13 +1533,6 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetCoreDeviceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         core_device_thing_name: "CoreDeviceThingName", # required
-    #       }
-    #
     # @!attribute [rw] core_device_thing_name
     #   The name of the core device. This is also the name of the IoT thing.
     #   @return [String]
@@ -1994,13 +1608,6 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDeploymentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         deployment_id: "NonEmptyString", # required
-    #       }
-    #
     # @!attribute [rw] deployment_id
     #   The ID of the deployment.
     #   @return [String]
@@ -2115,8 +1722,6 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/GetServiceRoleForAccountRequest AWS API Documentation
     #
     class GetServiceRoleForAccountRequest < Aws::EmptyStructure; end
@@ -2237,20 +1842,6 @@ module Aws::GreengrassV2
     # Contains a list of criteria that define when and how to cancel a
     # configuration deployment.
     #
-    # @note When making an API call, you may pass IoTJobAbortConfig
-    #   data as a hash:
-    #
-    #       {
-    #         criteria_list: [ # required
-    #           {
-    #             failure_type: "FAILED", # required, accepts FAILED, REJECTED, TIMED_OUT, ALL
-    #             action: "CANCEL", # required, accepts CANCEL
-    #             threshold_percentage: 1.0, # required
-    #             min_number_of_executed_things: 1, # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] criteria_list
     #   The list of criteria that define when and how to cancel the
     #   configuration deployment.
@@ -2273,16 +1864,6 @@ module Aws::GreengrassV2
     #
     # 2.  The percentage of failures with type `failureType` exceeds the
     #     `thresholdPercentage`.
-    #
-    # @note When making an API call, you may pass IoTJobAbortCriteria
-    #   data as a hash:
-    #
-    #       {
-    #         failure_type: "FAILED", # required, accepts FAILED, REJECTED, TIMED_OUT, ALL
-    #         action: "CANCEL", # required, accepts CANCEL
-    #         threshold_percentage: 1.0, # required
-    #         min_number_of_executed_things: 1, # required
-    #       }
     #
     # @!attribute [rw] failure_type
     #   The type of job deployment failure that can cancel a job.
@@ -2320,21 +1901,6 @@ module Aws::GreengrassV2
     # configuration defines the rate at which the job deploys a
     # configuration to a fleet of target devices.
     #
-    # @note When making an API call, you may pass IoTJobExecutionsRolloutConfig
-    #   data as a hash:
-    #
-    #       {
-    #         exponential_rate: {
-    #           base_rate_per_minute: 1, # required
-    #           increment_factor: 1.0, # required
-    #           rate_increase_criteria: { # required
-    #             number_of_notified_things: 1,
-    #             number_of_succeeded_things: 1,
-    #           },
-    #         },
-    #         maximum_per_minute: 1,
-    #       }
-    #
     # @!attribute [rw] exponential_rate
     #   The exponential rate to increase the job rollout rate.
     #   @return [Types::IoTJobExponentialRolloutRate]
@@ -2355,18 +1921,6 @@ module Aws::GreengrassV2
 
     # Contains information about an exponential rollout rate for a
     # configuration deployment job.
-    #
-    # @note When making an API call, you may pass IoTJobExponentialRolloutRate
-    #   data as a hash:
-    #
-    #       {
-    #         base_rate_per_minute: 1, # required
-    #         increment_factor: 1.0, # required
-    #         rate_increase_criteria: { # required
-    #           number_of_notified_things: 1,
-    #           number_of_succeeded_things: 1,
-    #         },
-    #       }
     #
     # @!attribute [rw] base_rate_per_minute
     #   The minimum number of devices that receive a pending job
@@ -2399,14 +1953,6 @@ module Aws::GreengrassV2
     # rollout rate. Specify either `numberOfNotifiedThings` or
     # `numberOfSucceededThings`.
     #
-    # @note When making an API call, you may pass IoTJobRateIncreaseCriteria
-    #   data as a hash:
-    #
-    #       {
-    #         number_of_notified_things: 1,
-    #         number_of_succeeded_things: 1,
-    #       }
-    #
     # @!attribute [rw] number_of_notified_things
     #   The number of devices to receive the job notification before the
     #   rollout rate increases.
@@ -2428,13 +1974,6 @@ module Aws::GreengrassV2
 
     # Contains information about the timeout configuration for a job.
     #
-    # @note When making an API call, you may pass IoTJobTimeoutConfig
-    #   data as a hash:
-    #
-    #       {
-    #         in_progress_timeout_in_minutes: 1,
-    #       }
-    #
     # @!attribute [rw] in_progress_timeout_in_minutes
     #   The amount of time, in minutes, that devices have to complete the
     #   job. The timer starts when the job status is set to `IN_PROGRESS`.
@@ -2455,29 +1994,6 @@ module Aws::GreengrassV2
 
     # Contains information about a container in which Lambda functions run
     # on Greengrass core devices.
-    #
-    # @note When making an API call, you may pass LambdaContainerParams
-    #   data as a hash:
-    #
-    #       {
-    #         memory_size_in_kb: 1,
-    #         mount_ro_sysfs: false,
-    #         volumes: [
-    #           {
-    #             source_path: "FileSystemPath", # required
-    #             destination_path: "FileSystemPath", # required
-    #             permission: "ro", # accepts ro, rw
-    #             add_group_owner: false,
-    #           },
-    #         ],
-    #         devices: [
-    #           {
-    #             path: "FileSystemPath", # required
-    #             permission: "ro", # accepts ro, rw
-    #             add_group_owner: false,
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] memory_size_in_kb
     #   The memory size of the container, expressed in kilobytes.
@@ -2514,15 +2030,6 @@ module Aws::GreengrassV2
     # Contains information about a device that Linux processes in a
     # container can access.
     #
-    # @note When making an API call, you may pass LambdaDeviceMount
-    #   data as a hash:
-    #
-    #       {
-    #         path: "FileSystemPath", # required
-    #         permission: "ro", # accepts ro, rw
-    #         add_group_owner: false,
-    #       }
-    #
     # @!attribute [rw] path
     #   The mount path for the device in the file system.
     #   @return [String]
@@ -2555,14 +2062,6 @@ module Aws::GreengrassV2
     # event source defines the topics on which this Lambda function
     # subscribes to receive messages that run the function.
     #
-    # @note When making an API call, you may pass LambdaEventSource
-    #   data as a hash:
-    #
-    #       {
-    #         topic: "TopicString", # required
-    #         type: "PUB_SUB", # required, accepts PUB_SUB, IOT_CORE
-    #       }
-    #
     # @!attribute [rw] topic
     #   The topic to which to subscribe to receive event messages.
     #   @return [String]
@@ -2589,51 +2088,6 @@ module Aws::GreengrassV2
     end
 
     # Contains parameters for a Lambda function that runs on IoT Greengrass.
-    #
-    # @note When making an API call, you may pass LambdaExecutionParameters
-    #   data as a hash:
-    #
-    #       {
-    #         event_sources: [
-    #           {
-    #             topic: "TopicString", # required
-    #             type: "PUB_SUB", # required, accepts PUB_SUB, IOT_CORE
-    #           },
-    #         ],
-    #         max_queue_size: 1,
-    #         max_instances_count: 1,
-    #         max_idle_time_in_seconds: 1,
-    #         timeout_in_seconds: 1,
-    #         status_timeout_in_seconds: 1,
-    #         pinned: false,
-    #         input_payload_encoding_type: "json", # accepts json, binary
-    #         exec_args: ["LambdaExecArg"],
-    #         environment_variables: {
-    #           "NonEmptyString" => "String",
-    #         },
-    #         linux_process_params: {
-    #           isolation_mode: "GreengrassContainer", # accepts GreengrassContainer, NoContainer
-    #           container_params: {
-    #             memory_size_in_kb: 1,
-    #             mount_ro_sysfs: false,
-    #             volumes: [
-    #               {
-    #                 source_path: "FileSystemPath", # required
-    #                 destination_path: "FileSystemPath", # required
-    #                 permission: "ro", # accepts ro, rw
-    #                 add_group_owner: false,
-    #               },
-    #             ],
-    #             devices: [
-    #               {
-    #                 path: "FileSystemPath", # required
-    #                 permission: "ro", # accepts ro, rw
-    #                 add_group_owner: false,
-    #               },
-    #             ],
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] event_sources
     #   The list of event sources to which to subscribe to receive work
@@ -2727,70 +2181,6 @@ module Aws::GreengrassV2
     # Contains information about an Lambda function to import to create a
     # component.
     #
-    # @note When making an API call, you may pass LambdaFunctionRecipeSource
-    #   data as a hash:
-    #
-    #       {
-    #         lambda_arn: "NonEmptyString", # required
-    #         component_name: "ComponentNameString",
-    #         component_version: "ComponentVersionString",
-    #         component_platforms: [
-    #           {
-    #             name: "NonEmptyString",
-    #             attributes: {
-    #               "NonEmptyString" => "NonEmptyString",
-    #             },
-    #           },
-    #         ],
-    #         component_dependencies: {
-    #           "NonEmptyString" => {
-    #             version_requirement: "NonEmptyString",
-    #             dependency_type: "HARD", # accepts HARD, SOFT
-    #           },
-    #         },
-    #         component_lambda_parameters: {
-    #           event_sources: [
-    #             {
-    #               topic: "TopicString", # required
-    #               type: "PUB_SUB", # required, accepts PUB_SUB, IOT_CORE
-    #             },
-    #           ],
-    #           max_queue_size: 1,
-    #           max_instances_count: 1,
-    #           max_idle_time_in_seconds: 1,
-    #           timeout_in_seconds: 1,
-    #           status_timeout_in_seconds: 1,
-    #           pinned: false,
-    #           input_payload_encoding_type: "json", # accepts json, binary
-    #           exec_args: ["LambdaExecArg"],
-    #           environment_variables: {
-    #             "NonEmptyString" => "String",
-    #           },
-    #           linux_process_params: {
-    #             isolation_mode: "GreengrassContainer", # accepts GreengrassContainer, NoContainer
-    #             container_params: {
-    #               memory_size_in_kb: 1,
-    #               mount_ro_sysfs: false,
-    #               volumes: [
-    #                 {
-    #                   source_path: "FileSystemPath", # required
-    #                   destination_path: "FileSystemPath", # required
-    #                   permission: "ro", # accepts ro, rw
-    #                   add_group_owner: false,
-    #                 },
-    #               ],
-    #               devices: [
-    #                 {
-    #                   path: "FileSystemPath", # required
-    #                   permission: "ro", # accepts ro, rw
-    #                   add_group_owner: false,
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] lambda_arn
     #   The [ARN][1] of the Lambda function. The ARN must include the
     #   version of the function to import. You can't use version aliases
@@ -2845,32 +2235,6 @@ module Aws::GreengrassV2
     # Contains parameters for a Linux process that contains an Lambda
     # function.
     #
-    # @note When making an API call, you may pass LambdaLinuxProcessParams
-    #   data as a hash:
-    #
-    #       {
-    #         isolation_mode: "GreengrassContainer", # accepts GreengrassContainer, NoContainer
-    #         container_params: {
-    #           memory_size_in_kb: 1,
-    #           mount_ro_sysfs: false,
-    #           volumes: [
-    #             {
-    #               source_path: "FileSystemPath", # required
-    #               destination_path: "FileSystemPath", # required
-    #               permission: "ro", # accepts ro, rw
-    #               add_group_owner: false,
-    #             },
-    #           ],
-    #           devices: [
-    #             {
-    #               path: "FileSystemPath", # required
-    #               permission: "ro", # accepts ro, rw
-    #               add_group_owner: false,
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] isolation_mode
     #   The isolation mode for the process that contains the Lambda
     #   function. The process can run in an isolated runtime environment
@@ -2897,16 +2261,6 @@ module Aws::GreengrassV2
     # container can access. When you define a volume, the IoT Greengrass
     # Core software mounts the source files to the destination inside the
     # container.
-    #
-    # @note When making an API call, you may pass LambdaVolumeMount
-    #   data as a hash:
-    #
-    #       {
-    #         source_path: "FileSystemPath", # required
-    #         destination_path: "FileSystemPath", # required
-    #         permission: "ro", # accepts ro, rw
-    #         add_group_owner: false,
-    #       }
     #
     # @!attribute [rw] source_path
     #   The path to the physical volume in the file system.
@@ -2941,15 +2295,6 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListClientDevicesAssociatedWithCoreDeviceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         core_device_thing_name: "IoTThingName", # required
-    #         max_results: 1,
-    #         next_token: "NextTokenString",
-    #       }
-    #
     # @!attribute [rw] core_device_thing_name
     #   The name of the core device. This is also the name of the IoT thing.
     #   @return [String]
@@ -2991,15 +2336,6 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListComponentVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "ComponentARN", # required
-    #         max_results: 1,
-    #         next_token: "NextTokenString",
-    #       }
-    #
     # @!attribute [rw] arn
     #   The [ARN][1] of the component.
     #
@@ -3044,15 +2380,6 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListComponentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         scope: "PRIVATE", # accepts PRIVATE, PUBLIC
-    #         max_results: 1,
-    #         next_token: "NextTokenString",
-    #       }
-    #
     # @!attribute [rw] scope
     #   The scope of the components to list.
     #
@@ -3095,16 +2422,6 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCoreDevicesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         thing_group_arn: "ThingGroupARN",
-    #         status: "HEALTHY", # accepts HEALTHY, UNHEALTHY
-    #         max_results: 1,
-    #         next_token: "NextTokenString",
-    #       }
-    #
     # @!attribute [rw] thing_group_arn
     #   The [ARN][1] of the IoT thing group by which to filter. If you
     #   specify this parameter, the list includes only core devices that
@@ -3166,17 +2483,6 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDeploymentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         target_arn: "TargetARN",
-    #         history_filter: "ALL", # accepts ALL, LATEST_ONLY
-    #         parent_target_arn: "ThingGroupARN",
-    #         max_results: 1,
-    #         next_token: "NextTokenString",
-    #       }
-    #
     # @!attribute [rw] target_arn
     #   The [ARN][1] of the target IoT thing or thing group.
     #
@@ -3243,15 +2549,6 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEffectiveDeploymentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         core_device_thing_name: "CoreDeviceThingName", # required
-    #         max_results: 1,
-    #         next_token: "NextTokenString",
-    #       }
-    #
     # @!attribute [rw] core_device_thing_name
     #   The name of the core device. This is also the name of the IoT thing.
     #   @return [String]
@@ -3292,16 +2589,6 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListInstalledComponentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         core_device_thing_name: "CoreDeviceThingName", # required
-    #         max_results: 1,
-    #         next_token: "NextTokenString",
-    #         topology_filter: "ALL", # accepts ALL, ROOT
-    #       }
-    #
     # @!attribute [rw] core_device_thing_name
     #   The name of the core device. This is also the name of the IoT thing.
     #   @return [String]
@@ -3371,13 +2658,6 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "GenericV2ARN", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The [ARN][1] of the resource.
     #
@@ -3427,27 +2707,6 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ResolveComponentCandidatesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         platform: {
-    #           name: "NonEmptyString",
-    #           attributes: {
-    #             "NonEmptyString" => "NonEmptyString",
-    #           },
-    #         },
-    #         component_candidates: [
-    #           {
-    #             component_name: "ComponentNameString",
-    #             component_version: "ComponentVersionString",
-    #             version_requirements: {
-    #               "NonEmptyString" => "NonEmptyString",
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] platform
     #   The platform to use to resolve compatible components.
     #   @return [Types::ComponentPlatform]
@@ -3613,14 +2872,6 @@ module Aws::GreengrassV2
     #
     # [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-system-resource-limits
     #
-    # @note When making an API call, you may pass SystemResourceLimits
-    #   data as a hash:
-    #
-    #       {
-    #         memory: 1,
-    #         cpus: 1.0,
-    #       }
-    #
     # @!attribute [rw] memory
     #   The maximum amount of RAM, expressed in kilobytes, that a
     #   component's processes can use on the core device.
@@ -3648,16 +2899,6 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "GenericV2ARN", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The [ARN][1] of the resource to tag.
     #
@@ -3727,14 +2968,6 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "GenericV2ARN", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The [ARN][1] of the resource to untag.
     #
@@ -3760,21 +2993,6 @@ module Aws::GreengrassV2
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateConnectivityInfoRequest
-    #   data as a hash:
-    #
-    #       {
-    #         thing_name: "CoreDeviceThingName", # required
-    #         connectivity_info: [ # required
-    #           {
-    #             id: "String",
-    #             host_address: "String",
-    #             port_number: 1,
-    #             metadata: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] thing_name
     #   The name of the core device. This is also the name of the IoT thing.
     #   @return [String]

@@ -98,15 +98,6 @@ module Aws::PrometheusService
 
     # Represents the input of a CreateAlertManagerDefinition operation.
     #
-    # @note When making an API call, you may pass CreateAlertManagerDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "IdempotencyToken",
-    #         data: "data", # required
-    #         workspace_id: "WorkspaceId", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Optional, unique, case-sensitive, user-provided identifier to ensure
     #   the idempotency of the request.
@@ -150,15 +141,6 @@ module Aws::PrometheusService
 
     # Represents the input of a CreateLoggingConfiguration operation.
     #
-    # @note When making an API call, you may pass CreateLoggingConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "IdempotencyToken",
-    #         log_group_arn: "LogGroupArn", # required
-    #         workspace_id: "WorkspaceId", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Optional, unique, case-sensitive, user-provided identifier to ensure
     #   the idempotency of the request.
@@ -201,19 +183,6 @@ module Aws::PrometheusService
     end
 
     # Represents the input of a CreateRuleGroupsNamespace operation.
-    #
-    # @note When making an API call, you may pass CreateRuleGroupsNamespaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "IdempotencyToken",
-    #         data: "data", # required
-    #         name: "RuleGroupsNamespaceName", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         workspace_id: "WorkspaceId", # required
-    #       }
     #
     # @!attribute [rw] client_token
     #   Optional, unique, case-sensitive, user-provided identifier to ensure
@@ -282,17 +251,6 @@ module Aws::PrometheusService
 
     # Represents the input of a CreateWorkspace operation.
     #
-    # @note When making an API call, you may pass CreateWorkspaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         alias: "WorkspaceAlias",
-    #         client_token: "IdempotencyToken",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] alias
     #   An optional user-assigned alias for this workspace. This alias is
     #   for user reference and does not need to be unique.
@@ -352,14 +310,6 @@ module Aws::PrometheusService
 
     # Represents the input of a DeleteAlertManagerDefinition operation.
     #
-    # @note When making an API call, you may pass DeleteAlertManagerDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "IdempotencyToken",
-    #         workspace_id: "WorkspaceId", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Optional, unique, case-sensitive, user-provided identifier to ensure
     #   the idempotency of the request.
@@ -384,14 +334,6 @@ module Aws::PrometheusService
 
     # Represents the input of a DeleteLoggingConfiguration operation.
     #
-    # @note When making an API call, you may pass DeleteLoggingConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "IdempotencyToken",
-    #         workspace_id: "WorkspaceId", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Optional, unique, case-sensitive, user-provided identifier to ensure
     #   the idempotency of the request.
@@ -414,15 +356,6 @@ module Aws::PrometheusService
     end
 
     # Represents the input of a DeleteRuleGroupsNamespace operation.
-    #
-    # @note When making an API call, you may pass DeleteRuleGroupsNamespaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "IdempotencyToken",
-    #         name: "RuleGroupsNamespaceName", # required
-    #         workspace_id: "WorkspaceId", # required
-    #       }
     #
     # @!attribute [rw] client_token
     #   Optional, unique, case-sensitive, user-provided identifier to ensure
@@ -452,14 +385,6 @@ module Aws::PrometheusService
 
     # Represents the input of a DeleteWorkspace operation.
     #
-    # @note When making an API call, you may pass DeleteWorkspaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "IdempotencyToken",
-    #         workspace_id: "WorkspaceId", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Optional, unique, case-sensitive, user-provided identifier to ensure
     #   the idempotency of the request.
@@ -482,13 +407,6 @@ module Aws::PrometheusService
     end
 
     # Represents the input of a DescribeAlertManagerDefinition operation.
-    #
-    # @note When making an API call, you may pass DescribeAlertManagerDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workspace_id: "WorkspaceId", # required
-    #       }
     #
     # @!attribute [rw] workspace_id
     #   The ID of the workspace to describe.
@@ -519,13 +437,6 @@ module Aws::PrometheusService
 
     # Represents the input of a DescribeLoggingConfiguration operation.
     #
-    # @note When making an API call, you may pass DescribeLoggingConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workspace_id: "WorkspaceId", # required
-    #       }
-    #
     # @!attribute [rw] workspace_id
     #   The ID of the workspace to vend logs to.
     #   @return [String]
@@ -554,14 +465,6 @@ module Aws::PrometheusService
     end
 
     # Represents the input of a DescribeRuleGroupsNamespace operation.
-    #
-    # @note When making an API call, you may pass DescribeRuleGroupsNamespaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "RuleGroupsNamespaceName", # required
-    #         workspace_id: "WorkspaceId", # required
-    #       }
     #
     # @!attribute [rw] name
     #   The rule groups namespace.
@@ -595,13 +498,6 @@ module Aws::PrometheusService
     end
 
     # Represents the input of a DescribeWorkspace operation.
-    #
-    # @note When making an API call, you may pass DescribeWorkspaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workspace_id: "WorkspaceId", # required
-    #       }
     #
     # @!attribute [rw] workspace_id
     #   The ID of the workspace to describe.
@@ -649,16 +545,6 @@ module Aws::PrometheusService
     end
 
     # Represents the input of a ListRuleGroupsNamespaces operation.
-    #
-    # @note When making an API call, you may pass ListRuleGroupsNamespacesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         name: "RuleGroupsNamespaceName",
-    #         next_token: "PaginationToken",
-    #         workspace_id: "WorkspaceId", # required
-    #       }
     #
     # @!attribute [rw] max_results
     #   Maximum results to return in response (default=100, maximum=1000).
@@ -709,13 +595,6 @@ module Aws::PrometheusService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource.
     #   @return [String]
@@ -741,15 +620,6 @@ module Aws::PrometheusService
     end
 
     # Represents the input of a ListWorkspaces operation.
-    #
-    # @note When making an API call, you may pass ListWorkspacesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         alias: "WorkspaceAlias",
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
     #
     # @!attribute [rw] alias
     #   Optional filter for workspace alias. Only the workspaces with
@@ -852,15 +722,6 @@ module Aws::PrometheusService
 
     # Represents the input of a PutAlertManagerDefinition operation.
     #
-    # @note When making an API call, you may pass PutAlertManagerDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "IdempotencyToken",
-    #         data: "data", # required
-    #         workspace_id: "WorkspaceId", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Optional, unique, case-sensitive, user-provided identifier to ensure
     #   the idempotency of the request.
@@ -903,16 +764,6 @@ module Aws::PrometheusService
     end
 
     # Represents the input of a PutRuleGroupsNamespace operation.
-    #
-    # @note When making an API call, you may pass PutRuleGroupsNamespaceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "IdempotencyToken",
-    #         data: "data", # required
-    #         name: "RuleGroupsNamespaceName", # required
-    #         workspace_id: "WorkspaceId", # required
-    #       }
     #
     # @!attribute [rw] client_token
     #   Optional, unique, case-sensitive, user-provided identifier to ensure
@@ -1134,16 +985,6 @@ module Aws::PrometheusService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource.
     #   @return [String]
@@ -1194,14 +1035,6 @@ module Aws::PrometheusService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource.
     #   @return [String]
@@ -1224,15 +1057,6 @@ module Aws::PrometheusService
     class UntagResourceResponse < Aws::EmptyStructure; end
 
     # Represents the input of an UpdateLoggingConfiguration operation.
-    #
-    # @note When making an API call, you may pass UpdateLoggingConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "IdempotencyToken",
-    #         log_group_arn: "LogGroupArn", # required
-    #         workspace_id: "WorkspaceId", # required
-    #       }
     #
     # @!attribute [rw] client_token
     #   Optional, unique, case-sensitive, user-provided identifier to ensure
@@ -1276,15 +1100,6 @@ module Aws::PrometheusService
     end
 
     # Represents the input of an UpdateWorkspaceAlias operation.
-    #
-    # @note When making an API call, you may pass UpdateWorkspaceAliasRequest
-    #   data as a hash:
-    #
-    #       {
-    #         alias: "WorkspaceAlias",
-    #         client_token: "IdempotencyToken",
-    #         workspace_id: "WorkspaceId", # required
-    #       }
     #
     # @!attribute [rw] alias
     #   The new alias of the workspace.

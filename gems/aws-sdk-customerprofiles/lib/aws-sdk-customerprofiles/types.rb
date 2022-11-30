@@ -23,16 +23,6 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AddProfileKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         profile_id: "uuid", # required
-    #         key_name: "name", # required
-    #         values: ["string1To255"], # required
-    #         domain_name: "name", # required
-    #       }
-    #
     # @!attribute [rw] profile_id
     #   The unique identifier of a customer profile.
     #   @return [String]
@@ -93,14 +83,6 @@ module Aws::CustomerProfiles
     # [2]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html#customerprofiles-SearchProfiles-request-Values
     # [3]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html
     #
-    # @note When making an API call, you may pass AdditionalSearchKey
-    #   data as a hash:
-    #
-    #       {
-    #         key_name: "name", # required
-    #         values: ["string1To255"], # required
-    #       }
-    #
     # @!attribute [rw] key_name
     #   A searchable identifier of a customer profile.
     #   @return [String]
@@ -120,22 +102,6 @@ module Aws::CustomerProfiles
 
     # A generic address associated with the customer that is not mailing,
     # shipping, or billing.
-    #
-    # @note When making an API call, you may pass Address
-    #   data as a hash:
-    #
-    #       {
-    #         address_1: "string1To255",
-    #         address_2: "string1To255",
-    #         address_3: "string1To255",
-    #         address_4: "string1To255",
-    #         city: "string1To255",
-    #         county: "string1To255",
-    #         state: "string1To255",
-    #         province: "string1To255",
-    #         country: "string1To255",
-    #         postal_code: "string1To255",
-    #       }
     #
     # @!attribute [rw] address_1
     #   The first line of a customer address.
@@ -195,81 +161,6 @@ module Aws::CustomerProfiles
     end
 
     # Details for workflow of type `APPFLOW_INTEGRATION`.
-    #
-    # @note When making an API call, you may pass AppflowIntegration
-    #   data as a hash:
-    #
-    #       {
-    #         flow_definition: { # required
-    #           description: "FlowDescription",
-    #           flow_name: "FlowName", # required
-    #           kms_arn: "KmsArn", # required
-    #           source_flow_config: { # required
-    #             connector_profile_name: "ConnectorProfileName",
-    #             connector_type: "Salesforce", # required, accepts Salesforce, Marketo, Zendesk, Servicenow, S3
-    #             incremental_pull_config: {
-    #               datetime_type_field_name: "DatetimeTypeFieldName",
-    #             },
-    #             source_connector_properties: { # required
-    #               marketo: {
-    #                 object: "Object", # required
-    #               },
-    #               s3: {
-    #                 bucket_name: "BucketName", # required
-    #                 bucket_prefix: "BucketPrefix",
-    #               },
-    #               salesforce: {
-    #                 object: "Object", # required
-    #                 enable_dynamic_field_update: false,
-    #                 include_deleted_records: false,
-    #               },
-    #               service_now: {
-    #                 object: "Object", # required
-    #               },
-    #               zendesk: {
-    #                 object: "Object", # required
-    #               },
-    #             },
-    #           },
-    #           tasks: [ # required
-    #             {
-    #               connector_operator: {
-    #                 marketo: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, BETWEEN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #                 s3: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #                 salesforce: "PROJECTION", # accepts PROJECTION, LESS_THAN, CONTAINS, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #                 service_now: "PROJECTION", # accepts PROJECTION, CONTAINS, LESS_THAN, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #                 zendesk: "PROJECTION", # accepts PROJECTION, GREATER_THAN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #               },
-    #               destination_field: "DestinationField",
-    #               source_fields: ["stringTo2048"], # required
-    #               task_properties: {
-    #                 "VALUE" => "Property",
-    #               },
-    #               task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Mask, Merge, Truncate, Validate
-    #             },
-    #           ],
-    #           trigger_config: { # required
-    #             trigger_type: "Scheduled", # required, accepts Scheduled, Event, OnDemand
-    #             trigger_properties: {
-    #               scheduled: {
-    #                 schedule_expression: "ScheduleExpression", # required
-    #                 data_pull_mode: "Incremental", # accepts Incremental, Complete
-    #                 schedule_start_time: Time.now,
-    #                 schedule_end_time: Time.now,
-    #                 timezone: "Timezone",
-    #                 schedule_offset: 1,
-    #                 first_execution_from: Time.now,
-    #               },
-    #             },
-    #           },
-    #         },
-    #         batches: [
-    #           {
-    #             start_time: Time.now, # required
-    #             end_time: Time.now, # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] flow_definition
     #   The configurations that control how Customer Profiles retrieves data
@@ -403,23 +294,6 @@ module Aws::CustomerProfiles
     # Configuration settings for how to perform the auto-merging of
     # profiles.
     #
-    # @note When making an API call, you may pass AutoMerging
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false, # required
-    #         consolidation: {
-    #           matching_attributes_list: [ # required
-    #             ["string1To255"],
-    #           ],
-    #         },
-    #         conflict_resolution: {
-    #           conflict_resolving_model: "RECENCY", # required, accepts RECENCY, SOURCE
-    #           source_name: "string1To255",
-    #         },
-    #         min_allowed_confidence_score_for_merging: 1.0,
-    #       }
-    #
     # @!attribute [rw] enabled
     #   The flag that enables the auto-merging of duplicate profiles.
     #   @return [Boolean]
@@ -472,14 +346,6 @@ module Aws::CustomerProfiles
     # `APPFLOW_INTEGRATION` workflow. `APPFLOW_INTEGRATION` workflow splits
     # ingestion based on these boundaries.
     #
-    # @note When making an API call, you may pass Batch
-    #   data as a hash:
-    #
-    #       {
-    #         start_time: Time.now, # required
-    #         end_time: Time.now, # required
-    #       }
-    #
     # @!attribute [rw] start_time
     #   Start time of batch to split ingestion.
     #   @return [Time]
@@ -499,14 +365,6 @@ module Aws::CustomerProfiles
 
     # How the auto-merging process should resolve conflicts between
     # different profiles.
-    #
-    # @note When making an API call, you may pass ConflictResolution
-    #   data as a hash:
-    #
-    #       {
-    #         conflict_resolving_model: "RECENCY", # required, accepts RECENCY, SOURCE
-    #         source_name: "string1To255",
-    #       }
     #
     # @!attribute [rw] conflict_resolving_model
     #   How the auto-merging process should resolve conflicts between
@@ -535,17 +393,6 @@ module Aws::CustomerProfiles
     end
 
     # The operation to be performed on the provided source fields.
-    #
-    # @note When making an API call, you may pass ConnectorOperator
-    #   data as a hash:
-    #
-    #       {
-    #         marketo: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, BETWEEN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #         s3: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #         salesforce: "PROJECTION", # accepts PROJECTION, LESS_THAN, CONTAINS, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #         service_now: "PROJECTION", # accepts PROJECTION, CONTAINS, LESS_THAN, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #         zendesk: "PROJECTION", # accepts PROJECTION, GREATER_THAN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #       }
     #
     # @!attribute [rw] marketo
     #   The operation to be performed on the provided Marketo source fields.
@@ -584,15 +431,6 @@ module Aws::CustomerProfiles
 
     # The matching criteria to be used during the auto-merging process.
     #
-    # @note When making an API call, you may pass Consolidation
-    #   data as a hash:
-    #
-    #       {
-    #         matching_attributes_list: [ # required
-    #           ["string1To255"],
-    #         ],
-    #       }
-    #
     # @!attribute [rw] matching_attributes_list
     #   A list of matching criteria.
     #   @return [Array<Array<String>>]
@@ -605,45 +443,6 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "name", # required
-    #         default_expiration_days: 1, # required
-    #         default_encryption_key: "encryptionKey",
-    #         dead_letter_queue_url: "sqsQueueUrl",
-    #         matching: {
-    #           enabled: false, # required
-    #           job_schedule: {
-    #             day_of_the_week: "SUNDAY", # required, accepts SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
-    #             time: "JobScheduleTime", # required
-    #           },
-    #           auto_merging: {
-    #             enabled: false, # required
-    #             consolidation: {
-    #               matching_attributes_list: [ # required
-    #                 ["string1To255"],
-    #               ],
-    #             },
-    #             conflict_resolution: {
-    #               conflict_resolving_model: "RECENCY", # required, accepts RECENCY, SOURCE
-    #               source_name: "string1To255",
-    #             },
-    #             min_allowed_confidence_score_for_merging: 1.0,
-    #           },
-    #           exporting_config: {
-    #             s3_exporting: {
-    #               s3_bucket_name: "s3BucketName", # required
-    #               s3_key_name: "s3KeyNameCustomerOutputConfig",
-    #             },
-    #           },
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The unique name of the domain.
     #   @return [String]
@@ -767,92 +566,6 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateIntegrationWorkflowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "name", # required
-    #         workflow_type: "APPFLOW_INTEGRATION", # required, accepts APPFLOW_INTEGRATION
-    #         integration_config: { # required
-    #           appflow_integration: {
-    #             flow_definition: { # required
-    #               description: "FlowDescription",
-    #               flow_name: "FlowName", # required
-    #               kms_arn: "KmsArn", # required
-    #               source_flow_config: { # required
-    #                 connector_profile_name: "ConnectorProfileName",
-    #                 connector_type: "Salesforce", # required, accepts Salesforce, Marketo, Zendesk, Servicenow, S3
-    #                 incremental_pull_config: {
-    #                   datetime_type_field_name: "DatetimeTypeFieldName",
-    #                 },
-    #                 source_connector_properties: { # required
-    #                   marketo: {
-    #                     object: "Object", # required
-    #                   },
-    #                   s3: {
-    #                     bucket_name: "BucketName", # required
-    #                     bucket_prefix: "BucketPrefix",
-    #                   },
-    #                   salesforce: {
-    #                     object: "Object", # required
-    #                     enable_dynamic_field_update: false,
-    #                     include_deleted_records: false,
-    #                   },
-    #                   service_now: {
-    #                     object: "Object", # required
-    #                   },
-    #                   zendesk: {
-    #                     object: "Object", # required
-    #                   },
-    #                 },
-    #               },
-    #               tasks: [ # required
-    #                 {
-    #                   connector_operator: {
-    #                     marketo: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, BETWEEN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #                     s3: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #                     salesforce: "PROJECTION", # accepts PROJECTION, LESS_THAN, CONTAINS, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #                     service_now: "PROJECTION", # accepts PROJECTION, CONTAINS, LESS_THAN, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #                     zendesk: "PROJECTION", # accepts PROJECTION, GREATER_THAN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #                   },
-    #                   destination_field: "DestinationField",
-    #                   source_fields: ["stringTo2048"], # required
-    #                   task_properties: {
-    #                     "VALUE" => "Property",
-    #                   },
-    #                   task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Mask, Merge, Truncate, Validate
-    #                 },
-    #               ],
-    #               trigger_config: { # required
-    #                 trigger_type: "Scheduled", # required, accepts Scheduled, Event, OnDemand
-    #                 trigger_properties: {
-    #                   scheduled: {
-    #                     schedule_expression: "ScheduleExpression", # required
-    #                     data_pull_mode: "Incremental", # accepts Incremental, Complete
-    #                     schedule_start_time: Time.now,
-    #                     schedule_end_time: Time.now,
-    #                     timezone: "Timezone",
-    #                     schedule_offset: 1,
-    #                     first_execution_from: Time.now,
-    #                   },
-    #                 },
-    #               },
-    #             },
-    #             batches: [
-    #               {
-    #                 start_time: Time.now, # required
-    #                 end_time: Time.now, # required
-    #               },
-    #             ],
-    #           },
-    #         },
-    #         object_type_name: "typeName", # required
-    #         role_arn: "RoleArn", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The unique name of the domain.
     #   @return [String]
@@ -911,80 +624,6 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "name", # required
-    #         account_number: "string1To255",
-    #         additional_information: "string1To1000",
-    #         party_type: "INDIVIDUAL", # accepts INDIVIDUAL, BUSINESS, OTHER
-    #         business_name: "string1To255",
-    #         first_name: "string1To255",
-    #         middle_name: "string1To255",
-    #         last_name: "string1To255",
-    #         birth_date: "string1To255",
-    #         gender: "MALE", # accepts MALE, FEMALE, UNSPECIFIED
-    #         phone_number: "string1To255",
-    #         mobile_phone_number: "string1To255",
-    #         home_phone_number: "string1To255",
-    #         business_phone_number: "string1To255",
-    #         email_address: "string1To255",
-    #         personal_email_address: "string1To255",
-    #         business_email_address: "string1To255",
-    #         address: {
-    #           address_1: "string1To255",
-    #           address_2: "string1To255",
-    #           address_3: "string1To255",
-    #           address_4: "string1To255",
-    #           city: "string1To255",
-    #           county: "string1To255",
-    #           state: "string1To255",
-    #           province: "string1To255",
-    #           country: "string1To255",
-    #           postal_code: "string1To255",
-    #         },
-    #         shipping_address: {
-    #           address_1: "string1To255",
-    #           address_2: "string1To255",
-    #           address_3: "string1To255",
-    #           address_4: "string1To255",
-    #           city: "string1To255",
-    #           county: "string1To255",
-    #           state: "string1To255",
-    #           province: "string1To255",
-    #           country: "string1To255",
-    #           postal_code: "string1To255",
-    #         },
-    #         mailing_address: {
-    #           address_1: "string1To255",
-    #           address_2: "string1To255",
-    #           address_3: "string1To255",
-    #           address_4: "string1To255",
-    #           city: "string1To255",
-    #           county: "string1To255",
-    #           state: "string1To255",
-    #           province: "string1To255",
-    #           country: "string1To255",
-    #           postal_code: "string1To255",
-    #         },
-    #         billing_address: {
-    #           address_1: "string1To255",
-    #           address_2: "string1To255",
-    #           address_3: "string1To255",
-    #           address_4: "string1To255",
-    #           city: "string1To255",
-    #           county: "string1To255",
-    #           state: "string1To255",
-    #           province: "string1To255",
-    #           country: "string1To255",
-    #           postal_code: "string1To255",
-    #         },
-    #         attributes: {
-    #           "string1To255" => "string1To255",
-    #         },
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The unique name of the domain.
     #   @return [String]
@@ -1117,13 +756,6 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "name", # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The unique name of the domain.
     #   @return [String]
@@ -1148,14 +780,6 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteIntegrationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "name", # required
-    #         uri: "string1To255", # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The unique name of the domain.
     #   @return [String]
@@ -1185,16 +809,6 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteProfileKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         profile_id: "uuid", # required
-    #         key_name: "name", # required
-    #         values: ["string1To255"], # required
-    #         domain_name: "name", # required
-    #       }
-    #
     # @!attribute [rw] profile_id
     #   The unique identifier of a customer profile.
     #   @return [String]
@@ -1234,16 +848,6 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteProfileObjectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         profile_id: "uuid", # required
-    #         profile_object_unique_key: "string1To255", # required
-    #         object_type_name: "typeName", # required
-    #         domain_name: "name", # required
-    #       }
-    #
     # @!attribute [rw] profile_id
     #   The unique identifier of a customer profile.
     #   @return [String]
@@ -1284,14 +888,6 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteProfileObjectTypeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "name", # required
-    #         object_type_name: "typeName", # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The unique name of the domain.
     #   @return [String]
@@ -1321,14 +917,6 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         profile_id: "uuid", # required
-    #         domain_name: "name", # required
-    #       }
-    #
     # @!attribute [rw] profile_id
     #   The unique identifier of a customer profile.
     #   @return [String]
@@ -1358,14 +946,6 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteWorkflowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "name", # required
-    #         workflow_id: "string1To255", # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The unique name of the domain.
     #   @return [String]
@@ -1433,16 +1013,6 @@ module Aws::CustomerProfiles
     #
     # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html#customer-profiles-cross-service
     #
-    # @note When making an API call, you may pass ExportingConfig
-    #   data as a hash:
-    #
-    #       {
-    #         s3_exporting: {
-    #           s3_bucket_name: "s3BucketName", # required
-    #           s3_key_name: "s3KeyNameCustomerOutputConfig",
-    #         },
-    #       }
-    #
     # @!attribute [rw] s3_exporting
     #   The S3 location where Identity Resolution Jobs write result files.
     #   @return [Types::S3ExportingConfig]
@@ -1471,35 +1041,6 @@ module Aws::CustomerProfiles
     end
 
     # A duplicate customer profile that is to be merged into a main profile.
-    #
-    # @note When making an API call, you may pass FieldSourceProfileIds
-    #   data as a hash:
-    #
-    #       {
-    #         account_number: "uuid",
-    #         additional_information: "uuid",
-    #         party_type: "uuid",
-    #         business_name: "uuid",
-    #         first_name: "uuid",
-    #         middle_name: "uuid",
-    #         last_name: "uuid",
-    #         birth_date: "uuid",
-    #         gender: "uuid",
-    #         phone_number: "uuid",
-    #         mobile_phone_number: "uuid",
-    #         home_phone_number: "uuid",
-    #         business_phone_number: "uuid",
-    #         email_address: "uuid",
-    #         personal_email_address: "uuid",
-    #         business_email_address: "uuid",
-    #         address: "uuid",
-    #         shipping_address: "uuid",
-    #         mailing_address: "uuid",
-    #         billing_address: "uuid",
-    #         attributes: {
-    #           "string1To255" => "uuid",
-    #         },
-    #       }
     #
     # @!attribute [rw] account_number
     #   A unique identifier for the account number field to be merged.
@@ -1620,73 +1161,6 @@ module Aws::CustomerProfiles
     # from the source, Amazon AppFlow. Customer Profiles uses this
     # information to create an AppFlow flow on behalf of customers.
     #
-    # @note When making an API call, you may pass FlowDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         description: "FlowDescription",
-    #         flow_name: "FlowName", # required
-    #         kms_arn: "KmsArn", # required
-    #         source_flow_config: { # required
-    #           connector_profile_name: "ConnectorProfileName",
-    #           connector_type: "Salesforce", # required, accepts Salesforce, Marketo, Zendesk, Servicenow, S3
-    #           incremental_pull_config: {
-    #             datetime_type_field_name: "DatetimeTypeFieldName",
-    #           },
-    #           source_connector_properties: { # required
-    #             marketo: {
-    #               object: "Object", # required
-    #             },
-    #             s3: {
-    #               bucket_name: "BucketName", # required
-    #               bucket_prefix: "BucketPrefix",
-    #             },
-    #             salesforce: {
-    #               object: "Object", # required
-    #               enable_dynamic_field_update: false,
-    #               include_deleted_records: false,
-    #             },
-    #             service_now: {
-    #               object: "Object", # required
-    #             },
-    #             zendesk: {
-    #               object: "Object", # required
-    #             },
-    #           },
-    #         },
-    #         tasks: [ # required
-    #           {
-    #             connector_operator: {
-    #               marketo: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, BETWEEN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #               s3: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #               salesforce: "PROJECTION", # accepts PROJECTION, LESS_THAN, CONTAINS, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #               service_now: "PROJECTION", # accepts PROJECTION, CONTAINS, LESS_THAN, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #               zendesk: "PROJECTION", # accepts PROJECTION, GREATER_THAN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #             },
-    #             destination_field: "DestinationField",
-    #             source_fields: ["stringTo2048"], # required
-    #             task_properties: {
-    #               "VALUE" => "Property",
-    #             },
-    #             task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Mask, Merge, Truncate, Validate
-    #           },
-    #         ],
-    #         trigger_config: { # required
-    #           trigger_type: "Scheduled", # required, accepts Scheduled, Event, OnDemand
-    #           trigger_properties: {
-    #             scheduled: {
-    #               schedule_expression: "ScheduleExpression", # required
-    #               data_pull_mode: "Incremental", # accepts Incremental, Complete
-    #               schedule_start_time: Time.now,
-    #               schedule_end_time: Time.now,
-    #               timezone: "Timezone",
-    #               schedule_offset: 1,
-    #               first_execution_from: Time.now,
-    #             },
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] description
     #   A description of the flow you want to create.
     #   @return [String]
@@ -1753,23 +1227,6 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAutoMergingPreviewRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "name", # required
-    #         consolidation: { # required
-    #           matching_attributes_list: [ # required
-    #             ["string1To255"],
-    #           ],
-    #         },
-    #         conflict_resolution: { # required
-    #           conflict_resolving_model: "RECENCY", # required, accepts RECENCY, SOURCE
-    #           source_name: "string1To255",
-    #         },
-    #         min_allowed_confidence_score_for_merging: 1.0,
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The unique name of the domain.
     #   @return [String]
@@ -1828,13 +1285,6 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "name", # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The unique name of the domain.
     #   @return [String]
@@ -1917,14 +1367,6 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetIdentityResolutionJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "name", # required
-    #         job_id: "uuid", # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The unique name of the domain.
     #   @return [String]
@@ -2032,14 +1474,6 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetIntegrationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "name", # required
-    #         uri: "string1To255", # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The unique name of the domain.
     #   @return [String]
@@ -2118,15 +1552,6 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetMatchesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "token",
-    #         max_results: 1,
-    #         domain_name: "name", # required
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The token for the next set of results. Use the value returned in the
     #   previous response in the next request to retrieve the next set of
@@ -2179,14 +1604,6 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetProfileObjectTypeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "name", # required
-    #         object_type_name: "typeName", # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The unique name of the domain.
     #   @return [String]
@@ -2279,13 +1696,6 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetProfileObjectTypeTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         template_id: "name", # required
-    #       }
-    #
     # @!attribute [rw] template_id
     #   A unique identifier for the object template.
     #   @return [String]
@@ -2346,14 +1756,6 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetWorkflowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "name", # required
-    #         workflow_id: "uuid", # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The unique name of the domain.
     #   @return [String]
@@ -2419,16 +1821,6 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetWorkflowStepsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "name", # required
-    #         workflow_id: "uuid", # required
-    #         next_token: "token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The unique name of the domain.
     #   @return [String]
@@ -2564,13 +1956,6 @@ module Aws::CustomerProfiles
     # Specifies the configuration used when importing incremental records
     # from the source.
     #
-    # @note When making an API call, you may pass IncrementalPullConfig
-    #   data as a hash:
-    #
-    #       {
-    #         datetime_type_field_name: "DatetimeTypeFieldName",
-    #       }
-    #
     # @!attribute [rw] datetime_type_field_name
     #   A field that specifies the date time or timestamp field as the
     #   criteria to use when importing incremental records from the source.
@@ -2585,83 +1970,6 @@ module Aws::CustomerProfiles
     end
 
     # Configuration data for integration workflow.
-    #
-    # @note When making an API call, you may pass IntegrationConfig
-    #   data as a hash:
-    #
-    #       {
-    #         appflow_integration: {
-    #           flow_definition: { # required
-    #             description: "FlowDescription",
-    #             flow_name: "FlowName", # required
-    #             kms_arn: "KmsArn", # required
-    #             source_flow_config: { # required
-    #               connector_profile_name: "ConnectorProfileName",
-    #               connector_type: "Salesforce", # required, accepts Salesforce, Marketo, Zendesk, Servicenow, S3
-    #               incremental_pull_config: {
-    #                 datetime_type_field_name: "DatetimeTypeFieldName",
-    #               },
-    #               source_connector_properties: { # required
-    #                 marketo: {
-    #                   object: "Object", # required
-    #                 },
-    #                 s3: {
-    #                   bucket_name: "BucketName", # required
-    #                   bucket_prefix: "BucketPrefix",
-    #                 },
-    #                 salesforce: {
-    #                   object: "Object", # required
-    #                   enable_dynamic_field_update: false,
-    #                   include_deleted_records: false,
-    #                 },
-    #                 service_now: {
-    #                   object: "Object", # required
-    #                 },
-    #                 zendesk: {
-    #                   object: "Object", # required
-    #                 },
-    #               },
-    #             },
-    #             tasks: [ # required
-    #               {
-    #                 connector_operator: {
-    #                   marketo: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, BETWEEN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #                   s3: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #                   salesforce: "PROJECTION", # accepts PROJECTION, LESS_THAN, CONTAINS, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #                   service_now: "PROJECTION", # accepts PROJECTION, CONTAINS, LESS_THAN, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #                   zendesk: "PROJECTION", # accepts PROJECTION, GREATER_THAN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #                 },
-    #                 destination_field: "DestinationField",
-    #                 source_fields: ["stringTo2048"], # required
-    #                 task_properties: {
-    #                   "VALUE" => "Property",
-    #                 },
-    #                 task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Mask, Merge, Truncate, Validate
-    #               },
-    #             ],
-    #             trigger_config: { # required
-    #               trigger_type: "Scheduled", # required, accepts Scheduled, Event, OnDemand
-    #               trigger_properties: {
-    #                 scheduled: {
-    #                   schedule_expression: "ScheduleExpression", # required
-    #                   data_pull_mode: "Incremental", # accepts Incremental, Complete
-    #                   schedule_start_time: Time.now,
-    #                   schedule_end_time: Time.now,
-    #                   timezone: "Timezone",
-    #                   schedule_offset: 1,
-    #                   first_execution_from: Time.now,
-    #                 },
-    #               },
-    #             },
-    #           },
-    #           batches: [
-    #             {
-    #               start_time: Time.now, # required
-    #               end_time: Time.now, # required
-    #             },
-    #           ],
-    #         },
-    #       }
     #
     # @!attribute [rw] appflow_integration
     #   Configuration data for `APPFLOW_INTEGRATION` workflow type.
@@ -2690,14 +1998,6 @@ module Aws::CustomerProfiles
 
     # The day and time when do you want to start the Identity Resolution Job
     # every week.
-    #
-    # @note When making an API call, you may pass JobSchedule
-    #   data as a hash:
-    #
-    #       {
-    #         day_of_the_week: "SUNDAY", # required, accepts SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
-    #         time: "JobScheduleTime", # required
-    #       }
     #
     # @!attribute [rw] day_of_the_week
     #   The day when the Identity Resolution Job should run every week.
@@ -2740,16 +2040,6 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAccountIntegrationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         uri: "string1To255", # required
-    #         next_token: "token",
-    #         max_results: 1,
-    #         include_hidden: false,
-    #       }
-    #
     # @!attribute [rw] uri
     #   The URI of the S3 bucket or any other type of data source.
     #   @return [String]
@@ -2827,14 +2117,6 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDomainsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The pagination token from the previous ListDomain API call.
     #   @return [String]
@@ -2869,15 +2151,6 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListIdentityResolutionJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "name", # required
-    #         next_token: "token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The unique name of the domain.
     #   @return [String]
@@ -2983,16 +2256,6 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListIntegrationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "name", # required
-    #         next_token: "token",
-    #         max_results: 1,
-    #         include_hidden: false,
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The unique name of the domain.
     #   @return [String]
@@ -3097,14 +2360,6 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListProfileObjectTypeTemplatesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The pagination token from the previous ListObjectTypeTemplates API
     #   call.
@@ -3141,15 +2396,6 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListProfileObjectTypesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "name", # required
-    #         next_token: "token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The unique name of the domain.
     #   @return [String]
@@ -3214,21 +2460,6 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListProfileObjectsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "token",
-    #         max_results: 1,
-    #         domain_name: "name", # required
-    #         object_type_name: "typeName", # required
-    #         profile_id: "uuid", # required
-    #         object_filter: {
-    #           key_name: "name", # required
-    #           values: ["string1To255"], # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The pagination token from the previous call to ListProfileObjects.
     #   @return [String]
@@ -3285,13 +2516,6 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "TagArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource for which you want to view tags.
     #   @return [String]
@@ -3357,19 +2581,6 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListWorkflowsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "name", # required
-    #         workflow_type: "APPFLOW_INTEGRATION", # accepts APPFLOW_INTEGRATION
-    #         status: "NOT_STARTED", # accepts NOT_STARTED, IN_PROGRESS, COMPLETE, FAILED, SPLIT, RETRY, CANCELLED
-    #         query_start_date: Time.now,
-    #         query_end_date: Time.now,
-    #         next_token: "token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The unique name of the domain.
     #   @return [String]
@@ -3436,13 +2647,6 @@ module Aws::CustomerProfiles
     # The properties that are applied when Marketo is being used as a
     # source.
     #
-    # @note When making an API call, you may pass MarketoSourceProperties
-    #   data as a hash:
-    #
-    #       {
-    #         object: "Object", # required
-    #       }
-    #
     # @!attribute [rw] object
     #   The object specified in the Marketo flow source.
     #   @return [String]
@@ -3488,36 +2692,6 @@ module Aws::CustomerProfiles
     end
 
     # The flag that enables the matching process of duplicate profiles.
-    #
-    # @note When making an API call, you may pass MatchingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false, # required
-    #         job_schedule: {
-    #           day_of_the_week: "SUNDAY", # required, accepts SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
-    #           time: "JobScheduleTime", # required
-    #         },
-    #         auto_merging: {
-    #           enabled: false, # required
-    #           consolidation: {
-    #             matching_attributes_list: [ # required
-    #               ["string1To255"],
-    #             ],
-    #           },
-    #           conflict_resolution: {
-    #             conflict_resolving_model: "RECENCY", # required, accepts RECENCY, SOURCE
-    #             source_name: "string1To255",
-    #           },
-    #           min_allowed_confidence_score_for_merging: 1.0,
-    #         },
-    #         exporting_config: {
-    #           s3_exporting: {
-    #             s3_bucket_name: "s3BucketName", # required
-    #             s3_key_name: "s3KeyNameCustomerOutputConfig",
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] enabled
     #   The flag that enables the matching process of duplicate profiles.
@@ -3579,40 +2753,6 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass MergeProfilesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "name", # required
-    #         main_profile_id: "uuid", # required
-    #         profile_ids_to_be_merged: ["uuid"], # required
-    #         field_source_profile_ids: {
-    #           account_number: "uuid",
-    #           additional_information: "uuid",
-    #           party_type: "uuid",
-    #           business_name: "uuid",
-    #           first_name: "uuid",
-    #           middle_name: "uuid",
-    #           last_name: "uuid",
-    #           birth_date: "uuid",
-    #           gender: "uuid",
-    #           phone_number: "uuid",
-    #           mobile_phone_number: "uuid",
-    #           home_phone_number: "uuid",
-    #           business_phone_number: "uuid",
-    #           email_address: "uuid",
-    #           personal_email_address: "uuid",
-    #           business_email_address: "uuid",
-    #           address: "uuid",
-    #           shipping_address: "uuid",
-    #           mailing_address: "uuid",
-    #           billing_address: "uuid",
-    #           attributes: {
-    #             "string1To255" => "uuid",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The unique name of the domain.
     #   @return [String]
@@ -3659,14 +2799,6 @@ module Aws::CustomerProfiles
     # objects with the specified index values. This filter is only supported
     # for ObjectTypeName \_asset, \_case and \_order.
     #
-    # @note When making an API call, you may pass ObjectFilter
-    #   data as a hash:
-    #
-    #       {
-    #         key_name: "name", # required
-    #         values: ["string1To255"], # required
-    #       }
-    #
     # @!attribute [rw] key_name
     #   A searchable identifier of a standard profile object. The predefined
     #   keys you can use to search for \_asset include: \_assetId,
@@ -3689,15 +2821,6 @@ module Aws::CustomerProfiles
     end
 
     # Represents a field in a ProfileObjectType.
-    #
-    # @note When making an API call, you may pass ObjectTypeField
-    #   data as a hash:
-    #
-    #       {
-    #         source: "text",
-    #         target: "text",
-    #         content_type: "STRING", # accepts STRING, NUMBER, PHONE_NUMBER, EMAIL_ADDRESS, NAME
-    #       }
     #
     # @!attribute [rw] source
     #   A field of a ProfileObject. For example: \_source.FirstName, where
@@ -3727,14 +2850,6 @@ module Aws::CustomerProfiles
 
     # An object that defines the Key element of a ProfileObject. A Key is a
     # special element that can be used to search for a customer profile.
-    #
-    # @note When making an API call, you may pass ObjectTypeKey
-    #   data as a hash:
-    #
-    #       {
-    #         standard_identifiers: ["PROFILE"], # accepts PROFILE, ASSET, CASE, UNIQUE, SECONDARY, LOOKUP_ONLY, NEW_ONLY, ORDER
-    #         field_names: ["name"],
-    #       }
     #
     # @!attribute [rw] standard_identifiers
     #   The types of keys that a ProfileObject can have. Each ProfileObject
@@ -3914,84 +3029,6 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutIntegrationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "name", # required
-    #         uri: "string1To255",
-    #         object_type_name: "typeName",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         flow_definition: {
-    #           description: "FlowDescription",
-    #           flow_name: "FlowName", # required
-    #           kms_arn: "KmsArn", # required
-    #           source_flow_config: { # required
-    #             connector_profile_name: "ConnectorProfileName",
-    #             connector_type: "Salesforce", # required, accepts Salesforce, Marketo, Zendesk, Servicenow, S3
-    #             incremental_pull_config: {
-    #               datetime_type_field_name: "DatetimeTypeFieldName",
-    #             },
-    #             source_connector_properties: { # required
-    #               marketo: {
-    #                 object: "Object", # required
-    #               },
-    #               s3: {
-    #                 bucket_name: "BucketName", # required
-    #                 bucket_prefix: "BucketPrefix",
-    #               },
-    #               salesforce: {
-    #                 object: "Object", # required
-    #                 enable_dynamic_field_update: false,
-    #                 include_deleted_records: false,
-    #               },
-    #               service_now: {
-    #                 object: "Object", # required
-    #               },
-    #               zendesk: {
-    #                 object: "Object", # required
-    #               },
-    #             },
-    #           },
-    #           tasks: [ # required
-    #             {
-    #               connector_operator: {
-    #                 marketo: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, BETWEEN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #                 s3: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #                 salesforce: "PROJECTION", # accepts PROJECTION, LESS_THAN, CONTAINS, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #                 service_now: "PROJECTION", # accepts PROJECTION, CONTAINS, LESS_THAN, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #                 zendesk: "PROJECTION", # accepts PROJECTION, GREATER_THAN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #               },
-    #               destination_field: "DestinationField",
-    #               source_fields: ["stringTo2048"], # required
-    #               task_properties: {
-    #                 "VALUE" => "Property",
-    #               },
-    #               task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Mask, Merge, Truncate, Validate
-    #             },
-    #           ],
-    #           trigger_config: { # required
-    #             trigger_type: "Scheduled", # required, accepts Scheduled, Event, OnDemand
-    #             trigger_properties: {
-    #               scheduled: {
-    #                 schedule_expression: "ScheduleExpression", # required
-    #                 data_pull_mode: "Incremental", # accepts Incremental, Complete
-    #                 schedule_start_time: Time.now,
-    #                 schedule_end_time: Time.now,
-    #                 timezone: "Timezone",
-    #                 schedule_offset: 1,
-    #                 first_execution_from: Time.now,
-    #               },
-    #             },
-    #           },
-    #         },
-    #         object_type_names: {
-    #           "string1To255" => "typeName",
-    #         },
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The unique name of the domain.
     #   @return [String]
@@ -4098,15 +3135,6 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutProfileObjectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         object_type_name: "typeName", # required
-    #         object: "stringifiedJson", # required
-    #         domain_name: "name", # required
-    #       }
-    #
     # @!attribute [rw] object_type_name
     #   The name of the profile object type.
     #   @return [String]
@@ -4142,38 +3170,6 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutProfileObjectTypeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "name", # required
-    #         object_type_name: "typeName", # required
-    #         description: "text", # required
-    #         template_id: "name",
-    #         expiration_days: 1,
-    #         encryption_key: "encryptionKey",
-    #         allow_profile_creation: false,
-    #         source_last_updated_timestamp_format: "string1To255",
-    #         fields: {
-    #           "name" => {
-    #             source: "text",
-    #             target: "text",
-    #             content_type: "STRING", # accepts STRING, NUMBER, PHONE_NUMBER, EMAIL_ADDRESS, NAME
-    #           },
-    #         },
-    #         keys: {
-    #           "name" => [
-    #             {
-    #               standard_identifiers: ["PROFILE"], # accepts PROFILE, ASSET, CASE, UNIQUE, SECONDARY, LOOKUP_ONLY, NEW_ONLY, ORDER
-    #               field_names: ["name"],
-    #             },
-    #           ],
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The unique name of the domain.
     #   @return [String]
@@ -4348,14 +3344,6 @@ module Aws::CustomerProfiles
     # Configuration information about the S3 bucket where Identity
     # Resolution Jobs write result files.
     #
-    # @note When making an API call, you may pass S3ExportingConfig
-    #   data as a hash:
-    #
-    #       {
-    #         s3_bucket_name: "s3BucketName", # required
-    #         s3_key_name: "s3KeyNameCustomerOutputConfig",
-    #       }
-    #
     # @!attribute [rw] s3_bucket_name
     #   The name of the S3 bucket where Identity Resolution Jobs write
     #   result files.
@@ -4399,14 +3387,6 @@ module Aws::CustomerProfiles
     # The properties that are applied when Amazon S3 is being used as the
     # flow source.
     #
-    # @note When making an API call, you may pass S3SourceProperties
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_name: "BucketName", # required
-    #         bucket_prefix: "BucketPrefix",
-    #       }
-    #
     # @!attribute [rw] bucket_name
     #   The Amazon S3 bucket name where the source files are stored.
     #   @return [String]
@@ -4427,15 +3407,6 @@ module Aws::CustomerProfiles
 
     # The properties that are applied when Salesforce is being used as a
     # source.
-    #
-    # @note When making an API call, you may pass SalesforceSourceProperties
-    #   data as a hash:
-    #
-    #       {
-    #         object: "Object", # required
-    #         enable_dynamic_field_update: false,
-    #         include_deleted_records: false,
-    #       }
     #
     # @!attribute [rw] object
     #   The object specified in the Salesforce flow source.
@@ -4464,19 +3435,6 @@ module Aws::CustomerProfiles
     # Specifies the configuration details of a scheduled-trigger flow that
     # you define. Currently, these settings only apply to the
     # scheduled-trigger type.
-    #
-    # @note When making an API call, you may pass ScheduledTriggerProperties
-    #   data as a hash:
-    #
-    #       {
-    #         schedule_expression: "ScheduleExpression", # required
-    #         data_pull_mode: "Incremental", # accepts Incremental, Complete
-    #         schedule_start_time: Time.now,
-    #         schedule_end_time: Time.now,
-    #         timezone: "Timezone",
-    #         schedule_offset: 1,
-    #         first_execution_from: Time.now,
-    #       }
     #
     # @!attribute [rw] schedule_expression
     #   The scheduling expression that determines the rate at which the
@@ -4525,24 +3483,6 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SearchProfilesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "token",
-    #         max_results: 1,
-    #         domain_name: "name", # required
-    #         key_name: "name", # required
-    #         values: ["string1To255"], # required
-    #         additional_search_keys: [
-    #           {
-    #             key_name: "name", # required
-    #             values: ["string1To255"], # required
-    #           },
-    #         ],
-    #         logical_operator: "AND", # accepts AND, OR
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The pagination token from the previous SearchProfiles API call.
     #   @return [String]
@@ -4634,13 +3574,6 @@ module Aws::CustomerProfiles
     # The properties that are applied when ServiceNow is being used as a
     # source.
     #
-    # @note When making an API call, you may pass ServiceNowSourceProperties
-    #   data as a hash:
-    #
-    #       {
-    #         object: "Object", # required
-    #       }
-    #
     # @!attribute [rw] object
     #   The object specified in the ServiceNow flow source.
     #   @return [String]
@@ -4656,30 +3589,6 @@ module Aws::CustomerProfiles
     # Specifies the information that is required to query a particular
     # Amazon AppFlow connector. Customer Profiles supports Salesforce,
     # Zendesk, Marketo, ServiceNow and Amazon S3.
-    #
-    # @note When making an API call, you may pass SourceConnectorProperties
-    #   data as a hash:
-    #
-    #       {
-    #         marketo: {
-    #           object: "Object", # required
-    #         },
-    #         s3: {
-    #           bucket_name: "BucketName", # required
-    #           bucket_prefix: "BucketPrefix",
-    #         },
-    #         salesforce: {
-    #           object: "Object", # required
-    #           enable_dynamic_field_update: false,
-    #           include_deleted_records: false,
-    #         },
-    #         service_now: {
-    #           object: "Object", # required
-    #         },
-    #         zendesk: {
-    #           object: "Object", # required
-    #         },
-    #       }
     #
     # @!attribute [rw] marketo
     #   The properties that are applied when Marketo is being used as a
@@ -4720,37 +3629,6 @@ module Aws::CustomerProfiles
     # Contains information about the configuration of the source connector
     # used in the flow.
     #
-    # @note When making an API call, you may pass SourceFlowConfig
-    #   data as a hash:
-    #
-    #       {
-    #         connector_profile_name: "ConnectorProfileName",
-    #         connector_type: "Salesforce", # required, accepts Salesforce, Marketo, Zendesk, Servicenow, S3
-    #         incremental_pull_config: {
-    #           datetime_type_field_name: "DatetimeTypeFieldName",
-    #         },
-    #         source_connector_properties: { # required
-    #           marketo: {
-    #             object: "Object", # required
-    #           },
-    #           s3: {
-    #             bucket_name: "BucketName", # required
-    #             bucket_prefix: "BucketPrefix",
-    #           },
-    #           salesforce: {
-    #             object: "Object", # required
-    #             enable_dynamic_field_update: false,
-    #             include_deleted_records: false,
-    #           },
-    #           service_now: {
-    #             object: "Object", # required
-    #           },
-    #           zendesk: {
-    #             object: "Object", # required
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] connector_profile_name
     #   The name of the AppFlow connector profile. This name must be unique
     #   for each connector profile in the AWS account.
@@ -4782,16 +3660,6 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "TagArn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource that you're adding tags to.
     #   @return [String]
@@ -4816,25 +3684,6 @@ module Aws::CustomerProfiles
 
     # A class for modeling different type of tasks. Task implementation
     # varies based on the TaskType.
-    #
-    # @note When making an API call, you may pass Task
-    #   data as a hash:
-    #
-    #       {
-    #         connector_operator: {
-    #           marketo: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, BETWEEN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #           s3: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #           salesforce: "PROJECTION", # accepts PROJECTION, LESS_THAN, CONTAINS, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #           service_now: "PROJECTION", # accepts PROJECTION, CONTAINS, LESS_THAN, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #           zendesk: "PROJECTION", # accepts PROJECTION, GREATER_THAN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
-    #         },
-    #         destination_field: "DestinationField",
-    #         source_fields: ["stringTo2048"], # required
-    #         task_properties: {
-    #           "VALUE" => "Property",
-    #         },
-    #         task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Mask, Merge, Truncate, Validate
-    #       }
     #
     # @!attribute [rw] connector_operator
     #   The operation to be performed on the provided source fields.
@@ -4887,24 +3736,6 @@ module Aws::CustomerProfiles
     # The trigger settings that determine how and when Amazon AppFlow runs
     # the specified flow.
     #
-    # @note When making an API call, you may pass TriggerConfig
-    #   data as a hash:
-    #
-    #       {
-    #         trigger_type: "Scheduled", # required, accepts Scheduled, Event, OnDemand
-    #         trigger_properties: {
-    #           scheduled: {
-    #             schedule_expression: "ScheduleExpression", # required
-    #             data_pull_mode: "Incremental", # accepts Incremental, Complete
-    #             schedule_start_time: Time.now,
-    #             schedule_end_time: Time.now,
-    #             timezone: "Timezone",
-    #             schedule_offset: 1,
-    #             first_execution_from: Time.now,
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] trigger_type
     #   Specifies the type of flow trigger. It can be OnDemand, Scheduled,
     #   or Event.
@@ -4929,21 +3760,6 @@ module Aws::CustomerProfiles
     # flow. Currently, these settings only apply to the Scheduled trigger
     # type.
     #
-    # @note When making an API call, you may pass TriggerProperties
-    #   data as a hash:
-    #
-    #       {
-    #         scheduled: {
-    #           schedule_expression: "ScheduleExpression", # required
-    #           data_pull_mode: "Incremental", # accepts Incremental, Complete
-    #           schedule_start_time: Time.now,
-    #           schedule_end_time: Time.now,
-    #           timezone: "Timezone",
-    #           schedule_offset: 1,
-    #           first_execution_from: Time.now,
-    #         },
-    #       }
-    #
     # @!attribute [rw] scheduled
     #   Specifies the configuration details of a schedule-triggered flow
     #   that you define.
@@ -4957,14 +3773,6 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "TagArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource from which you are removing tags.
     #   @return [String]
@@ -4987,22 +3795,6 @@ module Aws::CustomerProfiles
     class UntagResourceResponse < Aws::EmptyStructure; end
 
     # Updates associated with the address properties of a customer profile.
-    #
-    # @note When making an API call, you may pass UpdateAddress
-    #   data as a hash:
-    #
-    #       {
-    #         address_1: "string0To255",
-    #         address_2: "string0To255",
-    #         address_3: "string0To255",
-    #         address_4: "string0To255",
-    #         city: "string0To255",
-    #         county: "string0To255",
-    #         state: "string0To255",
-    #         province: "string0To255",
-    #         country: "string0To255",
-    #         postal_code: "string0To255",
-    #       }
     #
     # @!attribute [rw] address_1
     #   The first line of a customer address.
@@ -5061,45 +3853,6 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "name", # required
-    #         default_expiration_days: 1,
-    #         default_encryption_key: "encryptionKey",
-    #         dead_letter_queue_url: "sqsQueueUrl",
-    #         matching: {
-    #           enabled: false, # required
-    #           job_schedule: {
-    #             day_of_the_week: "SUNDAY", # required, accepts SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
-    #             time: "JobScheduleTime", # required
-    #           },
-    #           auto_merging: {
-    #             enabled: false, # required
-    #             consolidation: {
-    #               matching_attributes_list: [ # required
-    #                 ["string1To255"],
-    #               ],
-    #             },
-    #             conflict_resolution: {
-    #               conflict_resolving_model: "RECENCY", # required, accepts RECENCY, SOURCE
-    #               source_name: "string1To255",
-    #             },
-    #             min_allowed_confidence_score_for_merging: 1.0,
-    #           },
-    #           exporting_config: {
-    #             s3_exporting: {
-    #               s3_bucket_name: "s3BucketName", # required
-    #               s3_key_name: "s3KeyNameCustomerOutputConfig",
-    #             },
-    #           },
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The unique name of the domain.
     #   @return [String]
@@ -5225,81 +3978,6 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "name", # required
-    #         profile_id: "uuid", # required
-    #         additional_information: "string0To1000",
-    #         account_number: "string0To255",
-    #         party_type: "INDIVIDUAL", # accepts INDIVIDUAL, BUSINESS, OTHER
-    #         business_name: "string0To255",
-    #         first_name: "string0To255",
-    #         middle_name: "string0To255",
-    #         last_name: "string0To255",
-    #         birth_date: "string0To255",
-    #         gender: "MALE", # accepts MALE, FEMALE, UNSPECIFIED
-    #         phone_number: "string0To255",
-    #         mobile_phone_number: "string0To255",
-    #         home_phone_number: "string0To255",
-    #         business_phone_number: "string0To255",
-    #         email_address: "string0To255",
-    #         personal_email_address: "string0To255",
-    #         business_email_address: "string0To255",
-    #         address: {
-    #           address_1: "string0To255",
-    #           address_2: "string0To255",
-    #           address_3: "string0To255",
-    #           address_4: "string0To255",
-    #           city: "string0To255",
-    #           county: "string0To255",
-    #           state: "string0To255",
-    #           province: "string0To255",
-    #           country: "string0To255",
-    #           postal_code: "string0To255",
-    #         },
-    #         shipping_address: {
-    #           address_1: "string0To255",
-    #           address_2: "string0To255",
-    #           address_3: "string0To255",
-    #           address_4: "string0To255",
-    #           city: "string0To255",
-    #           county: "string0To255",
-    #           state: "string0To255",
-    #           province: "string0To255",
-    #           country: "string0To255",
-    #           postal_code: "string0To255",
-    #         },
-    #         mailing_address: {
-    #           address_1: "string0To255",
-    #           address_2: "string0To255",
-    #           address_3: "string0To255",
-    #           address_4: "string0To255",
-    #           city: "string0To255",
-    #           county: "string0To255",
-    #           state: "string0To255",
-    #           province: "string0To255",
-    #           country: "string0To255",
-    #           postal_code: "string0To255",
-    #         },
-    #         billing_address: {
-    #           address_1: "string0To255",
-    #           address_2: "string0To255",
-    #           address_3: "string0To255",
-    #           address_4: "string0To255",
-    #           city: "string0To255",
-    #           county: "string0To255",
-    #           state: "string0To255",
-    #           province: "string0To255",
-    #           country: "string0To255",
-    #           postal_code: "string0To255",
-    #         },
-    #         attributes: {
-    #           "string1To255" => "string0To255",
-    #         },
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The unique name of the domain.
     #   @return [String]
@@ -5481,13 +4159,6 @@ module Aws::CustomerProfiles
     end
 
     # The properties that are applied when using Zendesk as a flow source.
-    #
-    # @note When making an API call, you may pass ZendeskSourceProperties
-    #   data as a hash:
-    #
-    #       {
-    #         object: "Object", # required
-    #       }
     #
     # @!attribute [rw] object
     #   The object specified in the Zendesk flow source.

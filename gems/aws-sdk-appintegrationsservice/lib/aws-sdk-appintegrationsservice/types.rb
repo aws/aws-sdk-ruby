@@ -23,25 +23,6 @@ module Aws::AppIntegrationsService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDataIntegrationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         description: "Description",
-    #         kms_key: "NonBlankString",
-    #         source_uri: "NonBlankString",
-    #         schedule_config: {
-    #           first_execution_from: "NonBlankString",
-    #           object: "Object",
-    #           schedule_expression: "Schedule",
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         client_token: "IdempotencyToken",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the DataIntegration.
     #   @return [String]
@@ -143,22 +124,6 @@ module Aws::AppIntegrationsService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateEventIntegrationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         description: "Description",
-    #         event_filter: { # required
-    #           source: "Source", # required
-    #         },
-    #         event_bridge_bus: "EventBridgeBus", # required
-    #         client_token: "IdempotencyToken",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the event integration.
     #   @return [String]
@@ -261,13 +226,6 @@ module Aws::AppIntegrationsService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDataIntegrationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         data_integration_identifier: "Identifier", # required
-    #       }
-    #
     # @!attribute [rw] data_integration_identifier
     #   A unique identifier for the DataIntegration.
     #   @return [String]
@@ -284,13 +242,6 @@ module Aws::AppIntegrationsService
     #
     class DeleteDataIntegrationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteEventIntegrationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the event integration.
     #   @return [String]
@@ -321,13 +272,6 @@ module Aws::AppIntegrationsService
     end
 
     # The event filter.
-    #
-    # @note When making an API call, you may pass EventFilter
-    #   data as a hash:
-    #
-    #       {
-    #         source: "Source", # required
-    #       }
     #
     # @!attribute [rw] source
     #   The source of the events.
@@ -421,13 +365,6 @@ module Aws::AppIntegrationsService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDataIntegrationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identifier: "Identifier", # required
-    #       }
-    #
     # @!attribute [rw] identifier
     #   A unique identifier.
     #   @return [String]
@@ -488,13 +425,6 @@ module Aws::AppIntegrationsService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetEventIntegrationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the event integration.
     #   @return [String]
@@ -570,15 +500,6 @@ module Aws::AppIntegrationsService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDataIntegrationAssociationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         data_integration_identifier: "Identifier", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] data_integration_identifier
     #   A unique identifier for the DataIntegration.
     #   @return [String]
@@ -622,14 +543,6 @@ module Aws::AppIntegrationsService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDataIntegrationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The token for the next set of results. Use the value returned in the
     #   previous response in the next request to retrieve the next set of
@@ -667,15 +580,6 @@ module Aws::AppIntegrationsService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEventIntegrationAssociationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         event_integration_name: "Name", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] event_integration_name
     #   The name of the event integration.
     #   @return [String]
@@ -718,14 +622,6 @@ module Aws::AppIntegrationsService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEventIntegrationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The token for the next set of results. Use the value returned in the
     #   previous response in the next request to retrieve the next set of
@@ -763,13 +659,6 @@ module Aws::AppIntegrationsService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -823,15 +712,6 @@ module Aws::AppIntegrationsService
     # The name of the data and how often it should be pulled from the
     # source.
     #
-    # @note When making an API call, you may pass ScheduleConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         first_execution_from: "NonBlankString",
-    #         object: "Object",
-    #         schedule_expression: "Schedule",
-    #       }
-    #
     # @!attribute [rw] first_execution_from
     #   The start date for objects to import in the first flow run.
     #   @return [String]
@@ -854,16 +734,6 @@ module Aws::AppIntegrationsService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -898,14 +768,6 @@ module Aws::AppIntegrationsService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -927,15 +789,6 @@ module Aws::AppIntegrationsService
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateDataIntegrationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identifier: "Identifier", # required
-    #         name: "Name",
-    #         description: "Description",
-    #       }
-    #
     # @!attribute [rw] identifier
     #   A unique identifier for the DataIntegration.
     #   @return [String]
@@ -962,14 +815,6 @@ module Aws::AppIntegrationsService
     #
     class UpdateDataIntegrationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateEventIntegrationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         description: "Description",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the event integration.
     #   @return [String]

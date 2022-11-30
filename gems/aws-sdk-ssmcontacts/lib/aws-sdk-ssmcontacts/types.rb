@@ -10,18 +10,6 @@
 module Aws::SSMContacts
   module Types
 
-    # @note When making an API call, you may pass AcceptPageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         page_id: "SsmContactsArn", # required
-    #         contact_channel_id: "SsmContactsArn",
-    #         accept_type: "DELIVERED", # required, accepts DELIVERED, READ
-    #         note: "ReceiptInfo",
-    #         accept_code: "AcceptCode", # required
-    #         accept_code_validation: "IGNORE", # accepts IGNORE, ENFORCE
-    #       }
-    #
     # @!attribute [rw] page_id
     #   The Amazon Resource Name (ARN) of the engagement to a contact
     #   channel.
@@ -87,14 +75,6 @@ module Aws::SSMContacts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ActivateContactChannelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         contact_channel_id: "SsmContactsArn", # required
-    #         activation_code: "ActivationCode", # required
-    #       }
-    #
     # @!attribute [rw] contact_channel_id
     #   The Amazon Resource Name (ARN) of the contact channel.
     #   @return [String]
@@ -119,14 +99,6 @@ module Aws::SSMContacts
 
     # Information about the contact channel that Incident Manager uses to
     # engage the contact.
-    #
-    # @note When making an API call, you may pass ChannelTargetInfo
-    #   data as a hash:
-    #
-    #       {
-    #         contact_channel_id: "SsmContactsArn", # required
-    #         retry_interval_in_minutes: 1,
-    #       }
     #
     # @!attribute [rw] contact_channel_id
     #   The Amazon Resource Name (ARN) of the contact channel.
@@ -252,13 +224,6 @@ module Aws::SSMContacts
     # The details that Incident Manager uses when trying to engage the
     # contact channel.
     #
-    # @note When making an API call, you may pass ContactChannelAddress
-    #   data as a hash:
-    #
-    #       {
-    #         simple_address: "SimpleAddress",
-    #       }
-    #
     # @!attribute [rw] simple_address
     #   The format is dependent on the type of the contact channel. The
     #   following are the expected formats:
@@ -280,14 +245,6 @@ module Aws::SSMContacts
 
     # The contact that Incident Manager is engaging during an incident.
     #
-    # @note When making an API call, you may pass ContactTargetInfo
-    #   data as a hash:
-    #
-    #       {
-    #         contact_id: "SsmContactsArn",
-    #         is_essential: false, # required
-    #       }
-    #
     # @!attribute [rw] contact_id
     #   The Amazon Resource Name (ARN) of the contact.
     #   @return [String]
@@ -306,20 +263,6 @@ module Aws::SSMContacts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateContactChannelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         contact_id: "SsmContactsArn", # required
-    #         name: "ChannelName", # required
-    #         type: "SMS", # required, accepts SMS, VOICE, EMAIL
-    #         delivery_address: { # required
-    #           simple_address: "SimpleAddress",
-    #         },
-    #         defer_activation: false,
-    #         idempotency_token: "IdempotencyToken",
-    #       }
-    #
     # @!attribute [rw] contact_id
     #   The Amazon Resource Name (ARN) of the contact you are adding the
     #   contact channel to.
@@ -390,41 +333,6 @@ module Aws::SSMContacts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateContactRequest
-    #   data as a hash:
-    #
-    #       {
-    #         alias: "ContactAlias", # required
-    #         display_name: "ContactName",
-    #         type: "PERSONAL", # required, accepts PERSONAL, ESCALATION
-    #         plan: { # required
-    #           stages: [ # required
-    #             {
-    #               duration_in_minutes: 1, # required
-    #               targets: [ # required
-    #                 {
-    #                   channel_target_info: {
-    #                     contact_channel_id: "SsmContactsArn", # required
-    #                     retry_interval_in_minutes: 1,
-    #                   },
-    #                   contact_target_info: {
-    #                     contact_id: "SsmContactsArn",
-    #                     is_essential: false, # required
-    #                   },
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         idempotency_token: "IdempotencyToken",
-    #       }
-    #
     # @!attribute [rw] alias
     #   The short name to quickly identify a contact or escalation plan. The
     #   contact alias must be unique and identifiable.
@@ -497,13 +405,6 @@ module Aws::SSMContacts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeactivateContactChannelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         contact_channel_id: "SsmContactsArn", # required
-    #       }
-    #
     # @!attribute [rw] contact_channel_id
     #   The Amazon Resource Name (ARN) of the contact channel you're
     #   deactivating.
@@ -521,13 +422,6 @@ module Aws::SSMContacts
     #
     class DeactivateContactChannelResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteContactChannelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         contact_channel_id: "SsmContactsArn", # required
-    #       }
-    #
     # @!attribute [rw] contact_channel_id
     #   The Amazon Resource Name (ARN) of the contact channel.
     #   @return [String]
@@ -544,13 +438,6 @@ module Aws::SSMContacts
     #
     class DeleteContactChannelResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteContactRequest
-    #   data as a hash:
-    #
-    #       {
-    #         contact_id: "SsmContactsArn", # required
-    #       }
-    #
     # @!attribute [rw] contact_id
     #   The Amazon Resource Name (ARN) of the contact that you're deleting.
     #   @return [String]
@@ -567,13 +454,6 @@ module Aws::SSMContacts
     #
     class DeleteContactResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeEngagementRequest
-    #   data as a hash:
-    #
-    #       {
-    #         engagement_id: "SsmContactsArn", # required
-    #       }
-    #
     # @!attribute [rw] engagement_id
     #   The Amazon Resource Name (ARN) of the engagement you want the
     #   details of.
@@ -649,13 +529,6 @@ module Aws::SSMContacts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribePageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         page_id: "SsmContactsArn", # required
-    #       }
-    #
     # @!attribute [rw] page_id
     #   The ID of the engagement to a contact channel.
     #   @return [String]
@@ -781,13 +654,6 @@ module Aws::SSMContacts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetContactChannelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         contact_channel_id: "SsmContactsArn", # required
-    #       }
-    #
     # @!attribute [rw] contact_channel_id
     #   The Amazon Resource Name (ARN) of the contact channel you want
     #   information about.
@@ -840,13 +706,6 @@ module Aws::SSMContacts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetContactPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         contact_arn: "SsmContactsArn", # required
-    #       }
-    #
     # @!attribute [rw] contact_arn
     #   The Amazon Resource Name (ARN) of the contact or escalation plan.
     #   @return [String]
@@ -877,13 +736,6 @@ module Aws::SSMContacts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetContactRequest
-    #   data as a hash:
-    #
-    #       {
-    #         contact_id: "SsmContactsArn", # required
-    #       }
-    #
     # @!attribute [rw] contact_id
     #   The Amazon Resource Name (ARN) of the contact or escalation plan.
     #   @return [String]
@@ -948,15 +800,6 @@ module Aws::SSMContacts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListContactChannelsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         contact_id: "SsmContactsArn", # required
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] contact_id
     #   The Amazon Resource Name (ARN) of the contact.
     #   @return [String]
@@ -996,16 +839,6 @@ module Aws::SSMContacts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListContactsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #         alias_prefix: "ContactAlias",
-    #         type: "PERSONAL", # accepts PERSONAL, ESCALATION
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The pagination token to continue to the next page of results.
     #   @return [String]
@@ -1054,19 +887,6 @@ module Aws::SSMContacts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEngagementsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #         incident_id: "IncidentId",
-    #         time_range_value: {
-    #           start_time: Time.now,
-    #           end_time: Time.now,
-    #         },
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The pagination token to continue to the next page of results.
     #   @return [String]
@@ -1113,15 +933,6 @@ module Aws::SSMContacts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPageReceiptsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         page_id: "SsmContactsArn", # required
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] page_id
     #   The Amazon Resource Name (ARN) of the engagement to a specific
     #   contact channel.
@@ -1162,15 +973,6 @@ module Aws::SSMContacts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPagesByContactRequest
-    #   data as a hash:
-    #
-    #       {
-    #         contact_id: "SsmContactsArn", # required
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] contact_id
     #   The Amazon Resource Name (ARN) of the contact you are retrieving
     #   engagements for.
@@ -1212,15 +1014,6 @@ module Aws::SSMContacts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPagesByEngagementRequest
-    #   data as a hash:
-    #
-    #       {
-    #         engagement_id: "SsmContactsArn", # required
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] engagement_id
     #   The Amazon Resource Name (ARN) of the engagement.
     #   @return [String]
@@ -1261,13 +1054,6 @@ module Aws::SSMContacts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the contact or escalation plan.
     #   @return [String]
@@ -1344,29 +1130,6 @@ module Aws::SSMContacts
     # The stages that an escalation plan or engagement plan engages contacts
     # and contact methods in.
     #
-    # @note When making an API call, you may pass Plan
-    #   data as a hash:
-    #
-    #       {
-    #         stages: [ # required
-    #           {
-    #             duration_in_minutes: 1, # required
-    #             targets: [ # required
-    #               {
-    #                 channel_target_info: {
-    #                   contact_channel_id: "SsmContactsArn", # required
-    #                   retry_interval_in_minutes: 1,
-    #                 },
-    #                 contact_target_info: {
-    #                   contact_id: "SsmContactsArn",
-    #                   is_essential: false, # required
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] stages
     #   A list of stages that the escalation plan or engagement plan uses to
     #   engage contacts and contact methods.
@@ -1380,14 +1143,6 @@ module Aws::SSMContacts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutContactPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         contact_arn: "SsmContactsArn", # required
-    #         policy: "Policy", # required
-    #       }
-    #
     # @!attribute [rw] contact_arn
     #   The Amazon Resource Name (ARN) of the contact or escalation plan.
     #   @return [String]
@@ -1463,13 +1218,6 @@ module Aws::SSMContacts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SendActivationCodeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         contact_channel_id: "SsmContactsArn", # required
-    #       }
-    #
     # @!attribute [rw] contact_channel_id
     #   The Amazon Resource Name (ARN) of the contact channel.
     #   @return [String]
@@ -1522,25 +1270,6 @@ module Aws::SSMContacts
     # A set amount of time that an escalation plan or engagement plan
     # engages the specified contacts or contact methods.
     #
-    # @note When making an API call, you may pass Stage
-    #   data as a hash:
-    #
-    #       {
-    #         duration_in_minutes: 1, # required
-    #         targets: [ # required
-    #           {
-    #             channel_target_info: {
-    #               contact_channel_id: "SsmContactsArn", # required
-    #               retry_interval_in_minutes: 1,
-    #             },
-    #             contact_target_info: {
-    #               contact_id: "SsmContactsArn",
-    #               is_essential: false, # required
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] duration_in_minutes
     #   The time to wait until beginning the next stage. The duration can
     #   only be set to 0 if a target is specified.
@@ -1560,20 +1289,6 @@ module Aws::SSMContacts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartEngagementRequest
-    #   data as a hash:
-    #
-    #       {
-    #         contact_id: "SsmContactsArn", # required
-    #         sender: "Sender", # required
-    #         subject: "Subject", # required
-    #         content: "Content", # required
-    #         public_subject: "PublicSubject",
-    #         public_content: "PublicContent",
-    #         incident_id: "IncidentId",
-    #         idempotency_token: "IdempotencyToken",
-    #       }
-    #
     # @!attribute [rw] contact_id
     #   The Amazon Resource Name (ARN) of the contact being engaged.
     #   @return [String]
@@ -1641,14 +1356,6 @@ module Aws::SSMContacts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopEngagementRequest
-    #   data as a hash:
-    #
-    #       {
-    #         engagement_id: "SsmContactsArn", # required
-    #         reason: "StopReason",
-    #       }
-    #
     # @!attribute [rw] engagement_id
     #   The Amazon Resource Name (ARN) of the engagement.
     #   @return [String]
@@ -1672,14 +1379,6 @@ module Aws::SSMContacts
 
     # A container of a key-value name pair.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey",
-    #         value: "TagValue",
-    #       }
-    #
     # @!attribute [rw] key
     #   Name of the object key.
     #   @return [String]
@@ -1697,19 +1396,6 @@ module Aws::SSMContacts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the contact or escalation plan.
     #   @return [String]
@@ -1733,20 +1419,6 @@ module Aws::SSMContacts
     class TagResourceResult < Aws::EmptyStructure; end
 
     # The contact or contact channel that's being engaged.
-    #
-    # @note When making an API call, you may pass Target
-    #   data as a hash:
-    #
-    #       {
-    #         channel_target_info: {
-    #           contact_channel_id: "SsmContactsArn", # required
-    #           retry_interval_in_minutes: 1,
-    #         },
-    #         contact_target_info: {
-    #           contact_id: "SsmContactsArn",
-    #           is_essential: false, # required
-    #         },
-    #       }
     #
     # @!attribute [rw] channel_target_info
     #   Information about the contact channel Incident Manager is engaging.
@@ -1795,14 +1467,6 @@ module Aws::SSMContacts
 
     # A range of between two set times
     #
-    # @note When making an API call, you may pass TimeRange
-    #   data as a hash:
-    #
-    #       {
-    #         start_time: Time.now,
-    #         end_time: Time.now,
-    #       }
-    #
     # @!attribute [rw] start_time
     #   The start of the time range.
     #   @return [Time]
@@ -1820,14 +1484,6 @@ module Aws::SSMContacts
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the contact or escalation plan.
     #   @return [String]
@@ -1849,17 +1505,6 @@ module Aws::SSMContacts
     #
     class UntagResourceResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateContactChannelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         contact_channel_id: "SsmContactsArn", # required
-    #         name: "ChannelName",
-    #         delivery_address: {
-    #           simple_address: "SimpleAddress",
-    #         },
-    #       }
-    #
     # @!attribute [rw] contact_channel_id
     #   The Amazon Resource Name (ARN) of the contact channel you want to
     #   update.
@@ -1888,33 +1533,6 @@ module Aws::SSMContacts
     #
     class UpdateContactChannelResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateContactRequest
-    #   data as a hash:
-    #
-    #       {
-    #         contact_id: "SsmContactsArn", # required
-    #         display_name: "ContactName",
-    #         plan: {
-    #           stages: [ # required
-    #             {
-    #               duration_in_minutes: 1, # required
-    #               targets: [ # required
-    #                 {
-    #                   channel_target_info: {
-    #                     contact_channel_id: "SsmContactsArn", # required
-    #                     retry_interval_in_minutes: 1,
-    #                   },
-    #                   contact_target_info: {
-    #                     contact_id: "SsmContactsArn",
-    #                     is_essential: false, # required
-    #                   },
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] contact_id
     #   The Amazon Resource Name (ARN) of the contact or escalation plan
     #   you're updating.

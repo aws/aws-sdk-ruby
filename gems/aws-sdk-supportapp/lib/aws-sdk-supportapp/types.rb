@@ -55,20 +55,6 @@ module Aws::SupportApp
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateSlackChannelConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_id: "channelId", # required
-    #         channel_name: "channelName",
-    #         channel_role_arn: "roleArn", # required
-    #         notify_on_add_correspondence_to_case: false,
-    #         notify_on_case_severity: "none", # required, accepts none, all, high
-    #         notify_on_create_or_reopen_case: false,
-    #         notify_on_resolve_case: false,
-    #         team_id: "teamId", # required
-    #       }
-    #
     # @!attribute [rw] channel_id
     #   The channel ID in Slack. This ID identifies a channel within a Slack
     #   workspace.
@@ -156,8 +142,6 @@ module Aws::SupportApp
     #
     class CreateSlackChannelConfigurationResult < Aws::EmptyStructure; end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-app-2021-08-20/DeleteAccountAliasRequest AWS API Documentation
     #
     class DeleteAccountAliasRequest < Aws::EmptyStructure; end
@@ -166,14 +150,6 @@ module Aws::SupportApp
     #
     class DeleteAccountAliasResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteSlackChannelConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_id: "channelId", # required
-    #         team_id: "teamId", # required
-    #       }
-    #
     # @!attribute [rw] channel_id
     #   The channel ID in Slack. This ID identifies a channel within a Slack
     #   workspace.
@@ -197,13 +173,6 @@ module Aws::SupportApp
     #
     class DeleteSlackChannelConfigurationResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteSlackWorkspaceConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         team_id: "teamId", # required
-    #       }
-    #
     # @!attribute [rw] team_id
     #   The team ID in Slack. This ID uniquely identifies a Slack workspace,
     #   such as `T012ABCDEFG`.
@@ -221,8 +190,6 @@ module Aws::SupportApp
     #
     class DeleteSlackWorkspaceConfigurationResult < Aws::EmptyStructure; end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-app-2021-08-20/GetAccountAliasRequest AWS API Documentation
     #
     class GetAccountAliasRequest < Aws::EmptyStructure; end
@@ -253,13 +220,6 @@ module Aws::SupportApp
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSlackChannelConfigurationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "paginationToken",
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If the results of a search are large, the API only returns a portion
     #   of the results and includes a `nextToken` pagination token in the
@@ -295,13 +255,6 @@ module Aws::SupportApp
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSlackWorkspaceConfigurationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "paginationToken",
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If the results of a search are large, the API only returns a portion
     #   of the results and includes a `nextToken` pagination token in the
@@ -337,13 +290,6 @@ module Aws::SupportApp
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutAccountAliasRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_alias: "awsAccountAlias", # required
-    #       }
-    #
     # @!attribute [rw] account_alias
     #   An alias or short name for an Amazon Web Services account.
     #   @return [String]
@@ -360,13 +306,6 @@ module Aws::SupportApp
     #
     class PutAccountAliasResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass RegisterSlackWorkspaceForOrganizationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         team_id: "teamId", # required
-    #       }
-    #
     # @!attribute [rw] team_id
     #   The team ID in Slack. This ID uniquely identifies a Slack workspace,
     #   such as `T012ABCDEFG`. Specify the Slack workspace that you want to
@@ -526,20 +465,6 @@ module Aws::SupportApp
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateSlackChannelConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_id: "channelId", # required
-    #         channel_name: "channelName",
-    #         channel_role_arn: "roleArn",
-    #         notify_on_add_correspondence_to_case: false,
-    #         notify_on_case_severity: "none", # accepts none, all, high
-    #         notify_on_create_or_reopen_case: false,
-    #         notify_on_resolve_case: false,
-    #         team_id: "teamId", # required
-    #       }
-    #
     # @!attribute [rw] channel_id
     #   The channel ID in Slack. This ID identifies a channel within a Slack
     #   workspace.

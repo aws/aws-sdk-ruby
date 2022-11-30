@@ -14,18 +14,6 @@ module Aws::Comprehend
     # model. An augmented manifest file is a labeled dataset that is
     # produced by Amazon SageMaker Ground Truth.
     #
-    # @note When making an API call, you may pass AugmentedManifestsListItem
-    #   data as a hash:
-    #
-    #       {
-    #         s3_uri: "S3Uri", # required
-    #         split: "TRAIN", # accepts TRAIN, TEST
-    #         attribute_names: ["AttributeNamesListItem"], # required
-    #         annotation_data_s3_uri: "S3Uri",
-    #         source_documents_s3_uri: "S3Uri",
-    #         document_type: "PLAIN_TEXT_DOCUMENT", # accepts PLAIN_TEXT_DOCUMENT, SEMI_STRUCTURED_DOCUMENT
-    #       }
-    #
     # @!attribute [rw] s3_uri
     #   The Amazon S3 location of the augmented manifest file.
     #   @return [String]
@@ -118,13 +106,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchDetectDominantLanguageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         text_list: ["CustomerInputString"], # required
-    #       }
-    #
     # @!attribute [rw] text_list
     #   A list containing the UTF-8 encoded text of the input documents. The
     #   list can contain a maximum of 25 documents. Each document should
@@ -184,14 +165,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchDetectEntitiesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         text_list: ["CustomerInputString"], # required
-    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
-    #       }
-    #
     # @!attribute [rw] text_list
     #   A list containing the UTF-8 encoded text of the input documents. The
     #   list can contain a maximum of 25 documents. The maximum size of each
@@ -257,14 +230,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchDetectKeyPhrasesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         text_list: ["CustomerInputString"], # required
-    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
-    #       }
-    #
     # @!attribute [rw] text_list
     #   A list containing the UTF-8 encoded text of the input documents. The
     #   list can contain a maximum of 25 documents. The maximum size of each
@@ -335,14 +300,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchDetectSentimentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         text_list: ["CustomerInputString"], # required
-    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
-    #       }
-    #
     # @!attribute [rw] text_list
     #   A list containing the UTF-8 encoded text of the input documents. The
     #   list can contain a maximum of 25 documents. The maximum size of each
@@ -414,14 +371,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchDetectSyntaxRequest
-    #   data as a hash:
-    #
-    #       {
-    #         text_list: ["CustomerInputString"], # required
-    #         language_code: "en", # required, accepts en, es, fr, de, it, pt
-    #       }
-    #
     # @!attribute [rw] text_list
     #   A list containing the UTF-8 encoded text of the input documents. The
     #   list can contain a maximum of 25 documents. The maximum size for
@@ -487,14 +436,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchDetectTargetedSentimentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         text_list: ["CustomerInputString"], # required
-    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
-    #       }
-    #
     # @!attribute [rw] text_list
     #   A list containing the UTF-8 encoded text of the input documents. The
     #   list can contain a maximum of 25 documents. The maximum size of each
@@ -686,14 +627,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ClassifyDocumentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         text: "CustomerInputString", # required
-    #         endpoint_arn: "DocumentClassifierEndpointArn", # required
-    #       }
-    #
     # @!attribute [rw] text
     #   The document text to be analyzed.
     #   @return [String]
@@ -756,14 +689,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ContainsPiiEntitiesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         text: "String", # required
-    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
-    #       }
-    #
     # @!attribute [rw] text
     #   A UTF-8 text string. The maximum string size is 100 KB.
     #   @return [String]
@@ -795,51 +720,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDocumentClassifierRequest
-    #   data as a hash:
-    #
-    #       {
-    #         document_classifier_name: "ComprehendArnName", # required
-    #         version_name: "VersionName",
-    #         data_access_role_arn: "IamRoleArn", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         input_data_config: { # required
-    #           data_format: "COMPREHEND_CSV", # accepts COMPREHEND_CSV, AUGMENTED_MANIFEST
-    #           s3_uri: "S3Uri",
-    #           test_s3_uri: "S3Uri",
-    #           label_delimiter: "LabelDelimiter",
-    #           augmented_manifests: [
-    #             {
-    #               s3_uri: "S3Uri", # required
-    #               split: "TRAIN", # accepts TRAIN, TEST
-    #               attribute_names: ["AttributeNamesListItem"], # required
-    #               annotation_data_s3_uri: "S3Uri",
-    #               source_documents_s3_uri: "S3Uri",
-    #               document_type: "PLAIN_TEXT_DOCUMENT", # accepts PLAIN_TEXT_DOCUMENT, SEMI_STRUCTURED_DOCUMENT
-    #             },
-    #           ],
-    #         },
-    #         output_data_config: {
-    #           s3_uri: "S3Uri",
-    #           kms_key_id: "KmsKeyId",
-    #         },
-    #         client_request_token: "ClientRequestTokenString",
-    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
-    #         volume_kms_key_id: "KmsKeyId",
-    #         vpc_config: {
-    #           security_group_ids: ["SecurityGroupId"], # required
-    #           subnets: ["SubnetId"], # required
-    #         },
-    #         mode: "MULTI_CLASS", # accepts MULTI_CLASS, MULTI_LABEL
-    #         model_kms_key_id: "KmsKeyId",
-    #         model_policy: "Policy",
-    #       }
-    #
     # @!attribute [rw] document_classifier_name
     #   The name of the document classifier.
     #   @return [String]
@@ -985,23 +865,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateEndpointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_name: "ComprehendEndpointName", # required
-    #         model_arn: "ComprehendModelArn", # required
-    #         desired_inference_units: 1, # required
-    #         client_request_token: "ClientRequestTokenString",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         data_access_role_arn: "IamRoleArn",
-    #       }
-    #
     # @!attribute [rw] endpoint_name
     #   This is the descriptive suffix that becomes part of the
     #   `EndpointArn` used for all subsequent requests to this resource.
@@ -1066,60 +929,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateEntityRecognizerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         recognizer_name: "ComprehendArnName", # required
-    #         version_name: "VersionName",
-    #         data_access_role_arn: "IamRoleArn", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         input_data_config: { # required
-    #           data_format: "COMPREHEND_CSV", # accepts COMPREHEND_CSV, AUGMENTED_MANIFEST
-    #           entity_types: [ # required
-    #             {
-    #               type: "EntityTypeName", # required
-    #             },
-    #           ],
-    #           documents: {
-    #             s3_uri: "S3Uri", # required
-    #             test_s3_uri: "S3Uri",
-    #             input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
-    #           },
-    #           annotations: {
-    #             s3_uri: "S3Uri", # required
-    #             test_s3_uri: "S3Uri",
-    #           },
-    #           entity_list: {
-    #             s3_uri: "S3Uri", # required
-    #           },
-    #           augmented_manifests: [
-    #             {
-    #               s3_uri: "S3Uri", # required
-    #               split: "TRAIN", # accepts TRAIN, TEST
-    #               attribute_names: ["AttributeNamesListItem"], # required
-    #               annotation_data_s3_uri: "S3Uri",
-    #               source_documents_s3_uri: "S3Uri",
-    #               document_type: "PLAIN_TEXT_DOCUMENT", # accepts PLAIN_TEXT_DOCUMENT, SEMI_STRUCTURED_DOCUMENT
-    #             },
-    #           ],
-    #         },
-    #         client_request_token: "ClientRequestTokenString",
-    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
-    #         volume_kms_key_id: "KmsKeyId",
-    #         vpc_config: {
-    #           security_group_ids: ["SecurityGroupId"], # required
-    #           subnets: ["SubnetId"], # required
-    #         },
-    #         model_kms_key_id: "KmsKeyId",
-    #         model_policy: "Policy",
-    #       }
-    #
     # @!attribute [rw] recognizer_name
     #   The name given to the newly created recognizer. Recognizer names can
     #   be a maximum of 256 characters. Alphanumeric characters, hyphens (-)
@@ -1253,13 +1062,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDocumentClassifierRequest
-    #   data as a hash:
-    #
-    #       {
-    #         document_classifier_arn: "DocumentClassifierArn", # required
-    #       }
-    #
     # @!attribute [rw] document_classifier_arn
     #   The Amazon Resource Name (ARN) that identifies the document
     #   classifier.
@@ -1277,13 +1079,6 @@ module Aws::Comprehend
     #
     class DeleteDocumentClassifierResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteEndpointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_arn: "ComprehendEndpointArn", # required
-    #       }
-    #
     # @!attribute [rw] endpoint_arn
     #   The Amazon Resource Number (ARN) of the endpoint being deleted.
     #   @return [String]
@@ -1300,13 +1095,6 @@ module Aws::Comprehend
     #
     class DeleteEndpointResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteEntityRecognizerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         entity_recognizer_arn: "EntityRecognizerArn", # required
-    #       }
-    #
     # @!attribute [rw] entity_recognizer_arn
     #   The Amazon Resource Name (ARN) that identifies the entity
     #   recognizer.
@@ -1324,14 +1112,6 @@ module Aws::Comprehend
     #
     class DeleteEntityRecognizerResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteResourcePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ComprehendModelArn", # required
-    #         policy_revision_id: "PolicyRevisionId",
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the custom model version that has
     #   the policy to delete.
@@ -1354,13 +1134,6 @@ module Aws::Comprehend
     #
     class DeleteResourcePolicyResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeDocumentClassificationJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The identifier that Amazon Comprehend generated for the job. The
     #   operation returns this identifier in its response.
@@ -1387,13 +1160,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDocumentClassifierRequest
-    #   data as a hash:
-    #
-    #       {
-    #         document_classifier_arn: "DocumentClassifierArn", # required
-    #       }
-    #
     # @!attribute [rw] document_classifier_arn
     #   The Amazon Resource Name (ARN) that identifies the document
     #   classifier. The operation returns this identifier in its response.
@@ -1420,13 +1186,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDominantLanguageDetectionJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The identifier that Amazon Comprehend generated for the job. The
     #   operation returns this identifier in its response.
@@ -1453,13 +1212,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEndpointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_arn: "ComprehendEndpointArn", # required
-    #       }
-    #
     # @!attribute [rw] endpoint_arn
     #   The Amazon Resource Number (ARN) of the endpoint being described.
     #   @return [String]
@@ -1484,13 +1236,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEntitiesDetectionJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The identifier that Amazon Comprehend generated for the job. The
     #   operation returns this identifier in its response.
@@ -1517,13 +1262,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEntityRecognizerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         entity_recognizer_arn: "EntityRecognizerArn", # required
-    #       }
-    #
     # @!attribute [rw] entity_recognizer_arn
     #   The Amazon Resource Name (ARN) that identifies the entity
     #   recognizer.
@@ -1549,13 +1287,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEventsDetectionJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The identifier of the events detection job.
     #   @return [String]
@@ -1581,13 +1312,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeKeyPhrasesDetectionJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The identifier that Amazon Comprehend generated for the job. The
     #   operation returns this identifier in its response.
@@ -1614,13 +1338,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribePiiEntitiesDetectionJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The identifier that Amazon Comprehend generated for the job. The
     #   operation returns this identifier in its response.
@@ -1646,13 +1363,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeResourcePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ComprehendModelArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the policy to describe.
     #   @return [String]
@@ -1694,13 +1404,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeSentimentDetectionJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The identifier that Amazon Comprehend generated for the job. The
     #   operation returns this identifier in its response.
@@ -1727,13 +1430,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeTargetedSentimentDetectionJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The identifier that Amazon Comprehend generated for the job. The
     #   operation returns this identifier in its response.
@@ -1760,13 +1456,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeTopicsDetectionJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The identifier assigned by the user to the detection job.
     #   @return [String]
@@ -1791,13 +1480,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DetectDominantLanguageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         text: "CustomerInputString", # required
-    #       }
-    #
     # @!attribute [rw] text
     #   A UTF-8 text string. The string must contain at least 20 characters.
     #   The maximum string size is 100 KB.
@@ -1831,15 +1513,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DetectEntitiesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         text: "CustomerInputString", # required
-    #         language_code: "en", # accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
-    #         endpoint_arn: "EntityRecognizerEndpointArn",
-    #       }
-    #
     # @!attribute [rw] text
     #   A UTF-8 text string. The maximum string size is 100 KB.
     #   @return [String]
@@ -1907,14 +1580,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DetectKeyPhrasesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         text: "CustomerInputString", # required
-    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
-    #       }
-    #
     # @!attribute [rw] text
     #   A UTF-8 text string. The string must contain less than 100 KB of
     #   UTF-8 encoded characters.
@@ -1951,14 +1616,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DetectPiiEntitiesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         text: "String", # required
-    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
-    #       }
-    #
     # @!attribute [rw] text
     #   A UTF-8 text string. The maximum string size is 100 KB.
     #   @return [String]
@@ -1992,14 +1649,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DetectSentimentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         text: "CustomerInputString", # required
-    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
-    #       }
-    #
     # @!attribute [rw] text
     #   A UTF-8 text string. The maximum string size is 5 KB.
     #
@@ -2044,14 +1693,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DetectSyntaxRequest
-    #   data as a hash:
-    #
-    #       {
-    #         text: "CustomerInputString", # required
-    #         language_code: "en", # required, accepts en, es, fr, de, it, pt
-    #       }
-    #
     # @!attribute [rw] text
     #   A UTF-8 string. The maximum string size is 5 KB.
     #   @return [String]
@@ -2092,14 +1733,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DetectTargetedSentimentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         text: "CustomerInputString", # required
-    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
-    #       }
-    #
     # @!attribute [rw] text
     #   A UTF-8 text string. The maximum string length is 5 KB.
     #   @return [String]
@@ -2154,16 +1787,6 @@ module Aws::Comprehend
     # Provides information for filtering a list of document classification
     # jobs. For more information, see the operation. You can provide only
     # one filter parameter in each request.
-    #
-    # @note When making an API call, you may pass DocumentClassificationJobFilter
-    #   data as a hash:
-    #
-    #       {
-    #         job_name: "JobName",
-    #         job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, FAILED, STOP_REQUESTED, STOPPED
-    #         submit_time_before: Time.now,
-    #         submit_time_after: Time.now,
-    #       }
     #
     # @!attribute [rw] job_name
     #   Filters on the name of the job.
@@ -2307,16 +1930,6 @@ module Aws::Comprehend
     # can only specify one filtering parameter in a request. For more
     # information, see the operation.
     #
-    # @note When making an API call, you may pass DocumentClassifierFilter
-    #   data as a hash:
-    #
-    #       {
-    #         status: "SUBMITTED", # accepts SUBMITTED, TRAINING, DELETING, STOP_REQUESTED, STOPPED, IN_ERROR, TRAINED
-    #         document_classifier_name: "ComprehendArnName",
-    #         submit_time_before: Time.now,
-    #         submit_time_after: Time.now,
-    #       }
-    #
     # @!attribute [rw] status
     #   Filters the list of classifiers based on status.
     #   @return [String]
@@ -2358,26 +1971,6 @@ module Aws::Comprehend
     #
     #
     # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/prep-classifier-data.html
-    #
-    # @note When making an API call, you may pass DocumentClassifierInputDataConfig
-    #   data as a hash:
-    #
-    #       {
-    #         data_format: "COMPREHEND_CSV", # accepts COMPREHEND_CSV, AUGMENTED_MANIFEST
-    #         s3_uri: "S3Uri",
-    #         test_s3_uri: "S3Uri",
-    #         label_delimiter: "LabelDelimiter",
-    #         augmented_manifests: [
-    #           {
-    #             s3_uri: "S3Uri", # required
-    #             split: "TRAIN", # accepts TRAIN, TEST
-    #             attribute_names: ["AttributeNamesListItem"], # required
-    #             annotation_data_s3_uri: "S3Uri",
-    #             source_documents_s3_uri: "S3Uri",
-    #             document_type: "PLAIN_TEXT_DOCUMENT", # accepts PLAIN_TEXT_DOCUMENT, SEMI_STRUCTURED_DOCUMENT
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] data_format
     #   The format of your training data:
@@ -2453,14 +2046,6 @@ module Aws::Comprehend
 
     # Provides output results configuration parameters for custom classifier
     # jobs.
-    #
-    # @note When making an API call, you may pass DocumentClassifierOutputDataConfig
-    #   data as a hash:
-    #
-    #       {
-    #         s3_uri: "S3Uri",
-    #         kms_key_id: "KmsKeyId",
-    #       }
     #
     # @!attribute [rw] s3_uri
     #   When you use the `OutputDataConfig` object while creating a custom
@@ -2700,15 +2285,6 @@ module Aws::Comprehend
 
     # The input properties for a topic detection job.
     #
-    # @note When making an API call, you may pass DocumentReaderConfig
-    #   data as a hash:
-    #
-    #       {
-    #         document_read_action: "TEXTRACT_DETECT_DOCUMENT_TEXT", # required, accepts TEXTRACT_DETECT_DOCUMENT_TEXT, TEXTRACT_ANALYZE_DOCUMENT
-    #         document_read_mode: "SERVICE_DEFAULT", # accepts SERVICE_DEFAULT, FORCE_DOCUMENT_READ_ACTION
-    #         feature_types: ["TABLES"], # accepts TABLES, FORMS
-    #       }
-    #
     # @!attribute [rw] document_read_action
     #   This enum field will start with two values which will apply to PDFs:
     #
@@ -2774,16 +2350,6 @@ module Aws::Comprehend
 
     # Provides information for filtering a list of dominant language
     # detection jobs. For more information, see the operation.
-    #
-    # @note When making an API call, you may pass DominantLanguageDetectionJobFilter
-    #   data as a hash:
-    #
-    #       {
-    #         job_name: "JobName",
-    #         job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, FAILED, STOP_REQUESTED, STOPPED
-    #         submit_time_before: Time.now,
-    #         submit_time_after: Time.now,
-    #       }
     #
     # @!attribute [rw] job_name
     #   Filters on the name of the job.
@@ -2921,16 +2487,6 @@ module Aws::Comprehend
     # filter jobs on their name, model, status, or the date and time that
     # they were created. You can only set one filter at a time.
     #
-    # @note When making an API call, you may pass EndpointFilter
-    #   data as a hash:
-    #
-    #       {
-    #         model_arn: "ComprehendModelArn",
-    #         status: "CREATING", # accepts CREATING, DELETING, FAILED, IN_SERVICE, UPDATING
-    #         creation_time_before: Time.now,
-    #         creation_time_after: Time.now,
-    #       }
-    #
     # @!attribute [rw] model_arn
     #   The Amazon Resource Number (ARN) of the model to which the endpoint
     #   is attached.
@@ -3045,16 +2601,6 @@ module Aws::Comprehend
 
     # Provides information for filtering a list of dominant language
     # detection jobs. For more information, see the operation.
-    #
-    # @note When making an API call, you may pass EntitiesDetectionJobFilter
-    #   data as a hash:
-    #
-    #       {
-    #         job_name: "JobName",
-    #         job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, FAILED, STOP_REQUESTED, STOPPED
-    #         submit_time_before: Time.now,
-    #         submit_time_after: Time.now,
-    #       }
     #
     # @!attribute [rw] job_name
     #   Filters on the name of the job.
@@ -3258,14 +2804,6 @@ module Aws::Comprehend
 
     # Describes the annotations associated with a entity recognizer.
     #
-    # @note When making an API call, you may pass EntityRecognizerAnnotations
-    #   data as a hash:
-    #
-    #       {
-    #         s3_uri: "S3Uri", # required
-    #         test_s3_uri: "S3Uri",
-    #       }
-    #
     # @!attribute [rw] s3_uri
     #   Specifies the Amazon S3 location where the annotations for an entity
     #   recognizer are located. The URI must be in the same region as the
@@ -3288,15 +2826,6 @@ module Aws::Comprehend
     end
 
     # Describes the training documents submitted with an entity recognizer.
-    #
-    # @note When making an API call, you may pass EntityRecognizerDocuments
-    #   data as a hash:
-    #
-    #       {
-    #         s3_uri: "S3Uri", # required
-    #         test_s3_uri: "S3Uri",
-    #         input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
-    #       }
     #
     # @!attribute [rw] s3_uri
     #   Specifies the Amazon S3 location where the training documents for an
@@ -3331,13 +2860,6 @@ module Aws::Comprehend
     end
 
     # Describes the entity recognizer submitted with an entity recognizer.
-    #
-    # @note When making an API call, you may pass EntityRecognizerEntityList
-    #   data as a hash:
-    #
-    #       {
-    #         s3_uri: "S3Uri", # required
-    #       }
     #
     # @!attribute [rw] s3_uri
     #   Specifies the Amazon S3 location where the entity list is located.
@@ -3390,16 +2912,6 @@ module Aws::Comprehend
     # can only specify one filtering parameter in a request. For more
     # information, see the operation./&gt;
     #
-    # @note When making an API call, you may pass EntityRecognizerFilter
-    #   data as a hash:
-    #
-    #       {
-    #         status: "SUBMITTED", # accepts SUBMITTED, TRAINING, DELETING, STOP_REQUESTED, STOPPED, IN_ERROR, TRAINED
-    #         recognizer_name: "ComprehendArnName",
-    #         submit_time_before: Time.now,
-    #         submit_time_after: Time.now,
-    #       }
-    #
     # @!attribute [rw] status
     #   The status of an entity recognizer.
     #   @return [String]
@@ -3434,40 +2946,6 @@ module Aws::Comprehend
     end
 
     # Specifies the format and location of the input data.
-    #
-    # @note When making an API call, you may pass EntityRecognizerInputDataConfig
-    #   data as a hash:
-    #
-    #       {
-    #         data_format: "COMPREHEND_CSV", # accepts COMPREHEND_CSV, AUGMENTED_MANIFEST
-    #         entity_types: [ # required
-    #           {
-    #             type: "EntityTypeName", # required
-    #           },
-    #         ],
-    #         documents: {
-    #           s3_uri: "S3Uri", # required
-    #           test_s3_uri: "S3Uri",
-    #           input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
-    #         },
-    #         annotations: {
-    #           s3_uri: "S3Uri", # required
-    #           test_s3_uri: "S3Uri",
-    #         },
-    #         entity_list: {
-    #           s3_uri: "S3Uri", # required
-    #         },
-    #         augmented_manifests: [
-    #           {
-    #             s3_uri: "S3Uri", # required
-    #             split: "TRAIN", # accepts TRAIN, TEST
-    #             attribute_names: ["AttributeNamesListItem"], # required
-    #             annotation_data_s3_uri: "S3Uri",
-    #             source_documents_s3_uri: "S3Uri",
-    #             document_type: "PLAIN_TEXT_DOCUMENT", # accepts PLAIN_TEXT_DOCUMENT, SEMI_STRUCTURED_DOCUMENT
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] data_format
     #   The format of your training data:
@@ -3797,13 +3275,6 @@ module Aws::Comprehend
     # An entity type within a labeled training dataset that Amazon
     # Comprehend uses to train a custom entity recognizer.
     #
-    # @note When making an API call, you may pass EntityTypesListItem
-    #   data as a hash:
-    #
-    #       {
-    #         type: "EntityTypeName", # required
-    #       }
-    #
     # @!attribute [rw] type
     #   An entity type within a labeled training dataset that Amazon
     #   Comprehend uses to train a custom entity recognizer.
@@ -3823,16 +3294,6 @@ module Aws::Comprehend
     end
 
     # Provides information for filtering a list of event detection jobs.
-    #
-    # @note When making an API call, you may pass EventsDetectionJobFilter
-    #   data as a hash:
-    #
-    #       {
-    #         job_name: "JobName",
-    #         job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, FAILED, STOP_REQUESTED, STOPPED
-    #         submit_time_before: Time.now,
-    #         submit_time_after: Time.now,
-    #       }
     #
     # @!attribute [rw] job_name
     #   Filters on the name of the events detection job.
@@ -3950,23 +3411,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ImportModelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source_model_arn: "ComprehendModelArn", # required
-    #         model_name: "ComprehendArnName",
-    #         version_name: "VersionName",
-    #         model_kms_key_id: "KmsKeyId",
-    #         data_access_role_arn: "IamRoleArn",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] source_model_arn
     #   The Amazon Resource Name (ARN) of the custom model to import.
     #   @return [String]
@@ -4035,19 +3479,6 @@ module Aws::Comprehend
     end
 
     # The input properties for an inference job.
-    #
-    # @note When making an API call, you may pass InputDataConfig
-    #   data as a hash:
-    #
-    #       {
-    #         s3_uri: "S3Uri", # required
-    #         input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
-    #         document_reader_config: {
-    #           document_read_action: "TEXTRACT_DETECT_DOCUMENT_TEXT", # required, accepts TEXTRACT_DETECT_DOCUMENT_TEXT, TEXTRACT_ANALYZE_DOCUMENT
-    #           document_read_mode: "SERVICE_DEFAULT", # accepts SERVICE_DEFAULT, FORCE_DOCUMENT_READ_ACTION
-    #           feature_types: ["TABLES"], # accepts TABLES, FORMS
-    #         },
-    #       }
     #
     # @!attribute [rw] s3_uri
     #   The Amazon S3 URI for the input data. The URI must be in same region
@@ -4179,16 +3610,6 @@ module Aws::Comprehend
 
     # Provides information for filtering a list of dominant language
     # detection jobs. For more information, see the operation.
-    #
-    # @note When making an API call, you may pass KeyPhrasesDetectionJobFilter
-    #   data as a hash:
-    #
-    #       {
-    #         job_name: "JobName",
-    #         job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, FAILED, STOP_REQUESTED, STOPPED
-    #         submit_time_before: Time.now,
-    #         submit_time_after: Time.now,
-    #       }
     #
     # @!attribute [rw] job_name
     #   Filters on the name of the job.
@@ -4340,20 +3761,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDocumentClassificationJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter: {
-    #           job_name: "JobName",
-    #           job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, FAILED, STOP_REQUESTED, STOPPED
-    #           submit_time_before: Time.now,
-    #           submit_time_after: Time.now,
-    #         },
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] filter
     #   Filters the jobs that are returned. You can filter jobs on their
     #   names, status, or the date and time that they were submitted. You
@@ -4396,14 +3803,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDocumentClassifierSummariesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   Identifies the next page of results to return.
     #   @return [String]
@@ -4439,20 +3838,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDocumentClassifiersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter: {
-    #           status: "SUBMITTED", # accepts SUBMITTED, TRAINING, DELETING, STOP_REQUESTED, STOPPED, IN_ERROR, TRAINED
-    #           document_classifier_name: "ComprehendArnName",
-    #           submit_time_before: Time.now,
-    #           submit_time_after: Time.now,
-    #         },
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] filter
     #   Filters the jobs that are returned. You can filter jobs on their
     #   name, status, or the date and time that they were submitted. You can
@@ -4495,20 +3880,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDominantLanguageDetectionJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter: {
-    #           job_name: "JobName",
-    #           job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, FAILED, STOP_REQUESTED, STOPPED
-    #           submit_time_before: Time.now,
-    #           submit_time_after: Time.now,
-    #         },
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] filter
     #   Filters that jobs that are returned. You can filter jobs on their
     #   name, status, or the date and time that they were submitted. You can
@@ -4551,20 +3922,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEndpointsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter: {
-    #           model_arn: "ComprehendModelArn",
-    #           status: "CREATING", # accepts CREATING, DELETING, FAILED, IN_SERVICE, UPDATING
-    #           creation_time_before: Time.now,
-    #           creation_time_after: Time.now,
-    #         },
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] filter
     #   Filters the endpoints that are returned. You can filter endpoints on
     #   their name, model, status, or the date and time that they were
@@ -4608,20 +3965,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEntitiesDetectionJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter: {
-    #           job_name: "JobName",
-    #           job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, FAILED, STOP_REQUESTED, STOPPED
-    #           submit_time_before: Time.now,
-    #           submit_time_after: Time.now,
-    #         },
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] filter
     #   Filters the jobs that are returned. You can filter jobs on their
     #   name, status, or the date and time that they were submitted. You can
@@ -4664,14 +4007,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEntityRecognizerSummariesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   Identifies the next page of results to return.
     #   @return [String]
@@ -4707,20 +4042,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEntityRecognizersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter: {
-    #           status: "SUBMITTED", # accepts SUBMITTED, TRAINING, DELETING, STOP_REQUESTED, STOPPED, IN_ERROR, TRAINED
-    #           recognizer_name: "ComprehendArnName",
-    #           submit_time_before: Time.now,
-    #           submit_time_after: Time.now,
-    #         },
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] filter
     #   Filters the list of entities returned. You can filter on `Status`,
     #   `SubmitTimeBefore`, or `SubmitTimeAfter`. You can only set one
@@ -4763,20 +4084,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEventsDetectionJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter: {
-    #           job_name: "JobName",
-    #           job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, FAILED, STOP_REQUESTED, STOPPED
-    #           submit_time_before: Time.now,
-    #           submit_time_after: Time.now,
-    #         },
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] filter
     #   Filters the jobs that are returned. You can filter jobs on their
     #   name, status, or the date and time that they were submitted. You can
@@ -4818,20 +4125,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListKeyPhrasesDetectionJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter: {
-    #           job_name: "JobName",
-    #           job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, FAILED, STOP_REQUESTED, STOPPED
-    #           submit_time_before: Time.now,
-    #           submit_time_after: Time.now,
-    #         },
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] filter
     #   Filters the jobs that are returned. You can filter jobs on their
     #   name, status, or the date and time that they were submitted. You can
@@ -4874,20 +4167,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPiiEntitiesDetectionJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter: {
-    #           job_name: "JobName",
-    #           job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, FAILED, STOP_REQUESTED, STOPPED
-    #           submit_time_before: Time.now,
-    #           submit_time_after: Time.now,
-    #         },
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] filter
     #   Filters the jobs that are returned. You can filter jobs on their
     #   name, status, or the date and time that they were submitted. You can
@@ -4929,20 +4208,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSentimentDetectionJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter: {
-    #           job_name: "JobName",
-    #           job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, FAILED, STOP_REQUESTED, STOPPED
-    #           submit_time_before: Time.now,
-    #           submit_time_after: Time.now,
-    #         },
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] filter
     #   Filters the jobs that are returned. You can filter jobs on their
     #   name, status, or the date and time that they were submitted. You can
@@ -4985,13 +4250,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ComprehendArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the given Amazon Comprehend
     #   resource you are querying.
@@ -5027,20 +4285,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTargetedSentimentDetectionJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter: {
-    #           job_name: "JobName",
-    #           job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, FAILED, STOP_REQUESTED, STOPPED
-    #           submit_time_before: Time.now,
-    #           submit_time_after: Time.now,
-    #         },
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] filter
     #   Filters the jobs that are returned. You can filter jobs on their
     #   name, status, or the date and time that they were submitted. You can
@@ -5083,20 +4327,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTopicsDetectionJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter: {
-    #           job_name: "JobName",
-    #           job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, FAILED, STOP_REQUESTED, STOPPED
-    #           submit_time_before: Time.now,
-    #           submit_time_after: Time.now,
-    #         },
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] filter
     #   Filters the jobs that are returned. Jobs can be filtered on their
     #   name, status, or the date and time that they were submitted. You can
@@ -5168,14 +4398,6 @@ module Aws::Comprehend
     end
 
     # Provides configuration parameters for the output of inference jobs.
-    #
-    # @note When making an API call, you may pass OutputDataConfig
-    #   data as a hash:
-    #
-    #       {
-    #         s3_uri: "S3Uri", # required
-    #         kms_key_id: "KmsKeyId",
-    #       }
     #
     # @!attribute [rw] s3_uri
     #   When you use the `OutputDataConfig` object with asynchronous
@@ -5249,16 +4471,6 @@ module Aws::Comprehend
 
     # Provides information for filtering a list of PII entity detection
     # jobs.
-    #
-    # @note When making an API call, you may pass PiiEntitiesDetectionJobFilter
-    #   data as a hash:
-    #
-    #       {
-    #         job_name: "JobName",
-    #         job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, FAILED, STOP_REQUESTED, STOPPED
-    #         submit_time_before: Time.now,
-    #         submit_time_after: Time.now,
-    #       }
     #
     # @!attribute [rw] job_name
     #   Filters on the name of the job.
@@ -5445,15 +4657,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutResourcePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ComprehendModelArn", # required
-    #         resource_policy: "Policy", # required
-    #         policy_revision_id: "PolicyRevisionId",
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the custom model to attach the
     #   policy to.
@@ -5507,15 +4710,6 @@ module Aws::Comprehend
     end
 
     # Provides configuration parameters for PII entity redaction.
-    #
-    # @note When making an API call, you may pass RedactionConfig
-    #   data as a hash:
-    #
-    #       {
-    #         pii_entity_types: ["BANK_ACCOUNT_NUMBER"], # accepts BANK_ACCOUNT_NUMBER, BANK_ROUTING, CREDIT_DEBIT_NUMBER, CREDIT_DEBIT_CVV, CREDIT_DEBIT_EXPIRY, PIN, EMAIL, ADDRESS, NAME, PHONE, SSN, DATE_TIME, PASSPORT_NUMBER, DRIVER_ID, URL, AGE, USERNAME, PASSWORD, AWS_ACCESS_KEY, AWS_SECRET_KEY, IP_ADDRESS, MAC_ADDRESS, ALL, LICENSE_PLATE, VEHICLE_IDENTIFICATION_NUMBER, UK_NATIONAL_INSURANCE_NUMBER, CA_SOCIAL_INSURANCE_NUMBER, US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER, UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER, IN_PERMANENT_ACCOUNT_NUMBER, IN_NREGA, INTERNATIONAL_BANK_ACCOUNT_NUMBER, SWIFT_CODE, UK_NATIONAL_HEALTH_SERVICE_NUMBER, CA_HEALTH_NUMBER, IN_AADHAAR, IN_VOTER_NUMBER
-    #         mask_mode: "MASK", # accepts MASK, REPLACE_WITH_PII_ENTITY_TYPE
-    #         mask_character: "MaskCharacter",
-    #       }
     #
     # @!attribute [rw] pii_entity_types
     #   An array of the types of PII entities that Amazon Comprehend detects
@@ -5599,16 +4793,6 @@ module Aws::Comprehend
 
     # Provides information for filtering a list of dominant language
     # detection jobs. For more information, see the operation.
-    #
-    # @note When making an API call, you may pass SentimentDetectionJobFilter
-    #   data as a hash:
-    #
-    #       {
-    #         job_name: "JobName",
-    #         job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, FAILED, STOP_REQUESTED, STOPPED
-    #         submit_time_before: Time.now,
-    #         submit_time_after: Time.now,
-    #       }
     #
     # @!attribute [rw] job_name
     #   Filters on the name of the job.
@@ -5780,40 +4964,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartDocumentClassificationJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_name: "JobName",
-    #         document_classifier_arn: "DocumentClassifierArn", # required
-    #         input_data_config: { # required
-    #           s3_uri: "S3Uri", # required
-    #           input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
-    #           document_reader_config: {
-    #             document_read_action: "TEXTRACT_DETECT_DOCUMENT_TEXT", # required, accepts TEXTRACT_DETECT_DOCUMENT_TEXT, TEXTRACT_ANALYZE_DOCUMENT
-    #             document_read_mode: "SERVICE_DEFAULT", # accepts SERVICE_DEFAULT, FORCE_DOCUMENT_READ_ACTION
-    #             feature_types: ["TABLES"], # accepts TABLES, FORMS
-    #           },
-    #         },
-    #         output_data_config: { # required
-    #           s3_uri: "S3Uri", # required
-    #           kms_key_id: "KmsKeyId",
-    #         },
-    #         data_access_role_arn: "IamRoleArn", # required
-    #         client_request_token: "ClientRequestTokenString",
-    #         volume_kms_key_id: "KmsKeyId",
-    #         vpc_config: {
-    #           security_group_ids: ["SecurityGroupId"], # required
-    #           subnets: ["SubnetId"], # required
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] job_name
     #   The identifier of the job.
     #   @return [String]
@@ -5936,39 +5086,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartDominantLanguageDetectionJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         input_data_config: { # required
-    #           s3_uri: "S3Uri", # required
-    #           input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
-    #           document_reader_config: {
-    #             document_read_action: "TEXTRACT_DETECT_DOCUMENT_TEXT", # required, accepts TEXTRACT_DETECT_DOCUMENT_TEXT, TEXTRACT_ANALYZE_DOCUMENT
-    #             document_read_mode: "SERVICE_DEFAULT", # accepts SERVICE_DEFAULT, FORCE_DOCUMENT_READ_ACTION
-    #             feature_types: ["TABLES"], # accepts TABLES, FORMS
-    #           },
-    #         },
-    #         output_data_config: { # required
-    #           s3_uri: "S3Uri", # required
-    #           kms_key_id: "KmsKeyId",
-    #         },
-    #         data_access_role_arn: "IamRoleArn", # required
-    #         job_name: "JobName",
-    #         client_request_token: "ClientRequestTokenString",
-    #         volume_kms_key_id: "KmsKeyId",
-    #         vpc_config: {
-    #           security_group_ids: ["SecurityGroupId"], # required
-    #           subnets: ["SubnetId"], # required
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] input_data_config
     #   Specifies the format and location of the input data for the job.
     #   @return [Types::InputDataConfig]
@@ -6088,41 +5205,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartEntitiesDetectionJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         input_data_config: { # required
-    #           s3_uri: "S3Uri", # required
-    #           input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
-    #           document_reader_config: {
-    #             document_read_action: "TEXTRACT_DETECT_DOCUMENT_TEXT", # required, accepts TEXTRACT_DETECT_DOCUMENT_TEXT, TEXTRACT_ANALYZE_DOCUMENT
-    #             document_read_mode: "SERVICE_DEFAULT", # accepts SERVICE_DEFAULT, FORCE_DOCUMENT_READ_ACTION
-    #             feature_types: ["TABLES"], # accepts TABLES, FORMS
-    #           },
-    #         },
-    #         output_data_config: { # required
-    #           s3_uri: "S3Uri", # required
-    #           kms_key_id: "KmsKeyId",
-    #         },
-    #         data_access_role_arn: "IamRoleArn", # required
-    #         job_name: "JobName",
-    #         entity_recognizer_arn: "EntityRecognizerArn",
-    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
-    #         client_request_token: "ClientRequestTokenString",
-    #         volume_kms_key_id: "KmsKeyId",
-    #         vpc_config: {
-    #           security_group_ids: ["SecurityGroupId"], # required
-    #           subnets: ["SubnetId"], # required
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] input_data_config
     #   Specifies the format and location of the input data for the job.
     #   @return [Types::InputDataConfig]
@@ -6262,36 +5344,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartEventsDetectionJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         input_data_config: { # required
-    #           s3_uri: "S3Uri", # required
-    #           input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
-    #           document_reader_config: {
-    #             document_read_action: "TEXTRACT_DETECT_DOCUMENT_TEXT", # required, accepts TEXTRACT_DETECT_DOCUMENT_TEXT, TEXTRACT_ANALYZE_DOCUMENT
-    #             document_read_mode: "SERVICE_DEFAULT", # accepts SERVICE_DEFAULT, FORCE_DOCUMENT_READ_ACTION
-    #             feature_types: ["TABLES"], # accepts TABLES, FORMS
-    #           },
-    #         },
-    #         output_data_config: { # required
-    #           s3_uri: "S3Uri", # required
-    #           kms_key_id: "KmsKeyId",
-    #         },
-    #         data_access_role_arn: "IamRoleArn", # required
-    #         job_name: "JobName",
-    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
-    #         client_request_token: "ClientRequestTokenString",
-    #         target_event_types: ["EventTypeString"], # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] input_data_config
     #   Specifies the format and location of the input data for the job.
     #   @return [Types::InputDataConfig]
@@ -6380,40 +5432,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartKeyPhrasesDetectionJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         input_data_config: { # required
-    #           s3_uri: "S3Uri", # required
-    #           input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
-    #           document_reader_config: {
-    #             document_read_action: "TEXTRACT_DETECT_DOCUMENT_TEXT", # required, accepts TEXTRACT_DETECT_DOCUMENT_TEXT, TEXTRACT_ANALYZE_DOCUMENT
-    #             document_read_mode: "SERVICE_DEFAULT", # accepts SERVICE_DEFAULT, FORCE_DOCUMENT_READ_ACTION
-    #             feature_types: ["TABLES"], # accepts TABLES, FORMS
-    #           },
-    #         },
-    #         output_data_config: { # required
-    #           s3_uri: "S3Uri", # required
-    #           kms_key_id: "KmsKeyId",
-    #         },
-    #         data_access_role_arn: "IamRoleArn", # required
-    #         job_name: "JobName",
-    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
-    #         client_request_token: "ClientRequestTokenString",
-    #         volume_kms_key_id: "KmsKeyId",
-    #         vpc_config: {
-    #           security_group_ids: ["SecurityGroupId"], # required
-    #           subnets: ["SubnetId"], # required
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] input_data_config
     #   Specifies the format and location of the input data for the job.
     #   @return [Types::InputDataConfig]
@@ -6539,41 +5557,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartPiiEntitiesDetectionJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         input_data_config: { # required
-    #           s3_uri: "S3Uri", # required
-    #           input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
-    #           document_reader_config: {
-    #             document_read_action: "TEXTRACT_DETECT_DOCUMENT_TEXT", # required, accepts TEXTRACT_DETECT_DOCUMENT_TEXT, TEXTRACT_ANALYZE_DOCUMENT
-    #             document_read_mode: "SERVICE_DEFAULT", # accepts SERVICE_DEFAULT, FORCE_DOCUMENT_READ_ACTION
-    #             feature_types: ["TABLES"], # accepts TABLES, FORMS
-    #           },
-    #         },
-    #         output_data_config: { # required
-    #           s3_uri: "S3Uri", # required
-    #           kms_key_id: "KmsKeyId",
-    #         },
-    #         mode: "ONLY_REDACTION", # required, accepts ONLY_REDACTION, ONLY_OFFSETS
-    #         redaction_config: {
-    #           pii_entity_types: ["BANK_ACCOUNT_NUMBER"], # accepts BANK_ACCOUNT_NUMBER, BANK_ROUTING, CREDIT_DEBIT_NUMBER, CREDIT_DEBIT_CVV, CREDIT_DEBIT_EXPIRY, PIN, EMAIL, ADDRESS, NAME, PHONE, SSN, DATE_TIME, PASSPORT_NUMBER, DRIVER_ID, URL, AGE, USERNAME, PASSWORD, AWS_ACCESS_KEY, AWS_SECRET_KEY, IP_ADDRESS, MAC_ADDRESS, ALL, LICENSE_PLATE, VEHICLE_IDENTIFICATION_NUMBER, UK_NATIONAL_INSURANCE_NUMBER, CA_SOCIAL_INSURANCE_NUMBER, US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER, UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER, IN_PERMANENT_ACCOUNT_NUMBER, IN_NREGA, INTERNATIONAL_BANK_ACCOUNT_NUMBER, SWIFT_CODE, UK_NATIONAL_HEALTH_SERVICE_NUMBER, CA_HEALTH_NUMBER, IN_AADHAAR, IN_VOTER_NUMBER
-    #           mask_mode: "MASK", # accepts MASK, REPLACE_WITH_PII_ENTITY_TYPE
-    #           mask_character: "MaskCharacter",
-    #         },
-    #         data_access_role_arn: "IamRoleArn", # required
-    #         job_name: "JobName",
-    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
-    #         client_request_token: "ClientRequestTokenString",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] input_data_config
     #   The input properties for a PII entities detection job.
     #   @return [Types::InputDataConfig]
@@ -6673,40 +5656,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartSentimentDetectionJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         input_data_config: { # required
-    #           s3_uri: "S3Uri", # required
-    #           input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
-    #           document_reader_config: {
-    #             document_read_action: "TEXTRACT_DETECT_DOCUMENT_TEXT", # required, accepts TEXTRACT_DETECT_DOCUMENT_TEXT, TEXTRACT_ANALYZE_DOCUMENT
-    #             document_read_mode: "SERVICE_DEFAULT", # accepts SERVICE_DEFAULT, FORCE_DOCUMENT_READ_ACTION
-    #             feature_types: ["TABLES"], # accepts TABLES, FORMS
-    #           },
-    #         },
-    #         output_data_config: { # required
-    #           s3_uri: "S3Uri", # required
-    #           kms_key_id: "KmsKeyId",
-    #         },
-    #         data_access_role_arn: "IamRoleArn", # required
-    #         job_name: "JobName",
-    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
-    #         client_request_token: "ClientRequestTokenString",
-    #         volume_kms_key_id: "KmsKeyId",
-    #         vpc_config: {
-    #           security_group_ids: ["SecurityGroupId"], # required
-    #           subnets: ["SubnetId"], # required
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] input_data_config
     #   Specifies the format and location of the input data for the job.
     #   @return [Types::InputDataConfig]
@@ -6832,40 +5781,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartTargetedSentimentDetectionJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         input_data_config: { # required
-    #           s3_uri: "S3Uri", # required
-    #           input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
-    #           document_reader_config: {
-    #             document_read_action: "TEXTRACT_DETECT_DOCUMENT_TEXT", # required, accepts TEXTRACT_DETECT_DOCUMENT_TEXT, TEXTRACT_ANALYZE_DOCUMENT
-    #             document_read_mode: "SERVICE_DEFAULT", # accepts SERVICE_DEFAULT, FORCE_DOCUMENT_READ_ACTION
-    #             feature_types: ["TABLES"], # accepts TABLES, FORMS
-    #           },
-    #         },
-    #         output_data_config: { # required
-    #           s3_uri: "S3Uri", # required
-    #           kms_key_id: "KmsKeyId",
-    #         },
-    #         data_access_role_arn: "IamRoleArn", # required
-    #         job_name: "JobName",
-    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
-    #         client_request_token: "ClientRequestTokenString",
-    #         volume_kms_key_id: "KmsKeyId",
-    #         vpc_config: {
-    #           security_group_ids: ["SecurityGroupId"], # required
-    #           subnets: ["SubnetId"], # required
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] input_data_config
     #   The input properties for an inference job.
     #   @return [Types::InputDataConfig]
@@ -6991,40 +5906,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartTopicsDetectionJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         input_data_config: { # required
-    #           s3_uri: "S3Uri", # required
-    #           input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
-    #           document_reader_config: {
-    #             document_read_action: "TEXTRACT_DETECT_DOCUMENT_TEXT", # required, accepts TEXTRACT_DETECT_DOCUMENT_TEXT, TEXTRACT_ANALYZE_DOCUMENT
-    #             document_read_mode: "SERVICE_DEFAULT", # accepts SERVICE_DEFAULT, FORCE_DOCUMENT_READ_ACTION
-    #             feature_types: ["TABLES"], # accepts TABLES, FORMS
-    #           },
-    #         },
-    #         output_data_config: { # required
-    #           s3_uri: "S3Uri", # required
-    #           kms_key_id: "KmsKeyId",
-    #         },
-    #         data_access_role_arn: "IamRoleArn", # required
-    #         job_name: "JobName",
-    #         number_of_topics: 1,
-    #         client_request_token: "ClientRequestTokenString",
-    #         volume_kms_key_id: "KmsKeyId",
-    #         vpc_config: {
-    #           security_group_ids: ["SecurityGroupId"], # required
-    #           subnets: ["SubnetId"], # required
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] input_data_config
     #   Specifies the format and location of the input data for the job.
     #   @return [Types::InputDataConfig]
@@ -7151,13 +6032,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopDominantLanguageDetectionJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The identifier of the dominant language detection job to stop.
     #   @return [String]
@@ -7189,13 +6063,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopEntitiesDetectionJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The identifier of the entities detection job to stop.
     #   @return [String]
@@ -7227,13 +6094,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopEventsDetectionJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The identifier of the events detection job to stop.
     #   @return [String]
@@ -7263,13 +6123,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopKeyPhrasesDetectionJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The identifier of the key phrases detection job to stop.
     #   @return [String]
@@ -7301,13 +6154,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopPiiEntitiesDetectionJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The identifier of the PII entities detection job to stop.
     #   @return [String]
@@ -7337,13 +6183,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopSentimentDetectionJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The identifier of the sentiment detection job to stop.
     #   @return [String]
@@ -7375,13 +6214,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopTargetedSentimentDetectionJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The identifier of the targeted sentiment detection job to stop.
     #   @return [String]
@@ -7413,13 +6245,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopTrainingDocumentClassifierRequest
-    #   data as a hash:
-    #
-    #       {
-    #         document_classifier_arn: "DocumentClassifierArn", # required
-    #       }
-    #
     # @!attribute [rw] document_classifier_arn
     #   The Amazon Resource Name (ARN) that identifies the document
     #   classifier currently being trained.
@@ -7437,13 +6262,6 @@ module Aws::Comprehend
     #
     class StopTrainingDocumentClassifierResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass StopTrainingEntityRecognizerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         entity_recognizer_arn: "EntityRecognizerArn", # required
-    #       }
-    #
     # @!attribute [rw] entity_recognizer_arn
     #   The Amazon Resource Name (ARN) that identifies the entity recognizer
     #   currently being trained.
@@ -7511,14 +6329,6 @@ module Aws::Comprehend
     # ‘Department’:’Sales’ might be added to a resource to indicate its use
     # by a particular department.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue",
-    #       }
-    #
     # @!attribute [rw] key
     #   The initial part of a key-value pair that forms a tag associated
     #   with a given resource. For instance, if you want to show which
@@ -7544,19 +6354,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ComprehendArn", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the given Amazon Comprehend
     #   resource to which you want to associate the tags.
@@ -7583,16 +6380,6 @@ module Aws::Comprehend
 
     # Provides information for filtering a list of dominant language
     # detection jobs. For more information, see the operation.
-    #
-    # @note When making an API call, you may pass TargetedSentimentDetectionJobFilter
-    #   data as a hash:
-    #
-    #       {
-    #         job_name: "JobName",
-    #         job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, FAILED, STOP_REQUESTED, STOPPED
-    #         submit_time_before: Time.now,
-    #         submit_time_after: Time.now,
-    #       }
     #
     # @!attribute [rw] job_name
     #   Filters on the name of the job.
@@ -7882,16 +6669,6 @@ module Aws::Comprehend
     # Provides information for filtering topic detection jobs. For more
     # information, see .
     #
-    # @note When making an API call, you may pass TopicsDetectionJobFilter
-    #   data as a hash:
-    #
-    #       {
-    #         job_name: "JobName",
-    #         job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, FAILED, STOP_REQUESTED, STOPPED
-    #         submit_time_before: Time.now,
-    #         submit_time_after: Time.now,
-    #       }
-    #
     # @!attribute [rw] job_name
     #   @return [String]
     #
@@ -8049,14 +6826,6 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ComprehendArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the given Amazon Comprehend
     #   resource from which you want to remove the tags.
@@ -8083,16 +6852,6 @@ module Aws::Comprehend
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateEndpointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_arn: "ComprehendEndpointArn", # required
-    #         desired_model_arn: "ComprehendModelArn",
-    #         desired_inference_units: 1,
-    #         desired_data_access_role_arn: "IamRoleArn",
-    #       }
-    #
     # @!attribute [rw] endpoint_arn
     #   The Amazon Resource Number (ARN) of the endpoint being updated.
     #   @return [String]
@@ -8134,14 +6893,6 @@ module Aws::Comprehend
     #
     #
     # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
-    #
-    # @note When making an API call, you may pass VpcConfig
-    #   data as a hash:
-    #
-    #       {
-    #         security_group_ids: ["SecurityGroupId"], # required
-    #         subnets: ["SubnetId"], # required
-    #       }
     #
     # @!attribute [rw] security_group_ids
     #   The ID number for a security group on an instance of your private

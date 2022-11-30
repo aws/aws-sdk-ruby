@@ -23,18 +23,6 @@ module Aws::MigrationHubConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateHomeRegionControlRequest
-    #   data as a hash:
-    #
-    #       {
-    #         home_region: "HomeRegion", # required
-    #         target: { # required
-    #           type: "ACCOUNT", # required, accepts ACCOUNT
-    #           id: "TargetId",
-    #         },
-    #         dry_run: false,
-    #       }
-    #
     # @!attribute [rw] home_region
     #   The name of the home region of the calling account.
     #   @return [String]
@@ -72,20 +60,6 @@ module Aws::MigrationHubConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeHomeRegionControlsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         control_id: "ControlId",
-    #         home_region: "HomeRegion",
-    #         target: {
-    #           type: "ACCOUNT", # required, accepts ACCOUNT
-    #           id: "TargetId",
-    #         },
-    #         max_results: 1,
-    #         next_token: "Token",
-    #       }
-    #
     # @!attribute [rw] control_id
     #   The `ControlID` is a unique identifier string of your
     #   `HomeRegionControl` object.
@@ -156,8 +130,6 @@ module Aws::MigrationHubConfig
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhub-config-2019-06-30/GetHomeRegionRequest AWS API Documentation
     #
     class GetHomeRegionRequest < Aws::EmptyStructure; end
@@ -257,14 +229,6 @@ module Aws::MigrationHubConfig
     # The target parameter specifies the identifier to which the home region
     # is applied, which is always an `ACCOUNT`. It applies the home region
     # to the current `ACCOUNT`.
-    #
-    # @note When making an API call, you may pass Target
-    #   data as a hash:
-    #
-    #       {
-    #         type: "ACCOUNT", # required, accepts ACCOUNT
-    #         id: "TargetId",
-    #       }
     #
     # @!attribute [rw] type
     #   The target type is always an `ACCOUNT`.

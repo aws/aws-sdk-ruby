@@ -213,13 +213,6 @@ module Aws::EFS
     #
     # [1]: https://docs.aws.amazon.com/efs/latest/ug/awsbackup.html#automatic-backups
     #
-    # @note When making an API call, you may pass BackupPolicy
-    #   data as a hash:
-    #
-    #       {
-    #         status: "ENABLED", # required, accepts ENABLED, ENABLING, DISABLED, DISABLING
-    #       }
-    #
     # @!attribute [rw] status
     #   Describes the status of the file system's backup policy.
     #
@@ -285,33 +278,6 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAccessPointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         file_system_id: "FileSystemId", # required
-    #         posix_user: {
-    #           uid: 1, # required
-    #           gid: 1, # required
-    #           secondary_gids: [1],
-    #         },
-    #         root_directory: {
-    #           path: "Path",
-    #           creation_info: {
-    #             owner_uid: 1, # required
-    #             owner_gid: 1, # required
-    #             permissions: "Permissions", # required
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_token
     #   A string of up to 64 ASCII characters that Amazon EFS uses to ensure
     #   idempotent creation.
@@ -370,26 +336,6 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateFileSystemRequest
-    #   data as a hash:
-    #
-    #       {
-    #         creation_token: "CreationToken", # required
-    #         performance_mode: "generalPurpose", # accepts generalPurpose, maxIO
-    #         encrypted: false,
-    #         kms_key_id: "KmsKeyId",
-    #         throughput_mode: "bursting", # accepts bursting, provisioned, elastic
-    #         provisioned_throughput_in_mibps: 1.0,
-    #         availability_zone_name: "AvailabilityZoneName",
-    #         backup: false,
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] creation_token
     #   A string of up to 64 ASCII characters. Amazon EFS uses this to
     #   ensure idempotent creation.
@@ -546,16 +492,6 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateMountTargetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         file_system_id: "FileSystemId", # required
-    #         subnet_id: "SubnetId", # required
-    #         ip_address: "IpAddress",
-    #         security_groups: ["SecurityGroup"],
-    #       }
-    #
     # @!attribute [rw] file_system_id
     #   The ID of the file system for which to create the mount target.
     #   @return [String]
@@ -586,20 +522,6 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateReplicationConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source_file_system_id: "FileSystemId", # required
-    #         destinations: [ # required
-    #           {
-    #             region: "RegionName",
-    #             availability_zone_name: "AvailabilityZoneName",
-    #             kms_key_id: "KmsKeyId",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] source_file_system_id
     #   Specifies the Amazon EFS file system that you want to replicate.
     #   This file system cannot already be a source or destination file
@@ -620,19 +542,6 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateTagsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         file_system_id: "FileSystemId", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] file_system_id
     #   The ID of the file system whose tags you want to modify (String).
     #   This operation modifies the tags only, not the file system.
@@ -669,15 +578,6 @@ module Aws::EFS
     # does not exist, attempts to mount the file system using the access
     # point will fail.
     #
-    # @note When making an API call, you may pass CreationInfo
-    #   data as a hash:
-    #
-    #       {
-    #         owner_uid: 1, # required
-    #         owner_gid: 1, # required
-    #         permissions: "Permissions", # required
-    #       }
-    #
     # @!attribute [rw] owner_uid
     #   Specifies the POSIX user ID to apply to the `RootDirectory`. Accepts
     #   values from 0 to 2^32 (4294967295).
@@ -703,13 +603,6 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAccessPointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         access_point_id: "AccessPointId", # required
-    #       }
-    #
     # @!attribute [rw] access_point_id
     #   The ID of the access point that you want to delete.
     #   @return [String]
@@ -722,13 +615,6 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteFileSystemPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         file_system_id: "FileSystemId", # required
-    #       }
-    #
     # @!attribute [rw] file_system_id
     #   Specifies the EFS file system for which to delete the
     #   `FileSystemPolicy`.
@@ -742,13 +628,6 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteFileSystemRequest
-    #   data as a hash:
-    #
-    #       {
-    #         file_system_id: "FileSystemId", # required
-    #       }
-    #
     # @!attribute [rw] file_system_id
     #   The ID of the file system you want to delete.
     #   @return [String]
@@ -761,13 +640,6 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteMountTargetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         mount_target_id: "MountTargetId", # required
-    #       }
-    #
     # @!attribute [rw] mount_target_id
     #   The ID of the mount target to delete (String).
     #   @return [String]
@@ -780,13 +652,6 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteReplicationConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source_file_system_id: "FileSystemId", # required
-    #       }
-    #
     # @!attribute [rw] source_file_system_id
     #   The ID of the source file system in the replication configuration.
     #   @return [String]
@@ -799,14 +664,6 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteTagsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         file_system_id: "FileSystemId", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] file_system_id
     #   The ID of the file system whose tags you want to delete (String).
     #   @return [String]
@@ -852,16 +709,6 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAccessPointsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "Token",
-    #         access_point_id: "AccessPointId",
-    #         file_system_id: "FileSystemId",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   (Optional) When retrieving all access points for a file system, you
     #   can optionally specify the `MaxItems` parameter to limit the number
@@ -915,14 +762,6 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAccountPreferencesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   (Optional) You can use `NextToken` in a subsequent request to fetch
     #   the next page of Amazon Web Services account preferences if the
@@ -965,13 +804,6 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeBackupPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         file_system_id: "FileSystemId", # required
-    #       }
-    #
     # @!attribute [rw] file_system_id
     #   Specifies which EFS file system to retrieve the `BackupPolicy` for.
     #   @return [String]
@@ -984,13 +816,6 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeFileSystemPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         file_system_id: "FileSystemId", # required
-    #       }
-    #
     # @!attribute [rw] file_system_id
     #   Specifies which EFS file system to retrieve the `FileSystemPolicy`
     #   for.
@@ -1004,16 +829,6 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeFileSystemsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_items: 1,
-    #         marker: "Marker",
-    #         creation_token: "CreationToken",
-    #         file_system_id: "FileSystemId",
-    #       }
-    #
     # @!attribute [rw] max_items
     #   (Optional) Specifies the maximum number of file systems to return in
     #   the response (integer). This number is automatically set to 100. The
@@ -1073,13 +888,6 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeLifecycleConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         file_system_id: "FileSystemId", # required
-    #       }
-    #
     # @!attribute [rw] file_system_id
     #   The ID of the file system whose `LifecycleConfiguration` object you
     #   want to retrieve (String).
@@ -1093,13 +901,6 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeMountTargetSecurityGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         mount_target_id: "MountTargetId", # required
-    #       }
-    #
     # @!attribute [rw] mount_target_id
     #   The ID of the mount target whose security groups you want to
     #   retrieve.
@@ -1125,17 +926,6 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeMountTargetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_items: 1,
-    #         marker: "Marker",
-    #         file_system_id: "FileSystemId",
-    #         mount_target_id: "MountTargetId",
-    #         access_point_id: "AccessPointId",
-    #       }
-    #
     # @!attribute [rw] max_items
     #   (Optional) Maximum number of mount targets to return in the
     #   response. Currently, this number is automatically set to 10, and
@@ -1208,15 +998,6 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeReplicationConfigurationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         file_system_id: "FileSystemId",
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] file_system_id
     #   You can retrieve the replication configuration for a specific file
     #   system by providing its file system ID.
@@ -1261,15 +1042,6 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeTagsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_items: 1,
-    #         marker: "Marker",
-    #         file_system_id: "FileSystemId", # required
-    #       }
-    #
     # @!attribute [rw] max_items
     #   (Optional) The maximum number of file system tags to return in the
     #   response. Currently, this number is automatically set to 100, and
@@ -1365,15 +1137,6 @@ module Aws::EFS
 
     # Describes the destination file system to create in the replication
     # configuration.
-    #
-    # @note When making an API call, you may pass DestinationToCreate
-    #   data as a hash:
-    #
-    #       {
-    #         region: "RegionName",
-    #         availability_zone_name: "AvailabilityZoneName",
-    #         kms_key_id: "KmsKeyId",
-    #       }
     #
     # @!attribute [rw] region
     #   To create a file system that uses Regional storage, specify the
@@ -1930,14 +1693,6 @@ module Aws::EFS
     #
     # [1]: https://docs.aws.amazon.com/efs/latest/ug/lifecycle-management-efs.html
     #
-    # @note When making an API call, you may pass LifecyclePolicy
-    #   data as a hash:
-    #
-    #       {
-    #         transition_to_ia: "AFTER_7_DAYS", # accepts AFTER_7_DAYS, AFTER_14_DAYS, AFTER_30_DAYS, AFTER_60_DAYS, AFTER_90_DAYS, AFTER_1_DAY
-    #         transition_to_primary_storage_class: "AFTER_1_ACCESS", # accepts AFTER_1_ACCESS
-    #       }
-    #
     # @!attribute [rw] transition_to_ia
     #   Describes the period of time that a file is not accessed, after
     #   which it transitions to IA storage. Metadata operations such as
@@ -1960,15 +1715,6 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_id: "ResourceId", # required
-    #         max_results: 1,
-    #         next_token: "Token",
-    #       }
-    #
     # @!attribute [rw] resource_id
     #   Specifies the EFS resource you want to retrieve tags for. You can
     #   retrieve tags for EFS file systems and access points using this API
@@ -2015,14 +1761,6 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyMountTargetSecurityGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         mount_target_id: "MountTargetId", # required
-    #         security_groups: ["SecurityGroup"],
-    #       }
-    #
     # @!attribute [rw] mount_target_id
     #   The ID of the mount target whose security groups you want to modify.
     #   @return [String]
@@ -2262,15 +2000,6 @@ module Aws::EFS
     # secondary group IDs, on the access point that is used for all file
     # system operations performed by NFS clients using the access point.
     #
-    # @note When making an API call, you may pass PosixUser
-    #   data as a hash:
-    #
-    #       {
-    #         uid: 1, # required
-    #         gid: 1, # required
-    #         secondary_gids: [1],
-    #       }
-    #
     # @!attribute [rw] uid
     #   The POSIX user ID used for all file system operations using this
     #   access point.
@@ -2296,13 +2025,6 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutAccountPreferencesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_id_type: "LONG_ID", # required, accepts LONG_ID, SHORT_ID
-    #       }
-    #
     # @!attribute [rw] resource_id_type
     #   Specifies the EFS resource ID preference to set for the user's
     #   Amazon Web Services account, in the current Amazon Web Services
@@ -2339,16 +2061,6 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutBackupPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         file_system_id: "FileSystemId", # required
-    #         backup_policy: { # required
-    #           status: "ENABLED", # required, accepts ENABLED, ENABLING, DISABLED, DISABLING
-    #         },
-    #       }
-    #
     # @!attribute [rw] file_system_id
     #   Specifies which EFS file system to update the backup policy for.
     #   @return [String]
@@ -2366,15 +2078,6 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutFileSystemPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         file_system_id: "FileSystemId", # required
-    #         policy: "Policy", # required
-    #         bypass_policy_lockout_safety_check: false,
-    #       }
-    #
     # @!attribute [rw] file_system_id
     #   The ID of the EFS file system that you want to create or update the
     #   `FileSystemPolicy` for.
@@ -2413,19 +2116,6 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutLifecycleConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         file_system_id: "FileSystemId", # required
-    #         lifecycle_policies: [ # required
-    #           {
-    #             transition_to_ia: "AFTER_7_DAYS", # accepts AFTER_7_DAYS, AFTER_14_DAYS, AFTER_30_DAYS, AFTER_60_DAYS, AFTER_90_DAYS, AFTER_1_DAY
-    #             transition_to_primary_storage_class: "AFTER_1_ACCESS", # accepts AFTER_1_ACCESS
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] file_system_id
     #   The ID of the file system for which you are creating the
     #   `LifecycleConfiguration` object (String).
@@ -2560,18 +2250,6 @@ module Aws::EFS
     # access data in the access point's `RootDirectory` and it's
     # subdirectories.
     #
-    # @note When making an API call, you may pass RootDirectory
-    #   data as a hash:
-    #
-    #       {
-    #         path: "Path",
-    #         creation_info: {
-    #           owner_uid: 1, # required
-    #           owner_gid: 1, # required
-    #           permissions: "Permissions", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] path
     #   Specifies the path on the EFS file system to expose as the root
     #   directory to NFS clients using the access point to access the EFS
@@ -2690,14 +2368,6 @@ module Aws::EFS
     # space, and numbers that can be represented in UTF-8, and the following
     # characters:` + - = . _ : /`.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The tag key (String). The key can't start with `aws:`.
     #   @return [String]
@@ -2715,19 +2385,6 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_id: "ResourceId", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_id
     #   The ID specifying the EFS resource that you want to create a tag
     #   for.
@@ -2865,14 +2522,6 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_id: "ResourceId", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_id
     #   Specifies the EFS resource that you want to remove tags from.
     #   @return [String]
@@ -2891,15 +2540,6 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateFileSystemRequest
-    #   data as a hash:
-    #
-    #       {
-    #         file_system_id: "FileSystemId", # required
-    #         throughput_mode: "bursting", # accepts bursting, provisioned, elastic
-    #         provisioned_throughput_in_mibps: 1.0,
-    #       }
-    #
     # @!attribute [rw] file_system_id
     #   The ID of the file system that you want to update.
     #   @return [String]

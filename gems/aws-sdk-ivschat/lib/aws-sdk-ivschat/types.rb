@@ -23,13 +23,6 @@ module Aws::Ivschat
 
     # Specifies a CloudWatch Logs location where chat logs will be stored.
     #
-    # @note When making an API call, you may pass CloudWatchLogsDestinationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         log_group_name: "LogGroupName", # required
-    #       }
-    #
     # @!attribute [rw] log_group_name
     #   Name of the Amazon Cloudwatch Logs destination where chat activity
     #   will be logged.
@@ -62,19 +55,6 @@ module Aws::Ivschat
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateChatTokenRequest
-    #   data as a hash:
-    #
-    #       {
-    #         attributes: {
-    #           "String" => "String",
-    #         },
-    #         capabilities: ["SEND_MESSAGE"], # accepts SEND_MESSAGE, DISCONNECT_USER, DELETE_MESSAGE
-    #         room_identifier: "RoomIdentifier", # required
-    #         session_duration_in_minutes: 1,
-    #         user_id: "UserID", # required
-    #       }
-    #
     # @!attribute [rw] attributes
     #   Application-provided attributes to encode into the token and attach
     #   to a chat session. Map keys and values can contain UTF-8 encoded
@@ -139,27 +119,6 @@ module Aws::Ivschat
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateLoggingConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         destination_configuration: { # required
-    #           cloud_watch_logs: {
-    #             log_group_name: "LogGroupName", # required
-    #           },
-    #           firehose: {
-    #             delivery_stream_name: "DeliveryStreamName", # required
-    #           },
-    #           s3: {
-    #             bucket_name: "BucketName", # required
-    #           },
-    #         },
-    #         name: "LoggingConfigurationName",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] destination_configuration
     #   A complex type that contains a destination configuration for where
     #   chat content will be logged. There can be only one type of
@@ -249,23 +208,6 @@ module Aws::Ivschat
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateRoomRequest
-    #   data as a hash:
-    #
-    #       {
-    #         logging_configuration_identifiers: ["LoggingConfigurationIdentifier"],
-    #         maximum_message_length: 1,
-    #         maximum_message_rate_per_second: 1,
-    #         message_review_handler: {
-    #           fallback_result: "ALLOW", # accepts ALLOW, DENY
-    #           uri: "LambdaArn",
-    #         },
-    #         name: "RoomName",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] logging_configuration_identifiers
     #   Array of logging-configuration identifiers attached to the room.
     #   @return [Array<String>]
@@ -377,13 +319,6 @@ module Aws::Ivschat
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteLoggingConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identifier: "LoggingConfigurationIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] identifier
     #   Identifier of the logging configuration to be deleted.
     #   @return [String]
@@ -396,15 +331,6 @@ module Aws::Ivschat
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteMessageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "MessageID", # required
-    #         reason: "Reason",
-    #         room_identifier: "RoomIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   ID of the message to be deleted. This is the `Id` field in the
     #   received message (see [ Message (Subscribe)][1] in the Chat
@@ -446,13 +372,6 @@ module Aws::Ivschat
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteRoomRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identifier: "RoomIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] identifier
     #   Identifier of the room to be deleted. Currently this must be an ARN.
     #   @return [String]
@@ -469,10 +388,6 @@ module Aws::Ivschat
     # stored. Each member represents the configuration of one log
     # destination. For logging, you define only one type of destination (for
     # CloudWatch Logs, Kinesis Firehose, or S3).
-    #
-    # @note DestinationConfiguration is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note DestinationConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of DestinationConfiguration corresponding to the set member.
     #
     # @!attribute [rw] cloud_watch_logs
     #   Name of the Amazon CloudWatch Logs destination where chat activity
@@ -505,15 +420,6 @@ module Aws::Ivschat
       class Unknown < DestinationConfiguration; end
     end
 
-    # @note When making an API call, you may pass DisconnectUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         reason: "Reason",
-    #         room_identifier: "RoomIdentifier", # required
-    #         user_id: "UserID", # required
-    #       }
-    #
     # @!attribute [rw] reason
     #   Reason for disconnecting the user.
     #   @return [String]
@@ -543,13 +449,6 @@ module Aws::Ivschat
 
     # Specifies a Kinesis Firehose location where chat logs will be stored.
     #
-    # @note When making an API call, you may pass FirehoseDestinationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         delivery_stream_name: "DeliveryStreamName", # required
-    #       }
-    #
     # @!attribute [rw] delivery_stream_name
     #   Name of the Amazon Kinesis Firehose delivery stream where chat
     #   activity will be logged.
@@ -563,13 +462,6 @@ module Aws::Ivschat
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLoggingConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identifier: "LoggingConfigurationIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] identifier
     #   Identifier of the logging configuration to be retrieved.
     #   @return [String]
@@ -639,13 +531,6 @@ module Aws::Ivschat
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRoomRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identifier: "RoomIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] identifier
     #   Identifier of the room for which the configuration is to be
     #   retrieved. Currently this must be an ARN.
@@ -734,14 +619,6 @@ module Aws::Ivschat
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListLoggingConfigurationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   Maximum number of logging configurations to return. Default: 50.
     #   @return [Integer]
@@ -780,17 +657,6 @@ module Aws::Ivschat
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRoomsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         logging_configuration_identifier: "LoggingConfigurationIdentifier",
-    #         max_results: 1,
-    #         message_review_handler_uri: "LambdaArn",
-    #         name: "RoomName",
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] logging_configuration_identifier
     #   Logging-configuration identifier.
     #   @return [String]
@@ -842,13 +708,6 @@ module Aws::Ivschat
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource to be retrieved. The ARN must be
     #   URL-encoded.
@@ -939,14 +798,6 @@ module Aws::Ivschat
     end
 
     # Configuration information for optional message review.
-    #
-    # @note When making an API call, you may pass MessageReviewHandler
-    #   data as a hash:
-    #
-    #       {
-    #         fallback_result: "ALLOW", # accepts ALLOW, DENY
-    #         uri: "LambdaArn",
-    #       }
     #
     # @!attribute [rw] fallback_result
     #   Specifies the fallback behavior (whether the message is allowed or
@@ -1067,13 +918,6 @@ module Aws::Ivschat
 
     # Specifies an S3 location where chat logs will be stored.
     #
-    # @note When making an API call, you may pass S3DestinationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_name: "BucketName", # required
-    #       }
-    #
     # @!attribute [rw] bucket_name
     #   Name of the Amazon S3 bucket where chat activity will be logged.
     #   @return [String]
@@ -1086,17 +930,6 @@ module Aws::Ivschat
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SendEventRequest
-    #   data as a hash:
-    #
-    #       {
-    #         attributes: {
-    #           "String" => "String",
-    #         },
-    #         event_name: "EventName", # required
-    #         room_identifier: "RoomIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] attributes
     #   Application-defined metadata to attach to the event sent to clients.
     #   The maximum length of the metadata is 1 KB total.
@@ -1158,16 +991,6 @@ module Aws::Ivschat
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource to be tagged. The ARN must be URL-encoded.
     #   @return [String]
@@ -1220,14 +1043,6 @@ module Aws::Ivschat
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource to be untagged. The ARN must be URL-encoded.
     #   @return [String]
@@ -1257,25 +1072,6 @@ module Aws::Ivschat
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateLoggingConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         destination_configuration: {
-    #           cloud_watch_logs: {
-    #             log_group_name: "LogGroupName", # required
-    #           },
-    #           firehose: {
-    #             delivery_stream_name: "DeliveryStreamName", # required
-    #           },
-    #           s3: {
-    #             bucket_name: "BucketName", # required
-    #           },
-    #         },
-    #         identifier: "LoggingConfigurationIdentifier", # required
-    #         name: "LoggingConfigurationName",
-    #       }
-    #
     # @!attribute [rw] destination_configuration
     #   A complex type that contains a destination configuration for where
     #   chat content will be logged. There can be only one type of
@@ -1358,21 +1154,6 @@ module Aws::Ivschat
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateRoomRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identifier: "RoomIdentifier", # required
-    #         logging_configuration_identifiers: ["LoggingConfigurationIdentifier"],
-    #         maximum_message_length: 1,
-    #         maximum_message_rate_per_second: 1,
-    #         message_review_handler: {
-    #           fallback_result: "ALLOW", # accepts ALLOW, DENY
-    #           uri: "LambdaArn",
-    #         },
-    #         name: "RoomName",
-    #       }
-    #
     # @!attribute [rw] identifier
     #   Identifier of the room to be updated. Currently this must be an ARN.
     #   @return [String]

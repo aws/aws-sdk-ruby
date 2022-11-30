@@ -166,20 +166,6 @@ module Aws::APIGateway
 
     # API stage name of the associated API stage in a usage plan.
     #
-    # @note When making an API call, you may pass ApiStage
-    #   data as a hash:
-    #
-    #       {
-    #         api_id: "String",
-    #         stage: "String",
-    #         throttle: {
-    #           "String" => {
-    #             burst_limit: 1,
-    #             rate_limit: 1.0,
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] api_id
     #   API Id of the associated API stage in a usage plan.
     #   @return [String]
@@ -381,18 +367,6 @@ module Aws::APIGateway
 
     # Configuration settings of a canary deployment.
     #
-    # @note When making an API call, you may pass CanarySettings
-    #   data as a hash:
-    #
-    #       {
-    #         percent_traffic: 1.0,
-    #         deployment_id: "String",
-    #         stage_variable_overrides: {
-    #           "String" => "String",
-    #         },
-    #         use_stage_cache: false,
-    #       }
-    #
     # @!attribute [rw] percent_traffic
     #   The percent (0-100) of traffic diverted to a canary deployment.
     #   @return [Float]
@@ -493,27 +467,6 @@ module Aws::APIGateway
 
     # Request to create an ApiKey resource.
     #
-    # @note When making an API call, you may pass CreateApiKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String",
-    #         description: "String",
-    #         enabled: false,
-    #         generate_distinct_id: false,
-    #         value: "String",
-    #         stage_keys: [
-    #           {
-    #             rest_api_id: "String",
-    #             stage_name: "String",
-    #           },
-    #         ],
-    #         customer_id: "String",
-    #         tags: {
-    #           "String" => "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the ApiKey.
     #   @return [String]
@@ -566,22 +519,6 @@ module Aws::APIGateway
     end
 
     # Request to add a new Authorizer to an existing RestApi resource.
-    #
-    # @note When making an API call, you may pass CreateAuthorizerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         name: "String", # required
-    #         type: "TOKEN", # required, accepts TOKEN, REQUEST, COGNITO_USER_POOLS
-    #         provider_arns: ["ProviderARN"],
-    #         auth_type: "String",
-    #         authorizer_uri: "String",
-    #         authorizer_credentials: "String",
-    #         identity_source: "String",
-    #         identity_validation_expression: "String",
-    #         authorizer_result_ttl_in_seconds: 1,
-    #       }
     #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
@@ -690,16 +627,6 @@ module Aws::APIGateway
 
     # Requests API Gateway to create a new BasePathMapping resource.
     #
-    # @note When making an API call, you may pass CreateBasePathMappingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "String", # required
-    #         base_path: "String",
-    #         rest_api_id: "String", # required
-    #         stage: "String",
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The domain name of the BasePathMapping resource to create.
     #   @return [String]
@@ -731,29 +658,6 @@ module Aws::APIGateway
     end
 
     # Requests API Gateway to create a Deployment resource.
-    #
-    # @note When making an API call, you may pass CreateDeploymentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         stage_name: "String",
-    #         stage_description: "String",
-    #         description: "String",
-    #         cache_cluster_enabled: false,
-    #         cache_cluster_size: "0.5", # accepts 0.5, 1.6, 6.1, 13.5, 28.4, 58.2, 118, 237
-    #         variables: {
-    #           "String" => "String",
-    #         },
-    #         canary_settings: {
-    #           percent_traffic: 1.0,
-    #           stage_variable_overrides: {
-    #             "String" => "String",
-    #           },
-    #           use_stage_cache: false,
-    #         },
-    #         tracing_enabled: false,
-    #       }
     #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
@@ -816,21 +720,6 @@ module Aws::APIGateway
 
     # Creates a new documentation part of a given API.
     #
-    # @note When making an API call, you may pass CreateDocumentationPartRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         location: { # required
-    #           type: "API", # required, accepts API, AUTHORIZER, MODEL, RESOURCE, METHOD, PATH_PARAMETER, QUERY_PARAMETER, REQUEST_HEADER, REQUEST_BODY, RESPONSE, RESPONSE_HEADER, RESPONSE_BODY
-    #           path: "String",
-    #           method: "String",
-    #           status_code: "DocumentationPartLocationStatusCode",
-    #           name: "String",
-    #         },
-    #         properties: "String", # required
-    #       }
-    #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
     #   @return [String]
@@ -856,16 +745,6 @@ module Aws::APIGateway
     end
 
     # Creates a new documentation version of a given API.
-    #
-    # @note When making an API call, you may pass CreateDocumentationVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         documentation_version: "String", # required
-    #         stage_name: "String",
-    #         description: "String",
-    #       }
     #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
@@ -893,33 +772,6 @@ module Aws::APIGateway
     end
 
     # A request to create a new domain name.
-    #
-    # @note When making an API call, you may pass CreateDomainNameRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "String", # required
-    #         certificate_name: "String",
-    #         certificate_body: "String",
-    #         certificate_private_key: "String",
-    #         certificate_chain: "String",
-    #         certificate_arn: "String",
-    #         regional_certificate_name: "String",
-    #         regional_certificate_arn: "String",
-    #         endpoint_configuration: {
-    #           types: ["REGIONAL"], # accepts REGIONAL, EDGE, PRIVATE
-    #           vpc_endpoint_ids: ["String"],
-    #         },
-    #         tags: {
-    #           "String" => "String",
-    #         },
-    #         security_policy: "TLS_1_0", # accepts TLS_1_0, TLS_1_2
-    #         mutual_tls_authentication: {
-    #           truststore_uri: "String",
-    #           truststore_version: "String",
-    #         },
-    #         ownership_verification_certificate_arn: "String",
-    #       }
     #
     # @!attribute [rw] domain_name
     #   The name of the DomainName resource.
@@ -1019,17 +871,6 @@ module Aws::APIGateway
 
     # Request to add a new Model to an existing RestApi resource.
     #
-    # @note When making an API call, you may pass CreateModelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         name: "String", # required
-    #         description: "String",
-    #         schema: "String",
-    #         content_type: "String", # required
-    #       }
-    #
     # @!attribute [rw] rest_api_id
     #   The RestApi identifier under which the Model will be created.
     #   @return [String]
@@ -1063,16 +904,6 @@ module Aws::APIGateway
 
     # Creates a RequestValidator of a given RestApi.
     #
-    # @note When making an API call, you may pass CreateRequestValidatorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         name: "String",
-    #         validate_request_body: false,
-    #         validate_request_parameters: false,
-    #       }
-    #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
     #   @return [String]
@@ -1103,15 +934,6 @@ module Aws::APIGateway
 
     # Requests API Gateway to create a Resource resource.
     #
-    # @note When making an API call, you may pass CreateResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         parent_id: "String", # required
-    #         path_part: "String", # required
-    #       }
-    #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
     #   @return [String]
@@ -1133,28 +955,6 @@ module Aws::APIGateway
     end
 
     # The POST Request to add a new RestApi resource to your collection.
-    #
-    # @note When making an API call, you may pass CreateRestApiRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #         description: "String",
-    #         version: "String",
-    #         clone_from: "String",
-    #         binary_media_types: ["String"],
-    #         minimum_compression_size: 1,
-    #         api_key_source: "HEADER", # accepts HEADER, AUTHORIZER
-    #         endpoint_configuration: {
-    #           types: ["REGIONAL"], # accepts REGIONAL, EDGE, PRIVATE
-    #           vpc_endpoint_ids: ["String"],
-    #         },
-    #         policy: "String",
-    #         tags: {
-    #           "String" => "String",
-    #         },
-    #         disable_execute_api_endpoint: false,
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the RestApi.
@@ -1236,34 +1036,6 @@ module Aws::APIGateway
 
     # Requests API Gateway to create a Stage resource.
     #
-    # @note When making an API call, you may pass CreateStageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         stage_name: "String", # required
-    #         deployment_id: "String", # required
-    #         description: "String",
-    #         cache_cluster_enabled: false,
-    #         cache_cluster_size: "0.5", # accepts 0.5, 1.6, 6.1, 13.5, 28.4, 58.2, 118, 237
-    #         variables: {
-    #           "String" => "String",
-    #         },
-    #         documentation_version: "String",
-    #         canary_settings: {
-    #           percent_traffic: 1.0,
-    #           deployment_id: "String",
-    #           stage_variable_overrides: {
-    #             "String" => "String",
-    #           },
-    #           use_stage_cache: false,
-    #         },
-    #         tracing_enabled: false,
-    #         tags: {
-    #           "String" => "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
     #   @return [String]
@@ -1334,15 +1106,6 @@ module Aws::APIGateway
     # The POST request to create a usage plan key for adding an existing API
     # key to a usage plan.
     #
-    # @note When making an API call, you may pass CreateUsagePlanKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         usage_plan_id: "String", # required
-    #         key_id: "String", # required
-    #         key_type: "String", # required
-    #       }
-    #
     # @!attribute [rw] usage_plan_id
     #   The Id of the UsagePlan resource representing the usage plan
     #   containing the to-be-created UsagePlanKey resource representing a
@@ -1368,38 +1131,6 @@ module Aws::APIGateway
     # The POST request to create a usage plan with the name, description,
     # throttle limits and quota limits, as well as the associated API
     # stages, specified in the payload.
-    #
-    # @note When making an API call, you may pass CreateUsagePlanRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #         description: "String",
-    #         api_stages: [
-    #           {
-    #             api_id: "String",
-    #             stage: "String",
-    #             throttle: {
-    #               "String" => {
-    #                 burst_limit: 1,
-    #                 rate_limit: 1.0,
-    #               },
-    #             },
-    #           },
-    #         ],
-    #         throttle: {
-    #           burst_limit: 1,
-    #           rate_limit: 1.0,
-    #         },
-    #         quota: {
-    #           limit: 1,
-    #           offset: 1,
-    #           period: "DAY", # accepts DAY, WEEK, MONTH
-    #         },
-    #         tags: {
-    #           "String" => "String",
-    #         },
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the usage plan.
@@ -1443,18 +1174,6 @@ module Aws::APIGateway
     # complete and become operational. The caller must have permissions to
     # create and update VPC Endpoint services.
     #
-    # @note When making an API call, you may pass CreateVpcLinkRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #         description: "String",
-    #         target_arns: ["String"], # required
-    #         tags: {
-    #           "String" => "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name used to label and identify the VPC link.
     #   @return [String]
@@ -1486,13 +1205,6 @@ module Aws::APIGateway
 
     # A request to delete the ApiKey resource.
     #
-    # @note When making an API call, you may pass DeleteApiKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         api_key: "String", # required
-    #       }
-    #
     # @!attribute [rw] api_key
     #   The identifier of the ApiKey resource to be deleted.
     #   @return [String]
@@ -1504,14 +1216,6 @@ module Aws::APIGateway
     end
 
     # Request to delete an existing Authorizer resource.
-    #
-    # @note When making an API call, you may pass DeleteAuthorizerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         authorizer_id: "String", # required
-    #       }
     #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
@@ -1529,14 +1233,6 @@ module Aws::APIGateway
     end
 
     # A request to delete the BasePathMapping resource.
-    #
-    # @note When making an API call, you may pass DeleteBasePathMappingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "String", # required
-    #         base_path: "String", # required
-    #       }
     #
     # @!attribute [rw] domain_name
     #   The domain name of the BasePathMapping resource to delete.
@@ -1557,13 +1253,6 @@ module Aws::APIGateway
 
     # A request to delete the ClientCertificate resource.
     #
-    # @note When making an API call, you may pass DeleteClientCertificateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_certificate_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] client_certificate_id
     #   The identifier of the ClientCertificate resource to be deleted.
     #   @return [String]
@@ -1575,14 +1264,6 @@ module Aws::APIGateway
     end
 
     # Requests API Gateway to delete a Deployment resource.
-    #
-    # @note When making an API call, you may pass DeleteDeploymentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         deployment_id: "String", # required
-    #       }
     #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
@@ -1601,14 +1282,6 @@ module Aws::APIGateway
 
     # Deletes an existing documentation part of an API.
     #
-    # @note When making an API call, you may pass DeleteDocumentationPartRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         documentation_part_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
     #   @return [String]
@@ -1625,14 +1298,6 @@ module Aws::APIGateway
     end
 
     # Deletes an existing documentation version of an API.
-    #
-    # @note When making an API call, you may pass DeleteDocumentationVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         documentation_version: "String", # required
-    #       }
     #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
@@ -1651,13 +1316,6 @@ module Aws::APIGateway
 
     # A request to delete the DomainName resource.
     #
-    # @note When making an API call, you may pass DeleteDomainNameRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The name of the DomainName resource to be deleted.
     #   @return [String]
@@ -1670,14 +1328,6 @@ module Aws::APIGateway
 
     # Clears any customization of a GatewayResponse of a specified response
     # type on the given RestApi and resets it with the default settings.
-    #
-    # @note When making an API call, you may pass DeleteGatewayResponseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         response_type: "DEFAULT_4XX", # required, accepts DEFAULT_4XX, DEFAULT_5XX, RESOURCE_NOT_FOUND, UNAUTHORIZED, INVALID_API_KEY, ACCESS_DENIED, AUTHORIZER_FAILURE, AUTHORIZER_CONFIGURATION_ERROR, INVALID_SIGNATURE, EXPIRED_TOKEN, MISSING_AUTHENTICATION_TOKEN, INTEGRATION_FAILURE, INTEGRATION_TIMEOUT, API_CONFIGURATION_ERROR, UNSUPPORTED_MEDIA_TYPE, BAD_REQUEST_PARAMETERS, BAD_REQUEST_BODY, REQUEST_TOO_LARGE, THROTTLED, QUOTA_EXCEEDED, WAF_FILTERED
-    #       }
     #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
@@ -1695,15 +1345,6 @@ module Aws::APIGateway
     end
 
     # Represents a delete integration request.
-    #
-    # @note When making an API call, you may pass DeleteIntegrationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         resource_id: "String", # required
-    #         http_method: "String", # required
-    #       }
     #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
@@ -1726,16 +1367,6 @@ module Aws::APIGateway
     end
 
     # Represents a delete integration response request.
-    #
-    # @note When making an API call, you may pass DeleteIntegrationResponseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         resource_id: "String", # required
-    #         http_method: "String", # required
-    #         status_code: "StatusCode", # required
-    #       }
     #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
@@ -1765,15 +1396,6 @@ module Aws::APIGateway
 
     # Request to delete an existing Method resource.
     #
-    # @note When making an API call, you may pass DeleteMethodRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         resource_id: "String", # required
-    #         http_method: "String", # required
-    #       }
-    #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
     #   @return [String]
@@ -1795,16 +1417,6 @@ module Aws::APIGateway
     end
 
     # A request to delete an existing MethodResponse resource.
-    #
-    # @note When making an API call, you may pass DeleteMethodResponseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         resource_id: "String", # required
-    #         http_method: "String", # required
-    #         status_code: "StatusCode", # required
-    #       }
     #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
@@ -1833,14 +1445,6 @@ module Aws::APIGateway
 
     # Request to delete an existing model in an existing RestApi resource.
     #
-    # @note When making an API call, you may pass DeleteModelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         model_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
     #   @return [String]
@@ -1857,14 +1461,6 @@ module Aws::APIGateway
     end
 
     # Deletes a specified RequestValidator of a given RestApi.
-    #
-    # @note When making an API call, you may pass DeleteRequestValidatorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         request_validator_id: "String", # required
-    #       }
     #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
@@ -1883,14 +1479,6 @@ module Aws::APIGateway
 
     # Request to delete a Resource.
     #
-    # @note When making an API call, you may pass DeleteResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         resource_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
     #   @return [String]
@@ -1908,13 +1496,6 @@ module Aws::APIGateway
 
     # Request to delete the specified API from your collection.
     #
-    # @note When making an API call, you may pass DeleteRestApiRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
     #   @return [String]
@@ -1926,14 +1507,6 @@ module Aws::APIGateway
     end
 
     # Requests API Gateway to delete a Stage resource.
-    #
-    # @note When making an API call, you may pass DeleteStageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         stage_name: "String", # required
-    #       }
     #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
@@ -1952,14 +1525,6 @@ module Aws::APIGateway
 
     # The DELETE request to delete a usage plan key and remove the
     # underlying API key from the associated usage plan.
-    #
-    # @note When making an API call, you may pass DeleteUsagePlanKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         usage_plan_id: "String", # required
-    #         key_id: "String", # required
-    #       }
     #
     # @!attribute [rw] usage_plan_id
     #   The Id of the UsagePlan resource representing the usage plan
@@ -1980,13 +1545,6 @@ module Aws::APIGateway
 
     # The DELETE request to delete a usage plan of a given plan Id.
     #
-    # @note When making an API call, you may pass DeleteUsagePlanRequest
-    #   data as a hash:
-    #
-    #       {
-    #         usage_plan_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] usage_plan_id
     #   The Id of the to-be-deleted usage plan.
     #   @return [String]
@@ -1998,13 +1556,6 @@ module Aws::APIGateway
     end
 
     # Deletes an existing VpcLink of a specified identifier.
-    #
-    # @note When making an API call, you may pass DeleteVpcLinkRequest
-    #   data as a hash:
-    #
-    #       {
-    #         vpc_link_id: "String", # required
-    #       }
     #
     # @!attribute [rw] vpc_link_id
     #   The identifier of the VpcLink. It is used in an Integration to
@@ -2048,17 +1599,6 @@ module Aws::APIGateway
     end
 
     # The input configuration for a canary deployment.
-    #
-    # @note When making an API call, you may pass DeploymentCanarySettings
-    #   data as a hash:
-    #
-    #       {
-    #         percent_traffic: 1.0,
-    #         stage_variable_overrides: {
-    #           "String" => "String",
-    #         },
-    #         use_stage_cache: false,
-    #       }
     #
     # @!attribute [rw] percent_traffic
     #   The percentage (0.0-100.0) of traffic routed to the canary
@@ -2158,17 +1698,6 @@ module Aws::APIGateway
     end
 
     # Specifies the target API entity to which the documentation applies.
-    #
-    # @note When making an API call, you may pass DocumentationPartLocation
-    #   data as a hash:
-    #
-    #       {
-    #         type: "API", # required, accepts API, AUTHORIZER, MODEL, RESOURCE, METHOD, PATH_PARAMETER, QUERY_PARAMETER, REQUEST_HEADER, REQUEST_BODY, RESPONSE, RESPONSE_HEADER, RESPONSE_BODY
-    #         path: "String",
-    #         method: "String",
-    #         status_code: "DocumentationPartLocationStatusCode",
-    #         name: "String",
-    #       }
     #
     # @!attribute [rw] type
     #   The type of API entity to which the documentation content applies.
@@ -2429,14 +1958,6 @@ module Aws::APIGateway
     # The endpoint configuration to indicate the types of endpoints an API
     # (RestApi) or its custom domain name (DomainName) has.
     #
-    # @note When making an API call, you may pass EndpointConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         types: ["REGIONAL"], # accepts REGIONAL, EDGE, PRIVATE
-    #         vpc_endpoint_ids: ["String"],
-    #       }
-    #
     # @!attribute [rw] types
     #   A list of endpoint types of an API (RestApi) or its custom domain
     #   name (DomainName). For an edge-optimized API and its custom domain
@@ -2483,14 +2004,6 @@ module Aws::APIGateway
 
     # Request to flush authorizer cache entries on a specified stage.
     #
-    # @note When making an API call, you may pass FlushStageAuthorizersCacheRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         stage_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
     #   @return [String]
@@ -2507,14 +2020,6 @@ module Aws::APIGateway
     end
 
     # Requests API Gateway to flush a stage's cache.
-    #
-    # @note When making an API call, you may pass FlushStageCacheRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         stage_name: "String", # required
-    #       }
     #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
@@ -2589,16 +2094,6 @@ module Aws::APIGateway
 
     # A request to generate a ClientCertificate resource.
     #
-    # @note When making an API call, you may pass GenerateClientCertificateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "String",
-    #         tags: {
-    #           "String" => "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] description
     #   The description of the ClientCertificate.
     #   @return [String]
@@ -2619,19 +2114,9 @@ module Aws::APIGateway
     # Requests API Gateway to get information about the current Account
     # resource.
     #
-    # @api private
-    #
     class GetAccountRequest < Aws::EmptyStructure; end
 
     # A request to get information about the current ApiKey resource.
-    #
-    # @note When making an API call, you may pass GetApiKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         api_key: "String", # required
-    #         include_value: false,
-    #       }
     #
     # @!attribute [rw] api_key
     #   The identifier of the ApiKey resource.
@@ -2650,17 +2135,6 @@ module Aws::APIGateway
     end
 
     # A request to get information about the current ApiKeys resource.
-    #
-    # @note When making an API call, you may pass GetApiKeysRequest
-    #   data as a hash:
-    #
-    #       {
-    #         position: "String",
-    #         limit: 1,
-    #         name_query: "String",
-    #         customer_id: "String",
-    #         include_values: false,
-    #       }
     #
     # @!attribute [rw] position
     #   The current pagination position in the paged result set.
@@ -2697,14 +2171,6 @@ module Aws::APIGateway
 
     # Request to describe an existing Authorizer resource.
     #
-    # @note When making an API call, you may pass GetAuthorizerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         authorizer_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
     #   @return [String]
@@ -2721,15 +2187,6 @@ module Aws::APIGateway
     end
 
     # Request to describe an existing Authorizers resource.
-    #
-    # @note When making an API call, you may pass GetAuthorizersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         position: "String",
-    #         limit: 1,
-    #       }
     #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
@@ -2754,14 +2211,6 @@ module Aws::APIGateway
 
     # Request to describe a BasePathMapping resource.
     #
-    # @note When making an API call, you may pass GetBasePathMappingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "String", # required
-    #         base_path: "String", # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The domain name of the BasePathMapping resource to be described.
     #   @return [String]
@@ -2782,15 +2231,6 @@ module Aws::APIGateway
 
     # A request to get information about a collection of BasePathMapping
     # resources.
-    #
-    # @note When making an API call, you may pass GetBasePathMappingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "String", # required
-    #         position: "String",
-    #         limit: 1,
-    #       }
     #
     # @!attribute [rw] domain_name
     #   The domain name of a BasePathMapping resource.
@@ -2816,13 +2256,6 @@ module Aws::APIGateway
     # A request to get information about the current ClientCertificate
     # resource.
     #
-    # @note When making an API call, you may pass GetClientCertificateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_certificate_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] client_certificate_id
     #   The identifier of the ClientCertificate resource to be described.
     #   @return [String]
@@ -2835,14 +2268,6 @@ module Aws::APIGateway
 
     # A request to get information about a collection of ClientCertificate
     # resources.
-    #
-    # @note When making an API call, you may pass GetClientCertificatesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         position: "String",
-    #         limit: 1,
-    #       }
     #
     # @!attribute [rw] position
     #   The current pagination position in the paged result set.
@@ -2861,15 +2286,6 @@ module Aws::APIGateway
     end
 
     # Requests API Gateway to get information about a Deployment resource.
-    #
-    # @note When making an API call, you may pass GetDeploymentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         deployment_id: "String", # required
-    #         embed: ["String"],
-    #       }
     #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
@@ -2904,15 +2320,6 @@ module Aws::APIGateway
     # Requests API Gateway to get information about a Deployments
     # collection.
     #
-    # @note When making an API call, you may pass GetDeploymentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         position: "String",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
     #   @return [String]
@@ -2936,14 +2343,6 @@ module Aws::APIGateway
 
     # Gets a specified documentation part of a given API.
     #
-    # @note When making an API call, you may pass GetDocumentationPartRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         documentation_part_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
     #   @return [String]
@@ -2961,19 +2360,6 @@ module Aws::APIGateway
 
     # Gets the documentation parts of an API. The result may be filtered by
     # the type, name, or path of API entities (targets).
-    #
-    # @note When making an API call, you may pass GetDocumentationPartsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         type: "API", # accepts API, AUTHORIZER, MODEL, RESOURCE, METHOD, PATH_PARAMETER, QUERY_PARAMETER, REQUEST_HEADER, REQUEST_BODY, RESPONSE, RESPONSE_HEADER, RESPONSE_BODY
-    #         name_query: "String",
-    #         path: "String",
-    #         position: "String",
-    #         limit: 1,
-    #         location_status: "DOCUMENTED", # accepts DOCUMENTED, UNDOCUMENTED
-    #       }
     #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
@@ -3021,14 +2407,6 @@ module Aws::APIGateway
 
     # Gets a documentation snapshot of an API.
     #
-    # @note When making an API call, you may pass GetDocumentationVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         documentation_version: "String", # required
-    #       }
-    #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
     #   @return [String]
@@ -3046,15 +2424,6 @@ module Aws::APIGateway
     end
 
     # Gets the documentation versions of an API.
-    #
-    # @note When making an API call, you may pass GetDocumentationVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         position: "String",
-    #         limit: 1,
-    #       }
     #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
@@ -3079,13 +2448,6 @@ module Aws::APIGateway
 
     # Request to get the name of a DomainName resource.
     #
-    # @note When making an API call, you may pass GetDomainNameRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The name of the DomainName resource.
     #   @return [String]
@@ -3097,14 +2459,6 @@ module Aws::APIGateway
     end
 
     # Request to describe a collection of DomainName resources.
-    #
-    # @note When making an API call, you may pass GetDomainNamesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         position: "String",
-    #         limit: 1,
-    #       }
     #
     # @!attribute [rw] position
     #   The current pagination position in the paged result set.
@@ -3123,19 +2477,6 @@ module Aws::APIGateway
     end
 
     # Request a new export of a RestApi for a particular Stage.
-    #
-    # @note When making an API call, you may pass GetExportRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         stage_name: "String", # required
-    #         export_type: "String", # required
-    #         parameters: {
-    #           "String" => "String",
-    #         },
-    #         accepts: "String",
-    #       }
     #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
@@ -3182,14 +2523,6 @@ module Aws::APIGateway
     # Gets a GatewayResponse of a specified response type on the given
     # RestApi.
     #
-    # @note When making an API call, you may pass GetGatewayResponseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         response_type: "DEFAULT_4XX", # required, accepts DEFAULT_4XX, DEFAULT_5XX, RESOURCE_NOT_FOUND, UNAUTHORIZED, INVALID_API_KEY, ACCESS_DENIED, AUTHORIZER_FAILURE, AUTHORIZER_CONFIGURATION_ERROR, INVALID_SIGNATURE, EXPIRED_TOKEN, MISSING_AUTHENTICATION_TOKEN, INTEGRATION_FAILURE, INTEGRATION_TIMEOUT, API_CONFIGURATION_ERROR, UNSUPPORTED_MEDIA_TYPE, BAD_REQUEST_PARAMETERS, BAD_REQUEST_BODY, REQUEST_TOO_LARGE, THROTTLED, QUOTA_EXCEEDED, WAF_FILTERED
-    #       }
-    #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
     #   @return [String]
@@ -3209,15 +2542,6 @@ module Aws::APIGateway
     # developer has not added any definitions for gateway responses, the
     # result will be the API Gateway-generated default GatewayResponses
     # collection for the supported response types.
-    #
-    # @note When making an API call, you may pass GetGatewayResponsesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         position: "String",
-    #         limit: 1,
-    #       }
     #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
@@ -3245,15 +2569,6 @@ module Aws::APIGateway
 
     # Represents a request to get the integration configuration.
     #
-    # @note When making an API call, you may pass GetIntegrationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         resource_id: "String", # required
-    #         http_method: "String", # required
-    #       }
-    #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
     #   @return [String]
@@ -3275,16 +2590,6 @@ module Aws::APIGateway
     end
 
     # Represents a get integration response request.
-    #
-    # @note When making an API call, you may pass GetIntegrationResponseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         resource_id: "String", # required
-    #         http_method: "String", # required
-    #         status_code: "StatusCode", # required
-    #       }
     #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
@@ -3313,15 +2618,6 @@ module Aws::APIGateway
 
     # Request to describe an existing Method resource.
     #
-    # @note When making an API call, you may pass GetMethodRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         resource_id: "String", # required
-    #         http_method: "String", # required
-    #       }
-    #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
     #   @return [String]
@@ -3343,16 +2639,6 @@ module Aws::APIGateway
     end
 
     # Request to describe a MethodResponse resource.
-    #
-    # @note When making an API call, you may pass GetMethodResponseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         resource_id: "String", # required
-    #         http_method: "String", # required
-    #         status_code: "StatusCode", # required
-    #       }
     #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
@@ -3382,15 +2668,6 @@ module Aws::APIGateway
     # Request to list information about a model in an existing RestApi
     # resource.
     #
-    # @note When making an API call, you may pass GetModelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         model_name: "String", # required
-    #         flatten: false,
-    #       }
-    #
     # @!attribute [rw] rest_api_id
     #   The RestApi identifier under which the Model exists.
     #   @return [String]
@@ -3416,14 +2693,6 @@ module Aws::APIGateway
     # Request to generate a sample mapping template used to transform the
     # payload.
     #
-    # @note When making an API call, you may pass GetModelTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         model_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
     #   @return [String]
@@ -3440,15 +2709,6 @@ module Aws::APIGateway
     end
 
     # Request to list existing Models defined for a RestApi resource.
-    #
-    # @note When making an API call, you may pass GetModelsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         position: "String",
-    #         limit: 1,
-    #       }
     #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
@@ -3473,14 +2733,6 @@ module Aws::APIGateway
 
     # Gets a RequestValidator of a given RestApi.
     #
-    # @note When making an API call, you may pass GetRequestValidatorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         request_validator_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
     #   @return [String]
@@ -3497,15 +2749,6 @@ module Aws::APIGateway
     end
 
     # Gets the RequestValidators collection of a given RestApi.
-    #
-    # @note When making an API call, you may pass GetRequestValidatorsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         position: "String",
-    #         limit: 1,
-    #       }
     #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
@@ -3529,15 +2772,6 @@ module Aws::APIGateway
     end
 
     # Request to list information about a resource.
-    #
-    # @note When making an API call, you may pass GetResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         resource_id: "String", # required
-    #         embed: ["String"],
-    #       }
     #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
@@ -3566,16 +2800,6 @@ module Aws::APIGateway
     end
 
     # Request to list information about a collection of resources.
-    #
-    # @note When making an API call, you may pass GetResourcesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         position: "String",
-    #         limit: 1,
-    #         embed: ["String"],
-    #       }
     #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
@@ -3612,13 +2836,6 @@ module Aws::APIGateway
     # The GET request to list an existing RestApi defined for your
     # collection.
     #
-    # @note When making an API call, you may pass GetRestApiRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
     #   @return [String]
@@ -3630,14 +2847,6 @@ module Aws::APIGateway
     end
 
     # The GET request to list existing RestApis defined for your collection.
-    #
-    # @note When making an API call, you may pass GetRestApisRequest
-    #   data as a hash:
-    #
-    #       {
-    #         position: "String",
-    #         limit: 1,
-    #       }
     #
     # @!attribute [rw] position
     #   The current pagination position in the paged result set.
@@ -3656,18 +2865,6 @@ module Aws::APIGateway
     end
 
     # Request a new generated client SDK for a RestApi and Stage.
-    #
-    # @note When making an API call, you may pass GetSdkRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         stage_name: "String", # required
-    #         sdk_type: "String", # required
-    #         parameters: {
-    #           "String" => "String",
-    #         },
-    #       }
     #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
@@ -3704,13 +2901,6 @@ module Aws::APIGateway
 
     # Get an SdkType instance.
     #
-    # @note When making an API call, you may pass GetSdkTypeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "String", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The identifier of the queried SdkType instance.
     #   @return [String]
@@ -3722,14 +2912,6 @@ module Aws::APIGateway
     end
 
     # Get the SdkTypes collection.
-    #
-    # @note When making an API call, you may pass GetSdkTypesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         position: "String",
-    #         limit: 1,
-    #       }
     #
     # @!attribute [rw] position
     #   The current pagination position in the paged result set.
@@ -3749,14 +2931,6 @@ module Aws::APIGateway
 
     # Requests API Gateway to get information about a Stage resource.
     #
-    # @note When making an API call, you may pass GetStageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         stage_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
     #   @return [String]
@@ -3775,14 +2949,6 @@ module Aws::APIGateway
     # Requests API Gateway to get information about one or more Stage
     # resources.
     #
-    # @note When making an API call, you may pass GetStagesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         deployment_id: "String",
-    #       }
-    #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
     #   @return [String]
@@ -3799,15 +2965,6 @@ module Aws::APIGateway
     end
 
     # Gets the Tags collection for a given resource.
-    #
-    # @note When making an API call, you may pass GetTagsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #         position: "String",
-    #         limit: 1,
-    #       }
     #
     # @!attribute [rw] resource_arn
     #   The ARN of a resource that can be tagged.
@@ -3833,14 +2990,6 @@ module Aws::APIGateway
 
     # The GET request to get a usage plan key of a given key identifier.
     #
-    # @note When making an API call, you may pass GetUsagePlanKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         usage_plan_id: "String", # required
-    #         key_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] usage_plan_id
     #   The Id of the UsagePlan resource representing the usage plan
     #   containing the to-be-retrieved UsagePlanKey resource representing a
@@ -3861,16 +3010,6 @@ module Aws::APIGateway
 
     # The GET request to get all the usage plan keys representing the API
     # keys added to a specified usage plan.
-    #
-    # @note When making an API call, you may pass GetUsagePlanKeysRequest
-    #   data as a hash:
-    #
-    #       {
-    #         usage_plan_id: "String", # required
-    #         position: "String",
-    #         limit: 1,
-    #         name_query: "String",
-    #       }
     #
     # @!attribute [rw] usage_plan_id
     #   The Id of the UsagePlan resource representing the usage plan
@@ -3903,13 +3042,6 @@ module Aws::APIGateway
 
     # The GET request to get a usage plan of a given plan identifier.
     #
-    # @note When making an API call, you may pass GetUsagePlanRequest
-    #   data as a hash:
-    #
-    #       {
-    #         usage_plan_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] usage_plan_id
     #   The identifier of the UsagePlan resource to be retrieved.
     #   @return [String]
@@ -3921,15 +3053,6 @@ module Aws::APIGateway
     end
 
     # The GET request to get all the usage plans of the caller's account.
-    #
-    # @note When making an API call, you may pass GetUsagePlansRequest
-    #   data as a hash:
-    #
-    #       {
-    #         position: "String",
-    #         key_id: "String",
-    #         limit: 1,
-    #       }
     #
     # @!attribute [rw] position
     #   The current pagination position in the paged result set.
@@ -3954,18 +3077,6 @@ module Aws::APIGateway
 
     # The GET request to get the usage data of a usage plan in a specified
     # time interval.
-    #
-    # @note When making an API call, you may pass GetUsageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         usage_plan_id: "String", # required
-    #         key_id: "String",
-    #         start_date: "String", # required
-    #         end_date: "String", # required
-    #         position: "String",
-    #         limit: 1,
-    #       }
     #
     # @!attribute [rw] usage_plan_id
     #   The Id of the usage plan associated with the usage data.
@@ -4005,13 +3116,6 @@ module Aws::APIGateway
 
     # Gets a specified VPC link under the caller's account in a region.
     #
-    # @note When making an API call, you may pass GetVpcLinkRequest
-    #   data as a hash:
-    #
-    #       {
-    #         vpc_link_id: "String", # required
-    #       }
-    #
     # @!attribute [rw] vpc_link_id
     #   The identifier of the VpcLink. It is used in an Integration to
     #   reference this VpcLink.
@@ -4025,14 +3129,6 @@ module Aws::APIGateway
 
     # Gets the VpcLinks collection under the caller's account in a selected
     # region.
-    #
-    # @note When making an API call, you may pass GetVpcLinksRequest
-    #   data as a hash:
-    #
-    #       {
-    #         position: "String",
-    #         limit: 1,
-    #       }
     #
     # @!attribute [rw] position
     #   The current pagination position in the paged result set.
@@ -4052,15 +3148,6 @@ module Aws::APIGateway
 
     # The POST request to import API keys from an external source, such as a
     # CSV-formatted file.
-    #
-    # @note When making an API call, you may pass ImportApiKeysRequest
-    #   data as a hash:
-    #
-    #       {
-    #         body: "data", # required
-    #         format: "csv", # required, accepts csv
-    #         fail_on_warnings: false,
-    #       }
     #
     # @!attribute [rw] body
     #   The payload of the POST request to import API keys. For the payload
@@ -4087,16 +3174,6 @@ module Aws::APIGateway
 
     # Import documentation parts from an external (e.g., OpenAPI) definition
     # file.
-    #
-    # @note When making an API call, you may pass ImportDocumentationPartsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         mode: "merge", # accepts merge, overwrite
-    #         fail_on_warnings: false,
-    #         body: "data", # required
-    #       }
     #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
@@ -4130,17 +3207,6 @@ module Aws::APIGateway
 
     # A POST request to import an API to API Gateway using an input of an
     # API definition file.
-    #
-    # @note When making an API call, you may pass ImportRestApiRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fail_on_warnings: false,
-    #         parameters: {
-    #           "String" => "String",
-    #         },
-    #         body: "data", # required
-    #       }
     #
     # @!attribute [rw] fail_on_warnings
     #   A query parameter to indicate whether to rollback the API creation
@@ -4784,14 +3850,6 @@ module Aws::APIGateway
     # client and the server. Clients must present a trusted certificate to
     # access your API.
     #
-    # @note When making an API call, you may pass MutualTlsAuthenticationInput
-    #   data as a hash:
-    #
-    #       {
-    #         truststore_uri: "String",
-    #         truststore_version: "String",
-    #       }
-    #
     # @!attribute [rw] truststore_uri
     #   An Amazon S3 URL that specifies the truststore for mutual TLS
     #   authentication, for example `s3://bucket-name/key-name`. The
@@ -4833,16 +3891,6 @@ module Aws::APIGateway
     #
     #
     # [1]: https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html
-    #
-    # @note When making an API call, you may pass PatchOperation
-    #   data as a hash:
-    #
-    #       {
-    #         op: "add", # accepts add, remove, replace, move, copy, test
-    #         path: "String",
-    #         value: "String",
-    #         from: "String",
-    #       }
     #
     # @!attribute [rw] op
     #   An update operation to be performed with this PATCH request. The
@@ -4895,21 +3943,6 @@ module Aws::APIGateway
     # Creates a customization of a GatewayResponse of a specified response
     # type and status code on the given RestApi.
     #
-    # @note When making an API call, you may pass PutGatewayResponseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         response_type: "DEFAULT_4XX", # required, accepts DEFAULT_4XX, DEFAULT_5XX, RESOURCE_NOT_FOUND, UNAUTHORIZED, INVALID_API_KEY, ACCESS_DENIED, AUTHORIZER_FAILURE, AUTHORIZER_CONFIGURATION_ERROR, INVALID_SIGNATURE, EXPIRED_TOKEN, MISSING_AUTHENTICATION_TOKEN, INTEGRATION_FAILURE, INTEGRATION_TIMEOUT, API_CONFIGURATION_ERROR, UNSUPPORTED_MEDIA_TYPE, BAD_REQUEST_PARAMETERS, BAD_REQUEST_BODY, REQUEST_TOO_LARGE, THROTTLED, QUOTA_EXCEEDED, WAF_FILTERED
-    #         status_code: "StatusCode",
-    #         response_parameters: {
-    #           "String" => "String",
-    #         },
-    #         response_templates: {
-    #           "String" => "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
     #   @return [String]
@@ -4943,35 +3976,6 @@ module Aws::APIGateway
     end
 
     # Sets up a method's integration.
-    #
-    # @note When making an API call, you may pass PutIntegrationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         resource_id: "String", # required
-    #         http_method: "String", # required
-    #         type: "HTTP", # required, accepts HTTP, AWS, MOCK, HTTP_PROXY, AWS_PROXY
-    #         integration_http_method: "String",
-    #         uri: "String",
-    #         connection_type: "INTERNET", # accepts INTERNET, VPC_LINK
-    #         connection_id: "String",
-    #         credentials: "String",
-    #         request_parameters: {
-    #           "String" => "String",
-    #         },
-    #         request_templates: {
-    #           "String" => "String",
-    #         },
-    #         passthrough_behavior: "String",
-    #         cache_namespace: "String",
-    #         cache_key_parameters: ["String"],
-    #         content_handling: "CONVERT_TO_BINARY", # accepts CONVERT_TO_BINARY, CONVERT_TO_TEXT
-    #         timeout_in_millis: 1,
-    #         tls_config: {
-    #           insecure_skip_verification: false,
-    #         },
-    #       }
     #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
@@ -5122,24 +4126,6 @@ module Aws::APIGateway
 
     # Represents a put integration response request.
     #
-    # @note When making an API call, you may pass PutIntegrationResponseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         resource_id: "String", # required
-    #         http_method: "String", # required
-    #         status_code: "StatusCode", # required
-    #         selection_pattern: "String",
-    #         response_parameters: {
-    #           "String" => "String",
-    #         },
-    #         response_templates: {
-    #           "String" => "String",
-    #         },
-    #         content_handling: "CONVERT_TO_BINARY", # accepts CONVERT_TO_BINARY, CONVERT_TO_TEXT
-    #       }
-    #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
     #   @return [String]
@@ -5204,27 +4190,6 @@ module Aws::APIGateway
     end
 
     # Request to add a method to an existing Resource resource.
-    #
-    # @note When making an API call, you may pass PutMethodRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         resource_id: "String", # required
-    #         http_method: "String", # required
-    #         authorization_type: "String", # required
-    #         authorizer_id: "String",
-    #         api_key_required: false,
-    #         operation_name: "String",
-    #         request_parameters: {
-    #           "String" => false,
-    #         },
-    #         request_models: {
-    #           "String" => "String",
-    #         },
-    #         request_validator_id: "String",
-    #         authorization_scopes: ["String"],
-    #       }
     #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
@@ -5316,22 +4281,6 @@ module Aws::APIGateway
 
     # Request to add a MethodResponse to an existing Method resource.
     #
-    # @note When making an API call, you may pass PutMethodResponseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         resource_id: "String", # required
-    #         http_method: "String", # required
-    #         status_code: "StatusCode", # required
-    #         response_parameters: {
-    #           "String" => false,
-    #         },
-    #         response_models: {
-    #           "String" => "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
     #   @return [String]
@@ -5386,19 +4335,6 @@ module Aws::APIGateway
     # A PUT request to update an existing API, with external API definitions
     # specified as the request body.
     #
-    # @note When making an API call, you may pass PutRestApiRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         mode: "merge", # accepts merge, overwrite
-    #         fail_on_warnings: false,
-    #         parameters: {
-    #           "String" => "String",
-    #         },
-    #         body: "data", # required
-    #       }
-    #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
     #   @return [String]
@@ -5441,15 +4377,6 @@ module Aws::APIGateway
     end
 
     # Quotas configured for a usage plan.
-    #
-    # @note When making an API call, you may pass QuotaSettings
-    #   data as a hash:
-    #
-    #       {
-    #         limit: 1,
-    #         offset: 1,
-    #         period: "DAY", # accepts DAY, WEEK, MONTH
-    #       }
     #
     # @!attribute [rw] limit
     #   The target maximum number of requests that can be made in a given
@@ -5899,14 +4826,6 @@ module Aws::APIGateway
     # A reference to a unique stage identified in the format
     # `\{restApiId\}/\{stage\}`.
     #
-    # @note When making an API call, you may pass StageKey
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String",
-    #         stage_name: "String",
-    #       }
-    #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
     #   @return [String]
@@ -5936,16 +4855,6 @@ module Aws::APIGateway
     end
 
     # Adds or updates a tag on a given resource.
-    #
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #         tags: { # required
-    #           "String" => "String",
-    #         },
-    #       }
     #
     # @!attribute [rw] resource_arn
     #   The ARN of a resource that can be tagged.
@@ -5992,28 +4901,6 @@ module Aws::APIGateway
     end
 
     # Make a request to simulate the invocation of an Authorizer.
-    #
-    # @note When making an API call, you may pass TestInvokeAuthorizerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         authorizer_id: "String", # required
-    #         headers: {
-    #           "String" => "String",
-    #         },
-    #         multi_value_headers: {
-    #           "String" => ["String"],
-    #         },
-    #         path_with_query_string: "String",
-    #         body: "String",
-    #         stage_variables: {
-    #           "String" => "String",
-    #         },
-    #         additional_context: {
-    #           "String" => "String",
-    #         },
-    #       }
     #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
@@ -6114,27 +5001,6 @@ module Aws::APIGateway
 
     # Make a request to simulate the invocation of a Method.
     #
-    # @note When making an API call, you may pass TestInvokeMethodRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         resource_id: "String", # required
-    #         http_method: "String", # required
-    #         path_with_query_string: "String",
-    #         body: "String",
-    #         headers: {
-    #           "String" => "String",
-    #         },
-    #         multi_value_headers: {
-    #           "String" => ["String"],
-    #         },
-    #         client_certificate_id: "String",
-    #         stage_variables: {
-    #           "String" => "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
     #   @return [String]
@@ -6232,14 +5098,6 @@ module Aws::APIGateway
 
     # The API request rate limits.
     #
-    # @note When making an API call, you may pass ThrottleSettings
-    #   data as a hash:
-    #
-    #       {
-    #         burst_limit: 1,
-    #         rate_limit: 1.0,
-    #       }
-    #
     # @!attribute [rw] burst_limit
     #   The API target request burst rate limit. This allows more requests
     #   through for a period of time than the target rate limit.
@@ -6257,13 +5115,6 @@ module Aws::APIGateway
     end
 
     # Specifies the TLS configuration for an integration.
-    #
-    # @note When making an API call, you may pass TlsConfig
-    #   data as a hash:
-    #
-    #       {
-    #         insecure_skip_verification: false,
-    #       }
     #
     # @!attribute [rw] insecure_skip_verification
     #   Specifies whether or not API Gateway skips verification that the
@@ -6317,14 +5168,6 @@ module Aws::APIGateway
 
     # Removes a tag from a given resource.
     #
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #         tag_keys: ["String"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of a resource that can be tagged.
     #   @return [String]
@@ -6343,20 +5186,6 @@ module Aws::APIGateway
     # Requests API Gateway to change information about the current Account
     # resource.
     #
-    # @note When making an API call, you may pass UpdateAccountRequest
-    #   data as a hash:
-    #
-    #       {
-    #         patch_operations: [
-    #           {
-    #             op: "add", # accepts add, remove, replace, move, copy, test
-    #             path: "String",
-    #             value: "String",
-    #             from: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] patch_operations
     #   For more information about supported patch operations, see [Patch
     #   Operations][1].
@@ -6373,21 +5202,6 @@ module Aws::APIGateway
     end
 
     # A request to change information about an ApiKey resource.
-    #
-    # @note When making an API call, you may pass UpdateApiKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         api_key: "String", # required
-    #         patch_operations: [
-    #           {
-    #             op: "add", # accepts add, remove, replace, move, copy, test
-    #             path: "String",
-    #             value: "String",
-    #             from: "String",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] api_key
     #   The identifier of the ApiKey resource to be updated.
@@ -6410,22 +5224,6 @@ module Aws::APIGateway
     end
 
     # Request to update an existing Authorizer resource.
-    #
-    # @note When making an API call, you may pass UpdateAuthorizerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         authorizer_id: "String", # required
-    #         patch_operations: [
-    #           {
-    #             op: "add", # accepts add, remove, replace, move, copy, test
-    #             path: "String",
-    #             value: "String",
-    #             from: "String",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
@@ -6453,22 +5251,6 @@ module Aws::APIGateway
     end
 
     # A request to change information about the BasePathMapping resource.
-    #
-    # @note When making an API call, you may pass UpdateBasePathMappingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "String", # required
-    #         base_path: "String", # required
-    #         patch_operations: [
-    #           {
-    #             op: "add", # accepts add, remove, replace, move, copy, test
-    #             path: "String",
-    #             value: "String",
-    #             from: "String",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] domain_name
     #   The domain name of the BasePathMapping resource to change.
@@ -6499,21 +5281,6 @@ module Aws::APIGateway
 
     # A request to change information about an ClientCertificate resource.
     #
-    # @note When making an API call, you may pass UpdateClientCertificateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_certificate_id: "String", # required
-    #         patch_operations: [
-    #           {
-    #             op: "add", # accepts add, remove, replace, move, copy, test
-    #             path: "String",
-    #             value: "String",
-    #             from: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] client_certificate_id
     #   The identifier of the ClientCertificate resource to be updated.
     #   @return [String]
@@ -6536,22 +5303,6 @@ module Aws::APIGateway
 
     # Requests API Gateway to change information about a Deployment
     # resource.
-    #
-    # @note When making an API call, you may pass UpdateDeploymentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         deployment_id: "String", # required
-    #         patch_operations: [
-    #           {
-    #             op: "add", # accepts add, remove, replace, move, copy, test
-    #             path: "String",
-    #             value: "String",
-    #             from: "String",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
@@ -6581,22 +5332,6 @@ module Aws::APIGateway
 
     # Updates an existing documentation part of a given API.
     #
-    # @note When making an API call, you may pass UpdateDocumentationPartRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         documentation_part_id: "String", # required
-    #         patch_operations: [
-    #           {
-    #             op: "add", # accepts add, remove, replace, move, copy, test
-    #             path: "String",
-    #             value: "String",
-    #             from: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
     #   @return [String]
@@ -6623,22 +5358,6 @@ module Aws::APIGateway
     end
 
     # Updates an existing documentation version of an API.
-    #
-    # @note When making an API call, you may pass UpdateDocumentationVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         documentation_version: "String", # required
-    #         patch_operations: [
-    #           {
-    #             op: "add", # accepts add, remove, replace, move, copy, test
-    #             path: "String",
-    #             value: "String",
-    #             from: "String",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi..
@@ -6667,21 +5386,6 @@ module Aws::APIGateway
 
     # A request to change information about the DomainName resource.
     #
-    # @note When making an API call, you may pass UpdateDomainNameRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_name: "String", # required
-    #         patch_operations: [
-    #           {
-    #             op: "add", # accepts add, remove, replace, move, copy, test
-    #             path: "String",
-    #             value: "String",
-    #             from: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] domain_name
     #   The name of the DomainName resource to be changed.
     #   @return [String]
@@ -6704,22 +5408,6 @@ module Aws::APIGateway
 
     # Updates a GatewayResponse of a specified response type on the given
     # RestApi.
-    #
-    # @note When making an API call, you may pass UpdateGatewayResponseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         response_type: "DEFAULT_4XX", # required, accepts DEFAULT_4XX, DEFAULT_5XX, RESOURCE_NOT_FOUND, UNAUTHORIZED, INVALID_API_KEY, ACCESS_DENIED, AUTHORIZER_FAILURE, AUTHORIZER_CONFIGURATION_ERROR, INVALID_SIGNATURE, EXPIRED_TOKEN, MISSING_AUTHENTICATION_TOKEN, INTEGRATION_FAILURE, INTEGRATION_TIMEOUT, API_CONFIGURATION_ERROR, UNSUPPORTED_MEDIA_TYPE, BAD_REQUEST_PARAMETERS, BAD_REQUEST_BODY, REQUEST_TOO_LARGE, THROTTLED, QUOTA_EXCEEDED, WAF_FILTERED
-    #         patch_operations: [
-    #           {
-    #             op: "add", # accepts add, remove, replace, move, copy, test
-    #             path: "String",
-    #             value: "String",
-    #             from: "String",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
@@ -6747,23 +5435,6 @@ module Aws::APIGateway
     end
 
     # Represents an update integration request.
-    #
-    # @note When making an API call, you may pass UpdateIntegrationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         resource_id: "String", # required
-    #         http_method: "String", # required
-    #         patch_operations: [
-    #           {
-    #             op: "add", # accepts add, remove, replace, move, copy, test
-    #             path: "String",
-    #             value: "String",
-    #             from: "String",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
@@ -6796,24 +5467,6 @@ module Aws::APIGateway
     end
 
     # Represents an update integration response request.
-    #
-    # @note When making an API call, you may pass UpdateIntegrationResponseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         resource_id: "String", # required
-    #         http_method: "String", # required
-    #         status_code: "StatusCode", # required
-    #         patch_operations: [
-    #           {
-    #             op: "add", # accepts add, remove, replace, move, copy, test
-    #             path: "String",
-    #             value: "String",
-    #             from: "String",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
@@ -6853,23 +5506,6 @@ module Aws::APIGateway
 
     # Request to update an existing Method resource.
     #
-    # @note When making an API call, you may pass UpdateMethodRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         resource_id: "String", # required
-    #         http_method: "String", # required
-    #         patch_operations: [
-    #           {
-    #             op: "add", # accepts add, remove, replace, move, copy, test
-    #             path: "String",
-    #             value: "String",
-    #             from: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
     #   @return [String]
@@ -6901,24 +5537,6 @@ module Aws::APIGateway
     end
 
     # A request to update an existing MethodResponse resource.
-    #
-    # @note When making an API call, you may pass UpdateMethodResponseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         resource_id: "String", # required
-    #         http_method: "String", # required
-    #         status_code: "StatusCode", # required
-    #         patch_operations: [
-    #           {
-    #             op: "add", # accepts add, remove, replace, move, copy, test
-    #             path: "String",
-    #             value: "String",
-    #             from: "String",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
@@ -6957,22 +5575,6 @@ module Aws::APIGateway
 
     # Request to update an existing model in an existing RestApi resource.
     #
-    # @note When making an API call, you may pass UpdateModelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         model_name: "String", # required
-    #         patch_operations: [
-    #           {
-    #             op: "add", # accepts add, remove, replace, move, copy, test
-    #             path: "String",
-    #             value: "String",
-    #             from: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
     #   @return [String]
@@ -6999,22 +5601,6 @@ module Aws::APIGateway
     end
 
     # Updates a RequestValidator of a given RestApi.
-    #
-    # @note When making an API call, you may pass UpdateRequestValidatorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         request_validator_id: "String", # required
-    #         patch_operations: [
-    #           {
-    #             op: "add", # accepts add, remove, replace, move, copy, test
-    #             path: "String",
-    #             value: "String",
-    #             from: "String",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
@@ -7043,22 +5629,6 @@ module Aws::APIGateway
 
     # Request to change information about a Resource resource.
     #
-    # @note When making an API call, you may pass UpdateResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         resource_id: "String", # required
-    #         patch_operations: [
-    #           {
-    #             op: "add", # accepts add, remove, replace, move, copy, test
-    #             path: "String",
-    #             value: "String",
-    #             from: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
     #   @return [String]
@@ -7086,21 +5656,6 @@ module Aws::APIGateway
 
     # Request to update an existing RestApi resource in your collection.
     #
-    # @note When making an API call, you may pass UpdateRestApiRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         patch_operations: [
-    #           {
-    #             op: "add", # accepts add, remove, replace, move, copy, test
-    #             path: "String",
-    #             value: "String",
-    #             from: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
     #   @return [String]
@@ -7122,22 +5677,6 @@ module Aws::APIGateway
     end
 
     # Requests API Gateway to change information about a Stage resource.
-    #
-    # @note When making an API call, you may pass UpdateStageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rest_api_id: "String", # required
-    #         stage_name: "String", # required
-    #         patch_operations: [
-    #           {
-    #             op: "add", # accepts add, remove, replace, move, copy, test
-    #             path: "String",
-    #             value: "String",
-    #             from: "String",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
@@ -7166,21 +5705,6 @@ module Aws::APIGateway
 
     # The PATCH request to update a usage plan of a given plan Id.
     #
-    # @note When making an API call, you may pass UpdateUsagePlanRequest
-    #   data as a hash:
-    #
-    #       {
-    #         usage_plan_id: "String", # required
-    #         patch_operations: [
-    #           {
-    #             op: "add", # accepts add, remove, replace, move, copy, test
-    #             path: "String",
-    #             value: "String",
-    #             from: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] usage_plan_id
     #   The Id of the to-be-updated usage plan.
     #   @return [String]
@@ -7203,22 +5727,6 @@ module Aws::APIGateway
 
     # The PATCH request to grant a temporary extension to the remaining
     # quota of a usage plan associated with a specified API key.
-    #
-    # @note When making an API call, you may pass UpdateUsageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         usage_plan_id: "String", # required
-    #         key_id: "String", # required
-    #         patch_operations: [
-    #           {
-    #             op: "add", # accepts add, remove, replace, move, copy, test
-    #             path: "String",
-    #             value: "String",
-    #             from: "String",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] usage_plan_id
     #   The Id of the usage plan associated with the usage data.
@@ -7247,21 +5755,6 @@ module Aws::APIGateway
     end
 
     # Updates an existing VpcLink of a specified identifier.
-    #
-    # @note When making an API call, you may pass UpdateVpcLinkRequest
-    #   data as a hash:
-    #
-    #       {
-    #         vpc_link_id: "String", # required
-    #         patch_operations: [
-    #           {
-    #             op: "add", # accepts add, remove, replace, move, copy, test
-    #             path: "String",
-    #             value: "String",
-    #             from: "String",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] vpc_link_id
     #   The identifier of the VpcLink. It is used in an Integration to

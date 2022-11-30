@@ -12,13 +12,6 @@ module Aws::S3Control
 
     # The container for abort incomplete multipart upload
     #
-    # @note When making an API call, you may pass AbortIncompleteMultipartUpload
-    #   data as a hash:
-    #
-    #       {
-    #         days_after_initiation: 1,
-    #       }
-    #
     # @!attribute [rw] days_after_initiation
     #   Specifies the number of days after which Amazon S3 aborts an
     #   incomplete multipart upload to the Outposts bucket.
@@ -95,48 +88,6 @@ module Aws::S3Control
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html
     #
-    # @note When making an API call, you may pass AccountLevel
-    #   data as a hash:
-    #
-    #       {
-    #         activity_metrics: {
-    #           is_enabled: false,
-    #         },
-    #         bucket_level: { # required
-    #           activity_metrics: {
-    #             is_enabled: false,
-    #           },
-    #           prefix_level: {
-    #             storage_metrics: { # required
-    #               is_enabled: false,
-    #               selection_criteria: {
-    #                 delimiter: "StorageLensPrefixLevelDelimiter",
-    #                 max_depth: 1,
-    #                 min_storage_bytes_percentage: 1.0,
-    #               },
-    #             },
-    #           },
-    #           advanced_cost_optimization_metrics: {
-    #             is_enabled: false,
-    #           },
-    #           advanced_data_protection_metrics: {
-    #             is_enabled: false,
-    #           },
-    #           detailed_status_codes_metrics: {
-    #             is_enabled: false,
-    #           },
-    #         },
-    #         advanced_cost_optimization_metrics: {
-    #           is_enabled: false,
-    #         },
-    #         advanced_data_protection_metrics: {
-    #           is_enabled: false,
-    #         },
-    #         detailed_status_codes_metrics: {
-    #           is_enabled: false,
-    #         },
-    #       }
-    #
     # @!attribute [rw] activity_metrics
     #   A container for S3 Storage Lens activity metrics.
     #   @return [Types::ActivityMetrics]
@@ -184,13 +135,6 @@ module Aws::S3Control
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html
     #
-    # @note When making an API call, you may pass ActivityMetrics
-    #   data as a hash:
-    #
-    #       {
-    #         is_enabled: false,
-    #       }
-    #
     # @!attribute [rw] is_enabled
     #   A container that indicates whether activity metrics are enabled.
     #   @return [Boolean]
@@ -219,13 +163,6 @@ module Aws::S3Control
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html
     #
-    # @note When making an API call, you may pass AdvancedCostOptimizationMetrics
-    #   data as a hash:
-    #
-    #       {
-    #         is_enabled: false,
-    #       }
-    #
     # @!attribute [rw] is_enabled
     #   A container that indicates whether advanced cost-optimization
     #   metrics are enabled.
@@ -253,13 +190,6 @@ module Aws::S3Control
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html
-    #
-    # @note When making an API call, you may pass AdvancedDataProtectionMetrics
-    #   data as a hash:
-    #
-    #       {
-    #         is_enabled: false,
-    #       }
     #
     # @!attribute [rw] is_enabled
     #   A container that indicates whether advanced data-protection metrics
@@ -405,14 +335,6 @@ module Aws::S3Control
     # Lambda function used to transform objects through an Object Lambda
     # Access Point.
     #
-    # @note When making an API call, you may pass AwsLambdaTransformation
-    #   data as a hash:
-    #
-    #       {
-    #         function_arn: "FunctionArnString", # required
-    #         function_payload: "AwsLambdaTransformationPayload",
-    #       }
-    #
     # @!attribute [rw] function_arn
     #   The Amazon Resource Name (ARN) of the Lambda function.
     #   @return [String]
@@ -468,34 +390,6 @@ module Aws::S3Control
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html
     #
-    # @note When making an API call, you may pass BucketLevel
-    #   data as a hash:
-    #
-    #       {
-    #         activity_metrics: {
-    #           is_enabled: false,
-    #         },
-    #         prefix_level: {
-    #           storage_metrics: { # required
-    #             is_enabled: false,
-    #             selection_criteria: {
-    #               delimiter: "StorageLensPrefixLevelDelimiter",
-    #               max_depth: 1,
-    #               min_storage_bytes_percentage: 1.0,
-    #             },
-    #           },
-    #         },
-    #         advanced_cost_optimization_metrics: {
-    #           is_enabled: false,
-    #         },
-    #         advanced_data_protection_metrics: {
-    #           is_enabled: false,
-    #         },
-    #         detailed_status_codes_metrics: {
-    #           is_enabled: false,
-    #         },
-    #       }
-    #
     # @!attribute [rw] activity_metrics
     #   A container for the bucket-level activity metrics for S3 Storage
     #   Lens.
@@ -543,13 +437,6 @@ module Aws::S3Control
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_view_metrics_cloudwatch.html
     #
-    # @note When making an API call, you may pass CloudWatchMetrics
-    #   data as a hash:
-    #
-    #       {
-    #         is_enabled: false, # required
-    #       }
-    #
     # @!attribute [rw] is_enabled
     #   A container that indicates whether CloudWatch publishing for S3
     #   Storage Lens metrics is enabled. A value of `true` indicates that
@@ -564,30 +451,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAccessPointForObjectLambdaRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         name: "ObjectLambdaAccessPointName", # required
-    #         configuration: { # required
-    #           supporting_access_point: "ObjectLambdaSupportingAccessPointArn", # required
-    #           cloud_watch_metrics_enabled: false,
-    #           allowed_features: ["GetObject-Range"], # accepts GetObject-Range, GetObject-PartNumber, HeadObject-Range, HeadObject-PartNumber
-    #           transformation_configurations: [ # required
-    #             {
-    #               actions: ["GetObject"], # required, accepts GetObject, HeadObject, ListObjects, ListObjectsV2
-    #               content_transformation: { # required
-    #                 aws_lambda: {
-    #                   function_arn: "FunctionArnString", # required
-    #                   function_payload: "AwsLambdaTransformationPayload",
-    #                 },
-    #               },
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID for owner of the specified Object
     #   Lambda Access Point.
@@ -623,24 +486,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAccessPointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         name: "AccessPointName", # required
-    #         bucket: "BucketName", # required
-    #         vpc_configuration: {
-    #           vpc_id: "VpcId", # required
-    #         },
-    #         public_access_block_configuration: {
-    #           block_public_acls: false,
-    #           ignore_public_acls: false,
-    #           block_public_policy: false,
-    #           restrict_public_buckets: false,
-    #         },
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID for the owner of the bucket for
     #   which you want to create an access point.
@@ -722,13 +567,6 @@ module Aws::S3Control
     #
     #  </note>
     #
-    # @note When making an API call, you may pass CreateBucketConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         location_constraint: "EU", # accepts EU, eu-west-1, us-west-1, us-west-2, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, sa-east-1, cn-north-1, eu-central-1
-    #       }
-    #
     # @!attribute [rw] location_constraint
     #   Specifies the Region where the bucket will be created. If you are
     #   creating a bucket on the US East (N. Virginia) Region (us-east-1),
@@ -747,24 +585,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateBucketRequest
-    #   data as a hash:
-    #
-    #       {
-    #         acl: "private", # accepts private, public-read, public-read-write, authenticated-read
-    #         bucket: "BucketName", # required
-    #         create_bucket_configuration: {
-    #           location_constraint: "EU", # accepts EU, eu-west-1, us-west-1, us-west-2, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, sa-east-1, cn-north-1, eu-central-1
-    #         },
-    #         grant_full_control: "GrantFullControl",
-    #         grant_read: "GrantRead",
-    #         grant_read_acp: "GrantReadACP",
-    #         grant_write: "GrantWrite",
-    #         grant_write_acp: "GrantWriteACP",
-    #         object_lock_enabled_for_bucket: false,
-    #         outpost_id: "NonEmptyMaxLength64String",
-    #       }
-    #
     # @!attribute [rw] acl
     #   The canned ACL to apply to the bucket.
     #
@@ -891,170 +711,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         confirmation_required: false,
-    #         operation: { # required
-    #           lambda_invoke: {
-    #             function_arn: "FunctionArnString",
-    #           },
-    #           s3_put_object_copy: {
-    #             target_resource: "S3BucketArnString",
-    #             canned_access_control_list: "private", # accepts private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, bucket-owner-full-control
-    #             access_control_grants: [
-    #               {
-    #                 grantee: {
-    #                   type_identifier: "id", # accepts id, emailAddress, uri
-    #                   identifier: "NonEmptyMaxLength1024String",
-    #                   display_name: "NonEmptyMaxLength1024String",
-    #                 },
-    #                 permission: "FULL_CONTROL", # accepts FULL_CONTROL, READ, WRITE, READ_ACP, WRITE_ACP
-    #               },
-    #             ],
-    #             metadata_directive: "COPY", # accepts COPY, REPLACE
-    #             modified_since_constraint: Time.now,
-    #             new_object_metadata: {
-    #               cache_control: "NonEmptyMaxLength1024String",
-    #               content_disposition: "NonEmptyMaxLength1024String",
-    #               content_encoding: "NonEmptyMaxLength1024String",
-    #               content_language: "NonEmptyMaxLength1024String",
-    #               user_metadata: {
-    #                 "NonEmptyMaxLength1024String" => "MaxLength1024String",
-    #               },
-    #               content_length: 1,
-    #               content_md5: "NonEmptyMaxLength1024String",
-    #               content_type: "NonEmptyMaxLength1024String",
-    #               http_expires_date: Time.now,
-    #               requester_charged: false,
-    #               sse_algorithm: "AES256", # accepts AES256, KMS
-    #             },
-    #             new_object_tagging: [
-    #               {
-    #                 key: "TagKeyString", # required
-    #                 value: "TagValueString", # required
-    #               },
-    #             ],
-    #             redirect_location: "NonEmptyMaxLength2048String",
-    #             requester_pays: false,
-    #             storage_class: "STANDARD", # accepts STANDARD, STANDARD_IA, ONEZONE_IA, GLACIER, INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR
-    #             un_modified_since_constraint: Time.now,
-    #             sse_aws_kms_key_id: "KmsKeyArnString",
-    #             target_key_prefix: "NonEmptyMaxLength1024String",
-    #             object_lock_legal_hold_status: "OFF", # accepts OFF, ON
-    #             object_lock_mode: "COMPLIANCE", # accepts COMPLIANCE, GOVERNANCE
-    #             object_lock_retain_until_date: Time.now,
-    #             bucket_key_enabled: false,
-    #             checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256
-    #           },
-    #           s3_put_object_acl: {
-    #             access_control_policy: {
-    #               access_control_list: {
-    #                 owner: { # required
-    #                   id: "NonEmptyMaxLength1024String",
-    #                   display_name: "NonEmptyMaxLength1024String",
-    #                 },
-    #                 grants: [
-    #                   {
-    #                     grantee: {
-    #                       type_identifier: "id", # accepts id, emailAddress, uri
-    #                       identifier: "NonEmptyMaxLength1024String",
-    #                       display_name: "NonEmptyMaxLength1024String",
-    #                     },
-    #                     permission: "FULL_CONTROL", # accepts FULL_CONTROL, READ, WRITE, READ_ACP, WRITE_ACP
-    #                   },
-    #                 ],
-    #               },
-    #               canned_access_control_list: "private", # accepts private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, bucket-owner-full-control
-    #             },
-    #           },
-    #           s3_put_object_tagging: {
-    #             tag_set: [
-    #               {
-    #                 key: "TagKeyString", # required
-    #                 value: "TagValueString", # required
-    #               },
-    #             ],
-    #           },
-    #           s3_delete_object_tagging: {
-    #           },
-    #           s3_initiate_restore_object: {
-    #             expiration_in_days: 1,
-    #             glacier_job_tier: "BULK", # accepts BULK, STANDARD
-    #           },
-    #           s3_put_object_legal_hold: {
-    #             legal_hold: { # required
-    #               status: "OFF", # required, accepts OFF, ON
-    #             },
-    #           },
-    #           s3_put_object_retention: {
-    #             bypass_governance_retention: false,
-    #             retention: { # required
-    #               retain_until_date: Time.now,
-    #               mode: "COMPLIANCE", # accepts COMPLIANCE, GOVERNANCE
-    #             },
-    #           },
-    #           s3_replicate_object: {
-    #           },
-    #         },
-    #         report: { # required
-    #           bucket: "S3BucketArnString",
-    #           format: "Report_CSV_20180820", # accepts Report_CSV_20180820
-    #           enabled: false, # required
-    #           prefix: "ReportPrefixString",
-    #           report_scope: "AllTasks", # accepts AllTasks, FailedTasksOnly
-    #         },
-    #         client_request_token: "NonEmptyMaxLength64String", # required
-    #         manifest: {
-    #           spec: { # required
-    #             format: "S3BatchOperations_CSV_20180820", # required, accepts S3BatchOperations_CSV_20180820, S3InventoryReport_CSV_20161130
-    #             fields: ["Ignore"], # accepts Ignore, Bucket, Key, VersionId
-    #           },
-    #           location: { # required
-    #             object_arn: "S3KeyArnString", # required
-    #             object_version_id: "S3ObjectVersionId",
-    #             etag: "NonEmptyMaxLength1024String", # required
-    #           },
-    #         },
-    #         description: "NonEmptyMaxLength256String",
-    #         priority: 1, # required
-    #         role_arn: "IAMRoleArn", # required
-    #         tags: [
-    #           {
-    #             key: "TagKeyString", # required
-    #             value: "TagValueString", # required
-    #           },
-    #         ],
-    #         manifest_generator: {
-    #           s3_job_manifest_generator: {
-    #             expected_bucket_owner: "AccountId",
-    #             source_bucket: "S3BucketArnString", # required
-    #             manifest_output_location: {
-    #               expected_manifest_bucket_owner: "AccountId",
-    #               bucket: "S3BucketArnString", # required
-    #               manifest_prefix: "ManifestPrefixString",
-    #               manifest_encryption: {
-    #                 sses3: {
-    #                 },
-    #                 ssekms: {
-    #                   key_id: "KmsKeyArnString", # required
-    #                 },
-    #               },
-    #               manifest_format: "S3InventoryReport_CSV_20211130", # required, accepts S3InventoryReport_CSV_20211130
-    #             },
-    #             filter: {
-    #               eligible_for_replication: false,
-    #               created_after: Time.now,
-    #               created_before: Time.now,
-    #               object_replication_statuses: ["COMPLETED"], # accepts COMPLETED, FAILED, REPLICA, NONE
-    #             },
-    #             enable_manifest_output: false, # required
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID that creates the job.
     #   @return [String]
@@ -1158,24 +814,6 @@ module Aws::S3Control
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html
     #
-    # @note When making an API call, you may pass CreateMultiRegionAccessPointInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "MultiRegionAccessPointName", # required
-    #         public_access_block: {
-    #           block_public_acls: false,
-    #           ignore_public_acls: false,
-    #           block_public_policy: false,
-    #           restrict_public_buckets: false,
-    #         },
-    #         regions: [ # required
-    #           {
-    #             bucket: "BucketName", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the Multi-Region Access Point associated with this
     #   request.
@@ -1210,28 +848,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateMultiRegionAccessPointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         client_token: "MultiRegionAccessPointClientToken", # required
-    #         details: { # required
-    #           name: "MultiRegionAccessPointName", # required
-    #           public_access_block: {
-    #             block_public_acls: false,
-    #             ignore_public_acls: false,
-    #             block_public_policy: false,
-    #             restrict_public_buckets: false,
-    #           },
-    #           regions: [ # required
-    #             {
-    #               bucket: "BucketName", # required
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID for the owner of the Multi-Region
     #   Access Point. The owner of the Multi-Region Access Point also must
@@ -1279,14 +895,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAccessPointForObjectLambdaRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         name: "ObjectLambdaAccessPointName", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The account ID for the account that owns the specified Object Lambda
     #   Access Point.
@@ -1305,14 +913,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAccessPointPolicyForObjectLambdaRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         name: "ObjectLambdaAccessPointName", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The account ID for the account that owns the specified Object Lambda
     #   Access Point.
@@ -1332,14 +932,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAccessPointPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         name: "AccessPointName", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The account ID for the account that owns the specified access point.
     #   @return [String]
@@ -1370,14 +962,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAccessPointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         name: "AccessPointName", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The account ID for the account that owns the specified access point.
     #   @return [String]
@@ -1408,14 +992,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteBucketLifecycleConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         bucket: "BucketName", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The account ID of the lifecycle configuration to delete.
     #   @return [String]
@@ -1446,14 +1022,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteBucketPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         bucket: "BucketName", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The account ID of the Outposts bucket.
     #   @return [String]
@@ -1484,14 +1052,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteBucketRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         bucket: "BucketName", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The account ID that owns the Outposts bucket.
     #   @return [String]
@@ -1522,14 +1082,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteBucketTaggingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         bucket: "BucketName", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID of the Outposts bucket tag set to
     #   be removed.
@@ -1561,14 +1113,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteJobTaggingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID associated with the S3 Batch
     #   Operations job.
@@ -1599,13 +1143,6 @@ module Aws::S3Control
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html
     #
-    # @note When making an API call, you may pass DeleteMultiRegionAccessPointInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "MultiRegionAccessPointName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the Multi-Region Access Point associated with this
     #   request.
@@ -1619,17 +1156,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteMultiRegionAccessPointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         client_token: "MultiRegionAccessPointClientToken", # required
-    #         details: { # required
-    #           name: "MultiRegionAccessPointName", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID for the owner of the Multi-Region
     #   Access Point.
@@ -1676,13 +1202,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeletePublicAccessBlockRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The account ID for the Amazon Web Services account whose
     #   `PublicAccessBlock` configuration you want to remove.
@@ -1696,14 +1215,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteStorageLensConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         config_id: "ConfigId", # required
-    #         account_id: "AccountId",
-    #       }
-    #
     # @!attribute [rw] config_id
     #   The ID of the S3 Storage Lens configuration.
     #   @return [String]
@@ -1721,14 +1232,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteStorageLensConfigurationTaggingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         config_id: "ConfigId", # required
-    #         account_id: "AccountId",
-    #       }
-    #
     # @!attribute [rw] config_id
     #   The ID of the S3 Storage Lens configuration.
     #   @return [String]
@@ -1750,14 +1253,6 @@ module Aws::S3Control
     #
     class DeleteStorageLensConfigurationTaggingResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID associated with the S3 Batch
     #   Operations job.
@@ -1789,14 +1284,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeMultiRegionAccessPointOperationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         request_token_arn: "AsyncRequestTokenARN", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID for the owner of the Multi-Region
     #   Access Point.
@@ -1846,13 +1333,6 @@ module Aws::S3Control
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html
     #
-    # @note When making an API call, you may pass DetailedStatusCodesMetrics
-    #   data as a hash:
-    #
-    #       {
-    #         is_enabled: false,
-    #       }
-    #
     # @!attribute [rw] is_enabled
     #   A container that indicates whether detailed status code metrics are
     #   enabled.
@@ -1889,14 +1369,6 @@ module Aws::S3Control
 
     # A container for what Amazon S3 Storage Lens will exclude.
     #
-    # @note When making an API call, you may pass Exclude
-    #   data as a hash:
-    #
-    #       {
-    #         buckets: ["S3BucketArnString"],
-    #         regions: ["S3AWSRegion"],
-    #       }
-    #
     # @!attribute [rw] buckets
     #   A container for the S3 Storage Lens bucket excludes.
     #   @return [Array<String>]
@@ -1917,17 +1389,6 @@ module Aws::S3Control
     # The encryption configuration to use when storing the generated
     # manifest.
     #
-    # @note When making an API call, you may pass GeneratedManifestEncryption
-    #   data as a hash:
-    #
-    #       {
-    #         sses3: {
-    #         },
-    #         ssekms: {
-    #           key_id: "KmsKeyArnString", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] sses3
     #   Specifies the use of SSE-S3 to encrypt generated manifest objects.
     #   @return [Types::SSES3Encryption]
@@ -1946,14 +1407,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAccessPointConfigurationForObjectLambdaRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         name: "ObjectLambdaAccessPointName", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The account ID for the account that owns the specified Object Lambda
     #   Access Point.
@@ -1985,14 +1438,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAccessPointForObjectLambdaRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         name: "ObjectLambdaAccessPointName", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The account ID for the account that owns the specified Object Lambda
     #   Access Point.
@@ -2035,14 +1480,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAccessPointPolicyForObjectLambdaRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         name: "ObjectLambdaAccessPointName", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The account ID for the account that owns the specified Object Lambda
     #   Access Point.
@@ -2073,14 +1510,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAccessPointPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         name: "AccessPointName", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The account ID for the account that owns the specified access point.
     #   @return [String]
@@ -2123,14 +1552,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAccessPointPolicyStatusForObjectLambdaRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         name: "ObjectLambdaAccessPointName", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The account ID for the account that owns the specified Object Lambda
     #   Access Point.
@@ -2168,14 +1589,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAccessPointPolicyStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         name: "AccessPointName", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The account ID for the account that owns the specified access point.
     #   @return [String]
@@ -2206,14 +1619,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAccessPointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         name: "AccessPointName", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The account ID for the account that owns the specified access point.
     #   @return [String]
@@ -2320,14 +1725,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetBucketLifecycleConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         bucket: "BucketName", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID of the Outposts bucket.
     #   @return [String]
@@ -2370,14 +1767,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetBucketPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         bucket: "BucketName", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID of the Outposts bucket.
     #   @return [String]
@@ -2420,14 +1809,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetBucketRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         bucket: "BucketName", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID of the Outposts bucket.
     #   @return [String]
@@ -2479,14 +1860,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetBucketTaggingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         bucket: "BucketName", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID of the Outposts bucket.
     #   @return [String]
@@ -2529,14 +1902,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetBucketVersioningRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         bucket: "BucketName", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID of the S3 on Outposts bucket.
     #   @return [String]
@@ -2574,14 +1939,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetJobTaggingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID associated with the S3 Batch
     #   Operations job.
@@ -2613,14 +1970,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetMultiRegionAccessPointPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         name: "MultiRegionAccessPointName", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID for the owner of the Multi-Region
     #   Access Point.
@@ -2659,14 +2008,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetMultiRegionAccessPointPolicyStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         name: "MultiRegionAccessPointName", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID for the owner of the Multi-Region
     #   Access Point.
@@ -2712,14 +2053,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetMultiRegionAccessPointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         name: "MultiRegionAccessPointName", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID for the owner of the Multi-Region
     #   Access Point.
@@ -2760,14 +2093,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetMultiRegionAccessPointRoutesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         mrap: "MultiRegionAccessPointId", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID for the owner of the Multi-Region
     #   Access Point.
@@ -2818,13 +2143,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetPublicAccessBlockRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The account ID for the Amazon Web Services account whose
     #   `PublicAccessBlock` configuration you want to retrieve.
@@ -2838,14 +2156,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetStorageLensConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         config_id: "ConfigId", # required
-    #         account_id: "AccountId",
-    #       }
-    #
     # @!attribute [rw] config_id
     #   The ID of the Amazon S3 Storage Lens configuration.
     #   @return [String]
@@ -2875,14 +2185,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetStorageLensConfigurationTaggingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         config_id: "ConfigId", # required
-    #         account_id: "AccountId",
-    #       }
-    #
     # @!attribute [rw] config_id
     #   The ID of the Amazon S3 Storage Lens configuration.
     #   @return [String]
@@ -2924,14 +2226,6 @@ module Aws::S3Control
     end
 
     # A container for what Amazon S3 Storage Lens configuration includes.
-    #
-    # @note When making an API call, you may pass Include
-    #   data as a hash:
-    #
-    #       {
-    #         buckets: ["S3BucketArnString"],
-    #         regions: ["S3AWSRegion"],
-    #       }
     #
     # @!attribute [rw] buckets
     #   A container for the S3 Storage Lens bucket includes.
@@ -3183,21 +2477,6 @@ module Aws::S3Control
 
     # Contains the configuration information for a job's manifest.
     #
-    # @note When making an API call, you may pass JobManifest
-    #   data as a hash:
-    #
-    #       {
-    #         spec: { # required
-    #           format: "S3BatchOperations_CSV_20180820", # required, accepts S3BatchOperations_CSV_20180820, S3InventoryReport_CSV_20161130
-    #           fields: ["Ignore"], # accepts Ignore, Bucket, Key, VersionId
-    #         },
-    #         location: { # required
-    #           object_arn: "S3KeyArnString", # required
-    #           object_version_id: "S3ObjectVersionId",
-    #           etag: "NonEmptyMaxLength1024String", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] spec
     #   Describes the format of the specified job's manifest. If the
     #   manifest is in CSV format, also describes the columns contained
@@ -3220,10 +2499,6 @@ module Aws::S3Control
 
     # Configures the type of the job's ManifestGenerator.
     #
-    # @note JobManifestGenerator is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note JobManifestGenerator is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of JobManifestGenerator corresponding to the set member.
-    #
     # @!attribute [rw] s3_job_manifest_generator
     #   The S3 job ManifestGenerator's configuration details.
     #   @return [Types::S3JobManifestGenerator]
@@ -3242,16 +2517,6 @@ module Aws::S3Control
     end
 
     # The filter used to describe a set of objects for the job's manifest.
-    #
-    # @note When making an API call, you may pass JobManifestGeneratorFilter
-    #   data as a hash:
-    #
-    #       {
-    #         eligible_for_replication: false,
-    #         created_after: Time.now,
-    #         created_before: Time.now,
-    #         object_replication_statuses: ["COMPLETED"], # accepts COMPLETED, FAILED, REPLICA, NONE
-    #       }
     #
     # @!attribute [rw] eligible_for_replication
     #   Include objects in the generated manifest only if they are eligible
@@ -3287,15 +2552,6 @@ module Aws::S3Control
 
     # Contains the information required to locate a manifest object.
     #
-    # @note When making an API call, you may pass JobManifestLocation
-    #   data as a hash:
-    #
-    #       {
-    #         object_arn: "S3KeyArnString", # required
-    #         object_version_id: "S3ObjectVersionId",
-    #         etag: "NonEmptyMaxLength1024String", # required
-    #       }
-    #
     # @!attribute [rw] object_arn
     #   The Amazon Resource Name (ARN) for a manifest object.
     #
@@ -3330,14 +2586,6 @@ module Aws::S3Control
     # Describes the format of a manifest. If the manifest is in CSV format,
     # also describes the columns contained within the manifest.
     #
-    # @note When making an API call, you may pass JobManifestSpec
-    #   data as a hash:
-    #
-    #       {
-    #         format: "S3BatchOperations_CSV_20180820", # required, accepts S3BatchOperations_CSV_20180820, S3InventoryReport_CSV_20161130
-    #         fields: ["Ignore"], # accepts Ignore, Bucket, Key, VersionId
-    #       }
-    #
     # @!attribute [rw] format
     #   Indicates which of the available formats the specified manifest
     #   uses.
@@ -3365,112 +2613,6 @@ module Aws::S3Control
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-operations.html
-    #
-    # @note When making an API call, you may pass JobOperation
-    #   data as a hash:
-    #
-    #       {
-    #         lambda_invoke: {
-    #           function_arn: "FunctionArnString",
-    #         },
-    #         s3_put_object_copy: {
-    #           target_resource: "S3BucketArnString",
-    #           canned_access_control_list: "private", # accepts private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, bucket-owner-full-control
-    #           access_control_grants: [
-    #             {
-    #               grantee: {
-    #                 type_identifier: "id", # accepts id, emailAddress, uri
-    #                 identifier: "NonEmptyMaxLength1024String",
-    #                 display_name: "NonEmptyMaxLength1024String",
-    #               },
-    #               permission: "FULL_CONTROL", # accepts FULL_CONTROL, READ, WRITE, READ_ACP, WRITE_ACP
-    #             },
-    #           ],
-    #           metadata_directive: "COPY", # accepts COPY, REPLACE
-    #           modified_since_constraint: Time.now,
-    #           new_object_metadata: {
-    #             cache_control: "NonEmptyMaxLength1024String",
-    #             content_disposition: "NonEmptyMaxLength1024String",
-    #             content_encoding: "NonEmptyMaxLength1024String",
-    #             content_language: "NonEmptyMaxLength1024String",
-    #             user_metadata: {
-    #               "NonEmptyMaxLength1024String" => "MaxLength1024String",
-    #             },
-    #             content_length: 1,
-    #             content_md5: "NonEmptyMaxLength1024String",
-    #             content_type: "NonEmptyMaxLength1024String",
-    #             http_expires_date: Time.now,
-    #             requester_charged: false,
-    #             sse_algorithm: "AES256", # accepts AES256, KMS
-    #           },
-    #           new_object_tagging: [
-    #             {
-    #               key: "TagKeyString", # required
-    #               value: "TagValueString", # required
-    #             },
-    #           ],
-    #           redirect_location: "NonEmptyMaxLength2048String",
-    #           requester_pays: false,
-    #           storage_class: "STANDARD", # accepts STANDARD, STANDARD_IA, ONEZONE_IA, GLACIER, INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR
-    #           un_modified_since_constraint: Time.now,
-    #           sse_aws_kms_key_id: "KmsKeyArnString",
-    #           target_key_prefix: "NonEmptyMaxLength1024String",
-    #           object_lock_legal_hold_status: "OFF", # accepts OFF, ON
-    #           object_lock_mode: "COMPLIANCE", # accepts COMPLIANCE, GOVERNANCE
-    #           object_lock_retain_until_date: Time.now,
-    #           bucket_key_enabled: false,
-    #           checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256
-    #         },
-    #         s3_put_object_acl: {
-    #           access_control_policy: {
-    #             access_control_list: {
-    #               owner: { # required
-    #                 id: "NonEmptyMaxLength1024String",
-    #                 display_name: "NonEmptyMaxLength1024String",
-    #               },
-    #               grants: [
-    #                 {
-    #                   grantee: {
-    #                     type_identifier: "id", # accepts id, emailAddress, uri
-    #                     identifier: "NonEmptyMaxLength1024String",
-    #                     display_name: "NonEmptyMaxLength1024String",
-    #                   },
-    #                   permission: "FULL_CONTROL", # accepts FULL_CONTROL, READ, WRITE, READ_ACP, WRITE_ACP
-    #                 },
-    #               ],
-    #             },
-    #             canned_access_control_list: "private", # accepts private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, bucket-owner-full-control
-    #           },
-    #         },
-    #         s3_put_object_tagging: {
-    #           tag_set: [
-    #             {
-    #               key: "TagKeyString", # required
-    #               value: "TagValueString", # required
-    #             },
-    #           ],
-    #         },
-    #         s3_delete_object_tagging: {
-    #         },
-    #         s3_initiate_restore_object: {
-    #           expiration_in_days: 1,
-    #           glacier_job_tier: "BULK", # accepts BULK, STANDARD
-    #         },
-    #         s3_put_object_legal_hold: {
-    #           legal_hold: { # required
-    #             status: "OFF", # required, accepts OFF, ON
-    #           },
-    #         },
-    #         s3_put_object_retention: {
-    #           bypass_governance_retention: false,
-    #           retention: { # required
-    #             retain_until_date: Time.now,
-    #             mode: "COMPLIANCE", # accepts COMPLIANCE, GOVERNANCE
-    #           },
-    #         },
-    #         s3_replicate_object: {
-    #         },
-    #       }
     #
     # @!attribute [rw] lambda_invoke
     #   Directs the specified job to invoke an Lambda function on every
@@ -3577,17 +2719,6 @@ module Aws::S3Control
 
     # Contains the configuration parameters for a job-completion report.
     #
-    # @note When making an API call, you may pass JobReport
-    #   data as a hash:
-    #
-    #       {
-    #         bucket: "S3BucketArnString",
-    #         format: "Report_CSV_20180820", # accepts Report_CSV_20180820
-    #         enabled: false, # required
-    #         prefix: "ReportPrefixString",
-    #         report_scope: "AllTasks", # accepts AllTasks, FailedTasksOnly
-    #       }
-    #
     # @!attribute [rw] bucket
     #   The Amazon Resource Name (ARN) for the bucket where specified
     #   job-completion report will be stored.
@@ -3653,13 +2784,6 @@ module Aws::S3Control
 
     # Contains the configuration parameters for a `Lambda Invoke` operation.
     #
-    # @note When making an API call, you may pass LambdaInvokeOperation
-    #   data as a hash:
-    #
-    #       {
-    #         function_arn: "FunctionArnString",
-    #       }
-    #
     # @!attribute [rw] function_arn
     #   The Amazon Resource Name (ARN) for the Lambda function that the
     #   specified job will invoke on every object in the manifest.
@@ -3675,63 +2799,6 @@ module Aws::S3Control
 
     # The container for the Outposts bucket lifecycle configuration.
     #
-    # @note When making an API call, you may pass LifecycleConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         rules: [
-    #           {
-    #             expiration: {
-    #               date: Time.now,
-    #               days: 1,
-    #               expired_object_delete_marker: false,
-    #             },
-    #             id: "ID",
-    #             filter: {
-    #               prefix: "Prefix",
-    #               tag: {
-    #                 key: "TagKeyString", # required
-    #                 value: "TagValueString", # required
-    #               },
-    #               and: {
-    #                 prefix: "Prefix",
-    #                 tags: [
-    #                   {
-    #                     key: "TagKeyString", # required
-    #                     value: "TagValueString", # required
-    #                   },
-    #                 ],
-    #                 object_size_greater_than: 1,
-    #                 object_size_less_than: 1,
-    #               },
-    #               object_size_greater_than: 1,
-    #               object_size_less_than: 1,
-    #             },
-    #             status: "Enabled", # required, accepts Enabled, Disabled
-    #             transitions: [
-    #               {
-    #                 date: Time.now,
-    #                 days: 1,
-    #                 storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
-    #               },
-    #             ],
-    #             noncurrent_version_transitions: [
-    #               {
-    #                 noncurrent_days: 1,
-    #                 storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
-    #               },
-    #             ],
-    #             noncurrent_version_expiration: {
-    #               noncurrent_days: 1,
-    #               newer_noncurrent_versions: 1,
-    #             },
-    #             abort_incomplete_multipart_upload: {
-    #               days_after_initiation: 1,
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] rules
     #   A lifecycle rule for individual objects in an Outposts bucket.
     #   @return [Array<Types::LifecycleRule>]
@@ -3745,15 +2812,6 @@ module Aws::S3Control
     end
 
     # The container of the Outposts bucket lifecycle expiration.
-    #
-    # @note When making an API call, you may pass LifecycleExpiration
-    #   data as a hash:
-    #
-    #       {
-    #         date: Time.now,
-    #         days: 1,
-    #         expired_object_delete_marker: false,
-    #       }
     #
     # @!attribute [rw] date
     #   Indicates at what date the object is to be deleted. Should be in GMT
@@ -3783,59 +2841,6 @@ module Aws::S3Control
     end
 
     # The container for the Outposts bucket lifecycle rule.
-    #
-    # @note When making an API call, you may pass LifecycleRule
-    #   data as a hash:
-    #
-    #       {
-    #         expiration: {
-    #           date: Time.now,
-    #           days: 1,
-    #           expired_object_delete_marker: false,
-    #         },
-    #         id: "ID",
-    #         filter: {
-    #           prefix: "Prefix",
-    #           tag: {
-    #             key: "TagKeyString", # required
-    #             value: "TagValueString", # required
-    #           },
-    #           and: {
-    #             prefix: "Prefix",
-    #             tags: [
-    #               {
-    #                 key: "TagKeyString", # required
-    #                 value: "TagValueString", # required
-    #               },
-    #             ],
-    #             object_size_greater_than: 1,
-    #             object_size_less_than: 1,
-    #           },
-    #           object_size_greater_than: 1,
-    #           object_size_less_than: 1,
-    #         },
-    #         status: "Enabled", # required, accepts Enabled, Disabled
-    #         transitions: [
-    #           {
-    #             date: Time.now,
-    #             days: 1,
-    #             storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
-    #           },
-    #         ],
-    #         noncurrent_version_transitions: [
-    #           {
-    #             noncurrent_days: 1,
-    #             storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
-    #           },
-    #         ],
-    #         noncurrent_version_expiration: {
-    #           noncurrent_days: 1,
-    #           newer_noncurrent_versions: 1,
-    #         },
-    #         abort_incomplete_multipart_upload: {
-    #           days_after_initiation: 1,
-    #         },
-    #       }
     #
     # @!attribute [rw] expiration
     #   Specifies the expiration for the lifecycle of the object in the form
@@ -3911,21 +2916,6 @@ module Aws::S3Control
 
     # The container for the Outposts bucket lifecycle rule and operator.
     #
-    # @note When making an API call, you may pass LifecycleRuleAndOperator
-    #   data as a hash:
-    #
-    #       {
-    #         prefix: "Prefix",
-    #         tags: [
-    #           {
-    #             key: "TagKeyString", # required
-    #             value: "TagValueString", # required
-    #           },
-    #         ],
-    #         object_size_greater_than: 1,
-    #         object_size_less_than: 1,
-    #       }
-    #
     # @!attribute [rw] prefix
     #   Prefix identifying one or more objects to which the rule applies.
     #   @return [String]
@@ -3955,30 +2945,6 @@ module Aws::S3Control
     end
 
     # The container for the filter of the lifecycle rule.
-    #
-    # @note When making an API call, you may pass LifecycleRuleFilter
-    #   data as a hash:
-    #
-    #       {
-    #         prefix: "Prefix",
-    #         tag: {
-    #           key: "TagKeyString", # required
-    #           value: "TagValueString", # required
-    #         },
-    #         and: {
-    #           prefix: "Prefix",
-    #           tags: [
-    #             {
-    #               key: "TagKeyString", # required
-    #               value: "TagValueString", # required
-    #             },
-    #           ],
-    #           object_size_greater_than: 1,
-    #           object_size_less_than: 1,
-    #         },
-    #         object_size_greater_than: 1,
-    #         object_size_less_than: 1,
-    #       }
     #
     # @!attribute [rw] prefix
     #   Prefix identifying one or more objects to which the rule applies.
@@ -4020,15 +2986,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAccessPointsForObjectLambdaRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         next_token: "NonEmptyMaxLength1024String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The account ID for the account that owns the specified Object Lambda
     #   Access Point.
@@ -4080,16 +3037,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAccessPointsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         bucket: "BucketName",
-    #         next_token: "NonEmptyMaxLength1024String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID for owner of the bucket whose
     #   access points you want to list.
@@ -4160,16 +3107,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         job_statuses: ["Active"], # accepts Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended
-    #         next_token: "StringForNextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID associated with the S3 Batch
     #   Operations job.
@@ -4224,15 +3161,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListMultiRegionAccessPointsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         next_token: "NonEmptyMaxLength1024String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID for the owner of the Multi-Region
     #   Access Point.
@@ -4276,16 +3204,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRegionalBucketsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         next_token: "NonEmptyMaxLength1024String",
-    #         max_results: 1,
-    #         outpost_id: "NonEmptyMaxLength64String",
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID of the Outposts bucket.
     #   @return [String]
@@ -4369,14 +3287,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListStorageLensConfigurationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         next_token: "ContinuationToken",
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The account ID of the requester.
     #   @return [String]
@@ -4535,15 +3445,6 @@ module Aws::S3Control
     # Region are active (indicated by a value of `100`) or passive
     # (indicated by a value of `0`).
     #
-    # @note When making an API call, you may pass MultiRegionAccessPointRoute
-    #   data as a hash:
-    #
-    #       {
-    #         bucket: "BucketName",
-    #         region: "RegionName",
-    #         traffic_dial_percentage: 1, # required
-    #       }
-    #
     # @!attribute [rw] bucket
     #   The name of the Amazon S3 bucket for which you'll submit a routing
     #   configuration change. Either the `Bucket` or the `Region` value must
@@ -4620,14 +3521,6 @@ module Aws::S3Control
 
     # The container of the noncurrent version expiration.
     #
-    # @note When making an API call, you may pass NoncurrentVersionExpiration
-    #   data as a hash:
-    #
-    #       {
-    #         noncurrent_days: 1,
-    #         newer_noncurrent_versions: 1,
-    #       }
-    #
     # @!attribute [rw] noncurrent_days
     #   Specifies the number of days an object is noncurrent before Amazon
     #   S3 can perform the associated action. For information about the
@@ -4661,14 +3554,6 @@ module Aws::S3Control
     end
 
     # The container for the noncurrent version transition.
-    #
-    # @note When making an API call, you may pass NoncurrentVersionTransition
-    #   data as a hash:
-    #
-    #       {
-    #         noncurrent_days: 1,
-    #         storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
-    #       }
     #
     # @!attribute [rw] noncurrent_days
     #   Specifies the number of days an object is noncurrent before Amazon
@@ -4728,26 +3613,6 @@ module Aws::S3Control
 
     # A configuration used when creating an Object Lambda Access Point.
     #
-    # @note When making an API call, you may pass ObjectLambdaConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         supporting_access_point: "ObjectLambdaSupportingAccessPointArn", # required
-    #         cloud_watch_metrics_enabled: false,
-    #         allowed_features: ["GetObject-Range"], # accepts GetObject-Range, GetObject-PartNumber, HeadObject-Range, HeadObject-PartNumber
-    #         transformation_configurations: [ # required
-    #           {
-    #             actions: ["GetObject"], # required, accepts GetObject, HeadObject, ListObjects, ListObjectsV2
-    #             content_transformation: { # required
-    #               aws_lambda: {
-    #                 function_arn: "FunctionArnString", # required
-    #                 function_payload: "AwsLambdaTransformationPayload",
-    #               },
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] supporting_access_point
     #   Standard access point associated with the Object Lambda Access
     #   Point.
@@ -4782,10 +3647,6 @@ module Aws::S3Control
 
     # A container for AwsLambdaTransformation.
     #
-    # @note ObjectLambdaContentTransformation is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note ObjectLambdaContentTransformation is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ObjectLambdaContentTransformation corresponding to the set member.
-    #
     # @!attribute [rw] aws_lambda
     #   A container for an Lambda function.
     #   @return [Types::AwsLambdaTransformation]
@@ -4805,19 +3666,6 @@ module Aws::S3Control
 
     # A configuration used when creating an Object Lambda Access Point
     # transformation.
-    #
-    # @note When making an API call, you may pass ObjectLambdaTransformationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         actions: ["GetObject"], # required, accepts GetObject, HeadObject, ListObjects, ListObjectsV2
-    #         content_transformation: { # required
-    #           aws_lambda: {
-    #             function_arn: "FunctionArnString", # required
-    #             function_payload: "AwsLambdaTransformationPayload",
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] actions
     #   A container for the action of an Object Lambda Access Point
@@ -4861,20 +3709,6 @@ module Aws::S3Control
 
     # A container for the prefix-level configuration.
     #
-    # @note When making an API call, you may pass PrefixLevel
-    #   data as a hash:
-    #
-    #       {
-    #         storage_metrics: { # required
-    #           is_enabled: false,
-    #           selection_criteria: {
-    #             delimiter: "StorageLensPrefixLevelDelimiter",
-    #             max_depth: 1,
-    #             min_storage_bytes_percentage: 1.0,
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] storage_metrics
     #   A container for the prefix-level storage metrics for S3 Storage
     #   Lens.
@@ -4889,18 +3723,6 @@ module Aws::S3Control
     end
 
     # A container for the prefix-level storage metrics for S3 Storage Lens.
-    #
-    # @note When making an API call, you may pass PrefixLevelStorageMetrics
-    #   data as a hash:
-    #
-    #       {
-    #         is_enabled: false,
-    #         selection_criteria: {
-    #           delimiter: "StorageLensPrefixLevelDelimiter",
-    #           max_depth: 1,
-    #           min_storage_bytes_percentage: 1.0,
-    #         },
-    #       }
     #
     # @!attribute [rw] is_enabled
     #   A container for whether prefix-level storage metrics are enabled.
@@ -4949,16 +3771,6 @@ module Aws::S3Control
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status
-    #
-    # @note When making an API call, you may pass PublicAccessBlockConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         block_public_acls: false,
-    #         ignore_public_acls: false,
-    #         block_public_policy: false,
-    #         restrict_public_buckets: false,
-    #       }
     #
     # @!attribute [rw] block_public_acls
     #   Specifies whether Amazon S3 should block public access control lists
@@ -5025,30 +3837,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutAccessPointConfigurationForObjectLambdaRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         name: "ObjectLambdaAccessPointName", # required
-    #         configuration: { # required
-    #           supporting_access_point: "ObjectLambdaSupportingAccessPointArn", # required
-    #           cloud_watch_metrics_enabled: false,
-    #           allowed_features: ["GetObject-Range"], # accepts GetObject-Range, GetObject-PartNumber, HeadObject-Range, HeadObject-PartNumber
-    #           transformation_configurations: [ # required
-    #             {
-    #               actions: ["GetObject"], # required, accepts GetObject, HeadObject, ListObjects, ListObjectsV2
-    #               content_transformation: { # required
-    #                 aws_lambda: {
-    #                   function_arn: "FunctionArnString", # required
-    #                   function_payload: "AwsLambdaTransformationPayload",
-    #                 },
-    #               },
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The account ID for the account that owns the specified Object Lambda
     #   Access Point.
@@ -5072,15 +3860,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutAccessPointPolicyForObjectLambdaRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         name: "ObjectLambdaAccessPointName", # required
-    #         policy: "ObjectLambdaPolicy", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The account ID for the account that owns the specified Object Lambda
     #   Access Point.
@@ -5104,15 +3883,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutAccessPointPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         name: "AccessPointName", # required
-    #         policy: "Policy", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID for owner of the bucket
     #   associated with the specified access point.
@@ -5157,67 +3927,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutBucketLifecycleConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         bucket: "BucketName", # required
-    #         lifecycle_configuration: {
-    #           rules: [
-    #             {
-    #               expiration: {
-    #                 date: Time.now,
-    #                 days: 1,
-    #                 expired_object_delete_marker: false,
-    #               },
-    #               id: "ID",
-    #               filter: {
-    #                 prefix: "Prefix",
-    #                 tag: {
-    #                   key: "TagKeyString", # required
-    #                   value: "TagValueString", # required
-    #                 },
-    #                 and: {
-    #                   prefix: "Prefix",
-    #                   tags: [
-    #                     {
-    #                       key: "TagKeyString", # required
-    #                       value: "TagValueString", # required
-    #                     },
-    #                   ],
-    #                   object_size_greater_than: 1,
-    #                   object_size_less_than: 1,
-    #                 },
-    #                 object_size_greater_than: 1,
-    #                 object_size_less_than: 1,
-    #               },
-    #               status: "Enabled", # required, accepts Enabled, Disabled
-    #               transitions: [
-    #                 {
-    #                   date: Time.now,
-    #                   days: 1,
-    #                   storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
-    #                 },
-    #               ],
-    #               noncurrent_version_transitions: [
-    #                 {
-    #                   noncurrent_days: 1,
-    #                   storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
-    #                 },
-    #               ],
-    #               noncurrent_version_expiration: {
-    #                 noncurrent_days: 1,
-    #                 newer_noncurrent_versions: 1,
-    #               },
-    #               abort_incomplete_multipart_upload: {
-    #                 days_after_initiation: 1,
-    #               },
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID of the Outposts bucket.
     #   @return [String]
@@ -5240,16 +3949,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutBucketPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         bucket: "BucketName", # required
-    #         confirm_remove_self_bucket_access: false,
-    #         policy: "Policy", # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID of the Outposts bucket.
     #   @return [String]
@@ -5295,22 +3994,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutBucketTaggingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         bucket: "BucketName", # required
-    #         tagging: { # required
-    #           tag_set: [ # required
-    #             {
-    #               key: "TagKeyString", # required
-    #               value: "TagValueString", # required
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID of the Outposts bucket.
     #   @return [String]
@@ -5345,19 +4028,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutBucketVersioningRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         bucket: "BucketName", # required
-    #         mfa: "MFA",
-    #         versioning_configuration: { # required
-    #           mfa_delete: "Enabled", # accepts Enabled, Disabled
-    #           status: "Enabled", # accepts Enabled, Suspended
-    #         },
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID of the S3 on Outposts bucket.
     #   @return [String]
@@ -5387,20 +4057,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutJobTaggingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         job_id: "JobId", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKeyString", # required
-    #             value: "TagValueString", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID associated with the S3 Batch
     #   Operations job.
@@ -5436,14 +4092,6 @@ module Aws::S3Control
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutMultiRegionAccessPoint.html
     #
-    # @note When making an API call, you may pass PutMultiRegionAccessPointPolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "MultiRegionAccessPointName", # required
-    #         policy: "Policy", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the Multi-Region Access Point associated with the
     #   request.
@@ -5462,18 +4110,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutMultiRegionAccessPointPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         client_token: "MultiRegionAccessPointClientToken", # required
-    #         details: { # required
-    #           name: "MultiRegionAccessPointName", # required
-    #           policy: "Policy", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID for the owner of the Multi-Region
     #   Access Point.
@@ -5520,19 +4156,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutPublicAccessBlockRequest
-    #   data as a hash:
-    #
-    #       {
-    #         public_access_block_configuration: { # required
-    #           block_public_acls: false,
-    #           ignore_public_acls: false,
-    #           block_public_policy: false,
-    #           restrict_public_buckets: false,
-    #         },
-    #         account_id: "AccountId",
-    #       }
-    #
     # @!attribute [rw] public_access_block_configuration
     #   The `PublicAccessBlock` configuration that you want to apply to the
     #   specified Amazon Web Services account.
@@ -5552,93 +4175,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutStorageLensConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         config_id: "ConfigId", # required
-    #         account_id: "AccountId",
-    #         storage_lens_configuration: { # required
-    #           id: "ConfigId", # required
-    #           account_level: { # required
-    #             activity_metrics: {
-    #               is_enabled: false,
-    #             },
-    #             bucket_level: { # required
-    #               activity_metrics: {
-    #                 is_enabled: false,
-    #               },
-    #               prefix_level: {
-    #                 storage_metrics: { # required
-    #                   is_enabled: false,
-    #                   selection_criteria: {
-    #                     delimiter: "StorageLensPrefixLevelDelimiter",
-    #                     max_depth: 1,
-    #                     min_storage_bytes_percentage: 1.0,
-    #                   },
-    #                 },
-    #               },
-    #               advanced_cost_optimization_metrics: {
-    #                 is_enabled: false,
-    #               },
-    #               advanced_data_protection_metrics: {
-    #                 is_enabled: false,
-    #               },
-    #               detailed_status_codes_metrics: {
-    #                 is_enabled: false,
-    #               },
-    #             },
-    #             advanced_cost_optimization_metrics: {
-    #               is_enabled: false,
-    #             },
-    #             advanced_data_protection_metrics: {
-    #               is_enabled: false,
-    #             },
-    #             detailed_status_codes_metrics: {
-    #               is_enabled: false,
-    #             },
-    #           },
-    #           include: {
-    #             buckets: ["S3BucketArnString"],
-    #             regions: ["S3AWSRegion"],
-    #           },
-    #           exclude: {
-    #             buckets: ["S3BucketArnString"],
-    #             regions: ["S3AWSRegion"],
-    #           },
-    #           data_export: {
-    #             s3_bucket_destination: {
-    #               format: "CSV", # required, accepts CSV, Parquet
-    #               output_schema_version: "V_1", # required, accepts V_1
-    #               account_id: "AccountId", # required
-    #               arn: "S3BucketArnString", # required
-    #               prefix: "Prefix",
-    #               encryption: {
-    #                 sses3: {
-    #                 },
-    #                 ssekms: {
-    #                   key_id: "SSEKMSKeyId", # required
-    #                 },
-    #               },
-    #             },
-    #             cloud_watch_metrics: {
-    #               is_enabled: false, # required
-    #             },
-    #           },
-    #           is_enabled: false, # required
-    #           aws_org: {
-    #             arn: "AwsOrgArn", # required
-    #           },
-    #           storage_lens_arn: "StorageLensArn",
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKeyString", # required
-    #             value: "TagValueString", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] config_id
     #   The ID of the S3 Storage Lens configuration.
     #   @return [String]
@@ -5670,20 +4206,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutStorageLensConfigurationTaggingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         config_id: "ConfigId", # required
-    #         account_id: "AccountId",
-    #         tags: [ # required
-    #           {
-    #             key: "TagKeyString", # required
-    #             value: "TagValueString", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] config_id
     #   The ID of the S3 Storage Lens configuration.
     #   @return [String]
@@ -5716,13 +4238,6 @@ module Aws::S3Control
 
     # A Region that supports a Multi-Region Access Point as well as the
     # associated bucket for the Region.
-    #
-    # @note When making an API call, you may pass Region
-    #   data as a hash:
-    #
-    #       {
-    #         bucket: "BucketName", # required
-    #       }
     #
     # @!attribute [rw] bucket
     #   The name of the associated bucket for the Region.
@@ -5788,26 +4303,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass S3AccessControlList
-    #   data as a hash:
-    #
-    #       {
-    #         owner: { # required
-    #           id: "NonEmptyMaxLength1024String",
-    #           display_name: "NonEmptyMaxLength1024String",
-    #         },
-    #         grants: [
-    #           {
-    #             grantee: {
-    #               type_identifier: "id", # accepts id, emailAddress, uri
-    #               identifier: "NonEmptyMaxLength1024String",
-    #               display_name: "NonEmptyMaxLength1024String",
-    #             },
-    #             permission: "FULL_CONTROL", # accepts FULL_CONTROL, READ, WRITE, READ_ACP, WRITE_ACP
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] owner
     #   @return [Types::S3ObjectOwner]
     #
@@ -5823,29 +4318,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass S3AccessControlPolicy
-    #   data as a hash:
-    #
-    #       {
-    #         access_control_list: {
-    #           owner: { # required
-    #             id: "NonEmptyMaxLength1024String",
-    #             display_name: "NonEmptyMaxLength1024String",
-    #           },
-    #           grants: [
-    #             {
-    #               grantee: {
-    #                 type_identifier: "id", # accepts id, emailAddress, uri
-    #                 identifier: "NonEmptyMaxLength1024String",
-    #                 display_name: "NonEmptyMaxLength1024String",
-    #               },
-    #               permission: "FULL_CONTROL", # accepts FULL_CONTROL, READ, WRITE, READ_ACP, WRITE_ACP
-    #             },
-    #           ],
-    #         },
-    #         canned_access_control_list: "private", # accepts private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, bucket-owner-full-control
-    #       }
-    #
     # @!attribute [rw] access_control_list
     #   @return [Types::S3AccessControlList]
     #
@@ -5863,24 +4335,6 @@ module Aws::S3Control
 
     # A container for the bucket where the Amazon S3 Storage Lens metrics
     # export files are located.
-    #
-    # @note When making an API call, you may pass S3BucketDestination
-    #   data as a hash:
-    #
-    #       {
-    #         format: "CSV", # required, accepts CSV, Parquet
-    #         output_schema_version: "V_1", # required, accepts V_1
-    #         account_id: "AccountId", # required
-    #         arn: "S3BucketArnString", # required
-    #         prefix: "Prefix",
-    #         encryption: {
-    #           sses3: {
-    #           },
-    #           ssekms: {
-    #             key_id: "SSEKMSKeyId", # required
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] format
     #   @return [String]
@@ -5932,58 +4386,6 @@ module Aws::S3Control
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html
-    #
-    # @note When making an API call, you may pass S3CopyObjectOperation
-    #   data as a hash:
-    #
-    #       {
-    #         target_resource: "S3BucketArnString",
-    #         canned_access_control_list: "private", # accepts private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, bucket-owner-full-control
-    #         access_control_grants: [
-    #           {
-    #             grantee: {
-    #               type_identifier: "id", # accepts id, emailAddress, uri
-    #               identifier: "NonEmptyMaxLength1024String",
-    #               display_name: "NonEmptyMaxLength1024String",
-    #             },
-    #             permission: "FULL_CONTROL", # accepts FULL_CONTROL, READ, WRITE, READ_ACP, WRITE_ACP
-    #           },
-    #         ],
-    #         metadata_directive: "COPY", # accepts COPY, REPLACE
-    #         modified_since_constraint: Time.now,
-    #         new_object_metadata: {
-    #           cache_control: "NonEmptyMaxLength1024String",
-    #           content_disposition: "NonEmptyMaxLength1024String",
-    #           content_encoding: "NonEmptyMaxLength1024String",
-    #           content_language: "NonEmptyMaxLength1024String",
-    #           user_metadata: {
-    #             "NonEmptyMaxLength1024String" => "MaxLength1024String",
-    #           },
-    #           content_length: 1,
-    #           content_md5: "NonEmptyMaxLength1024String",
-    #           content_type: "NonEmptyMaxLength1024String",
-    #           http_expires_date: Time.now,
-    #           requester_charged: false,
-    #           sse_algorithm: "AES256", # accepts AES256, KMS
-    #         },
-    #         new_object_tagging: [
-    #           {
-    #             key: "TagKeyString", # required
-    #             value: "TagValueString", # required
-    #           },
-    #         ],
-    #         redirect_location: "NonEmptyMaxLength2048String",
-    #         requester_pays: false,
-    #         storage_class: "STANDARD", # accepts STANDARD, STANDARD_IA, ONEZONE_IA, GLACIER, INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR
-    #         un_modified_since_constraint: Time.now,
-    #         sse_aws_kms_key_id: "KmsKeyArnString",
-    #         target_key_prefix: "NonEmptyMaxLength1024String",
-    #         object_lock_legal_hold_status: "OFF", # accepts OFF, ON
-    #         object_lock_mode: "COMPLIANCE", # accepts COMPLIANCE, GOVERNANCE
-    #         object_lock_retain_until_date: Time.now,
-    #         bucket_key_enabled: false,
-    #         checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256
-    #       }
     #
     # @!attribute [rw] target_resource
     #   Specifies the destination bucket ARN for the batch copy operation.
@@ -6103,8 +4505,6 @@ module Aws::S3Control
     # API only accepts the bucket name and key name as parameters, which are
     # defined in the job's manifest.
     #
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3DeleteObjectTaggingOperation AWS API Documentation
     #
     class S3DeleteObjectTaggingOperation < Aws::EmptyStructure; end
@@ -6130,18 +4530,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass S3Grant
-    #   data as a hash:
-    #
-    #       {
-    #         grantee: {
-    #           type_identifier: "id", # accepts id, emailAddress, uri
-    #           identifier: "NonEmptyMaxLength1024String",
-    #           display_name: "NonEmptyMaxLength1024String",
-    #         },
-    #         permission: "FULL_CONTROL", # accepts FULL_CONTROL, READ, WRITE, READ_ACP, WRITE_ACP
-    #       }
-    #
     # @!attribute [rw] grantee
     #   @return [Types::S3Grantee]
     #
@@ -6157,15 +4545,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass S3Grantee
-    #   data as a hash:
-    #
-    #       {
-    #         type_identifier: "id", # accepts id, emailAddress, uri
-    #         identifier: "NonEmptyMaxLength1024String",
-    #         display_name: "NonEmptyMaxLength1024String",
-    #       }
-    #
     # @!attribute [rw] type_identifier
     #   @return [String]
     #
@@ -6193,14 +4572,6 @@ module Aws::S3Control
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOSTrestore.html#RESTObjectPOSTrestore-restore-request
-    #
-    # @note When making an API call, you may pass S3InitiateRestoreObjectOperation
-    #   data as a hash:
-    #
-    #       {
-    #         expiration_in_days: 1,
-    #         glacier_job_tier: "BULK", # accepts BULK, STANDARD
-    #       }
     #
     # @!attribute [rw] expiration_in_days
     #   This argument specifies how long the S3 Glacier or S3 Glacier Deep
@@ -6238,34 +4609,6 @@ module Aws::S3Control
     end
 
     # The container for the service that will create the S3 manifest.
-    #
-    # @note When making an API call, you may pass S3JobManifestGenerator
-    #   data as a hash:
-    #
-    #       {
-    #         expected_bucket_owner: "AccountId",
-    #         source_bucket: "S3BucketArnString", # required
-    #         manifest_output_location: {
-    #           expected_manifest_bucket_owner: "AccountId",
-    #           bucket: "S3BucketArnString", # required
-    #           manifest_prefix: "ManifestPrefixString",
-    #           manifest_encryption: {
-    #             sses3: {
-    #             },
-    #             ssekms: {
-    #               key_id: "KmsKeyArnString", # required
-    #             },
-    #           },
-    #           manifest_format: "S3InventoryReport_CSV_20211130", # required, accepts S3InventoryReport_CSV_20211130
-    #         },
-    #         filter: {
-    #           eligible_for_replication: false,
-    #           created_after: Time.now,
-    #           created_before: Time.now,
-    #           object_replication_statuses: ["COMPLETED"], # accepts COMPLETED, FAILED, REPLICA, NONE
-    #         },
-    #         enable_manifest_output: false, # required
-    #       }
     #
     # @!attribute [rw] expected_bucket_owner
     #   The Amazon Web Services account ID that owns the bucket the
@@ -6307,23 +4650,6 @@ module Aws::S3Control
 
     # Location details for where the generated manifest should be written.
     #
-    # @note When making an API call, you may pass S3ManifestOutputLocation
-    #   data as a hash:
-    #
-    #       {
-    #         expected_manifest_bucket_owner: "AccountId",
-    #         bucket: "S3BucketArnString", # required
-    #         manifest_prefix: "ManifestPrefixString",
-    #         manifest_encryption: {
-    #           sses3: {
-    #           },
-    #           ssekms: {
-    #             key_id: "KmsKeyArnString", # required
-    #           },
-    #         },
-    #         manifest_format: "S3InventoryReport_CSV_20211130", # required, accepts S3InventoryReport_CSV_20211130
-    #       }
-    #
     # @!attribute [rw] expected_manifest_bucket_owner
     #   The Account ID that owns the bucket the generated manifest is
     #   written to.
@@ -6362,13 +4688,6 @@ module Aws::S3Control
     # Whether S3 Object Lock legal hold will be applied to objects in an S3
     # Batch Operations job.
     #
-    # @note When making an API call, you may pass S3ObjectLockLegalHold
-    #   data as a hash:
-    #
-    #       {
-    #         status: "OFF", # required, accepts OFF, ON
-    #       }
-    #
     # @!attribute [rw] status
     #   The Object Lock legal hold status to be applied to all objects in
     #   the Batch Operations job.
@@ -6382,25 +4701,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass S3ObjectMetadata
-    #   data as a hash:
-    #
-    #       {
-    #         cache_control: "NonEmptyMaxLength1024String",
-    #         content_disposition: "NonEmptyMaxLength1024String",
-    #         content_encoding: "NonEmptyMaxLength1024String",
-    #         content_language: "NonEmptyMaxLength1024String",
-    #         user_metadata: {
-    #           "NonEmptyMaxLength1024String" => "MaxLength1024String",
-    #         },
-    #         content_length: 1,
-    #         content_md5: "NonEmptyMaxLength1024String",
-    #         content_type: "NonEmptyMaxLength1024String",
-    #         http_expires_date: Time.now,
-    #         requester_charged: false,
-    #         sse_algorithm: "AES256", # accepts AES256, KMS
-    #       }
-    #
     # @!attribute [rw] cache_control
     #   @return [String]
     #
@@ -6452,14 +4752,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass S3ObjectOwner
-    #   data as a hash:
-    #
-    #       {
-    #         id: "NonEmptyMaxLength1024String",
-    #         display_name: "NonEmptyMaxLength1024String",
-    #       }
-    #
     # @!attribute [rw] id
     #   @return [String]
     #
@@ -6478,8 +4770,6 @@ module Aws::S3Control
     # Directs the specified job to invoke `ReplicateObject` on every object
     # in the job's manifest.
     #
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3ReplicateObjectOperation AWS API Documentation
     #
     class S3ReplicateObjectOperation < Aws::EmptyStructure; end
@@ -6494,14 +4784,6 @@ module Aws::S3Control
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-retention-date.html
-    #
-    # @note When making an API call, you may pass S3Retention
-    #   data as a hash:
-    #
-    #       {
-    #         retain_until_date: Time.now,
-    #         mode: "COMPLIANCE", # accepts COMPLIANCE, GOVERNANCE
-    #       }
     #
     # @!attribute [rw] retain_until_date
     #   The date when the applied Object Lock retention will expire on all
@@ -6531,31 +4813,6 @@ module Aws::S3Control
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTacl.html
     #
-    # @note When making an API call, you may pass S3SetObjectAclOperation
-    #   data as a hash:
-    #
-    #       {
-    #         access_control_policy: {
-    #           access_control_list: {
-    #             owner: { # required
-    #               id: "NonEmptyMaxLength1024String",
-    #               display_name: "NonEmptyMaxLength1024String",
-    #             },
-    #             grants: [
-    #               {
-    #                 grantee: {
-    #                   type_identifier: "id", # accepts id, emailAddress, uri
-    #                   identifier: "NonEmptyMaxLength1024String",
-    #                   display_name: "NonEmptyMaxLength1024String",
-    #                 },
-    #                 permission: "FULL_CONTROL", # accepts FULL_CONTROL, READ, WRITE, READ_ACP, WRITE_ACP
-    #               },
-    #             ],
-    #           },
-    #           canned_access_control_list: "private", # accepts private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, bucket-owner-full-control
-    #         },
-    #       }
-    #
     # @!attribute [rw] access_control_policy
     #   @return [Types::S3AccessControlPolicy]
     #
@@ -6576,15 +4833,6 @@ module Aws::S3Control
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-legal-hold.html
-    #
-    # @note When making an API call, you may pass S3SetObjectLegalHoldOperation
-    #   data as a hash:
-    #
-    #       {
-    #         legal_hold: { # required
-    #           status: "OFF", # required, accepts OFF, ON
-    #         },
-    #       }
     #
     # @!attribute [rw] legal_hold
     #   Contains the Object Lock legal hold status to be applied to all
@@ -6608,17 +4856,6 @@ module Aws::S3Control
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-retention-date.html
-    #
-    # @note When making an API call, you may pass S3SetObjectRetentionOperation
-    #   data as a hash:
-    #
-    #       {
-    #         bypass_governance_retention: false,
-    #         retention: { # required
-    #           retain_until_date: Time.now,
-    #           mode: "COMPLIANCE", # accepts COMPLIANCE, GOVERNANCE
-    #         },
-    #       }
     #
     # @!attribute [rw] bypass_governance_retention
     #   Indicates if the action should be applied to objects in the Batch
@@ -6655,18 +4892,6 @@ module Aws::S3Control
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTtagging.html
     #
-    # @note When making an API call, you may pass S3SetObjectTaggingOperation
-    #   data as a hash:
-    #
-    #       {
-    #         tag_set: [
-    #           {
-    #             key: "TagKeyString", # required
-    #             value: "TagValueString", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] tag_set
     #   @return [Array<Types::S3Tag>]
     #
@@ -6679,14 +4904,6 @@ module Aws::S3Control
     end
 
     # A container for a key-value name pair.
-    #
-    # @note When making an API call, you may pass S3Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKeyString", # required
-    #         value: "TagValueString", # required
-    #       }
     #
     # @!attribute [rw] key
     #   Key of the tag
@@ -6705,13 +4922,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SSEKMS
-    #   data as a hash:
-    #
-    #       {
-    #         key_id: "SSEKMSKeyId", # required
-    #       }
-    #
     # @!attribute [rw] key_id
     #   A container for the ARN of the SSE-KMS encryption. This property is
     #   read-only and follows the following format: `
@@ -6730,13 +4940,6 @@ module Aws::S3Control
     # Configuration for the use of SSE-KMS to encrypt generated manifest
     # objects.
     #
-    # @note When making an API call, you may pass SSEKMSEncryption
-    #   data as a hash:
-    #
-    #       {
-    #         key_id: "KmsKeyArnString", # required
-    #       }
-    #
     # @!attribute [rw] key_id
     #   Specifies the ID of the Amazon Web Services Key Management Service
     #   (Amazon Web Services KMS) symmetric encryption customer managed key
@@ -6751,8 +4954,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/SSES3 AWS API Documentation
     #
     class SSES3 < Aws::EmptyStructure; end
@@ -6760,21 +4961,10 @@ module Aws::S3Control
     # Configuration for the use of SSE-S3 to encrypt generated manifest
     # objects.
     #
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/SSES3Encryption AWS API Documentation
     #
     class SSES3Encryption < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass SelectionCriteria
-    #   data as a hash:
-    #
-    #       {
-    #         delimiter: "StorageLensPrefixLevelDelimiter",
-    #         max_depth: 1,
-    #         min_storage_bytes_percentage: 1.0,
-    #       }
-    #
     # @!attribute [rw] delimiter
     #   A container for the delimiter of the selection criteria being used.
     #   @return [String]
@@ -6804,13 +4994,6 @@ module Aws::S3Control
 
     # The Amazon Web Services organization for your S3 Storage Lens.
     #
-    # @note When making an API call, you may pass StorageLensAwsOrg
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "AwsOrgArn", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   A container for the Amazon Resource Name (ARN) of the Amazon Web
     #   Services organization. This property is read-only and follows the
@@ -6828,83 +5011,6 @@ module Aws::S3Control
     end
 
     # A container for the Amazon S3 Storage Lens configuration.
-    #
-    # @note When making an API call, you may pass StorageLensConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ConfigId", # required
-    #         account_level: { # required
-    #           activity_metrics: {
-    #             is_enabled: false,
-    #           },
-    #           bucket_level: { # required
-    #             activity_metrics: {
-    #               is_enabled: false,
-    #             },
-    #             prefix_level: {
-    #               storage_metrics: { # required
-    #                 is_enabled: false,
-    #                 selection_criteria: {
-    #                   delimiter: "StorageLensPrefixLevelDelimiter",
-    #                   max_depth: 1,
-    #                   min_storage_bytes_percentage: 1.0,
-    #                 },
-    #               },
-    #             },
-    #             advanced_cost_optimization_metrics: {
-    #               is_enabled: false,
-    #             },
-    #             advanced_data_protection_metrics: {
-    #               is_enabled: false,
-    #             },
-    #             detailed_status_codes_metrics: {
-    #               is_enabled: false,
-    #             },
-    #           },
-    #           advanced_cost_optimization_metrics: {
-    #             is_enabled: false,
-    #           },
-    #           advanced_data_protection_metrics: {
-    #             is_enabled: false,
-    #           },
-    #           detailed_status_codes_metrics: {
-    #             is_enabled: false,
-    #           },
-    #         },
-    #         include: {
-    #           buckets: ["S3BucketArnString"],
-    #           regions: ["S3AWSRegion"],
-    #         },
-    #         exclude: {
-    #           buckets: ["S3BucketArnString"],
-    #           regions: ["S3AWSRegion"],
-    #         },
-    #         data_export: {
-    #           s3_bucket_destination: {
-    #             format: "CSV", # required, accepts CSV, Parquet
-    #             output_schema_version: "V_1", # required, accepts V_1
-    #             account_id: "AccountId", # required
-    #             arn: "S3BucketArnString", # required
-    #             prefix: "Prefix",
-    #             encryption: {
-    #               sses3: {
-    #               },
-    #               ssekms: {
-    #                 key_id: "SSEKMSKeyId", # required
-    #               },
-    #             },
-    #           },
-    #           cloud_watch_metrics: {
-    #             is_enabled: false, # required
-    #           },
-    #         },
-    #         is_enabled: false, # required
-    #         aws_org: {
-    #           arn: "AwsOrgArn", # required
-    #         },
-    #         storage_lens_arn: "StorageLensArn",
-    #       }
     #
     # @!attribute [rw] id
     #   A container for the Amazon S3 Storage Lens configuration ID.
@@ -6967,29 +5073,6 @@ module Aws::S3Control
     # A container to specify the properties of your S3 Storage Lens metrics
     # export, including the destination, schema, and format.
     #
-    # @note When making an API call, you may pass StorageLensDataExport
-    #   data as a hash:
-    #
-    #       {
-    #         s3_bucket_destination: {
-    #           format: "CSV", # required, accepts CSV, Parquet
-    #           output_schema_version: "V_1", # required, accepts V_1
-    #           account_id: "AccountId", # required
-    #           arn: "S3BucketArnString", # required
-    #           prefix: "Prefix",
-    #           encryption: {
-    #             sses3: {
-    #             },
-    #             ssekms: {
-    #               key_id: "SSEKMSKeyId", # required
-    #             },
-    #           },
-    #         },
-    #         cloud_watch_metrics: {
-    #           is_enabled: false, # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] s3_bucket_destination
     #   A container for the bucket where the S3 Storage Lens metrics export
     #   will be located.
@@ -7016,17 +5099,6 @@ module Aws::S3Control
 
     # A container for the encryption of the S3 Storage Lens metrics exports.
     #
-    # @note When making an API call, you may pass StorageLensDataExportEncryption
-    #   data as a hash:
-    #
-    #       {
-    #         sses3: {
-    #         },
-    #         ssekms: {
-    #           key_id: "SSEKMSKeyId", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] sses3
     #   @return [Types::SSES3]
     #
@@ -7042,14 +5114,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StorageLensTag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKeyString", # required
-    #         value: "TagValueString", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   @return [String]
     #
@@ -7065,21 +5129,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SubmitMultiRegionAccessPointRoutesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         mrap: "MultiRegionAccessPointId", # required
-    #         route_updates: [ # required
-    #           {
-    #             bucket: "BucketName",
-    #             region: "RegionName",
-    #             traffic_dial_percentage: 1, # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID for the owner of the Multi-Region
     #   Access Point.
@@ -7109,18 +5158,6 @@ module Aws::S3Control
     #
     class SubmitMultiRegionAccessPointRoutesResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass Tagging
-    #   data as a hash:
-    #
-    #       {
-    #         tag_set: [ # required
-    #           {
-    #             key: "TagKeyString", # required
-    #             value: "TagValueString", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] tag_set
     #   A collection for a set of tags.
     #   @return [Array<Types::S3Tag>]
@@ -7167,15 +5204,6 @@ module Aws::S3Control
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/lifecycle-transition-general-considerations.html
     #
-    # @note When making an API call, you may pass Transition
-    #   data as a hash:
-    #
-    #       {
-    #         date: Time.now,
-    #         days: 1,
-    #         storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
-    #       }
-    #
     # @!attribute [rw] date
     #   Indicates when objects are transitioned to the specified storage
     #   class. The date value must be in ISO 8601 format. The time is always
@@ -7202,15 +5230,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateJobPriorityRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         job_id: "JobId", # required
-    #         priority: 1, # required
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID associated with the S3 Batch
     #   Operations job.
@@ -7251,16 +5270,6 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateJobStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         job_id: "JobId", # required
-    #         requested_job_status: "Cancelled", # required, accepts Cancelled, Ready
-    #         status_update_reason: "JobStatusUpdateReason",
-    #       }
-    #
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID associated with the S3 Batch
     #   Operations job.
@@ -7320,14 +5329,6 @@ module Aws::S3Control
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketVersioning.html
     #
-    # @note When making an API call, you may pass VersioningConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         mfa_delete: "Enabled", # accepts Enabled, Disabled
-    #         status: "Enabled", # accepts Enabled, Suspended
-    #       }
-    #
     # @!attribute [rw] mfa_delete
     #   Specifies whether MFA delete is enabled or disabled in the bucket
     #   versioning configuration for the S3 on Outposts bucket.
@@ -7347,13 +5348,6 @@ module Aws::S3Control
     end
 
     # The virtual private cloud (VPC) configuration for an access point.
-    #
-    # @note When making an API call, you may pass VpcConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         vpc_id: "VpcId", # required
-    #       }
     #
     # @!attribute [rw] vpc_id
     #   If this field is specified, this access point will only allow

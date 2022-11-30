@@ -12,15 +12,6 @@ module Aws::ConfigService
 
     # A collection of accounts and regions.
     #
-    # @note When making an API call, you may pass AccountAggregationSource
-    #   data as a hash:
-    #
-    #       {
-    #         account_ids: ["AccountId"], # required
-    #         all_aws_regions: false,
-    #         aws_regions: ["String"],
-    #       }
-    #
     # @!attribute [rw] account_ids
     #   The 12-digit account ID of the account being aggregated.
     #   @return [Array<String>]
@@ -206,16 +197,6 @@ module Aws::ConfigService
     # Filters the conformance packs based on an account ID, region,
     # compliance type, and the name of the conformance pack.
     #
-    # @note When making an API call, you may pass AggregateConformancePackComplianceFilters
-    #   data as a hash:
-    #
-    #       {
-    #         conformance_pack_name: "ConformancePackName",
-    #         compliance_type: "COMPLIANT", # accepts COMPLIANT, NON_COMPLIANT, INSUFFICIENT_DATA
-    #         account_id: "AccountId",
-    #         aws_region: "AwsRegion",
-    #       }
-    #
     # @!attribute [rw] conformance_pack_name
     #   The name of the conformance pack.
     #   @return [String]
@@ -265,14 +246,6 @@ module Aws::ConfigService
     end
 
     # Filters the results based on account ID and region.
-    #
-    # @note When making an API call, you may pass AggregateConformancePackComplianceSummaryFilters
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         aws_region: "AwsRegion",
-    #       }
     #
     # @!attribute [rw] account_id
     #   The 12-digit Amazon Web Services account ID of the source account.
@@ -348,17 +321,6 @@ module Aws::ConfigService
     # The details that identify a resource that is collected by Config
     # aggregator, including the resource type, ID, (if available) the custom
     # resource name, the source account, and source region.
-    #
-    # @note When making an API call, you may pass AggregateResourceIdentifier
-    #   data as a hash:
-    #
-    #       {
-    #         source_account_id: "AccountId", # required
-    #         source_region: "AwsRegion", # required
-    #         resource_id: "ResourceId", # required
-    #         resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::EC2::RegisteredHAInstance, AWS::EC2::NatGateway, AWS::EC2::EgressOnlyInternetGateway, AWS::EC2::VPCEndpoint, AWS::EC2::VPCEndpointService, AWS::EC2::FlowLog, AWS::EC2::VPCPeeringConnection, AWS::Elasticsearch::Domain, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::DBCluster, AWS::RDS::DBClusterSnapshot, AWS::RDS::EventSubscription, AWS::S3::Bucket, AWS::S3::AccountPublicAccessBlock, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::SSM::ManagedInstanceInventory, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::ElasticLoadBalancing::LoadBalancer, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::DynamoDB::Table, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::RuleGroup, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::RuleGroup, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::Lambda::Function, AWS::NetworkFirewall::Firewall, AWS::NetworkFirewall::FirewallPolicy, AWS::NetworkFirewall::RuleGroup, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::WAFv2::WebACL, AWS::WAFv2::RuleGroup, AWS::WAFv2::IPSet, AWS::WAFv2::RegexPatternSet, AWS::WAFv2::ManagedRuleSet, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ConformancePackCompliance, AWS::Config::ResourceCompliance, AWS::ApiGateway::Stage, AWS::ApiGateway::RestApi, AWS::ApiGatewayV2::Stage, AWS::ApiGatewayV2::Api, AWS::CodePipeline::Pipeline, AWS::ServiceCatalog::CloudFormationProvisionedProduct, AWS::ServiceCatalog::CloudFormationProduct, AWS::ServiceCatalog::Portfolio, AWS::SQS::Queue, AWS::KMS::Key, AWS::QLDB::Ledger, AWS::SecretsManager::Secret, AWS::SNS::Topic, AWS::SSM::FileData, AWS::Backup::BackupPlan, AWS::Backup::BackupSelection, AWS::Backup::BackupVault, AWS::Backup::RecoveryPoint, AWS::ECR::Repository, AWS::ECS::Cluster, AWS::ECS::Service, AWS::ECS::TaskDefinition, AWS::EFS::AccessPoint, AWS::EFS::FileSystem, AWS::EKS::Cluster, AWS::OpenSearch::Domain, AWS::EC2::TransitGateway, AWS::Kinesis::Stream, AWS::Kinesis::StreamConsumer, AWS::CodeDeploy::Application, AWS::CodeDeploy::DeploymentConfig, AWS::CodeDeploy::DeploymentGroup, AWS::EC2::LaunchTemplate, AWS::ECR::PublicRepository, AWS::GuardDuty::Detector, AWS::EMR::SecurityConfiguration, AWS::SageMaker::CodeRepository, AWS::Route53Resolver::ResolverEndpoint, AWS::Route53Resolver::ResolverRule, AWS::Route53Resolver::ResolverRuleAssociation, AWS::DMS::ReplicationSubnetGroup, AWS::DMS::EventSubscription, AWS::MSK::Cluster, AWS::StepFunctions::Activity, AWS::WorkSpaces::Workspace, AWS::WorkSpaces::ConnectionAlias, AWS::SageMaker::Model, AWS::ElasticLoadBalancingV2::Listener, AWS::StepFunctions::StateMachine, AWS::Batch::JobQueue, AWS::Batch::ComputeEnvironment, AWS::AccessAnalyzer::Analyzer, AWS::Athena::WorkGroup, AWS::Athena::DataCatalog, AWS::Detective::Graph, AWS::GlobalAccelerator::Accelerator, AWS::GlobalAccelerator::EndpointGroup, AWS::GlobalAccelerator::Listener, AWS::EC2::TransitGatewayAttachment, AWS::EC2::TransitGatewayRouteTable, AWS::DMS::Certificate, AWS::AppConfig::Application, AWS::AppSync::GraphQLApi, AWS::DataSync::LocationSMB, AWS::DataSync::LocationFSxLustre, AWS::DataSync::LocationS3, AWS::DataSync::LocationEFS, AWS::DataSync::Task, AWS::DataSync::LocationNFS, AWS::EC2::NetworkInsightsAccessScopeAnalysis, AWS::EKS::FargateProfile, AWS::Glue::Job, AWS::GuardDuty::ThreatIntelSet, AWS::GuardDuty::IPSet, AWS::SageMaker::Workteam, AWS::SageMaker::NotebookInstanceLifecycleConfig, AWS::ServiceDiscovery::Service, AWS::ServiceDiscovery::PublicDnsNamespace, AWS::SES::ContactList, AWS::SES::ConfigurationSet, AWS::Route53::HostedZone
-    #         resource_name: "ResourceName",
-    #       }
     #
     # @!attribute [rw] source_account_id
     #   The 12-digit account ID of the source account.
@@ -575,22 +537,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchGetAggregateResourceConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_aggregator_name: "ConfigurationAggregatorName", # required
-    #         resource_identifiers: [ # required
-    #           {
-    #             source_account_id: "AccountId", # required
-    #             source_region: "AwsRegion", # required
-    #             resource_id: "ResourceId", # required
-    #             resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::EC2::RegisteredHAInstance, AWS::EC2::NatGateway, AWS::EC2::EgressOnlyInternetGateway, AWS::EC2::VPCEndpoint, AWS::EC2::VPCEndpointService, AWS::EC2::FlowLog, AWS::EC2::VPCPeeringConnection, AWS::Elasticsearch::Domain, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::DBCluster, AWS::RDS::DBClusterSnapshot, AWS::RDS::EventSubscription, AWS::S3::Bucket, AWS::S3::AccountPublicAccessBlock, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::SSM::ManagedInstanceInventory, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::ElasticLoadBalancing::LoadBalancer, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::DynamoDB::Table, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::RuleGroup, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::RuleGroup, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::Lambda::Function, AWS::NetworkFirewall::Firewall, AWS::NetworkFirewall::FirewallPolicy, AWS::NetworkFirewall::RuleGroup, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::WAFv2::WebACL, AWS::WAFv2::RuleGroup, AWS::WAFv2::IPSet, AWS::WAFv2::RegexPatternSet, AWS::WAFv2::ManagedRuleSet, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ConformancePackCompliance, AWS::Config::ResourceCompliance, AWS::ApiGateway::Stage, AWS::ApiGateway::RestApi, AWS::ApiGatewayV2::Stage, AWS::ApiGatewayV2::Api, AWS::CodePipeline::Pipeline, AWS::ServiceCatalog::CloudFormationProvisionedProduct, AWS::ServiceCatalog::CloudFormationProduct, AWS::ServiceCatalog::Portfolio, AWS::SQS::Queue, AWS::KMS::Key, AWS::QLDB::Ledger, AWS::SecretsManager::Secret, AWS::SNS::Topic, AWS::SSM::FileData, AWS::Backup::BackupPlan, AWS::Backup::BackupSelection, AWS::Backup::BackupVault, AWS::Backup::RecoveryPoint, AWS::ECR::Repository, AWS::ECS::Cluster, AWS::ECS::Service, AWS::ECS::TaskDefinition, AWS::EFS::AccessPoint, AWS::EFS::FileSystem, AWS::EKS::Cluster, AWS::OpenSearch::Domain, AWS::EC2::TransitGateway, AWS::Kinesis::Stream, AWS::Kinesis::StreamConsumer, AWS::CodeDeploy::Application, AWS::CodeDeploy::DeploymentConfig, AWS::CodeDeploy::DeploymentGroup, AWS::EC2::LaunchTemplate, AWS::ECR::PublicRepository, AWS::GuardDuty::Detector, AWS::EMR::SecurityConfiguration, AWS::SageMaker::CodeRepository, AWS::Route53Resolver::ResolverEndpoint, AWS::Route53Resolver::ResolverRule, AWS::Route53Resolver::ResolverRuleAssociation, AWS::DMS::ReplicationSubnetGroup, AWS::DMS::EventSubscription, AWS::MSK::Cluster, AWS::StepFunctions::Activity, AWS::WorkSpaces::Workspace, AWS::WorkSpaces::ConnectionAlias, AWS::SageMaker::Model, AWS::ElasticLoadBalancingV2::Listener, AWS::StepFunctions::StateMachine, AWS::Batch::JobQueue, AWS::Batch::ComputeEnvironment, AWS::AccessAnalyzer::Analyzer, AWS::Athena::WorkGroup, AWS::Athena::DataCatalog, AWS::Detective::Graph, AWS::GlobalAccelerator::Accelerator, AWS::GlobalAccelerator::EndpointGroup, AWS::GlobalAccelerator::Listener, AWS::EC2::TransitGatewayAttachment, AWS::EC2::TransitGatewayRouteTable, AWS::DMS::Certificate, AWS::AppConfig::Application, AWS::AppSync::GraphQLApi, AWS::DataSync::LocationSMB, AWS::DataSync::LocationFSxLustre, AWS::DataSync::LocationS3, AWS::DataSync::LocationEFS, AWS::DataSync::Task, AWS::DataSync::LocationNFS, AWS::EC2::NetworkInsightsAccessScopeAnalysis, AWS::EKS::FargateProfile, AWS::Glue::Job, AWS::GuardDuty::ThreatIntelSet, AWS::GuardDuty::IPSet, AWS::SageMaker::Workteam, AWS::SageMaker::NotebookInstanceLifecycleConfig, AWS::ServiceDiscovery::Service, AWS::ServiceDiscovery::PublicDnsNamespace, AWS::SES::ContactList, AWS::SES::ConfigurationSet, AWS::Route53::HostedZone
-    #             resource_name: "ResourceName",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] configuration_aggregator_name
     #   The name of the configuration aggregator.
     #   @return [String]
@@ -627,18 +573,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchGetResourceConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_keys: [ # required
-    #           {
-    #             resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::EC2::RegisteredHAInstance, AWS::EC2::NatGateway, AWS::EC2::EgressOnlyInternetGateway, AWS::EC2::VPCEndpoint, AWS::EC2::VPCEndpointService, AWS::EC2::FlowLog, AWS::EC2::VPCPeeringConnection, AWS::Elasticsearch::Domain, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::DBCluster, AWS::RDS::DBClusterSnapshot, AWS::RDS::EventSubscription, AWS::S3::Bucket, AWS::S3::AccountPublicAccessBlock, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::SSM::ManagedInstanceInventory, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::ElasticLoadBalancing::LoadBalancer, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::DynamoDB::Table, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::RuleGroup, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::RuleGroup, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::Lambda::Function, AWS::NetworkFirewall::Firewall, AWS::NetworkFirewall::FirewallPolicy, AWS::NetworkFirewall::RuleGroup, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::WAFv2::WebACL, AWS::WAFv2::RuleGroup, AWS::WAFv2::IPSet, AWS::WAFv2::RegexPatternSet, AWS::WAFv2::ManagedRuleSet, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ConformancePackCompliance, AWS::Config::ResourceCompliance, AWS::ApiGateway::Stage, AWS::ApiGateway::RestApi, AWS::ApiGatewayV2::Stage, AWS::ApiGatewayV2::Api, AWS::CodePipeline::Pipeline, AWS::ServiceCatalog::CloudFormationProvisionedProduct, AWS::ServiceCatalog::CloudFormationProduct, AWS::ServiceCatalog::Portfolio, AWS::SQS::Queue, AWS::KMS::Key, AWS::QLDB::Ledger, AWS::SecretsManager::Secret, AWS::SNS::Topic, AWS::SSM::FileData, AWS::Backup::BackupPlan, AWS::Backup::BackupSelection, AWS::Backup::BackupVault, AWS::Backup::RecoveryPoint, AWS::ECR::Repository, AWS::ECS::Cluster, AWS::ECS::Service, AWS::ECS::TaskDefinition, AWS::EFS::AccessPoint, AWS::EFS::FileSystem, AWS::EKS::Cluster, AWS::OpenSearch::Domain, AWS::EC2::TransitGateway, AWS::Kinesis::Stream, AWS::Kinesis::StreamConsumer, AWS::CodeDeploy::Application, AWS::CodeDeploy::DeploymentConfig, AWS::CodeDeploy::DeploymentGroup, AWS::EC2::LaunchTemplate, AWS::ECR::PublicRepository, AWS::GuardDuty::Detector, AWS::EMR::SecurityConfiguration, AWS::SageMaker::CodeRepository, AWS::Route53Resolver::ResolverEndpoint, AWS::Route53Resolver::ResolverRule, AWS::Route53Resolver::ResolverRuleAssociation, AWS::DMS::ReplicationSubnetGroup, AWS::DMS::EventSubscription, AWS::MSK::Cluster, AWS::StepFunctions::Activity, AWS::WorkSpaces::Workspace, AWS::WorkSpaces::ConnectionAlias, AWS::SageMaker::Model, AWS::ElasticLoadBalancingV2::Listener, AWS::StepFunctions::StateMachine, AWS::Batch::JobQueue, AWS::Batch::ComputeEnvironment, AWS::AccessAnalyzer::Analyzer, AWS::Athena::WorkGroup, AWS::Athena::DataCatalog, AWS::Detective::Graph, AWS::GlobalAccelerator::Accelerator, AWS::GlobalAccelerator::EndpointGroup, AWS::GlobalAccelerator::Listener, AWS::EC2::TransitGatewayAttachment, AWS::EC2::TransitGatewayRouteTable, AWS::DMS::Certificate, AWS::AppConfig::Application, AWS::AppSync::GraphQLApi, AWS::DataSync::LocationSMB, AWS::DataSync::LocationFSxLustre, AWS::DataSync::LocationS3, AWS::DataSync::LocationEFS, AWS::DataSync::Task, AWS::DataSync::LocationNFS, AWS::EC2::NetworkInsightsAccessScopeAnalysis, AWS::EKS::FargateProfile, AWS::Glue::Job, AWS::GuardDuty::ThreatIntelSet, AWS::GuardDuty::IPSet, AWS::SageMaker::Workteam, AWS::SageMaker::NotebookInstanceLifecycleConfig, AWS::ServiceDiscovery::Service, AWS::ServiceDiscovery::PublicDnsNamespace, AWS::SES::ContactList, AWS::SES::ConfigurationSet, AWS::Route53::HostedZone
-    #             resource_id: "ResourceId", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_keys
     #   A list of resource keys to be processed with the current request.
     #   Each element in the list consists of the resource type and resource
@@ -910,47 +844,6 @@ module Aws::ConfigService
     # [2]: https://github.com/aws-cloudformation/cloudformation-guard
     # [3]: https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html
     #
-    # @note When making an API call, you may pass ConfigRule
-    #   data as a hash:
-    #
-    #       {
-    #         config_rule_name: "ConfigRuleName",
-    #         config_rule_arn: "StringWithCharLimit256",
-    #         config_rule_id: "StringWithCharLimit64",
-    #         description: "EmptiableStringWithCharLimit256",
-    #         scope: {
-    #           compliance_resource_types: ["StringWithCharLimit256"],
-    #           tag_key: "StringWithCharLimit128",
-    #           tag_value: "StringWithCharLimit256",
-    #           compliance_resource_id: "BaseResourceId",
-    #         },
-    #         source: { # required
-    #           owner: "CUSTOM_LAMBDA", # required, accepts CUSTOM_LAMBDA, AWS, CUSTOM_POLICY
-    #           source_identifier: "StringWithCharLimit256",
-    #           source_details: [
-    #             {
-    #               event_source: "aws.config", # accepts aws.config
-    #               message_type: "ConfigurationItemChangeNotification", # accepts ConfigurationItemChangeNotification, ConfigurationSnapshotDeliveryCompleted, ScheduledNotification, OversizedConfigurationItemChangeNotification
-    #               maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
-    #             },
-    #           ],
-    #           custom_policy_details: {
-    #             policy_runtime: "PolicyRuntime", # required
-    #             policy_text: "PolicyText", # required
-    #             enable_debug_log_delivery: false,
-    #           },
-    #         },
-    #         input_parameters: "StringWithCharLimit1024",
-    #         maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
-    #         config_rule_state: "ACTIVE", # accepts ACTIVE, DELETING, DELETING_RESULTS, EVALUATING
-    #         created_by: "StringWithCharLimit256",
-    #         evaluation_modes: [
-    #           {
-    #             mode: "DETECTIVE", # accepts DETECTIVE, PROACTIVE
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] config_rule_name
     #   The name that you assign to the Config rule. The name is required if
     #   you are adding a new rule.
@@ -1068,16 +961,6 @@ module Aws::ConfigService
     # Filters the compliance results based on account ID, region, compliance
     # type, and rule name.
     #
-    # @note When making an API call, you may pass ConfigRuleComplianceFilters
-    #   data as a hash:
-    #
-    #       {
-    #         config_rule_name: "ConfigRuleName",
-    #         compliance_type: "COMPLIANT", # accepts COMPLIANT, NON_COMPLIANT, NOT_APPLICABLE, INSUFFICIENT_DATA
-    #         account_id: "AccountId",
-    #         aws_region: "AwsRegion",
-    #       }
-    #
     # @!attribute [rw] config_rule_name
     #   The name of the Config rule.
     #   @return [String]
@@ -1110,14 +993,6 @@ module Aws::ConfigService
     end
 
     # Filters the results based on the account IDs and regions.
-    #
-    # @note When making an API call, you may pass ConfigRuleComplianceSummaryFilters
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         aws_region: "AwsRegion",
-    #       }
     #
     # @!attribute [rw] account_id
     #   The 12-digit account ID of the source account.
@@ -1280,13 +1155,6 @@ module Aws::ConfigService
     #
     # To update the `deliveryFrequency` with which Config delivers your
     # configuration snapshots, use the `PutDeliveryChannel` action.
-    #
-    # @note When making an API call, you may pass ConfigSnapshotDeliveryProperties
-    #   data as a hash:
-    #
-    #       {
-    #         delivery_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
-    #       }
     #
     # @!attribute [rw] delivery_frequency
     #   The frequency with which Config delivers configuration snapshots.
@@ -1525,19 +1393,6 @@ module Aws::ConfigService
     # An object that represents the recording of configuration changes of an
     # Amazon Web Services resource.
     #
-    # @note When making an API call, you may pass ConfigurationRecorder
-    #   data as a hash:
-    #
-    #       {
-    #         name: "RecorderName",
-    #         role_arn: "String",
-    #         recording_group: {
-    #           all_supported: false,
-    #           include_global_resource_types: false,
-    #           resource_types: ["AWS::EC2::CustomerGateway"], # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::EC2::RegisteredHAInstance, AWS::EC2::NatGateway, AWS::EC2::EgressOnlyInternetGateway, AWS::EC2::VPCEndpoint, AWS::EC2::VPCEndpointService, AWS::EC2::FlowLog, AWS::EC2::VPCPeeringConnection, AWS::Elasticsearch::Domain, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::DBCluster, AWS::RDS::DBClusterSnapshot, AWS::RDS::EventSubscription, AWS::S3::Bucket, AWS::S3::AccountPublicAccessBlock, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::SSM::ManagedInstanceInventory, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::ElasticLoadBalancing::LoadBalancer, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::DynamoDB::Table, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::RuleGroup, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::RuleGroup, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::Lambda::Function, AWS::NetworkFirewall::Firewall, AWS::NetworkFirewall::FirewallPolicy, AWS::NetworkFirewall::RuleGroup, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::WAFv2::WebACL, AWS::WAFv2::RuleGroup, AWS::WAFv2::IPSet, AWS::WAFv2::RegexPatternSet, AWS::WAFv2::ManagedRuleSet, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ConformancePackCompliance, AWS::Config::ResourceCompliance, AWS::ApiGateway::Stage, AWS::ApiGateway::RestApi, AWS::ApiGatewayV2::Stage, AWS::ApiGatewayV2::Api, AWS::CodePipeline::Pipeline, AWS::ServiceCatalog::CloudFormationProvisionedProduct, AWS::ServiceCatalog::CloudFormationProduct, AWS::ServiceCatalog::Portfolio, AWS::SQS::Queue, AWS::KMS::Key, AWS::QLDB::Ledger, AWS::SecretsManager::Secret, AWS::SNS::Topic, AWS::SSM::FileData, AWS::Backup::BackupPlan, AWS::Backup::BackupSelection, AWS::Backup::BackupVault, AWS::Backup::RecoveryPoint, AWS::ECR::Repository, AWS::ECS::Cluster, AWS::ECS::Service, AWS::ECS::TaskDefinition, AWS::EFS::AccessPoint, AWS::EFS::FileSystem, AWS::EKS::Cluster, AWS::OpenSearch::Domain, AWS::EC2::TransitGateway, AWS::Kinesis::Stream, AWS::Kinesis::StreamConsumer, AWS::CodeDeploy::Application, AWS::CodeDeploy::DeploymentConfig, AWS::CodeDeploy::DeploymentGroup, AWS::EC2::LaunchTemplate, AWS::ECR::PublicRepository, AWS::GuardDuty::Detector, AWS::EMR::SecurityConfiguration, AWS::SageMaker::CodeRepository, AWS::Route53Resolver::ResolverEndpoint, AWS::Route53Resolver::ResolverRule, AWS::Route53Resolver::ResolverRuleAssociation, AWS::DMS::ReplicationSubnetGroup, AWS::DMS::EventSubscription, AWS::MSK::Cluster, AWS::StepFunctions::Activity, AWS::WorkSpaces::Workspace, AWS::WorkSpaces::ConnectionAlias, AWS::SageMaker::Model, AWS::ElasticLoadBalancingV2::Listener, AWS::StepFunctions::StateMachine, AWS::Batch::JobQueue, AWS::Batch::ComputeEnvironment, AWS::AccessAnalyzer::Analyzer, AWS::Athena::WorkGroup, AWS::Athena::DataCatalog, AWS::Detective::Graph, AWS::GlobalAccelerator::Accelerator, AWS::GlobalAccelerator::EndpointGroup, AWS::GlobalAccelerator::Listener, AWS::EC2::TransitGatewayAttachment, AWS::EC2::TransitGatewayRouteTable, AWS::DMS::Certificate, AWS::AppConfig::Application, AWS::AppSync::GraphQLApi, AWS::DataSync::LocationSMB, AWS::DataSync::LocationFSxLustre, AWS::DataSync::LocationS3, AWS::DataSync::LocationEFS, AWS::DataSync::Task, AWS::DataSync::LocationNFS, AWS::EC2::NetworkInsightsAccessScopeAnalysis, AWS::EKS::FargateProfile, AWS::Glue::Job, AWS::GuardDuty::ThreatIntelSet, AWS::GuardDuty::IPSet, AWS::SageMaker::Workteam, AWS::SageMaker::NotebookInstanceLifecycleConfig, AWS::ServiceDiscovery::Service, AWS::ServiceDiscovery::PublicDnsNamespace, AWS::SES::ContactList, AWS::SES::ConfigurationSet, AWS::Route53::HostedZone
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the recorder. By default, Config automatically assigns
     #   the name "default" when creating the configuration recorder. You
@@ -1622,14 +1477,6 @@ module Aws::ConfigService
     # Filters the conformance pack by compliance types and Config rule
     # names.
     #
-    # @note When making an API call, you may pass ConformancePackComplianceFilters
-    #   data as a hash:
-    #
-    #       {
-    #         config_rule_names: ["StringWithCharLimit64"],
-    #         compliance_type: "COMPLIANT", # accepts COMPLIANT, NON_COMPLIANT, INSUFFICIENT_DATA
-    #       }
-    #
     # @!attribute [rw] config_rule_names
     #   Filters the results by Config rule names.
     #   @return [Array<String>]
@@ -1685,13 +1532,6 @@ module Aws::ConfigService
 
     # A list of filters to apply to the conformance pack compliance score
     # result set.
-    #
-    # @note When making an API call, you may pass ConformancePackComplianceScoresFilters
-    #   data as a hash:
-    #
-    #       {
-    #         conformance_pack_names: ["ConformancePackName"], # required
-    #       }
     #
     # @!attribute [rw] conformance_pack_names
     #   The names of the conformance packs whose compliance scores you want
@@ -1800,16 +1640,6 @@ module Aws::ConfigService
     # Filters a conformance pack by Config rule names, compliance types,
     # Amazon Web Services resource types, and resource IDs.
     #
-    # @note When making an API call, you may pass ConformancePackEvaluationFilters
-    #   data as a hash:
-    #
-    #       {
-    #         config_rule_names: ["StringWithCharLimit64"],
-    #         compliance_type: "COMPLIANT", # accepts COMPLIANT, NON_COMPLIANT, INSUFFICIENT_DATA
-    #         resource_type: "StringWithCharLimit256",
-    #         resource_ids: ["StringWithCharLimit256"],
-    #       }
-    #
     # @!attribute [rw] config_rule_names
     #   Filters the results by Config rule names.
     #   @return [Array<String>]
@@ -1889,14 +1719,6 @@ module Aws::ConfigService
     # pack, both of which you define. Keys can have a maximum character
     # length of 255 characters, and values can have a maximum length of 4096
     # characters.
-    #
-    # @note When making an API call, you may pass ConformancePackInputParameter
-    #   data as a hash:
-    #
-    #       {
-    #         parameter_name: "ParameterName", # required
-    #         parameter_value: "ParameterValue", # required
-    #       }
     #
     # @!attribute [rw] parameter_name
     #   One part of a key-value pair.
@@ -2023,15 +1845,6 @@ module Aws::ConfigService
     # logging enabled. You can specify the following CustomPolicyDetails
     # parameter values only for Config Custom Policy rules.
     #
-    # @note When making an API call, you may pass CustomPolicyDetails
-    #   data as a hash:
-    #
-    #       {
-    #         policy_runtime: "PolicyRuntime", # required
-    #         policy_text: "PolicyText", # required
-    #         enable_debug_log_delivery: false,
-    #       }
-    #
     # @!attribute [rw] policy_runtime
     #   The runtime system for your Config Custom Policy rule. Guard is a
     #   policy-as-code language that allows you to write policies that are
@@ -2063,14 +1876,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAggregationAuthorizationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         authorized_account_id: "AccountId", # required
-    #         authorized_aws_region: "AwsRegion", # required
-    #       }
-    #
     # @!attribute [rw] authorized_account_id
     #   The 12-digit account ID of the account authorized to aggregate data.
     #   @return [String]
@@ -2088,13 +1893,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteConfigRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         config_rule_name: "ConfigRuleName", # required
-    #       }
-    #
     # @!attribute [rw] config_rule_name
     #   The name of the Config rule that you want to delete.
     #   @return [String]
@@ -2107,13 +1905,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteConfigurationAggregatorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_aggregator_name: "ConfigurationAggregatorName", # required
-    #       }
-    #
     # @!attribute [rw] configuration_aggregator_name
     #   The name of the configuration aggregator.
     #   @return [String]
@@ -2127,13 +1918,6 @@ module Aws::ConfigService
     end
 
     # The request object for the `DeleteConfigurationRecorder` action.
-    #
-    # @note When making an API call, you may pass DeleteConfigurationRecorderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_recorder_name: "RecorderName", # required
-    #       }
     #
     # @!attribute [rw] configuration_recorder_name
     #   The name of the configuration recorder to be deleted. You can
@@ -2149,13 +1933,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteConformancePackRequest
-    #   data as a hash:
-    #
-    #       {
-    #         conformance_pack_name: "ConformancePackName", # required
-    #       }
-    #
     # @!attribute [rw] conformance_pack_name
     #   Name of the conformance pack you want to delete.
     #   @return [String]
@@ -2171,13 +1948,6 @@ module Aws::ConfigService
     # The input for the DeleteDeliveryChannel action. The action accepts the
     # following data, in JSON format.
     #
-    # @note When making an API call, you may pass DeleteDeliveryChannelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         delivery_channel_name: "ChannelName", # required
-    #       }
-    #
     # @!attribute [rw] delivery_channel_name
     #   The name of the delivery channel to delete.
     #   @return [String]
@@ -2190,13 +1960,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteEvaluationResultsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         config_rule_name: "StringWithCharLimit64", # required
-    #       }
-    #
     # @!attribute [rw] config_rule_name
     #   The name of the Config rule for which you want to delete the
     #   evaluation results.
@@ -2217,13 +1980,6 @@ module Aws::ConfigService
     #
     class DeleteEvaluationResultsResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteOrganizationConfigRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_config_rule_name: "OrganizationConfigRuleName", # required
-    #       }
-    #
     # @!attribute [rw] organization_config_rule_name
     #   The name of organization Config rule that you want to delete.
     #   @return [String]
@@ -2236,13 +1992,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteOrganizationConformancePackRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_conformance_pack_name: "OrganizationConformancePackName", # required
-    #       }
-    #
     # @!attribute [rw] organization_conformance_pack_name
     #   The name of organization conformance pack that you want to delete.
     #   @return [String]
@@ -2255,14 +2004,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeletePendingAggregationRequestRequest
-    #   data as a hash:
-    #
-    #       {
-    #         requester_account_id: "AccountId", # required
-    #         requester_aws_region: "AwsRegion", # required
-    #       }
-    #
     # @!attribute [rw] requester_account_id
     #   The 12-digit account ID of the account requesting to aggregate data.
     #   @return [String]
@@ -2280,14 +2021,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteRemediationConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         config_rule_name: "ConfigRuleName", # required
-    #         resource_type: "String",
-    #       }
-    #
     # @!attribute [rw] config_rule_name
     #   The name of the Config rule for which you want to delete remediation
     #   configuration.
@@ -2310,19 +2043,6 @@ module Aws::ConfigService
     #
     class DeleteRemediationConfigurationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteRemediationExceptionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         config_rule_name: "ConfigRuleName", # required
-    #         resource_keys: [ # required
-    #           {
-    #             resource_type: "StringWithCharLimit256",
-    #             resource_id: "StringWithCharLimit1024",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] config_rule_name
     #   The name of the Config rule for which you want to delete remediation
     #   exception configuration.
@@ -2357,14 +2077,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteResourceConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_type: "ResourceTypeString", # required
-    #         resource_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] resource_type
     #   The type of the resource.
     #   @return [String]
@@ -2382,13 +2094,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteRetentionConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         retention_configuration_name: "RetentionConfigurationName", # required
-    #       }
-    #
     # @!attribute [rw] retention_configuration_name
     #   The name of the retention configuration to delete.
     #   @return [String]
@@ -2401,13 +2106,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteStoredQueryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         query_name: "QueryName", # required
-    #       }
-    #
     # @!attribute [rw] query_name
     #   The name of the query that you want to delete.
     #   @return [String]
@@ -2425,13 +2123,6 @@ module Aws::ConfigService
     class DeleteStoredQueryResponse < Aws::EmptyStructure; end
 
     # The input for the DeliverConfigSnapshot action.
-    #
-    # @note When making an API call, you may pass DeliverConfigSnapshotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         delivery_channel_name: "ChannelName", # required
-    #       }
     #
     # @!attribute [rw] delivery_channel_name
     #   The name of the delivery channel through which the snapshot is
@@ -2462,20 +2153,6 @@ module Aws::ConfigService
 
     # The channel through which Config delivers notifications and updated
     # configuration states.
-    #
-    # @note When making an API call, you may pass DeliveryChannel
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ChannelName",
-    #         s3_bucket_name: "String",
-    #         s3_key_prefix: "String",
-    #         s3_kms_key_arn: "String",
-    #         sns_topic_arn: "String",
-    #         config_snapshot_delivery_properties: {
-    #           delivery_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
-    #         },
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the delivery channel. By default, Config assigns the
@@ -2576,21 +2253,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAggregateComplianceByConfigRulesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_aggregator_name: "ConfigurationAggregatorName", # required
-    #         filters: {
-    #           config_rule_name: "ConfigRuleName",
-    #           compliance_type: "COMPLIANT", # accepts COMPLIANT, NON_COMPLIANT, NOT_APPLICABLE, INSUFFICIENT_DATA
-    #           account_id: "AccountId",
-    #           aws_region: "AwsRegion",
-    #         },
-    #         limit: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] configuration_aggregator_name
     #   The name of the configuration aggregator.
     #   @return [String]
@@ -2638,21 +2300,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAggregateComplianceByConformancePacksRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_aggregator_name: "ConfigurationAggregatorName", # required
-    #         filters: {
-    #           conformance_pack_name: "ConformancePackName",
-    #           compliance_type: "COMPLIANT", # accepts COMPLIANT, NON_COMPLIANT, INSUFFICIENT_DATA
-    #           account_id: "AccountId",
-    #           aws_region: "AwsRegion",
-    #         },
-    #         limit: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] configuration_aggregator_name
     #   The name of the configuration aggregator.
     #   @return [String]
@@ -2702,14 +2349,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAggregationAuthorizationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         limit: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] limit
     #   The maximum number of AggregationAuthorizations returned on each
     #   page. The default is maximum. If you specify 0, Config uses the
@@ -2749,15 +2388,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeComplianceByConfigRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         config_rule_names: ["ConfigRuleName"],
-    #         compliance_types: ["COMPLIANT"], # accepts COMPLIANT, NON_COMPLIANT, NOT_APPLICABLE, INSUFFICIENT_DATA
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] config_rule_names
     #   Specify one or more Config rule names to filter the results by rule.
     #   @return [Array<String>]
@@ -2801,17 +2431,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeComplianceByResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_type: "StringWithCharLimit256",
-    #         resource_id: "BaseResourceId",
-    #         compliance_types: ["COMPLIANT"], # accepts COMPLIANT, NON_COMPLIANT, NOT_APPLICABLE, INSUFFICIENT_DATA
-    #         limit: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] resource_type
     #   The types of Amazon Web Services resources for which you want
     #   compliance information (for example, `AWS::EC2::Instance`). For this
@@ -2875,15 +2494,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeConfigRuleEvaluationStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         config_rule_names: ["ConfigRuleName"],
-    #         next_token: "String",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] config_rule_names
     #   The name of the Config managed rules for which you want status
     #   information. If you do not specify any names, Config returns status
@@ -2941,13 +2551,6 @@ module Aws::ConfigService
     # default, if the filter is not defined, this API returns an unfiltered
     # list.
     #
-    # @note When making an API call, you may pass DescribeConfigRulesFilters
-    #   data as a hash:
-    #
-    #       {
-    #         evaluation_mode: "DETECTIVE", # accepts DETECTIVE, PROACTIVE
-    #       }
-    #
     # @!attribute [rw] evaluation_mode
     #   The mode of an evaluation. The valid values are Detective or
     #   Proactive.
@@ -2961,17 +2564,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeConfigRulesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         config_rule_names: ["ConfigRuleName"],
-    #         next_token: "String",
-    #         filters: {
-    #           evaluation_mode: "DETECTIVE", # accepts DETECTIVE, PROACTIVE
-    #         },
-    #       }
-    #
     # @!attribute [rw] config_rule_names
     #   The names of the Config rules for which you want details. If you do
     #   not specify any names, Config returns details for all your rules.
@@ -3015,16 +2607,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeConfigurationAggregatorSourcesStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_aggregator_name: "ConfigurationAggregatorName", # required
-    #         update_status: ["FAILED"], # accepts FAILED, SUCCEEDED, OUTDATED
-    #         next_token: "String",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] configuration_aggregator_name
     #   The name of the configuration aggregator.
     #   @return [String]
@@ -3078,15 +2660,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeConfigurationAggregatorsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_aggregator_names: ["ConfigurationAggregatorName"],
-    #         next_token: "String",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] configuration_aggregator_names
     #   The name of the configuration aggregators.
     #   @return [Array<String>]
@@ -3132,13 +2705,6 @@ module Aws::ConfigService
 
     # The input for the DescribeConfigurationRecorderStatus action.
     #
-    # @note When making an API call, you may pass DescribeConfigurationRecorderStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_recorder_names: ["RecorderName"],
-    #       }
-    #
     # @!attribute [rw] configuration_recorder_names
     #   The name(s) of the configuration recorder. If the name is not
     #   specified, the action returns the current status of all the
@@ -3170,13 +2736,6 @@ module Aws::ConfigService
 
     # The input for the DescribeConfigurationRecorders action.
     #
-    # @note When making an API call, you may pass DescribeConfigurationRecordersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_recorder_names: ["RecorderName"],
-    #       }
-    #
     # @!attribute [rw] configuration_recorder_names
     #   A list of configuration recorder names.
     #   @return [Array<String>]
@@ -3204,19 +2763,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeConformancePackComplianceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         conformance_pack_name: "ConformancePackName", # required
-    #         filters: {
-    #           config_rule_names: ["StringWithCharLimit64"],
-    #           compliance_type: "COMPLIANT", # accepts COMPLIANT, NON_COMPLIANT, INSUFFICIENT_DATA
-    #         },
-    #         limit: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] conformance_pack_name
     #   Name of the conformance pack.
     #   @return [String]
@@ -3269,15 +2815,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeConformancePackStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         conformance_pack_names: ["ConformancePackName"],
-    #         limit: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] conformance_pack_names
     #   Comma-separated list of conformance pack names.
     #   @return [Array<String>]
@@ -3320,15 +2857,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeConformancePacksRequest
-    #   data as a hash:
-    #
-    #       {
-    #         conformance_pack_names: ["ConformancePackName"],
-    #         limit: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] conformance_pack_names
     #   Comma-separated list of conformance pack names for which you want
     #   details. If you do not specify any names, Config returns details for
@@ -3374,13 +2902,6 @@ module Aws::ConfigService
 
     # The input for the DeliveryChannelStatus action.
     #
-    # @note When making an API call, you may pass DescribeDeliveryChannelStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         delivery_channel_names: ["ChannelName"],
-    #       }
-    #
     # @!attribute [rw] delivery_channel_names
     #   A list of delivery channel names.
     #   @return [Array<String>]
@@ -3409,13 +2930,6 @@ module Aws::ConfigService
 
     # The input for the DescribeDeliveryChannels action.
     #
-    # @note When making an API call, you may pass DescribeDeliveryChannelsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         delivery_channel_names: ["ChannelName"],
-    #       }
-    #
     # @!attribute [rw] delivery_channel_names
     #   A list of delivery channel names.
     #   @return [Array<String>]
@@ -3443,15 +2957,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeOrganizationConfigRuleStatusesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_config_rule_names: ["StringWithCharLimit64"],
-    #         limit: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] organization_config_rule_names
     #   The names of organization Config rules for which you want status
     #   details. If you do not specify any names, Config returns details for
@@ -3497,15 +3002,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeOrganizationConfigRulesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_config_rule_names: ["StringWithCharLimit64"],
-    #         limit: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] organization_config_rule_names
     #   The names of organization Config rules for which you want details.
     #   If you do not specify any names, Config returns details for all your
@@ -3551,15 +3047,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeOrganizationConformancePackStatusesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_conformance_pack_names: ["OrganizationConformancePackName"],
-    #         limit: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] organization_conformance_pack_names
     #   The names of organization conformance packs for which you want
     #   status details. If you do not specify any names, Config returns
@@ -3605,15 +3092,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeOrganizationConformancePacksRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_conformance_pack_names: ["OrganizationConformancePackName"],
-    #         limit: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] organization_conformance_pack_names
     #   The name that you assign to an organization conformance pack.
     #   @return [Array<String>]
@@ -3657,14 +3135,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribePendingAggregationRequestsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         limit: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] limit
     #   The maximum number of evaluation results returned on each page. The
     #   default is maximum. If you specify 0, Config uses the default.
@@ -3702,13 +3172,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeRemediationConfigurationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         config_rule_names: ["ConfigRuleName"], # required
-    #       }
-    #
     # @!attribute [rw] config_rule_names
     #   A list of Config rule names of remediation configurations for which
     #   you want details.
@@ -3734,21 +3197,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeRemediationExceptionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         config_rule_name: "ConfigRuleName", # required
-    #         resource_keys: [
-    #           {
-    #             resource_type: "StringWithCharLimit256",
-    #             resource_id: "StringWithCharLimit1024",
-    #           },
-    #         ],
-    #         limit: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] config_rule_name
     #   The name of the Config rule.
     #   @return [String]
@@ -3799,21 +3247,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeRemediationExecutionStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         config_rule_name: "ConfigRuleName", # required
-    #         resource_keys: [
-    #           {
-    #             resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::EC2::RegisteredHAInstance, AWS::EC2::NatGateway, AWS::EC2::EgressOnlyInternetGateway, AWS::EC2::VPCEndpoint, AWS::EC2::VPCEndpointService, AWS::EC2::FlowLog, AWS::EC2::VPCPeeringConnection, AWS::Elasticsearch::Domain, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::DBCluster, AWS::RDS::DBClusterSnapshot, AWS::RDS::EventSubscription, AWS::S3::Bucket, AWS::S3::AccountPublicAccessBlock, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::SSM::ManagedInstanceInventory, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::ElasticLoadBalancing::LoadBalancer, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::DynamoDB::Table, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::RuleGroup, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::RuleGroup, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::Lambda::Function, AWS::NetworkFirewall::Firewall, AWS::NetworkFirewall::FirewallPolicy, AWS::NetworkFirewall::RuleGroup, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::WAFv2::WebACL, AWS::WAFv2::RuleGroup, AWS::WAFv2::IPSet, AWS::WAFv2::RegexPatternSet, AWS::WAFv2::ManagedRuleSet, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ConformancePackCompliance, AWS::Config::ResourceCompliance, AWS::ApiGateway::Stage, AWS::ApiGateway::RestApi, AWS::ApiGatewayV2::Stage, AWS::ApiGatewayV2::Api, AWS::CodePipeline::Pipeline, AWS::ServiceCatalog::CloudFormationProvisionedProduct, AWS::ServiceCatalog::CloudFormationProduct, AWS::ServiceCatalog::Portfolio, AWS::SQS::Queue, AWS::KMS::Key, AWS::QLDB::Ledger, AWS::SecretsManager::Secret, AWS::SNS::Topic, AWS::SSM::FileData, AWS::Backup::BackupPlan, AWS::Backup::BackupSelection, AWS::Backup::BackupVault, AWS::Backup::RecoveryPoint, AWS::ECR::Repository, AWS::ECS::Cluster, AWS::ECS::Service, AWS::ECS::TaskDefinition, AWS::EFS::AccessPoint, AWS::EFS::FileSystem, AWS::EKS::Cluster, AWS::OpenSearch::Domain, AWS::EC2::TransitGateway, AWS::Kinesis::Stream, AWS::Kinesis::StreamConsumer, AWS::CodeDeploy::Application, AWS::CodeDeploy::DeploymentConfig, AWS::CodeDeploy::DeploymentGroup, AWS::EC2::LaunchTemplate, AWS::ECR::PublicRepository, AWS::GuardDuty::Detector, AWS::EMR::SecurityConfiguration, AWS::SageMaker::CodeRepository, AWS::Route53Resolver::ResolverEndpoint, AWS::Route53Resolver::ResolverRule, AWS::Route53Resolver::ResolverRuleAssociation, AWS::DMS::ReplicationSubnetGroup, AWS::DMS::EventSubscription, AWS::MSK::Cluster, AWS::StepFunctions::Activity, AWS::WorkSpaces::Workspace, AWS::WorkSpaces::ConnectionAlias, AWS::SageMaker::Model, AWS::ElasticLoadBalancingV2::Listener, AWS::StepFunctions::StateMachine, AWS::Batch::JobQueue, AWS::Batch::ComputeEnvironment, AWS::AccessAnalyzer::Analyzer, AWS::Athena::WorkGroup, AWS::Athena::DataCatalog, AWS::Detective::Graph, AWS::GlobalAccelerator::Accelerator, AWS::GlobalAccelerator::EndpointGroup, AWS::GlobalAccelerator::Listener, AWS::EC2::TransitGatewayAttachment, AWS::EC2::TransitGatewayRouteTable, AWS::DMS::Certificate, AWS::AppConfig::Application, AWS::AppSync::GraphQLApi, AWS::DataSync::LocationSMB, AWS::DataSync::LocationFSxLustre, AWS::DataSync::LocationS3, AWS::DataSync::LocationEFS, AWS::DataSync::Task, AWS::DataSync::LocationNFS, AWS::EC2::NetworkInsightsAccessScopeAnalysis, AWS::EKS::FargateProfile, AWS::Glue::Job, AWS::GuardDuty::ThreatIntelSet, AWS::GuardDuty::IPSet, AWS::SageMaker::Workteam, AWS::SageMaker::NotebookInstanceLifecycleConfig, AWS::ServiceDiscovery::Service, AWS::ServiceDiscovery::PublicDnsNamespace, AWS::SES::ContactList, AWS::SES::ConfigurationSet, AWS::Route53::HostedZone
-    #             resource_id: "ResourceId", # required
-    #           },
-    #         ],
-    #         limit: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] config_rule_name
     #   A list of Config rule names.
     #   @return [String]
@@ -3864,14 +3297,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeRetentionConfigurationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         retention_configuration_names: ["RetentionConfigurationName"],
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] retention_configuration_names
     #   A list of names of retention configurations for which you want
     #   details. If you do not specify a name, Config returns details for
@@ -3917,17 +3342,6 @@ module Aws::ConfigService
 
     # Identifies an Amazon Web Services resource and indicates whether it
     # complies with the Config rule that it was evaluated against.
-    #
-    # @note When making an API call, you may pass Evaluation
-    #   data as a hash:
-    #
-    #       {
-    #         compliance_resource_type: "StringWithCharLimit256", # required
-    #         compliance_resource_id: "BaseResourceId", # required
-    #         compliance_type: "COMPLIANT", # required, accepts COMPLIANT, NON_COMPLIANT, NOT_APPLICABLE, INSUFFICIENT_DATA
-    #         annotation: "StringWithCharLimit256",
-    #         ordering_timestamp: Time.now, # required
-    #       }
     #
     # @!attribute [rw] compliance_resource_type
     #   The type of Amazon Web Services resource that was evaluated.
@@ -3981,13 +3395,6 @@ module Aws::ConfigService
     # just a resource definition, you do not need to provide evaluation
     # context.
     #
-    # @note When making an API call, you may pass EvaluationContext
-    #   data as a hash:
-    #
-    #       {
-    #         evaluation_context_identifier: "EvaluationContextIdentifier",
-    #       }
-    #
     # @!attribute [rw] evaluation_context_identifier
     #   A unique EvaluationContextIdentifier ID for an EvaluationContext.
     #   @return [String]
@@ -4002,13 +3409,6 @@ module Aws::ConfigService
 
     # The configuration object for Config rule evaluation mode. The
     # Supported valid values are Detective or Proactive.
-    #
-    # @note When making an API call, you may pass EvaluationModeConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         mode: "DETECTIVE", # accepts DETECTIVE, PROACTIVE
-    #       }
     #
     # @!attribute [rw] mode
     #   The mode of an evaluation. The valid values are Detective or
@@ -4158,16 +3558,6 @@ module Aws::ConfigService
 
     # The controls that Config uses for executing remediations.
     #
-    # @note When making an API call, you may pass ExecutionControls
-    #   data as a hash:
-    #
-    #       {
-    #         ssm_controls: {
-    #           concurrent_execution_rate_percentage: 1,
-    #           error_percentage: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] ssm_controls
     #   A SsmControls object.
     #   @return [Types::SsmControls]
@@ -4182,17 +3572,6 @@ module Aws::ConfigService
 
     # Identifies an Amazon Web Services resource and indicates whether it
     # complies with the Config rule that it was evaluated against.
-    #
-    # @note When making an API call, you may pass ExternalEvaluation
-    #   data as a hash:
-    #
-    #       {
-    #         compliance_resource_type: "StringWithCharLimit256", # required
-    #         compliance_resource_id: "BaseResourceId", # required
-    #         compliance_type: "COMPLIANT", # required, accepts COMPLIANT, NON_COMPLIANT, NOT_APPLICABLE, INSUFFICIENT_DATA
-    #         annotation: "StringWithCharLimit256",
-    #         ordering_timestamp: Time.now, # required
-    #       }
     #
     # @!attribute [rw] compliance_resource_type
     #   The evaluated compliance resource type. Config accepts
@@ -4308,19 +3687,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAggregateComplianceDetailsByConfigRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_aggregator_name: "ConfigurationAggregatorName", # required
-    #         config_rule_name: "ConfigRuleName", # required
-    #         account_id: "AccountId", # required
-    #         aws_region: "AwsRegion", # required
-    #         compliance_type: "COMPLIANT", # accepts COMPLIANT, NON_COMPLIANT, NOT_APPLICABLE, INSUFFICIENT_DATA
-    #         limit: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] configuration_aggregator_name
     #   The name of the configuration aggregator.
     #   @return [String]
@@ -4392,20 +3758,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAggregateConfigRuleComplianceSummaryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_aggregator_name: "ConfigurationAggregatorName", # required
-    #         filters: {
-    #           account_id: "AccountId",
-    #           aws_region: "AwsRegion",
-    #         },
-    #         group_by_key: "ACCOUNT_ID", # accepts ACCOUNT_ID, AWS_REGION
-    #         limit: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] configuration_aggregator_name
     #   The name of the configuration aggregator.
     #   @return [String]
@@ -4465,20 +3817,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAggregateConformancePackComplianceSummaryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_aggregator_name: "ConfigurationAggregatorName", # required
-    #         filters: {
-    #           account_id: "AccountId",
-    #           aws_region: "AwsRegion",
-    #         },
-    #         group_by_key: "ACCOUNT_ID", # accepts ACCOUNT_ID, AWS_REGION
-    #         limit: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] configuration_aggregator_name
     #   The name of the configuration aggregator.
     #   @return [String]
@@ -4540,21 +3878,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAggregateDiscoveredResourceCountsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_aggregator_name: "ConfigurationAggregatorName", # required
-    #         filters: {
-    #           resource_type: "AWS::EC2::CustomerGateway", # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::EC2::RegisteredHAInstance, AWS::EC2::NatGateway, AWS::EC2::EgressOnlyInternetGateway, AWS::EC2::VPCEndpoint, AWS::EC2::VPCEndpointService, AWS::EC2::FlowLog, AWS::EC2::VPCPeeringConnection, AWS::Elasticsearch::Domain, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::DBCluster, AWS::RDS::DBClusterSnapshot, AWS::RDS::EventSubscription, AWS::S3::Bucket, AWS::S3::AccountPublicAccessBlock, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::SSM::ManagedInstanceInventory, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::ElasticLoadBalancing::LoadBalancer, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::DynamoDB::Table, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::RuleGroup, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::RuleGroup, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::Lambda::Function, AWS::NetworkFirewall::Firewall, AWS::NetworkFirewall::FirewallPolicy, AWS::NetworkFirewall::RuleGroup, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::WAFv2::WebACL, AWS::WAFv2::RuleGroup, AWS::WAFv2::IPSet, AWS::WAFv2::RegexPatternSet, AWS::WAFv2::ManagedRuleSet, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ConformancePackCompliance, AWS::Config::ResourceCompliance, AWS::ApiGateway::Stage, AWS::ApiGateway::RestApi, AWS::ApiGatewayV2::Stage, AWS::ApiGatewayV2::Api, AWS::CodePipeline::Pipeline, AWS::ServiceCatalog::CloudFormationProvisionedProduct, AWS::ServiceCatalog::CloudFormationProduct, AWS::ServiceCatalog::Portfolio, AWS::SQS::Queue, AWS::KMS::Key, AWS::QLDB::Ledger, AWS::SecretsManager::Secret, AWS::SNS::Topic, AWS::SSM::FileData, AWS::Backup::BackupPlan, AWS::Backup::BackupSelection, AWS::Backup::BackupVault, AWS::Backup::RecoveryPoint, AWS::ECR::Repository, AWS::ECS::Cluster, AWS::ECS::Service, AWS::ECS::TaskDefinition, AWS::EFS::AccessPoint, AWS::EFS::FileSystem, AWS::EKS::Cluster, AWS::OpenSearch::Domain, AWS::EC2::TransitGateway, AWS::Kinesis::Stream, AWS::Kinesis::StreamConsumer, AWS::CodeDeploy::Application, AWS::CodeDeploy::DeploymentConfig, AWS::CodeDeploy::DeploymentGroup, AWS::EC2::LaunchTemplate, AWS::ECR::PublicRepository, AWS::GuardDuty::Detector, AWS::EMR::SecurityConfiguration, AWS::SageMaker::CodeRepository, AWS::Route53Resolver::ResolverEndpoint, AWS::Route53Resolver::ResolverRule, AWS::Route53Resolver::ResolverRuleAssociation, AWS::DMS::ReplicationSubnetGroup, AWS::DMS::EventSubscription, AWS::MSK::Cluster, AWS::StepFunctions::Activity, AWS::WorkSpaces::Workspace, AWS::WorkSpaces::ConnectionAlias, AWS::SageMaker::Model, AWS::ElasticLoadBalancingV2::Listener, AWS::StepFunctions::StateMachine, AWS::Batch::JobQueue, AWS::Batch::ComputeEnvironment, AWS::AccessAnalyzer::Analyzer, AWS::Athena::WorkGroup, AWS::Athena::DataCatalog, AWS::Detective::Graph, AWS::GlobalAccelerator::Accelerator, AWS::GlobalAccelerator::EndpointGroup, AWS::GlobalAccelerator::Listener, AWS::EC2::TransitGatewayAttachment, AWS::EC2::TransitGatewayRouteTable, AWS::DMS::Certificate, AWS::AppConfig::Application, AWS::AppSync::GraphQLApi, AWS::DataSync::LocationSMB, AWS::DataSync::LocationFSxLustre, AWS::DataSync::LocationS3, AWS::DataSync::LocationEFS, AWS::DataSync::Task, AWS::DataSync::LocationNFS, AWS::EC2::NetworkInsightsAccessScopeAnalysis, AWS::EKS::FargateProfile, AWS::Glue::Job, AWS::GuardDuty::ThreatIntelSet, AWS::GuardDuty::IPSet, AWS::SageMaker::Workteam, AWS::SageMaker::NotebookInstanceLifecycleConfig, AWS::ServiceDiscovery::Service, AWS::ServiceDiscovery::PublicDnsNamespace, AWS::SES::ContactList, AWS::SES::ConfigurationSet, AWS::Route53::HostedZone
-    #           account_id: "AccountId",
-    #           region: "AwsRegion",
-    #         },
-    #         group_by_key: "RESOURCE_TYPE", # accepts RESOURCE_TYPE, ACCOUNT_ID, AWS_REGION
-    #         limit: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] configuration_aggregator_name
     #   The name of the configuration aggregator.
     #   @return [String]
@@ -4620,20 +3943,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAggregateResourceConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_aggregator_name: "ConfigurationAggregatorName", # required
-    #         resource_identifier: { # required
-    #           source_account_id: "AccountId", # required
-    #           source_region: "AwsRegion", # required
-    #           resource_id: "ResourceId", # required
-    #           resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::EC2::RegisteredHAInstance, AWS::EC2::NatGateway, AWS::EC2::EgressOnlyInternetGateway, AWS::EC2::VPCEndpoint, AWS::EC2::VPCEndpointService, AWS::EC2::FlowLog, AWS::EC2::VPCPeeringConnection, AWS::Elasticsearch::Domain, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::DBCluster, AWS::RDS::DBClusterSnapshot, AWS::RDS::EventSubscription, AWS::S3::Bucket, AWS::S3::AccountPublicAccessBlock, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::SSM::ManagedInstanceInventory, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::ElasticLoadBalancing::LoadBalancer, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::DynamoDB::Table, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::RuleGroup, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::RuleGroup, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::Lambda::Function, AWS::NetworkFirewall::Firewall, AWS::NetworkFirewall::FirewallPolicy, AWS::NetworkFirewall::RuleGroup, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::WAFv2::WebACL, AWS::WAFv2::RuleGroup, AWS::WAFv2::IPSet, AWS::WAFv2::RegexPatternSet, AWS::WAFv2::ManagedRuleSet, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ConformancePackCompliance, AWS::Config::ResourceCompliance, AWS::ApiGateway::Stage, AWS::ApiGateway::RestApi, AWS::ApiGatewayV2::Stage, AWS::ApiGatewayV2::Api, AWS::CodePipeline::Pipeline, AWS::ServiceCatalog::CloudFormationProvisionedProduct, AWS::ServiceCatalog::CloudFormationProduct, AWS::ServiceCatalog::Portfolio, AWS::SQS::Queue, AWS::KMS::Key, AWS::QLDB::Ledger, AWS::SecretsManager::Secret, AWS::SNS::Topic, AWS::SSM::FileData, AWS::Backup::BackupPlan, AWS::Backup::BackupSelection, AWS::Backup::BackupVault, AWS::Backup::RecoveryPoint, AWS::ECR::Repository, AWS::ECS::Cluster, AWS::ECS::Service, AWS::ECS::TaskDefinition, AWS::EFS::AccessPoint, AWS::EFS::FileSystem, AWS::EKS::Cluster, AWS::OpenSearch::Domain, AWS::EC2::TransitGateway, AWS::Kinesis::Stream, AWS::Kinesis::StreamConsumer, AWS::CodeDeploy::Application, AWS::CodeDeploy::DeploymentConfig, AWS::CodeDeploy::DeploymentGroup, AWS::EC2::LaunchTemplate, AWS::ECR::PublicRepository, AWS::GuardDuty::Detector, AWS::EMR::SecurityConfiguration, AWS::SageMaker::CodeRepository, AWS::Route53Resolver::ResolverEndpoint, AWS::Route53Resolver::ResolverRule, AWS::Route53Resolver::ResolverRuleAssociation, AWS::DMS::ReplicationSubnetGroup, AWS::DMS::EventSubscription, AWS::MSK::Cluster, AWS::StepFunctions::Activity, AWS::WorkSpaces::Workspace, AWS::WorkSpaces::ConnectionAlias, AWS::SageMaker::Model, AWS::ElasticLoadBalancingV2::Listener, AWS::StepFunctions::StateMachine, AWS::Batch::JobQueue, AWS::Batch::ComputeEnvironment, AWS::AccessAnalyzer::Analyzer, AWS::Athena::WorkGroup, AWS::Athena::DataCatalog, AWS::Detective::Graph, AWS::GlobalAccelerator::Accelerator, AWS::GlobalAccelerator::EndpointGroup, AWS::GlobalAccelerator::Listener, AWS::EC2::TransitGatewayAttachment, AWS::EC2::TransitGatewayRouteTable, AWS::DMS::Certificate, AWS::AppConfig::Application, AWS::AppSync::GraphQLApi, AWS::DataSync::LocationSMB, AWS::DataSync::LocationFSxLustre, AWS::DataSync::LocationS3, AWS::DataSync::LocationEFS, AWS::DataSync::Task, AWS::DataSync::LocationNFS, AWS::EC2::NetworkInsightsAccessScopeAnalysis, AWS::EKS::FargateProfile, AWS::Glue::Job, AWS::GuardDuty::ThreatIntelSet, AWS::GuardDuty::IPSet, AWS::SageMaker::Workteam, AWS::SageMaker::NotebookInstanceLifecycleConfig, AWS::ServiceDiscovery::Service, AWS::ServiceDiscovery::PublicDnsNamespace, AWS::SES::ContactList, AWS::SES::ConfigurationSet, AWS::Route53::HostedZone
-    #           resource_name: "ResourceName",
-    #         },
-    #       }
-    #
     # @!attribute [rw] configuration_aggregator_name
     #   The name of the configuration aggregator.
     #   @return [String]
@@ -4663,16 +3972,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetComplianceDetailsByConfigRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         config_rule_name: "StringWithCharLimit64", # required
-    #         compliance_types: ["COMPLIANT"], # accepts COMPLIANT, NON_COMPLIANT, NOT_APPLICABLE, INSUFFICIENT_DATA
-    #         limit: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] config_rule_name
     #   The name of the Config rule for which you want compliance
     #   information.
@@ -4726,17 +4025,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetComplianceDetailsByResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_type: "StringWithCharLimit256",
-    #         resource_id: "BaseResourceId",
-    #         compliance_types: ["COMPLIANT"], # accepts COMPLIANT, NON_COMPLIANT, NOT_APPLICABLE, INSUFFICIENT_DATA
-    #         next_token: "String",
-    #         resource_evaluation_id: "ResourceEvaluationId",
-    #       }
-    #
     # @!attribute [rw] resource_type
     #   The type of the Amazon Web Services resource for which you want
     #   compliance information.
@@ -4813,13 +4101,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetComplianceSummaryByResourceTypeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_types: ["StringWithCharLimit256"],
-    #       }
-    #
     # @!attribute [rw] resource_types
     #   Specify one or more resource types to get the number of resources
     #   that are compliant and the number that are noncompliant for each
@@ -4854,21 +4135,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetConformancePackComplianceDetailsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         conformance_pack_name: "ConformancePackName", # required
-    #         filters: {
-    #           config_rule_names: ["StringWithCharLimit64"],
-    #           compliance_type: "COMPLIANT", # accepts COMPLIANT, NON_COMPLIANT, INSUFFICIENT_DATA
-    #           resource_type: "StringWithCharLimit256",
-    #           resource_ids: ["StringWithCharLimit256"],
-    #         },
-    #         limit: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] conformance_pack_name
     #   Name of the conformance pack.
     #   @return [String]
@@ -4922,15 +4188,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetConformancePackComplianceSummaryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         conformance_pack_names: ["ConformancePackName"], # required
-    #         limit: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] conformance_pack_names
     #   Names of conformance packs.
     #   @return [Array<String>]
@@ -4972,13 +4229,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetCustomRulePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         config_rule_name: "ConfigRuleName",
-    #       }
-    #
     # @!attribute [rw] config_rule_name
     #   The name of your Config Custom Policy rule.
     #   @return [String]
@@ -5004,15 +4254,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDiscoveredResourceCountsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_types: ["StringWithCharLimit256"],
-    #         limit: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] resource_types
     #   The comma-separated list that specifies the resource types that you
     #   want Config to return (for example, `"AWS::EC2::Instance"`,
@@ -5090,19 +4331,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetOrganizationConfigRuleDetailedStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_config_rule_name: "OrganizationConfigRuleName", # required
-    #         filters: {
-    #           account_id: "AccountId",
-    #           member_account_rule_status: "CREATE_SUCCESSFUL", # accepts CREATE_SUCCESSFUL, CREATE_IN_PROGRESS, CREATE_FAILED, DELETE_SUCCESSFUL, DELETE_FAILED, DELETE_IN_PROGRESS, UPDATE_SUCCESSFUL, UPDATE_IN_PROGRESS, UPDATE_FAILED
-    #         },
-    #         limit: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] organization_config_rule_name
     #   The name of your organization Config rule for which you want status
     #   details for member accounts.
@@ -5152,19 +4380,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetOrganizationConformancePackDetailedStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_conformance_pack_name: "OrganizationConformancePackName", # required
-    #         filters: {
-    #           account_id: "AccountId",
-    #           status: "CREATE_SUCCESSFUL", # accepts CREATE_SUCCESSFUL, CREATE_IN_PROGRESS, CREATE_FAILED, DELETE_SUCCESSFUL, DELETE_FAILED, DELETE_IN_PROGRESS, UPDATE_SUCCESSFUL, UPDATE_IN_PROGRESS, UPDATE_FAILED
-    #         },
-    #         limit: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] organization_conformance_pack_name
     #   The name of organization conformance pack for which you want status
     #   details for member accounts.
@@ -5214,13 +4429,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetOrganizationCustomRulePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_config_rule_name: "OrganizationConfigRuleName", # required
-    #       }
-    #
     # @!attribute [rw] organization_config_rule_name
     #   The name of your organization Config Custom Policy rule.
     #   @return [String]
@@ -5247,19 +4455,6 @@ module Aws::ConfigService
     end
 
     # The input for the GetResourceConfigHistory action.
-    #
-    # @note When making an API call, you may pass GetResourceConfigHistoryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::EC2::RegisteredHAInstance, AWS::EC2::NatGateway, AWS::EC2::EgressOnlyInternetGateway, AWS::EC2::VPCEndpoint, AWS::EC2::VPCEndpointService, AWS::EC2::FlowLog, AWS::EC2::VPCPeeringConnection, AWS::Elasticsearch::Domain, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::DBCluster, AWS::RDS::DBClusterSnapshot, AWS::RDS::EventSubscription, AWS::S3::Bucket, AWS::S3::AccountPublicAccessBlock, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::SSM::ManagedInstanceInventory, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::ElasticLoadBalancing::LoadBalancer, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::DynamoDB::Table, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::RuleGroup, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::RuleGroup, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::Lambda::Function, AWS::NetworkFirewall::Firewall, AWS::NetworkFirewall::FirewallPolicy, AWS::NetworkFirewall::RuleGroup, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::WAFv2::WebACL, AWS::WAFv2::RuleGroup, AWS::WAFv2::IPSet, AWS::WAFv2::RegexPatternSet, AWS::WAFv2::ManagedRuleSet, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ConformancePackCompliance, AWS::Config::ResourceCompliance, AWS::ApiGateway::Stage, AWS::ApiGateway::RestApi, AWS::ApiGatewayV2::Stage, AWS::ApiGatewayV2::Api, AWS::CodePipeline::Pipeline, AWS::ServiceCatalog::CloudFormationProvisionedProduct, AWS::ServiceCatalog::CloudFormationProduct, AWS::ServiceCatalog::Portfolio, AWS::SQS::Queue, AWS::KMS::Key, AWS::QLDB::Ledger, AWS::SecretsManager::Secret, AWS::SNS::Topic, AWS::SSM::FileData, AWS::Backup::BackupPlan, AWS::Backup::BackupSelection, AWS::Backup::BackupVault, AWS::Backup::RecoveryPoint, AWS::ECR::Repository, AWS::ECS::Cluster, AWS::ECS::Service, AWS::ECS::TaskDefinition, AWS::EFS::AccessPoint, AWS::EFS::FileSystem, AWS::EKS::Cluster, AWS::OpenSearch::Domain, AWS::EC2::TransitGateway, AWS::Kinesis::Stream, AWS::Kinesis::StreamConsumer, AWS::CodeDeploy::Application, AWS::CodeDeploy::DeploymentConfig, AWS::CodeDeploy::DeploymentGroup, AWS::EC2::LaunchTemplate, AWS::ECR::PublicRepository, AWS::GuardDuty::Detector, AWS::EMR::SecurityConfiguration, AWS::SageMaker::CodeRepository, AWS::Route53Resolver::ResolverEndpoint, AWS::Route53Resolver::ResolverRule, AWS::Route53Resolver::ResolverRuleAssociation, AWS::DMS::ReplicationSubnetGroup, AWS::DMS::EventSubscription, AWS::MSK::Cluster, AWS::StepFunctions::Activity, AWS::WorkSpaces::Workspace, AWS::WorkSpaces::ConnectionAlias, AWS::SageMaker::Model, AWS::ElasticLoadBalancingV2::Listener, AWS::StepFunctions::StateMachine, AWS::Batch::JobQueue, AWS::Batch::ComputeEnvironment, AWS::AccessAnalyzer::Analyzer, AWS::Athena::WorkGroup, AWS::Athena::DataCatalog, AWS::Detective::Graph, AWS::GlobalAccelerator::Accelerator, AWS::GlobalAccelerator::EndpointGroup, AWS::GlobalAccelerator::Listener, AWS::EC2::TransitGatewayAttachment, AWS::EC2::TransitGatewayRouteTable, AWS::DMS::Certificate, AWS::AppConfig::Application, AWS::AppSync::GraphQLApi, AWS::DataSync::LocationSMB, AWS::DataSync::LocationFSxLustre, AWS::DataSync::LocationS3, AWS::DataSync::LocationEFS, AWS::DataSync::Task, AWS::DataSync::LocationNFS, AWS::EC2::NetworkInsightsAccessScopeAnalysis, AWS::EKS::FargateProfile, AWS::Glue::Job, AWS::GuardDuty::ThreatIntelSet, AWS::GuardDuty::IPSet, AWS::SageMaker::Workteam, AWS::SageMaker::NotebookInstanceLifecycleConfig, AWS::ServiceDiscovery::Service, AWS::ServiceDiscovery::PublicDnsNamespace, AWS::SES::ContactList, AWS::SES::ConfigurationSet, AWS::Route53::HostedZone
-    #         resource_id: "ResourceId", # required
-    #         later_time: Time.now,
-    #         earlier_time: Time.now,
-    #         chronological_order: "Reverse", # accepts Reverse, Forward
-    #         limit: 1,
-    #         next_token: "NextToken",
-    #       }
     #
     # @!attribute [rw] resource_type
     #   The resource type.
@@ -5331,13 +4526,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetResourceEvaluationSummaryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_evaluation_id: "ResourceEvaluationId", # required
-    #       }
-    #
     # @!attribute [rw] resource_evaluation_id
     #   The unique `ResourceEvaluationId` of Amazon Web Services resource
     #   execution for which you want to retrieve the evaluation summary.
@@ -5397,13 +4585,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetStoredQueryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         query_name: "QueryName", # required
-    #       }
-    #
     # @!attribute [rw] query_name
     #   The name of the query.
     #   @return [String]
@@ -5598,22 +4779,6 @@ module Aws::ConfigService
     #
     class LimitExceededException < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass ListAggregateDiscoveredResourcesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_aggregator_name: "ConfigurationAggregatorName", # required
-    #         resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::EC2::RegisteredHAInstance, AWS::EC2::NatGateway, AWS::EC2::EgressOnlyInternetGateway, AWS::EC2::VPCEndpoint, AWS::EC2::VPCEndpointService, AWS::EC2::FlowLog, AWS::EC2::VPCPeeringConnection, AWS::Elasticsearch::Domain, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::DBCluster, AWS::RDS::DBClusterSnapshot, AWS::RDS::EventSubscription, AWS::S3::Bucket, AWS::S3::AccountPublicAccessBlock, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::SSM::ManagedInstanceInventory, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::ElasticLoadBalancing::LoadBalancer, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::DynamoDB::Table, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::RuleGroup, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::RuleGroup, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::Lambda::Function, AWS::NetworkFirewall::Firewall, AWS::NetworkFirewall::FirewallPolicy, AWS::NetworkFirewall::RuleGroup, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::WAFv2::WebACL, AWS::WAFv2::RuleGroup, AWS::WAFv2::IPSet, AWS::WAFv2::RegexPatternSet, AWS::WAFv2::ManagedRuleSet, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ConformancePackCompliance, AWS::Config::ResourceCompliance, AWS::ApiGateway::Stage, AWS::ApiGateway::RestApi, AWS::ApiGatewayV2::Stage, AWS::ApiGatewayV2::Api, AWS::CodePipeline::Pipeline, AWS::ServiceCatalog::CloudFormationProvisionedProduct, AWS::ServiceCatalog::CloudFormationProduct, AWS::ServiceCatalog::Portfolio, AWS::SQS::Queue, AWS::KMS::Key, AWS::QLDB::Ledger, AWS::SecretsManager::Secret, AWS::SNS::Topic, AWS::SSM::FileData, AWS::Backup::BackupPlan, AWS::Backup::BackupSelection, AWS::Backup::BackupVault, AWS::Backup::RecoveryPoint, AWS::ECR::Repository, AWS::ECS::Cluster, AWS::ECS::Service, AWS::ECS::TaskDefinition, AWS::EFS::AccessPoint, AWS::EFS::FileSystem, AWS::EKS::Cluster, AWS::OpenSearch::Domain, AWS::EC2::TransitGateway, AWS::Kinesis::Stream, AWS::Kinesis::StreamConsumer, AWS::CodeDeploy::Application, AWS::CodeDeploy::DeploymentConfig, AWS::CodeDeploy::DeploymentGroup, AWS::EC2::LaunchTemplate, AWS::ECR::PublicRepository, AWS::GuardDuty::Detector, AWS::EMR::SecurityConfiguration, AWS::SageMaker::CodeRepository, AWS::Route53Resolver::ResolverEndpoint, AWS::Route53Resolver::ResolverRule, AWS::Route53Resolver::ResolverRuleAssociation, AWS::DMS::ReplicationSubnetGroup, AWS::DMS::EventSubscription, AWS::MSK::Cluster, AWS::StepFunctions::Activity, AWS::WorkSpaces::Workspace, AWS::WorkSpaces::ConnectionAlias, AWS::SageMaker::Model, AWS::ElasticLoadBalancingV2::Listener, AWS::StepFunctions::StateMachine, AWS::Batch::JobQueue, AWS::Batch::ComputeEnvironment, AWS::AccessAnalyzer::Analyzer, AWS::Athena::WorkGroup, AWS::Athena::DataCatalog, AWS::Detective::Graph, AWS::GlobalAccelerator::Accelerator, AWS::GlobalAccelerator::EndpointGroup, AWS::GlobalAccelerator::Listener, AWS::EC2::TransitGatewayAttachment, AWS::EC2::TransitGatewayRouteTable, AWS::DMS::Certificate, AWS::AppConfig::Application, AWS::AppSync::GraphQLApi, AWS::DataSync::LocationSMB, AWS::DataSync::LocationFSxLustre, AWS::DataSync::LocationS3, AWS::DataSync::LocationEFS, AWS::DataSync::Task, AWS::DataSync::LocationNFS, AWS::EC2::NetworkInsightsAccessScopeAnalysis, AWS::EKS::FargateProfile, AWS::Glue::Job, AWS::GuardDuty::ThreatIntelSet, AWS::GuardDuty::IPSet, AWS::SageMaker::Workteam, AWS::SageMaker::NotebookInstanceLifecycleConfig, AWS::ServiceDiscovery::Service, AWS::ServiceDiscovery::PublicDnsNamespace, AWS::SES::ContactList, AWS::SES::ConfigurationSet, AWS::Route53::HostedZone
-    #         filters: {
-    #           account_id: "AccountId",
-    #           resource_id: "ResourceId",
-    #           resource_name: "ResourceName",
-    #           region: "AwsRegion",
-    #         },
-    #         limit: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] configuration_aggregator_name
     #   The name of the configuration aggregator.
     #   @return [String]
@@ -5667,19 +4832,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListConformancePackComplianceScoresRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: {
-    #           conformance_pack_names: ["ConformancePackName"], # required
-    #         },
-    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #         sort_by: "SCORE", # accepts SCORE
-    #         limit: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] filters
     #   Filters the results based on the
     #   `ConformancePackComplianceScoresFilters`.
@@ -5753,18 +4905,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDiscoveredResourcesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::EC2::RegisteredHAInstance, AWS::EC2::NatGateway, AWS::EC2::EgressOnlyInternetGateway, AWS::EC2::VPCEndpoint, AWS::EC2::VPCEndpointService, AWS::EC2::FlowLog, AWS::EC2::VPCPeeringConnection, AWS::Elasticsearch::Domain, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::DBCluster, AWS::RDS::DBClusterSnapshot, AWS::RDS::EventSubscription, AWS::S3::Bucket, AWS::S3::AccountPublicAccessBlock, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::SSM::ManagedInstanceInventory, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::ElasticLoadBalancing::LoadBalancer, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::DynamoDB::Table, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::RuleGroup, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::RuleGroup, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::Lambda::Function, AWS::NetworkFirewall::Firewall, AWS::NetworkFirewall::FirewallPolicy, AWS::NetworkFirewall::RuleGroup, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::WAFv2::WebACL, AWS::WAFv2::RuleGroup, AWS::WAFv2::IPSet, AWS::WAFv2::RegexPatternSet, AWS::WAFv2::ManagedRuleSet, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ConformancePackCompliance, AWS::Config::ResourceCompliance, AWS::ApiGateway::Stage, AWS::ApiGateway::RestApi, AWS::ApiGatewayV2::Stage, AWS::ApiGatewayV2::Api, AWS::CodePipeline::Pipeline, AWS::ServiceCatalog::CloudFormationProvisionedProduct, AWS::ServiceCatalog::CloudFormationProduct, AWS::ServiceCatalog::Portfolio, AWS::SQS::Queue, AWS::KMS::Key, AWS::QLDB::Ledger, AWS::SecretsManager::Secret, AWS::SNS::Topic, AWS::SSM::FileData, AWS::Backup::BackupPlan, AWS::Backup::BackupSelection, AWS::Backup::BackupVault, AWS::Backup::RecoveryPoint, AWS::ECR::Repository, AWS::ECS::Cluster, AWS::ECS::Service, AWS::ECS::TaskDefinition, AWS::EFS::AccessPoint, AWS::EFS::FileSystem, AWS::EKS::Cluster, AWS::OpenSearch::Domain, AWS::EC2::TransitGateway, AWS::Kinesis::Stream, AWS::Kinesis::StreamConsumer, AWS::CodeDeploy::Application, AWS::CodeDeploy::DeploymentConfig, AWS::CodeDeploy::DeploymentGroup, AWS::EC2::LaunchTemplate, AWS::ECR::PublicRepository, AWS::GuardDuty::Detector, AWS::EMR::SecurityConfiguration, AWS::SageMaker::CodeRepository, AWS::Route53Resolver::ResolverEndpoint, AWS::Route53Resolver::ResolverRule, AWS::Route53Resolver::ResolverRuleAssociation, AWS::DMS::ReplicationSubnetGroup, AWS::DMS::EventSubscription, AWS::MSK::Cluster, AWS::StepFunctions::Activity, AWS::WorkSpaces::Workspace, AWS::WorkSpaces::ConnectionAlias, AWS::SageMaker::Model, AWS::ElasticLoadBalancingV2::Listener, AWS::StepFunctions::StateMachine, AWS::Batch::JobQueue, AWS::Batch::ComputeEnvironment, AWS::AccessAnalyzer::Analyzer, AWS::Athena::WorkGroup, AWS::Athena::DataCatalog, AWS::Detective::Graph, AWS::GlobalAccelerator::Accelerator, AWS::GlobalAccelerator::EndpointGroup, AWS::GlobalAccelerator::Listener, AWS::EC2::TransitGatewayAttachment, AWS::EC2::TransitGatewayRouteTable, AWS::DMS::Certificate, AWS::AppConfig::Application, AWS::AppSync::GraphQLApi, AWS::DataSync::LocationSMB, AWS::DataSync::LocationFSxLustre, AWS::DataSync::LocationS3, AWS::DataSync::LocationEFS, AWS::DataSync::Task, AWS::DataSync::LocationNFS, AWS::EC2::NetworkInsightsAccessScopeAnalysis, AWS::EKS::FargateProfile, AWS::Glue::Job, AWS::GuardDuty::ThreatIntelSet, AWS::GuardDuty::IPSet, AWS::SageMaker::Workteam, AWS::SageMaker::NotebookInstanceLifecycleConfig, AWS::ServiceDiscovery::Service, AWS::ServiceDiscovery::PublicDnsNamespace, AWS::SES::ContactList, AWS::SES::ConfigurationSet, AWS::Route53::HostedZone
-    #         resource_ids: ["ResourceId"],
-    #         resource_name: "ResourceName",
-    #         limit: 1,
-    #         include_deleted_resources: false,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] resource_type
     #   The type of resources that you want Config to list in the response.
     #   @return [String]
@@ -5830,22 +4970,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListResourceEvaluationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: {
-    #           evaluation_mode: "DETECTIVE", # accepts DETECTIVE, PROACTIVE
-    #           time_window: {
-    #             start_time: Time.now,
-    #             end_time: Time.now,
-    #           },
-    #           evaluation_context_identifier: "EvaluationContextIdentifier",
-    #         },
-    #         limit: 1,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] filters
     #   Returns a `ResourceEvaluationFilters` object.
     #   @return [Types::ResourceEvaluationFilters]
@@ -5889,14 +5013,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListStoredQueriesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The nextToken string returned in a previous request that you use to
     #   request the next page of results in a paginated response.
@@ -5937,15 +5053,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         limit: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) that identifies the resource for
     #   which to list the tags. Currently, the supported resources are
@@ -6285,15 +5392,6 @@ module Aws::ConfigService
 
     # This object contains regions to set up the aggregator and an IAM role
     # to retrieve organization details.
-    #
-    # @note When making an API call, you may pass OrganizationAggregationSource
-    #   data as a hash:
-    #
-    #       {
-    #         role_arn: "String", # required
-    #         aws_regions: ["String"],
-    #         all_aws_regions: false,
-    #       }
     #
     # @!attribute [rw] role_arn
     #   ARN of the IAM role used to retrieve Amazon Web Services
@@ -6675,23 +5773,6 @@ module Aws::ConfigService
     # resource, and organization trigger types that initiate Config to
     # evaluate Amazon Web Services resources against a rule.
     #
-    # @note When making an API call, you may pass OrganizationCustomPolicyRuleMetadata
-    #   data as a hash:
-    #
-    #       {
-    #         description: "StringWithCharLimit256Min0",
-    #         organization_config_rule_trigger_types: ["ConfigurationItemChangeNotification"], # accepts ConfigurationItemChangeNotification, OversizedConfigurationItemChangeNotification
-    #         input_parameters: "StringWithCharLimit2048",
-    #         maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
-    #         resource_types_scope: ["StringWithCharLimit256"],
-    #         resource_id_scope: "StringWithCharLimit768",
-    #         tag_key_scope: "StringWithCharLimit128",
-    #         tag_value_scope: "StringWithCharLimit256",
-    #         policy_runtime: "PolicyRuntime", # required
-    #         policy_text: "PolicyText", # required
-    #         debug_log_delivery_accounts: ["AccountId"],
-    #       }
-    #
     # @!attribute [rw] description
     #   The description that you provide for your organization Config Custom
     #   Policy rule.
@@ -6882,21 +5963,6 @@ module Aws::ConfigService
     # provides the frequency with which you want Config to run evaluations
     # for the rule if the trigger type is periodic.
     #
-    # @note When making an API call, you may pass OrganizationCustomRuleMetadata
-    #   data as a hash:
-    #
-    #       {
-    #         description: "StringWithCharLimit256Min0",
-    #         lambda_function_arn: "StringWithCharLimit256", # required
-    #         organization_config_rule_trigger_types: ["ConfigurationItemChangeNotification"], # required, accepts ConfigurationItemChangeNotification, OversizedConfigurationItemChangeNotification, ScheduledNotification
-    #         input_parameters: "StringWithCharLimit2048",
-    #         maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
-    #         resource_types_scope: ["StringWithCharLimit256"],
-    #         resource_id_scope: "StringWithCharLimit768",
-    #         tag_key_scope: "StringWithCharLimit128",
-    #         tag_value_scope: "StringWithCharLimit256",
-    #       }
-    #
     # @!attribute [rw] description
     #   The description that you provide for your organization Config rule.
     #   @return [String]
@@ -6981,20 +6047,6 @@ module Aws::ConfigService
     # Config to run evaluations for the rule if the trigger type is
     # periodic.
     #
-    # @note When making an API call, you may pass OrganizationManagedRuleMetadata
-    #   data as a hash:
-    #
-    #       {
-    #         description: "StringWithCharLimit256Min0",
-    #         rule_identifier: "StringWithCharLimit256", # required
-    #         input_parameters: "StringWithCharLimit2048",
-    #         maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
-    #         resource_types_scope: ["StringWithCharLimit256"],
-    #         resource_id_scope: "StringWithCharLimit768",
-    #         tag_key_scope: "StringWithCharLimit128",
-    #         tag_value_scope: "StringWithCharLimit256",
-    #       }
-    #
     # @!attribute [rw] description
     #   The description that you provide for your organization Config rule.
     #   @return [String]
@@ -7061,14 +6113,6 @@ module Aws::ConfigService
 
     # Status filter object to filter results based on specific member
     # account ID or status type for an organization conformance pack.
-    #
-    # @note When making an API call, you may pass OrganizationResourceDetailedStatusFilters
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         status: "CREATE_SUCCESSFUL", # accepts CREATE_SUCCESSFUL, CREATE_IN_PROGRESS, CREATE_FAILED, DELETE_SUCCESSFUL, DELETE_FAILED, DELETE_IN_PROGRESS, UPDATE_SUCCESSFUL, UPDATE_IN_PROGRESS, UPDATE_FAILED
-    #       }
     #
     # @!attribute [rw] account_id
     #   The 12-digit account ID of the member account within an
@@ -7151,20 +6195,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutAggregationAuthorizationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         authorized_account_id: "AccountId", # required
-    #         authorized_aws_region: "AwsRegion", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] authorized_account_id
     #   The 12-digit account ID of the account authorized to aggregate data.
     #   @return [String]
@@ -7199,55 +6229,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutConfigRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         config_rule: { # required
-    #           config_rule_name: "ConfigRuleName",
-    #           config_rule_arn: "StringWithCharLimit256",
-    #           config_rule_id: "StringWithCharLimit64",
-    #           description: "EmptiableStringWithCharLimit256",
-    #           scope: {
-    #             compliance_resource_types: ["StringWithCharLimit256"],
-    #             tag_key: "StringWithCharLimit128",
-    #             tag_value: "StringWithCharLimit256",
-    #             compliance_resource_id: "BaseResourceId",
-    #           },
-    #           source: { # required
-    #             owner: "CUSTOM_LAMBDA", # required, accepts CUSTOM_LAMBDA, AWS, CUSTOM_POLICY
-    #             source_identifier: "StringWithCharLimit256",
-    #             source_details: [
-    #               {
-    #                 event_source: "aws.config", # accepts aws.config
-    #                 message_type: "ConfigurationItemChangeNotification", # accepts ConfigurationItemChangeNotification, ConfigurationSnapshotDeliveryCompleted, ScheduledNotification, OversizedConfigurationItemChangeNotification
-    #                 maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
-    #               },
-    #             ],
-    #             custom_policy_details: {
-    #               policy_runtime: "PolicyRuntime", # required
-    #               policy_text: "PolicyText", # required
-    #               enable_debug_log_delivery: false,
-    #             },
-    #           },
-    #           input_parameters: "StringWithCharLimit1024",
-    #           maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
-    #           config_rule_state: "ACTIVE", # accepts ACTIVE, DELETING, DELETING_RESULTS, EVALUATING
-    #           created_by: "StringWithCharLimit256",
-    #           evaluation_modes: [
-    #             {
-    #               mode: "DETECTIVE", # accepts DETECTIVE, PROACTIVE
-    #             },
-    #           ],
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] config_rule
     #   The rule that you want to add to your account.
     #   @return [Types::ConfigRule]
@@ -7265,31 +6246,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutConfigurationAggregatorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_aggregator_name: "ConfigurationAggregatorName", # required
-    #         account_aggregation_sources: [
-    #           {
-    #             account_ids: ["AccountId"], # required
-    #             all_aws_regions: false,
-    #             aws_regions: ["String"],
-    #           },
-    #         ],
-    #         organization_aggregation_source: {
-    #           role_arn: "String", # required
-    #           aws_regions: ["String"],
-    #           all_aws_regions: false,
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] configuration_aggregator_name
     #   The name of the configuration aggregator.
     #   @return [String]
@@ -7331,21 +6287,6 @@ module Aws::ConfigService
 
     # The input for the PutConfigurationRecorder action.
     #
-    # @note When making an API call, you may pass PutConfigurationRecorderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_recorder: { # required
-    #           name: "RecorderName",
-    #           role_arn: "String",
-    #           recording_group: {
-    #             all_supported: false,
-    #             include_global_resource_types: false,
-    #             resource_types: ["AWS::EC2::CustomerGateway"], # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::EC2::RegisteredHAInstance, AWS::EC2::NatGateway, AWS::EC2::EgressOnlyInternetGateway, AWS::EC2::VPCEndpoint, AWS::EC2::VPCEndpointService, AWS::EC2::FlowLog, AWS::EC2::VPCPeeringConnection, AWS::Elasticsearch::Domain, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::DBCluster, AWS::RDS::DBClusterSnapshot, AWS::RDS::EventSubscription, AWS::S3::Bucket, AWS::S3::AccountPublicAccessBlock, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::SSM::ManagedInstanceInventory, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::ElasticLoadBalancing::LoadBalancer, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::DynamoDB::Table, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::RuleGroup, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::RuleGroup, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::Lambda::Function, AWS::NetworkFirewall::Firewall, AWS::NetworkFirewall::FirewallPolicy, AWS::NetworkFirewall::RuleGroup, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::WAFv2::WebACL, AWS::WAFv2::RuleGroup, AWS::WAFv2::IPSet, AWS::WAFv2::RegexPatternSet, AWS::WAFv2::ManagedRuleSet, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ConformancePackCompliance, AWS::Config::ResourceCompliance, AWS::ApiGateway::Stage, AWS::ApiGateway::RestApi, AWS::ApiGatewayV2::Stage, AWS::ApiGatewayV2::Api, AWS::CodePipeline::Pipeline, AWS::ServiceCatalog::CloudFormationProvisionedProduct, AWS::ServiceCatalog::CloudFormationProduct, AWS::ServiceCatalog::Portfolio, AWS::SQS::Queue, AWS::KMS::Key, AWS::QLDB::Ledger, AWS::SecretsManager::Secret, AWS::SNS::Topic, AWS::SSM::FileData, AWS::Backup::BackupPlan, AWS::Backup::BackupSelection, AWS::Backup::BackupVault, AWS::Backup::RecoveryPoint, AWS::ECR::Repository, AWS::ECS::Cluster, AWS::ECS::Service, AWS::ECS::TaskDefinition, AWS::EFS::AccessPoint, AWS::EFS::FileSystem, AWS::EKS::Cluster, AWS::OpenSearch::Domain, AWS::EC2::TransitGateway, AWS::Kinesis::Stream, AWS::Kinesis::StreamConsumer, AWS::CodeDeploy::Application, AWS::CodeDeploy::DeploymentConfig, AWS::CodeDeploy::DeploymentGroup, AWS::EC2::LaunchTemplate, AWS::ECR::PublicRepository, AWS::GuardDuty::Detector, AWS::EMR::SecurityConfiguration, AWS::SageMaker::CodeRepository, AWS::Route53Resolver::ResolverEndpoint, AWS::Route53Resolver::ResolverRule, AWS::Route53Resolver::ResolverRuleAssociation, AWS::DMS::ReplicationSubnetGroup, AWS::DMS::EventSubscription, AWS::MSK::Cluster, AWS::StepFunctions::Activity, AWS::WorkSpaces::Workspace, AWS::WorkSpaces::ConnectionAlias, AWS::SageMaker::Model, AWS::ElasticLoadBalancingV2::Listener, AWS::StepFunctions::StateMachine, AWS::Batch::JobQueue, AWS::Batch::ComputeEnvironment, AWS::AccessAnalyzer::Analyzer, AWS::Athena::WorkGroup, AWS::Athena::DataCatalog, AWS::Detective::Graph, AWS::GlobalAccelerator::Accelerator, AWS::GlobalAccelerator::EndpointGroup, AWS::GlobalAccelerator::Listener, AWS::EC2::TransitGatewayAttachment, AWS::EC2::TransitGatewayRouteTable, AWS::DMS::Certificate, AWS::AppConfig::Application, AWS::AppSync::GraphQLApi, AWS::DataSync::LocationSMB, AWS::DataSync::LocationFSxLustre, AWS::DataSync::LocationS3, AWS::DataSync::LocationEFS, AWS::DataSync::Task, AWS::DataSync::LocationNFS, AWS::EC2::NetworkInsightsAccessScopeAnalysis, AWS::EKS::FargateProfile, AWS::Glue::Job, AWS::GuardDuty::ThreatIntelSet, AWS::GuardDuty::IPSet, AWS::SageMaker::Workteam, AWS::SageMaker::NotebookInstanceLifecycleConfig, AWS::ServiceDiscovery::Service, AWS::ServiceDiscovery::PublicDnsNamespace, AWS::SES::ContactList, AWS::SES::ConfigurationSet, AWS::Route53::HostedZone
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] configuration_recorder
     #   The configuration recorder object that records each configuration
     #   change made to the resources.
@@ -7359,27 +6300,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutConformancePackRequest
-    #   data as a hash:
-    #
-    #       {
-    #         conformance_pack_name: "ConformancePackName", # required
-    #         template_s3_uri: "TemplateS3Uri",
-    #         template_body: "TemplateBody",
-    #         delivery_s3_bucket: "DeliveryS3Bucket",
-    #         delivery_s3_key_prefix: "DeliveryS3KeyPrefix",
-    #         conformance_pack_input_parameters: [
-    #           {
-    #             parameter_name: "ParameterName", # required
-    #             parameter_value: "ParameterValue", # required
-    #           },
-    #         ],
-    #         template_ssm_document_details: {
-    #           document_name: "SSMDocumentName", # required
-    #           document_version: "SSMDocumentVersion",
-    #         },
-    #       }
-    #
     # @!attribute [rw] conformance_pack_name
     #   The unique name of the conformance pack you want to deploy.
     #   @return [String]
@@ -7463,22 +6383,6 @@ module Aws::ConfigService
 
     # The input for the PutDeliveryChannel action.
     #
-    # @note When making an API call, you may pass PutDeliveryChannelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         delivery_channel: { # required
-    #           name: "ChannelName",
-    #           s3_bucket_name: "String",
-    #           s3_key_prefix: "String",
-    #           s3_kms_key_arn: "String",
-    #           sns_topic_arn: "String",
-    #           config_snapshot_delivery_properties: {
-    #             delivery_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] delivery_channel
     #   The configuration delivery channel object that delivers the
     #   configuration information to an Amazon S3 bucket and to an Amazon
@@ -7493,23 +6397,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutEvaluationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         evaluations: [
-    #           {
-    #             compliance_resource_type: "StringWithCharLimit256", # required
-    #             compliance_resource_id: "BaseResourceId", # required
-    #             compliance_type: "COMPLIANT", # required, accepts COMPLIANT, NON_COMPLIANT, NOT_APPLICABLE, INSUFFICIENT_DATA
-    #             annotation: "StringWithCharLimit256",
-    #             ordering_timestamp: Time.now, # required
-    #           },
-    #         ],
-    #         result_token: "String", # required
-    #         test_mode: false,
-    #       }
-    #
     # @!attribute [rw] evaluations
     #   The assessments that the Lambda function performs. Each evaluation
     #   identifies an Amazon Web Services resource and indicates whether it
@@ -7556,20 +6443,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutExternalEvaluationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         config_rule_name: "ConfigRuleName", # required
-    #         external_evaluation: { # required
-    #           compliance_resource_type: "StringWithCharLimit256", # required
-    #           compliance_resource_id: "BaseResourceId", # required
-    #           compliance_type: "COMPLIANT", # required, accepts COMPLIANT, NON_COMPLIANT, NOT_APPLICABLE, INSUFFICIENT_DATA
-    #           annotation: "StringWithCharLimit256",
-    #           ordering_timestamp: Time.now, # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] config_rule_name
     #   The name of the Config rule.
     #   @return [String]
@@ -7592,48 +6465,6 @@ module Aws::ConfigService
     #
     class PutExternalEvaluationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass PutOrganizationConfigRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_config_rule_name: "OrganizationConfigRuleName", # required
-    #         organization_managed_rule_metadata: {
-    #           description: "StringWithCharLimit256Min0",
-    #           rule_identifier: "StringWithCharLimit256", # required
-    #           input_parameters: "StringWithCharLimit2048",
-    #           maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
-    #           resource_types_scope: ["StringWithCharLimit256"],
-    #           resource_id_scope: "StringWithCharLimit768",
-    #           tag_key_scope: "StringWithCharLimit128",
-    #           tag_value_scope: "StringWithCharLimit256",
-    #         },
-    #         organization_custom_rule_metadata: {
-    #           description: "StringWithCharLimit256Min0",
-    #           lambda_function_arn: "StringWithCharLimit256", # required
-    #           organization_config_rule_trigger_types: ["ConfigurationItemChangeNotification"], # required, accepts ConfigurationItemChangeNotification, OversizedConfigurationItemChangeNotification, ScheduledNotification
-    #           input_parameters: "StringWithCharLimit2048",
-    #           maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
-    #           resource_types_scope: ["StringWithCharLimit256"],
-    #           resource_id_scope: "StringWithCharLimit768",
-    #           tag_key_scope: "StringWithCharLimit128",
-    #           tag_value_scope: "StringWithCharLimit256",
-    #         },
-    #         excluded_accounts: ["AccountId"],
-    #         organization_custom_policy_rule_metadata: {
-    #           description: "StringWithCharLimit256Min0",
-    #           organization_config_rule_trigger_types: ["ConfigurationItemChangeNotification"], # accepts ConfigurationItemChangeNotification, OversizedConfigurationItemChangeNotification
-    #           input_parameters: "StringWithCharLimit2048",
-    #           maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
-    #           resource_types_scope: ["StringWithCharLimit256"],
-    #           resource_id_scope: "StringWithCharLimit768",
-    #           tag_key_scope: "StringWithCharLimit128",
-    #           tag_value_scope: "StringWithCharLimit256",
-    #           policy_runtime: "PolicyRuntime", # required
-    #           policy_text: "PolicyText", # required
-    #           debug_log_delivery_accounts: ["AccountId"],
-    #         },
-    #       }
-    #
     # @!attribute [rw] organization_config_rule_name
     #   The name that you assign to an organization Config rule.
     #   @return [String]
@@ -7695,24 +6526,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutOrganizationConformancePackRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_conformance_pack_name: "OrganizationConformancePackName", # required
-    #         template_s3_uri: "TemplateS3Uri",
-    #         template_body: "TemplateBody",
-    #         delivery_s3_bucket: "DeliveryS3Bucket",
-    #         delivery_s3_key_prefix: "DeliveryS3KeyPrefix",
-    #         conformance_pack_input_parameters: [
-    #           {
-    #             parameter_name: "ParameterName", # required
-    #             parameter_value: "ParameterValue", # required
-    #           },
-    #         ],
-    #         excluded_accounts: ["AccountId"],
-    #       }
-    #
     # @!attribute [rw] organization_conformance_pack_name
     #   Name of the organization conformance pack you want to create.
     #   @return [String]
@@ -7785,42 +6598,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutRemediationConfigurationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         remediation_configurations: [ # required
-    #           {
-    #             config_rule_name: "ConfigRuleName", # required
-    #             target_type: "SSM_DOCUMENT", # required, accepts SSM_DOCUMENT
-    #             target_id: "StringWithCharLimit256", # required
-    #             target_version: "String",
-    #             parameters: {
-    #               "StringWithCharLimit256" => {
-    #                 resource_value: {
-    #                   value: "RESOURCE_ID", # required, accepts RESOURCE_ID
-    #                 },
-    #                 static_value: {
-    #                   values: ["StringWithCharLimit256"], # required
-    #                 },
-    #               },
-    #             },
-    #             resource_type: "String",
-    #             automatic: false,
-    #             execution_controls: {
-    #               ssm_controls: {
-    #                 concurrent_execution_rate_percentage: 1,
-    #                 error_percentage: 1,
-    #               },
-    #             },
-    #             maximum_automatic_attempts: 1,
-    #             retry_attempt_seconds: 1,
-    #             arn: "StringWithCharLimit1024",
-    #             created_by_service: "StringWithCharLimit1024",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] remediation_configurations
     #   A list of remediation configuration objects.
     #   @return [Array<Types::RemediationConfiguration>]
@@ -7845,21 +6622,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutRemediationExceptionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         config_rule_name: "ConfigRuleName", # required
-    #         resource_keys: [ # required
-    #           {
-    #             resource_type: "StringWithCharLimit256",
-    #             resource_id: "StringWithCharLimit1024",
-    #           },
-    #         ],
-    #         message: "StringWithCharLimit1024",
-    #         expiration_time: Time.now,
-    #       }
-    #
     # @!attribute [rw] config_rule_name
     #   The name of the Config rule for which you want to create remediation
     #   exception.
@@ -7904,20 +6666,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutResourceConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_type: "ResourceTypeString", # required
-    #         schema_version_id: "SchemaVersionId", # required
-    #         resource_id: "ResourceId", # required
-    #         resource_name: "ResourceName",
-    #         configuration: "Configuration", # required
-    #         tags: {
-    #           "Name" => "Value",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_type
     #   The type of the resource. The custom resource type must be
     #   registered with CloudFormation.
@@ -7975,13 +6723,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutRetentionConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         retention_period_in_days: 1, # required
-    #       }
-    #
     # @!attribute [rw] retention_period_in_days
     #   Number of days Config stores your historical information.
     #
@@ -8010,25 +6751,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutStoredQueryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         stored_query: { # required
-    #           query_id: "QueryId",
-    #           query_arn: "QueryArn",
-    #           query_name: "QueryName", # required
-    #           description: "QueryDescription",
-    #           expression: "QueryExpression",
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] stored_query
     #   A list of `StoredQuery` objects. The mandatory fields are
     #   `QueryName` and `Expression`.
@@ -8131,15 +6853,6 @@ module Aws::ConfigService
     # [1]: https://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources
     # [2]: https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html
     #
-    # @note When making an API call, you may pass RecordingGroup
-    #   data as a hash:
-    #
-    #       {
-    #         all_supported: false,
-    #         include_global_resource_types: false,
-    #         resource_types: ["AWS::EC2::CustomerGateway"], # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::EC2::RegisteredHAInstance, AWS::EC2::NatGateway, AWS::EC2::EgressOnlyInternetGateway, AWS::EC2::VPCEndpoint, AWS::EC2::VPCEndpointService, AWS::EC2::FlowLog, AWS::EC2::VPCPeeringConnection, AWS::Elasticsearch::Domain, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::DBCluster, AWS::RDS::DBClusterSnapshot, AWS::RDS::EventSubscription, AWS::S3::Bucket, AWS::S3::AccountPublicAccessBlock, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::SSM::ManagedInstanceInventory, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::ElasticLoadBalancing::LoadBalancer, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::DynamoDB::Table, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::RuleGroup, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::RuleGroup, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::Lambda::Function, AWS::NetworkFirewall::Firewall, AWS::NetworkFirewall::FirewallPolicy, AWS::NetworkFirewall::RuleGroup, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::WAFv2::WebACL, AWS::WAFv2::RuleGroup, AWS::WAFv2::IPSet, AWS::WAFv2::RegexPatternSet, AWS::WAFv2::ManagedRuleSet, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ConformancePackCompliance, AWS::Config::ResourceCompliance, AWS::ApiGateway::Stage, AWS::ApiGateway::RestApi, AWS::ApiGatewayV2::Stage, AWS::ApiGatewayV2::Api, AWS::CodePipeline::Pipeline, AWS::ServiceCatalog::CloudFormationProvisionedProduct, AWS::ServiceCatalog::CloudFormationProduct, AWS::ServiceCatalog::Portfolio, AWS::SQS::Queue, AWS::KMS::Key, AWS::QLDB::Ledger, AWS::SecretsManager::Secret, AWS::SNS::Topic, AWS::SSM::FileData, AWS::Backup::BackupPlan, AWS::Backup::BackupSelection, AWS::Backup::BackupVault, AWS::Backup::RecoveryPoint, AWS::ECR::Repository, AWS::ECS::Cluster, AWS::ECS::Service, AWS::ECS::TaskDefinition, AWS::EFS::AccessPoint, AWS::EFS::FileSystem, AWS::EKS::Cluster, AWS::OpenSearch::Domain, AWS::EC2::TransitGateway, AWS::Kinesis::Stream, AWS::Kinesis::StreamConsumer, AWS::CodeDeploy::Application, AWS::CodeDeploy::DeploymentConfig, AWS::CodeDeploy::DeploymentGroup, AWS::EC2::LaunchTemplate, AWS::ECR::PublicRepository, AWS::GuardDuty::Detector, AWS::EMR::SecurityConfiguration, AWS::SageMaker::CodeRepository, AWS::Route53Resolver::ResolverEndpoint, AWS::Route53Resolver::ResolverRule, AWS::Route53Resolver::ResolverRuleAssociation, AWS::DMS::ReplicationSubnetGroup, AWS::DMS::EventSubscription, AWS::MSK::Cluster, AWS::StepFunctions::Activity, AWS::WorkSpaces::Workspace, AWS::WorkSpaces::ConnectionAlias, AWS::SageMaker::Model, AWS::ElasticLoadBalancingV2::Listener, AWS::StepFunctions::StateMachine, AWS::Batch::JobQueue, AWS::Batch::ComputeEnvironment, AWS::AccessAnalyzer::Analyzer, AWS::Athena::WorkGroup, AWS::Athena::DataCatalog, AWS::Detective::Graph, AWS::GlobalAccelerator::Accelerator, AWS::GlobalAccelerator::EndpointGroup, AWS::GlobalAccelerator::Listener, AWS::EC2::TransitGatewayAttachment, AWS::EC2::TransitGatewayRouteTable, AWS::DMS::Certificate, AWS::AppConfig::Application, AWS::AppSync::GraphQLApi, AWS::DataSync::LocationSMB, AWS::DataSync::LocationFSxLustre, AWS::DataSync::LocationS3, AWS::DataSync::LocationEFS, AWS::DataSync::Task, AWS::DataSync::LocationNFS, AWS::EC2::NetworkInsightsAccessScopeAnalysis, AWS::EKS::FargateProfile, AWS::Glue::Job, AWS::GuardDuty::ThreatIntelSet, AWS::GuardDuty::IPSet, AWS::SageMaker::Workteam, AWS::SageMaker::NotebookInstanceLifecycleConfig, AWS::ServiceDiscovery::Service, AWS::ServiceDiscovery::PublicDnsNamespace, AWS::SES::ContactList, AWS::SES::ConfigurationSet, AWS::Route53::HostedZone
-    #       }
-    #
     # @!attribute [rw] all_supported
     #   Specifies whether Config records configuration changes for every
     #   supported type of regional resource.
@@ -8232,38 +6945,6 @@ module Aws::ConfigService
     # An object that represents the details about the remediation
     # configuration that includes the remediation action, parameters, and
     # data to execute the action.
-    #
-    # @note When making an API call, you may pass RemediationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         config_rule_name: "ConfigRuleName", # required
-    #         target_type: "SSM_DOCUMENT", # required, accepts SSM_DOCUMENT
-    #         target_id: "StringWithCharLimit256", # required
-    #         target_version: "String",
-    #         parameters: {
-    #           "StringWithCharLimit256" => {
-    #             resource_value: {
-    #               value: "RESOURCE_ID", # required, accepts RESOURCE_ID
-    #             },
-    #             static_value: {
-    #               values: ["StringWithCharLimit256"], # required
-    #             },
-    #           },
-    #         },
-    #         resource_type: "String",
-    #         automatic: false,
-    #         execution_controls: {
-    #           ssm_controls: {
-    #             concurrent_execution_rate_percentage: 1,
-    #             error_percentage: 1,
-    #           },
-    #         },
-    #         maximum_automatic_attempts: 1,
-    #         retry_attempt_seconds: 1,
-    #         arn: "StringWithCharLimit1024",
-    #         created_by_service: "StringWithCharLimit1024",
-    #       }
     #
     # @!attribute [rw] config_rule_name
     #   The name of the Config rule.
@@ -8391,14 +7072,6 @@ module Aws::ConfigService
     # The details that identify a resource within Config, including the
     # resource type and resource ID.
     #
-    # @note When making an API call, you may pass RemediationExceptionResourceKey
-    #   data as a hash:
-    #
-    #       {
-    #         resource_type: "StringWithCharLimit256",
-    #         resource_id: "StringWithCharLimit1024",
-    #       }
-    #
     # @!attribute [rw] resource_type
     #   The type of a resource.
     #   @return [String]
@@ -8496,18 +7169,6 @@ module Aws::ConfigService
     # The value is either a dynamic (resource) value or a static value. You
     # must select either a dynamic value or a static value.
     #
-    # @note When making an API call, you may pass RemediationParameterValue
-    #   data as a hash:
-    #
-    #       {
-    #         resource_value: {
-    #           value: "RESOURCE_ID", # required, accepts RESOURCE_ID
-    #         },
-    #         static_value: {
-    #           values: ["StringWithCharLimit256"], # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_value
     #   The value is dynamic and changes at run-time.
     #   @return [Types::ResourceValue]
@@ -8561,15 +7222,6 @@ module Aws::ConfigService
     # Filters the resource count based on account ID, region, and resource
     # type.
     #
-    # @note When making an API call, you may pass ResourceCountFilters
-    #   data as a hash:
-    #
-    #       {
-    #         resource_type: "AWS::EC2::CustomerGateway", # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::EC2::RegisteredHAInstance, AWS::EC2::NatGateway, AWS::EC2::EgressOnlyInternetGateway, AWS::EC2::VPCEndpoint, AWS::EC2::VPCEndpointService, AWS::EC2::FlowLog, AWS::EC2::VPCPeeringConnection, AWS::Elasticsearch::Domain, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::DBCluster, AWS::RDS::DBClusterSnapshot, AWS::RDS::EventSubscription, AWS::S3::Bucket, AWS::S3::AccountPublicAccessBlock, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::SSM::ManagedInstanceInventory, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::ElasticLoadBalancing::LoadBalancer, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::DynamoDB::Table, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::RuleGroup, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::RuleGroup, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::Lambda::Function, AWS::NetworkFirewall::Firewall, AWS::NetworkFirewall::FirewallPolicy, AWS::NetworkFirewall::RuleGroup, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::WAFv2::WebACL, AWS::WAFv2::RuleGroup, AWS::WAFv2::IPSet, AWS::WAFv2::RegexPatternSet, AWS::WAFv2::ManagedRuleSet, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ConformancePackCompliance, AWS::Config::ResourceCompliance, AWS::ApiGateway::Stage, AWS::ApiGateway::RestApi, AWS::ApiGatewayV2::Stage, AWS::ApiGatewayV2::Api, AWS::CodePipeline::Pipeline, AWS::ServiceCatalog::CloudFormationProvisionedProduct, AWS::ServiceCatalog::CloudFormationProduct, AWS::ServiceCatalog::Portfolio, AWS::SQS::Queue, AWS::KMS::Key, AWS::QLDB::Ledger, AWS::SecretsManager::Secret, AWS::SNS::Topic, AWS::SSM::FileData, AWS::Backup::BackupPlan, AWS::Backup::BackupSelection, AWS::Backup::BackupVault, AWS::Backup::RecoveryPoint, AWS::ECR::Repository, AWS::ECS::Cluster, AWS::ECS::Service, AWS::ECS::TaskDefinition, AWS::EFS::AccessPoint, AWS::EFS::FileSystem, AWS::EKS::Cluster, AWS::OpenSearch::Domain, AWS::EC2::TransitGateway, AWS::Kinesis::Stream, AWS::Kinesis::StreamConsumer, AWS::CodeDeploy::Application, AWS::CodeDeploy::DeploymentConfig, AWS::CodeDeploy::DeploymentGroup, AWS::EC2::LaunchTemplate, AWS::ECR::PublicRepository, AWS::GuardDuty::Detector, AWS::EMR::SecurityConfiguration, AWS::SageMaker::CodeRepository, AWS::Route53Resolver::ResolverEndpoint, AWS::Route53Resolver::ResolverRule, AWS::Route53Resolver::ResolverRuleAssociation, AWS::DMS::ReplicationSubnetGroup, AWS::DMS::EventSubscription, AWS::MSK::Cluster, AWS::StepFunctions::Activity, AWS::WorkSpaces::Workspace, AWS::WorkSpaces::ConnectionAlias, AWS::SageMaker::Model, AWS::ElasticLoadBalancingV2::Listener, AWS::StepFunctions::StateMachine, AWS::Batch::JobQueue, AWS::Batch::ComputeEnvironment, AWS::AccessAnalyzer::Analyzer, AWS::Athena::WorkGroup, AWS::Athena::DataCatalog, AWS::Detective::Graph, AWS::GlobalAccelerator::Accelerator, AWS::GlobalAccelerator::EndpointGroup, AWS::GlobalAccelerator::Listener, AWS::EC2::TransitGatewayAttachment, AWS::EC2::TransitGatewayRouteTable, AWS::DMS::Certificate, AWS::AppConfig::Application, AWS::AppSync::GraphQLApi, AWS::DataSync::LocationSMB, AWS::DataSync::LocationFSxLustre, AWS::DataSync::LocationS3, AWS::DataSync::LocationEFS, AWS::DataSync::Task, AWS::DataSync::LocationNFS, AWS::EC2::NetworkInsightsAccessScopeAnalysis, AWS::EKS::FargateProfile, AWS::Glue::Job, AWS::GuardDuty::ThreatIntelSet, AWS::GuardDuty::IPSet, AWS::SageMaker::Workteam, AWS::SageMaker::NotebookInstanceLifecycleConfig, AWS::ServiceDiscovery::Service, AWS::ServiceDiscovery::PublicDnsNamespace, AWS::SES::ContactList, AWS::SES::ConfigurationSet, AWS::Route53::HostedZone
-    #         account_id: "AccountId",
-    #         region: "AwsRegion",
-    #       }
-    #
     # @!attribute [rw] resource_type
     #   The type of the Amazon Web Services resource.
     #   @return [String]
@@ -8593,16 +7245,6 @@ module Aws::ConfigService
     end
 
     # Returns information about the resource being evaluated.
-    #
-    # @note When making an API call, you may pass ResourceDetails
-    #   data as a hash:
-    #
-    #       {
-    #         resource_id: "BaseResourceId", # required
-    #         resource_type: "StringWithCharLimit256", # required
-    #         resource_configuration: "ResourceConfiguration", # required
-    #         resource_configuration_schema_type: "CFN_RESOURCE_SCHEMA", # accepts CFN_RESOURCE_SCHEMA
-    #       }
     #
     # @!attribute [rw] resource_id
     #   A unique resource ID for an evaluation.
@@ -8659,18 +7301,6 @@ module Aws::ConfigService
 
     # Returns details of a resource evaluation based on the selected filter.
     #
-    # @note When making an API call, you may pass ResourceEvaluationFilters
-    #   data as a hash:
-    #
-    #       {
-    #         evaluation_mode: "DETECTIVE", # accepts DETECTIVE, PROACTIVE
-    #         time_window: {
-    #           start_time: Time.now,
-    #           end_time: Time.now,
-    #         },
-    #         evaluation_context_identifier: "EvaluationContextIdentifier",
-    #       }
-    #
     # @!attribute [rw] evaluation_mode
     #   Filters all resource evaluations results based on an evaluation
     #   mode. the valid value for this API is `Proactive`.
@@ -8697,16 +7327,6 @@ module Aws::ConfigService
 
     # Filters the results by resource account ID, region, resource ID, and
     # resource name.
-    #
-    # @note When making an API call, you may pass ResourceFilters
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         resource_id: "ResourceId",
-    #         resource_name: "ResourceName",
-    #         region: "AwsRegion",
-    #       }
     #
     # @!attribute [rw] account_id
     #   The 12-digit source account ID.
@@ -8799,14 +7419,6 @@ module Aws::ConfigService
     # The details that identify a resource within Config, including the
     # resource type and resource ID.
     #
-    # @note When making an API call, you may pass ResourceKey
-    #   data as a hash:
-    #
-    #       {
-    #         resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::EC2::RegisteredHAInstance, AWS::EC2::NatGateway, AWS::EC2::EgressOnlyInternetGateway, AWS::EC2::VPCEndpoint, AWS::EC2::VPCEndpointService, AWS::EC2::FlowLog, AWS::EC2::VPCPeeringConnection, AWS::Elasticsearch::Domain, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::DBCluster, AWS::RDS::DBClusterSnapshot, AWS::RDS::EventSubscription, AWS::S3::Bucket, AWS::S3::AccountPublicAccessBlock, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::SSM::ManagedInstanceInventory, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::ElasticLoadBalancing::LoadBalancer, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::DynamoDB::Table, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::RuleGroup, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::RuleGroup, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::Lambda::Function, AWS::NetworkFirewall::Firewall, AWS::NetworkFirewall::FirewallPolicy, AWS::NetworkFirewall::RuleGroup, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::WAFv2::WebACL, AWS::WAFv2::RuleGroup, AWS::WAFv2::IPSet, AWS::WAFv2::RegexPatternSet, AWS::WAFv2::ManagedRuleSet, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ConformancePackCompliance, AWS::Config::ResourceCompliance, AWS::ApiGateway::Stage, AWS::ApiGateway::RestApi, AWS::ApiGatewayV2::Stage, AWS::ApiGatewayV2::Api, AWS::CodePipeline::Pipeline, AWS::ServiceCatalog::CloudFormationProvisionedProduct, AWS::ServiceCatalog::CloudFormationProduct, AWS::ServiceCatalog::Portfolio, AWS::SQS::Queue, AWS::KMS::Key, AWS::QLDB::Ledger, AWS::SecretsManager::Secret, AWS::SNS::Topic, AWS::SSM::FileData, AWS::Backup::BackupPlan, AWS::Backup::BackupSelection, AWS::Backup::BackupVault, AWS::Backup::RecoveryPoint, AWS::ECR::Repository, AWS::ECS::Cluster, AWS::ECS::Service, AWS::ECS::TaskDefinition, AWS::EFS::AccessPoint, AWS::EFS::FileSystem, AWS::EKS::Cluster, AWS::OpenSearch::Domain, AWS::EC2::TransitGateway, AWS::Kinesis::Stream, AWS::Kinesis::StreamConsumer, AWS::CodeDeploy::Application, AWS::CodeDeploy::DeploymentConfig, AWS::CodeDeploy::DeploymentGroup, AWS::EC2::LaunchTemplate, AWS::ECR::PublicRepository, AWS::GuardDuty::Detector, AWS::EMR::SecurityConfiguration, AWS::SageMaker::CodeRepository, AWS::Route53Resolver::ResolverEndpoint, AWS::Route53Resolver::ResolverRule, AWS::Route53Resolver::ResolverRuleAssociation, AWS::DMS::ReplicationSubnetGroup, AWS::DMS::EventSubscription, AWS::MSK::Cluster, AWS::StepFunctions::Activity, AWS::WorkSpaces::Workspace, AWS::WorkSpaces::ConnectionAlias, AWS::SageMaker::Model, AWS::ElasticLoadBalancingV2::Listener, AWS::StepFunctions::StateMachine, AWS::Batch::JobQueue, AWS::Batch::ComputeEnvironment, AWS::AccessAnalyzer::Analyzer, AWS::Athena::WorkGroup, AWS::Athena::DataCatalog, AWS::Detective::Graph, AWS::GlobalAccelerator::Accelerator, AWS::GlobalAccelerator::EndpointGroup, AWS::GlobalAccelerator::Listener, AWS::EC2::TransitGatewayAttachment, AWS::EC2::TransitGatewayRouteTable, AWS::DMS::Certificate, AWS::AppConfig::Application, AWS::AppSync::GraphQLApi, AWS::DataSync::LocationSMB, AWS::DataSync::LocationFSxLustre, AWS::DataSync::LocationS3, AWS::DataSync::LocationEFS, AWS::DataSync::Task, AWS::DataSync::LocationNFS, AWS::EC2::NetworkInsightsAccessScopeAnalysis, AWS::EKS::FargateProfile, AWS::Glue::Job, AWS::GuardDuty::ThreatIntelSet, AWS::GuardDuty::IPSet, AWS::SageMaker::Workteam, AWS::SageMaker::NotebookInstanceLifecycleConfig, AWS::ServiceDiscovery::Service, AWS::ServiceDiscovery::PublicDnsNamespace, AWS::SES::ContactList, AWS::SES::ConfigurationSet, AWS::Route53::HostedZone
-    #         resource_id: "ResourceId", # required
-    #       }
-    #
     # @!attribute [rw] resource_type
     #   The resource type.
     #   @return [String]
@@ -8838,13 +7450,6 @@ module Aws::ConfigService
     class ResourceNotFoundException < Aws::EmptyStructure; end
 
     # The dynamic value of the resource.
-    #
-    # @note When making an API call, you may pass ResourceValue
-    #   data as a hash:
-    #
-    #       {
-    #         value: "RESOURCE_ID", # required, accepts RESOURCE_ID
-    #       }
     #
     # @!attribute [rw] value
     #   The value is a resource ID.
@@ -8890,16 +7495,6 @@ module Aws::ConfigService
     # for a rule. Otherwise, evaluations for the rule are triggered when any
     # resource in your recording group changes in configuration.
     #
-    # @note When making an API call, you may pass Scope
-    #   data as a hash:
-    #
-    #       {
-    #         compliance_resource_types: ["StringWithCharLimit256"],
-    #         tag_key: "StringWithCharLimit128",
-    #         tag_value: "StringWithCharLimit256",
-    #         compliance_resource_id: "BaseResourceId",
-    #       }
-    #
     # @!attribute [rw] compliance_resource_types
     #   The resource types of only those Amazon Web Services resources that
     #   you want to trigger an evaluation for the rule. You can only specify
@@ -8935,17 +7530,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SelectAggregateResourceConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         expression: "Expression", # required
-    #         configuration_aggregator_name: "ConfigurationAggregatorName", # required
-    #         limit: 1,
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] expression
     #   The SQL query SELECT command.
     #   @return [String]
@@ -9003,15 +7587,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SelectResourceConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         expression: "Expression", # required
-    #         limit: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] expression
     #   The SQL query `SELECT` command.
     #   @return [String]
@@ -9063,26 +7638,6 @@ module Aws::ConfigService
     # and `CUSTOM_LAMBDA` for Custom Lambda rules), the rule identifier, and
     # the events that cause the evaluation of your Amazon Web Services
     # resources.
-    #
-    # @note When making an API call, you may pass Source
-    #   data as a hash:
-    #
-    #       {
-    #         owner: "CUSTOM_LAMBDA", # required, accepts CUSTOM_LAMBDA, AWS, CUSTOM_POLICY
-    #         source_identifier: "StringWithCharLimit256",
-    #         source_details: [
-    #           {
-    #             event_source: "aws.config", # accepts aws.config
-    #             message_type: "ConfigurationItemChangeNotification", # accepts ConfigurationItemChangeNotification, ConfigurationSnapshotDeliveryCompleted, ScheduledNotification, OversizedConfigurationItemChangeNotification
-    #             maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
-    #           },
-    #         ],
-    #         custom_policy_details: {
-    #           policy_runtime: "PolicyRuntime", # required
-    #           policy_text: "PolicyText", # required
-    #           enable_debug_log_delivery: false,
-    #         },
-    #       }
     #
     # @!attribute [rw] owner
     #   Indicates whether Amazon Web Services or the customer owns and
@@ -9152,15 +7707,6 @@ module Aws::ConfigService
     # for the rule if the trigger type is periodic. You can specify the
     # parameter values for `SourceDetail` only for custom rules.
     #
-    # @note When making an API call, you may pass SourceDetail
-    #   data as a hash:
-    #
-    #       {
-    #         event_source: "aws.config", # accepts aws.config
-    #         message_type: "ConfigurationItemChangeNotification", # accepts ConfigurationItemChangeNotification, ConfigurationSnapshotDeliveryCompleted, ScheduledNotification, OversizedConfigurationItemChangeNotification
-    #         maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
-    #       }
-    #
     # @!attribute [rw] event_source
     #   The source of the event, such as an Amazon Web Services service,
     #   that triggers Config to evaluate your Amazon Web Services resources.
@@ -9223,14 +7769,6 @@ module Aws::ConfigService
     # Amazon Web Services Systems Manager (SSM) specific remediation
     # controls.
     #
-    # @note When making an API call, you may pass SsmControls
-    #   data as a hash:
-    #
-    #       {
-    #         concurrent_execution_rate_percentage: 1,
-    #         error_percentage: 1,
-    #       }
-    #
     # @!attribute [rw] concurrent_execution_rate_percentage
     #   The maximum percentage of remediation actions allowed to run in
     #   parallel on the non-compliant resources for that specific rule. You
@@ -9255,13 +7793,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartConfigRulesEvaluationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         config_rule_names: ["ConfigRuleName"],
-    #       }
-    #
     # @!attribute [rw] config_rule_names
     #   The list of names of Config rules that you want to run evaluations
     #   for.
@@ -9284,13 +7815,6 @@ module Aws::ConfigService
 
     # The input for the StartConfigurationRecorder action.
     #
-    # @note When making an API call, you may pass StartConfigurationRecorderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_recorder_name: "RecorderName", # required
-    #       }
-    #
     # @!attribute [rw] configuration_recorder_name
     #   The name of the recorder object that records each configuration
     #   change made to the resources.
@@ -9304,19 +7828,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartRemediationExecutionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         config_rule_name: "ConfigRuleName", # required
-    #         resource_keys: [ # required
-    #           {
-    #             resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::EC2::RegisteredHAInstance, AWS::EC2::NatGateway, AWS::EC2::EgressOnlyInternetGateway, AWS::EC2::VPCEndpoint, AWS::EC2::VPCEndpointService, AWS::EC2::FlowLog, AWS::EC2::VPCPeeringConnection, AWS::Elasticsearch::Domain, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::DBCluster, AWS::RDS::DBClusterSnapshot, AWS::RDS::EventSubscription, AWS::S3::Bucket, AWS::S3::AccountPublicAccessBlock, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::SSM::ManagedInstanceInventory, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::ElasticLoadBalancing::LoadBalancer, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::DynamoDB::Table, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::RuleGroup, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::RuleGroup, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::Lambda::Function, AWS::NetworkFirewall::Firewall, AWS::NetworkFirewall::FirewallPolicy, AWS::NetworkFirewall::RuleGroup, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::WAFv2::WebACL, AWS::WAFv2::RuleGroup, AWS::WAFv2::IPSet, AWS::WAFv2::RegexPatternSet, AWS::WAFv2::ManagedRuleSet, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ConformancePackCompliance, AWS::Config::ResourceCompliance, AWS::ApiGateway::Stage, AWS::ApiGateway::RestApi, AWS::ApiGatewayV2::Stage, AWS::ApiGatewayV2::Api, AWS::CodePipeline::Pipeline, AWS::ServiceCatalog::CloudFormationProvisionedProduct, AWS::ServiceCatalog::CloudFormationProduct, AWS::ServiceCatalog::Portfolio, AWS::SQS::Queue, AWS::KMS::Key, AWS::QLDB::Ledger, AWS::SecretsManager::Secret, AWS::SNS::Topic, AWS::SSM::FileData, AWS::Backup::BackupPlan, AWS::Backup::BackupSelection, AWS::Backup::BackupVault, AWS::Backup::RecoveryPoint, AWS::ECR::Repository, AWS::ECS::Cluster, AWS::ECS::Service, AWS::ECS::TaskDefinition, AWS::EFS::AccessPoint, AWS::EFS::FileSystem, AWS::EKS::Cluster, AWS::OpenSearch::Domain, AWS::EC2::TransitGateway, AWS::Kinesis::Stream, AWS::Kinesis::StreamConsumer, AWS::CodeDeploy::Application, AWS::CodeDeploy::DeploymentConfig, AWS::CodeDeploy::DeploymentGroup, AWS::EC2::LaunchTemplate, AWS::ECR::PublicRepository, AWS::GuardDuty::Detector, AWS::EMR::SecurityConfiguration, AWS::SageMaker::CodeRepository, AWS::Route53Resolver::ResolverEndpoint, AWS::Route53Resolver::ResolverRule, AWS::Route53Resolver::ResolverRuleAssociation, AWS::DMS::ReplicationSubnetGroup, AWS::DMS::EventSubscription, AWS::MSK::Cluster, AWS::StepFunctions::Activity, AWS::WorkSpaces::Workspace, AWS::WorkSpaces::ConnectionAlias, AWS::SageMaker::Model, AWS::ElasticLoadBalancingV2::Listener, AWS::StepFunctions::StateMachine, AWS::Batch::JobQueue, AWS::Batch::ComputeEnvironment, AWS::AccessAnalyzer::Analyzer, AWS::Athena::WorkGroup, AWS::Athena::DataCatalog, AWS::Detective::Graph, AWS::GlobalAccelerator::Accelerator, AWS::GlobalAccelerator::EndpointGroup, AWS::GlobalAccelerator::Listener, AWS::EC2::TransitGatewayAttachment, AWS::EC2::TransitGatewayRouteTable, AWS::DMS::Certificate, AWS::AppConfig::Application, AWS::AppSync::GraphQLApi, AWS::DataSync::LocationSMB, AWS::DataSync::LocationFSxLustre, AWS::DataSync::LocationS3, AWS::DataSync::LocationEFS, AWS::DataSync::Task, AWS::DataSync::LocationNFS, AWS::EC2::NetworkInsightsAccessScopeAnalysis, AWS::EKS::FargateProfile, AWS::Glue::Job, AWS::GuardDuty::ThreatIntelSet, AWS::GuardDuty::IPSet, AWS::SageMaker::Workteam, AWS::SageMaker::NotebookInstanceLifecycleConfig, AWS::ServiceDiscovery::Service, AWS::ServiceDiscovery::PublicDnsNamespace, AWS::SES::ContactList, AWS::SES::ConfigurationSet, AWS::Route53::HostedZone
-    #             resource_id: "ResourceId", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] config_rule_name
     #   The list of names of Config rules that you want to run remediation
     #   execution for.
@@ -9356,24 +7867,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartResourceEvaluationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_details: { # required
-    #           resource_id: "BaseResourceId", # required
-    #           resource_type: "StringWithCharLimit256", # required
-    #           resource_configuration: "ResourceConfiguration", # required
-    #           resource_configuration_schema_type: "CFN_RESOURCE_SCHEMA", # accepts CFN_RESOURCE_SCHEMA
-    #         },
-    #         evaluation_context: {
-    #           evaluation_context_identifier: "EvaluationContextIdentifier",
-    #         },
-    #         evaluation_mode: "DETECTIVE", # required, accepts DETECTIVE, PROACTIVE
-    #         evaluation_timeout: 1,
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] resource_details
     #   Returns a `ResourceDetails` object.
     #   @return [Types::ResourceDetails]
@@ -9436,13 +7929,6 @@ module Aws::ConfigService
 
     # The static value of the resource.
     #
-    # @note When making an API call, you may pass StaticValue
-    #   data as a hash:
-    #
-    #       {
-    #         values: ["StringWithCharLimit256"], # required
-    #       }
-    #
     # @!attribute [rw] values
     #   A list of values. For example, the ARN of the assumed role.
     #   @return [Array<String>]
@@ -9457,14 +7943,6 @@ module Aws::ConfigService
 
     # Status filter object to filter results based on specific member
     # account ID or status type for an organization Config rule.
-    #
-    # @note When making an API call, you may pass StatusDetailFilters
-    #   data as a hash:
-    #
-    #       {
-    #         account_id: "AccountId",
-    #         member_account_rule_status: "CREATE_SUCCESSFUL", # accepts CREATE_SUCCESSFUL, CREATE_IN_PROGRESS, CREATE_FAILED, DELETE_SUCCESSFUL, DELETE_FAILED, DELETE_IN_PROGRESS, UPDATE_SUCCESSFUL, UPDATE_IN_PROGRESS, UPDATE_FAILED
-    #       }
     #
     # @!attribute [rw] account_id
     #   The 12-digit account ID of the member account within an
@@ -9522,13 +8000,6 @@ module Aws::ConfigService
 
     # The input for the StopConfigurationRecorder action.
     #
-    # @note When making an API call, you may pass StopConfigurationRecorderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration_recorder_name: "RecorderName", # required
-    #       }
-    #
     # @!attribute [rw] configuration_recorder_name
     #   The name of the recorder object that records each configuration
     #   change made to the resources.
@@ -9543,17 +8014,6 @@ module Aws::ConfigService
     end
 
     # Provides the details of a stored query.
-    #
-    # @note When making an API call, you may pass StoredQuery
-    #   data as a hash:
-    #
-    #       {
-    #         query_id: "QueryId",
-    #         query_arn: "QueryArn",
-    #         query_name: "QueryName", # required
-    #         description: "QueryDescription",
-    #         expression: "QueryExpression",
-    #       }
     #
     # @!attribute [rw] query_id
     #   The ID of the query.
@@ -9629,14 +8089,6 @@ module Aws::ConfigService
     # maximum character length of 128 characters, and tag values can have a
     # maximum length of 256 characters.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey",
-    #         value: "TagValue",
-    #       }
-    #
     # @!attribute [rw] key
     #   One part of a key-value pair that make up a tag. A key is a general
     #   label that acts like a category for more specific tag values.
@@ -9656,19 +8108,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) that identifies the resource for
     #   which to list the tags. Currently, the supported resources are
@@ -9703,14 +8142,6 @@ module Aws::ConfigService
     #
     # [1]: https://docs.aws.amazon.com/config/latest/APIReference/API_PutConformancePack.html
     #
-    # @note When making an API call, you may pass TemplateSSMDocumentDetails
-    #   data as a hash:
-    #
-    #       {
-    #         document_name: "SSMDocumentName", # required
-    #         document_version: "SSMDocumentVersion",
-    #       }
-    #
     # @!attribute [rw] document_name
     #   The name or Amazon Resource Name (ARN) of the SSM document to use to
     #   create a conformance pack. If you use the document name, Config
@@ -9738,14 +8169,6 @@ module Aws::ConfigService
     end
 
     # Filters evaluation results based on start and end times.
-    #
-    # @note When making an API call, you may pass TimeWindow
-    #   data as a hash:
-    #
-    #       {
-    #         start_time: Time.now,
-    #         end_time: Time.now,
-    #       }
     #
     # @!attribute [rw] start_time
     #   The start time of an execution.
@@ -9777,14 +8200,6 @@ module Aws::ConfigService
     #
     class TooManyTagsException < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) that identifies the resource for
     #   which to list the tags. Currently, the supported resources are

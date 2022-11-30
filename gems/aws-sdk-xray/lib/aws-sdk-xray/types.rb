@@ -87,18 +87,6 @@ module Aws::XRay
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BackendConnectionErrors
-    #   data as a hash:
-    #
-    #       {
-    #         timeout_count: 1,
-    #         connection_refused_count: 1,
-    #         http_code_4_xx_count: 1,
-    #         http_code_5_xx_count: 1,
-    #         unknown_host_count: 1,
-    #         other_count: 1,
-    #       }
-    #
     # @!attribute [rw] timeout_count
     #   @return [Integer]
     #
@@ -130,14 +118,6 @@ module Aws::XRay
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchGetTracesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         trace_ids: ["TraceId"], # required
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] trace_ids
     #   Specify the trace IDs of requests for which to retrieve segments.
     #   @return [Array<String>]
@@ -177,24 +157,6 @@ module Aws::XRay
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         group_name: "GroupName", # required
-    #         filter_expression: "FilterExpression",
-    #         insights_configuration: {
-    #           insights_enabled: false,
-    #           notifications_enabled: false,
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] group_name
     #   The case-sensitive name of the new group. Default is a reserved name
     #   and names must be unique.
@@ -268,35 +230,6 @@ module Aws::XRay
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateSamplingRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         sampling_rule: { # required
-    #           rule_name: "RuleName",
-    #           rule_arn: "String",
-    #           resource_arn: "ResourceARN", # required
-    #           priority: 1, # required
-    #           fixed_rate: 1.0, # required
-    #           reservoir_size: 1, # required
-    #           service_name: "ServiceName", # required
-    #           service_type: "ServiceType", # required
-    #           host: "Host", # required
-    #           http_method: "HTTPMethod", # required
-    #           url_path: "URLPath", # required
-    #           version: 1, # required
-    #           attributes: {
-    #             "AttributeKey" => "AttributeValue",
-    #           },
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] sampling_rule
     #   The rule definition.
     #   @return [Types::SamplingRule]
@@ -349,14 +282,6 @@ module Aws::XRay
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         group_name: "GroupName",
-    #         group_arn: "GroupARN",
-    #       }
-    #
     # @!attribute [rw] group_name
     #   The case-sensitive name of the group.
     #   @return [String]
@@ -378,14 +303,6 @@ module Aws::XRay
     #
     class DeleteGroupResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteResourcePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy_name: "PolicyName", # required
-    #         policy_revision_id: "PolicyRevisionId",
-    #       }
-    #
     # @!attribute [rw] policy_name
     #   The name of the resource policy to delete.
     #   @return [String]
@@ -410,14 +327,6 @@ module Aws::XRay
     #
     class DeleteResourcePolicyResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteSamplingRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         rule_name: "String",
-    #         rule_arn: "String",
-    #       }
-    #
     # @!attribute [rw] rule_name
     #   The name of the sampling rule. Specify a rule by either name or ARN,
     #   but not both.
@@ -810,8 +719,6 @@ module Aws::XRay
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetEncryptionConfigRequest AWS API Documentation
     #
     class GetEncryptionConfigRequest < Aws::EmptyStructure; end
@@ -828,14 +735,6 @@ module Aws::XRay
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         group_name: "GroupName",
-    #         group_arn: "GroupARN",
-    #       }
-    #
     # @!attribute [rw] group_name
     #   The case-sensitive name of the group.
     #   @return [String]
@@ -867,13 +766,6 @@ module Aws::XRay
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "GetGroupsNextToken",
-    #       }
-    #
     # @!attribute [rw] next_token
     #   Pagination token.
     #   @return [String]
@@ -903,15 +795,6 @@ module Aws::XRay
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetInsightEventsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         insight_id: "InsightId", # required
-    #         max_results: 1,
-    #         next_token: "Token",
-    #       }
-    #
     # @!attribute [rw] insight_id
     #   The insight's unique identifier. Use the GetInsightSummaries action
     #   to retrieve an InsightId.
@@ -955,16 +838,6 @@ module Aws::XRay
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetInsightImpactGraphRequest
-    #   data as a hash:
-    #
-    #       {
-    #         insight_id: "InsightId", # required
-    #         start_time: Time.now, # required
-    #         end_time: Time.now, # required
-    #         next_token: "Token",
-    #       }
-    #
     # @!attribute [rw] insight_id
     #   The insight's unique identifier. Use the GetInsightSummaries action
     #   to retrieve an InsightId.
@@ -1041,13 +914,6 @@ module Aws::XRay
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetInsightRequest
-    #   data as a hash:
-    #
-    #       {
-    #         insight_id: "InsightId", # required
-    #       }
-    #
     # @!attribute [rw] insight_id
     #   The insight's unique identifier. Use the GetInsightSummaries action
     #   to retrieve an InsightId.
@@ -1073,19 +939,6 @@ module Aws::XRay
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetInsightSummariesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         states: ["ACTIVE"], # accepts ACTIVE, CLOSED
-    #         group_arn: "GroupARN",
-    #         group_name: "GroupName",
-    #         start_time: Time.now, # required
-    #         end_time: Time.now, # required
-    #         max_results: 1,
-    #         next_token: "Token",
-    #       }
-    #
     # @!attribute [rw] states
     #   The list of insight states.
     #   @return [Array<String>]
@@ -1151,13 +1004,6 @@ module Aws::XRay
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSamplingRulesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] next_token
     #   Pagination token.
     #   @return [String]
@@ -1187,13 +1033,6 @@ module Aws::XRay
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSamplingStatisticSummariesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] next_token
     #   Pagination token.
     #   @return [String]
@@ -1224,22 +1063,6 @@ module Aws::XRay
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSamplingTargetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         sampling_statistics_documents: [ # required
-    #           {
-    #             rule_name: "RuleName", # required
-    #             client_id: "ClientID", # required
-    #             timestamp: Time.now, # required
-    #             request_count: 1, # required
-    #             sampled_count: 1, # required
-    #             borrow_count: 1,
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] sampling_statistics_documents
     #   Information about rules that the service is using to sample
     #   requests.
@@ -1287,17 +1110,6 @@ module Aws::XRay
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetServiceGraphRequest
-    #   data as a hash:
-    #
-    #       {
-    #         start_time: Time.now, # required
-    #         end_time: Time.now, # required
-    #         group_name: "GroupName",
-    #         group_arn: "GroupARN",
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] start_time
     #   The start of the time frame for which to generate a graph.
     #   @return [Time]
@@ -1366,20 +1178,6 @@ module Aws::XRay
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetTimeSeriesServiceStatisticsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         start_time: Time.now, # required
-    #         end_time: Time.now, # required
-    #         group_name: "GroupName",
-    #         group_arn: "GroupARN",
-    #         entity_selector_expression: "EntitySelectorExpression",
-    #         period: 1,
-    #         forecast_statistics: false,
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] start_time
     #   The start of the time frame for which to aggregate statistics.
     #   @return [Time]
@@ -1456,14 +1254,6 @@ module Aws::XRay
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetTraceGraphRequest
-    #   data as a hash:
-    #
-    #       {
-    #         trace_ids: ["TraceId"], # required
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] trace_ids
     #   Trace IDs of requests for which to generate a service graph.
     #   @return [Array<String>]
@@ -1498,22 +1288,6 @@ module Aws::XRay
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetTraceSummariesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         start_time: Time.now, # required
-    #         end_time: Time.now, # required
-    #         time_range_type: "TraceId", # accepts TraceId, Event
-    #         sampling: false,
-    #         sampling_strategy: {
-    #           name: "PartialScan", # accepts PartialScan, FixedRate
-    #           value: 1.0,
-    #         },
-    #         filter_expression: "FilterExpression",
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] start_time
     #   The start of the time frame for which to retrieve traces.
     #   @return [Time]
@@ -1989,14 +1763,6 @@ module Aws::XRay
 
     # The structure containing configurations related to insights.
     #
-    # @note When making an API call, you may pass InsightsConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         insights_enabled: false,
-    #         notifications_enabled: false,
-    #       }
-    #
     # @!attribute [rw] insights_enabled
     #   Set the InsightsEnabled value to true to enable insights or false to
     #   disable insights.
@@ -2060,13 +1826,6 @@ module Aws::XRay
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListResourcePoliciesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "ResourcePolicyNextToken",
-    #       }
-    #
     # @!attribute [rw] next_token
     #   Not currently supported.
     #   @return [String]
@@ -2097,14 +1856,6 @@ module Aws::XRay
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Number (ARN) of an X-Ray group or sampling rule.
     #   @return [String]
@@ -2198,14 +1949,6 @@ module Aws::XRay
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutEncryptionConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         key_id: "EncryptionKeyId",
-    #         type: "NONE", # required, accepts NONE, KMS
-    #       }
-    #
     # @!attribute [rw] key_id
     #   An Amazon Web Services KMS key in one of the following formats:
     #
@@ -2249,16 +1992,6 @@ module Aws::XRay
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutResourcePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy_name: "PolicyName", # required
-    #         policy_document: "PolicyDocument", # required
-    #         policy_revision_id: "PolicyRevisionId",
-    #         bypass_policy_lockout_check: false,
-    #       }
-    #
     # @!attribute [rw] policy_name
     #   The name of the resource policy. Must be unique within a specific
     #   Amazon Web Services account.
@@ -2321,32 +2054,6 @@ module Aws::XRay
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutTelemetryRecordsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         telemetry_records: [ # required
-    #           {
-    #             timestamp: Time.now, # required
-    #             segments_received_count: 1,
-    #             segments_sent_count: 1,
-    #             segments_spillover_count: 1,
-    #             segments_rejected_count: 1,
-    #             backend_connection_errors: {
-    #               timeout_count: 1,
-    #               connection_refused_count: 1,
-    #               http_code_4_xx_count: 1,
-    #               http_code_5_xx_count: 1,
-    #               unknown_host_count: 1,
-    #               other_count: 1,
-    #             },
-    #           },
-    #         ],
-    #         ec2_instance_id: "EC2InstanceId",
-    #         hostname: "Hostname",
-    #         resource_arn: "ResourceARN",
-    #       }
-    #
     # @!attribute [rw] telemetry_records
     #   @return [Array<Types::TelemetryRecord>]
     #
@@ -2374,13 +2081,6 @@ module Aws::XRay
     #
     class PutTelemetryRecordsResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass PutTraceSegmentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         trace_segment_documents: ["TraceSegmentDocument"], # required
-    #       }
-    #
     # @!attribute [rw] trace_segment_documents
     #   A string containing a JSON document defining one or more segments or
     #   subsegments.
@@ -2617,27 +2317,6 @@ module Aws::XRay
     # properties of a request. The service can ignore rules that don't
     # match its properties.
     #
-    # @note When making an API call, you may pass SamplingRule
-    #   data as a hash:
-    #
-    #       {
-    #         rule_name: "RuleName",
-    #         rule_arn: "String",
-    #         resource_arn: "ResourceARN", # required
-    #         priority: 1, # required
-    #         fixed_rate: 1.0, # required
-    #         reservoir_size: 1, # required
-    #         service_name: "ServiceName", # required
-    #         service_type: "ServiceType", # required
-    #         host: "Host", # required
-    #         http_method: "HTTPMethod", # required
-    #         url_path: "URLPath", # required
-    #         version: 1, # required
-    #         attributes: {
-    #           "AttributeKey" => "AttributeValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] rule_name
     #   The name of the sampling rule. Specify a rule by either name or ARN,
     #   but not both.
@@ -2747,26 +2426,6 @@ module Aws::XRay
     end
 
     # A document specifying changes to a sampling rule's configuration.
-    #
-    # @note When making an API call, you may pass SamplingRuleUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         rule_name: "RuleName",
-    #         rule_arn: "String",
-    #         resource_arn: "ResourceARN",
-    #         priority: 1,
-    #         fixed_rate: 1.0,
-    #         reservoir_size: 1,
-    #         host: "Host",
-    #         service_name: "ServiceName",
-    #         service_type: "ServiceType",
-    #         http_method: "HTTPMethod",
-    #         url_path: "URLPath",
-    #         attributes: {
-    #           "AttributeKey" => "AttributeValue",
-    #         },
-    #       }
     #
     # @!attribute [rw] rule_name
     #   The name of the sampling rule. Specify a rule by either name or ARN,
@@ -2886,18 +2545,6 @@ module Aws::XRay
     #
     # [1]: https://docs.aws.amazon.com/xray/latest/api/API_GetSamplingTargets.html
     #
-    # @note When making an API call, you may pass SamplingStatisticsDocument
-    #   data as a hash:
-    #
-    #       {
-    #         rule_name: "RuleName", # required
-    #         client_id: "ClientID", # required
-    #         timestamp: Time.now, # required
-    #         request_count: 1, # required
-    #         sampled_count: 1, # required
-    #         borrow_count: 1,
-    #       }
-    #
     # @!attribute [rw] rule_name
     #   The name of the sampling rule.
     #   @return [String]
@@ -2936,14 +2583,6 @@ module Aws::XRay
     end
 
     # The name and value of a sampling rule to apply to a trace summary.
-    #
-    # @note When making an API call, you may pass SamplingStrategy
-    #   data as a hash:
-    #
-    #       {
-    #         name: "PartialScan", # accepts PartialScan, FixedRate
-    #         value: 1.0,
-    #       }
     #
     # @!attribute [rw] name
     #   The name of a sampling rule.
@@ -3208,14 +2847,6 @@ module Aws::XRay
     #
     # [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   A tag key, such as `Stage` or `Name`. A tag key cannot be empty. The
     #   key can be a maximum of 128 characters, and can contain only Unicode
@@ -3239,19 +2870,6 @@ module Aws::XRay
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Number (ARN) of an X-Ray group or sampling rule.
     #   @return [String]
@@ -3296,25 +2914,6 @@ module Aws::XRay
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass TelemetryRecord
-    #   data as a hash:
-    #
-    #       {
-    #         timestamp: Time.now, # required
-    #         segments_received_count: 1,
-    #         segments_sent_count: 1,
-    #         segments_spillover_count: 1,
-    #         segments_rejected_count: 1,
-    #         backend_connection_errors: {
-    #           timeout_count: 1,
-    #           connection_refused_count: 1,
-    #           http_code_4_xx_count: 1,
-    #           http_code_5_xx_count: 1,
-    #           unknown_host_count: 1,
-    #           other_count: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] timestamp
     #   @return [Time]
     #
@@ -3643,14 +3242,6 @@ module Aws::XRay
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Number (ARN) of an X-Ray group or sampling rule.
     #   @return [String]
@@ -3673,19 +3264,6 @@ module Aws::XRay
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         group_name: "GroupName",
-    #         group_arn: "GroupARN",
-    #         filter_expression: "FilterExpression",
-    #         insights_configuration: {
-    #           insights_enabled: false,
-    #           notifications_enabled: false,
-    #         },
-    #       }
-    #
     # @!attribute [rw] group_name
     #   The case-sensitive name of the group.
     #   @return [String]
@@ -3736,28 +3314,6 @@ module Aws::XRay
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateSamplingRuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         sampling_rule_update: { # required
-    #           rule_name: "RuleName",
-    #           rule_arn: "String",
-    #           resource_arn: "ResourceARN",
-    #           priority: 1,
-    #           fixed_rate: 1.0,
-    #           reservoir_size: 1,
-    #           host: "Host",
-    #           service_name: "ServiceName",
-    #           service_type: "ServiceType",
-    #           http_method: "HTTPMethod",
-    #           url_path: "URLPath",
-    #           attributes: {
-    #             "AttributeKey" => "AttributeValue",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] sampling_rule_update
     #   The rule and fields to change.
     #   @return [Types::SamplingRuleUpdate]

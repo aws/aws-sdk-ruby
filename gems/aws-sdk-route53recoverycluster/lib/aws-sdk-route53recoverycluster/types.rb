@@ -60,13 +60,6 @@ module Aws::Route53RecoveryCluster
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRoutingControlStateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         routing_control_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] routing_control_arn
     #   The Amazon Resource Name (ARN) for the routing control that you want
     #   to get the state for.
@@ -120,15 +113,6 @@ module Aws::Route53RecoveryCluster
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRoutingControlsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         control_panel_arn: "Arn",
-    #         next_token: "PageToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] control_panel_arn
     #   The Amazon Resource Name (ARN) of the control panel of the routing
     #   controls to list.
@@ -289,14 +273,6 @@ module Aws::Route53RecoveryCluster
 
     # A routing control state entry.
     #
-    # @note When making an API call, you may pass UpdateRoutingControlStateEntry
-    #   data as a hash:
-    #
-    #       {
-    #         routing_control_arn: "Arn", # required
-    #         routing_control_state: "On", # required, accepts On, Off
-    #       }
-    #
     # @!attribute [rw] routing_control_arn
     #   The Amazon Resource Name (ARN) for a routing control state entry.
     #   @return [String]
@@ -314,15 +290,6 @@ module Aws::Route53RecoveryCluster
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateRoutingControlStateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         routing_control_arn: "Arn", # required
-    #         routing_control_state: "On", # required, accepts On, Off
-    #         safety_rules_to_override: ["Arn"],
-    #       }
-    #
     # @!attribute [rw] routing_control_arn
     #   The Amazon Resource Name (ARN) for the routing control that you want
     #   to update the state for.
@@ -362,19 +329,6 @@ module Aws::Route53RecoveryCluster
     #
     class UpdateRoutingControlStateResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateRoutingControlStatesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         update_routing_control_state_entries: [ # required
-    #           {
-    #             routing_control_arn: "Arn", # required
-    #             routing_control_state: "On", # required, accepts On, Off
-    #           },
-    #         ],
-    #         safety_rules_to_override: ["Arn"],
-    #       }
-    #
     # @!attribute [rw] update_routing_control_state_entries
     #   A set of routing control entries that you want to update.
     #   @return [Array<Types::UpdateRoutingControlStateEntry>]

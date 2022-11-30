@@ -133,21 +133,6 @@ module Aws::FIS
     #
     # [1]: https://docs.aws.amazon.com/fis/latest/userguide/actions.html
     #
-    # @note When making an API call, you may pass CreateExperimentTemplateActionInput
-    #   data as a hash:
-    #
-    #       {
-    #         action_id: "ActionId", # required
-    #         description: "ExperimentTemplateActionDescription",
-    #         parameters: {
-    #           "ExperimentTemplateActionParameterName" => "ExperimentTemplateActionParameter",
-    #         },
-    #         targets: {
-    #           "ExperimentTemplateActionTargetName" => "ExperimentTemplateTargetName",
-    #         },
-    #         start_after: ["ExperimentTemplateActionStartAfter"],
-    #       }
-    #
     # @!attribute [rw] action_id
     #   The ID of the action. The format of the action ID is:
     #   aws:*service-name*\:*action-type*.
@@ -185,20 +170,6 @@ module Aws::FIS
 
     # Specifies the configuration for experiment logging.
     #
-    # @note When making an API call, you may pass CreateExperimentTemplateLogConfigurationInput
-    #   data as a hash:
-    #
-    #       {
-    #         cloud_watch_logs_configuration: {
-    #           log_group_arn: "CloudWatchLogGroupArn", # required
-    #         },
-    #         s3_configuration: {
-    #           bucket_name: "S3BucketName", # required
-    #           prefix: "S3ObjectKey",
-    #         },
-    #         log_schema_version: 1, # required
-    #       }
-    #
     # @!attribute [rw] cloud_watch_logs_configuration
     #   The configuration for experiment logging to Amazon CloudWatch Logs.
     #   @return [Types::ExperimentTemplateCloudWatchLogsLogConfigurationInput]
@@ -221,66 +192,6 @@ module Aws::FIS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateExperimentTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken", # required
-    #         description: "ExperimentTemplateDescription", # required
-    #         stop_conditions: [ # required
-    #           {
-    #             source: "StopConditionSource", # required
-    #             value: "StopConditionValue",
-    #           },
-    #         ],
-    #         targets: {
-    #           "ExperimentTemplateTargetName" => {
-    #             resource_type: "TargetResourceTypeId", # required
-    #             resource_arns: ["ResourceArn"],
-    #             resource_tags: {
-    #               "TagKey" => "TagValue",
-    #             },
-    #             filters: [
-    #               {
-    #                 path: "ExperimentTemplateTargetFilterPath", # required
-    #                 values: ["ExperimentTemplateTargetFilterValue"], # required
-    #               },
-    #             ],
-    #             selection_mode: "ExperimentTemplateTargetSelectionMode", # required
-    #             parameters: {
-    #               "ExperimentTemplateTargetParameterName" => "ExperimentTemplateTargetParameterValue",
-    #             },
-    #           },
-    #         },
-    #         actions: { # required
-    #           "ExperimentTemplateActionName" => {
-    #             action_id: "ActionId", # required
-    #             description: "ExperimentTemplateActionDescription",
-    #             parameters: {
-    #               "ExperimentTemplateActionParameterName" => "ExperimentTemplateActionParameter",
-    #             },
-    #             targets: {
-    #               "ExperimentTemplateActionTargetName" => "ExperimentTemplateTargetName",
-    #             },
-    #             start_after: ["ExperimentTemplateActionStartAfter"],
-    #           },
-    #         },
-    #         role_arn: "RoleArn", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         log_configuration: {
-    #           cloud_watch_logs_configuration: {
-    #             log_group_arn: "CloudWatchLogGroupArn", # required
-    #           },
-    #           s3_configuration: {
-    #             bucket_name: "S3BucketName", # required
-    #             prefix: "S3ObjectKey",
-    #           },
-    #           log_schema_version: 1, # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
@@ -347,14 +258,6 @@ module Aws::FIS
 
     # Specifies a stop condition for an experiment template.
     #
-    # @note When making an API call, you may pass CreateExperimentTemplateStopConditionInput
-    #   data as a hash:
-    #
-    #       {
-    #         source: "StopConditionSource", # required
-    #         value: "StopConditionValue",
-    #       }
-    #
     # @!attribute [rw] source
     #   The source for the stop condition. Specify `aws:cloudwatch:alarm` if
     #   the stop condition is defined by a CloudWatch alarm. Specify `none`
@@ -385,27 +288,6 @@ module Aws::FIS
     #
     #
     # [1]: https://docs.aws.amazon.com/fis/latest/userguide/targets.html
-    #
-    # @note When making an API call, you may pass CreateExperimentTemplateTargetInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_type: "TargetResourceTypeId", # required
-    #         resource_arns: ["ResourceArn"],
-    #         resource_tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         filters: [
-    #           {
-    #             path: "ExperimentTemplateTargetFilterPath", # required
-    #             values: ["ExperimentTemplateTargetFilterValue"], # required
-    #           },
-    #         ],
-    #         selection_mode: "ExperimentTemplateTargetSelectionMode", # required
-    #         parameters: {
-    #           "ExperimentTemplateTargetParameterName" => "ExperimentTemplateTargetParameterValue",
-    #         },
-    #       }
     #
     # @!attribute [rw] resource_type
     #   The resource type. The resource type must be supported for the
@@ -459,13 +341,6 @@ module Aws::FIS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteExperimentTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ExperimentTemplateId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the experiment template.
     #   @return [String]
@@ -933,13 +808,6 @@ module Aws::FIS
     # Specifies the configuration for experiment logging to Amazon
     # CloudWatch Logs.
     #
-    # @note When making an API call, you may pass ExperimentTemplateCloudWatchLogsLogConfigurationInput
-    #   data as a hash:
-    #
-    #       {
-    #         log_group_arn: "CloudWatchLogGroupArn", # required
-    #       }
-    #
     # @!attribute [rw] log_group_arn
     #   The Amazon Resource Name (ARN) of the destination Amazon CloudWatch
     #   Logs log group.
@@ -997,14 +865,6 @@ module Aws::FIS
     end
 
     # Specifies the configuration for experiment logging to Amazon S3.
-    #
-    # @note When making an API call, you may pass ExperimentTemplateS3LogConfigurationInput
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_name: "S3BucketName", # required
-    #         prefix: "S3ObjectKey",
-    #       }
     #
     # @!attribute [rw] bucket_name
     #   The name of the destination bucket.
@@ -1147,14 +1007,6 @@ module Aws::FIS
     #
     # [1]: https://docs.aws.amazon.com/fis/latest/userguide/targets.html#target-filters
     #
-    # @note When making an API call, you may pass ExperimentTemplateTargetInputFilter
-    #   data as a hash:
-    #
-    #       {
-    #         path: "ExperimentTemplateTargetFilterPath", # required
-    #         values: ["ExperimentTemplateTargetFilterValue"], # required
-    #       }
-    #
     # @!attribute [rw] path
     #   The attribute path for the filter.
     #   @return [String]
@@ -1172,13 +1024,6 @@ module Aws::FIS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetActionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ActionId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the action.
     #   @return [String]
@@ -1203,13 +1048,6 @@ module Aws::FIS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetExperimentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ExperimentId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the experiment.
     #   @return [String]
@@ -1234,13 +1072,6 @@ module Aws::FIS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetExperimentTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ExperimentTemplateId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the experiment template.
     #   @return [String]
@@ -1265,13 +1096,6 @@ module Aws::FIS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetTargetResourceTypeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_type: "TargetResourceTypeId", # required
-    #       }
-    #
     # @!attribute [rw] resource_type
     #   The resource type.
     #   @return [String]
@@ -1296,14 +1120,6 @@ module Aws::FIS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListActionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to return with a single call. To
     #   retrieve the remaining results, make another call with the returned
@@ -1341,14 +1157,6 @@ module Aws::FIS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListExperimentTemplatesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to return with a single call. To
     #   retrieve the remaining results, make another call with the returned
@@ -1386,14 +1194,6 @@ module Aws::FIS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListExperimentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to return with a single call. To
     #   retrieve the remaining results, make another call with the returned
@@ -1431,13 +1231,6 @@ module Aws::FIS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -1462,14 +1255,6 @@ module Aws::FIS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTargetResourceTypesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to return with a single call. To
     #   retrieve the remaining results, make another call with the returned
@@ -1533,17 +1318,6 @@ module Aws::FIS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartExperimentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken", # required
-    #         experiment_template_id: "ExperimentTemplateId", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
@@ -1582,13 +1356,6 @@ module Aws::FIS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopExperimentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ExperimentId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the experiment.
     #   @return [String]
@@ -1613,16 +1380,6 @@ module Aws::FIS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -1707,14 +1464,6 @@ module Aws::FIS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         tag_keys: ["TagKey"],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -1737,21 +1486,6 @@ module Aws::FIS
     class UntagResourceResponse < Aws::EmptyStructure; end
 
     # Specifies an action for an experiment template.
-    #
-    # @note When making an API call, you may pass UpdateExperimentTemplateActionInputItem
-    #   data as a hash:
-    #
-    #       {
-    #         action_id: "ActionId",
-    #         description: "ExperimentTemplateActionDescription",
-    #         parameters: {
-    #           "ExperimentTemplateActionParameterName" => "ExperimentTemplateActionParameter",
-    #         },
-    #         targets: {
-    #           "ExperimentTemplateActionTargetName" => "ExperimentTemplateTargetName",
-    #         },
-    #         start_after: ["ExperimentTemplateActionStartAfter"],
-    #       }
     #
     # @!attribute [rw] action_id
     #   The ID of the action.
@@ -1789,20 +1523,6 @@ module Aws::FIS
 
     # Specifies the configuration for experiment logging.
     #
-    # @note When making an API call, you may pass UpdateExperimentTemplateLogConfigurationInput
-    #   data as a hash:
-    #
-    #       {
-    #         cloud_watch_logs_configuration: {
-    #           log_group_arn: "CloudWatchLogGroupArn", # required
-    #         },
-    #         s3_configuration: {
-    #           bucket_name: "S3BucketName", # required
-    #           prefix: "S3ObjectKey",
-    #         },
-    #         log_schema_version: 1,
-    #       }
-    #
     # @!attribute [rw] cloud_watch_logs_configuration
     #   The configuration for experiment logging to Amazon CloudWatch Logs.
     #   @return [Types::ExperimentTemplateCloudWatchLogsLogConfigurationInput]
@@ -1825,63 +1545,6 @@ module Aws::FIS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateExperimentTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ExperimentTemplateId", # required
-    #         description: "ExperimentTemplateDescription",
-    #         stop_conditions: [
-    #           {
-    #             source: "StopConditionSource", # required
-    #             value: "StopConditionValue",
-    #           },
-    #         ],
-    #         targets: {
-    #           "ExperimentTemplateTargetName" => {
-    #             resource_type: "TargetResourceTypeId", # required
-    #             resource_arns: ["ResourceArn"],
-    #             resource_tags: {
-    #               "TagKey" => "TagValue",
-    #             },
-    #             filters: [
-    #               {
-    #                 path: "ExperimentTemplateTargetFilterPath", # required
-    #                 values: ["ExperimentTemplateTargetFilterValue"], # required
-    #               },
-    #             ],
-    #             selection_mode: "ExperimentTemplateTargetSelectionMode", # required
-    #             parameters: {
-    #               "ExperimentTemplateTargetParameterName" => "ExperimentTemplateTargetParameterValue",
-    #             },
-    #           },
-    #         },
-    #         actions: {
-    #           "ExperimentTemplateActionName" => {
-    #             action_id: "ActionId",
-    #             description: "ExperimentTemplateActionDescription",
-    #             parameters: {
-    #               "ExperimentTemplateActionParameterName" => "ExperimentTemplateActionParameter",
-    #             },
-    #             targets: {
-    #               "ExperimentTemplateActionTargetName" => "ExperimentTemplateTargetName",
-    #             },
-    #             start_after: ["ExperimentTemplateActionStartAfter"],
-    #           },
-    #         },
-    #         role_arn: "RoleArn",
-    #         log_configuration: {
-    #           cloud_watch_logs_configuration: {
-    #             log_group_arn: "CloudWatchLogGroupArn", # required
-    #           },
-    #           s3_configuration: {
-    #             bucket_name: "S3BucketName", # required
-    #             prefix: "S3ObjectKey",
-    #           },
-    #           log_schema_version: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the experiment template.
     #   @return [String]
@@ -1940,14 +1603,6 @@ module Aws::FIS
     # Specifies a stop condition for an experiment. You can define a stop
     # condition as a CloudWatch alarm.
     #
-    # @note When making an API call, you may pass UpdateExperimentTemplateStopConditionInput
-    #   data as a hash:
-    #
-    #       {
-    #         source: "StopConditionSource", # required
-    #         value: "StopConditionValue",
-    #       }
-    #
     # @!attribute [rw] source
     #   The source for the stop condition. Specify `aws:cloudwatch:alarm` if
     #   the stop condition is defined by a CloudWatch alarm. Specify `none`
@@ -1970,27 +1625,6 @@ module Aws::FIS
     # Specifies a target for an experiment. You must specify at least one
     # Amazon Resource Name (ARN) or at least one resource tag. You cannot
     # specify both.
-    #
-    # @note When making an API call, you may pass UpdateExperimentTemplateTargetInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_type: "TargetResourceTypeId", # required
-    #         resource_arns: ["ResourceArn"],
-    #         resource_tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         filters: [
-    #           {
-    #             path: "ExperimentTemplateTargetFilterPath", # required
-    #             values: ["ExperimentTemplateTargetFilterValue"], # required
-    #           },
-    #         ],
-    #         selection_mode: "ExperimentTemplateTargetSelectionMode", # required
-    #         parameters: {
-    #           "ExperimentTemplateTargetParameterName" => "ExperimentTemplateTargetParameterValue",
-    #         },
-    #       }
     #
     # @!attribute [rw] resource_type
     #   The resource type. The resource type must be supported for the

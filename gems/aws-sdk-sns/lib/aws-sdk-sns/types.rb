@@ -10,16 +10,6 @@
 module Aws::SNS
   module Types
 
-    # @note When making an API call, you may pass AddPermissionInput
-    #   data as a hash:
-    #
-    #       {
-    #         topic_arn: "topicARN", # required
-    #         label: "label", # required
-    #         aws_account_id: ["delegate"], # required
-    #         action_name: ["action"], # required
-    #       }
-    #
     # @!attribute [rw] topic_arn
     #   The ARN of the topic whose access control policy you wish to modify.
     #   @return [String]
@@ -125,13 +115,6 @@ module Aws::SNS
 
     # The input for the `CheckIfPhoneNumberIsOptedOut` action.
     #
-    # @note When making an API call, you may pass CheckIfPhoneNumberIsOptedOutInput
-    #   data as a hash:
-    #
-    #       {
-    #         phone_number: "PhoneNumber", # required
-    #       }
-    #
     # @!attribute [rw] phone_number
     #   The phone number for which you want to check the opt out status.
     #   @return [String]
@@ -179,15 +162,6 @@ module Aws::SNS
     end
 
     # Input for ConfirmSubscription action.
-    #
-    # @note When making an API call, you may pass ConfirmSubscriptionInput
-    #   data as a hash:
-    #
-    #       {
-    #         topic_arn: "topicARN", # required
-    #         token: "token", # required
-    #         authenticate_on_unsubscribe: "authenticateOnUnsubscribe",
-    #       }
     #
     # @!attribute [rw] topic_arn
     #   The ARN of the topic for which you wish to confirm a subscription.
@@ -245,17 +219,6 @@ module Aws::SNS
 
     # Input for CreatePlatformApplication action.
     #
-    # @note When making an API call, you may pass CreatePlatformApplicationInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #         platform: "String", # required
-    #         attributes: { # required
-    #           "String" => "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   Application names must be made up of only uppercase and lowercase
     #   ASCII letters, numbers, underscores, hyphens, and periods, and must
@@ -302,18 +265,6 @@ module Aws::SNS
 
     # Input for CreatePlatformEndpoint action.
     #
-    # @note When making an API call, you may pass CreatePlatformEndpointInput
-    #   data as a hash:
-    #
-    #       {
-    #         platform_application_arn: "String", # required
-    #         token: "String", # required
-    #         custom_user_data: "String",
-    #         attributes: {
-    #           "String" => "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] platform_application_arn
     #   PlatformApplicationArn returned from CreatePlatformApplication is
     #   used to create a an endpoint.
@@ -353,14 +304,6 @@ module Aws::SNS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateSMSSandboxPhoneNumberInput
-    #   data as a hash:
-    #
-    #       {
-    #         phone_number: "PhoneNumberString", # required
-    #         language_code: "en-US", # accepts en-US, en-GB, es-419, es-ES, de-DE, fr-CA, fr-FR, it-IT, ja-JP, pt-BR, kr-KR, zh-CN, zh-TW
-    #       }
-    #
     # @!attribute [rw] phone_number
     #   The destination phone number to verify. On verification, Amazon SNS
     #   adds this phone number to the list of verified phone numbers that
@@ -386,23 +329,6 @@ module Aws::SNS
     class CreateSMSSandboxPhoneNumberResult < Aws::EmptyStructure; end
 
     # Input for CreateTopic action.
-    #
-    # @note When making an API call, you may pass CreateTopicInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "topicName", # required
-    #         attributes: {
-    #           "attributeName" => "attributeValue",
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         data_protection_policy: "attributeValue",
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the topic you want to create.
@@ -519,13 +445,6 @@ module Aws::SNS
 
     # Input for DeleteEndpoint action.
     #
-    # @note When making an API call, you may pass DeleteEndpointInput
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] endpoint_arn
     #   EndpointArn of endpoint to delete.
     #   @return [String]
@@ -540,13 +459,6 @@ module Aws::SNS
 
     # Input for DeletePlatformApplication action.
     #
-    # @note When making an API call, you may pass DeletePlatformApplicationInput
-    #   data as a hash:
-    #
-    #       {
-    #         platform_application_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] platform_application_arn
     #   PlatformApplicationArn of platform application object to delete.
     #   @return [String]
@@ -559,13 +471,6 @@ module Aws::SNS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteSMSSandboxPhoneNumberInput
-    #   data as a hash:
-    #
-    #       {
-    #         phone_number: "PhoneNumberString", # required
-    #       }
-    #
     # @!attribute [rw] phone_number
     #   The destination phone number to delete.
     #   @return [String]
@@ -582,13 +487,6 @@ module Aws::SNS
     #
     class DeleteSMSSandboxPhoneNumberResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteTopicInput
-    #   data as a hash:
-    #
-    #       {
-    #         topic_arn: "topicARN", # required
-    #       }
-    #
     # @!attribute [rw] topic_arn
     #   The ARN of the topic you want to delete.
     #   @return [String]
@@ -663,13 +561,6 @@ module Aws::SNS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDataProtectionPolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "topicARN", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the topic whose `DataProtectionPolicy` you want to get.
     #
@@ -702,13 +593,6 @@ module Aws::SNS
     end
 
     # Input for GetEndpointAttributes action.
-    #
-    # @note When making an API call, you may pass GetEndpointAttributesInput
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_arn: "String", # required
-    #       }
     #
     # @!attribute [rw] endpoint_arn
     #   EndpointArn for GetEndpointAttributes input.
@@ -755,13 +639,6 @@ module Aws::SNS
     end
 
     # Input for GetPlatformApplicationAttributes action.
-    #
-    # @note When making an API call, you may pass GetPlatformApplicationAttributesInput
-    #   data as a hash:
-    #
-    #       {
-    #         platform_application_arn: "String", # required
-    #       }
     #
     # @!attribute [rw] platform_application_arn
     #   PlatformApplicationArn for GetPlatformApplicationAttributesInput.
@@ -813,13 +690,6 @@ module Aws::SNS
 
     # The input for the `GetSMSAttributes` request.
     #
-    # @note When making an API call, you may pass GetSMSAttributesInput
-    #   data as a hash:
-    #
-    #       {
-    #         attributes: ["String"],
-    #       }
-    #
     # @!attribute [rw] attributes
     #   A list of the individual attribute names, such as
     #   `MonthlySpendLimit`, for which you want values.
@@ -856,8 +726,6 @@ module Aws::SNS
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetSMSSandboxAccountStatusInput AWS API Documentation
     #
     class GetSMSSandboxAccountStatusInput < Aws::EmptyStructure; end
@@ -876,13 +744,6 @@ module Aws::SNS
     end
 
     # Input for GetSubscriptionAttributes.
-    #
-    # @note When making an API call, you may pass GetSubscriptionAttributesInput
-    #   data as a hash:
-    #
-    #       {
-    #         subscription_arn: "subscriptionARN", # required
-    #       }
     #
     # @!attribute [rw] subscription_arn
     #   The ARN of the subscription whose properties you want to get.
@@ -970,13 +831,6 @@ module Aws::SNS
     end
 
     # Input for GetTopicAttributes action.
-    #
-    # @note When making an API call, you may pass GetTopicAttributesInput
-    #   data as a hash:
-    #
-    #       {
-    #         topic_arn: "topicARN", # required
-    #       }
     #
     # @!attribute [rw] topic_arn
     #   The ARN of the topic whose properties you want to get.
@@ -1238,14 +1092,6 @@ module Aws::SNS
 
     # Input for ListEndpointsByPlatformApplication action.
     #
-    # @note When making an API call, you may pass ListEndpointsByPlatformApplicationInput
-    #   data as a hash:
-    #
-    #       {
-    #         platform_application_arn: "String", # required
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] platform_application_arn
     #   PlatformApplicationArn for ListEndpointsByPlatformApplicationInput
     #   action.
@@ -1287,14 +1133,6 @@ module Aws::SNS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListOriginationNumbersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "nextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   Token that the previous `ListOriginationNumbers` request returns.
     #   @return [String]
@@ -1333,13 +1171,6 @@ module Aws::SNS
     end
 
     # The input for the `ListPhoneNumbersOptedOut` action.
-    #
-    # @note When making an API call, you may pass ListPhoneNumbersOptedOutInput
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "string",
-    #       }
     #
     # @!attribute [rw] next_token
     #   A `NextToken` string is used when you call the
@@ -1380,13 +1211,6 @@ module Aws::SNS
 
     # Input for ListPlatformApplications action.
     #
-    # @note When making an API call, you may pass ListPlatformApplicationsInput
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] next_token
     #   NextToken string is used when calling ListPlatformApplications
     #   action to retrieve additional records that are available after the
@@ -1423,14 +1247,6 @@ module Aws::SNS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSMSSandboxPhoneNumbersInput
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "nextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   Token that the previous `ListSMSSandboxPhoneNumbersInput` request
     #   returns.
@@ -1469,14 +1285,6 @@ module Aws::SNS
     end
 
     # Input for ListSubscriptionsByTopic action.
-    #
-    # @note When making an API call, you may pass ListSubscriptionsByTopicInput
-    #   data as a hash:
-    #
-    #       {
-    #         topic_arn: "topicARN", # required
-    #         next_token: "nextToken",
-    #       }
     #
     # @!attribute [rw] topic_arn
     #   The ARN of the topic for which you wish to find subscriptions.
@@ -1518,13 +1326,6 @@ module Aws::SNS
 
     # Input for ListSubscriptions action.
     #
-    # @note When making an API call, you may pass ListSubscriptionsInput
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "nextToken",
-    #       }
-    #
     # @!attribute [rw] next_token
     #   Token returned by the previous `ListSubscriptions` request.
     #   @return [String]
@@ -1557,13 +1358,6 @@ module Aws::SNS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the topic for which to list tags.
     #   @return [String]
@@ -1588,13 +1382,6 @@ module Aws::SNS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTopicsInput
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "nextToken",
-    #       }
-    #
     # @!attribute [rw] next_token
     #   Token returned by the previous `ListTopics` request.
     #   @return [String]
@@ -1644,15 +1431,6 @@ module Aws::SNS
     # [2]: https://docs.aws.amazon.com/sns/latest/dg/SNSMessageAttributes.html
     # [3]: https://docs.aws.amazon.com/sns/latest/dg/sms_publish-to-phone.html
     #
-    # @note When making an API call, you may pass MessageAttributeValue
-    #   data as a hash:
-    #
-    #       {
-    #         data_type: "String", # required
-    #         string_value: "String",
-    #         binary_value: "data",
-    #       }
-    #
     # @!attribute [rw] data_type
     #   Amazon SNS supports the following logical data types: String,
     #   String.Array, Number, and Binary. For more information, see [Message
@@ -1701,13 +1479,6 @@ module Aws::SNS
     end
 
     # Input for the OptInPhoneNumber action.
-    #
-    # @note When making an API call, you may pass OptInPhoneNumberInput
-    #   data as a hash:
-    #
-    #       {
-    #         phone_number: "PhoneNumber", # required
-    #       }
     #
     # @!attribute [rw] phone_number
     #   The phone number to opt in. Use E.164 format.
@@ -1815,30 +1586,6 @@ module Aws::SNS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PublishBatchInput
-    #   data as a hash:
-    #
-    #       {
-    #         topic_arn: "topicARN", # required
-    #         publish_batch_request_entries: [ # required
-    #           {
-    #             id: "String", # required
-    #             message: "message", # required
-    #             subject: "subject",
-    #             message_structure: "messageStructure",
-    #             message_attributes: {
-    #               "String" => {
-    #                 data_type: "String", # required
-    #                 string_value: "String",
-    #                 binary_value: "data",
-    #               },
-    #             },
-    #             message_deduplication_id: "String",
-    #             message_group_id: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] topic_arn
     #   The Amazon resource name (ARN) of the topic you want to batch
     #   publish to.
@@ -1860,25 +1607,6 @@ module Aws::SNS
 
     # Contains the details of a single Amazon SNS message along with an `Id`
     # that identifies a message within the batch.
-    #
-    # @note When making an API call, you may pass PublishBatchRequestEntry
-    #   data as a hash:
-    #
-    #       {
-    #         id: "String", # required
-    #         message: "message", # required
-    #         subject: "subject",
-    #         message_structure: "messageStructure",
-    #         message_attributes: {
-    #           "String" => {
-    #             data_type: "String", # required
-    #             string_value: "String",
-    #             binary_value: "data",
-    #           },
-    #         },
-    #         message_deduplication_id: "String",
-    #         message_group_id: "String",
-    #       }
     #
     # @!attribute [rw] id
     #   An identifier for the message in this batch.
@@ -2071,27 +1799,6 @@ module Aws::SNS
 
     # Input for Publish action.
     #
-    # @note When making an API call, you may pass PublishInput
-    #   data as a hash:
-    #
-    #       {
-    #         topic_arn: "topicARN",
-    #         target_arn: "String",
-    #         phone_number: "String",
-    #         message: "message", # required
-    #         subject: "subject",
-    #         message_structure: "messageStructure",
-    #         message_attributes: {
-    #           "String" => {
-    #             data_type: "String", # required
-    #             string_value: "String",
-    #             binary_value: "data",
-    #           },
-    #         },
-    #         message_deduplication_id: "String",
-    #         message_group_id: "String",
-    #       }
-    #
     # @!attribute [rw] topic_arn
     #   The topic you want to publish to.
     #
@@ -2277,14 +1984,6 @@ module Aws::SNS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutDataProtectionPolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "topicARN", # required
-    #         data_protection_policy: "attributeValue", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the topic whose `DataProtectionPolicy` you want to add or
     #   update.
@@ -2315,14 +2014,6 @@ module Aws::SNS
     end
 
     # Input for RemovePermission action.
-    #
-    # @note When making an API call, you may pass RemovePermissionInput
-    #   data as a hash:
-    #
-    #       {
-    #         topic_arn: "topicARN", # required
-    #         label: "label", # required
-    #       }
     #
     # @!attribute [rw] topic_arn
     #   The ARN of the topic whose access control policy you wish to modify.
@@ -2390,16 +2081,6 @@ module Aws::SNS
 
     # Input for SetEndpointAttributes action.
     #
-    # @note When making an API call, you may pass SetEndpointAttributesInput
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_arn: "String", # required
-    #         attributes: { # required
-    #           "String" => "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] endpoint_arn
     #   EndpointArn used for SetEndpointAttributes action.
     #   @return [String]
@@ -2433,16 +2114,6 @@ module Aws::SNS
     end
 
     # Input for SetPlatformApplicationAttributes action.
-    #
-    # @note When making an API call, you may pass SetPlatformApplicationAttributesInput
-    #   data as a hash:
-    #
-    #       {
-    #         platform_application_arn: "String", # required
-    #         attributes: { # required
-    #           "String" => "String",
-    #         },
-    #       }
     #
     # @!attribute [rw] platform_application_arn
     #   PlatformApplicationArn for SetPlatformApplicationAttributes action.
@@ -2524,15 +2195,6 @@ module Aws::SNS
     end
 
     # The input for the SetSMSAttributes action.
-    #
-    # @note When making an API call, you may pass SetSMSAttributesInput
-    #   data as a hash:
-    #
-    #       {
-    #         attributes: { # required
-    #           "String" => "String",
-    #         },
-    #       }
     #
     # @!attribute [rw] attributes
     #   The default settings for sending SMS messages from your Amazon Web
@@ -2636,15 +2298,6 @@ module Aws::SNS
 
     # Input for SetSubscriptionAttributes action.
     #
-    # @note When making an API call, you may pass SetSubscriptionAttributesInput
-    #   data as a hash:
-    #
-    #       {
-    #         subscription_arn: "subscriptionARN", # required
-    #         attribute_name: "attributeName", # required
-    #         attribute_value: "attributeValue",
-    #       }
-    #
     # @!attribute [rw] subscription_arn
     #   The ARN of the subscription to modify.
     #   @return [String]
@@ -2710,15 +2363,6 @@ module Aws::SNS
     end
 
     # Input for SetTopicAttributes action.
-    #
-    # @note When making an API call, you may pass SetTopicAttributesInput
-    #   data as a hash:
-    #
-    #       {
-    #         topic_arn: "topicARN", # required
-    #         attribute_name: "attributeName", # required
-    #         attribute_value: "attributeValue",
-    #       }
     #
     # @!attribute [rw] topic_arn
     #   The ARN of the topic to modify.
@@ -2808,19 +2452,6 @@ module Aws::SNS
     end
 
     # Input for Subscribe action.
-    #
-    # @note When making an API call, you may pass SubscribeInput
-    #   data as a hash:
-    #
-    #       {
-    #         topic_arn: "topicARN", # required
-    #         protocol: "protocol", # required
-    #         endpoint: "endpoint",
-    #         attributes: {
-    #           "attributeName" => "attributeValue",
-    #         },
-    #         return_subscription_arn: false,
-    #       }
     #
     # @!attribute [rw] topic_arn
     #   The ARN of the topic you want to subscribe to.
@@ -3023,14 +2654,6 @@ module Aws::SNS
 
     # The list of tags to be added to the specified topic.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The required key portion of the tag.
     #   @return [String]
@@ -3075,19 +2698,6 @@ module Aws::SNS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the topic to which to add tags.
     #   @return [String]
@@ -3169,13 +2779,6 @@ module Aws::SNS
 
     # Input for Unsubscribe action.
     #
-    # @note When making an API call, you may pass UnsubscribeInput
-    #   data as a hash:
-    #
-    #       {
-    #         subscription_arn: "subscriptionARN", # required
-    #       }
-    #
     # @!attribute [rw] subscription_arn
     #   The ARN of the subscription to be deleted.
     #   @return [String]
@@ -3188,14 +2791,6 @@ module Aws::SNS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the topic from which to remove tags.
     #   @return [String]
@@ -3263,14 +2858,6 @@ module Aws::SNS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass VerifySMSSandboxPhoneNumberInput
-    #   data as a hash:
-    #
-    #       {
-    #         phone_number: "PhoneNumberString", # required
-    #         one_time_password: "OTPCode", # required
-    #       }
-    #
     # @!attribute [rw] phone_number
     #   The destination phone number to verify.
     #   @return [String]

@@ -12,16 +12,6 @@ module Aws::Backup
 
     # A list of backup options for each resource type.
     #
-    # @note When making an API call, you may pass AdvancedBackupSetting
-    #   data as a hash:
-    #
-    #       {
-    #         resource_type: "ResourceType",
-    #         backup_options: {
-    #           "BackupOptionKey" => "BackupOptionValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_type
     #   Specifies an object containing resource type and backup options. The
     #   only supported resource type is Amazon EC2 instances with Windows
@@ -300,47 +290,6 @@ module Aws::Backup
     # `BackupRule` objects, each of which specifies a backup rule. Each rule
     # in a backup plan is a separate scheduled task.
     #
-    # @note When making an API call, you may pass BackupPlanInput
-    #   data as a hash:
-    #
-    #       {
-    #         backup_plan_name: "BackupPlanName", # required
-    #         rules: [ # required
-    #           {
-    #             rule_name: "BackupRuleName", # required
-    #             target_backup_vault_name: "BackupVaultName", # required
-    #             schedule_expression: "CronExpression",
-    #             start_window_minutes: 1,
-    #             completion_window_minutes: 1,
-    #             lifecycle: {
-    #               move_to_cold_storage_after_days: 1,
-    #               delete_after_days: 1,
-    #             },
-    #             recovery_point_tags: {
-    #               "TagKey" => "TagValue",
-    #             },
-    #             copy_actions: [
-    #               {
-    #                 lifecycle: {
-    #                   move_to_cold_storage_after_days: 1,
-    #                   delete_after_days: 1,
-    #                 },
-    #                 destination_backup_vault_arn: "ARN", # required
-    #               },
-    #             ],
-    #             enable_continuous_backup: false,
-    #           },
-    #         ],
-    #         advanced_backup_settings: [
-    #           {
-    #             resource_type: "ResourceType",
-    #             backup_options: {
-    #               "BackupOptionKey" => "BackupOptionValue",
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] backup_plan_name
     #   The display name of a backup plan. Must contain 1 to 50 alphanumeric
     #   or '-\_.' characters.
@@ -562,34 +511,6 @@ module Aws::Backup
 
     # Specifies a scheduled task used to back up a selection of resources.
     #
-    # @note When making an API call, you may pass BackupRuleInput
-    #   data as a hash:
-    #
-    #       {
-    #         rule_name: "BackupRuleName", # required
-    #         target_backup_vault_name: "BackupVaultName", # required
-    #         schedule_expression: "CronExpression",
-    #         start_window_minutes: 1,
-    #         completion_window_minutes: 1,
-    #         lifecycle: {
-    #           move_to_cold_storage_after_days: 1,
-    #           delete_after_days: 1,
-    #         },
-    #         recovery_point_tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         copy_actions: [
-    #           {
-    #             lifecycle: {
-    #               move_to_cold_storage_after_days: 1,
-    #               delete_after_days: 1,
-    #             },
-    #             destination_backup_vault_arn: "ARN", # required
-    #           },
-    #         ],
-    #         enable_continuous_backup: false,
-    #       }
-    #
     # @!attribute [rw] rule_name
     #   A display name for a backup rule. Must contain 1 to 50 alphanumeric
     #   or '-\_.' characters.
@@ -680,49 +601,6 @@ module Aws::Backup
     # and/or `Resources` is recommended. If none of these are specified,
     # Backup will attempt to select all supported and opted-in storage
     # resources, which could have unintended cost implications.
-    #
-    # @note When making an API call, you may pass BackupSelection
-    #   data as a hash:
-    #
-    #       {
-    #         selection_name: "BackupSelectionName", # required
-    #         iam_role_arn: "IAMRoleArn", # required
-    #         resources: ["ARN"],
-    #         list_of_tags: [
-    #           {
-    #             condition_type: "STRINGEQUALS", # required, accepts STRINGEQUALS
-    #             condition_key: "ConditionKey", # required
-    #             condition_value: "ConditionValue", # required
-    #           },
-    #         ],
-    #         not_resources: ["ARN"],
-    #         conditions: {
-    #           string_equals: [
-    #             {
-    #               condition_key: "ConditionKey",
-    #               condition_value: "ConditionValue",
-    #             },
-    #           ],
-    #           string_not_equals: [
-    #             {
-    #               condition_key: "ConditionKey",
-    #               condition_value: "ConditionValue",
-    #             },
-    #           ],
-    #           string_like: [
-    #             {
-    #               condition_key: "ConditionKey",
-    #               condition_value: "ConditionValue",
-    #             },
-    #           ],
-    #           string_not_like: [
-    #             {
-    #               condition_key: "ConditionKey",
-    #               condition_value: "ConditionValue",
-    #             },
-    #           ],
-    #         },
-    #       }
     #
     # @!attribute [rw] selection_name
     #   The display name of a resource selection document. Must contain 1 to
@@ -1010,15 +888,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CancelLegalHoldInput
-    #   data as a hash:
-    #
-    #       {
-    #         legal_hold_id: "string", # required
-    #         cancel_description: "string", # required
-    #         retain_record_in_days: 1,
-    #       }
-    #
     # @!attribute [rw] legal_hold_id
     #   Legal hold ID required to remove the specified legal hold on a
     #   recovery point.
@@ -1050,15 +919,6 @@ module Aws::Backup
     # Contains an array of triplets made up of a condition type (such as
     # `StringEquals`), a key, and a value. Used to filter resources using
     # their tags and assign them to a backup plan. Case sensitive.
-    #
-    # @note When making an API call, you may pass Condition
-    #   data as a hash:
-    #
-    #       {
-    #         condition_type: "STRINGEQUALS", # required, accepts STRINGEQUALS
-    #         condition_key: "ConditionKey", # required
-    #         condition_value: "ConditionValue", # required
-    #       }
     #
     # @!attribute [rw] condition_type
     #   An operation applied to a key-value pair used to assign resources to
@@ -1095,14 +955,6 @@ module Aws::Backup
     # Includes information about tags you define to assign tagged resources
     # to a backup plan.
     #
-    # @note When making an API call, you may pass ConditionParameter
-    #   data as a hash:
-    #
-    #       {
-    #         condition_key: "ConditionKey",
-    #         condition_value: "ConditionValue",
-    #       }
-    #
     # @!attribute [rw] condition_key
     #   The key in a key-value pair. For example, in the tag `Department:
     #   Accounting`, `Department` is the key.
@@ -1124,36 +976,6 @@ module Aws::Backup
 
     # Contains information about which resources to include or exclude from
     # a backup plan using their tags. Conditions are case sensitive.
-    #
-    # @note When making an API call, you may pass Conditions
-    #   data as a hash:
-    #
-    #       {
-    #         string_equals: [
-    #           {
-    #             condition_key: "ConditionKey",
-    #             condition_value: "ConditionValue",
-    #           },
-    #         ],
-    #         string_not_equals: [
-    #           {
-    #             condition_key: "ConditionKey",
-    #             condition_value: "ConditionValue",
-    #           },
-    #         ],
-    #         string_like: [
-    #           {
-    #             condition_key: "ConditionKey",
-    #             condition_value: "ConditionValue",
-    #           },
-    #         ],
-    #         string_not_like: [
-    #           {
-    #             condition_key: "ConditionKey",
-    #             condition_value: "ConditionValue",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] string_equals
     #   Filters the values of your tagged resources for only those resources
@@ -1222,14 +1044,6 @@ module Aws::Backup
     # period is at least `1 year`". The first parameter is `daily`. The
     # second parameter is `1 year`.
     #
-    # @note When making an API call, you may pass ControlInputParameter
-    #   data as a hash:
-    #
-    #       {
-    #         parameter_name: "ParameterName",
-    #         parameter_value: "ParameterValue",
-    #       }
-    #
     # @!attribute [rw] parameter_name
     #   The name of a parameter, for example, `BackupPlanFrequency`.
     #   @return [String]
@@ -1260,17 +1074,6 @@ module Aws::Backup
     #
     #  </note>
     #
-    # @note When making an API call, you may pass ControlScope
-    #   data as a hash:
-    #
-    #       {
-    #         compliance_resource_ids: ["string"],
-    #         compliance_resource_types: ["ARN"],
-    #         tags: {
-    #           "string" => "string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] compliance_resource_ids
     #   The ID of the only Amazon Web Services resource that you want your
     #   control scope to contain.
@@ -1300,17 +1103,6 @@ module Aws::Backup
     end
 
     # The details of the copy operation.
-    #
-    # @note When making an API call, you may pass CopyAction
-    #   data as a hash:
-    #
-    #       {
-    #         lifecycle: {
-    #           move_to_cold_storage_after_days: 1,
-    #           delete_after_days: 1,
-    #         },
-    #         destination_backup_vault_arn: "ARN", # required
-    #       }
     #
     # @!attribute [rw] lifecycle
     #   Contains an array of `Transition` objects specifying how long in
@@ -1488,53 +1280,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateBackupPlanInput
-    #   data as a hash:
-    #
-    #       {
-    #         backup_plan: { # required
-    #           backup_plan_name: "BackupPlanName", # required
-    #           rules: [ # required
-    #             {
-    #               rule_name: "BackupRuleName", # required
-    #               target_backup_vault_name: "BackupVaultName", # required
-    #               schedule_expression: "CronExpression",
-    #               start_window_minutes: 1,
-    #               completion_window_minutes: 1,
-    #               lifecycle: {
-    #                 move_to_cold_storage_after_days: 1,
-    #                 delete_after_days: 1,
-    #               },
-    #               recovery_point_tags: {
-    #                 "TagKey" => "TagValue",
-    #               },
-    #               copy_actions: [
-    #                 {
-    #                   lifecycle: {
-    #                     move_to_cold_storage_after_days: 1,
-    #                     delete_after_days: 1,
-    #                   },
-    #                   destination_backup_vault_arn: "ARN", # required
-    #                 },
-    #               ],
-    #               enable_continuous_backup: false,
-    #             },
-    #           ],
-    #           advanced_backup_settings: [
-    #             {
-    #               resource_type: "ResourceType",
-    #               backup_options: {
-    #                 "BackupOptionKey" => "BackupOptionValue",
-    #               },
-    #             },
-    #           ],
-    #         },
-    #         backup_plan_tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         creator_request_id: "string",
-    #       }
-    #
     # @!attribute [rw] backup_plan
     #   Specifies the body of a backup plan. Includes a `BackupPlanName` and
     #   one or more sets of `Rules`.
@@ -1606,53 +1351,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateBackupSelectionInput
-    #   data as a hash:
-    #
-    #       {
-    #         backup_plan_id: "string", # required
-    #         backup_selection: { # required
-    #           selection_name: "BackupSelectionName", # required
-    #           iam_role_arn: "IAMRoleArn", # required
-    #           resources: ["ARN"],
-    #           list_of_tags: [
-    #             {
-    #               condition_type: "STRINGEQUALS", # required, accepts STRINGEQUALS
-    #               condition_key: "ConditionKey", # required
-    #               condition_value: "ConditionValue", # required
-    #             },
-    #           ],
-    #           not_resources: ["ARN"],
-    #           conditions: {
-    #             string_equals: [
-    #               {
-    #                 condition_key: "ConditionKey",
-    #                 condition_value: "ConditionValue",
-    #               },
-    #             ],
-    #             string_not_equals: [
-    #               {
-    #                 condition_key: "ConditionKey",
-    #                 condition_value: "ConditionValue",
-    #               },
-    #             ],
-    #             string_like: [
-    #               {
-    #                 condition_key: "ConditionKey",
-    #                 condition_value: "ConditionValue",
-    #               },
-    #             ],
-    #             string_not_like: [
-    #               {
-    #                 condition_key: "ConditionKey",
-    #                 condition_value: "ConditionValue",
-    #               },
-    #             ],
-    #           },
-    #         },
-    #         creator_request_id: "string",
-    #       }
-    #
     # @!attribute [rw] backup_plan_id
     #   Uniquely identifies the backup plan to be associated with the
     #   selection of resources.
@@ -1708,18 +1406,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateBackupVaultInput
-    #   data as a hash:
-    #
-    #       {
-    #         backup_vault_name: "BackupVaultName", # required
-    #         backup_vault_tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         encryption_key_arn: "ARN",
-    #         creator_request_id: "string",
-    #       }
-    #
     # @!attribute [rw] backup_vault_name
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used
@@ -1788,36 +1474,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateFrameworkInput
-    #   data as a hash:
-    #
-    #       {
-    #         framework_name: "FrameworkName", # required
-    #         framework_description: "FrameworkDescription",
-    #         framework_controls: [ # required
-    #           {
-    #             control_name: "ControlName", # required
-    #             control_input_parameters: [
-    #               {
-    #                 parameter_name: "ParameterName",
-    #                 parameter_value: "ParameterValue",
-    #               },
-    #             ],
-    #             control_scope: {
-    #               compliance_resource_ids: ["string"],
-    #               compliance_resource_types: ["ARN"],
-    #               tags: {
-    #                 "string" => "string",
-    #               },
-    #             },
-    #           },
-    #         ],
-    #         idempotency_token: "string",
-    #         framework_tags: {
-    #           "string" => "string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] framework_name
     #   The unique name of the framework. The name must be between 1 and 256
     #   characters, starting with a letter, and consisting of letters (a-z,
@@ -1881,26 +1537,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateLegalHoldInput
-    #   data as a hash:
-    #
-    #       {
-    #         title: "string", # required
-    #         description: "string", # required
-    #         idempotency_token: "string",
-    #         recovery_point_selection: {
-    #           vault_names: ["string"],
-    #           resource_identifiers: ["string"],
-    #           date_range: {
-    #             from_date: Time.now, # required
-    #             to_date: Time.now, # required
-    #           },
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] title
     #   This is the string title of the legal hold.
     #   @return [String]
@@ -1986,31 +1622,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateReportPlanInput
-    #   data as a hash:
-    #
-    #       {
-    #         report_plan_name: "ReportPlanName", # required
-    #         report_plan_description: "ReportPlanDescription",
-    #         report_delivery_channel: { # required
-    #           s3_bucket_name: "string", # required
-    #           s3_key_prefix: "string",
-    #           formats: ["string"],
-    #         },
-    #         report_setting: { # required
-    #           report_template: "string", # required
-    #           framework_arns: ["string"],
-    #           number_of_frameworks: 1,
-    #           accounts: ["string"],
-    #           organization_units: ["string"],
-    #           regions: ["string"],
-    #         },
-    #         report_plan_tags: {
-    #           "string" => "string",
-    #         },
-    #         idempotency_token: "string",
-    #       }
-    #
     # @!attribute [rw] report_plan_name
     #   The unique name of the report plan. The name must be between 1 and
     #   256 characters, starting with a letter, and consisting of letters
@@ -2103,14 +1714,6 @@ module Aws::Backup
     # optional). For example, the value 1516925490.087 represents Friday,
     # January 26, 2018 12:11:30.087 AM.
     #
-    # @note When making an API call, you may pass DateRange
-    #   data as a hash:
-    #
-    #       {
-    #         from_date: Time.now, # required
-    #         to_date: Time.now, # required
-    #       }
-    #
     # @!attribute [rw] from_date
     #   This value is the beginning date, inclusive.
     #
@@ -2136,13 +1739,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteBackupPlanInput
-    #   data as a hash:
-    #
-    #       {
-    #         backup_plan_id: "string", # required
-    #       }
-    #
     # @!attribute [rw] backup_plan_id
     #   Uniquely identifies a backup plan.
     #   @return [String]
@@ -2188,14 +1784,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteBackupSelectionInput
-    #   data as a hash:
-    #
-    #       {
-    #         backup_plan_id: "string", # required
-    #         selection_id: "string", # required
-    #       }
-    #
     # @!attribute [rw] backup_plan_id
     #   Uniquely identifies a backup plan.
     #   @return [String]
@@ -2214,13 +1802,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteBackupVaultAccessPolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         backup_vault_name: "BackupVaultName", # required
-    #       }
-    #
     # @!attribute [rw] backup_vault_name
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used
@@ -2236,13 +1817,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteBackupVaultInput
-    #   data as a hash:
-    #
-    #       {
-    #         backup_vault_name: "string", # required
-    #       }
-    #
     # @!attribute [rw] backup_vault_name
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used
@@ -2258,13 +1832,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteBackupVaultLockConfigurationInput
-    #   data as a hash:
-    #
-    #       {
-    #         backup_vault_name: "BackupVaultName", # required
-    #       }
-    #
     # @!attribute [rw] backup_vault_name
     #   The name of the backup vault from which to delete Backup Vault Lock.
     #   @return [String]
@@ -2277,13 +1844,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteBackupVaultNotificationsInput
-    #   data as a hash:
-    #
-    #       {
-    #         backup_vault_name: "BackupVaultName", # required
-    #       }
-    #
     # @!attribute [rw] backup_vault_name
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used
@@ -2299,13 +1859,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteFrameworkInput
-    #   data as a hash:
-    #
-    #       {
-    #         framework_name: "FrameworkName", # required
-    #       }
-    #
     # @!attribute [rw] framework_name
     #   The unique name of a framework.
     #   @return [String]
@@ -2318,14 +1871,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteRecoveryPointInput
-    #   data as a hash:
-    #
-    #       {
-    #         backup_vault_name: "BackupVaultName", # required
-    #         recovery_point_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] backup_vault_name
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used
@@ -2348,13 +1893,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteReportPlanInput
-    #   data as a hash:
-    #
-    #       {
-    #         report_plan_name: "ReportPlanName", # required
-    #       }
-    #
     # @!attribute [rw] report_plan_name
     #   The unique name of a report plan.
     #   @return [String]
@@ -2393,13 +1931,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeBackupJobInput
-    #   data as a hash:
-    #
-    #       {
-    #         backup_job_id: "string", # required
-    #       }
-    #
     # @!attribute [rw] backup_job_id
     #   Uniquely identifies a request to Backup to back up a resource.
     #   @return [String]
@@ -2577,13 +2108,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeBackupVaultInput
-    #   data as a hash:
-    #
-    #       {
-    #         backup_vault_name: "string", # required
-    #       }
-    #
     # @!attribute [rw] backup_vault_name
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used
@@ -2703,13 +2227,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeCopyJobInput
-    #   data as a hash:
-    #
-    #       {
-    #         copy_job_id: "string", # required
-    #       }
-    #
     # @!attribute [rw] copy_job_id
     #   Uniquely identifies a copy job.
     #   @return [String]
@@ -2734,13 +2251,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeFrameworkInput
-    #   data as a hash:
-    #
-    #       {
-    #         framework_name: "FrameworkName", # required
-    #       }
-    #
     # @!attribute [rw] framework_name
     #   The unique name of a framework.
     #   @return [String]
@@ -2826,8 +2336,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeGlobalSettingsInput AWS API Documentation
     #
     class DescribeGlobalSettingsInput < Aws::EmptyStructure; end
@@ -2853,13 +2361,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeProtectedResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   An Amazon Resource Name (ARN) that uniquely identifies a resource.
     #   The format of the ARN depends on the resource type.
@@ -2900,14 +2401,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeRecoveryPointInput
-    #   data as a hash:
-    #
-    #       {
-    #         backup_vault_name: "BackupVaultName", # required
-    #         recovery_point_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] backup_vault_name
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used
@@ -3138,8 +2631,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeRegionSettingsInput AWS API Documentation
     #
     class DescribeRegionSettingsInput < Aws::EmptyStructure; end
@@ -3179,13 +2670,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeReportJobInput
-    #   data as a hash:
-    #
-    #       {
-    #         report_job_id: "ReportJobId", # required
-    #       }
-    #
     # @!attribute [rw] report_job_id
     #   The identifier of the report job. A unique, randomly generated,
     #   Unicode, UTF-8 encoded string that is at most 1,024 bytes long. The
@@ -3214,13 +2698,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeReportPlanInput
-    #   data as a hash:
-    #
-    #       {
-    #         report_plan_name: "ReportPlanName", # required
-    #       }
-    #
     # @!attribute [rw] report_plan_name
     #   The unique name of a report plan.
     #   @return [String]
@@ -3248,13 +2725,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeRestoreJobInput
-    #   data as a hash:
-    #
-    #       {
-    #         restore_job_id: "RestoreJobId", # required
-    #       }
-    #
     # @!attribute [rw] restore_job_id
     #   Uniquely identifies the job that restores a recovery point.
     #   @return [String]
@@ -3354,14 +2824,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateRecoveryPointFromParentInput
-    #   data as a hash:
-    #
-    #       {
-    #         backup_vault_name: "BackupVaultName", # required
-    #         recovery_point_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] backup_vault_name
     #   This is the name of a logical container where the child (nested)
     #   recovery point is stored. Backup vaults are identified by names that
@@ -3385,14 +2847,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateRecoveryPointInput
-    #   data as a hash:
-    #
-    #       {
-    #         backup_vault_name: "BackupVaultName", # required
-    #         recovery_point_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] backup_vault_name
     #   The unique name of an Backup vault.
     #   @return [String]
@@ -3411,13 +2865,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ExportBackupPlanTemplateInput
-    #   data as a hash:
-    #
-    #       {
-    #         backup_plan_id: "string", # required
-    #       }
-    #
     # @!attribute [rw] backup_plan_id
     #   Uniquely identifies a backup plan.
     #   @return [String]
@@ -3501,26 +2948,6 @@ module Aws::Backup
     # Contains detailed information about all of the controls of a
     # framework. Each framework must contain at least one control.
     #
-    # @note When making an API call, you may pass FrameworkControl
-    #   data as a hash:
-    #
-    #       {
-    #         control_name: "ControlName", # required
-    #         control_input_parameters: [
-    #           {
-    #             parameter_name: "ParameterName",
-    #             parameter_value: "ParameterValue",
-    #           },
-    #         ],
-    #         control_scope: {
-    #           compliance_resource_ids: ["string"],
-    #           compliance_resource_types: ["ARN"],
-    #           tags: {
-    #             "string" => "string",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] control_name
     #   The name of a control. This name is between 1 and 256 characters.
     #   @return [String]
@@ -3547,13 +2974,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetBackupPlanFromJSONInput
-    #   data as a hash:
-    #
-    #       {
-    #         backup_plan_template_json: "string", # required
-    #       }
-    #
     # @!attribute [rw] backup_plan_template_json
     #   A customer-supplied backup plan document in JSON format.
     #   @return [String]
@@ -3579,13 +2999,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetBackupPlanFromTemplateInput
-    #   data as a hash:
-    #
-    #       {
-    #         backup_plan_template_id: "string", # required
-    #       }
-    #
     # @!attribute [rw] backup_plan_template_id
     #   Uniquely identifies a stored backup plan template.
     #   @return [String]
@@ -3611,14 +3024,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetBackupPlanInput
-    #   data as a hash:
-    #
-    #       {
-    #         backup_plan_id: "string", # required
-    #         version_id: "string",
-    #       }
-    #
     # @!attribute [rw] backup_plan_id
     #   Uniquely identifies a backup plan.
     #   @return [String]
@@ -3706,14 +3111,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetBackupSelectionInput
-    #   data as a hash:
-    #
-    #       {
-    #         backup_plan_id: "string", # required
-    #         selection_id: "string", # required
-    #       }
-    #
     # @!attribute [rw] backup_plan_id
     #   Uniquely identifies a backup plan.
     #   @return [String]
@@ -3771,13 +3168,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetBackupVaultAccessPolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         backup_vault_name: "BackupVaultName", # required
-    #       }
-    #
     # @!attribute [rw] backup_vault_name
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used
@@ -3820,13 +3210,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetBackupVaultNotificationsInput
-    #   data as a hash:
-    #
-    #       {
-    #         backup_vault_name: "BackupVaultName", # required
-    #       }
-    #
     # @!attribute [rw] backup_vault_name
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used
@@ -3877,13 +3260,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLegalHoldInput
-    #   data as a hash:
-    #
-    #       {
-    #         legal_hold_id: "string", # required
-    #       }
-    #
     # @!attribute [rw] legal_hold_id
     #   This is the ID required to use `GetLegalHold`. This unique ID is
     #   associated with a specific legal hold.
@@ -3959,14 +3335,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRecoveryPointRestoreMetadataInput
-    #   data as a hash:
-    #
-    #       {
-    #         backup_vault_name: "BackupVaultName", # required
-    #         recovery_point_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] backup_vault_name
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used
@@ -4199,14 +3567,6 @@ module Aws::Backup
     #
     # [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource
     #
-    # @note When making an API call, you may pass Lifecycle
-    #   data as a hash:
-    #
-    #       {
-    #         move_to_cold_storage_after_days: 1,
-    #         delete_after_days: 1,
-    #       }
-    #
     # @!attribute [rw] move_to_cold_storage_after_days
     #   Specifies the number of days after creation that a recovery point is
     #   moved to cold storage.
@@ -4253,24 +3613,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListBackupJobsInput
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "string",
-    #         max_results: 1,
-    #         by_resource_arn: "ARN",
-    #         by_state: "CREATED", # accepts CREATED, PENDING, RUNNING, ABORTING, ABORTED, COMPLETED, FAILED, EXPIRED, PARTIAL
-    #         by_backup_vault_name: "BackupVaultName",
-    #         by_created_before: Time.now,
-    #         by_created_after: Time.now,
-    #         by_resource_type: "ResourceType",
-    #         by_account_id: "AccountId",
-    #         by_complete_after: Time.now,
-    #         by_complete_before: Time.now,
-    #         by_parent_job_id: "string",
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The next item following a partial list of returned items. For
     #   example, if a request is made to return `maxResults` number of
@@ -4398,14 +3740,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListBackupPlanTemplatesInput
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "string",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The next item following a partial list of returned items. For
     #   example, if a request is made to return `maxResults` number of
@@ -4447,15 +3781,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListBackupPlanVersionsInput
-    #   data as a hash:
-    #
-    #       {
-    #         backup_plan_id: "string", # required
-    #         next_token: "string",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] backup_plan_id
     #   Uniquely identifies a backup plan.
     #   @return [String]
@@ -4502,15 +3827,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListBackupPlansInput
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "string",
-    #         max_results: 1,
-    #         include_deleted: false,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The next item following a partial list of returned items. For
     #   example, if a request is made to return `maxResults` number of
@@ -4558,15 +3874,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListBackupSelectionsInput
-    #   data as a hash:
-    #
-    #       {
-    #         backup_plan_id: "string", # required
-    #         next_token: "string",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] backup_plan_id
     #   Uniquely identifies a backup plan.
     #   @return [String]
@@ -4613,14 +3920,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListBackupVaultsInput
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "string",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The next item following a partial list of returned items. For
     #   example, if a request is made to return `maxResults` number of
@@ -4664,24 +3963,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCopyJobsInput
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "string",
-    #         max_results: 1,
-    #         by_resource_arn: "ARN",
-    #         by_state: "CREATED", # accepts CREATED, RUNNING, COMPLETED, FAILED, PARTIAL
-    #         by_created_before: Time.now,
-    #         by_created_after: Time.now,
-    #         by_resource_type: "ResourceType",
-    #         by_destination_vault_arn: "string",
-    #         by_account_id: "AccountId",
-    #         by_complete_before: Time.now,
-    #         by_complete_after: Time.now,
-    #         by_parent_job_id: "string",
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The next item following a partial list of returned items. For
     #   example, if a request is made to return maxResults number of items,
@@ -4803,14 +4084,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFrameworksInput
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The number of desired results from 1 to 1000. Optional. If
     #   unspecified, the query will return 1 MB of data.
@@ -4852,14 +4125,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListLegalHoldsInput
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "string",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The next item following a partial list of returned resources. For
     #   example, if a request is made to return `maxResults` number of
@@ -4900,14 +4165,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListProtectedResourcesInput
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "string",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The next item following a partial list of returned items. For
     #   example, if a request is made to return `maxResults` number of
@@ -4950,21 +4207,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRecoveryPointsByBackupVaultInput
-    #   data as a hash:
-    #
-    #       {
-    #         backup_vault_name: "BackupVaultName", # required
-    #         next_token: "string",
-    #         max_results: 1,
-    #         by_resource_arn: "ARN",
-    #         by_resource_type: "ResourceType",
-    #         by_backup_plan_id: "string",
-    #         by_created_before: Time.now,
-    #         by_created_after: Time.now,
-    #         by_parent_recovery_point_arn: "ARN",
-    #       }
-    #
     # @!attribute [rw] backup_vault_name
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used
@@ -5054,15 +4296,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRecoveryPointsByLegalHoldInput
-    #   data as a hash:
-    #
-    #       {
-    #         legal_hold_id: "string", # required
-    #         next_token: "string",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] legal_hold_id
     #   This is the ID of the legal hold.
     #   @return [String]
@@ -5107,15 +4340,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRecoveryPointsByResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ARN", # required
-    #         next_token: "string",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   An ARN that uniquely identifies a resource. The format of the ARN
     #   depends on the resource type.
@@ -5172,18 +4396,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListReportJobsInput
-    #   data as a hash:
-    #
-    #       {
-    #         by_report_plan_name: "ReportPlanName",
-    #         by_creation_before: Time.now,
-    #         by_creation_after: Time.now,
-    #         by_status: "string",
-    #         max_results: 1,
-    #         next_token: "string",
-    #       }
-    #
     # @!attribute [rw] by_report_plan_name
     #   Returns only report jobs with the specified report plan name.
     #   @return [String]
@@ -5252,14 +4464,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListReportPlansInput
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The number of desired results from 1 to 1000. Optional. If
     #   unspecified, the query will return 1 MB of data.
@@ -5303,20 +4507,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRestoreJobsInput
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "string",
-    #         max_results: 1,
-    #         by_account_id: "AccountId",
-    #         by_created_before: Time.now,
-    #         by_created_after: Time.now,
-    #         by_status: "PENDING", # accepts PENDING, RUNNING, COMPLETED, ABORTED, FAILED
-    #         by_complete_before: Time.now,
-    #         by_complete_after: Time.now,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The next item following a partial list of returned items. For
     #   example, if a request is made to return `maxResults` number of
@@ -5393,15 +4583,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ARN", # required
-    #         next_token: "string",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   An Amazon Resource Name (ARN) that uniquely identifies a resource.
     #   The format of the ARN depends on the type of resource. Valid targets
@@ -5507,14 +4688,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutBackupVaultAccessPolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         backup_vault_name: "BackupVaultName", # required
-    #         policy: "IAMPolicy",
-    #       }
-    #
     # @!attribute [rw] backup_vault_name
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used
@@ -5535,16 +4708,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutBackupVaultLockConfigurationInput
-    #   data as a hash:
-    #
-    #       {
-    #         backup_vault_name: "BackupVaultName", # required
-    #         min_retention_days: 1,
-    #         max_retention_days: 1,
-    #         changeable_for_days: 1,
-    #       }
-    #
     # @!attribute [rw] backup_vault_name
     #   The Backup Vault Lock configuration that specifies the name of the
     #   backup vault it protects.
@@ -5626,15 +4789,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutBackupVaultNotificationsInput
-    #   data as a hash:
-    #
-    #       {
-    #         backup_vault_name: "BackupVaultName", # required
-    #         sns_topic_arn: "ARN", # required
-    #         backup_vault_events: ["BACKUP_JOB_STARTED"], # required, accepts BACKUP_JOB_STARTED, BACKUP_JOB_COMPLETED, BACKUP_JOB_SUCCESSFUL, BACKUP_JOB_FAILED, BACKUP_JOB_EXPIRED, RESTORE_JOB_STARTED, RESTORE_JOB_COMPLETED, RESTORE_JOB_SUCCESSFUL, RESTORE_JOB_FAILED, COPY_JOB_STARTED, COPY_JOB_SUCCESSFUL, COPY_JOB_FAILED, RECOVERY_POINT_MODIFIED, BACKUP_PLAN_CREATED, BACKUP_PLAN_MODIFIED, S3_BACKUP_OBJECT_FAILED, S3_RESTORE_OBJECT_FAILED
-    #       }
-    #
     # @!attribute [rw] backup_vault_name
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used
@@ -5983,18 +5137,6 @@ module Aws::Backup
     # This specifies criteria to assign a set of resources, such as resource
     # types or backup vaults.
     #
-    # @note When making an API call, you may pass RecoveryPointSelection
-    #   data as a hash:
-    #
-    #       {
-    #         vault_names: ["string"],
-    #         resource_identifiers: ["string"],
-    #         date_range: {
-    #           from_date: Time.now, # required
-    #           to_date: Time.now, # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] vault_names
     #   These are the names of the vaults in which the selected recovery
     #   points are contained.
@@ -6029,15 +5171,6 @@ module Aws::Backup
     # Contains information from your report plan about where to deliver your
     # reports, specifically your Amazon S3 bucket name, S3 key prefix, and
     # the formats of your reports.
-    #
-    # @note When making an API call, you may pass ReportDeliveryChannel
-    #   data as a hash:
-    #
-    #       {
-    #         s3_bucket_name: "string", # required
-    #         s3_key_prefix: "string",
-    #         formats: ["string"],
-    #       }
     #
     # @!attribute [rw] s3_bucket_name
     #   The unique name of the S3 bucket that receives your reports.
@@ -6241,18 +5374,6 @@ module Aws::Backup
 
     # Contains detailed information about a report setting.
     #
-    # @note When making an API call, you may pass ReportSetting
-    #   data as a hash:
-    #
-    #       {
-    #         report_template: "string", # required
-    #         framework_arns: ["string"],
-    #         number_of_frameworks: 1,
-    #         accounts: ["string"],
-    #         organization_units: ["string"],
-    #         regions: ["string"],
-    #       }
-    #
     # @!attribute [rw] report_template
     #   Identifies the report template for the report. Reports are built
     #   using a report template. The report templates are:
@@ -6435,28 +5556,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartBackupJobInput
-    #   data as a hash:
-    #
-    #       {
-    #         backup_vault_name: "BackupVaultName", # required
-    #         resource_arn: "ARN", # required
-    #         iam_role_arn: "IAMRoleArn", # required
-    #         idempotency_token: "string",
-    #         start_window_minutes: 1,
-    #         complete_window_minutes: 1,
-    #         lifecycle: {
-    #           move_to_cold_storage_after_days: 1,
-    #           delete_after_days: 1,
-    #         },
-    #         recovery_point_tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         backup_options: {
-    #           "BackupOptionKey" => "BackupOptionValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] backup_vault_name
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used
@@ -6581,21 +5680,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartCopyJobInput
-    #   data as a hash:
-    #
-    #       {
-    #         recovery_point_arn: "ARN", # required
-    #         source_backup_vault_name: "BackupVaultName", # required
-    #         destination_backup_vault_arn: "ARN", # required
-    #         iam_role_arn: "IAMRoleArn", # required
-    #         idempotency_token: "string",
-    #         lifecycle: {
-    #           move_to_cold_storage_after_days: 1,
-    #           delete_after_days: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] recovery_point_arn
     #   An ARN that uniquely identifies a recovery point to use for the copy
     #   job; for example,
@@ -6688,14 +5772,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartReportJobInput
-    #   data as a hash:
-    #
-    #       {
-    #         report_plan_name: "ReportPlanName", # required
-    #         idempotency_token: "string",
-    #       }
-    #
     # @!attribute [rw] report_plan_name
     #   The unique name of a report plan.
     #   @return [String]
@@ -6733,19 +5809,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartRestoreJobInput
-    #   data as a hash:
-    #
-    #       {
-    #         recovery_point_arn: "ARN", # required
-    #         metadata: { # required
-    #           "MetadataKey" => "MetadataValue",
-    #         },
-    #         iam_role_arn: "IAMRoleArn",
-    #         idempotency_token: "string",
-    #         resource_type: "ResourceType",
-    #       }
-    #
     # @!attribute [rw] recovery_point_arn
     #   An ARN that uniquely identifies a recovery point; for example,
     #   `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45`.
@@ -6860,13 +5923,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopBackupJobInput
-    #   data as a hash:
-    #
-    #       {
-    #         backup_job_id: "string", # required
-    #       }
-    #
     # @!attribute [rw] backup_job_id
     #   Uniquely identifies a request to Backup to back up a resource.
     #   @return [String]
@@ -6879,16 +5935,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ARN", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   An ARN that uniquely identifies a resource. The format of the ARN
     #   depends on the type of the tagged resource.
@@ -6910,14 +5956,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ARN", # required
-    #         tag_key_list: ["string"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   An ARN that uniquely identifies a resource. The format of the ARN
     #   depends on the type of the tagged resource.
@@ -6937,50 +5975,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateBackupPlanInput
-    #   data as a hash:
-    #
-    #       {
-    #         backup_plan_id: "string", # required
-    #         backup_plan: { # required
-    #           backup_plan_name: "BackupPlanName", # required
-    #           rules: [ # required
-    #             {
-    #               rule_name: "BackupRuleName", # required
-    #               target_backup_vault_name: "BackupVaultName", # required
-    #               schedule_expression: "CronExpression",
-    #               start_window_minutes: 1,
-    #               completion_window_minutes: 1,
-    #               lifecycle: {
-    #                 move_to_cold_storage_after_days: 1,
-    #                 delete_after_days: 1,
-    #               },
-    #               recovery_point_tags: {
-    #                 "TagKey" => "TagValue",
-    #               },
-    #               copy_actions: [
-    #                 {
-    #                   lifecycle: {
-    #                     move_to_cold_storage_after_days: 1,
-    #                     delete_after_days: 1,
-    #                   },
-    #                   destination_backup_vault_arn: "ARN", # required
-    #                 },
-    #               ],
-    #               enable_continuous_backup: false,
-    #             },
-    #           ],
-    #           advanced_backup_settings: [
-    #             {
-    #               resource_type: "ResourceType",
-    #               backup_options: {
-    #                 "BackupOptionKey" => "BackupOptionValue",
-    #               },
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] backup_plan_id
     #   Uniquely identifies a backup plan.
     #   @return [String]
@@ -7037,33 +6031,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateFrameworkInput
-    #   data as a hash:
-    #
-    #       {
-    #         framework_name: "FrameworkName", # required
-    #         framework_description: "FrameworkDescription",
-    #         framework_controls: [
-    #           {
-    #             control_name: "ControlName", # required
-    #             control_input_parameters: [
-    #               {
-    #                 parameter_name: "ParameterName",
-    #                 parameter_value: "ParameterValue",
-    #               },
-    #             ],
-    #             control_scope: {
-    #               compliance_resource_ids: ["string"],
-    #               compliance_resource_types: ["ARN"],
-    #               tags: {
-    #                 "string" => "string",
-    #               },
-    #             },
-    #           },
-    #         ],
-    #         idempotency_token: "string",
-    #       }
-    #
     # @!attribute [rw] framework_name
     #   The unique name of a framework. This name is between 1 and 256
     #   characters, starting with a letter, and consisting of letters (a-z,
@@ -7129,15 +6096,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateGlobalSettingsInput
-    #   data as a hash:
-    #
-    #       {
-    #         global_settings: {
-    #           "GlobalSettingsName" => "GlobalSettingsValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] global_settings
     #   A value for `isCrossAccountBackupEnabled` and a Region. Example:
     #   `update-global-settings --global-settings
@@ -7152,18 +6110,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateRecoveryPointLifecycleInput
-    #   data as a hash:
-    #
-    #       {
-    #         backup_vault_name: "BackupVaultName", # required
-    #         recovery_point_arn: "ARN", # required
-    #         lifecycle: {
-    #           move_to_cold_storage_after_days: 1,
-    #           delete_after_days: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] backup_vault_name
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used
@@ -7247,18 +6193,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateRegionSettingsInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_type_opt_in_preference: {
-    #           "ResourceType" => false,
-    #         },
-    #         resource_type_management_preference: {
-    #           "ResourceType" => false,
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_type_opt_in_preference
     #   Updates the list of services along with the opt-in preferences for
     #   the Region.
@@ -7285,28 +6219,6 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateReportPlanInput
-    #   data as a hash:
-    #
-    #       {
-    #         report_plan_name: "ReportPlanName", # required
-    #         report_plan_description: "ReportPlanDescription",
-    #         report_delivery_channel: {
-    #           s3_bucket_name: "string", # required
-    #           s3_key_prefix: "string",
-    #           formats: ["string"],
-    #         },
-    #         report_setting: {
-    #           report_template: "string", # required
-    #           framework_arns: ["string"],
-    #           number_of_frameworks: 1,
-    #           accounts: ["string"],
-    #           organization_units: ["string"],
-    #           regions: ["string"],
-    #         },
-    #         idempotency_token: "string",
-    #       }
-    #
     # @!attribute [rw] report_plan_name
     #   The unique name of the report plan. This name is between 1 and 256
     #   characters, starting with a letter, and consisting of letters (a-z,

@@ -40,19 +40,6 @@ module Aws::CloudTrail
 
     # Specifies the tags to add to a trail or event data store.
     #
-    # @note When making an API call, you may pass AddTagsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_id: "String", # required
-    #         tags_list: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_id
     #   Specifies the ARN of the trail or event data store to which one or
     #   more tags will be added. The format of a trail ARN is:
@@ -105,24 +92,6 @@ module Aws::CloudTrail
     #
     # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html
     #
-    # @note When making an API call, you may pass AdvancedEventSelector
-    #   data as a hash:
-    #
-    #       {
-    #         name: "SelectorName",
-    #         field_selectors: [ # required
-    #           {
-    #             field: "SelectorField", # required
-    #             equals: ["OperatorValue"],
-    #             starts_with: ["OperatorValue"],
-    #             ends_with: ["OperatorValue"],
-    #             not_equals: ["OperatorValue"],
-    #             not_starts_with: ["OperatorValue"],
-    #             not_ends_with: ["OperatorValue"],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   An optional, descriptive name for an advanced event selector, such
     #   as "Log data events for only two S3 buckets".
@@ -142,19 +111,6 @@ module Aws::CloudTrail
     end
 
     # A single selector statement in an advanced event selector.
-    #
-    # @note When making an API call, you may pass AdvancedFieldSelector
-    #   data as a hash:
-    #
-    #       {
-    #         field: "SelectorField", # required
-    #         equals: ["OperatorValue"],
-    #         starts_with: ["OperatorValue"],
-    #         ends_with: ["OperatorValue"],
-    #         not_equals: ["OperatorValue"],
-    #         not_starts_with: ["OperatorValue"],
-    #         not_ends_with: ["OperatorValue"],
-    #       }
     #
     # @!attribute [rw] field
     #   A field in an event record on which to filter events to be logged.
@@ -346,14 +302,6 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CancelQueryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         event_data_store: "EventDataStoreArn",
-    #         query_id: "UUID", # required
-    #       }
-    #
     # @!attribute [rw] event_data_store
     #   The ARN (or the ID suffix of the ARN) of an event data store on
     #   which the specified query is running.
@@ -482,40 +430,6 @@ module Aws::CloudTrail
     #
     class ConflictException < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass CreateEventDataStoreRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "EventDataStoreName", # required
-    #         advanced_event_selectors: [
-    #           {
-    #             name: "SelectorName",
-    #             field_selectors: [ # required
-    #               {
-    #                 field: "SelectorField", # required
-    #                 equals: ["OperatorValue"],
-    #                 starts_with: ["OperatorValue"],
-    #                 ends_with: ["OperatorValue"],
-    #                 not_equals: ["OperatorValue"],
-    #                 not_starts_with: ["OperatorValue"],
-    #                 not_ends_with: ["OperatorValue"],
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         multi_region_enabled: false,
-    #         organization_enabled: false,
-    #         retention_period: 1,
-    #         termination_protection_enabled: false,
-    #         tags_list: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         kms_key_id: "EventDataStoreKmsKeyId",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the event data store.
     #   @return [String]
@@ -684,29 +598,6 @@ module Aws::CloudTrail
     end
 
     # Specifies the settings for each trail.
-    #
-    # @note When making an API call, you may pass CreateTrailRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #         s3_bucket_name: "String", # required
-    #         s3_key_prefix: "String",
-    #         sns_topic_name: "String",
-    #         include_global_service_events: false,
-    #         is_multi_region_trail: false,
-    #         enable_log_file_validation: false,
-    #         cloud_watch_logs_log_group_arn: "String",
-    #         cloud_watch_logs_role_arn: "String",
-    #         kms_key_id: "String",
-    #         is_organization_trail: false,
-    #         tags_list: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] name
     #   Specifies the name of the trail. The name must meet the following
@@ -1000,14 +891,6 @@ module Aws::CloudTrail
     #     *MyOtherLambdaFunction* does not match the function specified for
     #     the trail. The trail doesn’t log the event.
     #
-    # @note When making an API call, you may pass DataResource
-    #   data as a hash:
-    #
-    #       {
-    #         type: "String",
-    #         values: ["String"],
-    #       }
-    #
     # @!attribute [rw] type
     #   The resource type in which you want to log data events. You can
     #   specify the following *basic* event selector resource types:
@@ -1106,13 +989,6 @@ module Aws::CloudTrail
     #
     class DelegatedAdminAccountLimitExceededException < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteEventDataStoreRequest
-    #   data as a hash:
-    #
-    #       {
-    #         event_data_store: "EventDataStoreArn", # required
-    #       }
-    #
     # @!attribute [rw] event_data_store
     #   The ARN (or the ID suffix of the ARN) of the event data store to
     #   delete.
@@ -1131,13 +1007,6 @@ module Aws::CloudTrail
     class DeleteEventDataStoreResponse < Aws::EmptyStructure; end
 
     # The request that specifies the name of a trail to delete.
-    #
-    # @note When making an API call, you may pass DeleteTrailRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #       }
     #
     # @!attribute [rw] name
     #   Specifies the name or the CloudTrail ARN of the trail to be deleted.
@@ -1164,13 +1033,6 @@ module Aws::CloudTrail
     # specified member account in an organization that is currently
     # designated as a delegated administrator.
     #
-    # @note When making an API call, you may pass DeregisterOrganizationDelegatedAdminRequest
-    #   data as a hash:
-    #
-    #       {
-    #         delegated_admin_account_id: "AccountId", # required
-    #       }
-    #
     # @!attribute [rw] delegated_admin_account_id
     #   A delegated administrator account ID. This is a member account in an
     #   organization that is currently designated as a delegated
@@ -1192,14 +1054,6 @@ module Aws::CloudTrail
     #
     class DeregisterOrganizationDelegatedAdminResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeQueryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         event_data_store: "EventDataStoreArn",
-    #         query_id: "UUID", # required
-    #       }
-    #
     # @!attribute [rw] event_data_store
     #   The ARN (or the ID suffix of the ARN) of an event data store on
     #   which the specified query was run.
@@ -1265,14 +1119,6 @@ module Aws::CloudTrail
     end
 
     # Returns information about the trail.
-    #
-    # @note When making an API call, you may pass DescribeTrailsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         trail_name_list: ["String"],
-    #         include_shadow_trails: false,
-    #       }
     #
     # @!attribute [rw] trail_name_list
     #   Specifies a list of trail names, trail ARNs, or both, of the trails
@@ -1547,21 +1393,6 @@ module Aws::CloudTrail
     # You cannot apply both event selectors and advanced event selectors to
     # a trail.
     #
-    # @note When making an API call, you may pass EventSelector
-    #   data as a hash:
-    #
-    #       {
-    #         read_write_type: "ReadOnly", # accepts ReadOnly, WriteOnly, All
-    #         include_management_events: false,
-    #         data_resources: [
-    #           {
-    #             type: "String",
-    #             values: ["String"],
-    #           },
-    #         ],
-    #         exclude_management_event_sources: ["String"],
-    #       }
-    #
     # @!attribute [rw] read_write_type
     #   Specify if you want your trail to log read-only events, write-only
     #   events, or all. For example, the EC2 `GetConsoleOutput` is a
@@ -1630,13 +1461,6 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetChannelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel: "ChannelArn", # required
-    #       }
-    #
     # @!attribute [rw] channel
     #   The ARN or `UUID` of a channel.
     #   @return [String]
@@ -1688,13 +1512,6 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetEventDataStoreRequest
-    #   data as a hash:
-    #
-    #       {
-    #         event_data_store: "EventDataStoreArn", # required
-    #       }
-    #
     # @!attribute [rw] event_data_store
     #   The ARN (or ID suffix of the ARN) of the event data store about
     #   which you want information.
@@ -1780,13 +1597,6 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetEventSelectorsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         trail_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] trail_name
     #   Specifies the name of the trail or trail ARN. If you specify a trail
     #   name, the string must meet the following requirements:
@@ -1838,13 +1648,6 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetImportRequest
-    #   data as a hash:
-    #
-    #       {
-    #         import_id: "UUID", # required
-    #       }
-    #
     # @!attribute [rw] import_id
     #   The ID for the import.
     #   @return [String]
@@ -1917,13 +1720,6 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetInsightSelectorsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         trail_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] trail_name
     #   Specifies the name of the trail or trail ARN. If you specify a trail
     #   name, the string must meet the following requirements:
@@ -1973,16 +1769,6 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetQueryResultsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         event_data_store: "EventDataStoreArn",
-    #         query_id: "UUID", # required
-    #         next_token: "PaginationToken",
-    #         max_query_results: 1,
-    #       }
-    #
     # @!attribute [rw] event_data_store
     #   The ARN (or ID suffix of the ARN) of the event data store against
     #   which the query was run.
@@ -2044,13 +1830,6 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetTrailRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name or the Amazon Resource Name (ARN) of the trail for which
     #   you want to retrieve settings information.
@@ -2077,13 +1856,6 @@ module Aws::CloudTrail
     end
 
     # The name of a trail about which you want the current status.
-    #
-    # @note When making an API call, you may pass GetTrailStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #       }
     #
     # @!attribute [rw] name
     #   Specifies the name or the CloudTrail ARN of the trail for which you
@@ -2284,17 +2056,6 @@ module Aws::CloudTrail
 
     # The import source.
     #
-    # @note When making an API call, you may pass ImportSource
-    #   data as a hash:
-    #
-    #       {
-    #         s3: { # required
-    #           s3_location_uri: "String", # required
-    #           s3_bucket_region: "String", # required
-    #           s3_bucket_access_role_arn: "String", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] s3
     #   The source S3 bucket.
     #   @return [Types::S3ImportSource]
@@ -2403,13 +2164,6 @@ module Aws::CloudTrail
 
     # A JSON string that contains a list of insight types that are logged on
     # a trail.
-    #
-    # @note When making an API call, you may pass InsightSelector
-    #   data as a hash:
-    #
-    #       {
-    #         insight_type: "ApiCallRateInsight", # accepts ApiCallRateInsight, ApiErrorRateInsight
-    #       }
     #
     # @!attribute [rw] insight_type
     #   The type of insights to log on a trail. `ApiCallRateInsight` and
@@ -2693,14 +2447,6 @@ module Aws::CloudTrail
     #
     class KmsKeyNotFoundException < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass ListChannelsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of CloudTrail channels to display on a single
     #   page.
@@ -2742,14 +2488,6 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEventDataStoresRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   A token you can use to get the next page of event data store
     #   results.
@@ -2786,15 +2524,6 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListImportFailuresRequest
-    #   data as a hash:
-    #
-    #       {
-    #         import_id: "UUID", # required
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] import_id
     #   The ID of the import.
     #   @return [String]
@@ -2834,16 +2563,6 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListImportsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         destination: "EventDataStoreArn",
-    #         import_status: "INITIALIZING", # accepts INITIALIZING, IN_PROGRESS, FAILED, STOPPED, COMPLETED
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of imports to display on a single page.
     #   @return [Integer]
@@ -2889,15 +2608,6 @@ module Aws::CloudTrail
     end
 
     # Requests the public keys for a specified time range.
-    #
-    # @note When making an API call, you may pass ListPublicKeysRequest
-    #   data as a hash:
-    #
-    #       {
-    #         start_time: Time.now,
-    #         end_time: Time.now,
-    #         next_token: "String",
-    #       }
     #
     # @!attribute [rw] start_time
     #   Optionally specifies, in UTC, the start of the time range to look up
@@ -2949,18 +2659,6 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListQueriesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         event_data_store: "EventDataStoreArn", # required
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #         start_time: Time.now,
-    #         end_time: Time.now,
-    #         query_status: "QUEUED", # accepts QUEUED, RUNNING, FINISHED, FAILED, CANCELLED, TIMED_OUT
-    #       }
-    #
     # @!attribute [rw] event_data_store
     #   The ARN (or the ID suffix of the ARN) of an event data store on
     #   which queries were run.
@@ -3023,14 +2721,6 @@ module Aws::CloudTrail
 
     # Specifies a list of tags to return.
     #
-    # @note When making an API call, you may pass ListTagsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_id_list: ["String"], # required
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] resource_id_list
     #   Specifies a list of trail and event data store ARNs whose tags will
     #   be listed. The list has a limit of 20 ARNs.
@@ -3069,13 +2759,6 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTrailsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "String",
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The token to use to get the next page of results after a previous
     #   API call. This token must be passed in with the same parameters that
@@ -3118,14 +2801,6 @@ module Aws::CloudTrail
 
     # Specifies an attribute and value that filter the events returned.
     #
-    # @note When making an API call, you may pass LookupAttribute
-    #   data as a hash:
-    #
-    #       {
-    #         attribute_key: "EventId", # required, accepts EventId, EventName, ReadOnly, Username, ResourceType, ResourceName, EventSource, AccessKeyId
-    #         attribute_value: "String", # required
-    #       }
-    #
     # @!attribute [rw] attribute_key
     #   Specifies an attribute on which to filter the events returned.
     #   @return [String]
@@ -3144,23 +2819,6 @@ module Aws::CloudTrail
     end
 
     # Contains a request for LookupEvents.
-    #
-    # @note When making an API call, you may pass LookupEventsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         lookup_attributes: [
-    #           {
-    #             attribute_key: "EventId", # required, accepts EventId, EventName, ReadOnly, Username, ResourceType, ResourceName, EventSource, AccessKeyId
-    #             attribute_value: "String", # required
-    #           },
-    #         ],
-    #         start_time: Time.now,
-    #         end_time: Time.now,
-    #         event_category: "insight", # accepts insight
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
     #
     # @!attribute [rw] lookup_attributes
     #   Contains a list of lookup attributes. Currently the list can contain
@@ -3334,42 +2992,6 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutEventSelectorsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         trail_name: "String", # required
-    #         event_selectors: [
-    #           {
-    #             read_write_type: "ReadOnly", # accepts ReadOnly, WriteOnly, All
-    #             include_management_events: false,
-    #             data_resources: [
-    #               {
-    #                 type: "String",
-    #                 values: ["String"],
-    #               },
-    #             ],
-    #             exclude_management_event_sources: ["String"],
-    #           },
-    #         ],
-    #         advanced_event_selectors: [
-    #           {
-    #             name: "SelectorName",
-    #             field_selectors: [ # required
-    #               {
-    #                 field: "SelectorField", # required
-    #                 equals: ["OperatorValue"],
-    #                 starts_with: ["OperatorValue"],
-    #                 ends_with: ["OperatorValue"],
-    #                 not_equals: ["OperatorValue"],
-    #                 not_starts_with: ["OperatorValue"],
-    #                 not_ends_with: ["OperatorValue"],
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] trail_name
     #   Specifies the name of the trail or trail ARN. If you specify a trail
     #   name, the string must meet the following requirements:
@@ -3451,18 +3073,6 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutInsightSelectorsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         trail_name: "String", # required
-    #         insight_selectors: [ # required
-    #           {
-    #             insight_type: "ApiCallRateInsight", # accepts ApiCallRateInsight, ApiErrorRateInsight
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] trail_name
     #   The name of the CloudTrail trail for which you want to change or add
     #   Insights selectors.
@@ -3602,13 +3212,6 @@ module Aws::CloudTrail
     # Specifies an organization member account ID as a CloudTrail delegated
     # administrator.
     #
-    # @note When making an API call, you may pass RegisterOrganizationDelegatedAdminRequest
-    #   data as a hash:
-    #
-    #       {
-    #         member_account_id: "AccountId", # required
-    #       }
-    #
     # @!attribute [rw] member_account_id
     #   An organization member account ID that you want to designate as a
     #   delegated administrator.
@@ -3630,19 +3233,6 @@ module Aws::CloudTrail
     class RegisterOrganizationDelegatedAdminResponse < Aws::EmptyStructure; end
 
     # Specifies the tags to remove from a trail or event data store.
-    #
-    # @note When making an API call, you may pass RemoveTagsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_id: "String", # required
-    #         tags_list: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] resource_id
     #   Specifies the ARN of the trail or event data store from which tags
@@ -3739,13 +3329,6 @@ module Aws::CloudTrail
     #
     class ResourceTypeNotSupportedException < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass RestoreEventDataStoreRequest
-    #   data as a hash:
-    #
-    #       {
-    #         event_data_store: "EventDataStoreArn", # required
-    #       }
-    #
     # @!attribute [rw] event_data_store
     #   The ARN (or the ID suffix of the ARN) of the event data store that
     #   you want to restore.
@@ -3839,15 +3422,6 @@ module Aws::CloudTrail
 
     # The settings for the source S3 bucket.
     #
-    # @note When making an API call, you may pass S3ImportSource
-    #   data as a hash:
-    #
-    #       {
-    #         s3_location_uri: "String", # required
-    #         s3_bucket_region: "String", # required
-    #         s3_bucket_access_role_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] s3_location_uri
     #   The URI for the source S3 bucket.
     #   @return [String]
@@ -3890,23 +3464,6 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartImportRequest
-    #   data as a hash:
-    #
-    #       {
-    #         destinations: ["EventDataStoreArn"],
-    #         import_source: {
-    #           s3: { # required
-    #             s3_location_uri: "String", # required
-    #             s3_bucket_region: "String", # required
-    #             s3_bucket_access_role_arn: "String", # required
-    #           },
-    #         },
-    #         start_event_time: Time.now,
-    #         end_event_time: Time.now,
-    #         import_id: "UUID",
-    #       }
-    #
     # @!attribute [rw] destinations
     #   The ARN of the destination event data store. Use this parameter for
     #   a new import.
@@ -4008,13 +3565,6 @@ module Aws::CloudTrail
     # The request to CloudTrail to start logging Amazon Web Services API
     # calls for an account.
     #
-    # @note When making an API call, you may pass StartLoggingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   Specifies the name or the CloudTrail ARN of the trail for which
     #   CloudTrail logs Amazon Web Services API calls. The following is the
@@ -4038,14 +3588,6 @@ module Aws::CloudTrail
     #
     class StartLoggingResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass StartQueryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         query_statement: "QueryStatement", # required
-    #         delivery_s3_uri: "DeliveryS3Uri",
-    #       }
-    #
     # @!attribute [rw] query_statement
     #   The SQL code of your query.
     #   @return [String]
@@ -4076,13 +3618,6 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopImportRequest
-    #   data as a hash:
-    #
-    #       {
-    #         import_id: "UUID", # required
-    #       }
-    #
     # @!attribute [rw] import_id
     #   The ID of the import.
     #   @return [String]
@@ -4154,13 +3689,6 @@ module Aws::CloudTrail
     # Passes the request to CloudTrail to stop logging Amazon Web Services
     # API calls for the specified account.
     #
-    # @note When making an API call, you may pass StopLoggingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   Specifies the name or the CloudTrail ARN of the trail for which
     #   CloudTrail will stop logging Amazon Web Services API calls. The
@@ -4186,14 +3714,6 @@ module Aws::CloudTrail
 
     # A custom key-value pair associated with a resource such as a
     # CloudTrail trail.
-    #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue",
-    #       }
     #
     # @!attribute [rw] key
     #   The key in a key-value pair. The key must be must be no longer than
@@ -4391,35 +3911,6 @@ module Aws::CloudTrail
     #
     class UnsupportedOperationException < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateEventDataStoreRequest
-    #   data as a hash:
-    #
-    #       {
-    #         event_data_store: "EventDataStoreArn", # required
-    #         name: "EventDataStoreName",
-    #         advanced_event_selectors: [
-    #           {
-    #             name: "SelectorName",
-    #             field_selectors: [ # required
-    #               {
-    #                 field: "SelectorField", # required
-    #                 equals: ["OperatorValue"],
-    #                 starts_with: ["OperatorValue"],
-    #                 ends_with: ["OperatorValue"],
-    #                 not_equals: ["OperatorValue"],
-    #                 not_starts_with: ["OperatorValue"],
-    #                 not_ends_with: ["OperatorValue"],
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         multi_region_enabled: false,
-    #         organization_enabled: false,
-    #         retention_period: 1,
-    #         termination_protection_enabled: false,
-    #         kms_key_id: "EventDataStoreKmsKeyId",
-    #       }
-    #
     # @!attribute [rw] event_data_store
     #   The ARN (or the ID suffix of the ARN) of the event data store that
     #   you want to update.
@@ -4577,23 +4068,6 @@ module Aws::CloudTrail
     end
 
     # Specifies settings to update for the trail.
-    #
-    # @note When making an API call, you may pass UpdateTrailRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #         s3_bucket_name: "String",
-    #         s3_key_prefix: "String",
-    #         sns_topic_name: "String",
-    #         include_global_service_events: false,
-    #         is_multi_region_trail: false,
-    #         enable_log_file_validation: false,
-    #         cloud_watch_logs_log_group_arn: "String",
-    #         cloud_watch_logs_role_arn: "String",
-    #         kms_key_id: "String",
-    #         is_organization_trail: false,
-    #       }
     #
     # @!attribute [rw] name
     #   Specifies the name of the trail or trail ARN. If `Name` is a trail

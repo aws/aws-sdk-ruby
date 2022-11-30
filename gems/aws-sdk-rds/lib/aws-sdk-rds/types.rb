@@ -143,15 +143,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AddRoleToDBClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_identifier: "String", # required
-    #         role_arn: "String", # required
-    #         feature_name: "String",
-    #       }
-    #
     # @!attribute [rw] db_cluster_identifier
     #   The name of the DB cluster to associate the IAM role with.
     #   @return [String]
@@ -178,15 +169,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AddRoleToDBInstanceMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_instance_identifier: "String", # required
-    #         role_arn: "String", # required
-    #         feature_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] db_instance_identifier
     #   The name of the DB instance to associate the IAM role with.
     #   @return [String]
@@ -213,14 +195,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AddSourceIdentifierToSubscriptionMessage
-    #   data as a hash:
-    #
-    #       {
-    #         subscription_name: "String", # required
-    #         source_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] subscription_name
     #   The name of the RDS event notification subscription you want to add
     #   a source identifier to.
@@ -275,19 +249,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AddTagsToResourceMessage
-    #   data as a hash:
-    #
-    #       {
-    #         resource_name: "String", # required
-    #         tags: [ # required
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_name
     #   The Amazon RDS resource that the tags are added to. This value is an
     #   Amazon Resource Name (ARN). For information about creating an ARN,
@@ -311,15 +272,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ApplyPendingMaintenanceActionMessage
-    #   data as a hash:
-    #
-    #       {
-    #         resource_identifier: "String", # required
-    #         apply_action: "String", # required
-    #         opt_in_type: "String", # required
-    #       }
-    #
     # @!attribute [rw] resource_identifier
     #   The RDS Amazon Resource Name (ARN) of the resource that the pending
     #   maintenance action applies to. For information about creating an
@@ -398,17 +350,6 @@ module Aws::RDS
     #
     class AuthorizationQuotaExceededFault < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass AuthorizeDBSecurityGroupIngressMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_security_group_name: "String", # required
-    #         cidrip: "String",
-    #         ec2_security_group_name: "String",
-    #         ec2_security_group_id: "String",
-    #         ec2_security_group_owner_id: "String",
-    #       }
-    #
     # @!attribute [rw] db_security_group_name
     #   The name of the DB security group to add authorization to.
     #   @return [String]
@@ -519,16 +460,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BacktrackDBClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_identifier: "String", # required
-    #         backtrack_to: Time.now, # required
-    #         force: false,
-    #         use_earliest_time_on_point_in_time_unavailable: false,
-    #       }
-    #
     # @!attribute [rw] db_cluster_identifier
     #   The DB cluster identifier of the DB cluster to be backtracked. This
     #   parameter is stored as a lowercase string.
@@ -759,13 +690,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CancelExportTaskMessage
-    #   data as a hash:
-    #
-    #       {
-    #         export_task_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] export_task_identifier
     #   The identifier of the snapshot export task to cancel.
     #   @return [String]
@@ -897,14 +821,6 @@ module Aws::RDS
     # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #
-    # @note When making an API call, you may pass CloudwatchLogsExportConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         enable_log_types: ["String"],
-    #         disable_log_types: ["String"],
-    #       }
-    #
     # @!attribute [rw] enable_log_types
     #   The list of log types to enable.
     #   @return [Array<String>]
@@ -983,17 +899,6 @@ module Aws::RDS
 
     # Specifies the settings that control the size and behavior of the
     # connection pool associated with a `DBProxyTargetGroup`.
-    #
-    # @note When making an API call, you may pass ConnectionPoolConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         max_connections_percent: 1,
-    #         max_idle_connections_percent: 1,
-    #         connection_borrow_timeout: 1,
-    #         session_pinning_filters: ["String"],
-    #         init_query: "String",
-    #       }
     #
     # @!attribute [rw] max_connections_percent
     #   The maximum size of the connection pool for each target in a target
@@ -1136,21 +1041,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CopyDBClusterParameterGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         source_db_cluster_parameter_group_identifier: "String", # required
-    #         target_db_cluster_parameter_group_identifier: "String", # required
-    #         target_db_cluster_parameter_group_description: "String", # required
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] source_db_cluster_parameter_group_identifier
     #   The identifier or Amazon Resource Name (ARN) for the source DB
     #   cluster parameter group. For information about creating an ARN, see
@@ -1223,24 +1113,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CopyDBClusterSnapshotMessage
-    #   data as a hash:
-    #
-    #       {
-    #         source_db_cluster_snapshot_identifier: "String", # required
-    #         target_db_cluster_snapshot_identifier: "String", # required
-    #         kms_key_id: "String",
-    #         pre_signed_url: "String",
-    #         copy_tags: false,
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #         source_region: "String",
-    #       }
-    #
     # @!attribute [rw] source_db_cluster_snapshot_identifier
     #   The identifier of the DB cluster snapshot to copy. This parameter
     #   isn't case-sensitive.
@@ -1417,21 +1289,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CopyDBParameterGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         source_db_parameter_group_identifier: "String", # required
-    #         target_db_parameter_group_identifier: "String", # required
-    #         target_db_parameter_group_description: "String", # required
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] source_db_parameter_group_identifier
     #   The identifier or ARN for the source DB parameter group. For
     #   information about creating an ARN, see [ Constructing an ARN for
@@ -1503,26 +1360,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CopyDBSnapshotMessage
-    #   data as a hash:
-    #
-    #       {
-    #         source_db_snapshot_identifier: "String", # required
-    #         target_db_snapshot_identifier: "String", # required
-    #         kms_key_id: "String",
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #         copy_tags: false,
-    #         pre_signed_url: "String",
-    #         option_group_name: "String",
-    #         target_custom_availability_zone: "String",
-    #         source_region: "String",
-    #       }
-    #
     # @!attribute [rw] source_db_snapshot_identifier
     #   The identifier for the source DB snapshot.
     #
@@ -1738,21 +1575,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CopyOptionGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         source_option_group_identifier: "String", # required
-    #         target_option_group_identifier: "String", # required
-    #         target_option_group_description: "String", # required
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] source_option_group_identifier
     #   The identifier for the source option group.
     #
@@ -1814,23 +1636,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateBlueGreenDeploymentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         blue_green_deployment_name: "BlueGreenDeploymentName", # required
-    #         source: "DatabaseArn", # required
-    #         target_engine_version: "TargetEngineVersion",
-    #         target_db_parameter_group_name: "TargetDBParameterGroupName",
-    #         target_db_cluster_parameter_group_name: "TargetDBClusterParameterGroupName",
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] blue_green_deployment_name
     #   The name of the blue/green deployment.
     #
@@ -1913,25 +1718,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateCustomDBEngineVersionMessage
-    #   data as a hash:
-    #
-    #       {
-    #         engine: "CustomEngineName", # required
-    #         engine_version: "CustomEngineVersion", # required
-    #         database_installation_files_s3_bucket_name: "BucketName", # required
-    #         database_installation_files_s3_prefix: "String255",
-    #         kms_key_id: "KmsKeyIdOrArn", # required
-    #         description: "Description",
-    #         manifest: "CustomDBEngineVersionManifest", # required
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] engine
     #   The database engine to use for your custom engine version (CEV). The
     #   only supported value is `custom-oracle-ee`.
@@ -2044,23 +1830,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDBClusterEndpointMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_identifier: "String", # required
-    #         db_cluster_endpoint_identifier: "String", # required
-    #         endpoint_type: "String", # required
-    #         static_members: ["String"],
-    #         excluded_members: ["String"],
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] db_cluster_identifier
     #   The DB cluster identifier of the DB cluster associated with the
     #   endpoint. This parameter is stored as a lowercase string.
@@ -2104,75 +1873,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDBClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         availability_zones: ["String"],
-    #         backup_retention_period: 1,
-    #         character_set_name: "String",
-    #         database_name: "String",
-    #         db_cluster_identifier: "String", # required
-    #         db_cluster_parameter_group_name: "String",
-    #         vpc_security_group_ids: ["String"],
-    #         db_subnet_group_name: "String",
-    #         engine: "String", # required
-    #         engine_version: "String",
-    #         port: 1,
-    #         master_username: "String",
-    #         master_user_password: "String",
-    #         option_group_name: "String",
-    #         preferred_backup_window: "String",
-    #         preferred_maintenance_window: "String",
-    #         replication_source_identifier: "String",
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #         storage_encrypted: false,
-    #         kms_key_id: "String",
-    #         pre_signed_url: "String",
-    #         enable_iam_database_authentication: false,
-    #         backtrack_window: 1,
-    #         enable_cloudwatch_logs_exports: ["String"],
-    #         engine_mode: "String",
-    #         scaling_configuration: {
-    #           min_capacity: 1,
-    #           max_capacity: 1,
-    #           auto_pause: false,
-    #           seconds_until_auto_pause: 1,
-    #           timeout_action: "String",
-    #           seconds_before_timeout: 1,
-    #         },
-    #         deletion_protection: false,
-    #         global_cluster_identifier: "String",
-    #         enable_http_endpoint: false,
-    #         copy_tags_to_snapshot: false,
-    #         domain: "String",
-    #         domain_iam_role_name: "String",
-    #         enable_global_write_forwarding: false,
-    #         db_cluster_instance_class: "String",
-    #         allocated_storage: 1,
-    #         storage_type: "String",
-    #         iops: 1,
-    #         publicly_accessible: false,
-    #         auto_minor_version_upgrade: false,
-    #         monitoring_interval: 1,
-    #         monitoring_role_arn: "String",
-    #         enable_performance_insights: false,
-    #         performance_insights_kms_key_id: "String",
-    #         performance_insights_retention_period: 1,
-    #         serverless_v2_scaling_configuration: {
-    #           min_capacity: 1.0,
-    #           max_capacity: 1.0,
-    #         },
-    #         network_type: "String",
-    #         db_system_id: "String",
-    #         source_region: "String",
-    #       }
-    #
     # @!attribute [rw] availability_zones
     #   A list of Availability Zones (AZs) where DB instances in the DB
     #   cluster can be created.
@@ -3055,21 +2755,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDBClusterParameterGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_parameter_group_name: "String", # required
-    #         db_parameter_group_family: "String", # required
-    #         description: "String", # required
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] db_cluster_parameter_group_name
     #   The name of the DB cluster parameter group.
     #
@@ -3211,20 +2896,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDBClusterSnapshotMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_snapshot_identifier: "String", # required
-    #         db_cluster_identifier: "String", # required
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] db_cluster_snapshot_identifier
     #   The identifier of the DB cluster snapshot. This parameter is stored
     #   as a lowercase string.
@@ -3282,74 +2953,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDBInstanceMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_name: "String",
-    #         db_instance_identifier: "String", # required
-    #         allocated_storage: 1,
-    #         db_instance_class: "String", # required
-    #         engine: "String", # required
-    #         master_username: "String",
-    #         master_user_password: "String",
-    #         db_security_groups: ["String"],
-    #         vpc_security_group_ids: ["String"],
-    #         availability_zone: "String",
-    #         db_subnet_group_name: "String",
-    #         preferred_maintenance_window: "String",
-    #         db_parameter_group_name: "String",
-    #         backup_retention_period: 1,
-    #         preferred_backup_window: "String",
-    #         port: 1,
-    #         multi_az: false,
-    #         engine_version: "String",
-    #         auto_minor_version_upgrade: false,
-    #         license_model: "String",
-    #         iops: 1,
-    #         option_group_name: "String",
-    #         character_set_name: "String",
-    #         nchar_character_set_name: "String",
-    #         publicly_accessible: false,
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #         db_cluster_identifier: "String",
-    #         storage_type: "String",
-    #         tde_credential_arn: "String",
-    #         tde_credential_password: "String",
-    #         storage_encrypted: false,
-    #         kms_key_id: "String",
-    #         domain: "String",
-    #         copy_tags_to_snapshot: false,
-    #         monitoring_interval: 1,
-    #         monitoring_role_arn: "String",
-    #         domain_iam_role_name: "String",
-    #         promotion_tier: 1,
-    #         timezone: "String",
-    #         enable_iam_database_authentication: false,
-    #         enable_performance_insights: false,
-    #         performance_insights_kms_key_id: "String",
-    #         performance_insights_retention_period: 1,
-    #         enable_cloudwatch_logs_exports: ["String"],
-    #         processor_features: [
-    #           {
-    #             name: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #         deletion_protection: false,
-    #         max_allocated_storage: 1,
-    #         enable_customer_owned_ip: false,
-    #         custom_iam_instance_profile: "String",
-    #         backup_target: "String",
-    #         network_type: "String",
-    #         storage_throughput: 1,
-    #       }
-    #
     # @!attribute [rw] db_name
     #   The meaning of this parameter differs according to the database
     #   engine you use.
@@ -4574,58 +4177,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDBInstanceReadReplicaMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_instance_identifier: "String", # required
-    #         source_db_instance_identifier: "String", # required
-    #         db_instance_class: "String",
-    #         availability_zone: "String",
-    #         port: 1,
-    #         multi_az: false,
-    #         auto_minor_version_upgrade: false,
-    #         iops: 1,
-    #         option_group_name: "String",
-    #         db_parameter_group_name: "String",
-    #         publicly_accessible: false,
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #         db_subnet_group_name: "String",
-    #         vpc_security_group_ids: ["String"],
-    #         storage_type: "String",
-    #         copy_tags_to_snapshot: false,
-    #         monitoring_interval: 1,
-    #         monitoring_role_arn: "String",
-    #         kms_key_id: "String",
-    #         pre_signed_url: "String",
-    #         enable_iam_database_authentication: false,
-    #         enable_performance_insights: false,
-    #         performance_insights_kms_key_id: "String",
-    #         performance_insights_retention_period: 1,
-    #         enable_cloudwatch_logs_exports: ["String"],
-    #         processor_features: [
-    #           {
-    #             name: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #         use_default_processor_features: false,
-    #         deletion_protection: false,
-    #         domain: "String",
-    #         domain_iam_role_name: "String",
-    #         replica_mode: "open-read-only", # accepts open-read-only, mounted
-    #         max_allocated_storage: 1,
-    #         custom_iam_instance_profile: "String",
-    #         network_type: "String",
-    #         storage_throughput: 1,
-    #         source_region: "String",
-    #       }
-    #
     # @!attribute [rw] db_instance_identifier
     #   The DB instance identifier of the read replica. This identifier is
     #   the unique key that identifies a DB instance. This parameter is
@@ -5296,21 +4847,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDBParameterGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_parameter_group_name: "String", # required
-    #         db_parameter_group_family: "String", # required
-    #         description: "String", # required
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] db_parameter_group_name
     #   The name of the DB parameter group.
     #
@@ -5415,23 +4951,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDBProxyEndpointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         db_proxy_name: "DBProxyName", # required
-    #         db_proxy_endpoint_name: "DBProxyEndpointName", # required
-    #         vpc_subnet_ids: ["String"], # required
-    #         vpc_security_group_ids: ["String"],
-    #         target_role: "READ_WRITE", # accepts READ_WRITE, READ_ONLY
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] db_proxy_name
     #   The name of the DB proxy associated with the DB proxy endpoint that
     #   you create.
@@ -5498,35 +5017,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDBProxyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         db_proxy_name: "String", # required
-    #         engine_family: "MYSQL", # required, accepts MYSQL, POSTGRESQL, SQLSERVER
-    #         auth: [ # required
-    #           {
-    #             description: "String",
-    #             user_name: "String",
-    #             auth_scheme: "SECRETS", # accepts SECRETS
-    #             secret_arn: "String",
-    #             iam_auth: "DISABLED", # accepts DISABLED, REQUIRED, ENABLED
-    #           },
-    #         ],
-    #         role_arn: "String", # required
-    #         vpc_subnet_ids: ["String"], # required
-    #         vpc_security_group_ids: ["String"],
-    #         require_tls: false,
-    #         idle_client_timeout: 1,
-    #         debug_logging: false,
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] db_proxy_name
     #   The identifier for the proxy. This name must be unique for all
     #   proxies owned by your Amazon Web Services account in the specified
@@ -5620,20 +5110,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDBSecurityGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_security_group_name: "String", # required
-    #         db_security_group_description: "String", # required
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] db_security_group_name
     #   The name for the DB security group. This value is stored as a
     #   lowercase string.
@@ -5684,20 +5160,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDBSnapshotMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_snapshot_identifier: "String", # required
-    #         db_instance_identifier: "String", # required
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] db_snapshot_identifier
     #   The identifier for the DB snapshot.
     #
@@ -5759,21 +5221,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDBSubnetGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_subnet_group_name: "String", # required
-    #         db_subnet_group_description: "String", # required
-    #         subnet_ids: ["String"], # required
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] db_subnet_group_name
     #   The name for the DB subnet group. This value is stored as a
     #   lowercase string.
@@ -5828,24 +5275,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateEventSubscriptionMessage
-    #   data as a hash:
-    #
-    #       {
-    #         subscription_name: "String", # required
-    #         sns_topic_arn: "String", # required
-    #         source_type: "String",
-    #         event_categories: ["String"],
-    #         source_ids: ["String"],
-    #         enabled: false,
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] subscription_name
     #   The name of the subscription.
     #
@@ -5958,19 +5387,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateGlobalClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         global_cluster_identifier: "String",
-    #         source_db_cluster_identifier: "String",
-    #         engine: "String",
-    #         engine_version: "String",
-    #         deletion_protection: false,
-    #         database_name: "String",
-    #         storage_encrypted: false,
-    #       }
-    #
     # @!attribute [rw] global_cluster_identifier
     #   The cluster identifier of the new global database cluster.
     #   @return [String]
@@ -6030,22 +5446,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateOptionGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         option_group_name: "String", # required
-    #         engine_name: "String", # required
-    #         major_engine_version: "String", # required
-    #         option_group_description: "String", # required
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] option_group_name
     #   Specifies the name of the option group to be created.
     #
@@ -9847,14 +9247,6 @@ module Aws::RDS
     #
     class DBUpgradeDependencyFailureFault < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteBlueGreenDeploymentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         blue_green_deployment_identifier: "BlueGreenDeploymentIdentifier", # required
-    #         delete_target: false,
-    #       }
-    #
     # @!attribute [rw] blue_green_deployment_identifier
     #   The blue/green deployment identifier of the deployment to be
     #   deleted. This parameter isn't case-sensitive.
@@ -9902,14 +9294,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteCustomDBEngineVersionMessage
-    #   data as a hash:
-    #
-    #       {
-    #         engine: "CustomEngineName", # required
-    #         engine_version: "CustomEngineVersion", # required
-    #       }
-    #
     # @!attribute [rw] engine
     #   The database engine. The only supported engine is
     #   `custom-oracle-ee`.
@@ -9931,13 +9315,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDBClusterEndpointMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_endpoint_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] db_cluster_endpoint_identifier
     #   The identifier associated with the custom endpoint. This parameter
     #   is stored as a lowercase string.
@@ -9951,15 +9328,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDBClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_identifier: "String", # required
-    #         skip_final_snapshot: false,
-    #         final_db_snapshot_identifier: "String",
-    #       }
-    #
     # @!attribute [rw] db_cluster_identifier
     #   The DB cluster identifier for the DB cluster to be deleted. This
     #   parameter isn't case-sensitive.
@@ -10014,13 +9382,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDBClusterParameterGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_parameter_group_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] db_cluster_parameter_group_name
     #   The name of the DB cluster parameter group.
     #
@@ -10080,13 +9441,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDBClusterSnapshotMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_snapshot_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] db_cluster_snapshot_identifier
     #   The identifier of the DB cluster snapshot to delete.
     #
@@ -10118,14 +9472,6 @@ module Aws::RDS
     end
 
     # Parameter input for the `DeleteDBInstanceAutomatedBackup` operation.
-    #
-    # @note When making an API call, you may pass DeleteDBInstanceAutomatedBackupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         dbi_resource_id: "String",
-    #         db_instance_automated_backups_arn: "String",
-    #       }
     #
     # @!attribute [rw] dbi_resource_id
     #   The identifier for the source DB instance, which can't be changed
@@ -10163,16 +9509,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDBInstanceMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_instance_identifier: "String", # required
-    #         skip_final_snapshot: false,
-    #         final_db_snapshot_identifier: "String",
-    #         delete_automated_backups: false,
-    #       }
-    #
     # @!attribute [rw] db_instance_identifier
     #   The DB instance identifier for the DB instance to be deleted. This
     #   parameter isn't case-sensitive.
@@ -10267,13 +9603,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDBParameterGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_parameter_group_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] db_parameter_group_name
     #   The name of the DB parameter group.
     #
@@ -10294,13 +9623,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDBProxyEndpointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         db_proxy_endpoint_name: "DBProxyEndpointName", # required
-    #       }
-    #
     # @!attribute [rw] db_proxy_endpoint_name
     #   The name of the DB proxy endpoint to delete.
     #   @return [String]
@@ -10326,13 +9648,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDBProxyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         db_proxy_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] db_proxy_name
     #   The name of the DB proxy to delete.
     #   @return [String]
@@ -10358,13 +9673,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDBSecurityGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_security_group_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] db_security_group_name
     #   The name of the DB security group to delete.
     #
@@ -10391,13 +9699,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDBSnapshotMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_snapshot_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] db_snapshot_identifier
     #   The DB snapshot identifier.
     #
@@ -10428,13 +9729,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDBSubnetGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_subnet_group_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] db_subnet_group_name
     #   The name of the database subnet group to delete.
     #
@@ -10456,13 +9750,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteEventSubscriptionMessage
-    #   data as a hash:
-    #
-    #       {
-    #         subscription_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] subscription_name
     #   The name of the RDS event notification subscription you want to
     #   delete.
@@ -10489,13 +9776,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteGlobalClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         global_cluster_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] global_cluster_identifier
     #   The cluster identifier of the global database cluster being deleted.
     #   @return [String]
@@ -10520,13 +9800,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteOptionGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         option_group_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] option_group_name
     #   The name of the option group to be deleted.
     #
@@ -10543,16 +9816,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeregisterDBProxyTargetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         db_proxy_name: "String", # required
-    #         target_group_name: "String",
-    #         db_instance_identifiers: ["String"],
-    #         db_cluster_identifiers: ["String"],
-    #       }
-    #
     # @!attribute [rw] db_proxy_name
     #   The identifier of the `DBProxy` that is associated with the
     #   `DBProxyTargetGroup`.
@@ -10585,27 +9848,10 @@ module Aws::RDS
     #
     class DeregisterDBProxyTargetsResponse < Aws::EmptyStructure; end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeAccountAttributesMessage AWS API Documentation
     #
     class DescribeAccountAttributesMessage < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeBlueGreenDeploymentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         blue_green_deployment_identifier: "BlueGreenDeploymentIdentifier",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         marker: "String",
-    #         max_records: 1,
-    #       }
-    #
     # @!attribute [rw] blue_green_deployment_identifier
     #   The blue/green deployment identifier. If this parameter is
     #   specified, information from only the specific blue/green deployment
@@ -10690,21 +9936,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeCertificatesMessage
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_identifier: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] certificate_identifier
     #   The user-supplied certificate identifier. If this parameter is
     #   specified, information for only the identified certificate is
@@ -10750,22 +9981,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDBClusterBacktracksMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_identifier: "String", # required
-    #         backtrack_identifier: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] db_cluster_identifier
     #   The DB cluster identifier of the DB cluster to be described. This
     #   parameter is stored as a lowercase string.
@@ -10853,22 +10068,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDBClusterEndpointsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_identifier: "String",
-    #         db_cluster_endpoint_identifier: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] db_cluster_identifier
     #   The DB cluster identifier of the DB cluster associated with the
     #   endpoint. This parameter is stored as a lowercase string.
@@ -10925,21 +10124,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDBClusterParameterGroupsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_parameter_group_name: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] db_cluster_parameter_group_name
     #   The name of a specific DB cluster parameter group to return details
     #   for.
@@ -10985,22 +10169,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDBClusterParametersMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_parameter_group_name: "String", # required
-    #         source: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] db_cluster_parameter_group_name
     #   The name of a specific DB cluster parameter group to return
     #   parameter details for.
@@ -11052,13 +10220,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDBClusterSnapshotAttributesMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_snapshot_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] db_cluster_snapshot_identifier
     #   The identifier for the DB cluster snapshot to describe the
     #   attributes for.
@@ -11090,25 +10251,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDBClusterSnapshotsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_identifier: "String",
-    #         db_cluster_snapshot_identifier: "String",
-    #         snapshot_type: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #         include_shared: false,
-    #         include_public: false,
-    #       }
-    #
     # @!attribute [rw] db_cluster_identifier
     #   The ID of the DB cluster to retrieve the list of DB cluster
     #   snapshots for. This parameter can't be used in conjunction with the
@@ -11239,22 +10381,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDBClustersMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_identifier: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #         include_shared: false,
-    #       }
-    #
     # @!attribute [rw] db_cluster_identifier
     #   The user-supplied DB cluster identifier or the Amazon Resource Name
     #   (ARN) of the DB cluster. If this parameter is specified, information
@@ -11325,27 +10451,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDBEngineVersionsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         engine: "String",
-    #         engine_version: "String",
-    #         db_parameter_group_family: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #         default_only: false,
-    #         list_supported_character_sets: false,
-    #         list_supported_timezones: false,
-    #         include_all: false,
-    #       }
-    #
     # @!attribute [rw] engine
     #   The database engine to return.
     #
@@ -11511,23 +10616,6 @@ module Aws::RDS
 
     # Parameter input for DescribeDBInstanceAutomatedBackups.
     #
-    # @note When making an API call, you may pass DescribeDBInstanceAutomatedBackupsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         dbi_resource_id: "String",
-    #         db_instance_identifier: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #         db_instance_automated_backups_arn: "String",
-    #       }
-    #
     # @!attribute [rw] dbi_resource_id
     #   The resource ID of the DB instance that is the source of the
     #   automated backup. This parameter isn't case-sensitive.
@@ -11601,21 +10689,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDBInstancesMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_instance_identifier: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] db_instance_identifier
     #   The user-supplied instance identifier or the Amazon Resource Name
     #   (ARN) of the DB instance. If this parameter is specified,
@@ -11708,24 +10781,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDBLogFilesMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_instance_identifier: "String", # required
-    #         filename_contains: "String",
-    #         file_last_written: 1,
-    #         file_size: 1,
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] db_instance_identifier
     #   The customer-assigned name of the DB instance that contains the log
     #   files you want to list.
@@ -11803,21 +10858,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDBParameterGroupsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_parameter_group_name: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] db_parameter_group_name
     #   The name of a specific DB parameter group to return details for.
     #
@@ -11862,22 +10902,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDBParametersMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_parameter_group_name: "String", # required
-    #         source: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] db_parameter_group_name
     #   The name of a specific DB parameter group to return details for.
     #
@@ -11930,21 +10954,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDBProxiesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         db_proxy_name: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         marker: "String",
-    #         max_records: 1,
-    #       }
-    #
     # @!attribute [rw] db_proxy_name
     #   The name of the DB proxy. If you omit this parameter, the output
     #   includes information about all DB proxies owned by your Amazon Web
@@ -12003,22 +11012,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDBProxyEndpointsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         db_proxy_name: "DBProxyName",
-    #         db_proxy_endpoint_name: "DBProxyEndpointName",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         marker: "String",
-    #         max_records: 1,
-    #       }
-    #
     # @!attribute [rw] db_proxy_name
     #   The name of the DB proxy whose endpoints you want to describe. If
     #   you omit this parameter, the output includes information about all
@@ -12083,22 +11076,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDBProxyTargetGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         db_proxy_name: "String", # required
-    #         target_group_name: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         marker: "String",
-    #         max_records: 1,
-    #       }
-    #
     # @!attribute [rw] db_proxy_name
     #   The identifier of the `DBProxy` associated with the target group.
     #   @return [String]
@@ -12160,22 +11137,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDBProxyTargetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         db_proxy_name: "String", # required
-    #         target_group_name: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         marker: "String",
-    #         max_records: 1,
-    #       }
-    #
     # @!attribute [rw] db_proxy_name
     #   The identifier of the `DBProxyTarget` to describe.
     #   @return [String]
@@ -12237,21 +11198,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDBSecurityGroupsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_security_group_name: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] db_security_group_name
     #   The name of the DB security group to return details for.
     #   @return [String]
@@ -12289,13 +11235,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDBSnapshotAttributesMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_snapshot_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] db_snapshot_identifier
     #   The identifier for the DB snapshot to describe the attributes for.
     #   @return [String]
@@ -12325,26 +11264,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDBSnapshotsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_instance_identifier: "String",
-    #         db_snapshot_identifier: "String",
-    #         snapshot_type: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #         include_shared: false,
-    #         include_public: false,
-    #         dbi_resource_id: "String",
-    #       }
-    #
     # @!attribute [rw] db_instance_identifier
     #   The ID of the DB instance to retrieve the list of DB snapshots for.
     #   This parameter isn't case-sensitive.
@@ -12490,21 +11409,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDBSubnetGroupsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_subnet_group_name: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] db_subnet_group_name
     #   The name of the DB subnet group to return details for.
     #   @return [String]
@@ -12542,21 +11446,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEngineDefaultClusterParametersMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_parameter_group_family: "String", # required
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] db_parameter_group_family
     #   The name of the DB cluster parameter group family to return engine
     #   parameter information for.
@@ -12608,21 +11497,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEngineDefaultParametersMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_parameter_group_family: "String", # required
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] db_parameter_group_family
     #   The name of the DB parameter group family.
     #
@@ -12769,19 +11643,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEventCategoriesMessage
-    #   data as a hash:
-    #
-    #       {
-    #         source_type: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] source_type
     #   The type of source that is generating the events. For RDS Proxy
     #   events, specify `db-proxy`.
@@ -12804,21 +11665,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEventSubscriptionsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         subscription_name: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] subscription_name
     #   The name of the RDS event notification subscription you want to
     #   describe.
@@ -12857,26 +11703,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeEventsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         source_identifier: "String",
-    #         source_type: "db-instance", # accepts db-instance, db-parameter-group, db-security-group, db-snapshot, db-cluster, db-cluster-snapshot, custom-engine-version, db-proxy
-    #         start_time: Time.now,
-    #         end_time: Time.now,
-    #         duration: 1,
-    #         event_categories: ["String"],
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] source_identifier
     #   The identifier of the event source for which events are returned. If
     #   not specified, then all sources are included in the response.
@@ -12988,23 +11814,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeExportTasksMessage
-    #   data as a hash:
-    #
-    #       {
-    #         export_task_identifier: "String",
-    #         source_arn: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         marker: "String",
-    #         max_records: 1,
-    #         source_type: "SNAPSHOT", # accepts SNAPSHOT, CLUSTER
-    #       }
-    #
     # @!attribute [rw] export_task_identifier
     #   The identifier of the snapshot export task to be described.
     #   @return [String]
@@ -13081,21 +11890,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeGlobalClustersMessage
-    #   data as a hash:
-    #
-    #       {
-    #         global_cluster_identifier: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] global_cluster_identifier
     #   The user-supplied DB cluster identifier. If this parameter is
     #   specified, information from only the specific DB cluster is
@@ -13141,22 +11935,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeOptionGroupOptionsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         engine_name: "String", # required
-    #         major_engine_version: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] engine_name
     #   A required parameter. Options available for the given engine name
     #   are described.
@@ -13224,23 +12002,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeOptionGroupsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         option_group_name: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         marker: "String",
-    #         max_records: 1,
-    #         engine_name: "String",
-    #         major_engine_version: "String",
-    #       }
-    #
     # @!attribute [rw] option_group_name
     #   The name of the option group to describe. Can't be supplied
     #   together with EngineName or MajorEngineVersion.
@@ -13316,26 +12077,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeOrderableDBInstanceOptionsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         engine: "String", # required
-    #         engine_version: "String",
-    #         db_instance_class: "String",
-    #         license_model: "String",
-    #         availability_zone_group: "String",
-    #         vpc: false,
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] engine
     #   The name of the engine to retrieve DB instance options for.
     #
@@ -13446,21 +12187,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribePendingMaintenanceActionsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         resource_identifier: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         marker: "String",
-    #         max_records: 1,
-    #       }
-    #
     # @!attribute [rw] resource_identifier
     #   The ARN of a resource to return pending maintenance actions for.
     #   @return [String]
@@ -13510,28 +12236,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeReservedDBInstancesMessage
-    #   data as a hash:
-    #
-    #       {
-    #         reserved_db_instance_id: "String",
-    #         reserved_db_instances_offering_id: "String",
-    #         db_instance_class: "String",
-    #         duration: "String",
-    #         product_description: "String",
-    #         offering_type: "String",
-    #         multi_az: false,
-    #         lease_id: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] reserved_db_instance_id
     #   The reserved DB instance identifier filter value. Specify this
     #   parameter to show only the reservation that matches the specified
@@ -13622,26 +12326,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeReservedDBInstancesOfferingsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         reserved_db_instances_offering_id: "String",
-    #         db_instance_class: "String",
-    #         duration: "String",
-    #         product_description: "String",
-    #         offering_type: "String",
-    #         multi_az: false,
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
     # @!attribute [rw] reserved_db_instances_offering_id
     #   The offering identifier filter value. Specify this parameter to show
     #   only the available offering that matches the specified reservation
@@ -13722,21 +12406,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeSourceRegionsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         region_name: "String",
-    #         max_records: 1,
-    #         marker: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] region_name
     #   The source Amazon Web Services Region name. For example,
     #   `us-east-1`.
@@ -13781,13 +12450,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeValidDBInstanceModificationsMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_instance_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] db_instance_identifier
     #   The customer identifier or the ARN of your DB instance.
     #   @return [String]
@@ -13900,16 +12562,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DownloadDBLogFilePortionMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_instance_identifier: "String", # required
-    #         log_file_name: "String", # required
-    #         marker: "String",
-    #         number_of_lines: 1,
-    #       }
-    #
     # @!attribute [rw] db_instance_identifier
     #   The customer-assigned name of the DB instance that contains the log
     #   files you want to list.
@@ -14422,14 +13074,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass FailoverDBClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_identifier: "String", # required
-    #         target_db_instance_identifier: "String",
-    #       }
-    #
     # @!attribute [rw] db_cluster_identifier
     #   A DB cluster identifier to force a failover for. This parameter
     #   isn't case-sensitive.
@@ -14500,14 +13144,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass FailoverGlobalClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         global_cluster_identifier: "GlobalClusterIdentifier", # required
-    #         target_db_cluster_identifier: "DBClusterIdentifier", # required
-    #       }
-    #
     # @!attribute [rw] global_cluster_identifier
     #   Identifier of the Aurora global database (GlobalCluster) that should
     #   be failed over. The identifier is the unique key assigned by the
@@ -14618,14 +13254,6 @@ module Aws::RDS
     # * `DescribeDBInstances`
     #
     # * `DescribePendingMaintenanceActions`
-    #
-    # @note When making an API call, you may pass Filter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #         values: ["String"], # required
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the filter. Filter names are case-sensitive.
@@ -15047,19 +13675,6 @@ module Aws::RDS
     #
     class KMSKeyNotAccessibleFault < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass ListTagsForResourceMessage
-    #   data as a hash:
-    #
-    #       {
-    #         resource_name: "String", # required
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_name
     #   The Amazon RDS resource with tags to be listed. This value is an
     #   Amazon Resource Name (ARN). For information about creating an ARN,
@@ -15104,14 +13719,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyActivityStreamRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String",
-    #         audit_policy_state: "locked", # accepts locked, unlocked
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the RDS for Oracle DB instance,
     #   for example,
@@ -15174,14 +13781,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyCertificatesMessage
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_identifier: "String",
-    #         remove_customer_override: false,
-    #       }
-    #
     # @!attribute [rw] certificate_identifier
     #   The new default certificate identifier to override the current one
     #   with.
@@ -15217,16 +13816,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyCurrentDBClusterCapacityMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_identifier: "String", # required
-    #         capacity: 1,
-    #         seconds_before_timeout: 1,
-    #         timeout_action: "String",
-    #       }
-    #
     # @!attribute [rw] db_cluster_identifier
     #   The DB cluster identifier for the cluster being modified. This
     #   parameter isn't case-sensitive.
@@ -15283,16 +13872,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyCustomDBEngineVersionMessage
-    #   data as a hash:
-    #
-    #       {
-    #         engine: "CustomEngineName", # required
-    #         engine_version: "CustomEngineVersion", # required
-    #         description: "Description",
-    #         status: "available", # accepts available, inactive, inactive-except-restore
-    #       }
-    #
     # @!attribute [rw] engine
     #   The DB engine. The only supported value is `custom-oracle-ee`.
     #   @return [String]
@@ -15342,16 +13921,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyDBClusterEndpointMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_endpoint_identifier: "String", # required
-    #         endpoint_type: "String",
-    #         static_members: ["String"],
-    #         excluded_members: ["String"],
-    #       }
-    #
     # @!attribute [rw] db_cluster_endpoint_identifier
     #   The identifier of the endpoint to modify. This parameter is stored
     #   as a lowercase string.
@@ -15384,61 +13953,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyDBClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_identifier: "String", # required
-    #         new_db_cluster_identifier: "String",
-    #         apply_immediately: false,
-    #         backup_retention_period: 1,
-    #         db_cluster_parameter_group_name: "String",
-    #         vpc_security_group_ids: ["String"],
-    #         port: 1,
-    #         master_user_password: "String",
-    #         option_group_name: "String",
-    #         preferred_backup_window: "String",
-    #         preferred_maintenance_window: "String",
-    #         enable_iam_database_authentication: false,
-    #         backtrack_window: 1,
-    #         cloudwatch_logs_export_configuration: {
-    #           enable_log_types: ["String"],
-    #           disable_log_types: ["String"],
-    #         },
-    #         engine_version: "String",
-    #         allow_major_version_upgrade: false,
-    #         db_instance_parameter_group_name: "String",
-    #         domain: "String",
-    #         domain_iam_role_name: "String",
-    #         scaling_configuration: {
-    #           min_capacity: 1,
-    #           max_capacity: 1,
-    #           auto_pause: false,
-    #           seconds_until_auto_pause: 1,
-    #           timeout_action: "String",
-    #           seconds_before_timeout: 1,
-    #         },
-    #         deletion_protection: false,
-    #         enable_http_endpoint: false,
-    #         copy_tags_to_snapshot: false,
-    #         enable_global_write_forwarding: false,
-    #         db_cluster_instance_class: "String",
-    #         allocated_storage: 1,
-    #         storage_type: "String",
-    #         iops: 1,
-    #         auto_minor_version_upgrade: false,
-    #         monitoring_interval: 1,
-    #         monitoring_role_arn: "String",
-    #         enable_performance_insights: false,
-    #         performance_insights_kms_key_id: "String",
-    #         performance_insights_retention_period: 1,
-    #         serverless_v2_scaling_configuration: {
-    #           min_capacity: 1.0,
-    #           max_capacity: 1.0,
-    #         },
-    #         network_type: "String",
-    #       }
-    #
     # @!attribute [rw] db_cluster_identifier
     #   The DB cluster identifier for the cluster being modified. This
     #   parameter isn't case-sensitive.
@@ -16046,28 +14560,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyDBClusterParameterGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_parameter_group_name: "String", # required
-    #         parameters: [ # required
-    #           {
-    #             parameter_name: "String",
-    #             parameter_value: "String",
-    #             description: "String",
-    #             source: "String",
-    #             apply_type: "String",
-    #             data_type: "String",
-    #             allowed_values: "String",
-    #             is_modifiable: false,
-    #             minimum_engine_version: "String",
-    #             apply_method: "immediate", # accepts immediate, pending-reboot
-    #             supported_engine_modes: ["String"],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] db_cluster_parameter_group_name
     #   The name of the DB cluster parameter group to modify.
     #   @return [String]
@@ -16140,16 +14632,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyDBClusterSnapshotAttributeMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_snapshot_identifier: "String", # required
-    #         attribute_name: "String", # required
-    #         values_to_add: ["String"],
-    #         values_to_remove: ["String"],
-    #       }
-    #
     # @!attribute [rw] db_cluster_snapshot_identifier
     #   The identifier for the DB cluster snapshot to modify the attributes
     #   for.
@@ -16224,69 +14706,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyDBInstanceMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_instance_identifier: "String", # required
-    #         allocated_storage: 1,
-    #         db_instance_class: "String",
-    #         db_subnet_group_name: "String",
-    #         db_security_groups: ["String"],
-    #         vpc_security_group_ids: ["String"],
-    #         apply_immediately: false,
-    #         master_user_password: "String",
-    #         db_parameter_group_name: "String",
-    #         backup_retention_period: 1,
-    #         preferred_backup_window: "String",
-    #         preferred_maintenance_window: "String",
-    #         multi_az: false,
-    #         engine_version: "String",
-    #         allow_major_version_upgrade: false,
-    #         auto_minor_version_upgrade: false,
-    #         license_model: "String",
-    #         iops: 1,
-    #         option_group_name: "String",
-    #         new_db_instance_identifier: "String",
-    #         storage_type: "String",
-    #         tde_credential_arn: "String",
-    #         tde_credential_password: "String",
-    #         ca_certificate_identifier: "String",
-    #         domain: "String",
-    #         copy_tags_to_snapshot: false,
-    #         monitoring_interval: 1,
-    #         db_port_number: 1,
-    #         publicly_accessible: false,
-    #         monitoring_role_arn: "String",
-    #         domain_iam_role_name: "String",
-    #         promotion_tier: 1,
-    #         enable_iam_database_authentication: false,
-    #         enable_performance_insights: false,
-    #         performance_insights_kms_key_id: "String",
-    #         performance_insights_retention_period: 1,
-    #         cloudwatch_logs_export_configuration: {
-    #           enable_log_types: ["String"],
-    #           disable_log_types: ["String"],
-    #         },
-    #         processor_features: [
-    #           {
-    #             name: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #         use_default_processor_features: false,
-    #         deletion_protection: false,
-    #         max_allocated_storage: 1,
-    #         certificate_rotation_restart: false,
-    #         replica_mode: "open-read-only", # accepts open-read-only, mounted
-    #         enable_customer_owned_ip: false,
-    #         aws_backup_recovery_point_arn: "AwsBackupRecoveryPointArn",
-    #         automation_mode: "full", # accepts full, all-paused
-    #         resume_full_automation_mode_minutes: 1,
-    #         network_type: "String",
-    #         storage_throughput: 1,
-    #       }
-    #
     # @!attribute [rw] db_instance_identifier
     #   The DB instance identifier. This value is stored as a lowercase
     #   string.
@@ -17251,28 +15670,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyDBParameterGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_parameter_group_name: "String", # required
-    #         parameters: [ # required
-    #           {
-    #             parameter_name: "String",
-    #             parameter_value: "String",
-    #             description: "String",
-    #             source: "String",
-    #             apply_type: "String",
-    #             data_type: "String",
-    #             allowed_values: "String",
-    #             is_modifiable: false,
-    #             minimum_engine_version: "String",
-    #             apply_method: "immediate", # accepts immediate, pending-reboot
-    #             supported_engine_modes: ["String"],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] db_parameter_group_name
     #   The name of the DB parameter group.
     #
@@ -17327,15 +15724,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyDBProxyEndpointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         db_proxy_endpoint_name: "DBProxyEndpointName", # required
-    #         new_db_proxy_endpoint_name: "DBProxyEndpointName",
-    #         vpc_security_group_ids: ["String"],
-    #       }
-    #
     # @!attribute [rw] db_proxy_endpoint_name
     #   The name of the DB proxy sociated with the DB proxy endpoint that
     #   you want to modify.
@@ -17378,28 +15766,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyDBProxyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         db_proxy_name: "String", # required
-    #         new_db_proxy_name: "String",
-    #         auth: [
-    #           {
-    #             description: "String",
-    #             user_name: "String",
-    #             auth_scheme: "SECRETS", # accepts SECRETS
-    #             secret_arn: "String",
-    #             iam_auth: "DISABLED", # accepts DISABLED, REQUIRED, ENABLED
-    #           },
-    #         ],
-    #         require_tls: false,
-    #         idle_client_timeout: 1,
-    #         debug_logging: false,
-    #         role_arn: "String",
-    #         security_groups: ["String"],
-    #       }
-    #
     # @!attribute [rw] db_proxy_name
     #   The identifier for the `DBProxy` to modify.
     #   @return [String]
@@ -17474,22 +15840,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyDBProxyTargetGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         target_group_name: "String", # required
-    #         db_proxy_name: "String", # required
-    #         connection_pool_config: {
-    #           max_connections_percent: 1,
-    #           max_idle_connections_percent: 1,
-    #           connection_borrow_timeout: 1,
-    #           session_pinning_filters: ["String"],
-    #           init_query: "String",
-    #         },
-    #         new_name: "String",
-    #       }
-    #
     # @!attribute [rw] target_group_name
     #   The name of the target group to modify.
     #   @return [String]
@@ -17533,16 +15883,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyDBSnapshotAttributeMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_snapshot_identifier: "String", # required
-    #         attribute_name: "String", # required
-    #         values_to_add: ["String"],
-    #         values_to_remove: ["String"],
-    #       }
-    #
     # @!attribute [rw] db_snapshot_identifier
     #   The identifier for the DB snapshot to modify the attributes for.
     #   @return [String]
@@ -17612,15 +15952,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyDBSnapshotMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_snapshot_identifier: "String", # required
-    #         engine_version: "String",
-    #         option_group_name: "String",
-    #       }
-    #
     # @!attribute [rw] db_snapshot_identifier
     #   The identifier of the DB snapshot to modify.
     #   @return [String]
@@ -17694,15 +16025,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyDBSubnetGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_subnet_group_name: "String", # required
-    #         db_subnet_group_description: "String",
-    #         subnet_ids: ["String"], # required
-    #       }
-    #
     # @!attribute [rw] db_subnet_group_name
     #   The name for the DB subnet group. This value is stored as a
     #   lowercase string. You can't modify the default subnet group.
@@ -17746,17 +16068,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyEventSubscriptionMessage
-    #   data as a hash:
-    #
-    #       {
-    #         subscription_name: "String", # required
-    #         sns_topic_arn: "String",
-    #         source_type: "String",
-    #         event_categories: ["String"],
-    #         enabled: false,
-    #       }
-    #
     # @!attribute [rw] subscription_name
     #   The name of the RDS event notification subscription.
     #   @return [String]
@@ -17819,17 +16130,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyGlobalClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         global_cluster_identifier: "String",
-    #         new_global_cluster_identifier: "String",
-    #         deletion_protection: false,
-    #         engine_version: "String",
-    #         allow_major_version_upgrade: false,
-    #       }
-    #
     # @!attribute [rw] global_cluster_identifier
     #   The DB cluster identifier for the global cluster being modified.
     #   This parameter isn't case-sensitive.
@@ -17927,37 +16227,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyOptionGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         option_group_name: "String", # required
-    #         options_to_include: [
-    #           {
-    #             option_name: "String", # required
-    #             port: 1,
-    #             option_version: "String",
-    #             db_security_group_memberships: ["String"],
-    #             vpc_security_group_memberships: ["String"],
-    #             option_settings: [
-    #               {
-    #                 name: "String",
-    #                 value: "String",
-    #                 default_value: "String",
-    #                 description: "String",
-    #                 apply_type: "String",
-    #                 data_type: "String",
-    #                 allowed_values: "String",
-    #                 is_modifiable: false,
-    #                 is_collection: false,
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         options_to_remove: ["String"],
-    #         apply_immediately: false,
-    #       }
-    #
     # @!attribute [rw] option_group_name
     #   The name of the option group to be modified.
     #
@@ -18069,30 +16338,6 @@ module Aws::RDS
     end
 
     # A list of all available options
-    #
-    # @note When making an API call, you may pass OptionConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         option_name: "String", # required
-    #         port: 1,
-    #         option_version: "String",
-    #         db_security_group_memberships: ["String"],
-    #         vpc_security_group_memberships: ["String"],
-    #         option_settings: [
-    #           {
-    #             name: "String",
-    #             value: "String",
-    #             default_value: "String",
-    #             description: "String",
-    #             apply_type: "String",
-    #             data_type: "String",
-    #             allowed_values: "String",
-    #             is_modifiable: false,
-    #             is_collection: false,
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] option_name
     #   The configuration of options to include in a group.
@@ -18432,21 +16677,6 @@ module Aws::RDS
     # describe option groups. For example, the NATIVE\_NETWORK\_ENCRYPTION
     # option has a setting called SQLNET.ENCRYPTION\_SERVER that can have
     # several different values.
-    #
-    # @note When making an API call, you may pass OptionSetting
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String",
-    #         value: "String",
-    #         default_value: "String",
-    #         description: "String",
-    #         apply_type: "String",
-    #         data_type: "String",
-    #         allowed_values: "String",
-    #         is_modifiable: false,
-    #         is_collection: false,
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the option that has settings that you can set.
@@ -18796,23 +17026,6 @@ module Aws::RDS
     # This data type is used as a response element in the
     # `DescribeEngineDefaultParameters` and `DescribeDBParameters` actions.
     #
-    # @note When making an API call, you may pass Parameter
-    #   data as a hash:
-    #
-    #       {
-    #         parameter_name: "String",
-    #         parameter_value: "String",
-    #         description: "String",
-    #         source: "String",
-    #         apply_type: "String",
-    #         data_type: "String",
-    #         allowed_values: "String",
-    #         is_modifiable: false,
-    #         minimum_engine_version: "String",
-    #         apply_method: "immediate", # accepts immediate, pending-reboot
-    #         supported_engine_modes: ["String"],
-    #       }
-    #
     # @!attribute [rw] parameter_name
     #   Specifies the name of the parameter.
     #   @return [String]
@@ -19156,14 +17369,6 @@ module Aws::RDS
     #
     # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html#USER_ConfigureProcessor
     #
-    # @note When making an API call, you may pass ProcessorFeature
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String",
-    #         value: "String",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the processor feature. Valid names are `coreCount` and
     #   `threadsPerCore`.
@@ -19182,13 +17387,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PromoteReadReplicaDBClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] db_cluster_identifier
     #   The identifier of the DB cluster read replica to promote. This
     #   parameter isn't case-sensitive.
@@ -19249,15 +17447,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PromoteReadReplicaMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_instance_identifier: "String", # required
-    #         backup_retention_period: 1,
-    #         preferred_backup_window: "String",
-    #       }
-    #
     # @!attribute [rw] db_instance_identifier
     #   The DB instance identifier. This value is stored as a lowercase
     #   string.
@@ -19347,21 +17536,6 @@ module Aws::RDS
     #
     class ProvisionedIopsNotAvailableInAZFault < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass PurchaseReservedDBInstancesOfferingMessage
-    #   data as a hash:
-    #
-    #       {
-    #         reserved_db_instances_offering_id: "String", # required
-    #         reserved_db_instance_id: "String",
-    #         db_instance_count: 1,
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] reserved_db_instances_offering_id
     #   The ID of the Reserved DB instance offering to purchase.
     #
@@ -19442,13 +17616,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RebootDBClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] db_cluster_identifier
     #   The DB cluster identifier. This parameter is stored as a lowercase
     #   string.
@@ -19507,14 +17674,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RebootDBInstanceMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_instance_identifier: "String", # required
-    #         force_failover: false,
-    #       }
-    #
     # @!attribute [rw] db_instance_identifier
     #   The DB instance identifier. This parameter is stored as a lowercase
     #   string.
@@ -19584,16 +17743,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RegisterDBProxyTargetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         db_proxy_name: "String", # required
-    #         target_group_name: "String",
-    #         db_instance_identifiers: ["String"],
-    #         db_cluster_identifiers: ["String"],
-    #       }
-    #
     # @!attribute [rw] db_proxy_name
     #   The identifier of the `DBProxy` that is associated with the
     #   `DBProxyTargetGroup`.
@@ -19635,14 +17784,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RemoveFromGlobalClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         global_cluster_identifier: "String",
-    #         db_cluster_identifier: "String",
-    #       }
-    #
     # @!attribute [rw] global_cluster_identifier
     #   The cluster identifier to detach from the Aurora global database
     #   cluster.
@@ -19674,15 +17815,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RemoveRoleFromDBClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_identifier: "String", # required
-    #         role_arn: "String", # required
-    #         feature_name: "String",
-    #       }
-    #
     # @!attribute [rw] db_cluster_identifier
     #   The name of the DB cluster to disassociate the IAM role from.
     #   @return [String]
@@ -19709,15 +17841,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RemoveRoleFromDBInstanceMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_instance_identifier: "String", # required
-    #         role_arn: "String", # required
-    #         feature_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] db_instance_identifier
     #   The name of the DB instance to disassociate the IAM role from.
     #   @return [String]
@@ -19744,14 +17867,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RemoveSourceIdentifierFromSubscriptionMessage
-    #   data as a hash:
-    #
-    #       {
-    #         subscription_name: "String", # required
-    #         source_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] subscription_name
     #   The name of the RDS event notification subscription you want to
     #   remove a source identifier from.
@@ -19785,14 +17900,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RemoveTagsFromResourceMessage
-    #   data as a hash:
-    #
-    #       {
-    #         resource_name: "String", # required
-    #         tag_keys: ["String"], # required
-    #       }
-    #
     # @!attribute [rw] resource_name
     #   The Amazon RDS resource that the tags are removed from. This value
     #   is an Amazon Resource Name (ARN). For information about creating an
@@ -20042,29 +18149,6 @@ module Aws::RDS
     #
     class ReservedDBInstancesOfferingNotFoundFault < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass ResetDBClusterParameterGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_parameter_group_name: "String", # required
-    #         reset_all_parameters: false,
-    #         parameters: [
-    #           {
-    #             parameter_name: "String",
-    #             parameter_value: "String",
-    #             description: "String",
-    #             source: "String",
-    #             apply_type: "String",
-    #             data_type: "String",
-    #             allowed_values: "String",
-    #             is_modifiable: false,
-    #             minimum_engine_version: "String",
-    #             apply_method: "immediate", # accepts immediate, pending-reboot
-    #             supported_engine_modes: ["String"],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] db_cluster_parameter_group_name
     #   The name of the DB cluster parameter group to reset.
     #   @return [String]
@@ -20092,29 +18176,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ResetDBParameterGroupMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_parameter_group_name: "String", # required
-    #         reset_all_parameters: false,
-    #         parameters: [
-    #           {
-    #             parameter_name: "String",
-    #             parameter_value: "String",
-    #             description: "String",
-    #             source: "String",
-    #             apply_type: "String",
-    #             data_type: "String",
-    #             allowed_values: "String",
-    #             is_modifiable: false,
-    #             minimum_engine_version: "String",
-    #             apply_method: "immediate", # accepts immediate, pending-reboot
-    #             supported_engine_modes: ["String"],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] db_parameter_group_name
     #   The name of the DB parameter group.
     #
@@ -20195,53 +18256,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RestoreDBClusterFromS3Message
-    #   data as a hash:
-    #
-    #       {
-    #         availability_zones: ["String"],
-    #         backup_retention_period: 1,
-    #         character_set_name: "String",
-    #         database_name: "String",
-    #         db_cluster_identifier: "String", # required
-    #         db_cluster_parameter_group_name: "String",
-    #         vpc_security_group_ids: ["String"],
-    #         db_subnet_group_name: "String",
-    #         engine: "String", # required
-    #         engine_version: "String",
-    #         port: 1,
-    #         master_username: "String", # required
-    #         master_user_password: "String", # required
-    #         option_group_name: "String",
-    #         preferred_backup_window: "String",
-    #         preferred_maintenance_window: "String",
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #         storage_encrypted: false,
-    #         kms_key_id: "String",
-    #         enable_iam_database_authentication: false,
-    #         source_engine: "String", # required
-    #         source_engine_version: "String", # required
-    #         s3_bucket_name: "String", # required
-    #         s3_prefix: "String",
-    #         s3_ingestion_role_arn: "String", # required
-    #         backtrack_window: 1,
-    #         enable_cloudwatch_logs_exports: ["String"],
-    #         deletion_protection: false,
-    #         copy_tags_to_snapshot: false,
-    #         domain: "String",
-    #         domain_iam_role_name: "String",
-    #         serverless_v2_scaling_configuration: {
-    #           min_capacity: 1.0,
-    #           max_capacity: 1.0,
-    #         },
-    #         network_type: "String",
-    #       }
-    #
     # @!attribute [rw] availability_zones
     #   A list of Availability Zones (AZs) where instances in the restored
     #   DB cluster can be created.
@@ -20681,55 +18695,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RestoreDBClusterFromSnapshotMessage
-    #   data as a hash:
-    #
-    #       {
-    #         availability_zones: ["String"],
-    #         db_cluster_identifier: "String", # required
-    #         snapshot_identifier: "String", # required
-    #         engine: "String", # required
-    #         engine_version: "String",
-    #         port: 1,
-    #         db_subnet_group_name: "String",
-    #         database_name: "String",
-    #         option_group_name: "String",
-    #         vpc_security_group_ids: ["String"],
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #         kms_key_id: "String",
-    #         enable_iam_database_authentication: false,
-    #         backtrack_window: 1,
-    #         enable_cloudwatch_logs_exports: ["String"],
-    #         engine_mode: "String",
-    #         scaling_configuration: {
-    #           min_capacity: 1,
-    #           max_capacity: 1,
-    #           auto_pause: false,
-    #           seconds_until_auto_pause: 1,
-    #           timeout_action: "String",
-    #           seconds_before_timeout: 1,
-    #         },
-    #         db_cluster_parameter_group_name: "String",
-    #         deletion_protection: false,
-    #         copy_tags_to_snapshot: false,
-    #         domain: "String",
-    #         domain_iam_role_name: "String",
-    #         db_cluster_instance_class: "String",
-    #         storage_type: "String",
-    #         iops: 1,
-    #         publicly_accessible: false,
-    #         serverless_v2_scaling_configuration: {
-    #           min_capacity: 1.0,
-    #           max_capacity: 1.0,
-    #         },
-    #         network_type: "String",
-    #       }
-    #
     # @!attribute [rw] availability_zones
     #   Provides the list of Availability Zones (AZs) where instances in the
     #   restored DB cluster can be created.
@@ -21261,54 +19226,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RestoreDBClusterToPointInTimeMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_identifier: "String", # required
-    #         restore_type: "String",
-    #         source_db_cluster_identifier: "String", # required
-    #         restore_to_time: Time.now,
-    #         use_latest_restorable_time: false,
-    #         port: 1,
-    #         db_subnet_group_name: "String",
-    #         option_group_name: "String",
-    #         vpc_security_group_ids: ["String"],
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #         kms_key_id: "String",
-    #         enable_iam_database_authentication: false,
-    #         backtrack_window: 1,
-    #         enable_cloudwatch_logs_exports: ["String"],
-    #         db_cluster_parameter_group_name: "String",
-    #         deletion_protection: false,
-    #         copy_tags_to_snapshot: false,
-    #         domain: "String",
-    #         domain_iam_role_name: "String",
-    #         scaling_configuration: {
-    #           min_capacity: 1,
-    #           max_capacity: 1,
-    #           auto_pause: false,
-    #           seconds_until_auto_pause: 1,
-    #           timeout_action: "String",
-    #           seconds_before_timeout: 1,
-    #         },
-    #         engine_mode: "String",
-    #         db_cluster_instance_class: "String",
-    #         storage_type: "String",
-    #         publicly_accessible: false,
-    #         iops: 1,
-    #         serverless_v2_scaling_configuration: {
-    #           min_capacity: 1.0,
-    #           max_capacity: 1.0,
-    #         },
-    #         network_type: "String",
-    #       }
-    #
     # @!attribute [rw] db_cluster_identifier
     #   The name of the new DB cluster to be created.
     #
@@ -21802,56 +19719,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RestoreDBInstanceFromDBSnapshotMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_instance_identifier: "String", # required
-    #         db_snapshot_identifier: "String",
-    #         db_instance_class: "String",
-    #         port: 1,
-    #         availability_zone: "String",
-    #         db_subnet_group_name: "String",
-    #         multi_az: false,
-    #         publicly_accessible: false,
-    #         auto_minor_version_upgrade: false,
-    #         license_model: "String",
-    #         db_name: "String",
-    #         engine: "String",
-    #         iops: 1,
-    #         option_group_name: "String",
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #         storage_type: "String",
-    #         tde_credential_arn: "String",
-    #         tde_credential_password: "String",
-    #         vpc_security_group_ids: ["String"],
-    #         domain: "String",
-    #         copy_tags_to_snapshot: false,
-    #         domain_iam_role_name: "String",
-    #         enable_iam_database_authentication: false,
-    #         enable_cloudwatch_logs_exports: ["String"],
-    #         processor_features: [
-    #           {
-    #             name: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #         use_default_processor_features: false,
-    #         db_parameter_group_name: "String",
-    #         deletion_protection: false,
-    #         enable_customer_owned_ip: false,
-    #         custom_iam_instance_profile: "String",
-    #         backup_target: "String",
-    #         network_type: "String",
-    #         storage_throughput: 1,
-    #         db_cluster_snapshot_identifier: "String",
-    #       }
-    #
     # @!attribute [rw] db_instance_identifier
     #   Name of the DB instance to create from the DB snapshot. This
     #   parameter isn't case-sensitive.
@@ -22387,68 +20254,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RestoreDBInstanceFromS3Message
-    #   data as a hash:
-    #
-    #       {
-    #         db_name: "String",
-    #         db_instance_identifier: "String", # required
-    #         allocated_storage: 1,
-    #         db_instance_class: "String", # required
-    #         engine: "String", # required
-    #         master_username: "String",
-    #         master_user_password: "String",
-    #         db_security_groups: ["String"],
-    #         vpc_security_group_ids: ["String"],
-    #         availability_zone: "String",
-    #         db_subnet_group_name: "String",
-    #         preferred_maintenance_window: "String",
-    #         db_parameter_group_name: "String",
-    #         backup_retention_period: 1,
-    #         preferred_backup_window: "String",
-    #         port: 1,
-    #         multi_az: false,
-    #         engine_version: "String",
-    #         auto_minor_version_upgrade: false,
-    #         license_model: "String",
-    #         iops: 1,
-    #         option_group_name: "String",
-    #         publicly_accessible: false,
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #         storage_type: "String",
-    #         storage_encrypted: false,
-    #         kms_key_id: "String",
-    #         copy_tags_to_snapshot: false,
-    #         monitoring_interval: 1,
-    #         monitoring_role_arn: "String",
-    #         enable_iam_database_authentication: false,
-    #         source_engine: "String", # required
-    #         source_engine_version: "String", # required
-    #         s3_bucket_name: "String", # required
-    #         s3_prefix: "String",
-    #         s3_ingestion_role_arn: "String", # required
-    #         enable_performance_insights: false,
-    #         performance_insights_kms_key_id: "String",
-    #         performance_insights_retention_period: 1,
-    #         enable_cloudwatch_logs_exports: ["String"],
-    #         processor_features: [
-    #           {
-    #             name: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #         use_default_processor_features: false,
-    #         deletion_protection: false,
-    #         max_allocated_storage: 1,
-    #         network_type: "String",
-    #         storage_throughput: 1,
-    #       }
-    #
     # @!attribute [rw] db_name
     #   The name of the database to create when the DB instance is created.
     #   Follow the naming rules specified in `CreateDBInstance`.
@@ -22998,60 +20803,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RestoreDBInstanceToPointInTimeMessage
-    #   data as a hash:
-    #
-    #       {
-    #         source_db_instance_identifier: "String",
-    #         target_db_instance_identifier: "String", # required
-    #         restore_time: Time.now,
-    #         use_latest_restorable_time: false,
-    #         db_instance_class: "String",
-    #         port: 1,
-    #         availability_zone: "String",
-    #         db_subnet_group_name: "String",
-    #         multi_az: false,
-    #         publicly_accessible: false,
-    #         auto_minor_version_upgrade: false,
-    #         license_model: "String",
-    #         db_name: "String",
-    #         engine: "String",
-    #         iops: 1,
-    #         option_group_name: "String",
-    #         copy_tags_to_snapshot: false,
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #         storage_type: "String",
-    #         tde_credential_arn: "String",
-    #         tde_credential_password: "String",
-    #         vpc_security_group_ids: ["String"],
-    #         domain: "String",
-    #         domain_iam_role_name: "String",
-    #         enable_iam_database_authentication: false,
-    #         enable_cloudwatch_logs_exports: ["String"],
-    #         processor_features: [
-    #           {
-    #             name: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #         use_default_processor_features: false,
-    #         db_parameter_group_name: "String",
-    #         deletion_protection: false,
-    #         source_dbi_resource_id: "String",
-    #         max_allocated_storage: 1,
-    #         source_db_instance_automated_backups_arn: "String",
-    #         enable_customer_owned_ip: false,
-    #         custom_iam_instance_profile: "String",
-    #         backup_target: "String",
-    #         network_type: "String",
-    #         storage_throughput: 1,
-    #       }
-    #
     # @!attribute [rw] source_db_instance_identifier
     #   The identifier of the source DB instance from which to restore.
     #
@@ -23600,17 +21351,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RevokeDBSecurityGroupIngressMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_security_group_name: "String", # required
-    #         cidrip: "String",
-    #         ec2_security_group_name: "String",
-    #         ec2_security_group_id: "String",
-    #         ec2_security_group_owner_id: "String",
-    #       }
-    #
     # @!attribute [rw] db_security_group_name
     #   The name of the DB security group to revoke ingress from.
     #   @return [String]
@@ -23699,18 +21439,6 @@ module Aws::RDS
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html
-    #
-    # @note When making an API call, you may pass ScalingConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         min_capacity: 1,
-    #         max_capacity: 1,
-    #         auto_pause: false,
-    #         seconds_until_auto_pause: 1,
-    #         timeout_action: "String",
-    #         seconds_before_timeout: 1,
-    #       }
     #
     # @!attribute [rw] min_capacity
     #   The minimum capacity for an Aurora DB cluster in `serverless` DB
@@ -23876,14 +21604,6 @@ module Aws::RDS
     #
     # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
     #
-    # @note When making an API call, you may pass ServerlessV2ScalingConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         min_capacity: 1.0,
-    #         max_capacity: 1.0,
-    #       }
-    #
     # @!attribute [rw] min_capacity
     #   The minimum number of Aurora capacity units (ACUs) for a DB instance
     #   in an Aurora Serverless v2 cluster. You can specify ACU values in
@@ -24027,17 +21747,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartActivityStreamRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #         mode: "sync", # required, accepts sync, async
-    #         kms_key_id: "String", # required
-    #         apply_immediately: false,
-    #         engine_native_audit_fields_included: false,
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the DB cluster, for example,
     #   `arn:aws:rds:us-east-1:12345667890:cluster:das-cluster`.
@@ -24123,13 +21832,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartDBClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] db_cluster_identifier
     #   The DB cluster identifier of the Amazon Aurora DB cluster to be
     #   started. This parameter is stored as a lowercase string.
@@ -24182,17 +21884,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartDBInstanceAutomatedBackupsReplicationMessage
-    #   data as a hash:
-    #
-    #       {
-    #         source_db_instance_arn: "String", # required
-    #         backup_retention_period: 1,
-    #         kms_key_id: "String",
-    #         pre_signed_url: "String",
-    #         source_region: "String",
-    #       }
-    #
     # @!attribute [rw] source_db_instance_arn
     #   The Amazon Resource Name (ARN) of the source DB instance for the
     #   replicated automated backups, for example,
@@ -24274,13 +21965,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartDBInstanceMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_instance_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] db_instance_identifier
     #   The user-supplied instance identifier.
     #   @return [String]
@@ -24313,19 +21997,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartExportTaskMessage
-    #   data as a hash:
-    #
-    #       {
-    #         export_task_identifier: "String", # required
-    #         source_arn: "String", # required
-    #         s3_bucket_name: "String", # required
-    #         iam_role_arn: "String", # required
-    #         kms_key_id: "String", # required
-    #         s3_prefix: "String",
-    #         export_only: ["String"],
-    #       }
-    #
     # @!attribute [rw] export_task_identifier
     #   A unique identifier for the snapshot export task. This ID isn't an
     #   identifier for the Amazon S3 bucket where the snapshot is to be
@@ -24412,14 +22083,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopActivityStreamRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "String", # required
-    #         apply_immediately: false,
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the DB cluster for the database
     #   activity stream. For example,
@@ -24468,13 +22131,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopDBClusterMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_cluster_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] db_cluster_identifier
     #   The DB cluster identifier of the Amazon Aurora DB cluster to be
     #   stopped. This parameter is stored as a lowercase string.
@@ -24527,13 +22183,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopDBInstanceAutomatedBackupsReplicationMessage
-    #   data as a hash:
-    #
-    #       {
-    #         source_db_instance_arn: "String", # required
-    #       }
-    #
     # @!attribute [rw] source_db_instance_arn
     #   The Amazon Resource Name (ARN) of the source DB instance for which
     #   to stop replicating automated backups, for example,
@@ -24562,14 +22211,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopDBInstanceMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_instance_identifier: "String", # required
-    #         db_snapshot_identifier: "String",
-    #       }
-    #
     # @!attribute [rw] db_instance_identifier
     #   The user-supplied instance identifier.
     #   @return [String]
@@ -24687,14 +22328,6 @@ module Aws::RDS
     #
     class SubscriptionNotFoundFault < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass SwitchoverBlueGreenDeploymentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         blue_green_deployment_identifier: "BlueGreenDeploymentIdentifier", # required
-    #         switchover_timeout: 1,
-    #       }
-    #
     # @!attribute [rw] blue_green_deployment_identifier
     #   The blue/green deployment identifier.
     #
@@ -24795,13 +22428,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SwitchoverReadReplicaMessage
-    #   data as a hash:
-    #
-    #       {
-    #         db_instance_identifier: "String", # required
-    #       }
-    #
     # @!attribute [rw] db_instance_identifier
     #   The DB instance identifier of the current standby database. This
     #   value is stored as a lowercase string.
@@ -24851,14 +22477,6 @@ module Aws::RDS
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
-    #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "String",
-    #         value: "String",
-    #       }
     #
     # @!attribute [rw] key
     #   A key is the required name of the tag. The string value can be from
@@ -25009,17 +22627,6 @@ module Aws::RDS
 
     # Specifies the details of authentication used by a proxy to log in as a
     # specific database user.
-    #
-    # @note When making an API call, you may pass UserAuthConfig
-    #   data as a hash:
-    #
-    #       {
-    #         description: "String",
-    #         user_name: "String",
-    #         auth_scheme: "SECRETS", # accepts SECRETS
-    #         secret_arn: "String",
-    #         iam_auth: "DISABLED", # accepts DISABLED, REQUIRED, ENABLED
-    #       }
     #
     # @!attribute [rw] description
     #   A user-specified description about the authentication used by a

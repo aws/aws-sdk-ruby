@@ -12,19 +12,6 @@ module Aws::AutoScalingPlans
 
     # Represents an application source.
     #
-    # @note When making an API call, you may pass ApplicationSource
-    #   data as a hash:
-    #
-    #       {
-    #         cloud_formation_stack_arn: "XmlString",
-    #         tag_filters: [
-    #           {
-    #             key: "XmlStringMaxLen128",
-    #             values: ["XmlStringMaxLen256"],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] cloud_formation_stack_arn
     #   The Amazon Resource Name (ARN) of a AWS CloudFormation stack.
     #   @return [String]
@@ -56,78 +43,6 @@ module Aws::AutoScalingPlans
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateScalingPlanRequest
-    #   data as a hash:
-    #
-    #       {
-    #         scaling_plan_name: "ScalingPlanName", # required
-    #         application_source: { # required
-    #           cloud_formation_stack_arn: "XmlString",
-    #           tag_filters: [
-    #             {
-    #               key: "XmlStringMaxLen128",
-    #               values: ["XmlStringMaxLen256"],
-    #             },
-    #           ],
-    #         },
-    #         scaling_instructions: [ # required
-    #           {
-    #             service_namespace: "autoscaling", # required, accepts autoscaling, ecs, ec2, rds, dynamodb
-    #             resource_id: "ResourceIdMaxLen1600", # required
-    #             scalable_dimension: "autoscaling:autoScalingGroup:DesiredCapacity", # required, accepts autoscaling:autoScalingGroup:DesiredCapacity, ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, rds:cluster:ReadReplicaCount, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits
-    #             min_capacity: 1, # required
-    #             max_capacity: 1, # required
-    #             target_tracking_configurations: [ # required
-    #               {
-    #                 predefined_scaling_metric_specification: {
-    #                   predefined_scaling_metric_type: "ASGAverageCPUUtilization", # required, accepts ASGAverageCPUUtilization, ASGAverageNetworkIn, ASGAverageNetworkOut, DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ECSServiceAverageCPUUtilization, ECSServiceAverageMemoryUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut
-    #                   resource_label: "ResourceLabel",
-    #                 },
-    #                 customized_scaling_metric_specification: {
-    #                   metric_name: "MetricName", # required
-    #                   namespace: "MetricNamespace", # required
-    #                   dimensions: [
-    #                     {
-    #                       name: "MetricDimensionName", # required
-    #                       value: "MetricDimensionValue", # required
-    #                     },
-    #                   ],
-    #                   statistic: "Average", # required, accepts Average, Minimum, Maximum, SampleCount, Sum
-    #                   unit: "MetricUnit",
-    #                 },
-    #                 target_value: 1.0, # required
-    #                 disable_scale_in: false,
-    #                 scale_out_cooldown: 1,
-    #                 scale_in_cooldown: 1,
-    #                 estimated_instance_warmup: 1,
-    #               },
-    #             ],
-    #             predefined_load_metric_specification: {
-    #               predefined_load_metric_type: "ASGTotalCPUUtilization", # required, accepts ASGTotalCPUUtilization, ASGTotalNetworkIn, ASGTotalNetworkOut, ALBTargetGroupRequestCount
-    #               resource_label: "ResourceLabel",
-    #             },
-    #             customized_load_metric_specification: {
-    #               metric_name: "MetricName", # required
-    #               namespace: "MetricNamespace", # required
-    #               dimensions: [
-    #                 {
-    #                   name: "MetricDimensionName", # required
-    #                   value: "MetricDimensionValue", # required
-    #                 },
-    #               ],
-    #               statistic: "Average", # required, accepts Average, Minimum, Maximum, SampleCount, Sum
-    #               unit: "MetricUnit",
-    #             },
-    #             scheduled_action_buffer_time: 1,
-    #             predictive_scaling_max_capacity_behavior: "SetForecastCapacityToMaxCapacity", # accepts SetForecastCapacityToMaxCapacity, SetMaxCapacityToForecastCapacity, SetMaxCapacityAboveForecastCapacity
-    #             predictive_scaling_max_capacity_buffer: 1,
-    #             predictive_scaling_mode: "ForecastAndScale", # accepts ForecastAndScale, ForecastOnly
-    #             scaling_policy_update_behavior: "KeepExternalPolicies", # accepts KeepExternalPolicies, ReplaceExternalPolicies
-    #             disable_dynamic_scaling: false,
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] scaling_plan_name
     #   The name of the scaling plan. Names cannot contain vertical bars,
     #   colons, or forward slashes.
@@ -217,22 +132,6 @@ module Aws::AutoScalingPlans
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html
     # [2]: https://docs.aws.amazon.com/autoscaling/plans/userguide/gs-create-scaling-plan.html#gs-view-resource
     #
-    # @note When making an API call, you may pass CustomizedLoadMetricSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         metric_name: "MetricName", # required
-    #         namespace: "MetricNamespace", # required
-    #         dimensions: [
-    #           {
-    #             name: "MetricDimensionName", # required
-    #             value: "MetricDimensionValue", # required
-    #           },
-    #         ],
-    #         statistic: "Average", # required, accepts Average, Minimum, Maximum, SampleCount, Sum
-    #         unit: "MetricUnit",
-    #       }
-    #
     # @!attribute [rw] metric_name
     #   The name of the metric.
     #   @return [String]
@@ -294,22 +193,6 @@ module Aws::AutoScalingPlans
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html
     # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html
     #
-    # @note When making an API call, you may pass CustomizedScalingMetricSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         metric_name: "MetricName", # required
-    #         namespace: "MetricNamespace", # required
-    #         dimensions: [
-    #           {
-    #             name: "MetricDimensionName", # required
-    #             value: "MetricDimensionValue", # required
-    #           },
-    #         ],
-    #         statistic: "Average", # required, accepts Average, Minimum, Maximum, SampleCount, Sum
-    #         unit: "MetricUnit",
-    #       }
-    #
     # @!attribute [rw] metric_name
     #   The name of the metric.
     #   @return [String]
@@ -366,14 +249,6 @@ module Aws::AutoScalingPlans
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteScalingPlanRequest
-    #   data as a hash:
-    #
-    #       {
-    #         scaling_plan_name: "ScalingPlanName", # required
-    #         scaling_plan_version: 1, # required
-    #       }
-    #
     # @!attribute [rw] scaling_plan_name
     #   The name of the scaling plan.
     #   @return [String]
@@ -396,16 +271,6 @@ module Aws::AutoScalingPlans
     #
     class DeleteScalingPlanResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeScalingPlanResourcesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         scaling_plan_name: "ScalingPlanName", # required
-    #         scaling_plan_version: 1, # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] scaling_plan_name
     #   The name of the scaling plan.
     #   @return [String]
@@ -453,27 +318,6 @@ module Aws::AutoScalingPlans
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeScalingPlansRequest
-    #   data as a hash:
-    #
-    #       {
-    #         scaling_plan_names: ["ScalingPlanName"],
-    #         scaling_plan_version: 1,
-    #         application_sources: [
-    #           {
-    #             cloud_formation_stack_arn: "XmlString",
-    #             tag_filters: [
-    #               {
-    #                 key: "XmlStringMaxLen128",
-    #                 values: ["XmlStringMaxLen256"],
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] scaling_plan_names
     #   The names of the scaling plans (up to 10). If you specify
     #   application sources, you cannot specify scaling plan names.
@@ -533,20 +377,6 @@ module Aws::AutoScalingPlans
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetScalingPlanResourceForecastDataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         scaling_plan_name: "ScalingPlanName", # required
-    #         scaling_plan_version: 1, # required
-    #         service_namespace: "autoscaling", # required, accepts autoscaling, ecs, ec2, rds, dynamodb
-    #         resource_id: "XmlString", # required
-    #         scalable_dimension: "autoscaling:autoScalingGroup:DesiredCapacity", # required, accepts autoscaling:autoScalingGroup:DesiredCapacity, ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, rds:cluster:ReadReplicaCount, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits
-    #         forecast_data_type: "CapacityForecast", # required, accepts CapacityForecast, LoadForecast, ScheduledActionMinCapacity, ScheduledActionMaxCapacity
-    #         start_time: Time.now, # required
-    #         end_time: Time.now, # required
-    #       }
-    #
     # @!attribute [rw] scaling_plan_name
     #   The name of the scaling plan.
     #   @return [String]
@@ -676,14 +506,6 @@ module Aws::AutoScalingPlans
 
     # Represents a dimension for a customized metric.
     #
-    # @note When making an API call, you may pass MetricDimension
-    #   data as a hash:
-    #
-    #       {
-    #         name: "MetricDimensionName", # required
-    #         value: "MetricDimensionValue", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the dimension.
     #   @return [String]
@@ -725,14 +547,6 @@ module Aws::AutoScalingPlans
     #
     #
     # [1]: https://docs.aws.amazon.com/autoscaling/plans/userguide/gs-create-scaling-plan.html#gs-view-resource
-    #
-    # @note When making an API call, you may pass PredefinedLoadMetricSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         predefined_load_metric_type: "ASGTotalCPUUtilization", # required, accepts ASGTotalCPUUtilization, ASGTotalNetworkIn, ASGTotalNetworkOut, ALBTargetGroupRequestCount
-    #         resource_label: "ResourceLabel",
-    #       }
     #
     # @!attribute [rw] predefined_load_metric_type
     #   The metric type.
@@ -780,14 +594,6 @@ module Aws::AutoScalingPlans
 
     # Represents a predefined metric that can be used for dynamic scaling as
     # part of a target tracking scaling policy.
-    #
-    # @note When making an API call, you may pass PredefinedScalingMetricSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         predefined_scaling_metric_type: "ASGAverageCPUUtilization", # required, accepts ASGAverageCPUUtilization, ASGAverageNetworkIn, ASGAverageNetworkOut, DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ECSServiceAverageCPUUtilization, ECSServiceAverageMemoryUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut
-    #         resource_label: "ResourceLabel",
-    #       }
     #
     # @!attribute [rw] predefined_scaling_metric_type
     #   The metric type. The `ALBRequestCountPerTarget` metric type applies
@@ -862,64 +668,6 @@ module Aws::AutoScalingPlans
     #
     #
     # [1]: https://docs.aws.amazon.com/autoscaling/plans/userguide/gs-best-practices.html
-    #
-    # @note When making an API call, you may pass ScalingInstruction
-    #   data as a hash:
-    #
-    #       {
-    #         service_namespace: "autoscaling", # required, accepts autoscaling, ecs, ec2, rds, dynamodb
-    #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "autoscaling:autoScalingGroup:DesiredCapacity", # required, accepts autoscaling:autoScalingGroup:DesiredCapacity, ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, rds:cluster:ReadReplicaCount, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits
-    #         min_capacity: 1, # required
-    #         max_capacity: 1, # required
-    #         target_tracking_configurations: [ # required
-    #           {
-    #             predefined_scaling_metric_specification: {
-    #               predefined_scaling_metric_type: "ASGAverageCPUUtilization", # required, accepts ASGAverageCPUUtilization, ASGAverageNetworkIn, ASGAverageNetworkOut, DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ECSServiceAverageCPUUtilization, ECSServiceAverageMemoryUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut
-    #               resource_label: "ResourceLabel",
-    #             },
-    #             customized_scaling_metric_specification: {
-    #               metric_name: "MetricName", # required
-    #               namespace: "MetricNamespace", # required
-    #               dimensions: [
-    #                 {
-    #                   name: "MetricDimensionName", # required
-    #                   value: "MetricDimensionValue", # required
-    #                 },
-    #               ],
-    #               statistic: "Average", # required, accepts Average, Minimum, Maximum, SampleCount, Sum
-    #               unit: "MetricUnit",
-    #             },
-    #             target_value: 1.0, # required
-    #             disable_scale_in: false,
-    #             scale_out_cooldown: 1,
-    #             scale_in_cooldown: 1,
-    #             estimated_instance_warmup: 1,
-    #           },
-    #         ],
-    #         predefined_load_metric_specification: {
-    #           predefined_load_metric_type: "ASGTotalCPUUtilization", # required, accepts ASGTotalCPUUtilization, ASGTotalNetworkIn, ASGTotalNetworkOut, ALBTargetGroupRequestCount
-    #           resource_label: "ResourceLabel",
-    #         },
-    #         customized_load_metric_specification: {
-    #           metric_name: "MetricName", # required
-    #           namespace: "MetricNamespace", # required
-    #           dimensions: [
-    #             {
-    #               name: "MetricDimensionName", # required
-    #               value: "MetricDimensionValue", # required
-    #             },
-    #           ],
-    #           statistic: "Average", # required, accepts Average, Minimum, Maximum, SampleCount, Sum
-    #           unit: "MetricUnit",
-    #         },
-    #         scheduled_action_buffer_time: 1,
-    #         predictive_scaling_max_capacity_behavior: "SetForecastCapacityToMaxCapacity", # accepts SetForecastCapacityToMaxCapacity, SetMaxCapacityToForecastCapacity, SetMaxCapacityAboveForecastCapacity
-    #         predictive_scaling_max_capacity_buffer: 1,
-    #         predictive_scaling_mode: "ForecastAndScale", # accepts ForecastAndScale, ForecastOnly
-    #         scaling_policy_update_behavior: "KeepExternalPolicies", # accepts KeepExternalPolicies, ReplaceExternalPolicies
-    #         disable_dynamic_scaling: false,
-    #       }
     #
     # @!attribute [rw] service_namespace
     #   The namespace of the AWS service.
@@ -1321,14 +1069,6 @@ module Aws::AutoScalingPlans
 
     # Represents a tag.
     #
-    # @note When making an API call, you may pass TagFilter
-    #   data as a hash:
-    #
-    #       {
-    #         key: "XmlStringMaxLen128",
-    #         values: ["XmlStringMaxLen256"],
-    #       }
-    #
     # @!attribute [rw] key
     #   The tag key.
     #   @return [String]
@@ -1348,33 +1088,6 @@ module Aws::AutoScalingPlans
 
     # Describes a target tracking configuration to use with AWS Auto
     # Scaling. Used with ScalingInstruction and ScalingPolicy.
-    #
-    # @note When making an API call, you may pass TargetTrackingConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         predefined_scaling_metric_specification: {
-    #           predefined_scaling_metric_type: "ASGAverageCPUUtilization", # required, accepts ASGAverageCPUUtilization, ASGAverageNetworkIn, ASGAverageNetworkOut, DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ECSServiceAverageCPUUtilization, ECSServiceAverageMemoryUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut
-    #           resource_label: "ResourceLabel",
-    #         },
-    #         customized_scaling_metric_specification: {
-    #           metric_name: "MetricName", # required
-    #           namespace: "MetricNamespace", # required
-    #           dimensions: [
-    #             {
-    #               name: "MetricDimensionName", # required
-    #               value: "MetricDimensionValue", # required
-    #             },
-    #           ],
-    #           statistic: "Average", # required, accepts Average, Minimum, Maximum, SampleCount, Sum
-    #           unit: "MetricUnit",
-    #         },
-    #         target_value: 1.0, # required
-    #         disable_scale_in: false,
-    #         scale_out_cooldown: 1,
-    #         scale_in_cooldown: 1,
-    #         estimated_instance_warmup: 1,
-    #       }
     #
     # @!attribute [rw] predefined_scaling_metric_specification
     #   A predefined metric. You can specify either a predefined metric or a
@@ -1450,79 +1163,6 @@ module Aws::AutoScalingPlans
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateScalingPlanRequest
-    #   data as a hash:
-    #
-    #       {
-    #         scaling_plan_name: "ScalingPlanName", # required
-    #         scaling_plan_version: 1, # required
-    #         application_source: {
-    #           cloud_formation_stack_arn: "XmlString",
-    #           tag_filters: [
-    #             {
-    #               key: "XmlStringMaxLen128",
-    #               values: ["XmlStringMaxLen256"],
-    #             },
-    #           ],
-    #         },
-    #         scaling_instructions: [
-    #           {
-    #             service_namespace: "autoscaling", # required, accepts autoscaling, ecs, ec2, rds, dynamodb
-    #             resource_id: "ResourceIdMaxLen1600", # required
-    #             scalable_dimension: "autoscaling:autoScalingGroup:DesiredCapacity", # required, accepts autoscaling:autoScalingGroup:DesiredCapacity, ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, rds:cluster:ReadReplicaCount, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits
-    #             min_capacity: 1, # required
-    #             max_capacity: 1, # required
-    #             target_tracking_configurations: [ # required
-    #               {
-    #                 predefined_scaling_metric_specification: {
-    #                   predefined_scaling_metric_type: "ASGAverageCPUUtilization", # required, accepts ASGAverageCPUUtilization, ASGAverageNetworkIn, ASGAverageNetworkOut, DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ECSServiceAverageCPUUtilization, ECSServiceAverageMemoryUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut
-    #                   resource_label: "ResourceLabel",
-    #                 },
-    #                 customized_scaling_metric_specification: {
-    #                   metric_name: "MetricName", # required
-    #                   namespace: "MetricNamespace", # required
-    #                   dimensions: [
-    #                     {
-    #                       name: "MetricDimensionName", # required
-    #                       value: "MetricDimensionValue", # required
-    #                     },
-    #                   ],
-    #                   statistic: "Average", # required, accepts Average, Minimum, Maximum, SampleCount, Sum
-    #                   unit: "MetricUnit",
-    #                 },
-    #                 target_value: 1.0, # required
-    #                 disable_scale_in: false,
-    #                 scale_out_cooldown: 1,
-    #                 scale_in_cooldown: 1,
-    #                 estimated_instance_warmup: 1,
-    #               },
-    #             ],
-    #             predefined_load_metric_specification: {
-    #               predefined_load_metric_type: "ASGTotalCPUUtilization", # required, accepts ASGTotalCPUUtilization, ASGTotalNetworkIn, ASGTotalNetworkOut, ALBTargetGroupRequestCount
-    #               resource_label: "ResourceLabel",
-    #             },
-    #             customized_load_metric_specification: {
-    #               metric_name: "MetricName", # required
-    #               namespace: "MetricNamespace", # required
-    #               dimensions: [
-    #                 {
-    #                   name: "MetricDimensionName", # required
-    #                   value: "MetricDimensionValue", # required
-    #                 },
-    #               ],
-    #               statistic: "Average", # required, accepts Average, Minimum, Maximum, SampleCount, Sum
-    #               unit: "MetricUnit",
-    #             },
-    #             scheduled_action_buffer_time: 1,
-    #             predictive_scaling_max_capacity_behavior: "SetForecastCapacityToMaxCapacity", # accepts SetForecastCapacityToMaxCapacity, SetMaxCapacityToForecastCapacity, SetMaxCapacityAboveForecastCapacity
-    #             predictive_scaling_max_capacity_buffer: 1,
-    #             predictive_scaling_mode: "ForecastAndScale", # accepts ForecastAndScale, ForecastOnly
-    #             scaling_policy_update_behavior: "KeepExternalPolicies", # accepts KeepExternalPolicies, ReplaceExternalPolicies
-    #             disable_dynamic_scaling: false,
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] scaling_plan_name
     #   The name of the scaling plan.
     #   @return [String]

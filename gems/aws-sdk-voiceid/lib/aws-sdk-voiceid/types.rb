@@ -140,24 +140,6 @@ module Aws::VoiceID
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientTokenString",
-    #         description: "Description",
-    #         name: "DomainName", # required
-    #         server_side_encryption_configuration: { # required
-    #           kms_key_id: "KmsKeyId", # required
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] client_token
     #   The idempotency token for creating a new domain. If not provided,
     #   Amazon Web Services SDK populates this field.
@@ -213,13 +195,6 @@ module Aws::VoiceID
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_id: "DomainId", # required
-    #       }
-    #
     # @!attribute [rw] domain_id
     #   The identifier of the domain you want to delete.
     #   @return [String]
@@ -232,14 +207,6 @@ module Aws::VoiceID
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteFraudsterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_id: "DomainId", # required
-    #         fraudster_id: "FraudsterId", # required
-    #       }
-    #
     # @!attribute [rw] domain_id
     #   The identifier of the domain containing the fraudster.
     #   @return [String]
@@ -257,14 +224,6 @@ module Aws::VoiceID
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteSpeakerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_id: "DomainId", # required
-    #         speaker_id: "SpeakerId", # required
-    #       }
-    #
     # @!attribute [rw] domain_id
     #   The identifier of the domain containing the speaker.
     #   @return [String]
@@ -282,13 +241,6 @@ module Aws::VoiceID
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_id: "DomainId", # required
-    #       }
-    #
     # @!attribute [rw] domain_id
     #   The identifier of the domain you are describing.
     #   @return [String]
@@ -313,14 +265,6 @@ module Aws::VoiceID
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeFraudsterRegistrationJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_id: "DomainId", # required
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] domain_id
     #   The identifier for the domain containing the fraudster registration
     #   job.
@@ -352,14 +296,6 @@ module Aws::VoiceID
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeFraudsterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_id: "DomainId", # required
-    #         fraudster_id: "FraudsterId", # required
-    #       }
-    #
     # @!attribute [rw] domain_id
     #   The identifier of the domain containing the fraudster.
     #   @return [String]
@@ -389,14 +325,6 @@ module Aws::VoiceID
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeSpeakerEnrollmentJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_id: "DomainId", # required
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] domain_id
     #   The identifier of the domain containing the speaker enrollment job.
     #   @return [String]
@@ -426,14 +354,6 @@ module Aws::VoiceID
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeSpeakerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_id: "DomainId", # required
-    #         speaker_id: "SpeakerId", # required
-    #       }
-    #
     # @!attribute [rw] domain_id
     #   The identifier of the domain that contains the speaker.
     #   @return [String]
@@ -584,17 +504,6 @@ module Aws::VoiceID
     # Contains configurations defining enrollment behavior for the batch
     # job.
     #
-    # @note When making an API call, you may pass EnrollmentConfig
-    #   data as a hash:
-    #
-    #       {
-    #         existing_enrollment_action: "SKIP", # accepts SKIP, OVERWRITE
-    #         fraud_detection_config: {
-    #           fraud_detection_action: "IGNORE", # accepts IGNORE, FAIL
-    #           risk_threshold: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] existing_enrollment_action
     #   The action to take when the specified speaker is already enrolled in
     #   the specified domain. The default value is `SKIP`, which skips the
@@ -622,14 +531,6 @@ module Aws::VoiceID
     # flagged by the fraud detection system during a batch speaker
     # enrollment job, and the risk threshold to use for identification.
     #
-    # @note When making an API call, you may pass EnrollmentJobFraudDetectionConfig
-    #   data as a hash:
-    #
-    #       {
-    #         fraud_detection_action: "IGNORE", # accepts IGNORE, FAIL
-    #         risk_threshold: 1,
-    #       }
-    #
     # @!attribute [rw] fraud_detection_action
     #   The action to take when the given speaker is flagged by the fraud
     #   detection system. The default value is `FAIL`, which fails the
@@ -654,14 +555,6 @@ module Aws::VoiceID
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass EvaluateSessionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_id: "DomainId", # required
-    #         session_name_or_id: "SessionNameOrId", # required
-    #       }
-    #
     # @!attribute [rw] domain_id
     #   The identifier of the domain where the session started.
     #   @return [String]
@@ -1008,13 +901,6 @@ module Aws::VoiceID
 
     # The configuration containing input file information for a batch job.
     #
-    # @note When making an API call, you may pass InputDataConfig
-    #   data as a hash:
-    #
-    #       {
-    #         s3_uri: "S3Uri", # required
-    #       }
-    #
     # @!attribute [rw] s3_uri
     #   The S3 location for the input manifest file that contains the list
     #   of individual enrollment or registration job requests.
@@ -1080,14 +966,6 @@ module Aws::VoiceID
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDomainsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of domains to list per API call.
     #   @return [Integer]
@@ -1131,16 +1009,6 @@ module Aws::VoiceID
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFraudsterRegistrationJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_id: "DomainId", # required
-    #         job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, COMPLETED_WITH_ERRORS, FAILED
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] domain_id
     #   The identifier of the domain containing the fraudster registration
     #   Jobs.
@@ -1197,16 +1065,6 @@ module Aws::VoiceID
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSpeakerEnrollmentJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_id: "DomainId", # required
-    #         job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, COMPLETED_WITH_ERRORS, FAILED
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] domain_id
     #   The identifier of the domain containing the speaker enrollment jobs.
     #   @return [String]
@@ -1262,15 +1120,6 @@ module Aws::VoiceID
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSpeakersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_id: "DomainId", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] domain_id
     #   The identifier of the domain.
     #   @return [String]
@@ -1321,13 +1170,6 @@ module Aws::VoiceID
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the Voice ID resource for which
     #   you want to list the tags.
@@ -1353,14 +1195,6 @@ module Aws::VoiceID
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass OptOutSpeakerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         domain_id: "DomainId", # required
-    #         speaker_id: "SpeakerId", # required
-    #       }
-    #
     # @!attribute [rw] domain_id
     #   The identifier of the domain containing the speaker.
     #   @return [String]
@@ -1392,14 +1226,6 @@ module Aws::VoiceID
 
     # The configuration containing output file information for a batch job.
     #
-    # @note When making an API call, you may pass OutputDataConfig
-    #   data as a hash:
-    #
-    #       {
-    #         kms_key_id: "KmsKeyId",
-    #         s3_uri: "S3Uri", # required
-    #       }
-    #
     # @!attribute [rw] kms_key_id
     #   The identifier of the KMS key you want Voice ID to use to encrypt
     #   the output file of a speaker enrollment job/fraudster registration
@@ -1427,14 +1253,6 @@ module Aws::VoiceID
     # fraudster is detected, and the similarity threshold to use for
     # detecting a duplicate fraudster during a batch fraudster registration
     # job.
-    #
-    # @note When making an API call, you may pass RegistrationConfig
-    #   data as a hash:
-    #
-    #       {
-    #         duplicate_registration_action: "SKIP", # accepts SKIP, REGISTER_AS_NEW
-    #         fraudster_similarity_threshold: 1,
-    #       }
     #
     # @!attribute [rw] duplicate_registration_action
     #   The action to take when a fraudster is identified as a duplicate.
@@ -1480,13 +1298,6 @@ module Aws::VoiceID
 
     # The configuration containing information about the customer managed
     # key used for encrypting customer data.
-    #
-    # @note When making an API call, you may pass ServerSideEncryptionConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         kms_key_id: "KmsKeyId", # required
-    #       }
     #
     # @!attribute [rw] kms_key_id
     #   The identifier of the KMS key to use to encrypt data stored by Voice
@@ -1784,27 +1595,6 @@ module Aws::VoiceID
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartFraudsterRegistrationJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientTokenString",
-    #         data_access_role_arn: "IamRoleArn", # required
-    #         domain_id: "DomainId", # required
-    #         input_data_config: { # required
-    #           s3_uri: "S3Uri", # required
-    #         },
-    #         job_name: "JobName",
-    #         output_data_config: { # required
-    #           kms_key_id: "KmsKeyId",
-    #           s3_uri: "S3Uri", # required
-    #         },
-    #         registration_config: {
-    #           duplicate_registration_action: "SKIP", # accepts SKIP, REGISTER_AS_NEW
-    #           fraudster_similarity_threshold: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_token
     #   The idempotency token for starting a new fraudster registration job.
     #   If not provided, Amazon Web Services SDK populates this field.
@@ -1877,30 +1667,6 @@ module Aws::VoiceID
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartSpeakerEnrollmentJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientTokenString",
-    #         data_access_role_arn: "IamRoleArn", # required
-    #         domain_id: "DomainId", # required
-    #         enrollment_config: {
-    #           existing_enrollment_action: "SKIP", # accepts SKIP, OVERWRITE
-    #           fraud_detection_config: {
-    #             fraud_detection_action: "IGNORE", # accepts IGNORE, FAIL
-    #             risk_threshold: 1,
-    #           },
-    #         },
-    #         input_data_config: { # required
-    #           s3_uri: "S3Uri", # required
-    #         },
-    #         job_name: "JobName",
-    #         output_data_config: { # required
-    #           kms_key_id: "KmsKeyId",
-    #           s3_uri: "S3Uri", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_token
     #   The idempotency token for starting a new speaker enrollment Job. If
     #   not provided, Amazon Web Services SDK populates this field.
@@ -1977,14 +1743,6 @@ module Aws::VoiceID
     # For example, \\\{ "tags": \\\{"key1":"value1",
     # "key2":"value2"\\} \\}.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The first part of a key:value pair that forms a tag associated with
     #   a given resource. For example, in the tag 'Department':'Sales',
@@ -2006,19 +1764,6 @@ module Aws::VoiceID
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the Voice ID resource you want to
     #   tag.
@@ -2060,14 +1805,6 @@ module Aws::VoiceID
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the Voice ID resource you want to
     #   remove tags from.
@@ -2090,18 +1827,6 @@ module Aws::VoiceID
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateDomainRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "Description",
-    #         domain_id: "DomainId", # required
-    #         name: "DomainName", # required
-    #         server_side_encryption_configuration: { # required
-    #           kms_key_id: "KmsKeyId", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] description
     #   A brief description of the domain.
     #   @return [String]

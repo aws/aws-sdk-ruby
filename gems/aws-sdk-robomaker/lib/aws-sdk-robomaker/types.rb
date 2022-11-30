@@ -10,13 +10,6 @@
 module Aws::RoboMaker
   module Types
 
-    # @note When making an API call, you may pass BatchDeleteWorldsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         worlds: ["Arn"], # required
-    #       }
-    #
     # @!attribute [rw] worlds
     #   A list of Amazon Resource Names (arns) that correspond to worlds to
     #   delete.
@@ -43,13 +36,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchDescribeSimulationJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         jobs: ["Arn"], # required
-    #       }
-    #
     # @!attribute [rw] jobs
     #   A list of Amazon Resource Names (ARNs) of simulation jobs to
     #   describe.
@@ -82,14 +68,6 @@ module Aws::RoboMaker
 
     # Information about the batch policy.
     #
-    # @note When making an API call, you may pass BatchPolicy
-    #   data as a hash:
-    #
-    #       {
-    #         timeout_in_seconds: 1,
-    #         max_concurrency: 1,
-    #       }
-    #
     # @!attribute [rw] timeout_in_seconds
     #   The amount of time, in seconds, to wait for the batch to complete.
     #
@@ -119,13 +97,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CancelDeploymentJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] job
     #   The deployment job ARN to cancel.
     #   @return [String]
@@ -142,13 +113,6 @@ module Aws::RoboMaker
     #
     class CancelDeploymentJobResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass CancelSimulationJobBatchRequest
-    #   data as a hash:
-    #
-    #       {
-    #         batch: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] batch
     #   The id of the batch to cancel.
     #   @return [String]
@@ -165,13 +129,6 @@ module Aws::RoboMaker
     #
     class CancelSimulationJobBatchResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass CancelSimulationJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] job
     #   The simulation job ARN to cancel.
     #   @return [String]
@@ -188,13 +145,6 @@ module Aws::RoboMaker
     #
     class CancelSimulationJobResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass CancelWorldExportJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] job
     #   The Amazon Resource Name (arn) of the world export job to cancel.
     #   @return [String]
@@ -211,13 +161,6 @@ module Aws::RoboMaker
     #
     class CancelWorldExportJobResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass CancelWorldGenerationJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] job
     #   The Amazon Resource Name (arn) of the world generator job to cancel.
     #   @return [String]
@@ -235,15 +178,6 @@ module Aws::RoboMaker
     class CancelWorldGenerationJobResponse < Aws::EmptyStructure; end
 
     # Compute information for the simulation job.
-    #
-    # @note When making an API call, you may pass Compute
-    #   data as a hash:
-    #
-    #       {
-    #         simulation_unit_limit: 1,
-    #         compute_type: "CPU", # accepts CPU, GPU_AND_CPU
-    #         gpu_unit_limit: 1,
-    #       }
     #
     # @!attribute [rw] simulation_unit_limit
     #   The simulation unit limit. Your simulation is allocated CPU and
@@ -314,42 +248,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDeploymentJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         deployment_config: {
-    #           concurrent_deployment_percentage: 1,
-    #           failure_threshold_percentage: 1,
-    #           robot_deployment_timeout_in_seconds: 1,
-    #           download_condition_file: {
-    #             bucket: "S3Bucket", # required
-    #             key: "S3Key", # required
-    #             etag: "S3Etag",
-    #           },
-    #         },
-    #         client_request_token: "ClientRequestToken", # required
-    #         fleet: "Arn", # required
-    #         deployment_application_configs: [ # required
-    #           {
-    #             application: "Arn", # required
-    #             application_version: "DeploymentVersion", # required
-    #             launch_config: { # required
-    #               package_name: "Command", # required
-    #               pre_launch_file: "Path",
-    #               launch_file: "Command", # required
-    #               post_launch_file: "Path",
-    #               environment_variables: {
-    #                 "EnvironmentVariableKey" => "EnvironmentVariableValue",
-    #               },
-    #             },
-    #           },
-    #         ],
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] deployment_config
     #   The requested deployment configuration.
     #   @return [Types::DeploymentConfig]
@@ -502,16 +400,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateFleetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the fleet.
     #   @return [String]
@@ -558,30 +446,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateRobotApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         sources: [
-    #           {
-    #             s3_bucket: "S3Bucket",
-    #             s3_key: "S3Key",
-    #             architecture: "X86_64", # accepts X86_64, ARM64, ARMHF
-    #           },
-    #         ],
-    #         robot_software_suite: { # required
-    #           name: "ROS", # accepts ROS, ROS2, General
-    #           version: "Kinetic", # accepts Kinetic, Melodic, Dashing, Foxy
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         environment: {
-    #           uri: "RepositoryUrl",
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the robot application.
     #   @return [String]
@@ -672,16 +536,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateRobotApplicationVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application: "Arn", # required
-    #         current_revision_id: "RevisionId",
-    #         s3_etags: ["S3Etag"],
-    #         image_digest: "ImageDigest",
-    #       }
-    #
     # @!attribute [rw] application
     #   The application information for the robot application.
     #   @return [String]
@@ -763,18 +617,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateRobotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         architecture: "X86_64", # required, accepts X86_64, ARM64, ARMHF
-    #         greengrass_group_id: "Id", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name for the robot.
     #   @return [String]
@@ -842,38 +684,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateSimulationApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         sources: [
-    #           {
-    #             s3_bucket: "S3Bucket",
-    #             s3_key: "S3Key",
-    #             architecture: "X86_64", # accepts X86_64, ARM64, ARMHF
-    #           },
-    #         ],
-    #         simulation_software_suite: { # required
-    #           name: "Gazebo", # accepts Gazebo, RosbagPlay, SimulationRuntime
-    #           version: "SimulationSoftwareSuiteVersionType",
-    #         },
-    #         robot_software_suite: { # required
-    #           name: "ROS", # accepts ROS, ROS2, General
-    #           version: "Kinetic", # accepts Kinetic, Melodic, Dashing, Foxy
-    #         },
-    #         rendering_engine: {
-    #           name: "OGRE", # accepts OGRE
-    #           version: "RenderingEngineVersionType",
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         environment: {
-    #           uri: "RepositoryUrl",
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the simulation application.
     #   @return [String]
@@ -983,16 +793,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateSimulationApplicationVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application: "Arn", # required
-    #         current_revision_id: "RevisionId",
-    #         s3_etags: ["S3Etag"],
-    #         image_digest: "ImageDigest",
-    #       }
-    #
     # @!attribute [rw] application
     #   The application information for the simulation application.
     #   @return [String]
@@ -1083,134 +883,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateSimulationJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_request_token: "ClientRequestToken",
-    #         output_location: {
-    #           s3_bucket: "S3Bucket",
-    #           s3_prefix: "S3Key",
-    #         },
-    #         logging_config: {
-    #           record_all_ros_topics: false,
-    #         },
-    #         max_job_duration_in_seconds: 1, # required
-    #         iam_role: "IamRole", # required
-    #         failure_behavior: "Fail", # accepts Fail, Continue
-    #         robot_applications: [
-    #           {
-    #             application: "Arn", # required
-    #             application_version: "Version",
-    #             launch_config: { # required
-    #               package_name: "Command",
-    #               launch_file: "Command",
-    #               environment_variables: {
-    #                 "EnvironmentVariableKey" => "EnvironmentVariableValue",
-    #               },
-    #               port_forwarding_config: {
-    #                 port_mappings: [
-    #                   {
-    #                     job_port: 1, # required
-    #                     application_port: 1, # required
-    #                     enable_on_public_ip: false,
-    #                   },
-    #                 ],
-    #               },
-    #               stream_ui: false,
-    #               command: ["NonEmptyString"],
-    #             },
-    #             upload_configurations: [
-    #               {
-    #                 name: "Name", # required
-    #                 path: "Path", # required
-    #                 upload_behavior: "UPLOAD_ON_TERMINATE", # required, accepts UPLOAD_ON_TERMINATE, UPLOAD_ROLLING_AUTO_REMOVE
-    #               },
-    #             ],
-    #             use_default_upload_configurations: false,
-    #             tools: [
-    #               {
-    #                 stream_ui: false,
-    #                 name: "Name", # required
-    #                 command: "UnrestrictedCommand", # required
-    #                 stream_output_to_cloud_watch: false,
-    #                 exit_behavior: "FAIL", # accepts FAIL, RESTART
-    #               },
-    #             ],
-    #             use_default_tools: false,
-    #           },
-    #         ],
-    #         simulation_applications: [
-    #           {
-    #             application: "Arn", # required
-    #             application_version: "Version",
-    #             launch_config: { # required
-    #               package_name: "Command",
-    #               launch_file: "Command",
-    #               environment_variables: {
-    #                 "EnvironmentVariableKey" => "EnvironmentVariableValue",
-    #               },
-    #               port_forwarding_config: {
-    #                 port_mappings: [
-    #                   {
-    #                     job_port: 1, # required
-    #                     application_port: 1, # required
-    #                     enable_on_public_ip: false,
-    #                   },
-    #                 ],
-    #               },
-    #               stream_ui: false,
-    #               command: ["NonEmptyString"],
-    #             },
-    #             upload_configurations: [
-    #               {
-    #                 name: "Name", # required
-    #                 path: "Path", # required
-    #                 upload_behavior: "UPLOAD_ON_TERMINATE", # required, accepts UPLOAD_ON_TERMINATE, UPLOAD_ROLLING_AUTO_REMOVE
-    #               },
-    #             ],
-    #             world_configs: [
-    #               {
-    #                 world: "Arn",
-    #               },
-    #             ],
-    #             use_default_upload_configurations: false,
-    #             tools: [
-    #               {
-    #                 stream_ui: false,
-    #                 name: "Name", # required
-    #                 command: "UnrestrictedCommand", # required
-    #                 stream_output_to_cloud_watch: false,
-    #                 exit_behavior: "FAIL", # accepts FAIL, RESTART
-    #               },
-    #             ],
-    #             use_default_tools: false,
-    #           },
-    #         ],
-    #         data_sources: [
-    #           {
-    #             name: "Name", # required
-    #             s3_bucket: "S3Bucket", # required
-    #             s3_keys: ["S3KeyOrPrefix"], # required
-    #             type: "Prefix", # accepts Prefix, Archive, File
-    #             destination: "Path",
-    #           },
-    #         ],
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         vpc_config: {
-    #           subnets: ["NonEmptyString"], # required
-    #           security_groups: ["NonEmptyString"],
-    #           assign_public_ip: false,
-    #         },
-    #         compute: {
-    #           simulation_unit_limit: 1,
-    #           compute_type: "CPU", # accepts CPU, GPU_AND_CPU
-    #           gpu_unit_limit: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_request_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
@@ -1469,22 +1141,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateWorldExportJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_request_token: "ClientRequestToken",
-    #         worlds: ["Arn"], # required
-    #         output_location: { # required
-    #           s3_bucket: "S3Bucket",
-    #           s3_prefix: "S3Key",
-    #         },
-    #         iam_role: "IamRole", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_request_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
@@ -1634,24 +1290,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateWorldGenerationJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_request_token: "ClientRequestToken",
-    #         template: "Arn", # required
-    #         world_count: { # required
-    #           floorplan_count: 1,
-    #           interior_count_per_floorplan: 1,
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         world_tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_request_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
@@ -1798,22 +1436,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateWorldTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_request_token: "ClientRequestToken",
-    #         name: "TemplateName",
-    #         template_body: "Json",
-    #         template_location: {
-    #           s3_bucket: "S3Bucket", # required
-    #           s3_key: "S3Key", # required
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_request_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
@@ -1936,17 +1558,6 @@ module Aws::RoboMaker
 
     # Information about a data source.
     #
-    # @note When making an API call, you may pass DataSourceConfig
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         s3_bucket: "S3Bucket", # required
-    #         s3_keys: ["S3KeyOrPrefix"], # required
-    #         type: "Prefix", # accepts Prefix, Archive, File
-    #         destination: "Path",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the data source.
     #   @return [String]
@@ -1996,13 +1607,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteFleetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fleet: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] fleet
     #   The Amazon Resource Name (ARN) of the fleet.
     #   @return [String]
@@ -2019,14 +1623,6 @@ module Aws::RoboMaker
     #
     class DeleteFleetResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteRobotApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application: "Arn", # required
-    #         application_version: "Version",
-    #       }
-    #
     # @!attribute [rw] application
     #   The Amazon Resource Name (ARN) of the the robot application.
     #   @return [String]
@@ -2048,13 +1644,6 @@ module Aws::RoboMaker
     #
     class DeleteRobotApplicationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteRobotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         robot: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] robot
     #   The Amazon Resource Name (ARN) of the robot.
     #   @return [String]
@@ -2071,14 +1660,6 @@ module Aws::RoboMaker
     #
     class DeleteRobotResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteSimulationApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application: "Arn", # required
-    #         application_version: "Version",
-    #       }
-    #
     # @!attribute [rw] application
     #   The application information for the simulation application to
     #   delete.
@@ -2101,13 +1682,6 @@ module Aws::RoboMaker
     #
     class DeleteSimulationApplicationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteWorldTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         template: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] template
     #   The Amazon Resource Name (arn) of the world template you want to
     #   delete.
@@ -2126,23 +1700,6 @@ module Aws::RoboMaker
     class DeleteWorldTemplateResponse < Aws::EmptyStructure; end
 
     # Information about a deployment application configuration.
-    #
-    # @note When making an API call, you may pass DeploymentApplicationConfig
-    #   data as a hash:
-    #
-    #       {
-    #         application: "Arn", # required
-    #         application_version: "DeploymentVersion", # required
-    #         launch_config: { # required
-    #           package_name: "Command", # required
-    #           pre_launch_file: "Path",
-    #           launch_file: "Command", # required
-    #           post_launch_file: "Path",
-    #           environment_variables: {
-    #             "EnvironmentVariableKey" => "EnvironmentVariableValue",
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] application
     #   The Amazon Resource Name (ARN) of the robot application.
@@ -2167,20 +1724,6 @@ module Aws::RoboMaker
     end
 
     # Information about a deployment configuration.
-    #
-    # @note When making an API call, you may pass DeploymentConfig
-    #   data as a hash:
-    #
-    #       {
-    #         concurrent_deployment_percentage: 1,
-    #         failure_threshold_percentage: 1,
-    #         robot_deployment_timeout_in_seconds: 1,
-    #         download_condition_file: {
-    #           bucket: "S3Bucket", # required
-    #           key: "S3Key", # required
-    #           etag: "S3Etag",
-    #         },
-    #       }
     #
     # @!attribute [rw] concurrent_deployment_percentage
     #   The percentage of robots receiving the deployment at the same time.
@@ -2264,19 +1807,6 @@ module Aws::RoboMaker
 
     # Configuration information for a deployment launch.
     #
-    # @note When making an API call, you may pass DeploymentLaunchConfig
-    #   data as a hash:
-    #
-    #       {
-    #         package_name: "Command", # required
-    #         pre_launch_file: "Path",
-    #         launch_file: "Command", # required
-    #         post_launch_file: "Path",
-    #         environment_variables: {
-    #           "EnvironmentVariableKey" => "EnvironmentVariableValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] package_name
     #   The package name.
     #   @return [String]
@@ -2312,14 +1842,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeregisterRobotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fleet: "Arn", # required
-    #         robot: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] fleet
     #   The Amazon Resource Name (ARN) of the fleet.
     #   @return [String]
@@ -2354,13 +1876,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDeploymentJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] job
     #   The Amazon Resource Name (ARN) of the deployment job.
     #   @return [String]
@@ -2431,13 +1946,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeFleetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fleet: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] fleet
     #   The Amazon Resource Name (ARN) of the fleet.
     #   @return [String]
@@ -2498,14 +2006,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeRobotApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application: "Arn", # required
-    #         application_version: "Version",
-    #       }
-    #
     # @!attribute [rw] application
     #   The Amazon Resource Name (ARN) of the robot application.
     #   @return [String]
@@ -2584,13 +2084,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeRobotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         robot: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] robot
     #   The Amazon Resource Name (ARN) of the robot to be described.
     #   @return [String]
@@ -2661,14 +2154,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeSimulationApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application: "Arn", # required
-    #         application_version: "Version",
-    #       }
-    #
     # @!attribute [rw] application
     #   The application information for the simulation application.
     #   @return [String]
@@ -2756,13 +2241,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeSimulationJobBatchRequest
-    #   data as a hash:
-    #
-    #       {
-    #         batch: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] batch
     #   The id of the batch to describe.
     #   @return [String]
@@ -2898,13 +2376,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeSimulationJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] job
     #   The Amazon Resource Name (ARN) of the simulation job to be
     #   described.
@@ -3101,13 +2572,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeWorldExportJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] job
     #   The Amazon Resource Name (arn) of the world export job to describe.
     #   @return [String]
@@ -3229,13 +2693,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeWorldGenerationJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] job
     #   The Amazon Resource Name (arn) of the world generation job to
     #   describe.
@@ -3366,13 +2823,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeWorldRequest
-    #   data as a hash:
-    #
-    #       {
-    #         world: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] world
     #   The Amazon Resource Name (arn) of the world you want to describe.
     #   @return [String]
@@ -3426,13 +2876,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeWorldTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         template: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] template
     #   The Amazon Resource Name (arn) of the world template you want to
     #   describe.
@@ -3494,13 +2937,6 @@ module Aws::RoboMaker
 
     # The object that contains the Docker image URI for either your robot or
     # simulation applications.
-    #
-    # @note When making an API call, you may pass Environment
-    #   data as a hash:
-    #
-    #       {
-    #         uri: "RepositoryUrl",
-    #       }
     #
     # @!attribute [rw] uri
     #   The Docker image URI for either your robot or simulation
@@ -3565,14 +3001,6 @@ module Aws::RoboMaker
     end
 
     # Information about a filter.
-    #
-    # @note When making an API call, you may pass Filter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name",
-    #         values: ["Name"],
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the filter.
@@ -3655,14 +3083,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetWorldTemplateBodyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         template: "Arn",
-    #         generation_job: "Arn",
-    #       }
-    #
     # @!attribute [rw] template
     #   The Amazon Resource Name (arn) of the world template.
     #   @return [String]
@@ -3737,28 +3157,6 @@ module Aws::RoboMaker
 
     # Information about a launch configuration.
     #
-    # @note When making an API call, you may pass LaunchConfig
-    #   data as a hash:
-    #
-    #       {
-    #         package_name: "Command",
-    #         launch_file: "Command",
-    #         environment_variables: {
-    #           "EnvironmentVariableKey" => "EnvironmentVariableValue",
-    #         },
-    #         port_forwarding_config: {
-    #           port_mappings: [
-    #             {
-    #               job_port: 1, # required
-    #               application_port: 1, # required
-    #               enable_on_public_ip: false,
-    #             },
-    #           ],
-    #         },
-    #         stream_ui: false,
-    #         command: ["NonEmptyString"],
-    #       }
-    #
     # @!attribute [rw] package_name
     #   The package name.
     #   @return [String]
@@ -3821,20 +3219,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDeploymentJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             name: "Name",
-    #             values: ["Name"],
-    #           },
-    #         ],
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] filters
     #   Optional filters to limit results.
     #
@@ -3896,20 +3280,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFleetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #         filters: [
-    #           {
-    #             name: "Name",
-    #             values: ["Name"],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If the previous paginated request did not return all of the
     #   remaining results, the response object's `nextToken` parameter
@@ -3975,21 +3345,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRobotApplicationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         version_qualifier: "VersionQualifier",
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #         filters: [
-    #           {
-    #             name: "Name",
-    #             values: ["Name"],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] version_qualifier
     #   The version qualifier of the robot application.
     #   @return [String]
@@ -4055,20 +3410,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRobotsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #         filters: [
-    #           {
-    #             name: "Name",
-    #             values: ["Name"],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If the previous paginated request did not return all of the
     #   remaining results, the response object's `nextToken` parameter
@@ -4130,21 +3471,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSimulationApplicationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         version_qualifier: "VersionQualifier",
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #         filters: [
-    #           {
-    #             name: "Name",
-    #             values: ["Name"],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] version_qualifier
     #   The version qualifier of the simulation application.
     #   @return [String]
@@ -4213,20 +3539,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSimulationJobBatchesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #         filters: [
-    #           {
-    #             name: "Name",
-    #             values: ["Name"],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If the previous paginated request did not return all of the
     #   remaining results, the response object's `nextToken` parameter
@@ -4282,20 +3594,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSimulationJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #         filters: [
-    #           {
-    #             name: "Name",
-    #             values: ["Name"],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If the previous paginated request did not return all of the
     #   remaining results, the response object's `nextToken` parameter
@@ -4359,13 +3657,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The AWS RoboMaker Amazon Resource Name (ARN) with tags to be listed.
     #   @return [String]
@@ -4390,20 +3681,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListWorldExportJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #         filters: [
-    #           {
-    #             name: "Name",
-    #             values: ["Name"],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If the previous paginated request did not return all of the
     #   remaining results, the response object's `nextToken` parameter
@@ -4461,20 +3738,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListWorldGenerationJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #         filters: [
-    #           {
-    #             name: "Name",
-    #             values: ["Name"],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If the previous paginated request did not return all of the
     #   remaining results, the response object's `nextToken` parameter
@@ -4533,14 +3796,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListWorldTemplatesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If the previous paginated request did not return all of the
     #   remaining results, the response object's `nextToken` parameter
@@ -4591,20 +3846,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListWorldsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #         filters: [
-    #           {
-    #             name: "Name",
-    #             values: ["Name"],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If the previous paginated request did not return all of the
     #   remaining results, the response object's `nextToken` parameter
@@ -4662,13 +3903,6 @@ module Aws::RoboMaker
 
     # The logging configuration.
     #
-    # @note When making an API call, you may pass LoggingConfig
-    #   data as a hash:
-    #
-    #       {
-    #         record_all_ros_topics: false,
-    #       }
-    #
     # @!attribute [rw] record_all_ros_topics
     #   A boolean indicating whether to record all ROS topics.
     #
@@ -4709,14 +3943,6 @@ module Aws::RoboMaker
 
     # The output location.
     #
-    # @note When making an API call, you may pass OutputLocation
-    #   data as a hash:
-    #
-    #       {
-    #         s3_bucket: "S3Bucket",
-    #         s3_prefix: "S3Key",
-    #       }
-    #
     # @!attribute [rw] s3_bucket
     #   The S3 bucket for output.
     #   @return [String]
@@ -4736,19 +3962,6 @@ module Aws::RoboMaker
 
     # Configuration information for port forwarding.
     #
-    # @note When making an API call, you may pass PortForwardingConfig
-    #   data as a hash:
-    #
-    #       {
-    #         port_mappings: [
-    #           {
-    #             job_port: 1, # required
-    #             application_port: 1, # required
-    #             enable_on_public_ip: false,
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] port_mappings
     #   The port mappings for the configuration.
     #   @return [Array<Types::PortMapping>]
@@ -4762,15 +3975,6 @@ module Aws::RoboMaker
     end
 
     # An object representing a port mapping.
-    #
-    # @note When making an API call, you may pass PortMapping
-    #   data as a hash:
-    #
-    #       {
-    #         job_port: 1, # required
-    #         application_port: 1, # required
-    #         enable_on_public_ip: false,
-    #       }
     #
     # @!attribute [rw] job_port
     #   The port number on the simulation job instance to use as a remote
@@ -4853,14 +4057,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RegisterRobotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         fleet: "Arn", # required
-    #         robot: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] fleet
     #   The Amazon Resource Name (ARN) of the fleet.
     #   @return [String]
@@ -4897,14 +4093,6 @@ module Aws::RoboMaker
     end
 
     # Information about a rendering engine.
-    #
-    # @note When making an API call, you may pass RenderingEngine
-    #   data as a hash:
-    #
-    #       {
-    #         name: "OGRE", # accepts OGRE
-    #         version: "RenderingEngineVersionType",
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the rendering engine.
@@ -4949,13 +4137,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RestartSimulationJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] job
     #   The Amazon Resource Name (ARN) of the simulation job.
     #   @return [String]
@@ -5028,50 +4209,6 @@ module Aws::RoboMaker
     end
 
     # Application configuration information for a robot.
-    #
-    # @note When making an API call, you may pass RobotApplicationConfig
-    #   data as a hash:
-    #
-    #       {
-    #         application: "Arn", # required
-    #         application_version: "Version",
-    #         launch_config: { # required
-    #           package_name: "Command",
-    #           launch_file: "Command",
-    #           environment_variables: {
-    #             "EnvironmentVariableKey" => "EnvironmentVariableValue",
-    #           },
-    #           port_forwarding_config: {
-    #             port_mappings: [
-    #               {
-    #                 job_port: 1, # required
-    #                 application_port: 1, # required
-    #                 enable_on_public_ip: false,
-    #               },
-    #             ],
-    #           },
-    #           stream_ui: false,
-    #           command: ["NonEmptyString"],
-    #         },
-    #         upload_configurations: [
-    #           {
-    #             name: "Name", # required
-    #             path: "Path", # required
-    #             upload_behavior: "UPLOAD_ON_TERMINATE", # required, accepts UPLOAD_ON_TERMINATE, UPLOAD_ROLLING_AUTO_REMOVE
-    #           },
-    #         ],
-    #         use_default_upload_configurations: false,
-    #         tools: [
-    #           {
-    #             stream_ui: false,
-    #             name: "Name", # required
-    #             command: "UnrestrictedCommand", # required
-    #             stream_output_to_cloud_watch: false,
-    #             exit_behavior: "FAIL", # accepts FAIL, RESTART
-    #           },
-    #         ],
-    #         use_default_tools: false,
-    #       }
     #
     # @!attribute [rw] application
     #   The application information for the robot application.
@@ -5208,14 +4345,6 @@ module Aws::RoboMaker
 
     # Information about a robot software suite (ROS distribution).
     #
-    # @note When making an API call, you may pass RobotSoftwareSuite
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ROS", # accepts ROS, ROS2, General
-    #         version: "Kinetic", # accepts Kinetic, Melodic, Dashing, Foxy
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the robot software suite (ROS distribution).
     #   @return [String]
@@ -5254,15 +4383,6 @@ module Aws::RoboMaker
 
     # Information about an S3 object.
     #
-    # @note When making an API call, you may pass S3Object
-    #   data as a hash:
-    #
-    #       {
-    #         bucket: "S3Bucket", # required
-    #         key: "S3Key", # required
-    #         etag: "S3Etag",
-    #       }
-    #
     # @!attribute [rw] bucket
     #   The bucket containing the object.
     #   @return [String]
@@ -5299,55 +4419,6 @@ module Aws::RoboMaker
     end
 
     # Information about a simulation application configuration.
-    #
-    # @note When making an API call, you may pass SimulationApplicationConfig
-    #   data as a hash:
-    #
-    #       {
-    #         application: "Arn", # required
-    #         application_version: "Version",
-    #         launch_config: { # required
-    #           package_name: "Command",
-    #           launch_file: "Command",
-    #           environment_variables: {
-    #             "EnvironmentVariableKey" => "EnvironmentVariableValue",
-    #           },
-    #           port_forwarding_config: {
-    #             port_mappings: [
-    #               {
-    #                 job_port: 1, # required
-    #                 application_port: 1, # required
-    #                 enable_on_public_ip: false,
-    #               },
-    #             ],
-    #           },
-    #           stream_ui: false,
-    #           command: ["NonEmptyString"],
-    #         },
-    #         upload_configurations: [
-    #           {
-    #             name: "Name", # required
-    #             path: "Path", # required
-    #             upload_behavior: "UPLOAD_ON_TERMINATE", # required, accepts UPLOAD_ON_TERMINATE, UPLOAD_ROLLING_AUTO_REMOVE
-    #           },
-    #         ],
-    #         world_configs: [
-    #           {
-    #             world: "Arn",
-    #           },
-    #         ],
-    #         use_default_upload_configurations: false,
-    #         tools: [
-    #           {
-    #             stream_ui: false,
-    #             name: "Name", # required
-    #             command: "UnrestrictedCommand", # required
-    #             stream_output_to_cloud_watch: false,
-    #             exit_behavior: "FAIL", # accepts FAIL, RESTART
-    #           },
-    #         ],
-    #         use_default_tools: false,
-    #       }
     #
     # @!attribute [rw] application
     #   The application information for the simulation application.
@@ -5673,134 +4744,6 @@ module Aws::RoboMaker
 
     # Information about a simulation job request.
     #
-    # @note When making an API call, you may pass SimulationJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         output_location: {
-    #           s3_bucket: "S3Bucket",
-    #           s3_prefix: "S3Key",
-    #         },
-    #         logging_config: {
-    #           record_all_ros_topics: false,
-    #         },
-    #         max_job_duration_in_seconds: 1, # required
-    #         iam_role: "IamRole",
-    #         failure_behavior: "Fail", # accepts Fail, Continue
-    #         use_default_applications: false,
-    #         robot_applications: [
-    #           {
-    #             application: "Arn", # required
-    #             application_version: "Version",
-    #             launch_config: { # required
-    #               package_name: "Command",
-    #               launch_file: "Command",
-    #               environment_variables: {
-    #                 "EnvironmentVariableKey" => "EnvironmentVariableValue",
-    #               },
-    #               port_forwarding_config: {
-    #                 port_mappings: [
-    #                   {
-    #                     job_port: 1, # required
-    #                     application_port: 1, # required
-    #                     enable_on_public_ip: false,
-    #                   },
-    #                 ],
-    #               },
-    #               stream_ui: false,
-    #               command: ["NonEmptyString"],
-    #             },
-    #             upload_configurations: [
-    #               {
-    #                 name: "Name", # required
-    #                 path: "Path", # required
-    #                 upload_behavior: "UPLOAD_ON_TERMINATE", # required, accepts UPLOAD_ON_TERMINATE, UPLOAD_ROLLING_AUTO_REMOVE
-    #               },
-    #             ],
-    #             use_default_upload_configurations: false,
-    #             tools: [
-    #               {
-    #                 stream_ui: false,
-    #                 name: "Name", # required
-    #                 command: "UnrestrictedCommand", # required
-    #                 stream_output_to_cloud_watch: false,
-    #                 exit_behavior: "FAIL", # accepts FAIL, RESTART
-    #               },
-    #             ],
-    #             use_default_tools: false,
-    #           },
-    #         ],
-    #         simulation_applications: [
-    #           {
-    #             application: "Arn", # required
-    #             application_version: "Version",
-    #             launch_config: { # required
-    #               package_name: "Command",
-    #               launch_file: "Command",
-    #               environment_variables: {
-    #                 "EnvironmentVariableKey" => "EnvironmentVariableValue",
-    #               },
-    #               port_forwarding_config: {
-    #                 port_mappings: [
-    #                   {
-    #                     job_port: 1, # required
-    #                     application_port: 1, # required
-    #                     enable_on_public_ip: false,
-    #                   },
-    #                 ],
-    #               },
-    #               stream_ui: false,
-    #               command: ["NonEmptyString"],
-    #             },
-    #             upload_configurations: [
-    #               {
-    #                 name: "Name", # required
-    #                 path: "Path", # required
-    #                 upload_behavior: "UPLOAD_ON_TERMINATE", # required, accepts UPLOAD_ON_TERMINATE, UPLOAD_ROLLING_AUTO_REMOVE
-    #               },
-    #             ],
-    #             world_configs: [
-    #               {
-    #                 world: "Arn",
-    #               },
-    #             ],
-    #             use_default_upload_configurations: false,
-    #             tools: [
-    #               {
-    #                 stream_ui: false,
-    #                 name: "Name", # required
-    #                 command: "UnrestrictedCommand", # required
-    #                 stream_output_to_cloud_watch: false,
-    #                 exit_behavior: "FAIL", # accepts FAIL, RESTART
-    #               },
-    #             ],
-    #             use_default_tools: false,
-    #           },
-    #         ],
-    #         data_sources: [
-    #           {
-    #             name: "Name", # required
-    #             s3_bucket: "S3Bucket", # required
-    #             s3_keys: ["S3KeyOrPrefix"], # required
-    #             type: "Prefix", # accepts Prefix, Archive, File
-    #             destination: "Path",
-    #           },
-    #         ],
-    #         vpc_config: {
-    #           subnets: ["NonEmptyString"], # required
-    #           security_groups: ["NonEmptyString"],
-    #           assign_public_ip: false,
-    #         },
-    #         compute: {
-    #           simulation_unit_limit: 1,
-    #           compute_type: "CPU", # accepts CPU, GPU_AND_CPU
-    #           gpu_unit_limit: 1,
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] output_location
     #   The output location.
     #   @return [Types::OutputLocation]
@@ -5946,14 +4889,6 @@ module Aws::RoboMaker
 
     # Information about a simulation software suite.
     #
-    # @note When making an API call, you may pass SimulationSoftwareSuite
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Gazebo", # accepts Gazebo, RosbagPlay, SimulationRuntime
-    #         version: "SimulationSoftwareSuiteVersionType",
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the simulation software suite.
     #   @return [String]
@@ -6002,15 +4937,6 @@ module Aws::RoboMaker
 
     # Information about a source configuration.
     #
-    # @note When making an API call, you may pass SourceConfig
-    #   data as a hash:
-    #
-    #       {
-    #         s3_bucket: "S3Bucket",
-    #         s3_key: "S3Key",
-    #         architecture: "X86_64", # accepts X86_64, ARM64, ARMHF
-    #       }
-    #
     # @!attribute [rw] s3_bucket
     #   The Amazon S3 bucket name.
     #   @return [String]
@@ -6033,146 +4959,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartSimulationJobBatchRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_request_token: "ClientRequestToken",
-    #         batch_policy: {
-    #           timeout_in_seconds: 1,
-    #           max_concurrency: 1,
-    #         },
-    #         create_simulation_job_requests: [ # required
-    #           {
-    #             output_location: {
-    #               s3_bucket: "S3Bucket",
-    #               s3_prefix: "S3Key",
-    #             },
-    #             logging_config: {
-    #               record_all_ros_topics: false,
-    #             },
-    #             max_job_duration_in_seconds: 1, # required
-    #             iam_role: "IamRole",
-    #             failure_behavior: "Fail", # accepts Fail, Continue
-    #             use_default_applications: false,
-    #             robot_applications: [
-    #               {
-    #                 application: "Arn", # required
-    #                 application_version: "Version",
-    #                 launch_config: { # required
-    #                   package_name: "Command",
-    #                   launch_file: "Command",
-    #                   environment_variables: {
-    #                     "EnvironmentVariableKey" => "EnvironmentVariableValue",
-    #                   },
-    #                   port_forwarding_config: {
-    #                     port_mappings: [
-    #                       {
-    #                         job_port: 1, # required
-    #                         application_port: 1, # required
-    #                         enable_on_public_ip: false,
-    #                       },
-    #                     ],
-    #                   },
-    #                   stream_ui: false,
-    #                   command: ["NonEmptyString"],
-    #                 },
-    #                 upload_configurations: [
-    #                   {
-    #                     name: "Name", # required
-    #                     path: "Path", # required
-    #                     upload_behavior: "UPLOAD_ON_TERMINATE", # required, accepts UPLOAD_ON_TERMINATE, UPLOAD_ROLLING_AUTO_REMOVE
-    #                   },
-    #                 ],
-    #                 use_default_upload_configurations: false,
-    #                 tools: [
-    #                   {
-    #                     stream_ui: false,
-    #                     name: "Name", # required
-    #                     command: "UnrestrictedCommand", # required
-    #                     stream_output_to_cloud_watch: false,
-    #                     exit_behavior: "FAIL", # accepts FAIL, RESTART
-    #                   },
-    #                 ],
-    #                 use_default_tools: false,
-    #               },
-    #             ],
-    #             simulation_applications: [
-    #               {
-    #                 application: "Arn", # required
-    #                 application_version: "Version",
-    #                 launch_config: { # required
-    #                   package_name: "Command",
-    #                   launch_file: "Command",
-    #                   environment_variables: {
-    #                     "EnvironmentVariableKey" => "EnvironmentVariableValue",
-    #                   },
-    #                   port_forwarding_config: {
-    #                     port_mappings: [
-    #                       {
-    #                         job_port: 1, # required
-    #                         application_port: 1, # required
-    #                         enable_on_public_ip: false,
-    #                       },
-    #                     ],
-    #                   },
-    #                   stream_ui: false,
-    #                   command: ["NonEmptyString"],
-    #                 },
-    #                 upload_configurations: [
-    #                   {
-    #                     name: "Name", # required
-    #                     path: "Path", # required
-    #                     upload_behavior: "UPLOAD_ON_TERMINATE", # required, accepts UPLOAD_ON_TERMINATE, UPLOAD_ROLLING_AUTO_REMOVE
-    #                   },
-    #                 ],
-    #                 world_configs: [
-    #                   {
-    #                     world: "Arn",
-    #                   },
-    #                 ],
-    #                 use_default_upload_configurations: false,
-    #                 tools: [
-    #                   {
-    #                     stream_ui: false,
-    #                     name: "Name", # required
-    #                     command: "UnrestrictedCommand", # required
-    #                     stream_output_to_cloud_watch: false,
-    #                     exit_behavior: "FAIL", # accepts FAIL, RESTART
-    #                   },
-    #                 ],
-    #                 use_default_tools: false,
-    #               },
-    #             ],
-    #             data_sources: [
-    #               {
-    #                 name: "Name", # required
-    #                 s3_bucket: "S3Bucket", # required
-    #                 s3_keys: ["S3KeyOrPrefix"], # required
-    #                 type: "Prefix", # accepts Prefix, Archive, File
-    #                 destination: "Path",
-    #               },
-    #             ],
-    #             vpc_config: {
-    #               subnets: ["NonEmptyString"], # required
-    #               security_groups: ["NonEmptyString"],
-    #               assign_public_ip: false,
-    #             },
-    #             compute: {
-    #               simulation_unit_limit: 1,
-    #               compute_type: "CPU", # accepts CPU, GPU_AND_CPU
-    #               gpu_unit_limit: 1,
-    #             },
-    #             tags: {
-    #               "TagKey" => "TagValue",
-    #             },
-    #           },
-    #         ],
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_request_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
@@ -6322,14 +5108,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SyncDeploymentJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_request_token: "ClientRequestToken", # required
-    #         fleet: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] client_request_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
@@ -6460,16 +5238,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the AWS RoboMaker resource you are
     #   tagging.
@@ -6494,14 +5262,6 @@ module Aws::RoboMaker
     class TagResourceResponse < Aws::EmptyStructure; end
 
     # Information about a template location.
-    #
-    # @note When making an API call, you may pass TemplateLocation
-    #   data as a hash:
-    #
-    #       {
-    #         s3_bucket: "S3Bucket", # required
-    #         s3_key: "S3Key", # required
-    #       }
     #
     # @!attribute [rw] s3_bucket
     #   The Amazon S3 bucket name.
@@ -6572,17 +5332,6 @@ module Aws::RoboMaker
 
     # Information about a tool. Tools are used in a simulation job.
     #
-    # @note When making an API call, you may pass Tool
-    #   data as a hash:
-    #
-    #       {
-    #         stream_ui: false,
-    #         name: "Name", # required
-    #         command: "UnrestrictedCommand", # required
-    #         stream_output_to_cloud_watch: false,
-    #         exit_behavior: "FAIL", # accepts FAIL, RESTART
-    #       }
-    #
     # @!attribute [rw] stream_ui
     #   Boolean indicating whether a streaming session will be configured
     #   for the tool. If `True`, AWS RoboMaker will configure a connection
@@ -6623,14 +5372,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the AWS RoboMaker resource you are
     #   removing tags.
@@ -6654,28 +5395,6 @@ module Aws::RoboMaker
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateRobotApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application: "Arn", # required
-    #         sources: [
-    #           {
-    #             s3_bucket: "S3Bucket",
-    #             s3_key: "S3Key",
-    #             architecture: "X86_64", # accepts X86_64, ARM64, ARMHF
-    #           },
-    #         ],
-    #         robot_software_suite: { # required
-    #           name: "ROS", # accepts ROS, ROS2, General
-    #           version: "Kinetic", # accepts Kinetic, Melodic, Dashing, Foxy
-    #         },
-    #         current_revision_id: "RevisionId",
-    #         environment: {
-    #           uri: "RepositoryUrl",
-    #         },
-    #       }
-    #
     # @!attribute [rw] application
     #   The application information for the robot application.
     #   @return [String]
@@ -6760,36 +5479,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateSimulationApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application: "Arn", # required
-    #         sources: [
-    #           {
-    #             s3_bucket: "S3Bucket",
-    #             s3_key: "S3Key",
-    #             architecture: "X86_64", # accepts X86_64, ARM64, ARMHF
-    #           },
-    #         ],
-    #         simulation_software_suite: { # required
-    #           name: "Gazebo", # accepts Gazebo, RosbagPlay, SimulationRuntime
-    #           version: "SimulationSoftwareSuiteVersionType",
-    #         },
-    #         robot_software_suite: { # required
-    #           name: "ROS", # accepts ROS, ROS2, General
-    #           version: "Kinetic", # accepts Kinetic, Melodic, Dashing, Foxy
-    #         },
-    #         rendering_engine: {
-    #           name: "OGRE", # accepts OGRE
-    #           version: "RenderingEngineVersionType",
-    #         },
-    #         current_revision_id: "RevisionId",
-    #         environment: {
-    #           uri: "RepositoryUrl",
-    #         },
-    #       }
-    #
     # @!attribute [rw] application
     #   The application information for the simulation application.
     #   @return [String]
@@ -6893,19 +5582,6 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateWorldTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         template: "Arn", # required
-    #         name: "TemplateName",
-    #         template_body: "Json",
-    #         template_location: {
-    #           s3_bucket: "S3Bucket", # required
-    #           s3_key: "S3Key", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] template
     #   The Amazon Resource Name (arn) of the world template to update.
     #   @return [String]
@@ -6965,15 +5641,6 @@ module Aws::RoboMaker
     # Provides upload configuration information. Files are uploaded from the
     # simulation job to a location you specify.
     #
-    # @note When making an API call, you may pass UploadConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         path: "Path", # required
-    #         upload_behavior: "UPLOAD_ON_TERMINATE", # required, accepts UPLOAD_ON_TERMINATE, UPLOAD_ROLLING_AUTO_REMOVE
-    #       }
-    #
     # @!attribute [rw] name
     #   A prefix that specifies where files will be uploaded in Amazon S3.
     #   It is appended to the simulation output location to determine the
@@ -7031,15 +5698,6 @@ module Aws::RoboMaker
     # These must belong to the same VPC. You must provide at least one
     # security group and two subnet IDs.
     #
-    # @note When making an API call, you may pass VPCConfig
-    #   data as a hash:
-    #
-    #       {
-    #         subnets: ["NonEmptyString"], # required
-    #         security_groups: ["NonEmptyString"],
-    #         assign_public_ip: false,
-    #       }
-    #
     # @!attribute [rw] subnets
     #   A list of one or more subnet IDs in your VPC.
     #   @return [Array<String>]
@@ -7093,13 +5751,6 @@ module Aws::RoboMaker
 
     # Configuration information for a world.
     #
-    # @note When making an API call, you may pass WorldConfig
-    #   data as a hash:
-    #
-    #       {
-    #         world: "Arn",
-    #       }
-    #
     # @!attribute [rw] world
     #   The world generated by Simulation WorldForge.
     #   @return [String]
@@ -7121,14 +5772,6 @@ module Aws::RoboMaker
     #
     # If you set `floorplanCount = 4` and `interiorCountPerFloorplan = 5`,
     # there will be 20 worlds with 5 unique floor plans.
-    #
-    # @note When making an API call, you may pass WorldCount
-    #   data as a hash:
-    #
-    #       {
-    #         floorplan_count: 1,
-    #         interior_count_per_floorplan: 1,
-    #       }
     #
     # @!attribute [rw] floorplan_count
     #   The number of unique floorplans.

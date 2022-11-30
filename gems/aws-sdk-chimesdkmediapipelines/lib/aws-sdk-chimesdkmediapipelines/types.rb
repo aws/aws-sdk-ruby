@@ -12,33 +12,6 @@ module Aws::ChimeSDKMediaPipelines
 
     # The configuration for the artifacts concatenation.
     #
-    # @note When making an API call, you may pass ArtifactsConcatenationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         audio: { # required
-    #           state: "Enabled", # required, accepts Enabled
-    #         },
-    #         video: { # required
-    #           state: "Enabled", # required, accepts Enabled, Disabled
-    #         },
-    #         content: { # required
-    #           state: "Enabled", # required, accepts Enabled, Disabled
-    #         },
-    #         data_channel: { # required
-    #           state: "Enabled", # required, accepts Enabled, Disabled
-    #         },
-    #         transcription_messages: { # required
-    #           state: "Enabled", # required, accepts Enabled, Disabled
-    #         },
-    #         meeting_events: { # required
-    #           state: "Enabled", # required, accepts Enabled, Disabled
-    #         },
-    #         composited_video: { # required
-    #           state: "Enabled", # required, accepts Enabled, Disabled
-    #         },
-    #       }
-    #
     # @!attribute [rw] audio
     #   The configuration for the audio artifacts concatenation.
     #   @return [Types::AudioConcatenationConfiguration]
@@ -84,33 +57,6 @@ module Aws::ChimeSDKMediaPipelines
 
     # The configuration for the artifacts.
     #
-    # @note When making an API call, you may pass ArtifactsConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         audio: { # required
-    #           mux_type: "AudioOnly", # required, accepts AudioOnly, AudioWithActiveSpeakerVideo, AudioWithCompositedVideo
-    #         },
-    #         video: { # required
-    #           state: "Enabled", # required, accepts Enabled, Disabled
-    #           mux_type: "VideoOnly", # accepts VideoOnly
-    #         },
-    #         content: { # required
-    #           state: "Enabled", # required, accepts Enabled, Disabled
-    #           mux_type: "ContentOnly", # accepts ContentOnly
-    #         },
-    #         composited_video: {
-    #           layout: "GridView", # accepts GridView
-    #           resolution: "HD", # accepts HD, FHD
-    #           grid_view_configuration: { # required
-    #             content_share_layout: "PresenterOnly", # required, accepts PresenterOnly, Horizontal, Vertical
-    #             presenter_only_configuration: {
-    #               presenter_position: "TopLeft", # accepts TopLeft, TopRight, BottomLeft, BottomRight
-    #             },
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] audio
     #   The configuration for the audio artifacts.
     #   @return [Types::AudioArtifactsConfiguration]
@@ -140,13 +86,6 @@ module Aws::ChimeSDKMediaPipelines
 
     # The audio artifact configuration object.
     #
-    # @note When making an API call, you may pass AudioArtifactsConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         mux_type: "AudioOnly", # required, accepts AudioOnly, AudioWithActiveSpeakerVideo, AudioWithCompositedVideo
-    #       }
-    #
     # @!attribute [rw] mux_type
     #   The MUX type of the audio artifact configuration object.
     #   @return [String]
@@ -160,13 +99,6 @@ module Aws::ChimeSDKMediaPipelines
     end
 
     # The audio artifact concatenation configuration object.
-    #
-    # @note When making an API call, you may pass AudioConcatenationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         state: "Enabled", # required, accepts Enabled
-    #       }
     #
     # @!attribute [rw] state
     #   Enables the *name* object, where *name* is the name of the
@@ -207,35 +139,6 @@ module Aws::ChimeSDKMediaPipelines
     # The configuration object of the Amazon Chime SDK meeting concatenation
     # for a specified media pipeline.
     #
-    # @note When making an API call, you may pass ChimeSdkMeetingConcatenationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         artifacts_configuration: { # required
-    #           audio: { # required
-    #             state: "Enabled", # required, accepts Enabled
-    #           },
-    #           video: { # required
-    #             state: "Enabled", # required, accepts Enabled, Disabled
-    #           },
-    #           content: { # required
-    #             state: "Enabled", # required, accepts Enabled, Disabled
-    #           },
-    #           data_channel: { # required
-    #             state: "Enabled", # required, accepts Enabled, Disabled
-    #           },
-    #           transcription_messages: { # required
-    #             state: "Enabled", # required, accepts Enabled, Disabled
-    #           },
-    #           meeting_events: { # required
-    #             state: "Enabled", # required, accepts Enabled, Disabled
-    #           },
-    #           composited_video: { # required
-    #             state: "Enabled", # required, accepts Enabled, Disabled
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] artifacts_configuration
     #   The configuration for the artifacts in an Amazon Chime SDK meeting
     #   concatenation.
@@ -251,41 +154,6 @@ module Aws::ChimeSDKMediaPipelines
 
     # The configuration object of the Amazon Chime SDK meeting for a
     # specified media pipeline. `SourceType` must be `ChimeSdkMeeting`.
-    #
-    # @note When making an API call, you may pass ChimeSdkMeetingConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         source_configuration: {
-    #           selected_video_streams: {
-    #             attendee_ids: ["GuidString"],
-    #             external_user_ids: ["ExternalUserIdType"],
-    #           },
-    #         },
-    #         artifacts_configuration: {
-    #           audio: { # required
-    #             mux_type: "AudioOnly", # required, accepts AudioOnly, AudioWithActiveSpeakerVideo, AudioWithCompositedVideo
-    #           },
-    #           video: { # required
-    #             state: "Enabled", # required, accepts Enabled, Disabled
-    #             mux_type: "VideoOnly", # accepts VideoOnly
-    #           },
-    #           content: { # required
-    #             state: "Enabled", # required, accepts Enabled, Disabled
-    #             mux_type: "ContentOnly", # accepts ContentOnly
-    #           },
-    #           composited_video: {
-    #             layout: "GridView", # accepts GridView
-    #             resolution: "HD", # accepts HD, FHD
-    #             grid_view_configuration: { # required
-    #               content_share_layout: "PresenterOnly", # required, accepts PresenterOnly, Horizontal, Vertical
-    #               presenter_only_configuration: {
-    #                 presenter_position: "TopLeft", # accepts TopLeft, TopRight, BottomLeft, BottomRight
-    #               },
-    #             },
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] source_configuration
     #   The source configuration for a specified media pipline.
@@ -305,30 +173,6 @@ module Aws::ChimeSDKMediaPipelines
     end
 
     # The media pipeline's configuration object.
-    #
-    # @note When making an API call, you may pass ChimeSdkMeetingLiveConnectorConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "Arn", # required
-    #         mux_type: "AudioWithCompositedVideo", # required, accepts AudioWithCompositedVideo, AudioWithActiveSpeakerVideo
-    #         composited_video: {
-    #           layout: "GridView", # accepts GridView
-    #           resolution: "HD", # accepts HD, FHD
-    #           grid_view_configuration: { # required
-    #             content_share_layout: "PresenterOnly", # required, accepts PresenterOnly, Horizontal, Vertical
-    #             presenter_only_configuration: {
-    #               presenter_position: "TopLeft", # accepts TopLeft, TopRight, BottomLeft, BottomRight
-    #             },
-    #           },
-    #         },
-    #         source_configuration: {
-    #           selected_video_streams: {
-    #             attendee_ids: ["GuidString"],
-    #             external_user_ids: ["ExternalUserIdType"],
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] arn
     #   The configuration object's Chime SDK meeting ARN.
@@ -360,20 +204,6 @@ module Aws::ChimeSDKMediaPipelines
 
     # Describes the configuration for the composited video artifacts.
     #
-    # @note When making an API call, you may pass CompositedVideoArtifactsConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         layout: "GridView", # accepts GridView
-    #         resolution: "HD", # accepts HD, FHD
-    #         grid_view_configuration: { # required
-    #           content_share_layout: "PresenterOnly", # required, accepts PresenterOnly, Horizontal, Vertical
-    #           presenter_only_configuration: {
-    #             presenter_position: "TopLeft", # accepts TopLeft, TopRight, BottomLeft, BottomRight
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] layout
     #   The layout setting, such as `GridView` in the configuration object.
     #   @return [String]
@@ -400,13 +230,6 @@ module Aws::ChimeSDKMediaPipelines
     # The composited video configuration object for a specified media
     # pipeline. `SourceType` must be `ChimeSdkMeeting`.
     #
-    # @note When making an API call, you may pass CompositedVideoConcatenationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         state: "Enabled", # required, accepts Enabled, Disabled
-    #       }
-    #
     # @!attribute [rw] state
     #   Enables or disables the configuration object.
     #   @return [String]
@@ -420,16 +243,6 @@ module Aws::ChimeSDKMediaPipelines
     end
 
     # The data sink of the configuration object.
-    #
-    # @note When making an API call, you may pass ConcatenationSink
-    #   data as a hash:
-    #
-    #       {
-    #         type: "S3Bucket", # required, accepts S3Bucket
-    #         s3_bucket_sink_configuration: { # required
-    #           destination: "Arn", # required
-    #         },
-    #       }
     #
     # @!attribute [rw] type
     #   The type of data sink in the configuration object.
@@ -451,41 +264,6 @@ module Aws::ChimeSDKMediaPipelines
     # The source type and media pipeline configuration settings in a
     # configuration object.
     #
-    # @note When making an API call, you may pass ConcatenationSource
-    #   data as a hash:
-    #
-    #       {
-    #         type: "MediaCapturePipeline", # required, accepts MediaCapturePipeline
-    #         media_capture_pipeline_source_configuration: { # required
-    #           media_pipeline_arn: "Arn", # required
-    #           chime_sdk_meeting_configuration: { # required
-    #             artifacts_configuration: { # required
-    #               audio: { # required
-    #                 state: "Enabled", # required, accepts Enabled
-    #               },
-    #               video: { # required
-    #                 state: "Enabled", # required, accepts Enabled, Disabled
-    #               },
-    #               content: { # required
-    #                 state: "Enabled", # required, accepts Enabled, Disabled
-    #               },
-    #               data_channel: { # required
-    #                 state: "Enabled", # required, accepts Enabled, Disabled
-    #               },
-    #               transcription_messages: { # required
-    #                 state: "Enabled", # required, accepts Enabled, Disabled
-    #               },
-    #               meeting_events: { # required
-    #                 state: "Enabled", # required, accepts Enabled, Disabled
-    #               },
-    #               composited_video: { # required
-    #                 state: "Enabled", # required, accepts Enabled, Disabled
-    #               },
-    #             },
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] type
     #   The type of concatenation source in a configuration object.
     #   @return [String]
@@ -505,14 +283,6 @@ module Aws::ChimeSDKMediaPipelines
     end
 
     # The content artifact object.
-    #
-    # @note When making an API call, you may pass ContentArtifactsConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         state: "Enabled", # required, accepts Enabled, Disabled
-    #         mux_type: "ContentOnly", # accepts ContentOnly
-    #       }
     #
     # @!attribute [rw] state
     #   Indicates whether the content artifact is enabled or disabled.
@@ -534,13 +304,6 @@ module Aws::ChimeSDKMediaPipelines
     # The composited content configuration object for a specified media
     # pipeline.
     #
-    # @note When making an API call, you may pass ContentConcatenationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         state: "Enabled", # required, accepts Enabled, Disabled
-    #       }
-    #
     # @!attribute [rw] state
     #   Enables or disables the configuration object.
     #   @return [String]
@@ -553,54 +316,6 @@ module Aws::ChimeSDKMediaPipelines
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateMediaCapturePipelineRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source_type: "ChimeSdkMeeting", # required, accepts ChimeSdkMeeting
-    #         source_arn: "Arn", # required
-    #         sink_type: "S3Bucket", # required, accepts S3Bucket
-    #         sink_arn: "Arn", # required
-    #         client_request_token: "ClientRequestToken",
-    #         chime_sdk_meeting_configuration: {
-    #           source_configuration: {
-    #             selected_video_streams: {
-    #               attendee_ids: ["GuidString"],
-    #               external_user_ids: ["ExternalUserIdType"],
-    #             },
-    #           },
-    #           artifacts_configuration: {
-    #             audio: { # required
-    #               mux_type: "AudioOnly", # required, accepts AudioOnly, AudioWithActiveSpeakerVideo, AudioWithCompositedVideo
-    #             },
-    #             video: { # required
-    #               state: "Enabled", # required, accepts Enabled, Disabled
-    #               mux_type: "VideoOnly", # accepts VideoOnly
-    #             },
-    #             content: { # required
-    #               state: "Enabled", # required, accepts Enabled, Disabled
-    #               mux_type: "ContentOnly", # accepts ContentOnly
-    #             },
-    #             composited_video: {
-    #               layout: "GridView", # accepts GridView
-    #               resolution: "HD", # accepts HD, FHD
-    #               grid_view_configuration: { # required
-    #                 content_share_layout: "PresenterOnly", # required, accepts PresenterOnly, Horizontal, Vertical
-    #                 presenter_only_configuration: {
-    #                   presenter_position: "TopLeft", # accepts TopLeft, TopRight, BottomLeft, BottomRight
-    #                 },
-    #               },
-    #             },
-    #           },
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] source_type
     #   Source type from which the media artifacts are captured. A Chime SDK
     #   Meeting is the only supported source.
@@ -664,60 +379,6 @@ module Aws::ChimeSDKMediaPipelines
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateMediaConcatenationPipelineRequest
-    #   data as a hash:
-    #
-    #       {
-    #         sources: [ # required
-    #           {
-    #             type: "MediaCapturePipeline", # required, accepts MediaCapturePipeline
-    #             media_capture_pipeline_source_configuration: { # required
-    #               media_pipeline_arn: "Arn", # required
-    #               chime_sdk_meeting_configuration: { # required
-    #                 artifacts_configuration: { # required
-    #                   audio: { # required
-    #                     state: "Enabled", # required, accepts Enabled
-    #                   },
-    #                   video: { # required
-    #                     state: "Enabled", # required, accepts Enabled, Disabled
-    #                   },
-    #                   content: { # required
-    #                     state: "Enabled", # required, accepts Enabled, Disabled
-    #                   },
-    #                   data_channel: { # required
-    #                     state: "Enabled", # required, accepts Enabled, Disabled
-    #                   },
-    #                   transcription_messages: { # required
-    #                     state: "Enabled", # required, accepts Enabled, Disabled
-    #                   },
-    #                   meeting_events: { # required
-    #                     state: "Enabled", # required, accepts Enabled, Disabled
-    #                   },
-    #                   composited_video: { # required
-    #                     state: "Enabled", # required, accepts Enabled, Disabled
-    #                   },
-    #                 },
-    #               },
-    #             },
-    #           },
-    #         ],
-    #         sinks: [ # required
-    #           {
-    #             type: "S3Bucket", # required, accepts S3Bucket
-    #             s3_bucket_sink_configuration: { # required
-    #               destination: "Arn", # required
-    #             },
-    #           },
-    #         ],
-    #         client_request_token: "ClientRequestToken",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] sources
     #   An object that specifies the sources for the media concatenation
     #   pipeline.
@@ -766,54 +427,6 @@ module Aws::ChimeSDKMediaPipelines
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateMediaLiveConnectorPipelineRequest
-    #   data as a hash:
-    #
-    #       {
-    #         sources: [ # required
-    #           {
-    #             source_type: "ChimeSdkMeeting", # required, accepts ChimeSdkMeeting
-    #             chime_sdk_meeting_live_connector_configuration: { # required
-    #               arn: "Arn", # required
-    #               mux_type: "AudioWithCompositedVideo", # required, accepts AudioWithCompositedVideo, AudioWithActiveSpeakerVideo
-    #               composited_video: {
-    #                 layout: "GridView", # accepts GridView
-    #                 resolution: "HD", # accepts HD, FHD
-    #                 grid_view_configuration: { # required
-    #                   content_share_layout: "PresenterOnly", # required, accepts PresenterOnly, Horizontal, Vertical
-    #                   presenter_only_configuration: {
-    #                     presenter_position: "TopLeft", # accepts TopLeft, TopRight, BottomLeft, BottomRight
-    #                   },
-    #                 },
-    #               },
-    #               source_configuration: {
-    #                 selected_video_streams: {
-    #                   attendee_ids: ["GuidString"],
-    #                   external_user_ids: ["ExternalUserIdType"],
-    #                 },
-    #               },
-    #             },
-    #           },
-    #         ],
-    #         sinks: [ # required
-    #           {
-    #             sink_type: "RTMP", # required, accepts RTMP
-    #             rtmp_configuration: { # required
-    #               url: "SensitiveString", # required
-    #               audio_channels: "Stereo", # accepts Stereo, Mono
-    #               audio_sample_rate: "AudioSampleRateOption",
-    #             },
-    #           },
-    #         ],
-    #         client_request_token: "ClientRequestToken",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] sources
     #   The media pipeline's data sources.
     #   @return [Array<Types::LiveConnectorSourceConfiguration>]
@@ -858,13 +471,6 @@ module Aws::ChimeSDKMediaPipelines
 
     # The content configuration object's data channel.
     #
-    # @note When making an API call, you may pass DataChannelConcatenationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         state: "Enabled", # required, accepts Enabled, Disabled
-    #       }
-    #
     # @!attribute [rw] state
     #   Enables or disables the configuration object.
     #   @return [String]
@@ -877,13 +483,6 @@ module Aws::ChimeSDKMediaPipelines
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteMediaCapturePipelineRequest
-    #   data as a hash:
-    #
-    #       {
-    #         media_pipeline_id: "GuidString", # required
-    #       }
-    #
     # @!attribute [rw] media_pipeline_id
     #   The ID of the media pipeline being deleted.
     #   @return [String]
@@ -896,13 +495,6 @@ module Aws::ChimeSDKMediaPipelines
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteMediaPipelineRequest
-    #   data as a hash:
-    #
-    #       {
-    #         media_pipeline_id: "GuidString", # required
-    #       }
-    #
     # @!attribute [rw] media_pipeline_id
     #   The ID of the media pipeline to delete.
     #   @return [String]
@@ -938,13 +530,6 @@ module Aws::ChimeSDKMediaPipelines
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetMediaCapturePipelineRequest
-    #   data as a hash:
-    #
-    #       {
-    #         media_pipeline_id: "GuidString", # required
-    #       }
-    #
     # @!attribute [rw] media_pipeline_id
     #   The ID of the pipeline that you want to get.
     #   @return [String]
@@ -969,13 +554,6 @@ module Aws::ChimeSDKMediaPipelines
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetMediaPipelineRequest
-    #   data as a hash:
-    #
-    #       {
-    #         media_pipeline_id: "GuidString", # required
-    #       }
-    #
     # @!attribute [rw] media_pipeline_id
     #   The ID of the pipeline that you want to get.
     #   @return [String]
@@ -1002,16 +580,6 @@ module Aws::ChimeSDKMediaPipelines
 
     # Specifies the type of grid layout.
     #
-    # @note When making an API call, you may pass GridViewConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         content_share_layout: "PresenterOnly", # required, accepts PresenterOnly, Horizontal, Vertical
-    #         presenter_only_configuration: {
-    #           presenter_position: "TopLeft", # accepts TopLeft, TopRight, BottomLeft, BottomRight
-    #         },
-    #       }
-    #
     # @!attribute [rw] content_share_layout
     #   Defines the layout of the video tiles when content sharing is
     #   enabled.
@@ -1030,14 +598,6 @@ module Aws::ChimeSDKMediaPipelines
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListMediaCapturePipelinesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The token used to retrieve the next page of results.
     #   @return [String]
@@ -1073,14 +633,6 @@ module Aws::ChimeSDKMediaPipelines
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListMediaPipelinesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "String",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The token used to retrieve the next page of results.
     #   @return [String]
@@ -1116,13 +668,6 @@ module Aws::ChimeSDKMediaPipelines
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the media pipeline associated with any tags. The ARN
     #   consists of the pipeline's region, resource ID, and pipeline ID.
@@ -1150,15 +695,6 @@ module Aws::ChimeSDKMediaPipelines
 
     # The media pipeline's RTMP configuration object.
     #
-    # @note When making an API call, you may pass LiveConnectorRTMPConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         url: "SensitiveString", # required
-    #         audio_channels: "Stereo", # accepts Stereo, Mono
-    #         audio_sample_rate: "AudioSampleRateOption",
-    #       }
-    #
     # @!attribute [rw] url
     #   The URL of the RTMP configuration.
     #   @return [String]
@@ -1184,18 +720,6 @@ module Aws::ChimeSDKMediaPipelines
 
     # The media pipeline's sink configuration settings.
     #
-    # @note When making an API call, you may pass LiveConnectorSinkConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         sink_type: "RTMP", # required, accepts RTMP
-    #         rtmp_configuration: { # required
-    #           url: "SensitiveString", # required
-    #           audio_channels: "Stereo", # accepts Stereo, Mono
-    #           audio_sample_rate: "AudioSampleRateOption",
-    #         },
-    #       }
-    #
     # @!attribute [rw] sink_type
     #   The sink configuration's sink type.
     #   @return [String]
@@ -1214,33 +738,6 @@ module Aws::ChimeSDKMediaPipelines
     end
 
     # The data source configuration object of a streaming media pipeline.
-    #
-    # @note When making an API call, you may pass LiveConnectorSourceConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         source_type: "ChimeSdkMeeting", # required, accepts ChimeSdkMeeting
-    #         chime_sdk_meeting_live_connector_configuration: { # required
-    #           arn: "Arn", # required
-    #           mux_type: "AudioWithCompositedVideo", # required, accepts AudioWithCompositedVideo, AudioWithActiveSpeakerVideo
-    #           composited_video: {
-    #             layout: "GridView", # accepts GridView
-    #             resolution: "HD", # accepts HD, FHD
-    #             grid_view_configuration: { # required
-    #               content_share_layout: "PresenterOnly", # required, accepts PresenterOnly, Horizontal, Vertical
-    #               presenter_only_configuration: {
-    #                 presenter_position: "TopLeft", # accepts TopLeft, TopRight, BottomLeft, BottomRight
-    #               },
-    #             },
-    #           },
-    #           source_configuration: {
-    #             selected_video_streams: {
-    #               attendee_ids: ["GuidString"],
-    #               external_user_ids: ["ExternalUserIdType"],
-    #             },
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] source_type
     #   The source configuration's media source type.
@@ -1323,38 +820,6 @@ module Aws::ChimeSDKMediaPipelines
     end
 
     # The source configuration object of a media capture pipeline.
-    #
-    # @note When making an API call, you may pass MediaCapturePipelineSourceConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         media_pipeline_arn: "Arn", # required
-    #         chime_sdk_meeting_configuration: { # required
-    #           artifacts_configuration: { # required
-    #             audio: { # required
-    #               state: "Enabled", # required, accepts Enabled
-    #             },
-    #             video: { # required
-    #               state: "Enabled", # required, accepts Enabled, Disabled
-    #             },
-    #             content: { # required
-    #               state: "Enabled", # required, accepts Enabled, Disabled
-    #             },
-    #             data_channel: { # required
-    #               state: "Enabled", # required, accepts Enabled, Disabled
-    #             },
-    #             transcription_messages: { # required
-    #               state: "Enabled", # required, accepts Enabled, Disabled
-    #             },
-    #             meeting_events: { # required
-    #               state: "Enabled", # required, accepts Enabled, Disabled
-    #             },
-    #             composited_video: { # required
-    #               state: "Enabled", # required, accepts Enabled, Disabled
-    #             },
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] media_pipeline_arn
     #   The media pipeline ARN in the configuration object of a media
@@ -1529,13 +994,6 @@ module Aws::ChimeSDKMediaPipelines
 
     # The configuration object for an event concatenation pipeline.
     #
-    # @note When making an API call, you may pass MeetingEventsConcatenationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         state: "Enabled", # required, accepts Enabled, Disabled
-    #       }
-    #
     # @!attribute [rw] state
     #   Enables or disables the configuration object.
     #   @return [String]
@@ -1573,13 +1031,6 @@ module Aws::ChimeSDKMediaPipelines
     end
 
     # Defines the configuration for a presenter only video tile.
-    #
-    # @note When making an API call, you may pass PresenterOnlyConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         presenter_position: "TopLeft", # accepts TopLeft, TopRight, BottomLeft, BottomRight
-    #       }
     #
     # @!attribute [rw] presenter_position
     #   Defines the position of the presenter video tile. Default:
@@ -1619,13 +1070,6 @@ module Aws::ChimeSDKMediaPipelines
 
     # The configuration settings for the S3 bucket.
     #
-    # @note When making an API call, you may pass S3BucketSinkConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         destination: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] destination
     #   The destination URL of the S3 bucket.
     #   @return [String]
@@ -1640,14 +1084,6 @@ module Aws::ChimeSDKMediaPipelines
 
     # The video streams for a specified media pipeline. The total number of
     # video streams can't exceed 25.
-    #
-    # @note When making an API call, you may pass SelectedVideoStreams
-    #   data as a hash:
-    #
-    #       {
-    #         attendee_ids: ["GuidString"],
-    #         external_user_ids: ["ExternalUserIdType"],
-    #       }
     #
     # @!attribute [rw] attendee_ids
     #   The attendee IDs of the streams selected for a media pipeline.
@@ -1714,16 +1150,6 @@ module Aws::ChimeSDKMediaPipelines
 
     # Source configuration for a specified media pipeline.
     #
-    # @note When making an API call, you may pass SourceConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         selected_video_streams: {
-    #           attendee_ids: ["GuidString"],
-    #           external_user_ids: ["ExternalUserIdType"],
-    #         },
-    #       }
-    #
     # @!attribute [rw] selected_video_streams
     #   The selected video streams for a specified media pipeline. The
     #   number of video streams can't exceed 25.
@@ -1738,14 +1164,6 @@ module Aws::ChimeSDKMediaPipelines
     end
 
     # A key/value pair that grants users access to meeting resources.
-    #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
     #
     # @!attribute [rw] key
     #   The key half of a tag.
@@ -1764,19 +1182,6 @@ module Aws::ChimeSDKMediaPipelines
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the media pipeline associated with any tags. The ARN
     #   consists of the pipeline's endpoint region, resource ID, and
@@ -1825,13 +1230,6 @@ module Aws::ChimeSDKMediaPipelines
 
     # The configuration object for concatenating transcription messages.
     #
-    # @note When making an API call, you may pass TranscriptionMessagesConcatenationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         state: "Enabled", # required, accepts Enabled, Disabled
-    #       }
-    #
     # @!attribute [rw] state
     #   Enables or disables the configuration object.
     #   @return [String]
@@ -1867,14 +1265,6 @@ module Aws::ChimeSDKMediaPipelines
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the pipeline that you want to untag.
     #   @return [String]
@@ -1898,14 +1288,6 @@ module Aws::ChimeSDKMediaPipelines
 
     # The video artifact configuration object.
     #
-    # @note When making an API call, you may pass VideoArtifactsConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         state: "Enabled", # required, accepts Enabled, Disabled
-    #         mux_type: "VideoOnly", # accepts VideoOnly
-    #       }
-    #
     # @!attribute [rw] state
     #   Indicates whether the video artifact is enabled or disabled.
     #   @return [String]
@@ -1924,13 +1306,6 @@ module Aws::ChimeSDKMediaPipelines
     end
 
     # The configuration object of a video contacatentation pipeline.
-    #
-    # @note When making an API call, you may pass VideoConcatenationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         state: "Enabled", # required, accepts Enabled, Disabled
-    #       }
     #
     # @!attribute [rw] state
     #   Enables or disables the configuration object.

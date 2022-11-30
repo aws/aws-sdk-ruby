@@ -40,19 +40,6 @@ module Aws::Rekognition
     # version. Assets can also contain validation information that you use
     # to debug a failed model training.
     #
-    # @note When making an API call, you may pass Asset
-    #   data as a hash:
-    #
-    #       {
-    #         ground_truth_manifest: {
-    #           s3_object: {
-    #             bucket: "S3Bucket",
-    #             name: "S3ObjectName",
-    #             version: "S3ObjectVersion",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] ground_truth_manifest
     #   The S3 bucket that contains an Amazon Sagemaker Ground Truth format
     #   manifest file.
@@ -118,14 +105,6 @@ module Aws::Rekognition
     # for black frames that need to be accounted for. For more information,
     # see StartSegmentDetection.
     #
-    # @note When making an API call, you may pass BlackFrame
-    #   data as a hash:
-    #
-    #       {
-    #         max_pixel_threshold: 1.0,
-    #         min_coverage_percentage: 1.0,
-    #       }
-    #
     # @!attribute [rw] max_pixel_threshold
     #   A threshold used to determine the maximum luminance value for a
     #   pixel to be considered black. In a full color range video, luminance
@@ -185,16 +164,6 @@ module Aws::Rekognition
     # `top` values.
     #
     #  </note>
-    #
-    # @note When making an API call, you may pass BoundingBox
-    #   data as a hash:
-    #
-    #       {
-    #         width: 1.0,
-    #         height: 1.0,
-    #         left: 1.0,
-    #         top: 1.0,
-    #       }
     #
     # @!attribute [rw] width
     #   Width of the bounding box as a ratio of the overall image width.
@@ -354,30 +323,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CompareFacesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source_image: { # required
-    #           bytes: "data",
-    #           s3_object: {
-    #             bucket: "S3Bucket",
-    #             name: "S3ObjectName",
-    #             version: "S3ObjectVersion",
-    #           },
-    #         },
-    #         target_image: { # required
-    #           bytes: "data",
-    #           s3_object: {
-    #             bucket: "S3Bucket",
-    #             name: "S3ObjectName",
-    #             version: "S3ObjectVersion",
-    #           },
-    #         },
-    #         similarity_threshold: 1.0,
-    #         quality_filter: "NONE", # accepts NONE, AUTO, LOW, MEDIUM, HIGH
-    #       }
-    #
     # @!attribute [rw] source_image
     #   The input image as base64-encoded bytes or an S3 object. If you use
     #   the AWS CLI to call Amazon Rekognition operations, passing
@@ -572,14 +517,6 @@ module Aws::Rekognition
     # SNS notification is published the first time a pet is detected, as
     # well as an end-of-session summary.
     #
-    # @note When making an API call, you may pass ConnectedHomeSettings
-    #   data as a hash:
-    #
-    #       {
-    #         labels: ["ConnectedHomeLabel"], # required
-    #         min_confidence: 1.0,
-    #       }
-    #
     # @!attribute [rw] labels
     #   Specifies what you want to detect in the video, such as people,
     #   packages, or pets. The current valid labels you can include in this
@@ -600,14 +537,6 @@ module Aws::Rekognition
     # The label detection settings you want to use in your stream processor.
     # This includes the labels you want the stream processor to detect and
     # the minimum confidence level allowed to label objects.
-    #
-    # @note When making an API call, you may pass ConnectedHomeSettingsForUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         labels: ["ConnectedHomeLabel"],
-    #         min_confidence: 1.0,
-    #       }
     #
     # @!attribute [rw] labels
     #   Specifies what you want to detect in the video, such as people,
@@ -647,24 +576,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CopyProjectVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         source_project_arn: "ProjectArn", # required
-    #         source_project_version_arn: "ProjectVersionArn", # required
-    #         destination_project_arn: "ProjectArn", # required
-    #         version_name: "VersionName", # required
-    #         output_config: { # required
-    #           s3_bucket: "S3Bucket",
-    #           s3_key_prefix: "S3KeyPrefix",
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         kms_key_id: "KmsKeyId",
-    #       }
-    #
     # @!attribute [rw] source_project_arn
     #   The ARN of the source project in the trusting AWS account.
     #   @return [String]
@@ -756,16 +667,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateCollectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         collection_id: "CollectionId", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] collection_id
     #   ID for the collection that you are creating.
     #   @return [String]
@@ -804,24 +705,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDatasetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_source: {
-    #           ground_truth_manifest: {
-    #             s3_object: {
-    #               bucket: "S3Bucket",
-    #               name: "S3ObjectName",
-    #               version: "S3ObjectVersion",
-    #             },
-    #           },
-    #           dataset_arn: "DatasetArn",
-    #         },
-    #         dataset_type: "TRAIN", # required, accepts TRAIN, TEST
-    #         project_arn: "ProjectArn", # required
-    #       }
-    #
     # @!attribute [rw] dataset_source
     #   The source files for the dataset. You can specify the ARN of an
     #   existing dataset or specify the Amazon S3 bucket location of an
@@ -859,13 +742,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateProjectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_name: "ProjectName", # required
-    #       }
-    #
     # @!attribute [rw] project_name
     #   The name of the project to create.
     #   @return [String]
@@ -887,49 +763,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateProjectVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_arn: "ProjectArn", # required
-    #         version_name: "VersionName", # required
-    #         output_config: { # required
-    #           s3_bucket: "S3Bucket",
-    #           s3_key_prefix: "S3KeyPrefix",
-    #         },
-    #         training_data: {
-    #           assets: [
-    #             {
-    #               ground_truth_manifest: {
-    #                 s3_object: {
-    #                   bucket: "S3Bucket",
-    #                   name: "S3ObjectName",
-    #                   version: "S3ObjectVersion",
-    #                 },
-    #               },
-    #             },
-    #           ],
-    #         },
-    #         testing_data: {
-    #           assets: [
-    #             {
-    #               ground_truth_manifest: {
-    #                 s3_object: {
-    #                   bucket: "S3Bucket",
-    #                   name: "S3ObjectName",
-    #                   version: "S3ObjectVersion",
-    #                 },
-    #               },
-    #             },
-    #           ],
-    #           auto_create: false,
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         kms_key_id: "KmsKeyId",
-    #       }
-    #
     # @!attribute [rw] project_arn
     #   The ARN of the Amazon Rekognition Custom Labels project that manages
     #   the model that you want to train.
@@ -1010,64 +843,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateStreamProcessorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         input: { # required
-    #           kinesis_video_stream: {
-    #             arn: "KinesisVideoArn",
-    #           },
-    #         },
-    #         output: { # required
-    #           kinesis_data_stream: {
-    #             arn: "KinesisDataArn",
-    #           },
-    #           s3_destination: {
-    #             bucket: "S3Bucket",
-    #             key_prefix: "S3KeyPrefix",
-    #           },
-    #         },
-    #         name: "StreamProcessorName", # required
-    #         settings: { # required
-    #           face_search: {
-    #             collection_id: "CollectionId",
-    #             face_match_threshold: 1.0,
-    #           },
-    #           connected_home: {
-    #             labels: ["ConnectedHomeLabel"], # required
-    #             min_confidence: 1.0,
-    #           },
-    #         },
-    #         role_arn: "RoleArn", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         notification_channel: {
-    #           sns_topic_arn: "SNSTopicArn", # required
-    #         },
-    #         kms_key_id: "KmsKeyId",
-    #         regions_of_interest: [
-    #           {
-    #             bounding_box: {
-    #               width: 1.0,
-    #               height: 1.0,
-    #               left: 1.0,
-    #               top: 1.0,
-    #             },
-    #             polygon: [
-    #               {
-    #                 x: 1.0,
-    #                 y: 1.0,
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         data_sharing_preference: {
-    #           opt_in: false, # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] input
     #   Kinesis video stream stream that provides the source streaming
     #   video. If you are using the AWS CLI, the parameter name is
@@ -1212,13 +987,6 @@ module Aws::Rekognition
     # field of the update entry with the `source-ref` filed of the entry
     # that you want to update. If the `source-ref` field doesn't match an
     # existing entry, the entry is added to dataset as a new entry.
-    #
-    # @note When making an API call, you may pass DatasetChanges
-    #   data as a hash:
-    #
-    #       {
-    #         ground_truth: "data", # required
-    #       }
     #
     # @!attribute [rw] ground_truth
     #   A Base64-encoded binary data object containing one or JSON lines
@@ -1376,20 +1144,6 @@ module Aws::Rekognition
     #
     # For more information, see CreateDataset.
     #
-    # @note When making an API call, you may pass DatasetSource
-    #   data as a hash:
-    #
-    #       {
-    #         ground_truth_manifest: {
-    #           s3_object: {
-    #             bucket: "S3Bucket",
-    #             name: "S3ObjectName",
-    #             version: "S3ObjectVersion",
-    #           },
-    #         },
-    #         dataset_arn: "DatasetArn",
-    #       }
-    #
     # @!attribute [rw] ground_truth_manifest
     #   The S3 bucket that contains an Amazon Sagemaker Ground Truth format
     #   manifest file.
@@ -1435,13 +1189,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteCollectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         collection_id: "CollectionId", # required
-    #       }
-    #
     # @!attribute [rw] collection_id
     #   ID of the collection to delete.
     #   @return [String]
@@ -1462,13 +1209,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDatasetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_arn: "DatasetArn", # required
-    #       }
-    #
     # @!attribute [rw] dataset_arn
     #   The ARN of the Amazon Rekognition Custom Labels dataset that you
     #   want to delete.
@@ -1482,14 +1222,6 @@ module Aws::Rekognition
 
     class DeleteDatasetResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteFacesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         collection_id: "CollectionId", # required
-    #         face_ids: ["FaceId"], # required
-    #       }
-    #
     # @!attribute [rw] collection_id
     #   Collection from which to remove the specific faces.
     #   @return [String]
@@ -1515,15 +1247,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteProjectPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_arn: "ProjectArn", # required
-    #         policy_name: "ProjectPolicyName", # required
-    #         policy_revision_id: "ProjectPolicyRevisionId",
-    #       }
-    #
     # @!attribute [rw] project_arn
     #   The Amazon Resource Name (ARN) of the project that the project
     #   policy you want to delete is attached to.
@@ -1547,13 +1270,6 @@ module Aws::Rekognition
 
     class DeleteProjectPolicyResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteProjectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_arn: "ProjectArn", # required
-    #       }
-    #
     # @!attribute [rw] project_arn
     #   The Amazon Resource Name (ARN) of the project that you want to
     #   delete.
@@ -1575,13 +1291,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteProjectVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_version_arn: "ProjectVersionArn", # required
-    #       }
-    #
     # @!attribute [rw] project_version_arn
     #   The Amazon Resource Name (ARN) of the model version that you want to
     #   delete.
@@ -1603,13 +1312,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteStreamProcessorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "StreamProcessorName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the stream processor you want to delete.
     #   @return [String]
@@ -1622,13 +1324,6 @@ module Aws::Rekognition
 
     class DeleteStreamProcessorResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeCollectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         collection_id: "CollectionId", # required
-    #       }
-    #
     # @!attribute [rw] collection_id
     #   The ID of the collection to describe.
     #   @return [String]
@@ -1671,13 +1366,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDatasetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_arn: "DatasetArn", # required
-    #       }
-    #
     # @!attribute [rw] dataset_arn
     #   The Amazon Resource Name (ARN) of the dataset that you want to
     #   describe.
@@ -1699,16 +1387,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeProjectVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_arn: "ProjectArn", # required
-    #         version_names: ["VersionName"],
-    #         next_token: "ExtendedPaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] project_arn
     #   The Amazon Resource Name (ARN) of the project that contains the
     #   models you want to describe.
@@ -1766,15 +1444,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeProjectsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "ExtendedPaginationToken",
-    #         max_results: 1,
-    #         project_names: ["ProjectName"],
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If the previous response was incomplete (because there is more
     #   results to retrieve), Amazon Rekognition Custom Labels returns a
@@ -1822,13 +1491,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeStreamProcessorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "StreamProcessorName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   Name of the stream processor for which you want information.
     #   @return [String]
@@ -1938,23 +1600,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DetectCustomLabelsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_version_arn: "ProjectVersionArn", # required
-    #         image: { # required
-    #           bytes: "data",
-    #           s3_object: {
-    #             bucket: "S3Bucket",
-    #             name: "S3ObjectName",
-    #             version: "S3ObjectVersion",
-    #           },
-    #         },
-    #         max_results: 1,
-    #         min_confidence: 1.0,
-    #       }
-    #
     # @!attribute [rw] project_version_arn
     #   The ARN of the model version that you want to use.
     #   @return [String]
@@ -2025,21 +1670,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DetectFacesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         image: { # required
-    #           bytes: "data",
-    #           s3_object: {
-    #             bucket: "S3Bucket",
-    #             name: "S3ObjectName",
-    #             version: "S3ObjectVersion",
-    #           },
-    #         },
-    #         attributes: ["DEFAULT"], # accepts DEFAULT, ALL
-    #       }
-    #
     # @!attribute [rw] image
     #   The input image as base64-encoded bytes or an S3 object. If you use
     #   the AWS CLI to call Amazon Rekognition operations, passing
@@ -2184,13 +1814,6 @@ module Aws::Rekognition
 
     # Settings for the IMAGE\_PROPERTIES feature type.
     #
-    # @note When making an API call, you may pass DetectLabelsImagePropertiesSettings
-    #   data as a hash:
-    #
-    #       {
-    #         max_dominant_colors: 1,
-    #       }
-    #
     # @!attribute [rw] max_dominant_colors
     #   The maximum number of dominant colors to return when detecting
     #   labels in an image. The default value is 10.
@@ -2225,34 +1848,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DetectLabelsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         image: { # required
-    #           bytes: "data",
-    #           s3_object: {
-    #             bucket: "S3Bucket",
-    #             name: "S3ObjectName",
-    #             version: "S3ObjectVersion",
-    #           },
-    #         },
-    #         max_labels: 1,
-    #         min_confidence: 1.0,
-    #         features: ["GENERAL_LABELS"], # accepts GENERAL_LABELS, IMAGE_PROPERTIES
-    #         settings: {
-    #           general_labels: {
-    #             label_inclusion_filters: ["GeneralLabelsFilterValue"],
-    #             label_exclusion_filters: ["GeneralLabelsFilterValue"],
-    #             label_category_inclusion_filters: ["GeneralLabelsFilterValue"],
-    #             label_category_exclusion_filters: ["GeneralLabelsFilterValue"],
-    #           },
-    #           image_properties: {
-    #             max_dominant_colors: 1,
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] image
     #   The input image as base64-encoded bytes or an S3 object. If you use
     #   the AWS CLI to call Amazon Rekognition operations, passing image
@@ -2353,21 +1948,6 @@ module Aws::Rekognition
     # or label categories. IMAGE\_PROPERTIES filters allow specification of
     # a maximum number of dominant colors.
     #
-    # @note When making an API call, you may pass DetectLabelsSettings
-    #   data as a hash:
-    #
-    #       {
-    #         general_labels: {
-    #           label_inclusion_filters: ["GeneralLabelsFilterValue"],
-    #           label_exclusion_filters: ["GeneralLabelsFilterValue"],
-    #           label_category_inclusion_filters: ["GeneralLabelsFilterValue"],
-    #           label_category_exclusion_filters: ["GeneralLabelsFilterValue"],
-    #         },
-    #         image_properties: {
-    #           max_dominant_colors: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] general_labels
     #   Contains the specified filters for GENERAL\_LABELS.
     #   @return [Types::GeneralLabelsSettings]
@@ -2383,28 +1963,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DetectModerationLabelsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         image: { # required
-    #           bytes: "data",
-    #           s3_object: {
-    #             bucket: "S3Bucket",
-    #             name: "S3ObjectName",
-    #             version: "S3ObjectVersion",
-    #           },
-    #         },
-    #         min_confidence: 1.0,
-    #         human_loop_config: {
-    #           human_loop_name: "HumanLoopName", # required
-    #           flow_definition_arn: "FlowDefinitionArn", # required
-    #           data_attributes: {
-    #             content_classifiers: ["FreeOfPersonallyIdentifiableInformation"], # accepts FreeOfPersonallyIdentifiableInformation, FreeOfAdultContent
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] image
     #   The input image as base64-encoded bytes or an S3 object. If you use
     #   the AWS CLI to call Amazon Rekognition operations, passing
@@ -2460,24 +2018,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DetectProtectiveEquipmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         image: { # required
-    #           bytes: "data",
-    #           s3_object: {
-    #             bucket: "S3Bucket",
-    #             name: "S3ObjectName",
-    #             version: "S3ObjectVersion",
-    #           },
-    #         },
-    #         summarization_attributes: {
-    #           min_confidence: 1.0, # required
-    #           required_equipment_types: ["FACE_COVER"], # required, accepts FACE_COVER, HAND_COVER, HEAD_COVER
-    #         },
-    #       }
-    #
     # @!attribute [rw] image
     #   The image in which you want to detect PPE on detected persons. The
     #   image can be passed as image bytes or you can reference an image
@@ -2523,33 +2063,6 @@ module Aws::Rekognition
     # at a word’s height, width, and minimum confidence. `RegionOfInterest`
     # lets you set a specific region of the image to look for text in.
     #
-    # @note When making an API call, you may pass DetectTextFilters
-    #   data as a hash:
-    #
-    #       {
-    #         word_filter: {
-    #           min_confidence: 1.0,
-    #           min_bounding_box_height: 1.0,
-    #           min_bounding_box_width: 1.0,
-    #         },
-    #         regions_of_interest: [
-    #           {
-    #             bounding_box: {
-    #               width: 1.0,
-    #               height: 1.0,
-    #               left: 1.0,
-    #               top: 1.0,
-    #             },
-    #             polygon: [
-    #               {
-    #                 x: 1.0,
-    #                 y: 1.0,
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] word_filter
     #   A set of parameters that allow you to filter out certain results
     #   from your returned results.
@@ -2567,43 +2080,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DetectTextRequest
-    #   data as a hash:
-    #
-    #       {
-    #         image: { # required
-    #           bytes: "data",
-    #           s3_object: {
-    #             bucket: "S3Bucket",
-    #             name: "S3ObjectName",
-    #             version: "S3ObjectVersion",
-    #           },
-    #         },
-    #         filters: {
-    #           word_filter: {
-    #             min_confidence: 1.0,
-    #             min_bounding_box_height: 1.0,
-    #             min_bounding_box_width: 1.0,
-    #           },
-    #           regions_of_interest: [
-    #             {
-    #               bounding_box: {
-    #                 width: 1.0,
-    #                 height: 1.0,
-    #                 left: 1.0,
-    #                 top: 1.0,
-    #               },
-    #               polygon: [
-    #                 {
-    #                   x: 1.0,
-    #                   y: 1.0,
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] image
     #   The input image as base64-encoded bytes or an Amazon S3 object. If
     #   you use the AWS CLI to call Amazon Rekognition operations, you
@@ -2645,15 +2121,6 @@ module Aws::Rekognition
     # A set of parameters that allow you to filter out certain results from
     # your returned results.
     #
-    # @note When making an API call, you may pass DetectionFilter
-    #   data as a hash:
-    #
-    #       {
-    #         min_confidence: 1.0,
-    #         min_bounding_box_height: 1.0,
-    #         min_bounding_box_width: 1.0,
-    #       }
-    #
     # @!attribute [rw] min_confidence
     #   Sets the confidence of word detection. Words with detection
     #   confidence below this will be excluded from the result. Values
@@ -2683,13 +2150,6 @@ module Aws::Rekognition
     # A training dataset or a test dataset used in a dataset distribution
     # operation. For more information, see DistributeDatasetEntries.
     #
-    # @note When making an API call, you may pass DistributeDataset
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "DatasetArn", # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the dataset that you want to use.
     #   @return [String]
@@ -2700,17 +2160,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DistributeDatasetEntriesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         datasets: [ # required
-    #           {
-    #             arn: "DatasetArn", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] datasets
     #   The ARNS for the training dataset and test dataset that you want to
     #   use. The datasets must belong to the same project. The test dataset
@@ -3105,14 +2554,6 @@ module Aws::Rekognition
     # face attributes to detect. Defining the settings is required in the
     # request parameter for CreateStreamProcessor.
     #
-    # @note When making an API call, you may pass FaceSearchSettings
-    #   data as a hash:
-    #
-    #       {
-    #         collection_id: "CollectionId",
-    #         face_match_threshold: 1.0,
-    #       }
-    #
     # @!attribute [rw] collection_id
     #   The ID of a collection that contains faces that you want to search
     #   for.
@@ -3169,16 +2610,6 @@ module Aws::Rekognition
     # Filters can be inclusive, exclusive, or a combination of both and can
     # be applied to individual l abels or entire label categories.
     #
-    # @note When making an API call, you may pass GeneralLabelsSettings
-    #   data as a hash:
-    #
-    #       {
-    #         label_inclusion_filters: ["GeneralLabelsFilterValue"],
-    #         label_exclusion_filters: ["GeneralLabelsFilterValue"],
-    #         label_category_inclusion_filters: ["GeneralLabelsFilterValue"],
-    #         label_category_exclusion_filters: ["GeneralLabelsFilterValue"],
-    #       }
-    #
     # @!attribute [rw] label_inclusion_filters
     #   The labels that should be included in the return from DetectLabels.
     #   @return [Array<String>]
@@ -3227,13 +2658,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetCelebrityInfoRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "RekognitionUniqueId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID for the celebrity. You get the celebrity ID from a call to
     #   the RecognizeCelebrities operation, which recognizes celebrities in
@@ -3266,16 +2690,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetCelebrityRecognitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #         sort_by: "ID", # accepts ID, TIMESTAMP
-    #       }
-    #
     # @!attribute [rw] job_id
     #   Job identifier for the required celebrity recognition analysis. You
     #   can get the job identifer from a call to
@@ -3346,16 +2760,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetContentModerationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #         sort_by: "NAME", # accepts NAME, TIMESTAMP
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The identifier for the inappropriate, unwanted, or offensive content
     #   moderation job. Use `JobId` to identify the job in a subsequent call
@@ -3435,15 +2839,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetFaceDetectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] job_id
     #   Unique identifier for the face detection job. The `JobId` is
     #   returned from `StartFaceDetection`.
@@ -3508,16 +2903,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetFaceSearchRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #         sort_by: "INDEX", # accepts INDEX, TIMESTAMP
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The job identifer for the search request. You get the job identifier
     #   from an initial call to `StartFaceSearch`.
@@ -3594,16 +2979,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLabelDetectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #         sort_by: "NAME", # accepts NAME, TIMESTAMP
-    #       }
-    #
     # @!attribute [rw] job_id
     #   Job identifier for the label detection operation for which you want
     #   results returned. You get the job identifer from an initial call to
@@ -3684,16 +3059,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetPersonTrackingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #         sort_by: "INDEX", # accepts INDEX, TIMESTAMP
-    #       }
-    #
     # @!attribute [rw] job_id
     #   The identifier for a job that tracks persons in a video. You get the
     #   `JobId` from a call to `StartPersonTracking`.
@@ -3767,15 +3132,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSegmentDetectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] job_id
     #   Job identifier for the text detection operation for which you want
     #   results returned. You get the job identifer from an initial call to
@@ -3859,15 +3215,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetTextDetectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] job_id
     #   Job identifier for the text detection operation for which you want
     #   results returned. You get the job identifer from an initial call to
@@ -3940,17 +3287,6 @@ module Aws::Rekognition
     # The S3 bucket that contains an Amazon Sagemaker Ground Truth format
     # manifest file.
     #
-    # @note When making an API call, you may pass GroundTruthManifest
-    #   data as a hash:
-    #
-    #       {
-    #         s3_object: {
-    #           bucket: "S3Bucket",
-    #           name: "S3ObjectName",
-    #           version: "S3ObjectVersion",
-    #         },
-    #       }
-    #
     # @!attribute [rw] s3_object
     #   Provides the S3 bucket name and object name.
     #
@@ -3997,17 +3333,6 @@ module Aws::Rekognition
     # conditions is met. You can also set certain attributes of the image
     # before review.
     #
-    # @note When making an API call, you may pass HumanLoopConfig
-    #   data as a hash:
-    #
-    #       {
-    #         human_loop_name: "HumanLoopName", # required
-    #         flow_definition_arn: "FlowDefinitionArn", # required
-    #         data_attributes: {
-    #           content_classifiers: ["FreeOfPersonallyIdentifiableInformation"], # accepts FreeOfPersonallyIdentifiableInformation, FreeOfAdultContent
-    #         },
-    #       }
-    #
     # @!attribute [rw] human_loop_name
     #   The name of the human review used for this image. This should be
     #   kept unique within a region.
@@ -4037,13 +3362,6 @@ module Aws::Rekognition
 
     # Allows you to set attributes of the image. Currently, you can declare
     # an image as free of personally identifiable information.
-    #
-    # @note When making an API call, you may pass HumanLoopDataAttributes
-    #   data as a hash:
-    #
-    #       {
-    #         content_classifiers: ["FreeOfPersonallyIdentifiableInformation"], # accepts FreeOfPersonallyIdentifiableInformation, FreeOfAdultContent
-    #       }
     #
     # @!attribute [rw] content_classifiers
     #   Sets whether the input image is free of personally identifiable
@@ -4114,18 +3432,6 @@ module Aws::Rekognition
     # Amazon Rekognition works with IAM in the Amazon Rekognition Developer
     # Guide.
     #
-    # @note When making an API call, you may pass Image
-    #   data as a hash:
-    #
-    #       {
-    #         bytes: "data",
-    #         s3_object: {
-    #           bucket: "S3Bucket",
-    #           name: "S3ObjectName",
-    #           version: "S3ObjectVersion",
-    #         },
-    #       }
-    #
     # @!attribute [rw] bytes
     #   Blob of image bytes up to 5 MBs.
     #   @return [String]
@@ -4169,25 +3475,6 @@ module Aws::Rekognition
     #
     class ImageTooLargeException < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass IndexFacesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         collection_id: "CollectionId", # required
-    #         image: { # required
-    #           bytes: "data",
-    #           s3_object: {
-    #             bucket: "S3Bucket",
-    #             name: "S3ObjectName",
-    #             version: "S3ObjectVersion",
-    #           },
-    #         },
-    #         external_image_id: "ExternalImageId",
-    #         detection_attributes: ["DEFAULT"], # accepts DEFAULT, ALL
-    #         max_faces: 1,
-    #         quality_filter: "NONE", # accepts NONE, AUTO, LOW, MEDIUM, HIGH
-    #       }
-    #
     # @!attribute [rw] collection_id
     #   The ID of an existing collection to which you want to add the faces
     #   that are detected in the input images.
@@ -4382,13 +3669,6 @@ module Aws::Rekognition
     # more information, see CreateStreamProcessor in the Amazon Rekognition
     # Developer Guide.
     #
-    # @note When making an API call, you may pass KinesisDataStream
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "KinesisDataArn",
-    #       }
-    #
     # @!attribute [rw] arn
     #   ARN of the output Amazon Kinesis Data Streams stream.
     #   @return [String]
@@ -4402,13 +3682,6 @@ module Aws::Rekognition
     # Kinesis video stream stream that provides the source streaming video
     # for a Amazon Rekognition Video stream processor. For more information,
     # see CreateStreamProcessor in the Amazon Rekognition Developer Guide.
-    #
-    # @note When making an API call, you may pass KinesisVideoStream
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "KinesisVideoArn",
-    #       }
     #
     # @!attribute [rw] arn
     #   ARN of the Kinesis video stream stream that streams the source
@@ -4430,14 +3703,6 @@ module Aws::Rekognition
     #
     #
     # [1]: https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_reader_Fragment.html
-    #
-    # @note When making an API call, you may pass KinesisVideoStreamStartSelector
-    #   data as a hash:
-    #
-    #       {
-    #         producer_timestamp: 1,
-    #         fragment_number: "KinesisVideoStreamFragmentNumber",
-    #       }
     #
     # @!attribute [rw] producer_timestamp
     #   The timestamp from the producer corresponding to the fragment, in
@@ -4593,14 +3858,6 @@ module Aws::Rekognition
     #
     class LimitExceededException < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass ListCollectionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   Pagination token from the previous response.
     #   @return [String]
@@ -4641,19 +3898,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDatasetEntriesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_arn: "DatasetArn", # required
-    #         contains_labels: ["DatasetLabel"],
-    #         labeled: false,
-    #         source_ref_contains: "QueryString",
-    #         has_errors: false,
-    #         next_token: "ExtendedPaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] dataset_arn
     #   The Amazon Resource Name (ARN) for the dataset that you want to use.
     #   @return [String]
@@ -4730,15 +3974,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDatasetLabelsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_arn: "DatasetArn", # required
-    #         next_token: "ExtendedPaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] dataset_arn
     #   The Amazon Resource Name (ARN) of the dataset that you want to use.
     #   @return [String]
@@ -4783,15 +4018,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFacesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         collection_id: "CollectionId", # required
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] collection_id
     #   ID of the collection from which to list the faces.
     #   @return [String]
@@ -4838,15 +4064,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListProjectPoliciesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_arn: "ProjectArn", # required
-    #         next_token: "ExtendedPaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] project_arn
     #   The ARN of the project for which you want to list the project
     #   policies.
@@ -4890,14 +4107,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListStreamProcessorsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   If the previous response was incomplete (because there are more
     #   stream processors to retrieve), Amazon Rekognition Video returns a
@@ -4934,13 +4143,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   Amazon Resource Name (ARN) of the model, collection, or stream
     #   processor that contains the tags that you want a list of.
@@ -5050,14 +4252,6 @@ module Aws::Rekognition
     # [1]: https://docs.aws.amazon.com/rekognition/latest/dg/api-video.html
     # [2]: https://docs.aws.amazon.com/rekognition/latest/dg/api-video-roles.html#api-video-roles-all-topics
     #
-    # @note When making an API call, you may pass NotificationChannel
-    #   data as a hash:
-    #
-    #       {
-    #         sns_topic_arn: "SNSTopicArn", # required
-    #         role_arn: "RoleArn", # required
-    #       }
-    #
     # @!attribute [rw] sns_topic_arn
     #   The Amazon SNS topic to which Amazon Rekognition posts the
     #   completion status.
@@ -5076,14 +4270,6 @@ module Aws::Rekognition
     end
 
     # The S3 bucket and folder location where training output is placed.
-    #
-    # @note When making an API call, you may pass OutputConfig
-    #   data as a hash:
-    #
-    #       {
-    #         s3_bucket: "S3Bucket",
-    #         s3_key_prefix: "S3KeyPrefix",
-    #       }
     #
     # @!attribute [rw] s3_bucket
     #   The S3 bucket where training output is placed.
@@ -5201,14 +4387,6 @@ module Aws::Rekognition
     # returned by DetectText and by DetectCustomLabels `Polygon` represents
     # a fine-grained polygon around a detected item. For more information,
     # see Geometry in the Amazon Rekognition Developer Guide.
-    #
-    # @note When making an API call, you may pass Point
-    #   data as a hash:
-    #
-    #       {
-    #         x: 1.0,
-    #         y: 1.0,
-    #       }
     #
     # @!attribute [rw] x
     #   The value of the X coordinate for a point on a `Polygon`.
@@ -5478,14 +4656,6 @@ module Aws::Rekognition
     # the persons in which a determination could not be made. For more
     # information, see ProtectiveEquipmentSummary.
     #
-    # @note When making an API call, you may pass ProtectiveEquipmentSummarizationAttributes
-    #   data as a hash:
-    #
-    #       {
-    #         min_confidence: 1.0, # required
-    #         required_equipment_types: ["FACE_COVER"], # required, accepts FACE_COVER, HAND_COVER, HEAD_COVER
-    #       }
-    #
     # @!attribute [rw] min_confidence
     #   The minimum confidence level for which you want summary information.
     #   The confidence level applies to person detection, body part
@@ -5564,16 +4734,6 @@ module Aws::Rekognition
     #
     class ProvisionedThroughputExceededException < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass PutProjectPolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_arn: "ProjectArn", # required
-    #         policy_name: "ProjectPolicyName", # required
-    #         policy_revision_id: "ProjectPolicyRevisionId",
-    #         policy_document: "ProjectPolicyDocument", # required
-    #       }
-    #
     # @!attribute [rw] project_arn
     #   The Amazon Resource Name (ARN) of the project that the project
     #   policy is attached to.
@@ -5621,20 +4781,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RecognizeCelebritiesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         image: { # required
-    #           bytes: "data",
-    #           s3_object: {
-    #             bucket: "S3Bucket",
-    #             name: "S3ObjectName",
-    #             version: "S3ObjectVersion",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] image
     #   The input image as base64-encoded bytes or an S3 object. If you use
     #   the AWS CLI to call Amazon Rekognition operations, passing
@@ -5707,24 +4853,6 @@ module Aws::Rekognition
     # or label is compared with all regions of the screen. Any object of
     # interest that is more than half in a region is kept in the results.
     #
-    # @note When making an API call, you may pass RegionOfInterest
-    #   data as a hash:
-    #
-    #       {
-    #         bounding_box: {
-    #           width: 1.0,
-    #           height: 1.0,
-    #           left: 1.0,
-    #           top: 1.0,
-    #         },
-    #         polygon: [
-    #           {
-    #             x: 1.0,
-    #             y: 1.0,
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] bounding_box
     #   The box representing a region of interest on screen.
     #   @return [Types::BoundingBox]
@@ -5765,14 +4893,6 @@ module Aws::Rekognition
     # ID of the stream processing session, and labeled timestamps and
     # bounding boxes for detected labels.
     #
-    # @note When making an API call, you may pass S3Destination
-    #   data as a hash:
-    #
-    #       {
-    #         bucket: "S3Bucket",
-    #         key_prefix: "S3KeyPrefix",
-    #       }
-    #
     # @!attribute [rw] bucket
     #   The name of the Amazon S3 bucket you want to associate with the
     #   streaming video project. You must be the owner of the Amazon S3
@@ -5806,15 +4926,6 @@ module Aws::Rekognition
     # Amazon Rekognition works with IAM in the Amazon Rekognition Developer
     # Guide.
     #
-    # @note When making an API call, you may pass S3Object
-    #   data as a hash:
-    #
-    #       {
-    #         bucket: "S3Bucket",
-    #         name: "S3ObjectName",
-    #         version: "S3ObjectVersion",
-    #       }
-    #
     # @!attribute [rw] bucket
     #   Name of the S3 bucket.
     #   @return [String]
@@ -5836,24 +4947,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SearchFacesByImageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         collection_id: "CollectionId", # required
-    #         image: { # required
-    #           bytes: "data",
-    #           s3_object: {
-    #             bucket: "S3Bucket",
-    #             name: "S3ObjectName",
-    #             version: "S3ObjectVersion",
-    #           },
-    #         },
-    #         max_faces: 1,
-    #         face_match_threshold: 1.0,
-    #         quality_filter: "NONE", # accepts NONE, AUTO, LOW, MEDIUM, HIGH
-    #       }
-    #
     # @!attribute [rw] collection_id
     #   ID of the collection to search.
     #   @return [String]
@@ -5935,16 +5028,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SearchFacesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         collection_id: "CollectionId", # required
-    #         face_id: "FaceId", # required
-    #         max_faces: 1,
-    #         face_match_threshold: 1.0,
-    #       }
-    #
     # @!attribute [rw] collection_id
     #   ID of the collection the face belongs to.
     #   @return [String]
@@ -6140,25 +5223,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartCelebrityRecognitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         video: { # required
-    #           s3_object: {
-    #             bucket: "S3Bucket",
-    #             name: "S3ObjectName",
-    #             version: "S3ObjectVersion",
-    #           },
-    #         },
-    #         client_request_token: "ClientRequestToken",
-    #         notification_channel: {
-    #           sns_topic_arn: "SNSTopicArn", # required
-    #           role_arn: "RoleArn", # required
-    #         },
-    #         job_tag: "JobTag",
-    #       }
-    #
     # @!attribute [rw] video
     #   The video in which you want to recognize celebrities. The video must
     #   be stored in an Amazon S3 bucket.
@@ -6207,26 +5271,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartContentModerationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         video: { # required
-    #           s3_object: {
-    #             bucket: "S3Bucket",
-    #             name: "S3ObjectName",
-    #             version: "S3ObjectVersion",
-    #           },
-    #         },
-    #         min_confidence: 1.0,
-    #         client_request_token: "ClientRequestToken",
-    #         notification_channel: {
-    #           sns_topic_arn: "SNSTopicArn", # required
-    #           role_arn: "RoleArn", # required
-    #         },
-    #         job_tag: "JobTag",
-    #       }
-    #
     # @!attribute [rw] video
     #   The video in which you want to detect inappropriate, unwanted, or
     #   offensive content. The video must be stored in an Amazon S3 bucket.
@@ -6286,26 +5330,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartFaceDetectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         video: { # required
-    #           s3_object: {
-    #             bucket: "S3Bucket",
-    #             name: "S3ObjectName",
-    #             version: "S3ObjectVersion",
-    #           },
-    #         },
-    #         client_request_token: "ClientRequestToken",
-    #         notification_channel: {
-    #           sns_topic_arn: "SNSTopicArn", # required
-    #           role_arn: "RoleArn", # required
-    #         },
-    #         face_attributes: "DEFAULT", # accepts DEFAULT, ALL
-    #         job_tag: "JobTag",
-    #       }
-    #
     # @!attribute [rw] video
     #   The video in which you want to detect faces. The video must be
     #   stored in an Amazon S3 bucket.
@@ -6363,27 +5387,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartFaceSearchRequest
-    #   data as a hash:
-    #
-    #       {
-    #         video: { # required
-    #           s3_object: {
-    #             bucket: "S3Bucket",
-    #             name: "S3ObjectName",
-    #             version: "S3ObjectVersion",
-    #           },
-    #         },
-    #         client_request_token: "ClientRequestToken",
-    #         face_match_threshold: 1.0,
-    #         collection_id: "CollectionId", # required
-    #         notification_channel: {
-    #           sns_topic_arn: "SNSTopicArn", # required
-    #           role_arn: "RoleArn", # required
-    #         },
-    #         job_tag: "JobTag",
-    #       }
-    #
     # @!attribute [rw] video
     #   The video you want to search. The video must be stored in an Amazon
     #   S3 bucket.
@@ -6443,26 +5446,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartLabelDetectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         video: { # required
-    #           s3_object: {
-    #             bucket: "S3Bucket",
-    #             name: "S3ObjectName",
-    #             version: "S3ObjectVersion",
-    #           },
-    #         },
-    #         client_request_token: "ClientRequestToken",
-    #         min_confidence: 1.0,
-    #         notification_channel: {
-    #           sns_topic_arn: "SNSTopicArn", # required
-    #           role_arn: "RoleArn", # required
-    #         },
-    #         job_tag: "JobTag",
-    #       }
-    #
     # @!attribute [rw] video
     #   The video in which you want to detect labels. The video must be
     #   stored in an Amazon S3 bucket.
@@ -6523,25 +5506,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartPersonTrackingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         video: { # required
-    #           s3_object: {
-    #             bucket: "S3Bucket",
-    #             name: "S3ObjectName",
-    #             version: "S3ObjectVersion",
-    #           },
-    #         },
-    #         client_request_token: "ClientRequestToken",
-    #         notification_channel: {
-    #           sns_topic_arn: "SNSTopicArn", # required
-    #           role_arn: "RoleArn", # required
-    #         },
-    #         job_tag: "JobTag",
-    #       }
-    #
     # @!attribute [rw] video
     #   The video in which you want to detect people. The video must be
     #   stored in an Amazon S3 bucket.
@@ -6589,15 +5553,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartProjectVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_version_arn: "ProjectVersionArn", # required
-    #         min_inference_units: 1, # required
-    #         max_inference_units: 1,
-    #       }
-    #
     # @!attribute [rw] project_version_arn
     #   The Amazon Resource Name(ARN) of the model version that you want to
     #   start.
@@ -6643,22 +5598,6 @@ module Aws::Rekognition
     # Filters applied to the technical cue or shot detection segments. For
     # more information, see StartSegmentDetection.
     #
-    # @note When making an API call, you may pass StartSegmentDetectionFilters
-    #   data as a hash:
-    #
-    #       {
-    #         technical_cue_filter: {
-    #           min_segment_confidence: 1.0,
-    #           black_frame: {
-    #             max_pixel_threshold: 1.0,
-    #             min_coverage_percentage: 1.0,
-    #           },
-    #         },
-    #         shot_filter: {
-    #           min_segment_confidence: 1.0,
-    #         },
-    #       }
-    #
     # @!attribute [rw] technical_cue_filter
     #   Filters that are specific to technical cues.
     #   @return [Types::StartTechnicalCueDetectionFilter]
@@ -6674,38 +5613,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartSegmentDetectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         video: { # required
-    #           s3_object: {
-    #             bucket: "S3Bucket",
-    #             name: "S3ObjectName",
-    #             version: "S3ObjectVersion",
-    #           },
-    #         },
-    #         client_request_token: "ClientRequestToken",
-    #         notification_channel: {
-    #           sns_topic_arn: "SNSTopicArn", # required
-    #           role_arn: "RoleArn", # required
-    #         },
-    #         job_tag: "JobTag",
-    #         filters: {
-    #           technical_cue_filter: {
-    #             min_segment_confidence: 1.0,
-    #             black_frame: {
-    #               max_pixel_threshold: 1.0,
-    #               min_coverage_percentage: 1.0,
-    #             },
-    #           },
-    #           shot_filter: {
-    #             min_segment_confidence: 1.0,
-    #           },
-    #         },
-    #         segment_types: ["TECHNICAL_CUE"], # required, accepts TECHNICAL_CUE, SHOT
-    #       }
-    #
     # @!attribute [rw] video
     #   Video file stored in an Amazon S3 bucket. Amazon Rekognition video
     #   start operations such as StartLabelDetection use `Video` to specify
@@ -6770,13 +5677,6 @@ module Aws::Rekognition
     # `GetSegmentDetection`. For more information, see
     # StartSegmentDetectionFilters.
     #
-    # @note When making an API call, you may pass StartShotDetectionFilter
-    #   data as a hash:
-    #
-    #       {
-    #         min_segment_confidence: 1.0,
-    #       }
-    #
     # @!attribute [rw] min_segment_confidence
     #   Specifies the minimum confidence that Amazon Rekognition Video must
     #   have in order to return a detected segment. Confidence represents
@@ -6796,22 +5696,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartStreamProcessorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "StreamProcessorName", # required
-    #         start_selector: {
-    #           kvs_stream_start_selector: {
-    #             producer_timestamp: 1,
-    #             fragment_number: "KinesisVideoStreamFragmentNumber",
-    #           },
-    #         },
-    #         stop_selector: {
-    #           max_duration_in_seconds: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the stream processor to start processing.
     #   @return [String]
@@ -6860,17 +5744,6 @@ module Aws::Rekognition
     # Filters for the technical segments returned by GetSegmentDetection.
     # For more information, see StartSegmentDetectionFilters.
     #
-    # @note When making an API call, you may pass StartTechnicalCueDetectionFilter
-    #   data as a hash:
-    #
-    #       {
-    #         min_segment_confidence: 1.0,
-    #         black_frame: {
-    #           max_pixel_threshold: 1.0,
-    #           min_coverage_percentage: 1.0,
-    #         },
-    #       }
-    #
     # @!attribute [rw] min_segment_confidence
     #   Specifies the minimum confidence that Amazon Rekognition Video must
     #   have in order to return a detected segment. Confidence represents
@@ -6904,33 +5777,6 @@ module Aws::Rekognition
     # height, width and minimum confidence. `RegionOfInterest` lets you set
     # a specific region of the screen to look for text in.
     #
-    # @note When making an API call, you may pass StartTextDetectionFilters
-    #   data as a hash:
-    #
-    #       {
-    #         word_filter: {
-    #           min_confidence: 1.0,
-    #           min_bounding_box_height: 1.0,
-    #           min_bounding_box_width: 1.0,
-    #         },
-    #         regions_of_interest: [
-    #           {
-    #             bounding_box: {
-    #               width: 1.0,
-    #               height: 1.0,
-    #               left: 1.0,
-    #               top: 1.0,
-    #             },
-    #             polygon: [
-    #               {
-    #                 x: 1.0,
-    #                 y: 1.0,
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] word_filter
     #   Filters focusing on qualities of the text, such as confidence or
     #   size.
@@ -6948,48 +5794,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartTextDetectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         video: { # required
-    #           s3_object: {
-    #             bucket: "S3Bucket",
-    #             name: "S3ObjectName",
-    #             version: "S3ObjectVersion",
-    #           },
-    #         },
-    #         client_request_token: "ClientRequestToken",
-    #         notification_channel: {
-    #           sns_topic_arn: "SNSTopicArn", # required
-    #           role_arn: "RoleArn", # required
-    #         },
-    #         job_tag: "JobTag",
-    #         filters: {
-    #           word_filter: {
-    #             min_confidence: 1.0,
-    #             min_bounding_box_height: 1.0,
-    #             min_bounding_box_width: 1.0,
-    #           },
-    #           regions_of_interest: [
-    #             {
-    #               bounding_box: {
-    #                 width: 1.0,
-    #                 height: 1.0,
-    #                 left: 1.0,
-    #                 top: 1.0,
-    #               },
-    #               polygon: [
-    #                 {
-    #                   x: 1.0,
-    #                   y: 1.0,
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] video
     #   Video file stored in an Amazon S3 bucket. Amazon Rekognition video
     #   start operations such as StartLabelDetection use `Video` to specify
@@ -7053,13 +5857,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopProjectVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_version_arn: "ProjectVersionArn", # required
-    #       }
-    #
     # @!attribute [rw] project_version_arn
     #   The Amazon Resource Name (ARN) of the model version that you want to
     #   delete.
@@ -7084,13 +5881,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopStreamProcessorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "StreamProcessorName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of a stream processor created by CreateStreamProcessor.
     #   @return [String]
@@ -7106,16 +5896,6 @@ module Aws::Rekognition
     # This is a required parameter for label detection stream processors and
     # should not be used to start a face search stream processor.
     #
-    # @note When making an API call, you may pass StreamProcessingStartSelector
-    #   data as a hash:
-    #
-    #       {
-    #         kvs_stream_start_selector: {
-    #           producer_timestamp: 1,
-    #           fragment_number: "KinesisVideoStreamFragmentNumber",
-    #         },
-    #       }
-    #
     # @!attribute [rw] kvs_stream_start_selector
     #   Specifies the starting point in the stream to start processing. This
     #   can be done with a producer timestamp or a fragment number in a
@@ -7130,13 +5910,6 @@ module Aws::Rekognition
 
     # Specifies when to stop processing the stream. You can specify a
     # maximum amount of time to process the video.
-    #
-    # @note When making an API call, you may pass StreamProcessingStopSelector
-    #   data as a hash:
-    #
-    #       {
-    #         max_duration_in_seconds: 1,
-    #       }
     #
     # @!attribute [rw] max_duration_in_seconds
     #   Specifies the maximum amount of time in seconds that you want the
@@ -7177,13 +5950,6 @@ module Aws::Rekognition
     # level or on a per-stream basis. Note that if you opt out at the
     # account level this setting is ignored on individual streams.
     #
-    # @note When making an API call, you may pass StreamProcessorDataSharingPreference
-    #   data as a hash:
-    #
-    #       {
-    #         opt_in: false, # required
-    #       }
-    #
     # @!attribute [rw] opt_in
     #   If this option is set to true, you choose to share data with
     #   Rekognition to improve model performance.
@@ -7196,15 +5962,6 @@ module Aws::Rekognition
     end
 
     # Information about the source streaming video.
-    #
-    # @note When making an API call, you may pass StreamProcessorInput
-    #   data as a hash:
-    #
-    #       {
-    #         kinesis_video_stream: {
-    #           arn: "KinesisVideoArn",
-    #         },
-    #       }
     #
     # @!attribute [rw] kinesis_video_stream
     #   The Kinesis video stream input stream for the source streaming
@@ -7231,13 +5988,6 @@ module Aws::Rekognition
     # Amazon Rekognition also publishes an an end-of-session notification
     # with a summary when the stream processing session is complete.
     #
-    # @note When making an API call, you may pass StreamProcessorNotificationChannel
-    #   data as a hash:
-    #
-    #       {
-    #         sns_topic_arn: "SNSTopicArn", # required
-    #       }
-    #
     # @!attribute [rw] sns_topic_arn
     #   The Amazon Resource Number (ARN) of the Amazon Amazon Simple
     #   Notification Service topic to which Amazon Rekognition posts the
@@ -7254,19 +6004,6 @@ module Aws::Rekognition
     # Amazon Rekognition Video stream processor streams the results of a
     # video analysis. For more information, see CreateStreamProcessor in the
     # Amazon Rekognition Developer Guide.
-    #
-    # @note When making an API call, you may pass StreamProcessorOutput
-    #   data as a hash:
-    #
-    #       {
-    #         kinesis_data_stream: {
-    #           arn: "KinesisDataArn",
-    #         },
-    #         s3_destination: {
-    #           bucket: "S3Bucket",
-    #           key_prefix: "S3KeyPrefix",
-    #         },
-    #       }
     #
     # @!attribute [rw] kinesis_data_stream
     #   The Amazon Kinesis Data Streams stream to which the Amazon
@@ -7289,20 +6026,6 @@ module Aws::Rekognition
     # Rekognition stream processor. You can use `FaceSearch` to recognize
     # faces in a streaming video, or you can use `ConnectedHome` to detect
     # labels.
-    #
-    # @note When making an API call, you may pass StreamProcessorSettings
-    #   data as a hash:
-    #
-    #       {
-    #         face_search: {
-    #           collection_id: "CollectionId",
-    #           face_match_threshold: 1.0,
-    #         },
-    #         connected_home: {
-    #           labels: ["ConnectedHomeLabel"], # required
-    #           min_confidence: 1.0,
-    #         },
-    #       }
     #
     # @!attribute [rw] face_search
     #   Face search settings to use on a streaming video.
@@ -7332,16 +6055,6 @@ module Aws::Rekognition
     # The stream processor settings that you want to update. `ConnectedHome`
     # settings can be updated to detect different labels with a different
     # minimum confidence.
-    #
-    # @note When making an API call, you may pass StreamProcessorSettingsForUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         connected_home_for_update: {
-    #           labels: ["ConnectedHomeLabel"],
-    #           min_confidence: 1.0,
-    #         },
-    #       }
     #
     # @!attribute [rw] connected_home_for_update
     #   The label detection settings you want to use for your stream
@@ -7398,16 +6111,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   Amazon Resource Name (ARN) of the model, collection, or stream
     #   processor that you want to assign the tags to.
@@ -7448,24 +6151,6 @@ module Aws::Rekognition
     # The dataset used for testing. Optionally, if `AutoCreate` is set,
     # Amazon Rekognition Custom Labels uses the training dataset to create a
     # test dataset with a temporary split of the training dataset.
-    #
-    # @note When making an API call, you may pass TestingData
-    #   data as a hash:
-    #
-    #       {
-    #         assets: [
-    #           {
-    #             ground_truth_manifest: {
-    #               s3_object: {
-    #                 bucket: "S3Bucket",
-    #                 name: "S3ObjectName",
-    #                 version: "S3ObjectVersion",
-    #               },
-    #             },
-    #           },
-    #         ],
-    #         auto_create: false,
-    #       }
     #
     # @!attribute [rw] assets
     #   The assets used for testing.
@@ -7594,23 +6279,6 @@ module Aws::Rekognition
 
     # The dataset used for training.
     #
-    # @note When making an API call, you may pass TrainingData
-    #   data as a hash:
-    #
-    #       {
-    #         assets: [
-    #           {
-    #             ground_truth_manifest: {
-    #               s3_object: {
-    #                 bucket: "S3Bucket",
-    #                 name: "S3ObjectName",
-    #                 version: "S3ObjectVersion",
-    #               },
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] assets
     #   A Sagemaker GroundTruth manifest file that contains the training
     #   images (assets).
@@ -7682,14 +6350,6 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   Amazon Resource Name (ARN) of the model, collection, or stream
     #   processor that you want to remove the tags from.
@@ -7708,16 +6368,6 @@ module Aws::Rekognition
 
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateDatasetEntriesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_arn: "DatasetArn", # required
-    #         changes: { # required
-    #           ground_truth: "data", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] dataset_arn
     #   The Amazon Resource Name (ARN) of the dataset that you want to
     #   update.
@@ -7736,39 +6386,6 @@ module Aws::Rekognition
 
     class UpdateDatasetEntriesResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateStreamProcessorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "StreamProcessorName", # required
-    #         settings_for_update: {
-    #           connected_home_for_update: {
-    #             labels: ["ConnectedHomeLabel"],
-    #             min_confidence: 1.0,
-    #           },
-    #         },
-    #         regions_of_interest_for_update: [
-    #           {
-    #             bounding_box: {
-    #               width: 1.0,
-    #               height: 1.0,
-    #               left: 1.0,
-    #               top: 1.0,
-    #             },
-    #             polygon: [
-    #               {
-    #                 x: 1.0,
-    #                 y: 1.0,
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         data_sharing_preference_for_update: {
-    #           opt_in: false, # required
-    #         },
-    #         parameters_to_delete: ["ConnectedHomeMinConfidence"], # accepts ConnectedHomeMinConfidence, RegionsOfInterest
-    #       }
-    #
     # @!attribute [rw] name
     #   Name of the stream processor that you want to update.
     #   @return [String]
@@ -7838,17 +6455,6 @@ module Aws::Rekognition
     # start operations such as StartLabelDetection use `Video` to specify a
     # video for analysis. The supported file formats are .mp4, .mov and
     # .avi.
-    #
-    # @note When making an API call, you may pass Video
-    #   data as a hash:
-    #
-    #       {
-    #         s3_object: {
-    #           bucket: "S3Bucket",
-    #           name: "S3ObjectName",
-    #           version: "S3ObjectVersion",
-    #         },
-    #       }
     #
     # @!attribute [rw] s3_object
     #   The Amazon S3 bucket name and file name for the video.

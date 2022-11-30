@@ -17,37 +17,6 @@ module Aws::Textract
     #
     class AccessDeniedException < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass AnalyzeDocumentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         document: { # required
-    #           bytes: "data",
-    #           s3_object: {
-    #             bucket: "S3Bucket",
-    #             name: "S3ObjectName",
-    #             version: "S3ObjectVersion",
-    #           },
-    #         },
-    #         feature_types: ["TABLES"], # required, accepts TABLES, FORMS, QUERIES, SIGNATURES
-    #         human_loop_config: {
-    #           human_loop_name: "HumanLoopName", # required
-    #           flow_definition_arn: "FlowDefinitionArn", # required
-    #           data_attributes: {
-    #             content_classifiers: ["FreeOfPersonallyIdentifiableInformation"], # accepts FreeOfPersonallyIdentifiableInformation, FreeOfAdultContent
-    #           },
-    #         },
-    #         queries_config: {
-    #           queries: [ # required
-    #             {
-    #               text: "QueryInput", # required
-    #               alias: "QueryInput",
-    #               pages: ["QueryPage"],
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] document
     #   The input document as base64-encoded bytes or an Amazon S3 object.
     #   If you use the AWS CLI to call Amazon Textract operations, you
@@ -120,20 +89,6 @@ module Aws::Textract
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AnalyzeExpenseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         document: { # required
-    #           bytes: "data",
-    #           s3_object: {
-    #             bucket: "S3Bucket",
-    #             name: "S3ObjectName",
-    #             version: "S3ObjectVersion",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] document
     #   The input document, either as bytes or as an S3 object.
     #
@@ -210,22 +165,6 @@ module Aws::Textract
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AnalyzeIDRequest
-    #   data as a hash:
-    #
-    #       {
-    #         document_pages: [ # required
-    #           {
-    #             bytes: "data",
-    #             s3_object: {
-    #               bucket: "S3Bucket",
-    #               name: "S3ObjectName",
-    #               version: "S3ObjectVersion",
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] document_pages
     #   The document being passed to AnalyzeID.
     #   @return [Array<Types::Document>]
@@ -511,20 +450,6 @@ module Aws::Textract
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DetectDocumentTextRequest
-    #   data as a hash:
-    #
-    #       {
-    #         document: { # required
-    #           bytes: "data",
-    #           s3_object: {
-    #             bucket: "S3Bucket",
-    #             name: "S3ObjectName",
-    #             version: "S3ObjectVersion",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] document
     #   The input document as base64-encoded bytes or an Amazon S3 object.
     #   If you use the AWS CLI to call Amazon Textract operations, you
@@ -606,18 +531,6 @@ module Aws::Textract
     # For Amazon Textract to process an S3 object, the user must have
     # permission to access the S3 object.
     #
-    # @note When making an API call, you may pass Document
-    #   data as a hash:
-    #
-    #       {
-    #         bytes: "data",
-    #         s3_object: {
-    #           bucket: "S3Bucket",
-    #           name: "S3ObjectName",
-    #           version: "S3ObjectVersion",
-    #         },
-    #       }
-    #
     # @!attribute [rw] bytes
     #   A blob of base64-encoded document bytes. The maximum size of a
     #   document that's provided in a blob of bytes is 5 MB. The document
@@ -677,17 +590,6 @@ module Aws::Textract
     #
     # The input document can be an image file in JPEG or PNG format. It can
     # also be a file in PDF format.
-    #
-    # @note When making an API call, you may pass DocumentLocation
-    #   data as a hash:
-    #
-    #       {
-    #         s3_object: {
-    #           bucket: "S3Bucket",
-    #           name: "S3ObjectName",
-    #           version: "S3ObjectVersion",
-    #         },
-    #       }
     #
     # @!attribute [rw] s3_object
     #   The Amazon S3 bucket that contains the input document.
@@ -963,15 +865,6 @@ module Aws::Textract
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDocumentAnalysisRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] job_id
     #   A unique identifier for the text-detection job. The `JobId` is
     #   returned from `StartDocumentAnalysis`. A `JobId` value is only valid
@@ -1049,15 +942,6 @@ module Aws::Textract
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDocumentTextDetectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] job_id
     #   A unique identifier for the text detection job. The `JobId` is
     #   returned from `StartDocumentTextDetection`. A `JobId` value is only
@@ -1135,15 +1019,6 @@ module Aws::Textract
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetExpenseAnalysisRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] job_id
     #   A unique identifier for the text detection job. The `JobId` is
     #   returned from `StartExpenseAnalysis`. A `JobId` value is only valid
@@ -1222,15 +1097,6 @@ module Aws::Textract
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLendingAnalysisRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #         max_results: 1,
-    #         next_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] job_id
     #   A unique identifier for the lending or text-detection job. The
     #   `JobId` is returned from `StartLendingAnalysis`. A `JobId` value is
@@ -1307,13 +1173,6 @@ module Aws::Textract
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLendingAnalysisSummaryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_id: "JobId", # required
-    #       }
-    #
     # @!attribute [rw] job_id
     #   A unique identifier for the lending or text-detection job. The
     #   `JobId` is returned from StartLendingAnalysis. A `JobId` value is
@@ -1397,17 +1256,6 @@ module Aws::Textract
     # of the conditions is met. You can also set certain attributes of the
     # image before review.
     #
-    # @note When making an API call, you may pass HumanLoopConfig
-    #   data as a hash:
-    #
-    #       {
-    #         human_loop_name: "HumanLoopName", # required
-    #         flow_definition_arn: "FlowDefinitionArn", # required
-    #         data_attributes: {
-    #           content_classifiers: ["FreeOfPersonallyIdentifiableInformation"], # accepts FreeOfPersonallyIdentifiableInformation, FreeOfAdultContent
-    #         },
-    #       }
-    #
     # @!attribute [rw] human_loop_name
     #   The name of the human workflow used for this image. This should be
     #   kept unique within a region.
@@ -1434,13 +1282,6 @@ module Aws::Textract
     # Allows you to set attributes of the image. Currently, you can declare
     # an image as free of personally identifiable information and adult
     # content.
-    #
-    # @note When making an API call, you may pass HumanLoopDataAttributes
-    #   data as a hash:
-    #
-    #       {
-    #         content_classifiers: ["FreeOfPersonallyIdentifiableInformation"], # accepts FreeOfPersonallyIdentifiableInformation, FreeOfAdultContent
-    #       }
     #
     # @!attribute [rw] content_classifiers
     #   Sets whether the input image is free of personally identifiable
@@ -1777,14 +1618,6 @@ module Aws::Textract
     # Amazon Textract publishes the completion status of an asynchronous
     # document operation.
     #
-    # @note When making an API call, you may pass NotificationChannel
-    #   data as a hash:
-    #
-    #       {
-    #         sns_topic_arn: "SNSTopicArn", # required
-    #         role_arn: "RoleArn", # required
-    #       }
-    #
     # @!attribute [rw] sns_topic_arn
     #   The Amazon SNS topic that Amazon Textract posts the completion
     #   status to.
@@ -1831,14 +1664,6 @@ module Aws::Textract
     #
     # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
     # [2]: https://aws.amazon.com/compliance/data-privacy-faq/
-    #
-    # @note When making an API call, you may pass OutputConfig
-    #   data as a hash:
-    #
-    #       {
-    #         s3_bucket: "S3Bucket", # required
-    #         s3_prefix: "S3ObjectName",
-    #       }
     #
     # @!attribute [rw] s3_bucket
     #   The name of the bucket your output will go to.
@@ -1938,19 +1763,6 @@ module Aws::Textract
     #
     class ProvisionedThroughputExceededException < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass QueriesConfig
-    #   data as a hash:
-    #
-    #       {
-    #         queries: [ # required
-    #           {
-    #             text: "QueryInput", # required
-    #             alias: "QueryInput",
-    #             pages: ["QueryPage"],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] queries
     #   @return [Array<Types::Query>]
     #
@@ -1964,15 +1776,6 @@ module Aws::Textract
 
     # Each query contains the question you want to ask in the Text and the
     # alias you want to associate.
-    #
-    # @note When making an API call, you may pass Query
-    #   data as a hash:
-    #
-    #       {
-    #         text: "QueryInput", # required
-    #         alias: "QueryInput",
-    #         pages: ["QueryPage"],
-    #       }
     #
     # @!attribute [rw] text
     #   Question that Amazon Textract will apply to the document. An example
@@ -2052,15 +1855,6 @@ module Aws::Textract
     # For Amazon Textract to process a file in an S3 bucket, the user must
     # have permission to access the S3 bucket and file.
     #
-    # @note When making an API call, you may pass S3Object
-    #   data as a hash:
-    #
-    #       {
-    #         bucket: "S3Bucket",
-    #         name: "S3ObjectName",
-    #         version: "S3ObjectVersion",
-    #       }
-    #
     # @!attribute [rw] bucket
     #   The name of the S3 bucket. Note that the # character is not valid in
     #   the file name.
@@ -2131,40 +1925,6 @@ module Aws::Textract
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartDocumentAnalysisRequest
-    #   data as a hash:
-    #
-    #       {
-    #         document_location: { # required
-    #           s3_object: {
-    #             bucket: "S3Bucket",
-    #             name: "S3ObjectName",
-    #             version: "S3ObjectVersion",
-    #           },
-    #         },
-    #         feature_types: ["TABLES"], # required, accepts TABLES, FORMS, QUERIES, SIGNATURES
-    #         client_request_token: "ClientRequestToken",
-    #         job_tag: "JobTag",
-    #         notification_channel: {
-    #           sns_topic_arn: "SNSTopicArn", # required
-    #           role_arn: "RoleArn", # required
-    #         },
-    #         output_config: {
-    #           s3_bucket: "S3Bucket", # required
-    #           s3_prefix: "S3ObjectName",
-    #         },
-    #         kms_key_id: "KMSKeyId",
-    #         queries_config: {
-    #           queries: [ # required
-    #             {
-    #               text: "QueryInput", # required
-    #               alias: "QueryInput",
-    #               pages: ["QueryPage"],
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] document_location
     #   The location of the document to be processed.
     #   @return [Types::DocumentLocation]
@@ -2250,30 +2010,6 @@ module Aws::Textract
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartDocumentTextDetectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         document_location: { # required
-    #           s3_object: {
-    #             bucket: "S3Bucket",
-    #             name: "S3ObjectName",
-    #             version: "S3ObjectVersion",
-    #           },
-    #         },
-    #         client_request_token: "ClientRequestToken",
-    #         job_tag: "JobTag",
-    #         notification_channel: {
-    #           sns_topic_arn: "SNSTopicArn", # required
-    #           role_arn: "RoleArn", # required
-    #         },
-    #         output_config: {
-    #           s3_bucket: "S3Bucket", # required
-    #           s3_prefix: "S3ObjectName",
-    #         },
-    #         kms_key_id: "KMSKeyId",
-    #       }
-    #
     # @!attribute [rw] document_location
     #   The location of the document to be processed.
     #   @return [Types::DocumentLocation]
@@ -2345,30 +2081,6 @@ module Aws::Textract
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartExpenseAnalysisRequest
-    #   data as a hash:
-    #
-    #       {
-    #         document_location: { # required
-    #           s3_object: {
-    #             bucket: "S3Bucket",
-    #             name: "S3ObjectName",
-    #             version: "S3ObjectVersion",
-    #           },
-    #         },
-    #         client_request_token: "ClientRequestToken",
-    #         job_tag: "JobTag",
-    #         notification_channel: {
-    #           sns_topic_arn: "SNSTopicArn", # required
-    #           role_arn: "RoleArn", # required
-    #         },
-    #         output_config: {
-    #           s3_bucket: "S3Bucket", # required
-    #           s3_prefix: "S3ObjectName",
-    #         },
-    #         kms_key_id: "KMSKeyId",
-    #       }
-    #
     # @!attribute [rw] document_location
     #   The location of the document to be processed.
     #   @return [Types::DocumentLocation]
@@ -2439,30 +2151,6 @@ module Aws::Textract
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartLendingAnalysisRequest
-    #   data as a hash:
-    #
-    #       {
-    #         document_location: { # required
-    #           s3_object: {
-    #             bucket: "S3Bucket",
-    #             name: "S3ObjectName",
-    #             version: "S3ObjectVersion",
-    #           },
-    #         },
-    #         client_request_token: "ClientRequestToken",
-    #         job_tag: "JobTag",
-    #         notification_channel: {
-    #           sns_topic_arn: "SNSTopicArn", # required
-    #           role_arn: "RoleArn", # required
-    #         },
-    #         output_config: {
-    #           s3_bucket: "S3Bucket", # required
-    #           s3_prefix: "S3ObjectName",
-    #         },
-    #         kms_key_id: "KMSKeyId",
-    #       }
-    #
     # @!attribute [rw] document_location
     #   The Amazon S3 bucket that contains the document to be processed.
     #   It's used by asynchronous operations.

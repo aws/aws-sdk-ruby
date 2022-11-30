@@ -24,16 +24,6 @@ module Aws::KinesisVideoSignalingChannels
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetIceServerConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_arn: "ResourceARN", # required
-    #         client_id: "ClientId",
-    #         service: "TURN", # accepts TURN
-    #         username: "Username",
-    #       }
-    #
     # @!attribute [rw] channel_arn
     #   The ARN of the signaling channel to be used for the peer-to-peer
     #   connection between configured peers.
@@ -165,15 +155,6 @@ module Aws::KinesisVideoSignalingChannels
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SendAlexaOfferToMasterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_arn: "ResourceARN", # required
-    #         sender_client_id: "ClientId", # required
-    #         message_payload: "MessagePayload", # required
-    #       }
-    #
     # @!attribute [rw] channel_arn
     #   The ARN of the signaling channel by which Alexa and the master peer
     #   communicate.

@@ -12,15 +12,6 @@ module Aws::AppRegistry
 
     # Includes all of the Service Catalog AppRegistry settings.
     #
-    # @note When making an API call, you may pass AppRegistryConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         tag_query_configuration: {
-    #           tag_key: "TagKeyConfig",
-    #         },
-    #       }
-    #
     # @!attribute [rw] tag_query_configuration
     #   Includes the definition of a `tagQuery`.
     #   @return [Types::TagQueryConfiguration]
@@ -127,14 +118,6 @@ module Aws::AppRegistry
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateAttributeGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application: "ApplicationSpecifier", # required
-    #         attribute_group: "AttributeGroupSpecifier", # required
-    #       }
-    #
     # @!attribute [rw] application
     #   The name or ID of the application.
     #   @return [String]
@@ -172,15 +155,6 @@ module Aws::AppRegistry
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application: "ApplicationSpecifier", # required
-    #         resource_type: "CFN_STACK", # required, accepts CFN_STACK, RESOURCE_TAG_VALUE
-    #         resource: "ResourceSpecifier", # required
-    #       }
-    #
     # @!attribute [rw] application
     #   The name or ID of the application.
     #   @return [String]
@@ -359,18 +333,6 @@ module Aws::AppRegistry
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         description: "Description",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         client_token: "ClientToken", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the application. The name must be unique in the region
     #   in which you are creating the application.
@@ -419,19 +381,6 @@ module Aws::AppRegistry
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAttributeGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         description: "Description",
-    #         attributes: "Attributes", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         client_token: "ClientToken", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the attribute group.
     #   @return [String]
@@ -486,13 +435,6 @@ module Aws::AppRegistry
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application: "ApplicationSpecifier", # required
-    #       }
-    #
     # @!attribute [rw] application
     #   The name or ID of the application.
     #   @return [String]
@@ -517,13 +459,6 @@ module Aws::AppRegistry
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAttributeGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         attribute_group: "AttributeGroupSpecifier", # required
-    #       }
-    #
     # @!attribute [rw] attribute_group
     #   The name or ID of the attribute group that holds the attributes to
     #   describe the application.
@@ -549,14 +484,6 @@ module Aws::AppRegistry
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateAttributeGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application: "ApplicationSpecifier", # required
-    #         attribute_group: "AttributeGroupSpecifier", # required
-    #       }
-    #
     # @!attribute [rw] application
     #   The name or ID of the application.
     #   @return [String]
@@ -592,15 +519,6 @@ module Aws::AppRegistry
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application: "ApplicationSpecifier", # required
-    #         resource_type: "CFN_STACK", # required, accepts CFN_STACK, RESOURCE_TAG_VALUE
-    #         resource: "ResourceSpecifier", # required
-    #       }
-    #
     # @!attribute [rw] application
     #   The name or ID of the application.
     #   @return [String]
@@ -640,13 +558,6 @@ module Aws::AppRegistry
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application: "ApplicationSpecifier", # required
-    #       }
-    #
     # @!attribute [rw] application
     #   The name or ID of the application.
     #   @return [String]
@@ -717,15 +628,6 @@ module Aws::AppRegistry
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAssociatedResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application: "ApplicationSpecifier", # required
-    #         resource_type: "CFN_STACK", # required, accepts CFN_STACK, RESOURCE_TAG_VALUE
-    #         resource: "ResourceSpecifier", # required
-    #       }
-    #
     # @!attribute [rw] application
     #   The name or ID of the application.
     #   @return [String]
@@ -760,13 +662,6 @@ module Aws::AppRegistry
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAttributeGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         attribute_group: "AttributeGroupSpecifier", # required
-    #       }
-    #
     # @!attribute [rw] attribute_group
     #   The name or ID of the attribute group that holds the attributes to
     #   describe the application.
@@ -872,14 +767,6 @@ module Aws::AppRegistry
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListApplicationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The token to use to get the next page of results after a previous
     #   API call.
@@ -918,15 +805,6 @@ module Aws::AppRegistry
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAssociatedAttributeGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application: "ApplicationSpecifier", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] application
     #   The name or ID of the application.
     #   @return [String]
@@ -970,15 +848,6 @@ module Aws::AppRegistry
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAssociatedResourcesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application: "ApplicationSpecifier", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] application
     #   The name or ID of the application.
     #   @return [String]
@@ -1022,15 +891,6 @@ module Aws::AppRegistry
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAttributeGroupsForApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application: "ApplicationSpecifier", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] application
     #   The name or ID of the application.
     #   @return [String]
@@ -1074,14 +934,6 @@ module Aws::AppRegistry
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAttributeGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The token to use to get the next page of results after a previous
     #   API call.
@@ -1120,13 +972,6 @@ module Aws::AppRegistry
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon resource name (ARN) that specifies the resource.
     #   @return [String]
@@ -1151,17 +996,6 @@ module Aws::AppRegistry
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         configuration: { # required
-    #           tag_query_configuration: {
-    #             tag_key: "TagKeyConfig",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] configuration
     #   Associates a `TagKey` configuration to an account.
     #   @return [Types::AppRegistryConfiguration]
@@ -1326,14 +1160,6 @@ module Aws::AppRegistry
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SyncResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_type: "CFN_STACK", # required, accepts CFN_STACK, RESOURCE_TAG_VALUE
-    #         resource: "ResourceSpecifier", # required
-    #       }
-    #
     # @!attribute [rw] resource_type
     #   The type of resource of which the application will be associated.
     #   @return [String]
@@ -1379,13 +1205,6 @@ module Aws::AppRegistry
     # The definition of `tagQuery`. Specifies which resources are associated
     # with an application.
     #
-    # @note When making an API call, you may pass TagQueryConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         tag_key: "TagKeyConfig",
-    #       }
-    #
     # @!attribute [rw] tag_key
     #   Condition in the IAM policy that associates resources to an
     #   application.
@@ -1399,16 +1218,6 @@ module Aws::AppRegistry
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon resource name (ARN) that specifies the resource.
     #   @return [String]
@@ -1430,14 +1239,6 @@ module Aws::AppRegistry
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon resource name (ARN) that specifies the resource.
     #   @return [String]
@@ -1459,15 +1260,6 @@ module Aws::AppRegistry
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application: "ApplicationSpecifier", # required
-    #         name: "Name",
-    #         description: "Description",
-    #       }
-    #
     # @!attribute [rw] application
     #   The name or ID of the application that will be updated.
     #   @return [String]
@@ -1504,16 +1296,6 @@ module Aws::AppRegistry
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateAttributeGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         attribute_group: "AttributeGroupSpecifier", # required
-    #         name: "Name",
-    #         description: "Description",
-    #         attributes: "Attributes",
-    #       }
-    #
     # @!attribute [rw] attribute_group
     #   The name or ID of the attribute group that holds the attributes to
     #   describe the application.

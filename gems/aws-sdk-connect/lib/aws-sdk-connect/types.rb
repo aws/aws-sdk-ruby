@@ -196,14 +196,6 @@ module Aws::Connect
 
     # Configuration of the answering machine detection.
     #
-    # @note When making an API call, you may pass AnswerMachineDetectionConfig
-    #   data as a hash:
-    #
-    #       {
-    #         enable_answer_machine_detection: false,
-    #         await_answer_machine_prompt: false,
-    #       }
-    #
     # @!attribute [rw] enable_answer_machine_detection
     #   The flag to indicate if answer machine detection analysis needs to
     #   be performed for a voice call. If set to `true`, `TrafficType` must
@@ -223,14 +215,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateApprovedOriginRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         origin: "Origin", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -249,20 +233,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateBotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         lex_bot: {
-    #           name: "BotName",
-    #           lex_region: "LexRegion",
-    #         },
-    #         lex_v2_bot: {
-    #           alias_arn: "AliasArn",
-    #         },
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -286,15 +256,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateDefaultVocabularyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         language_code: "ar-AE", # required, accepts ar-AE, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fr-CA, fr-FR, hi-IN, it-IT, ja-JP, ko-KR, pt-BR, pt-PT, zh-CN
-    #         vocabulary_id: "VocabularyId",
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -329,40 +290,6 @@ module Aws::Connect
     #
     class AssociateDefaultVocabularyResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass AssociateInstanceStorageConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS, REAL_TIME_CONTACT_ANALYSIS_SEGMENTS
-    #         storage_config: { # required
-    #           association_id: "AssociationId",
-    #           storage_type: "S3", # required, accepts S3, KINESIS_VIDEO_STREAM, KINESIS_STREAM, KINESIS_FIREHOSE
-    #           s3_config: {
-    #             bucket_name: "BucketName", # required
-    #             bucket_prefix: "Prefix", # required
-    #             encryption_config: {
-    #               encryption_type: "KMS", # required, accepts KMS
-    #               key_id: "KeyId", # required
-    #             },
-    #           },
-    #           kinesis_video_stream_config: {
-    #             prefix: "Prefix", # required
-    #             retention_period_hours: 1, # required
-    #             encryption_config: { # required
-    #               encryption_type: "KMS", # required, accepts KMS
-    #               key_id: "KeyId", # required
-    #             },
-    #           },
-    #           kinesis_stream_config: {
-    #             stream_arn: "ARN", # required
-    #           },
-    #           kinesis_firehose_config: {
-    #             firehose_arn: "ARN", # required
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -399,14 +326,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateLambdaFunctionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         function_arn: "FunctionArn", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -426,17 +345,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateLexBotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         lex_bot: { # required
-    #           name: "BotName",
-    #           lex_region: "LexRegion",
-    #         },
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -455,15 +363,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociatePhoneNumberContactFlowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         phone_number_id: "PhoneNumberId", # required
-    #         instance_id: "InstanceId", # required
-    #         contact_flow_id: "ContactFlowId", # required
-    #       }
-    #
     # @!attribute [rw] phone_number_id
     #   A unique identifier for the phone number.
     #   @return [String]
@@ -487,15 +386,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateQueueQuickConnectsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         queue_id: "QueueId", # required
-    #         quick_connect_ids: ["QuickConnectId"], # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -519,24 +409,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateRoutingProfileQueuesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         routing_profile_id: "RoutingProfileId", # required
-    #         queue_configs: [ # required
-    #           {
-    #             queue_reference: { # required
-    #               queue_id: "QueueId", # required
-    #               channel: "VOICE", # required, accepts VOICE, CHAT, TASK
-    #             },
-    #             priority: 1, # required
-    #             delay: 1, # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -560,14 +432,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateSecurityKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         key: "PEM", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -670,14 +534,6 @@ module Aws::Connect
 
     # A chat message.
     #
-    # @note When making an API call, you may pass ChatMessage
-    #   data as a hash:
-    #
-    #       {
-    #         content_type: "ChatContentType", # required
-    #         content: "ChatContent", # required
-    #       }
-    #
     # @!attribute [rw] content_type
     #   The type of the content. Supported types are `text/plain`.
     #   @return [String]
@@ -698,13 +554,6 @@ module Aws::Connect
     # The streaming configuration, such as the Amazon SNS streaming
     # endpoint.
     #
-    # @note When making an API call, you may pass ChatStreamingConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         streaming_endpoint_arn: "ChatStreamingEndpointARN", # required
-    #       }
-    #
     # @!attribute [rw] streaming_endpoint_arn
     #   The Amazon Resource Name (ARN) of the standard Amazon SNS topic. The
     #   Amazon Resource Name (ARN) of the streaming endpoint that is used to
@@ -719,19 +568,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ClaimPhoneNumberRequest
-    #   data as a hash:
-    #
-    #       {
-    #         target_arn: "ARN", # required
-    #         phone_number: "PhoneNumber", # required
-    #         phone_number_description: "PhoneNumberDescription",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] target_arn
     #   The Amazon Resource Name (ARN) for Amazon Connect instances or
     #   traffic distribution groups that phone numbers are claimed to.
@@ -982,13 +818,6 @@ module Aws::Connect
     #
     # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/about-contact-states.html
     #
-    # @note When making an API call, you may pass ContactFilter
-    #   data as a hash:
-    #
-    #       {
-    #         contact_states: ["INCOMING"], # accepts INCOMING, PENDING, CONNECTING, CONNECTED, CONNECTED_ONHOLD, MISSED, ERROR, ENDED, REJECTED
-    #       }
-    #
     # @!attribute [rw] contact_states
     #   A list of up to 9 [contact states][1].
     #
@@ -1220,30 +1049,6 @@ module Aws::Connect
     # * Inner list specifies conditions that need to be applied with `AND`
     #   operator.
     #
-    # @note When making an API call, you may pass ControlPlaneTagFilter
-    #   data as a hash:
-    #
-    #       {
-    #         or_conditions: [
-    #           [
-    #             {
-    #               tag_key: "String",
-    #               tag_value: "String",
-    #             },
-    #           ],
-    #         ],
-    #         and_conditions: [
-    #           {
-    #             tag_key: "String",
-    #             tag_value: "String",
-    #           },
-    #         ],
-    #         tag_condition: {
-    #           tag_key: "String",
-    #           tag_value: "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] or_conditions
     #   A list of conditions which would be applied together with an `OR`
     #   condition.
@@ -1268,20 +1073,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAgentStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         name: "AgentStatusName", # required
-    #         description: "AgentStatusDescription",
-    #         state: "ENABLED", # required, accepts ENABLED, DISABLED
-    #         display_order: 1,
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -1339,20 +1130,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateContactFlowModuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         name: "ContactFlowModuleName", # required
-    #         description: "ContactFlowModuleDescription",
-    #         content: "ContactFlowModuleContent", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -1420,20 +1197,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateContactFlowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         name: "ContactFlowName", # required
-    #         type: "CONTACT_FLOW", # required, accepts CONTACT_FLOW, CUSTOMER_QUEUE, CUSTOMER_HOLD, CUSTOMER_WHISPER, AGENT_HOLD, AGENT_WHISPER, OUTBOUND_WHISPER, AGENT_TRANSFER, QUEUE_TRANSFER
-    #         description: "ContactFlowDescription",
-    #         content: "ContactFlowContent", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance.
     #   @return [String]
@@ -1495,32 +1258,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateHoursOfOperationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         name: "CommonNameLength127", # required
-    #         description: "HoursOfOperationDescription",
-    #         time_zone: "TimeZone", # required
-    #         config: [ # required
-    #           {
-    #             day: "SUNDAY", # required, accepts SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
-    #             start_time: { # required
-    #               hours: 1, # required
-    #               minutes: 1, # required
-    #             },
-    #             end_time: { # required
-    #               hours: 1, # required
-    #               minutes: 1, # required
-    #             },
-    #           },
-    #         ],
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -1579,18 +1316,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         identity_management_type: "SAML", # required, accepts SAML, CONNECT_MANAGED, EXISTING_DIRECTORY
-    #         instance_alias: "DirectoryAlias",
-    #         directory_id: "DirectoryId",
-    #         inbound_calls_enabled: false, # required
-    #         outbound_calls_enabled: false, # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   The idempotency token.
     #   @return [String]
@@ -1645,21 +1370,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateIntegrationAssociationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         integration_type: "EVENT", # required, accepts EVENT, VOICE_ID, PINPOINT_APP, WISDOM_ASSISTANT, WISDOM_KNOWLEDGE_BASE, CASES_DOMAIN
-    #         integration_arn: "ARN", # required
-    #         source_application_url: "URI",
-    #         source_application_name: "SourceApplicationName",
-    #         source_type: "SALESFORCE", # accepts SALESFORCE, ZENDESK
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -1730,26 +1440,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateQueueRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         name: "CommonNameLength127", # required
-    #         description: "QueueDescription",
-    #         outbound_caller_config: {
-    #           outbound_caller_id_name: "OutboundCallerIdName",
-    #           outbound_caller_id_number_id: "PhoneNumberId",
-    #           outbound_flow_id: "ContactFlowId",
-    #         },
-    #         hours_of_operation_id: "HoursOfOperationId", # required
-    #         max_contacts: 1,
-    #         quick_connect_ids: ["QuickConnectId"],
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -1818,32 +1508,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateQuickConnectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         name: "QuickConnectName", # required
-    #         description: "QuickConnectDescription",
-    #         quick_connect_config: { # required
-    #           quick_connect_type: "USER", # required, accepts USER, QUEUE, PHONE_NUMBER
-    #           user_config: {
-    #             user_id: "UserId", # required
-    #             contact_flow_id: "ContactFlowId", # required
-    #           },
-    #           queue_config: {
-    #             queue_id: "QueueId", # required
-    #             contact_flow_id: "ContactFlowId", # required
-    #           },
-    #           phone_config: {
-    #             phone_number: "PhoneNumber", # required
-    #           },
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -1896,35 +1560,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateRoutingProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         name: "RoutingProfileName", # required
-    #         description: "RoutingProfileDescription", # required
-    #         default_outbound_queue_id: "QueueId", # required
-    #         queue_configs: [
-    #           {
-    #             queue_reference: { # required
-    #               queue_id: "QueueId", # required
-    #               channel: "VOICE", # required, accepts VOICE, CHAT, TASK
-    #             },
-    #             priority: 1, # required
-    #             delay: 1, # required
-    #           },
-    #         ],
-    #         media_concurrencies: [ # required
-    #           {
-    #             channel: "VOICE", # required, accepts VOICE, CHAT, TASK
-    #             concurrency: 1, # required
-    #           },
-    #         ],
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -1991,23 +1626,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateSecurityProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         security_profile_name: "CreateSecurityProfileName", # required
-    #         description: "SecurityProfileDescription",
-    #         permissions: ["SecurityProfilePermission"],
-    #         instance_id: "InstanceId", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         allowed_access_control_tags: {
-    #           "SecurityProfilePolicyKey" => "SecurityProfilePolicyValue",
-    #         },
-    #         tag_restricted_resources: ["TagRestrictedResourceName"],
-    #       }
-    #
     # @!attribute [rw] security_profile_name
     #   The name of the security profile.
     #   @return [String]
@@ -2077,61 +1695,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateTaskTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         name: "TaskTemplateName", # required
-    #         description: "TaskTemplateDescription",
-    #         contact_flow_id: "ContactFlowId",
-    #         constraints: {
-    #           required_fields: [
-    #             {
-    #               id: {
-    #                 name: "TaskTemplateFieldName",
-    #               },
-    #             },
-    #           ],
-    #           read_only_fields: [
-    #             {
-    #               id: {
-    #                 name: "TaskTemplateFieldName",
-    #               },
-    #             },
-    #           ],
-    #           invisible_fields: [
-    #             {
-    #               id: {
-    #                 name: "TaskTemplateFieldName",
-    #               },
-    #             },
-    #           ],
-    #         },
-    #         defaults: {
-    #           default_field_values: [
-    #             {
-    #               id: {
-    #                 name: "TaskTemplateFieldName",
-    #               },
-    #               default_value: "TaskTemplateFieldValue",
-    #             },
-    #           ],
-    #         },
-    #         status: "ACTIVE", # accepts ACTIVE, INACTIVE
-    #         fields: [ # required
-    #           {
-    #             id: { # required
-    #               name: "TaskTemplateFieldName",
-    #             },
-    #             description: "TaskTemplateFieldDescription",
-    #             type: "NAME", # accepts NAME, DESCRIPTION, SCHEDULED_TIME, QUICK_CONNECT, URL, NUMBER, TEXT, TEXT_AREA, DATE_TIME, BOOLEAN, SINGLE_SELECT, EMAIL
-    #             single_select_options: ["TaskTemplateSingleSelectOption"],
-    #           },
-    #         ],
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -2217,19 +1780,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateTrafficDistributionGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name128", # required
-    #         description: "Description250",
-    #         instance_id: "InstanceIdOrArn", # required
-    #         client_token: "ClientToken",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name for the traffic distribution group.
     #   @return [String]
@@ -2296,18 +1846,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateUseCaseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         integration_association_id: "IntegrationAssociationId", # required
-    #         use_case_type: "RULES_EVALUATION", # required, accepts RULES_EVALUATION, CONNECT_CAMPAIGNS
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -2357,18 +1895,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateUserHierarchyGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "HierarchyGroupName", # required
-    #         parent_group_id: "HierarchyGroupId",
-    #         instance_id: "InstanceId", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the user hierarchy group. Must not be more than 100
     #   characters.
@@ -2418,35 +1944,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         username: "AgentUsername", # required
-    #         password: "Password",
-    #         identity_info: {
-    #           first_name: "AgentFirstName",
-    #           last_name: "AgentLastName",
-    #           email: "Email",
-    #           secondary_email: "Email",
-    #           mobile: "PhoneNumber",
-    #         },
-    #         phone_config: { # required
-    #           phone_type: "SOFT_PHONE", # required, accepts SOFT_PHONE, DESK_PHONE
-    #           auto_accept: false,
-    #           after_contact_work_time_limit: 1,
-    #           desk_phone_number: "PhoneNumber",
-    #         },
-    #         directory_user_id: "DirectoryUserId",
-    #         security_profile_ids: ["SecurityProfileId"], # required
-    #         routing_profile_id: "RoutingProfileId", # required
-    #         hierarchy_group_id: "HierarchyGroupId",
-    #         instance_id: "InstanceId", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] username
     #   The user name for the account. For instances not using SAML for
     #   identity management, the user name can include up to 20 characters.
@@ -2540,20 +2037,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateVocabularyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         instance_id: "InstanceId", # required
-    #         vocabulary_name: "VocabularyName", # required
-    #         language_code: "ar-AE", # required, accepts ar-AE, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fr-CA, fr-FR, hi-IN, it-IT, ja-JP, ko-KR, pt-BR, pt-PT, zh-CN
-    #         content: "VocabularyContent", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If not provided, the Amazon Web Services
@@ -2684,14 +2167,6 @@ module Aws::Connect
     #
     # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html
     #
-    # @note When making an API call, you may pass CurrentMetric
-    #   data as a hash:
-    #
-    #       {
-    #         name: "AGENTS_ONLINE", # accepts AGENTS_ONLINE, AGENTS_AVAILABLE, AGENTS_ON_CALL, AGENTS_NON_PRODUCTIVE, AGENTS_AFTER_CONTACT_WORK, AGENTS_ERROR, AGENTS_STAFFED, CONTACTS_IN_QUEUE, OLDEST_CONTACT_AGE, CONTACTS_SCHEDULED, AGENTS_ON_CONTACT, SLOTS_ACTIVE, SLOTS_AVAILABLE
-    #         unit: "SECONDS", # accepts SECONDS, COUNT, PERCENT
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the metric.
     #   @return [String]
@@ -2803,14 +2278,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteContactFlowModuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         contact_flow_module_id: "ContactFlowModuleId", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -2833,14 +2300,6 @@ module Aws::Connect
     #
     class DeleteContactFlowModuleResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteContactFlowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         contact_flow_id: "ContactFlowId", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -2859,14 +2318,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteHoursOfOperationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         hours_of_operation_id: "HoursOfOperationId", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -2885,13 +2336,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -2905,14 +2349,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteIntegrationAssociationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         integration_association_id: "IntegrationAssociationId", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -2931,14 +2367,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteQuickConnectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         quick_connect_id: "QuickConnectId", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -2957,14 +2385,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteSecurityProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         security_profile_id: "SecurityProfileId", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -2983,14 +2403,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteTaskTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         task_template_id: "TaskTemplateId", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -3013,13 +2425,6 @@ module Aws::Connect
     #
     class DeleteTaskTemplateResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteTrafficDistributionGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         traffic_distribution_group_id: "TrafficDistributionGroupIdOrArn", # required
-    #       }
-    #
     # @!attribute [rw] traffic_distribution_group_id
     #   The identifier of the traffic distribution group. This can be the ID
     #   or the ARN if the API is being called in the Region where the
@@ -3039,15 +2444,6 @@ module Aws::Connect
     #
     class DeleteTrafficDistributionGroupResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteUseCaseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         integration_association_id: "IntegrationAssociationId", # required
-    #         use_case_id: "UseCaseId", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -3071,14 +2467,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteUserHierarchyGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         hierarchy_group_id: "HierarchyGroupId", # required
-    #         instance_id: "InstanceId", # required
-    #       }
-    #
     # @!attribute [rw] hierarchy_group_id
     #   The identifier of the hierarchy group.
     #   @return [String]
@@ -3097,14 +2485,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         user_id: "UserId", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -3123,14 +2503,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteVocabularyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         vocabulary_id: "VocabularyId", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -3171,14 +2543,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAgentStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         agent_status_id: "AgentStatusId", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -3209,14 +2573,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeContactFlowModuleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         contact_flow_module_id: "ContactFlowModuleId", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -3247,14 +2603,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeContactFlowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         contact_flow_id: "ContactFlowId", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance.
     #   @return [String]
@@ -3284,14 +2632,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeContactRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         contact_id: "ContactId", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -3322,14 +2662,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeHoursOfOperationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         hours_of_operation_id: "HoursOfOperationId", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -3360,14 +2692,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeInstanceAttributeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         attribute_type: "INBOUND_CALLS", # required, accepts INBOUND_CALLS, OUTBOUND_CALLS, CONTACTFLOW_LOGS, CONTACT_LENS, AUTO_RESOLVE_BEST_VOICES, USE_CUSTOM_TTS_VOICES, EARLY_MEDIA, MULTI_PARTY_CONFERENCE, HIGH_VOLUME_OUTBOUND, ENHANCED_CONTACT_MONITORING
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -3398,13 +2722,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -3430,15 +2747,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeInstanceStorageConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         association_id: "AssociationId", # required
-    #         resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS, REAL_TIME_CONTACT_ANALYSIS_SEGMENTS
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -3475,13 +2783,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribePhoneNumberRequest
-    #   data as a hash:
-    #
-    #       {
-    #         phone_number_id: "PhoneNumberId", # required
-    #       }
-    #
     # @!attribute [rw] phone_number_id
     #   A unique identifier for the phone number.
     #   @return [String]
@@ -3507,14 +2808,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeQueueRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         queue_id: "QueueId", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -3545,14 +2838,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeQuickConnectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         quick_connect_id: "QuickConnectId", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -3583,14 +2868,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeRoutingProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         routing_profile_id: "RoutingProfileId", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -3621,14 +2898,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeSecurityProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         security_profile_id: "SecurityProfileId", # required
-    #         instance_id: "InstanceId", # required
-    #       }
-    #
     # @!attribute [rw] security_profile_id
     #   The identifier for the security profle.
     #   @return [String]
@@ -3659,13 +2928,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeTrafficDistributionGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         traffic_distribution_group_id: "TrafficDistributionGroupIdOrArn", # required
-    #       }
-    #
     # @!attribute [rw] traffic_distribution_group_id
     #   The identifier of the traffic distribution group. This can be the ID
     #   or the ARN if the API is being called in the Region where the
@@ -3693,14 +2955,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeUserHierarchyGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         hierarchy_group_id: "HierarchyGroupId", # required
-    #         instance_id: "InstanceId", # required
-    #       }
-    #
     # @!attribute [rw] hierarchy_group_id
     #   The identifier of the hierarchy group.
     #   @return [String]
@@ -3731,13 +2985,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeUserHierarchyStructureRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -3763,14 +3010,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_id: "UserId", # required
-    #         instance_id: "InstanceId", # required
-    #       }
-    #
     # @!attribute [rw] user_id
     #   The identifier of the user account.
     #   @return [String]
@@ -3801,14 +3040,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeVocabularyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         vocabulary_id: "VocabularyId", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -3875,14 +3106,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateApprovedOriginRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         origin: "Origin", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -3901,20 +3124,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateBotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         lex_bot: {
-    #           name: "BotName",
-    #           lex_region: "LexRegion",
-    #         },
-    #         lex_v2_bot: {
-    #           alias_arn: "AliasArn",
-    #         },
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -3938,15 +3147,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateInstanceStorageConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         association_id: "AssociationId", # required
-    #         resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS, REAL_TIME_CONTACT_ANALYSIS_SEGMENTS
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -3971,14 +3171,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateLambdaFunctionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         function_arn: "FunctionArn", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance..
@@ -3998,15 +3190,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateLexBotRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         bot_name: "BotName", # required
-    #         lex_region: "LexRegion", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -4031,14 +3214,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociatePhoneNumberContactFlowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         phone_number_id: "PhoneNumberId", # required
-    #         instance_id: "InstanceId", # required
-    #       }
-    #
     # @!attribute [rw] phone_number_id
     #   A unique identifier for the phone number.
     #   @return [String]
@@ -4057,15 +3232,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateQueueQuickConnectsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         queue_id: "QueueId", # required
-    #         quick_connect_ids: ["QuickConnectId"], # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -4089,20 +3255,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateRoutingProfileQueuesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         routing_profile_id: "RoutingProfileId", # required
-    #         queue_references: [ # required
-    #           {
-    #             queue_id: "QueueId", # required
-    #             channel: "VOICE", # required, accepts VOICE, CHAT, TASK
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -4126,14 +3278,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateSecurityKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         association_id: "AssociationId", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -4153,15 +3297,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DismissUserContactRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_id: "UserId", # required
-    #         instance_id: "InstanceId", # required
-    #         contact_id: "ContactId", # required
-    #       }
-    #
     # @!attribute [rw] user_id
     #   The identifier of the user account.
     #   @return [String]
@@ -4190,14 +3325,6 @@ module Aws::Connect
     class DismissUserContactResponse < Aws::EmptyStructure; end
 
     # Information about a traffic distribution.
-    #
-    # @note When making an API call, you may pass Distribution
-    #   data as a hash:
-    #
-    #       {
-    #         region: "AwsRegion", # required
-    #         percentage: 1, # required
-    #       }
     #
     # @!attribute [rw] region
     #   The Amazon Web Services Region where the traffic is distributed.
@@ -4252,14 +3379,6 @@ module Aws::Connect
 
     # The encryption configuration.
     #
-    # @note When making an API call, you may pass EncryptionConfig
-    #   data as a hash:
-    #
-    #       {
-    #         encryption_type: "KMS", # required, accepts KMS
-    #         key_id: "KeyId", # required
-    #       }
-    #
     # @!attribute [rw] encryption_type
     #   The type of encryption.
     #   @return [String]
@@ -4284,14 +3403,6 @@ module Aws::Connect
 
     # Contains the filter to apply when retrieving metrics.
     #
-    # @note When making an API call, you may pass Filters
-    #   data as a hash:
-    #
-    #       {
-    #         queues: ["QueueId"],
-    #         channels: ["VOICE"], # accepts VOICE, CHAT, TASK
-    #       }
-    #
     # @!attribute [rw] queues
     #   The queues to use to filter the metrics. You should specify at least
     #   one queue, and can specify up to 100 queues per request. The
@@ -4312,14 +3423,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetContactAttributesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         initial_contact_id: "ContactId", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance.
     #   @return [String]
@@ -4349,26 +3452,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetCurrentMetricDataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         filters: { # required
-    #           queues: ["QueueId"],
-    #           channels: ["VOICE"], # accepts VOICE, CHAT, TASK
-    #         },
-    #         groupings: ["QUEUE"], # accepts QUEUE, CHANNEL
-    #         current_metrics: [ # required
-    #           {
-    #             name: "AGENTS_ONLINE", # accepts AGENTS_ONLINE, AGENTS_AVAILABLE, AGENTS_ON_CALL, AGENTS_NON_PRODUCTIVE, AGENTS_AFTER_CONTACT_WORK, AGENTS_ERROR, AGENTS_STAFFED, CONTACTS_IN_QUEUE, OLDEST_CONTACT_AGE, CONTACTS_SCHEDULED, AGENTS_ON_CONTACT, SLOTS_ACTIVE, SLOTS_AVAILABLE
-    #             unit: "SECONDS", # accepts SECONDS, COUNT, PERCENT
-    #           },
-    #         ],
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -4565,21 +3648,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetCurrentUserDataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         filters: { # required
-    #           queues: ["QueueId"],
-    #           contact_filter: {
-    #             contact_states: ["INCOMING"], # accepts INCOMING, PENDING, CONNECTING, CONNECTED, CONNECTED_ONHOLD, MISSED, ERROR, ENDED, REJECTED
-    #           },
-    #         },
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -4630,13 +3698,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetFederationTokenRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -4677,33 +3738,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetMetricDataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         start_time: Time.now, # required
-    #         end_time: Time.now, # required
-    #         filters: { # required
-    #           queues: ["QueueId"],
-    #           channels: ["VOICE"], # accepts VOICE, CHAT, TASK
-    #         },
-    #         groupings: ["QUEUE"], # accepts QUEUE, CHANNEL
-    #         historical_metrics: [ # required
-    #           {
-    #             name: "CONTACTS_QUEUED", # accepts CONTACTS_QUEUED, CONTACTS_HANDLED, CONTACTS_ABANDONED, CONTACTS_CONSULTED, CONTACTS_AGENT_HUNG_UP_FIRST, CONTACTS_HANDLED_INCOMING, CONTACTS_HANDLED_OUTBOUND, CONTACTS_HOLD_ABANDONS, CONTACTS_TRANSFERRED_IN, CONTACTS_TRANSFERRED_OUT, CONTACTS_TRANSFERRED_IN_FROM_QUEUE, CONTACTS_TRANSFERRED_OUT_FROM_QUEUE, CONTACTS_MISSED, CALLBACK_CONTACTS_HANDLED, API_CONTACTS_HANDLED, OCCUPANCY, HANDLE_TIME, AFTER_CONTACT_WORK_TIME, QUEUED_TIME, ABANDON_TIME, QUEUE_ANSWER_TIME, HOLD_TIME, INTERACTION_TIME, INTERACTION_AND_HOLD_TIME, SERVICE_LEVEL
-    #             threshold: {
-    #               comparison: "LT", # accepts LT
-    #               threshold_value: 1.0,
-    #             },
-    #             statistic: "SUM", # accepts SUM, MAX, AVG
-    #             unit: "SECONDS", # accepts SECONDS, COUNT, PERCENT
-    #           },
-    #         ],
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -4974,15 +4008,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetTaskTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         task_template_id: "TaskTemplateId", # required
-    #         snapshot_version: "SnapshotVersion",
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -5087,13 +4112,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetTrafficDistributionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "TrafficDistributionGroupIdOrArn", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The identifier of the traffic distribution group.
     #   @return [String]
@@ -5174,14 +4192,6 @@ module Aws::Connect
 
     # A leaf node condition which can be used to specify a hierarchy group
     # condition.
-    #
-    # @note When making an API call, you may pass HierarchyGroupCondition
-    #   data as a hash:
-    #
-    #       {
-    #         value: "String",
-    #         hierarchy_group_match_type: "EXACT", # accepts EXACT, WITH_CHILD_GROUPS
-    #       }
     #
     # @!attribute [rw] value
     #   The value in the hierarchy group condition.
@@ -5268,13 +4278,6 @@ module Aws::Connect
     end
 
     # Contains information about the hierarchy level to update.
-    #
-    # @note When making an API call, you may pass HierarchyLevelUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         name: "HierarchyLevelName", # required
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the user hierarchy level. Must not be more than 50
@@ -5393,27 +4396,6 @@ module Aws::Connect
 
     # Contains information about the level hierarchy to update.
     #
-    # @note When making an API call, you may pass HierarchyStructureUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         level_one: {
-    #           name: "HierarchyLevelName", # required
-    #         },
-    #         level_two: {
-    #           name: "HierarchyLevelName", # required
-    #         },
-    #         level_three: {
-    #           name: "HierarchyLevelName", # required
-    #         },
-    #         level_four: {
-    #           name: "HierarchyLevelName", # required
-    #         },
-    #         level_five: {
-    #           name: "HierarchyLevelName", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] level_one
     #   The update for level one.
     #   @return [Types::HierarchyLevelUpdate]
@@ -5453,19 +4435,6 @@ module Aws::Connect
     #
     #
     # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html
-    #
-    # @note When making an API call, you may pass HistoricalMetric
-    #   data as a hash:
-    #
-    #       {
-    #         name: "CONTACTS_QUEUED", # accepts CONTACTS_QUEUED, CONTACTS_HANDLED, CONTACTS_ABANDONED, CONTACTS_CONSULTED, CONTACTS_AGENT_HUNG_UP_FIRST, CONTACTS_HANDLED_INCOMING, CONTACTS_HANDLED_OUTBOUND, CONTACTS_HOLD_ABANDONS, CONTACTS_TRANSFERRED_IN, CONTACTS_TRANSFERRED_OUT, CONTACTS_TRANSFERRED_IN_FROM_QUEUE, CONTACTS_TRANSFERRED_OUT_FROM_QUEUE, CONTACTS_MISSED, CALLBACK_CONTACTS_HANDLED, API_CONTACTS_HANDLED, OCCUPANCY, HANDLE_TIME, AFTER_CONTACT_WORK_TIME, QUEUED_TIME, ABANDON_TIME, QUEUE_ANSWER_TIME, HOLD_TIME, INTERACTION_TIME, INTERACTION_AND_HOLD_TIME, SERVICE_LEVEL
-    #         threshold: {
-    #           comparison: "LT", # accepts LT
-    #           threshold_value: 1.0,
-    #         },
-    #         statistic: "SUM", # accepts SUM, MAX, AVG
-    #         unit: "SECONDS", # accepts SECONDS, COUNT, PERCENT
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the metric.
@@ -5580,21 +4549,6 @@ module Aws::Connect
 
     # Contains information about the hours of operation.
     #
-    # @note When making an API call, you may pass HoursOfOperationConfig
-    #   data as a hash:
-    #
-    #       {
-    #         day: "SUNDAY", # required, accepts SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
-    #         start_time: { # required
-    #           hours: 1, # required
-    #           minutes: 1, # required
-    #         },
-    #         end_time: { # required
-    #           hours: 1, # required
-    #           minutes: 1, # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] day
     #   The day that the hours of operation applies to.
     #   @return [String]
@@ -5643,14 +4597,6 @@ module Aws::Connect
     end
 
     # The start time or end time for an hours of operation.
-    #
-    # @note When making an API call, you may pass HoursOfOperationTimeSlice
-    #   data as a hash:
-    #
-    #       {
-    #         hours: 1, # required
-    #         minutes: 1, # required
-    #       }
     #
     # @!attribute [rw] hours
     #   The hours.
@@ -5757,36 +4703,6 @@ module Aws::Connect
     end
 
     # The storage configuration for the instance.
-    #
-    # @note When making an API call, you may pass InstanceStorageConfig
-    #   data as a hash:
-    #
-    #       {
-    #         association_id: "AssociationId",
-    #         storage_type: "S3", # required, accepts S3, KINESIS_VIDEO_STREAM, KINESIS_STREAM, KINESIS_FIREHOSE
-    #         s3_config: {
-    #           bucket_name: "BucketName", # required
-    #           bucket_prefix: "Prefix", # required
-    #           encryption_config: {
-    #             encryption_type: "KMS", # required, accepts KMS
-    #             key_id: "KeyId", # required
-    #           },
-    #         },
-    #         kinesis_video_stream_config: {
-    #           prefix: "Prefix", # required
-    #           retention_period_hours: 1, # required
-    #           encryption_config: { # required
-    #             encryption_type: "KMS", # required, accepts KMS
-    #             key_id: "KeyId", # required
-    #           },
-    #         },
-    #         kinesis_stream_config: {
-    #           stream_arn: "ARN", # required
-    #         },
-    #         kinesis_firehose_config: {
-    #           firehose_arn: "ARN", # required
-    #         },
-    #       }
     #
     # @!attribute [rw] association_id
     #   The existing association identifier that uniquely identifies the
@@ -6002,15 +4918,6 @@ module Aws::Connect
 
     # A field that is invisible to an agent.
     #
-    # @note When making an API call, you may pass InvisibleFieldInfo
-    #   data as a hash:
-    #
-    #       {
-    #         id: {
-    #           name: "TaskTemplateFieldName",
-    #         },
-    #       }
-    #
     # @!attribute [rw] id
     #   Identifier of the invisible field.
     #   @return [Types::TaskTemplateFieldIdentifier]
@@ -6024,13 +4931,6 @@ module Aws::Connect
     end
 
     # Configuration information of a Kinesis Data Firehose delivery stream.
-    #
-    # @note When making an API call, you may pass KinesisFirehoseConfig
-    #   data as a hash:
-    #
-    #       {
-    #         firehose_arn: "ARN", # required
-    #       }
     #
     # @!attribute [rw] firehose_arn
     #   The Amazon Resource Name (ARN) of the delivery stream.
@@ -6046,13 +4946,6 @@ module Aws::Connect
 
     # Configuration information of a Kinesis data stream.
     #
-    # @note When making an API call, you may pass KinesisStreamConfig
-    #   data as a hash:
-    #
-    #       {
-    #         stream_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] stream_arn
     #   The Amazon Resource Name (ARN) of the data stream.
     #   @return [String]
@@ -6066,18 +4959,6 @@ module Aws::Connect
     end
 
     # Configuration information of a Kinesis video stream.
-    #
-    # @note When making an API call, you may pass KinesisVideoStreamConfig
-    #   data as a hash:
-    #
-    #       {
-    #         prefix: "Prefix", # required
-    #         retention_period_hours: 1, # required
-    #         encryption_config: { # required
-    #           encryption_type: "KMS", # required, accepts KMS
-    #           key_id: "KeyId", # required
-    #         },
-    #       }
     #
     # @!attribute [rw] prefix
     #   The prefix of the video stream.
@@ -6107,14 +4988,6 @@ module Aws::Connect
     end
 
     # Configuration information of an Amazon Lex bot.
-    #
-    # @note When making an API call, you may pass LexBot
-    #   data as a hash:
-    #
-    #       {
-    #         name: "BotName",
-    #         lex_region: "LexRegion",
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the Amazon Lex bot.
@@ -6154,13 +5027,6 @@ module Aws::Connect
 
     # Configuration information of an Amazon Lex V2 bot.
     #
-    # @note When making an API call, you may pass LexV2Bot
-    #   data as a hash:
-    #
-    #       {
-    #         alias_arn: "AliasArn",
-    #       }
-    #
     # @!attribute [rw] alias_arn
     #   The Amazon Resource Name (ARN) of the Amazon Lex V2 bot.
     #   @return [String]
@@ -6187,16 +5053,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAgentStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         agent_status_types: ["ROUTABLE"], # accepts ROUTABLE, CUSTOM, OFFLINE
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -6245,15 +5101,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListApprovedOriginsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -6297,16 +5144,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListBotsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         lex_version: "V1", # required, accepts V1, V2
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -6356,16 +5193,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListContactFlowModulesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         contact_flow_module_state: "ACTIVE", # accepts ACTIVE, ARCHIVED
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -6414,16 +5241,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListContactFlowsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         contact_flow_types: ["CONTACT_FLOW"], # accepts CONTACT_FLOW, CUSTOMER_QUEUE, CUSTOMER_HOLD, CUSTOMER_WHISPER, AGENT_HOLD, AGENT_WHISPER, OUTBOUND_WHISPER, AGENT_TRANSFER, QUEUE_TRANSFER
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -6473,16 +5290,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListContactReferencesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         contact_id: "ContactId", # required
-    #         reference_types: ["URL"], # required, accepts URL, ATTACHMENT, NUMBER, STRING, DATE, EMAIL
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -6536,16 +5343,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDefaultVocabulariesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         language_code: "ar-AE", # accepts ar-AE, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fr-CA, fr-FR, hi-IN, it-IT, ja-JP, ko-KR, pt-BR, pt-PT, zh-CN
-    #         max_results: 1,
-    #         next_token: "VocabularyNextToken",
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -6600,15 +5397,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListHoursOfOperationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -6653,15 +5441,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListInstanceAttributesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -6705,16 +5484,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListInstanceStorageConfigsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS, REAL_TIME_CONTACT_ANALYSIS_SEGMENTS
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -6763,14 +5532,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListInstancesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The token for the next set of results. Use the value returned in the
     #   previous response in the next request to retrieve the next set of
@@ -6808,16 +5569,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListIntegrationAssociationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         integration_type: "EVENT", # accepts EVENT, VOICE_ID, PINPOINT_APP, WISDOM_ASSISTANT, WISDOM_KNOWLEDGE_BASE, CASES_DOMAIN
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -6866,15 +5617,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListLambdaFunctionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -6918,15 +5660,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListLexBotsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -6972,17 +5705,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPhoneNumbersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         phone_number_types: ["TOLL_FREE"], # accepts TOLL_FREE, DID
-    #         phone_number_country_codes: ["AF"], # accepts AF, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BA, BW, BR, IO, VG, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CK, CR, HR, CU, CW, CY, CZ, CD, DK, DJ, DM, DO, TL, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, PF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GU, GT, GG, GN, GW, GY, HT, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, CI, JM, JP, JE, JO, KZ, KE, KI, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, AN, NC, NZ, NI, NE, NG, NU, KP, MP, NO, OM, PK, PW, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, CG, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, KR, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TG, TK, TO, TT, TN, TR, TM, TC, TV, VI, UG, UA, AE, GB, US, UY, UZ, VU, VA, VE, VN, WF, EH, YE, ZM, ZW
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -7079,18 +5801,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPhoneNumbersV2Request
-    #   data as a hash:
-    #
-    #       {
-    #         target_arn: "ARN",
-    #         max_results: 1,
-    #         next_token: "LargeNextToken",
-    #         phone_number_country_codes: ["AF"], # accepts AF, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BA, BW, BR, IO, VG, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CK, CR, HR, CU, CW, CY, CZ, CD, DK, DJ, DM, DO, TL, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, PF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GU, GT, GG, GN, GW, GY, HT, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, CI, JM, JP, JE, JO, KZ, KE, KI, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, AN, NC, NZ, NI, NE, NG, NU, KP, MP, NO, OM, PK, PW, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, CG, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, KR, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TG, TK, TO, TT, TN, TR, TM, TC, TV, VI, UG, UA, AE, GB, US, UY, UZ, VU, VA, VE, VN, WF, EH, YE, ZM, ZW
-    #         phone_number_types: ["TOLL_FREE"], # accepts TOLL_FREE, DID
-    #         phone_number_prefix: "PhoneNumberPrefix",
-    #       }
-    #
     # @!attribute [rw] target_arn
     #   The Amazon Resource Name (ARN) for Amazon Connect instances or
     #   traffic distribution groups that phone numbers are claimed to. If
@@ -7154,15 +5864,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPromptsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance.
     #   @return [String]
@@ -7206,16 +5907,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListQueueQuickConnectsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         queue_id: "QueueId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -7265,16 +5956,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListQueuesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         queue_types: ["STANDARD"], # accepts STANDARD, AGENT
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -7324,16 +6005,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListQuickConnectsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         quick_connect_types: ["USER"], # accepts USER, QUEUE, PHONE_NUMBER
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -7386,16 +6057,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRoutingProfileQueuesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         routing_profile_id: "RoutingProfileId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -7445,15 +6106,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRoutingProfilesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -7498,15 +6150,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSecurityKeysRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -7550,16 +6193,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSecurityProfilePermissionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         security_profile_id: "SecurityProfileId", # required
-    #         instance_id: "InstanceId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] security_profile_id
     #   The identifier for the security profle.
     #   @return [String]
@@ -7613,15 +6246,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSecurityProfilesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -7666,13 +6290,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ARN", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -7697,17 +6314,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTaskTemplatesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         status: "ACTIVE", # accepts ACTIVE, INACTIVE
-    #         name: "TaskTemplateName",
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -7772,15 +6378,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTrafficDistributionGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         instance_id: "InstanceIdOrArn",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to return per page.
     #   @return [Integer]
@@ -7826,16 +6423,6 @@ module Aws::Connect
 
     # Provides summary information about the use cases for the specified
     # integration association.
-    #
-    # @note When making an API call, you may pass ListUseCasesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         integration_association_id: "IntegrationAssociationId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
     #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
@@ -7885,15 +6472,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListUserHierarchyGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -7938,15 +6516,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListUsersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -7994,14 +6563,6 @@ module Aws::Connect
     # Contains information about which channels are supported, and how many
     # contacts an agent can have on a channel simultaneously.
     #
-    # @note When making an API call, you may pass MediaConcurrency
-    #   data as a hash:
-    #
-    #       {
-    #         channel: "VOICE", # required, accepts VOICE, CHAT, TASK
-    #         concurrency: 1, # required
-    #       }
-    #
     # @!attribute [rw] channel
     #   The channels that agents can handle in the Contact Control Panel
     #   (CCP).
@@ -8027,17 +6588,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass MonitorContactRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         contact_id: "ContactId", # required
-    #         user_id: "AgentResourceId", # required
-    #         allowed_monitor_capabilities: ["SILENT_MONITOR"], # accepts SILENT_MONITOR, BARGE
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -8122,15 +6672,6 @@ module Aws::Connect
 
     # The outbound caller ID name, number, and outbound whisper flow.
     #
-    # @note When making an API call, you may pass OutboundCallerConfig
-    #   data as a hash:
-    #
-    #       {
-    #         outbound_caller_id_name: "OutboundCallerIdName",
-    #         outbound_caller_id_number_id: "PhoneNumberId",
-    #         outbound_flow_id: "ContactFlowId",
-    #       }
-    #
     # @!attribute [rw] outbound_caller_id_name
     #   The caller ID name.
     #   @return [String]
@@ -8169,13 +6710,6 @@ module Aws::Connect
 
     # The customer's details.
     #
-    # @note When making an API call, you may pass ParticipantDetails
-    #   data as a hash:
-    #
-    #       {
-    #         display_name: "DisplayName", # required
-    #       }
-    #
     # @!attribute [rw] display_name
     #   Display name of the participant.
     #   @return [String]
@@ -8189,13 +6723,6 @@ module Aws::Connect
     end
 
     # Contains information about a phone number for a quick connect.
-    #
-    # @note When making an API call, you may pass PhoneNumberQuickConnectConfig
-    #   data as a hash:
-    #
-    #       {
-    #         phone_number: "PhoneNumber", # required
-    #       }
     #
     # @!attribute [rw] phone_number
     #   The phone number in E.164 format.
@@ -8366,15 +6893,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutUserStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_id: "UserId", # required
-    #         instance_id: "InstanceId", # required
-    #         agent_status_id: "AgentStatusId", # required
-    #       }
-    #
     # @!attribute [rw] user_id
     #   The identifier of the user.
     #   @return [String]
@@ -8481,14 +6999,6 @@ module Aws::Connect
     # Contains information about a queue for a quick connect. The flow must
     # be of type Transfer to Queue.
     #
-    # @note When making an API call, you may pass QueueQuickConnectConfig
-    #   data as a hash:
-    #
-    #       {
-    #         queue_id: "QueueId", # required
-    #         contact_flow_id: "ContactFlowId", # required
-    #       }
-    #
     # @!attribute [rw] queue_id
     #   The identifier for the queue.
     #   @return [String]
@@ -8535,50 +7045,6 @@ module Aws::Connect
     #
     #  </note>
     #
-    # @note When making an API call, you may pass QueueSearchCriteria
-    #   data as a hash:
-    #
-    #       {
-    #         or_conditions: [
-    #           {
-    #             or_conditions: {
-    #               # recursive QueueSearchConditionList
-    #             },
-    #             and_conditions: {
-    #               # recursive QueueSearchConditionList
-    #             },
-    #             string_condition: {
-    #               field_name: "String",
-    #               value: "String",
-    #               comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
-    #             },
-    #             queue_type_condition: "STANDARD", # accepts STANDARD
-    #           },
-    #         ],
-    #         and_conditions: [
-    #           {
-    #             or_conditions: {
-    #               # recursive QueueSearchConditionList
-    #             },
-    #             and_conditions: {
-    #               # recursive QueueSearchConditionList
-    #             },
-    #             string_condition: {
-    #               field_name: "String",
-    #               value: "String",
-    #               comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
-    #             },
-    #             queue_type_condition: "STANDARD", # accepts STANDARD
-    #           },
-    #         ],
-    #         string_condition: {
-    #           field_name: "String",
-    #           value: "String",
-    #           comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
-    #         },
-    #         queue_type_condition: "STANDARD", # accepts STANDARD
-    #       }
-    #
     # @!attribute [rw] or_conditions
     #   A list of conditions which would be applied together with an OR
     #   condition.
@@ -8614,32 +7080,6 @@ module Aws::Connect
     end
 
     # Filters to be applied to search results.
-    #
-    # @note When making an API call, you may pass QueueSearchFilter
-    #   data as a hash:
-    #
-    #       {
-    #         tag_filter: {
-    #           or_conditions: [
-    #             [
-    #               {
-    #                 tag_key: "String",
-    #                 tag_value: "String",
-    #               },
-    #             ],
-    #           ],
-    #           and_conditions: [
-    #             {
-    #               tag_key: "String",
-    #               tag_value: "String",
-    #             },
-    #           ],
-    #           tag_condition: {
-    #             tag_key: "String",
-    #             tag_value: "String",
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] tag_filter
     #   An object that can be used to specify Tag conditions inside the
@@ -8733,24 +7173,6 @@ module Aws::Connect
 
     # Contains configuration settings for a quick connect.
     #
-    # @note When making an API call, you may pass QuickConnectConfig
-    #   data as a hash:
-    #
-    #       {
-    #         quick_connect_type: "USER", # required, accepts USER, QUEUE, PHONE_NUMBER
-    #         user_config: {
-    #           user_id: "UserId", # required
-    #           contact_flow_id: "ContactFlowId", # required
-    #         },
-    #         queue_config: {
-    #           queue_id: "QueueId", # required
-    #           contact_flow_id: "ContactFlowId", # required
-    #         },
-    #         phone_config: {
-    #           phone_number: "PhoneNumber", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] quick_connect_type
     #   The type of quick connect. In the Amazon Connect console, when you
     #   create a quick connect, you are prompted to assign one of the
@@ -8818,15 +7240,6 @@ module Aws::Connect
 
     # Indicates a field that is read-only to an agent.
     #
-    # @note When making an API call, you may pass ReadOnlyFieldInfo
-    #   data as a hash:
-    #
-    #       {
-    #         id: {
-    #           name: "TaskTemplateFieldName",
-    #         },
-    #       }
-    #
     # @!attribute [rw] id
     #   Identifier of the read-only field.
     #   @return [Types::TaskTemplateFieldIdentifier]
@@ -8842,14 +7255,6 @@ module Aws::Connect
     # Well-formed data on a contact, used by agents to complete a contact
     # request. You can have up to 4,096 UTF-8 bytes across all references
     # for a contact.
-    #
-    # @note When making an API call, you may pass Reference
-    #   data as a hash:
-    #
-    #       {
-    #         value: "ReferenceValue", # required
-    #         type: "URL", # required, accepts URL, ATTACHMENT, NUMBER, STRING, DATE, EMAIL
-    #       }
     #
     # @!attribute [rw] value
     #   A valid value for the reference. For example, for a URL reference, a
@@ -8873,8 +7278,6 @@ module Aws::Connect
     # Contains summary information about a reference. `ReferenceSummary`
     # contains only one non null field between the URL and attachment based
     # on the reference type.
-    #
-    # @note ReferenceSummary is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ReferenceSummary corresponding to the set member.
     #
     # @!attribute [rw] url
     #   Information about the reference when the `referenceType` is `URL`.
@@ -8929,14 +7332,6 @@ module Aws::Connect
       class Unknown < ReferenceSummary; end
     end
 
-    # @note When making an API call, you may pass ReleasePhoneNumberRequest
-    #   data as a hash:
-    #
-    #       {
-    #         phone_number_id: "PhoneNumberId", # required
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] phone_number_id
     #   A unique identifier for the phone number.
     #   @return [String]
@@ -8964,16 +7359,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ReplicateInstanceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceIdOrArn", # required
-    #         replica_region: "AwsRegion", # required
-    #         client_token: "ClientToken",
-    #         replica_alias: "DirectoryAlias", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance. You can provide the
@@ -9035,15 +7420,6 @@ module Aws::Connect
     end
 
     # Information about a required field.
-    #
-    # @note When making an API call, you may pass RequiredFieldInfo
-    #   data as a hash:
-    #
-    #       {
-    #         id: {
-    #           name: "TaskTemplateFieldName",
-    #         },
-    #       }
     #
     # @!attribute [rw] id
     #   The unique identifier for the field.
@@ -9120,15 +7496,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ResumeContactRecordingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         contact_id: "ContactId", # required
-    #         initial_contact_id: "ContactId", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -9224,18 +7591,6 @@ module Aws::Connect
     # Contains information about the queue and channel for which priority
     # and delay can be set.
     #
-    # @note When making an API call, you may pass RoutingProfileQueueConfig
-    #   data as a hash:
-    #
-    #       {
-    #         queue_reference: { # required
-    #           queue_id: "QueueId", # required
-    #           channel: "VOICE", # required, accepts VOICE, CHAT, TASK
-    #         },
-    #         priority: 1, # required
-    #         delay: 1, # required
-    #       }
-    #
     # @!attribute [rw] queue_reference
     #   Contains information about a queue resource.
     #   @return [Types::RoutingProfileQueueReference]
@@ -9322,14 +7677,6 @@ module Aws::Connect
 
     # Contains the channel and queue identifier for a routing profile.
     #
-    # @note When making an API call, you may pass RoutingProfileQueueReference
-    #   data as a hash:
-    #
-    #       {
-    #         queue_id: "QueueId", # required
-    #         channel: "VOICE", # required, accepts VOICE, CHAT, TASK
-    #       }
-    #
     # @!attribute [rw] queue_id
     #   The identifier for the queue.
     #   @return [String]
@@ -9376,47 +7723,6 @@ module Aws::Connect
     #
     #  </note>
     #
-    # @note When making an API call, you may pass RoutingProfileSearchCriteria
-    #   data as a hash:
-    #
-    #       {
-    #         or_conditions: [
-    #           {
-    #             or_conditions: {
-    #               # recursive RoutingProfileSearchConditionList
-    #             },
-    #             and_conditions: {
-    #               # recursive RoutingProfileSearchConditionList
-    #             },
-    #             string_condition: {
-    #               field_name: "String",
-    #               value: "String",
-    #               comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
-    #             },
-    #           },
-    #         ],
-    #         and_conditions: [
-    #           {
-    #             or_conditions: {
-    #               # recursive RoutingProfileSearchConditionList
-    #             },
-    #             and_conditions: {
-    #               # recursive RoutingProfileSearchConditionList
-    #             },
-    #             string_condition: {
-    #               field_name: "String",
-    #               value: "String",
-    #               comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
-    #             },
-    #           },
-    #         ],
-    #         string_condition: {
-    #           field_name: "String",
-    #           value: "String",
-    #           comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
-    #         },
-    #       }
-    #
     # @!attribute [rw] or_conditions
     #   A list of conditions which would be applied together with an OR
     #   condition.
@@ -9447,32 +7753,6 @@ module Aws::Connect
     end
 
     # Filters to be applied to search results.
-    #
-    # @note When making an API call, you may pass RoutingProfileSearchFilter
-    #   data as a hash:
-    #
-    #       {
-    #         tag_filter: {
-    #           or_conditions: [
-    #             [
-    #               {
-    #                 tag_key: "String",
-    #                 tag_value: "String",
-    #               },
-    #             ],
-    #           ],
-    #           and_conditions: [
-    #             {
-    #               tag_key: "String",
-    #               tag_value: "String",
-    #             },
-    #           ],
-    #           tag_condition: {
-    #             tag_key: "String",
-    #             tag_value: "String",
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] tag_filter
     #   An object that can be used to specify Tag conditions inside the
@@ -9521,18 +7801,6 @@ module Aws::Connect
     # Information about the Amazon Simple Storage Service (Amazon S3)
     # storage type.
     #
-    # @note When making an API call, you may pass S3Config
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_name: "BucketName", # required
-    #         bucket_prefix: "Prefix", # required
-    #         encryption_config: {
-    #           encryption_type: "KMS", # required, accepts KMS
-    #           key_id: "KeyId", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] bucket_name
     #   The S3 bucket name.
     #   @return [String]
@@ -9555,18 +7823,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SearchAvailablePhoneNumbersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         target_arn: "ARN", # required
-    #         phone_number_country_code: "AF", # required, accepts AF, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BA, BW, BR, IO, VG, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CK, CR, HR, CU, CW, CY, CZ, CD, DK, DJ, DM, DO, TL, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, PF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GU, GT, GG, GN, GW, GY, HT, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, CI, JM, JP, JE, JO, KZ, KE, KI, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, AN, NC, NZ, NI, NE, NG, NU, KP, MP, NO, OM, PK, PW, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, CG, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, KR, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TG, TK, TO, TT, TN, TR, TM, TC, TV, VI, UG, UA, AE, GB, US, UY, UZ, VU, VA, VE, VN, WF, EH, YE, ZM, ZW
-    #         phone_number_type: "TOLL_FREE", # required, accepts TOLL_FREE, DID
-    #         phone_number_prefix: "PhoneNumberPrefix",
-    #         max_results: 1,
-    #         next_token: "LargeNextToken",
-    #       }
-    #
     # @!attribute [rw] target_arn
     #   The Amazon Resource Name (ARN) for Amazon Connect instances or
     #   traffic distribution groups that phone numbers are claimed to.
@@ -9627,55 +7883,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SearchQueuesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         next_token: "NextToken2500",
-    #         max_results: 1,
-    #         search_filter: {
-    #           tag_filter: {
-    #             or_conditions: [
-    #               [
-    #                 {
-    #                   tag_key: "String",
-    #                   tag_value: "String",
-    #                 },
-    #               ],
-    #             ],
-    #             and_conditions: [
-    #               {
-    #                 tag_key: "String",
-    #                 tag_value: "String",
-    #               },
-    #             ],
-    #             tag_condition: {
-    #               tag_key: "String",
-    #               tag_value: "String",
-    #             },
-    #           },
-    #         },
-    #         search_criteria: {
-    #           or_conditions: [
-    #             {
-    #               # recursive QueueSearchCriteria
-    #             },
-    #           ],
-    #           and_conditions: [
-    #             {
-    #               # recursive QueueSearchCriteria
-    #             },
-    #           ],
-    #           string_condition: {
-    #             field_name: "String",
-    #             value: "String",
-    #             comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
-    #           },
-    #           queue_type_condition: "STANDARD", # accepts STANDARD
-    #         },
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -9741,54 +7948,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SearchRoutingProfilesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         next_token: "NextToken2500",
-    #         max_results: 1,
-    #         search_filter: {
-    #           tag_filter: {
-    #             or_conditions: [
-    #               [
-    #                 {
-    #                   tag_key: "String",
-    #                   tag_value: "String",
-    #                 },
-    #               ],
-    #             ],
-    #             and_conditions: [
-    #               {
-    #                 tag_key: "String",
-    #                 tag_value: "String",
-    #               },
-    #             ],
-    #             tag_condition: {
-    #               tag_key: "String",
-    #               tag_value: "String",
-    #             },
-    #           },
-    #         },
-    #         search_criteria: {
-    #           or_conditions: [
-    #             {
-    #               # recursive RoutingProfileSearchCriteria
-    #             },
-    #           ],
-    #           and_conditions: [
-    #             {
-    #               # recursive RoutingProfileSearchCriteria
-    #             },
-    #           ],
-    #           string_condition: {
-    #             field_name: "String",
-    #             value: "String",
-    #             comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -9855,54 +8014,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SearchSecurityProfilesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         next_token: "NextToken2500",
-    #         max_results: 1,
-    #         search_criteria: {
-    #           or_conditions: [
-    #             {
-    #               # recursive SecurityProfileSearchCriteria
-    #             },
-    #           ],
-    #           and_conditions: [
-    #             {
-    #               # recursive SecurityProfileSearchCriteria
-    #             },
-    #           ],
-    #           string_condition: {
-    #             field_name: "String",
-    #             value: "String",
-    #             comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
-    #           },
-    #         },
-    #         search_filter: {
-    #           tag_filter: {
-    #             or_conditions: [
-    #               [
-    #                 {
-    #                   tag_key: "String",
-    #                   tag_value: "String",
-    #                 },
-    #               ],
-    #             ],
-    #             and_conditions: [
-    #               {
-    #                 tag_key: "String",
-    #                 tag_value: "String",
-    #               },
-    #             ],
-    #             tag_condition: {
-    #               tag_key: "String",
-    #               tag_value: "String",
-    #             },
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -9972,58 +8083,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SearchUsersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId",
-    #         next_token: "NextToken2500",
-    #         max_results: 1,
-    #         search_filter: {
-    #           tag_filter: {
-    #             or_conditions: [
-    #               [
-    #                 {
-    #                   tag_key: "String",
-    #                   tag_value: "String",
-    #                 },
-    #               ],
-    #             ],
-    #             and_conditions: [
-    #               {
-    #                 tag_key: "String",
-    #                 tag_value: "String",
-    #               },
-    #             ],
-    #             tag_condition: {
-    #               tag_key: "String",
-    #               tag_value: "String",
-    #             },
-    #           },
-    #         },
-    #         search_criteria: {
-    #           or_conditions: [
-    #             {
-    #               # recursive UserSearchCriteria
-    #             },
-    #           ],
-    #           and_conditions: [
-    #             {
-    #               # recursive UserSearchCriteria
-    #             },
-    #           ],
-    #           string_condition: {
-    #             field_name: "String",
-    #             value: "String",
-    #             comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
-    #           },
-    #           hierarchy_group_condition: {
-    #             value: "String",
-    #             hierarchy_group_match_type: "EXACT", # accepts EXACT, WITH_CHILD_GROUPS
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -10089,18 +8148,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SearchVocabulariesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         max_results: 1,
-    #         next_token: "VocabularyNextToken",
-    #         state: "CREATION_IN_PROGRESS", # accepts CREATION_IN_PROGRESS, ACTIVE, CREATION_FAILED, DELETE_IN_PROGRESS
-    #         name_starts_with: "VocabularyName",
-    #         language_code: "ar-AE", # accepts ar-AE, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fr-CA, fr-FR, hi-IN, it-IT, ja-JP, ko-KR, pt-BR, pt-PT, zh-CN
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -10251,47 +8298,6 @@ module Aws::Connect
     #
     #  </note>
     #
-    # @note When making an API call, you may pass SecurityProfileSearchCriteria
-    #   data as a hash:
-    #
-    #       {
-    #         or_conditions: [
-    #           {
-    #             or_conditions: {
-    #               # recursive SecurityProfileSearchConditionList
-    #             },
-    #             and_conditions: {
-    #               # recursive SecurityProfileSearchConditionList
-    #             },
-    #             string_condition: {
-    #               field_name: "String",
-    #               value: "String",
-    #               comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
-    #             },
-    #           },
-    #         ],
-    #         and_conditions: [
-    #           {
-    #             or_conditions: {
-    #               # recursive SecurityProfileSearchConditionList
-    #             },
-    #             and_conditions: {
-    #               # recursive SecurityProfileSearchConditionList
-    #             },
-    #             string_condition: {
-    #               field_name: "String",
-    #               value: "String",
-    #               comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
-    #             },
-    #           },
-    #         ],
-    #         string_condition: {
-    #           field_name: "String",
-    #           value: "String",
-    #           comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
-    #         },
-    #       }
-    #
     # @!attribute [rw] or_conditions
     #   A list of conditions which would be applied together with an OR
     #   condition.
@@ -10388,32 +8394,6 @@ module Aws::Connect
 
     # Filters to be applied to search results.
     #
-    # @note When making an API call, you may pass SecurityProfilesSearchFilter
-    #   data as a hash:
-    #
-    #       {
-    #         tag_filter: {
-    #           or_conditions: [
-    #             [
-    #               {
-    #                 tag_key: "String",
-    #                 tag_value: "String",
-    #               },
-    #             ],
-    #           ],
-    #           and_conditions: [
-    #             {
-    #               tag_key: "String",
-    #               tag_value: "String",
-    #             },
-    #           ],
-    #           tag_condition: {
-    #             tag_key: "String",
-    #             tag_value: "String",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] tag_filter
     #   An object that can be used to specify Tag conditions inside the
     #   `SearchFilter`. This accepts an `OR` of `AND` (List of List) input
@@ -10447,27 +8427,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartChatContactRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         contact_flow_id: "ContactFlowId", # required
-    #         attributes: {
-    #           "AttributeName" => "AttributeValue",
-    #         },
-    #         participant_details: { # required
-    #           display_name: "DisplayName", # required
-    #         },
-    #         initial_message: {
-    #           content_type: "ChatContentType", # required
-    #           content: "ChatContent", # required
-    #         },
-    #         client_token: "ClientToken",
-    #         chat_duration_in_minutes: 1,
-    #         supported_messaging_content_types: ["SupportedMessagingContentType"],
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -10572,18 +8531,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartContactRecordingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         contact_id: "ContactId", # required
-    #         initial_contact_id: "ContactId", # required
-    #         voice_recording_configuration: { # required
-    #           voice_recording_track: "FROM_AGENT", # accepts FROM_AGENT, TO_AGENT, ALL
-    #         },
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -10617,18 +8564,6 @@ module Aws::Connect
     #
     class StartContactRecordingResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass StartContactStreamingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         contact_id: "ContactId", # required
-    #         chat_streaming_configuration: { # required
-    #           streaming_endpoint_arn: "ChatStreamingEndpointARN", # required
-    #         },
-    #         client_token: "ClientToken", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -10681,27 +8616,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartOutboundVoiceContactRequest
-    #   data as a hash:
-    #
-    #       {
-    #         destination_phone_number: "PhoneNumber", # required
-    #         contact_flow_id: "ContactFlowId", # required
-    #         instance_id: "InstanceId", # required
-    #         client_token: "ClientToken",
-    #         source_phone_number: "PhoneNumber",
-    #         queue_id: "QueueId",
-    #         attributes: {
-    #           "AttributeName" => "AttributeValue",
-    #         },
-    #         answer_machine_detection_config: {
-    #           enable_answer_machine_detection: false,
-    #           await_answer_machine_prompt: false,
-    #         },
-    #         campaign_id: "CampaignId",
-    #         traffic_type: "GENERAL", # accepts GENERAL, CAMPAIGN
-    #       }
-    #
     # @!attribute [rw] destination_phone_number
     #   The phone number of the customer, in E.164 format.
     #   @return [String]
@@ -10806,30 +8720,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartTaskContactRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         previous_contact_id: "ContactId",
-    #         contact_flow_id: "ContactFlowId",
-    #         attributes: {
-    #           "AttributeName" => "AttributeValue",
-    #         },
-    #         name: "Name", # required
-    #         references: {
-    #           "ReferenceKey" => {
-    #             value: "ReferenceValue", # required
-    #             type: "URL", # required, accepts URL, ATTACHMENT, NUMBER, STRING, DATE, EMAIL
-    #           },
-    #         },
-    #         description: "Description",
-    #         client_token: "ClientToken",
-    #         scheduled_time: Time.now,
-    #         task_template_id: "TaskTemplateId",
-    #         quick_connect_id: "QuickConnectId",
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -10933,15 +8823,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopContactRecordingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         contact_id: "ContactId", # required
-    #         initial_contact_id: "ContactId", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -10970,14 +8851,6 @@ module Aws::Connect
     #
     class StopContactRecordingResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass StopContactRequest
-    #   data as a hash:
-    #
-    #       {
-    #         contact_id: "ContactId", # required
-    #         instance_id: "InstanceId", # required
-    #       }
-    #
     # @!attribute [rw] contact_id
     #   The ID of the contact.
     #   @return [String]
@@ -11000,15 +8873,6 @@ module Aws::Connect
     #
     class StopContactResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass StopContactStreamingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         contact_id: "ContactId", # required
-    #         streaming_id: "StreamingId", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -11043,15 +8907,6 @@ module Aws::Connect
     # <note markdown="1"> The currently supported value for `FieldName`\: `name`
     #
     #  </note>
-    #
-    # @note When making an API call, you may pass StringCondition
-    #   data as a hash:
-    #
-    #       {
-    #         field_name: "String",
-    #         value: "String",
-    #         comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
-    #       }
     #
     # @!attribute [rw] field_name
     #   The name of the field in the string condition.
@@ -11096,15 +8951,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SuspendContactRecordingRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         contact_id: "ContactId", # required
-    #         initial_contact_id: "ContactId", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -11136,14 +8982,6 @@ module Aws::Connect
     # A leaf node condition which can be used to specify a tag condition,
     # for example, `HAVE BPO = 123`.
     #
-    # @note When making an API call, you may pass TagCondition
-    #   data as a hash:
-    #
-    #       {
-    #         tag_key: "String",
-    #         tag_value: "String",
-    #       }
-    #
     # @!attribute [rw] tag_key
     #   The tag key in the tag condition.
     #   @return [String]
@@ -11161,16 +8999,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ARN", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -11191,33 +9019,6 @@ module Aws::Connect
     end
 
     # Describes constraints that apply to the template fields.
-    #
-    # @note When making an API call, you may pass TaskTemplateConstraints
-    #   data as a hash:
-    #
-    #       {
-    #         required_fields: [
-    #           {
-    #             id: {
-    #               name: "TaskTemplateFieldName",
-    #             },
-    #           },
-    #         ],
-    #         read_only_fields: [
-    #           {
-    #             id: {
-    #               name: "TaskTemplateFieldName",
-    #             },
-    #           },
-    #         ],
-    #         invisible_fields: [
-    #           {
-    #             id: {
-    #               name: "TaskTemplateFieldName",
-    #             },
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] required_fields
     #   Lists the fields that are required to be filled by agents.
@@ -11243,16 +9044,6 @@ module Aws::Connect
 
     # Describes a default field and its corresponding value.
     #
-    # @note When making an API call, you may pass TaskTemplateDefaultFieldValue
-    #   data as a hash:
-    #
-    #       {
-    #         id: {
-    #           name: "TaskTemplateFieldName",
-    #         },
-    #         default_value: "TaskTemplateFieldValue",
-    #       }
-    #
     # @!attribute [rw] id
     #   Identifier of a field.
     #   @return [Types::TaskTemplateFieldIdentifier]
@@ -11272,20 +9063,6 @@ module Aws::Connect
 
     # Describes default values for fields on a template.
     #
-    # @note When making an API call, you may pass TaskTemplateDefaults
-    #   data as a hash:
-    #
-    #       {
-    #         default_field_values: [
-    #           {
-    #             id: {
-    #               name: "TaskTemplateFieldName",
-    #             },
-    #             default_value: "TaskTemplateFieldValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] default_field_values
     #   Default value for the field.
     #   @return [Array<Types::TaskTemplateDefaultFieldValue>]
@@ -11299,18 +9076,6 @@ module Aws::Connect
     end
 
     # Describes a single task template field.
-    #
-    # @note When making an API call, you may pass TaskTemplateField
-    #   data as a hash:
-    #
-    #       {
-    #         id: { # required
-    #           name: "TaskTemplateFieldName",
-    #         },
-    #         description: "TaskTemplateFieldDescription",
-    #         type: "NAME", # accepts NAME, DESCRIPTION, SCHEDULED_TIME, QUICK_CONNECT, URL, NUMBER, TEXT, TEXT_AREA, DATE_TIME, BOOLEAN, SINGLE_SELECT, EMAIL
-    #         single_select_options: ["TaskTemplateSingleSelectOption"],
-    #       }
     #
     # @!attribute [rw] id
     #   The unique identifier for the field.
@@ -11340,13 +9105,6 @@ module Aws::Connect
     end
 
     # The identifier of the task template field.
-    #
-    # @note When making an API call, you may pass TaskTemplateFieldIdentifier
-    #   data as a hash:
-    #
-    #       {
-    #         name: "TaskTemplateFieldName",
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the task template field.
@@ -11409,18 +9167,6 @@ module Aws::Connect
 
     # The distribution of traffic between the instance and its replicas.
     #
-    # @note When making an API call, you may pass TelephonyConfig
-    #   data as a hash:
-    #
-    #       {
-    #         distributions: [ # required
-    #           {
-    #             region: "AwsRegion", # required
-    #             percentage: 1, # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] distributions
     #   Information about traffic distributions.
     #   @return [Array<Types::Distribution>]
@@ -11434,14 +9180,6 @@ module Aws::Connect
     end
 
     # Contains information about the threshold for service level metrics.
-    #
-    # @note When making an API call, you may pass Threshold
-    #   data as a hash:
-    #
-    #       {
-    #         comparison: "LT", # accepts LT
-    #         threshold_value: 1.0,
-    #       }
     #
     # @!attribute [rw] comparison
     #   The type of comparison. Only "less than" (LT) comparisons are
@@ -11614,18 +9352,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TransferContactRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         contact_id: "ContactId", # required
-    #         queue_id: "QueueId",
-    #         user_id: "AgentResourceId",
-    #         contact_flow_id: "ContactFlowId", # required
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -11691,14 +9417,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ARN", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -11716,19 +9434,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateAgentStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         agent_status_id: "AgentStatusId", # required
-    #         name: "AgentStatusName",
-    #         description: "UpdateAgentStatusDescription",
-    #         state: "ENABLED", # accepts ENABLED, DISABLED
-    #         display_order: 1,
-    #         reset_order_number: false,
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -11772,17 +9477,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateContactAttributesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         initial_contact_id: "ContactId", # required
-    #         instance_id: "InstanceId", # required
-    #         attributes: { # required
-    #           "AttributeName" => "AttributeValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] initial_contact_id
     #   The identifier of the contact. This is the identifier of the contact
     #   associated with the first interaction with the contact center.
@@ -11816,15 +9510,6 @@ module Aws::Connect
     #
     class UpdateContactAttributesResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateContactFlowContentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         contact_flow_id: "ContactFlowId", # required
-    #         content: "ContactFlowContent", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance.
     #   @return [String]
@@ -11853,17 +9538,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateContactFlowMetadataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         contact_flow_id: "ContactFlowId", # required
-    #         name: "ContactFlowName",
-    #         description: "ContactFlowDescription",
-    #         contact_flow_state: "ACTIVE", # accepts ACTIVE, ARCHIVED
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -11897,15 +9571,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateContactFlowModuleContentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         contact_flow_module_id: "ContactFlowModuleId", # required
-    #         content: "ContactFlowModuleContent", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -11933,17 +9598,6 @@ module Aws::Connect
     #
     class UpdateContactFlowModuleContentResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateContactFlowModuleMetadataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         contact_flow_module_id: "ContactFlowModuleId", # required
-    #         name: "ContactFlowModuleName",
-    #         description: "ContactFlowModuleDescription",
-    #         state: "ACTIVE", # accepts ACTIVE, ARCHIVED
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -11981,16 +9635,6 @@ module Aws::Connect
     #
     class UpdateContactFlowModuleMetadataResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateContactFlowNameRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         contact_flow_id: "ContactFlowId", # required
-    #         name: "ContactFlowName",
-    #         description: "ContactFlowDescription",
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance.
     #   @return [String]
@@ -12018,22 +9662,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateContactRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         contact_id: "ContactId", # required
-    #         name: "Name",
-    #         description: "Description",
-    #         references: {
-    #           "ReferenceKey" => {
-    #             value: "ReferenceValue", # required
-    #             type: "URL", # required, accepts URL, ATTACHMENT, NUMBER, STRING, DATE, EMAIL
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -12073,15 +9701,6 @@ module Aws::Connect
     #
     class UpdateContactResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateContactScheduleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         contact_id: "ContactId", # required
-    #         scheduled_time: Time.now, # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -12111,30 +9730,6 @@ module Aws::Connect
     #
     class UpdateContactScheduleResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateHoursOfOperationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         hours_of_operation_id: "HoursOfOperationId", # required
-    #         name: "CommonNameLength127",
-    #         description: "UpdateHoursOfOperationDescription",
-    #         time_zone: "TimeZone",
-    #         config: [
-    #           {
-    #             day: "SUNDAY", # required, accepts SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
-    #             start_time: { # required
-    #               hours: 1, # required
-    #               minutes: 1, # required
-    #             },
-    #             end_time: { # required
-    #               hours: 1, # required
-    #               minutes: 1, # required
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -12173,15 +9768,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateInstanceAttributeRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         attribute_type: "INBOUND_CALLS", # required, accepts INBOUND_CALLS, OUTBOUND_CALLS, CONTACTFLOW_LOGS, CONTACT_LENS, AUTO_RESOLVE_BEST_VOICES, USE_CUSTOM_TTS_VOICES, EARLY_MEDIA, MULTI_PARTY_CONFERENCE, HIGH_VOLUME_OUTBOUND, ENHANCED_CONTACT_MONITORING
-    #         value: "InstanceAttributeValue", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -12211,41 +9797,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateInstanceStorageConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         association_id: "AssociationId", # required
-    #         resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS, REAL_TIME_CONTACT_ANALYSIS_SEGMENTS
-    #         storage_config: { # required
-    #           association_id: "AssociationId",
-    #           storage_type: "S3", # required, accepts S3, KINESIS_VIDEO_STREAM, KINESIS_STREAM, KINESIS_FIREHOSE
-    #           s3_config: {
-    #             bucket_name: "BucketName", # required
-    #             bucket_prefix: "Prefix", # required
-    #             encryption_config: {
-    #               encryption_type: "KMS", # required, accepts KMS
-    #               key_id: "KeyId", # required
-    #             },
-    #           },
-    #           kinesis_video_stream_config: {
-    #             prefix: "Prefix", # required
-    #             retention_period_hours: 1, # required
-    #             encryption_config: { # required
-    #               encryption_type: "KMS", # required, accepts KMS
-    #               key_id: "KeyId", # required
-    #             },
-    #           },
-    #           kinesis_stream_config: {
-    #             stream_arn: "ARN", # required
-    #           },
-    #           kinesis_firehose_config: {
-    #             firehose_arn: "ARN", # required
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -12275,15 +9826,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdatePhoneNumberRequest
-    #   data as a hash:
-    #
-    #       {
-    #         phone_number_id: "PhoneNumberId", # required
-    #         target_arn: "ARN", # required
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] phone_number_id
     #   A unique identifier for the phone number.
     #   @return [String]
@@ -12334,15 +9876,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateQueueHoursOfOperationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         queue_id: "QueueId", # required
-    #         hours_of_operation_id: "HoursOfOperationId", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -12366,15 +9899,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateQueueMaxContactsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         queue_id: "QueueId", # required
-    #         max_contacts: 1,
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -12399,16 +9923,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateQueueNameRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         queue_id: "QueueId", # required
-    #         name: "CommonNameLength127",
-    #         description: "QueueDescription",
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -12437,19 +9951,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateQueueOutboundCallerConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         queue_id: "QueueId", # required
-    #         outbound_caller_config: { # required
-    #           outbound_caller_id_name: "OutboundCallerIdName",
-    #           outbound_caller_id_number_id: "PhoneNumberId",
-    #           outbound_flow_id: "ContactFlowId",
-    #         },
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -12473,15 +9974,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateQueueStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         queue_id: "QueueId", # required
-    #         status: "ENABLED", # required, accepts ENABLED, DISABLED
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -12505,28 +9997,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateQuickConnectConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         quick_connect_id: "QuickConnectId", # required
-    #         quick_connect_config: { # required
-    #           quick_connect_type: "USER", # required, accepts USER, QUEUE, PHONE_NUMBER
-    #           user_config: {
-    #             user_id: "UserId", # required
-    #             contact_flow_id: "ContactFlowId", # required
-    #           },
-    #           queue_config: {
-    #             queue_id: "QueueId", # required
-    #             contact_flow_id: "ContactFlowId", # required
-    #           },
-    #           phone_config: {
-    #             phone_number: "PhoneNumber", # required
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -12550,16 +10020,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateQuickConnectNameRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         quick_connect_id: "QuickConnectId", # required
-    #         name: "QuickConnectName",
-    #         description: "UpdateQuickConnectDescription",
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -12588,20 +10048,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateRoutingProfileConcurrencyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         routing_profile_id: "RoutingProfileId", # required
-    #         media_concurrencies: [ # required
-    #           {
-    #             channel: "VOICE", # required, accepts VOICE, CHAT, TASK
-    #             concurrency: 1, # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -12626,15 +10072,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateRoutingProfileDefaultOutboundQueueRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         routing_profile_id: "RoutingProfileId", # required
-    #         default_outbound_queue_id: "QueueId", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -12658,16 +10095,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateRoutingProfileNameRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         routing_profile_id: "RoutingProfileId", # required
-    #         name: "RoutingProfileName",
-    #         description: "RoutingProfileDescription",
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -12698,24 +10125,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateRoutingProfileQueuesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         routing_profile_id: "RoutingProfileId", # required
-    #         queue_configs: [ # required
-    #           {
-    #             queue_reference: { # required
-    #               queue_id: "QueueId", # required
-    #               channel: "VOICE", # required, accepts VOICE, CHAT, TASK
-    #             },
-    #             priority: 1, # required
-    #             delay: 1, # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -12741,20 +10150,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateSecurityProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "SecurityProfileDescription",
-    #         permissions: ["SecurityProfilePermission"],
-    #         security_profile_id: "SecurityProfileId", # required
-    #         instance_id: "InstanceId", # required
-    #         allowed_access_control_tags: {
-    #           "SecurityProfilePolicyKey" => "SecurityProfilePolicyValue",
-    #         },
-    #         tag_restricted_resources: ["TagRestrictedResourceName"],
-    #       }
-    #
     # @!attribute [rw] description
     #   The description of the security profile.
     #   @return [String]
@@ -12800,61 +10195,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateTaskTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         task_template_id: "TaskTemplateId", # required
-    #         instance_id: "InstanceId", # required
-    #         name: "TaskTemplateName",
-    #         description: "TaskTemplateDescription",
-    #         contact_flow_id: "ContactFlowId",
-    #         constraints: {
-    #           required_fields: [
-    #             {
-    #               id: {
-    #                 name: "TaskTemplateFieldName",
-    #               },
-    #             },
-    #           ],
-    #           read_only_fields: [
-    #             {
-    #               id: {
-    #                 name: "TaskTemplateFieldName",
-    #               },
-    #             },
-    #           ],
-    #           invisible_fields: [
-    #             {
-    #               id: {
-    #                 name: "TaskTemplateFieldName",
-    #               },
-    #             },
-    #           ],
-    #         },
-    #         defaults: {
-    #           default_field_values: [
-    #             {
-    #               id: {
-    #                 name: "TaskTemplateFieldName",
-    #               },
-    #               default_value: "TaskTemplateFieldValue",
-    #             },
-    #           ],
-    #         },
-    #         status: "ACTIVE", # accepts ACTIVE, INACTIVE
-    #         fields: [
-    #           {
-    #             id: { # required
-    #               name: "TaskTemplateFieldName",
-    #             },
-    #             description: "TaskTemplateFieldDescription",
-    #             type: "NAME", # accepts NAME, DESCRIPTION, SCHEDULED_TIME, QUICK_CONNECT, URL, NUMBER, TEXT, TEXT_AREA, DATE_TIME, BOOLEAN, SINGLE_SELECT, EMAIL
-    #             single_select_options: ["TaskTemplateSingleSelectOption"],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] task_template_id
     #   A unique identifier for the task template.
     #   @return [String]
@@ -12986,21 +10326,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateTrafficDistributionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "TrafficDistributionGroupIdOrArn", # required
-    #         telephony_config: {
-    #           distributions: [ # required
-    #             {
-    #               region: "AwsRegion", # required
-    #               percentage: 1, # required
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] id
     #   The identifier of the traffic distribution group. This can be the ID
     #   or the ARN if the API is being called in the Region where the
@@ -13025,15 +10350,6 @@ module Aws::Connect
     #
     class UpdateTrafficDistributionResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateUserHierarchyGroupNameRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "HierarchyGroupName", # required
-    #         hierarchy_group_id: "HierarchyGroupId", # required
-    #         instance_id: "InstanceId", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the hierarchy group. Must not be more than 100
     #   characters.
@@ -13058,15 +10374,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateUserHierarchyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         hierarchy_group_id: "HierarchyGroupId",
-    #         user_id: "UserId", # required
-    #         instance_id: "InstanceId", # required
-    #       }
-    #
     # @!attribute [rw] hierarchy_group_id
     #   The identifier of the hierarchy group.
     #   @return [String]
@@ -13090,30 +10397,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateUserHierarchyStructureRequest
-    #   data as a hash:
-    #
-    #       {
-    #         hierarchy_structure: { # required
-    #           level_one: {
-    #             name: "HierarchyLevelName", # required
-    #           },
-    #           level_two: {
-    #             name: "HierarchyLevelName", # required
-    #           },
-    #           level_three: {
-    #             name: "HierarchyLevelName", # required
-    #           },
-    #           level_four: {
-    #             name: "HierarchyLevelName", # required
-    #           },
-    #           level_five: {
-    #             name: "HierarchyLevelName", # required
-    #           },
-    #         },
-    #         instance_id: "InstanceId", # required
-    #       }
-    #
     # @!attribute [rw] hierarchy_structure
     #   The hierarchy levels to update.
     #   @return [Types::HierarchyStructureUpdate]
@@ -13132,21 +10415,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateUserIdentityInfoRequest
-    #   data as a hash:
-    #
-    #       {
-    #         identity_info: { # required
-    #           first_name: "AgentFirstName",
-    #           last_name: "AgentLastName",
-    #           email: "Email",
-    #           secondary_email: "Email",
-    #           mobile: "PhoneNumber",
-    #         },
-    #         user_id: "UserId", # required
-    #         instance_id: "InstanceId", # required
-    #       }
-    #
     # @!attribute [rw] identity_info
     #   The identity information for the user.
     #   @return [Types::UserIdentityInfo]
@@ -13170,20 +10438,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateUserPhoneConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         phone_config: { # required
-    #           phone_type: "SOFT_PHONE", # required, accepts SOFT_PHONE, DESK_PHONE
-    #           auto_accept: false,
-    #           after_contact_work_time_limit: 1,
-    #           desk_phone_number: "PhoneNumber",
-    #         },
-    #         user_id: "UserId", # required
-    #         instance_id: "InstanceId", # required
-    #       }
-    #
     # @!attribute [rw] phone_config
     #   Information about phone configuration settings for the user.
     #   @return [Types::UserPhoneConfig]
@@ -13207,15 +10461,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateUserRoutingProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         routing_profile_id: "RoutingProfileId", # required
-    #         user_id: "UserId", # required
-    #         instance_id: "InstanceId", # required
-    #       }
-    #
     # @!attribute [rw] routing_profile_id
     #   The identifier of the routing profile for the user.
     #   @return [String]
@@ -13239,15 +10484,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateUserSecurityProfilesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         security_profile_ids: ["SecurityProfileId"], # required
-    #         user_id: "UserId", # required
-    #         instance_id: "InstanceId", # required
-    #       }
-    #
     # @!attribute [rw] security_profile_ids
     #   The identifiers of the security profiles for the user.
     #   @return [Array<String>]
@@ -13441,16 +10677,6 @@ module Aws::Connect
 
     # A filter for the user data.
     #
-    # @note When making an API call, you may pass UserDataFilters
-    #   data as a hash:
-    #
-    #       {
-    #         queues: ["QueueId"],
-    #         contact_filter: {
-    #           contact_states: ["INCOMING"], # accepts INCOMING, PENDING, CONNECTING, CONNECTED, CONNECTED_ONHOLD, MISSED, ERROR, ENDED, REJECTED
-    #         },
-    #       }
-    #
     # @!attribute [rw] queues
     #   Contains information about a queue resource for which metrics are
     #   returned.
@@ -13471,17 +10697,6 @@ module Aws::Connect
     end
 
     # Contains information about the identity of a user.
-    #
-    # @note When making an API call, you may pass UserIdentityInfo
-    #   data as a hash:
-    #
-    #       {
-    #         first_name: "AgentFirstName",
-    #         last_name: "AgentLastName",
-    #         email: "Email",
-    #         secondary_email: "Email",
-    #         mobile: "PhoneNumber",
-    #       }
     #
     # @!attribute [rw] first_name
     #   The first name. This is required if you are using Amazon Connect or
@@ -13560,16 +10775,6 @@ module Aws::Connect
     # Contains information about the phone configuration settings for a
     # user.
     #
-    # @note When making an API call, you may pass UserPhoneConfig
-    #   data as a hash:
-    #
-    #       {
-    #         phone_type: "SOFT_PHONE", # required, accepts SOFT_PHONE, DESK_PHONE
-    #         auto_accept: false,
-    #         after_contact_work_time_limit: 1,
-    #         desk_phone_number: "PhoneNumber",
-    #       }
-    #
     # @!attribute [rw] phone_type
     #   The phone type.
     #   @return [String]
@@ -13604,14 +10809,6 @@ module Aws::Connect
 
     # Contains information about the quick connect configuration settings
     # for a user. The contact flow must be of type Transfer to Agent.
-    #
-    # @note When making an API call, you may pass UserQuickConnectConfig
-    #   data as a hash:
-    #
-    #       {
-    #         user_id: "UserId", # required
-    #         contact_flow_id: "ContactFlowId", # required
-    #       }
     #
     # @!attribute [rw] user_id
     #   The identifier of the user.
@@ -13658,59 +10855,6 @@ module Aws::Connect
     #
     #  </note>
     #
-    # @note When making an API call, you may pass UserSearchCriteria
-    #   data as a hash:
-    #
-    #       {
-    #         or_conditions: [
-    #           {
-    #             or_conditions: {
-    #               # recursive UserSearchConditionList
-    #             },
-    #             and_conditions: {
-    #               # recursive UserSearchConditionList
-    #             },
-    #             string_condition: {
-    #               field_name: "String",
-    #               value: "String",
-    #               comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
-    #             },
-    #             hierarchy_group_condition: {
-    #               value: "String",
-    #               hierarchy_group_match_type: "EXACT", # accepts EXACT, WITH_CHILD_GROUPS
-    #             },
-    #           },
-    #         ],
-    #         and_conditions: [
-    #           {
-    #             or_conditions: {
-    #               # recursive UserSearchConditionList
-    #             },
-    #             and_conditions: {
-    #               # recursive UserSearchConditionList
-    #             },
-    #             string_condition: {
-    #               field_name: "String",
-    #               value: "String",
-    #               comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
-    #             },
-    #             hierarchy_group_condition: {
-    #               value: "String",
-    #               hierarchy_group_match_type: "EXACT", # accepts EXACT, WITH_CHILD_GROUPS
-    #             },
-    #           },
-    #         ],
-    #         string_condition: {
-    #           field_name: "String",
-    #           value: "String",
-    #           comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
-    #         },
-    #         hierarchy_group_condition: {
-    #           value: "String",
-    #           hierarchy_group_match_type: "EXACT", # accepts EXACT, WITH_CHILD_GROUPS
-    #         },
-    #       }
-    #
     # @!attribute [rw] or_conditions
     #   A list of conditions which would be applied together with an `OR`
     #   condition.
@@ -13743,32 +10887,6 @@ module Aws::Connect
     end
 
     # Filters to be applied to search results.
-    #
-    # @note When making an API call, you may pass UserSearchFilter
-    #   data as a hash:
-    #
-    #       {
-    #         tag_filter: {
-    #           or_conditions: [
-    #             [
-    #               {
-    #                 tag_key: "String",
-    #                 tag_value: "String",
-    #               },
-    #             ],
-    #           ],
-    #           and_conditions: [
-    #             {
-    #               tag_key: "String",
-    #               tag_value: "String",
-    #             },
-    #           ],
-    #           tag_condition: {
-    #             tag_key: "String",
-    #             tag_value: "String",
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] tag_filter
     #   An object that can be used to specify Tag conditions inside the
@@ -13997,13 +11115,6 @@ module Aws::Connect
     end
 
     # Contains information about the recording configuration settings.
-    #
-    # @note When making an API call, you may pass VoiceRecordingConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         voice_recording_track: "FROM_AGENT", # accepts FROM_AGENT, TO_AGENT, ALL
-    #       }
     #
     # @!attribute [rw] voice_recording_track
     #   Identifies which track is being recorded.

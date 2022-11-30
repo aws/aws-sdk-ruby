@@ -12,15 +12,6 @@ module Aws::GameLift
 
     # Represents the input for a request operation.
     #
-    # @note When making an API call, you may pass AcceptMatchInput
-    #   data as a hash:
-    #
-    #       {
-    #         ticket_id: "MatchmakingIdStringModel", # required
-    #         player_ids: ["NonZeroAndMaxString"], # required
-    #         acceptance_type: "ACCEPT", # required, accepts ACCEPT, REJECT
-    #       }
-    #
     # @!attribute [rw] ticket_id
     #   A unique identifier for a matchmaking ticket. The ticket must be in
     #   status `REQUIRES_ACCEPTANCE`; otherwise this request will fail.
@@ -121,18 +112,6 @@ module Aws::GameLift
     # you specify an attribute value using any of the valid data types:
     # string, number, string array, or data map. Each `AttributeValue`
     # object can use only one of the available properties.
-    #
-    # @note When making an API call, you may pass AttributeValue
-    #   data as a hash:
-    #
-    #       {
-    #         s: "NonZeroAndMaxString",
-    #         n: 1.0,
-    #         sl: ["NonZeroAndMaxString"],
-    #         sdm: {
-    #           "NonZeroAndMaxString" => 1.0,
-    #         },
-    #       }
     #
     # @!attribute [rw] s
     #   For single string values. Maximum string length is 100 characters.
@@ -296,13 +275,6 @@ module Aws::GameLift
     #
     # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-serversdk.html
     #
-    # @note When making an API call, you may pass CertificateConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_type: "DISABLED", # required, accepts DISABLED, GENERATED
-    #       }
-    #
     # @!attribute [rw] certificate_type
     #   Indicates whether a TLS/SSL certificate is generated for a fleet.
     #
@@ -322,15 +294,6 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ClaimGameServerInput
-    #   data as a hash:
-    #
-    #       {
-    #         game_server_group_name: "GameServerGroupNameOrArn", # required
-    #         game_server_id: "GameServerId",
-    #         game_server_data: "GameServerData",
-    #       }
-    #
     # @!attribute [rw] game_server_group_name
     #   A unique identifier for the game server group where the game server
     #   is running. Use either the GameServerGroup name or ARN value. If you
@@ -391,25 +354,6 @@ module Aws::GameLift
 
     # Represents the input for a request operation.
     #
-    # @note When making an API call, you may pass CreateAliasInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "NonBlankAndLengthConstraintString", # required
-    #         description: "NonZeroAndMaxString",
-    #         routing_strategy: { # required
-    #           type: "SIMPLE", # accepts SIMPLE, TERMINAL
-    #           fleet_id: "FleetId",
-    #           message: "FreeText",
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   A descriptive label that is associated with an alias. Alias names do
     #   not need to be unique.
@@ -466,27 +410,6 @@ module Aws::GameLift
     end
 
     # Represents the input for a request operation.
-    #
-    # @note When making an API call, you may pass CreateBuildInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "NonZeroAndMaxString",
-    #         version: "NonZeroAndMaxString",
-    #         storage_location: {
-    #           bucket: "NonEmptyString",
-    #           key: "NonEmptyString",
-    #           role_arn: "NonEmptyString",
-    #           object_version: "NonEmptyString",
-    #         },
-    #         operating_system: "WINDOWS_2012", # accepts WINDOWS_2012, AMAZON_LINUX, AMAZON_LINUX_2
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] name
     #   A descriptive label that is associated with a build. Build names do
@@ -583,63 +506,6 @@ module Aws::GameLift
     end
 
     # Represents the input for a request operation.
-    #
-    # @note When making an API call, you may pass CreateFleetInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "NonZeroAndMaxString", # required
-    #         description: "NonZeroAndMaxString",
-    #         build_id: "BuildIdOrArn",
-    #         script_id: "ScriptIdOrArn",
-    #         server_launch_path: "LaunchPathStringModel",
-    #         server_launch_parameters: "LaunchParametersStringModel",
-    #         log_paths: ["NonZeroAndMaxString"],
-    #         ec2_instance_type: "t2.micro", # required, accepts t2.micro, t2.small, t2.medium, t2.large, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5a.large, c5a.xlarge, c5a.2xlarge, c5a.4xlarge, c5a.8xlarge, c5a.12xlarge, c5a.16xlarge, c5a.24xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.12xlarge, c5d.18xlarge, c5d.24xlarge, c6a.large, c6a.xlarge, c6a.2xlarge, c6a.4xlarge, c6a.8xlarge, c6a.12xlarge, c6a.16xlarge, c6a.24xlarge, c6i.large, c6i.xlarge, c6i.2xlarge, c6i.4xlarge, c6i.8xlarge, c6i.12xlarge, c6i.16xlarge, c6i.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge
-    #         ec2_inbound_permissions: [
-    #           {
-    #             from_port: 1, # required
-    #             to_port: 1, # required
-    #             ip_range: "NonBlankString", # required
-    #             protocol: "TCP", # required, accepts TCP, UDP
-    #           },
-    #         ],
-    #         new_game_session_protection_policy: "NoProtection", # accepts NoProtection, FullProtection
-    #         runtime_configuration: {
-    #           server_processes: [
-    #             {
-    #               launch_path: "LaunchPathStringModel", # required
-    #               parameters: "LaunchParametersStringModel",
-    #               concurrent_executions: 1, # required
-    #             },
-    #           ],
-    #           max_concurrent_game_session_activations: 1,
-    #           game_session_activation_timeout_seconds: 1,
-    #         },
-    #         resource_creation_limit_policy: {
-    #           new_game_sessions_per_creator: 1,
-    #           policy_period_in_minutes: 1,
-    #         },
-    #         metric_groups: ["MetricGroup"],
-    #         peer_vpc_aws_account_id: "NonZeroAndMaxString",
-    #         peer_vpc_id: "NonZeroAndMaxString",
-    #         fleet_type: "ON_DEMAND", # accepts ON_DEMAND, SPOT
-    #         instance_role_arn: "NonEmptyString",
-    #         certificate_configuration: {
-    #           certificate_type: "DISABLED", # required, accepts DISABLED, GENERATED
-    #         },
-    #         locations: [
-    #           {
-    #             location: "LocationStringModel",
-    #           },
-    #         ],
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] name
     #   A descriptive label that is associated with a fleet. Fleet names do
@@ -868,18 +734,6 @@ module Aws::GameLift
 
     # Represents the input for a request operation.
     #
-    # @note When making an API call, you may pass CreateFleetLocationsInput
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_id: "FleetIdOrArn", # required
-    #         locations: [ # required
-    #           {
-    #             location: "LocationStringModel",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] fleet_id
     #   A unique identifier for the fleet to add locations to. You can use
     #   either the fleet ID or ARN value.
@@ -964,42 +818,6 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateGameServerGroupInput
-    #   data as a hash:
-    #
-    #       {
-    #         game_server_group_name: "GameServerGroupName", # required
-    #         role_arn: "IamRoleArn", # required
-    #         min_size: 1, # required
-    #         max_size: 1, # required
-    #         launch_template: { # required
-    #           launch_template_id: "LaunchTemplateId",
-    #           launch_template_name: "LaunchTemplateName",
-    #           version: "LaunchTemplateVersion",
-    #         },
-    #         instance_definitions: [ # required
-    #           {
-    #             instance_type: "c4.large", # required, accepts c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5a.large, c5a.xlarge, c5a.2xlarge, c5a.4xlarge, c5a.8xlarge, c5a.12xlarge, c5a.16xlarge, c5a.24xlarge, c6g.medium, c6g.large, c6g.xlarge, c6g.2xlarge, c6g.4xlarge, c6g.8xlarge, c6g.12xlarge, c6g.16xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r6g.medium, r6g.large, r6g.xlarge, r6g.2xlarge, r6g.4xlarge, r6g.8xlarge, r6g.12xlarge, r6g.16xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m6g.medium, m6g.large, m6g.xlarge, m6g.2xlarge, m6g.4xlarge, m6g.8xlarge, m6g.12xlarge, m6g.16xlarge
-    #             weighted_capacity: "WeightedCapacity",
-    #           },
-    #         ],
-    #         auto_scaling_policy: {
-    #           estimated_instance_warmup: 1,
-    #           target_tracking_configuration: { # required
-    #             target_value: 1.0, # required
-    #           },
-    #         },
-    #         balancing_strategy: "SPOT_ONLY", # accepts SPOT_ONLY, SPOT_PREFERRED, ON_DEMAND_ONLY
-    #         game_server_protection_policy: "NO_PROTECTION", # accepts NO_PROTECTION, FULL_PROTECTION
-    #         vpc_subnets: ["VpcSubnet"],
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] game_server_group_name
     #   An identifier for the new game server group. This value is used to
     #   generate unique ARN identifiers for the Amazon EC2 Auto Scaling
@@ -1182,27 +1000,6 @@ module Aws::GameLift
 
     # Represents the input for a request operation.
     #
-    # @note When making an API call, you may pass CreateGameSessionInput
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_id: "FleetIdOrArn",
-    #         alias_id: "AliasIdOrArn",
-    #         maximum_player_session_count: 1, # required
-    #         name: "NonZeroAndMaxString",
-    #         game_properties: [
-    #           {
-    #             key: "GamePropertyKey", # required
-    #             value: "GamePropertyValue", # required
-    #           },
-    #         ],
-    #         creator_id: "NonZeroAndMaxString",
-    #         game_session_id: "IdStringModel",
-    #         idempotency_token: "IdStringModel",
-    #         game_session_data: "LargeGameSessionData",
-    #         location: "LocationStringModel",
-    #       }
-    #
     # @!attribute [rw] fleet_id
     #   A unique identifier for the fleet to create a game session in. You
     #   can use either the fleet ID or ARN value. Each request must
@@ -1319,40 +1116,6 @@ module Aws::GameLift
 
     # Represents the input for a request operation.
     #
-    # @note When making an API call, you may pass CreateGameSessionQueueInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "GameSessionQueueName", # required
-    #         timeout_in_seconds: 1,
-    #         player_latency_policies: [
-    #           {
-    #             maximum_individual_player_latency_milliseconds: 1,
-    #             policy_duration_seconds: 1,
-    #           },
-    #         ],
-    #         destinations: [
-    #           {
-    #             destination_arn: "ArnStringModel",
-    #           },
-    #         ],
-    #         filter_configuration: {
-    #           allowed_locations: ["LocationStringModel"],
-    #         },
-    #         priority_configuration: {
-    #           priority_order: ["LATENCY"], # accepts LATENCY, COST, DESTINATION, LOCATION
-    #           location_order: ["LocationStringModel"],
-    #         },
-    #         custom_event_data: "QueueCustomEventData",
-    #         notification_target: "QueueSnsArnStringModel",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   A descriptive label that is associated with game session queue.
     #   Queue names must be unique within each Region.
@@ -1458,37 +1221,6 @@ module Aws::GameLift
     end
 
     # Represents the input for a request operation.
-    #
-    # @note When making an API call, you may pass CreateMatchmakingConfigurationInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "MatchmakingIdStringModel", # required
-    #         description: "NonZeroAndMaxString",
-    #         game_session_queue_arns: ["ArnStringModel"],
-    #         request_timeout_seconds: 1, # required
-    #         acceptance_timeout_seconds: 1,
-    #         acceptance_required: false, # required
-    #         rule_set_name: "MatchmakingRuleSetName", # required
-    #         notification_target: "SnsArnStringModel",
-    #         additional_player_count: 1,
-    #         custom_event_data: "CustomEventData",
-    #         game_properties: [
-    #           {
-    #             key: "GamePropertyKey", # required
-    #             value: "GamePropertyValue", # required
-    #           },
-    #         ],
-    #         game_session_data: "GameSessionData",
-    #         backfill_mode: "AUTOMATIC", # accepts AUTOMATIC, MANUAL
-    #         flex_match_mode: "STANDALONE", # accepts STANDALONE, WITH_QUEUE
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] name
     #   A unique identifier for the matchmaking configuration. This name is
@@ -1676,20 +1408,6 @@ module Aws::GameLift
 
     # Represents the input for a request operation.
     #
-    # @note When making an API call, you may pass CreateMatchmakingRuleSetInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "MatchmakingIdStringModel", # required
-    #         rule_set_body: "RuleSetBody", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   A unique identifier for the matchmaking rule set. A matchmaking
     #   configuration identifies the rule set it uses by this name value.
@@ -1745,15 +1463,6 @@ module Aws::GameLift
 
     # Represents the input for a request operation.
     #
-    # @note When making an API call, you may pass CreatePlayerSessionInput
-    #   data as a hash:
-    #
-    #       {
-    #         game_session_id: "ArnStringModel", # required
-    #         player_id: "NonZeroAndMaxString", # required
-    #         player_data: "PlayerData",
-    #       }
-    #
     # @!attribute [rw] game_session_id
     #   A unique identifier for the game session to add a player to.
     #   @return [String]
@@ -1792,17 +1501,6 @@ module Aws::GameLift
     end
 
     # Represents the input for a request operation.
-    #
-    # @note When making an API call, you may pass CreatePlayerSessionsInput
-    #   data as a hash:
-    #
-    #       {
-    #         game_session_id: "ArnStringModel", # required
-    #         player_ids: ["NonZeroAndMaxString"], # required
-    #         player_data_map: {
-    #           "NonZeroAndMaxString" => "PlayerData",
-    #         },
-    #       }
     #
     # @!attribute [rw] game_session_id
     #   A unique identifier for the game session to add players to.
@@ -1845,27 +1543,6 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateScriptInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "NonZeroAndMaxString",
-    #         version: "NonZeroAndMaxString",
-    #         storage_location: {
-    #           bucket: "NonEmptyString",
-    #           key: "NonEmptyString",
-    #           role_arn: "NonEmptyString",
-    #           object_version: "NonEmptyString",
-    #         },
-    #         zip_file: "data",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   A descriptive label that is associated with a script. Script names
     #   do not need to be unique. You can use UpdateScript to change this
@@ -1949,14 +1626,6 @@ module Aws::GameLift
 
     # Represents the input for a request operation.
     #
-    # @note When making an API call, you may pass CreateVpcPeeringAuthorizationInput
-    #   data as a hash:
-    #
-    #       {
-    #         game_lift_aws_account_id: "NonZeroAndMaxString", # required
-    #         peer_vpc_id: "NonZeroAndMaxString", # required
-    #       }
-    #
     # @!attribute [rw] game_lift_aws_account_id
     #   A unique identifier for the Amazon Web Services account that you use
     #   to manage your GameLift fleet. You can find your Account ID in the
@@ -2002,15 +1671,6 @@ module Aws::GameLift
 
     # Represents the input for a request operation.
     #
-    # @note When making an API call, you may pass CreateVpcPeeringConnectionInput
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_id: "FleetId", # required
-    #         peer_vpc_aws_account_id: "NonZeroAndMaxString", # required
-    #         peer_vpc_id: "NonZeroAndMaxString", # required
-    #       }
-    #
     # @!attribute [rw] fleet_id
     #   A unique identifier for the fleet. You can use either the fleet ID
     #   or ARN value. This tells Amazon GameLift which GameLift VPC to peer
@@ -2053,13 +1713,6 @@ module Aws::GameLift
 
     # Represents the input for a request operation.
     #
-    # @note When making an API call, you may pass DeleteAliasInput
-    #   data as a hash:
-    #
-    #       {
-    #         alias_id: "AliasIdOrArn", # required
-    #       }
-    #
     # @!attribute [rw] alias_id
     #   A unique identifier of the alias that you want to delete. You can
     #   use either the alias ID or ARN value.
@@ -2074,13 +1727,6 @@ module Aws::GameLift
     end
 
     # Represents the input for a request operation.
-    #
-    # @note When making an API call, you may pass DeleteBuildInput
-    #   data as a hash:
-    #
-    #       {
-    #         build_id: "BuildIdOrArn", # required
-    #       }
     #
     # @!attribute [rw] build_id
     #   A unique identifier for the build to delete. You can use either the
@@ -2097,13 +1743,6 @@ module Aws::GameLift
 
     # Represents the input for a request operation.
     #
-    # @note When making an API call, you may pass DeleteFleetInput
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_id: "FleetIdOrArn", # required
-    #       }
-    #
     # @!attribute [rw] fleet_id
     #   A unique identifier for the fleet to be deleted. You can use either
     #   the fleet ID or ARN value.
@@ -2118,14 +1757,6 @@ module Aws::GameLift
     end
 
     # Represents the input for a request operation.
-    #
-    # @note When making an API call, you may pass DeleteFleetLocationsInput
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_id: "FleetIdOrArn", # required
-    #         locations: ["LocationStringModel"], # required
-    #       }
     #
     # @!attribute [rw] fleet_id
     #   A unique identifier for the fleet to delete locations for. You can
@@ -2179,14 +1810,6 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteGameServerGroupInput
-    #   data as a hash:
-    #
-    #       {
-    #         game_server_group_name: "GameServerGroupNameOrArn", # required
-    #         delete_option: "SAFE_DELETE", # accepts SAFE_DELETE, FORCE_DELETE, RETAIN
-    #       }
-    #
     # @!attribute [rw] game_server_group_name
     #   A unique identifier for the game server group. Use either the
     #   GameServerGroup name or ARN value.
@@ -2231,13 +1854,6 @@ module Aws::GameLift
 
     # Represents the input for a request operation.
     #
-    # @note When making an API call, you may pass DeleteGameSessionQueueInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "GameSessionQueueNameOrArn", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   A descriptive label that is associated with game session queue.
     #   Queue names must be unique within each Region. You can use either
@@ -2258,13 +1874,6 @@ module Aws::GameLift
 
     # Represents the input for a request operation.
     #
-    # @note When making an API call, you may pass DeleteMatchmakingConfigurationInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "MatchmakingConfigurationName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   A unique identifier for the matchmaking configuration. You can use
     #   either the configuration name or ARN value.
@@ -2283,13 +1892,6 @@ module Aws::GameLift
     class DeleteMatchmakingConfigurationOutput < Aws::EmptyStructure; end
 
     # Represents the input for a request operation.
-    #
-    # @note When making an API call, you may pass DeleteMatchmakingRuleSetInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "MatchmakingRuleSetName", # required
-    #       }
     #
     # @!attribute [rw] name
     #   A unique identifier for the matchmaking rule set to be deleted.
@@ -2314,14 +1916,6 @@ module Aws::GameLift
 
     # Represents the input for a request operation.
     #
-    # @note When making an API call, you may pass DeleteScalingPolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "NonZeroAndMaxString", # required
-    #         fleet_id: "FleetIdOrArn", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   A descriptive label that is associated with a fleet's scaling
     #   policy. Policy names do not need to be unique.
@@ -2341,13 +1935,6 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteScriptInput
-    #   data as a hash:
-    #
-    #       {
-    #         script_id: "ScriptIdOrArn", # required
-    #       }
-    #
     # @!attribute [rw] script_id
     #   A unique identifier for the Realtime script to delete. You can use
     #   either the script ID or ARN value.
@@ -2362,14 +1949,6 @@ module Aws::GameLift
     end
 
     # Represents the input for a request operation.
-    #
-    # @note When making an API call, you may pass DeleteVpcPeeringAuthorizationInput
-    #   data as a hash:
-    #
-    #       {
-    #         game_lift_aws_account_id: "NonZeroAndMaxString", # required
-    #         peer_vpc_id: "NonZeroAndMaxString", # required
-    #       }
     #
     # @!attribute [rw] game_lift_aws_account_id
     #   A unique identifier for the Amazon Web Services account that you use
@@ -2405,14 +1984,6 @@ module Aws::GameLift
 
     # Represents the input for a request operation.
     #
-    # @note When making an API call, you may pass DeleteVpcPeeringConnectionInput
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_id: "FleetId", # required
-    #         vpc_peering_connection_id: "NonZeroAndMaxString", # required
-    #       }
-    #
     # @!attribute [rw] fleet_id
     #   A unique identifier for the fleet. This fleet specified must match
     #   the fleet referenced in the VPC peering connection record. You can
@@ -2438,14 +2009,6 @@ module Aws::GameLift
     #
     class DeleteVpcPeeringConnectionOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeregisterGameServerInput
-    #   data as a hash:
-    #
-    #       {
-    #         game_server_group_name: "GameServerGroupNameOrArn", # required
-    #         game_server_id: "GameServerId", # required
-    #       }
-    #
     # @!attribute [rw] game_server_group_name
     #   A unique identifier for the game server group where the game server
     #   is running. Use either the GameServerGroup name or ARN value.
@@ -2466,13 +2029,6 @@ module Aws::GameLift
     end
 
     # Represents the input for a request operation.
-    #
-    # @note When making an API call, you may pass DescribeAliasInput
-    #   data as a hash:
-    #
-    #       {
-    #         alias_id: "AliasIdOrArn", # required
-    #       }
     #
     # @!attribute [rw] alias_id
     #   The unique identifier for the fleet alias that you want to retrieve.
@@ -2503,13 +2059,6 @@ module Aws::GameLift
 
     # Represents the input for a request operation.
     #
-    # @note When making an API call, you may pass DescribeBuildInput
-    #   data as a hash:
-    #
-    #       {
-    #         build_id: "BuildIdOrArn", # required
-    #       }
-    #
     # @!attribute [rw] build_id
     #   A unique identifier for the build to retrieve properties for. You
     #   can use either the build ID or ARN value.
@@ -2538,14 +2087,6 @@ module Aws::GameLift
     end
 
     # Represents the input for a request operation.
-    #
-    # @note When making an API call, you may pass DescribeEC2InstanceLimitsInput
-    #   data as a hash:
-    #
-    #       {
-    #         ec2_instance_type: "t2.micro", # accepts t2.micro, t2.small, t2.medium, t2.large, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5a.large, c5a.xlarge, c5a.2xlarge, c5a.4xlarge, c5a.8xlarge, c5a.12xlarge, c5a.16xlarge, c5a.24xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.12xlarge, c5d.18xlarge, c5d.24xlarge, c6a.large, c6a.xlarge, c6a.2xlarge, c6a.4xlarge, c6a.8xlarge, c6a.12xlarge, c6a.16xlarge, c6a.24xlarge, c6i.large, c6i.xlarge, c6i.2xlarge, c6i.4xlarge, c6i.8xlarge, c6i.12xlarge, c6i.16xlarge, c6i.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge
-    #         location: "LocationStringModel",
-    #       }
     #
     # @!attribute [rw] ec2_instance_type
     #   Name of an Amazon EC2 instance type that is supported in GameLift. A
@@ -2584,15 +2125,6 @@ module Aws::GameLift
     end
 
     # Represents the input for a request operation.
-    #
-    # @note When making an API call, you may pass DescribeFleetAttributesInput
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_ids: ["FleetIdOrArn"],
-    #         limit: 1,
-    #         next_token: "NonZeroAndMaxString",
-    #       }
     #
     # @!attribute [rw] fleet_ids
     #   A list of unique fleet identifiers to retrieve attributes for. You
@@ -2650,15 +2182,6 @@ module Aws::GameLift
 
     # Represents the input for a request operation.
     #
-    # @note When making an API call, you may pass DescribeFleetCapacityInput
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_ids: ["FleetIdOrArn"],
-    #         limit: 1,
-    #         next_token: "NonZeroAndMaxString",
-    #       }
-    #
     # @!attribute [rw] fleet_ids
     #   A unique identifier for the fleet(s) to retrieve capacity
     #   information for. You can use either the fleet ID or ARN value. Leave
@@ -2715,17 +2238,6 @@ module Aws::GameLift
     end
 
     # Represents the input for a request operation.
-    #
-    # @note When making an API call, you may pass DescribeFleetEventsInput
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_id: "FleetIdOrArn", # required
-    #         start_time: Time.now,
-    #         end_time: Time.now,
-    #         limit: 1,
-    #         next_token: "NonZeroAndMaxString",
-    #       }
     #
     # @!attribute [rw] fleet_id
     #   A unique identifier for the fleet to get event logs for. You can use
@@ -2793,16 +2305,6 @@ module Aws::GameLift
     end
 
     # Represents the input for a request operation.
-    #
-    # @note When making an API call, you may pass DescribeFleetLocationAttributesInput
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_id: "FleetIdOrArn", # required
-    #         locations: ["LocationStringModel"],
-    #         limit: 1,
-    #         next_token: "NonZeroAndMaxString",
-    #       }
     #
     # @!attribute [rw] fleet_id
     #   A unique identifier for the fleet to retrieve remote locations for.
@@ -2881,14 +2383,6 @@ module Aws::GameLift
 
     # Represents the input for a request operation.
     #
-    # @note When making an API call, you may pass DescribeFleetLocationCapacityInput
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_id: "FleetIdOrArn", # required
-    #         location: "LocationStringModel", # required
-    #       }
-    #
     # @!attribute [rw] fleet_id
     #   A unique identifier for the fleet to request location capacity for.
     #   You can use either the fleet ID or ARN value.
@@ -2927,14 +2421,6 @@ module Aws::GameLift
 
     # Represents the input for a request operation.
     #
-    # @note When making an API call, you may pass DescribeFleetLocationUtilizationInput
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_id: "FleetIdOrArn", # required
-    #         location: "LocationStringModel", # required
-    #       }
-    #
     # @!attribute [rw] fleet_id
     #   A unique identifier for the fleet to request location utilization
     #   for. You can use either the fleet ID or ARN value.
@@ -2972,14 +2458,6 @@ module Aws::GameLift
     end
 
     # Represents the input for a request operation.
-    #
-    # @note When making an API call, you may pass DescribeFleetPortSettingsInput
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_id: "FleetIdOrArn", # required
-    #         location: "LocationStringModel",
-    #       }
     #
     # @!attribute [rw] fleet_id
     #   A unique identifier for the fleet to retrieve port settings for. You
@@ -3047,15 +2525,6 @@ module Aws::GameLift
 
     # Represents the input for a request operation.
     #
-    # @note When making an API call, you may pass DescribeFleetUtilizationInput
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_ids: ["FleetIdOrArn"],
-    #         limit: 1,
-    #         next_token: "NonZeroAndMaxString",
-    #       }
-    #
     # @!attribute [rw] fleet_ids
     #   A unique identifier for the fleet(s) to retrieve utilization data
     #   for. You can use either the fleet ID or ARN value. To retrieve
@@ -3110,13 +2579,6 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeGameServerGroupInput
-    #   data as a hash:
-    #
-    #       {
-    #         game_server_group_name: "GameServerGroupNameOrArn", # required
-    #       }
-    #
     # @!attribute [rw] game_server_group_name
     #   A unique identifier for the game server group. Use either the
     #   GameServerGroup name or ARN value.
@@ -3143,14 +2605,6 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeGameServerInput
-    #   data as a hash:
-    #
-    #       {
-    #         game_server_group_name: "GameServerGroupNameOrArn", # required
-    #         game_server_id: "GameServerId", # required
-    #       }
-    #
     # @!attribute [rw] game_server_group_name
     #   A unique identifier for the game server group where the game server
     #   is running. Use either the GameServerGroup name or ARN value.
@@ -3170,16 +2624,6 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeGameServerInstancesInput
-    #   data as a hash:
-    #
-    #       {
-    #         game_server_group_name: "GameServerGroupNameOrArn", # required
-    #         instance_ids: ["GameServerInstanceId"],
-    #         limit: 1,
-    #         next_token: "NonZeroAndMaxString",
-    #       }
-    #
     # @!attribute [rw] game_server_group_name
     #   A unique identifier for the game server group. Use either the
     #   GameServerGroup name or ARN value.
@@ -3247,19 +2691,6 @@ module Aws::GameLift
     end
 
     # Represents the input for a request operation.
-    #
-    # @note When making an API call, you may pass DescribeGameSessionDetailsInput
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_id: "FleetIdOrArn",
-    #         game_session_id: "ArnStringModel",
-    #         alias_id: "AliasIdOrArn",
-    #         location: "LocationStringModel",
-    #         status_filter: "NonZeroAndMaxString",
-    #         limit: 1,
-    #         next_token: "NonZeroAndMaxString",
-    #       }
     #
     # @!attribute [rw] fleet_id
     #   A unique identifier for the fleet to retrieve all game sessions
@@ -3338,13 +2769,6 @@ module Aws::GameLift
 
     # Represents the input for a request operation.
     #
-    # @note When making an API call, you may pass DescribeGameSessionPlacementInput
-    #   data as a hash:
-    #
-    #       {
-    #         placement_id: "IdStringModel", # required
-    #       }
-    #
     # @!attribute [rw] placement_id
     #   A unique identifier for a game session placement to retrieve.
     #   @return [String]
@@ -3372,15 +2796,6 @@ module Aws::GameLift
     end
 
     # Represents the input for a request operation.
-    #
-    # @note When making an API call, you may pass DescribeGameSessionQueuesInput
-    #   data as a hash:
-    #
-    #       {
-    #         names: ["GameSessionQueueNameOrArn"],
-    #         limit: 1,
-    #         next_token: "NonZeroAndMaxString",
-    #       }
     #
     # @!attribute [rw] names
     #   A list of queue names to retrieve information for. You can use
@@ -3434,19 +2849,6 @@ module Aws::GameLift
     end
 
     # Represents the input for a request operation.
-    #
-    # @note When making an API call, you may pass DescribeGameSessionsInput
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_id: "FleetIdOrArn",
-    #         game_session_id: "ArnStringModel",
-    #         alias_id: "AliasIdOrArn",
-    #         location: "LocationStringModel",
-    #         status_filter: "NonZeroAndMaxString",
-    #         limit: 1,
-    #         next_token: "NonZeroAndMaxString",
-    #       }
     #
     # @!attribute [rw] fleet_id
     #   A unique identifier for the fleet to retrieve game sessions for. You
@@ -3526,17 +2928,6 @@ module Aws::GameLift
 
     # Represents the input for a request operation.
     #
-    # @note When making an API call, you may pass DescribeInstancesInput
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_id: "FleetIdOrArn", # required
-    #         instance_id: "InstanceId",
-    #         limit: 1,
-    #         next_token: "NonZeroAndMaxString",
-    #         location: "LocationStringModel",
-    #       }
-    #
     # @!attribute [rw] fleet_id
     #   A unique identifier for the fleet to retrieve instance information
     #   for. You can use either the fleet ID or ARN value.
@@ -3600,16 +2991,6 @@ module Aws::GameLift
 
     # Represents the input for a request operation.
     #
-    # @note When making an API call, you may pass DescribeMatchmakingConfigurationsInput
-    #   data as a hash:
-    #
-    #       {
-    #         names: ["MatchmakingConfigurationName"],
-    #         rule_set_name: "MatchmakingRuleSetName",
-    #         limit: 1,
-    #         next_token: "NonZeroAndMaxString",
-    #       }
-    #
     # @!attribute [rw] names
     #   A unique identifier for the matchmaking configuration(s) to
     #   retrieve. You can use either the configuration name or ARN value. To
@@ -3669,13 +3050,6 @@ module Aws::GameLift
 
     # Represents the input for a request operation.
     #
-    # @note When making an API call, you may pass DescribeMatchmakingInput
-    #   data as a hash:
-    #
-    #       {
-    #         ticket_ids: ["MatchmakingIdStringModel"], # required
-    #       }
-    #
     # @!attribute [rw] ticket_ids
     #   A unique identifier for a matchmaking ticket. You can include up to
     #   10 ID values.
@@ -3705,15 +3079,6 @@ module Aws::GameLift
     end
 
     # Represents the input for a request operation.
-    #
-    # @note When making an API call, you may pass DescribeMatchmakingRuleSetsInput
-    #   data as a hash:
-    #
-    #       {
-    #         names: ["MatchmakingRuleSetName"],
-    #         limit: 1,
-    #         next_token: "NonZeroAndMaxString",
-    #       }
     #
     # @!attribute [rw] names
     #   A list of one or more matchmaking rule set names to retrieve details
@@ -3766,18 +3131,6 @@ module Aws::GameLift
     end
 
     # Represents the input for a request operation.
-    #
-    # @note When making an API call, you may pass DescribePlayerSessionsInput
-    #   data as a hash:
-    #
-    #       {
-    #         game_session_id: "ArnStringModel",
-    #         player_id: "NonZeroAndMaxString",
-    #         player_session_id: "PlayerSessionId",
-    #         player_session_status_filter: "NonZeroAndMaxString",
-    #         limit: 1,
-    #         next_token: "NonZeroAndMaxString",
-    #       }
     #
     # @!attribute [rw] game_session_id
     #   A unique identifier for the game session to retrieve player sessions
@@ -3862,13 +3215,6 @@ module Aws::GameLift
 
     # Represents the input for a request operation.
     #
-    # @note When making an API call, you may pass DescribeRuntimeConfigurationInput
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_id: "FleetIdOrArn", # required
-    #       }
-    #
     # @!attribute [rw] fleet_id
     #   A unique identifier for the fleet to get the runtime configuration
     #   for. You can use either the fleet ID or ARN value.
@@ -3898,17 +3244,6 @@ module Aws::GameLift
     end
 
     # Represents the input for a request operation.
-    #
-    # @note When making an API call, you may pass DescribeScalingPoliciesInput
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_id: "FleetIdOrArn", # required
-    #         status_filter: "ACTIVE", # accepts ACTIVE, UPDATE_REQUESTED, UPDATING, DELETE_REQUESTED, DELETING, DELETED, ERROR
-    #         limit: 1,
-    #         next_token: "NonZeroAndMaxString",
-    #         location: "LocationStringModel",
-    #       }
     #
     # @!attribute [rw] fleet_id
     #   A unique identifier for the fleet for which to retrieve scaling
@@ -3988,13 +3323,6 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeScriptInput
-    #   data as a hash:
-    #
-    #       {
-    #         script_id: "ScriptIdOrArn", # required
-    #       }
-    #
     # @!attribute [rw] script_id
     #   A unique identifier for the Realtime script to retrieve properties
     #   for. You can use either the script ID or ARN value.
@@ -4020,8 +3348,6 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeVpcPeeringAuthorizationsInput AWS API Documentation
     #
     class DescribeVpcPeeringAuthorizationsInput < Aws::EmptyStructure; end
@@ -4040,13 +3366,6 @@ module Aws::GameLift
     end
 
     # Represents the input for a request operation.
-    #
-    # @note When making an API call, you may pass DescribeVpcPeeringConnectionsInput
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_id: "FleetId",
-    #       }
     #
     # @!attribute [rw] fleet_id
     #   A unique identifier for the fleet. You can use either the fleet ID
@@ -4078,14 +3397,6 @@ module Aws::GameLift
 
     # Player information for use when creating player sessions using a game
     # session placement request with StartGameSessionPlacement.
-    #
-    # @note When making an API call, you may pass DesiredPlayerSession
-    #   data as a hash:
-    #
-    #       {
-    #         player_id: "NonZeroAndMaxString",
-    #         player_data: "PlayerData",
-    #       }
     #
     # @!attribute [rw] player_id
     #   A unique identifier for a player to associate with the player
@@ -4437,13 +3748,6 @@ module Aws::GameLift
     # all of these locations.
     #
     # Filter configurations are part of a GameSessionQueue.
-    #
-    # @note When making an API call, you may pass FilterConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         allowed_locations: ["LocationStringModel"],
-    #       }
     #
     # @!attribute [rw] allowed_locations
     #   A list of locations to allow game session placement in, in the form
@@ -4828,14 +4132,6 @@ module Aws::GameLift
     #
     # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-client-api.html#gamelift-sdk-client-api-create
     #
-    # @note When making an API call, you may pass GameProperty
-    #   data as a hash:
-    #
-    #       {
-    #         key: "GamePropertyKey", # required
-    #         value: "GamePropertyValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The game property identifier.
     #   @return [String]
@@ -5138,16 +4434,6 @@ module Aws::GameLift
     # updates to Auto Scaling policies, including changing this policy and
     # adding or removing other policies, is done directly on the Auto
     # Scaling group.
-    #
-    # @note When making an API call, you may pass GameServerGroupAutoScalingPolicy
-    #   data as a hash:
-    #
-    #       {
-    #         estimated_instance_warmup: 1,
-    #         target_tracking_configuration: { # required
-    #           target_value: 1.0, # required
-    #         },
-    #       }
     #
     # @!attribute [rw] estimated_instance_warmup
     #   Length of time, in seconds, it takes for a new instance to start new
@@ -5834,13 +5120,6 @@ module Aws::GameLift
     #
     # Destinations are part of a GameSessionQueue.
     #
-    # @note When making an API call, you may pass GameSessionQueueDestination
-    #   data as a hash:
-    #
-    #       {
-    #         destination_arn: "ArnStringModel",
-    #       }
-    #
     # @!attribute [rw] destination_arn
     #   The Amazon Resource Name (ARN) that is assigned to fleet or fleet
     #   alias. ARNs, which include a fleet ID or alias ID and a Region name,
@@ -5856,13 +5135,6 @@ module Aws::GameLift
     end
 
     # Represents the input for a request operation.
-    #
-    # @note When making an API call, you may pass GetGameSessionLogUrlInput
-    #   data as a hash:
-    #
-    #       {
-    #         game_session_id: "ArnStringModel", # required
-    #       }
     #
     # @!attribute [rw] game_session_id
     #   A unique identifier for the game session to get logs for.
@@ -5894,14 +5166,6 @@ module Aws::GameLift
     end
 
     # Represents the input for a request operation.
-    #
-    # @note When making an API call, you may pass GetInstanceAccessInput
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_id: "FleetIdOrArn", # required
-    #         instance_id: "InstanceId", # required
-    #       }
     #
     # @!attribute [rw] fleet_id
     #   A unique identifier for the fleet that contains the instance you
@@ -6127,14 +5391,6 @@ module Aws::GameLift
     # then updates the Auto Scaling group with the list of viable instance
     # types.
     #
-    # @note When making an API call, you may pass InstanceDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         instance_type: "c4.large", # required, accepts c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5a.large, c5a.xlarge, c5a.2xlarge, c5a.4xlarge, c5a.8xlarge, c5a.12xlarge, c5a.16xlarge, c5a.24xlarge, c6g.medium, c6g.large, c6g.xlarge, c6g.2xlarge, c6g.4xlarge, c6g.8xlarge, c6g.12xlarge, c6g.16xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r6g.medium, r6g.large, r6g.xlarge, r6g.2xlarge, r6g.4xlarge, r6g.8xlarge, r6g.12xlarge, r6g.16xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m6g.medium, m6g.large, m6g.xlarge, m6g.2xlarge, m6g.4xlarge, m6g.8xlarge, m6g.12xlarge, m6g.16xlarge
-    #         weighted_capacity: "WeightedCapacity",
-    #       }
-    #
     # @!attribute [rw] instance_type
     #   An Amazon EC2 instance type designation.
     #   @return [String]
@@ -6234,16 +5490,6 @@ module Aws::GameLift
     #
     # DescribeFleetPortSettings
     #
-    # @note When making an API call, you may pass IpPermission
-    #   data as a hash:
-    #
-    #       {
-    #         from_port: 1, # required
-    #         to_port: 1, # required
-    #         ip_range: "NonBlankString", # required
-    #         protocol: "TCP", # required, accepts TCP, UDP
-    #       }
-    #
     # @!attribute [rw] from_port
     #   A starting value for a range of allowed port numbers.
     #
@@ -6288,15 +5534,6 @@ module Aws::GameLift
     # instances in a game server group. The launch template is specified
     # when creating a new game server group with CreateGameServerGroup.
     #
-    # @note When making an API call, you may pass LaunchTemplateSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         launch_template_id: "LaunchTemplateId",
-    #         launch_template_name: "LaunchTemplateName",
-    #         version: "LaunchTemplateVersion",
-    #       }
-    #
     # @!attribute [rw] launch_template_id
     #   A unique identifier for an existing Amazon EC2 launch template.
     #   @return [String]
@@ -6337,16 +5574,6 @@ module Aws::GameLift
     end
 
     # Represents the input for a request operation.
-    #
-    # @note When making an API call, you may pass ListAliasesInput
-    #   data as a hash:
-    #
-    #       {
-    #         routing_strategy_type: "SIMPLE", # accepts SIMPLE, TERMINAL
-    #         name: "NonEmptyString",
-    #         limit: 1,
-    #         next_token: "NonEmptyString",
-    #       }
     #
     # @!attribute [rw] routing_strategy_type
     #   The routing type to filter results on. Use this parameter to
@@ -6415,15 +5642,6 @@ module Aws::GameLift
 
     # Represents the input for a request operation.
     #
-    # @note When making an API call, you may pass ListBuildsInput
-    #   data as a hash:
-    #
-    #       {
-    #         status: "INITIALIZED", # accepts INITIALIZED, READY, FAILED
-    #         limit: 1,
-    #         next_token: "NonEmptyString",
-    #       }
-    #
     # @!attribute [rw] status
     #   Build status to filter results by. To retrieve all builds, leave
     #   this parameter empty.
@@ -6487,16 +5705,6 @@ module Aws::GameLift
 
     # Represents the input for a request operation.
     #
-    # @note When making an API call, you may pass ListFleetsInput
-    #   data as a hash:
-    #
-    #       {
-    #         build_id: "BuildIdOrArn",
-    #         script_id: "ScriptIdOrArn",
-    #         limit: 1,
-    #         next_token: "NonZeroAndMaxString",
-    #       }
-    #
     # @!attribute [rw] build_id
     #   A unique identifier for the build to request fleets for. Use this
     #   parameter to return only fleets using a specified build. Use either
@@ -6556,14 +5764,6 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListGameServerGroupsInput
-    #   data as a hash:
-    #
-    #       {
-    #         limit: 1,
-    #         next_token: "NonZeroAndMaxString",
-    #       }
-    #
     # @!attribute [rw] limit
     #   The maximum number of results to return. Use this parameter with
     #   `NextToken` to get results as a set of sequential pages.
@@ -6604,16 +5804,6 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListGameServersInput
-    #   data as a hash:
-    #
-    #       {
-    #         game_server_group_name: "GameServerGroupNameOrArn", # required
-    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #         limit: 1,
-    #         next_token: "NonZeroAndMaxString",
-    #       }
-    #
     # @!attribute [rw] game_server_group_name
     #   An identifier for the game server group to retrieve a list of game
     #   servers from. Use either the GameServerGroup name or ARN value.
@@ -6669,14 +5859,6 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListScriptsInput
-    #   data as a hash:
-    #
-    #       {
-    #         limit: 1,
-    #         next_token: "NonEmptyString",
-    #       }
-    #
     # @!attribute [rw] limit
     #   The maximum number of results to return. Use this parameter with
     #   `NextToken` to get results as a set of sequential pages.
@@ -6717,13 +5899,6 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name ([ARN][1]) that is assigned to and uniquely
     #   identifies the GameLift resource that you want to retrieve tags for.
@@ -6799,13 +5974,6 @@ module Aws::GameLift
     #
     #
     # [1]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateFleet.html
-    #
-    # @note When making an API call, you may pass LocationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         location: "LocationStringModel",
-    #       }
     #
     # @!attribute [rw] location
     #   An Amazon Web Services Region code, such as `us-west-2`.
@@ -7329,20 +6497,6 @@ module Aws::GameLift
     # data. Team information is added after a match has been successfully
     # completed.
     #
-    # @note When making an API call, you may pass Player
-    #   data as a hash:
-    #
-    #       {
-    #         player_id: "NonZeroAndMaxString",
-    #         player_attributes: {
-    #           "NonZeroAndMaxString" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #         },
-    #         team: "NonZeroAndMaxString",
-    #         latency_in_ms: {
-    #           "NonEmptyString" => 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] player_id
     #   A unique identifier for a player
     #   @return [String]
@@ -7390,15 +6544,6 @@ module Aws::GameLift
     # latency values for multiple Regions are used to determine which fleets
     # are best suited to place a new game session for the player.
     #
-    # @note When making an API call, you may pass PlayerLatency
-    #   data as a hash:
-    #
-    #       {
-    #         player_id: "NonZeroAndMaxString",
-    #         region_identifier: "NonZeroAndMaxString",
-    #         latency_in_milliseconds: 1.0,
-    #       }
-    #
     # @!attribute [rw] player_id
     #   A unique identifier for a player associated with the latency data.
     #   @return [String]
@@ -7430,14 +6575,6 @@ module Aws::GameLift
     # gradually relax latency requirements over time.
     #
     # Latency policies are part of a GameSessionQueue.
-    #
-    # @note When making an API call, you may pass PlayerLatencyPolicy
-    #   data as a hash:
-    #
-    #       {
-    #         maximum_individual_player_latency_milliseconds: 1,
-    #         policy_duration_seconds: 1,
-    #       }
     #
     # @!attribute [rw] maximum_individual_player_latency_milliseconds
     #   The maximum latency value that is allowed for any player, in
@@ -7615,14 +6752,6 @@ module Aws::GameLift
     #
     # Priority configurations are part of a GameSessionQueue.
     #
-    # @note When making an API call, you may pass PriorityConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         priority_order: ["LATENCY"], # accepts LATENCY, COST, DESTINATION, LOCATION
-    #         location_order: ["LocationStringModel"],
-    #       }
-    #
     # @!attribute [rw] priority_order
     #   The recommended sequence to use when prioritizing where to place new
     #   game sessions. Each type can only be listed once.
@@ -7659,24 +6788,6 @@ module Aws::GameLift
     end
 
     # Represents the input for a request operation.
-    #
-    # @note When making an API call, you may pass PutScalingPolicyInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "NonZeroAndMaxString", # required
-    #         fleet_id: "FleetIdOrArn", # required
-    #         scaling_adjustment: 1,
-    #         scaling_adjustment_type: "ChangeInCapacity", # accepts ChangeInCapacity, ExactCapacity, PercentChangeInCapacity
-    #         threshold: 1.0,
-    #         comparison_operator: "GreaterThanOrEqualToThreshold", # accepts GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, LessThanOrEqualToThreshold
-    #         evaluation_periods: 1,
-    #         metric_name: "ActivatingGameSessions", # required, accepts ActivatingGameSessions, ActiveGameSessions, ActiveInstances, AvailableGameSessions, AvailablePlayerSessions, CurrentPlayerSessions, IdleInstances, PercentAvailableGameSessions, PercentIdleInstances, QueueDepth, WaitTime
-    #         policy_type: "RuleBased", # accepts RuleBased, TargetBased
-    #         target_configuration: {
-    #           target_value: 1.0, # required
-    #         },
-    #       }
     #
     # @!attribute [rw] name
     #   A descriptive label that is associated with a fleet's scaling
@@ -7818,17 +6929,6 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RegisterGameServerInput
-    #   data as a hash:
-    #
-    #       {
-    #         game_server_group_name: "GameServerGroupNameOrArn", # required
-    #         game_server_id: "GameServerId", # required
-    #         instance_id: "GameServerInstanceId", # required
-    #         connection_info: "GameServerConnectionInfo",
-    #         game_server_data: "GameServerData",
-    #       }
-    #
     # @!attribute [rw] game_server_group_name
     #   A unique identifier for the game server group where the game server
     #   is running. Use either the GameServerGroup name or ARN value.
@@ -7885,13 +6985,6 @@ module Aws::GameLift
 
     # Represents the input for a request operation.
     #
-    # @note When making an API call, you may pass RequestUploadCredentialsInput
-    #   data as a hash:
-    #
-    #       {
-    #         build_id: "BuildIdOrArn", # required
-    #       }
-    #
     # @!attribute [rw] build_id
     #   A unique identifier for the build to get credentials for. You can
     #   use either the build ID or ARN value.
@@ -7928,13 +7021,6 @@ module Aws::GameLift
     end
 
     # Represents the input for a request operation.
-    #
-    # @note When making an API call, you may pass ResolveAliasInput
-    #   data as a hash:
-    #
-    #       {
-    #         alias_id: "AliasIdOrArn", # required
-    #       }
     #
     # @!attribute [rw] alias_id
     #   The unique identifier of the alias that you want to retrieve a fleet
@@ -7984,14 +7070,6 @@ module Aws::GameLift
     #
     # The resource creation limit policy is included in FleetAttributes.
     #
-    # @note When making an API call, you may pass ResourceCreationLimitPolicy
-    #   data as a hash:
-    #
-    #       {
-    #         new_game_sessions_per_creator: 1,
-    #         policy_period_in_minutes: 1,
-    #       }
-    #
     # @!attribute [rw] new_game_sessions_per_creator
     #   The maximum number of game sessions that an individual can create
     #   during the policy period.
@@ -8010,14 +7088,6 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ResumeGameServerGroupInput
-    #   data as a hash:
-    #
-    #       {
-    #         game_server_group_name: "GameServerGroupNameOrArn", # required
-    #         resume_actions: ["REPLACE_INSTANCE_TYPES"], # required, accepts REPLACE_INSTANCE_TYPES
-    #       }
-    #
     # @!attribute [rw] game_server_group_name
     #   A unique identifier for the game server group. Use either the
     #   GameServerGroup name or ARN value.
@@ -8059,15 +7129,6 @@ module Aws::GameLift
     #
     #
     # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets
-    #
-    # @note When making an API call, you may pass RoutingStrategy
-    #   data as a hash:
-    #
-    #       {
-    #         type: "SIMPLE", # accepts SIMPLE, TERMINAL
-    #         fleet_id: "FleetId",
-    #         message: "FreeText",
-    #       }
     #
     # @!attribute [rw] type
     #   The type of routing strategy for the alias.
@@ -8123,21 +7184,6 @@ module Aws::GameLift
     #
     # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-multiprocess.html
     #
-    # @note When making an API call, you may pass RuntimeConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         server_processes: [
-    #           {
-    #             launch_path: "LaunchPathStringModel", # required
-    #             parameters: "LaunchParametersStringModel",
-    #             concurrent_executions: 1, # required
-    #           },
-    #         ],
-    #         max_concurrent_game_session_activations: 1,
-    #         game_session_activation_timeout_seconds: 1,
-    #       }
-    #
     # @!attribute [rw] server_processes
     #   A collection of server process configurations that identify what
     #   server processes to run on each instance in a fleet.
@@ -8170,16 +7216,6 @@ module Aws::GameLift
     # The location in Amazon S3 where build or script files are stored for
     # access by Amazon GameLift. This location is specified in CreateBuild,
     # CreateScript, and UpdateScript requests.
-    #
-    # @note When making an API call, you may pass S3Location
-    #   data as a hash:
-    #
-    #       {
-    #         bucket: "NonEmptyString",
-    #         key: "NonEmptyString",
-    #         role_arn: "NonEmptyString",
-    #         object_version: "NonEmptyString",
-    #       }
     #
     # @!attribute [rw] bucket
     #   An Amazon S3 bucket identifier. This is the name of the S3 bucket.
@@ -8481,19 +7517,6 @@ module Aws::GameLift
 
     # Represents the input for a request operation.
     #
-    # @note When making an API call, you may pass SearchGameSessionsInput
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_id: "FleetIdOrArn",
-    #         alias_id: "AliasIdOrArn",
-    #         location: "LocationStringModel",
-    #         filter_expression: "NonZeroAndMaxString",
-    #         sort_expression: "NonZeroAndMaxString",
-    #         limit: 1,
-    #         next_token: "NonZeroAndMaxString",
-    #       }
-    #
     # @!attribute [rw] fleet_id
     #   A unique identifier for the fleet to search for active game
     #   sessions. You can use either the fleet ID or ARN value. Each request
@@ -8633,15 +7656,6 @@ module Aws::GameLift
     # build or a Realtime Servers script. Server process configurations are
     # part of a fleet's RuntimeConfiguration.
     #
-    # @note When making an API call, you may pass ServerProcess
-    #   data as a hash:
-    #
-    #       {
-    #         launch_path: "LaunchPathStringModel", # required
-    #         parameters: "LaunchParametersStringModel",
-    #         concurrent_executions: 1, # required
-    #       }
-    #
     # @!attribute [rw] launch_path
     #   The location of a game build executable or the Realtime script file
     #   that contains the `Init()` function. Game builds and Realtime
@@ -8676,15 +7690,6 @@ module Aws::GameLift
     end
 
     # Represents the input for a request operation.
-    #
-    # @note When making an API call, you may pass StartFleetActionsInput
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_id: "FleetIdOrArn", # required
-    #         actions: ["AUTO_SCALING"], # required, accepts AUTO_SCALING
-    #         location: "LocationStringModel",
-    #       }
     #
     # @!attribute [rw] fleet_id
     #   A unique identifier for the fleet to restart actions on. You can use
@@ -8738,36 +7743,6 @@ module Aws::GameLift
     end
 
     # Represents the input for a request operation.
-    #
-    # @note When making an API call, you may pass StartGameSessionPlacementInput
-    #   data as a hash:
-    #
-    #       {
-    #         placement_id: "IdStringModel", # required
-    #         game_session_queue_name: "GameSessionQueueNameOrArn", # required
-    #         game_properties: [
-    #           {
-    #             key: "GamePropertyKey", # required
-    #             value: "GamePropertyValue", # required
-    #           },
-    #         ],
-    #         maximum_player_session_count: 1, # required
-    #         game_session_name: "NonZeroAndMaxString",
-    #         player_latencies: [
-    #           {
-    #             player_id: "NonZeroAndMaxString",
-    #             region_identifier: "NonZeroAndMaxString",
-    #             latency_in_milliseconds: 1.0,
-    #           },
-    #         ],
-    #         desired_player_sessions: [
-    #           {
-    #             player_id: "NonZeroAndMaxString",
-    #             player_data: "PlayerData",
-    #           },
-    #         ],
-    #         game_session_data: "LargeGameSessionData",
-    #       }
     #
     # @!attribute [rw] placement_id
     #   A unique identifier to assign to the new game session placement.
@@ -8858,27 +7833,6 @@ module Aws::GameLift
 
     # Represents the input for a request operation.
     #
-    # @note When making an API call, you may pass StartMatchBackfillInput
-    #   data as a hash:
-    #
-    #       {
-    #         ticket_id: "MatchmakingIdStringModel",
-    #         configuration_name: "MatchmakingConfigurationName", # required
-    #         game_session_arn: "ArnStringModel",
-    #         players: [ # required
-    #           {
-    #             player_id: "NonZeroAndMaxString",
-    #             player_attributes: {
-    #               "NonZeroAndMaxString" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #             },
-    #             team: "NonZeroAndMaxString",
-    #             latency_in_ms: {
-    #               "NonEmptyString" => 1,
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] ticket_id
     #   A unique identifier for a matchmaking ticket. If no ticket ID is
     #   specified here, Amazon GameLift will generate one in the form of a
@@ -8952,26 +7906,6 @@ module Aws::GameLift
 
     # Represents the input for a request operation.
     #
-    # @note When making an API call, you may pass StartMatchmakingInput
-    #   data as a hash:
-    #
-    #       {
-    #         ticket_id: "MatchmakingIdStringModel",
-    #         configuration_name: "MatchmakingConfigurationName", # required
-    #         players: [ # required
-    #           {
-    #             player_id: "NonZeroAndMaxString",
-    #             player_attributes: {
-    #               "NonZeroAndMaxString" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #             },
-    #             team: "NonZeroAndMaxString",
-    #             latency_in_ms: {
-    #               "NonEmptyString" => 1,
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] ticket_id
     #   A unique identifier for a matchmaking ticket. If no ticket ID is
     #   specified here, Amazon GameLift will generate one in the form of a
@@ -9020,15 +7954,6 @@ module Aws::GameLift
     end
 
     # Represents the input for a request operation.
-    #
-    # @note When making an API call, you may pass StopFleetActionsInput
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_id: "FleetIdOrArn", # required
-    #         actions: ["AUTO_SCALING"], # required, accepts AUTO_SCALING
-    #         location: "LocationStringModel",
-    #       }
     #
     # @!attribute [rw] fleet_id
     #   A unique identifier for the fleet to stop actions on. You can use
@@ -9082,13 +8007,6 @@ module Aws::GameLift
 
     # Represents the input for a request operation.
     #
-    # @note When making an API call, you may pass StopGameSessionPlacementInput
-    #   data as a hash:
-    #
-    #       {
-    #         placement_id: "IdStringModel", # required
-    #       }
-    #
     # @!attribute [rw] placement_id
     #   A unique identifier for a game session placement to cancel.
     #   @return [String]
@@ -9118,13 +8036,6 @@ module Aws::GameLift
 
     # Represents the input for a request operation.
     #
-    # @note When making an API call, you may pass StopMatchmakingInput
-    #   data as a hash:
-    #
-    #       {
-    #         ticket_id: "MatchmakingIdStringModel", # required
-    #       }
-    #
     # @!attribute [rw] ticket_id
     #   A unique identifier for a matchmaking ticket.
     #   @return [String]
@@ -9141,14 +8052,6 @@ module Aws::GameLift
     #
     class StopMatchmakingOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass SuspendGameServerGroupInput
-    #   data as a hash:
-    #
-    #       {
-    #         game_server_group_name: "GameServerGroupNameOrArn", # required
-    #         suspend_actions: ["REPLACE_INSTANCE_TYPES"], # required, accepts REPLACE_INSTANCE_TYPES
-    #       }
-    #
     # @!attribute [rw] game_server_group_name
     #   A unique identifier for the game server group. Use either the
     #   GameServerGroup name or ARN value.
@@ -9201,14 +8104,6 @@ module Aws::GameLift
     # [2]: http://aws.amazon.com/answers/account-management/aws-tagging-strategies/
     # [3]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The key for a developer-defined key:value pair for tagging an Amazon
     #   Web Services resource.
@@ -9228,19 +8123,6 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name ([ARN][1]) that is assigned to and uniquely
     #   identifies the GameLift resource that you want to assign tags to.
@@ -9310,13 +8192,6 @@ module Aws::GameLift
     #
     # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets
     #
-    # @note When making an API call, you may pass TargetConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         target_value: 1.0, # required
-    #       }
-    #
     # @!attribute [rw] target_value
     #   Desired value to use with a target-based scaling policy. The value
     #   must be relevant for whatever metric the scaling policy is using.
@@ -9344,13 +8219,6 @@ module Aws::GameLift
     # metric. As player usage changes, the policy triggers to adjust the
     # game server group capacity so that the metric returns to the target
     # value.
-    #
-    # @note When making an API call, you may pass TargetTrackingConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         target_value: 1.0, # required
-    #       }
     #
     # @!attribute [rw] target_value
     #   Desired value to use with a game server group target-based scaling
@@ -9409,14 +8277,6 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name ([ARN][1]) that is assigned to and uniquely
     #   identifies the GameLift resource that you want to remove tags from.
@@ -9450,20 +8310,6 @@ module Aws::GameLift
     class UntagResourceResponse < Aws::EmptyStructure; end
 
     # Represents the input for a request operation.
-    #
-    # @note When making an API call, you may pass UpdateAliasInput
-    #   data as a hash:
-    #
-    #       {
-    #         alias_id: "AliasIdOrArn", # required
-    #         name: "NonBlankAndLengthConstraintString",
-    #         description: "NonZeroAndMaxString",
-    #         routing_strategy: {
-    #           type: "SIMPLE", # accepts SIMPLE, TERMINAL
-    #           fleet_id: "FleetId",
-    #           message: "FreeText",
-    #         },
-    #       }
     #
     # @!attribute [rw] alias_id
     #   A unique identifier for the alias that you want to update. You can
@@ -9511,15 +8357,6 @@ module Aws::GameLift
 
     # Represents the input for a request operation.
     #
-    # @note When making an API call, you may pass UpdateBuildInput
-    #   data as a hash:
-    #
-    #       {
-    #         build_id: "BuildIdOrArn", # required
-    #         name: "NonZeroAndMaxString",
-    #         version: "NonZeroAndMaxString",
-    #       }
-    #
     # @!attribute [rw] build_id
     #   A unique identifier for the build to update. You can use either the
     #   build ID or ARN value.
@@ -9560,21 +8397,6 @@ module Aws::GameLift
     end
 
     # Represents the input for a request operation.
-    #
-    # @note When making an API call, you may pass UpdateFleetAttributesInput
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_id: "FleetIdOrArn", # required
-    #         name: "NonZeroAndMaxString",
-    #         description: "NonZeroAndMaxString",
-    #         new_game_session_protection_policy: "NoProtection", # accepts NoProtection, FullProtection
-    #         resource_creation_limit_policy: {
-    #           new_game_sessions_per_creator: 1,
-    #           policy_period_in_minutes: 1,
-    #         },
-    #         metric_groups: ["MetricGroup"],
-    #       }
     #
     # @!attribute [rw] fleet_id
     #   A unique identifier for the fleet to update attribute metadata for.
@@ -9644,17 +8466,6 @@ module Aws::GameLift
     end
 
     # Represents the input for a request operation.
-    #
-    # @note When making an API call, you may pass UpdateFleetCapacityInput
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_id: "FleetIdOrArn", # required
-    #         desired_instances: 1,
-    #         min_size: 1,
-    #         max_size: 1,
-    #         location: "LocationStringModel",
-    #       }
     #
     # @!attribute [rw] fleet_id
     #   A unique identifier for the fleet to update capacity settings for.
@@ -9729,29 +8540,6 @@ module Aws::GameLift
 
     # Represents the input for a request operation.
     #
-    # @note When making an API call, you may pass UpdateFleetPortSettingsInput
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_id: "FleetIdOrArn", # required
-    #         inbound_permission_authorizations: [
-    #           {
-    #             from_port: 1, # required
-    #             to_port: 1, # required
-    #             ip_range: "NonBlankString", # required
-    #             protocol: "TCP", # required, accepts TCP, UDP
-    #           },
-    #         ],
-    #         inbound_permission_revocations: [
-    #           {
-    #             from_port: 1, # required
-    #             to_port: 1, # required
-    #             ip_range: "NonBlankString", # required
-    #             protocol: "TCP", # required, accepts TCP, UDP
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] fleet_id
     #   A unique identifier for the fleet to update port settings for. You
     #   can use either the fleet ID or ARN value.
@@ -9789,22 +8577,6 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateGameServerGroupInput
-    #   data as a hash:
-    #
-    #       {
-    #         game_server_group_name: "GameServerGroupNameOrArn", # required
-    #         role_arn: "IamRoleArn",
-    #         instance_definitions: [
-    #           {
-    #             instance_type: "c4.large", # required, accepts c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5a.large, c5a.xlarge, c5a.2xlarge, c5a.4xlarge, c5a.8xlarge, c5a.12xlarge, c5a.16xlarge, c5a.24xlarge, c6g.medium, c6g.large, c6g.xlarge, c6g.2xlarge, c6g.4xlarge, c6g.8xlarge, c6g.12xlarge, c6g.16xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r6g.medium, r6g.large, r6g.xlarge, r6g.2xlarge, r6g.4xlarge, r6g.8xlarge, r6g.12xlarge, r6g.16xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m6g.medium, m6g.large, m6g.xlarge, m6g.2xlarge, m6g.4xlarge, m6g.8xlarge, m6g.12xlarge, m6g.16xlarge
-    #             weighted_capacity: "WeightedCapacity",
-    #           },
-    #         ],
-    #         game_server_protection_policy: "NO_PROTECTION", # accepts NO_PROTECTION, FULL_PROTECTION
-    #         balancing_strategy: "SPOT_ONLY", # accepts SPOT_ONLY, SPOT_PREFERRED, ON_DEMAND_ONLY
-    #       }
-    #
     # @!attribute [rw] game_server_group_name
     #   A unique identifier for the game server group. Use either the
     #   GameServerGroup name or ARN value.
@@ -9899,17 +8671,6 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateGameServerInput
-    #   data as a hash:
-    #
-    #       {
-    #         game_server_group_name: "GameServerGroupNameOrArn", # required
-    #         game_server_id: "GameServerId", # required
-    #         game_server_data: "GameServerData",
-    #         utilization_status: "AVAILABLE", # accepts AVAILABLE, UTILIZED
-    #         health_check: "HEALTHY", # accepts HEALTHY
-    #       }
-    #
     # @!attribute [rw] game_server_group_name
     #   A unique identifier for the game server group where the game server
     #   is running. Use either the GameServerGroup name or ARN value.
@@ -9962,17 +8723,6 @@ module Aws::GameLift
     end
 
     # Represents the input for a request operation.
-    #
-    # @note When making an API call, you may pass UpdateGameSessionInput
-    #   data as a hash:
-    #
-    #       {
-    #         game_session_id: "ArnStringModel", # required
-    #         maximum_player_session_count: 1,
-    #         name: "NonZeroAndMaxString",
-    #         player_session_creation_policy: "ACCEPT_ALL", # accepts ACCEPT_ALL, DENY_ALL
-    #         protection_policy: "NoProtection", # accepts NoProtection, FullProtection
-    #       }
     #
     # @!attribute [rw] game_session_id
     #   A unique identifier for the game session to update.
@@ -10030,34 +8780,6 @@ module Aws::GameLift
     end
 
     # Represents the input for a request operation.
-    #
-    # @note When making an API call, you may pass UpdateGameSessionQueueInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "GameSessionQueueNameOrArn", # required
-    #         timeout_in_seconds: 1,
-    #         player_latency_policies: [
-    #           {
-    #             maximum_individual_player_latency_milliseconds: 1,
-    #             policy_duration_seconds: 1,
-    #           },
-    #         ],
-    #         destinations: [
-    #           {
-    #             destination_arn: "ArnStringModel",
-    #           },
-    #         ],
-    #         filter_configuration: {
-    #           allowed_locations: ["LocationStringModel"],
-    #         },
-    #         priority_configuration: {
-    #           priority_order: ["LATENCY"], # accepts LATENCY, COST, DESTINATION, LOCATION
-    #           location_order: ["LocationStringModel"],
-    #         },
-    #         custom_event_data: "QueueCustomEventData",
-    #         notification_target: "QueueSnsArnStringModel",
-    #       }
     #
     # @!attribute [rw] name
     #   A descriptive label that is associated with game session queue.
@@ -10152,31 +8874,6 @@ module Aws::GameLift
     end
 
     # Represents the input for a request operation.
-    #
-    # @note When making an API call, you may pass UpdateMatchmakingConfigurationInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "MatchmakingConfigurationName", # required
-    #         description: "NonZeroAndMaxString",
-    #         game_session_queue_arns: ["ArnStringModel"],
-    #         request_timeout_seconds: 1,
-    #         acceptance_timeout_seconds: 1,
-    #         acceptance_required: false,
-    #         rule_set_name: "MatchmakingRuleSetName",
-    #         notification_target: "SnsArnStringModel",
-    #         additional_player_count: 1,
-    #         custom_event_data: "CustomEventData",
-    #         game_properties: [
-    #           {
-    #             key: "GamePropertyKey", # required
-    #             value: "GamePropertyValue", # required
-    #           },
-    #         ],
-    #         game_session_data: "GameSessionData",
-    #         backfill_mode: "AUTOMATIC", # accepts AUTOMATIC, MANUAL
-    #         flex_match_mode: "STANDALONE", # accepts STANDALONE, WITH_QUEUE
-    #       }
     #
     # @!attribute [rw] name
     #   A unique identifier for the matchmaking configuration to update. You
@@ -10347,24 +9044,6 @@ module Aws::GameLift
 
     # Represents the input for a request operation.
     #
-    # @note When making an API call, you may pass UpdateRuntimeConfigurationInput
-    #   data as a hash:
-    #
-    #       {
-    #         fleet_id: "FleetIdOrArn", # required
-    #         runtime_configuration: { # required
-    #           server_processes: [
-    #             {
-    #               launch_path: "LaunchPathStringModel", # required
-    #               parameters: "LaunchParametersStringModel",
-    #               concurrent_executions: 1, # required
-    #             },
-    #           ],
-    #           max_concurrent_game_session_activations: 1,
-    #           game_session_activation_timeout_seconds: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] fleet_id
     #   A unique identifier for the fleet to update runtime configuration
     #   for. You can use either the fleet ID or ARN value.
@@ -10402,22 +9081,6 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateScriptInput
-    #   data as a hash:
-    #
-    #       {
-    #         script_id: "ScriptIdOrArn", # required
-    #         name: "NonZeroAndMaxString",
-    #         version: "NonZeroAndMaxString",
-    #         storage_location: {
-    #           bucket: "NonEmptyString",
-    #           key: "NonEmptyString",
-    #           role_arn: "NonEmptyString",
-    #           object_version: "NonEmptyString",
-    #         },
-    #         zip_file: "data",
-    #       }
-    #
     # @!attribute [rw] script_id
     #   A unique identifier for the Realtime script to update. You can use
     #   either the script ID or ARN value.
@@ -10487,13 +9150,6 @@ module Aws::GameLift
     end
 
     # Represents the input for a request operation.
-    #
-    # @note When making an API call, you may pass ValidateMatchmakingRuleSetInput
-    #   data as a hash:
-    #
-    #       {
-    #         rule_set_body: "RuleSetBody", # required
-    #       }
     #
     # @!attribute [rw] rule_set_body
     #   A collection of matchmaking rules to validate, formatted as a JSON

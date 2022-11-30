@@ -13,32 +13,6 @@ module Aws::MarketplaceMetering
     # A `BatchMeterUsageRequest` contains `UsageRecords`, which indicate
     # quantities of usage within your application.
     #
-    # @note When making an API call, you may pass BatchMeterUsageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         usage_records: [ # required
-    #           {
-    #             timestamp: Time.now, # required
-    #             customer_identifier: "CustomerIdentifier", # required
-    #             dimension: "UsageDimension", # required
-    #             quantity: 1,
-    #             usage_allocations: [
-    #               {
-    #                 allocated_usage_quantity: 1, # required
-    #                 tags: [
-    #                   {
-    #                     key: "TagKey", # required
-    #                     value: "TagValue", # required
-    #                   },
-    #                 ],
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         product_code: "ProductCode", # required
-    #       }
-    #
     # @!attribute [rw] usage_records
     #   The set of `UsageRecords` to submit. `BatchMeterUsage` accepts up to
     #   25 `UsageRecords` at a time.
@@ -283,28 +257,6 @@ module Aws::MarketplaceMetering
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass MeterUsageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         product_code: "ProductCode", # required
-    #         timestamp: Time.now, # required
-    #         usage_dimension: "UsageDimension", # required
-    #         usage_quantity: 1,
-    #         dry_run: false,
-    #         usage_allocations: [
-    #           {
-    #             allocated_usage_quantity: 1, # required
-    #             tags: [
-    #               {
-    #                 key: "TagKey", # required
-    #                 value: "TagValue", # required
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] product_code
     #   Product code is used to uniquely identify a product in AWS
     #   Marketplace. The product code should be the same as the one used
@@ -382,15 +334,6 @@ module Aws::MarketplaceMetering
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RegisterUsageRequest
-    #   data as a hash:
-    #
-    #       {
-    #         product_code: "ProductCode", # required
-    #         public_key_version: 1, # required
-    #         nonce: "Nonce",
-    #       }
-    #
     # @!attribute [rw] product_code
     #   Product code is used to uniquely identify a product in AWS
     #   Marketplace. The product code should be the same as the one used
@@ -434,13 +377,6 @@ module Aws::MarketplaceMetering
     end
 
     # Contains input to the `ResolveCustomer` operation.
-    #
-    # @note When making an API call, you may pass ResolveCustomerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         registration_token: "NonEmptyString", # required
-    #       }
     #
     # @!attribute [rw] registration_token
     #   When a buyer visits your website during the registration process,
@@ -490,14 +426,6 @@ module Aws::MarketplaceMetering
 
     # Metadata assigned to an allocation. Each tag is made up of a `key` and
     # a `value`.
-    #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
     #
     # @!attribute [rw] key
     #   One part of a key-value pair that makes up a `tag`. A `key` is a
@@ -555,19 +483,6 @@ module Aws::MarketplaceMetering
     # Each `UsageAllocation` indicates the usage quantity for a specific set
     # of tags.
     #
-    # @note When making an API call, you may pass UsageAllocation
-    #   data as a hash:
-    #
-    #       {
-    #         allocated_usage_quantity: 1, # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] allocated_usage_quantity
     #   The total quantity allocated to this bucket of usage.
     #   @return [Integer]
@@ -591,27 +506,6 @@ module Aws::MarketplaceMetering
     #
     # Multiple requests with the same `UsageRecords` as input will be
     # de-duplicated to prevent double charges.
-    #
-    # @note When making an API call, you may pass UsageRecord
-    #   data as a hash:
-    #
-    #       {
-    #         timestamp: Time.now, # required
-    #         customer_identifier: "CustomerIdentifier", # required
-    #         dimension: "UsageDimension", # required
-    #         quantity: 1,
-    #         usage_allocations: [
-    #           {
-    #             allocated_usage_quantity: 1, # required
-    #             tags: [
-    #               {
-    #                 key: "TagKey", # required
-    #                 value: "TagValue", # required
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] timestamp
     #   Timestamp, in UTC, for which the usage is being reported.

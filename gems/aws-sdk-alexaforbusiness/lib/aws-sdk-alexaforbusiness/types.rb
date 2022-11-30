@@ -71,13 +71,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ApproveSkillRequest
-    #   data as a hash:
-    #
-    #       {
-    #         skill_id: "SkillId", # required
-    #       }
-    #
     # @!attribute [rw] skill_id
     #   The unique identifier of the skill.
     #   @return [String]
@@ -94,14 +87,6 @@ module Aws::AlexaForBusiness
     #
     class ApproveSkillResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass AssociateContactWithAddressBookRequest
-    #   data as a hash:
-    #
-    #       {
-    #         contact_arn: "Arn", # required
-    #         address_book_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] contact_arn
     #   The ARN of the contact to associate with an address book.
     #   @return [String]
@@ -123,14 +108,6 @@ module Aws::AlexaForBusiness
     #
     class AssociateContactWithAddressBookResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass AssociateDeviceWithNetworkProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_arn: "Arn", # required
-    #         network_profile_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] device_arn
     #   The device ARN.
     #   @return [String]
@@ -152,14 +129,6 @@ module Aws::AlexaForBusiness
     #
     class AssociateDeviceWithNetworkProfileResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass AssociateDeviceWithRoomRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_arn: "Arn",
-    #         room_arn: "Arn",
-    #       }
-    #
     # @!attribute [rw] device_arn
     #   The ARN of the device to associate to a room. Required.
     #   @return [String]
@@ -181,14 +150,6 @@ module Aws::AlexaForBusiness
     #
     class AssociateDeviceWithRoomResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass AssociateSkillGroupWithRoomRequest
-    #   data as a hash:
-    #
-    #       {
-    #         skill_group_arn: "Arn",
-    #         room_arn: "Arn",
-    #       }
-    #
     # @!attribute [rw] skill_group_arn
     #   The ARN of the skill group to associate with a room. Required.
     #   @return [String]
@@ -211,14 +172,6 @@ module Aws::AlexaForBusiness
     #
     class AssociateSkillGroupWithRoomResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass AssociateSkillWithSkillGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         skill_group_arn: "Arn",
-    #         skill_id: "SkillId", # required
-    #       }
-    #
     # @!attribute [rw] skill_group_arn
     #   The ARN of the skill group to associate the skill to. Required.
     #   @return [String]
@@ -240,13 +193,6 @@ module Aws::AlexaForBusiness
     #
     class AssociateSkillWithSkillGroupResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass AssociateSkillWithUsersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         skill_id: "SkillId", # required
-    #       }
-    #
     # @!attribute [rw] skill_id
     #   The private skill ID you want to make available to enrolled users.
     #   @return [String]
@@ -279,14 +225,6 @@ module Aws::AlexaForBusiness
     #
     #
     # [1]: https://www.ffmpeg.org/
-    #
-    # @note When making an API call, you may pass Audio
-    #   data as a hash:
-    #
-    #       {
-    #         locale: "en-US", # required, accepts en-US
-    #         location: "AudioLocation", # required
-    #       }
     #
     # @!attribute [rw] locale
     #   The locale of the audio message. Currently, en-US is supported.
@@ -348,13 +286,6 @@ module Aws::AlexaForBusiness
 
     # The content range of the report.
     #
-    # @note When making an API call, you may pass BusinessReportContentRange
-    #   data as a hash:
-    #
-    #       {
-    #         interval: "ONE_DAY", # required, accepts ONE_DAY, ONE_WEEK, THIRTY_DAYS
-    #       }
-    #
     # @!attribute [rw] interval
     #   The interval of the content range.
     #   @return [String]
@@ -368,13 +299,6 @@ module Aws::AlexaForBusiness
     end
 
     # The recurrence of the reports.
-    #
-    # @note When making an API call, you may pass BusinessReportRecurrence
-    #   data as a hash:
-    #
-    #       {
-    #         start_date: "Date",
-    #       }
     #
     # @!attribute [rw] start_date
     #   The start date.
@@ -494,13 +418,6 @@ module Aws::AlexaForBusiness
 
     # The default conference provider that is used if no other scheduled
     # meetings are detected.
-    #
-    # @note When making an API call, you may pass ConferencePreference
-    #   data as a hash:
-    #
-    #       {
-    #         default_conference_provider_arn: "Arn",
-    #       }
     #
     # @!attribute [rw] default_conference_provider_arn
     #   The ARN of the default conference provider.
@@ -657,30 +574,6 @@ module Aws::AlexaForBusiness
     # The content definition. This can contain only one text, SSML, or audio
     # list object.
     #
-    # @note When making an API call, you may pass Content
-    #   data as a hash:
-    #
-    #       {
-    #         text_list: [
-    #           {
-    #             locale: "en-US", # required, accepts en-US
-    #             value: "TextValue", # required
-    #           },
-    #         ],
-    #         ssml_list: [
-    #           {
-    #             locale: "en-US", # required, accepts en-US
-    #             value: "SsmlValue", # required
-    #           },
-    #         ],
-    #         audio_list: [
-    #           {
-    #             locale: "en-US", # required, accepts en-US
-    #             location: "AudioLocation", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] text_list
     #   The list of text messages.
     #   @return [Array<Types::Text>]
@@ -703,21 +596,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAddressBookRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "AddressBookName", # required
-    #         description: "AddressBookDescription",
-    #         client_request_token: "ClientRequestToken",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the address book.
     #   @return [String]
@@ -762,29 +640,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateBusinessReportScheduleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         schedule_name: "BusinessReportScheduleName",
-    #         s3_bucket_name: "CustomerS3BucketName",
-    #         s3_key_prefix: "S3KeyPrefix",
-    #         format: "CSV", # required, accepts CSV, CSV_ZIP
-    #         content_range: { # required
-    #           interval: "ONE_DAY", # required, accepts ONE_DAY, ONE_WEEK, THIRTY_DAYS
-    #         },
-    #         recurrence: {
-    #           start_date: "Date",
-    #         },
-    #         client_request_token: "ClientRequestToken",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] schedule_name
     #   The name identifier of the schedule.
     #   @return [String]
@@ -851,34 +706,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateConferenceProviderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         conference_provider_name: "ConferenceProviderName", # required
-    #         conference_provider_type: "CHIME", # required, accepts CHIME, BLUEJEANS, FUZE, GOOGLE_HANGOUTS, POLYCOM, RINGCENTRAL, SKYPE_FOR_BUSINESS, WEBEX, ZOOM, CUSTOM
-    #         ip_dial_in: {
-    #           endpoint: "Endpoint", # required
-    #           comms_protocol: "SIP", # required, accepts SIP, SIPS, H323
-    #         },
-    #         pstn_dial_in: {
-    #           country_code: "CountryCode", # required
-    #           phone_number: "OutboundPhoneNumber", # required
-    #           one_click_id_delay: "OneClickIdDelay", # required
-    #           one_click_pin_delay: "OneClickPinDelay", # required
-    #         },
-    #         meeting_setting: { # required
-    #           require_pin: "YES", # required, accepts YES, NO, OPTIONAL
-    #         },
-    #         client_request_token: "ClientRequestToken",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] conference_provider_name
     #   The name of the conference provider.
     #   @return [String]
@@ -937,35 +764,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateContactRequest
-    #   data as a hash:
-    #
-    #       {
-    #         display_name: "ContactName",
-    #         first_name: "ContactName", # required
-    #         last_name: "ContactName",
-    #         phone_number: "RawPhoneNumber",
-    #         phone_numbers: [
-    #           {
-    #             number: "RawPhoneNumber", # required
-    #             type: "MOBILE", # required, accepts MOBILE, WORK, HOME
-    #           },
-    #         ],
-    #         sip_addresses: [
-    #           {
-    #             uri: "SipUri", # required
-    #             type: "WORK", # required, accepts WORK
-    #           },
-    #         ],
-    #         client_request_token: "ClientRequestToken",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] display_name
     #   The name of the contact to display on the console.
     #   @return [String]
@@ -1039,15 +837,6 @@ module Aws::AlexaForBusiness
     # applied to a room profile. The end of meeting reminder enables Alexa
     # to remind users when a meeting is ending.
     #
-    # @note When making an API call, you may pass CreateEndOfMeetingReminder
-    #   data as a hash:
-    #
-    #       {
-    #         reminder_at_minutes: [1], # required
-    #         reminder_type: "ANNOUNCEMENT_TIME_CHECK", # required, accepts ANNOUNCEMENT_TIME_CHECK, ANNOUNCEMENT_VARIABLE_TIME_LEFT, CHIME, KNOCK
-    #         enabled: false, # required
-    #       }
-    #
     # @!attribute [rw] reminder_at_minutes
     #   A range of 3 to 15 minutes that determines when the reminder begins.
     #   @return [Array<Integer>]
@@ -1071,21 +860,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateGatewayGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "GatewayGroupName", # required
-    #         description: "GatewayGroupDescription",
-    #         client_request_token: "ClientRequestToken", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the gateway group.
     #   @return [String]
@@ -1135,14 +909,6 @@ module Aws::AlexaForBusiness
     # automatically books the room for the configured duration if the room
     # is available.
     #
-    # @note When making an API call, you may pass CreateInstantBooking
-    #   data as a hash:
-    #
-    #       {
-    #         duration_in_minutes: 1, # required
-    #         enabled: false, # required
-    #       }
-    #
     # @!attribute [rw] duration_in_minutes
     #   Duration between 15 and 240 minutes at increments of 15 that
     #   determines how long to book an available room when a meeting is
@@ -1163,26 +929,6 @@ module Aws::AlexaForBusiness
     end
 
     # Creates meeting room settings of a room profile.
-    #
-    # @note When making an API call, you may pass CreateMeetingRoomConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         room_utilization_metrics_enabled: false,
-    #         end_of_meeting_reminder: {
-    #           reminder_at_minutes: [1], # required
-    #           reminder_type: "ANNOUNCEMENT_TIME_CHECK", # required, accepts ANNOUNCEMENT_TIME_CHECK, ANNOUNCEMENT_VARIABLE_TIME_LEFT, CHIME, KNOCK
-    #           enabled: false, # required
-    #         },
-    #         instant_booking: {
-    #           duration_in_minutes: 1, # required
-    #           enabled: false, # required
-    #         },
-    #         require_check_in: {
-    #           release_after_minutes: 1, # required
-    #           enabled: false, # required
-    #         },
-    #       }
     #
     # @!attribute [rw] room_utilization_metrics_enabled
     #   Whether room utilization metrics are enabled or not.
@@ -1217,28 +963,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateNetworkProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         network_profile_name: "NetworkProfileName", # required
-    #         description: "NetworkProfileDescription",
-    #         ssid: "NetworkSsid", # required
-    #         security_type: "OPEN", # required, accepts OPEN, WEP, WPA_PSK, WPA2_PSK, WPA2_ENTERPRISE
-    #         eap_method: "EAP_TLS", # accepts EAP_TLS
-    #         current_password: "CurrentWiFiPassword",
-    #         next_password: "NextWiFiPassword",
-    #         certificate_authority_arn: "Arn",
-    #         trust_anchors: ["TrustAnchor"],
-    #         client_request_token: "ClientRequestToken", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] network_profile_name
     #   The name of the network profile associated with a device.
     #   @return [String]
@@ -1326,46 +1050,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         profile_name: "ProfileName", # required
-    #         timezone: "Timezone", # required
-    #         address: "Address", # required
-    #         distance_unit: "METRIC", # required, accepts METRIC, IMPERIAL
-    #         temperature_unit: "FAHRENHEIT", # required, accepts FAHRENHEIT, CELSIUS
-    #         wake_word: "ALEXA", # required, accepts ALEXA, AMAZON, ECHO, COMPUTER
-    #         locale: "DeviceLocale",
-    #         client_request_token: "ClientRequestToken",
-    #         setup_mode_disabled: false,
-    #         max_volume_limit: 1,
-    #         pstn_enabled: false,
-    #         data_retention_opt_in: false,
-    #         meeting_room_configuration: {
-    #           room_utilization_metrics_enabled: false,
-    #           end_of_meeting_reminder: {
-    #             reminder_at_minutes: [1], # required
-    #             reminder_type: "ANNOUNCEMENT_TIME_CHECK", # required, accepts ANNOUNCEMENT_TIME_CHECK, ANNOUNCEMENT_VARIABLE_TIME_LEFT, CHIME, KNOCK
-    #             enabled: false, # required
-    #           },
-    #           instant_booking: {
-    #             duration_in_minutes: 1, # required
-    #             enabled: false, # required
-    #           },
-    #           require_check_in: {
-    #             release_after_minutes: 1, # required
-    #             enabled: false, # required
-    #           },
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] profile_name
     #   The name of a room profile.
     #   @return [String]
@@ -1465,14 +1149,6 @@ module Aws::AlexaForBusiness
     # device to prompt the user to check in; otherwise, the room will be
     # released.
     #
-    # @note When making an API call, you may pass CreateRequireCheckIn
-    #   data as a hash:
-    #
-    #       {
-    #         release_after_minutes: 1, # required
-    #         enabled: false, # required
-    #       }
-    #
     # @!attribute [rw] release_after_minutes
     #   Duration between 5 and 20 minutes to determine when to release the
     #   room if it's not checked into.
@@ -1491,23 +1167,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateRoomRequest
-    #   data as a hash:
-    #
-    #       {
-    #         room_name: "RoomName", # required
-    #         description: "RoomDescription",
-    #         profile_arn: "Arn",
-    #         provider_calendar_id: "ProviderCalendarId",
-    #         client_request_token: "ClientRequestToken",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] room_name
     #   The name for the room.
     #   @return [String]
@@ -1561,21 +1220,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateSkillGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         skill_group_name: "SkillGroupName", # required
-    #         description: "SkillGroupDescription",
-    #         client_request_token: "ClientRequestToken",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] skill_group_name
     #   The name for the skill group.
     #   @return [String]
@@ -1619,23 +1263,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_id: "user_UserId", # required
-    #         first_name: "user_FirstName",
-    #         last_name: "user_LastName",
-    #         email: "Email",
-    #         client_request_token: "ClientRequestToken",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] user_id
     #   The ARN for the user.
     #   @return [String]
@@ -1689,13 +1316,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAddressBookRequest
-    #   data as a hash:
-    #
-    #       {
-    #         address_book_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] address_book_arn
     #   The ARN of the address book to delete.
     #   @return [String]
@@ -1712,13 +1332,6 @@ module Aws::AlexaForBusiness
     #
     class DeleteAddressBookResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteBusinessReportScheduleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         schedule_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] schedule_arn
     #   The ARN of the business report schedule.
     #   @return [String]
@@ -1735,13 +1348,6 @@ module Aws::AlexaForBusiness
     #
     class DeleteBusinessReportScheduleResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteConferenceProviderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         conference_provider_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] conference_provider_arn
     #   The ARN of the conference provider.
     #   @return [String]
@@ -1758,13 +1364,6 @@ module Aws::AlexaForBusiness
     #
     class DeleteConferenceProviderResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteContactRequest
-    #   data as a hash:
-    #
-    #       {
-    #         contact_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] contact_arn
     #   The ARN of the contact to delete.
     #   @return [String]
@@ -1781,13 +1380,6 @@ module Aws::AlexaForBusiness
     #
     class DeleteContactResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteDeviceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] device_arn
     #   The ARN of the device for which to request details.
     #   @return [String]
@@ -1804,14 +1396,6 @@ module Aws::AlexaForBusiness
     #
     class DeleteDeviceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteDeviceUsageDataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_arn: "Arn", # required
-    #         device_usage_type: "VOICE", # required, accepts VOICE
-    #       }
-    #
     # @!attribute [rw] device_arn
     #   The ARN of the device.
     #   @return [String]
@@ -1833,13 +1417,6 @@ module Aws::AlexaForBusiness
     #
     class DeleteDeviceUsageDataResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteGatewayGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_group_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] gateway_group_arn
     #   The ARN of the gateway group to delete.
     #   @return [String]
@@ -1856,13 +1433,6 @@ module Aws::AlexaForBusiness
     #
     class DeleteGatewayGroupResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteNetworkProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         network_profile_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] network_profile_arn
     #   The ARN of the network profile associated with a device.
     #   @return [String]
@@ -1879,13 +1449,6 @@ module Aws::AlexaForBusiness
     #
     class DeleteNetworkProfileResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         profile_arn: "Arn",
-    #       }
-    #
     # @!attribute [rw] profile_arn
     #   The ARN of the room profile to delete. Required.
     #   @return [String]
@@ -1902,13 +1465,6 @@ module Aws::AlexaForBusiness
     #
     class DeleteProfileResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteRoomRequest
-    #   data as a hash:
-    #
-    #       {
-    #         room_arn: "Arn",
-    #       }
-    #
     # @!attribute [rw] room_arn
     #   The ARN of the room to delete. Required.
     #   @return [String]
@@ -1925,15 +1481,6 @@ module Aws::AlexaForBusiness
     #
     class DeleteRoomResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteRoomSkillParameterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         room_arn: "Arn",
-    #         skill_id: "SkillId", # required
-    #         parameter_key: "RoomSkillParameterKey", # required
-    #       }
-    #
     # @!attribute [rw] room_arn
     #   The ARN of the room from which to remove the room skill parameter
     #   details.
@@ -1962,14 +1509,6 @@ module Aws::AlexaForBusiness
     #
     class DeleteRoomSkillParameterResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteSkillAuthorizationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         skill_id: "SkillId", # required
-    #         room_arn: "Arn",
-    #       }
-    #
     # @!attribute [rw] skill_id
     #   The unique identifier of a skill.
     #   @return [String]
@@ -1991,13 +1530,6 @@ module Aws::AlexaForBusiness
     #
     class DeleteSkillAuthorizationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteSkillGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         skill_group_arn: "Arn",
-    #       }
-    #
     # @!attribute [rw] skill_group_arn
     #   The ARN of the skill group to delete. Required.
     #   @return [String]
@@ -2014,14 +1546,6 @@ module Aws::AlexaForBusiness
     #
     class DeleteSkillGroupResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteUserRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_arn: "Arn",
-    #         enrollment_id: "EnrollmentId", # required
-    #       }
-    #
     # @!attribute [rw] user_arn
     #   The ARN of the user to delete in the organization. Required.
     #   @return [String]
@@ -2312,14 +1836,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateContactFromAddressBookRequest
-    #   data as a hash:
-    #
-    #       {
-    #         contact_arn: "Arn", # required
-    #         address_book_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] contact_arn
     #   The ARN of the contact to disassociate from an address book.
     #   @return [String]
@@ -2341,13 +1857,6 @@ module Aws::AlexaForBusiness
     #
     class DisassociateContactFromAddressBookResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DisassociateDeviceFromRoomRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_arn: "Arn",
-    #       }
-    #
     # @!attribute [rw] device_arn
     #   The ARN of the device to disassociate from a room. Required.
     #   @return [String]
@@ -2364,14 +1873,6 @@ module Aws::AlexaForBusiness
     #
     class DisassociateDeviceFromRoomResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DisassociateSkillFromSkillGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         skill_group_arn: "Arn",
-    #         skill_id: "SkillId", # required
-    #       }
-    #
     # @!attribute [rw] skill_group_arn
     #   The unique identifier of a skill. Required.
     #   @return [String]
@@ -2393,13 +1894,6 @@ module Aws::AlexaForBusiness
     #
     class DisassociateSkillFromSkillGroupResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DisassociateSkillFromUsersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         skill_id: "SkillId", # required
-    #       }
-    #
     # @!attribute [rw] skill_id
     #   The private skill ID you want to make unavailable for enrolled
     #   users.
@@ -2417,14 +1911,6 @@ module Aws::AlexaForBusiness
     #
     class DisassociateSkillFromUsersResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DisassociateSkillGroupFromRoomRequest
-    #   data as a hash:
-    #
-    #       {
-    #         skill_group_arn: "Arn",
-    #         room_arn: "Arn",
-    #       }
-    #
     # @!attribute [rw] skill_group_arn
     #   The ARN of the skill group to disassociate from a room. Required.
     #   @return [String]
@@ -2478,14 +1964,6 @@ module Aws::AlexaForBusiness
     # list of results. Filters can be used to match a set of resources by
     # various criteria.
     #
-    # @note When making an API call, you may pass Filter
-    #   data as a hash:
-    #
-    #       {
-    #         key: "FilterKey", # required
-    #         values: ["FilterValue"], # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The key of a filter.
     #   @return [String]
@@ -2503,13 +1981,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ForgetSmartHomeAppliancesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         room_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] room_arn
     #   The room that the appliances are associated with.
     #   @return [String]
@@ -2644,13 +2115,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAddressBookRequest
-    #   data as a hash:
-    #
-    #       {
-    #         address_book_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] address_book_arn
     #   The ARN of the address book for which to request details.
     #   @return [String]
@@ -2675,8 +2139,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetConferencePreferenceRequest AWS API Documentation
     #
     class GetConferencePreferenceRequest < Aws::EmptyStructure; end
@@ -2693,13 +2155,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetConferenceProviderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         conference_provider_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] conference_provider_arn
     #   The ARN of the newly created conference provider.
     #   @return [String]
@@ -2724,13 +2179,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetContactRequest
-    #   data as a hash:
-    #
-    #       {
-    #         contact_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] contact_arn
     #   The ARN of the contact for which to request details.
     #   @return [String]
@@ -2755,13 +2203,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDeviceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_arn: "Arn",
-    #       }
-    #
     # @!attribute [rw] device_arn
     #   The ARN of the device for which to request details. Required.
     #   @return [String]
@@ -2786,13 +2227,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetGatewayGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_group_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] gateway_group_arn
     #   The ARN of the gateway group to get.
     #   @return [String]
@@ -2817,13 +2251,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetGatewayRequest
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] gateway_arn
     #   The ARN of the gateway to get.
     #   @return [String]
@@ -2848,8 +2275,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetInvitationConfigurationRequest AWS API Documentation
     #
     class GetInvitationConfigurationRequest < Aws::EmptyStructure; end
@@ -2879,13 +2304,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetNetworkProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         network_profile_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] network_profile_arn
     #   The ARN of the network profile associated with a device.
     #   @return [String]
@@ -2910,13 +2328,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         profile_arn: "Arn",
-    #       }
-    #
     # @!attribute [rw] profile_arn
     #   The ARN of the room profile for which to request details. Required.
     #   @return [String]
@@ -2941,13 +2352,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRoomRequest
-    #   data as a hash:
-    #
-    #       {
-    #         room_arn: "Arn",
-    #       }
-    #
     # @!attribute [rw] room_arn
     #   The ARN of the room for which to request details. Required.
     #   @return [String]
@@ -2972,15 +2376,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetRoomSkillParameterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         room_arn: "Arn",
-    #         skill_id: "SkillId", # required
-    #         parameter_key: "RoomSkillParameterKey", # required
-    #       }
-    #
     # @!attribute [rw] room_arn
     #   The ARN of the room from which to get the room skill parameter
     #   details.
@@ -3017,13 +2412,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSkillGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         skill_group_arn: "Arn",
-    #       }
-    #
     # @!attribute [rw] skill_group_arn
     #   The ARN of the skill group for which to get details. Required.
     #   @return [String]
@@ -3049,14 +2437,6 @@ module Aws::AlexaForBusiness
     end
 
     # The IP endpoint and protocol for calling.
-    #
-    # @note When making an API call, you may pass IPDialIn
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint: "Endpoint", # required
-    #         comms_protocol: "SIP", # required, accepts SIP, SIPS, H323
-    #       }
     #
     # @!attribute [rw] endpoint
     #   The IP address.
@@ -3179,14 +2559,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListBusinessReportSchedulesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The token used to list the remaining schedules from the previous API
     #   call.
@@ -3223,14 +2595,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListConferenceProvidersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The tokens used for pagination.
     #   @return [String]
@@ -3266,16 +2630,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDeviceEventsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_arn: "Arn", # required
-    #         event_type: "CONNECTION_STATUS", # accepts CONNECTION_STATUS, DEVICE_STATUS
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] device_arn
     #   The ARN of a device.
     #   @return [String]
@@ -3330,14 +2684,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListGatewayGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The token used to paginate though multiple pages of gateway group
     #   summaries.
@@ -3375,15 +2721,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListGatewaysRequest
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_group_arn: "Arn",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] gateway_group_arn
     #   The gateway group ARN for which to list gateways.
     #   @return [String]
@@ -3426,17 +2763,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSkillsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         skill_group_arn: "Arn",
-    #         enablement_type: "ENABLED", # accepts ENABLED, PENDING
-    #         skill_type: "PUBLIC", # accepts PUBLIC, PRIVATE, ALL
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] skill_group_arn
     #   The ARN of the skill group for which to list enabled skills.
     #   @return [String]
@@ -3492,14 +2818,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSkillsStoreCategoriesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The tokens used for pagination.
     #   @return [String]
@@ -3534,15 +2852,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSkillsStoreSkillsByCategoryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         category_id: 1, # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] category_id
     #   The category ID for which the skills are being retrieved from the
     #   skill store.
@@ -3583,15 +2892,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSmartHomeAppliancesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         room_arn: "Arn", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] room_arn
     #   The room that the appliances are associated with.
     #   @return [String]
@@ -3632,15 +2932,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "Arn", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] arn
     #   The ARN of the specified resource for which to list tags.
     #   @return [String]
@@ -3730,13 +3021,6 @@ module Aws::AlexaForBusiness
     #
     # * If OPTIONAL, Alexa will ask if you have a meeting pin and if the
     #   customer responds with yes, it will ask for the meeting pin.
-    #
-    # @note When making an API call, you may pass MeetingSetting
-    #   data as a hash:
-    #
-    #       {
-    #         require_pin: "YES", # required, accepts YES, NO, OPTIONAL
-    #       }
     #
     # @!attribute [rw] require_pin
     #   The values that indicate whether the pin is always required.
@@ -3894,16 +3178,6 @@ module Aws::AlexaForBusiness
     # The information for public switched telephone network (PSTN)
     # conferencing.
     #
-    # @note When making an API call, you may pass PSTNDialIn
-    #   data as a hash:
-    #
-    #       {
-    #         country_code: "CountryCode", # required
-    #         phone_number: "OutboundPhoneNumber", # required
-    #         one_click_id_delay: "OneClickIdDelay", # required
-    #         one_click_pin_delay: "OneClickPinDelay", # required
-    #       }
-    #
     # @!attribute [rw] country_code
     #   The zip code.
     #   @return [String]
@@ -3939,14 +3213,6 @@ module Aws::AlexaForBusiness
 
     # The phone number for the contact containing the raw number and phone
     # number type.
-    #
-    # @note When making an API call, you may pass PhoneNumber
-    #   data as a hash:
-    #
-    #       {
-    #         number: "RawPhoneNumber", # required
-    #         type: "MOBILE", # required, accepts MOBILE, WORK, HOME
-    #       }
     #
     # @!attribute [rw] number
     #   The raw value of the phone number.
@@ -4105,15 +3371,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutConferencePreferenceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         conference_preference: { # required
-    #           default_conference_provider_arn: "Arn",
-    #         },
-    #       }
-    #
     # @!attribute [rw] conference_preference
     #   The conference preference of a specific conference provider.
     #   @return [Types::ConferencePreference]
@@ -4130,15 +3387,6 @@ module Aws::AlexaForBusiness
     #
     class PutConferencePreferenceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass PutInvitationConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_name: "OrganizationName", # required
-    #         contact_email: "Email",
-    #         private_skill_ids: ["SkillId"],
-    #       }
-    #
     # @!attribute [rw] organization_name
     #   The name of the organization sending the enrollment invite to a
     #   user.
@@ -4168,18 +3416,6 @@ module Aws::AlexaForBusiness
     #
     class PutInvitationConfigurationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass PutRoomSkillParameterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         room_arn: "Arn",
-    #         skill_id: "SkillId", # required
-    #         room_skill_parameter: { # required
-    #           parameter_key: "RoomSkillParameterKey", # required
-    #           parameter_value: "RoomSkillParameterValue", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] room_arn
     #   The ARN of the room associated with the room skill parameter.
     #   Required.
@@ -4208,17 +3444,6 @@ module Aws::AlexaForBusiness
     #
     class PutRoomSkillParameterResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass PutSkillAuthorizationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         authorization_result: { # required
-    #           "Key" => "Value",
-    #         },
-    #         skill_id: "SkillId", # required
-    #         room_arn: "Arn",
-    #       }
-    #
     # @!attribute [rw] authorization_result
     #   The authorization result specific to OAUTH code grant output.
     #   "Code” must be populated in the AuthorizationResult map to
@@ -4247,24 +3472,6 @@ module Aws::AlexaForBusiness
     #
     class PutSkillAuthorizationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass RegisterAVSDeviceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_id: "ClientId", # required
-    #         user_code: "UserCode", # required
-    #         product_id: "ProductId", # required
-    #         device_serial_number: "DeviceSerialNumberForAVS",
-    #         amazon_id: "AmazonId", # required
-    #         room_arn: "Arn",
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] client_id
     #   The client ID of the OEM used for code-based linking authorization
     #   on an AVS device.
@@ -4327,13 +3534,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RejectSkillRequest
-    #   data as a hash:
-    #
-    #       {
-    #         skill_id: "SkillId", # required
-    #       }
-    #
     # @!attribute [rw] skill_id
     #   The unique identifier of the skill.
     #   @return [String]
@@ -4372,14 +3572,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ResolveRoomRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_id: "UserId", # required
-    #         skill_id: "SkillId", # required
-    #       }
-    #
     # @!attribute [rw] user_id
     #   The ARN of the user. Required.
     #   @return [String]
@@ -4451,14 +3643,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RevokeInvitationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_arn: "Arn",
-    #         enrollment_id: "EnrollmentId",
-    #       }
-    #
     # @!attribute [rw] user_arn
     #   The ARN of the user for whom to revoke an enrollment invitation.
     #   Required.
@@ -4556,14 +3740,6 @@ module Aws::AlexaForBusiness
 
     # A skill parameter associated with a room.
     #
-    # @note When making an API call, you may pass RoomSkillParameter
-    #   data as a hash:
-    #
-    #       {
-    #         parameter_key: "RoomSkillParameterKey", # required
-    #         parameter_value: "RoomSkillParameterValue", # required
-    #       }
-    #
     # @!attribute [rw] parameter_key
     #   The parameter key of a room skill parameter. ParameterKey is an
     #   enumerated type that only takes “DEFAULT” or “SCOPE” as valid
@@ -4583,26 +3759,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SearchAddressBooksRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             key: "FilterKey", # required
-    #             values: ["FilterValue"], # required
-    #           },
-    #         ],
-    #         sort_criteria: [
-    #           {
-    #             key: "SortKey", # required
-    #             value: "ASC", # required, accepts ASC, DESC
-    #           },
-    #         ],
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] filters
     #   The filters to use to list a specified set of address books. The
     #   supported filter key is AddressBookName.
@@ -4661,26 +3817,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SearchContactsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             key: "FilterKey", # required
-    #             values: ["FilterValue"], # required
-    #           },
-    #         ],
-    #         sort_criteria: [
-    #           {
-    #             key: "SortKey", # required
-    #             value: "ASC", # required, accepts ASC, DESC
-    #           },
-    #         ],
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] filters
     #   The filters to use to list a specified set of address books. The
     #   supported filter keys are DisplayName, FirstName, LastName, and
@@ -4740,26 +3876,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SearchDevicesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         filters: [
-    #           {
-    #             key: "FilterKey", # required
-    #             values: ["FilterValue"], # required
-    #           },
-    #         ],
-    #         sort_criteria: [
-    #           {
-    #             key: "SortKey", # required
-    #             value: "ASC", # required, accepts ASC, DESC
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] next_token
     #   An optional token returned from a prior request. Use this token for
     #   pagination of results from this action. If this parameter is
@@ -4823,26 +3939,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SearchNetworkProfilesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         filters: [
-    #           {
-    #             key: "FilterKey", # required
-    #             values: ["FilterValue"], # required
-    #           },
-    #         ],
-    #         sort_criteria: [
-    #           {
-    #             key: "SortKey", # required
-    #             value: "ASC", # required, accepts ASC, DESC
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] next_token
     #   An optional token returned from a prior request. Use this token for
     #   pagination of results from this action. If this parameter is
@@ -4905,26 +4001,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SearchProfilesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         filters: [
-    #           {
-    #             key: "FilterKey", # required
-    #             values: ["FilterValue"], # required
-    #           },
-    #         ],
-    #         sort_criteria: [
-    #           {
-    #             key: "SortKey", # required
-    #             value: "ASC", # required, accepts ASC, DESC
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] next_token
     #   An optional token returned from a prior request. Use this token for
     #   pagination of results from this action. If this parameter is
@@ -4983,26 +4059,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SearchRoomsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         filters: [
-    #           {
-    #             key: "FilterKey", # required
-    #             values: ["FilterValue"], # required
-    #           },
-    #         ],
-    #         sort_criteria: [
-    #           {
-    #             key: "SortKey", # required
-    #             value: "ASC", # required, accepts ASC, DESC
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] next_token
     #   An optional token returned from a prior request. Use this token for
     #   pagination of results from this action. If this parameter is
@@ -5061,26 +4117,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SearchSkillGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         filters: [
-    #           {
-    #             key: "FilterKey", # required
-    #             values: ["FilterValue"], # required
-    #           },
-    #         ],
-    #         sort_criteria: [
-    #           {
-    #             key: "SortKey", # required
-    #             value: "ASC", # required, accepts ASC, DESC
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] next_token
     #   An optional token returned from a prior request. Use this token for
     #   pagination of results from this action. If this parameter is
@@ -5138,26 +4174,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SearchUsersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         filters: [
-    #           {
-    #             key: "FilterKey", # required
-    #             values: ["FilterValue"], # required
-    #           },
-    #         ],
-    #         sort_criteria: [
-    #           {
-    #             key: "SortKey", # required
-    #             value: "ASC", # required, accepts ASC, DESC
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] next_token
     #   An optional token returned from a prior request. Use this token for
     #   pagination of results from this action. If this parameter is
@@ -5218,40 +4234,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SendAnnouncementRequest
-    #   data as a hash:
-    #
-    #       {
-    #         room_filters: [ # required
-    #           {
-    #             key: "FilterKey", # required
-    #             values: ["FilterValue"], # required
-    #           },
-    #         ],
-    #         content: { # required
-    #           text_list: [
-    #             {
-    #               locale: "en-US", # required, accepts en-US
-    #               value: "TextValue", # required
-    #             },
-    #           ],
-    #           ssml_list: [
-    #             {
-    #               locale: "en-US", # required, accepts en-US
-    #               value: "SsmlValue", # required
-    #             },
-    #           ],
-    #           audio_list: [
-    #             {
-    #               locale: "en-US", # required, accepts en-US
-    #               location: "AudioLocation", # required
-    #             },
-    #           ],
-    #         },
-    #         time_to_live_in_seconds: 1,
-    #         client_request_token: "ClientRequestToken", # required
-    #       }
-    #
     # @!attribute [rw] room_filters
     #   The filters to use to send an announcement to a specified list of
     #   rooms. The supported filter keys are RoomName, ProfileName, RoomArn,
@@ -5300,13 +4282,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SendInvitationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_arn: "Arn",
-    #       }
-    #
     # @!attribute [rw] user_arn
     #   The ARN of the user to whom to send an invitation. Required.
     #   @return [String]
@@ -5325,14 +4300,6 @@ module Aws::AlexaForBusiness
 
     # The SIP address for the contact containing the URI and SIP address
     # type.
-    #
-    # @note When making an API call, you may pass SipAddress
-    #   data as a hash:
-    #
-    #       {
-    #         uri: "SipUri", # required
-    #         type: "WORK", # required, accepts WORK
-    #       }
     #
     # @!attribute [rw] uri
     #   The URI for the SIP address.
@@ -5581,14 +4548,6 @@ module Aws::AlexaForBusiness
 
     # An object representing a sort criteria.
     #
-    # @note When making an API call, you may pass Sort
-    #   data as a hash:
-    #
-    #       {
-    #         key: "SortKey", # required
-    #         value: "ASC", # required, accepts ASC, DESC
-    #       }
-    #
     # @!attribute [rw] key
     #   The sort key of a sort object.
     #   @return [String]
@@ -5612,14 +4571,6 @@ module Aws::AlexaForBusiness
     #
     # [1]: https://developer.amazon.com/docs/custom-skills/speech-synthesis-markup-language-ssml-reference.html
     #
-    # @note When making an API call, you may pass Ssml
-    #   data as a hash:
-    #
-    #       {
-    #         locale: "en-US", # required, accepts en-US
-    #         value: "SsmlValue", # required
-    #       }
-    #
     # @!attribute [rw] locale
     #   The locale of the SSML message. Currently, en-US is supported.
     #   @return [String]
@@ -5638,15 +4589,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartDeviceSyncRequest
-    #   data as a hash:
-    #
-    #       {
-    #         room_arn: "Arn",
-    #         device_arn: "Arn",
-    #         features: ["BLUETOOTH"], # required, accepts BLUETOOTH, VOLUME, NOTIFICATIONS, LISTS, SKILLS, NETWORK_PROFILE, SETTINGS, ALL
-    #       }
-    #
     # @!attribute [rw] room_arn
     #   The ARN of the room with which the device to sync is associated.
     #   Required.
@@ -5674,13 +4616,6 @@ module Aws::AlexaForBusiness
     #
     class StartDeviceSyncResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass StartSmartHomeApplianceDiscoveryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         room_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] room_arn
     #   The room where smart home appliance discovery was initiated.
     #   @return [String]
@@ -5699,14 +4634,6 @@ module Aws::AlexaForBusiness
 
     # A key-value pair that can be associated with a resource.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The key of a tag. Tag keys are case-sensitive.
     #   @return [String]
@@ -5724,19 +4651,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "Arn", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] arn
     #   The ARN of the resource to which to add metadata tags. Required.
     #   @return [String]
@@ -5760,14 +4674,6 @@ module Aws::AlexaForBusiness
     class TagResourceResponse < Aws::EmptyStructure; end
 
     # The text message.
-    #
-    # @note When making an API call, you may pass Text
-    #   data as a hash:
-    #
-    #       {
-    #         locale: "en-US", # required, accepts en-US
-    #         value: "TextValue", # required
-    #       }
     #
     # @!attribute [rw] locale
     #   The locale of the text message. Currently, en-US is supported.
@@ -5800,14 +4706,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "Arn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] arn
     #   The ARN of the resource from which to remove metadata tags.
     #   Required.
@@ -5831,15 +4729,6 @@ module Aws::AlexaForBusiness
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateAddressBookRequest
-    #   data as a hash:
-    #
-    #       {
-    #         address_book_arn: "Arn", # required
-    #         name: "AddressBookName",
-    #         description: "AddressBookDescription",
-    #       }
-    #
     # @!attribute [rw] address_book_arn
     #   The ARN of the room to update.
     #   @return [String]
@@ -5866,20 +4755,6 @@ module Aws::AlexaForBusiness
     #
     class UpdateAddressBookResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateBusinessReportScheduleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         schedule_arn: "Arn", # required
-    #         s3_bucket_name: "CustomerS3BucketName",
-    #         s3_key_prefix: "S3KeyPrefix",
-    #         format: "CSV", # accepts CSV, CSV_ZIP
-    #         schedule_name: "BusinessReportScheduleName",
-    #         recurrence: {
-    #           start_date: "Date",
-    #         },
-    #       }
-    #
     # @!attribute [rw] schedule_arn
     #   The ARN of the business report schedule.
     #   @return [String]
@@ -5922,27 +4797,6 @@ module Aws::AlexaForBusiness
     #
     class UpdateBusinessReportScheduleResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateConferenceProviderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         conference_provider_arn: "Arn", # required
-    #         conference_provider_type: "CHIME", # required, accepts CHIME, BLUEJEANS, FUZE, GOOGLE_HANGOUTS, POLYCOM, RINGCENTRAL, SKYPE_FOR_BUSINESS, WEBEX, ZOOM, CUSTOM
-    #         ip_dial_in: {
-    #           endpoint: "Endpoint", # required
-    #           comms_protocol: "SIP", # required, accepts SIP, SIPS, H323
-    #         },
-    #         pstn_dial_in: {
-    #           country_code: "CountryCode", # required
-    #           phone_number: "OutboundPhoneNumber", # required
-    #           one_click_id_delay: "OneClickIdDelay", # required
-    #           one_click_pin_delay: "OneClickPinDelay", # required
-    #         },
-    #         meeting_setting: { # required
-    #           require_pin: "YES", # required, accepts YES, NO, OPTIONAL
-    #         },
-    #       }
-    #
     # @!attribute [rw] conference_provider_arn
     #   The ARN of the conference provider.
     #   @return [String]
@@ -5979,29 +4833,6 @@ module Aws::AlexaForBusiness
     #
     class UpdateConferenceProviderResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateContactRequest
-    #   data as a hash:
-    #
-    #       {
-    #         contact_arn: "Arn", # required
-    #         display_name: "ContactName",
-    #         first_name: "ContactName",
-    #         last_name: "ContactName",
-    #         phone_number: "RawPhoneNumber",
-    #         phone_numbers: [
-    #           {
-    #             number: "RawPhoneNumber", # required
-    #             type: "MOBILE", # required, accepts MOBILE, WORK, HOME
-    #           },
-    #         ],
-    #         sip_addresses: [
-    #           {
-    #             uri: "SipUri", # required
-    #             type: "WORK", # required, accepts WORK
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] contact_arn
     #   The ARN of the contact to update.
     #   @return [String]
@@ -6051,14 +4882,6 @@ module Aws::AlexaForBusiness
     #
     class UpdateContactResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateDeviceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_arn: "Arn",
-    #         device_name: "DeviceName",
-    #       }
-    #
     # @!attribute [rw] device_arn
     #   The ARN of the device to update. Required.
     #   @return [String]
@@ -6083,15 +4906,6 @@ module Aws::AlexaForBusiness
     # Settings for the end of meeting reminder feature that are applied to a
     # room profile. The end of meeting reminder enables Alexa to remind
     # users when a meeting is ending.
-    #
-    # @note When making an API call, you may pass UpdateEndOfMeetingReminder
-    #   data as a hash:
-    #
-    #       {
-    #         reminder_at_minutes: [1],
-    #         reminder_type: "ANNOUNCEMENT_TIME_CHECK", # accepts ANNOUNCEMENT_TIME_CHECK, ANNOUNCEMENT_VARIABLE_TIME_LEFT, CHIME, KNOCK
-    #         enabled: false,
-    #       }
     #
     # @!attribute [rw] reminder_at_minutes
     #   Updates settings for the end of meeting reminder feature that are
@@ -6118,15 +4932,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateGatewayGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_group_arn: "Arn", # required
-    #         name: "GatewayGroupName",
-    #         description: "GatewayGroupDescription",
-    #       }
-    #
     # @!attribute [rw] gateway_group_arn
     #   The ARN of the gateway group to update.
     #   @return [String]
@@ -6153,16 +4958,6 @@ module Aws::AlexaForBusiness
     #
     class UpdateGatewayGroupResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateGatewayRequest
-    #   data as a hash:
-    #
-    #       {
-    #         gateway_arn: "Arn", # required
-    #         name: "GatewayName",
-    #         description: "GatewayDescription",
-    #         software_version: "GatewayVersion",
-    #       }
-    #
     # @!attribute [rw] gateway_arn
     #   The ARN of the gateway to update.
     #   @return [String]
@@ -6199,14 +4994,6 @@ module Aws::AlexaForBusiness
     # room profile. If instant booking is enabled, Alexa automatically
     # reserves a room if it is free when a user joins a meeting with Alexa.
     #
-    # @note When making an API call, you may pass UpdateInstantBooking
-    #   data as a hash:
-    #
-    #       {
-    #         duration_in_minutes: 1,
-    #         enabled: false,
-    #       }
-    #
     # @!attribute [rw] duration_in_minutes
     #   Duration between 15 and 240 minutes at increments of 15 that
     #   determines how long to book an available room when a meeting is
@@ -6227,26 +5014,6 @@ module Aws::AlexaForBusiness
     end
 
     # Updates meeting room settings of a room profile.
-    #
-    # @note When making an API call, you may pass UpdateMeetingRoomConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         room_utilization_metrics_enabled: false,
-    #         end_of_meeting_reminder: {
-    #           reminder_at_minutes: [1],
-    #           reminder_type: "ANNOUNCEMENT_TIME_CHECK", # accepts ANNOUNCEMENT_TIME_CHECK, ANNOUNCEMENT_VARIABLE_TIME_LEFT, CHIME, KNOCK
-    #           enabled: false,
-    #         },
-    #         instant_booking: {
-    #           duration_in_minutes: 1,
-    #           enabled: false,
-    #         },
-    #         require_check_in: {
-    #           release_after_minutes: 1,
-    #           enabled: false,
-    #         },
-    #       }
     #
     # @!attribute [rw] room_utilization_metrics_enabled
     #   Whether room utilization metrics are enabled or not.
@@ -6281,19 +5048,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateNetworkProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         network_profile_arn: "Arn", # required
-    #         network_profile_name: "NetworkProfileName",
-    #         description: "NetworkProfileDescription",
-    #         current_password: "CurrentWiFiPassword",
-    #         next_password: "NextWiFiPassword",
-    #         certificate_authority_arn: "Arn",
-    #         trust_anchors: ["TrustAnchor"],
-    #       }
-    #
     # @!attribute [rw] network_profile_arn
     #   The ARN of the network profile associated with a device.
     #   @return [String]
@@ -6346,41 +5100,6 @@ module Aws::AlexaForBusiness
     #
     class UpdateNetworkProfileResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         profile_arn: "Arn",
-    #         profile_name: "ProfileName",
-    #         is_default: false,
-    #         timezone: "Timezone",
-    #         address: "Address",
-    #         distance_unit: "METRIC", # accepts METRIC, IMPERIAL
-    #         temperature_unit: "FAHRENHEIT", # accepts FAHRENHEIT, CELSIUS
-    #         wake_word: "ALEXA", # accepts ALEXA, AMAZON, ECHO, COMPUTER
-    #         locale: "DeviceLocale",
-    #         setup_mode_disabled: false,
-    #         max_volume_limit: 1,
-    #         pstn_enabled: false,
-    #         data_retention_opt_in: false,
-    #         meeting_room_configuration: {
-    #           room_utilization_metrics_enabled: false,
-    #           end_of_meeting_reminder: {
-    #             reminder_at_minutes: [1],
-    #             reminder_type: "ANNOUNCEMENT_TIME_CHECK", # accepts ANNOUNCEMENT_TIME_CHECK, ANNOUNCEMENT_VARIABLE_TIME_LEFT, CHIME, KNOCK
-    #             enabled: false,
-    #           },
-    #           instant_booking: {
-    #             duration_in_minutes: 1,
-    #             enabled: false,
-    #           },
-    #           require_check_in: {
-    #             release_after_minutes: 1,
-    #             enabled: false,
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] profile_arn
     #   The ARN of the room profile to update. Required.
     #   @return [String]
@@ -6469,14 +5188,6 @@ module Aws::AlexaForBusiness
     # device to prompt the user to check in; otherwise, the room will be
     # released.
     #
-    # @note When making an API call, you may pass UpdateRequireCheckIn
-    #   data as a hash:
-    #
-    #       {
-    #         release_after_minutes: 1,
-    #         enabled: false,
-    #       }
-    #
     # @!attribute [rw] release_after_minutes
     #   Duration between 5 and 20 minutes to determine when to release the
     #   room if it's not checked into.
@@ -6495,17 +5206,6 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateRoomRequest
-    #   data as a hash:
-    #
-    #       {
-    #         room_arn: "Arn",
-    #         room_name: "RoomName",
-    #         description: "RoomDescription",
-    #         provider_calendar_id: "ProviderCalendarId",
-    #         profile_arn: "Arn",
-    #       }
-    #
     # @!attribute [rw] room_arn
     #   The ARN of the room to update.
     #   @return [String]
@@ -6542,15 +5242,6 @@ module Aws::AlexaForBusiness
     #
     class UpdateRoomResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateSkillGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         skill_group_arn: "Arn",
-    #         skill_group_name: "SkillGroupName",
-    #         description: "SkillGroupDescription",
-    #       }
-    #
     # @!attribute [rw] skill_group_arn
     #   The ARN of the skill group to update.
     #   @return [String]

@@ -10,17 +10,6 @@
 module Aws::CodeStar
   module Types
 
-    # @note When making an API call, you may pass AssociateTeamMemberRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_id: "ProjectId", # required
-    #         client_request_token: "ClientRequestToken",
-    #         user_arn: "UserArn", # required
-    #         project_role: "Role", # required
-    #         remote_access_allowed: false,
-    #       }
-    #
     # @!attribute [rw] project_id
     #   The ID of the project to which you will add the IAM user.
     #   @return [String]
@@ -77,32 +66,6 @@ module Aws::CodeStar
     # provided with the project request. The source code is uploaded to the
     # new project source repository after project creation.
     #
-    # @note When making an API call, you may pass Code
-    #   data as a hash:
-    #
-    #       {
-    #         source: { # required
-    #           s3: { # required
-    #             bucket_name: "BucketName",
-    #             bucket_key: "BucketKey",
-    #           },
-    #         },
-    #         destination: { # required
-    #           code_commit: {
-    #             name: "RepositoryName", # required
-    #           },
-    #           git_hub: {
-    #             name: "RepositoryName", # required
-    #             description: "RepositoryDescription",
-    #             type: "RepositoryType", # required
-    #             owner: "RepositoryOwner", # required
-    #             private_repository: false, # required
-    #             issues_enabled: false, # required
-    #             token: "GitHubPersonalToken", # required
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] source
     #   The location where the source code files provided with the project
     #   request are stored. AWS CodeStar retrieves the files during project
@@ -129,13 +92,6 @@ module Aws::CodeStar
     # CodeStar. This is where the source code files provided with the
     # project request will be uploaded after project creation.
     #
-    # @note When making an API call, you may pass CodeCommitCodeDestination
-    #   data as a hash:
-    #
-    #       {
-    #         name: "RepositoryName", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the AWS CodeCommit repository to be created in AWS
     #   CodeStar.
@@ -153,24 +109,6 @@ module Aws::CodeStar
     # CodeCommit or GitHub. After AWS CodeStar provisions the new
     # repository, the source code files provided with the project request
     # are placed in the repository.
-    #
-    # @note When making an API call, you may pass CodeDestination
-    #   data as a hash:
-    #
-    #       {
-    #         code_commit: {
-    #           name: "RepositoryName", # required
-    #         },
-    #         git_hub: {
-    #           name: "RepositoryName", # required
-    #           description: "RepositoryDescription",
-    #           type: "RepositoryType", # required
-    #           owner: "RepositoryOwner", # required
-    #           private_repository: false, # required
-    #           issues_enabled: false, # required
-    #           token: "GitHubPersonalToken", # required
-    #         },
-    #       }
     #
     # @!attribute [rw] code_commit
     #   Information about the AWS CodeCommit repository to be created in AWS
@@ -197,16 +135,6 @@ module Aws::CodeStar
     # request are stored. AWS CodeStar retrieves the files during project
     # creation.
     #
-    # @note When making an API call, you may pass CodeSource
-    #   data as a hash:
-    #
-    #       {
-    #         s3: { # required
-    #           bucket_name: "BucketName",
-    #           bucket_key: "BucketKey",
-    #         },
-    #       }
-    #
     # @!attribute [rw] s3
     #   Information about the Amazon S3 location where the source code files
     #   provided with the project request are stored.
@@ -227,55 +155,6 @@ module Aws::CodeStar
     #
     class ConcurrentModificationException < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass CreateProjectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ProjectName", # required
-    #         id: "ProjectId", # required
-    #         description: "ProjectDescription",
-    #         client_request_token: "ClientRequestToken",
-    #         source_code: [
-    #           {
-    #             source: { # required
-    #               s3: { # required
-    #                 bucket_name: "BucketName",
-    #                 bucket_key: "BucketKey",
-    #               },
-    #             },
-    #             destination: { # required
-    #               code_commit: {
-    #                 name: "RepositoryName", # required
-    #               },
-    #               git_hub: {
-    #                 name: "RepositoryName", # required
-    #                 description: "RepositoryDescription",
-    #                 type: "RepositoryType", # required
-    #                 owner: "RepositoryOwner", # required
-    #                 private_repository: false, # required
-    #                 issues_enabled: false, # required
-    #                 token: "GitHubPersonalToken", # required
-    #               },
-    #             },
-    #           },
-    #         ],
-    #         toolchain: {
-    #           source: { # required
-    #             s3: { # required
-    #               bucket_name: "BucketName",
-    #               bucket_key: "BucketKey",
-    #             },
-    #           },
-    #           role_arn: "RoleArn",
-    #           stack_parameters: {
-    #             "TemplateParameterKey" => "TemplateParameterValue",
-    #           },
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The display name for the project to be created in AWS CodeStar.
     #   @return [String]
@@ -352,16 +231,6 @@ module Aws::CodeStar
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateUserProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_arn: "UserArn", # required
-    #         display_name: "UserProfileDisplayName", # required
-    #         email_address: "Email", # required
-    #         ssh_public_key: "SshPublicKey",
-    #       }
-    #
     # @!attribute [rw] user_arn
     #   The Amazon Resource Name (ARN) of the user in IAM.
     #   @return [String]
@@ -436,15 +305,6 @@ module Aws::CodeStar
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteProjectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ProjectId", # required
-    #         client_request_token: "ClientRequestToken",
-    #         delete_stack: false,
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the project to be deleted in AWS CodeStar.
     #   @return [String]
@@ -491,13 +351,6 @@ module Aws::CodeStar
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteUserProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_arn: "UserArn", # required
-    #       }
-    #
     # @!attribute [rw] user_arn
     #   The Amazon Resource Name (ARN) of the user to delete from AWS
     #   CodeStar.
@@ -524,13 +377,6 @@ module Aws::CodeStar
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeProjectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ProjectId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the project.
     #   @return [String]
@@ -598,13 +444,6 @@ module Aws::CodeStar
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeUserProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_arn: "UserArn", # required
-    #       }
-    #
     # @!attribute [rw] user_arn
     #   The Amazon Resource Name (ARN) of the user.
     #   @return [String]
@@ -670,14 +509,6 @@ module Aws::CodeStar
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateTeamMemberRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_id: "ProjectId", # required
-    #         user_arn: "UserArn", # required
-    #       }
-    #
     # @!attribute [rw] project_id
     #   The ID of the AWS CodeStar project from which you want to remove a
     #   team member.
@@ -704,19 +535,6 @@ module Aws::CodeStar
     # Information about the GitHub repository to be created in AWS CodeStar.
     # This is where the source code files provided with the project request
     # will be uploaded after project creation.
-    #
-    # @note When making an API call, you may pass GitHubCodeDestination
-    #   data as a hash:
-    #
-    #       {
-    #         name: "RepositoryName", # required
-    #         description: "RepositoryDescription",
-    #         type: "RepositoryType", # required
-    #         owner: "RepositoryOwner", # required
-    #         private_repository: false, # required
-    #         issues_enabled: false, # required
-    #         token: "GitHubPersonalToken", # required
-    #       }
     #
     # @!attribute [rw] name
     #   Name of the GitHub repository to be created in AWS CodeStar.
@@ -782,14 +600,6 @@ module Aws::CodeStar
     #
     class LimitExceededException < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass ListProjectsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The continuation token to be used to return the next set of results,
     #   if the results cannot be returned in one response.
@@ -827,15 +637,6 @@ module Aws::CodeStar
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListResourcesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_id: "ProjectId", # required
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] project_id
     #   The ID of the project.
     #   @return [String]
@@ -878,15 +679,6 @@ module Aws::CodeStar
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForProjectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ProjectId", # required
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the project to get tags for.
     #   @return [String]
@@ -926,15 +718,6 @@ module Aws::CodeStar
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTeamMembersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_id: "ProjectId", # required
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] project_id
     #   The ID of the project for which you want to list team members.
     #   @return [String]
@@ -976,14 +759,6 @@ module Aws::CodeStar
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListUserProfilesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "PaginationToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The continuation token for the next set of results, if the results
     #   cannot be returned in one response.
@@ -1105,14 +880,6 @@ module Aws::CodeStar
     # The Amazon S3 location where the source code files provided with the
     # project request are stored.
     #
-    # @note When making an API call, you may pass S3Location
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_name: "BucketName",
-    #         bucket_key: "BucketKey",
-    #       }
-    #
     # @!attribute [rw] bucket_name
     #   The Amazon S3 bucket name where the source code files provided with
     #   the project request are stored.
@@ -1132,16 +899,6 @@ module Aws::CodeStar
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagProjectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ProjectId", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the project you want to add a tag to.
     #   @return [String]
@@ -1218,22 +975,6 @@ module Aws::CodeStar
     # CodeStar uses the template to provision the toolchain stack in AWS
     # CloudFormation.
     #
-    # @note When making an API call, you may pass Toolchain
-    #   data as a hash:
-    #
-    #       {
-    #         source: { # required
-    #           s3: { # required
-    #             bucket_name: "BucketName",
-    #             bucket_key: "BucketKey",
-    #           },
-    #         },
-    #         role_arn: "RoleArn",
-    #         stack_parameters: {
-    #           "TemplateParameterKey" => "TemplateParameterValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] source
     #   The Amazon S3 location where the toolchain template file provided
     #   with the project request is stored. AWS CodeStar retrieves the file
@@ -1264,16 +1005,6 @@ module Aws::CodeStar
     # the project request is stored. AWS CodeStar retrieves the file during
     # project creation.
     #
-    # @note When making an API call, you may pass ToolchainSource
-    #   data as a hash:
-    #
-    #       {
-    #         s3: { # required
-    #           bucket_name: "BucketName",
-    #           bucket_key: "BucketKey",
-    #         },
-    #       }
-    #
     # @!attribute [rw] s3
     #   The Amazon S3 bucket where the toolchain template file provided with
     #   the project request is stored.
@@ -1287,14 +1018,6 @@ module Aws::CodeStar
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagProjectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ProjectId", # required
-    #         tags: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the project to remove tags from.
     #   @return [String]
@@ -1316,15 +1039,6 @@ module Aws::CodeStar
     #
     class UntagProjectResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateProjectRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "ProjectId", # required
-    #         name: "ProjectName",
-    #         description: "ProjectDescription",
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the project you want to update.
     #   @return [String]
@@ -1351,16 +1065,6 @@ module Aws::CodeStar
     #
     class UpdateProjectResult < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateTeamMemberRequest
-    #   data as a hash:
-    #
-    #       {
-    #         project_id: "ProjectId", # required
-    #         user_arn: "UserArn", # required
-    #         project_role: "Role",
-    #         remote_access_allowed: false,
-    #       }
-    #
     # @!attribute [rw] project_id
     #   The ID of the project.
     #   @return [String]
@@ -1423,16 +1127,6 @@ module Aws::CodeStar
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateUserProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         user_arn: "UserArn", # required
-    #         display_name: "UserProfileDisplayName",
-    #         email_address: "Email",
-    #         ssh_public_key: "SshPublicKey",
-    #       }
-    #
     # @!attribute [rw] user_arn
     #   The name that will be displayed as the friendly name for the user in
     #   AWS CodeStar.

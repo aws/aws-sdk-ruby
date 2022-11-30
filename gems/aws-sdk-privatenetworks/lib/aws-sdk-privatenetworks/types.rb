@@ -23,13 +23,6 @@ module Aws::PrivateNetworks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AcknowledgeOrderReceiptRequest
-    #   data as a hash:
-    #
-    #       {
-    #         order_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] order_arn
     #   The Amazon Resource Name (ARN) of the order.
     #   @return [String]
@@ -54,14 +47,6 @@ module Aws::PrivateNetworks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ActivateDeviceIdentifierRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         device_identifier_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [How to ensure
@@ -102,26 +87,6 @@ module Aws::PrivateNetworks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ActivateNetworkSiteRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         network_site_arn: "Arn", # required
-    #         shipping_address: { # required
-    #           city: "AddressContent", # required
-    #           company: "AddressContent",
-    #           country: "AddressContent", # required
-    #           name: "AddressContent", # required
-    #           phone_number: "AddressContent",
-    #           postal_code: "AddressContent", # required
-    #           state_or_province: "AddressContent", # required
-    #           street1: "AddressContent", # required
-    #           street2: "AddressContent",
-    #           street3: "AddressContent",
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [How to ensure
@@ -163,22 +128,6 @@ module Aws::PrivateNetworks
     end
 
     # Information about an address.
-    #
-    # @note When making an API call, you may pass Address
-    #   data as a hash:
-    #
-    #       {
-    #         city: "AddressContent", # required
-    #         company: "AddressContent",
-    #         country: "AddressContent", # required
-    #         name: "AddressContent", # required
-    #         phone_number: "AddressContent",
-    #         postal_code: "AddressContent", # required
-    #         state_or_province: "AddressContent", # required
-    #         street1: "AddressContent", # required
-    #         street2: "AddressContent",
-    #         street3: "AddressContent",
-    #       }
     #
     # @!attribute [rw] city
     #   The city for this address.
@@ -237,24 +186,6 @@ module Aws::PrivateNetworks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ConfigureAccessPointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         access_point_arn: "Arn", # required
-    #         cpi_secret_key: "ConfigureAccessPointRequestCpiSecretKeyString",
-    #         cpi_user_id: "ConfigureAccessPointRequestCpiUserIdString",
-    #         cpi_user_password: "ConfigureAccessPointRequestCpiUserPasswordString",
-    #         cpi_username: "ConfigureAccessPointRequestCpiUsernameString",
-    #         position: {
-    #           elevation: 1.0,
-    #           elevation_reference: "AGL", # accepts AGL, AMSL
-    #           elevation_unit: "FEET", # accepts FEET
-    #           latitude: 1.0,
-    #           longitude: 1.0,
-    #         },
-    #       }
-    #
     # @!attribute [rw] access_point_arn
     #   The Amazon Resource Name (ARN) of the network resource.
     #   @return [String]
@@ -308,18 +239,6 @@ module Aws::PrivateNetworks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateNetworkRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         description: "Description",
-    #         network_name: "Name", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [How to ensure
@@ -371,41 +290,6 @@ module Aws::PrivateNetworks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateNetworkSiteRequest
-    #   data as a hash:
-    #
-    #       {
-    #         availability_zone: "String",
-    #         availability_zone_id: "String",
-    #         client_token: "ClientToken",
-    #         description: "Description",
-    #         network_arn: "Arn", # required
-    #         network_site_name: "Name", # required
-    #         pending_plan: {
-    #           options: [
-    #             {
-    #               name: "String", # required
-    #               value: "String",
-    #             },
-    #           ],
-    #           resource_definitions: [
-    #             {
-    #               count: 1, # required
-    #               options: [
-    #                 {
-    #                   name: "String", # required
-    #                   value: "String",
-    #                 },
-    #               ],
-    #               type: "RADIO_UNIT", # required, accepts RADIO_UNIT, DEVICE_IDENTIFIER
-    #             },
-    #           ],
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] availability_zone
     #   The Availability Zone that is the parent of this site. You can't
     #   change the Availability Zone after you create the site.
@@ -479,14 +363,6 @@ module Aws::PrivateNetworks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeactivateDeviceIdentifierRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         device_identifier_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [How to ensure
@@ -522,14 +398,6 @@ module Aws::PrivateNetworks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteNetworkRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         network_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [How to ensure
@@ -565,14 +433,6 @@ module Aws::PrivateNetworks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteNetworkSiteRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         network_site_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [How to ensure
@@ -666,13 +526,6 @@ module Aws::PrivateNetworks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDeviceIdentifierRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_identifier_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] device_identifier_arn
     #   The Amazon Resource Name (ARN) of the device identifier.
     #   @return [String]
@@ -702,13 +555,6 @@ module Aws::PrivateNetworks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetNetworkRequest
-    #   data as a hash:
-    #
-    #       {
-    #         network_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] network_arn
     #   The Amazon Resource Name (ARN) of the network.
     #   @return [String]
@@ -721,13 +567,6 @@ module Aws::PrivateNetworks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetNetworkResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         network_resource_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] network_resource_arn
     #   The Amazon Resource Name (ARN) of the network resource.
     #   @return [String]
@@ -774,13 +613,6 @@ module Aws::PrivateNetworks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetNetworkSiteRequest
-    #   data as a hash:
-    #
-    #       {
-    #         network_site_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] network_site_arn
     #   The Amazon Resource Name (ARN) of the network site.
     #   @return [String]
@@ -810,13 +642,6 @@ module Aws::PrivateNetworks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetOrderRequest
-    #   data as a hash:
-    #
-    #       {
-    #         order_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] order_arn
     #   The Amazon Resource Name (ARN) of the order.
     #   @return [String]
@@ -878,18 +703,6 @@ module Aws::PrivateNetworks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDeviceIdentifiersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: {
-    #           "STATUS" => ["String"],
-    #         },
-    #         max_results: 1,
-    #         network_arn: "Arn", # required
-    #         start_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] filters
     #   The filters.
     #
@@ -945,18 +758,6 @@ module Aws::PrivateNetworks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListNetworkResourcesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: {
-    #           "ORDER" => ["String"],
-    #         },
-    #         max_results: 1,
-    #         network_arn: "Arn", # required
-    #         start_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] filters
     #   The filters.
     #
@@ -1010,18 +811,6 @@ module Aws::PrivateNetworks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListNetworkSitesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: {
-    #           "STATUS" => ["String"],
-    #         },
-    #         max_results: 1,
-    #         network_arn: "Arn", # required
-    #         start_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] filters
     #   The filters. Add filters to your request to return a more specific
     #   list of results. Use filters to match the status of the network
@@ -1077,17 +866,6 @@ module Aws::PrivateNetworks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListNetworksRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: {
-    #           "STATUS" => ["String"],
-    #         },
-    #         max_results: 1,
-    #         start_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] filters
     #   The filters.
     #
@@ -1136,18 +914,6 @@ module Aws::PrivateNetworks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListOrdersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: {
-    #           "STATUS" => ["String"],
-    #         },
-    #         max_results: 1,
-    #         network_arn: "Arn", # required
-    #         start_token: "PaginationToken",
-    #       }
-    #
     # @!attribute [rw] filters
     #   The filters.
     #
@@ -1202,13 +968,6 @@ module Aws::PrivateNetworks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -1234,14 +993,6 @@ module Aws::PrivateNetworks
     end
 
     # Information about a name/value pair.
-    #
-    # @note When making an API call, you may pass NameValuePair
-    #   data as a hash:
-    #
-    #       {
-    #         name: "String", # required
-    #         value: "String",
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the pair.
@@ -1387,20 +1138,6 @@ module Aws::PrivateNetworks
     end
 
     # Information about a network resource definition.
-    #
-    # @note When making an API call, you may pass NetworkResourceDefinition
-    #   data as a hash:
-    #
-    #       {
-    #         count: 1, # required
-    #         options: [
-    #           {
-    #             name: "String", # required
-    #             value: "String",
-    #           },
-    #         ],
-    #         type: "RADIO_UNIT", # required, accepts RADIO_UNIT, DEVICE_IDENTIFIER
-    #       }
     #
     # @!attribute [rw] count
     #   The count in the network resource definition.
@@ -1549,17 +1286,6 @@ module Aws::PrivateNetworks
 
     # Information about a position.
     #
-    # @note When making an API call, you may pass Position
-    #   data as a hash:
-    #
-    #       {
-    #         elevation: 1.0,
-    #         elevation_reference: "AGL", # accepts AGL, AMSL
-    #         elevation_unit: "FEET", # accepts FEET
-    #         latitude: 1.0,
-    #         longitude: 1.0,
-    #       }
-    #
     # @!attribute [rw] elevation
     #   The elevation of the equipment at this position.
     #   @return [Float]
@@ -1618,30 +1344,6 @@ module Aws::PrivateNetworks
 
     # Information about a site plan.
     #
-    # @note When making an API call, you may pass SitePlan
-    #   data as a hash:
-    #
-    #       {
-    #         options: [
-    #           {
-    #             name: "String", # required
-    #             value: "String",
-    #           },
-    #         ],
-    #         resource_definitions: [
-    #           {
-    #             count: 1, # required
-    #             options: [
-    #               {
-    #                 name: "String", # required
-    #                 value: "String",
-    #               },
-    #             ],
-    #             type: "RADIO_UNIT", # required, accepts RADIO_UNIT, DEVICE_IDENTIFIER
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] options
     #   The options of the plan.
     #   @return [Array<Types::NameValuePair>]
@@ -1659,16 +1361,6 @@ module Aws::PrivateNetworks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -1717,14 +1409,6 @@ module Aws::PrivateNetworks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -1746,34 +1430,6 @@ module Aws::PrivateNetworks
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateNetworkSitePlanRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         network_site_arn: "Arn", # required
-    #         pending_plan: { # required
-    #           options: [
-    #             {
-    #               name: "String", # required
-    #               value: "String",
-    #             },
-    #           ],
-    #           resource_definitions: [
-    #             {
-    #               count: 1, # required
-    #               options: [
-    #                 {
-    #                   name: "String", # required
-    #                   value: "String",
-    #                 },
-    #               ],
-    #               type: "RADIO_UNIT", # required, accepts RADIO_UNIT, DEVICE_IDENTIFIER
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [How to ensure
@@ -1802,15 +1458,6 @@ module Aws::PrivateNetworks
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateNetworkSiteRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "ClientToken",
-    #         description: "Description",
-    #         network_site_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [How to ensure

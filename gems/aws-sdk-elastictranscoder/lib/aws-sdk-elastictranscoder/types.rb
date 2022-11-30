@@ -25,24 +25,6 @@ module Aws::ElasticTranscoder
     # "Prepend", "Append", or "Fallback", and use an empty `Artwork`
     # array.
     #
-    # @note When making an API call, you may pass Artwork
-    #   data as a hash:
-    #
-    #       {
-    #         input_key: "WatermarkKey",
-    #         max_width: "DigitsOrAuto",
-    #         max_height: "DigitsOrAuto",
-    #         sizing_policy: "SizingPolicy",
-    #         padding_policy: "PaddingPolicy",
-    #         album_art_format: "JpgOrPng",
-    #         encryption: {
-    #           mode: "EncryptionMode",
-    #           key: "Base64EncodedString",
-    #           key_md_5: "Base64EncodedString",
-    #           initialization_vector: "ZeroTo255String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] input_key
     #   The name of the file to be used as album art. To determine which
     #   Amazon S3 bucket contains the specified file, Elastic Transcoder
@@ -136,16 +118,6 @@ module Aws::ElasticTranscoder
 
     # Options associated with your audio codec.
     #
-    # @note When making an API call, you may pass AudioCodecOptions
-    #   data as a hash:
-    #
-    #       {
-    #         profile: "AudioCodecProfile",
-    #         bit_depth: "AudioBitDepth",
-    #         bit_order: "AudioBitOrder",
-    #         signed: "AudioSigned",
-    #       }
-    #
     # @!attribute [rw] profile
     #   You can only choose an audio profile when you specify AAC for the
     #   value of Audio:Codec.
@@ -217,23 +189,6 @@ module Aws::ElasticTranscoder
     end
 
     # Parameters required for transcoding audio.
-    #
-    # @note When making an API call, you may pass AudioParameters
-    #   data as a hash:
-    #
-    #       {
-    #         codec: "AudioCodec",
-    #         sample_rate: "AudioSampleRate",
-    #         bit_rate: "AudioBitRate",
-    #         channels: "AudioChannels",
-    #         audio_packing_mode: "AudioPackingMode",
-    #         codec_options: {
-    #           profile: "AudioCodecProfile",
-    #           bit_depth: "AudioBitDepth",
-    #           bit_order: "AudioBitOrder",
-    #           signed: "AudioSigned",
-    #         },
-    #       }
     #
     # @!attribute [rw] codec
     #   The audio codec for the output file. Valid values include `aac`,
@@ -424,13 +379,6 @@ module Aws::ElasticTranscoder
 
     # The `CancelJobRequest` structure.
     #
-    # @note When making an API call, you may pass CancelJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "Id", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The identifier of the job that you want to cancel.
     #
@@ -451,20 +399,6 @@ module Aws::ElasticTranscoder
 
     # The file format of the output captions. If you leave this value blank,
     # Elastic Transcoder returns an error.
-    #
-    # @note When making an API call, you may pass CaptionFormat
-    #   data as a hash:
-    #
-    #       {
-    #         format: "CaptionFormatFormat",
-    #         pattern: "CaptionFormatPattern",
-    #         encryption: {
-    #           mode: "EncryptionMode",
-    #           key: "Base64EncodedString",
-    #           key_md_5: "Base64EncodedString",
-    #           initialization_vector: "ZeroTo255String",
-    #         },
-    #       }
     #
     # @!attribute [rw] format
     #   The format you specify determines whether Elastic Transcoder
@@ -534,22 +468,6 @@ module Aws::ElasticTranscoder
     # A source file for the input sidecar captions used during the
     # transcoding process.
     #
-    # @note When making an API call, you may pass CaptionSource
-    #   data as a hash:
-    #
-    #       {
-    #         key: "LongKey",
-    #         language: "Key",
-    #         time_offset: "TimeOffset",
-    #         label: "Name",
-    #         encryption: {
-    #           mode: "EncryptionMode",
-    #           key: "Base64EncodedString",
-    #           key_md_5: "Base64EncodedString",
-    #           initialization_vector: "ZeroTo255String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] key
     #   The name of the sidecar caption file that you want Elastic
     #   Transcoder to include in the output file.
@@ -602,39 +520,6 @@ module Aws::ElasticTranscoder
 
     # The captions to be created, if any.
     #
-    # @note When making an API call, you may pass Captions
-    #   data as a hash:
-    #
-    #       {
-    #         merge_policy: "CaptionMergePolicy",
-    #         caption_sources: [
-    #           {
-    #             key: "LongKey",
-    #             language: "Key",
-    #             time_offset: "TimeOffset",
-    #             label: "Name",
-    #             encryption: {
-    #               mode: "EncryptionMode",
-    #               key: "Base64EncodedString",
-    #               key_md_5: "Base64EncodedString",
-    #               initialization_vector: "ZeroTo255String",
-    #             },
-    #           },
-    #         ],
-    #         caption_formats: [
-    #           {
-    #             format: "CaptionFormatFormat",
-    #             pattern: "CaptionFormatPattern",
-    #             encryption: {
-    #               mode: "EncryptionMode",
-    #               key: "Base64EncodedString",
-    #               key_md_5: "Base64EncodedString",
-    #               initialization_vector: "ZeroTo255String",
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] merge_policy
     #   A policy that determines how Elastic Transcoder handles the
     #   existence of multiple captions.
@@ -681,16 +566,6 @@ module Aws::ElasticTranscoder
     # Settings for one clip in a composition. All jobs in a playlist must
     # have the same clip settings.
     #
-    # @note When making an API call, you may pass Clip
-    #   data as a hash:
-    #
-    #       {
-    #         time_span: {
-    #           start_time: "Time",
-    #           duration: "Time",
-    #         },
-    #       }
-    #
     # @!attribute [rw] time_span
     #   Settings that determine when a clip begins and how long it lasts.
     #   @return [Types::TimeSpan]
@@ -702,97 +577,6 @@ module Aws::ElasticTranscoder
     end
 
     # The `CreateJobOutput` structure.
-    #
-    # @note When making an API call, you may pass CreateJobOutput
-    #   data as a hash:
-    #
-    #       {
-    #         key: "Key",
-    #         thumbnail_pattern: "ThumbnailPattern",
-    #         thumbnail_encryption: {
-    #           mode: "EncryptionMode",
-    #           key: "Base64EncodedString",
-    #           key_md_5: "Base64EncodedString",
-    #           initialization_vector: "ZeroTo255String",
-    #         },
-    #         rotate: "Rotate",
-    #         preset_id: "Id",
-    #         segment_duration: "FloatString",
-    #         watermarks: [
-    #           {
-    #             preset_watermark_id: "PresetWatermarkId",
-    #             input_key: "WatermarkKey",
-    #             encryption: {
-    #               mode: "EncryptionMode",
-    #               key: "Base64EncodedString",
-    #               key_md_5: "Base64EncodedString",
-    #               initialization_vector: "ZeroTo255String",
-    #             },
-    #           },
-    #         ],
-    #         album_art: {
-    #           merge_policy: "MergePolicy",
-    #           artwork: [
-    #             {
-    #               input_key: "WatermarkKey",
-    #               max_width: "DigitsOrAuto",
-    #               max_height: "DigitsOrAuto",
-    #               sizing_policy: "SizingPolicy",
-    #               padding_policy: "PaddingPolicy",
-    #               album_art_format: "JpgOrPng",
-    #               encryption: {
-    #                 mode: "EncryptionMode",
-    #                 key: "Base64EncodedString",
-    #                 key_md_5: "Base64EncodedString",
-    #                 initialization_vector: "ZeroTo255String",
-    #               },
-    #             },
-    #           ],
-    #         },
-    #         composition: [
-    #           {
-    #             time_span: {
-    #               start_time: "Time",
-    #               duration: "Time",
-    #             },
-    #           },
-    #         ],
-    #         captions: {
-    #           merge_policy: "CaptionMergePolicy",
-    #           caption_sources: [
-    #             {
-    #               key: "LongKey",
-    #               language: "Key",
-    #               time_offset: "TimeOffset",
-    #               label: "Name",
-    #               encryption: {
-    #                 mode: "EncryptionMode",
-    #                 key: "Base64EncodedString",
-    #                 key_md_5: "Base64EncodedString",
-    #                 initialization_vector: "ZeroTo255String",
-    #               },
-    #             },
-    #           ],
-    #           caption_formats: [
-    #             {
-    #               format: "CaptionFormatFormat",
-    #               pattern: "CaptionFormatPattern",
-    #               encryption: {
-    #                 mode: "EncryptionMode",
-    #                 key: "Base64EncodedString",
-    #                 key_md_5: "Base64EncodedString",
-    #                 initialization_vector: "ZeroTo255String",
-    #               },
-    #             },
-    #           ],
-    #         },
-    #         encryption: {
-    #           mode: "EncryptionMode",
-    #           key: "Base64EncodedString",
-    #           key_md_5: "Base64EncodedString",
-    #           initialization_vector: "ZeroTo255String",
-    #         },
-    #       }
     #
     # @!attribute [rw] key
     #   The name to assign to the transcoded file. Elastic Transcoder saves
@@ -984,31 +768,6 @@ module Aws::ElasticTranscoder
 
     # Information about the master playlist.
     #
-    # @note When making an API call, you may pass CreateJobPlaylist
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Filename",
-    #         format: "PlaylistFormat",
-    #         output_keys: ["Key"],
-    #         hls_content_protection: {
-    #           method: "HlsContentProtectionMethod",
-    #           key: "Base64EncodedString",
-    #           key_md_5: "Base64EncodedString",
-    #           initialization_vector: "ZeroTo255String",
-    #           license_acquisition_url: "ZeroTo512String",
-    #           key_storage_policy: "KeyStoragePolicy",
-    #         },
-    #         play_ready_drm: {
-    #           format: "PlayReadyDrmFormatString",
-    #           key: "NonEmptyBase64EncodedString",
-    #           key_md_5: "NonEmptyBase64EncodedString",
-    #           key_id: "KeyIdGuid",
-    #           initialization_vector: "ZeroTo255String",
-    #           license_acquisition_url: "OneTo512String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name that you want Elastic Transcoder to assign to the master
     #   playlist, for example, nyc-vacation.m3u8. If the name includes a `/`
@@ -1095,302 +854,6 @@ module Aws::ElasticTranscoder
 
     # The `CreateJobRequest` structure.
     #
-    # @note When making an API call, you may pass CreateJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         pipeline_id: "Id", # required
-    #         input: {
-    #           key: "LongKey",
-    #           frame_rate: "FrameRate",
-    #           resolution: "Resolution",
-    #           aspect_ratio: "AspectRatio",
-    #           interlaced: "Interlaced",
-    #           container: "JobContainer",
-    #           encryption: {
-    #             mode: "EncryptionMode",
-    #             key: "Base64EncodedString",
-    #             key_md_5: "Base64EncodedString",
-    #             initialization_vector: "ZeroTo255String",
-    #           },
-    #           time_span: {
-    #             start_time: "Time",
-    #             duration: "Time",
-    #           },
-    #           input_captions: {
-    #             merge_policy: "CaptionMergePolicy",
-    #             caption_sources: [
-    #               {
-    #                 key: "LongKey",
-    #                 language: "Key",
-    #                 time_offset: "TimeOffset",
-    #                 label: "Name",
-    #                 encryption: {
-    #                   mode: "EncryptionMode",
-    #                   key: "Base64EncodedString",
-    #                   key_md_5: "Base64EncodedString",
-    #                   initialization_vector: "ZeroTo255String",
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #           detected_properties: {
-    #             width: 1,
-    #             height: 1,
-    #             frame_rate: "FloatString",
-    #             file_size: 1,
-    #             duration_millis: 1,
-    #           },
-    #         },
-    #         inputs: [
-    #           {
-    #             key: "LongKey",
-    #             frame_rate: "FrameRate",
-    #             resolution: "Resolution",
-    #             aspect_ratio: "AspectRatio",
-    #             interlaced: "Interlaced",
-    #             container: "JobContainer",
-    #             encryption: {
-    #               mode: "EncryptionMode",
-    #               key: "Base64EncodedString",
-    #               key_md_5: "Base64EncodedString",
-    #               initialization_vector: "ZeroTo255String",
-    #             },
-    #             time_span: {
-    #               start_time: "Time",
-    #               duration: "Time",
-    #             },
-    #             input_captions: {
-    #               merge_policy: "CaptionMergePolicy",
-    #               caption_sources: [
-    #                 {
-    #                   key: "LongKey",
-    #                   language: "Key",
-    #                   time_offset: "TimeOffset",
-    #                   label: "Name",
-    #                   encryption: {
-    #                     mode: "EncryptionMode",
-    #                     key: "Base64EncodedString",
-    #                     key_md_5: "Base64EncodedString",
-    #                     initialization_vector: "ZeroTo255String",
-    #                   },
-    #                 },
-    #               ],
-    #             },
-    #             detected_properties: {
-    #               width: 1,
-    #               height: 1,
-    #               frame_rate: "FloatString",
-    #               file_size: 1,
-    #               duration_millis: 1,
-    #             },
-    #           },
-    #         ],
-    #         output: {
-    #           key: "Key",
-    #           thumbnail_pattern: "ThumbnailPattern",
-    #           thumbnail_encryption: {
-    #             mode: "EncryptionMode",
-    #             key: "Base64EncodedString",
-    #             key_md_5: "Base64EncodedString",
-    #             initialization_vector: "ZeroTo255String",
-    #           },
-    #           rotate: "Rotate",
-    #           preset_id: "Id",
-    #           segment_duration: "FloatString",
-    #           watermarks: [
-    #             {
-    #               preset_watermark_id: "PresetWatermarkId",
-    #               input_key: "WatermarkKey",
-    #               encryption: {
-    #                 mode: "EncryptionMode",
-    #                 key: "Base64EncodedString",
-    #                 key_md_5: "Base64EncodedString",
-    #                 initialization_vector: "ZeroTo255String",
-    #               },
-    #             },
-    #           ],
-    #           album_art: {
-    #             merge_policy: "MergePolicy",
-    #             artwork: [
-    #               {
-    #                 input_key: "WatermarkKey",
-    #                 max_width: "DigitsOrAuto",
-    #                 max_height: "DigitsOrAuto",
-    #                 sizing_policy: "SizingPolicy",
-    #                 padding_policy: "PaddingPolicy",
-    #                 album_art_format: "JpgOrPng",
-    #                 encryption: {
-    #                   mode: "EncryptionMode",
-    #                   key: "Base64EncodedString",
-    #                   key_md_5: "Base64EncodedString",
-    #                   initialization_vector: "ZeroTo255String",
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #           composition: [
-    #             {
-    #               time_span: {
-    #                 start_time: "Time",
-    #                 duration: "Time",
-    #               },
-    #             },
-    #           ],
-    #           captions: {
-    #             merge_policy: "CaptionMergePolicy",
-    #             caption_sources: [
-    #               {
-    #                 key: "LongKey",
-    #                 language: "Key",
-    #                 time_offset: "TimeOffset",
-    #                 label: "Name",
-    #                 encryption: {
-    #                   mode: "EncryptionMode",
-    #                   key: "Base64EncodedString",
-    #                   key_md_5: "Base64EncodedString",
-    #                   initialization_vector: "ZeroTo255String",
-    #                 },
-    #               },
-    #             ],
-    #             caption_formats: [
-    #               {
-    #                 format: "CaptionFormatFormat",
-    #                 pattern: "CaptionFormatPattern",
-    #                 encryption: {
-    #                   mode: "EncryptionMode",
-    #                   key: "Base64EncodedString",
-    #                   key_md_5: "Base64EncodedString",
-    #                   initialization_vector: "ZeroTo255String",
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #           encryption: {
-    #             mode: "EncryptionMode",
-    #             key: "Base64EncodedString",
-    #             key_md_5: "Base64EncodedString",
-    #             initialization_vector: "ZeroTo255String",
-    #           },
-    #         },
-    #         outputs: [
-    #           {
-    #             key: "Key",
-    #             thumbnail_pattern: "ThumbnailPattern",
-    #             thumbnail_encryption: {
-    #               mode: "EncryptionMode",
-    #               key: "Base64EncodedString",
-    #               key_md_5: "Base64EncodedString",
-    #               initialization_vector: "ZeroTo255String",
-    #             },
-    #             rotate: "Rotate",
-    #             preset_id: "Id",
-    #             segment_duration: "FloatString",
-    #             watermarks: [
-    #               {
-    #                 preset_watermark_id: "PresetWatermarkId",
-    #                 input_key: "WatermarkKey",
-    #                 encryption: {
-    #                   mode: "EncryptionMode",
-    #                   key: "Base64EncodedString",
-    #                   key_md_5: "Base64EncodedString",
-    #                   initialization_vector: "ZeroTo255String",
-    #                 },
-    #               },
-    #             ],
-    #             album_art: {
-    #               merge_policy: "MergePolicy",
-    #               artwork: [
-    #                 {
-    #                   input_key: "WatermarkKey",
-    #                   max_width: "DigitsOrAuto",
-    #                   max_height: "DigitsOrAuto",
-    #                   sizing_policy: "SizingPolicy",
-    #                   padding_policy: "PaddingPolicy",
-    #                   album_art_format: "JpgOrPng",
-    #                   encryption: {
-    #                     mode: "EncryptionMode",
-    #                     key: "Base64EncodedString",
-    #                     key_md_5: "Base64EncodedString",
-    #                     initialization_vector: "ZeroTo255String",
-    #                   },
-    #                 },
-    #               ],
-    #             },
-    #             composition: [
-    #               {
-    #                 time_span: {
-    #                   start_time: "Time",
-    #                   duration: "Time",
-    #                 },
-    #               },
-    #             ],
-    #             captions: {
-    #               merge_policy: "CaptionMergePolicy",
-    #               caption_sources: [
-    #                 {
-    #                   key: "LongKey",
-    #                   language: "Key",
-    #                   time_offset: "TimeOffset",
-    #                   label: "Name",
-    #                   encryption: {
-    #                     mode: "EncryptionMode",
-    #                     key: "Base64EncodedString",
-    #                     key_md_5: "Base64EncodedString",
-    #                     initialization_vector: "ZeroTo255String",
-    #                   },
-    #                 },
-    #               ],
-    #               caption_formats: [
-    #                 {
-    #                   format: "CaptionFormatFormat",
-    #                   pattern: "CaptionFormatPattern",
-    #                   encryption: {
-    #                     mode: "EncryptionMode",
-    #                     key: "Base64EncodedString",
-    #                     key_md_5: "Base64EncodedString",
-    #                     initialization_vector: "ZeroTo255String",
-    #                   },
-    #                 },
-    #               ],
-    #             },
-    #             encryption: {
-    #               mode: "EncryptionMode",
-    #               key: "Base64EncodedString",
-    #               key_md_5: "Base64EncodedString",
-    #               initialization_vector: "ZeroTo255String",
-    #             },
-    #           },
-    #         ],
-    #         output_key_prefix: "Key",
-    #         playlists: [
-    #           {
-    #             name: "Filename",
-    #             format: "PlaylistFormat",
-    #             output_keys: ["Key"],
-    #             hls_content_protection: {
-    #               method: "HlsContentProtectionMethod",
-    #               key: "Base64EncodedString",
-    #               key_md_5: "Base64EncodedString",
-    #               initialization_vector: "ZeroTo255String",
-    #               license_acquisition_url: "ZeroTo512String",
-    #               key_storage_policy: "KeyStoragePolicy",
-    #             },
-    #             play_ready_drm: {
-    #               format: "PlayReadyDrmFormatString",
-    #               key: "NonEmptyBase64EncodedString",
-    #               key_md_5: "NonEmptyBase64EncodedString",
-    #               key_id: "KeyIdGuid",
-    #               initialization_vector: "ZeroTo255String",
-    #               license_acquisition_url: "OneTo512String",
-    #             },
-    #           },
-    #         ],
-    #         user_metadata: {
-    #           "String" => "String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] pipeline_id
     #   The `Id` of the pipeline that you want Elastic Transcoder to use for
     #   transcoding. The pipeline determines several settings, including the
@@ -1471,45 +934,6 @@ module Aws::ElasticTranscoder
     end
 
     # The `CreatePipelineRequest` structure.
-    #
-    # @note When making an API call, you may pass CreatePipelineRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         input_bucket: "BucketName", # required
-    #         output_bucket: "BucketName",
-    #         role: "Role", # required
-    #         aws_kms_key_arn: "KeyArn",
-    #         notifications: {
-    #           progressing: "SnsTopic",
-    #           completed: "SnsTopic",
-    #           warning: "SnsTopic",
-    #           error: "SnsTopic",
-    #         },
-    #         content_config: {
-    #           bucket: "BucketName",
-    #           storage_class: "StorageClass",
-    #           permissions: [
-    #             {
-    #               grantee_type: "GranteeType",
-    #               grantee: "Grantee",
-    #               access: ["AccessControl"],
-    #             },
-    #           ],
-    #         },
-    #         thumbnail_config: {
-    #           bucket: "BucketName",
-    #           storage_class: "StorageClass",
-    #           permissions: [
-    #             {
-    #               grantee_type: "GranteeType",
-    #               grantee: "Grantee",
-    #               access: ["AccessControl"],
-    #             },
-    #           ],
-    #         },
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the pipeline. We recommend that the name be unique
@@ -1781,70 +1205,6 @@ module Aws::ElasticTranscoder
 
     # The `CreatePresetRequest` structure.
     #
-    # @note When making an API call, you may pass CreatePresetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         description: "Description",
-    #         container: "PresetContainer", # required
-    #         video: {
-    #           codec: "VideoCodec",
-    #           codec_options: {
-    #             "CodecOption" => "CodecOption",
-    #           },
-    #           keyframes_max_dist: "KeyframesMaxDist",
-    #           fixed_gop: "FixedGOP",
-    #           bit_rate: "VideoBitRate",
-    #           frame_rate: "FrameRate",
-    #           max_frame_rate: "MaxFrameRate",
-    #           resolution: "Resolution",
-    #           aspect_ratio: "AspectRatio",
-    #           max_width: "DigitsOrAuto",
-    #           max_height: "DigitsOrAuto",
-    #           display_aspect_ratio: "AspectRatio",
-    #           sizing_policy: "SizingPolicy",
-    #           padding_policy: "PaddingPolicy",
-    #           watermarks: [
-    #             {
-    #               id: "PresetWatermarkId",
-    #               max_width: "PixelsOrPercent",
-    #               max_height: "PixelsOrPercent",
-    #               sizing_policy: "WatermarkSizingPolicy",
-    #               horizontal_align: "HorizontalAlign",
-    #               horizontal_offset: "PixelsOrPercent",
-    #               vertical_align: "VerticalAlign",
-    #               vertical_offset: "PixelsOrPercent",
-    #               opacity: "Opacity",
-    #               target: "Target",
-    #             },
-    #           ],
-    #         },
-    #         audio: {
-    #           codec: "AudioCodec",
-    #           sample_rate: "AudioSampleRate",
-    #           bit_rate: "AudioBitRate",
-    #           channels: "AudioChannels",
-    #           audio_packing_mode: "AudioPackingMode",
-    #           codec_options: {
-    #             profile: "AudioCodecProfile",
-    #             bit_depth: "AudioBitDepth",
-    #             bit_order: "AudioBitOrder",
-    #             signed: "AudioSigned",
-    #           },
-    #         },
-    #         thumbnails: {
-    #           format: "JpgOrPng",
-    #           interval: "Digits",
-    #           resolution: "ThumbnailResolution",
-    #           aspect_ratio: "AspectRatio",
-    #           max_width: "DigitsOrAuto",
-    #           max_height: "DigitsOrAuto",
-    #           sizing_policy: "SizingPolicy",
-    #           padding_policy: "PaddingPolicy",
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the preset. We recommend that the name be unique within
     #   the AWS account, but uniqueness is not enforced.
@@ -1908,13 +1268,6 @@ module Aws::ElasticTranscoder
 
     # The `DeletePipelineRequest` structure.
     #
-    # @note When making an API call, you may pass DeletePipelineRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "Id", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The identifier of the pipeline that you want to delete.
     #   @return [String]
@@ -1930,13 +1283,6 @@ module Aws::ElasticTranscoder
     class DeletePipelineResponse < Aws::EmptyStructure; end
 
     # The `DeletePresetRequest` structure.
-    #
-    # @note When making an API call, you may pass DeletePresetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "Id", # required
-    #       }
     #
     # @!attribute [rw] id
     #   The identifier of the preset for which you want to get detailed
@@ -1955,17 +1301,6 @@ module Aws::ElasticTranscoder
 
     # The detected properties of the input file. Elastic Transcoder
     # identifies these values from the input file.
-    #
-    # @note When making an API call, you may pass DetectedProperties
-    #   data as a hash:
-    #
-    #       {
-    #         width: 1,
-    #         height: 1,
-    #         frame_rate: "FloatString",
-    #         file_size: 1,
-    #         duration_millis: 1,
-    #       }
     #
     # @!attribute [rw] width
     #   The detected width of the input file, in pixels.
@@ -2002,16 +1337,6 @@ module Aws::ElasticTranscoder
     # encrypted, you must specify the mode that Elastic Transcoder uses to
     # decrypt your file, otherwise you must specify the mode you want
     # Elastic Transcoder to use to encrypt your output files.
-    #
-    # @note When making an API call, you may pass Encryption
-    #   data as a hash:
-    #
-    #       {
-    #         mode: "EncryptionMode",
-    #         key: "Base64EncodedString",
-    #         key_md_5: "Base64EncodedString",
-    #         initialization_vector: "ZeroTo255String",
-    #       }
     #
     # @!attribute [rw] mode
     #   The specific server-side encryption mode that you want Elastic
@@ -2094,18 +1419,6 @@ module Aws::ElasticTranscoder
     # The HLS content protection settings, if any, that you want Elastic
     # Transcoder to apply to your output files.
     #
-    # @note When making an API call, you may pass HlsContentProtection
-    #   data as a hash:
-    #
-    #       {
-    #         method: "HlsContentProtectionMethod",
-    #         key: "Base64EncodedString",
-    #         key_md_5: "Base64EncodedString",
-    #         initialization_vector: "ZeroTo255String",
-    #         license_acquisition_url: "ZeroTo512String",
-    #         key_storage_policy: "KeyStoragePolicy",
-    #       }
-    #
     # @!attribute [rw] method
     #   The content protection method for your output. The only valid value
     #   is: `aes-128`.
@@ -2175,27 +1488,6 @@ module Aws::ElasticTranscoder
     class IncompatibleVersionException < Aws::EmptyStructure; end
 
     # The captions to be created, if any.
-    #
-    # @note When making an API call, you may pass InputCaptions
-    #   data as a hash:
-    #
-    #       {
-    #         merge_policy: "CaptionMergePolicy",
-    #         caption_sources: [
-    #           {
-    #             key: "LongKey",
-    #             language: "Key",
-    #             time_offset: "TimeOffset",
-    #             label: "Name",
-    #             encryption: {
-    #               mode: "EncryptionMode",
-    #               key: "Base64EncodedString",
-    #               key_md_5: "Base64EncodedString",
-    #               initialization_vector: "ZeroTo255String",
-    #             },
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] merge_policy
     #   A policy that determines how Elastic Transcoder handles the
@@ -2360,29 +1652,6 @@ module Aws::ElasticTranscoder
 
     # The .jpg or .png file associated with an audio file.
     #
-    # @note When making an API call, you may pass JobAlbumArt
-    #   data as a hash:
-    #
-    #       {
-    #         merge_policy: "MergePolicy",
-    #         artwork: [
-    #           {
-    #             input_key: "WatermarkKey",
-    #             max_width: "DigitsOrAuto",
-    #             max_height: "DigitsOrAuto",
-    #             sizing_policy: "SizingPolicy",
-    #             padding_policy: "PaddingPolicy",
-    #             album_art_format: "JpgOrPng",
-    #             encryption: {
-    #               mode: "EncryptionMode",
-    #               key: "Base64EncodedString",
-    #               key_md_5: "Base64EncodedString",
-    #               initialization_vector: "ZeroTo255String",
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] merge_policy
     #   A policy that determines how Elastic Transcoder handles the
     #   existence of multiple album artwork files.
@@ -2416,52 +1685,6 @@ module Aws::ElasticTranscoder
     end
 
     # Information about the file that you're transcoding.
-    #
-    # @note When making an API call, you may pass JobInput
-    #   data as a hash:
-    #
-    #       {
-    #         key: "LongKey",
-    #         frame_rate: "FrameRate",
-    #         resolution: "Resolution",
-    #         aspect_ratio: "AspectRatio",
-    #         interlaced: "Interlaced",
-    #         container: "JobContainer",
-    #         encryption: {
-    #           mode: "EncryptionMode",
-    #           key: "Base64EncodedString",
-    #           key_md_5: "Base64EncodedString",
-    #           initialization_vector: "ZeroTo255String",
-    #         },
-    #         time_span: {
-    #           start_time: "Time",
-    #           duration: "Time",
-    #         },
-    #         input_captions: {
-    #           merge_policy: "CaptionMergePolicy",
-    #           caption_sources: [
-    #             {
-    #               key: "LongKey",
-    #               language: "Key",
-    #               time_offset: "TimeOffset",
-    #               label: "Name",
-    #               encryption: {
-    #                 mode: "EncryptionMode",
-    #                 key: "Base64EncodedString",
-    #                 key_md_5: "Base64EncodedString",
-    #                 initialization_vector: "ZeroTo255String",
-    #               },
-    #             },
-    #           ],
-    #         },
-    #         detected_properties: {
-    #           width: 1,
-    #           height: 1,
-    #           frame_rate: "FloatString",
-    #           file_size: 1,
-    #           duration_millis: 1,
-    #         },
-    #       }
     #
     # @!attribute [rw] key
     #   The name of the file to transcode. Elsewhere in the body of the JSON
@@ -2901,20 +2124,6 @@ module Aws::ElasticTranscoder
     # watermark that is not rectangular, use the .png format, which supports
     # transparency.
     #
-    # @note When making an API call, you may pass JobWatermark
-    #   data as a hash:
-    #
-    #       {
-    #         preset_watermark_id: "PresetWatermarkId",
-    #         input_key: "WatermarkKey",
-    #         encryption: {
-    #           mode: "EncryptionMode",
-    #           key: "Base64EncodedString",
-    #           key_md_5: "Base64EncodedString",
-    #           initialization_vector: "ZeroTo255String",
-    #         },
-    #       }
-    #
     # @!attribute [rw] preset_watermark_id
     #   The ID of the watermark settings that Elastic Transcoder uses to add
     #   watermarks to the video during transcoding. The settings are in the
@@ -2954,15 +2163,6 @@ module Aws::ElasticTranscoder
     class LimitExceededException < Aws::EmptyStructure; end
 
     # The `ListJobsByPipelineRequest` structure.
-    #
-    # @note When making an API call, you may pass ListJobsByPipelineRequest
-    #   data as a hash:
-    #
-    #       {
-    #         pipeline_id: "Id", # required
-    #         ascending: "Ascending",
-    #         page_token: "Id",
-    #       }
     #
     # @!attribute [rw] pipeline_id
     #   The ID of the pipeline for which you want to get job information.
@@ -3009,15 +2209,6 @@ module Aws::ElasticTranscoder
     end
 
     # The `ListJobsByStatusRequest` structure.
-    #
-    # @note When making an API call, you may pass ListJobsByStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         status: "JobStatus", # required
-    #         ascending: "Ascending",
-    #         page_token: "Id",
-    #       }
     #
     # @!attribute [rw] status
     #   To get information about all of the jobs associated with the current
@@ -3067,14 +2258,6 @@ module Aws::ElasticTranscoder
 
     # The `ListPipelineRequest` structure.
     #
-    # @note When making an API call, you may pass ListPipelinesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         ascending: "Ascending",
-    #         page_token: "Id",
-    #       }
-    #
     # @!attribute [rw] ascending
     #   To list pipelines in chronological order by the date and time that
     #   they were created, enter `true`. To list pipelines in reverse
@@ -3115,14 +2298,6 @@ module Aws::ElasticTranscoder
     end
 
     # The `ListPresetsRequest` structure.
-    #
-    # @note When making an API call, you may pass ListPresetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         ascending: "Ascending",
-    #         page_token: "Id",
-    #       }
     #
     # @!attribute [rw] ascending
     #   To list presets in chronological order by the date and time that
@@ -3169,16 +2344,6 @@ module Aws::ElasticTranscoder
     # To receive notifications, you must also subscribe to the new topic in
     # the Amazon SNS console.
     #
-    # @note When making an API call, you may pass Notifications
-    #   data as a hash:
-    #
-    #       {
-    #         progressing: "SnsTopic",
-    #         completed: "SnsTopic",
-    #         warning: "SnsTopic",
-    #         error: "SnsTopic",
-    #       }
-    #
     # @!attribute [rw] progressing
     #   The Amazon Simple Notification Service (Amazon SNS) topic that you
     #   want to notify when Elastic Transcoder has started to process the
@@ -3210,15 +2375,6 @@ module Aws::ElasticTranscoder
     end
 
     # The `Permission` structure.
-    #
-    # @note When making an API call, you may pass Permission
-    #   data as a hash:
-    #
-    #       {
-    #         grantee_type: "GranteeType",
-    #         grantee: "Grantee",
-    #         access: ["AccessControl"],
-    #       }
     #
     # @!attribute [rw] grantee_type
     #   The type of value that appears in the Grantee object:
@@ -3466,21 +2622,6 @@ module Aws::ElasticTranscoder
 
     # The `PipelineOutputConfig` structure.
     #
-    # @note When making an API call, you may pass PipelineOutputConfig
-    #   data as a hash:
-    #
-    #       {
-    #         bucket: "BucketName",
-    #         storage_class: "StorageClass",
-    #         permissions: [
-    #           {
-    #             grantee_type: "GranteeType",
-    #             grantee: "Grantee",
-    #             access: ["AccessControl"],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] bucket
     #   The Amazon S3 bucket in which you want Elastic Transcoder to save
     #   the transcoded files. Specify this value when all of the following
@@ -3545,18 +2686,6 @@ module Aws::ElasticTranscoder
     #
     # If you use DRM for an `HLSv3` playlist, your outputs must have a
     # master playlist.
-    #
-    # @note When making an API call, you may pass PlayReadyDrm
-    #   data as a hash:
-    #
-    #       {
-    #         format: "PlayReadyDrmFormatString",
-    #         key: "NonEmptyBase64EncodedString",
-    #         key_md_5: "NonEmptyBase64EncodedString",
-    #         key_id: "KeyIdGuid",
-    #         initialization_vector: "ZeroTo255String",
-    #         license_acquisition_url: "OneTo512String",
-    #       }
     #
     # @!attribute [rw] format
     #   The type of DRM, if any, that you want Elastic Transcoder to apply
@@ -3801,22 +2930,6 @@ module Aws::ElasticTranscoder
     # specify watermark settings in the preset, which allows you to use the
     # same preset for up to four watermarks that have different dimensions.
     #
-    # @note When making an API call, you may pass PresetWatermark
-    #   data as a hash:
-    #
-    #       {
-    #         id: "PresetWatermarkId",
-    #         max_width: "PixelsOrPercent",
-    #         max_height: "PixelsOrPercent",
-    #         sizing_policy: "WatermarkSizingPolicy",
-    #         horizontal_align: "HorizontalAlign",
-    #         horizontal_offset: "PixelsOrPercent",
-    #         vertical_align: "VerticalAlign",
-    #         vertical_offset: "PixelsOrPercent",
-    #         opacity: "Opacity",
-    #         target: "Target",
-    #       }
-    #
     # @!attribute [rw] id
     #   A unique identifier for the settings for one watermark. The value of
     #   `Id` can be up to 40 characters long.
@@ -4006,13 +3119,6 @@ module Aws::ElasticTranscoder
 
     # The `ReadJobRequest` structure.
     #
-    # @note When making an API call, you may pass ReadJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "Id", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The identifier of the job for which you want to get detailed
     #   information.
@@ -4038,13 +3144,6 @@ module Aws::ElasticTranscoder
     end
 
     # The `ReadPipelineRequest` structure.
-    #
-    # @note When making an API call, you may pass ReadPipelineRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "Id", # required
-    #       }
     #
     # @!attribute [rw] id
     #   The identifier of the pipeline to read.
@@ -4080,13 +3179,6 @@ module Aws::ElasticTranscoder
     end
 
     # The `ReadPresetRequest` structure.
-    #
-    # @note When making an API call, you may pass ReadPresetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "Id", # required
-    #       }
     #
     # @!attribute [rw] id
     #   The identifier of the preset for which you want to get detailed
@@ -4124,16 +3216,6 @@ module Aws::ElasticTranscoder
     class ResourceNotFoundException < Aws::EmptyStructure; end
 
     # The `TestRoleRequest` structure.
-    #
-    # @note When making an API call, you may pass TestRoleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         role: "Role", # required
-    #         input_bucket: "BucketName", # required
-    #         output_bucket: "BucketName", # required
-    #         topics: ["SnsTopic"], # required
-    #       }
     #
     # @!attribute [rw] role
     #   The IAM Amazon Resource Name (ARN) for the role that you want
@@ -4185,20 +3267,6 @@ module Aws::ElasticTranscoder
     end
 
     # Thumbnails for videos.
-    #
-    # @note When making an API call, you may pass Thumbnails
-    #   data as a hash:
-    #
-    #       {
-    #         format: "JpgOrPng",
-    #         interval: "Digits",
-    #         resolution: "ThumbnailResolution",
-    #         aspect_ratio: "AspectRatio",
-    #         max_width: "DigitsOrAuto",
-    #         max_height: "DigitsOrAuto",
-    #         sizing_policy: "SizingPolicy",
-    #         padding_policy: "PaddingPolicy",
-    #       }
     #
     # @!attribute [rw] format
     #   The format of thumbnails, if any. Valid values are `jpg` and `png`.
@@ -4312,14 +3380,6 @@ module Aws::ElasticTranscoder
 
     # Settings that determine when a clip begins and how long it lasts.
     #
-    # @note When making an API call, you may pass TimeSpan
-    #   data as a hash:
-    #
-    #       {
-    #         start_time: "Time",
-    #         duration: "Time",
-    #       }
-    #
     # @!attribute [rw] start_time
     #   The place in the input file where you want a clip to start. The
     #   format can be either HH:mm:ss.SSS (maximum value: 23:59:59.999; SSS
@@ -4371,19 +3431,6 @@ module Aws::ElasticTranscoder
     end
 
     # The `UpdatePipelineNotificationsRequest` structure.
-    #
-    # @note When making an API call, you may pass UpdatePipelineNotificationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "Id", # required
-    #         notifications: { # required
-    #           progressing: "SnsTopic",
-    #           completed: "SnsTopic",
-    #           warning: "SnsTopic",
-    #           error: "SnsTopic",
-    #         },
-    #       }
     #
     # @!attribute [rw] id
     #   The identifier of the pipeline for which you want to change
@@ -4440,45 +3487,6 @@ module Aws::ElasticTranscoder
     end
 
     # The `UpdatePipelineRequest` structure.
-    #
-    # @note When making an API call, you may pass UpdatePipelineRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "Id", # required
-    #         name: "Name",
-    #         input_bucket: "BucketName",
-    #         role: "Role",
-    #         aws_kms_key_arn: "KeyArn",
-    #         notifications: {
-    #           progressing: "SnsTopic",
-    #           completed: "SnsTopic",
-    #           warning: "SnsTopic",
-    #           error: "SnsTopic",
-    #         },
-    #         content_config: {
-    #           bucket: "BucketName",
-    #           storage_class: "StorageClass",
-    #           permissions: [
-    #             {
-    #               grantee_type: "GranteeType",
-    #               grantee: "Grantee",
-    #               access: ["AccessControl"],
-    #             },
-    #           ],
-    #         },
-    #         thumbnail_config: {
-    #           bucket: "BucketName",
-    #           storage_class: "StorageClass",
-    #           permissions: [
-    #             {
-    #               grantee_type: "GranteeType",
-    #               grantee: "Grantee",
-    #               access: ["AccessControl"],
-    #             },
-    #           ],
-    #         },
-    #       }
     #
     # @!attribute [rw] id
     #   The ID of the pipeline that you want to update.
@@ -4723,14 +3731,6 @@ module Aws::ElasticTranscoder
 
     # The `UpdatePipelineStatusRequest` structure.
     #
-    # @note When making an API call, you may pass UpdatePipelineStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "Id", # required
-    #         status: "PipelineStatus", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The identifier of the pipeline to update.
     #   @return [String]
@@ -4770,42 +3770,6 @@ module Aws::ElasticTranscoder
     class ValidationException < Aws::EmptyStructure; end
 
     # The `VideoParameters` structure.
-    #
-    # @note When making an API call, you may pass VideoParameters
-    #   data as a hash:
-    #
-    #       {
-    #         codec: "VideoCodec",
-    #         codec_options: {
-    #           "CodecOption" => "CodecOption",
-    #         },
-    #         keyframes_max_dist: "KeyframesMaxDist",
-    #         fixed_gop: "FixedGOP",
-    #         bit_rate: "VideoBitRate",
-    #         frame_rate: "FrameRate",
-    #         max_frame_rate: "MaxFrameRate",
-    #         resolution: "Resolution",
-    #         aspect_ratio: "AspectRatio",
-    #         max_width: "DigitsOrAuto",
-    #         max_height: "DigitsOrAuto",
-    #         display_aspect_ratio: "AspectRatio",
-    #         sizing_policy: "SizingPolicy",
-    #         padding_policy: "PaddingPolicy",
-    #         watermarks: [
-    #           {
-    #             id: "PresetWatermarkId",
-    #             max_width: "PixelsOrPercent",
-    #             max_height: "PixelsOrPercent",
-    #             sizing_policy: "WatermarkSizingPolicy",
-    #             horizontal_align: "HorizontalAlign",
-    #             horizontal_offset: "PixelsOrPercent",
-    #             vertical_align: "VerticalAlign",
-    #             vertical_offset: "PixelsOrPercent",
-    #             opacity: "Opacity",
-    #             target: "Target",
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] codec
     #   The video codec for the output file. Valid values include `gif`,

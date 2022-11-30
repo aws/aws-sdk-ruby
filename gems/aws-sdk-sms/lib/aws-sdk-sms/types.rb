@@ -118,28 +118,6 @@ module Aws::SMS
 
     # Configuration for validating an application.
     #
-    # @note When making an API call, you may pass AppValidationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         validation_id: "ValidationId",
-    #         name: "NonEmptyStringWithMaxLen255",
-    #         app_validation_strategy: "SSM", # accepts SSM
-    #         ssm_validation_parameters: {
-    #           source: {
-    #             s3_location: {
-    #               bucket: "S3BucketName",
-    #               key: "S3KeyName",
-    #             },
-    #           },
-    #           instance_id: "InstanceId",
-    #           script_type: "SHELL_SCRIPT", # accepts SHELL_SCRIPT, POWERSHELL_SCRIPT
-    #           command: "Command",
-    #           execution_timeout_seconds: 1,
-    #           output_s3_bucket_name: "BucketName",
-    #         },
-    #       }
-    #
     # @!attribute [rw] validation_id
     #   The ID of the validation.
     #   @return [String]
@@ -240,46 +218,6 @@ module Aws::SMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAppRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "AppName",
-    #         description: "AppDescription",
-    #         role_name: "RoleName",
-    #         client_token: "ClientToken",
-    #         server_groups: [
-    #           {
-    #             server_group_id: "ServerGroupId",
-    #             name: "ServerGroupName",
-    #             server_list: [
-    #               {
-    #                 server_id: "ServerId",
-    #                 server_type: "VIRTUAL_MACHINE", # accepts VIRTUAL_MACHINE
-    #                 vm_server: {
-    #                   vm_server_address: {
-    #                     vm_manager_id: "VmManagerId",
-    #                     vm_id: "VmId",
-    #                   },
-    #                   vm_name: "VmName",
-    #                   vm_manager_name: "VmManagerName",
-    #                   vm_manager_type: "VSPHERE", # accepts VSPHERE, SCVMM, HYPERV-MANAGER
-    #                   vm_path: "VmPath",
-    #                 },
-    #                 replication_job_id: "ReplicationJobId",
-    #                 replication_job_terminated: false,
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the new application.
     #   @return [String]
@@ -341,22 +279,6 @@ module Aws::SMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateReplicationJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         server_id: "ServerId", # required
-    #         seed_replication_time: Time.now, # required
-    #         frequency: 1,
-    #         run_once: false,
-    #         license_type: "AWS", # accepts AWS, BYOL
-    #         role_name: "RoleName",
-    #         description: "Description",
-    #         number_of_recent_amis_to_keep: 1,
-    #         encrypted: false,
-    #         kms_key_id: "KmsKeyId",
-    #       }
-    #
     # @!attribute [rw] server_id
     #   The ID of the server.
     #   @return [String]
@@ -441,13 +363,6 @@ module Aws::SMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAppLaunchConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_id: "AppId",
-    #       }
-    #
     # @!attribute [rw] app_id
     #   The ID of the application.
     #   @return [String]
@@ -464,13 +379,6 @@ module Aws::SMS
     #
     class DeleteAppLaunchConfigurationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteAppReplicationConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_id: "AppId",
-    #       }
-    #
     # @!attribute [rw] app_id
     #   The ID of the application.
     #   @return [String]
@@ -487,15 +395,6 @@ module Aws::SMS
     #
     class DeleteAppReplicationConfigurationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteAppRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_id: "AppId",
-    #         force_stop_app_replication: false,
-    #         force_terminate_app: false,
-    #       }
-    #
     # @!attribute [rw] app_id
     #   The ID of the application.
     #   @return [String]
@@ -524,13 +423,6 @@ module Aws::SMS
     #
     class DeleteAppResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteAppValidationConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_id: "AppIdWithValidation", # required
-    #       }
-    #
     # @!attribute [rw] app_id
     #   The ID of the application.
     #   @return [String]
@@ -547,13 +439,6 @@ module Aws::SMS
     #
     class DeleteAppValidationConfigurationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteReplicationJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         replication_job_id: "ReplicationJobId", # required
-    #       }
-    #
     # @!attribute [rw] replication_job_id
     #   The ID of the replication job.
     #   @return [String]
@@ -570,8 +455,6 @@ module Aws::SMS
     #
     class DeleteReplicationJobResponse < Aws::EmptyStructure; end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/DeleteServerCatalogRequest AWS API Documentation
     #
     class DeleteServerCatalogRequest < Aws::EmptyStructure; end
@@ -580,13 +463,6 @@ module Aws::SMS
     #
     class DeleteServerCatalogResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DisassociateConnectorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connector_id: "ConnectorId", # required
-    #       }
-    #
     # @!attribute [rw] connector_id
     #   The ID of the connector.
     #   @return [String]
@@ -617,14 +493,6 @@ module Aws::SMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GenerateChangeSetRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_id: "AppId",
-    #         changeset_format: "JSON", # accepts JSON, YAML
-    #       }
-    #
     # @!attribute [rw] app_id
     #   The ID of the application associated with the change set.
     #   @return [String]
@@ -654,14 +522,6 @@ module Aws::SMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GenerateTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_id: "AppId",
-    #         template_format: "JSON", # accepts JSON, YAML
-    #       }
-    #
     # @!attribute [rw] app_id
     #   The ID of the application associated with the CloudFormation
     #   template.
@@ -692,13 +552,6 @@ module Aws::SMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAppLaunchConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_id: "AppId",
-    #       }
-    #
     # @!attribute [rw] app_id
     #   The ID of the application.
     #   @return [String]
@@ -740,13 +593,6 @@ module Aws::SMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAppReplicationConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_id: "AppId",
-    #       }
-    #
     # @!attribute [rw] app_id
     #   The ID of the application.
     #   @return [String]
@@ -772,13 +618,6 @@ module Aws::SMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAppRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_id: "AppId",
-    #       }
-    #
     # @!attribute [rw] app_id
     #   The ID of the application.
     #   @return [String]
@@ -813,13 +652,6 @@ module Aws::SMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAppValidationConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_id: "AppIdWithValidation", # required
-    #       }
-    #
     # @!attribute [rw] app_id
     #   The ID of the application.
     #   @return [String]
@@ -849,13 +681,6 @@ module Aws::SMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAppValidationOutputRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_id: "AppIdWithValidation", # required
-    #       }
-    #
     # @!attribute [rw] app_id
     #   The ID of the application.
     #   @return [String]
@@ -880,14 +705,6 @@ module Aws::SMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetConnectorsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The token for the next set of results.
     #   @return [String]
@@ -925,15 +742,6 @@ module Aws::SMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetReplicationJobsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         replication_job_id: "ReplicationJobId",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] replication_job_id
     #   The ID of the replication job.
     #   @return [String]
@@ -976,15 +784,6 @@ module Aws::SMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetReplicationRunsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         replication_job_id: "ReplicationJobId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] replication_job_id
     #   The ID of the replication job.
     #   @return [String]
@@ -1032,20 +831,6 @@ module Aws::SMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetServersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         vm_server_address_list: [
-    #           {
-    #             vm_manager_id: "VmManagerId",
-    #             vm_id: "VmId",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The token for the next set of results.
     #   @return [String]
@@ -1098,13 +883,6 @@ module Aws::SMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ImportAppCatalogRequest
-    #   data as a hash:
-    #
-    #       {
-    #         role_name: "RoleName",
-    #       }
-    #
     # @!attribute [rw] role_name
     #   The name of the service role. If you omit this parameter, we create
     #   a service-linked role for Migration Hub in your account. Otherwise,
@@ -1128,8 +906,6 @@ module Aws::SMS
     #
     class ImportAppCatalogResponse < Aws::EmptyStructure; end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/ImportServerCatalogRequest AWS API Documentation
     #
     class ImportServerCatalogRequest < Aws::EmptyStructure; end
@@ -1164,13 +940,6 @@ module Aws::SMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass LaunchAppRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_id: "AppId",
-    #       }
-    #
     # @!attribute [rw] app_id
     #   The ID of the application.
     #   @return [String]
@@ -1211,15 +980,6 @@ module Aws::SMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAppsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_ids: ["AppId"],
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] app_ids
     #   The unique application IDs.
     #   @return [Array<String>]
@@ -1290,15 +1050,6 @@ module Aws::SMS
 
     # Contains the status of validating an application.
     #
-    # @note When making an API call, you may pass NotificationContext
-    #   data as a hash:
-    #
-    #       {
-    #         validation_id: "ValidationId",
-    #         status: "READY_FOR_VALIDATION", # accepts READY_FOR_VALIDATION, PENDING, IN_PROGRESS, SUCCEEDED, FAILED
-    #         status_message: "ValidationStatusMessage",
-    #       }
-    #
     # @!attribute [rw] validation_id
     #   The ID of the validation.
     #   @return [String]
@@ -1321,18 +1072,6 @@ module Aws::SMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass NotifyAppValidationOutputRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_id: "AppIdWithValidation", # required
-    #         notification_context: {
-    #           validation_id: "ValidationId",
-    #           status: "READY_FOR_VALIDATION", # accepts READY_FOR_VALIDATION, PENDING, IN_PROGRESS, SUCCEEDED, FAILED
-    #           status_message: "ValidationStatusMessage",
-    #         },
-    #       }
-    #
     # @!attribute [rw] app_id
     #   The ID of the application.
     #   @return [String]
@@ -1367,60 +1106,6 @@ module Aws::SMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutAppLaunchConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_id: "AppId",
-    #         role_name: "RoleName",
-    #         auto_launch: false,
-    #         server_group_launch_configurations: [
-    #           {
-    #             server_group_id: "ServerGroupId",
-    #             launch_order: 1,
-    #             server_launch_configurations: [
-    #               {
-    #                 server: {
-    #                   server_id: "ServerId",
-    #                   server_type: "VIRTUAL_MACHINE", # accepts VIRTUAL_MACHINE
-    #                   vm_server: {
-    #                     vm_server_address: {
-    #                       vm_manager_id: "VmManagerId",
-    #                       vm_id: "VmId",
-    #                     },
-    #                     vm_name: "VmName",
-    #                     vm_manager_name: "VmManagerName",
-    #                     vm_manager_type: "VSPHERE", # accepts VSPHERE, SCVMM, HYPERV-MANAGER
-    #                     vm_path: "VmPath",
-    #                   },
-    #                   replication_job_id: "ReplicationJobId",
-    #                   replication_job_terminated: false,
-    #                 },
-    #                 logical_id: "LogicalId",
-    #                 vpc: "VPC",
-    #                 subnet: "Subnet",
-    #                 security_group: "SecurityGroup",
-    #                 ec2_key_name: "EC2KeyName",
-    #                 user_data: {
-    #                   s3_location: {
-    #                     bucket: "S3BucketName",
-    #                     key: "S3KeyName",
-    #                   },
-    #                 },
-    #                 instance_type: "InstanceType",
-    #                 associate_public_ip_address: false,
-    #                 iam_instance_profile_name: "RoleName",
-    #                 configure_script: {
-    #                   bucket: "S3BucketName",
-    #                   key: "S3KeyName",
-    #                 },
-    #                 configure_script_type: "SHELL_SCRIPT", # accepts SHELL_SCRIPT, POWERSHELL_SCRIPT
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] app_id
     #   The ID of the application.
     #   @return [String]
@@ -1455,47 +1140,6 @@ module Aws::SMS
     #
     class PutAppLaunchConfigurationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass PutAppReplicationConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_id: "AppId",
-    #         server_group_replication_configurations: [
-    #           {
-    #             server_group_id: "ServerGroupId",
-    #             server_replication_configurations: [
-    #               {
-    #                 server: {
-    #                   server_id: "ServerId",
-    #                   server_type: "VIRTUAL_MACHINE", # accepts VIRTUAL_MACHINE
-    #                   vm_server: {
-    #                     vm_server_address: {
-    #                       vm_manager_id: "VmManagerId",
-    #                       vm_id: "VmId",
-    #                     },
-    #                     vm_name: "VmName",
-    #                     vm_manager_name: "VmManagerName",
-    #                     vm_manager_type: "VSPHERE", # accepts VSPHERE, SCVMM, HYPERV-MANAGER
-    #                     vm_path: "VmPath",
-    #                   },
-    #                   replication_job_id: "ReplicationJobId",
-    #                   replication_job_terminated: false,
-    #                 },
-    #                 server_replication_parameters: {
-    #                   seed_time: Time.now,
-    #                   frequency: 1,
-    #                   run_once: false,
-    #                   license_type: "AWS", # accepts AWS, BYOL
-    #                   number_of_recent_amis_to_keep: 1,
-    #                   encrypted: false,
-    #                   kms_key_id: "KmsKeyId",
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] app_id
     #   The ID of the application.
     #   @return [String]
@@ -1518,70 +1162,6 @@ module Aws::SMS
     #
     class PutAppReplicationConfigurationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass PutAppValidationConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_id: "AppIdWithValidation", # required
-    #         app_validation_configurations: [
-    #           {
-    #             validation_id: "ValidationId",
-    #             name: "NonEmptyStringWithMaxLen255",
-    #             app_validation_strategy: "SSM", # accepts SSM
-    #             ssm_validation_parameters: {
-    #               source: {
-    #                 s3_location: {
-    #                   bucket: "S3BucketName",
-    #                   key: "S3KeyName",
-    #                 },
-    #               },
-    #               instance_id: "InstanceId",
-    #               script_type: "SHELL_SCRIPT", # accepts SHELL_SCRIPT, POWERSHELL_SCRIPT
-    #               command: "Command",
-    #               execution_timeout_seconds: 1,
-    #               output_s3_bucket_name: "BucketName",
-    #             },
-    #           },
-    #         ],
-    #         server_group_validation_configurations: [
-    #           {
-    #             server_group_id: "ServerGroupId",
-    #             server_validation_configurations: [
-    #               {
-    #                 server: {
-    #                   server_id: "ServerId",
-    #                   server_type: "VIRTUAL_MACHINE", # accepts VIRTUAL_MACHINE
-    #                   vm_server: {
-    #                     vm_server_address: {
-    #                       vm_manager_id: "VmManagerId",
-    #                       vm_id: "VmId",
-    #                     },
-    #                     vm_name: "VmName",
-    #                     vm_manager_name: "VmManagerName",
-    #                     vm_manager_type: "VSPHERE", # accepts VSPHERE, SCVMM, HYPERV-MANAGER
-    #                     vm_path: "VmPath",
-    #                   },
-    #                   replication_job_id: "ReplicationJobId",
-    #                   replication_job_terminated: false,
-    #                 },
-    #                 validation_id: "ValidationId",
-    #                 name: "NonEmptyStringWithMaxLen255",
-    #                 server_validation_strategy: "USERDATA", # accepts USERDATA
-    #                 user_data_validation_parameters: {
-    #                   source: {
-    #                     s3_location: {
-    #                       bucket: "S3BucketName",
-    #                       key: "S3KeyName",
-    #                     },
-    #                   },
-    #                   script_type: "SHELL_SCRIPT", # accepts SHELL_SCRIPT, POWERSHELL_SCRIPT
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] app_id
     #   The ID of the application.
     #   @return [String]
@@ -1860,14 +1440,6 @@ module Aws::SMS
 
     # Location of an Amazon S3 object.
     #
-    # @note When making an API call, you may pass S3Location
-    #   data as a hash:
-    #
-    #       {
-    #         bucket: "S3BucketName",
-    #         key: "S3KeyName",
-    #       }
-    #
     # @!attribute [rw] bucket
     #   The Amazon S3 bucket name.
     #   @return [String]
@@ -1900,23 +1472,6 @@ module Aws::SMS
     end
 
     # Contains validation parameters.
-    #
-    # @note When making an API call, you may pass SSMValidationParameters
-    #   data as a hash:
-    #
-    #       {
-    #         source: {
-    #           s3_location: {
-    #             bucket: "S3BucketName",
-    #             key: "S3KeyName",
-    #           },
-    #         },
-    #         instance_id: "InstanceId",
-    #         script_type: "SHELL_SCRIPT", # accepts SHELL_SCRIPT, POWERSHELL_SCRIPT
-    #         command: "Command",
-    #         execution_timeout_seconds: 1,
-    #         output_s3_bucket_name: "BucketName",
-    #       }
     #
     # @!attribute [rw] source
     #   The location of the validation script.
@@ -1957,26 +1512,6 @@ module Aws::SMS
     end
 
     # Represents a server.
-    #
-    # @note When making an API call, you may pass Server
-    #   data as a hash:
-    #
-    #       {
-    #         server_id: "ServerId",
-    #         server_type: "VIRTUAL_MACHINE", # accepts VIRTUAL_MACHINE
-    #         vm_server: {
-    #           vm_server_address: {
-    #             vm_manager_id: "VmManagerId",
-    #             vm_id: "VmId",
-    #           },
-    #           vm_name: "VmName",
-    #           vm_manager_name: "VmManagerName",
-    #           vm_manager_type: "VSPHERE", # accepts VSPHERE, SCVMM, HYPERV-MANAGER
-    #           vm_path: "VmPath",
-    #         },
-    #         replication_job_id: "ReplicationJobId",
-    #         replication_job_terminated: false,
-    #       }
     #
     # @!attribute [rw] server_id
     #   The ID of the server.
@@ -2025,32 +1560,6 @@ module Aws::SMS
 
     # Logical grouping of servers.
     #
-    # @note When making an API call, you may pass ServerGroup
-    #   data as a hash:
-    #
-    #       {
-    #         server_group_id: "ServerGroupId",
-    #         name: "ServerGroupName",
-    #         server_list: [
-    #           {
-    #             server_id: "ServerId",
-    #             server_type: "VIRTUAL_MACHINE", # accepts VIRTUAL_MACHINE
-    #             vm_server: {
-    #               vm_server_address: {
-    #                 vm_manager_id: "VmManagerId",
-    #                 vm_id: "VmId",
-    #               },
-    #               vm_name: "VmName",
-    #               vm_manager_name: "VmManagerName",
-    #               vm_manager_type: "VSPHERE", # accepts VSPHERE, SCVMM, HYPERV-MANAGER
-    #               vm_path: "VmPath",
-    #             },
-    #             replication_job_id: "ReplicationJobId",
-    #             replication_job_terminated: false,
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] server_group_id
     #   The ID of a server group.
     #   @return [String]
@@ -2074,53 +1583,6 @@ module Aws::SMS
     end
 
     # Launch configuration for a server group.
-    #
-    # @note When making an API call, you may pass ServerGroupLaunchConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         server_group_id: "ServerGroupId",
-    #         launch_order: 1,
-    #         server_launch_configurations: [
-    #           {
-    #             server: {
-    #               server_id: "ServerId",
-    #               server_type: "VIRTUAL_MACHINE", # accepts VIRTUAL_MACHINE
-    #               vm_server: {
-    #                 vm_server_address: {
-    #                   vm_manager_id: "VmManagerId",
-    #                   vm_id: "VmId",
-    #                 },
-    #                 vm_name: "VmName",
-    #                 vm_manager_name: "VmManagerName",
-    #                 vm_manager_type: "VSPHERE", # accepts VSPHERE, SCVMM, HYPERV-MANAGER
-    #                 vm_path: "VmPath",
-    #               },
-    #               replication_job_id: "ReplicationJobId",
-    #               replication_job_terminated: false,
-    #             },
-    #             logical_id: "LogicalId",
-    #             vpc: "VPC",
-    #             subnet: "Subnet",
-    #             security_group: "SecurityGroup",
-    #             ec2_key_name: "EC2KeyName",
-    #             user_data: {
-    #               s3_location: {
-    #                 bucket: "S3BucketName",
-    #                 key: "S3KeyName",
-    #               },
-    #             },
-    #             instance_type: "InstanceType",
-    #             associate_public_ip_address: false,
-    #             iam_instance_profile_name: "RoleName",
-    #             configure_script: {
-    #               bucket: "S3BucketName",
-    #               key: "S3KeyName",
-    #             },
-    #             configure_script_type: "SHELL_SCRIPT", # accepts SHELL_SCRIPT, POWERSHELL_SCRIPT
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] server_group_id
     #   The ID of the server group with which the launch configuration is
@@ -2147,42 +1609,6 @@ module Aws::SMS
 
     # Replication configuration for a server group.
     #
-    # @note When making an API call, you may pass ServerGroupReplicationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         server_group_id: "ServerGroupId",
-    #         server_replication_configurations: [
-    #           {
-    #             server: {
-    #               server_id: "ServerId",
-    #               server_type: "VIRTUAL_MACHINE", # accepts VIRTUAL_MACHINE
-    #               vm_server: {
-    #                 vm_server_address: {
-    #                   vm_manager_id: "VmManagerId",
-    #                   vm_id: "VmId",
-    #                 },
-    #                 vm_name: "VmName",
-    #                 vm_manager_name: "VmManagerName",
-    #                 vm_manager_type: "VSPHERE", # accepts VSPHERE, SCVMM, HYPERV-MANAGER
-    #                 vm_path: "VmPath",
-    #               },
-    #               replication_job_id: "ReplicationJobId",
-    #               replication_job_terminated: false,
-    #             },
-    #             server_replication_parameters: {
-    #               seed_time: Time.now,
-    #               frequency: 1,
-    #               run_once: false,
-    #               license_type: "AWS", # accepts AWS, BYOL
-    #               number_of_recent_amis_to_keep: 1,
-    #               encrypted: false,
-    #               kms_key_id: "KmsKeyId",
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] server_group_id
     #   The ID of the server group with which this replication configuration
     #   is associated.
@@ -2203,45 +1629,6 @@ module Aws::SMS
 
     # Configuration for validating an instance.
     #
-    # @note When making an API call, you may pass ServerGroupValidationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         server_group_id: "ServerGroupId",
-    #         server_validation_configurations: [
-    #           {
-    #             server: {
-    #               server_id: "ServerId",
-    #               server_type: "VIRTUAL_MACHINE", # accepts VIRTUAL_MACHINE
-    #               vm_server: {
-    #                 vm_server_address: {
-    #                   vm_manager_id: "VmManagerId",
-    #                   vm_id: "VmId",
-    #                 },
-    #                 vm_name: "VmName",
-    #                 vm_manager_name: "VmManagerName",
-    #                 vm_manager_type: "VSPHERE", # accepts VSPHERE, SCVMM, HYPERV-MANAGER
-    #                 vm_path: "VmPath",
-    #               },
-    #               replication_job_id: "ReplicationJobId",
-    #               replication_job_terminated: false,
-    #             },
-    #             validation_id: "ValidationId",
-    #             name: "NonEmptyStringWithMaxLen255",
-    #             server_validation_strategy: "USERDATA", # accepts USERDATA
-    #             user_data_validation_parameters: {
-    #               source: {
-    #                 s3_location: {
-    #                   bucket: "S3BucketName",
-    #                   key: "S3KeyName",
-    #                 },
-    #               },
-    #               script_type: "SHELL_SCRIPT", # accepts SHELL_SCRIPT, POWERSHELL_SCRIPT
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] server_group_id
     #   The ID of the server group.
     #   @return [String]
@@ -2260,47 +1647,6 @@ module Aws::SMS
     end
 
     # Launch configuration for a server.
-    #
-    # @note When making an API call, you may pass ServerLaunchConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         server: {
-    #           server_id: "ServerId",
-    #           server_type: "VIRTUAL_MACHINE", # accepts VIRTUAL_MACHINE
-    #           vm_server: {
-    #             vm_server_address: {
-    #               vm_manager_id: "VmManagerId",
-    #               vm_id: "VmId",
-    #             },
-    #             vm_name: "VmName",
-    #             vm_manager_name: "VmManagerName",
-    #             vm_manager_type: "VSPHERE", # accepts VSPHERE, SCVMM, HYPERV-MANAGER
-    #             vm_path: "VmPath",
-    #           },
-    #           replication_job_id: "ReplicationJobId",
-    #           replication_job_terminated: false,
-    #         },
-    #         logical_id: "LogicalId",
-    #         vpc: "VPC",
-    #         subnet: "Subnet",
-    #         security_group: "SecurityGroup",
-    #         ec2_key_name: "EC2KeyName",
-    #         user_data: {
-    #           s3_location: {
-    #             bucket: "S3BucketName",
-    #             key: "S3KeyName",
-    #           },
-    #         },
-    #         instance_type: "InstanceType",
-    #         associate_public_ip_address: false,
-    #         iam_instance_profile_name: "RoleName",
-    #         configure_script: {
-    #           bucket: "S3BucketName",
-    #           key: "S3KeyName",
-    #         },
-    #         configure_script_type: "SHELL_SCRIPT", # accepts SHELL_SCRIPT, POWERSHELL_SCRIPT
-    #       }
     #
     # @!attribute [rw] server
     #   The ID of the server with which the launch configuration is
@@ -2375,37 +1721,6 @@ module Aws::SMS
 
     # Replication configuration of a server.
     #
-    # @note When making an API call, you may pass ServerReplicationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         server: {
-    #           server_id: "ServerId",
-    #           server_type: "VIRTUAL_MACHINE", # accepts VIRTUAL_MACHINE
-    #           vm_server: {
-    #             vm_server_address: {
-    #               vm_manager_id: "VmManagerId",
-    #               vm_id: "VmId",
-    #             },
-    #             vm_name: "VmName",
-    #             vm_manager_name: "VmManagerName",
-    #             vm_manager_type: "VSPHERE", # accepts VSPHERE, SCVMM, HYPERV-MANAGER
-    #             vm_path: "VmPath",
-    #           },
-    #           replication_job_id: "ReplicationJobId",
-    #           replication_job_terminated: false,
-    #         },
-    #         server_replication_parameters: {
-    #           seed_time: Time.now,
-    #           frequency: 1,
-    #           run_once: false,
-    #           license_type: "AWS", # accepts AWS, BYOL
-    #           number_of_recent_amis_to_keep: 1,
-    #           encrypted: false,
-    #           kms_key_id: "KmsKeyId",
-    #         },
-    #       }
-    #
     # @!attribute [rw] server
     #   The ID of the server with which this replication configuration is
     #   associated.
@@ -2425,19 +1740,6 @@ module Aws::SMS
     end
 
     # The replication parameters for replicating a server.
-    #
-    # @note When making an API call, you may pass ServerReplicationParameters
-    #   data as a hash:
-    #
-    #       {
-    #         seed_time: Time.now,
-    #         frequency: 1,
-    #         run_once: false,
-    #         license_type: "AWS", # accepts AWS, BYOL
-    #         number_of_recent_amis_to_keep: 1,
-    #         encrypted: false,
-    #         kms_key_id: "KmsKeyId",
-    #       }
     #
     # @!attribute [rw] seed_time
     #   The seed time for creating a replication job for the server.
@@ -2496,40 +1798,6 @@ module Aws::SMS
 
     # Configuration for validating an instance.
     #
-    # @note When making an API call, you may pass ServerValidationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         server: {
-    #           server_id: "ServerId",
-    #           server_type: "VIRTUAL_MACHINE", # accepts VIRTUAL_MACHINE
-    #           vm_server: {
-    #             vm_server_address: {
-    #               vm_manager_id: "VmManagerId",
-    #               vm_id: "VmId",
-    #             },
-    #             vm_name: "VmName",
-    #             vm_manager_name: "VmManagerName",
-    #             vm_manager_type: "VSPHERE", # accepts VSPHERE, SCVMM, HYPERV-MANAGER
-    #             vm_path: "VmPath",
-    #           },
-    #           replication_job_id: "ReplicationJobId",
-    #           replication_job_terminated: false,
-    #         },
-    #         validation_id: "ValidationId",
-    #         name: "NonEmptyStringWithMaxLen255",
-    #         server_validation_strategy: "USERDATA", # accepts USERDATA
-    #         user_data_validation_parameters: {
-    #           source: {
-    #             s3_location: {
-    #               bucket: "S3BucketName",
-    #               key: "S3KeyName",
-    #             },
-    #           },
-    #           script_type: "SHELL_SCRIPT", # accepts SHELL_SCRIPT, POWERSHELL_SCRIPT
-    #         },
-    #       }
-    #
     # @!attribute [rw] server
     #   Represents a server.
     #   @return [Types::Server]
@@ -2578,16 +1846,6 @@ module Aws::SMS
 
     # Contains the location of a validation script.
     #
-    # @note When making an API call, you may pass Source
-    #   data as a hash:
-    #
-    #       {
-    #         s3_location: {
-    #           bucket: "S3BucketName",
-    #           key: "S3KeyName",
-    #         },
-    #       }
-    #
     # @!attribute [rw] s3_location
     #   Location of an Amazon S3 object.
     #   @return [Types::S3Location]
@@ -2600,13 +1858,6 @@ module Aws::SMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartAppReplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_id: "AppId",
-    #       }
-    #
     # @!attribute [rw] app_id
     #   The ID of the application.
     #   @return [String]
@@ -2623,14 +1874,6 @@ module Aws::SMS
     #
     class StartAppReplicationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass StartOnDemandAppReplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_id: "AppId", # required
-    #         description: "Description",
-    #       }
-    #
     # @!attribute [rw] app_id
     #   The ID of the application.
     #   @return [String]
@@ -2652,14 +1895,6 @@ module Aws::SMS
     #
     class StartOnDemandAppReplicationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass StartOnDemandReplicationRunRequest
-    #   data as a hash:
-    #
-    #       {
-    #         replication_job_id: "ReplicationJobId", # required
-    #         description: "Description",
-    #       }
-    #
     # @!attribute [rw] replication_job_id
     #   The ID of the replication job.
     #   @return [String]
@@ -2689,13 +1924,6 @@ module Aws::SMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopAppReplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_id: "AppId",
-    #       }
-    #
     # @!attribute [rw] app_id
     #   The ID of the application.
     #   @return [String]
@@ -2713,14 +1941,6 @@ module Aws::SMS
     class StopAppReplicationResponse < Aws::EmptyStructure; end
 
     # Key/value pair that can be assigned to an application.
-    #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey",
-    #         value: "TagValue",
-    #       }
     #
     # @!attribute [rw] key
     #   The tag key.
@@ -2745,13 +1965,6 @@ module Aws::SMS
     #
     class TemporarilyUnavailableException < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass TerminateAppRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_id: "AppId",
-    #       }
-    #
     # @!attribute [rw] app_id
     #   The ID of the application.
     #   @return [String]
@@ -2782,46 +1995,6 @@ module Aws::SMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateAppRequest
-    #   data as a hash:
-    #
-    #       {
-    #         app_id: "AppId",
-    #         name: "AppName",
-    #         description: "AppDescription",
-    #         role_name: "RoleName",
-    #         server_groups: [
-    #           {
-    #             server_group_id: "ServerGroupId",
-    #             name: "ServerGroupName",
-    #             server_list: [
-    #               {
-    #                 server_id: "ServerId",
-    #                 server_type: "VIRTUAL_MACHINE", # accepts VIRTUAL_MACHINE
-    #                 vm_server: {
-    #                   vm_server_address: {
-    #                     vm_manager_id: "VmManagerId",
-    #                     vm_id: "VmId",
-    #                   },
-    #                   vm_name: "VmName",
-    #                   vm_manager_name: "VmManagerName",
-    #                   vm_manager_type: "VSPHERE", # accepts VSPHERE, SCVMM, HYPERV-MANAGER
-    #                   vm_path: "VmPath",
-    #                 },
-    #                 replication_job_id: "ReplicationJobId",
-    #                 replication_job_terminated: false,
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] app_id
     #   The ID of the application.
     #   @return [String]
@@ -2882,21 +2055,6 @@ module Aws::SMS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateReplicationJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         replication_job_id: "ReplicationJobId", # required
-    #         frequency: 1,
-    #         next_replication_run_start_time: Time.now,
-    #         license_type: "AWS", # accepts AWS, BYOL
-    #         role_name: "RoleName",
-    #         description: "Description",
-    #         number_of_recent_amis_to_keep: 1,
-    #         encrypted: false,
-    #         kms_key_id: "KmsKeyId",
-    #       }
-    #
     # @!attribute [rw] replication_job_id
     #   The ID of the replication job.
     #   @return [String]
@@ -2972,16 +2130,6 @@ module Aws::SMS
     # A script that runs on first launch of an Amazon EC2 instance. Used for
     # configuring the server during launch.
     #
-    # @note When making an API call, you may pass UserData
-    #   data as a hash:
-    #
-    #       {
-    #         s3_location: {
-    #           bucket: "S3BucketName",
-    #           key: "S3KeyName",
-    #         },
-    #       }
-    #
     # @!attribute [rw] s3_location
     #   Amazon S3 location of the user-data script.
     #   @return [Types::S3Location]
@@ -2995,19 +2143,6 @@ module Aws::SMS
     end
 
     # Contains validation parameters.
-    #
-    # @note When making an API call, you may pass UserDataValidationParameters
-    #   data as a hash:
-    #
-    #       {
-    #         source: {
-    #           s3_location: {
-    #             bucket: "S3BucketName",
-    #             key: "S3KeyName",
-    #           },
-    #         },
-    #         script_type: "SHELL_SCRIPT", # accepts SHELL_SCRIPT, POWERSHELL_SCRIPT
-    #       }
     #
     # @!attribute [rw] source
     #   The location of the validation script.
@@ -3072,20 +2207,6 @@ module Aws::SMS
 
     # Represents a VM server.
     #
-    # @note When making an API call, you may pass VmServer
-    #   data as a hash:
-    #
-    #       {
-    #         vm_server_address: {
-    #           vm_manager_id: "VmManagerId",
-    #           vm_id: "VmId",
-    #         },
-    #         vm_name: "VmName",
-    #         vm_manager_name: "VmManagerName",
-    #         vm_manager_type: "VSPHERE", # accepts VSPHERE, SCVMM, HYPERV-MANAGER
-    #         vm_path: "VmPath",
-    #       }
-    #
     # @!attribute [rw] vm_server_address
     #   The VM server location.
     #   @return [Types::VmServerAddress]
@@ -3120,14 +2241,6 @@ module Aws::SMS
     end
 
     # Represents a VM server location.
-    #
-    # @note When making an API call, you may pass VmServerAddress
-    #   data as a hash:
-    #
-    #       {
-    #         vm_manager_id: "VmManagerId",
-    #         vm_id: "VmId",
-    #       }
     #
     # @!attribute [rw] vm_manager_id
     #   The ID of the VM manager.

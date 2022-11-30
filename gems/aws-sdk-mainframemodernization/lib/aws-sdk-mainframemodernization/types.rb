@@ -29,16 +29,6 @@ module Aws::MainframeModernization
     # definitions exist, provide them, as some applications will make use of
     # them.
     #
-    # @note When making an API call, you may pass AlternateKey
-    #   data as a hash:
-    #
-    #       {
-    #         allow_duplicates: false,
-    #         length: 1, # required
-    #         name: "String",
-    #         offset: 1, # required
-    #       }
-    #
     # @!attribute [rw] allow_duplicates
     #   Indicates whether the alternate key values are supposed to be unique
     #   for the given data set.
@@ -173,8 +163,6 @@ module Aws::MainframeModernization
 
     # Defines the details of a batch job.
     #
-    # @note BatchJobDefinition is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of BatchJobDefinition corresponding to the set member.
-    #
     # @!attribute [rw] file_batch_job_definition
     #   Specifies a file containing a batch job definition.
     #   @return [Types::FileBatchJobDefinition]
@@ -250,8 +238,6 @@ module Aws::MainframeModernization
 
     # Identifies a specific batch job.
     #
-    # @note BatchJobIdentifier is a union - when making an API calls you must set exactly one of the members.
-    #
     # @!attribute [rw] file_batch_job_identifier
     #   Specifies a file associated with a specific batch job.
     #   @return [Types::FileBatchJobIdentifier]
@@ -276,14 +262,6 @@ module Aws::MainframeModernization
       class Unknown < BatchJobIdentifier; end
     end
 
-    # @note When making an API call, you may pass CancelBatchJobExecutionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "Identifier", # required
-    #         execution_id: "Identifier", # required
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The unique identifier of the application.
     #   @return [String]
@@ -329,23 +307,6 @@ module Aws::MainframeModernization
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "String",
-    #         definition: { # required
-    #           content: "StringFree65000",
-    #           s3_location: "String2000",
-    #         },
-    #         description: "EntityDescription",
-    #         engine_type: "microfocus", # required, accepts microfocus, bluage
-    #         name: "EntityName", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier the service generates to ensure
     #   the idempotency of the request to create an application. The service
@@ -414,57 +375,6 @@ module Aws::MainframeModernization
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDataSetImportTaskRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "Identifier", # required
-    #         client_token: "String",
-    #         import_config: { # required
-    #           data_sets: [
-    #             {
-    #               data_set: { # required
-    #                 dataset_name: "String", # required
-    #                 dataset_org: { # required
-    #                   gdg: {
-    #                     limit: 1,
-    #                     roll_disposition: "String",
-    #                   },
-    #                   vsam: {
-    #                     alternate_keys: [
-    #                       {
-    #                         allow_duplicates: false,
-    #                         length: 1, # required
-    #                         name: "String",
-    #                         offset: 1, # required
-    #                       },
-    #                     ],
-    #                     compressed: false,
-    #                     encoding: "String",
-    #                     format: "String", # required
-    #                     primary_key: {
-    #                       length: 1, # required
-    #                       name: "String",
-    #                       offset: 1, # required
-    #                     },
-    #                   },
-    #                 },
-    #                 record_length: { # required
-    #                   max: 1, # required
-    #                   min: 1, # required
-    #                 },
-    #                 relative_path: "String",
-    #                 storage_type: "String",
-    #               },
-    #               external_location: { # required
-    #                 s3_location: "String2000",
-    #               },
-    #             },
-    #           ],
-    #           s3_location: "String2000",
-    #         },
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The unique identifier of the application for which you want to
     #   import data sets.
@@ -510,16 +420,6 @@ module Aws::MainframeModernization
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDeploymentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "Identifier", # required
-    #         application_version: 1, # required
-    #         client_token: "String",
-    #         environment_id: "Identifier", # required
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The application identifier.
     #   @return [String]
@@ -568,40 +468,6 @@ module Aws::MainframeModernization
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateEnvironmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         client_token: "String",
-    #         description: "EntityDescription",
-    #         engine_type: "microfocus", # required, accepts microfocus, bluage
-    #         engine_version: "EngineVersion",
-    #         high_availability_config: {
-    #           desired_capacity: 1, # required
-    #         },
-    #         instance_type: "String20", # required
-    #         name: "EntityName", # required
-    #         preferred_maintenance_window: "String50",
-    #         publicly_accessible: false,
-    #         security_group_ids: ["String50"],
-    #         storage_configurations: [
-    #           {
-    #             efs: {
-    #               file_system_id: "String200", # required
-    #               mount_point: "String200", # required
-    #             },
-    #             fsx: {
-    #               file_system_id: "String200", # required
-    #               mount_point: "String200", # required
-    #             },
-    #           },
-    #         ],
-    #         subnet_ids: ["String50"],
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier you provide to ensure the
     #   idempotency of the request to create an environment. The service
@@ -700,43 +566,6 @@ module Aws::MainframeModernization
 
     # Defines a data set.
     #
-    # @note When making an API call, you may pass DataSet
-    #   data as a hash:
-    #
-    #       {
-    #         dataset_name: "String", # required
-    #         dataset_org: { # required
-    #           gdg: {
-    #             limit: 1,
-    #             roll_disposition: "String",
-    #           },
-    #           vsam: {
-    #             alternate_keys: [
-    #               {
-    #                 allow_duplicates: false,
-    #                 length: 1, # required
-    #                 name: "String",
-    #                 offset: 1, # required
-    #               },
-    #             ],
-    #             compressed: false,
-    #             encoding: "String",
-    #             format: "String", # required
-    #             primary_key: {
-    #               length: 1, # required
-    #               name: "String",
-    #               offset: 1, # required
-    #             },
-    #           },
-    #         },
-    #         record_length: { # required
-    #           max: 1, # required
-    #           min: 1, # required
-    #         },
-    #         relative_path: "String",
-    #         storage_type: "String",
-    #       }
-    #
     # @!attribute [rw] dataset_name
     #   The logical identifier for a specific data set (in mainframe
     #   format).
@@ -778,8 +607,6 @@ module Aws::MainframeModernization
     # Identifies one or more data sets you want to import with the
     # CreateDataSetImportTask operation.
     #
-    # @note DataSetImportConfig is a union - when making an API calls you must set exactly one of the members.
-    #
     # @!attribute [rw] data_sets
     #   The data sets.
     #   @return [Array<Types::DataSetImportItem>]
@@ -804,48 +631,6 @@ module Aws::MainframeModernization
     end
 
     # Identifies a specific data set to import from an external location.
-    #
-    # @note When making an API call, you may pass DataSetImportItem
-    #   data as a hash:
-    #
-    #       {
-    #         data_set: { # required
-    #           dataset_name: "String", # required
-    #           dataset_org: { # required
-    #             gdg: {
-    #               limit: 1,
-    #               roll_disposition: "String",
-    #             },
-    #             vsam: {
-    #               alternate_keys: [
-    #                 {
-    #                   allow_duplicates: false,
-    #                   length: 1, # required
-    #                   name: "String",
-    #                   offset: 1, # required
-    #                 },
-    #               ],
-    #               compressed: false,
-    #               encoding: "String",
-    #               format: "String", # required
-    #               primary_key: {
-    #                 length: 1, # required
-    #                 name: "String",
-    #                 offset: 1, # required
-    #               },
-    #             },
-    #           },
-    #           record_length: { # required
-    #             max: 1, # required
-    #             min: 1, # required
-    #           },
-    #           relative_path: "String",
-    #           storage_type: "String",
-    #         },
-    #         external_location: { # required
-    #           s3_location: "String2000",
-    #         },
-    #       }
     #
     # @!attribute [rw] data_set
     #   The data set.
@@ -966,8 +751,6 @@ module Aws::MainframeModernization
     # to different data set organizations. The values are populated based on
     # datasetOrg, storageType and backend (Blu Age or Micro Focus).
     #
-    # @note DatasetDetailOrgAttributes is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of DatasetDetailOrgAttributes corresponding to the set member.
-    #
     # @!attribute [rw] gdg
     #   The generation data group of the data set.
     #   @return [Types::GdgDetailAttributes]
@@ -995,8 +778,6 @@ module Aws::MainframeModernization
     # to different data set organizations. The values are populated based on
     # datasetOrg, storageType and backend (Blu Age or Micro Focus).
     #
-    # @note DatasetOrgAttributes is a union - when making an API calls you must set exactly one of the members.
-    #
     # @!attribute [rw] gdg
     #   The generation data group of the data set.
     #   @return [Types::GdgAttributes]
@@ -1021,8 +802,6 @@ module Aws::MainframeModernization
     end
 
     # The application definition for a particular application.
-    #
-    # @note Definition is a union - when making an API calls you must set exactly one of the members.
     #
     # @!attribute [rw] content
     #   The content of the application definition. This is a JSON object
@@ -1049,14 +828,6 @@ module Aws::MainframeModernization
       class Unknown < Definition; end
     end
 
-    # @note When making an API call, you may pass DeleteApplicationFromEnvironmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "Identifier", # required
-    #         environment_id: "Identifier", # required
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The unique identifier of the application you want to delete.
     #   @return [String]
@@ -1079,13 +850,6 @@ module Aws::MainframeModernization
     #
     class DeleteApplicationFromEnvironmentResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "Identifier", # required
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The unique identifier of the application you want to delete.
     #   @return [String]
@@ -1102,13 +866,6 @@ module Aws::MainframeModernization
     #
     class DeleteApplicationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteEnvironmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         environment_id: "Identifier", # required
-    #       }
-    #
     # @!attribute [rw] environment_id
     #   The unique identifier of the runtime environment you want to delete.
     #   @return [String]
@@ -1194,14 +951,6 @@ module Aws::MainframeModernization
     end
 
     # Defines the storage configuration for an Amazon EFS file system.
-    #
-    # @note When making an API call, you may pass EfsStorageConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         file_system_id: "String200", # required
-    #         mount_point: "String200", # required
-    #       }
     #
     # @!attribute [rw] file_system_id
     #   The file system identifier.
@@ -1292,8 +1041,6 @@ module Aws::MainframeModernization
 
     # Defines an external storage location.
     #
-    # @note ExternalLocation is a union - when making an API calls you must set exactly one of the members.
-    #
     # @!attribute [rw] s3_location
     #   The URI of the Amazon S3 bucket.
     #   @return [String]
@@ -1333,14 +1080,6 @@ module Aws::MainframeModernization
     # A batch job identifier in which the batch job to run is identified by
     # the file name and the relative path to the file name.
     #
-    # @note When making an API call, you may pass FileBatchJobIdentifier
-    #   data as a hash:
-    #
-    #       {
-    #         file_name: "String", # required
-    #         folder_path: "String",
-    #       }
-    #
     # @!attribute [rw] file_name
     #   The file name for the batch job identifier.
     #   @return [String]
@@ -1359,14 +1098,6 @@ module Aws::MainframeModernization
     end
 
     # Defines the storage configuration for an Amazon FSx file system.
-    #
-    # @note When making an API call, you may pass FsxStorageConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         file_system_id: "String200", # required
-    #         mount_point: "String200", # required
-    #       }
     #
     # @!attribute [rw] file_system_id
     #   The file system identifier.
@@ -1394,14 +1125,6 @@ module Aws::MainframeModernization
     #
     #
     # [1]: https://www.ibm.com/docs/en/zos/2.3.0?topic=guide-generation-data-sets
-    #
-    # @note When making an API call, you may pass GdgAttributes
-    #   data as a hash:
-    #
-    #       {
-    #         limit: 1,
-    #         roll_disposition: "String",
-    #       }
     #
     # @!attribute [rw] limit
     #   The maximum number of generation data sets, up to 255, in a GDG.
@@ -1447,13 +1170,6 @@ module Aws::MainframeModernization
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "Identifier", # required
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The identifier of the application.
     #   @return [String]
@@ -1574,14 +1290,6 @@ module Aws::MainframeModernization
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetApplicationVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "Identifier", # required
-    #         application_version: 1, # required
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The unique identifier of the application.
     #   @return [String]
@@ -1643,14 +1351,6 @@ module Aws::MainframeModernization
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetBatchJobExecutionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "Identifier", # required
-    #         execution_id: "Identifier", # required
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The identifier of the application.
     #   @return [String]
@@ -1725,14 +1425,6 @@ module Aws::MainframeModernization
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDataSetDetailsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "Identifier", # required
-    #         data_set_name: "String200", # required
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The unique identifier of the application that this data set is
     #   associated with.
@@ -1799,14 +1491,6 @@ module Aws::MainframeModernization
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDataSetImportTaskRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "Identifier", # required
-    #         task_id: "Identifier", # required
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The application identifier.
     #   @return [String]
@@ -1847,14 +1531,6 @@ module Aws::MainframeModernization
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDeploymentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "Identifier", # required
-    #         deployment_id: "Identifier", # required
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The unique identifier of the application.
     #   @return [String]
@@ -1914,13 +1590,6 @@ module Aws::MainframeModernization
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetEnvironmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         environment_id: "Identifier", # required
-    #       }
-    #
     # @!attribute [rw] environment_id
     #   The unique identifier of the runtime environment.
     #   @return [String]
@@ -2058,13 +1727,6 @@ module Aws::MainframeModernization
 
     # Defines the details of a high availability configuration.
     #
-    # @note When making an API call, you may pass HighAvailabilityConfig
-    #   data as a hash:
-    #
-    #       {
-    #         desired_capacity: 1, # required
-    #       }
-    #
     # @!attribute [rw] desired_capacity
     #   The number of instances in a high availability configuration.
     #   @return [Integer]
@@ -2095,15 +1757,6 @@ module Aws::MainframeModernization
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListApplicationVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "Identifier", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The unique identifier of the application.
     #   @return [String]
@@ -2147,16 +1800,6 @@ module Aws::MainframeModernization
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListApplicationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         environment_id: "Identifier",
-    #         max_results: 1,
-    #         names: ["EntityName"],
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] environment_id
     #   The unique identifier of the runtime environment where the
     #   applications are deployed.
@@ -2205,16 +1848,6 @@ module Aws::MainframeModernization
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListBatchJobDefinitionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "Identifier", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         prefix: "String",
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The identifier of the application.
     #   @return [String]
@@ -2264,20 +1897,6 @@ module Aws::MainframeModernization
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListBatchJobExecutionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "Identifier", # required
-    #         execution_ids: ["Identifier"],
-    #         job_name: "String100",
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         started_after: Time.now,
-    #         started_before: Time.now,
-    #         status: "Submitting", # accepts Submitting, Holding, Dispatching, Running, Cancelling, Cancelled, Succeeded, Failed, Succeeded With Warning
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The unique identifier of the application.
     #   @return [String]
@@ -2344,15 +1963,6 @@ module Aws::MainframeModernization
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDataSetImportHistoryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "Identifier", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The unique identifier of the application.
     #   @return [String]
@@ -2396,16 +2006,6 @@ module Aws::MainframeModernization
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDataSetsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "Identifier", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         prefix: "String200",
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The unique identifier of the application for which you want to list
     #   the associated data sets.
@@ -2459,15 +2059,6 @@ module Aws::MainframeModernization
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDeploymentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "Identifier", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The application identifier.
     #   @return [String]
@@ -2511,15 +2102,6 @@ module Aws::MainframeModernization
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEngineVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         engine_type: "microfocus", # accepts microfocus, bluage
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] engine_type
     #   The type of target platform.
     #   @return [String]
@@ -2563,16 +2145,6 @@ module Aws::MainframeModernization
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEnvironmentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         engine_type: "microfocus", # accepts microfocus, bluage
-    #         max_results: 1,
-    #         names: ["EntityName"],
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] engine_type
     #   The engine type for the environment.
     #   @return [String]
@@ -2620,13 +2192,6 @@ module Aws::MainframeModernization
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -2713,15 +2278,6 @@ module Aws::MainframeModernization
 
     # The primary key for a KSDS data set.
     #
-    # @note When making an API call, you may pass PrimaryKey
-    #   data as a hash:
-    #
-    #       {
-    #         length: 1, # required
-    #         name: "String",
-    #         offset: 1, # required
-    #       }
-    #
     # @!attribute [rw] length
     #   A strictly positive integer value representing the length of the
     #   primary key.
@@ -2747,14 +2303,6 @@ module Aws::MainframeModernization
     end
 
     # The length of the records in the data set.
-    #
-    # @note When making an API call, you may pass RecordLength
-    #   data as a hash:
-    #
-    #       {
-    #         max: 1, # required
-    #         min: 1, # required
-    #       }
     #
     # @!attribute [rw] max
     #   The maximum record length. In case of fixed, both minimum and
@@ -2814,13 +2362,6 @@ module Aws::MainframeModernization
     # A batch job identifier in which the batch job to run is identified by
     # the script name.
     #
-    # @note When making an API call, you may pass ScriptBatchJobIdentifier
-    #   data as a hash:
-    #
-    #       {
-    #         script_name: "String", # required
-    #       }
-    #
     # @!attribute [rw] script_name
     #   The name of the script containing the batch job definition.
     #   @return [String]
@@ -2869,13 +2410,6 @@ module Aws::MainframeModernization
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "Identifier", # required
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The unique identifier of the application you want to start.
     #   @return [String]
@@ -2892,25 +2426,6 @@ module Aws::MainframeModernization
     #
     class StartApplicationResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass StartBatchJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "Identifier", # required
-    #         batch_job_identifier: { # required
-    #           file_batch_job_identifier: {
-    #             file_name: "String", # required
-    #             folder_path: "String",
-    #           },
-    #           script_batch_job_identifier: {
-    #             script_name: "String", # required
-    #           },
-    #         },
-    #         job_params: {
-    #           "BatchParamKey" => "BatchParamValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The unique identifier of the application associated with this batch
     #   job.
@@ -2951,14 +2466,6 @@ module Aws::MainframeModernization
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "Identifier", # required
-    #         force_stop: false,
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The unique identifier of the application you want to stop.
     #   @return [String]
@@ -2985,10 +2492,6 @@ module Aws::MainframeModernization
 
     # Defines the storage configuration for an environment.
     #
-    # @note StorageConfiguration is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note StorageConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of StorageConfiguration corresponding to the set member.
-    #
     # @!attribute [rw] efs
     #   Defines the storage configuration for an Amazon EFS file system.
     #   @return [Types::EfsStorageConfiguration]
@@ -3012,16 +2515,6 @@ module Aws::MainframeModernization
       class Unknown < StorageConfiguration; end
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -3072,14 +2565,6 @@ module Aws::MainframeModernization
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -3101,19 +2586,6 @@ module Aws::MainframeModernization
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "Identifier", # required
-    #         current_application_version: 1, # required
-    #         definition: {
-    #           content: "StringFree65000",
-    #           s3_location: "String2000",
-    #         },
-    #         description: "EntityDescription",
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The unique identifier of the application you want to update.
     #   @return [String]
@@ -3154,18 +2626,6 @@ module Aws::MainframeModernization
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateEnvironmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         apply_during_maintenance_window: false,
-    #         desired_capacity: 1,
-    #         engine_version: "EngineVersion",
-    #         environment_id: "Identifier", # required
-    #         instance_type: "String20",
-    #         preferred_maintenance_window: "String",
-    #       }
-    #
     # @!attribute [rw] apply_during_maintenance_window
     #   Indicates whether to update the environment during the maintenance
     #   window. The default is false. Currently, Amazon Web Services
@@ -3266,28 +2726,6 @@ module Aws::MainframeModernization
     end
 
     # The attributes of a VSAM type data set.
-    #
-    # @note When making an API call, you may pass VsamAttributes
-    #   data as a hash:
-    #
-    #       {
-    #         alternate_keys: [
-    #           {
-    #             allow_duplicates: false,
-    #             length: 1, # required
-    #             name: "String",
-    #             offset: 1, # required
-    #           },
-    #         ],
-    #         compressed: false,
-    #         encoding: "String",
-    #         format: "String", # required
-    #         primary_key: {
-    #           length: 1, # required
-    #           name: "String",
-    #           offset: 1, # required
-    #         },
-    #       }
     #
     # @!attribute [rw] alternate_keys
     #   The alternate key definitions, if any. A legacy dataset might not

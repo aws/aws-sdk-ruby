@@ -190,14 +190,6 @@ module Aws::WellArchitected
 
     # Input to associate lens reviews.
     #
-    # @note When making an API call, you may pass AssociateLensesInput
-    #   data as a hash:
-    #
-    #       {
-    #         workload_id: "WorkloadId", # required
-    #         lens_aliases: ["LensAlias"], # required
-    #       }
-    #
     # @!attribute [rw] workload_id
     #   The ID assigned to the workload. This ID is unique within an Amazon
     #   Web Services Region.
@@ -506,15 +498,6 @@ module Aws::WellArchitected
 
     # A list of choices to be updated.
     #
-    # @note When making an API call, you may pass ChoiceUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         status: "SELECTED", # required, accepts SELECTED, NOT_APPLICABLE, UNSELECTED
-    #         reason: "OUT_OF_SCOPE", # accepts OUT_OF_SCOPE, BUSINESS_PRIORITIES, ARCHITECTURE_CONSTRAINTS, OTHER, NONE
-    #         notes: "ChoiceNotes",
-    #       }
-    #
     # @!attribute [rw] status
     #   The status of a choice.
     #   @return [String]
@@ -562,15 +545,6 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateLensShareInput
-    #   data as a hash:
-    #
-    #       {
-    #         lens_alias: "LensAlias", # required
-    #         shared_with: "SharedWith", # required
-    #         client_request_token: "ClientRequestToken", # required
-    #       }
-    #
     # @!attribute [rw] lens_alias
     #   The alias of the lens.
     #
@@ -629,16 +603,6 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateLensVersionInput
-    #   data as a hash:
-    #
-    #       {
-    #         lens_alias: "LensAlias", # required
-    #         lens_version: "LensVersion", # required
-    #         is_major_version: false,
-    #         client_request_token: "ClientRequestToken", # required
-    #       }
-    #
     # @!attribute [rw] lens_alias
     #   The alias of the lens.
     #
@@ -708,15 +672,6 @@ module Aws::WellArchitected
 
     # Input for milestone creation.
     #
-    # @note When making an API call, you may pass CreateMilestoneInput
-    #   data as a hash:
-    #
-    #       {
-    #         workload_id: "WorkloadId", # required
-    #         milestone_name: "MilestoneName", # required
-    #         client_request_token: "ClientRequestToken", # required
-    #       }
-    #
     # @!attribute [rw] workload_id
     #   The ID assigned to the workload. This ID is unique within an Amazon
     #   Web Services Region.
@@ -779,33 +734,6 @@ module Aws::WellArchitected
     end
 
     # Input for workload creation.
-    #
-    # @note When making an API call, you may pass CreateWorkloadInput
-    #   data as a hash:
-    #
-    #       {
-    #         workload_name: "WorkloadName", # required
-    #         description: "WorkloadDescription", # required
-    #         environment: "PRODUCTION", # required, accepts PRODUCTION, PREPRODUCTION
-    #         account_ids: ["AwsAccountId"],
-    #         aws_regions: ["AwsRegion"],
-    #         non_aws_regions: ["WorkloadNonAwsRegion"],
-    #         pillar_priorities: ["PillarId"],
-    #         architectural_design: "WorkloadArchitecturalDesign",
-    #         review_owner: "WorkloadReviewOwner",
-    #         industry_type: "WorkloadIndustryType",
-    #         industry: "WorkloadIndustry",
-    #         lenses: ["LensAlias"], # required
-    #         notes: "Notes",
-    #         client_request_token: "ClientRequestToken", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         discovery_config: {
-    #           trusted_advisor_integration_status: "ENABLED", # accepts ENABLED, DISABLED
-    #         },
-    #         applications: ["ApplicationArn"],
-    #       }
     #
     # @!attribute [rw] workload_name
     #   The name of the workload.
@@ -1004,16 +932,6 @@ module Aws::WellArchitected
 
     # Input for Create Workload Share
     #
-    # @note When making an API call, you may pass CreateWorkloadShareInput
-    #   data as a hash:
-    #
-    #       {
-    #         workload_id: "WorkloadId", # required
-    #         shared_with: "SharedWith", # required
-    #         permission_type: "READONLY", # required, accepts READONLY, CONTRIBUTOR
-    #         client_request_token: "ClientRequestToken", # required
-    #       }
-    #
     # @!attribute [rw] workload_id
     #   The ID assigned to the workload. This ID is unique within an Amazon
     #   Web Services Region.
@@ -1077,15 +995,6 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteLensInput
-    #   data as a hash:
-    #
-    #       {
-    #         lens_alias: "LensAlias", # required
-    #         client_request_token: "ClientRequestToken", # required
-    #         lens_status: "ALL", # required, accepts ALL, DRAFT, PUBLISHED
-    #       }
-    #
     # @!attribute [rw] lens_alias
     #   The alias of the lens.
     #
@@ -1131,15 +1040,6 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteLensShareInput
-    #   data as a hash:
-    #
-    #       {
-    #         share_id: "ShareId", # required
-    #         lens_alias: "LensAlias", # required
-    #         client_request_token: "ClientRequestToken", # required
-    #       }
-    #
     # @!attribute [rw] share_id
     #   The ID associated with the workload share.
     #   @return [String]
@@ -1187,14 +1087,6 @@ module Aws::WellArchitected
 
     # Input for workload deletion.
     #
-    # @note When making an API call, you may pass DeleteWorkloadInput
-    #   data as a hash:
-    #
-    #       {
-    #         workload_id: "WorkloadId", # required
-    #         client_request_token: "ClientRequestToken", # required
-    #       }
-    #
     # @!attribute [rw] workload_id
     #   The ID assigned to the workload. This ID is unique within an Amazon
     #   Web Services Region.
@@ -1228,15 +1120,6 @@ module Aws::WellArchitected
     end
 
     # Input for Delete Workload Share
-    #
-    # @note When making an API call, you may pass DeleteWorkloadShareInput
-    #   data as a hash:
-    #
-    #       {
-    #         share_id: "ShareId", # required
-    #         workload_id: "WorkloadId", # required
-    #         client_request_token: "ClientRequestToken", # required
-    #       }
     #
     # @!attribute [rw] share_id
     #   The ID associated with the workload share.
@@ -1277,14 +1160,6 @@ module Aws::WellArchitected
 
     # Input to disassociate lens reviews.
     #
-    # @note When making an API call, you may pass DisassociateLensesInput
-    #   data as a hash:
-    #
-    #       {
-    #         workload_id: "WorkloadId", # required
-    #         lens_aliases: ["LensAlias"], # required
-    #       }
-    #
     # @!attribute [rw] workload_id
     #   The ID assigned to the workload. This ID is unique within an Amazon
     #   Web Services Region.
@@ -1306,14 +1181,6 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ExportLensInput
-    #   data as a hash:
-    #
-    #       {
-    #         lens_alias: "LensAlias", # required
-    #         lens_version: "LensVersion",
-    #       }
-    #
     # @!attribute [rw] lens_alias
     #   The alias of the lens.
     #
@@ -1353,16 +1220,6 @@ module Aws::WellArchitected
     end
 
     # Input to get answer.
-    #
-    # @note When making an API call, you may pass GetAnswerInput
-    #   data as a hash:
-    #
-    #       {
-    #         workload_id: "WorkloadId", # required
-    #         lens_alias: "LensAlias", # required
-    #         question_id: "QuestionId", # required
-    #         milestone_number: 1,
-    #       }
     #
     # @!attribute [rw] workload_id
     #   The ID assigned to the workload. This ID is unique within an Amazon
@@ -1449,14 +1306,6 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLensInput
-    #   data as a hash:
-    #
-    #       {
-    #         lens_alias: "LensAlias", # required
-    #         lens_version: "LensVersion",
-    #       }
-    #
     # @!attribute [rw] lens_alias
     #   The alias of the lens.
     #
@@ -1496,15 +1345,6 @@ module Aws::WellArchitected
     end
 
     # Input to get lens review.
-    #
-    # @note When making an API call, you may pass GetLensReviewInput
-    #   data as a hash:
-    #
-    #       {
-    #         workload_id: "WorkloadId", # required
-    #         lens_alias: "LensAlias", # required
-    #         milestone_number: 1,
-    #       }
     #
     # @!attribute [rw] workload_id
     #   The ID assigned to the workload. This ID is unique within an Amazon
@@ -1569,15 +1409,6 @@ module Aws::WellArchitected
 
     # Input to get lens review report.
     #
-    # @note When making an API call, you may pass GetLensReviewReportInput
-    #   data as a hash:
-    #
-    #       {
-    #         workload_id: "WorkloadId", # required
-    #         lens_alias: "LensAlias", # required
-    #         milestone_number: 1,
-    #       }
-    #
     # @!attribute [rw] workload_id
     #   The ID assigned to the workload. This ID is unique within an Amazon
     #   Web Services Region.
@@ -1639,15 +1470,6 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLensVersionDifferenceInput
-    #   data as a hash:
-    #
-    #       {
-    #         lens_alias: "LensAlias", # required
-    #         base_lens_version: "LensVersion",
-    #         target_lens_version: "LensVersion",
-    #       }
-    #
     # @!attribute [rw] lens_alias
     #   The alias of the lens.
     #
@@ -1727,14 +1549,6 @@ module Aws::WellArchitected
 
     # Input to get a milestone.
     #
-    # @note When making an API call, you may pass GetMilestoneInput
-    #   data as a hash:
-    #
-    #       {
-    #         workload_id: "WorkloadId", # required
-    #         milestone_number: 1, # required
-    #       }
-    #
     # @!attribute [rw] workload_id
     #   The ID assigned to the workload. This ID is unique within an Amazon
     #   Web Services Region.
@@ -1777,13 +1591,6 @@ module Aws::WellArchitected
 
     # Input to get a workload.
     #
-    # @note When making an API call, you may pass GetWorkloadInput
-    #   data as a hash:
-    #
-    #       {
-    #         workload_id: "WorkloadId", # required
-    #       }
-    #
     # @!attribute [rw] workload_id
     #   The ID assigned to the workload. This ID is unique within an Amazon
     #   Web Services Region.
@@ -1811,18 +1618,6 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ImportLensInput
-    #   data as a hash:
-    #
-    #       {
-    #         lens_alias: "LensAlias",
-    #         json_string: "LensJSON", # required
-    #         client_request_token: "ClientRequestToken", # required
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] lens_alias
     #   The alias of the lens.
     #
@@ -2302,18 +2097,6 @@ module Aws::WellArchitected
 
     # Input to list answers.
     #
-    # @note When making an API call, you may pass ListAnswersInput
-    #   data as a hash:
-    #
-    #       {
-    #         workload_id: "WorkloadId", # required
-    #         lens_alias: "LensAlias", # required
-    #         pillar_id: "PillarId",
-    #         milestone_number: 1,
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] workload_id
     #   The ID assigned to the workload. This ID is unique within an Amazon
     #   Web Services Region.
@@ -2416,19 +2199,6 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCheckDetailsInput
-    #   data as a hash:
-    #
-    #       {
-    #         workload_id: "WorkloadId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         lens_arn: "LensArn", # required
-    #         pillar_id: "PillarId", # required
-    #         question_id: "QuestionId", # required
-    #         choice_id: "ChoiceId", # required
-    #       }
-    #
     # @!attribute [rw] workload_id
     #   The ID assigned to the workload. This ID is unique within an Amazon
     #   Web Services Region.
@@ -2492,19 +2262,6 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCheckSummariesInput
-    #   data as a hash:
-    #
-    #       {
-    #         workload_id: "WorkloadId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         lens_arn: "LensArn", # required
-    #         pillar_id: "PillarId", # required
-    #         question_id: "QuestionId", # required
-    #         choice_id: "ChoiceId", # required
-    #       }
-    #
     # @!attribute [rw] workload_id
     #   The ID assigned to the workload. This ID is unique within an Amazon
     #   Web Services Region.
@@ -2569,18 +2326,6 @@ module Aws::WellArchitected
     end
 
     # Input to list lens review improvements.
-    #
-    # @note When making an API call, you may pass ListLensReviewImprovementsInput
-    #   data as a hash:
-    #
-    #       {
-    #         workload_id: "WorkloadId", # required
-    #         lens_alias: "LensAlias", # required
-    #         pillar_id: "PillarId",
-    #         milestone_number: 1,
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
     #
     # @!attribute [rw] workload_id
     #   The ID assigned to the workload. This ID is unique within an Amazon
@@ -2686,16 +2431,6 @@ module Aws::WellArchitected
 
     # Input to list lens reviews.
     #
-    # @note When making an API call, you may pass ListLensReviewsInput
-    #   data as a hash:
-    #
-    #       {
-    #         workload_id: "WorkloadId", # required
-    #         milestone_number: 1,
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] workload_id
     #   The ID assigned to the workload. This ID is unique within an Amazon
     #   Web Services Region.
@@ -2758,17 +2493,6 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListLensSharesInput
-    #   data as a hash:
-    #
-    #       {
-    #         lens_alias: "LensAlias", # required
-    #         shared_with_prefix: "SharedWithPrefix",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         status: "ACCEPTED", # accepts ACCEPTED, REJECTED, PENDING, REVOKED, EXPIRED, ASSOCIATING, ASSOCIATED, FAILED
-    #       }
-    #
     # @!attribute [rw] lens_alias
     #   The alias of the lens.
     #
@@ -2830,17 +2554,6 @@ module Aws::WellArchitected
 
     # Input to list lenses.
     #
-    # @note When making an API call, you may pass ListLensesInput
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         lens_type: "AWS_OFFICIAL", # accepts AWS_OFFICIAL, CUSTOM_SHARED, CUSTOM_SELF
-    #         lens_status: "ALL", # accepts ALL, DRAFT, PUBLISHED
-    #         lens_name: "LensName",
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The token to use to retrieve the next set of results.
     #   @return [String]
@@ -2894,15 +2607,6 @@ module Aws::WellArchitected
 
     # Input to list all milestones for a workload.
     #
-    # @note When making an API call, you may pass ListMilestonesInput
-    #   data as a hash:
-    #
-    #       {
-    #         workload_id: "WorkloadId", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] workload_id
     #   The ID assigned to the workload. This ID is unique within an Amazon
     #   Web Services Region.
@@ -2951,15 +2655,6 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListNotificationsInput
-    #   data as a hash:
-    #
-    #       {
-    #         workload_id: "WorkloadId",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] workload_id
     #   The ID assigned to the workload. This ID is unique within an Amazon
     #   Web Services Region.
@@ -3001,17 +2696,6 @@ module Aws::WellArchitected
     end
 
     # Input for List Share Invitations
-    #
-    # @note When making an API call, you may pass ListShareInvitationsInput
-    #   data as a hash:
-    #
-    #       {
-    #         workload_name_prefix: "WorkloadNamePrefix",
-    #         lens_name_prefix: "LensNamePrefix",
-    #         share_resource_type: "WORKLOAD", # accepts WORKLOAD, LENS
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
     #
     # @!attribute [rw] workload_name_prefix
     #   An optional string added to the beginning of each workload name
@@ -3066,13 +2750,6 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         workload_arn: "WorkloadArn", # required
-    #       }
-    #
     # @!attribute [rw] workload_arn
     #   The ARN for the workload.
     #   @return [String]
@@ -3098,17 +2775,6 @@ module Aws::WellArchitected
     end
 
     # Input for List Workload Share
-    #
-    # @note When making an API call, you may pass ListWorkloadSharesInput
-    #   data as a hash:
-    #
-    #       {
-    #         workload_id: "WorkloadId", # required
-    #         shared_with_prefix: "SharedWithPrefix",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         status: "ACCEPTED", # accepts ACCEPTED, REJECTED, PENDING, REVOKED, EXPIRED, ASSOCIATING, ASSOCIATED, FAILED
-    #       }
     #
     # @!attribute [rw] workload_id
     #   The ID assigned to the workload. This ID is unique within an Amazon
@@ -3170,15 +2836,6 @@ module Aws::WellArchitected
     end
 
     # Input to list all workloads.
-    #
-    # @note When making an API call, you may pass ListWorkloadsInput
-    #   data as a hash:
-    #
-    #       {
-    #         workload_name_prefix: "WorkloadNamePrefix",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
     #
     # @!attribute [rw] workload_name_prefix
     #   An optional string added to the beginning of each workload name
@@ -3556,16 +3213,6 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         workload_arn: "WorkloadArn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] workload_arn
     #   The ARN for the workload.
     #   @return [String]
@@ -3611,14 +3258,6 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         workload_arn: "WorkloadArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] workload_arn
     #   The ARN for the workload.
     #   @return [String]
@@ -3642,26 +3281,6 @@ module Aws::WellArchitected
     class UntagResourceOutput < Aws::EmptyStructure; end
 
     # Input to update answer.
-    #
-    # @note When making an API call, you may pass UpdateAnswerInput
-    #   data as a hash:
-    #
-    #       {
-    #         workload_id: "WorkloadId", # required
-    #         lens_alias: "LensAlias", # required
-    #         question_id: "QuestionId", # required
-    #         selected_choices: ["ChoiceId"],
-    #         choice_updates: {
-    #           "ChoiceId" => {
-    #             status: "SELECTED", # required, accepts SELECTED, NOT_APPLICABLE, UNSELECTED
-    #             reason: "OUT_OF_SCOPE", # accepts OUT_OF_SCOPE, BUSINESS_PRIORITIES, ARCHITECTURE_CONSTRAINTS, OTHER, NONE
-    #             notes: "ChoiceNotes",
-    #           },
-    #         },
-    #         notes: "Notes",
-    #         is_applicable: false,
-    #         reason: "OUT_OF_SCOPE", # accepts OUT_OF_SCOPE, BUSINESS_PRIORITIES, ARCHITECTURE_CONSTRAINTS, OTHER, NONE
-    #       }
     #
     # @!attribute [rw] workload_id
     #   The ID assigned to the workload. This ID is unique within an Amazon
@@ -3762,13 +3381,6 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateGlobalSettingsInput
-    #   data as a hash:
-    #
-    #       {
-    #         organization_sharing_status: "ENABLED", # accepts ENABLED, DISABLED
-    #       }
-    #
     # @!attribute [rw] organization_sharing_status
     #   The status of organization sharing settings.
     #   @return [String]
@@ -3782,18 +3394,6 @@ module Aws::WellArchitected
     end
 
     # Input for update lens review.
-    #
-    # @note When making an API call, you may pass UpdateLensReviewInput
-    #   data as a hash:
-    #
-    #       {
-    #         workload_id: "WorkloadId", # required
-    #         lens_alias: "LensAlias", # required
-    #         lens_notes: "Notes",
-    #         pillar_notes: {
-    #           "PillarId" => "Notes",
-    #         },
-    #       }
     #
     # @!attribute [rw] workload_id
     #   The ID assigned to the workload. This ID is unique within an Amazon
@@ -3854,14 +3454,6 @@ module Aws::WellArchitected
 
     # Input for Update Share Invitation
     #
-    # @note When making an API call, you may pass UpdateShareInvitationInput
-    #   data as a hash:
-    #
-    #       {
-    #         share_invitation_id: "ShareInvitationId", # required
-    #         share_invitation_action: "ACCEPT", # required, accepts ACCEPT, REJECT
-    #       }
-    #
     # @!attribute [rw] share_invitation_id
     #   The ID assigned to the share invitation.
     #   @return [String]
@@ -3892,31 +3484,6 @@ module Aws::WellArchitected
     end
 
     # Input to update a workload.
-    #
-    # @note When making an API call, you may pass UpdateWorkloadInput
-    #   data as a hash:
-    #
-    #       {
-    #         workload_id: "WorkloadId", # required
-    #         workload_name: "WorkloadName",
-    #         description: "WorkloadDescription",
-    #         environment: "PRODUCTION", # accepts PRODUCTION, PREPRODUCTION
-    #         account_ids: ["AwsAccountId"],
-    #         aws_regions: ["AwsRegion"],
-    #         non_aws_regions: ["WorkloadNonAwsRegion"],
-    #         pillar_priorities: ["PillarId"],
-    #         architectural_design: "WorkloadArchitecturalDesign",
-    #         review_owner: "WorkloadReviewOwner",
-    #         is_review_owner_update_acknowledged: false,
-    #         industry_type: "WorkloadIndustryType",
-    #         industry: "WorkloadIndustry",
-    #         notes: "Notes",
-    #         improvement_status: "NOT_APPLICABLE", # accepts NOT_APPLICABLE, NOT_STARTED, IN_PROGRESS, COMPLETE, RISK_ACKNOWLEDGED
-    #         discovery_config: {
-    #           trusted_advisor_integration_status: "ENABLED", # accepts ENABLED, DISABLED
-    #         },
-    #         applications: ["ApplicationArn"],
-    #       }
     #
     # @!attribute [rw] workload_id
     #   The ID assigned to the workload. This ID is unique within an Amazon
@@ -4100,15 +3667,6 @@ module Aws::WellArchitected
 
     # Input for Update Workload Share
     #
-    # @note When making an API call, you may pass UpdateWorkloadShareInput
-    #   data as a hash:
-    #
-    #       {
-    #         share_id: "ShareId", # required
-    #         workload_id: "WorkloadId", # required
-    #         permission_type: "READONLY", # required, accepts READONLY, CONTRIBUTOR
-    #       }
-    #
     # @!attribute [rw] share_id
     #   The ID associated with the workload share.
     #   @return [String]
@@ -4152,16 +3710,6 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpgradeLensReviewInput
-    #   data as a hash:
-    #
-    #       {
-    #         workload_id: "WorkloadId", # required
-    #         lens_alias: "LensAlias", # required
-    #         milestone_name: "MilestoneName", # required
-    #         client_request_token: "ClientRequestToken",
-    #       }
-    #
     # @!attribute [rw] workload_id
     #   The ID assigned to the workload. This ID is unique within an Amazon
     #   Web Services Region.
@@ -4480,13 +4028,6 @@ module Aws::WellArchitected
     end
 
     # Discovery configuration associated to the workload.
-    #
-    # @note When making an API call, you may pass WorkloadDiscoveryConfig
-    #   data as a hash:
-    #
-    #       {
-    #         trusted_advisor_integration_status: "ENABLED", # accepts ENABLED, DISABLED
-    #       }
     #
     # @!attribute [rw] trusted_advisor_integration_status
     #   Discovery integration status in respect to Trusted Advisor for the

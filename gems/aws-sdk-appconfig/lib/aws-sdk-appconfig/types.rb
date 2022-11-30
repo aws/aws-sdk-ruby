@@ -33,16 +33,6 @@ module Aws::AppConfig
     #
     # * `ON_DEPLOYMENT_ROLLED_BACK`
     #
-    # @note When making an API call, you may pass Action
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name",
-    #         description: "Description",
-    #         uri: "Uri",
-    #         role_arn: "Arn",
-    #       }
-    #
     # @!attribute [rw] name
     #   The action name.
     #   @return [String]
@@ -409,17 +399,6 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         description: "Description",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   A name for the application.
     #   @return [String]
@@ -444,27 +423,6 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateConfigurationProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "Id", # required
-    #         name: "LongName", # required
-    #         description: "Description",
-    #         location_uri: "Uri", # required
-    #         retrieval_role_arn: "RoleArn",
-    #         validators: [
-    #           {
-    #             type: "JSON_SCHEMA", # required, accepts JSON_SCHEMA, LAMBDA
-    #             content: "StringWithLengthBetween0And32768", # required
-    #           },
-    #         ],
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         type: "ConfigurationProfileType",
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The application ID.
     #   @return [String]
@@ -538,22 +496,6 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDeploymentStrategyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         description: "Description",
-    #         deployment_duration_in_minutes: 1, # required
-    #         final_bake_time_in_minutes: 1,
-    #         growth_factor: 1.0, # required
-    #         growth_type: "LINEAR", # accepts LINEAR, EXPONENTIAL
-    #         replicate_to: "NONE", # accepts NONE, SSM_DOCUMENT
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   A name for the deployment strategy.
     #   @return [String]
@@ -641,24 +583,6 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateEnvironmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "Id", # required
-    #         name: "Name", # required
-    #         description: "Description",
-    #         monitors: [
-    #           {
-    #             alarm_arn: "StringWithLengthBetween1And2048", # required
-    #             alarm_role_arn: "RoleArn",
-    #           },
-    #         ],
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The application ID.
     #   @return [String]
@@ -693,21 +617,6 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateExtensionAssociationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         extension_identifier: "Identifier", # required
-    #         extension_version_number: 1,
-    #         resource_identifier: "Identifier", # required
-    #         parameters: {
-    #           "Name" => "StringWithLengthBetween1And2048",
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] extension_identifier
     #   The name, the ID, or the Amazon Resource Name (ARN) of the
     #   extension.
@@ -746,34 +655,6 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateExtensionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         description: "Description",
-    #         actions: { # required
-    #           "PRE_CREATE_HOSTED_CONFIGURATION_VERSION" => [
-    #             {
-    #               name: "Name",
-    #               description: "Description",
-    #               uri: "Uri",
-    #               role_arn: "Arn",
-    #             },
-    #           ],
-    #         },
-    #         parameters: {
-    #           "Name" => {
-    #             description: "Description",
-    #             required: false,
-    #           },
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #         latest_version_number: 1,
-    #       }
-    #
     # @!attribute [rw] name
     #   A name for the extension. Each extension name in your account must
     #   be unique. Extension versions use the same name.
@@ -821,18 +702,6 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateHostedConfigurationVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "Id", # required
-    #         configuration_profile_id: "Id", # required
-    #         description: "Description",
-    #         content: "data", # required
-    #         content_type: "StringWithLengthBetween1And255", # required
-    #         latest_version_number: 1,
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The application ID.
     #   @return [String]
@@ -879,13 +748,6 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "Id", # required
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The ID of the application to delete.
     #   @return [String]
@@ -898,14 +760,6 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteConfigurationProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "Id", # required
-    #         configuration_profile_id: "Id", # required
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The application ID that includes the configuration profile you want
     #   to delete.
@@ -924,13 +778,6 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDeploymentStrategyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         deployment_strategy_id: "DeploymentStrategyId", # required
-    #       }
-    #
     # @!attribute [rw] deployment_strategy_id
     #   The ID of the deployment strategy you want to delete.
     #   @return [String]
@@ -943,14 +790,6 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteEnvironmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "Id", # required
-    #         environment_id: "Id", # required
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The application ID that includes the environment that you want to
     #   delete.
@@ -969,13 +808,6 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteExtensionAssociationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         extension_association_id: "Id", # required
-    #       }
-    #
     # @!attribute [rw] extension_association_id
     #   The ID of the extension association to delete.
     #   @return [String]
@@ -988,14 +820,6 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteExtensionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         extension_identifier: "Identifier", # required
-    #         version_number: 1,
-    #       }
-    #
     # @!attribute [rw] extension_identifier
     #   The name, ID, or Amazon Resource Name (ARN) of the extension you
     #   want to delete.
@@ -1015,15 +839,6 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteHostedConfigurationVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "Id", # required
-    #         configuration_profile_id: "Id", # required
-    #         version_number: 1, # required
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The application ID.
     #   @return [String]
@@ -1596,13 +1411,6 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "Id", # required
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The ID of the application you want to get.
     #   @return [String]
@@ -1615,14 +1423,6 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetConfigurationProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "Id", # required
-    #         configuration_profile_id: "Id", # required
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The ID of the application that includes the configuration profile
     #   you want to get.
@@ -1641,17 +1441,6 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application: "StringWithLengthBetween1And64", # required
-    #         environment: "StringWithLengthBetween1And64", # required
-    #         configuration: "StringWithLengthBetween1And64", # required
-    #         client_id: "StringWithLengthBetween1And64", # required
-    #         client_configuration_version: "Version",
-    #       }
-    #
     # @!attribute [rw] application
     #   The application to get. Specify either the application name or the
     #   application ID.
@@ -1710,15 +1499,6 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDeploymentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "Id", # required
-    #         environment_id: "Id", # required
-    #         deployment_number: 1, # required
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The ID of the application that includes the deployment you want to
     #   get.
@@ -1743,13 +1523,6 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDeploymentStrategyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         deployment_strategy_id: "DeploymentStrategyId", # required
-    #       }
-    #
     # @!attribute [rw] deployment_strategy_id
     #   The ID of the deployment strategy to get.
     #   @return [String]
@@ -1762,14 +1535,6 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetEnvironmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "Id", # required
-    #         environment_id: "Id", # required
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The ID of the application that includes the environment you want to
     #   get.
@@ -1788,13 +1553,6 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetExtensionAssociationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         extension_association_id: "Id", # required
-    #       }
-    #
     # @!attribute [rw] extension_association_id
     #   The extension association ID to get.
     #   @return [String]
@@ -1807,14 +1565,6 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetExtensionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         extension_identifier: "Identifier", # required
-    #         version_number: 1,
-    #       }
-    #
     # @!attribute [rw] extension_identifier
     #   The name, the ID, or the Amazon Resource Name (ARN) of the
     #   extension.
@@ -1834,15 +1584,6 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetHostedConfigurationVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "Id", # required
-    #         configuration_profile_id: "Id", # required
-    #         version_number: 1, # required
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The application ID.
     #   @return [String]
@@ -2015,14 +1756,6 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListApplicationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of items to return for this call. The call also
     #   returns a token that you can specify in a subsequent call to get the
@@ -2047,16 +1780,6 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListConfigurationProfilesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "Id", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         type: "ConfigurationProfileType",
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The application ID.
     #   @return [String]
@@ -2089,14 +1812,6 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDeploymentStrategiesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of items to return for this call. The call also
     #   returns a token that you can specify in a subsequent call to get the
@@ -2117,16 +1832,6 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDeploymentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "Id", # required
-    #         environment_id: "Id", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The application ID.
     #   @return [String]
@@ -2159,15 +1864,6 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEnvironmentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "Id", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The application ID.
     #   @return [String]
@@ -2193,17 +1889,6 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListExtensionAssociationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_identifier: "Arn",
-    #         extension_identifier: "Identifier",
-    #         extension_version_number: 1,
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] resource_identifier
     #   The ARN of an application, configuration profile, or environment.
     #   @return [String]
@@ -2240,15 +1925,6 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListExtensionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         name: "QueryName",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of items to return for this call. The call also
     #   returns a token that you can specify in a subsequent call to get the
@@ -2274,16 +1950,6 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListHostedConfigurationVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "Id", # required
-    #         configuration_profile_id: "Id", # required
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The application ID.
     #   @return [String]
@@ -2314,13 +1980,6 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The resource ARN.
     #   @return [String]
@@ -2334,14 +1993,6 @@ module Aws::AppConfig
     end
 
     # Amazon CloudWatch alarms to monitor during the deployment process.
-    #
-    # @note When making an API call, you may pass Monitor
-    #   data as a hash:
-    #
-    #       {
-    #         alarm_arn: "StringWithLengthBetween1And2048", # required
-    #         alarm_role_arn: "RoleArn",
-    #       }
     #
     # @!attribute [rw] alarm_arn
     #   Amazon Resource Name (ARN) of the Amazon CloudWatch alarm.
@@ -2370,14 +2021,6 @@ module Aws::AppConfig
     #
     #
     # [1]: https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html
-    #
-    # @note When making an API call, you may pass Parameter
-    #   data as a hash:
-    #
-    #       {
-    #         description: "Description",
-    #         required: false,
-    #       }
     #
     # @!attribute [rw] description
     #   Information about the parameter.
@@ -2467,21 +2110,6 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartDeploymentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "Id", # required
-    #         environment_id: "Id", # required
-    #         deployment_strategy_id: "DeploymentStrategyId", # required
-    #         configuration_profile_id: "Id", # required
-    #         configuration_version: "Version", # required
-    #         description: "Description",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The application ID.
     #   @return [String]
@@ -2526,15 +2154,6 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopDeploymentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "Id", # required
-    #         environment_id: "Id", # required
-    #         deployment_number: 1, # required
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The application ID.
     #   @return [String]
@@ -2557,16 +2176,6 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource for which to retrieve tags.
     #   @return [String]
@@ -2586,14 +2195,6 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource for which to remove tags.
     #   @return [String]
@@ -2611,15 +2212,6 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateApplicationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "Id", # required
-    #         name: "Name",
-    #         description: "Description",
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The application ID.
     #   @return [String]
@@ -2642,23 +2234,6 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateConfigurationProfileRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "Id", # required
-    #         configuration_profile_id: "Id", # required
-    #         name: "Name",
-    #         description: "Description",
-    #         retrieval_role_arn: "RoleArn",
-    #         validators: [
-    #           {
-    #             type: "JSON_SCHEMA", # required, accepts JSON_SCHEMA, LAMBDA
-    #             content: "StringWithLengthBetween0And32768", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The application ID.
     #   @return [String]
@@ -2697,18 +2272,6 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateDeploymentStrategyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         deployment_strategy_id: "DeploymentStrategyId", # required
-    #         description: "Description",
-    #         deployment_duration_in_minutes: 1,
-    #         final_bake_time_in_minutes: 1,
-    #         growth_factor: 1.0,
-    #         growth_type: "LINEAR", # accepts LINEAR, EXPONENTIAL
-    #       }
-    #
     # @!attribute [rw] deployment_strategy_id
     #   The deployment strategy ID.
     #   @return [String]
@@ -2776,22 +2339,6 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateEnvironmentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "Id", # required
-    #         environment_id: "Id", # required
-    #         name: "Name",
-    #         description: "Description",
-    #         monitors: [
-    #           {
-    #             alarm_arn: "StringWithLengthBetween1And2048", # required
-    #             alarm_role_arn: "RoleArn",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The application ID.
     #   @return [String]
@@ -2824,16 +2371,6 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateExtensionAssociationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         extension_association_id: "Id", # required
-    #         parameters: {
-    #           "Name" => "StringWithLengthBetween1And2048",
-    #         },
-    #       }
-    #
     # @!attribute [rw] extension_association_id
     #   The system-generated ID for the association.
     #   @return [String]
@@ -2851,31 +2388,6 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateExtensionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         extension_identifier: "Identifier", # required
-    #         description: "Description",
-    #         actions: {
-    #           "PRE_CREATE_HOSTED_CONFIGURATION_VERSION" => [
-    #             {
-    #               name: "Name",
-    #               description: "Description",
-    #               uri: "Uri",
-    #               role_arn: "Arn",
-    #             },
-    #           ],
-    #         },
-    #         parameters: {
-    #           "Name" => {
-    #             description: "Description",
-    #             required: false,
-    #           },
-    #         },
-    #         version_number: 1,
-    #       }
-    #
     # @!attribute [rw] extension_identifier
     #   The name, the ID, or the Amazon Resource Name (ARN) of the
     #   extension.
@@ -2909,15 +2421,6 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ValidateConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         application_id: "Id", # required
-    #         configuration_profile_id: "Id", # required
-    #         configuration_version: "Version", # required
-    #       }
-    #
     # @!attribute [rw] application_id
     #   The application ID.
     #   @return [String]
@@ -2946,14 +2449,6 @@ module Aws::AppConfig
     # an Amazon Web Services Lambda function that runs against the
     # configuration. The configuration deployment or update can only proceed
     # when the configuration data is valid.
-    #
-    # @note When making an API call, you may pass Validator
-    #   data as a hash:
-    #
-    #       {
-    #         type: "JSON_SCHEMA", # required, accepts JSON_SCHEMA, LAMBDA
-    #         content: "StringWithLengthBetween0And32768", # required
-    #       }
     #
     # @!attribute [rw] type
     #   AppConfig supports validators of type `JSON_SCHEMA` and `LAMBDA`

@@ -12,16 +12,6 @@ module Aws::Kinesis
 
     # Represents the input for `AddTagsToStream`.
     #
-    # @note When making an API call, you may pass AddTagsToStreamInput
-    #   data as a hash:
-    #
-    #       {
-    #         stream_name: "StreamName", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] stream_name
     #   The name of the stream.
     #   @return [String]
@@ -146,17 +136,6 @@ module Aws::Kinesis
 
     # Represents the input for `CreateStream`.
     #
-    # @note When making an API call, you may pass CreateStreamInput
-    #   data as a hash:
-    #
-    #       {
-    #         stream_name: "StreamName", # required
-    #         shard_count: 1,
-    #         stream_mode_details: {
-    #           stream_mode: "PROVISIONED", # required, accepts PROVISIONED, ON_DEMAND
-    #         },
-    #       }
-    #
     # @!attribute [rw] stream_name
     #   A name to identify the stream. The stream name is scoped to the
     #   Amazon Web Services account used by the application that creates the
@@ -191,14 +170,6 @@ module Aws::Kinesis
 
     # Represents the input for DecreaseStreamRetentionPeriod.
     #
-    # @note When making an API call, you may pass DecreaseStreamRetentionPeriodInput
-    #   data as a hash:
-    #
-    #       {
-    #         stream_name: "StreamName", # required
-    #         retention_period_hours: 1, # required
-    #       }
-    #
     # @!attribute [rw] stream_name
     #   The name of the stream to modify.
     #   @return [String]
@@ -219,14 +190,6 @@ module Aws::Kinesis
 
     # Represents the input for DeleteStream.
     #
-    # @note When making an API call, you may pass DeleteStreamInput
-    #   data as a hash:
-    #
-    #       {
-    #         stream_name: "StreamName", # required
-    #         enforce_consumer_deletion: false,
-    #       }
-    #
     # @!attribute [rw] stream_name
     #   The name of the stream to delete.
     #   @return [String]
@@ -246,15 +209,6 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeregisterStreamConsumerInput
-    #   data as a hash:
-    #
-    #       {
-    #         stream_arn: "StreamARN",
-    #         consumer_name: "ConsumerName",
-    #         consumer_arn: "ConsumerARN",
-    #       }
-    #
     # @!attribute [rw] stream_arn
     #   The ARN of the Kinesis data stream that the consumer is registered
     #   with. For more information, see [Amazon Resource Names (ARNs) and
@@ -288,8 +242,6 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeLimitsInput AWS API Documentation
     #
     class DescribeLimitsInput < Aws::EmptyStructure; end
@@ -322,15 +274,6 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeStreamConsumerInput
-    #   data as a hash:
-    #
-    #       {
-    #         stream_arn: "StreamARN",
-    #         consumer_name: "ConsumerName",
-    #         consumer_arn: "ConsumerARN",
-    #       }
-    #
     # @!attribute [rw] stream_arn
     #   The ARN of the Kinesis data stream that the consumer is registered
     #   with. For more information, see [Amazon Resource Names (ARNs) and
@@ -373,15 +316,6 @@ module Aws::Kinesis
     end
 
     # Represents the input for `DescribeStream`.
-    #
-    # @note When making an API call, you may pass DescribeStreamInput
-    #   data as a hash:
-    #
-    #       {
-    #         stream_name: "StreamName", # required
-    #         limit: 1,
-    #         exclusive_start_shard_id: "ShardId",
-    #       }
     #
     # @!attribute [rw] stream_name
     #   The name of the stream to describe.
@@ -431,13 +365,6 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeStreamSummaryInput
-    #   data as a hash:
-    #
-    #       {
-    #         stream_name: "StreamName", # required
-    #       }
-    #
     # @!attribute [rw] stream_name
     #   The name of the stream to describe.
     #   @return [String]
@@ -463,14 +390,6 @@ module Aws::Kinesis
     end
 
     # Represents the input for DisableEnhancedMonitoring.
-    #
-    # @note When making an API call, you may pass DisableEnhancedMonitoringInput
-    #   data as a hash:
-    #
-    #       {
-    #         stream_name: "StreamName", # required
-    #         shard_level_metrics: ["IncomingBytes"], # required, accepts IncomingBytes, IncomingRecords, OutgoingBytes, OutgoingRecords, WriteProvisionedThroughputExceeded, ReadProvisionedThroughputExceeded, IteratorAgeMilliseconds, ALL
-    #       }
     #
     # @!attribute [rw] stream_name
     #   The name of the Kinesis data stream for which to disable enhanced
@@ -518,14 +437,6 @@ module Aws::Kinesis
     end
 
     # Represents the input for EnableEnhancedMonitoring.
-    #
-    # @note When making an API call, you may pass EnableEnhancedMonitoringInput
-    #   data as a hash:
-    #
-    #       {
-    #         stream_name: "StreamName", # required
-    #         shard_level_metrics: ["IncomingBytes"], # required, accepts IncomingBytes, IncomingRecords, OutgoingBytes, OutgoingRecords, WriteProvisionedThroughputExceeded, ReadProvisionedThroughputExceeded, IteratorAgeMilliseconds, ALL
-    #       }
     #
     # @!attribute [rw] stream_name
     #   The name of the stream for which to enable enhanced monitoring.
@@ -668,14 +579,6 @@ module Aws::Kinesis
 
     # Represents the input for GetRecords.
     #
-    # @note When making an API call, you may pass GetRecordsInput
-    #   data as a hash:
-    #
-    #       {
-    #         shard_iterator: "ShardIterator", # required
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] shard_iterator
     #   The position in the shard from which you want to start sequentially
     #   reading data records. A shard iterator specifies this position using
@@ -735,17 +638,6 @@ module Aws::Kinesis
     end
 
     # Represents the input for `GetShardIterator`.
-    #
-    # @note When making an API call, you may pass GetShardIteratorInput
-    #   data as a hash:
-    #
-    #       {
-    #         stream_name: "StreamName", # required
-    #         shard_id: "ShardId", # required
-    #         shard_iterator_type: "AT_SEQUENCE_NUMBER", # required, accepts AT_SEQUENCE_NUMBER, AFTER_SEQUENCE_NUMBER, TRIM_HORIZON, LATEST, AT_TIMESTAMP
-    #         starting_sequence_number: "SequenceNumber",
-    #         timestamp: Time.now,
-    #       }
     #
     # @!attribute [rw] stream_name
     #   The name of the Amazon Kinesis data stream.
@@ -846,14 +738,6 @@ module Aws::Kinesis
     end
 
     # Represents the input for IncreaseStreamRetentionPeriod.
-    #
-    # @note When making an API call, you may pass IncreaseStreamRetentionPeriodInput
-    #   data as a hash:
-    #
-    #       {
-    #         stream_name: "StreamName", # required
-    #         retention_period_hours: 1, # required
-    #       }
     #
     # @!attribute [rw] stream_name
     #   The name of the stream to modify.
@@ -1026,22 +910,6 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListShardsInput
-    #   data as a hash:
-    #
-    #       {
-    #         stream_name: "StreamName",
-    #         next_token: "NextToken",
-    #         exclusive_start_shard_id: "ShardId",
-    #         max_results: 1,
-    #         stream_creation_timestamp: Time.now,
-    #         shard_filter: {
-    #           type: "AFTER_SHARD_ID", # required, accepts AFTER_SHARD_ID, AT_TRIM_HORIZON, FROM_TRIM_HORIZON, AT_LATEST, AT_TIMESTAMP, FROM_TIMESTAMP
-    #           shard_id: "ShardId",
-    #           timestamp: Time.now,
-    #         },
-    #       }
-    #
     # @!attribute [rw] stream_name
     #   The name of the data stream whose shards you want to list.
     #
@@ -1180,16 +1048,6 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListStreamConsumersInput
-    #   data as a hash:
-    #
-    #       {
-    #         stream_arn: "StreamARN", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         stream_creation_timestamp: Time.now,
-    #       }
-    #
     # @!attribute [rw] stream_arn
     #   The ARN of the Kinesis data stream for which you want to list the
     #   registered consumers. For more information, see [Amazon Resource
@@ -1292,14 +1150,6 @@ module Aws::Kinesis
 
     # Represents the input for `ListStreams`.
     #
-    # @note When making an API call, you may pass ListStreamsInput
-    #   data as a hash:
-    #
-    #       {
-    #         limit: 1,
-    #         exclusive_start_stream_name: "StreamName",
-    #       }
-    #
     # @!attribute [rw] limit
     #   The maximum number of streams to list. The default value is 100. If
     #   you specify a value greater than 100, at most 100 results are
@@ -1340,15 +1190,6 @@ module Aws::Kinesis
     end
 
     # Represents the input for `ListTagsForStream`.
-    #
-    # @note When making an API call, you may pass ListTagsForStreamInput
-    #   data as a hash:
-    #
-    #       {
-    #         stream_name: "StreamName", # required
-    #         exclusive_start_tag_key: "TagKey",
-    #         limit: 1,
-    #       }
     #
     # @!attribute [rw] stream_name
     #   The name of the stream.
@@ -1401,15 +1242,6 @@ module Aws::Kinesis
 
     # Represents the input for `MergeShards`.
     #
-    # @note When making an API call, you may pass MergeShardsInput
-    #   data as a hash:
-    #
-    #       {
-    #         stream_name: "StreamName", # required
-    #         shard_to_merge: "ShardId", # required
-    #         adjacent_shard_to_merge: "ShardId", # required
-    #       }
-    #
     # @!attribute [rw] stream_name
     #   The name of the stream for the merge.
     #   @return [String]
@@ -1458,17 +1290,6 @@ module Aws::Kinesis
     end
 
     # Represents the input for `PutRecord`.
-    #
-    # @note When making an API call, you may pass PutRecordInput
-    #   data as a hash:
-    #
-    #       {
-    #         stream_name: "StreamName", # required
-    #         data: "data", # required
-    #         partition_key: "PartitionKey", # required
-    #         explicit_hash_key: "HashKey",
-    #         sequence_number_for_ordering: "SequenceNumber",
-    #       }
     #
     # @!attribute [rw] stream_name
     #   The name of the stream to put the data record into.
@@ -1554,20 +1375,6 @@ module Aws::Kinesis
 
     # A `PutRecords` request.
     #
-    # @note When making an API call, you may pass PutRecordsInput
-    #   data as a hash:
-    #
-    #       {
-    #         records: [ # required
-    #           {
-    #             data: "data", # required
-    #             explicit_hash_key: "HashKey",
-    #             partition_key: "PartitionKey", # required
-    #           },
-    #         ],
-    #         stream_name: "StreamName", # required
-    #       }
-    #
     # @!attribute [rw] records
     #   The records associated with the request.
     #   @return [Array<Types::PutRecordsRequestEntry>]
@@ -1621,15 +1428,6 @@ module Aws::Kinesis
     end
 
     # Represents the output for `PutRecords`.
-    #
-    # @note When making an API call, you may pass PutRecordsRequestEntry
-    #   data as a hash:
-    #
-    #       {
-    #         data: "data", # required
-    #         explicit_hash_key: "HashKey",
-    #         partition_key: "PartitionKey", # required
-    #       }
     #
     # @!attribute [rw] data
     #   The data blob to put into the record, which is base64-encoded when
@@ -1749,14 +1547,6 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RegisterStreamConsumerInput
-    #   data as a hash:
-    #
-    #       {
-    #         stream_arn: "StreamARN", # required
-    #         consumer_name: "ConsumerName", # required
-    #       }
-    #
     # @!attribute [rw] stream_arn
     #   The ARN of the Kinesis data stream that you want to register the
     #   consumer with. For more info, see [Amazon Resource Names (ARNs) and
@@ -1797,14 +1587,6 @@ module Aws::Kinesis
     end
 
     # Represents the input for `RemoveTagsFromStream`.
-    #
-    # @note When making an API call, you may pass RemoveTagsFromStreamInput
-    #   data as a hash:
-    #
-    #       {
-    #         stream_name: "StreamName", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
     #
     # @!attribute [rw] stream_name
     #   The name of the stream.
@@ -1914,15 +1696,6 @@ module Aws::Kinesis
     # The request parameter used to filter out the response of the
     # `ListShards` API.
     #
-    # @note When making an API call, you may pass ShardFilter
-    #   data as a hash:
-    #
-    #       {
-    #         type: "AFTER_SHARD_ID", # required, accepts AFTER_SHARD_ID, AT_TRIM_HORIZON, FROM_TRIM_HORIZON, AT_LATEST, AT_TIMESTAMP, FROM_TIMESTAMP
-    #         shard_id: "ShardId",
-    #         timestamp: Time.now,
-    #       }
-    #
     # @!attribute [rw] type
     #   The shard type specified in the `ShardFilter` parameter. This is a
     #   required property of the `ShardFilter` parameter.
@@ -1980,15 +1753,6 @@ module Aws::Kinesis
 
     # Represents the input for `SplitShard`.
     #
-    # @note When making an API call, you may pass SplitShardInput
-    #   data as a hash:
-    #
-    #       {
-    #         stream_name: "StreamName", # required
-    #         shard_to_split: "ShardId", # required
-    #         new_starting_hash_key: "HashKey", # required
-    #       }
-    #
     # @!attribute [rw] stream_name
     #   The name of the stream for the shard split.
     #   @return [String]
@@ -2018,15 +1782,6 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartStreamEncryptionInput
-    #   data as a hash:
-    #
-    #       {
-    #         stream_name: "StreamName", # required
-    #         encryption_type: "NONE", # required, accepts NONE, KMS
-    #         key_id: "KeyId", # required
-    #       }
-    #
     # @!attribute [rw] stream_name
     #   The name of the stream for which to start encrypting records.
     #   @return [String]
@@ -2069,15 +1824,6 @@ module Aws::Kinesis
 
     # The starting position in the data stream from which to start
     # streaming.
-    #
-    # @note When making an API call, you may pass StartingPosition
-    #   data as a hash:
-    #
-    #       {
-    #         type: "AT_SEQUENCE_NUMBER", # required, accepts AT_SEQUENCE_NUMBER, AFTER_SEQUENCE_NUMBER, TRIM_HORIZON, LATEST, AT_TIMESTAMP
-    #         sequence_number: "SequenceNumber",
-    #         timestamp: Time.now,
-    #       }
     #
     # @!attribute [rw] type
     #   You can set the starting position to one of the following values:
@@ -2127,15 +1873,6 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopStreamEncryptionInput
-    #   data as a hash:
-    #
-    #       {
-    #         stream_name: "StreamName", # required
-    #         encryption_type: "NONE", # required, accepts NONE, KMS
-    #         key_id: "KeyId", # required
-    #       }
-    #
     # @!attribute [rw] stream_name
     #   The name of the stream on which to stop encrypting records.
     #   @return [String]
@@ -2393,13 +2130,6 @@ module Aws::Kinesis
     # **on-demand** capacity mode and a **provisioned** capacity mode for
     # your data streams.
     #
-    # @note When making an API call, you may pass StreamModeDetails
-    #   data as a hash:
-    #
-    #       {
-    #         stream_mode: "PROVISIONED", # required, accepts PROVISIONED, ON_DEMAND
-    #       }
-    #
     # @!attribute [rw] stream_mode
     #   Specifies the capacity mode to which you want to set your data
     #   stream. Currently, in Kinesis Data Streams, you can choose between
@@ -2453,19 +2183,6 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SubscribeToShardInput
-    #   data as a hash:
-    #
-    #       {
-    #         consumer_arn: "ConsumerARN", # required
-    #         shard_id: "ShardId", # required
-    #         starting_position: { # required
-    #           type: "AT_SEQUENCE_NUMBER", # required, accepts AT_SEQUENCE_NUMBER, AFTER_SEQUENCE_NUMBER, TRIM_HORIZON, LATEST, AT_TIMESTAMP
-    #           sequence_number: "SequenceNumber",
-    #           timestamp: Time.now,
-    #         },
-    #       }
-    #
     # @!attribute [rw] consumer_arn
     #   For this parameter, use the value you obtained when you called
     #   RegisterStreamConsumer.
@@ -2527,15 +2244,6 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateShardCountInput
-    #   data as a hash:
-    #
-    #       {
-    #         stream_name: "StreamName", # required
-    #         target_shard_count: 1, # required
-    #         scaling_type: "UNIFORM_SCALING", # required, accepts UNIFORM_SCALING
-    #       }
-    #
     # @!attribute [rw] stream_name
     #   The name of the stream.
     #   @return [String]
@@ -2593,16 +2301,6 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateStreamModeInput
-    #   data as a hash:
-    #
-    #       {
-    #         stream_arn: "StreamARN", # required
-    #         stream_mode_details: { # required
-    #           stream_mode: "PROVISIONED", # required, accepts PROVISIONED, ON_DEMAND
-    #         },
-    #       }
-    #
     # @!attribute [rw] stream_arn
     #   Specifies the ARN of the data stream whose capacity mode you want to
     #   update.

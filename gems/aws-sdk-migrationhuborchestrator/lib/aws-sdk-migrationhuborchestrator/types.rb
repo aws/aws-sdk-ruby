@@ -23,30 +23,6 @@ module Aws::MigrationHubOrchestrator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateMigrationWorkflowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "CreateMigrationWorkflowRequestNameString", # required
-    #         description: "CreateMigrationWorkflowRequestDescriptionString",
-    #         template_id: "CreateMigrationWorkflowRequestTemplateIdString", # required
-    #         application_configuration_id: "CreateMigrationWorkflowRequestApplicationConfigurationIdString", # required
-    #         input_parameters: { # required
-    #           "StepInputParametersKey" => {
-    #             integer_value: 1,
-    #             string_value: "StringValue",
-    #             list_of_strings_value: ["StringListMember"],
-    #             map_of_string_value: {
-    #               "StringMapKey" => "StringMapValue",
-    #             },
-    #           },
-    #         },
-    #         step_targets: ["StringListMember"],
-    #         tags: {
-    #           "StringMapKey" => "StringMapValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the migration workflow.
     #   @return [String]
@@ -153,17 +129,6 @@ module Aws::MigrationHubOrchestrator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateWorkflowStepGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workflow_id: "MigrationWorkflowId", # required
-    #         name: "StepGroupName", # required
-    #         description: "StepGroupDescription",
-    #         next: ["StringListMember"],
-    #         previous: ["StringListMember"],
-    #       }
-    #
     # @!attribute [rw] workflow_id
     #   The ID of the migration workflow that will contain the step group.
     #   @return [String]
@@ -243,45 +208,6 @@ module Aws::MigrationHubOrchestrator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateWorkflowStepRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "MigrationWorkflowName", # required
-    #         step_group_id: "StepGroupId", # required
-    #         workflow_id: "MigrationWorkflowId", # required
-    #         step_action_type: "MANUAL", # required, accepts MANUAL, AUTOMATED
-    #         description: "MigrationWorkflowDescription",
-    #         workflow_step_automation_configuration: {
-    #           script_location_s3_bucket: "S3Bucket",
-    #           script_location_s3_key: {
-    #             linux: "S3Key",
-    #             windows: "S3Key",
-    #           },
-    #           command: {
-    #             linux: "String",
-    #             windows: "String",
-    #           },
-    #           run_environment: "AWS", # accepts AWS, ONPREMISE
-    #           target_type: "SINGLE", # accepts SINGLE, ALL, NONE
-    #         },
-    #         step_target: ["StringListMember"],
-    #         outputs: [
-    #           {
-    #             name: "WorkflowStepOutputName",
-    #             data_type: "STRING", # accepts STRING, INTEGER, STRINGLIST, STRINGMAP
-    #             required: false,
-    #             value: {
-    #               integer_value: 1,
-    #               string_value: "StringValue",
-    #               list_of_string_value: ["StringListMember"],
-    #             },
-    #           },
-    #         ],
-    #         previous: ["StringListMember"],
-    #         next: ["StringListMember"],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the step.
     #   @return [String]
@@ -368,13 +294,6 @@ module Aws::MigrationHubOrchestrator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteMigrationWorkflowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "MigrationWorkflowId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the migration workflow you want to delete.
     #   @return [String]
@@ -409,14 +328,6 @@ module Aws::MigrationHubOrchestrator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteWorkflowStepGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workflow_id: "MigrationWorkflowId", # required
-    #         id: "StepGroupId", # required
-    #       }
-    #
     # @!attribute [rw] workflow_id
     #   The ID of the migration workflow.
     #   @return [String]
@@ -438,15 +349,6 @@ module Aws::MigrationHubOrchestrator
     #
     class DeleteWorkflowStepGroupResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteWorkflowStepRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "StepId", # required
-    #         step_group_id: "StepGroupId", # required
-    #         workflow_id: "MigrationWorkflowId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the step you want to delete.
     #   @return [String]
@@ -473,13 +375,6 @@ module Aws::MigrationHubOrchestrator
     #
     class DeleteWorkflowStepResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass GetMigrationWorkflowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "MigrationWorkflowId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the migration workflow.
     #   @return [String]
@@ -601,13 +496,6 @@ module Aws::MigrationHubOrchestrator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetMigrationWorkflowTemplateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "TemplateId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the template.
     #   @return [String]
@@ -662,14 +550,6 @@ module Aws::MigrationHubOrchestrator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetTemplateStepGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         template_id: "TemplateId", # required
-    #         id: "StepGroupId", # required
-    #       }
-    #
     # @!attribute [rw] template_id
     #   The ID of the template.
     #   @return [String]
@@ -744,15 +624,6 @@ module Aws::MigrationHubOrchestrator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetTemplateStepRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "StepId", # required
-    #         template_id: "TemplateId", # required
-    #         step_group_id: "StepGroupId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the step.
     #   @return [String]
@@ -839,14 +710,6 @@ module Aws::MigrationHubOrchestrator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetWorkflowStepGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "StepGroupId", # required
-    #         workflow_id: "MigrationWorkflowId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the step group.
     #   @return [String]
@@ -931,15 +794,6 @@ module Aws::MigrationHubOrchestrator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetWorkflowStepRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workflow_id: "MigrationWorkflowId", # required
-    #         step_group_id: "StepGroupId", # required
-    #         id: "StepId", # required
-    #       }
-    #
     # @!attribute [rw] workflow_id
     #   The ID of the migration workflow.
     #   @return [String]
@@ -1089,15 +943,6 @@ module Aws::MigrationHubOrchestrator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListMigrationWorkflowTemplatesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         name: "TemplateName",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results that can be returned.
     #   @return [Integer]
@@ -1137,18 +982,6 @@ module Aws::MigrationHubOrchestrator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListMigrationWorkflowsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         template_id: "TemplateId",
-    #         ads_application_configuration_name: "ApplicationConfigurationName",
-    #         status: "CREATING", # accepts CREATING, NOT_STARTED, CREATION_FAILED, STARTING, IN_PROGRESS, WORKFLOW_FAILED, PAUSED, PAUSING, PAUSING_FAILED, USER_ATTENTION_REQUIRED, DELETING, DELETION_FAILED, DELETED, COMPLETED
-    #         name: "String",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results that can be returned.
     #   @return [Integer]
@@ -1204,14 +1037,6 @@ module Aws::MigrationHubOrchestrator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPluginsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of plugins that can be returned.
     #   @return [Integer]
@@ -1246,13 +1071,6 @@ module Aws::MigrationHubOrchestrator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -1277,15 +1095,6 @@ module Aws::MigrationHubOrchestrator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTemplateStepGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         template_id: "TemplateId", # required
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results that can be returned.
     #   @return [Integer]
@@ -1325,16 +1134,6 @@ module Aws::MigrationHubOrchestrator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTemplateStepsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #         template_id: "TemplateId", # required
-    #         step_group_id: "StepGroupId", # required
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results that can be returned.
     #   @return [Integer]
@@ -1379,15 +1178,6 @@ module Aws::MigrationHubOrchestrator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListWorkflowStepGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         workflow_id: "MigrationWorkflowId", # required
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The pagination token.
     #   @return [String]
@@ -1427,16 +1217,6 @@ module Aws::MigrationHubOrchestrator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListWorkflowStepsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #         workflow_id: "MigrationWorkflowId", # required
-    #         step_group_id: "StepGroupId", # required
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The pagination token.
     #   @return [String]
@@ -1543,14 +1323,6 @@ module Aws::MigrationHubOrchestrator
 
     # Command to be run on a particular operating system.
     #
-    # @note When making an API call, you may pass PlatformCommand
-    #   data as a hash:
-    #
-    #       {
-    #         linux: "String",
-    #         windows: "String",
-    #       }
-    #
     # @!attribute [rw] linux
     #   Command for Linux.
     #   @return [String]
@@ -1569,14 +1341,6 @@ module Aws::MigrationHubOrchestrator
     end
 
     # The script location for a particular operating system.
-    #
-    # @note When making an API call, you may pass PlatformScriptKey
-    #   data as a hash:
-    #
-    #       {
-    #         linux: "S3Key",
-    #         windows: "S3Key",
-    #       }
     #
     # @!attribute [rw] linux
     #   The script location for Linux.
@@ -1647,15 +1411,6 @@ module Aws::MigrationHubOrchestrator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RetryWorkflowStepRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workflow_id: "MigrationWorkflowId", # required
-    #         step_group_id: "StepGroupId", # required
-    #         id: "StepId", # required
-    #       }
-    #
     # @!attribute [rw] workflow_id
     #   The ID of the migration workflow.
     #   @return [String]
@@ -1705,13 +1460,6 @@ module Aws::MigrationHubOrchestrator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartMigrationWorkflowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "MigrationWorkflowId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the migration workflow.
     #   @return [String]
@@ -1794,10 +1542,6 @@ module Aws::MigrationHubOrchestrator
     # workflow. The key value pairs will differ based on your selection of
     # the template.
     #
-    # @note StepInput is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note StepInput is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of StepInput corresponding to the set member.
-    #
     # @!attribute [rw] integer_value
     #   The value of the integer.
     #   @return [Integer]
@@ -1857,13 +1601,6 @@ module Aws::MigrationHubOrchestrator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopMigrationWorkflowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "MigrationWorkflowId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the migration workflow.
     #   @return [String]
@@ -1908,16 +1645,6 @@ module Aws::MigrationHubOrchestrator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource to which you want to
     #   add tags.
@@ -2111,14 +1838,6 @@ module Aws::MigrationHubOrchestrator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource from which you want
     #   to remove tags.
@@ -2141,26 +1860,6 @@ module Aws::MigrationHubOrchestrator
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateMigrationWorkflowRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "MigrationWorkflowId", # required
-    #         name: "UpdateMigrationWorkflowRequestNameString",
-    #         description: "UpdateMigrationWorkflowRequestDescriptionString",
-    #         input_parameters: {
-    #           "StepInputParametersKey" => {
-    #             integer_value: 1,
-    #             string_value: "StringValue",
-    #             list_of_strings_value: ["StringListMember"],
-    #             map_of_string_value: {
-    #               "StringMapKey" => "StringMapValue",
-    #             },
-    #           },
-    #         },
-    #         step_targets: ["StringListMember"],
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the migration workflow.
     #   @return [String]
@@ -2261,18 +1960,6 @@ module Aws::MigrationHubOrchestrator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateWorkflowStepGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         workflow_id: "MigrationWorkflowId", # required
-    #         id: "StepGroupId", # required
-    #         name: "StepGroupName",
-    #         description: "StepGroupDescription",
-    #         next: ["StringListMember"],
-    #         previous: ["StringListMember"],
-    #       }
-    #
     # @!attribute [rw] workflow_id
     #   The ID of the migration workflow.
     #   @return [String]
@@ -2357,47 +2044,6 @@ module Aws::MigrationHubOrchestrator
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateWorkflowStepRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "StepId", # required
-    #         step_group_id: "StepGroupId", # required
-    #         workflow_id: "MigrationWorkflowId", # required
-    #         name: "StepName",
-    #         description: "StepDescription",
-    #         step_action_type: "MANUAL", # accepts MANUAL, AUTOMATED
-    #         workflow_step_automation_configuration: {
-    #           script_location_s3_bucket: "S3Bucket",
-    #           script_location_s3_key: {
-    #             linux: "S3Key",
-    #             windows: "S3Key",
-    #           },
-    #           command: {
-    #             linux: "String",
-    #             windows: "String",
-    #           },
-    #           run_environment: "AWS", # accepts AWS, ONPREMISE
-    #           target_type: "SINGLE", # accepts SINGLE, ALL, NONE
-    #         },
-    #         step_target: ["StringListMember"],
-    #         outputs: [
-    #           {
-    #             name: "WorkflowStepOutputName",
-    #             data_type: "STRING", # accepts STRING, INTEGER, STRINGLIST, STRINGMAP
-    #             required: false,
-    #             value: {
-    #               integer_value: 1,
-    #               string_value: "StringValue",
-    #               list_of_string_value: ["StringListMember"],
-    #             },
-    #           },
-    #         ],
-    #         previous: ["StringListMember"],
-    #         next: ["StringListMember"],
-    #         status: "AWAITING_DEPENDENCIES", # accepts AWAITING_DEPENDENCIES, READY, IN_PROGRESS, COMPLETED, FAILED, PAUSED, USER_ATTENTION_REQUIRED
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the step.
     #   @return [String]
@@ -2511,23 +2157,6 @@ module Aws::MigrationHubOrchestrator
 
     # The custom script to run tests on source or target environments.
     #
-    # @note When making an API call, you may pass WorkflowStepAutomationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         script_location_s3_bucket: "S3Bucket",
-    #         script_location_s3_key: {
-    #           linux: "S3Key",
-    #           windows: "S3Key",
-    #         },
-    #         command: {
-    #           linux: "String",
-    #           windows: "String",
-    #         },
-    #         run_environment: "AWS", # accepts AWS, ONPREMISE
-    #         target_type: "SINGLE", # accepts SINGLE, ALL, NONE
-    #       }
-    #
     # @!attribute [rw] script_location_s3_bucket
     #   The Amazon S3 bucket where the script is located.
     #   @return [String]
@@ -2601,20 +2230,6 @@ module Aws::MigrationHubOrchestrator
 
     # The output of a step.
     #
-    # @note When making an API call, you may pass WorkflowStepOutput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "WorkflowStepOutputName",
-    #         data_type: "STRING", # accepts STRING, INTEGER, STRINGLIST, STRINGMAP
-    #         required: false,
-    #         value: {
-    #           integer_value: 1,
-    #           string_value: "StringValue",
-    #           list_of_string_value: ["StringListMember"],
-    #         },
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the step.
     #   @return [String]
@@ -2643,10 +2258,6 @@ module Aws::MigrationHubOrchestrator
     end
 
     # A structure to hold multiple values of an output.
-    #
-    # @note WorkflowStepOutputUnion is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note WorkflowStepOutputUnion is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of WorkflowStepOutputUnion corresponding to the set member.
     #
     # @!attribute [rw] integer_value
     #   The integer value.

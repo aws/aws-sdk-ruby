@@ -13,26 +13,6 @@ module Aws::DLM
     # **\[Event-based policies only\]** Specifies an action for an
     # event-based policy.
     #
-    # @note When making an API call, you may pass Action
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ActionName", # required
-    #         cross_region_copy: [ # required
-    #           {
-    #             target: "Target", # required
-    #             encryption_configuration: { # required
-    #               encrypted: false, # required
-    #               cmk_arn: "CmkArn",
-    #             },
-    #             retain_rule: {
-    #               interval: 1,
-    #               interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   A descriptive name for the action.
     #   @return [String]
@@ -52,17 +32,6 @@ module Aws::DLM
 
     # **\[Snapshot policies only\]** Specifies information about the archive
     # storage tier retention period.
-    #
-    # @note When making an API call, you may pass ArchiveRetainRule
-    #   data as a hash:
-    #
-    #       {
-    #         retention_archive_tier: { # required
-    #           count: 1,
-    #           interval: 1,
-    #           interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
-    #         },
-    #       }
     #
     # @!attribute [rw] retention_archive_tier
     #   Information about retention period in the Amazon EBS Snapshots
@@ -85,19 +54,6 @@ module Aws::DLM
     # **\[Snapshot policies only\]** Specifies a snapshot archiving rule for
     # a schedule.
     #
-    # @note When making an API call, you may pass ArchiveRule
-    #   data as a hash:
-    #
-    #       {
-    #         retain_rule: { # required
-    #           retention_archive_tier: { # required
-    #             count: 1,
-    #             interval: 1,
-    #             interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] retain_rule
     #   Information about the retention period for the snapshot archiving
     #   rule.
@@ -111,139 +67,6 @@ module Aws::DLM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateLifecyclePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         execution_role_arn: "ExecutionRoleArn", # required
-    #         description: "PolicyDescription", # required
-    #         state: "ENABLED", # required, accepts ENABLED, DISABLED
-    #         policy_details: { # required
-    #           policy_type: "EBS_SNAPSHOT_MANAGEMENT", # accepts EBS_SNAPSHOT_MANAGEMENT, IMAGE_MANAGEMENT, EVENT_BASED_POLICY
-    #           resource_types: ["VOLUME"], # accepts VOLUME, INSTANCE
-    #           resource_locations: ["CLOUD"], # accepts CLOUD, OUTPOST
-    #           target_tags: [
-    #             {
-    #               key: "String", # required
-    #               value: "String", # required
-    #             },
-    #           ],
-    #           schedules: [
-    #             {
-    #               name: "ScheduleName",
-    #               copy_tags: false,
-    #               tags_to_add: [
-    #                 {
-    #                   key: "String", # required
-    #                   value: "String", # required
-    #                 },
-    #               ],
-    #               variable_tags: [
-    #                 {
-    #                   key: "String", # required
-    #                   value: "String", # required
-    #                 },
-    #               ],
-    #               create_rule: {
-    #                 location: "CLOUD", # accepts CLOUD, OUTPOST_LOCAL
-    #                 interval: 1,
-    #                 interval_unit: "HOURS", # accepts HOURS
-    #                 times: ["Time"],
-    #                 cron_expression: "CronExpression",
-    #               },
-    #               retain_rule: {
-    #                 count: 1,
-    #                 interval: 1,
-    #                 interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
-    #               },
-    #               fast_restore_rule: {
-    #                 count: 1,
-    #                 interval: 1,
-    #                 interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
-    #                 availability_zones: ["AvailabilityZone"], # required
-    #               },
-    #               cross_region_copy_rules: [
-    #                 {
-    #                   target_region: "TargetRegion",
-    #                   target: "Target",
-    #                   encrypted: false, # required
-    #                   cmk_arn: "CmkArn",
-    #                   copy_tags: false,
-    #                   retain_rule: {
-    #                     interval: 1,
-    #                     interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
-    #                   },
-    #                   deprecate_rule: {
-    #                     interval: 1,
-    #                     interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
-    #                   },
-    #                 },
-    #               ],
-    #               share_rules: [
-    #                 {
-    #                   target_accounts: ["AwsAccountId"], # required
-    #                   unshare_interval: 1,
-    #                   unshare_interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
-    #                 },
-    #               ],
-    #               deprecate_rule: {
-    #                 count: 1,
-    #                 interval: 1,
-    #                 interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
-    #               },
-    #               archive_rule: {
-    #                 retain_rule: { # required
-    #                   retention_archive_tier: { # required
-    #                     count: 1,
-    #                     interval: 1,
-    #                     interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
-    #                   },
-    #                 },
-    #               },
-    #             },
-    #           ],
-    #           parameters: {
-    #             exclude_boot_volume: false,
-    #             no_reboot: false,
-    #             exclude_data_volume_tags: [
-    #               {
-    #                 key: "String", # required
-    #                 value: "String", # required
-    #               },
-    #             ],
-    #           },
-    #           event_source: {
-    #             type: "MANAGED_CWE", # required, accepts MANAGED_CWE
-    #             parameters: {
-    #               event_type: "shareSnapshot", # required, accepts shareSnapshot
-    #               snapshot_owner: ["AwsAccountId"], # required
-    #               description_regex: "DescriptionRegex", # required
-    #             },
-    #           },
-    #           actions: [
-    #             {
-    #               name: "ActionName", # required
-    #               cross_region_copy: [ # required
-    #                 {
-    #                   target: "Target", # required
-    #                   encryption_configuration: { # required
-    #                     encrypted: false, # required
-    #                     cmk_arn: "CmkArn",
-    #                   },
-    #                   retain_rule: {
-    #                     interval: 1,
-    #                     interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
-    #                   },
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] execution_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role used to run the
     #   operations specified by the lifecycle policy.
@@ -300,17 +123,6 @@ module Aws::DLM
     #   must specify a creation frequency of at least 28 days.
     #
     #  </note>
-    #
-    # @note When making an API call, you may pass CreateRule
-    #   data as a hash:
-    #
-    #       {
-    #         location: "CLOUD", # accepts CLOUD, OUTPOST_LOCAL
-    #         interval: 1,
-    #         interval_unit: "HOURS", # accepts HOURS
-    #         times: ["Time"],
-    #         cron_expression: "CronExpression",
-    #       }
     #
     # @!attribute [rw] location
     #   **\[Snapshot policies only\]** Specifies the destination for
@@ -374,21 +186,6 @@ module Aws::DLM
     #
     #  </note>
     #
-    # @note When making an API call, you may pass CrossRegionCopyAction
-    #   data as a hash:
-    #
-    #       {
-    #         target: "Target", # required
-    #         encryption_configuration: { # required
-    #           encrypted: false, # required
-    #           cmk_arn: "CmkArn",
-    #         },
-    #         retain_rule: {
-    #           interval: 1,
-    #           interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
-    #         },
-    #       }
-    #
     # @!attribute [rw] target
     #   The target Region.
     #   @return [String]
@@ -417,14 +214,6 @@ module Aws::DLM
     # **\[AMI policies only\]** Specifies an AMI deprecation rule for
     # cross-Region AMI copies created by an AMI policy.
     #
-    # @note When making an API call, you may pass CrossRegionCopyDeprecateRule
-    #   data as a hash:
-    #
-    #       {
-    #         interval: 1,
-    #         interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
-    #       }
-    #
     # @!attribute [rw] interval
     #   The period after which to deprecate the cross-Region AMI copies. The
     #   period must be less than or equal to the cross-Region AMI copy
@@ -451,14 +240,6 @@ module Aws::DLM
     # snapshot or event-based policies, or cross-Region AMI copies created
     # by AMI policies. After the retention period expires, the cross-Region
     # copy is deleted.
-    #
-    # @note When making an API call, you may pass CrossRegionCopyRetainRule
-    #   data as a hash:
-    #
-    #       {
-    #         interval: 1,
-    #         interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
-    #       }
     #
     # @!attribute [rw] interval
     #   The amount of time to retain a cross-Region snapshot or AMI copy.
@@ -488,25 +269,6 @@ module Aws::DLM
     # CrossRegionCopyAction.
     #
     #  </note>
-    #
-    # @note When making an API call, you may pass CrossRegionCopyRule
-    #   data as a hash:
-    #
-    #       {
-    #         target_region: "TargetRegion",
-    #         target: "Target",
-    #         encrypted: false, # required
-    #         cmk_arn: "CmkArn",
-    #         copy_tags: false,
-    #         retain_rule: {
-    #           interval: 1,
-    #           interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
-    #         },
-    #         deprecate_rule: {
-    #           interval: 1,
-    #           interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
-    #         },
-    #       }
     #
     # @!attribute [rw] target_region
     #   <note markdown="1"> Avoid using this parameter when creating new policies. Instead, use
@@ -568,13 +330,6 @@ module Aws::DLM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteLifecyclePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy_id: "PolicyId", # required
-    #       }
-    #
     # @!attribute [rw] policy_id
     #   The identifier of the lifecycle policy.
     #   @return [String]
@@ -597,15 +352,6 @@ module Aws::DLM
     # For age-based schedules, you must specify **Interval** and
     # **IntervalUnit**. For count-based schedules, you must specify
     # **Count**.
-    #
-    # @note When making an API call, you may pass DeprecateRule
-    #   data as a hash:
-    #
-    #       {
-    #         count: 1,
-    #         interval: 1,
-    #         interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
-    #       }
     #
     # @!attribute [rw] count
     #   If the schedule has a count-based retention rule, this parameter
@@ -639,14 +385,6 @@ module Aws::DLM
     # **\[Event-based policies only\]** Specifies the encryption settings
     # for cross-Region snapshot copies created by event-based policies.
     #
-    # @note When making an API call, you may pass EncryptionConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         encrypted: false, # required
-    #         cmk_arn: "CmkArn",
-    #       }
-    #
     # @!attribute [rw] encrypted
     #   To encrypt a copy of an unencrypted snapshot when encryption by
     #   default is not enabled, enable encryption using this parameter.
@@ -671,15 +409,6 @@ module Aws::DLM
 
     # **\[Event-based policies only\]** Specifies an event that activates an
     # event-based policy.
-    #
-    # @note When making an API call, you may pass EventParameters
-    #   data as a hash:
-    #
-    #       {
-    #         event_type: "shareSnapshot", # required, accepts shareSnapshot
-    #         snapshot_owner: ["AwsAccountId"], # required
-    #         description_regex: "DescriptionRegex", # required
-    #       }
     #
     # @!attribute [rw] event_type
     #   The type of event. Currently, only snapshot sharing events are
@@ -718,18 +447,6 @@ module Aws::DLM
     # **\[Event-based policies only\]** Specifies an event that activates an
     # event-based policy.
     #
-    # @note When making an API call, you may pass EventSource
-    #   data as a hash:
-    #
-    #       {
-    #         type: "MANAGED_CWE", # required, accepts MANAGED_CWE
-    #         parameters: {
-    #           event_type: "shareSnapshot", # required, accepts shareSnapshot
-    #           snapshot_owner: ["AwsAccountId"], # required
-    #           description_regex: "DescriptionRegex", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] type
     #   The source of the event. Currently only managed CloudWatch Events
     #   rules are supported.
@@ -752,16 +469,6 @@ module Aws::DLM
     # snapshot restore for snapshots created by snapshot policies. You can
     # enable fast snapshot restore based on either a count or a time
     # interval.
-    #
-    # @note When making an API call, you may pass FastRestoreRule
-    #   data as a hash:
-    #
-    #       {
-    #         count: 1,
-    #         interval: 1,
-    #         interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
-    #         availability_zones: ["AvailabilityZone"], # required
-    #       }
     #
     # @!attribute [rw] count
     #   The number of snapshots to be enabled with fast snapshot restore.
@@ -792,17 +499,6 @@ module Aws::DLM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLifecyclePoliciesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy_ids: ["PolicyId"],
-    #         state: "ENABLED", # accepts ENABLED, DISABLED, ERROR
-    #         resource_types: ["VOLUME"], # accepts VOLUME, INSTANCE
-    #         target_tags: ["TagFilter"],
-    #         tags_to_add: ["TagFilter"],
-    #       }
-    #
     # @!attribute [rw] policy_ids
     #   The identifiers of the data lifecycle policies.
     #   @return [Array<String>]
@@ -854,13 +550,6 @@ module Aws::DLM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLifecyclePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy_id: "PolicyId", # required
-    #       }
-    #
     # @!attribute [rw] policy_id
     #   The identifier of the lifecycle policy.
     #   @return [String]
@@ -1052,13 +741,6 @@ module Aws::DLM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "PolicyArn", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -1097,20 +779,6 @@ module Aws::DLM
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitor-dlm-cw-metrics.html
-    #
-    # @note When making an API call, you may pass Parameters
-    #   data as a hash:
-    #
-    #       {
-    #         exclude_boot_volume: false,
-    #         no_reboot: false,
-    #         exclude_data_volume_tags: [
-    #           {
-    #             key: "String", # required
-    #             value: "String", # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] exclude_boot_volume
     #   **\[Snapshot policies that target instances only\]** Indicates
@@ -1151,131 +819,6 @@ module Aws::DLM
 
     # **\[All policy types\]** Specifies the configuration of a lifecycle
     # policy.
-    #
-    # @note When making an API call, you may pass PolicyDetails
-    #   data as a hash:
-    #
-    #       {
-    #         policy_type: "EBS_SNAPSHOT_MANAGEMENT", # accepts EBS_SNAPSHOT_MANAGEMENT, IMAGE_MANAGEMENT, EVENT_BASED_POLICY
-    #         resource_types: ["VOLUME"], # accepts VOLUME, INSTANCE
-    #         resource_locations: ["CLOUD"], # accepts CLOUD, OUTPOST
-    #         target_tags: [
-    #           {
-    #             key: "String", # required
-    #             value: "String", # required
-    #           },
-    #         ],
-    #         schedules: [
-    #           {
-    #             name: "ScheduleName",
-    #             copy_tags: false,
-    #             tags_to_add: [
-    #               {
-    #                 key: "String", # required
-    #                 value: "String", # required
-    #               },
-    #             ],
-    #             variable_tags: [
-    #               {
-    #                 key: "String", # required
-    #                 value: "String", # required
-    #               },
-    #             ],
-    #             create_rule: {
-    #               location: "CLOUD", # accepts CLOUD, OUTPOST_LOCAL
-    #               interval: 1,
-    #               interval_unit: "HOURS", # accepts HOURS
-    #               times: ["Time"],
-    #               cron_expression: "CronExpression",
-    #             },
-    #             retain_rule: {
-    #               count: 1,
-    #               interval: 1,
-    #               interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
-    #             },
-    #             fast_restore_rule: {
-    #               count: 1,
-    #               interval: 1,
-    #               interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
-    #               availability_zones: ["AvailabilityZone"], # required
-    #             },
-    #             cross_region_copy_rules: [
-    #               {
-    #                 target_region: "TargetRegion",
-    #                 target: "Target",
-    #                 encrypted: false, # required
-    #                 cmk_arn: "CmkArn",
-    #                 copy_tags: false,
-    #                 retain_rule: {
-    #                   interval: 1,
-    #                   interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
-    #                 },
-    #                 deprecate_rule: {
-    #                   interval: 1,
-    #                   interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
-    #                 },
-    #               },
-    #             ],
-    #             share_rules: [
-    #               {
-    #                 target_accounts: ["AwsAccountId"], # required
-    #                 unshare_interval: 1,
-    #                 unshare_interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
-    #               },
-    #             ],
-    #             deprecate_rule: {
-    #               count: 1,
-    #               interval: 1,
-    #               interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
-    #             },
-    #             archive_rule: {
-    #               retain_rule: { # required
-    #                 retention_archive_tier: { # required
-    #                   count: 1,
-    #                   interval: 1,
-    #                   interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
-    #                 },
-    #               },
-    #             },
-    #           },
-    #         ],
-    #         parameters: {
-    #           exclude_boot_volume: false,
-    #           no_reboot: false,
-    #           exclude_data_volume_tags: [
-    #             {
-    #               key: "String", # required
-    #               value: "String", # required
-    #             },
-    #           ],
-    #         },
-    #         event_source: {
-    #           type: "MANAGED_CWE", # required, accepts MANAGED_CWE
-    #           parameters: {
-    #             event_type: "shareSnapshot", # required, accepts shareSnapshot
-    #             snapshot_owner: ["AwsAccountId"], # required
-    #             description_regex: "DescriptionRegex", # required
-    #           },
-    #         },
-    #         actions: [
-    #           {
-    #             name: "ActionName", # required
-    #             cross_region_copy: [ # required
-    #               {
-    #                 target: "Target", # required
-    #                 encryption_configuration: { # required
-    #                   encrypted: false, # required
-    #                   cmk_arn: "CmkArn",
-    #                 },
-    #                 retain_rule: {
-    #                   interval: 1,
-    #                   interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] policy_type
     #   **\[All policy types\]** The valid target resource types and actions
@@ -1417,15 +960,6 @@ module Aws::DLM
     #   CrossRegionCopyRule, then you must specify a retention interval of
     #   `1` day or more.
     #
-    # @note When making an API call, you may pass RetainRule
-    #   data as a hash:
-    #
-    #       {
-    #         count: 1,
-    #         interval: 1,
-    #         interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
-    #       }
-    #
     # @!attribute [rw] count
     #   The number of snapshots to retain for each volume, up to a maximum
     #   of 1000. For example if you want to retain a maximum of three
@@ -1477,15 +1011,6 @@ module Aws::DLM
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-ami-policy.html#dlm-archive
     #
-    # @note When making an API call, you may pass RetentionArchiveTier
-    #   data as a hash:
-    #
-    #       {
-    #         count: 1,
-    #         interval: 1,
-    #         interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
-    #       }
-    #
     # @!attribute [rw] count
     #   The maximum number of snapshots to retain in the archive storage
     #   tier for each volume. The count must ensure that each snapshot
@@ -1519,82 +1044,6 @@ module Aws::DLM
 
     # **\[Snapshot and AMI policies only\]** Specifies a schedule for a
     # snapshot or AMI lifecycle policy.
-    #
-    # @note When making an API call, you may pass Schedule
-    #   data as a hash:
-    #
-    #       {
-    #         name: "ScheduleName",
-    #         copy_tags: false,
-    #         tags_to_add: [
-    #           {
-    #             key: "String", # required
-    #             value: "String", # required
-    #           },
-    #         ],
-    #         variable_tags: [
-    #           {
-    #             key: "String", # required
-    #             value: "String", # required
-    #           },
-    #         ],
-    #         create_rule: {
-    #           location: "CLOUD", # accepts CLOUD, OUTPOST_LOCAL
-    #           interval: 1,
-    #           interval_unit: "HOURS", # accepts HOURS
-    #           times: ["Time"],
-    #           cron_expression: "CronExpression",
-    #         },
-    #         retain_rule: {
-    #           count: 1,
-    #           interval: 1,
-    #           interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
-    #         },
-    #         fast_restore_rule: {
-    #           count: 1,
-    #           interval: 1,
-    #           interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
-    #           availability_zones: ["AvailabilityZone"], # required
-    #         },
-    #         cross_region_copy_rules: [
-    #           {
-    #             target_region: "TargetRegion",
-    #             target: "Target",
-    #             encrypted: false, # required
-    #             cmk_arn: "CmkArn",
-    #             copy_tags: false,
-    #             retain_rule: {
-    #               interval: 1,
-    #               interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
-    #             },
-    #             deprecate_rule: {
-    #               interval: 1,
-    #               interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
-    #             },
-    #           },
-    #         ],
-    #         share_rules: [
-    #           {
-    #             target_accounts: ["AwsAccountId"], # required
-    #             unshare_interval: 1,
-    #             unshare_interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
-    #           },
-    #         ],
-    #         deprecate_rule: {
-    #           count: 1,
-    #           interval: 1,
-    #           interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
-    #         },
-    #         archive_rule: {
-    #           retain_rule: { # required
-    #             retention_archive_tier: { # required
-    #               count: 1,
-    #               interval: 1,
-    #               interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
-    #             },
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the schedule.
@@ -1690,15 +1139,6 @@ module Aws::DLM
     # **\[Snapshot policies only\]** Specifies a rule for sharing snapshots
     # across Amazon Web Services accounts.
     #
-    # @note When making an API call, you may pass ShareRule
-    #   data as a hash:
-    #
-    #       {
-    #         target_accounts: ["AwsAccountId"], # required
-    #         unshare_interval: 1,
-    #         unshare_interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
-    #       }
-    #
     # @!attribute [rw] target_accounts
     #   The IDs of the Amazon Web Services accounts with which to share the
     #   snapshots.
@@ -1725,14 +1165,6 @@ module Aws::DLM
 
     # Specifies a tag for a resource.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "String", # required
-    #         value: "String", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The tag key.
     #   @return [String]
@@ -1750,16 +1182,6 @@ module Aws::DLM
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "PolicyArn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -1781,14 +1203,6 @@ module Aws::DLM
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "PolicyArn", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -1810,137 +1224,6 @@ module Aws::DLM
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateLifecyclePolicyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         policy_id: "PolicyId", # required
-    #         execution_role_arn: "ExecutionRoleArn",
-    #         state: "ENABLED", # accepts ENABLED, DISABLED
-    #         description: "PolicyDescription",
-    #         policy_details: {
-    #           policy_type: "EBS_SNAPSHOT_MANAGEMENT", # accepts EBS_SNAPSHOT_MANAGEMENT, IMAGE_MANAGEMENT, EVENT_BASED_POLICY
-    #           resource_types: ["VOLUME"], # accepts VOLUME, INSTANCE
-    #           resource_locations: ["CLOUD"], # accepts CLOUD, OUTPOST
-    #           target_tags: [
-    #             {
-    #               key: "String", # required
-    #               value: "String", # required
-    #             },
-    #           ],
-    #           schedules: [
-    #             {
-    #               name: "ScheduleName",
-    #               copy_tags: false,
-    #               tags_to_add: [
-    #                 {
-    #                   key: "String", # required
-    #                   value: "String", # required
-    #                 },
-    #               ],
-    #               variable_tags: [
-    #                 {
-    #                   key: "String", # required
-    #                   value: "String", # required
-    #                 },
-    #               ],
-    #               create_rule: {
-    #                 location: "CLOUD", # accepts CLOUD, OUTPOST_LOCAL
-    #                 interval: 1,
-    #                 interval_unit: "HOURS", # accepts HOURS
-    #                 times: ["Time"],
-    #                 cron_expression: "CronExpression",
-    #               },
-    #               retain_rule: {
-    #                 count: 1,
-    #                 interval: 1,
-    #                 interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
-    #               },
-    #               fast_restore_rule: {
-    #                 count: 1,
-    #                 interval: 1,
-    #                 interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
-    #                 availability_zones: ["AvailabilityZone"], # required
-    #               },
-    #               cross_region_copy_rules: [
-    #                 {
-    #                   target_region: "TargetRegion",
-    #                   target: "Target",
-    #                   encrypted: false, # required
-    #                   cmk_arn: "CmkArn",
-    #                   copy_tags: false,
-    #                   retain_rule: {
-    #                     interval: 1,
-    #                     interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
-    #                   },
-    #                   deprecate_rule: {
-    #                     interval: 1,
-    #                     interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
-    #                   },
-    #                 },
-    #               ],
-    #               share_rules: [
-    #                 {
-    #                   target_accounts: ["AwsAccountId"], # required
-    #                   unshare_interval: 1,
-    #                   unshare_interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
-    #                 },
-    #               ],
-    #               deprecate_rule: {
-    #                 count: 1,
-    #                 interval: 1,
-    #                 interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
-    #               },
-    #               archive_rule: {
-    #                 retain_rule: { # required
-    #                   retention_archive_tier: { # required
-    #                     count: 1,
-    #                     interval: 1,
-    #                     interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
-    #                   },
-    #                 },
-    #               },
-    #             },
-    #           ],
-    #           parameters: {
-    #             exclude_boot_volume: false,
-    #             no_reboot: false,
-    #             exclude_data_volume_tags: [
-    #               {
-    #                 key: "String", # required
-    #                 value: "String", # required
-    #               },
-    #             ],
-    #           },
-    #           event_source: {
-    #             type: "MANAGED_CWE", # required, accepts MANAGED_CWE
-    #             parameters: {
-    #               event_type: "shareSnapshot", # required, accepts shareSnapshot
-    #               snapshot_owner: ["AwsAccountId"], # required
-    #               description_regex: "DescriptionRegex", # required
-    #             },
-    #           },
-    #           actions: [
-    #             {
-    #               name: "ActionName", # required
-    #               cross_region_copy: [ # required
-    #                 {
-    #                   target: "Target", # required
-    #                   encryption_configuration: { # required
-    #                     encrypted: false, # required
-    #                     cmk_arn: "CmkArn",
-    #                   },
-    #                   retain_rule: {
-    #                     interval: 1,
-    #                     interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
-    #                   },
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] policy_id
     #   The identifier of the lifecycle policy.
     #   @return [String]

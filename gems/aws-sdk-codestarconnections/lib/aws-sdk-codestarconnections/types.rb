@@ -78,21 +78,6 @@ module Aws::CodeStarconnections
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateConnectionInput
-    #   data as a hash:
-    #
-    #       {
-    #         provider_type: "Bitbucket", # accepts Bitbucket, GitHub, GitHubEnterpriseServer
-    #         connection_name: "ConnectionName", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         host_arn: "HostArn",
-    #       }
-    #
     # @!attribute [rw] provider_type
     #   The name of the external provider where your third-party code
     #   repository is configured.
@@ -146,27 +131,6 @@ module Aws::CodeStarconnections
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateHostInput
-    #   data as a hash:
-    #
-    #       {
-    #         name: "HostName", # required
-    #         provider_type: "Bitbucket", # required, accepts Bitbucket, GitHub, GitHubEnterpriseServer
-    #         provider_endpoint: "Url", # required
-    #         vpc_configuration: {
-    #           vpc_id: "VpcId", # required
-    #           subnet_ids: ["SubnetId"], # required
-    #           security_group_ids: ["SecurityGroupId"], # required
-    #           tls_certificate: "TlsCertificate",
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the host to be created. The name must be unique in the
     #   calling AWS account.
@@ -221,13 +185,6 @@ module Aws::CodeStarconnections
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteConnectionInput
-    #   data as a hash:
-    #
-    #       {
-    #         connection_arn: "ConnectionArn", # required
-    #       }
-    #
     # @!attribute [rw] connection_arn
     #   The Amazon Resource Name (ARN) of the connection to be deleted.
     #
@@ -248,13 +205,6 @@ module Aws::CodeStarconnections
     #
     class DeleteConnectionOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteHostInput
-    #   data as a hash:
-    #
-    #       {
-    #         host_arn: "HostArn", # required
-    #       }
-    #
     # @!attribute [rw] host_arn
     #   The Amazon Resource Name (ARN) of the host to be deleted.
     #   @return [String]
@@ -271,13 +221,6 @@ module Aws::CodeStarconnections
     #
     class DeleteHostOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass GetConnectionInput
-    #   data as a hash:
-    #
-    #       {
-    #         connection_arn: "ConnectionArn", # required
-    #       }
-    #
     # @!attribute [rw] connection_arn
     #   The Amazon Resource Name (ARN) of a connection.
     #   @return [String]
@@ -302,13 +245,6 @@ module Aws::CodeStarconnections
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetHostInput
-    #   data as a hash:
-    #
-    #       {
-    #         host_arn: "HostArn", # required
-    #       }
-    #
     # @!attribute [rw] host_arn
     #   The Amazon Resource Name (ARN) of the requested host.
     #   @return [String]
@@ -427,16 +363,6 @@ module Aws::CodeStarconnections
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListConnectionsInput
-    #   data as a hash:
-    #
-    #       {
-    #         provider_type_filter: "Bitbucket", # accepts Bitbucket, GitHub, GitHubEnterpriseServer
-    #         host_arn_filter: "HostArn",
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] provider_type_filter
     #   Filters the list of connections to those associated with a specified
     #   provider, such as Bitbucket.
@@ -490,14 +416,6 @@ module Aws::CodeStarconnections
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListHostsInput
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to return in a single call. To
     #   retrieve the remaining results, make another call with the returned
@@ -538,13 +456,6 @@ module Aws::CodeStarconnections
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource for which you want to
     #   get information about tags, if any.
@@ -602,14 +513,6 @@ module Aws::CodeStarconnections
     #
     # This tag is available for use by AWS services that support tags.
     #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       }
-    #
     # @!attribute [rw] key
     #   The tag's key.
     #   @return [String]
@@ -627,19 +530,6 @@ module Aws::CodeStarconnections
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource to which you want to
     #   add or update tags.
@@ -676,14 +566,6 @@ module Aws::CodeStarconnections
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceInput
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "AmazonResourceName", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource to remove tags from.
     #   @return [String]
@@ -705,20 +587,6 @@ module Aws::CodeStarconnections
     #
     class UntagResourceOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateHostInput
-    #   data as a hash:
-    #
-    #       {
-    #         host_arn: "HostArn", # required
-    #         provider_endpoint: "Url",
-    #         vpc_configuration: {
-    #           vpc_id: "VpcId", # required
-    #           subnet_ids: ["SubnetId"], # required
-    #           security_group_ids: ["SecurityGroupId"], # required
-    #           tls_certificate: "TlsCertificate",
-    #         },
-    #       }
-    #
     # @!attribute [rw] host_arn
     #   The Amazon Resource Name (ARN) of the host to be updated.
     #   @return [String]
@@ -748,16 +616,6 @@ module Aws::CodeStarconnections
     class UpdateHostOutput < Aws::EmptyStructure; end
 
     # The VPC configuration provisioned for the host.
-    #
-    # @note When making an API call, you may pass VpcConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         vpc_id: "VpcId", # required
-    #         subnet_ids: ["SubnetId"], # required
-    #         security_group_ids: ["SecurityGroupId"], # required
-    #         tls_certificate: "TlsCertificate",
-    #       }
     #
     # @!attribute [rw] vpc_id
     #   The ID of the Amazon VPC connected to the infrastructure where your

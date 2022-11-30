@@ -13,14 +13,6 @@ module Aws::Firehose
     # Describes the buffering to perform before delivering data to the
     # Serverless offering for Amazon OpenSearch Service destination.
     #
-    # @note When making an API call, you may pass AmazonOpenSearchServerlessBufferingHints
-    #   data as a hash:
-    #
-    #       {
-    #         interval_in_seconds: 1,
-    #         size_in_m_bs: 1,
-    #       }
-    #
     # @!attribute [rw] interval_in_seconds
     #   Buffer incoming data for the specified period of time, in seconds,
     #   before delivering it to the destination. The default value is 300 (5
@@ -48,69 +40,6 @@ module Aws::Firehose
 
     # Describes the configuration of a destination in the Serverless
     # offering for Amazon OpenSearch Service.
-    #
-    # @note When making an API call, you may pass AmazonOpenSearchServerlessDestinationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         role_arn: "RoleARN", # required
-    #         collection_endpoint: "AmazonOpenSearchServerlessCollectionEndpoint",
-    #         index_name: "AmazonOpenSearchServerlessIndexName", # required
-    #         buffering_hints: {
-    #           interval_in_seconds: 1,
-    #           size_in_m_bs: 1,
-    #         },
-    #         retry_options: {
-    #           duration_in_seconds: 1,
-    #         },
-    #         s3_backup_mode: "FailedDocumentsOnly", # accepts FailedDocumentsOnly, AllDocuments
-    #         s3_configuration: { # required
-    #           role_arn: "RoleARN", # required
-    #           bucket_arn: "BucketARN", # required
-    #           prefix: "Prefix",
-    #           error_output_prefix: "ErrorOutputPrefix",
-    #           buffering_hints: {
-    #             size_in_m_bs: 1,
-    #             interval_in_seconds: 1,
-    #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
-    #           encryption_configuration: {
-    #             no_encryption_config: "NoEncryption", # accepts NoEncryption
-    #             kms_encryption_config: {
-    #               awskms_key_arn: "AWSKMSKeyARN", # required
-    #             },
-    #           },
-    #           cloud_watch_logging_options: {
-    #             enabled: false,
-    #             log_group_name: "LogGroupName",
-    #             log_stream_name: "LogStreamName",
-    #           },
-    #         },
-    #         processing_configuration: {
-    #           enabled: false,
-    #           processors: [
-    #             {
-    #               type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
-    #               parameters: [
-    #                 {
-    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
-    #                   parameter_value: "ProcessorParameterValue", # required
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #         cloud_watch_logging_options: {
-    #           enabled: false,
-    #           log_group_name: "LogGroupName",
-    #           log_stream_name: "LogStreamName",
-    #         },
-    #         vpc_configuration: {
-    #           subnet_ids: ["NonEmptyStringWithoutWhitespace"], # required
-    #           role_arn: "RoleARN", # required
-    #           security_group_ids: ["NonEmptyStringWithoutWhitespace"], # required
-    #         },
-    #       }
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the IAM role to be assumed by
@@ -247,63 +176,6 @@ module Aws::Firehose
     # Describes an update for a destination in the Serverless offering for
     # Amazon OpenSearch Service.
     #
-    # @note When making an API call, you may pass AmazonOpenSearchServerlessDestinationUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         role_arn: "RoleARN",
-    #         collection_endpoint: "AmazonOpenSearchServerlessCollectionEndpoint",
-    #         index_name: "AmazonOpenSearchServerlessIndexName",
-    #         buffering_hints: {
-    #           interval_in_seconds: 1,
-    #           size_in_m_bs: 1,
-    #         },
-    #         retry_options: {
-    #           duration_in_seconds: 1,
-    #         },
-    #         s3_update: {
-    #           role_arn: "RoleARN",
-    #           bucket_arn: "BucketARN",
-    #           prefix: "Prefix",
-    #           error_output_prefix: "ErrorOutputPrefix",
-    #           buffering_hints: {
-    #             size_in_m_bs: 1,
-    #             interval_in_seconds: 1,
-    #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
-    #           encryption_configuration: {
-    #             no_encryption_config: "NoEncryption", # accepts NoEncryption
-    #             kms_encryption_config: {
-    #               awskms_key_arn: "AWSKMSKeyARN", # required
-    #             },
-    #           },
-    #           cloud_watch_logging_options: {
-    #             enabled: false,
-    #             log_group_name: "LogGroupName",
-    #             log_stream_name: "LogStreamName",
-    #           },
-    #         },
-    #         processing_configuration: {
-    #           enabled: false,
-    #           processors: [
-    #             {
-    #               type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
-    #               parameters: [
-    #                 {
-    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
-    #                   parameter_value: "ProcessorParameterValue", # required
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #         cloud_watch_logging_options: {
-    #           enabled: false,
-    #           log_group_name: "LogGroupName",
-    #           log_stream_name: "LogStreamName",
-    #         },
-    #       }
-    #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the IAM role to be assumed by
     #   Kinesis Data Firehose for calling the Serverless offering for Amazon
@@ -362,13 +234,6 @@ module Aws::Firehose
     # deliver documents to the Serverless offering for Amazon OpenSearch
     # Service.
     #
-    # @note When making an API call, you may pass AmazonOpenSearchServerlessRetryOptions
-    #   data as a hash:
-    #
-    #       {
-    #         duration_in_seconds: 1,
-    #       }
-    #
     # @!attribute [rw] duration_in_seconds
     #   After an initial failure to deliver to the Serverless offering for
     #   Amazon OpenSearch Service, the total amount of time during which
@@ -388,14 +253,6 @@ module Aws::Firehose
 
     # Describes the buffering to perform before delivering data to the
     # Amazon OpenSearch Service destination.
-    #
-    # @note When making an API call, you may pass AmazonopensearchserviceBufferingHints
-    #   data as a hash:
-    #
-    #       {
-    #         interval_in_seconds: 1,
-    #         size_in_m_bs: 1,
-    #       }
     #
     # @!attribute [rw] interval_in_seconds
     #   Buffer incoming data for the specified period of time, in seconds,
@@ -424,72 +281,6 @@ module Aws::Firehose
 
     # Describes the configuration of a destination in Amazon OpenSearch
     # Service
-    #
-    # @note When making an API call, you may pass AmazonopensearchserviceDestinationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         role_arn: "RoleARN", # required
-    #         domain_arn: "AmazonopensearchserviceDomainARN",
-    #         cluster_endpoint: "AmazonopensearchserviceClusterEndpoint",
-    #         index_name: "AmazonopensearchserviceIndexName", # required
-    #         type_name: "AmazonopensearchserviceTypeName",
-    #         index_rotation_period: "NoRotation", # accepts NoRotation, OneHour, OneDay, OneWeek, OneMonth
-    #         buffering_hints: {
-    #           interval_in_seconds: 1,
-    #           size_in_m_bs: 1,
-    #         },
-    #         retry_options: {
-    #           duration_in_seconds: 1,
-    #         },
-    #         s3_backup_mode: "FailedDocumentsOnly", # accepts FailedDocumentsOnly, AllDocuments
-    #         s3_configuration: { # required
-    #           role_arn: "RoleARN", # required
-    #           bucket_arn: "BucketARN", # required
-    #           prefix: "Prefix",
-    #           error_output_prefix: "ErrorOutputPrefix",
-    #           buffering_hints: {
-    #             size_in_m_bs: 1,
-    #             interval_in_seconds: 1,
-    #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
-    #           encryption_configuration: {
-    #             no_encryption_config: "NoEncryption", # accepts NoEncryption
-    #             kms_encryption_config: {
-    #               awskms_key_arn: "AWSKMSKeyARN", # required
-    #             },
-    #           },
-    #           cloud_watch_logging_options: {
-    #             enabled: false,
-    #             log_group_name: "LogGroupName",
-    #             log_stream_name: "LogStreamName",
-    #           },
-    #         },
-    #         processing_configuration: {
-    #           enabled: false,
-    #           processors: [
-    #             {
-    #               type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
-    #               parameters: [
-    #                 {
-    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
-    #                   parameter_value: "ProcessorParameterValue", # required
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #         cloud_watch_logging_options: {
-    #           enabled: false,
-    #           log_group_name: "LogGroupName",
-    #           log_stream_name: "LogStreamName",
-    #         },
-    #         vpc_configuration: {
-    #           subnet_ids: ["NonEmptyStringWithoutWhitespace"], # required
-    #           role_arn: "RoleARN", # required
-    #           security_group_ids: ["NonEmptyStringWithoutWhitespace"], # required
-    #         },
-    #       }
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the IAM role to be assumed by
@@ -666,66 +457,6 @@ module Aws::Firehose
 
     # Describes an update for a destination in Amazon OpenSearch Service.
     #
-    # @note When making an API call, you may pass AmazonopensearchserviceDestinationUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         role_arn: "RoleARN",
-    #         domain_arn: "AmazonopensearchserviceDomainARN",
-    #         cluster_endpoint: "AmazonopensearchserviceClusterEndpoint",
-    #         index_name: "AmazonopensearchserviceIndexName",
-    #         type_name: "AmazonopensearchserviceTypeName",
-    #         index_rotation_period: "NoRotation", # accepts NoRotation, OneHour, OneDay, OneWeek, OneMonth
-    #         buffering_hints: {
-    #           interval_in_seconds: 1,
-    #           size_in_m_bs: 1,
-    #         },
-    #         retry_options: {
-    #           duration_in_seconds: 1,
-    #         },
-    #         s3_update: {
-    #           role_arn: "RoleARN",
-    #           bucket_arn: "BucketARN",
-    #           prefix: "Prefix",
-    #           error_output_prefix: "ErrorOutputPrefix",
-    #           buffering_hints: {
-    #             size_in_m_bs: 1,
-    #             interval_in_seconds: 1,
-    #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
-    #           encryption_configuration: {
-    #             no_encryption_config: "NoEncryption", # accepts NoEncryption
-    #             kms_encryption_config: {
-    #               awskms_key_arn: "AWSKMSKeyARN", # required
-    #             },
-    #           },
-    #           cloud_watch_logging_options: {
-    #             enabled: false,
-    #             log_group_name: "LogGroupName",
-    #             log_stream_name: "LogStreamName",
-    #           },
-    #         },
-    #         processing_configuration: {
-    #           enabled: false,
-    #           processors: [
-    #             {
-    #               type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
-    #               parameters: [
-    #                 {
-    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
-    #                   parameter_value: "ProcessorParameterValue", # required
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #         cloud_watch_logging_options: {
-    #           enabled: false,
-    #           log_group_name: "LogGroupName",
-    #           log_stream_name: "LogStreamName",
-    #         },
-    #       }
-    #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the IAM role to be assumed by
     #   Kinesis Data Firehose for calling the Amazon OpenSearch Service
@@ -812,13 +543,6 @@ module Aws::Firehose
     # Configures retry behavior in case Kinesis Data Firehose is unable to
     # deliver documents to Amazon OpenSearch Service.
     #
-    # @note When making an API call, you may pass AmazonopensearchserviceRetryOptions
-    #   data as a hash:
-    #
-    #       {
-    #         duration_in_seconds: 1,
-    #       }
-    #
     # @!attribute [rw] duration_in_seconds
     #   After an initial failure to deliver to Amazon OpenSearch Service,
     #   the total amount of time during which Kinesis Data Firehose retries
@@ -841,14 +565,6 @@ module Aws::Firehose
     # optimal. The `SizeInMBs` and `IntervalInSeconds` parameters are
     # optional. However, if specify a value for one of them, you must also
     # provide a value for the other.
-    #
-    # @note When making an API call, you may pass BufferingHints
-    #   data as a hash:
-    #
-    #       {
-    #         size_in_m_bs: 1,
-    #         interval_in_seconds: 1,
-    #       }
     #
     # @!attribute [rw] size_in_m_bs
     #   Buffer incoming data to the specified size, in MiBs, before
@@ -880,15 +596,6 @@ module Aws::Firehose
 
     # Describes the Amazon CloudWatch logging options for your delivery
     # stream.
-    #
-    # @note When making an API call, you may pass CloudWatchLoggingOptions
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false,
-    #         log_group_name: "LogGroupName",
-    #         log_stream_name: "LogStreamName",
-    #       }
     #
     # @!attribute [rw] enabled
     #   Enables or disables CloudWatch logging.
@@ -930,15 +637,6 @@ module Aws::Firehose
     end
 
     # Describes a `COPY` command for Amazon Redshift.
-    #
-    # @note When making an API call, you may pass CopyCommand
-    #   data as a hash:
-    #
-    #       {
-    #         data_table_name: "DataTableName", # required
-    #         data_table_columns: "DataTableColumns",
-    #         copy_options: "CopyOptions",
-    #       }
     #
     # @!attribute [rw] data_table_name
     #   The name of the target table. The table must already exist in the
@@ -989,542 +687,6 @@ module Aws::Firehose
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDeliveryStreamInput
-    #   data as a hash:
-    #
-    #       {
-    #         delivery_stream_name: "DeliveryStreamName", # required
-    #         delivery_stream_type: "DirectPut", # accepts DirectPut, KinesisStreamAsSource
-    #         kinesis_stream_source_configuration: {
-    #           kinesis_stream_arn: "KinesisStreamARN", # required
-    #           role_arn: "RoleARN", # required
-    #         },
-    #         delivery_stream_encryption_configuration_input: {
-    #           key_arn: "AWSKMSKeyARN",
-    #           key_type: "AWS_OWNED_CMK", # required, accepts AWS_OWNED_CMK, CUSTOMER_MANAGED_CMK
-    #         },
-    #         s3_destination_configuration: {
-    #           role_arn: "RoleARN", # required
-    #           bucket_arn: "BucketARN", # required
-    #           prefix: "Prefix",
-    #           error_output_prefix: "ErrorOutputPrefix",
-    #           buffering_hints: {
-    #             size_in_m_bs: 1,
-    #             interval_in_seconds: 1,
-    #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
-    #           encryption_configuration: {
-    #             no_encryption_config: "NoEncryption", # accepts NoEncryption
-    #             kms_encryption_config: {
-    #               awskms_key_arn: "AWSKMSKeyARN", # required
-    #             },
-    #           },
-    #           cloud_watch_logging_options: {
-    #             enabled: false,
-    #             log_group_name: "LogGroupName",
-    #             log_stream_name: "LogStreamName",
-    #           },
-    #         },
-    #         extended_s3_destination_configuration: {
-    #           role_arn: "RoleARN", # required
-    #           bucket_arn: "BucketARN", # required
-    #           prefix: "Prefix",
-    #           error_output_prefix: "ErrorOutputPrefix",
-    #           buffering_hints: {
-    #             size_in_m_bs: 1,
-    #             interval_in_seconds: 1,
-    #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
-    #           encryption_configuration: {
-    #             no_encryption_config: "NoEncryption", # accepts NoEncryption
-    #             kms_encryption_config: {
-    #               awskms_key_arn: "AWSKMSKeyARN", # required
-    #             },
-    #           },
-    #           cloud_watch_logging_options: {
-    #             enabled: false,
-    #             log_group_name: "LogGroupName",
-    #             log_stream_name: "LogStreamName",
-    #           },
-    #           processing_configuration: {
-    #             enabled: false,
-    #             processors: [
-    #               {
-    #                 type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
-    #                 parameters: [
-    #                   {
-    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
-    #                     parameter_value: "ProcessorParameterValue", # required
-    #                   },
-    #                 ],
-    #               },
-    #             ],
-    #           },
-    #           s3_backup_mode: "Disabled", # accepts Disabled, Enabled
-    #           s3_backup_configuration: {
-    #             role_arn: "RoleARN", # required
-    #             bucket_arn: "BucketARN", # required
-    #             prefix: "Prefix",
-    #             error_output_prefix: "ErrorOutputPrefix",
-    #             buffering_hints: {
-    #               size_in_m_bs: 1,
-    #               interval_in_seconds: 1,
-    #             },
-    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
-    #             encryption_configuration: {
-    #               no_encryption_config: "NoEncryption", # accepts NoEncryption
-    #               kms_encryption_config: {
-    #                 awskms_key_arn: "AWSKMSKeyARN", # required
-    #               },
-    #             },
-    #             cloud_watch_logging_options: {
-    #               enabled: false,
-    #               log_group_name: "LogGroupName",
-    #               log_stream_name: "LogStreamName",
-    #             },
-    #           },
-    #           data_format_conversion_configuration: {
-    #             schema_configuration: {
-    #               role_arn: "NonEmptyStringWithoutWhitespace",
-    #               catalog_id: "NonEmptyStringWithoutWhitespace",
-    #               database_name: "NonEmptyStringWithoutWhitespace",
-    #               table_name: "NonEmptyStringWithoutWhitespace",
-    #               region: "NonEmptyStringWithoutWhitespace",
-    #               version_id: "NonEmptyStringWithoutWhitespace",
-    #             },
-    #             input_format_configuration: {
-    #               deserializer: {
-    #                 open_x_json_ser_de: {
-    #                   convert_dots_in_json_keys_to_underscores: false,
-    #                   case_insensitive: false,
-    #                   column_to_json_key_mappings: {
-    #                     "NonEmptyStringWithoutWhitespace" => "NonEmptyString",
-    #                   },
-    #                 },
-    #                 hive_json_ser_de: {
-    #                   timestamp_formats: ["NonEmptyString"],
-    #                 },
-    #               },
-    #             },
-    #             output_format_configuration: {
-    #               serializer: {
-    #                 parquet_ser_de: {
-    #                   block_size_bytes: 1,
-    #                   page_size_bytes: 1,
-    #                   compression: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, SNAPPY
-    #                   enable_dictionary_compression: false,
-    #                   max_padding_bytes: 1,
-    #                   writer_version: "V1", # accepts V1, V2
-    #                 },
-    #                 orc_ser_de: {
-    #                   stripe_size_bytes: 1,
-    #                   block_size_bytes: 1,
-    #                   row_index_stride: 1,
-    #                   enable_padding: false,
-    #                   padding_tolerance: 1.0,
-    #                   compression: "NONE", # accepts NONE, ZLIB, SNAPPY
-    #                   bloom_filter_columns: ["NonEmptyStringWithoutWhitespace"],
-    #                   bloom_filter_false_positive_probability: 1.0,
-    #                   dictionary_key_threshold: 1.0,
-    #                   format_version: "V0_11", # accepts V0_11, V0_12
-    #                 },
-    #               },
-    #             },
-    #             enabled: false,
-    #           },
-    #           dynamic_partitioning_configuration: {
-    #             retry_options: {
-    #               duration_in_seconds: 1,
-    #             },
-    #             enabled: false,
-    #           },
-    #         },
-    #         redshift_destination_configuration: {
-    #           role_arn: "RoleARN", # required
-    #           cluster_jdbc_url: "ClusterJDBCURL", # required
-    #           copy_command: { # required
-    #             data_table_name: "DataTableName", # required
-    #             data_table_columns: "DataTableColumns",
-    #             copy_options: "CopyOptions",
-    #           },
-    #           username: "Username", # required
-    #           password: "Password", # required
-    #           retry_options: {
-    #             duration_in_seconds: 1,
-    #           },
-    #           s3_configuration: { # required
-    #             role_arn: "RoleARN", # required
-    #             bucket_arn: "BucketARN", # required
-    #             prefix: "Prefix",
-    #             error_output_prefix: "ErrorOutputPrefix",
-    #             buffering_hints: {
-    #               size_in_m_bs: 1,
-    #               interval_in_seconds: 1,
-    #             },
-    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
-    #             encryption_configuration: {
-    #               no_encryption_config: "NoEncryption", # accepts NoEncryption
-    #               kms_encryption_config: {
-    #                 awskms_key_arn: "AWSKMSKeyARN", # required
-    #               },
-    #             },
-    #             cloud_watch_logging_options: {
-    #               enabled: false,
-    #               log_group_name: "LogGroupName",
-    #               log_stream_name: "LogStreamName",
-    #             },
-    #           },
-    #           processing_configuration: {
-    #             enabled: false,
-    #             processors: [
-    #               {
-    #                 type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
-    #                 parameters: [
-    #                   {
-    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
-    #                     parameter_value: "ProcessorParameterValue", # required
-    #                   },
-    #                 ],
-    #               },
-    #             ],
-    #           },
-    #           s3_backup_mode: "Disabled", # accepts Disabled, Enabled
-    #           s3_backup_configuration: {
-    #             role_arn: "RoleARN", # required
-    #             bucket_arn: "BucketARN", # required
-    #             prefix: "Prefix",
-    #             error_output_prefix: "ErrorOutputPrefix",
-    #             buffering_hints: {
-    #               size_in_m_bs: 1,
-    #               interval_in_seconds: 1,
-    #             },
-    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
-    #             encryption_configuration: {
-    #               no_encryption_config: "NoEncryption", # accepts NoEncryption
-    #               kms_encryption_config: {
-    #                 awskms_key_arn: "AWSKMSKeyARN", # required
-    #               },
-    #             },
-    #             cloud_watch_logging_options: {
-    #               enabled: false,
-    #               log_group_name: "LogGroupName",
-    #               log_stream_name: "LogStreamName",
-    #             },
-    #           },
-    #           cloud_watch_logging_options: {
-    #             enabled: false,
-    #             log_group_name: "LogGroupName",
-    #             log_stream_name: "LogStreamName",
-    #           },
-    #         },
-    #         elasticsearch_destination_configuration: {
-    #           role_arn: "RoleARN", # required
-    #           domain_arn: "ElasticsearchDomainARN",
-    #           cluster_endpoint: "ElasticsearchClusterEndpoint",
-    #           index_name: "ElasticsearchIndexName", # required
-    #           type_name: "ElasticsearchTypeName",
-    #           index_rotation_period: "NoRotation", # accepts NoRotation, OneHour, OneDay, OneWeek, OneMonth
-    #           buffering_hints: {
-    #             interval_in_seconds: 1,
-    #             size_in_m_bs: 1,
-    #           },
-    #           retry_options: {
-    #             duration_in_seconds: 1,
-    #           },
-    #           s3_backup_mode: "FailedDocumentsOnly", # accepts FailedDocumentsOnly, AllDocuments
-    #           s3_configuration: { # required
-    #             role_arn: "RoleARN", # required
-    #             bucket_arn: "BucketARN", # required
-    #             prefix: "Prefix",
-    #             error_output_prefix: "ErrorOutputPrefix",
-    #             buffering_hints: {
-    #               size_in_m_bs: 1,
-    #               interval_in_seconds: 1,
-    #             },
-    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
-    #             encryption_configuration: {
-    #               no_encryption_config: "NoEncryption", # accepts NoEncryption
-    #               kms_encryption_config: {
-    #                 awskms_key_arn: "AWSKMSKeyARN", # required
-    #               },
-    #             },
-    #             cloud_watch_logging_options: {
-    #               enabled: false,
-    #               log_group_name: "LogGroupName",
-    #               log_stream_name: "LogStreamName",
-    #             },
-    #           },
-    #           processing_configuration: {
-    #             enabled: false,
-    #             processors: [
-    #               {
-    #                 type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
-    #                 parameters: [
-    #                   {
-    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
-    #                     parameter_value: "ProcessorParameterValue", # required
-    #                   },
-    #                 ],
-    #               },
-    #             ],
-    #           },
-    #           cloud_watch_logging_options: {
-    #             enabled: false,
-    #             log_group_name: "LogGroupName",
-    #             log_stream_name: "LogStreamName",
-    #           },
-    #           vpc_configuration: {
-    #             subnet_ids: ["NonEmptyStringWithoutWhitespace"], # required
-    #             role_arn: "RoleARN", # required
-    #             security_group_ids: ["NonEmptyStringWithoutWhitespace"], # required
-    #           },
-    #         },
-    #         amazonopensearchservice_destination_configuration: {
-    #           role_arn: "RoleARN", # required
-    #           domain_arn: "AmazonopensearchserviceDomainARN",
-    #           cluster_endpoint: "AmazonopensearchserviceClusterEndpoint",
-    #           index_name: "AmazonopensearchserviceIndexName", # required
-    #           type_name: "AmazonopensearchserviceTypeName",
-    #           index_rotation_period: "NoRotation", # accepts NoRotation, OneHour, OneDay, OneWeek, OneMonth
-    #           buffering_hints: {
-    #             interval_in_seconds: 1,
-    #             size_in_m_bs: 1,
-    #           },
-    #           retry_options: {
-    #             duration_in_seconds: 1,
-    #           },
-    #           s3_backup_mode: "FailedDocumentsOnly", # accepts FailedDocumentsOnly, AllDocuments
-    #           s3_configuration: { # required
-    #             role_arn: "RoleARN", # required
-    #             bucket_arn: "BucketARN", # required
-    #             prefix: "Prefix",
-    #             error_output_prefix: "ErrorOutputPrefix",
-    #             buffering_hints: {
-    #               size_in_m_bs: 1,
-    #               interval_in_seconds: 1,
-    #             },
-    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
-    #             encryption_configuration: {
-    #               no_encryption_config: "NoEncryption", # accepts NoEncryption
-    #               kms_encryption_config: {
-    #                 awskms_key_arn: "AWSKMSKeyARN", # required
-    #               },
-    #             },
-    #             cloud_watch_logging_options: {
-    #               enabled: false,
-    #               log_group_name: "LogGroupName",
-    #               log_stream_name: "LogStreamName",
-    #             },
-    #           },
-    #           processing_configuration: {
-    #             enabled: false,
-    #             processors: [
-    #               {
-    #                 type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
-    #                 parameters: [
-    #                   {
-    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
-    #                     parameter_value: "ProcessorParameterValue", # required
-    #                   },
-    #                 ],
-    #               },
-    #             ],
-    #           },
-    #           cloud_watch_logging_options: {
-    #             enabled: false,
-    #             log_group_name: "LogGroupName",
-    #             log_stream_name: "LogStreamName",
-    #           },
-    #           vpc_configuration: {
-    #             subnet_ids: ["NonEmptyStringWithoutWhitespace"], # required
-    #             role_arn: "RoleARN", # required
-    #             security_group_ids: ["NonEmptyStringWithoutWhitespace"], # required
-    #           },
-    #         },
-    #         splunk_destination_configuration: {
-    #           hec_endpoint: "HECEndpoint", # required
-    #           hec_endpoint_type: "Raw", # required, accepts Raw, Event
-    #           hec_token: "HECToken", # required
-    #           hec_acknowledgment_timeout_in_seconds: 1,
-    #           retry_options: {
-    #             duration_in_seconds: 1,
-    #           },
-    #           s3_backup_mode: "FailedEventsOnly", # accepts FailedEventsOnly, AllEvents
-    #           s3_configuration: { # required
-    #             role_arn: "RoleARN", # required
-    #             bucket_arn: "BucketARN", # required
-    #             prefix: "Prefix",
-    #             error_output_prefix: "ErrorOutputPrefix",
-    #             buffering_hints: {
-    #               size_in_m_bs: 1,
-    #               interval_in_seconds: 1,
-    #             },
-    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
-    #             encryption_configuration: {
-    #               no_encryption_config: "NoEncryption", # accepts NoEncryption
-    #               kms_encryption_config: {
-    #                 awskms_key_arn: "AWSKMSKeyARN", # required
-    #               },
-    #             },
-    #             cloud_watch_logging_options: {
-    #               enabled: false,
-    #               log_group_name: "LogGroupName",
-    #               log_stream_name: "LogStreamName",
-    #             },
-    #           },
-    #           processing_configuration: {
-    #             enabled: false,
-    #             processors: [
-    #               {
-    #                 type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
-    #                 parameters: [
-    #                   {
-    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
-    #                     parameter_value: "ProcessorParameterValue", # required
-    #                   },
-    #                 ],
-    #               },
-    #             ],
-    #           },
-    #           cloud_watch_logging_options: {
-    #             enabled: false,
-    #             log_group_name: "LogGroupName",
-    #             log_stream_name: "LogStreamName",
-    #           },
-    #         },
-    #         http_endpoint_destination_configuration: {
-    #           endpoint_configuration: { # required
-    #             url: "HttpEndpointUrl", # required
-    #             name: "HttpEndpointName",
-    #             access_key: "HttpEndpointAccessKey",
-    #           },
-    #           buffering_hints: {
-    #             size_in_m_bs: 1,
-    #             interval_in_seconds: 1,
-    #           },
-    #           cloud_watch_logging_options: {
-    #             enabled: false,
-    #             log_group_name: "LogGroupName",
-    #             log_stream_name: "LogStreamName",
-    #           },
-    #           request_configuration: {
-    #             content_encoding: "NONE", # accepts NONE, GZIP
-    #             common_attributes: [
-    #               {
-    #                 attribute_name: "HttpEndpointAttributeName", # required
-    #                 attribute_value: "HttpEndpointAttributeValue", # required
-    #               },
-    #             ],
-    #           },
-    #           processing_configuration: {
-    #             enabled: false,
-    #             processors: [
-    #               {
-    #                 type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
-    #                 parameters: [
-    #                   {
-    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
-    #                     parameter_value: "ProcessorParameterValue", # required
-    #                   },
-    #                 ],
-    #               },
-    #             ],
-    #           },
-    #           role_arn: "RoleARN",
-    #           retry_options: {
-    #             duration_in_seconds: 1,
-    #           },
-    #           s3_backup_mode: "FailedDataOnly", # accepts FailedDataOnly, AllData
-    #           s3_configuration: { # required
-    #             role_arn: "RoleARN", # required
-    #             bucket_arn: "BucketARN", # required
-    #             prefix: "Prefix",
-    #             error_output_prefix: "ErrorOutputPrefix",
-    #             buffering_hints: {
-    #               size_in_m_bs: 1,
-    #               interval_in_seconds: 1,
-    #             },
-    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
-    #             encryption_configuration: {
-    #               no_encryption_config: "NoEncryption", # accepts NoEncryption
-    #               kms_encryption_config: {
-    #                 awskms_key_arn: "AWSKMSKeyARN", # required
-    #               },
-    #             },
-    #             cloud_watch_logging_options: {
-    #               enabled: false,
-    #               log_group_name: "LogGroupName",
-    #               log_stream_name: "LogStreamName",
-    #             },
-    #           },
-    #         },
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         amazon_open_search_serverless_destination_configuration: {
-    #           role_arn: "RoleARN", # required
-    #           collection_endpoint: "AmazonOpenSearchServerlessCollectionEndpoint",
-    #           index_name: "AmazonOpenSearchServerlessIndexName", # required
-    #           buffering_hints: {
-    #             interval_in_seconds: 1,
-    #             size_in_m_bs: 1,
-    #           },
-    #           retry_options: {
-    #             duration_in_seconds: 1,
-    #           },
-    #           s3_backup_mode: "FailedDocumentsOnly", # accepts FailedDocumentsOnly, AllDocuments
-    #           s3_configuration: { # required
-    #             role_arn: "RoleARN", # required
-    #             bucket_arn: "BucketARN", # required
-    #             prefix: "Prefix",
-    #             error_output_prefix: "ErrorOutputPrefix",
-    #             buffering_hints: {
-    #               size_in_m_bs: 1,
-    #               interval_in_seconds: 1,
-    #             },
-    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
-    #             encryption_configuration: {
-    #               no_encryption_config: "NoEncryption", # accepts NoEncryption
-    #               kms_encryption_config: {
-    #                 awskms_key_arn: "AWSKMSKeyARN", # required
-    #               },
-    #             },
-    #             cloud_watch_logging_options: {
-    #               enabled: false,
-    #               log_group_name: "LogGroupName",
-    #               log_stream_name: "LogStreamName",
-    #             },
-    #           },
-    #           processing_configuration: {
-    #             enabled: false,
-    #             processors: [
-    #               {
-    #                 type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
-    #                 parameters: [
-    #                   {
-    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
-    #                     parameter_value: "ProcessorParameterValue", # required
-    #                   },
-    #                 ],
-    #               },
-    #             ],
-    #           },
-    #           cloud_watch_logging_options: {
-    #             enabled: false,
-    #             log_group_name: "LogGroupName",
-    #             log_stream_name: "LogStreamName",
-    #           },
-    #           vpc_configuration: {
-    #             subnet_ids: ["NonEmptyStringWithoutWhitespace"], # required
-    #             role_arn: "RoleARN", # required
-    #             security_group_ids: ["NonEmptyStringWithoutWhitespace"], # required
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] delivery_stream_name
     #   The name of the delivery stream. This name must be unique per Amazon
     #   Web Services account in the same Amazon Web Services Region. If the
@@ -1652,59 +814,6 @@ module Aws::Firehose
     #
     # [1]: https://docs.aws.amazon.com/firehose/latest/dev/record-format-conversion.html
     #
-    # @note When making an API call, you may pass DataFormatConversionConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         schema_configuration: {
-    #           role_arn: "NonEmptyStringWithoutWhitespace",
-    #           catalog_id: "NonEmptyStringWithoutWhitespace",
-    #           database_name: "NonEmptyStringWithoutWhitespace",
-    #           table_name: "NonEmptyStringWithoutWhitespace",
-    #           region: "NonEmptyStringWithoutWhitespace",
-    #           version_id: "NonEmptyStringWithoutWhitespace",
-    #         },
-    #         input_format_configuration: {
-    #           deserializer: {
-    #             open_x_json_ser_de: {
-    #               convert_dots_in_json_keys_to_underscores: false,
-    #               case_insensitive: false,
-    #               column_to_json_key_mappings: {
-    #                 "NonEmptyStringWithoutWhitespace" => "NonEmptyString",
-    #               },
-    #             },
-    #             hive_json_ser_de: {
-    #               timestamp_formats: ["NonEmptyString"],
-    #             },
-    #           },
-    #         },
-    #         output_format_configuration: {
-    #           serializer: {
-    #             parquet_ser_de: {
-    #               block_size_bytes: 1,
-    #               page_size_bytes: 1,
-    #               compression: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, SNAPPY
-    #               enable_dictionary_compression: false,
-    #               max_padding_bytes: 1,
-    #               writer_version: "V1", # accepts V1, V2
-    #             },
-    #             orc_ser_de: {
-    #               stripe_size_bytes: 1,
-    #               block_size_bytes: 1,
-    #               row_index_stride: 1,
-    #               enable_padding: false,
-    #               padding_tolerance: 1.0,
-    #               compression: "NONE", # accepts NONE, ZLIB, SNAPPY
-    #               bloom_filter_columns: ["NonEmptyStringWithoutWhitespace"],
-    #               bloom_filter_false_positive_probability: 1.0,
-    #               dictionary_key_threshold: 1.0,
-    #               format_version: "V0_11", # accepts V0_11, V0_12
-    #             },
-    #           },
-    #         },
-    #         enabled: false,
-    #       }
-    #
     # @!attribute [rw] schema_configuration
     #   Specifies the Amazon Web Services Glue Data Catalog table that
     #   contains the column information. This parameter is required if
@@ -1739,14 +848,6 @@ module Aws::Firehose
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDeliveryStreamInput
-    #   data as a hash:
-    #
-    #       {
-    #         delivery_stream_name: "DeliveryStreamName", # required
-    #         allow_force_delete: false,
-    #       }
-    #
     # @!attribute [rw] delivery_stream_name
     #   The name of the delivery stream.
     #   @return [String]
@@ -1928,14 +1029,6 @@ module Aws::Firehose
     # Specifies the type and Amazon Resource Name (ARN) of the CMK to use
     # for Server-Side Encryption (SSE).
     #
-    # @note When making an API call, you may pass DeliveryStreamEncryptionConfigurationInput
-    #   data as a hash:
-    #
-    #       {
-    #         key_arn: "AWSKMSKeyARN",
-    #         key_type: "AWS_OWNED_CMK", # required, accepts AWS_OWNED_CMK, CUSTOMER_MANAGED_CMK
-    #       }
-    #
     # @!attribute [rw] key_arn
     #   If you set `KeyType` to `CUSTOMER_MANAGED_CMK`, you must specify the
     #   Amazon Resource Name (ARN) of the CMK. If you set `KeyType` to
@@ -1986,15 +1079,6 @@ module Aws::Firehose
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDeliveryStreamInput
-    #   data as a hash:
-    #
-    #       {
-    #         delivery_stream_name: "DeliveryStreamName", # required
-    #         limit: 1,
-    #         exclusive_start_destination_id: "DestinationId",
-    #       }
-    #
     # @!attribute [rw] delivery_stream_name
     #   The name of the delivery stream.
     #   @return [String]
@@ -2042,22 +1126,6 @@ module Aws::Firehose
     #
     # [1]: https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManualDDL-JSON
     # [2]: https://github.com/rcongiu/Hive-JSON-Serde
-    #
-    # @note When making an API call, you may pass Deserializer
-    #   data as a hash:
-    #
-    #       {
-    #         open_x_json_ser_de: {
-    #           convert_dots_in_json_keys_to_underscores: false,
-    #           case_insensitive: false,
-    #           column_to_json_key_mappings: {
-    #             "NonEmptyStringWithoutWhitespace" => "NonEmptyString",
-    #           },
-    #         },
-    #         hive_json_ser_de: {
-    #           timestamp_formats: ["NonEmptyString"],
-    #         },
-    #       }
     #
     # @!attribute [rw] open_x_json_ser_de
     #   The OpenX SerDe. Used by Kinesis Data Firehose for deserializing
@@ -2146,16 +1214,6 @@ module Aws::Firehose
     # partition keys. Currently, dynamic partitioning is only supported for
     # Amazon S3 destinations.
     #
-    # @note When making an API call, you may pass DynamicPartitioningConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         retry_options: {
-    #           duration_in_seconds: 1,
-    #         },
-    #         enabled: false,
-    #       }
-    #
     # @!attribute [rw] retry_options
     #   The retry behavior in case Kinesis Data Firehose is unable to
     #   deliver data to an Amazon S3 prefix.
@@ -2177,14 +1235,6 @@ module Aws::Firehose
 
     # Describes the buffering to perform before delivering data to the
     # Amazon ES destination.
-    #
-    # @note When making an API call, you may pass ElasticsearchBufferingHints
-    #   data as a hash:
-    #
-    #       {
-    #         interval_in_seconds: 1,
-    #         size_in_m_bs: 1,
-    #       }
     #
     # @!attribute [rw] interval_in_seconds
     #   Buffer incoming data for the specified period of time, in seconds,
@@ -2212,72 +1262,6 @@ module Aws::Firehose
     end
 
     # Describes the configuration of a destination in Amazon ES.
-    #
-    # @note When making an API call, you may pass ElasticsearchDestinationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         role_arn: "RoleARN", # required
-    #         domain_arn: "ElasticsearchDomainARN",
-    #         cluster_endpoint: "ElasticsearchClusterEndpoint",
-    #         index_name: "ElasticsearchIndexName", # required
-    #         type_name: "ElasticsearchTypeName",
-    #         index_rotation_period: "NoRotation", # accepts NoRotation, OneHour, OneDay, OneWeek, OneMonth
-    #         buffering_hints: {
-    #           interval_in_seconds: 1,
-    #           size_in_m_bs: 1,
-    #         },
-    #         retry_options: {
-    #           duration_in_seconds: 1,
-    #         },
-    #         s3_backup_mode: "FailedDocumentsOnly", # accepts FailedDocumentsOnly, AllDocuments
-    #         s3_configuration: { # required
-    #           role_arn: "RoleARN", # required
-    #           bucket_arn: "BucketARN", # required
-    #           prefix: "Prefix",
-    #           error_output_prefix: "ErrorOutputPrefix",
-    #           buffering_hints: {
-    #             size_in_m_bs: 1,
-    #             interval_in_seconds: 1,
-    #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
-    #           encryption_configuration: {
-    #             no_encryption_config: "NoEncryption", # accepts NoEncryption
-    #             kms_encryption_config: {
-    #               awskms_key_arn: "AWSKMSKeyARN", # required
-    #             },
-    #           },
-    #           cloud_watch_logging_options: {
-    #             enabled: false,
-    #             log_group_name: "LogGroupName",
-    #             log_stream_name: "LogStreamName",
-    #           },
-    #         },
-    #         processing_configuration: {
-    #           enabled: false,
-    #           processors: [
-    #             {
-    #               type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
-    #               parameters: [
-    #                 {
-    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
-    #                   parameter_value: "ProcessorParameterValue", # required
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #         cloud_watch_logging_options: {
-    #           enabled: false,
-    #           log_group_name: "LogGroupName",
-    #           log_stream_name: "LogStreamName",
-    #         },
-    #         vpc_configuration: {
-    #           subnet_ids: ["NonEmptyStringWithoutWhitespace"], # required
-    #           role_arn: "RoleARN", # required
-    #           security_group_ids: ["NonEmptyStringWithoutWhitespace"], # required
-    #         },
-    #       }
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the IAM role to be assumed by
@@ -2497,66 +1481,6 @@ module Aws::Firehose
 
     # Describes an update for a destination in Amazon ES.
     #
-    # @note When making an API call, you may pass ElasticsearchDestinationUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         role_arn: "RoleARN",
-    #         domain_arn: "ElasticsearchDomainARN",
-    #         cluster_endpoint: "ElasticsearchClusterEndpoint",
-    #         index_name: "ElasticsearchIndexName",
-    #         type_name: "ElasticsearchTypeName",
-    #         index_rotation_period: "NoRotation", # accepts NoRotation, OneHour, OneDay, OneWeek, OneMonth
-    #         buffering_hints: {
-    #           interval_in_seconds: 1,
-    #           size_in_m_bs: 1,
-    #         },
-    #         retry_options: {
-    #           duration_in_seconds: 1,
-    #         },
-    #         s3_update: {
-    #           role_arn: "RoleARN",
-    #           bucket_arn: "BucketARN",
-    #           prefix: "Prefix",
-    #           error_output_prefix: "ErrorOutputPrefix",
-    #           buffering_hints: {
-    #             size_in_m_bs: 1,
-    #             interval_in_seconds: 1,
-    #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
-    #           encryption_configuration: {
-    #             no_encryption_config: "NoEncryption", # accepts NoEncryption
-    #             kms_encryption_config: {
-    #               awskms_key_arn: "AWSKMSKeyARN", # required
-    #             },
-    #           },
-    #           cloud_watch_logging_options: {
-    #             enabled: false,
-    #             log_group_name: "LogGroupName",
-    #             log_stream_name: "LogStreamName",
-    #           },
-    #         },
-    #         processing_configuration: {
-    #           enabled: false,
-    #           processors: [
-    #             {
-    #               type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
-    #               parameters: [
-    #                 {
-    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
-    #                   parameter_value: "ProcessorParameterValue", # required
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #         cloud_watch_logging_options: {
-    #           enabled: false,
-    #           log_group_name: "LogGroupName",
-    #           log_stream_name: "LogStreamName",
-    #         },
-    #       }
-    #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the IAM role to be assumed by
     #   Kinesis Data Firehose for calling the Amazon ES Configuration API
@@ -2662,13 +1586,6 @@ module Aws::Firehose
     # Configures retry behavior in case Kinesis Data Firehose is unable to
     # deliver documents to Amazon ES.
     #
-    # @note When making an API call, you may pass ElasticsearchRetryOptions
-    #   data as a hash:
-    #
-    #       {
-    #         duration_in_seconds: 1,
-    #       }
-    #
     # @!attribute [rw] duration_in_seconds
     #   After an initial failure to deliver to Amazon ES, the total amount
     #   of time during which Kinesis Data Firehose retries delivery
@@ -2686,16 +1603,6 @@ module Aws::Firehose
     end
 
     # Describes the encryption for a destination in Amazon S3.
-    #
-    # @note When making an API call, you may pass EncryptionConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         no_encryption_config: "NoEncryption", # accepts NoEncryption
-    #         kms_encryption_config: {
-    #           awskms_key_arn: "AWSKMSKeyARN", # required
-    #         },
-    #       }
     #
     # @!attribute [rw] no_encryption_config
     #   Specifically override existing encryption information to ensure that
@@ -2716,124 +1623,6 @@ module Aws::Firehose
     end
 
     # Describes the configuration of a destination in Amazon S3.
-    #
-    # @note When making an API call, you may pass ExtendedS3DestinationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         role_arn: "RoleARN", # required
-    #         bucket_arn: "BucketARN", # required
-    #         prefix: "Prefix",
-    #         error_output_prefix: "ErrorOutputPrefix",
-    #         buffering_hints: {
-    #           size_in_m_bs: 1,
-    #           interval_in_seconds: 1,
-    #         },
-    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
-    #         encryption_configuration: {
-    #           no_encryption_config: "NoEncryption", # accepts NoEncryption
-    #           kms_encryption_config: {
-    #             awskms_key_arn: "AWSKMSKeyARN", # required
-    #           },
-    #         },
-    #         cloud_watch_logging_options: {
-    #           enabled: false,
-    #           log_group_name: "LogGroupName",
-    #           log_stream_name: "LogStreamName",
-    #         },
-    #         processing_configuration: {
-    #           enabled: false,
-    #           processors: [
-    #             {
-    #               type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
-    #               parameters: [
-    #                 {
-    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
-    #                   parameter_value: "ProcessorParameterValue", # required
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #         s3_backup_mode: "Disabled", # accepts Disabled, Enabled
-    #         s3_backup_configuration: {
-    #           role_arn: "RoleARN", # required
-    #           bucket_arn: "BucketARN", # required
-    #           prefix: "Prefix",
-    #           error_output_prefix: "ErrorOutputPrefix",
-    #           buffering_hints: {
-    #             size_in_m_bs: 1,
-    #             interval_in_seconds: 1,
-    #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
-    #           encryption_configuration: {
-    #             no_encryption_config: "NoEncryption", # accepts NoEncryption
-    #             kms_encryption_config: {
-    #               awskms_key_arn: "AWSKMSKeyARN", # required
-    #             },
-    #           },
-    #           cloud_watch_logging_options: {
-    #             enabled: false,
-    #             log_group_name: "LogGroupName",
-    #             log_stream_name: "LogStreamName",
-    #           },
-    #         },
-    #         data_format_conversion_configuration: {
-    #           schema_configuration: {
-    #             role_arn: "NonEmptyStringWithoutWhitespace",
-    #             catalog_id: "NonEmptyStringWithoutWhitespace",
-    #             database_name: "NonEmptyStringWithoutWhitespace",
-    #             table_name: "NonEmptyStringWithoutWhitespace",
-    #             region: "NonEmptyStringWithoutWhitespace",
-    #             version_id: "NonEmptyStringWithoutWhitespace",
-    #           },
-    #           input_format_configuration: {
-    #             deserializer: {
-    #               open_x_json_ser_de: {
-    #                 convert_dots_in_json_keys_to_underscores: false,
-    #                 case_insensitive: false,
-    #                 column_to_json_key_mappings: {
-    #                   "NonEmptyStringWithoutWhitespace" => "NonEmptyString",
-    #                 },
-    #               },
-    #               hive_json_ser_de: {
-    #                 timestamp_formats: ["NonEmptyString"],
-    #               },
-    #             },
-    #           },
-    #           output_format_configuration: {
-    #             serializer: {
-    #               parquet_ser_de: {
-    #                 block_size_bytes: 1,
-    #                 page_size_bytes: 1,
-    #                 compression: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, SNAPPY
-    #                 enable_dictionary_compression: false,
-    #                 max_padding_bytes: 1,
-    #                 writer_version: "V1", # accepts V1, V2
-    #               },
-    #               orc_ser_de: {
-    #                 stripe_size_bytes: 1,
-    #                 block_size_bytes: 1,
-    #                 row_index_stride: 1,
-    #                 enable_padding: false,
-    #                 padding_tolerance: 1.0,
-    #                 compression: "NONE", # accepts NONE, ZLIB, SNAPPY
-    #                 bloom_filter_columns: ["NonEmptyStringWithoutWhitespace"],
-    #                 bloom_filter_false_positive_probability: 1.0,
-    #                 dictionary_key_threshold: 1.0,
-    #                 format_version: "V0_11", # accepts V0_11, V0_12
-    #               },
-    #             },
-    #           },
-    #           enabled: false,
-    #         },
-    #         dynamic_partitioning_configuration: {
-    #           retry_options: {
-    #             duration_in_seconds: 1,
-    #           },
-    #           enabled: false,
-    #         },
-    #       }
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the Amazon Web Services
@@ -3048,124 +1837,6 @@ module Aws::Firehose
 
     # Describes an update for a destination in Amazon S3.
     #
-    # @note When making an API call, you may pass ExtendedS3DestinationUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         role_arn: "RoleARN",
-    #         bucket_arn: "BucketARN",
-    #         prefix: "Prefix",
-    #         error_output_prefix: "ErrorOutputPrefix",
-    #         buffering_hints: {
-    #           size_in_m_bs: 1,
-    #           interval_in_seconds: 1,
-    #         },
-    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
-    #         encryption_configuration: {
-    #           no_encryption_config: "NoEncryption", # accepts NoEncryption
-    #           kms_encryption_config: {
-    #             awskms_key_arn: "AWSKMSKeyARN", # required
-    #           },
-    #         },
-    #         cloud_watch_logging_options: {
-    #           enabled: false,
-    #           log_group_name: "LogGroupName",
-    #           log_stream_name: "LogStreamName",
-    #         },
-    #         processing_configuration: {
-    #           enabled: false,
-    #           processors: [
-    #             {
-    #               type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
-    #               parameters: [
-    #                 {
-    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
-    #                   parameter_value: "ProcessorParameterValue", # required
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #         s3_backup_mode: "Disabled", # accepts Disabled, Enabled
-    #         s3_backup_update: {
-    #           role_arn: "RoleARN",
-    #           bucket_arn: "BucketARN",
-    #           prefix: "Prefix",
-    #           error_output_prefix: "ErrorOutputPrefix",
-    #           buffering_hints: {
-    #             size_in_m_bs: 1,
-    #             interval_in_seconds: 1,
-    #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
-    #           encryption_configuration: {
-    #             no_encryption_config: "NoEncryption", # accepts NoEncryption
-    #             kms_encryption_config: {
-    #               awskms_key_arn: "AWSKMSKeyARN", # required
-    #             },
-    #           },
-    #           cloud_watch_logging_options: {
-    #             enabled: false,
-    #             log_group_name: "LogGroupName",
-    #             log_stream_name: "LogStreamName",
-    #           },
-    #         },
-    #         data_format_conversion_configuration: {
-    #           schema_configuration: {
-    #             role_arn: "NonEmptyStringWithoutWhitespace",
-    #             catalog_id: "NonEmptyStringWithoutWhitespace",
-    #             database_name: "NonEmptyStringWithoutWhitespace",
-    #             table_name: "NonEmptyStringWithoutWhitespace",
-    #             region: "NonEmptyStringWithoutWhitespace",
-    #             version_id: "NonEmptyStringWithoutWhitespace",
-    #           },
-    #           input_format_configuration: {
-    #             deserializer: {
-    #               open_x_json_ser_de: {
-    #                 convert_dots_in_json_keys_to_underscores: false,
-    #                 case_insensitive: false,
-    #                 column_to_json_key_mappings: {
-    #                   "NonEmptyStringWithoutWhitespace" => "NonEmptyString",
-    #                 },
-    #               },
-    #               hive_json_ser_de: {
-    #                 timestamp_formats: ["NonEmptyString"],
-    #               },
-    #             },
-    #           },
-    #           output_format_configuration: {
-    #             serializer: {
-    #               parquet_ser_de: {
-    #                 block_size_bytes: 1,
-    #                 page_size_bytes: 1,
-    #                 compression: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, SNAPPY
-    #                 enable_dictionary_compression: false,
-    #                 max_padding_bytes: 1,
-    #                 writer_version: "V1", # accepts V1, V2
-    #               },
-    #               orc_ser_de: {
-    #                 stripe_size_bytes: 1,
-    #                 block_size_bytes: 1,
-    #                 row_index_stride: 1,
-    #                 enable_padding: false,
-    #                 padding_tolerance: 1.0,
-    #                 compression: "NONE", # accepts NONE, ZLIB, SNAPPY
-    #                 bloom_filter_columns: ["NonEmptyStringWithoutWhitespace"],
-    #                 bloom_filter_false_positive_probability: 1.0,
-    #                 dictionary_key_threshold: 1.0,
-    #                 format_version: "V0_11", # accepts V0_11, V0_12
-    #               },
-    #             },
-    #           },
-    #           enabled: false,
-    #         },
-    #         dynamic_partitioning_configuration: {
-    #           retry_options: {
-    #             duration_in_seconds: 1,
-    #           },
-    #           enabled: false,
-    #         },
-    #       }
-    #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the Amazon Web Services
     #   credentials. For more information, see [Amazon Resource Names (ARNs)
@@ -3299,13 +1970,6 @@ module Aws::Firehose
     # offers the functionality you need. The other option is the OpenX
     # SerDe.
     #
-    # @note When making an API call, you may pass HiveJsonSerDe
-    #   data as a hash:
-    #
-    #       {
-    #         timestamp_formats: ["NonEmptyString"],
-    #       }
-    #
     # @!attribute [rw] timestamp_formats
     #   Indicates how you want Kinesis Data Firehose to parse the date and
     #   timestamps that may be present in your input data JSON. To specify
@@ -3336,14 +2000,6 @@ module Aws::Firehose
     # optional. However, if specify a value for one of them, you must also
     # provide a value for the other.
     #
-    # @note When making an API call, you may pass HttpEndpointBufferingHints
-    #   data as a hash:
-    #
-    #       {
-    #         size_in_m_bs: 1,
-    #         interval_in_seconds: 1,
-    #       }
-    #
     # @!attribute [rw] size_in_m_bs
     #   Buffer incoming data to the specified size, in MBs, before
     #   delivering it to the destination. The default value is 5.
@@ -3372,14 +2028,6 @@ module Aws::Firehose
     # Describes the metadata that's delivered to the specified HTTP
     # endpoint destination.
     #
-    # @note When making an API call, you may pass HttpEndpointCommonAttribute
-    #   data as a hash:
-    #
-    #       {
-    #         attribute_name: "HttpEndpointAttributeName", # required
-    #         attribute_value: "HttpEndpointAttributeValue", # required
-    #       }
-    #
     # @!attribute [rw] attribute_name
     #   The name of the HTTP endpoint common attribute.
     #   @return [String]
@@ -3399,15 +2047,6 @@ module Aws::Firehose
 
     # Describes the configuration of the HTTP endpoint to which Kinesis
     # Firehose delivers data.
-    #
-    # @note When making an API call, you may pass HttpEndpointConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         url: "HttpEndpointUrl", # required
-    #         name: "HttpEndpointName",
-    #         access_key: "HttpEndpointAccessKey",
-    #       }
     #
     # @!attribute [rw] url
     #   The URL of the HTTP endpoint selected as the destination.
@@ -3460,76 +2099,6 @@ module Aws::Firehose
     end
 
     # Describes the configuration of the HTTP endpoint destination.
-    #
-    # @note When making an API call, you may pass HttpEndpointDestinationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_configuration: { # required
-    #           url: "HttpEndpointUrl", # required
-    #           name: "HttpEndpointName",
-    #           access_key: "HttpEndpointAccessKey",
-    #         },
-    #         buffering_hints: {
-    #           size_in_m_bs: 1,
-    #           interval_in_seconds: 1,
-    #         },
-    #         cloud_watch_logging_options: {
-    #           enabled: false,
-    #           log_group_name: "LogGroupName",
-    #           log_stream_name: "LogStreamName",
-    #         },
-    #         request_configuration: {
-    #           content_encoding: "NONE", # accepts NONE, GZIP
-    #           common_attributes: [
-    #             {
-    #               attribute_name: "HttpEndpointAttributeName", # required
-    #               attribute_value: "HttpEndpointAttributeValue", # required
-    #             },
-    #           ],
-    #         },
-    #         processing_configuration: {
-    #           enabled: false,
-    #           processors: [
-    #             {
-    #               type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
-    #               parameters: [
-    #                 {
-    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
-    #                   parameter_value: "ProcessorParameterValue", # required
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #         role_arn: "RoleARN",
-    #         retry_options: {
-    #           duration_in_seconds: 1,
-    #         },
-    #         s3_backup_mode: "FailedDataOnly", # accepts FailedDataOnly, AllData
-    #         s3_configuration: { # required
-    #           role_arn: "RoleARN", # required
-    #           bucket_arn: "BucketARN", # required
-    #           prefix: "Prefix",
-    #           error_output_prefix: "ErrorOutputPrefix",
-    #           buffering_hints: {
-    #             size_in_m_bs: 1,
-    #             interval_in_seconds: 1,
-    #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
-    #           encryption_configuration: {
-    #             no_encryption_config: "NoEncryption", # accepts NoEncryption
-    #             kms_encryption_config: {
-    #               awskms_key_arn: "AWSKMSKeyARN", # required
-    #             },
-    #           },
-    #           cloud_watch_logging_options: {
-    #             enabled: false,
-    #             log_group_name: "LogGroupName",
-    #             log_stream_name: "LogStreamName",
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] endpoint_configuration
     #   The configuration of the HTTP endpoint selected as the destination.
@@ -3669,76 +2238,6 @@ module Aws::Firehose
 
     # Updates the specified HTTP endpoint destination.
     #
-    # @note When making an API call, you may pass HttpEndpointDestinationUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         endpoint_configuration: {
-    #           url: "HttpEndpointUrl", # required
-    #           name: "HttpEndpointName",
-    #           access_key: "HttpEndpointAccessKey",
-    #         },
-    #         buffering_hints: {
-    #           size_in_m_bs: 1,
-    #           interval_in_seconds: 1,
-    #         },
-    #         cloud_watch_logging_options: {
-    #           enabled: false,
-    #           log_group_name: "LogGroupName",
-    #           log_stream_name: "LogStreamName",
-    #         },
-    #         request_configuration: {
-    #           content_encoding: "NONE", # accepts NONE, GZIP
-    #           common_attributes: [
-    #             {
-    #               attribute_name: "HttpEndpointAttributeName", # required
-    #               attribute_value: "HttpEndpointAttributeValue", # required
-    #             },
-    #           ],
-    #         },
-    #         processing_configuration: {
-    #           enabled: false,
-    #           processors: [
-    #             {
-    #               type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
-    #               parameters: [
-    #                 {
-    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
-    #                   parameter_value: "ProcessorParameterValue", # required
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #         role_arn: "RoleARN",
-    #         retry_options: {
-    #           duration_in_seconds: 1,
-    #         },
-    #         s3_backup_mode: "FailedDataOnly", # accepts FailedDataOnly, AllData
-    #         s3_update: {
-    #           role_arn: "RoleARN",
-    #           bucket_arn: "BucketARN",
-    #           prefix: "Prefix",
-    #           error_output_prefix: "ErrorOutputPrefix",
-    #           buffering_hints: {
-    #             size_in_m_bs: 1,
-    #             interval_in_seconds: 1,
-    #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
-    #           encryption_configuration: {
-    #             no_encryption_config: "NoEncryption", # accepts NoEncryption
-    #             kms_encryption_config: {
-    #               awskms_key_arn: "AWSKMSKeyARN", # required
-    #             },
-    #           },
-    #           cloud_watch_logging_options: {
-    #             enabled: false,
-    #             log_group_name: "LogGroupName",
-    #             log_stream_name: "LogStreamName",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] endpoint_configuration
     #   Describes the configuration of the HTTP endpoint destination.
     #   @return [Types::HttpEndpointConfiguration]
@@ -3808,19 +2307,6 @@ module Aws::Firehose
 
     # The configuration of the HTTP endpoint request.
     #
-    # @note When making an API call, you may pass HttpEndpointRequestConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         content_encoding: "NONE", # accepts NONE, GZIP
-    #         common_attributes: [
-    #           {
-    #             attribute_name: "HttpEndpointAttributeName", # required
-    #             attribute_value: "HttpEndpointAttributeValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] content_encoding
     #   Kinesis Data Firehose uses the content encoding to compress the body
     #   of a request before sending the request to the destination. For more
@@ -3850,13 +2336,6 @@ module Aws::Firehose
     # doesn't receive a valid acknowledgment of receipt from the specified
     # HTTP endpoint destination.
     #
-    # @note When making an API call, you may pass HttpEndpointRetryOptions
-    #   data as a hash:
-    #
-    #       {
-    #         duration_in_seconds: 1,
-    #       }
-    #
     # @!attribute [rw] duration_in_seconds
     #   The total amount of time that Kinesis Data Firehose spends on
     #   retries. This duration starts after the initial attempt to send data
@@ -3876,24 +2355,6 @@ module Aws::Firehose
     # Specifies the deserializer you want to use to convert the format of
     # the input data. This parameter is required if `Enabled` is set to
     # true.
-    #
-    # @note When making an API call, you may pass InputFormatConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         deserializer: {
-    #           open_x_json_ser_de: {
-    #             convert_dots_in_json_keys_to_underscores: false,
-    #             case_insensitive: false,
-    #             column_to_json_key_mappings: {
-    #               "NonEmptyStringWithoutWhitespace" => "NonEmptyString",
-    #             },
-    #           },
-    #           hive_json_ser_de: {
-    #             timestamp_formats: ["NonEmptyString"],
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] deserializer
     #   Specifies which deserializer to use. You can choose either the
@@ -3946,13 +2407,6 @@ module Aws::Firehose
 
     # Describes an encryption key for a destination in Amazon S3.
     #
-    # @note When making an API call, you may pass KMSEncryptionConfig
-    #   data as a hash:
-    #
-    #       {
-    #         awskms_key_arn: "AWSKMSKeyARN", # required
-    #       }
-    #
     # @!attribute [rw] awskms_key_arn
     #   The Amazon Resource Name (ARN) of the encryption key. Must belong to
     #   the same Amazon Web Services Region as the destination Amazon S3
@@ -3974,14 +2428,6 @@ module Aws::Firehose
 
     # The stream and role Amazon Resource Names (ARNs) for a Kinesis data
     # stream used as the source for a delivery stream.
-    #
-    # @note When making an API call, you may pass KinesisStreamSourceConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         kinesis_stream_arn: "KinesisStreamARN", # required
-    #         role_arn: "RoleARN", # required
-    #       }
     #
     # @!attribute [rw] kinesis_stream_arn
     #   The ARN of the source Kinesis data stream. For more information, see
@@ -4063,15 +2509,6 @@ module Aws::Firehose
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDeliveryStreamsInput
-    #   data as a hash:
-    #
-    #       {
-    #         limit: 1,
-    #         delivery_stream_type: "DirectPut", # accepts DirectPut, KinesisStreamAsSource
-    #         exclusive_start_delivery_stream_name: "DeliveryStreamName",
-    #       }
-    #
     # @!attribute [rw] limit
     #   The maximum number of delivery streams to list. The default value is
     #   10.
@@ -4124,15 +2561,6 @@ module Aws::Firehose
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForDeliveryStreamInput
-    #   data as a hash:
-    #
-    #       {
-    #         delivery_stream_name: "DeliveryStreamName", # required
-    #         exclusive_start_tag_key: "TagKey",
-    #         limit: 1,
-    #       }
-    #
     # @!attribute [rw] delivery_stream_name
     #   The name of the delivery stream whose tags you want to list.
     #   @return [String]
@@ -4188,17 +2616,6 @@ module Aws::Firehose
     # functionality you need. The other option is the native Hive / HCatalog
     # JsonSerDe.
     #
-    # @note When making an API call, you may pass OpenXJsonSerDe
-    #   data as a hash:
-    #
-    #       {
-    #         convert_dots_in_json_keys_to_underscores: false,
-    #         case_insensitive: false,
-    #         column_to_json_key_mappings: {
-    #           "NonEmptyStringWithoutWhitespace" => "NonEmptyString",
-    #         },
-    #       }
-    #
     # @!attribute [rw] convert_dots_in_json_keys_to_underscores
     #   When set to `true`, specifies that the names of the keys include
     #   dots and that you want Kinesis Data Firehose to replace them with
@@ -4239,22 +2656,6 @@ module Aws::Firehose
     #
     #
     # [1]: https://orc.apache.org/docs/
-    #
-    # @note When making an API call, you may pass OrcSerDe
-    #   data as a hash:
-    #
-    #       {
-    #         stripe_size_bytes: 1,
-    #         block_size_bytes: 1,
-    #         row_index_stride: 1,
-    #         enable_padding: false,
-    #         padding_tolerance: 1.0,
-    #         compression: "NONE", # accepts NONE, ZLIB, SNAPPY
-    #         bloom_filter_columns: ["NonEmptyStringWithoutWhitespace"],
-    #         bloom_filter_false_positive_probability: 1.0,
-    #         dictionary_key_threshold: 1.0,
-    #         format_version: "V0_11", # accepts V0_11, V0_12
-    #       }
     #
     # @!attribute [rw] stripe_size_bytes
     #   The number of bytes in each stripe. The default is 64 MiB and the
@@ -4345,34 +2746,6 @@ module Aws::Firehose
     # convert the format of your data before it writes it to Amazon S3. This
     # parameter is required if `Enabled` is set to true.
     #
-    # @note When making an API call, you may pass OutputFormatConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         serializer: {
-    #           parquet_ser_de: {
-    #             block_size_bytes: 1,
-    #             page_size_bytes: 1,
-    #             compression: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, SNAPPY
-    #             enable_dictionary_compression: false,
-    #             max_padding_bytes: 1,
-    #             writer_version: "V1", # accepts V1, V2
-    #           },
-    #           orc_ser_de: {
-    #             stripe_size_bytes: 1,
-    #             block_size_bytes: 1,
-    #             row_index_stride: 1,
-    #             enable_padding: false,
-    #             padding_tolerance: 1.0,
-    #             compression: "NONE", # accepts NONE, ZLIB, SNAPPY
-    #             bloom_filter_columns: ["NonEmptyStringWithoutWhitespace"],
-    #             bloom_filter_false_positive_probability: 1.0,
-    #             dictionary_key_threshold: 1.0,
-    #             format_version: "V0_11", # accepts V0_11, V0_12
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] serializer
     #   Specifies which serializer to use. You can choose either the ORC
     #   SerDe or the Parquet SerDe. If both are non-null, the server rejects
@@ -4394,18 +2767,6 @@ module Aws::Firehose
     #
     #
     # [1]: https://parquet.apache.org/documentation/latest/
-    #
-    # @note When making an API call, you may pass ParquetSerDe
-    #   data as a hash:
-    #
-    #       {
-    #         block_size_bytes: 1,
-    #         page_size_bytes: 1,
-    #         compression: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, SNAPPY
-    #         enable_dictionary_compression: false,
-    #         max_padding_bytes: 1,
-    #         writer_version: "V1", # accepts V1, V2
-    #       }
     #
     # @!attribute [rw] block_size_bytes
     #   The Hadoop Distributed File System (HDFS) block size. This is useful
@@ -4457,24 +2818,6 @@ module Aws::Firehose
 
     # Describes a data processing configuration.
     #
-    # @note When making an API call, you may pass ProcessingConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false,
-    #         processors: [
-    #           {
-    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
-    #             parameters: [
-    #               {
-    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
-    #                 parameter_value: "ProcessorParameterValue", # required
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] enabled
     #   Enables or disables data processing.
     #   @return [Boolean]
@@ -4494,19 +2837,6 @@ module Aws::Firehose
 
     # Describes a data processor.
     #
-    # @note When making an API call, you may pass Processor
-    #   data as a hash:
-    #
-    #       {
-    #         type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
-    #         parameters: [
-    #           {
-    #             parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
-    #             parameter_value: "ProcessorParameterValue", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] type
     #   The type of processor.
     #   @return [String]
@@ -4525,14 +2855,6 @@ module Aws::Firehose
     end
 
     # Describes the processor parameter.
-    #
-    # @note When making an API call, you may pass ProcessorParameter
-    #   data as a hash:
-    #
-    #       {
-    #         parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
-    #         parameter_value: "ProcessorParameterValue", # required
-    #       }
     #
     # @!attribute [rw] parameter_name
     #   The name of the parameter. Currently the following default values
@@ -4556,18 +2878,6 @@ module Aws::Firehose
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutRecordBatchInput
-    #   data as a hash:
-    #
-    #       {
-    #         delivery_stream_name: "DeliveryStreamName", # required
-    #         records: [ # required
-    #           {
-    #             data: "data", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] delivery_stream_name
     #   The name of the delivery stream.
     #   @return [String]
@@ -4640,16 +2950,6 @@ module Aws::Firehose
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutRecordInput
-    #   data as a hash:
-    #
-    #       {
-    #         delivery_stream_name: "DeliveryStreamName", # required
-    #         record: { # required
-    #           data: "data", # required
-    #         },
-    #       }
-    #
     # @!attribute [rw] delivery_stream_name
     #   The name of the delivery stream.
     #   @return [String]
@@ -4687,13 +2987,6 @@ module Aws::Firehose
 
     # The unit of data in a delivery stream.
     #
-    # @note When making an API call, you may pass Record
-    #   data as a hash:
-    #
-    #       {
-    #         data: "data", # required
-    #       }
-    #
     # @!attribute [rw] data
     #   The data blob, which is base64-encoded when the blob is serialized.
     #   The maximum size of the data blob, before base64-encoding, is 1,000
@@ -4709,88 +3002,6 @@ module Aws::Firehose
     end
 
     # Describes the configuration of a destination in Amazon Redshift.
-    #
-    # @note When making an API call, you may pass RedshiftDestinationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         role_arn: "RoleARN", # required
-    #         cluster_jdbc_url: "ClusterJDBCURL", # required
-    #         copy_command: { # required
-    #           data_table_name: "DataTableName", # required
-    #           data_table_columns: "DataTableColumns",
-    #           copy_options: "CopyOptions",
-    #         },
-    #         username: "Username", # required
-    #         password: "Password", # required
-    #         retry_options: {
-    #           duration_in_seconds: 1,
-    #         },
-    #         s3_configuration: { # required
-    #           role_arn: "RoleARN", # required
-    #           bucket_arn: "BucketARN", # required
-    #           prefix: "Prefix",
-    #           error_output_prefix: "ErrorOutputPrefix",
-    #           buffering_hints: {
-    #             size_in_m_bs: 1,
-    #             interval_in_seconds: 1,
-    #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
-    #           encryption_configuration: {
-    #             no_encryption_config: "NoEncryption", # accepts NoEncryption
-    #             kms_encryption_config: {
-    #               awskms_key_arn: "AWSKMSKeyARN", # required
-    #             },
-    #           },
-    #           cloud_watch_logging_options: {
-    #             enabled: false,
-    #             log_group_name: "LogGroupName",
-    #             log_stream_name: "LogStreamName",
-    #           },
-    #         },
-    #         processing_configuration: {
-    #           enabled: false,
-    #           processors: [
-    #             {
-    #               type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
-    #               parameters: [
-    #                 {
-    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
-    #                   parameter_value: "ProcessorParameterValue", # required
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #         s3_backup_mode: "Disabled", # accepts Disabled, Enabled
-    #         s3_backup_configuration: {
-    #           role_arn: "RoleARN", # required
-    #           bucket_arn: "BucketARN", # required
-    #           prefix: "Prefix",
-    #           error_output_prefix: "ErrorOutputPrefix",
-    #           buffering_hints: {
-    #             size_in_m_bs: 1,
-    #             interval_in_seconds: 1,
-    #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
-    #           encryption_configuration: {
-    #             no_encryption_config: "NoEncryption", # accepts NoEncryption
-    #             kms_encryption_config: {
-    #               awskms_key_arn: "AWSKMSKeyARN", # required
-    #             },
-    #           },
-    #           cloud_watch_logging_options: {
-    #             enabled: false,
-    #             log_group_name: "LogGroupName",
-    #             log_stream_name: "LogStreamName",
-    #           },
-    #         },
-    #         cloud_watch_logging_options: {
-    #           enabled: false,
-    #           log_group_name: "LogGroupName",
-    #           log_stream_name: "LogStreamName",
-    #         },
-    #       }
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the Amazon Web Services
@@ -4941,88 +3152,6 @@ module Aws::Firehose
 
     # Describes an update for a destination in Amazon Redshift.
     #
-    # @note When making an API call, you may pass RedshiftDestinationUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         role_arn: "RoleARN",
-    #         cluster_jdbc_url: "ClusterJDBCURL",
-    #         copy_command: {
-    #           data_table_name: "DataTableName", # required
-    #           data_table_columns: "DataTableColumns",
-    #           copy_options: "CopyOptions",
-    #         },
-    #         username: "Username",
-    #         password: "Password",
-    #         retry_options: {
-    #           duration_in_seconds: 1,
-    #         },
-    #         s3_update: {
-    #           role_arn: "RoleARN",
-    #           bucket_arn: "BucketARN",
-    #           prefix: "Prefix",
-    #           error_output_prefix: "ErrorOutputPrefix",
-    #           buffering_hints: {
-    #             size_in_m_bs: 1,
-    #             interval_in_seconds: 1,
-    #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
-    #           encryption_configuration: {
-    #             no_encryption_config: "NoEncryption", # accepts NoEncryption
-    #             kms_encryption_config: {
-    #               awskms_key_arn: "AWSKMSKeyARN", # required
-    #             },
-    #           },
-    #           cloud_watch_logging_options: {
-    #             enabled: false,
-    #             log_group_name: "LogGroupName",
-    #             log_stream_name: "LogStreamName",
-    #           },
-    #         },
-    #         processing_configuration: {
-    #           enabled: false,
-    #           processors: [
-    #             {
-    #               type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
-    #               parameters: [
-    #                 {
-    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
-    #                   parameter_value: "ProcessorParameterValue", # required
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #         s3_backup_mode: "Disabled", # accepts Disabled, Enabled
-    #         s3_backup_update: {
-    #           role_arn: "RoleARN",
-    #           bucket_arn: "BucketARN",
-    #           prefix: "Prefix",
-    #           error_output_prefix: "ErrorOutputPrefix",
-    #           buffering_hints: {
-    #             size_in_m_bs: 1,
-    #             interval_in_seconds: 1,
-    #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
-    #           encryption_configuration: {
-    #             no_encryption_config: "NoEncryption", # accepts NoEncryption
-    #             kms_encryption_config: {
-    #               awskms_key_arn: "AWSKMSKeyARN", # required
-    #             },
-    #           },
-    #           cloud_watch_logging_options: {
-    #             enabled: false,
-    #             log_group_name: "LogGroupName",
-    #             log_stream_name: "LogStreamName",
-    #           },
-    #         },
-    #         cloud_watch_logging_options: {
-    #           enabled: false,
-    #           log_group_name: "LogGroupName",
-    #           log_stream_name: "LogStreamName",
-    #         },
-    #       }
-    #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the Amazon Web Services
     #   credentials. For more information, see [Amazon Resource Names (ARNs)
@@ -5103,13 +3232,6 @@ module Aws::Firehose
     # Configures retry behavior in case Kinesis Data Firehose is unable to
     # deliver documents to Amazon Redshift.
     #
-    # @note When making an API call, you may pass RedshiftRetryOptions
-    #   data as a hash:
-    #
-    #       {
-    #         duration_in_seconds: 1,
-    #       }
-    #
     # @!attribute [rw] duration_in_seconds
     #   The length of time during which Kinesis Data Firehose retries
     #   delivery after a failure, starting from the initial request and
@@ -5158,13 +3280,6 @@ module Aws::Firehose
     # The retry behavior in case Kinesis Data Firehose is unable to deliver
     # data to an Amazon S3 prefix.
     #
-    # @note When making an API call, you may pass RetryOptions
-    #   data as a hash:
-    #
-    #       {
-    #         duration_in_seconds: 1,
-    #       }
-    #
     # @!attribute [rw] duration_in_seconds
     #   The period of time during which Kinesis Data Firehose retries to
     #   deliver data to the specified Amazon S3 prefix.
@@ -5179,32 +3294,6 @@ module Aws::Firehose
     end
 
     # Describes the configuration of a destination in Amazon S3.
-    #
-    # @note When making an API call, you may pass S3DestinationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         role_arn: "RoleARN", # required
-    #         bucket_arn: "BucketARN", # required
-    #         prefix: "Prefix",
-    #         error_output_prefix: "ErrorOutputPrefix",
-    #         buffering_hints: {
-    #           size_in_m_bs: 1,
-    #           interval_in_seconds: 1,
-    #         },
-    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
-    #         encryption_configuration: {
-    #           no_encryption_config: "NoEncryption", # accepts NoEncryption
-    #           kms_encryption_config: {
-    #             awskms_key_arn: "AWSKMSKeyARN", # required
-    #           },
-    #         },
-    #         cloud_watch_logging_options: {
-    #           enabled: false,
-    #           log_group_name: "LogGroupName",
-    #           log_stream_name: "LogStreamName",
-    #         },
-    #       }
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the Amazon Web Services
@@ -5362,32 +3451,6 @@ module Aws::Firehose
 
     # Describes an update for a destination in Amazon S3.
     #
-    # @note When making an API call, you may pass S3DestinationUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         role_arn: "RoleARN",
-    #         bucket_arn: "BucketARN",
-    #         prefix: "Prefix",
-    #         error_output_prefix: "ErrorOutputPrefix",
-    #         buffering_hints: {
-    #           size_in_m_bs: 1,
-    #           interval_in_seconds: 1,
-    #         },
-    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
-    #         encryption_configuration: {
-    #           no_encryption_config: "NoEncryption", # accepts NoEncryption
-    #           kms_encryption_config: {
-    #             awskms_key_arn: "AWSKMSKeyARN", # required
-    #           },
-    #         },
-    #         cloud_watch_logging_options: {
-    #           enabled: false,
-    #           log_group_name: "LogGroupName",
-    #           log_stream_name: "LogStreamName",
-    #         },
-    #       }
-    #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the Amazon Web Services
     #   credentials. For more information, see [Amazon Resource Names (ARNs)
@@ -5470,18 +3533,6 @@ module Aws::Firehose
     # configure your data before it writes it to Amazon S3. This parameter
     # is required if `Enabled` is set to true.
     #
-    # @note When making an API call, you may pass SchemaConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         role_arn: "NonEmptyStringWithoutWhitespace",
-    #         catalog_id: "NonEmptyStringWithoutWhitespace",
-    #         database_name: "NonEmptyStringWithoutWhitespace",
-    #         table_name: "NonEmptyStringWithoutWhitespace",
-    #         region: "NonEmptyStringWithoutWhitespace",
-    #         version_id: "NonEmptyStringWithoutWhitespace",
-    #       }
-    #
     # @!attribute [rw] role_arn
     #   The role that Kinesis Data Firehose can use to access Amazon Web
     #   Services Glue. This role must be in the same account you use for
@@ -5550,32 +3601,6 @@ module Aws::Firehose
     # [1]: https://hive.apache.org/javadocs/r1.2.2/api/org/apache/hadoop/hive/ql/io/orc/OrcSerde.html
     # [2]: https://hive.apache.org/javadocs/r1.2.2/api/org/apache/hadoop/hive/ql/io/parquet/serde/ParquetHiveSerDe.html
     #
-    # @note When making an API call, you may pass Serializer
-    #   data as a hash:
-    #
-    #       {
-    #         parquet_ser_de: {
-    #           block_size_bytes: 1,
-    #           page_size_bytes: 1,
-    #           compression: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, SNAPPY
-    #           enable_dictionary_compression: false,
-    #           max_padding_bytes: 1,
-    #           writer_version: "V1", # accepts V1, V2
-    #         },
-    #         orc_ser_de: {
-    #           stripe_size_bytes: 1,
-    #           block_size_bytes: 1,
-    #           row_index_stride: 1,
-    #           enable_padding: false,
-    #           padding_tolerance: 1.0,
-    #           compression: "NONE", # accepts NONE, ZLIB, SNAPPY
-    #           bloom_filter_columns: ["NonEmptyStringWithoutWhitespace"],
-    #           bloom_filter_false_positive_probability: 1.0,
-    #           dictionary_key_threshold: 1.0,
-    #           format_version: "V0_11", # accepts V0_11, V0_12
-    #         },
-    #       }
-    #
     # @!attribute [rw] parquet_ser_de
     #   A serializer to use for converting data to the Parquet format before
     #   storing it in Amazon S3. For more information, see [Apache
@@ -5643,61 +3668,6 @@ module Aws::Firehose
     end
 
     # Describes the configuration of a destination in Splunk.
-    #
-    # @note When making an API call, you may pass SplunkDestinationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         hec_endpoint: "HECEndpoint", # required
-    #         hec_endpoint_type: "Raw", # required, accepts Raw, Event
-    #         hec_token: "HECToken", # required
-    #         hec_acknowledgment_timeout_in_seconds: 1,
-    #         retry_options: {
-    #           duration_in_seconds: 1,
-    #         },
-    #         s3_backup_mode: "FailedEventsOnly", # accepts FailedEventsOnly, AllEvents
-    #         s3_configuration: { # required
-    #           role_arn: "RoleARN", # required
-    #           bucket_arn: "BucketARN", # required
-    #           prefix: "Prefix",
-    #           error_output_prefix: "ErrorOutputPrefix",
-    #           buffering_hints: {
-    #             size_in_m_bs: 1,
-    #             interval_in_seconds: 1,
-    #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
-    #           encryption_configuration: {
-    #             no_encryption_config: "NoEncryption", # accepts NoEncryption
-    #             kms_encryption_config: {
-    #               awskms_key_arn: "AWSKMSKeyARN", # required
-    #             },
-    #           },
-    #           cloud_watch_logging_options: {
-    #             enabled: false,
-    #             log_group_name: "LogGroupName",
-    #             log_stream_name: "LogStreamName",
-    #           },
-    #         },
-    #         processing_configuration: {
-    #           enabled: false,
-    #           processors: [
-    #             {
-    #               type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
-    #               parameters: [
-    #                 {
-    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
-    #                   parameter_value: "ProcessorParameterValue", # required
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #         cloud_watch_logging_options: {
-    #           enabled: false,
-    #           log_group_name: "LogGroupName",
-    #           log_stream_name: "LogStreamName",
-    #         },
-    #       }
     #
     # @!attribute [rw] hec_endpoint
     #   The HTTP Event Collector (HEC) endpoint to which Kinesis Data
@@ -5835,61 +3805,6 @@ module Aws::Firehose
 
     # Describes an update for a destination in Splunk.
     #
-    # @note When making an API call, you may pass SplunkDestinationUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         hec_endpoint: "HECEndpoint",
-    #         hec_endpoint_type: "Raw", # accepts Raw, Event
-    #         hec_token: "HECToken",
-    #         hec_acknowledgment_timeout_in_seconds: 1,
-    #         retry_options: {
-    #           duration_in_seconds: 1,
-    #         },
-    #         s3_backup_mode: "FailedEventsOnly", # accepts FailedEventsOnly, AllEvents
-    #         s3_update: {
-    #           role_arn: "RoleARN",
-    #           bucket_arn: "BucketARN",
-    #           prefix: "Prefix",
-    #           error_output_prefix: "ErrorOutputPrefix",
-    #           buffering_hints: {
-    #             size_in_m_bs: 1,
-    #             interval_in_seconds: 1,
-    #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
-    #           encryption_configuration: {
-    #             no_encryption_config: "NoEncryption", # accepts NoEncryption
-    #             kms_encryption_config: {
-    #               awskms_key_arn: "AWSKMSKeyARN", # required
-    #             },
-    #           },
-    #           cloud_watch_logging_options: {
-    #             enabled: false,
-    #             log_group_name: "LogGroupName",
-    #             log_stream_name: "LogStreamName",
-    #           },
-    #         },
-    #         processing_configuration: {
-    #           enabled: false,
-    #           processors: [
-    #             {
-    #               type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
-    #               parameters: [
-    #                 {
-    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
-    #                   parameter_value: "ProcessorParameterValue", # required
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #         cloud_watch_logging_options: {
-    #           enabled: false,
-    #           log_group_name: "LogGroupName",
-    #           log_stream_name: "LogStreamName",
-    #         },
-    #       }
-    #
     # @!attribute [rw] hec_endpoint
     #   The HTTP Event Collector (HEC) endpoint to which Kinesis Data
     #   Firehose sends your data.
@@ -5962,13 +3877,6 @@ module Aws::Firehose
     # deliver documents to Splunk, or if it doesn't receive an
     # acknowledgment from Splunk.
     #
-    # @note When making an API call, you may pass SplunkRetryOptions
-    #   data as a hash:
-    #
-    #       {
-    #         duration_in_seconds: 1,
-    #       }
-    #
     # @!attribute [rw] duration_in_seconds
     #   The total amount of time that Kinesis Data Firehose spends on
     #   retries. This duration starts after the initial attempt to send data
@@ -5985,17 +3893,6 @@ module Aws::Firehose
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartDeliveryStreamEncryptionInput
-    #   data as a hash:
-    #
-    #       {
-    #         delivery_stream_name: "DeliveryStreamName", # required
-    #         delivery_stream_encryption_configuration_input: {
-    #           key_arn: "AWSKMSKeyARN",
-    #           key_type: "AWS_OWNED_CMK", # required, accepts AWS_OWNED_CMK, CUSTOMER_MANAGED_CMK
-    #         },
-    #       }
-    #
     # @!attribute [rw] delivery_stream_name
     #   The name of the delivery stream for which you want to enable
     #   server-side encryption (SSE).
@@ -6019,13 +3916,6 @@ module Aws::Firehose
     #
     class StartDeliveryStreamEncryptionOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass StopDeliveryStreamEncryptionInput
-    #   data as a hash:
-    #
-    #       {
-    #         delivery_stream_name: "DeliveryStreamName", # required
-    #       }
-    #
     # @!attribute [rw] delivery_stream_name
     #   The name of the delivery stream for which you want to disable
     #   server-side encryption (SSE).
@@ -6045,14 +3935,6 @@ module Aws::Firehose
 
     # Metadata that you can assign to a delivery stream, consisting of a
     # key-value pair.
-    #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue",
-    #       }
     #
     # @!attribute [rw] key
     #   A unique identifier for the tag. Maximum length: 128 characters.
@@ -6075,19 +3957,6 @@ module Aws::Firehose
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagDeliveryStreamInput
-    #   data as a hash:
-    #
-    #       {
-    #         delivery_stream_name: "DeliveryStreamName", # required
-    #         tags: [ # required
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] delivery_stream_name
     #   The name of the delivery stream to which you want to add the tags.
     #   @return [String]
@@ -6109,14 +3978,6 @@ module Aws::Firehose
     #
     class TagDeliveryStreamOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UntagDeliveryStreamInput
-    #   data as a hash:
-    #
-    #       {
-    #         delivery_stream_name: "DeliveryStreamName", # required
-    #         tag_keys: ["TagKey"], # required
-    #       }
-    #
     # @!attribute [rw] delivery_stream_name
     #   The name of the delivery stream.
     #   @return [String]
@@ -6139,511 +4000,6 @@ module Aws::Firehose
     #
     class UntagDeliveryStreamOutput < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateDestinationInput
-    #   data as a hash:
-    #
-    #       {
-    #         delivery_stream_name: "DeliveryStreamName", # required
-    #         current_delivery_stream_version_id: "DeliveryStreamVersionId", # required
-    #         destination_id: "DestinationId", # required
-    #         s3_destination_update: {
-    #           role_arn: "RoleARN",
-    #           bucket_arn: "BucketARN",
-    #           prefix: "Prefix",
-    #           error_output_prefix: "ErrorOutputPrefix",
-    #           buffering_hints: {
-    #             size_in_m_bs: 1,
-    #             interval_in_seconds: 1,
-    #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
-    #           encryption_configuration: {
-    #             no_encryption_config: "NoEncryption", # accepts NoEncryption
-    #             kms_encryption_config: {
-    #               awskms_key_arn: "AWSKMSKeyARN", # required
-    #             },
-    #           },
-    #           cloud_watch_logging_options: {
-    #             enabled: false,
-    #             log_group_name: "LogGroupName",
-    #             log_stream_name: "LogStreamName",
-    #           },
-    #         },
-    #         extended_s3_destination_update: {
-    #           role_arn: "RoleARN",
-    #           bucket_arn: "BucketARN",
-    #           prefix: "Prefix",
-    #           error_output_prefix: "ErrorOutputPrefix",
-    #           buffering_hints: {
-    #             size_in_m_bs: 1,
-    #             interval_in_seconds: 1,
-    #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
-    #           encryption_configuration: {
-    #             no_encryption_config: "NoEncryption", # accepts NoEncryption
-    #             kms_encryption_config: {
-    #               awskms_key_arn: "AWSKMSKeyARN", # required
-    #             },
-    #           },
-    #           cloud_watch_logging_options: {
-    #             enabled: false,
-    #             log_group_name: "LogGroupName",
-    #             log_stream_name: "LogStreamName",
-    #           },
-    #           processing_configuration: {
-    #             enabled: false,
-    #             processors: [
-    #               {
-    #                 type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
-    #                 parameters: [
-    #                   {
-    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
-    #                     parameter_value: "ProcessorParameterValue", # required
-    #                   },
-    #                 ],
-    #               },
-    #             ],
-    #           },
-    #           s3_backup_mode: "Disabled", # accepts Disabled, Enabled
-    #           s3_backup_update: {
-    #             role_arn: "RoleARN",
-    #             bucket_arn: "BucketARN",
-    #             prefix: "Prefix",
-    #             error_output_prefix: "ErrorOutputPrefix",
-    #             buffering_hints: {
-    #               size_in_m_bs: 1,
-    #               interval_in_seconds: 1,
-    #             },
-    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
-    #             encryption_configuration: {
-    #               no_encryption_config: "NoEncryption", # accepts NoEncryption
-    #               kms_encryption_config: {
-    #                 awskms_key_arn: "AWSKMSKeyARN", # required
-    #               },
-    #             },
-    #             cloud_watch_logging_options: {
-    #               enabled: false,
-    #               log_group_name: "LogGroupName",
-    #               log_stream_name: "LogStreamName",
-    #             },
-    #           },
-    #           data_format_conversion_configuration: {
-    #             schema_configuration: {
-    #               role_arn: "NonEmptyStringWithoutWhitespace",
-    #               catalog_id: "NonEmptyStringWithoutWhitespace",
-    #               database_name: "NonEmptyStringWithoutWhitespace",
-    #               table_name: "NonEmptyStringWithoutWhitespace",
-    #               region: "NonEmptyStringWithoutWhitespace",
-    #               version_id: "NonEmptyStringWithoutWhitespace",
-    #             },
-    #             input_format_configuration: {
-    #               deserializer: {
-    #                 open_x_json_ser_de: {
-    #                   convert_dots_in_json_keys_to_underscores: false,
-    #                   case_insensitive: false,
-    #                   column_to_json_key_mappings: {
-    #                     "NonEmptyStringWithoutWhitespace" => "NonEmptyString",
-    #                   },
-    #                 },
-    #                 hive_json_ser_de: {
-    #                   timestamp_formats: ["NonEmptyString"],
-    #                 },
-    #               },
-    #             },
-    #             output_format_configuration: {
-    #               serializer: {
-    #                 parquet_ser_de: {
-    #                   block_size_bytes: 1,
-    #                   page_size_bytes: 1,
-    #                   compression: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, SNAPPY
-    #                   enable_dictionary_compression: false,
-    #                   max_padding_bytes: 1,
-    #                   writer_version: "V1", # accepts V1, V2
-    #                 },
-    #                 orc_ser_de: {
-    #                   stripe_size_bytes: 1,
-    #                   block_size_bytes: 1,
-    #                   row_index_stride: 1,
-    #                   enable_padding: false,
-    #                   padding_tolerance: 1.0,
-    #                   compression: "NONE", # accepts NONE, ZLIB, SNAPPY
-    #                   bloom_filter_columns: ["NonEmptyStringWithoutWhitespace"],
-    #                   bloom_filter_false_positive_probability: 1.0,
-    #                   dictionary_key_threshold: 1.0,
-    #                   format_version: "V0_11", # accepts V0_11, V0_12
-    #                 },
-    #               },
-    #             },
-    #             enabled: false,
-    #           },
-    #           dynamic_partitioning_configuration: {
-    #             retry_options: {
-    #               duration_in_seconds: 1,
-    #             },
-    #             enabled: false,
-    #           },
-    #         },
-    #         redshift_destination_update: {
-    #           role_arn: "RoleARN",
-    #           cluster_jdbc_url: "ClusterJDBCURL",
-    #           copy_command: {
-    #             data_table_name: "DataTableName", # required
-    #             data_table_columns: "DataTableColumns",
-    #             copy_options: "CopyOptions",
-    #           },
-    #           username: "Username",
-    #           password: "Password",
-    #           retry_options: {
-    #             duration_in_seconds: 1,
-    #           },
-    #           s3_update: {
-    #             role_arn: "RoleARN",
-    #             bucket_arn: "BucketARN",
-    #             prefix: "Prefix",
-    #             error_output_prefix: "ErrorOutputPrefix",
-    #             buffering_hints: {
-    #               size_in_m_bs: 1,
-    #               interval_in_seconds: 1,
-    #             },
-    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
-    #             encryption_configuration: {
-    #               no_encryption_config: "NoEncryption", # accepts NoEncryption
-    #               kms_encryption_config: {
-    #                 awskms_key_arn: "AWSKMSKeyARN", # required
-    #               },
-    #             },
-    #             cloud_watch_logging_options: {
-    #               enabled: false,
-    #               log_group_name: "LogGroupName",
-    #               log_stream_name: "LogStreamName",
-    #             },
-    #           },
-    #           processing_configuration: {
-    #             enabled: false,
-    #             processors: [
-    #               {
-    #                 type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
-    #                 parameters: [
-    #                   {
-    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
-    #                     parameter_value: "ProcessorParameterValue", # required
-    #                   },
-    #                 ],
-    #               },
-    #             ],
-    #           },
-    #           s3_backup_mode: "Disabled", # accepts Disabled, Enabled
-    #           s3_backup_update: {
-    #             role_arn: "RoleARN",
-    #             bucket_arn: "BucketARN",
-    #             prefix: "Prefix",
-    #             error_output_prefix: "ErrorOutputPrefix",
-    #             buffering_hints: {
-    #               size_in_m_bs: 1,
-    #               interval_in_seconds: 1,
-    #             },
-    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
-    #             encryption_configuration: {
-    #               no_encryption_config: "NoEncryption", # accepts NoEncryption
-    #               kms_encryption_config: {
-    #                 awskms_key_arn: "AWSKMSKeyARN", # required
-    #               },
-    #             },
-    #             cloud_watch_logging_options: {
-    #               enabled: false,
-    #               log_group_name: "LogGroupName",
-    #               log_stream_name: "LogStreamName",
-    #             },
-    #           },
-    #           cloud_watch_logging_options: {
-    #             enabled: false,
-    #             log_group_name: "LogGroupName",
-    #             log_stream_name: "LogStreamName",
-    #           },
-    #         },
-    #         elasticsearch_destination_update: {
-    #           role_arn: "RoleARN",
-    #           domain_arn: "ElasticsearchDomainARN",
-    #           cluster_endpoint: "ElasticsearchClusterEndpoint",
-    #           index_name: "ElasticsearchIndexName",
-    #           type_name: "ElasticsearchTypeName",
-    #           index_rotation_period: "NoRotation", # accepts NoRotation, OneHour, OneDay, OneWeek, OneMonth
-    #           buffering_hints: {
-    #             interval_in_seconds: 1,
-    #             size_in_m_bs: 1,
-    #           },
-    #           retry_options: {
-    #             duration_in_seconds: 1,
-    #           },
-    #           s3_update: {
-    #             role_arn: "RoleARN",
-    #             bucket_arn: "BucketARN",
-    #             prefix: "Prefix",
-    #             error_output_prefix: "ErrorOutputPrefix",
-    #             buffering_hints: {
-    #               size_in_m_bs: 1,
-    #               interval_in_seconds: 1,
-    #             },
-    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
-    #             encryption_configuration: {
-    #               no_encryption_config: "NoEncryption", # accepts NoEncryption
-    #               kms_encryption_config: {
-    #                 awskms_key_arn: "AWSKMSKeyARN", # required
-    #               },
-    #             },
-    #             cloud_watch_logging_options: {
-    #               enabled: false,
-    #               log_group_name: "LogGroupName",
-    #               log_stream_name: "LogStreamName",
-    #             },
-    #           },
-    #           processing_configuration: {
-    #             enabled: false,
-    #             processors: [
-    #               {
-    #                 type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
-    #                 parameters: [
-    #                   {
-    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
-    #                     parameter_value: "ProcessorParameterValue", # required
-    #                   },
-    #                 ],
-    #               },
-    #             ],
-    #           },
-    #           cloud_watch_logging_options: {
-    #             enabled: false,
-    #             log_group_name: "LogGroupName",
-    #             log_stream_name: "LogStreamName",
-    #           },
-    #         },
-    #         amazonopensearchservice_destination_update: {
-    #           role_arn: "RoleARN",
-    #           domain_arn: "AmazonopensearchserviceDomainARN",
-    #           cluster_endpoint: "AmazonopensearchserviceClusterEndpoint",
-    #           index_name: "AmazonopensearchserviceIndexName",
-    #           type_name: "AmazonopensearchserviceTypeName",
-    #           index_rotation_period: "NoRotation", # accepts NoRotation, OneHour, OneDay, OneWeek, OneMonth
-    #           buffering_hints: {
-    #             interval_in_seconds: 1,
-    #             size_in_m_bs: 1,
-    #           },
-    #           retry_options: {
-    #             duration_in_seconds: 1,
-    #           },
-    #           s3_update: {
-    #             role_arn: "RoleARN",
-    #             bucket_arn: "BucketARN",
-    #             prefix: "Prefix",
-    #             error_output_prefix: "ErrorOutputPrefix",
-    #             buffering_hints: {
-    #               size_in_m_bs: 1,
-    #               interval_in_seconds: 1,
-    #             },
-    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
-    #             encryption_configuration: {
-    #               no_encryption_config: "NoEncryption", # accepts NoEncryption
-    #               kms_encryption_config: {
-    #                 awskms_key_arn: "AWSKMSKeyARN", # required
-    #               },
-    #             },
-    #             cloud_watch_logging_options: {
-    #               enabled: false,
-    #               log_group_name: "LogGroupName",
-    #               log_stream_name: "LogStreamName",
-    #             },
-    #           },
-    #           processing_configuration: {
-    #             enabled: false,
-    #             processors: [
-    #               {
-    #                 type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
-    #                 parameters: [
-    #                   {
-    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
-    #                     parameter_value: "ProcessorParameterValue", # required
-    #                   },
-    #                 ],
-    #               },
-    #             ],
-    #           },
-    #           cloud_watch_logging_options: {
-    #             enabled: false,
-    #             log_group_name: "LogGroupName",
-    #             log_stream_name: "LogStreamName",
-    #           },
-    #         },
-    #         splunk_destination_update: {
-    #           hec_endpoint: "HECEndpoint",
-    #           hec_endpoint_type: "Raw", # accepts Raw, Event
-    #           hec_token: "HECToken",
-    #           hec_acknowledgment_timeout_in_seconds: 1,
-    #           retry_options: {
-    #             duration_in_seconds: 1,
-    #           },
-    #           s3_backup_mode: "FailedEventsOnly", # accepts FailedEventsOnly, AllEvents
-    #           s3_update: {
-    #             role_arn: "RoleARN",
-    #             bucket_arn: "BucketARN",
-    #             prefix: "Prefix",
-    #             error_output_prefix: "ErrorOutputPrefix",
-    #             buffering_hints: {
-    #               size_in_m_bs: 1,
-    #               interval_in_seconds: 1,
-    #             },
-    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
-    #             encryption_configuration: {
-    #               no_encryption_config: "NoEncryption", # accepts NoEncryption
-    #               kms_encryption_config: {
-    #                 awskms_key_arn: "AWSKMSKeyARN", # required
-    #               },
-    #             },
-    #             cloud_watch_logging_options: {
-    #               enabled: false,
-    #               log_group_name: "LogGroupName",
-    #               log_stream_name: "LogStreamName",
-    #             },
-    #           },
-    #           processing_configuration: {
-    #             enabled: false,
-    #             processors: [
-    #               {
-    #                 type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
-    #                 parameters: [
-    #                   {
-    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
-    #                     parameter_value: "ProcessorParameterValue", # required
-    #                   },
-    #                 ],
-    #               },
-    #             ],
-    #           },
-    #           cloud_watch_logging_options: {
-    #             enabled: false,
-    #             log_group_name: "LogGroupName",
-    #             log_stream_name: "LogStreamName",
-    #           },
-    #         },
-    #         http_endpoint_destination_update: {
-    #           endpoint_configuration: {
-    #             url: "HttpEndpointUrl", # required
-    #             name: "HttpEndpointName",
-    #             access_key: "HttpEndpointAccessKey",
-    #           },
-    #           buffering_hints: {
-    #             size_in_m_bs: 1,
-    #             interval_in_seconds: 1,
-    #           },
-    #           cloud_watch_logging_options: {
-    #             enabled: false,
-    #             log_group_name: "LogGroupName",
-    #             log_stream_name: "LogStreamName",
-    #           },
-    #           request_configuration: {
-    #             content_encoding: "NONE", # accepts NONE, GZIP
-    #             common_attributes: [
-    #               {
-    #                 attribute_name: "HttpEndpointAttributeName", # required
-    #                 attribute_value: "HttpEndpointAttributeValue", # required
-    #               },
-    #             ],
-    #           },
-    #           processing_configuration: {
-    #             enabled: false,
-    #             processors: [
-    #               {
-    #                 type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
-    #                 parameters: [
-    #                   {
-    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
-    #                     parameter_value: "ProcessorParameterValue", # required
-    #                   },
-    #                 ],
-    #               },
-    #             ],
-    #           },
-    #           role_arn: "RoleARN",
-    #           retry_options: {
-    #             duration_in_seconds: 1,
-    #           },
-    #           s3_backup_mode: "FailedDataOnly", # accepts FailedDataOnly, AllData
-    #           s3_update: {
-    #             role_arn: "RoleARN",
-    #             bucket_arn: "BucketARN",
-    #             prefix: "Prefix",
-    #             error_output_prefix: "ErrorOutputPrefix",
-    #             buffering_hints: {
-    #               size_in_m_bs: 1,
-    #               interval_in_seconds: 1,
-    #             },
-    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
-    #             encryption_configuration: {
-    #               no_encryption_config: "NoEncryption", # accepts NoEncryption
-    #               kms_encryption_config: {
-    #                 awskms_key_arn: "AWSKMSKeyARN", # required
-    #               },
-    #             },
-    #             cloud_watch_logging_options: {
-    #               enabled: false,
-    #               log_group_name: "LogGroupName",
-    #               log_stream_name: "LogStreamName",
-    #             },
-    #           },
-    #         },
-    #         amazon_open_search_serverless_destination_update: {
-    #           role_arn: "RoleARN",
-    #           collection_endpoint: "AmazonOpenSearchServerlessCollectionEndpoint",
-    #           index_name: "AmazonOpenSearchServerlessIndexName",
-    #           buffering_hints: {
-    #             interval_in_seconds: 1,
-    #             size_in_m_bs: 1,
-    #           },
-    #           retry_options: {
-    #             duration_in_seconds: 1,
-    #           },
-    #           s3_update: {
-    #             role_arn: "RoleARN",
-    #             bucket_arn: "BucketARN",
-    #             prefix: "Prefix",
-    #             error_output_prefix: "ErrorOutputPrefix",
-    #             buffering_hints: {
-    #               size_in_m_bs: 1,
-    #               interval_in_seconds: 1,
-    #             },
-    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
-    #             encryption_configuration: {
-    #               no_encryption_config: "NoEncryption", # accepts NoEncryption
-    #               kms_encryption_config: {
-    #                 awskms_key_arn: "AWSKMSKeyARN", # required
-    #               },
-    #             },
-    #             cloud_watch_logging_options: {
-    #               enabled: false,
-    #               log_group_name: "LogGroupName",
-    #               log_stream_name: "LogStreamName",
-    #             },
-    #           },
-    #           processing_configuration: {
-    #             enabled: false,
-    #             processors: [
-    #               {
-    #                 type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
-    #                 parameters: [
-    #                   {
-    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
-    #                     parameter_value: "ProcessorParameterValue", # required
-    #                   },
-    #                 ],
-    #               },
-    #             ],
-    #           },
-    #           cloud_watch_logging_options: {
-    #             enabled: false,
-    #             log_group_name: "LogGroupName",
-    #             log_stream_name: "LogStreamName",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] delivery_stream_name
     #   The name of the delivery stream.
     #   @return [String]
@@ -6718,15 +4074,6 @@ module Aws::Firehose
     class UpdateDestinationOutput < Aws::EmptyStructure; end
 
     # The details of the VPC of the Amazon ES destination.
-    #
-    # @note When making an API call, you may pass VpcConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         subnet_ids: ["NonEmptyStringWithoutWhitespace"], # required
-    #         role_arn: "RoleARN", # required
-    #         security_group_ids: ["NonEmptyStringWithoutWhitespace"], # required
-    #       }
     #
     # @!attribute [rw] subnet_ids
     #   The IDs of the subnets that you want Kinesis Data Firehose to use to

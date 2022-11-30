@@ -10,14 +10,6 @@
 module Aws::Greengrass
   module Types
 
-    # @note When making an API call, you may pass AssociateRoleToGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         group_id: "__string", # required
-    #         role_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] group_id
     #   @return [String]
     #
@@ -48,13 +40,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssociateServiceRoleToAccountRequest
-    #   data as a hash:
-    #
-    #       {
-    #         role_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] role_arn
     #   The ARN of the service role you wish to associate with your account.
     #   @return [String]
@@ -208,16 +193,6 @@ module Aws::Greengrass
 
     # Information about a Greengrass core's connectivity.
     #
-    # @note When making an API call, you may pass ConnectivityInfo
-    #   data as a hash:
-    #
-    #       {
-    #         host_address: "__string",
-    #         id: "__string",
-    #         metadata: "__string",
-    #         port_number: 1,
-    #       }
-    #
     # @!attribute [rw] host_address
     #   The endpoint for the Greengrass core. Can be an IP address or DNS.
     #   @return [String]
@@ -249,17 +224,6 @@ module Aws::Greengrass
     # and contain built-in integration with local infrastructure, device
     # protocols, AWS, and other cloud services.
     #
-    # @note When making an API call, you may pass Connector
-    #   data as a hash:
-    #
-    #       {
-    #         connector_arn: "__string", # required
-    #         id: "__string", # required
-    #         parameters: {
-    #           "__string" => "__string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] connector_arn
     #   The ARN of the connector.
     #   @return [String]
@@ -287,21 +251,6 @@ module Aws::Greengrass
     # Information about the connector definition version, which is a
     # container for connectors.
     #
-    # @note When making an API call, you may pass ConnectorDefinitionVersion
-    #   data as a hash:
-    #
-    #       {
-    #         connectors: [
-    #           {
-    #             connector_arn: "__string", # required
-    #             id: "__string", # required
-    #             parameters: {
-    #               "__string" => "__string",
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] connectors
     #   A list of references to connectors in this version, with their
     #   corresponding configuration settings.
@@ -316,16 +265,6 @@ module Aws::Greengrass
     end
 
     # Information about a core.
-    #
-    # @note When making an API call, you may pass Core
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_arn: "__string", # required
-    #         id: "__string", # required
-    #         sync_shadow: false,
-    #         thing_arn: "__string", # required
-    #       }
     #
     # @!attribute [rw] certificate_arn
     #   The ARN of the certificate associated with the core.
@@ -359,20 +298,6 @@ module Aws::Greengrass
 
     # Information about a core definition version.
     #
-    # @note When making an API call, you may pass CoreDefinitionVersion
-    #   data as a hash:
-    #
-    #       {
-    #         cores: [
-    #           {
-    #             certificate_arn: "__string", # required
-    #             id: "__string", # required
-    #             sync_shadow: false,
-    #             thing_arn: "__string", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] cores
     #   A list of cores in the core definition version.
     #   @return [Array<Types::Core>]
@@ -385,28 +310,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateConnectorDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         amzn_client_token: "__string",
-    #         initial_version: {
-    #           connectors: [
-    #             {
-    #               connector_arn: "__string", # required
-    #               id: "__string", # required
-    #               parameters: {
-    #                 "__string" => "__string",
-    #               },
-    #             },
-    #           ],
-    #         },
-    #         name: "__string",
-    #         tags: {
-    #           "__string" => "__string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] amzn_client_token
     #   @return [String]
     #
@@ -468,23 +371,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateConnectorDefinitionVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         amzn_client_token: "__string",
-    #         connector_definition_id: "__string", # required
-    #         connectors: [
-    #           {
-    #             connector_arn: "__string", # required
-    #             id: "__string", # required
-    #             parameters: {
-    #               "__string" => "__string",
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] amzn_client_token
     #   @return [String]
     #
@@ -527,27 +413,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateCoreDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         amzn_client_token: "__string",
-    #         initial_version: {
-    #           cores: [
-    #             {
-    #               certificate_arn: "__string", # required
-    #               id: "__string", # required
-    #               sync_shadow: false,
-    #               thing_arn: "__string", # required
-    #             },
-    #           ],
-    #         },
-    #         name: "__string",
-    #         tags: {
-    #           "__string" => "__string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] amzn_client_token
     #   @return [String]
     #
@@ -608,22 +473,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateCoreDefinitionVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         amzn_client_token: "__string",
-    #         core_definition_id: "__string", # required
-    #         cores: [
-    #           {
-    #             certificate_arn: "__string", # required
-    #             id: "__string", # required
-    #             sync_shadow: false,
-    #             thing_arn: "__string", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] amzn_client_token
     #   @return [String]
     #
@@ -667,17 +516,6 @@ module Aws::Greengrass
     end
 
     # Information about a deployment.
-    #
-    # @note When making an API call, you may pass CreateDeploymentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         amzn_client_token: "__string",
-    #         deployment_id: "__string",
-    #         deployment_type: "NewDeployment", # required, accepts NewDeployment, Redeployment, ResetDeployment, ForceResetDeployment
-    #         group_id: "__string", # required
-    #         group_version_id: "__string",
-    #       }
     #
     # @!attribute [rw] amzn_client_token
     #   @return [String]
@@ -728,27 +566,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDeviceDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         amzn_client_token: "__string",
-    #         initial_version: {
-    #           devices: [
-    #             {
-    #               certificate_arn: "__string", # required
-    #               id: "__string", # required
-    #               sync_shadow: false,
-    #               thing_arn: "__string", # required
-    #             },
-    #           ],
-    #         },
-    #         name: "__string",
-    #         tags: {
-    #           "__string" => "__string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] amzn_client_token
     #   @return [String]
     #
@@ -809,22 +626,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDeviceDefinitionVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         amzn_client_token: "__string",
-    #         device_definition_id: "__string", # required
-    #         devices: [
-    #           {
-    #             certificate_arn: "__string", # required
-    #             id: "__string", # required
-    #             sync_shadow: false,
-    #             thing_arn: "__string", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] amzn_client_token
     #   @return [String]
     #
@@ -867,62 +668,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateFunctionDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         amzn_client_token: "__string",
-    #         initial_version: {
-    #           default_config: {
-    #             execution: {
-    #               isolation_mode: "GreengrassContainer", # accepts GreengrassContainer, NoContainer
-    #               run_as: {
-    #                 gid: 1,
-    #                 uid: 1,
-    #               },
-    #             },
-    #           },
-    #           functions: [
-    #             {
-    #               function_arn: "__string",
-    #               function_configuration: {
-    #                 encoding_type: "binary", # accepts binary, json
-    #                 environment: {
-    #                   access_sysfs: false,
-    #                   execution: {
-    #                     isolation_mode: "GreengrassContainer", # accepts GreengrassContainer, NoContainer
-    #                     run_as: {
-    #                       gid: 1,
-    #                       uid: 1,
-    #                     },
-    #                   },
-    #                   resource_access_policies: [
-    #                     {
-    #                       permission: "ro", # accepts ro, rw
-    #                       resource_id: "__string", # required
-    #                     },
-    #                   ],
-    #                   variables: {
-    #                     "__string" => "__string",
-    #                   },
-    #                 },
-    #                 exec_args: "__string",
-    #                 executable: "__string",
-    #                 memory_size: 1,
-    #                 pinned: false,
-    #                 timeout: 1,
-    #                 function_runtime_override: "__string",
-    #               },
-    #               id: "__string", # required
-    #             },
-    #           ],
-    #         },
-    #         name: "__string",
-    #         tags: {
-    #           "__string" => "__string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] amzn_client_token
     #   @return [String]
     #
@@ -983,57 +728,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateFunctionDefinitionVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         amzn_client_token: "__string",
-    #         default_config: {
-    #           execution: {
-    #             isolation_mode: "GreengrassContainer", # accepts GreengrassContainer, NoContainer
-    #             run_as: {
-    #               gid: 1,
-    #               uid: 1,
-    #             },
-    #           },
-    #         },
-    #         function_definition_id: "__string", # required
-    #         functions: [
-    #           {
-    #             function_arn: "__string",
-    #             function_configuration: {
-    #               encoding_type: "binary", # accepts binary, json
-    #               environment: {
-    #                 access_sysfs: false,
-    #                 execution: {
-    #                   isolation_mode: "GreengrassContainer", # accepts GreengrassContainer, NoContainer
-    #                   run_as: {
-    #                     gid: 1,
-    #                     uid: 1,
-    #                   },
-    #                 },
-    #                 resource_access_policies: [
-    #                   {
-    #                     permission: "ro", # accepts ro, rw
-    #                     resource_id: "__string", # required
-    #                   },
-    #                 ],
-    #                 variables: {
-    #                   "__string" => "__string",
-    #                 },
-    #               },
-    #               exec_args: "__string",
-    #               executable: "__string",
-    #               memory_size: 1,
-    #               pinned: false,
-    #               timeout: 1,
-    #               function_runtime_override: "__string",
-    #             },
-    #             id: "__string", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] amzn_client_token
     #   @return [String]
     #
@@ -1082,14 +776,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateGroupCertificateAuthorityRequest
-    #   data as a hash:
-    #
-    #       {
-    #         amzn_client_token: "__string",
-    #         group_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] amzn_client_token
     #   @return [String]
     #
@@ -1117,26 +803,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         amzn_client_token: "__string",
-    #         initial_version: {
-    #           connector_definition_version_arn: "__string",
-    #           core_definition_version_arn: "__string",
-    #           device_definition_version_arn: "__string",
-    #           function_definition_version_arn: "__string",
-    #           logger_definition_version_arn: "__string",
-    #           resource_definition_version_arn: "__string",
-    #           subscription_definition_version_arn: "__string",
-    #         },
-    #         name: "__string", # required
-    #         tags: {
-    #           "__string" => "__string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] amzn_client_token
     #   @return [String]
     #
@@ -1197,21 +863,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateGroupVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         amzn_client_token: "__string",
-    #         connector_definition_version_arn: "__string",
-    #         core_definition_version_arn: "__string",
-    #         device_definition_version_arn: "__string",
-    #         function_definition_version_arn: "__string",
-    #         group_id: "__string", # required
-    #         logger_definition_version_arn: "__string",
-    #         resource_definition_version_arn: "__string",
-    #         subscription_definition_version_arn: "__string",
-    #       }
-    #
     # @!attribute [rw] amzn_client_token
     #   @return [String]
     #
@@ -1278,28 +929,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateLoggerDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         amzn_client_token: "__string",
-    #         initial_version: {
-    #           loggers: [
-    #             {
-    #               component: "GreengrassSystem", # required, accepts GreengrassSystem, Lambda
-    #               id: "__string", # required
-    #               level: "DEBUG", # required, accepts DEBUG, INFO, WARN, ERROR, FATAL
-    #               space: 1,
-    #               type: "FileSystem", # required, accepts FileSystem, AWSCloudWatch
-    #             },
-    #           ],
-    #         },
-    #         name: "__string",
-    #         tags: {
-    #           "__string" => "__string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] amzn_client_token
     #   @return [String]
     #
@@ -1360,23 +989,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateLoggerDefinitionVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         amzn_client_token: "__string",
-    #         logger_definition_id: "__string", # required
-    #         loggers: [
-    #           {
-    #             component: "GreengrassSystem", # required, accepts GreengrassSystem, Lambda
-    #             id: "__string", # required
-    #             level: "DEBUG", # required, accepts DEBUG, INFO, WARN, ERROR, FATAL
-    #             space: 1,
-    #             type: "FileSystem", # required, accepts FileSystem, AWSCloudWatch
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] amzn_client_token
     #   @return [String]
     #
@@ -1419,62 +1031,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateResourceDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         amzn_client_token: "__string",
-    #         initial_version: {
-    #           resources: [
-    #             {
-    #               id: "__string", # required
-    #               name: "__string", # required
-    #               resource_data_container: { # required
-    #                 local_device_resource_data: {
-    #                   group_owner_setting: {
-    #                     auto_add_group_owner: false,
-    #                     group_owner: "__string",
-    #                   },
-    #                   source_path: "__string",
-    #                 },
-    #                 local_volume_resource_data: {
-    #                   destination_path: "__string",
-    #                   group_owner_setting: {
-    #                     auto_add_group_owner: false,
-    #                     group_owner: "__string",
-    #                   },
-    #                   source_path: "__string",
-    #                 },
-    #                 s3_machine_learning_model_resource_data: {
-    #                   destination_path: "__string",
-    #                   owner_setting: {
-    #                     group_owner: "__string", # required
-    #                     group_permission: "ro", # required, accepts ro, rw
-    #                   },
-    #                   s3_uri: "__string",
-    #                 },
-    #                 sage_maker_machine_learning_model_resource_data: {
-    #                   destination_path: "__string",
-    #                   owner_setting: {
-    #                     group_owner: "__string", # required
-    #                     group_permission: "ro", # required, accepts ro, rw
-    #                   },
-    #                   sage_maker_job_arn: "__string",
-    #                 },
-    #                 secrets_manager_secret_resource_data: {
-    #                   arn: "__string",
-    #                   additional_staging_labels_to_download: ["__string"],
-    #                 },
-    #               },
-    #             },
-    #           ],
-    #         },
-    #         name: "__string",
-    #         tags: {
-    #           "__string" => "__string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] amzn_client_token
     #   @return [String]
     #
@@ -1535,57 +1091,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateResourceDefinitionVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         amzn_client_token: "__string",
-    #         resource_definition_id: "__string", # required
-    #         resources: [
-    #           {
-    #             id: "__string", # required
-    #             name: "__string", # required
-    #             resource_data_container: { # required
-    #               local_device_resource_data: {
-    #                 group_owner_setting: {
-    #                   auto_add_group_owner: false,
-    #                   group_owner: "__string",
-    #                 },
-    #                 source_path: "__string",
-    #               },
-    #               local_volume_resource_data: {
-    #                 destination_path: "__string",
-    #                 group_owner_setting: {
-    #                   auto_add_group_owner: false,
-    #                   group_owner: "__string",
-    #                 },
-    #                 source_path: "__string",
-    #               },
-    #               s3_machine_learning_model_resource_data: {
-    #                 destination_path: "__string",
-    #                 owner_setting: {
-    #                   group_owner: "__string", # required
-    #                   group_permission: "ro", # required, accepts ro, rw
-    #                 },
-    #                 s3_uri: "__string",
-    #               },
-    #               sage_maker_machine_learning_model_resource_data: {
-    #                 destination_path: "__string",
-    #                 owner_setting: {
-    #                   group_owner: "__string", # required
-    #                   group_permission: "ro", # required, accepts ro, rw
-    #                 },
-    #                 sage_maker_job_arn: "__string",
-    #               },
-    #               secrets_manager_secret_resource_data: {
-    #                 arn: "__string",
-    #                 additional_staging_labels_to_download: ["__string"],
-    #               },
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] amzn_client_token
     #   @return [String]
     #
@@ -1629,19 +1134,6 @@ module Aws::Greengrass
     end
 
     # Request for the CreateSoftwareUpdateJob API.
-    #
-    # @note When making an API call, you may pass CreateSoftwareUpdateJobRequest
-    #   data as a hash:
-    #
-    #       {
-    #         amzn_client_token: "__string",
-    #         s3_url_signer_role: "S3UrlSignerRole", # required
-    #         software_to_update: "core", # required, accepts core, ota_agent
-    #         update_agent_log_level: "NONE", # accepts NONE, TRACE, DEBUG, VERBOSE, INFO, WARN, ERROR, FATAL
-    #         update_targets: ["__string"], # required
-    #         update_targets_architecture: "armv6l", # required, accepts armv6l, armv7l, x86_64, aarch64
-    #         update_targets_operating_system: "ubuntu", # required, accepts ubuntu, raspbian, amazon_linux, openwrt
-    #       }
     #
     # @!attribute [rw] amzn_client_token
     #   @return [String]
@@ -1711,27 +1203,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateSubscriptionDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         amzn_client_token: "__string",
-    #         initial_version: {
-    #           subscriptions: [
-    #             {
-    #               id: "__string", # required
-    #               source: "__string", # required
-    #               subject: "__string", # required
-    #               target: "__string", # required
-    #             },
-    #           ],
-    #         },
-    #         name: "__string",
-    #         tags: {
-    #           "__string" => "__string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] amzn_client_token
     #   @return [String]
     #
@@ -1792,22 +1263,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateSubscriptionDefinitionVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         amzn_client_token: "__string",
-    #         subscription_definition_id: "__string", # required
-    #         subscriptions: [
-    #           {
-    #             id: "__string", # required
-    #             source: "__string", # required
-    #             subject: "__string", # required
-    #             target: "__string", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] amzn_client_token
     #   @return [String]
     #
@@ -1901,13 +1356,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteConnectorDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connector_definition_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] connector_definition_id
     #   @return [String]
     #
@@ -1923,13 +1371,6 @@ module Aws::Greengrass
     #
     class DeleteConnectorDefinitionResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteCoreDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         core_definition_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] core_definition_id
     #   @return [String]
     #
@@ -1945,13 +1386,6 @@ module Aws::Greengrass
     #
     class DeleteCoreDefinitionResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteDeviceDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_definition_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] device_definition_id
     #   @return [String]
     #
@@ -1967,13 +1401,6 @@ module Aws::Greengrass
     #
     class DeleteDeviceDefinitionResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteFunctionDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_definition_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] function_definition_id
     #   @return [String]
     #
@@ -1989,13 +1416,6 @@ module Aws::Greengrass
     #
     class DeleteFunctionDefinitionResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         group_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] group_id
     #   @return [String]
     #
@@ -2011,13 +1431,6 @@ module Aws::Greengrass
     #
     class DeleteGroupResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteLoggerDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         logger_definition_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] logger_definition_id
     #   @return [String]
     #
@@ -2033,13 +1446,6 @@ module Aws::Greengrass
     #
     class DeleteLoggerDefinitionResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteResourceDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_definition_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] resource_definition_id
     #   @return [String]
     #
@@ -2055,13 +1461,6 @@ module Aws::Greengrass
     #
     class DeleteResourceDefinitionResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteSubscriptionDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         subscription_definition_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] subscription_definition_id
     #   @return [String]
     #
@@ -2114,16 +1513,6 @@ module Aws::Greengrass
 
     # Information about a device.
     #
-    # @note When making an API call, you may pass Device
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_arn: "__string", # required
-    #         id: "__string", # required
-    #         sync_shadow: false,
-    #         thing_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] certificate_arn
     #   The ARN of the certificate associated with the device.
     #   @return [String]
@@ -2156,20 +1545,6 @@ module Aws::Greengrass
 
     # Information about a device definition version.
     #
-    # @note When making an API call, you may pass DeviceDefinitionVersion
-    #   data as a hash:
-    #
-    #       {
-    #         devices: [
-    #           {
-    #             certificate_arn: "__string", # required
-    #             id: "__string", # required
-    #             sync_shadow: false,
-    #             thing_arn: "__string", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] devices
     #   A list of devices in the definition version.
     #   @return [Array<Types::Device>]
@@ -2182,13 +1557,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisassociateRoleFromGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         group_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] group_id
     #   @return [String]
     #
@@ -2213,8 +1581,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DisassociateServiceRoleFromAccountRequest AWS API Documentation
     #
     class DisassociateServiceRoleFromAccountRequest < Aws::EmptyStructure; end
@@ -2258,42 +1624,6 @@ module Aws::Greengrass
 
     # Information about a Lambda function.
     #
-    # @note When making an API call, you may pass Function
-    #   data as a hash:
-    #
-    #       {
-    #         function_arn: "__string",
-    #         function_configuration: {
-    #           encoding_type: "binary", # accepts binary, json
-    #           environment: {
-    #             access_sysfs: false,
-    #             execution: {
-    #               isolation_mode: "GreengrassContainer", # accepts GreengrassContainer, NoContainer
-    #               run_as: {
-    #                 gid: 1,
-    #                 uid: 1,
-    #               },
-    #             },
-    #             resource_access_policies: [
-    #               {
-    #                 permission: "ro", # accepts ro, rw
-    #                 resource_id: "__string", # required
-    #               },
-    #             ],
-    #             variables: {
-    #               "__string" => "__string",
-    #             },
-    #           },
-    #           exec_args: "__string",
-    #           executable: "__string",
-    #           memory_size: 1,
-    #           pinned: false,
-    #           timeout: 1,
-    #           function_runtime_override: "__string",
-    #         },
-    #         id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] function_arn
     #   The ARN of the Lambda function.
     #   @return [String]
@@ -2319,38 +1649,6 @@ module Aws::Greengrass
     end
 
     # The configuration of the Lambda function.
-    #
-    # @note When making an API call, you may pass FunctionConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         encoding_type: "binary", # accepts binary, json
-    #         environment: {
-    #           access_sysfs: false,
-    #           execution: {
-    #             isolation_mode: "GreengrassContainer", # accepts GreengrassContainer, NoContainer
-    #             run_as: {
-    #               gid: 1,
-    #               uid: 1,
-    #             },
-    #           },
-    #           resource_access_policies: [
-    #             {
-    #               permission: "ro", # accepts ro, rw
-    #               resource_id: "__string", # required
-    #             },
-    #           ],
-    #           variables: {
-    #             "__string" => "__string",
-    #           },
-    #         },
-    #         exec_args: "__string",
-    #         executable: "__string",
-    #         memory_size: 1,
-    #         pinned: false,
-    #         timeout: 1,
-    #         function_runtime_override: "__string",
-    #       }
     #
     # @!attribute [rw] encoding_type
     #   The expected encoding type of the input payload for the function.
@@ -2408,29 +1706,6 @@ module Aws::Greengrass
 
     # The environment configuration of the function.
     #
-    # @note When making an API call, you may pass FunctionConfigurationEnvironment
-    #   data as a hash:
-    #
-    #       {
-    #         access_sysfs: false,
-    #         execution: {
-    #           isolation_mode: "GreengrassContainer", # accepts GreengrassContainer, NoContainer
-    #           run_as: {
-    #             gid: 1,
-    #             uid: 1,
-    #           },
-    #         },
-    #         resource_access_policies: [
-    #           {
-    #             permission: "ro", # accepts ro, rw
-    #             resource_id: "__string", # required
-    #           },
-    #         ],
-    #         variables: {
-    #           "__string" => "__string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] access_sysfs
     #   If true, the Lambda function is allowed to access the host's /sys
     #   folder. Use this when the Lambda function needs to read device
@@ -2467,19 +1742,6 @@ module Aws::Greengrass
     # The default configuration that applies to all Lambda functions in the
     # group. Individual Lambda functions can override these settings.
     #
-    # @note When making an API call, you may pass FunctionDefaultConfig
-    #   data as a hash:
-    #
-    #       {
-    #         execution: {
-    #           isolation_mode: "GreengrassContainer", # accepts GreengrassContainer, NoContainer
-    #           run_as: {
-    #             gid: 1,
-    #             uid: 1,
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] execution
     #   Configuration information that specifies how a Lambda function runs.
     #   @return [Types::FunctionDefaultExecutionConfig]
@@ -2493,17 +1755,6 @@ module Aws::Greengrass
     end
 
     # Configuration information that specifies how a Lambda function runs.
-    #
-    # @note When making an API call, you may pass FunctionDefaultExecutionConfig
-    #   data as a hash:
-    #
-    #       {
-    #         isolation_mode: "GreengrassContainer", # accepts GreengrassContainer, NoContainer
-    #         run_as: {
-    #           gid: 1,
-    #           uid: 1,
-    #         },
-    #       }
     #
     # @!attribute [rw] isolation_mode
     #   Specifies whether the Lambda function runs in a Greengrass container
@@ -2535,55 +1786,6 @@ module Aws::Greengrass
 
     # Information about a function definition version.
     #
-    # @note When making an API call, you may pass FunctionDefinitionVersion
-    #   data as a hash:
-    #
-    #       {
-    #         default_config: {
-    #           execution: {
-    #             isolation_mode: "GreengrassContainer", # accepts GreengrassContainer, NoContainer
-    #             run_as: {
-    #               gid: 1,
-    #               uid: 1,
-    #             },
-    #           },
-    #         },
-    #         functions: [
-    #           {
-    #             function_arn: "__string",
-    #             function_configuration: {
-    #               encoding_type: "binary", # accepts binary, json
-    #               environment: {
-    #                 access_sysfs: false,
-    #                 execution: {
-    #                   isolation_mode: "GreengrassContainer", # accepts GreengrassContainer, NoContainer
-    #                   run_as: {
-    #                     gid: 1,
-    #                     uid: 1,
-    #                   },
-    #                 },
-    #                 resource_access_policies: [
-    #                   {
-    #                     permission: "ro", # accepts ro, rw
-    #                     resource_id: "__string", # required
-    #                   },
-    #                 ],
-    #                 variables: {
-    #                   "__string" => "__string",
-    #                 },
-    #               },
-    #               exec_args: "__string",
-    #               executable: "__string",
-    #               memory_size: 1,
-    #               pinned: false,
-    #               timeout: 1,
-    #               function_runtime_override: "__string",
-    #             },
-    #             id: "__string", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] default_config
     #   The default configuration that applies to all Lambda functions in
     #   this function definition version. Individual Lambda functions can
@@ -2604,17 +1806,6 @@ module Aws::Greengrass
     end
 
     # Configuration information that specifies how a Lambda function runs.
-    #
-    # @note When making an API call, you may pass FunctionExecutionConfig
-    #   data as a hash:
-    #
-    #       {
-    #         isolation_mode: "GreengrassContainer", # accepts GreengrassContainer, NoContainer
-    #         run_as: {
-    #           gid: 1,
-    #           uid: 1,
-    #         },
-    #       }
     #
     # @!attribute [rw] isolation_mode
     #   Specifies whether the Lambda function runs in a Greengrass container
@@ -2653,14 +1844,6 @@ module Aws::Greengrass
     # ''greengrass-root/config'' to set
     # ''allowFunctionsToRunAsRoot'' to ''yes''.
     #
-    # @note When making an API call, you may pass FunctionRunAsConfig
-    #   data as a hash:
-    #
-    #       {
-    #         gid: 1,
-    #         uid: 1,
-    #       }
-    #
     # @!attribute [rw] gid
     #   The group ID whose permissions are used to run a Lambda function.
     #   @return [Integer]
@@ -2697,13 +1880,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetAssociatedRoleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         group_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] group_id
     #   @return [String]
     #
@@ -2732,13 +1908,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetBulkDeploymentStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         bulk_deployment_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] bulk_deployment_id
     #   @return [String]
     #
@@ -2790,13 +1959,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetConnectivityInfoRequest
-    #   data as a hash:
-    #
-    #       {
-    #         thing_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] thing_name
     #   @return [String]
     #
@@ -2827,13 +1989,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetConnectorDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connector_definition_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] connector_definition_id
     #   @return [String]
     #
@@ -2885,15 +2040,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetConnectorDefinitionVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connector_definition_id: "__string", # required
-    #         connector_definition_version_id: "__string", # required
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] connector_definition_id
     #   @return [String]
     #
@@ -2954,13 +2100,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetCoreDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         core_definition_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] core_definition_id
     #   @return [String]
     #
@@ -3012,14 +2151,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetCoreDefinitionVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         core_definition_id: "__string", # required
-    #         core_definition_version_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] core_definition_id
     #   @return [String]
     #
@@ -3074,14 +2205,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDeploymentStatusRequest
-    #   data as a hash:
-    #
-    #       {
-    #         deployment_id: "__string", # required
-    #         group_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] deployment_id
     #   @return [String]
     #
@@ -3133,13 +2256,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDeviceDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_definition_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] device_definition_id
     #   @return [String]
     #
@@ -3191,15 +2307,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDeviceDefinitionVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_definition_id: "__string", # required
-    #         device_definition_version_id: "__string", # required
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] device_definition_id
     #   @return [String]
     #
@@ -3258,13 +2365,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetFunctionDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_definition_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] function_definition_id
     #   @return [String]
     #
@@ -3316,15 +2416,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetFunctionDefinitionVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_definition_id: "__string", # required
-    #         function_definition_version_id: "__string", # required
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] function_definition_id
     #   @return [String]
     #
@@ -3385,14 +2476,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetGroupCertificateAuthorityRequest
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_authority_id: "__string", # required
-    #         group_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] certificate_authority_id
     #   @return [String]
     #
@@ -3432,13 +2515,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetGroupCertificateConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         group_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] group_id
     #   @return [String]
     #
@@ -3469,13 +2545,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         group_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] group_id
     #   @return [String]
     #
@@ -3527,14 +2596,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetGroupVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         group_id: "__string", # required
-    #         group_version_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] group_id
     #   @return [String]
     #
@@ -3585,13 +2646,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLoggerDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         logger_definition_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] logger_definition_id
     #   @return [String]
     #
@@ -3643,15 +2697,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLoggerDefinitionVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         logger_definition_id: "__string", # required
-    #         logger_definition_version_id: "__string", # required
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] logger_definition_id
     #   @return [String]
     #
@@ -3706,13 +2751,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetResourceDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_definition_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] resource_definition_id
     #   @return [String]
     #
@@ -3764,14 +2802,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetResourceDefinitionVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_definition_id: "__string", # required
-    #         resource_definition_version_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] resource_definition_id
     #   @return [String]
     #
@@ -3822,8 +2852,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetServiceRoleForAccountRequest AWS API Documentation
     #
     class GetServiceRoleForAccountRequest < Aws::EmptyStructure; end
@@ -3845,13 +2873,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSubscriptionDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         subscription_definition_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] subscription_definition_id
     #   @return [String]
     #
@@ -3903,15 +2924,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetSubscriptionDefinitionVersionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "__string",
-    #         subscription_definition_id: "__string", # required
-    #         subscription_definition_version_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] next_token
     #   @return [String]
     #
@@ -3972,13 +2984,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetThingRuntimeConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         thing_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] thing_name
     #   @return [String]
     #
@@ -4097,14 +3102,6 @@ module Aws::Greengrass
 
     # Group owner related settings for local resources.
     #
-    # @note When making an API call, you may pass GroupOwnerSetting
-    #   data as a hash:
-    #
-    #       {
-    #         auto_add_group_owner: false,
-    #         group_owner: "__string",
-    #       }
-    #
     # @!attribute [rw] auto_add_group_owner
     #   If true, AWS IoT Greengrass automatically adds the specified Linux
     #   OS group owner of the resource to the Lambda process privileges.
@@ -4127,19 +3124,6 @@ module Aws::Greengrass
     end
 
     # Information about a group version.
-    #
-    # @note When making an API call, you may pass GroupVersion
-    #   data as a hash:
-    #
-    #       {
-    #         connector_definition_version_arn: "__string",
-    #         core_definition_version_arn: "__string",
-    #         device_definition_version_arn: "__string",
-    #         function_definition_version_arn: "__string",
-    #         logger_definition_version_arn: "__string",
-    #         resource_definition_version_arn: "__string",
-    #         subscription_definition_version_arn: "__string",
-    #       }
     #
     # @!attribute [rw] connector_definition_version_arn
     #   The ARN of the connector definition version for this group.
@@ -4201,15 +3185,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListBulkDeploymentDetailedReportsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         bulk_deployment_id: "__string", # required
-    #         max_results: "__string",
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] bulk_deployment_id
     #   @return [String]
     #
@@ -4248,14 +3223,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListBulkDeploymentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: "__string",
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [String]
     #
@@ -4289,15 +3256,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListConnectorDefinitionVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connector_definition_id: "__string", # required
-    #         max_results: "__string",
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] connector_definition_id
     #   @return [String]
     #
@@ -4332,14 +3290,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListConnectorDefinitionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: "__string",
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [String]
     #
@@ -4370,15 +3320,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCoreDefinitionVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         core_definition_id: "__string", # required
-    #         max_results: "__string",
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] core_definition_id
     #   @return [String]
     #
@@ -4413,14 +3354,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListCoreDefinitionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: "__string",
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [String]
     #
@@ -4471,15 +3404,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDeploymentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         group_id: "__string", # required
-    #         max_results: "__string",
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] group_id
     #   @return [String]
     #
@@ -4517,15 +3441,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDeviceDefinitionVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_definition_id: "__string", # required
-    #         max_results: "__string",
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] device_definition_id
     #   @return [String]
     #
@@ -4560,14 +3475,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDeviceDefinitionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: "__string",
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [String]
     #
@@ -4598,15 +3505,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFunctionDefinitionVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_definition_id: "__string", # required
-    #         max_results: "__string",
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] function_definition_id
     #   @return [String]
     #
@@ -4641,14 +3539,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListFunctionDefinitionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: "__string",
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [String]
     #
@@ -4679,13 +3569,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListGroupCertificateAuthoritiesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         group_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] group_id
     #   @return [String]
     #
@@ -4709,15 +3592,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListGroupVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         group_id: "__string", # required
-    #         max_results: "__string",
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] group_id
     #   @return [String]
     #
@@ -4752,14 +3626,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: "__string",
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [String]
     #
@@ -4793,15 +3659,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListLoggerDefinitionVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         logger_definition_id: "__string", # required
-    #         max_results: "__string",
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] logger_definition_id
     #   @return [String]
     #
@@ -4836,14 +3693,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListLoggerDefinitionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: "__string",
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [String]
     #
@@ -4874,15 +3723,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListResourceDefinitionVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: "__string",
-    #         next_token: "__string",
-    #         resource_definition_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [String]
     #
@@ -4917,14 +3757,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListResourceDefinitionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: "__string",
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [String]
     #
@@ -4955,15 +3787,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSubscriptionDefinitionVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: "__string",
-    #         next_token: "__string",
-    #         subscription_definition_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [String]
     #
@@ -4998,14 +3821,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListSubscriptionDefinitionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: "__string",
-    #         next_token: "__string",
-    #       }
-    #
     # @!attribute [rw] max_results
     #   @return [String]
     #
@@ -5036,13 +3851,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "__string", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   @return [String]
     #
@@ -5088,17 +3896,6 @@ module Aws::Greengrass
 
     # Attributes that define a local device resource.
     #
-    # @note When making an API call, you may pass LocalDeviceResourceData
-    #   data as a hash:
-    #
-    #       {
-    #         group_owner_setting: {
-    #           auto_add_group_owner: false,
-    #           group_owner: "__string",
-    #         },
-    #         source_path: "__string",
-    #       }
-    #
     # @!attribute [rw] group_owner_setting
     #   Group/owner related settings for local resources.
     #   @return [Types::GroupOwnerSetting]
@@ -5119,18 +3916,6 @@ module Aws::Greengrass
     end
 
     # Attributes that define a local volume resource.
-    #
-    # @note When making an API call, you may pass LocalVolumeResourceData
-    #   data as a hash:
-    #
-    #       {
-    #         destination_path: "__string",
-    #         group_owner_setting: {
-    #           auto_add_group_owner: false,
-    #           group_owner: "__string",
-    #         },
-    #         source_path: "__string",
-    #       }
     #
     # @!attribute [rw] destination_path
     #   The absolute local path of the resource inside the Lambda
@@ -5159,17 +3944,6 @@ module Aws::Greengrass
     end
 
     # Information about a logger
-    #
-    # @note When making an API call, you may pass Logger
-    #   data as a hash:
-    #
-    #       {
-    #         component: "GreengrassSystem", # required, accepts GreengrassSystem, Lambda
-    #         id: "__string", # required
-    #         level: "DEBUG", # required, accepts DEBUG, INFO, WARN, ERROR, FATAL
-    #         space: 1,
-    #         type: "FileSystem", # required, accepts FileSystem, AWSCloudWatch
-    #       }
     #
     # @!attribute [rw] component
     #   The component that will be subject to logging.
@@ -5208,21 +3982,6 @@ module Aws::Greengrass
 
     # Information about a logger definition version.
     #
-    # @note When making an API call, you may pass LoggerDefinitionVersion
-    #   data as a hash:
-    #
-    #       {
-    #         loggers: [
-    #           {
-    #             component: "GreengrassSystem", # required, accepts GreengrassSystem, Lambda
-    #             id: "__string", # required
-    #             level: "DEBUG", # required, accepts DEBUG, INFO, WARN, ERROR, FATAL
-    #             space: 1,
-    #             type: "FileSystem", # required, accepts FileSystem, AWSCloudWatch
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] loggers
     #   A list of loggers.
     #   @return [Array<Types::Logger>]
@@ -5236,15 +3995,6 @@ module Aws::Greengrass
     end
 
     # Information about a group reset request.
-    #
-    # @note When making an API call, you may pass ResetDeploymentsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         amzn_client_token: "__string",
-    #         force: false,
-    #         group_id: "__string", # required
-    #       }
     #
     # @!attribute [rw] amzn_client_token
     #   @return [String]
@@ -5285,51 +4035,6 @@ module Aws::Greengrass
 
     # Information about a resource.
     #
-    # @note When making an API call, you may pass Resource
-    #   data as a hash:
-    #
-    #       {
-    #         id: "__string", # required
-    #         name: "__string", # required
-    #         resource_data_container: { # required
-    #           local_device_resource_data: {
-    #             group_owner_setting: {
-    #               auto_add_group_owner: false,
-    #               group_owner: "__string",
-    #             },
-    #             source_path: "__string",
-    #           },
-    #           local_volume_resource_data: {
-    #             destination_path: "__string",
-    #             group_owner_setting: {
-    #               auto_add_group_owner: false,
-    #               group_owner: "__string",
-    #             },
-    #             source_path: "__string",
-    #           },
-    #           s3_machine_learning_model_resource_data: {
-    #             destination_path: "__string",
-    #             owner_setting: {
-    #               group_owner: "__string", # required
-    #               group_permission: "ro", # required, accepts ro, rw
-    #             },
-    #             s3_uri: "__string",
-    #           },
-    #           sage_maker_machine_learning_model_resource_data: {
-    #             destination_path: "__string",
-    #             owner_setting: {
-    #               group_owner: "__string", # required
-    #               group_permission: "ro", # required, accepts ro, rw
-    #             },
-    #             sage_maker_job_arn: "__string",
-    #           },
-    #           secrets_manager_secret_resource_data: {
-    #             arn: "__string",
-    #             additional_staging_labels_to_download: ["__string"],
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] id
     #   The resource ID, used to refer to a resource in the Lambda function
     #   configuration. Max length is 128 characters with pattern
@@ -5360,14 +4065,6 @@ module Aws::Greengrass
 
     # A policy used by the function to access a resource.
     #
-    # @note When making an API call, you may pass ResourceAccessPolicy
-    #   data as a hash:
-    #
-    #       {
-    #         permission: "ro", # accepts ro, rw
-    #         resource_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] permission
     #   The permissions that the Lambda function has to the resource. Can be
     #   one of ''rw'' (read/write) or ''ro'' (read-only).
@@ -5393,47 +4090,6 @@ module Aws::Greengrass
     # ''SageMakerMachineLearningModelResourceData'',
     # ''S3MachineLearningModelResourceData'',
     # ''SecretsManagerSecretResourceData''.
-    #
-    # @note When making an API call, you may pass ResourceDataContainer
-    #   data as a hash:
-    #
-    #       {
-    #         local_device_resource_data: {
-    #           group_owner_setting: {
-    #             auto_add_group_owner: false,
-    #             group_owner: "__string",
-    #           },
-    #           source_path: "__string",
-    #         },
-    #         local_volume_resource_data: {
-    #           destination_path: "__string",
-    #           group_owner_setting: {
-    #             auto_add_group_owner: false,
-    #             group_owner: "__string",
-    #           },
-    #           source_path: "__string",
-    #         },
-    #         s3_machine_learning_model_resource_data: {
-    #           destination_path: "__string",
-    #           owner_setting: {
-    #             group_owner: "__string", # required
-    #             group_permission: "ro", # required, accepts ro, rw
-    #           },
-    #           s3_uri: "__string",
-    #         },
-    #         sage_maker_machine_learning_model_resource_data: {
-    #           destination_path: "__string",
-    #           owner_setting: {
-    #             group_owner: "__string", # required
-    #             group_permission: "ro", # required, accepts ro, rw
-    #           },
-    #           sage_maker_job_arn: "__string",
-    #         },
-    #         secrets_manager_secret_resource_data: {
-    #           arn: "__string",
-    #           additional_staging_labels_to_download: ["__string"],
-    #         },
-    #       }
     #
     # @!attribute [rw] local_device_resource_data
     #   Attributes that define the local device resource.
@@ -5471,55 +4127,6 @@ module Aws::Greengrass
 
     # Information about a resource definition version.
     #
-    # @note When making an API call, you may pass ResourceDefinitionVersion
-    #   data as a hash:
-    #
-    #       {
-    #         resources: [
-    #           {
-    #             id: "__string", # required
-    #             name: "__string", # required
-    #             resource_data_container: { # required
-    #               local_device_resource_data: {
-    #                 group_owner_setting: {
-    #                   auto_add_group_owner: false,
-    #                   group_owner: "__string",
-    #                 },
-    #                 source_path: "__string",
-    #               },
-    #               local_volume_resource_data: {
-    #                 destination_path: "__string",
-    #                 group_owner_setting: {
-    #                   auto_add_group_owner: false,
-    #                   group_owner: "__string",
-    #                 },
-    #                 source_path: "__string",
-    #               },
-    #               s3_machine_learning_model_resource_data: {
-    #                 destination_path: "__string",
-    #                 owner_setting: {
-    #                   group_owner: "__string", # required
-    #                   group_permission: "ro", # required, accepts ro, rw
-    #                 },
-    #                 s3_uri: "__string",
-    #               },
-    #               sage_maker_machine_learning_model_resource_data: {
-    #                 destination_path: "__string",
-    #                 owner_setting: {
-    #                   group_owner: "__string", # required
-    #                   group_permission: "ro", # required, accepts ro, rw
-    #                 },
-    #                 sage_maker_job_arn: "__string",
-    #               },
-    #               secrets_manager_secret_resource_data: {
-    #                 arn: "__string",
-    #                 additional_staging_labels_to_download: ["__string"],
-    #               },
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] resources
     #   A list of resources.
     #   @return [Array<Types::Resource>]
@@ -5533,14 +4140,6 @@ module Aws::Greengrass
     end
 
     # The owner setting for downloaded machine learning resources.
-    #
-    # @note When making an API call, you may pass ResourceDownloadOwnerSetting
-    #   data as a hash:
-    #
-    #       {
-    #         group_owner: "__string", # required
-    #         group_permission: "ro", # required, accepts ro, rw
-    #       }
     #
     # @!attribute [rw] group_owner
     #   The group owner of the resource. This is the name of an existing
@@ -5592,18 +4191,6 @@ module Aws::Greengrass
 
     # Attributes that define an Amazon S3 machine learning resource.
     #
-    # @note When making an API call, you may pass S3MachineLearningModelResourceData
-    #   data as a hash:
-    #
-    #       {
-    #         destination_path: "__string",
-    #         owner_setting: {
-    #           group_owner: "__string", # required
-    #           group_permission: "ro", # required, accepts ro, rw
-    #         },
-    #         s3_uri: "__string",
-    #       }
-    #
     # @!attribute [rw] destination_path
     #   The absolute local path of the resource inside the Lambda
     #   environment.
@@ -5629,18 +4216,6 @@ module Aws::Greengrass
     end
 
     # Attributes that define an Amazon SageMaker machine learning resource.
-    #
-    # @note When making an API call, you may pass SageMakerMachineLearningModelResourceData
-    #   data as a hash:
-    #
-    #       {
-    #         destination_path: "__string",
-    #         owner_setting: {
-    #           group_owner: "__string", # required
-    #           group_permission: "ro", # required, accepts ro, rw
-    #         },
-    #         sage_maker_job_arn: "__string",
-    #       }
     #
     # @!attribute [rw] destination_path
     #   The absolute local path of the resource inside the Lambda
@@ -5671,14 +4246,6 @@ module Aws::Greengrass
     # copy of the secret on the Greengrass core, where it can be securely
     # accessed by connectors and Lambda functions.
     #
-    # @note When making an API call, you may pass SecretsManagerSecretResourceData
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "__string",
-    #         additional_staging_labels_to_download: ["__string"],
-    #       }
-    #
     # @!attribute [rw] arn
     #   The ARN of the Secrets Manager secret to make available on the core.
     #   The value of the secret's latest version (represented by the
@@ -5702,18 +4269,6 @@ module Aws::Greengrass
     # Information about a bulk deployment. You cannot start a new bulk
     # deployment while another one is still running or in a non-terminal
     # state.
-    #
-    # @note When making an API call, you may pass StartBulkDeploymentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         amzn_client_token: "__string",
-    #         execution_role_arn: "__string", # required
-    #         input_file_uri: "__string", # required
-    #         tags: {
-    #           "__string" => "__string",
-    #         },
-    #       }
     #
     # @!attribute [rw] amzn_client_token
     #   @return [String]
@@ -5768,13 +4323,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StopBulkDeploymentRequest
-    #   data as a hash:
-    #
-    #       {
-    #         bulk_deployment_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] bulk_deployment_id
     #   @return [String]
     #
@@ -5791,16 +4339,6 @@ module Aws::Greengrass
     class StopBulkDeploymentResponse < Aws::EmptyStructure; end
 
     # Information about a subscription.
-    #
-    # @note When making an API call, you may pass Subscription
-    #   data as a hash:
-    #
-    #       {
-    #         id: "__string", # required
-    #         source: "__string", # required
-    #         subject: "__string", # required
-    #         target: "__string", # required
-    #       }
     #
     # @!attribute [rw] id
     #   A descriptive or arbitrary ID for the subscription. This value must
@@ -5837,20 +4375,6 @@ module Aws::Greengrass
 
     # Information about a subscription definition version.
     #
-    # @note When making an API call, you may pass SubscriptionDefinitionVersion
-    #   data as a hash:
-    #
-    #       {
-    #         subscriptions: [
-    #           {
-    #             id: "__string", # required
-    #             source: "__string", # required
-    #             subject: "__string", # required
-    #             target: "__string", # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] subscriptions
     #   A list of subscriptions.
     #   @return [Array<Types::Subscription>]
@@ -5863,16 +4387,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "__string", # required
-    #         tags: {
-    #           "__string" => "__string",
-    #         },
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   @return [String]
     #
@@ -5911,13 +4425,6 @@ module Aws::Greengrass
 
     # Configuration settings for running telemetry.
     #
-    # @note When making an API call, you may pass TelemetryConfigurationUpdate
-    #   data as a hash:
-    #
-    #       {
-    #         telemetry: "On", # required, accepts On, Off
-    #       }
-    #
     # @!attribute [rw] telemetry
     #   Configure telemetry to be on or off.
     #   @return [String]
@@ -5930,14 +4437,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "__string", # required
-    #         tag_keys: ["__string"], # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   @return [String]
     #
@@ -5954,21 +4453,6 @@ module Aws::Greengrass
     end
 
     # Information required to update a Greengrass core's connectivity.
-    #
-    # @note When making an API call, you may pass UpdateConnectivityInfoRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connectivity_info: [
-    #           {
-    #             host_address: "__string",
-    #             id: "__string",
-    #             metadata: "__string",
-    #             port_number: 1,
-    #           },
-    #         ],
-    #         thing_name: "__string", # required
-    #       }
     #
     # @!attribute [rw] connectivity_info
     #   A list of connectivity info.
@@ -6003,14 +4487,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateConnectorDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         connector_definition_id: "__string", # required
-    #         name: "__string",
-    #       }
-    #
     # @!attribute [rw] connector_definition_id
     #   @return [String]
     #
@@ -6030,14 +4506,6 @@ module Aws::Greengrass
     #
     class UpdateConnectorDefinitionResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateCoreDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         core_definition_id: "__string", # required
-    #         name: "__string",
-    #       }
-    #
     # @!attribute [rw] core_definition_id
     #   @return [String]
     #
@@ -6057,14 +4525,6 @@ module Aws::Greengrass
     #
     class UpdateCoreDefinitionResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateDeviceDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_definition_id: "__string", # required
-    #         name: "__string",
-    #       }
-    #
     # @!attribute [rw] device_definition_id
     #   @return [String]
     #
@@ -6084,14 +4544,6 @@ module Aws::Greengrass
     #
     class UpdateDeviceDefinitionResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateFunctionDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         function_definition_id: "__string", # required
-    #         name: "__string",
-    #       }
-    #
     # @!attribute [rw] function_definition_id
     #   @return [String]
     #
@@ -6111,14 +4563,6 @@ module Aws::Greengrass
     #
     class UpdateFunctionDefinitionResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateGroupCertificateConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         certificate_expiry_in_milliseconds: "__string",
-    #         group_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] certificate_expiry_in_milliseconds
     #   The amount of time remaining before the certificate expires, in
     #   milliseconds.
@@ -6155,14 +4599,6 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateGroupRequest
-    #   data as a hash:
-    #
-    #       {
-    #         group_id: "__string", # required
-    #         name: "__string",
-    #       }
-    #
     # @!attribute [rw] group_id
     #   @return [String]
     #
@@ -6182,14 +4618,6 @@ module Aws::Greengrass
     #
     class UpdateGroupResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateLoggerDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         logger_definition_id: "__string", # required
-    #         name: "__string",
-    #       }
-    #
     # @!attribute [rw] logger_definition_id
     #   @return [String]
     #
@@ -6209,14 +4637,6 @@ module Aws::Greengrass
     #
     class UpdateLoggerDefinitionResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateResourceDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "__string",
-    #         resource_definition_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   @return [String]
     #
@@ -6236,14 +4656,6 @@ module Aws::Greengrass
     #
     class UpdateResourceDefinitionResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateSubscriptionDefinitionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "__string",
-    #         subscription_definition_id: "__string", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   @return [String]
     #
@@ -6263,16 +4675,6 @@ module Aws::Greengrass
     #
     class UpdateSubscriptionDefinitionResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateThingRuntimeConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         telemetry_configuration: {
-    #           telemetry: "On", # required, accepts On, Off
-    #         },
-    #         thing_name: "__string", # required
-    #       }
-    #
     # @!attribute [rw] telemetry_configuration
     #   Configuration settings for running telemetry.
     #   @return [Types::TelemetryConfigurationUpdate]

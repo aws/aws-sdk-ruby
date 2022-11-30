@@ -24,69 +24,6 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AddLFTagsToResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         catalog_id: "CatalogIdString",
-    #         resource: { # required
-    #           catalog: {
-    #           },
-    #           database: {
-    #             catalog_id: "CatalogIdString",
-    #             name: "NameString", # required
-    #           },
-    #           table: {
-    #             catalog_id: "CatalogIdString",
-    #             database_name: "NameString", # required
-    #             name: "NameString",
-    #             table_wildcard: {
-    #             },
-    #           },
-    #           table_with_columns: {
-    #             catalog_id: "CatalogIdString",
-    #             database_name: "NameString", # required
-    #             name: "NameString", # required
-    #             column_names: ["NameString"],
-    #             column_wildcard: {
-    #               excluded_column_names: ["NameString"],
-    #             },
-    #           },
-    #           data_location: {
-    #             catalog_id: "CatalogIdString",
-    #             resource_arn: "ResourceArnString", # required
-    #           },
-    #           data_cells_filter: {
-    #             table_catalog_id: "CatalogIdString",
-    #             database_name: "NameString",
-    #             table_name: "NameString",
-    #             name: "NameString",
-    #           },
-    #           lf_tag: {
-    #             catalog_id: "CatalogIdString",
-    #             tag_key: "NameString", # required
-    #             tag_values: ["LFTagValue"], # required
-    #           },
-    #           lf_tag_policy: {
-    #             catalog_id: "CatalogIdString",
-    #             resource_type: "DATABASE", # required, accepts DATABASE, TABLE
-    #             expression: [ # required
-    #               {
-    #                 tag_key: "LFTagKey", # required
-    #                 tag_values: ["LFTagValue"], # required
-    #               },
-    #             ],
-    #           },
-    #         },
-    #         lf_tags: [ # required
-    #           {
-    #             catalog_id: "CatalogIdString",
-    #             tag_key: "LFTagKey", # required
-    #             tag_values: ["LFTagValue"], # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] catalog_id
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
@@ -127,16 +64,6 @@ module Aws::LakeFormation
 
     # A new object to add to the governed table.
     #
-    # @note When making an API call, you may pass AddObjectInput
-    #   data as a hash:
-    #
-    #       {
-    #         uri: "URI", # required
-    #         etag: "ETagString", # required
-    #         size: 1, # required
-    #         partition_values: ["PartitionValueString"],
-    #       }
-    #
     # @!attribute [rw] uri
     #   The Amazon S3 location of the object.
     #   @return [String]
@@ -172,8 +99,6 @@ module Aws::LakeFormation
 
     # A structure that you pass to indicate you want all rows in a filter.
     #
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/AllRowsWildcard AWS API Documentation
     #
     class AllRowsWildcard < Aws::EmptyStructure; end
@@ -192,16 +117,6 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AssumeDecoratedRoleWithSAMLRequest
-    #   data as a hash:
-    #
-    #       {
-    #         saml_assertion: "SAMLAssertionString", # required
-    #         role_arn: "IAMRoleArn", # required
-    #         principal_arn: "IAMSAMLProviderArn", # required
-    #         duration_seconds: 1,
-    #       }
-    #
     # @!attribute [rw] saml_assertion
     #   A SAML assertion consisting of an assertion statement for the user
     #   who needs temporary credentials. This must match the SAML assertion
@@ -268,13 +183,6 @@ module Aws::LakeFormation
     # A structure used to include auditing information on the privileged
     # API.
     #
-    # @note When making an API call, you may pass AuditContext
-    #   data as a hash:
-    #
-    #       {
-    #         additional_audit_context: "AuditContextString",
-    #       }
-    #
     # @!attribute [rw] additional_audit_context
     #   The filter engine can populate the 'AdditionalAuditContext'
     #   information with the request ID for you to track. This information
@@ -289,72 +197,6 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchGrantPermissionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         catalog_id: "CatalogIdString",
-    #         entries: [ # required
-    #           {
-    #             id: "Identifier", # required
-    #             principal: {
-    #               data_lake_principal_identifier: "DataLakePrincipalString",
-    #             },
-    #             resource: {
-    #               catalog: {
-    #               },
-    #               database: {
-    #                 catalog_id: "CatalogIdString",
-    #                 name: "NameString", # required
-    #               },
-    #               table: {
-    #                 catalog_id: "CatalogIdString",
-    #                 database_name: "NameString", # required
-    #                 name: "NameString",
-    #                 table_wildcard: {
-    #                 },
-    #               },
-    #               table_with_columns: {
-    #                 catalog_id: "CatalogIdString",
-    #                 database_name: "NameString", # required
-    #                 name: "NameString", # required
-    #                 column_names: ["NameString"],
-    #                 column_wildcard: {
-    #                   excluded_column_names: ["NameString"],
-    #                 },
-    #               },
-    #               data_location: {
-    #                 catalog_id: "CatalogIdString",
-    #                 resource_arn: "ResourceArnString", # required
-    #               },
-    #               data_cells_filter: {
-    #                 table_catalog_id: "CatalogIdString",
-    #                 database_name: "NameString",
-    #                 table_name: "NameString",
-    #                 name: "NameString",
-    #               },
-    #               lf_tag: {
-    #                 catalog_id: "CatalogIdString",
-    #                 tag_key: "NameString", # required
-    #                 tag_values: ["LFTagValue"], # required
-    #               },
-    #               lf_tag_policy: {
-    #                 catalog_id: "CatalogIdString",
-    #                 resource_type: "DATABASE", # required, accepts DATABASE, TABLE
-    #                 expression: [ # required
-    #                   {
-    #                     tag_key: "LFTagKey", # required
-    #                     tag_values: ["LFTagValue"], # required
-    #                   },
-    #                 ],
-    #               },
-    #             },
-    #             permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS, CREATE_TAG, ASSOCIATE
-    #             permissions_with_grant_option: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS, CREATE_TAG, ASSOCIATE
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] catalog_id
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
@@ -411,67 +253,6 @@ module Aws::LakeFormation
     # A permission to a resource granted by batch operation to the
     # principal.
     #
-    # @note When making an API call, you may pass BatchPermissionsRequestEntry
-    #   data as a hash:
-    #
-    #       {
-    #         id: "Identifier", # required
-    #         principal: {
-    #           data_lake_principal_identifier: "DataLakePrincipalString",
-    #         },
-    #         resource: {
-    #           catalog: {
-    #           },
-    #           database: {
-    #             catalog_id: "CatalogIdString",
-    #             name: "NameString", # required
-    #           },
-    #           table: {
-    #             catalog_id: "CatalogIdString",
-    #             database_name: "NameString", # required
-    #             name: "NameString",
-    #             table_wildcard: {
-    #             },
-    #           },
-    #           table_with_columns: {
-    #             catalog_id: "CatalogIdString",
-    #             database_name: "NameString", # required
-    #             name: "NameString", # required
-    #             column_names: ["NameString"],
-    #             column_wildcard: {
-    #               excluded_column_names: ["NameString"],
-    #             },
-    #           },
-    #           data_location: {
-    #             catalog_id: "CatalogIdString",
-    #             resource_arn: "ResourceArnString", # required
-    #           },
-    #           data_cells_filter: {
-    #             table_catalog_id: "CatalogIdString",
-    #             database_name: "NameString",
-    #             table_name: "NameString",
-    #             name: "NameString",
-    #           },
-    #           lf_tag: {
-    #             catalog_id: "CatalogIdString",
-    #             tag_key: "NameString", # required
-    #             tag_values: ["LFTagValue"], # required
-    #           },
-    #           lf_tag_policy: {
-    #             catalog_id: "CatalogIdString",
-    #             resource_type: "DATABASE", # required, accepts DATABASE, TABLE
-    #             expression: [ # required
-    #               {
-    #                 tag_key: "LFTagKey", # required
-    #                 tag_values: ["LFTagValue"], # required
-    #               },
-    #             ],
-    #           },
-    #         },
-    #         permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS, CREATE_TAG, ASSOCIATE
-    #         permissions_with_grant_option: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS, CREATE_TAG, ASSOCIATE
-    #       }
-    #
     # @!attribute [rw] id
     #   A unique identifier for the batch permissions request entry.
     #   @return [String]
@@ -504,72 +285,6 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchRevokePermissionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         catalog_id: "CatalogIdString",
-    #         entries: [ # required
-    #           {
-    #             id: "Identifier", # required
-    #             principal: {
-    #               data_lake_principal_identifier: "DataLakePrincipalString",
-    #             },
-    #             resource: {
-    #               catalog: {
-    #               },
-    #               database: {
-    #                 catalog_id: "CatalogIdString",
-    #                 name: "NameString", # required
-    #               },
-    #               table: {
-    #                 catalog_id: "CatalogIdString",
-    #                 database_name: "NameString", # required
-    #                 name: "NameString",
-    #                 table_wildcard: {
-    #                 },
-    #               },
-    #               table_with_columns: {
-    #                 catalog_id: "CatalogIdString",
-    #                 database_name: "NameString", # required
-    #                 name: "NameString", # required
-    #                 column_names: ["NameString"],
-    #                 column_wildcard: {
-    #                   excluded_column_names: ["NameString"],
-    #                 },
-    #               },
-    #               data_location: {
-    #                 catalog_id: "CatalogIdString",
-    #                 resource_arn: "ResourceArnString", # required
-    #               },
-    #               data_cells_filter: {
-    #                 table_catalog_id: "CatalogIdString",
-    #                 database_name: "NameString",
-    #                 table_name: "NameString",
-    #                 name: "NameString",
-    #               },
-    #               lf_tag: {
-    #                 catalog_id: "CatalogIdString",
-    #                 tag_key: "NameString", # required
-    #                 tag_values: ["LFTagValue"], # required
-    #               },
-    #               lf_tag_policy: {
-    #                 catalog_id: "CatalogIdString",
-    #                 resource_type: "DATABASE", # required, accepts DATABASE, TABLE
-    #                 expression: [ # required
-    #                   {
-    #                     tag_key: "LFTagKey", # required
-    #                     tag_values: ["LFTagValue"], # required
-    #                   },
-    #                 ],
-    #               },
-    #             },
-    #             permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS, CREATE_TAG, ASSOCIATE
-    #             permissions_with_grant_option: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS, CREATE_TAG, ASSOCIATE
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] catalog_id
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
@@ -603,13 +318,6 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CancelTransactionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         transaction_id: "TransactionIdString", # required
-    #       }
-    #
     # @!attribute [rw] transaction_id
     #   The transaction to cancel.
     #   @return [String]
@@ -627,8 +335,6 @@ module Aws::LakeFormation
     class CancelTransactionResponse < Aws::EmptyStructure; end
 
     # A structure for the catalog object.
-    #
-    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/CatalogResource AWS API Documentation
     #
@@ -657,13 +363,6 @@ module Aws::LakeFormation
     # A wildcard object, consisting of an optional list of excluded column
     # names or indexes.
     #
-    # @note When making an API call, you may pass ColumnWildcard
-    #   data as a hash:
-    #
-    #       {
-    #         excluded_column_names: ["NameString"],
-    #       }
-    #
     # @!attribute [rw] excluded_column_names
     #   Excludes column names. Any column with this name will be excluded.
     #   @return [Array<String>]
@@ -676,13 +375,6 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CommitTransactionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         transaction_id: "TransactionIdString", # required
-    #       }
-    #
     # @!attribute [rw] transaction_id
     #   The transaction to commit.
     #   @return [String]
@@ -721,27 +413,6 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDataCellsFilterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         table_data: { # required
-    #           table_catalog_id: "CatalogIdString", # required
-    #           database_name: "NameString", # required
-    #           table_name: "NameString", # required
-    #           name: "NameString", # required
-    #           row_filter: {
-    #             filter_expression: "PredicateString",
-    #             all_rows_wildcard: {
-    #             },
-    #           },
-    #           column_names: ["NameString"],
-    #           column_wildcard: {
-    #             excluded_column_names: ["NameString"],
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] table_data
     #   A `DataCellsFilter` structure containing information about the data
     #   cells filter.
@@ -759,15 +430,6 @@ module Aws::LakeFormation
     #
     class CreateDataCellsFilterResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass CreateLFTagRequest
-    #   data as a hash:
-    #
-    #       {
-    #         catalog_id: "CatalogIdString",
-    #         tag_key: "LFTagKey", # required
-    #         tag_values: ["LFTagValue"], # required
-    #       }
-    #
     # @!attribute [rw] catalog_id
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
@@ -798,25 +460,6 @@ module Aws::LakeFormation
     class CreateLFTagResponse < Aws::EmptyStructure; end
 
     # A structure that describes certain columns on certain rows.
-    #
-    # @note When making an API call, you may pass DataCellsFilter
-    #   data as a hash:
-    #
-    #       {
-    #         table_catalog_id: "CatalogIdString", # required
-    #         database_name: "NameString", # required
-    #         table_name: "NameString", # required
-    #         name: "NameString", # required
-    #         row_filter: {
-    #           filter_expression: "PredicateString",
-    #           all_rows_wildcard: {
-    #           },
-    #         },
-    #         column_names: ["NameString"],
-    #         column_wildcard: {
-    #           excluded_column_names: ["NameString"],
-    #         },
-    #       }
     #
     # @!attribute [rw] table_catalog_id
     #   The ID of the catalog to which the table belongs.
@@ -865,16 +508,6 @@ module Aws::LakeFormation
 
     # A structure for a data cells filter resource.
     #
-    # @note When making an API call, you may pass DataCellsFilterResource
-    #   data as a hash:
-    #
-    #       {
-    #         table_catalog_id: "CatalogIdString",
-    #         database_name: "NameString",
-    #         table_name: "NameString",
-    #         name: "NameString",
-    #       }
-    #
     # @!attribute [rw] table_catalog_id
     #   The ID of the catalog to which the table belongs.
     #   @return [String]
@@ -905,13 +538,6 @@ module Aws::LakeFormation
     # The Lake Formation principal. Supported principals are IAM users or
     # IAM roles.
     #
-    # @note When making an API call, you may pass DataLakePrincipal
-    #   data as a hash:
-    #
-    #       {
-    #         data_lake_principal_identifier: "DataLakePrincipalString",
-    #       }
-    #
     # @!attribute [rw] data_lake_principal_identifier
     #   An identifier for the Lake Formation principal.
     #   @return [String]
@@ -928,44 +554,6 @@ module Aws::LakeFormation
     # designated as data lake administrators and lists of principal
     # permission entries for default create database and default create
     # table permissions.
-    #
-    # @note When making an API call, you may pass DataLakeSettings
-    #   data as a hash:
-    #
-    #       {
-    #         data_lake_admins: [
-    #           {
-    #             data_lake_principal_identifier: "DataLakePrincipalString",
-    #           },
-    #         ],
-    #         create_database_default_permissions: [
-    #           {
-    #             principal: {
-    #               data_lake_principal_identifier: "DataLakePrincipalString",
-    #             },
-    #             permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS, CREATE_TAG, ASSOCIATE
-    #           },
-    #         ],
-    #         create_table_default_permissions: [
-    #           {
-    #             principal: {
-    #               data_lake_principal_identifier: "DataLakePrincipalString",
-    #             },
-    #             permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS, CREATE_TAG, ASSOCIATE
-    #           },
-    #         ],
-    #         parameters: {
-    #           "KeyString" => "ParametersMapValue",
-    #         },
-    #         trusted_resource_owners: ["CatalogIdString"],
-    #         allow_external_data_filtering: false,
-    #         external_data_filtering_allow_list: [
-    #           {
-    #             data_lake_principal_identifier: "DataLakePrincipalString",
-    #           },
-    #         ],
-    #         authorized_session_tag_value_list: ["NameString"],
-    #       }
     #
     # @!attribute [rw] data_lake_admins
     #   A list of Lake Formation principals. Supported principals are IAM
@@ -1086,14 +674,6 @@ module Aws::LakeFormation
     # A structure for a data location object where permissions are granted
     # or revoked.
     #
-    # @note When making an API call, you may pass DataLocationResource
-    #   data as a hash:
-    #
-    #       {
-    #         catalog_id: "CatalogIdString",
-    #         resource_arn: "ResourceArnString", # required
-    #       }
-    #
     # @!attribute [rw] catalog_id
     #   The identifier for the Data Catalog where the location is registered
     #   with Lake Formation. By default, it is the account ID of the caller.
@@ -1115,14 +695,6 @@ module Aws::LakeFormation
 
     # A structure for the database object.
     #
-    # @note When making an API call, you may pass DatabaseResource
-    #   data as a hash:
-    #
-    #       {
-    #         catalog_id: "CatalogIdString",
-    #         name: "NameString", # required
-    #       }
-    #
     # @!attribute [rw] catalog_id
     #   The identifier for the Data Catalog. By default, it is the account
     #   ID of the caller.
@@ -1141,16 +713,6 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteDataCellsFilterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         table_catalog_id: "CatalogIdString",
-    #         database_name: "NameString",
-    #         table_name: "NameString",
-    #         name: "NameString",
-    #       }
-    #
     # @!attribute [rw] table_catalog_id
     #   The ID of the catalog to which the table belongs.
     #   @return [String]
@@ -1182,14 +744,6 @@ module Aws::LakeFormation
     #
     class DeleteDataCellsFilterResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteLFTagRequest
-    #   data as a hash:
-    #
-    #       {
-    #         catalog_id: "CatalogIdString",
-    #         tag_key: "LFTagKey", # required
-    #       }
-    #
     # @!attribute [rw] catalog_id
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
@@ -1216,15 +770,6 @@ module Aws::LakeFormation
 
     # An object to delete from the governed table.
     #
-    # @note When making an API call, you may pass DeleteObjectInput
-    #   data as a hash:
-    #
-    #       {
-    #         uri: "URI", # required
-    #         etag: "ETagString",
-    #         partition_values: ["PartitionValueString"],
-    #       }
-    #
     # @!attribute [rw] uri
     #   The Amazon S3 location of the object to delete.
     #   @return [String]
@@ -1249,22 +794,6 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteObjectsOnCancelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         catalog_id: "CatalogIdString",
-    #         database_name: "NameString", # required
-    #         table_name: "NameString", # required
-    #         transaction_id: "TransactionIdString", # required
-    #         objects: [ # required
-    #           {
-    #             uri: "URI", # required
-    #             etag: "ETagString",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] catalog_id
     #   The Glue data catalog that contains the governed table. Defaults to
     #   the current account ID.
@@ -1303,13 +832,6 @@ module Aws::LakeFormation
     #
     class DeleteObjectsOnCancelResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeregisterResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArnString", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource that you want to
     #   deregister.
@@ -1327,13 +849,6 @@ module Aws::LakeFormation
     #
     class DeregisterResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArnString", # required
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The resource ARN.
     #   @return [String]
@@ -1358,13 +873,6 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeTransactionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         transaction_id: "TransactionIdString", # required
-    #       }
-    #
     # @!attribute [rw] transaction_id
     #   The transaction for which to return status.
     #   @return [String]
@@ -1479,13 +987,6 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ExtendTransactionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         transaction_id: "TransactionIdString",
-    #       }
-    #
     # @!attribute [rw] transaction_id
     #   The transaction to extend.
     #   @return [String]
@@ -1504,15 +1005,6 @@ module Aws::LakeFormation
 
     # This structure describes the filtering of columns in a table based on
     # a filter condition.
-    #
-    # @note When making an API call, you may pass FilterCondition
-    #   data as a hash:
-    #
-    #       {
-    #         field: "RESOURCE_ARN", # accepts RESOURCE_ARN, ROLE_ARN, LAST_MODIFIED
-    #         comparison_operator: "EQ", # accepts EQ, NE, LE, LT, GE, GT, CONTAINS, NOT_CONTAINS, BEGINS_WITH, IN, BETWEEN
-    #         string_value_list: ["StringValue"],
-    #       }
     #
     # @!attribute [rw] field
     #   The field to filter in the filter condition.
@@ -1536,13 +1028,6 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetDataLakeSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         catalog_id: "CatalogIdString",
-    #       }
-    #
     # @!attribute [rw] catalog_id
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
@@ -1571,16 +1056,6 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetEffectivePermissionsForPathRequest
-    #   data as a hash:
-    #
-    #       {
-    #         catalog_id: "CatalogIdString",
-    #         resource_arn: "ResourceArnString", # required
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] catalog_id
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
@@ -1632,14 +1107,6 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetLFTagRequest
-    #   data as a hash:
-    #
-    #       {
-    #         catalog_id: "CatalogIdString",
-    #         tag_key: "LFTagKey", # required
-    #       }
-    #
     # @!attribute [rw] catalog_id
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
@@ -1685,13 +1152,6 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetQueryStateRequest
-    #   data as a hash:
-    #
-    #       {
-    #         query_id: "GetQueryStateRequestQueryIdString", # required
-    #       }
-    #
     # @!attribute [rw] query_id
     #   The ID of the plan query operation.
     #   @return [String]
@@ -1734,13 +1194,6 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetQueryStatisticsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         query_id: "GetQueryStatisticsRequestQueryIdString", # required
-    #       }
-    #
     # @!attribute [rw] query_id
     #   The ID of the plan query operation.
     #   @return [String]
@@ -1776,63 +1229,6 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetResourceLFTagsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         catalog_id: "CatalogIdString",
-    #         resource: { # required
-    #           catalog: {
-    #           },
-    #           database: {
-    #             catalog_id: "CatalogIdString",
-    #             name: "NameString", # required
-    #           },
-    #           table: {
-    #             catalog_id: "CatalogIdString",
-    #             database_name: "NameString", # required
-    #             name: "NameString",
-    #             table_wildcard: {
-    #             },
-    #           },
-    #           table_with_columns: {
-    #             catalog_id: "CatalogIdString",
-    #             database_name: "NameString", # required
-    #             name: "NameString", # required
-    #             column_names: ["NameString"],
-    #             column_wildcard: {
-    #               excluded_column_names: ["NameString"],
-    #             },
-    #           },
-    #           data_location: {
-    #             catalog_id: "CatalogIdString",
-    #             resource_arn: "ResourceArnString", # required
-    #           },
-    #           data_cells_filter: {
-    #             table_catalog_id: "CatalogIdString",
-    #             database_name: "NameString",
-    #             table_name: "NameString",
-    #             name: "NameString",
-    #           },
-    #           lf_tag: {
-    #             catalog_id: "CatalogIdString",
-    #             tag_key: "NameString", # required
-    #             tag_values: ["LFTagValue"], # required
-    #           },
-    #           lf_tag_policy: {
-    #             catalog_id: "CatalogIdString",
-    #             resource_type: "DATABASE", # required, accepts DATABASE, TABLE
-    #             expression: [ # required
-    #               {
-    #                 tag_key: "LFTagKey", # required
-    #                 tag_values: ["LFTagValue"], # required
-    #               },
-    #             ],
-    #           },
-    #         },
-    #         show_assigned_lf_tags: false,
-    #       }
-    #
     # @!attribute [rw] catalog_id
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
@@ -1881,20 +1277,6 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetTableObjectsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         catalog_id: "CatalogIdString",
-    #         database_name: "NameString", # required
-    #         table_name: "NameString", # required
-    #         transaction_id: "TransactionIdString",
-    #         query_as_of_time: Time.now,
-    #         partition_predicate: "PredicateString",
-    #         max_results: 1,
-    #         next_token: "TokenString",
-    #       }
-    #
     # @!attribute [rw] catalog_id
     #   The catalog containing the governed table. Defaults to the caller’s
     #   account.
@@ -1977,22 +1359,6 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetTemporaryGluePartitionCredentialsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         table_arn: "ResourceArnString", # required
-    #         partition: { # required
-    #           values: ["ValueString"], # required
-    #         },
-    #         permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS, CREATE_TAG, ASSOCIATE
-    #         duration_seconds: 1,
-    #         audit_context: {
-    #           additional_audit_context: "AuditContextString",
-    #         },
-    #         supported_permission_types: ["COLUMN_PERMISSION"], # required, accepts COLUMN_PERMISSION, CELL_FILTER_PERMISSION
-    #       }
-    #
     # @!attribute [rw] table_arn
     #   The ARN of the partitions' table.
     #   @return [String]
@@ -2061,19 +1427,6 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetTemporaryGlueTableCredentialsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         table_arn: "ResourceArnString", # required
-    #         permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS, CREATE_TAG, ASSOCIATE
-    #         duration_seconds: 1,
-    #         audit_context: {
-    #           additional_audit_context: "AuditContextString",
-    #         },
-    #         supported_permission_types: ["COLUMN_PERMISSION"], # required, accepts COLUMN_PERMISSION, CELL_FILTER_PERMISSION
-    #       }
-    #
     # @!attribute [rw] table_arn
     #   The ARN identifying a table in the Data Catalog for the temporary
     #   credentials request.
@@ -2138,15 +1491,6 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetWorkUnitResultsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         query_id: "GetWorkUnitResultsRequestQueryIdString", # required
-    #         work_unit_id: 1, # required
-    #         work_unit_token: "SyntheticGetWorkUnitResultsRequestWorkUnitTokenString", # required
-    #       }
-    #
     # @!attribute [rw] query_id
     #   The ID of the plan query operation for which to get results.
     #   @return [String]
@@ -2187,15 +1531,6 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetWorkUnitsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "Token",
-    #         page_size: 1,
-    #         query_id: "GetWorkUnitsRequestQueryIdString", # required
-    #       }
-    #
     # @!attribute [rw] next_token
     #   A continuation token, if this is a continuation call.
     #   @return [String]
@@ -2263,67 +1598,6 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GrantPermissionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         catalog_id: "CatalogIdString",
-    #         principal: { # required
-    #           data_lake_principal_identifier: "DataLakePrincipalString",
-    #         },
-    #         resource: { # required
-    #           catalog: {
-    #           },
-    #           database: {
-    #             catalog_id: "CatalogIdString",
-    #             name: "NameString", # required
-    #           },
-    #           table: {
-    #             catalog_id: "CatalogIdString",
-    #             database_name: "NameString", # required
-    #             name: "NameString",
-    #             table_wildcard: {
-    #             },
-    #           },
-    #           table_with_columns: {
-    #             catalog_id: "CatalogIdString",
-    #             database_name: "NameString", # required
-    #             name: "NameString", # required
-    #             column_names: ["NameString"],
-    #             column_wildcard: {
-    #               excluded_column_names: ["NameString"],
-    #             },
-    #           },
-    #           data_location: {
-    #             catalog_id: "CatalogIdString",
-    #             resource_arn: "ResourceArnString", # required
-    #           },
-    #           data_cells_filter: {
-    #             table_catalog_id: "CatalogIdString",
-    #             database_name: "NameString",
-    #             table_name: "NameString",
-    #             name: "NameString",
-    #           },
-    #           lf_tag: {
-    #             catalog_id: "CatalogIdString",
-    #             tag_key: "NameString", # required
-    #             tag_values: ["LFTagValue"], # required
-    #           },
-    #           lf_tag_policy: {
-    #             catalog_id: "CatalogIdString",
-    #             resource_type: "DATABASE", # required, accepts DATABASE, TABLE
-    #             expression: [ # required
-    #               {
-    #                 tag_key: "LFTagKey", # required
-    #                 tag_values: ["LFTagValue"], # required
-    #               },
-    #             ],
-    #           },
-    #         },
-    #         permissions: ["ALL"], # required, accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS, CREATE_TAG, ASSOCIATE
-    #         permissions_with_grant_option: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS, CREATE_TAG, ASSOCIATE
-    #       }
-    #
     # @!attribute [rw] catalog_id
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
@@ -2408,14 +1682,6 @@ module Aws::LakeFormation
     # conditions. For example, granting a role access to all columns that do
     # not have the LF-tag 'PII' in tables that have the LF-tag 'Prod'.
     #
-    # @note When making an API call, you may pass LFTag
-    #   data as a hash:
-    #
-    #       {
-    #         tag_key: "LFTagKey", # required
-    #         tag_values: ["LFTagValue"], # required
-    #       }
-    #
     # @!attribute [rw] tag_key
     #   The key-name for the LF-tag.
     #   @return [String]
@@ -2456,15 +1722,6 @@ module Aws::LakeFormation
 
     # A structure containing an LF-tag key and values for a resource.
     #
-    # @note When making an API call, you may pass LFTagKeyResource
-    #   data as a hash:
-    #
-    #       {
-    #         catalog_id: "CatalogIdString",
-    #         tag_key: "NameString", # required
-    #         tag_values: ["LFTagValue"], # required
-    #       }
-    #
     # @!attribute [rw] catalog_id
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
@@ -2491,15 +1748,6 @@ module Aws::LakeFormation
     end
 
     # A structure containing an LF-tag key-value pair.
-    #
-    # @note When making an API call, you may pass LFTagPair
-    #   data as a hash:
-    #
-    #       {
-    #         catalog_id: "CatalogIdString",
-    #         tag_key: "LFTagKey", # required
-    #         tag_values: ["LFTagValue"], # required
-    #       }
     #
     # @!attribute [rw] catalog_id
     #   The identifier for the Data Catalog. By default, the account ID. The
@@ -2529,20 +1777,6 @@ module Aws::LakeFormation
     # A structure containing a list of LF-tag conditions that apply to a
     # resource's LF-tag policy.
     #
-    # @note When making an API call, you may pass LFTagPolicyResource
-    #   data as a hash:
-    #
-    #       {
-    #         catalog_id: "CatalogIdString",
-    #         resource_type: "DATABASE", # required, accepts DATABASE, TABLE
-    #         expression: [ # required
-    #           {
-    #             tag_key: "LFTagKey", # required
-    #             tag_values: ["LFTagValue"], # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] catalog_id
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
@@ -2569,21 +1803,6 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListDataCellsFilterRequest
-    #   data as a hash:
-    #
-    #       {
-    #         table: {
-    #           catalog_id: "CatalogIdString",
-    #           database_name: "NameString", # required
-    #           name: "NameString",
-    #           table_wildcard: {
-    #           },
-    #         },
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] table
     #   A table in the Glue Data Catalog.
     #   @return [Types::TableResource]
@@ -2624,16 +1843,6 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListLFTagsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         catalog_id: "CatalogIdString",
-    #         resource_share_type: "FOREIGN", # accepts FOREIGN, ALL
-    #         max_results: 1,
-    #         next_token: "Token",
-    #       }
-    #
     # @!attribute [rw] catalog_id
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
@@ -2688,69 +1897,6 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPermissionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         catalog_id: "CatalogIdString",
-    #         principal: {
-    #           data_lake_principal_identifier: "DataLakePrincipalString",
-    #         },
-    #         resource_type: "CATALOG", # accepts CATALOG, DATABASE, TABLE, DATA_LOCATION, LF_TAG, LF_TAG_POLICY, LF_TAG_POLICY_DATABASE, LF_TAG_POLICY_TABLE
-    #         resource: {
-    #           catalog: {
-    #           },
-    #           database: {
-    #             catalog_id: "CatalogIdString",
-    #             name: "NameString", # required
-    #           },
-    #           table: {
-    #             catalog_id: "CatalogIdString",
-    #             database_name: "NameString", # required
-    #             name: "NameString",
-    #             table_wildcard: {
-    #             },
-    #           },
-    #           table_with_columns: {
-    #             catalog_id: "CatalogIdString",
-    #             database_name: "NameString", # required
-    #             name: "NameString", # required
-    #             column_names: ["NameString"],
-    #             column_wildcard: {
-    #               excluded_column_names: ["NameString"],
-    #             },
-    #           },
-    #           data_location: {
-    #             catalog_id: "CatalogIdString",
-    #             resource_arn: "ResourceArnString", # required
-    #           },
-    #           data_cells_filter: {
-    #             table_catalog_id: "CatalogIdString",
-    #             database_name: "NameString",
-    #             table_name: "NameString",
-    #             name: "NameString",
-    #           },
-    #           lf_tag: {
-    #             catalog_id: "CatalogIdString",
-    #             tag_key: "NameString", # required
-    #             tag_values: ["LFTagValue"], # required
-    #           },
-    #           lf_tag_policy: {
-    #             catalog_id: "CatalogIdString",
-    #             resource_type: "DATABASE", # required, accepts DATABASE, TABLE
-    #             expression: [ # required
-    #               {
-    #                 tag_key: "LFTagKey", # required
-    #                 tag_values: ["LFTagValue"], # required
-    #               },
-    #             ],
-    #           },
-    #         },
-    #         next_token: "Token",
-    #         max_results: 1,
-    #         include_related: "TrueFalseString",
-    #       }
-    #
     # @!attribute [rw] catalog_id
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
@@ -2821,21 +1967,6 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListResourcesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filter_condition_list: [
-    #           {
-    #             field: "RESOURCE_ARN", # accepts RESOURCE_ARN, ROLE_ARN, LAST_MODIFIED
-    #             comparison_operator: "EQ", # accepts EQ, NE, LE, LT, GE, GT, CONTAINS, NOT_CONTAINS, BEGINS_WITH, IN, BETWEEN
-    #             string_value_list: ["StringValue"],
-    #           },
-    #         ],
-    #         max_results: 1,
-    #         next_token: "Token",
-    #       }
-    #
     # @!attribute [rw] filter_condition_list
     #   Any applicable row-level and/or column-level filtering conditions
     #   for the resources.
@@ -2878,18 +2009,6 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTableStorageOptimizersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         catalog_id: "CatalogIdString",
-    #         database_name: "NameString", # required
-    #         table_name: "NameString", # required
-    #         storage_optimizer_type: "COMPACTION", # accepts COMPACTION, GARBAGE_COLLECTION, ALL
-    #         max_results: 1,
-    #         next_token: "Token",
-    #       }
-    #
     # @!attribute [rw] catalog_id
     #   The Catalog ID of the table.
     #   @return [String]
@@ -2946,16 +2065,6 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListTransactionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         catalog_id: "CatalogIdString",
-    #         status_filter: "ALL", # accepts ALL, COMPLETED, ACTIVE, COMMITTED, ABORTED
-    #         max_results: 1,
-    #         next_token: "TokenString",
-    #       }
-    #
     # @!attribute [rw] catalog_id
     #   The catalog for which to list transactions. Defaults to the account
     #   ID of the caller.
@@ -3041,13 +2150,6 @@ module Aws::LakeFormation
 
     # Contains a list of values defining partitions.
     #
-    # @note When making an API call, you may pass PartitionValueList
-    #   data as a hash:
-    #
-    #       {
-    #         values: ["ValueString"], # required
-    #       }
-    #
     # @!attribute [rw] values
     #   The list of partition values.
     #   @return [Array<String>]
@@ -3109,16 +2211,6 @@ module Aws::LakeFormation
 
     # Permissions granted to a principal.
     #
-    # @note When making an API call, you may pass PrincipalPermissions
-    #   data as a hash:
-    #
-    #       {
-    #         principal: {
-    #           data_lake_principal_identifier: "DataLakePrincipalString",
-    #         },
-    #         permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS, CREATE_TAG, ASSOCIATE
-    #       }
-    #
     # @!attribute [rw] principal
     #   The principal who is granted permissions.
     #   @return [Types::DataLakePrincipal]
@@ -3173,47 +2265,6 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutDataLakeSettingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         catalog_id: "CatalogIdString",
-    #         data_lake_settings: { # required
-    #           data_lake_admins: [
-    #             {
-    #               data_lake_principal_identifier: "DataLakePrincipalString",
-    #             },
-    #           ],
-    #           create_database_default_permissions: [
-    #             {
-    #               principal: {
-    #                 data_lake_principal_identifier: "DataLakePrincipalString",
-    #               },
-    #               permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS, CREATE_TAG, ASSOCIATE
-    #             },
-    #           ],
-    #           create_table_default_permissions: [
-    #             {
-    #               principal: {
-    #                 data_lake_principal_identifier: "DataLakePrincipalString",
-    #               },
-    #               permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS, CREATE_TAG, ASSOCIATE
-    #             },
-    #           ],
-    #           parameters: {
-    #             "KeyString" => "ParametersMapValue",
-    #           },
-    #           trusted_resource_owners: ["CatalogIdString"],
-    #           allow_external_data_filtering: false,
-    #           external_data_filtering_allow_list: [
-    #             {
-    #               data_lake_principal_identifier: "DataLakePrincipalString",
-    #             },
-    #           ],
-    #           authorized_session_tag_value_list: ["NameString"],
-    #         },
-    #       }
-    #
     # @!attribute [rw] catalog_id
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
@@ -3240,19 +2291,6 @@ module Aws::LakeFormation
     class PutDataLakeSettingsResponse < Aws::EmptyStructure; end
 
     # A structure containing information about the query plan.
-    #
-    # @note When making an API call, you may pass QueryPlanningContext
-    #   data as a hash:
-    #
-    #       {
-    #         catalog_id: "CatalogIdString",
-    #         database_name: "QueryPlanningContextDatabaseNameString", # required
-    #         query_as_of_time: Time.now,
-    #         query_parameters: {
-    #           "String" => "String",
-    #         },
-    #         transaction_id: "TransactionIdString",
-    #       }
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog where the partition in question resides.
@@ -3295,15 +2333,6 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RegisterResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "ResourceArnString", # required
-    #         use_service_linked_role: false,
-    #         role_arn: "IAMRoleArn",
-    #       }
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource that you want to
     #   register.
@@ -3341,69 +2370,6 @@ module Aws::LakeFormation
     #
     class RegisterResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass RemoveLFTagsFromResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         catalog_id: "CatalogIdString",
-    #         resource: { # required
-    #           catalog: {
-    #           },
-    #           database: {
-    #             catalog_id: "CatalogIdString",
-    #             name: "NameString", # required
-    #           },
-    #           table: {
-    #             catalog_id: "CatalogIdString",
-    #             database_name: "NameString", # required
-    #             name: "NameString",
-    #             table_wildcard: {
-    #             },
-    #           },
-    #           table_with_columns: {
-    #             catalog_id: "CatalogIdString",
-    #             database_name: "NameString", # required
-    #             name: "NameString", # required
-    #             column_names: ["NameString"],
-    #             column_wildcard: {
-    #               excluded_column_names: ["NameString"],
-    #             },
-    #           },
-    #           data_location: {
-    #             catalog_id: "CatalogIdString",
-    #             resource_arn: "ResourceArnString", # required
-    #           },
-    #           data_cells_filter: {
-    #             table_catalog_id: "CatalogIdString",
-    #             database_name: "NameString",
-    #             table_name: "NameString",
-    #             name: "NameString",
-    #           },
-    #           lf_tag: {
-    #             catalog_id: "CatalogIdString",
-    #             tag_key: "NameString", # required
-    #             tag_values: ["LFTagValue"], # required
-    #           },
-    #           lf_tag_policy: {
-    #             catalog_id: "CatalogIdString",
-    #             resource_type: "DATABASE", # required, accepts DATABASE, TABLE
-    #             expression: [ # required
-    #               {
-    #                 tag_key: "LFTagKey", # required
-    #                 tag_values: ["LFTagValue"], # required
-    #               },
-    #             ],
-    #           },
-    #         },
-    #         lf_tags: [ # required
-    #           {
-    #             catalog_id: "CatalogIdString",
-    #             tag_key: "LFTagKey", # required
-    #             tag_values: ["LFTagValue"], # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] catalog_id
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
@@ -3443,59 +2409,6 @@ module Aws::LakeFormation
     end
 
     # A structure for the resource.
-    #
-    # @note When making an API call, you may pass Resource
-    #   data as a hash:
-    #
-    #       {
-    #         catalog: {
-    #         },
-    #         database: {
-    #           catalog_id: "CatalogIdString",
-    #           name: "NameString", # required
-    #         },
-    #         table: {
-    #           catalog_id: "CatalogIdString",
-    #           database_name: "NameString", # required
-    #           name: "NameString",
-    #           table_wildcard: {
-    #           },
-    #         },
-    #         table_with_columns: {
-    #           catalog_id: "CatalogIdString",
-    #           database_name: "NameString", # required
-    #           name: "NameString", # required
-    #           column_names: ["NameString"],
-    #           column_wildcard: {
-    #             excluded_column_names: ["NameString"],
-    #           },
-    #         },
-    #         data_location: {
-    #           catalog_id: "CatalogIdString",
-    #           resource_arn: "ResourceArnString", # required
-    #         },
-    #         data_cells_filter: {
-    #           table_catalog_id: "CatalogIdString",
-    #           database_name: "NameString",
-    #           table_name: "NameString",
-    #           name: "NameString",
-    #         },
-    #         lf_tag: {
-    #           catalog_id: "CatalogIdString",
-    #           tag_key: "NameString", # required
-    #           tag_values: ["LFTagValue"], # required
-    #         },
-    #         lf_tag_policy: {
-    #           catalog_id: "CatalogIdString",
-    #           resource_type: "DATABASE", # required, accepts DATABASE, TABLE
-    #           expression: [ # required
-    #             {
-    #               tag_key: "LFTagKey", # required
-    #               tag_values: ["LFTagValue"], # required
-    #             },
-    #           ],
-    #         },
-    #       }
     #
     # @!attribute [rw] catalog
     #   The identifier for the Data Catalog. By default, the account ID. The
@@ -3608,67 +2521,6 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RevokePermissionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         catalog_id: "CatalogIdString",
-    #         principal: { # required
-    #           data_lake_principal_identifier: "DataLakePrincipalString",
-    #         },
-    #         resource: { # required
-    #           catalog: {
-    #           },
-    #           database: {
-    #             catalog_id: "CatalogIdString",
-    #             name: "NameString", # required
-    #           },
-    #           table: {
-    #             catalog_id: "CatalogIdString",
-    #             database_name: "NameString", # required
-    #             name: "NameString",
-    #             table_wildcard: {
-    #             },
-    #           },
-    #           table_with_columns: {
-    #             catalog_id: "CatalogIdString",
-    #             database_name: "NameString", # required
-    #             name: "NameString", # required
-    #             column_names: ["NameString"],
-    #             column_wildcard: {
-    #               excluded_column_names: ["NameString"],
-    #             },
-    #           },
-    #           data_location: {
-    #             catalog_id: "CatalogIdString",
-    #             resource_arn: "ResourceArnString", # required
-    #           },
-    #           data_cells_filter: {
-    #             table_catalog_id: "CatalogIdString",
-    #             database_name: "NameString",
-    #             table_name: "NameString",
-    #             name: "NameString",
-    #           },
-    #           lf_tag: {
-    #             catalog_id: "CatalogIdString",
-    #             tag_key: "NameString", # required
-    #             tag_values: ["LFTagValue"], # required
-    #           },
-    #           lf_tag_policy: {
-    #             catalog_id: "CatalogIdString",
-    #             resource_type: "DATABASE", # required, accepts DATABASE, TABLE
-    #             expression: [ # required
-    #               {
-    #                 tag_key: "LFTagKey", # required
-    #                 tag_values: ["LFTagValue"], # required
-    #               },
-    #             ],
-    #           },
-    #         },
-    #         permissions: ["ALL"], # required, accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS, CREATE_TAG, ASSOCIATE
-    #         permissions_with_grant_option: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS, CREATE_TAG, ASSOCIATE
-    #       }
-    #
     # @!attribute [rw] catalog_id
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
@@ -3717,15 +2569,6 @@ module Aws::LakeFormation
 
     # A PartiQL predicate.
     #
-    # @note When making an API call, you may pass RowFilter
-    #   data as a hash:
-    #
-    #       {
-    #         filter_expression: "PredicateString",
-    #         all_rows_wildcard: {
-    #         },
-    #       }
-    #
     # @!attribute [rw] filter_expression
     #   A filter expression.
     #   @return [String]
@@ -3743,21 +2586,6 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SearchDatabasesByLFTagsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "Token",
-    #         max_results: 1,
-    #         catalog_id: "CatalogIdString",
-    #         expression: [ # required
-    #           {
-    #             tag_key: "LFTagKey", # required
-    #             tag_values: ["LFTagValue"], # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] next_token
     #   A continuation token, if this is not the first call to retrieve this
     #   list.
@@ -3808,21 +2636,6 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SearchTablesByLFTagsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "Token",
-    #         max_results: 1,
-    #         catalog_id: "CatalogIdString",
-    #         expression: [ # required
-    #           {
-    #             tag_key: "LFTagKey", # required
-    #             tag_values: ["LFTagValue"], # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] next_token
     #   A continuation token, if this is not the first call to retrieve this
     #   list.
@@ -3873,22 +2686,6 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartQueryPlanningRequest
-    #   data as a hash:
-    #
-    #       {
-    #         query_planning_context: { # required
-    #           catalog_id: "CatalogIdString",
-    #           database_name: "QueryPlanningContextDatabaseNameString", # required
-    #           query_as_of_time: Time.now,
-    #           query_parameters: {
-    #             "String" => "String",
-    #           },
-    #           transaction_id: "TransactionIdString",
-    #         },
-    #         query_string: "SyntheticStartQueryPlanningRequestQueryString", # required
-    #       }
-    #
     # @!attribute [rw] query_planning_context
     #   A structure containing information about the query plan.
     #   @return [Types::QueryPlanningContext]
@@ -3923,13 +2720,6 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartTransactionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         transaction_type: "READ_AND_WRITE", # accepts READ_AND_WRITE, READ_ONLY
-    #       }
-    #
     # @!attribute [rw] transaction_type
     #   Indicates whether this transaction should be read only or read and
     #   write. Writes made using a read-only transaction ID will be
@@ -4044,17 +2834,6 @@ module Aws::LakeFormation
     # that represents your data. You can Grant and Revoke table privileges
     # to a principal.
     #
-    # @note When making an API call, you may pass TableResource
-    #   data as a hash:
-    #
-    #       {
-    #         catalog_id: "CatalogIdString",
-    #         database_name: "NameString", # required
-    #         name: "NameString",
-    #         table_wildcard: {
-    #         },
-    #       }
-    #
     # @!attribute [rw] catalog_id
     #   The identifier for the Data Catalog. By default, it is the account
     #   ID of the caller.
@@ -4091,8 +2870,6 @@ module Aws::LakeFormation
 
     # A wildcard object representing every table under a database.
     #
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/TableWildcard AWS API Documentation
     #
     class TableWildcard < Aws::EmptyStructure; end
@@ -4102,19 +2879,6 @@ module Aws::LakeFormation
     #
     # This object must take a value for at least one of `ColumnsNames`,
     # `ColumnsIndexes`, or `ColumnsWildcard`.
-    #
-    # @note When making an API call, you may pass TableWithColumnsResource
-    #   data as a hash:
-    #
-    #       {
-    #         catalog_id: "CatalogIdString",
-    #         database_name: "NameString", # required
-    #         name: "NameString", # required
-    #         column_names: ["NameString"],
-    #         column_wildcard: {
-    #           excluded_column_names: ["NameString"],
-    #         },
-    #       }
     #
     # @!attribute [rw] catalog_id
     #   The identifier for the Data Catalog. By default, it is the account
@@ -4293,16 +3057,6 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateLFTagRequest
-    #   data as a hash:
-    #
-    #       {
-    #         catalog_id: "CatalogIdString",
-    #         tag_key: "LFTagKey", # required
-    #         tag_values_to_delete: ["LFTagValue"],
-    #         tag_values_to_add: ["LFTagValue"],
-    #       }
-    #
     # @!attribute [rw] catalog_id
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
@@ -4337,14 +3091,6 @@ module Aws::LakeFormation
     #
     class UpdateLFTagResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         role_arn: "IAMRoleArn", # required
-    #         resource_arn: "ResourceArnString", # required
-    #       }
-    #
     # @!attribute [rw] role_arn
     #   The new role to use for the given resource registered in Lake
     #   Formation.
@@ -4367,31 +3113,6 @@ module Aws::LakeFormation
     #
     class UpdateResourceResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateTableObjectsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         catalog_id: "CatalogIdString",
-    #         database_name: "NameString", # required
-    #         table_name: "NameString", # required
-    #         transaction_id: "TransactionIdString",
-    #         write_operations: [ # required
-    #           {
-    #             add_object: {
-    #               uri: "URI", # required
-    #               etag: "ETagString", # required
-    #               size: 1, # required
-    #               partition_values: ["PartitionValueString"],
-    #             },
-    #             delete_object: {
-    #               uri: "URI", # required
-    #               etag: "ETagString",
-    #               partition_values: ["PartitionValueString"],
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] catalog_id
     #   The catalog containing the governed table to update. Defaults to the
     #   caller’s account ID.
@@ -4430,20 +3151,6 @@ module Aws::LakeFormation
     #
     class UpdateTableObjectsResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass UpdateTableStorageOptimizerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         catalog_id: "CatalogIdString",
-    #         database_name: "NameString", # required
-    #         table_name: "NameString", # required
-    #         storage_optimizer_config: { # required
-    #           "COMPACTION" => {
-    #             "StorageOptimizerConfigKey" => "StorageOptimizerConfigValue",
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] catalog_id
     #   The Catalog ID of the table.
     #   @return [String]
@@ -4486,14 +3193,6 @@ module Aws::LakeFormation
     # An object that defines an Amazon S3 object to be deleted if a
     # transaction cancels, provided that `VirtualPut` was called before
     # writing the object.
-    #
-    # @note When making an API call, you may pass VirtualObject
-    #   data as a hash:
-    #
-    #       {
-    #         uri: "URI", # required
-    #         etag: "ETagString",
-    #       }
     #
     # @!attribute [rw] uri
     #   The path to the Amazon S3 object. Must start with s3://
@@ -4553,23 +3252,6 @@ module Aws::LakeFormation
     end
 
     # Defines an object to add to or delete from a governed table.
-    #
-    # @note When making an API call, you may pass WriteOperation
-    #   data as a hash:
-    #
-    #       {
-    #         add_object: {
-    #           uri: "URI", # required
-    #           etag: "ETagString", # required
-    #           size: 1, # required
-    #           partition_values: ["PartitionValueString"],
-    #         },
-    #         delete_object: {
-    #           uri: "URI", # required
-    #           etag: "ETagString",
-    #           partition_values: ["PartitionValueString"],
-    #         },
-    #       }
     #
     # @!attribute [rw] add_object
     #   A new object to add to the governed table.

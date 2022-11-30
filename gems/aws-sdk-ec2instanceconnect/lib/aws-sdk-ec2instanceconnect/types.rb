@@ -94,16 +94,6 @@ module Aws::EC2InstanceConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SendSSHPublicKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         instance_os_user: "InstanceOSUser", # required
-    #         ssh_public_key: "SSHPublicKey", # required
-    #         availability_zone: "AvailabilityZone",
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The ID of the EC2 instance.
     #   @return [String]
@@ -151,15 +141,6 @@ module Aws::EC2InstanceConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SendSerialConsoleSSHPublicKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "InstanceId", # required
-    #         serial_port: 1,
-    #         ssh_public_key: "SSHPublicKey", # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The ID of the EC2 instance.
     #   @return [String]

@@ -13,14 +13,6 @@ module Aws::AutoScaling
     # Specifies the minimum and maximum for the `AcceleratorCount` object
     # when you specify InstanceRequirements for an Auto Scaling group.
     #
-    # @note When making an API call, you may pass AcceleratorCountRequest
-    #   data as a hash:
-    #
-    #       {
-    #         min: 1,
-    #         max: 1,
-    #       }
-    #
     # @!attribute [rw] min
     #   The minimum value.
     #   @return [Integer]
@@ -41,14 +33,6 @@ module Aws::AutoScaling
     # Specifies the minimum and maximum for the `AcceleratorTotalMemoryMiB`
     # object when you specify InstanceRequirements for an Auto Scaling
     # group.
-    #
-    # @note When making an API call, you may pass AcceleratorTotalMemoryMiBRequest
-    #   data as a hash:
-    #
-    #       {
-    #         min: 1,
-    #         max: 1,
-    #       }
     #
     # @!attribute [rw] min
     #   The memory minimum in MiB.
@@ -236,14 +220,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AttachInstancesQuery
-    #   data as a hash:
-    #
-    #       {
-    #         instance_ids: ["XmlStringMaxLen19"],
-    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
-    #       }
-    #
     # @!attribute [rw] instance_ids
     #   The IDs of the instances. You can specify up to 20 instances.
     #   @return [Array<String>]
@@ -265,14 +241,6 @@ module Aws::AutoScaling
     #
     class AttachLoadBalancerTargetGroupsResultType < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass AttachLoadBalancerTargetGroupsType
-    #   data as a hash:
-    #
-    #       {
-    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
-    #         target_group_arns: ["XmlStringMaxLen511"], # required
-    #       }
-    #
     # @!attribute [rw] auto_scaling_group_name
     #   The name of the Auto Scaling group.
     #   @return [String]
@@ -301,14 +269,6 @@ module Aws::AutoScaling
     #
     class AttachLoadBalancersResultType < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass AttachLoadBalancersType
-    #   data as a hash:
-    #
-    #       {
-    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
-    #         load_balancer_names: ["XmlStringMaxLen255"], # required
-    #       }
-    #
     # @!attribute [rw] auto_scaling_group_name
     #   The name of the Auto Scaling group.
     #   @return [String]
@@ -516,21 +476,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AutoScalingGroupNamesType
-    #   data as a hash:
-    #
-    #       {
-    #         auto_scaling_group_names: ["XmlStringMaxLen255"],
-    #         next_token: "XmlString",
-    #         max_records: 1,
-    #         filters: [
-    #           {
-    #             name: "XmlString",
-    #             values: ["XmlString"],
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] auto_scaling_group_names
     #   The names of the Auto Scaling groups. By default, you can only
     #   specify up to 50 names. You can optionally increase this limit using
@@ -693,14 +638,6 @@ module Aws::AutoScaling
     # object when you specify InstanceRequirements for an Auto Scaling
     # group.
     #
-    # @note When making an API call, you may pass BaselineEbsBandwidthMbpsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         min: 1,
-    #         max: 1,
-    #       }
-    #
     # @!attribute [rw] min
     #   The minimum value in Mbps.
     #   @return [Integer]
@@ -731,14 +668,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchDeleteScheduledActionType
-    #   data as a hash:
-    #
-    #       {
-    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
-    #         scheduled_action_names: ["XmlStringMaxLen255"], # required
-    #       }
-    #
     # @!attribute [rw] auto_scaling_group_name
     #   The name of the Auto Scaling group.
     #   @return [String]
@@ -770,25 +699,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass BatchPutScheduledUpdateGroupActionType
-    #   data as a hash:
-    #
-    #       {
-    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
-    #         scheduled_update_group_actions: [ # required
-    #           {
-    #             scheduled_action_name: "XmlStringMaxLen255", # required
-    #             start_time: Time.now,
-    #             end_time: Time.now,
-    #             recurrence: "XmlStringMaxLen255",
-    #             min_size: 1,
-    #             max_size: 1,
-    #             desired_capacity: 1,
-    #             time_zone: "XmlStringMaxLen255",
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] auto_scaling_group_name
     #   The name of the Auto Scaling group.
     #   @return [String]
@@ -807,24 +717,6 @@ module Aws::AutoScaling
     end
 
     # Describes a block device mapping.
-    #
-    # @note When making an API call, you may pass BlockDeviceMapping
-    #   data as a hash:
-    #
-    #       {
-    #         virtual_name: "XmlStringMaxLen255",
-    #         device_name: "XmlStringMaxLen255", # required
-    #         ebs: {
-    #           snapshot_id: "XmlStringMaxLen255",
-    #           volume_size: 1,
-    #           volume_type: "BlockDeviceEbsVolumeType",
-    #           delete_on_termination: false,
-    #           iops: 1,
-    #           encrypted: false,
-    #           throughput: 1,
-    #         },
-    #         no_device: false,
-    #       }
     #
     # @!attribute [rw] virtual_name
     #   The name of the instance store volume (virtual device) to attach to
@@ -886,13 +778,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CancelInstanceRefreshType
-    #   data as a hash:
-    #
-    #       {
-    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
-    #       }
-    #
     # @!attribute [rw] auto_scaling_group_name
     #   The name of the Auto Scaling group.
     #   @return [String]
@@ -931,17 +816,6 @@ module Aws::AutoScaling
     #
     class CompleteLifecycleActionAnswer < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass CompleteLifecycleActionType
-    #   data as a hash:
-    #
-    #       {
-    #         lifecycle_hook_name: "AsciiStringMaxLen255", # required
-    #         auto_scaling_group_name: "ResourceName", # required
-    #         lifecycle_action_token: "LifecycleActionToken",
-    #         lifecycle_action_result: "LifecycleActionResult", # required
-    #         instance_id: "XmlStringMaxLen19",
-    #       }
-    #
     # @!attribute [rw] lifecycle_hook_name
     #   The name of the lifecycle hook.
     #   @return [String]
@@ -978,139 +852,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAutoScalingGroupType
-    #   data as a hash:
-    #
-    #       {
-    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
-    #         launch_configuration_name: "XmlStringMaxLen255",
-    #         launch_template: {
-    #           launch_template_id: "XmlStringMaxLen255",
-    #           launch_template_name: "LaunchTemplateName",
-    #           version: "XmlStringMaxLen255",
-    #         },
-    #         mixed_instances_policy: {
-    #           launch_template: {
-    #             launch_template_specification: {
-    #               launch_template_id: "XmlStringMaxLen255",
-    #               launch_template_name: "LaunchTemplateName",
-    #               version: "XmlStringMaxLen255",
-    #             },
-    #             overrides: [
-    #               {
-    #                 instance_type: "XmlStringMaxLen255",
-    #                 weighted_capacity: "XmlStringMaxLen32",
-    #                 launch_template_specification: {
-    #                   launch_template_id: "XmlStringMaxLen255",
-    #                   launch_template_name: "LaunchTemplateName",
-    #                   version: "XmlStringMaxLen255",
-    #                 },
-    #                 instance_requirements: {
-    #                   v_cpu_count: { # required
-    #                     min: 1, # required
-    #                     max: 1,
-    #                   },
-    #                   memory_mi_b: { # required
-    #                     min: 1, # required
-    #                     max: 1,
-    #                   },
-    #                   cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
-    #                   memory_gi_b_per_v_cpu: {
-    #                     min: 1.0,
-    #                     max: 1.0,
-    #                   },
-    #                   excluded_instance_types: ["ExcludedInstance"],
-    #                   instance_generations: ["current"], # accepts current, previous
-    #                   spot_max_price_percentage_over_lowest_price: 1,
-    #                   on_demand_max_price_percentage_over_lowest_price: 1,
-    #                   bare_metal: "included", # accepts included, excluded, required
-    #                   burstable_performance: "included", # accepts included, excluded, required
-    #                   require_hibernate_support: false,
-    #                   network_interface_count: {
-    #                     min: 1,
-    #                     max: 1,
-    #                   },
-    #                   local_storage: "included", # accepts included, excluded, required
-    #                   local_storage_types: ["hdd"], # accepts hdd, ssd
-    #                   total_local_storage_gb: {
-    #                     min: 1.0,
-    #                     max: 1.0,
-    #                   },
-    #                   baseline_ebs_bandwidth_mbps: {
-    #                     min: 1,
-    #                     max: 1,
-    #                   },
-    #                   accelerator_types: ["gpu"], # accepts gpu, fpga, inference
-    #                   accelerator_count: {
-    #                     min: 1,
-    #                     max: 1,
-    #                   },
-    #                   accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
-    #                   accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
-    #                   accelerator_total_memory_mi_b: {
-    #                     min: 1,
-    #                     max: 1,
-    #                   },
-    #                   network_bandwidth_gbps: {
-    #                     min: 1.0,
-    #                     max: 1.0,
-    #                   },
-    #                   allowed_instance_types: ["AllowedInstanceType"],
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #           instances_distribution: {
-    #             on_demand_allocation_strategy: "XmlString",
-    #             on_demand_base_capacity: 1,
-    #             on_demand_percentage_above_base_capacity: 1,
-    #             spot_allocation_strategy: "XmlString",
-    #             spot_instance_pools: 1,
-    #             spot_max_price: "MixedInstanceSpotPrice",
-    #           },
-    #         },
-    #         instance_id: "XmlStringMaxLen19",
-    #         min_size: 1, # required
-    #         max_size: 1, # required
-    #         desired_capacity: 1,
-    #         default_cooldown: 1,
-    #         availability_zones: ["XmlStringMaxLen255"],
-    #         load_balancer_names: ["XmlStringMaxLen255"],
-    #         target_group_arns: ["XmlStringMaxLen511"],
-    #         health_check_type: "XmlStringMaxLen32",
-    #         health_check_grace_period: 1,
-    #         placement_group: "XmlStringMaxLen255",
-    #         vpc_zone_identifier: "XmlStringMaxLen2047",
-    #         termination_policies: ["XmlStringMaxLen1600"],
-    #         new_instances_protected_from_scale_in: false,
-    #         capacity_rebalance: false,
-    #         lifecycle_hook_specification_list: [
-    #           {
-    #             lifecycle_hook_name: "AsciiStringMaxLen255", # required
-    #             lifecycle_transition: "LifecycleTransition", # required
-    #             notification_metadata: "XmlStringMaxLen1023",
-    #             heartbeat_timeout: 1,
-    #             default_result: "LifecycleActionResult",
-    #             notification_target_arn: "NotificationTargetResourceName",
-    #             role_arn: "XmlStringMaxLen255",
-    #           },
-    #         ],
-    #         tags: [
-    #           {
-    #             resource_id: "XmlString",
-    #             resource_type: "XmlString",
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #             propagate_at_launch: false,
-    #           },
-    #         ],
-    #         service_linked_role_arn: "ResourceName",
-    #         max_instance_lifetime: 1,
-    #         context: "Context",
-    #         desired_capacity_type: "XmlStringMaxLen255",
-    #         default_instance_warmup: 1,
-    #       }
-    #
     # @!attribute [rw] auto_scaling_group_name
     #   The name of the Auto Scaling group. This name must be unique per
     #   Region per account.
@@ -1476,52 +1217,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateLaunchConfigurationType
-    #   data as a hash:
-    #
-    #       {
-    #         launch_configuration_name: "XmlStringMaxLen255", # required
-    #         image_id: "XmlStringMaxLen255",
-    #         key_name: "XmlStringMaxLen255",
-    #         security_groups: ["XmlString"],
-    #         classic_link_vpc_id: "XmlStringMaxLen255",
-    #         classic_link_vpc_security_groups: ["XmlStringMaxLen255"],
-    #         user_data: "XmlStringUserData",
-    #         instance_id: "XmlStringMaxLen19",
-    #         instance_type: "XmlStringMaxLen255",
-    #         kernel_id: "XmlStringMaxLen255",
-    #         ramdisk_id: "XmlStringMaxLen255",
-    #         block_device_mappings: [
-    #           {
-    #             virtual_name: "XmlStringMaxLen255",
-    #             device_name: "XmlStringMaxLen255", # required
-    #             ebs: {
-    #               snapshot_id: "XmlStringMaxLen255",
-    #               volume_size: 1,
-    #               volume_type: "BlockDeviceEbsVolumeType",
-    #               delete_on_termination: false,
-    #               iops: 1,
-    #               encrypted: false,
-    #               throughput: 1,
-    #             },
-    #             no_device: false,
-    #           },
-    #         ],
-    #         instance_monitoring: {
-    #           enabled: false,
-    #         },
-    #         spot_price: "SpotPrice",
-    #         iam_instance_profile: "XmlStringMaxLen1600",
-    #         ebs_optimized: false,
-    #         associate_public_ip_address: false,
-    #         placement_tenancy: "XmlStringMaxLen64",
-    #         metadata_options: {
-    #           http_tokens: "optional", # accepts optional, required
-    #           http_put_response_hop_limit: 1,
-    #           http_endpoint: "disabled", # accepts disabled, enabled
-    #         },
-    #       }
-    #
     # @!attribute [rw] launch_configuration_name
     #   The name of the launch configuration. This name must be unique per
     #   Region per account.
@@ -1797,21 +1492,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateOrUpdateTagsType
-    #   data as a hash:
-    #
-    #       {
-    #         tags: [ # required
-    #           {
-    #             resource_id: "XmlString",
-    #             resource_type: "XmlString",
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #             propagate_at_launch: false,
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] tags
     #   One or more tags.
     #   @return [Array<Types::Tag>]
@@ -1855,22 +1535,6 @@ module Aws::AutoScaling
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html
     # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html
     # [3]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html
-    #
-    # @note When making an API call, you may pass CustomizedMetricSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         metric_name: "MetricName", # required
-    #         namespace: "MetricNamespace", # required
-    #         dimensions: [
-    #           {
-    #             name: "MetricDimensionName", # required
-    #             value: "MetricDimensionValue", # required
-    #           },
-    #         ],
-    #         statistic: "Average", # required, accepts Average, Minimum, Maximum, SampleCount, Sum
-    #         unit: "MetricUnit",
-    #       }
     #
     # @!attribute [rw] metric_name
     #   The name of the metric. To get the exact metric name, namespace, and
@@ -1920,14 +1584,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAutoScalingGroupType
-    #   data as a hash:
-    #
-    #       {
-    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
-    #         force_delete: false,
-    #       }
-    #
     # @!attribute [rw] auto_scaling_group_name
     #   The name of the Auto Scaling group.
     #   @return [String]
@@ -1952,14 +1608,6 @@ module Aws::AutoScaling
     #
     class DeleteLifecycleHookAnswer < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteLifecycleHookType
-    #   data as a hash:
-    #
-    #       {
-    #         lifecycle_hook_name: "AsciiStringMaxLen255", # required
-    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
-    #       }
-    #
     # @!attribute [rw] lifecycle_hook_name
     #   The name of the lifecycle hook.
     #   @return [String]
@@ -1977,14 +1625,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteNotificationConfigurationType
-    #   data as a hash:
-    #
-    #       {
-    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
-    #         topic_arn: "XmlStringMaxLen255", # required
-    #       }
-    #
     # @!attribute [rw] auto_scaling_group_name
     #   The name of the Auto Scaling group.
     #   @return [String]
@@ -2002,14 +1642,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeletePolicyType
-    #   data as a hash:
-    #
-    #       {
-    #         auto_scaling_group_name: "XmlStringMaxLen255",
-    #         policy_name: "ResourceName", # required
-    #       }
-    #
     # @!attribute [rw] auto_scaling_group_name
     #   The name of the Auto Scaling group.
     #   @return [String]
@@ -2027,14 +1659,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteScheduledActionType
-    #   data as a hash:
-    #
-    #       {
-    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
-    #         scheduled_action_name: "XmlStringMaxLen255", # required
-    #       }
-    #
     # @!attribute [rw] auto_scaling_group_name
     #   The name of the Auto Scaling group.
     #   @return [String]
@@ -2052,21 +1676,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteTagsType
-    #   data as a hash:
-    #
-    #       {
-    #         tags: [ # required
-    #           {
-    #             resource_id: "XmlString",
-    #             resource_type: "XmlString",
-    #             key: "TagKey", # required
-    #             value: "TagValue",
-    #             propagate_at_launch: false,
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] tags
     #   One or more tags.
     #   @return [Array<Types::Tag>]
@@ -2083,14 +1692,6 @@ module Aws::AutoScaling
     #
     class DeleteWarmPoolAnswer < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteWarmPoolType
-    #   data as a hash:
-    #
-    #       {
-    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
-    #         force_delete: false,
-    #       }
-    #
     # @!attribute [rw] auto_scaling_group_name
     #   The name of the Auto Scaling group.
     #   @return [String]
@@ -2152,15 +1753,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAutoScalingInstancesType
-    #   data as a hash:
-    #
-    #       {
-    #         instance_ids: ["XmlStringMaxLen19"],
-    #         max_records: 1,
-    #         next_token: "XmlString",
-    #       }
-    #
     # @!attribute [rw] instance_ids
     #   The IDs of the instances. If you omit this property, all Auto
     #   Scaling instances are described. If you specify an ID that does not
@@ -2223,16 +1815,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeInstanceRefreshesType
-    #   data as a hash:
-    #
-    #       {
-    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
-    #         instance_refresh_ids: ["XmlStringMaxLen255"],
-    #         next_token: "XmlString",
-    #         max_records: 1,
-    #       }
-    #
     # @!attribute [rw] auto_scaling_group_name
     #   The name of the Auto Scaling group.
     #   @return [String]
@@ -2286,14 +1868,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeLifecycleHooksType
-    #   data as a hash:
-    #
-    #       {
-    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
-    #         lifecycle_hook_names: ["AsciiStringMaxLen255"],
-    #       }
-    #
     # @!attribute [rw] auto_scaling_group_name
     #   The name of the Auto Scaling group.
     #   @return [String]
@@ -2312,15 +1886,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeLoadBalancerTargetGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
-    #         next_token: "XmlString",
-    #         max_records: 1,
-    #       }
-    #
     # @!attribute [rw] auto_scaling_group_name
     #   The name of the Auto Scaling group.
     #   @return [String]
@@ -2366,15 +1931,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeLoadBalancersRequest
-    #   data as a hash:
-    #
-    #       {
-    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
-    #         next_token: "XmlString",
-    #         max_records: 1,
-    #       }
-    #
     # @!attribute [rw] auto_scaling_group_name
     #   The name of the Auto Scaling group.
     #   @return [String]
@@ -2458,15 +2014,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeNotificationConfigurationsType
-    #   data as a hash:
-    #
-    #       {
-    #         auto_scaling_group_names: ["XmlStringMaxLen255"],
-    #         next_token: "XmlString",
-    #         max_records: 1,
-    #       }
-    #
     # @!attribute [rw] auto_scaling_group_names
     #   The name of the Auto Scaling group.
     #   @return [Array<String>]
@@ -2491,17 +2038,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribePoliciesType
-    #   data as a hash:
-    #
-    #       {
-    #         auto_scaling_group_name: "XmlStringMaxLen255",
-    #         policy_names: ["ResourceName"],
-    #         policy_types: ["XmlStringMaxLen64"],
-    #         next_token: "XmlString",
-    #         max_records: 1,
-    #       }
-    #
     # @!attribute [rw] auto_scaling_group_name
     #   The name of the Auto Scaling group.
     #   @return [String]
@@ -2542,17 +2078,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeScalingActivitiesType
-    #   data as a hash:
-    #
-    #       {
-    #         activity_ids: ["XmlString"],
-    #         auto_scaling_group_name: "XmlStringMaxLen255",
-    #         include_deleted_groups: false,
-    #         max_records: 1,
-    #         next_token: "XmlString",
-    #       }
-    #
     # @!attribute [rw] activity_ids
     #   The activity IDs of the desired scaling activities. If you omit this
     #   property, all activities for the past six weeks are described. If
@@ -2594,18 +2119,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeScheduledActionsType
-    #   data as a hash:
-    #
-    #       {
-    #         auto_scaling_group_name: "XmlStringMaxLen255",
-    #         scheduled_action_names: ["XmlStringMaxLen255"],
-    #         start_time: Time.now,
-    #         end_time: Time.now,
-    #         next_token: "XmlString",
-    #         max_records: 1,
-    #       }
-    #
     # @!attribute [rw] auto_scaling_group_name
     #   The name of the Auto Scaling group.
     #   @return [String]
@@ -2651,20 +2164,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeTagsType
-    #   data as a hash:
-    #
-    #       {
-    #         filters: [
-    #           {
-    #             name: "XmlString",
-    #             values: ["XmlString"],
-    #           },
-    #         ],
-    #         next_token: "XmlString",
-    #         max_records: 1,
-    #       }
-    #
     # @!attribute [rw] filters
     #   One or more filters to scope the tags to return. The maximum number
     #   of filters per filter type (for example, `auto-scaling-group`) is
@@ -2729,15 +2228,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeWarmPoolType
-    #   data as a hash:
-    #
-    #       {
-    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
-    #         max_records: 1,
-    #         next_token: "XmlString",
-    #       }
-    #
     # @!attribute [rw] auto_scaling_group_name
     #   The name of the Auto Scaling group.
     #   @return [String]
@@ -2766,97 +2256,6 @@ module Aws::AutoScaling
     #
     # If you specify a desired configuration, you must specify either a
     # `LaunchTemplate` or a `MixedInstancesPolicy`.
-    #
-    # @note When making an API call, you may pass DesiredConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         launch_template: {
-    #           launch_template_id: "XmlStringMaxLen255",
-    #           launch_template_name: "LaunchTemplateName",
-    #           version: "XmlStringMaxLen255",
-    #         },
-    #         mixed_instances_policy: {
-    #           launch_template: {
-    #             launch_template_specification: {
-    #               launch_template_id: "XmlStringMaxLen255",
-    #               launch_template_name: "LaunchTemplateName",
-    #               version: "XmlStringMaxLen255",
-    #             },
-    #             overrides: [
-    #               {
-    #                 instance_type: "XmlStringMaxLen255",
-    #                 weighted_capacity: "XmlStringMaxLen32",
-    #                 launch_template_specification: {
-    #                   launch_template_id: "XmlStringMaxLen255",
-    #                   launch_template_name: "LaunchTemplateName",
-    #                   version: "XmlStringMaxLen255",
-    #                 },
-    #                 instance_requirements: {
-    #                   v_cpu_count: { # required
-    #                     min: 1, # required
-    #                     max: 1,
-    #                   },
-    #                   memory_mi_b: { # required
-    #                     min: 1, # required
-    #                     max: 1,
-    #                   },
-    #                   cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
-    #                   memory_gi_b_per_v_cpu: {
-    #                     min: 1.0,
-    #                     max: 1.0,
-    #                   },
-    #                   excluded_instance_types: ["ExcludedInstance"],
-    #                   instance_generations: ["current"], # accepts current, previous
-    #                   spot_max_price_percentage_over_lowest_price: 1,
-    #                   on_demand_max_price_percentage_over_lowest_price: 1,
-    #                   bare_metal: "included", # accepts included, excluded, required
-    #                   burstable_performance: "included", # accepts included, excluded, required
-    #                   require_hibernate_support: false,
-    #                   network_interface_count: {
-    #                     min: 1,
-    #                     max: 1,
-    #                   },
-    #                   local_storage: "included", # accepts included, excluded, required
-    #                   local_storage_types: ["hdd"], # accepts hdd, ssd
-    #                   total_local_storage_gb: {
-    #                     min: 1.0,
-    #                     max: 1.0,
-    #                   },
-    #                   baseline_ebs_bandwidth_mbps: {
-    #                     min: 1,
-    #                     max: 1,
-    #                   },
-    #                   accelerator_types: ["gpu"], # accepts gpu, fpga, inference
-    #                   accelerator_count: {
-    #                     min: 1,
-    #                     max: 1,
-    #                   },
-    #                   accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
-    #                   accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
-    #                   accelerator_total_memory_mi_b: {
-    #                     min: 1,
-    #                     max: 1,
-    #                   },
-    #                   network_bandwidth_gbps: {
-    #                     min: 1.0,
-    #                     max: 1.0,
-    #                   },
-    #                   allowed_instance_types: ["AllowedInstanceType"],
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #           instances_distribution: {
-    #             on_demand_allocation_strategy: "XmlString",
-    #             on_demand_base_capacity: 1,
-    #             on_demand_percentage_above_base_capacity: 1,
-    #             spot_allocation_strategy: "XmlString",
-    #             spot_instance_pools: 1,
-    #             spot_max_price: "MixedInstanceSpotPrice",
-    #           },
-    #         },
-    #       }
     #
     # @!attribute [rw] launch_template
     #   Describes the launch template and the version of the launch template
@@ -2906,15 +2305,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DetachInstancesQuery
-    #   data as a hash:
-    #
-    #       {
-    #         instance_ids: ["XmlStringMaxLen19"],
-    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
-    #         should_decrement_desired_capacity: false, # required
-    #       }
-    #
     # @!attribute [rw] instance_ids
     #   The IDs of the instances. You can specify up to 20 instances.
     #   @return [Array<String>]
@@ -2942,14 +2332,6 @@ module Aws::AutoScaling
     #
     class DetachLoadBalancerTargetGroupsResultType < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DetachLoadBalancerTargetGroupsType
-    #   data as a hash:
-    #
-    #       {
-    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
-    #         target_group_arns: ["XmlStringMaxLen511"], # required
-    #       }
-    #
     # @!attribute [rw] auto_scaling_group_name
     #   The name of the Auto Scaling group.
     #   @return [String]
@@ -2972,14 +2354,6 @@ module Aws::AutoScaling
     #
     class DetachLoadBalancersResultType < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DetachLoadBalancersType
-    #   data as a hash:
-    #
-    #       {
-    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
-    #         load_balancer_names: ["XmlStringMaxLen255"], # required
-    #       }
-    #
     # @!attribute [rw] auto_scaling_group_name
     #   The name of the Auto Scaling group.
     #   @return [String]
@@ -2998,14 +2372,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DisableMetricsCollectionQuery
-    #   data as a hash:
-    #
-    #       {
-    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
-    #         metrics: ["XmlStringMaxLen255"],
-    #       }
-    #
     # @!attribute [rw] auto_scaling_group_name
     #   The name of the Auto Scaling group.
     #   @return [String]
@@ -3076,19 +2442,6 @@ module Aws::AutoScaling
 
     # Describes information used to set up an Amazon EBS volume specified in
     # a block device mapping.
-    #
-    # @note When making an API call, you may pass Ebs
-    #   data as a hash:
-    #
-    #       {
-    #         snapshot_id: "XmlStringMaxLen255",
-    #         volume_size: 1,
-    #         volume_type: "BlockDeviceEbsVolumeType",
-    #         delete_on_termination: false,
-    #         iops: 1,
-    #         encrypted: false,
-    #         throughput: 1,
-    #       }
     #
     # @!attribute [rw] snapshot_id
     #   The snapshot ID of the volume to use.
@@ -3203,15 +2556,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass EnableMetricsCollectionQuery
-    #   data as a hash:
-    #
-    #       {
-    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
-    #         metrics: ["XmlStringMaxLen255"],
-    #         granularity: "XmlStringMaxLen255", # required
-    #       }
-    #
     # @!attribute [rw] auto_scaling_group_name
     #   The name of the Auto Scaling group.
     #   @return [String]
@@ -3365,15 +2709,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass EnterStandbyQuery
-    #   data as a hash:
-    #
-    #       {
-    #         instance_ids: ["XmlStringMaxLen19"],
-    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
-    #         should_decrement_desired_capacity: false, # required
-    #       }
-    #
     # @!attribute [rw] instance_ids
     #   The IDs of the instances. You can specify up to 20 instances.
     #   @return [Array<String>]
@@ -3397,17 +2732,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ExecutePolicyType
-    #   data as a hash:
-    #
-    #       {
-    #         auto_scaling_group_name: "XmlStringMaxLen255",
-    #         policy_name: "ResourceName", # required
-    #         honor_cooldown: false,
-    #         metric_value: 1.0,
-    #         breach_threshold: 1.0,
-    #       }
-    #
     # @!attribute [rw] auto_scaling_group_name
     #   The name of the Auto Scaling group.
     #   @return [String]
@@ -3474,14 +2798,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ExitStandbyQuery
-    #   data as a hash:
-    #
-    #       {
-    #         instance_ids: ["XmlStringMaxLen19"],
-    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
-    #       }
-    #
     # @!attribute [rw] instance_ids
     #   The IDs of the instances. You can specify up to 20 instances.
     #   @return [Array<String>]
@@ -3537,14 +2853,6 @@ module Aws::AutoScaling
     #
     #
     # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-tagging.html
-    #
-    # @note When making an API call, you may pass Filter
-    #   data as a hash:
-    #
-    #       {
-    #         name: "XmlString",
-    #         values: ["XmlString"],
-    #       }
     #
     # @!attribute [rw] name
     #   The name of the filter.
@@ -3631,16 +2939,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetPredictiveScalingForecastType
-    #   data as a hash:
-    #
-    #       {
-    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
-    #         policy_name: "XmlStringMaxLen255", # required
-    #         start_time: Time.now, # required
-    #         end_time: Time.now, # required
-    #       }
-    #
     # @!attribute [rw] auto_scaling_group_name
     #   The name of the Auto Scaling group.
     #   @return [String]
@@ -3752,15 +3050,6 @@ module Aws::AutoScaling
     #
     # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-config.html#launch-configurations-imds
     #
-    # @note When making an API call, you may pass InstanceMetadataOptions
-    #   data as a hash:
-    #
-    #       {
-    #         http_tokens: "optional", # accepts optional, required
-    #         http_put_response_hop_limit: 1,
-    #         http_endpoint: "disabled", # accepts disabled, enabled
-    #       }
-    #
     # @!attribute [rw] http_tokens
     #   The state of token usage for your instance metadata requests. If the
     #   parameter is not specified in the request, the default state is
@@ -3810,13 +3099,6 @@ module Aws::AutoScaling
 
     # Describes whether detailed monitoring is enabled for the Auto Scaling
     # instances.
-    #
-    # @note When making an API call, you may pass InstanceMonitoring
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false,
-    #       }
     #
     # @!attribute [rw] enabled
     #   If `true`, detailed monitoring is enabled. Otherwise, basic
@@ -4044,62 +3326,6 @@ module Aws::AutoScaling
     #
     # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-instance-type-requirements.html
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html#ec2fleet-get-instance-types-from-instance-requirements
-    #
-    # @note When making an API call, you may pass InstanceRequirements
-    #   data as a hash:
-    #
-    #       {
-    #         v_cpu_count: { # required
-    #           min: 1, # required
-    #           max: 1,
-    #         },
-    #         memory_mi_b: { # required
-    #           min: 1, # required
-    #           max: 1,
-    #         },
-    #         cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
-    #         memory_gi_b_per_v_cpu: {
-    #           min: 1.0,
-    #           max: 1.0,
-    #         },
-    #         excluded_instance_types: ["ExcludedInstance"],
-    #         instance_generations: ["current"], # accepts current, previous
-    #         spot_max_price_percentage_over_lowest_price: 1,
-    #         on_demand_max_price_percentage_over_lowest_price: 1,
-    #         bare_metal: "included", # accepts included, excluded, required
-    #         burstable_performance: "included", # accepts included, excluded, required
-    #         require_hibernate_support: false,
-    #         network_interface_count: {
-    #           min: 1,
-    #           max: 1,
-    #         },
-    #         local_storage: "included", # accepts included, excluded, required
-    #         local_storage_types: ["hdd"], # accepts hdd, ssd
-    #         total_local_storage_gb: {
-    #           min: 1.0,
-    #           max: 1.0,
-    #         },
-    #         baseline_ebs_bandwidth_mbps: {
-    #           min: 1,
-    #           max: 1,
-    #         },
-    #         accelerator_types: ["gpu"], # accepts gpu, fpga, inference
-    #         accelerator_count: {
-    #           min: 1,
-    #           max: 1,
-    #         },
-    #         accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
-    #         accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
-    #         accelerator_total_memory_mi_b: {
-    #           min: 1,
-    #           max: 1,
-    #         },
-    #         network_bandwidth_gbps: {
-    #           min: 1.0,
-    #           max: 1.0,
-    #         },
-    #         allowed_instance_types: ["AllowedInstanceType"],
-    #       }
     #
     # @!attribute [rw] v_cpu_count
     #   The minimum and maximum number of vCPUs for an instance type.
@@ -4425,13 +3651,6 @@ module Aws::AutoScaling
     #
     # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-warm-pools.html
     #
-    # @note When making an API call, you may pass InstanceReusePolicy
-    #   data as a hash:
-    #
-    #       {
-    #         reuse_on_scale_in: false,
-    #       }
-    #
     # @!attribute [rw] reuse_on_scale_in
     #   Specifies whether instances in the Auto Scaling group can be
     #   returned to the warm pool on scale in.
@@ -4448,18 +3667,6 @@ module Aws::AutoScaling
     # Use this structure to specify the distribution of On-Demand Instances
     # and Spot Instances and the allocation strategies used to fulfill
     # On-Demand and Spot capacities for a mixed instances policy.
-    #
-    # @note When making an API call, you may pass InstancesDistribution
-    #   data as a hash:
-    #
-    #       {
-    #         on_demand_allocation_strategy: "XmlString",
-    #         on_demand_base_capacity: 1,
-    #         on_demand_percentage_above_base_capacity: 1,
-    #         spot_allocation_strategy: "XmlString",
-    #         spot_instance_pools: 1,
-    #         spot_max_price: "MixedInstanceSpotPrice",
-    #       }
     #
     # @!attribute [rw] on_demand_allocation_strategy
     #   The allocation strategy to apply to your On-Demand Instances when
@@ -4820,13 +4027,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass LaunchConfigurationNameType
-    #   data as a hash:
-    #
-    #       {
-    #         launch_configuration_name: "XmlStringMaxLen255", # required
-    #       }
-    #
     # @!attribute [rw] launch_configuration_name
     #   The name of the launch configuration.
     #   @return [String]
@@ -4839,15 +4039,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass LaunchConfigurationNamesType
-    #   data as a hash:
-    #
-    #       {
-    #         launch_configuration_names: ["XmlStringMaxLen255"],
-    #         next_token: "XmlString",
-    #         max_records: 1,
-    #       }
-    #
     # @!attribute [rw] launch_configuration_names
     #   The launch configuration names. If you omit this property, all
     #   launch configurations are described.
@@ -4899,80 +4090,6 @@ module Aws::AutoScaling
     # Use this structure to specify the launch templates and instance types
     # (overrides) for a mixed instances policy.
     #
-    # @note When making an API call, you may pass LaunchTemplate
-    #   data as a hash:
-    #
-    #       {
-    #         launch_template_specification: {
-    #           launch_template_id: "XmlStringMaxLen255",
-    #           launch_template_name: "LaunchTemplateName",
-    #           version: "XmlStringMaxLen255",
-    #         },
-    #         overrides: [
-    #           {
-    #             instance_type: "XmlStringMaxLen255",
-    #             weighted_capacity: "XmlStringMaxLen32",
-    #             launch_template_specification: {
-    #               launch_template_id: "XmlStringMaxLen255",
-    #               launch_template_name: "LaunchTemplateName",
-    #               version: "XmlStringMaxLen255",
-    #             },
-    #             instance_requirements: {
-    #               v_cpu_count: { # required
-    #                 min: 1, # required
-    #                 max: 1,
-    #               },
-    #               memory_mi_b: { # required
-    #                 min: 1, # required
-    #                 max: 1,
-    #               },
-    #               cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
-    #               memory_gi_b_per_v_cpu: {
-    #                 min: 1.0,
-    #                 max: 1.0,
-    #               },
-    #               excluded_instance_types: ["ExcludedInstance"],
-    #               instance_generations: ["current"], # accepts current, previous
-    #               spot_max_price_percentage_over_lowest_price: 1,
-    #               on_demand_max_price_percentage_over_lowest_price: 1,
-    #               bare_metal: "included", # accepts included, excluded, required
-    #               burstable_performance: "included", # accepts included, excluded, required
-    #               require_hibernate_support: false,
-    #               network_interface_count: {
-    #                 min: 1,
-    #                 max: 1,
-    #               },
-    #               local_storage: "included", # accepts included, excluded, required
-    #               local_storage_types: ["hdd"], # accepts hdd, ssd
-    #               total_local_storage_gb: {
-    #                 min: 1.0,
-    #                 max: 1.0,
-    #               },
-    #               baseline_ebs_bandwidth_mbps: {
-    #                 min: 1,
-    #                 max: 1,
-    #               },
-    #               accelerator_types: ["gpu"], # accepts gpu, fpga, inference
-    #               accelerator_count: {
-    #                 min: 1,
-    #                 max: 1,
-    #               },
-    #               accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
-    #               accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
-    #               accelerator_total_memory_mi_b: {
-    #                 min: 1,
-    #                 max: 1,
-    #               },
-    #               network_bandwidth_gbps: {
-    #                 min: 1.0,
-    #                 max: 1.0,
-    #               },
-    #               allowed_instance_types: ["AllowedInstanceType"],
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] launch_template_specification
     #   The launch template.
     #   @return [Types::LaunchTemplateSpecification]
@@ -5011,71 +4128,6 @@ module Aws::AutoScaling
     # Amazon EC2 Auto Scaling uses the instance requirements of the Auto
     # Scaling group to determine whether a new EC2 instance type can be
     # used.
-    #
-    # @note When making an API call, you may pass LaunchTemplateOverrides
-    #   data as a hash:
-    #
-    #       {
-    #         instance_type: "XmlStringMaxLen255",
-    #         weighted_capacity: "XmlStringMaxLen32",
-    #         launch_template_specification: {
-    #           launch_template_id: "XmlStringMaxLen255",
-    #           launch_template_name: "LaunchTemplateName",
-    #           version: "XmlStringMaxLen255",
-    #         },
-    #         instance_requirements: {
-    #           v_cpu_count: { # required
-    #             min: 1, # required
-    #             max: 1,
-    #           },
-    #           memory_mi_b: { # required
-    #             min: 1, # required
-    #             max: 1,
-    #           },
-    #           cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
-    #           memory_gi_b_per_v_cpu: {
-    #             min: 1.0,
-    #             max: 1.0,
-    #           },
-    #           excluded_instance_types: ["ExcludedInstance"],
-    #           instance_generations: ["current"], # accepts current, previous
-    #           spot_max_price_percentage_over_lowest_price: 1,
-    #           on_demand_max_price_percentage_over_lowest_price: 1,
-    #           bare_metal: "included", # accepts included, excluded, required
-    #           burstable_performance: "included", # accepts included, excluded, required
-    #           require_hibernate_support: false,
-    #           network_interface_count: {
-    #             min: 1,
-    #             max: 1,
-    #           },
-    #           local_storage: "included", # accepts included, excluded, required
-    #           local_storage_types: ["hdd"], # accepts hdd, ssd
-    #           total_local_storage_gb: {
-    #             min: 1.0,
-    #             max: 1.0,
-    #           },
-    #           baseline_ebs_bandwidth_mbps: {
-    #             min: 1,
-    #             max: 1,
-    #           },
-    #           accelerator_types: ["gpu"], # accepts gpu, fpga, inference
-    #           accelerator_count: {
-    #             min: 1,
-    #             max: 1,
-    #           },
-    #           accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
-    #           accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
-    #           accelerator_total_memory_mi_b: {
-    #             min: 1,
-    #             max: 1,
-    #           },
-    #           network_bandwidth_gbps: {
-    #             min: 1.0,
-    #             max: 1.0,
-    #           },
-    #           allowed_instance_types: ["AllowedInstanceType"],
-    #         },
-    #       }
     #
     # @!attribute [rw] instance_type
     #   The instance type, such as `m3.xlarge`. You must specify an instance
@@ -5177,15 +4229,6 @@ module Aws::AutoScaling
     #
     #
     # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/LaunchTemplates.html
-    #
-    # @note When making an API call, you may pass LaunchTemplateSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         launch_template_id: "XmlStringMaxLen255",
-    #         launch_template_name: "LaunchTemplateName",
-    #         version: "XmlStringMaxLen255",
-    #       }
     #
     # @!attribute [rw] launch_template_id
     #   The ID of the launch template. To get the template ID, use the
@@ -5326,19 +4369,6 @@ module Aws::AutoScaling
     #
     #
     # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html
-    #
-    # @note When making an API call, you may pass LifecycleHookSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         lifecycle_hook_name: "AsciiStringMaxLen255", # required
-    #         lifecycle_transition: "LifecycleTransition", # required
-    #         notification_metadata: "XmlStringMaxLen1023",
-    #         heartbeat_timeout: 1,
-    #         default_result: "LifecycleActionResult",
-    #         notification_target_arn: "NotificationTargetResourceName",
-    #         role_arn: "XmlStringMaxLen255",
-    #       }
     #
     # @!attribute [rw] lifecycle_hook_name
     #   The name of the lifecycle hook.
@@ -5531,14 +4561,6 @@ module Aws::AutoScaling
     # Specifies the minimum and maximum for the `MemoryGiBPerVCpu` object
     # when you specify InstanceRequirements for an Auto Scaling group.
     #
-    # @note When making an API call, you may pass MemoryGiBPerVCpuRequest
-    #   data as a hash:
-    #
-    #       {
-    #         min: 1.0,
-    #         max: 1.0,
-    #       }
-    #
     # @!attribute [rw] min
     #   The memory minimum in GiB.
     #   @return [Float]
@@ -5559,14 +4581,6 @@ module Aws::AutoScaling
     # Specifies the minimum and maximum for the `MemoryMiB` object when you
     # specify InstanceRequirements for an Auto Scaling group.
     #
-    # @note When making an API call, you may pass MemoryMiBRequest
-    #   data as a hash:
-    #
-    #       {
-    #         min: 1, # required
-    #         max: 1,
-    #       }
-    #
     # @!attribute [rw] min
     #   The memory minimum in MiB.
     #   @return [Integer]
@@ -5585,20 +4599,6 @@ module Aws::AutoScaling
     end
 
     # Represents a specific metric.
-    #
-    # @note When making an API call, you may pass Metric
-    #   data as a hash:
-    #
-    #       {
-    #         namespace: "MetricNamespace", # required
-    #         metric_name: "MetricName", # required
-    #         dimensions: [
-    #           {
-    #             name: "MetricDimensionName", # required
-    #             value: "MetricDimensionValue", # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] namespace
     #   The namespace of the metric. For more information, see the table in
@@ -5706,30 +4706,6 @@ module Aws::AutoScaling
     #
     # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/predictive-scaling-customized-metric-specification.html
     #
-    # @note When making an API call, you may pass MetricDataQuery
-    #   data as a hash:
-    #
-    #       {
-    #         id: "XmlStringMaxLen255", # required
-    #         expression: "XmlStringMaxLen1023",
-    #         metric_stat: {
-    #           metric: { # required
-    #             namespace: "MetricNamespace", # required
-    #             metric_name: "MetricName", # required
-    #             dimensions: [
-    #               {
-    #                 name: "MetricDimensionName", # required
-    #                 value: "MetricDimensionValue", # required
-    #               },
-    #             ],
-    #           },
-    #           stat: "XmlStringMetricStat", # required
-    #           unit: "MetricUnit",
-    #         },
-    #         label: "XmlStringMetricLabel",
-    #         return_data: false,
-    #       }
-    #
     # @!attribute [rw] id
     #   A short name that identifies the object's results in the response.
     #   This name must be unique among all `MetricDataQuery` objects
@@ -5791,14 +4767,6 @@ module Aws::AutoScaling
 
     # Describes the dimension of a metric.
     #
-    # @note When making an API call, you may pass MetricDimension
-    #   data as a hash:
-    #
-    #       {
-    #         name: "MetricDimensionName", # required
-    #         value: "MetricDimensionValue", # required
-    #       }
-    #
     # @!attribute [rw] name
     #   The name of the dimension.
     #   @return [String]
@@ -5839,24 +4807,6 @@ module Aws::AutoScaling
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html
-    #
-    # @note When making an API call, you may pass MetricStat
-    #   data as a hash:
-    #
-    #       {
-    #         metric: { # required
-    #           namespace: "MetricNamespace", # required
-    #           metric_name: "MetricName", # required
-    #           dimensions: [
-    #             {
-    #               name: "MetricDimensionName", # required
-    #               value: "MetricDimensionValue", # required
-    #             },
-    #           ],
-    #         },
-    #         stat: "XmlStringMetricStat", # required
-    #         unit: "MetricUnit",
-    #       }
     #
     # @!attribute [rw] metric
     #   The CloudWatch metric to return, including the metric name,
@@ -5916,90 +4866,6 @@ module Aws::AutoScaling
     #
     # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html
     #
-    # @note When making an API call, you may pass MixedInstancesPolicy
-    #   data as a hash:
-    #
-    #       {
-    #         launch_template: {
-    #           launch_template_specification: {
-    #             launch_template_id: "XmlStringMaxLen255",
-    #             launch_template_name: "LaunchTemplateName",
-    #             version: "XmlStringMaxLen255",
-    #           },
-    #           overrides: [
-    #             {
-    #               instance_type: "XmlStringMaxLen255",
-    #               weighted_capacity: "XmlStringMaxLen32",
-    #               launch_template_specification: {
-    #                 launch_template_id: "XmlStringMaxLen255",
-    #                 launch_template_name: "LaunchTemplateName",
-    #                 version: "XmlStringMaxLen255",
-    #               },
-    #               instance_requirements: {
-    #                 v_cpu_count: { # required
-    #                   min: 1, # required
-    #                   max: 1,
-    #                 },
-    #                 memory_mi_b: { # required
-    #                   min: 1, # required
-    #                   max: 1,
-    #                 },
-    #                 cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
-    #                 memory_gi_b_per_v_cpu: {
-    #                   min: 1.0,
-    #                   max: 1.0,
-    #                 },
-    #                 excluded_instance_types: ["ExcludedInstance"],
-    #                 instance_generations: ["current"], # accepts current, previous
-    #                 spot_max_price_percentage_over_lowest_price: 1,
-    #                 on_demand_max_price_percentage_over_lowest_price: 1,
-    #                 bare_metal: "included", # accepts included, excluded, required
-    #                 burstable_performance: "included", # accepts included, excluded, required
-    #                 require_hibernate_support: false,
-    #                 network_interface_count: {
-    #                   min: 1,
-    #                   max: 1,
-    #                 },
-    #                 local_storage: "included", # accepts included, excluded, required
-    #                 local_storage_types: ["hdd"], # accepts hdd, ssd
-    #                 total_local_storage_gb: {
-    #                   min: 1.0,
-    #                   max: 1.0,
-    #                 },
-    #                 baseline_ebs_bandwidth_mbps: {
-    #                   min: 1,
-    #                   max: 1,
-    #                 },
-    #                 accelerator_types: ["gpu"], # accepts gpu, fpga, inference
-    #                 accelerator_count: {
-    #                   min: 1,
-    #                   max: 1,
-    #                 },
-    #                 accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
-    #                 accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
-    #                 accelerator_total_memory_mi_b: {
-    #                   min: 1,
-    #                   max: 1,
-    #                 },
-    #                 network_bandwidth_gbps: {
-    #                   min: 1.0,
-    #                   max: 1.0,
-    #                 },
-    #                 allowed_instance_types: ["AllowedInstanceType"],
-    #               },
-    #             },
-    #           ],
-    #         },
-    #         instances_distribution: {
-    #           on_demand_allocation_strategy: "XmlString",
-    #           on_demand_base_capacity: 1,
-    #           on_demand_percentage_above_base_capacity: 1,
-    #           spot_allocation_strategy: "XmlString",
-    #           spot_instance_pools: 1,
-    #           spot_max_price: "MixedInstanceSpotPrice",
-    #         },
-    #       }
-    #
     # @!attribute [rw] launch_template
     #   One or more launch templates and the instance types (overrides) that
     #   are used to launch EC2 instances to fulfill On-Demand and Spot
@@ -6036,14 +4902,6 @@ module Aws::AutoScaling
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-network-bandwidth.html#available-instance-bandwidth
     #
-    # @note When making an API call, you may pass NetworkBandwidthGbpsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         min: 1.0,
-    #         max: 1.0,
-    #       }
-    #
     # @!attribute [rw] min
     #   The minimum amount of network bandwidth, in gigabits per second
     #   (Gbps).
@@ -6066,14 +4924,6 @@ module Aws::AutoScaling
     # Specifies the minimum and maximum for the `NetworkInterfaceCount`
     # object when you specify InstanceRequirements for an Auto Scaling
     # group.
-    #
-    # @note When making an API call, you may pass NetworkInterfaceCountRequest
-    #   data as a hash:
-    #
-    #       {
-    #         min: 1,
-    #         max: 1,
-    #       }
     #
     # @!attribute [rw] min
     #   The minimum number of network interfaces.
@@ -6170,14 +5020,6 @@ module Aws::AutoScaling
     # Represents a predefined metric for a target tracking scaling policy to
     # use with Amazon EC2 Auto Scaling.
     #
-    # @note When making an API call, you may pass PredefinedMetricSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         predefined_metric_type: "ASGAverageCPUUtilization", # required, accepts ASGAverageCPUUtilization, ASGAverageNetworkIn, ASGAverageNetworkOut, ALBRequestCountPerTarget
-    #         resource_label: "XmlStringMaxLen1023",
-    #       }
-    #
     # @!attribute [rw] predefined_metric_type
     #   The metric type. The following predefined metrics are available:
     #
@@ -6237,105 +5079,6 @@ module Aws::AutoScaling
 
     # Represents a predictive scaling policy configuration to use with
     # Amazon EC2 Auto Scaling.
-    #
-    # @note When making an API call, you may pass PredictiveScalingConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         metric_specifications: [ # required
-    #           {
-    #             target_value: 1.0, # required
-    #             predefined_metric_pair_specification: {
-    #               predefined_metric_type: "ASGCPUUtilization", # required, accepts ASGCPUUtilization, ASGNetworkIn, ASGNetworkOut, ALBRequestCount
-    #               resource_label: "XmlStringMaxLen1023",
-    #             },
-    #             predefined_scaling_metric_specification: {
-    #               predefined_metric_type: "ASGAverageCPUUtilization", # required, accepts ASGAverageCPUUtilization, ASGAverageNetworkIn, ASGAverageNetworkOut, ALBRequestCountPerTarget
-    #               resource_label: "XmlStringMaxLen1023",
-    #             },
-    #             predefined_load_metric_specification: {
-    #               predefined_metric_type: "ASGTotalCPUUtilization", # required, accepts ASGTotalCPUUtilization, ASGTotalNetworkIn, ASGTotalNetworkOut, ALBTargetGroupRequestCount
-    #               resource_label: "XmlStringMaxLen1023",
-    #             },
-    #             customized_scaling_metric_specification: {
-    #               metric_data_queries: [ # required
-    #                 {
-    #                   id: "XmlStringMaxLen255", # required
-    #                   expression: "XmlStringMaxLen1023",
-    #                   metric_stat: {
-    #                     metric: { # required
-    #                       namespace: "MetricNamespace", # required
-    #                       metric_name: "MetricName", # required
-    #                       dimensions: [
-    #                         {
-    #                           name: "MetricDimensionName", # required
-    #                           value: "MetricDimensionValue", # required
-    #                         },
-    #                       ],
-    #                     },
-    #                     stat: "XmlStringMetricStat", # required
-    #                     unit: "MetricUnit",
-    #                   },
-    #                   label: "XmlStringMetricLabel",
-    #                   return_data: false,
-    #                 },
-    #               ],
-    #             },
-    #             customized_load_metric_specification: {
-    #               metric_data_queries: [ # required
-    #                 {
-    #                   id: "XmlStringMaxLen255", # required
-    #                   expression: "XmlStringMaxLen1023",
-    #                   metric_stat: {
-    #                     metric: { # required
-    #                       namespace: "MetricNamespace", # required
-    #                       metric_name: "MetricName", # required
-    #                       dimensions: [
-    #                         {
-    #                           name: "MetricDimensionName", # required
-    #                           value: "MetricDimensionValue", # required
-    #                         },
-    #                       ],
-    #                     },
-    #                     stat: "XmlStringMetricStat", # required
-    #                     unit: "MetricUnit",
-    #                   },
-    #                   label: "XmlStringMetricLabel",
-    #                   return_data: false,
-    #                 },
-    #               ],
-    #             },
-    #             customized_capacity_metric_specification: {
-    #               metric_data_queries: [ # required
-    #                 {
-    #                   id: "XmlStringMaxLen255", # required
-    #                   expression: "XmlStringMaxLen1023",
-    #                   metric_stat: {
-    #                     metric: { # required
-    #                       namespace: "MetricNamespace", # required
-    #                       metric_name: "MetricName", # required
-    #                       dimensions: [
-    #                         {
-    #                           name: "MetricDimensionName", # required
-    #                           value: "MetricDimensionValue", # required
-    #                         },
-    #                       ],
-    #                     },
-    #                     stat: "XmlStringMetricStat", # required
-    #                     unit: "MetricUnit",
-    #                   },
-    #                   label: "XmlStringMetricLabel",
-    #                   return_data: false,
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #         ],
-    #         mode: "ForecastAndScale", # accepts ForecastAndScale, ForecastOnly
-    #         scheduling_buffer_time: 1,
-    #         max_capacity_breach_behavior: "HonorMaxCapacity", # accepts HonorMaxCapacity, IncreaseMaxCapacity
-    #         max_capacity_buffer: 1,
-    #       }
     #
     # @!attribute [rw] metric_specifications
     #   This structure includes the metrics and target utilization to use
@@ -6414,34 +5157,6 @@ module Aws::AutoScaling
     # Describes a customized capacity metric for a predictive scaling
     # policy.
     #
-    # @note When making an API call, you may pass PredictiveScalingCustomizedCapacityMetric
-    #   data as a hash:
-    #
-    #       {
-    #         metric_data_queries: [ # required
-    #           {
-    #             id: "XmlStringMaxLen255", # required
-    #             expression: "XmlStringMaxLen1023",
-    #             metric_stat: {
-    #               metric: { # required
-    #                 namespace: "MetricNamespace", # required
-    #                 metric_name: "MetricName", # required
-    #                 dimensions: [
-    #                   {
-    #                     name: "MetricDimensionName", # required
-    #                     value: "MetricDimensionValue", # required
-    #                   },
-    #                 ],
-    #               },
-    #               stat: "XmlStringMetricStat", # required
-    #               unit: "MetricUnit",
-    #             },
-    #             label: "XmlStringMetricLabel",
-    #             return_data: false,
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] metric_data_queries
     #   One or more metric data queries to provide the data points for a
     #   capacity metric. Use multiple metric data queries only if you are
@@ -6458,34 +5173,6 @@ module Aws::AutoScaling
 
     # Describes a custom load metric for a predictive scaling policy.
     #
-    # @note When making an API call, you may pass PredictiveScalingCustomizedLoadMetric
-    #   data as a hash:
-    #
-    #       {
-    #         metric_data_queries: [ # required
-    #           {
-    #             id: "XmlStringMaxLen255", # required
-    #             expression: "XmlStringMaxLen1023",
-    #             metric_stat: {
-    #               metric: { # required
-    #                 namespace: "MetricNamespace", # required
-    #                 metric_name: "MetricName", # required
-    #                 dimensions: [
-    #                   {
-    #                     name: "MetricDimensionName", # required
-    #                     value: "MetricDimensionValue", # required
-    #                   },
-    #                 ],
-    #               },
-    #               stat: "XmlStringMetricStat", # required
-    #               unit: "MetricUnit",
-    #             },
-    #             label: "XmlStringMetricLabel",
-    #             return_data: false,
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] metric_data_queries
     #   One or more metric data queries to provide the data points for a
     #   load metric. Use multiple metric data queries only if you are
@@ -6501,34 +5188,6 @@ module Aws::AutoScaling
     end
 
     # Describes a custom scaling metric for a predictive scaling policy.
-    #
-    # @note When making an API call, you may pass PredictiveScalingCustomizedScalingMetric
-    #   data as a hash:
-    #
-    #       {
-    #         metric_data_queries: [ # required
-    #           {
-    #             id: "XmlStringMaxLen255", # required
-    #             expression: "XmlStringMaxLen1023",
-    #             metric_stat: {
-    #               metric: { # required
-    #                 namespace: "MetricNamespace", # required
-    #                 metric_name: "MetricName", # required
-    #                 dimensions: [
-    #                   {
-    #                     name: "MetricDimensionName", # required
-    #                     value: "MetricDimensionValue", # required
-    #                   },
-    #                 ],
-    #               },
-    #               stat: "XmlStringMetricStat", # required
-    #               unit: "MetricUnit",
-    #             },
-    #             label: "XmlStringMetricLabel",
-    #             return_data: false,
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] metric_data_queries
     #   One or more metric data queries to provide the data points for a
@@ -6592,97 +5251,6 @@ module Aws::AutoScaling
     #
     # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/predictive-scaling-customized-metric-specification.html
     #
-    # @note When making an API call, you may pass PredictiveScalingMetricSpecification
-    #   data as a hash:
-    #
-    #       {
-    #         target_value: 1.0, # required
-    #         predefined_metric_pair_specification: {
-    #           predefined_metric_type: "ASGCPUUtilization", # required, accepts ASGCPUUtilization, ASGNetworkIn, ASGNetworkOut, ALBRequestCount
-    #           resource_label: "XmlStringMaxLen1023",
-    #         },
-    #         predefined_scaling_metric_specification: {
-    #           predefined_metric_type: "ASGAverageCPUUtilization", # required, accepts ASGAverageCPUUtilization, ASGAverageNetworkIn, ASGAverageNetworkOut, ALBRequestCountPerTarget
-    #           resource_label: "XmlStringMaxLen1023",
-    #         },
-    #         predefined_load_metric_specification: {
-    #           predefined_metric_type: "ASGTotalCPUUtilization", # required, accepts ASGTotalCPUUtilization, ASGTotalNetworkIn, ASGTotalNetworkOut, ALBTargetGroupRequestCount
-    #           resource_label: "XmlStringMaxLen1023",
-    #         },
-    #         customized_scaling_metric_specification: {
-    #           metric_data_queries: [ # required
-    #             {
-    #               id: "XmlStringMaxLen255", # required
-    #               expression: "XmlStringMaxLen1023",
-    #               metric_stat: {
-    #                 metric: { # required
-    #                   namespace: "MetricNamespace", # required
-    #                   metric_name: "MetricName", # required
-    #                   dimensions: [
-    #                     {
-    #                       name: "MetricDimensionName", # required
-    #                       value: "MetricDimensionValue", # required
-    #                     },
-    #                   ],
-    #                 },
-    #                 stat: "XmlStringMetricStat", # required
-    #                 unit: "MetricUnit",
-    #               },
-    #               label: "XmlStringMetricLabel",
-    #               return_data: false,
-    #             },
-    #           ],
-    #         },
-    #         customized_load_metric_specification: {
-    #           metric_data_queries: [ # required
-    #             {
-    #               id: "XmlStringMaxLen255", # required
-    #               expression: "XmlStringMaxLen1023",
-    #               metric_stat: {
-    #                 metric: { # required
-    #                   namespace: "MetricNamespace", # required
-    #                   metric_name: "MetricName", # required
-    #                   dimensions: [
-    #                     {
-    #                       name: "MetricDimensionName", # required
-    #                       value: "MetricDimensionValue", # required
-    #                     },
-    #                   ],
-    #                 },
-    #                 stat: "XmlStringMetricStat", # required
-    #                 unit: "MetricUnit",
-    #               },
-    #               label: "XmlStringMetricLabel",
-    #               return_data: false,
-    #             },
-    #           ],
-    #         },
-    #         customized_capacity_metric_specification: {
-    #           metric_data_queries: [ # required
-    #             {
-    #               id: "XmlStringMaxLen255", # required
-    #               expression: "XmlStringMaxLen1023",
-    #               metric_stat: {
-    #                 metric: { # required
-    #                   namespace: "MetricNamespace", # required
-    #                   metric_name: "MetricName", # required
-    #                   dimensions: [
-    #                     {
-    #                       name: "MetricDimensionName", # required
-    #                       value: "MetricDimensionValue", # required
-    #                     },
-    #                   ],
-    #                 },
-    #                 stat: "XmlStringMetricStat", # required
-    #                 unit: "MetricUnit",
-    #               },
-    #               label: "XmlStringMetricLabel",
-    #               return_data: false,
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] target_value
     #   Specifies the target utilization.
     #
@@ -6742,14 +5310,6 @@ module Aws::AutoScaling
     # predictive scaling policy uses individually specified load and scaling
     # metrics instead of a metric pair.
     #
-    # @note When making an API call, you may pass PredictiveScalingPredefinedLoadMetric
-    #   data as a hash:
-    #
-    #       {
-    #         predefined_metric_type: "ASGTotalCPUUtilization", # required, accepts ASGTotalCPUUtilization, ASGTotalNetworkIn, ASGTotalNetworkOut, ALBTargetGroupRequestCount
-    #         resource_label: "XmlStringMaxLen1023",
-    #       }
-    #
     # @!attribute [rw] predefined_metric_type
     #   The metric type.
     #   @return [String]
@@ -6795,14 +5355,6 @@ module Aws::AutoScaling
     end
 
     # Represents a metric pair for a predictive scaling policy.
-    #
-    # @note When making an API call, you may pass PredictiveScalingPredefinedMetricPair
-    #   data as a hash:
-    #
-    #       {
-    #         predefined_metric_type: "ASGCPUUtilization", # required, accepts ASGCPUUtilization, ASGNetworkIn, ASGNetworkOut, ALBRequestCount
-    #         resource_label: "XmlStringMaxLen1023",
-    #       }
     #
     # @!attribute [rw] predefined_metric_type
     #   Indicates which metrics to use. There are two different types of
@@ -6859,14 +5411,6 @@ module Aws::AutoScaling
     # When returned in the output of `DescribePolicies`, it indicates that a
     # predictive scaling policy uses individually specified load and scaling
     # metrics instead of a metric pair.
-    #
-    # @note When making an API call, you may pass PredictiveScalingPredefinedScalingMetric
-    #   data as a hash:
-    #
-    #       {
-    #         predefined_metric_type: "ASGAverageCPUUtilization", # required, accepts ASGAverageCPUUtilization, ASGAverageNetworkIn, ASGAverageNetworkOut, ALBRequestCountPerTarget
-    #         resource_label: "XmlStringMaxLen1023",
-    #       }
     #
     # @!attribute [rw] predefined_metric_type
     #   The metric type.
@@ -6968,20 +5512,6 @@ module Aws::AutoScaling
     #
     class PutLifecycleHookAnswer < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass PutLifecycleHookType
-    #   data as a hash:
-    #
-    #       {
-    #         lifecycle_hook_name: "AsciiStringMaxLen255", # required
-    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
-    #         lifecycle_transition: "LifecycleTransition",
-    #         role_arn: "XmlStringMaxLen255",
-    #         notification_target_arn: "NotificationTargetResourceName",
-    #         notification_metadata: "XmlStringMaxLen1023",
-    #         heartbeat_timeout: 1,
-    #         default_result: "LifecycleActionResult",
-    #       }
-    #
     # @!attribute [rw] lifecycle_hook_name
     #   The name of the lifecycle hook.
     #   @return [String]
@@ -7065,15 +5595,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutNotificationConfigurationType
-    #   data as a hash:
-    #
-    #       {
-    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
-    #         topic_arn: "XmlStringMaxLen255", # required
-    #         notification_types: ["XmlStringMaxLen255"], # required
-    #       }
-    #
     # @!attribute [rw] auto_scaling_group_name
     #   The name of the Auto Scaling group.
     #   @return [String]
@@ -7098,145 +5619,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutScalingPolicyType
-    #   data as a hash:
-    #
-    #       {
-    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
-    #         policy_name: "XmlStringMaxLen255", # required
-    #         policy_type: "XmlStringMaxLen64",
-    #         adjustment_type: "XmlStringMaxLen255",
-    #         min_adjustment_step: 1,
-    #         min_adjustment_magnitude: 1,
-    #         scaling_adjustment: 1,
-    #         cooldown: 1,
-    #         metric_aggregation_type: "XmlStringMaxLen32",
-    #         step_adjustments: [
-    #           {
-    #             metric_interval_lower_bound: 1.0,
-    #             metric_interval_upper_bound: 1.0,
-    #             scaling_adjustment: 1, # required
-    #           },
-    #         ],
-    #         estimated_instance_warmup: 1,
-    #         target_tracking_configuration: {
-    #           predefined_metric_specification: {
-    #             predefined_metric_type: "ASGAverageCPUUtilization", # required, accepts ASGAverageCPUUtilization, ASGAverageNetworkIn, ASGAverageNetworkOut, ALBRequestCountPerTarget
-    #             resource_label: "XmlStringMaxLen1023",
-    #           },
-    #           customized_metric_specification: {
-    #             metric_name: "MetricName", # required
-    #             namespace: "MetricNamespace", # required
-    #             dimensions: [
-    #               {
-    #                 name: "MetricDimensionName", # required
-    #                 value: "MetricDimensionValue", # required
-    #               },
-    #             ],
-    #             statistic: "Average", # required, accepts Average, Minimum, Maximum, SampleCount, Sum
-    #             unit: "MetricUnit",
-    #           },
-    #           target_value: 1.0, # required
-    #           disable_scale_in: false,
-    #         },
-    #         enabled: false,
-    #         predictive_scaling_configuration: {
-    #           metric_specifications: [ # required
-    #             {
-    #               target_value: 1.0, # required
-    #               predefined_metric_pair_specification: {
-    #                 predefined_metric_type: "ASGCPUUtilization", # required, accepts ASGCPUUtilization, ASGNetworkIn, ASGNetworkOut, ALBRequestCount
-    #                 resource_label: "XmlStringMaxLen1023",
-    #               },
-    #               predefined_scaling_metric_specification: {
-    #                 predefined_metric_type: "ASGAverageCPUUtilization", # required, accepts ASGAverageCPUUtilization, ASGAverageNetworkIn, ASGAverageNetworkOut, ALBRequestCountPerTarget
-    #                 resource_label: "XmlStringMaxLen1023",
-    #               },
-    #               predefined_load_metric_specification: {
-    #                 predefined_metric_type: "ASGTotalCPUUtilization", # required, accepts ASGTotalCPUUtilization, ASGTotalNetworkIn, ASGTotalNetworkOut, ALBTargetGroupRequestCount
-    #                 resource_label: "XmlStringMaxLen1023",
-    #               },
-    #               customized_scaling_metric_specification: {
-    #                 metric_data_queries: [ # required
-    #                   {
-    #                     id: "XmlStringMaxLen255", # required
-    #                     expression: "XmlStringMaxLen1023",
-    #                     metric_stat: {
-    #                       metric: { # required
-    #                         namespace: "MetricNamespace", # required
-    #                         metric_name: "MetricName", # required
-    #                         dimensions: [
-    #                           {
-    #                             name: "MetricDimensionName", # required
-    #                             value: "MetricDimensionValue", # required
-    #                           },
-    #                         ],
-    #                       },
-    #                       stat: "XmlStringMetricStat", # required
-    #                       unit: "MetricUnit",
-    #                     },
-    #                     label: "XmlStringMetricLabel",
-    #                     return_data: false,
-    #                   },
-    #                 ],
-    #               },
-    #               customized_load_metric_specification: {
-    #                 metric_data_queries: [ # required
-    #                   {
-    #                     id: "XmlStringMaxLen255", # required
-    #                     expression: "XmlStringMaxLen1023",
-    #                     metric_stat: {
-    #                       metric: { # required
-    #                         namespace: "MetricNamespace", # required
-    #                         metric_name: "MetricName", # required
-    #                         dimensions: [
-    #                           {
-    #                             name: "MetricDimensionName", # required
-    #                             value: "MetricDimensionValue", # required
-    #                           },
-    #                         ],
-    #                       },
-    #                       stat: "XmlStringMetricStat", # required
-    #                       unit: "MetricUnit",
-    #                     },
-    #                     label: "XmlStringMetricLabel",
-    #                     return_data: false,
-    #                   },
-    #                 ],
-    #               },
-    #               customized_capacity_metric_specification: {
-    #                 metric_data_queries: [ # required
-    #                   {
-    #                     id: "XmlStringMaxLen255", # required
-    #                     expression: "XmlStringMaxLen1023",
-    #                     metric_stat: {
-    #                       metric: { # required
-    #                         namespace: "MetricNamespace", # required
-    #                         metric_name: "MetricName", # required
-    #                         dimensions: [
-    #                           {
-    #                             name: "MetricDimensionName", # required
-    #                             value: "MetricDimensionValue", # required
-    #                           },
-    #                         ],
-    #                       },
-    #                       stat: "XmlStringMetricStat", # required
-    #                       unit: "MetricUnit",
-    #                     },
-    #                     label: "XmlStringMetricLabel",
-    #                     return_data: false,
-    #                   },
-    #                 ],
-    #               },
-    #             },
-    #           ],
-    #           mode: "ForecastAndScale", # accepts ForecastAndScale, ForecastOnly
-    #           scheduling_buffer_time: 1,
-    #           max_capacity_breach_behavior: "HonorMaxCapacity", # accepts HonorMaxCapacity, IncreaseMaxCapacity
-    #           max_capacity_buffer: 1,
-    #         },
-    #       }
-    #
     # @!attribute [rw] auto_scaling_group_name
     #   The name of the Auto Scaling group.
     #   @return [String]
@@ -7440,22 +5822,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutScheduledUpdateGroupActionType
-    #   data as a hash:
-    #
-    #       {
-    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
-    #         scheduled_action_name: "XmlStringMaxLen255", # required
-    #         time: Time.now,
-    #         start_time: Time.now,
-    #         end_time: Time.now,
-    #         recurrence: "XmlStringMaxLen255",
-    #         min_size: 1,
-    #         max_size: 1,
-    #         desired_capacity: 1,
-    #         time_zone: "XmlStringMaxLen255",
-    #       }
-    #
     # @!attribute [rw] auto_scaling_group_name
     #   The name of the Auto Scaling group.
     #   @return [String]
@@ -7555,19 +5921,6 @@ module Aws::AutoScaling
     #
     class PutWarmPoolAnswer < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass PutWarmPoolType
-    #   data as a hash:
-    #
-    #       {
-    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
-    #         max_group_prepared_capacity: 1,
-    #         min_size: 1,
-    #         pool_state: "Stopped", # accepts Stopped, Running, Hibernated
-    #         instance_reuse_policy: {
-    #           reuse_on_scale_in: false,
-    #         },
-    #       }
-    #
     # @!attribute [rw] auto_scaling_group_name
     #   The name of the Auto Scaling group.
     #   @return [String]
@@ -7630,16 +5983,6 @@ module Aws::AutoScaling
     #
     class RecordLifecycleActionHeartbeatAnswer < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass RecordLifecycleActionHeartbeatType
-    #   data as a hash:
-    #
-    #       {
-    #         lifecycle_hook_name: "AsciiStringMaxLen255", # required
-    #         auto_scaling_group_name: "ResourceName", # required
-    #         lifecycle_action_token: "LifecycleActionToken",
-    #         instance_id: "XmlStringMaxLen19",
-    #       }
-    #
     # @!attribute [rw] lifecycle_hook_name
     #   The name of the lifecycle hook.
     #   @return [String]
@@ -7671,17 +6014,6 @@ module Aws::AutoScaling
     end
 
     # Describes the preferences for an instance refresh.
-    #
-    # @note When making an API call, you may pass RefreshPreferences
-    #   data as a hash:
-    #
-    #       {
-    #         min_healthy_percentage: 1,
-    #         instance_warmup: 1,
-    #         checkpoint_percentages: [1],
-    #         checkpoint_delay: 1,
-    #         skip_matching: false,
-    #       }
     #
     # @!attribute [rw] min_healthy_percentage
     #   The amount of capacity in the Auto Scaling group that must pass your
@@ -7911,14 +6243,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ScalingProcessQuery
-    #   data as a hash:
-    #
-    #       {
-    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
-    #         scaling_processes: ["XmlStringMaxLen255"],
-    #       }
-    #
     # @!attribute [rw] auto_scaling_group_name
     #   The name of the Auto Scaling group.
     #   @return [String]
@@ -8051,20 +6375,6 @@ module Aws::AutoScaling
     # Describes information used for one or more scheduled scaling action
     # updates in a BatchPutScheduledUpdateGroupAction operation.
     #
-    # @note When making an API call, you may pass ScheduledUpdateGroupActionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         scheduled_action_name: "XmlStringMaxLen255", # required
-    #         start_time: Time.now,
-    #         end_time: Time.now,
-    #         recurrence: "XmlStringMaxLen255",
-    #         min_size: 1,
-    #         max_size: 1,
-    #         desired_capacity: 1,
-    #         time_zone: "XmlStringMaxLen255",
-    #       }
-    #
     # @!attribute [rw] scheduled_action_name
     #   The name of the scaling action.
     #   @return [String]
@@ -8160,15 +6470,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SetDesiredCapacityType
-    #   data as a hash:
-    #
-    #       {
-    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
-    #         desired_capacity: 1, # required
-    #         honor_cooldown: false,
-    #       }
-    #
     # @!attribute [rw] auto_scaling_group_name
     #   The name of the Auto Scaling group.
     #   @return [String]
@@ -8197,15 +6498,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SetInstanceHealthQuery
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "XmlStringMaxLen19", # required
-    #         health_status: "XmlStringMaxLen32", # required
-    #         should_respect_grace_period: false,
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The ID of the instance.
     #   @return [String]
@@ -8246,15 +6538,6 @@ module Aws::AutoScaling
     #
     class SetInstanceProtectionAnswer < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass SetInstanceProtectionQuery
-    #   data as a hash:
-    #
-    #       {
-    #         instance_ids: ["XmlStringMaxLen19"], # required
-    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
-    #         protected_from_scale_in: false, # required
-    #       }
-    #
     # @!attribute [rw] instance_ids
     #   One or more instance IDs. You can specify up to 50 instances.
     #   @return [Array<String>]
@@ -8290,108 +6573,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartInstanceRefreshType
-    #   data as a hash:
-    #
-    #       {
-    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
-    #         strategy: "Rolling", # accepts Rolling
-    #         desired_configuration: {
-    #           launch_template: {
-    #             launch_template_id: "XmlStringMaxLen255",
-    #             launch_template_name: "LaunchTemplateName",
-    #             version: "XmlStringMaxLen255",
-    #           },
-    #           mixed_instances_policy: {
-    #             launch_template: {
-    #               launch_template_specification: {
-    #                 launch_template_id: "XmlStringMaxLen255",
-    #                 launch_template_name: "LaunchTemplateName",
-    #                 version: "XmlStringMaxLen255",
-    #               },
-    #               overrides: [
-    #                 {
-    #                   instance_type: "XmlStringMaxLen255",
-    #                   weighted_capacity: "XmlStringMaxLen32",
-    #                   launch_template_specification: {
-    #                     launch_template_id: "XmlStringMaxLen255",
-    #                     launch_template_name: "LaunchTemplateName",
-    #                     version: "XmlStringMaxLen255",
-    #                   },
-    #                   instance_requirements: {
-    #                     v_cpu_count: { # required
-    #                       min: 1, # required
-    #                       max: 1,
-    #                     },
-    #                     memory_mi_b: { # required
-    #                       min: 1, # required
-    #                       max: 1,
-    #                     },
-    #                     cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
-    #                     memory_gi_b_per_v_cpu: {
-    #                       min: 1.0,
-    #                       max: 1.0,
-    #                     },
-    #                     excluded_instance_types: ["ExcludedInstance"],
-    #                     instance_generations: ["current"], # accepts current, previous
-    #                     spot_max_price_percentage_over_lowest_price: 1,
-    #                     on_demand_max_price_percentage_over_lowest_price: 1,
-    #                     bare_metal: "included", # accepts included, excluded, required
-    #                     burstable_performance: "included", # accepts included, excluded, required
-    #                     require_hibernate_support: false,
-    #                     network_interface_count: {
-    #                       min: 1,
-    #                       max: 1,
-    #                     },
-    #                     local_storage: "included", # accepts included, excluded, required
-    #                     local_storage_types: ["hdd"], # accepts hdd, ssd
-    #                     total_local_storage_gb: {
-    #                       min: 1.0,
-    #                       max: 1.0,
-    #                     },
-    #                     baseline_ebs_bandwidth_mbps: {
-    #                       min: 1,
-    #                       max: 1,
-    #                     },
-    #                     accelerator_types: ["gpu"], # accepts gpu, fpga, inference
-    #                     accelerator_count: {
-    #                       min: 1,
-    #                       max: 1,
-    #                     },
-    #                     accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
-    #                     accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
-    #                     accelerator_total_memory_mi_b: {
-    #                       min: 1,
-    #                       max: 1,
-    #                     },
-    #                     network_bandwidth_gbps: {
-    #                       min: 1.0,
-    #                       max: 1.0,
-    #                     },
-    #                     allowed_instance_types: ["AllowedInstanceType"],
-    #                   },
-    #                 },
-    #               ],
-    #             },
-    #             instances_distribution: {
-    #               on_demand_allocation_strategy: "XmlString",
-    #               on_demand_base_capacity: 1,
-    #               on_demand_percentage_above_base_capacity: 1,
-    #               spot_allocation_strategy: "XmlString",
-    #               spot_instance_pools: 1,
-    #               spot_max_price: "MixedInstanceSpotPrice",
-    #             },
-    #           },
-    #         },
-    #         preferences: {
-    #           min_healthy_percentage: 1,
-    #           instance_warmup: 1,
-    #           checkpoint_percentages: [1],
-    #           checkpoint_delay: 1,
-    #           skip_matching: false,
-    #         },
-    #       }
-    #
     # @!attribute [rw] auto_scaling_group_name
     #   The name of the Auto Scaling group.
     #   @return [String]
@@ -8479,15 +6660,6 @@ module Aws::AutoScaling
     #
     # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-simple-step.html#as-scaling-steps
     #
-    # @note When making an API call, you may pass StepAdjustment
-    #   data as a hash:
-    #
-    #       {
-    #         metric_interval_lower_bound: 1.0,
-    #         metric_interval_upper_bound: 1.0,
-    #         scaling_adjustment: 1, # required
-    #       }
-    #
     # @!attribute [rw] metric_interval_lower_bound
     #   The lower bound for the difference between the alarm threshold and
     #   the CloudWatch metric. If the metric value is above the breach
@@ -8557,17 +6729,6 @@ module Aws::AutoScaling
     end
 
     # Describes a tag for an Auto Scaling group.
-    #
-    # @note When making an API call, you may pass Tag
-    #   data as a hash:
-    #
-    #       {
-    #         resource_id: "XmlString",
-    #         resource_type: "XmlString",
-    #         key: "TagKey", # required
-    #         value: "TagValue",
-    #         propagate_at_launch: false,
-    #       }
     #
     # @!attribute [rw] resource_id
     #   The name of the Auto Scaling group.
@@ -8663,30 +6824,6 @@ module Aws::AutoScaling
     # Represents a target tracking scaling policy configuration to use with
     # Amazon EC2 Auto Scaling.
     #
-    # @note When making an API call, you may pass TargetTrackingConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         predefined_metric_specification: {
-    #           predefined_metric_type: "ASGAverageCPUUtilization", # required, accepts ASGAverageCPUUtilization, ASGAverageNetworkIn, ASGAverageNetworkOut, ALBRequestCountPerTarget
-    #           resource_label: "XmlStringMaxLen1023",
-    #         },
-    #         customized_metric_specification: {
-    #           metric_name: "MetricName", # required
-    #           namespace: "MetricNamespace", # required
-    #           dimensions: [
-    #             {
-    #               name: "MetricDimensionName", # required
-    #               value: "MetricDimensionValue", # required
-    #             },
-    #           ],
-    #           statistic: "Average", # required, accepts Average, Minimum, Maximum, SampleCount, Sum
-    #           unit: "MetricUnit",
-    #         },
-    #         target_value: 1.0, # required
-    #         disable_scale_in: false,
-    #       }
-    #
     # @!attribute [rw] predefined_metric_specification
     #   A predefined metric. You must specify either a predefined metric or
     #   a customized metric.
@@ -8729,14 +6866,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass TerminateInstanceInAutoScalingGroupType
-    #   data as a hash:
-    #
-    #       {
-    #         instance_id: "XmlStringMaxLen19", # required
-    #         should_decrement_desired_capacity: false, # required
-    #       }
-    #
     # @!attribute [rw] instance_id
     #   The ID of the instance.
     #   @return [String]
@@ -8758,14 +6887,6 @@ module Aws::AutoScaling
     # Specifies the minimum and maximum for the `TotalLocalStorageGB` object
     # when you specify InstanceRequirements for an Auto Scaling group.
     #
-    # @note When making an API call, you may pass TotalLocalStorageGBRequest
-    #   data as a hash:
-    #
-    #       {
-    #         min: 1.0,
-    #         max: 1.0,
-    #       }
-    #
     # @!attribute [rw] min
     #   The storage minimum in GB.
     #   @return [Float]
@@ -8783,116 +6904,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateAutoScalingGroupType
-    #   data as a hash:
-    #
-    #       {
-    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
-    #         launch_configuration_name: "XmlStringMaxLen255",
-    #         launch_template: {
-    #           launch_template_id: "XmlStringMaxLen255",
-    #           launch_template_name: "LaunchTemplateName",
-    #           version: "XmlStringMaxLen255",
-    #         },
-    #         mixed_instances_policy: {
-    #           launch_template: {
-    #             launch_template_specification: {
-    #               launch_template_id: "XmlStringMaxLen255",
-    #               launch_template_name: "LaunchTemplateName",
-    #               version: "XmlStringMaxLen255",
-    #             },
-    #             overrides: [
-    #               {
-    #                 instance_type: "XmlStringMaxLen255",
-    #                 weighted_capacity: "XmlStringMaxLen32",
-    #                 launch_template_specification: {
-    #                   launch_template_id: "XmlStringMaxLen255",
-    #                   launch_template_name: "LaunchTemplateName",
-    #                   version: "XmlStringMaxLen255",
-    #                 },
-    #                 instance_requirements: {
-    #                   v_cpu_count: { # required
-    #                     min: 1, # required
-    #                     max: 1,
-    #                   },
-    #                   memory_mi_b: { # required
-    #                     min: 1, # required
-    #                     max: 1,
-    #                   },
-    #                   cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
-    #                   memory_gi_b_per_v_cpu: {
-    #                     min: 1.0,
-    #                     max: 1.0,
-    #                   },
-    #                   excluded_instance_types: ["ExcludedInstance"],
-    #                   instance_generations: ["current"], # accepts current, previous
-    #                   spot_max_price_percentage_over_lowest_price: 1,
-    #                   on_demand_max_price_percentage_over_lowest_price: 1,
-    #                   bare_metal: "included", # accepts included, excluded, required
-    #                   burstable_performance: "included", # accepts included, excluded, required
-    #                   require_hibernate_support: false,
-    #                   network_interface_count: {
-    #                     min: 1,
-    #                     max: 1,
-    #                   },
-    #                   local_storage: "included", # accepts included, excluded, required
-    #                   local_storage_types: ["hdd"], # accepts hdd, ssd
-    #                   total_local_storage_gb: {
-    #                     min: 1.0,
-    #                     max: 1.0,
-    #                   },
-    #                   baseline_ebs_bandwidth_mbps: {
-    #                     min: 1,
-    #                     max: 1,
-    #                   },
-    #                   accelerator_types: ["gpu"], # accepts gpu, fpga, inference
-    #                   accelerator_count: {
-    #                     min: 1,
-    #                     max: 1,
-    #                   },
-    #                   accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
-    #                   accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
-    #                   accelerator_total_memory_mi_b: {
-    #                     min: 1,
-    #                     max: 1,
-    #                   },
-    #                   network_bandwidth_gbps: {
-    #                     min: 1.0,
-    #                     max: 1.0,
-    #                   },
-    #                   allowed_instance_types: ["AllowedInstanceType"],
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #           instances_distribution: {
-    #             on_demand_allocation_strategy: "XmlString",
-    #             on_demand_base_capacity: 1,
-    #             on_demand_percentage_above_base_capacity: 1,
-    #             spot_allocation_strategy: "XmlString",
-    #             spot_instance_pools: 1,
-    #             spot_max_price: "MixedInstanceSpotPrice",
-    #           },
-    #         },
-    #         min_size: 1,
-    #         max_size: 1,
-    #         desired_capacity: 1,
-    #         default_cooldown: 1,
-    #         availability_zones: ["XmlStringMaxLen255"],
-    #         health_check_type: "XmlStringMaxLen32",
-    #         health_check_grace_period: 1,
-    #         placement_group: "XmlStringMaxLen255",
-    #         vpc_zone_identifier: "XmlStringMaxLen2047",
-    #         termination_policies: ["XmlStringMaxLen1600"],
-    #         new_instances_protected_from_scale_in: false,
-    #         service_linked_role_arn: "ResourceName",
-    #         max_instance_lifetime: 1,
-    #         capacity_rebalance: false,
-    #         context: "Context",
-    #         desired_capacity_type: "XmlStringMaxLen255",
-    #         default_instance_warmup: 1,
-    #       }
-    #
     # @!attribute [rw] auto_scaling_group_name
     #   The name of the Auto Scaling group.
     #   @return [String]
@@ -9147,14 +7158,6 @@ module Aws::AutoScaling
 
     # Specifies the minimum and maximum for the `VCpuCount` object when you
     # specify InstanceRequirements for an Auto Scaling group.
-    #
-    # @note When making an API call, you may pass VCpuCountRequest
-    #   data as a hash:
-    #
-    #       {
-    #         min: 1, # required
-    #         max: 1,
-    #       }
     #
     # @!attribute [rw] min
     #   The minimum number of vCPUs.

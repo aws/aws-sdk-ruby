@@ -76,21 +76,6 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AddNotificationChannelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         config: { # required
-    #           sns: { # required
-    #             topic_arn: "TopicArn",
-    #           },
-    #           filters: {
-    #             severities: ["LOW"], # accepts LOW, MEDIUM, HIGH
-    #             message_types: ["NEW_INSIGHT"], # accepts NEW_INSIGHT, CLOSED_INSIGHT, NEW_ASSOCIATION, SEVERITY_UPGRADED, NEW_RECOMMENDATION
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] config
     #   A `NotificationChannelConfig` object that specifies what type of
     #   notification channel to add. The one supported notification channel
@@ -120,13 +105,6 @@ module Aws::DevOpsGuru
     # Information about your account's integration with Amazon CodeGuru
     # Profiler. This returns whether DevOps Guru is configured to consume
     # recommendations generated from Amazon CodeGuru Profiler.
-    #
-    # @note When making an API call, you may pass AmazonCodeGuruProfilerIntegration
-    #   data as a hash:
-    #
-    #       {
-    #         status: "ENABLED", # accepts ENABLED, DISABLED
-    #       }
     #
     # @!attribute [rw] status
     #   The status of the CodeGuru Profiler integration. Specifies if DevOps
@@ -305,13 +283,6 @@ module Aws::DevOpsGuru
     #
     # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html
     #
-    # @note When making an API call, you may pass CloudFormationCollection
-    #   data as a hash:
-    #
-    #       {
-    #         stack_names: ["StackName"],
-    #       }
-    #
     # @!attribute [rw] stack_names
     #   An array of CloudFormation stack names.
     #   @return [Array<String>]
@@ -356,13 +327,6 @@ module Aws::DevOpsGuru
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html
-    #
-    # @note When making an API call, you may pass CloudFormationCostEstimationResourceCollectionFilter
-    #   data as a hash:
-    #
-    #       {
-    #         stack_names: ["StackName"],
-    #       }
     #
     # @!attribute [rw] stack_names
     #   An array of CloudFormation stack names. Its size is fixed at 1 item.
@@ -545,21 +509,6 @@ module Aws::DevOpsGuru
     # [1]: https://docs.aws.amazon.com/devops-guru/latest/userguide/cost-estimate.html
     # [2]: http://aws.amazon.com/devops-guru/pricing/
     #
-    # @note When making an API call, you may pass CostEstimationResourceCollectionFilter
-    #   data as a hash:
-    #
-    #       {
-    #         cloud_formation: {
-    #           stack_names: ["StackName"],
-    #         },
-    #         tags: [
-    #           {
-    #             app_boundary_key: "AppBoundaryKey", # required
-    #             tag_values: ["TagValue"], # required
-    #           },
-    #         ],
-    #       }
-    #
     # @!attribute [rw] cloud_formation
     #   An object that specifies the CloudFormation stack that defines the
     #   Amazon Web Services resources used to create a monthly estimate for
@@ -635,13 +584,6 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteInsightRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "InsightId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the insight.
     #   @return [String]
@@ -658,8 +600,6 @@ module Aws::DevOpsGuru
     #
     class DeleteInsightResponse < Aws::EmptyStructure; end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeAccountHealthRequest AWS API Documentation
     #
     class DescribeAccountHealthRequest < Aws::EmptyStructure; end
@@ -701,14 +641,6 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAccountOverviewRequest
-    #   data as a hash:
-    #
-    #       {
-    #         from_time: Time.now, # required
-    #         to_time: Time.now,
-    #       }
-    #
     # @!attribute [rw] from_time
     #   The start of the time range passed in. The start time granularity is
     #   at the day level. The floor of the start time is used. Returned
@@ -758,14 +690,6 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeAnomalyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "AnomalyId", # required
-    #         account_id: "AwsAccountId",
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the anomaly.
     #   @return [String]
@@ -800,8 +724,6 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeEventSourcesConfigRequest AWS API Documentation
     #
     class DescribeEventSourcesConfigRequest < Aws::EmptyStructure; end
@@ -818,13 +740,6 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeFeedbackRequest
-    #   data as a hash:
-    #
-    #       {
-    #         insight_id: "InsightId",
-    #       }
-    #
     # @!attribute [rw] insight_id
     #   The ID of the insight for which the feedback was provided.
     #   @return [String]
@@ -849,14 +764,6 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeInsightRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "InsightId", # required
-    #         account_id: "AwsAccountId",
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the insight.
     #   @return [String]
@@ -891,14 +798,6 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeOrganizationHealthRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_ids: ["AwsAccountId"],
-    #         organizational_unit_ids: ["OrganizationalUnitId"],
-    #       }
-    #
     # @!attribute [rw] account_ids
     #   The ID of the Amazon Web Services account.
     #   @return [Array<String>]
@@ -947,16 +846,6 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeOrganizationOverviewRequest
-    #   data as a hash:
-    #
-    #       {
-    #         from_time: Time.now, # required
-    #         to_time: Time.now,
-    #         account_ids: ["AwsAccountId"],
-    #         organizational_unit_ids: ["OrganizationalUnitId"],
-    #       }
-    #
     # @!attribute [rw] from_time
     #   The start of the time range passed in. The start time granularity is
     #   at the day level. The floor of the start time is used. Returned
@@ -1008,17 +897,6 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeOrganizationResourceCollectionHealthRequest
-    #   data as a hash:
-    #
-    #       {
-    #         organization_resource_collection_type: "AWS_CLOUD_FORMATION", # required, accepts AWS_CLOUD_FORMATION, AWS_SERVICE, AWS_ACCOUNT, AWS_TAGS
-    #         account_ids: ["AwsAccountId"],
-    #         organizational_unit_ids: ["OrganizationalUnitId"],
-    #         next_token: "UuidNextToken",
-    #         max_results: 1,
-    #       }
-    #
     # @!attribute [rw] organization_resource_collection_type
     #   An Amazon Web Services resource collection type. This type specifies
     #   how analyzed Amazon Web Services resources are defined. The two
@@ -1133,14 +1011,6 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeResourceCollectionHealthRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_collection_type: "AWS_CLOUD_FORMATION", # required, accepts AWS_CLOUD_FORMATION, AWS_SERVICE, AWS_TAGS
-    #         next_token: "UuidNextToken",
-    #       }
-    #
     # @!attribute [rw] resource_collection_type
     #   An Amazon Web Services resource collection type. This type specifies
     #   how analyzed Amazon Web Services resources are defined. The two
@@ -1236,8 +1106,6 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # @api private
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeServiceIntegrationRequest AWS API Documentation
     #
     class DescribeServiceIntegrationRequest < Aws::EmptyStructure; end
@@ -1257,14 +1125,6 @@ module Aws::DevOpsGuru
 
     # A range of time that specifies when anomalous behavior in an anomaly
     # or insight ended.
-    #
-    # @note When making an API call, you may pass EndTimeRange
-    #   data as a hash:
-    #
-    #       {
-    #         from_time: Time.now,
-    #         to_time: Time.now,
-    #       }
     #
     # @!attribute [rw] from_time
     #   The earliest end time in the time range.
@@ -1377,15 +1237,6 @@ module Aws::DevOpsGuru
     # Information about the integration of DevOps Guru as consumer with
     # another AWS service, such as AWS CodeGuru Profiler via EventBridge.
     #
-    # @note When making an API call, you may pass EventSourcesConfig
-    #   data as a hash:
-    #
-    #       {
-    #         amazon_code_guru_profiler: {
-    #           status: "ENABLED", # accepts ENABLED, DISABLED
-    #         },
-    #       }
-    #
     # @!attribute [rw] amazon_code_guru_profiler
     #   Information about whether DevOps Guru is configured to consume
     #   recommendations which are generated from AWS CodeGuru Profiler.
@@ -1404,14 +1255,6 @@ module Aws::DevOpsGuru
     # Guru to find anomalous behavior and provide recommendations to improve
     # your operational solutions.
     #
-    # @note When making an API call, you may pass EventTimeRange
-    #   data as a hash:
-    #
-    #       {
-    #         from_time: Time.now, # required
-    #         to_time: Time.now, # required
-    #       }
-    #
     # @!attribute [rw] from_time
     #   The time when the event started.
     #   @return [Time]
@@ -1429,13 +1272,6 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetCostEstimationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "UuidNextToken",
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The pagination token to use to retrieve the next page of results for
     #   this operation. If this value is null, it retrieves the first page.
@@ -1494,14 +1330,6 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetResourceCollectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_collection_type: "AWS_CLOUD_FORMATION", # required, accepts AWS_CLOUD_FORMATION, AWS_SERVICE, AWS_TAGS
-    #         next_token: "UuidNextToken",
-    #       }
-    #
     # @!attribute [rw] resource_collection_type
     #   The type of Amazon Web Services resource collections to return. The
     #   one valid value is `CLOUD_FORMATION` for Amazon Web Services
@@ -1548,14 +1376,6 @@ module Aws::DevOpsGuru
     end
 
     # Information about insight feedback received from a customer.
-    #
-    # @note When making an API call, you may pass InsightFeedback
-    #   data as a hash:
-    #
-    #       {
-    #         id: "InsightId",
-    #         feedback: "VALID_COLLECTION", # accepts VALID_COLLECTION, RECOMMENDATION_USEFUL, ALERT_TOO_SENSITIVE, DATA_NOISY_ANOMALY, DATA_INCORRECT
-    #       }
     #
     # @!attribute [rw] id
     #   The insight feedback ID.
@@ -1638,20 +1458,6 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAnomaliesForInsightRequest
-    #   data as a hash:
-    #
-    #       {
-    #         insight_id: "InsightId", # required
-    #         start_time_range: {
-    #           from_time: Time.now,
-    #           to_time: Time.now,
-    #         },
-    #         max_results: 1,
-    #         next_token: "UuidNextToken",
-    #         account_id: "AwsAccountId",
-    #       }
-    #
     # @!attribute [rw] insight_id
     #   The ID of the insight. The returned anomalies belong to this
     #   insight.
@@ -1714,15 +1520,6 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListAnomalousLogGroupsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         insight_id: "InsightId", # required
-    #         max_results: 1,
-    #         next_token: "UuidNextToken",
-    #       }
-    #
     # @!attribute [rw] insight_id
     #   The ID of the insight containing the log groups.
     #   @return [String]
@@ -1775,31 +1572,6 @@ module Aws::DevOpsGuru
     # Filters you can use to specify which events are returned when
     # `ListEvents` is called.
     #
-    # @note When making an API call, you may pass ListEventsFilters
-    #   data as a hash:
-    #
-    #       {
-    #         insight_id: "InsightId",
-    #         event_time_range: {
-    #           from_time: Time.now, # required
-    #           to_time: Time.now, # required
-    #         },
-    #         event_class: "INFRASTRUCTURE", # accepts INFRASTRUCTURE, DEPLOYMENT, SECURITY_CHANGE, CONFIG_CHANGE, SCHEMA_CHANGE
-    #         event_source: "EventSource",
-    #         data_source: "AWS_CLOUD_TRAIL", # accepts AWS_CLOUD_TRAIL, AWS_CODE_DEPLOY
-    #         resource_collection: {
-    #           cloud_formation: {
-    #             stack_names: ["StackName"],
-    #           },
-    #           tags: [
-    #             {
-    #               app_boundary_key: "AppBoundaryKey", # required
-    #               tag_values: ["TagValue"], # required
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] insight_id
     #   An ID of an insight that is related to the events you want to filter
     #   for.
@@ -1849,36 +1621,6 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListEventsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: { # required
-    #           insight_id: "InsightId",
-    #           event_time_range: {
-    #             from_time: Time.now, # required
-    #             to_time: Time.now, # required
-    #           },
-    #           event_class: "INFRASTRUCTURE", # accepts INFRASTRUCTURE, DEPLOYMENT, SECURITY_CHANGE, CONFIG_CHANGE, SCHEMA_CHANGE
-    #           event_source: "EventSource",
-    #           data_source: "AWS_CLOUD_TRAIL", # accepts AWS_CLOUD_TRAIL, AWS_CODE_DEPLOY
-    #           resource_collection: {
-    #             cloud_formation: {
-    #               stack_names: ["StackName"],
-    #             },
-    #             tags: [
-    #               {
-    #                 app_boundary_key: "AppBoundaryKey", # required
-    #                 tag_values: ["TagValue"], # required
-    #               },
-    #             ],
-    #           },
-    #         },
-    #         max_results: 1,
-    #         next_token: "UuidNextToken",
-    #         account_id: "AwsAccountId",
-    #       }
-    #
     # @!attribute [rw] filters
     #   A `ListEventsFilters` object used to specify which events to return.
     #   @return [Types::ListEventsFilters]
@@ -1929,17 +1671,6 @@ module Aws::DevOpsGuru
 
     # Used to filter for insights that have any status.
     #
-    # @note When making an API call, you may pass ListInsightsAnyStatusFilter
-    #   data as a hash:
-    #
-    #       {
-    #         type: "REACTIVE", # required, accepts REACTIVE, PROACTIVE
-    #         start_time_range: { # required
-    #           from_time: Time.now,
-    #           to_time: Time.now,
-    #         },
-    #       }
-    #
     # @!attribute [rw] type
     #   Use to filter for either `REACTIVE` or `PROACTIVE` insights.
     #   @return [String]
@@ -1959,17 +1690,6 @@ module Aws::DevOpsGuru
     end
 
     # Used to filter for insights that have the status `CLOSED`.
-    #
-    # @note When making an API call, you may pass ListInsightsClosedStatusFilter
-    #   data as a hash:
-    #
-    #       {
-    #         type: "REACTIVE", # required, accepts REACTIVE, PROACTIVE
-    #         end_time_range: { # required
-    #           from_time: Time.now,
-    #           to_time: Time.now,
-    #         },
-    #       }
     #
     # @!attribute [rw] type
     #   Use to filter for either `REACTIVE` or `PROACTIVE` insights.
@@ -1991,13 +1711,6 @@ module Aws::DevOpsGuru
 
     # Used to filter for insights that have the status `ONGOING`.
     #
-    # @note When making an API call, you may pass ListInsightsOngoingStatusFilter
-    #   data as a hash:
-    #
-    #       {
-    #         type: "REACTIVE", # required, accepts REACTIVE, PROACTIVE
-    #       }
-    #
     # @!attribute [rw] type
     #   Use to filter for either `REACTIVE` or `PROACTIVE` insights.
     #   @return [String]
@@ -2010,33 +1723,6 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListInsightsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         status_filter: { # required
-    #           ongoing: {
-    #             type: "REACTIVE", # required, accepts REACTIVE, PROACTIVE
-    #           },
-    #           closed: {
-    #             type: "REACTIVE", # required, accepts REACTIVE, PROACTIVE
-    #             end_time_range: { # required
-    #               from_time: Time.now,
-    #               to_time: Time.now,
-    #             },
-    #           },
-    #           any: {
-    #             type: "REACTIVE", # required, accepts REACTIVE, PROACTIVE
-    #             start_time_range: { # required
-    #               from_time: Time.now,
-    #               to_time: Time.now,
-    #             },
-    #           },
-    #         },
-    #         max_results: 1,
-    #         next_token: "UuidNextToken",
-    #       }
-    #
     # @!attribute [rw] status_filter
     #   A filter used to filter the returned insights by their status. You
     #   can specify one status filter.
@@ -2088,29 +1774,6 @@ module Aws::DevOpsGuru
 
     # A filter used by `ListInsights` to specify which insights to return.
     #
-    # @note When making an API call, you may pass ListInsightsStatusFilter
-    #   data as a hash:
-    #
-    #       {
-    #         ongoing: {
-    #           type: "REACTIVE", # required, accepts REACTIVE, PROACTIVE
-    #         },
-    #         closed: {
-    #           type: "REACTIVE", # required, accepts REACTIVE, PROACTIVE
-    #           end_time_range: { # required
-    #             from_time: Time.now,
-    #             to_time: Time.now,
-    #           },
-    #         },
-    #         any: {
-    #           type: "REACTIVE", # required, accepts REACTIVE, PROACTIVE
-    #           start_time_range: { # required
-    #             from_time: Time.now,
-    #             to_time: Time.now,
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] ongoing
     #   A `ListInsightsAnyStatusFilter` that specifies ongoing insights that
     #   are either `REACTIVE` or `PROACTIVE`.
@@ -2139,14 +1802,6 @@ module Aws::DevOpsGuru
     # Filters to determine which monitored resources you want to retrieve.
     # You can filter by resource type or resource permission status.
     #
-    # @note When making an API call, you may pass ListMonitoredResourcesFilters
-    #   data as a hash:
-    #
-    #       {
-    #         resource_permission: "FULL_PERMISSION", # required, accepts FULL_PERMISSION, MISSING_PERMISSION
-    #         resource_type_filters: ["LOG_GROUPS"], # required, accepts LOG_GROUPS, CLOUDFRONT_DISTRIBUTION, DYNAMODB_TABLE, EC2_NAT_GATEWAY, ECS_CLUSTER, ECS_SERVICE, EKS_CLUSTER, ELASTIC_BEANSTALK_ENVIRONMENT, ELASTIC_LOAD_BALANCER_LOAD_BALANCER, ELASTIC_LOAD_BALANCING_V2_LOAD_BALANCER, ELASTIC_LOAD_BALANCING_V2_TARGET_GROUP, ELASTICACHE_CACHE_CLUSTER, ELASTICSEARCH_DOMAIN, KINESIS_STREAM, LAMBDA_FUNCTION, OPEN_SEARCH_SERVICE_DOMAIN, RDS_DB_INSTANCE, RDS_DB_CLUSTER, REDSHIFT_CLUSTER, ROUTE53_HOSTED_ZONE, ROUTE53_HEALTH_CHECK, S3_BUCKET, SAGEMAKER_ENDPOINT, SNS_TOPIC, SQS_QUEUE, STEP_FUNCTIONS_ACTIVITY, STEP_FUNCTIONS_STATE_MACHINE
-    #       }
-    #
     # @!attribute [rw] resource_permission
     #   The permission status of a resource.
     #   @return [String]
@@ -2164,18 +1819,6 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListMonitoredResourcesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         filters: {
-    #           resource_permission: "FULL_PERMISSION", # required, accepts FULL_PERMISSION, MISSING_PERMISSION
-    #           resource_type_filters: ["LOG_GROUPS"], # required, accepts LOG_GROUPS, CLOUDFRONT_DISTRIBUTION, DYNAMODB_TABLE, EC2_NAT_GATEWAY, ECS_CLUSTER, ECS_SERVICE, EKS_CLUSTER, ELASTIC_BEANSTALK_ENVIRONMENT, ELASTIC_LOAD_BALANCER_LOAD_BALANCER, ELASTIC_LOAD_BALANCING_V2_LOAD_BALANCER, ELASTIC_LOAD_BALANCING_V2_TARGET_GROUP, ELASTICACHE_CACHE_CLUSTER, ELASTICSEARCH_DOMAIN, KINESIS_STREAM, LAMBDA_FUNCTION, OPEN_SEARCH_SERVICE_DOMAIN, RDS_DB_INSTANCE, RDS_DB_CLUSTER, REDSHIFT_CLUSTER, ROUTE53_HOSTED_ZONE, ROUTE53_HEALTH_CHECK, S3_BUCKET, SAGEMAKER_ENDPOINT, SNS_TOPIC, SQS_QUEUE, STEP_FUNCTIONS_ACTIVITY, STEP_FUNCTIONS_STATE_MACHINE
-    #         },
-    #         max_results: 1,
-    #         next_token: "UuidNextToken",
-    #       }
-    #
     # @!attribute [rw] filters
     #   Filters to determine which monitored resources you want to retrieve.
     #   You can filter by resource type or resource permission status.
@@ -2222,13 +1865,6 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListNotificationChannelsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "UuidNextToken",
-    #       }
-    #
     # @!attribute [rw] next_token
     #   The pagination token to use to retrieve the next page of results for
     #   this operation. If this value is null, it retrieves the first page.
@@ -2260,35 +1896,6 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListOrganizationInsightsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         status_filter: { # required
-    #           ongoing: {
-    #             type: "REACTIVE", # required, accepts REACTIVE, PROACTIVE
-    #           },
-    #           closed: {
-    #             type: "REACTIVE", # required, accepts REACTIVE, PROACTIVE
-    #             end_time_range: { # required
-    #               from_time: Time.now,
-    #               to_time: Time.now,
-    #             },
-    #           },
-    #           any: {
-    #             type: "REACTIVE", # required, accepts REACTIVE, PROACTIVE
-    #             start_time_range: { # required
-    #               from_time: Time.now,
-    #               to_time: Time.now,
-    #             },
-    #           },
-    #         },
-    #         max_results: 1,
-    #         account_ids: ["AwsAccountId"],
-    #         organizational_unit_ids: ["OrganizationalUnitId"],
-    #         next_token: "UuidNextToken",
-    #       }
-    #
     # @!attribute [rw] status_filter
     #   A filter used by `ListInsights` to specify which insights to return.
     #   @return [Types::ListInsightsStatusFilter]
@@ -2349,16 +1956,6 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListRecommendationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         insight_id: "InsightId", # required
-    #         next_token: "UuidNextToken",
-    #         locale: "DE_DE", # accepts DE_DE, EN_US, EN_GB, ES_ES, FR_FR, IT_IT, JA_JP, KO_KR, PT_BR, ZH_CN, ZH_TW
-    #         account_id: "AwsAccountId",
-    #       }
-    #
     # @!attribute [rw] insight_id
     #   The ID of the requested insight.
     #   @return [String]
@@ -2487,13 +2084,6 @@ module Aws::DevOpsGuru
     # groups for log anomaly detection. You can use this to update the
     # configuration.
     #
-    # @note When making an API call, you may pass LogsAnomalyDetectionIntegrationConfig
-    #   data as a hash:
-    #
-    #       {
-    #         opt_in_status: "ENABLED", # accepts ENABLED, DISABLED
-    #       }
-    #
     # @!attribute [rw] opt_in_status
     #   Specifies if DevOps Guru is configured to perform log anomaly
     #   detection on CloudWatch log groups.
@@ -2601,19 +2191,6 @@ module Aws::DevOpsGuru
     # DevOps Guru. The one supported notification channel is Amazon Simple
     # Notification Service (Amazon SNS).
     #
-    # @note When making an API call, you may pass NotificationChannelConfig
-    #   data as a hash:
-    #
-    #       {
-    #         sns: { # required
-    #           topic_arn: "TopicArn",
-    #         },
-    #         filters: {
-    #           severities: ["LOW"], # accepts LOW, MEDIUM, HIGH
-    #           message_types: ["NEW_INSIGHT"], # accepts NEW_INSIGHT, CLOSED_INSIGHT, NEW_ASSOCIATION, SEVERITY_UPGRADED, NEW_RECOMMENDATION
-    #         },
-    #       }
-    #
     # @!attribute [rw] sns
     #   Information about a notification channel configured in DevOps Guru
     #   to send notifications when insights are created.
@@ -2664,14 +2241,6 @@ module Aws::DevOpsGuru
     # message types to receive notifications for. You can also choose to
     # specify which severity levels to receive notifications for.
     #
-    # @note When making an API call, you may pass NotificationFilterConfig
-    #   data as a hash:
-    #
-    #       {
-    #         severities: ["LOW"], # accepts LOW, MEDIUM, HIGH
-    #         message_types: ["NEW_INSIGHT"], # accepts NEW_INSIGHT, CLOSED_INSIGHT, NEW_ASSOCIATION, SEVERITY_UPGRADED, NEW_RECOMMENDATION
-    #       }
-    #
     # @!attribute [rw] severities
     #   The severity levels that you want to receive notifications for. For
     #   example, you can choose to receive notifications only for insights
@@ -2718,13 +2287,6 @@ module Aws::DevOpsGuru
     # Information about whether DevOps Guru is configured to create an
     # OpsItem in Amazon Web Services Systems Manager OpsCenter for each
     # created insight. You can use this to update the configuration.
-    #
-    # @note When making an API call, you may pass OpsCenterIntegrationConfig
-    #   data as a hash:
-    #
-    #       {
-    #         opt_in_status: "ENABLED", # accepts ENABLED, DISABLED
-    #       }
     #
     # @!attribute [rw] opt_in_status
     #   Specifies if DevOps Guru is enabled to create an Amazon Web Services
@@ -3551,16 +3113,6 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutFeedbackRequest
-    #   data as a hash:
-    #
-    #       {
-    #         insight_feedback: {
-    #           id: "InsightId",
-    #           feedback: "VALID_COLLECTION", # accepts VALID_COLLECTION, RECOMMENDATION_USEFUL, ALERT_TOO_SENSITIVE, DATA_NOISY_ANOMALY, DATA_INCORRECT
-    #         },
-    #       }
-    #
     # @!attribute [rw] insight_feedback
     #   The feedback from customers is about the recommendations in this
     #   insight.
@@ -4175,13 +3727,6 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RemoveNotificationChannelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         id: "NotificationChannelId", # required
-    #       }
-    #
     # @!attribute [rw] id
     #   The ID of the notification channel to be removed.
     #   @return [String]
@@ -4206,21 +3751,6 @@ module Aws::DevOpsGuru
     # resources that are defined in the stacks or that are tagged using the
     # same tag *key*. You can specify up to 500 Amazon Web Services
     # CloudFormation stacks.
-    #
-    # @note When making an API call, you may pass ResourceCollection
-    #   data as a hash:
-    #
-    #       {
-    #         cloud_formation: {
-    #           stack_names: ["StackName"],
-    #         },
-    #         tags: [
-    #           {
-    #             app_boundary_key: "AppBoundaryKey", # required
-    #             tag_values: ["TagValue"], # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] cloud_formation
     #   An array of the names of Amazon Web Services CloudFormation stacks.
@@ -4370,28 +3900,6 @@ module Aws::DevOpsGuru
     # Specifies one or more severity values and one or more status values
     # that are used to search for insights.
     #
-    # @note When making an API call, you may pass SearchInsightsFilters
-    #   data as a hash:
-    #
-    #       {
-    #         severities: ["LOW"], # accepts LOW, MEDIUM, HIGH
-    #         statuses: ["ONGOING"], # accepts ONGOING, CLOSED
-    #         resource_collection: {
-    #           cloud_formation: {
-    #             stack_names: ["StackName"],
-    #           },
-    #           tags: [
-    #             {
-    #               app_boundary_key: "AppBoundaryKey", # required
-    #               tag_values: ["TagValue"], # required
-    #             },
-    #           ],
-    #         },
-    #         service_collection: {
-    #           service_names: ["API_GATEWAY"], # accepts API_GATEWAY, APPLICATION_ELB, AUTO_SCALING_GROUP, CLOUD_FRONT, DYNAMO_DB, EC2, ECS, EKS, ELASTIC_BEANSTALK, ELASTI_CACHE, ELB, ES, KINESIS, LAMBDA, NAT_GATEWAY, NETWORK_ELB, RDS, REDSHIFT, ROUTE_53, S3, SAGE_MAKER, SNS, SQS, STEP_FUNCTIONS, SWF
-    #         },
-    #       }
-    #
     # @!attribute [rw] severities
     #   An array of severity values used to search for insights.
     #   @return [Array<String>]
@@ -4426,37 +3934,6 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SearchInsightsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         start_time_range: { # required
-    #           from_time: Time.now,
-    #           to_time: Time.now,
-    #         },
-    #         filters: {
-    #           severities: ["LOW"], # accepts LOW, MEDIUM, HIGH
-    #           statuses: ["ONGOING"], # accepts ONGOING, CLOSED
-    #           resource_collection: {
-    #             cloud_formation: {
-    #               stack_names: ["StackName"],
-    #             },
-    #             tags: [
-    #               {
-    #                 app_boundary_key: "AppBoundaryKey", # required
-    #                 tag_values: ["TagValue"], # required
-    #               },
-    #             ],
-    #           },
-    #           service_collection: {
-    #             service_names: ["API_GATEWAY"], # accepts API_GATEWAY, APPLICATION_ELB, AUTO_SCALING_GROUP, CLOUD_FRONT, DYNAMO_DB, EC2, ECS, EKS, ELASTIC_BEANSTALK, ELASTI_CACHE, ELB, ES, KINESIS, LAMBDA, NAT_GATEWAY, NETWORK_ELB, RDS, REDSHIFT, ROUTE_53, S3, SAGE_MAKER, SNS, SQS, STEP_FUNCTIONS, SWF
-    #           },
-    #         },
-    #         max_results: 1,
-    #         next_token: "UuidNextToken",
-    #         type: "REACTIVE", # required, accepts REACTIVE, PROACTIVE
-    #       }
-    #
     # @!attribute [rw] start_time_range
     #   The start of the time range passed in. Returned insights occurred
     #   after this time.
@@ -4521,28 +3998,6 @@ module Aws::DevOpsGuru
     # Filters you can use to specify which events are returned when
     # `ListEvents` is called.
     #
-    # @note When making an API call, you may pass SearchOrganizationInsightsFilters
-    #   data as a hash:
-    #
-    #       {
-    #         severities: ["LOW"], # accepts LOW, MEDIUM, HIGH
-    #         statuses: ["ONGOING"], # accepts ONGOING, CLOSED
-    #         resource_collection: {
-    #           cloud_formation: {
-    #             stack_names: ["StackName"],
-    #           },
-    #           tags: [
-    #             {
-    #               app_boundary_key: "AppBoundaryKey", # required
-    #               tag_values: ["TagValue"], # required
-    #             },
-    #           ],
-    #         },
-    #         service_collection: {
-    #           service_names: ["API_GATEWAY"], # accepts API_GATEWAY, APPLICATION_ELB, AUTO_SCALING_GROUP, CLOUD_FRONT, DYNAMO_DB, EC2, ECS, EKS, ELASTIC_BEANSTALK, ELASTI_CACHE, ELB, ES, KINESIS, LAMBDA, NAT_GATEWAY, NETWORK_ELB, RDS, REDSHIFT, ROUTE_53, S3, SAGE_MAKER, SNS, SQS, STEP_FUNCTIONS, SWF
-    #         },
-    #       }
-    #
     # @!attribute [rw] severities
     #   An array of severity values used to search for insights.
     #   @return [Array<String>]
@@ -4577,38 +4032,6 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass SearchOrganizationInsightsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         account_ids: ["AwsAccountId"], # required
-    #         start_time_range: { # required
-    #           from_time: Time.now,
-    #           to_time: Time.now,
-    #         },
-    #         filters: {
-    #           severities: ["LOW"], # accepts LOW, MEDIUM, HIGH
-    #           statuses: ["ONGOING"], # accepts ONGOING, CLOSED
-    #           resource_collection: {
-    #             cloud_formation: {
-    #               stack_names: ["StackName"],
-    #             },
-    #             tags: [
-    #               {
-    #                 app_boundary_key: "AppBoundaryKey", # required
-    #                 tag_values: ["TagValue"], # required
-    #               },
-    #             ],
-    #           },
-    #           service_collection: {
-    #             service_names: ["API_GATEWAY"], # accepts API_GATEWAY, APPLICATION_ELB, AUTO_SCALING_GROUP, CLOUD_FRONT, DYNAMO_DB, EC2, ECS, EKS, ELASTIC_BEANSTALK, ELASTI_CACHE, ELB, ES, KINESIS, LAMBDA, NAT_GATEWAY, NETWORK_ELB, RDS, REDSHIFT, ROUTE_53, S3, SAGE_MAKER, SNS, SQS, STEP_FUNCTIONS, SWF
-    #           },
-    #         },
-    #         max_results: 1,
-    #         next_token: "UuidNextToken",
-    #         type: "REACTIVE", # required, accepts REACTIVE, PROACTIVE
-    #       }
-    #
     # @!attribute [rw] account_ids
     #   The ID of the Amazon Web Services account.
     #   @return [Array<String>]
@@ -4678,13 +4101,6 @@ module Aws::DevOpsGuru
     end
 
     # A collection of the names of Amazon Web Services services.
-    #
-    # @note When making an API call, you may pass ServiceCollection
-    #   data as a hash:
-    #
-    #       {
-    #         service_names: ["API_GATEWAY"], # accepts API_GATEWAY, APPLICATION_ELB, AUTO_SCALING_GROUP, CLOUD_FRONT, DYNAMO_DB, EC2, ECS, EKS, ELASTIC_BEANSTALK, ELASTI_CACHE, ELB, ES, KINESIS, LAMBDA, NAT_GATEWAY, NETWORK_ELB, RDS, REDSHIFT, ROUTE_53, S3, SAGE_MAKER, SNS, SQS, STEP_FUNCTIONS, SWF
-    #       }
     #
     # @!attribute [rw] service_names
     #   An array of strings that each specifies the name of an Amazon Web
@@ -4865,13 +4281,6 @@ module Aws::DevOpsGuru
     # [1]: https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html
     # [2]: https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html
     #
-    # @note When making an API call, you may pass SnsChannelConfig
-    #   data as a hash:
-    #
-    #       {
-    #         topic_arn: "TopicArn",
-    #       }
-    #
     # @!attribute [rw] topic_arn
     #   The Amazon Resource Name (ARN) of an Amazon Simple Notification
     #   Service topic.
@@ -4885,24 +4294,6 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass StartCostEstimationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_collection: { # required
-    #           cloud_formation: {
-    #             stack_names: ["StackName"],
-    #           },
-    #           tags: [
-    #             {
-    #               app_boundary_key: "AppBoundaryKey", # required
-    #               tag_values: ["TagValue"], # required
-    #             },
-    #           ],
-    #         },
-    #         client_token: "ClientToken",
-    #       }
-    #
     # @!attribute [rw] resource_collection
     #   The collection of Amazon Web Services resources used to create a
     #   monthly DevOps Guru cost estimate.
@@ -4930,14 +4321,6 @@ module Aws::DevOpsGuru
 
     # A time range used to specify when the behavior of an insight or
     # anomaly started.
-    #
-    # @note When making an API call, you may pass StartTimeRange
-    #   data as a hash:
-    #
-    #       {
-    #         from_time: Time.now,
-    #         to_time: Time.now,
-    #       }
     #
     # @!attribute [rw] from_time
     #   The start time of the time range.
@@ -4992,14 +4375,6 @@ module Aws::DevOpsGuru
     #
     #
     # [1]: https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf
-    #
-    # @note When making an API call, you may pass TagCollection
-    #   data as a hash:
-    #
-    #       {
-    #         app_boundary_key: "AppBoundaryKey", # required
-    #         tag_values: ["TagValue"], # required
-    #       }
     #
     # @!attribute [rw] app_boundary_key
     #   An Amazon Web Services tag *key* that is used to identify the Amazon
@@ -5095,14 +4470,6 @@ module Aws::DevOpsGuru
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html
-    #
-    # @note When making an API call, you may pass TagCostEstimationResourceCollectionFilter
-    #   data as a hash:
-    #
-    #       {
-    #         app_boundary_key: "AppBoundaryKey", # required
-    #         tag_values: ["TagValue"], # required
-    #       }
     #
     # @!attribute [rw] app_boundary_key
     #   An Amazon Web Services tag *key* that is used to identify the Amazon
@@ -5252,13 +4619,6 @@ module Aws::DevOpsGuru
     # to update a collection of stacks. You can specify up to 500 Amazon Web
     # Services CloudFormation stacks.
     #
-    # @note When making an API call, you may pass UpdateCloudFormationCollectionFilter
-    #   data as a hash:
-    #
-    #       {
-    #         stack_names: ["StackName"],
-    #       }
-    #
     # @!attribute [rw] stack_names
     #   An array of the names of the Amazon Web Services CloudFormation
     #   stacks to update. You can specify up to 500 Amazon Web Services
@@ -5273,17 +4633,6 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateEventSourcesConfigRequest
-    #   data as a hash:
-    #
-    #       {
-    #         event_sources: {
-    #           amazon_code_guru_profiler: {
-    #             status: "ENABLED", # accepts ENABLED, DISABLED
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] event_sources
     #   Configuration information about the integration of DevOps Guru as
     #   the Consumer via EventBridge with another AWS Service.
@@ -5303,21 +4652,6 @@ module Aws::DevOpsGuru
 
     # Contains information used to update a collection of Amazon Web
     # Services resources.
-    #
-    # @note When making an API call, you may pass UpdateResourceCollectionFilter
-    #   data as a hash:
-    #
-    #       {
-    #         cloud_formation: {
-    #           stack_names: ["StackName"],
-    #         },
-    #         tags: [
-    #           {
-    #             app_boundary_key: "AppBoundaryKey", # required
-    #             tag_values: ["TagValue"], # required
-    #           },
-    #         ],
-    #       }
     #
     # @!attribute [rw] cloud_formation
     #   A collection of Amazon Web Services CloudFormation stacks. You can
@@ -5374,24 +4708,6 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateResourceCollectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         action: "ADD", # required, accepts ADD, REMOVE
-    #         resource_collection: { # required
-    #           cloud_formation: {
-    #             stack_names: ["StackName"],
-    #           },
-    #           tags: [
-    #             {
-    #               app_boundary_key: "AppBoundaryKey", # required
-    #               tag_values: ["TagValue"], # required
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
     # @!attribute [rw] action
     #   Specifies if the resource collection in the request is added or
     #   deleted to the resource collection.
@@ -5419,18 +4735,6 @@ module Aws::DevOpsGuru
     # Services service, such as Amazon Web Services Systems Manager, with
     # DevOps Guru.
     #
-    # @note When making an API call, you may pass UpdateServiceIntegrationConfig
-    #   data as a hash:
-    #
-    #       {
-    #         ops_center: {
-    #           opt_in_status: "ENABLED", # accepts ENABLED, DISABLED
-    #         },
-    #         logs_anomaly_detection: {
-    #           opt_in_status: "ENABLED", # accepts ENABLED, DISABLED
-    #         },
-    #       }
-    #
     # @!attribute [rw] ops_center
     #   Information about whether DevOps Guru is configured to create an
     #   OpsItem in Amazon Web Services Systems Manager OpsCenter for each
@@ -5451,20 +4755,6 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateServiceIntegrationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_integration: { # required
-    #           ops_center: {
-    #             opt_in_status: "ENABLED", # accepts ENABLED, DISABLED
-    #           },
-    #           logs_anomaly_detection: {
-    #             opt_in_status: "ENABLED", # accepts ENABLED, DISABLED
-    #           },
-    #         },
-    #       }
-    #
     # @!attribute [rw] service_integration
     #   An `IntegratedServiceConfig` object used to specify the integrated
     #   service you want to update, and whether you want to update it to
@@ -5485,14 +4775,6 @@ module Aws::DevOpsGuru
 
     # A new collection of Amazon Web Services resources that are defined by
     # an Amazon Web Services tag or tag *key*/*value* pair.
-    #
-    # @note When making an API call, you may pass UpdateTagCollectionFilter
-    #   data as a hash:
-    #
-    #       {
-    #         app_boundary_key: "AppBoundaryKey", # required
-    #         tag_values: ["TagValue"], # required
-    #       }
     #
     # @!attribute [rw] app_boundary_key
     #   An Amazon Web Services tag *key* that is used to identify the Amazon

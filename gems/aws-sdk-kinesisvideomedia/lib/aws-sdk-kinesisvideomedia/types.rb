@@ -38,20 +38,6 @@ module Aws::KinesisVideoMedia
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetMediaInput
-    #   data as a hash:
-    #
-    #       {
-    #         stream_name: "StreamName",
-    #         stream_arn: "ResourceARN",
-    #         start_selector: { # required
-    #           start_selector_type: "FRAGMENT_NUMBER", # required, accepts FRAGMENT_NUMBER, SERVER_TIMESTAMP, PRODUCER_TIMESTAMP, NOW, EARLIEST, CONTINUATION_TOKEN
-    #           after_fragment_number: "FragmentNumberString",
-    #           start_timestamp: Time.now,
-    #           continuation_token: "ContinuationToken",
-    #         },
-    #       }
-    #
     # @!attribute [rw] stream_name
     #   The Kinesis video stream name from where you want to get the media
     #   content. If you don't specify the `streamName`, you must specify
@@ -216,16 +202,6 @@ module Aws::KinesisVideoMedia
     #   `GetMedia` request terminated, you can use this tag value in your
     #   next `GetMedia` request. The API then starts returning chunks
     #   starting where the last API ended.
-    #
-    # @note When making an API call, you may pass StartSelector
-    #   data as a hash:
-    #
-    #       {
-    #         start_selector_type: "FRAGMENT_NUMBER", # required, accepts FRAGMENT_NUMBER, SERVER_TIMESTAMP, PRODUCER_TIMESTAMP, NOW, EARLIEST, CONTINUATION_TOKEN
-    #         after_fragment_number: "FragmentNumberString",
-    #         start_timestamp: Time.now,
-    #         continuation_token: "ContinuationToken",
-    #       }
     #
     # @!attribute [rw] start_selector_type
     #   Identifies the fragment on the Kinesis video stream where you want
